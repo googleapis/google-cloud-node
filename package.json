@@ -26,10 +26,14 @@
     "google storage"
   ],
   "dependencies" : {
+    "gapitoken": "*"
   },
   "devDependencies" : {
+    "async": "*",
+    "mocha": "*"
   },
   "scripts": {
+    "test": "mocha --reporter spec"
   },
   "license": "Apache 2"
 }
