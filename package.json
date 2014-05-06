@@ -30,6 +30,7 @@
   },
   "devDependencies" : {
     "async": "*",
+    "request": "*",
     "mocha": "*"
   },
   "scripts": {
