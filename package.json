@@ -1,0 +1,35 @@
+
+{
+  "name": "gcloud",
+  "version": "0.0.1",
+  "author": "Google Inc.",
+  "description": "Google Cloud APIs Client Library for Node.js",
+  "contributors": [
+    {
+      "name": "Burcu Dogan",
+      "email": "jbd@google.com"
+    }
+  ],
+  "main": "./lib/gcloud",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/googlecloudplatform/gcloud-nodejs.git"
+  },
+  "keywords": [
+    "google",
+    "api",
+    "google apis",
+    "client",
+    "cloud",
+    "datastore",
+    "compute engine",
+    "google storage"
+  ],
+  "dependencies" : {
+  },
+  "devDependencies" : {
+  },
+  "scripts": {
+  },
+  "license": "Apache 2"
+}
