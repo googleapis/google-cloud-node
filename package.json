@@ -29,8 +29,6 @@
     "gapitoken": "*"
   },
   "devDependencies" : {
-    "async": "*",
-    "request": "*",
     "mocha": "*"
   },
   "scripts": {
