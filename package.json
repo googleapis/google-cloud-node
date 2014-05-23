@@ -29,10 +29,12 @@
     "gapitoken": "*"
   },
   "devDependencies" : {
-    "mocha": "*"
+    "mocha": "*",
+    "istanbul": "*"
   },
   "scripts": {
-    "test": "mocha --reporter spec"
+    "test": "mocha --reporter spec",
+    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha"
   },
   "license": "Apache 2"
 }
