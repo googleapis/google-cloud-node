@@ -2,11 +2,11 @@ var assert = require('assert'),
     entity = require('../lib/datastore/entity.js');
 
 var blogPostMetadata = {
-  title:       { kind: entity.kinds.STRING, indexed: true },
-  tags:        { kind: entity.kinds.STRING, multi: true, indexed: true },
-  publishedAt: { kind: entity.kinds.DATETIME },
-  author:      { kind: entity.kinds.KEY, indexed: true },
-  isDraft:     { kind: entity.kinds.BOOL, indexed: true }
+  title:       { kind: String, indexed: true },
+  tags:        { kind: String, multi: true, indexed: true },
+  publishedAt: { kind: Date },
+  author:      { kind: Object, indexed: true },
+  isDraft:     { kind: Boolean, indexed: true }
 }
 
 describe('registerKind', function() {
