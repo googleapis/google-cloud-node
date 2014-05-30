@@ -3,7 +3,7 @@ var assert = require('assert'),
 
 describe('Query', function() {
 
-  var ds = new datastore.Dataset({ id: 'my-project-id' });
+  var ds = new datastore.Dataset({ projectId: 'my-project-id' });
   it('should be identified by its parent dataset ID', function(done) {
     var q = ds.query(['kind1']);
     assert.equal(q.datasetId, 's~my-project-id');
