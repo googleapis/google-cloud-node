@@ -15,4 +15,5 @@ describe('Dataset', function() {
     assert.equal(dsWithEPrefix.id, 'e~name');
     done();
   });
+
 });

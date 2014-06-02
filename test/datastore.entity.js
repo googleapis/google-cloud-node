@@ -31,51 +31,36 @@ describe('registerKind', function() {
 });
 
 describe('keyFromKeyProto', function() {
-  var protoWithId = {
-    partitionId: { namespace: 'Test', datasetId: 'datasetId' },
-    path:        [{ kind: 'Kind', id: '111' }]
-  };
-  var protoWithName = {
-    partitionId: { namespace: 'Test', datasetId: 'datasetId' },
+   var proto = {
+    partitionId: { namespace: 'default', datasetId: 'datasetId' },
     path:        [{ kind: 'Kind', name: 'Name' }]
   };
 
-  it('should convert proto to a key with ID if id is set', function(done) {
-    var key = entity.keyFromKeyProto(protoWithId);
-    assert.strictEqual(key.ns, 'Test');
-    assert.strictEqual(key.kind, 'Kind');
-    assert.strictEqual(key.id, '111');
-    assert.strictEqual(key.name, undefined);
+  var protoH = {
+    partitionId: { namespace: 'Test', datasetId: 'datasetId' },
+    path:        [{ kind: 'Kind', id: '111' }, { kind: 'Kind2', name: 'name' }]
+  };
+
+  var protoHIncomplete = {
+    partitionId: { namespace: 'Test', datasetId: 'datasetId' },
+    path:        [{ kind: 'Kind' }, { kind: 'Kind2' }]
+  };
+
+  it('should handle keys hierarchically', function(done) {
+    var key = entity.keyFromKeyProto(protoH);
+    assert.deepEqual(key, ['Test', 'Kind', 111, 'Kind2', 'name']);
     done();
   });
 
-  it('should convert proto to a key with name if name is set', function(done) {
-    var key = entity.keyFromKeyProto(protoWithName);
-    assert.strictEqual(key.ns, 'Test');
-    assert.strictEqual(key.kind, 'Kind');
-    assert.strictEqual(key.id, undefined);
-    assert.strictEqual(key.name, 'Name');
+  it('should handle incomplete keys hierarchically', function(done) {
+    var key = entity.keyFromKeyProto(protoHIncomplete);
+    assert.deepEqual(key, ['Test', 'Kind', null, 'Kind2', null]);
     done();
   });
 
-  it('should not set ns if namespace is default', function(done) {
-    var key = entity.keyFromKeyProto({
-      partitionId: { namespace: 'default', datasetId: 'datasetId' },
-      path:        [{ kind: 'Kind', id: '111' }]
-    });
-    assert.strictEqual(key.ns, undefined);
-    done();
-  });
-
-  it('should support incomplete keys', function(done) {
-    var key = entity.keyFromKeyProto({
-      partitionId: { namespace: 'Test', datasetId: 'datasetId' },
-      path:        [{ kind: 'Kind' }]
-    });
-    assert.strictEqual(key.ns, 'Test');
-    assert.strictEqual(key.kind, 'Kind');
-    assert.strictEqual(key.id, undefined);
-    assert.strictEqual(key.name, undefined);
+  it('should not set namespace if default', function(done) {
+    var key = entity.keyFromKeyProto(proto);
+    assert.deepEqual(key, ['Kind', 'Name']);
     done();
   });
 
@@ -83,53 +68,59 @@ describe('keyFromKeyProto', function() {
 
 describe('keyToKeyProto', function() {
 
-  it('should convert a key with ID', function(done) {
-    var proto = entity.keyToKeyProto('datasetId', {
-      ns: 'Test',
-      kind: 'Kind',
-      id: '111'
-    });
-    assert.strictEqual(proto.partitionId.datasetId, 'datasetId');
-    assert.strictEqual(proto.partitionId.namespace, 'Test');
-    assert.strictEqual(proto.path[0].kind, 'Kind');
-    assert.strictEqual(proto.path[0].id, '111');
-    assert.strictEqual(proto.path[0].name, undefined);
-    done();
-  });
-
-  it('should covert a key with name', function(done) {
-    var proto = entity.keyToKeyProto('datasetId', {
-      ns: 'Test',
-      kind: 'Kind',
-      name: 'Name'
-    });
-    assert.strictEqual(proto.partitionId.datasetId, 'datasetId');
-    assert.strictEqual(proto.partitionId.namespace, 'Test');
-    assert.strictEqual(proto.path[0].kind, 'Kind');
-    assert.strictEqual(proto.path[0].id, undefined);
-    assert.strictEqual(proto.path[0].name, 'Name');
-    done();
-  });
-
-  it('should set namesapce to default if none is provided', function(done){
-    var proto = entity.keyToKeyProto('datasetId', {
-      kind: 'Kind',
-      name: 'Name'
-    });
-    assert.strictEqual(proto.partitionId.namespace, 'default');
-    done();
-  });
-
-  it('should support incomplete keys', function(done){
-    var proto = entity.keyToKeyProto('datasetId', {
-      kind: 'Kind'
-    });
+  it('should handle hierarchical key definitions', function(done) {
+    var key = ['Kind1', 1, 'Kind2', 'name'];
+    var proto = entity.keyToKeyProto('datasetId', key);
     assert.strictEqual(proto.partitionId.datasetId, 'datasetId');
     assert.strictEqual(proto.partitionId.namespace, 'default');
-    assert.strictEqual(proto.path[0].kind, 'Kind');
+    assert.strictEqual(proto.path[0].kind, 'Kind1');
+    assert.strictEqual(proto.path[0].id, 1);
+    assert.strictEqual(proto.path[0].name, undefined);
+    assert.strictEqual(proto.path[1].kind, 'Kind2');
+    assert.strictEqual(proto.path[1].id, undefined);
+    assert.strictEqual(proto.path[1].name, 'name');
+    done();
+  });
+
+  it('should detect the namespace of the hierarchical keys', function(done) {
+    var key = ['Namespace', 'Kind1', 1, 'Kind2', 'name'];
+    var proto = entity.keyToKeyProto('datasetId', key);
+    assert.strictEqual(proto.partitionId.datasetId, 'datasetId');
+    assert.strictEqual(proto.partitionId.namespace, 'Namespace');
+    assert.strictEqual(proto.path[0].kind, 'Kind1');
+    assert.strictEqual(proto.path[0].id, 1);
+    assert.strictEqual(proto.path[0].name, undefined);
+    assert.strictEqual(proto.path[1].kind, 'Kind2');
+    assert.strictEqual(proto.path[1].id, undefined);
+    assert.strictEqual(proto.path[1].name, 'name');
+    done();
+  });
+
+  it('should handle incomplete keys with and without namespaces', function(done) {
+    var key = ['Kind1', null];
+    var keyWithNS = ['Namespace', 'Kind1', null];
+
+    var proto = entity.keyToKeyProto('datasetId', key);
+    var protoWithNS = entity.keyToKeyProto('datasetId', keyWithNS);
+
+    assert.strictEqual(proto.partitionId.datasetId, 'datasetId');
+    assert.strictEqual(proto.partitionId.namespace, 'default');
+    assert.strictEqual(proto.path[0].kind, 'Kind1');
     assert.strictEqual(proto.path[0].id, undefined);
     assert.strictEqual(proto.path[0].name, undefined);
+
+    assert.strictEqual(protoWithNS.partitionId.datasetId, 'datasetId');
+    assert.strictEqual(protoWithNS.partitionId.namespace, 'Namespace');
+    assert.strictEqual(protoWithNS.path[0].kind, 'Kind1');
+    assert.strictEqual(protoWithNS.path[0].id, undefined);
+    assert.strictEqual(protoWithNS.path[0].name, undefined);
     done();
+  });
+
+  it('should throw if key contains less than 2 items', function() {
+    assert.throws(function() {
+      entity.keyToKeyProto('datasetId', ['Kind']);
+    });
   });
 
 });
@@ -137,10 +128,10 @@ describe('keyToKeyProto', function() {
 describe('isKeyComplete', function() {
 
   it('should return true if kind and one of the identifiers have non-zero values', function(done) {
-    assert.ok(entity.isKeyComplete({ kind: 'Kind', id: '111' }));
-    assert.ok(entity.isKeyComplete({ kind: 'Kind', name: 'Name' }));
-    assert.strictEqual(entity.isKeyComplete({ kind: 'Kind' }), false);
-    assert.strictEqual(entity.isKeyComplete({}), false);
+    assert.strictEqual(entity.isKeyComplete(['Kind1', null]), false);
+    assert.strictEqual(entity.isKeyComplete(['Kind1', 3]), true);
+    assert.strictEqual(entity.isKeyComplete(['Namespace', 'Kind1', null]), false);
+    assert.strictEqual(entity.isKeyComplete(['Namespace', 'Kind1', 'name']), true);
     done();
   });
 
@@ -152,8 +143,8 @@ describe('entityFromEntityProto', function() {
     var obj = entity.entityFromEntityProto(entityProto);
     assert.strictEqual(obj.createdAt.getTime(), new Date('2001-01-01').getTime());
     assert.strictEqual(obj.linkedTo.ns, undefined);
-    assert.strictEqual(obj.linkedTo.kind, 'Kind');
-    assert.strictEqual(obj.linkedTo.id, '4790047639339008');
+    assert.strictEqual(obj.linkedTo[0], 'Kind');
+    assert.strictEqual(obj.linkedTo[1], 4790047639339008);
     assert.strictEqual(obj.name, 'Name');
     assert.strictEqual(obj.flagged, true);
     assert.strictEqual(obj.count, 5);
