@@ -1,0 +1,43 @@
+{
+  "found":[
+    {
+      "entity":{
+        "key":{
+          "partitionId":{
+            "datasetId":"s~bamboo-shift-xxx",
+            "namespace":"default"
+          },
+          "path":[
+            {
+              "kind":"Kind",
+              "id":"5732568548769792"
+            }
+          ]
+        },
+        "properties":{
+          "name":{
+            "stringValue":"Burcu"
+          },
+          "bytes":{
+            "blobValue":"aGVsbG8="
+          },
+          "done":{
+            "booleanValue":false
+          },
+          "total":{
+            "doubleValue":6.7
+          },
+          "createdat":{
+            "dateTimeValue":"2001-01-01T00:00:00.00Z"
+          }
+        }
+      }
+    }
+  ],
+  "missing":[
+
+  ],
+  "deferred":[
+
+  ]
+}
