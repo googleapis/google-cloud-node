@@ -36,6 +36,25 @@ describe('Dataset', function() {
     });
   });
 
+  it('should multi get by keys', function(done) {
+    var ds = new datastore.Dataset({ projectId: 'test' });
+    ds.transaction.makeReq = function(method, proto, callback) {
+      assert.equal(method, 'lookup');
+      assert.equal(proto.keys.length, 1);
+      callback(null, mockResp_get);
+    };
+    ds.getAll([
+        ['Kind', 123]], function(err, keys, objs) {
+      assert.deepEqual(keys[0], ['Kind', 5732568548769792]);
+      assert.strictEqual(objs[0].name, 'Burcu');
+      assert.strictEqual(objs[0].bytes, 'aGVsbG8=');
+      assert.strictEqual(objs[0].done, false);
+      assert.strictEqual(objs[0].total, 6.7);
+      assert.strictEqual(objs[0].createdat.getTime(), 978307200000);
+      done();
+    });
+  });
+
   it('should delete by key', function(done) {
     var ds = new datastore.Dataset({ projectId: 'test' });
     ds.transaction.makeReq = function(method, proto, callback) {
@@ -44,6 +63,18 @@ describe('Dataset', function() {
       callback();
     };
     ds.del(['Kind', 123], done);
+  });
+
+  it('should multi delete by keys', function(done) {
+    var ds = new datastore.Dataset({ projectId: 'test' });
+    ds.transaction.makeReq = function(method, proto, callback) {
+      assert.equal(method, 'commit');
+      assert.equal(proto.mutation.delete.length, 2);
+      callback();
+    };
+    ds.delAll([
+      ['Kind', 123], ['Kind', 345]
+    ], done);
   });
 
   it('should produce proper allocate IDs req protos', function(done) {
