@@ -77,6 +77,36 @@ describe('Dataset', function() {
     ], done);
   });
 
+  it('should throw if number of keys dont match the number of objs', function() {
+    assert.throws(function() {
+      var ds = new datastore.Dataset({ projectId: 'test' });
+      ds.saveAll([
+        ['Kind', 123], ['Kind', 456]], [{}], function(){});
+    }, /The length of the keys/);
+  });
+
+  it('should save with incomplete key', function(done) {
+    var ds = new datastore.Dataset({ projectId: 'test' });
+    ds.transaction.makeReq = function(method, proto, callback) {
+      assert.equal(method, 'commit');
+      assert.equal(proto.mutation.insertAutoId.length, 1);
+      callback();
+    };
+    ds.save(['Kind', 123, null], {}, done);
+  });
+
+  it('should save with keys', function(done) {
+    var ds = new datastore.Dataset({ projectId: 'test' });
+    ds.transaction.makeReq = function(method, proto, callback) {
+      assert.equal(method, 'commit');
+      assert.equal(proto.mutation.update.length, 2);
+      assert.equal(proto.mutation.update[0].properties.k.stringValue, 'v');
+      callback();
+    };
+    ds.saveAll([
+        ['Kind', 123], ['Kind', 456]], [{k: 'v'}, {k: 'v'}], done);
+  });
+
   it('should produce proper allocate IDs req protos', function(done) {
     var ds = new datastore.Dataset({ projectId: 'test' });
     ds.transaction.makeReq = function(method, proto, callback) {
