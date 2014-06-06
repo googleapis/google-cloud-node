@@ -1,5 +1,5 @@
 var assert = require('assert'),
-    datastore = require('../lib/datastore'),
+    datastore = require('../lib').datastore,
     mockResp_get = require('./testdata/response_get.json');
 
 describe('Keys', function() {
@@ -30,7 +30,7 @@ describe('Dataset', function() {
       assert.strictEqual(obj.name, 'Burcu');
       assert.strictEqual(obj.bytes, 'aGVsbG8=');
       assert.strictEqual(obj.done, false);
-      assert.strictEqual(obj.total, 6.7);
+      assert.deepEqual(obj.total, new datastore.Double(6.7));
       assert.strictEqual(obj.createdat.getTime(), 978307200000);
       done();
     });
@@ -49,7 +49,7 @@ describe('Dataset', function() {
       assert.strictEqual(objs[0].name, 'Burcu');
       assert.strictEqual(objs[0].bytes, 'aGVsbG8=');
       assert.strictEqual(objs[0].done, false);
-      assert.strictEqual(objs[0].total, 6.7);
+      assert.deepEqual(objs[0].total, new datastore.Double(6.7));
       assert.strictEqual(objs[0].createdat.getTime(), 978307200000);
       done();
     });

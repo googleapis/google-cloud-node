@@ -147,10 +147,10 @@ describe('entityFromEntityProto', function() {
     assert.strictEqual(obj.linkedTo[1], 4790047639339008);
     assert.strictEqual(obj.name, 'Name');
     assert.strictEqual(obj.flagged, true);
-    assert.strictEqual(obj.count, 5);
-    assert.strictEqual(obj.total, 5.42);
+    assert.deepEqual(obj.count, new entity.Int(5));
+    assert.deepEqual(obj.total, new entity.Double(5.42));
     assert.strictEqual(obj.author.name, 'Burcu Dogan');
-    assert.strictEqual(obj.list[0], 6);
+    assert.deepEqual(obj.list[0], new entity.Int(6));
     assert.strictEqual(obj.list[1], false);
     done();
   });
