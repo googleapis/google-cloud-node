@@ -157,6 +157,36 @@ describe('entityFromEntityProto', function() {
 
 });
 
+describe('entityToEntityProto', function() {
+
+  it('should support boolean, integer, double, string, entity and list values', function(done) {
+    var now = new Date();
+    var proto = entity.entityToEntityProto({
+      name: 'Burcu',
+      desc: 'Description',
+      count: new entity.Int(6),
+      date : now,
+      bytes: new Buffer("Hello"),
+      list: ['a', new entity.Double(54.7)],
+      metadata: {
+        key1: 'value1',
+        key2: 'value2'
+      }
+    });
+    assert.equal(proto.properties.name.stringValue, 'Burcu');
+    assert.equal(proto.properties.desc.stringValue, 'Description');
+    assert.equal(proto.properties.count.integerValue, 6);
+    assert.equal(proto.properties.date.dateTimeValue, now);
+    assert.equal(proto.properties.bytes.blobValue, 'SGVsbG8=');
+    assert.equal(proto.properties.list.listValue[0].stringValue, 'a');
+    assert.equal(proto.properties.list.listValue[1].doubleValue, 54.7);
+    assert.equal(proto.properties.metadata.entityValue.properties.key1.stringValue, 'value1');
+    assert.equal(proto.properties.metadata.entityValue.properties.key2.stringValue, 'value2');
+    done();
+  });
+
+});
+
 var keyProto = {
   "partitionId":{
      "datasetId":"s~bamboo-shift-xxx",

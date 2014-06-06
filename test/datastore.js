@@ -28,7 +28,7 @@ describe('Dataset', function() {
     ds.get(['Kind', 123], function(err, key, obj) {
       assert.deepEqual(key, ['Kind', 5732568548769792]);
       assert.strictEqual(obj.name, 'Burcu');
-      assert.strictEqual(obj.bytes, 'aGVsbG8=');
+      assert.deepEqual(obj.bytes, new Buffer('hello'));
       assert.strictEqual(obj.done, false);
       assert.deepEqual(obj.total, new datastore.Double(6.7));
       assert.strictEqual(obj.createdat.getTime(), 978307200000);
@@ -47,7 +47,7 @@ describe('Dataset', function() {
         ['Kind', 123]], function(err, keys, objs) {
       assert.deepEqual(keys[0], ['Kind', 5732568548769792]);
       assert.strictEqual(objs[0].name, 'Burcu');
-      assert.strictEqual(objs[0].bytes, 'aGVsbG8=');
+      assert.deepEqual(objs[0].bytes, new Buffer('hello'));
       assert.strictEqual(objs[0].done, false);
       assert.deepEqual(objs[0].total, new datastore.Double(6.7));
       assert.strictEqual(objs[0].createdat.getTime(), 978307200000);
