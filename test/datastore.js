@@ -18,7 +18,55 @@ var assert = require('assert'),
     datastore = require('../lib').datastore,
     mockResp_get = require('./testdata/response_get.json');
 
-describe('Keys', function() {
+describe('Transaction', function() {
+
+  it('should begin', function(done) {
+    var t = new datastore.Transaction(null, 'test');
+    t.makeReq = function(method, proto, callback) {
+      assert.equal(method, 'beginTransaction');
+      assert.equal(proto, null);
+      callback(null, 'some-id');
+    };
+    t.begin(done);
+  });
+
+  it('should rollback', function(done) {
+    var t = new datastore.Transaction(null, 'test');
+    t.id = 'some-id';
+    t.makeReq = function(method, proto, callback) {
+      assert.equal(method, 'rollback');
+      assert.deepEqual(proto, { transaction: 'some-id' });
+      callback();
+    };
+    t.rollback(function() {
+      assert.equal(t.isFinalized, true);
+      done();
+    });
+  });
+
+  it('should commit', function(done) {
+    var t = new datastore.Transaction(null, 'test');
+    t.id = 'some-id';
+    t.makeReq = function(method, proto, callback) {
+      assert.equal(method, 'commit');
+      assert.deepEqual(proto, { transaction: 'some-id' });
+      callback();
+    };
+    t.commit(function() {
+      assert.equal(t.isFinalized, true);
+      done();
+    });
+  });
+
+  it('should be committed if not rolled back', function(done) {
+    var t = new datastore.Transaction(null, 'test');
+    t.isFinalized = false;
+    t.makeReq = function(method, proto, callback) {
+      assert.equal(method, 'commit');
+      done();
+    };
+    t.finalize();
+  });
 
 });
 
