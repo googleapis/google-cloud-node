@@ -20,27 +20,29 @@ var assert = require('assert'),
 describe('Query', function() {
 
   var ds = new datastore.Dataset({ projectId: 'my-project-id' });
-  it('should be identified by its parent dataset ID', function(done) {
+  it('should use default namespace if none is specified', function(done) {
     var q = ds.query(['kind1']);
-    assert.equal(q.datasetId, 's~my-project-id');
+    assert.equal(q.namespace, 'default');
+    done();
+  });
+
+  it('should use support custom namespaces', function(done) {
+    var q = ds.queryNS('ns', ['kind1']);
+    assert.equal(q.namespace, 'ns');
     done();
   });
 
   it('should support querying multiple kinds', function(done) {
     var q = ds.query(['kind1', 'kind2']);
-    var qNS = ds.queryNS([
-      { ns: 'ns1', kind: 'kind1' },
-      { ns: 'ns2', kind: 'kind2' }]);
+    var qNS = ds.queryNS('ns', ['kind1', 'kind2']);
 
-    assert.equal(q.kinds[0].ns, 'default');
-    assert.equal(q.kinds[0].kind, 'kind1');
-    assert.equal(q.kinds[1].ns, 'default');
-    assert.equal(q.kinds[1].kind, 'kind2');
+    assert.equal(q.namespace, 'default');
+    assert.equal(q.kinds[0], 'kind1');
+    assert.equal(q.kinds[1], 'kind2');
 
-    assert.equal(qNS.kinds[0].ns, 'ns1');
-    assert.equal(qNS.kinds[0].kind, 'kind1');
-    assert.equal(qNS.kinds[1].ns, 'ns2');
-    assert.equal(qNS.kinds[1].kind, 'kind2');
+    assert.equal(qNS.namespace, 'ns');
+    assert.equal(qNS.kinds[0], 'kind1');
+    assert.equal(qNS.kinds[1], 'kind2');
     done();
   });
 
