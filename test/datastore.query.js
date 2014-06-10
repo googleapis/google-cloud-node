@@ -15,7 +15,9 @@
  */
 
 var assert = require('assert'),
-  datastore = require('../lib/datastore');
+    datastore = require('../lib/datastore'),
+    entity = require('../lib/datastore/entity.js'),
+    queryProto = require('./testdata/proto_query.json');
 
 describe('Query', function() {
 
@@ -97,9 +99,23 @@ describe('Query', function() {
   });
 
   it('should allow page start tokens', function(done) {
-     var q = ds.query(['kind1']).start('abc123');
-     assert.strictEqual(q.startVal, 'abc123');
-     done();
+    var q = ds.query(['kind1']).start('abc123');
+    assert.strictEqual(q.startVal, 'abc123');
+    done();
+  });
+
+  it('should be converted to a query proto successfully', function(done) {
+    var q = ds.query(['Kind'])
+        .select(['name', 'count'])
+        .filter('count >=', datastore.Int(5))
+        .filter('name =', 'Burcu')
+        .order('-count')
+        .groupBy(['count'])
+        .start('cursor')
+        .offset(5)
+        .limit(10);
+    assert.deepEqual(entity.queryToQueryProto(q), queryProto);
+    done();
   });
 
 });
