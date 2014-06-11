@@ -4,9 +4,9 @@ Node idiomatic client for Google Cloud services. Work in progress... Watch the r
 
 ![Travis Build Status](https://travis-ci.org/GoogleCloudPlatform/gcloud-node.svg)
 
-This client support the following Google Cloud services:
+This client supports the following Google Cloud services:
 
-* [Google Cloud Datastore](https://developers.google.com/datastore/) (externalized Megastore, also allows access to the collections of existing AppEngine apps)
+* [Google Cloud Datastore](https://developers.google.com/datastore/) (externalized Megastore, also allows access to the collections of your existing AppEngine apps)
 * [Google Cloud Storage](https://cloud.google.com/products/cloud-storage/)
 * Planned but not yet started: [Google Compute Engine](https://developers.google.com/compute), and [Google BigQuery](https://developers.google.com/bigquery/)
 
@@ -22,7 +22,7 @@ If you are running this client on Google Compute Engine, you can skip to the dev
 
 ### Elsewhere
 
-If you are not running it on a Google Compute Engine VM, you need a Google Developers service account. To create a service account:
+If you are not running this client on Google Compute Engine, you need a Google Developers service account. To create a service account:
 
 * Visit the [Google Developers Console](https://console.developers.google.com/project).
 * Create a new project or click on an existing project.
