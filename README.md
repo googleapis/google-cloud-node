@@ -40,6 +40,49 @@ If you are not running this client on Google Compute Engine, you need a Google D
 	
 ## Developer's Guide
 
+* [Google Cloud Datastore](#google_cloud_datastore)
+* [Google Cloud Storage](#google_cloud_storage)
+
+### Google Cloud Datastore
+
+Google Cloud Datastore is a NoSQL database with the
+convenience of a traditional RDBMS in terms of strong
+consistency guarantees and high availablity. It's also known
+as Megastore. Its performance characteristics are explained
+in detail on [Megastore: Providing Scalable, Highly Available Storage for Interactive Services](http://www.cidrdb.org/cidr2011/Papers/CIDR11_Paper32.pdf).
+
+#### Configuration
+
+If you're running this client on Google Compute Engine, you need to construct a dataset with your Compute Engine enabled project's ID (e.g. bamboo-shift-454). Project ID is listed on the [Google Developers Console](https://console.developers.google.com/project).
+
+~~~~ js
+var gcloud = require('gcloud'),
+    ds = new gcloud.datastore.Dataset({ projectId: YOUR_PROJECT_ID });
+~~~~
+
+Else, initiate with project ID, service account's email and private key downloaded from Developer's Console.
+
+~~~~ js
+var gcloud = require('gcloud'),
+    ds = new gcloud.datastore.Dataset({
+    	projectId: YOUR_PROJECT_ID,
+    	email: 'xxx@developer.gserviceaccount.com',
+    	pemFilePath: '/path/to/the/pem/private/key.pem'
+    });
+~~~~
+
+#### Creating, Reading, Updating and Deleting
+
+#### Querying
+
+#### Allocating IDs (ID generation)
+
+#### Transactions
+
+#### Keys
+
+### Google Cloud Storage
+
 TODO
 
 ## Contributing
