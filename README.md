@@ -40,8 +40,8 @@ If you are not running this client on Google Compute Engine, you need a Google D
 	
 ## Developer's Guide
 
-* [Google Cloud Datastore](#google_cloud_datastore)
-* [Google Cloud Storage](#google_cloud_storage)
+* [Google Cloud Datastore](#google-cloud-datastore)
+* [Google Cloud Storage](#google-cloud-storage)
 
 ### Google Cloud Datastore
 
