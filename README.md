@@ -79,8 +79,7 @@ Get operations require a valid key to retrieve the key identified entity from Da
 ds.get(['Elephant', 123], function(err, obj) {
 
 });
-// alternatively, you can retrieve multiple entities by
-// getting by multiple entity keys.
+// alternatively, you can retrieve multiple entities at once.
 ds.getAll([key1, key2, ...], function(err, objs) {
 
 });
@@ -95,9 +94,24 @@ ds.save(['Animal', null], obj, function(err, key) {
 	// First arg is an incomplete key for Animal kind.
 	// console.log(key) will output ['Animal', 599900452312].
 });
-// alternatively, you can save multiple entities.
+// alternatively, you can save multiple entities at once.
 ds.saveAll([key1, key2, key3], [obj1, obj2, obj3], function(err, keys) {
 	// if key1 was incomplete, keys[0] will return the generated key.
+});
+~~~~
+
+Deletion requires the key of the entity to be deleted.
+
+~~~~ js
+ds.del(['Animal', 599900452312], obj, function(err) {
+
+});
+// alternatively, you can delete multiple entities at once.
+ds.delAll([
+	['Animal', 599900452312],
+	['Animal', 599900452315],
+	['Elephant', 123]], function(err) {
+
 });
 ~~~~
 
