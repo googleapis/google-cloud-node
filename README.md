@@ -6,7 +6,7 @@ Node idiomatic client for Google Cloud services. Work in progress... Watch the r
 
 This client supports the following Google Cloud services:
 
-* [Google Cloud Datastore](https://developers.google.com/datastore/) (externalized Megastore, also allows access to the collections of your existing AppEngine apps)
+* [Google Cloud Datastore](https://developers.google.com/datastore/) (externalised Megastore, also allows access to the collections of your existing AppEngine apps)
 * [Google Cloud Storage](https://cloud.google.com/products/cloud-storage/)
 * Planned but not yet started: [Google Compute Engine](https://developers.google.com/compute), and [Google BigQuery](https://developers.google.com/bigquery/)
 
@@ -18,7 +18,7 @@ npm install gcloud
 
 ### On Google Compute Engine
 
-If you are running this client on Google Compute Engine, you can skip to the developer's guide. We handle authorization for you with no configuration.
+If you are running this client on Google Compute Engine, you can skip to the developer's guide. We handle authorisation for you with no configuration.
 
 ### Elsewhere
 
@@ -32,7 +32,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
 	* Google Cloud Storage
 	* Google Cloud Storage JSON API
 * Once API access is enabled, switch back to "APIs & auth" section on the navigation panel and switch to "Credentials" page.
-* Click on "Create new client ID" to create a new **service account**. Once the account is created, a p12 file will be auto downloaded. The downloaded file is the private key you'll need for authorization.
+* Click on "Create new client ID" to create a new **service account**. Once the account is created, a p12 file will be auto downloaded. The downloaded file is the private key you'll need for authorisation.
 * You'll the following for auth configuration:
 	* Developers Console project's ID (e.g. bamboo-shift-455)
 	* Service account's email address (e.g. xxx@developer.gserviceaccount.com)
@@ -47,7 +47,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
 
 Google Cloud Datastore is a NoSQL database with the
 convenience of a traditional RDBMS in terms of strong
-consistency guarantees and high availablity. It's also known
+consistency guarantees and high availability. It's also known
 as Megastore. Its performance characteristics are explained
 in detail on [Megastore: Providing Scalable, Highly Available Storage for Interactive Services](http://www.cidrdb.org/cidr2011/Papers/CIDR11_Paper32.pdf).
 
@@ -56,7 +56,7 @@ in detail on [Megastore: Providing Scalable, Highly Available Storage for Intera
 If you're running this client on Google Compute Engine, you need to construct a dataset with your Compute Engine enabled project's ID (e.g. bamboo-shift-454). Project ID is listed on the [Google Developers Console](https://console.developers.google.com/project).
 
 ~~~~ js
-var gcloud = require('gcloud'),
+var cloud = require('gcloud'),
     ds = new gcloud.datastore.Dataset({ projectId: YOUR_PROJECT_ID });
 ~~~~
 
@@ -71,7 +71,35 @@ var gcloud = require('gcloud'),
     });
 ~~~~
 
-#### Creating, Reading, Updating and Deleting
+#### Getting, Saving and Deleting Entities
+
+Get operations require a valid key to retrieve the key identified entity from Datastore. Skip to the "Querying" section if you'd like to learn more about querying against Datastore.
+
+~~~~ js
+ds.get(['Elephant', 123], function(err, obj) {
+
+});
+// alternatively, you can retrieve multiple entities by
+// getting by multiple entity keys.
+ds.getAll([key1, key2, ...], function(err, objs) {
+
+});
+~~~~
+
+You can insert arbitrary objects by providing an incomplete key during saving. If the key is not incomplete, the existing entity is updated or inserted with the provided key.
+
+To learn more about keys and incomplete keys, skip to the Keys section.
+
+~~~~ js
+ds.save(['Animal', null], obj, function(err, key) {
+	// First arg is an incomplete key for Animal kind.
+	// console.log(key) will output ['Animal', 599900452312].
+});
+// alternatively, you can save multiple entities.
+ds.saveAll([key1, key2, key3], [obj1, obj2, obj3], function(err, keys) {
+	// if key1 was incomplete, keys[0] will return the generated key.
+});
+~~~~
 
 #### Querying
 
@@ -89,8 +117,8 @@ TODO
 
 Fork the repo, make changes and open a pull request.
 
-* `npm test` to run tests.
-* `npm run cover` to see the test coverage report.
+* `npnomest` to run tests.
+* `npnomun cover` to see the test coverage report.
 
 Before we can accept any pull requests
 we have to jump through a couple of legal hurdles,
