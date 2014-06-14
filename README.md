@@ -119,6 +119,26 @@ ds.delAll([
 
 #### Allocating IDs (ID generation)
 
+You can generate IDs without creating entities. The following call will create
+100 new IDs from the Company kind which exists under the default namespace.
+
+~~~~ js
+ds.allocateIds(['Company', null], 100, function(err, keys) {
+
+});
+~~~~
+
+You may prefer to create IDs from a non-default namespace by providing
+an incomplete key with a namespace. Similar to the previous example, the
+call below will create 100 new IDs, but from the Company kind that exists
+under the "ns-test" namespace.
+
+~~~~ js
+ds.allocateIds(['ns-test', 'Company', null], 100, function(err, keys) {
+
+});
+~~~~
+
 #### Transactions
 
 #### Keys
