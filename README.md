@@ -119,6 +119,66 @@ ds.delAll([
 
 #### Querying
 
+Datastore allows you to query entities by kind, filter them by property filters and sort them by a property name. Projection and pagination are
+also supported.
+
+~~~~ js
+// retrieves 5 companies
+var q = ds.query('Company').limit(5);
+ds.runQuery(q, function(err, keys, objs, nextQuery) {
+    // nextQuery is not null if there are more results.
+    if (nextQuery) {
+        ds.runQuery(nextQuery, callback);
+    }
+});
+~~~~
+
+##### Filtering
+
+Datastore allows querying on properties. Supported comparison operators are
+`=`, `<`, `>`, `<=`, `>=`. Not equal and `IN` operators are currently not
+supported.
+
+~~~~ js
+// lists all companies named Google and
+// have less than 400 employees.
+var q = ds.query('Company')
+    .filter('name =', 'Google')
+    .filter('size <', 400);
+~~~~
+
+##### Sorting
+
+You can sort the results by a property name ascendingly or descendingly.
+
+~~~~ js
+// sorts by size ascendingly.
+var q = ds.query('Company').sort('+size');
+
+// sorts by size descendingly.
+var q = ds.query('Company').sort('-size');
+~~~~
+
+##### Selection (or Projection)
+
+You may prefer to retrieve only a few of the properties of the entities.
+
+~~~~ js
+// retrieves names and sizes of all companies.
+var q = ds.query('Company').select(['name', 'size']);
+~~~~
+
+##### Pagination
+
+Pagination allows you to set an offset, limit and starting cursor to a query.
+
+~~~~ js
+var q = ds.query('Company')
+    .offset(100) // start from 100th result
+    .limit(10)   // return only 10 results
+    .start(cursorToken); // continue to retrieve results from the given cursor.
+~~~~
+
 #### Allocating IDs (ID generation)
 
 You can generate IDs without creating entities. The following call will create
