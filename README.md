@@ -42,11 +42,11 @@ If you are not running this client on Google Compute Engine, you need a Google D
 
 * [Google Cloud Datastore](#google-cloud-datastore)
 	* [Configuration](#configuration)
+	* [Entities and Keys](#entities-and-keys)
 	* [Getting, Saving and Deleting Entities](#getting-saving-and-deleting-entities)
 	* [Querying](#querying)
 	* [Allocating IDs](#allocating-ids-id-generation)
 	* [Transactions](#transactions)
-	* [Keys](#keys)
 * [Google Cloud Storage](#google-cloud-storage)
 
 ### Google Cloud Datastore
@@ -76,6 +76,10 @@ var gcloud = require('gcloud'),
     	pemFilePath: '/path/to/the/pem/private/key.pem'
     });
 ~~~~
+
+#### Entities and Keys
+
+TODO
 
 #### Getting, Saving and Deleting Entities
 
@@ -244,8 +248,6 @@ CRUD and transaction related operations.
 * t.delAll(keys, callback)
 * t.rollback(callback)
 * t.commit(callback)
-
-#### Keys
 
 ### Google Cloud Storage
 
