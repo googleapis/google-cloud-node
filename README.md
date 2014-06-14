@@ -41,6 +41,12 @@ If you are not running this client on Google Compute Engine, you need a Google D
 ## Developer's Guide
 
 * [Google Cloud Datastore](#google-cloud-datastore)
+	* [Configuration](#configuration)
+	* [Getting, Saving and Deleting Entities](#getting-saving-and-deleting-entities)
+	* [Querying](#querying)
+	* [Allocating IDs](#allocating-ids-id-generation)
+	* [Transactions](#transactions)
+	* [Keys](#keys)
 * [Google Cloud Storage](#google-cloud-storage)
 
 ### Google Cloud Datastore
