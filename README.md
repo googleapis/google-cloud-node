@@ -37,7 +37,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
 	* Developers Console project's ID (e.g. bamboo-shift-455)
 	* Service account's email address (e.g. xxx@developer.gserviceaccount.com)
 	* The path to the downloaded private key.
-	
+
 ## Developer's Guide
 
 * [Google Cloud Datastore](#google-cloud-datastore)
@@ -76,7 +76,7 @@ var gcloud = require('gcloud'),
 Get operations require a valid key to retrieve the key identified entity from Datastore. Skip to the "Querying" section if you'd like to learn more about querying against Datastore.
 
 ~~~~ js
-ds.get(['Elephant', 123], function(err, obj) {
+ds.get(['Company', 123], function(err, obj) {
 
 });
 // alternatively, you can retrieve multiple entities at once.
@@ -90,9 +90,9 @@ You can insert arbitrary objects by providing an incomplete key during saving. I
 To learn more about keys and incomplete keys, skip to the Keys section.
 
 ~~~~ js
-ds.save(['Animal', null], obj, function(err, key) {
-	// First arg is an incomplete key for Animal kind.
-	// console.log(key) will output ['Animal', 599900452312].
+ds.save(['Company', null], obj, function(err, key) {
+	// First arg is an incomplete key for Company kind.
+	// console.log(key) will output ['Company', 599900452312].
 });
 // alternatively, you can save multiple entities at once.
 ds.saveAll([key1, key2, key3], [obj1, obj2, obj3], function(err, keys) {
@@ -103,14 +103,16 @@ ds.saveAll([key1, key2, key3], [obj1, obj2, obj3], function(err, keys) {
 Deletion requires the key of the entity to be deleted.
 
 ~~~~ js
-ds.del(['Animal', 599900452312], obj, function(err) {
+ds.del(['Company', 599900452312], obj, function(err) {
 
 });
-// alternatively, you can delete multiple entities at once.
+// alternatively, you can delete multiple entities of different
+// kinds at once.
 ds.delAll([
-	['Animal', 599900452312],
-	['Animal', 599900452315],
-	['Elephant', 123]], function(err) {
+	['Company', 599900452312],
+	['Company', 599900452315],
+    ['Office', 'mtv'],
+	['Company', 123, 'Employee', 'jbd']], function(err) {
 
 });
 ~~~~
