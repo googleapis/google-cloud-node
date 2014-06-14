@@ -32,11 +32,17 @@ If you are not running this client on Google Compute Engine, you need a Google D
 	* Google Cloud Storage
 	* Google Cloud Storage JSON API
 * Once API access is enabled, switch back to "APIs & auth" section on the navigation panel and switch to "Credentials" page.
-* Click on "Create new client ID" to create a new **service account**. Once the account is created, a p12 file will be auto downloaded. The downloaded file is the private key you'll need for authorisation.
+* Click on "Create new client ID" to create a new **service account**. Once the account is created, a p12 file will be auto downloaded. You need to run the following command to convert this file to a pem file.
+
+~~~~ sh
+openssl pkcs12 -in <key.p12> -nocerts -passin pass:notasecret -nodes -out <key.pem>
+~~~~
+
+The pem file is the private key you'll need for authorization.
 * You'll the following for auth configuration:
 	* Developers Console project's ID (e.g. bamboo-shift-455)
 	* Service account's email address (e.g. xxx@developer.gserviceaccount.com)
-	* The path to the downloaded private key.
+	* The path to the pem file.
 
 ## Developer's Guide
 
