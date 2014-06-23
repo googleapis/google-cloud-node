@@ -94,7 +94,7 @@ describe('Dataset', function() {
       assert.strictEqual(obj.name, 'Burcu');
       assert.deepEqual(obj.bytes, new Buffer('hello'));
       assert.strictEqual(obj.done, false);
-      assert.deepEqual(obj.total, new datastore.Double(6.7));
+      assert.deepEqual(obj.total, 6.7);
       assert.strictEqual(obj.createdat.getTime(), 978307200000);
       done();
     });
@@ -113,7 +113,7 @@ describe('Dataset', function() {
       assert.strictEqual(objs[0].name, 'Burcu');
       assert.deepEqual(objs[0].bytes, new Buffer('hello'));
       assert.strictEqual(objs[0].done, false);
-      assert.deepEqual(objs[0].total, new datastore.Double(6.7));
+      assert.deepEqual(objs[0].total, 6.7);
       assert.strictEqual(objs[0].createdat.getTime(), 978307200000);
       done();
     });
