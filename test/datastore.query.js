@@ -24,7 +24,7 @@ describe('Query', function() {
   var ds = new datastore.Dataset({ projectId: 'my-project-id' });
   it('should use default namespace if none is specified', function(done) {
     var q = ds.query(['kind1']);
-    assert.equal(q.namespace, 'default');
+    assert.equal(q.namespace, '');
     done();
   });
 
@@ -38,7 +38,7 @@ describe('Query', function() {
     var q = ds.query(['kind1', 'kind2']);
     var qNS = ds.queryNS('ns', ['kind1', 'kind2']);
 
-    assert.equal(q.namespace, 'default');
+    assert.strictEqual(q.namespace, '');
     assert.equal(q.kinds[0], 'kind1');
     assert.equal(q.kinds[1], 'kind2');
 

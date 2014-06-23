@@ -5,7 +5,7 @@
         "key":{
           "partitionId":{
             "datasetId":"s~bamboo-shift-xxx",
-            "namespace":"default"
+            "namespace":""
           },
           "path":[
             {

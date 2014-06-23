@@ -179,11 +179,11 @@ describe('Dataset', function() {
       assert.deepEqual(proto.keys[0], {
         partitionId:{
           datasetId: 's~test',
-          namespace: 'default'
+          namespace: ''
         },
         path :[{kind:'Kind'}]
       });
-      callback(null, { keys: [{ partitionId: { datasetId: 's~test', namespace: 'default' }, path :[{kind:'Kind', id: '123'}]}]});
+      callback(null, { keys: [{ partitionId: { datasetId: 's~test', namespace: '' }, path :[{kind:'Kind', id: '123'}]}]});
     };
     ds.allocateIds(['Kind', null], 1, function(err, ids) {
       assert.deepEqual(ids[0], ['Kind', 123]);

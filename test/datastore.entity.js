@@ -31,9 +31,9 @@ describe('registerKind', function() {
     done();
   });
 
-  it('should set the namespace to be "default" if zero value or null is provided', function(done) {
+  it('should set the namespace to be "" if zero value or null is provided', function(done) {
     entity.registerKind(null, 'kind', blogPostMetadata);
-    var meta = entity.getKind('default', 'kind');
+    var meta = entity.getKind('', 'kind');
     assert.strictEqual(meta, blogPostMetadata);
     done();
   });
@@ -48,7 +48,7 @@ describe('registerKind', function() {
 
 describe('keyFromKeyProto', function() {
    var proto = {
-    partitionId: { namespace: 'default', datasetId: 'datasetId' },
+    partitionId: { namespace: '', datasetId: 'datasetId' },
     path:        [{ kind: 'Kind', name: 'Name' }]
   };
 
@@ -88,7 +88,7 @@ describe('keyToKeyProto', function() {
     var key = ['Kind1', 1, 'Kind2', 'name'];
     var proto = entity.keyToKeyProto('datasetId', key);
     assert.strictEqual(proto.partitionId.datasetId, 'datasetId');
-    assert.strictEqual(proto.partitionId.namespace, 'default');
+    assert.strictEqual(proto.partitionId.namespace, '');
     assert.strictEqual(proto.path[0].kind, 'Kind1');
     assert.strictEqual(proto.path[0].id, 1);
     assert.strictEqual(proto.path[0].name, undefined);
@@ -120,7 +120,7 @@ describe('keyToKeyProto', function() {
     var protoWithNS = entity.keyToKeyProto('datasetId', keyWithNS);
 
     assert.strictEqual(proto.partitionId.datasetId, 'datasetId');
-    assert.strictEqual(proto.partitionId.namespace, 'default');
+    assert.strictEqual(proto.partitionId.namespace, '');
     assert.strictEqual(proto.path[0].kind, 'Kind1');
     assert.strictEqual(proto.path[0].id, undefined);
     assert.strictEqual(proto.path[0].name, undefined);
@@ -206,7 +206,7 @@ describe('entityToEntityProto', function() {
 var keyProto = {
   "partitionId":{
      "datasetId":"s~bamboo-shift-xxx",
-     "namespace":"default"
+     "namespace":""
   },
   "path":[
      {
