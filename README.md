@@ -140,7 +140,7 @@ also supported.
 
 ~~~~ js
 // retrieves 5 companies
-var q = ds.query('Company').limit(5);
+var q = ds.createQuery('Company').limit(5);
 ds.runQuery(q, function(err, keys, objs, nextQuery) {
     // nextQuery is not null if there are more results.
     if (nextQuery) {
@@ -158,7 +158,7 @@ supported.
 ~~~~ js
 // lists all companies named Google and
 // have less than 400 employees.
-var q = ds.query('Company')
+var q = ds.createQuery('Company')
     .filter('name =', 'Google')
     .filter('size <', 400);
 ~~~~
@@ -169,10 +169,10 @@ You can sort the results by a property name ascendingly or descendingly.
 
 ~~~~ js
 // sorts by size ascendingly.
-var q = ds.query('Company').sort('+size');
+var q = ds.createQuery('Company').sort('+size');
 
 // sorts by size descendingly.
-var q = ds.query('Company').sort('-size');
+var q = ds.createQuery('Company').sort('-size');
 ~~~~
 
 ##### Selection (or Projection)
@@ -181,7 +181,7 @@ You may prefer to retrieve only a few of the properties of the entities.
 
 ~~~~ js
 // retrieves names and sizes of all companies.
-var q = ds.query('Company').select(['name', 'size']);
+var q = ds.createQuery('Company').select(['name', 'size']);
 ~~~~
 
 ##### Pagination
@@ -189,7 +189,7 @@ var q = ds.query('Company').select(['name', 'size']);
 Pagination allows you to set an offset, limit and starting cursor to a query.
 
 ~~~~ js
-var q = ds.query('Company')
+var q = ds.createQuery('Company')
     .offset(100) // start from 100th result
     .limit(10)   // return only 10 results
     .start(cursorToken); // continue to retrieve results from the given cursor.

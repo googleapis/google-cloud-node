@@ -23,20 +23,20 @@ describe('Query', function() {
 
   var ds = new datastore.Dataset({ projectId: 'my-project-id' });
   it('should use default namespace if none is specified', function(done) {
-    var q = ds.query(['kind1']);
+    var q = ds.createQuery(['kind1']);
     assert.equal(q.namespace, '');
     done();
   });
 
   it('should use support custom namespaces', function(done) {
-    var q = ds.queryNS('ns', ['kind1']);
+    var q = ds.createQueryNS('ns', ['kind1']);
     assert.equal(q.namespace, 'ns');
     done();
   });
 
   it('should support querying multiple kinds', function(done) {
-    var q = ds.query(['kind1', 'kind2']);
-    var qNS = ds.queryNS('ns', ['kind1', 'kind2']);
+    var q = ds.createQuery(['kind1', 'kind2']);
+    var qNS = ds.createQueryNS('ns', ['kind1', 'kind2']);
 
     assert.strictEqual(q.namespace, '');
     assert.equal(q.kinds[0], 'kind1');
@@ -49,7 +49,7 @@ describe('Query', function() {
   });
 
   it('should support field selection by field name', function(done) {
-    var q = ds.query(['kind1']).select(['name', 'title']);
+    var q = ds.createQuery(['kind1']).select(['name', 'title']);
     assert.equal(q.selectVal[0], 'name');
     assert.equal(q.selectVal[1], 'title');
     done();
@@ -57,7 +57,7 @@ describe('Query', function() {
 
   it('should support multiple filters', function(done) {
     var now = new Date();
-    var q = ds.query(['kind1'])
+    var q = ds.createQuery(['kind1'])
         .filter('date <=', now)
         .filter('name =', 'Title')
         .filter('count >', 20);
@@ -76,7 +76,7 @@ describe('Query', function() {
   });
 
   it('should support ordering asc and desc', function(done) {
-    var q = ds.query(['kind1']).order('+name').order('-count');
+    var q = ds.createQuery(['kind1']).order('+name').order('-count');
     assert.equal(q.orders[0].name, 'name');
     assert.equal(q.orders[0].sign, '+');
     assert.equal(q.orders[1].name, 'count');
@@ -86,26 +86,26 @@ describe('Query', function() {
 
   it('should throw error is invalid sort sign is provided', function(done) {
     assert.throws(function() {
-      var q = ds.query(['kind1']).order('*name');
+      var q = ds.createQuery(['kind1']).order('*name');
     }, /Invalid order pattern/);
     done();
   });
 
   it('should provide pagination with offset and limit', function(done) {
-    var q = ds.query(['kind1']).offset(20).limit(100);
+    var q = ds.createQuery(['kind1']).offset(20).limit(100);
     assert.strictEqual(q.offsetVal, 20);
     assert.strictEqual(q.limitVal, 100);
     done();
   });
 
   it('should allow page start tokens', function(done) {
-    var q = ds.query(['kind1']).start('abc123');
+    var q = ds.createQuery(['kind1']).start('abc123');
     assert.strictEqual(q.startVal, 'abc123');
     done();
   });
 
   it('should be converted to a query proto successfully', function(done) {
-    var q = ds.query(['Kind'])
+    var q = ds.createQuery(['Kind'])
         .select(['name', 'count'])
         .filter('count >=', datastore.Int(5))
         .filter('name =', 'Burcu')
