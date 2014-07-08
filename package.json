@@ -28,7 +28,8 @@
   "dependencies" : {
     "gapitoken": "*",
     "async": "*",
-    "request": "*"
+    "request": "*",
+    "node-uuid": "*"
   },
   "devDependencies" : {
     "mocha": "*",
