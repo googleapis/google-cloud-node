@@ -119,7 +119,7 @@ ds.saveAll([key1, key2, key3], [obj1, obj2, obj3], function(err, keys) {
 Deletion requires the key of the entity to be deleted.
 
 ~~~~ js
-ds.del(['Company', 599900452312], obj, function(err) {
+ds.del(['Company', 599900452312], function(err) {
 
 });
 // alternatively, you can delete multiple entities of different
