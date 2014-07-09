@@ -88,7 +88,7 @@ describe('keyToKeyProto', function() {
     var key = ['Kind1', 1, 'Kind2', 'name'];
     var proto = entity.keyToKeyProto('datasetId', key);
     assert.strictEqual(proto.partitionId.datasetId, 'datasetId');
-    assert.strictEqual(proto.partitionId.namespace, '');
+    assert.strictEqual(proto.partitionId.namespace, undefined);
     assert.strictEqual(proto.path[0].kind, 'Kind1');
     assert.strictEqual(proto.path[0].id, 1);
     assert.strictEqual(proto.path[0].name, undefined);
@@ -120,7 +120,7 @@ describe('keyToKeyProto', function() {
     var protoWithNS = entity.keyToKeyProto('datasetId', keyWithNS);
 
     assert.strictEqual(proto.partitionId.datasetId, 'datasetId');
-    assert.strictEqual(proto.partitionId.namespace, '');
+    assert.strictEqual(proto.partitionId.namespace, undefined);
     assert.strictEqual(proto.path[0].kind, 'Kind1');
     assert.strictEqual(proto.path[0].id, undefined);
     assert.strictEqual(proto.path[0].name, undefined);

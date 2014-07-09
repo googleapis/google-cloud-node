@@ -179,7 +179,6 @@ describe('Dataset', function() {
       assert.deepEqual(proto.keys[0], {
         partitionId:{
           datasetId: 's~test',
-          namespace: ''
         },
         path :[{kind:'Kind'}]
       });
