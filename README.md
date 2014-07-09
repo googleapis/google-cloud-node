@@ -68,7 +68,7 @@ in detail on [Megastore: Providing Scalable, Highly Available Storage for Intera
 If you're running this client on Google Compute Engine, you need to construct a dataset with your Compute Engine enabled project's ID (e.g. bamboo-shift-454). Project ID is listed on the [Google Developers Console](https://console.developers.google.com/project).
 
 ~~~~ js
-var cloud = require('gcloud'),
+var gcloud = require('gcloud'),
     ds = new gcloud.datastore.Dataset({ projectId: YOUR_PROJECT_ID });
 ~~~~
 
@@ -119,7 +119,7 @@ ds.saveAll([key1, key2, key3], [obj1, obj2, obj3], function(err, keys) {
 Deletion requires the key of the entity to be deleted.
 
 ~~~~ js
-ds.del(['Company', 599900452312], obj, function(err) {
+ds.del(['Company', 599900452312], function(err) {
 
 });
 // alternatively, you can delete multiple entities of different
