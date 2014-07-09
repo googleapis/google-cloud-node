@@ -68,7 +68,7 @@ in detail on [Megastore: Providing Scalable, Highly Available Storage for Intera
 If you're running this client on Google Compute Engine, you need to construct a dataset with your Compute Engine enabled project's ID (e.g. bamboo-shift-454). Project ID is listed on the [Google Developers Console](https://console.developers.google.com/project).
 
 ~~~~ js
-var cloud = require('gcloud'),
+var gcloud = require('gcloud'),
     ds = new gcloud.datastore.Dataset({ projectId: YOUR_PROJECT_ID });
 ~~~~
 
