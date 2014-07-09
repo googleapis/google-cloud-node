@@ -72,7 +72,7 @@ var gcloud = require('gcloud'),
     ds = new gcloud.datastore.Dataset({ projectId: YOUR_PROJECT_ID });
 ~~~~
 
-Else, initiate with project ID, service account's email and private key downloaded from Developer's Console.
+Elsewhere, initiate with project ID, service account's email and private key downloaded from Developer's Console.
 
 ~~~~ js
 var gcloud = require('gcloud'),
@@ -257,7 +257,102 @@ CRUD and transaction related operations.
 
 ### Google Cloud Storage
 
-TODO
+Google Cloud Storage allows you to store data on Google infrastructure. Read [Google Cloud Storage API docs](https://developers.google.com/storage/) for more information.
+
+You need to create a Google Cloud Storage bucket to use this client library. Follow the steps on [Google Cloud Storage docs](https://developers.google.com/storage/) to create a bucket.
+
+#### Configuration
+
+If you're running this client on Google Compute Engine, you need to initiate a bucket object with your bucket's name.
+
+~~~~ js
+var gcloud = require('gcloud'),
+    bucket = new gcloud.storage.Bucket({ bucketName: YOUR_BUCKET_NAME });
+~~~~
+
+Elsewhere, initiate with bucket's name, service account's email and private key downloaded from Developer's Console.
+
+~~~~ js
+var gcloud = require('gcloud'),
+    bucket = new gcloud.storage.Bucket({
+        projectId: YOUR_PROJECT_ID,
+        email: 'xxx@developer.gserviceaccount.com',
+        pemFilePath: '/path/to/the/pem/private/key.pem'
+    });
+~~~~
+
+#### Listing Files
+
+~~~~ js
+bucket.list(function(err, files, nextQuery) {
+    // if more results, nextQuery will be non-null.
+});
+~~~~
+
+Or optionally, you can provide a query. The following call will limit the
+number of results to 5.
+
+~~~~ js
+bucket.list({ maxResults: 5 }, function(err, files, nextQuery) {
+    // if more results, nextQuery will be non-null.
+});
+~~~~
+
+#### Stat Files
+
+You can retrieve file metadata by stating the file.
+
+~~~~ js
+bucket.stat(filename, function(err, metadata) {
+});
+~~~~
+
+#### Read file contents
+
+Buckets provive a read stream to the file contents. You can pipe it to a write
+stream, or listening 'data' events to read a file's contents. The following
+example will create a readable stream to the file identified by filename,
+and write the file contents to `/path/to/file`.
+
+~~~~ js
+bucket.createReadStream(filename)
+    .pipe(fs.createWriteStream('/path/to/file'))
+    .on('error', console.log)
+    .on('completed', console.log);
+~~~~
+
+#### Write file contents and metadata
+
+A bucket object allows you to write a readable stream, a file and a buffer
+as file contents.
+
+~~~~ js
+// Uploads file.pdf
+bucket.writeFile(
+    filename, '/path/to/file.pdf', { contentType: 'application/pdf' }, callback);
+
+// Reads the stream and uploads it as file contents
+bucket.writeStream(
+    filename, fs.createReadStream('/path/to/file.pdf'), metadata, callback);
+
+// Uploads 'Hello World' as file contents
+bucket.writeBuffer(filename, 'Hello World', callback);
+~~~~
+
+#### Copy files
+
+You can copy an existing file. If no bucket name provided for the destination
+file, current bucket name will be used.
+
+~~~~ js
+bucket.copy(filename, { bucket: 'other-bucket', name: 'other-filename' }, callback);
+~~~~
+
+#### Remove files
+
+~~~~ js
+bucket.remove(filename, callback);
+~~~~
 
 ## Contributing
 
