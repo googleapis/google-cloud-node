@@ -10,7 +10,7 @@
       "email": "jbd@google.com"
     }
   ],
-  "main": "./lib/gcloud",
+  "main": "./lib/index",
   "repository": {
     "type": "git",
     "url": "https://github.com/googlecloudplatform/gcloud-nodejs.git"
