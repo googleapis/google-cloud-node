@@ -263,8 +263,8 @@ TODO
 
 Fork the repo, make changes and open a pull request.
 
-* `npnomest` to run tests.
-* `npnomun cover` to see the test coverage report.
+* `npm test` to run tests.
+* `npm run cover` to see the test coverage report.
 
 Before we can accept any pull requests
 we have to jump through a couple of legal hurdles,
