@@ -54,6 +54,13 @@ The pem file is the private key you'll need for authorization.
 	* [Allocating IDs](#allocating-ids-id-generation)
 	* [Transactions](#transactions)
 * [Google Cloud Storage](#google-cloud-storage)
+    * [Configuration](#configuration-1)
+    * [Listing Files](#listing-files)
+    * [Stat Files](#stat-files)
+    * [Read file contents](#read-file-contents)
+    * [Write file contents and metadata](#write-file-contents-and-metadata)
+    * [Copy files](#copy-files)
+    * [Remove files](#remove-files)
 
 ### Google Cloud Datastore
 
