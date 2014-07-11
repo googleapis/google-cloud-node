@@ -56,10 +56,10 @@ describe('Query', function() {
   });
 
   it('should support ancestor filtering', function(done) {
-    var q = ds.createQuery(['kind1']).hasAncestor(['kind2', null]);
+    var q = ds.createQuery(['kind1']).hasAncestor(['kind2', 123]);
     assert.equal(q.filters[0].name, '__key__');
     assert.equal(q.filters[0].op, 'HAS_ANCESTOR');
-    assert.deepEqual(q.filters[0].val, ['kind2', null]);
+    assert.deepEqual(q.filters[0].val, ['kind2', 123]);
     done();
   });
 
