@@ -55,6 +55,14 @@ describe('Query', function() {
     done();
   });
 
+  it('should support ancestor filtering', function(done) {
+    var q = ds.createQuery(['kind1']).hasAncestor(['kind2', null]);
+    assert.equal(q.filters[0].name, '__key__');
+    assert.equal(q.filters[0].op, 'HAS_ANCESTOR');
+    assert.deepEqual(q.filters[0].val, ['kind2', null]);
+    done();
+  });
+
   it('should support multiple filters', function(done) {
     var now = new Date();
     var q = ds.createQuery(['kind1'])
