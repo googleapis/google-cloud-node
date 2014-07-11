@@ -15,7 +15,8 @@
  */
 
 var assert = require('assert'),
-    entity = require('../lib/datastore/entity.js');
+    entity = require('../lib/datastore/entity.js'),
+    datastore = require('../lib/datastore');
 
 var blogPostMetadata = {
   title:       { kind: String, indexed: true },
@@ -203,6 +204,20 @@ describe('entityToEntityProto', function() {
 
 });
 
+describe('queryToQueryProto', function() {
+
+  it('should support filters and ancestory filtering', function(done) {
+    var ds = new datastore.Dataset({ projectId: 'project-id' });
+    var q = ds.createQuery('Kind1')
+      .filter('name =', 'John')
+      .hasAncestor(['Kind2', 'somename']);
+    var proto = entity.queryToQueryProto(q);
+    assert.deepEqual(proto, queryFilterProto);
+    done();
+  });
+
+});
+
 var keyProto = {
   "partitionId":{
      "datasetId":"s~bamboo-shift-xxx",
@@ -247,4 +262,46 @@ var entityProto = {
          "listValue": [{ "integerValue": "6" }, { "booleanValue": false }]
       }
    }
+};
+
+var queryFilterProto = {
+    "projection": [],
+    "kinds": [{
+        "name": "Kind1"
+    }],
+    "filter": {
+        "compositeFilter": {
+            "filters": [{
+                "propertyFilter": {
+                    "property": {
+                        "name": "name"
+                    },
+                    "operator": "EQUAL",
+                    "value": {
+                        "properties": {
+                            "stringValue": "John"
+                        }
+                    }
+                }
+            }, {
+                "propertyFilter": {
+                    "property": {
+                        "name": "__key__"
+                    },
+                    "operator": "HAS_ANCESTOR",
+                    "value": {
+                        "keyValue": {
+                            "path": [{
+                                "kind": "Kind2",
+                                "name": "somename"
+                            }]
+                        }
+                    }
+                }
+            }],
+            "operator": "AND"
+        }
+    },
+    "order": [],
+    "groupBy": []
 };
