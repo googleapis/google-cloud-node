@@ -8,6 +8,7 @@ This client supports the following Google Cloud services:
 
 * [Google Cloud Datastore](https://developers.google.com/datastore/) (externalised Megastore, also allows access to the collections of your existing AppEngine apps)
 * [Google Cloud Storage](https://cloud.google.com/products/cloud-storage/)
+* [Google Cloud Pub/Sub](https://developers.google.com/pubsub/)
 * Planned but not yet started: [Google Compute Engine](https://developers.google.com/compute), and [Google BigQuery](https://developers.google.com/bigquery/)
 
 ## Quickstart
@@ -31,6 +32,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
 	* Google Cloud Datastore API
 	* Google Cloud Storage
 	* Google Cloud Storage JSON API
+    * Google Cloud Pub/Sub
 * Once API access is enabled, switch back to "APIs & auth" section on the navigation panel and switch to "Credentials" page.
 * Click on "Create new client ID" to create a new **service account**. Once the account is created, a p12 file will be auto downloaded. You need to run the following command to convert this file to a pem file.
 
