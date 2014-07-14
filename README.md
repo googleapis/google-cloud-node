@@ -170,6 +170,12 @@ var q = ds.createQuery('Company')
     .filter('size <', 400);
 ~~~~
 
+In order to filter by ancestors, use `hasAncestor` helper.
+
+~~~ js
+var q = ds.createQuery('Child').hasAncestor(['Parent', 123]);
+~~~
+
 ##### Sorting
 
 You can sort the results by a property name ascendingly or descendingly.
