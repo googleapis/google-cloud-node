@@ -163,8 +163,8 @@ describe('Dataset', function() {
     var ds = new datastore.Dataset({ projectId: 'test' });
     ds.transaction.makeReq = function(method, proto, callback) {
       assert.equal(method, 'commit');
-      assert.equal(proto.mutation.update.length, 2);
-      assert.equal(proto.mutation.update[0].properties.k.stringValue, 'v');
+      assert.equal(proto.mutation.upsert.length, 2);
+      assert.equal(proto.mutation.upsert[0].properties.k.stringValue, 'v');
       callback();
     };
     ds.saveAll([
