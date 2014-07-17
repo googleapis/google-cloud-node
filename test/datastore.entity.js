@@ -182,6 +182,8 @@ describe('entityToEntityProto', function() {
       name: 'Burcu',
       desc: 'Description',
       count: new entity.Int(6),
+      primitiveCount: 6,
+      legit: true,
       date : now,
       bytes: new Buffer("Hello"),
       list: ['a', new entity.Double(54.7)],
@@ -193,6 +195,8 @@ describe('entityToEntityProto', function() {
     assert.equal(proto.properties.name.stringValue, 'Burcu');
     assert.equal(proto.properties.desc.stringValue, 'Description');
     assert.equal(proto.properties.count.integerValue, 6);
+    assert.equal(proto.properties.primitiveCount.integerValue, 6);
+    assert.equal(proto.properties.legit.booleanValue, true);
     assert.equal(proto.properties.date.dateTimeValue, now);
     assert.equal(proto.properties.bytes.blobValue, 'SGVsbG8=');
     assert.equal(proto.properties.list.listValue[0].stringValue, 'a');
