@@ -101,11 +101,11 @@ TODO
 Get operations require a valid key to retrieve the key identified entity from Datastore. Skip to the "Querying" section if you'd like to learn more about querying against Datastore.
 
 ~~~~ js
-ds.get(['Company', 123], function(err, obj) {
+ds.get(['Company', 123], function(err, key, obj) {
 
 });
 // alternatively, you can retrieve multiple entities at once.
-ds.getAll([key1, key2, ...], function(err, objs) {
+ds.getAll([key1, key2, ...], function(err, keys, objs) {
 
 });
 ~~~~
