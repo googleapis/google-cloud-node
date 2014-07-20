@@ -184,10 +184,10 @@ You can sort the results by a property name ascendingly or descendingly.
 
 ~~~~ js
 // sorts by size ascendingly.
-var q = ds.createQuery('Company').sort('+size');
+var q = ds.createQuery('Company').order('+size');
 
 // sorts by size descendingly.
-var q = ds.createQuery('Company').sort('-size');
+var q = ds.createQuery('Company').order('-size');
 ~~~~
 
 ##### Selection (or Projection)
@@ -205,7 +205,7 @@ Pagination allows you to set an offset, limit and starting cursor to a query.
 
 ~~~~ js
 var q = ds.createQuery('Company')
-    .offset(100) // start from 100th result
+    .offset(100) // start from 101th result
     .limit(10)   // return only 10 results
     .start(cursorToken); // continue to retrieve results from the given cursor.
 ~~~~
