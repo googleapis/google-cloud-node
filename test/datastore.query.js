@@ -112,6 +112,13 @@ describe('Query', function() {
     done();
   });
 
+  it('should reset the offset to 0 when using start tokens', function(done) {
+    var q = ds.createQuery(['kind1']).offset(5);
+    q.start('startVal');
+    assert.strictEqual(q.offsetVal, 0);
+    done();
+  });
+
   it('should be converted to a query proto successfully', function(done) {
     var q = ds.createQuery(['Kind'])
         .select(['name', 'count'])
