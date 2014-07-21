@@ -1,7 +1,7 @@
 
 {
   "name": "gcloud",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Google Inc.",
   "description": "Google Cloud APIs Client Library for Node.js",
   "contributors": [
