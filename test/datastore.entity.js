@@ -282,9 +282,7 @@ var queryFilterProto = {
                     },
                     "operator": "EQUAL",
                     "value": {
-                        "properties": {
-                            "stringValue": "John"
-                        }
+                        "stringValue": "John"
                     }
                 }
             }, {
