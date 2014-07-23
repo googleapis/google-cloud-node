@@ -376,6 +376,9 @@ Fork the repo, make changes and open a pull request.
 * `npm test` to run tests.
 * `npm run cover` to see the test coverage report.
 
+Add your (or your organization's name) to AUTHORS and
+CONTRIBUTORS files.
+
 Before we can accept any pull requests
 we have to jump through a couple of legal hurdles,
 primarily a Contributor License Agreement (CLA):
