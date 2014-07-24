@@ -36,7 +36,7 @@ var assert = require('assert'),
 
 describe('datastore', function() {
 
-  describe.only('create, retrieve and delete using the datastore service', function() {
+  describe('create, retrieve and delete using the datastore service', function() {
 
     it('should save/get/delete with a key name', function(done) {
       var post = {
@@ -134,23 +134,16 @@ describe('datastore', function() {
         wordCount: 450,
         rating: 4.5,
       };
-      var key = ['Post', null],
-        saveAllAssignedIds = [],
-        saveAllMap = {};
+      var key = ['Post', null];
       ds.saveAll([key, key], [post1, post2], function(err, keys) {
         if (err) return done(err);
-        assert(keys[0][1]);
-        saveAllAssignedIds.push(keys[0][1])
-        saveAllMap[keys[0][1]] = post1;
-        assert(keys[1][1]);
-        saveAllAssignedIds.push(keys[1][1])
-        saveAllMap[keys[1][1]] = post2;
-        var firstKey = ['Post', saveAllAssignedIds[0]],
-          secondKey = ['Post', saveAllAssignedIds[1]];
+        assert.equal(keys.length,2);
+        var firstKey = ['Post', keys[0][1]],
+            secondKey = ['Post', keys[1][1]];
         ds.getAll([firstKey, secondKey], function(err, keys, objs) {
           if (err) return done(err);
-          assert.deepEqual(objs[0], saveAllMap[keys[0][1]]);
-          assert.deepEqual(objs[1], saveAllMap[keys[1][1]]);
+          assert.deepEqual(objs[0], post1);
+          assert.deepEqual(objs[1], post2);
           ds.delAll([firstKey, secondKey], function(err) {
             if (err) return done(err);
             done();
