@@ -37,8 +37,8 @@
   },
   "scripts": {
     "test": "node_modules/mocha/bin/_mocha --reporter spec",
-    "regression-test": "node_modules/mocha/bin/_mocha --reporter spec --timeout 4000 regression/*",
-    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- --timeout 4000 test/* regression/*"
+    "regression-test": "node_modules/mocha/bin/_mocha --reporter spec --timeout 10000 regression/*",
+    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- --timeout 10000 test/* regression/*"
   },
   "license": "Apache 2"
 }
