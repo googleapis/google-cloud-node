@@ -57,12 +57,20 @@ before(function(done) {
 describe('Topic', function() {
 
   it('should be listed', function(done) {
-    // TODO(jbd): Add pagination.
     conn.listTopics(function(err, topics) {
       assert(topics.length, 3);
       done(err);
     });
   });
+
+  it('should return a nextQuery if there are more results', function(done) {
+    conn.listTopics({ maxResults: 2 }, function(err, topics, next) {
+      assert(topics.length, 2);
+      assert(next.maxResults, 2);
+      assert(!!next.pageToken, true);
+      done(err);
+    });
+  })
 
   it('should be created', function(done) {
     conn.createTopic('topic-new', done);
@@ -121,8 +129,7 @@ describe('Subscription', function() {
     });
   });
 
-  // TODO(jbd): Add assertions.
-  it('should get a subscription', function(done) {
+  it('should be gettable', function(done) {
     conn.getSubscription('sub1', function(err, sub) {
       if (err) {
         done(err); return;
@@ -139,11 +146,36 @@ describe('Subscription', function() {
     });
   });
 
-  it('should create a subscription', function(done) {
+  it('should be created', function(done) {
     conn.createSubscription({
       topic: 'topic1',
       name: 'new-sub'
     }, done);
+  });
+
+  it('should be able to pull and ack', function(done) {
+    conn.getTopic('topic1', function(err, topic) {
+      if (err) {
+        done(err); return;
+      }
+      topic.publish('hello', function(err) {
+        if(err) done(err); return;
+      });
+    });
+    conn.getSubscription('sub1', function(err, sub) {
+      if (err) {
+        done(err); return;
+      }
+      sub.on('message', function(msg) {
+        sub.ack(msg.ackId, done);
+      });
+      sub.pull({}, function(err) {
+        if (err) {
+          done(err);
+          return;
+        }
+      });
+    });
   });
 
 });
