@@ -14,17 +14,10 @@
  * limitations under the License.
  */
 
-if (!process.env.GCLOUD_TESTS_PROJECT_ID &&
-    !process.env.GCLOUD_TESTS_SERVICE_ACCOUNT &&
-    !process.env.GCLOUD_TESTS_PEM_KEY) {
-  var error = ['To run the regression tests, you need to set the value of some environment variables.',
-    'Please check the README for instructions.'
-  ].join('\n');
-  throw error;
-}
-var projectId = process.env.GCLOUD_TESTS_PROJECT_ID,
-  email = process.env.GCLOUD_TESTS_SERVICE_ACCOUNT,
-  pemFilePath = process.env.GCLOUD_TESTS_PEM_KEY;
+var env = require('./env.js'),
+    projectId = env.projectId,
+    email = env.serviceAccount,
+    pemFilePath = env.pemKey;
 
 var assert = require('assert'),
   datastore = require('../lib/datastore'),
