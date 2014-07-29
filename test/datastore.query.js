@@ -29,14 +29,14 @@ describe('Query', function() {
   });
 
   it('should use support custom namespaces', function(done) {
-    var q = ds.createQueryNS('ns', ['kind1']);
+    var q = ds.createQuery('ns', ['kind1']);
     assert.equal(q.namespace, 'ns');
     done();
   });
 
   it('should support querying multiple kinds', function(done) {
     var q = ds.createQuery(['kind1', 'kind2']);
-    var qNS = ds.createQueryNS('ns', ['kind1', 'kind2']);
+    var qNS = ds.createQuery('ns', ['kind1', 'kind2']);
 
     assert.strictEqual(q.namespace, '');
     assert.equal(q.kinds[0], 'kind1');
