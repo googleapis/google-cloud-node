@@ -15,8 +15,7 @@
  */
 
 if (!process.env.GCLOUD_TESTS_PROJECT_ID &&
-    !process.env.GCLOUD_TESTS_SERVICE_ACCOUNT &&
-    !process.env.GCLOUD_TESTS_PEM_KEY) {
+    !process.env.GCLOUD_TESTS_KEY) {
   var error = ['To run the regression tests, you need to set the value of some environment variables.',
     'Please check the README for instructions.'
   ].join('\n');
@@ -25,6 +24,5 @@ if (!process.env.GCLOUD_TESTS_PROJECT_ID &&
 
 module.exports = {
   projectId: process.env.GCLOUD_TESTS_PROJECT_ID,
-  serviceAccount: process.env.GCLOUD_TESTS_SERVICE_ACCOUNT,
-  pemKey: process.env.GCLOUD_TESTS_PEM_KEY
+  keyFilename: process.env.GCLOUD_TESTS_KEY
 };
