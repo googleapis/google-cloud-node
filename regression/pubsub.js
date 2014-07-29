@@ -169,12 +169,7 @@ describe('Subscription', function() {
       sub.on('message', function(msg) {
         sub.ack(msg.ackId, done);
       });
-      sub.pull({}, function(err) {
-        if (err) {
-          done(err);
-          return;
-        }
-      });
+      sub.pull({}, done);
     });
   });
 
