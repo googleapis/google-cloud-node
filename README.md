@@ -59,6 +59,11 @@ The downloaded file contains credentials you'll need for authorization.
     * [Write file contents and metadata](#write-file-contents-and-metadata)
     * [Copy files](#copy-files)
     * [Remove files](#remove-files)
+* [Google Cloud Pub/Sub](#google-cloud-pub-sub)
+    * [Configuration](#configuration-2)
+    * [Topics and Subscriptions](#topics-and-subscriptions)
+    * [Publishing a message](#publishing-a-message)
+    * [Listening for messages](#listening-for-messages)
 
 ### Google Cloud Datastore
 
@@ -362,6 +367,121 @@ bucket.copy(filename, { bucket: 'other-bucket', name: 'other-filename' }, callba
 ~~~~ js
 bucket.remove(filename, callback);
 ~~~~
+
+### Google Cloud Pub/Sub
+
+Google Cloud Pub/Sub is a reliable, many-to-many, asynchronous messaging
+service from Google Cloud Platform. A detailed overview is available on
+[Pub/Sub docs](https://developers.google.com/pubsub/overview).
+
+#### Configuration
+
+If you're running this client on Google Compute Engine, you need to construct
+a pubsub Connection with your Google Developers Console project ID.
+
+~~~~ js
+var gcloud = require('gcloud'),
+    conn = new gcloud.pubsub.Connection({ projectId: YOUR_PROJECT_ID });
+~~~~
+
+Elsewhere, construct with project ID, service account's email
+and private key downloaded from Developer's Console.
+
+~~~~ js
+var gcloud = require('gcloud'),
+    conn = new gcloud.pubsub.Connection({
+        projectId: YOUR_PROJECT_ID,
+        email: 'xxx@developer.gserviceaccount.com',
+        pemFilePath: '/path/to/the/pem/private/key.pem'
+    });
+~~~~
+
+#### Topics and Subscriptions
+
+List, get, create and delete topics.
+
+~~~ js
+// lists topics.
+conn.listTopics({ maxResults: 5 }, function(err, topics, nextQuery) {
+    // if more results, nextQuery will be non-null.
+});
+
+// retrieves an existing topic by name.
+conn.getTopic('topic1', function(err, topic) {
+    // deletes this topic.
+    topic.del(callback);
+});
+
+// creates a new topic named topic2.
+conn.createTopic('topic2', callback);
+~~~
+
+List, get, create and delete subscriptions.
+
+~~~ js
+var query = {
+    maxResults: 5,
+    filterByTopicName: 'topic1'
+};
+// list 5 subscriptions that are subscribed to topic1.
+conn.listSubscriptions(query, function(err, subs, nextQuery) {
+    // if there are more results, nextQuery will be non-null.
+});
+
+// get subscription named sub1
+conn.getSubscription('sub1', function(err, sub) {
+    // delete this subscription.
+    sub.del(callback);
+});
+
+// create a new subsription named sub2, listens to topic1.
+conn.createSubscription({
+    topic: 'topic1',
+    name: 'sub2',
+    ackDeadlineSeconds: 60
+}, callback);
+~~~
+
+#### Publishing a message
+
+You need to retrieve or create a topic to publish a message.
+You can either publish simple string messages or a raw Pub/Sub
+message object.
+
+~~~ js
+conn.getTopic('topic1', function(err, topic) {
+    // publishes "hello world" to to topic1 subscribers.
+    topic.publish('hello world', callback);
+    topic.publishMessage({
+        data: 'Some text here...',
+        label: [
+            { key: 'priority', numValue: 0 },
+            { key: 'foo', stringValue: 'bar' }
+        ]
+    }, callback);
+});
+~~~
+
+#### Listening for messages
+
+You can either pull messages one by one via a subscription, or
+let the client to open a long-lived request to poll them.
+
+~~~ js
+// allow client to poll messages from sub1
+// autoAck automatically acknowledges the messages. by default, false.
+var sub = conn.subscribe('sub1', { autoAck: true });
+sub.on('ready', function() {
+    console.log('listening messages...');
+});
+sub.on('message', function(msg) {
+    console.log('message retrieved:', msg);
+});
+sub.on('error', function(err) {
+    console.log('error occured:', err);
+});
+sub.close(); // closes the connection, stops listening for messages.
+~~~
 
 ## Contributing
 
