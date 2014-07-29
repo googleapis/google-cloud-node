@@ -14,18 +14,11 @@
  * limitations under the License.
  */
 
-var env = require('./env.js'),
-    projectId = env.projectId,
-    email = env.serviceAccount,
-    pemFilePath = env.pemKey;
+var env = require('./env.js');
 
 var assert = require('assert'),
   datastore = require('../lib/datastore'),
-  ds = new datastore.Dataset({
-    projectId: projectId,
-    email: email,
-    pemFilePath: pemFilePath
-  });
+  ds = new datastore.Dataset(env);
 
 describe('datastore', function() {
 
