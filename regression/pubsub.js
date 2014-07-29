@@ -29,11 +29,7 @@ var subscriptions = [{
   ackDeadlineSeconds: 60
 }];
 
-var conn = new gcloud.pubsub.Connection({
-  projectId: env.projectId,
-  email:  env.serviceAccount,
-  pemFilePath: env.pemKey,
-});
+var conn = new gcloud.pubsub.Connection(env);
 
 before(function(done) {
   // TODO: Handle pagination.
