@@ -34,17 +34,13 @@ If you are not running this client on Google Compute Engine, you need a Google D
 	* Google Cloud Storage JSON API
     * Google Cloud Pub/Sub
 * Once API access is enabled, switch back to "APIs & auth" section on the navigation panel and switch to "Credentials" page.
-* Click on "Create new client ID" to create a new **service account**. Once the account is created, a p12 file will be auto downloaded. You need to run the following command to convert this file to a pem file.
+* Click on "Create new client ID" to create a new **service account**. Once the account is created, click on "Generate new JSON key" to download
+your private key.
 
-~~~~ sh
-openssl pkcs12 -in <key.p12> -nocerts -passin pass:notasecret -nodes -out <key.pem>
-~~~~
-
-The pem file is the private key you'll need for authorization.
+The downloaded file contains credentials you'll need for authorization.
 * You'll the following for auth configuration:
 	* Developers Console project's ID (e.g. bamboo-shift-455)
-	* Service account's email address (e.g. xxx@developer.gserviceaccount.com)
-	* The path to the pem file.
+	* The path to the JSON key file.
 
 ## Developer's Guide
 
@@ -87,8 +83,7 @@ Elsewhere, initiate with project ID, service account's email and private key dow
 var gcloud = require('gcloud'),
     ds = new gcloud.datastore.Dataset({
     	projectId: YOUR_PROJECT_ID,
-    	email: 'xxx@developer.gserviceaccount.com',
-    	pemFilePath: '/path/to/the/pem/private/key.pem'
+    	keyFilename: '/path/to/the/key.json'
     });
 ~~~~
 
@@ -291,8 +286,7 @@ Elsewhere, initiate with bucket's name, service account's email and private key 
 var gcloud = require('gcloud'),
     bucket = new gcloud.storage.Bucket({
         projectId: YOUR_PROJECT_ID,
-        email: 'xxx@developer.gserviceaccount.com',
-        pemFilePath: '/path/to/the/pem/private/key.pem'
+        keyFilename: '/path/to/the/key.json'
     });
 ~~~~
 
