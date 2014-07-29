@@ -1,0 +1,11 @@
+indexes:
+
+- kind: Character
+  properties:
+  - name: family
+  - name: appearances
+
+- kind: Character
+  properties:
+  - name: name
+  - name: family
