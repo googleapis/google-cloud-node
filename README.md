@@ -6,7 +6,7 @@ Node idiomatic client for Google Cloud services. Work in progress... Watch the r
 
 This client supports the following Google Cloud services:
 
-* [Google Cloud Datastore](https://developers.google.com/datastore/) (externalised Megastore, also allows access to the collections of your existing AppEngine apps)
+* [Google Cloud Datastore](https://developers.google.com/datastore/) (also allows access to the collections of your existing AppEngine apps)
 * [Google Cloud Storage](https://cloud.google.com/products/cloud-storage/)
 * [Google Cloud Pub/Sub](https://developers.google.com/pubsub/)
 * Planned but not yet started: [Google Compute Engine](https://developers.google.com/compute), and [Google BigQuery](https://developers.google.com/bigquery/)
