@@ -29,6 +29,10 @@ function createBucket() {
 
 describe('Bucket', function() {
 
+  it('should throw if a bucket name is not passed', function() {
+    assert.throws(function() { var bucket = new storage.Bucket(); }, Error);
+  })
+
   it('should list without a query', function(done) {
     var bucket = createBucket();
     bucket.makeReq = function(method, path, q, body, callback) {
