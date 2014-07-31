@@ -172,6 +172,14 @@ var q = ds.createQuery('Company')
     .filter('size <', 400);
 ~~~~
 
+To filter by key, use `__key__` for the property name. Filtering on keys
+stored as properties is not currently supported.
+
+~~~~ js
+var q = ds.createQuery('Company')
+    .filter('__key__ =', ['Company', 'Google'])
+~~~~
+
 In order to filter by ancestors, use `hasAncestor` helper.
 
 ~~~ js
