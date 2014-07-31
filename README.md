@@ -82,7 +82,7 @@ var gcloud = require('gcloud'),
     ds = new gcloud.datastore.Dataset({ projectId: YOUR_PROJECT_ID });
 ~~~~
 
-Elsewhere, initiate with project ID, service account's email and private key downloaded from Developer's Console.
+Elsewhere, initiate with project ID and private key downloaded from Developer's Console.
 
 ~~~~ js
 var gcloud = require('gcloud'),
@@ -285,12 +285,12 @@ var gcloud = require('gcloud'),
     bucket = new gcloud.storage.Bucket({ bucketName: YOUR_BUCKET_NAME });
 ~~~~
 
-Elsewhere, initiate with bucket's name, service account's email and private key downloaded from Developer's Console.
+Elsewhere, initiate with bucket's name and private key downloaded from Developer's Console.
 
 ~~~~ js
 var gcloud = require('gcloud'),
     bucket = new gcloud.storage.Bucket({
-        projectId: YOUR_PROJECT_ID,
+        bucketName: YOUR_BUCKET_NAME,
         keyFilename: '/path/to/the/key.json'
     });
 ~~~~
@@ -332,7 +332,7 @@ and write the file contents to `/path/to/file`.
 bucket.createReadStream(filename)
     .pipe(fs.createWriteStream('/path/to/file'))
     .on('error', console.log)
-    .on('completed', console.log);
+    .on('complete', console.log);
 ~~~~
 
 #### Write file contents and metadata
@@ -390,8 +390,7 @@ and private key downloaded from Developer's Console.
 var gcloud = require('gcloud'),
     conn = new gcloud.pubsub.Connection({
         projectId: YOUR_PROJECT_ID,
-        email: 'xxx@developer.gserviceaccount.com',
-        pemFilePath: '/path/to/the/pem/private/key.pem'
+        keyFilename: '/path/to/the/key.json'
     });
 ~~~~
 
