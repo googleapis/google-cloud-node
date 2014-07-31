@@ -89,13 +89,14 @@ describe('Dataset', function() {
       assert.equal(proto.keys.length, 1);
       callback(null, mockResp_get);
     };
-    ds.get(['Kind', 123], function(err, key, obj) {
-      assert.deepEqual(key, ['Kind', 5732568548769792]);
-      assert.strictEqual(obj.name, 'Burcu');
-      assert.deepEqual(obj.bytes, new Buffer('hello'));
-      assert.strictEqual(obj.done, false);
-      assert.deepEqual(obj.total, 6.7);
-      assert.strictEqual(obj.createdat.getTime(), 978307200000);
+    ds.get(['Kind', 123], function(err, entity) {
+      var properties = entity.data;
+      assert.deepEqual(entity.key, ['Kind', 5732568548769792]);
+      assert.strictEqual(properties.name, 'Burcu');
+      assert.deepEqual(properties.bytes, new Buffer('hello'));
+      assert.strictEqual(properties.done, false);
+      assert.deepEqual(properties.total, 6.7);
+      assert.strictEqual(properties.createdat.getTime(), 978307200000);
       done();
     });
   });
@@ -108,13 +109,15 @@ describe('Dataset', function() {
       callback(null, mockResp_get);
     };
     ds.getAll([
-        ['Kind', 123]], function(err, keys, objs) {
-      assert.deepEqual(keys[0], ['Kind', 5732568548769792]);
-      assert.strictEqual(objs[0].name, 'Burcu');
-      assert.deepEqual(objs[0].bytes, new Buffer('hello'));
-      assert.strictEqual(objs[0].done, false);
-      assert.deepEqual(objs[0].total, 6.7);
-      assert.strictEqual(objs[0].createdat.getTime(), 978307200000);
+        ['Kind', 123]], function(err, entities) {
+      var entity = entities[0];
+      var properties = entity.data;
+      assert.deepEqual(entity.key, ['Kind', 5732568548769792]);
+      assert.strictEqual(properties.name, 'Burcu');
+      assert.deepEqual(properties.bytes, new Buffer('hello'));
+      assert.strictEqual(properties.done, false);
+      assert.deepEqual(properties.total, 6.7);
+      assert.strictEqual(properties.createdat.getTime(), 978307200000);
       done();
     });
   });
