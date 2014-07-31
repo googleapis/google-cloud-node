@@ -39,9 +39,9 @@ describe('datastore', function() {
       ds.save(['Post', postKeyName], post, function(err, key) {
         if (err) return done(err);
         assert.equal(key[1], postKeyName);
-        ds.get(['Post', postKeyName], function(err, key, obj) {
+        ds.get(['Post', postKeyName], function(err, entity) {
           if (err) return done(err);
-          assert.deepEqual(obj, post);
+          assert.deepEqual(entity.data, post);
           ds.del(['Post', postKeyName], function(err) {
             if (err) return done(err);
             done();
@@ -65,9 +65,9 @@ describe('datastore', function() {
       ds.save(['Post', postKeyId], post, function(err, key) {
         if (err) return done(err);
         assert.equal(key[1], postKeyId);
-        ds.get(['Post', postKeyId], function(err, key, obj) {
+        ds.get(['Post', postKeyId], function(err, entity) {
           if (err) return done(err);
-          assert.deepEqual(obj, post);
+          assert.deepEqual(entity.data, post);
           ds.del(['Post', postKeyId], function(err) {
             if (err) return done(err);
             done();
@@ -90,9 +90,9 @@ describe('datastore', function() {
         if (err) return done(err);
         assert(key[1]);
         var assignedId = key[1];
-        ds.get(['Post', assignedId], function(err, key, obj) {
+        ds.get(['Post', assignedId], function(err, entity) {
           if (err) return done(err);
-          assert.deepEqual(obj, post);
+          assert.deepEqual(entity.data, post);
           ds.del(['Post', assignedId], function(err) {
             if (err) return done(err);
             done();
@@ -126,9 +126,9 @@ describe('datastore', function() {
         assert.equal(keys.length,2);
         var firstKey = ['Post', keys[0][1]],
             secondKey = ['Post', keys[1][1]];
-        ds.getAll([firstKey, secondKey], function(err, keys, objs) {
+        ds.getAll([firstKey, secondKey], function(err, entities) {
           if (err) return done(err);
-          assert.equal(objs.length, 2);
+          assert.equal(entities.length, 2);
           ds.delAll([firstKey, secondKey], function(err) {
             if (err) return done(err);
             done();
@@ -350,9 +350,9 @@ describe('datastore', function() {
           'url': 'www.google.com'
         };
       ds.runInTransaction(function(t, tDone) {
-        ds.get(key, function(err, keyRes, objRes) {
+        ds.get(key, function(err, entity) {
           if (err) return done(err);
-          if (objRes) {
+          if (entity) {
             tDone();
             return;
           } else {
@@ -365,10 +365,10 @@ describe('datastore', function() {
         });
       }, function(err) {
         if (err) throw (err);
-        ds.get(key, function(err, keyRes, objRes) {
+        ds.get(key, function(err, entity) {
           if (err) return done(err);
-          assert.deepEqual(objRes, obj);
-          ds.del(keyRes, function(err) {
+          assert.deepEqual(entity.data, obj);
+          ds.del(entity.key, function(err) {
             if (err) return done(err);
             done();
           })
