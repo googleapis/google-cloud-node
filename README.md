@@ -341,16 +341,21 @@ A bucket object allows you to write a readable stream, a file and a buffer
 as file contents.
 
 ~~~~ js
-// Uploads file.pdf
-bucket.writeFile(
-    filename, '/path/to/file.pdf', { contentType: 'application/pdf' }, callback);
+// Uploads file.pdf.
+bucket.write(name, {
+    filename: '/path/to/file.pdf',
+    metadata: { /* metadata properties */ }
+}, callback);
 
-// Reads the stream and uploads it as file contents
-bucket.writeStream(
-    filename, fs.createReadStream('/path/to/file.pdf'), metadata, callback);
+// Uploads the readable stream.
+bucket.write(name, {
+    data: anyReadableStream,
+    metadata: { /* metadata properties */ }
+}, callback);
 
-// Uploads 'Hello World' as file contents
-bucket.writeBuffer(filename, 'Hello World', callback);
+// Uploads 'Hello World' as file contents.
+// data could be any string or buffer.
+bucket.write(name, { data: 'Hello World' }, callback);
 ~~~~
 
 #### Copy files
