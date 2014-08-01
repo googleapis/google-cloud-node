@@ -205,17 +205,17 @@ describe('datastore', function() {
 
     it('should limit queries', function(done) {
       var q = ds.createQuery('Character').limit(5);
-      ds.runQuery(q, function(err, keys, objs, secondQuery) {
+      ds.runQuery(q, function(err, firstEntities, secondQuery) {
         if (err) return done(err);
-        assert.equal(objs.length, 5);
+        assert.equal(firstEntities.length, 5);
         assert(secondQuery);
-        ds.runQuery(secondQuery, function(err, keys, objs, thirdQuery) {
+        ds.runQuery(secondQuery, function(err, secondEntities, thirdQuery) {
           if (err) return done(err);
-          assert.equal(objs.length, 3);
+          assert.equal(secondEntities.length, 3);
           // TODO(silvano): it currently requires an additional request that brings
           // an empty page and a null query
           //assert.equal(thirdQuery, null)
-          ds.runQuery(thirdQuery, function(err, keys, objs, fourthQuery) {
+          ds.runQuery(thirdQuery, function(err, thirdEntities, fourthQuery) {
             if (err) return done(err);
             assert.equal(fourthQuery, null);
             done();
@@ -227,9 +227,9 @@ describe('datastore', function() {
     it('should filter queries with simple indexes', function(done) {
       var q = ds.createQuery('Character')
         .filter('appearances >=', 20);
-      ds.runQuery(q, function(err, keys, objs, nextQuery) {
+      ds.runQuery(q, function(err, entities, nextQuery) {
         if (err) return done(err);
-        assert.equal(objs.length, 6);
+        assert.equal(entities.length, 6);
         done();
       });
     });
@@ -238,28 +238,28 @@ describe('datastore', function() {
       var q = ds.createQuery('Character')
         .filter('family =', 'Stark')
         .filter('appearances >=', 20);
-      ds.runQuery(q, function(err, keys, objs, nextQuery) {
+      ds.runQuery(q, function(err, entities, nextQuery) {
         if (err) return done(err);
-        assert.equal(objs.length, 6);
+        assert.equal(entities.length, 6);
         done();
       });
     });
 
     it('should filter by ancestor', function(done) {
       var q = ds.createQuery('Character').hasAncestor(['Character', 'Eddard']);
-      ds.runQuery(q, function(err, keys, objs, nextQuery) {
+      ds.runQuery(q, function(err, entities, nextQuery) {
         if (err) return done(err);
-        assert.equal(objs.length, 5);
+        assert.equal(entities.length, 5);
         done();
       });
     });
 
     it('should order queries', function(done) {
       var q = ds.createQuery('Character').order('+appearances');
-      ds.runQuery(q, function(err, keys, objs, nextQuery) {
+      ds.runQuery(q, function(err, entities, nextQuery) {
         if (err) return done(err);
-        assert.equal(objs[0].name, characters[0].name);
-        assert.equal(objs[7].name, characters[3].name);
+        assert.equal(entities[0].data.name, characters[0].name);
+        assert.equal(entities[7].data.name, characters[3].name);
         done();
       });
     });
@@ -267,13 +267,13 @@ describe('datastore', function() {
     it('should select projections', function(done) {
       var q = ds.createQuery('Character')
         .select(['name', 'family']);
-      ds.runQuery(q, function(err, keys, objs, nextQuery) {
+      ds.runQuery(q, function(err, entities, nextQuery) {
         if (err) return done(err);
-        assert.deepEqual(objs[0], {
+        assert.deepEqual(entities[0].data, {
           name: 'Arya',
           family: 'Stark'
         });
-        assert.deepEqual(objs[8], {
+        assert.deepEqual(entities[8].data, {
           name: 'Sansa',
           family: 'Stark'
         });
@@ -286,15 +286,15 @@ describe('datastore', function() {
         .offset(2)
         .limit(3)
         .order('+appearances');
-      ds.runQuery(q, function(err, keys, objs, secondQuery) {
+      ds.runQuery(q, function(err, entities, secondQuery) {
         if (err) return done(err);
-        assert.equal(objs.length, 3);
-        assert.equal(objs[0].name, 'Robb');
-        assert.equal(objs[2].name, 'Catelyn');
-        ds.runQuery(secondQuery, function(err, keys, objs, thirdQuery) {
-          assert.equal(objs.length, 3);
-          assert.equal(objs[0].name, 'Sansa');
-          assert.equal(objs[2].name, 'Arya');
+        assert.equal(entities.length, 3);
+        assert.equal(entities[0].data.name, 'Robb');
+        assert.equal(entities[2].data.name, 'Catelyn');
+        ds.runQuery(secondQuery, function(err, secondEntities, thirdQuery) {
+          assert.equal(secondEntities.length, 3);
+          assert.equal(secondEntities[0].data.name, 'Sansa');
+          assert.equal(secondEntities[2].data.name, 'Arya');
           done();
         });
       });
@@ -305,17 +305,17 @@ describe('datastore', function() {
         .offset(2)
         .limit(2)
         .order('+appearances');
-      ds.runQuery(q, function(err, keys, objs, nextQuery) {
+      ds.runQuery(q, function(err, entities, nextQuery) {
         if (err) return done(err);
         var startCursor = nextQuery.startVal;
         var cursorQuery = ds.createQuery('Character')
           .order('+appearances')
           .start(startCursor);
-        ds.runQuery(cursorQuery, function(err, keys, objs, nextQuery) {
+        ds.runQuery(cursorQuery, function(err, secondEntities, nextQuery) {
           if (err) return done(err);
-          assert.equal(objs.length, 4);
-          assert.equal(objs[0].name, 'Catelyn');
-          assert.equal(objs[3].name, 'Arya');
+          assert.equal(secondEntities.length, 4);
+          assert.equal(secondEntities[0].data.name, 'Catelyn');
+          assert.equal(secondEntities[3].data.name, 'Arya');
           done();
         });
       });
@@ -324,9 +324,9 @@ describe('datastore', function() {
     it('should group queries', function(done) {
       var q = ds.createQuery('Character')
         .groupBy('alive');
-      ds.runQuery(q, function(err, keys, objs, nextQuery) {
+      ds.runQuery(q, function(err, entities, nextQuery) {
         if (err) return done(err);
-        assert.equal(objs.length, 2);
+        assert.equal(entities.length, 2);
         done();
       });
     })

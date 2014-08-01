@@ -150,7 +150,7 @@ also supported.
 ~~~~ js
 // retrieves 5 companies
 var q = ds.createQuery('Company').limit(5);
-ds.runQuery(q, function(err, keys, objs, nextQuery) {
+ds.runQuery(q, function(err, entities, nextQuery) {
     // nextQuery is not null if there are more results.
     if (nextQuery) {
         ds.runQuery(nextQuery, callback);
