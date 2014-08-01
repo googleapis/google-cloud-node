@@ -254,6 +254,16 @@ describe('datastore', function() {
       });
     });
 
+    it('should filter by key', function(done) {
+      var q = ds.createQuery('Character')
+          .filter('__key__ =', ['Character', 'Rickard']);
+      ds.runQuery(q, function(err, keys, objs, nextQuery) {
+        if (err) return done(err);
+        assert.equal(objs.length, 1);
+        done();
+      });
+    });
+
     it('should order queries', function(done) {
       var q = ds.createQuery('Character').order('+appearances');
       ds.runQuery(q, function(err, keys, objs, nextQuery) {
