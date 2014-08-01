@@ -33,3 +33,44 @@ describe('arrayize', function() {
     done();
   });
 });
+
+describe('handleResp', function() {
+
+  it('should handle errors', function(done) {
+    var defaultErr = new Error('new error');
+    util.handleResp(defaultErr, null, null, function(err) {
+      assert.equal(err, defaultErr);
+      done();
+    });
+  });
+
+  it('should handle body errors', function(done) {
+    var apiErr = {
+      errors: [{ foo: 'bar' }],
+      code:  400,
+      message: 'an error occurred'
+    }
+    util.handleResp(null, {}, { error: apiErr }, function(err) {
+      assert.deepEqual(err.errors, apiErr.errors);
+      assert.strictEqual(err.code, apiErr.code);
+      assert.deepEqual(err.message, apiErr.message);
+      done();
+    });
+  });
+
+  it('should try to parse JSON if body is string', function(done) {
+    var body = '{ "foo": "bar" }';
+    util.handleResp(null, {}, body, function(err, body) {
+      assert.strictEqual(body.foo, 'bar');
+      done();
+    });
+  });
+
+  it('should return status code as an error if there are not other errors', function(done) {
+    util.handleResp(null, { statusCode: 400 }, null, function(err) {
+      assert.strictEqual(err.message, 'error during request, statusCode: 400');
+      done();
+    });
+  });
+
+});
