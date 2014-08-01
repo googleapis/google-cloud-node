@@ -200,4 +200,77 @@ describe('Dataset', function() {
     });
   });
 
+  describe('runQuery', function() {
+    var ds;
+    var query;
+    var mockResponse = {
+      withResults: {
+        batch: { entityResults: mockResp_get.found }
+      },
+      withResultsAndEndCursor: {
+        batch: { entityResults: mockResp_get.found, endCursor: 'cursor' }
+      },
+      withoutResults: mockResp_get
+    };
+
+    beforeEach(function () {
+      ds = new datastore.Dataset({ projectId: 'test' });
+      query = ds.createQuery('Kind');
+    });
+
+    describe('errors', function() {
+      it('should handle upstream errors', function() {
+        var upstreamError = new Error('upstream error.');
+        ds.transaction.makeReq = function(method, proto, callback) {
+          assert.equal(method, 'runQuery');
+          callback(upstreamError);
+        };
+
+        ds.runQuery(query, function(err) {
+          assert.equal(err, upstreamError);
+        });
+      });
+
+      it('should handle missing results error', function() {
+        ds.transaction.makeReq = function(method, proto, callback) {
+          assert.equal(method, 'runQuery');
+          callback('simulated-error', mockResponse.withoutResults);
+        };
+
+        ds.runQuery(query, function(err) {
+          assert.equal(err, 'simulated-error');
+        });
+      });
+    });
+
+    it('should execute callback with results', function() {
+      ds.transaction.makeReq = function(method, proto, callback) {
+        assert.equal(method, 'runQuery');
+        callback(null, mockResponse.withResults);
+      };
+
+      ds.runQuery(query, function (err, entities) {
+        assert.ifError(err);
+
+        var properties = entities[0].data;
+        assert.deepEqual(entities[0].key, ['Kind', 5732568548769792]);
+        assert.strictEqual(properties.name, 'Burcu');
+        assert.deepEqual(properties.bytes, new Buffer('hello'));
+        assert.strictEqual(properties.done, false);
+        assert.deepEqual(properties.total, 6.7);
+      });
+    });
+
+    it('should return a new query if results remain', function() {
+      ds.transaction.makeReq = function(method, proto, callback) {
+        assert.equal(method, 'runQuery');
+        callback(null, mockResponse.withResultsAndEndCursor);
+      };
+
+      ds.runQuery(query, function(err, entities, nextQuery) {
+        assert.ifError(err);
+        assert.equal(nextQuery.constructor.name, 'Query');
+      });
+    });
+  });
 });
