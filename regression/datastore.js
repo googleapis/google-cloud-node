@@ -257,9 +257,9 @@ describe('datastore', function() {
     it('should filter by key', function(done) {
       var q = ds.createQuery('Character')
           .filter('__key__ =', ['Character', 'Rickard']);
-      ds.runQuery(q, function(err, keys, objs, nextQuery) {
+      ds.runQuery(q, function(err, entities, nextQuery) {
         if (err) return done(err);
-        assert.equal(objs.length, 1);
+        assert.equal(entities.length, 1);
         done();
       });
     });
