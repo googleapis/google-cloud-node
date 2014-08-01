@@ -6,7 +6,7 @@ Node idiomatic client for Google Cloud services. Work in progress... Watch the r
 
 This client supports the following Google Cloud services:
 
-* [Google Cloud Datastore](https://developers.google.com/datastore/) (also allows access to the collections of your existing AppEngine apps)
+* [Google Cloud Datastore](https://developers.google.com/datastore/)
 * [Google Cloud Storage](https://cloud.google.com/products/cloud-storage/)
 * [Google Cloud Pub/Sub](https://developers.google.com/pubsub/)
 * Planned but not yet started: [Google Compute Engine](https://developers.google.com/compute), and [Google BigQuery](https://developers.google.com/bigquery/)
@@ -67,11 +67,7 @@ The downloaded file contains credentials you'll need for authorization.
 
 ### Google Cloud Datastore
 
-Google Cloud Datastore is a NoSQL database with the
-convenience of a traditional RDBMS in terms of strong
-consistency guarantees and high availability. It's also known
-as Megastore. Its performance characteristics are explained
-in detail on [Megastore: Providing Scalable, Highly Available Storage for Interactive Services](http://www.cidrdb.org/cidr2011/Papers/CIDR11_Paper32.pdf).
+[Google Cloud Datastore](https://developers.google.com/datastore/) is a fully managed, schemaless database for storing non-relational data. Cloud Datastore automatically scales with your users and supports ACID transactions, high availability of reads and writes, strong consistency for reads and ancestor queries, and eventual consistency for all other queries.
 
 #### Configuration
 
