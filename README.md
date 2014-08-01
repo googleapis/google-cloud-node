@@ -6,7 +6,7 @@ Node idiomatic client for Google Cloud services. Work in progress... Watch the r
 
 This client supports the following Google Cloud services:
 
-* [Google Cloud Datastore](https://developers.google.com/datastore/) (also allows access to the collections of your existing AppEngine apps)
+* [Google Cloud Datastore](https://developers.google.com/datastore/)
 * [Google Cloud Storage](https://cloud.google.com/products/cloud-storage/)
 * [Google Cloud Pub/Sub](https://developers.google.com/pubsub/)
 * Planned but not yet started: [Google Compute Engine](https://developers.google.com/compute), and [Google BigQuery](https://developers.google.com/bigquery/)
@@ -67,11 +67,7 @@ The downloaded file contains credentials you'll need for authorization.
 
 ### Google Cloud Datastore
 
-Google Cloud Datastore is a NoSQL database with the
-convenience of a traditional RDBMS in terms of strong
-consistency guarantees and high availability. It's also known
-as Megastore. Its performance characteristics are explained
-in detail on [Megastore: Providing Scalable, Highly Available Storage for Interactive Services](http://www.cidrdb.org/cidr2011/Papers/CIDR11_Paper32.pdf).
+[Google Cloud Datastore](https://developers.google.com/datastore/) is a fully managed, schemaless database for storing non-relational data. Cloud Datastore automatically scales with your users and supports ACID transactions, high availability of reads and writes, strong consistency for reads and ancestor queries, and eventual consistency for all other queries.
 
 #### Configuration
 
@@ -101,11 +97,11 @@ TODO
 Get operations require a valid key to retrieve the key identified entity from Datastore. Skip to the "Querying" section if you'd like to learn more about querying against Datastore.
 
 ~~~~ js
-ds.get(['Company', 123], function(err, key, obj) {
+ds.get(['Company', 123], function(err, entities) {
 
 });
 // alternatively, you can retrieve multiple entities at once.
-ds.getAll([key1, key2, ...], function(err, keys, objs) {
+ds.getAll([key1, key2, ...], function(err, entities) {
 
 });
 ~~~~
@@ -150,7 +146,7 @@ also supported.
 ~~~~ js
 // retrieves 5 companies
 var q = ds.createQuery('Company').limit(5);
-ds.runQuery(q, function(err, keys, objs, nextQuery) {
+ds.runQuery(q, function(err, entities, nextQuery) {
     // nextQuery is not null if there are more results.
     if (nextQuery) {
         ds.runQuery(nextQuery, callback);
@@ -170,6 +166,14 @@ supported.
 var q = ds.createQuery('Company')
     .filter('name =', 'Google')
     .filter('size <', 400);
+~~~~
+
+To filter by key, use `__key__` for the property name. Filtering on keys
+stored as properties is not currently supported.
+
+~~~~ js
+var q = ds.createQuery('Company')
+    .filter('__key__ =', ['Company', 'Google'])
 ~~~~
 
 In order to filter by ancestors, use `hasAncestor` helper.
@@ -341,16 +345,21 @@ A bucket object allows you to write a readable stream, a file and a buffer
 as file contents.
 
 ~~~~ js
-// Uploads file.pdf
-bucket.writeFile(
-    filename, '/path/to/file.pdf', { contentType: 'application/pdf' }, callback);
+// Uploads file.pdf.
+bucket.write(name, {
+    filename: '/path/to/file.pdf',
+    metadata: { /* metadata properties */ }
+}, callback);
 
-// Reads the stream and uploads it as file contents
-bucket.writeStream(
-    filename, fs.createReadStream('/path/to/file.pdf'), metadata, callback);
+// Uploads the readable stream.
+bucket.write(name, {
+    data: anyReadableStream,
+    metadata: { /* metadata properties */ }
+}, callback);
 
-// Uploads 'Hello World' as file contents
-bucket.writeBuffer(filename, 'Hello World', callback);
+// Uploads 'Hello World' as file contents.
+// data could be any string or buffer.
+bucket.write(name, { data: 'Hello World' }, callback);
 ~~~~
 
 #### Copy files
