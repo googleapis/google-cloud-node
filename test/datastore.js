@@ -108,8 +108,9 @@ describe('Dataset', function() {
       assert.equal(proto.keys.length, 1);
       callback(null, mockResp_get);
     };
-    ds.getAll([
-        ['Kind', 123]], function(err, entities) {
+    ds.get([
+        ['Kind', 123]
+    ], function(err, entities) {
       var entity = entities[0];
       var properties = entity.data;
       assert.deepEqual(entity.key, ['Kind', 5732568548769792]);
@@ -129,7 +130,7 @@ describe('Dataset', function() {
       assert.equal(!!proto.mutation.delete, true);
       callback();
     };
-    ds.del(['Kind', 123], done);
+    ds.delete(['Kind', 123], done);
   });
 
   it('should multi delete by keys', function(done) {
@@ -139,17 +140,9 @@ describe('Dataset', function() {
       assert.equal(proto.mutation.delete.length, 2);
       callback();
     };
-    ds.delAll([
+    ds.delete([
       ['Kind', 123], ['Kind', 345]
     ], done);
-  });
-
-  it('should throw if number of keys dont match the number of objs', function() {
-    assert.throws(function() {
-      var ds = new datastore.Dataset({ projectId: 'test' });
-      ds.saveAll([
-        ['Kind', 123], ['Kind', 456]], [{}], function(){});
-    }, /The length of the keys/);
   });
 
   it('should save with incomplete key', function(done) {
@@ -159,7 +152,7 @@ describe('Dataset', function() {
       assert.equal(proto.mutation.insertAutoId.length, 1);
       callback();
     };
-    ds.save(['Kind', 123, null], {}, done);
+    ds.save({ key: ['Kind', 123, null], data: {} }, done);
   });
 
   it('should save with keys', function(done) {
@@ -170,8 +163,10 @@ describe('Dataset', function() {
       assert.equal(proto.mutation.upsert[0].properties.k.stringValue, 'v');
       callback();
     };
-    ds.saveAll([
-        ['Kind', 123], ['Kind', 456]], [{k: 'v'}, {k: 'v'}], done);
+    ds.save([
+      { key: ['Kind', 123], data: { k: 'v' } },
+      { key: ['Kind', 456], data: { k: 'v' } }
+    ], done);
   });
 
   it('should produce proper allocate IDs req protos', function(done) {
