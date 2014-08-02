@@ -15,28 +15,41 @@
  */
 
 var assert = require('assert'),
-    fs = require('fs');
+    async = require('async'),
+    crypto = require('crypto'),
+    fs = require('fs'),
+    tmp = require('tmp');
 
 var env = require('./env.js'),
     gcloud = require('../lib'),
     bucket = new gcloud.storage.Bucket(env);
 
-var pathToLogoFile = 'regression/data/CloudPlatform_128px_Retina.png';
-var pathToReadFile = 'regression/data/readfile.txt';
+var pathToLogoFile = 'regression/data/CloudPlatform_128px_Retina.png',
+    logoFileMd5Hash;
 
 describe('storage', function() {
 
   describe('write, read and remove files', function() {
 
+    before(function(done) {
+      var md5sum = crypto.createHash('md5');
+      s = fs.ReadStream(pathToLogoFile);
+      s.on('data', function(d) {
+        md5sum.update(d);
+      });
+      s.on('error', done);
+      s.on('end', function() {
+        logoFileMd5Hash = md5sum.digest('base64');
+        done();
+      });
+    });
+
     it('should write/remove from file', function(done) {
       var fileName = 'CloudLogo';
       bucket.write(fileName, { filename: pathToLogoFile }, function(err, fileObject, resp) {
         if (err) { return done(err); }
-        assert(fileObject);
-        bucket.remove(fileName, function(err) {
-          if (err) { return done(err); }
-          done();
-        });
+        assert.equal(fileObject.md5Hash, logoFileMd5Hash);
+        bucket.remove(fileName, done);
       });
     });
 
@@ -45,7 +58,7 @@ describe('storage', function() {
       bucket.write(fileName, { data: fs.createReadStream(pathToLogoFile) },
           function(err, fileObject) {
         if (err) { return done(err); }
-        assert(fileObject);
+        assert.equal(fileObject.md5Hash, logoFileMd5Hash);
         bucket.remove(fileName, function(err) {
           if (err) { return done(err); }
           done();
@@ -56,25 +69,26 @@ describe('storage', function() {
     it('should write/read/remove from a buffer', function(done) {
       var fileName = 'MyBuffer',
           fileContent =  'Hello World';
-      bucket.write(fileName, { data: fileContent }, function(err, fileObject) {
-        if (err) { return done(err); }
-        assert(fileObject);
-        var content = '';
-        bucket.createReadStream(fileName)
-            .pipe(fs.createWriteStream(pathToReadFile))
-            .on('error', done)
-            .on('complete', function(content) {
-              bucket.remove(fileName, function(err) {
-                if (err) { return done(err); }
-                fs.readFile(pathToReadFile, function(err, data) {
-                  assert.equal(data, fileContent);
-                  fs.unlink(pathToReadFile, function(err) {
-                    if (err) { return done(err); }
+      tmp.setGracefulCleanup();
+      tmp.file(function _tempFileCreated(err, path, fd) {
+        if (err) {return  done(err)};
+        bucket.write(fileName, { data: fileContent }, function(err, fileObject) {
+          if (err) { return done(err); }
+          assert(fileObject);
+          var content = '';
+          bucket.createReadStream(fileName)
+              .pipe(fs.createWriteStream(path))
+              .on('error', done)
+              .on('complete', function(content) {
+                bucket.remove(fileName, function(err) {
+                  if (err) { return done(err); }
+                  fs.readFile(path, function(err, data) {
+                    assert.equal(data, fileContent);
                     done();
                   });
                 });
               });
-            });
+        });
       });
     });
 
@@ -156,16 +170,17 @@ describe('storage', function() {
     });
 
     after(function(done) {
-      bucket.remove(filenames[0], function(err) {
-        if (err) { return done(err); }
-        bucket.remove(filenames[1], function(err) {
-          if (err) { return done(err); }
-          bucket.remove(filenames[2], function() {
-            if (err) { return done(err); }
-            done();
-          });
-        });
-      });
+      async.parallel([
+        function(callback) {
+          bucket.remove(filenames[0], callback);
+        },
+        function(callback) {
+          bucket.remove(filenames[1], callback);
+        },
+        function(callback) {
+          bucket.remove(filenames[2], callback);
+        }
+      ], done);
     });
 
   });
