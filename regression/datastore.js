@@ -36,13 +36,13 @@ describe('datastore', function() {
       };
       var postKeyName = 'post1';
 
-      ds.save(['Post', postKeyName], post, function(err, key) {
+      ds.save({ key: ['Post', postKeyName], data: post }, function(err, key) {
         if (err) return done(err);
         assert.equal(key[1], postKeyName);
         ds.get(['Post', postKeyName], function(err, entity) {
           if (err) return done(err);
           assert.deepEqual(entity.data, post);
-          ds.del(['Post', postKeyName], function(err) {
+          ds.delete(['Post', postKeyName], function(err) {
             if (err) return done(err);
             done();
           });
@@ -62,13 +62,13 @@ describe('datastore', function() {
       };
       var postKeyId = '123456789';
 
-      ds.save(['Post', postKeyId], post, function(err, key) {
+      ds.save({ key: ['Post', postKeyId], data: post }, function(err, key) {
         if (err) return done(err);
         assert.equal(key[1], postKeyId);
         ds.get(['Post', postKeyId], function(err, entity) {
           if (err) return done(err);
           assert.deepEqual(entity.data, post);
-          ds.del(['Post', postKeyId], function(err) {
+          ds.delete(['Post', postKeyId], function(err) {
             if (err) return done(err);
             done();
           });
@@ -86,14 +86,14 @@ describe('datastore', function() {
         wordCount: 400,
         rating: 5.0,
       };
-      ds.save(['Post', null], post, function(err, key) {
+      ds.save({ key: ['Post', null], data: post }, function(err, key) {
         if (err) return done(err);
         assert(key[1]);
         var assignedId = key[1];
         ds.get(['Post', assignedId], function(err, entity) {
           if (err) return done(err);
           assert.deepEqual(entity.data, post);
-          ds.del(['Post', assignedId], function(err) {
+          ds.delete(['Post', assignedId], function(err) {
             if (err) return done(err);
             done();
           });
@@ -121,15 +121,18 @@ describe('datastore', function() {
         rating: 4.5,
       };
       var key = ['Post', null];
-      ds.saveAll([key, key], [post1, post2], function(err, keys) {
+      ds.save([
+        { key: key, data: post1 },
+        { key: key, data: post2 }
+      ], function(err, keys) {
         if (err) return done(err);
         assert.equal(keys.length,2);
         var firstKey = ['Post', keys[0][1]],
             secondKey = ['Post', keys[1][1]];
-        ds.getAll([firstKey, secondKey], function(err, entities) {
+        ds.get([firstKey, secondKey], function(err, entities) {
           if (err) return done(err);
           assert.equal(entities.length, 2);
-          ds.delAll([firstKey, secondKey], function(err) {
+          ds.delete([firstKey, secondKey], function(err) {
             if (err) return done(err);
             done();
           });
@@ -196,7 +199,12 @@ describe('datastore', function() {
 
     before(function(done) {
 
-      ds.saveAll(keys, characters, function(err, keys) {
+      ds.save(keys.map(function(key, index) {
+        return {
+          key: key,
+          data: characters[index]
+        };
+      }), function(err, keys) {
         if (err) return done(err);
         done();
       });
@@ -343,7 +351,7 @@ describe('datastore', function() {
 
     after(function(done) {
 
-      ds.delAll(keys, function(err) {
+      ds.delete(keys, function(err) {
         if (err) return done(err);
         done();
       });
@@ -366,7 +374,7 @@ describe('datastore', function() {
             tDone();
             return;
           } else {
-            ds.save(key, obj, function(err, keyRes) {
+            ds.save({ key: key, data: obj }, function(err, keyRes) {
               if (err) console.log(err);
               tDone();
               return;
@@ -378,7 +386,7 @@ describe('datastore', function() {
         ds.get(key, function(err, entity) {
           if (err) return done(err);
           assert.deepEqual(entity.data, obj);
-          ds.del(entity.key, function(err) {
+          ds.delete(entity.key, function(err) {
             if (err) return done(err);
             done();
           })

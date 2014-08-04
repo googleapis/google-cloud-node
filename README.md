@@ -29,9 +29,9 @@ If you are not running this client on Google Compute Engine, you need a Google D
 * Create a new project or click on an existing project.
 * Enable billing if you haven't already.
 * On the "APIs & auth" tab, click APIs section and turn on the following. You may need to enable billing in order to use these services.
-	* Google Cloud Datastore API
-	* Google Cloud Storage
-	* Google Cloud Storage JSON API
+    * Google Cloud Datastore API
+    * Google Cloud Storage
+    * Google Cloud Storage JSON API
     * Google Cloud Pub/Sub
 * Once API access is enabled, switch back to "APIs & auth" section on the navigation panel and switch to "Credentials" page.
 * Click on "Create new client ID" to create a new **service account**. Once the account is created, click on "Generate new JSON key" to download
@@ -39,18 +39,18 @@ your private key.
 
 The downloaded file contains credentials you'll need for authorization.
 * You'll the following for auth configuration:
-	* Developers Console project's ID (e.g. bamboo-shift-455)
-	* The path to the JSON key file.
+    * Developers Console project's ID (e.g. bamboo-shift-455)
+    * The path to the JSON key file.
 
 ## Developer's Guide
 
 * [Google Cloud Datastore](#google-cloud-datastore)
-	* [Configuration](#configuration)
-	* [Entities and Keys](#entities-and-keys)
-	* [Getting, Saving and Deleting Entities](#getting-saving-and-deleting-entities)
-	* [Querying](#querying)
-	* [Allocating IDs](#allocating-ids-id-generation)
-	* [Transactions](#transactions)
+    * [Configuration](#configuration)
+    * [Entities and Keys](#entities-and-keys)
+    * [Getting, Saving and Deleting Entities](#getting-saving-and-deleting-entities)
+    * [Querying](#querying)
+    * [Allocating IDs](#allocating-ids-id-generation)
+    * [Transactions](#transactions)
 * [Google Cloud Storage](#google-cloud-storage)
     * [Configuration](#configuration-1)
     * [Listing Files](#listing-files)
@@ -83,8 +83,8 @@ Elsewhere, initiate with project ID and private key downloaded from Developer's 
 ~~~~ js
 var gcloud = require('gcloud'),
     ds = new gcloud.datastore.Dataset({
-    	projectId: YOUR_PROJECT_ID,
-    	keyFilename: '/path/to/the/key.json'
+        projectId: YOUR_PROJECT_ID,
+        keyFilename: '/path/to/the/key.json'
     });
 ~~~~
 
@@ -97,13 +97,13 @@ TODO
 Get operations require a valid key to retrieve the key identified entity from Datastore. Skip to the "Querying" section if you'd like to learn more about querying against Datastore.
 
 ~~~~ js
-ds.get(['Company', 123], function(err, entities) {
+ds.get(['Company', 123], function(err, entity) {});
 
-});
 // alternatively, you can retrieve multiple entities at once.
-ds.getAll([key1, key2, ...], function(err, entities) {
-
-});
+ds.get([
+    ['Company', 123],
+    ['Product', 'Computer']
+], function(err, entities) {});
 ~~~~
 
 You can insert arbitrary objects by providing an incomplete key during saving. If the key is not incomplete, the existing entity is updated or inserted with the provided key.
@@ -111,31 +111,32 @@ You can insert arbitrary objects by providing an incomplete key during saving. I
 To learn more about keys and incomplete keys, skip to the Keys section.
 
 ~~~~ js
-ds.save(['Company', null], obj, function(err, key) {
-	// First arg is an incomplete key for Company kind.
-	// console.log(key) will output ['Company', 599900452312].
+ds.save({ key: ['Company', null], data: {/*...*/} }, function(err, key) {
+    // First arg is an incomplete key for Company kind.
+    // console.log(key) will output ['Company', 599900452312].
 });
 // alternatively, you can save multiple entities at once.
-ds.saveAll([key1, key2, key3], [obj1, obj2, obj3], function(err, keys) {
-	// if key1 was incomplete, keys[0] will return the generated key.
+ds.save([
+    { key: ['Company', 123], data: {/*...*/} },
+    { key: ['Product', 'Computer'], data: {/*...*/} }
+], function(err, keys) {
+    // if the first key was incomplete, keys[0] will return the generated key.
 });
 ~~~~
 
 Deletion requires the key of the entity to be deleted.
 
 ~~~~ js
-ds.del(['Company', 599900452312], function(err) {
+ds.delete(['Company', 599900452312], function(err) {});
 
-});
 // alternatively, you can delete multiple entities of different
 // kinds at once.
-ds.delAll([
-	['Company', 599900452312],
-	['Company', 599900452315],
+ds.delete([
+    ['Company', 599900452312],
+    ['Company', 599900452315],
     ['Office', 'mtv'],
-	['Company', 123, 'Employee', 'jbd']], function(err) {
-
-});
+    ['Company', 123, 'Employee', 'jbd']
+], function(err) {});
 ~~~~
 
 #### Querying
