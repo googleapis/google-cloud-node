@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+/*global describe, it */
+
+'use strict';
+
 var assert = require('assert'),
     pubsub = require('../lib/pubsub');
 
@@ -23,7 +27,7 @@ describe('Subscription', function() {
     var sub = new pubsub.Subscription({}, 'sub1');
     sub.autoAck = true;
     sub.conn.makeReq = function(method, path, qs, body, callback) {
-      if (path == 'subscriptions/pull') {
+      if (path === 'subscriptions/pull') {
         callback(null, { ackId: 'ackd-id' });
         return;
       }

@@ -10,10 +10,7 @@
     }
   ],
   "main": "./lib/index",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/googlecloudplatform/gcloud-nodejs.git"
-  },
+  "repository": "googlecloudplatform/gcloud-nodejs",
   "keywords": [
     "google",
     "api",
@@ -25,20 +22,21 @@
     "google storage"
   ],
   "dependencies": {
-    "gapitoken": "*",
-    "async": "*",
-    "request": "*",
-    "node-uuid": "*"
+    "async": "^0.9.0",
+    "gapitoken": "^0.1.3",
+    "node-uuid": "^1.4.1",
+    "request": "^2.39.0"
   },
   "devDependencies": {
-    "mocha": "*",
-    "istanbul": "*",
-    "tmp": "*"
+    "istanbul": "^0.3.0",
+    "jshint": "^2.5.2",
+    "mocha": "^1.21.3",
+    "tmp": "0.0.24"
   },
   "scripts": {
-    "test": "node_modules/mocha/bin/_mocha --reporter spec",
-    "regression-test": "node_modules/mocha/bin/_mocha --reporter spec --timeout 10000 regression/*",
-    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- --timeout 10000 test/* regression/*"
+    "test": "jshint lib/**/*.js test/*.js && mocha --reporter spec",
+    "regression-test": "mocha --reporter spec --timeout 10000 regression/*",
+    "cover": "istanbul cover mocha -- --timeout 10000 test/* regression/*"
   },
   "license": "Apache 2"
 }

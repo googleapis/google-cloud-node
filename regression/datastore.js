@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+/*global describe, it, after, before */
+
+'use strict';
+
 var env = require('./env.js');
 
 var assert = require('assert'),
@@ -22,28 +26,28 @@ var assert = require('assert'),
 
 describe('datastore', function() {
 
-  describe('create, retrieve and delete using the datastore service', function() {
+  describe('create, retrieve and delete', function() {
+    var post = {
+      title: 'How to make the perfect pizza in your grill',
+      tags: ['pizza', 'grill'],
+      publishedAt: Date('2001-01-01T00:00:00.000Z'),
+      author: 'Silvano',
+      isDraft: false,
+      wordCount: 400,
+      rating: 5.0,
+    };
 
     it('should save/get/delete with a key name', function(done) {
-      var post = {
-        title: "How to make the perfect pizza in your grill",
-        tags: ['pizza', 'grill'],
-        publishedAt: Date("2001-01-01T00:00:00.000Z"),
-        author: "Silvano",
-        isDraft: false,
-        wordCount: 400,
-        rating: 5.0,
-      };
       var postKeyName = 'post1';
 
       ds.save({ key: ['Post', postKeyName], data: post }, function(err, key) {
-        if (err) return done(err);
+        assert.ifError(err);
         assert.equal(key[1], postKeyName);
         ds.get(['Post', postKeyName], function(err, entity) {
-          if (err) return done(err);
+          assert.ifError(err);
           assert.deepEqual(entity.data, post);
           ds.delete(['Post', postKeyName], function(err) {
-            if (err) return done(err);
+            assert.ifError(err);
             done();
           });
         });
@@ -51,50 +55,32 @@ describe('datastore', function() {
     });
 
     it('should save/get/delete with a numeric key id', function(done) {
-      var post = {
-        title: "How to make the perfect pizza in your grill",
-        tags: ['pizza', 'grill'],
-        publishedAt: Date("2001-01-01T00:00:00.000Z"),
-        author: "Silvano",
-        isDraft: false,
-        wordCount: 400,
-        rating: 5.0,
-      };
       var postKeyId = '123456789';
 
       ds.save({ key: ['Post', postKeyId], data: post }, function(err, key) {
-        if (err) return done(err);
+        assert.ifError(err);
         assert.equal(key[1], postKeyId);
         ds.get(['Post', postKeyId], function(err, entity) {
-          if (err) return done(err);
+          assert.ifError(err);
           assert.deepEqual(entity.data, post);
           ds.delete(['Post', postKeyId], function(err) {
-            if (err) return done(err);
+            assert.ifError(err);
             done();
           });
         });
       });
     });
 
-    it('should save/get/delete with an automatically generated key id', function(done) {
-      var post = {
-        title: "How to make the perfect pizza in your grill",
-        tags: ['pizza', 'grill'],
-        publishedAt: Date("2001-01-01T00:00:00.000Z"),
-        author: "Silvano",
-        isDraft: false,
-        wordCount: 400,
-        rating: 5.0,
-      };
+    it('should save/get/delete with a generated key id', function(done) {
       ds.save({ key: ['Post', null], data: post }, function(err, key) {
-        if (err) return done(err);
+        assert.ifError(err);
         assert(key[1]);
         var assignedId = key[1];
         ds.get(['Post', assignedId], function(err, entity) {
-          if (err) return done(err);
+          assert.ifError(err);
           assert.deepEqual(entity.data, post);
           ds.delete(['Post', assignedId], function(err) {
-            if (err) return done(err);
+            assert.ifError(err);
             done();
           });
         });
@@ -102,42 +88,33 @@ describe('datastore', function() {
     });
 
     it('should save/get/delete multiple entities at once', function(done) {
-      var post1 = {
-        title: "How to make the perfect pizza in your grill",
-        tags: ['pizza', 'grill'],
-        publishedAt: Date("2001-01-01T00:00:00.000Z"),
-        author: "Silvano",
-        isDraft: false,
-        wordCount: 400,
-        rating: 5.0,
-      };
       var post2 = {
-        title: "How to make the perfect homemade pasta",
+        title: 'How to make the perfect homemade pasta',
         tags: ['pasta', 'homemade'],
-        publishedAt: Date("2001-01-01T00:00:00.000Z"),
-        author: "Silvano",
+        publishedAt: Date('2001-01-01T00:00:00.000Z'),
+        author: 'Silvano',
         isDraft: false,
         wordCount: 450,
         rating: 4.5,
       };
       var key = ['Post', null];
       ds.save([
-        { key: key, data: post1 },
+        { key: key, data: post },
         { key: key, data: post2 }
       ], function(err, keys) {
-        if (err) return done(err);
+        assert.ifError(err);
         assert.equal(keys.length,2);
         var firstKey = ['Post', keys[0][1]],
             secondKey = ['Post', keys[1][1]];
         ds.get([firstKey, secondKey], function(err, entities) {
-          if (err) return done(err);
+          assert.ifError(err);
           assert.equal(entities.length, 2);
           ds.delete([firstKey, secondKey], function(err) {
-            if (err) return done(err);
+            assert.ifError(err);
             done();
           });
         });
-      })
+      });
     });
 
   });
@@ -205,7 +182,7 @@ describe('datastore', function() {
           data: characters[index]
         };
       }), function(err, keys) {
-        if (err) return done(err);
+        assert.ifError(err);
         done();
       });
 
@@ -214,17 +191,17 @@ describe('datastore', function() {
     it('should limit queries', function(done) {
       var q = ds.createQuery('Character').limit(5);
       ds.runQuery(q, function(err, firstEntities, secondQuery) {
-        if (err) return done(err);
+        assert.ifError(err);
         assert.equal(firstEntities.length, 5);
         assert(secondQuery);
         ds.runQuery(secondQuery, function(err, secondEntities, thirdQuery) {
-          if (err) return done(err);
+          assert.ifError(err);
           assert.equal(secondEntities.length, 3);
-          // TODO(silvano): it currently requires an additional request that brings
-          // an empty page and a null query
+          // TODO(silvano): it currently requires an additional request that
+          // brings an empty page and a null query
           //assert.equal(thirdQuery, null)
           ds.runQuery(thirdQuery, function(err, thirdEntities, fourthQuery) {
-            if (err) return done(err);
+            assert.ifError(err);
             assert.equal(fourthQuery, null);
             done();
           });
@@ -235,8 +212,8 @@ describe('datastore', function() {
     it('should filter queries with simple indexes', function(done) {
       var q = ds.createQuery('Character')
         .filter('appearances >=', 20);
-      ds.runQuery(q, function(err, entities, nextQuery) {
-        if (err) return done(err);
+      ds.runQuery(q, function(err, entities) {
+        assert.ifError(err);
         assert.equal(entities.length, 6);
         done();
       });
@@ -246,8 +223,8 @@ describe('datastore', function() {
       var q = ds.createQuery('Character')
         .filter('family =', 'Stark')
         .filter('appearances >=', 20);
-      ds.runQuery(q, function(err, entities, nextQuery) {
-        if (err) return done(err);
+      ds.runQuery(q, function(err, entities) {
+        assert.ifError(err);
         assert.equal(entities.length, 6);
         done();
       });
@@ -255,8 +232,8 @@ describe('datastore', function() {
 
     it('should filter by ancestor', function(done) {
       var q = ds.createQuery('Character').hasAncestor(['Character', 'Eddard']);
-      ds.runQuery(q, function(err, entities, nextQuery) {
-        if (err) return done(err);
+      ds.runQuery(q, function(err, entities) {
+        assert.ifError(err);
         assert.equal(entities.length, 5);
         done();
       });
@@ -265,8 +242,8 @@ describe('datastore', function() {
     it('should filter by key', function(done) {
       var q = ds.createQuery('Character')
           .filter('__key__ =', ['Character', 'Rickard']);
-      ds.runQuery(q, function(err, entities, nextQuery) {
-        if (err) return done(err);
+      ds.runQuery(q, function(err, entities) {
+        assert.ifError(err);
         assert.equal(entities.length, 1);
         done();
       });
@@ -274,8 +251,8 @@ describe('datastore', function() {
 
     it('should order queries', function(done) {
       var q = ds.createQuery('Character').order('+appearances');
-      ds.runQuery(q, function(err, entities, nextQuery) {
-        if (err) return done(err);
+      ds.runQuery(q, function(err, entities) {
+        assert.ifError(err);
         assert.equal(entities[0].data.name, characters[0].name);
         assert.equal(entities[7].data.name, characters[3].name);
         done();
@@ -285,8 +262,8 @@ describe('datastore', function() {
     it('should select projections', function(done) {
       var q = ds.createQuery('Character')
         .select(['name', 'family']);
-      ds.runQuery(q, function(err, entities, nextQuery) {
-        if (err) return done(err);
+      ds.runQuery(q, function(err, entities) {
+        assert.ifError(err);
         assert.deepEqual(entities[0].data, {
           name: 'Arya',
           family: 'Stark'
@@ -305,11 +282,11 @@ describe('datastore', function() {
         .limit(3)
         .order('+appearances');
       ds.runQuery(q, function(err, entities, secondQuery) {
-        if (err) return done(err);
+        assert.ifError(err);
         assert.equal(entities.length, 3);
         assert.equal(entities[0].data.name, 'Robb');
         assert.equal(entities[2].data.name, 'Catelyn');
-        ds.runQuery(secondQuery, function(err, secondEntities, thirdQuery) {
+        ds.runQuery(secondQuery, function(err, secondEntities) {
           assert.equal(secondEntities.length, 3);
           assert.equal(secondEntities[0].data.name, 'Sansa');
           assert.equal(secondEntities[2].data.name, 'Arya');
@@ -324,13 +301,13 @@ describe('datastore', function() {
         .limit(2)
         .order('+appearances');
       ds.runQuery(q, function(err, entities, nextQuery) {
-        if (err) return done(err);
+        assert.ifError(err);
         var startCursor = nextQuery.startVal;
         var cursorQuery = ds.createQuery('Character')
           .order('+appearances')
           .start(startCursor);
-        ds.runQuery(cursorQuery, function(err, secondEntities, nextQuery) {
-          if (err) return done(err);
+        ds.runQuery(cursorQuery, function(err, secondEntities) {
+          assert.ifError(err);
           assert.equal(secondEntities.length, 4);
           assert.equal(secondEntities[0].data.name, 'Catelyn');
           assert.equal(secondEntities[3].data.name, 'Arya');
@@ -342,17 +319,17 @@ describe('datastore', function() {
     it('should group queries', function(done) {
       var q = ds.createQuery('Character')
         .groupBy('alive');
-      ds.runQuery(q, function(err, entities, nextQuery) {
-        if (err) return done(err);
+      ds.runQuery(q, function(err, entities) {
+        assert.ifError(err);
         assert.equal(entities.length, 2);
         done();
       });
-    })
+    });
 
     after(function(done) {
 
       ds.delete(keys, function(err) {
-        if (err) return done(err);
+        assert.ifError(err);
         done();
       });
 
@@ -369,27 +346,27 @@ describe('datastore', function() {
         };
       ds.runInTransaction(function(t, tDone) {
         ds.get(key, function(err, entity) {
-          if (err) return done(err);
+          assert.ifError(err);
           if (entity) {
             tDone();
             return;
           } else {
             ds.save({ key: key, data: obj }, function(err, keyRes) {
-              if (err) console.log(err);
+              assert.ifError(err);
               tDone();
               return;
             });
           }
         });
       }, function(err) {
-        if (err) throw (err);
+        assert.ifError(err);
         ds.get(key, function(err, entity) {
-          if (err) return done(err);
+          assert.ifError(err);
           assert.deepEqual(entity.data, obj);
           ds.delete(entity.key, function(err) {
-            if (err) return done(err);
+            assert.ifError(err);
             done();
-          })
+          });
         });
       });
     });
