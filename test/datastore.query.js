@@ -18,13 +18,12 @@
 
 'use strict';
 
-var assert = require('assert'),
-    datastore = require('../lib/datastore'),
-    entity = require('../lib/datastore/entity.js'),
-    queryProto = require('./testdata/proto_query.json');
+var assert = require('assert');
+var datastore = require('../lib/datastore');
+var entity = require('../lib/datastore/entity.js');
+var queryProto = require('./testdata/proto_query.json');
 
 describe('Query', function() {
-
   var ds = new datastore.Dataset({ projectId: 'my-project-id' });
   it('should use default namespace if none is specified', function(done) {
     var q = ds.createQuery(['kind1']);
@@ -111,16 +110,15 @@ describe('Query', function() {
   });
 
   it('should allow page start and end tokens', function(done) {
-    var q = ds.createQuery(['kind1'])
-        .start('abc123')
-        .end('def987');
+    var q = ds.createQuery(['kind1']).start('abc123').end('def987');
     assert.strictEqual(q.startVal, 'abc123');
     assert.strictEqual(q.endVal, 'def987');
     done();
   });
 
   it('should be converted to a query proto successfully', function(done) {
-    var q = ds.createQuery(['Kind'])
+    var q =
+      ds.createQuery(['Kind'])
         .select(['name', 'count'])
         .filter('count >=', datastore.Int(5))
         .filter('name =', 'Burcu')
@@ -133,5 +131,4 @@ describe('Query', function() {
     assert.deepEqual(entity.queryToQueryProto(q), queryProto);
     done();
   });
-
 });

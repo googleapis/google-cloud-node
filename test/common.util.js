@@ -18,16 +18,14 @@
 
 'use strict';
 
-var util = require('../lib/common/util.js'),
-    assert = require('assert');
+var assert = require('assert');
+var util = require('../lib/common/util.js');
 
 describe('extend', function() {
-
   it ('should return null for null input', function() {
     var copy = util.extend(null, {});
     assert.strictEqual(copy, null);
   });
-
 });
 
 describe('arrayize', function() {
@@ -39,7 +37,6 @@ describe('arrayize', function() {
 });
 
 describe('handleResp', function() {
-
   it('should handle errors', function(done) {
     var defaultErr = new Error('new error');
     util.handleResp(defaultErr, null, null, function(err) {
@@ -76,5 +73,4 @@ describe('handleResp', function() {
       done();
     });
   });
-
 });

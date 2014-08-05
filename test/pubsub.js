@@ -18,11 +18,10 @@
 
 'use strict';
 
-var assert = require('assert'),
-    pubsub = require('../lib/pubsub');
+var assert = require('assert');
+var pubsub = require('../lib/pubsub');
 
 describe('Subscription', function() {
-
   it('should ack messages if autoAck is set', function(done) {
     var sub = new pubsub.Subscription({}, 'sub1');
     sub.autoAck = true;
@@ -97,5 +96,4 @@ describe('Subscription', function() {
       doneCalled = true;
     });
   });
-
 });
