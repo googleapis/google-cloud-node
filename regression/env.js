@@ -15,6 +15,7 @@
  */
 
 if (!process.env.GCLOUD_TESTS_PROJECT_ID &&
+    !process.env.GCLOUD_TESTS_BUCKET_NAME &&
     !process.env.GCLOUD_TESTS_KEY) {
   var error = ['To run the regression tests, you need to set the value of some environment variables.',
     'Please check the README for instructions.'
@@ -24,5 +25,6 @@ if (!process.env.GCLOUD_TESTS_PROJECT_ID &&
 
 module.exports = {
   projectId: process.env.GCLOUD_TESTS_PROJECT_ID,
-  keyFilename: process.env.GCLOUD_TESTS_KEY
+  bucketName: process.env.GCLOUD_TESTS_BUCKET_NAME,
+  keyFilename: process.env.GCLOUD_TESTS_KEY,
 };
