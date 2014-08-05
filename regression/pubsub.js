@@ -14,20 +14,27 @@
  * limitations under the License.
  */
 
-var assert = require('assert'),
-    async = require('async');
+/*global describe, it, before */
 
-var env = require('./env.js'),
-    gcloud = require('../lib');
+'use strict';
+
+var assert = require('assert');
+var async = require('async');
+
+var env = require('./env.js');
+var gcloud = require('../lib');
 
 var topicNames = ['topic1', 'topic2', 'topic3'];
-var subscriptions = [{
-  name: 'sub1',
-  ackDeadlineSeconds: 30
-}, {
-  name: 'sub2',
-  ackDeadlineSeconds: 60
-}];
+var subscriptions = [
+  {
+    name: 'sub1',
+    ackDeadlineSeconds: 30
+  },
+  {
+    name: 'sub2',
+    ackDeadlineSeconds: 60
+  }
+];
 
 var conn = new gcloud.pubsub.Connection(env);
 
@@ -37,21 +44,20 @@ before(function(done) {
     conn.createTopic(name, callback);
   };
   conn.listTopics(function(err, topics) {
-    if (err) { return done(err); }
+    assert.ifError(err);
     var fns = topics.map(function(t) {
       return function(cb) {
         t.del(cb);
       };
     });
     async.parallel(fns, function(err) {
-      if (err) { return done(err); }
+      assert.ifError(err);
       async.map(topicNames, createFn, done);
     });
-  })
+  });
 });
 
 describe('Topic', function() {
-
   it('should be listed', function(done) {
     conn.listTopics(function(err, topics) {
       assert(topics.length, 3);
@@ -66,7 +72,7 @@ describe('Topic', function() {
       assert(!!next.pageToken, true);
       done(err);
     });
-  })
+  });
 
   it('should be created', function(done) {
     conn.createTopic('topic-new', done);
@@ -87,11 +93,9 @@ describe('Topic', function() {
       topic.del(done);
     });
   });
-
 });
 
 describe('Subscription', function() {
-
   before(function(done) {
     var createFn = function(item, callback) {
       conn.createSubscription({
@@ -101,21 +105,17 @@ describe('Subscription', function() {
       }, callback);
     };
     conn.listSubscriptions(function(err, subs) {
-      if (err) {
-        done(err); return;
-      }
+      assert.ifError(err);
       var fns = subs.map(function(sub) {
         return function(cb) {
           sub.del(cb);
         };
       });
       async.series(fns, function(err) {
-        if (err) {
-          done(err); return;
-        }
+        assert.ifError(err);
         async.map(subscriptions, createFn, done);
       });
-    })
+    });
   });
 
   it('should be listed', function(done) {
@@ -127,16 +127,14 @@ describe('Subscription', function() {
 
   it('should be gettable', function(done) {
     conn.getSubscription('sub1', function(err, sub) {
-      if (err) {
-        done(err); return;
-      }
+      assert.ifError(err);
       assert.strictEqual(sub.name, '/subscriptions/' + env.projectId + '/sub1');
       done();
     });
   });
 
   it('should error while getting a non-existent subscription', function(done){
-    conn.getSubscription('sub-nothing-is-here', function(err, sub) {
+    conn.getSubscription('sub-nothing-is-here', function(err) {
       assert.strictEqual(err.code, 404);
       done();
     });
@@ -151,22 +149,17 @@ describe('Subscription', function() {
 
   it('should be able to pull and ack', function(done) {
     conn.getTopic('topic1', function(err, topic) {
-      if (err) {
-        done(err); return;
-      }
+      assert.ifError(err);
       topic.publish('hello', function(err) {
-        if(err) done(err); return;
+        assert.ifError(err);
       });
     });
     conn.getSubscription('sub1', function(err, sub) {
-      if (err) {
-        done(err); return;
-      }
+      assert.ifError(err);
       sub.on('message', function(msg) {
         sub.ack(msg.ackId, done);
       });
       sub.pull({}, done);
     });
   });
-
 });

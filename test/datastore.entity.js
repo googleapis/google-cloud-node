@@ -14,17 +14,101 @@
  * limitations under the License.
  */
 
-var assert = require('assert'),
-    entity = require('../lib/datastore/entity.js'),
-    datastore = require('../lib/datastore');
+/*global describe, it */
+
+'use strict';
+
+var assert = require('assert');
+var entity = require('../lib/datastore/entity.js');
+var datastore = require('../lib/datastore');
 
 var blogPostMetadata = {
-  title:       { kind: String, indexed: true },
-  tags:        { kind: String, multi: true, indexed: true },
+  title: { kind: String, indexed: true },
+  tags: { kind: String, multi: true, indexed: true },
   publishedAt: { kind: Date },
-  author:      { kind: Object, indexed: true },
-  isDraft:     { kind: Boolean, indexed: true }
-}
+  author: { kind: Object, indexed: true },
+  isDraft: { kind: Boolean, indexed: true }
+};
+
+var keyProto = {
+  partitionId: {
+    datasetId: 's~bamboo-shift-xxx',
+    namespace: ''
+  },
+  path: [
+    {
+      kind: 'Kind',
+      id: '4790047639339008'
+    }
+  ]
+};
+
+var entityProto = {
+  properties: {
+    createdAt: {
+      dateTimeValue: '2001-01-01T00:00:00.000Z'
+    },
+    linkedTo: {
+      keyValue: keyProto
+    },
+    name: {
+      stringValue: 'Name'
+    },
+    flagged: {
+      booleanValue: true
+    },
+    count: {
+      integerValue: '5'
+    },
+    total: {
+      doubleValue: '5.42'
+    },
+    author: {
+      entityValue: {
+        properties: {
+          name: { stringValue: 'Burcu Dogan' }
+        }
+      }
+    },
+    list: {
+      listValue: [{ integerValue: '6' }, { booleanValue: false }]
+    }
+  }
+};
+
+var queryFilterProto = {
+  projection: [],
+  kinds: [{
+    name: 'Kind1'
+  }],
+  filter: {
+    compositeFilter: {
+      filters: [
+        {
+          propertyFilter: {
+            property: { name: 'name' },
+            operator: 'EQUAL',
+            value: { stringValue: 'John' }
+          }
+        },
+        {
+          propertyFilter: {
+            property: { name: '__key__' },
+            operator: 'HAS_ANCESTOR',
+            value: {
+              keyValue: {
+                path: [{ kind: 'Kind2', name: 'somename' }]
+              }
+            }
+          }
+        }
+      ],
+      operator: 'AND'
+    }
+  },
+  order: [],
+  groupBy: []
+};
 
 describe('registerKind', function() {
   it('should be able to register valid field metadata', function(done) {
@@ -32,14 +116,14 @@ describe('registerKind', function() {
     done();
   });
 
-  it('should set the namespace to be "" if zero value or null is provided', function(done) {
+  it('should set the namespace to "" if zero value or null', function(done) {
     entity.registerKind(null, 'kind', blogPostMetadata);
     var meta = entity.getKind('', 'kind');
     assert.strictEqual(meta, blogPostMetadata);
     done();
   });
 
-  it('should throw an exception if an invalid kind is provided', function(done) {
+  it('should throw an exception if an invalid kind', function(done) {
     assert.throws(function() {
       entity.registerKind(null, '000', blogPostMetadata);
     }, /Kinds should match/);
@@ -50,17 +134,17 @@ describe('registerKind', function() {
 describe('keyFromKeyProto', function() {
    var proto = {
     partitionId: { namespace: '', datasetId: 'datasetId' },
-    path:        [{ kind: 'Kind', name: 'Name' }]
+    path: [{ kind: 'Kind', name: 'Name' }]
   };
 
   var protoH = {
     partitionId: { namespace: 'Test', datasetId: 'datasetId' },
-    path:        [{ kind: 'Kind', id: '111' }, { kind: 'Kind2', name: 'name' }]
+    path: [{ kind: 'Kind', id: '111' }, { kind: 'Kind2', name: 'name' }]
   };
 
   var protoHIncomplete = {
     partitionId: { namespace: 'Test', datasetId: 'datasetId' },
-    path:        [{ kind: 'Kind' }, { kind: 'Kind2' }]
+    path: [{ kind: 'Kind' }, { kind: 'Kind2' }]
   };
 
   it('should handle keys hierarchically', function(done) {
@@ -80,11 +164,9 @@ describe('keyFromKeyProto', function() {
     assert.deepEqual(key, ['Kind', 'Name']);
     done();
   });
-
 });
 
 describe('keyToKeyProto', function() {
-
   it('should handle hierarchical key definitions', function(done) {
     var key = ['Kind1', 1, 'Kind2', 'name'];
     var proto = entity.keyToKeyProto('datasetId', key);
@@ -113,7 +195,7 @@ describe('keyToKeyProto', function() {
     done();
   });
 
-  it('should handle incomplete keys with and without namespaces', function(done) {
+  it('should handle incomplete keys with & without namespaces', function(done) {
     var key = ['Kind1', null];
     var keyWithNS = ['Namespace', 'Kind1', null];
 
@@ -139,26 +221,29 @@ describe('keyToKeyProto', function() {
       entity.keyToKeyProto('datasetId', ['Kind']);
     });
   });
-
 });
 
 describe('isKeyComplete', function() {
-
-  it('should return true if kind and one of the identifiers have non-zero values', function(done) {
-    assert.strictEqual(entity.isKeyComplete(['Kind1', null]), false);
-    assert.strictEqual(entity.isKeyComplete(['Kind1', 3]), true);
-    assert.strictEqual(entity.isKeyComplete(['Namespace', 'Kind1', null]), false);
-    assert.strictEqual(entity.isKeyComplete(['Namespace', 'Kind1', 'name']), true);
+  it('should ret true if kind and an identifier have !0 vals', function(done) {
+    [
+      { key: ['Kind1', null], expected: false },
+      { key: ['Kind1', 3], expected: true },
+      { key: ['Namespace', 'Kind1', null], expected: false },
+      { key: ['Namespace', 'Kind1', 'name'], expected: true }
+    ].forEach(function(test) {
+      assert.strictEqual(entity.isKeyComplete(test.key), test.expected);
+    });
     done();
   });
-
 });
 
 describe('entityFromEntityProto', function() {
-
-  it('should support boolean, integer, double, string, entity and list values', function(done) {
+  it(
+      'should support boolean, integer, double, string, entity and list values',
+      function(done) {
     var obj = entity.entityFromEntityProto(entityProto);
-    assert.strictEqual(obj.createdAt.getTime(), new Date('2001-01-01').getTime());
+    assert.strictEqual(
+        obj.createdAt.getTime(), new Date('2001-01-01').getTime());
     assert.strictEqual(obj.linkedTo.ns, undefined);
     assert.strictEqual(obj.linkedTo[0], 'Kind');
     assert.strictEqual(obj.linkedTo[1], 4790047639339008);
@@ -171,12 +256,12 @@ describe('entityFromEntityProto', function() {
     assert.strictEqual(obj.list[1], false);
     done();
   });
-
 });
 
 describe('entityToEntityProto', function() {
-
-  it('should support boolean, integer, double, string, entity and list values', function(done) {
+  it(
+      'should support boolean, integer, double, string, entity and list values',
+      function(done) {
     var now = new Date();
     var proto = entity.entityToEntityProto({
       name: 'Burcu',
@@ -185,31 +270,33 @@ describe('entityToEntityProto', function() {
       primitiveCount: 6,
       legit: true,
       date : now,
-      bytes: new Buffer("Hello"),
+      bytes: new Buffer('Hello'),
       list: ['a', new entity.Double(54.7)],
       metadata: {
         key1: 'value1',
         key2: 'value2'
       }
     });
-    assert.equal(proto.properties.name.stringValue, 'Burcu');
-    assert.equal(proto.properties.desc.stringValue, 'Description');
-    assert.equal(proto.properties.count.integerValue, 6);
-    assert.equal(proto.properties.primitiveCount.integerValue, 6);
-    assert.equal(proto.properties.legit.booleanValue, true);
-    assert.equal(proto.properties.date.dateTimeValue, now);
-    assert.equal(proto.properties.bytes.blobValue, 'SGVsbG8=');
-    assert.equal(proto.properties.list.listValue[0].stringValue, 'a');
-    assert.equal(proto.properties.list.listValue[1].doubleValue, 54.7);
-    assert.equal(proto.properties.metadata.entityValue.properties.key1.stringValue, 'value1');
-    assert.equal(proto.properties.metadata.entityValue.properties.key2.stringValue, 'value2');
+    var properties = proto.properties;
+    assert.equal(properties.name.stringValue, 'Burcu');
+    assert.equal(properties.desc.stringValue, 'Description');
+    assert.equal(properties.count.integerValue, 6);
+    assert.equal(properties.primitiveCount.integerValue, 6);
+    assert.equal(properties.legit.booleanValue, true);
+    assert.equal(properties.date.dateTimeValue, now);
+    assert.equal(properties.bytes.blobValue, 'SGVsbG8=');
+    assert.equal(properties.list.listValue[0].stringValue, 'a');
+    assert.equal(properties.list.listValue[1].doubleValue, 54.7);
+    assert.equal(
+        properties.metadata.entityValue.properties.key1.stringValue, 'value1');
+    assert.equal(
+        properties.metadata.entityValue.properties.key2.stringValue, 'value2');
     done();
   });
 
 });
 
 describe('queryToQueryProto', function() {
-
   it('should support filters and ancestory filtering', function(done) {
     var ds = new datastore.Dataset({ projectId: 'project-id' });
     var q = ds.createQuery('Kind1')
@@ -219,91 +306,4 @@ describe('queryToQueryProto', function() {
     assert.deepEqual(proto, queryFilterProto);
     done();
   });
-
 });
-
-var keyProto = {
-  "partitionId":{
-     "datasetId":"s~bamboo-shift-xxx",
-     "namespace":""
-  },
-  "path":[
-     {
-        "kind":"Kind",
-        "id":"4790047639339008"
-     }
-  ]
-};
-
-var entityProto = {
-   "properties":{
-      "createdAt":{
-         "dateTimeValue":"2001-01-01T00:00:00.000Z"
-      },
-      "linkedTo": {
-         "keyValue": keyProto
-      },
-      "name":{
-         "stringValue":"Name"
-      },
-      "flagged":{
-         "booleanValue":true
-      },
-      "count":{
-         "integerValue":"5"
-      },
-      "total":{
-         "doubleValue": "5.42"
-      },
-      "author": {
-         "entityValue": {
-             "properties": {
-                "name": { "stringValue": "Burcu Dogan" }
-             }
-         }
-      },
-      "list": {
-         "listValue": [{ "integerValue": "6" }, { "booleanValue": false }]
-      }
-   }
-};
-
-var queryFilterProto = {
-    "projection": [],
-    "kinds": [{
-        "name": "Kind1"
-    }],
-    "filter": {
-        "compositeFilter": {
-            "filters": [{
-                "propertyFilter": {
-                    "property": {
-                        "name": "name"
-                    },
-                    "operator": "EQUAL",
-                    "value": {
-                        "stringValue": "John"
-                    }
-                }
-            }, {
-                "propertyFilter": {
-                    "property": {
-                        "name": "__key__"
-                    },
-                    "operator": "HAS_ANCESTOR",
-                    "value": {
-                        "keyValue": {
-                            "path": [{
-                                "kind": "Kind2",
-                                "name": "somename"
-                            }]
-                        }
-                    }
-                }
-            }],
-            "operator": "AND"
-        }
-    },
-    "order": [],
-    "groupBy": []
-};

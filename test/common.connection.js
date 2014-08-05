@@ -14,9 +14,13 @@
  * limitations under the License.
  */
 
-var assert = require('assert'),
-    async = require('async'),
-    conn = require('../lib/common/connection.js');
+/*global describe, it */
+
+'use strict';
+
+var assert = require('assert');
+var async = require('async');
+var conn = require('../lib/common/connection.js');
 
 describe('Connection', function() {
 
@@ -29,7 +33,7 @@ describe('Connection', function() {
       scopes: ['scope1', 'scope2']
     });
     c.token = tokenExpired;
-    c.fetchToken = function(cb) {
+    c.fetchToken = function() {
       done();
     };
     c.requester = function(opts, callback) {
@@ -38,7 +42,7 @@ describe('Connection', function() {
     c.req({ uri: 'https://someuri' }, function(){});
   });
 
-  it('should be able to make other requests wait while connecting', function(done) {
+  it('should make other requests wait while connecting', function(done) {
     var numTokenFetches = 0;
     var c = new conn.Connection({
       email: 'x@provider',
@@ -74,7 +78,7 @@ describe('Connection', function() {
       scopes: ['scope1', 'scope2']
     });
     c.token = new conn.Token();
-    c.fetchToken = function(cb) {
+    c.fetchToken = function() {
       done();
     };
     c.requester = function(opts, callback) {

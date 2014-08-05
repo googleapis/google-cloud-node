@@ -14,11 +14,14 @@
  * limitations under the License.
  */
 
+'use strict';
+
 if (!process.env.GCLOUD_TESTS_PROJECT_ID &&
     !process.env.GCLOUD_TESTS_BUCKET_NAME &&
     !process.env.GCLOUD_TESTS_KEY) {
-  var error = ['To run the regression tests, you need to set the value of some environment variables.',
-    'Please check the README for instructions.'
+  var error = [
+    'To run the regression tests, you need to set some environment variables.',
+    'Please check the Contributing guide for instructions.'
   ].join('\n');
   throw error;
 }
