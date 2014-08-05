@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 
-var assert = require('assert'),
-    datastore = require('../lib').datastore,
-    mockResp_get = require('./testdata/response_get.json');
+/*global describe, it, beforeEach */
+
+'use strict';
+
+var assert = require('assert');
+var datastore = require('../lib').datastore;
+var mockRespGet = require('./testdata/response_get.json');
 
 describe('Transaction', function() {
-
   it('should begin', function(done) {
     var t = new datastore.Transaction(null, 'test');
     t.makeReq = function(method, proto, callback) {
@@ -61,17 +64,15 @@ describe('Transaction', function() {
   it('should be committed if not rolled back', function(done) {
     var t = new datastore.Transaction(null, 'test');
     t.isFinalized = false;
-    t.makeReq = function(method, proto, callback) {
+    t.makeReq = function(method) {
       assert.equal(method, 'commit');
       done();
     };
     t.finalize();
   });
-
 });
 
 describe('Dataset', function() {
-
   it('should append ~s if ~s or ~e are not presented', function(done) {
     var dsWithNoPrefix = new datastore.Dataset({ projectId: 'test' });
     var dsWithSPrefix = new datastore.Dataset({ projectId: 's~name' });
@@ -87,7 +88,7 @@ describe('Dataset', function() {
     ds.transaction.makeReq = function(method, proto, callback) {
       assert.equal(method, 'lookup');
       assert.equal(proto.keys.length, 1);
-      callback(null, mockResp_get);
+      callback(null, mockRespGet);
     };
     ds.get(['Kind', 123], function(err, entity) {
       var properties = entity.data;
@@ -106,11 +107,9 @@ describe('Dataset', function() {
     ds.transaction.makeReq = function(method, proto, callback) {
       assert.equal(method, 'lookup');
       assert.equal(proto.keys.length, 1);
-      callback(null, mockResp_get);
+      callback(null, mockRespGet);
     };
-    ds.get([
-        ['Kind', 123]
-    ], function(err, entities) {
+    ds.get([['Kind', 123]], function(err, entities) {
       var entity = entities[0];
       var properties = entity.data;
       assert.deepEqual(entity.key, ['Kind', 5732568548769792]);
@@ -141,7 +140,8 @@ describe('Dataset', function() {
       callback();
     };
     ds.delete([
-      ['Kind', 123], ['Kind', 345]
+      ['Kind', 123],
+      ['Kind', 345]
     ], done);
   });
 
@@ -180,7 +180,14 @@ describe('Dataset', function() {
         },
         path :[{kind:'Kind'}]
       });
-      callback(null, { keys: [{ partitionId: { datasetId: 's~test', namespace: '' }, path :[{kind:'Kind', id: '123'}]}]});
+      callback(null, {
+        keys: [
+          {
+            partitionId: { datasetId: 's~test', namespace: '' },
+            path: [{ kind: 'Kind', id: '123' }]
+          }
+        ]
+      });
     };
     ds.allocateIds(['Kind', null], 1, function(err, ids) {
       assert.deepEqual(ids[0], ['Kind', 123]);
@@ -200,12 +207,12 @@ describe('Dataset', function() {
     var query;
     var mockResponse = {
       withResults: {
-        batch: { entityResults: mockResp_get.found }
+        batch: { entityResults: mockRespGet.found }
       },
       withResultsAndEndCursor: {
-        batch: { entityResults: mockResp_get.found, endCursor: 'cursor' }
+        batch: { entityResults: mockRespGet.found, endCursor: 'cursor' }
       },
-      withoutResults: mockResp_get
+      withoutResults: mockRespGet
     };
 
     beforeEach(function () {
