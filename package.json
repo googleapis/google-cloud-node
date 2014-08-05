@@ -1,6 +1,6 @@
 {
   "name": "gcloud",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Google Inc.",
   "description": "Google Cloud APIs Client Library for Node.js",
   "contributors": [
@@ -24,13 +24,13 @@
     "compute engine",
     "google storage"
   ],
-  "dependencies" : {
+  "dependencies": {
     "gapitoken": "*",
     "async": "*",
     "request": "*",
     "node-uuid": "*"
   },
-  "devDependencies" : {
+  "devDependencies": {
     "mocha": "*",
     "istanbul": "*",
     "tmp": "*"
