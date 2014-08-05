@@ -113,6 +113,7 @@ describe('storage', function() {
       var fileName = 'CloudLogo',
           copyName = 'CloudLogoCopy';
 
+      // TODO(silvano): Use async.parallel.
       bucket.write(fileName, { filename: pathToLogoFile }, function(err, fileObject) {
         if (err) { return done(err); }
         bucket.copy(fileName, {  name: copyName }, function() {
@@ -170,6 +171,7 @@ describe('storage', function() {
     });
 
     after(function(done) {
+      // TODO(silvano): Use Array.prototype.map to generate task array.
       async.parallel([
         function(callback) {
           bucket.remove(filenames[0], callback);
