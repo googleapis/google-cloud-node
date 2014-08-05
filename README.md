@@ -210,9 +210,9 @@ Pagination allows you to set an offset, limit and starting cursor to a query.
 
 ~~~~ js
 var q = ds.createQuery('Company')
-    .offset(100) // start from 101th result
-    .limit(10)   // return only 10 results
     .start(cursorToken); // continue to retrieve results from the given cursor.
+    .offset(100) // start from the 101th result after start cursor.
+    .limit(10)   // return only 10 results
 ~~~~
 
 #### Allocating IDs (ID generation)
