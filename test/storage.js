@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+/*global describe, it */
+
+'use strict';
+
 var assert = require('assert'),
     storage = require('../lib').storage;
 
@@ -30,12 +34,12 @@ function createBucket() {
 describe('Bucket', function() {
 
   it('should throw if a bucket name is not passed', function() {
-    assert.throws(function() { var bucket = new storage.Bucket(); }, Error);
-  })
+    assert.throws(function() { new storage.Bucket(); }, Error);
+  });
 
   it('should list without a query', function(done) {
     var bucket = createBucket();
-    bucket.makeReq = function(method, path, q, body, callback) {
+    bucket.makeReq = function(method, path, q, body) {
       assert.strictEqual(method, 'GET');
       assert.strictEqual(path, 'o');
       assert.deepEqual(q, {});
@@ -47,7 +51,7 @@ describe('Bucket', function() {
 
   it('should list with a query', function(done) {
     var bucket = createBucket();
-    bucket.makeReq = function(method, path, q, body, callback) {
+    bucket.makeReq = function(method, path, q, body) {
       assert.strictEqual(method, 'GET');
       assert.strictEqual(path, 'o');
       assert.deepEqual(q, { maxResults: 5, pageToken: 'token' });
@@ -60,7 +64,7 @@ describe('Bucket', function() {
   it('should return nextQuery if more results', function() {
     var bucket = createBucket();
     bucket.makeReq = function(method, path, q, body, callback) {
-      callback(null, { nextPageToken: 'next-page-token', items: [] })
+      callback(null, { nextPageToken: 'next-page-token', items: [] });
     };
     bucket.list({ maxResults: 5}, function(err, results, nextQuery) {
       assert.strictEqual(nextQuery.pageToken, 'next-page-token');
@@ -71,7 +75,7 @@ describe('Bucket', function() {
   it('should return no nextQuery if no more results', function() {
     var bucket = createBucket();
     bucket.makeReq = function(method, path, q, body, callback) {
-      callback(null, { items: [] })
+      callback(null, { items: [] });
     };
     bucket.list({ maxResults: 5}, function(err, results, nextQuery) {
       assert.strictEqual(nextQuery, null);
@@ -80,7 +84,7 @@ describe('Bucket', function() {
 
   it('should stat a file', function(done) {
     var bucket = createBucket();
-    bucket.makeReq = function(method, path, q, body, callback) {
+    bucket.makeReq = function(method, path, q, body) {
       assert.strictEqual(method, 'GET');
       assert.strictEqual(path, 'o/file-name');
       assert.strictEqual(q, null);
@@ -92,7 +96,7 @@ describe('Bucket', function() {
 
   it('should copy a file', function(done) {
     var bucket = createBucket();
-    bucket.makeReq = function(method, path, q, body, callback) {
+    bucket.makeReq = function(method, path, q, body) {
       assert.strictEqual(method, 'POST');
       assert.strictEqual(path, 'o/file-name/copyTo/b/new-bucket/o/new-name');
       assert.strictEqual(q, null);
@@ -105,7 +109,7 @@ describe('Bucket', function() {
 
   it('should use the same bucket if nothing else is provided', function(done) {
     var bucket = createBucket();
-    bucket.makeReq = function(method, path, q, body, callback) {
+    bucket.makeReq = function(method, path, q, body) {
       assert.strictEqual(method, 'POST');
       assert.strictEqual(path, 'o/file-name/copyTo/b/bucket-name/o/new-name');
       assert.strictEqual(q, null);
@@ -118,7 +122,7 @@ describe('Bucket', function() {
 
   it('should remove a file', function(done) {
     var bucket = createBucket();
-    bucket.makeReq = function(method, path, q, body, callback) {
+    bucket.makeReq = function(method, path, q, body) {
       assert.strictEqual(method, 'DELETE');
       assert.strictEqual(path, 'o/file-name');
       assert.strictEqual(q, null);

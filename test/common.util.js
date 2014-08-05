@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+/*global describe, it */
+
+'use strict';
+
 var util = require('../lib/common/util.js'),
     assert = require('assert');
 
@@ -49,7 +53,7 @@ describe('handleResp', function() {
       errors: [{ foo: 'bar' }],
       code:  400,
       message: 'an error occurred'
-    }
+    };
     util.handleResp(null, {}, { error: apiErr }, function(err) {
       assert.deepEqual(err.errors, apiErr.errors);
       assert.strictEqual(err.code, apiErr.code);
@@ -66,7 +70,7 @@ describe('handleResp', function() {
     });
   });
 
-  it('should return status code as an error if there are not other errors', function(done) {
+  it('should return error code if there are not other errors', function(done) {
     util.handleResp(null, { statusCode: 400 }, null, function(err) {
       assert.strictEqual(err.message, 'error during request, statusCode: 400');
       done();

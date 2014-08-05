@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+/*global describe, it */
+
+'use strict';
+
 var assert = require('assert'),
     datastore = require('../lib/datastore'),
     entity = require('../lib/datastore/entity.js'),
@@ -94,7 +98,7 @@ describe('Query', function() {
 
   it('should throw error is invalid sort sign is provided', function(done) {
     assert.throws(function() {
-      var q = ds.createQuery(['kind1']).order('*name');
+      ds.createQuery(['kind1']).order('*name');
     }, /Invalid order pattern/);
     done();
   });

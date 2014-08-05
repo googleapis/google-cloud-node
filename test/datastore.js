@@ -14,9 +14,13 @@
  * limitations under the License.
  */
 
+/*global describe, it, beforeEach */
+
+'use strict';
+
 var assert = require('assert'),
     datastore = require('../lib').datastore,
-    mockResp_get = require('./testdata/response_get.json');
+    mockRespGet = require('./testdata/response_get.json');
 
 describe('Transaction', function() {
 
@@ -61,7 +65,7 @@ describe('Transaction', function() {
   it('should be committed if not rolled back', function(done) {
     var t = new datastore.Transaction(null, 'test');
     t.isFinalized = false;
-    t.makeReq = function(method, proto, callback) {
+    t.makeReq = function(method) {
       assert.equal(method, 'commit');
       done();
     };
@@ -87,7 +91,7 @@ describe('Dataset', function() {
     ds.transaction.makeReq = function(method, proto, callback) {
       assert.equal(method, 'lookup');
       assert.equal(proto.keys.length, 1);
-      callback(null, mockResp_get);
+      callback(null, mockRespGet);
     };
     ds.get(['Kind', 123], function(err, entity) {
       var properties = entity.data;
@@ -106,7 +110,7 @@ describe('Dataset', function() {
     ds.transaction.makeReq = function(method, proto, callback) {
       assert.equal(method, 'lookup');
       assert.equal(proto.keys.length, 1);
-      callback(null, mockResp_get);
+      callback(null, mockRespGet);
     };
     ds.get([
         ['Kind', 123]
@@ -180,7 +184,14 @@ describe('Dataset', function() {
         },
         path :[{kind:'Kind'}]
       });
-      callback(null, { keys: [{ partitionId: { datasetId: 's~test', namespace: '' }, path :[{kind:'Kind', id: '123'}]}]});
+      callback(null, {
+        keys: [
+          {
+            partitionId: { datasetId: 's~test', namespace: '' },
+            path: [{ kind: 'Kind', id: '123' }]
+          }
+        ]
+      });
     };
     ds.allocateIds(['Kind', null], 1, function(err, ids) {
       assert.deepEqual(ids[0], ['Kind', 123]);
@@ -200,12 +211,12 @@ describe('Dataset', function() {
     var query;
     var mockResponse = {
       withResults: {
-        batch: { entityResults: mockResp_get.found }
+        batch: { entityResults: mockRespGet.found }
       },
       withResultsAndEndCursor: {
-        batch: { entityResults: mockResp_get.found, endCursor: 'cursor' }
+        batch: { entityResults: mockRespGet.found, endCursor: 'cursor' }
       },
-      withoutResults: mockResp_get
+      withoutResults: mockRespGet
     };
 
     beforeEach(function () {
