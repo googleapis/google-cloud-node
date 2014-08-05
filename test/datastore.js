@@ -18,12 +18,11 @@
 
 'use strict';
 
-var assert = require('assert'),
-    datastore = require('../lib').datastore,
-    mockRespGet = require('./testdata/response_get.json');
+var assert = require('assert');
+var datastore = require('../lib').datastore;
+var mockRespGet = require('./testdata/response_get.json');
 
 describe('Transaction', function() {
-
   it('should begin', function(done) {
     var t = new datastore.Transaction(null, 'test');
     t.makeReq = function(method, proto, callback) {
@@ -71,11 +70,9 @@ describe('Transaction', function() {
     };
     t.finalize();
   });
-
 });
 
 describe('Dataset', function() {
-
   it('should append ~s if ~s or ~e are not presented', function(done) {
     var dsWithNoPrefix = new datastore.Dataset({ projectId: 'test' });
     var dsWithSPrefix = new datastore.Dataset({ projectId: 's~name' });
@@ -112,9 +109,7 @@ describe('Dataset', function() {
       assert.equal(proto.keys.length, 1);
       callback(null, mockRespGet);
     };
-    ds.get([
-        ['Kind', 123]
-    ], function(err, entities) {
+    ds.get([['Kind', 123]], function(err, entities) {
       var entity = entities[0];
       var properties = entity.data;
       assert.deepEqual(entity.key, ['Kind', 5732568548769792]);
@@ -145,7 +140,8 @@ describe('Dataset', function() {
       callback();
     };
     ds.delete([
-      ['Kind', 123], ['Kind', 345]
+      ['Kind', 123],
+      ['Kind', 345]
     ], done);
   });
 

@@ -18,16 +18,16 @@
 
 'use strict';
 
-var assert = require('assert'),
-    entity = require('../lib/datastore/entity.js'),
-    datastore = require('../lib/datastore');
+var assert = require('assert');
+var entity = require('../lib/datastore/entity.js');
+var datastore = require('../lib/datastore');
 
 var blogPostMetadata = {
-  title:       { kind: String, indexed: true },
-  tags:        { kind: String, multi: true, indexed: true },
+  title: { kind: String, indexed: true },
+  tags: { kind: String, multi: true, indexed: true },
   publishedAt: { kind: Date },
-  author:      { kind: Object, indexed: true },
-  isDraft:     { kind: Boolean, indexed: true }
+  author: { kind: Object, indexed: true },
+  isDraft: { kind: Boolean, indexed: true }
 };
 
 var keyProto = {
@@ -134,17 +134,17 @@ describe('registerKind', function() {
 describe('keyFromKeyProto', function() {
    var proto = {
     partitionId: { namespace: '', datasetId: 'datasetId' },
-    path:        [{ kind: 'Kind', name: 'Name' }]
+    path: [{ kind: 'Kind', name: 'Name' }]
   };
 
   var protoH = {
     partitionId: { namespace: 'Test', datasetId: 'datasetId' },
-    path:        [{ kind: 'Kind', id: '111' }, { kind: 'Kind2', name: 'name' }]
+    path: [{ kind: 'Kind', id: '111' }, { kind: 'Kind2', name: 'name' }]
   };
 
   var protoHIncomplete = {
     partitionId: { namespace: 'Test', datasetId: 'datasetId' },
-    path:        [{ kind: 'Kind' }, { kind: 'Kind2' }]
+    path: [{ kind: 'Kind' }, { kind: 'Kind2' }]
   };
 
   it('should handle keys hierarchically', function(done) {
@@ -164,11 +164,9 @@ describe('keyFromKeyProto', function() {
     assert.deepEqual(key, ['Kind', 'Name']);
     done();
   });
-
 });
 
 describe('keyToKeyProto', function() {
-
   it('should handle hierarchical key definitions', function(done) {
     var key = ['Kind1', 1, 'Kind2', 'name'];
     var proto = entity.keyToKeyProto('datasetId', key);
@@ -223,13 +221,10 @@ describe('keyToKeyProto', function() {
       entity.keyToKeyProto('datasetId', ['Kind']);
     });
   });
-
 });
 
 describe('isKeyComplete', function() {
-
-  it('should return true if kind and an identifier have non-zero values',
-      function(done) {
+  it('should ret true if kind and an identifier have !0 vals', function(done) {
     [
       { key: ['Kind1', null], expected: false },
       { key: ['Kind1', 3], expected: true },
@@ -240,16 +235,15 @@ describe('isKeyComplete', function() {
     });
     done();
   });
-
 });
 
 describe('entityFromEntityProto', function() {
-
-  it('should support boolean, integer, double, string, entity and list values',
+  it(
+      'should support boolean, integer, double, string, entity and list values',
       function(done) {
     var obj = entity.entityFromEntityProto(entityProto);
-    assert.strictEqual(obj.createdAt.getTime(),
-                       new Date('2001-01-01').getTime());
+    assert.strictEqual(
+        obj.createdAt.getTime(), new Date('2001-01-01').getTime());
     assert.strictEqual(obj.linkedTo.ns, undefined);
     assert.strictEqual(obj.linkedTo[0], 'Kind');
     assert.strictEqual(obj.linkedTo[1], 4790047639339008);
@@ -262,12 +256,11 @@ describe('entityFromEntityProto', function() {
     assert.strictEqual(obj.list[1], false);
     done();
   });
-
 });
 
 describe('entityToEntityProto', function() {
-
-  it('should support boolean, integer, double, string, entity and list values',
+  it(
+      'should support boolean, integer, double, string, entity and list values',
       function(done) {
     var now = new Date();
     var proto = entity.entityToEntityProto({
@@ -294,17 +287,16 @@ describe('entityToEntityProto', function() {
     assert.equal(properties.bytes.blobValue, 'SGVsbG8=');
     assert.equal(properties.list.listValue[0].stringValue, 'a');
     assert.equal(properties.list.listValue[1].doubleValue, 54.7);
-    assert.equal(properties.metadata.entityValue.properties.key1.stringValue,
-                 'value1');
-    assert.equal(properties.metadata.entityValue.properties.key2.stringValue,
-                 'value2');
+    assert.equal(
+        properties.metadata.entityValue.properties.key1.stringValue, 'value1');
+    assert.equal(
+        properties.metadata.entityValue.properties.key2.stringValue, 'value2');
     done();
   });
 
 });
 
 describe('queryToQueryProto', function() {
-
   it('should support filters and ancestory filtering', function(done) {
     var ds = new datastore.Dataset({ projectId: 'project-id' });
     var q = ds.createQuery('Kind1')
@@ -314,5 +306,4 @@ describe('queryToQueryProto', function() {
     assert.deepEqual(proto, queryFilterProto);
     done();
   });
-
 });

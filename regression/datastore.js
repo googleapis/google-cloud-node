@@ -20,12 +20,11 @@
 
 var env = require('./env.js');
 
-var assert = require('assert'),
-  datastore = require('../lib/datastore'),
-  ds = new datastore.Dataset(env);
+var assert = require('assert');
+var datastore = require('../lib/datastore');
+var ds = new datastore.Dataset(env);
 
 describe('datastore', function() {
-
   describe('create, retrieve and delete', function() {
     var post = {
       title: 'How to make the perfect pizza in your grill',
@@ -34,7 +33,7 @@ describe('datastore', function() {
       author: 'Silvano',
       isDraft: false,
       wordCount: 400,
-      rating: 5.0,
+      rating: 5.0
     };
 
     it('should save/get/delete with a key name', function(done) {
@@ -104,8 +103,8 @@ describe('datastore', function() {
       ], function(err, keys) {
         assert.ifError(err);
         assert.equal(keys.length,2);
-        var firstKey = ['Post', keys[0][1]],
-            secondKey = ['Post', keys[1][1]];
+        var firstKey = ['Post', keys[0][1]];
+        var secondKey = ['Post', keys[1][1]];
         ds.get([firstKey, secondKey], function(err, entities) {
           assert.ifError(err);
           assert.equal(entities.length, 2);
@@ -175,17 +174,15 @@ describe('datastore', function() {
     }];
 
     before(function(done) {
-
       ds.save(keys.map(function(key, index) {
         return {
           key: key,
           data: characters[index]
         };
-      }), function(err, keys) {
+      }), function(err) {
         assert.ifError(err);
         done();
       });
-
     });
 
     it('should limit queries', function(done) {
@@ -210,8 +207,7 @@ describe('datastore', function() {
     });
 
     it('should filter queries with simple indexes', function(done) {
-      var q = ds.createQuery('Character')
-        .filter('appearances >=', 20);
+      var q = ds.createQuery('Character').filter('appearances >=', 20);
       ds.runQuery(q, function(err, entities) {
         assert.ifError(err);
         assert.equal(entities.length, 6);
@@ -221,8 +217,8 @@ describe('datastore', function() {
 
     it('should filter queries with defined indexes', function(done) {
       var q = ds.createQuery('Character')
-        .filter('family =', 'Stark')
-        .filter('appearances >=', 20);
+          .filter('family =', 'Stark')
+          .filter('appearances >=', 20);
       ds.runQuery(q, function(err, entities) {
         assert.ifError(err);
         assert.equal(entities.length, 6);
@@ -260,8 +256,7 @@ describe('datastore', function() {
     });
 
     it('should select projections', function(done) {
-      var q = ds.createQuery('Character')
-        .select(['name', 'family']);
+      var q = ds.createQuery('Character').select(['name', 'family']);
       ds.runQuery(q, function(err, entities) {
         assert.ifError(err);
         assert.deepEqual(entities[0].data, {
@@ -278,9 +273,9 @@ describe('datastore', function() {
 
     it('should paginate with offset and limit', function(done) {
       var q = ds.createQuery('Character')
-        .offset(2)
-        .limit(3)
-        .order('+appearances');
+          .offset(2)
+          .limit(3)
+          .order('+appearances');
       ds.runQuery(q, function(err, entities, secondQuery) {
         assert.ifError(err);
         assert.equal(entities.length, 3);
@@ -297,15 +292,16 @@ describe('datastore', function() {
 
     it('should resume from a start cursor', function(done) {
       var q = ds.createQuery('Character')
-        .offset(2)
-        .limit(2)
-        .order('+appearances');
+          .offset(2)
+          .limit(2)
+          .order('+appearances');
       ds.runQuery(q, function(err, entities, nextQuery) {
         assert.ifError(err);
         var startCursor = nextQuery.startVal;
-        var cursorQuery = ds.createQuery('Character')
-          .order('+appearances')
-          .start(startCursor);
+        var cursorQuery =
+            ds.createQuery('Character')
+              .order('+appearances')
+              .start(startCursor);
         ds.runQuery(cursorQuery, function(err, secondEntities) {
           assert.ifError(err);
           assert.equal(secondEntities.length, 4);
@@ -317,8 +313,7 @@ describe('datastore', function() {
     });
 
     it('should group queries', function(done) {
-      var q = ds.createQuery('Character')
-        .groupBy('alive');
+      var q = ds.createQuery('Character').groupBy('alive');
       ds.runQuery(q, function(err, entities) {
         assert.ifError(err);
         assert.equal(entities.length, 2);
@@ -327,23 +322,20 @@ describe('datastore', function() {
     });
 
     after(function(done) {
-
       ds.delete(keys, function(err) {
         assert.ifError(err);
         done();
       });
-
     });
-
   });
 
   describe('transactions', function() {
 
     it('should run in a transaction', function(done) {
-      var key = ['Company', 'Google'],
-        obj = {
-          'url': 'www.google.com'
-        };
+      var key = ['Company', 'Google'];
+      var obj = {
+        url: 'www.google.com'
+      };
       ds.runInTransaction(function(t, tDone) {
         ds.get(key, function(err, entity) {
           assert.ifError(err);
@@ -351,7 +343,7 @@ describe('datastore', function() {
             tDone();
             return;
           } else {
-            ds.save({ key: key, data: obj }, function(err, keyRes) {
+            ds.save({ key: key, data: obj }, function(err) {
               assert.ifError(err);
               tDone();
               return;
@@ -370,7 +362,5 @@ describe('datastore', function() {
         });
       });
     });
-
   });
-
 });

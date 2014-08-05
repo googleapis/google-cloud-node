@@ -18,8 +18,8 @@
 
 'use strict';
 
-var assert = require('assert'),
-    storage = require('../lib').storage;
+var assert = require('assert');
+var storage = require('../lib').storage;
 
 var noop = function() {};
 
@@ -32,7 +32,6 @@ function createBucket() {
 }
 
 describe('Bucket', function() {
-
   it('should throw if a bucket name is not passed', function() {
     assert.throws(function() { new storage.Bucket(); }, Error);
   });
@@ -103,8 +102,8 @@ describe('Bucket', function() {
       assert.deepEqual(body, { metadata: 'hello' });
       done();
     };
-    bucket.copy('file-name', {
-      name: 'new-name', bucket: 'new-bucket', metadata: 'hello' });
+    var copyObj = { name: 'new-name', bucket: 'new-bucket', metadata: 'hello' };
+    bucket.copy('file-name', copyObj);
   });
 
   it('should use the same bucket if nothing else is provided', function(done) {
@@ -116,8 +115,8 @@ describe('Bucket', function() {
       assert.deepEqual(body, { metadata: 'hello' });
       done();
     };
-    bucket.copy('file-name', {
-      name: 'new-name', metadata: 'hello' });
+    var copyObj = { name: 'new-name', metadata: 'hello' };
+    bucket.copy('file-name', copyObj);
   });
 
   it('should remove a file', function(done) {
@@ -131,5 +130,4 @@ describe('Bucket', function() {
     };
     bucket.remove('file-name');
   });
-
 });

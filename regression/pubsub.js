@@ -18,20 +18,23 @@
 
 'use strict';
 
-var assert = require('assert'),
-    async = require('async');
+var assert = require('assert');
+var async = require('async');
 
-var env = require('./env.js'),
-    gcloud = require('../lib');
+var env = require('./env.js');
+var gcloud = require('../lib');
 
 var topicNames = ['topic1', 'topic2', 'topic3'];
-var subscriptions = [{
-  name: 'sub1',
-  ackDeadlineSeconds: 30
-}, {
-  name: 'sub2',
-  ackDeadlineSeconds: 60
-}];
+var subscriptions = [
+  {
+    name: 'sub1',
+    ackDeadlineSeconds: 30
+  },
+  {
+    name: 'sub2',
+    ackDeadlineSeconds: 60
+  }
+];
 
 var conn = new gcloud.pubsub.Connection(env);
 
@@ -55,7 +58,6 @@ before(function(done) {
 });
 
 describe('Topic', function() {
-
   it('should be listed', function(done) {
     conn.listTopics(function(err, topics) {
       assert(topics.length, 3);
@@ -91,11 +93,9 @@ describe('Topic', function() {
       topic.del(done);
     });
   });
-
 });
 
 describe('Subscription', function() {
-
   before(function(done) {
     var createFn = function(item, callback) {
       conn.createSubscription({
@@ -162,5 +162,4 @@ describe('Subscription', function() {
       sub.pull({}, done);
     });
   });
-
 });

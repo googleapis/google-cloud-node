@@ -18,9 +18,9 @@
 
 'use strict';
 
-var assert = require('assert'),
-    async = require('async'),
-    conn = require('../lib/common/connection.js');
+var assert = require('assert');
+var async = require('async');
+var conn = require('../lib/common/connection.js');
 
 describe('Connection', function() {
 
