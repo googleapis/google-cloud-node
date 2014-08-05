@@ -32,7 +32,8 @@
   },
   "devDependencies" : {
     "mocha": "*",
-    "istanbul": "*"
+    "istanbul": "*",
+    "tmp": "*"
   },
   "scripts": {
     "test": "node_modules/mocha/bin/_mocha --reporter spec",
