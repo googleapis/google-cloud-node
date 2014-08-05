@@ -106,9 +106,12 @@ describe('Query', function() {
     done();
   });
 
-  it('should allow page start tokens', function(done) {
-    var q = ds.createQuery(['kind1']).start('abc123');
+  it('should allow page start and end tokens', function(done) {
+    var q = ds.createQuery(['kind1'])
+        .start('abc123')
+        .end('def987');
     assert.strictEqual(q.startVal, 'abc123');
+    assert.strictEqual(q.endVal, 'def987');
     done();
   });
 
@@ -119,7 +122,8 @@ describe('Query', function() {
         .filter('name =', 'Burcu')
         .order('-count')
         .groupBy(['count'])
-        .start('cursor')
+        .start('start-cursor')
+        .end('end-cursor')
         .offset(5)
         .limit(10);
     assert.deepEqual(entity.queryToQueryProto(q), queryProto);
