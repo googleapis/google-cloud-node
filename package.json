@@ -47,8 +47,9 @@
     "tmp": "0.0.24"
   },
   "scripts": {
-    "test": "jshint lib/**/*.js regression/*.js test/**/*.js && mocha test/**/*.js --reporter spec",
-    "regression-test": "mocha --reporter spec --timeout 10000 regression/*",
+    "lint": "jshint lib/ regression/ test/",
+    "test": "mocha --recursive --reporter spec",
+    "regression-test": "mocha regression/ --reporter spec --timeout 10000",
     "cover": "istanbul cover mocha -- --timeout 10000 test/* regression/*"
   },
   "license": "Apache 2"
