@@ -19,7 +19,7 @@
 'use strict';
 
 var assert = require('assert');
-var util = require('../lib/common/util.js');
+var util = require('../../lib/common/util.js');
 
 describe('extend', function() {
   it ('should return null for null input', function() {
