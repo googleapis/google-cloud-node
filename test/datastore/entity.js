@@ -169,9 +169,8 @@ describe('keyFromKeyProto', function() {
 describe('keyToKeyProto', function() {
   it('should handle hierarchical key definitions', function(done) {
     var key = ['Kind1', 1, 'Kind2', 'name'];
-    var proto = entity.keyToKeyProto('datasetId', key);
-    assert.strictEqual(proto.partitionId.datasetId, 'datasetId');
-    assert.strictEqual(proto.partitionId.namespace, undefined);
+    var proto = entity.keyToKeyProto(key);
+    assert.strictEqual(proto.partitionId, undefined);
     assert.strictEqual(proto.path[0].kind, 'Kind1');
     assert.strictEqual(proto.path[0].id, 1);
     assert.strictEqual(proto.path[0].name, undefined);
@@ -183,8 +182,7 @@ describe('keyToKeyProto', function() {
 
   it('should detect the namespace of the hierarchical keys', function(done) {
     var key = ['Namespace', 'Kind1', 1, 'Kind2', 'name'];
-    var proto = entity.keyToKeyProto('datasetId', key);
-    assert.strictEqual(proto.partitionId.datasetId, 'datasetId');
+    var proto = entity.keyToKeyProto(key);
     assert.strictEqual(proto.partitionId.namespace, 'Namespace');
     assert.strictEqual(proto.path[0].kind, 'Kind1');
     assert.strictEqual(proto.path[0].id, 1);
@@ -199,16 +197,14 @@ describe('keyToKeyProto', function() {
     var key = ['Kind1', null];
     var keyWithNS = ['Namespace', 'Kind1', null];
 
-    var proto = entity.keyToKeyProto('datasetId', key);
-    var protoWithNS = entity.keyToKeyProto('datasetId', keyWithNS);
+    var proto = entity.keyToKeyProto(key);
+    var protoWithNS = entity.keyToKeyProto(keyWithNS);
 
-    assert.strictEqual(proto.partitionId.datasetId, 'datasetId');
-    assert.strictEqual(proto.partitionId.namespace, undefined);
+    assert.strictEqual(proto.partitionId, undefined);
     assert.strictEqual(proto.path[0].kind, 'Kind1');
     assert.strictEqual(proto.path[0].id, undefined);
     assert.strictEqual(proto.path[0].name, undefined);
 
-    assert.strictEqual(protoWithNS.partitionId.datasetId, 'datasetId');
     assert.strictEqual(protoWithNS.partitionId.namespace, 'Namespace');
     assert.strictEqual(protoWithNS.path[0].kind, 'Kind1');
     assert.strictEqual(protoWithNS.path[0].id, undefined);
@@ -218,7 +214,7 @@ describe('keyToKeyProto', function() {
 
   it('should throw if key contains less than 2 items', function() {
     assert.throws(function() {
-      entity.keyToKeyProto('datasetId', ['Kind']);
+      entity.keyToKeyProto(['Kind']);
     });
   });
 });
