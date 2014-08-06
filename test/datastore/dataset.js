@@ -19,58 +19,9 @@
 'use strict';
 
 var assert = require('assert');
-var datastore = require('../lib').datastore;
-var mockRespGet = require('./testdata/response_get.json');
-
-describe('Transaction', function() {
-  it('should begin', function(done) {
-    var t = new datastore.Transaction(null, 'test');
-    t.makeReq = function(method, proto, callback) {
-      assert.equal(method, 'beginTransaction');
-      assert.equal(proto, null);
-      callback(null, 'some-id');
-    };
-    t.begin(done);
-  });
-
-  it('should rollback', function(done) {
-    var t = new datastore.Transaction(null, 'test');
-    t.id = 'some-id';
-    t.makeReq = function(method, proto, callback) {
-      assert.equal(method, 'rollback');
-      assert.deepEqual(proto, { transaction: 'some-id' });
-      callback();
-    };
-    t.rollback(function() {
-      assert.equal(t.isFinalized, true);
-      done();
-    });
-  });
-
-  it('should commit', function(done) {
-    var t = new datastore.Transaction(null, 'test');
-    t.id = 'some-id';
-    t.makeReq = function(method, proto, callback) {
-      assert.equal(method, 'commit');
-      assert.deepEqual(proto, { transaction: 'some-id' });
-      callback();
-    };
-    t.commit(function() {
-      assert.equal(t.isFinalized, true);
-      done();
-    });
-  });
-
-  it('should be committed if not rolled back', function(done) {
-    var t = new datastore.Transaction(null, 'test');
-    t.isFinalized = false;
-    t.makeReq = function(method) {
-      assert.equal(method, 'commit');
-      done();
-    };
-    t.finalize();
-  });
-});
+var datastore = require('../../lib').datastore;
+var mockRespGet = require('../testdata/response_get.json');
+var Transaction = require('../../lib/datastore/transaction.js');
 
 describe('Dataset', function() {
   it('should append ~s if ~s or ~e are not presented', function(done) {
@@ -199,6 +150,42 @@ describe('Dataset', function() {
     var ds = new datastore.Dataset({ projectId: 'test' });
     assert.throws(function() {
       ds.allocateIds(['Kind', 123]);
+    });
+  });
+
+  describe('runInTransaction', function() {
+    var ds;
+    var transaction;
+
+    beforeEach(function() {
+      ds = new datastore.Dataset({ projectId: 'test' });
+      ds.createTransaction = function() {
+        transaction = new Transaction();
+        transaction.makeReq = function(method, proto, callback) {
+          assert.equal(method, 'beginTransaction');
+          callback(null, { transaction: '' });
+        };
+        return transaction;
+      };
+    });
+
+    it('should begin transaction', function() {
+      ds.runInTransaction(function() {}, function() {});
+    });
+
+    it('should return transaction object to the callback', function() {
+      ds.runInTransaction(function(transactionObject) {
+        assert.equal(transactionObject, transaction);
+      }, assert.ifError);
+    });
+
+    it('should commit the transaction when done', function() {
+      ds.runInTransaction(function(t, done) {
+        transaction.makeReq = function(method) {
+          assert.equal(method, 'commit');
+        };
+        done();
+      }, assert.ifError);
     });
   });
 

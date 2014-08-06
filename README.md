@@ -242,18 +242,18 @@ ds.allocateIds(['ns-test', 'Company', null], 100, function(err, keys) {
 Datastore has support for transactions. Transactions allow you to perform
 multiple operations and commiting your changes atomically.
 
-`runInTransaction` is a utility method to work with transactions.
+`transaction` is a utility method to work with transactions.
 
 ~~~~ js
-ds.runInTransaction(function(t, done) {
-    // perform actions via t.
-    t.get(key, function(err, obj) {
+ds.transaction(function(transaction, done) {
+    // call datastore methods as usual
+    // when you're done, call done
+    transaction.get(key, function(err, entity) {
         if (err) {
-            t.rollback(done);
+            transaction.rollback(done);
             return;
         }
-        // do any other operation with obj.
-        // when you're done, call done.
+        // do any other operations with entity.
         done();
     });
 }, function(err) {
@@ -262,18 +262,11 @@ ds.runInTransaction(function(t, done) {
 });
 ~~~~
 
-The transaction will be auto committed if it's not rollbacked or
-commited when done is called. Transactions support the following
-CRUD and transaction related operations.
-
-* t.get(key, callback)
-* t.getAll(keys, callback)
-* t.save(key, obj, callback)
-* t.saveAll(keys, objs, callback)
-* t.del(key, callback)
-* t.delAll(keys, callback)
-* t.rollback(callback)
-* t.commit(callback)
+* transaction.get([key], callback);
+* transaction.save([{ key: '', data: {} }], callback);
+* transaction.delete([key], callback);
+* transaction.rollback(callback);
+* transaction.commit(callback);
 
 ### Google Cloud Storage
 

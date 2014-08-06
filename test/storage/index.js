@@ -19,7 +19,7 @@
 'use strict';
 
 var assert = require('assert');
-var storage = require('../lib').storage;
+var storage = require('../../lib').storage;
 
 var noop = function() {};
 
