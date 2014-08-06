@@ -20,10 +20,9 @@
 
 var assert = require('assert');
 var async = require('async');
-var conn = require('../lib/common/connection.js');
+var conn = require('../../lib/common/connection.js');
 
 describe('Connection', function() {
-
   var tokenNeverExpires = new conn.Token('token', new Date(3000, 0, 0));
   var tokenExpired = new conn.Token('token', new Date(2011, 0, 0));
   it('should fetch a new token if token expires', function(done) {
@@ -86,5 +85,4 @@ describe('Connection', function() {
     };
     c.req({ uri: 'https://someuri' }, function(){});
   });
-
 });
