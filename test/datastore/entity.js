@@ -19,8 +19,8 @@
 'use strict';
 
 var assert = require('assert');
-var entity = require('../lib/datastore/entity.js');
-var datastore = require('../lib/datastore');
+var entity = require('../../lib/datastore/entity.js');
+var datastore = require('../../lib/datastore');
 
 var blogPostMetadata = {
   title: { kind: String, indexed: true },
