@@ -53,7 +53,7 @@ describe('datastore', function() {
     });
 
     it('should save/get/delete with a numeric key id', function(done) {
-      var postKey = datastore.Key('Post', 123456789)
+      var postKey = datastore.Key('Post', 123456789);
       ds.save({
         key: postKey,
         data: post
