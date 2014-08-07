@@ -31,9 +31,9 @@ describe('Dataset', function() {
       assert.equal(proto.keys.length, 1);
       callback(null, mockRespGet);
     };
-    ds.get(['Kind', 123], function(err, entity) {
+    ds.get(datastore.Key('Kind', 123), function(err, entity) {
       var properties = entity.data;
-      assert.deepEqual(entity.key, ['Kind', 5732568548769792]);
+      assert.deepEqual(entity.key.path_, ['Kind', 5732568548769792]);
       assert.strictEqual(properties.name, 'Burcu');
       assert.deepEqual(properties.bytes, new Buffer('hello'));
       assert.strictEqual(properties.done, false);
@@ -50,10 +50,11 @@ describe('Dataset', function() {
       assert.equal(proto.keys.length, 1);
       callback(null, mockRespGet);
     };
-    ds.get([['Kind', 123]], function(err, entities) {
+    var key = datastore.Key('Kind', 5732568548769792);
+    ds.get([key], function(err, entities) {
       var entity = entities[0];
       var properties = entity.data;
-      assert.deepEqual(entity.key, ['Kind', 5732568548769792]);
+      assert.deepEqual(entity.key.path_, ['Kind', 5732568548769792]);
       assert.strictEqual(properties.name, 'Burcu');
       assert.deepEqual(properties.bytes, new Buffer('hello'));
       assert.strictEqual(properties.done, false);
@@ -70,7 +71,7 @@ describe('Dataset', function() {
       assert.equal(!!proto.mutation.delete, true);
       callback();
     };
-    ds.delete(['Kind', 123], done);
+    ds.delete(datastore.Key('Kind', 123), done);
   });
 
   it('should multi delete by keys', function(done) {
@@ -81,8 +82,8 @@ describe('Dataset', function() {
       callback();
     };
     ds.delete([
-      ['Kind', 123],
-      ['Kind', 345]
+      datastore.Key('Kind', 123),
+      datastore.Key('Kind', 345)
     ], done);
   });
 
@@ -93,7 +94,8 @@ describe('Dataset', function() {
       assert.equal(proto.mutation.insertAutoId.length, 1);
       callback();
     };
-    ds.save({ key: ['Kind', 123, null], data: {} }, done);
+    var key = datastore.Key('Kind', 123, null);
+    ds.save({ key: key, data: {} }, done);
   });
 
   it('should save with keys', function(done) {
@@ -105,8 +107,8 @@ describe('Dataset', function() {
       callback();
     };
     ds.save([
-      { key: ['Kind', 123], data: { k: 'v' } },
-      { key: ['Kind', 456], data: { k: 'v' } }
+      { key: datastore.Key('Kind', 123), data: { k: 'v' } },
+      { key: datastore.Key('Kind', 456), data: { k: 'v' } }
     ], done);
   });
 
@@ -127,8 +129,8 @@ describe('Dataset', function() {
         ]
       });
     };
-    ds.allocateIds(['Kind', null], 1, function(err, ids) {
-      assert.deepEqual(ids[0], ['Kind', 123]);
+    ds.allocateIds(datastore.Key('Kind', null), 1, function(err, ids) {
+      assert.deepEqual(ids[0], datastore.Key('Kind', 123));
       done();
     });
   });
@@ -136,7 +138,7 @@ describe('Dataset', function() {
   it('should throw if trying to allocate IDs with complete keys', function() {
     var ds = new datastore.Dataset({ projectId: 'test' });
     assert.throws(function() {
-      ds.allocateIds(['Kind', 123]);
+      ds.allocateIds(datastore.Key('Kind', 123));
     });
   });
 
@@ -229,7 +231,7 @@ describe('Dataset', function() {
         assert.ifError(err);
 
         var properties = entities[0].data;
-        assert.deepEqual(entities[0].key, ['Kind', 5732568548769792]);
+        assert.deepEqual(entities[0].key.path_, ['Kind', 5732568548769792]);
         assert.strictEqual(properties.name, 'Burcu');
         assert.deepEqual(properties.bytes, new Buffer('hello'));
         assert.strictEqual(properties.done, false);
