@@ -120,7 +120,7 @@ describe('Query', function() {
   it('should be converted to a query proto successfully', function(done) {
     var q = ds.createQuery(['Kind'])
         .select(['name', 'count'])
-        .filter('count >=', datastore.Int(5))
+        .filter('count >=', datastore.int(5))
         .filter('name =', 'Burcu')
         .order('-count')
         .groupBy(['count'])
