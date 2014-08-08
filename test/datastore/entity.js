@@ -149,26 +149,26 @@ describe('keyFromKeyProto', function() {
 
   it('should handle keys hierarchically', function(done) {
     var key = entity.keyFromKeyProto(protoH);
-    assert.deepEqual(key, ['Test', 'Kind', 111, 'Kind2', 'name']);
+    assert.deepEqual(key, datastore.key('Test', 'Kind', 111, 'Kind2', 'name'));
     done();
   });
 
   it('should handle incomplete keys hierarchically', function(done) {
     var key = entity.keyFromKeyProto(protoHIncomplete);
-    assert.deepEqual(key, ['Test', 'Kind', null, 'Kind2', null]);
+    assert.deepEqual(key, datastore.key('Test', 'Kind', null, 'Kind2', null));
     done();
   });
 
   it('should not set namespace if default', function(done) {
     var key = entity.keyFromKeyProto(proto);
-    assert.deepEqual(key, ['Kind', 'Name']);
+    assert.deepEqual(key, datastore.key('Kind', 'Name'));
     done();
   });
 });
 
 describe('keyToKeyProto', function() {
   it('should handle hierarchical key definitions', function(done) {
-    var key = ['Kind1', 1, 'Kind2', 'name'];
+    var key = datastore.key('Kind1', 1, 'Kind2', 'name');
     var proto = entity.keyToKeyProto(key);
     assert.strictEqual(proto.partitionId, undefined);
     assert.strictEqual(proto.path[0].kind, 'Kind1');
@@ -181,7 +181,7 @@ describe('keyToKeyProto', function() {
   });
 
   it('should detect the namespace of the hierarchical keys', function(done) {
-    var key = ['Namespace', 'Kind1', 1, 'Kind2', 'name'];
+    var key = datastore.key('Namespace', 'Kind1', 1, 'Kind2', 'name');
     var proto = entity.keyToKeyProto(key);
     assert.strictEqual(proto.partitionId.namespace, 'Namespace');
     assert.strictEqual(proto.path[0].kind, 'Kind1');
@@ -194,8 +194,8 @@ describe('keyToKeyProto', function() {
   });
 
   it('should handle incomplete keys with & without namespaces', function(done) {
-    var key = ['Kind1', null];
-    var keyWithNS = ['Namespace', 'Kind1', null];
+    var key = datastore.key('Kind1', null);
+    var keyWithNS = datastore.key('Namespace', 'Kind1', null);
 
     var proto = entity.keyToKeyProto(key);
     var protoWithNS = entity.keyToKeyProto(keyWithNS);
@@ -222,10 +222,10 @@ describe('keyToKeyProto', function() {
 describe('isKeyComplete', function() {
   it('should ret true if kind and an identifier have !0 vals', function(done) {
     [
-      { key: ['Kind1', null], expected: false },
-      { key: ['Kind1', 3], expected: true },
-      { key: ['Namespace', 'Kind1', null], expected: false },
-      { key: ['Namespace', 'Kind1', 'name'], expected: true }
+      { key: datastore.key('Kind1', null), expected: false },
+      { key: datastore.key('Kind1', 3), expected: true },
+      { key: datastore.key('Namespace', 'Kind1', null), expected: false },
+      { key: datastore.key('Namespace', 'Kind1', 'name'), expected: true }
     ].forEach(function(test) {
       assert.strictEqual(entity.isKeyComplete(test.key), test.expected);
     });
@@ -234,15 +234,12 @@ describe('isKeyComplete', function() {
 });
 
 describe('entityFromEntityProto', function() {
-  it(
-      'should support boolean, integer, double, string, entity and list values',
+  it('should support boolean, integer, double, string, entity and list values',
       function(done) {
     var obj = entity.entityFromEntityProto(entityProto);
     assert.strictEqual(
         obj.createdAt.getTime(), new Date('2001-01-01').getTime());
-    assert.strictEqual(obj.linkedTo.ns, undefined);
-    assert.strictEqual(obj.linkedTo[0], 'Kind');
-    assert.strictEqual(obj.linkedTo[1], 4790047639339008);
+    assert.deepEqual(obj.linkedTo, datastore.key('Kind', 4790047639339008));
     assert.strictEqual(obj.name, 'Name');
     assert.strictEqual(obj.flagged, true);
     assert.strictEqual(obj.count, 5);
@@ -297,7 +294,7 @@ describe('queryToQueryProto', function() {
     var ds = new datastore.Dataset({ projectId: 'project-id' });
     var q = ds.createQuery('Kind1')
       .filter('name =', 'John')
-      .hasAncestor(['Kind2', 'somename']);
+      .hasAncestor(datastore.key('Kind2', 'somename'));
     var proto = entity.queryToQueryProto(q);
     assert.deepEqual(proto, queryFilterProto);
     done();
