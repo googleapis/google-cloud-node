@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-/*global describe, it */
+/*global describe, it, beforeEach */
 
 'use strict';
 
 var assert = require('assert');
 var async = require('async');
-var fs = require('fs');
 var path = require('path');
 
 var connection = require('../../lib/common/connection.js');
