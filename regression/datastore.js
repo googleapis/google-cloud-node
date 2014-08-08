@@ -122,6 +122,28 @@ describe('datastore', function() {
 
   });
 
+  it('should be able to save keys as a part of entity and query by key',
+      function(done) {
+    var personKey = datastore.key('Person', 'name');
+    ds.save({
+      key: personKey,
+      data: {
+        fullName: 'Full name',
+        linkedTo: personKey // himself
+      }
+    }, function(err) {
+      assert.ifError(err);
+      var q = ds.createQuery('Person')
+          .filter('linkedTo =', personKey);
+      ds.runQuery(q, function(err, results) {
+        assert.ifError(err);
+        assert.strictEqual(results[0].data.fullName, 'Full name');
+        assert.deepEqual(results[0].data.linkedTo, personKey);
+        ds.delete(personKey, done);
+      });
+    });
+  });
+
   describe('querying the datastore', function() {
 
     var keys = [
