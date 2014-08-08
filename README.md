@@ -98,12 +98,12 @@ TODO
 Get operations require a valid key to retrieve the key identified entity from Datastore. Skip to the "Querying" section if you'd like to learn more about querying against Datastore.
 
 ~~~~ js
-ds.get(datastore.Key('Company', 123), function(err, entity) {});
+ds.get(datastore.key('Company', 123), function(err, entity) {});
 
 // alternatively, you can retrieve multiple entities at once.
 ds.get([
-    datastore.Key('Company', 123),
-    datastore.Key('Product', 'Computer')
+    datastore.key('Company', 123),
+    datastore.key('Product', 'Computer')
 ], function(err, entities) {});
 ~~~~
 
@@ -113,15 +113,15 @@ To learn more about keys and incomplete keys, skip to the Keys section.
 
 ~~~~ js
 ds.save({
-    key: datastore.Key('Company', null), data: {/*...*/}
+    key: datastore.key('Company', null), data: {/*...*/}
 }, function(err, key) {
     // First arg is an incomplete key for Company kind.
     // console.log(key) will output ['Company', 599900452312].
 });
 // alternatively, you can save multiple entities at once.
 ds.save([
-    { key: datastore.Key('Company', 123), data: {/*...*/} },
-    { key: datastore.Key('Product', 'Computer'), data: {/*...*/} }
+    { key: datastore.key('Company', 123), data: {/*...*/} },
+    { key: datastore.key('Product', 'Computer'), data: {/*...*/} }
 ], function(err, keys) {
     // if the first key was incomplete, keys[0] will return the generated key.
 });
@@ -135,10 +135,10 @@ ds.delete(['Company', 599900452312], function(err) {});
 // alternatively, you can delete multiple entities of different
 // kinds at once.
 ds.delete([
-    datastore.Key('Company', 599900452312),
-    datastore.Key('Company', 599900452315),
-    datastore.Key('Office', 'mtv'),
-    datastore.Key('Company', 123, 'Employee', 'jbd')
+    datastore.key('Company', 599900452312),
+    datastore.key('Company', 599900452315),
+    datastore.key('Office', 'mtv'),
+    datastore.key('Company', 123, 'Employee', 'jbd')
 ], function(err) {});
 ~~~~
 
@@ -177,14 +177,14 @@ stored as properties is not currently supported.
 
 ~~~~ js
 var q = ds.createQuery('Company')
-    .filter('__key__ =', datastore.Key('Company', 'Google'))
+    .filter('__key__ =', datastore.key('Company', 'Google'))
 ~~~~
 
 In order to filter by ancestors, use `hasAncestor` helper.
 
 ~~~ js
 var q = ds.createQuery('Child')
-    .hasAncestor(datastore.Key('Parent', 123));
+    .hasAncestor(datastore.key('Parent', 123));
 ~~~
 
 ##### Sorting
@@ -225,7 +225,7 @@ You can generate IDs without creating entities. The following call will create
 100 new IDs from the Company kind which exists under the default namespace.
 
 ~~~~ js
-ds.allocateIds(datastore.Key('Company', null), 100, function(err, keys) {
+ds.allocateIds(datastore.key('Company', null), 100, function(err, keys) {
 
 });
 ~~~~
@@ -236,7 +236,7 @@ call below will create 100 new IDs, but from the Company kind that exists
 under the "ns-test" namespace.
 
 ~~~~ js
-var incompleteKey = datastore.Key('ns-test', 'Company', null);
+var incompleteKey = datastore.key('ns-test', 'Company', null);
 ds.allocateIds(incompleteKey, 100, function(err, keys) {
 });
 ~~~~

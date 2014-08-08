@@ -37,7 +37,7 @@ describe('datastore', function() {
     };
 
     it('should save/get/delete with a key name', function(done) {
-      var postKey = datastore.Key('Post', 'post1');
+      var postKey = datastore.key('Post', 'post1');
       ds.save({ key: postKey, data: post }, function(err, key) {
         assert.ifError(err);
         assert.equal(key.path_[1], 'post1');
@@ -53,7 +53,7 @@ describe('datastore', function() {
     });
 
     it('should save/get/delete with a numeric key id', function(done) {
-      var postKey = datastore.Key('Post', 123456789);
+      var postKey = datastore.key('Post', 123456789);
       ds.save({
         key: postKey,
         data: post
@@ -73,16 +73,16 @@ describe('datastore', function() {
 
     it('should save/get/delete with a generated key id', function(done) {
       ds.save({
-        key: datastore.Key('Post', null),
+        key: datastore.key('Post', null),
         data: post
       }, function(err, key) {
         assert.ifError(err);
         var assignedId = key.path_[1];
         assert(assignedId);
-        ds.get(datastore.Key('Post', assignedId), function(err, entity) {
+        ds.get(datastore.key('Post', assignedId), function(err, entity) {
           assert.ifError(err);
           assert.deepEqual(entity.data, post);
-          ds.delete(datastore.Key('Post', assignedId), function(err) {
+          ds.delete(datastore.key('Post', assignedId), function(err) {
             assert.ifError(err);
             done();
           });
@@ -100,15 +100,15 @@ describe('datastore', function() {
         wordCount: 450,
         rating: 4.5,
       };
-      var key = datastore.Key('Post', null);
+      var key = datastore.key('Post', null);
       ds.save([
         { key: key, data: post },
         { key: key, data: post2 }
       ], function(err, keys) {
         assert.ifError(err);
         assert.equal(keys.length,2);
-        var firstKey = datastore.Key('Post', keys[0].path_[1]);
-        var secondKey = datastore.Key('Post', keys[1].path_[1]);
+        var firstKey = datastore.key('Post', keys[0].path_[1]);
+        var secondKey = datastore.key('Post', keys[1].path_[1]);
         ds.get([firstKey, secondKey], function(err, entities) {
           assert.ifError(err);
           assert.equal(entities.length, 2);
@@ -125,14 +125,14 @@ describe('datastore', function() {
   describe('querying the datastore', function() {
 
     var keys = [
-      datastore.Key('Character', 'Rickard'),
-      datastore.Key('Character', 'Rickard', 'Character', 'Eddard'),
-      datastore.Key('Character', 'Catelyn'),
-      datastore.Key('Character', 'Eddard', 'Character', 'Arya'),
-      datastore.Key('Character', 'Eddard', 'Character', 'Sansa'),
-      datastore.Key('Character', 'Eddard', 'Character', 'Robb'),
-      datastore.Key('Character', 'Eddard', 'Character', 'Bran'),
-      datastore.Key('Character', 'Eddard', 'Character', 'Jon Snow')
+      datastore.key('Character', 'Rickard'),
+      datastore.key('Character', 'Rickard', 'Character', 'Eddard'),
+      datastore.key('Character', 'Catelyn'),
+      datastore.key('Character', 'Eddard', 'Character', 'Arya'),
+      datastore.key('Character', 'Eddard', 'Character', 'Sansa'),
+      datastore.key('Character', 'Eddard', 'Character', 'Robb'),
+      datastore.key('Character', 'Eddard', 'Character', 'Bran'),
+      datastore.key('Character', 'Eddard', 'Character', 'Jon Snow')
     ];
 
     var characters = [{
@@ -232,7 +232,7 @@ describe('datastore', function() {
 
     it('should filter by ancestor', function(done) {
       var q = ds.createQuery('Character')
-          .hasAncestor(datastore.Key('Character', 'Eddard'));
+          .hasAncestor(datastore.key('Character', 'Eddard'));
       ds.runQuery(q, function(err, entities) {
         assert.ifError(err);
         assert.equal(entities.length, 5);
@@ -242,7 +242,7 @@ describe('datastore', function() {
 
     it('should filter by key', function(done) {
       var q = ds.createQuery('Character')
-          .filter('__key__ =', datastore.Key('Character', 'Rickard'));
+          .filter('__key__ =', datastore.key('Character', 'Rickard'));
       ds.runQuery(q, function(err, entities) {
         assert.ifError(err);
         assert.equal(entities.length, 1);
@@ -337,7 +337,7 @@ describe('datastore', function() {
   describe('transactions', function() {
 
     it('should run in a transaction', function(done) {
-      var key = datastore.Key('Company', 'Google');
+      var key = datastore.key('Company', 'Google');
       var obj = {
         url: 'www.google.com'
       };
