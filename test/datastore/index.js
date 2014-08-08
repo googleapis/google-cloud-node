@@ -44,13 +44,13 @@ describe('Datastore', function() {
 
   it('should expose Int builder', function() {
     var anInt = 7;
-    datastore.Int(anInt);
+    datastore.int(anInt);
     assert.equal(entity.intCalledWith, anInt);
   });
 
   it('should expose Double builder', function() {
     var aDouble = 7.0;
-    datastore.Double(aDouble);
+    datastore.double(aDouble);
     assert.equal(entity.doubleCalledWith, aDouble);
   });
 });
