@@ -42,32 +42,74 @@ describe('PubSub/Topic', function() {
       }
     }
     var error = new Error('No way, Jose.');
-    var topic = getTopic({ name: 'topic-wont-work' }, makeReqOverride);
+    var topic = getTopic({
+      name: 'topic-wont-work',
+      autoCreate: true
+    }, makeReqOverride);
     topic.on('error', function(err) {
       assert.equal(err, error);
       done();
     });
   });
 
-  it('should not "exist" by default', function() {
+  it('should attempt to get by default', function() {
     function makeReqOverride(method, path, qs, body, callback) {
-      if (path === 'topics') {
+      if (method === 'GET' && path === 'topics//topics/test-project/hi') {
         callback(null);
       }
     }
     var topic = getTopic({ name: 'hi' }, makeReqOverride);
-    assert.strictEqual(topic.exists, true);
+    assert.strictEqual(topic.exists_, true);
   });
 
-  it('should not need confirm existence with `exists: true` set', function() {
-    function makeReqOverride() {
-      called = true;
+  it('should attempt to create with `autoCreate: true`', function() {
+    var attemptedToCreate = false;
+    var attemptedToGet = false;
+    function makeReqOverride(method, path, qs, body, callback) {
+      if (method === 'GET' && path === 'topics//topics/test-project/hi') {
+        attemptedToGet = true;
+        callback();
+        return;
+      }
+      if (method === 'POST' && path === 'topics') {
+        attemptedToCreate = true;
+        callback();
+        return;
+      }
     }
-    var called = false;
-    var topic = getTopic(
-        { name: '/topics/test-project/hi', exists: true }, makeReqOverride);
-    assert.strictEqual(topic.exists, true);
-    assert.strictEqual(called, false);
+    var config = {
+      name: '/topics/test-project/hi',
+      autoCreate: true
+    };
+    var topic = getTopic(config, makeReqOverride);
+    assert.strictEqual(attemptedToCreate, true);
+    assert.strictEqual(attemptedToGet, false);
+    assert.strictEqual(topic.exists_, true);
+  });
+
+  it('should not attempt to create or get when specified not to', function() {
+    var attemptedToCreate = false;
+    var attemptedToGet = false;
+    function makeReqOverride(method, path, qs, body, callback) {
+      if (method === 'GET' && path === 'topics//topics/test-project/hi') {
+        attemptedToGet = true;
+        callback();
+        return;
+      }
+      if (method === 'POST' && path === 'topics') {
+        attemptedToCreate = true;
+        callback();
+        return;
+      }
+    }
+    var config = {
+      name: '/topics/test-project/hi',
+      autoCreate: false
+    };
+    var topic = getTopic(config, makeReqOverride);
+    assert.strictEqual(attemptedToCreate, false);
+    assert.strictEqual(attemptedToGet, false);
+    assert.strictEqual(topic.exists_, true);
   });
 
   describe('publishing', function() {
@@ -112,7 +154,7 @@ describe('PubSub/Topic', function() {
 
     it('should publish a message once existence is confirmed', function() {
       function makeReqOverride(method, path, qs, body, callback) {
-        if (path === 'topics') {
+        if (method === 'GET' && path === 'topics//topics/test-project/hi') {
           // confirm existence.
           timesCheckedForExistence++;
           callback(null);
@@ -125,7 +167,7 @@ describe('PubSub/Topic', function() {
       }
       var timesCheckedForExistence = 0;
       var timesAttemptedToPublish = 0;
-      var topic = getTopic('lazy-confirm', makeReqOverride);
+      var topic = getTopic('hi', makeReqOverride);
       topic.on('error', assert.ifError);
 
       topic.publish('Hi', assert.ifError);
@@ -139,10 +181,16 @@ describe('PubSub/Topic', function() {
     it('should not try to publish a message if Topic does not exist',
         function(done) {
       function makeReqOverride(method, path, qs, body, callback) {
-        if (path === 'topics') {
+        if (method === 'GET' && path === 'topics//topics/test-project/hi') {
           // confirm non-existence.
           timesCheckedForExistence++;
-          setTimeout(callback.bind(null, error), 1);
+          setTimeout(callback.bind(null, { code: 404 }), 1);
+          return;
+        }
+        if (method === 'POST' && path === 'topics') {
+          // deny creation of the topic.
+          timesAttemptedToCreate++;
+          callback(error);
           return;
         }
         if (path === 'topics/publish') {
@@ -150,18 +198,21 @@ describe('PubSub/Topic', function() {
           return;
         }
       }
+      var timesAttemptedToCreate = 0;
       var timesAttemptedToPublish = 0;
       var timesCheckedForExistence = 0;
       var error = new Error('No way, Jose.');
-      var topic = getTopic('lazy-confirm', makeReqOverride);
-      topic.on('error', function() {/*ignore non-existence error.*/});
+      var topic = getTopic('hi', makeReqOverride);
+      topic.on('error', function() {/*ignore failed creation error.*/});
       topic.publish(message, function() {
         assert.equal(timesAttemptedToPublish, 0);
         assert.equal(timesCheckedForExistence, 1);
+        assert.equal(timesAttemptedToCreate, 1);
       });
       topic.publishRaw(messageRaw, function() {
         assert.equal(timesAttemptedToPublish, 0);
         assert.equal(timesCheckedForExistence, 1);
+        assert.equal(timesAttemptedToCreate, 1);
         done();
       });
     });
@@ -172,7 +223,9 @@ describe('PubSub/Topic', function() {
 
     function createTopicAndRegisterSubscriptions(makeReqOverride) {
       var topic = getTopic('topic', makeReqOverride);
-      subNames.forEach(topic.subscribe.bind(topic));
+      subNames.forEach(function(subName) {
+        topic.subscribe(subName);
+      });
       return topic;
     }
 
@@ -190,7 +243,7 @@ describe('PubSub/Topic', function() {
         }
       }
       var topic = createTopicAndRegisterSubscriptions(makeReqOverride);
-      topic.getSubscription(subNames[0], function(err, sub) {
+      topic.subscribe(subNames[0], function(err, sub) {
         assert.ifError(err);
         assert(sub instanceof Subscription);
         assert.equal(sub.name, subName);

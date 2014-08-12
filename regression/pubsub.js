@@ -76,42 +76,39 @@ describe('PubSub', function() {
     it('should be created', function(done) {
       var topic = pubsub.topic('topic-new');
       topic.on('error', assert.ifError);
-      topic.on('ready', function() {
-        assert.equal(topic.exists, true);
-        done();
-      });
+      topic.on('ready', done);
     });
 
     it('should be gettable', function(done) {
-      var topic = pubsub.getTopic('topic1');
+      var topic = pubsub.topic('topic1');
       topic.on('error', assert.ifError);
-      topic.on('ready', function() {
-        assert.equal(topic.exists, true);
-        done();
-      });
+      topic.on('ready', done);
     });
 
     it('should publish a message', function(done) {
-      pubsub.getTopic('topic1').publish('message from me', function(err) {
+      pubsub.topic('topic1').publish('message from me', function(err) {
         assert.ifError(err);
         done();
       });
     });
 
     it('should be deleted', function(done) {
-      pubsub.getTopic('topic1').delete(done);
+      pubsub.topic('topic1').delete(function (err) {
+        assert.ifError(err);
+        done();
+      });
     });
   });
 
   describe('Subscription', function() {
     var subscriptionObjects = [
-      { name: 'sub1', ackDeadlineSeconds: 30 },
-      { name: 'sub2', ackDeadlineSeconds: 60 }
+      { name: 'sub1', ackDeadlineSeconds: 30, autoPull: false },
+      { name: 'sub2', ackDeadlineSeconds: 60, autoPull: false }
     ];
     var topic;
 
     before(function(done) {
-      topic = pubsub.getTopic('topic1');
+      topic = pubsub.topic('topic1');
       topic.on('error', assert.ifError);
 
       pubsub.getSubscriptions(function(err, subscriptions) {
@@ -126,11 +123,7 @@ describe('PubSub', function() {
             assert.ifError(err);
             // re-subscribe.
             async.map(subscriptionObjects, function(subscriptionObj, callback) {
-              var sub = topic.subscribe(subscriptionObj);
-              sub.on('ready', function() {
-                sub.close();
-                callback();
-              });
+              topic.subscribe(subscriptionObj).on('ready', callback);
             }, done);
           });
       });
@@ -143,33 +136,23 @@ describe('PubSub', function() {
         assert.strictEqual(subscriptions.length, subscriptionObjects.length);
         subscriptions.forEach(function(subscription) {
           assert(subscription instanceof Subscription);
-          subscription.close();
         });
         done();
       });
     });
 
-    it('should be gettable',  function(done) {
-      var sub = topic.getSubscription(subscriptionObjects[0].name);
+    it('should be gettable', function(done) {
+      var sub = topic.subscribe(subscriptionObjects[0]);
       sub.on('error', assert.ifError);
-      sub.on('ready', function(err) {
-        assert.ifError(err);
-        assert.strictEqual(
-            sub.name, '/subscriptions/' + env.projectId + '/sub1');
+      sub.on('ready', function() {
+        assert.equal(sub.name, '/subscriptions/' + env.projectId + '/sub1');
         sub.close();
         done();
       });
     });
 
-    it('should error while getting a non-existent subscription', function(done){
-      topic.getSubscription('sub-nothing-is-here').on('error', function(err) {
-        assert.strictEqual(err.code, 404);
-        done();
-      });
-    });
-
     it('should create a subscription', function(done) {
-      var newSub = topic.subscribe({ name: 'new-sub' });
+      var newSub = topic.subscribe('new-sub');
       newSub.on('error', assert.ifError);
       newSub.on('ready', function() {
         newSub.close();
@@ -179,7 +162,7 @@ describe('PubSub', function() {
 
     it('should be able to pull and ack', function(done) {
       topic.publish('hello');
-      var sub = topic.getSubscription(subscriptionObjects[0].name);
+      var sub = topic.subscribe(subscriptionObjects[0].name);
       sub.on('error', assert.ifError);
       sub.on('message', function(msg) {
         sub.ack(msg.ackId, function(err) {

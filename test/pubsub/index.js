@@ -38,7 +38,9 @@ describe('PubSub', function() {
 
     function createPubSubAndRegisterTopics(makeReqOverride) {
       var pubsub = getPubSub('test-project', makeReqOverride);
-      topicNames.forEach(pubsub.topic.bind(pubsub));
+      topicNames.forEach(function(topicName) {
+        pubsub.topic(topicName);
+      });
       return pubsub;
     }
 
@@ -66,7 +68,7 @@ describe('PubSub', function() {
         }
       }
       var pubsub = createPubSubAndRegisterTopics(makeReqOverride);
-      pubsub.getTopic(topicNames[0], function(err, topic) {
+      pubsub.topic(topicNames[0], function(err, topic) {
         assert.ifError(err);
         assert(topic instanceof Topic);
         assert.equal(topic.name, topicName);

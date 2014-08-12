@@ -52,7 +52,11 @@ describe('PubSub/Subscription', function() {
         acked = true;
       }
     }
-    var config = { name: 'sub', autoAck: true, exists: true };
+    var config = {
+      name: 'sub',
+      autoAck: true,
+      autoCreate: false
+    };
     var sub = getSubscription(config, makeReqOverride);
     sub.pull({}, function() {});
     assert.strictEqual(acked, true);
@@ -92,10 +96,86 @@ describe('PubSub/Subscription', function() {
         return;
       }
     }
-    var config = { name: 'sub', autoAck: true, exists: true };
+    var config = {
+      name: 'sub',
+      autoAck: true,
+      autoCreate: false
+    };
     var sub = getSubscription(config, makeReqOverride);
     sub.once('message', function() {
       done();
     });
+  });
+
+  it('should attempt to get by default', function() {
+    function makeReqOverride(method, path, qs, body, callback) {
+      if (method === 'GET' &&
+          path === 'subscriptions//subscriptions/test-project/hi') {
+        callback(null);
+      }
+    }
+    var sub = getSubscription({ name: 'hi' }, makeReqOverride);
+    assert.strictEqual(sub.exists_, true);
+  });
+
+  it('should not attempt to create or get when specified not to', function() {
+    var attemptedToCreate = false;
+    var attemptedToGet = false;
+    function makeReqOverride(method, path, qs, body, callback) {
+      if (method === 'GET' &&
+          path === 'subscriptions//subscriptions/test-project/hi') {
+        attemptedToGet = true;
+        callback();
+        return;
+      }
+      if (method === 'POST' && path === 'subscriptions') {
+        attemptedToCreate = true;
+        callback();
+        return;
+      }
+    }
+    var config = {
+      name: '/subscriptions/test-project/hi',
+      autoCreate: false
+    };
+    var sub = getSubscription(config, makeReqOverride);
+    assert.strictEqual(attemptedToCreate, false);
+    assert.strictEqual(attemptedToGet, false);
+    assert.strictEqual(sub.exists_, true);
+  });
+
+  it('should delete and re-create when ackDeadlineSeconds do not match',
+    function() {
+    var attemptedToRecreate = false;
+    var attemptedToDelete = false;
+    var attemptedToGet = false;
+    function makeReqOverride(method, path, qs, body, callback) {
+      if (method === 'GET' &&
+          path === 'subscriptions//subscriptions/test-project/hi') {
+        attemptedToGet = true;
+        callback(null, { ackDeadlineSeconds: 60 });
+        return;
+      }
+      if (method === 'DELETE') {
+        attemptedToDelete = true;
+        callback();
+        return;
+      }
+      if (method === 'POST' && path === 'subscriptions' &&
+          body.ackDeadlineSeconds === 30) {
+        attemptedToRecreate = true;
+        callback();
+        return;
+      }
+    }
+    var config = {
+      name: '/subscriptions/test-project/hi',
+      ackDeadlineSeconds: 30
+    };
+    var sub = getSubscription(config, makeReqOverride);
+    assert.strictEqual(attemptedToRecreate, true);
+    assert.strictEqual(attemptedToDelete, true);
+    assert.strictEqual(attemptedToGet, true);
+    assert.strictEqual(sub.exists_, true);
   });
 });
