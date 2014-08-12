@@ -388,7 +388,7 @@ a pubsub Connection with your Google Developers Console project ID.
 
 ~~~~ js
 var gcloud = require('gcloud'),
-    conn = new gcloud.pubsub.Connection({ projectId: YOUR_PROJECT_ID });
+    pubsub = new gcloud.PubSub({ projectId: YOUR_PROJECT_ID });
 ~~~~
 
 Elsewhere, construct with project ID, service account's email
@@ -396,7 +396,7 @@ and private key downloaded from Developer's Console.
 
 ~~~~ js
 var gcloud = require('gcloud'),
-    conn = new gcloud.pubsub.Connection({
+    pubsub = new gcloud.PubSub({
         projectId: YOUR_PROJECT_ID,
         keyFilename: '/path/to/the/key.json'
     });
@@ -404,89 +404,110 @@ var gcloud = require('gcloud'),
 
 #### Topics and Subscriptions
 
-List, get, create and delete topics.
+##### Topics
 
+*Create, get, and delete topics.*
+
+Create a topic by name.
 ~~~ js
-// lists topics.
-conn.listTopics({ maxResults: 5 }, function(err, topics, nextQuery) {
-    // if more results, nextQuery will be non-null.
-});
-
-// retrieves an existing topic by name.
-conn.getTopic('topic1', function(err, topic) {
-    // deletes this topic.
-    topic.del(callback);
-});
-
-// creates a new topic named topic2.
-conn.createTopic('topic2', callback);
+pubsub.topic('new-topic');
 ~~~
 
-List, get, create and delete subscriptions.
+The `topic` and `getTopic` methods extend Node's event emitter. For any command you run against the returned Topic object, it will first assure the topic has been created or retrieved. If there is an error during creation or retrieval of the topic, you can catch this by adding an `error` event listener, as demonstrated below.
 
 ~~~ js
-var query = {
-    maxResults: 5,
-    filterByTopicName: 'topic1'
-};
-// list 5 subscriptions that are subscribed to topic1.
-conn.listSubscriptions(query, function(err, subs, nextQuery) {
-    // if there are more results, nextQuery will be non-null.
-});
-
-// get subscription named sub1
-conn.getSubscription('sub1', function(err, sub) {
-    // delete this subscription.
-    sub.del(callback);
-});
-
-// create a new subsription named sub2, listens to topic1.
-conn.createSubscription({
-    topic: 'topic1',
-    name: 'sub2',
-    ackDeadlineSeconds: 60
-}, callback);
+var newTopic = pubsub.topic('new-topic');
+newTopic.on('error', function(err) {});
+newTopic.delete(function(err) {});
 ~~~
 
-#### Publishing a message
+Retrieve an existing topic by name.
+~~~ js
+var newTopic = pubsub.getTopic('new-topic');
+newTopic.on('error', function(err) {});
+newTopic.delete(function(err) {});
+~~~
+
+Get a list of the topics registered to your project.
+~~~ js
+pubsub.getTopics({ maxResults: 5 }, function(err, topics, nextQuery) {
+    // if more results exist, nextQuery will be non-null.
+});
+~~~
+
+##### Subscriptions
+
+*Create, get, and delete subscriptions.*
+
+Create a new subsription by name.
+~~~ js
+newTopic.subscribe('new-sub');
+~~~
+
+As with the Topic examples above, `subscribe` and `getSubscription` also extend Node's event emitter. Assign an error handler to catch any errors the subscription may throw.
+~~~ js
+var newSub = newTopic.subscribe({ name: 'new-sub', ackDeadlineSeconds: 60 });
+newSub.on('error', function(err) {});
+newSub.delete(function(err) {});
+~~~
+
+Get a subscription by name.
+~~~ js
+var newSub = newTopic.getSubscription('new-sub');
+newSub.on('error', function(err) {});
+newSub.delete(function(err) {});
+~~~
+
+Get 5 subscriptions that are subscribed to "new-topic".
+~~~ js
+newTopic.getSubscriptions(
+    { maxResults: 5 }, function(err, subscriptions, nextQuery) {
+    // if more results exist, nextQuery will be non-null.
+});
+~~~
+
+#### Publishing Messages
 
 You need to retrieve or create a topic to publish a message.
-You can either publish simple string messages or a raw Pub/Sub
-message object.
-
 ~~~ js
-conn.getTopic('topic1', function(err, topic) {
-    // publishes "hello world" to to topic1 subscribers.
-    topic.publish('hello world', callback);
-    topic.publishMessage({
-        data: 'Some text here...',
-        label: [
-            { key: 'priority', numValue: 0 },
-            { key: 'foo', stringValue: 'bar' }
-        ]
-    }, callback);
-});
+newTopic.publish('hello world', function(err) {});
 ~~~
 
-#### Listening for messages
-
-You can either pull messages one by one via a subscription, or
-let the client to open a long-lived request to poll them.
-
+To publish a raw Pub/Sub message object, use the `publishRaw` method.
 ~~~ js
-// allow client to poll messages from sub1
-// autoAck automatically acknowledges the messages. by default, false.
-var sub = conn.subscribe('sub1', { autoAck: true });
-sub.on('ready', function() {
-    console.log('listening messages...');
+newTopic.publishRaw({
+    data: 'Some text here...',
+    label: [
+        { key: 'priority', numValue: 0 },
+        { key: 'foo', stringValue: 'bar' }
+    ]
+}, function(err) {});
+~~~
+
+#### Listening for Messages
+
+You can either pull messages one by one via a subscription, or let the client open a long-lived request to poll them.
+~~~ js
+var newerSub = newTopic.subscribe({
+  name: 'newer-sub',
+
+  // automatically acknowledges the messages (default: false)
+  autoAck: true
 });
-sub.on('message', function(msg) {
-    console.log('message retrieved:', msg);
-});
-sub.on('error', function(err) {
-    console.log('error occured:', err);
-});
-sub.close(); // closes the connection, stops listening for messages.
+
+// Listening for messages...
+newerSub.on('ready', function() {});
+
+// Received a message...
+newerSub.on('message', function(msg) {});
+
+// Received an error...
+newerSub.on('error', function(err) {});
+~~~
+
+To close the connection and stop listening for messages, call `close`.
+~~~ js
+newerSub.close();
 ~~~
 
 ## Contributing

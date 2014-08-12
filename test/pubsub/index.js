@@ -19,81 +19,96 @@
 'use strict';
 
 var assert = require('assert');
-var pubsub = require('../../lib/pubsub');
+var util = require('../../lib/common/util.js');
+var PubSub = require('../../lib/pubsub/index.js');
+var Topic = require('../../lib/pubsub/topic.js');
 
-describe('Subscription', function() {
-  it('should ack messages if autoAck is set', function(done) {
-    var sub = new pubsub.Subscription({}, 'sub1');
-    sub.autoAck = true;
-    sub.conn.makeReq = function(method, path, qs, body, callback) {
-      if (path === 'subscriptions/pull') {
-        callback(null, { ackId: 'ackd-id' });
-        return;
+describe('PubSub', function() {
+  function getPubSub(config, makeReqOverride) {
+    if (typeof config === 'string' || !config) {
+      config = { projectId: config || 'test-project' };
+    }
+    var pubsub = new PubSub(config);
+    pubsub.makeReq = makeReqOverride || util.noop;
+    return pubsub;
+  }
+
+  describe('topics', function() {
+    var topicNames = ['topic-name-1', 'topic-name-2', 'topic-name-3'];
+
+    function createPubSubAndRegisterTopics(makeReqOverride) {
+      var pubsub = getPubSub('test-project', makeReqOverride);
+      topicNames.forEach(function(topicName) {
+        pubsub.topic(topicName);
+      });
+      return pubsub;
+    }
+
+    it('should accept a string', function() {
+      var topicName = 'topic-name';
+      var topic = getPubSub().topic(topicName);
+      assert.equal(topic.name, '/topics/test-project/' + topicName);
+    });
+
+    it('should accept an object', function() {
+      var topicName = 'topic-name';
+      var topic = getPubSub().topic({ name: topicName });
+      assert.equal(topic.name, '/topics/test-project/' + topicName);
+    });
+
+    it('should create a new Topic object', function() {
+      assert(getPubSub().topic('topic-name') instanceof Topic);
+    });
+
+    it('should return an individual topic', function() {
+      var topicName = '/topics/test-project/topic-name-1';
+      function makeReqOverride(method, path, qs, body, callback) {
+        if (path === 'topics' || path === 'topics/' + topicName) {
+          return callback();
+        }
       }
-      if (path === 'subscriptions/acknowledge') {
-        done();
+      var pubsub = createPubSubAndRegisterTopics(makeReqOverride);
+      pubsub.topic(topicNames[0], function(err, topic) {
+        assert.ifError(err);
+        assert(topic instanceof Topic);
+        assert.equal(topic.name, topicName);
+      });
+    });
+
+    it('should return all topics', function() {
+      function makeReqOverride(method, path, qs, body, callback) {
+        if (path === 'topics') {
+          if (method === 'POST') {
+            return callback();
+          }
+          if (method === 'GET') {
+            return callback(null, {
+                topic: topicNames.map(function(topic) {
+                  return { name: topic };
+                })
+              });
+          }
+        }
       }
-    };
-    sub.pull({}, function() {});
+      var pubsub = createPubSubAndRegisterTopics(makeReqOverride);
+      pubsub.getTopics(function(err, subscriptions) {
+        assert.ifError(err);
+        assert.equal(subscriptions.length, topicNames.length);
+        subscriptions.forEach(function(sub, index) {
+          // ignore the fullName formatting
+          assert.equal(sub.name.split('/')[3], topicNames[index]);
+        });
+      });
+    });
   });
 
-  it('should be closed', function(done) {
-    var sub = new pubsub.Subscription({}, 'sub1');
-    sub.close();
-    assert.strictEqual(sub.closed, true);
-    done();
-  });
-
-  it('should pull messages', function(done) {
-    var conn = new pubsub.Connection({
-      projectId: 'test-project'
-    });
-    conn.makeReq = function(method, path, qs, body, callback) {
-      switch (path) {
-        case 'subscriptions//subscriptions/test-project/sub1':
-          callback(null, {});
-          return;
-        case 'subscriptions/pull':
-          callback(null, { ackId: 123 });
-          return;
-      }
+  it('should pass network requests to the connection object', function() {
+    var called = false;
+    var pubsub = new PubSub({ projectId: 'test-project' });
+    pubsub.conn.req = function () {
+      called = true;
     };
-    var sub = conn.subscribe('sub1', { autoAck: false });
-    var doneCalled = false;
-    sub.on('message', function() {
-      if (!doneCalled) {
-        done();
-      }
-      doneCalled = true;
-    });
-  });
-
-  it('should pull and ack messages', function(done) {
-    var conn = new pubsub.Connection({
-      projectId: 'test-project'
-    });
-    conn.makeReq = function(method, path, qs, body, callback) {
-      switch (path) {
-        case 'subscriptions//subscriptions/test-project/sub1':
-          callback(null, {});
-          return;
-        case 'subscriptions/pull':
-          setTimeout(function() {
-            callback(null, { ackId: 123 });
-          }, 500);
-          return;
-        case 'subscriptions/acknowledge':
-          callback(null, true);
-          return;
-      }
-    };
-    var sub = conn.subscribe('sub1', { autoAck: true });
-    var doneCalled = false;
-    sub.on('message', function() {
-      if (!doneCalled) {
-        done();
-      }
-      doneCalled = true;
-    });
+    pubsub.makeReq();
+    assert.strictEqual(called, true);
   });
 });

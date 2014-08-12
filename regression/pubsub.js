@@ -24,142 +24,154 @@ var async = require('async');
 var env = require('./env.js');
 var gcloud = require('../lib');
 
-var topicNames = ['topic1', 'topic2', 'topic3'];
-var subscriptions = [
-  {
-    name: 'sub1',
-    ackDeadlineSeconds: 30
-  },
-  {
-    name: 'sub2',
-    ackDeadlineSeconds: 60
-  }
-];
+var Topic = require('../lib/pubsub/topic.js');
+var Subscription = require('../lib/pubsub/subscription.js');
 
-var conn = new gcloud.pubsub.Connection(env);
+describe('PubSub', function() {
+  var pubsub;
 
-before(function(done) {
-  // TODO: Handle pagination.
-  var createFn = function(name, callback) {
-    conn.createTopic(name, callback);
-  };
-  conn.listTopics(function(err, topics) {
-    assert.ifError(err);
-    var fns = topics.map(function(t) {
-      return function(cb) {
-        t.del(cb);
-      };
-    });
-    async.parallel(fns, function(err) {
-      assert.ifError(err);
-      async.map(topicNames, createFn, done);
-    });
-  });
-});
-
-describe('Topic', function() {
-  it('should be listed', function(done) {
-    conn.listTopics(function(err, topics) {
-      assert(topics.length, 3);
-      done(err);
-    });
-  });
-
-  it('should return a nextQuery if there are more results', function(done) {
-    conn.listTopics({ maxResults: 2 }, function(err, topics, next) {
-      assert(topics.length, 2);
-      assert(next.maxResults, 2);
-      assert(!!next.pageToken, true);
-      done(err);
-    });
-  });
-
-  it('should be created', function(done) {
-    conn.createTopic('topic-new', done);
-  });
-
-  it('should be gettable', function(done) {
-    conn.getTopic('topic1', done);
-  });
-
-  it('should publish a message', function(done) {
-    conn.getTopic('topic1', function(err, topic) {
-      topic.publish('message from me', done);
-    });
-  });
-
-  it('should be deleted', function(done) {
-    conn.getTopic('topic3', function(err, topic) {
-      topic.del(done);
-    });
-  });
-});
-
-describe('Subscription', function() {
   before(function(done) {
-    var createFn = function(item, callback) {
-      conn.createSubscription({
-        name: item.name,
-        topic: 'topic1',
-        ackDeadlineSeconds: item.ackDeadlineSeconds
-      }, callback);
-    };
-    conn.listSubscriptions(function(err, subs) {
+    pubsub = new gcloud.PubSub(env);
+    var topicNames = ['topic1', 'topic2', 'topic3'];
+    // TODO: Handle pagination.
+    pubsub.getTopics(function(err, topics) {
       assert.ifError(err);
-      var fns = subs.map(function(sub) {
-        return function(cb) {
-          sub.del(cb);
-        };
+
+      async.series(
+        // delete existing topics.
+        topics.map(function(topic) {
+          return topic.delete.bind(topic);
+        }),
+        function(err) {
+          assert.ifError(err);
+          // create new topics.
+          async.map(topicNames, function(topic, callback) {
+            pubsub.topic(topic).on('ready', callback);
+          }, done);
+        });
+    });
+  });
+
+  describe('Topic', function() {
+    it('should return Topic instances for existing topics', function(done) {
+      pubsub.getTopics(function(err, topics) {
+        assert(topics.length, 3);
+        topics.forEach(function(topic) {
+          assert(topic instanceof Topic);
+        });
+        done(err);
       });
-      async.series(fns, function(err) {
+    });
+
+    it('should return a nextQuery if there are more results', function(done) {
+      pubsub.getTopics({ maxResults: 2 }, function(err, topics, next) {
         assert.ifError(err);
-        async.map(subscriptions, createFn, done);
+        assert.equal(topics.length, 2);
+        assert.equal(next.maxResults, 2);
+        assert.equal(!!next.pageToken, true);
+        done();
       });
     });
-  });
 
-  it('should be listed', function(done) {
-    conn.listSubscriptions(function(err, subs) {
-      assert.strictEqual(subs.length, 2);
-      done(err);
+    it('should be created', function(done) {
+      var topic = pubsub.topic('topic-new');
+      topic.on('error', assert.ifError);
+      topic.on('ready', done);
     });
-  });
 
-  it('should be gettable', function(done) {
-    conn.getSubscription('sub1', function(err, sub) {
-      assert.ifError(err);
-      assert.strictEqual(sub.name, '/subscriptions/' + env.projectId + '/sub1');
-      done();
+    it('should be gettable', function(done) {
+      var topic = pubsub.topic('topic1');
+      topic.on('error', assert.ifError);
+      topic.on('ready', done);
     });
-  });
 
-  it('should error while getting a non-existent subscription', function(done){
-    conn.getSubscription('sub-nothing-is-here', function(err) {
-      assert.strictEqual(err.code, 404);
-      done();
-    });
-  });
-
-  it('should be created', function(done) {
-    conn.createSubscription({
-      topic: 'topic1',
-      name: 'new-sub'
-    }, done);
-  });
-
-  it('should be able to pull and ack', function(done) {
-    conn.getTopic('topic1', function(err, topic) {
-      assert.ifError(err);
-      topic.publish('hello', function(err) {
+    it('should publish a message', function(done) {
+      pubsub.topic('topic1').publish('message from me', function(err) {
         assert.ifError(err);
+        done();
       });
     });
-    conn.getSubscription('sub1', function(err, sub) {
-      assert.ifError(err);
+
+    it('should be deleted', function(done) {
+      pubsub.topic('topic1').delete(function (err) {
+        assert.ifError(err);
+        done();
+      });
+    });
+  });
+
+  describe('Subscription', function() {
+    var subscriptionObjects = [
+      { name: 'sub1', ackDeadlineSeconds: 30, autoPull: false },
+      { name: 'sub2', ackDeadlineSeconds: 60, autoPull: false }
+    ];
+    var topic;
+
+    before(function(done) {
+      topic = pubsub.topic('topic1');
+      topic.on('error', assert.ifError);
+
+      pubsub.getSubscriptions(function(err, subscriptions) {
+        assert.ifError(err);
+
+        async.series(
+          // delete existing subscriptions.
+          subscriptions.map(function(subscription) {
+            return subscription.delete.bind(subscription);
+          }),
+          function(err) {
+            assert.ifError(err);
+            // re-subscribe.
+            async.map(subscriptionObjects, function(subscriptionObj, callback) {
+              topic.subscribe(subscriptionObj).on('ready', callback);
+            }, done);
+          });
+      });
+    });
+
+    it('should return Subscription instances for existing subscriptions',
+        function(done) {
+      topic.getSubscriptions(function(err, subscriptions) {
+        assert.ifError(err);
+        assert.strictEqual(subscriptions.length, subscriptionObjects.length);
+        subscriptions.forEach(function(subscription) {
+          assert(subscription instanceof Subscription);
+        });
+        done();
+      });
+    });
+
+    it('should be gettable', function(done) {
+      var sub = topic.subscribe(subscriptionObjects[0]);
+      sub.on('error', assert.ifError);
+      sub.on('ready', function() {
+        assert.equal(sub.name, '/subscriptions/' + env.projectId + '/sub1');
+        sub.close();
+        done();
+      });
+    });
+
+    it('should create a subscription', function(done) {
+      var newSub = topic.subscribe('new-sub');
+      newSub.on('error', assert.ifError);
+      newSub.on('ready', function() {
+        newSub.close();
+        done();
+      });
+    });
+
+    it('should be able to pull and ack', function(done) {
+      topic.publish('hello');
+      var sub = topic.subscribe(subscriptionObjects[0].name);
+      sub.on('error', assert.ifError);
       sub.on('message', function(msg) {
-        sub.ack(msg.ackId, done);
+        sub.ack(msg.ackId, function(err) {
+          assert.ifError(err);
+          sub.close();
+          done();
+        });
       });
-      sub.pull({}, function() {});
+      sub.pull();
     });
   });
 });
