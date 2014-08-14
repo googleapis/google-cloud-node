@@ -176,13 +176,11 @@ describe('storage', function() {
 
     after(function(done) {
       async.parallel(
-        filenames.map(
-          function(filename) {
-            return function(callback) {
-              bucket.remove(filename, callback);
-            };
-          }
-        ), done);
+        filenames.map(function(filename) {
+          return function(callback) {
+            bucket.remove(filename, callback);
+          };
+        }), done);
     });
   });
 });
