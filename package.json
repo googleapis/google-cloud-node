@@ -50,7 +50,7 @@
     "lint": "jshint lib/ regression/ test/",
     "test": "mocha --recursive --reporter spec",
     "regression-test": "mocha regression/ --reporter spec --timeout 10000",
-    "cover": "istanbul cover _mocha -- --timeout 10000 test/* regression/*"
+    "cover": "istanbul cover -x 'regression/*' _mocha -- --timeout 10000 test/* regression/*"
   },
   "license": "Apache 2"
 }
