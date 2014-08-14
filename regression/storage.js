@@ -118,18 +118,18 @@ describe('storage', function() {
       var fileConfig = { filename: pathToLogoFile };
       var copyName = 'CloudLogoCopy';
 
-      // TODO(silvano): Use async.parallel.
       bucket.write(fileName, fileConfig, function(err) {
         assert.ifError(err);
         bucket.copy(fileName, { name: copyName }, function() {
           assert.ifError(err);
-          bucket.remove(copyName, function(err) {
-            assert.ifError(err);
-            bucket.remove(fileName, function(err) {
-              assert.ifError(err);
-              done();
-            });
-          });
+          async.parallel([
+              function(callback) {
+                bucket.remove(fileName, callback);
+              },
+              function(callback) {
+                bucket.remove(copyName, callback);
+              },
+            ], done);
         });
       });
     });
@@ -175,18 +175,14 @@ describe('storage', function() {
     });
 
     after(function(done) {
-      // TODO(silvano): Use Array.prototype.map to generate task array.
-      async.parallel([
-        function(callback) {
-          bucket.remove(filenames[0], callback);
-        },
-        function(callback) {
-          bucket.remove(filenames[1], callback);
-        },
-        function(callback) {
-          bucket.remove(filenames[2], callback);
-        }
-      ], done);
+      async.parallel(
+        filenames.map(
+          function(filename) {
+            return function(callback) {
+              bucket.remove(filename, callback);
+            };
+          }
+        ), done);
     });
   });
 });
