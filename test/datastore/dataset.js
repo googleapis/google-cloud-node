@@ -19,6 +19,7 @@
 'use strict';
 
 var assert = require('assert');
+var ByteBuffer = require('bytebuffer');
 var datastore = require('../../lib').datastore;
 var mockRespGet = require('../testdata/response_get.json');
 var Transaction = require('../../lib/datastore/transaction.js');
@@ -26,47 +27,43 @@ var Transaction = require('../../lib/datastore/transaction.js');
 describe('Dataset', function() {
   it('should get by key', function(done) {
     var ds = new datastore.Dataset({ projectId: 'test' });
-    ds.transaction.makeReq = function(method, proto, callback) {
+    ds.transaction.makeReq = function(method, proto, typ, callback) {
       assert.equal(method, 'lookup');
-      assert.equal(proto.keys.length, 1);
+      assert.equal(proto.key.length, 1);
       callback(null, mockRespGet);
     };
     ds.get(datastore.key('Kind', 123), function(err, entity) {
-      var properties = entity.data;
+      var data = entity.data;
       assert.deepEqual(entity.key.path_, ['Kind', 5732568548769792]);
-      assert.strictEqual(properties.name, 'Burcu');
-      assert.deepEqual(properties.bytes, new Buffer('hello'));
-      assert.strictEqual(properties.done, false);
-      assert.deepEqual(properties.total, 6.7);
-      assert.strictEqual(properties.createdat.getTime(), 978307200000);
+      assert.strictEqual(data.author, 'Silvano');
+      assert.strictEqual(data.isDraft, false);
+      assert.deepEqual(data.publishedAt, new Date(2001, 0, 1));
       done();
     });
   });
 
   it('should multi get by keys', function(done) {
     var ds = new datastore.Dataset({ projectId: 'test' });
-    ds.transaction.makeReq = function(method, proto, callback) {
+    ds.transaction.makeReq = function(method, proto, typ, callback) {
       assert.equal(method, 'lookup');
-      assert.equal(proto.keys.length, 1);
+      assert.equal(proto.key.length, 1);
       callback(null, mockRespGet);
     };
     var key = datastore.key('Kind', 5732568548769792);
     ds.get([key], function(err, entities) {
       var entity = entities[0];
-      var properties = entity.data;
+      var data = entity.data;
       assert.deepEqual(entity.key.path_, ['Kind', 5732568548769792]);
-      assert.strictEqual(properties.name, 'Burcu');
-      assert.deepEqual(properties.bytes, new Buffer('hello'));
-      assert.strictEqual(properties.done, false);
-      assert.deepEqual(properties.total, 6.7);
-      assert.strictEqual(properties.createdat.getTime(), 978307200000);
+      assert.strictEqual(data.author, 'Silvano');
+      assert.strictEqual(data.isDraft, false);
+      assert.deepEqual(data.publishedAt, new Date(2001, 0, 1));
       done();
     });
   });
 
   it('should delete by key', function(done) {
     var ds = new datastore.Dataset({ projectId: 'test' });
-    ds.transaction.makeReq = function(method, proto, callback) {
+    ds.transaction.makeReq = function(method, proto, typ, callback) {
       assert.equal(method, 'commit');
       assert.equal(!!proto.mutation.delete, true);
       callback();
@@ -76,7 +73,7 @@ describe('Dataset', function() {
 
   it('should multi delete by keys', function(done) {
     var ds = new datastore.Dataset({ projectId: 'test' });
-    ds.transaction.makeReq = function(method, proto, callback) {
+    ds.transaction.makeReq = function(method, proto, typ, callback) {
       assert.equal(method, 'commit');
       assert.equal(proto.mutation.delete.length, 2);
       callback();
@@ -89,21 +86,23 @@ describe('Dataset', function() {
 
   it('should save with incomplete key', function(done) {
     var ds = new datastore.Dataset({ projectId: 'test' });
-    ds.transaction.makeReq = function(method, proto, callback) {
+    ds.transaction.makeReq = function(method, proto, typ, callback) {
       assert.equal(method, 'commit');
-      assert.equal(proto.mutation.insertAutoId.length, 1);
+      assert.equal(proto.mutation.insert_auto_id.length, 1);
       callback();
     };
-    var key = datastore.key('Kind', 123, null);
+    var key = datastore.key('Kind', null);
     ds.save({ key: key, data: {} }, done);
   });
 
   it('should save with keys', function(done) {
     var ds = new datastore.Dataset({ projectId: 'test' });
-    ds.transaction.makeReq = function(method, proto, callback) {
+    ds.transaction.makeReq = function(method, proto, typ, callback) {
       assert.equal(method, 'commit');
       assert.equal(proto.mutation.upsert.length, 2);
-      assert.equal(proto.mutation.upsert[0].properties.k.stringValue, 'v');
+      assert.equal(proto.mutation.upsert[0].property[0].name, 'k');
+      assert.equal(
+        proto.mutation.upsert[0].property[0].value.string_value, 'v');
       callback();
     };
     ds.save([
@@ -114,18 +113,16 @@ describe('Dataset', function() {
 
   it('should produce proper allocate IDs req protos', function(done) {
     var ds = new datastore.Dataset({ projectId: 'test' });
-    ds.transaction.makeReq = function(method, proto, callback) {
+    ds.transaction.makeReq = function(method, proto, typ, callback) {
       assert.equal(method, 'allocateIds');
-      assert.equal(proto.keys.length, 1);
-      assert.deepEqual(proto.keys[0], {
-        path :[{kind:'Kind'}]
+      assert.equal(proto.key.length, 1);
+      assert.deepEqual(proto.key[0], {
+        partition_id: null,
+        path_element :[{kind:'Kind', name: null, id: null}]
       });
       callback(null, {
-        keys: [
-          {
-            partitionId: { datasetId: 's~test', namespace: '' },
-            path: [{ kind: 'Kind', id: '123' }]
-          }
+        key: [
+          { path_element: [{ kind: 'Kind', id: 123 }] }
         ]
       });
     };
@@ -150,7 +147,7 @@ describe('Dataset', function() {
       ds = new datastore.Dataset({ projectId: 'test' });
       ds.createTransaction = function() {
         transaction = new Transaction();
-        transaction.makeReq = function(method, proto, callback) {
+        transaction.makeReq = function(method, proto, typ, callback) {
           assert.equal(method, 'beginTransaction');
           callback(null, { transaction: '' });
         };
@@ -183,10 +180,13 @@ describe('Dataset', function() {
     var query;
     var mockResponse = {
       withResults: {
-        batch: { entityResults: mockRespGet.found }
+        batch: { entity_result: mockRespGet.found }
       },
       withResultsAndEndCursor: {
-        batch: { entityResults: mockRespGet.found, endCursor: 'cursor' }
+        batch: {
+          entity_result: mockRespGet.found,
+          end_cursor: new ByteBuffer().writeIString('cursor').flip()
+        }
       },
       withoutResults: mockRespGet
     };
@@ -199,7 +199,7 @@ describe('Dataset', function() {
     describe('errors', function() {
       it('should handle upstream errors', function() {
         var upstreamError = new Error('upstream error.');
-        ds.transaction.makeReq = function(method, proto, callback) {
+        ds.transaction.makeReq = function(method, proto, typ, callback) {
           assert.equal(method, 'runQuery');
           callback(upstreamError);
         };
@@ -210,7 +210,7 @@ describe('Dataset', function() {
       });
 
       it('should handle missing results error', function() {
-        ds.transaction.makeReq = function(method, proto, callback) {
+        ds.transaction.makeReq = function(method, proto, typ, callback) {
           assert.equal(method, 'runQuery');
           callback('simulated-error', mockResponse.withoutResults);
         };
@@ -222,25 +222,24 @@ describe('Dataset', function() {
     });
 
     it('should execute callback with results', function() {
-      ds.transaction.makeReq = function(method, proto, callback) {
+      ds.transaction.makeReq = function(method, proto, typ, callback) {
         assert.equal(method, 'runQuery');
         callback(null, mockResponse.withResults);
       };
 
       ds.runQuery(query, function (err, entities) {
         assert.ifError(err);
-
-        var properties = entities[0].data;
         assert.deepEqual(entities[0].key.path_, ['Kind', 5732568548769792]);
-        assert.strictEqual(properties.name, 'Burcu');
-        assert.deepEqual(properties.bytes, new Buffer('hello'));
-        assert.strictEqual(properties.done, false);
-        assert.deepEqual(properties.total, 6.7);
+
+        var data = entities[0].data;
+        assert.strictEqual(data.author, 'Silvano');
+        assert.strictEqual(data.isDraft, false);
+        assert.deepEqual(data.publishedAt, new Date(2001, 0, 1));
       });
     });
 
     it('should return a new query if results remain', function() {
-      ds.transaction.makeReq = function(method, proto, callback) {
+      ds.transaction.makeReq = function(method, proto, typ, callback) {
         assert.equal(method, 'runQuery');
         callback(null, mockResponse.withResultsAndEndCursor);
       };
