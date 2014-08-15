@@ -124,8 +124,6 @@ describe('Query', function() {
         .filter('name =', 'Burcu')
         .order('-count')
         .groupBy(['count'])
-        .start('start-cursor')
-        .end('end-cursor')
         .offset(5)
         .limit(10);
     assert.deepEqual(entity.queryToQueryProto(q), queryProto);

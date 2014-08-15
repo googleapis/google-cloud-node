@@ -31,9 +31,8 @@ describe('Transaction', function() {
   });
 
   it('should begin', function(done) {
-    transaction.makeReq = function(method, proto, callback) {
+    transaction.makeReq = function(method, proto, respType, callback) {
       assert.equal(method, 'beginTransaction');
-      assert.equal(proto, null);
       callback(null, 'some-id');
     };
     transaction.begin(done);
@@ -41,9 +40,11 @@ describe('Transaction', function() {
 
   it('should rollback', function(done) {
     transaction.id = 'some-id';
-    transaction.makeReq = function(method, proto, callback) {
+    transaction.makeReq = function(method, proto, respType, callback) {
       assert.equal(method, 'rollback');
-      assert.deepEqual(proto, { transaction: 'some-id' });
+      assert.equal(
+        proto.transaction.toBase64(),
+        new Buffer('some-id').toString('base64'));
       callback();
     };
     transaction.rollback(function() {
@@ -54,9 +55,11 @@ describe('Transaction', function() {
 
   it('should commit', function(done) {
     transaction.id = 'some-id';
-    transaction.makeReq = function(method, proto, callback) {
+    transaction.makeReq = function(method, proto, respType, callback) {
       assert.equal(method, 'commit');
-      assert.deepEqual(proto, { transaction: 'some-id' });
+      assert.equal(
+        proto.transaction.toBase64(),
+        new Buffer('some-id').toString('base64'));
       callback();
     };
     transaction.commit(function() {
