@@ -33,39 +33,71 @@ var blogPostMetadata = {
 var keyProto = {
   partitionId: {
     datasetId: 's~bamboo-shift-xxx',
-    namespace: ''
+    namespace: null
   },
-  path: [
+  path_element: [
     {
       kind: 'Kind',
-      id: '4790047639339008'
+      id: '4790047639339008',
+      name: null
     }
   ]
 };
 
 var entityProto = {
-  property: [
-    { name: 'linkedTo',      value: { key_value: keyProto } },
-    { name: 'name',          value: { string_value: 'Name' } },
-    { name: 'flagged',       value: { boolean_value: true } },
-    { name: 'count',         value: { integer_value: 5 } },
-    { name: 'total', value: { double_value: 5.42 } },
-    {
-      name: 'author',
-      value: { entity_value: {
-        property: [
-          { name: 'name', value: { string_value: 'Burcu Dogan' } }
-        ]
-      }}
-    },
-    {
-      name: 'list',
-      value: [
-        { integer_value: 6 },
-        { boolean_value: false}
-      ]
+  "property": [{
+    "name": "linkedTo",
+    "value": {
+        "key_value": {
+            "path_element": [{
+                "kind": "Kind",
+                "name": "another"
+            }]
+        }
     }
-  ]
+  }, {
+      "name": "name",
+      "value": {
+          "string_value": "Some name"
+      }
+  }, {
+      "name": "flagged",
+      "value": {
+          "boolean_value": false
+      }
+  }, {
+      "name": "count",
+      "value": {
+          "integer_value": 5
+      }
+  }, {
+      "name": "total",
+      "value": {
+          "double_value": 7.8
+      }
+  }, {
+      "name": "author",
+      "value": {
+          "entity_value": {
+              "property": [{
+                  "name": "name",
+                  "value": {
+                      "string_value": "Burcu Dogan"
+                  }
+              }]
+          },
+          "indexed": false
+      }
+  }, {
+      "name": "list",
+      "value": {
+          "list_value": [{
+              "integer_value": 6
+          }, {
+              "boolean_value": false
+          }]
+      }
+  }]
 };
 
 var queryFilterProto = {
@@ -229,15 +261,13 @@ describe('entityFromEntityProto', function() {
   it('should support boolean, integer, double, string, entity and list values',
       function(done) {
     var obj = entity.entityFromEntityProto(entityProto);
-    assert.strictEqual(
-        obj.createdAt.getTime(), new Date('2001-01-01').getTime());
-    assert.deepEqual(obj.linkedTo, datastore.key('Kind', 4790047639339008));
-    assert.strictEqual(obj.name, 'Name');
-    assert.strictEqual(obj.flagged, true);
+    assert.deepEqual(obj.linkedTo, datastore.key('Kind', 'another'));
+    assert.strictEqual(obj.name, 'Some name');
+    assert.strictEqual(obj.flagged, false);
     assert.strictEqual(obj.count, 5);
-    assert.strictEqual(obj.total, 5.42);
+    assert.strictEqual(obj.total, 7.8);
     assert.strictEqual(obj.author.name, 'Burcu Dogan');
-    assert.deepEqual(obj.list[0], 6);
+    assert.strictEqual(obj.list[0], 6);
     assert.strictEqual(obj.list[1], false);
     done();
   });
