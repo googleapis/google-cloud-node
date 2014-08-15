@@ -29,7 +29,7 @@ describe('datastore', function() {
     var post = {
       title: 'How to make the perfect pizza in your grill',
       tags: ['pizza', 'grill'],
-      publishedAt: Date('2001-01-01T00:00:00.000Z'),
+      publishedAt: new Date(2001, 0, 1),
       author: 'Silvano',
       isDraft: false,
       wordCount: 400,
