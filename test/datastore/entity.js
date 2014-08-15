@@ -30,71 +30,57 @@ var blogPostMetadata = {
   isDraft: { kind: Boolean, indexed: true }
 };
 
-var keyProto = {
-  partitionId: {
-    datasetId: 's~bamboo-shift-xxx',
-    namespace: null
-  },
-  path_element: [
-    {
-      kind: 'Kind',
-      id: '4790047639339008',
-      name: null
-    }
-  ]
-};
-
 var entityProto = {
-  "property": [{
-    "name": "linkedTo",
-    "value": {
-        "key_value": {
-            "path_element": [{
-                "kind": "Kind",
-                "name": "another"
+  'property': [{
+    'name': 'linkedTo',
+    'value': {
+        'key_value': {
+            'path_element': [{
+                'kind': 'Kind',
+                'name': 'another'
             }]
         }
     }
   }, {
-      "name": "name",
-      "value": {
-          "string_value": "Some name"
+      'name': 'name',
+      'value': {
+          'string_value': 'Some name'
       }
   }, {
-      "name": "flagged",
-      "value": {
-          "boolean_value": false
+      'name': 'flagged',
+      'value': {
+          'boolean_value': false
       }
   }, {
-      "name": "count",
-      "value": {
-          "integer_value": 5
+      'name': 'count',
+      'value': {
+          'integer_value': 5
       }
   }, {
-      "name": "total",
-      "value": {
-          "double_value": 7.8
+      'name': 'total',
+      'value': {
+          'double_value': 7.8
       }
   }, {
-      "name": "author",
-      "value": {
-          "entity_value": {
-              "property": [{
-                  "name": "name",
-                  "value": {
-                      "string_value": "Burcu Dogan"
+      'name': 'author',
+      'value': {
+          'entity_value': {
+              'property': [{
+                  'name': 'name',
+                  'value': {
+                      'string_value': 'Burcu Dogan'
                   }
               }]
           },
-          "indexed": false
+          'indexed': false
       }
   }, {
-      "name": "list",
-      "value": {
-          "list_value": [{
-              "integer_value": 6
+      'name': 'list',
+      'value': {
+          'list_value': [{
+              'integer_value': 6
           }, {
-              "boolean_value": false
+              'boolean_value': false
           }]
       }
   }]
