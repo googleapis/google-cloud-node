@@ -37,7 +37,7 @@ describe('Dataset', function() {
       assert.deepEqual(entity.key.path_, ['Kind', 5732568548769792]);
       assert.strictEqual(data.author, 'Silvano');
       assert.strictEqual(data.isDraft, false);
-      assert.deepEqual(data.publishedAt, new Date(2001, 0, 1));
+      assert.deepEqual(data.publishedAt, new Date(978336000000));
       done();
     });
   });
@@ -56,7 +56,7 @@ describe('Dataset', function() {
       assert.deepEqual(entity.key.path_, ['Kind', 5732568548769792]);
       assert.strictEqual(data.author, 'Silvano');
       assert.strictEqual(data.isDraft, false);
-      assert.deepEqual(data.publishedAt, new Date(2001, 0, 1));
+      assert.deepEqual(data.publishedAt, new Date(978336000000));
       done();
     });
   });
@@ -234,7 +234,7 @@ describe('Dataset', function() {
         var data = entities[0].data;
         assert.strictEqual(data.author, 'Silvano');
         assert.strictEqual(data.isDraft, false);
-        assert.deepEqual(data.publishedAt, new Date(2001, 0, 1));
+        assert.deepEqual(data.publishedAt, new Date(978336000000));
       });
     });
 
