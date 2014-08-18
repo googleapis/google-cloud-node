@@ -1,43 +1,68 @@
 {
-  "found":[
-    {
-      "entity":{
-        "key":{
-          "partitionId":{
-            "datasetId":"s~bamboo-shift-xxx",
-            "namespace":""
-          },
-          "path":[
-            {
-              "kind":"Kind",
-              "id":"5732568548769792"
-            }
-          ]
-        },
-        "properties":{
-          "name":{
-            "stringValue":"Burcu"
-          },
-          "bytes":{
-            "blobValue":"aGVsbG8="
-          },
-          "done":{
-            "booleanValue":false
-          },
-          "total":{
-            "doubleValue":6.7
-          },
-          "createdat":{
-            "dateTimeValue":"2001-01-01T00:00:00.00Z"
-          }
+    "found": [{
+        "entity": {
+            "key": {
+                "partition_id": {
+                    "dataset_id": "s~bamboo-shift-504",
+                    "namespace": null
+                },
+                "path_element": [{
+                    "kind": "Kind",
+                    "id": 5732568548769792,
+                    "name": null
+                }]
+            },
+            "property": [{
+                "name": "publishedAt",
+                "value": {
+                    "boolean_value": null,
+                    "integer_value": null,
+                    "double_value": null,
+                    "timestamp_microseconds_value": 978336000000000,
+                    "key_value": null,
+                    "blob_key_value": null,
+                    "string_value": null,
+                    "blob_value": null,
+                    "entity_value": null,
+                    "list_value": [],
+                    "meaning": null,
+                    "indexed": true
+                }
+            }, {
+                "name": "author",
+                "value": {
+                    "boolean_value": null,
+                    "integer_value": null,
+                    "double_value": null,
+                    "timestamp_microseconds_value": null,
+                    "key_value": null,
+                    "blob_key_value": null,
+                    "string_value": "Silvano",
+                    "blob_value": null,
+                    "entity_value": null,
+                    "list_value": [],
+                    "meaning": null,
+                    "indexed": true
+                }
+            }, {
+                "name": "isDraft",
+                "value": {
+                    "boolean_value": false,
+                    "integer_value": null,
+                    "double_value": null,
+                    "timestamp_microseconds_value": null,
+                    "key_value": null,
+                    "blob_key_value": null,
+                    "string_value": null,
+                    "blob_value": null,
+                    "entity_value": null,
+                    "list_value": [],
+                    "meaning": null,
+                    "indexed": true
+                }
+            }]
         }
-      }
-    }
-  ],
-  "missing":[
-
-  ],
-  "deferred":[
-
-  ]
+    }],
+    "missing": [],
+    "deferred": []
 }
