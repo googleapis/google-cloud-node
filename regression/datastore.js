@@ -23,13 +23,24 @@ var env = require('./env.js');
 var assert = require('assert');
 var datastore = require('../lib/datastore');
 var ds = new datastore.Dataset(env);
+var entity = require('../lib/datastore/entity.js');
 
 describe('datastore', function() {
+
+  it('should allocate IDs', function(done) {
+    ds.allocateIds(datastore.key('Kind', null), 10, function(err, keys) {
+      assert.ifError(err);
+      assert.equal(keys.length, 10);
+      assert.equal(entity.isKeyComplete(keys[0]), true);
+      done();
+    });
+  });
+
   describe('create, retrieve and delete', function() {
     var post = {
       title: 'How to make the perfect pizza in your grill',
       tags: ['pizza', 'grill'],
-      publishedAt: Date('2001-01-01T00:00:00.000Z'),
+      publishedAt: new Date(2001, 0, 1),
       author: 'Silvano',
       isDraft: false,
       wordCount: 400,
