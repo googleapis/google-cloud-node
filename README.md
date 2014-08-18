@@ -375,11 +375,16 @@ bucket.copy(filename, { bucket: 'other-bucket', name: 'other-filename' }, callba
 bucket.remove(filename, callback);
 ~~~~
 
-### Google Cloud Pub/Sub
+### Google Cloud Pub/Sub (experimental)
 
 Google Cloud Pub/Sub is a reliable, many-to-many, asynchronous messaging
 service from Google Cloud Platform. A detailed overview is available on
 [Pub/Sub docs](https://developers.google.com/pubsub/overview).
+
+Note: Google Cloud Pub/Sub API is not publicly available yet and the
+client library we provide is currently experimental. We may break the
+interfaces anytime and/or make significant changes to the API.
+Use the Pub/Sub client at your own risk.
 
 #### Configuration
 
