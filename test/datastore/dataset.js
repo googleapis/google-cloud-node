@@ -145,7 +145,7 @@ describe('Dataset', function() {
 
     beforeEach(function() {
       ds = new datastore.Dataset({ projectId: 'test' });
-      ds.createTransaction = function() {
+      ds.createTransaction_ = function() {
         transaction = new Transaction();
         transaction.makeReq = function(method, proto, typ, callback) {
           assert.equal(method, 'beginTransaction');
@@ -191,7 +191,7 @@ describe('Dataset', function() {
       withoutResults: mockRespGet
     };
 
-    beforeEach(function () {
+    beforeEach(function() {
       ds = new datastore.Dataset({ projectId: 'test' });
       query = ds.createQuery('Kind');
     });

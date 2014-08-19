@@ -27,7 +27,7 @@ describe('Transaction', function() {
 
   beforeEach(function() {
     ds = new datastore.Dataset({ projectId: 'test' });
-    transaction = ds.createTransaction(null, 'test');
+    transaction = ds.createTransaction_(null, 'test');
   });
 
   it('should begin', function(done) {
