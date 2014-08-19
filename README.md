@@ -381,10 +381,11 @@ Google Cloud Pub/Sub is a reliable, many-to-many, asynchronous messaging
 service from Google Cloud Platform. A detailed overview is available on
 [Pub/Sub docs](https://developers.google.com/pubsub/overview).
 
-Note: Google Cloud Pub/Sub API is not publicly available yet and the
-client library we provide is currently experimental. We may break the
-interfaces anytime and/or make significant changes to the API.
-Use the Pub/Sub client at your own risk.
+Note: Google Cloud Pub/Sub API is available as a Limited Preview and the
+client library we provide is currently experimental. The API and/or the
+client might be changed in backward-incompatible ways.
+This API is not subject to any SLA or deprecation policy. Request to be
+whitelisted to use it by filling the [Limited Preview application form](https://docs.google.com/a/google.com/forms/d/1IQY4LAbISLa86uxRv2dKAzkeWOyNZda_tUn7xgVYeoE/viewform).
 
 #### Configuration
 
