@@ -312,17 +312,18 @@ var gcloud = require('gcloud'),
 
 ~~~~ js
 bucket.list(function(err, files, nextQuery) {
-    // if more results, nextQuery will be non-null.
+    // nextQuery is not null if there are more results.
+    if (nextQuery) {
+        bucket.list(nextQuery, callback);
+    }
 });
 ~~~~
 
-Or optionally, you can provide a query. The following call will limit the
-number of results to 5.
+You can also provide a query. The following call will limit the number of
+results to 5.
 
 ~~~~ js
-bucket.list({ maxResults: 5 }, function(err, files, nextQuery) {
-    // if more results, nextQuery will be non-null.
-});
+bucket.list({ maxResults: 5 }, function(err, files, nextQuery) {});
 ~~~~
 
 #### Stat Files
@@ -330,11 +331,10 @@ bucket.list({ maxResults: 5 }, function(err, files, nextQuery) {
 You can retrieve file metadata by stating the file.
 
 ~~~~ js
-bucket.stat(filename, function(err, metadata) {
-});
+bucket.stat(filename, function(err, metadata) {});
 ~~~~
 
-#### Read file contents
+#### Read File Contents
 
 Buckets provive a read stream to the file contents. You can pipe it to a write
 stream, or listening 'data' events to read a file's contents. The following
@@ -342,55 +342,76 @@ example will create a readable stream to the file identified by filename,
 and write the file contents to `/path/to/file`.
 
 ~~~~ js
-bucket.createReadStream(filename)
-    .pipe(fs.createWriteStream('/path/to/file'))
-    .on('error', console.log)
-    .on('complete', console.log);
+// Pipe a bucket file's contents to a writable stream. In this case, a local
+// file "local-file-path" will be created.
+bucket.createReadStream('remote-file-name')
+    .pipe(fs.createWriteStream('local-file-path'))
+    .on('error', function(err) {})
+    .on('finish', function() {});
 ~~~~
 
-#### Write file contents and metadata
+#### Write File Contents and Metadata
 
 A bucket object allows you to write a readable stream, a file and a buffer
 as file contents.
 
 ~~~~ js
 // Uploads file.pdf.
-bucket.write(name, {
-    filename: '/path/to/file.pdf',
-    metadata: { /* metadata properties */ }
-}, callback);
-
-// Uploads the readable stream.
-bucket.write(name, {
-    data: anyReadableStream,
-    metadata: { /* metadata properties */ }
-}, callback);
-
-// Uploads 'Hello World' as file contents.
-// data could be any string or buffer.
-bucket.write(name, { data: 'Hello World' }, callback);
+fs.createReadStream('file.pdf')
+    .pipe(bucket.createWriteStream('MyPDFFile', {/* optional metadata. */}))
+    .on('error', function(err) {})
+    .on('complete', function(fileObject) {});
 ~~~~
 
-#### Copy files
-
-You can copy an existing file. If no bucket name provided for the destination
-file, current bucket name will be used.
+You can also call `bucket.write` to send String or Buffer objects, along with
+metadata.
 
 ~~~~ js
-bucket.copy(filename, { bucket: 'other-bucket', name: 'other-filename' }, callback);
+var data;
+
+// The message can be any string or Buffer.
+data = 'Hello World';
+bucket.write('HelloMessageFile', data, function(err, fileObject) {});
+
+// To pass along metadata, embed the body of your message in a `data` property.
+data = {
+  data: 'Hello World',
+  metadata: {
+    // ...
+  }
+};
+bucket.write('HelloMessageFile', data, function(err, fileObject) {});
 ~~~~
 
-#### Remove files
+#### Copy Files
+
+You can copy an existing file. If no bucket name is provided for the destination
+file, the current bucket name will be used.
 
 ~~~~ js
-bucket.remove(filename, callback);
+bucket.copy('HelloMessageFile', {
+    bucket: 'other-bucket',
+    name: 'NewHelloMessageFileName'
+}, function(err) {});
 ~~~~
 
-### Google Cloud Pub/Sub
+#### Remove Files
+
+~~~~ js
+bucket.remove('HelloMessageFile', function(err) {});
+~~~~
+
+### Google Cloud Pub/Sub (experimental)
 
 Google Cloud Pub/Sub is a reliable, many-to-many, asynchronous messaging
 service from Google Cloud Platform. A detailed overview is available on
 [Pub/Sub docs](https://developers.google.com/pubsub/overview).
+
+Note: Google Cloud Pub/Sub API is available as a Limited Preview and the
+client library we provide is currently experimental. The API and/or the
+client might be changed in backward-incompatible ways.
+This API is not subject to any SLA or deprecation policy. Request to be
+whitelisted to use it by filling the [Limited Preview application form](https://docs.google.com/a/google.com/forms/d/1IQY4LAbISLa86uxRv2dKAzkeWOyNZda_tUn7xgVYeoE/viewform).
 
 #### Configuration
 
