@@ -18,39 +18,11 @@
 
 'use strict';
 
-var entity = {
-  Int: function(val) {
-    entity.intCalledWith = val;
-  },
-  Double: function(val) {
-    entity.doubleCalledWith = val;
-  },
-  intCalledWith: null,
-  doubleCalledWith: null
-};
-
 var assert = require('assert');
-var datastore = require('sandboxed-module')
-    .require('../../lib/datastore/index.js', {
-      requires: {
-        './entity': entity
-      }
-    });
+var datastore = require('../../lib/datastore/index.js');
 
 describe('Datastore', function() {
   it('should expose Dataset class', function() {
     assert.equal(typeof datastore.Dataset, 'function');
-  });
-
-  it('should expose Int builder', function() {
-    var anInt = 7;
-    datastore.int(anInt);
-    assert.equal(entity.intCalledWith, anInt);
-  });
-
-  it('should expose Double builder', function() {
-    var aDouble = 7.0;
-    datastore.double(aDouble);
-    assert.equal(entity.doubleCalledWith, aDouble);
   });
 });
