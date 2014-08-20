@@ -3,7 +3,7 @@
 Node idiomatic client for Google Cloud services. Work in progress... Watch the repo for notifications.
 
 ![Travis Build Status](https://travis-ci.org/GoogleCloudPlatform/gcloud-node.svg)
-[![Coverage Status](https://img.shields.io/coveralls/GoogleCloudPlatform/gcloud-node.svg)](https://coveralls.io/r/GoogleCloudPlatform/gcloud-node?branch=origin%2Fmaster)
+[![Coverage Status](https://img.shields.io/coveralls/GoogleCloudPlatform/gcloud-node.svg)](https://coveralls.io/r/GoogleCloudPlatform/gcloud-node?branch=master)
 
 This client supports the following Google Cloud services:
 
