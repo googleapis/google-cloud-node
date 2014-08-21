@@ -30,9 +30,20 @@ describe('Query', function() {
       namespace: 'ns'
     });
 
+  it('should use undefined for all falsy namespace values', function() {
+    [
+      ds.createQuery('', 'Kind'),
+      ds.createQuery(null, 'Kind'),
+      ds.createQuery(undefined, 'Kind'),
+      ds.createQuery(0, 'Kind')
+    ].forEach(function(query) {
+      assert.strictEqual(query.namespace, undefined);
+    });
+  });
+
   it('should use default namespace if none is specified', function(done) {
     var q = ds.createQuery(['kind1']);
-    assert.equal(q.namespace, '');
+    assert.strictEqual(q.namespace, undefined);
     done();
   });
 
@@ -46,7 +57,7 @@ describe('Query', function() {
     var q = ds.createQuery(['kind1', 'kind2']);
     var qNS = dsWithNs.createQuery(['kind1', 'kind2']);
 
-    assert.strictEqual(q.namespace, '');
+    assert.strictEqual(q.namespace, undefined);
     assert.equal(q.kinds[0], 'kind1');
     assert.equal(q.kinds[1], 'kind2');
 
