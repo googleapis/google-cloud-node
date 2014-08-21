@@ -29,6 +29,17 @@ describe('Dataset', function() {
     var ds = new datastore.Dataset({ projectId: 'test', namespace: 'my-ns' });
     var key = ds.key('Company', 1);
     assert.equal(key.namespace_, 'my-ns');
+    assert.deepEqual(key.path_, ['Company', 1]);
+  });
+
+  it('should allow namespace specification when creating a key', function() {
+    var ds = new datastore.Dataset({ projectId: 'test' });
+    var key = ds.key({
+      namespace: 'custom-ns',
+      path: ['Company', 1]
+    });
+    assert.equal(key.namespace_, 'custom-ns');
+    assert.deepEqual(key.path_, ['Company', 1])
   });
 
   it('should get by key', function(done) {
