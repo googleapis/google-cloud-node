@@ -39,7 +39,7 @@ describe('Dataset', function() {
       path: ['Company', 1]
     });
     assert.equal(key.namespace_, 'custom-ns');
-    assert.deepEqual(key.path_, ['Company', 1])
+    assert.deepEqual(key.path_, ['Company', 1]);
   });
 
   it('should get by key', function(done) {
@@ -189,6 +189,42 @@ describe('Dataset', function() {
         };
         done();
       }, assert.ifError);
+    });
+  });
+
+  describe('createQuery', function() {
+    var ds;
+    var dsWithNs;
+
+    beforeEach(function() {
+      ds = new datastore.Dataset({ projectId: 'test' });
+      dsWithNs = new datastore.Dataset({
+        projectId: 'test',
+        namespace: 'my-ns'
+      });
+    });
+
+    it('should not include a namespace on a ns-less dataset', function() {
+      var query = ds.createQuery('Kind');
+      assert.equal(query.namespace, false);
+    });
+
+    it('should scope query to namespace', function() {
+      var query = dsWithNs.createQuery('Kind');
+      assert.equal(query.namespace, 'my-ns');
+    });
+
+    it('should allow control over namespace and kinds', function() {
+      var queryFromDs = ds.createQuery('my-ns', 'Kind');
+      assert.equal(queryFromDs.namespace, 'my-ns');
+
+      var queryFromDsWithNs = dsWithNs.createQuery('Kind');
+      assert.equal(queryFromDsWithNs.namespace, 'my-ns');
+    });
+
+    it('should allow removal of namespace', function() {
+      var query = dsWithNs.createQuery(null, 'Kind');
+      assert.equal(query.namespace, false);
     });
   });
 
