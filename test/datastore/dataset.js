@@ -206,7 +206,7 @@ describe('Dataset', function() {
 
     it('should not include a namespace on a ns-less dataset', function() {
       var query = ds.createQuery('Kind');
-      assert.equal(query.namespace, false);
+      assert.equal(query.namespace, undefined);
     });
 
     it('should scope query to namespace', function() {
@@ -223,8 +223,8 @@ describe('Dataset', function() {
     });
 
     it('should allow removal of namespace', function() {
-      var query = dsWithNs.createQuery(null, 'Kind');
-      assert.equal(query.namespace, false);
+      var query = dsWithNs.createQuery(undefined, 'Kind');
+      assert.strictEqual(query.namespace, undefined);
     });
   });
 
