@@ -77,7 +77,11 @@ If you're running this client on Google Compute Engine, you need to construct a 
 ~~~~ js
 var gcloud = require('gcloud'),
     datastore = gcloud.datastore,
-    ds = new datastore.Dataset({ projectId: YOUR_PROJECT_ID });
+    ds = new datastore.Dataset({
+        projectId: YOUR_PROJECT_ID,
+        /* namespace is optional, if not provided the default is used. */
+        namespace: 'namespace1'
+    });
 ~~~~
 
 Elsewhere, initiate with project ID and private key downloaded from Developer's Console.
@@ -86,6 +90,8 @@ Elsewhere, initiate with project ID and private key downloaded from Developer's 
 var gcloud = require('gcloud'),
     ds = new gcloud.datastore.Dataset({
         projectId: YOUR_PROJECT_ID,
+        /* namespace is optional, if not provided the default is used. */
+        namespace: 'namespace1',
         keyFilename: '/path/to/the/key.json'
     });
 ~~~~
@@ -99,12 +105,12 @@ TODO
 Get operations require a valid key to retrieve the key identified entity from Datastore. Skip to the "Querying" section if you'd like to learn more about querying against Datastore.
 
 ~~~~ js
-ds.get(datastore.key('Company', 123), function(err, entity) {});
+ds.get(ds.key('Company', 123), function(err, entity) {});
 
 // alternatively, you can retrieve multiple entities at once.
 ds.get([
-    datastore.key('Company', 123),
-    datastore.key('Product', 'Computer')
+    ds.key('Company', 123),
+    ds.key('Product', 'Computer')
 ], function(err, entities) {});
 ~~~~
 
@@ -114,15 +120,15 @@ To learn more about keys and incomplete keys, skip to the Keys section.
 
 ~~~~ js
 ds.save({
-    key: datastore.key('Company', null), data: {/*...*/}
+    key: ds.key('Company', null), data: {/*...*/}
 }, function(err, key) {
     // First arg is an incomplete key for Company kind.
     // console.log(key) will output ['Company', 599900452312].
 });
 // alternatively, you can save multiple entities at once.
 ds.save([
-    { key: datastore.key('Company', 123), data: {/*...*/} },
-    { key: datastore.key('Product', 'Computer'), data: {/*...*/} }
+    { key: ds.key('Company', 123), data: {/*...*/} },
+    { key: ds.key('Product', 'Computer'), data: {/*...*/} }
 ], function(err, keys) {
     // if the first key was incomplete, keys[0] will return the generated key.
 });
@@ -136,10 +142,10 @@ ds.delete(['Company', 599900452312], function(err) {});
 // alternatively, you can delete multiple entities of different
 // kinds at once.
 ds.delete([
-    datastore.key('Company', 599900452312),
-    datastore.key('Company', 599900452315),
-    datastore.key('Office', 'mtv'),
-    datastore.key('Company', 123, 'Employee', 'jbd')
+    ds.key('Company', 599900452312),
+    ds.key('Company', 599900452315),
+    ds.key('Office', 'mtv'),
+    ds.key('Company', 123, 'Employee', 'jbd')
 ], function(err) {});
 ~~~~
 
@@ -178,14 +184,14 @@ stored as properties is not currently supported.
 
 ~~~~ js
 var q = ds.createQuery('Company')
-    .filter('__key__ =', datastore.key('Company', 'Google'))
+    .filter('__key__ =', ds.key('Company', 'Google'))
 ~~~~
 
 In order to filter by ancestors, use `hasAncestor` helper.
 
 ~~~ js
 var q = ds.createQuery('Child')
-    .hasAncestor(datastore.key('Parent', 123));
+    .hasAncestor(ds.key('Parent', 123));
 ~~~
 
 ##### Sorting
@@ -226,19 +232,24 @@ You can generate IDs without creating entities. The following call will create
 100 new IDs from the Company kind which exists under the default namespace.
 
 ~~~~ js
-ds.allocateIds(datastore.key('Company', null), 100, function(err, keys) {
+ds.allocateIds(ds.key('Company', null), 100, function(err, keys) {
 
 });
 ~~~~
 
-You may prefer to create IDs from a non-default namespace by providing
-an incomplete key with a namespace. Similar to the previous example, the
-call below will create 100 new IDs, but from the Company kind that exists
+You may prefer to create IDs from a non-default namespace.
+
+Initialize a `Dataset` object with a namespace and allocate IDS.
+Similar to the previous example, the call below will create 100
+new IDs, but from the Company kind that exists
 under the "ns-test" namespace.
 
 ~~~~ js
-var incompleteKey = datastore.key('ns-test', 'Company', null);
-ds.allocateIds(incompleteKey, 100, function(err, keys) {
+var ds = new gcloud.datastore.Dataset({
+    // ...
+    namespace: 'ns-test'
+});
+ds.allocateIds(ds.key('Company', null), 100, function(err, keys) {
 });
 ~~~~
 

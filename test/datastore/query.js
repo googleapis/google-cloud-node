@@ -26,29 +26,10 @@ var queryProto = require('../testdata/proto_query.json');
 describe('Query', function() {
   var ds = new datastore.Dataset({ projectId: 'my-project-id' });
 
-  it('should use default namespace if none is specified', function(done) {
-    var q = ds.createQuery(['kind1']);
-    assert.equal(q.namespace, '');
-    done();
-  });
-
-  it('should use support custom namespaces', function(done) {
-    var q = ds.createQuery('ns', ['kind1']);
-    assert.equal(q.namespace, 'ns');
-    done();
-  });
-
   it('should support querying multiple kinds', function(done) {
     var q = ds.createQuery(['kind1', 'kind2']);
-    var qNS = ds.createQuery('ns', ['kind1', 'kind2']);
-
-    assert.strictEqual(q.namespace, '');
     assert.equal(q.kinds[0], 'kind1');
     assert.equal(q.kinds[1], 'kind2');
-
-    assert.equal(qNS.namespace, 'ns');
-    assert.equal(qNS.kinds[0], 'kind1');
-    assert.equal(qNS.kinds[1], 'kind2');
     done();
   });
 
@@ -120,7 +101,7 @@ describe('Query', function() {
   it('should be converted to a query proto successfully', function(done) {
     var q = ds.createQuery(['Kind'])
         .select(['name', 'count'])
-        .filter('count >=', datastore.int(5))
+        .filter('count >=', ds.int(5))
         .filter('name =', 'Burcu')
         .order('-count')
         .groupBy(['count'])

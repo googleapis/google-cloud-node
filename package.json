@@ -46,7 +46,6 @@
     "istanbul": "^0.3.0",
     "jshint": "^2.5.2",
     "mocha": "^1.21.3",
-    "sandboxed-module": "^1.0.1",
     "tmp": "0.0.24",
     "coveralls": "^2.11.1"
   },
