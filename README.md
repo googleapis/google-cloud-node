@@ -223,7 +223,9 @@ var q = ds.createQuery('Company')
 #### Allocating IDs (ID generation)
 
 You can generate IDs without creating entities. The following call will create
-100 new IDs from the Company kind which exists under the dataset's namespace.
+100 new IDs from the Company kind which exists under the dataset's namespace. If
+no namespace was provided when the dataset was created, the default namespace
+will be used.
 
 ~~~~ js
 ds.allocateIds(ds.key('Company', null), 100, function(err, keys) {
