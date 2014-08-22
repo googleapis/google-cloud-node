@@ -37,13 +37,13 @@ describe('Query', function() {
       ds.createQuery(undefined, 'Kind'),
       ds.createQuery(0, 'Kind')
     ].forEach(function(query) {
-      assert.strictEqual(query.namespace, undefined);
+      assert.strictEqual(query.namespace, null);
     });
   });
 
   it('should use default namespace if none is specified', function(done) {
     var q = ds.createQuery(['kind1']);
-    assert.strictEqual(q.namespace, undefined);
+    assert.strictEqual(q.namespace, null);
     done();
   });
 
@@ -57,7 +57,7 @@ describe('Query', function() {
     var q = ds.createQuery(['kind1', 'kind2']);
     var qNS = dsWithNs.createQuery(['kind1', 'kind2']);
 
-    assert.strictEqual(q.namespace, undefined);
+    assert.strictEqual(q.namespace, null);
     assert.equal(q.kinds[0], 'kind1');
     assert.equal(q.kinds[1], 'kind2');
 
