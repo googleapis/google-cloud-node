@@ -57,7 +57,7 @@ before(function(done) {
   });
 });
 
-describe('Topic', function() {
+describe.skip('Topic', function() {
   it('should be listed', function(done) {
     conn.listTopics(function(err, topics) {
       assert(topics.length, 3);
@@ -95,7 +95,7 @@ describe('Topic', function() {
   });
 });
 
-describe('Subscription', function() {
+describe.skip('Subscription', function() {
   before(function(done) {
     var createFn = function(item, callback) {
       conn.createSubscription({
