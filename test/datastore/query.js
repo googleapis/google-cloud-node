@@ -30,9 +30,11 @@ describe('Query', function() {
       new Query('', 'Kind'),
       new Query(null, 'Kind'),
       new Query(undefined, 'Kind'),
-      new Query(0, 'Kind')
+      new Query(0, 'Kind'),
+      new Query('Kind')
     ].forEach(function(query) {
       assert.strictEqual(query.namespace, null);
+      assert.equal(query.kinds, 'Kind');
     });
   });
 
@@ -42,7 +44,7 @@ describe('Query', function() {
   });
 
   it('should support querying multiple kinds', function() {
-    var query = new Query(null, ['kind1', 'kind2']);
+    var query = new Query(['kind1', 'kind2']);
     var queryWithNamespace = new Query('ns', ['kind1', 'kind2']);
 
     assert.strictEqual(query.namespace, null);
@@ -55,14 +57,14 @@ describe('Query', function() {
   });
 
   it('should support field selection by field name', function() {
-    var query = new Query(null, ['kind1'])
+    var query = new Query(['kind1'])
         .select(['name', 'title']);
     assert.equal(query.selectVal[0], 'name');
     assert.equal(query.selectVal[1], 'title');
   });
 
   it('should support ancestor filtering', function() {
-    var query = new Query(null, ['kind1'])
+    var query = new Query(['kind1'])
         .hasAncestor(['kind2', 123]);
     assert.equal(query.filters[0].name, '__key__');
     assert.equal(query.filters[0].op, 'HAS_ANCESTOR');
@@ -71,7 +73,7 @@ describe('Query', function() {
 
   it('should support multiple filters', function() {
     var now = new Date();
-    var query = new Query(null, ['kind1'])
+    var query = new Query(['kind1'])
         .filter('date <=', now)
         .filter('name =', 'Title')
         .filter('count >', 20);
@@ -90,7 +92,7 @@ describe('Query', function() {
   });
 
   it('should support ordering asc and desc', function() {
-    var query = new Query(null, ['kind1'])
+    var query = new Query(['kind1'])
         .order('+name')
         .order('-count');
     assert.equal(query.orders[0].name, 'name');
@@ -101,7 +103,7 @@ describe('Query', function() {
 
   it('should throw error is invalid sort sign is provided', function() {
     assert.throws(function() {
-      new Query(null, ['kind1']).order('*name');
+      new Query(['kind1']).order('*name');
     }, /Invalid order pattern/);
   });
 
@@ -122,7 +124,7 @@ describe('Query', function() {
   });
 
   it('should be converted to a query proto successfully', function() {
-    var query = new Query(null, ['Kind'])
+    var query = new Query(['Kind'])
         .select(['name', 'count'])
         .filter('count >=', datastore.int(5))
         .filter('name =', 'Burcu')
