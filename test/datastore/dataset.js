@@ -223,8 +223,8 @@ describe('Dataset', function() {
     });
 
     it('should allow removal of namespace', function() {
-      var query = dsWithNs.createQuery(undefined, 'Kind');
-      assert.strictEqual(query.namespace, undefined);
+      var query = dsWithNs.createQuery(null, 'Kind');
+      assert.strictEqual(query.namespace, null);
     });
   });
 
