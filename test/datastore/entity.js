@@ -159,26 +159,32 @@ describe('keyFromKeyProto', function() {
 
   it('should handle keys hierarchically', function(done) {
     var key = entity.keyFromKeyProto(protoH);
-    assert.deepEqual(key, datastore.key('Test', 'Kind', 111, 'Kind2', 'name'));
+    assert.deepEqual(key, new entity.Key({
+        namespace: 'Test',
+        path: [ 'Kind', 111, 'Kind2', 'name' ]
+      }));
     done();
   });
 
   it('should handle incomplete keys hierarchically', function(done) {
     var key = entity.keyFromKeyProto(protoHIncomplete);
-    assert.deepEqual(key, datastore.key('Test', 'Kind', null, 'Kind2', null));
+    assert.deepEqual(key, new entity.Key({
+        namespace: 'Test',
+        path: [ 'Kind', null, 'Kind2', null ]
+      }));
     done();
   });
 
   it('should not set namespace if default', function(done) {
     var key = entity.keyFromKeyProto(proto);
-    assert.deepEqual(key, datastore.key('Kind', 'Name'));
+    assert.deepEqual(key, new entity.Key({ path: [ 'Kind', 'Name' ] }));
     done();
   });
 });
 
 describe('keyToKeyProto', function() {
   it('should handle hierarchical key definitions', function(done) {
-    var key = datastore.key('Kind1', 1, 'Kind2', 'name');
+    var key = new entity.Key({ path: [ 'Kind1', 1, 'Kind2', 'name' ] });
     var proto = entity.keyToKeyProto(key);
     assert.strictEqual(proto.partition_id, undefined);
     assert.strictEqual(proto.path_element[0].kind, 'Kind1');
@@ -191,7 +197,10 @@ describe('keyToKeyProto', function() {
   });
 
   it('should detect the namespace of the hierarchical keys', function(done) {
-    var key = datastore.key('Namespace', 'Kind1', 1, 'Kind2', 'name');
+    var key = new entity.Key({
+        namespace: 'Namespace',
+        path: [ 'Kind1', 1, 'Kind2', 'name' ]
+      });
     var proto = entity.keyToKeyProto(key);
     assert.strictEqual(proto.partition_id.namespace, 'Namespace');
     assert.strictEqual(proto.path_element[0].kind, 'Kind1');
@@ -204,8 +213,11 @@ describe('keyToKeyProto', function() {
   });
 
   it('should handle incomplete keys with & without namespaces', function(done) {
-    var key = datastore.key('Kind1', null);
-    var keyWithNS = datastore.key('Namespace', 'Kind1', null);
+    var key = new entity.Key({ path: [ 'Kind1', null ] });
+    var keyWithNS = new entity.Key({
+        namespace: 'Namespace',
+        path: [ 'Kind1', null ]
+      });
 
     var proto = entity.keyToKeyProto(key);
     var protoWithNS = entity.keyToKeyProto(keyWithNS);
@@ -232,10 +244,16 @@ describe('keyToKeyProto', function() {
 describe('isKeyComplete', function() {
   it('should ret true if kind and an identifier have !0 vals', function(done) {
     [
-      { key: datastore.key('Kind1', null), expected: false },
-      { key: datastore.key('Kind1', 3), expected: true },
-      { key: datastore.key('Namespace', 'Kind1', null), expected: false },
-      { key: datastore.key('Namespace', 'Kind1', 'name'), expected: true }
+      { key: new entity.Key({ path: [ 'Kind1', null ] }), expected: false },
+      { key: new entity.Key({ path: [ 'Kind1', 3 ] }), expected: true },
+      { key: new entity.Key({
+          namespace: 'Namespace',
+          path: [ 'Kind1', null ]
+        }), expected: false },
+      { key: new entity.Key({
+          namespace: 'Namespace',
+          path: [ 'Kind1', 'name' ]
+        }), expected: true }
     ].forEach(function(test) {
       assert.strictEqual(entity.isKeyComplete(test.key), test.expected);
     });
@@ -247,7 +265,9 @@ describe('entityFromEntityProto', function() {
   it('should support boolean, integer, double, string, entity and list values',
       function(done) {
     var obj = entity.entityFromEntityProto(entityProto);
-    assert.deepEqual(obj.linkedTo, datastore.key('Kind', 'another'));
+    assert.deepEqual(obj.linkedTo, new entity.Key({
+        path: [ 'Kind', 'another' ]
+      }));
     assert.strictEqual(obj.name, 'Some name');
     assert.strictEqual(obj.flagged, false);
     assert.strictEqual(obj.count, 5);
@@ -305,7 +325,7 @@ describe('queryToQueryProto', function() {
     var ds = new datastore.Dataset({ projectId: 'project-id' });
     var q = ds.createQuery('Kind1')
       .filter('name =', 'John')
-      .hasAncestor(datastore.key('Kind2', 'somename'));
+      .hasAncestor(new entity.Key({ path: [ 'Kind2', 'somename' ] }));
     var proto = entity.queryToQueryProto(q);
     assert.deepEqual(proto, queryFilterProto);
     done();
