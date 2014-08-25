@@ -101,10 +101,10 @@ describe('Query', function() {
     assert.equal(query.orders[1].sign, '-');
   });
 
-  it('should throw error is invalid sort sign is provided', function() {
-    assert.throws(function() {
-      new Query(['kind1']).order('*name');
-    }, /Invalid order pattern/);
+  it('should default ordering to ascending', function() {
+    var query = new Query(['kind1']).order('name');
+    assert.equal(query.orders[0].name, 'name');
+    assert.equal(query.orders[0].sign, '+');
   });
 
   it('should provide pagination with offset and limit', function() {
