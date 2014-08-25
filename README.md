@@ -193,8 +193,8 @@ var q = ds.createQuery('Child')
 You can sort the results by a property name ascendingly or descendingly.
 
 ~~~~ js
-// sorts by size ascendingly.
-var q = ds.createQuery('Company').order('+size');
+// sorts by size ascendingly. (default)
+var q = ds.createQuery('Company').order('size');
 
 // sorts by size descendingly.
 var q = ds.createQuery('Company').order('-size');

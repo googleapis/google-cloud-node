@@ -284,7 +284,7 @@ describe('datastore', function() {
     });
 
     it('should order queries', function(done) {
-      var q = ds.createQuery('Character').order('+appearances');
+      var q = ds.createQuery('Character').order('appearances');
       ds.runQuery(q, function(err, entities) {
         assert.ifError(err);
         assert.equal(entities[0].data.name, characters[0].name);
@@ -313,7 +313,7 @@ describe('datastore', function() {
       var q = ds.createQuery('Character')
           .offset(2)
           .limit(3)
-          .order('+appearances');
+          .order('appearances');
       ds.runQuery(q, function(err, entities, secondQuery) {
         assert.ifError(err);
         assert.equal(entities.length, 3);
@@ -332,13 +332,13 @@ describe('datastore', function() {
       var q = ds.createQuery('Character')
           .offset(2)
           .limit(2)
-          .order('+appearances');
+          .order('appearances');
       ds.runQuery(q, function(err, entities, nextQuery) {
         assert.ifError(err);
         var startCursor = nextQuery.startVal;
         var cursorQuery =
             ds.createQuery('Character')
-              .order('+appearances')
+              .order('appearances')
               .start(startCursor);
         ds.runQuery(cursorQuery, function(err, secondEntities) {
           assert.ifError(err);
