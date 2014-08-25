@@ -21,119 +21,110 @@
 var assert = require('assert');
 var datastore = require('../../lib/datastore');
 var entity = require('../../lib/datastore/entity.js');
+var Query = require('../../lib/datastore/query.js');
 var queryProto = require('../testdata/proto_query.json');
 
 describe('Query', function() {
-  var ds = new datastore.Dataset({ projectId: 'my-project-id' });
-  var dsWithNs = new datastore.Dataset({
-      projectId: 'my-project-id',
-      namespace: 'ns'
-    });
-
-  it('should use undefined for all falsy namespace values', function() {
+  it('should use null for all falsy namespace values', function() {
     [
-      ds.createQuery('', 'Kind'),
-      ds.createQuery(null, 'Kind'),
-      ds.createQuery(undefined, 'Kind'),
-      ds.createQuery(0, 'Kind')
+      new Query('', 'Kind'),
+      new Query(null, 'Kind'),
+      new Query(undefined, 'Kind'),
+      new Query(0, 'Kind'),
+      new Query('Kind')
     ].forEach(function(query) {
       assert.strictEqual(query.namespace, null);
+      assert.equal(query.kinds, 'Kind');
     });
   });
 
-  it('should use default namespace if none is specified', function(done) {
-    var q = ds.createQuery(['kind1']);
-    assert.strictEqual(q.namespace, null);
-    done();
+  it('should support custom namespaces', function() {
+    var query = new Query('ns', ['kind1']);
+    assert.equal(query.namespace, 'ns');
   });
 
-  it('should use support custom namespaces', function(done) {
-    var q = dsWithNs.createQuery(['kind1']);
-    assert.equal(q.namespace, 'ns');
-    done();
+  it('should support querying multiple kinds', function() {
+    var query = new Query(['kind1', 'kind2']);
+    var queryWithNamespace = new Query('ns', ['kind1', 'kind2']);
+
+    assert.strictEqual(query.namespace, null);
+    assert.equal(query.kinds[0], 'kind1');
+    assert.equal(query.kinds[1], 'kind2');
+
+    assert.equal(queryWithNamespace.namespace, 'ns');
+    assert.equal(queryWithNamespace.kinds[0], 'kind1');
+    assert.equal(queryWithNamespace.kinds[1], 'kind2');
   });
 
-  it('should support querying multiple kinds', function(done) {
-    var q = ds.createQuery(['kind1', 'kind2']);
-    var qNS = dsWithNs.createQuery(['kind1', 'kind2']);
-
-    assert.strictEqual(q.namespace, null);
-    assert.equal(q.kinds[0], 'kind1');
-    assert.equal(q.kinds[1], 'kind2');
-
-    assert.equal(qNS.namespace, 'ns');
-    assert.equal(qNS.kinds[0], 'kind1');
-    assert.equal(qNS.kinds[1], 'kind2');
-    done();
+  it('should support field selection by field name', function() {
+    var query = new Query(['kind1'])
+        .select(['name', 'title']);
+    assert.equal(query.selectVal[0], 'name');
+    assert.equal(query.selectVal[1], 'title');
   });
 
-  it('should support field selection by field name', function(done) {
-    var q = ds.createQuery(['kind1']).select(['name', 'title']);
-    assert.equal(q.selectVal[0], 'name');
-    assert.equal(q.selectVal[1], 'title');
-    done();
+  it('should support ancestor filtering', function() {
+    var query = new Query(['kind1'])
+        .hasAncestor(['kind2', 123]);
+    assert.equal(query.filters[0].name, '__key__');
+    assert.equal(query.filters[0].op, 'HAS_ANCESTOR');
+    assert.deepEqual(query.filters[0].val, ['kind2', 123]);
   });
 
-  it('should support ancestor filtering', function(done) {
-    var q = ds.createQuery(['kind1']).hasAncestor(['kind2', 123]);
-    assert.equal(q.filters[0].name, '__key__');
-    assert.equal(q.filters[0].op, 'HAS_ANCESTOR');
-    assert.deepEqual(q.filters[0].val, ['kind2', 123]);
-    done();
-  });
-
-  it('should support multiple filters', function(done) {
+  it('should support multiple filters', function() {
     var now = new Date();
-    var q = ds.createQuery(['kind1'])
+    var query = new Query(['kind1'])
         .filter('date <=', now)
         .filter('name =', 'Title')
         .filter('count >', 20);
-    assert.equal(q.filters[0].name, 'date');
-    assert.equal(q.filters[0].op, '<=');
-    assert.strictEqual(q.filters[0].val, now);
 
-    assert.equal(q.filters[1].name, 'name');
-    assert.equal(q.filters[1].op, '=');
-    assert.strictEqual(q.filters[1].val, 'Title');
+    assert.equal(query.filters[0].name, 'date');
+    assert.equal(query.filters[0].op, '<=');
+    assert.strictEqual(query.filters[0].val, now);
 
-    assert.equal(q.filters[2].name, 'count');
-    assert.equal(q.filters[2].op, '>');
-    assert.strictEqual(q.filters[2].val, 20);
-    done();
+    assert.equal(query.filters[1].name, 'name');
+    assert.equal(query.filters[1].op, '=');
+    assert.equal(query.filters[1].val, 'Title');
+
+    assert.equal(query.filters[2].name, 'count');
+    assert.equal(query.filters[2].op, '>');
+    assert.strictEqual(query.filters[2].val, 20);
   });
 
-  it('should support ordering asc and desc', function(done) {
-    var q = ds.createQuery(['kind1']).order('+name').order('-count');
-    assert.equal(q.orders[0].name, 'name');
-    assert.equal(q.orders[0].sign, '+');
-    assert.equal(q.orders[1].name, 'count');
-    assert.equal(q.orders[1].sign, '-');
-    done();
+  it('should support ordering asc and desc', function() {
+    var query = new Query(['kind1'])
+        .order('+name')
+        .order('-count');
+    assert.equal(query.orders[0].name, 'name');
+    assert.equal(query.orders[0].sign, '+');
+    assert.equal(query.orders[1].name, 'count');
+    assert.equal(query.orders[1].sign, '-');
   });
 
-  it('should throw error is invalid sort sign is provided', function(done) {
+  it('should throw error is invalid sort sign is provided', function() {
     assert.throws(function() {
-      ds.createQuery(['kind1']).order('*name');
+      new Query(['kind1']).order('*name');
     }, /Invalid order pattern/);
-    done();
   });
 
-  it('should provide pagination with offset and limit', function(done) {
-    var q = ds.createQuery(['kind1']).offset(20).limit(100);
-    assert.strictEqual(q.offsetVal, 20);
-    assert.strictEqual(q.limitVal, 100);
-    done();
+  it('should provide pagination with offset and limit', function() {
+    var query = new Query(['kind1'])
+        .offset(20)
+        .limit(100);
+    assert.strictEqual(query.offsetVal, 20);
+    assert.strictEqual(query.limitVal, 100);
   });
 
-  it('should allow page start and end tokens', function(done) {
-    var q = ds.createQuery(['kind1']).start('abc123').end('def987');
-    assert.strictEqual(q.startVal, 'abc123');
-    assert.strictEqual(q.endVal, 'def987');
-    done();
+  it('should allow page start and end tokens', function() {
+    var query = new Query(['kind1'])
+        .start('abc123')
+        .end('def987');
+    assert.equal(query.startVal, 'abc123');
+    assert.equal(query.endVal, 'def987');
   });
 
-  it('should be converted to a query proto successfully', function(done) {
-    var q = ds.createQuery(['Kind'])
+  it('should be converted to a query proto successfully', function() {
+    var query = new Query(['Kind'])
         .select(['name', 'count'])
         .filter('count >=', datastore.int(5))
         .filter('name =', 'Burcu')
@@ -141,7 +132,6 @@ describe('Query', function() {
         .groupBy(['count'])
         .offset(5)
         .limit(10);
-    assert.deepEqual(entity.queryToQueryProto(q), queryProto);
-    done();
+    assert.deepEqual(entity.queryToQueryProto(query), queryProto);
   });
 });
