@@ -60,7 +60,7 @@ The downloaded file contains credentials you'll need for authorization.
     * [Write file contents and metadata](#write-file-contents-and-metadata)
     * [Copy files](#copy-files)
     * [Remove files](#remove-files)
-* [Google Cloud Pub/Sub](#google-cloud-pub-sub)
+* [Google Cloud Pub/Sub](#google-cloud-pubsub-experimental)
     * [Configuration](#configuration-2)
     * [Topics and Subscriptions](#topics-and-subscriptions)
     * [Publishing a message](#publishing-a-message)
