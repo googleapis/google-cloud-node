@@ -2,6 +2,7 @@
 
 Node idiomatic client for Google Cloud services. Work in progress... Watch the repo for notifications.
 
+[![NPM Version](https://img.shields.io/npm/v/gcloud.svg)](https://www.npmjs.org/package/gcloud)
 ![Travis Build Status](https://travis-ci.org/GoogleCloudPlatform/gcloud-node.svg)
 [![Coverage Status](https://img.shields.io/coveralls/GoogleCloudPlatform/gcloud-node.svg)](https://coveralls.io/r/GoogleCloudPlatform/gcloud-node?branch=master)
 
