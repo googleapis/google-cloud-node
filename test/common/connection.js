@@ -26,6 +26,7 @@ var connection = require('../../lib/common/connection.js');
 
 describe('Connection', function() {
   var conn;
+  var privateKeyFileJson = require('../testdata/privateKeyFile.json');
 
   beforeEach(function() {
     conn = new connection.Connection({
@@ -34,7 +35,6 @@ describe('Connection', function() {
   });
 
   it('should use a private key json file', function(done) {
-    var privateKeyFileJson = require('../testdata/privateKeyFile.json');
     conn.fetchServiceAccountToken_ = function(callback) {
       callback(null);
     };
@@ -44,6 +44,24 @@ describe('Connection', function() {
       done();
     });
   });
+
+  describe('credentials object', function() {
+    it('should accept and assign a complete credentials object', function() {
+      var credConnection = new connection.Connection({
+        credentials: privateKeyFileJson
+      });
+      assert.deepEqual(credConnection.credentials, privateKeyFileJson);
+    });
+
+    it('should reject an incomplete credentials object', function() {
+      assert.throws(function() {
+        new connection.Connection({
+          credentials: {}
+        });
+      }, /must contain/);
+    });
+  });
+
 
   describe('Token', function() {
     var tokenNeverExpires = new connection.Token('token', new Date(3000, 0, 0));
