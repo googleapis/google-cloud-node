@@ -59,12 +59,8 @@ describe('Subscription', function() {
       }
     };
     var sub = conn.subscribe('sub1', { autoAck: false });
-    var doneCalled = false;
     sub.on('message', function() {
-      if (!doneCalled) {
-        done();
-      }
-      doneCalled = true;
+      done();
     });
   });
 
@@ -78,9 +74,9 @@ describe('Subscription', function() {
           callback(null, {});
           return;
         case 'subscriptions/pull':
-          setTimeout(function() {
+          setImmediate(function() {
             callback(null, { ackId: 123 });
-          }, 500);
+          });
           return;
         case 'subscriptions/acknowledge':
           callback(null, true);
@@ -88,12 +84,8 @@ describe('Subscription', function() {
       }
     };
     var sub = conn.subscribe('sub1', { autoAck: true });
-    var doneCalled = false;
     sub.on('message', function() {
-      if (!doneCalled) {
-        done();
-      }
-      doneCalled = true;
+      done();
     });
   });
 });
