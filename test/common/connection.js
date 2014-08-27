@@ -62,7 +62,7 @@ describe('Connection', function() {
       c.requester = function(opts, callback) {
         callback(null);
       };
-      c.req({ uri: 'https://someuri' }, function(){});
+      c.req({ uri: 'https://someuri' }, function() {});
     });
 
     it('should make other requests wait while connecting', function(done) {
@@ -74,9 +74,9 @@ describe('Connection', function() {
       });
       c.fetchToken = function(cb) {
         numTokenFetches++;
-        setTimeout(function() {
+        setImmediate(function() {
           cb(null, tokenNeverExpires);
-        }, 100);
+        });
       };
       c.requester = function(opts, callback) {
         callback(null);
@@ -107,7 +107,7 @@ describe('Connection', function() {
       c.requester = function(opts, callback) {
         callback(null);
       };
-      c.req({ uri: 'https://someuri' }, function(){});
+      c.req({ uri: 'https://someuri' }, function() {});
     });
   });
 });
