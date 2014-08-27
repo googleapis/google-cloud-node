@@ -21,6 +21,7 @@
 var assert = require('assert');
 var ByteBuffer = require('bytebuffer');
 var datastore = require('../../lib').datastore;
+var entity = require('../../lib/datastore/entity.js');
 var mockRespGet = require('../testdata/response_get.json');
 var Transaction = require('../../lib/datastore/transaction.js');
 
@@ -74,6 +75,29 @@ describe('Dataset', function() {
       assert.strictEqual(data.author, 'Silvano');
       assert.strictEqual(data.isDraft, false);
       assert.deepEqual(data.publishedAt, new Date(978336000000));
+      done();
+    });
+  });
+
+  it('should continue looking for deferred results', function(done) {
+    var ds = new datastore.Dataset({ projectId: 'test' });
+    var key = ds.key('Kind', 5732568548769792);
+    var key2 = ds.key('Kind', 5732568548769792);
+    var lookupCount = 0;
+    ds.transaction.makeReq = function(method, proto, typ, callback) {
+      lookupCount++;
+      assert.equal(method, 'lookup');
+      if (mockRespGet.deferred.length) {
+        // Revert deferred to original state.
+        mockRespGet.deferred = [];
+      } else {
+        mockRespGet.deferred = [ entity.keyToKeyProto(key2) ];
+      }
+      callback(null, mockRespGet);
+    };
+    ds.get([key, key2], function(err, entities) {
+      assert.equal(entities.length, 2);
+      assert.equal(lookupCount, 2);
       done();
     });
   });
