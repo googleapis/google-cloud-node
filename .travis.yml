@@ -1,4 +1,27 @@
-language: node_js
-script: "npm run-script lint && npm run-script test"
+language:
+  node_js
 node_js:
-  - "0.10"
+  - 0.10
+branches:
+  only:
+    - master
+env:
+  global:
+    - secure: "B1vanjI2TMf+YnmbcF5HWAMNnmT+CFr2EB1CCIcyoWqs2RIBvgiDH0gDR46iUDdfPRSt3Eokaru1fY8ptZDRnrt3oKokWp4ZrRO0x7uUGbkGfdmHHxnOlUA1m9rVhaOBCWl5opfaA8ncWcXwdWZGg7HWpS7EfTNr2dIr7lAC2mU="
+    - GH_OWNER: GoogleCloudPlatform
+    - GH_PROJECT_NAME: gcloud-node
+script:
+  - npm run lint
+  - npm run test
+after_success:
+  - git submodule add -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} site > /dev/null 2>&1
+  - cd site
+  - if git checkout gh-pages; then git checkout -b gh-pages; fi
+  - git rm -r .
+  - cp -R ../docs/* .
+  - cp ../docs/.* .
+  - git add -f .
+  - git config user.email "sawchuk@gmail.com"
+  - git config user.name "stephenplusplus"
+  - git commit -am "building gh-pages [ci skip]"
+  - git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages > /dev/null 2>&1

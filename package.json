@@ -43,14 +43,16 @@
     "request": "^2.39.0"
   },
   "devDependencies": {
+    "coveralls": "^2.11.1",
     "istanbul": "^0.3.0",
+    "jsdoc": "^3.3.0-alpha9",
     "jshint": "^2.5.2",
     "mocha": "^1.21.3",
     "sandboxed-module": "^1.0.1",
-    "tmp": "0.0.24",
-    "coveralls": "^2.11.1"
+    "tmp": "0.0.24"
   },
   "scripts": {
+    "docs": "jsdoc -c .jsdoc.json && cp docs/module-gcloud.html docs/index.html",
     "lint": "jshint lib/ regression/ test/",
     "test": "mocha --recursive --reporter spec",
     "regression-test": "mocha regression/ --reporter spec --timeout 15000",
