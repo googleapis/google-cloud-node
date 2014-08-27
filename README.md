@@ -50,7 +50,7 @@ You'll need the following for auth configuration:
 
 [Google Cloud Datastore](https://developers.google.com/datastore/) is a fully managed, schemaless database for storing non-relational data. Cloud Datastore automatically scales with your users and supports ACID transactions, high availability of reads and writes, strong consistency for reads and ancestor queries, and eventual consistency for all other queries.
 
-See [the API documentation](https://googlecloudplatform.github.io/module-datastore.html) for how to interact with the Datastore.
+See [the API documentation](https://googlecloudplatform.github.io/gcloud-node/module-datastore.html) for how to interact with the Datastore.
 
 ### Google Cloud Storage
 
@@ -58,7 +58,7 @@ Google Cloud Storage allows you to store data on Google infrastructure. Read [Go
 
 You need to create a Google Cloud Storage bucket to use this client library. Follow the steps on [Google Cloud Storage docs](https://developers.google.com/storage/) to create a bucket.
 
-See [the API documentation](https://googlecloudplatform.github.io/module-storage.html) for how to connect to the Storage API.
+See [the API documentation](https://googlecloudplatform.github.io/gcloud-node/module-storage.html) for how to connect to the Storage API.
 
 ### Google Cloud Pub/Sub (experimental)
 
