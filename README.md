@@ -30,22 +30,21 @@ If you are running this client on Google Compute Engine, you can skip to the dev
 
 If you are not running this client on Google Compute Engine, you need a Google Developers service account. To create a service account:
 
-* Visit the [Google Developers Console](https://console.developers.google.com/project).
-* Create a new project or click on an existing project.
-* Enable billing if you haven't already.
-* On the "APIs & auth" tab, click APIs section and turn on the following. You may need to enable billing in order to use these services.
-    * Google Cloud Datastore API
-    * Google Cloud Storage
-    * Google Cloud Storage JSON API
-    * Google Cloud Pub/Sub
-* Once API access is enabled, switch back to "APIs & auth" section on the navigation panel and switch to "Credentials" page.
-* Click on "Create new client ID" to create a new **service account**. Once the account is created, click on "Generate new JSON key" to download
-your private key.
+1. Visit the [Google Developers Console](https://console.developers.google.com/project).
+2. Create a new project or click on an existing project.
+3. Enable billing if you haven't already.
+4. On the "APIs & auth" tab, click APIs section and turn on the following. You may need to enable billing in order to use these services.
+   * Google Cloud Datastore API
+   * Google Cloud Storage
+   * Google Cloud Storage JSON API
+   * Google Cloud Pub/Sub
+5. Once API access is enabled, switch back to "APIs & auth" section on the navigation panel and switch to "Credentials" page.
+6. Click on "Create new client ID" to create a new **service account**. Once the account is created, click on "Generate new JSON key" to download your private key. The downloaded file contains credentials you'll need for authorization.
 
-The downloaded file contains credentials you'll need for authorization.
-* You'll need the following for auth configuration:
-    * Developers Console project's ID (e.g. bamboo-shift-455)
-    * The path to the JSON key file.
+You'll need the following for auth configuration:
+
+1. Your Developers Console project's ID (e.g. bamboo-shift-455).
+2. The path to the JSON key file.
 
 ### Google Cloud Datastore
 
