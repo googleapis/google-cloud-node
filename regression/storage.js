@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/*global describe, it, before, after */
+/*global describe, it, before, after, beforeEach */
 
 'use strict';
 
@@ -22,6 +22,7 @@ var assert = require('assert');
 var async = require('async');
 var crypto = require('crypto');
 var fs = require('fs');
+var request = require('request');
 var tmp = require('tmp');
 
 var env = require('./env.js');
@@ -187,6 +188,64 @@ describe('storage', function() {
             bucket.remove(filename, callback);
           };
         }), done);
+    });
+  });
+
+  describe('sign urls', function() {
+    var fileName = 'LogoToSign.jpg';
+
+    beforeEach(function(done) {
+      fs.createReadStream(files.logo.path)
+          .pipe(bucket.createWriteStream(fileName))
+          .on('error', done)
+          .on('complete', done.bind(null, null));
+    });
+
+    it('should create a signed read url', function(done) {
+      var signedReadUrl = bucket.getSignedUrl({
+          action: 'read',
+          expires: Math.round(Date.now() / 1000) + 5,
+          resource: fileName
+        });
+      var localFile = fs.readFileSync(files.logo.path);
+      request.get(signedReadUrl, function(err, resp, body) {
+        assert.equal(body, localFile);
+        bucket.remove(fileName, done);
+      });
+    });
+
+    it('should create a signed delete url', function(done) {
+      var signedDeleteUrl = bucket.getSignedUrl({
+          action: 'delete',
+          expires: Math.round(Date.now() / 1000) + 5,
+          resource: fileName
+        });
+      request.del(signedDeleteUrl, function(err, resp) {
+        assert.equal(resp.statusCode, 204);
+        bucket.stat(fileName, function(err) {
+          assert.equal(err.code, 404);
+          done();
+        });
+      });
+    });
+
+    it('should allow control of expiration', function(done) {
+      var offsetSeconds = 5;
+      var signedReadUrl = bucket.getSignedUrl({
+          action: 'read',
+          expires: Math.round(Date.now() / 1000) + offsetSeconds,
+          resource: fileName
+        });
+      var localFile = fs.readFileSync(files.logo.path);
+      request.get(signedReadUrl, function(err, resp, body) {
+        assert.equal(body, localFile);
+      });
+      setTimeout(function() {
+        request.get(signedReadUrl, function(err, resp) {
+          assert.equal(resp.statusCode, 400);
+          bucket.remove(fileName, done);
+        });
+      }, (offsetSeconds + 1) * 1000);
     });
   });
 });
