@@ -32,6 +32,9 @@ describe('Connection', function() {
     conn = new connection.Connection({
       keyFilename: path.join(__dirname, '../testdata/privateKeyFile.json')
     });
+    conn.requester = function(opts, callback) {
+      callback(null);
+    };
   });
 
   it('should use a private key json file', function(done) {
@@ -62,70 +65,58 @@ describe('Connection', function() {
     });
   });
 
-
   describe('Token', function() {
     var tokenNeverExpires = new connection.Token('token', new Date(3000, 0, 0));
     var tokenExpired = new connection.Token('token', new Date(2011, 0, 0));
 
     it('should fetch a new token if token expires', function(done) {
-      var c = new connection.Connection({
-        email: 'x@provider',
-        privateKey: '/some/path',
-        scopes: ['scope1', 'scope2']
-      });
-      c.token = tokenExpired;
-      c.fetchToken = function() {
+      conn.token = tokenExpired;
+      conn.fetchToken = function() {
         done();
       };
-      c.requester = function(opts, callback) {
-        callback(null);
-      };
-      c.req({ uri: 'https://someuri' }, function() {});
+      conn.req({ uri: 'https://someuri' }, function() {});
     });
 
     it('should make other requests wait while connecting', function(done) {
       var numTokenFetches = 0;
-      var c = new connection.Connection({
-        email: 'x@provider',
-        privateKey: '/some/path',
-        scopes: ['scope1', 'scope2']
-      });
-      c.fetchToken = function(cb) {
+      var requestedUris = [];
+      conn.fetchToken = function(cb) {
         numTokenFetches++;
         setImmediate(function() {
           cb(null, tokenNeverExpires);
         });
       };
-      c.requester = function(opts, callback) {
+      conn.requester = function(opts, callback) {
+        requestedUris.push(opts.uri);
         callback(null);
       };
-
       async.parallel([
-        function(done) { c.req({ uri: 'https://someuri' }, done); },
-        function(done) { c.req({ uri: 'https://someuri' }, done); },
-        function(done) { c.req({ uri: 'https://someuri' }, done); }
+        function(next) {
+          assert.strictEqual(conn.isConnecting, false);
+          conn.req({ uri: '1' }, next);
+        },
+        function(next) {
+          assert.strictEqual(conn.isConnecting, true);
+          conn.req({ uri: '2' }, next);
+        },
+        function(next) {
+          conn.req({ uri: '3' }, next);
+        }
       ], function(err) {
-        assert.equal(err, null);
+        assert.ifError(err);
         assert.equal(numTokenFetches, 1);
-        assert.equal(c.token, tokenNeverExpires);
+        assert.equal(conn.token, tokenNeverExpires);
+        assert.deepEqual(requestedUris, ['1', '2', '3']);
         done();
       });
     });
 
     it('should fetch a new token if token is invalid', function(done) {
-      var c = new connection.Connection({
-        email: 'x@provider',
-        privateKey: '/some/path',
-        scopes: ['scope1', 'scope2']
-      });
-      c.token = new connection.Token();
-      c.fetchToken = function() {
+      conn.token = new connection.Token();
+      conn.fetchToken = function() {
         done();
       };
-      c.requester = function(opts, callback) {
-        callback(null);
-      };
-      c.req({ uri: 'https://someuri' }, function() {});
+      conn.req({ uri: 'https://someuri' }, function() {});
     });
   });
 });
