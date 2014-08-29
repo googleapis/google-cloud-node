@@ -77,6 +77,17 @@ describe('Connection', function() {
       conn.req({ uri: 'https://someuri' }, function() {});
     });
 
+    it('should pass error to callback', function(done) {
+      var error = new Error('Something terrible happened.');
+      conn.fetchToken = function(cb) {
+        cb(error);
+      };
+      conn.req({}, function(err) {
+        assert.equal(error, err);
+        done();
+      });
+    });
+
     it('should make other requests wait while connecting', function(done) {
       var numTokenFetches = 0;
       var requestedUris = [];
