@@ -49,17 +49,18 @@ describe('Subscription', function() {
       projectId: 'test-project'
     });
     conn.makeReq = function(method, path, qs, body, callback) {
-      switch (path) {
-        case 'subscriptions//subscriptions/test-project/sub1':
-          callback(null, {});
-          return;
-        case 'subscriptions/pull':
-          callback(null, { ackId: 123 });
-          return;
+      if (path === 'subscriptions//subscriptions/test-project/sub1') {
+        callback(null, {});
+        return;
+      }
+      if (path === 'subscriptions/pull') {
+        callback(null, { ackId: 123 });
+        return;
       }
     };
     var sub = conn.subscribe('sub1', { autoAck: false });
-    sub.on('message', function() {
+    sub.once('message', function() {
+      sub.close();
       done();
     });
   });
@@ -69,22 +70,24 @@ describe('Subscription', function() {
       projectId: 'test-project'
     });
     conn.makeReq = function(method, path, qs, body, callback) {
-      switch (path) {
-        case 'subscriptions//subscriptions/test-project/sub1':
-          callback(null, {});
-          return;
-        case 'subscriptions/pull':
-          setImmediate(function() {
-            callback(null, { ackId: 123 });
-          });
-          return;
-        case 'subscriptions/acknowledge':
-          callback(null, true);
-          return;
+      if (path === 'subscriptions//subscriptions/test-project/sub1') {
+        callback(null, {});
+        return;
+      }
+      if (path === 'subscriptions/pull') {
+        setImmediate(function() {
+          callback(null, { ackId: 123 });
+        });
+        return;
+      }
+      if (path === 'subscriptions/acknowledge') {
+        callback(null, true);
+        return;
       }
     };
     var sub = conn.subscribe('sub1', { autoAck: true });
-    sub.on('message', function() {
+    sub.once('message', function() {
+      sub.close();
       done();
     });
   });
