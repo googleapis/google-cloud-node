@@ -26,6 +26,13 @@ describe('extend', function() {
     var copy = util.extend(null, {});
     assert.strictEqual(copy, null);
   });
+
+  it('should return a new Date for Date input', function() {
+    var now = new Date();
+    var copy = util.extend(now, {});
+    assert.notStrictEqual(copy, now);
+    assert.strictEqual(copy.toString(), now.toString());
+  });
 });
 
 describe('arrayize', function() {
