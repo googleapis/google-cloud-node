@@ -28,7 +28,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
 
 1. Visit the [Google Developers Console](https://console.developers.google.com/project).
 2. Create a new project or click on an existing project.
-3. Navigato to  **APIs & auth** > **APIs section** and turn on the following APIs (you may need to enable billing in order to use these services):
+3. Navigate to  **APIs & auth** > **APIs section** and turn on the following APIs (you may need to enable billing in order to use these services):
    * Google Cloud Datastore API
    * Google Cloud Storage
    * Google Cloud Storage JSON API
@@ -60,7 +60,7 @@ dataset = new datastore.Dataset({
   keyFilename: '/path/to/keyfile.json' 
 });
 
-dataset.get(datastore.key('Product', 'Computer');
+dataset.get(dataset.key('Product', 'Computer'), function(err, entity) {});
 ```
 
 ## Google Cloud Storage
