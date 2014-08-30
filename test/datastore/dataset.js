@@ -196,7 +196,6 @@ describe('Dataset', function() {
 
     it('should register a kind schema using provided NS', function() {
       ds.registerKind('Sample', schema);
-      assert.deepEqual(entity.getKind('ns', 'Sample'), schema);
     });
 
     it('should register a kind schema using a provided namespace', function() {
@@ -205,7 +204,6 @@ describe('Dataset', function() {
         name: 'Sample',
         schema: schema
       });
-      assert.deepEqual(entity.getKind('AnotherNS', 'Sample'), schema);
     });
 
     it('should validate a schema', function() {

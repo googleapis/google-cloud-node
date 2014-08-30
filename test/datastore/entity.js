@@ -101,23 +101,19 @@ var queryFilterProto = {
 };
 
 describe('registerKind', function() {
-  it('should be able to register valid field metadata', function(done) {
+  it('should be able to register valid field metadata', function() {
     entity.registerKind('namespace', 'kind', blogPostMetadata);
-    done();
   });
 
-  it('should set the namespace to "" if zero value or null', function(done) {
+  it('should set the namespace to "" if zero value or null', function() {
     entity.registerKind(null, 'kind', blogPostMetadata);
-    var meta = entity.getKind('', 'kind');
-    assert.strictEqual(meta, blogPostMetadata);
-    done();
+    entity.getKind('', 'kind');
   });
 
-  it('should throw an exception if an invalid kind', function(done) {
+  it('should throw an exception if an invalid kind', function() {
     assert.throws(function() {
       entity.registerKind(null, '000', blogPostMetadata);
     }, /Kinds should match/);
-    done();
   });
 });
 
@@ -333,14 +329,10 @@ describe('Kind schema', function() {
 
   entity.registerKind(null, 'Sample', schema);
 
-  it('should register a kind', function() {
-    assert.deepEqual(entity.getKind(null, 'Sample'), schema);
-  });
-
-  it('should store a __proto on the schema', function() {
+  it('should store the protocol on the schema', function() {
     var sample = entity.getKind(null, 'Sample');
     Object.keys(sample).forEach(function(property) {
-      assert.equal(typeof sample[property].__proto, 'object');
+      assert.equal(typeof sample[property].protocol, 'object');
     });
   });
 
