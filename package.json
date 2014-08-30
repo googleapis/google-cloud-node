@@ -26,6 +26,12 @@
     }
   ],
   "main": "./lib/index",
+  "files": [
+    "lib/",
+    "AUTHORS",
+    "CONTRIBUTORS",
+    "COPYING"
+  ],
   "repository": "googlecloudplatform/gcloud-nodejs",
   "keywords": [
     "google",
