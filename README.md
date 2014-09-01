@@ -16,6 +16,8 @@ Planned, but not yet available:
 * [Google Compute Engine](https://developers.google.com/compute)
 * [Google BigQuery](https://developers.google.com/bigquery/)
 
+If you are looking for the `gcloud` command-line tool, check it out [here][gcloudcli].
+
 ## Quickstart
 
 ```sh
@@ -199,3 +201,5 @@ sub.close();
 ## Contributing
 
 See [CONTRIBUTING](CONTRIBUTING.md).
+
+[gcloudcli]: https://developers.google.com/cloud/sdk/gcloud/
