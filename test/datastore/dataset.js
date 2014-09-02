@@ -26,6 +26,49 @@ var mockRespGet = require('../testdata/response_get.json');
 var Transaction = require('../../lib/datastore/transaction.js');
 
 describe('Dataset', function() {
+
+  describe('constructor', function() {
+
+    beforeEach(function() {
+      delete process.env.GAE_LONG_APP_ID;
+      delete process.env.GAE_VM;
+    });
+
+    it('should detect GAE prod', function(done) {
+      process.env.GAE_LONG_APP_ID = 'gae-app-id';
+      process.env.GAE_VM = true;
+      var ds = new datastore.Dataset();
+      assert.strictEqual(ds.id, 'gae-app-id');
+      ds.transaction.conn.createAuthorizedReq = function(req) {
+        assert.equal(req.host, 'www.googleapis.com');
+        done();
+      };
+      ds.get(ds.key('Kind', 123), function() {});
+    });
+
+    it('should detect GAE dev', function(done) {
+      process.env.GAE_LONG_APP_ID = 'gae-app-id';
+      var ds = new datastore.Dataset();
+      assert.strictEqual(ds.id, 'gae-app-id');
+      ds.transaction.conn.createAuthorizedReq = function(req) {
+        assert.equal(req.host, 'localhost');
+        done();
+      };
+      ds.get(ds.key('Kind', 123), function() {});
+    });
+
+    it ('should not set app id if GAE_LONG_APP_ID is not set', function(done) {
+      var ds = new datastore.Dataset();
+      assert.equal(!!ds.id, false);
+      ds.transaction.conn.createAuthorizedReq = function(req) {
+        assert.equal(req.host, 'www.googleapis.com');
+        done();
+      };
+      ds.get(ds.key('Kind', 123), function() {});
+    });
+
+  });
+
   it('should return a key scoped by namespace', function() {
     var ds = new datastore.Dataset({ projectId: 'test', namespace: 'my-ns' });
     var key = ds.key('Company', 1);
