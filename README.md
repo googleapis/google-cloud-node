@@ -10,6 +10,8 @@ This client supports the following Google Cloud services:
 * [Google Cloud Datastore](https://cloud.google.com/products/cloud-datastore/)
 * [Google Cloud Storage](https://cloud.google.com/products/cloud-storage/)
 
+If you are looking for the `gcloud` command-line tool, check it out [here][gcloudcli].
+
 ## Quickstart
 
 ```sh
@@ -93,3 +95,5 @@ bucket.write('filename', 'Hello World', function(err) {});
 ## Contributing
 
 See [CONTRIBUTING](CONTRIBUTING.md).
+
+[gcloudcli]: https://developers.google.com/cloud/sdk/gcloud/
