@@ -2,7 +2,7 @@
 > Node idiomatic client for Google Cloud services.
 
 [![NPM Version](https://img.shields.io/npm/v/gcloud.svg)](https://www.npmjs.org/package/gcloud)
-![Travis Build Status](https://travis-ci.org/GoogleCloudPlatform/gcloud-node.svg)
+[![Travis Build Status](https://travis-ci.org/GoogleCloudPlatform/gcloud-node.svg)](https://travis-ci.org/GoogleCloudPlatform/gcloud-node/)
 [![Coverage Status](https://img.shields.io/coveralls/GoogleCloudPlatform/gcloud-node.svg)](https://coveralls.io/r/GoogleCloudPlatform/gcloud-node?branch=master)
 
 This client supports the following Google Cloud services:
@@ -42,25 +42,27 @@ If you are not running this client on Google Compute Engine, you need a Google D
 
 See the [Google Cloud Datastore docs](https://developers.google.com/datastore/docs/activate) for more details on how to activate Cloud Datastore for your project.
 
-See [the API documentation](https://googlecloudplatform.github.io/gcloud-node/module-datastore.html) to learn how to interact with the Cloud Datastore using this Client Library.
+See [the gcloud-node API documentation](https://googlecloudplatform.github.io/gcloud-node/module-datastore.html) to learn how to interact with the Cloud Datastore using this Client Library.
 
 ```js
 var gcloud = require('gcloud');
 var datastore = gcloud.datastore;
 var dataset;
 
-// From Google Compute Engine
+// From Google Compute Engine:
 dataset = new datastore.Dataset({
   projectId: 'my-project',
 });
 
-// From elsewhere
+// Or from elsewhere:
 dataset = new datastore.Dataset({
   projectId: 'my-project',
-  keyFilename: '/path/to/keyfile.json' 
+  keyFilename: '/path/to/keyfile.json'
 });
 
-dataset.get(dataset.key('Product', 'Computer'), function(err, entity) {});
+dataset.get(dataset.key('Product', 'Computer'), function(err, entity) {
+  console.log(err || entity);
+});
 ```
 
 ## Google Cloud Storage
@@ -69,27 +71,35 @@ dataset.get(dataset.key('Product', 'Computer'), function(err, entity) {});
 
 You need to create a Google Cloud Storage bucket to use this client library. Follow the steps on the [Google Cloud Storage docs](https://developers.google.com/storage/docs/cloud-console#_creatingbuckets) to learn how to create a bucket.
 
-See [the API documentation](https://googlecloudplatform.github.io/gcloud-node/module-storage.html) to learn how to connect to the Cloud Storage using this Client Library.
+See [the gcloud-node API documentation](https://googlecloudplatform.github.io/gcloud-node/module-storage.html) to learn how to connect to the Cloud Storage using this Client Library.
 
 ```js
 var gcloud = require('gcloud');
 var storage = gcloud.storage;
 var bucket;
 
-// From Google Compute Engine
+// From Google Compute Engine:
 bucket = new storage.Bucket({
   bucketName: YOUR_BUCKET_NAME
 });
 
-// From elsewhere
+// Or from elsewhere:
 bucket = new storage.Bucket({
   bucketName: YOUR_BUCKET_NAME,
   keyFilename: '/path/to/the/key.json'
 });
 
-bucket.write('filename', 'Hello World', function(err) {});
+bucket.write('demo.txt', 'Hello World', function(err) {
+  console.log(err || 'Created demo.txt');
+});
 ```
 
 ## Contributing
 
-See [CONTRIBUTING](CONTRIBUTING.md).
+Contributions to this library are always welcome and highly encouraged.
+
+See [CONTRIBUTING](CONTRIBUTING.md) for more information on how to get started.
+
+## License
+
+Apache 2.0 - See [COPYING](COPYING) for more information.
