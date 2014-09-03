@@ -1,0 +1,148 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "ignore": true
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>@module gcloud</p>",
+      "summary": "<p>@module gcloud</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": true,
+    "code": "'use strict';"
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>@alias module:gcloud</p>",
+      "summary": "<p>@alias module:gcloud</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": true,
+    "code": "var gcloud = {};",
+    "ctx": {
+      "type": "declaration",
+      "name": "gcloud",
+      "value": "{}",
+      "string": "gcloud"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "types": [
+          "module:datastore"
+        ]
+      },
+      {
+        "type": "return",
+        "types": [
+          "module:datastore"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\nvar datastore = gcloud.datastore;\n\n// datastore:\n// {\n//   Dataset: function() {},\n//   double: function() {},\n//   int: function() {}\n// }"
+      }
+    ],
+    "description": {
+      "full": "<p>[Google Cloud Datastore]{@link <a href=\"https://developers.google.com/datastore/}\">https://developers.google.com/datastore/}</a> is a<br />fully managed, schemaless database for storing non-relational data. Use this<br />object to create a Dataset to interact with your data, an &quot;Int&quot;, and a<br />&quot;Double&quot; representation.</p>",
+      "summary": "<p>[Google Cloud Datastore]{@link <a href=\"https://developers.google.com/datastore/}\">https://developers.google.com/datastore/}</a> is a<br />fully managed, schemaless database for storing non-relational data. Use this<br />object to create a Dataset to interact with your data, an &quot;Int&quot;, and a<br />&quot;Double&quot; representation.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "gcloud.datastore = require('./datastore');",
+    "ctx": {
+      "type": "property",
+      "receiver": "gcloud",
+      "name": "datastore",
+      "value": "require('./datastore')",
+      "string": "gcloud.datastore"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "types": [
+          "module:pubsub"
+        ]
+      },
+      {
+        "type": "return",
+        "types": [
+          "object"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\nvar pubsub = gcloud.pubsub;\n\nvar conn = new pubsub.Connection({\n  projectId: YOUR_PROJECT_ID,\n  keyFilename: '/path/to/the/key.json'\n});"
+      }
+    ],
+    "description": {
+      "full": "<p><strong>Experimental</strong></p><p>[Google Cloud Pub/Sub]{@link <a href=\"https://developers.google.com/pubsub/overview}\">https://developers.google.com/pubsub/overview}</a><br />is a reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p><p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use it<br />by filling the<br />[Limited Preview application form]{@link <a href=\"http://goo.gl/sO0wTu}\">http://goo.gl/sO0wTu}</a>.</p>",
+      "summary": "<p><strong>Experimental</strong></p>",
+      "body": "<p>[Google Cloud Pub/Sub]{@link <a href=\"https://developers.google.com/pubsub/overview}\">https://developers.google.com/pubsub/overview}</a><br />is a reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p><p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use it<br />by filling the<br />[Limited Preview application form]{@link <a href=\"http://goo.gl/sO0wTu}\">http://goo.gl/sO0wTu}</a>.</p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "gcloud.pubsub = require('./pubsub');",
+    "ctx": {
+      "type": "property",
+      "receiver": "gcloud",
+      "name": "pubsub",
+      "value": "require('./pubsub')",
+      "string": "gcloud.pubsub"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "types": [
+          "module:storage"
+        ]
+      },
+      {
+        "type": "return",
+        "types": [
+          "module:storage"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\nvar storage = gcloud.storage;\n\n// storage:\n// {\n//   Bucket: function() {}\n// }"
+      }
+    ],
+    "description": {
+      "full": "<p>Google Cloud Storage allows you to store data on Google infrastructure. Read<br />[Google Cloud Storage API docs]{@link <a href=\"https://developers.google.com/storage/}\">https://developers.google.com/storage/}</a><br />for more information.</p><p>You need to create a Google Cloud Storage bucket to use this client library.<br />Follow the steps on<br />[Google Cloud Storage docs]{@link <a href=\"https://developers.google.com/storage/}\">https://developers.google.com/storage/}</a> to<br />create a bucket.</p>",
+      "summary": "<p>Google Cloud Storage allows you to store data on Google infrastructure. Read<br />[Google Cloud Storage API docs]{@link <a href=\"https://developers.google.com/storage/}\">https://developers.google.com/storage/}</a><br />for more information.</p>",
+      "body": "<p>You need to create a Google Cloud Storage bucket to use this client library.<br />Follow the steps on<br />[Google Cloud Storage docs]{@link <a href=\"https://developers.google.com/storage/}\">https://developers.google.com/storage/}</a> to<br />create a bucket.</p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "gcloud.storage = require('./storage');\n\nmodule.exports = gcloud;",
+    "ctx": {
+      "type": "property",
+      "receiver": "gcloud",
+      "name": "storage",
+      "value": "require('./storage')",
+      "string": "gcloud.storage"
+    }
+  }
+]
