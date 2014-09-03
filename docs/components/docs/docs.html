@@ -1,0 +1,124 @@
+<header class="page-header fixed" role="banner">
+  <h1 class="logo">
+    <a href="/gcloud-node" title="Home">
+      <img src="img/logo.svg" alt="Google Cloud Platform" />
+      <span class="gcloud">gcloud</span>
+    </a>
+  </h1>
+</header><!-- end of .page-header -->
+
+<article class="main lang-page" role="main">
+  <section class="content">
+    <h1 class="page-title">Node.js</h1>
+
+    <article>
+      <h1>{{module[0].toUpperCase() + module.substr(1)}}</h1>
+      <p>
+        First, install <code>gcloud</code> with npm and require it into your project:
+      </p>
+      <div hljs>$ npm install --save gcloud</div>
+      <div hljs>var gcloud = require('gcloud');</div>
+
+      <article ng-if="isActiveDoc('datastore')">
+        <p>
+          The <code>gcloud.datastore</code> object gives you some convenience methods, as well as exposes a <code>Dataset</code> function. This will allow you to create a <code>Dataset</code>, which is the object from which you will interact with the Google Cloud Datastore.
+        </p>
+        <div hljs>
+var datastore = gcloud.datastore;
+var dataset = new datastore.Dataset();</div>
+        <p ng-if="!isActiveUrl('/docs/datastore/dataset')">
+          See <a href="/#/docs/datastore/dataset">the Dataset documentation</a> for examples of how to query the datastore, save entities, run a transaction, and others.
+        </p>
+      </article>
+
+      <article ng-if="isActiveDoc('storage')">
+        <p>
+          The <code>gcloud.storage</code> object contains a <code>Bucket</code> object, which is how you will interact with your Google Cloud Storage bucket.
+        </p>
+        <div hljs>
+var storage = gcloud.storage;
+var bucket = new storage.Bucket({
+  bucketName: 'MyBucket'
+});</div>
+        <p>
+          See examples below for more on how to upload a file, read from your bucket's files, create signed URLs, and more.
+        </p>
+      </article>
+    </article>
+
+    <article ng-repeat="method in methods" id="{{method.name}}">
+      <h2 ng-if="method.name[0].toUpperCase() === method.name[0]">
+        {{method.name}}
+      </h2>
+      <h3 ng-if="method.name[0].toUpperCase() !== method.name[0]">
+        {{method.name}}
+      </h3>
+      <p ng-if="method.description" ng-bind-html="method.description"></p>
+      <h4 ng-show="method.params">Parameters</h4>
+      <table class="table" ng-show="method.params">
+        <tbody>
+          <tr ng-repeat="param in method.params">
+            <th scope="row">{{param.name}}</th>
+            <td ng-bind-html="param.types"></td>
+            <td ng-bind-html="param.description"></td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 ng-show="method.returns">Returns</h4>
+      <p ng-show="method.returns" ng-bind-html="method.returns"></p>
+      <h4 ng-show="method.example">Example</h4>
+      <div ng-repeat-end
+        ng-show="method.example"
+        hljs source="method.example" language="js"></div>
+      <hr ng-if="$index < methods.length - 1">
+    </article>
+  </section><!-- end of .content -->
+
+  <nav class="side-nav">
+    <ul class="page-sections">
+      <li ng-repeat="page in pages">
+        <a
+          ng-class="{ current: isActiveUrl(page.url) }"
+          ng-href="{{page.url}}">
+          {{page.title}}
+        </a>
+        <ul class="sub-sections" ng-if="page.pages">
+          <li ng-repeat="innerPage in page.pages">
+            <a
+              ng-class="{ current: isActiveUrl(page.url + innerPage.url) }"
+              ng-href="{{page.url + innerPage.url}}">
+              {{innerPage.title}}
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <ul class="external-links">
+      <li>
+        <a href="https://github.com/GoogleCloudPlatform/gcloud-node" title="gcloud-node on Github">
+          <img src="img/icon-link-github.svg" alt="GitHub icon" />
+          GitHub
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/GoogleCloudPlatform/gcloud-node/issues" title="gcloud-node issues on Github">
+          <img src="img/icon-link-github.svg" alt="GitHub icon" />
+          Issues
+        </a>
+      </li>
+      <li>
+        <a href="http://stackoverflow.com/questions/tagged/gcloud-node" title="gcloud-node on StackOverflow">
+          <img src="img/icon-link-stackoverflow.svg" alt="StackOverflow icon" />
+          StackOverflow
+        </a>
+      </li>
+      <li>
+        <a href="http://npmjs.org/package/gcloud" title="gcloud-node on npm">
+          <img src="img/icon-link-package-manager.svg" alt="npm icon" />
+          npm
+        </a>
+      </li>
+    </ul>
+  </nav><!-- end of .side-nav -->
+</article>

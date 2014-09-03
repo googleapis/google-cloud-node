@@ -7,19 +7,22 @@ branches:
     - master
 env:
   global:
-    - secure: "B1vanjI2TMf+YnmbcF5HWAMNnmT+CFr2EB1CCIcyoWqs2RIBvgiDH0gDR46iUDdfPRSt3Eokaru1fY8ptZDRnrt3oKokWp4ZrRO0x7uUGbkGfdmHHxnOlUA1m9rVhaOBCWl5opfaA8ncWcXwdWZGg7HWpS7EfTNr2dIr7lAC2mU="
+    - secure: "a9Qx7y7dIWXEdppdmPW5g6CJQpUWUmd3sKWcJPKMfcg+xVHEBhPl9PCt/2jGK1sxstTDiwrVaV1NKpG4qD03UVot2zX28o1mM7JY6rDAl709rvKveegDeC9vo+U/BWid3lq/Impl37X0YYGY+spEcptI6bnvWxa6d7MGPCx3L2c="
     - GH_OWNER: GoogleCloudPlatform
     - GH_PROJECT_NAME: gcloud-node
 script:
   - npm run lint
   - npm run test
 after_success:
-  - git submodule add -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} site > /dev/null 2>&1
-  - cd site
+  - git submodule add -b master https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} master > /dev/null 2>&1
+  - cd master
+  - npm install
+  - npm run docs
+  - git submodule add -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} ghpages > /dev/null 2>&1
+  - cd ghpages
   - if git checkout gh-pages; then git checkout -b gh-pages; fi
   - git rm -r .
   - cp -R ../docs/* .
-  - cp ../docs/.* .
   - git add -f .
   - git config user.email "sawchuk@gmail.com"
   - git config user.name "stephenplusplus"
