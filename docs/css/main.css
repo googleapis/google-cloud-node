@@ -98,10 +98,12 @@ textarea {
    ========================================================================== */
 
 html {
+    height: 100%;
     background: #fff;
 }
 
 body {
+    height: 100%;
     font-family: 'Roboto', sans-serif;
     color: #5d6061;
 }
@@ -332,7 +334,6 @@ h1, h2, h3, h4, h5, h6 {
  What is it?
  */
 .about pre {
-  border: 0;
   font-size: 110%;
 }
 
@@ -556,16 +557,95 @@ h1, h2, h3, h4, h5, h6 {
 /* Docs Content
    ========================================================================== */
 
-.content {
-    padding: 4em 2em 1em;
+.docs-header {
+    position: relative;
+    padding: 7em 2em 4em;
+    background: #f8f8f8;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
+/*
+ Page Title
+*/
+
 .page-title {
-    margin-bottom: 1em;
+    margin: 0;
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
     color: #4285f4;
     font-size: 2.4em;
+    line-height: 1em;
+}
+
+/*
+ Versions
+*/
+
+.versions {
+    display: inline-block;
+    margin-top: 2em;
+}
+
+.versions span,
+.versions a {
+    display: block;
+}
+
+.v-current {
+    font-size: 1.2em;
+    color: #2b70e2;
+}
+
+.v-current i {
+    font-size: 0.7em;
+}
+
+.v-btn {
+    padding: 0.5em;
+    border: 1px solid rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.07);
+    font-size: 0.8em;
+    color: rgba(0,0,0,0.6);
+    text-align: center;
+    text-decoration: none;
+    /* Transitions */
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+}
+
+.v-btn:hover {
+    background: rgba(0,0,0,0.02);
+}
+
+.v-btn img {
+    position: relative;
+    top: -0.1em;
+    opacity: 0.3;
+}
+
+.v-list {
+    color: rgba(0,0,0,0.2);
+}
+
+.v-list a {
+    color: #4285f4;
+    text-decoration: none;
+}
+
+.v-list a:hover {
+    text-decoration: underline;
+}
+
+/*
+ Content
+ */
+
+
+.content {
+    padding: 1em 2em;
 }
 
 .content pre,
@@ -576,6 +656,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .content h2, .content h3, .content h4, .content h5, .content h6 {
     margin: 2em 0 0.5em;
+}
+
+.content>h2:first-child {
+    margin-top: 1em;
 }
 
 /*
@@ -818,6 +902,26 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
+@media only screen and (min-width: 45em) {
+
+    /*
+     Docs Header
+    */
+
+    .versions {
+        position: absolute;
+        top: 6em;
+        right: 2em;
+        margin: 0;
+    }
+
+    .v-btn {
+        font-size: 0.7em;
+        line-height: normal;
+    }
+
+}
+
 @media only screen and (min-width: 50em) {
 
     /*
@@ -900,6 +1004,17 @@ h1, h2, h3, h4, h5, h6 {
         top: 70px;
     }
 
+    /*
+     Docs Header
+    */
+
+    .docs-header {
+        padding-top: 7.7em;
+    }
+
+    .versions {
+        top: 7em;
+    }
 
     /*
      Content
@@ -909,11 +1024,7 @@ h1, h2, h3, h4, h5, h6 {
     .content {
         width: 80%;
         margin: 0 auto;
-        padding: 4em 0;
-    }
-
-    .content {
-        padding-top: 6em;
+        padding: 2em 0;
     }
 
     /*
@@ -1058,18 +1169,25 @@ h1, h2, h3, h4, h5, h6 {
     */
 
     .lang-page {
-        max-width: 780px;
-        padding-left: 290px;
         background: url(../img/lang-bg.png) repeat-y;
+    }
+
+    .docs-header {
+        margin-left: 240px;
     }
 
     .content {
         width: 100%;
+        max-width: 1070px;
+        padding-left: 290px;
+        padding-right: 2em;
+        /* Box Sizing  */
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
         margin: 0;
-        padding-top: 6.2em;
         font-size: 0.9em;
     }
-
 
     .side-nav {
         position: absolute;
