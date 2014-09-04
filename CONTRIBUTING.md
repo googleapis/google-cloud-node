@@ -7,29 +7,55 @@
 
 ## Testing
 
+### Unit tests
+
+To run the unit tests, simply run:
+
 ``` sh
-# Run the tests.
 $ npm test
-
-# Run the regression tests.
-$ npm run regression-test
-
-# See the test coverage report.
-$ npm run cover
 ```
 
-To run the regression tests, first create and configure a project following the [instructions on how to run gcloud-node][elsewhere]. After that, set the following environment variables:
+### Regression Tests
+
+To run the regression tests, first create and configure a project in the Google Developers Console following the [instructions on how to run gcloud-node][elsewhere]. After that, set the following environment variables:
 
 - **GCLOUD_TESTS_PROJECT_ID**: Developers Console project's ID (e.g. bamboo-shift-455)
 - **GCLOUD_TESTS_BUCKET_NAME**: The name of the bucket to use for the Cloud Storage API tests
 - **GCLOUD_TESTS_KEY**: The path to the JSON key file.
 
-Lastly, create the indexes used in the datastore regression tests using the [gcloud command-line tool][gcloudcli] and the indexes found in `regression/data/index/yaml`:
+Install the [gcloud command-line tool][gcloudcli] to your machine and use it to create the indexes used in the datastore regression tests with indexes found in `regression/data/index/yaml`:
+
+From the project's root directory:
 
 ``` sh
-# From the project's root directory:
+# Install the app component
+$ gcloud components update app
+
+# Set the default project in your env
+$ gcloud config set project $GCLOUD_TESTS_PROJECT_ID
+
+# Authenticate the gcloud tool with your account
+$ gcloud auth login
+
+# Create the indexes
 $ gcloud preview datastore create-indexes regression/data/
 ```
+
+You may now run the regression tests:
+
+``` sh
+$ npm run regression-test
+```
+
+### Test Coverage
+
+Generate the coverage report:
+
+``` sh
+$ npm run cover
+```
+
+The test coverage report will be available in `coverage/`.
 
 ## Contributor License Agreements
 
