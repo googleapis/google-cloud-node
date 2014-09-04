@@ -117,10 +117,13 @@ pre {
         -moz-border-radius: 5px;
         border-radius: 5px;
     background: #fff;
-    font-family: 'Droid Sans Mono', monospace;
     font-size: 0.9em;
     line-height: 1.6em;
+}
 
+pre,
+code {
+  font-family: Monaco, 'Droid Sans Mono', monospace !important;
 }
 
 img {
