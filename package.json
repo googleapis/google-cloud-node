@@ -54,15 +54,15 @@
   },
   "devDependencies": {
     "coveralls": "^2.11.1",
+    "dox": "^0.4.6",
     "istanbul": "^0.3.0",
-    "jsdoc": "^3.3.0-alpha9",
     "jshint": "^2.5.2",
     "mocha": "^1.21.3",
     "sandboxed-module": "^1.0.1",
     "tmp": "0.0.24"
   },
   "scripts": {
-    "docs": "jsdoc -c .jsdoc.json && cp docs/module-gcloud.html docs/index.html",
+    "docs": "dox < lib/index.js > docs/json/index.json & dox < lib/datastore/dataset.js > docs/json/datastore/dataset.json & dox < lib/datastore/index.js > docs/json/datastore/index.json & dox < lib/datastore/query.js > docs/json/datastore/query.json & dox < lib/storage/index.js > docs/json/storage/index.json",
     "lint": "jshint lib/ regression/ test/",
     "test": "mocha --recursive --reporter spec",
     "regression-test": "mocha regression/datastore.js regression/storage.js --reporter spec --timeout 15000",
