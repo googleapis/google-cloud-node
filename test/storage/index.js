@@ -27,7 +27,7 @@ function createBucket() {
   return new storage.Bucket({
     bucketName: 'bucket-name',
     email: 'xxx@email.com',
-    pemFilePath: '/some/path'
+    credentials: require('../testdata/privateKeyFile.json')
   });
 }
 
@@ -129,5 +129,18 @@ describe('Bucket', function() {
       done();
     };
     bucket.remove('file-name');
+  });
+
+  it('should create a signed url', function(done) {
+    var bucket = createBucket();
+    bucket.getSignedUrl({
+        action: 'read',
+        resource: 'filename',
+        expires: Date.now() / 1000
+      }, function(err, url) {
+        assert.ifError(err);
+        assert.equal(typeof url, 'string');
+        done();
+      });
   });
 });
