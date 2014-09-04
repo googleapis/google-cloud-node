@@ -120,6 +120,28 @@ var queryFilterProto = {
   group_by: []
 };
 
+describe('Key', function() {
+  var path = ['Kind', 23];
+  var id = path[path.length  - 1];
+  var key = new entity.Key({
+    path: ['Kind', 23]
+  });
+
+  it('should expose internal Key values', function() {
+    assert.strictEqual(key.namespace, undefined);
+    assert.deepEqual(key.path, path);
+    assert.equal(key.id, id);
+  });
+
+  it('should protect internal Key values', function() {
+    ['namespace', 'path', 'id'].forEach(function(property) {
+      assert.throws(function() {
+        key[property] = 'overriden value';
+      }, /Cannot assign/);
+    });
+  });
+});
+
 describe('registerKind', function() {
   it('should be able to register valid field metadata', function(done) {
     entity.registerKind('namespace', 'kind', blogPostMetadata);
