@@ -42,7 +42,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
 
 See the [Google Cloud Datastore docs](https://developers.google.com/datastore/docs/activate) for more details on how to activate Cloud Datastore for your project.
 
-See [the gcloud-node API documentation](https://googlecloudplatform.github.io/gcloud-node/module-datastore.html) to learn how to interact with the Cloud Datastore using this Client Library.
+See [the gcloud-node API documentation](https://googlecloudplatform.github.io/gcloud-node/#/docs/datastore) to learn how to interact with the Cloud Datastore using this Client Library.
 
 ```js
 var gcloud = require('gcloud');
@@ -71,7 +71,7 @@ dataset.get(dataset.key('Product', 'Computer'), function(err, entity) {
 
 You need to create a Google Cloud Storage bucket to use this client library. Follow the steps on the [Google Cloud Storage docs](https://developers.google.com/storage/docs/cloud-console#_creatingbuckets) to learn how to create a bucket.
 
-See [the gcloud-node API documentation](https://googlecloudplatform.github.io/gcloud-node/module-storage.html) to learn how to connect to the Cloud Storage using this Client Library.
+See [the gcloud-node API documentation](https://googlecloudplatform.github.io/gcloud-node/#/docs/storage) to learn how to connect to the Cloud Storage using this Client Library.
 
 ```js
 var gcloud = require('gcloud');
