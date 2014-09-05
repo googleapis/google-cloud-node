@@ -651,7 +651,7 @@
           "string"
         ],
         "name": "name",
-        "description": "- Name of the remote file toc reate."
+        "description": "- Name of the remote file to create."
       },
       {
         "type": "param",
