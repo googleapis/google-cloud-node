@@ -51,7 +51,7 @@ describe('datastore', function() {
       var postKey = ds.key('Post', 'post1');
       ds.save({ key: postKey, data: post }, function(err, key) {
         assert.ifError(err);
-        assert.equal(key.path_[1], 'post1');
+        assert.equal(key.path[1], 'post1');
         ds.get(key, function(err, entity) {
           assert.ifError(err);
           assert.deepEqual(entity.data, post);
@@ -70,7 +70,7 @@ describe('datastore', function() {
         data: post
       }, function(err, key) {
         assert.ifError(err);
-        assert.equal(key.path_[1], 123456789);
+        assert.equal(key.path[1], 123456789);
         ds.get(key, function(err, entity) {
           assert.ifError(err);
           assert.deepEqual(entity.data, post);
@@ -88,7 +88,7 @@ describe('datastore', function() {
         data: post
       }, function(err, key) {
         assert.ifError(err);
-        var assignedId = key.path_[1];
+        var assignedId = key.path[1];
         assert(assignedId);
         ds.get(ds.key('Post', assignedId), function(err, entity) {
           assert.ifError(err);
@@ -118,8 +118,8 @@ describe('datastore', function() {
       ], function(err, keys) {
         assert.ifError(err);
         assert.equal(keys.length,2);
-        var firstKey = ds.key('Post', keys[0].path_[1]);
-        var secondKey = ds.key('Post', keys[1].path_[1]);
+        var firstKey = ds.key('Post', keys[0].path[1]);
+        var secondKey = ds.key('Post', keys[1].path[1]);
         ds.get([firstKey, secondKey], function(err, entities) {
           assert.ifError(err);
           assert.equal(entities.length, 2);
