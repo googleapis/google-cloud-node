@@ -269,7 +269,7 @@
         "types": [
           "string"
         ],
-        "name": "query.delimeter",
+        "name": "query.delimiter",
         "description": "- Results will contain only objects whose     names, aside from the prefix, do not contain delimiter. Objects whose\n    names, aside from the prefix, contain delimiter will have their name\n    truncated after the delimiter, returned in prefixes. Duplicate prefixes\n    are omitted."
       },
       {
