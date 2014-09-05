@@ -5,6 +5,6 @@ angular
 
     $routeProvider
       .when('/', {
-        templateUrl: '/gcloud-node/home.html'
+        templateUrl: 'home.html'
       });
   });
