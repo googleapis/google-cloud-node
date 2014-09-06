@@ -100,6 +100,25 @@ angular
       };
     }
 
+    function setMethod($location, methodName) {
+      return function(methods) {
+        var methodExists = methods.some(function(methodObj) {
+          return methodName === methodObj.name;
+        });
+        if (methodExists) {
+          methods.singleMethod = methodName;
+          return methods;
+        } else {
+          $location.path('/docs/' + module + '/' + cl);
+        }
+      };
+    }
+
+    var MODULE_TO_CLASSES = {
+      datastore: ['dataset', 'query'],
+      storage: []
+    };
+
     $routeProvider
       .when('/docs', {
         controller: 'DocsCtrl',
@@ -107,7 +126,13 @@ angular
         resolve: {
           methods: function($http, $sce) {
             return $http.get('json/index.json')
-                .then(filterDocJson($sce));
+                .then(filterDocJson($sce))
+                .then(function(methods) {
+                  // Prevent displaying permalinks.
+                  // ** Can remove when PubSub api is documented **
+                  methods.noPermalink = true;
+                  return methods;
+                });
           }
         }
       })
@@ -126,11 +151,34 @@ angular
         controller: 'DocsCtrl',
         templateUrl: 'components/docs/docs.html',
         resolve: {
-          methods: function($q, $http, $route, $sce) {
+          methods: function($q, $http, $route, $sce, $location) {
             var module = $route.current.params.module;
             var cl = $route.current.params.class;
+            if (MODULE_TO_CLASSES[module].length > 0) {
+              return $http
+                  .get('json/' + module + '/' + cl + '.json')
+                  .then(filterDocJson($sce));
+            } else {
+              // This is not a class, this is the name of a method.
+              var method = cl;
+              return $http.get('json/' + module + '/index.json')
+                  .then(filterDocJson($sce))
+                  .then(setMethod($location, method));
+            }
+          }
+        }
+      })
+      .when('/docs/:module/:class/:method', {
+        controller: 'DocsCtrl',
+        templateUrl: 'components/docs/docs.html',
+        resolve: {
+          methods: function($q, $http, $route, $sce, $location) {
+            var module = $route.current.params.module;
+            var cl = $route.current.params.class;
+            var method = $route.current.params.method;
             return $http.get('json/' + module + '/' + cl + '.json')
-                .then(filterDocJson($sce));
+                .then(filterDocJson($sce))
+                .then(setMethod($location, method));
           }
         }
       });
@@ -139,13 +187,20 @@ angular
     'use strict';
 
     $scope.isActiveUrl = function(url) {
-      return url.replace(/^#/, '') === $location.path();
+      var current = $location.path().replace('/' + methods.singleMethod, '');
+      var link = url
+          .replace(/^#/, '')
+          .replace('/' + methods.singleMethod, '');
+      return current === link;
     };
 
     $scope.isActiveDoc = function(doc) {
       return doc.toLowerCase() === $routeParams.module;
     };
 
+    $scope.activeUrl = '#' + $location.path();
+    $scope.singleMethod = methods.singleMethod;
+    $scope.noPermalink = methods.singleMethod || methods.noPermalink;
     $scope.methods = methods;
     $scope.module = $routeParams.module;
     $scope.pages = [

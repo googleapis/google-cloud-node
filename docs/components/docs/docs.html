@@ -48,11 +48,19 @@ var bucket = new storage.Bucket({
       </article>
     </article>
 
-    <article ng-repeat="method in methods" id="{{method.name}}">
+    <article
+      ng-repeat="method in methods"
+      ng-hide="singleMethod && method.name !== singleMethod">
       <h2 ng-if="method.name[0].toUpperCase() === method.name[0]">
         {{method.name}}
       </h2>
-      <h3 ng-if="method.name[0].toUpperCase() !== method.name[0]">
+      <h3
+        class="method-heading"
+        ng-if="method.name[0].toUpperCase() !== method.name[0]">
+        <a
+          class="permalink"
+          ng-if="!noPermalink"
+          ng-href="{{activeUrl + '/' + method.name}}">#</a>
         {{method.name}}
       </h3>
       <p ng-if="method.description" ng-bind-html="method.description"></p>
