@@ -197,8 +197,8 @@
       }
     ],
     "description": {
-      "full": "<p>Sort the results by a property name ascendingly or descendingly. By default,<br />an ascending sort order will be used.</p><p><em>Reference: {@link <a href=\"http://goo.gl/mfegFR}\">http://goo.gl/mfegFR}</a></em></p>",
-      "summary": "<p>Sort the results by a property name ascendingly or descendingly. By default,<br />an ascending sort order will be used.</p>",
+      "full": "<p>Sort the results by a property name in ascending or descending order. By<br />default, an ascending sort order will be used.</p><p><em>Reference: {@link <a href=\"http://goo.gl/mfegFR}\">http://goo.gl/mfegFR}</a></em></p>",
+      "summary": "<p>Sort the results by a property name in ascending or descending order. By<br />default, an ascending sort order will be used.</p>",
       "body": "<p><em>Reference: {@link <a href=\"http://goo.gl/mfegFR}\">http://goo.gl/mfegFR}</a></em></p>"
     },
     "isPrivate": false,
