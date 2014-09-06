@@ -564,6 +564,28 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
+.method-heading {
+    position: relative;
+}
+
+.permalink {
+    display: none;
+    position: absolute;
+    padding: 0 7px;
+    left: -24px;
+    text-decoration: none;
+    color: #2b70e2;
+}
+
+.permalink:hover {
+    color: #4285f4;
+    display: block;
+}
+
+.method-heading:hover .permalink {
+    display: block;
+}
+
 /*
  Page Title
 */
