@@ -1,4 +1,5 @@
 # Google Cloud Node.js Client
+[Quick, take me to the API documentation.](https://googlecloudplatform.github.io/gcloud-node/#/docs)
 
 > Node idiomatic client for Google Cloud services.
 
