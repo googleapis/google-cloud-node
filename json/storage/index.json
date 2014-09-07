@@ -18,7 +18,7 @@
     },
     "isPrivate": false,
     "ignore": true,
-    "code": "'use strict';\n\nvar crypto = require('crypto');\nvar duplexify = require('duplexify');\nvar nodeutil = require('util');\nvar stream = require('stream');\nvar uuid = require('node-uuid');"
+    "code": "'use strict';\n\nvar crypto = require('crypto');\nvar duplexify = require('duplexify');\nvar stream = require('stream');\nvar uuid = require('node-uuid');"
   },
   {
     "tags": [
@@ -132,62 +132,6 @@
       "name": "STORAGE_UPLOAD_BASE_URL",
       "value": "'https://www.googleapis.com/upload/storage/v1/b'",
       "string": "STORAGE_UPLOAD_BASE_URL"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "constructor",
-        "string": ""
-      },
-      {
-        "type": "param",
-        "types": [
-          "buffer"
-        ],
-        "name": "buffer",
-        "description": "- The buffer to stream. "
-      },
-      {
-        "type": "private",
-        "visibility": "private"
-      }
-    ],
-    "description": {
-      "full": "<p>Readable stream implementation to stream the given buffer.</p>",
-      "summary": "<p>Readable stream implementation to stream the given buffer.</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "ignore": false,
-    "code": "function BufferStream(buffer) {\n  stream.Readable.call(this);\n  this.data = buffer;\n}\n\nnodeutil.inherits(BufferStream, stream.Readable);",
-    "ctx": {
-      "type": "function",
-      "name": "BufferStream",
-      "string": "BufferStream()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "private",
-        "visibility": "private"
-      }
-    ],
-    "description": {
-      "full": "<p>Push the provided buffer to the stream.</p>",
-      "summary": "<p>Push the provided buffer to the stream.</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "ignore": false,
-    "code": "BufferStream.prototype._read = function() {\n  this.push(this.data);\n  this.push(null);\n};",
-    "ctx": {
-      "type": "method",
-      "constructor": "BufferStream",
-      "cons": "BufferStream",
-      "name": "_read",
-      "string": "BufferStream.prototype._read()"
     }
   },
   {
@@ -691,7 +635,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Bucket.prototype.write = function(name, options, callback) {\n  callback = callback || util.noop;\n  var data = typeof options === 'object' ? options.data : options;\n  var metadata = options.metadata || {};\n\n  if (typeof data === 'undefined') {\n    // metadata only write\n    this.makeReq('PATCH', 'o/' + name, null, metadata, callback);\n    return;\n  }\n\n  if (typeof data === 'string' || data instanceof Buffer) {\n    new BufferStream(data).pipe(this.createWriteStream(name, metadata))\n        .on('error', callback)\n        .on('complete', callback.bind(null, null));\n  }\n};",
+    "code": "Bucket.prototype.write = function(name, options, callback) {\n  callback = callback || util.noop;\n  var bufferStream;\n  var data = typeof options === 'object' ? options.data : options;\n  var metadata = options.metadata || {};\n\n  if (typeof data === 'undefined') {\n    // metadata only write\n    this.makeReq('PATCH', 'o/' + name, null, metadata, callback);\n    return;\n  }\n\n  if (typeof data === 'string' || data instanceof Buffer) {\n    bufferStream = new stream.PassThrough();\n    bufferStream.pipe(this.createWriteStream(name, metadata))\n        .on('error', callback)\n        .on('complete', callback.bind(null, null));\n    bufferStream.push(data);\n    bufferStream.push(null);\n  }\n};",
     "ctx": {
       "type": "method",
       "constructor": "Bucket",
