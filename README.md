@@ -25,7 +25,7 @@ $ npm install gcloud
 
 If you are running this client on Google Compute Engine, we handle authorization for you with no configuration. You just need to make sure that when you [set up the GCE instance](https://developers.google.com/compute/docs/authentication#using), you add the correct scopes for the APIs you want to access.
 
-### Elsewhere
+### Elsewhere (ie, where do I get keyfile.json?)
 
 If you are not running this client on Google Compute Engine, you need a Google Developers service account. To create a service account:
 
