@@ -29,8 +29,8 @@ describe('Dataset', function() {
   it('should return a key scoped by namespace', function() {
     var ds = new datastore.Dataset({ projectId: 'test', namespace: 'my-ns' });
     var key = ds.key('Company', 1);
-    assert.equal(key.namespace_, 'my-ns');
-    assert.deepEqual(key.path_, ['Company', 1]);
+    assert.equal(key.namespace, 'my-ns');
+    assert.deepEqual(key.path, ['Company', 1]);
   });
 
   it('should allow namespace specification when creating a key', function() {
@@ -39,8 +39,8 @@ describe('Dataset', function() {
       namespace: 'custom-ns',
       path: ['Company', 1]
     });
-    assert.equal(key.namespace_, 'custom-ns');
-    assert.deepEqual(key.path_, ['Company', 1]);
+    assert.equal(key.namespace, 'custom-ns');
+    assert.deepEqual(key.path, ['Company', 1]);
   });
 
   it('should get by key', function(done) {
@@ -52,7 +52,7 @@ describe('Dataset', function() {
     };
     ds.get(ds.key('Kind', 123), function(err, entity) {
       var data = entity.data;
-      assert.deepEqual(entity.key.path_, ['Kind', 5732568548769792]);
+      assert.deepEqual(entity.key.path, ['Kind', 5732568548769792]);
       assert.strictEqual(data.author, 'Silvano');
       assert.strictEqual(data.isDraft, false);
       assert.deepEqual(data.publishedAt, new Date(978336000000));
@@ -71,7 +71,7 @@ describe('Dataset', function() {
     ds.get([key], function(err, entities) {
       var entity = entities[0];
       var data = entity.data;
-      assert.deepEqual(entity.key.path_, ['Kind', 5732568548769792]);
+      assert.deepEqual(entity.key.path, ['Kind', 5732568548769792]);
       assert.strictEqual(data.author, 'Silvano');
       assert.strictEqual(data.isDraft, false);
       assert.deepEqual(data.publishedAt, new Date(978336000000));
@@ -306,7 +306,7 @@ describe('Dataset', function() {
 
       ds.runQuery(query, function (err, entities) {
         assert.ifError(err);
-        assert.deepEqual(entities[0].key.path_, ['Kind', 5732568548769792]);
+        assert.deepEqual(entities[0].key.path, ['Kind', 5732568548769792]);
 
         var data = entities[0].data;
         assert.strictEqual(data.author, 'Silvano');
