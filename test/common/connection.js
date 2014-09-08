@@ -49,6 +49,35 @@ describe('Connection', function() {
   });
 
   describe('credentials object', function() {
+    describe('getCredentials', function() {
+      it('should expose a method to retrieve credentials', function() {
+        var conn = new connection.Connection();
+        assert.equal(typeof conn.getCredentials, 'function');
+      });
+
+      it('should return credentials object if provided', function(done) {
+        var conn = new connection.Connection({
+          credentials: privateKeyFileJson
+        });
+        conn.getCredentials(function(err, credentials) {
+          assert.deepEqual(credentials, privateKeyFileJson);
+          done();
+        });
+      });
+
+      it('should fetch token if missing credentials object', function(done) {
+        var conn = new connection.Connection();
+        conn.fetchToken = function(cb) {
+          conn.credentials = privateKeyFileJson;
+          cb();
+        };
+        conn.getCredentials(function(err, credentials) {
+          assert.deepEqual(credentials, privateKeyFileJson);
+          done();
+        });
+      });
+    });
+
     it('should accept and assign a complete credentials object', function() {
       var credConnection = new connection.Connection({
         credentials: privateKeyFileJson
