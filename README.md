@@ -13,6 +13,8 @@ This client supports the following Google Cloud services:
 * [Google Cloud Datastore](https://cloud.google.com/products/cloud-datastore/)
 * [Google Cloud Storage](https://cloud.google.com/products/cloud-storage/)
 
+If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
+
 ## Quick Start
 
 ```sh
@@ -106,3 +108,5 @@ See [CONTRIBUTING](CONTRIBUTING.md) for more information on how to get started.
 ## License
 
 Apache 2.0 - See [COPYING](COPYING) for more information.
+
+[googleapis]: https://github.com/google/google-api-nodejs-client
