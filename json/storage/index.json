@@ -260,7 +260,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Bucket.prototype.list = function(query, callback) {\n  if (arguments.length === 1) {\n    callback = query;\n    query = {};\n  }\n  this.makeReq('GET', 'o', query, true, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = util.extend({}, query);\n      nextQuery.pageToken = resp.nextPageToken;\n    }\n    callback(null, resp.items, nextQuery);\n  });\n};",
+    "code": "Bucket.prototype.list = function(query, callback) {\n  if (arguments.length === 1) {\n    callback = query;\n    query = {};\n  }\n  this.makeReq_('GET', 'o', query, true, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = util.extend({}, query);\n      nextQuery.pageToken = resp.nextPageToken;\n    }\n    callback(null, resp.items, nextQuery);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Bucket",
@@ -299,7 +299,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Bucket.prototype.stat = function(name, callback) {\n  var path = util.format('o/{name}', { name: name });\n  this.makeReq('GET', path, null, true, callback);\n};",
+    "code": "Bucket.prototype.stat = function(name, callback) {\n  var path = util.format('o/{name}', { name: name });\n  this.makeReq_('GET', path, null, true, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Bucket",
@@ -369,7 +369,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Bucket.prototype.copy = function(name, metadata, callback) {\n  callback = callback || util.noop;\n  if (!metadata.name) {\n    throw new Error('Destination file should have a name.');\n  }\n  if (!metadata.bucket) {\n    metadata.bucket = this.bucketName;\n  }\n  var path = util.format('o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {\n    srcName: name,\n    destBucket: metadata.bucket,\n    destName: metadata.name\n  });\n  delete metadata.name;\n  delete metadata.bucket;\n  this.makeReq('POST', path, null, metadata, callback);\n};",
+    "code": "Bucket.prototype.copy = function(name, metadata, callback) {\n  callback = callback || util.noop;\n  if (!metadata.name) {\n    throw new Error('Destination file should have a name.');\n  }\n  if (!metadata.bucket) {\n    metadata.bucket = this.bucketName;\n  }\n  var path = util.format('o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {\n    srcName: name,\n    destBucket: metadata.bucket,\n    destName: metadata.name\n  });\n  delete metadata.name;\n  delete metadata.bucket;\n  this.makeReq_('POST', path, null, metadata, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Bucket",
@@ -408,7 +408,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Bucket.prototype.remove = function(name, callback) {\n  var path = util.format('o/{name}', { name: name });\n  this.makeReq('DELETE', path, null, true, callback);\n};",
+    "code": "Bucket.prototype.remove = function(name, callback) {\n  var path = util.format('o/{name}', { name: name });\n  this.makeReq_('DELETE', path, null, true, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Bucket",
@@ -635,7 +635,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Bucket.prototype.write = function(name, options, callback) {\n  callback = callback || util.noop;\n  var bufferStream;\n  var data = typeof options === 'object' ? options.data : options;\n  var metadata = options.metadata || {};\n\n  if (typeof data === 'undefined') {\n    // metadata only write\n    this.makeReq('PATCH', 'o/' + name, null, metadata, callback);\n    return;\n  }\n\n  if (typeof data === 'string' || data instanceof Buffer) {\n    bufferStream = new stream.PassThrough();\n    bufferStream.pipe(this.createWriteStream(name, metadata))\n        .on('error', callback)\n        .on('complete', callback.bind(null, null));\n    bufferStream.push(data);\n    bufferStream.push(null);\n  }\n};",
+    "code": "Bucket.prototype.write = function(name, options, callback) {\n  callback = callback || util.noop;\n  var bufferStream;\n  var data = typeof options === 'object' ? options.data : options;\n  var metadata = options.metadata || {};\n\n  if (typeof data === 'undefined') {\n    // metadata only write\n    this.makeReq_('PATCH', 'o/' + name, null, metadata, callback);\n    return;\n  }\n\n  if (typeof data === 'string' || data instanceof Buffer) {\n    bufferStream = new stream.PassThrough();\n    bufferStream.pipe(this.createWriteStream(name, metadata))\n        .on('error', callback)\n        .on('complete', callback.bind(null, null));\n    bufferStream.push(data);\n    bufferStream.push(null);\n  }\n};",
     "ctx": {
       "type": "method",
       "constructor": "Bucket",
@@ -694,6 +694,10 @@
   {
     "tags": [
       {
+        "type": "private",
+        "visibility": "private"
+      },
+      {
         "type": "param",
         "types": [
           "string"
@@ -739,15 +743,15 @@
       "summary": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
       "body": ""
     },
-    "isPrivate": false,
+    "isPrivate": true,
     "ignore": false,
-    "code": "Bucket.prototype.makeReq = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: util.format('{base}/{bucket}/{path}', {\n      base: STORAGE_BASE_URL,\n      bucket: this.bucketName,\n      path: path\n    })\n  };\n  if (body) {\n    reqOpts.json = body;\n  }\n  this.conn.req(reqOpts, function(err, res, body) {\n    util.handleResp(err, res, body, callback);\n  });\n};\n\nmodule.exports.Bucket = Bucket;",
+    "code": "Bucket.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: util.format('{base}/{bucket}/{path}', {\n      base: STORAGE_BASE_URL,\n      bucket: this.bucketName,\n      path: path\n    })\n  };\n  if (body) {\n    reqOpts.json = body;\n  }\n  this.conn.req(reqOpts, function(err, res, body) {\n    util.handleResp(err, res, body, callback);\n  });\n};\n\nmodule.exports.Bucket = Bucket;",
     "ctx": {
       "type": "method",
       "constructor": "Bucket",
       "cons": "Bucket",
-      "name": "makeReq",
-      "string": "Bucket.prototype.makeReq()"
+      "name": "makeReq_",
+      "string": "Bucket.prototype.makeReq_()"
     }
   }
 ]
