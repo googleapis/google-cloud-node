@@ -357,7 +357,9 @@ h2, h3 {
 .featuring-links {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 8px;
+    background-color: #eee;
+    border-radius: 5px;
 }
 
 .btn,
@@ -400,6 +402,68 @@ h2, h3 {
 
 .featuring-links .btn img {
     width: 2em;
+}
+
+.docs-link {
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: normal;
+    margin-bottom: 1.3em;
+}
+
+.docs-link img {
+    background-color: #5d6061;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 4px;
+    width: 4%;
+    margin-top: -3px;
+    margin-left: 8px;
+    margin-right: 8px;
+    /* Transitions */
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -ms-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+}
+
+.docs-link a {
+    color: #4285f4;
+    text-decoration: none;
+    /* Transitions */
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+}
+
+.docs-link .supplementary-text {
+    font-size: .8em;
+    color: rgba(93, 96, 97, .8);
+}
+
+.docs-link a:hover .link-text {
+    text-decoration: underline;
+}
+
+.docs-link a:hover img {
+    background-color: #4285f4;
+    -webkit-border-radius: 80px;
+    -moz-border-radius: 80px;
+    border-radius: 80px;
+    transform: rotate(135deg);
+    -webkit-box-shadow: 4px 4px 4px #eee;
+    -moz-box-shadow: 4px 4px 4px #eee;
+    box-shadow: 4px 4px 4px #eee;
+}
+
+.docs-link a:active img {
+    -webkit-box-shadow: 4px 4px 4px #ddd;
+    -moz-box-shadow: 4px 4px 4px #ddd;
+    box-shadow: 4px 4px 4px #ddd;
 }
 
 .ext-link {
@@ -880,7 +944,7 @@ h2, h3 {
    Modify as content requires.
    ========================================================================== */
 
-@media only screen and (min-width: 35em) {
+@media only screen and (min-width: 36em) {
 
     /*
      Main
@@ -900,10 +964,6 @@ h2, h3 {
 
     .featuring-links li {
         display: inline-block;
-    }
-
-    .featuring-links li:first-child {
-        display: block;
     }
 
     .featuring-links .btn {
@@ -1140,6 +1200,14 @@ h2, h3 {
     }
 
     /*
+    Doc Link
+    */
+    .docs-link {
+        font-size: 1.7em;
+        margin-bottom: 1.1em;
+    }
+
+    /*
     Featuring
     */
 
@@ -1149,10 +1217,6 @@ h2, h3 {
 
     .featuring-links li {
         font-size: 1em;
-    }
-
-    .featuring-links li:first-child {
-        display: inline-block;
     }
 
     .featuring-links .btn {
