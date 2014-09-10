@@ -55,7 +55,7 @@ describe('handleResp', function() {
   it('should handle body errors', function(done) {
     var apiErr = {
       errors: [{ foo: 'bar' }],
-      code:  400,
+      code: 400,
       message: 'an error occurred'
     };
     util.handleResp(null, {}, { error: apiErr }, function(err) {
@@ -76,7 +76,8 @@ describe('handleResp', function() {
 
   it('should return error code if there are not other errors', function(done) {
     util.handleResp(null, { statusCode: 400 }, null, function(err) {
-      assert.strictEqual(err.message, 'error during request, statusCode: 400');
+      assert.strictEqual(err.code, 400);
+      assert.strictEqual(err.message, 'Error during request.');
       done();
     });
   });
