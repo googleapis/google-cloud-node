@@ -289,7 +289,7 @@
       },
       {
         "type": "example",
-        "string": "bucket.stat('filename', function(err, metadata){});"
+        "string": "bucket.stat('filename', function(err, metadata) {});"
       }
     ],
     "description": {
@@ -473,14 +473,7 @@
           "string"
         ],
         "name": "options.resource",
-        "description": "- Resource to allow access to."
-      },
-      {
-        "type": "return",
-        "types": [
-          "string"
-        ],
-        "description": ""
+        "description": "- Resource to allow access to. "
       },
       {
         "type": "example",
@@ -572,8 +565,8 @@
       }
     ],
     "description": {
-      "full": "<p>Create a Duplex to handle the upload of a file.</p>",
-      "summary": "<p>Create a Duplex to handle the upload of a file.</p>",
+      "full": "<p>Create a duplex stream to handle the upload of a file.</p>",
+      "summary": "<p>Create a duplex stream to handle the upload of a file.</p>",
       "body": ""
     },
     "isPrivate": false,
