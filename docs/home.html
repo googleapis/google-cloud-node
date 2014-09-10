@@ -7,7 +7,7 @@
     <div class="container clearfix">
       <div class="col col-left">
         <h1>gcloud</h1>
-        <p><code>gcloud</code> is the Google Cloud Client Library for Node.js
+        <p>Google Cloud APIs Client for Node.js
         - an idiomatic, intuitive, and natural way for Node.js developers to
         integrate with Google Cloud Platform services, like Cloud Datastore
         and Cloud Storage.</p>
@@ -65,15 +65,17 @@
         <p><code>gcloud</code> is a client library for accessing Google
         Cloud Platform services that significantly reduces the boilerplate
         code you have to write. The library provides high-level API
-        abstractions so they're easier to understand. And, it embraces
-        idioms of Node.js, such as returning Readable streams or errors
-        as the first object in callbacks. All this means you spend more
-        time creating code that matters to you.</p>
+        abstractions so they're easier to understand. It embraces
+        idioms of Node.js, works well with the standard library, and
+        integrates better with your codebase.
+        All this means you spend more time creating code that matters
+        to you.</p>
+
         <p><code>gcloud</code> is configured to access Google Cloud
         services and authorize (OAuth 2.0) automatically on your behalf.
-        With a one line install and a private key, you are up and ready
+        With a one-line install and a private key, you are up and ready
         to go. Better yet, if you are running on a Google Compute Engine
-        instance, the one line install is enough!</p>
+        instance, the one-line install is enough!</p>
 
       </div><!-- end of .col.col-left -->
 
@@ -83,12 +85,12 @@
         <div hljs language="js">
 var gcloud = require('gcloud');
 
-var dataset = new gcloud.datastore.Dataset({
+var ds = new gcloud.datastore.Dataset({
   projectId: 'my-project',
   keyFilename: '/path/to/keyfile.json'
 });
 
-dataset.get(dataset.key('Product', 123), function(err, entity) {
+ds.get(ds.key('Product', 123), function(err, entity) {
   console.log(err, entity);
 });</div>
 
@@ -100,7 +102,7 @@ dataset.get(dataset.key('Product', 123), function(err, entity) {
       <div class="container clearfix">
       <h3 class="block-title">FAQ</h3>
 
-      <h4>What is the relationship between <code>gcloud</code> package
+      <h4>What is the relationship <code>gcloud</code> package
       and the <code>gcloud</code> command-line tool?</h4>
       <p>Both the <code>gcloud</code> command-line tool and
       <code>gcloud</code> package is a part of the Google Cloud SDK: a collection
@@ -110,9 +112,10 @@ dataset.get(dataset.key('Product', 123), function(err, entity) {
       Google Cloud Platform resources while the <code>gcloud</code> package is the
       Google Cloud APIs Client for Node.js.</p>
 
-      <h4>What is the relationship between the <code>gcloud</code>
-      and the <code>Google APIs Node.js Client</code>?</h4>
-      <p>The <code>Google APIs Node.js Client</code> is a client library for
+      <h4>What is the relationship between <code>gcloud</code>
+      and the Google APIs Node.js Client?</h4>
+      <p>The <a href="https://github.com/google/google-api-nodejs-client">
+      Google APIs Node.js Client</a> is a client library for
       using the broad set of Google APIs.
       <code>gcloud</code> is built specifically for the Google Cloud Platform
       and is the recommended way to integrate Google Cloud APIs into your
