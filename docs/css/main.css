@@ -345,7 +345,7 @@ h2, h3 {
  Featuring
 */
 
-.featuring .block-title {
+.featuring {
     text-align: center;
 }
 
@@ -356,7 +356,7 @@ h2, h3 {
 
 .featuring-links {
     list-style: none;
-    margin: 0;
+    margin: auto;
     padding: 8px;
     background-color: #eee;
     border-radius: 5px;
@@ -408,16 +408,17 @@ h2, h3 {
     text-align: center;
     font-size: 1.4em;
     font-weight: normal;
-    margin-bottom: 1.3em;
+    margin-bottom: 1em;
 }
 
 .docs-link img {
-    background-color: #5d6061;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    display: none;
+    border: 1px solid transparent;
+    -webkit-border-radius: 80px;
+    -moz-border-radius: 80px;
+    border-radius: 80px;
     padding: 4px;
-    width: 4%;
+    width: 40px;
     margin-top: -3px;
     margin-left: 8px;
     margin-right: 8px;
@@ -441,19 +442,15 @@ h2, h3 {
 }
 
 .docs-link .supplementary-text {
-    font-size: .8em;
-    color: rgba(93, 96, 97, .8);
+    text-decoration: none;
 }
 
-.docs-link a:hover .link-text {
+.docs-link .link-text {
     text-decoration: underline;
 }
 
 .docs-link a:hover img {
-    background-color: #4285f4;
-    -webkit-border-radius: 80px;
-    -moz-border-radius: 80px;
-    border-radius: 80px;
+    border: 1px solid #ccc;
     transform: rotate(135deg);
     -webkit-box-shadow: 4px 4px 4px #eee;
     -moz-box-shadow: 4px 4px 4px #eee;
@@ -461,9 +458,9 @@ h2, h3 {
 }
 
 .docs-link a:active img {
-    -webkit-box-shadow: 4px 4px 4px #ddd;
-    -moz-box-shadow: 4px 4px 4px #ddd;
-    box-shadow: 4px 4px 4px #ddd;
+    -webkit-box-shadow: 4px 4px 4px #ccc;
+    -moz-box-shadow: 4px 4px 4px #ccc;
+    box-shadow: 4px 4px 4px #ccc;
 }
 
 .ext-link {
@@ -478,6 +475,10 @@ h2, h3 {
         -ms-transition: all 0.3s ease;
         -o-transition: all 0.3s ease;
         transition: all 0.3s ease;
+}
+
+.featuring-links li:last-child .ext-link {
+    border-bottom: none;
 }
 
 .ext-link:hover {
@@ -944,7 +945,7 @@ h2, h3 {
    Modify as content requires.
    ========================================================================== */
 
-@media only screen and (min-width: 36em) {
+@media only screen and (min-width: 37em) {
 
     /*
      Main
@@ -955,10 +956,18 @@ h2, h3 {
     }
 
     /*
+     Docs Link
+     */
+    .docs-link img {
+        display: inline;
+    }
+
+    /*
      Featuring
     */
 
     .featuring-links {
+        display: inline-block;
         text-align: center;
     }
 
