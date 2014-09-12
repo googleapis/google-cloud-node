@@ -357,6 +357,7 @@ h2, h3 {
 .featuring-links {
     list-style: none;
     margin: 0;
+    margin-bottom: -1em;
     padding: 0;
 }
 
@@ -402,6 +403,36 @@ h2, h3 {
     width: 2em;
 }
 
+.btn-docs img {
+    background-color: #fff;
+    border: 1px solid transparent;
+    -webkit-border-radius: 80px;
+    -moz-border-radius: 80px;
+    border-radius: 80px;
+    padding: 4px;
+    width: 40px;
+    /* Transitions */
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -ms-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+}
+
+.btn-docs:hover img {
+    border: 1px solid #ccc;
+    transform: rotate(135deg);
+    -webkit-box-shadow: 4px 4px 4px rgba(0, 0, 0, .3);
+    -moz-box-shadow: 4px 4px 4px rgba(0, 0, 0, .3);
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, .3);
+}
+
+.btn-docs:active img {
+    -webkit-box-shadow: 4px 4px 4px rgba(0, 0, 0, .5);
+    -moz-box-shadow: 4px 4px 4px rgba(0, 0, 0, .5);
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, .5);
+}
+
 .ext-link {
     display: block;
     padding: 1em;
@@ -414,6 +445,10 @@ h2, h3 {
         -ms-transition: all 0.3s ease;
         -o-transition: all 0.3s ease;
         transition: all 0.3s ease;
+}
+
+.featuring-links li:last-child .ext-link {
+    border-bottom: none;
 }
 
 .ext-link:hover {
@@ -880,7 +915,7 @@ h2, h3 {
    Modify as content requires.
    ========================================================================== */
 
-@media only screen and (min-width: 35em) {
+@media only screen and (min-width: 37em) {
 
     /*
      Main
@@ -894,16 +929,16 @@ h2, h3 {
      Featuring
     */
 
+    .featuring-links li:first-child {
+        display: block;
+    }
+
     .featuring-links {
         text-align: center;
     }
 
     .featuring-links li {
         display: inline-block;
-    }
-
-    .featuring-links li:first-child {
-        display: block;
     }
 
     .featuring-links .btn {
