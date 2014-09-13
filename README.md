@@ -1,5 +1,5 @@
 # Google Cloud Node.js Client
-> Node idiomatic client for Google Cloud services.
+> Node.js idiomatic client for Google Cloud services.
 
 [![NPM Version](https://img.shields.io/npm/v/gcloud.svg)](https://www.npmjs.org/package/gcloud)
 [![Travis Build Status](https://travis-ci.org/GoogleCloudPlatform/gcloud-node.svg)](https://travis-ci.org/GoogleCloudPlatform/gcloud-node/)
@@ -65,7 +65,7 @@ dataset = new datastore.Dataset({
   keyFilename: '/path/to/keyfile.json'
 });
 
-dataset.get(dataset.key('Product', 'Computer'), function(err, entity) {
+dataset.get(dataset.key(['Product', 'Computer']), function(err, entity) {
   console.log(err || entity);
 });
 ```
