@@ -42,15 +42,27 @@ describe('Datastore', function() {
     assert.equal(typeof datastore.Dataset, 'function');
   });
 
-  it('should expose Int builder', function() {
-    var anInt = 7;
-    datastore.int(anInt);
-    assert.equal(entity.intCalledWith, anInt);
+  describe('int', function() {
+    it('should expose Int builder', function() {
+      var anInt = 7;
+      datastore.int(anInt);
+      assert.equal(entity.intCalledWith, anInt);
+    });
+
+    it('should name the Int builder function', function() {
+      assert.equal(datastore.int.name, 'Int');
+    });
   });
 
-  it('should expose Double builder', function() {
-    var aDouble = 7.0;
-    datastore.double(aDouble);
-    assert.equal(entity.doubleCalledWith, aDouble);
+  describe('double', function() {
+    it('should expose Double builder', function() {
+      var aDouble = 7.0;
+      datastore.double(aDouble);
+      assert.equal(entity.doubleCalledWith, aDouble);
+    });
+
+    it('should name the Double builder function', function() {
+      assert.equal(datastore.double.name, 'Double');
+    });
   });
 });

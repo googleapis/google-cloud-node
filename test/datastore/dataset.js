@@ -180,6 +180,40 @@ describe('Dataset', function() {
     });
   });
 
+  describe('schema', function() {
+    var ds = new datastore.Dataset({
+      namespace: 'ns',
+      projectId: 'test'
+    });
+    var schema = {
+      name: {
+        type: String
+      },
+      age: {
+        type: 'int'
+      }
+    };
+
+    it('should register a kind schema using provided NS', function() {
+      ds.registerKind('Sample', schema);
+    });
+
+    it('should register a kind schema using a provided namespace', function() {
+      ds.registerKind({
+        namespace: 'AnotherNS',
+        name: 'Sample',
+        schema: schema
+      });
+    });
+
+    it('should validate a schema', function() {
+      assert.strictEqual(ds.validateKind('Sample', {
+          name: 'Abe Vigoda',
+          age: datastore.int(93)
+        }), true);
+    });
+  });
+
   describe('runInTransaction', function() {
     var ds;
     var transaction;

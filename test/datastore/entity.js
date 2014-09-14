@@ -23,74 +23,56 @@ var entity = require('../../lib/datastore/entity.js');
 var datastore = require('../../lib/datastore');
 
 var blogPostMetadata = {
-  title: { kind: String, indexed: true },
-  tags: { kind: String, multi: true, indexed: true },
-  publishedAt: { kind: Date },
-  author: { kind: Object, indexed: true },
-  isDraft: { kind: Boolean, indexed: true }
+  title: { type: String, indexed: true },
+  tags: { type: String, multi: true, indexed: true },
+  publishedAt: { type: Date },
+  author: { type: Object, indexed: true },
+  isDraft: { type: Boolean, indexed: true }
 };
 
 var entityProto = {
-  'property': [{
-    'name': 'linkedTo',
-    'value': {
-        'key_value': {
-            'path_element': [{
-                'kind': 'Kind',
-                'name': 'another'
-            }]
+  property: [
+    {
+      name: 'linkedTo',
+      value: {
+        key_value: {
+          path_element: [{ kind: 'Kind', name: 'another' }]
         }
+      }
+    },
+    {
+      name: 'name',
+      value: {
+        string_value: 'Some name'
+      }
+    },
+    {
+      name: 'flagged',
+      value: {
+        boolean_value: false
+      }
+    },
+    { name: 'count', value: { integer_value: 5 } },
+    { name: 'total', value: { double_value: 7.8 } },
+    {
+      name: 'author',
+      value: {
+        entity_value: {
+          property: [{ name: 'name', value: { string_value: 'Burcu Dogan' } }]
+        },
+        indexed: false
+      }
+    },
+    {
+      name: 'list',
+      value: { list_value: [{ integer_value: 6 }, { boolean_value: false }] }
     }
-  }, {
-      'name': 'name',
-      'value': {
-          'string_value': 'Some name'
-      }
-  }, {
-      'name': 'flagged',
-      'value': {
-          'boolean_value': false
-      }
-  }, {
-      'name': 'count',
-      'value': {
-          'integer_value': 5
-      }
-  }, {
-      'name': 'total',
-      'value': {
-          'double_value': 7.8
-      }
-  }, {
-      'name': 'author',
-      'value': {
-          'entity_value': {
-              'property': [{
-                  'name': 'name',
-                  'value': {
-                      'string_value': 'Burcu Dogan'
-                  }
-              }]
-          },
-          'indexed': false
-      }
-  }, {
-      'name': 'list',
-      'value': {
-          'list_value': [{
-              'integer_value': 6
-          }, {
-              'boolean_value': false
-          }]
-      }
-  }]
+  ]
 };
 
 var queryFilterProto = {
   projection: [],
-  kind: [{
-    name: 'Kind1'
-  }],
+  kind: [{ name: 'Kind1' }],
   filter: {
     composite_filter: {
       filter: [
@@ -106,9 +88,7 @@ var queryFilterProto = {
             property: { name: '__key__' },
             operator: 'HAS_ANCESTOR',
             value: {
-              key_value: {
-                path_element: [{ kind: 'Kind2', name: 'somename' }]
-              }
+              key_value: { path_element: [{ kind: 'Kind2', name: 'somename' }] }
             }
           }
         }
@@ -121,23 +101,19 @@ var queryFilterProto = {
 };
 
 describe('registerKind', function() {
-  it('should be able to register valid field metadata', function(done) {
+  it('should be able to register valid field metadata', function() {
     entity.registerKind('namespace', 'kind', blogPostMetadata);
-    done();
   });
 
-  it('should set the namespace to "" if zero value or null', function(done) {
+  it('should set the namespace to "" if zero value or null', function() {
     entity.registerKind(null, 'kind', blogPostMetadata);
-    var meta = entity.getKind('', 'kind');
-    assert.strictEqual(meta, blogPostMetadata);
-    done();
+    entity.getKind('', 'kind');
   });
 
-  it('should throw an exception if an invalid kind', function(done) {
+  it('should throw an exception if an invalid kind', function() {
     assert.throws(function() {
       entity.registerKind(null, '000', blogPostMetadata);
     }, /Kinds should match/);
-    done();
   });
 });
 
@@ -280,9 +256,7 @@ describe('entityFromEntityProto', function() {
 });
 
 describe('entityToEntityProto', function() {
-  it(
-      'should support boolean, integer, double, string, entity and list values',
-      function(done) {
+  it('should support bool, int, double, str, entity & [] vals', function(done) {
     var now = new Date();
     var proto = entity.entityToEntityProto({
       name: 'Burcu',
@@ -317,7 +291,6 @@ describe('entityToEntityProto', function() {
     assert.equal(entityValue.property[1].value.string_value, 'value2');
     done();
   });
-
 });
 
 describe('queryToQueryProto', function() {
@@ -330,4 +303,104 @@ describe('queryToQueryProto', function() {
     assert.deepEqual(proto, queryFilterProto);
     done();
   });
+});
+
+describe('Kind schema', function() {
+  var schema = {
+    name: {
+      type: String,
+      indexed: false
+    },
+    tags: {
+      type: String,
+      multi: true
+    },
+    favArticles: {
+      type: 'Key',
+      multi: true
+    },
+    contact: {
+      type: {
+        telephone: { type: String },
+        email: { type: String }
+      }
+    }
+  };
+
+  entity.registerKind(null, 'Sample', schema);
+
+  it('should store the protocol on the schema', function() {
+    var sample = entity.getKind(null, 'Sample');
+    Object.keys(sample).forEach(function(property) {
+      assert.equal(typeof sample[property].protocol, 'object');
+    });
+  });
+
+  it('should validate a Kind schema', function() {
+      assert.strictEqual(
+          entity.validateKind(null, 'Sample', {
+            name: 'Name',
+            tags: ['a', 'b', 'c'],
+            favArticles: [
+              new entity.Key({ path: ['Article', 1] }),
+              new entity.Key({ path: ['Article', 2] })
+            ],
+            contact: {
+              telephone: '5551234567',
+              email: 'email@theemailstore.com'
+            }
+          }), true);
+      assert.strictEqual(
+          entity.validateKind(null, 'Sample', {
+            name: 'Name',
+            tags: ['a', 'b', 'c'],
+            favArticles: [
+              new entity.Key({ path: ['Article', 1] }),
+              new entity.Key({ path: ['Article', 2] })
+            ],
+            contact: {
+              telephone: '5551234567',
+              email: 3 // Should be string_value
+            }
+          }), false);
+      assert.strictEqual(
+          entity.validateKind(null, 'Sample', {
+            name: 'Name',
+            tags: ['a', 1], // Should all be string_value.
+            favArticles: [
+              new entity.Key({ path: ['Article', 1] }),
+              new entity.Key({ path: ['Article', 2] })
+            ],
+            contact: {
+              telephone: '5551234567',
+              email: 'email@theemailstore.com'
+            }
+          }), false);
+      assert.strictEqual(
+          entity.validateKind(null, 'Sample', {
+            // name: 'Name', // (missing property)
+            tags: ['a', 'b', 'c'],
+            favArticles: [
+              new entity.Key({ path: ['Article', 1] }),
+              new entity.Key({ path: ['Article', 2] })
+            ],
+            contact: {
+              telephone: '5551234567',
+              email: 'email@theemailstore.com'
+            }
+          }), false);
+      assert.strictEqual(
+          entity.validateKind(null, 'Sample', {
+            name: 'Name',
+            tags: ['a', 'b', 'c'],
+            favArticles: [
+              new entity.Key({ path: ['Article', 1] }),
+              new entity.Key({ path: ['Article', 2] })
+            ],
+            contact: {
+              // telephone: '5551234567', // (missing embedded entity property)
+              email: 'email@theemailstore.com'
+            }
+          }), false);
+    });
 });
