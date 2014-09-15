@@ -14,30 +14,48 @@
  * limitations under the License.
  */
 
-/*global describe, it */
+/*global describe, it, beforeEach */
 
 'use strict';
 
 var assert = require('assert');
-var storage = require('../../lib').storage;
+var gcloud = require('../../lib');
+var storage = require('../../lib/storage');
 
+var credentials = require('../testdata/privateKeyFile.json');
 var noop = function() {};
 
-function createBucket() {
-  return new storage.Bucket({
-    bucketName: 'bucket-name',
-    email: 'xxx@email.com',
-    credentials: require('../testdata/privateKeyFile.json')
-  });
-}
-
 describe('Bucket', function() {
+  var bucket;
+
+  beforeEach(function() {
+    bucket = storage.bucket({
+      bucketName: 'bucket-name',
+      credentials: credentials
+    });
+  });
+
+  it('should not require connection details', function() {
+    var project = gcloud({ credentials: credentials });
+    var aBucket = project.storage.bucket({ bucketName: 'test' });
+    assert.deepEqual(aBucket.connection.credentials, credentials);
+  });
+
+  it('should allow overriding connection details', function() {
+    var uniqueCredentials = require('../testdata/privateKeyFile-2.json');
+    var project = gcloud({ credentials: credentials });
+    var aBucket = project.storage.bucket({
+      bucketName: 'another-bucket',
+      credentials: uniqueCredentials
+    });
+    assert.deepEqual(aBucket.connection.credentials, uniqueCredentials);
+  });
+
   it('should throw if a bucket name is not passed', function() {
-    assert.throws(function() { new storage.Bucket(); }, Error);
+    assert.throws(storage.bucket, Error);
   });
 
   it('should list without a query', function(done) {
-    var bucket = createBucket();
     bucket.makeReq_ = function(method, path, q, body) {
       assert.strictEqual(method, 'GET');
       assert.strictEqual(path, 'o');
@@ -49,7 +67,6 @@ describe('Bucket', function() {
   });
 
   it('should list with a query', function(done) {
-    var bucket = createBucket();
     bucket.makeReq_ = function(method, path, q, body) {
       assert.strictEqual(method, 'GET');
       assert.strictEqual(path, 'o');
@@ -61,7 +78,6 @@ describe('Bucket', function() {
   });
 
   it('should return nextQuery if more results', function() {
-    var bucket = createBucket();
     bucket.makeReq_ = function(method, path, q, body, callback) {
       callback(null, { nextPageToken: 'next-page-token', items: [] });
     };
@@ -72,7 +88,6 @@ describe('Bucket', function() {
   });
 
   it('should return no nextQuery if no more results', function() {
-    var bucket = createBucket();
     bucket.makeReq_ = function(method, path, q, body, callback) {
       callback(null, { items: [] });
     };
@@ -82,7 +97,6 @@ describe('Bucket', function() {
   });
 
   it('should stat a file', function(done) {
-    var bucket = createBucket();
     bucket.makeReq_ = function(method, path, q, body) {
       assert.strictEqual(method, 'GET');
       assert.strictEqual(path, 'o/file-name');
@@ -94,7 +108,6 @@ describe('Bucket', function() {
   });
 
   it('should copy a file', function(done) {
-    var bucket = createBucket();
     bucket.makeReq_ = function(method, path, q, body) {
       assert.strictEqual(method, 'POST');
       assert.strictEqual(path, 'o/file-name/copyTo/b/new-bucket/o/new-name');
@@ -107,7 +120,6 @@ describe('Bucket', function() {
   });
 
   it('should use the same bucket if nothing else is provided', function(done) {
-    var bucket = createBucket();
     bucket.makeReq_ = function(method, path, q, body) {
       assert.strictEqual(method, 'POST');
       assert.strictEqual(path, 'o/file-name/copyTo/b/bucket-name/o/new-name');
@@ -120,7 +132,6 @@ describe('Bucket', function() {
   });
 
   it('should remove a file', function(done) {
-    var bucket = createBucket();
     bucket.makeReq_ = function(method, path, q, body) {
       assert.strictEqual(method, 'DELETE');
       assert.strictEqual(path, 'o/file-name');
@@ -132,7 +143,6 @@ describe('Bucket', function() {
   });
 
   it('should create a signed url', function(done) {
-    var bucket = createBucket();
     bucket.getSignedUrl({
         action: 'read',
         resource: 'filename',
