@@ -45,6 +45,7 @@
   ],
   "dependencies": {
     "duplexify": "^3.1.2",
+    "extend": "^1.3.0",
     "gapitoken": "^0.1.3",
     "node-uuid": "^1.4.1",
     "protobufjs": "^3.4.0",

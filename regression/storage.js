@@ -26,9 +26,9 @@ var request = require('request');
 var tmp = require('tmp');
 
 var env = require('./env.js');
-var gcloud = require('../lib');
+var storage = require('../lib/storage');
 
-var bucket = new gcloud.storage.Bucket(env);
+var bucket = storage.bucket(env);
 
 var files = {
   logo: {

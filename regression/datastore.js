@@ -22,7 +22,7 @@ var env = require('./env.js');
 
 var assert = require('assert');
 var datastore = require('../lib/datastore');
-var ds = new datastore.Dataset(env);
+var ds = datastore.dataset(env);
 var entity = require('../lib/datastore/entity.js');
 
 describe('datastore', function() {

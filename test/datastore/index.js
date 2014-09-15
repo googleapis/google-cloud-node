@@ -39,7 +39,7 @@ var datastore = require('sandboxed-module')
 
 describe('Datastore', function() {
   it('should expose Dataset class', function() {
-    assert.equal(typeof datastore.Dataset, 'function');
+    assert.equal(typeof datastore.dataset, 'function');
   });
 
   it('should expose Int builder', function() {
