@@ -199,7 +199,7 @@
       {
         "type": "param",
         "types": [
-          "string"
+          "string="
         ],
         "name": "options.projectId",
         "description": "- Dataset ID. This is your project ID from     the Google Developers Console."
@@ -230,7 +230,7 @@
       },
       {
         "type": "example",
-        "string": "var dataset = new datastore.Dataset({\n  projectId: 'my-project',\n  keyFilename: '/path/to/keyfile.json'\n});"
+        "string": "var dataset = datastore.dataset({\n  projectId: 'my-project',\n  keyFilename: '/path/to/keyfile.json'\n});"
       }
     ],
     "description": {
@@ -240,7 +240,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "function Dataset(options) {\n  options = options || {};\n\n  this.connection = new conn.Connection({\n    credentials: options.credentials,\n    keyFilename: options.keyFilename,\n    scopes: SCOPES\n  });\n  this.id = options.projectId;\n  this.namespace = options.namespace;\n  this.transaction = this.createTransaction_();\n}",
+    "code": "function Dataset(options) {\n  if (!(this instanceof Dataset)) {\n    return new Dataset(options);\n  }\n\n  options = options || {};\n\n  this.connection = new conn.Connection({\n    credentials: options.credentials,\n    keyFilename: options.keyFilename,\n    scopes: SCOPES\n  });\n  this.projectId = options.projectId;\n  this.namespace = options.namespace;\n  this.transaction = this.createTransaction_();\n}",
     "ctx": {
       "type": "function",
       "name": "Dataset",
@@ -251,7 +251,7 @@
     "tags": [
       {
         "type": "example",
-        "string": "var key;\n\n// Create a key from the dataset's namespace.\nkey = dataset.key('Company', 123);\n\n// Create a key from a provided namespace and path.\nkey = dataset.key({\n  namespace: 'My-NS',\n  path: ['Company', 123]\n});"
+        "string": "// Create a key from the dataset's namespace.\nvar company123 = dataset.key('Company', 123);\n\n// Create a key from a provided namespace and path.\nvar nsCompany123 = dataset.key({\n  namespace: 'My-NS',\n  path: ['Company', 123]\n});"
       }
     ],
     "description": {
@@ -632,7 +632,7 @@
     },
     "isPrivate": true,
     "ignore": false,
-    "code": "Dataset.prototype.createTransaction_ = function() {\n  return new Transaction(this.connection, this.id);\n};\n\nmodule.exports = Dataset;",
+    "code": "Dataset.prototype.createTransaction_ = function() {\n  return new Transaction(this.connection, this.projectId);\n};\n\nmodule.exports = Dataset;",
     "ctx": {
       "type": "method",
       "constructor": "Dataset",

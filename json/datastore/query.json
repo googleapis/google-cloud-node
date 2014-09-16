@@ -18,7 +18,7 @@
     },
     "isPrivate": false,
     "ignore": true,
-    "code": "'use strict';"
+    "code": "'use strict';\n\nvar extend = require('extend');"
   },
   {
     "tags": [
@@ -70,7 +70,7 @@
       },
       {
         "type": "example",
-        "string": "var query;\n\n// If your dataset was scoped to a namespace at initialization, your query\n// will likewise be scoped to that namespace.\nquery = dataset.createQuery(['Lion', 'Chimp']);\n\n// However, you may override the namespace per query.\nquery = dataset.createQuery('AnimalNamespace', ['Lion', 'Chimp']);\n\n// You may also remove the namespace altogether.\nquery = dataset.createQuery(null, ['Lion', 'Chimp']);"
+        "string": "// If your dataset was scoped to a namespace at initialization, your query\n// will likewise be scoped to that namespace.\ndataset.createQuery(['Lion', 'Chimp']);\n\n// However, you may override the namespace per query.\ndataset.createQuery('AnimalNamespace', ['Lion', 'Chimp']);\n\n// You may also remove the namespace altogether.\ndataset.createQuery(null, ['Lion', 'Chimp']);"
       }
     ],
     "description": {
@@ -125,7 +125,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Query.prototype.filter = function(filter, value) {\n  // TODO: Add filter validation.\n  var q = util.extend(this, new Query());\n  filter = filter.trim();\n  var fieldName = filter.replace(/[>|<|=|>=|<=]*$/, '').trim();\n  var op = filter.substr(fieldName.length, filter.length).trim();\n  q.filters = q.filters || [];\n  q.filters.push({ name: fieldName, op: op, val: value });\n  return q;\n};",
+    "code": "Query.prototype.filter = function(filter, value) {\n  // TODO: Add filter validation.\n  var query = extend(new Query(), this);\n  filter = filter.trim();\n  var fieldName = filter.replace(/[>|<|=|>=|<=]*$/, '').trim();\n  var op = filter.substr(fieldName.length, filter.length).trim();\n  query.filters = query.filters || [];\n  query.filters.push({\n    name: fieldName,\n    op: op,\n    val: value\n  });\n  return query;\n};",
     "ctx": {
       "type": "method",
       "constructor": "Query",
@@ -164,7 +164,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Query.prototype.hasAncestor = function(key) {\n  var q = util.extend(this, new Query());\n  this.filters.push({ name: '__key__', op: 'HAS_ANCESTOR', val: key });\n  return q;\n};",
+    "code": "Query.prototype.hasAncestor = function(key) {\n  var query = extend(new Query(), this);\n  query.filters.push({ name: '__key__', op: 'HAS_ANCESTOR', val: key });\n  return query;\n};",
     "ctx": {
       "type": "method",
       "constructor": "Query",
@@ -203,7 +203,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Query.prototype.order = function(property) {\n  var q = util.extend(this, new Query());\n  var sign = '+';\n  if (property[0] === '-' || property[0] === '+') {\n    sign = property[0];\n    property = property.substr(1);\n  }\n  q.orders = q.orders || [];\n  q.orders.push({ name: property, sign: sign });\n  return q;\n};",
+    "code": "Query.prototype.order = function(property) {\n  var query = extend(new Query(), this);\n  var sign = '+';\n  if (property[0] === '-' || property[0] === '+') {\n    sign = property[0];\n    property = property.substr(1);\n  }\n  query.orders = query.orders || [];\n  query.orders.push({ name: property, sign: sign });\n  return query;\n};",
     "ctx": {
       "type": "method",
       "constructor": "Query",
@@ -242,7 +242,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Query.prototype.groupBy = function(fieldNames) {\n  var fields = util.arrayize(fieldNames);\n  var q = util.extend(this, new Query());\n  q.groupByVal = fields;\n  return q;\n};",
+    "code": "Query.prototype.groupBy = function(fieldNames) {\n  var query = extend(new Query(), this);\n  query.groupByVal = util.arrayize(fieldNames);\n  return query;\n};",
     "ctx": {
       "type": "method",
       "constructor": "Query",
@@ -281,7 +281,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Query.prototype.select = function(fieldNames) {\n  var q = util.extend(this, new Query());\n  q.selectVal = fieldNames;\n  return q;\n};",
+    "code": "Query.prototype.select = function(fieldNames) {\n  var query = extend(new Query(), this);\n  query.selectVal = fieldNames;\n  return query;\n};",
     "ctx": {
       "type": "method",
       "constructor": "Query",
@@ -320,7 +320,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Query.prototype.start = function(start) {\n  var q = util.extend(this, new Query());\n  q.startVal = start;\n  return q;\n};",
+    "code": "Query.prototype.start = function(start) {\n  var query = extend(new Query(), this);\n  query.startVal = start;\n  return query;\n};",
     "ctx": {
       "type": "method",
       "constructor": "Query",
@@ -359,7 +359,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Query.prototype.end = function(end) {\n  var q = util.extend(this, new Query());\n  q.endVal = end;\n  return q;\n};",
+    "code": "Query.prototype.end = function(end) {\n  var query = extend(new Query(), this);\n  query.endVal = end;\n  return query;\n};",
     "ctx": {
       "type": "method",
       "constructor": "Query",
@@ -398,7 +398,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Query.prototype.limit = function(n) {\n  var q = util.extend(this, new Query());\n  q.limitVal = n;\n  return q;\n};",
+    "code": "Query.prototype.limit = function(n) {\n  var query = extend(new Query(), this);\n  query.limitVal = n;\n  return query;\n};",
     "ctx": {
       "type": "method",
       "constructor": "Query",
@@ -437,7 +437,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Query.prototype.offset = function(n) {\n  var q = util.extend(this, new Query());\n  q.offsetVal = n;\n  return q;\n};\n\nmodule.exports = Query;",
+    "code": "Query.prototype.offset = function(n) {\n  var query = extend(new Query(), this);\n  query.offsetVal = n;\n  return query;\n};\n\nmodule.exports = Query;",
     "ctx": {
       "type": "method",
       "constructor": "Query",

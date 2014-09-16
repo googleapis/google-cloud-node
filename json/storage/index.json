@@ -18,7 +18,7 @@
     },
     "isPrivate": false,
     "ignore": true,
-    "code": "'use strict';\n\nvar crypto = require('crypto');\nvar duplexify = require('duplexify');\nvar stream = require('stream');\nvar uuid = require('node-uuid');"
+    "code": "'use strict';\n\nvar crypto = require('crypto');\nvar duplexify = require('duplexify');\nvar extend = require('extend');\nvar stream = require('stream');\nvar uuid = require('node-uuid');"
   },
   {
     "tags": [
@@ -137,9 +137,114 @@
   {
     "tags": [
       {
+        "type": "param",
+        "types": [
+          "object"
+        ],
+        "name": "config",
+        "description": "- Configuration object."
+      }
+    ],
+    "description": {
+      "full": "<p>Developer Documentation</p><p>Invoke this method to create a new Storage object bound with pre-determined<br />configuration options. For each object that can be created (e.g., a bucket),<br />there is an equivalent static and instance method. While they are classes,<br />they can be instantiated without use of the <code>new</code> keyword.</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": "<p>Invoke this method to create a new Storage object bound with pre-determined<br />configuration options. For each object that can be created (e.g., a bucket),<br />there is an equivalent static and instance method. While they are classes,<br />they can be instantiated without use of the <code>new</code> keyword.</p>"
+    },
+    "isPrivate": false,
+    "ignore": true
+  },
+  {
+    "tags": [
+      {
         "type": "alias",
-        "string": "module:storage "
+        "string": "module:storage"
       },
+      {
+        "type": "constructor",
+        "string": ""
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\n\n// From Google Compute Engine and Google App Engine:\n\n// Access `storage` through the `gcloud` module directly.\nvar musicBucket = gcloud.storage.bucket({\n  bucketName: 'MusicBucket'\n});\n\n// Elsewhere:\n\n// Provide configuration details up-front.\nvar myProject = gcloud({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar albums = myProject.storage.bucket({\n  bucketName: 'AlbumsBucket'\n});\n\nvar photos = myProject.storage.bucket({\n  bucketName: 'PhotosBucket'\n});\n\n\n// Override default configuration details.\nvar records = myProject.storage.bucket({\n  bucketName: 'RecordsBucket',\n  keyFilename: '/path/to/another/keyfile.json',\n});\n\n\n// Specify all options at instantiation.\nvar misc = gcloud.storage.bucket({\n  keyFilename: '/path/to/keyfile.json',\n  bucketName: 'MiscBucket'\n});"
+      }
+    ],
+    "description": {
+      "full": "<p>To access your Cloud Storage buckets, you will use the <code>bucket</code> function<br />returned from this <code>storage</code> object.</p><p>The example below will demonstrate the different usage patterns your app may<br />need to connect to <code>gcloud</code> and access your bucket.</p>",
+      "summary": "<p>To access your Cloud Storage buckets, you will use the <code>bucket</code> function<br />returned from this <code>storage</code> object.</p>",
+      "body": "<p>The example below will demonstrate the different usage patterns your app may<br />need to connect to <code>gcloud</code> and access your bucket.</p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "function Storage(config) {\n  this.config = config || {};\n}",
+    "ctx": {
+      "type": "function",
+      "name": "Storage",
+      "string": "Storage()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\n\nvar Albums = gcloud.storage.bucket({\n  bucketName: 'AlbumsBucket',\n  keyFilename: '/path/to/keyfile.json'\n});"
+      }
+    ],
+    "description": {
+      "full": "<p>Developer Documentation</p><p>Static method to create a Bucket without any pre-configured options.</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": "<p>Static method to create a Bucket without any pre-configured options.</p>"
+    },
+    "isPrivate": false,
+    "ignore": true,
+    "code": "Storage.bucket = Bucket;",
+    "ctx": {
+      "type": "property",
+      "receiver": "Storage",
+      "name": "bucket",
+      "value": "Bucket",
+      "string": "Storage.bucket"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "object"
+        ],
+        "name": "options",
+        "description": ""
+      },
+      {
+        "type": "return",
+        "types": [
+          "Bucket"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json'\n});\n\nvar Albums = gcloud.storage.bucket({\n  bucketName: 'AlbumsBucket'\n});\n\nvar Photos = gcloud.storage.bucket({\n  bucketName: 'PhotosBucket'\n});"
+      }
+    ],
+    "description": {
+      "full": "<p>Developer Documentation</p><p>Instance method for creating a Bucket. Options configured at instantiation of<br />the Storage class will be passed through, allowing for overridden options<br />specified here.</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": "<p>Instance method for creating a Bucket. Options configured at instantiation of<br />the Storage class will be passed through, allowing for overridden options<br />specified here.</p>"
+    },
+    "isPrivate": false,
+    "ignore": true,
+    "code": "Storage.prototype.bucket = function(options) {\n  // Mix in instance config data to the provided options.\n  return new Bucket(util.extendGlobalConfig(this.config, options));\n};\n\nmodule.exports = Storage;",
+    "ctx": {
+      "type": "method",
+      "constructor": "Storage",
+      "cons": "Storage",
+      "name": "bucket",
+      "string": "Storage.prototype.bucket()"
+    }
+  },
+  {
+    "tags": [
       {
         "type": "throws",
         "types": [
@@ -181,17 +286,17 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\nvar storage = gcloud.storage;\nvar bucket;\n\n// From Google Compute Engine\nbucket = new storage.Bucket({\n  bucketName: YOUR_BUCKET_NAME\n});\n\n// From elsewhere\nbucket = new storage.Bucket({\n  bucketName: YOUR_BUCKET_NAME,\n  keyFilename: '/path/to/the/key.json'\n});"
+        "string": "var gcloud = require('gcloud');\n\n// From Google Compute Engine\nvar Albums = gcloud.storage.bucket({\n  bucketName: 'Albums'\n});\n\n// From elsewhere\nvar Photos = gcloud.storage.bucket({\n  bucketName: 'PhotosBucket',\n  keyFilename: '/path/to/keyfile.json'\n});"
       }
     ],
     "description": {
-      "full": "<p>Google Cloud Storage allows you to store data on Google infrastructure. See<br />the guide on {@link <a href=\"https://developers.google.com/storage}\">https://developers.google.com/storage}</a> to create a<br />bucket.</p>",
-      "summary": "<p>Google Cloud Storage allows you to store data on Google infrastructure. See<br />the guide on {@link <a href=\"https://developers.google.com/storage}\">https://developers.google.com/storage}</a> to create a<br />bucket.</p>",
+      "full": "<p>Create a Bucket object to interact with a Google Cloud Storage bucket.</p>",
+      "summary": "<p>Create a Bucket object to interact with a Google Cloud Storage bucket.</p>",
       "body": ""
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "function Bucket(options) {\n  if (!options.bucketName) {\n    throw Error('A bucket name is needed to use Google Cloud Storage');\n  }\n  this.bucketName = options.bucketName;\n  this.conn = new conn.Connection({\n    credentials: options.credentials,\n    keyFilename: options.keyFilename,\n    scopes: SCOPES\n  });\n}",
+    "code": "function Bucket(options) {\n  if (!(this instanceof Bucket)) {\n    return new Bucket(options);\n  }\n\n  if (!options.bucketName) {\n    throw Error('A bucket name is needed to use Google Cloud Storage');\n  }\n\n  this.bucketName = options.bucketName;\n  this.connection = new conn.Connection({\n    credentials: options.credentials,\n    keyFilename: options.keyFilename,\n    scopes: SCOPES\n  });\n}",
     "ctx": {
       "type": "function",
       "name": "Bucket",
@@ -260,7 +365,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Bucket.prototype.list = function(query, callback) {\n  if (arguments.length === 1) {\n    callback = query;\n    query = {};\n  }\n  this.makeReq_('GET', 'o', query, true, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = util.extend({}, query);\n      nextQuery.pageToken = resp.nextPageToken;\n    }\n    callback(null, resp.items, nextQuery);\n  });\n};",
+    "code": "Bucket.prototype.list = function(query, callback) {\n  if (arguments.length === 1) {\n    callback = query;\n    query = {};\n  }\n  this.makeReq_('GET', 'o', query, true, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query);\n      nextQuery.pageToken = resp.nextPageToken;\n    }\n    callback(null, resp.items, nextQuery);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Bucket",
@@ -487,7 +592,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Bucket.prototype.getSignedUrl = function(options, callback) {\n  options.action = {\n      read: 'GET',\n      write: 'PUT',\n      delete: 'DELETE'\n    }[options.action];\n\n  options.resource = util.format('/{bucket}/{resource}', {\n      bucket: this.bucketName,\n      resource: options.resource\n    });\n\n  this.conn.getCredentials(function(err, credentials) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var sign = crypto.createSign('RSA-SHA256');\n    sign.update([\n        options.action,\n        (options.contentMd5 || ''),\n        (options.contentType || ''),\n        options.expires,\n        (options.extensionHeaders || '') + options.resource\n      ].join('\\n'));\n    var signature = sign.sign(credentials.private_key, 'base64');\n\n    callback(null, [\n        'http://storage.googleapis.com' + options.resource,\n        '?GoogleAccessId=' + credentials.client_email,\n        '&Expires=' + options.expires,\n        '&Signature=' + encodeURIComponent(signature)\n      ].join(''));\n  });\n};",
+    "code": "Bucket.prototype.getSignedUrl = function(options, callback) {\n  options.action = {\n      read: 'GET',\n      write: 'PUT',\n      delete: 'DELETE'\n    }[options.action];\n\n  options.resource = util.format('/{bucket}/{resource}', {\n      bucket: this.bucketName,\n      resource: options.resource\n    });\n\n  this.connection.getCredentials(function(err, credentials) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var sign = crypto.createSign('RSA-SHA256');\n    sign.update([\n        options.action,\n        (options.contentMd5 || ''),\n        (options.contentType || ''),\n        options.expires,\n        (options.extensionHeaders || '') + options.resource\n      ].join('\\n'));\n    var signature = sign.sign(credentials.private_key, 'base64');\n\n    callback(null, [\n        'http://storage.googleapis.com' + options.resource,\n        '?GoogleAccessId=' + credentials.client_email,\n        '&Expires=' + options.expires,\n        '&Signature=' + encodeURIComponent(signature)\n      ].join(''));\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Bucket",
@@ -525,7 +630,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Bucket.prototype.createReadStream = function(name) {\n  var that = this;\n  var dup = duplexify();\n  this.stat(name, function(err, metadata) {\n    if (err) {\n      dup.emit('error', err);\n      return;\n    }\n    that.conn.createAuthorizedReq(\n        { uri: metadata.mediaLink }, function(err, req) {\n      if (err) {\n        dup.emit('error', err);\n        return;\n      }\n      dup.setReadable(that.conn.requester(req));\n    });\n  });\n  return dup;\n};",
+    "code": "Bucket.prototype.createReadStream = function(name) {\n  var that = this;\n  var dup = duplexify();\n  this.stat(name, function(err, metadata) {\n    if (err) {\n      dup.emit('error', err);\n      return;\n    }\n    that.connection.createAuthorizedReq(\n        { uri: metadata.mediaLink }, function(err, req) {\n      if (err) {\n        dup.emit('error', err);\n        return;\n      }\n      dup.setReadable(that.connection.requester(req));\n    });\n  });\n  return dup;\n};",
     "ctx": {
       "type": "method",
       "constructor": "Bucket",
@@ -675,7 +780,7 @@
     },
     "isPrivate": true,
     "ignore": false,
-    "code": "Bucket.prototype.getWritableStream_ = function(name, metadata, callback) {\n  var boundary = uuid.v4();\n  var that = this;\n  metadata.contentType = metadata.contentType || 'text/plain';\n  this.conn.createAuthorizedReq({\n    method: 'POST',\n    uri: util.format('{base}/{bucket}/o', {\n      base: STORAGE_UPLOAD_BASE_URL,\n      bucket: this.bucketName\n    }),\n    qs: {\n      name: name,\n      uploadType: 'multipart'\n    },\n    headers: {\n      'Content-Type': 'multipart/related; boundary=\"' + boundary + '\"'\n    }\n  }, function(err, req) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    var remoteStream = that.conn.requester(req);\n    remoteStream.callback = util.noop;\n    remoteStream.write('--' + boundary + '\\n');\n    remoteStream.write('Content-Type: application/json\\n\\n');\n    remoteStream.write(JSON.stringify(metadata));\n    remoteStream.write('\\n\\n');\n    remoteStream.write('--' + boundary + '\\n');\n    remoteStream.write('Content-Type: ' + metadata.contentType + '\\n\\n');\n    var oldEndFn = remoteStream.end;\n    remoteStream.end = function(data, encoding, callback) {\n      data = (data || '') + '\\n--' + boundary + '--\\n';\n      remoteStream.write(data, encoding, callback);\n      oldEndFn.apply(this);\n    };\n    callback(null, remoteStream);\n  });\n};",
+    "code": "Bucket.prototype.getWritableStream_ = function(name, metadata, callback) {\n  var boundary = uuid.v4();\n  var that = this;\n  metadata.contentType = metadata.contentType || 'text/plain';\n  this.connection.createAuthorizedReq({\n    method: 'POST',\n    uri: util.format('{base}/{bucket}/o', {\n      base: STORAGE_UPLOAD_BASE_URL,\n      bucket: this.bucketName\n    }),\n    qs: {\n      name: name,\n      uploadType: 'multipart'\n    },\n    headers: {\n      'Content-Type': 'multipart/related; boundary=\"' + boundary + '\"'\n    }\n  }, function(err, req) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    var remoteStream = that.connection.requester(req);\n    remoteStream.callback = util.noop;\n    remoteStream.write('--' + boundary + '\\n');\n    remoteStream.write('Content-Type: application/json\\n\\n');\n    remoteStream.write(JSON.stringify(metadata));\n    remoteStream.write('\\n\\n');\n    remoteStream.write('--' + boundary + '\\n');\n    remoteStream.write('Content-Type: ' + metadata.contentType + '\\n\\n');\n    var oldEndFn = remoteStream.end;\n    remoteStream.end = function(data, encoding, callback) {\n      data = (data || '') + '\\n--' + boundary + '--\\n';\n      remoteStream.write(data, encoding, callback);\n      oldEndFn.apply(this);\n    };\n    callback(null, remoteStream);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Bucket",
@@ -738,7 +843,7 @@
     },
     "isPrivate": true,
     "ignore": false,
-    "code": "Bucket.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: util.format('{base}/{bucket}/{path}', {\n      base: STORAGE_BASE_URL,\n      bucket: this.bucketName,\n      path: path\n    })\n  };\n  if (body) {\n    reqOpts.json = body;\n  }\n  this.conn.req(reqOpts, function(err, res, body) {\n    util.handleResp(err, res, body, callback);\n  });\n};\n\nmodule.exports.Bucket = Bucket;",
+    "code": "Bucket.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: util.format('{base}/{bucket}/{path}', {\n      base: STORAGE_BASE_URL,\n      bucket: this.bucketName,\n      path: path\n    })\n  };\n  if (body) {\n    reqOpts.json = body;\n  }\n  this.connection.req(reqOpts, function(err, res, body) {\n    util.handleResp(err, res, body, callback);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Bucket",
