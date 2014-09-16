@@ -21,25 +21,33 @@
 var assert = require('assert');
 var util = require('../../lib/common/util.js');
 
-describe('extend', function() {
-  it ('should return null for null input', function() {
-    var copy = util.extend(null, {});
-    assert.strictEqual(copy, null);
-  });
-
-  it('should return a new Date for Date input', function() {
-    var now = new Date();
-    var copy = util.extend(now, {});
-    assert.notStrictEqual(copy, now);
-    assert.strictEqual(copy.toString(), now.toString());
-  });
-});
-
 describe('arrayize', function() {
   it('should arrayize if the input is not an array', function(done) {
     var o = util.arrayize('text');
     assert.deepEqual(o, ['text']);
     done();
+  });
+});
+
+describe('extendGlobalConfig', function() {
+  it('should favor `keyFilename` when `credentials` is global', function() {
+    var globalConfig = { credentials: {} };
+    var options = util.extendGlobalConfig(globalConfig, {
+      keyFilename: 'key.json'
+    });
+    assert.deepEqual(options, { keyFilename: 'key.json' });
+  });
+
+  it('should favor `credentials` when `keyFilename` is global', function() {
+    var globalConfig = { keyFilename: 'key.json' };
+    var options = util.extendGlobalConfig(globalConfig, { credentials: {} });
+    assert.deepEqual(options, { credentials: {} });
+  });
+
+  it('should not modify original object', function() {
+    var globalConfig = { keyFilename: 'key.json' };
+    util.extendGlobalConfig(globalConfig, { credentials: {} });
+    assert.deepEqual(globalConfig, { keyFilename: 'key.json' });
   });
 });
 
