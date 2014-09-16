@@ -13,39 +13,65 @@
   </header>
 
   <section class="content">
-    <article>
-      <h1>{{module[0].toUpperCase() + module.substr(1)}}</h1>
+    <h1>{{module[0].toUpperCase() + module.substr(1)}}</h1>
+    <h3 class="sub-heading">
+      <div class="toggler" ng-click="showGcloudDocs = !showGcloudDocs">
+        <span class="toggle" ng-hide="showGcloudDocs">▹</span>
+        <span class="toggle" ng-show="showGcloudDocs">▿</span>
+      </div>
+      Getting Started with <code>gcloud</code>
+    </h3>
+    <article ng-if="showGcloudDocs">
       <p>
         First, install <code>gcloud</code> with npm and require it into your project:
       </p>
       <div hljs>$ npm install --save gcloud</div>
       <div hljs>var gcloud = require('gcloud');</div>
+      <p>
+        There are a couple of ways to use the <code>gcloud</code> module.
+      </p>
+      <p>
+        If you are running your app on Google App Engine or Google Compute Engine, you won't need to worry about supplying connection configuration options to <code>gcloud</code>&mdash; we figure that out for you.
+      </p>
+      <p>
+        However, if you're running your app elsewhere, you will need to provide this information.
+      </p>
+      <div hljs>
+// App Engine and Compute Engine
+var gcloud = require('gcloud');
 
-      <article ng-if="isActiveDoc('datastore')">
-        <p>
-          The <code>gcloud.datastore</code> object gives you some convenience methods, as well as exposes a <code>Dataset</code> function. This will allow you to create a <code>Dataset</code>, which is the object from which you will interact with the Google Cloud Datastore.
-        </p>
-        <div hljs>
-var datastore = gcloud.datastore;
-var dataset = new datastore.Dataset();</div>
-        <p ng-if="!isActiveUrl('/docs/datastore/dataset')">
-          See <a href="#/docs/datastore/dataset">the Dataset documentation</a> for examples of how to query the datastore, save entities, run a transaction, and others.
-        </p>
-      </article>
-
-      <article ng-if="isActiveDoc('storage')">
-        <p>
-          The <code>gcloud.storage</code> object contains a <code>Bucket</code> object, which is how you will interact with your Google Cloud Storage bucket.
-        </p>
-        <div hljs>
-var storage = gcloud.storage;
-var bucket = new storage.Bucket({
-  bucketName: 'MyBucket'
+// Elsewhere
+var gcloud = require('gcloud')({
+  keyFilename: '/path/to/keyfile.json'
 });</div>
-        <p>
-          See examples below for more on how to upload a file, read from your bucket's files, create signed URLs, and more.
-        </p>
-      </article>
+      <p>
+        In any environment, you are free to provide these and other default properties, which eventually will be passed to the <code>gcloud</code> sub-modules (Datastore, Storage, etc.).
+      </p>
+    </article>
+    <hr>
+    <article ng-if="isActiveDoc('datastore')">
+      <h2>Overview</h2>
+      <p>
+        The <code>gcloud.datastore</code> object gives you some convenience methods, as well as exposes a <code>dataset</code> function. This will allow you to create a <code>dataset</code>, which is the object from which you will interact with the Google Cloud Datastore.
+      </p>
+      <div hljs>
+var datastore = gcloud.datastore;
+var dataset = datastore.dataset({
+  projectId: 'myProject',
+  keyFilename: '/path/to/keyfile.json'
+});</div>
+      <p ng-if="!isActiveUrl('/docs/datastore/dataset')">
+        See <a href="#/docs/datastore/dataset">the Dataset documentation</a> for examples of how to query the datastore, save entities, run a transaction, and others.
+      </p>
+    </article>
+    <article ng-if="isActiveDoc('storage')">
+      <h2>Overview</h2>
+      <p>
+        The <code>gcloud.storage</code> object contains a <code>bucket</code> object, which is how you will interact with your Google Cloud Storage bucket. See the guide on <a href="https://developers.google.com/storage">Google Cloud Storage</a> to create a bucket.
+      </p>
+      <p>
+        See examples below for more on how to access your bucket to upload a file, read its files, create signed URLs, and more.
+      </p>
     </article>
 
     <article

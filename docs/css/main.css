@@ -625,6 +625,21 @@ h2, h3 {
     display: block;
 }
 
+.sub-heading {
+  color: #5d6061;
+  margin: 0;
+}
+
+.toggler {
+  float: left;
+  min-width: 15px;
+  margin: auto;
+}
+
+.toggle {
+  cursor: pointer;
+}
+
 /*
  Page Title
 */

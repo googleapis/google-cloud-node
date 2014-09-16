@@ -20,21 +20,48 @@
 
 var assert = require('assert');
 var ByteBuffer = require('bytebuffer');
+var gcloud = require('../../lib');
 var datastore = require('../../lib').datastore;
 var entity = require('../../lib/datastore/entity.js');
 var mockRespGet = require('../testdata/response_get.json');
 var Transaction = require('../../lib/datastore/transaction.js');
 
 describe('Dataset', function() {
+  it('should not require connection details', function() {
+    var credentials = require('../testdata/privateKeyFile.json');
+    var project = gcloud({
+      projectId: 'test-project',
+      credentials: credentials
+    });
+    var ds = project.datastore.dataset({ hi: 'there' });
+    assert.equal(ds.projectId, 'test-project');
+    assert.deepEqual(ds.connection.credentials, credentials);
+  });
+
+  it('should allow overriding connection details', function() {
+    var projectCredentials = require('../testdata/privateKeyFile.json');
+    var uniqueCredentials = require('../testdata/privateKeyFile-2.json');
+    var project = gcloud({
+      projectId: 'test-project',
+      credentials: projectCredentials
+    });
+    var ds = project.datastore.dataset({
+      projectId: 'another-project',
+      credentials: uniqueCredentials
+    });
+    assert.equal(ds.projectId, 'another-project');
+    assert.deepEqual(ds.connection.credentials, uniqueCredentials);
+  });
+
   it('should return a key scoped by namespace', function() {
-    var ds = new datastore.Dataset({ projectId: 'test', namespace: 'my-ns' });
+    var ds = datastore.dataset({ projectId: 'test', namespace: 'my-ns' });
     var key = ds.key('Company', 1);
     assert.equal(key.namespace, 'my-ns');
     assert.deepEqual(key.path, ['Company', 1]);
   });
 
   it('should allow namespace specification when creating a key', function() {
-    var ds = new datastore.Dataset({ projectId: 'test' });
+    var ds = datastore.dataset({ projectId: 'test' });
     var key = ds.key({
       namespace: 'custom-ns',
       path: ['Company', 1]
@@ -44,7 +71,7 @@ describe('Dataset', function() {
   });
 
   it('should get by key', function(done) {
-    var ds = new datastore.Dataset({ projectId: 'test' });
+    var ds = datastore.dataset({ projectId: 'test' });
     ds.transaction.makeReq = function(method, proto, typ, callback) {
       assert.equal(method, 'lookup');
       assert.equal(proto.key.length, 1);
@@ -61,7 +88,7 @@ describe('Dataset', function() {
   });
 
   it('should multi get by keys', function(done) {
-    var ds = new datastore.Dataset({ projectId: 'test' });
+    var ds = datastore.dataset({ projectId: 'test' });
     ds.transaction.makeReq = function(method, proto, typ, callback) {
       assert.equal(method, 'lookup');
       assert.equal(proto.key.length, 1);
@@ -80,7 +107,7 @@ describe('Dataset', function() {
   });
 
   it('should continue looking for deferred results', function(done) {
-    var ds = new datastore.Dataset({ projectId: 'test' });
+    var ds = datastore.dataset({ projectId: 'test' });
     var key = ds.key('Kind', 5732568548769792);
     var key2 = ds.key('Kind', 5732568548769792);
     var lookupCount = 0;
@@ -103,7 +130,7 @@ describe('Dataset', function() {
   });
 
   it('should delete by key', function(done) {
-    var ds = new datastore.Dataset({ projectId: 'test' });
+    var ds = datastore.dataset({ projectId: 'test' });
     ds.transaction.makeReq = function(method, proto, typ, callback) {
       assert.equal(method, 'commit');
       assert.equal(!!proto.mutation.delete, true);
@@ -113,7 +140,7 @@ describe('Dataset', function() {
   });
 
   it('should multi delete by keys', function(done) {
-    var ds = new datastore.Dataset({ projectId: 'test' });
+    var ds = datastore.dataset({ projectId: 'test' });
     ds.transaction.makeReq = function(method, proto, typ, callback) {
       assert.equal(method, 'commit');
       assert.equal(proto.mutation.delete.length, 2);
@@ -126,7 +153,7 @@ describe('Dataset', function() {
   });
 
   it('should save with incomplete key', function(done) {
-    var ds = new datastore.Dataset({ projectId: 'test' });
+    var ds = datastore.dataset({ projectId: 'test' });
     ds.transaction.makeReq = function(method, proto, typ, callback) {
       assert.equal(method, 'commit');
       assert.equal(proto.mutation.insert_auto_id.length, 1);
@@ -137,7 +164,7 @@ describe('Dataset', function() {
   });
 
   it('should save with keys', function(done) {
-    var ds = new datastore.Dataset({ projectId: 'test' });
+    var ds = datastore.dataset({ projectId: 'test' });
     ds.transaction.makeReq = function(method, proto, typ, callback) {
       assert.equal(method, 'commit');
       assert.equal(proto.mutation.upsert.length, 2);
@@ -153,7 +180,7 @@ describe('Dataset', function() {
   });
 
   it('should produce proper allocate IDs req protos', function(done) {
-    var ds = new datastore.Dataset({ projectId: 'test' });
+    var ds = datastore.dataset({ projectId: 'test' });
     ds.transaction.makeReq = function(method, proto, typ, callback) {
       assert.equal(method, 'allocateIds');
       assert.equal(proto.key.length, 1);
@@ -174,7 +201,7 @@ describe('Dataset', function() {
   });
 
   it('should throw if trying to allocate IDs with complete keys', function() {
-    var ds = new datastore.Dataset({ projectId: 'test' });
+    var ds = datastore.dataset({ projectId: 'test' });
     assert.throws(function() {
       ds.allocateIds(ds.key('Kind', 123));
     });
@@ -185,7 +212,7 @@ describe('Dataset', function() {
     var transaction;
 
     beforeEach(function() {
-      ds = new datastore.Dataset({ projectId: 'test' });
+      ds = datastore.dataset({ projectId: 'test' });
       ds.createTransaction_ = function() {
         transaction = new Transaction();
         transaction.makeReq = function(method, proto, typ, callback) {
@@ -221,8 +248,8 @@ describe('Dataset', function() {
     var dsWithNs;
 
     beforeEach(function() {
-      ds = new datastore.Dataset({ projectId: 'test' });
-      dsWithNs = new datastore.Dataset({
+      ds = datastore.dataset({ projectId: 'test' });
+      dsWithNs = datastore.dataset({
         projectId: 'test',
         namespace: 'my-ns'
       });
@@ -269,7 +296,7 @@ describe('Dataset', function() {
     };
 
     beforeEach(function() {
-      ds = new datastore.Dataset({ projectId: 'test' });
+      ds = datastore.dataset({ projectId: 'test' });
       query = ds.createQuery('Kind');
     });
 

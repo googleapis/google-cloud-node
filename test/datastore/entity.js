@@ -322,7 +322,7 @@ describe('entityToEntityProto', function() {
 
 describe('queryToQueryProto', function() {
   it('should support filters and ancestory filtering', function(done) {
-    var ds = new datastore.Dataset({ projectId: 'project-id' });
+    var ds = datastore.dataset({ projectId: 'project-id' });
     var q = ds.createQuery('Kind1')
       .filter('name =', 'John')
       .hasAncestor(new entity.Key({ path: [ 'Kind2', 'somename' ] }));
