@@ -179,7 +179,7 @@
     },
     "isPrivate": false,
     "ignore": true,
-    "code": "Datastore.prototype.dataset = function(options) {\n  // Mix in global config data to the provided options.\n  return new Dataset(util.extendGlobalConfig(this.config, options));\n};",
+    "code": "Datastore.prototype.dataset = function(options) {\n  options = options || {};\n  // Mix in global config data to the provided options.\n  return new Dataset(util.extendGlobalConfig(this.config, options));\n};",
     "ctx": {
       "type": "method",
       "constructor": "Datastore",

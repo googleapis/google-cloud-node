@@ -234,7 +234,7 @@
     },
     "isPrivate": false,
     "ignore": true,
-    "code": "Storage.prototype.bucket = function(options) {\n  // Mix in instance config data to the provided options.\n  return new Bucket(util.extendGlobalConfig(this.config, options));\n};\n\nmodule.exports = Storage;",
+    "code": "Storage.prototype.bucket = function(options) {\n  options = options || {};\n  // Mix in instance config data to the provided options.\n  return new Bucket(util.extendGlobalConfig(this.config, options));\n};\n\nmodule.exports = Storage;",
     "ctx": {
       "type": "method",
       "constructor": "Storage",
