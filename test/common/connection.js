@@ -98,6 +98,41 @@ describe('Connection', function() {
     var tokenNeverExpires = new connection.Token('token', new Date(3000, 0, 0));
     var tokenExpired = new connection.Token('token', new Date(2011, 0, 0));
 
+    describe('GCE', function() {
+      var gceConn;
+      var metadataResponse = {
+        body: {
+          access_token: 'y.8',
+          expires_in: 60
+        }
+      };
+
+      beforeEach(function() {
+        gceConn = new connection.Connection();
+      });
+
+      it('should fetch a token from the metadata server', function() {
+        gceConn.requester = function(opts) {
+          assert.equal(opts.uri.indexOf('http://metadata/'), 0);
+        };
+        gceConn.fetchToken();
+      });
+
+      it('should build token from the metadata server response', function() {
+        gceConn.requester = function(opts, callback) {
+          callback(null, metadataResponse, metadataResponse.body);
+        };
+        gceConn.fetchToken(function(err, token) {
+          assert.ifError(err);
+          assert(token instanceof connection.Token);
+          assert.equal(token.accessToken, metadataResponse.body.access_token);
+          var addedMs = metadataResponse.body.expires_in * 1000;
+          var tokenDate = new Date(Date.now() + addedMs);
+          assert.equal(token.expiry.getTime(), tokenDate.getTime());
+        });
+      });
+    });
+
     it('should fetch a new token if token expires', function(done) {
       conn.token = tokenExpired;
       conn.fetchToken = function() {
