@@ -53,21 +53,43 @@ describe('Dataset', function() {
     assert.deepEqual(ds.connection.credentials, uniqueCredentials);
   });
 
-  it('should return a key scoped by namespace', function() {
-    var ds = datastore.dataset({ projectId: 'test', namespace: 'my-ns' });
-    var key = ds.key('Company', 1);
-    assert.equal(key.namespace, 'my-ns');
-    assert.deepEqual(key.path, ['Company', 1]);
-  });
-
-  it('should allow namespace specification when creating a key', function() {
-    var ds = datastore.dataset({ projectId: 'test' });
-    var key = ds.key({
-      namespace: 'custom-ns',
-      path: ['Company', 1]
+  describe('key', function() {
+    it('should return key scoped by default namespace', function() {
+      var ds = datastore.dataset({ projectId: 'test', namespace: 'my-ns' });
+      var key = ds.key(['Company', 1]);
+      assert.equal(key.namespace, 'my-ns');
+      assert.deepEqual(key.path, ['Company', 1]);
     });
-    assert.equal(key.namespace, 'custom-ns');
-    assert.deepEqual(key.path, ['Company', 1]);
+
+    it('should allow namespace specification', function() {
+      var ds = datastore.dataset({ projectId: 'test', namespace: 'my-ns' });
+      var key = ds.key({
+        namespace: 'custom-ns',
+        path: ['Company', 1]
+      });
+      assert.equal(key.namespace, 'custom-ns');
+      assert.deepEqual(key.path, ['Company', 1]);
+    });
+
+    it('should create incomplete key from string', function() {
+      var ds = datastore.dataset({ projectId: 'test' });
+      var key = ds.key('hello');
+      assert.deepEqual(key.path, ['hello']);
+    });
+
+    it('should create incomplete key from array in obj', function() {
+      var ds = datastore.dataset({ projectId: 'test' });
+      var key = ds.key({
+        path: ['world']
+      });
+      assert.deepEqual(key.path, ['world']);
+    });
+
+    it('should create incomplete key from array', function() {
+      var ds = datastore.dataset({ projectId: 'test' });
+      var key = ds.key(['Company']);
+      assert.deepEqual(key.path, ['Company']);
+    });
   });
 
   it('should get by key', function(done) {
@@ -77,7 +99,7 @@ describe('Dataset', function() {
       assert.equal(proto.key.length, 1);
       callback(null, mockRespGet);
     };
-    ds.get(ds.key('Kind', 123), function(err, entity) {
+    ds.get(ds.key(['Kind', 123]), function(err, entity) {
       var data = entity.data;
       assert.deepEqual(entity.key.path, ['Kind', 5732568548769792]);
       assert.strictEqual(data.author, 'Silvano');
@@ -94,7 +116,7 @@ describe('Dataset', function() {
       assert.equal(proto.key.length, 1);
       callback(null, mockRespGet);
     };
-    var key = ds.key('Kind', 5732568548769792);
+    var key = ds.key(['Kind', 5732568548769792]);
     ds.get([key], function(err, entities) {
       var entity = entities[0];
       var data = entity.data;
@@ -108,8 +130,8 @@ describe('Dataset', function() {
 
   it('should continue looking for deferred results', function(done) {
     var ds = datastore.dataset({ projectId: 'test' });
-    var key = ds.key('Kind', 5732568548769792);
-    var key2 = ds.key('Kind', 5732568548769792);
+    var key = ds.key(['Kind', 5732568548769792]);
+    var key2 = ds.key(['Kind', 5732568548769792]);
     var lookupCount = 0;
     ds.transaction.makeReq = function(method, proto, typ, callback) {
       lookupCount++;
@@ -136,7 +158,7 @@ describe('Dataset', function() {
       assert.equal(!!proto.mutation.delete, true);
       callback();
     };
-    ds.delete(ds.key('Kind', 123), done);
+    ds.delete(ds.key(['Kind', 123]), done);
   });
 
   it('should multi delete by keys', function(done) {
@@ -147,8 +169,8 @@ describe('Dataset', function() {
       callback();
     };
     ds.delete([
-      ds.key('Kind', 123),
-      ds.key('Kind', 345)
+      ds.key(['Kind', 123]),
+      ds.key(['Kind', 345])
     ], done);
   });
 
@@ -159,7 +181,7 @@ describe('Dataset', function() {
       assert.equal(proto.mutation.insert_auto_id.length, 1);
       callback();
     };
-    var key = ds.key('Kind', null);
+    var key = ds.key('Kind');
     ds.save({ key: key, data: {} }, done);
   });
 
@@ -174,8 +196,8 @@ describe('Dataset', function() {
       callback();
     };
     ds.save([
-      { key: ds.key('Kind', 123), data: { k: 'v' } },
-      { key: ds.key('Kind', 456), data: { k: 'v' } }
+      { key: ds.key(['Kind', 123]), data: { k: 'v' } },
+      { key: ds.key(['Kind', 456]), data: { k: 'v' } }
     ], done);
   });
 
@@ -194,8 +216,8 @@ describe('Dataset', function() {
         ]
       });
     };
-    ds.allocateIds(ds.key('Kind', null), 1, function(err, ids) {
-      assert.deepEqual(ids[0], ds.key('Kind', 123));
+    ds.allocateIds(ds.key('Kind'), 1, function(err, ids) {
+      assert.deepEqual(ids[0], ds.key(['Kind', 123]));
       done();
     });
   });
@@ -203,7 +225,7 @@ describe('Dataset', function() {
   it('should throw if trying to allocate IDs with complete keys', function() {
     var ds = datastore.dataset({ projectId: 'test' });
     assert.throws(function() {
-      ds.allocateIds(ds.key('Kind', 123));
+      ds.allocateIds(ds.key(['Kind', 123]));
     });
   });
 
