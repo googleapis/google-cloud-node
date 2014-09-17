@@ -1,8 +1,6 @@
 language: node_js
 node_js:
 - 0.10
-before_install:
-- openssl aes-256-cbc -K $encrypted_b8aa0887832a_key -iv $encrypted_b8aa0887832a_iv -in key.json.enc -out key.json -d
 script:
 - npm run lint
 - npm run test
