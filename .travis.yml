@@ -1,29 +1,9 @@
-language:
-  node_js
+language: node_js
 node_js:
-  - 0.10
-branches:
-  only:
-    - master
-env:
-  global:
-    - secure: "a9Qx7y7dIWXEdppdmPW5g6CJQpUWUmd3sKWcJPKMfcg+xVHEBhPl9PCt/2jGK1sxstTDiwrVaV1NKpG4qD03UVot2zX28o1mM7JY6rDAl709rvKveegDeC9vo+U/BWid3lq/Impl37X0YYGY+spEcptI6bnvWxa6d7MGPCx3L2c="
-    - GH_OWNER: GoogleCloudPlatform
-    - GH_PROJECT_NAME: gcloud-node
+- 0.10
+before_install:
+- openssl aes-256-cbc -K $encrypted_b8aa0887832a_key -iv $encrypted_b8aa0887832a_iv -in key.json.enc -out key.json -d
 script:
-  - npm run lint
-  - npm run test
-after_success:
-  - git submodule add -b master https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} master > /dev/null 2>&1
-  - cd master
-  - npm install
-  - npm run docs
-  - git submodule add -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} ghpages > /dev/null 2>&1
-  - cd ghpages
-  - git rm -r .
-  - cp -R ../docs/* .
-  - git add -f .
-  - git config user.email "sawchuk@gmail.com"
-  - git config user.name "stephenplusplus"
-  - git commit -am "building gh-pages [ci skip]"
-  - git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages > /dev/null 2>&1
+- npm run lint
+- npm run test
+after_success: ./scripts/merge.sh
