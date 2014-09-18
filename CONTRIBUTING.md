@@ -59,7 +59,7 @@ The test coverage report will be available in `coverage/`.
 
 ## Commit Guidelines
 
-We follow the AngularJS [commit conventions][ngcontributing]. Please model your commit message after the following structure:
+Please model your commit message after the following structure:
 
 ```
 <type>(<scope>): <subject>
@@ -71,13 +71,13 @@ We follow the AngularJS [commit conventions][ngcontributing]. Please model your 
 
 - All lines must be limited to 72 characters
 - For `<scope>`, you may use:
-  - `app` for an application-wide change
+  - `common` for a change impacting the entire library
   - `datastore`
   - `pubsub`
   - `storage`
   - etc.
 
-Be sure to read the AngularJS [contributing document][ngcontributing]. For a thorough explanation, see the [AngularJS Git Commit Message Conventions doc][commitdoc].
+For a thorough explanation, see this [Git Commit Message Conventions doc][commitdoc].
 
 ## Contributor License Agreements
 
@@ -92,5 +92,4 @@ You can sign these electronically (just scroll to the bottom). After that, we'll
 [gcloudcli]: https://developers.google.com/cloud/sdk/gcloud/
 [indvcla]: https://developers.google.com/open-source/cla/individual
 [corpcla]: https://developers.google.com/open-source/cla/corporate
-[ngcontributing]: https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit-message-format
 [commitdoc]: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
