@@ -63,7 +63,7 @@
     "tmp": "0.0.24"
   },
   "scripts": {
-    "docs": "dox < lib/index.js > docs/json/index.json & dox < lib/datastore/dataset.js > docs/json/datastore/dataset.json & dox < lib/datastore/index.js > docs/json/datastore/index.json & dox < lib/datastore/query.js > docs/json/datastore/query.json & dox < lib/storage/index.js > docs/json/storage/index.json",
+    "docs": "dox < lib/index.js > docs/json/master/index.json & dox < lib/datastore/dataset.js > docs/json/master/datastore/dataset.json & dox < lib/datastore/index.js > docs/json/master/datastore/index.json & dox < lib/datastore/query.js > docs/json/master/datastore/query.json & dox < lib/storage/index.js > docs/json/master/storage/index.json",
     "lint": "jshint lib/ regression/ test/",
     "test": "mocha --recursive --reporter spec",
     "regression-test": "mocha regression/datastore.js regression/storage.js --reporter spec --timeout 15000",
