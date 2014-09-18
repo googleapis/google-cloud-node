@@ -57,28 +57,6 @@ $ npm run cover
 
 The test coverage report will be available in `coverage/`.
 
-## Commit Guidelines
-
-Please model your commit message after the following structure:
-
-```
-<type>(<scope>): <subject>
-<BLANK LINE>
-<body>
-<BLANK LINE>
-<footer>
-```
-
-- All lines must be limited to 72 characters
-- For `<scope>`, you may use:
-  - `common` for a change impacting the entire library
-  - `datastore`
-  - `pubsub`
-  - `storage`
-  - etc.
-
-For a thorough explanation, see this [Git Commit Message Conventions doc][commitdoc].
-
 ## Contributor License Agreements
 
 Before we can accept your pull requests you'll need to sign a Contributor License Agreement (CLA):
