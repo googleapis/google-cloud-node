@@ -7,7 +7,7 @@
 
 ## Testing
 
-### Unit tests
+### Unit Tests
 
 To run the unit tests, simply run:
 
