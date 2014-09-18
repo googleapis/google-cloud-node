@@ -57,28 +57,6 @@ $ npm run cover
 
 The test coverage report will be available in `coverage/`.
 
-## Commit Guidelines
-
-We follow the AngularJS [commit conventions][ngcontributing]. Please model your commit message after the following structure:
-
-```
-<type>(<scope>): <subject>
-<BLANK LINE>
-<body>
-<BLANK LINE>
-<footer>
-```
-
-- All lines must be limited to 72 characters
-- For `<scope>`, you may use:
-  - `app` for an application-wide change
-  - `datastore`
-  - `pubsub`
-  - `storage`
-  - etc.
-
-Be sure to read the AngularJS [contributing document][ngcontributing]. For a thorough explanation, see the [AngularJS Git Commit Message Conventions doc][commitdoc].
-
 ## Contributor License Agreements
 
 Before we can accept your pull requests you'll need to sign a Contributor License Agreement (CLA):
