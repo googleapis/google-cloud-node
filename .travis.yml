@@ -5,3 +5,13 @@ script:
 - npm run lint
 - npm run test
 after_success: ./scripts/merge.sh
+before_deploy: ./scripts/release.sh
+deploy:
+  provider: npm
+  email: silvano.luciani@gmail.com
+  api_key:
+    secure: W8J++FLVJYKeZL9R5R/tpBJbmaVhYRyjiYDCAFg+HCaX/aa9THql7iYpTlk5ezQw3CXAqPZhWqvoxQMUJNFiAkdmsNhiopD7zInomCzQhlCazWqGsv0a/m5qfdlhlesv31/WZzqr+gA3PEOjG6ED893YMhDi8SluMfHZYbYJPXk=
+  on:
+    tags: true
+    repo: GoogleCloudPlatform/gcloud-node
+    all_branches: true
