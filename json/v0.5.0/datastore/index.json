@@ -1,0 +1,159 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "ignore": true
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>@module datastore</p>",
+      "summary": "<p>@module datastore</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": true,
+    "code": "'use strict';"
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@type module:datastore/entity</p>",
+      "summary": "<p>@type module:datastore/entity</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var entity = require('./entity');",
+    "ctx": {
+      "type": "declaration",
+      "name": "entity",
+      "value": "require('./entity')",
+      "string": "entity"
+    }
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>@alias module:datastore</p>",
+      "summary": "<p>@alias module:datastore</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": true,
+    "code": "var datastore = {};",
+    "ctx": {
+      "type": "declaration",
+      "name": "datastore",
+      "value": "{}",
+      "string": "datastore"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\nvar datastore = gcloud.datastore;\n\n// Create a Dataset object.\nvar dataset = new datastore.Dataset();"
+      }
+    ],
+    "description": {
+      "full": "<p>@see {module:datastore/dataset}</p>",
+      "summary": "<p>@see {module:datastore/dataset}</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "datastore.Dataset = require('./dataset');",
+    "ctx": {
+      "type": "property",
+      "receiver": "datastore",
+      "name": "Dataset",
+      "value": "require('./dataset')",
+      "string": "datastore.Dataset"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "number"
+        ],
+        "name": "value",
+        "description": "- The integer value."
+      },
+      {
+        "type": "return",
+        "types": [
+          "object"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\n\n// Create an Integer.\nvar sevenInteger = gcloud.datastore.int(7);"
+      }
+    ],
+    "description": {
+      "full": "<p>Helper function to get a Datastore Integer object.</p>",
+      "summary": "<p>Helper function to get a Datastore Integer object.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "datastore.int = function(value) {\n  return new entity.Int(value);\n};",
+    "ctx": {
+      "type": "method",
+      "receiver": "datastore",
+      "name": "int",
+      "string": "datastore.int()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "number"
+        ],
+        "name": "value",
+        "description": "- The double value."
+      },
+      {
+        "type": "return",
+        "types": [
+          "object"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\n\n// Create a Double.\nvar threeDouble = gcloud.datastore.double(3.0);"
+      }
+    ],
+    "description": {
+      "full": "<p>Helper function to get a Datastore Double object.</p>",
+      "summary": "<p>Helper function to get a Datastore Double object.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "datastore.double = function(value) {\n  return new entity.Double(value);\n};\n\nmodule.exports = datastore;",
+    "ctx": {
+      "type": "method",
+      "receiver": "datastore",
+      "name": "double",
+      "string": "datastore.double()"
+    }
+  }
+]

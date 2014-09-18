@@ -1,0 +1,449 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "ignore": true
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>@module datastore/query</p>",
+      "summary": "<p>@module datastore/query</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": true,
+    "code": "'use strict';"
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@type {module:common/util}</p>",
+      "summary": "<p>@type {module:common/util}</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var util = require('../common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "constructor",
+        "string": ""
+      },
+      {
+        "type": "alias",
+        "string": "module:datastore/query "
+      },
+      {
+        "type": "param",
+        "types": [
+          "string="
+        ],
+        "name": "namespace",
+        "description": "- Namespace to query entities from."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string[]"
+        ],
+        "name": "kinds",
+        "description": "- Kinds to query. "
+      },
+      {
+        "type": "example",
+        "string": "var query;\n\n// If your dataset was scoped to a namespace at initialization, your query\n// will likewise be scoped to that namespace.\nquery = dataset.createQuery(['Lion', 'Chimp']);\n\n// However, you may override the namespace per query.\nquery = dataset.createQuery('AnimalNamespace', ['Lion', 'Chimp']);\n\n// You may also remove the namespace altogether.\nquery = dataset.createQuery(null, ['Lion', 'Chimp']);"
+      }
+    ],
+    "description": {
+      "full": "<p>Build a Query object.</p><p><strong>Queries should be built with<br />{@linkcode module:datastore/dataset#createQuery} and run via<br />{@linkcode module:datastore/dataset#runQuery}.</strong></p><p><em>Reference: {@link <a href=\"http://goo.gl/Cag0r6}\">http://goo.gl/Cag0r6}</a></em></p>",
+      "summary": "<p>Build a Query object.</p>",
+      "body": "<p><strong>Queries should be built with<br />{@linkcode module:datastore/dataset#createQuery} and run via<br />{@linkcode module:datastore/dataset#runQuery}.</strong></p><p><em>Reference: {@link <a href=\"http://goo.gl/Cag0r6}\">http://goo.gl/Cag0r6}</a></em></p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "function Query(namespace, kinds) {\n  if (!kinds) {\n    kinds = namespace;\n    namespace = null;\n  }\n\n  this.namespace = namespace || null;\n  this.kinds = kinds;\n\n  this.filters = [];\n  this.orders = [];\n  this.groupByVal = [];\n  this.selectVal = [];\n\n  // pagination\n  this.startVal = null;\n  this.endVal = null;\n  this.limitVal = -1;\n  this.offsetVal = -1;\n}",
+    "ctx": {
+      "type": "function",
+      "name": "Query",
+      "string": "Query()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "filter",
+        "description": "- Property + Operator (=, <, >, <=, >=)."
+      },
+      {
+        "type": "param",
+        "types": [
+          "*"
+        ],
+        "name": "value",
+        "description": "- Value to compare property to."
+      },
+      {
+        "type": "return",
+        "types": [
+          "module:datastore",
+          "query"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "// List all companies named Google that have less than 400 employees.\nvar companyQuery = query\n  .filter('name =', 'Google');\n  .filter('size <', 400);\n\n// To filter by key, use `__key__` for the property name. Filter on keys\n// stored as properties is not currently supported.\nvar keyQuery = query.filter('__key__ =', dataset.key('Company', 'Google'));"
+      }
+    ],
+    "description": {
+      "full": "<p>Datastore allows querying on properties. Supported comparison operators<br />are <code>=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code>. &quot;Not equal&quot; and <code>IN</code> operators are<br />currently not supported.</p><p><em>To filter by ancestors, see {@linkcode module:datastore/query#hasAncestor}.</em></p><p><em>Reference: {@link <a href=\"http://goo.gl/ENCx7e}\">http://goo.gl/ENCx7e}</a></em></p>",
+      "summary": "<p>Datastore allows querying on properties. Supported comparison operators<br />are <code>=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code>. &quot;Not equal&quot; and <code>IN</code> operators are<br />currently not supported.</p>",
+      "body": "<p><em>To filter by ancestors, see {@linkcode module:datastore/query#hasAncestor}.</em></p><p><em>Reference: {@link <a href=\"http://goo.gl/ENCx7e}\">http://goo.gl/ENCx7e}</a></em></p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Query.prototype.filter = function(filter, value) {\n  // TODO: Add filter validation.\n  var q = util.extend(this, new Query());\n  filter = filter.trim();\n  var fieldName = filter.replace(/[>|<|=|>=|<=]*$/, '').trim();\n  var op = filter.substr(fieldName.length, filter.length).trim();\n  q.filters = q.filters || [];\n  q.filters.push({ name: fieldName, op: op, val: value });\n  return q;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Query",
+      "cons": "Query",
+      "name": "filter",
+      "string": "Query.prototype.filter()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "Key"
+        ],
+        "name": "key",
+        "description": "- Key object to filter by."
+      },
+      {
+        "type": "return",
+        "types": [
+          "module:datastore",
+          "query"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "var ancestoryQuery = query.hasAncestor(dataset.key('Parent', 123));"
+      }
+    ],
+    "description": {
+      "full": "<p>Filter a query by ancestors.</p><p><em>Reference: {@link <a href=\"http://goo.gl/1qfpkZ}\">http://goo.gl/1qfpkZ}</a></em></p>",
+      "summary": "<p>Filter a query by ancestors.</p>",
+      "body": "<p><em>Reference: {@link <a href=\"http://goo.gl/1qfpkZ}\">http://goo.gl/1qfpkZ}</a></em></p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Query.prototype.hasAncestor = function(key) {\n  var q = util.extend(this, new Query());\n  this.filters.push({ name: '__key__', op: 'HAS_ANCESTOR', val: key });\n  return q;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Query",
+      "cons": "Query",
+      "name": "hasAncestor",
+      "string": "Query.prototype.hasAncestor()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "property",
+        "description": "- Optional operator (+, -) and property to order by."
+      },
+      {
+        "type": "return",
+        "types": [
+          "module:datastore",
+          "query"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "// Sort by size ascendingly.\nvar companiesAscending = companyQuery.order('size');\n\n// Sort by size descendingly.\nvar companiesDescending = companyQuery.order('-size');"
+      }
+    ],
+    "description": {
+      "full": "<p>Sort the results by a property name in ascending or descending order. By<br />default, an ascending sort order will be used.</p><p><em>Reference: {@link <a href=\"http://goo.gl/mfegFR}\">http://goo.gl/mfegFR}</a></em></p>",
+      "summary": "<p>Sort the results by a property name in ascending or descending order. By<br />default, an ascending sort order will be used.</p>",
+      "body": "<p><em>Reference: {@link <a href=\"http://goo.gl/mfegFR}\">http://goo.gl/mfegFR}</a></em></p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Query.prototype.order = function(property) {\n  var q = util.extend(this, new Query());\n  var sign = '+';\n  if (property[0] === '-' || property[0] === '+') {\n    sign = property[0];\n    property = property.substr(1);\n  }\n  q.orders = q.orders || [];\n  q.orders.push({ name: property, sign: sign });\n  return q;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Query",
+      "cons": "Query",
+      "name": "order",
+      "string": "Query.prototype.order()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "array"
+        ],
+        "name": "properties",
+        "description": "- Properties to group by."
+      },
+      {
+        "type": "return",
+        "types": [
+          "module:datastore",
+          "query"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "var groupedQuery = companyQuery.groupBy(['name', 'size']);"
+      }
+    ],
+    "description": {
+      "full": "<p>Group query results by a list of properties.</p>",
+      "summary": "<p>Group query results by a list of properties.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Query.prototype.groupBy = function(fieldNames) {\n  var fields = util.arrayize(fieldNames);\n  var q = util.extend(this, new Query());\n  q.groupByVal = fields;\n  return q;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Query",
+      "cons": "Query",
+      "name": "groupBy",
+      "string": "Query.prototype.groupBy()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "array"
+        ],
+        "name": "fieldNames",
+        "description": "- Properties to return from the matched entities."
+      },
+      {
+        "type": "return",
+        "types": [
+          "module:datastore",
+          "query"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "// Only retrieve the name and size properties.\nvar selectQuery = companyQuery.select(['name', 'size']);"
+      }
+    ],
+    "description": {
+      "full": "<p>Retrieve only select properties from the matched entities.</p><p><em>Reference: [Projection Queries]{@link <a href=\"http://goo.gl/EfsrJl}\">http://goo.gl/EfsrJl}</a></em></p>",
+      "summary": "<p>Retrieve only select properties from the matched entities.</p>",
+      "body": "<p><em>Reference: [Projection Queries]{@link <a href=\"http://goo.gl/EfsrJl}\">http://goo.gl/EfsrJl}</a></em></p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Query.prototype.select = function(fieldNames) {\n  var q = util.extend(this, new Query());\n  q.selectVal = fieldNames;\n  return q;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Query",
+      "cons": "Query",
+      "name": "select",
+      "string": "Query.prototype.select()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "cursorToken",
+        "description": "- The starting cursor token."
+      },
+      {
+        "type": "return",
+        "types": [
+          "module:datastore",
+          "query"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "var cursorToken = 'X';\n\n// Retrieve results starting from cursorToken.\nvar startQuery = companyQuery.start(cursorToken);"
+      }
+    ],
+    "description": {
+      "full": "<p>Set a starting cursor to a query.</p><p><em>Reference: {@link <a href=\"http://goo.gl/WuTGRI}\">http://goo.gl/WuTGRI}</a></em></p>",
+      "summary": "<p>Set a starting cursor to a query.</p>",
+      "body": "<p><em>Reference: {@link <a href=\"http://goo.gl/WuTGRI}\">http://goo.gl/WuTGRI}</a></em></p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Query.prototype.start = function(start) {\n  var q = util.extend(this, new Query());\n  q.startVal = start;\n  return q;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Query",
+      "cons": "Query",
+      "name": "start",
+      "string": "Query.prototype.start()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "cursorToken",
+        "description": "- The ending cursor token."
+      },
+      {
+        "type": "return",
+        "types": [
+          "module:datastore",
+          "query"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "var cursorToken = 'X';\n\n// Retrieve results limited to the extent of cursorToken.\nvar endQuery = companyQuery.end(cursorToken);"
+      }
+    ],
+    "description": {
+      "full": "<p>Set an ending cursor to a query.</p><p><em>Reference: {@link <a href=\"http://goo.gl/WuTGRI}\">http://goo.gl/WuTGRI}</a></em></p>",
+      "summary": "<p>Set an ending cursor to a query.</p>",
+      "body": "<p><em>Reference: {@link <a href=\"http://goo.gl/WuTGRI}\">http://goo.gl/WuTGRI}</a></em></p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Query.prototype.end = function(end) {\n  var q = util.extend(this, new Query());\n  q.endVal = end;\n  return q;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Query",
+      "cons": "Query",
+      "name": "end",
+      "string": "Query.prototype.end()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "number"
+        ],
+        "name": "n",
+        "description": "- The number of results to limit the query to."
+      },
+      {
+        "type": "return",
+        "types": [
+          "module:datastore",
+          "query"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "// Limit the results to 10 entities.\nvar limitQuery = companyQuery.limit(10);"
+      }
+    ],
+    "description": {
+      "full": "<p>Set a limit on a query.</p><p><em>Reference: {@link <a href=\"http://goo.gl/f0VZ0n}\">http://goo.gl/f0VZ0n}</a></em></p>",
+      "summary": "<p>Set a limit on a query.</p>",
+      "body": "<p><em>Reference: {@link <a href=\"http://goo.gl/f0VZ0n}\">http://goo.gl/f0VZ0n}</a></em></p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Query.prototype.limit = function(n) {\n  var q = util.extend(this, new Query());\n  q.limitVal = n;\n  return q;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Query",
+      "cons": "Query",
+      "name": "limit",
+      "string": "Query.prototype.limit()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "number"
+        ],
+        "name": "n",
+        "description": "- The offset to start from after the start cursor."
+      },
+      {
+        "type": "return",
+        "types": [
+          "module:datastore",
+          "query"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "// Start from the 101st result.\nvar offsetQuery = companyQuery.offset(100);"
+      }
+    ],
+    "description": {
+      "full": "<p>Set an offset on a query.</p><p><em>Reference: {@link <a href=\"http://goo.gl/f0VZ0n}\">http://goo.gl/f0VZ0n}</a></em></p>",
+      "summary": "<p>Set an offset on a query.</p>",
+      "body": "<p><em>Reference: {@link <a href=\"http://goo.gl/f0VZ0n}\">http://goo.gl/f0VZ0n}</a></em></p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Query.prototype.offset = function(n) {\n  var q = util.extend(this, new Query());\n  q.offsetVal = n;\n  return q;\n};\n\nmodule.exports = Query;",
+    "ctx": {
+      "type": "method",
+      "constructor": "Query",
+      "cons": "Query",
+      "name": "offset",
+      "string": "Query.prototype.offset()"
+    }
+  }
+]

@@ -1,0 +1,750 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "ignore": true
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>@module storage</p>",
+      "summary": "<p>@module storage</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": true,
+    "code": "'use strict';\n\nvar crypto = require('crypto');\nvar duplexify = require('duplexify');\nvar stream = require('stream');\nvar uuid = require('node-uuid');"
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@type module:common/connection</p>",
+      "summary": "<p>@type module:common/connection</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var conn = require('../common/connection.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "conn",
+      "value": "require('../common/connection.js')",
+      "string": "conn"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@type module:common/util</p>",
+      "summary": "<p>@type module:common/util</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var util = require('../common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "const",
+        "string": "{array}"
+      },
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>Required scopes for Google Cloud Storage API.</p>",
+      "summary": "<p>Required scopes for Google Cloud Storage API.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var SCOPES = ['https://www.googleapis.com/auth/devstorage.full_control'];",
+    "ctx": {
+      "type": "declaration",
+      "name": "SCOPES",
+      "value": "['https://www.googleapis.com/auth/devstorage.full_control']",
+      "string": "SCOPES"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@const {string}</p>",
+      "summary": "<p>@const {string}</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var STORAGE_BASE_URL = 'https://www.googleapis.com/storage/v1/b';",
+    "ctx": {
+      "type": "declaration",
+      "name": "STORAGE_BASE_URL",
+      "value": "'https://www.googleapis.com/storage/v1/b'",
+      "string": "STORAGE_BASE_URL"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@const {string}</p>",
+      "summary": "<p>@const {string}</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var STORAGE_UPLOAD_BASE_URL = 'https://www.googleapis.com/upload/storage/v1/b';",
+    "ctx": {
+      "type": "declaration",
+      "name": "STORAGE_UPLOAD_BASE_URL",
+      "value": "'https://www.googleapis.com/upload/storage/v1/b'",
+      "string": "STORAGE_UPLOAD_BASE_URL"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "module:storage "
+      },
+      {
+        "type": "throws",
+        "types": [
+          "if"
+        ],
+        "description": "a bucket name isn't provided. "
+      },
+      {
+        "type": "param",
+        "types": [
+          "object"
+        ],
+        "name": "options",
+        "description": "- Configuration options."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "options.bucketName",
+        "description": "- Name of the bucket."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string="
+        ],
+        "name": "options.keyFilename",
+        "description": "- Full path to the JSON key downloaded     from the Google Developers Console. Alternatively, you may provide a\n    `credentials` object."
+      },
+      {
+        "type": "param",
+        "types": [
+          "object="
+        ],
+        "name": "options.credentials",
+        "description": "- Credentials object, used in place of     a `keyFilename`.\n"
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\nvar storage = gcloud.storage;\nvar bucket;\n\n// From Google Compute Engine\nbucket = new storage.Bucket({\n  bucketName: YOUR_BUCKET_NAME\n});\n\n// From elsewhere\nbucket = new storage.Bucket({\n  bucketName: YOUR_BUCKET_NAME,\n  keyFilename: '/path/to/the/key.json'\n});"
+      }
+    ],
+    "description": {
+      "full": "<p>Google Cloud Storage allows you to store data on Google infrastructure. See<br />the guide on {@link <a href=\"https://developers.google.com/storage}\">https://developers.google.com/storage}</a> to create a<br />bucket.</p>",
+      "summary": "<p>Google Cloud Storage allows you to store data on Google infrastructure. See<br />the guide on {@link <a href=\"https://developers.google.com/storage}\">https://developers.google.com/storage}</a> to create a<br />bucket.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "function Bucket(options) {\n  if (!options.bucketName) {\n    throw Error('A bucket name is needed to use Google Cloud Storage');\n  }\n  this.bucketName = options.bucketName;\n  this.conn = new conn.Connection({\n    credentials: options.credentials,\n    keyFilename: options.keyFilename,\n    scopes: SCOPES\n  });\n}",
+    "ctx": {
+      "type": "function",
+      "name": "Bucket",
+      "string": "Bucket()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "object="
+        ],
+        "name": "query",
+        "description": "- Query object."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "query.delimiter",
+        "description": "- Results will contain only objects whose     names, aside from the prefix, do not contain delimiter. Objects whose\n    names, aside from the prefix, contain delimiter will have their name\n    truncated after the delimiter, returned in prefixes. Duplicate prefixes\n    are omitted."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "query.prefix",
+        "description": "- Filters results to objects whose names begin     with this prefix."
+      },
+      {
+        "type": "param",
+        "types": [
+          "number"
+        ],
+        "name": "query.maxResults",
+        "description": "- Maximum number of items plus prefixes to     return."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "query.pageToken",
+        "description": "- A previously-returned page token     representing part of the larger set of results to view."
+      },
+      {
+        "type": "param",
+        "types": [
+          "function"
+        ],
+        "name": "callback",
+        "description": "- The callback function. "
+      },
+      {
+        "type": "example",
+        "string": "bucket.list(function(err, files, nextQuery) {\n  if (nextQuery) {\n    // nextQuery will be non-null if there are more results.\n    bucket.list(nextQuery, function(err, files, nextQuery) {});\n  }\n});\n\n// Fetch using a query.\nbucket.list({ maxResults: 5 }, function(err, files, nextQuery) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>List files from the current bucket.</p>",
+      "summary": "<p>List files from the current bucket.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Bucket.prototype.list = function(query, callback) {\n  if (arguments.length === 1) {\n    callback = query;\n    query = {};\n  }\n  this.makeReq_('GET', 'o', query, true, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = util.extend({}, query);\n      nextQuery.pageToken = resp.nextPageToken;\n    }\n    callback(null, resp.items, nextQuery);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "list",
+      "string": "Bucket.prototype.list()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "name",
+        "description": "- Name of the remote file."
+      },
+      {
+        "type": "param",
+        "types": [
+          "function"
+        ],
+        "name": "callback",
+        "description": "- The callback function. "
+      },
+      {
+        "type": "example",
+        "string": "bucket.stat('filename', function(err, metadata) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Stat a file.</p>",
+      "summary": "<p>Stat a file.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Bucket.prototype.stat = function(name, callback) {\n  var path = util.format('o/{name}', { name: name });\n  this.makeReq_('GET', path, null, true, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "stat",
+      "string": "Bucket.prototype.stat()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "throws",
+        "types": [
+          "if"
+        ],
+        "description": "the destination filename is not provided. "
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "name",
+        "description": "- Name of the existing file."
+      },
+      {
+        "type": "param",
+        "types": [
+          "object"
+        ],
+        "name": "metadata",
+        "description": "- Destination file metadata object."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "metadata.name",
+        "description": "- Name of the destination file."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string="
+        ],
+        "name": "metadata.bucket",
+        "description": "- Destination bucket for the file. If none     is provided, the source's bucket name is used."
+      },
+      {
+        "type": "param",
+        "types": [
+          "function="
+        ],
+        "name": "callback",
+        "description": "- The callback function. "
+      },
+      {
+        "type": "example",
+        "string": "bucket.copy('filename', {\n   bucket: 'destination-bucket',\n   name: 'destination-filename'\n}, function(err) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Copy an existing file. If no bucket name is provided for the destination<br />file, the current bucket name will be used.</p>",
+      "summary": "<p>Copy an existing file. If no bucket name is provided for the destination<br />file, the current bucket name will be used.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Bucket.prototype.copy = function(name, metadata, callback) {\n  callback = callback || util.noop;\n  if (!metadata.name) {\n    throw new Error('Destination file should have a name.');\n  }\n  if (!metadata.bucket) {\n    metadata.bucket = this.bucketName;\n  }\n  var path = util.format('o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {\n    srcName: name,\n    destBucket: metadata.bucket,\n    destName: metadata.name\n  });\n  delete metadata.name;\n  delete metadata.bucket;\n  this.makeReq_('POST', path, null, metadata, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "copy",
+      "string": "Bucket.prototype.copy()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "name",
+        "description": "- Name of the file to remove."
+      },
+      {
+        "type": "param",
+        "types": [
+          "function"
+        ],
+        "name": "callback",
+        "description": "- The callback function. "
+      },
+      {
+        "type": "example",
+        "string": "bucket.remove('filename', function(err) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Remove a file.</p>",
+      "summary": "<p>Remove a file.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Bucket.prototype.remove = function(name, callback) {\n  var path = util.format('o/{name}', { name: name });\n  this.makeReq_('DELETE', path, null, true, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "remove",
+      "string": "Bucket.prototype.remove()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "object"
+        ],
+        "name": "options",
+        "description": "- Configuration object."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "options.action",
+        "description": "- \"read\", \"write\", or \"delete\""
+      },
+      {
+        "type": "param",
+        "types": [
+          "string="
+        ],
+        "name": "options.contentMd5",
+        "description": "- The MD5 digest value in base64. If you     provide this, the client must provide this HTTP header with this same\n    value in its request."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string="
+        ],
+        "name": "options.contentType",
+        "description": "- If you provide this value, the client     must provide this HTTP header set to the same value."
+      },
+      {
+        "type": "param",
+        "types": [
+          "number"
+        ],
+        "name": "options.expires",
+        "description": "- Timestamp (seconds since epoch) when this     link will expire."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string="
+        ],
+        "name": "options.extensionHeaders",
+        "description": "- If these headers are used, the     server will check to make sure that the client provides matching values."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "options.resource",
+        "description": "- Resource to allow access to. "
+      },
+      {
+        "type": "example",
+        "string": "var signedUrl = bucket.getSignedUrl({\n  action: 'read',\n  expires: Math.round(Date.now() / 1000) + (60 * 60 * 24 * 14), // 2 weeks.\n  resource: 'my-dog.jpg'\n}, function(err, url) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a signed URL to allow limited time access to a resource.</p><p>{@link <a href=\"https://developers.google.com/storage/docs/accesscontrol#Signed-URLs}\">https://developers.google.com/storage/docs/accesscontrol#Signed-URLs}</a></p>",
+      "summary": "<p>Get a signed URL to allow limited time access to a resource.</p>",
+      "body": "<p>{@link <a href=\"https://developers.google.com/storage/docs/accesscontrol#Signed-URLs}\">https://developers.google.com/storage/docs/accesscontrol#Signed-URLs}</a></p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Bucket.prototype.getSignedUrl = function(options, callback) {\n  options.action = {\n      read: 'GET',\n      write: 'PUT',\n      delete: 'DELETE'\n    }[options.action];\n\n  options.resource = util.format('/{bucket}/{resource}', {\n      bucket: this.bucketName,\n      resource: options.resource\n    });\n\n  this.conn.getCredentials(function(err, credentials) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var sign = crypto.createSign('RSA-SHA256');\n    sign.update([\n        options.action,\n        (options.contentMd5 || ''),\n        (options.contentType || ''),\n        options.expires,\n        (options.extensionHeaders || '') + options.resource\n      ].join('\\n'));\n    var signature = sign.sign(credentials.private_key, 'base64');\n\n    callback(null, [\n        'http://storage.googleapis.com' + options.resource,\n        '?GoogleAccessId=' + credentials.client_email,\n        '&Expires=' + options.expires,\n        '&Signature=' + encodeURIComponent(signature)\n      ].join(''));\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "getSignedUrl",
+      "string": "Bucket.prototype.getSignedUrl()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "name",
+        "description": "- Name of the remote file."
+      },
+      {
+        "type": "return",
+        "types": [
+          "ReadStream"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "// Create a readable stream and write the file contents to \"local-file-path\".\nvar fs = require('fs');\n\nbucket.createReadStream('remote-file-name')\n   .pipe(fs.createWriteStream('local-file-path'))\n   .on('error', function(err) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a readable stream to read contents of the provided remote file. It<br />can be piped to a write stream, or listened to for &#39;data&#39; events to read a<br />file&#39;s contents.</p>",
+      "summary": "<p>Create a readable stream to read contents of the provided remote file. It<br />can be piped to a write stream, or listened to for &#39;data&#39; events to read a<br />file&#39;s contents.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Bucket.prototype.createReadStream = function(name) {\n  var that = this;\n  var dup = duplexify();\n  this.stat(name, function(err, metadata) {\n    if (err) {\n      dup.emit('error', err);\n      return;\n    }\n    that.conn.createAuthorizedReq(\n        { uri: metadata.mediaLink }, function(err, req) {\n      if (err) {\n        dup.emit('error', err);\n        return;\n      }\n      dup.setReadable(that.conn.requester(req));\n    });\n  });\n  return dup;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "createReadStream",
+      "string": "Bucket.prototype.createReadStream()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "name",
+        "description": "- Name of the remote file to create."
+      },
+      {
+        "type": "param",
+        "types": [
+          "object="
+        ],
+        "name": "metadata",
+        "description": "- Optional metadata."
+      },
+      {
+        "type": "return",
+        "types": [
+          "stream"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "// Read from a local file and pipe to your bucket.\nvar fs = require('fs');\n\nfs.createReadStream('local-file-path')\n    .pipe(bucket.createWriteStream('remote-file-name'))\n    .on('error', function(err) {})\n    .on('complete', function(fileObject) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a duplex stream to handle the upload of a file.</p>",
+      "summary": "<p>Create a duplex stream to handle the upload of a file.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Bucket.prototype.createWriteStream = function(name, metadata) {\n  var dup = duplexify();\n  this.getWritableStream_(name, (metadata || {}), function(err, writable) {\n    if (err) {\n      dup.emit('error', err);\n      return;\n    }\n    writable.on('complete', function(res) {\n      util.handleResp(null, res, res.body, function(err, data) {\n        if (err) {\n          dup.emit('error', err);\n          return;\n        }\n        dup.emit('complete', data);\n      });\n    });\n    dup.setWritable(writable);\n    dup.pipe(writable);\n  });\n  return dup;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "createWriteStream",
+      "string": "Bucket.prototype.createWriteStream()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "name",
+        "description": "- Name of the remote file to create."
+      },
+      {
+        "type": "param",
+        "types": [
+          "object",
+          "string",
+          "buffer"
+        ],
+        "name": "options",
+        "description": "- Configuration object or data."
+      },
+      {
+        "type": "param",
+        "types": [
+          "object="
+        ],
+        "name": "options.metadata",
+        "description": "- Optional metadata."
+      },
+      {
+        "type": "param",
+        "types": [
+          "function="
+        ],
+        "name": "callback",
+        "description": "- The callback function. "
+      },
+      {
+        "type": "example",
+        "string": "// Upload \"Hello World\" as file contents. `data` can be any string or buffer.\nbucket.write('filename', {\n  data: 'Hello World'\n}, function(err) {});\n\n// A shorthand for the above.\nbucket.write('filename', 'Hello World', function(err) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Write the provided data to the destination with optional metadata.</p>",
+      "summary": "<p>Write the provided data to the destination with optional metadata.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Bucket.prototype.write = function(name, options, callback) {\n  callback = callback || util.noop;\n  var bufferStream;\n  var data = typeof options === 'object' ? options.data : options;\n  var metadata = options.metadata || {};\n\n  if (typeof data === 'undefined') {\n    // metadata only write\n    this.makeReq_('PATCH', 'o/' + name, null, metadata, callback);\n    return;\n  }\n\n  if (typeof data === 'string' || data instanceof Buffer) {\n    bufferStream = new stream.PassThrough();\n    bufferStream.pipe(this.createWriteStream(name, metadata))\n        .on('error', callback)\n        .on('complete', callback.bind(null, null));\n    bufferStream.push(data);\n    bufferStream.push(null);\n  }\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "write",
+      "string": "Bucket.prototype.write()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "name",
+        "description": "- The desired name of the file."
+      },
+      {
+        "type": "param",
+        "types": [
+          "object"
+        ],
+        "name": "metadata",
+        "description": "- File descriptive metadata."
+      },
+      {
+        "type": "param",
+        "types": [
+          "function"
+        ],
+        "name": "callback",
+        "description": "- The callback function."
+      }
+    ],
+    "description": {
+      "full": "<p>Get a remote stream to begin piping a readable stream to.</p>",
+      "summary": "<p>Get a remote stream to begin piping a readable stream to.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "Bucket.prototype.getWritableStream_ = function(name, metadata, callback) {\n  var boundary = uuid.v4();\n  var that = this;\n  metadata.contentType = metadata.contentType || 'text/plain';\n  this.conn.createAuthorizedReq({\n    method: 'POST',\n    uri: util.format('{base}/{bucket}/o', {\n      base: STORAGE_UPLOAD_BASE_URL,\n      bucket: this.bucketName\n    }),\n    qs: {\n      name: name,\n      uploadType: 'multipart'\n    },\n    headers: {\n      'Content-Type': 'multipart/related; boundary=\"' + boundary + '\"'\n    }\n  }, function(err, req) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    var remoteStream = that.conn.requester(req);\n    remoteStream.callback = util.noop;\n    remoteStream.write('--' + boundary + '\\n');\n    remoteStream.write('Content-Type: application/json\\n\\n');\n    remoteStream.write(JSON.stringify(metadata));\n    remoteStream.write('\\n\\n');\n    remoteStream.write('--' + boundary + '\\n');\n    remoteStream.write('Content-Type: ' + metadata.contentType + '\\n\\n');\n    var oldEndFn = remoteStream.end;\n    remoteStream.end = function(data, encoding, callback) {\n      data = (data || '') + '\\n--' + boundary + '--\\n';\n      remoteStream.write(data, encoding, callback);\n      oldEndFn.apply(this);\n    };\n    callback(null, remoteStream);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "getWritableStream_",
+      "string": "Bucket.prototype.getWritableStream_()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "method",
+        "description": "- Action."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "path",
+        "description": "- Request path."
+      },
+      {
+        "type": "param",
+        "types": [
+          "*"
+        ],
+        "name": "query",
+        "description": "- Request query object."
+      },
+      {
+        "type": "param",
+        "types": [
+          "*"
+        ],
+        "name": "body",
+        "description": "- Request body contents."
+      },
+      {
+        "type": "param",
+        "types": [
+          "function"
+        ],
+        "name": "callback",
+        "description": "- The callback function."
+      }
+    ],
+    "description": {
+      "full": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
+      "summary": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "Bucket.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: util.format('{base}/{bucket}/{path}', {\n      base: STORAGE_BASE_URL,\n      bucket: this.bucketName,\n      path: path\n    })\n  };\n  if (body) {\n    reqOpts.json = body;\n  }\n  this.conn.req(reqOpts, function(err, res, body) {\n    util.handleResp(err, res, body, callback);\n  });\n};\n\nmodule.exports.Bucket = Bucket;",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "makeReq_",
+      "string": "Bucket.prototype.makeReq_()"
+    }
+  }
+]

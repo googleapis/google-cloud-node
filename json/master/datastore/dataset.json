@@ -250,8 +250,40 @@
   {
     "tags": [
       {
+        "type": "param",
+        "types": [
+          "...*="
+        ],
+        "name": "options",
+        "description": "- Key path. To specify or override a namespace,     you must use an object here to explicitly state it."
+      },
+      {
+        "type": "param",
+        "types": [
+          "object="
+        ],
+        "name": "options",
+        "description": "- Configuration object."
+      },
+      {
+        "type": "param",
+        "types": [
+          "...*="
+        ],
+        "name": "options.path",
+        "description": "- Key path."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string="
+        ],
+        "name": "options.namespace",
+        "description": "- Optional namespace. "
+      },
+      {
         "type": "example",
-        "string": "// Create a key from the dataset's namespace.\nvar company123 = dataset.key('Company', 123);\n\n// Create a key from a provided namespace and path.\nvar nsCompany123 = dataset.key({\n  namespace: 'My-NS',\n  path: ['Company', 123]\n});"
+        "string": "var key;\n\n// Create an incomplete key from the dataset namespace, kind='Company'\nkey = dataset.key('Company');\n\n// A complete key from the dataset namespace, kind='Company', id=123\nkey = dataset.key(['Company', 123]);\n\n// A complete key from the dataset namespace, kind='Company', name='Google'\n// Note: `id` is used for numeric identifiers and `name` is used otherwise\nkey = dataset.key(['Company', 'Google']);\n\n// A complete key from a provided namespace and path.\nkey = dataset.key({\n  namespace: 'My-NS',\n  path: ['Company', 123]\n});"
       }
     ],
     "description": {
@@ -261,7 +293,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Dataset.prototype.key = function(keyConfig) {\n  if (!util.is(keyConfig, 'object')) {\n    keyConfig = {\n      namespace: this.namespace,\n      path: util.toArray(arguments)\n    };\n  }\n  return new entity.Key(keyConfig);\n};",
+    "code": "Dataset.prototype.key = function(options) {\n  options = util.is(options, 'object') ? options : {\n    namespace: this.namespace,\n    path: util.arrayize(options)\n  };\n  return new entity.Key(options);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Dataset",
@@ -349,7 +381,7 @@
       },
       {
         "type": "example",
-        "string": "dataset.get([\n  dataset.key('Company', 123),\n  dataset.key('Product', 'Computer')\n], function(err, entities) {});"
+        "string": "dataset.get([\n  dataset.key(['Company', 123]),\n  dataset.key(['Product', 'Computer'])\n], function(err, entities) {});"
       }
     ],
     "description": {
@@ -410,7 +442,7 @@
       },
       {
         "type": "example",
-        "string": "// Save a single entity.\ndataset.save({\n  key: dataset.key('Company', null),\n  data: {\n    rating: '10'\n  }\n}, function(err, key) {\n  // Because we gave an incomplete key as an argument, `key` will be\n  // populated with the complete, generated key.\n});\n\n// Save multiple entities at once.\ndataset.save([\n  {\n    key: dataset.key('Company', 123),\n    data: {\n      HQ: 'Dallas, TX'\n    }\n  },\n  {\n    key: dataset.key('Product', 'Computer'),\n    data: {\n      vendor: 'Dell'\n    }\n  }\n], function(err, keys) {});"
+        "string": "// Save a single entity.\ndataset.save({\n  key: dataset.key('Company'),\n  data: {\n    rating: '10'\n  }\n}, function(err, key) {\n  // Because we gave an incomplete key as an argument, `key` will be\n  // populated with the complete, generated key.\n});\n\n// Save multiple entities at once.\ndataset.save([\n  {\n    key: dataset.key(['Company', 123]),\n    data: {\n      HQ: 'Dallas, TX'\n    }\n  },\n  {\n    key: dataset.key(['Product', 'Computer']),\n    data: {\n      vendor: 'Dell'\n    }\n  }\n], function(err, keys) {});"
       }
     ],
     "description": {
@@ -455,7 +487,7 @@
       },
       {
         "type": "example",
-        "string": "// Delete a single entity.\ndataset.delete(dataset.key('Company', 123), function(err) {});\n\n// Delete multiple entities at once.\ndataset.delete([\n  dataset.key('Company', 123),\n  dataset.key('Product', 'Computer')\n], function(err) {});"
+        "string": "// Delete a single entity.\ndataset.delete(dataset.key(['Company', 123]), function(err) {});\n\n// Delete multiple entities at once.\ndataset.delete([\n  dataset.key(['Company', 123]),\n  dataset.key(['Product', 'Computer'])\n], function(err) {});"
       }
     ],
     "description": {
@@ -544,7 +576,7 @@
       },
       {
         "type": "example",
-        "string": "dataset.runInTransaction(function(transaction, done) {\n  // From the `transaction` object, execute dataset methods as usual.\n  // Call `done` when you're ready to commit all of the changes.\n  transaction.get(dataset.key('Company', 123), function(err, entity) {\n    if (err) {\n      transaction.rollback(done);\n      return;\n    }\n\n    done();\n  });\n}, function(err) {});"
+        "string": "dataset.runInTransaction(function(transaction, done) {\n  // From the `transaction` object, execute dataset methods as usual.\n  // Call `done` when you're ready to commit all of the changes.\n  transaction.get(dataset.key(['Company', 123]), function(err, entity) {\n    if (err) {\n      transaction.rollback(done);\n      return;\n    }\n\n    done();\n  });\n}, function(err) {});"
       }
     ],
     "description": {
@@ -591,7 +623,7 @@
       },
       {
         "type": "example",
-        "string": "// The following call will create 100 new IDs from the Company kind, which\n// exists under the default namespace.\nvar incompleteKey = dataset.key('Company', null);\ndataset.allocateIds(incompleteKey, 100, function(err, keys) {});\n\n// You may prefer to create IDs from a non-default namespace by providing an\n// incomplete key with a namespace. Similar to the previous example, the call\n// below will create 100 new IDs, but from the Company kind that exists under\n// the \"ns-test\" namespace.\nvar incompleteKey = dataset.key('ns-test', 'Company', null);\ndataset.allocateIds(incompleteKey, 100, function(err, keys) {});"
+        "string": "// The following call will create 100 new IDs from the Company kind, which\n// exists under the default namespace.\nvar incompleteKey = dataset.key('Company');\ndataset.allocateIds(incompleteKey, 100, function(err, keys) {});\n\n// You may prefer to create IDs from a non-default namespace by providing an\n// incomplete key with a namespace. Similar to the previous example, the call\n// below will create 100 new IDs, but from the Company kind that exists under\n// the \"ns-test\" namespace.\nvar incompleteKey = dataset.key({\n  namespace: 'ns-test',\n  path: ['Company']\n});\ndataset.allocateIds(incompleteKey, 100, function(err, keys) {});"
       }
     ],
     "description": {
