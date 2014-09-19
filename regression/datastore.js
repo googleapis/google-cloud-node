@@ -375,13 +375,13 @@ describe('datastore', function() {
         url: 'www.google.com'
       };
       ds.runInTransaction(function(t, tDone) {
-        ds.get(key, function(err, entity) {
+        t.get(key, function(err, entity) {
           assert.ifError(err);
           if (entity) {
             tDone();
             return;
           } else {
-            ds.save({ key: key, data: obj }, function(err) {
+            t.save({ key: key, data: obj }, function(err) {
               assert.ifError(err);
               tDone();
               return;
