@@ -708,10 +708,19 @@
       {
         "type": "param",
         "types": [
+          "string",
+          "buffer="
+        ],
+        "name": "options.data",
+        "description": "- Data to save to the file."
+      },
+      {
+        "type": "param",
+        "types": [
           "object="
         ],
         "name": "options.metadata",
-        "description": "- Optional metadata."
+        "description": "- Metadata."
       },
       {
         "type": "param",
