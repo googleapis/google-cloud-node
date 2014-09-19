@@ -1,5 +1,5 @@
 # Google Cloud Node.js Client
-> Node.js idiomatic client for Google Cloud services.
+> Node.js idiomatic client for Google Cloud Platform services.
 
 [![NPM Version](https://img.shields.io/npm/v/gcloud.svg)](https://www.npmjs.org/package/gcloud)
 [![Travis Build Status](https://travis-ci.org/GoogleCloudPlatform/gcloud-node.svg)](https://travis-ci.org/GoogleCloudPlatform/gcloud-node/)
@@ -8,7 +8,7 @@
 * [Homepage](https://googlecloudplatform.github.io/gcloud-node/)
 * [API Documentation](https://googlecloudplatform.github.io/gcloud-node/#/docs)
 
-This client supports the following Google Cloud services:
+This client supports the following Google Cloud Platform services:
 
 * [Google Cloud Datastore](https://cloud.google.com/products/cloud-datastore/)
 * [Google Cloud Storage](https://cloud.google.com/products/cloud-storage/)
