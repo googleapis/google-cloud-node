@@ -22,16 +22,14 @@
 
   <section class="content">
     <article ng-show="showReference">
-    <h1>{{module[0].toUpperCase() + module.substr(1)}}</h1>
-    <h3 class="sub-heading">
-      <div class="toggler" ng-click="showGcloudDocs = !showGcloudDocs">
-        <span class="toggle" ng-hide="showGcloudDocs">▹</span>
-        <span class="toggle" ng-show="showGcloudDocs">▿</span>
-      </div>
-      Getting Started with <code>gcloud</code>
-    </h3>
+      <h3 class="sub-heading">
+        <div class="toggler" ng-click="showGcloudDocs = !showGcloudDocs">
+          <span class="toggle" ng-hide="showGcloudDocs">▹</span>
+          <span class="toggle" ng-show="showGcloudDocs">▿</span>
+        </div>
+        Getting Started with <code>gcloud</code>
+      </h3>
       <article ng-if="showGcloudDocs">
-        <h1>{{module[0].toUpperCase() + module.substr(1)}}</h1>
         <p>
           First, install <code>gcloud</code> with npm and require it into your project:
         </p>
@@ -59,40 +57,32 @@
         </p>
       </article>
       <hr>
+
       <article ng-if="isActiveDoc('datastore')">
-        <h2>Overview</h2>
+        <h3>Datastore Overview</h3>
         <p>
           The <code>gcloud.datastore</code> object gives you some convenience methods, as well as exposes a <code>dataset</code> function. This will allow you to create a <code>dataset</code>, which is the object from which you will interact with the Google Cloud Datastore.
         </p>
         <div hljs>
-  var datastore = gcloud.datastore;
-  var dataset = datastore.dataset({
-    projectId: 'myProject',
-    keyFilename: '/path/to/keyfile.json'
-        </div>
-          <p ng-if="!isActiveUrl('/docs/datastore/dataset')">
-            See <a href="#/docs/{{version}}/datastore/dataset">the Dataset documentation</a> for examples of how to query the datastore, save entities, run a transaction, and others.
-          </p>
-        </article>
-
-        <article ng-if="isActiveDoc('storage')">
-          <p>
-            The <code>gcloud.storage</code> object contains a <code>Bucket</code> object, which is how you will interact with your Google Cloud Storage bucket.
-          </p>
-          <div hljs>
-  var storage = gcloud.storage;
-  var bucket = new storage.Bucket({
-    bucketName: 'MyBucket'
-  });</div>
+var datastore = gcloud.datastore;
+var dataset = datastore.dataset({
+  projectId: 'myProject',
+  keyFilename: '/path/to/keyfile.json'
+});</div>
         <p ng-if="!isActiveUrl('/docs/datastore/dataset')">
-          See <a href="#/docs/datastore/dataset">the Dataset documentation</a> for examples of how to query the datastore, save entities, run a transaction, and others.
+          See <a href="#/docs/{{version}}/datastore/dataset">the Dataset documentation</a> for examples of how to query the datastore, save entities, run a transaction, and others.
         </p>
       </article>
+
       <article ng-if="isActiveDoc('storage')">
-        <h2>Overview</h2>
+        <h3>Storage Overview</h3>
         <p>
           The <code>gcloud.storage</code> object contains a <code>bucket</code> object, which is how you will interact with your Google Cloud Storage bucket. See the guide on <a href="https://developers.google.com/storage">Google Cloud Storage</a> to create a bucket.
         </p>
+        <div hljs>
+var bucket = gcloud.storage.bucket({
+  bucketName: 'MyBucket'
+});</div>
         <p>
           See examples below for more on how to access your bucket to upload a file, read its files, create signed URLs, and more.
         </p>
@@ -117,10 +107,12 @@
         <h4 ng-show="method.params">Parameters</h4>
         <table class="table" ng-show="method.params">
           <tbody>
-            <tr ng-repeat="param in method.params">
+            <tr
+              ng-repeat="param in method.params"
+              ng-class="{ 'param-optional': param.optional }">
               <th scope="row">{{param.name}}</th>
-              <td ng-bind-html="param.types"></td>
-              <td ng-bind-html="param.description"></td>
+              <td class="param-types" ng-bind-html="param.types"></td>
+              <td class="param-description" ng-bind-html="param.description"></td>
             </tr>
           </tbody>
         </table>
@@ -146,14 +138,14 @@
     <ul class="page-sections" ng-show="showReference">
       <li ng-repeat="page in pages">
         <a
-          ng-class="{ current: docs.isActiveUrl(page.url) }"
+          ng-class="{ current: isActiveUrl(page.url) }"
           ng-href="{{page.url}}">
           {{page.title}}
         </a>
         <ul class="sub-sections" ng-if="page.pages">
           <li ng-repeat="innerPage in page.pages">
             <a
-              ng-class="{ current: docs.isActiveUrl(page.url + innerPage.url) }"
+              ng-class="{ current: isActiveUrl(page.url + innerPage.url) }"
               ng-href="{{page.url + innerPage.url}}">
               {{innerPage.title}}
             </a>

@@ -80,6 +80,7 @@ angular
                       formatHtml(tag.description.replace(/^- /, '')));
                   tag.types = $sce.trustAsHtml(tag.types.reduceRight(
                       reduceModules, []).join(', '));
+                  tag.optional = tag.types.toString().substr(-1) === '=';
                   return tag;
                 }),
               returns: obj.tags.filter(function(tag) {
@@ -197,15 +198,16 @@ angular
         }
       });
   })
+
   .controller('DocsCtrl', function($location, $scope, $routeParams, methods, $http, versions) {
     'use strict';
 
     $scope.isActiveUrl = function(url) {
-      var current = $location.path().replace('/' + methods.singleMethod, '');
-      var link = url
-          .replace(/^#/, '')
-          .replace('/' + methods.singleMethod, '');
-      return current === link;
+      var active = $location.path()
+          .replace('/' + methods.singleMethod, '')
+          .replace('/' + $scope.version, '');
+      url = url.replace('#', '').replace('/' + $scope.version, '');
+      return active === url;
     };
 
     $scope.isActiveDoc = function(doc) {
@@ -252,7 +254,8 @@ angular
       }
     ];
   })
-  .controller("HistoryCtrl", function($scope, versions) {
+
+  .controller('HistoryCtrl', function($scope, versions) {
     $scope.pageTitle = 'Node.js Docs Versions';
     $scope.showHistory = true;
     $scope.versions = versions;
