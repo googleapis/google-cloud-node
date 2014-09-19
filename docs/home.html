@@ -85,12 +85,12 @@
         <div hljs language="js">
 var gcloud = require('gcloud');
 
-var ds = new gcloud.datastore.Dataset({
+var ds = gcloud.datastore.dataset({
   projectId: 'my-project',
   keyFilename: '/path/to/keyfile.json'
 });
 
-ds.get(ds.key('Product', 123), function(err, entity) {
+ds.get(ds.key(['Product', 123]), function(err, entity) {
   console.log(err, entity);
 });</div>
 
