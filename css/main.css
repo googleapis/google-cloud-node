@@ -603,6 +603,16 @@ h2, h3 {
     border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
+.param-optional .param-types {
+  font-style: italic;
+}
+
+.param-optional .param-description:before {
+  content: "optional. ";
+  color: #aaa;
+  font-style: italic;
+}
+
 .method-heading {
     position: relative;
 }
@@ -627,7 +637,7 @@ h2, h3 {
 
 .sub-heading {
   color: #5d6061;
-  margin: 0;
+  margin: 0 !important;
 }
 
 .toggler {
