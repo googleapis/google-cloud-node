@@ -94,7 +94,7 @@ describe('Dataset', function() {
 
   it('should get by key', function(done) {
     var ds = datastore.dataset({ projectId: 'test' });
-    ds.transaction.makeReq = function(method, proto, typ, callback) {
+    ds.createRequest = function(method, proto, typ, callback) {
       assert.equal(method, 'lookup');
       assert.equal(proto.key.length, 1);
       callback(null, mockRespGet);
@@ -111,7 +111,7 @@ describe('Dataset', function() {
 
   it('should multi get by keys', function(done) {
     var ds = datastore.dataset({ projectId: 'test' });
-    ds.transaction.makeReq = function(method, proto, typ, callback) {
+    ds.createRequest = function(method, proto, typ, callback) {
       assert.equal(method, 'lookup');
       assert.equal(proto.key.length, 1);
       callback(null, mockRespGet);
@@ -133,7 +133,7 @@ describe('Dataset', function() {
     var key = ds.key(['Kind', 5732568548769792]);
     var key2 = ds.key(['Kind', 5732568548769792]);
     var lookupCount = 0;
-    ds.transaction.makeReq = function(method, proto, typ, callback) {
+    ds.createRequest = function(method, proto, typ, callback) {
       lookupCount++;
       assert.equal(method, 'lookup');
       if (mockRespGet.deferred.length) {
@@ -153,7 +153,7 @@ describe('Dataset', function() {
 
   it('should delete by key', function(done) {
     var ds = datastore.dataset({ projectId: 'test' });
-    ds.transaction.makeReq = function(method, proto, typ, callback) {
+    ds.createRequest = function(method, proto, typ, callback) {
       assert.equal(method, 'commit');
       assert.equal(!!proto.mutation.delete, true);
       callback();
@@ -163,7 +163,7 @@ describe('Dataset', function() {
 
   it('should multi delete by keys', function(done) {
     var ds = datastore.dataset({ projectId: 'test' });
-    ds.transaction.makeReq = function(method, proto, typ, callback) {
+    ds.createRequest = function(method, proto, typ, callback) {
       assert.equal(method, 'commit');
       assert.equal(proto.mutation.delete.length, 2);
       callback();
@@ -176,7 +176,7 @@ describe('Dataset', function() {
 
   it('should save with incomplete key', function(done) {
     var ds = datastore.dataset({ projectId: 'test' });
-    ds.transaction.makeReq = function(method, proto, typ, callback) {
+    ds.createRequest = function(method, proto, typ, callback) {
       assert.equal(method, 'commit');
       assert.equal(proto.mutation.insert_auto_id.length, 1);
       callback();
@@ -187,7 +187,7 @@ describe('Dataset', function() {
 
   it('should save with keys', function(done) {
     var ds = datastore.dataset({ projectId: 'test' });
-    ds.transaction.makeReq = function(method, proto, typ, callback) {
+    ds.createRequest = function(method, proto, typ, callback) {
       assert.equal(method, 'commit');
       assert.equal(proto.mutation.upsert.length, 2);
       assert.equal(proto.mutation.upsert[0].property[0].name, 'k');
@@ -203,7 +203,7 @@ describe('Dataset', function() {
 
   it('should produce proper allocate IDs req protos', function(done) {
     var ds = datastore.dataset({ projectId: 'test' });
-    ds.transaction.makeReq = function(method, proto, typ, callback) {
+    ds.createRequest = function(method, proto, typ, callback) {
       assert.equal(method, 'allocateIds');
       assert.equal(proto.key.length, 1);
       assert.deepEqual(proto.key[0], {
@@ -237,7 +237,7 @@ describe('Dataset', function() {
       ds = datastore.dataset({ projectId: 'test' });
       ds.createTransaction_ = function() {
         transaction = new Transaction();
-        transaction.makeReq = function(method, proto, typ, callback) {
+        transaction.createRequest = function(method, proto, typ, callback) {
           assert.equal(method, 'beginTransaction');
           callback(null, { transaction: '' });
         };
@@ -257,7 +257,7 @@ describe('Dataset', function() {
 
     it('should commit the transaction when done', function() {
       ds.runInTransaction(function(t, done) {
-        transaction.makeReq = function(method) {
+        transaction.createRequest = function(method) {
           assert.equal(method, 'commit');
         };
         done();
@@ -325,7 +325,7 @@ describe('Dataset', function() {
     describe('errors', function() {
       it('should handle upstream errors', function() {
         var upstreamError = new Error('upstream error.');
-        ds.transaction.makeReq = function(method, proto, typ, callback) {
+        ds.createRequest = function(method, proto, typ, callback) {
           assert.equal(method, 'runQuery');
           callback(upstreamError);
         };
@@ -336,7 +336,7 @@ describe('Dataset', function() {
       });
 
       it('should handle missing results error', function() {
-        ds.transaction.makeReq = function(method, proto, typ, callback) {
+        ds.createRequest = function(method, proto, typ, callback) {
           assert.equal(method, 'runQuery');
           callback('simulated-error', mockResponse.withoutResults);
         };
@@ -348,7 +348,7 @@ describe('Dataset', function() {
     });
 
     it('should execute callback with results', function() {
-      ds.transaction.makeReq = function(method, proto, typ, callback) {
+      ds.createRequest = function(method, proto, typ, callback) {
         assert.equal(method, 'runQuery');
         callback(null, mockResponse.withResults);
       };
@@ -365,7 +365,7 @@ describe('Dataset', function() {
     });
 
     it('should return a new query if results remain', function() {
-      ds.transaction.makeReq = function(method, proto, typ, callback) {
+      ds.createRequest = function(method, proto, typ, callback) {
         assert.equal(method, 'runQuery');
         callback(null, mockResponse.withResultsAndEndCursor);
       };
