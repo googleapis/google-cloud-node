@@ -64,8 +64,7 @@
           The <code>gcloud.datastore</code> object gives you some convenience methods, as well as exposes a <code>dataset</code> function. This will allow you to create a <code>dataset</code>, which is the object from which you will interact with the Google Cloud Datastore.
         </p>
         <div hljs>
-var datastore = gcloud.datastore;
-var dataset = datastore.dataset({
+var dataset = gcloud.datastore.dataset({
   projectId: 'myProject',
   keyFilename: '/path/to/keyfile.json'
 });</div>
