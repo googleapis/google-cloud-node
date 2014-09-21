@@ -202,12 +202,13 @@ angular
   .run(function($location, $route, $rootScope, versions) {
     $rootScope.$on('$routeChangeStart', function(event, route) {
       var url = $location.path();
-      if (url.indexOf('/docs/') === -1) {
+      if (url.indexOf('/docs/') === -1 || (!route.params || !route.params.version)) {
+        // This isn't a `docs` route or it's not one that expects a version.
+        // No need to re-direct request.
         return;
       }
-      var version = route.params && route.params.version;
-      if (versions.indexOf(version) === -1) {
-        // No version specified.
+      if (versions.indexOf(route.params.version) === -1) {
+        // No version specified where one was expected.
         // Route to same url with latest version prepended.
         event.preventDefault();
         $route.reload();
