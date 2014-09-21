@@ -18,7 +18,7 @@ If you need support for other Google APIs, check out the [Google Node.js API Cli
 ## Quick Start
 
 ```sh
-$ npm install gcloud
+$ npm install --save gcloud
 ```
 
 ## Authorization
