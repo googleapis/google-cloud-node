@@ -199,6 +199,23 @@ angular
       });
   })
 
+  .run(function($location, $route, $rootScope, versions) {
+    $rootScope.$on('$routeChangeStart', function(event, route) {
+      var url = $location.path();
+      if (url.indexOf('/docs/') === -1) {
+        return;
+      }
+      var version = route.params && route.params.version;
+      if (versions.indexOf(version) === -1) {
+        // No version specified.
+        // Route to same url with latest version prepended.
+        event.preventDefault();
+        $route.reload();
+        $location.path(url.replace('docs/', 'docs/' + versions[0] + '/'));
+      }
+    });
+  })
+
   .controller('DocsCtrl', function($location, $scope, $routeParams, methods, $http, versions) {
     'use strict';
 
