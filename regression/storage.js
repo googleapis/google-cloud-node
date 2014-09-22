@@ -226,10 +226,11 @@ describe('storage', function() {
     });
 
     it('should allow control of expiration', function(done) {
-      var offsetSeconds = 5;
+      var waitSeconds = 5;
+      var expiresIn = 1; // 1 second
       bucket.getSignedUrl({
           action: 'read',
-          expires: Math.round(Date.now() / 1000) + offsetSeconds,
+          expires: Math.round(Date.now() / 1000) + expiresIn,
           resource: filename
         }, function(err, signedReadUrl) {
           assert.ifError(err);
@@ -241,7 +242,7 @@ describe('storage', function() {
               assert.equal(resp.statusCode, 400);
               bucket.remove(filename, done);
             });
-          }, (offsetSeconds + 1) * 1000);
+          }, waitSeconds * 1000);
         });
     });
   });
