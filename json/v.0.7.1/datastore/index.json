@@ -1,0 +1,265 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "ignore": true
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>@module datastore</p>",
+      "summary": "<p>@module datastore</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": true,
+    "code": "'use strict';"
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@type module:datastore/entity</p>",
+      "summary": "<p>@type module:datastore/entity</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var entity = require('./entity');",
+    "ctx": {
+      "type": "declaration",
+      "name": "entity",
+      "value": "require('./entity')",
+      "string": "entity"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@type module:common/util</p>",
+      "summary": "<p>@type module:common/util</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var util = require('../common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@type module:datastore/dataset</p>",
+      "summary": "<p>@type module:datastore/dataset</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var Dataset = require('./dataset');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Dataset",
+      "value": "require('./dataset')",
+      "string": "Dataset"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "example",
+        "string": "var datastore = require('gcloud/lib/datastore')({\n  keyFilename: '/path/to/keyfile.json'\n});\n\nvar dataset = datastore.dataset();\n// equal to:\n//   datastore.dataset({\n//     keyFilename: '/path/to/keyfile.json'\n//   });"
+      }
+    ],
+    "description": {
+      "full": "<p>Developer Documentation</p><p>Invoking the Datastore class allows you to provide configuration up-front.<br />This configuration will be used for future invokations of the returned<br /><code>dataset</code> method.</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": "<p>Invoking the Datastore class allows you to provide configuration up-front.<br />This configuration will be used for future invokations of the returned<br /><code>dataset</code> method.</p>"
+    },
+    "isPrivate": false,
+    "ignore": true
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "module:datastore"
+      },
+      {
+        "type": "constructor",
+        "string": ""
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\n\n// Providing configuration details up-front.\nvar myProject = gcloud({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar dataset = myProject.datastore.dataset();\n\n\n// Overriding default configuration details.\nvar anotherDataset = myProject.datastore.dataset({\n  keyFilename: '/path/to/another/keyfile.json'\n});\n\n\n// Not using a default configuration.\nvar myOtherProject = gcloud.datastore.dataset({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});"
+      }
+    ],
+    "description": {
+      "full": "<p>The example below will demonstrate the different usage patterns your app may<br />need to support to retrieve a datastore object.</p>",
+      "summary": "<p>The example below will demonstrate the different usage patterns your app may<br />need to support to retrieve a datastore object.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "function Datastore(config) {\n  this.config = config || {};\n}",
+    "ctx": {
+      "type": "function",
+      "name": "Datastore",
+      "string": "Datastore()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "example",
+        "string": "var datastore = require('gcloud/lib/datastore');\n\n// Create a Dataset object.\nvar dataset = datastore.dataset({\n  keyFilename: '/path/to/keyfile.json'\n});"
+      }
+    ],
+    "description": {
+      "full": "<p>Developer Documentation</p><p>Use this static method to create a dataset without any pre-configured<br />options.</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": "<p>Use this static method to create a dataset without any pre-configured<br />options.</p>"
+    },
+    "isPrivate": false,
+    "ignore": true,
+    "code": "Datastore.dataset = Dataset;",
+    "ctx": {
+      "type": "property",
+      "receiver": "Datastore",
+      "name": "dataset",
+      "value": "Dataset",
+      "string": "Datastore.dataset"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "object="
+        ],
+        "name": "options",
+        "description": "- Configuration object."
+      },
+      {
+        "type": "return",
+        "types": [
+          "module:datastore",
+          "dataset"
+        ],
+        "description": ""
+      }
+    ],
+    "description": {
+      "full": "<p>Developer Documentation</p><p>Create a dataset using the instance method when you want to use your<br />pre-configured options from the Datastore instance.</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": "<p>Create a dataset using the instance method when you want to use your<br />pre-configured options from the Datastore instance.</p>"
+    },
+    "isPrivate": false,
+    "ignore": true,
+    "code": "Datastore.prototype.dataset = function(options) {\n  options = options || {};\n  // Mix in global config data to the provided options.\n  return new Dataset(util.extendGlobalConfig(this.config, options));\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Datastore",
+      "cons": "Datastore",
+      "name": "dataset",
+      "string": "Datastore.prototype.dataset()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "number"
+        ],
+        "name": "value",
+        "description": "- The integer value."
+      },
+      {
+        "type": "return",
+        "types": [
+          "object"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\n\n// Create an Integer.\nvar sevenInteger = gcloud.datastore.int(7);"
+      }
+    ],
+    "description": {
+      "full": "<p>Helper function to get a Datastore Integer object.</p>",
+      "summary": "<p>Helper function to get a Datastore Integer object.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Datastore.int = function(value) {\n  return new entity.Int(value);\n};",
+    "ctx": {
+      "type": "method",
+      "receiver": "Datastore",
+      "name": "int",
+      "string": "Datastore.int()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "number"
+        ],
+        "name": "value",
+        "description": "- The double value."
+      },
+      {
+        "type": "return",
+        "types": [
+          "object"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\n\n// Create a Double.\nvar threeDouble = gcloud.datastore.double(3.0);"
+      }
+    ],
+    "description": {
+      "full": "<p>Helper function to get a Datastore Double object.</p>",
+      "summary": "<p>Helper function to get a Datastore Double object.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Datastore.double = function(value) {\n  return new entity.Double(value);\n};\n\nmodule.exports = Datastore;",
+    "ctx": {
+      "type": "method",
+      "receiver": "Datastore",
+      "name": "double",
+      "string": "Datastore.double()"
+    }
+  }
+]
