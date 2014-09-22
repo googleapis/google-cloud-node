@@ -70,4 +70,3 @@ You can sign these electronically (just scroll to the bottom). After that, we'll
 [gcloudcli]: https://developers.google.com/cloud/sdk/gcloud/
 [indvcla]: https://developers.google.com/open-source/cla/individual
 [corpcla]: https://developers.google.com/open-source/cla/corporate
-[commitdoc]: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
