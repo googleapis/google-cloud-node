@@ -224,25 +224,5 @@ describe('storage', function() {
           });
         });
     });
-
-    it('should allow control of expiration', function(done) {
-      var offsetSeconds = 5;
-      bucket.getSignedUrl({
-          action: 'read',
-          expires: Math.round(Date.now() / 1000) + offsetSeconds,
-          resource: filename
-        }, function(err, signedReadUrl) {
-          assert.ifError(err);
-          request.get(signedReadUrl, function(err, resp, body) {
-            assert.equal(body, localFile);
-          });
-          setTimeout(function() {
-            request.get(signedReadUrl, function(err, resp) {
-              assert.equal(resp.statusCode, 400);
-              bucket.remove(filename, done);
-            });
-          }, (offsetSeconds + 1) * 1000);
-        });
-    });
   });
 });
