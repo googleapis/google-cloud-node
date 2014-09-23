@@ -21,6 +21,7 @@
 var assert = require('assert');
 var gcloud = require('../../lib');
 var storage = require('../../lib/storage');
+var url = require('url');
 
 var credentials = require('../testdata/privateKeyFile.json');
 var noop = function() {};
@@ -142,15 +143,46 @@ describe('Bucket', function() {
     bucket.remove('file-name');
   });
 
-  it('should create a signed url', function(done) {
-    bucket.getSignedUrl({
+  describe('getSignedUrl', function() {
+    it('should create a signed url', function(done) {
+      bucket.getSignedUrl({
         action: 'read',
-        resource: 'filename',
-        expires: Date.now() / 1000
-      }, function(err, url) {
+        expires: Math.round(Date.now() / 1000) + 5,
+        resource: 'filename'
+      }, function(err, signedUrl) {
         assert.ifError(err);
-        assert.equal(typeof url, 'string');
+        assert.equal(typeof signedUrl, 'string');
         done();
       });
+    });
+
+    describe('expires', function() {
+      var nowInSeconds = Math.floor(Date.now() / 1000);
+
+      it('should use the provided expiration date', function(done) {
+        var expirationTimestamp = nowInSeconds + 60;
+        bucket.getSignedUrl({
+          action: 'read',
+          resource: 'filename',
+          expires: expirationTimestamp
+        }, function(err, signedUrl) {
+          assert.ifError(err);
+          var expires = url.parse(signedUrl, true).query.Expires;
+          assert.equal(expires, expirationTimestamp);
+          done();
+        });
+      });
+
+      it('should throw if a date from the past is given', function() {
+        var expirationTimestamp = nowInSeconds - 1;
+        assert.throws(function() {
+          bucket.getSignedUrl({
+            action: 'read',
+            resource: 'filename',
+            expires: expirationTimestamp
+          }, function() {});
+        }, /cannot be in the past/);
+      });
+    });
   });
 });
