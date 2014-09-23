@@ -525,6 +525,13 @@
   {
     "tags": [
       {
+        "type": "throws",
+        "types": [
+          "Error"
+        ],
+        "description": "if an expiration timestamp from the past is given. "
+      },
+      {
         "type": "param",
         "types": [
           "object"
@@ -592,7 +599,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Bucket.prototype.getSignedUrl = function(options, callback) {\n  options.action = {\n      read: 'GET',\n      write: 'PUT',\n      delete: 'DELETE'\n    }[options.action];\n\n  options.resource = util.format('/{bucket}/{resource}', {\n      bucket: this.bucketName,\n      resource: options.resource\n    });\n\n  this.connection.getCredentials(function(err, credentials) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var sign = crypto.createSign('RSA-SHA256');\n    sign.update([\n        options.action,\n        (options.contentMd5 || ''),\n        (options.contentType || ''),\n        options.expires,\n        (options.extensionHeaders || '') + options.resource\n      ].join('\\n'));\n    var signature = sign.sign(credentials.private_key, 'base64');\n\n    callback(null, [\n        'http://storage.googleapis.com' + options.resource,\n        '?GoogleAccessId=' + credentials.client_email,\n        '&Expires=' + options.expires,\n        '&Signature=' + encodeURIComponent(signature)\n      ].join(''));\n  });\n};",
+    "code": "Bucket.prototype.getSignedUrl = function(options, callback) {\n  if (options.expires < Math.floor(Date.now() / 1000)) {\n    throw new Error('An expiration date cannot be in the past.');\n  }\n\n  options.action = {\n      read: 'GET',\n      write: 'PUT',\n      delete: 'DELETE'\n    }[options.action];\n\n  options.resource = util.format('/{bucket}/{resource}', {\n      bucket: this.bucketName,\n      resource: options.resource\n    });\n\n  this.connection.getCredentials(function(err, credentials) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var sign = crypto.createSign('RSA-SHA256');\n    sign.update([\n        options.action,\n        (options.contentMd5 || ''),\n        (options.contentType || ''),\n        options.expires,\n        (options.extensionHeaders || '') + options.resource\n      ].join('\\n'));\n    var signature = sign.sign(credentials.private_key, 'base64');\n\n    callback(null, [\n        'http://storage.googleapis.com' + options.resource,\n        '?GoogleAccessId=' + credentials.client_email,\n        '&Expires=' + options.expires,\n        '&Signature=' + encodeURIComponent(signature)\n      ].join(''));\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Bucket",
