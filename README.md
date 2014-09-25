@@ -51,16 +51,15 @@ See [the gcloud-node API documentation](https://googlecloudplatform.github.io/gc
 
 ```js
 var gcloud = require('gcloud');
-var datastore = gcloud.datastore;
 var dataset;
 
 // From Google Compute Engine:
-dataset = new datastore.Dataset({
+dataset = gcloud.datastore.dataset({
   projectId: 'my-project',
 });
 
 // Or from elsewhere:
-dataset = new datastore.Dataset({
+dataset = gcloud.datastore.dataset({
   projectId: 'my-project',
   keyFilename: '/path/to/keyfile.json'
 });
@@ -80,17 +79,16 @@ See [the gcloud-node API documentation](https://googlecloudplatform.github.io/gc
 
 ```js
 var gcloud = require('gcloud');
-var storage = gcloud.storage;
 var bucket;
 
 // From Google Compute Engine:
-bucket = new storage.Bucket({
-  bucketName: YOUR_BUCKET_NAME
+bucket = gcloud.storage.bucket({
+  bucketName: 'my-bucket'
 });
 
 // Or from elsewhere:
-bucket = new storage.Bucket({
-  bucketName: YOUR_BUCKET_NAME,
+bucket = gcloud.storage.bucket({
+  bucketName: 'my-bucket',
   keyFilename: '/path/to/the/key.json'
 });
 
