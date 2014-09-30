@@ -23,6 +23,7 @@ var async = require('async');
 var path = require('path');
 
 var connection = require('../../lib/common/connection.js');
+var util = require('../../lib/common/util.js');
 
 describe('Connection', function() {
   var conn;
@@ -141,13 +142,54 @@ describe('Connection', function() {
       conn.req({ uri: 'https://someuri' }, function() {});
     });
 
-    it('should pass error to callback', function(done) {
-      var error = new Error('Something terrible happened.');
-      conn.fetchToken = function(cb) {
-        cb(error);
+    it('should fetch a new token if API returns a 401', function() {
+      var fetchTokenCount = 0;
+      conn.fetchToken = function(callback) {
+        fetchTokenCount++;
+        callback(null, tokenNeverExpires);
       };
-      conn.req({}, function(err) {
-        assert.equal(error, err);
+      conn.requester = function(req, callback) {
+        if (fetchTokenCount === 1) {
+          callback({ code: 401 });
+        } else {
+          callback(null);
+        }
+      };
+      conn.req({ uri: 'https://someuri' }, function() {});
+      assert.equal(fetchTokenCount, 2);
+    });
+
+    it('should try API request 2 times', function(done) {
+      // Fail 1: invalid token.
+      // -- try to get token --
+      // Fail 2: invalid token.
+      // -- execute callback with error.
+      var error = { code: 401 };
+      var requesterCount = 0;
+      conn.fetchToken = function(callback) {
+        callback(null, tokenNeverExpires);
+      };
+      conn.requester = function(req, callback) {
+        requesterCount++;
+        callback(error);
+      };
+      conn.req({ uri: 'https://someuri' }, function(err) {
+        assert.equal(requesterCount, 2);
+        assert.deepEqual(err, error);
+        done();
+      });
+    });
+
+    it('should pass all arguments from requester to callback', function(done) {
+      var args = [null, 1, 2, 3];
+      conn.fetchToken = function(callback) {
+        callback(null, tokenNeverExpires);
+      };
+      conn.requester = function(req, callback) {
+        callback.apply(null, args);
+      };
+      conn.req({ uri: 'https://someuri' }, function() {
+        assert.deepEqual(util.toArray(arguments), args);
         done();
       });
     });
