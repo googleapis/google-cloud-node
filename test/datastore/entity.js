@@ -304,39 +304,22 @@ describe('entityFromEntityProto', function() {
 });
 
 describe('entityToEntityProto', function() {
-  it('should support bool, int, double, str, entity & list values', function() {
-    var now = new Date();
-    var proto = entity.entityToEntityProto({
-      name: 'Burcu',
-      desc: 'Description',
-      count: new entity.Int(6),
-      primitiveCount: 6,
-      legit: true,
-      date : now,
-      bytes: new Buffer('Hello'),
-      list: ['a', new entity.Double(54.7)],
-      metadata: {
-        key1: 'value1',
-        key2: 'value2'
-      }
+  it('should format an entity', function() {
+    var val = entity.entityToEntityProto({
+      name: 'name'
     });
-    var properties = proto.property;
-    assert.equal(properties[0].value.string_value, 'Burcu');
-    assert.equal(properties[1].value.string_value, 'Description');
-    assert.equal(properties[2].value.integer_value, 6);
-    assert.equal(properties[3].value.integer_value, 6);
-    assert.equal(properties[4].value.boolean_value, true);
-    assert.equal(
-      properties[5].value.timestamp_microseconds_value, now.getTime() * 1000);
-    assert.deepEqual(properties[6].value.blob_value, new Buffer('Hello'));
-
-    var listValue = properties[7].value.list_value;
-    assert.equal(listValue[0].string_value, 'a');
-    assert.equal(listValue[1].double_value, 54.7);
-
-    var entityValue = properties[8].value.entity_value;
-    assert.equal(entityValue.property[0].value.string_value, 'value1');
-    assert.equal(entityValue.property[1].value.string_value, 'value2');
+    var expected = {
+      key: null,
+      property: [
+        {
+          name: 'name',
+          value: {
+            string_value: 'name'
+          }
+        }
+      ]
+    };
+    assert.deepEqual(val, expected);
   });
 });
 
@@ -348,5 +331,109 @@ describe('queryToQueryProto', function() {
       .hasAncestor(new entity.Key({ path: [ 'Kind2', 'somename' ] }));
     var proto = entity.queryToQueryProto(q);
     assert.deepEqual(proto, queryFilterProto);
+  });
+});
+
+describe('valueToProperty', function() {
+  it('should translate a boolean', function() {
+    var val = entity.valueToProperty(true);
+    assert.deepEqual(val, {
+      boolean_value: true
+    });
+  });
+
+  it('should translate an int', function() {
+    var val1 = entity.valueToProperty(new entity.Int(3));
+    var val2 = entity.valueToProperty(3);
+    var expected = { integer_value: 3 };
+    assert.deepEqual(val1, expected);
+    assert.deepEqual(val2, expected);
+  });
+
+  it('should translate a double', function() {
+    var val1 = entity.valueToProperty(new entity.Double(3.1));
+    var val2 = entity.valueToProperty(3.1);
+    var expected = { double_value: 3.1 };
+    assert.deepEqual(val1, expected);
+    assert.deepEqual(val2, expected);
+  });
+
+  it('should translate a date', function() {
+    var date = new Date();
+    var val = entity.valueToProperty(date);
+    var expected = {
+      timestamp_microseconds_value: date.getTime() * 1000
+    };
+    assert.deepEqual(val, expected);
+  });
+
+  it('should translate a string', function() {
+    var val = entity.valueToProperty('Hi');
+    var expected = {
+      string_value: 'Hi'
+    };
+    assert.deepEqual(val, expected);
+  });
+
+  it('should translate a buffer', function() {
+    var buffer = new Buffer('Hi');
+    var val = entity.valueToProperty(buffer);
+    var expected = {
+      blob_value: buffer
+    };
+    assert.deepEqual(val, expected);
+  });
+
+  it('should translate an array', function() {
+    var array = [1, '2', true];
+    var val = entity.valueToProperty(array);
+    var expected = {
+      list_value: [
+        { integer_value: 1 },
+        { string_value: '2' },
+        { boolean_value: true }
+      ]
+    };
+    assert.deepEqual(val, expected);
+  });
+
+  it('should translate a Key', function() {
+    var key = new entity.Key({
+      namespace: 'ns',
+      path: ['Kind', 3]
+    });
+    var val = entity.valueToProperty(key);
+    var expected = {
+      key_value: entity.keyToKeyProto(key)
+    };
+    assert.deepEqual(val, expected);
+  });
+
+  describe('objects', function() {
+    it('should translate an object', function() {
+      var val = entity.valueToProperty({
+        name: 'value'
+      });
+      var expected = {
+        entity_value: {
+          property: [
+            {
+              name: 'name',
+              value: {
+                string_value: 'value',
+              }
+            }
+          ]
+        },
+        indexed: false
+      };
+      assert.deepEqual(val, expected);
+    });
+
+    it('should not translate a key-less object', function() {
+      assert.throws(function() {
+        entity.valueToProperty({});
+      }, /Unsupported field value/);
+    });
   });
 });
