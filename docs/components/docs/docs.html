@@ -45,13 +45,13 @@
           However, if you're running your app elsewhere, you will need to provide this information.
         </p>
         <div hljs>
-  // App Engine and Compute Engine
-  var gcloud = require('gcloud');
+// App Engine and Compute Engine
+var gcloud = require('gcloud');
 
-  // Elsewhere
-  var gcloud = require('gcloud')({
-    keyFilename: '/path/to/keyfile.json'
-  });</div>
+// Elsewhere
+var gcloud = require('gcloud')({
+  keyFilename: '/path/to/keyfile.json'
+});</div>
         <p>
           In any environment, you are free to provide these and other default properties, which eventually will be passed to the <code>gcloud</code> sub-modules (Datastore, Storage, etc.).
         </p>
@@ -98,8 +98,7 @@ var bucket = gcloud.storage.bucket({
           ng-if="method.name[0].toUpperCase() !== method.name[0]">
           <a
             class="permalink"
-            ng-if="!noPermalink"
-            ng-href="{{activeUrl + '/' + method.name}}">#</a>
+            ng-href="{{activeUrl + '?method=' + method.name}}">#</a>
           {{method.name}}
         </h3>
         <p ng-if="method.description" ng-bind-html="method.description"></p>
@@ -118,9 +117,8 @@ var bucket = gcloud.storage.bucket({
         <h4 ng-show="method.returns">Returns</h4>
         <p ng-show="method.returns" ng-bind-html="method.returns"></p>
         <h4 ng-show="method.example">Example</h4>
-        <div ng-repeat-end
-          ng-show="method.example"
-          hljs source="method.example" language="js"></div>
+        <div docs-example ng-repeat-end
+          ng-show="method.example" ng-bind-html="method.example"></div>
         <hr ng-if="$index < methods.length - 1">
       </article>
     </article>
@@ -135,7 +133,7 @@ var bucket = gcloud.storage.bucket({
 
   <nav class="side-nav">
     <ul class="page-sections" ng-show="showReference">
-      <li ng-repeat="page in pages">
+      <li ng-repeat="page in links">
         <a
           ng-class="{ current: isActiveUrl(page.url) }"
           ng-href="{{page.url}}">
