@@ -120,6 +120,7 @@ describe('Connection', function() {
       });
 
       it('should build token from the metadata server response', function() {
+        var startDate = new Date();
         gceConn.requester = function(opts, callback) {
           callback(null, metadataResponse, metadataResponse.body);
         };
@@ -129,7 +130,8 @@ describe('Connection', function() {
           assert.equal(token.accessToken, metadataResponse.body.access_token);
           var addedMs = metadataResponse.body.expires_in * 1000;
           var tokenDate = new Date(Date.now() + addedMs);
-          assert.equal(token.expiry.getTime(), tokenDate.getTime());
+          assert(token.expiry.getTime() >= startDate.getTime());
+          assert(token.expiry.getTime() <= tokenDate.getTime());
         });
       });
     });
