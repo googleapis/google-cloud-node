@@ -427,10 +427,11 @@
       {
         "type": "param",
         "types": [
-          "object"
+          "object",
+          "object[]"
         ],
         "name": "entities.data",
-        "description": "- Data to save with the provided key."
+        "description": "- Data to save with the provided key.     If you provide an array of objects, you must use the explicit syntax:\n    `name` for the name of the property and `value` for its value. You may\n    also specify an `excludeFromIndexes` property, set to `true` or `false`."
       },
       {
         "type": "param",
@@ -442,13 +443,13 @@
       },
       {
         "type": "example",
-        "string": "// Save a single entity.\ndataset.save({\n  key: dataset.key('Company'),\n  data: {\n    rating: '10'\n  }\n}, function(err, key) {\n  // Because we gave an incomplete key as an argument, `key` will be\n  // populated with the complete, generated key.\n});\n\n// Save multiple entities at once.\ndataset.save([\n  {\n    key: dataset.key(['Company', 123]),\n    data: {\n      HQ: 'Dallas, TX'\n    }\n  },\n  {\n    key: dataset.key(['Product', 'Computer']),\n    data: {\n      vendor: 'Dell'\n    }\n  }\n], function(err, keys) {});"
+        "string": "// Save a single entity.\ndataset.save({\n  key: dataset.key('Company'),\n  data: {\n    rating: '10'\n  }\n}, function(err, key) {\n  // Because we gave an incomplete key as an argument, `key` will be\n  // populated with the complete, generated key.\n});\n\n// To specify an `excludeFromIndexes` value for a Datastore entity, pass in\n// an array for the key's data. The above example would then look like:\ntransaction.save({\n  key: dataset.key('Company'),\n  data: [\n    {\n      name: 'rating',\n      value: '10',\n      excludeFromIndexes: false\n    }\n  ]\n}, function(err, key) {});\n\n// Save multiple entities at once.\ndataset.save([\n  {\n    key: dataset.key(['Company', 123]),\n    data: {\n      HQ: 'Dallas, TX'\n    }\n  },\n  {\n    key: dataset.key(['Product', 'Computer']),\n    data: {\n      vendor: 'Dell'\n    }\n  }\n], function(err, keys) {});"
       }
     ],
     "description": {
-      "full": "<p>Insert or update the specified object(s) in the current transaction. If a<br />key is incomplete, its associated object is inserted and its generated<br />identifier is returned to the callback.</p>",
-      "summary": "<p>Insert or update the specified object(s) in the current transaction. If a<br />key is incomplete, its associated object is inserted and its generated<br />identifier is returned to the callback.</p>",
-      "body": ""
+      "full": "<p>Insert or update the specified object(s) in the current transaction. If a key<br />is incomplete, its associated object is inserted and its generated identifier<br />is returned to the callback.</p><p>This method will determine the correct Datastore method to execute (<code>upsert</code>,<br /><code>insert</code>, <code>update</code>, and <code>insertAutoId</code>) by using the key(s) provided. For<br />example, if you provide an incomplete key (one without an ID), the request<br />will create a new entity and have its ID automatically assigned. If you<br />provide a complete key, the entity will be updated with the data specified.</p><p>By default, all properties are indexed. To prevent a property from being<br />included in <em>all</em> indexes, you must supply an entity&#39;s <code>data</code> property as an<br />array. See below for an example.</p>",
+      "summary": "<p>Insert or update the specified object(s) in the current transaction. If a key<br />is incomplete, its associated object is inserted and its generated identifier<br />is returned to the callback.</p>",
+      "body": "<p>This method will determine the correct Datastore method to execute (<code>upsert</code>,<br /><code>insert</code>, <code>update</code>, and <code>insertAutoId</code>) by using the key(s) provided. For<br />example, if you provide an incomplete key (one without an ID), the request<br />will create a new entity and have its ID automatically assigned. If you<br />provide a complete key, the entity will be updated with the data specified.</p><p>By default, all properties are indexed. To prevent a property from being<br />included in <em>all</em> indexes, you must supply an entity&#39;s <code>data</code> property as an<br />array. See below for an example.</p>"
     },
     "isPrivate": false,
     "ignore": false,
