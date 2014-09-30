@@ -21,6 +21,10 @@ If you need support for other Google APIs, check out the [Google Node.js API Cli
 $ npm install --save gcloud
 ```
 
+## Examples
+
+- [TodoMVC backend using gcloud-node][gcloud-todos]
+
 ## Authorization
 
 ### On Google Compute Engine
@@ -108,3 +112,4 @@ See [CONTRIBUTING](CONTRIBUTING.md) for more information on how to get started.
 Apache 2.0 - See [COPYING](COPYING) for more information.
 
 [googleapis]: https://github.com/google/google-api-nodejs-client
+[gcloud-todos]: https://github.com/GoogleCloudPlatform/gcloud-node-todos
