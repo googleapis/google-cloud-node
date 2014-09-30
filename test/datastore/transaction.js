@@ -38,18 +38,34 @@ describe('Transaction', function() {
     transaction.begin(done);
   });
 
-  it('should rollback', function(done) {
-    transaction.id = 'some-id';
-    transaction.makeReq = function(method, proto, respType, callback) {
-      assert.equal(method, 'rollback');
-      assert.equal(
-        proto.transaction.toBase64(),
-        new Buffer('some-id').toString('base64'));
-      callback();
-    };
-    transaction.rollback(function() {
-      assert.equal(transaction.isFinalized, true);
-      done();
+  describe('rollback', function() {
+    beforeEach(function() {
+      transaction.id = 'transaction-id';
+    });
+
+    it('should rollback', function(done) {
+      transaction.makeReq = function(method, proto, respType, callback) {
+        var base64Id = new Buffer(transaction.id).toString('base64');
+        assert.equal(method, 'rollback');
+        assert.equal(proto.transaction.toBase64(), base64Id);
+        callback();
+      };
+      transaction.rollback(function() {
+        assert.equal(transaction.isFinalized, true);
+        done();
+      });
+    });
+
+    it('should mark as `finalized` when rollback errors', function(done) {
+      var error = new Error('rollback error');
+      transaction.makeReq = function(method, proto, respType, callback) {
+       callback(error);
+      };
+      transaction.rollback(function(err) {
+        assert.equal(err, error);
+        assert.equal(transaction.isFinalized, true);
+        done();
+      });
     });
   });
 
