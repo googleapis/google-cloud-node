@@ -4,13 +4,40 @@ angular
     'use strict';
 
     function filterDocJson($sce, version) {
-      // Transform JSON response to remove extraneous objects, such as copyright
-      // notices & use strict directives.
+      // Transform JSON response to remove extraneous objects.
       function formatHtml(str) {
         return str
             .replace(/\s+/g, ' ')
             .replace(/<br *\/*>/g, ' ')
             .replace(/`([^`]*)`/g, '<code>$1</code>');
+      }
+      function formatComments(str) {
+        var matched = 0;
+        var paragraphComments = /\/\/-+((\n|\r|.)*?(\/\/-))/g;
+
+        if (!paragraphComments.test(str)) {
+          return '<div hljs language="javascript">\n' + str + '</div>';
+        }
+
+        str = str.replace(paragraphComments, function(match, block) {
+          return '' +
+              (++matched > 1 ? '</div>' : '') +
+              '<p>' +
+              formatHtml(detectLinks(detectModules(
+                block.trim()
+                  .replace(/\/\/-*\s*/g, '\n')
+                  .replace(/\n\n/g, '\n')
+                  .replace(/(\w)\n(\w)/g, '$1 $2')
+                  .replace(/\n\n/g, '</p><p>')
+              ))) +
+              '</p>' +
+              '<div hljs language="javascript">';
+        });
+
+        str = str.replace(/(<div[^>]*>)\n+/g, '$1\n');
+        str = str.replace(/\n<\/div>/g, '</div>');
+
+        return str;
       }
       function detectLinks(str) {
         var regex = {
@@ -42,13 +69,23 @@ angular
         };
         var a = document.createElement('a');
         return str.replace(regex.see, function(match, module) {
-          a.href = '#/docs/' + version + '/' + module;
+          var path = module;
+          if (path.indexOf('#') > -1) {
+            path = path.split('#').map(function(part, index, parts) {
+              if (index < parts.length - 1) {
+                return part + '/';
+              } else {
+                return '?method=' + part;
+              }
+            }).join('');
+          }
+          a.href = '#/docs/' + version + '/' + path;
           a.innerText = module;
           return a.outerHTML;
         });
       }
       function reduceModules(acc, type, index, types) {
-        var CUSTOM_TYPES = ['query', 'dataset'];
+        var CUSTOM_TYPES = ['query', 'dataset', 'transaction'];
         if (CUSTOM_TYPES.indexOf(type.toLowerCase()) > -1) {
           if (types[index - 1]) {
             type = types[index - 1] + '/' + type;
@@ -70,6 +107,9 @@ angular
               constructor: obj.tags.some(function(tag) {
                   return tag.type === 'constructor';
                 }),
+              mixes: obj.tags.filter(function(tag) {
+                  return tag.type === 'mixes';
+                }),
               description: $sce.trustAsHtml(
                   formatHtml(detectLinks(detectModules(obj.description.full)))),
               params: obj.tags.filter(function(tag) {
@@ -88,13 +128,13 @@ angular
                 })
                 .map(function(tag) {
                   return $sce.trustAsHtml(
-                      tag.types.reduceRight(reduceModules, [])[0])
+                      tag.types.reduceRight(reduceModules, [])[0]);
                 })[0],
               example: obj.tags.filter(function(tag) {
-                  return tag.type === 'example'
+                  return tag.type === 'example';
                 })
                 .map(function(tag) {
-                  return tag.string;
+                  return $sce.trustAsHtml(formatComments(tag.string));
                 })[0]
             };
           })
@@ -104,24 +144,78 @@ angular
       };
     }
 
-    function setMethod($location, methodName, version) {
-      return function(methods) {
-        var methodExists = methods.some(function(methodObj) {
-          return methodName === methodObj.name;
-        });
-        if (methodExists) {
-          methods.singleMethod = methodName;
-          return methods;
-        } else {
-          $location.path('/docs/' + version + '/' + module + '/' + cl);
+    function getMixIns($sce, $q, $http, version, baseUrl) {
+      return function(data) {
+        var methodWithMixIns = data.filter(function(method) {
+          return method.mixes;
+        })[0];
+        if (!methodWithMixIns) {
+          return data;
         }
+        return $q
+          .all(getMixInMethods(methodWithMixIns))
+          .then(combineMixInMethods(data));
+      };
+      function getMixInMethods(method) {
+        return method.mixes.map(function (module) {
+          module = module.string.trim().replace('module:', '');
+          return $http.get(baseUrl + '/' + module + '.json')
+              .then(filterDocJson($sce, version))
+              .then(function(mixInData) {
+                return mixInData.filter(function(method) {
+                  return !method.constructor;
+                });
+              });
+        });
+      }
+      function combineMixInMethods(data) {
+        return function(mixInData) {
+          return mixInData
+            .reduce(function(acc, mixInMethods) {
+              acc = acc.concat(mixInMethods);
+              return acc;
+            }, data)
+            .sort(function(a, b) {
+              return a.name > b.name;
+            });
+        };
+      }
+    }
+
+    function setSingleMethod(method) {
+      return function(methods) {
+        if (method && methods.some(function(methodObj) {
+          return methodObj.name === method;
+        })) {
+          methods.singleMethod = method;
+        }
+        return methods;
       };
     }
 
-    var MODULE_TO_CLASSES = {
-      datastore: ['dataset', 'query'],
-      storage: []
-    };
+    function getMethods($http, $route, $sce, $q, $location) {
+      var version = $route.current.params.version;
+      var module = $route.current.params.module;
+      var cl = $route.current.params.class;
+      var path = ['json', version];
+      if (!module && !cl) {
+        path.push('index.json');
+      } else if (module && !cl) {
+        path.push(module);
+        path.push('index.json');
+      } else if (module && cl) {
+        path.push(module);
+        path.push(cl + '.json');
+      }
+      return $http.get(path.join('/'))
+          .then(filterDocJson($sce, version))
+          .then(getMixIns($sce, $q, $http, version, 'json/' + version))
+          .then(setSingleMethod($location.search().method));
+    }
+
+    function getLinks($route, getLinks) {
+      return getLinks($route.current.params.version);
+    }
 
     $routeProvider
       .when('/docs', {
@@ -134,72 +228,23 @@ angular
       .when('/docs/:version', {
         controller: 'DocsCtrl',
         templateUrl: 'components/docs/docs.html',
-        resolve: {
-          methods: function($http, $route, $sce) {
-            var version = $route.current.params.version;
-            return $http.get('json/' + version + '/index.json')
-                .then(filterDocJson($sce, version))
-                .then(function(methods) {
-                  // Prevent displaying permalinks.
-                  // ** Can remove when PubSub api is documented **
-                  methods.noPermalink = true;
-                  return methods;
-                });
-          }
-        }
+        resolve: { methods: getMethods, links: getLinks }
       })
       .when('/docs/:version/:module', {
         controller: 'DocsCtrl',
         templateUrl: 'components/docs/docs.html',
-        resolve: {
-          methods: function($http, $route, $sce) {
-            var version = $route.current.params.version;
-            var module = $route.current.params.module;
-            return $http.get('json/' + version + '/' + module + '/index.json')
-                .then(filterDocJson($sce, version));
-          }
-        }
+        resolve: { methods: getMethods, links: getLinks }
       })
       .when('/docs/:version/:module/:class', {
         controller: 'DocsCtrl',
         templateUrl: 'components/docs/docs.html',
-        resolve: {
-          methods: function($q, $http, $route, $sce, $location) {
-            var version = $route.current.params.version;
-            var module = $route.current.params.module;
-            var cl = $route.current.params.class;
-            if (MODULE_TO_CLASSES[module].length > 0) {
-              return $http
-                  .get('json/' + version + '/' + module + '/' + cl + '.json')
-                  .then(filterDocJson($sce, version));
-            } else {
-              // This is not a class, this is the name of a method.
-              var method = cl;
-              return $http.get('json/' + version + '/' +module + '/index.json')
-                  .then(filterDocJson($sce, version))
-                  .then(setMethod($location, method, version));
-            }
-          }
-        }
-      })
-      .when('/docs/:version/:module/:class/:method', {
-        controller: 'DocsCtrl',
-        templateUrl: 'components/docs/docs.html',
-        resolve: {
-          methods: function($q, $http, $route, $sce, $location) {
-            var version = $route.current.params.version;
-            var module = $route.current.params.module;
-            var cl = $route.current.params.class;
-            var method = $route.current.params.method;
-            return $http.get('json/' + version + '/' + module + '/' + cl + '.json')
-                .then(filterDocJson($sce, version))
-                .then(setMethod($location, method, version));
-          }
-        }
+        resolve: { methods: getMethods, links: getLinks }
       });
   })
 
   .run(function($location, $route, $rootScope, versions) {
+    'use strict';
+
     $rootScope.$on('$routeChangeStart', function(event, route) {
       var url = $location.path();
       if (url.indexOf('/docs/') === -1 || (!route.params || !route.params.version)) {
@@ -217,7 +262,7 @@ angular
     });
   })
 
-  .controller('DocsCtrl', function($location, $scope, $routeParams, methods, $http, versions) {
+  .controller('DocsCtrl', function($location, $scope, $routeParams, methods, $http, links, versions) {
     'use strict';
 
     $scope.isActiveUrl = function(url) {
@@ -236,44 +281,17 @@ angular
     $scope.showReference = true;
     $scope.activeUrl = '#' + $location.path();
     $scope.singleMethod = methods.singleMethod;
-    $scope.noPermalink = methods.singleMethod || methods.noPermalink;
-    $scope.methods = methods;
     $scope.module = $routeParams.module;
+    $scope.methods = methods;
     $scope.version = $routeParams.version;
     $scope.isLatestVersion = $scope.version == versions[0];
     $scope.versions = versions;
-    var baseUrl = '#/docs/' + $scope.version;
-    /*
-    TODO(silvano): future versions will introduce new pages, so the list below will have
-    to be generated according to the specific version
-    */
-    $scope.pages = [
-      {
-        title: 'gcloud',
-        url: baseUrl
-      },
-      {
-        title: 'Datastore',
-        url: baseUrl + '/datastore',
-        pages: [
-          {
-            title: 'Dataset',
-            url: '/dataset'
-          },
-          {
-            title: 'Query',
-            url: '/query'
-          }
-        ]
-      },
-      {
-        title: 'Storage',
-        url: baseUrl + '/storage'
-      }
-    ];
+    $scope.links = links;
   })
 
   .controller('HistoryCtrl', function($scope, versions) {
+    'use strict';
+
     $scope.pageTitle = 'Node.js Docs Versions';
     $scope.showHistory = true;
     $scope.versions = versions;

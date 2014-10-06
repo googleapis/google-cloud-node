@@ -45,13 +45,13 @@
           However, if you're running your app elsewhere, you will need to provide this information.
         </p>
         <div hljs>
-  // App Engine and Compute Engine
-  var gcloud = require('gcloud');
+// App Engine and Compute Engine
+var gcloud = require('gcloud');
 
-  // Elsewhere
-  var gcloud = require('gcloud')({
-    keyFilename: '/path/to/keyfile.json'
-  });</div>
+// Elsewhere
+var gcloud = require('gcloud')({
+  keyFilename: '/path/to/keyfile.json'
+});</div>
         <p>
           In any environment, you are free to provide these and other default properties, which eventually will be passed to the <code>gcloud</code> sub-modules (Datastore, Storage, etc.).
         </p>
@@ -70,6 +70,24 @@ var dataset = gcloud.datastore.dataset({
 });</div>
         <p ng-if="!isActiveUrl('/docs/datastore/dataset')">
           See <a href="#/docs/{{version}}/datastore/dataset">the Dataset documentation</a> for examples of how to query the datastore, save entities, run a transaction, and others.
+        </p>
+      </article>
+
+      <article ng-if="isActiveDoc('pubsub')">
+        <h3>Pub/Sub Overview</h3>
+        <p class="notice">
+          Google Cloud Pub/Sub is in Alpha status. As a result, it might be changed in backward-incompatible ways and is not recommended for production use. It is not subject to any SLA or deprecation policy.
+        </p>
+        <p>
+          The <code>gcloud.pubsub</code> method will return a <code>pubsub</code> object, allowing you to create topics, publish messages, subscribe to topics, and more. See the <a href="https://developers.google.com/pubsub/overview">Google Cloud Pub/Sub overview</a> for more information.
+        </p>
+        <div hljs>
+var pubsub = gcloud.pubsub({
+  projectId: 'myProject',
+  keyFilename: '/path/to/keyfile.json'
+});</div>
+        <p>
+          See the examples below, which demonstrate everything from creating a topic to subscribing to messages on a topic.
         </p>
       </article>
 
@@ -98,8 +116,7 @@ var bucket = gcloud.storage.bucket({
           ng-if="method.name[0].toUpperCase() !== method.name[0]">
           <a
             class="permalink"
-            ng-if="!noPermalink"
-            ng-href="{{activeUrl + '/' + method.name}}">#</a>
+            ng-href="{{activeUrl + '?method=' + method.name}}">#</a>
           {{method.name}}
         </h3>
         <p ng-if="method.description" ng-bind-html="method.description"></p>
@@ -118,9 +135,8 @@ var bucket = gcloud.storage.bucket({
         <h4 ng-show="method.returns">Returns</h4>
         <p ng-show="method.returns" ng-bind-html="method.returns"></p>
         <h4 ng-show="method.example">Example</h4>
-        <div ng-repeat-end
-          ng-show="method.example"
-          hljs source="method.example" language="js"></div>
+        <div docs-example ng-repeat-end
+          ng-show="method.example" ng-bind-html="method.example"></div>
         <hr ng-if="$index < methods.length - 1">
       </article>
     </article>
@@ -135,7 +151,7 @@ var bucket = gcloud.storage.bucket({
 
   <nav class="side-nav">
     <ul class="page-sections" ng-show="showReference">
-      <li ng-repeat="page in pages">
+      <li ng-repeat="page in links">
         <a
           ng-class="{ current: isActiveUrl(page.url) }"
           ng-href="{{page.url}}">

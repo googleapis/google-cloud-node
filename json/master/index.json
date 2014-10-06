@@ -28,6 +28,28 @@
       }
     ],
     "description": {
+      "full": "<p>@type module:common/util</p>",
+      "summary": "<p>@type module:common/util</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var util = require('./common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('./common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
       "full": "<p>@type {module:datastore}</p>",
       "summary": "<p>@type {module:datastore}</p>",
       "body": ""
@@ -56,12 +78,12 @@
     },
     "isPrivate": true,
     "ignore": false,
-    "code": "var pubsub = require('./pubsub');",
+    "code": "var PubSub = require('./pubsub');",
     "ctx": {
       "type": "declaration",
-      "name": "pubsub",
+      "name": "PubSub",
       "value": "require('./pubsub')",
-      "string": "pubsub"
+      "string": "PubSub"
     }
   },
   {
@@ -138,7 +160,7 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar dataset = gcloud.datastore.dataset();\n// equal to:\n//   gcloud.datastore.dataset({\n//     keyFilename: '/path/to/keyfile.json',\n//     projectId: 'my-project'\n//   });\n\nvar bucket = gcloud.storage.bucket({\n  bucketName: 'PhotosBucket',\n  // properties may be overriden:\n  keyFilename: '/path/to/other/keyfile.json'\n});"
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar dataset = gcloud.datastore.dataset();\n// equal to:\n//   gcloud.datastore.dataset({\n//     keyFilename: '/path/to/keyfile.json',\n//     projectId: 'my-project'\n//   });\n\nvar bucket = gcloud.storage.bucket({\n  bucketName: 'PhotosBucket',\n  // properties may be overridden:\n  keyFilename: '/path/to/other/keyfile.json'\n});"
       }
     ],
     "description": {
@@ -148,7 +170,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "function gcloud(config) {\n  return {\n    datastore: new Datastore(config),\n    storage: new Storage(config)\n  };\n}",
+    "code": "function gcloud(config) {\n  return {\n    datastore: new Datastore(config),\n    pubsub: function(options) {\n      options = options || {};\n      return new PubSub(util.extendGlobalConfig(config, options));\n    },\n    storage: new Storage(config)\n  };\n}",
     "ctx": {
       "type": "function",
       "name": "gcloud",
@@ -202,29 +224,28 @@
       {
         "type": "return",
         "types": [
-          "object"
+          "module:pubsub"
         ],
         "description": ""
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\nvar pubsub = gcloud.pubsub;\n\nvar conn = new pubsub.Connection({\n  projectId: YOUR_PROJECT_ID,\n  keyFilename: '/path/to/the/key.json'\n});"
+        "string": "var gcloud = require('gcloud');\n\nvar pubsub = gcloud.pubsub({\n  projectId: YOUR_PROJECT_ID,\n  keyFilename: '/path/to/the/key.json'\n});"
       }
     ],
     "description": {
-      "full": "<p><strong>Experimental</strong></p><p>[Google Cloud Pub/Sub]{@link <a href=\"https://developers.google.com/pubsub/overview}\">https://developers.google.com/pubsub/overview}</a><br />is a reliable, many-to-many, asynchronous messaging service from Google<br />Cloud Platform.</p><p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use<br />it by filling the<br />[Limited Preview application form]{@link <a href=\"http://goo.gl/sO0wTu}\">http://goo.gl/sO0wTu}</a>.</p>",
+      "full": "<p><strong>Experimental</strong></p><p>[Google Cloud Pub/Sub]{@link <a href=\"https://developers.google.com/pubsub/overview}\">https://developers.google.com/pubsub/overview}</a><br />is a reliable, many-to-many, asynchronous messaging service from Google<br />Cloud Platform.</p><p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use it<br />by filling the<br />[Limited Preview application form]{@link <a href=\"http://goo.gl/sO0wTu}\">http://goo.gl/sO0wTu}</a>.</p>",
       "summary": "<p><strong>Experimental</strong></p>",
-      "body": "<p>[Google Cloud Pub/Sub]{@link <a href=\"https://developers.google.com/pubsub/overview}\">https://developers.google.com/pubsub/overview}</a><br />is a reliable, many-to-many, asynchronous messaging service from Google<br />Cloud Platform.</p><p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use<br />it by filling the<br />[Limited Preview application form]{@link <a href=\"http://goo.gl/sO0wTu}\">http://goo.gl/sO0wTu}</a>.</p>"
+      "body": "<p>[Google Cloud Pub/Sub]{@link <a href=\"https://developers.google.com/pubsub/overview}\">https://developers.google.com/pubsub/overview}</a><br />is a reliable, many-to-many, asynchronous messaging service from Google<br />Cloud Platform.</p><p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use it<br />by filling the<br />[Limited Preview application form]{@link <a href=\"http://goo.gl/sO0wTu}\">http://goo.gl/sO0wTu}</a>.</p>"
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "gcloud.pubsub = pubsub;",
+    "code": "gcloud.pubsub = function(config) {\n  return new PubSub(config);\n};",
     "ctx": {
-      "type": "property",
+      "type": "method",
       "receiver": "gcloud",
       "name": "pubsub",
-      "value": "pubsub",
-      "string": "gcloud.pubsub"
+      "string": "gcloud.pubsub()"
     }
   },
   {
@@ -244,7 +265,7 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\nvar storage = gcloud.storage;\n\n// storage:\n// {\n//   Bucket: function() {}\n// }"
+        "string": "var gcloud = require('gcloud');\nvar storage = gcloud.storage;\n\n// storage:\n// {\n//   bucket: function() {}\n// }"
       }
     ],
     "description": {

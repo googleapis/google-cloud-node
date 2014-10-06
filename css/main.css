@@ -617,6 +617,11 @@ h2, h3 {
     position: relative;
 }
 
+.notice {
+  background-color: #e5ecf9;
+  padding: 8px;
+}
+
 .permalink {
     display: none;
     position: absolute;
