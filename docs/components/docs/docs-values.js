@@ -39,6 +39,21 @@ angular.module('gcloud.docs')
       ]
     },
 
+    pubsub: {
+      title: 'PubSub',
+      _url: '{baseUrl}/pubsub',
+      pages: [
+        {
+          title: 'Topic',
+          url: '/topic'
+        },
+        {
+          title: 'Subscription',
+          url: '/subscription'
+        }
+      ]
+    },
+
     storage: {
       title: 'Storage',
       _url: '{baseUrl}/storage'
@@ -49,6 +64,6 @@ angular.module('gcloud.docs')
       //   https://github.com/npm/node-semver#versions
       // List should be in ascending order.
       '<=0.7.1': ['gcloud', 'datastore', 'storage'],
-      '>0.7.1': ['gcloud', 'datastoreWithTransaction', 'storage']
+      '>0.7.1': ['gcloud', 'datastoreWithTransaction', 'pubsub', 'storage']
     }
   });

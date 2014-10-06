@@ -63,12 +63,12 @@
     "tmp": "0.0.24"
   },
   "scripts": {
-    "docs": "dox < lib/index.js > docs/json/master/index.json & dox < lib/datastore/dataset.js > docs/json/master/datastore/dataset.json & dox < lib/datastore/transaction.js > docs/json/master/datastore/transaction.json & dox < lib/datastore/index.js > docs/json/master/datastore/index.json & dox < lib/datastore/request.js > docs/json/master/datastore/request.json & dox < lib/datastore/query.js > docs/json/master/datastore/query.json & dox < lib/storage/index.js > docs/json/master/storage/index.json",
+    "docs": "./scripts/docs.sh",
     "lint": "jshint lib/ regression/ test/",
     "test": "mocha --recursive --reporter spec",
-    "regression-test": "mocha regression/datastore.js regression/storage.js --reporter spec --timeout 15000",
-    "cover": "istanbul cover -x 'regression/* lib/pubsub/*' _mocha -- --timeout 15000 test/* regression/datastore.js regression/storage.js",
-    "coveralls": "istanbul cover -x 'regression/* lib/pubsub/*' _mocha --report lcovonly -- --timeout 15000 test/* regression/datastore.js regression/storage.js -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "regression-test": "mocha regression/datastore.js regression/pubsub.js regression/storage.js --reporter spec --timeout 15000",
+    "cover": "istanbul cover -x 'regression/*' _mocha -- --timeout 15000 test/* regression/datastore.js regression/pubsub.js regression/storage.js",
+    "coveralls": "istanbul cover -x 'regression/*' _mocha --report lcovonly -- --timeout 15000 test/* regression/datastore.js regression/pubsub.js regression/storage.js -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "license": "Apache 2"
 }
