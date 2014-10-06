@@ -14,81 +14,174 @@
  * limitations under the License.
  */
 
-/*global describe, it */
+/*global describe, it, beforeEach */
 
 'use strict';
 
 var assert = require('assert');
-var pubsub = require('../../lib/pubsub');
+var PubSub = require('../../lib/pubsub/index.js');
+var Subscription = require('../../lib/pubsub/subscription.js');
+var Topic = require('../../lib/pubsub/topic.js');
 
-describe('Subscription', function() {
-  it('should ack messages if autoAck is set', function(done) {
-    var sub = new pubsub.Subscription({}, 'sub1');
-    sub.autoAck = true;
-    sub.conn.makeReq = function(method, path, qs, body, callback) {
-      if (path === 'subscriptions/pull') {
-        callback(null, { ackId: 'ackd-id' });
-        return;
-      }
-      if (path === 'subscriptions/acknowledge') {
-        done();
-      }
+describe('PubSub', function() {
+  var PROJECT_ID = 'test-project';
+  var pubsub;
+
+  beforeEach(function() {
+    pubsub = new PubSub({ projectId: PROJECT_ID });
+    pubsub.makeReq_ = function(method, path, q, body, callback) {
+      callback();
     };
-    sub.pull({}, function() {});
   });
 
-  it('should be closed', function(done) {
-    var sub = new pubsub.Subscription({}, 'sub1');
-    sub.close();
-    assert.strictEqual(sub.closed, true);
-    done();
+  describe('getTopics', function() {
+    beforeEach(function() {
+      pubsub.makeReq_ = function(method, path, q, body, callback) {
+        callback(null, { topic: [{ name: 'fake-topic' }] });
+      };
+    });
+
+    it('should accept a query and a callback', function(done) {
+      pubsub.getTopics({}, done);
+    });
+
+    it('should accept just a callback', function(done) {
+      pubsub.getTopics(done);
+    });
+
+    it('should build a project-wide query', function() {
+      pubsub.makeReq_ = function(method, path, q) {
+        var query =
+            'cloud.googleapis.com/project in (/projects/' + PROJECT_ID + ')';
+        assert.equal(method, 'GET');
+        assert.equal(path, 'topics');
+        assert.equal(q.query, query);
+      };
+      pubsub.getTopics(function() {});
+    });
+
+    it('should return Topic instances', function() {
+      pubsub.getTopics(function(err, topics) {
+        assert.ifError(err);
+        assert(topics[0] instanceof Topic);
+      });
+    });
+
+    it('should return a query if more results exist', function() {
+      var token = 'next-page-token';
+      pubsub.makeReq_ = function(method, path, q, body, callback) {
+        callback(null, { nextPageToken: token });
+      };
+      var query = { maxResults: 1 };
+      pubsub.getTopics(query, function(err, topics, nextQuery) {
+        assert.ifError(err);
+        assert.strictEqual(query.maxResults, nextQuery.maxResults);
+        assert.equal(query.pageToken, token);
+      });
+    });
+
+    it('should pass error if api returns an error', function() {
+      var error = new Error('Error');
+      pubsub.makeReq_ = function(method, path, q, body, callback) {
+        callback(error);
+      };
+      pubsub.getTopics(function(err) {
+        assert.equal(err, error);
+      });
+    });
   });
 
-  it('should pull messages', function(done) {
-    var conn = new pubsub.Connection({
-      projectId: 'test-project'
+  describe('createTopic', function() {
+    it('should create a topic', function() {
+      var topicName = 'new-topic-name';
+      pubsub.makeReq_ = function(method, path, q, body) {
+        assert.equal(method, 'POST');
+        assert.equal(path, 'topics');
+        assert.equal(body.name, '/topics/' + PROJECT_ID + '/' + topicName);
+      };
+      pubsub.createTopic(topicName, function() {});
     });
-    conn.makeReq = function(method, path, qs, body, callback) {
-      if (path === 'subscriptions//subscriptions/test-project/sub1') {
-        callback(null, {});
-        return;
-      }
-      if (path === 'subscriptions/pull') {
-        callback(null, { ackId: 123 });
-        return;
-      }
-    };
-    var sub = conn.subscribe('sub1', { autoAck: false });
-    sub.once('message', function() {
-      sub.close();
-      done();
+
+    it('should return a Topic object', function() {
+      pubsub.createTopic('new-topic', function(err, topic) {
+        assert.ifError(err);
+        assert(topic instanceof Topic);
+      });
     });
   });
 
-  it('should pull and ack messages', function(done) {
-    var conn = new pubsub.Connection({
-      projectId: 'test-project'
+  describe('topic', function() {
+    it('should throw if a name is not provided', function() {
+      assert.throws(function() {
+        pubsub.topic();
+      }, /name must be specified/);
     });
-    conn.makeReq = function(method, path, qs, body, callback) {
-      if (path === 'subscriptions//subscriptions/test-project/sub1') {
-        callback(null, {});
-        return;
-      }
-      if (path === 'subscriptions/pull') {
-        setImmediate(function() {
-          callback(null, { ackId: 123 });
-        });
-        return;
-      }
-      if (path === 'subscriptions/acknowledge') {
-        callback(null, true);
-        return;
-      }
-    };
-    var sub = conn.subscribe('sub1', { autoAck: true });
-    sub.once('message', function() {
-      sub.close();
-      done();
+
+    it('should return a Topic object', function() {
+      assert(pubsub.topic('new-topic') instanceof Topic);
     });
+  });
+
+  describe('getSubscriptions', function() {
+    beforeEach(function() {
+      pubsub.makeReq_ = function(method, path, q, body, callback) {
+        callback(null, { subscription: [{ name: 'fake-subscription' }] });
+      };
+    });
+
+    it('should accept a query and a callback', function(done) {
+      pubsub.getSubscriptions({}, done);
+    });
+
+    it('should accept just a callback', function(done) {
+      pubsub.getSubscriptions(done);
+    });
+
+    it('should build a project-wide query', function() {
+      pubsub.makeReq_ = function(method, path, q) {
+        var query =
+            'cloud.googleapis.com/project in (/projects/' + PROJECT_ID + ')';
+        assert.equal(method, 'GET');
+        assert.equal(path, 'subscriptions');
+        assert.equal(q.query, query);
+      };
+      pubsub.getSubscriptions(function() {});
+    });
+
+    it('should return Subscription instances', function() {
+      pubsub.getSubscriptions(function(err, subscriptions) {
+        assert.ifError(err);
+        assert(subscriptions[0] instanceof Subscription);
+      });
+    });
+
+    it('should return a query if more results exist', function() {
+      var token = 'next-page-token';
+      pubsub.makeReq_ = function(method, path, q, body, callback) {
+        callback(null, { nextPageToken: token });
+      };
+      var query = { maxResults: 1 };
+      pubsub.getSubscriptions(query, function(err, subscriptions, nextQuery) {
+        assert.ifError(err);
+        assert.strictEqual(query.maxResults, nextQuery.maxResults);
+        assert.equal(query.pageToken, token);
+      });
+    });
+
+    it('should pass error if api returns an error', function() {
+      var error = new Error('Error');
+      pubsub.makeReq_ = function(method, path, q, body, callback) {
+        callback(error);
+      };
+      pubsub.getSubscriptions(function(err) {
+        assert.equal(err, error);
+      });
+    });
+  });
+
+  it('should pass network requests to the connection object', function(done) {
+    var pubsub = new PubSub();
+    pubsub.connection.req = done.bind(null, null);
+    pubsub.makeReq_();
   });
 });

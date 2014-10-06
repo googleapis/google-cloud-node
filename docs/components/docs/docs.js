@@ -172,7 +172,8 @@ angular
         return function(mixInData) {
           return mixInData
             .reduce(function(acc, mixInMethods) {
-              return acc = acc.concat(mixInMethods);
+              acc = acc.concat(mixInMethods);
+              return acc;
             }, data)
             .sort(function(a, b) {
               return a.name > b.name;
