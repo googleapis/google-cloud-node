@@ -33,7 +33,7 @@ describe('Transaction', function() {
 
   describe('begin', function() {
     it('should begin', function(done) {
-      transaction.makeReq = function(method, proto, respType, callback) {
+      transaction.createRequest_ = function(method, proto, respType, callback) {
         assert.equal(method, 'beginTransaction');
         callback(null, 'some-id');
       };
@@ -47,7 +47,7 @@ describe('Transaction', function() {
     });
 
     it('should rollback', function(done) {
-      transaction.makeReq = function(method, proto, respType, callback) {
+      transaction.createRequest_ = function(method, proto, respType, callback) {
         assert.equal(method, 'rollback');
         assert.equal(
           proto.transaction.toBase64(),
@@ -62,7 +62,7 @@ describe('Transaction', function() {
 
     it('should mark as `finalized` when rollback errors', function(done) {
       var error = new Error('rollback error');
-      transaction.makeReq = function(method, proto, respType, callback) {
+      transaction.createRequest_ = function(method, proto, respType, callback) {
        callback(error);
       };
       transaction.rollback(function(err) {
@@ -76,7 +76,7 @@ describe('Transaction', function() {
   describe('commit', function() {
     it('should commit', function(done) {
       transaction.id = 'some-id';
-      transaction.makeReq = function(method, proto, respType, callback) {
+      transaction.createRequest_ = function(method, proto, respType, callback) {
         assert.equal(method, 'commit');
         assert.equal(
           proto.transaction.toBase64(),
@@ -92,7 +92,7 @@ describe('Transaction', function() {
 
   describe('finalize', function() {
     it('should be committed if not rolled back', function(done) {
-      transaction.makeReq = function(method) {
+      transaction.createRequest_ = function(method) {
         assert.equal(method, 'commit');
         done();
       };
@@ -107,7 +107,7 @@ describe('Transaction', function() {
     });
 
     it('should not set an indexed value by default', function() {
-      transaction.makeReq = function(method, req) {
+      transaction.createRequest_ = function(method, req) {
         var property = req.mutation.upsert[0].property[0];
         assert.strictEqual(property.value.indexed, null);
       };
@@ -118,7 +118,7 @@ describe('Transaction', function() {
     });
 
     it('should allow setting the indexed value of a property', function() {
-      transaction.makeReq = function(method, req) {
+      transaction.createRequest_ = function(method, req) {
         var property = req.mutation.upsert[0].property[0];
         assert.equal(property.name, 'name');
         assert.equal(property.value.string_value, 'value');
