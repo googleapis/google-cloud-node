@@ -286,7 +286,7 @@ describe('storage', function() {
         expires: Math.round(Date.now() / 1000) + 283473274
       }, function(err, signedDeleteUrl) {
         assert.ifError(err);
-        request.del(signedDeleteUrl, function(err, resp) {
+        request.del(signedDeleteUrl, function() {
           file.getMetadata(function(err) {
             assert.equal(err.code, 404);
             done();
