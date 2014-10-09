@@ -1,0 +1,301 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "ignore": true
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>@module datastore/transaction</p>",
+      "summary": "<p>@module datastore/transaction</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": true,
+    "code": "'use strict';\n\nvar nodeutil = require('util');"
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@type module:datastore/pb</p>",
+      "summary": "<p>@type module:datastore/pb</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var pb = require('./pb.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "pb",
+      "value": "require('./pb.js')",
+      "string": "pb"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@type module:common/util</p>",
+      "summary": "<p>@type module:common/util</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var util = require('../common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@type module:datastore/request</p>",
+      "summary": "<p>@type module:datastore/request</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var DatastoreRequest = require('./request.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "DatastoreRequest",
+      "value": "require('./request.js')",
+      "string": "DatastoreRequest"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "module:common",
+          "connection#Connection"
+        ],
+        "name": "connection",
+        "description": "- An authorized     connection to Google Cloud Datastore."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "projectId",
+        "description": "- Dataset ID. This is your project ID from the     Google Developers Console."
+      }
+    ],
+    "description": {
+      "full": "<p>Developer Documentation</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": true
+  },
+  {
+    "tags": [
+      {
+        "type": "constructor",
+        "string": ""
+      },
+      {
+        "type": "alias",
+        "string": "module:datastore/transaction"
+      },
+      {
+        "type": "mixes",
+        "string": "module:datastore/request "
+      },
+      {
+        "type": "example",
+        "string": "dataset.runInTransaction(function(transaction, done) {\n  // `transaction` is a Transaction object.\n});"
+      }
+    ],
+    "description": {
+      "full": "<p>Build a Transaction object. Transactions will be created for you by<br />{@linkcode module:datastore/dataset}. When you need to run a transactional<br />operation, use {@linkcode module:datastore/dataset#runInTransaction}.</p><p><em>Reference: {@link <a href=\"http://goo.gl/n4oSjt}\">http://goo.gl/n4oSjt}</a></em></p>",
+      "summary": "<p>Build a Transaction object. Transactions will be created for you by<br />{@linkcode module:datastore/dataset}. When you need to run a transactional<br />operation, use {@linkcode module:datastore/dataset#runInTransaction}.</p>",
+      "body": "<p><em>Reference: {@link <a href=\"http://goo.gl/n4oSjt}\">http://goo.gl/n4oSjt}</a></em></p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "function Transaction(connection, projectId) {\n  this.connection = connection;\n  this.projectId = projectId;\n  // the default transaction has no id.\n  // if id is not set, run operations non-transactional.\n  this.id = null;\n  this.isFinalized = false;\n}\n\nnodeutil.inherits(Transaction, DatastoreRequest);",
+    "ctx": {
+      "type": "function",
+      "name": "Transaction",
+      "string": "Transaction()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "function"
+        ],
+        "name": "callback",
+        "description": "- The function to execute within the context of     a transaction.\n"
+      },
+      {
+        "type": "example",
+        "string": "transaction.begin(function(err) {\n  // Perform Datastore operations as usual.\n  transaction.get(dataset.key(['Company', 123]), function(err, entity) {\n    // Commit the transaction.\n    transaction.finalize(function(err) {});\n\n    // Rollback the transaction.\n    transaction.rollback(function(err) {});\n  });\n});"
+      }
+    ],
+    "description": {
+      "full": "<p>Begin a remote transaction and identify the current transaction instance with<br />the remote transaction&#39;s ID.</p>",
+      "summary": "<p>Begin a remote transaction and identify the current transaction instance with<br />the remote transaction&#39;s ID.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Transaction.prototype.begin = function(callback) {\n  callback = callback || util.noop;\n  var that = this;\n  var req = new pb.BeginTransactionRequest();\n  var res = pb.BeginTransactionResponse;\n  this.createRequest_('beginTransaction', req, res, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    that.id = resp.transaction;\n    callback(null);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Transaction",
+      "cons": "Transaction",
+      "name": "begin",
+      "string": "Transaction.prototype.begin()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "function"
+        ],
+        "name": "callback",
+        "description": "- The callback function. "
+      },
+      {
+        "type": "example",
+        "string": "transaction.begin(function(err) {\n  transaction.rollback(function(err) {\n    if (err) {\n      // Transaction could not be rolled back.\n    }\n  });\n});"
+      }
+    ],
+    "description": {
+      "full": "<p>Reverse a transaction remotely and finalize the current transaction instance.</p>",
+      "summary": "<p>Reverse a transaction remotely and finalize the current transaction instance.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Transaction.prototype.rollback = function(callback) {\n  callback = callback || util.noop;\n  var that = this;\n  var req = new pb.RollbackRequest({ transaction: this.id });\n  var res = pb.RollbackResponse;\n  this.createRequest_('rollback', req, res, function(err) {\n    that.isFinalized = true;\n    callback(err || null);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Transaction",
+      "cons": "Transaction",
+      "name": "rollback",
+      "string": "Transaction.prototype.rollback()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "function"
+        ],
+        "name": "callback",
+        "description": "- The callback function. "
+      },
+      {
+        "type": "example",
+        "string": "transaction.begin(function(err) {\n  transaction.commit(function(err) {\n    if (err) {\n      // Transaction could not be committed.\n    }\n  });\n});"
+      }
+    ],
+    "description": {
+      "full": "<p>Commit the remote transaction and finalize the current transaction instance.</p>",
+      "summary": "<p>Commit the remote transaction and finalize the current transaction instance.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Transaction.prototype.commit = function(callback) {\n  callback = callback || util.noop;\n  var that = this;\n  var req = new pb.CommitRequest({ transaction: this.id });\n  var res = pb.CommitResponse;\n  this.createRequest_('commit', req, res, function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    that.isFinalized = true;\n    callback(null);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Transaction",
+      "cons": "Transaction",
+      "name": "commit",
+      "string": "Transaction.prototype.commit()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "function"
+        ],
+        "name": "callback",
+        "description": "- The callback function. "
+      },
+      {
+        "type": "example",
+        "string": "transaction.begin(function(err) {\n  transaction.finalize(function(err) {\n    if (err) {\n      // Transaction could not be finalized.\n    }\n  });\n});"
+      }
+    ],
+    "description": {
+      "full": "<p>Commit a transaction if it&#39;s not finalized yet.</p>",
+      "summary": "<p>Commit a transaction if it&#39;s not finalized yet.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Transaction.prototype.finalize = function(callback) {\n  if (!this.isFinalized) {\n    this.commit(callback);\n    return;\n  }\n  setImmediate(callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Transaction",
+      "cons": "Transaction",
+      "name": "finalize",
+      "string": "Transaction.prototype.finalize()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "todo",
+        "string": "Implement. "
+      },
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>mapQuery</p>",
+      "summary": "<p>mapQuery</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "Transaction.prototype.mapQuery = function() {\n  throw new Error('not yet implemented');\n};\n\nmodule.exports = Transaction;",
+    "ctx": {
+      "type": "method",
+      "constructor": "Transaction",
+      "cons": "Transaction",
+      "name": "mapQuery",
+      "string": "Transaction.prototype.mapQuery()"
+    }
+  }
+]
