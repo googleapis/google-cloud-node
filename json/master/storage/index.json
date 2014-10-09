@@ -589,7 +589,7 @@
       },
       {
         "type": "example",
-        "string": "var signedUrl = bucket.getSignedUrl({\n  action: 'read',\n  expires: Math.round(Date.now() / 1000) + (60 * 60 * 24 * 14), // 2 weeks.\n  resource: 'my-dog.jpg'\n}, function(err, url) {});"
+        "string": "bucket.getSignedUrl({\n  action: 'read',\n  expires: Math.round(Date.now() / 1000) + (60 * 60 * 24 * 14), // 2 weeks.\n  resource: 'my-dog.jpg'\n}, function(err, url) {});"
       }
     ],
     "description": {
