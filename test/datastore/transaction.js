@@ -19,115 +19,156 @@
 'use strict';
 
 var assert = require('assert');
-var datastore = require('../../lib').datastore;
-var Key = require('../../lib/datastore/entity').Key;
+var Transaction = require('../../lib/datastore/transaction.js');
 
 describe('Transaction', function() {
-  var ds;
   var transaction;
+  var TRANSACTION_ID = 'transaction-id';
 
   beforeEach(function() {
-    ds = datastore.dataset({ projectId: 'test' });
-    transaction = ds.createTransaction_(null, 'test');
+    transaction = new Transaction(null, 'project-id');
   });
 
   describe('begin', function() {
     it('should begin', function(done) {
-      transaction.createRequest_ = function(method, proto, respType, callback) {
+      transaction.createRequest_ = function(method) {
         assert.equal(method, 'beginTransaction');
-        callback(null, 'some-id');
+        done();
       };
-      transaction.begin(done);
+      transaction.begin();
+    });
+
+    it('should set transaction id', function(done) {
+      transaction.createRequest_ = function(method, proto, respType, callback) {
+        callback(null, { transaction: TRANSACTION_ID });
+      };
+      transaction.begin(function(err) {
+        assert.ifError(err);
+        assert.equal(transaction.id, TRANSACTION_ID);
+        done();
+      });
+    });
+
+    it('should pass error to callback', function(done) {
+      var error = new Error('Error.');
+      transaction.createRequest_ = function(method, proto, respType, callback) {
+        callback(error);
+      };
+      transaction.begin(function(err) {
+        assert.deepEqual(err, error);
+        done();
+      });
     });
   });
 
   describe('rollback', function() {
     beforeEach(function() {
-      transaction.id = 'some-id';
+      transaction.id = TRANSACTION_ID;
     });
 
     it('should rollback', function(done) {
-      transaction.createRequest_ = function(method, proto, respType, callback) {
+      transaction.createRequest_ = function(method, proto) {
         assert.equal(method, 'rollback');
         assert.equal(
           proto.transaction.toBase64(),
           new Buffer(transaction.id).toString('base64'));
-        callback();
+        done();
       };
-      transaction.rollback(function() {
-        assert.equal(transaction.isFinalized, true);
+      transaction.rollback();
+    });
+
+    it('should pass error to callback', function(done) {
+      var error = new Error('Error.');
+      transaction.createRequest_ = function(method, proto, respType, callback) {
+        callback(error);
+      };
+      transaction.rollback(function(err) {
+        assert.deepEqual(err, error);
         done();
       });
     });
 
-    it('should mark as `finalized` when rollback errors', function(done) {
-      var error = new Error('rollback error');
+    it('should mark as finalized', function(done) {
       transaction.createRequest_ = function(method, proto, respType, callback) {
-       callback(error);
+        callback();
       };
-      transaction.rollback(function(err) {
-        assert.equal(err, error);
-        assert.equal(transaction.isFinalized, true);
+      transaction.rollback(function() {
+        assert.strictEqual(transaction.isFinalized, true);
+        done();
+      });
+    });
+
+    it('should mark as finalized when rollback errors', function(done) {
+      transaction.createRequest_ = function(method, proto, respType, callback) {
+       callback(new Error('Error.'));
+      };
+      transaction.rollback(function() {
+        assert.strictEqual(transaction.isFinalized, true);
         done();
       });
     });
   });
 
   describe('commit', function() {
+    beforeEach(function() {
+      transaction.id = TRANSACTION_ID;
+    });
+
     it('should commit', function(done) {
-      transaction.id = 'some-id';
-      transaction.createRequest_ = function(method, proto, respType, callback) {
+      transaction.createRequest_ = function(method, proto) {
         assert.equal(method, 'commit');
         assert.equal(
           proto.transaction.toBase64(),
-          new Buffer('some-id').toString('base64'));
+          new Buffer(transaction.id).toString('base64'));
+        done();
+      };
+      transaction.commit();
+    });
+
+    it('should pass error to callback', function(done) {
+      var error = new Error('Error.');
+      transaction.createRequest_ = function(method, proto, respType, callback) {
+        callback(error);
+      };
+      transaction.commit(function(err) {
+        assert.deepEqual(err, error);
+        done();
+      });
+    });
+
+    it('should mark as finalized', function(done) {
+      transaction.createRequest_ = function(method, proto, respType, callback) {
         callback();
       };
       transaction.commit(function() {
-        assert.equal(transaction.isFinalized, true);
+        assert.strictEqual(transaction.isFinalized, true);
+        done();
+      });
+    });
+
+    it('should not mark as finalized if commit errors', function(done) {
+      transaction.createRequest_ = function(method, proto, respType, callback) {
+        callback(new Error('Error.'));
+      };
+      transaction.commit(function() {
+        assert.strictEqual(transaction.isFinalized, false);
         done();
       });
     });
   });
 
   describe('finalize', function() {
-    it('should be committed if not rolled back', function(done) {
-      transaction.createRequest_ = function(method) {
-        assert.equal(method, 'commit');
+    it('should be committed if not finalized', function(done) {
+      transaction.isFinalized = false;
+      transaction.commit = function () {
         done();
       };
       transaction.finalize();
     });
-  });
 
-  describe('save', function() {
-    var key = new Key({
-      namespace: null,
-      path: ['Kind', 1]
-    });
-
-    it('should not set an indexed value by default', function() {
-      transaction.createRequest_ = function(method, req) {
-        var property = req.mutation.upsert[0].property[0];
-        assert.strictEqual(property.value.indexed, null);
-      };
-      transaction.save({
-        key: key,
-        data: [{ name: 'name', value: 'value' }]
-      }, assert.ifError);
-    });
-
-    it('should allow setting the indexed value of a property', function() {
-      transaction.createRequest_ = function(method, req) {
-        var property = req.mutation.upsert[0].property[0];
-        assert.equal(property.name, 'name');
-        assert.equal(property.value.string_value, 'value');
-        assert.strictEqual(property.value.indexed, false);
-      };
-      transaction.save({
-        key: key,
-        data: [{ name: 'name', value: 'value', excludeFromIndexes: true }]
-      }, assert.ifError);
+    it('should execute callback if already finalized', function(done) {
+      transaction.isFinalized = true;
+      transaction.finalize(done);
     });
   });
 });
