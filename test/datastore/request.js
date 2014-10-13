@@ -73,7 +73,7 @@ describe('Request', function() {
 
   describe('get', function() {
     it('should get by key', function(done) {
-      request.createRequest_ = function(method, req, callback) {
+      request.makeReq_ = function(method, req, callback) {
         assert.equal(method, 'lookup');
         assert.equal(req.key.length, 1);
         callback(null, mockRespGet);
@@ -89,7 +89,7 @@ describe('Request', function() {
     });
 
     it('should multi get by keys', function(done) {
-      request.createRequest_ = function(method, req, callback) {
+      request.makeReq_ = function(method, req, callback) {
         assert.equal(method, 'lookup');
         assert.equal(req.key.length, 1);
         callback(null, mockRespGet);
@@ -107,7 +107,7 @@ describe('Request', function() {
 
     it('should continue looking for deferred results', function(done) {
       var lookupCount = 0;
-      request.createRequest_ = function(method, req, callback) {
+      request.makeReq_ = function(method, req, callback) {
         lookupCount++;
         assert.equal(method, 'lookup');
         if (mockRespGet.deferred.length) {
@@ -128,7 +128,7 @@ describe('Request', function() {
 
   describe('save', function() {
     it('should save with incomplete key', function(done) {
-      request.createRequest_ = function(method, req, callback) {
+      request.makeReq_ = function(method, req, callback) {
         assert.equal(method, 'commit');
         assert.equal(req.mutation.insert_auto_id.length, 1);
         callback();
@@ -138,7 +138,7 @@ describe('Request', function() {
     });
 
     it('should save with keys', function(done) {
-      request.createRequest_ = function(method, req, callback) {
+      request.makeReq_ = function(method, req, callback) {
         assert.equal(method, 'commit');
         assert.equal(req.mutation.upsert.length, 2);
         assert.equal(req.mutation.upsert[0].property[0].name, 'k');
@@ -160,7 +160,7 @@ describe('Request', function() {
 
       it('should mark transaction as finalized', function(done) {
         assert.strictEqual(request.isFinalized, undefined);
-        request.createRequest_ = function(method, req, callback) {
+        request.makeReq_ = function(method, req, callback) {
           callback(null, { mutation_result: {} });
         };
         request.save({ key: key, data: {} }, function(err) {
@@ -172,7 +172,7 @@ describe('Request', function() {
 
       it('should not mark as finalized if an error occurred', function(done) {
         assert.strictEqual(request.isFinalized, undefined);
-        request.createRequest_ = function(method, req, callback) {
+        request.makeReq_ = function(method, req, callback) {
           callback(new Error('Error.'));
         };
         request.save({ key: key, data: {} }, function() {
@@ -182,7 +182,7 @@ describe('Request', function() {
       });
 
       it('should not set an indexed value by default', function(done) {
-        request.createRequest_ = function(method, req) {
+        request.makeReq_ = function(method, req) {
           var property = req.mutation.upsert[0].property[0];
           assert.equal(property.name, 'name');
           assert.equal(property.value.string_value, 'value');
@@ -196,7 +196,7 @@ describe('Request', function() {
       });
 
       it('should allow setting the indexed value of property', function(done) {
-        request.createRequest_ = function(method, req) {
+        request.makeReq_ = function(method, req) {
           var property = req.mutation.upsert[0].property[0];
           assert.equal(property.name, 'name');
           assert.equal(property.value.string_value, 'value');
@@ -213,7 +213,7 @@ describe('Request', function() {
 
   describe('delete', function() {
     it('should delete by key', function(done) {
-      request.createRequest_ = function(method, req, callback) {
+      request.makeReq_ = function(method, req, callback) {
         assert.equal(method, 'commit');
         assert.equal(!!req.mutation.delete, true);
         callback();
@@ -222,7 +222,7 @@ describe('Request', function() {
     });
 
     it('should multi delete by keys', function(done) {
-      request.createRequest_ = function(method, req, callback) {
+      request.makeReq_ = function(method, req, callback) {
         assert.equal(method, 'commit');
         assert.equal(req.mutation.delete.length, 2);
         callback();
@@ -238,7 +238,7 @@ describe('Request', function() {
 
       it('should mark transaction as finalized', function(done) {
         assert.strictEqual(request.isFinalized, undefined);
-        request.createRequest_ = function(method, req, callback) {
+        request.makeReq_ = function(method, req, callback) {
           callback(null, { mutation_result: {} });
         };
         request.delete(key, function(err) {
@@ -250,7 +250,7 @@ describe('Request', function() {
 
       it('should not mark as finalized if an error occurred', function(done) {
         assert.strictEqual(request.isFinalized, undefined);
-        request.createRequest_ = function(method, req, callback) {
+        request.makeReq_ = function(method, req, callback) {
           callback(new Error('Error.'));
         };
         request.delete(key, function() {
@@ -283,7 +283,7 @@ describe('Request', function() {
     describe('errors', function() {
       it('should handle upstream errors', function() {
         var error = new Error('Error.');
-        request.createRequest_ = function(method, req, callback) {
+        request.makeReq_ = function(method, req, callback) {
           assert.equal(method, 'runQuery');
           callback(error);
         };
@@ -294,7 +294,7 @@ describe('Request', function() {
       });
 
       it('should handle missing results error', function() {
-        request.createRequest_ = function(method, req, callback) {
+        request.makeReq_ = function(method, req, callback) {
           assert.equal(method, 'runQuery');
           callback(null, mockResponse.withoutResults);
         };
@@ -307,7 +307,7 @@ describe('Request', function() {
     });
 
     it('should execute callback with results', function() {
-      request.createRequest_ = function(method, req, callback) {
+      request.makeReq_ = function(method, req, callback) {
         assert.equal(method, 'runQuery');
         callback(null, mockResponse.withResults);
       };
@@ -324,7 +324,7 @@ describe('Request', function() {
     });
 
     it('should return a new query if results remain', function() {
-      request.createRequest_ = function(method, req, callback) {
+      request.makeReq_ = function(method, req, callback) {
         assert.equal(method, 'runQuery');
         callback(null, mockResponse.withResultsAndEndCursor);
       };
@@ -338,7 +338,7 @@ describe('Request', function() {
 
   describe('allocateIds', function() {
     it('should produce proper allocate IDs req protos', function(done) {
-      request.createRequest_ = function(method, req, callback) {
+      request.makeReq_ = function(method, req, callback) {
         assert.equal(method, 'allocateIds');
         assert.equal(req.key.length, 1);
         callback(null, {
@@ -363,7 +363,7 @@ describe('Request', function() {
     });
   });
 
-  describe('createRequest_', function() {
+  describe('makeReq_', function() {
     beforeEach(function() {
       request.connection = {
         createAuthorizedReq: util.noop
@@ -381,7 +381,7 @@ describe('Request', function() {
         assert.equal(opts.headers['content-type'], 'application/x-protobuf');
         done();
       };
-      request.createRequest_(method, {}, util.noop);
+      request.makeReq_(method, {}, util.noop);
     });
 
     it('should make https request', function(done) {
@@ -394,7 +394,7 @@ describe('Request', function() {
       request.connection.createAuthorizedReq = function(opts, callback) {
         callback(null, mockRequest);
       };
-      request.createRequest_('commit', {}, util.noop);
+      request.makeReq_('commit', {}, util.noop);
     });
 
     it('should send protobuf request', function(done) {
@@ -411,7 +411,7 @@ describe('Request', function() {
       request.connection.createAuthorizedReq = function(opts, callback) {
         callback();
       };
-      request.createRequest_('commit', requestOptions, util.noop);
+      request.makeReq_('commit', requestOptions, util.noop);
     });
 
     it('should decode protobuf response', function(done) {
@@ -427,7 +427,7 @@ describe('Request', function() {
       request.connection.createAuthorizedReq = function(opts, callback) {
         callback();
       };
-      request.createRequest_('fakeMethod', util.noop);
+      request.makeReq_('fakeMethod', util.noop);
     });
 
     describe('transactional and non-transactional properties', function() {
@@ -452,7 +452,7 @@ describe('Request', function() {
             };
             return stream;
           };
-          request.createRequest_('commit', util.noop);
+          request.makeReq_('commit', util.noop);
         });
 
         it('should attach non-transactional properties', function(done) {
@@ -467,7 +467,7 @@ describe('Request', function() {
             };
             return stream;
           };
-          request.createRequest_('commit', util.noop);
+          request.makeReq_('commit', util.noop);
         });
       });
 
@@ -487,7 +487,7 @@ describe('Request', function() {
             };
             return stream;
           };
-          request.createRequest_('lookup', util.noop);
+          request.makeReq_('lookup', util.noop);
         });
 
         it('should not attach transactional properties', function(done) {
@@ -500,7 +500,7 @@ describe('Request', function() {
             };
             return stream;
           };
-          request.createRequest_('lookup', util.noop);
+          request.makeReq_('lookup', util.noop);
         });
       });
     });
