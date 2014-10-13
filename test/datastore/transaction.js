@@ -31,7 +31,8 @@ describe('Transaction', function() {
 
   describe('begin', function() {
     it('should begin', function(done) {
-      transaction.createRequest_ = function(method) {
+      transaction.makeReq_ = function(method, req, callback) {
+        callback = callback || req;
         assert.equal(method, 'beginTransaction');
         done();
       };
@@ -39,7 +40,8 @@ describe('Transaction', function() {
     });
 
     it('should set transaction id', function(done) {
-      transaction.createRequest_ = function(method, proto, respType, callback) {
+      transaction.makeReq_ = function(method, req, callback) {
+        callback = callback || req;
         callback(null, { transaction: TRANSACTION_ID });
       };
       transaction.begin(function(err) {
@@ -51,7 +53,8 @@ describe('Transaction', function() {
 
     it('should pass error to callback', function(done) {
       var error = new Error('Error.');
-      transaction.createRequest_ = function(method, proto, respType, callback) {
+      transaction.makeReq_ = function(method, req, callback) {
+        callback = callback || req;
         callback(error);
       };
       transaction.begin(function(err) {
@@ -67,11 +70,8 @@ describe('Transaction', function() {
     });
 
     it('should rollback', function(done) {
-      transaction.createRequest_ = function(method, proto) {
+      transaction.makeReq_ = function(method) {
         assert.equal(method, 'rollback');
-        assert.equal(
-          proto.transaction.toBase64(),
-          new Buffer(transaction.id).toString('base64'));
         done();
       };
       transaction.rollback();
@@ -79,7 +79,8 @@ describe('Transaction', function() {
 
     it('should pass error to callback', function(done) {
       var error = new Error('Error.');
-      transaction.createRequest_ = function(method, proto, respType, callback) {
+      transaction.makeReq_ = function(method, req, callback) {
+        callback = callback || req;
         callback(error);
       };
       transaction.rollback(function(err) {
@@ -89,7 +90,8 @@ describe('Transaction', function() {
     });
 
     it('should mark as finalized', function(done) {
-      transaction.createRequest_ = function(method, proto, respType, callback) {
+      transaction.makeReq_ = function(method, req, callback) {
+        callback = callback || req;
         callback();
       };
       transaction.rollback(function() {
@@ -99,8 +101,9 @@ describe('Transaction', function() {
     });
 
     it('should mark as finalized when rollback errors', function(done) {
-      transaction.createRequest_ = function(method, proto, respType, callback) {
-       callback(new Error('Error.'));
+      transaction.makeReq_ = function(method, req, callback) {
+        callback = callback || req;
+        callback(new Error('Error.'));
       };
       transaction.rollback(function() {
         assert.strictEqual(transaction.isFinalized, true);
@@ -115,11 +118,8 @@ describe('Transaction', function() {
     });
 
     it('should commit', function(done) {
-      transaction.createRequest_ = function(method, proto) {
+      transaction.makeReq_ = function(method) {
         assert.equal(method, 'commit');
-        assert.equal(
-          proto.transaction.toBase64(),
-          new Buffer(transaction.id).toString('base64'));
         done();
       };
       transaction.commit();
@@ -127,7 +127,8 @@ describe('Transaction', function() {
 
     it('should pass error to callback', function(done) {
       var error = new Error('Error.');
-      transaction.createRequest_ = function(method, proto, respType, callback) {
+      transaction.makeReq_ = function(method, req, callback) {
+        callback = callback || req;
         callback(error);
       };
       transaction.commit(function(err) {
@@ -137,7 +138,8 @@ describe('Transaction', function() {
     });
 
     it('should mark as finalized', function(done) {
-      transaction.createRequest_ = function(method, proto, respType, callback) {
+      transaction.makeReq_ = function(method, req, callback) {
+        callback = callback || req;
         callback();
       };
       transaction.commit(function() {
@@ -147,7 +149,8 @@ describe('Transaction', function() {
     });
 
     it('should not mark as finalized if commit errors', function(done) {
-      transaction.createRequest_ = function(method, proto, respType, callback) {
+      transaction.makeReq_ = function(method, req, callback) {
+        callback = callback || req;
         callback(new Error('Error.'));
       };
       transaction.commit(function() {
