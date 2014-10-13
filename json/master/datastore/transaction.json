@@ -28,28 +28,6 @@
       }
     ],
     "description": {
-      "full": "<p>@type module:datastore/pb</p>",
-      "summary": "<p>@type module:datastore/pb</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "ignore": false,
-    "code": "var pb = require('./pb.js');",
-    "ctx": {
-      "type": "declaration",
-      "name": "pb",
-      "value": "require('./pb.js')",
-      "string": "pb"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "private",
-        "visibility": "private"
-      }
-    ],
-    "description": {
       "full": "<p>@type module:common/util</p>",
       "summary": "<p>@type module:common/util</p>",
       "body": ""
@@ -140,7 +118,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "function Transaction(connection, projectId) {\n  this.connection = connection;\n  this.projectId = projectId;\n  // the default transaction has no id.\n  // if id is not set, run operations non-transactional.\n  this.id = null;\n  this.isFinalized = false;\n}\n\nnodeutil.inherits(Transaction, DatastoreRequest);",
+    "code": "function Transaction(connection, projectId) {\n  this.connection = connection;\n  this.id = null;\n  this.isFinalized = false;\n  this.projectId = projectId;\n}\n\nnodeutil.inherits(Transaction, DatastoreRequest);",
     "ctx": {
       "type": "function",
       "name": "Transaction",
@@ -169,7 +147,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Transaction.prototype.begin = function(callback) {\n  callback = callback || util.noop;\n  var that = this;\n  var req = new pb.BeginTransactionRequest();\n  var res = pb.BeginTransactionResponse;\n  this.createRequest_('beginTransaction', req, res, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    that.id = resp.transaction;\n    callback(null);\n  });\n};",
+    "code": "Transaction.prototype.begin = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('beginTransaction', function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    this.id = resp.transaction;\n    callback(null);\n  }.bind(this));\n};",
     "ctx": {
       "type": "method",
       "constructor": "Transaction",
@@ -200,7 +178,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Transaction.prototype.rollback = function(callback) {\n  callback = callback || util.noop;\n  var that = this;\n  var req = new pb.RollbackRequest({ transaction: this.id });\n  var res = pb.RollbackResponse;\n  this.createRequest_('rollback', req, res, function(err) {\n    that.isFinalized = true;\n    callback(err || null);\n  });\n};",
+    "code": "Transaction.prototype.rollback = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('rollback', function(err) {\n    this.isFinalized = true;\n    callback(err || null);\n  }.bind(this));\n};",
     "ctx": {
       "type": "method",
       "constructor": "Transaction",
@@ -231,7 +209,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Transaction.prototype.commit = function(callback) {\n  callback = callback || util.noop;\n  var that = this;\n  var req = new pb.CommitRequest({ transaction: this.id });\n  var res = pb.CommitResponse;\n  this.createRequest_('commit', req, res, function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    that.isFinalized = true;\n    callback(null);\n  });\n};",
+    "code": "Transaction.prototype.commit = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('commit', function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    this.isFinalized = true;\n    callback(null);\n  }.bind(this));\n};",
     "ctx": {
       "type": "method",
       "constructor": "Transaction",

@@ -227,7 +227,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "DatastoreRequest.prototype.get = function(keys, callback) {\n  var isMultipleRequest = Array.isArray(keys);\n  keys = isMultipleRequest ? keys : [keys];\n  callback = callback || util.noop;\n  var req = new pb.LookupRequest({\n    key: keys.map(entity.keyToKeyProto)\n  });\n  var res = pb.LookupResponse;\n  if (this.id) {\n    req.transaction = this.id;\n  }\n  this.createRequest_('lookup', req, res, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    var found = entity.formatArray(resp.found);\n    if (isMultipleRequest && resp.deferred && resp.deferred.length) {\n      // There may be more results. Call `.get` again, and append the results.\n      this.get(\n          resp.deferred.map(entity.keyFromKeyProto), function(err, entities) {\n        if (err) {\n          callback(err);\n          return;\n        }\n        if (resp) {\n          found = (found || []).concat(entities);\n        }\n        callback(null, found);\n      });\n      return;\n    }\n    callback(null, isMultipleRequest ? found : found[0]);\n  }.bind(this));\n};",
+    "code": "DatastoreRequest.prototype.get = function(keys, callback) {\n  var isMultipleRequest = Array.isArray(keys);\n  keys = isMultipleRequest ? keys : [keys];\n  callback = callback || util.noop;\n  var req = {\n    key: keys.map(entity.keyToKeyProto)\n  };\n  this.makeReq_('lookup', req, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    var found = entity.formatArray(resp.found);\n    if (isMultipleRequest && resp.deferred && resp.deferred.length) {\n      // There may be more results. Call `.get` again, and append the results.\n      this.get(\n          resp.deferred.map(entity.keyFromKeyProto), function(err, entities) {\n        if (err) {\n          callback(err);\n          return;\n        }\n        if (resp) {\n          found = (found || []).concat(entities);\n        }\n        callback(null, found);\n      });\n      return;\n    }\n    callback(null, isMultipleRequest ? found : found[0]);\n  }.bind(this));\n};",
     "ctx": {
       "type": "method",
       "constructor": "DatastoreRequest",
@@ -289,7 +289,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "DatastoreRequest.prototype.save = function(entities, callback) {\n  var isMultipleRequest = Array.isArray(entities);\n  entities = isMultipleRequest ? entities : [entities];\n  var insertIndexes = [];\n  var keys = entities.map(function(entityObject) {\n    return entityObject.key;\n  });\n  var req = {\n    mode: MODE_NON_TRANSACTIONAL,\n    mutation: entities.reduce(function(acc, entityObject, index) {\n      var ent = {};\n      if (Array.isArray(entityObject.data)) {\n        ent.property = entityObject.data.map(function(data) {\n          data.value = entity.valueToProperty(data.value);\n          if (util.is(data.excludeFromIndexes, 'boolean')) {\n            data.value.indexed = !data.excludeFromIndexes;\n            delete data.excludeFromIndexes;\n          }\n          return data;\n        });\n      } else {\n        ent = entity.entityToEntityProto(entityObject.data);\n      }\n      ent.key = entity.keyToKeyProto(entityObject.key);\n      if (entity.isKeyComplete(entityObject.key)) {\n        acc.upsert.push(ent);\n      } else {\n        insertIndexes.push(index);\n        acc.insert_auto_id.push(ent);\n      }\n      return acc;\n    }.bind(this), { upsert: [], insert_auto_id: [] })\n  };\n  if (this.id) {\n    req.transaction = this.id;\n    req.mode = MODE_TRANSACTIONAL;\n  }\n  req = new pb.CommitRequest(req);\n  var res = pb.CommitResponse;\n  this.createRequest_('commit', req, res, function(err, resp) {\n    if (err || !resp) {\n      callback(err);\n      return;\n    }\n    if (this.id) {\n      this.isFinalized = true;\n    }\n    var autoInserted = (resp.mutation_result.insert_auto_id_key || []);\n    autoInserted.forEach(function(key, index) {\n      keys[insertIndexes[index]] = entity.keyFromKeyProto(key);\n    });\n    callback(null, isMultipleRequest ? keys : keys[0]);\n  }.bind(this));\n};",
+    "code": "DatastoreRequest.prototype.save = function(entities, callback) {\n  var isMultipleRequest = Array.isArray(entities);\n  entities = isMultipleRequest ? entities : [entities];\n  var insertIndexes = [];\n  var keys = entities.map(function(entityObject) {\n    return entityObject.key;\n  });\n  var req = {\n    mutation: entities.reduce(function(acc, entityObject, index) {\n      var ent = {};\n      if (Array.isArray(entityObject.data)) {\n        ent.property = entityObject.data.map(function(data) {\n          data.value = entity.valueToProperty(data.value);\n          if (util.is(data.excludeFromIndexes, 'boolean')) {\n            data.value.indexed = !data.excludeFromIndexes;\n            delete data.excludeFromIndexes;\n          }\n          return data;\n        });\n      } else {\n        ent = entity.entityToEntityProto(entityObject.data);\n      }\n      ent.key = entity.keyToKeyProto(entityObject.key);\n      if (entity.isKeyComplete(entityObject.key)) {\n        acc.upsert.push(ent);\n      } else {\n        insertIndexes.push(index);\n        acc.insert_auto_id.push(ent);\n      }\n      return acc;\n    }.bind(this), { upsert: [], insert_auto_id: [] })\n  };\n  this.makeReq_('commit', req, function(err, resp) {\n    if (err || !resp) {\n      callback(err);\n      return;\n    }\n    if (this.id) {\n      this.isFinalized = true;\n    }\n    var autoInserted = (resp.mutation_result.insert_auto_id_key || []);\n    autoInserted.forEach(function(key, index) {\n      keys[insertIndexes[index]] = entity.keyFromKeyProto(key);\n    });\n    callback(null, isMultipleRequest ? keys : keys[0]);\n  }.bind(this));\n};",
     "ctx": {
       "type": "method",
       "constructor": "DatastoreRequest",
@@ -329,7 +329,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "DatastoreRequest.prototype.delete = function(keys, callback) {\n  var isMultipleRequest = Array.isArray(keys);\n  keys = isMultipleRequest ? keys : [keys];\n  callback = callback || util.noop;\n\n  var req = {\n    mode: MODE_NON_TRANSACTIONAL,\n    mutation: {\n      delete: keys.map(entity.keyToKeyProto)\n    }\n  };\n  if (this.id) {\n    req.transaction = this.id;\n    req.mode = MODE_TRANSACTIONAL;\n  }\n  req = new pb.CommitRequest(req);\n  var res = pb.CommitResponse;\n  this.createRequest_('commit', req, res, function(err) {\n    if (!err && this.id) {\n      this.isFinalized = true;\n    }\n    callback.apply(null, util.toArray(arguments));\n  }.bind(this));\n};",
+    "code": "DatastoreRequest.prototype.delete = function(keys, callback) {\n  var isMultipleRequest = Array.isArray(keys);\n  keys = isMultipleRequest ? keys : [keys];\n  callback = callback || util.noop;\n  var req = {\n    mutation: {\n      delete: keys.map(entity.keyToKeyProto)\n    }\n  };\n  this.makeReq_('commit', req, function(err) {\n    if (!err && this.id) {\n      this.isFinalized = true;\n    }\n    callback.apply(null, util.toArray(arguments));\n  }.bind(this));\n};",
     "ctx": {
       "type": "method",
       "constructor": "DatastoreRequest",
@@ -369,7 +369,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "DatastoreRequest.prototype.runQuery = function(q, callback) {\n  callback = callback || util.noop;\n  var req = {\n    read_options: {},\n    query: entity.queryToQueryProto(q)\n  };\n\n  if (this.id) {\n    req.read_options.transaction = this.id;\n  }\n\n  if (q.namespace) {\n    req.partition_id = {\n      namespace: q.namespace\n    };\n  }\n\n  req = new pb.RunQueryRequest(req);\n  var res = pb.RunQueryResponse;\n\n  this.createRequest_('runQuery', req, res, function(err, resp) {\n    if (err || !resp.batch || !resp.batch.entity_result) {\n      callback(err);\n      return;\n    }\n    var nextQuery = null;\n    if (resp.batch.end_cursor) {\n      var cursor = resp.batch.end_cursor.toBase64();\n      if (cursor !== q.startVal) {\n        nextQuery = q.start(cursor).offset(0);\n      }\n    }\n    callback(null, entity.formatArray(resp.batch.entity_result), nextQuery);\n  });\n};",
+    "code": "DatastoreRequest.prototype.runQuery = function(q, callback) {\n  callback = callback || util.noop;\n  var req = {\n    read_options: {},\n    query: entity.queryToQueryProto(q)\n  };\n\n  if (q.namespace) {\n    req.partition_id = {\n      namespace: q.namespace\n    };\n  }\n\n  this.makeReq_('runQuery', req, function(err, resp) {\n    if (err || !resp.batch || !resp.batch.entity_result) {\n      callback(err);\n      return;\n    }\n    var nextQuery = null;\n    if (resp.batch.end_cursor) {\n      var cursor = resp.batch.end_cursor.toBase64();\n      if (cursor !== q.startVal) {\n        nextQuery = q.start(cursor).offset(0);\n      }\n    }\n    callback(null, entity.formatArray(resp.batch.entity_result), nextQuery);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "DatastoreRequest",
@@ -416,7 +416,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "DatastoreRequest.prototype.allocateIds = function(incompleteKey, n, callback) {\n  if (entity.isKeyComplete(incompleteKey)) {\n    throw new Error('An incomplete key should be provided.');\n  }\n  var incompleteKeys = [];\n  for (var i = 0; i < n; i++) {\n    incompleteKeys.push(entity.keyToKeyProto(incompleteKey));\n  }\n\n  this.createRequest_(\n      'allocateIds',\n      new pb.AllocateIdsRequest({ key: incompleteKeys }),\n      pb.AllocateIdsResponse, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    var keys = [];\n    (resp.key || []).forEach(function(k) {\n      keys.push(entity.keyFromKeyProto(k));\n    });\n    callback(null, keys);\n  });\n};",
+    "code": "DatastoreRequest.prototype.allocateIds = function(incompleteKey, n, callback) {\n  if (entity.isKeyComplete(incompleteKey)) {\n    throw new Error('An incomplete key should be provided.');\n  }\n  var incompleteKeys = [];\n  for (var i = 0; i < n; i++) {\n    incompleteKeys.push(entity.keyToKeyProto(incompleteKey));\n  }\n  var req = {\n    key: incompleteKeys\n  };\n  this.makeReq_('allocateIds', req, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    var keys = [];\n    (resp.key || []).forEach(function(k) {\n      keys.push(entity.keyFromKeyProto(k));\n    });\n    callback(null, keys);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "DatastoreRequest",
@@ -433,30 +433,22 @@
           "string"
         ],
         "name": "method",
-        "description": "- Transaction action (allocateIds, commit, etc.)."
+        "description": "- Datastore action (allocateIds, commit, etc.)."
       },
       {
         "type": "param",
         "types": [
-          "object"
+          "object="
         ],
-        "name": "req",
+        "name": "body",
         "description": "- Request configuration object."
-      },
-      {
-        "type": "param",
-        "types": [
-          "object"
-        ],
-        "name": "respType",
-        "description": "- Response type."
       },
       {
         "type": "param",
         "types": [
           "function"
         ],
-        "name": "cb",
+        "name": "callback",
         "description": "- The callback function. "
       },
       {
@@ -465,16 +457,23 @@
       },
       {
         "type": "example",
-        "string": "var deleteRequest = {\n  MODE: 'NON_TRANSACTIONAL',\n  mutation: {\n    delete: [] // datastore key objects.\n  }\n};\ntransaction.makeReq('commit', deleteRequest, function(err) {});"
+        "string": "var deleteRequest = {\n  mutation: {\n    delete: [] // datastore key objects.\n  }\n};\ntransaction.makeReq('commit', deleteRequest, function(err) {});"
       }
     ],
     "description": {
-      "full": "<p>Make a request to the API endpoint.</p>",
-      "summary": "<p>Make a request to the API endpoint.</p>",
+      "full": "<p>Make a request to the API endpoint. Properties to indicate a transactional or<br />non-transactional operation are added automatically.</p>",
+      "summary": "<p>Make a request to the API endpoint. Properties to indicate a transactional or<br />non-transactional operation are added automatically.</p>",
       "body": ""
     },
     "isPrivate": true,
     "ignore": false,
-    "code": "DatastoreRequest.prototype.createRequest_ =\n    function(method, req, respType, cb) {\n  // TODO: Handle non-HTTP 200 cases.\n  cb = cb || util.noop;\n  this.connection.createAuthorizedReq({\n    method: 'POST',\n    host: GOOGLE_APIS_HOST,\n    path: '/datastore/v1beta2/datasets/' + this.projectId + '/' + method,\n    headers: {\n      'content-type': 'application/x-protobuf'\n    }\n  }, function(err, request) {\n    if (err) {\n      cb(err);\n      return;\n    }\n    var remoteStream = https.request(request, function(resp) {\n      var buffer = new Buffer('');\n      resp.on('data', function(chunk) {\n        buffer = Buffer.concat([buffer, chunk]);\n      });\n      resp.on('end', function() {\n        util.handleResp(null, resp, buffer.toString(), function(err) {\n          if (err) {\n            cb(err);\n            return;\n          }\n          cb(null, respType.decode(buffer));\n        });\n      });\n    });\n    remoteStream.on('error', cb);\n    remoteStream.write(req.toBuffer());\n    remoteStream.end();\n  });\n};\n\nmodule.exports = DatastoreRequest;"
+    "code": "DatastoreRequest.prototype.makeReq_ = function(method, body, callback) {\n  // TODO: Handle non-HTTP 200 cases.\n  if (!callback) {\n    callback = body;\n    body = {};\n  }\n  callback = callback || util.noop;\n\n  // Set properties to indicate if we're in a transaction or not.\n  if (method === 'commit') {\n    if (this.id) {\n      body.mode = MODE_TRANSACTIONAL;\n      body.transaction = this.id;\n    } else {\n      body.mode = MODE_NON_TRANSACTIONAL;\n    }\n  }\n\n  if (method === 'lookup' && this.id) {\n    body.read_options = body.read_options || {};\n    body.read_options.transaction = this.id;\n  }\n\n  var pbKey = method[0].toUpperCase() + method.substr(1);\n  var pbRequest = new pb[pbKey + 'Request'](body).toBuffer();\n  var pbResponse = pb[pbKey + 'Response'];\n\n  this.connection.createAuthorizedReq({\n    method: 'POST',\n    host: GOOGLE_APIS_HOST,\n    path: '/datastore/v1beta2/datasets/' + this.projectId + '/' + method,\n    headers: {\n      'content-type': 'application/x-protobuf'\n    }\n  }, function(err, request) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    var remoteStream = https.request(request, function(resp) {\n      var buffer = new Buffer('');\n      resp.on('data', function(chunk) {\n        buffer = Buffer.concat([buffer, chunk]);\n      });\n      resp.on('end', function() {\n        util.handleResp(null, resp, buffer.toString(), function(err) {\n          if (err) {\n            callback(err);\n            return;\n          }\n          callback(null, pbResponse.decode(buffer));\n        });\n      });\n    });\n    remoteStream.on('error', callback);\n    remoteStream.write(pbRequest);\n    remoteStream.end();\n  });\n};\n\nmodule.exports = DatastoreRequest;",
+    "ctx": {
+      "type": "method",
+      "constructor": "DatastoreRequest",
+      "cons": "DatastoreRequest",
+      "name": "makeReq_",
+      "string": "DatastoreRequest.prototype.makeReq_()"
+    }
   }
 ]
