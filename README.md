@@ -12,6 +12,7 @@ This client supports the following Google Cloud Platform services:
 
 * [Google Cloud Datastore](https://cloud.google.com/products/cloud-datastore/)
 * [Google Cloud Storage](https://cloud.google.com/products/cloud-storage/)
+* [Google Cloud Pub/Sub][cloud-pubsub] (Developer Preview)
 
 If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
 
@@ -101,6 +102,50 @@ bucket.write('demo.txt', 'Hello World', function(err) {
 });
 ```
 
+## Google Cloud Pub/Sub (Alpha)
+
+> Google Cloud Pub/Sub is in **Alpha status**. As a result, it might change in backward-incompatible ways and is not recommended for production use. It is not subject to any SLA or deprecation policy.
+
+[Google Cloud Pub/Sub][cloud-pubsub] allows you to connect your services with reliable, many-to-many, asynchronous messaging hosted on Google's infrastructure. Cloud Pub/Sub automatically scales as you need it and provides a foundation for building your own robust, global services.
+
+See [the gcloud-node API documentation][gcloud-pubsub] to learn how to connect to the Cloud Pub/Sub using this Client Library.
+
+``` js
+var gcloud = require('gcloud');
+
+// From Google Compute Engine:
+var pubsub = gcloud.pubsub();
+
+// Or from elsewhere:
+var pubsub = gcloud.pubsub({
+  keyFilename: '/path/to/keyfile.json',
+  projectId: 'my-project'
+});
+
+// Create a new topic.
+pubsub.createTopic('my-new-topic', function(err, topic) {
+  // Subscribe to the topic.
+  topic.subscribe('new-subscription', function(err, subscription) {
+    // Create listeners to start listening for messages.
+    function onError(err) {}
+    function onMessage(message) {}
+    subscription.on('error', onError);
+    subscription.on('message', onMessage);
+
+    // Publish a message to the topic.
+    topic.publish('New message!', function(err) {});
+
+    // Clean up listeners.
+    subscription.removeListener('message', onMessage);
+    subscription.removeListener('error', onError);
+  });
+});
+
+// Or reference an existing topic.
+var topic = pubsub.topic('my-existing-topic');
+// etc...
+```
+
 ## Contributing
 
 Contributions to this library are always welcome and highly encouraged.
@@ -113,3 +158,6 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 
 [googleapis]: https://github.com/google/google-api-nodejs-client
 [gcloud-todos]: https://github.com/GoogleCloudPlatform/gcloud-node-todos
+[cloud-pubsub]: https://cloud.google.com/pubsub/
+[pubsub-preview]: https://docs.google.com/a/google.com/forms/d/1IQY4LAbISLa86uxRv2dKAzkeWOyNZda_tUn7xgVYeoE/viewform
+[gcloud-pubsub]: https://googlecloudplatform.github.io/gcloud-node/#/docs/pubsub
