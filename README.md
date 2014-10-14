@@ -83,25 +83,32 @@ If you don't have a bucket already, follow the steps of the [Creating a Bucket g
 See the [gcloud-node Storage API documentation][gcloud-storage-docs] to learn how to connect to Cloud Storage using this library.
 
 ```js
+var fs = require('fs');
 var gcloud = require('gcloud');
-var bucket;
+var storage;
 
 // From Google Compute Engine:
-bucket = gcloud.storage.bucket({
-  projectId: 'my-project',
-  bucketName: 'my-bucket'
+storage = gcloud.storage({
+  projectId: 'my-project'
 });
 
 // Or from elsewhere:
-bucket = gcloud.storage.bucket({
-  projectId: 'my-project',
+storage = gcloud.storage({
   keyFilename: '/path/to/keyfile.json',
-  bucketName: 'my-bucket'
+  projectId: 'my-project'
 });
 
-bucket.write('demo.txt', 'Hello World', function(err) {
-  console.log(err || 'Created demo.txt');
-});
+// Create a new bucket.
+storage.createBucket('my-new-bucket', function(err, bucket) {});
+
+// Reference an existing bucket.
+var bucket = storage.bucket('my-bucket');
+
+// Upload a local file to a new file to be created in your bucket.
+fs.createReadStream('/local/file.txt').pipe(bucket.file('file.txt'));
+
+// Download a remote file to a new local file.
+bucket.file('photo.jpg').pipe(fs.createWriteStream('/local/photo.jpg'));
 ```
 
 ## Google Cloud Pub/Sub (Alpha)
