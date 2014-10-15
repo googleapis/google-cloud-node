@@ -138,9 +138,7 @@ angular
                 })[0]
             };
           })
-          .sort(function(a, b) {
-            return a.constructor ? -1: a.name > b.name;
-          });
+          .sort(compareMethods);
       };
     }
 
@@ -175,9 +173,7 @@ angular
               acc = acc.concat(mixInMethods);
               return acc;
             }, data)
-            .sort(function(a, b) {
-              return a.name > b.name;
-            });
+            .sort(compareMethods);
         };
       }
     }
@@ -211,6 +207,10 @@ angular
           .then(filterDocJson($sce, version))
           .then(getMixIns($sce, $q, $http, version, 'json/' + version))
           .then(setSingleMethod($location.search().method));
+    }
+
+    function compareMethods(a, b) {
+      return a.constructor ? -1: a.name > b.name;
     }
 
     function getLinks($route, getLinks) {
