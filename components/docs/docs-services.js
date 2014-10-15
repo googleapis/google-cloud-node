@@ -8,8 +8,11 @@ angular.module('gcloud.docs')
       var VERSIONS = pages.VERSIONS;
 
       if (version === 'master') {
-        // Use the most recent release.
-        version = versions[0];
+        // Set an insanely high version. This is because for master we need
+        // all the modules from the latest version, but when executed locally,
+        // we don't know which one is the latest unless we manually add to
+        // versions.txt
+        version = '1000.0.0';
       }
 
       // Use semver matching to put all matching modules together.
