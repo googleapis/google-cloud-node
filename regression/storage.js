@@ -141,7 +141,7 @@ describe('storage', function() {
       it('should stream write, then remove large file (5mb)', function(done) {
         var file = bucket.file('LargeFile');
         fs.createReadStream(files.big.path)
-          .pipe(file)
+          .pipe(file.createWriteStream())
           .on('error', done)
           .on('complete', function(fileObject) {
             assert.equal(fileObject.md5Hash, files.big.hash);
@@ -167,10 +167,12 @@ describe('storage', function() {
           var file = bucket.file('MyBuffer');
           var fileContent = 'Hello World';
           assert.ifError(err);
-          file.write(fileContent);
-          file.end();
-          file.on('complete', function() {
-            file.pipe(fs.createWriteStream(tmpFilePath))
+          var writable = file.createWriteStream();
+          writable.write(fileContent);
+          writable.end();
+          writable.on('complete', function() {
+            file.createReadStream()
+              .pipe(fs.createWriteStream(tmpFilePath))
               .on('error', done)
               .on('finish', function() {
                 file.delete(function(err) {
@@ -211,7 +213,7 @@ describe('storage', function() {
         }
         var file = bucket.file(filenames[0]);
         fs.createReadStream(files.logo.path)
-          .pipe(file)
+          .pipe(file.createWriteStream())
           .on('error', done)
           .on('complete', function() {
             file.copy(filenames[1], function(err, copiedFile) {
@@ -262,7 +264,7 @@ describe('storage', function() {
     before(function(done) {
       file = bucket.file('LogoToSign.jpg');
       fs.createReadStream(files.logo.path)
-        .pipe(file)
+        .pipe(file.createWriteStream())
         .on('error', done)
         .on('complete', done.bind(null, null));
     });
