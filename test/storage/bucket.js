@@ -19,20 +19,22 @@
 'use strict';
 
 var assert = require('assert');
-var nodeutil = require('util');
-var stream = require('stream');
+var duplexify = require('duplexify');
 var util = require('../../lib/common/util.js');
 
 function FakeFile(bucket, name, metadata) {
-  stream.Writable.call(this);
   this.bucket = bucket;
   this.name = name;
   this.metadata = metadata;
-  this._write = function() {
-    this.emit('complete');
-  }.bind(this);
+  this.createWriteStream = function(metadata) {
+    this.metadata = metadata;
+    var dup = duplexify();
+    dup._write = function() {
+      dup.emit('complete');
+    };
+    return dup;
+  };
 }
-nodeutil.inherits(FakeFile, stream.Writable);
 
 var Bucket = require('sandboxed-module')
   .require('../../lib/storage/bucket.js', {
@@ -111,10 +113,6 @@ describe('Bucket', function() {
 
     it('should pass filename to File object', function() {
       assert.equal(file.name, FILE_NAME);
-    });
-
-    it('should pass provided metadata to File object', function() {
-      assert.deepEqual(file.metadata, metadata);
     });
   });
 
@@ -339,8 +337,12 @@ describe('Bucket', function() {
     it('should execute callback on error', function(done) {
       var error = new Error('Error.');
       var fakeFile = new FakeFile(bucket, 'file-name');
-      fakeFile._write = function() {
-        this.emit('error', error);
+      fakeFile.createWriteStream = function() {
+        var dup = duplexify();
+        setImmediate(function() {
+          dup.emit('error', error);
+        });
+        return dup;
       };
       bucket.upload(filepath, fakeFile, function(err) {
         assert.equal(err, error);

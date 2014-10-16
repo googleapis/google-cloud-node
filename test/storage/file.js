@@ -20,14 +20,35 @@
 
 var assert = require('assert');
 var Bucket = require('../../lib/storage/bucket.js');
-var events = require('events');
+var credentials = require('../testdata/privateKeyFile.json');
+var duplexify = require('duplexify');
 var extend = require('extend');
-var File = require('../../lib/storage/file.js');
 var nodeutil = require('util');
 var url = require('url');
 var util = require('../../lib/common/util');
 
-var credentials = require('../testdata/privateKeyFile.json');
+var readableStream;
+var writableStream;
+function FakeDuplexify() {
+  if (!(this instanceof FakeDuplexify)) {
+    return new FakeDuplexify();
+  }
+  duplexify.call(this);
+  this.setReadable = function(setReadableStream) {
+    readableStream = setReadableStream;
+  };
+  this.setWritable = function(setWritableStream) {
+    writableStream = setWritableStream;
+  };
+}
+nodeutil.inherits(FakeDuplexify, duplexify);
+
+var File = require('sandboxed-module')
+  .require('../../lib/storage/file.js', {
+    requires: {
+      'duplexify': FakeDuplexify
+    }
+  });
 
 describe('File', function() {
   var FILE_NAME = 'file-name.png';
@@ -40,11 +61,6 @@ describe('File', function() {
     }
   });
   var file;
-
-  function FakeStream() {
-    events.EventEmitter.call(this);
-  }
-  nodeutil.inherits(FakeStream, events.EventEmitter);
 
   beforeEach(function() {
     file = new File(bucket, FILE_NAME);
@@ -66,21 +82,6 @@ describe('File', function() {
       var metadata = { a: 'b', c: 'd' };
       var newFile = new File(bucket, FILE_NAME, metadata);
       assert.deepEqual(newFile.metadata, metadata);
-    });
-
-    it('should bind events', function(done) {
-      var bindEvents_ = File.prototype.bindEvents_;
-      File.prototype.bindEvents_ = function() {
-        File.prototype.bindEvents_ = bindEvents_;
-        done();
-      };
-      new File(bucket, FILE_NAME);
-    });
-
-    it('should cache events', function() {
-      assert.equal(typeof file.events_, 'object');
-      assert.equal(typeof file.events_._read, 'function');
-      assert.equal(typeof file.events_._write, 'function');
     });
   });
 
@@ -176,6 +177,137 @@ describe('File', function() {
     });
   });
 
+  describe('createReadStream', function() {
+    var metadata = { mediaLink: 'filelink' };
+
+    it('should confirm file exists before reading', function(done) {
+      file.getMetadata = function() {
+        done();
+      };
+      file.createReadStream();
+    });
+
+    it('should emit error if stat returns error', function(done) {
+      var error = new Error('Error.');
+      file.getMetadata = function(callback) {
+        setImmediate(function() {
+          callback(error);
+        });
+      };
+      file.createReadStream()
+        .once('error', function(err) {
+          assert.equal(err, error);
+          done();
+        });
+    });
+
+    it('should create an authorized request', function(done) {
+      file.bucket.connection_.createAuthorizedReq = function(opts) {
+        assert.equal(opts.uri, metadata.mediaLink);
+        done();
+      };
+      file.getMetadata = function(callback) {
+        callback(null, metadata);
+      };
+      file.createReadStream();
+    });
+
+    it('should emit an error from authorizing', function(done) {
+      var error = new Error('Error.');
+      file.bucket.connection_.createAuthorizedReq = function(opts, callback) {
+        callback(error);
+      };
+      file.getMetadata = function(callback) {
+        setImmediate(function() {
+          callback(null, metadata);
+        });
+      };
+      file.createReadStream()
+        .once('error', function(err) {
+          assert.equal(err, error);
+          done();
+        });
+    });
+
+    it('should get readable stream from request', function(done) {
+      var fakeRequest = { a: 'b', c: 'd' };
+      file.getMetadata = function(callback) {
+        callback(null, metadata);
+      };
+      file.bucket.connection_.requester = function(req) {
+        assert.deepEqual(req, fakeRequest);
+        done();
+      };
+      file.bucket.connection_.createAuthorizedReq = function(opts, callback) {
+        callback(null, fakeRequest);
+      };
+      file.createReadStream();
+    });
+
+    it('should set readable stream', function() {
+      var dup = duplexify();
+      file.getMetadata = function(callback) {
+        callback(null, metadata);
+      };
+      file.bucket.connection_.requester = function() {
+        return dup;
+      };
+      file.bucket.connection_.createAuthorizedReq = function(opts, callback) {
+        callback();
+      };
+      file.createReadStream();
+      assert.deepEqual(readableStream, dup);
+      readableStream = null;
+    });
+  });
+
+  describe('createWriteStream', function() {
+    it('should get a writable stream', function(done) {
+      file.getWritableStream_ = function() {
+        done();
+      };
+      file.createWriteStream();
+    });
+
+    it('should emit an error if one is returned', function(done) {
+      var error = new Error('Error.');
+      file.getWritableStream_ = function(metadata, callback) {
+        setImmediate(function() {
+          callback(error);
+        });
+      };
+      file.createWriteStream()
+        .once('error', function(err) {
+          assert.equal(err, error);
+          done();
+        });
+    });
+
+    it('should set writable stream from the response', function() {
+      var dup = duplexify();
+      file.getWritableStream_ = function(metadata, callback) {
+        callback(null, dup);
+      };
+      file.createWriteStream();
+      assert.deepEqual(writableStream, dup);
+      writableStream = null;
+    });
+
+    it('should emit complete event when writable is complete', function(done) {
+      var dup = duplexify();
+      var fakeResponse = { body: { fake: 'data' } };
+      file.getWritableStream_ = function(metadata, callback) {
+        callback(null, dup);
+      };
+      file.createWriteStream()
+        .on('complete', function(data) {
+          assert.deepEqual(data, fakeResponse.body);
+          done();
+        });
+      dup.emit('complete', fakeResponse);
+    });
+  });
+
   describe('delete', function() {
     it('should delete the file', function(done) {
       file.makeReq_ = function(method, path, query, body) {
@@ -193,16 +325,6 @@ describe('File', function() {
         callback();
       };
       file.delete(done);
-    });
-
-    it('should remove all listeners', function(done) {
-      file.makeReq_ = function(method, path, query, body, callback) {
-        callback();
-      };
-      file.removeAllListeners = function() {
-        done();
-      };
-      file.delete();
     });
   });
 
@@ -319,73 +441,6 @@ describe('File', function() {
     });
   });
 
-  describe('bindEvents_', function() {
-    it('should overwrite, then re-assign cached _write', function() {
-      var setWritableStream = false;
-      file.setWritableStream_ = function() {
-        setWritableStream = true;
-      };
-      var _write = file._write.toString();
-      file._write();
-      assert(setWritableStream);
-      assert.notEqual(_write, file._write.toString());
-    });
-
-    it('should overwrite, then re-assign cached _read', function() {
-      var setReadableStream = false;
-      file.setReadableStream_ = function() {
-        setReadableStream = true;
-      };
-      var _read = file._read.toString();
-      file._read();
-      assert(setReadableStream);
-      assert.notEqual(_read, file._read.toString());
-    });
-
-    it('set writable stream on first write', function(done) {
-      file.setWritableStream_ = function() {
-        done();
-      };
-      file.write(' ');
-    });
-
-    it('set readable stream on first read', function(done) {
-      file.setReadableStream_ = function() {
-        done();
-      };
-      file.read();
-    });
-
-    describe('destroy, remove listeners, & re-bind events', function() {
-      function overwriteExpectedMethodCalls(callback) {
-        var called = 0;
-        function continueIfDone() {
-          if (++called === 3) {
-            callback();
-          }
-        }
-        file.bindEvents_ = continueIfDone;
-        file.destroy = continueIfDone;
-        file.removeAllListeners = continueIfDone;
-      }
-
-      it('should clean up on end', function(done) {
-        overwriteExpectedMethodCalls(done);
-        file.emit('end');
-      });
-
-      it('should clean up on error', function(done) {
-        overwriteExpectedMethodCalls(done);
-        file.emit('error');
-      });
-
-      it('should clean up on complete', function(done) {
-        overwriteExpectedMethodCalls(done);
-        file.emit('complete');
-      });
-    });
-  });
-
   describe('getWritableStream_', function() {
     var query;
     var written;
@@ -446,25 +501,23 @@ describe('File', function() {
       assert(find('Content-Type: text/plain'));
     });
 
-    it('should allow overwriting contentType', function() {
-      file.metadata = {
+    it('should allow overwriting metadata', function() {
+      file.getWritableStream_({
         contentType: 'something/custom'
-      };
-      file.getWritableStream_(util.noop);
+      }, util.noop);
       assert(find('Content-Type: something/custom'));
     });
 
     it('should send metadata from the instance', function() {
-      file.metadata = {
+      var metadata = {
         hi: 'there',
         good: 'sir',
         metadata: {
           properties: 'have values, often times'
         }
       };
-      file.getWritableStream_(util.noop);
-      var expectedMetadata = extend(
-          {}, { contentType: 'text/plain' }, file.metadata);
+      file.getWritableStream_(metadata, util.noop);
+      var expectedMetadata = extend({ contentType: 'text/plain' }, metadata);
       assert(find(JSON.stringify(expectedMetadata)));
     });
 
@@ -473,134 +526,6 @@ describe('File', function() {
         assert.equal(stream, fakeStream);
         done();
       });
-    });
-  });
-
-  describe('setReadableStream_', function() {
-    var metadata = { mediaLink: 'filelink' };
-
-    it('should confirm file exists before reading', function(done) {
-      file.getMetadata = function() {
-        done();
-      };
-      file.setReadableStream_();
-    });
-
-    it('should emit error if stat returns error', function(done) {
-      var error = new Error('Error.');
-      file.getMetadata = function(callback) {
-        callback(error);
-      };
-      file.once('error', function(err) {
-        assert.equal(err, error);
-        done();
-      });
-      file.setReadableStream_();
-    });
-
-    it('should create an authorized request', function(done) {
-      file.bucket.connection_.createAuthorizedReq = function(opts) {
-        assert.equal(opts.uri, metadata.mediaLink);
-        done();
-      };
-      file.getMetadata = function(callback) {
-        callback(null, metadata);
-      };
-      file.setReadableStream_();
-    });
-
-    it('should emit an error from authorizing', function(done) {
-      var error = new Error('Error.');
-      file.bucket.connection_.createAuthorizedReq = function(opts, callback) {
-        callback(error);
-      };
-      file.getMetadata = function(callback) {
-        callback(null, metadata);
-      };
-      file.once('error', function(err) {
-        assert.equal(err, error);
-        done();
-      });
-      file.setReadableStream_();
-    });
-
-    it('should get readable stream from request', function(done) {
-      var fakeRequest = { fake: 'request' };
-      file.getMetadata = function(callback) {
-        callback(null, metadata);
-      };
-      file.bucket.connection_.requester = function(req) {
-        assert.deepEqual(req, fakeRequest);
-        done();
-      };
-      file.bucket.connection_.createAuthorizedReq = function(opts, callback) {
-        callback(null, fakeRequest);
-      };
-      file.setReadable = function() {};
-      file.setReadableStream_();
-    });
-
-    it('should set readable stream', function(done) {
-      file.getMetadata = function(callback) {
-        callback(null, metadata);
-      };
-      file.bucket.connection_.requester = function() {
-        return new FakeStream();
-      };
-      file.bucket.connection_.createAuthorizedReq = function(opts, callback) {
-        callback();
-      };
-      file.setReadable = function(stream) {
-        assert(stream instanceof FakeStream);
-        done();
-      };
-      file.setReadableStream_();
-    });
-  });
-
-  describe('setWritableStream_', function() {
-    it('should get a writable stream', function(done) {
-      file.getWritableStream_ = function() {
-        done();
-      };
-      file.setWritableStream_();
-    });
-
-    it('should emit an error if one is returned', function(done) {
-      var error = new Error('Error.');
-      file.getWritableStream_ = function(callback) {
-        callback(error);
-      };
-      file.once('error', function(err) {
-        assert.equal(err, error);
-        done();
-      });
-      file.setWritableStream_();
-    });
-
-    it('should set writable stream from the response', function(done) {
-      file.getWritableStream_ = function(callback) {
-        callback(null, new FakeStream());
-      };
-      file.setWritable = function(stream) {
-        assert(stream instanceof FakeStream);
-        done();
-      };
-      file.setWritableStream_();
-    });
-
-    it('should emit complete event when writable is complete', function(done) {
-      var fakeStream = new FakeStream();
-      var fakeResponse = { body: { fake: 'data' } };
-      file.getWritableStream_ = function(callback) {
-        callback(null, fakeStream);
-      };
-      file.setWritableStream_();
-      file.on('complete', function(data) {
-        assert.deepEqual(data, fakeResponse.body);
-        done();
-      });
-      fakeStream.emit('complete', fakeResponse);
     });
   });
 });
