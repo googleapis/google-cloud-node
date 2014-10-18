@@ -23,7 +23,7 @@ var assert = require('assert');
 var gcloud = require('../../');
 
 
-describe.only('BigQuery', function() {
+describe('BigQuery', function() {
   it('should exist', function() {
     assert.equal(typeof gcloud.bigquery, 'function');
   });
