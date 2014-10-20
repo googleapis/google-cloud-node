@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/*global describe, it, before, after, beforeEach */
+/*global describe, it, before, after */
 
 'use strict';
 
@@ -26,9 +26,7 @@ var request = require('request');
 var tmp = require('tmp');
 
 var env = require('./env.js');
-var storage = require('../lib/storage');
-
-var bucket = storage.bucket(env);
+var storage = require('../lib/storage')(env);
 
 var files = {
   logo: {
@@ -42,14 +40,91 @@ var files = {
 function setHash(obj, file, done) {
   var hash = crypto.createHash('md5');
   fs.createReadStream(obj[file].path)
-      .on('data', hash.update.bind(hash))
-      .on('end', function() {
-        obj[file].hash = hash.digest('base64');
-        done();
+    .on('data', hash.update.bind(hash))
+    .on('end', function() {
+      obj[file].hash = hash.digest('base64');
+      done();
+    });
+}
+
+function deleteBucketsAndFiles(callback) {
+  storage.getBuckets(function(err, buckets) {
+    if (err) {
+      callback(err);
+      return;
+    }
+    async.map(buckets, function(bucket, next) {
+      deleteFiles(bucket, function() {
+        bucket.delete(next);
       });
+    }, callback);
+  });
+}
+
+function deleteFiles(bucket, callback) {
+  bucket.getFiles(function(err, files) {
+    if (err) {
+      callback(err);
+      return;
+    }
+    async.map(files, function(file, next) {
+      file.delete(next);
+    }, callback);
+  });
 }
 
 describe('storage', function() {
+  var bucket;
+
+  before(function(done) {
+    deleteBucketsAndFiles(function() {
+      storage.createBucket('new' + Date.now(), function(err, newBucket) {
+        if (err) {
+          done(err);
+          return;
+        }
+        bucket = newBucket;
+        done();
+      });
+    });
+  });
+
+  after(deleteBucketsAndFiles);
+
+  describe('creating a bucket', function() {
+    it('should create a bucket', function(done) {
+      storage.createBucket('a-new-bucket', function(err, bucket) {
+        assert.ifError(err);
+        bucket.delete(done);
+      });
+    });
+  });
+
+  describe('getting buckets', function() {
+    it('should get buckets', function(done) {
+      var bucketsToCreate = [
+        'new' + Date.now(),
+        'newer' + Date.now(),
+        'newest' + Date.now()
+      ];
+      async.map(
+        bucketsToCreate,
+        storage.createBucket.bind(storage),
+        function(err) {
+          assert.ifError(err);
+          storage.getBuckets(function(err, buckets) {
+            assert.equal(
+              buckets.filter(function(bucket) {
+                return bucketsToCreate.indexOf(bucket.name) > -1;
+              }).length,
+              bucketsToCreate.length
+            );
+            done();
+          });
+        });
+    });
+  });
+
   describe('write, read, and remove files', function() {
     before(function(done) {
       var doneCalled = 0;
@@ -64,75 +139,66 @@ describe('storage', function() {
 
     describe('stream write', function() {
       it('should stream write, then remove large file (5mb)', function(done) {
-        var filename = 'LargeFile';
+        var file = bucket.file('LargeFile');
         fs.createReadStream(files.big.path)
-            .pipe(bucket.createWriteStream(filename))
-            .on('error', done)
-            .on('complete', function(fileObject) {
-              assert.equal(fileObject.md5Hash, files.big.hash);
-              bucket.remove(filename, done);
-            });
+          .pipe(file.createWriteStream())
+          .on('error', done)
+          .on('complete', function(fileObject) {
+            assert.equal(fileObject.md5Hash, files.big.hash);
+            file.delete(done);
+          });
       });
 
-      it('should write and read metadata', function(done) {
-        var filename = 'CloudLogo';
+      it('should write metadata', function(done) {
         var myMetadata = { contentType: 'image/png' };
-        fs.createReadStream(files.logo.path)
-            .pipe(bucket.createWriteStream(filename, myMetadata))
-            .on('error', done)
-            .on('complete', function() {
-              bucket.stat(filename, function(err, metadata) {
-                assert.ifError(err);
-                assert.equal(metadata.contentType, myMetadata.contentType);
-                bucket.remove(filename, function(err) {
-                  assert.ifError(err);
-                  done();
-                });
-              });
-            });
+        bucket.upload(files.logo.path, myMetadata, function(err, file) {
+          assert.ifError(err);
+          file.getMetadata(function(err, metadata) {
+            assert.ifError(err);
+            assert.equal(metadata.contentType, myMetadata.contentType);
+            file.delete(done);
+          });
+        });
       });
 
       it('should write/read/remove from a buffer', function(done) {
-        var filename = 'MyBuffer';
-        var fileContent =  'Hello World';
         tmp.setGracefulCleanup();
-        tmp.file(function _tempFileCreated(err, path) {
+        tmp.file(function _tempFileCreated(err, tmpFilePath) {
+          var file = bucket.file('MyBuffer');
+          var fileContent = 'Hello World';
           assert.ifError(err);
-          bucket.write(filename, fileContent, function(err, fileObject) {
-            assert.ifError(err);
-            assert(fileObject);
-            bucket.createReadStream(filename)
-                .pipe(fs.createWriteStream(path))
-                .on('error', done)
-                .on('finish', function() {
-                  bucket.remove(filename, function(err) {
-                    assert.ifError(err);
-                    fs.readFile(path, function(err, data) {
-                      assert.equal(data, fileContent);
-                      done();
-                    });
+          var writable = file.createWriteStream();
+          writable.write(fileContent);
+          writable.end();
+          writable.on('complete', function() {
+            file.createReadStream()
+              .pipe(fs.createWriteStream(tmpFilePath))
+              .on('error', done)
+              .on('finish', function() {
+                file.delete(function(err) {
+                  assert.ifError(err);
+                  fs.readFile(tmpFilePath, function(err, data) {
+                    assert.equal(data, fileContent);
+                    done();
                   });
                 });
+              });
           });
         });
       });
     });
 
     it('should copy an existing file', function(done) {
-      var filename = 'CloudLogo';
-      var copyName = 'CloudLogoCopy';
-      fs.createReadStream(files.logo.path)
-          .pipe(bucket.createWriteStream(filename))
-          .on('error', done)
-          .on('complete', function() {
-            bucket.copy(filename, { name: copyName }, function(err) {
-              assert.ifError(err);
-              async.parallel([
-                bucket.remove.bind(bucket, filename),
-                bucket.remove.bind(bucket, copyName)
-              ], done);
-            });
-          });
+      bucket.upload(files.logo.path, 'CloudLogo', function(err, file) {
+        assert.ifError(err);
+        file.copy('CloudLogoCopy', function(err, copiedFile) {
+          assert.ifError(err);
+          async.parallel([
+            file.delete.bind(file),
+            copiedFile.delete.bind(copiedFile)
+          ], done);
+        });
+      });
     });
   });
 
@@ -140,36 +206,21 @@ describe('storage', function() {
     var filenames = ['CloudLogo1', 'CloudLogo2', 'CloudLogo3'];
 
     before(function(done) {
-      fs.createReadStream(files.logo.path)
-          .pipe(bucket.createWriteStream(filenames[0]))
+      deleteFiles(bucket, function(err) {
+        if (err) {
+          done(err);
+          return;
+        }
+        var file = bucket.file(filenames[0]);
+        fs.createReadStream(files.logo.path)
+          .pipe(file.createWriteStream())
           .on('error', done)
           .on('complete', function() {
-            bucket.copy(filenames[0], { name: filenames[1] }, function(err) {
+            file.copy(filenames[1], function(err, copiedFile) {
               assert.ifError(err);
-              bucket.copy(filenames[0], { name: filenames[2] }, done);
+              copiedFile.copy(filenames[2], done);
             });
           });
-    });
-
-    it('should list files', function(done) {
-      bucket.list(function(err, files, nextQuery) {
-        assert.ifError(err);
-        assert.equal(files.length, 3);
-        assert.equal(nextQuery, null);
-        done();
-      });
-    });
-
-    it('should paginate the list', function(done) {
-      bucket.list({ maxResults: 2 }, function(err, files, nextQuery) {
-        assert.ifError(err);
-        assert.equal(files.length, 2);
-        assert(nextQuery);
-        bucket.list(nextQuery, function(err, files) {
-          assert.ifError(err);
-          assert(files);
-          done();
-        });
       });
     });
 
@@ -177,52 +228,73 @@ describe('storage', function() {
       async.parallel(
         filenames.map(function(filename) {
           return function(callback) {
-            bucket.remove(filename, callback);
+            bucket.file(filename).delete(callback);
           };
         }), done);
+    });
+
+    it('should get files', function(done) {
+      bucket.getFiles(function(err, files, nextQuery) {
+        assert.ifError(err);
+        assert.equal(files.length, filenames.length);
+        assert.equal(nextQuery, null);
+        done();
+      });
+    });
+
+    it('should paginate the list', function(done) {
+      var query = { maxResults: filenames.length - 1 };
+      bucket.getFiles(query, function(err, files, nextQuery) {
+        assert.ifError(err);
+        assert.equal(files.length, filenames.length - 1);
+        assert(nextQuery);
+        bucket.getFiles(nextQuery, function(err, files) {
+          assert.ifError(err);
+          assert.equal(files.length, 1);
+          done();
+        });
+      });
     });
   });
 
   describe('sign urls', function() {
-    var filename = 'LogoToSign.jpg';
     var localFile = fs.readFileSync(files.logo.path);
+    var file;
 
-    beforeEach(function(done) {
+    before(function(done) {
+      file = bucket.file('LogoToSign.jpg');
       fs.createReadStream(files.logo.path)
-          .pipe(bucket.createWriteStream(filename))
-          .on('error', done)
-          .on('complete', done.bind(null, null));
+        .pipe(file.createWriteStream())
+        .on('error', done)
+        .on('complete', done.bind(null, null));
     });
 
     it('should create a signed read url', function(done) {
-      bucket.getSignedUrl({
-          action: 'read',
-          expires: Math.round(Date.now() / 1000) + 5,
-          resource: filename
-        }, function(err, signedReadUrl) {
-          assert.ifError(err);
-          request.get(signedReadUrl, function(err, resp, body) {
-            assert.equal(body, localFile);
-            bucket.remove(filename, done);
-          });
+      file.getSignedUrl({
+        action: 'read',
+        expires: Math.round(Date.now() / 1000) + 5
+      }, function(err, signedReadUrl) {
+        assert.ifError(err);
+        request.get(signedReadUrl, function(err, resp, body) {
+          assert.equal(body, localFile);
+          file.delete(done);
         });
+      });
     });
 
     it('should create a signed delete url', function(done) {
-      bucket.getSignedUrl({
-          action: 'delete',
-          expires: Math.round(Date.now() / 1000) + 5,
-          resource: filename
-        }, function(err, signedDeleteUrl) {
-          assert.ifError(err);
-          request.del(signedDeleteUrl, function(err, resp) {
-            assert.equal(resp.statusCode, 204);
-            bucket.stat(filename, function(err) {
-              assert.equal(err.code, 404);
-              done();
-            });
+      file.getSignedUrl({
+        action: 'delete',
+        expires: Math.round(Date.now() / 1000) + 283473274
+      }, function(err, signedDeleteUrl) {
+        assert.ifError(err);
+        request.del(signedDeleteUrl, function() {
+          file.getMetadata(function(err) {
+            assert.equal(err.code, 404);
+            done();
           });
         });
+      });
     });
   });
 });

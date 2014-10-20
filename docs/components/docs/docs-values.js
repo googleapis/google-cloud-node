@@ -74,9 +74,22 @@ angular.module('gcloud.docs')
       _url: '{baseUrl}/storage'
     },
 
+    storageWithFiles: {
+      title: 'Storage',
+      _url: '{baseUrl}/storage',
+      pages: [
+        {
+          title: 'Bucket',
+          url: '/bucket'
+        },
+        {
+          title: 'File',
+          url: '/file'
+        }
+      ]
+    },
+
     VERSIONS: {
-      // Give a version with/without a comparator, anything semver:
-      //   https://github.com/npm/node-semver#versions
       //
       // Multiple keys may be used to match a version.
       //
@@ -89,8 +102,18 @@ angular.module('gcloud.docs')
       //
       // To keep the documentation for the main module, `gcloud`, on top of the
       // link list, **make sure the title is `gcloud`**
-      '*': ['gcloud', 'storage'],
+      '*': ['gcloud'],
+
+      // deprecate old datastore api.
       '<0.8.0': ['datastore'],
-      '>=0.8.0': ['datastoreWithTransaction', 'pubsub']
+
+      // introduce datastore refactor + pubsub.
+      '>=0.8.0': ['datastoreWithTransaction', 'pubsub'],
+
+      // deprecate old storage api.
+      '<0.9.0': ['storage'],
+
+      // introduce new storage api.
+      '>=0.9.0': ['storageWithFiles']
     }
   });
