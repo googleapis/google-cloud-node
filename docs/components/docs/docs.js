@@ -12,32 +12,37 @@ angular
             .replace(/`([^`]*)`/g, '<code>$1</code>');
       }
       function formatComments(str) {
-        var matched = 0;
         var paragraphComments = /\/\/-+((\n|\r|.)*?(\/\/-))/g;
-
         if (!paragraphComments.test(str)) {
-          return '<div hljs language="javascript">\n' + str + '</div>';
+          return wrapCode(str);
         }
-
-        str = str.replace(paragraphComments, function(match, block) {
-          return '' +
-              (++matched > 1 ? '</div>' : '') +
-              '<p>' +
-              formatHtml(detectLinks(detectModules(
-                block.trim()
-                  .replace(/\/\/-*\s*/g, '\n')
-                  .replace(/\n\n/g, '\n')
-                  .replace(/(\w)\n(\w)/g, '$1 $2')
-                  .replace(/\n\n/g, '</p><p>')
-              ))) +
-              '</p>' +
-              '<div hljs language="javascript">';
+        var matches = [];
+        var lastIndex = 0;
+        str.replace(paragraphComments, function(match, block, inner, close, offset) {
+          if (lastIndex !== offset) {
+            // Push the code missed between text blocks.
+            matches.push(wrapCode(str.substr(lastIndex, offset - lastIndex)));
+          }
+          lastIndex = offset + match.length;
+          matches.push('<p>');
+          matches.push(formatHtml(detectLinks(detectModules(
+            block.trim()
+              .replace(/\/\/-*\s*/g, '\n')
+              .replace(/\n\n/g, '\n')
+              .replace(/(\w)\n(\w)/g, '$1 $2')
+              .replace(/\n\n/g, '</p><p>')
+          ))));
+          matches.push('</p>');
         });
-
-        str = str.replace(/(<div[^>]*>)\n+/g, '$1\n');
-        str = str.replace(/\n<\/div>/g, '</div>');
-
-        return str;
+        if (lastIndex < str.length) {
+          matches.push(wrapCode(str.substr(lastIndex)));
+        }
+        return matches.join('')
+          .replace(/(<div[^>]*>)\n+/g, '$1\n')
+          .replace(/\n<\/div>/g, '</div>');
+        function wrapCode(code) {
+          return '<div hljs language="javascript">\n' + code + '</div>';
+        }
       }
       function detectLinks(str) {
         var regex = {
@@ -85,7 +90,8 @@ angular
         });
       }
       function reduceModules(acc, type, index, types) {
-        var CUSTOM_TYPES = ['query', 'dataset', 'transaction'];
+        var CUSTOM_TYPES = ['query', 'dataset', 'transaction', 'bucket', 'file'];
+        type = type.replace('=', '');
         if (CUSTOM_TYPES.indexOf(type.toLowerCase()) > -1) {
           if (types[index - 1]) {
             type = types[index - 1] + '/' + type;
@@ -98,7 +104,7 @@ angular
       return function(data) {
         return data.data
           .filter(function(obj) {
-            return obj.isPrivate === false && obj.ignore === false;
+            return obj.ctx && obj.isPrivate === false && obj.ignore === false;
           })
           .map(function(obj) {
             return {
@@ -120,7 +126,7 @@ angular
                       formatHtml(tag.description.replace(/^- /, '')));
                   tag.types = $sce.trustAsHtml(tag.types.reduceRight(
                       reduceModules, []).join(', '));
-                  tag.optional = tag.types.toString().substr(-1) === '=';
+                  tag.optional = tag.types.toString().indexOf('=') > -1;
                   return tag;
                 }),
               returns: obj.tags.filter(function(tag) {
