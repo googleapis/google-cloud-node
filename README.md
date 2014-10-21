@@ -78,8 +78,6 @@ dataset.get(dataset.key(['Product', 'Computer']), function(err, entity) {
 
 [Google Cloud Storage][cloud-storage] ([docs][cloud-storage-docs]) allows you to store data on Google infrastructure with very high reliability, performance and availability, and can be used to distribute large data objects to users via direct download.
 
-If you don't have a bucket already, follow the steps of the [Creating a Bucket guide][cloud-storage-create-bucket] to learn how to create your own.
-
 See the [gcloud-node Storage API documentation][gcloud-storage-docs] to learn how to connect to Cloud Storage using this library.
 
 ```js
