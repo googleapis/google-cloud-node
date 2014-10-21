@@ -105,10 +105,10 @@ storage.createBucket('my-new-bucket', function(err, bucket) {});
 var bucket = storage.bucket('my-bucket');
 
 // Upload a local file to a new file to be created in your bucket.
-fs.createReadStream('/local/file.txt').pipe(bucket.file('file.txt'));
+fs.createReadStream('/local/file.txt').pipe(bucket.file('file.txt').createWriteStream());
 
 // Download a remote file to a new local file.
-bucket.file('photo.jpg').pipe(fs.createWriteStream('/local/photo.jpg'));
+bucket.file('photo.jpg').createReadStream().pipe(fs.createWriteStream('/local/photo.jpg'));
 ```
 
 ## Google Cloud Pub/Sub (Alpha)
