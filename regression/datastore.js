@@ -157,15 +157,22 @@ describe('datastore', function() {
 
   describe('querying the datastore', function() {
 
+    var ancestor = ds.key(['Book', 'GoT']);
+
     var keys = [
-      ds.key(['Character', 'Rickard']),
-      ds.key(['Character', 'Rickard', 'Character', 'Eddard']),
-      ds.key(['Character', 'Catelyn']),
-      ds.key(['Character', 'Eddard', 'Character', 'Arya']),
-      ds.key(['Character', 'Eddard', 'Character', 'Sansa']),
-      ds.key(['Character', 'Eddard', 'Character', 'Robb']),
-      ds.key(['Character', 'Eddard', 'Character', 'Bran']),
-      ds.key(['Character', 'Eddard', 'Character', 'Jon Snow'])
+      ds.key(['Book', 'GoT', 'Character', 'Rickard']),
+      ds.key(['Book', 'GoT', 'Character', 'Rickard', 'Character', 'Eddard']),
+      ds.key(['Book', 'GoT', 'Character', 'Catelyn']),
+      ds.key(['Book', 'GoT', 'Character', 'Rickard', 'Character', 'Eddard',
+          'Character', 'Arya']),
+      ds.key(['Book', 'GoT', 'Character', 'Rickard', 'Character', 'Eddard',
+          'Character', 'Sansa']),
+      ds.key(['Book', 'GoT', 'Character', 'Rickard', 'Character', 'Eddard',
+          'Character', 'Robb']),
+      ds.key(['Book', 'GoT', 'Character', 'Rickard', 'Character', 'Eddard',
+          'Character', 'Bran']),
+      ds.key(['Book', 'GoT', 'Character', 'Rickard', 'Character', 'Eddard',
+          'Character', 'Jon Snow'])
     ];
 
     var characters = [{
@@ -223,7 +230,8 @@ describe('datastore', function() {
     });
 
     it('should limit queries', function(done) {
-      var q = ds.createQuery('Character').limit(5);
+      var q = ds.createQuery('Character').hasAncestor(ancestor)
+          .limit(5);
       ds.runQuery(q, function(err, firstEntities, secondQuery) {
         assert.ifError(err);
         assert.equal(firstEntities.length, 5);
@@ -244,7 +252,8 @@ describe('datastore', function() {
     });
 
     it('should filter queries with simple indexes', function(done) {
-      var q = ds.createQuery('Character').filter('appearances >=', 20);
+      var q = ds.createQuery('Character').hasAncestor(ancestor)
+          .filter('appearances >=', 20);
       ds.runQuery(q, function(err, entities) {
         assert.ifError(err);
         assert.equal(entities.length, 6);
@@ -253,7 +262,7 @@ describe('datastore', function() {
     });
 
     it('should filter queries with defined indexes', function(done) {
-      var q = ds.createQuery('Character')
+      var q = ds.createQuery('Character').hasAncestor(ancestor)
           .filter('family =', 'Stark')
           .filter('appearances >=', 20);
       ds.runQuery(q, function(err, entities) {
@@ -265,17 +274,17 @@ describe('datastore', function() {
 
     it('should filter by ancestor', function(done) {
       var q = ds.createQuery('Character')
-          .hasAncestor(ds.key(['Character', 'Eddard']));
+          .hasAncestor(ancestor);
       ds.runQuery(q, function(err, entities) {
         assert.ifError(err);
-        assert.equal(entities.length, 5);
+        assert.equal(entities.length, 8);
         done();
       });
     });
 
     it('should filter by key', function(done) {
-      var q = ds.createQuery('Character')
-          .filter('__key__ =', ds.key(['Character', 'Rickard']));
+      var q = ds.createQuery('Character').hasAncestor(ancestor)
+          .filter('__key__ =', ds.key(['Book', 'GoT', 'Character', 'Rickard']));
       ds.runQuery(q, function(err, entities) {
         assert.ifError(err);
         assert.equal(entities.length, 1);
@@ -284,7 +293,8 @@ describe('datastore', function() {
     });
 
     it('should order queries', function(done) {
-      var q = ds.createQuery('Character').order('appearances');
+      var q = ds.createQuery('Character').hasAncestor(ancestor)
+          .order('appearances');
       ds.runQuery(q, function(err, entities) {
         assert.ifError(err);
         assert.equal(entities[0].data.name, characters[0].name);
@@ -294,7 +304,8 @@ describe('datastore', function() {
     });
 
     it('should select projections', function(done) {
-      var q = ds.createQuery('Character').select(['name', 'family']);
+      var q = ds.createQuery('Character').hasAncestor(ancestor)
+          .select(['name', 'family']);
       ds.runQuery(q, function(err, entities) {
         assert.ifError(err);
         assert.deepEqual(entities[0].data, {
@@ -310,7 +321,7 @@ describe('datastore', function() {
     });
 
     it('should paginate with offset and limit', function(done) {
-      var q = ds.createQuery('Character')
+      var q = ds.createQuery('Character').hasAncestor(ancestor)
           .offset(2)
           .limit(3)
           .order('appearances');
@@ -329,7 +340,7 @@ describe('datastore', function() {
     });
 
     it('should resume from a start cursor', function(done) {
-      var q = ds.createQuery('Character')
+      var q = ds.createQuery('Character').hasAncestor(ancestor)
           .offset(2)
           .limit(2)
           .order('appearances');
@@ -337,7 +348,7 @@ describe('datastore', function() {
         assert.ifError(err);
         var startCursor = nextQuery.startVal;
         var cursorQuery =
-            ds.createQuery('Character')
+            ds.createQuery('Character').hasAncestor(ancestor)
               .order('appearances')
               .start(startCursor);
         ds.runQuery(cursorQuery, function(err, secondEntities) {
@@ -351,7 +362,8 @@ describe('datastore', function() {
     });
 
     it('should group queries', function(done) {
-      var q = ds.createQuery('Character').groupBy('alive');
+      var q = ds.createQuery('Character').hasAncestor(ancestor)
+          .groupBy('alive');
       ds.runQuery(q, function(err, entities) {
         assert.ifError(err);
         assert.equal(entities.length, 2);
