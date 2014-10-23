@@ -291,9 +291,9 @@
       }
     ],
     "description": {
-      "full": "<p>Google Cloud Storage allows you to store data on Google infrastructure.<br />Read<br />[Google Cloud Storage API docs]{@link <a href=\"https://developers.google.com/storage/}\">https://developers.google.com/storage/}</a><br />for more information.</p><p>You need to create a Google Cloud Storage bucket to use this client<br />library.<br />Follow the steps on<br />[Google Cloud Storage docs]{@link <a href=\"https://developers.google.com/storage/}\">https://developers.google.com/storage/}</a><br />to create a bucket.</p>",
+      "full": "<p>Google Cloud Storage allows you to store data on Google infrastructure.<br />Read<br />[Google Cloud Storage API docs]{@link <a href=\"https://developers.google.com/storage/}\">https://developers.google.com/storage/}</a><br />for more information.</p>",
       "summary": "<p>Google Cloud Storage allows you to store data on Google infrastructure.<br />Read<br />[Google Cloud Storage API docs]{@link <a href=\"https://developers.google.com/storage/}\">https://developers.google.com/storage/}</a><br />for more information.</p>",
-      "body": "<p>You need to create a Google Cloud Storage bucket to use this client<br />library.<br />Follow the steps on<br />[Google Cloud Storage docs]{@link <a href=\"https://developers.google.com/storage/}\">https://developers.google.com/storage/}</a><br />to create a bucket.</p>"
+      "body": ""
     },
     "isPrivate": false,
     "ignore": false,
