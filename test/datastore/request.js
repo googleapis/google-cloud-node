@@ -439,7 +439,8 @@ describe('Request', function() {
 
       describe('commit', function() {
         it('should attach transactional properties', function(done) {
-          request.id = 'transaction-id';
+          request.id = 'EeMXCSGvwcSWGkkABRmGMTWdbi_pa66VflNhQAGblQFMXf9HrmNGa' +
+            'GugEsO1M2_2x7wZvLencG51uwaDOTZCjTkkRh7bw_oyKUgTmtJ0iWJwath7';
           var expected = new pb.CommitRequest({
             mode: 'TRANSACTIONAL',
             transaction: request.id
@@ -473,7 +474,8 @@ describe('Request', function() {
 
       describe('lookup', function() {
         it('should attach transactional properties', function(done) {
-          request.id = 'transaction-id';
+          request.id = 'EeMXCSGvwcSWGkkABRmGMTWdbi_pa66VflNhQAGblQFMXf9HrmNGa' +
+            'GugEsO1M2_2x7wZvLencG51uwaDOTZCjTkkRh7bw_oyKUgTmtJ0iWJwath7';
           var expected = new pb.LookupRequest({
             read_options: {
               transaction: request.id
