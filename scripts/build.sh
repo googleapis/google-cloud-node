@@ -31,7 +31,10 @@ if [ "${TRAVIS_BRANCH}" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]
   cd docs
   cp -R `ls --ignore 'versions.txt'` ../ghpages/
   cd ../ghpages
+  # allow "git add" to fail if there aren't new files.
+  set +e
   git add .
+  set -e
   # commit to gh-pages branch to apply changes
   git config user.name "selfiebot"
   git commit -m "Update docs after merge to master"
