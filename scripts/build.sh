@@ -35,8 +35,15 @@ if [ "${TRAVIS_BRANCH}" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]
   set +e
   git add .
   set -e
-  # commit to gh-pages branch to apply changes
-  git config user.name "selfiebot"
-  git commit -m "Update docs after merge to master"
-  git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages
+  git status
+  # H/T: https://github.com/dhermes
+  if [[ -n "$(git status --porcelain)" ]]; then
+    # commit to gh-pages branch to apply changes
+    git config user.name "selfiebot"
+    git commit -m "Update docs after merge to master"
+    git status
+    git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages
+  else
+    echo "Nothing to commit. Exiting without pushing changes."
+  fi
 fi
