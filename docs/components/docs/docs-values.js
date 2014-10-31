@@ -20,6 +20,25 @@ angular.module('gcloud.docs')
       _url: '{baseUrl}'
     },
 
+    bigquery: {
+      title: 'BigQuery',
+      _url: '{baseUrl}/bigquery',
+      pages: [
+        {
+          title: 'Dataset',
+          url: '/dataset'
+        },
+        {
+          title: 'Job',
+          url: '/job'
+        },
+        {
+          title: 'Table',
+          url: '/table'
+        }
+      ]
+    },
+
     datastore: {
       title: 'Datastore',
       _url: '{baseUrl}/datastore',
@@ -114,6 +133,8 @@ angular.module('gcloud.docs')
       '<0.9.0': ['storage'],
 
       // introduce new storage api.
-      '>=0.9.0': ['storageWithFiles']
+      '>=0.9.0': ['storageWithFiles'],
+
+      '>=0.10.0': ['bigquery']
     }
   });

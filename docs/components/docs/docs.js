@@ -28,6 +28,7 @@ angular
           matches.push(formatHtml(detectLinks(detectModules(
             block.trim()
               .replace(/\/\/-*\s*/g, '\n')
+              .replace(/(https*:)\W*/g, '$1//')
               .replace(/\n\n/g, '\n')
               .replace(/(\w)\n(\w)/g, '$1 $2')
               .replace(/\n\n/g, '</p><p>')
@@ -46,12 +47,24 @@ angular
       }
       function detectLinks(str) {
         var regex = {
+          normal: /{@link ([^}]*)}/g,
+          normalWithTitle: /\[([^\]]*)]{@link ([^}]*)}/g,
           withCode: /{@linkcode <a href="([^\"]*)">([^<]*)<\/a>/g,
           withTitle: /\[([^\]]*)]{@link <a href="([^}]*)}">[^}]*}<\/a>/g,
           withoutTitle: /{@link <a href="([^}]*)}">[^}]*}<\/a>/g
         };
         var a = document.createElement('a');
         return str
+          .replace(regex.normalWithTitle, function(match, title, link) {
+            a.href = link;
+            a.innerText = title;
+            return a.outerHTML;
+          })
+          .replace(regex.normal, function(match, link) {
+            a.href = link;
+            a.innerText = link;
+            return a.outerHTML;
+          })
           .replace(regex.withTitle, function(match, title, link) {
             a.href = link;
             a.innerText = title;
@@ -90,7 +103,15 @@ angular
         });
       }
       function reduceModules(acc, type, index, types) {
-        var CUSTOM_TYPES = ['query', 'dataset', 'transaction', 'bucket', 'file'];
+        var CUSTOM_TYPES = [
+          'query',
+          'dataset',
+          'transaction',
+          'bucket',
+          'file',
+          'job',
+          'table'
+        ];
         type = type.replace('=', '');
         if (CUSTOM_TYPES.indexOf(type.toLowerCase()) > -1) {
           if (types[index - 1]) {
@@ -123,7 +144,7 @@ angular
                 })
                 .map(function(tag) {
                   tag.description = $sce.trustAsHtml(
-                      formatHtml(tag.description.replace(/^- /, '')));
+                      formatHtml(detectLinks(tag.description.replace(/^- /, ''))));
                   tag.types = $sce.trustAsHtml(tag.types.reduceRight(
                       reduceModules, []).join(', '));
                   tag.optional = tag.types.toString().indexOf('=') > -1;
@@ -216,7 +237,7 @@ angular
     }
 
     function compareMethods(a, b) {
-      return a.constructor ? -1: a.name > b.name;
+      return a.constructor ? -1: a.name > b.name ? 1 : -1;
     }
 
     function getLinks($route, getLinks) {

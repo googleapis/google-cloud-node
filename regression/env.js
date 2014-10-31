@@ -29,5 +29,5 @@ if (!process.env.GCLOUD_TESTS_PROJECT_ID &&
 module.exports = {
   projectId: process.env.GCLOUD_TESTS_PROJECT_ID,
   bucketName: process.env.GCLOUD_TESTS_BUCKET_NAME,
-  keyFilename: process.env.GCLOUD_TESTS_KEY,
+  keyFilename: process.env.GCLOUD_TESTS_KEY
 };
