@@ -16,6 +16,11 @@
 
 ./node_modules/.bin/dox < lib/index.js > docs/json/master/index.json &
 
+./node_modules/.bin/dox < lib/bigquery/dataset.js > docs/json/master/bigquery/dataset.json &
+./node_modules/.bin/dox < lib/bigquery/index.js > docs/json/master/bigquery/index.json &
+./node_modules/.bin/dox < lib/bigquery/job.js > docs/json/master/bigquery/job.json &
+./node_modules/.bin/dox < lib/bigquery/table.js > docs/json/master/bigquery/table.json &
+
 ./node_modules/.bin/dox < lib/datastore/dataset.js > docs/json/master/datastore/dataset.json &
 ./node_modules/.bin/dox < lib/datastore/index.js > docs/json/master/datastore/index.json &
 ./node_modules/.bin/dox < lib/datastore/query.js > docs/json/master/datastore/query.json &

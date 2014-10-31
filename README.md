@@ -46,6 +46,46 @@ If you are not running this client on Google Compute Engine, you need a Google D
   * If you want to use a new service account, click on **Create new client ID**. After the account is created, you will be prompted to download the JSON key file that the library uses to authorize your requests.
   * If you want to generate a new key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
 
+## Google BigQuery
+
+Analyze Big Data in the cloud with [Google BigQuery][cloud-bigquery] ([docs][cloud-bigquery-docs]) . Run fast, SQL-like queries against multi-terabyte datasets in seconds. Scalable and easy to use, BigQuery gives you real-time insights about your data.
+
+See the [gcloud-node BigQuery API documentation][gcloud-bigquery-docs] to learn how to access your BigQuery datasets using this library.
+
+```js
+var gcloud = require('gcloud');
+var bigquery;
+
+// From Google Compute Engine:
+bigquery = gcloud.bigquery({
+  projectId: 'my-project'
+});
+
+// Or from elsewhere:
+bigquery = gcloud.bigquery({
+  projectId: 'my-project',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+// Access an existing dataset.
+var schoolsDataset = bigquery.dataset('schools');
+
+// Import data into a dataset.
+schoolsDataset.import('/local/file.json', function(err, job) {});
+
+// Get results from a query job.
+bigquery.job('job-id').getQueryResults(function(err, rows, nextQuery) {});
+
+// Get the same results as a readable stream.
+bigquery.job('job-id')
+  .getQueryResults()
+  .pipe(require('through2').obj(function(row, enc, next) {
+    this.push(row.address + '\n');
+    next();
+  }))
+  .pipe(process.stdout);
+```
+
 ## Google Cloud Datastore
 
 [Google Cloud Datastore][cloud-datastore] ([docs][cloud-datastore-docs]) is a fully managed, schemaless database for storing non-relational data. Cloud Datastore automatically scales with your users and supports ACID transactions, high availability of reads and writes, strong consistency for reads and ancestor queries, and eventual consistency for all other queries.
@@ -165,6 +205,7 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 
 [gcloud-homepage]: https://googlecloudplatform.github.io/gcloud-node
 [gcloud-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs
+[gcloud-bigquery-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/bigquery
 [gcloud-datastore-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/datastore
 [gcloud-pubsub-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/pubsub
 [gcloud-storage-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/storage
@@ -174,6 +215,9 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [gce-how-to]: https://developers.google.com/compute/docs/authentication#using
 
 [googleapis]: https://github.com/google/google-api-nodejs-client
+
+[cloud-bigquery]: https://cloud.google.com/bigquery
+[cloud-bigquery-docs]: https://cloud.google.com/bigquery/what-is-bigquery
 
 [cloud-datastore]: https://cloud.google.com/products/cloud-datastore
 [cloud-datastore-docs]: https://developers.google.com/datastore
