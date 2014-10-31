@@ -873,7 +873,7 @@ describe('BigQuery/Table', function() {
         };
       });
 
-      it('should update metadata on Dataset object', function(done) {
+      it('should update metadata on Table object', function(done) {
         table.setMetadata(METADATA, function(err) {
           assert.ifError(err);
           assert.deepEqual(table.metadata, METADATA);
