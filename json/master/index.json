@@ -28,18 +28,18 @@
       }
     ],
     "description": {
-      "full": "<p>@type module:common/util</p>",
-      "summary": "<p>@type module:common/util</p>",
+      "full": "<p>@type {module:bigquery}</p>",
+      "summary": "<p>@type {module:bigquery}</p>",
       "body": ""
     },
     "isPrivate": true,
     "ignore": false,
-    "code": "var util = require('./common/util.js');",
+    "code": "var BigQuery = require('./bigquery');",
     "ctx": {
       "type": "declaration",
-      "name": "util",
-      "value": "require('./common/util.js')",
-      "string": "util"
+      "name": "BigQuery",
+      "value": "require('./bigquery')",
+      "string": "BigQuery"
     }
   },
   {
@@ -116,8 +116,8 @@
       }
     ],
     "description": {
-      "full": "<p>@type {module:common/util}</p>",
-      "summary": "<p>@type {module:common/util}</p>",
+      "full": "<p>@type module:common/util</p>",
+      "summary": "<p>@type module:common/util</p>",
       "body": ""
     },
     "isPrivate": true,
@@ -192,11 +192,47 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "function gcloud(config) {\n  return {\n    datastore: new Datastore(config),\n    pubsub: function(options) {\n      options = options || {};\n      return new PubSub(util.extendGlobalConfig(config, options));\n    },\n    storage: function(options) {\n      options = options || {};\n      return new Storage(util.extendGlobalConfig(config, options));\n    }\n  };\n}",
+    "code": "function gcloud(config) {\n  return {\n    bigquery: function(options) {\n      options = options || {};\n      return new BigQuery(util.extendGlobalConfig(config, options));\n    },\n    datastore: new Datastore(config),\n    pubsub: function(options) {\n      options = options || {};\n      return new PubSub(util.extendGlobalConfig(config, options));\n    },\n    storage: function(options) {\n      options = options || {};\n      return new Storage(util.extendGlobalConfig(config, options));\n    }\n  };\n}",
     "ctx": {
       "type": "function",
       "name": "gcloud",
       "string": "gcloud()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "types": [
+          "module:bigquery"
+        ]
+      },
+      {
+        "type": "return",
+        "types": [
+          "module:bigquery"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\nvar bigquery = gcloud.bigquery({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});"
+      }
+    ],
+    "description": {
+      "full": "<p>Analyze Big Data in the cloud with<br />[Google BigQuery]{@link <a href=\"https://cloud.google.com/bigquery}\">https://cloud.google.com/bigquery}</a>. Run fast,<br />SQL-like queries against multi-terabyte datasets in seconds. Scalable and<br />easy to use, BigQuery gives you real-time insights about your data.</p>",
+      "summary": "<p>Analyze Big Data in the cloud with<br />[Google BigQuery]{@link <a href=\"https://cloud.google.com/bigquery}\">https://cloud.google.com/bigquery}</a>. Run fast,<br />SQL-like queries against multi-terabyte datasets in seconds. Scalable and<br />easy to use, BigQuery gives you real-time insights about your data.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "gcloud.bigquery = BigQuery;",
+    "ctx": {
+      "type": "property",
+      "receiver": "gcloud",
+      "name": "bigquery",
+      "value": "BigQuery",
+      "string": "gcloud.bigquery"
     }
   },
   {
@@ -216,7 +252,7 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\nvar datastore = gcloud.datastore;\n\n// datastore:\n// {\n//   Dataset: function() {},\n//   double: function() {},\n//   int: function() {}\n// }"
+        "string": "var gcloud = require('gcloud');\nvar datastore = gcloud.datastore;\nvar dataset = datastore.dataset({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});"
       }
     ],
     "description": {
@@ -252,7 +288,7 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\n\nvar pubsub = gcloud.pubsub({\n  projectId: YOUR_PROJECT_ID,\n  keyFilename: '/path/to/the/key.json'\n});"
+        "string": "var gcloud = require('gcloud');\nvar pubsub = gcloud.pubsub({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});"
       }
     ],
     "description": {
@@ -287,7 +323,7 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\nvar storage = gcloud.storage;\n\n// storage:\n// {\n//   bucket: function() {}\n// }"
+        "string": "var gcloud = require('gcloud');\nvar storage = gcloud.storage({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});"
       }
     ],
     "description": {
