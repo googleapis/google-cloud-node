@@ -58,6 +58,18 @@ var gcloud = require('gcloud')({
       </article>
       <hr>
 
+      <article ng-if="isActiveDoc('bigquery')">
+        <h3>BigQuery Overview</h3>
+        <p>
+          The object returned from <code>gcloud.bigquery</code> gives you complete access to and control of your BigQuery datasets. You can work with existing ones, by using the <code>dataset</code> method, or create new ones with <code>createDataset</code>.
+        </p>
+        <div hljs>
+var bigquery = gcloud.bigquery();</div>
+        <p>
+          Follow along with the examples below to see how to query your datasets, create tables, import data from your Cloud Storage buckets, and more.
+        </p>
+      </article>
+
       <article ng-if="isActiveDoc('datastore')">
         <h3>Datastore Overview</h3>
         <p>
