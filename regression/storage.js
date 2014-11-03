@@ -24,9 +24,12 @@ var crypto = require('crypto');
 var fs = require('fs');
 var request = require('request');
 var tmp = require('tmp');
+var uuid = require('node-uuid');
 
 var env = require('./env.js');
 var storage = require('../lib/storage')(env);
+
+var BUCKET_NAME = generateBucketName();
 
 var files = {
   logo: {
@@ -36,30 +39,6 @@ var files = {
     path: 'regression/data/five-mb-file.zip'
   }
 };
-
-function setHash(obj, file, done) {
-  var hash = crypto.createHash('md5');
-  fs.createReadStream(obj[file].path)
-    .on('data', hash.update.bind(hash))
-    .on('end', function() {
-      obj[file].hash = hash.digest('base64');
-      done();
-    });
-}
-
-function deleteBucketsAndFiles(callback) {
-  storage.getBuckets(function(err, buckets) {
-    if (err) {
-      callback(err);
-      return;
-    }
-    async.map(buckets, function(bucket, next) {
-      deleteFiles(bucket, function() {
-        bucket.delete(next);
-      });
-    }, callback);
-  });
-}
 
 function deleteFiles(bucket, callback) {
   bucket.getFiles(function(err, files) {
@@ -73,55 +52,93 @@ function deleteFiles(bucket, callback) {
   });
 }
 
+function generateBucketName() {
+  return 'gcloud-test-bucket-temp-' + uuid.v1();
+}
+
+function setHash(obj, file, done) {
+  var hash = crypto.createHash('md5');
+  fs.createReadStream(obj[file].path)
+    .on('data', hash.update.bind(hash))
+    .on('end', function() {
+      obj[file].hash = hash.digest('base64');
+      done();
+    });
+}
+
 describe('storage', function() {
   var bucket;
 
   before(function(done) {
-    deleteBucketsAndFiles(function() {
-      storage.createBucket('new' + Date.now(), function(err, newBucket) {
-        if (err) {
-          done(err);
-          return;
-        }
-        bucket = newBucket;
-        done();
-      });
+    storage.createBucket(BUCKET_NAME, function(err, newBucket) {
+      if (err) {
+        done(err);
+        return;
+      }
+      bucket = newBucket;
+      done();
     });
   });
 
-  after(deleteBucketsAndFiles);
-
-  describe('creating a bucket', function() {
-    it('should create a bucket', function(done) {
-      storage.createBucket('a-new-bucket', function(err, bucket) {
-        assert.ifError(err);
-        bucket.delete(done);
-      });
+  after(function(done) {
+    deleteFiles(bucket, function(err) {
+      if (err) {
+        done(err);
+        return;
+      }
+      bucket.delete(done);
     });
   });
 
   describe('getting buckets', function() {
+    var bucketsToCreate = [
+      generateBucketName(), generateBucketName(), generateBucketName()
+    ];
+
+    before(function(done) {
+      async.map(bucketsToCreate, storage.createBucket.bind(storage), done);
+    });
+
+    after(function(done) {
+      async.parallel(bucketsToCreate.map(function(bucket) {
+        return function(done) {
+          storage.bucket(bucket).delete(done);
+        };
+      }), done);
+    });
+
     it('should get buckets', function(done) {
-      var bucketsToCreate = [
-        'new' + Date.now(),
-        'newer' + Date.now(),
-        'newest' + Date.now()
-      ];
-      async.map(
-        bucketsToCreate,
-        storage.createBucket.bind(storage),
-        function(err) {
-          assert.ifError(err);
-          storage.getBuckets(function(err, buckets) {
-            assert.equal(
-              buckets.filter(function(bucket) {
-                return bucketsToCreate.indexOf(bucket.name) > -1;
-              }).length,
-              bucketsToCreate.length
-            );
-            done();
-          });
+      storage.getBuckets(getBucketsHandler);
+
+      var createdBuckets = [];
+      var failedTests = 0;
+      var MAX_TRIES = 2;
+
+      function getBucketsHandler(err, buckets, nextQuery) {
+        buckets.forEach(function(bucket) {
+          if (bucketsToCreate.indexOf(bucket.name) > -1) {
+            createdBuckets.push(bucket);
+          }
         });
+
+        function allCreated() {
+          assert.equal(createdBuckets.length, bucketsToCreate.length);
+        }
+
+        try {
+          allCreated();
+          done();
+        } catch(e) {
+          failedTests++;
+
+          if (failedTests <= MAX_TRIES) {
+            storage.getBuckets(nextQuery, getBucketsHandler);
+          } else {
+            // Crash.
+            allCreated();
+          }
+        }
+      }
     });
   });
 
