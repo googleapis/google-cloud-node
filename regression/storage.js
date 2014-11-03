@@ -111,8 +111,8 @@ describe('storage', function() {
       storage.getBuckets(getBucketsHandler);
 
       var createdBuckets = [];
-      var failedTests = 0;
-      var MAX_TRIES = 2;
+      var retries = 0;
+      var MAX_RETRIES = 2;
 
       function getBucketsHandler(err, buckets, nextQuery) {
         buckets.forEach(function(bucket) {
@@ -121,23 +121,17 @@ describe('storage', function() {
           }
         });
 
-        function allCreated() {
-          assert.equal(createdBuckets.length, bucketsToCreate.length);
-        }
+        if (createdBuckets.length < bucketsToCreate.length && nextQuery) {
+          retries++;
 
-        try {
-          allCreated();
-          done();
-        } catch(e) {
-          failedTests++;
-
-          if (failedTests <= MAX_TRIES) {
+          if (retries <= MAX_RETRIES) {
             storage.getBuckets(nextQuery, getBucketsHandler);
-          } else {
-            // Crash.
-            allCreated();
+            return;
           }
         }
+
+        assert.equal(createdBuckets.length, bucketsToCreate.length);
+        done();
       }
     });
   });
