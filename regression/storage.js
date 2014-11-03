@@ -71,10 +71,7 @@ describe('storage', function() {
 
   before(function(done) {
     storage.createBucket(BUCKET_NAME, function(err, newBucket) {
-      if (err) {
-        done(err);
-        return;
-      }
+      assert.ifError(err);
       bucket = newBucket;
       done();
     });
@@ -82,10 +79,7 @@ describe('storage', function() {
 
   after(function(done) {
     deleteFiles(bucket, function(err) {
-      if (err) {
-        done(err);
-        return;
-      }
+      assert.ifError(err);
       bucket.delete(done);
     });
   });
