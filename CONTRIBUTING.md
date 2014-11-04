@@ -20,7 +20,6 @@ $ npm test
 To run the regression tests, first create and configure a project in the Google Developers Console following the [instructions on how to run gcloud-node][elsewhere]. After that, set the following environment variables:
 
 - **GCLOUD_TESTS_PROJECT_ID**: Developers Console project's ID (e.g. bamboo-shift-455)
-- **GCLOUD_TESTS_BUCKET_NAME**: The name of the bucket to use for the Cloud Storage API tests
 - **GCLOUD_TESTS_KEY**: The path to the JSON key file.
 
 Install the [gcloud command-line tool][gcloudcli] to your machine and use it to create the indexes used in the datastore regression tests with indexes found in `regression/data/index/yaml`:
