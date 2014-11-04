@@ -73,35 +73,42 @@ describe('Storage', function() {
   });
 
   describe('createBucket', function() {
-    var newBucketName = 'new-bucket-name';
+    var BUCKET_NAME = 'new-bucket-name';
+    var METADATA = { a: 'b', c: { d: 'e' } };
+    var BUCKET = { name: BUCKET_NAME };
 
-    beforeEach(function() {
+    it('should make correct API request', function(done) {
       storage.makeReq_ = function(method, path, query, body, callback) {
         assert.equal(method, 'POST');
         assert.equal(path, '');
         assert.equal(query.project, storage.projectId);
-        assert.equal(body.name, newBucketName);
-        callback(null);
+        assert.equal(body.name, BUCKET_NAME);
+        callback();
       };
+
+      storage.createBucket(BUCKET_NAME, done);
     });
 
     it('should accept a name, metadata, and callback', function(done) {
-      var metadata = { a: 'b', c: { d: 'e' } };
       storage.makeReq_ = function(method, path, query, body, callback) {
-        assert.deepEqual(body, extend(metadata, { name: newBucketName }));
-        callback(null);
+        assert.deepEqual(body, extend(METADATA, { name: BUCKET_NAME }));
+        callback(null, METADATA);
       };
       storage.bucket = function(name) {
-        assert.equal(name, newBucketName);
+        assert.equal(name, BUCKET_NAME);
+        return BUCKET;
       };
-      storage.createBucket(newBucketName, metadata, function(err) {
+      storage.createBucket(BUCKET_NAME, METADATA, function(err) {
         assert.ifError(err);
         done();
       });
     });
 
     it('should accept a name and callback only', function(done) {
-      storage.createBucket(newBucketName, done);
+      storage.makeReq_ = function(method, path, query, body, callback) {
+        callback();
+      };
+      storage.createBucket(BUCKET_NAME, done);
     });
 
     it('should throw if no name is provided', function() {
@@ -111,13 +118,16 @@ describe('Storage', function() {
     });
 
     it('should execute callback with bucket', function(done) {
-      var fakeBucket = { fake: 'bucket' };
       storage.bucket = function() {
-        return fakeBucket;
+        return BUCKET;
       };
-      storage.createBucket(newBucketName, function(err, bucket) {
+      storage.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, METADATA);
+      };
+      storage.createBucket(BUCKET_NAME, function(err, bucket) {
         assert.ifError(err);
-        assert.deepEqual(bucket, fakeBucket);
+        assert.deepEqual(bucket, BUCKET);
+        assert.deepEqual(bucket.metadata, METADATA);
         done();
       });
     });
@@ -127,7 +137,7 @@ describe('Storage', function() {
       storage.makeReq_ = function(method, path, query, body, callback) {
         callback(error);
       };
-      storage.createBucket(newBucketName, function(err) {
+      storage.createBucket(BUCKET_NAME, function(err) {
         assert.equal(err, error);
         done();
       });
