@@ -285,7 +285,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Storage.prototype.createBucket = function(name, metadata, callback) {\n  if (!name) {\n    throw new Error('A name is required to create a bucket.');\n  }\n  if (!callback) {\n    callback = metadata;\n    metadata = {};\n  }\n  var query = {\n    project: this.projectId\n  };\n  var body = extend(metadata, {\n    name: name\n  });\n  this.makeReq_('POST', '', query, body, function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    return callback(null, this.bucket(name));\n  }.bind(this));\n};",
+    "code": "Storage.prototype.createBucket = function(name, metadata, callback) {\n  if (!name) {\n    throw new Error('A name is required to create a bucket.');\n  }\n  if (!callback) {\n    callback = metadata;\n    metadata = {};\n  }\n  var query = {\n    project: this.projectId\n  };\n  var body = extend(metadata, {\n    name: name\n  });\n  this.makeReq_('POST', '', query, body, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    var bucket = this.bucket(name);\n    bucket.metadata = resp;\n    callback(null, bucket);\n  }.bind(this));\n};",
     "ctx": {
       "type": "method",
       "constructor": "Storage",
