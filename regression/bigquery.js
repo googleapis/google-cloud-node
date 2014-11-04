@@ -24,16 +24,18 @@ var Dataset = require('../lib/bigquery/dataset');
 var env = require('./env');
 var fs = require('fs');
 var Job = require('../lib/bigquery/job');
+var uuid = require('node-uuid');
 
 var gcloud = require('../lib')(env);
 var bigquery = gcloud.bigquery();
-var bucket = gcloud.storage().bucket();
+var storage = gcloud.storage();
 
 describe('BigQuery', function() {
   var DATASET_ID = 'testDatasetId';
   var dataset;
   var TABLE_ID = 'myKittens';
   var table;
+  var bucket;
 
   var query = 'SELECT url FROM [publicdata:samples.github_nested] LIMIT 100';
 
@@ -82,23 +84,17 @@ describe('BigQuery', function() {
         });
       },
 
-      // Create a Bucket, if necessary.
+      // Create a Bucket.
       function(next) {
-        bucket.getMetadata(function(err) {
-          if (!err) {
-            next();
+        var bucketName = 'gcloud-test-bucket-temp-' + uuid.v1();
+        storage.createBucket(bucketName, function(err, b) {
+          if (err) {
+            next(err);
             return;
           }
 
-          gcloud.storage().createBucket(bucket.name, function(err, b) {
-            if (err) {
-              next(err);
-              return;
-            }
-
-            bucket = b;
-            next();
-          });
+          bucket = b;
+          next();
         });
       }
     ], done);
