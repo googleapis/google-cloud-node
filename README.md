@@ -10,7 +10,7 @@
 
 This client supports the following Google Cloud Platform services:
 
-* [Google Big Query][cloud-bigquery]
+* [Google BigQuery][cloud-bigquery]
 * [Google Cloud Datastore][cloud-datastore]
 * [Google Cloud Storage][cloud-storage]
 * [Google Cloud Pub/Sub][cloud-pubsub] (Alpha)
