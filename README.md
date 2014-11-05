@@ -44,7 +44,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
   * Google Cloud Storage
   * Google Cloud Storage JSON API
 4. Navigate to **APIs & auth** >  **Credentials** and then:
-  * If you want to use a new service account, click on **Create new client ID**. After the account is created, you will be prompted to download the JSON key file that the library uses to authorize your requests.
+  * If you want to use a new service account, click on **Create new Client ID** and select **Service account**. After the account is created, you will be prompted to download the JSON key file that the library uses to authorize your requests.
   * If you want to generate a new key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
 
 ## Google BigQuery
