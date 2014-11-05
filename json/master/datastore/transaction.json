@@ -112,9 +112,9 @@
       }
     ],
     "description": {
-      "full": "<p>Build a Transaction object. Transactions will be created for you by<br />{@linkcode module:datastore/dataset}. When you need to run a transactional<br />operation, use {@linkcode module:datastore/dataset#runInTransaction}.</p><p><em>Reference: {@link <a href=\"http://goo.gl/n4oSjt}\">http://goo.gl/n4oSjt}</a></em></p>",
+      "full": "<p>Build a Transaction object. Transactions will be created for you by<br />{@linkcode module:datastore/dataset}. When you need to run a transactional<br />operation, use {@linkcode module:datastore/dataset#runInTransaction}.</p><p><em><a href=\"http://goo.gl/n4oSjt\">Reference</a>.</em></p>",
       "summary": "<p>Build a Transaction object. Transactions will be created for you by<br />{@linkcode module:datastore/dataset}. When you need to run a transactional<br />operation, use {@linkcode module:datastore/dataset#runInTransaction}.</p>",
-      "body": "<p><em>Reference: {@link <a href=\"http://goo.gl/n4oSjt}\">http://goo.gl/n4oSjt}</a></em></p>"
+      "body": "<p><em><a href=\"http://goo.gl/n4oSjt\">Reference</a>.</em></p>"
     },
     "isPrivate": false,
     "ignore": false,

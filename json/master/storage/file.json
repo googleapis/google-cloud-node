@@ -354,9 +354,9 @@
       }
     ],
     "description": {
-      "full": "<p>Get a signed URL to allow limited time access to the file.</p><p>{@link <a href=\"https://developers.google.com/storage/docs/accesscontrol#Signed-URLs}\">https://developers.google.com/storage/docs/accesscontrol#Signed-URLs}</a></p>",
+      "full": "<p>Get a signed URL to allow limited time access to the file.</p><p><em><a href=\"http://goo.gl/LcqhjU\">Reference</a>.</em></p>",
       "summary": "<p>Get a signed URL to allow limited time access to the file.</p>",
-      "body": "<p>{@link <a href=\"https://developers.google.com/storage/docs/accesscontrol#Signed-URLs}\">https://developers.google.com/storage/docs/accesscontrol#Signed-URLs}</a></p>"
+      "body": "<p><em><a href=\"http://goo.gl/LcqhjU\">Reference</a>.</em></p>"
     },
     "isPrivate": false,
     "ignore": false,
