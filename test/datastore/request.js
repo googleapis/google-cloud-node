@@ -22,19 +22,22 @@ var assert = require('assert');
 var ByteBuffer = require('bytebuffer');
 var duplexify = require('duplexify');
 var entity = require('../../lib/datastore/entity.js');
+var extend = require('extend');
+var https = require('https');
 var mockRespGet = require('../testdata/response_get.json');
 var pb = require('../../lib/datastore/pb.js');
 var Query = require('../../lib/datastore/query.js');
 var util = require('../../lib/common/util.js');
 
 var httpsRequestOverride = util.noop;
-var https = {
+
+extend(true, https, {
   request: function() {
     var requestFn = httpsRequestOverride;
     httpsRequestOverride = util.noop;
     return requestFn.apply(this, util.toArray(arguments));
   }
-};
+});
 
 // Create a protobuf "FakeMethod" request & response.
 pb.FakeMethodRequest = function() {
@@ -54,8 +57,8 @@ pb.FakeMethodResponse = {
 var Request = require('sandboxed-module')
   .require('../../lib/datastore/request.js', {
     requires: {
-      'https': https,
-      './pb.js': pb
+      './pb.js': pb,
+      https: https
     }
   });
 
@@ -69,6 +72,9 @@ describe('Request', function() {
       path: ['Company', 123]
     });
     request = new Request();
+    request.makeAuthorizedRequest_ = function(req, callback) {
+      (callback.onAuthorized || callback)(null, req);
+    };
   });
 
   describe('get', function() {
@@ -374,11 +380,11 @@ describe('Request', function() {
       var method = 'commit';
       var projectId = 'project-id';
       request.projectId = projectId;
-      request.connection.createAuthorizedReq = function(opts) {
+      request.makeAuthorizedRequest_ = function(opts) {
         assert.equal(opts.method, 'POST');
         assert.equal(
           opts.path, '/datastore/v1beta2/datasets/' + projectId + '/' + method);
-        assert.equal(opts.headers['content-type'], 'application/x-protobuf');
+        assert.equal(opts.headers['Content-Type'], 'application/x-protobuf');
         done();
       };
       request.makeReq_(method, {}, util.noop);
@@ -391,8 +397,8 @@ describe('Request', function() {
         done();
         return duplexify();
       };
-      request.connection.createAuthorizedReq = function(opts, callback) {
-        callback(null, mockRequest);
+      request.makeAuthorizedRequest_ = function(opts, callback) {
+        (callback.onAuthorized || callback)(null, mockRequest);
       };
       request.makeReq_('commit', {}, util.noop);
     });
@@ -408,9 +414,6 @@ describe('Request', function() {
         };
         return stream;
       };
-      request.connection.createAuthorizedReq = function(opts, callback) {
-        callback();
-      };
       request.makeReq_('commit', requestOptions, util.noop);
     });
 
@@ -424,16 +427,13 @@ describe('Request', function() {
         responseStream.emit('end');
         return duplexify();
       };
-      request.connection.createAuthorizedReq = function(opts, callback) {
-        callback();
-      };
       request.makeReq_('fakeMethod', util.noop);
     });
 
     describe('transactional and non-transactional properties', function() {
       beforeEach(function() {
-        request.connection.createAuthorizedReq = function(opts, callback) {
-          callback();
+        request.createAuthorizedRequest_ = function(opts, callback) {
+          (callback.onAuthorized || callback)();
         };
       });
 

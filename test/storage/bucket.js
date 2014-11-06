@@ -20,6 +20,7 @@
 
 var assert = require('assert');
 var duplexify = require('duplexify');
+var request = require('request');
 var util = require('../../lib/common/util.js');
 
 function FakeFile(bucket, name, metadata) {
@@ -39,41 +40,46 @@ function FakeFile(bucket, name, metadata) {
 var Bucket = require('sandboxed-module')
   .require('../../lib/storage/bucket.js', {
     requires: {
-      './file.js': FakeFile
+      './file.js': FakeFile,
+      request: fakeRequest
     }
   });
+
+var request_Cached = request;
+var request_Override;
+
+function fakeRequest() {
+  var args = [].slice.apply(arguments);
+  var results = (request_Override || request_Cached).apply(null, args);
+  request_Override = null;
+  return results;
+}
 
 describe('Bucket', function() {
   var BUCKET_NAME = 'test-bucket';
   var bucket;
   var options = {
-    connection_: {},
-    name: BUCKET_NAME
+    makeAuthorizedRequest_: function(req, callback) {
+      callback(null, req);
+    }
   };
 
   beforeEach(function() {
-    bucket = new Bucket(options);
+    bucket = new Bucket(options, BUCKET_NAME);
   });
 
   describe('initialization', function() {
     it('should re-use provided connection', function() {
-      assert.deepEqual(bucket.connection_, options.connection_);
+      assert.deepEqual(bucket.authorizeReq_, options.authorizeReq_);
     });
 
     it('should default metadata to an empty object', function() {
       assert.deepEqual(bucket.metadata, {});
     });
 
-    it('should use name or bucketName', function() {
-      var newBucket = new Bucket({ name: BUCKET_NAME });
-      assert.equal(newBucket.name, BUCKET_NAME);
-      var newerBucket = new Bucket({ bucketName: BUCKET_NAME });
-      assert.equal(newerBucket.name, BUCKET_NAME);
-    });
-
     it('should throw if no name was provided', function() {
       assert.throws(function() {
-        new Bucket({});
+        new Bucket();
       }, /A bucket name is needed/);
     });
   });
@@ -399,7 +405,7 @@ describe('Bucket', function() {
     var body = { hi: 'there' };
 
     it('should make correct request', function(done) {
-      bucket.connection_.req = function(request) {
+      bucket.storage.makeAuthorizedRequest_ = function(request) {
         var basePath = 'https://www.googleapis.com/storage/v1/b';
         assert.equal(request.method, method);
         assert.equal(request.uri, basePath + '/' + bucket.name + path);
@@ -411,7 +417,7 @@ describe('Bucket', function() {
     });
 
     it('should execute callback', function(done) {
-      bucket.connection_.req = function(request, callback) {
+      bucket.storage.makeAuthorizedRequest_ = function(request, callback) {
         callback();
       };
       bucket.makeReq_(method, path, query, body, done);

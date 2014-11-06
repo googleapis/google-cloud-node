@@ -20,10 +20,10 @@
 
 var assert = require('assert');
 var Bucket = require('../../lib/storage/bucket.js');
-var credentials = require('../testdata/privateKeyFile.json');
 var duplexify = require('duplexify');
 var extend = require('extend');
 var nodeutil = require('util');
+var request = require('request');
 var url = require('url');
 var util = require('../../lib/common/util');
 
@@ -52,24 +52,33 @@ var fakeUtil = extend({}, util, {
   }
 });
 
+var request_Cached = request;
+var request_Override;
+
+function fakeRequest() {
+  var args = [].slice.apply(arguments);
+  var results = (request_Override || request_Cached).apply(null, args);
+  request_Override = null;
+  return results;
+}
+
 var File = require('sandboxed-module')
   .require('../../lib/storage/file.js', {
     requires: {
-      'duplexify': FakeDuplexify,
+      duplexify: FakeDuplexify,
+      request: fakeRequest,
       '../common/util': fakeUtil
     }
   });
 
 describe('File', function() {
   var FILE_NAME = 'file-name.png';
-  var bucket = new Bucket({
-    bucketName: 'bucket-name',
-    connection_: {
-      getCredentials: function(callback) {
-        callback(null, credentials);
-      }
+  var options = {
+    makeAuthorizedRequest_: function(req, callback) {
+      (callback.onAuthorized || callback)(null, req);
     }
-  });
+  };
+  var bucket = new Bucket(options, 'bucket-name');
   var file;
 
   beforeEach(function() {
@@ -123,7 +132,7 @@ describe('File', function() {
       });
 
       it('should allow a Bucket', function(done) {
-        var newBucket = new Bucket({ name: 'new-bucket' });
+        var newBucket = new Bucket({}, 'new-bucket');
         var expectedPath =
           util.format('/o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {
             srcName: file.name,
@@ -135,7 +144,7 @@ describe('File', function() {
       });
 
       it('should allow a File', function(done) {
-        var newBucket = new Bucket({ name: 'new-bucket' });
+        var newBucket = new Bucket({}, 'new-bucket');
         var newFile = new File(newBucket, 'new-file');
         var expectedPath =
           util.format('/o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {
@@ -156,7 +165,7 @@ describe('File', function() {
       });
 
       it('should re-use file object if one is provided', function(done) {
-        var newBucket = new Bucket({ name: 'new-bucket' });
+        var newBucket = new Bucket({}, 'new-bucket');
         var newFile = new File(newBucket, 'new-file');
         file.copy(newFile, function(err, copiedFile) {
           assert.ifError(err);
@@ -176,7 +185,7 @@ describe('File', function() {
       });
 
       it('should create new file on the destination bucket', function(done) {
-        var newBucket = new Bucket({ name: 'new-bucket' });
+        var newBucket = new Bucket({}, 'new-bucket');
         file.copy(newBucket, function(err, copiedFile) {
           assert.ifError(err);
           assert.equal(copiedFile.bucket.name, newBucket.name);
@@ -212,7 +221,7 @@ describe('File', function() {
     });
 
     it('should create an authorized request', function(done) {
-      file.bucket.connection_.createAuthorizedReq = function(opts) {
+      request_Override = function(opts) {
         assert.equal(opts.uri, metadata.mediaLink);
         done();
       };
@@ -224,8 +233,8 @@ describe('File', function() {
 
     it('should emit an error from authorizing', function(done) {
       var error = new Error('Error.');
-      file.bucket.connection_.createAuthorizedReq = function(opts, callback) {
-        callback(error);
+      file.bucket.storage.makeAuthorizedRequest_ = function(opts, callback) {
+        (callback.onAuthorized || callback)(error);
       };
       file.getMetadata = function(callback) {
         setImmediate(function() {
@@ -244,12 +253,12 @@ describe('File', function() {
       file.getMetadata = function(callback) {
         callback(null, metadata);
       };
-      file.bucket.connection_.requester = function(req) {
+      request_Override = function(req) {
         assert.deepEqual(req, fakeRequest);
         done();
       };
-      file.bucket.connection_.createAuthorizedReq = function(opts, callback) {
-        callback(null, fakeRequest);
+      file.bucket.storage.makeAuthorizedRequest_ = function(opts, callback) {
+        (callback.onAuthorized || callback)(null, fakeRequest);
       };
       file.createReadStream();
     });
@@ -259,11 +268,11 @@ describe('File', function() {
       file.getMetadata = function(callback) {
         callback(null, metadata);
       };
-      file.bucket.connection_.requester = function() {
+      request_Override = function() {
         return dup;
       };
-      file.bucket.connection_.createAuthorizedReq = function(opts, callback) {
-        callback();
+      file.bucket.storage.makeAuthorizedRequest_ = function(opts, callback) {
+        (callback.onAuthorized || callback)();
       };
       file.createReadStream();
       assert.deepEqual(readableStream, dup);
@@ -299,7 +308,6 @@ describe('File', function() {
       var metadata = { a: 'b', c: 'd' };
 
       makeWritableStream_Override = function(stream, options) {
-        assert.deepEqual(options.connection, file.bucket.connection_);
         assert.deepEqual(options.metadata, metadata);
         assert.deepEqual(options.request, {
           qs: {
@@ -379,6 +387,15 @@ describe('File', function() {
   });
 
   describe('getSignedUrl', function() {
+    var credentials = require('../testdata/privateKeyFile.json');
+
+    beforeEach(function() {
+      var storage = bucket.storage;
+      storage.makeAuthorizedRequest_.getCredentials = function(callback) {
+        callback(null, credentials);
+      };
+    });
+
     it('should create a signed url', function(done) {
       file.getSignedUrl({
         action: 'read',

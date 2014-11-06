@@ -26,7 +26,6 @@ var ds = datastore.dataset(env);
 var entity = require('../lib/datastore/entity.js');
 
 describe('datastore', function() {
-
   it('should allocate IDs', function(done) {
     ds.allocateIds(ds.key('Kind'), 10, function(err, keys) {
       assert.ifError(err);

@@ -21,6 +21,7 @@
 var assert = require('assert');
 var Dataset = require('../../lib/bigquery/dataset');
 var Job = require('../../lib/bigquery/job');
+var request = require('request');
 var Stream = require('stream').Stream;
 var Table = require('../../lib/bigquery/table');
 var util = require('../../lib/common/util');
@@ -30,7 +31,9 @@ var BigQuery = require('sandboxed-module')
     requires: {
       './dataset': Dataset,
       './job': Job,
-      './table': FakeTable
+      './table': FakeTable,
+      request: fakeRequest,
+      'google-service-account': fakeGsa
     }
   });
 
@@ -46,6 +49,22 @@ FakeTable.mergeSchemaWithRows_ = function() {
   return (mergeSchemaWithRows_Override || mergeSchemaWithRows_Cached)
     .apply(null, args);
 };
+
+var request_Cached = request;
+var request_Override;
+
+function fakeRequest() {
+  var args = [].slice.apply(arguments);
+  var results = (request_Override || request_Cached).apply(null, args);
+  request_Override = null;
+  return results;
+}
+
+function fakeGsa() {
+  return function(req, callback) {
+    callback(null, req);
+  };
+}
 
 describe('BigQuery', function() {
   var JOB_ID = JOB_ID;
@@ -659,7 +678,7 @@ describe('BigQuery', function() {
     var body = { hi: 'there' };
 
     it('should make correct request', function(done) {
-      bq.connection_.req = function(request) {
+      request_Override = function(request) {
         var basePath = 'https://www.googleapis.com/bigquery/v2/projects/';
         assert.equal(request.method, method);
         assert.equal(request.uri, basePath + bq.projectId + path);
@@ -671,7 +690,7 @@ describe('BigQuery', function() {
     });
 
     it('should execute callback', function(done) {
-      bq.connection_.req = function(request, callback) {
+      request_Override = function(request, callback) {
         callback();
       };
       bq.makeReq_(method, path, query, body, done);
