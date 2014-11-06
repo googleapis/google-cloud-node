@@ -21,11 +21,8 @@
 var assert = require('assert');
 var Bucket = require('../../lib/storage/bucket.js');
 var extend = require('extend');
-var gcloud = require('../../lib');
 var Storage = require('../../lib/storage');
 var util = require('../../lib/common/util.js');
-
-var credentials = require('../testdata/privateKeyFile.json');
 
 describe('Storage', function() {
   var storage;
@@ -35,27 +32,6 @@ describe('Storage', function() {
   });
 
   describe('initialization', function() {
-    it('should not require connection details', function() {
-      var project = gcloud({
-        credentials: credentials,
-        projectId: 'project-id'
-      });
-      var aBucket = project.storage().bucket({ name: 'test' });
-      assert.deepEqual(aBucket.connection_.credentials, credentials);
-    });
-
-    it('should allow overriding connection details', function() {
-      var uniqueCredentials = require('../testdata/privateKeyFile-2.json');
-      var project = gcloud({
-        credentials: credentials,
-        projectId: 'project-id'
-      });
-      var aBucket = project
-        .storage({ credentials: uniqueCredentials })
-        .bucket({ name: 'another-bucket' });
-      assert.deepEqual(aBucket.connection_.credentials, uniqueCredentials);
-    });
-
     it('should throw if a bucket name is not passed', function() {
       assert.throws(function() {
         storage.bucket();

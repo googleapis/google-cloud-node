@@ -19,9 +19,28 @@
 'use strict';
 
 var assert = require('assert');
-var PubSub = require('../../lib/pubsub/index.js');
+var request = require('request');
 var Subscription = require('../../lib/pubsub/subscription.js');
 var Topic = require('../../lib/pubsub/topic.js');
+
+var PubSub = require('sandboxed-module')
+  .require('../../lib/pubsub', {
+    requires: {
+      './subscription': Subscription,
+      './topic': Topic,
+      request: fakeRequest
+    }
+  });
+
+var request_Cached = request;
+var request_Override;
+
+function fakeRequest() {
+  var args = [].slice.apply(arguments);
+  var results = (request_Override || request_Cached).apply(null, args);
+  request_Override = null;
+  return results;
+}
 
 describe('PubSub', function() {
   var PROJECT_ID = 'test-project';
@@ -181,7 +200,9 @@ describe('PubSub', function() {
 
   it('should pass network requests to the connection object', function(done) {
     var pubsub = new PubSub();
-    pubsub.connection.req = done.bind(null, null);
+    request_Override = function() {
+      done();
+    };
     pubsub.makeReq_();
   });
 });
