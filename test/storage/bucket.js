@@ -263,6 +263,7 @@ describe('Bucket', function() {
   describe('upload', function() {
     var basename = 'proto_query.json';
     var filepath = 'test/testdata/' + basename;
+    var textFilepath = 'test/testdata/textfile.txt';
     var metadata = { a: 'b', c: 'd' };
 
     beforeEach(function() {
@@ -332,6 +333,46 @@ describe('Bucket', function() {
           file.isSameFile();
         });
       });
+    });
+
+    it('should guess at the content type', function(done) {
+      var fakeFile = new FakeFile(bucket, 'file-name');
+      fakeFile.createWriteStream = function(metadata) {
+        var dup = duplexify();
+        setImmediate(function() {
+          assert.equal(metadata.contentType, 'application/json');
+          done();
+        });
+        return dup;
+      };
+      bucket.upload(filepath, fakeFile, assert.ifError);
+    });
+
+    it('should guess at the charset', function(done) {
+      var fakeFile = new FakeFile(bucket, 'file-name');
+      fakeFile.createWriteStream = function(metadata) {
+        var dup = duplexify();
+        setImmediate(function() {
+          assert.equal(metadata.contentType, 'text/plain; charset=UTF-8');
+          done();
+        });
+        return dup;
+      };
+      bucket.upload(textFilepath, fakeFile, assert.ifError);
+    });
+
+    it('should allow overriding content type', function(done) {
+      var fakeFile = new FakeFile(bucket, 'file-name');
+      var metadata = { contentType: 'made-up-content-type' };
+      fakeFile.createWriteStream = function(meta) {
+        var dup = duplexify();
+        setImmediate(function() {
+          assert.equal(meta.contentType,  metadata.contentType);
+          done();
+        });
+        return dup;
+      };
+      bucket.upload(filepath, fakeFile, metadata, assert.ifError);
     });
 
     it('should execute callback on error', function(done) {
