@@ -18,7 +18,7 @@
     },
     "isPrivate": false,
     "ignore": true,
-    "code": "'use strict';\n\nvar crypto = require('crypto');\nvar duplexify = require('duplexify');\nvar extend = require('extend');\nvar uuid = require('node-uuid');"
+    "code": "'use strict';\n\nvar crypto = require('crypto');\nvar duplexify = require('duplexify');\nvar streamEvents = require('stream-events');"
   },
   {
     "tags": [
@@ -220,7 +220,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "File.prototype.createWriteStream = function(metadata) {\n  var that = this;\n  var dup = duplexify();\n  this.getWritableStream_(metadata, function(err, writable) {\n    if (err) {\n      dup.emit('error', err);\n      return;\n    }\n    writable.on('complete', function(res) {\n      util.handleResp(null, res, res.body, function(err, data) {\n        if (err) {\n          dup.emit('error', err);\n          return;\n        }\n        that.metadata = data;\n        dup.emit('complete', data);\n      });\n    });\n    dup.setWritable(writable);\n    dup.pipe(writable);\n  });\n  return dup;\n};",
+    "code": "File.prototype.createWriteStream = function(metadata) {\n  var that = this;\n  var dup = streamEvents(duplexify());\n\n  dup.once('writing', function() {\n    util.makeWritableStream(dup, {\n      connection: that.bucket.connection_,\n      metadata: metadata,\n      request: {\n        qs: {\n          name: that.name,\n        },\n        uri: util.format('{base}/{bucket}/o', {\n          base: STORAGE_UPLOAD_BASE_URL,\n          bucket: that.bucket.name\n        })\n      }\n    }, function(data) {\n      that.metadata = data;\n\n      dup.emit('complete', data);\n      dup.end();\n    });\n  });\n\n  return dup;\n};",
     "ctx": {
       "type": "method",
       "constructor": "File",
@@ -399,46 +399,13 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "File.prototype.setMetadata = function(metadata, callback) {\n  callback = callback || util.noop;\n  this.makeReq_(\n      'PATCH', '/o/' + this.name, null, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    this.metadata = resp;\n    callback(null, this.metadata);\n  }.bind(this));\n};",
+    "code": "File.prototype.setMetadata = function(metadata, callback) {\n  callback = callback || util.noop;\n  this.makeReq_(\n      'PATCH', '/o/' + this.name, null, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    this.metadata = resp;\n    callback(null, this.metadata);\n  }.bind(this));\n};\n\nmodule.exports = File;",
     "ctx": {
       "type": "method",
       "constructor": "File",
       "cons": "File",
       "name": "setMetadata",
       "string": "File.prototype.setMetadata()"
-    }
-  },
-  {
-    "tags": [],
-    "description": {
-      "full": "<p>Developer Documentation</p><p>Private Methods</p><p>These methods deal with creating and maintaining the lifecycle of a stream.<br />All File objects are Duplex streams, which will allow a reader to pipe data<br />to the remote endpoint. Likewise, you can pipe data from a remote endpoint to<br />a writer.</p><p>Duplexify is used to allow us to asynchronously set the readable and writable<br />portions of this stream. We can&#39;t accept data for buffering until we have<br />made an authorized connection. Once we have such a connection, we call<br /><code>setReadable</code> and/or <code>setWritable</code> on the File instance (which is also a<br />Duplexify instance), which then opens the pipe for more data to come in or go<br />out.</p>",
-      "summary": "<p>Developer Documentation</p>",
-      "body": "<p>Private Methods</p><p>These methods deal with creating and maintaining the lifecycle of a stream.<br />All File objects are Duplex streams, which will allow a reader to pipe data<br />to the remote endpoint. Likewise, you can pipe data from a remote endpoint to<br />a writer.</p><p>Duplexify is used to allow us to asynchronously set the readable and writable<br />portions of this stream. We can&#39;t accept data for buffering until we have<br />made an authorized connection. Once we have such a connection, we call<br /><code>setReadable</code> and/or <code>setWritable</code> on the File instance (which is also a<br />Duplexify instance), which then opens the pipe for more data to come in or go<br />out.</p>"
-    },
-    "isPrivate": false,
-    "ignore": true
-  },
-  {
-    "tags": [
-      {
-        "type": "private",
-        "visibility": "private"
-      }
-    ],
-    "description": {
-      "full": "<p>Get a remote stream to begin piping a readable stream to.</p>",
-      "summary": "<p>Get a remote stream to begin piping a readable stream to.</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "ignore": false,
-    "code": "File.prototype.getWritableStream_ = function(metadata, callback) {\n  if (!callback) {\n    callback = metadata;\n    metadata = {};\n  }\n  var that = this;\n  var boundary = uuid.v4();\n  metadata = extend({ contentType: 'text/plain' }, metadata);\n  this.bucket.connection_.createAuthorizedReq({\n    method: 'POST',\n    uri: util.format('{base}/{bucket}/o', {\n      base: STORAGE_UPLOAD_BASE_URL,\n      bucket: that.bucket.name\n    }),\n    qs: {\n      name: this.name,\n      uploadType: 'multipart'\n    },\n    headers: {\n      'Content-Type': 'multipart/related; boundary=\"' + boundary + '\"'\n    }\n  }, function(err, req) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    var remoteStream = that.bucket.connection_.requester(req);\n    remoteStream.callback = util.noop;\n    remoteStream.write('--' + boundary + '\\n');\n    remoteStream.write('Content-Type: application/json\\n\\n');\n    remoteStream.write(JSON.stringify(metadata));\n    remoteStream.write('\\n\\n');\n    remoteStream.write('--' + boundary + '\\n');\n    remoteStream.write('Content-Type: ' + metadata.contentType + '\\n\\n');\n    var oldEndFn = remoteStream.end;\n    remoteStream.end = function(data, encoding, callback) {\n      data = (data || '') + '\\n--' + boundary + '--\\n';\n      remoteStream.write(data, encoding, callback);\n      oldEndFn.apply(this);\n    };\n    callback(null, remoteStream);\n  });\n};\n\nmodule.exports = File;",
-    "ctx": {
-      "type": "method",
-      "constructor": "File",
-      "cons": "File",
-      "name": "getWritableStream_",
-      "string": "File.prototype.getWritableStream_()"
     }
   }
 ]
