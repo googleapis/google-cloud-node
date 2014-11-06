@@ -50,28 +50,6 @@
       }
     ],
     "description": {
-      "full": "<p>@type module:common/connection</p>",
-      "summary": "<p>@type module:common/connection</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "ignore": false,
-    "code": "var conn = require('../common/connection.js');",
-    "ctx": {
-      "type": "declaration",
-      "name": "conn",
-      "value": "require('../common/connection.js')",
-      "string": "conn"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "private",
-        "visibility": "private"
-      }
-    ],
-    "description": {
       "full": "<p>@type module:common/util</p>",
       "summary": "<p>@type module:common/util</p>",
       "body": ""
@@ -175,22 +153,12 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "function Storage(config) {\n  if (!(this instanceof Storage)) {\n    return new Storage(config);\n  }\n\n  this.config = config || {};\n\n  this.connection_ = new conn.Connection({\n    credentials: this.config.credentials,\n    keyFilename: this.config.keyFilename,\n    scopes: SCOPES\n  });\n  this.config.connection_ = this.connection_;\n\n  this.projectId = this.config.projectId;\n}",
+    "code": "function Storage(config) {\n  if (!(this instanceof Storage)) {\n    return new Storage(config);\n  }\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequest({\n    credentials: config.credentials,\n    keyFile: config.keyFilename,\n    scopes: SCOPES\n  });\n\n  this.projectId = config.projectId;\n}",
     "ctx": {
       "type": "function",
       "name": "Storage",
       "string": "Storage()"
     }
-  },
-  {
-    "tags": [],
-    "description": {
-      "full": "<p>Developer Documentation</p><p>Instance method for creating a Bucket object. Options configured at<br />instantiation of the Storage class will be passed through, allowing for<br />overridden options specified here.</p>",
-      "summary": "<p>Developer Documentation</p>",
-      "body": "<p>Instance method for creating a Bucket object. Options configured at<br />instantiation of the Storage class will be passed through, allowing for<br />overridden options specified here.</p>"
-    },
-    "isPrivate": false,
-    "ignore": true
   },
   {
     "tags": [
@@ -200,16 +168,8 @@
           "object",
           "string"
         ],
-        "name": "options",
-        "description": "- Name of the bucket or configuration object."
-      },
-      {
-        "type": "param",
-        "types": [
-          "string"
-        ],
-        "name": "options.name",
-        "description": "- The name of the existing bucket."
+        "name": "name",
+        "description": "- Name of the existing bucket."
       },
       {
         "type": "return",
@@ -231,7 +191,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Storage.prototype.bucket = function(options) {\n  if (util.is(options, 'string')) {\n    options = {\n      name: options\n    };\n  }\n  options = options || {};\n  // Mix in instance config data to the provided options.\n  return new Bucket(util.extendGlobalConfig(this.config, options));\n};",
+    "code": "Storage.prototype.bucket = function(name) {\n  return new Bucket(this, name);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Storage",
@@ -403,7 +363,7 @@
     },
     "isPrivate": true,
     "ignore": false,
-    "code": "Storage.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: STORAGE_BASE_URL + path\n  };\n  if (body) {\n    reqOpts.json = body;\n  }\n  this.connection_.req(reqOpts, function(err, res, body) {\n    util.handleResp(err, res, body, callback);\n  });\n};\n\nmodule.exports = Storage;",
+    "code": "Storage.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: STORAGE_BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};\n\nmodule.exports = Storage;",
     "ctx": {
       "type": "method",
       "constructor": "Storage",

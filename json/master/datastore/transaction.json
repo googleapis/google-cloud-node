@@ -118,7 +118,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "function Transaction(connection, projectId) {\n  this.connection = connection;\n  this.id = null;\n  this.isFinalized = false;\n  this.projectId = projectId;\n}\n\nnodeutil.inherits(Transaction, DatastoreRequest);",
+    "code": "function Transaction(dataset, projectId) {\n  this.makeAuthorizedRequest_ = dataset.makeAuthorizedRequest_;\n  this.id = null;\n  this.isFinalized = false;\n  this.projectId = projectId;\n}\n\nnodeutil.inherits(Transaction, DatastoreRequest);",
     "ctx": {
       "type": "function",
       "name": "Transaction",

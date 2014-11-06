@@ -28,28 +28,6 @@
       }
     ],
     "description": {
-      "full": "<p>@type module:common/connection</p>",
-      "summary": "<p>@type module:common/connection</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "ignore": false,
-    "code": "var conn = require('../common/connection.js');",
-    "ctx": {
-      "type": "declaration",
-      "name": "conn",
-      "value": "require('../common/connection.js')",
-      "string": "conn"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "private",
-        "visibility": "private"
-      }
-    ],
-    "description": {
       "full": "<p>@type module:datastore/entity</p>",
       "summary": "<p>@type module:datastore/entity</p>",
       "body": ""
@@ -244,7 +222,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "function Dataset(options) {\n  if (!(this instanceof Dataset)) {\n    return new Dataset(options);\n  }\n\n  options = options || {};\n\n  this.connection = new conn.Connection({\n    credentials: options.credentials,\n    keyFilename: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  this.projectId = options.projectId;\n  this.namespace = options.namespace;\n}\n\nnodeutil.inherits(Dataset, DatastoreRequest);",
+    "code": "function Dataset(options) {\n  if (!(this instanceof Dataset)) {\n    return new Dataset(options);\n  }\n\n  options = options || {};\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequest({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  this.projectId = options.projectId;\n  this.namespace = options.namespace;\n}\n\nnodeutil.inherits(Dataset, DatastoreRequest);",
     "ctx": {
       "type": "function",
       "name": "Dataset",
@@ -432,7 +410,7 @@
     },
     "isPrivate": true,
     "ignore": false,
-    "code": "Dataset.prototype.createTransaction_ = function() {\n  return new Transaction(this.connection, this.projectId);\n};\n\nmodule.exports = Dataset;",
+    "code": "Dataset.prototype.createTransaction_ = function() {\n  return new Transaction(this, this.projectId);\n};\n\nmodule.exports = Dataset;",
     "ctx": {
       "type": "method",
       "constructor": "Dataset",

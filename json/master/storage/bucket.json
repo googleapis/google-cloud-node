@@ -147,7 +147,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "function Bucket(options) {\n  this.connection_ = options.connection_;\n  this.metadata = {};\n  this.name = options.name || options.bucketName;\n\n  if (!this.name) {\n    throw Error('A bucket name is needed to use Google Cloud Storage.');\n  }\n}",
+    "code": "function Bucket(storage, name) {\n  this.metadata = {};\n  this.name = name;\n  this.storage = storage;\n\n  if (!this.name) {\n    throw Error('A bucket name is needed to use Google Cloud Storage.');\n  }\n}",
     "ctx": {
       "type": "function",
       "name": "Bucket",
@@ -487,7 +487,7 @@
     },
     "isPrivate": true,
     "ignore": false,
-    "code": "Bucket.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: STORAGE_BASE_URL + '/' + this.name + path\n  };\n  if (body) {\n    reqOpts.json = body;\n  }\n  this.connection_.req(reqOpts, function(err, res, body) {\n    util.handleResp(err, res, body, callback);\n  });\n};\n\nmodule.exports = Bucket;",
+    "code": "Bucket.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: STORAGE_BASE_URL + '/' + this.name + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.storage.makeAuthorizedRequest_(reqOpts, callback);\n};\n\nmodule.exports = Bucket;",
     "ctx": {
       "type": "method",
       "constructor": "Bucket",

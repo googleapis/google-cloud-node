@@ -28,28 +28,6 @@
       }
     ],
     "description": {
-      "full": "<p>@type module:common/connection</p>",
-      "summary": "<p>@type module:common/connection</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "ignore": false,
-    "code": "var conn = require('../common/connection.js');",
-    "ctx": {
-      "type": "declaration",
-      "name": "conn",
-      "value": "require('../common/connection.js')",
-      "string": "conn"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "private",
-        "visibility": "private"
-      }
-    ],
-    "description": {
       "full": "<p>@type module:bigquery/dataset</p>",
       "summary": "<p>@type module:bigquery/dataset</p>",
       "body": ""
@@ -200,7 +178,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "function BigQuery(options) {\n  if (!(this instanceof BigQuery)) {\n    return new BigQuery(options);\n  }\n\n  options = options || {};\n\n  this.connection_ = new conn.Connection({\n    credentials: options.credentials,\n    keyFilename: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  this.projectId = options.projectId;\n}",
+    "code": "function BigQuery(options) {\n  if (!(this instanceof BigQuery)) {\n    return new BigQuery(options);\n  }\n\n  options = options || {};\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequest({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  this.projectId = options.projectId;\n}",
     "ctx": {
       "type": "function",
       "name": "BigQuery",
@@ -665,7 +643,7 @@
     },
     "isPrivate": true,
     "ignore": false,
-    "code": "BigQuery.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: BIGQUERY_BASE_URL + this.projectId + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.connection_.req(reqOpts, function(err, res, body) {\n    util.handleResp(err, res, body, callback);\n  });\n};\n\nmodule.exports = BigQuery;",
+    "code": "BigQuery.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: BIGQUERY_BASE_URL + this.projectId + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};\n\nmodule.exports = BigQuery;",
     "ctx": {
       "type": "method",
       "constructor": "BigQuery",

@@ -28,28 +28,6 @@
       }
     ],
     "description": {
-      "full": "<p>@type module:common/connection</p>",
-      "summary": "<p>@type module:common/connection</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "ignore": false,
-    "code": "var conn = require('../common/connection.js');",
-    "ctx": {
-      "type": "declaration",
-      "name": "conn",
-      "value": "require('../common/connection.js')",
-      "string": "conn"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "private",
-        "visibility": "private"
-      }
-    ],
-    "description": {
       "full": "<p>@type module:pubsub/subscription</p>",
       "summary": "<p>@type module:pubsub/subscription</p>",
       "body": ""
@@ -206,7 +184,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "function PubSub(options) {\n  options = options || {};\n\n  this.connection = new conn.Connection({\n    credentials: options.credentials,\n    keyFilename: options.keyFilename,\n    scopes: SCOPES\n  });\n  this.projectId = options.projectId;\n  this.projectName = '/projects/' + this.projectId;\n}",
+    "code": "function PubSub(options) {\n  options = options || {};\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequest({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  this.projectId = options.projectId;\n  this.projectName = '/projects/' + this.projectId;\n}",
     "ctx": {
       "type": "function",
       "name": "PubSub",
@@ -462,7 +440,7 @@
     },
     "isPrivate": true,
     "ignore": false,
-    "code": "PubSub.prototype.makeReq_ = function(method, path, q, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: q,\n    uri: PUBSUB_BASE_URL + '/' + path\n  };\n  if (body) {\n    reqOpts.json = body;\n  }\n  this.connection.req(reqOpts, function(err, res, body) {\n    util.handleResp(err, res, body, callback);\n  });\n};\n\nmodule.exports = PubSub;",
+    "code": "PubSub.prototype.makeReq_ = function(method, path, q, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: q,\n    uri: PUBSUB_BASE_URL + '/' + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};\n\nmodule.exports = PubSub;",
     "ctx": {
       "type": "method",
       "constructor": "PubSub",
