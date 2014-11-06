@@ -26,7 +26,11 @@ describe('Transaction', function() {
   var TRANSACTION_ID = 'transaction-id';
 
   beforeEach(function() {
-    transaction = new Transaction(null, 'project-id');
+    transaction = new Transaction({
+      authorizeReq_: function(req, callback) {
+        return callback(null, req);
+      }
+    }, 'project-id');
   });
 
   describe('begin', function() {
