@@ -31,7 +31,7 @@ function FakeFile(a, b) {
 }
 
 var makeWritableStream_Override;
-var fakeUtil = extend(util, {
+var fakeUtil = extend({}, util, {
   makeWritableStream: function() {
     var args = [].slice.call(arguments);
     (makeWritableStream_Override || util.makeWritableStream).apply(null, args);
