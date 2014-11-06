@@ -43,10 +43,20 @@ function FakeDuplexify() {
 }
 nodeutil.inherits(FakeDuplexify, duplexify);
 
+var makeWritableStream_Override;
+var fakeUtil = extend({}, util, {
+  makeWritableStream: function() {
+    var args = [].slice.call(arguments);
+    (makeWritableStream_Override || util.makeWritableStream).apply(null, args);
+    makeWritableStream_Override = null;
+  }
+});
+
 var File = require('sandboxed-module')
   .require('../../lib/storage/file.js', {
     requires: {
-      'duplexify': FakeDuplexify
+      'duplexify': FakeDuplexify,
+      '../common/util': fakeUtil
     }
   });
 
@@ -263,48 +273,45 @@ describe('File', function() {
 
   describe('createWriteStream', function() {
     it('should get a writable stream', function(done) {
-      file.getWritableStream_ = function() {
+      makeWritableStream_Override = function() {
         done();
       };
-      file.createWriteStream();
+      file.createWriteStream().emit('writing');
     });
 
-    it('should emit an error if one is returned', function(done) {
-      var error = new Error('Error.');
-      file.getWritableStream_ = function(metadata, callback) {
-        setImmediate(function() {
-          callback(error);
-        });
-      };
-      file.createWriteStream()
-        .once('error', function(err) {
-          assert.equal(err, error);
-          done();
-        });
-    });
+    it('should emit complete event when writing is complete', function(done) {
+      var fakeResponse = { fake: 'data' };
 
-    it('should set writable stream from the response', function() {
-      var dup = duplexify();
-      file.getWritableStream_ = function(metadata, callback) {
-        callback(null, dup);
+      makeWritableStream_Override = function(stream, options, callback) {
+        callback(fakeResponse);
       };
-      file.createWriteStream();
-      assert.deepEqual(writableStream, dup);
-      writableStream = null;
-    });
 
-    it('should emit complete event when writable is complete', function(done) {
-      var dup = duplexify();
-      var fakeResponse = { body: { fake: 'data' } };
-      file.getWritableStream_ = function(metadata, callback) {
-        callback(null, dup);
-      };
       file.createWriteStream()
         .on('complete', function(data) {
-          assert.deepEqual(data, fakeResponse.body);
+          assert.deepEqual(data, fakeResponse);
+          assert.deepEqual(file.metadata, data);
           done();
+        })
+        .emit('writing');
+    });
+
+    it('should pass the required arguments', function(done) {
+      var metadata = { a: 'b', c: 'd' };
+
+      makeWritableStream_Override = function(stream, options) {
+        assert.deepEqual(options.connection, file.bucket.connection_);
+        assert.deepEqual(options.metadata, metadata);
+        assert.deepEqual(options.request, {
+          qs: {
+            name: file.name
+          },
+          uri: 'https://www.googleapis.com/upload/storage/v1/b/' +
+            file.bucket.name + '/o'
         });
-      dup.emit('complete', fakeResponse);
+        done();
+      };
+
+      file.createWriteStream(metadata).emit('writing');
     });
   });
 
@@ -437,94 +444,6 @@ describe('File', function() {
       };
       file.setMetadata(metadata, function() {
         assert.deepEqual(file.metadata, metadata);
-      });
-    });
-  });
-
-  describe('getWritableStream_', function() {
-    var query;
-    var written;
-    var fakeStream = {
-      write: function(chunk) {
-        written.push(chunk);
-      }
-    };
-
-    beforeEach(function() {
-      query = {};
-      written = [];
-      file.bucket.connection_.requester = function() {
-        return fakeStream;
-      };
-      file.bucket.connection_.createAuthorizedReq = function(q, callback) {
-        query = q;
-        callback(null, fakeStream);
-      };
-    });
-
-    function find(term) {
-      return written.some(function(chunk) {
-        return chunk.indexOf(term) > -1;
-      });
-    }
-
-    it('should set correct method', function() {
-      file.getWritableStream_(util.noop);
-      assert.equal(query.method, 'POST');
-    });
-
-    it('should send to correct uri', function() {
-      file.getWritableStream_(util.noop);
-      var expected =
-        'https://www.googleapis.com/upload/storage/v1/b/' + file.bucket.name +
-        '/o';
-      assert.equal(query.uri, expected);
-    });
-
-    it('should set name on query string', function() {
-      file.getWritableStream_(util.noop);
-      assert.equal(query.qs.name, file.name);
-    });
-
-    it('should set multipart upload type', function() {
-      file.getWritableStream_(util.noop);
-      assert.equal(query.qs.uploadType, 'multipart');
-    });
-
-    it('should set multipart content type in header', function() {
-      file.getWritableStream_(util.noop);
-      assert(query.headers['Content-Type'].indexOf('multipart/related;') === 0);
-    });
-
-    it('should set default contentType', function() {
-      file.getWritableStream_(util.noop);
-      assert(find('Content-Type: text/plain'));
-    });
-
-    it('should allow overwriting metadata', function() {
-      file.getWritableStream_({
-        contentType: 'something/custom'
-      }, util.noop);
-      assert(find('Content-Type: something/custom'));
-    });
-
-    it('should send metadata from the instance', function() {
-      var metadata = {
-        hi: 'there',
-        good: 'sir',
-        metadata: {
-          properties: 'have values, often times'
-        }
-      };
-      file.getWritableStream_(metadata, util.noop);
-      var expectedMetadata = extend({ contentType: 'text/plain' }, metadata);
-      assert(find(JSON.stringify(expectedMetadata)));
-    });
-
-    it('should execute callback with remote stream', function(done) {
-      file.getWritableStream_(function(err, stream) {
-        assert.equal(stream, fakeStream);
-        done();
       });
     });
   });
