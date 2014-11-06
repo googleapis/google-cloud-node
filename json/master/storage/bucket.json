@@ -18,7 +18,7 @@
     },
     "isPrivate": false,
     "ignore": true,
-    "code": "'use strict';\n\nvar extend = require('extend');\nvar fs = require('fs');\nvar path = require('path');"
+    "code": "'use strict';\n\nvar extend = require('extend');\nvar fs = require('fs');\nvar mime = require('mime');\nvar path = require('path');"
   },
   {
     "tags": [
@@ -431,7 +431,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "default:\n      callback = callback || destination;\n      name = path.basename(localPath);\n      break;\n  }\n  metadata = metadata || {};\n  callback = callback || util.noop;\n  if (util.is(destination, 'string')) {\n    name = destination;\n  }\n  if (destination instanceof File) {\n    name = destination.name;\n    newFile = destination;\n  }\n  newFile = newFile || this.file(name);\n  fs.createReadStream(localPath)\n    .pipe(newFile.createWriteStream(metadata))\n    .on('error', callback)\n    .on('complete', function() {\n      callback(null, newFile);\n    });\n};"
+    "code": "default:\n      callback = callback || destination;\n      name = path.basename(localPath);\n      break;\n  }\n  metadata = metadata || {};\n  callback = callback || util.noop;\n  if (util.is(destination, 'string')) {\n    name = destination;\n  }\n  if (destination instanceof File) {\n    name = destination.name;\n    newFile = destination;\n  }\n  newFile = newFile || this.file(name);\n\n  var contentType = mime.lookup(localPath);\n  if (contentType && !metadata.contentType) {\n    metadata.contentType = contentType;\n  }\n\n  var charset = mime.charsets.lookup(metadata.contentType);\n  if (charset) {\n    metadata.contentType += '; charset=' + charset;\n  }\n\n  fs.createReadStream(localPath)\n    .pipe(newFile.createWriteStream(metadata))\n    .on('error', callback)\n    .on('complete', function() {\n      callback(null, newFile);\n    });\n};"
   },
   {
     "tags": [
