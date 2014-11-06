@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/*global describe, it, before */
+/*global describe, it, before, after */
 
 'use strict';
 
@@ -31,10 +31,11 @@ var bigquery = gcloud.bigquery();
 var storage = gcloud.storage();
 
 describe('BigQuery', function() {
-  var DATASET_ID = 'testDatasetId';
+  var DATASET_ID = ('gcloud_test_dataset_temp' + uuid.v1()).replace(/-/g, '_');
   var dataset;
   var TABLE_ID = 'myKittens';
   var table;
+  var BUCKET_NAME = 'gcloud-test-bucket-temp-' + uuid.v1();
   var bucket;
 
   var query = 'SELECT url FROM [publicdata:samples.github_nested] LIMIT 100';
@@ -86,8 +87,7 @@ describe('BigQuery', function() {
 
       // Create a Bucket.
       function(next) {
-        var bucketName = 'gcloud-test-bucket-temp-' + uuid.v1();
-        storage.createBucket(bucketName, function(err, b) {
+        storage.createBucket(BUCKET_NAME, function(err, b) {
           if (err) {
             next(err);
             return;
@@ -96,6 +96,36 @@ describe('BigQuery', function() {
           bucket = b;
           next();
         });
+      }
+    ], done);
+  });
+
+  after(function(done) {
+    async.parallel([
+      // Delete the bucket we used.
+      function(next) {
+        bucket.getFiles(function(err, files) {
+          if (err) {
+            next(err);
+            return;
+          }
+
+          async.map(files, function(file, onComplete) {
+            file.delete(onComplete);
+          }, function(err) {
+            if (err) {
+              next(err);
+              return;
+            }
+
+            bucket.delete(next);
+          });
+        });
+      },
+
+      // Delete the test dataset.
+      function(next) {
+        dataset.delete({ force: true }, next);
       }
     ], done);
   });
