@@ -19,47 +19,20 @@
 'use strict';
 
 var assert = require('assert');
-var datastore = require('../../lib').datastore;
-var gcloud = require('../../lib');
+var Dataset = require('../../lib/datastore/dataset');
 var util = require('../../lib/common/util.js');
 
 describe('Dataset', function() {
-  it('should not require connection details', function() {
-    var credentials = require('../testdata/privateKeyFile.json');
-    var project = gcloud({
-      projectId: 'test-project',
-      credentials: credentials
-    });
-    var ds = project.datastore.dataset({ hi: 'there' });
-    assert.equal(ds.projectId, 'test-project');
-    assert.deepEqual(ds.connection.credentials, credentials);
-  });
-
-  it('should allow overriding connection details', function() {
-    var projectCredentials = require('../testdata/privateKeyFile.json');
-    var uniqueCredentials = require('../testdata/privateKeyFile-2.json');
-    var project = gcloud({
-      projectId: 'test-project',
-      credentials: projectCredentials
-    });
-    var ds = project.datastore.dataset({
-      projectId: 'another-project',
-      credentials: uniqueCredentials
-    });
-    assert.equal(ds.projectId, 'another-project');
-    assert.deepEqual(ds.connection.credentials, uniqueCredentials);
-  });
-
   describe('key', function() {
     it('should return key scoped by default namespace', function() {
-      var ds = datastore.dataset({ projectId: 'test', namespace: 'my-ns' });
+      var ds = new Dataset({ projectId: 'test', namespace: 'my-ns' });
       var key = ds.key(['Company', 1]);
       assert.equal(key.namespace, 'my-ns');
       assert.deepEqual(key.path, ['Company', 1]);
     });
 
     it('should allow namespace specification', function() {
-      var ds = datastore.dataset({ projectId: 'test', namespace: 'my-ns' });
+      var ds = new Dataset({ projectId: 'test', namespace: 'my-ns' });
       var key = ds.key({
         namespace: 'custom-ns',
         path: ['Company', 1]
@@ -69,13 +42,13 @@ describe('Dataset', function() {
     });
 
     it('should create incomplete key from string', function() {
-      var ds = datastore.dataset({ projectId: 'test' });
+      var ds = new Dataset({ projectId: 'test' });
       var key = ds.key('hello');
       assert.deepEqual(key.path, ['hello']);
     });
 
     it('should create incomplete key from array in obj', function() {
-      var ds = datastore.dataset({ projectId: 'test' });
+      var ds = new Dataset({ projectId: 'test' });
       var key = ds.key({
         path: ['world']
       });
@@ -83,7 +56,7 @@ describe('Dataset', function() {
     });
 
     it('should create incomplete key from array', function() {
-      var ds = datastore.dataset({ projectId: 'test' });
+      var ds = new Dataset({ projectId: 'test' });
       var key = ds.key(['Company']);
       assert.deepEqual(key.path, ['Company']);
     });
@@ -93,7 +66,7 @@ describe('Dataset', function() {
     var ds;
 
     beforeEach(function() {
-      ds = datastore.dataset({ projectId: 'test' });
+      ds = new Dataset({ projectId: 'test' });
     });
 
     it('should begin transaction', function(done) {
@@ -145,8 +118,8 @@ describe('Dataset', function() {
     var dsWithNs;
 
     beforeEach(function() {
-      ds = datastore.dataset({ projectId: 'test' });
-      dsWithNs = datastore.dataset({
+      ds = new Dataset({ projectId: 'test' });
+      dsWithNs = new Dataset({
         projectId: 'test',
         namespace: 'my-ns'
       });

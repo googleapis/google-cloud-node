@@ -20,7 +20,34 @@
 
 var assert = require('assert');
 var duplexify = require('duplexify');
-var util = require('../../lib/common/util.js');
+var request = require('request');
+
+var util = require('sandboxed-module')
+  .require('../../lib/common/util', {
+    requires: {
+      'google-service-account': fakeGsa,
+      request: fakeRequest
+    }
+  });
+
+var gsa_Override;
+
+function fakeGsa() {
+  var args = [].slice.apply(arguments);
+  var results = (gsa_Override || util.noop).apply(null, args);
+  gsa_Override = null;
+  return results || { getCredentials: util.noop };
+}
+
+var request_Cached = request;
+var request_Override;
+
+function fakeRequest() {
+  var args = [].slice.apply(arguments);
+  var results = (request_Override || request_Cached).apply(null, args);
+  request_Override = null;
+  return results;
+}
 
 describe('common/util', function() {
   describe('arrayize', function() {
@@ -97,15 +124,13 @@ describe('common/util', function() {
     it('should use defaults', function(done) {
       var dup = duplexify();
       util.makeWritableStream(dup, {
-        connection: {
-          createAuthorizedReq: function(request) {
-            assert.equal(request.method, 'POST');
-            assert.equal(request.qs.uploadType, 'multipart');
+        makeAuthorizedRequest: function(request) {
+          assert.equal(request.method, 'POST');
+          assert.equal(request.qs.uploadType, 'multipart');
 
-            var contentType = request.headers['Content-Type'];
-            assert.equal(contentType.indexOf('multipart/related'), 0);
-            done();
-          }
+          var contentType = request.headers['Content-Type'];
+          assert.equal(contentType.indexOf('multipart/related'), 0);
+          done();
         }
       });
     });
@@ -122,13 +147,11 @@ describe('common/util', function() {
       };
 
       util.makeWritableStream(dup, {
-        connection: {
-          createAuthorizedReq: function(request) {
-            assert.equal(request.method, req.method);
-            assert.deepEqual(request.qs, req.qs);
-            assert.equal(request.something, req.something);
-            done();
-          }
+        makeAuthorizedRequest: function(request) {
+          assert.equal(request.method, req.method);
+          assert.deepEqual(request.qs, req.qs);
+          assert.equal(request.something, req.something);
+          done();
         },
 
         request: req
@@ -145,10 +168,8 @@ describe('common/util', function() {
       });
 
       util.makeWritableStream(dup, {
-        connection: {
-          createAuthorizedReq: function(request, callback) {
-            callback(error);
-          }
+        makeAuthorizedRequest: function(request, opts) {
+          opts.onAuthorized(error);
         }
       });
     });
@@ -158,48 +179,45 @@ describe('common/util', function() {
       var boundary;
       var metadata = { a: 'b', c: 'd' };
 
+      request_Override = function() {
+        var written = [];
+
+        var req = duplexify();
+
+        req.write = function(data) {
+          written.push(data);
+        };
+
+        req.end = function() {
+          var boundaryLine = '--' + boundary + '\n';
+
+          var startFirstBoundaryIdx = written.indexOf(boundaryLine);
+          var endFirstBoundaryIdx = written.lastIndexOf(boundaryLine);
+          var endBoundaryIdx = written.indexOf('\n--' + boundary + '--\n');
+
+          assert(startFirstBoundaryIdx > -1);
+          assert(endFirstBoundaryIdx > startFirstBoundaryIdx);
+          assert(endBoundaryIdx > -1);
+
+          assert(written.indexOf(JSON.stringify(metadata)) > -1);
+
+          done();
+        };
+
+        setImmediate(function() {
+          req.end();
+        });
+
+        return req;
+      };
+
       util.makeWritableStream(dup, {
         metadata: metadata,
 
-        connection: {
-          createAuthorizedReq: function(request, callback) {
-            var contentType = request.headers['Content-Type'];
-            // Match the UUID boundary from the contentType
-            boundary = contentType.match(/boundary="([^"]*)/)[1];
-            callback();
-          },
-
-          requester: function() {
-            var written = [];
-
-            var req = duplexify();
-
-            req.write = function(data) {
-              written.push(data);
-            };
-
-            req.end = function() {
-              var boundaryLine = '--' + boundary + '\n';
-
-              var startFirstBoundaryIdx = written.indexOf(boundaryLine);
-              var endFirstBoundaryIdx = written.lastIndexOf(boundaryLine);
-              var endBoundaryIdx = written.indexOf('\n--' + boundary + '--\n');
-
-              assert(startFirstBoundaryIdx > -1);
-              assert(endFirstBoundaryIdx > startFirstBoundaryIdx);
-              assert(endBoundaryIdx > -1);
-
-              assert(written.indexOf(JSON.stringify(metadata)) > -1);
-
-              done();
-            };
-
-            setImmediate(function() {
-              req.end();
-            });
-
-            return req;
-          }
+        makeAuthorizedRequest: function(request, opts) {
+          var contentType = request.headers['Content-Type'];
+          boundary = contentType.match(/boundary="([^"]*)/)[1];
+          opts.onAuthorized();
         }
       });
     });
@@ -208,20 +226,18 @@ describe('common/util', function() {
       var dup = duplexify();
       var stream = duplexify();
 
+      request_Override = function() {
+        return stream;
+      };
+
       dup.setWritable = function(writable) {
         assert.equal(writable, stream);
         done();
       };
 
       util.makeWritableStream(dup, {
-        connection: {
-          createAuthorizedReq: function(request, callback) {
-            callback();
-          },
-
-          requester: function() {
-            return stream;
-          }
+        makeAuthorizedRequest: function(request, opts) {
+          opts.onAuthorized();
         }
       });
     });
@@ -230,21 +246,147 @@ describe('common/util', function() {
       var dup = duplexify();
       var stream = duplexify();
 
+      request_Override = function() {
+        return stream;
+      };
+
       dup.pipe = function(writable) {
         assert.equal(writable, stream);
         done();
       };
 
       util.makeWritableStream(dup, {
-        connection: {
-          createAuthorizedReq: function(request, callback) {
-            callback();
-          },
-
-          requester: function() {
-            return stream;
-          }
+        makeAuthorizedRequest: function(request, opts) {
+          opts.onAuthorized();
         }
+      });
+    });
+  });
+
+  describe('makeAuthorizedRequest', function() {
+    it('should pass configuration to gsa', function(done) {
+      var config = { keyFile: 'key', scopes: [1, 2] };
+
+      gsa_Override = function(cfg) {
+        assert.deepEqual(cfg, config);
+        done();
+      };
+
+      util.makeAuthorizedRequest(config);
+    });
+
+    it('should return gsa.getCredentials function', function() {
+      var getCredentials = util.makeAuthorizedRequest().getCredentials;
+      assert.equal(typeof getCredentials, 'function');
+    });
+
+    describe('makeRequest', function() {
+      it('should add a user agent onto headers', function(done) {
+        gsa_Override = function() {
+          return function authorize(reqOpts) {
+            assert(reqOpts.headers['User-Agent'].indexOf('gcloud') > -1);
+            done();
+          };
+        };
+
+        var makeRequest = util.makeAuthorizedRequest();
+        makeRequest({});
+      });
+
+      it('should extend an existing user agent', function(done) {
+        gsa_Override = function() {
+          return function authorize(reqOpts) {
+            var index = reqOpts.headers['User-Agent'].indexOf('test; gcloud');
+            assert.equal(index, 0);
+            done();
+          };
+        };
+
+        var makeRequest = util.makeAuthorizedRequest();
+        makeRequest({ headers: { 'User-Agent': 'test' } });
+      });
+
+      it('should execute callback with error', function(done) {
+        var error = new Error('Error.');
+
+        gsa_Override = function() {
+          return function authorize(reqOpts, callback) {
+            callback(error);
+          };
+        };
+
+        var makeRequest = util.makeAuthorizedRequest();
+        makeRequest({}, function(err) {
+          assert.equal(err, error);
+          done();
+        });
+      });
+
+      it('should try to reconnect if token invalid', function(done) {
+        var attempts = 0;
+        var expectedAttempts = 2;
+        var error = { code: 401 };
+
+        gsa_Override = function() {
+          return function authorize(reqOpts, callback) {
+            attempts++;
+            callback(error);
+          };
+        };
+
+        var makeRequest = util.makeAuthorizedRequest();
+        makeRequest({}, function (err) {
+          assert.equal(attempts, expectedAttempts);
+          assert.equal(err, error);
+          done();
+        });
+      });
+
+      it('should execute the onauthorized callback', function(done) {
+        gsa_Override = function() {
+          return function authorize(reqOpts, callback) {
+            callback();
+          };
+        };
+
+        var makeRequest = util.makeAuthorizedRequest();
+        makeRequest({}, { onAuthorized: done });
+      });
+
+      it('should execute the onauthorized callback with error', function(done) {
+        var error = new Error('Error.');
+
+        gsa_Override = function() {
+          return function authorize(reqOpts, callback) {
+            callback(error);
+          };
+        };
+
+        var makeRequest = util.makeAuthorizedRequest();
+        makeRequest({}, {
+          onAuthorized: function(err) {
+            assert.equal(err, error);
+            done();
+          }
+        });
+      });
+
+      it('should make the authorized request', function(done) {
+        var authorizedReqOpts = { a: 'b', c: 'd' };
+
+        gsa_Override = function() {
+          return function authorize(reqOpts, callback) {
+            callback(null, authorizedReqOpts);
+          };
+        };
+
+        request_Override = function(reqOpts) {
+          assert.deepEqual(reqOpts, authorizedReqOpts);
+          done();
+        };
+
+        var makeRequest = util.makeAuthorizedRequest();
+        makeRequest({}, assert.ifError);
       });
     });
   });
