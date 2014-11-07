@@ -142,6 +142,25 @@ describe('storage', function() {
       });
     });
 
+    it('should read/write from/to a file in a directory', function(done) {
+      var file = bucket.file('directory/file');
+      var contents = 'test';
+
+      var writeStream = file.createWriteStream();
+      writeStream.write(contents);
+      writeStream.end();
+
+      writeStream.on('error', done);
+      writeStream.on('complete', function() {
+        file.createReadStream()
+          .on('data', function(chunk) {
+            assert.equal(String(chunk), contents);
+          })
+          .on('error', done)
+          .on('end', done);
+      });
+    });
+
     describe('stream write', function() {
       it('should stream write, then remove large file (5mb)', function(done) {
         var file = bucket.file('LargeFile');
