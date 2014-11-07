@@ -80,10 +80,14 @@ describe('File', function() {
   };
   var bucket = new Bucket(options, 'bucket-name');
   var file;
+  var directoryFile;
 
   beforeEach(function() {
     file = new File(bucket, FILE_NAME);
     file.makeReq_ = util.noop;
+
+    directoryFile = new File(bucket, 'directory/file.jpg');
+    directoryFile.makeReq_ = util.noop;
   });
 
   describe('initialization', function() {
@@ -109,6 +113,24 @@ describe('File', function() {
       assert.throws(function() {
         file.copy();
       }, /should have a name/);
+    });
+
+    it('should URI encode file names', function(done) {
+      var newFile = new File(bucket, 'nested/file.jpg');
+
+      var expectedPath =
+        util.format('/o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {
+          srcName: encodeURIComponent(directoryFile.name),
+          destBucket: file.bucket.name,
+          destName: encodeURIComponent(newFile.name)
+        });
+
+      directoryFile.makeReq_ = function(method, path) {
+        assert.equal(path, expectedPath);
+        done();
+      };
+
+      directoryFile.copy(newFile);
     });
 
     describe('destination types', function() {
@@ -335,6 +357,15 @@ describe('File', function() {
       file.delete();
     });
 
+    it('should URI encode file names', function(done) {
+      directoryFile.makeReq_ = function(method, path) {
+        assert.equal(path, '/o/' + encodeURIComponent(directoryFile.name));
+        done();
+      };
+
+      directoryFile.delete();
+    });
+
     it('should execute callback', function(done) {
       file.makeReq_ = function(method, path, query, body, callback) {
         callback();
@@ -355,6 +386,15 @@ describe('File', function() {
         done();
       };
       file.getMetadata();
+    });
+
+    it('should URI encode file names', function(done) {
+      directoryFile.makeReq_ = function(method, path) {
+        assert.equal(path, '/o/' + encodeURIComponent(directoryFile.name));
+        done();
+      };
+
+      directoryFile.getMetadata();
     });
 
     it('should execute callback', function(done) {
@@ -407,6 +447,16 @@ describe('File', function() {
       });
     });
 
+    it('should URI encode file names', function(done) {
+      directoryFile.getSignedUrl({
+        action: 'read',
+        expires: Math.round(Date.now() / 1000) + 5
+      }, function(err, signedUrl) {
+        assert(signedUrl.indexOf(encodeURIComponent(directoryFile.name)) > -1);
+        done();
+      });
+    });
+
     describe('expires', function() {
       var nowInSeconds = Math.floor(Date.now() / 1000);
 
@@ -446,6 +496,15 @@ describe('File', function() {
         done();
       };
       file.setMetadata(metadata);
+    });
+
+    it('should URI encode file names', function(done) {
+      directoryFile.makeReq_ = function(method, path) {
+        assert.equal(path, '/o/' + encodeURIComponent(directoryFile.name));
+        done();
+      };
+
+      directoryFile.setMetadata();
     });
 
     it('should execute callback', function(done) {
