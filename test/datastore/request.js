@@ -329,15 +329,29 @@ describe('Request', function() {
       });
     });
 
-    it('should return a new query if results remain', function() {
+    it('should return an empty string if no end cursor exists', function(done) {
       request.makeReq_ = function(method, req, callback) {
-        assert.equal(method, 'runQuery');
-        callback(null, mockResponse.withResultsAndEndCursor);
+        callback(null, mockResponse.withResults);
       };
 
-      request.runQuery(query, function(err, entities, nextQuery) {
+      request.runQuery(query, function(err, entities, endCursor) {
         assert.ifError(err);
-        assert.equal(nextQuery.constructor.name, 'Query');
+        assert.strictEqual(endCursor, '');
+        done();
+      });
+    });
+
+    it('should return the end cursor from the last query', function(done) {
+      var response = mockResponse.withResultsAndEndCursor;
+
+      request.makeReq_ = function(method, req, callback) {
+        callback(null, response);
+      };
+
+      request.runQuery(query, function(err, entities, endCursor) {
+        assert.ifError(err);
+        assert.equal(endCursor, response.batch.end_cursor.toBase64());
+        done();
       });
     });
   });
