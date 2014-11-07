@@ -27,6 +27,7 @@ var https = require('https');
 var mockRespGet = require('../testdata/response_get.json');
 var pb = require('../../lib/datastore/pb.js');
 var Query = require('../../lib/datastore/query.js');
+var Stream = require('stream');
 var util = require('../../lib/common/util.js');
 
 var httpsRequestOverride = util.noop;
@@ -278,8 +279,7 @@ describe('Request', function() {
           entity_result: mockRespGet.found,
           end_cursor: new ByteBuffer().writeIString('cursor').flip()
         }
-      },
-      withoutResults: mockRespGet
+      }
     };
 
     beforeEach(function() {
@@ -296,18 +296,6 @@ describe('Request', function() {
 
         request.runQuery(query, function(err) {
           assert.equal(err, error);
-        });
-      });
-
-      it('should handle missing results error', function() {
-        request.makeReq_ = function(method, req, callback) {
-          assert.equal(method, 'runQuery');
-          callback(null, mockResponse.withoutResults);
-        };
-
-        request.runQuery(query, function(err, entities) {
-          assert.strictEqual(err, null);
-          assert.strictEqual(entities, undefined);
         });
       });
     });
@@ -352,6 +340,66 @@ describe('Request', function() {
         assert.ifError(err);
         assert.equal(endCursor, response.batch.end_cursor.toBase64());
         done();
+      });
+    });
+
+    describe('streams', function() {
+      it('should be a stream if a callback is omitted', function() {
+        assert(request.runQuery(query) instanceof Stream);
+      });
+
+      it('should run the query after being read from', function(done) {
+        request.makeReq_ = function() {
+          done();
+        };
+
+        request.runQuery(query).emit('reading');
+      });
+
+      it('should continuosly run until there are no results', function(done) {
+        var run = 0;
+        var timesToRun = 2;
+
+        request.makeReq_ = function(method, req, callback) {
+          run++;
+
+          if (run < timesToRun) {
+            callback(null, mockResponse.withResultsAndEndCursor);
+          } else {
+            var lastEndCursor =
+              mockResponse.withResultsAndEndCursor.batch.end_cursor.toBase64();
+            lastEndCursor = new Buffer(lastEndCursor, 'base64').toString();
+
+            assert.equal(String(req.query.start_cursor), lastEndCursor);
+            assert.strictEqual(req.query.offset, undefined);
+
+            callback(null, mockResponse.withResults);
+          }
+        };
+
+        var resultsReturned = 0;
+
+        request.runQuery(query)
+          .on('data', function() { resultsReturned++; })
+          .on('end', function() {
+            assert.equal(resultsReturned, mockRespGet.found.length);
+            done();
+          });
+      });
+
+      it('should emit an error', function(done) {
+        var error = new Error('Error.');
+
+        request.makeReq_ = function(method, req, callback) {
+          callback(error);
+        };
+
+        request.runQuery(query)
+          .on('error', function(err) {
+            assert.equal(err, error);
+            done();
+          })
+          .emit('reading');
       });
     });
   });

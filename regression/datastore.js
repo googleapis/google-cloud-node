@@ -248,6 +248,21 @@ describe('datastore', function() {
       });
     });
 
+    it('should run a query as a stream', function(done) {
+      var q = ds.createQuery('Character').hasAncestor(ancestor)
+          .limit(5);
+
+      var resultsReturned = 0;
+
+      ds.runQuery(q)
+        .on('error', done)
+        .on('data', function() { resultsReturned++; })
+        .on('end', function() {
+          assert.equal(resultsReturned, characters.length);
+          done();
+        });
+    });
+
     it('should filter queries with simple indexes', function(done) {
       var q = ds.createQuery('Character').hasAncestor(ancestor)
           .filter('appearances >=', 20);
