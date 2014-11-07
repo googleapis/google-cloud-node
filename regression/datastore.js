@@ -231,19 +231,17 @@ describe('datastore', function() {
     it('should limit queries', function(done) {
       var q = ds.createQuery('Character').hasAncestor(ancestor)
           .limit(5);
-      ds.runQuery(q, function(err, firstEntities, secondQuery) {
+      ds.runQuery(q, function(err, firstEntities, firstEndCursor) {
         assert.ifError(err);
         assert.equal(firstEntities.length, 5);
-        assert(secondQuery);
-        ds.runQuery(secondQuery, function(err, secondEntities, thirdQuery) {
+        var secondQ = q.start(firstEndCursor);
+        ds.runQuery(secondQ, function(err, secondEntities, secondEndCursor) {
           assert.ifError(err);
           assert.equal(secondEntities.length, 3);
-          // TODO(silvano): it currently requires an additional request that
-          // brings an empty page and a null query
-          //assert.equal(thirdQuery, null)
-          ds.runQuery(thirdQuery, function(err, thirdEntities, fourthQuery) {
+          var thirdQ = q.start(secondEndCursor);
+          ds.runQuery(thirdQ, function(err, thirdEntities) {
             assert.ifError(err);
-            assert.equal(fourthQuery, null);
+            assert.equal(thirdEntities.length, 0);
             done();
           });
         });
@@ -324,11 +322,12 @@ describe('datastore', function() {
           .offset(2)
           .limit(3)
           .order('appearances');
-      ds.runQuery(q, function(err, entities, secondQuery) {
+      ds.runQuery(q, function(err, entities, endCursor) {
         assert.ifError(err);
         assert.equal(entities.length, 3);
         assert.equal(entities[0].data.name, 'Robb');
         assert.equal(entities[2].data.name, 'Catelyn');
+        var secondQuery = q.start(endCursor).offset(0);
         ds.runQuery(secondQuery, function(err, secondEntities) {
           assert.equal(secondEntities.length, 3);
           assert.equal(secondEntities[0].data.name, 'Sansa');
@@ -343,13 +342,12 @@ describe('datastore', function() {
           .offset(2)
           .limit(2)
           .order('appearances');
-      ds.runQuery(q, function(err, entities, nextQuery) {
+      ds.runQuery(q, function(err, entities, endCursor) {
         assert.ifError(err);
-        var startCursor = nextQuery.startVal;
         var cursorQuery =
             ds.createQuery('Character').hasAncestor(ancestor)
               .order('appearances')
-              .start(startCursor);
+              .start(endCursor);
         ds.runQuery(cursorQuery, function(err, secondEntities) {
           assert.ifError(err);
           assert.equal(secondEntities.length, 4);
