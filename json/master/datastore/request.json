@@ -18,7 +18,7 @@
     },
     "isPrivate": false,
     "ignore": true,
-    "code": "'use strict';\n\nvar https = require('https');"
+    "code": "'use strict';\n\nvar https = require('https');\nvar streamEvents = require('stream-events');\nvar through = require('through2');"
   },
   {
     "tags": [
@@ -352,24 +352,24 @@
       {
         "type": "param",
         "types": [
-          "function"
+          "function="
         ],
         "name": "callback",
-        "description": "- The callback function. "
+        "description": "- The callback function. If omitted, a readable     stream instance is returned.\n"
       },
       {
         "type": "example",
-        "string": "//-\n// Where you see `transaction`, assume this is the context that's relevant to\n// your use, whether that be a Dataset or a Transaction object.\n//-\n\n// Retrieve 5 companies.\ntransaction.runQuery(queryObject, function(err, entities, endCursor) {\n  // Use `endCursor` as the starting cursor for your next query.\n  var nextQuery = queryObject.start(endCursor);\n  transaction.runQuery(nextQuery, function(err, entities, endCursor) {});\n});"
+        "string": "//-\n// Where you see `transaction`, assume this is the context that's relevant to\n// your use, whether that be a Dataset or a Transaction object.\n//-\n\n// Retrieve 5 companies.\ntransaction.runQuery(queryObject, function(err, entities, endCursor) {\n  // Use `endCursor` as the starting cursor for your next query.\n  var nextQuery = queryObject.start(endCursor);\n  transaction.runQuery(nextQuery, function(err, entities, endCursor) {});\n});\n\n//-\n// If you omit the callback, runQuery will automatically call subsequent\n// queries until no results remain. Entity objects will be pushed as they are\n// found.\n//-\ntransaction.runQuery(queryObject)\n  .on('data', function (entity) {});"
       }
     ],
     "description": {
-      "full": "<p>Datastore allows you to query entities by kind, filter them by property<br />filters, and sort them by a property name. Projection and pagination are also<br />supported. If more results are available, a query to retrieve the next page<br />is provided to the callback function.</p>",
-      "summary": "<p>Datastore allows you to query entities by kind, filter them by property<br />filters, and sort them by a property name. Projection and pagination are also<br />supported. If more results are available, a query to retrieve the next page<br />is provided to the callback function.</p>",
-      "body": ""
+      "full": "<p>Datastore allows you to query entities by kind, filter them by property<br />filters, and sort them by a property name. Projection and pagination are also<br />supported.</p><p>If you provide a callback, the query is run, and the results are returned as<br />the second argument to your callback. A third argument will also exist, which<br />is the <code>endCursor</code> of the previously-run query. You can use this to extend<br />the query you just ran to see if more results exist.</p><p>You may also omit the callback to this function to trigger streaming mode.</p><p>See below for examples of both approaches.</p>",
+      "summary": "<p>Datastore allows you to query entities by kind, filter them by property<br />filters, and sort them by a property name. Projection and pagination are also<br />supported.</p>",
+      "body": "<p>If you provide a callback, the query is run, and the results are returned as<br />the second argument to your callback. A third argument will also exist, which<br />is the <code>endCursor</code> of the previously-run query. You can use this to extend<br />the query you just ran to see if more results exist.</p><p>You may also omit the callback to this function to trigger streaming mode.</p><p>See below for examples of both approaches.</p>"
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "DatastoreRequest.prototype.runQuery = function(q, callback) {\n  callback = callback || util.noop;\n\n  var req = {\n    read_options: {},\n    query: entity.queryToQueryProto(q)\n  };\n\n  if (q.namespace) {\n    req.partition_id = {\n      namespace: q.namespace\n    };\n  }\n\n  this.makeReq_('runQuery', req, function(err, resp) {\n    if (err || !resp.batch || !resp.batch.entity_result) {\n      callback(err);\n      return;\n    }\n\n    var cursor = '';\n    if (resp.batch.end_cursor) {\n      cursor = resp.batch.end_cursor.toBase64();\n    }\n\n    callback(null, entity.formatArray(resp.batch.entity_result), cursor);\n  });\n};",
+    "code": "DatastoreRequest.prototype.runQuery = function(q, callback) {\n  var that = this;\n  var stream;\n\n  var req = {\n    read_options: {},\n    query: entity.queryToQueryProto(q)\n  };\n\n  if (q.namespace) {\n    req.partition_id = {\n      namespace: q.namespace\n    };\n  }\n\n  if (!util.is(callback, 'function')) {\n    stream = streamEvents(through.obj());\n    stream.once('reading', runQuery);\n    return stream;\n  } else {\n    callback = callback || util.noop;\n    runQuery();\n  }\n\n  function runQuery() {\n    that.makeReq_('runQuery', req, function(err, resp) {\n      if (err) {\n        if (stream) {\n          stream.emit('error', err);\n          stream.end();\n        } else {\n          callback(err);\n        }\n        return;\n      }\n\n      var entities = entity.formatArray(resp.batch.entity_result);\n\n      var cursor = '';\n      if (resp.batch.end_cursor) {\n        cursor = resp.batch.end_cursor.toBase64();\n      }\n\n      if (stream) {\n        if (cursor && entities.length > 0) {\n          entities.forEach(function (entity) {\n            stream.push(entity);\n          });\n\n          req.query = entity.queryToQueryProto(q.start(cursor).offset(0));\n\n          runQuery();\n        } else {\n          stream.end();\n        }\n      } else {\n        callback(null, entities, cursor);\n      }\n    });\n  }\n};",
     "ctx": {
       "type": "method",
       "constructor": "DatastoreRequest",

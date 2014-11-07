@@ -166,7 +166,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "File.prototype.copy = function(destination, callback) {\n  var noDestinationError = new Error('Destination file should have a name.');\n  if (!destination) {\n    throw noDestinationError;\n  }\n  callback = callback || util.noop;\n  var destBucket;\n  var destName;\n  var newFile;\n  if (util.is(destination, 'string')) {\n    destBucket = this.bucket;\n    destName = destination;\n  }\n  if (destination.constructor && destination.constructor.name === 'Bucket') {\n    destBucket = destination;\n    destName = this.name;\n  }\n  if (destination instanceof File) {\n    destBucket = destination.bucket;\n    destName = destination.name;\n    newFile = destination;\n  }\n  if (!destName) {\n    throw noDestinationError;\n  }\n  var path = util.format('/o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {\n    srcName: this.name,\n    destBucket: destBucket.name,\n    destName: destName\n  });\n  this.makeReq_('POST', path, null, {}, function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    callback(null, newFile || destBucket.file(destName));\n  });\n};",
+    "code": "File.prototype.copy = function(destination, callback) {\n  var noDestinationError = new Error('Destination file should have a name.');\n  if (!destination) {\n    throw noDestinationError;\n  }\n  callback = callback || util.noop;\n  var destBucket;\n  var destName;\n  var newFile;\n  if (util.is(destination, 'string')) {\n    destBucket = this.bucket;\n    destName = destination;\n  }\n  if (destination.constructor && destination.constructor.name === 'Bucket') {\n    destBucket = destination;\n    destName = this.name;\n  }\n  if (destination instanceof File) {\n    destBucket = destination.bucket;\n    destName = destination.name;\n    newFile = destination;\n  }\n  if (!destName) {\n    throw noDestinationError;\n  }\n  var path = util.format('/o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {\n    srcName: encodeURIComponent(this.name),\n    destBucket: destBucket.name,\n    destName: encodeURIComponent(destName)\n  });\n  this.makeReq_('POST', path, null, {}, function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    callback(null, newFile || destBucket.file(destName));\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "File",
@@ -220,7 +220,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "File.prototype.createWriteStream = function(metadata) {\n  var that = this;\n  var dup = streamEvents(duplexify());\n\n  dup.once('writing', function() {\n    util.makeWritableStream(dup, {\n      makeAuthorizedRequest: that.bucket.storage.makeAuthorizedRequest_,\n      metadata: metadata,\n      request: {\n        qs: {\n          name: that.name,\n        },\n        uri: util.format('{base}/{bucket}/o', {\n          base: STORAGE_UPLOAD_BASE_URL,\n          bucket: that.bucket.name\n        })\n      }\n    }, function(data) {\n      that.metadata = data;\n\n      dup.emit('complete', data);\n      dup.end();\n    });\n  });\n\n  return dup;\n};",
+    "code": "File.prototype.createWriteStream = function(metadata) {\n  var that = this;\n  var dup = streamEvents(duplexify());\n\n  dup.once('writing', function() {\n    util.makeWritableStream(dup, {\n      makeAuthorizedRequest: that.bucket.storage.makeAuthorizedRequest_,\n      metadata: metadata,\n      request: {\n        qs: {\n          name: that.name\n        },\n        uri: util.format('{base}/{bucket}/o', {\n          base: STORAGE_UPLOAD_BASE_URL,\n          bucket: that.bucket.name\n        })\n      }\n    }, function(data) {\n      that.metadata = data;\n\n      dup.emit('complete', data);\n      dup.end();\n    });\n  });\n\n  return dup;\n};",
     "ctx": {
       "type": "method",
       "constructor": "File",
@@ -251,7 +251,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "File.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('DELETE', '/o/' + this.name, null, true, function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    callback();\n  }.bind(this));\n};",
+    "code": "File.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n  var path = '/o/' + encodeURIComponent(this.name);\n  this.makeReq_('DELETE', path, null, true, function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    callback();\n  }.bind(this));\n};",
     "ctx": {
       "type": "method",
       "constructor": "File",
@@ -282,7 +282,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "File.prototype.getMetadata = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('GET', '/o/' + this.name, null, true, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    this.metadata = resp;\n    callback(null, this.metadata);\n  }.bind(this));\n};",
+    "code": "File.prototype.getMetadata = function(callback) {\n  callback = callback || util.noop;\n  var path = '/o/' + encodeURIComponent(this.name);\n  this.makeReq_('GET', path, null, true, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    this.metadata = resp;\n    callback(null, this.metadata);\n  }.bind(this));\n};",
     "ctx": {
       "type": "method",
       "constructor": "File",
@@ -360,7 +360,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "File.prototype.getSignedUrl = function(options, callback) {\n  if (options.expires < Math.floor(Date.now() / 1000)) {\n    throw new Error('An expiration date cannot be in the past.');\n  }\n\n  options.action = {\n    read: 'GET',\n    write: 'PUT',\n    delete: 'DELETE'\n  }[options.action];\n\n  options.resource = '/' + this.bucket.name + '/' + this.name;\n\n  var makeAuthorizedRequest_ = this.bucket.storage.makeAuthorizedRequest_;\n\n  makeAuthorizedRequest_.getCredentials(function(err, credentials) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var sign = crypto.createSign('RSA-SHA256');\n    sign.update([\n      options.action,\n      (options.contentMd5 || ''),\n      (options.contentType || ''),\n      options.expires,\n      (options.extensionHeaders || '') + options.resource\n    ].join('\\n'));\n    var signature = sign.sign(credentials.private_key, 'base64');\n\n    callback(null, [\n      'http://storage.googleapis.com' + options.resource,\n      '?GoogleAccessId=' + credentials.client_email,\n      '&Expires=' + options.expires,\n      '&Signature=' + encodeURIComponent(signature)\n    ].join(''));\n  });\n};",
+    "code": "File.prototype.getSignedUrl = function(options, callback) {\n  if (options.expires < Math.floor(Date.now() / 1000)) {\n    throw new Error('An expiration date cannot be in the past.');\n  }\n\n  options.action = {\n    read: 'GET',\n    write: 'PUT',\n    delete: 'DELETE'\n  }[options.action];\n\n  var name = encodeURIComponent(this.name);\n\n  options.resource = '/' + this.bucket.name + '/' + name;\n\n  var makeAuthorizedRequest_ = this.bucket.storage.makeAuthorizedRequest_;\n\n  makeAuthorizedRequest_.getCredentials(function(err, credentials) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var sign = crypto.createSign('RSA-SHA256');\n    sign.update([\n      options.action,\n      (options.contentMd5 || ''),\n      (options.contentType || ''),\n      options.expires,\n      (options.extensionHeaders || '') + options.resource\n    ].join('\\n'));\n    var signature = sign.sign(credentials.private_key, 'base64');\n\n    callback(null, [\n      'http://storage.googleapis.com' + options.resource,\n      '?GoogleAccessId=' + credentials.client_email,\n      '&Expires=' + options.expires,\n      '&Signature=' + encodeURIComponent(signature)\n    ].join(''));\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "File",
@@ -399,7 +399,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "File.prototype.setMetadata = function(metadata, callback) {\n  callback = callback || util.noop;\n  this.makeReq_(\n      'PATCH', '/o/' + this.name, null, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    this.metadata = resp;\n    callback(null, this.metadata);\n  }.bind(this));\n};\n\nmodule.exports = File;",
+    "code": "File.prototype.setMetadata = function(metadata, callback) {\n  callback = callback || util.noop;\n  var path = '/o/' + encodeURIComponent(this.name);\n  this.makeReq_('PATCH', path, null, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    this.metadata = resp;\n    callback(null, this.metadata);\n  }.bind(this));\n};\n\nmodule.exports = File;",
     "ctx": {
       "type": "method",
       "constructor": "File",
