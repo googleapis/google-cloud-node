@@ -359,7 +359,7 @@
       },
       {
         "type": "example",
-        "string": "//-\n// Where you see `transaction`, assume this is the context that's relevant to\n// your use, whether that be a Dataset or a Transaction object.\n//-\n\n// Retrieve 5 companies.\ntransaction.runQuery(queryObject, function(err, entities, nextQuery) {\n  // `nextQuery` is not null if there are more results.\n  if (nextQuery) {\n    transaction.runQuery(nextQuery, function(err, entities, nextQuery) {});\n  }\n});"
+        "string": "//-\n// Where you see `transaction`, assume this is the context that's relevant to\n// your use, whether that be a Dataset or a Transaction object.\n//-\n\n// Retrieve 5 companies.\ntransaction.runQuery(queryObject, function(err, entities, endCursor) {\n  // Use `endCursor` as the starting cursor for your next query.\n  var nextQuery = queryObject.start(endCursor);\n  transaction.runQuery(nextQuery, function(err, entities, endCursor) {});\n});"
       }
     ],
     "description": {
@@ -369,7 +369,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "DatastoreRequest.prototype.runQuery = function(q, callback) {\n  callback = callback || util.noop;\n  var req = {\n    read_options: {},\n    query: entity.queryToQueryProto(q)\n  };\n\n  if (q.namespace) {\n    req.partition_id = {\n      namespace: q.namespace\n    };\n  }\n\n  this.makeReq_('runQuery', req, function(err, resp) {\n    if (err || !resp.batch || !resp.batch.entity_result) {\n      callback(err);\n      return;\n    }\n    var nextQuery = null;\n    if (resp.batch.end_cursor) {\n      var cursor = resp.batch.end_cursor.toBase64();\n      if (cursor !== q.startVal) {\n        nextQuery = q.start(cursor).offset(0);\n      }\n    }\n    callback(null, entity.formatArray(resp.batch.entity_result), nextQuery);\n  });\n};",
+    "code": "DatastoreRequest.prototype.runQuery = function(q, callback) {\n  callback = callback || util.noop;\n\n  var req = {\n    read_options: {},\n    query: entity.queryToQueryProto(q)\n  };\n\n  if (q.namespace) {\n    req.partition_id = {\n      namespace: q.namespace\n    };\n  }\n\n  this.makeReq_('runQuery', req, function(err, resp) {\n    if (err || !resp.batch || !resp.batch.entity_result) {\n      callback(err);\n      return;\n    }\n\n    var cursor = '';\n    if (resp.batch.end_cursor) {\n      cursor = resp.batch.end_cursor.toBase64();\n    }\n\n    callback(null, entity.formatArray(resp.batch.entity_result), cursor);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "DatastoreRequest",
