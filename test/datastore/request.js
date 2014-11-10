@@ -387,6 +387,25 @@ describe('Request', function() {
           });
       });
 
+      it('should only emit the limited number of results', function(done) {
+        var limit = 2;
+
+        query.limitVal = limit;
+
+        request.makeReq_ = function(method, req, callback) {
+          callback(null, mockResponse.withResultsAndEndCursor);
+        };
+
+        var resultsReturned = 0;
+
+        request.runQuery(query)
+          .on('data', function() { resultsReturned++; })
+          .on('end', function() {
+            assert.equal(resultsReturned, limit);
+            done();
+          });
+      });
+
       it('should emit an error', function(done) {
         var error = new Error('Error.');
 
