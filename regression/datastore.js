@@ -249,8 +249,7 @@ describe('datastore', function() {
     });
 
     it('should run a query as a stream', function(done) {
-      var q = ds.createQuery('Character').hasAncestor(ancestor)
-          .limit(5);
+      var q = ds.createQuery('Character').hasAncestor(ancestor);
 
       var resultsReturned = 0;
 
@@ -259,6 +258,21 @@ describe('datastore', function() {
         .on('data', function() { resultsReturned++; })
         .on('end', function() {
           assert.equal(resultsReturned, characters.length);
+          done();
+        });
+    });
+
+    it('should not go over a limit with a stream', function(done) {
+      var limit = 3;
+      var q = ds.createQuery('Character').hasAncestor(ancestor).limit(limit);
+
+      var resultsReturned = 0;
+
+      ds.runQuery(q)
+        .on('error', done)
+        .on('data', function() { resultsReturned++; })
+        .on('end', function() {
+          assert.equal(resultsReturned, limit);
           done();
         });
     });
