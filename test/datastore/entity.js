@@ -21,6 +21,7 @@
 var assert = require('assert');
 var entity = require('../../lib/datastore/entity.js');
 var datastore = require('../../lib/datastore');
+var ByteBuffer = require('bytebuffer');
 
 var blogPostMetadata = {
   title: { kind: String, indexed: true },
@@ -331,6 +332,17 @@ describe('queryToQueryProto', function() {
       .hasAncestor(new entity.Key({ path: [ 'Kind2', 'somename' ] }));
     var proto = entity.queryToQueryProto(q);
     assert.deepEqual(proto, queryFilterProto);
+  });
+});
+
+describe('propertyToValue', function() {
+  it('should translate a buffer', function() {
+    var buffer = new Buffer('010159406940');
+    var property = {
+      blob_value: ByteBuffer.wrap(buffer)
+    };
+    var returnedbuffer = entity.propertyToValue(property);
+    assert.deepEqual(buffer, returnedbuffer);
   });
 });
 
