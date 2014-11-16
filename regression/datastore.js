@@ -81,6 +81,28 @@ describe('datastore', function() {
       });
     });
 
+    it('should save/get/delete a buffer', function(done) {
+      var data = {
+        buf: new Buffer('010100000000000000000059400000000000006940', 'hex')
+      };
+      ds.save({
+        key: ds.key('Post'),
+        data: data
+      }, function (err, key) {
+        assert.ifError(err);
+        var assignedId = key.path[1];
+        assert(assignedId);
+        ds.get(key, function (err, entity) {
+          assert.ifError(err);
+          assert.deepEqual(entity.data, data);
+          ds.delete(ds.key(['Post', assignedId]), function(err) {
+            assert.ifError(err);
+            done();
+          });
+        });
+      });
+    });
+
     it('should save/get/delete with a generated key id', function(done) {
       ds.save({
         key: ds.key('Post'),
