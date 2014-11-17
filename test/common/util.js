@@ -20,6 +20,7 @@
 
 var assert = require('assert');
 var duplexify = require('duplexify');
+var gsa = require('google-service-account');
 var request = require('request');
 
 var util = require('sandboxed-module')
@@ -31,20 +32,17 @@ var util = require('sandboxed-module')
   });
 
 var gsa_Override;
-
 function fakeGsa() {
   var args = [].slice.apply(arguments);
-  var results = (gsa_Override || util.noop).apply(null, args);
+  var results = (gsa_Override || gsa).apply(null, args);
   gsa_Override = null;
   return results || { getCredentials: util.noop };
 }
 
-var request_Cached = request;
 var request_Override;
-
 function fakeRequest() {
   var args = [].slice.apply(arguments);
-  var results = (request_Override || request_Cached).apply(null, args);
+  var results = (request_Override || request).apply(null, args);
   request_Override = null;
   return results;
 }
@@ -318,6 +316,21 @@ describe('common/util', function() {
         var makeRequest = util.makeAuthorizedRequest();
         makeRequest({}, function(err) {
           assert.equal(err, error);
+          done();
+        });
+      });
+
+      it('should handle malformed key response', function(done) {
+        var makeRequest = util.makeAuthorizedRequest({
+          credentials: {
+            client_email: 'invalid@email',
+            private_key: 'invalid-key'
+          }
+        });
+
+        makeRequest({}, function (err) {
+          var errorMessage = 'There was an error with your private key.';
+          assert.equal(err.message, errorMessage);
           done();
         });
       });
