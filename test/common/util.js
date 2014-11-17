@@ -329,7 +329,10 @@ describe('common/util', function() {
         });
 
         makeRequest({}, function (err) {
-          var errorMessage = 'There was an error with your private key.';
+          var errorMessage = [
+            'Your private key is in an unexpected format and cannot be used.',
+            'Please try again with another private key.'
+          ].join(' ');
           assert.equal(err.message, errorMessage);
           done();
         });
