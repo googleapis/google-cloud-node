@@ -28,7 +28,7 @@ $ npm install --save gcloud
 
 Instructions on where to find these are available if you are [running your application on Google Compute Engine][wiki-faq-gce], or [running it elsewhere][wiki-faq-elsewhere].
 
-### Google BigQuery
+## Google BigQuery
 
 Analyze Big Data in the cloud with [Google BigQuery][cloud-bigquery] ([docs][cloud-bigquery-docs]) . Run fast, SQL-like queries against multi-terabyte datasets in seconds. Scalable and easy to use, BigQuery gives you real-time insights about your data.
 
@@ -68,7 +68,7 @@ bigquery.job('job-id')
   .pipe(process.stdout);
 ```
 
-### Google Cloud Datastore
+## Google Cloud Datastore
 
 [Google Cloud Datastore][cloud-datastore] ([docs][cloud-datastore-docs]) is a fully managed, schemaless database for storing non-relational data. Cloud Datastore automatically scales with your users and supports ACID transactions, high availability of reads and writes, strong consistency for reads and ancestor queries, and eventual consistency for all other queries.
 
@@ -96,7 +96,7 @@ dataset.get(dataset.key(['Product', 'Computer']), function(err, entity) {
 });
 ```
 
-### Google Cloud Storage
+## Google Cloud Storage
 
 [Google Cloud Storage][cloud-storage] ([docs][cloud-storage-docs]) allows you to store data on Google infrastructure with very high reliability, performance and availability, and can be used to distribute large data objects to users via direct download.
 
@@ -131,7 +131,7 @@ fs.createReadStream('/local/file.txt').pipe(bucket.file('file.txt').createWriteS
 bucket.file('photo.jpg').createReadStream().pipe(fs.createWriteStream('/local/photo.jpg'));
 ```
 
-### Google Cloud Pub/Sub (Alpha)
+## Google Cloud Pub/Sub (Alpha)
 
 > Google Cloud Pub/Sub is in **Alpha status**. As a result, it might change in backward-incompatible ways and is not recommended for production use. It is not subject to any SLA or deprecation policy.
 
