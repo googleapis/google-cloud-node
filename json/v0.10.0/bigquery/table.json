@@ -224,7 +224,7 @@
           "object="
         ],
         "name": "metadata",
-        "description": "- Metadata to set with the copy operation. The     metadata object should be in the format of the\n    [`configuration.copy`]{@link http://goo.gl/dKWIyS} property of a Jobs\n    resource."
+        "description": "- Metadata to set with the copy operation. The     metadata object should be in the format of the\n    [`configuration.copy`](http://goo.gl/dKWIyS) property of a Jobs resource."
       },
       {
         "type": "param",
@@ -243,7 +243,7 @@
       },
       {
         "type": "example",
-        "string": "table.copy(dataset.table('institution_data'), function(err, job) {});\n\n//-\n// See the [`configuration.copy`]{@link http://goo.gl/dKWIyS} object for all\n// available options.\n//-\nvar metadata = {\n  createDisposition: 'CREATE_NEVER',\n  writeDisposition: 'WRITE_TRUNCATE'\n};\n\ntable.copy(options, metadata, function(err, job) {});"
+        "string": "table.copy(dataset.table('institution_data'), function(err, job) {});\n\n//-\n// See the [`configuration.copy`](http://goo.gl/dKWIyS) object for all\n// available options.\n//-\nvar metadata = {\n  createDisposition: 'CREATE_NEVER',\n  writeDisposition: 'WRITE_TRUNCATE'\n};\n\ntable.copy(options, metadata, function(err, job) {});"
       }
     ],
     "description": {
@@ -301,7 +301,7 @@
           "object="
         ],
         "name": "metadata",
-        "description": "- Metadata to set with the load operation.     The metadata object should be in the format of the\n    [`configuration.load`]{@link http://goo.gl/BVcXk4} property of a Jobs\n    resource. If a string is given, it will be used as the filetype."
+        "description": "- Metadata to set with the load operation.     The metadata object should be in the format of the\n    [`configuration.load`](http://goo.gl/BVcXk4) property of a Jobs resource.\n    If a string is given, it will be used as the filetype."
       },
       {
         "type": "return",
@@ -545,7 +545,7 @@
           "object="
         ],
         "name": "metadata",
-        "description": "- Metadata to set with the load operation. The     metadata object should be in the format of the\n    [`configuration.load`]{@link http://goo.gl/BVcXk4} property of a Jobs\n    resource."
+        "description": "- Metadata to set with the load operation. The     metadata object should be in the format of the\n    [`configuration.load`](http://goo.gl/BVcXk4) property of a Jobs resource."
       },
       {
         "type": "param",
@@ -564,7 +564,7 @@
       },
       {
         "type": "example",
-        "string": "//-\n// Load data from a local file.\n//-\ntable.import('./institutions.csv', function(err, job) {});\n\n//-\n// You may also pass in metadata in the format of a Jobs resource. See\n// {@link http://goo.gl/BVcXk4} for a full list of supported values.\n//-\nvar metadata = {\n  encoding: 'ISO-8859-1',\n  sourceFormat: 'JSON'\n};\n\ntable.import('./institutions.csv', metadata, function(err, job) {});\n\n//-\n// Load data from a file in your Storage bucket.\n//-\nvar data = storage.bucket('institutions').file('data.csv');\ntable.import(data, function(err, job) {});\n\n//-\n// Load data from multiple files in your Storage bucket(s).\n//-\ntable.import([\n  storage.bucket('institutions').file('2011.csv'),\n  storage.bucket('institutions').file('2012.csv')\n], function(err, job) {});"
+        "string": "//-\n// Load data from a local file.\n//-\ntable.import('./institutions.csv', function(err, job) {});\n\n//-\n// You may also pass in metadata in the format of a Jobs resource. See\n// (http://goo.gl/BVcXk4) for a full list of supported values.\n//-\nvar metadata = {\n  encoding: 'ISO-8859-1',\n  sourceFormat: 'JSON'\n};\n\ntable.import('./institutions.csv', metadata, function(err, job) {});\n\n//-\n// Load data from a file in your Storage bucket.\n//-\nvar data = storage.bucket('institutions').file('data.csv');\ntable.import(data, function(err, job) {});\n\n//-\n// Load data from multiple files in your Storage bucket(s).\n//-\ntable.import([\n  storage.bucket('institutions').file('2011.csv'),\n  storage.bucket('institutions').file('2012.csv')\n], function(err, job) {});"
       }
     ],
     "description": {
@@ -674,7 +674,7 @@
           "object"
         ],
         "name": "metadata.schema",
-        "description": "- A comma-separated list of name:type     pairs. Valid types are \"string\", \"integer\", \"float\", \"boolean\", and\n    \"timestamp\". If the type is omitted, it is assumed to be \"string\".\n    Example: \"name:string, age:integer\". Schemas can also be specified as a\n    JSON array of fields, which allows for nested and repeated fields. See\n    a [Table resource]{@link http://goo.gl/sl8Dmg} for more detailed\n    information."
+        "description": "- A comma-separated list of name:type     pairs. Valid types are \"string\", \"integer\", \"float\", \"boolean\", and\n    \"timestamp\". If the type is omitted, it is assumed to be \"string\".\n    Example: \"name:string, age:integer\". Schemas can also be specified as a\n    JSON array of fields, which allows for nested and repeated fields. See\n    a [Table resource](http://goo.gl/sl8Dmg) for more detailed information."
       },
       {
         "type": "param",

@@ -220,8 +220,8 @@
       }
     ],
     "description": {
-      "full": "<p>Analyze Big Data in the cloud with<br />[Google BigQuery]{@link <a href=\"https://cloud.google.com/bigquery}\">https://cloud.google.com/bigquery}</a>. Run fast,<br />SQL-like queries against multi-terabyte datasets in seconds. Scalable and<br />easy to use, BigQuery gives you real-time insights about your data.</p>",
-      "summary": "<p>Analyze Big Data in the cloud with<br />[Google BigQuery]{@link <a href=\"https://cloud.google.com/bigquery}\">https://cloud.google.com/bigquery}</a>. Run fast,<br />SQL-like queries against multi-terabyte datasets in seconds. Scalable and<br />easy to use, BigQuery gives you real-time insights about your data.</p>",
+      "full": "<p>Analyze Big Data in the cloud with<br /><a href=\"https://cloud.google.com/bigquery\">Google BigQuery</a>. Run fast, SQL-like<br />queries against multi-terabyte datasets in seconds. Scalable and easy to use,<br />BigQuery gives you real-time insights about your data.</p>",
+      "summary": "<p>Analyze Big Data in the cloud with<br /><a href=\"https://cloud.google.com/bigquery\">Google BigQuery</a>. Run fast, SQL-like<br />queries against multi-terabyte datasets in seconds. Scalable and easy to use,<br />BigQuery gives you real-time insights about your data.</p>",
       "body": ""
     },
     "isPrivate": false,
@@ -256,8 +256,8 @@
       }
     ],
     "description": {
-      "full": "<p>[Google Cloud Datastore]{@link <a href=\"https://developers.google.com/datastore/}\">https://developers.google.com/datastore/}</a> is<br />a fully managed, schemaless database for storing non-relational data. Use<br />this object to create a Dataset to interact with your data, an &quot;Int&quot;, and a<br />&quot;Double&quot; representation.</p>",
-      "summary": "<p>[Google Cloud Datastore]{@link <a href=\"https://developers.google.com/datastore/}\">https://developers.google.com/datastore/}</a> is<br />a fully managed, schemaless database for storing non-relational data. Use<br />this object to create a Dataset to interact with your data, an &quot;Int&quot;, and a<br />&quot;Double&quot; representation.</p>",
+      "full": "<p><a href=\"https://developers.google.com/datastore/\">Google Cloud Datastore</a> is a fully<br />managed, schemaless database for storing non-relational data. Use this object<br />to create a Dataset to interact with your data, an &quot;Int&quot;, and a &quot;Double&quot;<br />representation.</p>",
+      "summary": "<p><a href=\"https://developers.google.com/datastore/\">Google Cloud Datastore</a> is a fully<br />managed, schemaless database for storing non-relational data. Use this object<br />to create a Dataset to interact with your data, an &quot;Int&quot;, and a &quot;Double&quot;<br />representation.</p>",
       "body": ""
     },
     "isPrivate": false,
@@ -292,9 +292,9 @@
       }
     ],
     "description": {
-      "full": "<p><strong>Experimental</strong></p><p>[Google Cloud Pub/Sub]{@link <a href=\"https://developers.google.com/pubsub/overview}\">https://developers.google.com/pubsub/overview}</a><br />is a reliable, many-to-many, asynchronous messaging service from Google<br />Cloud Platform.</p><p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use it<br />by filling the<br />[Limited Preview application form]{@link <a href=\"http://goo.gl/sO0wTu}\">http://goo.gl/sO0wTu}</a>.</p>",
+      "full": "<p><strong>Experimental</strong></p><p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p><p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use it<br />by filling the <a href=\"http://goo.gl/sO0wTu\">Limited Preview application form</a>.</p>",
       "summary": "<p><strong>Experimental</strong></p>",
-      "body": "<p>[Google Cloud Pub/Sub]{@link <a href=\"https://developers.google.com/pubsub/overview}\">https://developers.google.com/pubsub/overview}</a><br />is a reliable, many-to-many, asynchronous messaging service from Google<br />Cloud Platform.</p><p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use it<br />by filling the<br />[Limited Preview application form]{@link <a href=\"http://goo.gl/sO0wTu}\">http://goo.gl/sO0wTu}</a>.</p>"
+      "body": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p><p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use it<br />by filling the <a href=\"http://goo.gl/sO0wTu\">Limited Preview application form</a>.</p>"
     },
     "isPrivate": false,
     "ignore": false,
@@ -327,8 +327,8 @@
       }
     ],
     "description": {
-      "full": "<p>Google Cloud Storage allows you to store data on Google infrastructure.<br />Read<br />[Google Cloud Storage API docs]{@link <a href=\"https://developers.google.com/storage/}\">https://developers.google.com/storage/}</a><br />for more information.</p>",
-      "summary": "<p>Google Cloud Storage allows you to store data on Google infrastructure.<br />Read<br />[Google Cloud Storage API docs]{@link <a href=\"https://developers.google.com/storage/}\">https://developers.google.com/storage/}</a><br />for more information.</p>",
+      "full": "<p>Google Cloud Storage allows you to store data on Google infrastructure.<br />Read <a href=\"https://developers.google.com/storage/\">Google Cloud Storage API docs</a><br />for more information.</p>",
+      "summary": "<p>Google Cloud Storage allows you to store data on Google infrastructure.<br />Read <a href=\"https://developers.google.com/storage/\">Google Cloud Storage API docs</a><br />for more information.</p>",
       "body": ""
     },
     "isPrivate": false,

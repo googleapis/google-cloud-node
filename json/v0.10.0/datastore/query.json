@@ -74,9 +74,9 @@
       }
     ],
     "description": {
-      "full": "<p>Build a Query object.</p><p><strong>Queries should be built with<br />{@linkcode module:datastore/dataset#createQuery} and run via<br />{@linkcode module:datastore/dataset#runQuery}.</strong></p><p><em>Reference: {@link <a href=\"http://goo.gl/Cag0r6}\">http://goo.gl/Cag0r6}</a></em></p>",
+      "full": "<p>Build a Query object.</p><p><strong>Queries should be built with<br />{@linkcode module:datastore/dataset#createQuery} and run via<br />{@linkcode module:datastore/dataset#runQuery}.</strong></p><p><em><a href=\"http://goo.gl/Cag0r6\">Reference</a>.</em></p>",
       "summary": "<p>Build a Query object.</p>",
-      "body": "<p><strong>Queries should be built with<br />{@linkcode module:datastore/dataset#createQuery} and run via<br />{@linkcode module:datastore/dataset#runQuery}.</strong></p><p><em>Reference: {@link <a href=\"http://goo.gl/Cag0r6}\">http://goo.gl/Cag0r6}</a></em></p>"
+      "body": "<p><strong>Queries should be built with<br />{@linkcode module:datastore/dataset#createQuery} and run via<br />{@linkcode module:datastore/dataset#runQuery}.</strong></p><p><em><a href=\"http://goo.gl/Cag0r6\">Reference</a>.</em></p>"
     },
     "isPrivate": false,
     "ignore": false,
@@ -119,9 +119,9 @@
       }
     ],
     "description": {
-      "full": "<p>Datastore allows querying on properties. Supported comparison operators<br />are <code>=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code>. &quot;Not equal&quot; and <code>IN</code> operators are<br />currently not supported.</p><p><em>To filter by ancestors, see {@linkcode module:datastore/query#hasAncestor}.</em></p><p><em>Reference: {@link <a href=\"http://goo.gl/ENCx7e}\">http://goo.gl/ENCx7e}</a></em></p>",
+      "full": "<p>Datastore allows querying on properties. Supported comparison operators<br />are <code>=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code>. &quot;Not equal&quot; and <code>IN</code> operators are<br />currently not supported.</p><p><em>To filter by ancestors, see {@linkcode module:datastore/query#hasAncestor}.</em></p><p><em><a href=\"http://goo.gl/ENCx7e\">Reference</a>.</em></p>",
       "summary": "<p>Datastore allows querying on properties. Supported comparison operators<br />are <code>=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code>. &quot;Not equal&quot; and <code>IN</code> operators are<br />currently not supported.</p>",
-      "body": "<p><em>To filter by ancestors, see {@linkcode module:datastore/query#hasAncestor}.</em></p><p><em>Reference: {@link <a href=\"http://goo.gl/ENCx7e}\">http://goo.gl/ENCx7e}</a></em></p>"
+      "body": "<p><em>To filter by ancestors, see {@linkcode module:datastore/query#hasAncestor}.</em></p><p><em><a href=\"http://goo.gl/ENCx7e\">Reference</a>.</em></p>"
     },
     "isPrivate": false,
     "ignore": false,
@@ -158,9 +158,9 @@
       }
     ],
     "description": {
-      "full": "<p>Filter a query by ancestors.</p><p><em>Reference: {@link <a href=\"http://goo.gl/1qfpkZ}\">http://goo.gl/1qfpkZ}</a></em></p>",
+      "full": "<p>Filter a query by ancestors.</p><p><em><a href=\"http://goo.gl/1qfpkZ\">Reference</a>.</em></p>",
       "summary": "<p>Filter a query by ancestors.</p>",
-      "body": "<p><em>Reference: {@link <a href=\"http://goo.gl/1qfpkZ}\">http://goo.gl/1qfpkZ}</a></em></p>"
+      "body": "<p><em><a href=\"http://goo.gl/1qfpkZ\">Reference</a>.</em></p>"
     },
     "isPrivate": false,
     "ignore": false,
@@ -197,9 +197,9 @@
       }
     ],
     "description": {
-      "full": "<p>Sort the results by a property name in ascending or descending order. By<br />default, an ascending sort order will be used.</p><p><em>Reference: {@link <a href=\"http://goo.gl/mfegFR}\">http://goo.gl/mfegFR}</a></em></p>",
+      "full": "<p>Sort the results by a property name in ascending or descending order. By<br />default, an ascending sort order will be used.</p><p><em><a href=\"http://goo.gl/mfegFR\">Reference</a>.</em></p>",
       "summary": "<p>Sort the results by a property name in ascending or descending order. By<br />default, an ascending sort order will be used.</p>",
-      "body": "<p><em>Reference: {@link <a href=\"http://goo.gl/mfegFR}\">http://goo.gl/mfegFR}</a></em></p>"
+      "body": "<p><em><a href=\"http://goo.gl/mfegFR\">Reference</a>.</em></p>"
     },
     "isPrivate": false,
     "ignore": false,
@@ -275,9 +275,9 @@
       }
     ],
     "description": {
-      "full": "<p>Retrieve only select properties from the matched entities.</p><p><em>Reference: [Projection Queries]{@link <a href=\"http://goo.gl/EfsrJl}\">http://goo.gl/EfsrJl}</a></em></p>",
+      "full": "<p>Retrieve only select properties from the matched entities.</p><p><em><a href=\"http://goo.gl/EfsrJl\">Reference</a>.</em></p>",
       "summary": "<p>Retrieve only select properties from the matched entities.</p>",
-      "body": "<p><em>Reference: [Projection Queries]{@link <a href=\"http://goo.gl/EfsrJl}\">http://goo.gl/EfsrJl}</a></em></p>"
+      "body": "<p><em><a href=\"http://goo.gl/EfsrJl\">Reference</a>.</em></p>"
     },
     "isPrivate": false,
     "ignore": false,
@@ -314,9 +314,9 @@
       }
     ],
     "description": {
-      "full": "<p>Set a starting cursor to a query.</p><p><em>Reference: {@link <a href=\"http://goo.gl/WuTGRI}\">http://goo.gl/WuTGRI}</a></em></p>",
+      "full": "<p>Set a starting cursor to a query.</p><p><em><a href=\"http://goo.gl/WuTGRI\">Reference</a>.</em></p>",
       "summary": "<p>Set a starting cursor to a query.</p>",
-      "body": "<p><em>Reference: {@link <a href=\"http://goo.gl/WuTGRI}\">http://goo.gl/WuTGRI}</a></em></p>"
+      "body": "<p><em><a href=\"http://goo.gl/WuTGRI\">Reference</a>.</em></p>"
     },
     "isPrivate": false,
     "ignore": false,
@@ -353,9 +353,9 @@
       }
     ],
     "description": {
-      "full": "<p>Set an ending cursor to a query.</p><p><em>Reference: {@link <a href=\"http://goo.gl/WuTGRI}\">http://goo.gl/WuTGRI}</a></em></p>",
+      "full": "<p>Set an ending cursor to a query.</p><p><em><a href=\"http://goo.gl/WuTGRI\">Reference</a>.</em></p>",
       "summary": "<p>Set an ending cursor to a query.</p>",
-      "body": "<p><em>Reference: {@link <a href=\"http://goo.gl/WuTGRI}\">http://goo.gl/WuTGRI}</a></em></p>"
+      "body": "<p><em><a href=\"http://goo.gl/WuTGRI\">Reference</a>.</em></p>"
     },
     "isPrivate": false,
     "ignore": false,
@@ -392,9 +392,9 @@
       }
     ],
     "description": {
-      "full": "<p>Set a limit on a query.</p><p><em>Reference: {@link <a href=\"http://goo.gl/f0VZ0n}\">http://goo.gl/f0VZ0n}</a></em></p>",
+      "full": "<p>Set a limit on a query.</p><p><em><a href=\"http://goo.gl/f0VZ0n\">Reference</a>.</em></p>",
       "summary": "<p>Set a limit on a query.</p>",
-      "body": "<p><em>Reference: {@link <a href=\"http://goo.gl/f0VZ0n}\">http://goo.gl/f0VZ0n}</a></em></p>"
+      "body": "<p><em><a href=\"http://goo.gl/f0VZ0n\">Reference</a>.</em></p>"
     },
     "isPrivate": false,
     "ignore": false,
@@ -431,9 +431,9 @@
       }
     ],
     "description": {
-      "full": "<p>Set an offset on a query.</p><p><em>Reference: {@link <a href=\"http://goo.gl/f0VZ0n}\">http://goo.gl/f0VZ0n}</a></em></p>",
+      "full": "<p>Set an offset on a query.</p><p><em><a href=\"http://goo.gl/f0VZ0n\">Reference</a>.</em></p>",
       "summary": "<p>Set an offset on a query.</p>",
-      "body": "<p><em>Reference: {@link <a href=\"http://goo.gl/f0VZ0n}\">http://goo.gl/f0VZ0n}</a></em></p>"
+      "body": "<p><em><a href=\"http://goo.gl/f0VZ0n\">Reference</a>.</em></p>"
     },
     "isPrivate": false,
     "ignore": false,

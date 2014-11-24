@@ -238,8 +238,8 @@
       }
     ],
     "description": {
-      "full": "<p>Interact with a dataset from the<br />[Google Cloud Datastore]{@link <a href=\"https://developers.google.com/datastore/}\">https://developers.google.com/datastore/}</a>.</p>",
-      "summary": "<p>Interact with a dataset from the<br />[Google Cloud Datastore]{@link <a href=\"https://developers.google.com/datastore/}\">https://developers.google.com/datastore/}</a>.</p>",
+      "full": "<p>Interact with a dataset from the<br /><a href=\"https://developers.google.com/datastore/\">Google Cloud Datastore</a>.</p>",
+      "summary": "<p>Interact with a dataset from the<br /><a href=\"https://developers.google.com/datastore/\">Google Cloud Datastore</a>.</p>",
       "body": ""
     },
     "isPrivate": false,
@@ -351,9 +351,9 @@
       }
     ],
     "description": {
-      "full": "<p>Create a query from the current dataset to query the specified kinds, scoped<br />to the namespace provided at the initialization of the dataset.</p><p><em>Dataset query reference: {@link <a href=\"http://goo.gl/Cag0r6}\">http://goo.gl/Cag0r6}</a></em></p>",
+      "full": "<p>Create a query from the current dataset to query the specified kinds, scoped<br />to the namespace provided at the initialization of the dataset.</p><p><em><a href=\"http://goo.gl/Cag0r6\">Reference</a>.</em></p>",
       "summary": "<p>Create a query from the current dataset to query the specified kinds, scoped<br />to the namespace provided at the initialization of the dataset.</p>",
-      "body": "<p><em>Dataset query reference: {@link <a href=\"http://goo.gl/Cag0r6}\">http://goo.gl/Cag0r6}</a></em></p>"
+      "body": "<p><em><a href=\"http://goo.gl/Cag0r6\">Reference</a>.</em></p>"
     },
     "isPrivate": false,
     "ignore": false,
