@@ -242,7 +242,7 @@ describe('Bucket', function() {
     it('should set metadata', function(done) {
       bucket.makeReq_ = function(method, path, query, body) {
         assert.equal(method, 'PATCH');
-        assert.equal(path, '/b/' + bucket.name);
+        assert.equal(path, '');
         assert.deepEqual(body, metadata);
         done();
       };

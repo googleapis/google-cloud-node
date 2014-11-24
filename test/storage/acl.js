@@ -1,0 +1,323 @@
+/**
+ * Copyright 2014 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*global describe, it, beforeEach */
+
+'use strict';
+
+var Acl = require('../../lib/storage/acl.js');
+var assert = require('assert');
+var storage = require('../../lib/storage/index.js');
+var util = require('../../lib/common/util.js');
+
+describe('storage/acl', function() {
+  var acl;
+  var ERROR = new Error('Error.');
+  var MAKE_REQ = util.noop;
+  var PATH_PREFIX = '/acl';
+  var ROLE = storage.acl.OWNER_ROLE;
+  var SCOPE = 'user-user@example.com';
+
+  beforeEach(function() {
+    acl = new Acl({ makeReq: MAKE_REQ, pathPrefix: PATH_PREFIX });
+  });
+
+  describe('initialization', function() {
+    it('should assign makeReq and pathPrefix', function() {
+      assert.equal(acl.makeReq, MAKE_REQ);
+      assert.equal(acl.pathPrefix, PATH_PREFIX);
+    });
+  });
+
+  describe('add', function() {
+    it('makes the correct api request', function(done) {
+      acl.makeReq_ = function(method, path, query, body) {
+        assert.equal(method, 'POST');
+        assert.equal(path, '');
+        assert.strictEqual(query, null);
+        assert.deepEqual(body, { entity: SCOPE, role: ROLE });
+
+        done();
+      };
+
+      acl.add({ scope: SCOPE, role: ROLE }, assert.ifError);
+    });
+
+    it('executes the callback with an ACL object', function(done) {
+      var apiResponse = { scope: SCOPE, role: ROLE };
+      var expectedAclObject = { scope: SCOPE, role: ROLE };
+
+      acl.makeAclObject_ = function (obj) {
+        assert.deepEqual(obj, apiResponse);
+        return expectedAclObject;
+      };
+
+      acl.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, apiResponse);
+      };
+
+      acl.add({ scope: SCOPE, role: ROLE }, function(err, aclObject) {
+        assert.ifError(err);
+        assert.deepEqual(aclObject, expectedAclObject);
+        done();
+      });
+    });
+
+    it('executes the callback with an error', function(done) {
+      acl.makeReq_ = function(method, path, query, body, callback) {
+        callback(ERROR);
+      };
+
+      acl.add({ scope: SCOPE, role: ROLE }, function(err) {
+        assert.deepEqual(err, ERROR);
+        done();
+      });
+    });
+  });
+
+  describe('delete', function() {
+    it('makes the correct api request', function(done) {
+      acl.makeReq_ = function(method, path, query, body) {
+        assert.equal(method, 'DELETE');
+        assert.equal(path, '/' + encodeURIComponent(SCOPE));
+        assert.strictEqual(query, null);
+        assert.strictEqual(body, null);
+
+        done();
+      };
+
+      acl.delete({ scope: SCOPE }, assert.ifError);
+    });
+
+    it('should execute the callback with an error', function(done) {
+      acl.makeReq_ = function(method, path, query, body, callback) {
+        callback(ERROR);
+      };
+
+      acl.delete({ scope: SCOPE }, function(err) {
+        assert.deepEqual(err, ERROR);
+        done();
+      });
+    });
+  });
+
+  describe('get', function() {
+    describe('all ACL objects', function() {
+      it('should make the correct API request', function(done) {
+        acl.makeReq_ = function(method, path, query, body) {
+          assert.equal(method, 'GET');
+          assert.equal(path, '');
+          assert.strictEqual(query, null);
+          assert.strictEqual(body, null);
+
+          done();
+        };
+
+        acl.get(assert.ifError);
+      });
+
+      it('should accept a configuration object', function(done) {
+        var generation = 1;
+
+        acl.makeReq_ = function(method, path, query) {
+          assert.equal(query.generation, generation);
+
+          done();
+        };
+
+        acl.get({ generation: generation }, assert.ifError);
+      });
+
+      it('should pass an array of acl objects to the callback', function(done) {
+        var apiResponse = {
+          items: [
+            { scope: SCOPE, role: ROLE },
+            { scope: SCOPE, role: ROLE },
+            { scope: SCOPE, role: ROLE }
+          ]
+        };
+
+        var expectedAclObjects = [
+          { scope: SCOPE, role: ROLE },
+          { scope: SCOPE, role: ROLE },
+          { scope: SCOPE, role: ROLE }
+        ];
+
+        acl.makeAclObject_ = function (obj, index) {
+          return expectedAclObjects[index];
+        };
+
+        acl.makeReq_ = function(method, path, query, body, callback) {
+          callback(null, apiResponse);
+        };
+
+        acl.get(function(err, aclObjects) {
+          assert.ifError(err);
+          assert.deepEqual(aclObjects, expectedAclObjects);
+          done();
+        });
+      });
+    });
+
+    describe('ACL object for a scope', function() {
+      it('should get a specific ACL object', function(done) {
+        acl.makeReq_ = function(method, path, query, body) {
+          assert.equal(method, 'GET');
+          assert.equal(path, '/' + encodeURIComponent(SCOPE));
+          assert.strictEqual(query, null);
+          assert.strictEqual(body, null);
+
+          done();
+        };
+
+        acl.get({ scope: SCOPE }, assert.ifError);
+      });
+
+      it('should accept a configuration object', function(done) {
+        var generation = 1;
+
+        acl.makeReq_ = function(method, path, query) {
+          assert.equal(query.generation, generation);
+
+          done();
+        };
+
+        acl.get({ scope: SCOPE, generation: generation }, assert.ifError);
+      });
+
+      it('should pass an acl object to the callback', function(done) {
+        var apiResponse = { scope: SCOPE, role: ROLE };
+        var expectedAclObject = { scope: SCOPE, role: ROLE };
+
+        acl.makeAclObject_ = function () {
+          return expectedAclObject;
+        };
+
+        acl.makeReq_ = function(method, path, query, body, callback) {
+          callback(null, apiResponse);
+        };
+
+        acl.get({ scope: SCOPE }, function(err, aclObject) {
+          assert.ifError(err);
+          assert.deepEqual(aclObject, expectedAclObject);
+          done();
+        });
+      });
+    });
+
+    it('should execute the callback with an error', function(done) {
+      acl.makeReq_ = function(method, path, query, body, callback) {
+        callback(ERROR);
+      };
+
+      acl.get(function(err) {
+        assert.deepEqual(err, ERROR);
+        done();
+      });
+    });
+  });
+
+  describe('update', function() {
+    it('should make the correct API request', function(done) {
+      acl.makeReq_ = function(method, path, query, body) {
+        assert.equal(method, 'PUT');
+        assert.equal(path, '/' + encodeURIComponent(SCOPE));
+        assert.strictEqual(query, null);
+        assert.deepEqual(body, { role: ROLE });
+
+        done();
+      };
+
+      acl.update({ scope: SCOPE, role: ROLE }, assert.ifError);
+    });
+
+    it('should pass an acl object to the callback', function(done) {
+      var apiResponse = { scope: SCOPE, role: ROLE };
+      var expectedAclObject = { scope: SCOPE, role: ROLE };
+
+      acl.makeAclObject_ = function () {
+        return expectedAclObject;
+      };
+
+      acl.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, apiResponse);
+      };
+
+      acl.update({ scope: SCOPE, role: ROLE }, function(err, aclObject) {
+        assert.ifError(err);
+        assert.deepEqual(aclObject, expectedAclObject);
+        done();
+      });
+    });
+
+    it('should execute the callback with an error', function(done) {
+      acl.makeReq_ = function(method, path, query, body, callback) {
+        callback(ERROR);
+      };
+
+      acl.update({ scope: SCOPE, role: ROLE }, function(err) {
+        assert.deepEqual(err, ERROR);
+        done();
+      });
+    });
+  });
+
+  describe('makeAclObject_', function() {
+    it('should return an ACL object from an API response', function() {
+      var projectTeam = {
+        projectNumber: '283748374',
+        team: 'awesome'
+      };
+
+      var apiResponse = {
+        scope: SCOPE,
+        role: ROLE,
+        projectTeam: projectTeam,
+        extra: 'ignored',
+        things: true
+      };
+
+      assert.deepEqual(acl.makeAclObject_(apiResponse), {
+        scope: SCOPE,
+        role: ROLE,
+        projectTeam: projectTeam
+      });
+    });
+  });
+
+  describe('makeReq_', function() {
+    it('patches requests through to the makeReq function', function(done) {
+      var method = 'POST';
+      var path = '/path';
+      var query = { a: 'b', c: 'd' };
+      var body = { a: 'b', c: 'd' };
+      var callback = util.noop;
+
+      // This is overriding the method we passed on instantiation.
+      acl.makeReq = function(m, p, q, b, c) {
+        assert.equal(m, method);
+        assert.equal(p, PATH_PREFIX + path);
+        assert.deepEqual(q, query);
+        assert.deepEqual(b, body);
+        assert.equal(c, callback);
+
+        done();
+      };
+
+      acl.makeReq_(method, path, query, body, callback);
+    });
+  });
+});
