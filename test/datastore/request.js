@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach */
+/*global describe, it, beforeEach, after */
 
 'use strict';
 
@@ -30,6 +30,7 @@ var Query = require('../../lib/datastore/query.js');
 var Stream = require('stream');
 var util = require('../../lib/common/util.js');
 
+var httpsRequestCached = https.request;
 var httpsRequestOverride = util.noop;
 
 extend(true, https, {
@@ -76,6 +77,10 @@ describe('Request', function() {
     request.makeAuthorizedRequest_ = function(req, callback) {
       (callback.onAuthorized || callback)(null, req);
     };
+  });
+
+  after(function() {
+    https.request = httpsRequestCached;
   });
 
   describe('get', function() {
