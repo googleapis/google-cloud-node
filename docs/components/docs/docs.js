@@ -128,9 +128,19 @@ angular
             return obj.ctx && obj.isPrivate === false && obj.ignore === false;
           })
           .map(function(obj) {
+            var alias = obj.tags.filter(function(tag) {
+              return tag.type === 'alias';
+            })[0];
+
+            if (alias && alias.string.indexOf('module:') !== 0) {
+              alias = alias.string;
+            } else {
+              alias = false
+            }
+
             return {
               data: obj,
-              name: obj.ctx.name,
+              name: (alias || obj.ctx.name).trim(),
               constructor: obj.tags.some(function(tag) {
                   return tag.type === 'constructor';
                 }),
@@ -144,7 +154,7 @@ angular
                 })
                 .map(function(tag) {
                   tag.description = $sce.trustAsHtml(
-                      formatHtml(detectLinks(tag.description.replace(/^- /, ''))));
+                      formatHtml(detectLinks(detectModules(tag.description.replace(/^- /, '')))));
                   tag.types = $sce.trustAsHtml(tag.types.reduceRight(
                       reduceModules, []).join(', '));
                   tag.optional = tag.types.toString().indexOf('=') > -1;
@@ -172,7 +182,7 @@ angular
     function getMixIns($sce, $q, $http, version, baseUrl) {
       return function(data) {
         var methodWithMixIns = data.filter(function(method) {
-          return method.mixes;
+          return method.mixes.length > 0;
         })[0];
         if (!methodWithMixIns) {
           return data;
