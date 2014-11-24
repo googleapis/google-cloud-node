@@ -1,0 +1,456 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "ignore": true
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>@module storage/file</p>",
+      "summary": "<p>@module storage/file</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": true,
+    "code": "'use strict';\n\nvar crypto = require('crypto');\nvar duplexify = require('duplexify');\nvar request = require('request');\nvar streamEvents = require('stream-events');"
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@type module:storage/acl</p>",
+      "summary": "<p>@type module:storage/acl</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var Acl = require('./acl.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Acl",
+      "value": "require('./acl.js')",
+      "string": "Acl"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@type module:common/util</p>",
+      "summary": "<p>@type module:common/util</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var util = require('../common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@const {string}</p>",
+      "summary": "<p>@const {string}</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var STORAGE_UPLOAD_BASE_URL = 'https://www.googleapis.com/upload/storage/v1/b';",
+    "ctx": {
+      "type": "declaration",
+      "name": "STORAGE_UPLOAD_BASE_URL",
+      "value": "'https://www.googleapis.com/upload/storage/v1/b'",
+      "string": "STORAGE_UPLOAD_BASE_URL"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "module:storage",
+          "bucket"
+        ],
+        "name": "bucket",
+        "description": "- The Bucket instance this file is     attached to."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "name",
+        "description": "- The name of the remote file."
+      },
+      {
+        "type": "param",
+        "types": [
+          "object="
+        ],
+        "name": "metadata",
+        "description": "- Metadata to set on the object. This is useful     when you are creating a file for the first time, to prevent making an\n    extra call to `setMetadata`."
+      }
+    ],
+    "description": {
+      "full": "<p>Developer Documentation</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": true
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "module:storage/file"
+      },
+      {
+        "type": "constructor",
+        "string": ""
+      }
+    ],
+    "description": {
+      "full": "<p>A File object is created from your Bucket object using<br />{module:storage/bucket#file}.</p>",
+      "summary": "<p>A File object is created from your Bucket object using<br />{module:storage/bucket#file}.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "function File(bucket, name, metadata) {\n  if (!name) {\n    throw Error('A file name must be specified.');\n  }\n\n  this.bucket = bucket;\n  this.makeReq_ = bucket.makeReq_.bind(bucket);\n  this.metadata = metadata || {};\n\n  Object.defineProperty(this, 'name', {\n    enumerable: true,\n    value: name\n  });",
+    "ctx": {
+      "type": "function",
+      "name": "File",
+      "string": "File()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "mixes",
+        "string": "module:storage/acl"
+      }
+    ],
+    "description": {
+      "full": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p><p>An ACL consists of one or more entries, where each entry grants permissions<br />to a scope. Permissions define the actions that can be performed against an<br />object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the scope defines who<br />the permission applies to (for example, a specific user or group of users).</p><p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p><p>The <code>acl</code> object on a File instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p>",
+      "summary": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p>",
+      "body": "<p>An ACL consists of one or more entries, where each entry grants permissions<br />to a scope. Permissions define the actions that can be performed against an<br />object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the scope defines who<br />the permission applies to (for example, a specific user or group of users).</p><p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p><p>The <code>acl</code> object on a File instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "this.acl = new Acl({\n    makeReq: this.makeReq_,\n    pathPrefix: '/o/' + encodeURIComponent(this.name) + '/acl'\n  });\n}",
+    "ctx": {
+      "type": "property",
+      "receiver": "this",
+      "name": "acl",
+      "value": "new Acl({",
+      "string": "this.acl"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "throws",
+        "types": [
+          "Error"
+        ],
+        "description": "If the destination file is not provided. "
+      },
+      {
+        "type": "param",
+        "types": [
+          "string",
+          "module:storage",
+          "bucket",
+          "module:storage",
+          "file"
+        ],
+        "name": "destination",
+        "description": "-     Destination file."
+      },
+      {
+        "type": "param",
+        "types": [
+          "function="
+        ],
+        "name": "callback",
+        "description": "- The callback function. "
+      },
+      {
+        "type": "example",
+        "string": "//-\n// You can pass in a variety of types for the destination.\n//\n// For all of the below examples, assume we are working with the following\n// Bucket and File objects.\n//-\nvar bucket = storage.bucket('my-bucket');\nvar file = bucket.file('my-image.png');\n\n//-\n// If you pass in a string for the destination, the file is copied to its\n// current bucket, under the new name provided.\n//-\nfile.copy('my-image-copy.png', function(err, copiedFile) {\n  // `my-bucket` now contains:\n  // - \"my-image.png\"\n  // - \"my-image-copy.png\"\n\n  // `copiedFile` is an instance of a File object that refers to your new\n  // file.\n});\n\n//-\n// If you pass in a Bucket object, the file will be copied to that bucket\n// using the same name.\n//-\nvar anotherBucket = storage.bucket('another-bucket');\nfile.copy(anotherBucket, function(err, copiedFile) {\n  // `my-bucket` still contains:\n  // - \"my-image.png\"\n  //\n  // `another-bucket` now contains:\n  // - \"my-image.png\"\n\n  // `copiedFile` is an instance of a File object that refers to your new\n  // file.\n});\n\n//-\n// If you pass in a File object, you have complete control over the new\n// bucket and filename.\n//-\nvar anotherFile = anotherBucket.file('my-awesome-image.png');\nfile.copy(anotherFile, function(err, copiedFile) {\n  // `my-bucket` still contains:\n  // - \"my-image.png\"\n  //\n  // `another-bucket` now contains:\n  // - \"my-awesome-image.png\"\n\n  // Note:\n  // The `copiedFile` parameter is equal to `anotherFile`.\n});"
+      }
+    ],
+    "description": {
+      "full": "<p>Copy this file to another file. By default, this will copy the file to the<br />same bucket, but you can choose to copy it to another Bucket by providing<br />either a Bucket or File object.</p>",
+      "summary": "<p>Copy this file to another file. By default, this will copy the file to the<br />same bucket, but you can choose to copy it to another Bucket by providing<br />either a Bucket or File object.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "File.prototype.copy = function(destination, callback) {\n  var noDestinationError = new Error('Destination file should have a name.');\n  if (!destination) {\n    throw noDestinationError;\n  }\n  callback = callback || util.noop;\n  var destBucket;\n  var destName;\n  var newFile;\n  if (util.is(destination, 'string')) {\n    destBucket = this.bucket;\n    destName = destination;\n  }\n  if (destination.constructor && destination.constructor.name === 'Bucket') {\n    destBucket = destination;\n    destName = this.name;\n  }\n  if (destination instanceof File) {\n    destBucket = destination.bucket;\n    destName = destination.name;\n    newFile = destination;\n  }\n  if (!destName) {\n    throw noDestinationError;\n  }\n  var path = util.format('/o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {\n    srcName: encodeURIComponent(this.name),\n    destBucket: destBucket.name,\n    destName: encodeURIComponent(destName)\n  });\n  this.makeReq_('POST', path, null, {}, function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    callback(null, newFile || destBucket.file(destName));\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "File",
+      "cons": "File",
+      "name": "copy",
+      "string": "File.prototype.copy()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "example",
+        "string": "//-\n// <h4>Downloading a File</h4>\n//\n// The example below demonstrates how we can reference a remote file, then\n// pipe its contents to a local file. This is effectively creating a local\n// backup of your remote data.\n//-\nvar fs = require('fs');\nvar image = myBucket.file('image.png');\n\nimage.createReadStream()\n  .pipe(fs.createWriteStream('/Users/stephen/Photos/image.png'))\n  .on('error', function(err) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a readable stream to read the contents of the remote file. It can be<br />piped to a writable stream or listened to for &#39;data&#39; events to read a file&#39;s<br />contents.</p>",
+      "summary": "<p>Create a readable stream to read the contents of the remote file. It can be<br />piped to a writable stream or listened to for &#39;data&#39; events to read a file&#39;s<br />contents.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "File.prototype.createReadStream = function() {\n  var storage = this.bucket.storage;\n  var dup = duplexify();\n  function createAuthorizedReq(uri) {\n    var reqOpts = { uri: uri };\n    storage.makeAuthorizedRequest_(reqOpts, {\n      onAuthorized: function(err, authorizedReqOpts) {\n        if (err) {\n          dup.emit('error', err);\n          dup.end();\n          return;\n        }\n        dup.setReadable(request(authorizedReqOpts));\n      }\n    });\n  }\n  if (this.metadata.mediaLink) {\n    createAuthorizedReq(this.metadata.mediaLink);\n  } else {\n    this.getMetadata(function(err, metadata) {\n      if (err) {\n        dup.emit('error', err);\n        dup.end();\n        return;\n      }\n      createAuthorizedReq(metadata.mediaLink);\n    });\n  }\n  return dup;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "File",
+      "cons": "File",
+      "name": "createReadStream",
+      "string": "File.prototype.createReadStream()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "object="
+        ],
+        "name": "metadata",
+        "description": "- Set the metadata for this file. "
+      },
+      {
+        "type": "example",
+        "string": "//-\n// <h4>Uploading a File</h4>\n//\n// Now, consider a case where we want to upload a file to your bucket. You\n// have the option of using {module:storage/bucket#upload}, but that is just\n// a convenience method which will do the following.\n//-\nvar fs = require('fs');\nvar image = myBucket.file('image.png');\n\nfs.createReadStream('/Users/stephen/Photos/birthday-at-the-zoo/panda.jpg')\n  .pipe(image.createWriteStream())\n  .on('error', function(err) {});\n\n//-\n// <h4>Uploading a File with Metadata</h4>\n//\n// One last case you may run into is when you want to upload a file to your\n// bucket and set its metadata at the same time. Like above, you can use\n// {module:storage/bucket#upload} to do this, which is just a wrapper around\n// the following.\n//-\nvar fs = require('fs');\nvar image = myBucket.file('image.png');\n\nfs.createReadStream('/Users/stephen/Photos/birthday-at-the-zoo/panda.jpg')\n  .pipe(image.createWriteStream({ contentType: 'image/jpeg' }))\n  .on('error', function(err) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a writable stream to overwrite the contents of the file in your<br />bucket.</p><p>A File object can also be used to create files for the first time.</p>",
+      "summary": "<p>Create a writable stream to overwrite the contents of the file in your<br />bucket.</p>",
+      "body": "<p>A File object can also be used to create files for the first time.</p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "File.prototype.createWriteStream = function(metadata) {\n  var that = this;\n  var dup = streamEvents(duplexify());\n\n  dup.once('writing', function() {\n    util.makeWritableStream(dup, {\n      makeAuthorizedRequest: that.bucket.storage.makeAuthorizedRequest_,\n      metadata: metadata,\n      request: {\n        qs: {\n          name: that.name\n        },\n        uri: util.format('{base}/{bucket}/o', {\n          base: STORAGE_UPLOAD_BASE_URL,\n          bucket: that.bucket.name\n        })\n      }\n    }, function(data) {\n      that.metadata = data;\n\n      dup.emit('complete', data);\n      dup.end();\n    });\n  });\n\n  return dup;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "File",
+      "cons": "File",
+      "name": "createWriteStream",
+      "string": "File.prototype.createWriteStream()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "function="
+        ],
+        "name": "callback",
+        "description": "- The callback function. "
+      },
+      {
+        "type": "example",
+        "string": "file.delete(function(err) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Delete the file.</p>",
+      "summary": "<p>Delete the file.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "File.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n  var path = '/o/' + encodeURIComponent(this.name);\n  this.makeReq_('DELETE', path, null, true, function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    callback();\n  }.bind(this));\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "File",
+      "cons": "File",
+      "name": "delete",
+      "string": "File.prototype.delete()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "function="
+        ],
+        "name": "callback",
+        "description": "- The callback function. "
+      },
+      {
+        "type": "example",
+        "string": "file.getMetadata(function(err, metadata) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Get the file&#39;s metadata.</p>",
+      "summary": "<p>Get the file&#39;s metadata.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "File.prototype.getMetadata = function(callback) {\n  callback = callback || util.noop;\n  var path = '/o/' + encodeURIComponent(this.name);\n  this.makeReq_('GET', path, null, true, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    this.metadata = resp;\n    callback(null, this.metadata);\n  }.bind(this));\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "File",
+      "cons": "File",
+      "name": "getMetadata",
+      "string": "File.prototype.getMetadata()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "throws",
+        "types": [
+          "Error"
+        ],
+        "description": "if an expiration timestamp from the past is given. "
+      },
+      {
+        "type": "param",
+        "types": [
+          "object"
+        ],
+        "name": "options",
+        "description": "- Configuration object."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "options.action",
+        "description": "- \"read\", \"write\", or \"delete\""
+      },
+      {
+        "type": "param",
+        "types": [
+          "string="
+        ],
+        "name": "options.contentMd5",
+        "description": "- The MD5 digest value in base64. If you     provide this, the client must provide this HTTP header with this same\n    value in its request."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string="
+        ],
+        "name": "options.contentType",
+        "description": "- If you provide this value, the client     must provide this HTTP header set to the same value."
+      },
+      {
+        "type": "param",
+        "types": [
+          "number"
+        ],
+        "name": "options.expires",
+        "description": "- Timestamp (seconds since epoch) when this     link will expire."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string="
+        ],
+        "name": "options.extensionHeaders",
+        "description": "- If these headers are used, the     server will check to make sure that the client provides matching values.\n"
+      },
+      {
+        "type": "example",
+        "string": "file.getSignedUrl({\n  action: 'read',\n  expires: Math.round(Date.now() / 1000) + (60 * 60 * 24 * 14) // 2 weeks.\n}, function(err, url) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a signed URL to allow limited time access to the file.</p><p><em><a href=\"http://goo.gl/LcqhjU\">Reference</a>.</em></p>",
+      "summary": "<p>Get a signed URL to allow limited time access to the file.</p>",
+      "body": "<p><em><a href=\"http://goo.gl/LcqhjU\">Reference</a>.</em></p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "File.prototype.getSignedUrl = function(options, callback) {\n  if (options.expires < Math.floor(Date.now() / 1000)) {\n    throw new Error('An expiration date cannot be in the past.');\n  }\n\n  options.action = {\n    read: 'GET',\n    write: 'PUT',\n    delete: 'DELETE'\n  }[options.action];\n\n  var name = encodeURIComponent(this.name);\n\n  options.resource = '/' + this.bucket.name + '/' + name;\n\n  var makeAuthorizedRequest_ = this.bucket.storage.makeAuthorizedRequest_;\n\n  makeAuthorizedRequest_.getCredentials(function(err, credentials) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var sign = crypto.createSign('RSA-SHA256');\n    sign.update([\n      options.action,\n      (options.contentMd5 || ''),\n      (options.contentType || ''),\n      options.expires,\n      (options.extensionHeaders || '') + options.resource\n    ].join('\\n'));\n    var signature = sign.sign(credentials.private_key, 'base64');\n\n    callback(null, [\n      'http://storage.googleapis.com' + options.resource,\n      '?GoogleAccessId=' + credentials.client_email,\n      '&Expires=' + options.expires,\n      '&Signature=' + encodeURIComponent(signature)\n    ].join(''));\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "File",
+      "cons": "File",
+      "name": "getSignedUrl",
+      "string": "File.prototype.getSignedUrl()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "object"
+        ],
+        "name": "metadata",
+        "description": "- The metadata you wish to set."
+      },
+      {
+        "type": "param",
+        "types": [
+          "function="
+        ],
+        "name": "callback",
+        "description": "- The callback function. "
+      },
+      {
+        "type": "example",
+        "string": "file.setMetadata({\n  contentType: 'application/x-font-ttf',\n  metadata: {\n    my: 'custom',\n    properties: 'go here'\n  }\n}, function(err, metadata) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Set the file&#39;s metadata.</p>",
+      "summary": "<p>Set the file&#39;s metadata.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "File.prototype.setMetadata = function(metadata, callback) {\n  callback = callback || util.noop;\n  var path = '/o/' + encodeURIComponent(this.name);\n  this.makeReq_('PATCH', path, null, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    this.metadata = resp;\n    callback(null, this.metadata);\n  }.bind(this));\n};\n\nmodule.exports = File;",
+    "ctx": {
+      "type": "method",
+      "constructor": "File",
+      "cons": "File",
+      "name": "setMetadata",
+      "string": "File.prototype.setMetadata()"
+    }
+  }
+]

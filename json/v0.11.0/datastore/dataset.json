@@ -1,0 +1,422 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "ignore": true
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>@module datastore/dataset</p>",
+      "summary": "<p>@module datastore/dataset</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": true,
+    "code": "'use strict';\n\nvar nodeutil = require('util');"
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@type module:datastore/entity</p>",
+      "summary": "<p>@type module:datastore/entity</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var entity = require('./entity.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "entity",
+      "value": "require('./entity.js')",
+      "string": "entity"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@type module:datastore/query</p>",
+      "summary": "<p>@type module:datastore/query</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var Query = require('./query.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Query",
+      "value": "require('./query.js')",
+      "string": "Query"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@type module:datastore/transaction</p>",
+      "summary": "<p>@type module:datastore/transaction</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var Transaction = require('./transaction.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Transaction",
+      "value": "require('./transaction.js')",
+      "string": "Transaction"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@type module:common/util</p>",
+      "summary": "<p>@type module:common/util</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var util = require('../common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@type module:datastore/request</p>",
+      "summary": "<p>@type module:datastore/request</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var DatastoreRequest = require('./request.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "DatastoreRequest",
+      "value": "require('./request.js')",
+      "string": "DatastoreRequest"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "const",
+        "string": "{array} SCOPES"
+      },
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>Scopes for Google Datastore access.</p>",
+      "summary": "<p>Scopes for Google Datastore access.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var SCOPES = [\n  'https://www.googleapis.com/auth/datastore',\n  'https://www.googleapis.com/auth/userinfo.email'\n];",
+    "ctx": {
+      "type": "declaration",
+      "name": "SCOPES",
+      "value": "[",
+      "string": "SCOPES"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "constructor",
+        "string": ""
+      },
+      {
+        "type": "alias",
+        "string": "module:datastore/dataset"
+      },
+      {
+        "type": "mixes",
+        "string": "module:datastore/request "
+      },
+      {
+        "type": "param",
+        "types": [
+          "object="
+        ],
+        "name": "options",
+        "description": "- Configuration object."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string="
+        ],
+        "name": "options.projectId",
+        "description": "- Dataset ID. This is your project ID from     the Google Developers Console."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string="
+        ],
+        "name": "options.keyFilename",
+        "description": "- Full path to the JSON key downloaded     from the Google Developers Console. Alternatively, you may provide a\n    `credentials` object."
+      },
+      {
+        "type": "param",
+        "types": [
+          "object="
+        ],
+        "name": "options.credentials",
+        "description": "- Credentials object, used in place of     a `keyFilename`."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "options.namespace",
+        "description": "- Namespace to isolate transactions to. "
+      },
+      {
+        "type": "example",
+        "string": "var dataset = datastore.dataset({\n  projectId: 'my-project',\n  keyFilename: '/path/to/keyfile.json'\n});"
+      }
+    ],
+    "description": {
+      "full": "<p>Interact with a dataset from the<br /><a href=\"https://developers.google.com/datastore/\">Google Cloud Datastore</a>.</p>",
+      "summary": "<p>Interact with a dataset from the<br /><a href=\"https://developers.google.com/datastore/\">Google Cloud Datastore</a>.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "function Dataset(options) {\n  if (!(this instanceof Dataset)) {\n    return new Dataset(options);\n  }\n\n  options = options || {};\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequest({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  this.projectId = options.projectId;\n  this.namespace = options.namespace;\n}\n\nnodeutil.inherits(Dataset, DatastoreRequest);",
+    "ctx": {
+      "type": "function",
+      "name": "Dataset",
+      "string": "Dataset()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "...*="
+        ],
+        "name": "options",
+        "description": "- Key path. To specify or override a namespace,     you must use an object here to explicitly state it."
+      },
+      {
+        "type": "param",
+        "types": [
+          "object="
+        ],
+        "name": "options",
+        "description": "- Configuration object."
+      },
+      {
+        "type": "param",
+        "types": [
+          "...*="
+        ],
+        "name": "options.path",
+        "description": "- Key path."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string="
+        ],
+        "name": "options.namespace",
+        "description": "- Optional namespace. "
+      },
+      {
+        "type": "example",
+        "string": "var key;\n\n// Create an incomplete key from the dataset namespace, kind='Company'\nkey = dataset.key('Company');\n\n// A complete key from the dataset namespace, kind='Company', id=123\nkey = dataset.key(['Company', 123]);\n\n// A complete key from the dataset namespace, kind='Company', name='Google'\n// Note: `id` is used for numeric identifiers and `name` is used otherwise\nkey = dataset.key(['Company', 'Google']);\n\n// A complete key from a provided namespace and path.\nkey = dataset.key({\n  namespace: 'My-NS',\n  path: ['Company', 123]\n});\n"
+      },
+      {
+        "type": "return",
+        "types": [
+          "Key"
+        ],
+        "description": "A newly created Key from the options given."
+      }
+    ],
+    "description": {
+      "full": "<p>Helper to create a Key object, scoped to the dataset&#39;s namespace by default.</p><p>You may also specify a configuration object to define a namespace and path.</p>",
+      "summary": "<p>Helper to create a Key object, scoped to the dataset&#39;s namespace by default.</p>",
+      "body": "<p>You may also specify a configuration object to define a namespace and path.</p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Dataset.prototype.key = function(options) {\n  options = util.is(options, 'object') ? options : {\n    namespace: this.namespace,\n    path: util.arrayize(options)\n  };\n  return new entity.Key(options);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Dataset",
+      "cons": "Dataset",
+      "name": "key",
+      "string": "Dataset.prototype.key()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "borrows",
+        "otherMemberName": "{module:datastore/query}",
+        "thisMemberName": "createQuery"
+      },
+      {
+        "type": "see",
+        "local": "{module:datastore/query} "
+      },
+      {
+        "type": "param",
+        "types": [
+          "string="
+        ],
+        "name": "namespace",
+        "description": "- Optional namespace."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string",
+          "array"
+        ],
+        "name": "kinds",
+        "description": "- Kinds to query."
+      },
+      {
+        "type": "return",
+        "types": [
+          "module:datastore",
+          "query"
+        ],
+        "description": ""
+      }
+    ],
+    "description": {
+      "full": "<p>Create a query from the current dataset to query the specified kinds, scoped<br />to the namespace provided at the initialization of the dataset.</p><p><em><a href=\"http://goo.gl/Cag0r6\">Reference</a>.</em></p>",
+      "summary": "<p>Create a query from the current dataset to query the specified kinds, scoped<br />to the namespace provided at the initialization of the dataset.</p>",
+      "body": "<p><em><a href=\"http://goo.gl/Cag0r6\">Reference</a>.</em></p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Dataset.prototype.createQuery = function(namespace, kinds) {\n  if (arguments.length === 1) {\n    kinds = util.arrayize(namespace);\n    namespace = this.namespace;\n  }\n  return new Query(namespace, util.arrayize(kinds));\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Dataset",
+      "cons": "Dataset",
+      "name": "createQuery",
+      "string": "Dataset.prototype.createQuery()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "borrows",
+        "otherMemberName": "{module:datastore/transaction#begin}",
+        "thisMemberName": "runInTransaction "
+      },
+      {
+        "type": "param",
+        "types": [
+          "function"
+        ],
+        "name": "fn",
+        "description": "- The function to run in the context of a transaction."
+      },
+      {
+        "type": "param",
+        "types": [
+          "function"
+        ],
+        "name": "callback",
+        "description": "- The callback function. "
+      },
+      {
+        "type": "example",
+        "string": "dataset.runInTransaction(function(transaction, done) {\n  // From the `transaction` object, execute dataset methods as usual.\n  // Call `done` when you're ready to commit all of the changes.\n  transaction.get(dataset.key(['Company', 123]), function(err, entity) {\n    if (err) {\n      transaction.rollback(done);\n      return;\n    }\n\n    done();\n  });\n}, function(err) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Run a function in the context of a new transaction. Transactions allow you to<br />perform multiple operations, committing your changes atomically.</p>",
+      "summary": "<p>Run a function in the context of a new transaction. Transactions allow you to<br />perform multiple operations, committing your changes atomically.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Dataset.prototype.runInTransaction = function(fn, callback) {\n  var newTransaction = this.createTransaction_();\n  newTransaction.begin(function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    fn(newTransaction, newTransaction.finalize.bind(newTransaction, callback));\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Dataset",
+      "cons": "Dataset",
+      "name": "runInTransaction",
+      "string": "Dataset.prototype.runInTransaction()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "return",
+        "types": [
+          "module:datastore",
+          "transaction"
+        ],
+        "description": ""
+      },
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a new Transaction object using the existing connection and dataset.</p>",
+      "summary": "<p>Create a new Transaction object using the existing connection and dataset.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "Dataset.prototype.createTransaction_ = function() {\n  return new Transaction(this, this.projectId);\n};\n\nmodule.exports = Dataset;",
+    "ctx": {
+      "type": "method",
+      "constructor": "Dataset",
+      "cons": "Dataset",
+      "name": "createTransaction_",
+      "string": "Dataset.prototype.createTransaction_()"
+    }
+  }
+]
