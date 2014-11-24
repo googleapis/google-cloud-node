@@ -7,6 +7,8 @@
 
 * [Homepage][gcloud-homepage]
 * [API Documentation][gcloud-docs]
+* [Frequently Asked Questions][wiki-faq]
+* [Examples][wiki-examples]
 
 This client supports the following Google Cloud Platform services:
 
@@ -15,37 +17,16 @@ This client supports the following Google Cloud Platform services:
 * [Google Cloud Storage][cloud-storage]
 * [Google Cloud Pub/Sub][cloud-pubsub] (Alpha)
 
-If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
 
-## Quick Start
+## Getting Started
 
 ```sh
 $ npm install --save gcloud
 ```
 
-## Examples
+:warning: **All `gcloud` service APIs require authorization details for your project.**
 
-- [TodoMVC backend using gcloud-node][gcloud-todos]
-
-## Authorization
-
-### On Google Compute Engine
-
-If you are running this client on Google Compute Engine, we handle authorization for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
-
-### Elsewhere
-
-If you are not running this client on Google Compute Engine, you need a Google Developers service account. To create a service account:
-
-1. Visit the [Google Developers Console][dev-console].
-2. Create a new project or click on an existing project.
-3. Navigate to  **APIs & auth** > **APIs section** and turn on the following APIs (you may need to enable billing in order to use these services):
-  * Google Cloud Datastore API
-  * Google Cloud Storage
-  * Google Cloud Storage JSON API
-4. Navigate to **APIs & auth** >  **Credentials** and then:
-  * If you want to use a new service account, click on **Create new Client ID** and select **Service account**. After the account is created, you will be prompted to download the JSON key file that the library uses to authorize your requests.
-  * If you want to generate a new key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
+Instructions on where to find these are available if you are [running your application on Google Compute Engine][wiki-faq-gce], or [running it elsewhere][wiki-faq-elsewhere].
 
 ## Google BigQuery
 
@@ -210,12 +191,11 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [gcloud-datastore-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/datastore
 [gcloud-pubsub-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/pubsub
 [gcloud-storage-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/storage
-[gcloud-todos]: https://github.com/GoogleCloudPlatform/gcloud-node-todos
 
-[dev-console]: https://console.developers.google.com/project
-[gce-how-to]: https://developers.google.com/compute/docs/authentication#using
-
-[googleapis]: https://github.com/google/google-api-nodejs-client
+[wiki-faq]: https://github.com/GoogleCloudPlatform/wiki/Frequently-Asked-Questions
+[wiki-examples]: https://github.com/GoogleCloudPlatform/wiki/Examples
+[wiki-faq-gce]: https://github.com/GoogleCloudPlatform/wiki/Frequently-Asked-Questions#how-do-i-use-gcloud-with-google-compute-engine]
+[wiki-faq-elsewhere]: https://github.com/GoogleCloudPlatform/wiki/Frequently-Asked-Questions#im-not-using-compute-engine-what-do-i-need-to-do]
 
 [cloud-bigquery]: https://cloud.google.com/bigquery
 [cloud-bigquery-docs]: https://cloud.google.com/bigquery/what-is-bigquery
