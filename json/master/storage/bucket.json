@@ -28,6 +28,28 @@
       }
     ],
     "description": {
+      "full": "<p>@type module:storage/acl</p>",
+      "summary": "<p>@type module:storage/acl</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var Acl = require('./acl.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Acl",
+      "value": "require('./acl.js')",
+      "string": "Acl"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
       "full": "<p>@type module:storage/file</p>",
       "summary": "<p>@type module:storage/file</p>",
       "body": ""
@@ -147,12 +169,146 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "function Bucket(storage, name) {\n  this.metadata = {};\n  this.name = name;\n  this.storage = storage;\n\n  if (!this.name) {\n    throw Error('A bucket name is needed to use Google Cloud Storage.');\n  }\n}",
+    "code": "function Bucket(storage, name) {\n  this.metadata = {};\n  this.name = name;\n  this.storage = storage;\n\n  if (!this.name) {\n    throw Error('A bucket name is needed to use Google Cloud Storage.');\n  }",
     "ctx": {
       "type": "function",
       "name": "Bucket",
       "string": "Bucket()"
     }
+  },
+  {
+    "tags": [
+      {
+        "type": "mixes",
+        "string": "module:storage/acl"
+      }
+    ],
+    "description": {
+      "full": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p><p>An ACL consists of one or more entries, where each entry grants permissions<br />to a scope. Permissions define the actions that can be performed against an<br />object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the scope defines who<br />the permission applies to (for example, a specific user or group of users).</p><p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p><p>The <code>acl</code> object on a Bucket instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p><p>Buckets also have<br /><a href=\"https://cloud.google.com/storage/docs/accesscontrol#default\">default ACLs</a><br />for all created files. Default ACLs specify permissions that all new<br />objects added to the bucket will inherit by default. You can add, delete,<br />get, and update scopes and permissions for these as well with<br />{module:storage/bucket#acl.default}.</p>",
+      "summary": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p>",
+      "body": "<p>An ACL consists of one or more entries, where each entry grants permissions<br />to a scope. Permissions define the actions that can be performed against an<br />object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the scope defines who<br />the permission applies to (for example, a specific user or group of users).</p><p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p><p>The <code>acl</code> object on a Bucket instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p><p>Buckets also have<br /><a href=\"https://cloud.google.com/storage/docs/accesscontrol#default\">default ACLs</a><br />for all created files. Default ACLs specify permissions that all new<br />objects added to the bucket will inherit by default. You can add, delete,<br />get, and update scopes and permissions for these as well with<br />{module:storage/bucket#acl.default}.</p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "this.acl = new Acl({\n    makeReq: this.makeReq_.bind(this),\n    pathPrefix: '/acl'\n  });\n\n  this.acl.default = new Acl({\n    makeReq: this.makeReq_.bind(this),\n    pathPrefix: '/defaultObjectAcl'\n  });",
+    "ctx": {
+      "type": "property",
+      "receiver": "this",
+      "name": "acl",
+      "value": "new Acl({",
+      "string": "this.acl"
+    }
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>jshint ignore:start</p>",
+      "summary": "<p>jshint ignore:start</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Developer Documentation</p><p>Sadly, to generate the documentation properly, this comment block describes<br />a useless variable named <code>ignored</code> and aliases it to <code>acl.default</code>. This is<br />done so the doc building process picks this up, without adding cruft to the<br />Bucket class itself.</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": "<p>Sadly, to generate the documentation properly, this comment block describes<br />a useless variable named <code>ignored</code> and aliases it to <code>acl.default</code>. This is<br />done so the doc building process picks this up, without adding cruft to the<br />Bucket class itself.</p>"
+    },
+    "isPrivate": false,
+    "ignore": true
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "acl.default"
+      }
+    ],
+    "description": {
+      "full": "<p>Google Cloud Storage Buckets have <a href=\"http://goo.gl/YpGdyv\">default ACLs</a> for<br />all created files. You can add, delete, get, and update scopes and<br />permissions for these as well. The method signatures and examples are all<br />the same, after only prefixing the method call with <code>default</code>.</p>",
+      "summary": "<p>Google Cloud Storage Buckets have <a href=\"http://goo.gl/YpGdyv\">default ACLs</a> for<br />all created files. You can add, delete, get, and update scopes and<br />permissions for these as well. The method signatures and examples are all<br />the same, after only prefixing the method call with <code>default</code>.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "var aclDefault;"
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "acl.default.add"
+      }
+    ],
+    "description": {
+      "full": "<p>Maps to {module:storage/bucket#acl.add}.</p>",
+      "summary": "<p>Maps to {module:storage/bucket#acl.add}.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "var aclDefaultAdd;"
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "acl.default.delete"
+      }
+    ],
+    "description": {
+      "full": "<p>Maps to {module:storage/bucket#acl.delete}.</p>",
+      "summary": "<p>Maps to {module:storage/bucket#acl.delete}.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "var aclDefaultDelete;"
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "acl.default.get"
+      }
+    ],
+    "description": {
+      "full": "<p>Maps to {module:storage/bucket#acl.get}.</p>",
+      "summary": "<p>Maps to {module:storage/bucket#acl.get}.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "var aclDefaultGet;"
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "acl.default.update"
+      }
+    ],
+    "description": {
+      "full": "<p>Maps to {module:storage/bucket#acl.update}.</p>",
+      "summary": "<p>Maps to {module:storage/bucket#acl.update}.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "var aclDefaultUpdate;"
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>jshint ignore:end</p>",
+      "summary": "<p>jshint ignore:end</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "}"
   },
   {
     "tags": [
@@ -356,7 +512,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Bucket.prototype.setMetadata = function(metadata, callback) {\n  callback = callback || util.noop;\n  this.makeReq_(\n      'PATCH', '/b/' + this.name, null, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    this.metadata = resp;\n    callback(null, this.metadata);\n  }.bind(this));\n};",
+    "code": "Bucket.prototype.setMetadata = function(metadata, callback) {\n  callback = callback || util.noop;\n  this.makeReq_('PATCH', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    this.metadata = resp;\n    callback(null, this.metadata);\n  }.bind(this));\n};",
     "ctx": {
       "type": "method",
       "constructor": "Bucket",

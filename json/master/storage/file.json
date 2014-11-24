@@ -28,6 +28,28 @@
       }
     ],
     "description": {
+      "full": "<p>@type module:storage/acl</p>",
+      "summary": "<p>@type module:storage/acl</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var Acl = require('./acl.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Acl",
+      "value": "require('./acl.js')",
+      "string": "Acl"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
       "full": "<p>@type module:common/util</p>",
       "summary": "<p>@type module:common/util</p>",
       "body": ""
@@ -118,11 +140,34 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "function File(bucket, name, metadata) {\n  if (!name) {\n    throw Error('A file name must be specified.');\n  }\n\n  this.bucket = bucket;\n  this.makeReq_ = bucket.makeReq_.bind(bucket);\n  this.metadata = metadata || {};\n  Object.defineProperty(this, 'name', {\n    enumerable: true,\n    value: name\n  });\n}",
+    "code": "function File(bucket, name, metadata) {\n  if (!name) {\n    throw Error('A file name must be specified.');\n  }\n\n  this.bucket = bucket;\n  this.makeReq_ = bucket.makeReq_.bind(bucket);\n  this.metadata = metadata || {};\n\n  Object.defineProperty(this, 'name', {\n    enumerable: true,\n    value: name\n  });",
     "ctx": {
       "type": "function",
       "name": "File",
       "string": "File()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "mixes",
+        "string": "module:storage/acl"
+      }
+    ],
+    "description": {
+      "full": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p><p>An ACL consists of one or more entries, where each entry grants permissions<br />to a scope. Permissions define the actions that can be performed against an<br />object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the scope defines who<br />the permission applies to (for example, a specific user or group of users).</p><p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p><p>The <code>acl</code> object on a File instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p>",
+      "summary": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p>",
+      "body": "<p>An ACL consists of one or more entries, where each entry grants permissions<br />to a scope. Permissions define the actions that can be performed against an<br />object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the scope defines who<br />the permission applies to (for example, a specific user or group of users).</p><p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p><p>The <code>acl</code> object on a File instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "this.acl = new Acl({\n    makeReq: this.makeReq_,\n    pathPrefix: '/o/' + encodeURIComponent(this.name) + '/acl'\n  });\n}",
+    "ctx": {
+      "type": "property",
+      "receiver": "this",
+      "name": "acl",
+      "value": "new Acl({",
+      "string": "this.acl"
     }
   },
   {
