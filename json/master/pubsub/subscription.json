@@ -158,7 +158,7 @@
     },
     "isPrivate": true,
     "ignore": false,
-    "code": "Subscription.formatMessage_ = function(msg) {\n  var message = {\n    id: msg.ackId\n  };\n  if (msg.pubsubEvent && msg.pubsubEvent.message) {\n    message.data =\n      new Buffer(msg.pubsubEvent.message.data, 'base64').toString('utf-8');\n    try {\n      message.data = JSON.parse(message.data);\n    } catch(e) {}\n  }\n  return message;\n};",
+    "code": "Subscription.formatMessage_ = function(msg) {\n  var message = {\n    id: msg.ackId\n  };\n  var evt = msg.pubsubEvent;\n  if (evt && evt.message && evt.message.data) {\n    message.data = new Buffer(evt.message.data, 'base64').toString('utf-8');\n    try {\n      message.data = JSON.parse(message.data);\n    } catch(e) {}\n  }\n  return message;\n};",
     "ctx": {
       "type": "method",
       "receiver": "Subscription",
