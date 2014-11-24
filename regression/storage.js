@@ -84,6 +84,158 @@ describe('storage', function() {
     });
   });
 
+  describe('acls', function() {
+    var USER_ACCOUNT = 'user-spsawchuk@gmail.com';
+
+    describe('buckets', function() {
+      it('should get access controls', function(done) {
+        bucket.acl.get(done, function(err, accessControls) {
+          assert.ifError(err);
+          assert(Array.isArray(accessControls));
+          done();
+        });
+      });
+
+      it('should add entity to default access controls', function(done) {
+        bucket.acl.default.add({
+          scope: USER_ACCOUNT,
+          role: storage.acl.OWNER_ROLE
+        }, function(err, accessControl) {
+          assert.ifError(err);
+          assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
+
+          bucket.acl.default.get({
+            scope: USER_ACCOUNT
+          }, function(err, accessControl) {
+            assert.ifError(err);
+            assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
+
+            bucket.acl.default.update({
+              scope: USER_ACCOUNT,
+              role: storage.acl.READER_ROLE
+            }, function(err, accessControl) {
+              assert.ifError(err);
+              assert.equal(accessControl.role, storage.acl.READER_ROLE);
+
+              bucket.acl.default.delete({ scope: USER_ACCOUNT }, done);
+            });
+          });
+        });
+      });
+
+      it('should get default access controls', function(done) {
+        bucket.acl.default.get(function(err, accessControls) {
+          assert.ifError(err);
+          assert(Array.isArray(accessControls));
+          done();
+        });
+      });
+
+      it('should grant an account access', function(done) {
+        bucket.acl.add({
+          scope: USER_ACCOUNT,
+          role: storage.acl.OWNER_ROLE
+        }, function(err, accessControl) {
+          assert.ifError(err);
+          assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
+
+          bucket.acl.get({ scope: USER_ACCOUNT }, function(err, accessControl) {
+            assert.ifError(err);
+            assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
+
+            bucket.acl.delete({ scope: USER_ACCOUNT }, done);
+          });
+        });
+      });
+
+      it('should update an account', function(done) {
+        bucket.acl.add({
+          scope: USER_ACCOUNT,
+          role: storage.acl.OWNER_ROLE
+        }, function(err, accessControl) {
+          assert.ifError(err);
+          assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
+
+          bucket.acl.update({
+            scope: USER_ACCOUNT,
+            role: storage.acl.WRITER_ROLE
+          }, function(err, accessControl) {
+            assert.ifError(err);
+            assert.equal(accessControl.role, storage.acl.WRITER_ROLE);
+
+            bucket.acl.delete({ scope: USER_ACCOUNT }, done);
+          });
+        });
+      });
+    });
+
+    describe('files', function() {
+      var file;
+
+      before(function(done) {
+        bucket.upload(files.logo.path, function(err, f) {
+          assert.ifError(err);
+          file = f;
+          done();
+        });
+      });
+
+      after(function(done) {
+        file.delete(done);
+      });
+
+      it('should get access controls', function(done) {
+        file.acl.get(done, function(err, accessControls) {
+          assert.ifError(err);
+          assert(Array.isArray(accessControls));
+          done();
+        });
+      });
+
+      it('should not expose default api', function() {
+        assert.equal(typeof file.default, 'undefined');
+      });
+
+      it('should grant an account access', function(done) {
+        file.acl.add({
+          scope: USER_ACCOUNT,
+          role: storage.acl.OWNER_ROLE
+        }, function(err, accessControl) {
+          assert.ifError(err);
+          assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
+
+          file.acl.get({ scope: USER_ACCOUNT }, function(err, accessControl) {
+            assert.ifError(err);
+            assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
+
+            file.acl.delete({ scope: USER_ACCOUNT }, done);
+          });
+        });
+      });
+
+      it('should update an account', function(done) {
+        file.acl.add({
+          scope: USER_ACCOUNT,
+          role: storage.acl.OWNER_ROLE
+        }, function(err, accessControl) {
+          assert.ifError(err);
+          assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
+
+          file.acl.update({
+            scope: USER_ACCOUNT,
+            role: storage.acl.READER_ROLE
+          }, function(err, accessControl) {
+            assert.ifError(err);
+
+            assert.equal(accessControl.role, storage.acl.READER_ROLE);
+
+            file.acl.delete({ scope: USER_ACCOUNT }, done);
+          });
+        });
+      });
+    });
+  });
+
   describe('getting buckets', function() {
     var bucketsToCreate = [
       generateBucketName(), generateBucketName(), generateBucketName()
@@ -127,6 +279,23 @@ describe('storage', function() {
         assert.equal(createdBuckets.length, bucketsToCreate.length);
         done();
       }
+    });
+  });
+
+  describe('bucket metadata', function() {
+    it('should allow setting metadata on a bucket', function(done) {
+      var metadata = {
+        website: {
+          mainPageSuffix: 'http://fakeuri',
+          notFoundPage: 'http://fakeuri/404.html'
+        }
+      };
+
+      bucket.setMetadata(metadata, function(err, meta) {
+        assert.ifError(err);
+        assert.deepEqual(meta.website, metadata.website);
+        done();
+      });
     });
   });
 
