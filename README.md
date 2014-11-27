@@ -1,5 +1,5 @@
 # Google Cloud Node.js Client
-> Node.js idiomatic client for Google Cloud Platform services.
+> [Node.js](https://cloud.google.com/solutions/nodejs/) idiomatic client for [Google Cloud Platform](https://cloud.google.com/) services.
 
 [![NPM Version](https://img.shields.io/npm/v/gcloud.svg)](https://www.npmjs.org/package/gcloud)
 [![Travis Build Status](https://travis-ci.org/GoogleCloudPlatform/gcloud-node.svg)](https://travis-ci.org/GoogleCloudPlatform/gcloud-node/)
@@ -213,20 +213,20 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [gcloud-todos]: https://github.com/GoogleCloudPlatform/gcloud-node-todos
 
 [dev-console]: https://console.developers.google.com/project
-[gce-how-to]: https://developers.google.com/compute/docs/authentication#using
+[gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 
 [googleapis]: https://github.com/google/google-api-nodejs-client
 
-[cloud-bigquery]: https://cloud.google.com/bigquery
+[cloud-bigquery]: https://cloud.google.com/bigquery/
 [cloud-bigquery-docs]: https://cloud.google.com/bigquery/what-is-bigquery
 
-[cloud-datastore]: https://cloud.google.com/products/cloud-datastore
-[cloud-datastore-docs]: https://developers.google.com/datastore
-[cloud-datastore-activation]: https://developers.google.com/datastore/docs/activate
+[cloud-datastore]: https://cloud.google.com/datastore/
+[cloud-datastore-docs]: https://cloud.google.com/datastore/docs
+[cloud-datastore-activation]: https://cloud.google.com/datastore/docs/activate
 
-[cloud-pubsub]: https://cloud.google.com/pubsub
-[cloud-pubsub-docs]: https://developers.google.com/pubsub
+[cloud-pubsub]: https://cloud.google.com/pubsub/
+[cloud-pubsub-docs]: https://cloud.google.com/pubsub/docs
 
-[cloud-storage]: https://cloud.google.com/products/cloud-storage
-[cloud-storage-docs]: https://developers.google.com/storage
-[cloud-storage-create-bucket]: https://developers.google.com/storage/docs/cloud-console#_creatingbuckets
+[cloud-storage]: https://cloud.google.com/storage/
+[cloud-storage-docs]: https://cloud.google.com/storage/docs/overview
+[cloud-storage-create-bucket]: https://cloud.google.com/storage/docs/cloud-console#_creatingbuckets
