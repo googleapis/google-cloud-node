@@ -23,9 +23,11 @@ If you need support for other Google APIs, check out the [Google Node.js API Cli
 $ npm install --save gcloud
 ```
 
-## Examples
+## Example Applications
 
-- [TodoMVC backend using gcloud-node][gcloud-todos]
+- [gcloud-node-todos][gcloud-todos] - TodoMVC backend using gcloud-node.
+- [gitnpm][gitnpm] - Easily lookup an npm package's GitHub repo using gcloud backend.
+- [gcloud-keystore][gcloud-keystore] - Use Datastore as a simple key-value store.
 
 ## Authorization
 
@@ -211,6 +213,8 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [gcloud-pubsub-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/pubsub
 [gcloud-storage-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/storage
 [gcloud-todos]: https://github.com/GoogleCloudPlatform/gcloud-node-todos
+[gitnpm]: https://github.com/stephenplusplus/gitnpm
+[gcloud-keystore]: https://github.com/stephenplusplus/gcloud-keystore
 
 [dev-console]: https://console.developers.google.com/project
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
