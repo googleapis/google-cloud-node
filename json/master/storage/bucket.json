@@ -111,6 +111,32 @@
   {
     "tags": [
       {
+        "type": "const",
+        "string": "{number}"
+      },
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>The size of a file (in bytes) must be greater than this number to<br />automatically trigger a resumable upload.</p>",
+      "summary": "<p>The size of a file (in bytes) must be greater than this number to<br />automatically trigger a resumable upload.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var RESUMABLE_THRESHOLD = 5000000;",
+    "ctx": {
+      "type": "declaration",
+      "name": "RESUMABLE_THRESHOLD",
+      "value": "5000000",
+      "string": "RESUMABLE_THRESHOLD"
+    }
+  },
+  {
+    "tags": [
+      {
         "type": "constructor",
         "string": ""
       },
@@ -534,20 +560,36 @@
       {
         "type": "param",
         "types": [
-          "string=",
-          "module:storage",
-          "file="
+          "object="
         ],
-        "name": "destination",
-        "description": "- The place to save your     file. If given a string, the file will be uploaded to the bucket using\n    the string as a filename. When given a File object, your local file will\n    be uploaded to the File object's bucket and under the File object's name.\n    Lastly, when this argument is omitted, the file is uploaded to your\n    bucket using the name of the local file."
+        "name": "options",
+        "description": "- Configuration options."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string",
+          "module:storage",
+          "file"
+        ],
+        "name": "options.destination",
+        "description": "- The place to save     your file. If given a string, the file will be uploaded to the bucket\n    using the string as a filename. When given a File object, your local file\n    will be uploaded to the File object's bucket and under the File object's\n    name. Lastly, when this argument is omitted, the file is uploaded to your\n    bucket using the name of the local file."
       },
       {
         "type": "param",
         "types": [
           "object="
         ],
-        "name": "metadata",
+        "name": "options.metadata",
         "description": "- Metadata to set for your file."
+      },
+      {
+        "type": "param",
+        "types": [
+          "boolean="
+        ],
+        "name": "options.resumable",
+        "description": "- Force a resumable upload. (default:     true for files larger than 5MB). Read more about resumable uploads\n    [here](http://goo.gl/1JWqCF). NOTE: This behavior is only possible with\n    this method, and not {module:storage/file#createWriteStream}. When\n    working with streams, the file format and size is unknown until it's\n    completely consumed. Because of this, it's best for you to be explicit\n    for what makes sense given your input."
       },
       {
         "type": "param",
@@ -555,11 +597,20 @@
           "function"
         ],
         "name": "callback",
-        "description": "- The callback function. "
+        "description": "- The callback function."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string",
+          "boolean"
+        ],
+        "name": "options.validation",
+        "description": "- Possible values: `\"md5\"`,     `\"crc32c\"`, or `false`. By default, data integrity is validated with an\n    MD5 checksum for maximum reliability. CRC32c will provide better\n    performance with less reliability. You may also choose to skip validation\n    completely, however this is **not recommended**.\n"
       },
       {
         "type": "example",
-        "string": "//-\n// The easiest way to upload a file.\n//-\nbucket.upload('/local/path/image.png', function(err, file) {\n  // Your bucket now contains:\n  // - \"image.png\" (with the contents of `/local/path/image.png')\n\n  // `file` is an instance of a File object that refers to your new file.\n});\n\n//-\n// It's not always that easy. You will likely want to specify the filename\n// used when your new file lands in your bucket.\n//-\nbucket.upload('/local/path/image.png', 'new-image.png', function(err, file) {\n  // Your bucket now contains:\n  // - \"new-image.png\" (with the contents of `/local/path/image.png')\n\n  // `file` is an instance of a File object that refers to your new file.\n});\n\n//-\n// You may also re-use a File object, {module:storage/file}, that references\n// the file you wish to create or overwrite.\n//-\nvar file = bucket.file('existing-file.png');\nbucket.upload('/local/path/image.png', file, function(err, newFile) {\n  // Your bucket now contains:\n  // - \"existing-file.png\" (with the contents of `/local/path/image.png')\n\n  // Note:\n  // The `newFile` parameter is equal to `file`.\n});"
+        "string": "//-\n// The easiest way to upload a file.\n//-\nbucket.upload('/local/path/image.png', function(err, file) {\n  // Your bucket now contains:\n  // - \"image.png\" (with the contents of `/local/path/image.png')\n\n  // `file` is an instance of a File object that refers to your new file.\n});\n\n//-\n// It's not always that easy. You will likely want to specify the filename\n// used when your new file lands in your bucket.\n//\n// You may also want to set metadata or customize other options.\n//-\nvar options = {\n  destination: 'new-image.png',\n  resumable: true,\n  validation: 'crc32c',\n  metadata: {\n    event: 'Fall trip to the zoo'\n  }\n};\n\nbucket.upload('/local/path/image.png', options, function(err, file) {\n  // Your bucket now contains:\n  // - \"new-image.png\" (with the contents of `/local/path/image.png')\n\n  // `file` is an instance of a File object that refers to your new file.\n});\n\n//-\n// You may also re-use a File object, {module:storage/file}, that references\n// the file you wish to create or overwrite.\n//-\nvar options = {\n  destination: bucket.file('existing-file.png'),\n  resumable: false\n};\n\nbucket.upload('/local/path/image.png', options, function(err, newFile) {\n  // Your bucket now contains:\n  // - \"existing-file.png\" (with the contents of `/local/path/image.png')\n\n  // Note:\n  // The `newFile` parameter is equal to `file`.\n});"
       }
     ],
     "description": {
@@ -569,7 +620,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Bucket.prototype.upload = function(localPath, destination, metadata, callback) {\n  var name;\n  var newFile;\n  switch (arguments.length) {\n    case 4:\n      break;\n    case 3:\n      callback = metadata;\n      if (util.is(destination, 'object')) {\n        metadata = destination;\n      } else {\n        metadata = {};\n      }",
+    "code": "Bucket.prototype.upload = function(localPath, options, callback) {\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = {};\n  }\n\n  var newFile;\n  if (options.destination instanceof File) {\n    newFile = options.destination;\n  } else if (util.is(options.destination, 'string')) {\n    // Use the string as the name of the file.\n    newFile = this.file(options.destination);\n  } else {\n    // Resort to using the name of the incoming file.\n    newFile = this.file(path.basename(localPath));\n  }\n\n  var metadata = options.metadata || {};\n  var contentType = mime.lookup(localPath);\n  if (contentType && !metadata.contentType) {\n    metadata.contentType = contentType;\n  }\n\n  var charset = mime.charsets.lookup(metadata.contentType);\n  if (charset) {\n    metadata.contentType += '; charset=' + charset;\n  }\n\n  var resumable;\n  if (util.is(options.resumable, 'boolean')) {\n    resumable = options.resumable;\n    upload();\n  } else {\n    // Determine if the upload should be resumable if it's over the threshold.\n    fs.stat(localPath, function(err, fd) {\n      if (err) {\n        callback(err);\n        return;\n      }\n\n      resumable = fd.size > RESUMABLE_THRESHOLD;\n\n      upload();\n    });\n  }\n\n  function upload() {\n    fs.createReadStream(localPath)\n      .pipe(newFile.createWriteStream({\n        validation: options.validation,\n        resumable: resumable,\n        metadata: metadata\n      }))\n      .on('error', callback)\n      .on('complete', function() {\n        callback(null, newFile);\n      });\n  }\n};",
     "ctx": {
       "type": "method",
       "constructor": "Bucket",
@@ -577,17 +628,6 @@
       "name": "upload",
       "string": "Bucket.prototype.upload()"
     }
-  },
-  {
-    "tags": [],
-    "description": {
-      "full": "<p>falls through</p>",
-      "summary": "<p>falls through</p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "default:\n      callback = callback || destination;\n      name = path.basename(localPath);\n      break;\n  }\n  metadata = metadata || {};\n  callback = callback || util.noop;\n  if (util.is(destination, 'string')) {\n    name = destination;\n  }\n  if (destination instanceof File) {\n    name = destination.name;\n    newFile = destination;\n  }\n  newFile = newFile || this.file(name);\n\n  var contentType = mime.lookup(localPath);\n  if (contentType && !metadata.contentType) {\n    metadata.contentType = contentType;\n  }\n\n  var charset = mime.charsets.lookup(metadata.contentType);\n  if (charset) {\n    metadata.contentType += '; charset=' + charset;\n  }\n\n  fs.createReadStream(localPath)\n    .pipe(newFile.createWriteStream(metadata))\n    .on('error', callback)\n    .on('complete', function() {\n      callback(null, newFile);\n    });\n};"
   },
   {
     "tags": [
