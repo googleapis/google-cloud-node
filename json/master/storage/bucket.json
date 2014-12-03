@@ -259,7 +259,13 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "var aclDefault;"
+    "code": "var aclDefault = true;",
+    "ctx": {
+      "type": "declaration",
+      "name": "aclDefault",
+      "value": "true",
+      "string": "aclDefault"
+    }
   },
   {
     "tags": [
@@ -275,7 +281,13 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "var aclDefaultAdd;"
+    "code": "var aclDefaultAdd = true;",
+    "ctx": {
+      "type": "declaration",
+      "name": "aclDefaultAdd",
+      "value": "true",
+      "string": "aclDefaultAdd"
+    }
   },
   {
     "tags": [
@@ -291,7 +303,13 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "var aclDefaultDelete;"
+    "code": "var aclDefaultDelete = true;",
+    "ctx": {
+      "type": "declaration",
+      "name": "aclDefaultDelete",
+      "value": "true",
+      "string": "aclDefaultDelete"
+    }
   },
   {
     "tags": [
@@ -307,7 +325,13 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "var aclDefaultGet;"
+    "code": "var aclDefaultGet = true;",
+    "ctx": {
+      "type": "declaration",
+      "name": "aclDefaultGet",
+      "value": "true",
+      "string": "aclDefaultGet"
+    }
   },
   {
     "tags": [
@@ -323,7 +347,13 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "var aclDefaultUpdate;"
+    "code": "var aclDefaultUpdate = true;",
+    "ctx": {
+      "type": "declaration",
+      "name": "aclDefaultUpdate",
+      "value": "true",
+      "string": "aclDefaultUpdate"
+    }
   },
   {
     "tags": [],

@@ -110,6 +110,10 @@
         "description": "- The callback function. "
       },
       {
+        "type": "alias",
+        "string": "acl.add "
+      },
+      {
         "type": "example",
         "string": "myBucket.acl.add({\n  scope: 'user-useremail@example.com',\n  role: storage.acl.OWNER_ROLE\n}, function(err, aclObject) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.add({\n  scope: 'user-useremail@example.com',\n  role: storage.acl.OWNER_ROLE,\n  generation: 1\n}, function(err, aclObject) {});"
       }
@@ -165,8 +169,12 @@
         "description": "- The callback function. "
       },
       {
+        "type": "alias",
+        "string": "acl.delete "
+      },
+      {
         "type": "example",
-        "string": "myBucket.acl.delete({\n  scope: 'user-useremail@example.com'\n}, function(err) {});\n\n//-\n// For file ACL operations, an options object is also accepted.\n//-\nmyFile.acl.delete({\n  scope: 'user-useremail@example.com',\n  generation: 1\n}, function(err) {});"
+        "string": "myBucket.acl.delete({\n  scope: 'user-useremail@example.com'\n}, function(err) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.delete({\n  scope: 'user-useremail@example.com',\n  generation: 1\n}, function(err) {});"
       }
     ],
     "description": {
@@ -213,8 +221,12 @@
         "description": "- **File Objects Only** Select a specific     revision of this file (as opposed to the latest version, the default).\n"
       },
       {
+        "type": "alias",
+        "string": "acl.get "
+      },
+      {
         "type": "example",
-        "string": "myBucket.acl.get({\n  scope: 'user-useremail@example.com'\n}, function(err, aclObject) {});\n\n//-\n// Get all access controls.\n//-\nmyBucket.acl.get(function(err, aclObjects) {\n  // aclObjects = [\n  //   {\n  //     scope: 'user-useremail@example.com',\n  //     role: 'owner'\n  //   }\n  // ]\n});\n\n//-\n// For file ACL operations, an options object is also accepted.\n//-\nmyFile.acl.get({\n  scope: 'user-useremail@example.com',\n  generation: 1\n} function(err, aclObject) {});"
+        "string": "myBucket.acl.get({\n  scope: 'user-useremail@example.com'\n}, function(err, aclObject) {});\n\n//-\n// Get all access controls.\n//-\nmyBucket.acl.get(function(err, aclObjects) {\n  // aclObjects = [\n  //   {\n  //     scope: 'user-useremail@example.com',\n  //     role: 'owner'\n  //   }\n  // ]\n});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.get({\n  scope: 'user-useremail@example.com',\n  generation: 1\n} function(err, aclObject) {});"
       }
     ],
     "description": {
@@ -276,8 +288,12 @@
         "description": "- The callback function. "
       },
       {
+        "type": "alias",
+        "string": "acl.update "
+      },
+      {
         "type": "example",
-        "string": "var storage = gcloud.storage();\n\nmyBucket.acl.update({\n  scope: 'user-useremail@example.com',\n  role: storage.acl.WRITER_ROLE\n}, function(err) {});\n\n//-\n// For file ACL operations, an options object is also accepted.\n//-\nmyFile.acl.update({\n  scope: 'user-useremail@example.com',\n  role: storage.acl.WRITER_ROLE,\n  generation: 1\n}, function(err) {});"
+        "string": "var storage = gcloud.storage();\n\nmyBucket.acl.update({\n  scope: 'user-useremail@example.com',\n  role: storage.acl.WRITER_ROLE\n}, function(err) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.update({\n  scope: 'user-useremail@example.com',\n  role: storage.acl.WRITER_ROLE,\n  generation: 1\n}, function(err) {});"
       }
     ],
     "description": {
