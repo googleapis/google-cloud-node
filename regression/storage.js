@@ -23,6 +23,7 @@ var async = require('async');
 var crypto = require('crypto');
 var fs = require('fs');
 var request = require('request');
+var through = require('through2');
 var tmp = require('tmp');
 var uuid = require('node-uuid');
 
@@ -36,7 +37,7 @@ var files = {
     path: 'regression/data/CloudPlatform_128px_Retina.png'
   },
   big: {
-    path: 'regression/data/five-mb-file.zip'
+    path: 'regression/data/three-mb-file.tif'
   }
 };
 
@@ -315,7 +316,7 @@ describe('storage', function() {
       var file = bucket.file('directory/file');
       var contents = 'test';
 
-      var writeStream = file.createWriteStream();
+      var writeStream = file.createWriteStream({ resumable: false });
       writeStream.write(contents);
       writeStream.end();
 
@@ -331,10 +332,10 @@ describe('storage', function() {
     });
 
     describe('stream write', function() {
-      it('should stream write, then remove large file (5mb)', function(done) {
+      it('should stream write, then remove file (3mb)', function(done) {
         var file = bucket.file('LargeFile');
         fs.createReadStream(files.big.path)
-          .pipe(file.createWriteStream())
+          .pipe(file.createWriteStream({ resumable: false }))
           .on('error', done)
           .on('complete', function(fileObject) {
             assert.equal(fileObject.md5Hash, files.big.hash);
@@ -343,26 +344,77 @@ describe('storage', function() {
       });
 
       it('should write metadata', function(done) {
-        var myMetadata = { contentType: 'image/png' };
-        bucket.upload(files.logo.path, myMetadata, function(err, file) {
+        var options = {
+          metadata: { contentType: 'image/png' },
+          resumable: false
+        };
+
+        bucket.upload(files.logo.path, options, function(err, file) {
           assert.ifError(err);
+
           file.getMetadata(function(err, metadata) {
             assert.ifError(err);
-            assert.equal(metadata.contentType, myMetadata.contentType);
+            assert.equal(metadata.contentType, options.metadata.contentType);
             file.delete(done);
           });
+        });
+      });
+
+      it('should resume an upload after an interruption', function(done) {
+        fs.stat(files.big.path, function(err, metadata) {
+          assert.ifError(err);
+
+          var fileSize = metadata.size;
+          var file = bucket.file('LargeFile');
+
+          upload({ interrupt: true }, function(err) {
+            assert.ifError(err);
+
+            upload({ interrupt: false }, function(err, metadata) {
+              assert.ifError(err);
+
+              assert.equal(metadata.size, fileSize);
+              file.delete(done);
+            });
+          });
+
+          function upload(opts, callback) {
+            var sizeStreamed = 0;
+
+            fs.createReadStream(files.big.path)
+              .pipe(through(function(chunk, enc, next) {
+                sizeStreamed += chunk.length;
+
+                if (opts.interrupt && sizeStreamed >= fileSize / 2) {
+                  // stop sending data half way through.
+                  next();
+                } else {
+                  this.push(chunk);
+                  next();
+                }
+              }))
+              .pipe(file.createWriteStream())
+              .on('error', callback)
+              .on('complete', function(fileObject) {
+                callback(null, fileObject);
+              });
+          }
         });
       });
 
       it('should write/read/remove from a buffer', function(done) {
         tmp.setGracefulCleanup();
         tmp.file(function _tempFileCreated(err, tmpFilePath) {
+          assert.ifError(err);
+
           var file = bucket.file('MyBuffer');
           var fileContent = 'Hello World';
-          assert.ifError(err);
+
           var writable = file.createWriteStream();
+
           writable.write(fileContent);
           writable.end();
+
           writable.on('complete', function() {
             file.createReadStream()
               .pipe(fs.createWriteStream(tmpFilePath))
@@ -370,6 +422,7 @@ describe('storage', function() {
               .on('finish', function() {
                 file.delete(function(err) {
                   assert.ifError(err);
+
                   fs.readFile(tmpFilePath, function(err, data) {
                     assert.equal(data, fileContent);
                     done();
@@ -400,10 +453,8 @@ describe('storage', function() {
 
     before(function(done) {
       deleteFiles(bucket, function(err) {
-        if (err) {
-          done(err);
-          return;
-        }
+        assert.ifError(err);
+
         var file = bucket.file(filenames[0]);
         fs.createReadStream(files.logo.path)
           .pipe(file.createWriteStream())

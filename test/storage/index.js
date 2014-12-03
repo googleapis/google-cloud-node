@@ -32,10 +32,8 @@ describe('Storage', function() {
   });
 
   describe('initialization', function() {
-    it('should throw if a bucket name is not passed', function() {
-      assert.throws(function() {
-        storage.bucket();
-      }, Error);
+    it('should set the project id', function() {
+      assert.equal(storage.projectId, 'project-id');
     });
   });
 
