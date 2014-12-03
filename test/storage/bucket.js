@@ -27,8 +27,8 @@ function FakeFile(bucket, name, metadata) {
   this.bucket = bucket;
   this.name = name;
   this.metadata = metadata;
-  this.createWriteStream = function(metadata) {
-    this.metadata = metadata;
+  this.createWriteStream = function(options) {
+    this.metadata = options.metadata;
     var dup = duplexify();
     dup._write = function() {
       dup.emit('complete');
@@ -278,112 +278,137 @@ describe('Bucket', function() {
       };
     });
 
-    describe('variable arity', function() {
-      it('should accept a path & cb', function(done) {
-        bucket.upload(filepath, function(err, file) {
-          assert.ifError(err);
-          assert.equal(file.bucket.name, bucket.name);
-          assert.equal(file.name, basename);
-          done();
-        });
+    it('should accept a path & cb', function(done) {
+      bucket.upload(filepath, function(err, file) {
+        assert.ifError(err);
+        assert.equal(file.bucket.name, bucket.name);
+        assert.equal(file.name, basename);
+        done();
       });
+    });
 
-      it('should accept a path, metadata, & cb', function(done) {
-        bucket.upload(filepath, metadata, function(err, file) {
-          assert.ifError(err);
-          assert.equal(file.bucket.name, bucket.name);
-          assert.deepEqual(file.metadata, metadata);
-          done();
-        });
+    it('should accept a path, metadata, & cb', function(done) {
+      var options = { metadata: metadata };
+      bucket.upload(filepath, options, function(err, file) {
+        assert.ifError(err);
+        assert.equal(file.bucket.name, bucket.name);
+        assert.deepEqual(file.metadata, metadata);
+        done();
       });
+    });
 
-      it('should accept a path, a string dest, & cb', function(done) {
-        var newFileName = 'new-file-name.png';
-        bucket.upload(filepath, newFileName, function(err, file) {
-          assert.ifError(err);
-          assert.equal(file.bucket.name, bucket.name);
-          assert.equal(file.name, newFileName);
-          done();
-        });
+    it('should accept a path, a string dest, & cb', function(done) {
+      var newFileName = 'new-file-name.png';
+      var options = { destination: newFileName };
+      bucket.upload(filepath, options, function(err, file) {
+        assert.ifError(err);
+        assert.equal(file.bucket.name, bucket.name);
+        assert.equal(file.name, newFileName);
+        done();
       });
+    });
 
-      it('should accept a path, a string dest, metadata, & cb', function(done) {
-        var newFileName = 'new-file-name.png';
-        bucket.upload(filepath, newFileName, metadata, function(err, file) {
-          assert.ifError(err);
-          assert.equal(file.bucket.name, bucket.name);
-          assert.equal(file.name, newFileName);
-          assert.deepEqual(file.metadata, metadata);
-          done();
-        });
+    it('should accept a path, a string dest, metadata, & cb', function(done) {
+      var newFileName = 'new-file-name.png';
+      var options = { destination: newFileName, metadata: metadata };
+      bucket.upload(filepath, options, function(err, file) {
+        assert.ifError(err);
+        assert.equal(file.bucket.name, bucket.name);
+        assert.equal(file.name, newFileName);
+        assert.deepEqual(file.metadata, metadata);
+        done();
       });
+    });
 
-      it('should accept a path, a File dest, & cb', function(done) {
-        var fakeFile = new FakeFile(bucket, 'file-name');
-        fakeFile.isSameFile = function() {
-          done();
-        };
-        bucket.upload(filepath, fakeFile, function(err, file) {
-          assert.ifError(err);
-          file.isSameFile();
-        });
+    it('should accept a path, a File dest, & cb', function(done) {
+      var fakeFile = new FakeFile(bucket, 'file-name');
+      fakeFile.isSameFile = function() {
+        return true;
+      };
+      var options = { destination: fakeFile };
+      bucket.upload(filepath, options, function(err, file) {
+        assert.ifError(err);
+        assert(file.isSameFile());
+        done();
       });
+    });
 
-      it('should accept a path, a File dest, metadata, & cb', function(done) {
-        var fakeFile = new FakeFile(bucket, 'file-name');
-        fakeFile.isSameFile = function() {
-          done();
-        };
-        bucket.upload(filepath, fakeFile, metadata, function(err, file) {
-          assert.ifError(err);
-          file.isSameFile();
-        });
+    it('should accept a path, a File dest, metadata, & cb', function(done) {
+      var fakeFile = new FakeFile(bucket, 'file-name');
+      fakeFile.isSameFile = function() {
+        return true;
+      };
+      var options = { destination: fakeFile, metadata: metadata };
+      bucket.upload(filepath, options, function(err, file) {
+        assert.ifError(err);
+        assert(file.isSameFile());
+        assert.deepEqual(file.metadata, metadata);
+        done();
       });
     });
 
     it('should guess at the content type', function(done) {
       var fakeFile = new FakeFile(bucket, 'file-name');
-      fakeFile.createWriteStream = function(metadata) {
+      var options = { destination: fakeFile };
+      fakeFile.createWriteStream = function(options) {
         var dup = duplexify();
         setImmediate(function() {
-          assert.equal(metadata.contentType, 'application/json');
+          assert.equal(options.metadata.contentType, 'application/json');
           done();
         });
         return dup;
       };
-      bucket.upload(filepath, fakeFile, assert.ifError);
+      bucket.upload(filepath, options, assert.ifError);
     });
 
     it('should guess at the charset', function(done) {
       var fakeFile = new FakeFile(bucket, 'file-name');
-      fakeFile.createWriteStream = function(metadata) {
+      var options = { destination: fakeFile };
+      fakeFile.createWriteStream = function(options) {
         var dup = duplexify();
         setImmediate(function() {
-          assert.equal(metadata.contentType, 'text/plain; charset=UTF-8');
+          assert.equal(
+              options.metadata.contentType, 'text/plain; charset=UTF-8');
           done();
         });
         return dup;
       };
-      bucket.upload(textFilepath, fakeFile, assert.ifError);
+      bucket.upload(textFilepath, options, assert.ifError);
     });
 
     it('should allow overriding content type', function(done) {
       var fakeFile = new FakeFile(bucket, 'file-name');
       var metadata = { contentType: 'made-up-content-type' };
-      fakeFile.createWriteStream = function(meta) {
+      var options = { destination: fakeFile, metadata: metadata };
+      fakeFile.createWriteStream = function(options) {
         var dup = duplexify();
         setImmediate(function() {
-          assert.equal(meta.contentType,  metadata.contentType);
+          assert.equal(options.metadata.contentType,  metadata.contentType);
           done();
         });
         return dup;
       };
-      bucket.upload(filepath, fakeFile, metadata, assert.ifError);
+      bucket.upload(filepath, options, assert.ifError);
+    });
+
+    it('should allow specifying options.resumable', function(done) {
+      var fakeFile = new FakeFile(bucket, 'file-name');
+      var options = { destination: fakeFile, resumable: false };
+      fakeFile.createWriteStream = function(options) {
+        var dup = duplexify();
+        setImmediate(function() {
+          assert.strictEqual(options.resumable, false);
+          done();
+        });
+        return dup;
+      };
+      bucket.upload(filepath, options, assert.ifError);
     });
 
     it('should execute callback on error', function(done) {
       var error = new Error('Error.');
       var fakeFile = new FakeFile(bucket, 'file-name');
+      var options = { destination: fakeFile };
       fakeFile.createWriteStream = function() {
         var dup = duplexify();
         setImmediate(function() {
@@ -391,7 +416,7 @@ describe('Bucket', function() {
         });
         return dup;
       };
-      bucket.upload(filepath, fakeFile, function(err) {
+      bucket.upload(filepath, options, function(err) {
         assert.equal(err, error);
         done();
       });
