@@ -20,10 +20,14 @@
 
 var assert = require('assert');
 var Bucket = require('../../lib/storage/bucket.js');
+var crc = require('fast-crc32c');
+var crypto = require('crypto');
 var duplexify = require('duplexify');
 var extend = require('extend');
 var nodeutil = require('util');
 var request = require('request');
+var stream = require('stream');
+var through = require('through2');
 var url = require('url');
 var util = require('../../lib/common/util');
 
@@ -62,9 +66,25 @@ function fakeRequest() {
   return results;
 }
 
+var configStoreData = {};
+function FakeConfigStore() {
+  this.del = function(key) {
+    delete configStoreData[key];
+  };
+
+  this.get = function(key) {
+    return configStoreData[key];
+  };
+
+  this.set = function(key, value) {
+    configStoreData[key] = value;
+  };
+}
+
 var File = require('sandboxed-module')
   .require('../../lib/storage/file.js', {
     requires: {
+      configstore: FakeConfigStore,
       duplexify: FakeDuplexify,
       request: fakeRequest,
       '../common/util': fakeUtil
@@ -303,45 +323,229 @@ describe('File', function() {
   });
 
   describe('createWriteStream', function() {
-    it('should get a writable stream', function(done) {
-      makeWritableStream_Override = function() {
-        done();
-      };
-      file.createWriteStream().emit('writing');
+    var METADATA = { a: 'b', c: 'd' };
+
+    it('should return a stream', function() {
+      assert(file.createWriteStream() instanceof stream);
     });
 
-    it('should emit complete event when writing is complete', function(done) {
-      var fakeResponse = { fake: 'data' };
+    it('should emit errors', function(done) {
+      var error = new Error('Error.');
 
-      makeWritableStream_Override = function(stream, options, callback) {
-        callback(fakeResponse);
+      file.bucket.storage.makeAuthorizedRequest_ = function(reqOpts, cb) {
+        cb(error);
       };
 
-      file.createWriteStream()
-        .on('complete', function(data) {
-          assert.deepEqual(data, fakeResponse);
-          assert.deepEqual(file.metadata, data);
+      var writable = file.createWriteStream();
+
+      writable.on('error', function(err) {
+        assert.equal(err, error);
+        done();
+      });
+
+      writable.write('data');
+    });
+
+    it('should start a simple upload if specified', function(done) {
+      var writable = file.createWriteStream({
+        metadata: METADATA,
+        resumable: false
+      });
+
+      file.startSimpleUpload_ = function(stream, metadata) {
+        assert.deepEqual(metadata, METADATA);
+        done();
+      };
+
+      writable.write('data');
+    });
+
+    it('should start a resumable upload if specified', function(done) {
+      var writable = file.createWriteStream({
+        metadata: METADATA,
+        resumable: true
+      });
+
+      file.startResumableUpload_ = function(stream, metadata) {
+        assert.deepEqual(metadata, METADATA);
+        done();
+      };
+
+      writable.write('data');
+    });
+
+    it('should default to a resumable upload', function(done) {
+      var writable = file.createWriteStream({
+        metadata: METADATA
+      });
+
+      file.startResumableUpload_ = function(stream, metadata) {
+        assert.deepEqual(metadata, METADATA);
+        done();
+      };
+
+      writable.write('data');
+    });
+
+    describe('validation', function() {
+      var data = 'test';
+
+      var crc32cBase64 = new Buffer([crc.calculate(data)]).toString('base64');
+
+      var md5HashBase64 = crypto.createHash('md5');
+      md5HashBase64.update(data);
+      md5HashBase64 = md5HashBase64.digest('base64');
+
+      var fakeMetadata = {
+        crc32c: { crc32c: '####' + crc32cBase64 },
+        md5: { md5Hash: md5HashBase64 }
+      };
+
+      it('should validate with crc32c', function(done) {
+        var writable = file.createWriteStream({ validation: 'crc32c' });
+
+        file.startResumableUpload_ = function(stream) {
+          setImmediate(function() {
+            stream.emit('complete', fakeMetadata.crc32c);
+          });
+        };
+
+        writable.write(data);
+        writable.end();
+
+        writable
+          .on('error', done)
+          .on('complete', function() {
+            done();
+          });
+      });
+
+      it('should emit an error if crc32c validation fails', function(done) {
+        var writable = file.createWriteStream({ validation: 'crc32c' });
+
+        file.startResumableUpload_ = function(stream) {
+          setImmediate(function() {
+            stream.emit('complete', fakeMetadata.crc32c);
+          });
+        };
+
+        file.delete = function(cb) {
+          cb();
+        };
+
+        writable.write('bad-data');
+        writable.end();
+
+        writable.on('error', function(err) {
+          assert.equal(err.code, 'FILE_NO_UPLOAD');
           done();
-        })
-        .emit('writing');
-    });
-
-    it('should pass the required arguments', function(done) {
-      var metadata = { a: 'b', c: 'd' };
-
-      makeWritableStream_Override = function(stream, options) {
-        assert.deepEqual(options.metadata, metadata);
-        assert.deepEqual(options.request, {
-          qs: {
-            name: file.name
-          },
-          uri: 'https://www.googleapis.com/upload/storage/v1/b/' +
-            file.bucket.name + '/o'
         });
-        done();
-      };
+      });
 
-      file.createWriteStream(metadata).emit('writing');
+      it('should validate with md5', function(done) {
+        var writable = file.createWriteStream({ validation: 'md5' });
+
+        file.startResumableUpload_ = function(stream) {
+          setImmediate(function() {
+            stream.emit('complete', fakeMetadata.md5);
+          });
+        };
+
+        writable.write(data);
+        writable.end();
+
+        writable
+          .on('error', done)
+          .on('complete', function() {
+            done();
+          });
+      });
+
+      it('should emit an error if md5 validation fails', function(done) {
+        var writable = file.createWriteStream({ validation: 'md5' });
+
+        file.startResumableUpload_ = function(stream) {
+          setImmediate(function() {
+            stream.emit('complete', fakeMetadata.md5);
+          });
+        };
+
+        file.delete = function(cb) {
+          cb();
+        };
+
+        writable.write('bad-data');
+        writable.end();
+
+        writable.on('error', function(err) {
+          assert.equal(err.code, 'FILE_NO_UPLOAD');
+          done();
+        });
+      });
+
+      it('should default to md5 validation', function(done) {
+        var writable = file.createWriteStream();
+
+        file.startResumableUpload_ = function(stream) {
+          setImmediate(function() {
+            stream.emit('complete', { md5Hash: 'bad-hash' });
+          });
+        };
+
+        file.delete = function(cb) {
+          cb();
+        };
+
+        writable.write(data);
+        writable.end();
+
+        writable.on('error', function(err) {
+          assert.equal(err.code, 'FILE_NO_UPLOAD');
+          done();
+        });
+      });
+
+      it('should delete the file if validation fails', function(done) {
+        var writable = file.createWriteStream();
+
+        file.startResumableUpload_ = function(stream) {
+          setImmediate(function() {
+            stream.emit('complete', { md5Hash: 'bad-hash' });
+          });
+        };
+
+        file.delete = function() {
+          done();
+        };
+
+        writable.write(data);
+        writable.end();
+      });
+
+      it('should emit a different error if delete fails', function(done) {
+        var writable = file.createWriteStream();
+
+        file.startResumableUpload_ = function(stream) {
+          setImmediate(function() {
+            stream.emit('complete', { md5Hash: 'bad-hash' });
+          });
+        };
+
+        var deleteErrorMessage = 'Delete error message.';
+        var deleteError = new Error(deleteErrorMessage);
+        file.delete = function(cb) {
+          cb(deleteError);
+        };
+
+        writable.write(data);
+        writable.end();
+
+        writable.on('error', function(err) {
+          assert.equal(err.code, 'FILE_NO_UPLOAD_DELETE');
+          assert(err.message.indexOf(deleteErrorMessage > -1));
+          done();
+        });
+      });
     });
   });
 
@@ -521,6 +725,203 @@ describe('File', function() {
       file.setMetadata(metadata, function() {
         assert.deepEqual(file.metadata, metadata);
       });
+    });
+  });
+
+  describe('startResumableUpload_', function() {
+    var RESUMABLE_URI = 'http://resume';
+
+    beforeEach(function() {
+      configStoreData = {};
+    });
+
+    describe('starting', function() {
+      it('should start a resumable upload', function(done) {
+        file.bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
+          var uri = 'https://www.googleapis.com/upload/storage/v1/b/' +
+            file.bucket.name + '/o';
+
+          assert.equal(reqOpts.method, 'POST');
+          assert.equal(reqOpts.uri, uri);
+          assert.equal(reqOpts.qs.name, file.name);
+          assert.equal(reqOpts.qs.uploadType, 'resumable');
+
+          assert.deepEqual(reqOpts.headers, {
+            'X-Upload-Content-Type': 'custom'
+          });
+          assert.deepEqual(reqOpts.json, { contentType: 'custom' });
+
+          done();
+        };
+
+        file.startResumableUpload_(duplexify(), { contentType: 'custom' });
+      });
+
+      it('should upload file', function(done) {
+        var requestCount = 0;
+        file.bucket.storage.makeAuthorizedRequest_ = function(reqOpts, cb) {
+          requestCount++;
+
+          // respond to creation POST.
+          if (requestCount === 1) {
+            cb(null, null, { headers: { location: RESUMABLE_URI }});
+            assert.deepEqual(configStoreData[file.name].uri, RESUMABLE_URI);
+            return;
+          }
+
+          // create an authorized request for the first PUT.
+          if (requestCount === 2) {
+            assert.equal(reqOpts.method, 'PUT');
+            assert.equal(reqOpts.uri, RESUMABLE_URI);
+            cb.onAuthorized(null, { headers: {} });
+          }
+        };
+
+        // respond to first upload PUT request.
+        var metadata = { a: 'b', c: 'd' };
+        request_Override = function(reqOpts) {
+          assert.equal(reqOpts.headers['Content-Range'], 'bytes 0-*/*');
+
+          var stream = through();
+          setImmediate(function() {
+            stream.emit('complete', { body: metadata });
+          });
+          return stream;
+        };
+
+        var stream = duplexify();
+
+        stream
+          .on('error', done)
+          .on('complete', function(data) {
+            assert.deepEqual(data, metadata);
+
+            setImmediate(function() {
+              // cache deleted.
+              assert(!configStoreData[file.name]);
+              done();
+            });
+          });
+
+        file.startResumableUpload_(stream);
+      });
+    });
+
+    describe('resuming', function() {
+      beforeEach(function() {
+        configStoreData[file.name] = {
+          uri: RESUMABLE_URI
+        };
+      });
+
+      it('should resume uploading from last sent byte', function(done) {
+        var lastByte = 135;
+
+        var requestCount = 0;
+        file.bucket.storage.makeAuthorizedRequest_ = function(reqOpts, cb) {
+          requestCount++;
+
+          if (requestCount === 1) {
+            assert.equal(reqOpts.method, 'PUT');
+            assert.equal(reqOpts.uri, RESUMABLE_URI);
+            assert.deepEqual(reqOpts.headers, {
+              'Content-Length': 0,
+              'Content-Range': 'bytes */*'
+            });
+
+            cb({
+              code: 308, // resumable upload status code
+              response: { headers: { range: '0-' + lastByte } }
+            });
+
+            return;
+          }
+
+          if (requestCount === 2) {
+            assert.equal(reqOpts.method, 'PUT');
+            assert.equal(reqOpts.uri, RESUMABLE_URI);
+
+            cb.onAuthorized(null, { headers: {} });
+          }
+        };
+
+        var metadata = { a: 'b', c: 'd' };
+        request_Override = function(reqOpts) {
+          var startByte = lastByte + 1;
+          assert.equal(
+            reqOpts.headers['Content-Range'], 'bytes ' + startByte + '-*/*');
+
+          var stream = through();
+          setImmediate(function() {
+            stream.emit('complete', { body: metadata });
+          });
+          return stream;
+        };
+
+        var stream = duplexify();
+
+        stream
+          .on('error', done)
+          .on('complete', function(data) {
+            assert.deepEqual(data, metadata);
+
+            setImmediate(function() {
+              // cache deleted.
+              assert(!configStoreData[file.name]);
+              done();
+            });
+          });
+
+        file.startResumableUpload_(stream);
+      });
+    });
+  });
+
+  describe('startSimpleUpload_', function() {
+    it('should get a writable stream', function(done) {
+      makeWritableStream_Override = function() {
+        done();
+      };
+
+      file.startSimpleUpload_(duplexify());
+    });
+
+    it('should pass the required arguments', function(done) {
+      var metadata = { a: 'b', c: 'd' };
+
+      makeWritableStream_Override = function(stream, options) {
+        assert.deepEqual(options.metadata, metadata);
+        assert.deepEqual(options.request, {
+          qs: {
+            name: file.name
+          },
+          uri: 'https://www.googleapis.com/upload/storage/v1/b/' +
+            file.bucket.name + '/o'
+        });
+        done();
+      };
+
+      file.startSimpleUpload_(duplexify(), metadata);
+    });
+
+    it('should finish stream and set metadata', function(done) {
+      var metadata = { a: 'b', c: 'd' };
+
+      makeWritableStream_Override = function(stream, options, callback) {
+        callback(metadata);
+      };
+
+      var stream = duplexify();
+
+      stream
+        .on('error', done)
+        .on('complete', function(meta) {
+          assert.deepEqual(meta, metadata);
+          assert.deepEqual(file.metadata, metadata);
+          done();
+        });
+
+      file.startSimpleUpload_(stream, metadata);
     });
   });
 });

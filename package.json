@@ -44,8 +44,11 @@
     "google storage"
   ],
   "dependencies": {
+    "buffer-equal": "0.0.1",
+    "configstore": "^0.3.1",
     "duplexify": "^3.1.2",
     "extend": "^1.3.0",
+    "fast-crc32c": "^0.1.3",
     "google-service-account": "^1.0.3",
     "mime": "^1.2.11",
     "node-uuid": "^1.4.1",
@@ -61,7 +64,7 @@
     "dox": "^0.4.6",
     "istanbul": "^0.3.0",
     "jshint": "^2.5.2",
-    "mocha": "^1.21.3",
+    "mocha": "^2.0.1",
     "sandboxed-module": "^1.0.1",
     "tmp": "0.0.24"
   },
@@ -69,9 +72,9 @@
     "docs": "./scripts/docs.sh",
     "lint": "jshint lib/ regression/ test/",
     "test": "mocha --recursive",
-    "regression-test": "mocha regression/* --timeout 15000",
-    "cover": "istanbul cover -x 'regression/*' _mocha -- --timeout 15000 test/* regression/*",
-    "coveralls": "istanbul cover -x 'regression/*' _mocha --report lcovonly -- --timeout 15000 test/* regression/* -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "regression-test": "mocha regression/* --timeout 20000",
+    "cover": "istanbul cover -x 'regression/*' _mocha -- --timeout 20000 test/* regression/*",
+    "coveralls": "istanbul cover -x 'regression/*' _mocha --report lcovonly -- --timeout 20000 test/* regression/* -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "license": "Apache 2"
 }
