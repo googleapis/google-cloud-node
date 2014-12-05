@@ -50,7 +50,7 @@
     "extend": "^1.3.0",
     "fast-crc32c": "^0.1.3",
     "google-service-account": "^1.0.3",
-    "mime": "^1.2.11",
+    "mime-types": "^2.0.3",
     "node-uuid": "^1.4.1",
     "protobufjs": "^3.4.0",
     "request": "^2.39.0",
