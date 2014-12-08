@@ -353,7 +353,8 @@ describe('Bucket', function() {
       fakeFile.createWriteStream = function(options) {
         var dup = duplexify();
         setImmediate(function() {
-          assert.equal(options.metadata.contentType, 'application/json');
+          var expectedContentType = 'application/json; charset=utf-8';
+          assert.equal(options.metadata.contentType, expectedContentType);
           done();
         });
         return dup;
@@ -367,8 +368,8 @@ describe('Bucket', function() {
       fakeFile.createWriteStream = function(options) {
         var dup = duplexify();
         setImmediate(function() {
-          assert.equal(
-              options.metadata.contentType, 'text/plain; charset=UTF-8');
+          var expectedContentType = 'text/plain; charset=utf-8';
+          assert.equal(options.metadata.contentType, expectedContentType);
           done();
         });
         return dup;
