@@ -322,12 +322,17 @@ describe('storage', function() {
 
       writeStream.on('error', done);
       writeStream.on('complete', function() {
+        var data = new Buffer('');
+
         file.createReadStream()
-          .on('data', function(chunk) {
-            assert.equal(String(chunk), contents);
-          })
           .on('error', done)
-          .on('end', done);
+          .on('data', function(chunk) {
+            data = Buffer.concat([data, chunk]);
+          })
+          .on('complete', function() {
+            assert.equal(data.toString(), contents);
+            done();
+          });
       });
     });
 
