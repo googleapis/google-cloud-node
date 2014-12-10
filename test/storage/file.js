@@ -263,13 +263,15 @@ describe('File', function() {
     });
 
     it('should create an authorized request', function(done) {
-      request_Override = function(opts) {
+      file.bucket.storage.makeAuthorizedRequest_ = function(opts) {
         assert.equal(opts.uri, metadata.mediaLink);
         done();
       };
+
       file.getMetadata = function(callback) {
         callback(null, metadata);
       };
+
       file.createReadStream();
     });
 
@@ -292,33 +294,129 @@ describe('File', function() {
 
     it('should get readable stream from request', function(done) {
       var fakeRequest = { a: 'b', c: 'd' };
-      file.getMetadata = function(callback) {
-        callback(null, metadata);
-      };
+
+      // Faking a stream implementation so we can simulate an actual Request
+      // request. The only thing we want to know is if the data passed to
+      // request was correct.
       request_Override = function(req) {
+        if (!(this instanceof request_Override)) {
+          return new request_Override(req);
+        }
+
+        stream.Readable.call(this);
+        this._read = util.noop;
+
         assert.deepEqual(req, fakeRequest);
         done();
       };
-      file.bucket.storage.makeAuthorizedRequest_ = function(opts, callback) {
-        (callback.onAuthorized || callback)(null, fakeRequest);
-      };
-      file.createReadStream();
-    });
+      nodeutil.inherits(request_Override, stream.Readable);
 
-    it('should set readable stream', function() {
-      var dup = duplexify();
       file.getMetadata = function(callback) {
         callback(null, metadata);
       };
-      request_Override = function() {
-        return dup;
-      };
+
       file.bucket.storage.makeAuthorizedRequest_ = function(opts, callback) {
-        (callback.onAuthorized || callback)();
+        (callback.onAuthorized || callback)(null, fakeRequest);
       };
+
       file.createReadStream();
-      assert.deepEqual(readableStream, dup);
-      readableStream = null;
+    });
+
+    describe('validation', function() {
+      var data = 'test';
+
+      var crc32cBase64 = new Buffer([crc.calculate(data)]).toString('base64');
+
+      var md5HashBase64 = crypto.createHash('md5');
+      md5HashBase64.update(data);
+      md5HashBase64 = md5HashBase64.digest('base64');
+
+      var fakeResponse = {
+        crc32c: {
+          headers: { 'x-goog-hash': 'crc32c=####' + crc32cBase64 }
+        },
+        md5: {
+          headers: { 'x-goog-hash': 'md5=' + md5HashBase64 }
+        }
+      };
+
+      function getFakeRequest(data, fakeResponse) {
+        function FakeRequest(req) {
+          if (!(this instanceof FakeRequest)) {
+            return new FakeRequest(req);
+          }
+
+          var that = this;
+
+          stream.Readable.call(this);
+          this._read = function() {
+            this.push(data);
+            this.push(null);
+          };
+
+          setImmediate(function() {
+            that.emit('complete', fakeResponse);
+          });
+        }
+        nodeutil.inherits(FakeRequest, stream.Readable);
+        return FakeRequest;
+      }
+
+      beforeEach(function() {
+        file.metadata.mediaLink = 'http://uri';
+
+        file.bucket.storage.makeAuthorizedRequest_ = function(opts, callback) {
+          (callback.onAuthorized || callback)(null, {});
+        };
+      });
+
+      it('should validate with crc32c', function(done) {
+        request_Override = getFakeRequest(data, fakeResponse.crc32c);
+
+        file.createReadStream({ validation: 'crc32c' })
+          .on('error', done)
+          .on('complete', done);
+      });
+
+      it('should emit an error if crc32c validation fails', function(done) {
+        request_Override = getFakeRequest('bad-data', fakeResponse.crc32c);
+
+        file.createReadStream({ validation: 'crc32c' })
+          .on('error', function(err) {
+            assert.equal(err.code, 'CONTENT_DOWNLOAD_MISMATCH');
+            done();
+          });
+      });
+
+      it('should validate with md5', function(done) {
+        request_Override = getFakeRequest(data, fakeResponse.md5);
+
+        file.createReadStream({ validation: 'md5' })
+          .on('error', done)
+          .on('complete', done);
+      });
+
+      it('should emit an error if md5 validation fails', function(done) {
+        request_Override = getFakeRequest('bad-data', fakeResponse.crc32c);
+
+        file.createReadStream({ validation: 'md5' })
+          .on('error', function(err) {
+            assert.equal(err.code, 'CONTENT_DOWNLOAD_MISMATCH');
+            done();
+          });
+      });
+
+      it('should default to md5 validation', function(done) {
+        request_Override = getFakeRequest(data, {
+          headers: { 'x-goog-hash': 'md5=fakefakefake' }
+        });
+
+        file.createReadStream()
+          .on('error', function(err) {
+            assert.equal(err.code, 'CONTENT_DOWNLOAD_MISMATCH');
+            done();
+          });
+      });
     });
   });
 
