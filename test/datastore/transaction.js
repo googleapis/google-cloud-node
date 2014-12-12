@@ -19,11 +19,48 @@
 'use strict';
 
 var assert = require('assert');
+var entity = require('../../lib/datastore/entity.js');
+var extend = require('extend');
 var Transaction = require('../../lib/datastore/transaction.js');
+var util = require('../../lib/common/util.js');
+
+var DatastoreRequest_Override = {
+  delete: util.noop,
+  save: util.noop
+};
+
+var FakeDatastoreRequest = {
+  prototype: {
+    delete: function() {
+      var args = [].slice.apply(arguments);
+      var results = DatastoreRequest_Override.delete.apply(null, args);
+      DatastoreRequest_Override.delete = util.noop;
+      return results;
+    },
+
+    save: function() {
+      var args = [].slice.apply(arguments);
+      var results = DatastoreRequest_Override.save.apply(null, args);
+      DatastoreRequest_Override.save = util.noop;
+      return results;
+    }
+  }
+};
+
+var Transaction = require('sandboxed-module')
+  .require('../../lib/datastore/transaction.js', {
+    requires: {
+      './request.js': FakeDatastoreRequest
+    }
+  });
 
 describe('Transaction', function() {
   var transaction;
   var TRANSACTION_ID = 'transaction-id';
+
+  function key(path) {
+    return new entity.Key({ path: util.arrayize(path) });
+  }
 
   beforeEach(function() {
     transaction = new Transaction({
@@ -93,24 +130,24 @@ describe('Transaction', function() {
       });
     });
 
-    it('should mark as finalized', function(done) {
+    it('should set skipCommit', function(done) {
       transaction.makeReq_ = function(method, req, callback) {
         callback = callback || req;
         callback();
       };
       transaction.rollback(function() {
-        assert.strictEqual(transaction.isFinalized, true);
+        assert.strictEqual(transaction.skipCommit, true);
         done();
       });
     });
 
-    it('should mark as finalized when rollback errors', function(done) {
+    it('should set skipCommit when rollback errors', function(done) {
       transaction.makeReq_ = function(method, req, callback) {
         callback = callback || req;
         callback(new Error('Error.'));
       };
       transaction.rollback(function() {
-        assert.strictEqual(transaction.isFinalized, true);
+        assert.strictEqual(transaction.skipCommit, true);
         done();
       });
     });
@@ -141,41 +178,146 @@ describe('Transaction', function() {
       });
     });
 
-    it('should mark as finalized', function(done) {
-      transaction.makeReq_ = function(method, req, callback) {
-        callback = callback || req;
-        callback();
+    it('should group mutations & execute original methods', function() {
+      var deleteArg1 = key(['Product', 123]);
+      var deleteArg2 = key(['Product', 234]);
+
+      var saveArg1 = { key: key(['Product', 345]), data: '' };
+      var saveArg2 = { key: key(['Product', 456]), data: '' };
+
+      // Queue saves & deletes in varying order.
+      transaction.delete(deleteArg1);
+      transaction.save(saveArg1);
+      transaction.delete(deleteArg2);
+      transaction.save(saveArg2);
+
+      var args = [];
+
+      var deleteCalled = 0;
+      DatastoreRequest_Override.delete = function() {
+        args.push(arguments[0]);
+        deleteCalled++;
       };
-      transaction.commit(function() {
-        assert.strictEqual(transaction.isFinalized, true);
-        done();
-      });
+
+      var saveCalled = 0;
+      DatastoreRequest_Override.save = function() {
+        args.push(arguments[0]);
+        saveCalled++;
+      };
+
+      transaction.makeReq_ = util.noop;
+
+      transaction.commit();
+
+      assert.equal(deleteCalled, 1);
+      assert.equal(saveCalled, 1);
+
+      assert.equal(args.length, 2);
+      assert.deepEqual(args, [
+        [deleteArg1, deleteArg2],
+        [saveArg1, saveArg2]
+      ]);
     });
 
-    it('should not mark as finalized if commit errors', function(done) {
-      transaction.makeReq_ = function(method, req, callback) {
-        callback = callback || req;
-        callback(new Error('Error.'));
+    it('should honor ordering of mutations (last wins)', function() {
+      // The delete should be ignored.
+      transaction.delete(key(['Product', 123]));
+      transaction.save({ key: key(['Product', 123]), data: '' });
+
+      var deleteCalled = 0;
+      DatastoreRequest_Override.delete = function() {
+        deleteCalled++;
       };
-      transaction.commit(function() {
-        assert.strictEqual(transaction.isFinalized, false);
+
+      var saveCalled = 0;
+      DatastoreRequest_Override.save = function() {
+        saveCalled++;
+      };
+
+      transaction.makeReq_ = util.noop;
+
+      transaction.commit();
+      assert.equal(deleteCalled, 0);
+      assert.equal(saveCalled, 1);
+    });
+
+    it('should send the built request object', function(done) {
+      transaction.requests_ = [
+        { a: 'b', c: 'd' },
+        { e: 'f', g: 'h' }
+      ];
+
+      transaction.makeReq_ = function(method, req) {
+        var req1 = transaction.requests_[0];
+        var req2 = transaction.requests_[1];
+        assert.deepEqual(req, extend(req1, req2));
         done();
+      };
+
+      transaction.commit();
+    });
+
+    it('should execute the queued callbacks', function() {
+      var cb1Called = false;
+      var cb2Called = false;
+
+      transaction.requestCallbacks_ = [
+        function() { cb1Called = true; },
+        function() { cb2Called = true; }
+      ];
+
+      transaction.makeReq_ = function(method, req, cb) {
+        cb();
+      };
+
+      transaction.commit();
+
+      assert(cb1Called);
+      assert(cb2Called);
+    });
+  });
+
+  describe('delete', function() {
+    it('should push entities into a queue', function() {
+      var keys = [
+        key('Product', 123),
+        key('Product', 234),
+        key('Product', 345)
+      ];
+
+      transaction.delete(keys);
+
+      assert.equal(transaction.modifiedEntities_.length, keys.length);
+
+      transaction.modifiedEntities_.forEach(function (queuedEntity) {
+        assert.equal(queuedEntity.method, 'delete');
+        assert(keys.indexOf(queuedEntity.entity.key) > -1);
+        assert.deepEqual(queuedEntity.args, [queuedEntity.entity.key]);
       });
     });
   });
 
-  describe('finalize', function() {
-    it('should be committed if not finalized', function(done) {
-      transaction.isFinalized = false;
-      transaction.commit = function () {
-        done();
-      };
-      transaction.finalize();
-    });
+  describe('save', function() {
+    it('should push entities into a queue', function() {
+      var entities = [
+        { key: key('Product', 123), data: 123 },
+        { key: key('Product', 234), data: 234 },
+        { key: key('Product', 345), data: 345 }
+      ];
 
-    it('should execute callback if already finalized', function(done) {
-      transaction.isFinalized = true;
-      transaction.finalize(done);
+      transaction.save(entities);
+
+      assert.equal(transaction.modifiedEntities_.length, entities.length);
+
+      transaction.modifiedEntities_.forEach(function (queuedEntity) {
+        assert.equal(queuedEntity.method, 'save');
+
+        var match = entities.filter(function(ent) {
+          return ent.key === queuedEntity.entity.key;
+        })[0];
+
+        assert.deepEqual(queuedEntity.args, [match]);
+      });
     });
   });
 });
