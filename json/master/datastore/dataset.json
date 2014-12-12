@@ -222,7 +222,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "function Dataset(options) {\n  if (!(this instanceof Dataset)) {\n    return new Dataset(options);\n  }\n\n  options = options || {};\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequest({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  this.projectId = options.projectId;\n  this.namespace = options.namespace;\n}\n\nnodeutil.inherits(Dataset, DatastoreRequest);",
+    "code": "function Dataset(options) {\n  if (!(this instanceof Dataset)) {\n    return new Dataset(options);\n  }\n\n  options = options || {};\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequest({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  this.namespace = options.namespace;\n  this.projectId = options.projectId;\n}\n\nnodeutil.inherits(Dataset, DatastoreRequest);",
     "ctx": {
       "type": "function",
       "name": "Dataset",
@@ -282,7 +282,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Dataset.prototype.key = function(options) {\n  options = util.is(options, 'object') ? options : {\n    namespace: this.namespace,\n    path: util.arrayize(options)\n  };\n  return new entity.Key(options);\n};",
+    "code": "Dataset.prototype.key = function(options) {\n  options = util.is(options, 'object') ? options : {\n    namespace: this.namespace,\n    path: util.arrayize(options)\n  };\n\n  return new entity.Key(options);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Dataset",
@@ -335,7 +335,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Dataset.prototype.createQuery = function(namespace, kinds) {\n  if (arguments.length === 1) {\n    kinds = util.arrayize(namespace);\n    namespace = this.namespace;\n  }\n  return new Query(namespace, util.arrayize(kinds));\n};",
+    "code": "Dataset.prototype.createQuery = function(namespace, kinds) {\n  if (arguments.length === 1) {\n    kinds = util.arrayize(namespace);\n    namespace = this.namespace;\n  }\n\n  return new Query(namespace, util.arrayize(kinds));\n};",
     "ctx": {
       "type": "method",
       "constructor": "Dataset",
@@ -379,7 +379,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Dataset.prototype.runInTransaction = function(fn, callback) {\n  var newTransaction = this.createTransaction_();\n  newTransaction.begin(function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    fn(newTransaction, newTransaction.finalize.bind(newTransaction, callback));\n  });\n};",
+    "code": "Dataset.prototype.runInTransaction = function(fn, callback) {\n  var newTransaction = this.createTransaction_();\n\n  newTransaction.begin(function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    fn(newTransaction, newTransaction.commit.bind(newTransaction, callback));\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Dataset",

@@ -56,7 +56,7 @@
     },
     "isPrivate": true,
     "ignore": false,
-    "code": "var DatastoreRequest = require('./request.js');",
+    "code": "var DatastoreRequest = require('./request.js');\n\nvar extend = require('extend');",
     "ctx": {
       "type": "declaration",
       "name": "DatastoreRequest",
@@ -118,7 +118,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "function Transaction(dataset, projectId) {\n  this.makeAuthorizedRequest_ = dataset.makeAuthorizedRequest_;\n  this.id = null;\n  this.isFinalized = false;\n  this.projectId = projectId;\n}\n\nnodeutil.inherits(Transaction, DatastoreRequest);",
+    "code": "function Transaction(dataset, projectId) {\n  this.id = null;\n  this.makeAuthorizedRequest_ = dataset.makeAuthorizedRequest_;\n  this.projectId = projectId;\n\n  // A queue for entity modifications made during the transaction.\n  this.modifiedEntities_ = [];\n\n  // Queue the callbacks that process the API responses.\n  this.requestCallbacks_ = [];\n\n  // Queue the requests to make when we send the transactional commit.\n  this.requests_ = [];\n}\n\nnodeutil.inherits(Transaction, DatastoreRequest);",
     "ctx": {
       "type": "function",
       "name": "Transaction",
@@ -147,7 +147,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Transaction.prototype.begin = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('beginTransaction', function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    this.id = resp.transaction;\n    callback(null);\n  }.bind(this));\n};",
+    "code": "Transaction.prototype.begin = function(callback) {\n  var that = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('beginTransaction', function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.id = resp.transaction;\n\n    callback(null);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Transaction",
@@ -178,7 +178,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Transaction.prototype.rollback = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('rollback', function(err) {\n    this.isFinalized = true;\n    callback(err || null);\n  }.bind(this));\n};",
+    "code": "Transaction.prototype.rollback = function(callback) {\n  var that = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('rollback', function(err) {\n    that.skipCommit = true;\n\n    callback(err || null);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Transaction",
@@ -209,7 +209,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Transaction.prototype.commit = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('commit', function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    this.isFinalized = true;\n    callback(null);\n  }.bind(this));\n};",
+    "code": "Transaction.prototype.commit = function(callback) {\n  var that = this;\n\n  callback = callback || util.noop;\n\n  if (this.skipCommit) {\n    setImmediate(callback);\n    return;\n  }\n\n  var keys = {};\n\n  this.modifiedEntities_\n\n    // Reverse the order of the queue to respect the \"last queued request wins\"\n    // behavior.\n    .reverse()\n\n    // Limit the operations we're going to send through to only the most\n    // recently queued operations. E.g., if a user tries to save with the same\n    // key they just asked to be deleted, the delete request will be ignored,\n    // giving preference to the save operation.\n    .filter(function(modifiedEntity) {\n      var key = JSON.stringify(modifiedEntity.entity.key);\n\n      if (!keys[key]) {\n        keys[key] = true;\n        return true;\n      }\n    })\n\n    // Group entities together by action (delete or save).\n    .sort(function(a, b) {\n      return a.method > b.method ? 1 : a.method < b.method ? -1 : 0;\n    })\n\n    // Group arguments together so that we only make one call to each method.\n    // This is important for `DatastoreRequest.save`, especially, as that method\n    // handles assigning auto-generated IDs to the original keys passed in. When\n    // we eventually execute the `save` method's API callback, having all the\n    // keys together is necessary to maintain order.\n    .reduce(function(acc, entityObject) {\n      var lastEntityObject = acc[acc.length - 1];\n      var sameMethod = lastEntityObject &&\n        entityObject.method === lastEntityObject.method;\n\n      if (!lastEntityObject || !sameMethod) {\n        acc.push(entityObject);\n      } else {\n        lastEntityObject.args = lastEntityObject.args.concat(entityObject.args);\n      }\n\n      return acc;\n    }, [])\n\n    // Call each of the mutational methods (DatastoreRequest[save,delete]) to\n    // build up a `req` array on this instance. This will also build up a\n    // `callbacks` array, that is the same callback that would run if we were\n    // using `save` and `delete` outside of a transaction, to process the\n    // response from the API.\n    .forEach(function(modifiedEntity) {\n      var method = modifiedEntity.method;\n      var args = modifiedEntity.args.reverse();\n\n      DatastoreRequest.prototype[method].call(that, args, util.noop);\n    });\n\n  // Take the `req` array built previously, and merge them into one request to\n  // send as the final transactional commit.\n  var req = this.requests_.reduce(function(acc, req) {\n    return extend(true, acc, req);\n  }, {});\n\n  this.makeReq_('commit', req, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    // The `callbacks` array was built previously. These are the callbacks that\n    // handle the API response normally when using the DatastoreRequest.save and\n    // .delete methods.\n    that.requestCallbacks_.forEach(function(cb) {\n      cb(null, resp);\n    });\n\n    callback(null);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Transaction",
@@ -219,34 +219,94 @@
     }
   },
   {
+    "tags": [],
+    "description": {
+      "full": "<p>Developer Documentation</p><p>Below, we override two methods that we inherit from DatastoreRequest:<br /><code>delete</code> and <code>save</code>. This is done because:</p><p>  A) the documentation needs to be different for a transactional save, and<br />  B) we build up a &quot;modifiedEntities_&quot; array on this object, used to build<br />     the final commit request with.</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": "<p>Below, we override two methods that we inherit from DatastoreRequest:<br /><code>delete</code> and <code>save</code>. This is done because:</p><p>  A) the documentation needs to be different for a transactional save, and<br />  B) we build up a &quot;modifiedEntities_&quot; array on this object, used to build<br />     the final commit request with.</p>"
+    },
+    "isPrivate": false,
+    "ignore": true
+  },
+  {
     "tags": [
       {
         "type": "param",
         "types": [
-          "function"
+          "Key",
+          "Key[]"
         ],
-        "name": "callback",
-        "description": "- The callback function. "
+        "name": "key",
+        "description": "- Datastore key object(s). "
       },
       {
         "type": "example",
-        "string": "transaction.begin(function(err) {\n  transaction.finalize(function(err) {\n    if (err) {\n      // Transaction could not be finalized.\n    }\n  });\n});"
+        "string": "// Delete a single entity.\ntransaction.delete(dataset.key(['Company', 123]), function(err) {});\n\n// Delete multiple entities at once.\ntransaction.delete([\n  dataset.key(['Company', 123]),\n  dataset.key(['Product', 'Computer'])\n], function(err) {});"
       }
     ],
     "description": {
-      "full": "<p>Commit a transaction if it&#39;s not finalized yet.</p>",
-      "summary": "<p>Commit a transaction if it&#39;s not finalized yet.</p>",
+      "full": "<p>Delete all entities identified with the specified key(s) in the current<br />transaction.</p>",
+      "summary": "<p>Delete all entities identified with the specified key(s) in the current<br />transaction.</p>",
       "body": ""
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Transaction.prototype.finalize = function(callback) {\n  if (!this.isFinalized) {\n    this.commit(callback);\n    return;\n  }\n  setImmediate(callback);\n};",
+    "code": "Transaction.prototype.delete = function(entities) {\n  var that = this;\n\n  util.arrayize(entities).forEach(function(ent) {\n    that.modifiedEntities_.push({\n      entity: {\n        key: ent\n      },\n      method: 'delete',\n      args: [ent]\n    });\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Transaction",
       "cons": "Transaction",
-      "name": "finalize",
-      "string": "Transaction.prototype.finalize()"
+      "name": "delete",
+      "string": "Transaction.prototype.delete()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "object",
+          "object[]"
+        ],
+        "name": "entities",
+        "description": "- Datastore key object(s)."
+      },
+      {
+        "type": "param",
+        "types": [
+          "Key"
+        ],
+        "name": "entities.key",
+        "description": "- Datastore key object."
+      },
+      {
+        "type": "param",
+        "types": [
+          "object",
+          "object[]"
+        ],
+        "name": "entities.data",
+        "description": "- Data to save with the provided key.     If you provide an array of objects, you must use the explicit syntax:\n    `name` for the name of the property and `value` for its value. You may\n    also specify an `excludeFromIndexes` property, set to `true` or `false`.\n"
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Save a single entity.\n//\n// Notice that we are providing an incomplete key. After the transaction is\n// committed, the Key object held by the `key` variable will be populated\n// with a path containing its generated ID.\n//-\nvar key = dataset.key('Company');\n\ntransaction.save({\n  key: key,\n  data: {\n    rating: '10'\n  }\n});\n\n//-\n// To specify an `excludeFromIndexes` value for a Datastore entity, pass in\n// an array for the key's data. The above example would then look like:\n//-\ntransaction.save({\n  key: key,\n  data: [\n    {\n      name: 'rating',\n      value: '10',\n      excludeFromIndexes: false\n    }\n  ]\n});\n\n//-\n// Save multiple entities at once.\n//-\nvar companyKey = dataset.key(['Company', 123]);\nvar productKey = dataset.key(['Product', 'Computer']);\n\ntransaction.save([\n  {\n    key: companyKey,\n    data: {\n      HQ: 'Dallas, TX'\n    }\n  },\n  {\n    key: productKey,\n    data: {\n      vendor: 'Dell'\n    }\n  }\n]);"
+      }
+    ],
+    "description": {
+      "full": "<p>Insert or update the specified object(s) in the current transaction. If a key<br />is incomplete, its associated object is inserted and the original Key object<br />is updated to contain the generated ID.</p><p>This method will determine the correct Datastore method to execute (<code>upsert</code>,<br /><code>insert</code>, <code>update</code>, and <code>insertAutoId</code>) by using the key(s) provided. For<br />example, if you provide an incomplete key (one without an ID), the request<br />will create a new entity and have its ID automatically assigned. If you<br />provide a complete key, the entity will be updated with the data specified.</p><p>By default, all properties are indexed. To prevent a property from being<br />included in <em>all</em> indexes, you must supply an entity&#39;s <code>data</code> property as an<br />array. See below for an example.</p>",
+      "summary": "<p>Insert or update the specified object(s) in the current transaction. If a key<br />is incomplete, its associated object is inserted and the original Key object<br />is updated to contain the generated ID.</p>",
+      "body": "<p>This method will determine the correct Datastore method to execute (<code>upsert</code>,<br /><code>insert</code>, <code>update</code>, and <code>insertAutoId</code>) by using the key(s) provided. For<br />example, if you provide an incomplete key (one without an ID), the request<br />will create a new entity and have its ID automatically assigned. If you<br />provide a complete key, the entity will be updated with the data specified.</p><p>By default, all properties are indexed. To prevent a property from being<br />included in <em>all</em> indexes, you must supply an entity&#39;s <code>data</code> property as an<br />array. See below for an example.</p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Transaction.prototype.save = function(entities) {\n  var that = this;\n\n  util.arrayize(entities).forEach(function(ent) {\n    that.modifiedEntities_.push({\n      entity: {\n        key: ent.key\n      },\n      method: 'save',\n      args: [ent]\n    });\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Transaction",
+      "cons": "Transaction",
+      "name": "save",
+      "string": "Transaction.prototype.save()"
     }
   },
   {
