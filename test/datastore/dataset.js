@@ -85,7 +85,7 @@ describe('Dataset', function() {
         begin: function(callback) {
           callback();
         },
-        finalize: util.noop
+        commit: util.noop
       };
       ds.createTransaction_ = function() {
         return transaction;
@@ -102,7 +102,7 @@ describe('Dataset', function() {
           begin: function(callback) {
             callback();
           },
-          finalize: function() {
+          commit: function() {
             done();
           }
         };

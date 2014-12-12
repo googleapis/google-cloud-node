@@ -181,6 +181,9 @@ angular
 
     function getMixIns($sce, $q, $http, version, baseUrl) {
       return function(data) {
+        var classMethodNames = data.map(function(method) {
+          return method.name;
+        });
         var methodWithMixIns = data.filter(function(method) {
           return method.mixes.length > 0;
         })[0];
@@ -188,17 +191,18 @@ angular
           return data;
         }
         return $q
-          .all(getMixInMethods(methodWithMixIns))
+          .all(getMixInMethods(classMethodNames, methodWithMixIns))
           .then(combineMixInMethods(data));
       };
-      function getMixInMethods(method) {
+      function getMixInMethods(classMethodNames, method) {
         return method.mixes.map(function (module) {
           module = module.string.trim().replace('module:', '');
           return $http.get(baseUrl + '/' + module + '.json')
               .then(filterDocJson($sce, version))
               .then(function(mixInData) {
                 return mixInData.filter(function(method) {
-                  return !method.constructor;
+                  return !method.constructor &&
+                    classMethodNames.indexOf(method.name) === -1;
                 });
               });
         });
