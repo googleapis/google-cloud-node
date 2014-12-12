@@ -21,6 +21,7 @@
 var env = require('./env.js');
 
 var assert = require('assert');
+var async = require('async');
 var datastore = require('../lib/datastore');
 var ds = datastore.dataset(env);
 var entity = require('../lib/datastore/entity.js');
@@ -48,76 +49,72 @@ describe('datastore', function() {
 
     it('should save/get/delete with a key name', function(done) {
       var postKey = ds.key(['Post', 'post1']);
-      ds.save({ key: postKey, data: post }, function(err, key) {
+      ds.save({ key: postKey, data: post }, function(err) {
         assert.ifError(err);
-        assert.equal(key.path[1], 'post1');
-        ds.get(key, function(err, entity) {
+
+        ds.get(postKey, function(err, entity) {
           assert.ifError(err);
+
           assert.deepEqual(entity.data, post);
-          ds.delete(key, function(err) {
-            assert.ifError(err);
-            done();
-          });
+
+          ds.delete(postKey, done);
         });
       });
     });
 
     it('should save/get/delete with a numeric key id', function(done) {
       var postKey = ds.key(['Post', 123456789]);
-      ds.save({
-        key: postKey,
-        data: post
-      }, function(err, key) {
+
+      ds.save({ key: postKey, data: post }, function(err) {
         assert.ifError(err);
-        assert.equal(key.path[1], 123456789);
-        ds.get(key, function(err, entity) {
+
+        ds.get(postKey, function(err, entity) {
           assert.ifError(err);
+
           assert.deepEqual(entity.data, post);
-          ds.delete(key, function(err) {
-            assert.ifError(err);
-            done();
-          });
+
+          ds.delete(postKey, done);
         });
       });
     });
 
     it('should save/get/delete a buffer', function(done) {
+      var postKey = ds.key('Post');
       var data = {
         buf: new Buffer('010100000000000000000059400000000000006940', 'hex')
       };
-      ds.save({
-        key: ds.key('Post'),
-        data: data
-      }, function (err, key) {
+
+      ds.save({ key: postKey, data: data }, function (err) {
         assert.ifError(err);
-        var assignedId = key.path[1];
+
+        var assignedId = postKey.path[1];
         assert(assignedId);
-        ds.get(key, function (err, entity) {
+
+        ds.get(postKey, function(err, entity) {
           assert.ifError(err);
+
           assert.deepEqual(entity.data, data);
-          ds.delete(ds.key(['Post', assignedId]), function(err) {
-            assert.ifError(err);
-            done();
-          });
+
+          ds.delete(ds.key(['Post', assignedId]), done);
         });
       });
     });
 
     it('should save/get/delete with a generated key id', function(done) {
-      ds.save({
-        key: ds.key('Post'),
-        data: post
-      }, function(err, key) {
+      var postKey = ds.key('Post');
+
+      ds.save({ key: postKey, data: post }, function(err) {
         assert.ifError(err);
-        var assignedId = key.path[1];
-        assert(assignedId);
-        ds.get(ds.key(['Post', assignedId]), function(err, entity) {
+
+        // The key's path should now be complete.
+        assert(postKey.path[1]);
+
+        ds.get(postKey, function(err, entity) {
           assert.ifError(err);
+
           assert.deepEqual(entity.data, post);
-          ds.delete(ds.key(['Post', assignedId]), function(err) {
-            assert.ifError(err);
-            done();
-          });
+
+          ds.delete(postKey, done);
         });
       });
     });
@@ -132,30 +129,31 @@ describe('datastore', function() {
         wordCount: 450,
         rating: 4.5,
       };
-      var key = ds.key('Post');
+      var key1 = ds.key('Post');
+      var key2 = ds.key('Post');
+
       ds.save([
-        { key: key, data: post },
-        { key: key, data: post2 }
-      ], function(err, keys) {
+        { key: key1, data: post },
+        { key: key2, data: post2 }
+      ], function(err) {
         assert.ifError(err);
-        assert.equal(keys.length,2);
-        var firstKey = ds.key(['Post', keys[0].path[1]]);
-        var secondKey = ds.key(['Post', keys[1].path[1]]);
+
+        var firstKey = ds.key(['Post', key1.path[1]]);
+        var secondKey = ds.key(['Post', key2.path[1]]);
+
         ds.get([firstKey, secondKey], function(err, entities) {
           assert.ifError(err);
+
           assert.equal(entities.length, 2);
-          ds.delete([firstKey, secondKey], function(err) {
-            assert.ifError(err);
-            done();
-          });
+
+          ds.delete([firstKey, secondKey], done);
         });
       });
     });
 
   });
 
-  it('should be able to save keys as a part of entity and query by key',
-      function(done) {
+  it('should save keys as a part of entity and query by key', function(done) {
     var personKey = ds.key(['Person', 'name']);
     ds.save({
       key: personKey,
@@ -177,7 +175,6 @@ describe('datastore', function() {
   });
 
   describe('querying the datastore', function() {
-
     var ancestor = ds.key(['Book', 'GoT']);
 
     var keys = [
@@ -428,35 +425,110 @@ describe('datastore', function() {
   });
 
   describe('transactions', function() {
-
     it('should run in a transaction', function(done) {
       var key = ds.key(['Company', 'Google']);
       var obj = {
         url: 'www.google.com'
       };
+
       ds.runInTransaction(function(t, tDone) {
-        t.get(key, function(err, entity) {
+        t.get(key, function(err) {
           assert.ifError(err);
-          if (entity) {
-            tDone();
-            return;
-          } else {
-            t.save({ key: key, data: obj }, function(err) {
-              assert.ifError(err);
-              tDone();
-              return;
-            });
-          }
+
+          t.save({ key: key, data: obj });
+          tDone();
         });
       }, function(err) {
         assert.ifError(err);
+
         ds.get(key, function(err, entity) {
           assert.ifError(err);
+
           assert.deepEqual(entity.data, obj);
-          ds.delete(entity.key, function(err) {
-            assert.ifError(err);
-            done();
-          });
+
+          ds.delete(key, done);
+        });
+      });
+    });
+
+    it('should commit all saves and deletes at the end', function(done) {
+      var deleteKey = ds.key(['Company', 'Subway']);
+      var key = ds.key(['Company', 'Google']);
+      var incompleteKey = ds.key('Company');
+
+      ds.runInTransaction(function(t, tDone) {
+        t.delete(deleteKey);
+
+        t.save([
+          {
+            key: key,
+            data: { rating: 10 }
+          },
+          {
+            key: incompleteKey,
+            data: { rating: 100 }
+          }
+        ]);
+
+        tDone();
+      }, function(err) {
+        assert.ifError(err);
+
+        // Incomplete key should have been given an ID.
+        assert.equal(incompleteKey.path.length, 2);
+
+        async.parallel([
+          // The key queued for deletion should have been deleted.
+          function(done) {
+            ds.get(deleteKey, function(err, entity) {
+              assert.ifError(err);
+              assert.equal(typeof entity, 'undefined');
+              done();
+            });
+          },
+
+          // Data should have been updated on the key.
+          function(done) {
+            ds.get(key, function(err, entity) {
+              assert.ifError(err);
+              assert.equal(entity.data.rating, 10);
+              done();
+            });
+          }
+        ], done);
+      });
+    });
+
+    it('should use the last modification to a key', function(done) {
+      var incompleteKey = ds.key('Company');
+      var key = ds.key(['Company', 'Google']);
+
+      ds.runInTransaction(function(t, tDone) {
+        t.save([
+          {
+            key: key,
+            data: { rating: 10 }
+          },
+          {
+            key: incompleteKey,
+            data: { rating: 100 }
+          }
+        ]);
+
+        t.delete(key);
+
+        tDone();
+      }, function(err) {
+        assert.ifError(err);
+
+        // Should not return a result.
+        ds.get(key, function(err, entity) {
+          assert.ifError(err);
+          assert.strictEqual(entity, undefined);
+
+          // Incomplete key should have been given an id.
+          assert.equal(incompleteKey.path.length, 2);
+          done();
         });
       });
     });
