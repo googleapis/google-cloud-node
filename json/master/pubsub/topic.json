@@ -256,7 +256,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Topic.prototype.publishRaw = function(message, callback) {\n  if (!message) {\n    throw new Error('Cannot publish an empty message.');\n  }\n  callback = callback || util.noop;\n  if (!util.is(message.data, 'string') && !util.is(message.data, 'buffer')) {\n    message.data = new Buffer(JSON.stringify(message.data)).toString('base64');\n  }\n  message.topic = this.name;\n  this.makeReq_('POST', 'topics/publish', null, message, callback);\n};",
+    "code": "Topic.prototype.publishRaw = function(message, callback) {\n  if (!message) {\n    throw new Error('Cannot publish an empty message.');\n  }\n  callback = callback || util.noop;\n  if (!util.is(message.data, 'string') && !util.is(message.data, 'buffer')) {\n    message.data = new Buffer(JSON.stringify(message.data)).toString('base64');\n  }\n  var body = {\n    message: message,\n    topic: this.name\n  };\n  this.makeReq_('POST', 'topics/publish', null, body, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Topic",
