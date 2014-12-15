@@ -150,7 +150,7 @@ describe('Topic', function() {
 
       it('should stringify non-strings & non-buffers', function(done) {
         topic.makeReq_ = function(method, path, qs, body) {
-          assert.deepEqual(body.data, messageObjDecoded);
+          assert.deepEqual(body.message.data, messageObjDecoded);
           done();
         };
         topic.publishRaw({ data: messageObj }, assert.ifError);
@@ -160,7 +160,7 @@ describe('Topic', function() {
         topic.makeReq_ = function(method, path, qs, body) {
           assert.equal(method, 'POST');
           assert.equal(path, 'topics/publish');
-          assert.deepEqual(body.message, messageRaw.message);
+          assert.deepEqual(body.message.data, messageRaw.data);
           done();
         };
         topic.publishRaw(messageRaw, assert.ifError);
