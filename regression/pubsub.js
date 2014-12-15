@@ -179,11 +179,28 @@ describe('pubsub', function() {
         subscription.ack(msg.id, done);
       });
       topic.publish('hello', assert.ifError);
+    });
+
+    it('should receive the published message', function(done) {
+      var subscription = topic.subscription(subscriptions[0].name);
+      subscription.pull({ returnImmediately: true }, function(err, msg) {
+        assert.ifError(err);
+        assert.equal(msg.data, 'hello');
+        subscription.ack(msg.id, done);
+      });
       topic.publish('hello', assert.ifError);
-      topic.publish('hello', assert.ifError);
-      topic.publish('hello', assert.ifError);
-      topic.publish('hello', assert.ifError);
-      topic.publish('hello', assert.ifError);
+    });
+
+    it('should receive a raw published message', function(done) {
+      var subscription = topic.subscription(subscriptions[0].name);
+      subscription.pull({ returnImmediately: true }, function(err, msg) {
+        assert.ifError(err);
+        assert.equal(msg.data, 'hello');
+        subscription.ack(msg.id, done);
+      });
+      topic.publishRaw({
+        data: new Buffer('hello').toString('base64')
+      }, assert.ifError);
     });
   });
 });
