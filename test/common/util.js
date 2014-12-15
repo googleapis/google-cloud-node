@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/*global describe, it */
+/*global describe, it, beforeEach */
 
 'use strict';
 
@@ -48,6 +48,10 @@ function fakeRequest() {
 }
 
 describe('common/util', function() {
+  beforeEach(function() {
+    gsa_Override = null;
+  });
+
   describe('arrayize', function() {
     it('should arrayize if the input is not an array', function(done) {
       var o = util.arrayize('text');
@@ -318,6 +322,22 @@ describe('common/util', function() {
           assert.equal(err, error);
           done();
         });
+      });
+
+      it('should throw if not GCE/GAE & missing credentials', function() {
+        gsa_Override = function() {
+          return function authorize(reqOpts, callback) {
+            // Simulate the metadata server not existing.
+            callback({ code: 'ENOTFOUND' });
+          };
+        };
+
+        assert.throws(function() {
+          // Don't provide a keyFile or credentials object.
+          var connectionConfig = {};
+          var makeRequest = util.makeAuthorizedRequest(connectionConfig);
+          makeRequest({}, util.noop);
+        }, /A connection to gcloud must be established/);
       });
 
       it('should handle malformed key response', function(done) {
