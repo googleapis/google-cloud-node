@@ -1108,6 +1108,13 @@ h2, h3 {
     }
 
     /*
+     GitHub Edit Heade Button
+     */
+    .header--gh-edit-btn {
+      top: 8em;
+    }
+
+    /*
      Content
     */
 

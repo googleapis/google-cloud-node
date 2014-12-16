@@ -1,0 +1,153 @@
+<script id="docs-header.html" type="text/ng-template">
+  <header header title="Node.js">
+    <div class="versions" ng-show="showReference">
+      <span class="v-current">{{version}} <i ng-if="isLatestVersion">(Latest version)</i></span>
+      <a href="#/docs/history" class="v-btn">
+        <img src="site/img/icon-arrow-bullet.svg" />
+        See version History
+      </a>
+    </div>
+  </header>
+</script>
+
+<div subpage
+  links="{{links}}"
+  header-templateUrl="docs-header.html"
+  is-active-url="isActiveUrl">
+  <article ng-show="showReference">
+    <h3 class="sub-heading">
+      <div class="toggler" ng-click="showGcloudDocs = !showGcloudDocs">
+        <span class="toggle" ng-hide="showGcloudDocs">▹</span>
+        <span class="toggle" ng-show="showGcloudDocs">▿</span>
+      </div>
+      Getting Started with <code>gcloud</code>
+    </h3>
+    <article ng-if="showGcloudDocs">
+      <p>
+        First, install <code>gcloud</code> with npm and require it into your project:
+      </p>
+      <div hljs>$ npm install --save gcloud</div>
+      <div hljs>var gcloud = require('gcloud');</div>
+      <p>
+        There are a couple of ways to use the <code>gcloud</code> module.
+      </p>
+      <p>
+        If you are running your app on Google App Engine or Google Compute Engine, you won't need to worry about supplying connection configuration options to <code>gcloud</code>&mdash; we figure that out for you.
+      </p>
+      <p>
+        However, if you're running your app elsewhere, you will need to provide this information.
+      </p>
+      <div hljs>
+// App Engine and Compute Engine
+var gcloud = require('gcloud');
+
+// Elsewhere
+var gcloud = require('gcloud')({
+keyFilename: '/path/to/keyfile.json'
+});</div>
+      <p>
+        In any environment, you are free to provide these and other default properties, which eventually will be passed to the <code>gcloud</code> sub-modules (Datastore, Storage, etc.).
+      </p>
+    </article>
+    <hr>
+
+    <article ng-if="isActiveDoc('bigquery')">
+      <h3>BigQuery Overview</h3>
+      <p>
+        The object returned from <code>gcloud.bigquery</code> gives you complete access to and control of your BigQuery datasets. You can work with existing ones, by using the <code>dataset</code> method, or create new ones with <code>createDataset</code>.
+      </p>
+      <div hljs>
+var bigquery = gcloud.bigquery();</div>
+      <p>
+        Follow along with the examples below to see how to query your datasets, create tables, import data from your Cloud Storage buckets, and more.
+      </p>
+    </article>
+
+    <article ng-if="isActiveDoc('datastore')">
+      <h3>Datastore Overview</h3>
+      <p>
+        The <code>gcloud.datastore</code> object gives you some convenience methods, as well as exposes a <code>dataset</code> function. This will allow you to create a <code>dataset</code>, which is the object from which you will interact with the Google Cloud Datastore.
+      </p>
+      <div hljs>
+var dataset = gcloud.datastore.dataset({
+projectId: 'myProject',
+keyFilename: '/path/to/keyfile.json'
+});</div>
+      <p ng-if="!isActiveUrl('/docs/datastore/dataset')">
+        See <a href="#/docs/{{version}}/datastore/dataset">the Dataset documentation</a> for examples of how to query the datastore, save entities, run a transaction, and others.
+      </p>
+    </article>
+
+    <article ng-if="isActiveDoc('pubsub')">
+      <h3>Pub/Sub Overview</h3>
+      <p class="notice">
+        Google Cloud Pub/Sub is in Alpha status. As a result, it might be changed in backward-incompatible ways and is not recommended for production use. It is not subject to any SLA or deprecation policy.
+      </p>
+      <p>
+        The <code>gcloud.pubsub</code> method will return a <code>pubsub</code> object, allowing you to create topics, publish messages, subscribe to topics, and more. See the <a href="https://developers.google.com/pubsub/overview">Google Cloud Pub/Sub overview</a> for more information.
+      </p>
+      <div hljs>
+var pubsub = gcloud.pubsub({
+projectId: 'myProject',
+keyFilename: '/path/to/keyfile.json'
+});</div>
+      <p>
+        See the examples below, which demonstrate everything from creating a topic to subscribing to messages on a topic.
+      </p>
+    </article>
+
+    <article ng-if="isActiveDoc('storage')">
+      <h3>Storage Overview</h3>
+      <p>
+        The <code>gcloud.storage</code> object contains a <code>bucket</code> function, which is how you will interact with your Google Cloud Storage bucket. See the guide on <a href="https://developers.google.com/storage">Google Cloud Storage</a> to create a bucket.
+      </p>
+      <div hljs>
+var bucket = gcloud.storage.bucket('my-bucket');</div>
+      <p>
+        See examples below for more on how to access your bucket to upload a file, read its files, create signed URLs, and more.
+      </p>
+    </article>
+
+    <article
+      ng-repeat="method in methods"
+      ng-hide="singleMethod && method.name !== singleMethod">
+      <h2 ng-if="method.name[0].toUpperCase() === method.name[0]">
+        {{method.name}}
+      </h2>
+      <h3
+        class="method-heading"
+        ng-if="method.name[0].toUpperCase() !== method.name[0]">
+        <a
+          class="permalink"
+          ng-href="{{activeUrl + '?method=' + method.name}}">#</a>
+        {{method.name}}
+      </h3>
+      <p ng-if="method.description" ng-bind-html="method.description"></p>
+      <h4 ng-show="method.params">Parameters</h4>
+      <table class="table" ng-show="method.params">
+        <tbody>
+          <tr
+            ng-repeat="param in method.params"
+            ng-class="{ 'param-optional': param.optional }">
+            <th scope="row">{{param.name}}</th>
+            <td class="param-types" ng-bind-html="param.types"></td>
+            <td class="param-description" ng-bind-html="param.description"></td>
+          </tr>
+        </tbody>
+      </table>
+      <h4 ng-show="method.returns">Returns</h4>
+      <p ng-show="method.returns" ng-bind-html="method.returns"></p>
+      <h4 ng-show="method.example">Example</h4>
+      <div docs-example ng-repeat-end
+        ng-show="method.example" ng-bind-html="method.example"></div>
+      <hr ng-if="$index < methods.length - 1">
+    </article>
+  </article>
+  <article ng-show="showHistory">
+    <ul class="v-list">
+      <li ng-repeat="version in versions">
+        <a ng-href="#/docs/{{version}}">{{version}}</a>
+      </li>
+    </ul>
+  </article>
+</div>
