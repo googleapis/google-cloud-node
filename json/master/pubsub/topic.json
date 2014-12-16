@@ -231,10 +231,10 @@
       {
         "type": "param",
         "types": [
-          "*"
+          "string"
         ],
         "name": "message.data",
-        "description": "- The contents of the message."
+        "description": "- The base64-encoded contents of the message."
       },
       {
         "type": "param",
