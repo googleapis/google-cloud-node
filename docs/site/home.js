@@ -10,6 +10,10 @@ angular
   .config(function($routeProvider) {
     'use strict';
 
+    $routeProvider.otherwise({
+      redirectTo: '/'
+    });
+
     $routeProvider.when('/', {
       templateUrl: 'site/home.html',
       controller: 'HomeCtrl'
