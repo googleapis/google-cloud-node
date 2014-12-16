@@ -1,0 +1,81 @@
+<article class="main lang-page" role="main">
+  <header class="page-header fixed" role="banner">
+    <h1 class="logo">
+      <a href="." title="Home">
+        <img src="site/img/logo.svg" alt="Google Cloud Platform">
+        <span class="gcloud">gcloud</span>
+      </a>
+    </h1>
+  </header>
+
+  <header ng-if="headerTemplateUrl" ng-include="headerTemplateUrl"></header>
+  <header ng-if="!headerTemplateUrl" header title="{{title}}"></header>
+
+  <section class="content" ng-transclude></section>
+
+  <nav class="side-nav">
+    <ul class="page-sections">
+      <li ng-repeat="page in links">
+        <a
+          ng-class="{ current: isActiveUrl(page.url) }"
+          ng-href="{{page.url}}">
+          {{page.title}}
+        </a>
+        <ul class="sub-sections" ng-if="page.pages">
+          <li ng-repeat="innerPage in page.pages">
+            <a
+              ng-class="{ current: isActiveUrl(page.url + innerPage.url) }"
+              ng-href="{{page.url + innerPage.url}}">
+              {{innerPage.title}}
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <ul class="page-sections external-links">
+      <li>
+        <a href="#/docs" title="Documentation" ng-if="!isActiveUrl('/docs')">
+          Documentation
+        </a>
+      </li>
+      <li>
+        <a href="#/faq" ng-class="{ current: isActiveUrl('/faq') }" title="Frequently Asked Questions">
+          FAQ
+        </a>
+      </li>
+      <li>
+        <a href="#/troubleshooting" ng-class="{ current: isActiveUrl('/troubleshooting') }" title="Troubleshooting">
+          Troubleshooting
+        </a>
+      </li>
+    </ul>
+
+    <ul class="external-links">
+      <li>
+        <a href="https://github.com/GoogleCloudPlatform/gcloud-node" title="gcloud-node on Github">
+          <img src="site/img/icon-link-github.svg" alt="GitHub icon" />
+          GitHub
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/GoogleCloudPlatform/gcloud-node/issues" title="gcloud-node issues on Github">
+          <img src="site/img/icon-link-github.svg" alt="GitHub icon" />
+          Issues
+        </a>
+      </li>
+      <li>
+        <a href="http://stackoverflow.com/questions/tagged/gcloud-node" title="gcloud-node on StackOverflow">
+          <img src="site/img/icon-link-stackoverflow.svg" alt="StackOverflow icon" />
+          StackOverflow
+        </a>
+      </li>
+      <li>
+        <a href="http://npmjs.org/package/gcloud" title="gcloud-node on npm">
+          <img src="site/img/icon-link-package-manager.svg" alt="npm icon" />
+          npm
+        </a>
+      </li>
+    </ul>
+  </nav>
+</article>

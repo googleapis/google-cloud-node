@@ -10,8 +10,8 @@
     <meta name="description" content="Node idiomatic client for Google Cloud services.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="https://cloud.google.com/images/gcp-favicon.ico">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="site/css/normalize.css">
+    <link rel="stylesheet" href="site/css/main.css">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Droid+Sans+Mono|Roboto:300,400,700,700italic,400italic|Open+Sans:300">
     <link rel="stylesheet" href="//yandex.st/highlightjs/8.0/styles/github.min.css">
   </head>
@@ -23,15 +23,22 @@
     <main ng-view autoscroll="true"></main>
 
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
-    <script src="//code.angularjs.org/1.2.23/angular-route.js"></script>
+    <script src="//code.angularjs.org/1.2.23/angular-route.min.js"></script>
+    <script src="//code.angularjs.org/1.2.23/angular-sanitize.min.js"></script>
     <script src="//yandex.st/highlightjs/8.0/highlight.min.js"></script>
     <script src="//pc035860.github.io/angular-highlightjs/angular-highlightjs.min.js"></script>
-    <script src="lib/node-semver/semver.browser.js"></script>
-    <script src="home.js"></script>
-    <script src="components/docs/docs.js"></script>
-    <script src="components/docs/docs-directives.js"></script>
-    <script src="components/docs/docs-services.js"></script>
-    <script src="components/docs/docs-values.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>
+    <script src="site/lib/node-semver/semver.browser.js"></script>
+    <script src="site/lib/angular-markdown-directive/markdown.js"></script>
+    <script src="site/home.js"></script>
+    <script src="site/components/docs/docs.js"></script>
+    <script src="site/components/docs/docs-directives.js"></script>
+    <script src="site/components/docs/docs-services.js"></script>
+    <script src="site/components/docs/docs-values.js"></script>
+    <script src="site/components/faq/faq.js"></script>
+    <script src="site/components/subpage/subpage-directive.js"></script>
+    <script src="site/components/header/header-directive.js"></script>
+    <script src="site/components/troubleshooting/troubleshooting.js"></script>
 
     <script>
       (function() {
