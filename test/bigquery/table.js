@@ -19,6 +19,7 @@
 'use strict';
 
 var assert = require('assert');
+var crypto = require('crypto');
 var extend = require('extend');
 var File = require('../../lib/storage/file');
 var Stream = require('stream');
@@ -801,12 +802,64 @@ describe('BigQuery/Table', function() {
       { state: 'MI', gender: 'M', year: '2015', name: 'Berkley', count: '0' }
     ];
 
+    var dataApiFormat = {
+      rows: data.map(function(row) {
+        var rowObject = {};
+        var md5 = crypto.createHash('md5');
+        md5.update(JSON.stringify(row));
+        rowObject.insertId = md5.digest('hex');
+        rowObject.json = row;
+        return rowObject;
+      })
+    };
+
     it('should save data', function(done) {
+      table.makeReq_ = function(method, path, query, body) {
+        assert.equal(method, 'POST');
+        assert.equal(path, '/insertAll');
+        assert.strictEqual(query, null);
+        assert.deepEqual(body, dataApiFormat);
+        done();
+      };
+
+      table.insert(data, done);
+    });
+
+    it('should execute callback', function(done) {
       table.makeReq_ = function(method, path, query, body, callback) {
         callback(null, { insertErrors: [] });
       };
 
-      table.insert(data, done);
+      table.insert(data, function(err, insertErrors) {
+        assert.ifError(err);
+        assert.deepEqual(insertErrors, []);
+        done();
+      });
+    });
+
+    it('should return errors to the callback', function(done) {
+      var row0Error = { message: 'Error.', reason: 'notFound' };
+      var row1Error = { message: 'Error.', reason: 'notFound' };
+
+      table.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, {
+          insertErrors: [
+            { index: 0, errors: [row0Error] },
+            { index: 1, errors: [row1Error] }
+          ]
+        });
+      };
+
+      table.insert(data, function(err, insertErrors) {
+        assert.ifError(err);
+
+        assert.deepEqual(insertErrors, [
+          { row: dataApiFormat.rows[0].json, errors: [row0Error] },
+          { row: dataApiFormat.rows[1].json, errors: [row1Error] }
+        ]);
+
+        done();
+      });
     });
   });
 
