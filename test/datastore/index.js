@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/*global describe, it */
+/*global describe, it, before, after */
 
 'use strict';
 
@@ -30,14 +30,25 @@ var entity = {
 };
 
 var assert = require('assert');
-var datastore = require('sandboxed-module')
-    .require('../../lib/datastore/index.js', {
-      requires: {
-        './entity': entity
-      }
-    });
+var mockery = require('mockery');
 
 describe('Datastore', function() {
+  var datastore;
+
+  before(function() {
+    mockery.registerMock('./entity', entity);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+    datastore = require('../../lib/datastore/index.js');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
+
   it('should expose Dataset class', function() {
     assert.equal(typeof datastore.dataset, 'function');
   });

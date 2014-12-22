@@ -14,42 +14,51 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach */
+/*global describe, it, beforeEach, before, after */
 
 'use strict';
 
 var assert = require('assert');
 var duplexify = require('duplexify');
 var gsa = require('google-service-account');
+var mockery = require('mockery');
 var request = require('request');
-
-var util = require('sandboxed-module')
-  .require('../../lib/common/util', {
-    requires: {
-      'google-service-account': fakeGsa,
-      request: fakeRequest
-    }
-  });
+var stream = require('stream');
 
 var gsa_Override;
 function fakeGsa() {
   var args = [].slice.apply(arguments);
   var results = (gsa_Override || gsa).apply(null, args);
-  gsa_Override = null;
-  return results || { getCredentials: util.noop };
+  return results || { getCredentials: function() {} };
 }
 
 var request_Override;
 function fakeRequest() {
   var args = [].slice.apply(arguments);
-  var results = (request_Override || request).apply(null, args);
-  request_Override = null;
-  return results;
+  return (request_Override || request).apply(null, args);
 }
 
 describe('common/util', function() {
+  var util;
+
+  before(function() {
+    mockery.registerMock('google-service-account', fakeGsa);
+    mockery.registerMock('request', fakeRequest);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+    util = require('../../lib/common/util');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
+
   beforeEach(function() {
     gsa_Override = null;
+    request_Override = null;
   });
 
   describe('arrayize', function() {
@@ -163,13 +172,13 @@ describe('common/util', function() {
     it('should emit an error', function(done) {
       var error = new Error('Error.');
 
-      var dup = duplexify();
-      dup.on('error', function(err) {
+      var ws = new stream.Writable();
+      ws.on('error', function(err) {
         assert.equal(err, error);
         done();
       });
 
-      util.makeWritableStream(dup, {
+      util.makeWritableStream(ws, {
         makeAuthorizedRequest: function(request, opts) {
           opts.onAuthorized(error);
         }
@@ -226,14 +235,15 @@ describe('common/util', function() {
 
     it('should set the writable stream', function(done) {
       var dup = duplexify();
-      var stream = duplexify();
+      var ws = new stream.Writable();
+      ws.write = function() {};
 
       request_Override = function() {
-        return stream;
+        return ws;
       };
 
       dup.setWritable = function(writable) {
-        assert.equal(writable, stream);
+        assert.equal(writable, ws);
         done();
       };
 
@@ -246,14 +256,15 @@ describe('common/util', function() {
 
     it('should keep the pipe open on the stream', function(done) {
       var dup = duplexify();
-      var stream = duplexify();
+      var ws = new stream.Writable();
+      ws.write = function() {};
 
       request_Override = function() {
-        return stream;
+        return ws;
       };
 
       dup.pipe = function(writable) {
-        assert.equal(writable, stream);
+        assert.equal(writable, ws);
         done();
       };
 

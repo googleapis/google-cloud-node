@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach */
+/*global describe, it, beforeEach, before, after */
 
 'use strict';
 
 var assert = require('assert');
 var entity = require('../../lib/datastore/entity.js');
 var extend = require('extend');
-var Transaction = require('../../lib/datastore/transaction.js');
+var mockery = require('mockery');
 var util = require('../../lib/common/util.js');
 
 var DatastoreRequest_Override = {
@@ -47,20 +47,28 @@ var FakeDatastoreRequest = {
   }
 };
 
-var Transaction = require('sandboxed-module')
-  .require('../../lib/datastore/transaction.js', {
-    requires: {
-      './request.js': FakeDatastoreRequest
-    }
-  });
-
 describe('Transaction', function() {
+  var Transaction;
   var transaction;
   var TRANSACTION_ID = 'transaction-id';
 
   function key(path) {
     return new entity.Key({ path: util.arrayize(path) });
   }
+
+  before(function() {
+    mockery.registerMock('./request.js', FakeDatastoreRequest);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+    Transaction = require('../../lib/datastore/transaction.js');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
 
   beforeEach(function() {
     transaction = new Transaction({
