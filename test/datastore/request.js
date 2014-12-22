@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach, after */
+/*global describe, it, beforeEach, before, after */
 
 'use strict';
 
 var assert = require('assert');
 var ByteBuffer = require('bytebuffer');
-var duplexify = require('duplexify');
 var entity = require('../../lib/datastore/entity.js');
 var extend = require('extend');
 var https = require('https');
+var mockery = require('mockery');
 var mockRespGet = require('../testdata/response_get.json');
 var pb = require('../../lib/datastore/pb.js');
 var Query = require('../../lib/datastore/query.js');
-var Stream = require('stream');
+var stream = require('stream');
 var util = require('../../lib/common/util.js');
 
 var httpsRequestCached = https.request;
@@ -35,9 +35,7 @@ var httpsRequestOverride = util.noop;
 
 extend(true, https, {
   request: function() {
-    var requestFn = httpsRequestOverride;
-    httpsRequestOverride = util.noop;
-    return requestFn.apply(this, util.toArray(arguments));
+    return httpsRequestOverride.apply(this, util.toArray(arguments));
   }
 });
 
@@ -56,19 +54,29 @@ pb.FakeMethodResponse = {
   }
 };
 
-var Request = require('sandboxed-module')
-  .require('../../lib/datastore/request.js', {
-    requires: {
-      './pb.js': pb,
-      https: https
-    }
-  });
-
 describe('Request', function() {
+  var Request;
   var key;
   var request;
 
+  before(function() {
+    mockery.registerMock('./pb.js', pb);
+    mockery.registerMock('https', https);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+    Request = require('../../lib/datastore/request.js');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+    httpsRequestOverride = httpsRequestCached;
+  });
+
   beforeEach(function() {
+    httpsRequestOverride = util.noop;
     key = new entity.Key({
       namespace: 'namespace',
       path: ['Company', 123]
@@ -77,10 +85,6 @@ describe('Request', function() {
     request.makeAuthorizedRequest_ = function(req, callback) {
       (callback.onAuthorized || callback)(null, req);
     };
-  });
-
-  after(function() {
-    https.request = httpsRequestCached;
   });
 
   describe('get', function() {
@@ -360,7 +364,7 @@ describe('Request', function() {
 
     describe('streams', function() {
       it('should be a stream if a callback is omitted', function() {
-        assert(request.runQuery(query) instanceof Stream);
+        assert(request.runQuery(query) instanceof stream.Stream);
       });
 
       it('should run the query after being read from', function(done) {
@@ -491,7 +495,7 @@ describe('Request', function() {
       httpsRequestOverride = function(req) {
         assert.deepEqual(req, mockRequest);
         done();
-        return duplexify();
+        return new stream.Writable();
       };
       request.makeAuthorizedRequest_ = function(opts, callback) {
         (callback.onAuthorized || callback)(null, mockRequest);
@@ -518,10 +522,10 @@ describe('Request', function() {
         done();
       };
       httpsRequestOverride = function(req, callback) {
-        var responseStream = duplexify();
-        callback(responseStream);
-        responseStream.emit('end');
-        return duplexify();
+        var ws = new stream.Writable();
+        callback(ws);
+        ws.emit('end');
+        return ws;
       };
       request.makeReq_('fakeMethod', util.noop);
     });
@@ -591,12 +595,12 @@ describe('Request', function() {
         it('should not attach transactional properties', function(done) {
           var expected = new pb.LookupRequest().toBuffer();
           httpsRequestOverride = function() {
-            var stream = { on: util.noop, end: util.noop };
-            stream.write = function(data) {
+            var ws = new stream.Writable();
+            ws.write = function(data) {
               assert.deepEqual(data, expected);
               done();
             };
-            return stream;
+            return ws;
           };
           request.makeReq_('lookup', util.noop);
         });

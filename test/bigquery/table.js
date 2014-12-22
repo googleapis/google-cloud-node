@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach */
+/*global describe, it, beforeEach, before, after */
 
 'use strict';
 
 var assert = require('assert');
 var extend = require('extend');
 var File = require('../../lib/storage/file');
-var Stream = require('stream');
-var sandbox = require('sandboxed-module');
-var through = require('through2');
+var mockery = require('mockery');
+var stream = require('stream');
 var util = require('../../lib/common/util');
 
 function FakeFile(a, b) {
@@ -35,14 +34,6 @@ var fakeUtil = extend({}, util, {
   makeWritableStream: function() {
     var args = [].slice.call(arguments);
     (makeWritableStream_Override || util.makeWritableStream).apply(null, args);
-    makeWritableStream_Override = null;
-  }
-});
-
-var Table = sandbox.require('../../lib/bigquery/table', {
-  requires: {
-    '../storage/file': FakeFile,
-    '../common/util': fakeUtil
   }
 });
 
@@ -54,7 +45,7 @@ describe('BigQuery/Table', function() {
       job: function(id) {
         return { id: id };
       },
-      projectId: 'project-id',
+      projectId: 'project-id'
     }
   };
 
@@ -68,10 +59,27 @@ describe('BigQuery/Table', function() {
   };
   var SCHEMA_STRING = 'id:integer,breed,name,dob:timestamp';
 
+  var Table;
   var TABLE_ID = 'kittens';
   var table;
 
+  before(function() {
+    mockery.registerMock('../storage/file', FakeFile);
+    mockery.registerMock('../common/util', fakeUtil);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+    Table = require('../../lib/bigquery/table');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
+
   beforeEach(function() {
+    makeWritableStream_Override = null;
     table = new Table(DATASET, TABLE_ID);
   });
 
@@ -111,7 +119,11 @@ describe('BigQuery/Table', function() {
   });
 
   describe('copy', function() {
-    var DEST_TABLE = new Table(DATASET, 'destination-table');
+    var DEST_TABLE;
+
+    before(function() {
+      DEST_TABLE = new Table(DATASET, 'destination-table');
+    });
 
     it('should throw if a destination is not a Table', function() {
       assert.throws(function() {
@@ -208,7 +220,7 @@ describe('BigQuery/Table', function() {
 
   describe('createReadStream', function() {
     it('should return a stream', function() {
-      assert(table.createReadStream() instanceof Stream);
+      assert(table.createReadStream() instanceof stream.Stream);
     });
 
     it('should call getRows() when asked for data', function(done) {
@@ -326,7 +338,7 @@ describe('BigQuery/Table', function() {
     });
 
     it('should return a stream', function() {
-      assert(table.createWriteStream() instanceof Stream);
+      assert(table.createWriteStream() instanceof stream.Stream);
     });
 
     describe('writable stream', function() {
@@ -686,30 +698,34 @@ describe('BigQuery/Table', function() {
 
     it('should accept just a File and a callback', function(done) {
       table.createWriteStream = function() {
-        var stream = through();
+        var ws = new stream.Writable();
         setImmediate(function() {
-          stream.emit('complete');
+          ws.emit('complete');
+          ws.end();
         });
-        return stream;
+        return ws;
       };
 
       table.import(FILEPATH, done);
     });
 
     it('should return a stream when a string is given', function() {
-      table.createWriteStream = through;
+      table.createWriteStream = function() {
+        return new stream.Writable();
+      };
 
-      assert(table.import(FILEPATH) instanceof Stream);
+      assert(table.import(FILEPATH) instanceof stream.Stream);
     });
 
     it('should infer the file format from the given filepath', function(done) {
       table.createWriteStream = function(metadata) {
         assert.equal(metadata.sourceFormat, 'NEWLINE_DELIMITED_JSON');
-        var stream = through();
+        var ws = new stream.Writable();
         setImmediate(function() {
-          stream.emit('complete');
+          ws.emit('complete');
+          ws.end();
         });
-        return stream;
+        return ws;
       };
 
       table.import(FILEPATH, done);
@@ -718,11 +734,12 @@ describe('BigQuery/Table', function() {
     it('should not infer the file format if one is given', function(done) {
       table.createWriteStream = function(metadata) {
         assert.equal(metadata.sourceFormat, 'CSV');
-        var stream = through();
+        var ws = new stream.Writable();
         setImmediate(function() {
-          stream.emit('complete');
+          ws.emit('complete');
+          ws.end();
         });
-        return stream;
+        return ws;
       };
 
       table.import(FILEPATH, { sourceFormat: 'CSV' }, done);

@@ -14,51 +14,26 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach */
+/*global describe, it, beforeEach, before, after */
 
 'use strict';
 
 var assert = require('assert');
-var Dataset = require('../../lib/bigquery/dataset');
-var Job = require('../../lib/bigquery/job');
-var request = require('request');
+var mockery = require('mockery');
 var Stream = require('stream').Stream;
 var Table = require('../../lib/bigquery/table');
 var util = require('../../lib/common/util');
-
-var BigQuery = require('sandboxed-module')
-  .require('../../lib/bigquery', {
-    requires: {
-      './dataset': Dataset,
-      './job': Job,
-      './table': FakeTable,
-      request: fakeRequest,
-      'google-service-account': fakeGsa
-    }
-  });
-
-var mergeSchemaWithRows_Cached = Table.mergeSchemaWithRows_;
-var mergeSchemaWithRows_Override;
 
 function FakeTable(a, b) {
   Table.call(this, a, b);
 }
 
+var mergeSchemaWithRows_Override;
 FakeTable.mergeSchemaWithRows_ = function() {
   var args = [].slice.apply(arguments);
-  return (mergeSchemaWithRows_Override || mergeSchemaWithRows_Cached)
+  return (mergeSchemaWithRows_Override || Table.mergeSchemaWithRows_)
     .apply(null, args);
 };
-
-var request_Cached = request;
-var request_Override;
-
-function fakeRequest() {
-  var args = [].slice.apply(arguments);
-  var results = (request_Override || request_Cached).apply(null, args);
-  request_Override = null;
-  return results;
-}
 
 function fakeGsa() {
   return function(req, callback) {
@@ -69,7 +44,24 @@ function fakeGsa() {
 describe('BigQuery', function() {
   var JOB_ID = JOB_ID;
   var PROJECT_ID = 'test-project';
+
+  var BigQuery;
   var bq;
+
+  before(function() {
+    mockery.registerMock('./table.js', FakeTable);
+    mockery.registerMock('google-service-account', fakeGsa);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+    BigQuery = require('../../lib/bigquery');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
 
   beforeEach(function() {
     bq = new BigQuery({ projectId: PROJECT_ID });
@@ -110,7 +102,7 @@ describe('BigQuery', function() {
       };
       bq.createDataset(DATASET_ID, function(err, dataset) {
         assert.ifError(err);
-        assert(dataset instanceof Dataset);
+        assert.equal(dataset.constructor.name, 'Dataset');
         done();
       });
     });
@@ -133,7 +125,7 @@ describe('BigQuery', function() {
 
     it('returns a Dataset instance', function() {
       var ds = bq.dataset(DATASET_ID);
-      assert(ds instanceof Dataset);
+      assert.equal(ds.constructor.name, 'Dataset');
     });
 
     it('should scope the correct dataset', function() {
@@ -183,7 +175,7 @@ describe('BigQuery', function() {
       };
       bq.getDatasets(function(err, datasets) {
         assert.ifError(err);
-        assert(datasets[0] instanceof Dataset);
+        assert.equal(datasets[0].constructor.name, 'Dataset');
         done();
       });
     });
@@ -266,7 +258,7 @@ describe('BigQuery', function() {
       };
       bq.getJobs(function(err, jobs) {
         assert.ifError(err);
-        assert(jobs[0] instanceof Job);
+        assert.equal(jobs[0].constructor.name, 'Job');
         done();
       });
     });
@@ -300,7 +292,7 @@ describe('BigQuery', function() {
   describe('job', function() {
     it('should return a Job instance', function() {
       var job = bq.job(JOB_ID);
-      assert(job instanceof Job);
+      assert.equal(job.constructor.name, 'Job');
     });
 
     it('should scope the correct job', function() {
@@ -377,7 +369,7 @@ describe('BigQuery', function() {
       it('should populate nextQuery when job is incomplete', function(done) {
         bq.query({}, function(err, rows, nextQuery) {
           assert.ifError(err);
-          assert(nextQuery.job instanceof Job);
+          assert.equal(nextQuery.job.constructor.name, 'Job');
           assert.equal(nextQuery.job.id, JOB_ID);
           done();
         });
@@ -408,7 +400,7 @@ describe('BigQuery', function() {
       it('should populate nextQuery when more results exist', function(done) {
         bq.query(options, function(err, rows, nextQuery) {
           assert.ifError(err);
-          assert(nextQuery.job instanceof Job);
+          assert.equal(nextQuery.job.constructor.name, 'Job');
           assert.equal(nextQuery.job.id, JOB_ID);
           assert.equal(nextQuery.pageToken, pageToken);
           done();
@@ -663,7 +655,7 @@ describe('BigQuery', function() {
 
       bq.startQuery('query', function(err, job) {
         assert.ifError(err);
-        assert(job instanceof Job);
+        assert.equal(job.constructor.name, 'Job');
         assert.equal(job.id, JOB_ID);
         assert.deepEqual(job.metadata, jobsResource);
         done();
@@ -678,7 +670,7 @@ describe('BigQuery', function() {
     var body = { hi: 'there' };
 
     it('should make correct request', function(done) {
-      request_Override = function(request) {
+      bq.makeAuthorizedRequest_ = function(request) {
         var basePath = 'https://www.googleapis.com/bigquery/v2/projects/';
         assert.equal(request.method, method);
         assert.equal(request.uri, basePath + bq.projectId + path);
@@ -690,7 +682,7 @@ describe('BigQuery', function() {
     });
 
     it('should execute callback', function(done) {
-      request_Override = function(request, callback) {
+      bq.makeAuthorizedRequest_ = function(request, callback) {
         callback();
       };
       bq.makeReq_(method, path, query, body, done);

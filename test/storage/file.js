@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach */
+/*global describe, it, beforeEach, before, after */
 
 'use strict';
 
@@ -24,6 +24,7 @@ var crc = require('fast-crc32c');
 var crypto = require('crypto');
 var duplexify = require('duplexify');
 var extend = require('extend');
+var mockery = require('mockery');
 var nodeutil = require('util');
 var request = require('request');
 var stream = require('stream');
@@ -37,7 +38,9 @@ function FakeDuplexify() {
   if (!(this instanceof FakeDuplexify)) {
     return new FakeDuplexify();
   }
-  duplexify.call(this);
+  stream.Duplex.call(this);
+  this._read = util.noop;
+  this._write = util.noop;
   this.setReadable = function(setReadableStream) {
     readableStream = setReadableStream;
   };
@@ -45,14 +48,13 @@ function FakeDuplexify() {
     writableStream = setWritableStream;
   };
 }
-nodeutil.inherits(FakeDuplexify, duplexify);
+nodeutil.inherits(FakeDuplexify, stream.Duplex);
 
 var makeWritableStream_Override;
 var fakeUtil = extend({}, util, {
   makeWritableStream: function() {
     var args = [].slice.call(arguments);
     (makeWritableStream_Override || util.makeWritableStream).apply(null, args);
-    makeWritableStream_Override = null;
   }
 });
 
@@ -62,7 +64,6 @@ var request_Override;
 function fakeRequest() {
   var args = [].slice.apply(arguments);
   var results = (request_Override || request_Cached).apply(null, args);
-  request_Override = null;
   return results;
 }
 
@@ -81,17 +82,8 @@ function FakeConfigStore() {
   };
 }
 
-var File = require('sandboxed-module')
-  .require('../../lib/storage/file.js', {
-    requires: {
-      configstore: FakeConfigStore,
-      duplexify: FakeDuplexify,
-      request: fakeRequest,
-      '../common/util': fakeUtil
-    }
-  });
-
 describe('File', function() {
+  var File;
   var FILE_NAME = 'file-name.png';
   var options = {
     makeAuthorizedRequest_: function(req, callback) {
@@ -102,7 +94,27 @@ describe('File', function() {
   var file;
   var directoryFile;
 
+  before(function() {
+    mockery.registerMock('configstore', FakeConfigStore);
+    mockery.registerMock('duplexify', FakeDuplexify);
+    mockery.registerMock('request', fakeRequest);
+    mockery.registerMock('../common/util.js', fakeUtil);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+    File = require('../../lib/storage/file.js');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
+
   beforeEach(function() {
+    makeWritableStream_Override = null;
+    request_Override = null;
+
     file = new File(bucket, FILE_NAME);
     file.makeReq_ = util.noop;
 
@@ -1009,9 +1021,9 @@ describe('File', function() {
         callback(metadata);
       };
 
-      var stream = duplexify();
+      var ws = new stream.Writable();
 
-      stream
+      ws
         .on('error', done)
         .on('complete', function(meta) {
           assert.deepEqual(meta, metadata);
@@ -1019,7 +1031,7 @@ describe('File', function() {
           done();
         });
 
-      file.startSimpleUpload_(stream, metadata);
+      file.startSimpleUpload_(ws, metadata);
     });
   });
 });

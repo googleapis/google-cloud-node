@@ -14,23 +14,15 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach */
+/*global describe, it, beforeEach, before, after */
 
 'use strict';
 
 var assert = require('assert');
+var mockery = require('mockery');
 var request = require('request');
 var Subscription = require('../../lib/pubsub/subscription.js');
 var Topic = require('../../lib/pubsub/topic.js');
-
-var PubSub = require('sandboxed-module')
-  .require('../../lib/pubsub', {
-    requires: {
-      './subscription': Subscription,
-      './topic': Topic,
-      request: fakeRequest
-    }
-  });
 
 var request_Cached = request;
 var request_Override;
@@ -38,15 +30,32 @@ var request_Override;
 function fakeRequest() {
   var args = [].slice.apply(arguments);
   var results = (request_Override || request_Cached).apply(null, args);
-  request_Override = null;
   return results;
 }
 
 describe('PubSub', function() {
+  var PubSub;
   var PROJECT_ID = 'test-project';
   var pubsub;
 
+  before(function() {
+    mockery.registerMock('./subscription.js', Subscription);
+    mockery.registerMock('./topic.js', Topic);
+    mockery.registerMock('request', fakeRequest);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+    PubSub = require('../../lib/pubsub');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
+
   beforeEach(function() {
+    request_Override = null;
     pubsub = new PubSub({ projectId: PROJECT_ID });
     pubsub.makeReq_ = function(method, path, q, body, callback) {
       callback();
