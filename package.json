@@ -65,13 +65,13 @@
     "istanbul": "^0.3.0",
     "jshint": "^2.5.2",
     "mocha": "^2.0.1",
-    "sandboxed-module": "^1.0.1",
+    "mockery": "^1.4.0",
     "tmp": "0.0.24"
   },
   "scripts": {
     "docs": "./scripts/docs.sh",
     "lint": "jshint lib/ regression/ test/",
-    "test": "mocha --recursive",
+    "test": "mocha test/*",
     "regression-test": "mocha regression/* --timeout 20000",
     "cover": "istanbul cover -x 'regression/*' _mocha -- --timeout 20000 test/* regression/*",
     "coveralls": "istanbul cover -x 'regression/*' _mocha --report lcovonly -- --timeout 20000 test/* regression/* -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"

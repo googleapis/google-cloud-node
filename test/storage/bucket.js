@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach */
+/*global describe, it, beforeEach, before, after */
 
 'use strict';
 
 var assert = require('assert');
-var duplexify = require('duplexify');
+var mockery = require('mockery');
 var request = require('request');
+var stream = require('stream');
 var util = require('../../lib/common/util.js');
 
 function FakeFile(bucket, name, metadata) {
@@ -29,33 +30,25 @@ function FakeFile(bucket, name, metadata) {
   this.metadata = metadata;
   this.createWriteStream = function(options) {
     this.metadata = options.metadata;
-    var dup = duplexify();
-    dup._write = function() {
-      dup.emit('complete');
+    var ws = new stream.Writable();
+    ws.write = function() {
+      ws.emit('complete');
+      ws.end();
     };
-    return dup;
+    return ws;
   };
 }
-
-var Bucket = require('sandboxed-module')
-  .require('../../lib/storage/bucket.js', {
-    requires: {
-      './file.js': FakeFile,
-      request: fakeRequest
-    }
-  });
 
 var request_Cached = request;
 var request_Override;
 
 function fakeRequest() {
   var args = [].slice.apply(arguments);
-  var results = (request_Override || request_Cached).apply(null, args);
-  request_Override = null;
-  return results;
+  return (request_Override || request_Cached).apply(null, args);
 }
 
 describe('Bucket', function() {
+  var Bucket;
   var BUCKET_NAME = 'test-bucket';
   var bucket;
   var options = {
@@ -64,7 +57,23 @@ describe('Bucket', function() {
     }
   };
 
+  before(function() {
+    mockery.registerMock('./file.js', FakeFile);
+    mockery.registerMock('request', fakeRequest);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+    Bucket = require('../../lib/storage/bucket.js');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
+
   beforeEach(function() {
+    request_Override = null;
     bucket = new Bucket(options, BUCKET_NAME);
   });
 
@@ -351,13 +360,14 @@ describe('Bucket', function() {
       var fakeFile = new FakeFile(bucket, 'file-name');
       var options = { destination: fakeFile };
       fakeFile.createWriteStream = function(options) {
-        var dup = duplexify();
+        var ws = new stream.Writable();
+        ws.write = util.noop;
         setImmediate(function() {
           var expectedContentType = 'application/json; charset=utf-8';
           assert.equal(options.metadata.contentType, expectedContentType);
           done();
         });
-        return dup;
+        return ws;
       };
       bucket.upload(filepath, options, assert.ifError);
     });
@@ -366,13 +376,14 @@ describe('Bucket', function() {
       var fakeFile = new FakeFile(bucket, 'file-name');
       var options = { destination: fakeFile };
       fakeFile.createWriteStream = function(options) {
-        var dup = duplexify();
+        var ws = new stream.Writable();
+        ws.write = util.noop;
         setImmediate(function() {
           var expectedContentType = 'text/plain; charset=utf-8';
           assert.equal(options.metadata.contentType, expectedContentType);
           done();
         });
-        return dup;
+        return ws;
       };
       bucket.upload(textFilepath, options, assert.ifError);
     });
@@ -382,12 +393,13 @@ describe('Bucket', function() {
       var metadata = { contentType: 'made-up-content-type' };
       var options = { destination: fakeFile, metadata: metadata };
       fakeFile.createWriteStream = function(options) {
-        var dup = duplexify();
+        var ws = new stream.Writable();
+        ws.write = util.noop;
         setImmediate(function() {
           assert.equal(options.metadata.contentType,  metadata.contentType);
           done();
         });
-        return dup;
+        return ws;
       };
       bucket.upload(filepath, options, assert.ifError);
     });
@@ -396,12 +408,13 @@ describe('Bucket', function() {
       var fakeFile = new FakeFile(bucket, 'file-name');
       var options = { destination: fakeFile, resumable: false };
       fakeFile.createWriteStream = function(options) {
-        var dup = duplexify();
+        var ws = new stream.Writable();
+        ws.write = util.noop;
         setImmediate(function() {
           assert.strictEqual(options.resumable, false);
           done();
         });
-        return dup;
+        return ws;
       };
       bucket.upload(filepath, options, assert.ifError);
     });
@@ -411,11 +424,12 @@ describe('Bucket', function() {
       var fakeFile = new FakeFile(bucket, 'file-name');
       var options = { destination: fakeFile };
       fakeFile.createWriteStream = function() {
-        var dup = duplexify();
+        var ws = new stream.Writable();
         setImmediate(function() {
-          dup.emit('error', error);
+          ws.emit('error', error);
+          ws.end();
         });
-        return dup;
+        return ws;
       };
       bucket.upload(filepath, options, function(err) {
         assert.equal(err, error);

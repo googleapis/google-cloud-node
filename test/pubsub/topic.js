@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach, afterEach */
+/*global describe, it, beforeEach, before, after */
 
 'use strict';
 
 var assert = require('assert');
+var mockery = require('mockery');
 var util = require('../../lib/common/util.js');
 
 var SubscriptionCached = require('../../lib/pubsub/subscription.js');
@@ -36,14 +37,8 @@ Subscription.formatName_ = function() {
   return (formatName_Override || formatName_Cached).apply(null, args);
 };
 
-var Topic = require('sandboxed-module')
-    .require('../../lib/pubsub/topic.js', {
-      requires: {
-        './subscription.js': Subscription
-      }
-    });
-
 describe('Topic', function() {
+  var Topic;
   var PROJECT_ID = 'test-project';
   var TOPIC_NAME = 'test-topic';
   var pubsubMock = {
@@ -52,13 +47,24 @@ describe('Topic', function() {
   };
   var topic;
 
-  beforeEach(function() {
-    topic = new Topic(pubsubMock, { name: TOPIC_NAME });
+  before(function() {
+    mockery.registerMock('./subscription.js', Subscription);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+    Topic = require('../../lib/pubsub/topic');
   });
 
-  afterEach(function() {
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
+
+  beforeEach(function() {
     SubscriptionOverride = null;
     formatName_Override = null;
+    topic = new Topic(pubsubMock, { name: TOPIC_NAME });
   });
 
   describe('initialization', function() {
