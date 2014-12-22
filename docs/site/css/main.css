@@ -137,6 +137,10 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
 }
 
+h2 code {
+  font-size: .9em;
+}
+
 h2, h3 {
     color: #4285f4;
 }
@@ -1108,6 +1112,13 @@ h2, h3 {
     }
 
     /*
+     GitHub Edit Heade Button
+     */
+    .header--gh-edit-btn {
+      top: 8em;
+    }
+
+    /*
      Content
     */
 
@@ -1284,9 +1295,9 @@ h2, h3 {
         position: absolute;
         top: 0;
         left: 0;
+        bottom: 0;
         width: 240px;
         padding-top: 7.7em;
-        background: none;
         font-size: 0.9em;
     }
 

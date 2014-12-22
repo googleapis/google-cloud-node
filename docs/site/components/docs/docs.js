@@ -1,5 +1,5 @@
 angular
-  .module('gcloud.docs', ['ngRoute', 'hljs', 'config'])
+  .module('gcloud.docs', ['ngRoute', 'gcloud.header', 'gcloud.subpage', 'hljs', 'config'])
   .config(function($routeProvider, versions) {
     'use strict';
 
@@ -264,21 +264,21 @@ angular
       })
       .when('/docs/history', {
         controller: 'HistoryCtrl',
-        templateUrl: 'components/docs/docs.html'
+        templateUrl: 'site/components/docs/docs.html'
       })
       .when('/docs/:version', {
         controller: 'DocsCtrl',
-        templateUrl: 'components/docs/docs.html',
+        templateUrl: 'site/components/docs/docs.html',
         resolve: { methods: getMethods, links: getLinks }
       })
       .when('/docs/:version/:module', {
         controller: 'DocsCtrl',
-        templateUrl: 'components/docs/docs.html',
+        templateUrl: 'site/components/docs/docs.html',
         resolve: { methods: getMethods, links: getLinks }
       })
       .when('/docs/:version/:module/:class', {
         controller: 'DocsCtrl',
-        templateUrl: 'components/docs/docs.html',
+        templateUrl: 'site/components/docs/docs.html',
         resolve: { methods: getMethods, links: getLinks }
       });
   })
@@ -307,6 +307,10 @@ angular
     'use strict';
 
     $scope.isActiveUrl = function(url) {
+      if (url === '/docs') {
+        return true;
+      }
+
       var active = $location.path()
           .replace('/' + methods.singleMethod, '')
           .replace('/' + $scope.version, '');
