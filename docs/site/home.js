@@ -1,18 +1,28 @@
 angular
-  .module('gcloud', ['ngRoute', 'hljs', 'gcloud.docs', 'config'])
+  .module('gcloud', [
+    'ngRoute',
+    'gcloud.docs',
+    'gcloud.faq',
+    'gcloud.troubleshooting',
+    'config',
+    'hljs'
+  ])
   .config(function($routeProvider) {
     'use strict';
 
-    $routeProvider
-      .when('/', {
-        templateUrl: 'home.html',
-        controller: 'HomeCtrl'
-      });
+    $routeProvider.otherwise({
+      redirectTo: '/'
+    });
+
+    $routeProvider.when('/', {
+      templateUrl: 'site/home.html',
+      controller: 'HomeCtrl'
+    });
   })
   .controller('HomeCtrl', function($scope, versions) {
     'use strict';
-    $scope.latestVersion = versions[0];
 
+    $scope.latestVersion = versions[0];
   })
   .run(function($rootScope, $location) {
     'use strict';
