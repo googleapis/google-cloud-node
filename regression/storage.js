@@ -336,6 +336,30 @@ describe('storage', function() {
       });
     });
 
+    it('should read a byte range from a file', function(done) {
+      bucket.upload(files.big.path, function(err, file) {
+        assert.ifError(err);
+
+        var fileSize = file.metadata.size;
+        var byteRange = {
+          start: Math.floor(fileSize * 1/3),
+          end: Math.floor(fileSize * 2/3)
+        };
+        var expectedContentSize = byteRange.start + 1;
+
+        var sizeStreamed = 0;
+        file.createReadStream(byteRange)
+          .on('data', function (chunk) {
+            sizeStreamed += chunk.length;
+          })
+          .on('error', done)
+          .on('complete', function() {
+            assert.equal(sizeStreamed, expectedContentSize);
+            file.delete(done);
+          });
+      });
+    });
+
     describe('stream write', function() {
       it('should stream write, then remove file (3mb)', function(done) {
         var file = bucket.file('LargeFile');
