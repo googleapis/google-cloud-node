@@ -53,7 +53,7 @@ nodeutil.inherits(FakeDuplexify, stream.Duplex);
 var makeWritableStream_Override;
 var fakeUtil = extend({}, util, {
   makeWritableStream: function() {
-    var args = [].slice.call(arguments);
+    var args = util.toArray(arguments);
     (makeWritableStream_Override || util.makeWritableStream).apply(null, args);
   }
 });
@@ -62,7 +62,7 @@ var request_Cached = request;
 var request_Override;
 
 function fakeRequest() {
-  var args = [].slice.apply(arguments);
+  var args = util.toArray(arguments);
   var results = (request_Override || request_Cached).apply(null, args);
   return results;
 }
@@ -85,14 +85,9 @@ function FakeConfigStore() {
 describe('File', function() {
   var File;
   var FILE_NAME = 'file-name.png';
-  var options = {
-    makeAuthorizedRequest_: function(req, callback) {
-      (callback.onAuthorized || callback)(null, req);
-    }
-  };
-  var bucket = new Bucket(options, 'bucket-name');
   var file;
   var directoryFile;
+  var bucket;
 
   before(function() {
     mockery.registerMock('configstore', FakeConfigStore);
@@ -112,14 +107,21 @@ describe('File', function() {
   });
 
   beforeEach(function() {
-    makeWritableStream_Override = null;
-    request_Override = null;
+    var options = {
+      makeAuthorizedRequest_: function(req, callback) {
+        (callback.onAuthorized || callback)(null, req);
+      }
+    };
+    bucket = new Bucket(options, 'bucket-name');
 
     file = new File(bucket, FILE_NAME);
     file.makeReq_ = util.noop;
 
     directoryFile = new File(bucket, 'directory/file.jpg');
     directoryFile.makeReq_ = util.noop;
+
+    makeWritableStream_Override = null;
+    request_Override = null;
   });
 
   describe('initialization', function() {
@@ -387,7 +389,9 @@ describe('File', function() {
 
         file.createReadStream({ validation: 'crc32c' })
           .on('error', done)
-          .on('complete', done);
+          .on('complete', function () {
+            done();
+          });
       });
 
       it('should emit an error if crc32c validation fails', function(done) {
@@ -405,7 +409,9 @@ describe('File', function() {
 
         file.createReadStream({ validation: 'md5' })
           .on('error', done)
-          .on('complete', done);
+          .on('complete', function () {
+            done();
+          });
       });
 
       it('should emit an error if md5 validation fails', function(done) {
@@ -429,6 +435,53 @@ describe('File', function() {
             done();
           });
       });
+    });
+
+    it('should accept a start range', function(done) {
+      var startOffset = 100;
+
+      request_Override = function(opts) {
+        setImmediate(function () {
+          assert.equal(opts.headers.Range, 'bytes=' + startOffset + '-');
+          done();
+        });
+        return duplexify();
+      };
+
+      file.metadata = metadata;
+      file.createReadStream({ start: startOffset });
+    });
+
+    it('should accept an end range', function(done) {
+      var endOffset = 100;
+
+      request_Override = function(opts) {
+        setImmediate(function () {
+          assert.equal(opts.headers.Range, 'bytes=-' + endOffset);
+          done();
+        });
+        return duplexify();
+      };
+
+      file.metadata = metadata;
+      file.createReadStream({ end: endOffset });
+    });
+
+    it('should accept both a start and end range', function(done) {
+      var startOffset = 100;
+      var endOffset = 101;
+
+      request_Override = function(opts) {
+        setImmediate(function () {
+          var expectedRange = 'bytes=' + startOffset + '-' + endOffset;
+          assert.equal(opts.headers.Range, expectedRange);
+          done();
+        });
+        return duplexify();
+      };
+
+      file.metadata = metadata;
+      file.createReadStream({ start: startOffset, end: endOffset });
     });
   });
 
