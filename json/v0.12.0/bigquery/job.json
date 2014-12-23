@@ -1,0 +1,199 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "ignore": true
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>@module bigquery/job</p>",
+      "summary": "<p>@module bigquery/job</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": true,
+    "code": "'use strict';"
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@type {module:common/util}</p>",
+      "summary": "<p>@type {module:common/util}</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var util = require('../common/util');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "module:bigquery"
+        ],
+        "name": "bigQuery",
+        "description": "- BigQuery instance."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "id",
+        "description": "- The ID of the table."
+      }
+    ],
+    "description": {
+      "full": "<p>Developer Documentation</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": true
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "module:bigquery/job"
+      },
+      {
+        "type": "constructor",
+        "string": ""
+      }
+    ],
+    "description": {
+      "full": "<p>Job objects are returned from various places in the BigQuery API:</p><ul>\n<li>{module:bigquery#getJobs}</li>\n<li>{module:bigquery#job}</li>\n<li>{module:bigquery#query}</li>\n<li>{module:bigquery#startJob}</li>\n<li>{module:bigquery/table#copy}</li>\n<li>{module:bigquery/table#createWriteStream}</li>\n<li>{module:bigquery/table#export}</li>\n<li>{module:bigquery/table#import}</li>\n</ul>\n<p>They can be used to check the status of a running job or fetching the results<br />of a previously-executed one.</p>",
+      "summary": "<p>Job objects are returned from various places in the BigQuery API:</p>",
+      "body": "<ul>\n<li>{module:bigquery#getJobs}</li>\n<li>{module:bigquery#job}</li>\n<li>{module:bigquery#query}</li>\n<li>{module:bigquery#startJob}</li>\n<li>{module:bigquery/table#copy}</li>\n<li>{module:bigquery/table#createWriteStream}</li>\n<li>{module:bigquery/table#export}</li>\n<li>{module:bigquery/table#import}</li>\n</ul>\n<p>They can be used to check the status of a running job or fetching the results<br />of a previously-executed one.</p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "function Job(bigQuery, id) {\n  this.bigQuery = bigQuery;\n  this.id = id;\n  this.metadata = {};\n}",
+    "ctx": {
+      "type": "function",
+      "name": "Job",
+      "string": "Job()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "function"
+        ],
+        "name": "callback",
+        "description": "- The callback function. "
+      },
+      {
+        "type": "example",
+        "string": "job.getMetadata(function(err, metadata) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Get the metadata of the job. This will mostly be useful for checking the<br />status of a previously-run job.</p>",
+      "summary": "<p>Get the metadata of the job. This will mostly be useful for checking the<br />status of a previously-run job.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Job.prototype.getMetadata = function(callback) {\n  var that = this;\n\n  var path = '/jobs/' + this.id;\n\n  this.bigQuery.makeReq_('GET', path, null, null, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Job",
+      "cons": "Job",
+      "name": "getMetadata",
+      "string": "Job.prototype.getMetadata()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "object="
+        ],
+        "name": "options",
+        "description": "- Configuration object."
+      },
+      {
+        "type": "param",
+        "types": [
+          "number"
+        ],
+        "name": "options.maxResults",
+        "description": "- Maximum number of results to read."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "options.pageToken",
+        "description": "- Page token, returned by a previous call,     to request the next page of results. Note: This is automatically added to\n    the `nextQuery` argument of your callback."
+      },
+      {
+        "type": "param",
+        "types": [
+          "number"
+        ],
+        "name": "options.startIndex",
+        "description": "- Zero-based index of the starting row."
+      },
+      {
+        "type": "param",
+        "types": [
+          "number"
+        ],
+        "name": "options.timeoutMs",
+        "description": "- How long to wait for the query to     complete, in milliseconds, before returning. Default is to return\n    immediately. If the timeout passes before the job completes, the request\n    will fail with a `TIMEOUT` error."
+      },
+      {
+        "type": "param",
+        "types": [
+          "function="
+        ],
+        "name": "callback",
+        "description": "- The callback function. If you intend to     continuously run this query until all results are in as part of a stream,\n    do not pass a callback.\n"
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Use the default options to get the results of a query.\n//-\njob.getQueryResults(function(err, rows, nextQuery) {});\n\n//-\n// Customize the results you want to fetch.\n//-\nvar options = {\n  maxResults: 100\n};\n\njob.getQueryResults(options, function(err, rows, nextQuery) {});\n\n//-\n// Consume the results from the query as a readable stream.\n//-\nvar through2 = require('through2');\n\njob.getQueryResults(options)\n  .pipe(through2.obj(function (row, enc, next) {\n    this.push(JSON.stringify(row) + '\\n');\n  }))\n  .pipe(fs.createWriteStream('./backup.json'));"
+      }
+    ],
+    "description": {
+      "full": "<p>Get the results of a job.</p>",
+      "summary": "<p>Get the results of a job.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Job.prototype.getQueryResults = function(options, callback) {\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.job = this;\n\n  return this.bigQuery.query(options, callback);\n};\n\nmodule.exports = Job;",
+    "ctx": {
+      "type": "method",
+      "constructor": "Job",
+      "cons": "Job",
+      "name": "getQueryResults",
+      "string": "Job.prototype.getQueryResults()"
+    }
+  }
+]

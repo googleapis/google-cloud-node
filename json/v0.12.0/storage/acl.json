@@ -1,0 +1,401 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "ignore": true
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>@module storage/acl</p>",
+      "summary": "<p>@module storage/acl</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": true,
+    "code": "'use strict';"
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>@type module:common/util</p>",
+      "summary": "<p>@type module:common/util</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "var util = require('../common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "constructor",
+        "string": ""
+      },
+      {
+        "type": "alias",
+        "string": "module:storage/acl"
+      }
+    ],
+    "description": {
+      "full": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p><p>An ACL consists of one or more entries, where each entry grants permissions<br />to a scope. Permissions define the actions that can be performed against an<br />object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the scope defines who the<br />permission applies to (for example, a specific user or group of users).</p><p>Where a <code>scope</code> value is accepted, we follow the format the Cloud Storage API<br />expects.</p><p>Refer to<br /><a href=\"https://cloud.google.com/storage/docs/json_api/v1/defaultObjectAccessControls\">https://cloud.google.com/storage/docs/json_api/v1/defaultObjectAccessControls</a><br />for the most up-to-date values.</p><ul>\n<li><code>user-userId</code></li>\n<li><code>user-email</code></li>\n<li><code>group-groupId</code></li>\n<li><code>group-email</code></li>\n<li><code>domain-domain</code></li>\n<li><code>project-team-projectId</code></li>\n<li><code>allUsers</code></li>\n<li><code>allAuthenticatedUsers</code></li>\n</ul>\n<p>Examples:</p><ul>\n<li>The user &quot;liz@example.com&quot; would be <code>user-liz@example.com</code>.</li>\n<li>The group &quot;example@googlegroups.com&quot; would be<br /><code>group-example@googlegroups.com</code>.</li>\n<li>To refer to all members of the Google Apps for Business domain<br />&quot;example.com&quot;, the entity would be <code>domain-example.com</code>.</li>\n</ul>\n<p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p>",
+      "summary": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p>",
+      "body": "<p>An ACL consists of one or more entries, where each entry grants permissions<br />to a scope. Permissions define the actions that can be performed against an<br />object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the scope defines who the<br />permission applies to (for example, a specific user or group of users).</p><p>Where a <code>scope</code> value is accepted, we follow the format the Cloud Storage API<br />expects.</p><p>Refer to<br /><a href=\"https://cloud.google.com/storage/docs/json_api/v1/defaultObjectAccessControls\">https://cloud.google.com/storage/docs/json_api/v1/defaultObjectAccessControls</a><br />for the most up-to-date values.</p><ul>\n<li><code>user-userId</code></li>\n<li><code>user-email</code></li>\n<li><code>group-groupId</code></li>\n<li><code>group-email</code></li>\n<li><code>domain-domain</code></li>\n<li><code>project-team-projectId</code></li>\n<li><code>allUsers</code></li>\n<li><code>allAuthenticatedUsers</code></li>\n</ul>\n<p>Examples:</p><ul>\n<li>The user &quot;liz@example.com&quot; would be <code>user-liz@example.com</code>.</li>\n<li>The group &quot;example@googlegroups.com&quot; would be<br /><code>group-example@googlegroups.com</code>.</li>\n<li>To refer to all members of the Google Apps for Business domain<br />&quot;example.com&quot;, the entity would be <code>domain-example.com</code>.</li>\n</ul>\n<p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p>"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "function Acl(options) {\n  this.makeReq = options.makeReq;\n  this.pathPrefix = options.pathPrefix;\n}",
+    "ctx": {
+      "type": "function",
+      "name": "Acl",
+      "string": "Acl()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "object"
+        ],
+        "name": "options",
+        "description": "- Configuration object."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "options.scope",
+        "description": "- Whose permissions will be added."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "options.role",
+        "description": "- Permissions allowed for the defined scope. See     {module:storage#acl}."
+      },
+      {
+        "type": "param",
+        "types": [
+          "int="
+        ],
+        "name": "options.generation",
+        "description": "- **File Objects Only** Select a specific     revision of this file (as opposed to the latest version, the default)."
+      },
+      {
+        "type": "param",
+        "types": [
+          "function"
+        ],
+        "name": "callback",
+        "description": "- The callback function. "
+      },
+      {
+        "type": "alias",
+        "string": "acl.add "
+      },
+      {
+        "type": "example",
+        "string": "myBucket.acl.add({\n  scope: 'user-useremail@example.com',\n  role: storage.acl.OWNER_ROLE\n}, function(err, aclObject) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.add({\n  scope: 'user-useremail@example.com',\n  role: storage.acl.OWNER_ROLE,\n  generation: 1\n}, function(err, aclObject) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Add access controls on a {module:storage/bucket} or {module:storage/file}.</p>",
+      "summary": "<p>Add access controls on a {module:storage/bucket} or {module:storage/file}.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Acl.prototype.add = function(options, callback) {\n  var that = this;\n\n  var body = {\n    entity: options.scope,\n    role: options.role.toUpperCase()\n  };\n\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  this.makeReq_('POST', '', query, body, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    callback(null, that.makeAclObject_(resp));\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Acl",
+      "cons": "Acl",
+      "name": "add",
+      "string": "Acl.prototype.add()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "object="
+        ],
+        "name": "options",
+        "description": "- Configuration object."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "options.scope",
+        "description": "- Whose permissions will be revoked."
+      },
+      {
+        "type": "param",
+        "types": [
+          "int="
+        ],
+        "name": "options.generation",
+        "description": "- **File Objects Only** Select a specific     revision of this file (as opposed to the latest version, the default)."
+      },
+      {
+        "type": "param",
+        "types": [
+          "function"
+        ],
+        "name": "callback",
+        "description": "- The callback function. "
+      },
+      {
+        "type": "alias",
+        "string": "acl.delete "
+      },
+      {
+        "type": "example",
+        "string": "myBucket.acl.delete({\n  scope: 'user-useremail@example.com'\n}, function(err) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.delete({\n  scope: 'user-useremail@example.com',\n  generation: 1\n}, function(err) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Delete access controls on a {module:storage/bucket} or {module:storage/file}.</p>",
+      "summary": "<p>Delete access controls on a {module:storage/bucket} or {module:storage/file}.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Acl.prototype.delete = function(options, callback) {\n  var path = '/' + encodeURIComponent(options.scope);\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  this.makeReq_('DELETE', path, query, null, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Acl",
+      "cons": "Acl",
+      "name": "delete",
+      "string": "Acl.prototype.delete()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "object",
+          "function"
+        ],
+        "name": "options",
+        "description": "- Configuration object. If you want to     receive a list of all access controls, pass the callback function as the\n    only argument."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string="
+        ],
+        "name": "options.scope",
+        "description": "- Whose permissions will be fetched."
+      },
+      {
+        "type": "param",
+        "types": [
+          "int="
+        ],
+        "name": "options.generation",
+        "description": "- **File Objects Only** Select a specific     revision of this file (as opposed to the latest version, the default).\n"
+      },
+      {
+        "type": "alias",
+        "string": "acl.get "
+      },
+      {
+        "type": "example",
+        "string": "myBucket.acl.get({\n  scope: 'user-useremail@example.com'\n}, function(err, aclObject) {});\n\n//-\n// Get all access controls.\n//-\nmyBucket.acl.get(function(err, aclObjects) {\n  // aclObjects = [\n  //   {\n  //     scope: 'user-useremail@example.com',\n  //     role: 'owner'\n  //   }\n  // ]\n});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.get({\n  scope: 'user-useremail@example.com',\n  generation: 1\n} function(err, aclObject) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Get access controls on a {module:storage/bucket} or {module:storage/file}. If<br />a scope is omitted, you will receive an array of all applicable access<br />controls.</p>",
+      "summary": "<p>Get access controls on a {module:storage/bucket} or {module:storage/file}. If<br />a scope is omitted, you will receive an array of all applicable access<br />controls.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Acl.prototype.get = function(options, callback) {\n  var that = this;\n  var path = '';\n  var query = null;\n\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = null;\n  } else {\n    path = '/' + encodeURIComponent(options.scope);\n\n    if (options.generation) {\n      query = {\n        generation: options.generation\n      };\n    }\n  }\n\n  this.makeReq_('GET', path, query, null, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var results = resp;\n\n    if (resp.items) {\n      results = (resp.items || []).map(that.makeAclObject_);\n    } else {\n      results = that.makeAclObject_(results);\n    }\n\n    callback(null, results);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Acl",
+      "cons": "Acl",
+      "name": "get",
+      "string": "Acl.prototype.get()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "types": [
+          "object="
+        ],
+        "name": "options",
+        "description": "- Configuration object."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "options.scope",
+        "description": "- Whose permissions will be added."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "options.role",
+        "description": "- Permissions allowed for the defined scope. See     {module:storage#acl}."
+      },
+      {
+        "type": "param",
+        "types": [
+          "int="
+        ],
+        "name": "options.generation",
+        "description": "- **File Objects Only** Select a specific     revision of this file (as opposed to the latest version, the default)."
+      },
+      {
+        "type": "param",
+        "types": [
+          "function"
+        ],
+        "name": "callback",
+        "description": "- The callback function. "
+      },
+      {
+        "type": "alias",
+        "string": "acl.update "
+      },
+      {
+        "type": "example",
+        "string": "var storage = gcloud.storage();\n\nmyBucket.acl.update({\n  scope: 'user-useremail@example.com',\n  role: storage.acl.WRITER_ROLE\n}, function(err) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.update({\n  scope: 'user-useremail@example.com',\n  role: storage.acl.WRITER_ROLE,\n  generation: 1\n}, function(err) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Update access controls on a {module:storage/bucket} or {module:storage/file}.</p>",
+      "summary": "<p>Update access controls on a {module:storage/bucket} or {module:storage/file}.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Acl.prototype.update = function(options, callback) {\n  var that = this;\n  var path = '/' + encodeURIComponent(options.scope);\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  var body = {\n    role: options.role.toUpperCase()\n  };\n\n  this.makeReq_('PUT', path, query, body, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    callback(null, that.makeAclObject_(resp));\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Acl",
+      "cons": "Acl",
+      "name": "update",
+      "string": "Acl.prototype.update()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>Transform API responses to a consistent object format.</p>",
+      "summary": "<p>Transform API responses to a consistent object format.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "Acl.prototype.makeAclObject_ = function(accessControlObject) {\n  var obj = {\n    scope: accessControlObject.scope,\n    role: accessControlObject.role\n  };\n\n  if (accessControlObject.projectTeam) {\n    obj.projectTeam = accessControlObject.projectTeam;\n  }\n\n  return obj;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Acl",
+      "cons": "Acl",
+      "name": "makeAclObject_",
+      "string": "Acl.prototype.makeAclObject_()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "method",
+        "description": "- Action."
+      },
+      {
+        "type": "param",
+        "types": [
+          "string"
+        ],
+        "name": "path",
+        "description": "- Request path."
+      },
+      {
+        "type": "param",
+        "types": [
+          "*"
+        ],
+        "name": "query",
+        "description": "- Request query object."
+      },
+      {
+        "type": "param",
+        "types": [
+          "*"
+        ],
+        "name": "body",
+        "description": "- Request body contents."
+      },
+      {
+        "type": "param",
+        "types": [
+          "function"
+        ],
+        "name": "callback",
+        "description": "- The callback function."
+      }
+    ],
+    "description": {
+      "full": "<p>Patch requests up to the bucket&#39;s request object.</p>",
+      "summary": "<p>Patch requests up to the bucket&#39;s request object.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "Acl.prototype.makeReq_ = function(method, path, query, body, callback) {\n  this.makeReq(method, this.pathPrefix + path, query, body, callback);\n};\n\nmodule.exports = Acl;",
+    "ctx": {
+      "type": "method",
+      "constructor": "Acl",
+      "cons": "Acl",
+      "name": "makeReq_",
+      "string": "Acl.prototype.makeReq_()"
+    }
+  }
+]
