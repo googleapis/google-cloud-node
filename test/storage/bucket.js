@@ -200,6 +200,30 @@ describe('Bucket', function() {
         done();
       });
     });
+
+    it('should return prefixes', function(done) {
+      var fakePrefixes = ['fake-prefix-1'];
+      bucket.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, { prefixes: fakePrefixes });
+      };
+      bucket.getFiles(function(err, files, nextQuery, prefixes) {
+        assert.ifError(err);
+        assert(prefixes, fakePrefixes);
+        done();
+      });
+    });
+
+    it('should return null if no prefixes', function(done) {
+      bucket.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, {});
+      };
+      bucket.getFiles(function(err, files, nextQuery, prefixes) {
+        console.log(prefixes);
+        assert.ifError(err);
+        assert.strictEqual(nextQuery, null);
+        done();
+      });
+    });
   });
 
   describe('getMetadata', function() {
