@@ -5,6 +5,14 @@
 3. Add your (or your organization's) name to the AUTHORS and CONTRIBUTORS files.
 4. Send a pull request.
 
+## Code quality
+
+To check code use:
+
+``` sh
+$ npm run lint
+```
+
 ## Testing
 
 ### Unit Tests

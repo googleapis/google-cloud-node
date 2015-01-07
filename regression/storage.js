@@ -42,12 +42,12 @@ var files = {
 };
 
 function deleteFiles(bucket, callback) {
-  bucket.getFiles(function (err, files) {
+  bucket.getFiles(function(err, files) {
     if (err) {
       callback(err);
       return;
     }
-    async.map(files, function (file, next) {
+    async.map(files, function(file, next) {
       file.delete(next);
     }, callback);
   });
@@ -61,200 +61,200 @@ function setHash(obj, file, done) {
   var hash = crypto.createHash('md5');
   fs.createReadStream(obj[file].path)
     .on('data', hash.update.bind(hash))
-    .on('end', function () {
+    .on('end', function() {
       obj[file].hash = hash.digest('base64');
       done();
     });
 }
 
-describe('storage', function () {
+describe('storage', function() {
   var bucket;
 
-  before(function (done) {
-    storage.createBucket(BUCKET_NAME, function (err, newBucket) {
+  before(function(done) {
+    storage.createBucket(BUCKET_NAME, function(err, newBucket) {
       assert.ifError(err);
       bucket = newBucket;
       done();
     });
   });
 
-  after(function (done) {
-    deleteFiles(bucket, function (err) {
+  after(function(done) {
+    deleteFiles(bucket, function(err) {
       assert.ifError(err);
       bucket.delete(done);
     });
   });
 
-  describe('acls', function () {
+  describe('acls', function() {
     var USER_ACCOUNT = 'user-spsawchuk@gmail.com';
 
-    describe('buckets', function () {
-      it('should get access controls', function (done) {
-        bucket.acl.get(done, function (err, accessControls) {
+    describe('buckets', function() {
+      it('should get access controls', function(done) {
+        bucket.acl.get(done, function(err, accessControls) {
           assert.ifError(err);
           assert(Array.isArray(accessControls));
           done();
         });
       });
 
-      it('should add entity to default access controls', function (done) {
+      it('should add entity to default access controls', function(done) {
         bucket.acl.default.add({
           scope: USER_ACCOUNT,
           role: storage.acl.OWNER_ROLE
-        }, function (err, accessControl) {
+        }, function(err, accessControl) {
           assert.ifError(err);
           assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
 
           bucket.acl.default.get({
             scope: USER_ACCOUNT
-          }, function (err, accessControl) {
+          }, function(err, accessControl) {
             assert.ifError(err);
             assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
 
             bucket.acl.default.update({
               scope: USER_ACCOUNT,
               role: storage.acl.READER_ROLE
-            }, function (err, accessControl) {
+            }, function(err, accessControl) {
               assert.ifError(err);
               assert.equal(accessControl.role, storage.acl.READER_ROLE);
 
-              bucket.acl.default.delete({scope: USER_ACCOUNT}, done);
+              bucket.acl.default.delete({ scope: USER_ACCOUNT }, done);
             });
           });
         });
       });
 
-      it('should get default access controls', function (done) {
-        bucket.acl.default.get(function (err, accessControls) {
+      it('should get default access controls', function(done) {
+        bucket.acl.default.get(function(err, accessControls) {
           assert.ifError(err);
           assert(Array.isArray(accessControls));
           done();
         });
       });
 
-      it('should grant an account access', function (done) {
+      it('should grant an account access', function(done) {
         bucket.acl.add({
           scope: USER_ACCOUNT,
           role: storage.acl.OWNER_ROLE
-        }, function (err, accessControl) {
+        }, function(err, accessControl) {
           assert.ifError(err);
           assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
 
-          bucket.acl.get({scope: USER_ACCOUNT}, function (err, accessControl) {
+          bucket.acl.get({ scope: USER_ACCOUNT }, function(err, accessControl) {
             assert.ifError(err);
             assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
 
-            bucket.acl.delete({scope: USER_ACCOUNT}, done);
+            bucket.acl.delete({ scope: USER_ACCOUNT }, done);
           });
         });
       });
 
-      it('should update an account', function (done) {
+      it('should update an account', function(done) {
         bucket.acl.add({
           scope: USER_ACCOUNT,
           role: storage.acl.OWNER_ROLE
-        }, function (err, accessControl) {
+        }, function(err, accessControl) {
           assert.ifError(err);
           assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
 
           bucket.acl.update({
             scope: USER_ACCOUNT,
             role: storage.acl.WRITER_ROLE
-          }, function (err, accessControl) {
+          }, function(err, accessControl) {
             assert.ifError(err);
             assert.equal(accessControl.role, storage.acl.WRITER_ROLE);
 
-            bucket.acl.delete({scope: USER_ACCOUNT}, done);
+            bucket.acl.delete({ scope: USER_ACCOUNT }, done);
           });
         });
       });
     });
 
-    describe('files', function () {
+    describe('files', function() {
       var file;
 
-      before(function (done) {
-        bucket.upload(files.logo.path, function (err, f) {
+      before(function(done) {
+        bucket.upload(files.logo.path, function(err, f) {
           assert.ifError(err);
           file = f;
           done();
         });
       });
 
-      after(function (done) {
+      after(function(done) {
         file.delete(done);
       });
 
-      it('should get access controls', function (done) {
-        file.acl.get(done, function (err, accessControls) {
+      it('should get access controls', function(done) {
+        file.acl.get(done, function(err, accessControls) {
           assert.ifError(err);
           assert(Array.isArray(accessControls));
           done();
         });
       });
 
-      it('should not expose default api', function () {
+      it('should not expose default api', function() {
         assert.equal(typeof file.default, 'undefined');
       });
 
-      it('should grant an account access', function (done) {
+      it('should grant an account access', function(done) {
         file.acl.add({
           scope: USER_ACCOUNT,
           role: storage.acl.OWNER_ROLE
-        }, function (err, accessControl) {
+        }, function(err, accessControl) {
           assert.ifError(err);
           assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
 
-          file.acl.get({scope: USER_ACCOUNT}, function (err, accessControl) {
+          file.acl.get({ scope: USER_ACCOUNT }, function(err, accessControl) {
             assert.ifError(err);
             assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
 
-            file.acl.delete({scope: USER_ACCOUNT}, done);
+            file.acl.delete({ scope: USER_ACCOUNT }, done);
           });
         });
       });
 
-      it('should update an account', function (done) {
+      it('should update an account', function(done) {
         file.acl.add({
           scope: USER_ACCOUNT,
           role: storage.acl.OWNER_ROLE
-        }, function (err, accessControl) {
+        }, function(err, accessControl) {
           assert.ifError(err);
           assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
 
           file.acl.update({
             scope: USER_ACCOUNT,
             role: storage.acl.READER_ROLE
-          }, function (err, accessControl) {
+          }, function(err, accessControl) {
             assert.ifError(err);
 
             assert.equal(accessControl.role, storage.acl.READER_ROLE);
 
-            file.acl.delete({scope: USER_ACCOUNT}, done);
+            file.acl.delete({ scope: USER_ACCOUNT }, done);
           });
         });
       });
     });
   });
 
-  describe('getting buckets', function () {
+  describe('getting buckets', function() {
     var bucketsToCreate = [
       generateBucketName(), generateBucketName(), generateBucketName()
     ];
 
-    before(function (done) {
+    before(function(done) {
       async.map(bucketsToCreate, storage.createBucket.bind(storage), done);
     });
 
-    after(function (done) {
-      async.parallel(bucketsToCreate.map(function (bucket) {
-        return function (done) {
+    after(function(done) {
+      async.parallel(bucketsToCreate.map(function(bucket) {
+        return function(done) {
           storage.bucket(bucket).delete(done);
         };
       }), done);
     });
 
-    it('should get buckets', function (done) {
+    it('should get buckets', function(done) {
       storage.getBuckets(getBucketsHandler);
 
       var createdBuckets = [];
@@ -262,7 +262,7 @@ describe('storage', function () {
       var MAX_RETRIES = 2;
 
       function getBucketsHandler(err, buckets, nextQuery) {
-        buckets.forEach(function (bucket) {
+        buckets.forEach(function(bucket) {
           if (bucketsToCreate.indexOf(bucket.name) > -1) {
             createdBuckets.push(bucket);
           }
@@ -283,8 +283,8 @@ describe('storage', function () {
     });
   });
 
-  describe('bucket metadata', function () {
-    it('should allow setting metadata on a bucket', function (done) {
+  describe('bucket metadata', function() {
+    it('should allow setting metadata on a bucket', function(done) {
       var metadata = {
         website: {
           mainPageSuffix: 'http://fakeuri',
@@ -292,7 +292,7 @@ describe('storage', function () {
         }
       };
 
-      bucket.setMetadata(metadata, function (err, meta) {
+      bucket.setMetadata(metadata, function(err, meta) {
         assert.ifError(err);
         assert.deepEqual(meta.website, metadata.website);
         done();
@@ -300,11 +300,11 @@ describe('storage', function () {
     });
   });
 
-  describe('write, read, and remove files', function () {
-    before(function (done) {
+  describe('write, read, and remove files', function() {
+    before(function(done) {
       var doneCalled = 0;
-      Object.keys(files).forEach(function (file) {
-        setHash(files, file, function () {
+      Object.keys(files).forEach(function(file) {
+        setHash(files, file, function() {
           if (++doneCalled === Object.keys(files).length) {
             done();
           }
@@ -312,38 +312,38 @@ describe('storage', function () {
       });
     });
 
-    it('should read/write from/to a file in a directory', function (done) {
+    it('should read/write from/to a file in a directory', function(done) {
       var file = bucket.file('directory/file');
       var contents = 'test';
 
-      var writeStream = file.createWriteStream({resumable: false});
+      var writeStream = file.createWriteStream({ resumable: false });
       writeStream.write(contents);
       writeStream.end();
 
       writeStream.on('error', done);
-      writeStream.on('complete', function () {
+      writeStream.on('complete', function() {
         var data = new Buffer('');
 
         file.createReadStream()
           .on('error', done)
-          .on('data', function (chunk) {
+          .on('data', function(chunk) {
             data = Buffer.concat([data, chunk]);
           })
-          .on('complete', function () {
+          .on('complete', function() {
             assert.equal(data.toString(), contents);
             done();
           });
       });
     });
 
-    it('should read a byte range from a file', function (done) {
-      bucket.upload(files.big.path, function (err, file) {
+    it('should read a byte range from a file', function(done) {
+      bucket.upload(files.big.path, function(err, file) {
         assert.ifError(err);
 
         var fileSize = file.metadata.size;
         var byteRange = {
-          start: Math.floor(fileSize * 1 / 3),
-          end: Math.floor(fileSize * 2 / 3)
+          start: Math.floor(fileSize * 1/3),
+          end: Math.floor(fileSize * 2/3)
         };
         var expectedContentSize = byteRange.start + 1;
 
@@ -353,35 +353,35 @@ describe('storage', function () {
             sizeStreamed += chunk.length;
           })
           .on('error', done)
-          .on('complete', function () {
+          .on('complete', function() {
             assert.equal(sizeStreamed, expectedContentSize);
             file.delete(done);
           });
       });
     });
 
-    describe('stream write', function () {
-      it('should stream write, then remove file (3mb)', function (done) {
+    describe('stream write', function() {
+      it('should stream write, then remove file (3mb)', function(done) {
         var file = bucket.file('LargeFile');
         fs.createReadStream(files.big.path)
-          .pipe(file.createWriteStream({resumable: false}))
+          .pipe(file.createWriteStream({ resumable: false }))
           .on('error', done)
-          .on('complete', function (fileObject) {
+          .on('complete', function(fileObject) {
             assert.equal(fileObject.md5Hash, files.big.hash);
             file.delete(done);
           });
       });
 
-      it('should write metadata', function (done) {
+      it('should write metadata', function(done) {
         var options = {
-          metadata: {contentType: 'image/png'},
+          metadata: { contentType: 'image/png' },
           resumable: false
         };
 
-        bucket.upload(files.logo.path, options, function (err, file) {
+        bucket.upload(files.logo.path, options, function(err, file) {
           assert.ifError(err);
 
-          file.getMetadata(function (err, metadata) {
+          file.getMetadata(function(err, metadata) {
             assert.ifError(err);
             assert.equal(metadata.contentType, options.metadata.contentType);
             file.delete(done);
@@ -389,17 +389,17 @@ describe('storage', function () {
         });
       });
 
-      it('should resume an upload after an interruption', function (done) {
-        fs.stat(files.big.path, function (err, metadata) {
+      it('should resume an upload after an interruption', function(done) {
+        fs.stat(files.big.path, function(err, metadata) {
           assert.ifError(err);
 
           var fileSize = metadata.size;
           var file = bucket.file('LargeFile');
 
-          upload({interrupt: true}, function (err) {
+          upload({ interrupt: true }, function(err) {
             assert.ifError(err);
 
-            upload({interrupt: false}, function (err, metadata) {
+            upload({ interrupt: false }, function(err, metadata) {
               assert.ifError(err);
 
               assert.equal(metadata.size, fileSize);
@@ -411,7 +411,7 @@ describe('storage', function () {
             var sizeStreamed = 0;
 
             fs.createReadStream(files.big.path)
-              .pipe(through(function (chunk, enc, next) {
+              .pipe(through(function(chunk, enc, next) {
                 sizeStreamed += chunk.length;
 
                 if (opts.interrupt && sizeStreamed >= fileSize / 2) {
@@ -424,14 +424,14 @@ describe('storage', function () {
               }))
               .pipe(file.createWriteStream())
               .on('error', callback)
-              .on('complete', function (fileObject) {
+              .on('complete', function(fileObject) {
                 callback(null, fileObject);
               });
           }
         });
       });
 
-      it('should write/read/remove from a buffer', function (done) {
+      it('should write/read/remove from a buffer', function(done) {
         tmp.setGracefulCleanup();
         tmp.file(function _tempFileCreated(err, tmpFilePath) {
           assert.ifError(err);
@@ -444,15 +444,15 @@ describe('storage', function () {
           writable.write(fileContent);
           writable.end();
 
-          writable.on('complete', function () {
+          writable.on('complete', function() {
             file.createReadStream()
               .pipe(fs.createWriteStream(tmpFilePath))
               .on('error', done)
-              .on('finish', function () {
-                file.delete(function (err) {
+              .on('finish', function() {
+                file.delete(function(err) {
                   assert.ifError(err);
 
-                  fs.readFile(tmpFilePath, function (err, data) {
+                  fs.readFile(tmpFilePath, function(err, data) {
                     assert.equal(data, fileContent);
                     done();
                   });
@@ -463,10 +463,10 @@ describe('storage', function () {
       });
     });
 
-    it('should copy an existing file', function (done) {
-      bucket.upload(files.logo.path, 'CloudLogo', function (err, file) {
+    it('should copy an existing file', function(done) {
+      bucket.upload(files.logo.path, 'CloudLogo', function(err, file) {
         assert.ifError(err);
-        file.copy('CloudLogoCopy', function (err, copiedFile) {
+        file.copy('CloudLogoCopy', function(err, copiedFile) {
           assert.ifError(err);
           async.parallel([
             file.delete.bind(file),
@@ -477,19 +477,19 @@ describe('storage', function () {
     });
   });
 
-  describe('list files', function () {
+  describe('list files', function() {
     var filenames = ['CloudLogo1', 'CloudLogo2', 'CloudLogo3'];
 
-    before(function (done) {
-      deleteFiles(bucket, function (err) {
+    before(function(done) {
+      deleteFiles(bucket, function(err) {
         assert.ifError(err);
 
         var file = bucket.file(filenames[0]);
         fs.createReadStream(files.logo.path)
           .pipe(file.createWriteStream())
           .on('error', done)
-          .on('complete', function () {
-            file.copy(filenames[1], function (err, copiedFile) {
+          .on('complete', function() {
+            file.copy(filenames[1], function(err, copiedFile) {
               assert.ifError(err);
               copiedFile.copy(filenames[2], done);
             });
@@ -497,17 +497,17 @@ describe('storage', function () {
       });
     });
 
-    after(function (done) {
+    after(function(done) {
       async.parallel(
-        filenames.map(function (filename) {
-          return function (callback) {
+        filenames.map(function(filename) {
+          return function(callback) {
             bucket.file(filename).delete(callback);
           };
         }), done);
     });
 
-    it('should get files', function (done) {
-      bucket.getFiles(function (err, files, nextQuery) {
+    it('should get files', function(done) {
+      bucket.getFiles(function(err, files, nextQuery) {
         assert.ifError(err);
         assert.equal(files.length, filenames.length);
         assert.equal(nextQuery, null);
@@ -515,13 +515,13 @@ describe('storage', function () {
       });
     });
 
-    it('should paginate the list', function (done) {
-      var query = {maxResults: filenames.length - 1};
-      bucket.getFiles(query, function (err, files, nextQuery) {
+    it('should paginate the list', function(done) {
+      var query = { maxResults: filenames.length - 1 };
+      bucket.getFiles(query, function(err, files, nextQuery) {
         assert.ifError(err);
         assert.equal(files.length, filenames.length - 1);
         assert(nextQuery);
-        bucket.getFiles(nextQuery, function (err, files) {
+        bucket.getFiles(nextQuery, function(err, files) {
           assert.ifError(err);
           assert.equal(files.length, 1);
           done();
@@ -530,17 +530,17 @@ describe('storage', function () {
     });
   });
 
-  describe('prefixes', function () {
+  describe('prefixes', function() {
     var filenames = ['a/b', 'a/c', 'd', 'e', 'e/f', 'e/f/g'];
 
-    before(function (done) {
+    before(function(done) {
       async.parallel(
-        filenames.map(function (filename) {
-          return function (callback) {
+        filenames.map(function(filename) {
+          return function(callback) {
             var file = bucket.file(filename);
             var contents = 'test';
 
-            var writeStream = file.createWriteStream({resumable: false});
+            var writeStream = file.createWriteStream({ resumable: false });
             writeStream.on('error', function() {
               callback();
             });
@@ -553,18 +553,18 @@ describe('storage', function () {
         }), done);
     });
 
-    after(function (done) {
+    after(function(done) {
       async.parallel(
-        filenames.map(function (filename) {
-          return function (callback) {
+        filenames.map(function(filename) {
+          return function(callback) {
             bucket.file(filename).delete(callback);
           };
         }), done);
     });
 
-    it('should use delimiter', function (done) {
-      var query = {delimiter: '/'};
-      bucket.getFiles(query, function (err, files, nextQuery, prefixes) {
+    it('should use delimiter', function(done) {
+      var query = { delimiter: '/' };
+      bucket.getFiles(query, function(err, files, nextQuery, prefixes) {
         assert.ifError(err);
         assert.equal(files.length, 2);
         ['a/', 'e/'].forEach(function(val) {
@@ -575,9 +575,9 @@ describe('storage', function () {
       });
     });
 
-    it('should use prefix & delimiter', function (done) {
-      var query = {delimiter: '/', prefix: 'e/'};
-      bucket.getFiles(query, function (err, files, nextQuery, prefixes) {
+    it('should use prefix & delimiter', function(done) {
+      var query = { delimiter: '/', prefix: 'e/' };
+      bucket.getFiles(query, function(err, files, nextQuery, prefixes) {
         assert.ifError(err);
         assert.equal(files.length, 1);
         ['e/f/'].forEach(function(val) {
@@ -589,11 +589,11 @@ describe('storage', function () {
     });
   });
 
-  describe('sign urls', function () {
+  describe('sign urls', function() {
     var localFile = fs.readFileSync(files.logo.path);
     var file;
 
-    before(function (done) {
+    before(function(done) {
       file = bucket.file('LogoToSign.jpg');
       fs.createReadStream(files.logo.path)
         .pipe(file.createWriteStream())
@@ -601,27 +601,27 @@ describe('storage', function () {
         .on('complete', done.bind(null, null));
     });
 
-    it('should create a signed read url', function (done) {
+    it('should create a signed read url', function(done) {
       file.getSignedUrl({
         action: 'read',
         expires: Math.round(Date.now() / 1000) + 5
-      }, function (err, signedReadUrl) {
+      }, function(err, signedReadUrl) {
         assert.ifError(err);
-        request.get(signedReadUrl, function (err, resp, body) {
+        request.get(signedReadUrl, function(err, resp, body) {
           assert.equal(body, localFile);
           file.delete(done);
         });
       });
     });
 
-    it('should create a signed delete url', function (done) {
+    it('should create a signed delete url', function(done) {
       file.getSignedUrl({
         action: 'delete',
         expires: Math.round(Date.now() / 1000) + 283473274
-      }, function (err, signedDeleteUrl) {
+      }, function(err, signedDeleteUrl) {
         assert.ifError(err);
-        request.del(signedDeleteUrl, function () {
-          file.getMetadata(function (err) {
+        request.del(signedDeleteUrl, function() {
+          file.getMetadata(function(err) {
             assert.equal(err.code, 404);
             done();
           });
