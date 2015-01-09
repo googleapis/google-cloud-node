@@ -12,3 +12,4 @@ deploy:
     tags: true
     repo: GoogleCloudPlatform/gcloud-node
     all_branches: true
+sudo: false
