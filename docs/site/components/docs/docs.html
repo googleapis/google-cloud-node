@@ -20,7 +20,9 @@
         <span class="toggle" ng-hide="showGcloudDocs">▹</span>
         <span class="toggle" ng-show="showGcloudDocs">▿</span>
       </div>
-      Getting Started with <code>gcloud</code>
+      <a ng-click="showGcloudDocs = !showGcloudDocs">
+        Getting Started with <code>gcloud</code>
+      </a>
     </h3>
     <article ng-if="showGcloudDocs">
       <p>
