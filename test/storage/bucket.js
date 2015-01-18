@@ -118,15 +118,19 @@ describe('Bucket', function() {
     var file;
     var metadata = { a: 'b' };
 
-    beforeEach(function() {
-      file = bucket.file(FILE_NAME, metadata);
+    it('should throw if no name was provided', function() {
+      assert.throws(function() {
+        file = bucket.file();
+      }, /A file name must be specified./);
     });
 
     it('should return a File object', function() {
+      file = bucket.file(FILE_NAME, metadata);
       assert(file instanceof FakeFile);
     });
 
     it('should pass filename to File object', function() {
+      file = bucket.file(FILE_NAME, metadata);
       assert.equal(file.name, FILE_NAME);
     });
   });

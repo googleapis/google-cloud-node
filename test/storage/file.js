@@ -125,12 +125,6 @@ describe('File', function() {
   });
 
   describe('initialization', function() {
-    it('should throw if no name is provided', function() {
-      assert.throws(function() {
-        new File(bucket);
-      }, /A file name must be specified/);
-    });
-
     it('should assign file name', function() {
       assert.equal(file.name, FILE_NAME);
     });
