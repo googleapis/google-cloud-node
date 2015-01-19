@@ -28,6 +28,7 @@ $ npm install --save gcloud
 - [gcloud-node-todos][gcloud-todos] - A TodoMVC backend using gcloud-node and Datastore.
 - [gitnpm][gitnpm] - Easily lookup an npm package's GitHub repo using gcloud-node and Google App Engine.
 - [gcloud-keystore][gcloud-keystore] - Use Datastore as a simple key-value store.
+- [hya-wave][hya-wave] - Cloud-based web sample editor. Part of the [hya-io][hya-io] family of products.
 
 ## Authorization
 
@@ -234,3 +235,5 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [cloud-storage]: https://cloud.google.com/storage/
 [cloud-storage-docs]: https://cloud.google.com/storage/docs/overview
 [cloud-storage-create-bucket]: https://cloud.google.com/storage/docs/cloud-console#_creatingbuckets
+[hya-wave]: https://wav.hya.io
+[hya-io]: https://hya.io
