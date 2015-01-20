@@ -1,16 +1,19 @@
 <script id="faq-header.html" type="text/ng-template">
-  <header header title="Frequently Asked Questions">
-    <div class="versions header--gh-edit-btn">
-      <a href="https://github.com/GoogleCloudPlatform/gcloud-node/edit/master/docs/faq.md" class="v-btn">
-        <img src="site/img/icon-link-github.svg" />
-        Edit on GitHub
-      </a>
+  <header header title="FAQ">
+    <div class="row row--right">
+      <div class="col margin-vertical">
+        <a href="https://github.com/GoogleCloudPlatform/gcloud-node/edit/master/docs/faq.md"
+          class="v-btn">
+          <img src="site/img/icon-link-github.svg" />
+          Edit on GitHub
+        </a>
+      </div>
     </div>
   </header>
 </script>
 
 <div subpage
   header-templateUrl="faq-header.html"
-  title="Frequently Asked Questions">
+  title="FAQ">
   <btf-markdown ng-include="'faq.md'"></btf-markdown>
 </div>
