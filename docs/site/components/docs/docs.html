@@ -45,7 +45,7 @@ var gcloud = require('gcloud');
 
 // Elsewhere
 var gcloud = require('gcloud')({
-keyFilename: '/path/to/keyfile.json'
+  keyFilename: '/path/to/keyfile.json'
 });</div>
       <p>
         In any environment, you are free to provide these and other default properties, which eventually will be passed to the <code>gcloud</code> sub-modules (Datastore, Storage, etc.).
@@ -72,8 +72,8 @@ var bigquery = gcloud.bigquery();</div>
       </p>
       <div hljs>
 var dataset = gcloud.datastore.dataset({
-projectId: 'myProject',
-keyFilename: '/path/to/keyfile.json'
+  projectId: 'myProject',
+  keyFilename: '/path/to/keyfile.json'
 });</div>
       <p ng-if="!isActiveUrl('/docs/datastore/dataset')">
         See <a href="#/docs/{{version}}/datastore/dataset">the Dataset documentation</a> for examples of how to query the datastore, save entities, run a transaction, and others.
@@ -90,8 +90,8 @@ keyFilename: '/path/to/keyfile.json'
       </p>
       <div hljs>
 var pubsub = gcloud.pubsub({
-projectId: 'myProject',
-keyFilename: '/path/to/keyfile.json'
+  projectId: 'myProject',
+  keyFilename: '/path/to/keyfile.json'
 });</div>
       <p>
         See the examples below, which demonstrate everything from creating a topic to subscribing to messages on a topic.
