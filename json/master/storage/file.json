@@ -151,7 +151,11 @@
     "tags": [
       {
         "type": "mixes",
-        "string": "module:storage/acl"
+        "string": "module:storage/acl "
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Make a file publicly readable.\n//-\nmyFile.acl.add({\n  scope: 'allUsers',\n  permission: Storage.acl.READER_ROLE\n}, function(err, aclObject) {});"
       }
     ],
     "description": {

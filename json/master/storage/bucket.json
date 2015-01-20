@@ -206,7 +206,11 @@
     "tags": [
       {
         "type": "mixes",
-        "string": "module:storage/acl"
+        "string": "module:storage/acl "
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Make a bucket's contents publicly readable.\n//-\nmyBucket.acl.add({\n  scope: 'allUsers',\n  permission: Storage.acl.READER_ROLE\n}, function(err, aclObject) {});"
       }
     ],
     "description": {
