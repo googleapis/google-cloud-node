@@ -16,7 +16,7 @@ angular
         } else {
           $scope.isActiveUrl = function (url) {
             return $location.path() === url.replace('#', '');
-          }
+          };
         }
       }
     };
