@@ -329,7 +329,6 @@ angular
     $scope.module = $routeParams.module;
     $scope.methods = methods;
     $scope.version = $routeParams.version;
-    $scope.isLatestVersion = $scope.version == versions[0];
     $scope.versions = versions;
     $scope.links = links;
   })
