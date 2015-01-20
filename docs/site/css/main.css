@@ -149,6 +149,63 @@ a {
     cursor: pointer;
 }
 
+
+/* Grid
+   ========================================================================== */
+
+.row:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.row--right,
+[class*='col'] {
+    float: none;
+}
+
+@media only screen and (min-width: 45em) {
+    .row--right {
+        float: right;
+    }
+
+    [class*='col'] {
+        float: left;
+    }
+
+    .col-10 { width: 10%; }
+    .col-20 { width: 20%; }
+    .col-25 { width: 25%; }
+    .col-30 { width: 30%; }
+    .col-33 { width: 33%; }
+    .col-40 { width: 40%; }
+    .col-50 { width: 50%; }
+    .col-60 { width: 60%; }
+    .col-66 { width: 66%; }
+    .col-70 { width: 70%; }
+    .col-75 { width: 75%; }
+    .col-80 { width: 80%; }
+    .col-90 { width: 90%; }
+}
+
+
+/* Utilities
+   ========================================================================== */
+
+.padding {
+    padding: 10px;
+}
+
+.margin {
+    margin: 10px;
+}
+
+.margin-vertical {
+    margin: 10px 0;
+}
+
+
+
 /* Header
    ========================================================================== */
 
@@ -681,8 +738,6 @@ a {
 */
 
 .versions {
-    display: inline-block;
-    margin-top: 2em;
 }
 
 .versions span,
@@ -700,6 +755,7 @@ a {
 }
 
 .v-btn {
+    margin: 0.5em 0;
     padding: 0.5em;
     border: 1px solid rgba(0,0,0,0.2);
     background: rgba(0,0,0,0.07);
@@ -1002,27 +1058,14 @@ a {
 }
 
 @media only screen and (min-width: 45em) {
-
-    /*
-     Docs Header
-    */
-
-    .versions {
-        position: absolute;
-        top: 6em;
-        right: 2em;
-        margin: 0;
-    }
-
     .v-btn {
         font-size: 0.7em;
         line-height: normal;
+        margin-left: .5em;
     }
-
 }
 
 @media only screen and (min-width: 50em) {
-
     /*
     Header
     */
@@ -1116,13 +1159,6 @@ a {
     }
 
     /*
-     GitHub Edit Heade Button
-     */
-    .header--gh-edit-btn {
-      top: 8em;
-    }
-
-    /*
      Content
     */
 
@@ -1173,15 +1209,12 @@ a {
         font-size: 0.9em;
     }
 
-    .col {
+    .quote-box {
         width: 46%;
-    }
-
-    .col-left {
         float: left;
     }
 
-    .col-right {
+    .quote-box--supplementary {
         float: right;
     }
 
