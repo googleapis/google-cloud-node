@@ -155,7 +155,7 @@
       },
       {
         "type": "example",
-        "string": "//-\n// Make a file publicly readable.\n//-\nmyFile.acl.add({\n  scope: 'allUsers',\n  permission: Storage.acl.READER_ROLE\n}, function(err, aclObject) {});"
+        "string": "//-\n// Make a file publicly readable.\n//-\nmyFile.acl.add({\n  scope: 'allUsers',\n  permission: storage.acl.READER_ROLE\n}, function(err, aclObject) {});"
       }
     ],
     "description": {

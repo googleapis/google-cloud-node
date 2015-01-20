@@ -185,7 +185,7 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\n\n// From Google Compute Engine\nvar albums = gcloud.storage.bucket('albums');\n\n// From elsewhere\nvar photos = gcloud.storage.bucket({\n  keyFilename: '/path/to/keyfile.json',\n  name: 'bucket'\n});"
+        "string": "var gcloud = require('gcloud');\nvar storage = gcloud.storage();\n\n// From Google Compute Engine\nvar albums = storage.bucket('albums');\n\n// From elsewhere\nvar photos = storage.bucket({\n  keyFilename: '/path/to/keyfile.json', // If you have not yet provided it.\n  name: 'bucket'\n});"
       }
     ],
     "description": {
@@ -210,7 +210,7 @@
       },
       {
         "type": "example",
-        "string": "//-\n// Make a bucket's contents publicly readable.\n//-\nmyBucket.acl.add({\n  scope: 'allUsers',\n  permission: Storage.acl.READER_ROLE\n}, function(err, aclObject) {});"
+        "string": "//-\n// Make a bucket's contents publicly readable.\n//-\nmyBucket.acl.add({\n  scope: 'allUsers',\n  permission: storage.acl.READER_ROLE\n}, function(err, aclObject) {});"
       }
     ],
     "description": {

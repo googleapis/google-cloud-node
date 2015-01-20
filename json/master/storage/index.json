@@ -143,7 +143,7 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\n\n//-\n// From Google Compute Engine and Google App Engine.\n//-\n\n// Access `storage` through the `gcloud` module directly.\nvar musicBucket = gcloud.storage().bucket('music');\n\n//-\n// Elsewhere.\n//-\n\n// Provide configuration details up-front.\nvar myProject = gcloud({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar albums = myProject.storage().bucket('albums');\nvar photos = myProject.storage().bucket('photos');\n\n\n// Override default configuration details.\nvar storage = myProject.storage({\n  keyFilename: '/path/to/another/keyfile.json'\n});\nvar records = storage.bucket('records');"
+        "string": "var gcloud = require('gcloud');\n\n//-\n// From Google Compute Engine and Google App Engine.\n//-\n\n// Access `storage` through the `gcloud` module directly.\nvar storage = gcloud.storage();\nvar musicBucket = storage.bucket('music');\n\n//-\n// Elsewhere.\n//-\n\n// Provide configuration details up-front.\nvar myProject = gcloud({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\n// Use default configuration details.\nvar storage = myProject.storage();\nvar albums = storage.bucket('albums');\nvar photos = storage.bucket('photos');\n\n\n// Override default configuration details.\nvar storage = myProject.storage({\n  keyFilename: '/path/to/another/keyfile.json'\n});\nvar records = storage.bucket('records');"
       }
     ],
     "description": {
@@ -170,13 +170,13 @@
       },
       {
         "type": "example",
-        "string": "var storage = gcloud.storage();\nvar albums = storage.bucket('albums');\n\n//-\n// Make all of the files currently in a bucket publicly readable.\n//-\nalbums.acl.add({\n  scope: 'allUsers',\n  permission: Storage.acl.READER_ROLE\n}, function(err, aclObject) {});\n\n//-\n// Make any new objects added to a bucket publicly readable.\n//-\nalbums.acl.default.add({\n  scope: 'allUsers',\n  permission: Storage.acl.READER_ROLE\n}, function(err, aclObject) {});\n\n//-\n// Grant a user ownership permissions to a bucket.\n//-\n\nalbums.acl.add({\n  scope: 'user-useremail@example.com',\n  permission: Storage.acl.OWNER_ROLE\n}, function(err, aclObject) {});"
+        "string": "var storage = gcloud.storage();\nvar albums = storage.bucket('albums');\n\n//-\n// Make all of the files currently in a bucket publicly readable.\n//-\nalbums.acl.add({\n  scope: 'allUsers',\n  permission: storage.acl.READER_ROLE\n}, function(err, aclObject) {});\n\n//-\n// Make any new objects added to a bucket publicly readable.\n//-\nalbums.acl.default.add({\n  scope: 'allUsers',\n  permission: storage.acl.READER_ROLE\n}, function(err, aclObject) {});\n\n//-\n// Grant a user ownership permissions to a bucket.\n//-\n\nalbums.acl.add({\n  scope: 'user-useremail@example.com',\n  permission: storage.acl.OWNER_ROLE\n}, function(err, aclObject) {});"
       }
     ],
     "description": {
-      "full": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p><p>This object provides constants to refer to the three permission levels that<br />can be granted to a scope:</p><ul>\n<li><code>Storage.acl.OWNER_ROLE</code> - (&quot;OWNER&quot;)</li>\n<li><code>Storage.acl.READER_ROLE</code> - (&quot;READER&quot;)</li>\n<li><code>Storage.acl.WRITER_ROLE</code> - (&quot;WRITER&quot;)</li>\n</ul>\n<p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p>",
+      "full": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p><p>This object provides constants to refer to the three permission levels that<br />can be granted to a scope:</p><ul>\n<li><code>storage.acl.OWNER_ROLE</code> - (&quot;OWNER&quot;)</li>\n<li><code>storage.acl.READER_ROLE</code> - (&quot;READER&quot;)</li>\n<li><code>storage.acl.WRITER_ROLE</code> - (&quot;WRITER&quot;)</li>\n</ul>\n<p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p>",
       "summary": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p>",
-      "body": "<p>This object provides constants to refer to the three permission levels that<br />can be granted to a scope:</p><ul>\n<li><code>Storage.acl.OWNER_ROLE</code> - (&quot;OWNER&quot;)</li>\n<li><code>Storage.acl.READER_ROLE</code> - (&quot;READER&quot;)</li>\n<li><code>Storage.acl.WRITER_ROLE</code> - (&quot;WRITER&quot;)</li>\n</ul>\n<p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p>"
+      "body": "<p>This object provides constants to refer to the three permission levels that<br />can be granted to a scope:</p><ul>\n<li><code>storage.acl.OWNER_ROLE</code> - (&quot;OWNER&quot;)</li>\n<li><code>storage.acl.READER_ROLE</code> - (&quot;READER&quot;)</li>\n<li><code>storage.acl.WRITER_ROLE</code> - (&quot;WRITER&quot;)</li>\n</ul>\n<p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p>"
     },
     "isPrivate": false,
     "ignore": false,
@@ -210,7 +210,7 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json'\n});\n\nvar albums = gcloud.storage().bucket('albums');\nvar photos = gcloud.storage().bucket('photos');"
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json'\n});\n\nvar storage = gcloud.storage();\n\nvar albums = storage.bucket('albums');\nvar photos = storage.bucket('photos');"
       }
     ],
     "description": {
