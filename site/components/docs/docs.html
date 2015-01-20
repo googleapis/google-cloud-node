@@ -1,11 +1,20 @@
 <script id="docs-header.html" type="text/ng-template">
   <header header title="Node.js">
-    <div class="versions" ng-show="showReference">
-      <span class="v-current">{{version}} <i ng-if="isLatestVersion">(Latest version)</i></span>
-      <a href="#/docs/history" class="v-btn">
-        <img src="site/img/icon-arrow-bullet.svg" />
-        See version History
-      </a>
+    <div class="row row--right">
+      <div class="col margin-vertical">
+        <a href="https://github.com/GoogleCloudPlatform/gcloud-node/issues/new"
+          class="v-btn">
+          <img src="site/img/icon-link-github.svg" />
+          Report an Issue
+        </a>
+      </div>
+      <div class="col margin-vertical">
+        <a href="#/docs/history" ng-show="showReference"
+          class="v-btn">
+          <img src="site/img/icon-arrow-bullet.svg" />
+          Version History (<i>{{version}}</i>)
+        </a>
+      </div>
     </div>
   </header>
 </script>
@@ -45,7 +54,7 @@ var gcloud = require('gcloud');
 
 // Elsewhere
 var gcloud = require('gcloud')({
-keyFilename: '/path/to/keyfile.json'
+  keyFilename: '/path/to/keyfile.json'
 });</div>
       <p>
         In any environment, you are free to provide these and other default properties, which eventually will be passed to the <code>gcloud</code> sub-modules (Datastore, Storage, etc.).
@@ -72,8 +81,8 @@ var bigquery = gcloud.bigquery();</div>
       </p>
       <div hljs>
 var dataset = gcloud.datastore.dataset({
-projectId: 'myProject',
-keyFilename: '/path/to/keyfile.json'
+  projectId: 'myProject',
+  keyFilename: '/path/to/keyfile.json'
 });</div>
       <p ng-if="!isActiveUrl('/docs/datastore/dataset')">
         See <a href="#/docs/{{version}}/datastore/dataset">the Dataset documentation</a> for examples of how to query the datastore, save entities, run a transaction, and others.
@@ -90,8 +99,8 @@ keyFilename: '/path/to/keyfile.json'
       </p>
       <div hljs>
 var pubsub = gcloud.pubsub({
-projectId: 'myProject',
-keyFilename: '/path/to/keyfile.json'
+  projectId: 'myProject',
+  keyFilename: '/path/to/keyfile.json'
 });</div>
       <p>
         See the examples below, which demonstrate everything from creating a topic to subscribing to messages on a topic.
