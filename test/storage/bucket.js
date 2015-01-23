@@ -152,6 +152,26 @@ describe('Bucket', function() {
       bucket.getFiles({ maxResults: 5, pageToken: token }, util.noop);
     });
 
+    it('should get files based on folder', function(done) {
+      var folder = 'hello/world';
+      bucket.makeReq_ = function(method, path, query, body, callback) {
+        assert.deepEqual(query, { delimiter: '/', prefix: 'hello/world/' });
+        callback(null, { items: [] });
+      };
+      bucket.getFiles({ folder: folder }, done);
+    });
+
+    it('should return prefixes value', function(done) {
+      var prefixes = [ 'hello', 'world' ];
+      bucket.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, { items: [], prefixes: prefixes });
+      };
+      bucket.getFiles({ delimiter: '/' }, function(err, files) {
+        assert.deepEqual(files.prefixes, prefixes);
+        done();
+      });
+    });
+
     it('should return nextQuery if more results exist', function() {
       var token = 'next-page-token';
       bucket.makeReq_ = function(method, path, query, body, callback) {
