@@ -90,7 +90,7 @@ describe('storage', function() {
 
     describe('buckets', function() {
       it('should get access controls', function(done) {
-        bucket.acl.get(done, function(err, accessControls) {
+        bucket.acl.get(function(err, accessControls) {
           assert.ifError(err);
           assert(Array.isArray(accessControls));
           done();
@@ -99,26 +99,26 @@ describe('storage', function() {
 
       it('should add entity to default access controls', function(done) {
         bucket.acl.default.add({
-          scope: USER_ACCOUNT,
+          entity: USER_ACCOUNT,
           role: storage.acl.OWNER_ROLE
         }, function(err, accessControl) {
           assert.ifError(err);
           assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
 
           bucket.acl.default.get({
-            scope: USER_ACCOUNT
+            entity: USER_ACCOUNT
           }, function(err, accessControl) {
             assert.ifError(err);
             assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
 
             bucket.acl.default.update({
-              scope: USER_ACCOUNT,
+              entity: USER_ACCOUNT,
               role: storage.acl.READER_ROLE
             }, function(err, accessControl) {
               assert.ifError(err);
               assert.equal(accessControl.role, storage.acl.READER_ROLE);
 
-              bucket.acl.default.delete({ scope: USER_ACCOUNT }, done);
+              bucket.acl.default.delete({ entity: USER_ACCOUNT }, done);
             });
           });
         });
@@ -134,37 +134,39 @@ describe('storage', function() {
 
       it('should grant an account access', function(done) {
         bucket.acl.add({
-          scope: USER_ACCOUNT,
+          entity: USER_ACCOUNT,
           role: storage.acl.OWNER_ROLE
         }, function(err, accessControl) {
           assert.ifError(err);
           assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
 
-          bucket.acl.get({ scope: USER_ACCOUNT }, function(err, accessControl) {
+          var opts = { entity: USER_ACCOUNT };
+
+          bucket.acl.get(opts, function(err, accessControl) {
             assert.ifError(err);
             assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
 
-            bucket.acl.delete({ scope: USER_ACCOUNT }, done);
+            bucket.acl.delete(opts, done);
           });
         });
       });
 
       it('should update an account', function(done) {
         bucket.acl.add({
-          scope: USER_ACCOUNT,
+          entity: USER_ACCOUNT,
           role: storage.acl.OWNER_ROLE
         }, function(err, accessControl) {
           assert.ifError(err);
           assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
 
           bucket.acl.update({
-            scope: USER_ACCOUNT,
+            entity: USER_ACCOUNT,
             role: storage.acl.WRITER_ROLE
           }, function(err, accessControl) {
             assert.ifError(err);
             assert.equal(accessControl.role, storage.acl.WRITER_ROLE);
 
-            bucket.acl.delete({ scope: USER_ACCOUNT }, done);
+            bucket.acl.delete({ entity: USER_ACCOUNT }, done);
           });
         });
       });
@@ -199,38 +201,38 @@ describe('storage', function() {
 
       it('should grant an account access', function(done) {
         file.acl.add({
-          scope: USER_ACCOUNT,
+          entity: USER_ACCOUNT,
           role: storage.acl.OWNER_ROLE
         }, function(err, accessControl) {
           assert.ifError(err);
           assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
 
-          file.acl.get({ scope: USER_ACCOUNT }, function(err, accessControl) {
+          file.acl.get({ entity: USER_ACCOUNT }, function(err, accessControl) {
             assert.ifError(err);
             assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
 
-            file.acl.delete({ scope: USER_ACCOUNT }, done);
+            file.acl.delete({ entity: USER_ACCOUNT }, done);
           });
         });
       });
 
       it('should update an account', function(done) {
         file.acl.add({
-          scope: USER_ACCOUNT,
+          entity: USER_ACCOUNT,
           role: storage.acl.OWNER_ROLE
         }, function(err, accessControl) {
           assert.ifError(err);
           assert.equal(accessControl.role, storage.acl.OWNER_ROLE);
 
           file.acl.update({
-            scope: USER_ACCOUNT,
+            entity: USER_ACCOUNT,
             role: storage.acl.READER_ROLE
           }, function(err, accessControl) {
             assert.ifError(err);
 
             assert.equal(accessControl.role, storage.acl.READER_ROLE);
 
-            file.acl.delete({ scope: USER_ACCOUNT }, done);
+            file.acl.delete({ entity: USER_ACCOUNT }, done);
           });
         });
       });

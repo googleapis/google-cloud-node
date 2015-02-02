@@ -114,6 +114,20 @@ var pubsub = gcloud.pubsub({
       </p>
       <div hljs>
 var bucket = gcloud.storage.bucket('my-bucket');</div>
+      <h4>ACLs</h4>
+      <p>
+        Google Cloud Storage uses access control lists (ACLs) to manage object and bucket access. ACLs are the mechanism you use to share files with other users and allow other users to access your buckets and files.
+      </p>
+      <p>
+        Convenience methods are provided to perform common operations, such as the following.
+      </p>
+      <div hljs>
+// Allow a user to read files from a bucket.
+bucket.acl.readers.addUser('email@example.com', function(err, aclObject) {});
+
+// Revoke file ownership permissions from a group.
+var myFile = bucket.file('my-file.txt');
+myFile.acl.owners.deleteGroup('group-id', function(err, aclObject) {});</div>
       <p>
         See examples below for more on how to access your bucket to upload a file, read its files, create signed URLs, and more.
       </p>
