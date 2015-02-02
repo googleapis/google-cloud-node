@@ -871,7 +871,7 @@ describe('File', function() {
         done();
       };
 
-      directoryFile.setMetadata();
+      directoryFile.setMetadata(metadata);
     });
 
     it('should execute callback', function(done) {
