@@ -376,7 +376,10 @@ describe('storage', function() {
 
       it('should write metadata', function(done) {
         var options = {
-          metadata: { contentType: 'image/png' },
+          metadata: {
+            contentType: 'image/png',
+            property: 'value'
+          },
           resumable: false
         };
 
@@ -386,6 +389,7 @@ describe('storage', function() {
           file.getMetadata(function(err, metadata) {
             assert.ifError(err);
             assert.equal(metadata.contentType, options.metadata.contentType);
+            assert.equal(metadata.metadata.property, options.metadata.property);
             file.delete(done);
           });
         });
