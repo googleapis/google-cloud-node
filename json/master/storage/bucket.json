@@ -360,6 +360,72 @@
     }
   },
   {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "acl.default.owners"
+      }
+    ],
+    "description": {
+      "full": "<p>Maps to {module:storage/bucket#acl.owners}.</p>",
+      "summary": "<p>Maps to {module:storage/bucket#acl.owners}.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "var aclDefaultOwners = true;",
+    "ctx": {
+      "type": "declaration",
+      "name": "aclDefaultOwners",
+      "value": "true",
+      "string": "aclDefaultOwners"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "acl.default.readers"
+      }
+    ],
+    "description": {
+      "full": "<p>Maps to {module:storage/bucket#acl.readers}.</p>",
+      "summary": "<p>Maps to {module:storage/bucket#acl.readers}.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "var aclDefaultReaders = true;",
+    "ctx": {
+      "type": "declaration",
+      "name": "aclDefaultReaders",
+      "value": "true",
+      "string": "aclDefaultReaders"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "acl.default.writers"
+      }
+    ],
+    "description": {
+      "full": "<p>Maps to {module:storage/bucket#acl.writers}.</p>",
+      "summary": "<p>Maps to {module:storage/bucket#acl.writers}.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "var aclDefaultWriters = true;",
+    "ctx": {
+      "type": "declaration",
+      "name": "aclDefaultWriters",
+      "value": "true",
+      "string": "aclDefaultWriters"
+    }
+  },
+  {
     "tags": [],
     "description": {
       "full": "<p>jshint ignore:end</p>",
@@ -572,7 +638,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Bucket.prototype.setMetadata = function(metadata, callback) {\n  callback = callback || util.noop;\n  this.makeReq_('PATCH', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    this.metadata = resp;\n    callback(null, this.metadata);\n  }.bind(this));\n};",
+    "code": "Bucket.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n  callback = callback || util.noop;\n\n  this.makeReq_('PATCH', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Bucket",

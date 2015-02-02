@@ -18,7 +18,7 @@
     },
     "isPrivate": false,
     "ignore": true,
-    "code": "'use strict';"
+    "code": "'use strict';\n\nvar nodeutil = require('util');"
   },
   {
     "tags": [
@@ -54,17 +54,122 @@
       }
     ],
     "description": {
-      "full": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p><p>An ACL consists of one or more entries, where each entry grants permissions<br />to a scope. Permissions define the actions that can be performed against an<br />object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the scope defines who the<br />permission applies to (for example, a specific user or group of users).</p><p>Where a <code>scope</code> value is accepted, we follow the format the Cloud Storage API<br />expects.</p><p>Refer to<br /><a href=\"https://cloud.google.com/storage/docs/json_api/v1/defaultObjectAccessControls\">https://cloud.google.com/storage/docs/json_api/v1/defaultObjectAccessControls</a><br />for the most up-to-date values.</p><ul>\n<li><code>user-userId</code></li>\n<li><code>user-email</code></li>\n<li><code>group-groupId</code></li>\n<li><code>group-email</code></li>\n<li><code>domain-domain</code></li>\n<li><code>project-team-projectId</code></li>\n<li><code>allUsers</code></li>\n<li><code>allAuthenticatedUsers</code></li>\n</ul>\n<p>Examples:</p><ul>\n<li>The user &quot;liz@example.com&quot; would be <code>user-liz@example.com</code>.</li>\n<li>The group &quot;example@googlegroups.com&quot; would be<br /><code>group-example@googlegroups.com</code>.</li>\n<li>To refer to all members of the Google Apps for Business domain<br />&quot;example.com&quot;, the entity would be <code>domain-example.com</code>.</li>\n</ul>\n<p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p>",
+      "full": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p><p>An ACL consists of one or more entries, where each entry grants permissions<br />to an entity. Permissions define the actions that can be performed against an<br />object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the entity defines who the<br />permission applies to (for example, a specific user or group of users).</p><p>Where an <code>entity</code> value is accepted, we follow the format the Cloud Storage<br />API expects.</p><p>Refer to<br /><a href=\"https://cloud.google.com/storage/docs/json_api/v1/defaultObjectAccessControls\">https://cloud.google.com/storage/docs/json_api/v1/defaultObjectAccessControls</a><br />for the most up-to-date values.</p><ul>\n<li><code>user-userId</code></li>\n<li><code>user-email</code></li>\n<li><code>group-groupId</code></li>\n<li><code>group-email</code></li>\n<li><code>domain-domain</code></li>\n<li><code>project-team-projectId</code></li>\n<li><code>allUsers</code></li>\n<li><code>allAuthenticatedUsers</code></li>\n</ul>\n<p>Examples:</p><ul>\n<li>The user &quot;liz@example.com&quot; would be <code>user-liz@example.com</code>.</li>\n<li>The group &quot;example@googlegroups.com&quot; would be<br /><code>group-example@googlegroups.com</code>.</li>\n<li>To refer to all members of the Google Apps for Business domain<br />&quot;example.com&quot;, the entity would be <code>domain-example.com</code>.</li>\n</ul>\n<p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p>",
       "summary": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p>",
-      "body": "<p>An ACL consists of one or more entries, where each entry grants permissions<br />to a scope. Permissions define the actions that can be performed against an<br />object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the scope defines who the<br />permission applies to (for example, a specific user or group of users).</p><p>Where a <code>scope</code> value is accepted, we follow the format the Cloud Storage API<br />expects.</p><p>Refer to<br /><a href=\"https://cloud.google.com/storage/docs/json_api/v1/defaultObjectAccessControls\">https://cloud.google.com/storage/docs/json_api/v1/defaultObjectAccessControls</a><br />for the most up-to-date values.</p><ul>\n<li><code>user-userId</code></li>\n<li><code>user-email</code></li>\n<li><code>group-groupId</code></li>\n<li><code>group-email</code></li>\n<li><code>domain-domain</code></li>\n<li><code>project-team-projectId</code></li>\n<li><code>allUsers</code></li>\n<li><code>allAuthenticatedUsers</code></li>\n</ul>\n<p>Examples:</p><ul>\n<li>The user &quot;liz@example.com&quot; would be <code>user-liz@example.com</code>.</li>\n<li>The group &quot;example@googlegroups.com&quot; would be<br /><code>group-example@googlegroups.com</code>.</li>\n<li>To refer to all members of the Google Apps for Business domain<br />&quot;example.com&quot;, the entity would be <code>domain-example.com</code>.</li>\n</ul>\n<p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p>"
+      "body": "<p>An ACL consists of one or more entries, where each entry grants permissions<br />to an entity. Permissions define the actions that can be performed against an<br />object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the entity defines who the<br />permission applies to (for example, a specific user or group of users).</p><p>Where an <code>entity</code> value is accepted, we follow the format the Cloud Storage<br />API expects.</p><p>Refer to<br /><a href=\"https://cloud.google.com/storage/docs/json_api/v1/defaultObjectAccessControls\">https://cloud.google.com/storage/docs/json_api/v1/defaultObjectAccessControls</a><br />for the most up-to-date values.</p><ul>\n<li><code>user-userId</code></li>\n<li><code>user-email</code></li>\n<li><code>group-groupId</code></li>\n<li><code>group-email</code></li>\n<li><code>domain-domain</code></li>\n<li><code>project-team-projectId</code></li>\n<li><code>allUsers</code></li>\n<li><code>allAuthenticatedUsers</code></li>\n</ul>\n<p>Examples:</p><ul>\n<li>The user &quot;liz@example.com&quot; would be <code>user-liz@example.com</code>.</li>\n<li>The group &quot;example@googlegroups.com&quot; would be<br /><code>group-example@googlegroups.com</code>.</li>\n<li>To refer to all members of the Google Apps for Business domain<br />&quot;example.com&quot;, the entity would be <code>domain-example.com</code>.</li>\n</ul>\n<p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p>"
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "function Acl(options) {\n  this.makeReq = options.makeReq;\n  this.pathPrefix = options.pathPrefix;\n}",
+    "code": "function Acl(options) {\n  AclRoleAccessorMethods.call(this);\n\n  this.makeReq = options.makeReq;\n  this.pathPrefix = options.pathPrefix;\n}",
     "ctx": {
       "type": "function",
       "name": "Acl",
       "string": "Acl()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "acl.owners "
+      },
+      {
+        "type": "return",
+        "types": [
+          "object"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Add a user as an owner of a file.\n//-\nmyFile.acl.owners.addUser('email@example.com', function(err, aclObject) {});\n\n//-\n// For reference, the above command is the same as running the following.\n//-\nmyFile.acl.add({\n  entity: 'user-email@example.com',\n  role: storage.acl.OWNER_ROLE\n}, function(err, aclObject) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>An object of convenience methods to add or delete owner ACL permissions for a<br />given entity.</p><p>The supported methods include:</p><ul>\n<li><code>myFile.acl.owners.addAllAuthenticatedUsers</code></li>\n<li><code>myFile.acl.owners.deleteAllAuthenticatedUsers</code></li>\n<li><code>myFile.acl.owners.addAllUsers</code></li>\n<li><code>myFile.acl.owners.deleteAllUsers</code></li>\n<li><code>myFile.acl.owners.addDomain</code></li>\n<li><code>myFile.acl.owners.deleteDomain</code></li>\n<li><code>myFile.acl.owners.addGroup</code></li>\n<li><code>myFile.acl.owners.deleteGroup</code></li>\n<li><code>myFile.acl.owners.addProject</code></li>\n<li><code>myFile.acl.owners.deleteProject</code></li>\n<li><code>myFile.acl.owners.addUser</code></li>\n<li><code>myFile.acl.owners.deleteUser</code></li>\n</ul>\n",
+      "summary": "<p>An object of convenience methods to add or delete owner ACL permissions for a<br />given entity.</p>",
+      "body": "<p>The supported methods include:</p><ul>\n<li><code>myFile.acl.owners.addAllAuthenticatedUsers</code></li>\n<li><code>myFile.acl.owners.deleteAllAuthenticatedUsers</code></li>\n<li><code>myFile.acl.owners.addAllUsers</code></li>\n<li><code>myFile.acl.owners.deleteAllUsers</code></li>\n<li><code>myFile.acl.owners.addDomain</code></li>\n<li><code>myFile.acl.owners.deleteDomain</code></li>\n<li><code>myFile.acl.owners.addGroup</code></li>\n<li><code>myFile.acl.owners.deleteGroup</code></li>\n<li><code>myFile.acl.owners.addProject</code></li>\n<li><code>myFile.acl.owners.deleteProject</code></li>\n<li><code>myFile.acl.owners.addUser</code></li>\n<li><code>myFile.acl.owners.deleteUser</code></li>\n</ul>\n"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Acl.prototype.owners = {};",
+    "ctx": {
+      "type": "property",
+      "constructor": "Acl",
+      "cons": "Acl",
+      "name": "owners",
+      "value": "{}",
+      "string": "Acl.prototype.owners"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "acl.readers "
+      },
+      {
+        "type": "return",
+        "types": [
+          "object"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Add a user as a reader of a file.\n//-\nmyFile.acl.readers.addUser('email@example.com', function(err, aclObject) {});\n\n//-\n// For reference, the above command is the same as running the following.\n//-\nmyFile.acl.add({\n  entity: 'user-email@example.com',\n  role: storage.acl.READER_ROLE\n}, function(err, aclObject) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>An object of convenience methods to add or delete reader ACL permissions for<br />a given entity.</p><p>The supported methods include:</p><ul>\n<li><code>myFile.acl.readers.addAllAuthenticatedUsers</code></li>\n<li><code>myFile.acl.readers.deleteAllAuthenticatedUsers</code></li>\n<li><code>myFile.acl.readers.addAllUsers</code></li>\n<li><code>myFile.acl.readers.deleteAllUsers</code></li>\n<li><code>myFile.acl.readers.addDomain</code></li>\n<li><code>myFile.acl.readers.deleteDomain</code></li>\n<li><code>myFile.acl.readers.addGroup</code></li>\n<li><code>myFile.acl.readers.deleteGroup</code></li>\n<li><code>myFile.acl.readers.addProject</code></li>\n<li><code>myFile.acl.readers.deleteProject</code></li>\n<li><code>myFile.acl.readers.addUser</code></li>\n<li><code>myFile.acl.readers.deleteUser</code></li>\n</ul>\n",
+      "summary": "<p>An object of convenience methods to add or delete reader ACL permissions for<br />a given entity.</p>",
+      "body": "<p>The supported methods include:</p><ul>\n<li><code>myFile.acl.readers.addAllAuthenticatedUsers</code></li>\n<li><code>myFile.acl.readers.deleteAllAuthenticatedUsers</code></li>\n<li><code>myFile.acl.readers.addAllUsers</code></li>\n<li><code>myFile.acl.readers.deleteAllUsers</code></li>\n<li><code>myFile.acl.readers.addDomain</code></li>\n<li><code>myFile.acl.readers.deleteDomain</code></li>\n<li><code>myFile.acl.readers.addGroup</code></li>\n<li><code>myFile.acl.readers.deleteGroup</code></li>\n<li><code>myFile.acl.readers.addProject</code></li>\n<li><code>myFile.acl.readers.deleteProject</code></li>\n<li><code>myFile.acl.readers.addUser</code></li>\n<li><code>myFile.acl.readers.deleteUser</code></li>\n</ul>\n"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Acl.prototype.readers = {};",
+    "ctx": {
+      "type": "property",
+      "constructor": "Acl",
+      "cons": "Acl",
+      "name": "readers",
+      "value": "{}",
+      "string": "Acl.prototype.readers"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "acl.writers "
+      },
+      {
+        "type": "return",
+        "types": [
+          "object"
+        ],
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Add a user as a writer of a file.\n//-\nmyFile.acl.writers.addUser('email@example.com', function(err, aclObject) {});\n\n//-\n// For reference, the above command is the same as running the following.\n//-\nmyFile.acl.add({\n  entity: 'user-email@example.com',\n  role: storage.acl.WRITER_ROLE\n}, function(err, aclObject) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>An object of convenience methods to add or delete writer ACL permissions for<br />a given entity.</p><p>The supported methods include:</p><ul>\n<li><code>myFile.acl.writers.addAllAuthenticatedUsers</code></li>\n<li><code>myFile.acl.writers.deleteAllAuthenticatedUsers</code></li>\n<li><code>myFile.acl.writers.addAllUsers</code></li>\n<li><code>myFile.acl.writers.deleteAllUsers</code></li>\n<li><code>myFile.acl.writers.addDomain</code></li>\n<li><code>myFile.acl.writers.deleteDomain</code></li>\n<li><code>myFile.acl.writers.addGroup</code></li>\n<li><code>myFile.acl.writers.deleteGroup</code></li>\n<li><code>myFile.acl.writers.addProject</code></li>\n<li><code>myFile.acl.writers.deleteProject</code></li>\n<li><code>myFile.acl.writers.addUser</code></li>\n<li><code>myFile.acl.writers.deleteUser</code></li>\n</ul>\n",
+      "summary": "<p>An object of convenience methods to add or delete writer ACL permissions for<br />a given entity.</p>",
+      "body": "<p>The supported methods include:</p><ul>\n<li><code>myFile.acl.writers.addAllAuthenticatedUsers</code></li>\n<li><code>myFile.acl.writers.deleteAllAuthenticatedUsers</code></li>\n<li><code>myFile.acl.writers.addAllUsers</code></li>\n<li><code>myFile.acl.writers.deleteAllUsers</code></li>\n<li><code>myFile.acl.writers.addDomain</code></li>\n<li><code>myFile.acl.writers.deleteDomain</code></li>\n<li><code>myFile.acl.writers.addGroup</code></li>\n<li><code>myFile.acl.writers.deleteGroup</code></li>\n<li><code>myFile.acl.writers.addProject</code></li>\n<li><code>myFile.acl.writers.deleteProject</code></li>\n<li><code>myFile.acl.writers.addUser</code></li>\n<li><code>myFile.acl.writers.deleteUser</code></li>\n</ul>\n"
+    },
+    "isPrivate": false,
+    "ignore": false,
+    "code": "Acl.prototype.writers = {};\n\nnodeutil.inherits(Acl, AclRoleAccessorMethods);",
+    "ctx": {
+      "type": "property",
+      "constructor": "Acl",
+      "cons": "Acl",
+      "name": "writers",
+      "value": "{}",
+      "string": "Acl.prototype.writers"
     }
   },
   {
@@ -82,7 +187,7 @@
         "types": [
           "string"
         ],
-        "name": "options.scope",
+        "name": "options.entity",
         "description": "- Whose permissions will be added."
       },
       {
@@ -91,7 +196,7 @@
           "string"
         ],
         "name": "options.role",
-        "description": "- Permissions allowed for the defined scope. See     {module:storage#acl}."
+        "description": "- Permissions allowed for the defined entity.     See {module:storage#acl}."
       },
       {
         "type": "param",
@@ -115,7 +220,7 @@
       },
       {
         "type": "example",
-        "string": "myBucket.acl.add({\n  scope: 'user-useremail@example.com',\n  role: storage.acl.OWNER_ROLE\n}, function(err, aclObject) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n// Here is how you would grant ownership permissions to a user on a specific\n// revision of a file.\n//-\nmyFile.acl.add({\n  scope: 'user-useremail@example.com',\n  role: storage.acl.OWNER_ROLE,\n  generation: 1\n}, function(err, aclObject) {});"
+        "string": "myBucket.acl.add({\n  entity: 'user-useremail@example.com',\n  role: storage.acl.OWNER_ROLE\n}, function(err, aclObject) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n// Here is how you would grant ownership permissions to a user on a specific\n// revision of a file.\n//-\nmyFile.acl.add({\n  entity: 'user-useremail@example.com',\n  role: storage.acl.OWNER_ROLE,\n  generation: 1\n}, function(err, aclObject) {});"
       }
     ],
     "description": {
@@ -125,7 +230,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Acl.prototype.add = function(options, callback) {\n  var that = this;\n\n  var body = {\n    entity: options.scope,\n    role: options.role.toUpperCase()\n  };\n\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  this.makeReq_('POST', '', query, body, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    callback(null, that.makeAclObject_(resp));\n  });\n};",
+    "code": "Acl.prototype.add = function(options, callback) {\n  var that = this;\n\n  var body = {\n    entity: options.entity,\n    role: options.role.toUpperCase()\n  };\n\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  this.makeReq_('POST', '', query, body, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    callback(null, that.makeAclObject_(resp));\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Acl",
@@ -149,7 +254,7 @@
         "types": [
           "string"
         ],
-        "name": "options.scope",
+        "name": "options.entity",
         "description": "- Whose permissions will be revoked."
       },
       {
@@ -174,7 +279,7 @@
       },
       {
         "type": "example",
-        "string": "myBucket.acl.delete({\n  scope: 'user-useremail@example.com'\n}, function(err) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.delete({\n  scope: 'user-useremail@example.com',\n  generation: 1\n}, function(err) {});"
+        "string": "myBucket.acl.delete({\n  entity: 'user-useremail@example.com'\n}, function(err) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.delete({\n  entity: 'user-useremail@example.com',\n  generation: 1\n}, function(err) {});"
       }
     ],
     "description": {
@@ -184,7 +289,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Acl.prototype.delete = function(options, callback) {\n  var path = '/' + encodeURIComponent(options.scope);\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  this.makeReq_('DELETE', path, query, null, callback);\n};",
+    "code": "Acl.prototype.delete = function(options, callback) {\n  var path = '/' + encodeURIComponent(options.entity);\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  this.makeReq_('DELETE', path, query, null, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Acl",
@@ -209,7 +314,7 @@
         "types": [
           "string="
         ],
-        "name": "options.scope",
+        "name": "options.entity",
         "description": "- Whose permissions will be fetched."
       },
       {
@@ -226,17 +331,17 @@
       },
       {
         "type": "example",
-        "string": "myBucket.acl.get({\n  scope: 'user-useremail@example.com'\n}, function(err, aclObject) {});\n\n//-\n// Get all access controls.\n//-\nmyBucket.acl.get(function(err, aclObjects) {\n  // aclObjects = [\n  //   {\n  //     scope: 'user-useremail@example.com',\n  //     role: 'owner'\n  //   }\n  // ]\n});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.get({\n  scope: 'user-useremail@example.com',\n  generation: 1\n} function(err, aclObject) {});"
+        "string": "myBucket.acl.get({\n  entity: 'user-useremail@example.com'\n}, function(err, aclObject) {});\n\n//-\n// Get all access controls.\n//-\nmyBucket.acl.get(function(err, aclObjects) {\n  // aclObjects = [\n  //   {\n  //     entity: 'user-useremail@example.com',\n  //     role: 'owner'\n  //   }\n  // ]\n});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.get({\n  entity: 'user-useremail@example.com',\n  generation: 1\n} function(err, aclObject) {});"
       }
     ],
     "description": {
-      "full": "<p>Get access controls on a {module:storage/bucket} or {module:storage/file}. If<br />a scope is omitted, you will receive an array of all applicable access<br />controls.</p>",
-      "summary": "<p>Get access controls on a {module:storage/bucket} or {module:storage/file}. If<br />a scope is omitted, you will receive an array of all applicable access<br />controls.</p>",
+      "full": "<p>Get access controls on a {module:storage/bucket} or {module:storage/file}. If<br />an entity is omitted, you will receive an array of all applicable access<br />controls.</p>",
+      "summary": "<p>Get access controls on a {module:storage/bucket} or {module:storage/file}. If<br />an entity is omitted, you will receive an array of all applicable access<br />controls.</p>",
       "body": ""
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Acl.prototype.get = function(options, callback) {\n  var that = this;\n  var path = '';\n  var query = null;\n\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = null;\n  } else {\n    path = '/' + encodeURIComponent(options.scope);\n\n    if (options.generation) {\n      query = {\n        generation: options.generation\n      };\n    }\n  }\n\n  this.makeReq_('GET', path, query, null, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var results = resp;\n\n    if (resp.items) {\n      results = (resp.items || []).map(that.makeAclObject_);\n    } else {\n      results = that.makeAclObject_(results);\n    }\n\n    callback(null, results);\n  });\n};",
+    "code": "Acl.prototype.get = function(options, callback) {\n  var that = this;\n  var path = '';\n  var query = null;\n\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = null;\n  } else {\n    path = '/' + encodeURIComponent(options.entity);\n\n    if (options.generation) {\n      query = {\n        generation: options.generation\n      };\n    }\n  }\n\n  this.makeReq_('GET', path, query, null, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var results = resp;\n\n    if (resp.items) {\n      results = (resp.items || []).map(that.makeAclObject_);\n    } else {\n      results = that.makeAclObject_(results);\n    }\n\n    callback(null, results);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Acl",
@@ -260,8 +365,8 @@
         "types": [
           "string"
         ],
-        "name": "options.scope",
-        "description": "- Whose permissions will be added."
+        "name": "options.entity",
+        "description": "- Whose permissions will be updated."
       },
       {
         "type": "param",
@@ -269,7 +374,7 @@
           "string"
         ],
         "name": "options.role",
-        "description": "- Permissions allowed for the defined scope. See     {module:storage#acl}."
+        "description": "- Permissions allowed for the defined entity.     See {module:storage#acl}."
       },
       {
         "type": "param",
@@ -293,7 +398,7 @@
       },
       {
         "type": "example",
-        "string": "var storage = gcloud.storage();\n\nmyBucket.acl.update({\n  scope: 'user-useremail@example.com',\n  role: storage.acl.WRITER_ROLE\n}, function(err) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.update({\n  scope: 'user-useremail@example.com',\n  role: storage.acl.WRITER_ROLE,\n  generation: 1\n}, function(err) {});"
+        "string": "var storage = gcloud.storage();\n\nmyBucket.acl.update({\n  entity: 'user-useremail@example.com',\n  role: storage.acl.WRITER_ROLE\n}, function(err) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.update({\n  entity: 'user-useremail@example.com',\n  role: storage.acl.WRITER_ROLE,\n  generation: 1\n}, function(err) {});"
       }
     ],
     "description": {
@@ -303,7 +408,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "Acl.prototype.update = function(options, callback) {\n  var that = this;\n  var path = '/' + encodeURIComponent(options.scope);\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  var body = {\n    role: options.role.toUpperCase()\n  };\n\n  this.makeReq_('PUT', path, query, body, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    callback(null, that.makeAclObject_(resp));\n  });\n};",
+    "code": "Acl.prototype.update = function(options, callback) {\n  var that = this;\n  var path = '/' + encodeURIComponent(options.entity);\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  var body = {\n    role: options.role.toUpperCase()\n  };\n\n  this.makeReq_('PUT', path, query, body, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    callback(null, that.makeAclObject_(resp));\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Acl",
@@ -326,7 +431,7 @@
     },
     "isPrivate": true,
     "ignore": false,
-    "code": "Acl.prototype.makeAclObject_ = function(accessControlObject) {\n  var obj = {\n    scope: accessControlObject.scope,\n    role: accessControlObject.role\n  };\n\n  if (accessControlObject.projectTeam) {\n    obj.projectTeam = accessControlObject.projectTeam;\n  }\n\n  return obj;\n};",
+    "code": "Acl.prototype.makeAclObject_ = function(accessControlObject) {\n  var obj = {\n    entity: accessControlObject.entity,\n    role: accessControlObject.role\n  };\n\n  if (accessControlObject.projectTeam) {\n    obj.projectTeam = accessControlObject.projectTeam;\n  }\n\n  return obj;\n};",
     "ctx": {
       "type": "method",
       "constructor": "Acl",
@@ -396,6 +501,27 @@
       "cons": "Acl",
       "name": "makeReq_",
       "string": "Acl.prototype.makeReq_()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>Attach functionality to a {module:storage/acl} instance. This will add an<br />object for each role group (owners, readers, and writers), with each object<br />containing methods to add or delete a type of entity.</p><p>As an example, here are a few methods that are created.</p><p>  myBucket.acl.readers.deleteGroup(&#39;groupId&#39;, function(err) {});</p><p>  myBucket.acl.owners.addUser(&#39;email@example.com&#39;, function(err, acl) {});</p><p>  myBucket.acl.writers.addDomain(&#39;example.com&#39;, function(err, acl) {});</p>",
+      "summary": "<p>Attach functionality to a {module:storage/acl} instance. This will add an<br />object for each role group (owners, readers, and writers), with each object<br />containing methods to add or delete a type of entity.</p>",
+      "body": "<p>As an example, here are a few methods that are created.</p><p>  myBucket.acl.readers.deleteGroup(&#39;groupId&#39;, function(err) {});</p><p>  myBucket.acl.owners.addUser(&#39;email@example.com&#39;, function(err, acl) {});</p><p>  myBucket.acl.writers.addDomain(&#39;example.com&#39;, function(err, acl) {});</p>"
+    },
+    "isPrivate": true,
+    "ignore": false,
+    "code": "function AclRoleAccessorMethods() {\n  AclRoleAccessorMethods.roles.forEach(this._assignAccessMethods.bind(this));\n}\n\nAclRoleAccessorMethods.accessMethods = [\n  'add',\n  'delete'\n];\n\nAclRoleAccessorMethods.entities = [\n  // Special entity groups that do not require further specification.\n  'allAuthenticatedUsers',\n  'allUsers',\n\n  // Entity groups that require specification, e.g. `user-email@example.com`.\n  'domain-',\n  'group-',\n  'project-',\n  'user-'\n];\n\nAclRoleAccessorMethods.roles = [\n  'OWNER',\n  'READER',\n  'WRITER'\n];\n\nAclRoleAccessorMethods.prototype._assignAccessMethods = function(role) {\n  var that = this;\n\n  var accessMethods = AclRoleAccessorMethods.accessMethods;\n  var entities = AclRoleAccessorMethods.entities;\n  var roleGroup = role.toLowerCase() + 's';\n\n  this[roleGroup] = entities.reduce(function(acc, entity) {\n    var isPrefix = entity.charAt(entity.length - 1) === '-';\n\n    accessMethods.forEach(function(accessMethod) {\n      var method = accessMethod + entity[0].toUpperCase() + entity.substr(1);\n\n      if (isPrefix) {\n        method = method.replace('-', '');\n      }\n\n      // Wrap the parent accessor method (e.g. `add` or `delete`) to avoid the\n      // more complex API of specifying an `entity` and `role`.\n      acc[method] = function(entityId, callback) {\n        var apiEntity;\n\n        if (isPrefix) {\n          apiEntity = entity + entityId;\n        } else {\n          // If the entity is not a prefix, it is a special entity group that\n          // does not require further details. The accessor methods only accept\n          // a callback.\n          apiEntity = entity;\n          callback = entityId;\n        }\n\n        that[accessMethod]({\n          entity: apiEntity,\n          role: role\n        }, callback);\n      };\n    });\n\n    return acc;\n  }, {});\n};\n\nmodule.exports.AclRoleAccessorMethods = AclRoleAccessorMethods;",
+    "ctx": {
+      "type": "function",
+      "name": "AclRoleAccessorMethods",
+      "string": "AclRoleAccessorMethods()"
     }
   }
 ]

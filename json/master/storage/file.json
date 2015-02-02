@@ -506,7 +506,7 @@
     },
     "isPrivate": false,
     "ignore": false,
-    "code": "File.prototype.setMetadata = function(metadata, callback) {\n  callback = callback || util.noop;\n  var path = '/o/' + encodeURIComponent(this.name);\n  this.makeReq_('PATCH', path, null, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    this.metadata = resp;\n    callback(null, this.metadata);\n  }.bind(this));\n};",
+    "code": "File.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n  var path = '/o/' + encodeURIComponent(this.name);\n  callback = callback || util.noop;\n\n  this.makeReq_('PATCH', path, null, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "File",
