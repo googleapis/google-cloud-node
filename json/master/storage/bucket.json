@@ -628,7 +628,7 @@
       },
       {
         "type": "example",
-        "string": "bucket.setMetadata({\n  contentType: 'application/x-font-ttf',\n  metadata: {\n    my: 'custom',\n    properties: 'go here'\n  }\n}, function(err, metadata) {});"
+        "string": "//-\n// Set website metadata field on the bucket.\n//-\nbucket.setMetadata({\n  website: {\n    mainPageSuffix: 'http://example.com',\n    notFoundPage: 'http://example.com/404.html'\n  }\n}, function(err, metadata) {});"
       }
     ],
     "description": {
