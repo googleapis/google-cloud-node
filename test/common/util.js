@@ -210,7 +210,9 @@ describe('common/util', function() {
           assert(endFirstBoundaryIdx > startFirstBoundaryIdx);
           assert(endBoundaryIdx > -1);
 
-          assert(written.indexOf(JSON.stringify(metadata)) > -1);
+          assert(written.indexOf(JSON.stringify({
+            metadata: metadata
+          })) > -1);
 
           done();
         };
