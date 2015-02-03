@@ -23,14 +23,6 @@ var entity = require('../../lib/datastore/entity.js');
 var datastore = require('../../lib/datastore');
 var ByteBuffer = require('bytebuffer');
 
-var blogPostMetadata = {
-  title: { kind: String, indexed: true },
-  tags: { kind: String, multi: true, indexed: true },
-  publishedAt: { kind: Date },
-  author: { kind: Object, indexed: true },
-  isDraft: { kind: Boolean, indexed: true }
-};
-
 var entityProto = {
   'property': [{
     'name': 'linkedTo',
@@ -120,24 +112,6 @@ var queryFilterProto = {
   order: [],
   group_by: []
 };
-
-describe('registerKind', function() {
-  it('should be able to register valid field metadata', function() {
-    entity.registerKind('namespace', 'kind', blogPostMetadata);
-  });
-
-  it('should set the namespace to "" if zero value or null', function() {
-    entity.registerKind(null, 'kind', blogPostMetadata);
-    var meta = entity.getKind('', 'kind');
-    assert.strictEqual(meta, blogPostMetadata);
-  });
-
-  it('should throw an exception if an invalid kind', function() {
-    assert.throws(function() {
-      entity.registerKind(null, '000', blogPostMetadata);
-    }, /Kinds should match/);
-  });
-});
 
 describe('keyFromKeyProto', function() {
   var proto = {
