@@ -205,6 +205,25 @@ describe('Request', function() {
       ], done);
     });
 
+    it('should save with specific method', function(done) {
+      request.makeReq_ = function(method, req, callback) {
+        assert.equal(method, 'commit');
+        assert.equal(req.mutation.insert.length, 1);
+        assert.equal(req.mutation.update.length, 1);
+        assert.equal(req.mutation.insert[0].property[0].name, 'k');
+        assert.equal(
+          req.mutation.insert[0].property[0].value.string_value, 'v');
+        assert.equal(req.mutation.update[0].property[0].name, 'k2');
+        assert.equal(
+          req.mutation.update[0].property[0].value.string_value, 'v2');
+        callback();
+      };
+      request.save([
+        { key: key, method: 'insert', data: { k: 'v' } },
+        { key: key, method: 'update', data: { k2: 'v2' } }
+      ], done);
+    });
+
     it('should not set an indexed value by default', function(done) {
       request.makeReq_ = function(method, req) {
         var property = req.mutation.upsert[0].property[0];
