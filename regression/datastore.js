@@ -119,6 +119,38 @@ describe('datastore', function() {
       });
     });
 
+    it('should fail explicitly set second insert on save', function(done) {
+      var postKey = ds.key('Post');
+
+      ds.save({ key: postKey, data: post }, function(err) {
+        assert.ifError(err);
+
+        // The key's path should now be complete.
+        assert(postKey.path[1]);
+
+        ds.save({ key: postKey, method: 'insert', data: post }, function(err) {
+          assert.notEqual(err, null); // should fail insert
+
+          ds.get(postKey, function(err, entity) {
+            assert.ifError(err);
+
+            assert.deepEqual(entity.data, post);
+
+            ds.delete(postKey, done);
+          });
+        });
+      });
+    });
+
+    it('should fail explicitly set first update on save', function(done) {
+      var postKey = ds.key('Post');
+
+      ds.save({ key: postKey, method: 'update', data: post }, function(err) {
+        assert.notEqual(err, null);
+        done();
+      });
+    });
+
     it('should save/get/delete multiple entities at once', function(done) {
       var post2 = {
         title: 'How to make the perfect homemade pasta',
