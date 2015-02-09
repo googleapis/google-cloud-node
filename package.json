@@ -17,6 +17,10 @@
       "email": "pcostell@google.com"
     },
     {
+      "name": "Ryan Seys",
+      "email": "ryan@ryanseys.com"
+    },
+    {
       "name": "Silvano Luciani",
       "email": "silvano@google.com"
     },
@@ -45,26 +49,26 @@
   ],
   "dependencies": {
     "buffer-equal": "0.0.1",
-    "configstore": "^0.3.1",
-    "duplexify": "^3.1.2",
-    "extend": "^1.3.0",
+    "configstore": "^0.3.2",
+    "duplexify": "^3.2.0",
+    "extend": "^2.0.0",
     "fast-crc32c": "^0.1.3",
     "google-service-account": "^1.0.3",
-    "mime-types": "^2.0.3",
-    "node-uuid": "^1.4.1",
-    "protobufjs": "^3.4.0",
-    "request": "^2.39.0",
+    "mime-types": "^2.0.8",
+    "node-uuid": "^1.4.2",
+    "protobufjs": "^3.8.2",
+    "request": "^2.53.0",
     "stream-events": "^1.0.1",
     "through2": "^0.6.3"
   },
   "devDependencies": {
     "async": "^0.9.0",
-    "bytebuffer": "^3.2.0",
-    "coveralls": "^2.11.1",
-    "dox": "^0.4.6",
-    "istanbul": "^0.3.0",
-    "jshint": "^2.5.2",
-    "mocha": "^2.0.1",
+    "bytebuffer": "^3.5.4",
+    "coveralls": "^2.11.2",
+    "dox": "^0.6.1",
+    "istanbul": "^0.3.5",
+    "jshint": "^2.6.0",
+    "mocha": "^2.1.0",
     "mockery": "^1.4.0",
     "tmp": "0.0.24"
   },
