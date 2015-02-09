@@ -24,11 +24,13 @@ var crc = require('fast-crc32c');
 var crypto = require('crypto');
 var duplexify = require('duplexify');
 var extend = require('extend');
+var fs = require('fs');
 var mockery = require('mockery');
 var nodeutil = require('util');
 var request = require('request');
 var stream = require('stream');
 var through = require('through2');
+var tmp = require('tmp');
 var url = require('url');
 var util = require('../../lib/common/util');
 
@@ -738,6 +740,138 @@ describe('File', function() {
         callback();
       };
       file.delete(done);
+    });
+  });
+
+  describe('download', function() {
+    var fileReadStream;
+
+    beforeEach(function() {
+      fileReadStream = new stream.Readable();
+      fileReadStream._read = util.noop;
+
+      fileReadStream.on('end', function() {
+        fileReadStream.emit('complete');
+      });
+
+      file.createReadStream = function() {
+        return fileReadStream;
+      };
+    });
+
+    it('should accept just a callback', function(done) {
+      fileReadStream._read = function() {
+        done();
+      };
+
+      file.download(assert.ifError);
+    });
+
+    it('should accept an options object and callback', function(done) {
+      fileReadStream._read = function() {
+        done();
+      };
+
+      file.download({}, assert.ifError);
+    });
+
+    it('should pass the provided options to createReadStream', function(done) {
+      var readOptions = { start: 100, end: 200 };
+
+      file.createReadStream = function(options) {
+        assert.deepEqual(options, readOptions);
+        done();
+        return fileReadStream;
+      };
+
+      file.download(readOptions, assert.ifError);
+    });
+
+    it('should only execute callback once', function(done) {
+      fileReadStream._read = function() {
+        this.emit('error', new Error('Error.'));
+        this.emit('error', new Error('Error.'));
+      };
+
+      file.download(function() {
+        done();
+      });
+    });
+
+    describe('into memory', function() {
+      it('should buffer a file into memory if no destination', function(done) {
+        var fileContents = 'abcdefghijklmnopqrstuvwxyz';
+
+        fileReadStream._read = function() {
+          this.push(fileContents);
+          this.push(null);
+        };
+
+        file.download(function(err, remoteFileContents) {
+          assert.ifError(err);
+
+          assert.equal(fileContents, remoteFileContents);
+          done();
+        });
+      });
+
+      it('should execute callback with error', function(done) {
+        var error = new Error('Error.');
+
+        fileReadStream._read = function() {
+          this.emit('error', error);
+        };
+
+        file.download(function(err) {
+          assert.equal(err, error);
+          done();
+        });
+      });
+    });
+
+    describe('with destination', function() {
+      it('should write the file to a destination if provided', function(done) {
+        tmp.setGracefulCleanup();
+        tmp.file(function _tempFileCreated(err, tmpFilePath) {
+          assert.ifError(err);
+
+          var fileContents = 'abcdefghijklmnopqrstuvwxyz';
+
+          fileReadStream._read = function() {
+            this.push(fileContents);
+            this.push(null);
+          };
+
+          file.download({ destination: tmpFilePath }, function(err) {
+            assert.ifError(err);
+
+            fs.readFile(tmpFilePath, function(err, tmpFileContents) {
+              assert.ifError(err);
+
+              assert.equal(fileContents, tmpFileContents);
+              done();
+            });
+          });
+        });
+      });
+
+      it('should execute callback with error', function(done) {
+        tmp.setGracefulCleanup();
+        tmp.file(function _tempFileCreated(err, tmpFilePath) {
+          assert.ifError(err);
+
+          var error = new Error('Error.');
+
+          fileReadStream._read = function() {
+            this.emit('error', error);
+          };
+
+          file.download({ destination: tmpFilePath }, function(err) {
+            assert.equal(err, error);
+            done();
+          });
+        });
+      });
     });
   });
 
