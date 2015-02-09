@@ -362,6 +362,20 @@ describe('storage', function() {
       });
     });
 
+    it('should download a file to memory', function(done) {
+      var fileContents = fs.readFileSync(files.big.path);
+
+      bucket.upload(files.big.path, function(err, file) {
+        assert.ifError(err);
+
+        file.download(function(err, remoteContents) {
+          assert.ifError(err);
+          assert.equal(fileContents, remoteContents);
+          done();
+        });
+      });
+    });
+
     describe('stream write', function() {
       it('should stream write, then remove file (3mb)', function(done) {
         var file = bucket.file('LargeFile');
