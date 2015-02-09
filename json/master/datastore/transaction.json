@@ -7,33 +7,59 @@
       "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
     },
     "isPrivate": false,
-    "ignore": true
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
   },
   {
-    "tags": [],
+    "tags": [
+      {
+        "type": "module",
+        "string": "datastore/transaction"
+      }
+    ],
     "description": {
-      "full": "<p>@module datastore/transaction</p>",
-      "summary": "<p>@module datastore/transaction</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": true,
+    "line": 17,
+    "codeStart": 21,
     "code": "'use strict';\n\nvar nodeutil = require('util');"
   },
   {
     "tags": [
+      {
+        "type": "type",
+        "types": [],
+        "typesDescription": "<code>?</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
       {
         "type": "private",
         "visibility": "private"
       }
     ],
     "description": {
-      "full": "<p>@type module:common/util</p>",
-      "summary": "<p>@type module:common/util</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 25,
+    "codeStart": 29,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -45,17 +71,30 @@
   {
     "tags": [
       {
+        "type": "type",
+        "types": [],
+        "typesDescription": "<code>?</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
         "type": "private",
         "visibility": "private"
       }
     ],
     "description": {
-      "full": "<p>@type module:datastore/request</p>",
-      "summary": "<p>@type module:datastore/request</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 31,
+    "codeStart": 35,
     "code": "var DatastoreRequest = require('./request.js');\n\nvar extend = require('extend');",
     "ctx": {
       "type": "declaration",
@@ -68,20 +107,29 @@
     "tags": [
       {
         "type": "param",
-        "types": [
-          "module:common",
-          "connection#Connection"
-        ],
         "name": "connection",
-        "description": "- An authorized     connection to Google Cloud Datastore."
+        "description": "<ul>\n<li>An authorized     connection to Google Cloud Datastore.</li>\n</ul>\n",
+        "types": [
+          "module:common/connection#Connection"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Fconnection%23Connection.html\">common/connection#Connection</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "projectId",
+        "description": "<ul>\n<li>Dataset ID. This is your project ID from the     Google Developers Console.</li>\n</ul>\n",
         "types": [
           "string"
         ],
-        "name": "projectId",
-        "description": "- Dataset ID. This is your project ID from the     Google Developers Console."
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       }
     ],
     "description": {
@@ -90,7 +138,11 @@
       "body": ""
     },
     "isPrivate": false,
-    "ignore": true
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 39,
+    "codeStart": 46
   },
   {
     "tags": [
@@ -117,10 +169,14 @@
       "body": "<p><em><a href=\"http://goo.gl/n4oSjt\">Reference</a>.</em></p>"
     },
     "isPrivate": false,
+    "isConstructor": true,
+    "isEvent": false,
     "ignore": false,
+    "line": 46,
+    "codeStart": 62,
     "code": "function Transaction(dataset, projectId) {\n  this.id = null;\n  this.makeAuthorizedRequest_ = dataset.makeAuthorizedRequest_;\n  this.projectId = projectId;\n\n  // A queue for entity modifications made during the transaction.\n  this.modifiedEntities_ = [];\n\n  // Queue the callbacks that process the API responses.\n  this.requestCallbacks_ = [];\n\n  // Queue the requests to make when we send the transactional commit.\n  this.requests_ = [];\n}\n\nnodeutil.inherits(Transaction, DatastoreRequest);",
     "ctx": {
-      "type": "function",
+      "type": "constructor",
       "name": "Transaction",
       "string": "Transaction()"
     }
@@ -129,11 +185,16 @@
     "tags": [
       {
         "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The function to execute within the context of     a transaction.</li>\n</ul>\n",
         "types": [
           "function"
         ],
-        "name": "callback",
-        "description": "- The function to execute within the context of     a transaction.\n"
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "example",
@@ -146,7 +207,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 79,
+    "codeStart": 98,
     "code": "Transaction.prototype.begin = function(callback) {\n  var that = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('beginTransaction', function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.id = resp.transaction;\n\n    callback(null);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -160,11 +225,16 @@
     "tags": [
       {
         "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
           "function"
         ],
-        "name": "callback",
-        "description": "- The callback function. "
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "example",
@@ -177,7 +247,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 115,
+    "codeStart": 129,
     "code": "Transaction.prototype.rollback = function(callback) {\n  var that = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('rollback', function(err) {\n    that.skipCommit = true;\n\n    callback(err || null);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -191,11 +265,16 @@
     "tags": [
       {
         "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
           "function"
         ],
-        "name": "callback",
-        "description": "- The callback function. "
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "example",
@@ -208,7 +287,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 141,
+    "codeStart": 155,
     "code": "Transaction.prototype.commit = function(callback) {\n  var that = this;\n\n  callback = callback || util.noop;\n\n  if (this.skipCommit) {\n    setImmediate(callback);\n    return;\n  }\n\n  var keys = {};\n\n  this.modifiedEntities_\n\n    // Reverse the order of the queue to respect the \"last queued request wins\"\n    // behavior.\n    .reverse()\n\n    // Limit the operations we're going to send through to only the most\n    // recently queued operations. E.g., if a user tries to save with the same\n    // key they just asked to be deleted, the delete request will be ignored,\n    // giving preference to the save operation.\n    .filter(function(modifiedEntity) {\n      var key = JSON.stringify(modifiedEntity.entity.key);\n\n      if (!keys[key]) {\n        keys[key] = true;\n        return true;\n      }\n    })\n\n    // Group entities together by action (delete or save).\n    .sort(function(a, b) {\n      return a.method > b.method ? 1 : a.method < b.method ? -1 : 0;\n    })\n\n    // Group arguments together so that we only make one call to each method.\n    // This is important for `DatastoreRequest.save`, especially, as that method\n    // handles assigning auto-generated IDs to the original keys passed in. When\n    // we eventually execute the `save` method's API callback, having all the\n    // keys together is necessary to maintain order.\n    .reduce(function(acc, entityObject) {\n      var lastEntityObject = acc[acc.length - 1];\n      var sameMethod = lastEntityObject &&\n        entityObject.method === lastEntityObject.method;\n\n      if (!lastEntityObject || !sameMethod) {\n        acc.push(entityObject);\n      } else {\n        lastEntityObject.args = lastEntityObject.args.concat(entityObject.args);\n      }\n\n      return acc;\n    }, [])\n\n    // Call each of the mutational methods (DatastoreRequest[save,delete]) to\n    // build up a `req` array on this instance. This will also build up a\n    // `callbacks` array, that is the same callback that would run if we were\n    // using `save` and `delete` outside of a transaction, to process the\n    // response from the API.\n    .forEach(function(modifiedEntity) {\n      var method = modifiedEntity.method;\n      var args = modifiedEntity.args.reverse();\n\n      DatastoreRequest.prototype[method].call(that, args, util.noop);\n    });\n\n  // Take the `req` array built previously, and merge them into one request to\n  // send as the final transactional commit.\n  var req = this.requests_.reduce(function(acc, req) {\n    return extend(true, acc, req);\n  }, {});\n\n  this.makeReq_('commit', req, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    // The `callbacks` array was built previously. These are the callbacks that\n    // handle the API response normally when using the DatastoreRequest.save and\n    // .delete methods.\n    that.requestCallbacks_.forEach(function(cb) {\n      cb(null, resp);\n    });\n\n    callback(null);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -226,18 +309,27 @@
       "body": "<p>Below, we override two methods that we inherit from DatastoreRequest:<br /><code>delete</code> and <code>save</code>. This is done because:</p><p>  A) the documentation needs to be different for a transactional save, and<br />  B) we build up a &quot;modifiedEntities_&quot; array on this object, used to build<br />     the final commit request with.</p>"
     },
     "isPrivate": false,
-    "ignore": true
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 245,
+    "codeStart": 254
   },
   {
     "tags": [
       {
         "type": "param",
+        "name": "key",
+        "description": "<ul>\n<li>Datastore key object(s). </li>\n</ul>\n",
         "types": [
           "Key",
-          "Key[]"
+          "Array.<Key>"
         ],
-        "name": "key",
-        "description": "- Datastore key object(s). "
+        "typesDescription": "<a href=\"Key.html\">Key</a>|<code>Array</code>.&lt;<a href=\"Key.html\">Key</a>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "example",
@@ -250,7 +342,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 254,
+    "codeStart": 270,
     "code": "Transaction.prototype.delete = function(entities) {\n  var that = this;\n\n  util.arrayize(entities).forEach(function(ent) {\n    that.modifiedEntities_.push({\n      entity: {\n        key: ent\n      },\n      method: 'delete',\n      args: [ent]\n    });\n  });\n};",
     "ctx": {
       "type": "method",
@@ -264,29 +360,44 @@
     "tags": [
       {
         "type": "param",
+        "name": "entities",
+        "description": "<ul>\n<li>Datastore key object(s).</li>\n</ul>\n",
         "types": [
           "object",
-          "object[]"
+          "Array.<object>"
         ],
-        "name": "entities",
-        "description": "- Datastore key object(s)."
+        "typesDescription": "<code>object</code>|<code>Array</code>.&lt;<code>object</code>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "entities.key",
+        "description": "<ul>\n<li>Datastore key object.</li>\n</ul>\n",
         "types": [
           "Key"
         ],
-        "name": "entities.key",
-        "description": "- Datastore key object."
+        "typesDescription": "<a href=\"Key.html\">Key</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "entities.data",
+        "description": "<ul>\n<li>Data to save with the provided key.     If you provide an array of objects, you must use the explicit syntax:<br />  <code>name</code> for the name of the property and <code>value</code> for its value. You may<br />  also specify an <code>excludeFromIndexes</code> property, set to <code>true</code> or <code>false</code>.</li>\n</ul>\n",
         "types": [
           "object",
-          "object[]"
+          "Array.<object>"
         ],
-        "name": "entities.data",
-        "description": "- Data to save with the provided key.     If you provide an array of objects, you must use the explicit syntax:\n    `name` for the name of the property and `value` for its value. You may\n    also specify an `excludeFromIndexes` property, set to `true` or `false`.\n"
+        "typesDescription": "<code>object</code>|<code>Array</code>.&lt;<code>object</code>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "example",
@@ -299,7 +410,11 @@
       "body": "<p>This method will determine the correct Datastore method to execute (<code>upsert</code>,<br /><code>insert</code>, <code>update</code>, and <code>insertAutoId</code>) by using the key(s) provided. For<br />example, if you provide an incomplete key (one without an ID), the request<br />will create a new entity and have its ID automatically assigned. If you<br />provide a complete key, the entity will be updated with the data specified.</p><p>By default, all properties are indexed. To prevent a property from being<br />included in <em>all</em> indexes, you must supply an entity&#39;s <code>data</code> property as an<br />array. See below for an example.</p>"
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 284,
+    "codeStart": 359,
     "code": "Transaction.prototype.save = function(entities) {\n  var that = this;\n\n  util.arrayize(entities).forEach(function(ent) {\n    that.modifiedEntities_.push({\n      entity: {\n        key: ent.key\n      },\n      method: 'save',\n      args: [ent]\n    });\n  });\n};",
     "ctx": {
       "type": "method",
@@ -326,7 +441,11 @@
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 373,
+    "codeStart": 380,
     "code": "Transaction.prototype.mapQuery = function() {\n  throw new Error('not yet implemented');\n};\n\nmodule.exports = Transaction;",
     "ctx": {
       "type": "method",

@@ -7,33 +7,59 @@
       "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
     },
     "isPrivate": false,
-    "ignore": true
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
   },
   {
-    "tags": [],
+    "tags": [
+      {
+        "type": "module",
+        "string": "storage"
+      }
+    ],
     "description": {
-      "full": "<p>@module storage</p>",
-      "summary": "<p>@module storage</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": true,
+    "line": 17,
+    "codeStart": 21,
     "code": "'use strict';\n\nvar extend = require('extend');"
   },
   {
     "tags": [
+      {
+        "type": "type",
+        "types": [],
+        "typesDescription": "<code>?</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
       {
         "type": "private",
         "visibility": "private"
       }
     ],
     "description": {
-      "full": "<p>@type module:storage/bucket</p>",
-      "summary": "<p>@type module:storage/bucket</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 25,
+    "codeStart": 29,
     "code": "var Bucket = require('./bucket.js');",
     "ctx": {
       "type": "declaration",
@@ -45,17 +71,30 @@
   {
     "tags": [
       {
+        "type": "type",
+        "types": [],
+        "typesDescription": "<code>?</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
         "type": "private",
         "visibility": "private"
       }
     ],
     "description": {
-      "full": "<p>@type module:common/util</p>",
-      "summary": "<p>@type module:common/util</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 31,
+    "codeStart": 35,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -81,8 +120,12 @@
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
-    "code": "var SCOPES = ['https://www.googleapis.com/auth/devstorage.full_control'];",
+    "line": 37,
+    "codeStart": 42,
+    "code": "var SCOPES = ['https://www.googleapis.com/auth/devstorage.full_control'];\n\n/**\n * @const {string}\n * @private\n */\nvar STORAGE_BASE_URL = 'https://www.googleapis.com/storage/v1/b';",
     "ctx": {
       "type": "declaration",
       "name": "SCOPES",
@@ -93,34 +136,17 @@
   {
     "tags": [
       {
-        "type": "private",
-        "visibility": "private"
-      }
-    ],
-    "description": {
-      "full": "<p>@const {string}</p>",
-      "summary": "<p>@const {string}</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "ignore": false,
-    "code": "var STORAGE_BASE_URL = 'https://www.googleapis.com/storage/v1/b';",
-    "ctx": {
-      "type": "declaration",
-      "name": "STORAGE_BASE_URL",
-      "value": "'https://www.googleapis.com/storage/v1/b'",
-      "string": "STORAGE_BASE_URL"
-    }
-  },
-  {
-    "tags": [
-      {
         "type": "param",
+        "name": "config",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
         "types": [
           "object"
         ],
-        "name": "config",
-        "description": "- Configuration object."
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       }
     ],
     "description": {
@@ -129,7 +155,11 @@
       "body": "<p>Invoke this method to create a new Storage object bound with pre-determined<br />configuration options. For each object that can be created (e.g., a bucket),<br />there is an equivalent static and instance method. While they are classes,<br />they can be instantiated without use of the <code>new</code> keyword.</p>"
     },
     "isPrivate": false,
-    "ignore": true
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 50,
+    "codeStart": 59
   },
   {
     "tags": [
@@ -152,10 +182,14 @@
       "body": "<p>The example below will demonstrate the different usage patterns your app may<br />need to connect to <code>gcloud</code> and access your bucket.</p>"
     },
     "isPrivate": false,
+    "isConstructor": true,
+    "isEvent": false,
     "ignore": false,
+    "line": 59,
+    "codeStart": 102,
     "code": "function Storage(config) {\n  if (!(this instanceof Storage)) {\n    return new Storage(config);\n  }\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequest({\n    credentials: config.credentials,\n    keyFile: config.keyFilename,\n    scopes: SCOPES\n  });\n\n  this.projectId = config.projectId;\n}",
     "ctx": {
-      "type": "function",
+      "type": "constructor",
       "name": "Storage",
       "string": "Storage()"
     }
@@ -166,7 +200,12 @@
         "type": "type",
         "types": [
           "object"
-        ]
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "example",
@@ -179,7 +218,11 @@
       "body": "<p>This object provides constants to refer to the three permission levels that<br />can be granted to a scope:</p><ul>\n<li><code>storage.acl.OWNER_ROLE</code> - (&quot;OWNER&quot;)</li>\n<li><code>storage.acl.READER_ROLE</code> - (&quot;READER&quot;)</li>\n<li><code>storage.acl.WRITER_ROLE</code> - (&quot;WRITER&quot;)</li>\n</ul>\n<p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p>"
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 116,
+    "codeStart": 162,
     "code": "Storage.acl = {\n  OWNER_ROLE: 'OWNER',\n  READER_ROLE: 'READER',\n  WRITER_ROLE: 'WRITER'\n};\n\nStorage.prototype.acl = Storage.acl;",
     "ctx": {
       "type": "property",
@@ -193,19 +236,28 @@
     "tags": [
       {
         "type": "param",
+        "name": "name",
+        "description": "<ul>\n<li>Name of the existing bucket.</li>\n</ul>\n",
         "types": [
           "object",
           "string"
         ],
-        "name": "name",
-        "description": "- Name of the existing bucket."
+        "typesDescription": "<code>object</code>|<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "return",
         "types": [
-          "module:storage",
-          "bucket"
+          "module:storage/bucket"
         ],
+        "typesDescription": "module:<a href=\"module%3Astorage%2Fbucket.html\">storage/bucket</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
         "description": ""
       },
       {
@@ -219,7 +271,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 170,
+    "codeStart": 186,
     "code": "Storage.prototype.bucket = function(name) {\n  return new Bucket(this, name);\n};",
     "ctx": {
       "type": "method",
@@ -236,31 +292,46 @@
         "types": [
           "Error"
         ],
-        "description": "If a name is not provided. "
+        "description": "<p>If a name is not provided. </p>"
       },
       {
         "type": "param",
+        "name": "name",
+        "description": "<ul>\n<li>Name of the bucket to create.</li>\n</ul>\n",
         "types": [
           "string"
         ],
-        "name": "name",
-        "description": "- Name of the bucket to create."
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
-        "types": [
-          "object="
-        ],
         "name": "metadata",
-        "description": "- Metadata to set for the bucket."
+        "description": "<ul>\n<li>Metadata to set for the bucket.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
           "function"
         ],
-        "name": "callback",
-        "description": "- The callback function. "
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "example",
@@ -273,7 +344,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 190,
+    "codeStart": 213,
     "code": "Storage.prototype.createBucket = function(name, metadata, callback) {\n  if (!name) {\n    throw new Error('A name is required to create a bucket.');\n  }\n  if (!callback) {\n    callback = metadata;\n    metadata = {};\n  }\n  var query = {\n    project: this.projectId\n  };\n  var body = extend(metadata, {\n    name: name\n  });\n  this.makeReq_('POST', '', query, body, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    var bucket = this.bucket(name);\n    bucket.metadata = resp;\n    callback(null, bucket);\n  }.bind(this));\n};",
     "ctx": {
       "type": "method",
@@ -287,35 +362,55 @@
     "tags": [
       {
         "type": "param",
-        "types": [
-          "object="
-        ],
         "name": "query",
-        "description": "- Query object."
+        "description": "<ul>\n<li>Query object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "query.maxResults",
+        "description": "<ul>\n<li>Maximum number of items plus prefixes to     return.</li>\n</ul>\n",
         "types": [
           "number"
         ],
-        "name": "query.maxResults",
-        "description": "- Maximum number of items plus prefixes to     return."
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "query.pageToken",
+        "description": "<ul>\n<li>A previously-returned page token     representing part of the larger set of results to view.</li>\n</ul>\n",
         "types": [
           "string"
         ],
-        "name": "query.pageToken",
-        "description": "- A previously-returned page token     representing part of the larger set of results to view."
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
           "function"
         ],
-        "name": "callback",
-        "description": "- The callback function. "
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "example",
@@ -328,7 +423,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 238,
+    "codeStart": 271,
     "code": "Storage.prototype.getBuckets = function(query, callback) {\n  var that = this;\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n  query.project = query.project || this.projectId;\n  this.makeReq_('GET', '', query, null, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    var buckets = (resp.items || []).map(function(item) {\n      var bucket = that.bucket(item.id);\n      bucket.metadata = item;\n      return bucket;\n    });\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, { pageToken: resp.nextPageToken });\n    }\n    callback(null, buckets, nextQuery);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -346,43 +445,64 @@
       },
       {
         "type": "param",
-        "types": [
-          "string"
-        ],
         "name": "method",
-        "description": "- Action."
-      },
-      {
-        "type": "param",
+        "description": "<ul>\n<li>Action.</li>\n</ul>\n",
         "types": [
           "string"
         ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
         "name": "path",
-        "description": "- Request path."
+        "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
-        "types": [
-          "*"
-        ],
         "name": "query",
-        "description": "- Request query object."
+        "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
-        "types": [
-          "*"
-        ],
         "name": "body",
-        "description": "- Request body contents."
+        "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
-        "name": "callback",
-        "description": "- The callback function."
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       }
     ],
     "description": {
@@ -391,7 +511,11 @@
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 296,
+    "codeStart": 308,
     "code": "Storage.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: STORAGE_BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};\n\nmodule.exports = Storage;",
     "ctx": {
       "type": "method",

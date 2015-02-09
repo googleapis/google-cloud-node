@@ -7,33 +7,59 @@
       "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
     },
     "isPrivate": false,
-    "ignore": true
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
   },
   {
-    "tags": [],
+    "tags": [
+      {
+        "type": "module",
+        "string": "pubsub/subscription"
+      }
+    ],
     "description": {
-      "full": "<p>@module pubsub/subscription</p>",
-      "summary": "<p>@module pubsub/subscription</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": true,
+    "line": 17,
+    "codeStart": 21,
     "code": "'use strict';\n\nvar events = require('events');\nvar nodeutil = require('util');"
   },
   {
     "tags": [
+      {
+        "type": "type",
+        "types": [],
+        "typesDescription": "<code>?</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
       {
         "type": "private",
         "visibility": "private"
       }
     ],
     "description": {
-      "full": "<p>@type module:common/util</p>",
-      "summary": "<p>@type module:common/util</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 26,
+    "codeStart": 30,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -46,43 +72,68 @@
     "tags": [
       {
         "type": "param",
+        "name": "pubsub",
+        "description": "<ul>\n<li>PubSub object.</li>\n</ul>\n",
         "types": [
           "module:pubsub"
         ],
-        "name": "pubsub",
-        "description": "- PubSub object."
+        "typesDescription": "module:<a href=\"module%3Apubsub.html\">pubsub</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
         "types": [
           "object"
         ],
-        "name": "options",
-        "description": "- Configuration object."
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "options.autoAck",
+        "description": "<ul>\n<li>Automatically acknowledge the message     once it&#39;s pulled. (default: false)</li>\n</ul>\n",
         "types": [
           "boolean"
         ],
-        "name": "options.autoAck",
-        "description": "- Automatically acknowledge the message     once it's pulled. (default: false)"
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "options.interval",
+        "description": "<ul>\n<li>Interval in milliseconds to check for new     messages. (default: 10)</li>\n</ul>\n",
         "types": [
           "number"
         ],
-        "name": "options.interval",
-        "description": "- Interval in milliseconds to check for new     messages. (default: 10)"
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "options.name",
+        "description": "<ul>\n<li>Name of the subscription.</li>\n</ul>\n",
         "types": [
           "string"
         ],
-        "name": "options.name",
-        "description": "- Name of the subscription."
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       }
     ],
     "description": {
@@ -91,7 +142,11 @@
       "body": ""
     },
     "isPrivate": false,
-    "ignore": true
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 32,
+    "codeStart": 42
   },
   {
     "tags": [
@@ -114,10 +169,14 @@
       "body": "<p>Subscriptions are sometimes retrieved when using various methods:</p><ul>\n<li>{@linkcode module:pubsub#getSubscriptions}</li>\n<li>{@linkcode module:pubsub/topic#getSubscriptions}</li>\n<li>{@linkcode module:pubsub/topic#subscribe}</li>\n</ul>\n<p>Subscription objects may be created directly with:</p><ul>\n<li>{@linkcode module:pubsub/topic#subscription}</li>\n</ul>\n<p>All Subscription objects are instances of an<br /><a href=\"http://nodejs.org/api/events.html\">EventEmitter</a>. The subscription will pull<br />for messages automatically as long as there is at least one listener assigned<br />for the <code>message</code> event.</p>"
     },
     "isPrivate": false,
+    "isConstructor": true,
+    "isEvent": false,
     "ignore": false,
+    "line": 42,
+    "codeStart": 113,
     "code": "function Subscription(pubsub, options) {\n  events.EventEmitter.call(this);\n\n  this.name = Subscription.formatName_(pubsub.projectId, options.name);\n  this.makeReq_ = pubsub.makeReq_.bind(pubsub);\n\n  this.autoAck = util.is(options.autoAck, 'boolean') ? options.autoAck : false;\n  this.closed = false;\n  this.interval = util.is(options.interval, 'number') ? options.interval : 10;\n\n  this.listenForEvents_();\n}\n\nnodeutil.inherits(Subscription, events.EventEmitter);",
     "ctx": {
-      "type": "function",
+      "type": "constructor",
       "name": "Subscription",
       "string": "Subscription()"
     }
@@ -135,7 +194,11 @@
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 128,
+    "codeStart": 134,
     "code": "Subscription.formatName_ = function(projectId, name) {\n  // Simple check if the name is already formatted.\n  if (name.indexOf('/') > -1) {\n    return name;\n  }\n  return '/subscriptions/' + projectId + '/' + name;\n};",
     "ctx": {
       "type": "method",
@@ -157,7 +220,11 @@
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 142,
+    "codeStart": 148,
     "code": "Subscription.formatMessage_ = function(msg) {\n  var message = {\n    id: msg.ackId\n  };\n  var evt = msg.pubsubEvent;\n  if (evt && evt.message && evt.message.data) {\n    message.data = new Buffer(evt.message.data, 'base64').toString('utf-8');\n    try {\n      message.data = JSON.parse(message.data);\n    } catch(e) {}\n  }\n  return message;\n};",
     "ctx": {
       "type": "method",
@@ -183,7 +250,11 @@
       "body": "<p>As long as there is one active message listener, the connection is open. As<br />soon as there are no more message listeners, the connection is closed.</p>"
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 162,
+    "codeStart": 175,
     "code": "Subscription.prototype.listenForEvents_ = function() {\n  var that = this;\n  var messageListeners = 0;\n\n  this.on('newListener', function(event) {\n    if (event === 'message') {\n      messageListeners++;\n      if (that.closed) {\n        that.closed = false;\n      }\n      that.startPulling_();\n    }\n  });\n\n  this.on('removeListener', function(event) {\n    if (event === 'message' && --messageListeners === 0) {\n      that.closed = true;\n    }\n  });\n};",
     "ctx": {
       "type": "method",
@@ -210,7 +281,11 @@
       "body": "<p>If messages are received, they are emitted on the <code>message</code> event.</p><p>Note: This method is automatically called once a message event handler is<br />assigned to the description.</p><p>To stop pulling, see {@linkcode module:pubsub/subscription#close}.</p>"
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 196,
+    "codeStart": 213,
     "code": "Subscription.prototype.startPulling_ = function() {\n  var that = this;\n  if (this.closed) {\n    return;\n  }\n  this.pull({\n    returnImmediately: false\n  }, function(err, message) {\n    if (err) {\n      that.emit('error', err);\n    }\n    if (message) {\n      that.emit('message', message);\n    }\n    setTimeout(that.startPulling_.bind(that), that.interval);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -227,24 +302,34 @@
         "types": [
           "Error"
         ],
-        "description": "If at least one id is not provided. "
+        "description": "<p>If at least one id is not provided. </p>"
       },
       {
         "type": "param",
+        "name": "ids",
+        "description": "<ul>\n<li>An ID or array of message IDs.</li>\n</ul>\n",
         "types": [
           "string",
-          "string[]"
+          "Array.<string>"
         ],
-        "name": "ids",
-        "description": "- An ID or array of message IDs."
+        "typesDescription": "<code>string</code>|<code>Array</code>.&lt;<code>string</code>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
           "function"
         ],
-        "name": "callback",
-        "description": "- The callback function. "
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "example",
@@ -257,7 +342,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 231,
+    "codeStart": 243,
     "code": "Subscription.prototype.ack = function(ids, callback) {\n  if (!ids || ids.length === 0) {\n    throw new Error(\n        'At least one ID must be specified before it can be acknowledged');\n  }\n  ids = util.arrayize(ids);\n  var body = {\n    subscription: this.name,\n    ackId: ids\n  };\n  this.makeReq_('POST', 'subscriptions/acknowledge', null, body, callback);\n};",
     "ctx": {
       "type": "method",
@@ -271,11 +360,16 @@
     "tags": [
       {
         "type": "param",
-        "types": [
-          "function="
-        ],
         "name": "callback",
-        "description": "- The callback function. "
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "example",
@@ -288,7 +382,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 256,
+    "codeStart": 265,
     "code": "Subscription.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_(\n      'DELETE', 'subscriptions/' + this.name, null, true, function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    this.closed = true;\n    this.removeAllListeners();\n    callback(null);\n  }.bind(this));\n};",
     "ctx": {
       "type": "method",
@@ -302,27 +400,42 @@
     "tags": [
       {
         "type": "param",
-        "types": [
-          "object="
-        ],
         "name": "options",
-        "description": "- Configuration object."
-      },
-      {
-        "type": "param",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
         "types": [
-          "boolean="
+          "object"
         ],
-        "name": "options.returnImmediately",
-        "description": "- If set, the system will respond     immediately. Otherwise, wait until new messages are available. Returns if\n    timeout is reached."
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "options.returnImmediately",
+        "description": "<ul>\n<li>If set, the system will respond     immediately. Otherwise, wait until new messages are available. Returns if<br />  timeout is reached.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
           "function"
         ],
-        "name": "callback",
-        "description": "- The callback function. "
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "example",
@@ -335,7 +448,11 @@
       "body": "<p>Note that messages are pulled automatically once you register your first<br />event listener to the subscription, thus the call to <code>pull</code> is handled for<br />you. If you don&#39;t want to start pulling, simply don&#39;t register a<br /><code>subscription.on(&#39;message&#39;, function() {})</code> event handler.</p>"
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 279,
+    "codeStart": 300,
     "code": "Subscription.prototype.pull = function(options, callback) {\n  var that = this;\n  // TODO(jbd): Should not be racing with other pull.\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n  var body = {\n    subscription: this.name,\n    returnImmediately: !!options.returnImmediately\n  };\n  this.makeReq_(\n      'POST', 'subscriptions/pull', null, body, function(err, message) {\n    // TODO(jbd): Fix API to return a list of messages.\n    if (err) {\n      callback(err);\n      return;\n    }\n    message = Subscription.formatMessage_(message);\n    if (that.autoAck) {\n      that.ack(message.id, function(err) {\n        callback(err, message);\n      });\n    } else {\n      callback(null, message);\n    }\n  });\n};\n\nmodule.exports = Subscription;",
     "ctx": {
       "type": "method",

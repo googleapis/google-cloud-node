@@ -7,33 +7,59 @@
       "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
     },
     "isPrivate": false,
-    "ignore": true
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
   },
   {
-    "tags": [],
+    "tags": [
+      {
+        "type": "module",
+        "string": "storage/bucket"
+      }
+    ],
     "description": {
-      "full": "<p>@module storage/bucket</p>",
-      "summary": "<p>@module storage/bucket</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": true,
+    "line": 17,
+    "codeStart": 21,
     "code": "'use strict';\n\nvar extend = require('extend');\nvar fs = require('fs');\nvar mime = require('mime-types');\nvar path = require('path');"
   },
   {
     "tags": [
+      {
+        "type": "type",
+        "types": [],
+        "typesDescription": "<code>?</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
       {
         "type": "private",
         "visibility": "private"
       }
     ],
     "description": {
-      "full": "<p>@type module:storage/acl</p>",
-      "summary": "<p>@type module:storage/acl</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 28,
+    "codeStart": 32,
     "code": "var Acl = require('./acl.js');",
     "ctx": {
       "type": "declaration",
@@ -45,17 +71,30 @@
   {
     "tags": [
       {
+        "type": "type",
+        "types": [],
+        "typesDescription": "<code>?</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
         "type": "private",
         "visibility": "private"
       }
     ],
     "description": {
-      "full": "<p>@type module:storage/file</p>",
-      "summary": "<p>@type module:storage/file</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 34,
+    "codeStart": 38,
     "code": "var File = require('./file.js');",
     "ctx": {
       "type": "declaration",
@@ -67,17 +106,30 @@
   {
     "tags": [
       {
+        "type": "type",
+        "types": [],
+        "typesDescription": "<code>?</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
         "type": "private",
         "visibility": "private"
       }
     ],
     "description": {
-      "full": "<p>@type module:common/util</p>",
-      "summary": "<p>@type module:common/util</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 40,
+    "codeStart": 44,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -89,117 +141,31 @@
   {
     "tags": [
       {
+        "type": "const",
+        "string": "{string}"
+      },
+      {
         "type": "private",
         "visibility": "private"
       }
     ],
     "description": {
-      "full": "<p>@const {string}</p>",
-      "summary": "<p>@const {string}</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
-    "code": "var STORAGE_BASE_URL = 'https://www.googleapis.com/storage/v1/b';",
+    "line": 46,
+    "codeStart": 50,
+    "code": "var STORAGE_BASE_URL = 'https://www.googleapis.com/storage/v1/b';\n\n/**\n * The size of a file (in bytes) must be greater than this number to\n * automatically trigger a resumable upload.\n *\n * @const {number}\n * @private\n */\nvar RESUMABLE_THRESHOLD = 5000000;\n\n/**\n * Create a Bucket object to interact with a Google Cloud Storage bucket.\n *\n * @constructor\n * @alias module:storage/bucket\n *\n * @throws if a bucket name isn't provided.\n *\n * @param {object} options - Configuration options.\n * @param {string} options.bucketName - Name of the bucket.\n * @param {string=} options.keyFilename - Full path to the JSON key downloaded\n *     from the Google Developers Console. Alternatively, you may provide a\n *     `credentials` object.\n * @param {object=} options.credentials - Credentials object, used in place of\n *     a `keyFilename`.\n *\n * @example\n * var gcloud = require('gcloud');\n * var storage = gcloud.storage();\n *\n * // From Google Compute Engine\n * var albums = storage.bucket('albums');\n *\n * // From elsewhere\n * var photos = storage.bucket({\n *   keyFilename: '/path/to/keyfile.json', // If you have not yet provided it.\n *   name: 'bucket'\n * });\n */\nfunction Bucket(storage, name) {\n  this.metadata = {};\n  this.name = name;\n  this.storage = storage;\n\n  if (!this.name) {\n    throw Error('A bucket name is needed to use Google Cloud Storage.');\n  }",
     "ctx": {
       "type": "declaration",
       "name": "STORAGE_BASE_URL",
       "value": "'https://www.googleapis.com/storage/v1/b'",
       "string": "STORAGE_BASE_URL"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "const",
-        "string": "{number}"
-      },
-      {
-        "type": "private",
-        "visibility": "private"
-      }
-    ],
-    "description": {
-      "full": "<p>The size of a file (in bytes) must be greater than this number to<br />automatically trigger a resumable upload.</p>",
-      "summary": "<p>The size of a file (in bytes) must be greater than this number to<br />automatically trigger a resumable upload.</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "ignore": false,
-    "code": "var RESUMABLE_THRESHOLD = 5000000;",
-    "ctx": {
-      "type": "declaration",
-      "name": "RESUMABLE_THRESHOLD",
-      "value": "5000000",
-      "string": "RESUMABLE_THRESHOLD"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "constructor",
-        "string": ""
-      },
-      {
-        "type": "alias",
-        "string": "module:storage/bucket "
-      },
-      {
-        "type": "throws",
-        "types": [
-          "if"
-        ],
-        "description": "a bucket name isn't provided. "
-      },
-      {
-        "type": "param",
-        "types": [
-          "object"
-        ],
-        "name": "options",
-        "description": "- Configuration options."
-      },
-      {
-        "type": "param",
-        "types": [
-          "string"
-        ],
-        "name": "options.bucketName",
-        "description": "- Name of the bucket."
-      },
-      {
-        "type": "param",
-        "types": [
-          "string="
-        ],
-        "name": "options.keyFilename",
-        "description": "- Full path to the JSON key downloaded     from the Google Developers Console. Alternatively, you may provide a\n    `credentials` object."
-      },
-      {
-        "type": "param",
-        "types": [
-          "object="
-        ],
-        "name": "options.credentials",
-        "description": "- Credentials object, used in place of     a `keyFilename`.\n"
-      },
-      {
-        "type": "example",
-        "string": "var gcloud = require('gcloud');\nvar storage = gcloud.storage();\n\n// From Google Compute Engine\nvar albums = storage.bucket('albums');\n\n// From elsewhere\nvar photos = storage.bucket({\n  keyFilename: '/path/to/keyfile.json', // If you have not yet provided it.\n  name: 'bucket'\n});"
-      }
-    ],
-    "description": {
-      "full": "<p>Create a Bucket object to interact with a Google Cloud Storage bucket.</p>",
-      "summary": "<p>Create a Bucket object to interact with a Google Cloud Storage bucket.</p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "ignore": false,
-    "code": "function Bucket(storage, name) {\n  this.metadata = {};\n  this.name = name;\n  this.storage = storage;\n\n  if (!this.name) {\n    throw Error('A bucket name is needed to use Google Cloud Storage.');\n  }",
-    "ctx": {
-      "type": "function",
-      "name": "Bucket",
-      "string": "Bucket()"
     }
   },
   {
@@ -219,8 +185,12 @@
       "body": "<p>An ACL consists of one or more entries, where each entry grants permissions<br />to a scope. Permissions define the actions that can be performed against an<br />object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the scope defines who<br />the permission applies to (for example, a specific user or group of users).</p><p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p><p>The <code>acl</code> object on a Bucket instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p><p>Buckets also have<br /><a href=\"https://cloud.google.com/storage/docs/accesscontrol#default\">default ACLs</a><br />for all created files. Default ACLs specify permissions that all new<br />objects added to the bucket will inherit by default. You can add, delete,<br />get, and update scopes and permissions for these as well with<br />{module:storage/bucket#acl.default}.</p>"
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
-    "code": "this.acl = new Acl({\n    makeReq: this.makeReq_.bind(this),\n    pathPrefix: '/acl'\n  });\n\n  this.acl.default = new Acl({\n    makeReq: this.makeReq_.bind(this),\n    pathPrefix: '/defaultObjectAcl'\n  });",
+    "line": 99,
+    "codeStart": 133,
+    "code": "this.acl = new Acl({\n  makeReq: this.makeReq_.bind(this),\n  pathPrefix: '/acl'\n});\n\nthis.acl.default = new Acl({\n  makeReq: this.makeReq_.bind(this),\n  pathPrefix: '/defaultObjectAcl'\n});",
     "ctx": {
       "type": "property",
       "receiver": "this",
@@ -232,22 +202,16 @@
   {
     "tags": [],
     "description": {
-      "full": "<p>jshint ignore:start</p>",
-      "summary": "<p>jshint ignore:start</p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "ignore": false
-  },
-  {
-    "tags": [],
-    "description": {
       "full": "<p>Developer Documentation</p><p>Sadly, to generate the documentation properly, this comment block describes<br />a useless variable named <code>ignored</code> and aliases it to <code>acl.default</code>. This is<br />done so the doc building process picks this up, without adding cruft to the<br />Bucket class itself.</p>",
       "summary": "<p>Developer Documentation</p>",
       "body": "<p>Sadly, to generate the documentation properly, this comment block describes<br />a useless variable named <code>ignored</code> and aliases it to <code>acl.default</code>. This is<br />done so the doc building process picks this up, without adding cruft to the<br />Bucket class itself.</p>"
     },
     "isPrivate": false,
-    "ignore": true
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 144,
+    "codeStart": 151
   },
   {
     "tags": [
@@ -262,7 +226,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 151,
+    "codeStart": 159,
     "code": "var aclDefault = true;",
     "ctx": {
       "type": "declaration",
@@ -284,7 +252,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 161,
+    "codeStart": 165,
     "code": "var aclDefaultAdd = true;",
     "ctx": {
       "type": "declaration",
@@ -306,7 +278,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 167,
+    "codeStart": 171,
     "code": "var aclDefaultDelete = true;",
     "ctx": {
       "type": "declaration",
@@ -328,7 +304,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 173,
+    "codeStart": 177,
     "code": "var aclDefaultGet = true;",
     "ctx": {
       "type": "declaration",
@@ -350,7 +330,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 179,
+    "codeStart": 183,
     "code": "var aclDefaultUpdate = true;",
     "ctx": {
       "type": "declaration",
@@ -372,7 +356,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 185,
+    "codeStart": 189,
     "code": "var aclDefaultOwners = true;",
     "ctx": {
       "type": "declaration",
@@ -394,7 +382,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 191,
+    "codeStart": 195,
     "code": "var aclDefaultReaders = true;",
     "ctx": {
       "type": "declaration",
@@ -416,35 +408,27 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
-    "code": "var aclDefaultWriters = true;",
-    "ctx": {
-      "type": "declaration",
-      "name": "aclDefaultWriters",
-      "value": "true",
-      "string": "aclDefaultWriters"
-    }
-  },
-  {
-    "tags": [],
-    "description": {
-      "full": "<p>jshint ignore:end</p>",
-      "summary": "<p>jshint ignore:end</p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "ignore": false,
+    "line": 197,
+    "codeStart": 201,
     "code": "}"
   },
   {
     "tags": [
       {
         "type": "param",
-        "types": [
-          "function="
-        ],
         "name": "callback",
-        "description": "- The callback function. "
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "example",
@@ -457,7 +441,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 205,
+    "codeStart": 213,
     "code": "Bucket.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('DELETE', '', null, true, callback);\n};",
     "ctx": {
       "type": "method",
@@ -471,18 +459,27 @@
     "tags": [
       {
         "type": "param",
+        "name": "name",
+        "description": "<ul>\n<li>The name of the file in this bucket.</li>\n</ul>\n",
         "types": [
           "string"
         ],
-        "name": "name",
-        "description": "- The name of the file in this bucket."
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "return",
         "types": [
-          "module:storage",
-          "file"
+          "module:storage/file"
         ],
+        "typesDescription": "module:<a href=\"module%3Astorage%2Ffile.html\">storage/file</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
         "description": ""
       },
       {
@@ -496,7 +493,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 218,
+    "codeStart": 228,
     "code": "Bucket.prototype.file = function(name) {\n  return new File(this, name);\n};",
     "ctx": {
       "type": "method",
@@ -510,51 +511,81 @@
     "tags": [
       {
         "type": "param",
-        "types": [
-          "object="
-        ],
         "name": "query",
-        "description": "- Query object."
+        "description": "<ul>\n<li>Query object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
-        "types": [
-          "string"
-        ],
         "name": "query.delimiter",
-        "description": "- Results will contain only objects whose     names, aside from the prefix, do not contain delimiter. Objects whose\n    names, aside from the prefix, contain delimiter will have their name\n    truncated after the delimiter, returned in prefixes. Duplicate prefixes\n    are omitted."
-      },
-      {
-        "type": "param",
+        "description": "<ul>\n<li>Results will contain only objects whose     names, aside from the prefix, do not contain delimiter. Objects whose<br />  names, aside from the prefix, contain delimiter will have their name<br />  truncated after the delimiter, returned in prefixes. Duplicate prefixes<br />  are omitted.</li>\n</ul>\n",
         "types": [
           "string"
         ],
-        "name": "query.prefix",
-        "description": "- Filter results to objects whose names begin     with this prefix."
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "query.prefix",
+        "description": "<ul>\n<li>Filter results to objects whose names begin     with this prefix.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "query.maxResults",
+        "description": "<ul>\n<li>Maximum number of items plus prefixes to     return.</li>\n</ul>\n",
         "types": [
           "number"
         ],
-        "name": "query.maxResults",
-        "description": "- Maximum number of items plus prefixes to     return."
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "query.pageToken",
+        "description": "<ul>\n<li>A previously-returned page token     representing part of the larger set of results to view.</li>\n</ul>\n",
         "types": [
           "string"
         ],
-        "name": "query.pageToken",
-        "description": "- A previously-returned page token     representing part of the larger set of results to view."
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
           "function"
         ],
-        "name": "callback",
-        "description": "- The callback function. "
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "example",
@@ -567,7 +598,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 232,
+    "codeStart": 272,
     "code": "Bucket.prototype.getFiles = function(query, callback) {\n  var that = this;\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n  this.makeReq_('GET', '/o', query, true, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    var files = (resp.items || []).map(function(item) {\n      var file = that.file(item.name);\n      file.metadata = item;\n      return file;\n    });\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, { pageToken: resp.nextPageToken });\n    }\n    callback(null, files, nextQuery);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -581,11 +616,16 @@
     "tags": [
       {
         "type": "param",
-        "types": [
-          "function="
-        ],
         "name": "callback",
-        "description": "- The callback function. "
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "example",
@@ -598,7 +638,11 @@
       "body": "<p>To set metadata, see {module:storage/bucket#setMetadata}.</p>"
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 296,
+    "codeStart": 306,
     "code": "Bucket.prototype.getMetadata = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('GET', '', null, true, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    this.metadata = resp;\n    callback(null, this.metadata);\n  }.bind(this));\n};",
     "ctx": {
       "type": "method",
@@ -612,19 +656,29 @@
     "tags": [
       {
         "type": "param",
+        "name": "metadata",
+        "description": "<ul>\n<li>The metadata you wish to set.</li>\n</ul>\n",
         "types": [
           "object"
         ],
-        "name": "metadata",
-        "description": "- The metadata you wish to set."
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
-        "types": [
-          "function="
-        ],
         "name": "callback",
-        "description": "- The callback function. "
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "example",
@@ -637,7 +691,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 318,
+    "codeStart": 335,
     "code": "Bucket.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n  callback = callback || util.noop;\n\n  this.makeReq_('PATCH', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -651,62 +709,96 @@
     "tags": [
       {
         "type": "param",
+        "name": "localPath",
+        "description": "<ul>\n<li>The fully qualified path to the file you wish to     upload to your bucket.</li>\n</ul>\n",
         "types": [
           "string"
         ],
-        "name": "localPath",
-        "description": "- The fully qualified path to the file you wish to     upload to your bucket."
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
-        "types": [
-          "object="
-        ],
         "name": "options",
-        "description": "- Configuration options."
+        "description": "<ul>\n<li>Configuration options.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "options.destination",
+        "description": "<ul>\n<li>The place to save     your file. If given a string, the file will be uploaded to the bucket<br />  using the string as a filename. When given a File object, your local file<br />  will be uploaded to the File object&#39;s bucket and under the File object&#39;s<br />  name. Lastly, when this argument is omitted, the file is uploaded to your<br />  bucket using the name of the local file.</li>\n</ul>\n",
         "types": [
           "string",
-          "module:storage",
-          "file"
+          "module:storage/file"
         ],
-        "name": "options.destination",
-        "description": "- The place to save     your file. If given a string, the file will be uploaded to the bucket\n    using the string as a filename. When given a File object, your local file\n    will be uploaded to the File object's bucket and under the File object's\n    name. Lastly, when this argument is omitted, the file is uploaded to your\n    bucket using the name of the local file."
+        "typesDescription": "<code>string</code>|module:<a href=\"module%3Astorage%2Ffile.html\">storage/file</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
-        "types": [
-          "object="
-        ],
         "name": "options.metadata",
-        "description": "- Metadata to set for your file."
-      },
-      {
-        "type": "param",
+        "description": "<ul>\n<li>Metadata to set for your file.</li>\n</ul>\n",
         "types": [
-          "boolean="
+          "object"
         ],
-        "name": "options.resumable",
-        "description": "- Force a resumable upload. (default:     true for files larger than 5MB). Read more about resumable uploads\n    [here](http://goo.gl/1JWqCF). NOTE: This behavior is only possible with\n    this method, and not {module:storage/file#createWriteStream}. When\n    working with streams, the file format and size is unknown until it's\n    completely consumed. Because of this, it's best for you to be explicit\n    for what makes sense given your input."
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "options.resumable",
+        "description": "<ul>\n<li>Force a resumable upload. (default:     true for files larger than 5MB). Read more about resumable uploads<br />  <a href=\"http://goo.gl/1JWqCF\">here</a>. NOTE: This behavior is only possible with<br />  this method, and not {module:storage/file#createWriteStream}. When<br />  working with streams, the file format and size is unknown until it&#39;s<br />  completely consumed. Because of this, it&#39;s best for you to be explicit<br />  for what makes sense given your input.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
-        "name": "callback",
-        "description": "- The callback function."
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "options.validation",
+        "description": "<ul>\n<li>Possible values: <code>&quot;md5&quot;</code>,     <code>&quot;crc32c&quot;</code>, or <code>false</code>. By default, data integrity is validated with an<br />  MD5 checksum for maximum reliability. CRC32c will provide better<br />  performance with less reliability. You may also choose to skip validation<br />  completely, however this is <strong>not recommended</strong>.</li>\n</ul>\n",
         "types": [
           "string",
           "boolean"
         ],
-        "name": "options.validation",
-        "description": "- Possible values: `\"md5\"`,     `\"crc32c\"`, or `false`. By default, data integrity is validated with an\n    MD5 checksum for maximum reliability. CRC32c will provide better\n    performance with less reliability. You may also choose to skip validation\n    completely, however this is **not recommended**.\n"
+        "typesDescription": "<code>string</code>|<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "example",
@@ -719,7 +811,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 351,
+    "codeStart": 429,
     "code": "Bucket.prototype.upload = function(localPath, options, callback) {\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = {};\n  }\n\n  var newFile;\n  if (options.destination instanceof File) {\n    newFile = options.destination;\n  } else if (util.is(options.destination, 'string')) {\n    // Use the string as the name of the file.\n    newFile = this.file(options.destination);\n  } else {\n    // Resort to using the name of the incoming file.\n    newFile = this.file(path.basename(localPath));\n  }\n\n  var metadata = options.metadata || {};\n  var contentType = mime.contentType(path.basename(localPath));\n\n  if (contentType && !metadata.contentType) {\n    metadata.contentType = contentType;\n  }\n\n  var resumable;\n  if (util.is(options.resumable, 'boolean')) {\n    resumable = options.resumable;\n    upload();\n  } else {\n    // Determine if the upload should be resumable if it's over the threshold.\n    fs.stat(localPath, function(err, fd) {\n      if (err) {\n        callback(err);\n        return;\n      }\n\n      resumable = fd.size > RESUMABLE_THRESHOLD;\n\n      upload();\n    });\n  }\n\n  function upload() {\n    fs.createReadStream(localPath)\n      .pipe(newFile.createWriteStream({\n        validation: options.validation,\n        resumable: resumable,\n        metadata: metadata\n      }))\n      .on('error', callback)\n      .on('complete', function() {\n        callback(null, newFile);\n      });\n  }\n};",
     "ctx": {
       "type": "method",
@@ -737,43 +833,64 @@
       },
       {
         "type": "param",
-        "types": [
-          "string"
-        ],
         "name": "method",
-        "description": "- Action."
-      },
-      {
-        "type": "param",
+        "description": "<ul>\n<li>Action.</li>\n</ul>\n",
         "types": [
           "string"
         ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
         "name": "path",
-        "description": "- Request path."
+        "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
-        "types": [
-          "*"
-        ],
         "name": "query",
-        "description": "- Request query object."
+        "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
-        "types": [
-          "*"
-        ],
         "name": "body",
-        "description": "- Request body contents."
+        "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
-        "name": "callback",
-        "description": "- The callback function."
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       }
     ],
     "description": {
@@ -782,7 +899,11 @@
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 485,
+    "codeStart": 497,
     "code": "Bucket.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: STORAGE_BASE_URL + '/' + this.name + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.storage.makeAuthorizedRequest_(reqOpts, callback);\n};\n\nmodule.exports = Bucket;",
     "ctx": {
       "type": "method",

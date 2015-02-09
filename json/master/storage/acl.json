@@ -7,33 +7,59 @@
       "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
     },
     "isPrivate": false,
-    "ignore": true
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
   },
   {
-    "tags": [],
+    "tags": [
+      {
+        "type": "module",
+        "string": "storage/acl"
+      }
+    ],
     "description": {
-      "full": "<p>@module storage/acl</p>",
-      "summary": "<p>@module storage/acl</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": true,
+    "line": 17,
+    "codeStart": 21,
     "code": "'use strict';\n\nvar nodeutil = require('util');"
   },
   {
     "tags": [
+      {
+        "type": "type",
+        "types": [],
+        "typesDescription": "<code>?</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
       {
         "type": "private",
         "visibility": "private"
       }
     ],
     "description": {
-      "full": "<p>@type module:common/util</p>",
-      "summary": "<p>@type module:common/util</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 25,
+    "codeStart": 29,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -59,10 +85,14 @@
       "body": "<p>An ACL consists of one or more entries, where each entry grants permissions<br />to an entity. Permissions define the actions that can be performed against an<br />object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the entity defines who the<br />permission applies to (for example, a specific user or group of users).</p><p>Where an <code>entity</code> value is accepted, we follow the format the Cloud Storage<br />API expects.</p><p>Refer to<br /><a href=\"https://cloud.google.com/storage/docs/json_api/v1/defaultObjectAccessControls\">https://cloud.google.com/storage/docs/json_api/v1/defaultObjectAccessControls</a><br />for the most up-to-date values.</p><ul>\n<li><code>user-userId</code></li>\n<li><code>user-email</code></li>\n<li><code>group-groupId</code></li>\n<li><code>group-email</code></li>\n<li><code>domain-domain</code></li>\n<li><code>project-team-projectId</code></li>\n<li><code>allUsers</code></li>\n<li><code>allAuthenticatedUsers</code></li>\n</ul>\n<p>Examples:</p><ul>\n<li>The user &quot;liz@example.com&quot; would be <code>user-liz@example.com</code>.</li>\n<li>The group &quot;example@googlegroups.com&quot; would be<br /><code>group-example@googlegroups.com</code>.</li>\n<li>To refer to all members of the Google Apps for Business domain<br />&quot;example.com&quot;, the entity would be <code>domain-example.com</code>.</li>\n</ul>\n<p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p>"
     },
     "isPrivate": false,
+    "isConstructor": true,
+    "isEvent": false,
     "ignore": false,
+    "line": 31,
+    "codeStart": 71,
     "code": "function Acl(options) {\n  AclRoleAccessorMethods.call(this);\n\n  this.makeReq = options.makeReq;\n  this.pathPrefix = options.pathPrefix;\n}",
     "ctx": {
-      "type": "function",
+      "type": "constructor",
       "name": "Acl",
       "string": "Acl()"
     }
@@ -78,6 +108,11 @@
         "types": [
           "object"
         ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
         "description": ""
       },
       {
@@ -91,7 +126,11 @@
       "body": "<p>The supported methods include:</p><ul>\n<li><code>myFile.acl.owners.addAllAuthenticatedUsers</code></li>\n<li><code>myFile.acl.owners.deleteAllAuthenticatedUsers</code></li>\n<li><code>myFile.acl.owners.addAllUsers</code></li>\n<li><code>myFile.acl.owners.deleteAllUsers</code></li>\n<li><code>myFile.acl.owners.addDomain</code></li>\n<li><code>myFile.acl.owners.deleteDomain</code></li>\n<li><code>myFile.acl.owners.addGroup</code></li>\n<li><code>myFile.acl.owners.deleteGroup</code></li>\n<li><code>myFile.acl.owners.addProject</code></li>\n<li><code>myFile.acl.owners.deleteProject</code></li>\n<li><code>myFile.acl.owners.addUser</code></li>\n<li><code>myFile.acl.owners.deleteUser</code></li>\n</ul>\n"
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 78,
+    "codeStart": 115,
     "code": "Acl.prototype.owners = {};",
     "ctx": {
       "type": "property",
@@ -113,6 +152,11 @@
         "types": [
           "object"
         ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
         "description": ""
       },
       {
@@ -126,7 +170,11 @@
       "body": "<p>The supported methods include:</p><ul>\n<li><code>myFile.acl.readers.addAllAuthenticatedUsers</code></li>\n<li><code>myFile.acl.readers.deleteAllAuthenticatedUsers</code></li>\n<li><code>myFile.acl.readers.addAllUsers</code></li>\n<li><code>myFile.acl.readers.deleteAllUsers</code></li>\n<li><code>myFile.acl.readers.addDomain</code></li>\n<li><code>myFile.acl.readers.deleteDomain</code></li>\n<li><code>myFile.acl.readers.addGroup</code></li>\n<li><code>myFile.acl.readers.deleteGroup</code></li>\n<li><code>myFile.acl.readers.addProject</code></li>\n<li><code>myFile.acl.readers.deleteProject</code></li>\n<li><code>myFile.acl.readers.addUser</code></li>\n<li><code>myFile.acl.readers.deleteUser</code></li>\n</ul>\n"
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 117,
+    "codeStart": 154,
     "code": "Acl.prototype.readers = {};",
     "ctx": {
       "type": "property",
@@ -148,6 +196,11 @@
         "types": [
           "object"
         ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
         "description": ""
       },
       {
@@ -161,7 +214,11 @@
       "body": "<p>The supported methods include:</p><ul>\n<li><code>myFile.acl.writers.addAllAuthenticatedUsers</code></li>\n<li><code>myFile.acl.writers.deleteAllAuthenticatedUsers</code></li>\n<li><code>myFile.acl.writers.addAllUsers</code></li>\n<li><code>myFile.acl.writers.deleteAllUsers</code></li>\n<li><code>myFile.acl.writers.addDomain</code></li>\n<li><code>myFile.acl.writers.deleteDomain</code></li>\n<li><code>myFile.acl.writers.addGroup</code></li>\n<li><code>myFile.acl.writers.deleteGroup</code></li>\n<li><code>myFile.acl.writers.addProject</code></li>\n<li><code>myFile.acl.writers.deleteProject</code></li>\n<li><code>myFile.acl.writers.addUser</code></li>\n<li><code>myFile.acl.writers.deleteUser</code></li>\n</ul>\n"
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 156,
+    "codeStart": 193,
     "code": "Acl.prototype.writers = {};\n\nnodeutil.inherits(Acl, AclRoleAccessorMethods);",
     "ctx": {
       "type": "property",
@@ -176,43 +233,68 @@
     "tags": [
       {
         "type": "param",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
         "types": [
           "object"
         ],
-        "name": "options",
-        "description": "- Configuration object."
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
-        "types": [
-          "string"
-        ],
         "name": "options.entity",
-        "description": "- Whose permissions will be added."
-      },
-      {
-        "type": "param",
+        "description": "<ul>\n<li>Whose permissions will be added.</li>\n</ul>\n",
         "types": [
           "string"
         ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
         "name": "options.role",
-        "description": "- Permissions allowed for the defined entity.     See {module:storage#acl}."
-      },
-      {
-        "type": "param",
+        "description": "<ul>\n<li>Permissions allowed for the defined entity.     See {module:storage#acl}.</li>\n</ul>\n",
         "types": [
-          "int="
+          "string"
         ],
-        "name": "options.generation",
-        "description": "- **File Objects Only** Select a specific     revision of this file (as opposed to the latest version, the default)."
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "options.generation",
+        "description": "<ul>\n<li><strong>File Objects Only</strong> Select a specific     revision of this file (as opposed to the latest version, the default).</li>\n</ul>\n",
+        "types": [
+          "int"
+        ],
+        "typesDescription": "<a href=\"int.html\">int</a>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
           "function"
         ],
-        "name": "callback",
-        "description": "- The callback function. "
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "alias",
@@ -229,7 +311,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 197,
+    "codeStart": 227,
     "code": "Acl.prototype.add = function(options, callback) {\n  var that = this;\n\n  var body = {\n    entity: options.entity,\n    role: options.role.toUpperCase()\n  };\n\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  this.makeReq_('POST', '', query, body, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    callback(null, that.makeAclObject_(resp));\n  });\n};",
     "ctx": {
       "type": "method",
@@ -243,35 +329,55 @@
     "tags": [
       {
         "type": "param",
-        "types": [
-          "object="
-        ],
         "name": "options",
-        "description": "- Configuration object."
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "options.entity",
+        "description": "<ul>\n<li>Whose permissions will be revoked.</li>\n</ul>\n",
         "types": [
           "string"
         ],
-        "name": "options.entity",
-        "description": "- Whose permissions will be revoked."
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
-        "types": [
-          "int="
-        ],
         "name": "options.generation",
-        "description": "- **File Objects Only** Select a specific     revision of this file (as opposed to the latest version, the default)."
+        "description": "<ul>\n<li><strong>File Objects Only</strong> Select a specific     revision of this file (as opposed to the latest version, the default).</li>\n</ul>\n",
+        "types": [
+          "int"
+        ],
+        "typesDescription": "<a href=\"int.html\">int</a>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
           "function"
         ],
-        "name": "callback",
-        "description": "- The callback function. "
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "alias",
@@ -288,7 +394,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 253,
+    "codeStart": 277,
     "code": "Acl.prototype.delete = function(options, callback) {\n  var path = '/' + encodeURIComponent(options.entity);\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  this.makeReq_('DELETE', path, query, null, callback);\n};",
     "ctx": {
       "type": "method",
@@ -302,28 +412,43 @@
     "tags": [
       {
         "type": "param",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object. If you want to     receive a list of all access controls, pass the callback function as the<br />  only argument.</li>\n</ul>\n",
         "types": [
           "object",
           "function"
         ],
-        "name": "options",
-        "description": "- Configuration object. If you want to     receive a list of all access controls, pass the callback function as the\n    only argument."
+        "typesDescription": "<code>object</code>|<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
-        "types": [
-          "string="
-        ],
         "name": "options.entity",
-        "description": "- Whose permissions will be fetched."
+        "description": "<ul>\n<li>Whose permissions will be fetched.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
-        "types": [
-          "int="
-        ],
         "name": "options.generation",
-        "description": "- **File Objects Only** Select a specific     revision of this file (as opposed to the latest version, the default).\n"
+        "description": "<ul>\n<li><strong>File Objects Only</strong> Select a specific     revision of this file (as opposed to the latest version, the default).</li>\n</ul>\n",
+        "types": [
+          "int"
+        ],
+        "typesDescription": "<a href=\"int.html\">int</a>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "alias",
@@ -340,7 +465,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 290,
+    "codeStart": 329,
     "code": "Acl.prototype.get = function(options, callback) {\n  var that = this;\n  var path = '';\n  var query = null;\n\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = null;\n  } else {\n    path = '/' + encodeURIComponent(options.entity);\n\n    if (options.generation) {\n      query = {\n        generation: options.generation\n      };\n    }\n  }\n\n  this.makeReq_('GET', path, query, null, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var results = resp;\n\n    if (resp.items) {\n      results = (resp.items || []).map(that.makeAclObject_);\n    } else {\n      results = that.makeAclObject_(results);\n    }\n\n    callback(null, results);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -354,43 +483,68 @@
     "tags": [
       {
         "type": "param",
-        "types": [
-          "object="
-        ],
         "name": "options",
-        "description": "- Configuration object."
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
-        "types": [
-          "string"
-        ],
         "name": "options.entity",
-        "description": "- Whose permissions will be updated."
-      },
-      {
-        "type": "param",
+        "description": "<ul>\n<li>Whose permissions will be updated.</li>\n</ul>\n",
         "types": [
           "string"
         ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
         "name": "options.role",
-        "description": "- Permissions allowed for the defined entity.     See {module:storage#acl}."
-      },
-      {
-        "type": "param",
+        "description": "<ul>\n<li>Permissions allowed for the defined entity.     See {module:storage#acl}.</li>\n</ul>\n",
         "types": [
-          "int="
+          "string"
         ],
-        "name": "options.generation",
-        "description": "- **File Objects Only** Select a specific     revision of this file (as opposed to the latest version, the default)."
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "options.generation",
+        "description": "<ul>\n<li><strong>File Objects Only</strong> Select a specific     revision of this file (as opposed to the latest version, the default).</li>\n</ul>\n",
+        "types": [
+          "int"
+        ],
+        "typesDescription": "<a href=\"int.html\">int</a>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
           "function"
         ],
-        "name": "callback",
-        "description": "- The callback function. "
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "alias",
@@ -407,7 +561,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 365,
+    "codeStart": 395,
     "code": "Acl.prototype.update = function(options, callback) {\n  var that = this;\n  var path = '/' + encodeURIComponent(options.entity);\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  var body = {\n    role: options.role.toUpperCase()\n  };\n\n  this.makeReq_('PUT', path, query, body, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    callback(null, that.makeAclObject_(resp));\n  });\n};",
     "ctx": {
       "type": "method",
@@ -430,7 +588,11 @@
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 420,
+    "codeStart": 425,
     "code": "Acl.prototype.makeAclObject_ = function(accessControlObject) {\n  var obj = {\n    entity: accessControlObject.entity,\n    role: accessControlObject.role\n  };\n\n  if (accessControlObject.projectTeam) {\n    obj.projectTeam = accessControlObject.projectTeam;\n  }\n\n  return obj;\n};",
     "ctx": {
       "type": "method",
@@ -448,43 +610,64 @@
       },
       {
         "type": "param",
-        "types": [
-          "string"
-        ],
         "name": "method",
-        "description": "- Action."
-      },
-      {
-        "type": "param",
+        "description": "<ul>\n<li>Action.</li>\n</ul>\n",
         "types": [
           "string"
         ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
         "name": "path",
-        "description": "- Request path."
+        "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
-        "types": [
-          "*"
-        ],
         "name": "query",
-        "description": "- Request query object."
+        "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
-        "types": [
-          "*"
-        ],
         "name": "body",
-        "description": "- Request body contents."
+        "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
-        "name": "callback",
-        "description": "- The callback function."
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       }
     ],
     "description": {
@@ -493,7 +676,11 @@
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 438,
+    "codeStart": 449,
     "code": "Acl.prototype.makeReq_ = function(method, path, query, body, callback) {\n  this.makeReq(method, this.pathPrefix + path, query, body, callback);\n};\n\nmodule.exports = Acl;",
     "ctx": {
       "type": "method",
@@ -516,7 +703,11 @@
       "body": "<p>As an example, here are a few methods that are created.</p><p>  myBucket.acl.readers.deleteGroup(&#39;groupId&#39;, function(err) {});</p><p>  myBucket.acl.owners.addUser(&#39;email@example.com&#39;, function(err, acl) {});</p><p>  myBucket.acl.writers.addDomain(&#39;example.com&#39;, function(err, acl) {});</p>"
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 455,
+    "codeStart": 470,
     "code": "function AclRoleAccessorMethods() {\n  AclRoleAccessorMethods.roles.forEach(this._assignAccessMethods.bind(this));\n}\n\nAclRoleAccessorMethods.accessMethods = [\n  'add',\n  'delete'\n];\n\nAclRoleAccessorMethods.entities = [\n  // Special entity groups that do not require further specification.\n  'allAuthenticatedUsers',\n  'allUsers',\n\n  // Entity groups that require specification, e.g. `user-email@example.com`.\n  'domain-',\n  'group-',\n  'project-',\n  'user-'\n];\n\nAclRoleAccessorMethods.roles = [\n  'OWNER',\n  'READER',\n  'WRITER'\n];\n\nAclRoleAccessorMethods.prototype._assignAccessMethods = function(role) {\n  var that = this;\n\n  var accessMethods = AclRoleAccessorMethods.accessMethods;\n  var entities = AclRoleAccessorMethods.entities;\n  var roleGroup = role.toLowerCase() + 's';\n\n  this[roleGroup] = entities.reduce(function(acc, entity) {\n    var isPrefix = entity.charAt(entity.length - 1) === '-';\n\n    accessMethods.forEach(function(accessMethod) {\n      var method = accessMethod + entity[0].toUpperCase() + entity.substr(1);\n\n      if (isPrefix) {\n        method = method.replace('-', '');\n      }\n\n      // Wrap the parent accessor method (e.g. `add` or `delete`) to avoid the\n      // more complex API of specifying an `entity` and `role`.\n      acc[method] = function(entityId, callback) {\n        var apiEntity;\n\n        if (isPrefix) {\n          apiEntity = entity + entityId;\n        } else {\n          // If the entity is not a prefix, it is a special entity group that\n          // does not require further details. The accessor methods only accept\n          // a callback.\n          apiEntity = entity;\n          callback = entityId;\n        }\n\n        that[accessMethod]({\n          entity: apiEntity,\n          role: role\n        }, callback);\n      };\n    });\n\n    return acc;\n  }, {});\n};\n\nmodule.exports.AclRoleAccessorMethods = AclRoleAccessorMethods;",
     "ctx": {
       "type": "function",

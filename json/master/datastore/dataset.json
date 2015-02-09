@@ -7,33 +7,59 @@
       "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
     },
     "isPrivate": false,
-    "ignore": true
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
   },
   {
-    "tags": [],
+    "tags": [
+      {
+        "type": "module",
+        "string": "datastore/dataset"
+      }
+    ],
     "description": {
-      "full": "<p>@module datastore/dataset</p>",
-      "summary": "<p>@module datastore/dataset</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": true,
+    "line": 17,
+    "codeStart": 21,
     "code": "'use strict';\n\nvar nodeutil = require('util');"
   },
   {
     "tags": [
+      {
+        "type": "type",
+        "types": [],
+        "typesDescription": "<code>?</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
       {
         "type": "private",
         "visibility": "private"
       }
     ],
     "description": {
-      "full": "<p>@type module:datastore/entity</p>",
-      "summary": "<p>@type module:datastore/entity</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 25,
+    "codeStart": 29,
     "code": "var entity = require('./entity.js');",
     "ctx": {
       "type": "declaration",
@@ -45,17 +71,30 @@
   {
     "tags": [
       {
+        "type": "type",
+        "types": [],
+        "typesDescription": "<code>?</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
         "type": "private",
         "visibility": "private"
       }
     ],
     "description": {
-      "full": "<p>@type module:datastore/query</p>",
-      "summary": "<p>@type module:datastore/query</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 31,
+    "codeStart": 35,
     "code": "var Query = require('./query.js');",
     "ctx": {
       "type": "declaration",
@@ -67,17 +106,30 @@
   {
     "tags": [
       {
+        "type": "type",
+        "types": [],
+        "typesDescription": "<code>?</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
         "type": "private",
         "visibility": "private"
       }
     ],
     "description": {
-      "full": "<p>@type module:datastore/transaction</p>",
-      "summary": "<p>@type module:datastore/transaction</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 37,
+    "codeStart": 41,
     "code": "var Transaction = require('./transaction.js');",
     "ctx": {
       "type": "declaration",
@@ -89,17 +141,30 @@
   {
     "tags": [
       {
+        "type": "type",
+        "types": [],
+        "typesDescription": "<code>?</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
         "type": "private",
         "visibility": "private"
       }
     ],
     "description": {
-      "full": "<p>@type module:common/util</p>",
-      "summary": "<p>@type module:common/util</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 43,
+    "codeStart": 47,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -111,17 +176,30 @@
   {
     "tags": [
       {
+        "type": "type",
+        "types": [],
+        "typesDescription": "<code>?</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
         "type": "private",
         "visibility": "private"
       }
     ],
     "description": {
-      "full": "<p>@type module:datastore/request</p>",
-      "summary": "<p>@type module:datastore/request</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 49,
+    "codeStart": 53,
     "code": "var DatastoreRequest = require('./request.js');",
     "ctx": {
       "type": "declaration",
@@ -147,7 +225,11 @@
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 55,
+    "codeStart": 60,
     "code": "var SCOPES = [\n  'https://www.googleapis.com/auth/datastore',\n  'https://www.googleapis.com/auth/userinfo.email'\n];",
     "ctx": {
       "type": "declaration",
@@ -172,43 +254,68 @@
       },
       {
         "type": "param",
-        "types": [
-          "object="
-        ],
         "name": "options",
-        "description": "- Configuration object."
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
-        "types": [
-          "string="
-        ],
         "name": "options.projectId",
-        "description": "- Dataset ID. This is your project ID from     the Google Developers Console."
-      },
-      {
-        "type": "param",
-        "types": [
-          "string="
-        ],
-        "name": "options.keyFilename",
-        "description": "- Full path to the JSON key downloaded     from the Google Developers Console. Alternatively, you may provide a\n    `credentials` object."
-      },
-      {
-        "type": "param",
-        "types": [
-          "object="
-        ],
-        "name": "options.credentials",
-        "description": "- Credentials object, used in place of     a `keyFilename`."
-      },
-      {
-        "type": "param",
+        "description": "<ul>\n<li>Dataset ID. This is your project ID from     the Google Developers Console.</li>\n</ul>\n",
         "types": [
           "string"
         ],
+        "typesDescription": "<code>string</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "options.keyFilename",
+        "description": "<ul>\n<li>Full path to the JSON key downloaded     from the Google Developers Console. Alternatively, you may provide a<br />  <code>credentials</code> object.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "options.credentials",
+        "description": "<ul>\n<li>Credentials object, used in place of     a <code>keyFilename</code>.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
         "name": "options.namespace",
-        "description": "- Namespace to isolate transactions to. "
+        "description": "<ul>\n<li>Namespace to isolate transactions to. </li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "example",
@@ -221,10 +328,14 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": true,
+    "isEvent": false,
     "ignore": false,
+    "line": 65,
+    "codeStart": 89,
     "code": "function Dataset(options) {\n  if (!(this instanceof Dataset)) {\n    return new Dataset(options);\n  }\n\n  options = options || {};\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequest({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  this.namespace = options.namespace;\n  this.projectId = options.projectId;\n}\n\nnodeutil.inherits(Dataset, DatastoreRequest);",
     "ctx": {
-      "type": "function",
+      "type": "constructor",
       "name": "Dataset",
       "string": "Dataset()"
     }
@@ -233,35 +344,51 @@
     "tags": [
       {
         "type": "param",
-        "types": [
-          "...*="
-        ],
         "name": "options",
-        "description": "- Key path. To specify or override a namespace,     you must use an object here to explicitly state it."
+        "description": "<ul>\n<li>Key path. To specify or override a namespace,     you must use an object here to explicitly state it.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": true
       },
       {
         "type": "param",
-        "types": [
-          "object="
-        ],
         "name": "options",
-        "description": "- Configuration object."
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
-        "types": [
-          "...*="
-        ],
         "name": "options.path",
-        "description": "- Key path."
+        "description": "<ul>\n<li>Key path.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": true
       },
       {
         "type": "param",
-        "types": [
-          "string="
-        ],
         "name": "options.namespace",
-        "description": "- Optional namespace. "
+        "description": "<ul>\n<li>Optional namespace. </li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "example",
@@ -272,7 +399,12 @@
         "types": [
           "Key"
         ],
-        "description": "A newly created Key from the options given."
+        "typesDescription": "<a href=\"Key.html\">Key</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "<p>A newly created Key from the options given.</p>"
       }
     ],
     "description": {
@@ -281,7 +413,11 @@
       "body": "<p>You may also specify a configuration object to define a namespace and path.</p>"
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 108,
+    "codeStart": 140,
     "code": "Dataset.prototype.key = function(options) {\n  options = util.is(options, 'object') ? options : {\n    namespace: this.namespace,\n    path: util.arrayize(options)\n  };\n\n  return new entity.Key(options);\n};",
     "ctx": {
       "type": "method",
@@ -304,27 +440,41 @@
       },
       {
         "type": "param",
-        "types": [
-          "string="
-        ],
         "name": "namespace",
-        "description": "- Optional namespace."
+        "description": "<ul>\n<li>Optional namespace.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "kinds",
+        "description": "<ul>\n<li>Kinds to query.</li>\n</ul>\n",
         "types": [
           "string",
           "array"
         ],
-        "name": "kinds",
-        "description": "- Kinds to query."
+        "typesDescription": "<code>string</code>|<code>array</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "return",
         "types": [
-          "module:datastore",
-          "query"
+          "module:datastore/query"
         ],
+        "typesDescription": "module:<a href=\"module%3Adatastore%2Fquery.html\">datastore/query</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
         "description": ""
       }
     ],
@@ -334,7 +484,11 @@
       "body": "<p><em><a href=\"http://goo.gl/Cag0r6\">Reference</a>.</em></p>"
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 149,
+    "codeStart": 162,
     "code": "Dataset.prototype.createQuery = function(namespace, kinds) {\n  if (arguments.length === 1) {\n    kinds = util.arrayize(namespace);\n    namespace = this.namespace;\n  }\n\n  return new Query(namespace, util.arrayize(kinds));\n};",
     "ctx": {
       "type": "method",
@@ -353,19 +507,29 @@
       },
       {
         "type": "param",
+        "name": "fn",
+        "description": "<ul>\n<li>The function to run in the context of a transaction.</li>\n</ul>\n",
         "types": [
           "function"
         ],
-        "name": "fn",
-        "description": "- The function to run in the context of a transaction."
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
           "function"
         ],
-        "name": "callback",
-        "description": "- The callback function. "
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "example",
@@ -378,7 +542,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 171,
+    "codeStart": 194,
     "code": "Dataset.prototype.runInTransaction = function(fn, callback) {\n  var newTransaction = this.createTransaction_();\n\n  newTransaction.begin(function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    fn(newTransaction, newTransaction.commit.bind(newTransaction, callback));\n  });\n};",
     "ctx": {
       "type": "method",
@@ -393,9 +561,13 @@
       {
         "type": "return",
         "types": [
-          "module:datastore",
-          "transaction"
+          "module:datastore/transaction"
         ],
+        "typesDescription": "module:<a href=\"module%3Adatastore%2Ftransaction.html\">datastore/transaction</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
         "description": ""
       },
       {
@@ -409,7 +581,11 @@
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 207,
+    "codeStart": 213,
     "code": "Dataset.prototype.createTransaction_ = function() {\n  return new Transaction(this, this.projectId);\n};\n\nmodule.exports = Dataset;",
     "ctx": {
       "type": "method",

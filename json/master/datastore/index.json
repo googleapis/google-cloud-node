@@ -7,33 +7,59 @@
       "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
     },
     "isPrivate": false,
-    "ignore": true
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
   },
   {
-    "tags": [],
+    "tags": [
+      {
+        "type": "module",
+        "string": "datastore"
+      }
+    ],
     "description": {
-      "full": "<p>@module datastore</p>",
-      "summary": "<p>@module datastore</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": true,
+    "line": 17,
+    "codeStart": 21,
     "code": "'use strict';"
   },
   {
     "tags": [
+      {
+        "type": "type",
+        "types": [],
+        "typesDescription": "<code>?</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
       {
         "type": "private",
         "visibility": "private"
       }
     ],
     "description": {
-      "full": "<p>@type module:datastore/entity</p>",
-      "summary": "<p>@type module:datastore/entity</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 23,
+    "codeStart": 27,
     "code": "var entity = require('./entity');",
     "ctx": {
       "type": "declaration",
@@ -45,17 +71,30 @@
   {
     "tags": [
       {
+        "type": "type",
+        "types": [],
+        "typesDescription": "<code>?</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
         "type": "private",
         "visibility": "private"
       }
     ],
     "description": {
-      "full": "<p>@type module:common/util</p>",
-      "summary": "<p>@type module:common/util</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 29,
+    "codeStart": 33,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -67,17 +106,30 @@
   {
     "tags": [
       {
+        "type": "type",
+        "types": [],
+        "typesDescription": "<code>?</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
         "type": "private",
         "visibility": "private"
       }
     ],
     "description": {
-      "full": "<p>@type module:datastore/dataset</p>",
-      "summary": "<p>@type module:datastore/dataset</p>",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 35,
+    "codeStart": 39,
     "code": "var Dataset = require('./dataset');",
     "ctx": {
       "type": "declaration",
@@ -99,7 +151,11 @@
       "body": "<p>Invoking the Datastore class allows you to provide configuration up-front.<br />This configuration will be used for future invokations of the returned<br /><code>dataset</code> method.</p>"
     },
     "isPrivate": false,
-    "ignore": true
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 41,
+    "codeStart": 58
   },
   {
     "tags": [
@@ -122,10 +178,14 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": true,
+    "isEvent": false,
     "ignore": false,
+    "line": 58,
+    "codeStart": 89,
     "code": "function Datastore(config) {\n  this.config = config || {};\n}",
     "ctx": {
-      "type": "function",
+      "type": "constructor",
       "name": "Datastore",
       "string": "Datastore()"
     }
@@ -143,7 +203,11 @@
       "body": "<p>Use this static method to create a dataset without any pre-configured<br />options.</p>"
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": true,
+    "line": 93,
+    "codeStart": 106,
     "code": "Datastore.dataset = Dataset;",
     "ctx": {
       "type": "property",
@@ -157,18 +221,27 @@
     "tags": [
       {
         "type": "param",
-        "types": [
-          "object="
-        ],
         "name": "options",
-        "description": "- Configuration object."
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "return",
         "types": [
-          "module:datastore",
-          "dataset"
+          "module:datastore/dataset"
         ],
+        "typesDescription": "module:<a href=\"module%3Adatastore%2Fdataset.html\">datastore/dataset</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
         "description": ""
       }
     ],
@@ -178,7 +251,11 @@
       "body": "<p>Create a dataset using the instance method when you want to use your<br />pre-configured options from the Datastore instance.</p>"
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": true,
+    "line": 108,
+    "codeStart": 116,
     "code": "Datastore.prototype.dataset = function(options) {\n  options = options || {};\n  // Mix in global config data to the provided options.\n  return new Dataset(util.extendGlobalConfig(this.config, options));\n};",
     "ctx": {
       "type": "method",
@@ -192,17 +269,27 @@
     "tags": [
       {
         "type": "param",
+        "name": "value",
+        "description": "<ul>\n<li>The integer value.</li>\n</ul>\n",
         "types": [
           "number"
         ],
-        "name": "value",
-        "description": "- The integer value."
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "return",
         "types": [
           "object"
         ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
         "description": ""
       },
       {
@@ -216,7 +303,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 122,
+    "codeStart": 134,
     "code": "Datastore.int = function(value) {\n  return new entity.Int(value);\n};",
     "ctx": {
       "type": "method",
@@ -229,17 +320,27 @@
     "tags": [
       {
         "type": "param",
+        "name": "value",
+        "description": "<ul>\n<li>The double value.</li>\n</ul>\n",
         "types": [
           "number"
         ],
-        "name": "value",
-        "description": "- The double value."
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       },
       {
         "type": "return",
         "types": [
           "object"
         ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
         "description": ""
       },
       {
@@ -253,7 +354,11 @@
       "body": ""
     },
     "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
     "ignore": false,
+    "line": 138,
+    "codeStart": 150,
     "code": "Datastore.double = function(value) {\n  return new entity.Double(value);\n};\n\nmodule.exports = Datastore;",
     "ctx": {
       "type": "method",
