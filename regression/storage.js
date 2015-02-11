@@ -236,6 +236,32 @@ describe('storage', function() {
           });
         });
       });
+
+      it('should be made public', function(done) {
+        file.makePublic(function(err) {
+          assert.ifError(err);
+          file.acl.get({ entity: 'allUsers' }, function(err, aclObject) {
+            assert.ifError(err);
+            assert.deepEqual(aclObject, { entity: 'allUsers', role: 'READER' });
+            file.acl.delete({ entity: 'allUsers' }, done);
+          });
+        });
+      });
+
+      it('should be made private', function(done) {
+        file.makePublic(function(err) {
+          assert.ifError(err);
+          file.makePrivate(function(err) {
+            assert.ifError(err);
+            file.acl.get({ entity: 'allUsers' }, function(err, aclObject) {
+              assert.equal(err.code, 404);
+              assert.equal(err.message, 'Not Found');
+              assert.equal(aclObject, null);
+              done();
+            });
+          });
+        });
+      });
     });
   });
 
