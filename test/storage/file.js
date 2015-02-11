@@ -1025,6 +1025,59 @@ describe('File', function() {
     });
   });
 
+  describe('makePublic', function() {
+    it('should execute callback', function(done) {
+      file.acl.add = function(options, callback) {
+        callback();
+      };
+
+      file.makePublic(done);
+    });
+
+    it('should make the file public', function(done) {
+      file.acl.add = function(options) {
+        assert.deepEqual(options, { entity: 'allUsers', role: 'READER' });
+        done();
+      };
+
+      file.makePublic(util.noop);
+    });
+  });
+
+  describe('makePrivate', function() {
+    it('should execute callback', function(done) {
+      file.makeReq_ = function(method, path, query, body, callback) {
+        callback();
+      };
+
+      file.makePrivate(done);
+    });
+
+    it('should make the file private to project by default', function(done) {
+      file.makeReq_ = function(method, path, query, body) {
+        assert.equal(method, 'PATCH');
+        assert.equal(path, '/o/' + encodeURIComponent(file.name));
+        assert.deepEqual(query, { predefinedAcl: 'projectPrivate' });
+        assert.deepEqual(body, { acl: null });
+        done();
+      };
+
+      file.makePrivate(util.noop);
+    });
+
+    it('should make the file private to user if strict = true', function(done) {
+      file.makeReq_ = function(method, path, query, body) {
+        assert.equal(method, 'PATCH');
+        assert.equal(path, '/o/' + encodeURIComponent(file.name));
+        assert.deepEqual(query, { predefinedAcl: 'private' });
+        assert.deepEqual(body, { acl: null });
+        done();
+      };
+
+      file.makePrivate({ strict: true }, util.noop);
+    });
+  });
+
   describe('startResumableUpload_', function() {
     var RESUMABLE_URI = 'http://resume';
 
