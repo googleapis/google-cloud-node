@@ -437,4 +437,12 @@ describe('common/util', function() {
       });
     });
   });
+
+  describe('propAssign', function() {
+    it('should assign a property and value to an object', function() {
+      var obj = {};
+      util.propAssign('prop', 'value')(obj);
+      assert.equal(obj.prop, 'value');
+    });
+  });
 });

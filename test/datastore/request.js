@@ -142,6 +142,26 @@ describe('Request', function() {
     });
   });
 
+  describe('insert', function() {
+    it('should pass the correct arguments to save', function(done) {
+      request.save = function(entities, callback) {
+        assert.deepEqual(entities, {
+          key: {
+            namespace: 'ns',
+            path: ['Company'],
+          },
+          data: {},
+          method: 'insert'
+        });
+
+        callback();
+      };
+
+      var key = new entity.Key({ namespace: 'ns', path: ['Company'] });
+      request.insert({ key: key, data: {} }, done);
+    });
+  });
+
   describe('save', function() {
     it('should save with incomplete key', function(done) {
       request.makeReq_ = function(method, req, callback) {
@@ -458,6 +478,46 @@ describe('Request', function() {
           })
           .emit('reading');
       });
+    });
+  });
+
+  describe('update', function() {
+    it('should pass the correct arguments to save', function(done) {
+      request.save = function(entities, callback) {
+        assert.deepEqual(entities, {
+          key: {
+            namespace: 'ns',
+            path: ['Company'],
+          },
+          data: {},
+          method: 'update'
+        });
+
+        callback();
+      };
+
+      var key = new entity.Key({ namespace: 'ns', path: ['Company'] });
+      request.update({ key: key, data: {} }, done);
+    });
+  });
+
+  describe('upsert', function() {
+    it('should pass the correct arguments to save', function(done) {
+      request.save = function(entities, callback) {
+        assert.deepEqual(entities, {
+          key: {
+            namespace: 'ns',
+            path: ['Company'],
+          },
+          data: {},
+          method: 'upsert'
+        });
+
+        callback();
+      };
+
+      var key = new entity.Key({ namespace: 'ns', path: ['Company'] });
+      request.upsert({ key: key, data: {} }, done);
     });
   });
 
