@@ -23,6 +23,7 @@
   links="{{links}}"
   header-templateUrl="docs-header.html"
   is-active-url="isActiveUrl">
+
   <article ng-show="showReference">
     <h3 class="sub-heading">
       <div class="toggler" ng-click="showGcloudDocs = !showGcloudDocs">
@@ -132,6 +133,8 @@ myFile.acl.owners.deleteGroup('group-id', function(err, aclObject) {});</div>
         See examples below for more on how to access your bucket to upload a file, read its files, create signed URLs, and more.
       </p>
     </article>
+
+    <em ng-if="lastBuiltDate">Docs last built {{lastBuiltDate}}.</em>
 
     <article
       ng-repeat="method in methods"
