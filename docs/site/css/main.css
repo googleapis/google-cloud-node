@@ -794,6 +794,11 @@ a {
     text-decoration: underline;
 }
 
+.build-date {
+  font-style: italic;
+  font-size: 0.8em;
+}
+
 /*
  Content
  */
@@ -1055,6 +1060,10 @@ a {
         height: 0.6em;
     }
 
+    .build-date {
+      margin-left: 0em;
+    }
+
 }
 
 @media only screen and (min-width: 45em) {
@@ -1062,6 +1071,10 @@ a {
         font-size: 0.7em;
         line-height: normal;
         margin-left: .5em;
+    }
+
+    .build-date {
+      margin-left: 0.5em;
     }
 }
 
