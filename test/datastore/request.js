@@ -145,14 +145,14 @@ describe('Request', function() {
   describe('insert', function() {
     it('should pass the correct arguments to save', function(done) {
       request.save = function(entities, callback) {
-        assert.deepEqual(entities, {
+        assert.deepEqual(entities, [{
           key: {
             namespace: 'ns',
             path: ['Company'],
           },
           data: {},
           method: 'insert'
-        });
+        }]);
 
         callback();
       };
@@ -484,14 +484,14 @@ describe('Request', function() {
   describe('update', function() {
     it('should pass the correct arguments to save', function(done) {
       request.save = function(entities, callback) {
-        assert.deepEqual(entities, {
+        assert.deepEqual(entities, [{
           key: {
             namespace: 'ns',
             path: ['Company'],
           },
           data: {},
           method: 'update'
-        });
+        }]);
 
         callback();
       };
@@ -504,14 +504,14 @@ describe('Request', function() {
   describe('upsert', function() {
     it('should pass the correct arguments to save', function(done) {
       request.save = function(entities, callback) {
-        assert.deepEqual(entities, {
+        assert.deepEqual(entities, [{
           key: {
             namespace: 'ns',
             path: ['Company'],
           },
           data: {},
           method: 'upsert'
-        });
+        }]);
 
         callback();
       };
