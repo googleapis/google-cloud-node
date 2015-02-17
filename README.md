@@ -149,26 +149,28 @@ dataset.get(dataset.key(['Product', 'Computer']), function(err, entity) {
   console.log(err || entity);
 });
 
-// Save data to datastore
+// Save data to your dataset.
 var blogPostData = {
   title: 'How to make the perfect homemade pasta',
   tags: ['pasta', 'homemade'],
-  author: 'Silvano',
+  author: 'Andrew Chilton',
   isDraft: true,
-  wordCount: 450,
+  wordCount: 450
 };
 
-var theKey = ds.key('BlogPost');
+var blogPostKey = ds.key('BlogPost');
 
 dataset.save({
-  key: theKey,
+  key: blogPostKey,
   data: blogPostData
 }, function(err) {
-  // theKey has been updated with an id so you can
-  // do more operations with it. Such as an update:
+  // `blogPostKey` has been updated with an id so you
+  // can do more operations with it. Such as an update:
   dataset.save({
-    key: theKey,
-    data: { isDraft: false }
+    key: blogPostKey,
+    data: {
+      isDraft: false
+    }
   }, function(err) {
     // The blog post is now published!
   });
