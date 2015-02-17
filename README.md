@@ -148,6 +148,31 @@ dataset = gcloud.datastore.dataset({
 dataset.get(dataset.key(['Product', 'Computer']), function(err, entity) {
   console.log(err || entity);
 });
+
+// Save data to datastore
+var blogPostData = {
+  title: 'How to make the perfect homemade pasta',
+  tags: ['pasta', 'homemade'],
+  author: 'Silvano',
+  isDraft: true,
+  wordCount: 450,
+};
+
+var theKey = ds.key('BlogPost');
+
+dataset.save({
+  key: theKey,
+  data: blogPostData
+}, function(err) {
+  // theKey has been updated with an id so you can
+  // do more operations with it. Such as an update:
+  dataset.save({
+    key: theKey,
+    data: { isDraft: false }
+  }, function(err) {
+    // The blog post is now published!
+  });
+});
 ```
 
 ## Google Cloud Storage
