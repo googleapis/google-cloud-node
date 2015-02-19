@@ -246,7 +246,9 @@ pubsub.createTopic('my-new-topic', function(err, topic) {});
 var topic = pubsub.topic('my-existing-topic');
 
 // Publish a message to the topic.
-topic.publish('New message!', function(err) {});
+topic.publish({
+  data: 'New message!'
+}, function(err) {});
 
 // Subscribe to the topic.
 topic.subscribe('new-subscription', function(err, subscription) {

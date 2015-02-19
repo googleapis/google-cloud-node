@@ -81,7 +81,7 @@ describe('pubsub', function() {
 
     it('should publish a message', function(done) {
       pubsub.topic(topicNames[0])
-        .publish('message from me', done);
+        .publish({ data: 'message from me' }, done);
     });
 
     it('should be deleted', function(done) {
@@ -166,6 +166,7 @@ describe('pubsub', function() {
 
     it('should error when using a non-existent subscription', function(done) {
       var subscription = topic.subscription('non-existent-subscription');
+
       subscription.pull(function(err) {
         assert.equal(err.code, 404);
         done();
@@ -174,33 +175,106 @@ describe('pubsub', function() {
 
     it('should be able to pull and ack', function(done) {
       var subscription = topic.subscription(subscriptions[0].name);
-      subscription.pull({ returnImmediately: true }, function(err, msg) {
+
+      topic.publish({ data: 'hello' }, function(err) {
         assert.ifError(err);
-        subscription.ack(msg.id, done);
+
+        subscription.pull({
+          returnImmediately: true,
+          maxResults: 1
+        }, function(err, msgs) {
+          assert.ifError(err);
+          subscription.ack(msgs[0].ackId, done);
+        });
       });
-      topic.publish('hello', assert.ifError);
     });
 
     it('should receive the published message', function(done) {
       var subscription = topic.subscription(subscriptions[0].name);
-      subscription.pull({ returnImmediately: true }, function(err, msg) {
+
+      topic.publish([
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' }
+      ], function(err) {
         assert.ifError(err);
-        assert.equal(msg.data, 'hello');
-        subscription.ack(msg.id, done);
+
+        subscription.pull({
+          returnImmediately: true,
+          maxResults: 1
+        }, function(err, msgs) {
+          assert.ifError(err);
+          assert.equal(msgs[0].data, 'hello');
+          subscription.ack(msgs[0].ackId, done);
+        });
       });
-      topic.publish('hello', assert.ifError);
     });
 
     it('should receive a raw published message', function(done) {
       var subscription = topic.subscription(subscriptions[0].name);
-      subscription.pull({ returnImmediately: true }, function(err, msg) {
+
+      topic.publish([
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' }
+      ], function(err) {
         assert.ifError(err);
-        assert.equal(msg.data, 'hello');
-        subscription.ack(msg.id, done);
+
+        subscription.pull({
+          returnImmediately: true,
+          maxResults: 1
+        }, function(err, msgs) {
+          assert.ifError(err);
+          assert.equal(msgs[0].data, 'hello');
+          subscription.ack(msgs[0].ackId, done);
+        });
       });
-      topic.publishRaw({
-        data: new Buffer('hello').toString('base64')
-      }, assert.ifError);
+    });
+
+    it('should receive the chosen amount of results', function(done) {
+      var subscription = topic.subscription(subscriptions[0].name);
+      var opts = { returnImmediately: true, maxResults: 3 };
+
+      topic.publish([
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' },
+        { data: 'hello' }
+      ], function(err) {
+        assert.ifError(err);
+
+        subscription.pull(opts, function(err, messages) {
+          assert.ifError(err);
+
+          assert.equal(messages.length, opts.maxResults);
+
+          var ackIds = messages.map(function(message) {
+            return message.ackId;
+          });
+
+          subscription.ack(ackIds, done);
+        });
+      });
     });
   });
 });
