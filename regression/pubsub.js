@@ -20,6 +20,7 @@
 
 var assert = require('assert');
 var async = require('async');
+var uuid = require('node-uuid');
 
 var env = require('./env.js');
 var gcloud = require('../lib')(env);
@@ -28,8 +29,20 @@ var Subscription = require('../lib/pubsub/subscription.js');
 
 var pubsub = gcloud.pubsub();
 
+function generateTopicName() {
+  return 'test-topic-' + uuid.v4();
+}
+
+function generateSubName() {
+  return 'test-subscription-' + uuid.v4();
+}
+
 describe('pubsub', function() {
-  var topicNames = ['topic1', 'topic2', 'topic3'];
+  var topicNames = [
+    generateTopicName(),
+    generateTopicName(),
+    generateTopicName()
+  ];
 
   function deleteAllTopics(callback) {
     // TODO: Handle pagination.
@@ -91,45 +104,21 @@ describe('pubsub', function() {
   });
 
   describe('Subscription', function() {
-    var TOPIC_NAME = 'test-topic';
+    var TOPIC_NAME = generateTopicName();
     var subscriptions = [
       {
-        name: 'sub1',
+        name: generateSubName(),
         options: { ackDeadlineSeconds: 30 }
       },
       {
-        name: 'sub2',
+        name: generateSubName(),
         options: { ackDeadlineSeconds: 60 }
       }
     ];
     var topic;
 
-    function deleteAllTopics(callback) {
-      pubsub.getTopics(function(err, topics) {
-        if (err) {
-          callback(err);
-          return;
-        }
-        async.parallel(topics.map(function(topic) {
-          return topic.delete.bind(topic);
-        }), callback);
-      });
-    }
-
-    function deleteAllSubscriptions(callback) {
-      pubsub.getSubscriptions(function(err, subs) {
-        if (err) {
-          callback(err);
-          return;
-        }
-        async.parallel(subs.map(function(sub) {
-          return sub.delete.bind(sub);
-        }), callback);
-      });
-    }
-
     before(function(done) {
-      async.parallel([deleteAllTopics, deleteAllSubscriptions], function(err) {
+      deleteAllTopics(function(err) {
         assert.ifError(err);
         // Create a new test topic.
         pubsub.createTopic(TOPIC_NAME, function(err, newTopic) {
