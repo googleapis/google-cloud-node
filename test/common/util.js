@@ -62,10 +62,21 @@ describe('common/util', function() {
   });
 
   describe('arrayize', function() {
-    it('should arrayize if the input is not an array', function(done) {
-      var o = util.arrayize('text');
-      assert.deepEqual(o, ['text']);
-      done();
+    it('should arrayize if the input is not an array', function() {
+      assert.deepEqual(util.arrayize('text'), ['text']);
+    });
+
+    it('should return the same array if given an array', function() {
+      var arr = [1, 2, 3];
+      assert.deepEqual(util.arrayize(arr), arr);
+    });
+
+    it('should return an empty array in correct circumstance', function() {
+      assert.deepEqual(util.arrayize(undefined), []);
+      assert.deepEqual(util.arrayize(null), []);
+
+      assert.deepEqual(util.arrayize(false), [false]);
+      assert.deepEqual(util.arrayize(0), [0]);
     });
   });
 
