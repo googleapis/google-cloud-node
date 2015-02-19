@@ -15,6 +15,9 @@
           Version History (<i>{{version}}</i>)
         </a>
       </div>
+      <div>
+        <div ng-if="lastBuiltDate" class="build-date">Docs last built {{lastBuiltDate}}.</div>
+      </div>
     </div>
   </header>
 </script>
@@ -23,6 +26,7 @@
   links="{{links}}"
   header-templateUrl="docs-header.html"
   is-active-url="isActiveUrl">
+
   <article ng-show="showReference">
     <h3 class="sub-heading">
       <div class="toggler" ng-click="showGcloudDocs = !showGcloudDocs">

@@ -37,8 +37,10 @@
     "tags": [
       {
         "type": "type",
-        "types": [],
-        "typesDescription": "<code>?</code>",
+        "types": [
+          "module:bigquery/dataset"
+        ],
+        "typesDescription": "module:<a href=\"module%3Abigquery%2Fdataset.html\">bigquery/dataset</a>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -72,8 +74,10 @@
     "tags": [
       {
         "type": "type",
-        "types": [],
-        "typesDescription": "<code>?</code>",
+        "types": [
+          "module:bigquery/job"
+        ],
+        "typesDescription": "module:<a href=\"module%3Abigquery%2Fjob.html\">bigquery/job</a>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -107,8 +111,10 @@
     "tags": [
       {
         "type": "type",
-        "types": [],
-        "typesDescription": "<code>?</code>",
+        "types": [
+          "module:bigquery/table"
+        ],
+        "typesDescription": "module:<a href=\"module%3Abigquery%2Ftable.html\">bigquery/table</a>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -142,8 +148,10 @@
     "tags": [
       {
         "type": "type",
-        "types": [],
-        "typesDescription": "<code>?</code>",
+        "types": [
+          "module:common/util"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,

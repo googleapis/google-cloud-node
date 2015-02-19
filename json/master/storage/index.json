@@ -37,8 +37,10 @@
     "tags": [
       {
         "type": "type",
-        "types": [],
-        "typesDescription": "<code>?</code>",
+        "types": [
+          "module:storage/bucket"
+        ],
+        "typesDescription": "module:<a href=\"module%3Astorage%2Fbucket.html\">storage/bucket</a>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -72,8 +74,10 @@
     "tags": [
       {
         "type": "type",
-        "types": [],
-        "typesDescription": "<code>?</code>",
+        "types": [
+          "module:common/util"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,

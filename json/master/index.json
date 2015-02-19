@@ -185,8 +185,10 @@
     "tags": [
       {
         "type": "type",
-        "types": [],
-        "typesDescription": "<code>?</code>",
+        "types": [
+          "module:common/util"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,

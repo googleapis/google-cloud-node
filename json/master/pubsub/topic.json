@@ -37,8 +37,10 @@
     "tags": [
       {
         "type": "type",
-        "types": [],
-        "typesDescription": "<code>?</code>",
+        "types": [
+          "module:common/util"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -72,8 +74,10 @@
     "tags": [
       {
         "type": "type",
-        "types": [],
-        "typesDescription": "<code>?</code>",
+        "types": [
+          "module:pubsub/subscription"
+        ],
+        "typesDescription": "module:<a href=\"module%3Apubsub%2Fsubscription.html\">pubsub/subscription</a>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -199,6 +203,44 @@
       {
         "type": "return",
         "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": ""
+      }
+    ],
+    "description": {
+      "full": "<p>Format a message object as the upstream API expects it.</p>",
+      "summary": "<p>Format a message object as the upstream API expects it.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 65,
+    "codeStart": 72,
+    "code": "Topic.formatMessage_ = function(message) {\n  if (!util.is(message.data, 'buffer')) {\n    message.data = new Buffer(JSON.stringify(message.data));\n  }\n\n  message.data = message.data.toString('base64');\n\n  return message;\n};",
+    "ctx": {
+      "type": "method",
+      "receiver": "Topic",
+      "name": "formatMessage_",
+      "string": "Topic.formatMessage_()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      },
+      {
+        "type": "return",
+        "types": [
           "string"
         ],
         "typesDescription": "<code>string</code>",
@@ -218,8 +260,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 65,
-    "codeStart": 73,
+    "line": 82,
+    "codeStart": 90,
     "code": "Topic.formatName_ = function(projectId, name) {\n  // Simple check if the name is already formatted.\n  if (name.indexOf('/') > -1) {\n    return name;\n  }\n  return '/topics/' + projectId + '/' + name;\n};",
     "ctx": {
       "type": "method",
@@ -240,7 +282,21 @@
       {
         "type": "param",
         "name": "message",
-        "description": "<ul>\n<li>The message to publish.</li>\n</ul>\n",
+        "description": "<ul>\n<li>The message(s) to publish.</li>\n</ul>\n",
+        "types": [
+          "object",
+          "Array.<object>"
+        ],
+        "typesDescription": "<code>object</code>|<code>Array</code>.&lt;<code>object</code>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "message.data",
+        "description": "<ul>\n<li>The contents of the message.</li>\n</ul>\n",
         "types": [],
         "typesDescription": "<code>*</code>",
         "optional": false,
@@ -250,68 +306,8 @@
       },
       {
         "type": "param",
-        "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
-        "types": [
-          "function"
-        ],
-        "typesDescription": "<code>function</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "example",
-        "string": "topic.publish('New message!', function(err) {});\n\ntopic.publish({\n  user_id: 3,\n  name: 'Stephen',\n  message: 'Hello from me!'\n}, function(err) {});"
-      }
-    ],
-    "description": {
-      "full": "<p>Publish the provided message. A message can be of any type.</p>",
-      "summary": "<p>Publish the provided message. A message can be of any type.</p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "isConstructor": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 81,
-    "codeStart": 98,
-    "code": "Topic.prototype.publish = function(message, callback) {\n  if (!message) {\n    throw new Error('Cannot publish an empty message.');\n  }\n  callback = callback || util.noop;\n  if (!util.is(message, 'string') && !util.is(message, 'buffer')) {\n    message = JSON.stringify(message);\n  }\n  this.publishRaw({\n    data: new Buffer(message).toString('base64')\n  }, callback);\n};",
-    "ctx": {
-      "type": "method",
-      "constructor": "Topic",
-      "cons": "Topic",
-      "name": "publish",
-      "string": "Topic.prototype.publish()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "throws",
-        "types": [
-          "Error"
-        ],
-        "description": "<p>If no message is provided. </p>"
-      },
-      {
-        "type": "param",
-        "name": "message",
-        "description": "<ul>\n<li>Raw message to publish.</li>\n</ul>\n",
-        "types": [
-          "object"
-        ],
-        "typesDescription": "<code>object</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "name": "message.label",
-        "description": "<ul>\n<li>List of labels for the message.</li>\n</ul>\n",
+        "name": "message.labels",
+        "description": "<ul>\n<li>Labels to apply to the message.</li>\n</ul>\n",
         "types": [
           "array"
         ],
@@ -323,19 +319,6 @@
       },
       {
         "type": "param",
-        "name": "message.data",
-        "description": "<ul>\n<li>The base64-encoded contents of the message.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -349,27 +332,27 @@
       },
       {
         "type": "example",
-        "string": "topic.publishRaw({\n  data: new Buffer('New message!').toString('base64')\n}, function(err) {});"
+        "string": "var registrationMessage = {\n  data: {\n    userId: 3,\n    name: 'Stephen',\n    event: 'new user'\n  },\n  labels: [\n    'registration'\n  ]\n};\ntopic.publish(registrationMessage, function(err) {});\n\n//-\n// You can publish a batch of messages at once by supplying an array.\n//-\nvar purchaseMessage = {\n  data: {\n    userId: 3,\n    product: 'computer',\n    event: 'purchase'\n  }\n};\n\ntopic.publish([\n  registrationMessage,\n  purchaseMessage\n], function(err) {});"
       }
     ],
     "description": {
-      "full": "<p>Publish a raw message.</p>",
-      "summary": "<p>Publish a raw message.</p>",
+      "full": "<p>Publish the provided message. A message can be of any type.</p>",
+      "summary": "<p>Publish the provided message. A message can be of any type.</p>",
       "body": ""
     },
     "isPrivate": false,
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 111,
-    "codeStart": 126,
-    "code": "Topic.prototype.publishRaw = function(message, callback) {\n  if (!message) {\n    throw new Error('Cannot publish an empty message.');\n  }\n  callback = callback || util.noop;\n  if (!util.is(message.data, 'string') && !util.is(message.data, 'buffer')) {\n    message.data = new Buffer(JSON.stringify(message.data)).toString('base64');\n  }\n  var body = {\n    message: message,\n    topic: this.name\n  };\n  this.makeReq_('POST', 'topics/publish', null, body, callback);\n};",
+    "line": 98,
+    "codeStart": 137,
+    "code": "Topic.prototype.publish = function(messages, callback) {\n  messages = util.arrayize(messages);\n\n  if (messages.length === 0) {\n    throw new Error('Cannot publish without a message.');\n  }\n\n  callback = callback || util.noop;\n\n  var body = {\n    topic: this.name,\n    messages: messages.map(Topic.formatMessage_)\n  };\n\n  this.makeReq_('POST', 'topics/publishBatch', null, body, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Topic",
       "cons": "Topic",
-      "name": "publishRaw",
-      "string": "Topic.prototype.publishRaw()"
+      "name": "publish",
+      "string": "Topic.prototype.publish()"
     }
   },
   {
@@ -393,16 +376,16 @@
       }
     ],
     "description": {
-      "full": "<p>Delete the topic.</p>",
-      "summary": "<p>Delete the topic.</p>",
+      "full": "<p>Delete the topic. This will also delete any subscriptions to this topic.</p>",
+      "summary": "<p>Delete the topic. This will also delete any subscriptions to this topic.</p>",
       "body": ""
     },
     "isPrivate": false,
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 141,
-    "codeStart": 149,
+    "line": 154,
+    "codeStart": 162,
     "code": "Topic.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('DELETE', 'topics/' + this.name, null, true, callback);\n};",
     "ctx": {
       "type": "method",
@@ -480,9 +463,9 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 154,
-    "codeStart": 179,
-    "code": "Topic.prototype.getSubscriptions = function(query, callback) {\n  query.query = 'pubsub.googleapis.com/topic in (' + this.name + ')';\n  this.pubsub.getSubscriptions(query, callback);\n};",
+    "line": 167,
+    "codeStart": 192,
+    "code": "Topic.prototype.getSubscriptions = function(query, callback) {\n  if (util.is(query, 'function')) {\n    callback = query;\n    query = {};\n  }\n\n  query.query = 'pubsub.googleapis.com/topic in (' + this.name + ')';\n\n  this.pubsub.getSubscriptions(query, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Topic",
@@ -592,8 +575,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 184,
-    "codeStart": 214,
+    "line": 203,
+    "codeStart": 233,
     "code": "Topic.prototype.subscribe = function(name, options, callback) {\n  if (!name) {\n    throw new Error('A name is required for a new subscription.');\n  }\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n  var body = {\n    topic: this.name,\n    name: Subscription.formatName_(this.projectId, name)\n  };\n  if (options.ackDeadlineSeconds) {\n    body.ackDeadlineSeconds = options.ackDeadlineSeconds;\n  }\n  this.makeReq_('POST', 'subscriptions', null, body, function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    callback(null, this.subscription(name, options));\n  }.bind(this));\n};",
     "ctx": {
       "type": "method",
@@ -690,8 +673,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 238,
-    "codeStart": 264,
+    "line": 257,
+    "codeStart": 283,
     "code": "Topic.prototype.subscription = function(name, options) {\n  if (!name) {\n    throw new Error('The name of a subscription is required.');\n  }\n  options = options || {};\n  options.name = name;\n  return new Subscription(this.pubsub, options);\n};\n\nmodule.exports = Topic;",
     "ctx": {
       "type": "method",

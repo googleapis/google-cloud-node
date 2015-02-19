@@ -37,8 +37,10 @@
     "tags": [
       {
         "type": "type",
-        "types": [],
-        "typesDescription": "<code>?</code>",
+        "types": [
+          "module:storage/acl"
+        ],
+        "typesDescription": "module:<a href=\"module%3Astorage%2Facl.html\">storage/acl</a>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -72,8 +74,10 @@
     "tags": [
       {
         "type": "type",
-        "types": [],
-        "typesDescription": "<code>?</code>",
+        "types": [
+          "module:storage/file"
+        ],
+        "typesDescription": "module:<a href=\"module%3Astorage%2Ffile.html\">storage/file</a>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -107,8 +111,10 @@
     "tags": [
       {
         "type": "type",
-        "types": [],
-        "typesDescription": "<code>?</code>",
+        "types": [
+          "module:common/util"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
