@@ -211,6 +211,15 @@ describe('Topic', function() {
         };
         topic.getSubscriptions({}, assert.ifError);
       });
+
+      it('should attach scoped topic query without a query', function(done) {
+        topic.pubsub.getSubscriptions = function(q) {
+          assert.equal(
+              q.query, 'pubsub.googleapis.com/topic in (' + topic.name + ')');
+          done();
+        };
+        topic.getSubscriptions(assert.ifError);
+      });
     });
 
     describe('subscribe', function() {
