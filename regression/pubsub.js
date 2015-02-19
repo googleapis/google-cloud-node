@@ -57,15 +57,36 @@ describe('pubsub', function() {
     });
   }
 
+  function deleteAllSubscriptions(callback) {
+    pubsub.getSubscriptions(function(err, subs) {
+      if(err) {
+        callback(err);
+        return;
+      }
+      async.parallel(subs.map(function(sub) {
+        return sub.delete.bind(sub);
+      }), callback);
+    });
+  }
+
   before(function(done) {
-    deleteAllTopics(function(err) {
+    deleteAllSubscriptions(function(err) {
       assert.ifError(err);
-      // Create new topics.
-      async.map(topicNames, pubsub.createTopic.bind(pubsub), done);
+
+      deleteAllTopics(function(err) {
+        assert.ifError(err);
+        // Create new topics.
+        async.map(topicNames, pubsub.createTopic.bind(pubsub), done);
+      });
     });
   });
 
-  after(deleteAllTopics);
+  after(function(done) {
+    deleteAllSubscriptions(function(err) {
+      assert.ifError(err);
+      deleteAllTopics(done);
+    });
+  });
 
   describe('Topic', function() {
     it('should be listed', function(done) {
@@ -118,22 +139,29 @@ describe('pubsub', function() {
     var topic;
 
     before(function(done) {
-      deleteAllTopics(function(err) {
+      deleteAllSubscriptions(function(err) {
         assert.ifError(err);
-        // Create a new test topic.
-        pubsub.createTopic(TOPIC_NAME, function(err, newTopic) {
+
+        deleteAllTopics(function(err) {
           assert.ifError(err);
-          topic = newTopic;
-          // Create subscriptions.
-          async.parallel(subscriptions.map(function(sub) {
-            return topic.subscribe.bind(topic, sub.name, sub.options);
-          }), done);
+          // Create a new test topic.
+          pubsub.createTopic(TOPIC_NAME, function(err, newTopic) {
+            assert.ifError(err);
+            topic = newTopic;
+            // Create subscriptions.
+            async.parallel(subscriptions.map(function(sub) {
+              return topic.subscribe.bind(topic, sub.name, sub.options);
+            }), done);
+          });
         });
       });
     });
 
     after(function(done) {
-      topic.delete(done);
+      deleteAllSubscriptions(function(err) {
+        assert.ifError(err);
+        deleteAllTopics(done);
+      });
     });
 
     it('should list all subscriptions registered to the topic', function(done) {
