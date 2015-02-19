@@ -370,7 +370,7 @@ describe('storage', function() {
 
         file.download(function(err, remoteContents) {
           assert.ifError(err);
-          assert.equal(fileContents, remoteContents);
+          assert.equal(String(fileContents), String(remoteContents));
           done();
         });
       });
