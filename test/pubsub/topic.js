@@ -86,6 +86,28 @@ describe('Topic', function() {
     });
   });
 
+  describe('formatMessage_', function() {
+    var messageString = 'string';
+    var messageBuffer = new Buffer(messageString);
+
+    var messageObjectWithString = { data: messageString };
+    var messageObjectWithBuffer = { data: messageBuffer };
+
+    it('should handle string data', function() {
+      assert.deepEqual(
+        Topic.formatMessage_(messageObjectWithString),
+        { data: new Buffer(JSON.stringify(messageString)).toString('base64') }
+      );
+    });
+
+    it('should handle buffer data', function() {
+      assert.deepEqual(
+        Topic.formatMessage_(messageObjectWithBuffer),
+        { data: messageBuffer.toString('base64') }
+      );
+    });
+  });
+
   describe('formatName_', function() {
     var fullName = '/topics/' + PROJECT_ID + '/' + TOPIC_NAME;
 
@@ -100,85 +122,43 @@ describe('Topic', function() {
     });
   });
 
-  describe('publishing', function() {
+  describe('publish', function() {
     var message = 'howdy';
-    var messageBuffer = new Buffer(message);
-    var messageRaw = { data: messageBuffer.toString('base64') };
-    var messageObj = { test: 'object' };
-    var messageObjDecoded =
-            new Buffer(JSON.stringify(messageObj)).toString('base64');
+    var messageObject = { data: message };
 
-    describe('publish', function() {
-      it('should throw if no message is provided', function() {
-        assert.throws(function() {
-          topic.publish();
-        }, /empty message/);
-      });
+    it('should throw if no message is provided', function() {
+      assert.throws(function() {
+        topic.publish();
+      }, /Cannot publish/);
 
-      it('should convert string to raw message', function(done) {
-        topic.publishRaw = function(msg) {
-          assert.deepEqual(msg, messageRaw);
-          done();
-        };
-        topic.publish(message, assert.ifError);
-      });
-
-      it('should convert buffer to raw message', function(done) {
-        topic.publishRaw = function(msg) {
-          assert.deepEqual(msg, messageRaw);
-          done();
-        };
-        topic.publish(messageBuffer, assert.ifError);
-      });
-
-      it('should stringify non-strings & non-buffers', function(done) {
-        topic.publishRaw = function(msg) {
-          assert.deepEqual(msg.data, messageObjDecoded);
-          done();
-        };
-        topic.publish(messageObj, assert.ifError);
-      });
-
-      it('should pass callback', function(done) {
-        topic.publishRaw = function(msg, callback) {
-          callback();
-        };
-        topic.publish(message, done);
-      });
+      assert.throws(function() {
+        topic.publish([]);
+      }, /Cannot publish/);
     });
 
-    describe('publishRaw', function() {
-      it('should throw if no message is provided', function() {
-        assert.throws(function() {
-          topic.publishRaw();
-        }, /empty message/);
-      });
+    it('should send correct api request', function(done) {
+      topic.makeReq_ = function(method, path, query, body) {
+        assert.equal(method, 'POST');
+        assert.equal(path, 'topics/publishBatch');
+        assert.strictEqual(query, null);
+        assert.deepEqual(body, {
+          topic: topic.name,
+          messages: [
+            { data: new Buffer(JSON.stringify(message)).toString('base64') }
+          ]
+        });
+        done();
+      };
 
-      it('should stringify non-strings & non-buffers', function(done) {
-        topic.makeReq_ = function(method, path, qs, body) {
-          assert.deepEqual(body.message.data, messageObjDecoded);
-          done();
-        };
-        topic.publishRaw({ data: messageObj }, assert.ifError);
-      });
+      topic.publish(messageObject, assert.ifError);
+    });
 
-      it('should post raw messages to the api', function(done) {
-        topic.makeReq_ = function(method, path, qs, body) {
-          assert.equal(method, 'POST');
-          assert.equal(path, 'topics/publish');
-          assert.deepEqual(body.message.data, messageRaw.data);
-          done();
-        };
-        topic.publishRaw(messageRaw, assert.ifError);
-      });
+    it('should execute callback', function(done) {
+      topic.makeReq_ = function(method, path, query, body, callback) {
+        callback();
+      };
 
-      it('should attach topic name to the request', function(done) {
-        topic.makeReq_ = function(method, path, qs, body) {
-          assert.equal(body.topic, topic.name);
-          done();
-        };
-        topic.publishRaw(messageRaw, assert.ifError);
-      });
+      topic.publish(messageObject, done);
     });
   });
 
