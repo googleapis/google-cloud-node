@@ -38,129 +38,118 @@ function generateSubName() {
 }
 
 describe('pubsub', function() {
-  var topicNames = [
+  var TOPIC_NAMES = [
     generateTopicName(),
     generateTopicName(),
     generateTopicName()
   ];
 
-  function deleteAllTopics(callback) {
-    // TODO: Handle pagination.
-    pubsub.getTopics(function(err, topics) {
-      if (err) {
-        callback(err);
-        return;
-      }
-      async.parallel(topics.map(function(topic) {
-        return topic.delete.bind(topic);
-      }), callback);
-    });
-  }
+  var TOPICS = TOPIC_NAMES.map(pubsub.topic.bind(pubsub));
 
-  function deleteAllSubscriptions(callback) {
-    pubsub.getSubscriptions(function(err, subs) {
-      if(err) {
-        callback(err);
-        return;
-      }
-      async.parallel(subs.map(function(sub) {
-        return sub.delete.bind(sub);
-      }), callback);
-    });
-  }
+  var TOPIC_FULL_NAMES = TOPICS.map(function(topic) {
+    return topic.name;
+  });
 
   before(function(done) {
-    deleteAllSubscriptions(function(err) {
-      assert.ifError(err);
-
-      deleteAllTopics(function(err) {
-        assert.ifError(err);
-        // Create new topics.
-        async.map(topicNames, pubsub.createTopic.bind(pubsub), done);
-      });
-    });
+    // create all needed topics
+    async.each(TOPIC_NAMES, function(name, cb) {
+      pubsub.createTopic(name, cb);
+    }, done);
   });
 
   after(function(done) {
-    deleteAllSubscriptions(function(err) {
-      assert.ifError(err);
-      deleteAllTopics(done);
-    });
+    // Delete topics
+    async.each(TOPICS, function(topic, callback) {
+      topic.delete(callback);
+    }, done);
   });
 
   describe('Topic', function() {
+
     it('should be listed', function(done) {
       pubsub.getTopics(function(err, topics) {
         assert.ifError(err);
-        assert(topics.length, topicNames.length);
+
+        var results = topics.filter(function(topic) {
+          return TOPIC_FULL_NAMES.indexOf(topic.name) !== -1;
+        });
+
+        // get all topics in list of known names
+        assert.equal(results.length, TOPIC_NAMES.length);
         done();
       });
     });
 
     it('should return a nextQuery if there are more results', function(done) {
       pubsub.getTopics({
-        maxResults: topicNames.length - 1
+        maxResults: TOPIC_NAMES.length - 1
       }, function(err, topics, next) {
         assert.ifError(err);
-        assert(topics.length, topicNames.length - 1);
-        assert(next.maxResults, topicNames.length - 1);
+        assert(topics.length, TOPIC_NAMES.length - 1);
+        assert(next.maxResults, TOPIC_NAMES.length - 1);
         assert(!!next.pageToken, true);
         done();
       });
     });
 
-    it('should be created', function(done) {
-      pubsub.createTopic('new-topic-name', done);
+    it('should be created and deleted', function(done) {
+      var TOPIC_NAME = generateTopicName();
+      pubsub.createTopic(TOPIC_NAME, function(err) {
+        assert.ifError(err);
+        pubsub.topic(TOPIC_NAME).delete(done);
+      });
     });
 
     it('should publish a message', function(done) {
-      pubsub.topic(topicNames[0])
-        .publish({ data: 'message from me' }, done);
-    });
-
-    it('should be deleted', function(done) {
-      pubsub.topic(topicNames[0])
-        .delete(done);
+      pubsub.topic(TOPIC_NAMES[0]).publish({ data: 'message from me' }, done);
     });
   });
 
   describe('Subscription', function() {
     var TOPIC_NAME = generateTopicName();
-    var subscriptions = [
+
+    var SUB_NAMES = [
+      generateSubName(),
+      generateSubName()
+    ];
+
+    var SUBSCRIPTIONS = [
       {
-        name: generateSubName(),
+        name: SUB_NAMES[0],
         options: { ackDeadlineSeconds: 30 }
       },
       {
-        name: generateSubName(),
+        name: SUB_NAMES[1],
         options: { ackDeadlineSeconds: 60 }
       }
     ];
+
     var topic;
 
     before(function(done) {
-      deleteAllSubscriptions(function(err) {
+      // Create a new test topic.
+      pubsub.createTopic(TOPIC_NAME, function(err, newTopic) {
         assert.ifError(err);
+        topic = newTopic;
 
-        deleteAllTopics(function(err) {
-          assert.ifError(err);
-          // Create a new test topic.
-          pubsub.createTopic(TOPIC_NAME, function(err, newTopic) {
-            assert.ifError(err);
-            topic = newTopic;
-            // Create subscriptions.
-            async.parallel(subscriptions.map(function(sub) {
-              return topic.subscribe.bind(topic, sub.name, sub.options);
-            }), done);
-          });
-        });
+        // Create subscriptions.
+        async.parallel(SUBSCRIPTIONS.map(function(sub) {
+          return topic.subscribe.bind(topic, sub.name, sub.options);
+        }), done);
       });
     });
 
     after(function(done) {
-      deleteAllSubscriptions(function(err) {
+      var SUBS = SUB_NAMES.map(function(name) {
+        return topic.subscription(name);
+      });
+
+      // Delete subscriptions
+      async.each(SUBS, function(sub, callback) {
+        sub.delete(callback);
+      }, function(err) {
         assert.ifError(err);
-        deleteAllTopics(done);
+        topic.delete(done);
       });
     });
 
@@ -168,21 +157,22 @@ describe('pubsub', function() {
       topic.getSubscriptions(function(err, subs) {
         assert.ifError(err);
         assert(subs[0] instanceof Subscription);
-        assert.equal(subs.length, subscriptions.length);
+        assert.equal(subs.length, SUBSCRIPTIONS.length);
         done();
       });
     });
 
-    it('should allow creation of a topic', function(done) {
-      topic.subscribe('new-subscription', function(err, sub) {
+    it('should allow creation and deletion of a topic', function(done) {
+      var subName = generateSubName();
+      topic.subscribe(subName, function(err, sub) {
         assert.ifError(err);
         assert(sub instanceof Subscription);
-        done();
+        sub.delete(done);
       });
     });
 
     it('should error when using a non-existent subscription', function(done) {
-      var subscription = topic.subscription('non-existent-subscription');
+      var subscription = topic.subscription(generateSubName());
 
       subscription.pull(function(err) {
         assert.equal(err.code, 404);
@@ -191,7 +181,7 @@ describe('pubsub', function() {
     });
 
     it('should be able to pull and ack', function(done) {
-      var subscription = topic.subscription(subscriptions[0].name);
+      var subscription = topic.subscription(SUB_NAMES[0]);
 
       topic.publish({ data: 'hello' }, function(err) {
         assert.ifError(err);
@@ -207,7 +197,7 @@ describe('pubsub', function() {
     });
 
     it('should receive the published message', function(done) {
-      var subscription = topic.subscription(subscriptions[0].name);
+      var subscription = topic.subscription(SUB_NAMES[1]);
 
       topic.publish([
         { data: 'hello' },
@@ -235,7 +225,7 @@ describe('pubsub', function() {
     });
 
     it('should receive a raw published message', function(done) {
-      var subscription = topic.subscription(subscriptions[0].name);
+      var subscription = topic.subscription(SUB_NAMES[0]);
 
       topic.publish([
         { data: 'hello' },
@@ -263,7 +253,7 @@ describe('pubsub', function() {
     });
 
     it('should receive the chosen amount of results', function(done) {
-      var subscription = topic.subscription(subscriptions[0].name);
+      var subscription = topic.subscription(SUB_NAMES[1]);
       var opts = { returnImmediately: true, maxResults: 3 };
 
       topic.publish([
