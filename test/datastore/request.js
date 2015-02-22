@@ -22,6 +22,7 @@ var assert = require('assert');
 var ByteBuffer = require('bytebuffer');
 var entity = require('../../lib/datastore/entity.js');
 var extend = require('extend');
+var http = require('http');
 var https = require('https');
 var mockery = require('mockery');
 var mockRespGet = require('../testdata/response_get.json');
@@ -36,6 +37,15 @@ var httpsRequestOverride = util.noop;
 extend(true, https, {
   request: function() {
     return httpsRequestOverride.apply(this, util.toArray(arguments));
+  }
+});
+
+var httpRequestCached = http.request;
+var httpRequestOverride = util.noop;
+
+extend(true, http, {
+  request: function() {
+    return httpRequestOverride.apply(this, util.toArray(arguments));
   }
 });
 
@@ -62,6 +72,7 @@ describe('Request', function() {
   before(function() {
     mockery.registerMock('./pb.js', pb);
     mockery.registerMock('https', https);
+    mockery.registerMock('http', http);
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
@@ -73,6 +84,7 @@ describe('Request', function() {
     mockery.deregisterAll();
     mockery.disable();
     httpsRequestOverride = httpsRequestCached;
+    httpRequestOverride = httpRequestCached;
   });
 
   beforeEach(function() {
@@ -84,6 +96,9 @@ describe('Request', function() {
     request = new Request();
     request.makeAuthorizedRequest_ = function(req, callback) {
       (callback.onAuthorized || callback)(null, req);
+    };
+    request.makeAuthorizedRequest_.getEnvironment = function() {
+      return {};
     };
   });
 
@@ -566,10 +581,13 @@ describe('Request', function() {
         assert.equal(opts.headers['Content-Type'], 'application/x-protobuf');
         done();
       };
+      request.makeAuthorizedRequest_.getEnvironment = function() {
+        return {};
+      };
       request.makeReq_(method, {}, util.noop);
     });
 
-    it('should make https request', function(done) {
+    it('should make https request if not gae dev and no creds', function(done) {
       var mockRequest = { mock: 'request' };
       httpsRequestOverride = function(req) {
         assert.deepEqual(req, mockRequest);
@@ -578,6 +596,45 @@ describe('Request', function() {
       };
       request.makeAuthorizedRequest_ = function(opts, callback) {
         (callback.onAuthorized || callback)(null, mockRequest);
+      };
+      request.makeAuthorizedRequest_.getEnvironment = function() {
+        return {
+          GAE_DEV: false,
+          NO_CREDENTIALS: false
+        };
+      };
+      request.makeReq_('commit', {}, util.noop);
+    });
+
+    it('should make http call to API_HOST if no credentials', function(done) {
+      var mockRequest = { mock: 'request' };
+
+      var API_HOST_CACHED = process.env.API_HOST;
+      var GAE_SERVER_PORT_CACHED = process.env.GAE_SERVER_PORT;
+
+      process.env.API_HOST = 'API_HOST';
+      process.env.GAE_SERVER_PORT = 99;
+
+      httpRequestOverride = function(req) {
+        assert.deepEqual(req, mockRequest);
+        assert.equal(req.host, process.env.API_HOST);
+        assert.equal(req.port, process.env.GAE_SERVER_PORT);
+
+        done();
+
+        process.env.API_HOST = API_HOST_CACHED;
+        process.env.GAE_SERVER_PORT = GAE_SERVER_PORT_CACHED;
+
+        return new stream.Writable();
+      };
+      request.makeAuthorizedRequest_ = function(opts, callback) {
+        (callback.onAuthorized || callback)(null, mockRequest);
+      };
+      request.makeAuthorizedRequest_.getEnvironment = function() {
+        return {
+          GAE_DEV: true,
+          NO_CREDENTIALS: true
+        };
       };
       request.makeReq_('commit', {}, util.noop);
     });
@@ -600,11 +657,14 @@ describe('Request', function() {
       pbFakeMethodResponseDecode = function() {
         done();
       };
-      httpsRequestOverride = function(req, callback) {
-        var ws = new stream.Writable();
-        callback(ws);
-        ws.emit('end');
-        return ws;
+      httpsRequestOverride = function() {
+        var requestStream = new stream.PassThrough();
+        var responseStream = new stream.PassThrough();
+        setImmediate(function() {
+          requestStream.emit('response', responseStream);
+          responseStream.end();
+        });
+        return requestStream;
       };
       request.makeReq_('fakeMethod', util.noop);
     });
@@ -613,6 +673,9 @@ describe('Request', function() {
       beforeEach(function() {
         request.createAuthorizedRequest_ = function(opts, callback) {
           (callback.onAuthorized || callback)();
+        };
+        request.makeAuthorizedRequest_.getEnvironment = function() {
+          return {};
         };
       });
 
