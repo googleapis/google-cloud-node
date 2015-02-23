@@ -25,7 +25,10 @@ var fs = require('fs');
 var request = require('request');
 var through = require('through2');
 var tmp = require('tmp');
+var util = require('../lib/common/util');
 var uuid = require('node-uuid');
+
+var prop = util.prop;
 
 var env = require('./env.js');
 var storage = require('../lib/storage')(env);
@@ -47,10 +50,12 @@ function deleteFiles(bucket, callback) {
       callback(err);
       return;
     }
-    async.map(files, function(file, next) {
-      file.delete(next);
-    }, callback);
+    async.map(files, deleteFile, callback);
   });
+}
+
+function deleteFile(file, callback) {
+  file.delete(callback);
 }
 
 function generateBucketName() {
@@ -490,6 +495,41 @@ describe('storage', function() {
           ], done);
         });
       });
+    });
+  });
+
+  describe('combine files', function() {
+    it('should combine multiple files into one', function(done) {
+      var files = [
+        { file: bucket.file('file-one.txt'), contents: '123' },
+        { file: bucket.file('file-two.txt'), contents: '456' }
+      ];
+
+      async.each(files, createFile, function(err) {
+        assert.ifError(err);
+
+        var sourceFiles = files.map(prop('file'));
+        var destinationFile = bucket.file('file-one-and-two.txt');
+
+        bucket.combine(sourceFiles, destinationFile, function(err) {
+          assert.ifError(err);
+
+          destinationFile.download(function(err, contents) {
+            assert.ifError(err);
+
+            assert.equal(contents, files.map(prop('contents')).join(''));
+
+            async.each(sourceFiles.concat([destinationFile]), deleteFile, done);
+          });
+        });
+      });
+
+      function createFile(fileObject, cb) {
+        var ws = fileObject.file.createWriteStream();
+        ws.on('error', cb);
+        ws.on('complete', cb.bind(null, null));
+        ws.end(fileObject.contents);
+      }
     });
   });
 
