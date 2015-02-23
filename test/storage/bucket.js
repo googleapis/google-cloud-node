@@ -19,6 +19,8 @@
 'use strict';
 
 var assert = require('assert');
+var async = require('async');
+var mime = require('mime-types');
 var mockery = require('mockery');
 var request = require('request');
 var stream = require('stream');
@@ -27,7 +29,7 @@ var util = require('../../lib/common/util.js');
 function FakeFile(bucket, name, metadata) {
   this.bucket = bucket;
   this.name = name;
-  this.metadata = metadata;
+  this.metadata = metadata || {};
   this.createWriteStream = function(options) {
     this.metadata = options.metadata;
     var ws = new stream.Writable();
@@ -90,6 +92,189 @@ describe('Bucket', function() {
       assert.throws(function() {
         new Bucket();
       }, /A bucket name is needed/);
+    });
+  });
+
+  describe('combine', function() {
+    it('should throw if invalid sources are not provided', function() {
+      var error = 'You must provide at least two source files.';
+
+      assert.throws(function() {
+        bucket.combine();
+      }, new RegExp(error));
+
+      assert.throws(function() {
+        bucket.combine(['1']);
+      }, new RegExp(error));
+    });
+
+    it('should throw if a destination is not provided', function() {
+      var error = 'A destination file must be specified.';
+
+      assert.throws(function() {
+        bucket.combine(['1', '2']);
+      }, new RegExp(error));
+    });
+
+    it('should accept string or file input for sources', function(done) {
+      var file1 = bucket.file('1.txt');
+      var file2 = '2.txt';
+
+      bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
+        assert.equal(reqOpts.json.sourceObjects[0].name, file1.name);
+        assert.equal(reqOpts.json.sourceObjects[1].name, file2);
+        done();
+      };
+
+      bucket.combine([file1, file2], 'destination.txt');
+    });
+
+    it('should accept string or file input for destination', function(done) {
+      var destinations = [
+        'destination.txt',
+        bucket.file('destination.txt')
+      ];
+
+      async.each(destinations, function (destination, next) {
+        bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
+          assert(reqOpts.uri.indexOf(bucket.name + '/o/destination.txt') > -1);
+          next();
+        };
+
+        bucket.combine(['1', '2'], destination);
+      }, done);
+    });
+
+    it('should use content type from the destination metadata', function(done) {
+      var destination = 'destination.txt';
+
+      bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
+        assert.equal(
+          reqOpts.json.destination.contentType,
+          mime.contentType(destination)
+        );
+        done();
+      };
+
+      bucket.combine(['1', '2'], destination);
+    });
+
+    it('should use content type from the destination metadata', function(done) {
+      var destination = bucket.file('destination.txt');
+      destination.metadata = { contentType: 'content-type' };
+
+      bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
+        assert.equal(
+          reqOpts.json.destination.contentType,
+          destination.metadata.contentType
+        );
+        done();
+      };
+
+      bucket.combine(['1', '2'], destination);
+    });
+
+    it('should detect dest content type if not in metadata', function(done) {
+      var destination = 'destination.txt';
+
+      bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
+        assert.equal(
+          reqOpts.json.destination.contentType,
+          mime.contentType(destination)
+        );
+        done();
+      };
+
+      bucket.combine(['1', '2'], destination);
+    });
+
+    it('should throw if content type cannot be determined', function() {
+      var error =
+        'A content type could not be detected for the destination file.';
+
+      assert.throws(function() {
+        bucket.combine(['1', '2'], 'destination');
+      }, new RegExp(error));
+    });
+
+    it('should make correct API request', function(done) {
+      var sources = [bucket.file('1.txt'), bucket.file('2.txt')];
+      var destination = bucket.file('destination.txt');
+
+      bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
+        var expectedUri = util.format('{base}/{bucket}/o/{file}/compose', {
+          base: 'https://www.googleapis.com/storage/v1/b',
+          bucket: destination.bucket.name,
+          file: encodeURIComponent(destination.name)
+        });
+
+        assert.equal(reqOpts.uri, expectedUri);
+        assert.deepEqual(reqOpts.json, {
+          destination: { contentType: mime.contentType(destination.name) },
+          sourceObjects: [{ name: sources[0].name }, { name: sources[1].name }]
+        });
+        done();
+      };
+
+      bucket.combine(sources, destination);
+    });
+
+    it('should encode the destination file name', function(done) {
+      var sources = [bucket.file('1.txt'), bucket.file('2.txt')];
+      var destination = 'needs encoding.jpg';
+
+      bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
+        assert.equal(reqOpts.uri.indexOf(destination), -1);
+        done();
+      };
+
+      bucket.combine(sources, destination);
+    });
+
+    it('should send a source generation value if available', function(done) {
+      var sources = [bucket.file('1.txt'), bucket.file('2.txt')];
+      sources[0].metadata = { generation: 1 };
+      sources[1].metadata = { generation: 2 };
+
+      var destination = bucket.file('destination.txt');
+
+      bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
+        assert.deepEqual(reqOpts.json.sourceObjects, [
+          { name: sources[0].name, generation: sources[0].metadata.generation },
+          { name: sources[1].name, generation: sources[1].metadata.generation }
+        ]);
+
+        done();
+      };
+
+      bucket.combine(sources, destination);
+    });
+
+    it('should execute the callback', function(done) {
+      var sources = [bucket.file('1.txt'), bucket.file('2.txt')];
+      var destination = 'destination.txt';
+
+      bucket.storage.makeAuthorizedRequest_ = function(reqOpts, callback) {
+        callback();
+      };
+
+      bucket.combine(sources, destination, done);
+    });
+
+    it('should execute the callback with an error', function(done) {
+      var sources = [bucket.file('1.txt'), bucket.file('2.txt')];
+      var destination = 'destination.txt';
+
+      var error = new Error('Error.');
+
+      bucket.storage.makeAuthorizedRequest_ = function(reqOpts, callback) {
+        callback(error);
+      };
+
+      bucket.combine(sources, destination, function(err) {
+        assert.equal(err, error);
+        done();
+      });
     });
   });
 
