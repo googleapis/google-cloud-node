@@ -23,6 +23,20 @@ var Dataset = require('../../lib/datastore/dataset');
 var util = require('../../lib/common/util.js');
 
 describe('Dataset', function() {
+  describe('instantiation', function() {
+    it('should set default API connection details', function() {
+      var ds = new Dataset();
+      assert.equal(ds.api.host, 'https://www.googleapis.com');
+      assert.equal(ds.api.port, 443);
+    });
+
+    it('should set API connection details', function() {
+      var ds = new Dataset({ host: 'http://localhost', port: 8080 });
+      assert.equal(ds.api.host, 'http://localhost');
+      assert.equal(ds.api.port, 8080);
+    });
+  });
+
   describe('key', function() {
     it('should return key scoped by default namespace', function() {
       var ds = new Dataset({ projectId: 'test', namespace: 'my-ns' });
