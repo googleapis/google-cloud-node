@@ -424,6 +424,91 @@
   {
     "tags": [
       {
+        "type": "throws",
+        "types": [],
+        "description": "<p>a non-array is provided as sources argument.</p>"
+      },
+      {
+        "type": "throws",
+        "types": [],
+        "description": "<p>less than two sources are provided.</p>"
+      },
+      {
+        "type": "throws",
+        "types": [],
+        "description": "<p>no destination is provided.</p>"
+      },
+      {
+        "type": "throws",
+        "types": [],
+        "description": "<p>a content type cannot be determined for the destination file. </p>"
+      },
+      {
+        "type": "param",
+        "name": "sources",
+        "description": "<ul>\n<li>The source files that will     be combined.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>?</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "destination",
+        "description": "<ul>\n<li>The file you would like the     source files combined into.</li>\n</ul>\n",
+        "types": [
+          "string",
+          "module:storage/file"
+        ],
+        "typesDescription": "<code>string</code>|module:<a href=\"module%3Astorage%2Ffile.html\">storage/file</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var 2013logs = bucket.file('2013-logs.txt');\nvar 2014logs = bucket.file('2014-logs.txt');\n\nvar allLogs = bucket.file('all-logs.txt');\n\nbucket.combine([\n  2013logs,\n  2014logs\n], allLogs, function(err, newFile) {\n  // newFile === allLogs\n});"
+      }
+    ],
+    "description": {
+      "full": "<p>Combine mutliple files into one new file.</p>",
+      "summary": "<p>Combine mutliple files into one new file.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 205,
+    "codeStart": 232,
+    "code": "Bucket.prototype.combine = function(sources, destination, callback) {\n  if (!util.is(sources, 'array') || sources.length < 2) {\n    throw new Error('You must provide at least two source files.');\n  }\n\n  if (!destination) {\n    throw new Error('A destination file must be specified.');\n  }\n\n  var self = this;\n\n  sources = sources.map(convertToFile);\n  destination = convertToFile(destination);\n  callback = callback || util.noop;\n\n  if (!destination.metadata.contentType) {\n    var destinationContentType = mime.contentType(destination.name);\n\n    if (destinationContentType) {\n      destination.metadata.contentType = destinationContentType;\n    } else {\n      throw new Error(\n        'A content type could not be detected for the destination file.');\n    }\n  }\n\n  this.storage.makeAuthorizedRequest_({\n    method: 'POST',\n    uri: util.format('{base}/{destBucket}/o/{destFile}/compose', {\n      base: STORAGE_BASE_URL,\n      destBucket: destination.bucket.name,\n      destFile: encodeURIComponent(destination.name)\n    }),\n    json: {\n      destination: {\n        contentType: destination.metadata.contentType\n      },\n      sourceObjects: sources.map(function (source) {\n        var sourceObject = {\n          name: source.name\n        };\n\n        if (source.metadata && source.metadata.generation) {\n          sourceObject.generation = source.metadata.generation;\n        }\n\n        return sourceObject;\n      })\n    }\n  }, function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    callback(null, destination);\n  });\n\n  function convertToFile(file) {\n    if (file instanceof File) {\n      return file;\n    } else {\n      return self.file(file);\n    }\n  }\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "combine",
+      "string": "Bucket.prototype.combine()"
+    }
+  },
+  {
+    "tags": [
+      {
         "type": "param",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
@@ -450,8 +535,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 205,
-    "codeStart": 213,
+    "line": 299,
+    "codeStart": 307,
     "code": "Bucket.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('DELETE', '', null, true, callback);\n};",
     "ctx": {
       "type": "method",
@@ -502,8 +587,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 218,
-    "codeStart": 228,
+    "line": 312,
+    "codeStart": 322,
     "code": "Bucket.prototype.file = function(name) {\n  return new File(this, name);\n};",
     "ctx": {
       "type": "method",
@@ -607,8 +692,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 232,
-    "codeStart": 272,
+    "line": 326,
+    "codeStart": 366,
     "code": "Bucket.prototype.getFiles = function(query, callback) {\n  var that = this;\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n  this.makeReq_('GET', '/o', query, true, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    var files = (resp.items || []).map(function(item) {\n      var file = that.file(item.name);\n      file.metadata = item;\n      return file;\n    });\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, { pageToken: resp.nextPageToken });\n    }\n    callback(null, files, nextQuery);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -647,8 +732,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 296,
-    "codeStart": 306,
+    "line": 390,
+    "codeStart": 400,
     "code": "Bucket.prototype.getMetadata = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('GET', '', null, true, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    this.metadata = resp;\n    callback(null, this.metadata);\n  }.bind(this));\n};",
     "ctx": {
       "type": "method",
@@ -700,8 +785,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 318,
-    "codeStart": 335,
+    "line": 412,
+    "codeStart": 429,
     "code": "Bucket.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n  callback = callback || util.noop;\n\n  this.makeReq_('PATCH', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -820,8 +905,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 351,
-    "codeStart": 429,
+    "line": 445,
+    "codeStart": 523,
     "code": "Bucket.prototype.upload = function(localPath, options, callback) {\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = {};\n  }\n\n  var newFile;\n  if (options.destination instanceof File) {\n    newFile = options.destination;\n  } else if (util.is(options.destination, 'string')) {\n    // Use the string as the name of the file.\n    newFile = this.file(options.destination);\n  } else {\n    // Resort to using the name of the incoming file.\n    newFile = this.file(path.basename(localPath));\n  }\n\n  var metadata = options.metadata || {};\n  var contentType = mime.contentType(path.basename(localPath));\n\n  if (contentType && !metadata.contentType) {\n    metadata.contentType = contentType;\n  }\n\n  var resumable;\n  if (util.is(options.resumable, 'boolean')) {\n    resumable = options.resumable;\n    upload();\n  } else {\n    // Determine if the upload should be resumable if it's over the threshold.\n    fs.stat(localPath, function(err, fd) {\n      if (err) {\n        callback(err);\n        return;\n      }\n\n      resumable = fd.size > RESUMABLE_THRESHOLD;\n\n      upload();\n    });\n  }\n\n  function upload() {\n    fs.createReadStream(localPath)\n      .pipe(newFile.createWriteStream({\n        validation: options.validation,\n        resumable: resumable,\n        metadata: metadata\n      }))\n      .on('error', callback)\n      .on('complete', function() {\n        callback(null, newFile);\n      });\n  }\n};",
     "ctx": {
       "type": "method",
@@ -908,8 +993,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 485,
-    "codeStart": 497,
+    "line": 579,
+    "codeStart": 591,
     "code": "Bucket.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: STORAGE_BASE_URL + '/' + this.name + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.storage.makeAuthorizedRequest_(reqOpts, callback);\n};\n\nmodule.exports = Bucket;",
     "ctx": {
       "type": "method",
