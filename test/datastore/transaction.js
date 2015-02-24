@@ -82,14 +82,14 @@ describe('Transaction', function() {
     it('should assign default properties', function() {
       var projectId = 'abc';
       var fakeDataset = {
-        api: { host: 'host', port: 80 },
+        apiEndpoint: 'http://localhost:8080',
         makeAuthorizedRequest_: function fakeMakeAuthorizedRequest_() {}
       };
 
       var transaction = new Transaction(fakeDataset, projectId);
 
       assert.strictEqual(transaction.id, null);
-      assert.deepEqual(transaction.api, fakeDataset.api);
+      assert.deepEqual(transaction.apiEndpoint, fakeDataset.apiEndpoint);
       assert.equal(
         transaction.makeAuthorizedRequest_,
         fakeDataset.makeAuthorizedRequest_

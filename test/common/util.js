@@ -300,7 +300,7 @@ describe('common/util', function() {
     });
 
     it('should not authenticate requests with a custom API', function(done) {
-      var makeRequest = util.makeAuthorizedRequest({ customApi: true });
+      var makeRequest = util.makeAuthorizedRequest({ customEndpoint: true });
 
       var gsaCalled = false;
       gsa_Override = function() {
