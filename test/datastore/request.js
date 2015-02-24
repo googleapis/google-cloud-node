@@ -53,8 +53,7 @@ describe('Request', function() {
   var Request;
   var key;
   var request;
-  var HOST = 'http://localhost';
-  var PORT = 8080;
+  var CUSTOM_ENDPOINT = 'http://localhost:8080';
 
   before(function() {
     mockery.registerMock('./pb.js', pb);
@@ -78,7 +77,7 @@ describe('Request', function() {
     });
     request_Override = null;
     request = new Request();
-    request.api = { host: HOST, port: PORT };
+    request.apiEndpoint = CUSTOM_ENDPOINT;
     request.makeAuthorizedRequest_ = function(req, callback) {
       (callback.onAuthorized || callback)(null, req);
     };
@@ -556,9 +555,8 @@ describe('Request', function() {
       var method = 'commit';
       var projectId = 'project-id';
       var expectedUri =
-        util.format('{host}:{port}/datastore/v1beta2/datasets/{pId}/{method}', {
-          host: HOST,
-          port: PORT,
+        util.format('{apiEndpoint}/datastore/v1beta2/datasets/{pId}/{method}', {
+          apiEndpoint: CUSTOM_ENDPOINT,
           pId: projectId,
           method: method
         });
@@ -617,10 +615,10 @@ describe('Request', function() {
     });
 
     it('should respect API host and port configuration', function(done) {
-      request.api = { host: 'abc', port: 123 };
+      request.apiEndpoint = CUSTOM_ENDPOINT;
 
       request_Override = function(req) {
-        assert.equal(req.uri.indexOf('abc:123'), 0);
+        assert.equal(req.uri.indexOf(CUSTOM_ENDPOINT), 0);
         done();
         return new stream.Writable();
       };
