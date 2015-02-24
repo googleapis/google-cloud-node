@@ -21,23 +21,18 @@
 var assert = require('assert');
 var ByteBuffer = require('bytebuffer');
 var entity = require('../../lib/datastore/entity.js');
-var extend = require('extend');
-var https = require('https');
 var mockery = require('mockery');
 var mockRespGet = require('../testdata/response_get.json');
 var pb = require('../../lib/datastore/pb.js');
 var Query = require('../../lib/datastore/query.js');
+var requestModule = require('request');
 var stream = require('stream');
 var util = require('../../lib/common/util.js');
 
-var httpsRequestCached = https.request;
-var httpsRequestOverride = util.noop;
-
-extend(true, https, {
-  request: function() {
-    return httpsRequestOverride.apply(this, util.toArray(arguments));
-  }
-});
+var request_Override;
+function fakeRequest() {
+  return (request_Override || requestModule).apply(null, arguments);
+}
 
 // Create a protobuf "FakeMethod" request & response.
 pb.FakeMethodRequest = function() {
@@ -58,10 +53,11 @@ describe('Request', function() {
   var Request;
   var key;
   var request;
+  var CUSTOM_ENDPOINT = 'http://localhost:8080';
 
   before(function() {
     mockery.registerMock('./pb.js', pb);
-    mockery.registerMock('https', https);
+    mockery.registerMock('request', fakeRequest);
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
@@ -72,16 +68,16 @@ describe('Request', function() {
   after(function() {
     mockery.deregisterAll();
     mockery.disable();
-    httpsRequestOverride = httpsRequestCached;
   });
 
   beforeEach(function() {
-    httpsRequestOverride = util.noop;
     key = new entity.Key({
       namespace: 'namespace',
       path: ['Company', 123]
     });
+    request_Override = null;
     request = new Request();
+    request.apiEndpoint = CUSTOM_ENDPOINT;
     request.makeAuthorizedRequest_ = function(req, callback) {
       (callback.onAuthorized || callback)(null, req);
     };
@@ -558,20 +554,27 @@ describe('Request', function() {
     it('should assemble correct request', function(done) {
       var method = 'commit';
       var projectId = 'project-id';
+      var expectedUri =
+        util.format('{apiEndpoint}/datastore/v1beta2/datasets/{pId}/{method}', {
+          apiEndpoint: CUSTOM_ENDPOINT,
+          pId: projectId,
+          method: method
+        });
+
       request.projectId = projectId;
       request.makeAuthorizedRequest_ = function(opts) {
         assert.equal(opts.method, 'POST');
-        assert.equal(
-          opts.path, '/datastore/v1beta2/datasets/' + projectId + '/' + method);
+        assert.equal(opts.uri, expectedUri);
         assert.equal(opts.headers['Content-Type'], 'application/x-protobuf');
         done();
       };
       request.makeReq_(method, {}, util.noop);
     });
 
-    it('should make https request', function(done) {
+    it('should make API request', function(done) {
       var mockRequest = { mock: 'request' };
-      httpsRequestOverride = function(req) {
+      request_Override = function(req) {
+        assert.equal(req.headers['Content-Length'], 2);
         assert.deepEqual(req, mockRequest);
         done();
         return new stream.Writable();
@@ -585,9 +588,9 @@ describe('Request', function() {
     it('should send protobuf request', function(done) {
       var requestOptions = { mode: 'NON_TRANSACTIONAL' };
       var decoded = new pb.CommitRequest(requestOptions).toBuffer();
-      httpsRequestOverride = function() {
-        var stream = { on: util.noop, end: util.noop };
-        stream.write = function(data) {
+      request_Override = function() {
+        var stream = { on: util.noop };
+        stream.end = function(data) {
           assert.equal(String(data), String(decoded));
           done();
         };
@@ -600,12 +603,26 @@ describe('Request', function() {
       pbFakeMethodResponseDecode = function() {
         done();
       };
-      httpsRequestOverride = function(req, callback) {
+      request_Override = function() {
         var ws = new stream.Writable();
-        callback(ws);
-        ws.emit('end');
+        setImmediate(function () {
+          ws.emit('response', ws);
+          ws.emit('end');
+        });
         return ws;
       };
+      request.makeReq_('fakeMethod', util.noop);
+    });
+
+    it('should respect API host and port configuration', function(done) {
+      request.apiEndpoint = CUSTOM_ENDPOINT;
+
+      request_Override = function(req) {
+        assert.equal(req.uri.indexOf(CUSTOM_ENDPOINT), 0);
+        done();
+        return new stream.Writable();
+      };
+
       request.makeReq_('fakeMethod', util.noop);
     });
 
@@ -624,9 +641,9 @@ describe('Request', function() {
             mode: 'TRANSACTIONAL',
             transaction: request.id
           }).toBuffer();
-          httpsRequestOverride = function() {
+          request_Override = function() {
             var stream = { on: util.noop, end: util.noop };
-            stream.write = function(data) {
+            stream.end = function(data) {
               assert.deepEqual(data, expected);
               done();
             };
@@ -639,9 +656,9 @@ describe('Request', function() {
           var expected = new pb.CommitRequest({
             mode: 'NON_TRANSACTIONAL'
           }).toBuffer();
-          httpsRequestOverride = function() {
+          request_Override = function() {
             var stream = { on: util.noop, end: util.noop };
-            stream.write = function(data) {
+            stream.end = function(data) {
               assert.deepEqual(data, expected);
               done();
             };
@@ -660,9 +677,9 @@ describe('Request', function() {
               transaction: request.id
             }
           }).toBuffer();
-          httpsRequestOverride = function() {
+          request_Override = function() {
             var stream = { on: util.noop, end: util.noop };
-            stream.write = function(data) {
+            stream.end = function(data) {
               assert.deepEqual(data, expected);
               done();
             };
@@ -673,9 +690,9 @@ describe('Request', function() {
 
         it('should not attach transactional properties', function(done) {
           var expected = new pb.LookupRequest().toBuffer();
-          httpsRequestOverride = function() {
+          request_Override = function() {
             var ws = new stream.Writable();
-            ws.write = function(data) {
+            ws.end = function(data) {
               assert.deepEqual(data, expected);
               done();
             };

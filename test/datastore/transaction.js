@@ -78,6 +78,26 @@ describe('Transaction', function() {
     }, 'project-id');
   });
 
+  describe('instantiation', function() {
+    it('should assign default properties', function() {
+      var projectId = 'abc';
+      var fakeDataset = {
+        apiEndpoint: 'http://localhost:8080',
+        makeAuthorizedRequest_: function fakeMakeAuthorizedRequest_() {}
+      };
+
+      var transaction = new Transaction(fakeDataset, projectId);
+
+      assert.strictEqual(transaction.id, null);
+      assert.deepEqual(transaction.apiEndpoint, fakeDataset.apiEndpoint);
+      assert.equal(
+        transaction.makeAuthorizedRequest_,
+        fakeDataset.makeAuthorizedRequest_
+      );
+      assert.equal(transaction.projectId, projectId);
+    });
+  });
+
   describe('begin', function() {
     it('should begin', function(done) {
       transaction.makeReq_ = function(method, req, callback) {
