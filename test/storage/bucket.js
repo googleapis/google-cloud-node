@@ -135,7 +135,7 @@ describe('Bucket', function() {
         bucket.file('destination.txt')
       ];
 
-      async.each(destinations, function (destination, next) {
+      async.each(destinations, function(destination, next) {
         bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
           assert(reqOpts.uri.indexOf(bucket.name + '/o/destination.txt') > -1);
           next();
