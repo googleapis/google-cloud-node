@@ -23,6 +23,33 @@ var Dataset = require('../../lib/datastore/dataset');
 var util = require('../../lib/common/util.js');
 
 describe('Dataset', function() {
+  describe('instantiation', function() {
+    it('should set default API connection details', function() {
+      var ds = new Dataset();
+      assert.equal(ds.apiEndpoint, 'https://www.googleapis.com');
+    });
+
+    it('should set API connection details', function() {
+      var ds = new Dataset({ apiEndpoint: 'http://localhost:8080' });
+      assert.equal(ds.apiEndpoint, 'http://localhost:8080');
+    });
+
+    it('should remove slashes from the apiEndpoint', function() {
+      var ds1 = new Dataset({ apiEndpoint: 'http://localhost:8080' });
+      var ds2 = new Dataset({ apiEndpoint: 'http://localhost:8080/' });
+      var ds3 = new Dataset({ apiEndpoint: 'http://localhost:8080//' });
+
+      assert.equal(ds1.apiEndpoint, 'http://localhost:8080');
+      assert.equal(ds2.apiEndpoint, 'http://localhost:8080');
+      assert.equal(ds3.apiEndpoint, 'http://localhost:8080');
+    });
+
+    it('should default to http if protocol is unspecified', function() {
+      var ds = new Dataset({ apiEndpoint: 'localhost:8080' });
+      assert.equal(ds.apiEndpoint, 'http://localhost:8080');
+    });
+  });
+
   describe('key', function() {
     it('should return key scoped by default namespace', function() {
       var ds = new Dataset({ projectId: 'test', namespace: 'my-ns' });

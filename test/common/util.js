@@ -299,8 +299,25 @@ describe('common/util', function() {
       util.makeAuthorizedRequest(config);
     });
 
+    it('should not authenticate requests with a custom API', function(done) {
+      var makeRequest = util.makeAuthorizedRequest({ customEndpoint: true });
+
+      var gsaCalled = false;
+      gsa_Override = function() {
+        gsaCalled = true;
+      };
+
+      makeRequest({}, {
+        onAuthorized: function(err) {
+          assert.ifError(err);
+          assert.strictEqual(gsaCalled, false);
+          done();
+        }
+      });
+    });
+
     it('should return gsa.getCredentials function', function() {
-      var getCredentials = util.makeAuthorizedRequest().getCredentials;
+      var getCredentials = util.makeAuthorizedRequest({}).getCredentials;
       assert.equal(typeof getCredentials, 'function');
     });
 
@@ -313,7 +330,7 @@ describe('common/util', function() {
           };
         };
 
-        var makeRequest = util.makeAuthorizedRequest();
+        var makeRequest = util.makeAuthorizedRequest({});
         makeRequest({});
       });
 
@@ -326,7 +343,7 @@ describe('common/util', function() {
           };
         };
 
-        var makeRequest = util.makeAuthorizedRequest();
+        var makeRequest = util.makeAuthorizedRequest({});
         makeRequest({ headers: { 'User-Agent': 'test' } });
       });
 
@@ -339,7 +356,7 @@ describe('common/util', function() {
           };
         };
 
-        var makeRequest = util.makeAuthorizedRequest();
+        var makeRequest = util.makeAuthorizedRequest({});
         makeRequest({}, function(err) {
           assert.equal(err, error);
           done();
@@ -392,7 +409,7 @@ describe('common/util', function() {
           };
         };
 
-        var makeRequest = util.makeAuthorizedRequest();
+        var makeRequest = util.makeAuthorizedRequest({});
         makeRequest({}, function (err) {
           assert.equal(attempts, expectedAttempts);
           assert.equal(err, error);
@@ -407,7 +424,7 @@ describe('common/util', function() {
           };
         };
 
-        var makeRequest = util.makeAuthorizedRequest();
+        var makeRequest = util.makeAuthorizedRequest({});
         makeRequest({}, { onAuthorized: done });
       });
 
@@ -420,7 +437,7 @@ describe('common/util', function() {
           };
         };
 
-        var makeRequest = util.makeAuthorizedRequest();
+        var makeRequest = util.makeAuthorizedRequest({});
         makeRequest({}, {
           onAuthorized: function(err) {
             assert.equal(err, error);
@@ -443,7 +460,7 @@ describe('common/util', function() {
           done();
         };
 
-        var makeRequest = util.makeAuthorizedRequest();
+        var makeRequest = util.makeAuthorizedRequest({});
         makeRequest({}, assert.ifError);
       });
     });
