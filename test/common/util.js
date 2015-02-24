@@ -449,6 +449,18 @@ describe('common/util', function() {
     });
   });
 
+  describe('prop', function() {
+    it('should return objects that match the property name', function() {
+      var people = [
+        { name: 'Stephen', origin: 'USA', beenToNYC: false },
+        { name: 'Ryan', origin: 'Canada', beenToNYC: true }
+      ];
+
+      assert.deepEqual(people.map(util.prop('name')), ['Stephen', 'Ryan']);
+      assert.deepEqual(people.filter(util.prop('beenToNYC')), [people[1]]);
+    });
+  });
+
   describe('propAssign', function() {
     it('should assign a property and value to an object', function() {
       var obj = {};
