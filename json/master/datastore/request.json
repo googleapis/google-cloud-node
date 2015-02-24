@@ -31,7 +31,7 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar https = require('https');\nvar streamEvents = require('stream-events');\nvar through = require('through2');"
+    "code": "'use strict';\n\nvar streamEvents = require('stream-events');\nvar request = require('request');\nvar through = require('through2');"
   },
   {
     "tags": [
@@ -148,7 +148,7 @@
     "tags": [
       {
         "type": "const",
-        "string": "{string} Host to send with API requests."
+        "string": "{string} Non-transaction mode key."
       },
       {
         "type": "private",
@@ -166,36 +166,6 @@
     "ignore": false,
     "line": 45,
     "codeStart": 49,
-    "code": "var GOOGLE_APIS_HOST = 'www.googleapis.com';",
-    "ctx": {
-      "type": "declaration",
-      "name": "GOOGLE_APIS_HOST",
-      "value": "'www.googleapis.com'",
-      "string": "GOOGLE_APIS_HOST"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "const",
-        "string": "{string} Non-transaction mode key."
-      },
-      {
-        "type": "private",
-        "visibility": "private"
-      }
-    ],
-    "description": {
-      "full": "",
-      "summary": "",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 51,
-    "codeStart": 55,
     "code": "var MODE_NON_TRANSACTIONAL = 'NON_TRANSACTIONAL';",
     "ctx": {
       "type": "declaration",
@@ -224,8 +194,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 57,
-    "codeStart": 61,
+    "line": 51,
+    "codeStart": 55,
     "code": "var MODE_TRANSACTIONAL = 'TRANSACTIONAL';",
     "ctx": {
       "type": "declaration",
@@ -250,8 +220,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": true,
-    "line": 63,
-    "codeStart": 75
+    "line": 57,
+    "codeStart": 69
   },
   {
     "tags": [
@@ -277,8 +247,8 @@
     "isConstructor": true,
     "isEvent": false,
     "ignore": false,
-    "line": 75,
-    "codeStart": 82,
+    "line": 69,
+    "codeStart": 76,
     "code": "function DatastoreRequest() {}",
     "ctx": {
       "type": "constructor",
@@ -329,8 +299,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 84,
-    "codeStart": 107,
+    "line": 78,
+    "codeStart": 101,
     "code": "DatastoreRequest.prototype.get = function(keys, callback) {\n  var that = this;\n\n  var isMultipleRequest = Array.isArray(keys);\n  keys = isMultipleRequest ? keys : [keys];\n\n  callback = callback || util.noop;\n\n  var req = {\n    key: keys.map(entity.keyToKeyProto)\n  };\n\n  this.makeReq_('lookup', req, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var found = entity.formatArray(resp.found);\n\n    if (isMultipleRequest && resp.deferred && resp.deferred.length) {\n      // There may be more results. Call `.get` again, and append the results.\n      that.get(\n          resp.deferred.map(entity.keyFromKeyProto), function(err, entities) {\n        if (err) {\n          callback(err);\n          return;\n        }\n\n        if (resp) {\n          found = (found || []).concat(entities);\n        }\n\n        callback(null, found);\n      });\n\n      return;\n    }\n\n    callback(null, isMultipleRequest ? found : found[0]);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -351,8 +321,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 150,
-    "codeStart": 153,
+    "line": 144,
+    "codeStart": 147,
     "code": "DatastoreRequest.prototype.insert = function(entities, callback) {\n  entities = util.arrayize(entities).map(util.propAssign('method', 'insert'));\n  this.save(entities, callback);\n};",
     "ctx": {
       "type": "method",
@@ -450,8 +420,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 158,
-    "codeStart": 253,
+    "line": 152,
+    "codeStart": 247,
     "code": "DatastoreRequest.prototype.save = function(entities, callback) {\n  entities = util.arrayize(entities);\n\n  var insertIndexes = [];\n\n  var req = {\n    mutation: entities.reduce(function(acc, entityObject, index) {\n      var ent = {};\n      var method = entityObject.method;\n      delete entityObject.method;\n\n      if (Array.isArray(entityObject.data)) {\n        ent.property = entityObject.data.map(function(data) {\n          data.value = entity.valueToProperty(data.value);\n\n          if (util.is(data.excludeFromIndexes, 'boolean')) {\n            data.value.indexed = !data.excludeFromIndexes;\n            delete data.excludeFromIndexes;\n          }\n\n          return data;\n        });\n      } else {\n        ent = entity.entityToEntityProto(entityObject.data);\n      }\n\n      ent.key = entity.keyToKeyProto(entityObject.key);\n\n      if (method) {\n        switch (method) {\n          case 'insert':\n            acc.insert.push(ent);\n            break;\n          case 'update':\n            acc.update.push(ent);\n            break;\n          case 'upsert':\n            acc.upsert.push(ent);\n            break;\n          case 'insert_auto_id':\n            insertIndexes.push(index);\n            acc.insert_auto_id.push(ent);\n            break;\n        }\n      } else {\n        if (entity.isKeyComplete(entityObject.key)) {\n          acc.upsert.push(ent);\n        } else {\n          insertIndexes.push(index);\n          acc.insert_auto_id.push(ent);\n        }\n      }\n\n      return acc;\n    }, {\n      insert: [],\n      update: [],\n      upsert: [],\n      insert_auto_id: []\n    })\n  };\n\n  if (this.id) {\n    this.requests_.push(req);\n    this.requestCallbacks_.push(onCommit);\n    return;\n  } else {\n    this.makeReq_('commit', req, onCommit);\n  }\n\n  function onCommit(err, resp) {\n    if (err || !resp) {\n      callback(err);\n      return;\n    }\n\n    var autoInserted = (resp.mutation_result.insert_auto_id_key || []);\n    autoInserted.forEach(function(key, index) {\n      var path = entity.keyFromKeyProto(key).path;\n      entities[insertIndexes[index]].key.path = path;\n    });\n\n    callback(null);\n  }\n};",
     "ctx": {
       "type": "method",
@@ -504,8 +474,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 339,
-    "codeStart": 355,
+    "line": 333,
+    "codeStart": 349,
     "code": "DatastoreRequest.prototype.delete = function(keys, callback) {\n  callback = callback || util.noop;\n\n  var req = {\n    mutation: {\n      delete: util.arrayize(keys).map(entity.keyToKeyProto)\n    }\n  };\n\n  if (this.id) {\n    this.requests_.push(req);\n    return;\n  }\n\n  this.makeReq_('commit', req, callback);\n};",
     "ctx": {
       "type": "method",
@@ -557,8 +527,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 372,
-    "codeStart": 411,
+    "line": 366,
+    "codeStart": 405,
     "code": "DatastoreRequest.prototype.runQuery = function(q, callback) {\n  var that = this;\n  var stream;\n  var resultsToSend = q.limitVal;\n\n  var req = {\n    read_options: {},\n    query: entity.queryToQueryProto(q)\n  };\n\n  if (q.namespace) {\n    req.partition_id = {\n      namespace: q.namespace\n    };\n  }\n\n  if (!util.is(callback, 'function')) {\n    stream = streamEvents(through.obj());\n    stream.once('reading', runQuery);\n    return stream;\n  } else {\n    runQuery();\n  }\n\n  function runQuery() {\n    that.makeReq_('runQuery', req, function(err, resp) {\n      if (err) {\n        if (stream) {\n          stream.emit('error', err);\n          stream.end();\n        } else {\n          callback(err);\n        }\n        return;\n      }\n\n      var entities = entity.formatArray(resp.batch.entity_result);\n\n      var cursor = '';\n      if (resp.batch.end_cursor) {\n        cursor = resp.batch.end_cursor.toBase64();\n      }\n\n      if (!stream) {\n        callback(null, entities, cursor);\n        return;\n      }\n\n      if (!cursor || entities.length === 0) {\n        stream.end();\n        return;\n      }\n\n      var result;\n      while ((result = entities.shift()) && resultsToSend !== 0) {\n        stream.push(result);\n        resultsToSend--;\n      }\n\n      if (resultsToSend === 0) {\n        stream.end();\n        return;\n      }\n\n      req.query = entity.queryToQueryProto(q.start(cursor).offset(0));\n      runQuery();\n    });\n  }\n};",
     "ctx": {
       "type": "method",
@@ -623,8 +593,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 481,
-    "codeStart": 508,
+    "line": 475,
+    "codeStart": 502,
     "code": "DatastoreRequest.prototype.allocateIds = function(incompleteKey, n, callback) {\n  if (entity.isKeyComplete(incompleteKey)) {\n    throw new Error('An incomplete key should be provided.');\n  }\n\n  var incompleteKeys = [];\n  for (var i = 0; i < n; i++) {\n    incompleteKeys.push(entity.keyToKeyProto(incompleteKey));\n  }\n\n  var req = {\n    key: incompleteKeys\n  };\n\n  this.makeReq_('allocateIds', req, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var keys = (resp.key || []).map(entity.keyFromKeyProto);\n\n    callback(null, keys);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -645,8 +615,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 534,
-    "codeStart": 537,
+    "line": 528,
+    "codeStart": 531,
     "code": "DatastoreRequest.prototype.update = function(entities, callback) {\n  entities = util.arrayize(entities).map(util.propAssign('method', 'update'));\n  this.save(entities, callback);\n};",
     "ctx": {
       "type": "method",
@@ -667,8 +637,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 542,
-    "codeStart": 545,
+    "line": 536,
+    "codeStart": 539,
     "code": "DatastoreRequest.prototype.upsert = function(entities, callback) {\n  entities = util.arrayize(entities).map(util.propAssign('method', 'upsert'));\n  this.save(entities, callback);\n};",
     "ctx": {
       "type": "method",
@@ -737,9 +707,9 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 550,
-    "codeStart": 568,
-    "code": "DatastoreRequest.prototype.makeReq_ = function(method, body, callback) {\n  // TODO: Handle non-HTTP 200 cases.\n  if (!callback) {\n    callback = body;\n    body = {};\n  }\n\n  callback = callback || util.noop;\n\n  // Set properties to indicate if we're in a transaction or not.\n  if (method === 'commit') {\n    if (this.id) {\n      body.mode = MODE_TRANSACTIONAL;\n      body.transaction = this.id;\n    } else {\n      body.mode = MODE_NON_TRANSACTIONAL;\n    }\n  }\n\n  if (method === 'lookup' && this.id) {\n    body.read_options = body.read_options || {};\n    body.read_options.transaction = this.id;\n  }\n\n  var pbKey = method[0].toUpperCase() + method.substr(1);\n  var pbRequest = new pb[pbKey + 'Request'](body).toBuffer();\n  var pbResponse = pb[pbKey + 'Response'];\n\n  var reqOpts = {\n    method: 'POST',\n    host: GOOGLE_APIS_HOST,\n    path: '/datastore/v1beta2/datasets/' + this.projectId + '/' + method,\n    headers: {\n      'Content-Type': 'application/x-protobuf'\n    }\n  };\n\n  this.makeAuthorizedRequest_(reqOpts, {\n    onAuthorized: function(err, authorizedReqOpts) {\n      if (err) {\n        callback(err);\n        return;\n      }\n\n      var remoteStream = https.request(authorizedReqOpts, function(resp) {\n        var buffer = new Buffer('');\n        resp.on('data', function(chunk) {\n          buffer = Buffer.concat([buffer, chunk]);\n        });\n        resp.on('end', function() {\n          util.handleResp(null, resp, buffer.toString(), function(err) {\n            if (err) {\n              callback(err);\n              return;\n            }\n            callback(null, pbResponse.decode(buffer));\n          });\n        });\n      });\n      remoteStream.on('error', callback);\n      remoteStream.write(pbRequest);\n      remoteStream.end();\n    }\n  });\n};\n\nmodule.exports = DatastoreRequest;",
+    "line": 544,
+    "codeStart": 562,
+    "code": "DatastoreRequest.prototype.makeReq_ = function(method, body, callback) {\n  // TODO: Handle non-HTTP 200 cases.\n  if (!callback) {\n    callback = body;\n    body = {};\n  }\n\n  callback = callback || util.noop;\n\n  // Set properties to indicate if we're in a transaction or not.\n  if (method === 'commit') {\n    if (this.id) {\n      body.mode = MODE_TRANSACTIONAL;\n      body.transaction = this.id;\n    } else {\n      body.mode = MODE_NON_TRANSACTIONAL;\n    }\n  }\n\n  if (method === 'lookup' && this.id) {\n    body.read_options = body.read_options || {};\n    body.read_options.transaction = this.id;\n  }\n\n  var pbKey = method[0].toUpperCase() + method.substr(1);\n  var pbRequest = new pb[pbKey + 'Request'](body).toBuffer();\n  var pbResponse = pb[pbKey + 'Response'];\n\n  var reqOpts = {\n    method: 'POST',\n    uri: util.format('{apiEndpoint}/{path}/{projectId}/{method}', {\n      apiEndpoint: this.apiEndpoint,\n      path: 'datastore/v1beta2/datasets',\n      projectId: this.projectId,\n      method: method\n    }),\n    headers: {\n      'Content-Type': 'application/x-protobuf'\n    }\n  };\n\n  this.makeAuthorizedRequest_(reqOpts, {\n    onAuthorized: function(err, authorizedReqOpts) {\n      if (err) {\n        callback(err);\n        return;\n      }\n\n      authorizedReqOpts.headers = authorizedReqOpts.headers || {};\n      authorizedReqOpts.headers['Content-Length'] = pbRequest.length;\n\n      var apiRequest = request(authorizedReqOpts);\n\n      apiRequest.on('error', callback);\n\n      apiRequest.on('response', function(resp) {\n        var buffer = new Buffer('');\n        resp.on('data', function(chunk) {\n          buffer = Buffer.concat([buffer, chunk]);\n        });\n        resp.on('end', function() {\n          util.handleResp(null, resp, buffer.toString(), function(err) {\n            if (err) {\n              callback(err);\n              return;\n            }\n            callback(null, pbResponse.decode(buffer));\n          });\n        });\n      });\n\n      apiRequest.end(pbRequest);\n    }\n  });\n};\n\nmodule.exports = DatastoreRequest;",
     "ctx": {
       "type": "method",
       "constructor": "DatastoreRequest",

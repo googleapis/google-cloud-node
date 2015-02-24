@@ -316,6 +316,19 @@
       },
       {
         "type": "param",
+        "name": "options.apiEndpoint",
+        "description": "<ul>\n<li>Override the default API endpoint used     to reach Datastore. This is useful for connecting to your local Datastore<br />  server (usually &quot;<a href=\"http://localhost:8080\">http://localhost:8080</a>&quot;).</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
         "name": "options.namespace",
         "description": "<ul>\n<li>Namespace to isolate transactions to. </li>\n</ul>\n",
         "types": [
@@ -329,7 +342,7 @@
       },
       {
         "type": "example",
-        "string": "var dataset = datastore.dataset({\n  projectId: 'my-project',\n  keyFilename: '/path/to/keyfile.json'\n});"
+        "string": "var dataset = datastore.dataset({\n  projectId: 'my-project',\n  keyFilename: '/path/to/keyfile.json'\n});\n\n//-\n// Connect to your local Datastore server.\n//-\nvar dataset = datastore.dataset({\n  projectId: 'my-project',\n  apiEndpoint: 'http://localhost:8080'\n});"
       }
     ],
     "description": {
@@ -342,8 +355,8 @@
     "isEvent": false,
     "ignore": false,
     "line": 65,
-    "codeStart": 89,
-    "code": "function Dataset(options) {\n  if (!(this instanceof Dataset)) {\n    return new Dataset(options);\n  }\n\n  options = options || {};\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequest({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  this.namespace = options.namespace;\n  this.projectId = options.projectId;\n}\n\nnodeutil.inherits(Dataset, DatastoreRequest);",
+    "codeStart": 100,
+    "code": "function Dataset(options) {\n  if (!(this instanceof Dataset)) {\n    return new Dataset(options);\n  }\n\n  options = options || {};\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequest({\n    customEndpoint: typeof options.apiEndpoint !== 'undefined',\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  if (options.apiEndpoint && options.apiEndpoint.indexOf('http') !== 0) {\n    options.apiEndpoint = 'http://' + options.apiEndpoint;\n  }\n\n  this.apiEndpoint = options.apiEndpoint || 'https://www.googleapis.com';\n  this.apiEndpoint = this.apiEndpoint.replace(/\\",
     "ctx": {
       "type": "constructor",
       "name": "Dataset",
@@ -418,16 +431,16 @@
       }
     ],
     "description": {
-      "full": "<p>Helper to create a Key object, scoped to the dataset&#39;s namespace by default.</p><p>You may also specify a configuration object to define a namespace and path.</p>",
-      "summary": "<p>Helper to create a Key object, scoped to the dataset&#39;s namespace by default.</p>",
-      "body": "<p>You may also specify a configuration object to define a namespace and path.</p>"
+      "full": "<p>$/, &#39;&#39;);</p><p>  this.namespace = options.namespace;<br />  this.projectId = options.projectId;<br />}</p><p>nodeutil.inherits(Dataset, DatastoreRequest);</p><p>/**<br />Helper to create a Key object, scoped to the dataset&#39;s namespace by default.</p><p>You may also specify a configuration object to define a namespace and path.</p>",
+      "summary": "<p>$/, &#39;&#39;);</p>",
+      "body": "<p>  this.namespace = options.namespace;<br />  this.projectId = options.projectId;<br />}</p><p>nodeutil.inherits(Dataset, DatastoreRequest);</p><p>/**<br />Helper to create a Key object, scoped to the dataset&#39;s namespace by default.</p><p>You may also specify a configuration object to define a namespace and path.</p>"
     },
     "isPrivate": false,
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 108,
-    "codeStart": 140,
+    "line": 119,
+    "codeStart": 159,
     "code": "Dataset.prototype.key = function(options) {\n  options = util.is(options, 'object') ? options : {\n    namespace: this.namespace,\n    path: util.arrayize(options)\n  };\n\n  return new entity.Key(options);\n};",
     "ctx": {
       "type": "method",
@@ -497,8 +510,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 149,
-    "codeStart": 162,
+    "line": 168,
+    "codeStart": 181,
     "code": "Dataset.prototype.createQuery = function(namespace, kinds) {\n  if (arguments.length === 1) {\n    kinds = util.arrayize(namespace);\n    namespace = this.namespace;\n  }\n\n  return new Query(namespace, util.arrayize(kinds));\n};",
     "ctx": {
       "type": "method",
@@ -555,8 +568,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 171,
-    "codeStart": 194,
+    "line": 190,
+    "codeStart": 213,
     "code": "Dataset.prototype.runInTransaction = function(fn, callback) {\n  var newTransaction = this.createTransaction_();\n\n  newTransaction.begin(function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    fn(newTransaction, newTransaction.commit.bind(newTransaction, callback));\n  });\n};",
     "ctx": {
       "type": "method",
@@ -594,8 +607,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 207,
-    "codeStart": 213,
+    "line": 226,
+    "codeStart": 232,
     "code": "Dataset.prototype.createTransaction_ = function() {\n  return new Transaction(this, this.projectId);\n};\n\nmodule.exports = Dataset;",
     "ctx": {
       "type": "method",
