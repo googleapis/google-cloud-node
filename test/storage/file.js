@@ -454,12 +454,12 @@ describe('File', function() {
       file.createReadStream({ start: startOffset });
     });
 
-    it('should accept an end range', function(done) {
+    it('should accept an end range and set start to 0', function(done) {
       var endOffset = 100;
 
       request_Override = function(opts) {
         setImmediate(function () {
-          assert.equal(opts.headers.Range, 'bytes=-' + endOffset);
+          assert.equal(opts.headers.Range, 'bytes=0-' + endOffset);
           done();
         });
         return duplexify();
@@ -476,6 +476,23 @@ describe('File', function() {
       request_Override = function(opts) {
         setImmediate(function () {
           var expectedRange = 'bytes=' + startOffset + '-' + endOffset;
+          assert.equal(opts.headers.Range, expectedRange);
+          done();
+        });
+        return duplexify();
+      };
+
+      file.metadata = metadata;
+      file.createReadStream({ start: startOffset, end: endOffset });
+    });
+
+    it('should accept range start and end as 0', function(done) {
+      var startOffset = 0;
+      var endOffset = 0;
+
+      request_Override = function(opts) {
+        setImmediate(function () {
+          var expectedRange = 'bytes=0-0';
           assert.equal(opts.headers.Range, expectedRange);
           done();
         });
