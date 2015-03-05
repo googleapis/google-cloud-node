@@ -528,6 +528,44 @@ describe('File', function() {
       writable.write('data');
     });
 
+    it('should re-emit errors', function(done) {
+      var error = new Error('Error.');
+      var requestCount = 0;
+      file.bucket.storage.makeAuthorizedRequest_ = function(reqOpts, cb) {
+        requestCount++;
+
+        // respond to creation POST.
+        if (requestCount === 1) {
+          cb(null, null, { headers: { location: 'http://resume' }});
+          return;
+        }
+
+        // create an authorized request for the first PUT.
+        if (requestCount === 2) {
+          cb.onAuthorized(null, { headers: {} });
+        }
+      };
+
+      // respond to first upload PUT request.
+      request_Override = function() {
+        var stream = through();
+        setImmediate(function() {
+          stream.emit('error', error);
+        });
+        return stream;
+      };
+
+      var stream = duplexify();
+
+      stream
+        .on('error', function(err) {
+          assert.equal(err, error);
+          done();
+        });
+
+      file.startResumableUpload_(stream);
+    });
+
     it('should start a simple upload if specified', function(done) {
       var writable = file.createWriteStream({
         metadata: METADATA,
