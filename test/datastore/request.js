@@ -268,6 +268,27 @@ describe('Request', function() {
       }, assert.ifError);
     });
 
+    it('should allow setting the indexed value on arrays', function(done) {
+      request.makeReq_ = function(method, req) {
+        var property = req.mutation.upsert[0].property[0];
+
+        property.value.list_value.forEach(function(value) {
+          assert.strictEqual(value.indexed, false);
+        });
+
+        done();
+      };
+
+      request.save({
+        key: key,
+        data: [{
+          name: 'name',
+          value: ['one', 'two', 'three'],
+          excludeFromIndexes: true
+        }]
+      }, assert.ifError);
+    });
+
     describe('transactions', function() {
       beforeEach(function() {
         // Trigger transaction mode.
