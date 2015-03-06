@@ -36,7 +36,7 @@
     "CONTRIBUTORS",
     "COPYING"
   ],
-  "repository": "sunnychow/gcloud-node",
+  "repository": "googlecloudplatform/gcloud-node",
   "keywords": [
     "google",
     "api",
