@@ -82,11 +82,11 @@ describe('pubsub', function() {
 
     it('should return a nextQuery if there are more results', function(done) {
       pubsub.getTopics({
-        maxResults: TOPIC_NAMES.length - 1
+        pageSize: TOPIC_NAMES.length - 1
       }, function(err, topics, next) {
         assert.ifError(err);
         assert(topics.length, TOPIC_NAMES.length - 1);
-        assert(next.maxResults, TOPIC_NAMES.length - 1);
+        assert(next.pageSize, TOPIC_NAMES.length - 1);
         assert(!!next.pageToken, true);
         done();
       });
@@ -101,7 +101,12 @@ describe('pubsub', function() {
     });
 
     it('should publish a message', function(done) {
-      pubsub.topic(TOPIC_NAMES[0]).publish({ data: 'message from me' }, done);
+      var topic = pubsub.topic(TOPIC_NAMES[0]);
+      topic.publish({ data: 'message from me' }, function(err, messageIds) {
+        assert.ifError(err);
+        assert.equal(messageIds.length, 1);
+        done();
+      });
     });
   });
 
@@ -162,6 +167,14 @@ describe('pubsub', function() {
       });
     });
 
+    it('should list all subscriptions regardless of topic', function(done) {
+      pubsub.getSubscriptions(function(err, subscriptions) {
+        assert.ifError(err);
+        assert(subscriptions instanceof Array);
+        done();
+      });
+    });
+
     it('should allow creation and deletion of a topic', function(done) {
       var subName = generateSubName();
       topic.subscribe(subName, function(err, sub) {
@@ -192,6 +205,26 @@ describe('pubsub', function() {
         }, function(err, msgs) {
           assert.ifError(err);
           subscription.ack(msgs[0].ackId, done);
+        });
+      });
+    });
+
+    it('should be able to set a new ack deadline', function(done) {
+      var subscription = topic.subscription(SUB_NAMES[0]);
+
+      topic.publish({ data: 'hello' }, function(err) {
+        assert.ifError(err);
+
+        subscription.pull({
+          returnImmediately: true,
+          maxResults: 1
+        }, function(err, msgs) {
+          assert.ifError(err);
+          var options = {
+            ackId: msgs[0].ackId,
+            seconds: 10
+          };
+          subscription.setAckDeadline(options, done);
         });
       });
     });

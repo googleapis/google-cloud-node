@@ -65,7 +65,7 @@ describe('PubSub', function() {
   describe('getTopics', function() {
     beforeEach(function() {
       pubsub.makeReq_ = function(method, path, q, body, callback) {
-        callback(null, { topic: [{ name: 'fake-topic' }] });
+        callback(null, { topics: [{ name: 'fake-topic' }] });
       };
     });
 
@@ -77,13 +77,10 @@ describe('PubSub', function() {
       pubsub.getTopics(done);
     });
 
-    it('should build a project-wide query', function() {
-      pubsub.makeReq_ = function(method, path, q) {
-        var query =
-            'cloud.googleapis.com/project in (/projects/' + PROJECT_ID + ')';
+    it('should build the right request', function() {
+      pubsub.makeReq_ = function(method, path) {
         assert.equal(method, 'GET');
-        assert.equal(path, 'topics');
-        assert.equal(q.query, query);
+        assert.equal(path, 'projects/' + PROJECT_ID + '/topics');
       };
       pubsub.getTopics(function() {});
     });
@@ -100,10 +97,10 @@ describe('PubSub', function() {
       pubsub.makeReq_ = function(method, path, q, body, callback) {
         callback(null, { nextPageToken: token });
       };
-      var query = { maxResults: 1 };
+      var query = { pageSize: 1 };
       pubsub.getTopics(query, function(err, topics, nextQuery) {
         assert.ifError(err);
-        assert.strictEqual(query.maxResults, nextQuery.maxResults);
+        assert.strictEqual(query.pageSize, nextQuery.pageSize);
         assert.equal(query.pageToken, token);
       });
     });
@@ -123,9 +120,9 @@ describe('PubSub', function() {
     it('should create a topic', function() {
       var topicName = 'new-topic-name';
       pubsub.makeReq_ = function(method, path, q, body) {
-        assert.equal(method, 'POST');
-        assert.equal(path, 'topics');
-        assert.equal(body.name, '/topics/' + PROJECT_ID + '/' + topicName);
+        assert.equal(method, 'PUT');
+        assert.equal(path, 'projects/' + PROJECT_ID + '/topics/' + topicName);
+        assert.equal(body, null);
       };
       pubsub.createTopic(topicName, function() {});
     });
@@ -153,7 +150,7 @@ describe('PubSub', function() {
   describe('getSubscriptions', function() {
     beforeEach(function() {
       pubsub.makeReq_ = function(method, path, q, body, callback) {
-        callback(null, { subscription: [{ name: 'fake-subscription' }] });
+        callback(null, { subscriptions: [{ name: 'fake-subscription' }] });
       };
     });
 
@@ -165,13 +162,11 @@ describe('PubSub', function() {
       pubsub.getSubscriptions(done);
     });
 
-    it('should build a project-wide query', function() {
+    it('should pass the right parameters', function() {
       pubsub.makeReq_ = function(method, path, q) {
-        var query =
-            'cloud.googleapis.com/project in (/projects/' + PROJECT_ID + ')';
         assert.equal(method, 'GET');
-        assert.equal(path, 'subscriptions');
-        assert.equal(q.query, query);
+        assert.equal(path, 'projects/' + PROJECT_ID + '/subscriptions');
+        assert.equal(q.query, undefined);
       };
       pubsub.getSubscriptions(function() {});
     });
