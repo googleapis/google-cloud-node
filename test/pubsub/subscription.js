@@ -25,7 +25,7 @@ var Subscription = require('../../lib/pubsub/subscription.js');
 describe('Subscription', function() {
   var PROJECT_ID = 'test-project';
   var SUB_NAME = 'test-subscription';
-  var SUB_FULL_NAME = '/subscriptions/' + PROJECT_ID + '/' + SUB_NAME;
+  var SUB_FULL_NAME = 'projects/' + PROJECT_ID + '/subscriptions/' + SUB_NAME;
   var pubsubMock = {
     projectId: PROJECT_ID,
     makeReq_: util.noop
@@ -33,13 +33,13 @@ describe('Subscription', function() {
   var message = 'howdy';
   var messageBuffer = new Buffer(message).toString('base64');
   var messageObj = {
-    ackId: 3,
-    pubsubEvent: {
+    receivedMessages: [{
+      ackId: 3,
       message: {
         data: messageBuffer,
         messageId: 7
       }
-    }
+    }]
   };
   var expectedMessage = {
     ackId: 3,
@@ -152,8 +152,7 @@ describe('Subscription', function() {
     it('should make an array out of ids', function(done) {
       var ID = 1;
       subscription.makeReq_ = function(method, path, qs, body) {
-        assert.equal(body.subscription, SUB_FULL_NAME);
-        assert.deepEqual(body.ackId, [ID]);
+        assert.deepEqual(body.ackIds, [ID]);
         done();
       };
       subscription.ack(ID, assert.ifError);
@@ -162,8 +161,8 @@ describe('Subscription', function() {
     it('should make correct api request', function(done) {
       var IDS = [1, 2, 3];
       subscription.makeReq_ = function(method, path, qs, body) {
-        assert.equal(body.subscription, SUB_FULL_NAME);
-        assert.deepEqual(body.ackId, IDS);
+        assert.equal(path, SUB_FULL_NAME + ':acknowledge');
+        assert.deepEqual(body.ackIds, IDS);
         done();
       };
       subscription.ack(IDS, assert.ifError);
@@ -205,116 +204,38 @@ describe('Subscription', function() {
       subscription.pull({ returnImmediately: true }, assert.ifError);
     });
 
-    it('should default to batching', function(done) {
-      subscription.makeReq_ = function(method, path, query, body) {
-        assert.equal(path, 'subscriptions/pullBatch');
-        assert.equal(body.maxEvents, 1000);
+    it('should make correct api request', function(done) {
+      subscription.makeReq_ = function(method, path, qs, body) {
+        assert.equal(method, 'POST');
+        assert.equal(path, SUB_FULL_NAME + ':pull');
+        assert.strictEqual(body.returnImmediately, false);
+        assert.equal(body.maxMessages, 1);
         done();
       };
 
-      subscription.pull(assert.ifError);
+      subscription.pull({ maxResults: 1 }, assert.ifError);
     });
 
-    describe('single pull', function() {
-      it('should make correct api request', function(done) {
-        subscription.makeReq_ = function(method, path, qs, body) {
-          assert.equal(method, 'POST');
-          assert.equal(path, 'subscriptions/pullBatch');
-          assert.equal(body.subscription, SUB_FULL_NAME);
-          assert.strictEqual(body.returnImmediately, false);
-          assert.equal(body.maxEvents, 1);
-          done();
-        };
-
-        subscription.pull({ maxResults: 1 }, assert.ifError);
-      });
-
-      it('should execute callback with a message', function(done) {
-        var apiResponse = {
+    it('should execute callback with a message', function(done) {
+      var apiResponse = {
+        receivedMessages: [{
           ackId: 1,
-          pubsubEvent: {
-            message: {
-              data: new Buffer('message').toString('base64')
-            }
+          message: {
+            messageId: '123',
+            data: new Buffer('message').toString('base64')
           }
-        };
+        }]
+      };
 
-        subscription.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, apiResponse);
-        };
+      subscription.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, apiResponse);
+      };
 
-        subscription.pull(function(err, msgs) {
-          assert.ifError(err);
-
-          assert.deepEqual(msgs, [Subscription.formatMessage_(apiResponse)]);
-
-          done();
-        });
-      });
-    });
-
-    describe('batching', function() {
-      it('should make correct api request', function(done) {
-        subscription.makeReq_ = function(method, path, query, body) {
-          assert.equal(method, 'POST');
-          assert.equal(path, 'subscriptions/pullBatch');
-          assert.strictEqual(query, null);
-          assert.deepEqual(body, {
-            subscription: subscription.name,
-            returnImmediately: false,
-            maxEvents: 3
-          });
-
-          done();
-        };
-
-        subscription.pull({ maxResults: 3 }, assert.ifError);
-      });
-
-      it('should execute callback with the messages', function(done) {
-        var apiResponse = {
-          pullResponses: [
-            {
-              ackId: 1,
-              pubsubEvent: {
-                message: {
-                  data: new Buffer('message').toString('base64')
-                }
-              }
-            },
-            {
-              ackId: 2,
-              pubsubEvent: {
-                message: {
-                  data: new Buffer('message').toString('base64')
-                }
-              }
-            },
-            {
-              ackId: 3,
-              pubsubEvent: {
-                message: {
-                  data: new Buffer('message').toString('base64')
-                }
-              }
-            }
-          ]
-        };
-
-        subscription.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, apiResponse);
-        };
-
-        subscription.pull({ maxResults: 3 }, function(err, messages) {
-          assert.ifError(err);
-
-          assert.deepEqual(
-            messages,
-            apiResponse.pullResponses.map(Subscription.formatMessage_)
-          );
-
-          done();
-        });
+      subscription.pull(function(err, msgs) {
+        assert.ifError(err);
+        var msg = Subscription.formatMessage_(apiResponse.receivedMessages[0]);
+        assert.deepEqual(msgs, [msg]);
+        done();
       });
     });
 
@@ -401,7 +322,6 @@ describe('Subscription', function() {
     it('should pull at specified interval', function(done) {
       var INTERVAL = 5;
       subscription.pull = function(options, callback) {
-        assert.equal(options.maxResults, 1);
         assert.strictEqual(options.returnImmediately, false);
         // After pull is called once, overwrite with `done`.
         // This is to override the function passed to `setTimeout`, so we are
@@ -462,7 +382,7 @@ describe('Subscription', function() {
 
     it('should emit a message event', function(done) {
       subscription.pull = function(options, callback) {
-        callback(null, { hi: 'there' });
+        callback(null, [{ hi: 'there' }]);
       };
       subscription
         .once('message', function(msg) {
@@ -476,7 +396,7 @@ describe('Subscription', function() {
     it('should delete a subscription', function(done) {
       subscription.makeReq_ = function(method, path) {
         assert.equal(method, 'DELETE');
-        assert.equal(path, 'subscriptions/' + subscription.name);
+        assert.equal(path, subscription.name);
         done();
       };
       subscription.delete();
@@ -520,6 +440,26 @@ describe('Subscription', function() {
     });
   });
 
+  describe('setAckDeadline', function() {
+    it('should set the ack deadline', function(done) {
+      subscription.makeReq_ = function(method, path, qs, body) {
+        assert.equal(method, 'POST');
+        assert.equal(path, this.name + ':modifyAckDeadline');
+        assert.equal(qs, null);
+        assert.deepEqual(body, { ackId: 123, ackDeadlineSeconds: 10 });
+        done();
+      };
+      subscription.setAckDeadline({ ackId: 123, seconds: 10 }, done);
+    });
+
+    it('should execute the callback', function(done) {
+      subscription.makeReq_ = function(method, path, qs, body, callback) {
+        callback();
+      };
+      subscription.setAckDeadline({}, done);
+    });
+  });
+
   describe('formatMessage_', function() {
     it('should decode stringified JSON to object', function() {
       var obj = { hi: 'there' };
@@ -527,11 +467,9 @@ describe('Subscription', function() {
 
       var msg = Subscription.formatMessage_({
         ackId: 3,
-        pubsubEvent: {
-          message: {
-            data: stringified,
-            messageId: 7
-          }
+        message: {
+          data: stringified,
+          messageId: 7
         }
       });
 
@@ -543,7 +481,7 @@ describe('Subscription', function() {
     });
 
     it('should decode buffer to string', function() {
-      var msg = Subscription.formatMessage_(messageObj);
+      var msg = Subscription.formatMessage_(messageObj.receivedMessages[0]);
       assert.deepEqual(msg, expectedMessage);
     });
   });

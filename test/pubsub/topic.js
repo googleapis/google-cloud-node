@@ -109,7 +109,7 @@ describe('Topic', function() {
   });
 
   describe('formatName_', function() {
-    var fullName = '/topics/' + PROJECT_ID + '/' + TOPIC_NAME;
+    var fullName = 'projects/' + PROJECT_ID + '/topics/' + TOPIC_NAME;
 
     it('should format name', function() {
       var formattedName = Topic.formatName_(PROJECT_ID, TOPIC_NAME);
@@ -139,10 +139,9 @@ describe('Topic', function() {
     it('should send correct api request', function(done) {
       topic.makeReq_ = function(method, path, query, body) {
         assert.equal(method, 'POST');
-        assert.equal(path, 'topics/publishBatch');
+        assert.equal(path, topic.name + ':publish');
         assert.strictEqual(query, null);
         assert.deepEqual(body, {
-          topic: topic.name,
           messages: [
             { data: new Buffer(JSON.stringify(message)).toString('base64') }
           ]
@@ -166,29 +165,30 @@ describe('Topic', function() {
     it('should delete a topic', function(done) {
       topic.makeReq_ = function(method, path) {
         assert.equal(method, 'DELETE');
-        assert.equal(path, 'topics/' + topic.name);
+        assert.equal(path, topic.name);
         done();
       };
       topic.delete();
+    });
+
+    it('should call the callback', function(done) {
+      topic.makeReq_ = function(method, path, q, body, callback) {
+        callback();
+      };
+      topic.delete(done);
     });
   });
 
   describe('subscriptions', function() {
     var SUB_NAME = 'new-sub-name';
-    var SUB_FULL_NAME = '/subscriptions/' + PROJECT_ID + '/' + SUB_NAME;
+    var SUB_FULL_NAME = 'projects/' + PROJECT_ID + '/subscriptions/' + SUB_NAME;
     var CONFIG = { autoAck: true, interval: 90 };
 
     describe('getSubscriptions', function() {
-      it('should call parent getSubscriptions', function(done) {
-        topic.pubsub.getSubscriptions = function() {
-          done();
-        };
-        topic.getSubscriptions(assert.ifError);
-      });
 
       it('should pass query', function(done) {
         var query = { pageToken: 1, maxResults: 3 };
-        topic.pubsub.getSubscriptions = function(q) {
+        topic.getSubscriptions = function(q) {
           assert.strictEqual(q.pageToken, query.pageToken);
           assert.strictEqual(q.maxResults, query.maxResults);
           done();
@@ -197,28 +197,10 @@ describe('Topic', function() {
       });
 
       it('should pass callback', function(done) {
-        topic.pubsub.getSubscriptions = function(q, callback) {
+        topic.getSubscriptions = function(q, callback) {
           callback();
         };
         topic.getSubscriptions({}, done);
-      });
-
-      it('should attach scoped topic query to query object', function(done) {
-        topic.pubsub.getSubscriptions = function(q) {
-          assert.equal(
-              q.query, 'pubsub.googleapis.com/topic in (' + topic.name + ')');
-          done();
-        };
-        topic.getSubscriptions({}, assert.ifError);
-      });
-
-      it('should attach scoped topic query without a query', function(done) {
-        topic.pubsub.getSubscriptions = function(q) {
-          assert.equal(
-              q.query, 'pubsub.googleapis.com/topic in (' + topic.name + ')');
-          done();
-        };
-        topic.getSubscriptions(assert.ifError);
       });
     });
 
@@ -245,10 +227,9 @@ describe('Topic', function() {
 
       it('should send correct request', function(done) {
         topic.makeReq_ = function(method, path, qs, body) {
-          assert.equal(method, 'POST');
-          assert.equal(path, 'subscriptions');
+          assert.equal(method, 'PUT');
+          assert.equal(path, SUB_FULL_NAME);
           assert.equal(body.topic, topic.name);
-          assert.equal(body.name, SUB_FULL_NAME);
           done();
         };
         topic.subscribe(SUB_NAME, assert.ifError);
