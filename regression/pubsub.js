@@ -200,7 +200,7 @@ describe('pubsub', function() {
         assert.ifError(err);
 
         subscription.pull({
-          returnImmediately: true,
+          returnImmediately: false,
           maxResults: 1
         }, function(err, msgs) {
           assert.ifError(err);
@@ -216,10 +216,11 @@ describe('pubsub', function() {
         assert.ifError(err);
 
         subscription.pull({
-          returnImmediately: true,
+          returnImmediately: false,
           maxResults: 1
         }, function(err, msgs) {
           assert.ifError(err);
+
           var options = {
             ackId: msgs[0].ackId,
             seconds: 10
@@ -247,7 +248,7 @@ describe('pubsub', function() {
         assert.ifError(err);
 
         subscription.pull({
-          returnImmediately: true,
+          returnImmediately: false,
           maxResults: 1
         }, function(err, msgs) {
           assert.ifError(err);
@@ -275,7 +276,7 @@ describe('pubsub', function() {
         assert.ifError(err);
 
         subscription.pull({
-          returnImmediately: true,
+          returnImmediately: false,
           maxResults: 1
         }, function(err, msgs) {
           assert.ifError(err);
@@ -287,7 +288,7 @@ describe('pubsub', function() {
 
     it('should receive the chosen amount of results', function(done) {
       var subscription = topic.subscription(SUB_NAMES[1]);
-      var opts = { returnImmediately: true, maxResults: 3 };
+      var opts = { returnImmediately: false, maxResults: 3 };
 
       topic.publish([
         { data: 'hello' },
