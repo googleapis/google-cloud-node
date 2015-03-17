@@ -191,8 +191,8 @@
       }
     ],
     "description": {
-      "full": "<p>Format the name of a subscription. A subscription&#39;s full name is in the<br />format of /subscription/{projectId}/{name}.</p>",
-      "summary": "<p>Format the name of a subscription. A subscription&#39;s full name is in the<br />format of /subscription/{projectId}/{name}.</p>",
+      "full": "<p>Format the name of a subscription. A subscription&#39;s full name is in the<br />format of projects/{projectId}/subscriptions/{subName}.</p>",
+      "summary": "<p>Format the name of a subscription. A subscription&#39;s full name is in the<br />format of projects/{projectId}/subscriptions/{subName}.</p>",
       "body": ""
     },
     "isPrivate": true,
@@ -201,7 +201,7 @@
     "ignore": false,
     "line": 128,
     "codeStart": 134,
-    "code": "Subscription.formatName_ = function(projectId, name) {\n  // Simple check if the name is already formatted.\n  if (name.indexOf('/') > -1) {\n    return name;\n  }\n  return '/subscriptions/' + projectId + '/' + name;\n};",
+    "code": "Subscription.formatName_ = function(projectId, name) {\n  // Simple check if the name is already formatted.\n  if (name.indexOf('/') > -1) {\n    return name;\n  }\n  return 'projects/' + projectId + '/subscriptions/' + name;\n};",
     "ctx": {
       "type": "method",
       "receiver": "Subscription",
@@ -217,8 +217,8 @@
       }
     ],
     "description": {
-      "full": "<p>Simplify a message from an API response to have two properties, <code>id</code> and<br /><code>data</code>. <code>data</code> is always converted to a string.</p>",
-      "summary": "<p>Simplify a message from an API response to have two properties, <code>id</code> and<br /><code>data</code>. <code>data</code> is always converted to a string.</p>",
+      "full": "<p>Simplify a message from an API response to have three properties, <code>id</code>,<br /><code>data</code> and <code>attributes</code>. <code>data</code> is always converted to a string.</p>",
+      "summary": "<p>Simplify a message from an API response to have three properties, <code>id</code>,<br /><code>data</code> and <code>attributes</code>. <code>data</code> is always converted to a string.</p>",
       "body": ""
     },
     "isPrivate": true,
@@ -227,7 +227,7 @@
     "ignore": false,
     "line": 142,
     "codeStart": 148,
-    "code": "Subscription.formatMessage_ = function(msg) {\n  var event = msg.pubsubEvent;\n\n  var message = {\n    ackId: msg.ackId\n  };\n\n  if (event && event.message) {\n    message.id = event.message.messageId;\n\n    if (event.message.data) {\n      message.data = new Buffer(event.message.data, 'base64').toString('utf-8');\n\n      try {\n        message.data = JSON.parse(message.data);\n      } catch(e) {}\n    }\n  }\n\n  return message;\n};",
+    "code": "Subscription.formatMessage_ = function(msg) {\n  var innerMessage = msg.message;\n  var message = {\n    ackId: msg.ackId\n  };\n\n  if (innerMessage) {\n    message.id = innerMessage.messageId;\n\n    if (innerMessage.data) {\n      message.data = new Buffer(innerMessage.data, 'base64').toString('utf-8');\n\n      try {\n        message.data = JSON.parse(message.data);\n      } catch(e) {}\n    }\n\n    if (innerMessage.attributes) {\n      message.attributes = innerMessage.attributes;\n    }\n  }\n\n  return message;\n};",
     "ctx": {
       "type": "method",
       "receiver": "Subscription",
@@ -255,9 +255,9 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 170,
-    "codeStart": 183,
-    "code": "Subscription.prototype.listenForEvents_ = function() {\n  var that = this;\n  var messageListeners = 0;\n\n  this.on('newListener', function(event) {\n    if (event === 'message') {\n      messageListeners++;\n      if (that.closed) {\n        that.closed = false;\n      }\n      that.startPulling_();\n    }\n  });\n\n  this.on('removeListener', function(event) {\n    if (event === 'message' && --messageListeners === 0) {\n      that.closed = true;\n    }\n  });\n};",
+    "line": 173,
+    "codeStart": 186,
+    "code": "Subscription.prototype.listenForEvents_ = function() {\n  var self = this;\n  var messageListeners = 0;\n\n  this.on('newListener', function(event) {\n    if (event === 'message') {\n      messageListeners++;\n      if (self.closed) {\n        self.closed = false;\n      }\n      self.startPulling_();\n    }\n  });\n\n  this.on('removeListener', function(event) {\n    if (event === 'message' && --messageListeners === 0) {\n      self.closed = true;\n    }\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Subscription",
@@ -286,9 +286,9 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 204,
-    "codeStart": 221,
-    "code": "Subscription.prototype.startPulling_ = function() {\n  var that = this;\n  if (this.closed) {\n    return;\n  }\n  this.pull({\n    maxResults: 1,\n    returnImmediately: false\n  }, function(err, message) {\n    if (err) {\n      that.emit('error', err);\n    }\n    if (message) {\n      that.emit('message', message);\n    }\n    setTimeout(that.startPulling_.bind(that), that.interval);\n  });\n};",
+    "line": 207,
+    "codeStart": 224,
+    "code": "Subscription.prototype.startPulling_ = function() {\n  var self = this;\n  if (this.closed) {\n    return;\n  }\n  this.pull({\n    returnImmediately: false\n  }, function(err, messages) {\n    if (err) {\n      self.emit('error', err);\n    }\n    if (messages) {\n      messages.forEach(function(message) {\n        self.emit('message', message);\n      });\n    }\n    setTimeout(self.startPulling_.bind(self), self.interval);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Subscription",
@@ -347,9 +347,9 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 240,
-    "codeStart": 252,
-    "code": "Subscription.prototype.ack = function(ids, callback) {\n  if (!ids || ids.length === 0) {\n    throw new Error(\n        'At least one ID must be specified before it can be acknowledged.');\n  }\n  ids = util.arrayize(ids);\n  var body = {\n    subscription: this.name,\n    ackId: ids\n  };\n  this.makeReq_('POST', 'subscriptions/acknowledge', null, body, callback);\n};",
+    "line": 244,
+    "codeStart": 256,
+    "code": "Subscription.prototype.ack = function(ids, callback) {\n  if (!ids || ids.length === 0) {\n    throw new Error(\n        'At least one ID must be specified before it can be acknowledged.');\n  }\n  ids = util.arrayize(ids);\n  var body = {\n    ackIds: ids\n  };\n  var path = this.name + ':acknowledge';\n  this.makeReq_('POST', path, null, body, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Subscription",
@@ -387,9 +387,9 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 265,
-    "codeStart": 274,
-    "code": "Subscription.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_(\n      'DELETE', 'subscriptions/' + this.name, null, true, function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    this.closed = true;\n    this.removeAllListeners();\n    callback(null);\n  }.bind(this));\n};",
+    "line": 269,
+    "codeStart": 278,
+    "code": "Subscription.prototype.delete = function(callback) {\n  var self = this;\n  callback = callback || util.noop;\n  this.makeReq_('DELETE', this.name, null, true, function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    self.closed = true;\n    self.removeAllListeners();\n    callback(null);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Subscription",
@@ -402,11 +402,7 @@
     "tags": [
       {
         "type": "todo",
-        "string": "Should not be racing with other pull."
-      },
-      {
-        "type": "todo",
-        "string": "Fix API to return a list of messages. "
+        "string": "Should not be racing with other pull. "
       },
       {
         "type": "param",
@@ -462,7 +458,7 @@
       },
       {
         "type": "example",
-        "string": "//-\n// Pull all available messages.\n//-\nsubscription.pull(function(err, messages) {\n  // messages = [\n  //   {\n  //     ackId: '', // ID used to acknowledge its receival.\n  //     id: '',    // Unique message ID.\n  //     data: ''   // Contents of the message.\n  //   },\n  //   // ...\n  // ]\n});\n\n//-\n// Pull a single message.\n//-\nvar opts = {\n  maxResults: 1\n};\n\nsubscription.pull(opts, function(err, messages) {});"
+        "string": "//-\n// Pull all available messages.\n//-\nsubscription.pull(function(err, messages) {\n  // messages = [\n  //   {\n  //     ackId: '',     // ID used to acknowledge its receival.\n  //     id: '',        // Unique message ID.\n  //     data: '',      // Contents of the message.\n  //     attributes: {} // Attributes of the message.\n  //   },\n  //   // ...\n  // ]\n});\n\n//-\n// Pull a single message.\n//-\nvar opts = {\n  maxResults: 1\n};\n\nsubscription.pull(opts, function(err, messages) {});"
       }
     ],
     "description": {
@@ -474,15 +470,94 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 288,
-    "codeStart": 331,
-    "code": "Subscription.prototype.pull = function(options, callback) {\n  var that = this;\n  var MAX_EVENTS_LIMIT = 1000;\n  var apiEndpoint = 'subscriptions/pullBatch';\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  if (!util.is(options.maxResults, 'number')) {\n    options.maxResults = MAX_EVENTS_LIMIT;\n  }\n\n  var body = {\n    subscription: this.name,\n    returnImmediately: !!options.returnImmediately,\n    maxEvents: options.maxResults\n  };\n\n  this.makeReq_('POST', apiEndpoint, null, body, function(err, response) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var messages = response.pullResponses || [response];\n    messages = messages.map(Subscription.formatMessage_);\n\n    if (that.autoAck) {\n      var ackIds = messages.map(function(message) {\n        return message.ackId;\n      });\n\n      that.ack(ackIds, function(err) {\n        callback(err, messages);\n      });\n    } else {\n      callback(null, messages);\n    }\n  });\n};\n\nmodule.exports = Subscription;",
+    "line": 292,
+    "codeStart": 335,
+    "code": "Subscription.prototype.pull = function(options, callback) {\n  var self = this;\n  var MAX_EVENTS_LIMIT = 1000;\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  if (!util.is(options.maxResults, 'number')) {\n    options.maxResults = MAX_EVENTS_LIMIT;\n  }\n\n  var body = {\n    returnImmediately: !!options.returnImmediately,\n    maxMessages: options.maxResults\n  };\n\n  var path = this.name + ':pull';\n  this.makeReq_('POST', path, null, body, function(err, response) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var messages = response.receivedMessages || [];\n    messages = messages.map(Subscription.formatMessage_);\n\n    if (self.autoAck) {\n      var ackIds = messages.map(function(message) {\n        return message.ackId;\n      });\n\n      self.ack(ackIds, function(err) {\n        callback(err, messages);\n      });\n    } else {\n      callback(null, messages);\n    }\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Subscription",
       "cons": "Subscription",
       "name": "pull",
       "string": "Subscription.prototype.pull()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "name": "options",
+        "description": "<ul>\n<li>The configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "options.ackId",
+        "description": "<ul>\n<li>The ack id to change.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "options.seconds",
+        "description": "<ul>\n<li>Number of seconds after call is made to     set the deadline of the ack.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "Function"
+        ],
+        "typesDescription": "<code>Function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var options = {\n  ackId: 123,\n  seconds: 10 // Expire in 10 seconds from call.\n};\nsubscription.setAckDeadline(options, function(err) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Modify the ack deadline for a specific message. This method is useful to<br />indicate that more time is needed to process a message by the subscriber, or<br />to make the message available for redelivery if the processing was<br />interrupted.</p>",
+      "summary": "<p>Modify the ack deadline for a specific message. This method is useful to<br />indicate that more time is needed to process a message by the subscriber, or<br />to make the message available for redelivery if the processing was<br />interrupted.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 377,
+    "codeStart": 396,
+    "code": "Subscription.prototype.setAckDeadline = function(options, callback) {\n  var body = {\n    ackId: options.ackId,\n    ackDeadlineSeconds: options.seconds\n  };\n\n  callback = callback || util.noop;\n\n  var path = this.name + ':modifyAckDeadline';\n  this.makeReq_('POST', path, null, body, callback);\n};\n\nmodule.exports = Subscription;",
+    "ctx": {
+      "type": "method",
+      "constructor": "Subscription",
+      "cons": "Subscription",
+      "name": "setAckDeadline",
+      "string": "Subscription.prototype.setAckDeadline()"
     }
   }
 ]
