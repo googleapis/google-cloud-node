@@ -116,6 +116,17 @@ describe('Storage', function() {
         done();
       });
     });
+
+    it('should execute callback with apiResponse', function(done) {
+      var resp = { success: true };
+      storage.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, resp);
+      };
+      storage.createBucket(BUCKET_NAME, function(err, bucket, apiResponse) {
+        assert.equal(resp, apiResponse);
+        done();
+      });
+    });
   });
 
   describe('getBuckets', function() {
@@ -174,6 +185,17 @@ describe('Storage', function() {
       });
     });
 
+    it('should return apiResponse', function(done) {
+      var resp = { items: [{ id: 'fake-bucket-name' }] };
+      storage.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, resp);
+      };
+      storage.getBuckets(function(err, buckets, nextQuery, apiResponse) {
+        assert.deepEqual(resp, apiResponse);
+        done();
+      });
+    });
+
     it('should populate returned Bucket object with metadata', function(done) {
       var bucketMetadata = {
         id: 'bucketname',
@@ -191,9 +213,5 @@ describe('Storage', function() {
         done();
       });
     });
-  });
-
-  describe('makeReq_', function() {
-
   });
 });
