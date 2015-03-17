@@ -95,6 +95,14 @@ describe('BigQuery/Job', function() {
           done();
         });
       });
+
+      it('should execute callback with apiResponse', function(done) {
+        job.getMetadata(function(err, metadata, apiResponse) {
+          assert.ifError(err);
+          assert.deepEqual(apiResponse, METADATA);
+          done();
+        });
+      });
     });
   });
 

@@ -114,6 +114,17 @@ describe('PubSub', function() {
         assert.equal(err, error);
       });
     });
+
+    it('should pass apiResponse to callback', function(done) {
+      var resp = { success: true };
+      pubsub.makeReq_ = function(method, path, q, body, callback) {
+        callback(null, resp);
+      };
+      pubsub.getTopics(function(err, topics, nextQuery, apiResponse) {
+        assert.equal(resp, apiResponse);
+        done();
+      });
+    });
   });
 
   describe('createTopic', function() {
@@ -131,6 +142,17 @@ describe('PubSub', function() {
       pubsub.createTopic('new-topic', function(err, topic) {
         assert.ifError(err);
         assert(topic instanceof Topic);
+      });
+    });
+
+    it('should pass apiResponse to callback', function(done) {
+      var resp = { success: true };
+      pubsub.makeReq_ = function(method, path, q, body, callback) {
+        callback(null, resp);
+      };
+      pubsub.createTopic('new-topic', function(err, topic, apiResponse) {
+        assert.equal(resp, apiResponse);
+        done();
       });
     });
   });
@@ -198,6 +220,17 @@ describe('PubSub', function() {
       };
       pubsub.getSubscriptions(function(err) {
         assert.equal(err, error);
+      });
+    });
+
+    it('should pass apiResponse to callback', function(done) {
+      var resp = { success: true };
+      pubsub.makeReq_ = function(method, path, q, body, callback) {
+        callback(null, resp);
+      };
+      pubsub.getSubscriptions(function(err, topics, nextQuery, apiResponse) {
+        assert.equal(resp, apiResponse);
+        done();
       });
     });
   });
