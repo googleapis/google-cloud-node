@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-/*global describe, it, before, after */
+/*global describe, it, before, after, beforeEach, afterEach */
 
 'use strict';
 
@@ -180,15 +180,18 @@ describe('storage', function() {
     describe('files', function() {
       var file;
 
-      before(function(done) {
-        bucket.upload(files.logo.path, function(err, f) {
+      beforeEach(function(done) {
+        var options = {
+          destination: uuid.v1() + '.png'
+        };
+        bucket.upload(files.logo.path, options, function(err, f) {
           assert.ifError(err);
           file = f;
           done();
         });
       });
 
-      after(function(done) {
+      afterEach(function(done) {
         file.delete(done);
       });
 
@@ -272,7 +275,7 @@ describe('storage', function() {
 
   describe('getting buckets', function() {
     var bucketsToCreate = [
-      generateBucketName(), generateBucketName(), generateBucketName()
+      generateBucketName(), generateBucketName()
     ];
 
     before(function(done) {
@@ -280,7 +283,7 @@ describe('storage', function() {
     });
 
     after(function(done) {
-      async.parallel(bucketsToCreate.map(function(bucket) {
+      async.series(bucketsToCreate.map(function(bucket) {
         return function(done) {
           storage.bucket(bucket).delete(done);
         };
