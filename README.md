@@ -158,7 +158,7 @@ var blogPostData = {
   wordCount: 450
 };
 
-var blogPostKey = ds.key('BlogPost');
+var blogPostKey = dataset.key('BlogPost');
 
 dataset.save({
   key: blogPostKey,
