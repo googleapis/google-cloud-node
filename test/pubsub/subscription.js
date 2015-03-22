@@ -285,6 +285,18 @@ describe('Subscription', function() {
         subscription.pull({}, assert.ifError);
       });
 
+      it('should not autoAck if no messages returned', function(done) {
+        subscription.makeReq_ = function(method, path, qs, body, callback) {
+          callback(null, { receivedMessages: [] });
+        };
+        subscription.ack = function() {
+          throw new Error('I should not run.');
+        };
+        subscription.pull(function() {
+          done();
+        });
+      });
+
       it('should pass id to ack', function(done) {
         subscription.ack = function(id) {
           assert.equal(id, expectedMessage.ackId);
