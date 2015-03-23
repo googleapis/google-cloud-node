@@ -176,7 +176,7 @@ describe('storage', function() {
         });
       });
 
-      it('should be made public', function(done) {
+      it('should make a bucket public', function(done) {
         bucket.makePublic(function(err) {
           assert.ifError(err);
           bucket.acl.get({ entity: 'allUsers' }, function(err, aclObject) {
@@ -239,7 +239,7 @@ describe('storage', function() {
         }
       });
 
-      it('should be made private', function(done) {
+      it('should make a bucket private', function(done) {
         bucket.makePublic(function(err) {
           assert.ifError(err);
           bucket.makePrivate(function(err) {
@@ -362,7 +362,7 @@ describe('storage', function() {
         });
       });
 
-      it('should be made public', function(done) {
+      it('should make a file public', function(done) {
         file.makePublic(function(err) {
           assert.ifError(err);
           file.acl.get({ entity: 'allUsers' }, function(err, aclObject) {
@@ -373,7 +373,7 @@ describe('storage', function() {
         });
       });
 
-      it('should be made private', function(done) {
+      it('should make a file private', function(done) {
         file.makePublic(function(err) {
           assert.ifError(err);
           file.makePrivate(function(err) {
