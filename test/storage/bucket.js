@@ -20,6 +20,7 @@
 
 var assert = require('assert');
 var async = require('async');
+var extend = require('extend');
 var mime = require('mime-types');
 var mockery = require('mockery');
 var request = require('request');
@@ -45,9 +46,15 @@ var request_Cached = request;
 var request_Override;
 
 function fakeRequest() {
-  var args = [].slice.apply(arguments);
-  return (request_Override || request_Cached).apply(null, args);
+  return (request_Override || request_Cached).apply(null, arguments);
 }
+
+var eachLimit_Override;
+
+var fakeAsync = extend({}, async);
+fakeAsync.eachLimit = function() {
+  (eachLimit_Override || async.eachLimit).apply(null, arguments);
+};
 
 describe('Bucket', function() {
   var Bucket;
@@ -61,6 +68,7 @@ describe('Bucket', function() {
 
   before(function() {
     mockery.registerMock('./file.js', FakeFile);
+    mockery.registerMock('async', fakeAsync);
     mockery.registerMock('request', fakeRequest);
     mockery.enable({
       useCleanCache: true,
@@ -76,6 +84,7 @@ describe('Bucket', function() {
 
   beforeEach(function() {
     request_Override = null;
+    eachLimit_Override = null;
     bucket = new Bucket(options, BUCKET_NAME);
   });
 
@@ -430,6 +439,101 @@ describe('Bucket', function() {
     });
   });
 
+  describe('makePublic', function() {
+    beforeEach(function() {
+      bucket.makeReq_ = function(method, path, query, body, callback) {
+        callback();
+      };
+    });
+
+    it('should set predefined & default ACL, publicize files', function(done) {
+      bucket.acl.default.add = function(opts, callback) {
+        assert.equal(opts.entity, 'allUsers');
+        assert.equal(opts.role, 'READER');
+        callback();
+      };
+
+      bucket.makeAllFilesPublicPrivate_ = function(opts, callback) {
+        assert.strictEqual(opts.public, true);
+        assert.strictEqual(opts.force, true);
+        callback();
+      };
+
+      bucket.makePublic({
+        includeFiles: true,
+        force: true
+      }, done);
+    });
+
+    it('should not make files public by default', function(done) {
+      bucket.acl.default.add = function(opts, callback) {
+        callback();
+      };
+
+      bucket.makeAllFilesPublicPrivate_ = function() {
+        throw new Error('Please, no. I do not want to be called.');
+      };
+
+      bucket.makePublic(done);
+    });
+
+    it('should execute callback with error', function(done) {
+      var error = new Error('Error.');
+
+      bucket.acl.default.add = function(opts, callback) {
+        callback(error);
+      };
+
+      bucket.makePublic(function(err) {
+        assert.equal(err, error);
+        done();
+      });
+    });
+  });
+
+  describe('makePrivate', function() {
+    it('should set predefinedAcl & privatize files', function(done) {
+      bucket.setPredefinedAcl_ = function(opts, callback) {
+        assert.strictEqual(opts.private, true);
+        assert.strictEqual(opts.force, true);
+        callback();
+      };
+
+      bucket.makeAllFilesPublicPrivate_ = function(opts, callback) {
+        assert.strictEqual(opts.private, true);
+        assert.strictEqual(opts.force, true);
+        callback();
+      };
+
+      bucket.makePrivate({ includeFiles: true, force: true }, done);
+    });
+
+    it('should not make files private by default', function(done) {
+      bucket.setPredefinedAcl_ = function(opts, callback) {
+        callback();
+      };
+
+      bucket.makeAllFilesPublicPrivate_ = function() {
+        throw new Error('Please, no. I do not want to be called.');
+      };
+
+      bucket.makePrivate(done);
+    });
+
+    it('should execute callback with error', function(done) {
+      var error = new Error('Error.');
+
+      bucket.setPredefinedAcl_ = function(opts, callback) {
+        callback(error);
+      };
+
+      bucket.makePrivate(function(err) {
+        assert.equal(err, error);
+        done();
+      });
+    });
+  });
+
   describe('setMetadata', function() {
     var metadata = { fake: 'metadata' };
 
@@ -617,6 +721,236 @@ describe('Bucket', function() {
         return ws;
       };
       bucket.upload(filepath, options, function(err) {
+        assert.equal(err, error);
+        done();
+      });
+    });
+  });
+
+  describe('makeAllFilesPublicPrivate_', function() {
+    it('should get all files from the bucket', function(done) {
+      bucket.getFiles = function() {
+        done();
+      };
+
+      bucket.makeAllFilesPublicPrivate_({}, assert.ifError);
+    });
+
+    it('should process 10 files at a time', function(done) {
+      eachLimit_Override = function(arr, limit) {
+        assert.equal(limit, 10);
+        done();
+      };
+
+      bucket.getFiles = function(query, callback) {
+        callback(null, []);
+      };
+
+      bucket.makeAllFilesPublicPrivate_({}, assert.ifError);
+    });
+
+    it('should make files public', function(done) {
+      var timesCalled = 0;
+
+      var files = [
+        bucket.file('1'),
+        bucket.file('2')
+      ].map(util.propAssign('makePublic', function(callback) {
+        timesCalled++;
+        callback();
+      }));
+
+      bucket.getFiles = function(query, callback) {
+        callback(null, files);
+      };
+
+      bucket.makeAllFilesPublicPrivate_({ public: true }, function(err) {
+        assert.ifError(err);
+        assert.equal(timesCalled, files.length);
+        done();
+      });
+    });
+
+    it('should make files private', function(done) {
+      var timesCalled = 0;
+
+      var files = [
+        bucket.file('1'),
+        bucket.file('2')
+      ].map(util.propAssign('makePrivate', function(callback) {
+        timesCalled++;
+        callback();
+      }));
+
+      bucket.getFiles = function(query, callback) {
+        callback(null, files);
+      };
+
+      bucket.makeAllFilesPublicPrivate_({ private: true }, function(err) {
+        assert.ifError(err);
+        assert.equal(timesCalled, files.length);
+        done();
+      });
+    });
+
+    it('should get more files if more exist', function(done) {
+      var fakeNextQuery = { a: 'b', c: 'd' };
+
+      bucket.getFiles = function(query, callback) {
+        if (Object.keys(query).length === 0) {
+          // First time through, return a `nextQuery` value.
+          callback(null, [], fakeNextQuery);
+        } else {
+          // Second time through.
+          assert.deepEqual(query, fakeNextQuery);
+          done();
+        }
+      };
+
+      bucket.makeAllFilesPublicPrivate_({}, assert.ifError);
+    });
+
+    it('should execute callback with error from getting files', function(done) {
+      var error = new Error('Error.');
+
+      bucket.getFiles = function(query, callback) {
+        callback(error);
+      };
+
+      bucket.makeAllFilesPublicPrivate_({}, function(err) {
+        assert.equal(err, error);
+        done();
+      });
+    });
+
+    it('should execute callback with error from changing file', function(done) {
+      var error = new Error('Error.');
+
+      var files = [
+        bucket.file('1'),
+        bucket.file('2')
+      ].map(util.propAssign('makePublic', function(callback) {
+        callback(error);
+      }));
+
+      bucket.getFiles = function(query, callback) {
+        callback(null, files);
+      };
+
+      bucket.makeAllFilesPublicPrivate_({ public: true }, function(err) {
+        assert.equal(err, error);
+        done();
+      });
+    });
+
+    it('should execute callback with queued errors', function(done) {
+      var error = new Error('Error.');
+
+      var files = [
+        bucket.file('1'),
+        bucket.file('2')
+      ].map(util.propAssign('makePublic', function(callback) {
+        callback(error);
+      }));
+
+      bucket.getFiles = function(query, callback) {
+        callback(null, files);
+      };
+
+      bucket.makeAllFilesPublicPrivate_({
+        public: true,
+        force: true
+      }, function(errs) {
+        assert.deepEqual(errs, [error, error]);
+        done();
+      });
+    });
+
+    it('should execute callback with files changed', function(done) {
+      var error = new Error('Error.');
+
+      var successFiles = [
+        bucket.file('1'),
+        bucket.file('2')
+      ].map(util.propAssign('makePublic', function(callback) {
+        callback();
+      }));
+
+      var errorFiles = [
+        bucket.file('3'),
+        bucket.file('4')
+      ].map(util.propAssign('makePublic', function(callback) {
+        callback(error);
+      }));
+
+      bucket.getFiles = function(query, callback) {
+        callback(null, successFiles.concat(errorFiles));
+      };
+
+      bucket.makeAllFilesPublicPrivate_({
+        public: true,
+        force: true
+      }, function(errs, files) {
+        assert.deepEqual(errs, [error, error]);
+        assert.deepEqual(files, successFiles);
+        done();
+      });
+    });
+  });
+
+  describe('setPredefinedAcl_', function() {
+    it('should make correct public PATCH request', function(done) {
+      bucket.makeReq_ = function(method, path, query, body) {
+        assert.equal(method, 'PATCH');
+        assert.equal(path, '');
+        assert.deepEqual(query, {
+          predefinedAcl: 'publicRead'
+        });
+        assert.deepEqual(body, { acl: null });
+        done();
+      };
+
+      bucket.setPredefinedAcl_({ public: true }, assert.ifError);
+    });
+
+    it('should make correct private PATCH request', function(done) {
+      bucket.makeReq_ = function(method, path, query, body) {
+        assert.equal(method, 'PATCH');
+        assert.equal(path, '');
+        assert.deepEqual(query, {
+          predefinedAcl: 'projectPrivate'
+        });
+        assert.deepEqual(body, { acl: null });
+        done();
+      };
+
+      bucket.setPredefinedAcl_({ private: true }, assert.ifError);
+    });
+
+    it('should update metadata from response', function(done) {
+      var fakeMetadata = { a: 'b', c: 'd' };
+
+      bucket.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, fakeMetadata);
+      };
+
+      bucket.setPredefinedAcl_({}, function(err) {
+        assert.ifError(err);
+
+        assert.deepEqual(bucket.metadata, fakeMetadata);
+
+        done();
+      });
+    });
+
+    it('should execute callback with error', function(done) {
+      var error = new Error('Error.');
+
+      bucket.makeReq_ = function(method, path, query, body, callback) {
+        callback(error);
+      };
+
+      bucket.setPredefinedAcl_({ public: true }, function(err) {
         assert.equal(err, error);
         done();
       });

@@ -175,6 +175,123 @@ describe('storage', function() {
           });
         });
       });
+
+      it('should be made public', function(done) {
+        bucket.makePublic(function(err) {
+          assert.ifError(err);
+          bucket.acl.get({ entity: 'allUsers' }, function(err, aclObject) {
+            assert.ifError(err);
+            assert.deepEqual(aclObject, { entity: 'allUsers', role: 'READER' });
+            bucket.acl.delete({ entity: 'allUsers' }, done);
+          });
+        });
+      });
+
+      it('should make files public', function(done) {
+        async.each(['a', 'b', 'c'], createFileWithContent, function(err) {
+          assert.ifError(err);
+
+          bucket.makePublic({ includeFiles: true }, function(err) {
+            assert.ifError(err);
+
+            bucket.getFiles(function(err, files) {
+              assert.ifError(err);
+
+              async.each(files, isFilePublic, function(err) {
+                assert.ifError(err);
+
+                async.parallel([
+                  function(next) {
+                    bucket.acl.default.delete({ entity: 'allUsers' }, next);
+                  },
+                  function(next) {
+                    deleteFiles(bucket, next);
+                  }
+                ], done);
+              });
+            });
+          });
+        });
+
+        function createFileWithContent(content, callback) {
+          bucket.file(uuid() + '.txt').createWriteStream()
+            .on('error', callback)
+            .on('complete', function() {
+              callback();
+            })
+            .end(content);
+        }
+
+        function isFilePublic(file, callback) {
+          file.acl.get({ entity: 'allUsers' }, function(err, aclObject) {
+            if (err) {
+              callback(err);
+              return;
+            }
+
+            if (aclObject.entity === 'allUsers' &&
+                aclObject.role === 'READER') {
+              callback();
+            } else {
+              callback(new Error('File is not public.'));
+            }
+          });
+        }
+      });
+
+      it('should be made private', function(done) {
+        bucket.makePublic(function(err) {
+          assert.ifError(err);
+          bucket.makePrivate(function(err) {
+            assert.ifError(err);
+            bucket.acl.get({ entity: 'allUsers' }, function(err, aclObject) {
+              assert.equal(err.code, 404);
+              assert.equal(err.message, 'Not Found');
+              assert.equal(aclObject, null);
+              done();
+            });
+          });
+        });
+      });
+
+      it('should make files private', function(done) {
+        async.each(['a', 'b', 'c'], createFileWithContent, function(err) {
+          assert.ifError(err);
+
+          bucket.makePrivate({ includeFiles: true }, function(err) {
+            assert.ifError(err);
+
+            bucket.getFiles(function(err, files) {
+              assert.ifError(err);
+
+              async.each(files, isFilePrivate, function(err) {
+                assert.ifError(err);
+
+                deleteFiles(bucket, done);
+              });
+            });
+          });
+        });
+
+        function createFileWithContent(content, callback) {
+          bucket.file(uuid() + '.txt').createWriteStream()
+            .on('error', callback)
+            .on('complete', function() {
+              callback();
+            })
+            .end(content);
+        }
+
+        function isFilePrivate(file, callback) {
+          file.acl.get({ entity: 'allUsers' }, function(err) {
+            if (err && err.code === 404) {
+              callback();
+            } else {
+              callback(new Error('File is not private.'));
+            }
+          });
+        }
+      });
     });
 
     describe('files', function() {
