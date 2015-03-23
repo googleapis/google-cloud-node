@@ -446,26 +446,49 @@ describe('Bucket', function() {
       };
     });
 
-    it('should set predefined & default ACL, publicize files', function(done) {
+    it('should set ACL, default ACL, and publicize files', function(done) {
+      var didSetAcl = false;
+      var didSetDefaultAcl = false;
+      var didMakeFilesPublic = false;
+
+      bucket.acl.add = function(opts, callback) {
+        assert.equal(opts.entity, 'allUsers');
+        assert.equal(opts.role, 'READER');
+        didSetAcl = true;
+        callback();
+      };
+
       bucket.acl.default.add = function(opts, callback) {
         assert.equal(opts.entity, 'allUsers');
         assert.equal(opts.role, 'READER');
+        didSetDefaultAcl = true;
         callback();
       };
 
       bucket.makeAllFilesPublicPrivate_ = function(opts, callback) {
         assert.strictEqual(opts.public, true);
         assert.strictEqual(opts.force, true);
+        didMakeFilesPublic = true;
         callback();
       };
 
       bucket.makePublic({
         includeFiles: true,
         force: true
-      }, done);
+      }, function(err) {
+        assert.ifError(err);
+        assert(didSetAcl);
+        assert(didSetDefaultAcl);
+        assert(didMakeFilesPublic);
+        done();
+      });
     });
 
     it('should not make files public by default', function(done) {
+      bucket.acl.add = function(opts, callback) {
+        callback();
+      };
+
       bucket.acl.default.add = function(opts, callback) {
         callback();
       };
@@ -480,7 +503,7 @@ describe('Bucket', function() {
     it('should execute callback with error', function(done) {
       var error = new Error('Error.');
 
-      bucket.acl.default.add = function(opts, callback) {
+      bucket.acl.add = function(opts, callback) {
         callback(error);
       };
 
@@ -493,23 +516,37 @@ describe('Bucket', function() {
 
   describe('makePrivate', function() {
     it('should set predefinedAcl & privatize files', function(done) {
-      bucket.setPredefinedAcl_ = function(opts, callback) {
-        assert.strictEqual(opts.private, true);
-        assert.strictEqual(opts.force, true);
+      var didSetPredefinedAcl = false;
+      var didMakeFilesPrivate = false;
+
+      bucket.makeReq_ = function(method, path, query, body, callback) {
+        // Correct request.
+        assert.equal(method, 'PATCH');
+        assert.equal(path, '');
+        assert.deepEqual(query, { predefinedAcl: 'projectPrivate' });
+        assert.deepEqual(body, { acl: null });
+
+        didSetPredefinedAcl = true;
         callback();
       };
 
       bucket.makeAllFilesPublicPrivate_ = function(opts, callback) {
         assert.strictEqual(opts.private, true);
         assert.strictEqual(opts.force, true);
+        didMakeFilesPrivate = true;
         callback();
       };
 
-      bucket.makePrivate({ includeFiles: true, force: true }, done);
+      bucket.makePrivate({ includeFiles: true, force: true }, function(err) {
+        assert.ifError(err);
+        assert(didSetPredefinedAcl);
+        assert(didMakeFilesPrivate);
+        done();
+      });
     });
 
     it('should not make files private by default', function(done) {
-      bucket.setPredefinedAcl_ = function(opts, callback) {
+      bucket.makeReq_ = function(method, path, query, body, callback) {
         callback();
       };
 
@@ -523,7 +560,7 @@ describe('Bucket', function() {
     it('should execute callback with error', function(done) {
       var error = new Error('Error.');
 
-      bucket.setPredefinedAcl_ = function(opts, callback) {
+      bucket.makeReq_ = function(method, path, query, body, callback) {
         callback(error);
       };
 
@@ -893,65 +930,6 @@ describe('Bucket', function() {
       }, function(errs, files) {
         assert.deepEqual(errs, [error, error]);
         assert.deepEqual(files, successFiles);
-        done();
-      });
-    });
-  });
-
-  describe('setPredefinedAcl_', function() {
-    it('should make correct public PATCH request', function(done) {
-      bucket.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'PATCH');
-        assert.equal(path, '');
-        assert.deepEqual(query, {
-          predefinedAcl: 'publicRead'
-        });
-        assert.deepEqual(body, { acl: null });
-        done();
-      };
-
-      bucket.setPredefinedAcl_({ public: true }, assert.ifError);
-    });
-
-    it('should make correct private PATCH request', function(done) {
-      bucket.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'PATCH');
-        assert.equal(path, '');
-        assert.deepEqual(query, {
-          predefinedAcl: 'projectPrivate'
-        });
-        assert.deepEqual(body, { acl: null });
-        done();
-      };
-
-      bucket.setPredefinedAcl_({ private: true }, assert.ifError);
-    });
-
-    it('should update metadata from response', function(done) {
-      var fakeMetadata = { a: 'b', c: 'd' };
-
-      bucket.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, fakeMetadata);
-      };
-
-      bucket.setPredefinedAcl_({}, function(err) {
-        assert.ifError(err);
-
-        assert.deepEqual(bucket.metadata, fakeMetadata);
-
-        done();
-      });
-    });
-
-    it('should execute callback with error', function(done) {
-      var error = new Error('Error.');
-
-      bucket.makeReq_ = function(method, path, query, body, callback) {
-        callback(error);
-      };
-
-      bucket.setPredefinedAcl_({ public: true }, function(err) {
-        assert.equal(err, error);
         done();
       });
     });
