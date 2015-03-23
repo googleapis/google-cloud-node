@@ -508,7 +508,7 @@
     "ignore": false,
     "line": 231,
     "codeStart": 244,
-    "code": "Dataset.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n\n  this.makeReq_('PUT', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata);\n  });\n};",
+    "code": "Dataset.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n\n  this.makeReq_('PATCH', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Dataset",
