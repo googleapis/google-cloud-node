@@ -345,7 +345,7 @@ describe('BigQuery/Dataset', function() {
 
     it('should send request to the api', function(done) {
       ds.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'PUT');
+        assert.equal(method, 'PATCH');
         assert.equal(path, '');
         assert.strictEqual(query, null);
         assert.deepEqual(body, METADATA);
