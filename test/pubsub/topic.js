@@ -161,6 +161,38 @@ describe('Topic', function() {
     });
   });
 
+  describe('publish to non-existing topic', function(){
+    var messageObject = { data: 'howdy' };
+
+    it('should execute callback with 404 error without autoCreate', function(done) {
+      topic.makeReq_ = function(method, path, query, body, callback) {
+        callback({code: 404});
+      };
+
+      topic.publish(messageObject, function(err){
+        assert.equal(err.code, 404);
+        done();
+      });
+    });
+
+    it('should publish successfully with autoCreate', function(done) {
+      var acTopic = new Topic(pubsubMock, { name: TOPIC_NAME, autoCreate: true });
+      var created = false;
+
+      acTopic.origMakeReq_ = function(method, path, query, body, callback) {
+        if (!created) callback({code: 404});
+        else callback(null);
+      };
+
+      pubsubMock.createTopic = function(name, callback) {
+        created = true;
+        callback();
+      }
+
+      acTopic.publish(messageObject, done);
+    });
+  });
+
   describe('delete', function() {
     it('should delete a topic', function(done) {
       topic.makeReq_ = function(method, path) {
