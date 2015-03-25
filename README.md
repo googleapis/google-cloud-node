@@ -215,9 +215,9 @@ fs.createReadStream('/local/file.txt').pipe(bucket.file('file.txt').createWriteS
 bucket.file('photo.jpg').createReadStream().pipe(fs.createWriteStream('/local/photo.jpg'));
 ```
 
-## Google Cloud Pub/Sub (Alpha)
+## Google Cloud Pub/Sub (Beta)
 
-> Google Cloud Pub/Sub is in **Alpha status**. As a result, it might change in backward-incompatible ways and is not recommended for production use. It is not subject to any SLA or deprecation policy.
+> This is a *Beta* release of Google Cloud Pub/Sub. This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
 
 [Google Cloud Pub/Sub][cloud-pubsub] ([docs][cloud-pubsub-docs]) allows you to connect your services with reliable, many-to-many, asynchronous messaging hosted on Google's infrastructure. Cloud Pub/Sub automatically scales as you need it and provides a foundation for building your own robust, global services.
 
