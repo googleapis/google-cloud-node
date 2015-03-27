@@ -166,7 +166,7 @@ describe('Topic', function() {
 
     it('should generate 404 error without autoCreate', function(done) {
       topic.makeReq_ = function(method, path, query, body, callback) {
-        callback({code: 404});
+        callback({ code: 404 });
       };
 
       topic.publish(messageObject, function(err){
@@ -183,7 +183,7 @@ describe('Topic', function() {
 
       acTopic.origMakeReq_ = function(method, path, query, body, callback) {
         if (!created) {
-          callback({code: 404});
+          callback({ code: 404 });
         }
         else {
           callback(null);
@@ -321,7 +321,7 @@ describe('Topic', function() {
         };
 
         topic.makeReq_ = function(method, path, qs, body, callback){
-          callback({code: 409});
+          callback({ code: 409 });
         };
 
         topic.subscribe(SUB_NAME, function(err) {
