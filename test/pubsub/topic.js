@@ -314,6 +314,22 @@ describe('Topic', function() {
         };
         topic.subscribe(SUB_NAME, CONFIG, assert.ifError);
       });
+
+      it('should re-use existing subscription if specified', function(done) {
+        topic.subscription = function() {
+          done();
+        };
+
+        topic.makeReq_ = function(method, path, qs, body, callback){
+          callback({code: 409});
+        };
+
+        topic.subscribe(SUB_NAME, function(err) {
+          assert.equal(err.code, 409);
+        });
+
+        topic.subscribe(SUB_NAME, { reuseExisting: true }, assert.ifError);
+      });
     });
 
     describe('subscription', function() {
