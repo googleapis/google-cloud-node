@@ -463,6 +463,190 @@ describe('common/util', function() {
         var makeRequest = util.makeAuthorizedRequest({});
         makeRequest({}, assert.ifError);
       });
+
+      it('should retry rate limit requests by default', function(done) {
+        var attemptedRetries = 0;
+        var error = new Error('Rate Limit Error.');
+        error.code = 429; // Rate limit error
+
+        var authorizedReqOpts = { a: 'b', c: 'd' };
+
+        var old_setTimeout = setTimeout;
+        setTimeout = function(callback, time) {
+          var MIN_TIME = (Math.pow(2, attemptedRetries) * 1000);
+          var MAX_TIME = (Math.pow(2, attemptedRetries) * 1000) + 1000;
+          assert(time >= MIN_TIME && time <= MAX_TIME);
+          attemptedRetries++;
+          callback(); // make the request again
+        };
+
+        gsa_Override = function() {
+          return function authorize(reqOpts, callback) {
+            callback(null, authorizedReqOpts);
+          };
+        };
+
+        request_Override = function(reqOpts, callback) {
+          if (attemptedRetries === 3) {
+            setTimeout = old_setTimeout;
+            done();
+          } else {
+            callback(error); // this callback should check for rate limits
+          }
+        };
+
+        var makeRequest = util.makeAuthorizedRequest({});
+        makeRequest({}, assert.ifError);
+      });
+
+      it('should retry rate limits 3x on 429, 500, 503', function(done) {
+        var attemptedRetries = 0;
+        var codes = [429, 503, 500, 'done'];
+        var error = new Error('Rate Limit Error.');
+        error.code = codes[0]; // Rate limit error
+
+        var authorizedReqOpts = { a: 'b', c: 'd' };
+
+        var old_setTimeout = setTimeout;
+        setTimeout = function(callback, time) {
+          var MIN_TIME = (Math.pow(2, attemptedRetries) * 1000);
+          var MAX_TIME = (Math.pow(2, attemptedRetries) * 1000) + 1000;
+          assert(time >= MIN_TIME && time <= MAX_TIME);
+          attemptedRetries++;
+          error.code = codes[attemptedRetries]; // test a new code
+          callback(); // make the request again
+        };
+
+        gsa_Override = function() {
+          return function authorize(reqOpts, callback) {
+            callback(null, authorizedReqOpts);
+          };
+        };
+
+        request_Override = function(reqOpts, callback) {
+          callback(error); // this callback should check for rate limits
+        };
+
+        var makeRequest = util.makeAuthorizedRequest({});
+        makeRequest({}, function(err) {
+          setTimeout = old_setTimeout;
+          assert.equal(err, error);
+          assert.equal(err.code, 'done');
+          done();
+        });
+      });
+
+      it('should retry rate limits 3x by default', function(done) {
+        var attemptedRetries = 0;
+        var error = new Error('Rate Limit Error.');
+        error.code = 429; // Rate limit error
+
+        var authorizedReqOpts = { a: 'b', c: 'd' };
+
+        var old_setTimeout = setTimeout;
+        setTimeout = function(callback, time) {
+          var MIN_TIME = (Math.pow(2, attemptedRetries) * 1000);
+          var MAX_TIME = (Math.pow(2, attemptedRetries) * 1000) + 1000;
+          assert(time >= MIN_TIME && time <= MAX_TIME);
+          attemptedRetries++;
+          callback(); // make the request again
+        };
+
+        gsa_Override = function() {
+          return function authorize(reqOpts, callback) {
+            callback(null, authorizedReqOpts);
+          };
+        };
+
+        request_Override = function(reqOpts, callback) {
+          callback(error); // this callback should check for rate limits
+        };
+
+        var makeRequest = util.makeAuthorizedRequest({});
+        makeRequest({}, function(err) {
+          setTimeout = old_setTimeout;
+          assert.equal(attemptedRetries, 3);
+          assert.equal(err, error);
+          done();
+        });
+      });
+
+      it('should retry rate limits by maxRetries if provided', function(done) {
+        var MAX_RETRIES = 5;
+        var attemptedRetries = 0;
+        var error = new Error('Rate Limit Error.');
+        error.code = 429; // Rate limit error
+
+        var authorizedReqOpts = { a: 'b', c: 'd' };
+
+        var old_setTimeout = setTimeout;
+        setTimeout = function(callback, time) {
+          var MIN_TIME = (Math.pow(2, attemptedRetries) * 1000);
+          var MAX_TIME = (Math.pow(2, attemptedRetries) * 1000) + 1000;
+          assert(time >= MIN_TIME && time <= MAX_TIME);
+          attemptedRetries++;
+          callback(); // make the request again
+        };
+
+        gsa_Override = function() {
+          return function authorize(reqOpts, callback) {
+            callback(null, authorizedReqOpts);
+          };
+        };
+
+        request_Override = function(reqOpts, callback) {
+          callback(error); // this callback should check for rate limits
+        };
+
+        var makeRequest = util.makeAuthorizedRequest({
+          maxRetries: MAX_RETRIES
+        });
+
+        makeRequest({}, function(err) {
+          setTimeout = old_setTimeout;
+          assert.equal(attemptedRetries, MAX_RETRIES);
+          assert.equal(err, error);
+          done();
+        });
+      });
+
+      it('should not retry rate limits if autoRetry is false', function(done) {
+        var attemptedRetries = 0;
+        var error = new Error('Rate Limit Error.');
+        error.code = 429; // Rate limit error
+
+        var authorizedReqOpts = { a: 'b', c: 'd' };
+
+        var old_setTimeout = setTimeout;
+        setTimeout = function(callback, time) {
+          var MIN_TIME = (Math.pow(2, attemptedRetries) * 1000);
+          var MAX_TIME = (Math.pow(2, attemptedRetries) * 1000) + 1000;
+          assert(time >= MIN_TIME && time <= MAX_TIME);
+          attemptedRetries++;
+          callback(); // make the request again
+        };
+
+        gsa_Override = function() {
+          return function authorize(reqOpts, callback) {
+            callback(null, authorizedReqOpts);
+          };
+        };
+
+        request_Override = function(reqOpts, callback) {
+          callback(error); // this callback should check for rate limits
+        };
+
+        var makeRequest = util.makeAuthorizedRequest({
+          autoRetry: false
+        });
+
+        makeRequest({}, function(err) {
+          setTimeout = old_setTimeout;
+          assert.equal(attemptedRetries, 0);
+          assert.equal(err, error);
+          done();
+        });
+      });
     });
   });
 
