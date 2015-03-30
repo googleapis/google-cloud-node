@@ -294,8 +294,38 @@
         "variable": false
       },
       {
+        "type": "param",
+        "name": "config.autoRetry",
+        "description": "<ul>\n<li>Automatically retry requests if the     response is related to rate limits or certain intermittent server errors.<br />  (default: true). Recommended is true. We will exponentially backoff<br />  subsequent requests by default.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "config.maxRetries",
+        "description": "<ul>\n<li>Max number of auto retries to attempt     before returning the error. (default: 3).</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
         "type": "example",
-        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar dataset = gcloud.datastore.dataset();\n// equal to:\n//   gcloud.datastore.dataset({\n//     keyFilename: '/path/to/keyfile.json',\n//     projectId: 'my-project'\n//   });\n\nvar storage = gcloud.storage();\nvar bucket = storage.bucket({\n  name: 'PhotosBucket',\n  // properties may be overridden:\n  keyFilename: '/path/to/other/keyfile.json'\n});"
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar dataset = gcloud.datastore.dataset();\n// equal to:\n//   gcloud.datastore.dataset({\n//     keyFilename: '/path/to/keyfile.json',\n//     projectId: 'my-project'\n//   });\n\nvar storage = gcloud.storage();\nvar bucket = storage.bucket({\n  name: 'PhotosBucket',\n  // properties may be overridden:\n  keyFilename: '/path/to/other/keyfile.json'\n});\n"
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project',\n  maxRetries: 5 // retry rate limited requests 5 times before giving up\n});"
       }
     ],
     "description": {
@@ -308,7 +338,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 53,
-    "codeStart": 106,
+    "codeStart": 119,
     "code": "function gcloud(config) {\n  return {\n    bigquery: function(options) {\n      options = options || {};\n      return new BigQuery(util.extendGlobalConfig(config, options));\n    },\n    datastore: new Datastore(config),\n    pubsub: function(options) {\n      options = options || {};\n      return new PubSub(util.extendGlobalConfig(config, options));\n    },\n    storage: function(options) {\n      options = options || {};\n      return new Storage(util.extendGlobalConfig(config, options));\n    }\n  };\n}",
     "ctx": {
       "type": "constructor",
@@ -355,8 +385,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 124,
-    "codeStart": 141,
+    "line": 137,
+    "codeStart": 154,
     "code": "gcloud.bigquery = BigQuery;",
     "ctx": {
       "type": "property",
@@ -405,8 +435,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 143,
-    "codeStart": 161,
+    "line": 156,
+    "codeStart": 174,
     "code": "gcloud.datastore = Datastore;",
     "ctx": {
       "type": "property",
@@ -455,8 +485,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 163,
-    "codeStart": 187,
+    "line": 176,
+    "codeStart": 200,
     "code": "gcloud.pubsub = function(config) {\n  return new PubSub(config);\n};",
     "ctx": {
       "type": "method",
@@ -504,8 +534,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 191,
-    "codeStart": 207,
+    "line": 204,
+    "codeStart": 220,
     "code": "gcloud.storage = Storage;\n\nmodule.exports = gcloud;",
     "ctx": {
       "type": "property",

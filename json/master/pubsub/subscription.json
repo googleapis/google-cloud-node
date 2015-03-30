@@ -339,8 +339,8 @@
       }
     ],
     "description": {
-      "full": "<p>Acknowledge to the backend that the message was retrieved. You must provide<br />either a single ID, or an array of IDs.</p>",
-      "summary": "<p>Acknowledge to the backend that the message was retrieved. You must provide<br />either a single ID, or an array of IDs.</p>",
+      "full": "<p>Acknowledge to the backend that the message was retrieved. You must provide<br />either a single ID or an array of IDs.</p>",
+      "summary": "<p>Acknowledge to the backend that the message was retrieved. You must provide<br />either a single ID or an array of IDs.</p>",
       "body": ""
     },
     "isPrivate": false,
@@ -349,7 +349,7 @@
     "ignore": false,
     "line": 244,
     "codeStart": 256,
-    "code": "Subscription.prototype.ack = function(ids, callback) {\n  if (!ids || ids.length === 0) {\n    throw new Error(\n        'At least one ID must be specified before it can be acknowledged.');\n  }\n  ids = util.arrayize(ids);\n  var body = {\n    ackIds: ids\n  };\n  var path = this.name + ':acknowledge';\n  this.makeReq_('POST', path, null, body, callback);\n};",
+    "code": "Subscription.prototype.ack = function(ids, callback) {\n  if (!ids || ids.length === 0) {\n    throw new Error(\n        'At least one ID must be specified before it can be acknowledged.');\n  }\n  ids = util.arrayize(ids);\n  var body = {\n    ackIds: ids\n  };\n  var path = this.name + ':acknowledge';\n  this.makeReq_('POST', path, null, body, callback || util.noop);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Subscription",

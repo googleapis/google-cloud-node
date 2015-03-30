@@ -187,7 +187,7 @@
     "ignore": false,
     "line": 41,
     "codeStart": 58,
-    "code": "function Topic(pubsub, options) {\n  this.makeReq_ = pubsub.makeReq_.bind(pubsub);\n  this.name = Topic.formatName_(pubsub.projectId, options.name);\n  this.projectId = pubsub.projectId;\n  this.pubsub = pubsub;\n}",
+    "code": "function Topic(pubsub, options) {\n  this.makeReq_ = pubsub.makeReq_.bind(pubsub);\n  this.name = Topic.formatName_(pubsub.projectId, options.name);\n  this.projectId = pubsub.projectId;\n  this.pubsub = pubsub;\n\n  if (options.autoCreate) {\n    this.unformattedName = options.name;\n    this.origMakeReq_ = this.makeReq_;\n    this.makeReq_ = this.autoCreateWrapper_;\n  }\n}",
     "ctx": {
       "type": "constructor",
       "name": "Topic",
@@ -222,8 +222,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 65,
-    "codeStart": 72,
+    "line": 71,
+    "codeStart": 78,
     "code": "Topic.formatMessage_ = function(message) {\n  if (!util.is(message.data, 'buffer')) {\n    message.data = new Buffer(JSON.stringify(message.data));\n  }\n\n  message.data = message.data.toString('base64');\n\n  return message;\n};",
     "ctx": {
       "type": "method",
@@ -260,14 +260,41 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 82,
-    "codeStart": 90,
+    "line": 88,
+    "codeStart": 96,
     "code": "Topic.formatName_ = function(projectId, name) {\n  // Simple check if the name is already formatted.\n  if (name.indexOf('/') > -1) {\n    return name;\n  }\n  return 'projects/' + projectId + '/topics/' + name;\n};",
     "ctx": {
       "type": "method",
       "receiver": "Topic",
       "name": "formatName_",
       "string": "Topic.formatName_()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "<p>Wrapper for makeReq_ that automatically attempts to create a topic if it<br />does not yet exist.</p>",
+      "summary": "<p>Wrapper for makeReq_ that automatically attempts to create a topic if it<br />does not yet exist.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 104,
+    "codeStart": 110,
+    "code": "Topic.prototype.autoCreateWrapper_ = function(method, path, q, body, callback) {\n  var self = this;\n\n  function createAndRetry() {\n    self.pubsub.createTopic(self.unformattedName, function(err) {\n      if (err) {\n        callback(err);\n        return;\n      }\n      self.origMakeReq_(method, path, q, body, callback);\n    });\n  }\n\n  this.origMakeReq_(method, path, q, body, function(err, res) {\n    if (err && err.code === 404 && method !== 'DELETE') {\n      createAndRetry();\n    } else {\n      callback(err, res);\n    }\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Topic",
+      "cons": "Topic",
+      "name": "autoCreateWrapper_",
+      "string": "Topic.prototype.autoCreateWrapper_()"
     }
   },
   {
@@ -344,8 +371,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 98,
-    "codeStart": 140,
+    "line": 132,
+    "codeStart": 174,
     "code": "Topic.prototype.publish = function(messages, callback) {\n  messages = util.arrayize(messages);\n\n  if (messages.length === 0) {\n    throw new Error('Cannot publish without a message.');\n  }\n\n  callback = callback || util.noop;\n\n  var body = {\n    messages: messages.map(Topic.formatMessage_)\n  };\n\n  var path = this.name + ':publish';\n  this.makeReq_('POST', path, null, body, function(err, result) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    callback(null, result && result.messageIds || []);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -384,8 +411,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 163,
-    "codeStart": 171,
+    "line": 197,
+    "codeStart": 205,
     "code": "Topic.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('DELETE', this.name, null, null, callback);\n};",
     "ctx": {
       "type": "method",
@@ -463,8 +490,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 176,
-    "codeStart": 201,
+    "line": 210,
+    "codeStart": 235,
     "code": "Topic.prototype.getSubscriptions = function(query, callback) {\n  var self = this;\n  if (util.is(query, 'function')) {\n    callback = query;\n    query = {};\n  }\n\n  var path = this.name + '/subscriptions';\n  this.makeReq_('GET', path, query, true, function(err, result) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var subscriptions = (result.subscriptions || []).map(function(name) {\n      return new Subscription(self, {\n        name: name\n      });\n    });\n    var nextQuery = null;\n    if (result.nextPageToken) {\n      nextQuery = query;\n      nextQuery.pageToken = result.nextPageToken;\n    }\n    callback(null, subscriptions, nextQuery);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -550,6 +577,19 @@
       },
       {
         "type": "param",
+        "name": "options.reuseExisting",
+        "description": "<ul>\n<li>If the subscription already exists,     reuse it. The options of the existing subscription are not changed. If<br />  false, attempting to create a subscription that already exists will fail.<br />  (default: false)</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -575,9 +615,9 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 229,
-    "codeStart": 259,
-    "code": "Topic.prototype.subscribe = function(name, options, callback) {\n  var self = this;\n  if (!name) {\n    throw new Error('A name is required for a new subscription.');\n  }\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  var body = {\n    topic: this.name\n  };\n\n  if (options.ackDeadlineSeconds) {\n    body.ackDeadlineSeconds = options.ackDeadlineSeconds;\n  }\n\n  var path = Subscription.formatName_(this.projectId, name);\n  this.makeReq_('PUT', path, null, body, function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    callback(null, self.subscription(name, options));\n  });\n};",
+    "line": 263,
+    "codeStart": 297,
+    "code": "Topic.prototype.subscribe = function(name, options, callback) {\n  var self = this;\n  if (!name) {\n    throw new Error('A name is required for a new subscription.');\n  }\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  var body = {\n    topic: this.name\n  };\n\n  if (options.ackDeadlineSeconds) {\n    body.ackDeadlineSeconds = options.ackDeadlineSeconds;\n  }\n\n  var path = Subscription.formatName_(this.projectId, name);\n  this.makeReq_('PUT', path, null, body, function(err) {\n    if (options.reuseExisting && err && err.code === 409) {\n      callback(null, self.subscription(name, options));\n    } else if (err) {\n      callback(err);\n    } else {\n      callback(null, self.subscription(name, options));\n    }\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Topic",
@@ -673,8 +713,8 @@
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 287,
-    "codeStart": 314,
+    "line": 327,
+    "codeStart": 354,
     "code": "Topic.prototype.subscription = function(name, options) {\n  if (!name) {\n    throw new Error('The name of a subscription is required.');\n  }\n  options = options || {};\n  options.name = name;\n  return new Subscription(this.pubsub, options);\n};\n\nmodule.exports = Topic;",
     "ctx": {
       "type": "method",
