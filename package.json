@@ -77,9 +77,9 @@
     "docs": "./scripts/docs.sh",
     "lint": "jshint lib/ regression/ test/",
     "test": "mocha test/*",
-    "regression-test": "mocha regression/* --timeout 20000",
-    "cover": "istanbul cover -x 'regression/*' _mocha -- --timeout 20000 test/* regression/*",
-    "coveralls": "istanbul cover -x 'regression/*' _mocha --report lcovonly -- --timeout 20000 test/* regression/* -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "regression-test": "mocha regression/* --timeout 30000",
+    "cover": "istanbul cover -x 'regression/*' _mocha -- --timeout 30000 test/* regression/*",
+    "coveralls": "istanbul cover -x 'regression/*' _mocha --report lcovonly -- --timeout 30000 test/* regression/* -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "license": "Apache 2"
 }
