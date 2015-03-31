@@ -573,6 +573,78 @@ describe('common/util', function() {
         });
       });
 
+      it('should retry rate limits on rateLimitExceeded', function(done) {
+        var attemptedRetries = 0;
+        var error = new Error('Rate Limit Error.');
+        error.code = 403; // not a rate limit code!
+        error.errors = [{ reason: 'rateLimitExceeded' }];
+
+        var authorizedReqOpts = { a: 'b', c: 'd' };
+
+        var old_setTimeout = setTimeout;
+        setTimeout = function(callback, time) {
+          var MIN_TIME = (Math.pow(2, attemptedRetries) * 1000);
+          var MAX_TIME = (Math.pow(2, attemptedRetries) * 1000) + 1000;
+          assert(time >= MIN_TIME && time <= MAX_TIME);
+          attemptedRetries++;
+          callback(); // make the request again
+        };
+
+        gsa_Override = function() {
+          return function authorize(reqOpts, callback) {
+            callback(null, authorizedReqOpts);
+          };
+        };
+
+        request_Override = function(reqOpts, callback) {
+          callback(null, null, { error: error });
+        };
+
+        var makeRequest = util.makeAuthorizedRequest({});
+        makeRequest({}, function(err) {
+          setTimeout = old_setTimeout;
+          assert.equal(attemptedRetries, 3);
+          assert.equal(err.message, 'Rate Limit Error.');
+          done();
+        });
+      });
+
+      it('should retry rate limits on userRateLimitExceeded', function(done) {
+        var attemptedRetries = 0;
+        var error = new Error('Rate Limit Error.');
+        error.code = 403; // not a rate limit code!
+        error.errors = [{ reason: 'userRateLimitExceeded' }];
+
+        var authorizedReqOpts = { a: 'b', c: 'd' };
+
+        var old_setTimeout = setTimeout;
+        setTimeout = function(callback, time) {
+          var MIN_TIME = (Math.pow(2, attemptedRetries) * 1000);
+          var MAX_TIME = (Math.pow(2, attemptedRetries) * 1000) + 1000;
+          assert(time >= MIN_TIME && time <= MAX_TIME);
+          attemptedRetries++;
+          callback(); // make the request again
+        };
+
+        gsa_Override = function() {
+          return function authorize(reqOpts, callback) {
+            callback(null, authorizedReqOpts);
+          };
+        };
+
+        request_Override = function(reqOpts, callback) {
+          callback(null, null, { error: error });
+        };
+
+        var makeRequest = util.makeAuthorizedRequest({});
+        makeRequest({}, function(err) {
+          setTimeout = old_setTimeout;
+          assert.equal(attemptedRetries, 3);
+          assert.equal(err.message, 'Rate Limit Error.');
+          done();
+        });
+      });
+
       it('should retry rate limits 3x by default', function(done) {
         var attemptedRetries = 0;
         var error = new Error('Rate Limit Error.');
