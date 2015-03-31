@@ -22,8 +22,12 @@ npm run test
 # if merging to master and not a pull request, execute regression tests, create coverage report and update docs
 if [ "${TRAVIS_BRANCH}" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then
   openssl aes-256-cbc -K $encrypted_b8aa0887832a_key -iv $encrypted_b8aa0887832a_iv -in key.json.enc -out key.json -d
-  # create new coverage report (executes regression tests)
-  npm run coveralls
+
+  # Only run regression tests on non-release (non-tagged) commits.
+  if [ "${TRAVIS_TAG}" == "" ]; then
+    # create new coverage report (executes regression tests)
+    npm run coveralls
+  fi
 
   # generate new set of json files in docs/json/master
   npm run docs
