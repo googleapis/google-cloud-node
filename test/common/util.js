@@ -536,6 +536,43 @@ describe('common/util', function() {
         });
       });
 
+      it('should retry rate limits on API errors', function(done) {
+        var attemptedRetries = 0;
+        var codes = [429, 503, 500, 'done'];
+        var error = new Error('Rate Limit Error.');
+        error.code = codes[0]; // Rate limit error
+
+        var authorizedReqOpts = { a: 'b', c: 'd' };
+
+        var old_setTimeout = setTimeout;
+        setTimeout = function(callback, time) {
+          var MIN_TIME = (Math.pow(2, attemptedRetries) * 1000);
+          var MAX_TIME = (Math.pow(2, attemptedRetries) * 1000) + 1000;
+          assert(time >= MIN_TIME && time <= MAX_TIME);
+          attemptedRetries++;
+          error.code = codes[attemptedRetries]; // test a new code
+          callback(); // make the request again
+        };
+
+        gsa_Override = function() {
+          return function authorize(reqOpts, callback) {
+            callback(null, authorizedReqOpts);
+          };
+        };
+
+        request_Override = function(reqOpts, callback) {
+          callback(null, null, { error: error });
+        };
+
+        var makeRequest = util.makeAuthorizedRequest({});
+        makeRequest({}, function(err) {
+          setTimeout = old_setTimeout;
+          assert.equal(err.message, 'Rate Limit Error.');
+          assert.equal(err.code, 'done');
+          done();
+        });
+      });
+
       it('should retry rate limits 3x by default', function(done) {
         var attemptedRetries = 0;
         var error = new Error('Rate Limit Error.');
