@@ -1,0 +1,721 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
+  },
+  {
+    "tags": [
+      {
+        "type": "module",
+        "string": "datastore/request"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 17,
+    "codeStart": 21,
+    "code": "'use strict';\n\nvar streamEvents = require('stream-events');\nvar request = require('request');\nvar through = require('through2');"
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "types": [
+          "module:datastore/entity"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adatastore%2Fentity.html\">datastore/entity</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 27,
+    "codeStart": 31,
+    "code": "var entity = require('./entity.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "entity",
+      "value": "require('./entity.js')",
+      "string": "entity"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "types": [
+          "module:datastore/pb"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adatastore%2Fpb.html\">datastore/pb</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 33,
+    "codeStart": 37,
+    "code": "var pb = require('./pb.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "pb",
+      "value": "require('./pb.js')",
+      "string": "pb"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "types": [
+          "module:common/util"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 39,
+    "codeStart": 43,
+    "code": "var util = require('../common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "const",
+        "string": "{string} Non-transaction mode key."
+      },
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 45,
+    "codeStart": 49,
+    "code": "var MODE_NON_TRANSACTIONAL = 'NON_TRANSACTIONAL';",
+    "ctx": {
+      "type": "declaration",
+      "name": "MODE_NON_TRANSACTIONAL",
+      "value": "'NON_TRANSACTIONAL'",
+      "string": "MODE_NON_TRANSACTIONAL"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "const",
+        "string": "{string} Transaction mode key."
+      },
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 51,
+    "codeStart": 55,
+    "code": "var MODE_TRANSACTIONAL = 'TRANSACTIONAL';",
+    "ctx": {
+      "type": "declaration",
+      "name": "MODE_TRANSACTIONAL",
+      "value": "'TRANSACTIONAL'",
+      "string": "MODE_TRANSACTIONAL"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "example",
+        "string": "// Inherit in Dataset and Transaction\nrequire('util').inherits(Dataset, DatastoreRequest);\nrequire('util').inherits(Transaction, DatastoreRequest);"
+      }
+    ],
+    "description": {
+      "full": "<p>Developer Documentation</p><p>Handles request logic for Datastore.</p><p>Creates requests to the Dataset endpoint. Designed to be inherited by<br />datastore.Dataset and datastore.Transaction objects.</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": "<p>Handles request logic for Datastore.</p><p>Creates requests to the Dataset endpoint. Designed to be inherited by<br />datastore.Dataset and datastore.Transaction objects.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 57,
+    "codeStart": 69
+  },
+  {
+    "tags": [
+      {
+        "type": "constructor",
+        "string": ""
+      },
+      {
+        "type": "alias",
+        "string": "module:datastore/request"
+      },
+      {
+        "type": "mixin",
+        "string": ""
+      }
+    ],
+    "description": {
+      "full": "<p>Handle logic for Datastore API operations.</p>",
+      "summary": "<p>Handle logic for Datastore API operations.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": true,
+    "isEvent": false,
+    "ignore": false,
+    "line": 69,
+    "codeStart": 76,
+    "code": "function DatastoreRequest() {}",
+    "ctx": {
+      "type": "constructor",
+      "name": "DatastoreRequest",
+      "string": "DatastoreRequest()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "name": "keys",
+        "description": "<ul>\n<li>Datastore key object(s).</li>\n</ul>\n",
+        "types": [
+          "Key",
+          "Array.<Key>"
+        ],
+        "typesDescription": "<a href=\"Key.html\">Key</a>|<code>Array</code>.&lt;<a href=\"Key.html\">Key</a>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Where you see `transaction`, assume this is the context that's relevant to\n// your use, whether that be a Dataset or Transaction object.\n//-\n\n// Get a single entity.\ntransaction.get(dataset.key(['Company', 123]), function(err, entity) {});\n\n// Get multiple entities at once.\ntransaction.get([\n  dataset.key(['Company', 123]),\n  dataset.key(['Product', 'Computer'])\n], function(err, entities) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Retrieve the entities identified with the specified key(s) in the current<br />transaction. Get operations require a valid key to retrieve the<br />key-identified entity from Datastore.</p>",
+      "summary": "<p>Retrieve the entities identified with the specified key(s) in the current<br />transaction. Get operations require a valid key to retrieve the<br />key-identified entity from Datastore.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 78,
+    "codeStart": 101,
+    "code": "DatastoreRequest.prototype.get = function(keys, callback) {\n  var that = this;\n\n  var isMultipleRequest = Array.isArray(keys);\n  keys = isMultipleRequest ? keys : [keys];\n\n  callback = callback || util.noop;\n\n  var req = {\n    key: keys.map(entity.keyToKeyProto)\n  };\n\n  this.makeReq_('lookup', req, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var found = entity.formatArray(resp.found);\n\n    if (isMultipleRequest && resp.deferred && resp.deferred.length) {\n      // There may be more results. Call `.get` again, and append the results.\n      that.get(\n          resp.deferred.map(entity.keyFromKeyProto), function(err, entities) {\n        if (err) {\n          callback(err);\n          return;\n        }\n\n        if (resp) {\n          found = (found || []).concat(entities);\n        }\n\n        callback(null, found);\n      });\n\n      return;\n    }\n\n    callback(null, isMultipleRequest ? found : found[0]);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "DatastoreRequest",
+      "cons": "DatastoreRequest",
+      "name": "get",
+      "string": "DatastoreRequest.prototype.get()"
+    }
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Maps to {module:datastore/dataset#save}, forcing the method to be <code>insert</code>.</p>",
+      "summary": "<p>Maps to {module:datastore/dataset#save}, forcing the method to be <code>insert</code>.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 144,
+    "codeStart": 147,
+    "code": "DatastoreRequest.prototype.insert = function(entities, callback) {\n  entities = util.arrayize(entities).map(util.propAssign('method', 'insert'));\n  this.save(entities, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "DatastoreRequest",
+      "cons": "DatastoreRequest",
+      "name": "insert",
+      "string": "DatastoreRequest.prototype.insert()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "borrows",
+        "otherMemberName": "{module:datastore/transaction#save}",
+        "thisMemberName": "save "
+      },
+      {
+        "type": "param",
+        "name": "entities",
+        "description": "<ul>\n<li>Datastore key object(s).</li>\n</ul>\n",
+        "types": [
+          "object",
+          "Array.<object>"
+        ],
+        "typesDescription": "<code>object</code>|<code>Array</code>.&lt;<code>object</code>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "entities.key",
+        "description": "<ul>\n<li>Datastore key object.</li>\n</ul>\n",
+        "types": [
+          "Key"
+        ],
+        "typesDescription": "<a href=\"Key.html\">Key</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "entities.method",
+        "description": "<ul>\n<li>Optional method to explicity use for save.     The choices include &#39;insert&#39;, &#39;update&#39;, &#39;upsert&#39; and &#39;auto_insert_id&#39;.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "entities.data",
+        "description": "<ul>\n<li>Data to save with the provided key.     If you provide an array of objects, you must use the explicit syntax:<br />  <code>name</code> for the name of the property and <code>value</code> for its value. You may<br />  also specify an <code>excludeFromIndexes</code> property, set to <code>true</code> or <code>false</code>.</li>\n</ul>\n",
+        "types": [
+          "object",
+          "Array.<object>"
+        ],
+        "typesDescription": "<code>object</code>|<code>Array</code>.&lt;<code>object</code>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Save a single entity.\n//\n// Notice that we are providing an incomplete key. After saving, the original\n// Key object used to save will be updated to contain the path with its\n// generated ID.\n//-\nvar key = dataset.key('Company');\n\ndataset.save({\n  key: key,\n  data: {\n    rating: '10'\n  }\n}, function(err) {});\n\n//-\n// To specify an `excludeFromIndexes` value for a Datastore entity, pass in\n// an array for the key's data. The above example would then look like:\n//-\ndataset.save({\n  key: dataset.key('Company'),\n  data: [\n    {\n      name: 'rating',\n      value: '10',\n      excludeFromIndexes: false\n    }\n  ]\n}, function(err) {});\n\n//-\n// Save multiple entities at once.\n//-\nvar companyKey = dataset.key(['Company', 123]);\nvar productKey = dataset.key(['Product', 'Computer']);\n\ndataset.save([\n  {\n    key: companyKey,\n    data: {\n      HQ: 'Dallas, TX'\n    }\n  },\n  {\n    key: productKey,\n    data: {\n      vendor: 'Dell'\n    }\n  }\n], function(err) {});\n\n//-\n// Explicitly attempt to 'insert' a specific entity.\n//-\nvar userKey = dataset.key(['User', 'chilts']);\n\ndataset.save([\n  {\n    key: userKey,\n    method: 'insert', // force the method to 'insert'\n    data: {\n      fullName: 'Andrew Chilton'\n    }\n  }\n], function(err) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Insert or update the specified object(s). If a key is incomplete, its<br />associated object is inserted and the original Key object is updated to<br />contain the generated ID.</p><p>This method will determine the correct Datastore method to execute (<code>upsert</code>,<br /><code>insert</code>, <code>update</code>, and <code>insertAutoId</code>) by using the key(s) provided. For<br />example, if you provide an incomplete key (one without an ID), the request<br />will create a new entity and have its ID automatically assigned. If you<br />provide a complete key, the entity will be updated with the data specified.</p><p>By default, all properties are indexed. To prevent a property from being<br />included in <em>all</em> indexes, you must supply an entity&#39;s <code>data</code> property as an<br />array. See below for an example.</p>",
+      "summary": "<p>Insert or update the specified object(s). If a key is incomplete, its<br />associated object is inserted and the original Key object is updated to<br />contain the generated ID.</p>",
+      "body": "<p>This method will determine the correct Datastore method to execute (<code>upsert</code>,<br /><code>insert</code>, <code>update</code>, and <code>insertAutoId</code>) by using the key(s) provided. For<br />example, if you provide an incomplete key (one without an ID), the request<br />will create a new entity and have its ID automatically assigned. If you<br />provide a complete key, the entity will be updated with the data specified.</p><p>By default, all properties are indexed. To prevent a property from being<br />included in <em>all</em> indexes, you must supply an entity&#39;s <code>data</code> property as an<br />array. See below for an example.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 152,
+    "codeStart": 247,
+    "code": "DatastoreRequest.prototype.save = function(entities, callback) {\n  entities = util.arrayize(entities);\n\n  var insertIndexes = [];\n\n  var req = {\n    mutation: entities.reduce(function(acc, entityObject, index) {\n      var ent = {};\n      var method = entityObject.method;\n      delete entityObject.method;\n\n      if (Array.isArray(entityObject.data)) {\n        ent.property = entityObject.data.map(function(data) {\n          data.value = entity.valueToProperty(data.value);\n\n          if (util.is(data.excludeFromIndexes, 'boolean')) {\n            var indexed = !data.excludeFromIndexes;\n\n            if (util.is(data.value.list_value, 'array')) {\n              data.value.list_value =\n                data.value.list_value.map(util.propAssign('indexed', indexed));\n            } else {\n              data.value.indexed = indexed;\n            }\n\n            delete data.excludeFromIndexes;\n          }\n\n          return data;\n        });\n      } else {\n        ent = entity.entityToEntityProto(entityObject.data);\n      }\n\n      ent.key = entity.keyToKeyProto(entityObject.key);\n\n      if (method) {\n        switch (method) {\n          case 'insert':\n            acc.insert.push(ent);\n            break;\n          case 'update':\n            acc.update.push(ent);\n            break;\n          case 'upsert':\n            acc.upsert.push(ent);\n            break;\n          case 'insert_auto_id':\n            insertIndexes.push(index);\n            acc.insert_auto_id.push(ent);\n            break;\n        }\n      } else {\n        if (entity.isKeyComplete(entityObject.key)) {\n          acc.upsert.push(ent);\n        } else {\n          insertIndexes.push(index);\n          acc.insert_auto_id.push(ent);\n        }\n      }\n\n      return acc;\n    }, {\n      insert: [],\n      update: [],\n      upsert: [],\n      insert_auto_id: []\n    })\n  };\n\n  if (this.id) {\n    this.requests_.push(req);\n    this.requestCallbacks_.push(onCommit);\n    return;\n  } else {\n    this.makeReq_('commit', req, onCommit);\n  }\n\n  function onCommit(err, resp) {\n    if (err || !resp) {\n      callback(err);\n      return;\n    }\n\n    var autoInserted = (resp.mutation_result.insert_auto_id_key || []);\n    autoInserted.forEach(function(key, index) {\n      var path = entity.keyFromKeyProto(key).path;\n      entities[insertIndexes[index]].key.path = path;\n    });\n\n    callback(null);\n  }\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "DatastoreRequest",
+      "cons": "DatastoreRequest",
+      "name": "save",
+      "string": "DatastoreRequest.prototype.save()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "name": "key",
+        "description": "<ul>\n<li>Datastore key object(s).</li>\n</ul>\n",
+        "types": [
+          "Key",
+          "Array.<Key>"
+        ],
+        "typesDescription": "<a href=\"Key.html\">Key</a>|<code>Array</code>.&lt;<a href=\"Key.html\">Key</a>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "// Delete a single entity.\ndataset.delete(dataset.key(['Company', 123]), function(err) {});\n\n// Delete multiple entities at once.\ndataset.delete([\n  dataset.key(['Company', 123]),\n  dataset.key(['Product', 'Computer'])\n], function(err) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Delete all entities identified with the specified key(s).</p>",
+      "summary": "<p>Delete all entities identified with the specified key(s).</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 341,
+    "codeStart": 357,
+    "code": "DatastoreRequest.prototype.delete = function(keys, callback) {\n  callback = callback || util.noop;\n\n  var req = {\n    mutation: {\n      delete: util.arrayize(keys).map(entity.keyToKeyProto)\n    }\n  };\n\n  if (this.id) {\n    this.requests_.push(req);\n    return;\n  }\n\n  this.makeReq_('commit', req, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "DatastoreRequest",
+      "cons": "DatastoreRequest",
+      "name": "delete",
+      "string": "DatastoreRequest.prototype.delete()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "name": "q",
+        "description": "<ul>\n<li>Query object.</li>\n</ul>\n",
+        "types": [
+          "module:datastore/query"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adatastore%2Fquery.html\">datastore/query</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. If omitted, a readable     stream instance is returned.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Where you see `transaction`, assume this is the context that's relevant to\n// your use, whether that be a Dataset or a Transaction object.\n//-\n\n// Retrieve 5 companies.\ntransaction.runQuery(queryObject, function(err, entities, endCursor) {\n  // Use `endCursor` as the starting cursor for your next query.\n  var nextQuery = queryObject.start(endCursor);\n  transaction.runQuery(nextQuery, function(err, entities, endCursor) {});\n});\n\n//-\n// If you omit the callback, runQuery will automatically call subsequent\n// queries until no results remain. Entity objects will be pushed as they are\n// found.\n//-\ntransaction.runQuery(queryObject)\n  .on('data', function (entity) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Datastore allows you to query entities by kind, filter them by property<br />filters, and sort them by a property name. Projection and pagination are also<br />supported.</p><p>If you provide a callback, the query is run, and the results are returned as<br />the second argument to your callback. A third argument will also exist, which<br />is the <code>endCursor</code> of the previously-run query. You can use this to extend<br />the query you just ran to see if more results exist.</p><p>You may also omit the callback to this function to trigger streaming mode.</p><p>See below for examples of both approaches.</p>",
+      "summary": "<p>Datastore allows you to query entities by kind, filter them by property<br />filters, and sort them by a property name. Projection and pagination are also<br />supported.</p>",
+      "body": "<p>If you provide a callback, the query is run, and the results are returned as<br />the second argument to your callback. A third argument will also exist, which<br />is the <code>endCursor</code> of the previously-run query. You can use this to extend<br />the query you just ran to see if more results exist.</p><p>You may also omit the callback to this function to trigger streaming mode.</p><p>See below for examples of both approaches.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 374,
+    "codeStart": 413,
+    "code": "DatastoreRequest.prototype.runQuery = function(q, callback) {\n  var that = this;\n  var stream;\n  var resultsToSend = q.limitVal;\n\n  var req = {\n    read_options: {},\n    query: entity.queryToQueryProto(q)\n  };\n\n  if (q.namespace) {\n    req.partition_id = {\n      namespace: q.namespace\n    };\n  }\n\n  if (!util.is(callback, 'function')) {\n    stream = streamEvents(through.obj());\n    stream.once('reading', runQuery);\n    return stream;\n  } else {\n    runQuery();\n  }\n\n  function runQuery() {\n    that.makeReq_('runQuery', req, function(err, resp) {\n      if (err) {\n        if (stream) {\n          stream.emit('error', err);\n          stream.end();\n        } else {\n          callback(err);\n        }\n        return;\n      }\n\n      var entities = entity.formatArray(resp.batch.entity_result);\n\n      var cursor = '';\n      if (resp.batch.end_cursor) {\n        cursor = resp.batch.end_cursor.toBase64();\n      }\n\n      if (!stream) {\n        callback(null, entities, cursor);\n        return;\n      }\n\n      if (!cursor || entities.length === 0) {\n        stream.end();\n        return;\n      }\n\n      var result;\n      while ((result = entities.shift()) && resultsToSend !== 0) {\n        stream.push(result);\n        resultsToSend--;\n      }\n\n      if (resultsToSend === 0) {\n        stream.end();\n        return;\n      }\n\n      req.query = entity.queryToQueryProto(q.start(cursor).offset(0));\n      runQuery();\n    });\n  }\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "DatastoreRequest",
+      "cons": "DatastoreRequest",
+      "name": "runQuery",
+      "string": "DatastoreRequest.prototype.runQuery()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "name": "incompleteKey",
+        "description": "<ul>\n<li>The key object to complete.</li>\n</ul>\n",
+        "types": [
+          "Key"
+        ],
+        "typesDescription": "<a href=\"Key.html\">Key</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "n",
+        "description": "<ul>\n<li>How many IDs to generate.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Where you see `transaction`, assume this is the context that's relevant to\n// your use, whether that be a Dataset or a Transaction object.\n//-\n\n// The following call will create 100 new IDs from the Company kind, which\n// exists under the default namespace.\ntransaction.allocateIds(incompleteKey, 100, function(err, keys) {});\n\n// You may prefer to create IDs from a non-default namespace by providing an\n// incomplete key with a namespace. Similar to the previous example, the call\n// below will create 100 new IDs, but from the Company kind that exists under\n// the \"ns-test\" namespace.\nvar incompleteKey = dataset.key({\n  namespace: 'ns-test',\n  path: ['Company']\n});\ntransaction.allocateIds(incompleteKey, 100, function(err, keys) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Generate IDs without creating entities.</p>",
+      "summary": "<p>Generate IDs without creating entities.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 483,
+    "codeStart": 510,
+    "code": "DatastoreRequest.prototype.allocateIds = function(incompleteKey, n, callback) {\n  if (entity.isKeyComplete(incompleteKey)) {\n    throw new Error('An incomplete key should be provided.');\n  }\n\n  var incompleteKeys = [];\n  for (var i = 0; i < n; i++) {\n    incompleteKeys.push(entity.keyToKeyProto(incompleteKey));\n  }\n\n  var req = {\n    key: incompleteKeys\n  };\n\n  this.makeReq_('allocateIds', req, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var keys = (resp.key || []).map(entity.keyFromKeyProto);\n\n    callback(null, keys);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "DatastoreRequest",
+      "cons": "DatastoreRequest",
+      "name": "allocateIds",
+      "string": "DatastoreRequest.prototype.allocateIds()"
+    }
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Maps to {module:datastore/dataset#save}, forcing the method to be <code>update</code>.</p>",
+      "summary": "<p>Maps to {module:datastore/dataset#save}, forcing the method to be <code>update</code>.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 536,
+    "codeStart": 539,
+    "code": "DatastoreRequest.prototype.update = function(entities, callback) {\n  entities = util.arrayize(entities).map(util.propAssign('method', 'update'));\n  this.save(entities, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "DatastoreRequest",
+      "cons": "DatastoreRequest",
+      "name": "update",
+      "string": "DatastoreRequest.prototype.update()"
+    }
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Maps to {module:datastore/dataset#save}, forcing the method to be <code>upsert</code>.</p>",
+      "summary": "<p>Maps to {module:datastore/dataset#save}, forcing the method to be <code>upsert</code>.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 544,
+    "codeStart": 547,
+    "code": "DatastoreRequest.prototype.upsert = function(entities, callback) {\n  entities = util.arrayize(entities).map(util.propAssign('method', 'upsert'));\n  this.save(entities, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "DatastoreRequest",
+      "cons": "DatastoreRequest",
+      "name": "upsert",
+      "string": "DatastoreRequest.prototype.upsert()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "name": "method",
+        "description": "<ul>\n<li>Datastore action (allocateIds, commit, etc.).</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "body",
+        "description": "<ul>\n<li>Request configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "private",
+        "visibility": "private"
+      },
+      {
+        "type": "example",
+        "string": "var deleteRequest = {\n  mutation: {\n    delete: [] // datastore key objects.\n  }\n};\ntransaction.makeReq('commit', deleteRequest, function(err) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Make a request to the API endpoint. Properties to indicate a transactional or<br />non-transactional operation are added automatically.</p>",
+      "summary": "<p>Make a request to the API endpoint. Properties to indicate a transactional or<br />non-transactional operation are added automatically.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 552,
+    "codeStart": 570,
+    "code": "DatastoreRequest.prototype.makeReq_ = function(method, body, callback) {\n  // TODO: Handle non-HTTP 200 cases.\n  if (!callback) {\n    callback = body;\n    body = {};\n  }\n\n  callback = callback || util.noop;\n\n  // Set properties to indicate if we're in a transaction or not.\n  if (method === 'commit') {\n    if (this.id) {\n      body.mode = MODE_TRANSACTIONAL;\n      body.transaction = this.id;\n    } else {\n      body.mode = MODE_NON_TRANSACTIONAL;\n    }\n  }\n\n  if (method === 'lookup' && this.id) {\n    body.read_options = body.read_options || {};\n    body.read_options.transaction = this.id;\n  }\n\n  var pbKey = method[0].toUpperCase() + method.substr(1);\n  var pbRequest = new pb[pbKey + 'Request'](body).toBuffer();\n  var pbResponse = pb[pbKey + 'Response'];\n\n  var reqOpts = {\n    method: 'POST',\n    uri: util.format('{apiEndpoint}/{path}/{projectId}/{method}', {\n      apiEndpoint: this.apiEndpoint,\n      path: 'datastore/v1beta2/datasets',\n      projectId: this.projectId,\n      method: method\n    }),\n    headers: {\n      'Content-Type': 'application/x-protobuf'\n    }\n  };\n\n  this.makeAuthorizedRequest_(reqOpts, {\n    onAuthorized: function(err, authorizedReqOpts) {\n      if (err) {\n        callback(err);\n        return;\n      }\n\n      authorizedReqOpts.headers = authorizedReqOpts.headers || {};\n      authorizedReqOpts.headers['Content-Length'] = pbRequest.length;\n\n      var apiRequest = request(authorizedReqOpts);\n\n      apiRequest.on('error', callback);\n\n      apiRequest.on('response', function(resp) {\n        var buffer = new Buffer('');\n        resp.on('data', function(chunk) {\n          buffer = Buffer.concat([buffer, chunk]);\n        });\n        resp.on('end', function() {\n          util.handleResp(null, resp, buffer.toString(), function(err) {\n            if (err) {\n              callback(err);\n              return;\n            }\n            callback(null, pbResponse.decode(buffer));\n          });\n        });\n      });\n\n      apiRequest.end(pbRequest);\n    }\n  });\n};\n\nmodule.exports = DatastoreRequest;",
+    "ctx": {
+      "type": "method",
+      "constructor": "DatastoreRequest",
+      "cons": "DatastoreRequest",
+      "name": "makeReq_",
+      "string": "DatastoreRequest.prototype.makeReq_()"
+    }
+  }
+]
