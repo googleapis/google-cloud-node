@@ -356,7 +356,7 @@
     "ignore": false,
     "line": 65,
     "codeStart": 100,
-    "code": "function Dataset(options) {\n  if (!(this instanceof Dataset)) {\n    return new Dataset(options);\n  }\n\n  options = options || {};\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequest({\n    customEndpoint: typeof options.apiEndpoint !== 'undefined',\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  if (options.apiEndpoint && options.apiEndpoint.indexOf('http') !== 0) {\n    options.apiEndpoint = 'http://' + options.apiEndpoint;\n  }\n\n  this.apiEndpoint = options.apiEndpoint || 'https://www.googleapis.com';\n  this.apiEndpoint = this.apiEndpoint.replace(/\\",
+    "code": "function Dataset(options) {\n  if (!(this instanceof Dataset)) {\n    return new Dataset(options);\n  }\n\n  options = options || {};\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequest({\n    customEndpoint: typeof options.apiEndpoint !== 'undefined',\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  if (options.apiEndpoint && options.apiEndpoint.indexOf('http') !== 0) {\n    options.apiEndpoint = 'http://' + options.apiEndpoint;\n  }\n\n  var trailingSlashes = new RegExp('",
     "ctx": {
       "type": "constructor",
       "name": "Dataset",
@@ -403,7 +403,7 @@
       {
         "type": "param",
         "name": "options.namespace",
-        "description": "<ul>\n<li>Optional namespace. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Optional namespace.</li>\n</ul>\n",
         "types": [
           "string"
         ],
@@ -412,10 +412,6 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false
-      },
-      {
-        "type": "example",
-        "string": "var key;\n\n// Create an incomplete key from the dataset namespace, kind='Company'\nkey = dataset.key('Company');\n\n// A complete key from the dataset namespace, kind='Company', id=123\nkey = dataset.key(['Company', 123]);\n\n// A complete key from the dataset namespace, kind='Company', name='Google'\n// Note: `id` is used for numeric identifiers and `name` is used otherwise\nkey = dataset.key(['Company', 'Google']);\n\n// A complete key from a provided namespace and path.\nkey = dataset.key({\n  namespace: 'My-NS',\n  path: ['Company', 123]\n});\n"
       },
       {
         "type": "return",
@@ -427,19 +423,23 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": "<p>A newly created Key from the options given.</p>"
+        "description": "<p>A newly created Key from the options given. </p>"
+      },
+      {
+        "type": "example",
+        "string": "var key;\n\n// Create an incomplete key from the dataset namespace, kind='Company'\nkey = dataset.key('Company');\n\n// A complete key from the dataset namespace, kind='Company', id=123\nkey = dataset.key(['Company', 123]);\n\n// A complete key from the dataset namespace, kind='Company', name='Google'\n// Note: `id` is used for numeric identifiers and `name` is used otherwise\nkey = dataset.key(['Company', 'Google']);\n\n// A complete key from a provided namespace and path.\nkey = dataset.key({\n  namespace: 'My-NS',\n  path: ['Company', 123]\n});"
       }
     ],
     "description": {
-      "full": "<p>$/, &#39;&#39;);</p><p>  this.namespace = options.namespace;<br />  this.projectId = options.projectId;<br />}</p><p>nodeutil.inherits(Dataset, DatastoreRequest);</p><p>/**<br />Helper to create a Key object, scoped to the dataset&#39;s namespace by default.</p><p>You may also specify a configuration object to define a namespace and path.</p>",
-      "summary": "<p>$/, &#39;&#39;);</p>",
+      "full": "<p>$&#39;);<br />  this.apiEndpoint = options.apiEndpoint || &#39;<a href=\"https://www.googleapis.com\">https://www.googleapis.com</a>&#39;;<br />  this.apiEndpoint = this.apiEndpoint.replace(trailingSlashes, &#39;&#39;);</p><p>  this.namespace = options.namespace;<br />  this.projectId = options.projectId;<br />}</p><p>nodeutil.inherits(Dataset, DatastoreRequest);</p><p>/**<br />Helper to create a Key object, scoped to the dataset&#39;s namespace by default.</p><p>You may also specify a configuration object to define a namespace and path.</p>",
+      "summary": "<p>$&#39;);<br />  this.apiEndpoint = options.apiEndpoint || &#39;<a href=\"https://www.googleapis.com\">https://www.googleapis.com</a>&#39;;<br />  this.apiEndpoint = this.apiEndpoint.replace(trailingSlashes, &#39;&#39;);</p>",
       "body": "<p>  this.namespace = options.namespace;<br />  this.projectId = options.projectId;<br />}</p><p>nodeutil.inherits(Dataset, DatastoreRequest);</p><p>/**<br />Helper to create a Key object, scoped to the dataset&#39;s namespace by default.</p><p>You may also specify a configuration object to define a namespace and path.</p>"
     },
     "isPrivate": false,
     "isConstructor": false,
     "isEvent": false,
     "ignore": false,
-    "line": 119,
+    "line": 118,
     "codeStart": 159,
     "code": "Dataset.prototype.key = function(options) {\n  options = util.is(options, 'object') ? options : {\n    namespace: this.namespace,\n    path: util.arrayize(options)\n  };\n\n  return new entity.Key(options);\n};",
     "ctx": {
