@@ -446,9 +446,12 @@
       {
         "type": "param",
         "name": "sources",
-        "description": "<ul>\n<li>The source files that will     be combined.</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>?</code>",
+        "description": "<ul>\n<li>The source files that will be     combined.</li>\n</ul>\n",
+        "types": [
+          "Array.<string>",
+          "module:storage/file"
+        ],
+        "typesDescription": "<code>Array</code>.&lt;<code>string</code>&gt;|module:<a href=\"module%3Astorage%2Ffile.html\">storage/file</a>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
