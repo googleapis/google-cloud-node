@@ -1,0 +1,660 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
+  },
+  {
+    "tags": [
+      {
+        "type": "module",
+        "string": "bigquery/dataset"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 17,
+    "codeStart": 21,
+    "code": "'use strict';\n\nvar extend = require('extend');"
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "types": [
+          "module:bigquery/table"
+        ],
+        "typesDescription": "module:<a href=\"module%3Abigquery%2Ftable.html\">bigquery/table</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 25,
+    "codeStart": 29,
+    "code": "var Table = require('./table.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Table",
+      "value": "require('./table.js')",
+      "string": "Table"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "types": [
+          "module:common/util"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "private",
+        "visibility": "private"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 31,
+    "codeStart": 35,
+    "code": "var util = require('../common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "name": "bigQuery",
+        "description": "<ul>\n<li>BigQuery instance.</li>\n</ul>\n",
+        "types": [
+          "module:bigquery"
+        ],
+        "typesDescription": "module:<a href=\"module%3Abigquery.html\">bigquery</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "id",
+        "description": "<ul>\n<li>The ID of the Dataset.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Developer Documentation</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 37,
+    "codeStart": 42
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "module:bigquery/dataset"
+      },
+      {
+        "type": "constructor",
+        "string": ""
+      }
+    ],
+    "description": {
+      "full": "<p>Interact with your BigQuery dataset. Create a Dataset instance with<br />{module:bigquery#createDataset} or {module:bigquery#dataset}.</p>",
+      "summary": "<p>Interact with your BigQuery dataset. Create a Dataset instance with<br />{module:bigquery#createDataset} or {module:bigquery#dataset}.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": true,
+    "isEvent": false,
+    "ignore": false,
+    "line": 42,
+    "codeStart": 49,
+    "code": "function Dataset(bigQuery, id) {\n  this.bigQuery = bigQuery;\n  this.id = id;\n  this.metadata = {};\n}",
+    "ctx": {
+      "type": "constructor",
+      "name": "Dataset",
+      "string": "Dataset()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "name": "options",
+        "description": "<ul>\n<li>Table id or configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "options.id",
+        "description": "<ul>\n<li>The id of the table.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "options.schema",
+        "description": "<ul>\n<li>A comma-separated list of name:type     pairs. Valid types are &quot;string&quot;, &quot;integer&quot;, &quot;float&quot;, &quot;boolean&quot;, and<br />  &quot;timestamp&quot;. If the type is omitted, it is assumed to be &quot;string&quot;.<br />  Example: &quot;name:string, age:integer&quot;. Schemas can also be specified as a<br />  JSON array of fields, which allows for nested and repeated fields. See<br />  a <a href=\"http://goo.gl/sl8Dmg\">Table resource</a> for more detailed information.</li>\n</ul>\n",
+        "types": [
+          "string",
+          "object"
+        ],
+        "typesDescription": "<code>string</code>|<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var tableConfig = {\n  id: 'institution_data',\n\n  // From the data.gov CSV dataset (http://goo.gl/kSE7z6):\n  schema: 'UNITID,INSTNM,ADDR,CITY,STABBR,ZIP,FIPS,OBEREG,CHFNM,...'\n};\n\ndataset.createTable(tableConfig, function(err, table) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a table given a tableId or configuration object.</p>",
+      "summary": "<p>Create a table given a tableId or configuration object.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 55,
+    "codeStart": 78,
+    "code": "Dataset.prototype.createTable = function(options, callback) {\n  var that = this;\n\n  extend(true, options, {\n    tableReference: {\n      datasetId: this.id,\n      projectId: this.bigQuery.projectId,\n      tableId: options.id\n    }\n  });\n\n  if (util.is(options.schema, 'string')) {\n    options.schema = Table.createSchemaFromString_(options.schema);\n  }\n\n  delete options.id;\n\n  this.makeReq_('POST', '/tables', null, options, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var table = that.table(resp.tableReference.tableId);\n    table.metadata = resp;\n\n    callback(null, table);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Dataset",
+      "cons": "Dataset",
+      "name": "createTable",
+      "string": "Dataset.prototype.createTable()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "name": "options",
+        "description": "<ul>\n<li>The configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "options.force",
+        "description": "<ul>\n<li>Force delete dataset and all tables.     Default: false.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Delete the dataset, only if it does not have any tables.\n//-\ndataset.delete(function(err) {});\n\n//-\n// Delete the dataset and any tables it contains.\n//-\ndataset.delete({ force: true }, function(err) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Delete the dataset.</p>",
+      "summary": "<p>Delete the dataset.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 108,
+    "codeStart": 127,
+    "code": "Dataset.prototype.delete = function(options, callback) {\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  var query = {\n    deleteContents: !!options.force\n  };\n\n  this.makeReq_('DELETE', '', query, null, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Dataset",
+      "cons": "Dataset",
+      "name": "delete",
+      "string": "Dataset.prototype.delete()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "dataset.getMetadata(function(err, metadata) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Get the metadata for the Dataset.</p>",
+      "summary": "<p>Get the metadata for the Dataset.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 140,
+    "codeStart": 148,
+    "code": "Dataset.prototype.getMetadata = function(callback) {\n  var that = this;\n  this.makeReq_('GET', '', null, null, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Dataset",
+      "cons": "Dataset",
+      "name": "getMetadata",
+      "string": "Dataset.prototype.getMetadata()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "name": "query",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "query.maxResults",
+        "description": "<ul>\n<li>Maximum number of results to return.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "query.pageToken",
+        "description": "<ul>\n<li>Token returned from a previous call, to     request the next page of results.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "dataset.getTables(function(err, tables, nextQuery) {\n  // If `nextQuery` is non-null, there are more results to fetch.\n});"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a list of tables.</p>",
+      "summary": "<p>Get a list of tables.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 162,
+    "codeStart": 176,
+    "code": "Dataset.prototype.getTables = function(query, callback) {\n  var that = this;\n\n  if (util.is(query, 'function')) {\n    callback = query;\n    query = {};\n  }\n\n  query = query || {};\n\n  this.makeReq_('GET', '/tables', query, null, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var tables = (resp.tables || []).map(function(tableObject) {\n      var table = that.table(tableObject.id);\n      table.metadata = tableObject;\n      return table;\n    });\n\n    callback(null, tables, nextQuery);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Dataset",
+      "cons": "Dataset",
+      "name": "getTables",
+      "string": "Dataset.prototype.getTables()"
+    }
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Run a query scoped to your dataset.</p><p>See {module:bigquery#query} for full documentation of this method.</p>",
+      "summary": "<p>Run a query scoped to your dataset.</p>",
+      "body": "<p>See {module:bigquery#query} for full documentation of this method.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 210,
+    "codeStart": 215,
+    "code": "Dataset.prototype.query = function(options, callback) {\n  if (util.is(options, 'string')) {\n    options = {\n      query: options\n    };\n  }\n\n  options = extend(true, {}, options, {\n    defaultDataset: {\n      datasetId: this.id\n    }\n  });\n\n  return this.bigQuery.query(options, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Dataset",
+      "cons": "Dataset",
+      "name": "query",
+      "string": "Dataset.prototype.query()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "name": "metadata",
+        "description": "<ul>\n<li>Metadata to save on the Dataset.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var metadata = {\n  description: 'Information for every institution in the 2013 IPEDS universe'\n};\n\ndataset.setMetadata(metadata, function(err) {});"
+      }
+    ],
+    "description": {
+      "full": "<p>Sets the metadata of the Dataset object.</p>",
+      "summary": "<p>Sets the metadata of the Dataset object.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 231,
+    "codeStart": 244,
+    "code": "Dataset.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n\n  this.makeReq_('PATCH', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Dataset",
+      "cons": "Dataset",
+      "name": "setMetadata",
+      "string": "Dataset.prototype.setMetadata()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "name": "id",
+        "description": "<ul>\n<li>The ID of the table.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "types": [
+          "module:bigquery/table"
+        ],
+        "typesDescription": "module:<a href=\"module%3Abigquery%2Ftable.html\">bigquery/table</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": ""
+      },
+      {
+        "type": "example",
+        "string": "var institutions = dataset.table('institution_data');"
+      }
+    ],
+    "description": {
+      "full": "<p>Return a new instance of reference to an existing Table object.</p>",
+      "summary": "<p>Return a new instance of reference to an existing Table object.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 259,
+    "codeStart": 268,
+    "code": "Dataset.prototype.table = function(id) {\n  return new Table(this, id);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Dataset",
+      "cons": "Dataset",
+      "name": "table",
+      "string": "Dataset.prototype.table()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "visibility": "private"
+      },
+      {
+        "type": "param",
+        "name": "method",
+        "description": "<ul>\n<li>Action.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "path",
+        "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "query",
+        "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "body",
+        "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Pass through this request to BigQuery&#39;s request handler, first prepending the<br />path with the dataset.</p>",
+      "summary": "<p>Pass through this request to BigQuery&#39;s request handler, first prepending the<br />path with the dataset.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 272,
+    "codeStart": 284,
+    "code": "Dataset.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/datasets/' + this.id + path;\n  this.bigQuery.makeReq_(method, path, query, body, callback);\n};\n\nmodule.exports = Dataset;",
+    "ctx": {
+      "type": "method",
+      "constructor": "Dataset",
+      "cons": "Dataset",
+      "name": "makeReq_",
+      "string": "Dataset.prototype.makeReq_()"
+    }
+  }
+]
