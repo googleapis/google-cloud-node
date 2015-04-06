@@ -20,35 +20,45 @@
 
 var assert = require('assert');
 var duplexify = require('duplexify');
-var gsa = require('google-service-account');
+var extend = require('extend');
+var googleAuthLibrary = require('google-auth-library');
 var mockery = require('mockery');
 var request = require('request');
 var stream = require('stream');
 
-var gsa_Override;
-function fakeGsa() {
-  var args = [].slice.apply(arguments);
-  var results = (gsa_Override || gsa).apply(null, args);
-  return results || { getCredentials: function() {} };
+var googleAuthLibrary_Override;
+function fakeGoogleAuthLibrary() {
+  return (googleAuthLibrary_Override || googleAuthLibrary)
+    .apply(null, arguments);
 }
 
 var request_Override;
 function fakeRequest() {
-  var args = [].slice.apply(arguments);
-  return (request_Override || request).apply(null, args);
+  return (request_Override || request).apply(null, arguments);
 }
 
 describe('common/util', function() {
   var util;
+  var utilOverrides = {};
 
   before(function() {
-    mockery.registerMock('google-service-account', fakeGsa);
+    mockery.registerMock('google-auth-library', fakeGoogleAuthLibrary);
     mockery.registerMock('request', fakeRequest);
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
     });
     util = require('../../lib/common/util');
+    var util_Cached = extend(true, {}, util);
+
+    // Override all util methods, allowing them to be mocked. Overrides are
+    // removed before each test.
+    Object.keys(util).forEach(function(utilMethod) {
+      util[utilMethod] = function() {
+        return (utilOverrides[utilMethod] || util_Cached[utilMethod])
+          .apply(this, arguments);
+      };
+    });
   });
 
   after(function() {
@@ -57,8 +67,9 @@ describe('common/util', function() {
   });
 
   beforeEach(function() {
-    gsa_Override = null;
+    googleAuthLibrary_Override = null;
     request_Override = null;
+    utilOverrides = {};
   });
 
   describe('arrayize', function() {
@@ -287,472 +298,441 @@ describe('common/util', function() {
     });
   });
 
-  describe('makeAuthorizedRequest', function() {
-    it('should pass configuration to gsa', function(done) {
-      var config = { keyFile: 'key', scopes: [1, 2] };
+  describe('getAuthClient', function() {
+    it('should use google-auth-library', function() {
+      var googleAuthLibraryCalled = false;
 
-      gsa_Override = function(cfg) {
+      googleAuthLibrary_Override = function() {
+        googleAuthLibraryCalled = true;
+        return {
+          getApplicationDefault: util.noop
+        };
+      };
+
+      util.getAuthClient({});
+
+      assert.strictEqual(googleAuthLibraryCalled, true);
+    });
+
+    it('should create a JWT auth client from a keyFile', function(done) {
+      var jwt = {};
+
+      googleAuthLibrary_Override = function() {
+        return {
+          JWT: function() { return jwt; }
+        };
+      };
+
+      var config = {
+        keyFile: 'key.json',
+        email: 'example@example.com',
+        scopes: ['dev.scope']
+      };
+
+      util.getAuthClient(config, function(err, authClient) {
+        assert.ifError(err);
+
+        assert.equal(jwt.keyFile, config.keyFile);
+        assert.equal(jwt.email, config.email);
+        assert.deepEqual(jwt.scopes, config.scopes);
+
+        assert.deepEqual(authClient, jwt);
+
+        done();
+      });
+    });
+
+    it('should create an auth client from credentials', function(done) {
+      var credentialsSet;
+
+      googleAuthLibrary_Override = function() {
+        return {
+          fromJSON: function(credentials, callback) {
+            credentialsSet = credentials;
+            callback(null, {});
+          }
+        };
+      };
+
+      var config = {
+        credentials: { a: 'b', c: 'd' }
+      };
+
+      util.getAuthClient(config, function() {
+        assert.deepEqual(credentialsSet, config.credentials);
+        done();
+      });
+    });
+
+    it('should create an auth client from magic', function(done) {
+      googleAuthLibrary_Override = function() {
+        return {
+          getApplicationDefault: function(callback) {
+            callback(null, {});
+          }
+        };
+      };
+
+      util.getAuthClient({}, done);
+    });
+
+    it('should scope an auth client if necessary', function(done) {
+      var config = {
+        scopes: ['a.scope', 'b.scope']
+      };
+
+      var fakeAuthClient = {
+        createScopedRequired: function() {
+          return true;
+        },
+        createScoped: function(scopes) {
+          assert.deepEqual(scopes, config.scopes);
+          return fakeAuthClient;
+        },
+        getAccessToken: function() {}
+      };
+
+      googleAuthLibrary_Override = function() {
+        return {
+          getApplicationDefault: function(callback) {
+            callback(null, fakeAuthClient);
+          }
+        };
+      };
+
+      util.getAuthClient(config, done);
+    });
+  });
+
+  describe('authorizeRequest', function() {
+    it('should get an auth client', function(done) {
+      var config = { a: 'b', c: 'd' };
+
+      utilOverrides.getAuthClient = function(cfg) {
         assert.deepEqual(cfg, config);
         done();
       };
 
-      util.makeAuthorizedRequest(config);
+      util.authorizeRequest(config);
     });
 
-    it('should not authenticate requests with a custom API', function(done) {
-      var makeRequest = util.makeAuthorizedRequest({ customEndpoint: true });
+    it('should ignore "Could not load" error from google-auth', function(done) {
+      var reqOpts = { a: 'b', c: 'd' };
+      var couldNotLoadError = new Error('Could not load');
 
-      var gsaCalled = false;
-      gsa_Override = function() {
-        gsaCalled = true;
+      utilOverrides.getAuthClient = function(config, callback) {
+        callback(couldNotLoadError);
       };
 
-      makeRequest({}, {
-        onAuthorized: function(err) {
-          assert.ifError(err);
-          assert.strictEqual(gsaCalled, false);
+      util.authorizeRequest({}, reqOpts, function(err, authorizedReqOpts) {
+        assert.ifError(err);
+        assert.deepEqual(reqOpts, authorizedReqOpts);
+        done();
+      });
+    });
+
+    it('should return an error to the callback', function(done) {
+      var error = new Error('Error.');
+
+      utilOverrides.getAuthClient = function(config, callback) {
+        callback(error);
+      };
+
+      util.authorizeRequest({}, {}, function(err) {
+        assert.deepEqual(err, error);
+        done();
+      });
+    });
+
+    it('should get an access token', function(done) {
+      var fakeAuthClient = {
+        getAccessToken: function() {
           done();
         }
+      };
+
+      utilOverrides.getAuthClient = function(config, callback) {
+        callback(null, fakeAuthClient);
+      };
+
+      util.authorizeRequest();
+    });
+
+    it('should return an access token error to callback', function(done) {
+      var error = new Error('Error.');
+
+      var fakeAuthClient = {
+        getAccessToken: function(callback) {
+          callback(error);
+        }
+      };
+
+      utilOverrides.getAuthClient = function(config, callback) {
+        callback(null, fakeAuthClient);
+      };
+
+      util.authorizeRequest({}, {}, function(err) {
+        assert.deepEqual(err, error);
+        done();
       });
     });
 
-    it('should return gsa.getCredentials function', function() {
-      var getCredentials = util.makeAuthorizedRequest({}).getCredentials;
-      assert.equal(typeof getCredentials, 'function');
-    });
+    it('should extend the request options with token', function(done) {
+      var token = 'abctoken';
 
-    describe('makeRequest', function() {
-      it('should add a user agent onto headers', function(done) {
-        gsa_Override = function() {
-          return function authorize(reqOpts) {
-            assert(reqOpts.headers['User-Agent'].indexOf('gcloud') > -1);
-            done();
-          };
-        };
+      var reqOpts = {
+        uri: 'a',
+        headers: {
+          a: 'b',
+          c: 'd'
+        }
+      };
 
-        var makeRequest = util.makeAuthorizedRequest({});
-        makeRequest({});
+      var expectedAuthorizedReqOpts = extend(true, {}, reqOpts, {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
       });
 
-      it('should extend an existing user agent', function(done) {
-        gsa_Override = function() {
-          return function authorize(reqOpts) {
-            var index = reqOpts.headers['User-Agent'].indexOf('test; gcloud');
-            assert.equal(index, 0);
+      var fakeAuthClient = {
+        getAccessToken: function(callback) {
+          callback(null, token);
+        }
+      };
+
+      utilOverrides.getAuthClient = function(config, callback) {
+        callback(null, fakeAuthClient);
+      };
+
+      util.authorizeRequest({}, reqOpts, function(err, authorizedReqOpts) {
+        assert.ifError(err);
+
+        assert.deepEqual(authorizedReqOpts, expectedAuthorizedReqOpts);
+
+        done();
+      });
+    });
+  });
+
+  describe('makeAuthorizedRequestFactory', function() {
+    it('should return a function', function() {
+      assert.equal(typeof util.makeAuthorizedRequestFactory(), 'function');
+    });
+
+    describe('customEndpoint (no authorization attempted)', function() {
+      var makeAuthorizedRequest;
+
+      beforeEach(function() {
+        makeAuthorizedRequest = util.makeAuthorizedRequestFactory({
+          customEndpoint: true
+        });
+      });
+
+      it('should pass options back to onAuthorized callback', function(done) {
+        var reqOpts = { a: 'b', c: 'd' };
+
+        makeAuthorizedRequest(reqOpts, {
+          onAuthorized: function(err, authorizedReqOpts) {
+            assert.ifError(err);
+            assert.deepEqual(reqOpts, authorizedReqOpts);
             done();
-          };
+          }
+        });
+      });
+
+      it('should not authenticate requests with a custom API', function(done) {
+        var reqOpts = { a: 'b', c: 'd' };
+
+        utilOverrides.makeRequest = function(rOpts) {
+          assert.deepEqual(rOpts, reqOpts);
+          done();
         };
 
-        var makeRequest = util.makeAuthorizedRequest({});
-        makeRequest({ headers: { 'User-Agent': 'test' } });
+        makeAuthorizedRequest(reqOpts, assert.ifError);
+      });
+    });
+
+    describe('needs authorization', function() {
+      it('should pass correct arguments to authorizeRequest', function(done) {
+        var config = { a: 'b', c: 'd' };
+        var reqOpts = { e: 'f', g: 'h' };
+
+        utilOverrides.authorizeRequest = function(cfg, rOpts) {
+          assert.deepEqual(cfg, config);
+          assert.deepEqual(rOpts, reqOpts);
+          done();
+        };
+
+        var makeAuthorizedRequest = util.makeAuthorizedRequestFactory(config);
+        makeAuthorizedRequest(reqOpts);
+      });
+
+      describe('authorization errors', function() {
+        var error = new Error('Error.');
+
+        beforeEach(function() {
+          utilOverrides.authorizeRequest = function(cfg, rOpts, callback) {
+            callback(error);
+          };
+        });
+
+        it('should invoke the callback with error', function(done) {
+          var makeAuthorizedRequest = util.makeAuthorizedRequestFactory();
+          makeAuthorizedRequest({}, function(err) {
+            assert.deepEqual(err, error);
+            done();
+          });
+        });
+
+        it('should invoke the onAuthorized handler with error', function(done) {
+          var makeAuthorizedRequest = util.makeAuthorizedRequestFactory();
+          makeAuthorizedRequest({}, {
+            onAuthorized: function(err) {
+              assert.deepEqual(err, error);
+              done();
+            }
+          });
+        });
+      });
+
+      describe('authorization success', function() {
+        var reqOpts = { a: 'b', c: 'd' };
+
+        it('should return the authorized request to callback', function(done) {
+          utilOverrides.authorizeRequest = function(cfg, rOpts, callback) {
+            callback(null, rOpts);
+          };
+
+          var makeAuthorizedRequest = util.makeAuthorizedRequestFactory();
+          makeAuthorizedRequest(reqOpts, {
+            onAuthorized: function(err, authorizedReqOpts) {
+              assert.deepEqual(authorizedReqOpts, reqOpts);
+              done();
+            }
+          });
+        });
+
+        it('should make request with correct options', function(done) {
+          var config = { a: 'b', c: 'd' };
+
+          utilOverrides.authorizeRequest = function(cfg, rOpts, callback) {
+            callback(null, rOpts);
+          };
+
+          utilOverrides.makeRequest = function(authorizedReqOpts, cfg, cb) {
+            assert.deepEqual(authorizedReqOpts, reqOpts);
+            assert.deepEqual(cfg, config);
+            cb();
+          };
+
+          var makeAuthorizedRequest = util.makeAuthorizedRequestFactory(config);
+          makeAuthorizedRequest(reqOpts, done);
+        });
+      });
+    });
+
+    describe('getCredentials', function() {
+      var fakeAuthClient = {
+        email: 'fake-email@example.com',
+        key: 'fake-key',
+
+        authorize: function(callback) { callback(); }
+      };
+      var config = { a: 'b', c: 'd' };
+
+      it('should return getCredentials method', function() {
+        utilOverrides.getAuthClient = function(config, callback) {
+          callback(null, fakeAuthClient);
+        };
+
+        var makeAuthorizedRequest =
+          util.makeAuthorizedRequestFactory(config, assert.ifError);
+
+        assert.equal(typeof makeAuthorizedRequest.getCredentials, 'function');
+      });
+
+      it('should pass config to getAuthClient', function(done) {
+        utilOverrides.getAuthClient = function(cfg) {
+          assert.deepEqual(cfg, config);
+          done();
+        };
+
+        var makeAuthorizedRequest =
+          util.makeAuthorizedRequestFactory(config, assert.ifError);
+
+        makeAuthorizedRequest.getCredentials();
       });
 
       it('should execute callback with error', function(done) {
         var error = new Error('Error.');
 
-        gsa_Override = function() {
-          return function authorize(reqOpts, callback) {
-            callback(error);
-          };
+        utilOverrides.getAuthClient = function(config, callback) {
+          callback(error);
         };
 
-        var makeRequest = util.makeAuthorizedRequest({});
-        makeRequest({}, function(err) {
-          assert.equal(err, error);
+        var makeAuthorizedRequest =
+          util.makeAuthorizedRequestFactory(config, assert.ifError);
+
+        makeAuthorizedRequest.getCredentials(function(err) {
+          assert.deepEqual(err, error);
           done();
         });
       });
 
-      it('should throw if not GCE/GAE & missing credentials', function() {
-        gsa_Override = function() {
-          return function authorize(reqOpts, callback) {
-            // Simulate the metadata server not existing.
-            callback({ code: 'ENOTFOUND' });
-          };
+      it('should authorize the connection', function(done) {
+        fakeAuthClient.authorize = function(callback) {
+          callback();
         };
 
-        assert.throws(function() {
-          // Don't provide a keyFile or credentials object.
-          var connectionConfig = {};
-          var makeRequest = util.makeAuthorizedRequest(connectionConfig);
-          makeRequest({}, util.noop);
-        }, /A connection to gcloud must be established/);
-      });
-
-      it('should handle malformed key response', function(done) {
-        var makeRequest = util.makeAuthorizedRequest({
-          credentials: {
-            client_email: 'invalid@email',
-            private_key: 'invalid-key'
-          }
-        });
-
-        makeRequest({}, function (err) {
-          var errorMessage = [
-            'Your private key is in an unexpected format and cannot be used.',
-            'Please try again with another private key.'
-          ].join(' ');
-          assert.equal(err.message, errorMessage);
-          done();
-        });
-      });
-
-      it('should try to reconnect if token invalid', function(done) {
-        var attempts = 0;
-        var expectedAttempts = 2;
-        var error = { code: 401 };
-
-        gsa_Override = function() {
-          return function authorize(reqOpts, callback) {
-            attempts++;
-            callback(error);
-          };
+        utilOverrides.getAuthClient = function(config, callback) {
+          callback(null, fakeAuthClient);
         };
 
-        var makeRequest = util.makeAuthorizedRequest({});
-        makeRequest({}, function (err) {
-          assert.equal(attempts, expectedAttempts);
-          assert.equal(err, error);
-          done();
-        });
+        var makeAuthorizedRequest =
+          util.makeAuthorizedRequestFactory(config, assert.ifError);
+
+        makeAuthorizedRequest.getCredentials(done);
       });
 
-      it('should execute the onauthorized callback', function(done) {
-        gsa_Override = function() {
-          return function authorize(reqOpts, callback) {
-            callback();
-          };
-        };
 
-        var makeRequest = util.makeAuthorizedRequest({});
-        makeRequest({}, { onAuthorized: done });
-      });
-
-      it('should execute the onauthorized callback with error', function(done) {
+      it('should execute callback with authorization error', function(done) {
         var error = new Error('Error.');
 
-        gsa_Override = function() {
-          return function authorize(reqOpts, callback) {
-            callback(error);
-          };
+        fakeAuthClient.authorize = function(cb) {
+          cb(error);
         };
 
-        var makeRequest = util.makeAuthorizedRequest({});
-        makeRequest({}, {
-          onAuthorized: function(err) {
-            assert.equal(err, error);
-            done();
-          }
-        });
-      });
-
-      it('should make the authorized request', function(done) {
-        var authorizedReqOpts = { a: 'b', c: 'd' };
-
-        gsa_Override = function() {
-          return function authorize(reqOpts, callback) {
-            callback(null, authorizedReqOpts);
-          };
+        utilOverrides.getAuthClient = function(config, callback) {
+          callback(null, fakeAuthClient);
         };
 
-        request_Override = function(reqOpts) {
-          assert.deepEqual(reqOpts, authorizedReqOpts);
-          done();
-        };
+        var makeAuthorizedRequest =
+          util.makeAuthorizedRequestFactory(config, assert.ifError);
 
-        var makeRequest = util.makeAuthorizedRequest({});
-        makeRequest({}, assert.ifError);
-      });
-
-      it('should retry rate limit requests by default', function(done) {
-        var attemptedRetries = 0;
-        var error = new Error('Rate Limit Error.');
-        error.code = 429; // Rate limit error
-
-        var authorizedReqOpts = { a: 'b', c: 'd' };
-
-        var old_setTimeout = setTimeout;
-        setTimeout = function(callback, time) {
-          var MIN_TIME = (Math.pow(2, attemptedRetries) * 1000);
-          var MAX_TIME = (Math.pow(2, attemptedRetries) * 1000) + 1000;
-          assert(time >= MIN_TIME && time <= MAX_TIME);
-          attemptedRetries++;
-          callback(); // make the request again
-        };
-
-        gsa_Override = function() {
-          return function authorize(reqOpts, callback) {
-            callback(null, authorizedReqOpts);
-          };
-        };
-
-        request_Override = function(reqOpts, callback) {
-          if (attemptedRetries === 3) {
-            setTimeout = old_setTimeout;
-            done();
-          } else {
-            callback(error); // this callback should check for rate limits
-          }
-        };
-
-        var makeRequest = util.makeAuthorizedRequest({});
-        makeRequest({}, assert.ifError);
-      });
-
-      it('should retry rate limits 3x on 429, 500, 503', function(done) {
-        var attemptedRetries = 0;
-        var codes = [429, 503, 500, 'done'];
-        var error = new Error('Rate Limit Error.');
-        error.code = codes[0]; // Rate limit error
-
-        var authorizedReqOpts = { a: 'b', c: 'd' };
-
-        var old_setTimeout = setTimeout;
-        setTimeout = function(callback, time) {
-          var MIN_TIME = (Math.pow(2, attemptedRetries) * 1000);
-          var MAX_TIME = (Math.pow(2, attemptedRetries) * 1000) + 1000;
-          assert(time >= MIN_TIME && time <= MAX_TIME);
-          attemptedRetries++;
-          error.code = codes[attemptedRetries]; // test a new code
-          callback(); // make the request again
-        };
-
-        gsa_Override = function() {
-          return function authorize(reqOpts, callback) {
-            callback(null, authorizedReqOpts);
-          };
-        };
-
-        request_Override = function(reqOpts, callback) {
-          callback(error); // this callback should check for rate limits
-        };
-
-        var makeRequest = util.makeAuthorizedRequest({});
-        makeRequest({}, function(err) {
-          setTimeout = old_setTimeout;
-          assert.equal(err, error);
-          assert.equal(err.code, 'done');
+        makeAuthorizedRequest.getCredentials(function(err) {
+          assert.deepEqual(err, error);
           done();
         });
       });
 
-      it('should retry rate limits on API errors', function(done) {
-        var attemptedRetries = 0;
-        var codes = [429, 503, 500, 'done'];
-        var error = new Error('Rate Limit Error.');
-        error.code = codes[0]; // Rate limit error
-
-        var authorizedReqOpts = { a: 'b', c: 'd' };
-
-        var old_setTimeout = setTimeout;
-        setTimeout = function(callback, time) {
-          var MIN_TIME = (Math.pow(2, attemptedRetries) * 1000);
-          var MAX_TIME = (Math.pow(2, attemptedRetries) * 1000) + 1000;
-          assert(time >= MIN_TIME && time <= MAX_TIME);
-          attemptedRetries++;
-          error.code = codes[attemptedRetries]; // test a new code
-          callback(); // make the request again
+      it('should exec callback with client_email & client_key', function(done) {
+        fakeAuthClient.authorize = function(callback) {
+          callback();
         };
 
-        gsa_Override = function() {
-          return function authorize(reqOpts, callback) {
-            callback(null, authorizedReqOpts);
-          };
+        utilOverrides.getAuthClient = function(config, callback) {
+          callback(null, fakeAuthClient);
         };
 
-        request_Override = function(reqOpts, callback) {
-          callback(null, null, { error: error });
-        };
+        var makeAuthorizedRequest =
+          util.makeAuthorizedRequestFactory(config, assert.ifError);
 
-        var makeRequest = util.makeAuthorizedRequest({});
-        makeRequest({}, function(err) {
-          setTimeout = old_setTimeout;
-          assert.equal(err.message, 'Rate Limit Error.');
-          assert.equal(err.code, 'done');
-          done();
-        });
-      });
+        makeAuthorizedRequest.getCredentials(function(err, credentials) {
+          assert.deepEqual(credentials, {
+            client_email: fakeAuthClient.email,
+            private_key: fakeAuthClient.key
+          });
 
-      it('should retry rate limits on rateLimitExceeded', function(done) {
-        var attemptedRetries = 0;
-        var error = new Error('Rate Limit Error.');
-        error.code = 403; // not a rate limit code!
-        error.errors = [{ reason: 'rateLimitExceeded' }];
-
-        var authorizedReqOpts = { a: 'b', c: 'd' };
-
-        var old_setTimeout = setTimeout;
-        setTimeout = function(callback, time) {
-          var MIN_TIME = (Math.pow(2, attemptedRetries) * 1000);
-          var MAX_TIME = (Math.pow(2, attemptedRetries) * 1000) + 1000;
-          assert(time >= MIN_TIME && time <= MAX_TIME);
-          attemptedRetries++;
-          callback(); // make the request again
-        };
-
-        gsa_Override = function() {
-          return function authorize(reqOpts, callback) {
-            callback(null, authorizedReqOpts);
-          };
-        };
-
-        request_Override = function(reqOpts, callback) {
-          callback(null, null, { error: error });
-        };
-
-        var makeRequest = util.makeAuthorizedRequest({});
-        makeRequest({}, function(err) {
-          setTimeout = old_setTimeout;
-          assert.equal(attemptedRetries, 3);
-          assert.equal(err.message, 'Rate Limit Error.');
-          done();
-        });
-      });
-
-      it('should retry rate limits on userRateLimitExceeded', function(done) {
-        var attemptedRetries = 0;
-        var error = new Error('Rate Limit Error.');
-        error.code = 403; // not a rate limit code!
-        error.errors = [{ reason: 'userRateLimitExceeded' }];
-
-        var authorizedReqOpts = { a: 'b', c: 'd' };
-
-        var old_setTimeout = setTimeout;
-        setTimeout = function(callback, time) {
-          var MIN_TIME = (Math.pow(2, attemptedRetries) * 1000);
-          var MAX_TIME = (Math.pow(2, attemptedRetries) * 1000) + 1000;
-          assert(time >= MIN_TIME && time <= MAX_TIME);
-          attemptedRetries++;
-          callback(); // make the request again
-        };
-
-        gsa_Override = function() {
-          return function authorize(reqOpts, callback) {
-            callback(null, authorizedReqOpts);
-          };
-        };
-
-        request_Override = function(reqOpts, callback) {
-          callback(null, null, { error: error });
-        };
-
-        var makeRequest = util.makeAuthorizedRequest({});
-        makeRequest({}, function(err) {
-          setTimeout = old_setTimeout;
-          assert.equal(attemptedRetries, 3);
-          assert.equal(err.message, 'Rate Limit Error.');
-          done();
-        });
-      });
-
-      it('should retry rate limits 3x by default', function(done) {
-        var attemptedRetries = 0;
-        var error = new Error('Rate Limit Error.');
-        error.code = 429; // Rate limit error
-
-        var authorizedReqOpts = { a: 'b', c: 'd' };
-
-        var old_setTimeout = setTimeout;
-        setTimeout = function(callback, time) {
-          var MIN_TIME = (Math.pow(2, attemptedRetries) * 1000);
-          var MAX_TIME = (Math.pow(2, attemptedRetries) * 1000) + 1000;
-          assert(time >= MIN_TIME && time <= MAX_TIME);
-          attemptedRetries++;
-          callback(); // make the request again
-        };
-
-        gsa_Override = function() {
-          return function authorize(reqOpts, callback) {
-            callback(null, authorizedReqOpts);
-          };
-        };
-
-        request_Override = function(reqOpts, callback) {
-          callback(error); // this callback should check for rate limits
-        };
-
-        var makeRequest = util.makeAuthorizedRequest({});
-        makeRequest({}, function(err) {
-          setTimeout = old_setTimeout;
-          assert.equal(attemptedRetries, 3);
-          assert.equal(err, error);
-          done();
-        });
-      });
-
-      it('should retry rate limits by maxRetries if provided', function(done) {
-        var MAX_RETRIES = 5;
-        var attemptedRetries = 0;
-        var error = new Error('Rate Limit Error.');
-        error.code = 429; // Rate limit error
-
-        var authorizedReqOpts = { a: 'b', c: 'd' };
-
-        var old_setTimeout = setTimeout;
-        setTimeout = function(callback, time) {
-          var MIN_TIME = (Math.pow(2, attemptedRetries) * 1000);
-          var MAX_TIME = (Math.pow(2, attemptedRetries) * 1000) + 1000;
-          assert(time >= MIN_TIME && time <= MAX_TIME);
-          attemptedRetries++;
-          callback(); // make the request again
-        };
-
-        gsa_Override = function() {
-          return function authorize(reqOpts, callback) {
-            callback(null, authorizedReqOpts);
-          };
-        };
-
-        request_Override = function(reqOpts, callback) {
-          callback(error); // this callback should check for rate limits
-        };
-
-        var makeRequest = util.makeAuthorizedRequest({
-          maxRetries: MAX_RETRIES
-        });
-
-        makeRequest({}, function(err) {
-          setTimeout = old_setTimeout;
-          assert.equal(attemptedRetries, MAX_RETRIES);
-          assert.equal(err, error);
-          done();
-        });
-      });
-
-      it('should not retry rate limits if autoRetry is false', function(done) {
-        var attemptedRetries = 0;
-        var error = new Error('Rate Limit Error.');
-        error.code = 429; // Rate limit error
-
-        var authorizedReqOpts = { a: 'b', c: 'd' };
-
-        var old_setTimeout = setTimeout;
-        setTimeout = function(callback, time) {
-          var MIN_TIME = (Math.pow(2, attemptedRetries) * 1000);
-          var MAX_TIME = (Math.pow(2, attemptedRetries) * 1000) + 1000;
-          assert(time >= MIN_TIME && time <= MAX_TIME);
-          attemptedRetries++;
-          callback(); // make the request again
-        };
-
-        gsa_Override = function() {
-          return function authorize(reqOpts, callback) {
-            callback(null, authorizedReqOpts);
-          };
-        };
-
-        request_Override = function(reqOpts, callback) {
-          callback(error); // this callback should check for rate limits
-        };
-
-        var makeRequest = util.makeAuthorizedRequest({
-          autoRetry: false
-        });
-
-        makeRequest({}, function(err) {
-          setTimeout = old_setTimeout;
-          assert.equal(attemptedRetries, 0);
-          assert.equal(err, error);
           done();
         });
       });
@@ -776,6 +756,229 @@ describe('common/util', function() {
       var obj = {};
       util.propAssign('prop', 'value')(obj);
       assert.equal(obj.prop, 'value');
+    });
+  });
+
+  describe('shouldRetryRequest', function() {
+    it('should return false if there is no error', function() {
+      assert.strictEqual(util.shouldRetryRequest(), false);
+    });
+
+    it('should return false from generic error', function() {
+      var error = new Error('Generic error with no code');
+
+      assert.strictEqual(util.shouldRetryRequest(error), false);
+    });
+
+    it('should return true with error code 429', function() {
+      var error = new Error('429');
+      error.code = 429;
+
+      assert.strictEqual(util.shouldRetryRequest(error), true);
+    });
+
+    it('should return true with error code 500', function() {
+      var error = new Error('500');
+      error.code = 500;
+
+      assert.strictEqual(util.shouldRetryRequest(error), true);
+    });
+
+    it('should return true with error code 503', function() {
+      var error = new Error('503');
+      error.code = 503;
+
+      assert.strictEqual(util.shouldRetryRequest(error), true);
+    });
+
+    it('should detect rateLimitExceeded reason', function() {
+      var rateLimitError = new Error('Rate limit error without code.');
+      rateLimitError.errors = [{ reason: 'rateLimitExceeded' }];
+
+      assert.strictEqual(util.shouldRetryRequest(rateLimitError), true);
+    });
+
+    it('should detect userRateLimitExceeded reason', function() {
+      var rateLimitError = new Error('Rate limit error without code.');
+      rateLimitError.errors = [{ reason: 'userRateLimitExceeded' }];
+
+      assert.strictEqual(util.shouldRetryRequest(rateLimitError), true);
+    });
+  });
+
+  describe('getNextRetryWait', function() {
+    function secs(seconds) {
+      return seconds * 1000;
+    }
+
+    it('should return exponential retry delay', function() {
+      [1, 2, 3, 4, 5].forEach(assertTime);
+
+      function assertTime(retryNumber) {
+        var min = (Math.pow(2, retryNumber) * secs(1));
+        var max = (Math.pow(2, retryNumber) * secs(1)) + secs(1);
+
+        var time = util.getNextRetryWait(retryNumber);
+
+        assert(time >= min && time <= max);
+      }
+    });
+  });
+
+  describe('makeRequest', function() {
+    var PKG = require('../../package.json');
+    var USER_AGENT = 'gcloud-node/' + PKG.version;
+    var reqOpts = { a: 'b', c: 'd' };
+    var expectedReqOpts = extend(true, {}, reqOpts, {
+      headers: {
+        'User-Agent': USER_AGENT
+      }
+    });
+
+    it('should make a request', function(done) {
+      request_Override = function() {
+        done();
+      };
+
+      util.makeRequest({}, assert.ifError, {});
+    });
+
+    it('should add the user agent', function(done) {
+      request_Override = function(rOpts) {
+        assert.deepEqual(rOpts, expectedReqOpts);
+        done();
+      };
+
+      util.makeRequest(reqOpts, assert.ifError, {});
+    });
+
+    it('should let handleResp handle the response', function(done) {
+      var error = new Error('Error.');
+      var response = { a: 'b', c: 'd' };
+      var body = response.a;
+
+      request_Override = function(rOpts, callback) {
+        callback(error, response, body);
+      };
+
+      utilOverrides.handleResp = function(err, resp, bdy) {
+        assert.deepEqual(err, error);
+        assert.deepEqual(resp, response);
+        assert.deepEqual(bdy, body);
+        done();
+      };
+
+      util.makeRequest({}, {}, assert.ifError);
+    });
+
+    describe('request errors', function() {
+      describe('non-rate limit error', function() {
+        it('should return error to callback', function(done) {
+          var nonRateLimitError = new Error('Error.');
+
+          request_Override = function(reqOpts, callback) {
+            callback(nonRateLimitError);
+          };
+
+          util.makeRequest({}, {}, function(err) {
+            assert.deepEqual(err, nonRateLimitError);
+            done();
+          });
+        });
+      });
+
+      describe('rate limit errors', function() {
+        var rateLimitError = new Error('Rate limit error.');
+        rateLimitError.code = 500;
+
+        beforeEach(function() {
+          // Always return a rate limit error.
+          request_Override = function (reqOpts, callback) {
+            callback(rateLimitError);
+          };
+
+          // Always suggest retrying.
+          utilOverrides.shouldRetryRequest = function() {
+            return true;
+          };
+
+          // Always return a 0 retry wait.
+          utilOverrides.getNextRetryWait = function() {
+            return 0;
+          };
+        });
+
+        it('should check with shouldRetryRequest', function(done) {
+          utilOverrides.shouldRetryRequest = function() {
+            done();
+          };
+
+          util.makeRequest({}, {}, util.noop);
+        });
+
+        it('should default to 3 retries', function(done) {
+          var attempts = 0;
+          var expectedAttempts = 4; // the original request + 3 retries
+
+          utilOverrides.handleResp = function(err, resp, body, callback) {
+            attempts++;
+            callback(err);
+          };
+
+          util.makeRequest({}, {}, function(err) {
+            assert.equal(err, rateLimitError);
+            assert.equal(attempts, expectedAttempts);
+            done();
+          });
+        });
+
+        it('should allow max retries to be specified', function(done) {
+          var attempts = 0;
+          var maxRetries = 5;
+          var expectedAttempts = maxRetries + 1; // the original req
+
+          utilOverrides.handleResp = function(err, resp, body, callback) {
+            attempts++;
+            callback(err);
+          };
+
+          util.makeRequest({}, { maxRetries: maxRetries }, function(err) {
+            assert.equal(err, rateLimitError);
+            assert.equal(attempts, expectedAttempts);
+            done();
+          });
+        });
+
+        it('should not retry reqs if autoRetry is false', function(done) {
+          var attempts = 0;
+          var expectedAttempts = 1; // the original req
+
+          utilOverrides.handleResp = function(err, resp, body, callback) {
+            attempts++;
+            callback(err);
+          };
+
+          util.makeRequest({}, { autoRetry: false }, function(err) {
+            assert.equal(err, rateLimitError);
+            assert.equal(attempts, expectedAttempts);
+            done();
+          });
+        });
+      });
+    });
+
+    describe('request success', function() {
+      it('should let handleResp handle response', function(done) {
+        utilOverrides.handleResp = function() {
+          done();
+        };
+
+        request_Override = function(reqOpts, callback) {
+          callback();
+        };
+
+        util.makeRequest({}, {}, assert.ifError);
+      });
     });
   });
 });
