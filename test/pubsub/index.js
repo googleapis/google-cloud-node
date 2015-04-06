@@ -202,11 +202,15 @@ describe('PubSub', function() {
     });
   });
 
-  it('should pass network requests to the connection object', function(done) {
-    var pubsub = new PubSub();
-    request_Override = function() {
-      done();
-    };
-    pubsub.makeReq_();
+  describe('makeReq_', function() {
+    it('should pass network requests to the connection object', function(done) {
+      var pubsub = new PubSub();
+
+      pubsub.makeAuthorizedRequest_ = function() {
+        done();
+      };
+
+      pubsub.makeReq_(null, null, null, null, assert.ifError);
+    });
   });
 });
