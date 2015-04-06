@@ -44,13 +44,10 @@
       <div hljs>$ npm install --save gcloud</div>
       <div hljs>var gcloud = require('gcloud');</div>
       <p>
-        There are a couple of ways to use the <code>gcloud</code> module.
-      </p>
-      <p>
         If you are running your app on Google App Engine or Google Compute Engine, you won't need to worry about supplying connection configuration options to <code>gcloud</code>&mdash; we figure that out for you.
       </p>
       <p>
-        However, if you're running your app elsewhere, you will need to provide this information.
+        However, if you're running your app elsewhere, you will need to provide project details to authenticate API requests.
       </p>
       <div hljs>
 // App Engine and Compute Engine
@@ -58,10 +55,11 @@ var gcloud = require('gcloud');
 
 // Elsewhere
 var gcloud = require('gcloud')({
+  projectId: 'project-id',
   keyFilename: '/path/to/keyfile.json'
 });</div>
       <p>
-        In any environment, you are free to provide these and other default properties, which eventually will be passed to the <code>gcloud</code> sub-modules (Datastore, Storage, etc.).
+        The full set of options which can be passed to gcloud and sub-modules are <a href="#/docs/?method=gcloud">outlined here</a>.
       </p>
     </article>
     <hr>
@@ -85,7 +83,7 @@ var bigquery = gcloud.bigquery();</div>
       </p>
       <div hljs>
 var dataset = gcloud.datastore.dataset({
-  projectId: 'myProject',
+  projectId: 'project-id',
   keyFilename: '/path/to/keyfile.json'
 });</div>
       <p ng-if="!isActiveUrl('/docs/datastore/dataset')">
@@ -103,7 +101,7 @@ var dataset = gcloud.datastore.dataset({
       </p>
       <div hljs>
 var pubsub = gcloud.pubsub({
-  projectId: 'myProject',
+  projectId: 'project-id',
   keyFilename: '/path/to/keyfile.json'
 });</div>
       <p>
