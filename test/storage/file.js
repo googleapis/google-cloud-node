@@ -20,7 +20,7 @@
 
 var assert = require('assert');
 var Bucket = require('../../lib/storage/bucket.js');
-var crc = require('fast-crc32c');
+var crc = require('sse4_crc32');
 var crypto = require('crypto');
 var duplexify = require('duplexify');
 var extend = require('extend');
