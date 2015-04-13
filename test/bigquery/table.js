@@ -698,16 +698,22 @@ describe('BigQuery/Table', function() {
     }, 'file.json');
 
     it('should accept just a File and a callback', function(done) {
+      var mockJob = { id: 'foo' };
+
       table.createWriteStream = function() {
         var ws = new stream.Writable();
         setImmediate(function() {
-          ws.emit('complete');
+          ws.emit('complete', mockJob);
           ws.end();
         });
         return ws;
       };
 
-      table.import(FILEPATH, done);
+      table.import(FILEPATH, function(error, job) {
+        assert.strictEqual(error, null);
+        assert.deepEqual(job, mockJob);
+        done();
+      });
     });
 
     it('should return a stream when a string is given', function() {
