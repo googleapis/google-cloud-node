@@ -136,6 +136,12 @@ describe('Topic', function() {
       }, /Cannot publish/);
     });
 
+    it('should throw if a message is not an object', function() {
+      assert.throws(function() {
+        topic.publish(message);
+      }, /Cannot publish message/);
+    });
+
     it('should send correct api request', function(done) {
       topic.makeReq_ = function(method, path, query, body) {
         assert.equal(method, 'POST');
