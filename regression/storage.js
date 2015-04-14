@@ -732,6 +732,65 @@ describe('storage', function() {
     });
   });
 
+  describe('prefixes', function() {
+    var filenames = ['a/b', 'a/c', 'd', 'e', 'e/f', 'e/f/g'];
+
+    before(function(done) {
+      async.parallel(
+        filenames.map(function(filename) {
+          return function(callback) {
+            var file = bucket.file(filename);
+            var contents = 'test';
+
+            var writeStream = file.createWriteStream({ resumable: false });
+            writeStream.on('error', function() {
+              callback();
+            });
+            writeStream.on('complete', function() {
+              callback();
+            });
+            writeStream.write(contents);
+            writeStream.end();
+          };
+        }), done);
+    });
+
+    after(function(done) {
+      async.parallel(
+        filenames.map(function(filename) {
+          return function(callback) {
+            bucket.file(filename).delete(callback);
+          };
+        }), done);
+    });
+
+    it('should use delimiter', function(done) {
+      var query = { delimiter: '/' };
+      bucket.getFiles(query, function(err, files, nextQuery, prefixes) {
+        assert.ifError(err);
+        assert.equal(files.length, 2);
+        ['a/', 'e/'].forEach(function(val) {
+          assert.equal((prefixes.indexOf(val) > -1), true);
+        });
+        assert.equal(nextQuery, null);
+        done();
+      });
+    });
+
+    it('should use prefix & delimiter', function(done) {
+      var query = { delimiter: '/', prefix: 'e/' };
+      bucket.getFiles(query, function(err, files, nextQuery, prefixes) {
+        assert.ifError(err);
+        assert.equal(files.length, 1);
+        ['e/f/'].forEach(function(val) {
+          assert.equal((prefixes.indexOf(val) > -1), true);
+        });
+        assert.equal(nextQuery, null);
+        done();
+      });
+    });
+  });
+
   describe('sign urls', function() {
     var localFile = fs.readFileSync(files.logo.path);
     var file;
