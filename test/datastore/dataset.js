@@ -14,39 +14,31 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach */
-
 'use strict';
 
 var assert = require('assert');
-var Dataset = require('../../lib/datastore/dataset');
 var util = require('../../lib/common/util.js');
 
 describe('Dataset', function() {
+  var Dataset;
+
+  beforeEach(function() {
+    delete require.cache[require.resolve('../../lib/datastore/dataset')];
+    Dataset = require('../../lib/datastore/dataset');
+  });
+
   describe('instantiation', function() {
     it('should set default API connection details', function() {
-      var ds = new Dataset();
-      assert.equal(ds.apiEndpoint, 'https://www.googleapis.com');
-    });
+      var options = { a: 'b', c: 'd' };
+      var mockApiEndpoint = 'http://localhost:8080';
 
-    it('should set API connection details', function() {
-      var ds = new Dataset({ apiEndpoint: 'http://localhost:8080' });
-      assert.equal(ds.apiEndpoint, 'http://localhost:8080');
-    });
+      Dataset.determineApiEndpoint_ = function (opts) {
+        assert.deepEqual(opts, options);
+        return mockApiEndpoint;
+      };
 
-    it('should remove slashes from the apiEndpoint', function() {
-      var ds1 = new Dataset({ apiEndpoint: 'http://localhost:8080' });
-      var ds2 = new Dataset({ apiEndpoint: 'http://localhost:8080/' });
-      var ds3 = new Dataset({ apiEndpoint: 'http://localhost:8080//' });
-
-      assert.equal(ds1.apiEndpoint, 'http://localhost:8080');
-      assert.equal(ds2.apiEndpoint, 'http://localhost:8080');
-      assert.equal(ds3.apiEndpoint, 'http://localhost:8080');
-    });
-
-    it('should default to http if protocol is unspecified', function() {
-      var ds = new Dataset({ apiEndpoint: 'localhost:8080' });
-      assert.equal(ds.apiEndpoint, 'http://localhost:8080');
+      var ds = new Dataset(options);
+      assert.equal(ds.apiEndpoint, mockApiEndpoint);
     });
   });
 
@@ -173,6 +165,61 @@ describe('Dataset', function() {
     it('should allow removal of namespace', function() {
       var query = dsWithNs.createQuery(null, 'Kind');
       assert.strictEqual(query.namespace, null);
+    });
+  });
+
+  describe('determineApiEndpoint_', function() {
+    it('should default to googleapis.com', function() {
+      delete process.env.DATASTORE_HOST;
+      var expectedApiEndpoint = 'https://www.googleapis.com';
+      assert.equal(Dataset.determineApiEndpoint_({}), expectedApiEndpoint);
+    });
+
+    it('should remove slashes from the apiEndpoint', function() {
+      var expectedApiEndpoint = 'http://localhost:8080';
+
+      assert.equal(Dataset.determineApiEndpoint_({
+        apiEndpoint: expectedApiEndpoint
+      }), expectedApiEndpoint);
+
+      assert.equal(Dataset.determineApiEndpoint_({
+        apiEndpoint: 'http://localhost:8080/'
+      }), expectedApiEndpoint);
+
+      assert.equal(Dataset.determineApiEndpoint_({
+        apiEndpoint: 'http://localhost:8080//'
+      }), expectedApiEndpoint);
+    });
+
+    it('should default to http if protocol is unspecified', function() {
+      var apiEndpoint = Dataset.determineApiEndpoint_({
+        apiEndpoint: 'localhost:8080'
+      });
+      assert.equal(apiEndpoint, 'http://localhost:8080');
+    });
+
+    describe('with DATASTORE_HOST environment variable', function() {
+      var DATASTORE_HOST = 'http://localhost:8080';
+
+      before(function() {
+        process.env.DATASTORE_HOST = DATASTORE_HOST;
+      });
+
+      after(function() {
+        delete process.env.DATASTORE_HOST;
+      });
+
+      it('should use the DATASTORE_HOST env var', function() {
+        assert.equal(Dataset.determineApiEndpoint_({}), DATASTORE_HOST);
+      });
+
+      it('should favor an explicit apiEndpoint option', function() {
+        var expectedApiEndpoint = 'http://apiendpointoverride';
+
+        assert.equal(Dataset.determineApiEndpoint_({
+          apiEndpoint: expectedApiEndpoint
+        }), expectedApiEndpoint);
+      });
     });
   });
 });
