@@ -1122,6 +1122,7 @@ describe('File', function() {
           done();
         });
       });
+
       it('should throw if equal condition is not an array', function() {
         var expiration = Math.round(Date.now() / 1000) + 5;
         assert.throws(function() {        
@@ -1131,6 +1132,7 @@ describe('File', function() {
           }, function() {});
         }, /Equals condition must be an array/);
       });
+
       it('should throw if equal condition length is not 2', function() {
         var expiration = Math.round(Date.now() / 1000) + 5;
         assert.throws(function() {        
@@ -1155,6 +1157,7 @@ describe('File', function() {
           done();
         });
       });
+
       it('should throw if prexif condition is not an array', function() {
         var expiration = Math.round(Date.now() / 1000) + 5;
         assert.throws(function() {        
@@ -1164,6 +1167,7 @@ describe('File', function() {
           }, function() {});
         }, /StartsWith condition must be an array/);
       });
+
       it('should throw if prefix condition length is not 2', function() {
         var expiration = Math.round(Date.now() / 1000) + 5;
         assert.throws(function() {        
@@ -1188,6 +1192,7 @@ describe('File', function() {
           done();
         });
       });
+
       it('should throw if content length has no min', function() {
         var expiration = Math.round(Date.now() / 1000) + 5;
         assert.throws(function() {        
@@ -1197,6 +1202,7 @@ describe('File', function() {
           }, function() {});
         }, /ContentLengthRange must have min and max fields/);
       });
+
       it('should throw if content length has no max', function() {
         var expiration = Math.round(Date.now() / 1000) + 5;
         assert.throws(function() {        
