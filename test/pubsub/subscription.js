@@ -174,6 +174,17 @@ describe('Subscription', function() {
       };
       subscription.ack(1, done);
     });
+
+    it('should pass apiResponse to callback', function(done) {
+      var resp = { success: true };
+      subscription.makeReq_ = function(method, path, qs, body, callback) {
+        callback(null, resp);
+      };
+      subscription.ack(1, function(err, apiResponse) {
+        assert.deepEqual(resp, apiResponse);
+        done();
+      });
+    });
   });
 
   describe('pull', function() {
@@ -246,6 +257,25 @@ describe('Subscription', function() {
       };
       subscription.pull(function(err) {
         assert.equal(err, error);
+        done();
+      });
+    });
+
+    it('should pass apiResponse to callback', function(done) {
+      var resp = {
+        receivedMessages: [{
+          ackId: 1,
+          message: {
+            messageId: '123',
+            data: new Buffer('message').toString('base64')
+          }
+        }]
+      };
+      subscription.makeReq_ = function(method, path, qs, body, callback) {
+        callback(null, resp);
+      };
+      subscription.pull(function(err, msgs, apiResponse) {
+        assert.deepEqual(resp, apiResponse);
         done();
       });
     });
@@ -323,6 +353,31 @@ describe('Subscription', function() {
       it('should execute callback', function(done) {
         subscription.pull({}, done);
       });
+
+      it('should return pull response as apiResponse', function(done) {
+        var resp = {
+          receivedMessages: [{
+            ackId: 1,
+            message: {
+              messageId: '123',
+              data: new Buffer('message').toString('base64')
+            }
+          }]
+        };
+
+        subscription.ack = function(id, callback) {
+          callback(null, { success: true });
+        };
+
+        subscription.makeReq_ = function(method, path, qs, body, callback) {
+          callback(null, resp);
+        };
+
+        subscription.pull({}, function(err, msgs, apiResponse) {
+          assert.deepEqual(resp, apiResponse);
+          done();
+        });
+      });
     });
   });
 
@@ -392,6 +447,24 @@ describe('Subscription', function() {
         .startPulling_();
     });
 
+    it('should emit an error event with apiResponse', function(done) {
+      var error = new Error('Error.');
+      var resp = { success: false };
+      subscription.pull = function(options, callback) {
+        subscription.pull = function() {};
+        setImmediate(function() {
+          callback(error, null, resp);
+        });
+      };
+      subscription
+        .once('error', function(err, apiResponse) {
+          assert.equal(err, error);
+          assert.deepEqual(resp, apiResponse);
+          done();
+        })
+        .startPulling_();
+    });
+
     it('should emit a message event', function(done) {
       subscription.pull = function(options, callback) {
         callback(null, [{ hi: 'there' }]);
@@ -399,6 +472,18 @@ describe('Subscription', function() {
       subscription
         .once('message', function(msg) {
           assert.deepEqual(msg, { hi: 'there' });
+          done();
+        });
+    });
+
+    it('should emit a message event with apiResponse', function(done) {
+      var resp = { success: true, msgs: [{ hi: 'there' }] };
+      subscription.pull = function(options, callback) {
+        callback(null, [{ hi: 'there' }], resp);
+      };
+      subscription
+        .once('message', function(msg, apiResponse) {
+          assert.deepEqual(resp, apiResponse);
           done();
         });
     });
@@ -450,6 +535,17 @@ describe('Subscription', function() {
         done();
       });
     });
+
+    it('should execute callback with apiResponse', function(done) {
+      var resp = { success: true };
+      subscription.makeReq_ = function(method, path, qs, body, callback) {
+        callback(null, resp);
+      };
+      subscription.delete(function(err, apiResponse) {
+        assert.deepEqual(resp, apiResponse);
+        done();
+      });
+    });
   });
 
   describe('setAckDeadline', function() {
@@ -469,6 +565,17 @@ describe('Subscription', function() {
         callback();
       };
       subscription.setAckDeadline({}, done);
+    });
+
+    it('should execute the callback with apiResponse', function(done) {
+      var resp = { success: true };
+      subscription.makeReq_ = function(method, path, qs, body, callback) {
+        callback(null, resp);
+      };
+      subscription.setAckDeadline({}, function(err, apiResponse) {
+        assert.deepEqual(resp, apiResponse);
+        done();
+      });
     });
   });
 

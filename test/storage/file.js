@@ -217,8 +217,9 @@ describe('File', function() {
 
     describe('returned File object', function() {
       beforeEach(function() {
+        var resp = { success: true };
         file.makeReq_ = function(method, path, qs, body, callback) {
-          callback();
+          callback(null, resp);
         };
       });
 
@@ -248,6 +249,14 @@ describe('File', function() {
           assert.ifError(err);
           assert.equal(copiedFile.bucket.name, newBucket.name);
           assert.equal(copiedFile.name, file.name);
+          done();
+        });
+      });
+
+      it('should pass apiResponse into callback', function(done) {
+        var newBucket = new Bucket({}, 'new-bucket');
+        file.copy(newBucket, function(err, copiedFile, apiResponse) {
+          assert.deepEqual({ success: true }, apiResponse);
           done();
         });
       });
@@ -796,6 +805,17 @@ describe('File', function() {
       };
       file.delete(done);
     });
+
+    it('should execute callback with apiResponse', function(done) {
+      var resp = { success: true };
+      file.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, resp);
+      };
+      file.delete(function(err, apiResponse) {
+        assert.deepEqual(resp, apiResponse);
+        done();
+      });
+    });
   });
 
   describe('download', function() {
@@ -960,6 +980,17 @@ describe('File', function() {
       file.getMetadata(done);
     });
 
+    it('should execute callback with apiResponse', function(done) {
+      var resp = { success: true };
+      file.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, resp);
+      };
+      file.getMetadata(function(err, metadata, apiResponse) {
+        assert.deepEqual(resp, apiResponse);
+        done();
+      });
+    });
+
     it('should update metadata property on object', function() {
       file.makeReq_ = function(method, path, query, body, callback) {
         callback(null, metadata);
@@ -1068,6 +1099,17 @@ describe('File', function() {
         callback();
       };
       file.setMetadata(metadata, done);
+    });
+
+    it('should execute callback with apiResponse', function(done) {
+      var resp = { success: true };
+      file.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, resp);
+      };
+      file.setMetadata(metadata, function(err, apiResponse) {
+        assert.deepEqual(resp, apiResponse);
+        done();
+      });
     });
 
     it('should update internal metadata property', function() {

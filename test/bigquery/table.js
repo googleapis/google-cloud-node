@@ -217,6 +217,20 @@ describe('BigQuery/Table', function() {
         done();
       });
     });
+
+    it('should pass an apiResponse to the callback', function(done) {
+      var jobMetadata = { jobReference: { jobId: 'job-id' }, a: 'b', c: 'd' };
+
+      table.bigQuery.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, jobMetadata);
+      };
+
+      table.copy(DEST_TABLE, function(err, job, apiResponse) {
+        assert.ifError(err);
+        assert.deepEqual(apiResponse, jobMetadata);
+        done();
+      });
+    });
   });
 
   describe('createReadStream', function() {
@@ -431,6 +445,18 @@ describe('BigQuery/Table', function() {
 
       table.delete(done);
     });
+
+    it('should return apiResponse in callback', function(done) {
+      var resp = { success: true };
+      table.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, resp);
+      };
+
+      table.delete(function(err, apiResponse) {
+        assert.deepEqual(apiResponse, resp);
+        done();
+      });
+    });
   });
 
   describe('export', function() {
@@ -552,6 +578,20 @@ describe('BigQuery/Table', function() {
         done();
       });
     });
+
+    it('should return apiResponse to callback', function(done) {
+      var jobMetadata = { jobReference: { jobId: 'job-id' }, a: 'b', c: 'd' };
+
+      table.bigQuery.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, jobMetadata);
+      };
+
+      table.export(FILE, function(err, job, apiResponse) {
+        assert.ifError(err);
+        assert.deepEqual(apiResponse, jobMetadata);
+        done();
+      });
+    });
   });
 
   describe('getMetadata', function() {
@@ -598,6 +638,14 @@ describe('BigQuery/Table', function() {
         table.getMetadata(function(err, metadata) {
           assert.ifError(err);
           assert.deepEqual(metadata, METADATA);
+          done();
+        });
+      });
+
+      it('should execute callback with apiResponse', function(done) {
+        table.getMetadata(function(err, metadata, apiResponse) {
+          assert.ifError(err);
+          assert.deepEqual(apiResponse, METADATA);
           done();
         });
       });
@@ -665,6 +713,22 @@ describe('BigQuery/Table', function() {
       table.getRows(function(err, rows) {
         assert.ifError(err);
         assert.deepEqual(rows, [{ name: 'stephen' }]);
+        done();
+      });
+    });
+
+    it('should return apiResponse in callback', function(done) {
+      var rows = [{ f: [{ v: 'stephen' }] }];
+      var schema = { fields: [{ name: 'name', type: 'string' }] };
+      table.metadata = { schema: schema };
+
+      table.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, { rows: rows });
+      };
+
+      table.getRows(function(err, rows, nextQuery, apiResponse) {
+        assert.ifError(err);
+        assert.deepEqual(apiResponse, { rows: [{ f: [{ v: 'stephen' }] }] });
         done();
       });
     });
@@ -814,6 +878,20 @@ describe('BigQuery/Table', function() {
         done();
       });
     });
+
+    it('should return apiResponse to callback', function(done) {
+      var jobMetadata = { jobReference: { jobId: 'job-id' }, a: 'b', c: 'd' };
+
+      table.bigQuery.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, jobMetadata);
+      };
+
+      table.import(FILE, function(err, job, apiResponse) {
+        assert.ifError(err);
+        assert.deepEqual(apiResponse, jobMetadata);
+        done();
+      });
+    });
   });
 
   describe('insert', function() {
@@ -856,6 +934,18 @@ describe('BigQuery/Table', function() {
       table.insert(data, function(err, insertErrors) {
         assert.ifError(err);
         assert.deepEqual(insertErrors, []);
+        done();
+      });
+    });
+
+    it('should execute callback with apiResponse', function(done) {
+      table.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, { insertErrors: [] });
+      };
+
+      table.insert(data, function(err, insertErrors, apiResponse) {
+        assert.ifError(err);
+        assert.deepEqual(apiResponse, { insertErrors: [] });
         done();
       });
     });
@@ -961,6 +1051,14 @@ describe('BigQuery/Table', function() {
         table.setMetadata(METADATA, function(err, metadata) {
           assert.ifError(err);
           assert.deepEqual(metadata, METADATA);
+          done();
+        });
+      });
+
+      it('should execute callback with apiResponse', function(done) {
+        table.setMetadata(METADATA, function(err, metadata, apiResponse) {
+          assert.ifError(err);
+          assert.deepEqual(apiResponse, METADATA);
           done();
         });
       });

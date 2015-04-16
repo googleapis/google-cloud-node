@@ -107,6 +107,18 @@ describe('BigQuery', function() {
       });
     });
 
+    it('should return an apiResponse', function(done) {
+      var resp = { success: true };
+      bq.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, resp);
+      };
+      bq.createDataset(DATASET_ID, function(err, dataset, apiResponse) {
+        assert.ifError(err);
+        assert.deepEqual(apiResponse, resp);
+        done();
+      });
+    });
+
     it('should assign metadata to the Dataset object', function(done) {
       var metadata = { a: 'b', c: 'd' };
       bq.makeReq_ = function(method, path, query, body, callback) {
@@ -176,6 +188,18 @@ describe('BigQuery', function() {
       bq.getDatasets(function(err, datasets) {
         assert.ifError(err);
         assert.equal(datasets[0].constructor.name, 'Dataset');
+        done();
+      });
+    });
+
+    it('should return Dataset objects', function(done) {
+      var resp = { success: true };
+      bq.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, resp);
+      };
+      bq.getDatasets(function(err, datasets, nextQuery, apiResponse) {
+        assert.ifError(err);
+        assert.equal(apiResponse, resp);
         done();
       });
     });
@@ -259,6 +283,18 @@ describe('BigQuery', function() {
       bq.getJobs(function(err, jobs) {
         assert.ifError(err);
         assert.equal(jobs[0].constructor.name, 'Job');
+        done();
+      });
+    });
+
+    it('should return apiResponse', function(done) {
+      var resp = { jobs: [{ id: JOB_ID }] };
+      bq.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, resp);
+      };
+      bq.getJobs(function(err, jobs, nextQuery, apiResponse) {
+        assert.ifError(err);
+        assert.equal(resp, apiResponse);
         done();
       });
     });
@@ -371,6 +407,17 @@ describe('BigQuery', function() {
           assert.ifError(err);
           assert.equal(nextQuery.job.constructor.name, 'Job');
           assert.equal(nextQuery.job.id, JOB_ID);
+          done();
+        });
+      });
+
+      it('should return apiResponse', function(done) {
+        bq.query({}, function(err, rows, nextQuery, apiResponse) {
+          assert.ifError(err);
+          assert.deepEqual(apiResponse, {
+            jobComplete: false,
+            jobReference: { jobId: JOB_ID }
+          });
           done();
         });
       });
@@ -658,6 +705,20 @@ describe('BigQuery', function() {
         assert.equal(job.constructor.name, 'Job');
         assert.equal(job.id, JOB_ID);
         assert.deepEqual(job.metadata, jobsResource);
+        done();
+      });
+    });
+
+    it('should execute the callback with apiResponse', function(done) {
+      var jobsResource = { jobReference: { jobId: JOB_ID }, a: 'b', c: 'd' };
+
+      bq.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, jobsResource);
+      };
+
+      bq.startQuery('query', function(err, job, apiResponse) {
+        assert.ifError(err);
+        assert.deepEqual(apiResponse, jobsResource);
         done();
       });
     });
