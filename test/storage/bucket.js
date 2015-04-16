@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach, before, after */
-
 'use strict';
 
 var assert = require('assert');
 var async = require('async');
 var extend = require('extend');
+var globby = require('globby');
 var mime = require('mime-types');
 var mockery = require('mockery');
 var request = require('request');
@@ -56,6 +55,12 @@ fakeAsync.eachLimit = function() {
   (eachLimit_Override || async.eachLimit).apply(null, arguments);
 };
 
+var globby_Override;
+
+function fakeGlobby() {
+  return (globby_Override || globby).apply(null, arguments);
+}
+
 describe('Bucket', function() {
   var Bucket;
   var BUCKET_NAME = 'test-bucket';
@@ -69,6 +74,7 @@ describe('Bucket', function() {
   before(function() {
     mockery.registerMock('./file.js', FakeFile);
     mockery.registerMock('async', fakeAsync);
+    mockery.registerMock('globby', fakeGlobby);
     mockery.registerMock('request', fakeRequest);
     mockery.enable({
       useCleanCache: true,
@@ -660,7 +666,7 @@ describe('Bucket', function() {
     });
   });
 
-  describe('upload', function() {
+  describe.skip('upload', function() {
     var basename = 'proto_query.json';
     var filepath = 'test/testdata/' + basename;
     var textFilepath = 'test/testdata/textfile.txt';
@@ -740,84 +746,188 @@ describe('Bucket', function() {
         done();
       });
     });
+  });
+
+  describe.skip('uploadDirectory', function() {
+    it('should assign a basepath if one is not given', function(done) {
+
+    });
+
+    it('should not override a given basepath', function() {
+
+    });
+
+    it('should call upload with self and children pattern', function(done) {
+
+    });
+  });
+
+  describe.skip('uploadFile', function() {
+    describe('resumable undefined', function() {
+      describe('size unknown', function() {
+        it('should stat file and assign size', function(done) {
+
+        });
+
+        it('should re-execute uploadFile with size property', function(done) {
+
+        });
+      });
+
+      describe('size known', function() {
+        it('should set resumable false < 5MB', function() {
+
+        });
+
+        it('should set resumable true >= 5MB', function() {
+
+        });
+      });
+    });
+
+    describe('resumable defined', function() {
+      it('should not stat file if resumable is specified', function(done) {
+
+      });
+    });
+
+    it('should create a File from a string destination', function(done) {
+
+    });
+
+    it('should name the file its basename if no destination', function(done) {
+
+    });
+
+    it('should pass final options to uploadFile_', function(done) {
+
+    });
+  });
+
+  describe('uploadFile_', function() {
+    var basename = 'proto_query.json';
+    var filepath = 'test/testdata/' + basename;
+    var textFilepath = 'test/testdata/textfile.txt';
+
+    var destinationFile;
+
+    beforeEach(function() {
+      destinationFile = new FakeFile(bucket, 'file-name');
+    });
 
     it('should guess at the content type', function(done) {
-      var fakeFile = new FakeFile(bucket, 'file-name');
-      var options = { destination: fakeFile };
-      fakeFile.createWriteStream = function(options) {
+      var options = { destination: destinationFile };
+
+      destinationFile.createWriteStream = function(options) {
         var ws = new stream.Writable();
         ws.write = util.noop;
+
         setImmediate(function() {
           var expectedContentType = 'application/json; charset=utf-8';
           assert.equal(options.metadata.contentType, expectedContentType);
           done();
         });
+
         return ws;
       };
-      bucket.upload(filepath, options, assert.ifError);
+
+      bucket.uploadFile_(filepath, options, assert.ifError);
     });
 
     it('should guess at the charset', function(done) {
-      var fakeFile = new FakeFile(bucket, 'file-name');
-      var options = { destination: fakeFile };
-      fakeFile.createWriteStream = function(options) {
+      var options = { destination: destinationFile };
+
+      destinationFile.createWriteStream = function(options) {
         var ws = new stream.Writable();
         ws.write = util.noop;
+
         setImmediate(function() {
           var expectedContentType = 'text/plain; charset=utf-8';
           assert.equal(options.metadata.contentType, expectedContentType);
           done();
         });
+
         return ws;
       };
-      bucket.upload(textFilepath, options, assert.ifError);
+
+      bucket.uploadFile_(textFilepath, options, assert.ifError);
     });
 
     it('should allow overriding content type', function(done) {
-      var fakeFile = new FakeFile(bucket, 'file-name');
       var metadata = { contentType: 'made-up-content-type' };
-      var options = { destination: fakeFile, metadata: metadata };
-      fakeFile.createWriteStream = function(options) {
+      var options = { destination: destinationFile, metadata: metadata };
+
+      destinationFile.createWriteStream = function(options) {
         var ws = new stream.Writable();
         ws.write = util.noop;
+
         setImmediate(function() {
           assert.equal(options.metadata.contentType,  metadata.contentType);
           done();
         });
+
         return ws;
       };
-      bucket.upload(filepath, options, assert.ifError);
+
+      bucket.uploadFile_(filepath, options, assert.ifError);
     });
 
     it('should allow specifying options.resumable', function(done) {
-      var fakeFile = new FakeFile(bucket, 'file-name');
-      var options = { destination: fakeFile, resumable: false };
-      fakeFile.createWriteStream = function(options) {
+      var options = { destination: destinationFile, resumable: false };
+
+      destinationFile.createWriteStream = function(options) {
         var ws = new stream.Writable();
         ws.write = util.noop;
+
         setImmediate(function() {
           assert.strictEqual(options.resumable, false);
           done();
         });
+
         return ws;
       };
-      bucket.upload(filepath, options, assert.ifError);
+
+      bucket.uploadFile_(filepath, options, assert.ifError);
     });
 
     it('should execute callback on error', function(done) {
       var error = new Error('Error.');
-      var fakeFile = new FakeFile(bucket, 'file-name');
-      var options = { destination: fakeFile };
-      fakeFile.createWriteStream = function() {
+      var options = { destination: destinationFile };
+
+      destinationFile.createWriteStream = function() {
         var ws = new stream.Writable();
+
         setImmediate(function() {
           ws.emit('error', error);
           ws.end();
         });
+
         return ws;
       };
-      bucket.upload(filepath, options, function(err) {
+
+      bucket.uploadFile_(filepath, options, function(err) {
         assert.equal(err, error);
+        done();
+      });
+    });
+
+    it('should return destination File on complete', function(done) {
+      var options = { destination: destinationFile };
+
+      destinationFile.createWriteStream = function() {
+        var ws = new stream.Writable();
+
+        setImmediate(function() {
+          ws.emit('complete');
+          ws.end();
+        });
+
+        return ws;
+      };
+
+      bucket.uploadFile_(filepath, options, function(err, file) {
+        assert.ifError(err);
+        assert.deepEqual(file, destinationFile);
         done();
       });
     });
