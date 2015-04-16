@@ -100,6 +100,17 @@ describe('Request', function() {
       });
     });
 
+    it('should return apiResponse in callback', function(done) {
+      request.makeReq_ = function(method, req, callback) {
+        callback(null, mockRespGet);
+      };
+      request.get(key, function(err, entity, apiResponse) {
+        assert.ifError(err);
+        assert.deepEqual(mockRespGet, apiResponse);
+        done();
+      });
+    });
+
     it('should multi get by keys', function(done) {
       request.makeReq_ = function(method, req, callback) {
         assert.equal(method, 'lookup');
@@ -240,6 +251,37 @@ describe('Request', function() {
       ], done);
     });
 
+    it('should return apiResponse in callback', function(done) {
+      var key = new entity.Key({ namespace: 'ns', path: ['Company'] });
+      var mockCommitResponse = {
+        mutation_result: {
+          insert_auto_id_key: [
+            {
+              partition_id: {
+                dataset_id: 's~project-id',
+                namespace: 'ns'
+              },
+              path_element: [
+                {
+                  kind: 'Company',
+                  id: 123,
+                  name: null
+                }
+              ]
+            }
+          ]
+        }
+      };
+      request.makeReq_ = function(method, req, callback) {
+        callback(null, mockCommitResponse);
+      };
+      request.save({ key: key, data: {} }, function(err, apiResponse) {
+        assert.ifError(err);
+        assert.deepEqual(mockCommitResponse, apiResponse);
+        done();
+      });
+    });
+
     it('should not set an indexed value by default', function(done) {
       request.makeReq_ = function(method, req) {
         var property = req.mutation.upsert[0].property[0];
@@ -319,6 +361,18 @@ describe('Request', function() {
       request.delete(key, done);
     });
 
+    it('should return apiResponse in callback', function(done) {
+      var resp = { success: true };
+      request.makeReq_ = function(method, req, callback) {
+        callback(null, resp);
+      };
+      request.delete(key, function(err, apiResponse) {
+        assert.ifError(err);
+        assert.deepEqual(resp, apiResponse);
+        done();
+      });
+    });
+
     it('should multi delete by keys', function(done) {
       request.makeReq_ = function(method, req, callback) {
         assert.equal(method, 'commit');
@@ -389,6 +443,18 @@ describe('Request', function() {
         assert.strictEqual(data.author, 'Silvano');
         assert.strictEqual(data.isDraft, false);
         assert.deepEqual(data.publishedAt, new Date(978336000000));
+      });
+    });
+
+    it('should execute callback with apiResponse', function(done) {
+      request.makeReq_ = function(method, req, callback) {
+        callback(null, mockResponse.withResults);
+      };
+
+      request.runQuery(query, function (err, entities, nextQuery, apiResponse) {
+        assert.ifError(err);
+        assert.deepEqual(mockResponse.withResults, apiResponse);
+        done();
       });
     });
 
@@ -554,6 +620,23 @@ describe('Request', function() {
         assert.ifError(err);
         var generatedKey = keys[0];
         assert.strictEqual(generatedKey.path.pop(), 123);
+        done();
+      });
+    });
+
+    it('should return apiResponse in callback', function(done) {
+      var resp = {
+        key: [
+          { path_element: [{ kind: 'Kind', id: 123 }] }
+        ]
+      };
+      request.makeReq_ = function(method, req, callback) {
+        callback(null, resp);
+      };
+      var incompleteKey = new entity.Key({ namespace: null, path: ['Kind'] });
+      request.allocateIds(incompleteKey, 1, function(err, keys, apiResponse) {
+        assert.ifError(err);
+        assert.deepEqual(resp, apiResponse);
         done();
       });
     });

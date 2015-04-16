@@ -131,6 +131,19 @@ describe('Transaction', function() {
         done();
       });
     });
+
+    it('should pass apiResponse to callback', function(done) {
+      var resp = { success: true };
+      transaction.makeReq_ = function(method, req, callback) {
+        callback = callback || req;
+        callback(null, resp);
+      };
+      transaction.begin(function(err, apiResponse) {
+        assert.ifError(err);
+        assert.deepEqual(resp, apiResponse);
+        done();
+      });
+    });
   });
 
   describe('rollback', function() {
@@ -154,6 +167,19 @@ describe('Transaction', function() {
       };
       transaction.rollback(function(err) {
         assert.deepEqual(err, error);
+        done();
+      });
+    });
+
+    it('should pass apiResponse to callback', function(done) {
+      var resp = { success: true };
+      transaction.makeReq_ = function(method, req, callback) {
+        callback = callback || req;
+        callback(null, resp);
+      };
+      transaction.rollback(function(err, apiResponse) {
+        assert.ifError(err);
+        assert.deepEqual(resp, apiResponse);
         done();
       });
     });
@@ -202,6 +228,19 @@ describe('Transaction', function() {
       };
       transaction.commit(function(err) {
         assert.deepEqual(err, error);
+        done();
+      });
+    });
+
+    it('should pass apiResponse to callback', function(done) {
+      var resp = { success: true };
+      transaction.makeReq_ = function(method, req, callback) {
+        callback = callback || req;
+        callback(null, resp);
+      };
+      transaction.commit(function(err, apiResponse) {
+        assert.ifError(err);
+        assert.deepEqual(resp, apiResponse);
         done();
       });
     });

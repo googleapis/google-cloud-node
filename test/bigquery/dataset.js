@@ -89,6 +89,19 @@ describe('BigQuery/Dataset', function() {
       });
     });
 
+    it('should return an apiResponse', function(done) {
+      var resp = { tableReference: { tableId: TABLE_ID } };
+      ds.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, resp);
+      };
+      var options = { id: TABLE_ID, schema: SCHEMA_OBJECT };
+      ds.createTable(options, function(err, table, apiResponse) {
+        assert.ifError(err);
+        assert.deepEqual(apiResponse, resp);
+        done();
+      });
+    });
+
     it('should assign metadata to the Table object', function(done) {
       var metadata = {
         a: 'b',
@@ -144,6 +157,17 @@ describe('BigQuery/Dataset', function() {
         done();
       });
     });
+
+    it('should pass apiResponse to callback', function(done) {
+      var resp = { success: true };
+      ds.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, resp);
+      };
+      ds.delete(function(err, apiResponse) {
+        assert.deepEqual(apiResponse, { success: true });
+        done();
+      });
+    });
   });
 
   describe('getMetadata', function() {
@@ -193,6 +217,14 @@ describe('BigQuery/Dataset', function() {
           done();
         });
       });
+
+      it('should execute callback with apiResponse', function(done) {
+        ds.getMetadata(function(err, metadata, apiResponse) {
+          assert.ifError(err);
+          assert.deepEqual(apiResponse, METADATA);
+          done();
+        });
+      });
     });
   });
 
@@ -235,6 +267,17 @@ describe('BigQuery/Dataset', function() {
       ds.getTables(function(err, tables) {
         assert.ifError(err);
         assert(tables[0] instanceof Table);
+        done();
+      });
+    });
+
+    it('should return apiResponse', function(done) {
+      ds.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, { tables: [{ id: 'tableName' }] });
+      };
+      ds.getTables(function(err, tables, nextQuery, apiResponse) {
+        assert.ifError(err);
+        assert.deepEqual(apiResponse, { tables: [{ id: 'tableName' }] });
         done();
       });
     });
@@ -384,6 +427,14 @@ describe('BigQuery/Dataset', function() {
         ds.setMetadata(METADATA, function(err, metadata) {
           assert.ifError(err);
           assert.deepEqual(metadata, METADATA);
+          done();
+        });
+      });
+
+      it('should execute callback with apiResponse', function(done) {
+        ds.setMetadata(METADATA, function(err, metadata, apiResponse) {
+          assert.ifError(err);
+          assert.deepEqual(apiResponse, METADATA);
           done();
         });
       });

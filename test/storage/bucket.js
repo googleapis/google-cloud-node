@@ -285,6 +285,21 @@ describe('Bucket', function() {
         done();
       });
     });
+
+    it('should execute the callback with apiResponse', function(done) {
+      var sources = [bucket.file('1.txt'), bucket.file('2.txt')];
+      var destination = 'destination.txt';
+      var resp = { success: true };
+
+      bucket.storage.makeAuthorizedRequest_ = function(reqOpts, callback) {
+        callback(null, resp);
+      };
+
+      bucket.combine(sources, destination, function(err, obj, apiResponse) {
+        assert.equal(resp, apiResponse);
+        done();
+      });
+    });
   });
 
   describe('delete', function() {
@@ -304,6 +319,17 @@ describe('Bucket', function() {
         callback();
       };
       bucket.delete(done);
+    });
+
+    it('should execute callback with apiResponse', function(done) {
+      var resp = { success: true };
+      bucket.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, resp);
+      };
+      bucket.delete(function(err, apiResponse) {
+        assert.deepEqual(resp, apiResponse);
+        done();
+      });
     });
   });
 
@@ -377,6 +403,17 @@ describe('Bucket', function() {
       });
     });
 
+    it('should return apiResponse in callback', function(done) {
+      var resp = { items: [{ name: 'fake-file-name' }] };
+      bucket.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, resp);
+      };
+      bucket.getFiles(function(err, files, nextQuery, apiResponse) {
+        assert.deepEqual(resp, apiResponse);
+        done();
+      });
+    });
+
     it('should populate returned File object with metadata', function(done) {
       var fileMetadata = {
         name: 'filename',
@@ -434,6 +471,17 @@ describe('Bucket', function() {
       };
       bucket.getMetadata(function(err, fileMetadata) {
         assert.deepEqual(fileMetadata, metadata);
+        done();
+      });
+    });
+
+    it('should pass apiResponse to callback', function(done) {
+      var resp = metadata;
+      bucket.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, resp);
+      };
+      bucket.getMetadata(function(err, fileMetadata, apiResponse) {
+        assert.deepEqual(resp, apiResponse);
         done();
       });
     });
@@ -589,6 +637,17 @@ describe('Bucket', function() {
         callback();
       };
       bucket.setMetadata(metadata, done);
+    });
+
+    it('should execute callback with apiResponse', function(done) {
+      var resp = { success: true };
+      bucket.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, resp);
+      };
+      bucket.setMetadata(metadata, function(err, apiResponse) {
+        assert.deepEqual(resp, apiResponse);
+        done();
+      });
     });
 
     it('should update internal metadata property', function() {

@@ -50,7 +50,6 @@ describe('storage/acl', function() {
         assert.equal(path, '');
         assert.strictEqual(query, null);
         assert.deepEqual(body, { entity: ENTITY, role: ROLE });
-
         done();
       };
 
@@ -87,6 +86,18 @@ describe('storage/acl', function() {
         done();
       });
     });
+
+    it('executes the callback with apiResponse', function(done) {
+      var resp = { success: true };
+      acl.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, resp);
+      };
+
+      acl.add({ entity: ENTITY, role: ROLE }, function(err, acls, apiResponse) {
+        assert.deepEqual(resp, apiResponse);
+        done();
+      });
+    });
   });
 
   describe('delete', function() {
@@ -110,6 +121,18 @@ describe('storage/acl', function() {
 
       acl.delete({ entity: ENTITY }, function(err) {
         assert.deepEqual(err, ERROR);
+        done();
+      });
+    });
+
+    it('should execute the callback with apiResponse', function(done) {
+      var resp = { success: true };
+      acl.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, resp);
+      };
+
+      acl.delete({ entity: ENTITY }, function(err, apiResponse) {
+        assert.deepEqual(resp, apiResponse);
         done();
       });
     });
@@ -229,6 +252,18 @@ describe('storage/acl', function() {
         done();
       });
     });
+
+    it('should execute the callback with apiResponse', function(done) {
+      var resp = { success: true };
+      acl.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, resp);
+      };
+
+      acl.get(function(err, acls, apiResponse) {
+        assert.deepEqual(resp, apiResponse);
+        done();
+      });
+    });
   });
 
   describe('update', function() {
@@ -271,6 +306,19 @@ describe('storage/acl', function() {
 
       acl.update({ entity: ENTITY, role: ROLE }, function(err) {
         assert.deepEqual(err, ERROR);
+        done();
+      });
+    });
+
+    it('should execute the callback with apiResponse', function(done) {
+      var resp = { success: true };
+      acl.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, resp);
+      };
+
+      var config = { entity: ENTITY, role: ROLE };
+      acl.update(config, function(err, acls, apiResponse) {
+        assert.deepEqual(resp, apiResponse);
         done();
       });
     });

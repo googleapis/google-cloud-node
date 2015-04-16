@@ -165,6 +165,18 @@ describe('Topic', function() {
 
       topic.publish(messageObject, done);
     });
+
+    it('should execute callback with apiResponse', function(done) {
+      var resp = { success: true };
+      topic.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, resp);
+      };
+
+      topic.publish(messageObject, function(err, ackIds, apiResponse) {
+        assert.deepEqual(resp, apiResponse);
+        done();
+      });
+    });
   });
 
   describe('publish to non-existing topic', function() {
@@ -220,6 +232,17 @@ describe('Topic', function() {
       };
       topic.delete(done);
     });
+
+    it('should call the callback with apiResponse', function(done) {
+      var resp = { success: true };
+      topic.makeReq_ = function(method, path, q, body, callback) {
+        callback(null, resp);
+      };
+      topic.delete(function(err, apiResponse) {
+        assert.deepEqual(resp, apiResponse);
+        done();
+      });
+    });
   });
 
   describe('subscriptions', function() {
@@ -228,7 +251,6 @@ describe('Topic', function() {
     var CONFIG = { autoAck: true, interval: 90 };
 
     describe('getSubscriptions', function() {
-
       it('should pass query', function(done) {
         var query = { pageToken: 1, maxResults: 3 };
         topic.getSubscriptions = function(q) {
@@ -244,6 +266,17 @@ describe('Topic', function() {
           callback();
         };
         topic.getSubscriptions({}, done);
+      });
+
+      it('should pass apiResponse with callback', function(done) {
+        var resp = { success: true };
+        topic.getSubscriptions = function(q, callback) {
+          callback(null, [], resp);
+        };
+        topic.getSubscriptions({}, function(err, subs, apiResponse) {
+          assert.deepEqual(resp, apiResponse);
+          done();
+        });
       });
     });
 
@@ -285,6 +318,17 @@ describe('Topic', function() {
         };
         topic.subscribe(SUB_NAME, function(err) {
           assert.equal(err, error);
+          done();
+        });
+      });
+
+      it('should return apiResponse to the callback', function(done) {
+        var resp = { success: true };
+        topic.makeReq_ = function(method, path, qs, body, callback) {
+          callback(null, resp);
+        };
+        topic.subscribe(SUB_NAME, function(err, sub, apiResponse) {
+          assert.deepEqual(resp, apiResponse);
           done();
         });
       });
