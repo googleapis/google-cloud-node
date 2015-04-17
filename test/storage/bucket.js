@@ -19,8 +19,10 @@
 var assert = require('assert');
 var async = require('async');
 var extend = require('extend');
+var fs = require('fs');
 var globby = require('globby');
 var mime = require('mime-types');
+var path = require('path');
 var mockery = require('mockery');
 var request = require('request');
 var stream = require('stream');
@@ -49,10 +51,14 @@ function fakeRequest() {
 }
 
 var eachLimit_Override;
+var parallelLimit_Override;
 
 var fakeAsync = extend({}, async);
 fakeAsync.eachLimit = function() {
   (eachLimit_Override || async.eachLimit).apply(null, arguments);
+};
+fakeAsync.parallelLimit = function() {
+  (parallelLimit_Override || async.parallelLimit).apply(null, arguments);
 };
 
 var globby_Override;
@@ -60,6 +66,13 @@ var globby_Override;
 function fakeGlobby() {
   return (globby_Override || globby).apply(null, arguments);
 }
+
+var stat_Override;
+
+var fakeFs = extend({}, fs);
+fakeFs.stat = function() {
+  return (stat_Override || fakeFs.stat).apply(null, arguments);
+};
 
 describe('Bucket', function() {
   var Bucket;
@@ -74,6 +87,7 @@ describe('Bucket', function() {
   before(function() {
     mockery.registerMock('./file.js', FakeFile);
     mockery.registerMock('async', fakeAsync);
+    mockery.registerMock('fs', fakeFs);
     mockery.registerMock('globby', fakeGlobby);
     mockery.registerMock('request', fakeRequest);
     mockery.enable({
@@ -91,6 +105,8 @@ describe('Bucket', function() {
   beforeEach(function() {
     request_Override = null;
     eachLimit_Override = null;
+    parallelLimit_Override = null;
+    stat_Override = null;
     bucket = new Bucket(options, BUCKET_NAME);
   });
 
@@ -666,141 +682,376 @@ describe('Bucket', function() {
     });
   });
 
-  describe.skip('upload', function() {
-    var basename = 'proto_query.json';
-    var filepath = 'test/testdata/' + basename;
-    var textFilepath = 'test/testdata/textfile.txt';
-    var metadata = { a: 'b', c: 'd' };
+  describe('upload', function() {
+    var globPattern = '/Users/stephen/Photos/zoo/**/*.jpg';
 
     beforeEach(function() {
-      bucket.file = function(name, metadata) {
-        return new FakeFile(bucket, name, metadata);
+      bucket.uploadFile = util.noop;
+    });
+
+    it('should extend provided glob options', function(done) {
+      var globOptions = { a: 'b', c: 'd' };
+      var options = { globOptions: globOptions };
+      var expectedGlobOptions = extend({}, globOptions, { nodir: true });
+
+      globby_Override = function(pattern, opts) {
+        assert.deepEqual(opts, expectedGlobOptions);
+        done();
       };
+
+      bucket.upload(globPattern, options, assert.ifError);
     });
 
-    it('should accept a path & cb', function(done) {
-      bucket.upload(filepath, function(err, file) {
-        assert.ifError(err);
-        assert.equal(file.bucket.name, bucket.name);
-        assert.equal(file.name, basename);
+    it('should always ignore directory paths in glob options', function(done) {
+      var globOptions = { a: 'b', c: 'd', nodir: false };
+      var options = { globOptions: globOptions };
+
+      globby_Override = function(pattern, opts) {
+        assert.strictEqual(opts.nodir, true);
         done();
-      });
-    });
-
-    it('should accept a path, metadata, & cb', function(done) {
-      var options = { metadata: metadata };
-      bucket.upload(filepath, options, function(err, file) {
-        assert.ifError(err);
-        assert.equal(file.bucket.name, bucket.name);
-        assert.deepEqual(file.metadata, metadata);
-        done();
-      });
-    });
-
-    it('should accept a path, a string dest, & cb', function(done) {
-      var newFileName = 'new-file-name.png';
-      var options = { destination: newFileName };
-      bucket.upload(filepath, options, function(err, file) {
-        assert.ifError(err);
-        assert.equal(file.bucket.name, bucket.name);
-        assert.equal(file.name, newFileName);
-        done();
-      });
-    });
-
-    it('should accept a path, a string dest, metadata, & cb', function(done) {
-      var newFileName = 'new-file-name.png';
-      var options = { destination: newFileName, metadata: metadata };
-      bucket.upload(filepath, options, function(err, file) {
-        assert.ifError(err);
-        assert.equal(file.bucket.name, bucket.name);
-        assert.equal(file.name, newFileName);
-        assert.deepEqual(file.metadata, metadata);
-        done();
-      });
-    });
-
-    it('should accept a path, a File dest, & cb', function(done) {
-      var fakeFile = new FakeFile(bucket, 'file-name');
-      fakeFile.isSameFile = function() {
-        return true;
       };
-      var options = { destination: fakeFile };
-      bucket.upload(filepath, options, function(err, file) {
-        assert.ifError(err);
-        assert(file.isSameFile());
+
+      bucket.upload(globPattern, options, assert.ifError);
+    });
+
+    it('should execute callback with error from globby', function(done) {
+      var error = new Error('Error.');
+
+      globby_Override = function(pattern, opts, callback) {
+        callback(error);
+      };
+
+      bucket.upload(globPattern, {}, function(err) {
+        assert.deepEqual(err, error);
         done();
       });
     });
 
-    it('should accept a path, a File dest, metadata, & cb', function(done) {
-      var fakeFile = new FakeFile(bucket, 'file-name');
-      fakeFile.isSameFile = function() {
-        return true;
+    it('should upload limited to 5 files in parallel', function(done) {
+      globby_Override = function(pattern, opts, callback) {
+        callback(null, []);
       };
-      var options = { destination: fakeFile, metadata: metadata };
-      bucket.upload(filepath, options, function(err, file) {
-        assert.ifError(err);
-        assert(file.isSameFile());
-        assert.deepEqual(file.metadata, metadata);
+
+      parallelLimit_Override = function(fns, limit) {
+        assert.equal(limit, 5);
         done();
+      };
+
+      bucket.upload(globPattern, {}, assert.ifError);
+    });
+
+    describe('file processing', function() {
+      var filePath = '/Users/stephen/Photos/zoo/a-monkey.jpg';
+
+      beforeEach(function() {
+        globby_Override = function(pattern, opts, callback) {
+          callback(null, [filePath]);
+        };
+      });
+
+      it('should use a basePath to determine the filename', function(done) {
+        var basePath = path.resolve(filePath, '..');
+        var expectedFileName = path.relative(basePath, filePath);
+        var options = { basePath: basePath };
+
+        parallelLimit_Override = function(fns) {
+          var processFileFn = fns[0];
+          processFileFn(assert.ifError);
+        };
+
+        bucket.uploadFile = function(uploadFilePath, opts) {
+          assert.equal(opts.destination, expectedFileName);
+          done();
+        };
+
+        bucket.upload(globPattern, options, assert.ifError);
+      });
+
+      it('should use the basename to determine the filename', function(done) {
+        parallelLimit_Override = function(fns) {
+          var processFileFn = fns[0];
+          processFileFn(assert.ifError);
+        };
+
+        bucket.uploadFile = function(uploadFilePath, opts) {
+          assert.equal(opts.destination, path.basename(filePath));
+          done();
+        };
+
+        bucket.upload(globPattern, {}, assert.ifError);
+      });
+
+      it('should pass correct arguments to uploadFile', function(done) {
+        var options = { a: 'b', c: 'd' };
+        var expectedOptions = extend({}, options, {
+          destination: path.basename(filePath)
+        });
+
+        parallelLimit_Override = function(fns) {
+          var processFileFn = fns[0];
+          processFileFn(assert.ifError);
+        };
+
+        bucket.uploadFile = function(uploadFilePath, opts) {
+          assert.equal(uploadFilePath, filePath);
+          assert.deepEqual(opts, expectedOptions);
+          done();
+        };
+
+        bucket.upload(globPattern, options, assert.ifError);
+      });
+
+
+      it('should stop processing files after error', function(done) {
+        var error = new Error('Error.');
+
+        bucket.uploadFile = function(uploadFilePath, opts, callback) {
+          callback(error);
+        };
+
+        parallelLimit_Override = function(fns) {
+          var processFileFn = fns[0];
+
+          processFileFn(function(err) {
+            assert.deepEqual(err, error);
+            done();
+          });
+        };
+
+        bucket.upload(globPattern, {}, assert.ifError);
+      });
+
+      it('should continue processing files if in force mode', function(done) {
+        var options = { force: true };
+        var error = new Error('Error.');
+
+        bucket.uploadFile = function(uploadFilePath, opts, callback) {
+          callback(error);
+        };
+
+        parallelLimit_Override = function(fns) {
+          var processFileFn = fns[0];
+
+          processFileFn(function(err) {
+            assert.strictEqual(err, null);
+            done();
+          });
+        };
+
+        bucket.upload(globPattern, options, assert.ifError);
+      });
+
+      it('should execute callback with all errors and files', function(done) {
+        var options = { force: true };
+        var error = new Error('Error.');
+        var filePaths = [filePath, filePath];
+        var file = new FakeFile(bucket, filePath);
+
+        globby_Override = function(pattern, opts, callback) {
+          callback(null, filePaths);
+        };
+
+        var filesProcessed = 0;
+        bucket.uploadFile = function(uploadFilePath, opts, callback) {
+          filesProcessed++;
+
+          if (filesProcessed === 1) {
+            callback(error);
+          } else if (filesProcessed === 2) {
+            callback(null, file);
+          }
+        };
+
+        bucket.upload(globPattern, options, function(errors, files) {
+          assert.equal(errors.length, 1);
+          assert.equal(files.length, 1);
+
+          assert.deepEqual(errors[0], error);
+          assert.deepEqual(files[0], file);
+
+          done();
+        });
       });
     });
   });
 
-  describe.skip('uploadDirectory', function() {
-    it('should assign a basepath if one is not given', function(done) {
+  describe('uploadDirectory', function() {
+    var directoryPath = '/Users/stephen/Photos/zoo';
 
+    beforeEach(function() {
+      bucket.upload = util.noop;
     });
 
-    it('should not override a given basepath', function() {
+    it('should assign a basepath if one is not given', function(done) {
+      bucket.upload = function(pattern, options) {
+        assert.equal(options.basePath, directoryPath);
+        done();
+      };
 
+      bucket.uploadDirectory(directoryPath, {}, assert.ifError);
+    });
+
+    it('should not override a given basepath', function(done) {
+      var options = { basePath: path.resolve(directoryPath, '..') };
+
+      bucket.upload = function(pattern, opts) {
+        assert.equal(opts.basePath, options.basePath);
+        done();
+      };
+
+      bucket.uploadDirectory(directoryPath, options, assert.ifError);
     });
 
     it('should call upload with self and children pattern', function(done) {
+      bucket.upload = function(pattern) {
+        assert.equal(pattern, path.join(directoryPath, '**/*'));
+        done();
+      };
 
+      bucket.uploadDirectory(directoryPath, {}, assert.ifError);
+    });
+
+    it('should call upload with all arguments', function(done) {
+      var options = { a: 'b', c: 'd' };
+
+      bucket.upload = function(pattern, opts, callback) {
+        assert.equal(pattern, path.join(directoryPath, '**/*'));
+        assert.deepEqual(opts, options);
+        callback();
+      };
+
+      bucket.uploadDirectory(directoryPath, options, done);
     });
   });
 
-  describe.skip('uploadFile', function() {
+  describe('uploadFile', function() {
+    var filePath = 'file-path.txt';
+    var RESUMABLE_THRESHOLD = 5000000;
+
+    beforeEach(function() {
+      bucket.uploadFile_ = util.noop;
+    });
+
     describe('resumable undefined', function() {
       describe('size unknown', function() {
-        it('should stat file and assign size', function(done) {
+        it('should stat file, assign size & re-attempt upload', function(done) {
+          var size = 1000;
+          var options = { a: 'b', c: 'd' };
 
+          stat_Override = function(statFilePath, callback) {
+            assert.equal(statFilePath, filePath);
+
+            // Should call `uploadFile` again.
+            bucket.uploadFile = function(uploadFilePath, opts, callback) {
+              assert.equal(uploadFilePath, filePath);
+              assert.equal(opts.size, size);
+              assert.deepEqual(opts, options);
+              callback();
+            };
+
+            callback(null, { size: size });
+          };
+
+          bucket.uploadFile(filePath, options, done);
         });
 
-        it('should re-execute uploadFile with size property', function(done) {
+        it('return stat error to callback', function(done) {
+          var error = new Error('Error.');
 
+          stat_Override = function(statFilePath, callback) {
+            callback(error);
+          };
+
+          bucket.uploadFile(filePath, {}, function(err) {
+            assert.deepEqual(err, error);
+            done();
+          });
         });
       });
 
       describe('size known', function() {
-        it('should set resumable false < 5MB', function() {
-
+        beforeEach(function() {
+          stat_Override = function() {
+            throw new Error('`stat` should not be called.');
+          };
         });
 
-        it('should set resumable true >= 5MB', function() {
+        it('should set resumable false <= 5MB', function(done) {
+          var options = { size: RESUMABLE_THRESHOLD };
 
+          bucket.uploadFile_ = function(filePath, opts) {
+            assert.strictEqual(opts.resumable, false);
+            done();
+          };
+
+          bucket.uploadFile(filePath, options, assert.ifError);
+        });
+
+        it('should set resumable true > 5MB', function(done) {
+          var options = { size: RESUMABLE_THRESHOLD + 1 };
+
+          bucket.uploadFile_ = function(filePath, opts) {
+            assert.strictEqual(opts.resumable, true);
+            done();
+          };
+
+          bucket.uploadFile(filePath, options, assert.ifError);
         });
       });
     });
 
     describe('resumable defined', function() {
       it('should not stat file if resumable is specified', function(done) {
+        var options = { resumable: true };
 
+        stat_Override = function() {
+          throw new Error('`stat` should not be called.');
+        };
+
+        bucket.uploadFile_ = function(filePath, opts) {
+          assert.strictEqual(opts.resumable, options.resumable);
+          done();
+        };
+
+        bucket.uploadFile(filePath, options, assert.ifError);
       });
     });
 
     it('should create a File from a string destination', function(done) {
+      var options = { destination: 'a-new-file.txt', resumable: true };
 
+      bucket.file = function(name) {
+        assert.equal(name, options.destination);
+        setImmediate(done);
+        return {};
+      };
+
+      bucket.uploadFile(filePath, options, assert.ifError);
     });
 
     it('should name the file its basename if no destination', function(done) {
+      var baseName = 'a-new-file.txt';
+      var options = { resumable: true };
 
+      bucket.file = function(name) {
+        assert.equal(name, baseName);
+        setImmediate(done);
+        return {};
+      };
+
+      bucket.uploadFile('a/filepath/to/' + baseName, options, assert.ifError);
     });
 
-    it('should pass final options to uploadFile_', function(done) {
+    it('should pass all arguments to uploadFile_', function(done) {
+      var options = { a: 'b', c: 'd', resumable: true };
 
+      bucket.uploadFile_ = function(uploadFilePath, opts, callback) {
+        assert.equal(uploadFilePath, filePath);
+        assert.deepEqual(options, opts);
+        callback();
+      };
+
+      bucket.uploadFile(filePath, options, done);
     });
   });
 
