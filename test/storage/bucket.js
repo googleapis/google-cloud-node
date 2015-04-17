@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach, before, after */
-
 'use strict';
 
 var assert = require('assert');
@@ -27,12 +25,17 @@ var request = require('request');
 var stream = require('stream');
 var util = require('../../lib/common/util.js');
 
-function FakeFile(bucket, name, metadata) {
+function FakeFile(bucket, name) {
+  var self = this;
+
+  this.calledWith_ = arguments;
+
   this.bucket = bucket;
   this.name = name;
-  this.metadata = metadata || {};
+  this.metadata = {};
+
   this.createWriteStream = function(options) {
-    this.metadata = options.metadata;
+    self.metadata = options.metadata;
     var ws = new stream.Writable();
     ws.write = function() {
       ws.emit('complete');
@@ -336,18 +339,26 @@ describe('Bucket', function() {
   describe('file', function() {
     var FILE_NAME = 'remote-file-name.jpg';
     var file;
-    var metadata = { a: 'b' };
+    var options = { a: 'b', c: 'd' };
 
     beforeEach(function() {
-      file = bucket.file(FILE_NAME, metadata);
+      file = bucket.file(FILE_NAME, options);
     });
 
     it('should return a File object', function() {
       assert(file instanceof FakeFile);
     });
 
+    it('should pass bucket to File object', function() {
+      assert.deepEqual(file.calledWith_[0], bucket);
+    });
+
     it('should pass filename to File object', function() {
-      assert.equal(file.name, FILE_NAME);
+      assert.equal(file.calledWith_[1], FILE_NAME);
+    });
+
+    it('should pass configuration object to File', function() {
+      assert.deepEqual(file.calledWith_[2], options);
     });
   });
 
@@ -394,11 +405,29 @@ describe('Bucket', function() {
 
     it('should return File objects', function(done) {
       bucket.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, { items: [{ name: 'fake-file-name' }] });
+        callback(null, {
+          items: [{ name: 'fake-file-name', generation: 1 }]
+        });
       };
       bucket.getFiles(function(err, files) {
         assert.ifError(err);
         assert(files[0] instanceof FakeFile);
+        assert.equal(typeof files[0].calledWith_[2].generation, 'undefined');
+        done();
+      });
+    });
+
+    it('should return versioned Files if queried for versions', function(done) {
+      bucket.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, {
+          items: [{ name: 'fake-file-name', generation: 1 }]
+        });
+      };
+
+      bucket.getFiles({ versions: true }, function(err, files) {
+        assert.ifError(err);
+        assert(files[0] instanceof FakeFile);
+        assert.equal(files[0].calledWith_[2].generation, 1);
         done();
       });
     });
