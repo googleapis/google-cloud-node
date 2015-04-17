@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-/*global describe, it, before, after, beforeEach, afterEach */
-
 'use strict';
 
 var assert = require('assert');
@@ -44,6 +42,17 @@ var files = {
   }
 };
 
+function deleteVersionedFiles(bucket, callback) {
+  bucket.getFiles({ versions: true }, function(err, files) {
+    if (err) {
+      callback(err);
+      return;
+    }
+
+    async.each(files, deleteFile, callback);
+  });
+}
+
 function deleteFiles(bucket, callback) {
   bucket.getFiles(function(err, files) {
     if (err) {
@@ -56,6 +65,13 @@ function deleteFiles(bucket, callback) {
 
 function deleteFile(file, callback) {
   file.delete(callback);
+}
+
+function writeToFile(file, contents, callback) {
+  var writeStream = file.createWriteStream();
+  writeStream.once('error', callback);
+  writeStream.once('complete', callback.bind(null, null));
+  writeStream.end(contents);
 }
 
 function generateBucketName() {
@@ -214,12 +230,7 @@ describe('storage', function() {
         });
 
         function createFileWithContent(content, callback) {
-          bucket.file(uuid() + '.txt').createWriteStream()
-            .on('error', callback)
-            .on('complete', function() {
-              callback();
-            })
-            .end(content);
+          writeToFile(bucket.file(uuid() + '.txt'), content, callback);
         }
 
         function isFilePublic(file, callback) {
@@ -274,12 +285,7 @@ describe('storage', function() {
         });
 
         function createFileWithContent(content, callback) {
-          bucket.file(uuid() + '.txt').createWriteStream()
-            .on('error', callback)
-            .on('complete', function() {
-              callback();
-            })
-            .end(content);
+          writeToFile(bucket.file(uuid() + '.txt'), content, callback);
         }
 
         function isFilePrivate(file, callback) {
@@ -670,11 +676,8 @@ describe('storage', function() {
         });
       });
 
-      function createFile(fileObject, cb) {
-        var ws = fileObject.file.createWriteStream();
-        ws.on('error', cb);
-        ws.on('complete', cb.bind(null, null));
-        ws.end(fileObject.contents);
+      function createFile(fileObject, callback) {
+        writeToFile(fileObject.file, fileObject.contents, callback);
       }
     });
   });
@@ -729,6 +732,89 @@ describe('storage', function() {
           done();
         });
       });
+    });
+  });
+
+  describe('file generations', function() {
+    var VERSIONED_BUCKET_NAME = generateBucketName();
+    var versionedBucket;
+
+    before(function(done) {
+      var opts = { versioning: { enabled: true } };
+
+      storage.createBucket(VERSIONED_BUCKET_NAME, opts, function(err, bucket) {
+        assert.ifError(err);
+        versionedBucket = bucket;
+        done();
+      });
+    });
+
+    afterEach(function(done) {
+      deleteVersionedFiles(versionedBucket, done);
+    });
+
+    after(function(done) {
+      versionedBucket.delete(done);
+    });
+
+    it('should overwrite file, then get older version', function(done) {
+      var VERSIONED_FILE_NAME = Date.now();
+      var versionedFile = versionedBucket.file(VERSIONED_FILE_NAME);
+
+      writeToFile(versionedFile, 'a', function(err) {
+        assert.ifError(err);
+
+        versionedFile.getMetadata(function(err, metadata) {
+          assert.ifError(err);
+
+          var initialGeneration = metadata.generation;
+
+          writeToFile(versionedFile, 'b', function(err) {
+            assert.ifError(err);
+
+            var firstGenFile = versionedBucket.file(VERSIONED_FILE_NAME, {
+              generation: initialGeneration
+            });
+
+            firstGenFile.download(function(err, contents) {
+              assert.ifError(err);
+              assert.equal(contents, 'a');
+              done();
+            });
+          });
+        });
+      });
+
+    });
+
+    it('should get all files scoped to their version', function(done) {
+      var filesToCreate = [
+        { file: versionedBucket.file('file-one.txt'), contents: '123' },
+        { file: versionedBucket.file('file-one.txt'), contents: '456' }
+      ];
+
+      async.each(filesToCreate, createFile, function(err) {
+        assert.ifError(err);
+
+        versionedBucket.getFiles({ versions: true }, function(err, files) {
+          assert.ifError(err);
+
+          // same file.
+          assert.equal(files[0].name, files[1].name);
+
+          // different generations.
+          assert.notEqual(
+            files[0].metadata.generation,
+            files[1].metadata.generation
+          );
+
+          done();
+        });
+      });
+
+      function createFile(fileObject, callback) {
+        writeToFile(fileObject.file, fileObject.contents, callback);
+      }
     });
   });
 
