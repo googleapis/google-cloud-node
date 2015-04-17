@@ -22,6 +22,7 @@ var assert = require('assert');
 var async = require('async');
 var crypto = require('crypto');
 var fs = require('fs');
+var path = require('path');
 var request = require('request');
 var through = require('through2');
 var tmp = require('tmp');
@@ -301,7 +302,7 @@ describe('storage', function() {
         var options = {
           destination: uuid.v1() + '.png'
         };
-        bucket.upload(files.logo.path, options, function(err, f) {
+        bucket.uploadFile(files.logo.path, options, function(err, f) {
           assert.ifError(err);
           file = f;
           done();
@@ -490,7 +491,7 @@ describe('storage', function() {
     });
 
     it('should read a byte range from a file', function(done) {
-      bucket.upload(files.big.path, function(err, file) {
+      bucket.uploadFile(files.big.path, function(err, file) {
         assert.ifError(err);
 
         var fileSize = file.metadata.size;
@@ -516,7 +517,7 @@ describe('storage', function() {
     it('should download a file to memory', function(done) {
       var fileContents = fs.readFileSync(files.big.path);
 
-      bucket.upload(files.big.path, function(err, file) {
+      bucket.uploadFile(files.big.path, function(err, file) {
         assert.ifError(err);
 
         file.download(function(err, remoteContents) {
@@ -545,7 +546,7 @@ describe('storage', function() {
           resumable: false
         };
 
-        bucket.upload(files.logo.path, options, function(err, file) {
+        bucket.uploadFile(files.logo.path, options, function(err, file) {
           assert.ifError(err);
 
           file.getMetadata(function(err, metadata) {
@@ -631,7 +632,7 @@ describe('storage', function() {
     });
 
     it('should copy an existing file', function(done) {
-      bucket.upload(files.logo.path, 'CloudLogo', function(err, file) {
+      bucket.uploadFile(files.logo.path, 'CloudLogo', function(err, file) {
         assert.ifError(err);
         file.copy('CloudLogoCopy', function(err, copiedFile) {
           assert.ifError(err);
@@ -639,6 +640,93 @@ describe('storage', function() {
             file.delete.bind(file),
             copiedFile.delete.bind(copiedFile)
           ], done);
+        });
+      });
+    });
+  });
+
+  describe('upload files', function() {
+    it('should upload a file', function(done) {
+      bucket.uploadFile(files.logo.path, function(err, file) {
+        assert.ifError(err);
+        file.delete(done);
+      });
+    });
+
+    it('should upload files from a glob pattern', function(done) {
+      tmp.setGracefulCleanup();
+      tmp.dir(function(err, directoryPath) {
+        assert.ifError(err);
+
+        var filesToCreate = ['a.txt', 'b.jpg'];
+
+        async.each(
+          filesToCreate,
+
+          function createFile(fileName, next) {
+            fs.createWriteStream(path.join(directoryPath, fileName))
+              .on('error', next)
+              .on('finish', next)
+              .end('file content');
+          },
+
+          function filesCreated(err) {
+            assert.ifError(err);
+
+            var onlyImages = path.join(directoryPath, '*.jpg');
+            bucket.upload(onlyImages, function(errors, files) {
+              if (errors.length > 0) {
+                done(errors);
+                return;
+              }
+
+              assert.equal(files.length, 1);
+              deleteFile(files[0], done);
+            });
+        });
+      });
+    });
+
+    it('should upload a directory', function(done) {
+      tmp.setGracefulCleanup();
+      tmp.dir(function(err, directoryPath) {
+        assert.ifError(err);
+
+        var directoriesToCreate = ['txt', 'jpg'];
+        var filesToCreate = ['txt/a.txt', 'jpg/b.jpg', 'c.png'];
+
+        function createDirectories(callback) {
+          async.each(directoriesToCreate, function(directoryName, next) {
+            fs.mkdir(path.join(directoryPath, directoryName), next);
+          }, callback);
+        }
+
+        function createFiles(callback) {
+          async.each(filesToCreate, function(fileName, next) {
+            fs.createWriteStream(path.join(directoryPath, fileName))
+              .on('error', next)
+              .on('finish', next)
+              .end('file content');
+          }, callback);
+        }
+
+        async.series([createDirectories, createFiles], function(err) {
+          assert.ifError(err);
+
+          bucket.uploadDirectory(directoryPath, function(errors, files) {
+            if (errors.length > 0) {
+              done(errors);
+              return;
+            }
+
+            assert.equal(files.length, 3);
+
+            assert(files.every(function(file) {
+              return filesToCreate.indexOf(file.name) > -1;
+            }));
+
+            async.each(files, deleteFile, done);
+          });
         });
       });
     });
