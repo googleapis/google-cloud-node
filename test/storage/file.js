@@ -137,7 +137,7 @@ describe('File', function() {
 
     it('should accept specifying a generation', function() {
       var file = new File(bucket, 'name', { generation: 2 });
-      assert.equal(file.explicitGeneration, 2);
+      assert.equal(file.generation, 2);
     });
   });
 
