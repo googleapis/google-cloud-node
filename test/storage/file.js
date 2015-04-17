@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach, before, after */
-
 'use strict';
 
 var assert = require('assert');
@@ -137,10 +135,9 @@ describe('File', function() {
       assert.equal(file.name, FILE_NAME);
     });
 
-    it('should assign metadata if provided', function() {
-      var metadata = { a: 'b', c: 'd' };
-      var newFile = new File(bucket, FILE_NAME, metadata);
-      assert.deepEqual(newFile.metadata, metadata);
+    it('should accept specifying a generation', function() {
+      var file = new File(bucket, 'name', { generation: 2 });
+      assert.equal(file.explicitGeneration, 2);
     });
   });
 
@@ -167,6 +164,18 @@ describe('File', function() {
       };
 
       directoryFile.copy(newFile);
+    });
+
+    it('should send query.sourceGeneration if File has one', function(done) {
+      var versionedFile = new File(bucket, 'name', { generation: 1 });
+      var newFile = new File(bucket, 'new-file');
+
+      versionedFile.makeReq_ = function(method, path, query) {
+        assert.equal(query.sourceGeneration, 1);
+        done();
+      };
+
+      versionedFile.copy(newFile, assert.ifError);
     });
 
     describe('destination types', function() {
@@ -446,6 +455,17 @@ describe('File', function() {
             done();
           });
       });
+    });
+
+    it('should send query.generation if File has one', function(done) {
+      var versionedFile = new File(bucket, 'file.txt', { generation: 1 });
+
+      versionedFile.bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
+        assert.equal(reqOpts.qs.generation, 1);
+        done();
+      };
+
+      versionedFile.createReadStream();
     });
 
     it('should accept a start range', function(done) {
@@ -783,8 +803,8 @@ describe('File', function() {
       file.makeReq_ = function(method, path, query, body) {
         assert.equal(method, 'DELETE');
         assert.equal(path, '/o/' + FILE_NAME);
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, true);
+        assert.deepEqual(query, {});
+        assert.strictEqual(body, null);
         done();
       };
       file.delete();
@@ -797,6 +817,17 @@ describe('File', function() {
       };
 
       directoryFile.delete();
+    });
+
+    it('should send query.generation if File has one', function(done) {
+      var versionedFile = new File(bucket, 'new-file.txt', { generation: 1 });
+
+      versionedFile.makeReq_ = function(method, path, query) {
+        assert.equal(query.generation, 1);
+        done();
+      };
+
+      versionedFile.delete();
     });
 
     it('should execute callback', function(done) {
@@ -957,8 +988,8 @@ describe('File', function() {
       file.makeReq_ = function(method, path, query, body) {
         assert.equal(method, 'GET');
         assert.equal(path, '/o/' + FILE_NAME);
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, true);
+        assert.deepEqual(query, {});
+        assert.strictEqual(body, null);
         done();
       };
       file.getMetadata();
@@ -971,6 +1002,17 @@ describe('File', function() {
       };
 
       directoryFile.getMetadata();
+    });
+
+    it('should send query.generation if File has one', function(done) {
+      var versionedFile = new File(bucket, 'new-file.txt', { generation: 1 });
+
+      versionedFile.makeReq_ = function(method, path, query) {
+        assert.equal(query.generation, 1);
+        done();
+      };
+
+      versionedFile.getMetadata();
     });
 
     it('should execute callback', function(done) {
@@ -1094,6 +1136,17 @@ describe('File', function() {
       directoryFile.setMetadata(metadata);
     });
 
+    it('should send query.generation if File has one', function(done) {
+      var versionedFile = new File(bucket, 'new-file.txt', { generation: 1 });
+
+      versionedFile.makeReq_ = function(method, path, query) {
+        assert.equal(query.generation, 1);
+        done();
+      };
+
+      versionedFile.setMetadata();
+    });
+
     it('should execute callback', function(done) {
       file.makeReq_ = function(method, path, query, body, callback) {
         callback();
@@ -1202,6 +1255,17 @@ describe('File', function() {
         };
 
         file.startResumableUpload_(duplexify(), { contentType: 'custom' });
+      });
+
+      it('should send query.ifGenerationMatch if File has one', function(done) {
+        var versionedFile = new File(bucket, 'new-file.txt', { generation: 1 });
+
+        versionedFile.bucket.storage.makeAuthorizedRequest_ = function(rOpts) {
+          assert.equal(rOpts.qs.ifGenerationMatch, 1);
+          done();
+        };
+
+        versionedFile.startResumableUpload_(duplexify(), {});
       });
 
       it('should upload file', function(done) {
@@ -1349,6 +1413,17 @@ describe('File', function() {
       };
 
       file.startSimpleUpload_(duplexify(), metadata);
+    });
+
+    it('should send query.ifGenerationMatch if File has one', function(done) {
+      var versionedFile = new File(bucket, 'new-file.txt', { generation: 1 });
+
+      makeWritableStream_Override = function(stream, options) {
+        assert.equal(options.request.qs.ifGenerationMatch, 1);
+        done();
+      };
+
+      versionedFile.startSimpleUpload_(duplexify(), {});
     });
 
     it('should finish stream and set metadata', function(done) {
