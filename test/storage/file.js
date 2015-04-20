@@ -1110,11 +1110,24 @@ describe('File', function() {
     });
 
     describe('equality condition', function() {
-      it('should add equality condition', function(done) {
+      it('should add equality conditions (array of arrays)', function(done) {
         var expiration = Math.round(Date.now() / 1000) + 5;
         file.getSignedPolicy({
           expiration: expiration,
           equals: [['$<field>', '<value>']]
+        }, function(err, signedPolicy) {
+          var conditionString = '[\"eq\",\"$<field>\",\"<value>\"]';
+          assert.ifError(err);
+          assert(signedPolicy.string.indexOf(conditionString) > -1);
+          done();
+        });
+      });
+
+      it('should add equality condition (array)', function(done) {
+        var expiration = Math.round(Date.now() / 1000) + 5;
+        file.getSignedPolicy({
+          expiration: expiration,
+          equals: ['$<field>', '<value>']
         }, function(err, signedPolicy) {
           var conditionString = '[\"eq\",\"$<field>\",\"<value>\"]';
           assert.ifError(err);
@@ -1145,12 +1158,27 @@ describe('File', function() {
     });
 
     describe('prefix conditions', function() {
-      it('should add prefix condition', function(done) {
+      it('should add prefix conditions (array of arrays)', function(done) {
         var expiration = Math.round(Date.now() / 1000) + 5;
         file.getSignedPolicy({
           expiration: expiration,
           startsWith: [['$<field>', '<value>']]
         }, function(err, signedPolicy) {
+          console.log(signedPolicy);
+          var conditionString = '[\"starts-with\",\"$<field>\",\"<value>\"]';
+          assert.ifError(err);
+          assert(signedPolicy.string.indexOf(conditionString) > -1);
+          done();
+        });
+      });
+
+      it('should add prefix condition (array)', function(done) {
+        var expiration = Math.round(Date.now() / 1000) + 5;
+        file.getSignedPolicy({
+          expiration: expiration,
+          startsWith: ['$<field>', '<value>']
+        }, function(err, signedPolicy) {
+          console.log(signedPolicy);
           var conditionString = '[\"starts-with\",\"$<field>\",\"<value>\"]';
           assert.ifError(err);
           assert(signedPolicy.string.indexOf(conditionString) > -1);
@@ -1200,7 +1228,7 @@ describe('File', function() {
             expiration: expiration,
             contentLengthRange: [{max: 1}]
           }, function() {});
-        }, /ContentLengthRange must have min and max fields/);
+        }, /ContentLengthRange must have numeric min and max fields/);
       });
 
       it('should throw if content length has no max', function() {
@@ -1210,7 +1238,7 @@ describe('File', function() {
             expiration: expiration,
             contentLengthRange: [{min: 0}]
           }, function() {});
-        }, /ContentLengthRange must have min and max fields/);
+        }, /ContentLengthRange must have numeric min and max fields/);
       });
     });
   });
