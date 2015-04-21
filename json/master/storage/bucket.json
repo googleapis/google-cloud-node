@@ -842,9 +842,9 @@
       },
       {
         "type": "param",
-        "string": "{string} query.delimiter - Results will contain only objects whose\n    names, aside from the prefix, do not contain delimiter. Objects whose\n    names, aside from the prefix, contain delimiter will have their name\n    truncated after the delimiter, returned in prefixes. Duplicate prefixes\n    are omitted.",
+        "string": "{string} query.delimiter - Results will contain only objects whose\n    names, aside from the prefix, do not contain delimiter. Objects whose\n    names, aside from the prefix, contain delimiter will have their name\n    truncated after the delimiter, returned in `apiResponse.prefixes`.\n    Duplicate prefixes are omitted.",
         "name": "query.delimiter",
-        "description": "<ul>\n<li>Results will contain only objects whose     names, aside from the prefix, do not contain delimiter. Objects whose<br />  names, aside from the prefix, contain delimiter will have their name<br />  truncated after the delimiter, returned in prefixes. Duplicate prefixes<br />  are omitted.</li>\n</ul>\n",
+        "description": "<ul>\n<li>Results will contain only objects whose     names, aside from the prefix, do not contain delimiter. Objects whose<br />  names, aside from the prefix, contain delimiter will have their name<br />  truncated after the delimiter, returned in <code>apiResponse.prefixes</code>.<br />  Duplicate prefixes are omitted.</li>\n</ul>\n",
         "types": [
           "string"
         ],
