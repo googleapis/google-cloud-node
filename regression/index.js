@@ -19,6 +19,7 @@
 var assert = require('assert');
 var env = require('./env');
 var gcloud = require('../lib');
+var path = require('path');
 
 // Test used to confirm we can perform a successful API operation.
 function canConnect(config, callback) {
@@ -28,7 +29,7 @@ function canConnect(config, callback) {
 describe('environment', function() {
   it('should connect with credentials object', canConnect.bind(null, {
     projectId: env.projectId,
-    credentials: require(env.keyFilename)
+    credentials: require(path.resolve(process.cwd(), env.keyFilename))
   }));
 
   it('should connect from a JSON keyFilename', canConnect.bind(null, {
