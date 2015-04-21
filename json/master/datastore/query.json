@@ -8,6 +8,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 1,
@@ -17,7 +18,8 @@
     "tags": [
       {
         "type": "module",
-        "string": "datastore/query"
+        "string": "datastore/query",
+        "html": "<p>datastore/query</p>"
       }
     ],
     "description": {
@@ -27,16 +29,19 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar extend = require('extend');"
+    "code": "'use strict';\n\nvar extend = require('extend');",
+    "ctx": false
   },
   {
     "tags": [
       {
         "type": "type",
+        "string": "{module:common/util}",
         "types": [
           "module:common/util"
         ],
@@ -44,11 +49,14 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -58,6 +66,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 25,
@@ -74,14 +83,17 @@
     "tags": [
       {
         "type": "constructor",
-        "string": ""
+        "string": "",
+        "html": ""
       },
       {
         "type": "alias",
-        "string": "module:datastore/query "
+        "string": "module:datastore/query ",
+        "html": "<p>module:datastore/query </p>"
       },
       {
         "type": "param",
+        "string": "{string=} namespace - Namespace to query entities from.",
         "name": "namespace",
         "description": "<ul>\n<li>Namespace to query entities from.</li>\n</ul>\n",
         "types": [
@@ -95,6 +107,7 @@
       },
       {
         "type": "param",
+        "string": "{string[]} kinds - Kinds to query.\n",
         "name": "kinds",
         "description": "<ul>\n<li>Kinds to query. </li>\n</ul>\n",
         "types": [
@@ -108,7 +121,8 @@
       },
       {
         "type": "example",
-        "string": "// If your dataset was scoped to a namespace at initialization, your query\n// will likewise be scoped to that namespace.\ndataset.createQuery(['Lion', 'Chimp']);\n\n// However, you may override the namespace per query.\ndataset.createQuery('AnimalNamespace', ['Lion', 'Chimp']);\n\n// You may also remove the namespace altogether.\ndataset.createQuery(null, ['Lion', 'Chimp']);"
+        "string": "// If your dataset was scoped to a namespace at initialization, your query\n// will likewise be scoped to that namespace.\ndataset.createQuery(['Lion', 'Chimp']);\n\n// However, you may override the namespace per query.\ndataset.createQuery('AnimalNamespace', ['Lion', 'Chimp']);\n\n// You may also remove the namespace altogether.\ndataset.createQuery(null, ['Lion', 'Chimp']);",
+        "html": "<p>// If your dataset was scoped to a namespace at initialization, your query<br />// will likewise be scoped to that namespace.<br />dataset.createQuery([&#39;Lion&#39;, &#39;Chimp&#39;]);</p><p>// However, you may override the namespace per query.<br />dataset.createQuery(&#39;AnimalNamespace&#39;, [&#39;Lion&#39;, &#39;Chimp&#39;]);</p><p>// You may also remove the namespace altogether.<br />dataset.createQuery(null, [&#39;Lion&#39;, &#39;Chimp&#39;]);</p>"
       }
     ],
     "description": {
@@ -118,6 +132,7 @@
     },
     "isPrivate": false,
     "isConstructor": true,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 31,
@@ -133,6 +148,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{string} filter - Property + Operator (=, <, >, <=, >=).",
         "name": "filter",
         "description": "<ul>\n<li>Property + Operator (=, &lt;, &gt;, &lt;=, &gt;=).</li>\n</ul>\n",
         "types": [
@@ -146,6 +162,7 @@
       },
       {
         "type": "param",
+        "string": "{*} value - Value to compare property to.",
         "name": "value",
         "description": "<ul>\n<li>Value to compare property to.</li>\n</ul>\n",
         "types": [],
@@ -157,6 +174,7 @@
       },
       {
         "type": "return",
+        "string": "{module:datastore/query}\n",
         "types": [
           "module:datastore/query"
         ],
@@ -165,11 +183,13 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "description": "",
+        "html": "<p>{module:datastore/query}</p>"
       },
       {
         "type": "example",
-        "string": "// List all companies named Google that have less than 400 employees.\nvar companyQuery = query\n  .filter('name =', 'Google');\n  .filter('size <', 400);\n\n// To filter by key, use `__key__` for the property name. Filter on keys\n// stored as properties is not currently supported.\nvar keyQuery = query.filter('__key__ =', dataset.key(['Company', 'Google']));"
+        "string": "// List all companies named Google that have less than 400 employees.\nvar companyQuery = query\n  .filter('name =', 'Google');\n  .filter('size <', 400);\n\n// To filter by key, use `__key__` for the property name. Filter on keys\n// stored as properties is not currently supported.\nvar keyQuery = query.filter('__key__ =', dataset.key(['Company', 'Google']));",
+        "html": "<p>// List all companies named Google that have less than 400 employees.<br />var companyQuery = query<br />  .filter(&#39;name =&#39;, &#39;Google&#39;);<br />  .filter(&#39;size &lt;&#39;, 400);</p><p>// To filter by key, use <code>__key__</code> for the property name. Filter on keys<br />// stored as properties is not currently supported.<br />var keyQuery = query.filter(&#39;<strong>key</strong> =&#39;, dataset.key([&#39;Company&#39;, &#39;Google&#39;]));</p>"
       }
     ],
     "description": {
@@ -179,6 +199,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 78,
@@ -196,6 +217,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{Key} key - Key object to filter by.",
         "name": "key",
         "description": "<ul>\n<li>Key object to filter by.</li>\n</ul>\n",
         "types": [
@@ -209,6 +231,7 @@
       },
       {
         "type": "return",
+        "string": "{module:datastore/query}\n",
         "types": [
           "module:datastore/query"
         ],
@@ -217,11 +240,13 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "description": "",
+        "html": "<p>{module:datastore/query}</p>"
       },
       {
         "type": "example",
-        "string": "var ancestoryQuery = query.hasAncestor(dataset.key(['Parent', 123]));"
+        "string": "var ancestoryQuery = query.hasAncestor(dataset.key(['Parent', 123]));",
+        "html": "<p>var ancestoryQuery = query.hasAncestor(dataset.key([&#39;Parent&#39;, 123]));</p>"
       }
     ],
     "description": {
@@ -231,6 +256,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 116,
@@ -248,6 +274,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{string} property - Optional operator (+, -) and property to order by.",
         "name": "property",
         "description": "<ul>\n<li>Optional operator (+, -) and property to order by.</li>\n</ul>\n",
         "types": [
@@ -261,6 +288,7 @@
       },
       {
         "type": "return",
+        "string": "{module:datastore/query}\n",
         "types": [
           "module:datastore/query"
         ],
@@ -269,11 +297,13 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "description": "",
+        "html": "<p>{module:datastore/query}</p>"
       },
       {
         "type": "example",
-        "string": "// Sort by size ascendingly.\nvar companiesAscending = companyQuery.order('size');\n\n// Sort by size descendingly.\nvar companiesDescending = companyQuery.order('-size');"
+        "string": "// Sort by size ascendingly.\nvar companiesAscending = companyQuery.order('size');\n\n// Sort by size descendingly.\nvar companiesDescending = companyQuery.order('-size');",
+        "html": "<p>// Sort by size ascendingly.<br />var companiesAscending = companyQuery.order(&#39;size&#39;);</p><p>// Sort by size descendingly.<br />var companiesDescending = companyQuery.order(&#39;-size&#39;);</p>"
       }
     ],
     "description": {
@@ -283,6 +313,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 133,
@@ -300,6 +331,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{array} properties - Properties to group by.",
         "name": "properties",
         "description": "<ul>\n<li>Properties to group by.</li>\n</ul>\n",
         "types": [
@@ -313,6 +345,7 @@
       },
       {
         "type": "return",
+        "string": "{module:datastore/query}\n",
         "types": [
           "module:datastore/query"
         ],
@@ -321,11 +354,13 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "description": "",
+        "html": "<p>{module:datastore/query}</p>"
       },
       {
         "type": "example",
-        "string": "var groupedQuery = companyQuery.groupBy(['name', 'size']);"
+        "string": "var groupedQuery = companyQuery.groupBy(['name', 'size']);",
+        "html": "<p>var groupedQuery = companyQuery.groupBy([&#39;name&#39;, &#39;size&#39;]);</p>"
       }
     ],
     "description": {
@@ -335,6 +370,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 161,
@@ -352,6 +388,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{array} fieldNames - Properties to return from the matched entities.",
         "name": "fieldNames",
         "description": "<ul>\n<li>Properties to return from the matched entities.</li>\n</ul>\n",
         "types": [
@@ -365,6 +402,7 @@
       },
       {
         "type": "return",
+        "string": "{module:datastore/query}\n",
         "types": [
           "module:datastore/query"
         ],
@@ -373,11 +411,13 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "description": "",
+        "html": "<p>{module:datastore/query}</p>"
       },
       {
         "type": "example",
-        "string": "// Only retrieve the name and size properties.\nvar selectQuery = companyQuery.select(['name', 'size']);"
+        "string": "// Only retrieve the name and size properties.\nvar selectQuery = companyQuery.select(['name', 'size']);",
+        "html": "<p>// Only retrieve the name and size properties.<br />var selectQuery = companyQuery.select([&#39;name&#39;, &#39;size&#39;]);</p>"
       }
     ],
     "description": {
@@ -387,6 +427,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 176,
@@ -404,6 +445,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{string} cursorToken - The starting cursor token.",
         "name": "cursorToken",
         "description": "<ul>\n<li>The starting cursor token.</li>\n</ul>\n",
         "types": [
@@ -417,6 +459,7 @@
       },
       {
         "type": "return",
+        "string": "{module:datastore/query}\n",
         "types": [
           "module:datastore/query"
         ],
@@ -425,11 +468,13 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "description": "",
+        "html": "<p>{module:datastore/query}</p>"
       },
       {
         "type": "example",
-        "string": "var cursorToken = 'X';\n\n// Retrieve results starting from cursorToken.\nvar startQuery = companyQuery.start(cursorToken);"
+        "string": "var cursorToken = 'X';\n\n// Retrieve results starting from cursorToken.\nvar startQuery = companyQuery.start(cursorToken);",
+        "html": "<p>var cursorToken = &#39;X&#39;;</p><p>// Retrieve results starting from cursorToken.<br />var startQuery = companyQuery.start(cursorToken);</p>"
       }
     ],
     "description": {
@@ -439,6 +484,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 194,
@@ -456,6 +502,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{string} cursorToken - The ending cursor token.",
         "name": "cursorToken",
         "description": "<ul>\n<li>The ending cursor token.</li>\n</ul>\n",
         "types": [
@@ -469,6 +516,7 @@
       },
       {
         "type": "return",
+        "string": "{module:datastore/query}\n",
         "types": [
           "module:datastore/query"
         ],
@@ -477,11 +525,13 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "description": "",
+        "html": "<p>{module:datastore/query}</p>"
       },
       {
         "type": "example",
-        "string": "var cursorToken = 'X';\n\n// Retrieve results limited to the extent of cursorToken.\nvar endQuery = companyQuery.end(cursorToken);"
+        "string": "var cursorToken = 'X';\n\n// Retrieve results limited to the extent of cursorToken.\nvar endQuery = companyQuery.end(cursorToken);",
+        "html": "<p>var cursorToken = &#39;X&#39;;</p><p>// Retrieve results limited to the extent of cursorToken.<br />var endQuery = companyQuery.end(cursorToken);</p>"
       }
     ],
     "description": {
@@ -491,6 +541,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 214,
@@ -508,6 +559,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{number} n - The number of results to limit the query to.",
         "name": "n",
         "description": "<ul>\n<li>The number of results to limit the query to.</li>\n</ul>\n",
         "types": [
@@ -521,6 +573,7 @@
       },
       {
         "type": "return",
+        "string": "{module:datastore/query}\n",
         "types": [
           "module:datastore/query"
         ],
@@ -529,11 +582,13 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "description": "",
+        "html": "<p>{module:datastore/query}</p>"
       },
       {
         "type": "example",
-        "string": "// Limit the results to 10 entities.\nvar limitQuery = companyQuery.limit(10);"
+        "string": "// Limit the results to 10 entities.\nvar limitQuery = companyQuery.limit(10);",
+        "html": "<p>// Limit the results to 10 entities.<br />var limitQuery = companyQuery.limit(10);</p>"
       }
     ],
     "description": {
@@ -543,6 +598,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 234,
@@ -560,6 +616,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{number} n - The offset to start from after the start cursor.",
         "name": "n",
         "description": "<ul>\n<li>The offset to start from after the start cursor.</li>\n</ul>\n",
         "types": [
@@ -573,6 +630,7 @@
       },
       {
         "type": "return",
+        "string": "{module:datastore/query}\n",
         "types": [
           "module:datastore/query"
         ],
@@ -581,11 +639,13 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "description": "",
+        "html": "<p>{module:datastore/query}</p>"
       },
       {
         "type": "example",
-        "string": "// Start from the 101st result.\nvar offsetQuery = companyQuery.offset(100);"
+        "string": "// Start from the 101st result.\nvar offsetQuery = companyQuery.offset(100);",
+        "html": "<p>// Start from the 101st result.<br />var offsetQuery = companyQuery.offset(100);</p>"
       }
     ],
     "description": {
@@ -595,6 +655,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 252,

@@ -8,6 +8,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 1,
@@ -17,7 +18,8 @@
     "tags": [
       {
         "type": "module",
-        "string": "pubsub/topic"
+        "string": "pubsub/topic",
+        "html": "<p>pubsub/topic</p>"
       }
     ],
     "description": {
@@ -27,16 +29,19 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';"
+    "code": "'use strict';",
+    "ctx": false
   },
   {
     "tags": [
       {
         "type": "type",
+        "string": "{module:common/util}",
         "types": [
           "module:common/util"
         ],
@@ -44,11 +49,14 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -58,6 +66,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 23,
@@ -74,6 +83,7 @@
     "tags": [
       {
         "type": "type",
+        "string": "{module:pubsub/subscription}",
         "types": [
           "module:pubsub/subscription"
         ],
@@ -81,11 +91,14 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{module:pubsub/subscription}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -95,6 +108,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 29,
@@ -111,6 +125,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{module:pubsub} pubsub - PubSub object.",
         "name": "pubsub",
         "description": "<ul>\n<li>PubSub object.</li>\n</ul>\n",
         "types": [
@@ -124,6 +139,7 @@
       },
       {
         "type": "param",
+        "string": "{object} options - Configuration object.",
         "name": "options",
         "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
         "types": [
@@ -137,6 +153,7 @@
       },
       {
         "type": "param",
+        "string": "{string} options.name - Name of the topic.",
         "name": "options.name",
         "description": "<ul>\n<li>Name of the topic.</li>\n</ul>\n",
         "types": [
@@ -156,6 +173,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 35,
@@ -165,15 +183,18 @@
     "tags": [
       {
         "type": "constructor",
-        "string": ""
+        "string": "",
+        "html": ""
       },
       {
         "type": "alias",
-        "string": "module:pubsub/topic "
+        "string": "module:pubsub/topic ",
+        "html": "<p>module:pubsub/topic </p>"
       },
       {
         "type": "example",
-        "string": "// From pubsub.topic:\nvar topic = pubsub.topic('my-existing-topic');\n\n// From pubsub.createTopic:\npubsub.createTopic('my-new-topic', function(err, topic) {\n  // `topic` is a Topic object.\n});"
+        "string": "// From pubsub.topic:\nvar topic = pubsub.topic('my-existing-topic');\n\n// From pubsub.createTopic:\npubsub.createTopic('my-new-topic', function(err, topic) {\n  // `topic` is a Topic object.\n});",
+        "html": "<p>// From pubsub.topic:<br />var topic = pubsub.topic(&#39;my-existing-topic&#39;);</p><p>// From pubsub.createTopic:<br />pubsub.createTopic(&#39;my-new-topic&#39;, function(err, topic) {<br />  // <code>topic</code> is a Topic object.<br />});</p>"
       }
     ],
     "description": {
@@ -183,6 +204,7 @@
     },
     "isPrivate": false,
     "isConstructor": true,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 41,
@@ -198,10 +220,13 @@
     "tags": [
       {
         "type": "private",
-        "visibility": "private"
+        "string": "\n",
+        "visibility": "private",
+        "html": ""
       },
       {
         "type": "return",
+        "string": "{object}",
         "types": [
           "object"
         ],
@@ -210,7 +235,8 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "description": "",
+        "html": "<p>{object}</p>"
       }
     ],
     "description": {
@@ -220,6 +246,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 71,
@@ -236,10 +263,13 @@
     "tags": [
       {
         "type": "private",
-        "visibility": "private"
+        "string": "\n",
+        "visibility": "private",
+        "html": ""
       },
       {
         "type": "return",
+        "string": "{string}",
         "types": [
           "string"
         ],
@@ -248,16 +278,18 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "description": "",
+        "html": "<p>{string}</p>"
       }
     ],
     "description": {
-      "full": "<p>Format the name of a topic. A Topic&#39;s full name is in the format of<br />&#39;projects/{projectId}/topics/{topicName}.</p>",
-      "summary": "<p>Format the name of a topic. A Topic&#39;s full name is in the format of<br />&#39;projects/{projectId}/topics/{topicName}.</p>",
+      "full": "<p>Format the name of a topic. A Topic&#39;s full name is in the format of<br />&#39;projects/{projectId}/topics/{topicName}&#39;.</p>",
+      "summary": "<p>Format the name of a topic. A Topic&#39;s full name is in the format of<br />&#39;projects/{projectId}/topics/{topicName}&#39;.</p>",
       "body": ""
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 88,
@@ -274,16 +306,19 @@
     "tags": [
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
-      "full": "<p>Wrapper for makeReq_ that automatically attempts to create a topic if it<br />does not yet exist.</p>",
-      "summary": "<p>Wrapper for makeReq_ that automatically attempts to create a topic if it<br />does not yet exist.</p>",
+      "full": "<p>Wrapper for makeReq_ that automatically attempts to create a topic if it does<br />not yet exist.</p>",
+      "summary": "<p>Wrapper for makeReq_ that automatically attempts to create a topic if it does<br />not yet exist.</p>",
       "body": ""
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 104,
@@ -301,13 +336,23 @@
     "tags": [
       {
         "type": "throws",
+        "string": "{Error} If no message is provided.",
         "types": [
           "Error"
         ],
-        "description": "<p>If no message is provided. </p>"
+        "description": "<p>If no message is provided.</p>"
+      },
+      {
+        "type": "throws",
+        "string": "{Error} If a message is missing a data property.\n",
+        "types": [
+          "Error"
+        ],
+        "description": "<p>If a message is missing a data property. </p>"
       },
       {
         "type": "param",
+        "string": "{object|object[]} message - The message(s) to publish.",
         "name": "message",
         "description": "<ul>\n<li>The message(s) to publish.</li>\n</ul>\n",
         "types": [
@@ -322,6 +367,7 @@
       },
       {
         "type": "param",
+        "string": "{*} message.data - The contents of the message.",
         "name": "message.data",
         "description": "<ul>\n<li>The contents of the message.</li>\n</ul>\n",
         "types": [],
@@ -333,6 +379,7 @@
       },
       {
         "type": "param",
+        "string": "{array=} message.attributes - Key/value pair of attributes to apply to\n    the message. All values must be strings.",
         "name": "message.attributes",
         "description": "<ul>\n<li>Key/value pair of attributes to apply to     the message. All values must be strings.</li>\n</ul>\n",
         "types": [
@@ -346,6 +393,7 @@
       },
       {
         "type": "param",
+        "string": "{function=} callback - The callback function.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -359,21 +407,23 @@
       },
       {
         "type": "example",
-        "string": "var registrationMessage = {\n  data: {\n    userId: 3,\n    name: 'Stephen',\n    event: 'new user'\n  },\n  attributes: {\n    key: 'value',\n    hello: 'world'\n  }\n};\ntopic.publish(registrationMessage, function(err, messageIds) {});\n\n//-\n// You can publish a batch of messages at once by supplying an array.\n//-\nvar purchaseMessage = {\n  data: {\n    userId: 3,\n    product: 'computer',\n    event: 'purchase'\n  }\n};\n\ntopic.publish([\n  registrationMessage,\n  purchaseMessage\n], function(err, messageIds) {});"
+        "string": "var registerMessage = {\n  data: {\n    userId: 3,\n    name: 'Stephen',\n    event: 'new user'\n  },\n  attributes: {\n    key: 'value',\n    hello: 'world'\n  }\n};\ntopic.publish(registerMessage, function(err, messageIds, apiResponse) {});\n\n//-\n// You can publish a batch of messages at once by supplying an array.\n//-\nvar purchaseMessage = {\n  data: {\n    userId: 3,\n    product: 'computer',\n    event: 'purchase'\n  }\n};\n\ntopic.publish([\n  registerMessage,\n  purchaseMessage\n], function(err, messageIds, apiResponse) {});",
+        "html": "<p>var registerMessage = {<br />  data: {<br />    userId: 3,<br />    name: &#39;Stephen&#39;,<br />    event: &#39;new user&#39;<br />  },<br />  attributes: {<br />    key: &#39;value&#39;,<br />    hello: &#39;world&#39;<br />  }<br />};<br />topic.publish(registerMessage, function(err, messageIds, apiResponse) {});</p><p>//-<br />// You can publish a batch of messages at once by supplying an array.<br />//-<br />var purchaseMessage = {<br />  data: {<br />    userId: 3,<br />    product: &#39;computer&#39;,<br />    event: &#39;purchase&#39;<br />  }<br />};</p><p>topic.publish([<br />  registerMessage,<br />  purchaseMessage<br />], function(err, messageIds, apiResponse) {});</p>"
       }
     ],
     "description": {
-      "full": "<p>Publish the provided message or array of messages. A message can be of any<br />type. On success, an array of messageIds is returned in the response.</p>",
-      "summary": "<p>Publish the provided message or array of messages. A message can be of any<br />type. On success, an array of messageIds is returned in the response.</p>",
+      "full": "<p>Publish the provided message or array of messages. On success, an array of<br />messageIds is returned in the response.</p>",
+      "summary": "<p>Publish the provided message or array of messages. On success, an array of<br />messageIds is returned in the response.</p>",
       "body": ""
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 132,
-    "codeStart": 174,
-    "code": "Topic.prototype.publish = function(messages, callback) {\n  messages = util.arrayize(messages);\n\n  if (messages.length === 0) {\n    throw new Error('Cannot publish without a message.');\n  }\n\n  callback = callback || util.noop;\n\n  var body = {\n    messages: messages.map(Topic.formatMessage_)\n  };\n\n  var path = this.name + ':publish';\n  this.makeReq_('POST', path, null, body, function(err, result) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    callback(null, result && result.messageIds || []);\n  });\n};",
+    "codeStart": 175,
+    "code": "Topic.prototype.publish = function(messages, callback) {\n  messages = util.arrayize(messages);\n\n  if (messages.length === 0) {\n    throw new Error('Cannot publish without a message.');\n  }\n\n  if (!messages.every(util.prop('data'))) {\n    throw new Error('Cannot publish message without a `data` property.');\n  }\n\n  callback = callback || util.noop;\n\n  var body = {\n    messages: messages.map(Topic.formatMessage_)\n  };\n\n  var path = this.name + ':publish';\n  this.makeReq_('POST', path, null, body, function(err, result) {\n    if (err) {\n      callback(err, null, result);\n      return;\n    }\n    callback(null, result && result.messageIds || [], result);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Topic",
@@ -386,6 +436,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{function=} callback - The callback function.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -399,7 +450,8 @@
       },
       {
         "type": "example",
-        "string": "topic.delete(function(err) {});"
+        "string": "topic.delete(function(err, apiResponse) {});",
+        "html": "<p>topic.delete(function(err, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -409,10 +461,11 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 197,
-    "codeStart": 205,
+    "line": 202,
+    "codeStart": 210,
     "code": "Topic.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('DELETE', this.name, null, null, callback);\n};",
     "ctx": {
       "type": "method",
@@ -426,6 +479,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{object=} query - Query object.",
         "name": "query",
         "description": "<ul>\n<li>Query object.</li>\n</ul>\n",
         "types": [
@@ -439,6 +493,7 @@
       },
       {
         "type": "param",
+        "string": "{string=} query.pageToken - Page token.",
         "name": "query.pageToken",
         "description": "<ul>\n<li>Page token.</li>\n</ul>\n",
         "types": [
@@ -452,6 +507,7 @@
       },
       {
         "type": "param",
+        "string": "{number=} query.pageSize - Maximum number of results to return.",
         "name": "query.pageSize",
         "description": "<ul>\n<li>Maximum number of results to return.</li>\n</ul>\n",
         "types": [
@@ -465,6 +521,7 @@
       },
       {
         "type": "param",
+        "string": "{function} callback - The callback function.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -478,7 +535,8 @@
       },
       {
         "type": "example",
-        "string": "// Get all subscriptions for this topic.\ntopic.getSubscriptions(function(err, subscriptions, nextQuery) {\n  // If `nextQuery` is non-null, there may be more results to fetch. To do\n  // so, run `topic.getSubscriptions(nextQuery, callback);`.\n});\n\n// Customize the query.\ntopic.getSubscriptions({\n  pageSize: 3\n}, function(err, subscriptions, nextQuery) {});"
+        "string": "// Get all subscriptions for this topic.\ntopic.getSubscriptions(function(err, subscriptions, nextQuery, apiResponse) {\n  // If `nextQuery` is non-null, there may be more results to fetch. To do\n  // so, run `topic.getSubscriptions(nextQuery, callback);`.\n});\n\n// Customize the query.\ntopic.getSubscriptions({\n  pageSize: 3\n}, function(err, subscriptions, nextQuery, apiResponse) {});",
+        "html": "<p>// Get all subscriptions for this topic.<br />topic.getSubscriptions(function(err, subscriptions, nextQuery, apiResponse) {<br />  // If <code>nextQuery</code> is non-null, there may be more results to fetch. To do<br />  // so, run <code>topic.getSubscriptions(nextQuery, callback);</code>.<br />});</p><p>// Customize the query.<br />topic.getSubscriptions({<br />  pageSize: 3<br />}, function(err, subscriptions, nextQuery, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -488,11 +546,12 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 210,
-    "codeStart": 235,
-    "code": "Topic.prototype.getSubscriptions = function(query, callback) {\n  var self = this;\n  if (util.is(query, 'function')) {\n    callback = query;\n    query = {};\n  }\n\n  var path = this.name + '/subscriptions';\n  this.makeReq_('GET', path, query, true, function(err, result) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var subscriptions = (result.subscriptions || []).map(function(name) {\n      return new Subscription(self, {\n        name: name\n      });\n    });\n    var nextQuery = null;\n    if (result.nextPageToken) {\n      nextQuery = query;\n      nextQuery.pageToken = result.nextPageToken;\n    }\n    callback(null, subscriptions, nextQuery);\n  });\n};",
+    "line": 215,
+    "codeStart": 240,
+    "code": "Topic.prototype.getSubscriptions = function(query, callback) {\n  var self = this;\n  if (util.is(query, 'function')) {\n    callback = query;\n    query = {};\n  }\n\n  var path = this.name + '/subscriptions';\n  this.makeReq_('GET', path, query, true, function(err, result) {\n    if (err) {\n      callback(err, null, null, result);\n      return;\n    }\n\n    var subscriptions = (result.subscriptions || []).map(function(name) {\n      return new Subscription(self, {\n        name: name\n      });\n    });\n    var nextQuery = null;\n    if (result.nextPageToken) {\n      nextQuery = query;\n      nextQuery.pageToken = result.nextPageToken;\n    }\n    callback(null, subscriptions, nextQuery, result);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Topic",
@@ -505,6 +564,7 @@
     "tags": [
       {
         "type": "throws",
+        "string": "{Error} If a name is not provided.\n",
         "types": [
           "Error"
         ],
@@ -512,6 +572,7 @@
       },
       {
         "type": "param",
+        "string": "{string} name - The name of the subscription.",
         "name": "name",
         "description": "<ul>\n<li>The name of the subscription.</li>\n</ul>\n",
         "types": [
@@ -525,6 +586,7 @@
       },
       {
         "type": "param",
+        "string": "{object=} options - Configuration object.",
         "name": "options",
         "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
         "types": [
@@ -538,6 +600,7 @@
       },
       {
         "type": "param",
+        "string": "{number=} options.ackDeadlineSeconds - The maximum time after\n    receiving a message that you must ack a message before it is redelivered.",
         "name": "options.ackDeadlineSeconds",
         "description": "<ul>\n<li>The maximum time after     receiving a message that you must ack a message before it is redelivered.</li>\n</ul>\n",
         "types": [
@@ -551,6 +614,7 @@
       },
       {
         "type": "param",
+        "string": "{boolean=} options.autoAck - Automatically acknowledge the message\n    once it's pulled. (default: false)",
         "name": "options.autoAck",
         "description": "<ul>\n<li>Automatically acknowledge the message     once it&#39;s pulled. (default: false)</li>\n</ul>\n",
         "types": [
@@ -564,6 +628,7 @@
       },
       {
         "type": "param",
+        "string": "{number=} options.interval - Interval in milliseconds to check for new\n    messages. (default: 10)",
         "name": "options.interval",
         "description": "<ul>\n<li>Interval in milliseconds to check for new     messages. (default: 10)</li>\n</ul>\n",
         "types": [
@@ -577,6 +642,7 @@
       },
       {
         "type": "param",
+        "string": "{boolean=} options.reuseExisting - If the subscription already exists,\n    reuse it. The options of the existing subscription are not changed. If\n    false, attempting to create a subscription that already exists will fail.\n    (default: false)",
         "name": "options.reuseExisting",
         "description": "<ul>\n<li>If the subscription already exists,     reuse it. The options of the existing subscription are not changed. If<br />  false, attempting to create a subscription that already exists will fail.<br />  (default: false)</li>\n</ul>\n",
         "types": [
@@ -590,6 +656,7 @@
       },
       {
         "type": "param",
+        "string": "{function} callback - The callback function.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -603,7 +670,8 @@
       },
       {
         "type": "example",
-        "string": "// Without specifying any options.\ntopic.subscribe('new-subscription', function(err, subscription) {});\n\n// With options.\ntopic.subscribe('new-subscription', {\n  ackDeadlineSeconds: 90,\n  autoAck: true,\n  interval: 30\n}, function(err, subscription) {});"
+        "string": "// Without specifying any options.\ntopic.subscribe('my-cool-sub', function(err, subscription, apiResponse) {});\n\n// With options.\ntopic.subscribe('my-cool-sub', {\n  ackDeadlineSeconds: 90,\n  autoAck: true,\n  interval: 30\n}, function(err, subscription, apiResponse) {});",
+        "html": "<p>// Without specifying any options.<br />topic.subscribe(&#39;my-cool-sub&#39;, function(err, subscription, apiResponse) {});</p><p>// With options.<br />topic.subscribe(&#39;my-cool-sub&#39;, {<br />  ackDeadlineSeconds: 90,<br />  autoAck: true,<br />  interval: 30<br />}, function(err, subscription, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -613,11 +681,12 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 263,
-    "codeStart": 297,
-    "code": "Topic.prototype.subscribe = function(name, options, callback) {\n  var self = this;\n  if (!name) {\n    throw new Error('A name is required for a new subscription.');\n  }\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  var body = {\n    topic: this.name\n  };\n\n  if (options.ackDeadlineSeconds) {\n    body.ackDeadlineSeconds = options.ackDeadlineSeconds;\n  }\n\n  var path = Subscription.formatName_(this.projectId, name);\n  this.makeReq_('PUT', path, null, body, function(err) {\n    if (options.reuseExisting && err && err.code === 409) {\n      callback(null, self.subscription(name, options));\n    } else if (err) {\n      callback(err);\n    } else {\n      callback(null, self.subscription(name, options));\n    }\n  });\n};",
+    "line": 268,
+    "codeStart": 302,
+    "code": "Topic.prototype.subscribe = function(name, options, callback) {\n  var self = this;\n  if (!name) {\n    throw new Error('A name is required for a new subscription.');\n  }\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  var body = {\n    topic: this.name\n  };\n\n  if (options.ackDeadlineSeconds) {\n    body.ackDeadlineSeconds = options.ackDeadlineSeconds;\n  }\n\n  var path = Subscription.formatName_(this.projectId, name);\n\n  this.makeReq_('PUT', path, null, body, function(err, result) {\n    if (options.reuseExisting && err && err.code === 409) {\n      callback(null, self.subscription(name, options), result);\n    } else if (err) {\n      callback(err, null, result);\n    } else {\n      callback(null, self.subscription(name, options), result);\n    }\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Topic",
@@ -630,6 +699,7 @@
     "tags": [
       {
         "type": "throws",
+        "string": "{Error} If a name is not provided.\n",
         "types": [
           "Error"
         ],
@@ -637,6 +707,7 @@
       },
       {
         "type": "param",
+        "string": "{string} name - Name of the subscription.",
         "name": "name",
         "description": "<ul>\n<li>Name of the subscription.</li>\n</ul>\n",
         "types": [
@@ -650,6 +721,7 @@
       },
       {
         "type": "param",
+        "string": "{object=} options - Configuration object.",
         "name": "options",
         "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
         "types": [
@@ -663,6 +735,7 @@
       },
       {
         "type": "param",
+        "string": "{boolean=} options.autoAck - Automatically acknowledge the message\n    once it's pulled.",
         "name": "options.autoAck",
         "description": "<ul>\n<li>Automatically acknowledge the message     once it&#39;s pulled.</li>\n</ul>\n",
         "types": [
@@ -676,6 +749,7 @@
       },
       {
         "type": "param",
+        "string": "{number=} options.interval - Interval in milliseconds to check for new\n    messages.",
         "name": "options.interval",
         "description": "<ul>\n<li>Interval in milliseconds to check for new     messages.</li>\n</ul>\n",
         "types": [
@@ -689,6 +763,7 @@
       },
       {
         "type": "return",
+        "string": "{module:pubsub/subscription}\n",
         "types": [
           "module:pubsub/subscription"
         ],
@@ -697,11 +772,13 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "description": "",
+        "html": "<p>{module:pubsub/subscription}</p>"
       },
       {
         "type": "example",
-        "string": "var subscription = topic.subscription('my-existing-subscription');\n\n// Register a listener for `message` events.\nsubscription.on('message', function(message) {\n  // Called every time a message is received.\n  // message.id = ID used to acknowledge its receival.\n  // message.data = Contents of the message.\n  // message.attributes = Attributes of the message.\n});"
+        "string": "var subscription = topic.subscription('my-existing-subscription');\n\n// Register a listener for `message` events.\nsubscription.on('message', function(message) {\n  // Called every time a message is received.\n  // message.id = ID used to acknowledge its receival.\n  // message.data = Contents of the message.\n  // message.attributes = Attributes of the message.\n});",
+        "html": "<p>var subscription = topic.subscription(&#39;my-existing-subscription&#39;);</p><p>// Register a listener for <code>message</code> events.<br />subscription.on(&#39;message&#39;, function(message) {<br />  // Called every time a message is received.<br />  // message.id = ID used to acknowledge its receival.<br />  // message.data = Contents of the message.<br />  // message.attributes = Attributes of the message.<br />});</p>"
       }
     ],
     "description": {
@@ -711,10 +788,11 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 327,
-    "codeStart": 354,
+    "line": 333,
+    "codeStart": 360,
     "code": "Topic.prototype.subscription = function(name, options) {\n  if (!name) {\n    throw new Error('The name of a subscription is required.');\n  }\n  options = options || {};\n  options.name = name;\n  return new Subscription(this.pubsub, options);\n};\n\nmodule.exports = Topic;",
     "ctx": {
       "type": "method",

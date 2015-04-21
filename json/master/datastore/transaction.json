@@ -8,6 +8,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 1,
@@ -17,7 +18,8 @@
     "tags": [
       {
         "type": "module",
-        "string": "datastore/transaction"
+        "string": "datastore/transaction",
+        "html": "<p>datastore/transaction</p>"
       }
     ],
     "description": {
@@ -27,16 +29,19 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar nodeutil = require('util');"
+    "code": "'use strict';\n\nvar nodeutil = require('util');",
+    "ctx": false
   },
   {
     "tags": [
       {
         "type": "type",
+        "string": "{module:common/util}",
         "types": [
           "module:common/util"
         ],
@@ -44,11 +49,14 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -58,6 +66,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 25,
@@ -74,6 +83,7 @@
     "tags": [
       {
         "type": "type",
+        "string": "{module:datastore/request}",
         "types": [
           "module:datastore/request"
         ],
@@ -81,11 +91,14 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{module:datastore/request}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -95,6 +108,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 31,
@@ -111,6 +125,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{module:common/connection#Connection} connection - An authorized\n    connection to Google Cloud Datastore.",
         "name": "connection",
         "description": "<ul>\n<li>An authorized     connection to Google Cloud Datastore.</li>\n</ul>\n",
         "types": [
@@ -124,6 +139,7 @@
       },
       {
         "type": "param",
+        "string": "{string} projectId - Dataset ID. This is your project ID from the\n    Google Developers Console.",
         "name": "projectId",
         "description": "<ul>\n<li>Dataset ID. This is your project ID from the     Google Developers Console.</li>\n</ul>\n",
         "types": [
@@ -143,6 +159,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 39,
@@ -152,19 +169,23 @@
     "tags": [
       {
         "type": "constructor",
-        "string": ""
+        "string": "",
+        "html": ""
       },
       {
         "type": "alias",
-        "string": "module:datastore/transaction"
+        "string": "module:datastore/transaction",
+        "html": "<p>module:datastore/transaction</p>"
       },
       {
         "type": "mixes",
-        "string": "module:datastore/request "
+        "string": "module:datastore/request ",
+        "html": "<p>module:datastore/request </p>"
       },
       {
         "type": "example",
-        "string": "dataset.runInTransaction(function(transaction, done) {\n  // `transaction` is a Transaction object.\n});"
+        "string": "dataset.runInTransaction(function(transaction, done) {\n  // `transaction` is a Transaction object.\n});",
+        "html": "<p>dataset.runInTransaction(function(transaction, done) {<br />  // <code>transaction</code> is a Transaction object.<br />});</p>"
       }
     ],
     "description": {
@@ -174,6 +195,7 @@
     },
     "isPrivate": false,
     "isConstructor": true,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 46,
@@ -189,6 +211,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{function} callback - The function to execute within the context of\n    a transaction.\n",
         "name": "callback",
         "description": "<ul>\n<li>The function to execute within the context of     a transaction.</li>\n</ul>\n",
         "types": [
@@ -202,7 +225,8 @@
       },
       {
         "type": "example",
-        "string": "transaction.begin(function(err) {\n  // Perform Datastore operations as usual.\n  transaction.get(dataset.key(['Company', 123]), function(err, entity) {\n    // Commit the transaction.\n    transaction.finalize(function(err) {});\n\n    // Rollback the transaction.\n    transaction.rollback(function(err) {});\n  });\n});"
+        "string": "transaction.begin(function(err) {\n  // Perform Datastore operations as usual.\n  transaction.get(dataset.key(['Company', 123]), function(err, entity) {\n    // Commit the transaction.\n    transaction.finalize(function(err, apiResponse) {});\n\n    // Rollback the transaction.\n    transaction.rollback(function(err, apiResponse) {});\n  });\n});",
+        "html": "<p>transaction.begin(function(err) {<br />  // Perform Datastore operations as usual.<br />  transaction.get(dataset.key([&#39;Company&#39;, 123]), function(err, entity) {<br />    // Commit the transaction.<br />    transaction.finalize(function(err, apiResponse) {});</p><pre><code>// Rollback the transaction.\ntransaction.rollback(function(err, apiResponse) {});\n</code></pre><p>  });<br />});</p>"
       }
     ],
     "description": {
@@ -212,11 +236,12 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 80,
     "codeStart": 99,
-    "code": "Transaction.prototype.begin = function(callback) {\n  var that = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('beginTransaction', function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.id = resp.transaction;\n\n    callback(null);\n  });\n};",
+    "code": "Transaction.prototype.begin = function(callback) {\n  var that = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('beginTransaction', function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    that.id = resp.transaction;\n\n    callback(null, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Transaction",
@@ -229,6 +254,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{function} callback - The callback function.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -242,7 +268,8 @@
       },
       {
         "type": "example",
-        "string": "transaction.begin(function(err) {\n  transaction.rollback(function(err) {\n    if (err) {\n      // Transaction could not be rolled back.\n    }\n  });\n});"
+        "string": "transaction.begin(function(err) {\n  transaction.rollback(function(err) {\n    if (err) {\n      // Transaction could not be rolled back.\n    }\n  });\n});",
+        "html": "<p>transaction.begin(function(err) {<br />  transaction.rollback(function(err) {<br />    if (err) {<br />      // Transaction could not be rolled back.<br />    }<br />  });<br />});</p>"
       }
     ],
     "description": {
@@ -252,11 +279,12 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 116,
     "codeStart": 130,
-    "code": "Transaction.prototype.rollback = function(callback) {\n  var that = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('rollback', function(err) {\n    that.skipCommit = true;\n\n    callback(err || null);\n  });\n};",
+    "code": "Transaction.prototype.rollback = function(callback) {\n  var that = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('rollback', function(err, resp) {\n    that.skipCommit = true;\n\n    callback(err || null, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Transaction",
@@ -269,6 +297,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{function} callback - The callback function.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -282,7 +311,8 @@
       },
       {
         "type": "example",
-        "string": "transaction.begin(function(err) {\n  transaction.commit(function(err) {\n    if (err) {\n      // Transaction could not be committed.\n    }\n  });\n});"
+        "string": "transaction.begin(function(err) {\n  transaction.commit(function(err, apiResponse) {\n    if (err) {\n      // Transaction could not be committed.\n    }\n  });\n});",
+        "html": "<p>transaction.begin(function(err) {<br />  transaction.commit(function(err, apiResponse) {<br />    if (err) {<br />      // Transaction could not be committed.<br />    }<br />  });<br />});</p>"
       }
     ],
     "description": {
@@ -292,11 +322,12 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 142,
     "codeStart": 156,
-    "code": "Transaction.prototype.commit = function(callback) {\n  var that = this;\n\n  callback = callback || util.noop;\n\n  if (this.skipCommit) {\n    setImmediate(callback);\n    return;\n  }\n\n  var keys = {};\n\n  this.modifiedEntities_\n\n    // Reverse the order of the queue to respect the \"last queued request wins\"\n    // behavior.\n    .reverse()\n\n    // Limit the operations we're going to send through to only the most\n    // recently queued operations. E.g., if a user tries to save with the same\n    // key they just asked to be deleted, the delete request will be ignored,\n    // giving preference to the save operation.\n    .filter(function(modifiedEntity) {\n      var key = JSON.stringify(modifiedEntity.entity.key);\n\n      if (!keys[key]) {\n        keys[key] = true;\n        return true;\n      }\n    })\n\n    // Group entities together by action (delete or save).\n    .sort(function(a, b) {\n      return a.method > b.method ? 1 : a.method < b.method ? -1 : 0;\n    })\n\n    // Group arguments together so that we only make one call to each method.\n    // This is important for `DatastoreRequest.save`, especially, as that method\n    // handles assigning auto-generated IDs to the original keys passed in. When\n    // we eventually execute the `save` method's API callback, having all the\n    // keys together is necessary to maintain order.\n    .reduce(function(acc, entityObject) {\n      var lastEntityObject = acc[acc.length - 1];\n      var sameMethod = lastEntityObject &&\n        entityObject.method === lastEntityObject.method;\n\n      if (!lastEntityObject || !sameMethod) {\n        acc.push(entityObject);\n      } else {\n        lastEntityObject.args = lastEntityObject.args.concat(entityObject.args);\n      }\n\n      return acc;\n    }, [])\n\n    // Call each of the mutational methods (DatastoreRequest[save,delete]) to\n    // build up a `req` array on this instance. This will also build up a\n    // `callbacks` array, that is the same callback that would run if we were\n    // using `save` and `delete` outside of a transaction, to process the\n    // response from the API.\n    .forEach(function(modifiedEntity) {\n      var method = modifiedEntity.method;\n      var args = modifiedEntity.args.reverse();\n\n      DatastoreRequest.prototype[method].call(that, args, util.noop);\n    });\n\n  // Take the `req` array built previously, and merge them into one request to\n  // send as the final transactional commit.\n  var req = this.requests_.reduce(function(acc, req) {\n    return extend(true, acc, req);\n  }, {});\n\n  this.makeReq_('commit', req, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    // The `callbacks` array was built previously. These are the callbacks that\n    // handle the API response normally when using the DatastoreRequest.save and\n    // .delete methods.\n    that.requestCallbacks_.forEach(function(cb) {\n      cb(null, resp);\n    });\n\n    callback(null);\n  });\n};",
+    "code": "Transaction.prototype.commit = function(callback) {\n  var that = this;\n\n  callback = callback || util.noop;\n\n  if (this.skipCommit) {\n    setImmediate(callback);\n    return;\n  }\n\n  var keys = {};\n\n  this.modifiedEntities_\n\n    // Reverse the order of the queue to respect the \"last queued request wins\"\n    // behavior.\n    .reverse()\n\n    // Limit the operations we're going to send through to only the most\n    // recently queued operations. E.g., if a user tries to save with the same\n    // key they just asked to be deleted, the delete request will be ignored,\n    // giving preference to the save operation.\n    .filter(function(modifiedEntity) {\n      var key = JSON.stringify(modifiedEntity.entity.key);\n\n      if (!keys[key]) {\n        keys[key] = true;\n        return true;\n      }\n    })\n\n    // Group entities together by action (delete or save).\n    .sort(function(a, b) {\n      return a.method > b.method ? 1 : a.method < b.method ? -1 : 0;\n    })\n\n    // Group arguments together so that we only make one call to each method.\n    // This is important for `DatastoreRequest.save`, especially, as that method\n    // handles assigning auto-generated IDs to the original keys passed in. When\n    // we eventually execute the `save` method's API callback, having all the\n    // keys together is necessary to maintain order.\n    .reduce(function(acc, entityObject) {\n      var lastEntityObject = acc[acc.length - 1];\n      var sameMethod = lastEntityObject &&\n        entityObject.method === lastEntityObject.method;\n\n      if (!lastEntityObject || !sameMethod) {\n        acc.push(entityObject);\n      } else {\n        lastEntityObject.args = lastEntityObject.args.concat(entityObject.args);\n      }\n\n      return acc;\n    }, [])\n\n    // Call each of the mutational methods (DatastoreRequest[save,delete]) to\n    // build up a `req` array on this instance. This will also build up a\n    // `callbacks` array, that is the same callback that would run if we were\n    // using `save` and `delete` outside of a transaction, to process the\n    // response from the API.\n    .forEach(function(modifiedEntity) {\n      var method = modifiedEntity.method;\n      var args = modifiedEntity.args.reverse();\n\n      DatastoreRequest.prototype[method].call(that, args, util.noop);\n    });\n\n  // Take the `req` array built previously, and merge them into one request to\n  // send as the final transactional commit.\n  var req = this.requests_.reduce(function(acc, req) {\n    return extend(true, acc, req);\n  }, {});\n\n  this.makeReq_('commit', req, function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    // The `callbacks` array was built previously. These are the callbacks that\n    // handle the API response normally when using the DatastoreRequest.save and\n    // .delete methods.\n    that.requestCallbacks_.forEach(function(cb) {\n      cb(null, resp);\n    });\n\n    callback(null, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Transaction",
@@ -314,6 +345,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 246,
@@ -323,6 +355,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{Key|Key[]} key - Datastore key object(s).\n",
         "name": "key",
         "description": "<ul>\n<li>Datastore key object(s). </li>\n</ul>\n",
         "types": [
@@ -337,7 +370,8 @@
       },
       {
         "type": "example",
-        "string": "// Delete a single entity.\ntransaction.delete(dataset.key(['Company', 123]), function(err) {});\n\n// Delete multiple entities at once.\ntransaction.delete([\n  dataset.key(['Company', 123]),\n  dataset.key(['Product', 'Computer'])\n], function(err) {});"
+        "string": "// Delete a single entity.\ntransaction.delete(dataset.key(['Company', 123]), function(err) {});\n\n// Delete multiple entities at once.\ntransaction.delete([\n  dataset.key(['Company', 123]),\n  dataset.key(['Product', 'Computer'])\n], function(err) {});",
+        "html": "<p>// Delete a single entity.<br />transaction.delete(dataset.key([&#39;Company&#39;, 123]), function(err) {});</p><p>// Delete multiple entities at once.<br />transaction.delete([<br />  dataset.key([&#39;Company&#39;, 123]),<br />  dataset.key([&#39;Product&#39;, &#39;Computer&#39;])<br />], function(err) {});</p>"
       }
     ],
     "description": {
@@ -347,6 +381,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 255,
@@ -364,6 +399,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{object|object[]} entities - Datastore key object(s).",
         "name": "entities",
         "description": "<ul>\n<li>Datastore key object(s).</li>\n</ul>\n",
         "types": [
@@ -378,6 +414,7 @@
       },
       {
         "type": "param",
+        "string": "{Key} entities.key - Datastore key object.",
         "name": "entities.key",
         "description": "<ul>\n<li>Datastore key object.</li>\n</ul>\n",
         "types": [
@@ -391,6 +428,7 @@
       },
       {
         "type": "param",
+        "string": "{object|object[]} entities.data - Data to save with the provided key.\n    If you provide an array of objects, you must use the explicit syntax:\n    `name` for the name of the property and `value` for its value. You may\n    also specify an `excludeFromIndexes` property, set to `true` or `false`.\n",
         "name": "entities.data",
         "description": "<ul>\n<li>Data to save with the provided key.     If you provide an array of objects, you must use the explicit syntax:<br />  <code>name</code> for the name of the property and <code>value</code> for its value. You may<br />  also specify an <code>excludeFromIndexes</code> property, set to <code>true</code> or <code>false</code>.</li>\n</ul>\n",
         "types": [
@@ -405,7 +443,8 @@
       },
       {
         "type": "example",
-        "string": "//-\n// Save a single entity.\n//\n// Notice that we are providing an incomplete key. After the transaction is\n// committed, the Key object held by the `key` variable will be populated\n// with a path containing its generated ID.\n//-\nvar key = dataset.key('Company');\n\ntransaction.save({\n  key: key,\n  data: {\n    rating: '10'\n  }\n});\n\n//-\n// To specify an `excludeFromIndexes` value for a Datastore entity, pass in\n// an array for the key's data. The above example would then look like:\n//-\ntransaction.save({\n  key: key,\n  data: [\n    {\n      name: 'rating',\n      value: '10',\n      excludeFromIndexes: false\n    }\n  ]\n});\n\n//-\n// Save multiple entities at once.\n//-\nvar companyKey = dataset.key(['Company', 123]);\nvar productKey = dataset.key(['Product', 'Computer']);\n\ntransaction.save([\n  {\n    key: companyKey,\n    data: {\n      HQ: 'Dallas, TX'\n    }\n  },\n  {\n    key: productKey,\n    data: {\n      vendor: 'Dell'\n    }\n  }\n]);"
+        "string": "//-\n// Save a single entity.\n//\n// Notice that we are providing an incomplete key. After the transaction is\n// committed, the Key object held by the `key` variable will be populated\n// with a path containing its generated ID.\n//-\nvar key = dataset.key('Company');\n\ntransaction.save({\n  key: key,\n  data: {\n    rating: '10'\n  }\n});\n\n//-\n// To specify an `excludeFromIndexes` value for a Datastore entity, pass in\n// an array for the key's data. The above example would then look like:\n//-\ntransaction.save({\n  key: key,\n  data: [\n    {\n      name: 'rating',\n      value: '10',\n      excludeFromIndexes: false\n    }\n  ]\n});\n\n//-\n// Save multiple entities at once.\n//-\nvar companyKey = dataset.key(['Company', 123]);\nvar productKey = dataset.key(['Product', 'Computer']);\n\ntransaction.save([\n  {\n    key: companyKey,\n    data: {\n      HQ: 'Dallas, TX'\n    }\n  },\n  {\n    key: productKey,\n    data: {\n      vendor: 'Dell'\n    }\n  }\n]);",
+        "html": "<p>//-<br />// Save a single entity.<br />//<br />// Notice that we are providing an incomplete key. After the transaction is<br />// committed, the Key object held by the <code>key</code> variable will be populated<br />// with a path containing its generated ID.<br />//-<br />var key = dataset.key(&#39;Company&#39;);</p><p>transaction.save({<br />  key: key,<br />  data: {<br />    rating: &#39;10&#39;<br />  }<br />});</p><p>//-<br />// To specify an <code>excludeFromIndexes</code> value for a Datastore entity, pass in<br />// an array for the key&#39;s data. The above example would then look like:<br />//-<br />transaction.save({<br />  key: key,<br />  data: [<br />    {<br />      name: &#39;rating&#39;,<br />      value: &#39;10&#39;,<br />      excludeFromIndexes: false<br />    }<br />  ]<br />});</p><p>//-<br />// Save multiple entities at once.<br />//-<br />var companyKey = dataset.key([&#39;Company&#39;, 123]);<br />var productKey = dataset.key([&#39;Product&#39;, &#39;Computer&#39;]);</p><p>transaction.save([<br />  {<br />    key: companyKey,<br />    data: {<br />      HQ: &#39;Dallas, TX&#39;<br />    }<br />  },<br />  {<br />    key: productKey,<br />    data: {<br />      vendor: &#39;Dell&#39;<br />    }<br />  }<br />]);</p>"
       }
     ],
     "description": {
@@ -415,6 +454,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 285,
@@ -432,11 +472,14 @@
     "tags": [
       {
         "type": "todo",
-        "string": "Implement. "
+        "string": "Implement. ",
+        "html": "<p>Implement. </p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -446,6 +489,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 374,

@@ -8,6 +8,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 1,
@@ -17,7 +18,8 @@
     "tags": [
       {
         "type": "module",
-        "string": "pubsub/subscription"
+        "string": "pubsub/subscription",
+        "html": "<p>pubsub/subscription</p>"
       }
     ],
     "description": {
@@ -27,16 +29,19 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar events = require('events');\nvar nodeutil = require('util');"
+    "code": "'use strict';\n\nvar events = require('events');\nvar nodeutil = require('util');",
+    "ctx": false
   },
   {
     "tags": [
       {
         "type": "type",
+        "string": "{module:common/util}",
         "types": [
           "module:common/util"
         ],
@@ -44,11 +49,14 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -58,6 +66,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 26,
@@ -74,6 +83,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{module:pubsub} pubsub - PubSub object.",
         "name": "pubsub",
         "description": "<ul>\n<li>PubSub object.</li>\n</ul>\n",
         "types": [
@@ -87,6 +97,7 @@
       },
       {
         "type": "param",
+        "string": "{object} options - Configuration object.",
         "name": "options",
         "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
         "types": [
@@ -100,6 +111,7 @@
       },
       {
         "type": "param",
+        "string": "{boolean} options.autoAck - Automatically acknowledge the message\n    once it's pulled. (default: false)",
         "name": "options.autoAck",
         "description": "<ul>\n<li>Automatically acknowledge the message     once it&#39;s pulled. (default: false)</li>\n</ul>\n",
         "types": [
@@ -113,6 +125,7 @@
       },
       {
         "type": "param",
+        "string": "{number} options.interval - Interval in milliseconds to check for new\n    messages. (default: 10)",
         "name": "options.interval",
         "description": "<ul>\n<li>Interval in milliseconds to check for new     messages. (default: 10)</li>\n</ul>\n",
         "types": [
@@ -126,6 +139,7 @@
       },
       {
         "type": "param",
+        "string": "{string} options.name - Name of the subscription.",
         "name": "options.name",
         "description": "<ul>\n<li>Name of the subscription.</li>\n</ul>\n",
         "types": [
@@ -145,6 +159,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 32,
@@ -154,15 +169,18 @@
     "tags": [
       {
         "type": "alias",
-        "string": "pubsub/subscription"
+        "string": "pubsub/subscription",
+        "html": "<p>pubsub/subscription</p>"
       },
       {
         "type": "constructor",
-        "string": ""
+        "string": "",
+        "html": ""
       },
       {
         "type": "example",
-        "string": "//-\n// From {@linkcode module:pubsub#getSubscriptions}:\n//-\npubsub.getSubscriptions(function(err, subscriptions) {\n  // `subscriptions` is an array of Subscription objects.\n});\n\n//-\n// From {@linkcode module:pubsub/topic#getSubscriptions}:\n//-\nvar topic = pubsub.topic('my-existing-topic');\ntopic.getSubscriptions(function(err, subscriptions) {\n  // `subscriptions` is an array of Subscription objects.\n});\n\n//-\n// From {@linkcode module:pubsub/topic#subscribe}:\n//-\nvar topic = pubsub.topic('my-existing-topic');\ntopic.subscribe('new-subscription', function(err, subscription) {\n  // `subscription` is a Subscription object.\n});\n\n//-\n// From {@linkcode module:pubsub/topic#subscription}:\n//-\nvar topic = pubsub.topic('my-existing-topic');\nvar subscription = topic.subscription('my-existing-subscription');\n// `subscription` is a Subscription object.\n\n//-\n// Once you have obtained a subscription object, you may begin to register\n// listeners. This will automatically trigger pulling for messages.\n//-\n// Register an error handler.\nsubscription.on('error', function(err) {});\n\n// Register a listener for `message` events.\nfunction onMessage(message) {\n  // Called every time a message is received.\n  // message.id = ID used to acknowledge its receival.\n  // message.data = Contents of the message.\n}\nsubscription.on('message', onMessage);\n\n// Remove the listener from receiving `message` events.\nsubscription.removeListener('message', onMessage);"
+        "string": "//-\n// From {@linkcode module:pubsub#getSubscriptions}:\n//-\npubsub.getSubscriptions(function(err, subscriptions) {\n  // `subscriptions` is an array of Subscription objects.\n});\n\n//-\n// From {@linkcode module:pubsub/topic#getSubscriptions}:\n//-\nvar topic = pubsub.topic('my-existing-topic');\ntopic.getSubscriptions(function(err, subscriptions) {\n  // `subscriptions` is an array of Subscription objects.\n});\n\n//-\n// From {@linkcode module:pubsub/topic#subscribe}:\n//-\nvar topic = pubsub.topic('my-existing-topic');\ntopic.subscribe('new-subscription', function(err, subscription) {\n  // `subscription` is a Subscription object.\n});\n\n//-\n// From {@linkcode module:pubsub/topic#subscription}:\n//-\nvar topic = pubsub.topic('my-existing-topic');\nvar subscription = topic.subscription('my-existing-subscription');\n// `subscription` is a Subscription object.\n\n//-\n// Once you have obtained a subscription object, you may begin to register\n// listeners. This will automatically trigger pulling for messages.\n//-\n// Register an error handler.\nsubscription.on('error', function(err) {});\n\n// Register a listener for `message` events.\nfunction onMessage(message) {\n  // Called every time a message is received.\n  // message.id = ID used to acknowledge its receival.\n  // message.data = Contents of the message.\n}\nsubscription.on('message', onMessage);\n\n// Remove the listener from receiving `message` events.\nsubscription.removeListener('message', onMessage);",
+        "html": "<p>//-<br />// From {@linkcode module:pubsub#getSubscriptions}:<br />//-<br />pubsub.getSubscriptions(function(err, subscriptions) {<br />  // <code>subscriptions</code> is an array of Subscription objects.<br />});</p><p>//-<br />// From {@linkcode module:pubsub/topic#getSubscriptions}:<br />//-<br />var topic = pubsub.topic(&#39;my-existing-topic&#39;);<br />topic.getSubscriptions(function(err, subscriptions) {<br />  // <code>subscriptions</code> is an array of Subscription objects.<br />});</p><p>//-<br />// From {@linkcode module:pubsub/topic#subscribe}:<br />//-<br />var topic = pubsub.topic(&#39;my-existing-topic&#39;);<br />topic.subscribe(&#39;new-subscription&#39;, function(err, subscription) {<br />  // <code>subscription</code> is a Subscription object.<br />});</p><p>//-<br />// From {@linkcode module:pubsub/topic#subscription}:<br />//-<br />var topic = pubsub.topic(&#39;my-existing-topic&#39;);<br />var subscription = topic.subscription(&#39;my-existing-subscription&#39;);<br />// <code>subscription</code> is a Subscription object.</p><p>//-<br />// Once you have obtained a subscription object, you may begin to register<br />// listeners. This will automatically trigger pulling for messages.<br />//-<br />// Register an error handler.<br />subscription.on(&#39;error&#39;, function(err) {});</p><p>// Register a listener for <code>message</code> events.<br />function onMessage(message) {<br />  // Called every time a message is received.<br />  // message.id = ID used to acknowledge its receival.<br />  // message.data = Contents of the message.<br />}<br />subscription.on(&#39;message&#39;, onMessage);</p><p>// Remove the listener from receiving <code>message</code> events.<br />subscription.removeListener(&#39;message&#39;, onMessage);</p>"
       }
     ],
     "description": {
@@ -172,6 +190,7 @@
     },
     "isPrivate": false,
     "isConstructor": true,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 42,
@@ -187,7 +206,9 @@
     "tags": [
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -197,6 +218,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 128,
@@ -213,7 +235,9 @@
     "tags": [
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -223,6 +247,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 142,
@@ -239,11 +264,14 @@
     "tags": [
       {
         "type": "private",
-        "visibility": "private"
+        "string": "\n",
+        "visibility": "private",
+        "html": ""
       },
       {
         "type": "example",
-        "string": "this.listenForEvents_();"
+        "string": "this.listenForEvents_();",
+        "html": "<p>this.listenForEvents_();</p>"
       }
     ],
     "description": {
@@ -253,6 +281,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 173,
@@ -270,11 +299,14 @@
     "tags": [
       {
         "type": "private",
-        "visibility": "private"
+        "string": "\n",
+        "visibility": "private",
+        "html": ""
       },
       {
         "type": "example",
-        "string": "subscription.startPulling_();"
+        "string": "subscription.startPulling_();",
+        "html": "<p>subscription.startPulling_();</p>"
       }
     ],
     "description": {
@@ -284,11 +316,12 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 207,
     "codeStart": 224,
-    "code": "Subscription.prototype.startPulling_ = function() {\n  var self = this;\n  if (this.closed) {\n    return;\n  }\n  this.pull({\n    returnImmediately: false\n  }, function(err, messages) {\n    if (err) {\n      self.emit('error', err);\n    }\n    if (messages) {\n      messages.forEach(function(message) {\n        self.emit('message', message);\n      });\n    }\n    setTimeout(self.startPulling_.bind(self), self.interval);\n  });\n};",
+    "code": "Subscription.prototype.startPulling_ = function() {\n  var self = this;\n  if (this.closed) {\n    return;\n  }\n  this.pull({\n    returnImmediately: false\n  }, function(err, messages, apiResponse) {\n    if (err) {\n      self.emit('error', err, apiResponse);\n    }\n    if (messages) {\n      messages.forEach(function(message) {\n        self.emit('message', message, apiResponse);\n      });\n    }\n    setTimeout(self.startPulling_.bind(self), self.interval);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Subscription",
@@ -301,6 +334,7 @@
     "tags": [
       {
         "type": "throws",
+        "string": "{Error} If at least one id is not provided.\n",
         "types": [
           "Error"
         ],
@@ -308,6 +342,7 @@
       },
       {
         "type": "param",
+        "string": "{string|string[]} ids - An ID or array of message IDs.",
         "name": "ids",
         "description": "<ul>\n<li>An ID or array of message IDs.</li>\n</ul>\n",
         "types": [
@@ -322,6 +357,7 @@
       },
       {
         "type": "param",
+        "string": "{function=} callback - The callback function.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -335,7 +371,8 @@
       },
       {
         "type": "example",
-        "string": "subscription.ack('ePHEESyhuE8e...', function(err) {});"
+        "string": "subscription.ack('ePHEESyhuE8e...', function(err, apiResponse) {});",
+        "html": "<p>subscription.ack(&#39;ePHEESyhuE8e...&#39;, function(err, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -345,6 +382,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 244,
@@ -362,6 +400,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{function=} callback - The callback function.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -375,7 +414,8 @@
       },
       {
         "type": "example",
-        "string": "subscription.delete(function(err) {});"
+        "string": "subscription.delete(function(err, apiResponse) {});",
+        "html": "<p>subscription.delete(function(err, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -385,11 +425,12 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 269,
     "codeStart": 278,
-    "code": "Subscription.prototype.delete = function(callback) {\n  var self = this;\n  callback = callback || util.noop;\n  this.makeReq_('DELETE', this.name, null, true, function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n    self.closed = true;\n    self.removeAllListeners();\n    callback(null);\n  });\n};",
+    "code": "Subscription.prototype.delete = function(callback) {\n  var self = this;\n  callback = callback || util.noop;\n  this.makeReq_('DELETE', this.name, null, true, function(err, result) {\n    if (err) {\n      callback(err, result);\n      return;\n    }\n    self.closed = true;\n    self.removeAllListeners();\n    callback(null, result);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Subscription",
@@ -402,10 +443,12 @@
     "tags": [
       {
         "type": "todo",
-        "string": "Should not be racing with other pull. "
+        "string": "Should not be racing with other pull. ",
+        "html": "<p>Should not be racing with other pull. </p>"
       },
       {
         "type": "param",
+        "string": "{object=} options - Configuration object.",
         "name": "options",
         "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
         "types": [
@@ -419,6 +462,7 @@
       },
       {
         "type": "param",
+        "string": "{boolean} options.returnImmediately - If set, the system will respond\n    immediately. Otherwise, wait until new messages are available. Returns if\n    timeout is reached.",
         "name": "options.returnImmediately",
         "description": "<ul>\n<li>If set, the system will respond     immediately. Otherwise, wait until new messages are available. Returns if<br />  timeout is reached.</li>\n</ul>\n",
         "types": [
@@ -432,6 +476,7 @@
       },
       {
         "type": "param",
+        "string": "{number} options.maxResults - Limit the amount of messages pulled.",
         "name": "options.maxResults",
         "description": "<ul>\n<li>Limit the amount of messages pulled.</li>\n</ul>\n",
         "types": [
@@ -445,6 +490,7 @@
       },
       {
         "type": "param",
+        "string": "{function} callback - The callback function.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -458,7 +504,8 @@
       },
       {
         "type": "example",
-        "string": "//-\n// Pull all available messages.\n//-\nsubscription.pull(function(err, messages) {\n  // messages = [\n  //   {\n  //     ackId: '',     // ID used to acknowledge its receival.\n  //     id: '',        // Unique message ID.\n  //     data: '',      // Contents of the message.\n  //     attributes: {} // Attributes of the message.\n  //   },\n  //   // ...\n  // ]\n});\n\n//-\n// Pull a single message.\n//-\nvar opts = {\n  maxResults: 1\n};\n\nsubscription.pull(opts, function(err, messages) {});"
+        "string": "//-\n// Pull all available messages.\n//-\nsubscription.pull(function(err, messages) {\n  // messages = [\n  //   {\n  //     ackId: '',     // ID used to acknowledge its receival.\n  //     id: '',        // Unique message ID.\n  //     data: '',      // Contents of the message.\n  //     attributes: {} // Attributes of the message.\n  //   },\n  //   // ...\n  // ]\n});\n\n//-\n// Pull a single message.\n//-\nvar opts = {\n  maxResults: 1\n};\n\nsubscription.pull(opts, function(err, messages, apiResponse) {});",
+        "html": "<p>//-<br />// Pull all available messages.<br />//-<br />subscription.pull(function(err, messages) {<br />  // messages = [<br />  //   {<br />  //     ackId: &#39;&#39;,     // ID used to acknowledge its receival.<br />  //     id: &#39;&#39;,        // Unique message ID.<br />  //     data: &#39;&#39;,      // Contents of the message.<br />  //     attributes: {} // Attributes of the message.<br />  //   },<br />  //   // ...<br />  // ]<br />});</p><p>//-<br />// Pull a single message.<br />//-<br />var opts = {<br />  maxResults: 1<br />};</p><p>subscription.pull(opts, function(err, messages, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -468,11 +515,12 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 292,
     "codeStart": 335,
-    "code": "Subscription.prototype.pull = function(options, callback) {\n  var self = this;\n  var MAX_EVENTS_LIMIT = 1000;\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  if (!util.is(options.maxResults, 'number')) {\n    options.maxResults = MAX_EVENTS_LIMIT;\n  }\n\n  var body = {\n    returnImmediately: !!options.returnImmediately,\n    maxMessages: options.maxResults\n  };\n\n  var path = this.name + ':pull';\n  this.makeReq_('POST', path, null, body, function(err, response) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var messages = response.receivedMessages || [];\n    messages = messages.map(Subscription.formatMessage_);\n\n    if (self.autoAck && messages.length !== 0) {\n      var ackIds = messages.map(function(message) {\n        return message.ackId;\n      });\n\n      self.ack(ackIds, function(err) {\n        callback(err, messages);\n      });\n    } else {\n      callback(null, messages);\n    }\n  });\n};",
+    "code": "Subscription.prototype.pull = function(options, callback) {\n  var self = this;\n  var MAX_EVENTS_LIMIT = 1000;\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  if (!util.is(options.maxResults, 'number')) {\n    options.maxResults = MAX_EVENTS_LIMIT;\n  }\n\n  var body = {\n    returnImmediately: !!options.returnImmediately,\n    maxMessages: options.maxResults\n  };\n\n  var path = this.name + ':pull';\n  this.makeReq_('POST', path, null, body, function(err, response) {\n    if (err) {\n      callback(err, null, response);\n      return;\n    }\n\n    var messages = response.receivedMessages || [];\n    messages = messages.map(Subscription.formatMessage_);\n\n    if (self.autoAck && messages.length !== 0) {\n      var ackIds = messages.map(function(message) {\n        return message.ackId;\n      });\n\n      self.ack(ackIds, function(err) {\n        callback(err, messages, response);\n      });\n    } else {\n      callback(null, messages, response);\n    }\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Subscription",
@@ -485,6 +533,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{object} options - The configuration object.",
         "name": "options",
         "description": "<ul>\n<li>The configuration object.</li>\n</ul>\n",
         "types": [
@@ -498,6 +547,7 @@
       },
       {
         "type": "param",
+        "string": "{number} options.ackId - The ack id to change.",
         "name": "options.ackId",
         "description": "<ul>\n<li>The ack id to change.</li>\n</ul>\n",
         "types": [
@@ -511,6 +561,7 @@
       },
       {
         "type": "param",
+        "string": "{number} options.seconds - Number of seconds after call is made to\n    set the deadline of the ack.",
         "name": "options.seconds",
         "description": "<ul>\n<li>Number of seconds after call is made to     set the deadline of the ack.</li>\n</ul>\n",
         "types": [
@@ -524,6 +575,7 @@
       },
       {
         "type": "param",
+        "string": "{Function=} callback - The callback function.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -537,7 +589,8 @@
       },
       {
         "type": "example",
-        "string": "var options = {\n  ackId: 123,\n  seconds: 10 // Expire in 10 seconds from call.\n};\nsubscription.setAckDeadline(options, function(err) {});"
+        "string": "var options = {\n  ackId: 123,\n  seconds: 10 // Expire in 10 seconds from call.\n};\nsubscription.setAckDeadline(options, function(err, apiResponse) {});",
+        "html": "<p>var options = {<br />  ackId: 123,<br />  seconds: 10 // Expire in 10 seconds from call.<br />};<br />subscription.setAckDeadline(options, function(err, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -547,6 +600,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 377,

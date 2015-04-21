@@ -8,6 +8,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 1,
@@ -17,7 +18,8 @@
     "tags": [
       {
         "type": "module",
-        "string": "storage/acl"
+        "string": "storage/acl",
+        "html": "<p>storage/acl</p>"
       }
     ],
     "description": {
@@ -27,16 +29,19 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar nodeutil = require('util');"
+    "code": "'use strict';\n\nvar nodeutil = require('util');",
+    "ctx": false
   },
   {
     "tags": [
       {
         "type": "type",
+        "string": "{module:common/util}",
         "types": [
           "module:common/util"
         ],
@@ -44,11 +49,14 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -58,6 +66,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 25,
@@ -74,11 +83,13 @@
     "tags": [
       {
         "type": "constructor",
-        "string": ""
+        "string": "",
+        "html": ""
       },
       {
         "type": "alias",
-        "string": "module:storage/acl"
+        "string": "module:storage/acl",
+        "html": "<p>module:storage/acl</p>"
       }
     ],
     "description": {
@@ -88,6 +99,7 @@
     },
     "isPrivate": false,
     "isConstructor": true,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 31,
@@ -103,10 +115,12 @@
     "tags": [
       {
         "type": "alias",
-        "string": "acl.owners "
+        "string": "acl.owners ",
+        "html": "<p>acl.owners </p>"
       },
       {
         "type": "return",
+        "string": "{object}\n",
         "types": [
           "object"
         ],
@@ -115,11 +129,13 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "description": "",
+        "html": "<p>{object}</p>"
       },
       {
         "type": "example",
-        "string": "//-\n// Add a user as an owner of a file.\n//-\nmyFile.acl.owners.addUser('email@example.com', function(err, aclObject) {});\n\n//-\n// For reference, the above command is the same as running the following.\n//-\nmyFile.acl.add({\n  entity: 'user-email@example.com',\n  role: storage.acl.OWNER_ROLE\n}, function(err, aclObject) {});"
+        "string": "//-\n// Add a user as an owner of a file.\n//-\nmyFile.acl.owners.addUser('email@example.com', function(err, aclObject) {});\n\n//-\n// For reference, the above command is the same as running the following.\n//-\nmyFile.acl.add({\n  entity: 'user-email@example.com',\n  role: storage.acl.OWNER_ROLE\n}, function(err, aclObject) {});",
+        "html": "<p>//-<br />// Add a user as an owner of a file.<br />//-<br />myFile.acl.owners.addUser(&#39;email@example.com&#39;, function(err, aclObject) {});</p><p>//-<br />// For reference, the above command is the same as running the following.<br />//-<br />myFile.acl.add({<br />  entity: &#39;user-email@example.com&#39;,<br />  role: storage.acl.OWNER_ROLE<br />}, function(err, aclObject) {});</p>"
       }
     ],
     "description": {
@@ -129,6 +145,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 78,
@@ -147,10 +164,12 @@
     "tags": [
       {
         "type": "alias",
-        "string": "acl.readers "
+        "string": "acl.readers ",
+        "html": "<p>acl.readers </p>"
       },
       {
         "type": "return",
+        "string": "{object}\n",
         "types": [
           "object"
         ],
@@ -159,11 +178,13 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "description": "",
+        "html": "<p>{object}</p>"
       },
       {
         "type": "example",
-        "string": "//-\n// Add a user as a reader of a file.\n//-\nmyFile.acl.readers.addUser('email@example.com', function(err, aclObject) {});\n\n//-\n// For reference, the above command is the same as running the following.\n//-\nmyFile.acl.add({\n  entity: 'user-email@example.com',\n  role: storage.acl.READER_ROLE\n}, function(err, aclObject) {});"
+        "string": "//-\n// Add a user as a reader of a file.\n//-\nmyFile.acl.readers.addUser('email@example.com', function(err, aclObject) {});\n\n//-\n// For reference, the above command is the same as running the following.\n//-\nmyFile.acl.add({\n  entity: 'user-email@example.com',\n  role: storage.acl.READER_ROLE\n}, function(err, aclObject) {});",
+        "html": "<p>//-<br />// Add a user as a reader of a file.<br />//-<br />myFile.acl.readers.addUser(&#39;email@example.com&#39;, function(err, aclObject) {});</p><p>//-<br />// For reference, the above command is the same as running the following.<br />//-<br />myFile.acl.add({<br />  entity: &#39;user-email@example.com&#39;,<br />  role: storage.acl.READER_ROLE<br />}, function(err, aclObject) {});</p>"
       }
     ],
     "description": {
@@ -173,6 +194,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 117,
@@ -191,10 +213,12 @@
     "tags": [
       {
         "type": "alias",
-        "string": "acl.writers "
+        "string": "acl.writers ",
+        "html": "<p>acl.writers </p>"
       },
       {
         "type": "return",
+        "string": "{object}\n",
         "types": [
           "object"
         ],
@@ -203,11 +227,13 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "description": "",
+        "html": "<p>{object}</p>"
       },
       {
         "type": "example",
-        "string": "//-\n// Add a user as a writer of a file.\n//-\nmyFile.acl.writers.addUser('email@example.com', function(err, aclObject) {});\n\n//-\n// For reference, the above command is the same as running the following.\n//-\nmyFile.acl.add({\n  entity: 'user-email@example.com',\n  role: storage.acl.WRITER_ROLE\n}, function(err, aclObject) {});"
+        "string": "//-\n// Add a user as a writer of a file.\n//-\nmyFile.acl.writers.addUser('email@example.com', function(err, aclObject) {});\n\n//-\n// For reference, the above command is the same as running the following.\n//-\nmyFile.acl.add({\n  entity: 'user-email@example.com',\n  role: storage.acl.WRITER_ROLE\n}, function(err, aclObject) {});",
+        "html": "<p>//-<br />// Add a user as a writer of a file.<br />//-<br />myFile.acl.writers.addUser(&#39;email@example.com&#39;, function(err, aclObject) {});</p><p>//-<br />// For reference, the above command is the same as running the following.<br />//-<br />myFile.acl.add({<br />  entity: &#39;user-email@example.com&#39;,<br />  role: storage.acl.WRITER_ROLE<br />}, function(err, aclObject) {});</p>"
       }
     ],
     "description": {
@@ -217,6 +243,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 156,
@@ -235,6 +262,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{object} options - Configuration object.",
         "name": "options",
         "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
         "types": [
@@ -248,6 +276,7 @@
       },
       {
         "type": "param",
+        "string": "{string} options.entity - Whose permissions will be added.",
         "name": "options.entity",
         "description": "<ul>\n<li>Whose permissions will be added.</li>\n</ul>\n",
         "types": [
@@ -261,6 +290,7 @@
       },
       {
         "type": "param",
+        "string": "{string} options.role - Permissions allowed for the defined entity.\n    See {module:storage#acl}.",
         "name": "options.role",
         "description": "<ul>\n<li>Permissions allowed for the defined entity.     See {module:storage#acl}.</li>\n</ul>\n",
         "types": [
@@ -274,6 +304,7 @@
       },
       {
         "type": "param",
+        "string": "{int=} options.generation - **File Objects Only** Select a specific\n    revision of this file (as opposed to the latest version, the default).",
         "name": "options.generation",
         "description": "<ul>\n<li><strong>File Objects Only</strong> Select a specific     revision of this file (as opposed to the latest version, the default).</li>\n</ul>\n",
         "types": [
@@ -287,6 +318,7 @@
       },
       {
         "type": "param",
+        "string": "{function} callback - The callback function.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -300,11 +332,13 @@
       },
       {
         "type": "alias",
-        "string": "acl.add "
+        "string": "acl.add ",
+        "html": "<p>acl.add </p>"
       },
       {
         "type": "example",
-        "string": "myBucket.acl.add({\n  entity: 'user-useremail@example.com',\n  role: storage.acl.OWNER_ROLE\n}, function(err, aclObject) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n// Here is how you would grant ownership permissions to a user on a specific\n// revision of a file.\n//-\nmyFile.acl.add({\n  entity: 'user-useremail@example.com',\n  role: storage.acl.OWNER_ROLE,\n  generation: 1\n}, function(err, aclObject) {});"
+        "string": "myBucket.acl.add({\n  entity: 'user-useremail@example.com',\n  role: storage.acl.OWNER_ROLE\n}, function(err, aclObject, apiResponse) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n// Here is how you would grant ownership permissions to a user on a specific\n// revision of a file.\n//-\nmyFile.acl.add({\n  entity: 'user-useremail@example.com',\n  role: storage.acl.OWNER_ROLE,\n  generation: 1\n}, function(err, aclObject, apiResponse) {});",
+        "html": "<p>myBucket.acl.add({<br />  entity: &#39;user-useremail@example.com&#39;,<br />  role: storage.acl.OWNER_ROLE<br />}, function(err, aclObject, apiResponse) {});</p><p>//-<br />// For file ACL operations, you can also specify a <code>generation</code> property.<br />// Here is how you would grant ownership permissions to a user on a specific<br />// revision of a file.<br />//-<br />myFile.acl.add({<br />  entity: &#39;user-useremail@example.com&#39;,<br />  role: storage.acl.OWNER_ROLE,<br />  generation: 1<br />}, function(err, aclObject, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -314,11 +348,12 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 197,
     "codeStart": 227,
-    "code": "Acl.prototype.add = function(options, callback) {\n  var that = this;\n\n  var body = {\n    entity: options.entity,\n    role: options.role.toUpperCase()\n  };\n\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  this.makeReq_('POST', '', query, body, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    callback(null, that.makeAclObject_(resp));\n  });\n};",
+    "code": "Acl.prototype.add = function(options, callback) {\n  var that = this;\n\n  var body = {\n    entity: options.entity,\n    role: options.role.toUpperCase()\n  };\n\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  this.makeReq_('POST', '', query, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, that.makeAclObject_(resp), resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Acl",
@@ -331,6 +366,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{object=} options - Configuration object.",
         "name": "options",
         "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
         "types": [
@@ -344,6 +380,7 @@
       },
       {
         "type": "param",
+        "string": "{string} options.entity - Whose permissions will be revoked.",
         "name": "options.entity",
         "description": "<ul>\n<li>Whose permissions will be revoked.</li>\n</ul>\n",
         "types": [
@@ -357,6 +394,7 @@
       },
       {
         "type": "param",
+        "string": "{int=} options.generation - **File Objects Only** Select a specific\n    revision of this file (as opposed to the latest version, the default).",
         "name": "options.generation",
         "description": "<ul>\n<li><strong>File Objects Only</strong> Select a specific     revision of this file (as opposed to the latest version, the default).</li>\n</ul>\n",
         "types": [
@@ -370,6 +408,7 @@
       },
       {
         "type": "param",
+        "string": "{function} callback - The callback function.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -383,11 +422,13 @@
       },
       {
         "type": "alias",
-        "string": "acl.delete "
+        "string": "acl.delete ",
+        "html": "<p>acl.delete </p>"
       },
       {
         "type": "example",
-        "string": "myBucket.acl.delete({\n  entity: 'user-useremail@example.com'\n}, function(err) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.delete({\n  entity: 'user-useremail@example.com',\n  generation: 1\n}, function(err) {});"
+        "string": "myBucket.acl.delete({\n  entity: 'user-useremail@example.com'\n}, function(err, apiResponse) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.delete({\n  entity: 'user-useremail@example.com',\n  generation: 1\n}, function(err, apiResponse) {});",
+        "html": "<p>myBucket.acl.delete({<br />  entity: &#39;user-useremail@example.com&#39;<br />}, function(err, apiResponse) {});</p><p>//-<br />// For file ACL operations, you can also specify a <code>generation</code> property.<br />//-<br />myFile.acl.delete({<br />  entity: &#39;user-useremail@example.com&#39;,<br />  generation: 1<br />}, function(err, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -397,6 +438,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 253,
@@ -414,6 +456,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{object|function} options - Configuration object. If you want to\n    receive a list of all access controls, pass the callback function as the\n    only argument.",
         "name": "options",
         "description": "<ul>\n<li>Configuration object. If you want to     receive a list of all access controls, pass the callback function as the<br />  only argument.</li>\n</ul>\n",
         "types": [
@@ -428,6 +471,7 @@
       },
       {
         "type": "param",
+        "string": "{string=} options.entity - Whose permissions will be fetched.",
         "name": "options.entity",
         "description": "<ul>\n<li>Whose permissions will be fetched.</li>\n</ul>\n",
         "types": [
@@ -441,89 +485,7 @@
       },
       {
         "type": "param",
-        "name": "options.generation",
-        "description": "<ul>\n<li><strong>File Objects Only</strong> Select a specific     revision of this file (as opposed to the latest version, the default).</li>\n</ul>\n",
-        "types": [
-          "int"
-        ],
-        "typesDescription": "<a href=\"int.html\">int</a>|<code>undefined</code>",
-        "optional": true,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "alias",
-        "string": "acl.get "
-      },
-      {
-        "type": "example",
-        "string": "myBucket.acl.get({\n  entity: 'user-useremail@example.com'\n}, function(err, aclObject) {});\n\n//-\n// Get all access controls.\n//-\nmyBucket.acl.get(function(err, aclObjects) {\n  // aclObjects = [\n  //   {\n  //     entity: 'user-useremail@example.com',\n  //     role: 'owner'\n  //   }\n  // ]\n});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.get({\n  entity: 'user-useremail@example.com',\n  generation: 1\n} function(err, aclObject) {});"
-      }
-    ],
-    "description": {
-      "full": "<p>Get access controls on a {module:storage/bucket} or {module:storage/file}. If<br />an entity is omitted, you will receive an array of all applicable access<br />controls.</p>",
-      "summary": "<p>Get access controls on a {module:storage/bucket} or {module:storage/file}. If<br />an entity is omitted, you will receive an array of all applicable access<br />controls.</p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "isConstructor": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 290,
-    "codeStart": 329,
-    "code": "Acl.prototype.get = function(options, callback) {\n  var that = this;\n  var path = '';\n  var query = null;\n\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = null;\n  } else {\n    path = '/' + encodeURIComponent(options.entity);\n\n    if (options.generation) {\n      query = {\n        generation: options.generation\n      };\n    }\n  }\n\n  this.makeReq_('GET', path, query, null, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var results = resp;\n\n    if (resp.items) {\n      results = (resp.items || []).map(that.makeAclObject_);\n    } else {\n      results = that.makeAclObject_(results);\n    }\n\n    callback(null, results);\n  });\n};",
-    "ctx": {
-      "type": "method",
-      "constructor": "Acl",
-      "cons": "Acl",
-      "name": "get",
-      "string": "Acl.prototype.get()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "name": "options",
-        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
-        "types": [
-          "object"
-        ],
-        "typesDescription": "<code>object</code>|<code>undefined</code>",
-        "optional": true,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "name": "options.entity",
-        "description": "<ul>\n<li>Whose permissions will be updated.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "name": "options.role",
-        "description": "<ul>\n<li>Permissions allowed for the defined entity.     See {module:storage#acl}.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
+        "string": "{int=} options.generation - **File Objects Only** Select a specific\n    revision of this file (as opposed to the latest version, the default).",
         "name": "options.generation",
         "description": "<ul>\n<li><strong>File Objects Only</strong> Select a specific     revision of this file (as opposed to the latest version, the default).</li>\n</ul>\n",
         "types": [
@@ -537,6 +499,7 @@
       },
       {
         "type": "param",
+        "string": "{function} callback - The callback function.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -550,11 +513,117 @@
       },
       {
         "type": "alias",
-        "string": "acl.update "
+        "string": "acl.get ",
+        "html": "<p>acl.get </p>"
       },
       {
         "type": "example",
-        "string": "var storage = gcloud.storage();\n\nmyBucket.acl.update({\n  entity: 'user-useremail@example.com',\n  role: storage.acl.WRITER_ROLE\n}, function(err) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.update({\n  entity: 'user-useremail@example.com',\n  role: storage.acl.WRITER_ROLE,\n  generation: 1\n}, function(err) {});"
+        "string": "myBucket.acl.get({\n  entity: 'user-useremail@example.com'\n}, function(err, aclObject, apiResponse) {});\n\n//-\n// Get all access controls.\n//-\nmyBucket.acl.get(function(err, aclObjects, apiResponse) {\n  // aclObjects = [\n  //   {\n  //     entity: 'user-useremail@example.com',\n  //     role: 'owner'\n  //   }\n  // ]\n});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.get({\n  entity: 'user-useremail@example.com',\n  generation: 1\n} function(err, aclObject, apiResponse) {});",
+        "html": "<p>myBucket.acl.get({<br />  entity: &#39;user-useremail@example.com&#39;<br />}, function(err, aclObject, apiResponse) {});</p><p>//-<br />// Get all access controls.<br />//-<br />myBucket.acl.get(function(err, aclObjects, apiResponse) {<br />  // aclObjects = [<br />  //   {<br />  //     entity: &#39;user-useremail@example.com&#39;,<br />  //     role: &#39;owner&#39;<br />  //   }<br />  // ]<br />});</p><p>//-<br />// For file ACL operations, you can also specify a <code>generation</code> property.<br />//-<br />myFile.acl.get({<br />  entity: &#39;user-useremail@example.com&#39;,<br />  generation: 1<br />} function(err, aclObject, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get access controls on a {module:storage/bucket} or {module:storage/file}. If<br />an entity is omitted, you will receive an array of all applicable access<br />controls.</p>",
+      "summary": "<p>Get access controls on a {module:storage/bucket} or {module:storage/file}. If<br />an entity is omitted, you will receive an array of all applicable access<br />controls.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 290,
+    "codeStart": 330,
+    "code": "Acl.prototype.get = function(options, callback) {\n  var that = this;\n  var path = '';\n  var query = null;\n\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = null;\n  } else {\n    path = '/' + encodeURIComponent(options.entity);\n\n    if (options.generation) {\n      query = {\n        generation: options.generation\n      };\n    }\n  }\n\n  this.makeReq_('GET', path, query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var results = resp;\n\n    if (resp.items) {\n      results = (resp.items || []).map(that.makeAclObject_);\n    } else {\n      results = that.makeAclObject_(results);\n    }\n\n    callback(null, results, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Acl",
+      "cons": "Acl",
+      "name": "get",
+      "string": "Acl.prototype.get()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{object=} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} options.entity - Whose permissions will be updated.",
+        "name": "options.entity",
+        "description": "<ul>\n<li>Whose permissions will be updated.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} options.role - Permissions allowed for the defined entity.\n    See {module:storage#acl}.",
+        "name": "options.role",
+        "description": "<ul>\n<li>Permissions allowed for the defined entity.     See {module:storage#acl}.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{int=} options.generation - **File Objects Only** Select a specific\n    revision of this file (as opposed to the latest version, the default).",
+        "name": "options.generation",
+        "description": "<ul>\n<li><strong>File Objects Only</strong> Select a specific     revision of this file (as opposed to the latest version, the default).</li>\n</ul>\n",
+        "types": [
+          "int"
+        ],
+        "typesDescription": "<a href=\"int.html\">int</a>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.\n",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "alias",
+        "string": "acl.update ",
+        "html": "<p>acl.update </p>"
+      },
+      {
+        "type": "example",
+        "string": "var storage = gcloud.storage();\n\nmyBucket.acl.update({\n  entity: 'user-useremail@example.com',\n  role: storage.acl.WRITER_ROLE\n}, function(err, apiResponse) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.update({\n  entity: 'user-useremail@example.com',\n  role: storage.acl.WRITER_ROLE,\n  generation: 1\n}, function(err, apiResponse) {});",
+        "html": "<p>var storage = gcloud.storage();</p><p>myBucket.acl.update({<br />  entity: &#39;user-useremail@example.com&#39;,<br />  role: storage.acl.WRITER_ROLE<br />}, function(err, apiResponse) {});</p><p>//-<br />// For file ACL operations, you can also specify a <code>generation</code> property.<br />//-<br />myFile.acl.update({<br />  entity: &#39;user-useremail@example.com&#39;,<br />  role: storage.acl.WRITER_ROLE,<br />  generation: 1<br />}, function(err, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -564,11 +633,12 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 365,
-    "codeStart": 395,
-    "code": "Acl.prototype.update = function(options, callback) {\n  var that = this;\n  var path = '/' + encodeURIComponent(options.entity);\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  var body = {\n    role: options.role.toUpperCase()\n  };\n\n  this.makeReq_('PUT', path, query, body, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    callback(null, that.makeAclObject_(resp));\n  });\n};",
+    "line": 366,
+    "codeStart": 396,
+    "code": "Acl.prototype.update = function(options, callback) {\n  var that = this;\n  var path = '/' + encodeURIComponent(options.entity);\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  var body = {\n    role: options.role.toUpperCase()\n  };\n\n  this.makeReq_('PUT', path, query, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, that.makeAclObject_(resp), resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Acl",
@@ -581,7 +651,9 @@
     "tags": [
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -591,10 +663,11 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 420,
-    "codeStart": 425,
+    "line": 421,
+    "codeStart": 426,
     "code": "Acl.prototype.makeAclObject_ = function(accessControlObject) {\n  var obj = {\n    entity: accessControlObject.entity,\n    role: accessControlObject.role\n  };\n\n  if (accessControlObject.projectTeam) {\n    obj.projectTeam = accessControlObject.projectTeam;\n  }\n\n  return obj;\n};",
     "ctx": {
       "type": "method",
@@ -608,10 +681,13 @@
     "tags": [
       {
         "type": "private",
-        "visibility": "private"
+        "string": "\n",
+        "visibility": "private",
+        "html": ""
       },
       {
         "type": "param",
+        "string": "{string} method - Action.",
         "name": "method",
         "description": "<ul>\n<li>Action.</li>\n</ul>\n",
         "types": [
@@ -625,6 +701,7 @@
       },
       {
         "type": "param",
+        "string": "{string} path - Request path.",
         "name": "path",
         "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
         "types": [
@@ -638,6 +715,7 @@
       },
       {
         "type": "param",
+        "string": "{*} query - Request query object.",
         "name": "query",
         "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
         "types": [],
@@ -649,6 +727,7 @@
       },
       {
         "type": "param",
+        "string": "{*} body - Request body contents.",
         "name": "body",
         "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
         "types": [],
@@ -660,6 +739,7 @@
       },
       {
         "type": "param",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
         "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
@@ -679,10 +759,11 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 438,
-    "codeStart": 449,
+    "line": 439,
+    "codeStart": 450,
     "code": "Acl.prototype.makeReq_ = function(method, path, query, body, callback) {\n  this.makeReq(method, this.pathPrefix + path, query, body, callback);\n};\n\nmodule.exports = Acl;",
     "ctx": {
       "type": "method",
@@ -696,7 +777,9 @@
     "tags": [
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -706,10 +789,11 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 455,
-    "codeStart": 470,
+    "line": 456,
+    "codeStart": 471,
     "code": "function AclRoleAccessorMethods() {\n  AclRoleAccessorMethods.roles.forEach(this._assignAccessMethods.bind(this));\n}\n\nAclRoleAccessorMethods.accessMethods = [\n  'add',\n  'delete'\n];\n\nAclRoleAccessorMethods.entities = [\n  // Special entity groups that do not require further specification.\n  'allAuthenticatedUsers',\n  'allUsers',\n\n  // Entity groups that require specification, e.g. `user-email@example.com`.\n  'domain-',\n  'group-',\n  'project-',\n  'user-'\n];\n\nAclRoleAccessorMethods.roles = [\n  'OWNER',\n  'READER',\n  'WRITER'\n];\n\nAclRoleAccessorMethods.prototype._assignAccessMethods = function(role) {\n  var that = this;\n\n  var accessMethods = AclRoleAccessorMethods.accessMethods;\n  var entities = AclRoleAccessorMethods.entities;\n  var roleGroup = role.toLowerCase() + 's';\n\n  this[roleGroup] = entities.reduce(function(acc, entity) {\n    var isPrefix = entity.charAt(entity.length - 1) === '-';\n\n    accessMethods.forEach(function(accessMethod) {\n      var method = accessMethod + entity[0].toUpperCase() + entity.substr(1);\n\n      if (isPrefix) {\n        method = method.replace('-', '');\n      }\n\n      // Wrap the parent accessor method (e.g. `add` or `delete`) to avoid the\n      // more complex API of specifying an `entity` and `role`.\n      acc[method] = function(entityId, callback) {\n        var apiEntity;\n\n        if (isPrefix) {\n          apiEntity = entity + entityId;\n        } else {\n          // If the entity is not a prefix, it is a special entity group that\n          // does not require further details. The accessor methods only accept\n          // a callback.\n          apiEntity = entity;\n          callback = entityId;\n        }\n\n        that[accessMethod]({\n          entity: apiEntity,\n          role: role\n        }, callback);\n      };\n    });\n\n    return acc;\n  }, {});\n};\n\nmodule.exports.AclRoleAccessorMethods = AclRoleAccessorMethods;",
     "ctx": {
       "type": "function",

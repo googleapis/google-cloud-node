@@ -8,6 +8,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 1,
@@ -17,7 +18,8 @@
     "tags": [
       {
         "type": "module",
-        "string": "bigquery/dataset"
+        "string": "bigquery/dataset",
+        "html": "<p>bigquery/dataset</p>"
       }
     ],
     "description": {
@@ -27,16 +29,19 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar extend = require('extend');"
+    "code": "'use strict';\n\nvar extend = require('extend');",
+    "ctx": false
   },
   {
     "tags": [
       {
         "type": "type",
+        "string": "{module:bigquery/table}",
         "types": [
           "module:bigquery/table"
         ],
@@ -44,11 +49,14 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{module:bigquery/table}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -58,6 +66,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 25,
@@ -74,6 +83,7 @@
     "tags": [
       {
         "type": "type",
+        "string": "{module:common/util}",
         "types": [
           "module:common/util"
         ],
@@ -81,11 +91,14 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -95,6 +108,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 31,
@@ -111,6 +125,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{module:bigquery} bigQuery - BigQuery instance.",
         "name": "bigQuery",
         "description": "<ul>\n<li>BigQuery instance.</li>\n</ul>\n",
         "types": [
@@ -124,6 +139,7 @@
       },
       {
         "type": "param",
+        "string": "{string} id - The ID of the Dataset.",
         "name": "id",
         "description": "<ul>\n<li>The ID of the Dataset.</li>\n</ul>\n",
         "types": [
@@ -143,6 +159,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 37,
@@ -152,11 +169,13 @@
     "tags": [
       {
         "type": "alias",
-        "string": "module:bigquery/dataset"
+        "string": "module:bigquery/dataset",
+        "html": "<p>module:bigquery/dataset</p>"
       },
       {
         "type": "constructor",
-        "string": ""
+        "string": "",
+        "html": ""
       }
     ],
     "description": {
@@ -166,6 +185,7 @@
     },
     "isPrivate": false,
     "isConstructor": true,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 42,
@@ -181,6 +201,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{object} options - Table id or configuration object.",
         "name": "options",
         "description": "<ul>\n<li>Table id or configuration object.</li>\n</ul>\n",
         "types": [
@@ -194,6 +215,7 @@
       },
       {
         "type": "param",
+        "string": "{string} options.id - The id of the table.",
         "name": "options.id",
         "description": "<ul>\n<li>The id of the table.</li>\n</ul>\n",
         "types": [
@@ -207,6 +229,7 @@
       },
       {
         "type": "param",
+        "string": "{string|object} options.schema - A comma-separated list of name:type\n    pairs. Valid types are \"string\", \"integer\", \"float\", \"boolean\", and\n    \"timestamp\". If the type is omitted, it is assumed to be \"string\".\n    Example: \"name:string, age:integer\". Schemas can also be specified as a\n    JSON array of fields, which allows for nested and repeated fields. See\n    a [Table resource](http://goo.gl/sl8Dmg) for more detailed information.",
         "name": "options.schema",
         "description": "<ul>\n<li>A comma-separated list of name:type     pairs. Valid types are &quot;string&quot;, &quot;integer&quot;, &quot;float&quot;, &quot;boolean&quot;, and<br />  &quot;timestamp&quot;. If the type is omitted, it is assumed to be &quot;string&quot;.<br />  Example: &quot;name:string, age:integer&quot;. Schemas can also be specified as a<br />  JSON array of fields, which allows for nested and repeated fields. See<br />  a <a href=\"http://goo.gl/sl8Dmg\">Table resource</a> for more detailed information.</li>\n</ul>\n",
         "types": [
@@ -221,6 +244,7 @@
       },
       {
         "type": "param",
+        "string": "{function} callback - The callback function.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -234,7 +258,8 @@
       },
       {
         "type": "example",
-        "string": "var tableConfig = {\n  id: 'institution_data',\n\n  // From the data.gov CSV dataset (http://goo.gl/kSE7z6):\n  schema: 'UNITID,INSTNM,ADDR,CITY,STABBR,ZIP,FIPS,OBEREG,CHFNM,...'\n};\n\ndataset.createTable(tableConfig, function(err, table) {});"
+        "string": "var tableConfig = {\n  id: 'institution_data',\n\n  // From the data.gov CSV dataset (http://goo.gl/kSE7z6):\n  schema: 'UNITID,INSTNM,ADDR,CITY,STABBR,ZIP,FIPS,OBEREG,CHFNM,...'\n};\n\ndataset.createTable(tableConfig, function(err, table, apiResponse) {});",
+        "html": "<p>var tableConfig = {<br />  id: &#39;institution_data&#39;,</p><p>  // From the data.gov CSV dataset (<a href=\"http://goo.gl/kSE7z6\">http://goo.gl/kSE7z6</a>):<br />  schema: &#39;UNITID,INSTNM,ADDR,CITY,STABBR,ZIP,FIPS,OBEREG,CHFNM,...&#39;<br />};</p><p>dataset.createTable(tableConfig, function(err, table, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -244,11 +269,12 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 55,
     "codeStart": 78,
-    "code": "Dataset.prototype.createTable = function(options, callback) {\n  var that = this;\n\n  extend(true, options, {\n    tableReference: {\n      datasetId: this.id,\n      projectId: this.bigQuery.projectId,\n      tableId: options.id\n    }\n  });\n\n  if (util.is(options.schema, 'string')) {\n    options.schema = Table.createSchemaFromString_(options.schema);\n  }\n\n  delete options.id;\n\n  this.makeReq_('POST', '/tables', null, options, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var table = that.table(resp.tableReference.tableId);\n    table.metadata = resp;\n\n    callback(null, table);\n  });\n};",
+    "code": "Dataset.prototype.createTable = function(options, callback) {\n  var that = this;\n\n  extend(true, options, {\n    tableReference: {\n      datasetId: this.id,\n      projectId: this.bigQuery.projectId,\n      tableId: options.id\n    }\n  });\n\n  if (util.is(options.schema, 'string')) {\n    options.schema = Table.createSchemaFromString_(options.schema);\n  }\n\n  delete options.id;\n\n  this.makeReq_('POST', '/tables', null, options, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var table = that.table(resp.tableReference.tableId);\n    table.metadata = resp;\n\n    callback(null, table, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Dataset",
@@ -261,6 +287,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{object=} options - The configuration object.",
         "name": "options",
         "description": "<ul>\n<li>The configuration object.</li>\n</ul>\n",
         "types": [
@@ -274,6 +301,7 @@
       },
       {
         "type": "param",
+        "string": "{boolean} options.force - Force delete dataset and all tables.\n    Default: false.",
         "name": "options.force",
         "description": "<ul>\n<li>Force delete dataset and all tables.     Default: false.</li>\n</ul>\n",
         "types": [
@@ -287,6 +315,7 @@
       },
       {
         "type": "param",
+        "string": "{function} callback - The callback function.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -300,7 +329,8 @@
       },
       {
         "type": "example",
-        "string": "//-\n// Delete the dataset, only if it does not have any tables.\n//-\ndataset.delete(function(err) {});\n\n//-\n// Delete the dataset and any tables it contains.\n//-\ndataset.delete({ force: true }, function(err) {});"
+        "string": "//-\n// Delete the dataset, only if it does not have any tables.\n//-\ndataset.delete(function(err, apiResponse) {});\n\n//-\n// Delete the dataset and any tables it contains.\n//-\ndataset.delete({ force: true }, function(err, apiResponse) {});",
+        "html": "<p>//-<br />// Delete the dataset, only if it does not have any tables.<br />//-<br />dataset.delete(function(err, apiResponse) {});</p><p>//-<br />// Delete the dataset and any tables it contains.<br />//-<br />dataset.delete({ force: true }, function(err, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -310,6 +340,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 108,
@@ -327,6 +358,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{function} callback - The callback function.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -340,7 +372,8 @@
       },
       {
         "type": "example",
-        "string": "dataset.getMetadata(function(err, metadata) {});"
+        "string": "dataset.getMetadata(function(err, metadata, apiResponse) {});",
+        "html": "<p>dataset.getMetadata(function(err, metadata, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -350,11 +383,12 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 140,
     "codeStart": 148,
-    "code": "Dataset.prototype.getMetadata = function(callback) {\n  var that = this;\n  this.makeReq_('GET', '', null, null, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata);\n  });\n};",
+    "code": "Dataset.prototype.getMetadata = function(callback) {\n  var that = this;\n  this.makeReq_('GET', '', null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Dataset",
@@ -367,6 +401,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{object=} query - Configuration object.",
         "name": "query",
         "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
         "types": [
@@ -380,6 +415,7 @@
       },
       {
         "type": "param",
+        "string": "{number} query.maxResults - Maximum number of results to return.",
         "name": "query.maxResults",
         "description": "<ul>\n<li>Maximum number of results to return.</li>\n</ul>\n",
         "types": [
@@ -393,6 +429,7 @@
       },
       {
         "type": "param",
+        "string": "{string} query.pageToken - Token returned from a previous call, to\n    request the next page of results.",
         "name": "query.pageToken",
         "description": "<ul>\n<li>Token returned from a previous call, to     request the next page of results.</li>\n</ul>\n",
         "types": [
@@ -406,6 +443,7 @@
       },
       {
         "type": "param",
+        "string": "{function} callback - The callback function.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -419,7 +457,8 @@
       },
       {
         "type": "example",
-        "string": "dataset.getTables(function(err, tables, nextQuery) {\n  // If `nextQuery` is non-null, there are more results to fetch.\n});"
+        "string": "dataset.getTables(function(err, tables, nextQuery, apiResponse) {\n  // If `nextQuery` is non-null, there are more results to fetch.\n});",
+        "html": "<p>dataset.getTables(function(err, tables, nextQuery, apiResponse) {<br />  // If <code>nextQuery</code> is non-null, there are more results to fetch.<br />});</p>"
       }
     ],
     "description": {
@@ -429,11 +468,12 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 162,
     "codeStart": 176,
-    "code": "Dataset.prototype.getTables = function(query, callback) {\n  var that = this;\n\n  if (util.is(query, 'function')) {\n    callback = query;\n    query = {};\n  }\n\n  query = query || {};\n\n  this.makeReq_('GET', '/tables', query, null, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var tables = (resp.tables || []).map(function(tableObject) {\n      var table = that.table(tableObject.id);\n      table.metadata = tableObject;\n      return table;\n    });\n\n    callback(null, tables, nextQuery);\n  });\n};",
+    "code": "Dataset.prototype.getTables = function(query, callback) {\n  var that = this;\n\n  if (util.is(query, 'function')) {\n    callback = query;\n    query = {};\n  }\n\n  query = query || {};\n\n  this.makeReq_('GET', '/tables', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var tables = (resp.tables || []).map(function(tableObject) {\n      var table = that.table(tableObject.id);\n      table.metadata = tableObject;\n      return table;\n    });\n\n    callback(null, tables, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Dataset",
@@ -451,6 +491,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 210,
@@ -468,6 +509,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{object} metadata - Metadata to save on the Dataset.",
         "name": "metadata",
         "description": "<ul>\n<li>Metadata to save on the Dataset.</li>\n</ul>\n",
         "types": [
@@ -481,6 +523,7 @@
       },
       {
         "type": "param",
+        "string": "{function} callback - The callback function.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -494,7 +537,8 @@
       },
       {
         "type": "example",
-        "string": "var metadata = {\n  description: 'Information for every institution in the 2013 IPEDS universe'\n};\n\ndataset.setMetadata(metadata, function(err) {});"
+        "string": "var metadata = {\n  description: 'Information for every institution in the 2013 IPEDS universe'\n};\n\ndataset.setMetadata(metadata, function(err, apiResponse) {});",
+        "html": "<p>var metadata = {<br />  description: &#39;Information for every institution in the 2013 IPEDS universe&#39;<br />};</p><p>dataset.setMetadata(metadata, function(err, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -504,11 +548,12 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 231,
     "codeStart": 244,
-    "code": "Dataset.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n\n  this.makeReq_('PATCH', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata);\n  });\n};",
+    "code": "Dataset.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n\n  this.makeReq_('PATCH', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Dataset",
@@ -521,6 +566,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{string} id - The ID of the table.",
         "name": "id",
         "description": "<ul>\n<li>The ID of the table.</li>\n</ul>\n",
         "types": [
@@ -534,6 +580,7 @@
       },
       {
         "type": "return",
+        "string": "{module:bigquery/table}\n",
         "types": [
           "module:bigquery/table"
         ],
@@ -542,11 +589,13 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "description": "",
+        "html": "<p>{module:bigquery/table}</p>"
       },
       {
         "type": "example",
-        "string": "var institutions = dataset.table('institution_data');"
+        "string": "var institutions = dataset.table('institution_data');",
+        "html": "<p>var institutions = dataset.table(&#39;institution_data&#39;);</p>"
       }
     ],
     "description": {
@@ -556,6 +605,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 259,
@@ -573,10 +623,13 @@
     "tags": [
       {
         "type": "private",
-        "visibility": "private"
+        "string": "\n",
+        "visibility": "private",
+        "html": ""
       },
       {
         "type": "param",
+        "string": "{string} method - Action.",
         "name": "method",
         "description": "<ul>\n<li>Action.</li>\n</ul>\n",
         "types": [
@@ -590,6 +643,7 @@
       },
       {
         "type": "param",
+        "string": "{string} path - Request path.",
         "name": "path",
         "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
         "types": [
@@ -603,6 +657,7 @@
       },
       {
         "type": "param",
+        "string": "{*} query - Request query object.",
         "name": "query",
         "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
         "types": [],
@@ -614,6 +669,7 @@
       },
       {
         "type": "param",
+        "string": "{*} body - Request body contents.",
         "name": "body",
         "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
         "types": [],
@@ -625,6 +681,7 @@
       },
       {
         "type": "param",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
         "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
@@ -644,6 +701,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 272,

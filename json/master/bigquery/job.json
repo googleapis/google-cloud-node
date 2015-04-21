@@ -8,6 +8,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 1,
@@ -17,7 +18,8 @@
     "tags": [
       {
         "type": "module",
-        "string": "bigquery/job"
+        "string": "bigquery/job",
+        "html": "<p>bigquery/job</p>"
       }
     ],
     "description": {
@@ -27,16 +29,19 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';"
+    "code": "'use strict';",
+    "ctx": false
   },
   {
     "tags": [
       {
         "type": "type",
+        "string": "{module:common/util}",
         "types": [
           "module:common/util"
         ],
@@ -44,11 +49,14 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -58,6 +66,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 23,
@@ -74,6 +83,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{module:bigquery} bigQuery - BigQuery instance.",
         "name": "bigQuery",
         "description": "<ul>\n<li>BigQuery instance.</li>\n</ul>\n",
         "types": [
@@ -87,6 +97,7 @@
       },
       {
         "type": "param",
+        "string": "{string} id - The ID of the table.",
         "name": "id",
         "description": "<ul>\n<li>The ID of the table.</li>\n</ul>\n",
         "types": [
@@ -106,6 +117,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 29,
@@ -115,11 +127,13 @@
     "tags": [
       {
         "type": "alias",
-        "string": "module:bigquery/job"
+        "string": "module:bigquery/job",
+        "html": "<p>module:bigquery/job</p>"
       },
       {
         "type": "constructor",
-        "string": ""
+        "string": "",
+        "html": ""
       }
     ],
     "description": {
@@ -129,6 +143,7 @@
     },
     "isPrivate": false,
     "isConstructor": true,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 34,
@@ -144,6 +159,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{function} callback - The callback function.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -157,7 +173,8 @@
       },
       {
         "type": "example",
-        "string": "job.getMetadata(function(err, metadata) {});"
+        "string": "job.getMetadata(function(err, metadata, apiResponse) {});",
+        "html": "<p>job.getMetadata(function(err, metadata, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -167,11 +184,12 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 58,
     "codeStart": 67,
-    "code": "Job.prototype.getMetadata = function(callback) {\n  var that = this;\n\n  var path = '/jobs/' + this.id;\n\n  this.bigQuery.makeReq_('GET', path, null, null, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata);\n  });\n};",
+    "code": "Job.prototype.getMetadata = function(callback) {\n  var that = this;\n\n  var path = '/jobs/' + this.id;\n\n  this.bigQuery.makeReq_('GET', path, null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Job",
@@ -184,6 +202,7 @@
     "tags": [
       {
         "type": "param",
+        "string": "{object=} options - Configuration object.",
         "name": "options",
         "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
         "types": [
@@ -197,6 +216,7 @@
       },
       {
         "type": "param",
+        "string": "{number} options.maxResults - Maximum number of results to read.",
         "name": "options.maxResults",
         "description": "<ul>\n<li>Maximum number of results to read.</li>\n</ul>\n",
         "types": [
@@ -210,6 +230,7 @@
       },
       {
         "type": "param",
+        "string": "{string} options.pageToken - Page token, returned by a previous call,\n    to request the next page of results. Note: This is automatically added to\n    the `nextQuery` argument of your callback.",
         "name": "options.pageToken",
         "description": "<ul>\n<li>Page token, returned by a previous call,     to request the next page of results. Note: This is automatically added to<br />  the <code>nextQuery</code> argument of your callback.</li>\n</ul>\n",
         "types": [
@@ -223,6 +244,7 @@
       },
       {
         "type": "param",
+        "string": "{number} options.startIndex - Zero-based index of the starting row.",
         "name": "options.startIndex",
         "description": "<ul>\n<li>Zero-based index of the starting row.</li>\n</ul>\n",
         "types": [
@@ -236,6 +258,7 @@
       },
       {
         "type": "param",
+        "string": "{number} options.timeoutMs - How long to wait for the query to\n    complete, in milliseconds, before returning. Default is to return\n    immediately. If the timeout passes before the job completes, the request\n    will fail with a `TIMEOUT` error.",
         "name": "options.timeoutMs",
         "description": "<ul>\n<li>How long to wait for the query to     complete, in milliseconds, before returning. Default is to return<br />  immediately. If the timeout passes before the job completes, the request<br />  will fail with a <code>TIMEOUT</code> error.</li>\n</ul>\n",
         "types": [
@@ -249,6 +272,7 @@
       },
       {
         "type": "param",
+        "string": "{function=} callback - The callback function. If you intend to\n    continuously run this query until all results are in as part of a stream,\n    do not pass a callback.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. If you intend to     continuously run this query until all results are in as part of a stream,<br />  do not pass a callback.</li>\n</ul>\n",
         "types": [
@@ -262,7 +286,8 @@
       },
       {
         "type": "example",
-        "string": "//-\n// Use the default options to get the results of a query.\n//-\njob.getQueryResults(function(err, rows, nextQuery) {});\n\n//-\n// Customize the results you want to fetch.\n//-\nvar options = {\n  maxResults: 100\n};\n\njob.getQueryResults(options, function(err, rows, nextQuery) {});\n\n//-\n// Consume the results from the query as a readable stream.\n//-\nvar through2 = require('through2');\n\njob.getQueryResults(options)\n  .pipe(through2.obj(function (row, enc, next) {\n    this.push(JSON.stringify(row) + '\\n');\n  }))\n  .pipe(fs.createWriteStream('./backup.json'));"
+        "string": "//-\n// Use the default options to get the results of a query.\n//-\njob.getQueryResults(function(err, rows, nextQuery, apiResponse) {});\n\n//-\n// Customize the results you want to fetch.\n//-\nvar options = {\n  maxResults: 100\n};\n\njob.getQueryResults(options, function(err, rows, nextQuery, apiResponse) {});\n\n//-\n// Consume the results from the query as a readable stream.\n//-\nvar through2 = require('through2');\n\njob.getQueryResults(options)\n  .pipe(through2.obj(function (row, enc, next) {\n    this.push(JSON.stringify(row) + '\\n');\n  }))\n  .pipe(fs.createWriteStream('./backup.json'));",
+        "html": "<p>//-<br />// Use the default options to get the results of a query.<br />//-<br />job.getQueryResults(function(err, rows, nextQuery, apiResponse) {});</p><p>//-<br />// Customize the results you want to fetch.<br />//-<br />var options = {<br />  maxResults: 100<br />};</p><p>job.getQueryResults(options, function(err, rows, nextQuery, apiResponse) {});</p><p>//-<br />// Consume the results from the query as a readable stream.<br />//-<br />var through2 = require(&#39;through2&#39;);</p><p>job.getQueryResults(options)<br />  .pipe(through2.obj(function (row, enc, next) {<br />    this.push(JSON.stringify(row) + &#39;\\n&#39;);<br />  }))<br />  .pipe(fs.createWriteStream(&#39;./backup.json&#39;));</p>"
       }
     ],
     "description": {
@@ -272,6 +297,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 84,

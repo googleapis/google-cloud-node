@@ -8,6 +8,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 1,
@@ -17,7 +18,8 @@
     "tags": [
       {
         "type": "module",
-        "string": "datastore/dataset"
+        "string": "datastore/dataset",
+        "html": "<p>datastore/dataset</p>"
       }
     ],
     "description": {
@@ -27,16 +29,19 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar nodeutil = require('util');"
+    "code": "'use strict';\n\nvar nodeutil = require('util');",
+    "ctx": false
   },
   {
     "tags": [
       {
         "type": "type",
+        "string": "{module:datastore/entity}",
         "types": [
           "module:datastore/entity"
         ],
@@ -44,11 +49,14 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{module:datastore/entity}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -58,6 +66,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 25,
@@ -74,6 +83,7 @@
     "tags": [
       {
         "type": "type",
+        "string": "{module:datastore/query}",
         "types": [
           "module:datastore/query"
         ],
@@ -81,11 +91,14 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{module:datastore/query}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -95,6 +108,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 31,
@@ -111,6 +125,7 @@
     "tags": [
       {
         "type": "type",
+        "string": "{module:datastore/transaction}",
         "types": [
           "module:datastore/transaction"
         ],
@@ -118,11 +133,14 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{module:datastore/transaction}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -132,6 +150,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 37,
@@ -148,6 +167,7 @@
     "tags": [
       {
         "type": "type",
+        "string": "{module:common/util}",
         "types": [
           "module:common/util"
         ],
@@ -155,11 +175,14 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -169,6 +192,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 43,
@@ -185,6 +209,7 @@
     "tags": [
       {
         "type": "type",
+        "string": "{module:datastore/request}",
         "types": [
           "module:datastore/request"
         ],
@@ -192,11 +217,14 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{module:datastore/request}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -206,6 +234,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 49,
@@ -222,11 +251,14 @@
     "tags": [
       {
         "type": "const",
-        "string": "{array} SCOPES"
+        "string": "{array} SCOPES",
+        "html": "<p>{array} SCOPES</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -236,6 +268,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 55,
@@ -252,18 +285,22 @@
     "tags": [
       {
         "type": "constructor",
-        "string": ""
+        "string": "",
+        "html": ""
       },
       {
         "type": "alias",
-        "string": "module:datastore/dataset"
+        "string": "module:datastore/dataset",
+        "html": "<p>module:datastore/dataset</p>"
       },
       {
         "type": "mixes",
-        "string": "module:datastore/request "
+        "string": "module:datastore/request ",
+        "html": "<p>module:datastore/request </p>"
       },
       {
         "type": "param",
+        "string": "{object=} options - Configuration object.",
         "name": "options",
         "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
         "types": [
@@ -277,6 +314,7 @@
       },
       {
         "type": "param",
+        "string": "{string=} options.projectId - Dataset ID. This is your project ID from\n    the Google Developers Console.",
         "name": "options.projectId",
         "description": "<ul>\n<li>Dataset ID. This is your project ID from     the Google Developers Console.</li>\n</ul>\n",
         "types": [
@@ -290,32 +328,7 @@
       },
       {
         "type": "param",
-        "name": "options.keyFilename",
-        "description": "<ul>\n<li>Full path to the JSON key downloaded     from the Google Developers Console. Alternatively, you may provide a<br />  <code>credentials</code> object.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>|<code>undefined</code>",
-        "optional": true,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "name": "options.credentials",
-        "description": "<ul>\n<li>Credentials object, used in place of     a <code>keyFilename</code>.</li>\n</ul>\n",
-        "types": [
-          "object"
-        ],
-        "typesDescription": "<code>object</code>|<code>undefined</code>",
-        "optional": true,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
+        "string": "{string=} options.apiEndpoint - Override the default API endpoint used\n    to reach Datastore. This is useful for connecting to your local Datastore\n    server (usually \"http://localhost:8080\").",
         "name": "options.apiEndpoint",
         "description": "<ul>\n<li>Override the default API endpoint used     to reach Datastore. This is useful for connecting to your local Datastore<br />  server (usually &quot;<a href=\"http://localhost:8080\">http://localhost:8080</a>&quot;).</li>\n</ul>\n",
         "types": [
@@ -329,6 +342,7 @@
       },
       {
         "type": "param",
+        "string": "{string} options.namespace - Namespace to isolate transactions to.\n",
         "name": "options.namespace",
         "description": "<ul>\n<li>Namespace to isolate transactions to. </li>\n</ul>\n",
         "types": [
@@ -342,21 +356,23 @@
       },
       {
         "type": "example",
-        "string": "var dataset = datastore.dataset({\n  projectId: 'my-project',\n  keyFilename: '/path/to/keyfile.json'\n});\n\n//-\n// Connect to your local Datastore server.\n//-\nvar dataset = datastore.dataset({\n  projectId: 'my-project',\n  apiEndpoint: 'http://localhost:8080'\n});"
+        "string": "var dataset = datastore.dataset({\n  projectId: 'my-project',\n  keyFilename: '/path/to/keyfile.json'\n});\n\n//-\n// Connect to your local Datastore server.\n//-\nvar dataset = datastore.dataset({\n  projectId: 'my-project',\n  apiEndpoint: 'http://localhost:8080'\n});",
+        "html": "<p>var dataset = datastore.dataset({<br />  projectId: &#39;my-project&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p><p>//-<br />// Connect to your local Datastore server.<br />//-<br />var dataset = datastore.dataset({<br />  projectId: &#39;my-project&#39;,<br />  apiEndpoint: &#39;<a href=\"http://localhost:8080\">http://localhost:8080</a>&#39;<br />});</p>"
       }
     ],
     "description": {
-      "full": "<p>Interact with a dataset from the<br /><a href=\"https://developers.google.com/datastore/\">Google Cloud Datastore</a>.</p>",
+      "full": "<p>Interact with a dataset from the<br /><a href=\"https://developers.google.com/datastore/\">Google Cloud Datastore</a>.</p><p>The full set of options that can be passed to this method are<br /><a href=\"#/docs/?method=gcloud\">outlined here</a>.</p>",
       "summary": "<p>Interact with a dataset from the<br /><a href=\"https://developers.google.com/datastore/\">Google Cloud Datastore</a>.</p>",
-      "body": ""
+      "body": "<p>The full set of options that can be passed to this method are<br /><a href=\"#/docs/?method=gcloud\">outlined here</a>.</p>"
     },
     "isPrivate": false,
     "isConstructor": true,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 65,
-    "codeStart": 100,
-    "code": "function Dataset(options) {\n  if (!(this instanceof Dataset)) {\n    return new Dataset(options);\n  }\n\n  options = options || {};\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequest({\n    customEndpoint: typeof options.apiEndpoint !== 'undefined',\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  if (options.apiEndpoint && options.apiEndpoint.indexOf('http') !== 0) {\n    options.apiEndpoint = 'http://' + options.apiEndpoint;\n  }\n\n  var trailingSlashes = new RegExp('",
+    "codeStart": 98,
+    "code": "function Dataset(options) {\n  if (!(this instanceof Dataset)) {\n    return new Dataset(options);\n  }\n\n  options = options || {};\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    customEndpoint: typeof options.apiEndpoint !== 'undefined',\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.apiEndpoint = Dataset.determineApiEndpoint_(options);\n  this.namespace = options.namespace;\n  this.projectId = options.projectId;\n}\n\nnodeutil.inherits(Dataset, DatastoreRequest);",
     "ctx": {
       "type": "constructor",
       "name": "Dataset",
@@ -366,7 +382,65 @@
   {
     "tags": [
       {
+        "type": "private",
+        "string": "\n",
+        "visibility": "private",
+        "html": ""
+      },
+      {
         "type": "param",
+        "string": "{object} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string=} options.apiEndpoint - Custom API endpoint.",
+        "name": "options.apiEndpoint",
+        "description": "<ul>\n<li>Custom API endpoint.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Determine the appropriate endpoint to use for API requests. If not explicitly<br />defined, check for the &quot;DATASTORE_HOST&quot; environment variable, used to connect<br />to a local Datastore server.</p>",
+      "summary": "<p>Determine the appropriate endpoint to use for API requests. If not explicitly<br />defined, check for the &quot;DATASTORE_HOST&quot; environment variable, used to connect<br />to a local Datastore server.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 120,
+    "codeStart": 130,
+    "code": "Dataset.determineApiEndpoint_ = function(options) {\n  var apiEndpoint = 'https://www.googleapis.com';\n  var trailingSlashes = new RegExp('/*$');\n\n  if (options.apiEndpoint) {\n    apiEndpoint = options.apiEndpoint;\n  } else if (process.env.DATASTORE_HOST) {\n    apiEndpoint = process.env.DATASTORE_HOST;\n  }\n\n  if (apiEndpoint.indexOf('http') !== 0) {\n    apiEndpoint = 'http://' + apiEndpoint;\n  }\n\n  return apiEndpoint.replace(trailingSlashes, '');\n};",
+    "ctx": {
+      "type": "method",
+      "receiver": "Dataset",
+      "name": "determineApiEndpoint_",
+      "string": "Dataset.determineApiEndpoint_()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{...*=} options - Key path. To specify or override a namespace,\n    you must use an object here to explicitly state it.",
         "name": "options",
         "description": "<ul>\n<li>Key path. To specify or override a namespace,     you must use an object here to explicitly state it.</li>\n</ul>\n",
         "types": [],
@@ -378,6 +452,7 @@
       },
       {
         "type": "param",
+        "string": "{object=} options - Configuration object.",
         "name": "options",
         "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
         "types": [
@@ -391,6 +466,7 @@
       },
       {
         "type": "param",
+        "string": "{...*=} options.path - Key path.",
         "name": "options.path",
         "description": "<ul>\n<li>Key path.</li>\n</ul>\n",
         "types": [],
@@ -402,6 +478,7 @@
       },
       {
         "type": "param",
+        "string": "{string=} options.namespace - Optional namespace.",
         "name": "options.namespace",
         "description": "<ul>\n<li>Optional namespace.</li>\n</ul>\n",
         "types": [
@@ -415,6 +492,7 @@
       },
       {
         "type": "return",
+        "string": "{Key} A newly created Key from the options given.\n",
         "types": [
           "Key"
         ],
@@ -427,20 +505,22 @@
       },
       {
         "type": "example",
-        "string": "var key;\n\n// Create an incomplete key from the dataset namespace, kind='Company'\nkey = dataset.key('Company');\n\n// A complete key from the dataset namespace, kind='Company', id=123\nkey = dataset.key(['Company', 123]);\n\n// A complete key from the dataset namespace, kind='Company', name='Google'\n// Note: `id` is used for numeric identifiers and `name` is used otherwise\nkey = dataset.key(['Company', 'Google']);\n\n// A complete key from a provided namespace and path.\nkey = dataset.key({\n  namespace: 'My-NS',\n  path: ['Company', 123]\n});"
+        "string": "var key;\n\n// Create an incomplete key from the dataset namespace, kind='Company'\nkey = dataset.key('Company');\n\n// A complete key from the dataset namespace, kind='Company', id=123\nkey = dataset.key(['Company', 123]);\n\n// A complete key from the dataset namespace, kind='Company', name='Google'\n// Note: `id` is used for numeric identifiers and `name` is used otherwise\nkey = dataset.key(['Company', 'Google']);\n\n// A complete key from a provided namespace and path.\nkey = dataset.key({\n  namespace: 'My-NS',\n  path: ['Company', 123]\n});",
+        "html": "<p>var key;</p><p>// Create an incomplete key from the dataset namespace, kind=&#39;Company&#39;<br />key = dataset.key(&#39;Company&#39;);</p><p>// A complete key from the dataset namespace, kind=&#39;Company&#39;, id=123<br />key = dataset.key([&#39;Company&#39;, 123]);</p><p>// A complete key from the dataset namespace, kind=&#39;Company&#39;, name=&#39;Google&#39;<br />// Note: <code>id</code> is used for numeric identifiers and <code>name</code> is used otherwise<br />key = dataset.key([&#39;Company&#39;, &#39;Google&#39;]);</p><p>// A complete key from a provided namespace and path.<br />key = dataset.key({<br />  namespace: &#39;My-NS&#39;,<br />  path: [&#39;Company&#39;, 123]<br />});</p>"
       }
     ],
     "description": {
-      "full": "<p>$&#39;);<br />  this.apiEndpoint = options.apiEndpoint || &#39;<a href=\"https://www.googleapis.com\">https://www.googleapis.com</a>&#39;;<br />  this.apiEndpoint = this.apiEndpoint.replace(trailingSlashes, &#39;&#39;);</p><p>  this.namespace = options.namespace;<br />  this.projectId = options.projectId;<br />}</p><p>nodeutil.inherits(Dataset, DatastoreRequest);</p><p>/**<br />Helper to create a Key object, scoped to the dataset&#39;s namespace by default.</p><p>You may also specify a configuration object to define a namespace and path.</p>",
-      "summary": "<p>$&#39;);<br />  this.apiEndpoint = options.apiEndpoint || &#39;<a href=\"https://www.googleapis.com\">https://www.googleapis.com</a>&#39;;<br />  this.apiEndpoint = this.apiEndpoint.replace(trailingSlashes, &#39;&#39;);</p>",
-      "body": "<p>  this.namespace = options.namespace;<br />  this.projectId = options.projectId;<br />}</p><p>nodeutil.inherits(Dataset, DatastoreRequest);</p><p>/**<br />Helper to create a Key object, scoped to the dataset&#39;s namespace by default.</p><p>You may also specify a configuration object to define a namespace and path.</p>"
+      "full": "<p>Helper to create a Key object, scoped to the dataset&#39;s namespace by default.</p><p>You may also specify a configuration object to define a namespace and path.</p>",
+      "summary": "<p>Helper to create a Key object, scoped to the dataset&#39;s namespace by default.</p>",
+      "body": "<p>You may also specify a configuration object to define a namespace and path.</p>"
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 118,
-    "codeStart": 159,
+    "line": 147,
+    "codeStart": 178,
     "code": "Dataset.prototype.key = function(options) {\n  options = util.is(options, 'object') ? options : {\n    namespace: this.namespace,\n    path: util.arrayize(options)\n  };\n\n  return new entity.Key(options);\n};",
     "ctx": {
       "type": "method",
@@ -454,15 +534,20 @@
     "tags": [
       {
         "type": "borrows",
+        "string": "{module:datastore/query} as createQuery",
         "otherMemberName": "{module:datastore/query}",
-        "thisMemberName": "createQuery"
+        "thisMemberName": "createQuery",
+        "html": "<p>{module:datastore/query} as createQuery</p>"
       },
       {
         "type": "see",
-        "local": "{module:datastore/query} "
+        "string": "{module:datastore/query}\n",
+        "local": "{module:datastore/query} ",
+        "html": "<p>{module:datastore/query}</p>"
       },
       {
         "type": "param",
+        "string": "{string=} namespace - Optional namespace.",
         "name": "namespace",
         "description": "<ul>\n<li>Optional namespace.</li>\n</ul>\n",
         "types": [
@@ -476,6 +561,7 @@
       },
       {
         "type": "param",
+        "string": "{string|array} kinds - Kinds to query.",
         "name": "kinds",
         "description": "<ul>\n<li>Kinds to query.</li>\n</ul>\n",
         "types": [
@@ -490,6 +576,7 @@
       },
       {
         "type": "return",
+        "string": "{module:datastore/query}",
         "types": [
           "module:datastore/query"
         ],
@@ -498,7 +585,8 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "description": "",
+        "html": "<p>{module:datastore/query}</p>"
       }
     ],
     "description": {
@@ -508,10 +596,11 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 168,
-    "codeStart": 181,
+    "line": 187,
+    "codeStart": 200,
     "code": "Dataset.prototype.createQuery = function(namespace, kinds) {\n  if (arguments.length === 1) {\n    kinds = util.arrayize(namespace);\n    namespace = this.namespace;\n  }\n\n  return new Query(namespace, util.arrayize(kinds));\n};",
     "ctx": {
       "type": "method",
@@ -525,11 +614,14 @@
     "tags": [
       {
         "type": "borrows",
+        "string": "{module:datastore/transaction#begin} as runInTransaction\n",
         "otherMemberName": "{module:datastore/transaction#begin}",
-        "thisMemberName": "runInTransaction "
+        "thisMemberName": "runInTransaction ",
+        "html": "<p>{module:datastore/transaction#begin} as runInTransaction</p>"
       },
       {
         "type": "param",
+        "string": "{function} fn - The function to run in the context of a transaction.",
         "name": "fn",
         "description": "<ul>\n<li>The function to run in the context of a transaction.</li>\n</ul>\n",
         "types": [
@@ -543,6 +635,7 @@
       },
       {
         "type": "param",
+        "string": "{function} callback - The callback function.\n",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
         "types": [
@@ -556,7 +649,8 @@
       },
       {
         "type": "example",
-        "string": "dataset.runInTransaction(function(transaction, done) {\n  // From the `transaction` object, execute dataset methods as usual.\n  // Call `done` when you're ready to commit all of the changes.\n  transaction.get(dataset.key(['Company', 123]), function(err, entity) {\n    if (err) {\n      transaction.rollback(done);\n      return;\n    }\n\n    done();\n  });\n}, function(err) {});"
+        "string": "dataset.runInTransaction(function(transaction, done) {\n  // From the `transaction` object, execute dataset methods as usual.\n  // Call `done` when you're ready to commit all of the changes.\n  transaction.get(dataset.key(['Company', 123]), function(err, entity) {\n    if (err) {\n      transaction.rollback(done);\n      return;\n    }\n\n    done();\n  });\n}, function(err) {});",
+        "html": "<p>dataset.runInTransaction(function(transaction, done) {<br />  // From the <code>transaction</code> object, execute dataset methods as usual.<br />  // Call <code>done</code> when you&#39;re ready to commit all of the changes.<br />  transaction.get(dataset.key([&#39;Company&#39;, 123]), function(err, entity) {<br />    if (err) {<br />      transaction.rollback(done);<br />      return;<br />    }</p><pre><code>done();\n</code></pre><p>  });<br />}, function(err) {});</p>"
       }
     ],
     "description": {
@@ -566,10 +660,11 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 190,
-    "codeStart": 213,
+    "line": 209,
+    "codeStart": 232,
     "code": "Dataset.prototype.runInTransaction = function(fn, callback) {\n  var newTransaction = this.createTransaction_();\n\n  newTransaction.begin(function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    fn(newTransaction, newTransaction.commit.bind(newTransaction, callback));\n  });\n};",
     "ctx": {
       "type": "method",
@@ -583,6 +678,7 @@
     "tags": [
       {
         "type": "return",
+        "string": "{module:datastore/transaction}",
         "types": [
           "module:datastore/transaction"
         ],
@@ -591,11 +687,14 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "description": "",
+        "html": "<p>{module:datastore/transaction}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -605,10 +704,11 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 226,
-    "codeStart": 232,
+    "line": 245,
+    "codeStart": 251,
     "code": "Dataset.prototype.createTransaction_ = function() {\n  return new Transaction(this, this.projectId);\n};\n\nmodule.exports = Dataset;",
     "ctx": {
       "type": "method",

@@ -8,6 +8,7 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 1,
@@ -17,7 +18,8 @@
     "tags": [
       {
         "type": "module",
-        "string": "gcloud"
+        "string": "gcloud",
+        "html": "<p>gcloud</p>"
       }
     ],
     "description": {
@@ -27,16 +29,19 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';"
+    "code": "'use strict';",
+    "ctx": false
   },
   {
     "tags": [
       {
         "type": "type",
+        "string": "{module:bigquery}",
         "types": [
           "module:bigquery"
         ],
@@ -44,11 +49,14 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{module:bigquery}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -58,6 +66,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 23,
@@ -74,6 +83,7 @@
     "tags": [
       {
         "type": "type",
+        "string": "{module:datastore}",
         "types": [
           "module:datastore"
         ],
@@ -81,11 +91,14 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{module:datastore}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -95,6 +108,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 29,
@@ -111,6 +125,7 @@
     "tags": [
       {
         "type": "type",
+        "string": "{module:pubsub}",
         "types": [
           "module:pubsub"
         ],
@@ -118,11 +133,14 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{module:pubsub}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -132,6 +150,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 35,
@@ -148,6 +167,7 @@
     "tags": [
       {
         "type": "type",
+        "string": "{module:storage}",
         "types": [
           "module:storage"
         ],
@@ -155,11 +175,14 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{module:storage}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -169,6 +192,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 41,
@@ -185,6 +209,7 @@
     "tags": [
       {
         "type": "type",
+        "string": "{module:common/util}",
         "types": [
           "module:common/util"
         ],
@@ -192,11 +217,14 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
       },
       {
         "type": "private",
-        "visibility": "private"
+        "string": "",
+        "visibility": "private",
+        "html": ""
       }
     ],
     "description": {
@@ -206,6 +234,7 @@
     },
     "isPrivate": true,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 47,
@@ -222,14 +251,17 @@
     "tags": [
       {
         "type": "alias",
-        "string": "module:gcloud"
+        "string": "module:gcloud",
+        "html": "<p>module:gcloud</p>"
       },
       {
         "type": "constructor",
-        "string": ""
+        "string": "",
+        "html": ""
       },
       {
         "type": "param",
+        "string": "{object} config - Connection configuration options.",
         "name": "config",
         "description": "<ul>\n<li>Connection configuration options.</li>\n</ul>\n",
         "types": [
@@ -243,8 +275,9 @@
       },
       {
         "type": "param",
+        "string": "{string=} config.keyFilename - Full path to the a .json, .pem, or .p12\n    key downloaded from the Google Developers Console. NOTE: .pem and .p12\n    require you to specify `config.email` as well.",
         "name": "config.keyFilename",
-        "description": "<ul>\n<li>Full path to the JSON key downloaded     from the Google Developers Console. Alternatively, you may provide a<br />  <code>credentials</code> object.</li>\n</ul>\n",
+        "description": "<ul>\n<li>Full path to the a .json, .pem, or .p12     key downloaded from the Google Developers Console. NOTE: .pem and .p12<br />  require you to specify <code>config.email</code> as well.</li>\n</ul>\n",
         "types": [
           "string"
         ],
@@ -256,6 +289,21 @@
       },
       {
         "type": "param",
+        "string": "{string=} config.email - Account email address. Required when using a\n    .pem or .p12 keyFilename.",
+        "name": "config.email",
+        "description": "<ul>\n<li>Account email address. Required when using a     .pem or .p12 keyFilename.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object=} config.credentials - Credentials object.",
         "name": "config.credentials",
         "description": "<ul>\n<li>Credentials object.</li>\n</ul>\n",
         "types": [
@@ -269,6 +317,7 @@
       },
       {
         "type": "param",
+        "string": "{string} config.credentials.client_email",
         "name": "config.credentials.client_email",
         "description": "",
         "types": [
@@ -278,10 +327,12 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{string} config.credentials.client_email</p>"
       },
       {
         "type": "param",
+        "string": "{string} config.credentials.private_key",
         "name": "config.credentials.private_key",
         "description": "",
         "types": [
@@ -291,54 +342,60 @@
         "optional": false,
         "nullable": false,
         "nonNullable": false,
-        "variable": false
+        "variable": false,
+        "html": "<p>{string} config.credentials.private_key</p>"
       },
       {
         "type": "param",
+        "string": "{boolean=} config.autoRetry - Automatically retry requests if the\n    response is related to rate limits or certain intermittent server errors.\n    We will exponentially backoff subsequent requests by default. (default:\n    true)",
         "name": "config.autoRetry",
-        "description": "<ul>\n<li>Automatically retry requests if the     response is related to rate limits or certain intermittent server errors.<br />  (default: true). Recommended is true. We will exponentially backoff<br />  subsequent requests by default.</li>\n</ul>\n",
+        "description": "<ul>\n<li>Automatically retry requests if the     response is related to rate limits or certain intermittent server errors.<br />  We will exponentially backoff subsequent requests by default. (default:<br />  true)</li>\n</ul>\n",
         "types": [
           "boolean"
         ],
-        "typesDescription": "<code>boolean</code>",
-        "optional": false,
+        "typesDescription": "<code>boolean</code>|<code>undefined</code>",
+        "optional": true,
         "nullable": false,
         "nonNullable": false,
         "variable": false
       },
       {
         "type": "param",
+        "string": "{number=} config.maxRetries - Maximum number of automatic retries\n    attempted before returning the error. (default: 3)\n",
         "name": "config.maxRetries",
-        "description": "<ul>\n<li>Max number of auto retries to attempt     before returning the error. (default: 3).</li>\n</ul>\n",
+        "description": "<ul>\n<li>Maximum number of automatic retries     attempted before returning the error. (default: 3)</li>\n</ul>\n",
         "types": [
           "number"
         ],
-        "typesDescription": "<code>number</code>",
-        "optional": false,
+        "typesDescription": "<code>number</code>|<code>undefined</code>",
+        "optional": true,
         "nullable": false,
         "nonNullable": false,
         "variable": false
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar dataset = gcloud.datastore.dataset();\n// equal to:\n//   gcloud.datastore.dataset({\n//     keyFilename: '/path/to/keyfile.json',\n//     projectId: 'my-project'\n//   });\n\nvar storage = gcloud.storage();\nvar bucket = storage.bucket({\n  name: 'PhotosBucket',\n  // properties may be overridden:\n  keyFilename: '/path/to/other/keyfile.json'\n});\n"
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar dataset = gcloud.datastore.dataset();\n// equal to:\n//   gcloud.datastore.dataset({\n//     keyFilename: '/path/to/keyfile.json',\n//     projectId: 'my-project'\n//   });\n\nvar storage = gcloud.storage();\nvar bucket = storage.bucket({\n  name: 'PhotosBucket',\n  // properties may be overridden:\n  keyFilename: '/path/to/other/keyfile.json'\n});\n",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;my-project&#39;<br />});</p><p>var dataset = gcloud.datastore.dataset();<br />// equal to:<br />//   gcloud.datastore.dataset({<br />//     keyFilename: &#39;/path/to/keyfile.json&#39;,<br />//     projectId: &#39;my-project&#39;<br />//   });</p><p>var storage = gcloud.storage();<br />var bucket = storage.bucket({<br />  name: &#39;PhotosBucket&#39;,<br />  // properties may be overridden:<br />  keyFilename: &#39;/path/to/other/keyfile.json&#39;<br />});</p>"
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project',\n  maxRetries: 5 // retry rate limited requests 5 times before giving up\n});"
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project',\n  maxRetries: 5 // retry rate limited requests 5 times before giving up\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;my-project&#39;,<br />  maxRetries: 5 // retry rate limited requests 5 times before giving up<br />});</p>"
       }
     ],
     "description": {
-      "full": "<p>There are two key ways to use the <code>gcloud</code> module.</p><ol>\n<li><p>Provide connection &amp; configuration details up-front.</p></li>\n<li><p>Provide them at the time of instantiation of sub-modules, e.g. a Datastore<br />dataset, a Cloud Storage bucket, etc.</p></li>\n</ol>\n<p>If you are using Google App Engine or Google Compute Engine, your connection<br />details are handled for you. You won&#39;t have to worry about specifying these,<br />however you may find it advantageous to provide a <code>projectId</code> at<br />instantiation.</p><p>To specify the configuration details up-front, invoke the gcloud module,<br />passing in an object. The properties defined on this object will be persisted<br />to the instantiation of every sub-module. It&#39;s important to note that you can<br />override any of these defaults when you invoke a sub-module later.</p><p>You can invoke this module as many times as your project warrants. Each time,<br />your provided configuration will remain isolated to the returned gcloud<br />module.</p>",
+      "full": "<p>There are two key ways to use the <code>gcloud</code> module.</p><ol>\n<li><p>Provide connection &amp; configuration details up-front.</p></li>\n<li><p>Provide them at the time of instantiation of sub-modules, e.g. a Datastore<br />dataset, a Cloud Storage bucket, etc.</p></li>\n</ol>\n<p>If you are using Google App Engine or Google Compute Engine, your connection<br />details are handled for you. You won&#39;t have to worry about specifying these,<br />however you may find it advantageous to provide a <code>projectId</code> at<br />instantiation.</p><p>To specify the configuration details up-front, invoke the gcloud module,<br />passing in an object. The properties defined on this object will be persisted<br />to the instantiation of every sub-module. It&#39;s important to note that you can<br />override any of these defaults when you invoke a sub-module later.</p><p>You can invoke this module as many times as your project warrants. Each time,<br />your provided configuration will remain isolated to the returned gcloud<br />module.</p><p>To authenticate API requests,<br /><a href=\"https://github.com/google/google-auth-library-nodejs\">google-auth-library</a><br />is used to detect the environment your project is running in. Use the<br />following guide to determine the appropriate configuration.</p><h4>Google Compute Engine</h4>\n\n<ul>\n<li>No configuration necessary!</li>\n</ul>\n<h4>Google App Engine Production</h4>\n\n<ul>\n<li>No configuration necessary!</li>\n</ul>\n<h4>Other</h4>\n\n<ul>\n<li>Provide <code>config.projectId</code></li>\n<li><p>Use one of the following:</p><ul>\n<li><code>config.credentials</code> object containing <code>client_email</code> and <code>private_key</code><br />properties.</li>\n<li><code>config.keyFilename</code> path to a .json, .pem, or .p12 key file.</li>\n<li><code>GOOGLE_APPLICATION_CREDENTIALS</code> environment variable with a full path<br /> to your key file.</li>\n</ul>\n<p><strong>Note</strong>: When using a .pem or .p12 key file, <code>config.email</code> is also<br />required.</p></li>\n</ul>\n",
       "summary": "<p>There are two key ways to use the <code>gcloud</code> module.</p>",
-      "body": "<ol>\n<li><p>Provide connection &amp; configuration details up-front.</p></li>\n<li><p>Provide them at the time of instantiation of sub-modules, e.g. a Datastore<br />dataset, a Cloud Storage bucket, etc.</p></li>\n</ol>\n<p>If you are using Google App Engine or Google Compute Engine, your connection<br />details are handled for you. You won&#39;t have to worry about specifying these,<br />however you may find it advantageous to provide a <code>projectId</code> at<br />instantiation.</p><p>To specify the configuration details up-front, invoke the gcloud module,<br />passing in an object. The properties defined on this object will be persisted<br />to the instantiation of every sub-module. It&#39;s important to note that you can<br />override any of these defaults when you invoke a sub-module later.</p><p>You can invoke this module as many times as your project warrants. Each time,<br />your provided configuration will remain isolated to the returned gcloud<br />module.</p>"
+      "body": "<ol>\n<li><p>Provide connection &amp; configuration details up-front.</p></li>\n<li><p>Provide them at the time of instantiation of sub-modules, e.g. a Datastore<br />dataset, a Cloud Storage bucket, etc.</p></li>\n</ol>\n<p>If you are using Google App Engine or Google Compute Engine, your connection<br />details are handled for you. You won&#39;t have to worry about specifying these,<br />however you may find it advantageous to provide a <code>projectId</code> at<br />instantiation.</p><p>To specify the configuration details up-front, invoke the gcloud module,<br />passing in an object. The properties defined on this object will be persisted<br />to the instantiation of every sub-module. It&#39;s important to note that you can<br />override any of these defaults when you invoke a sub-module later.</p><p>You can invoke this module as many times as your project warrants. Each time,<br />your provided configuration will remain isolated to the returned gcloud<br />module.</p><p>To authenticate API requests,<br /><a href=\"https://github.com/google/google-auth-library-nodejs\">google-auth-library</a><br />is used to detect the environment your project is running in. Use the<br />following guide to determine the appropriate configuration.</p><h4>Google Compute Engine</h4>\n\n<ul>\n<li>No configuration necessary!</li>\n</ul>\n<h4>Google App Engine Production</h4>\n\n<ul>\n<li>No configuration necessary!</li>\n</ul>\n<h4>Other</h4>\n\n<ul>\n<li>Provide <code>config.projectId</code></li>\n<li><p>Use one of the following:</p><ul>\n<li><code>config.credentials</code> object containing <code>client_email</code> and <code>private_key</code><br />properties.</li>\n<li><code>config.keyFilename</code> path to a .json, .pem, or .p12 key file.</li>\n<li><code>GOOGLE_APPLICATION_CREDENTIALS</code> environment variable with a full path<br /> to your key file.</li>\n</ul>\n<p><strong>Note</strong>: When using a .pem or .p12 key file, <code>config.email</code> is also<br />required.</p></li>\n</ul>\n"
     },
     "isPrivate": false,
     "isConstructor": true,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 53,
-    "codeStart": 119,
+    "codeStart": 147,
     "code": "function gcloud(config) {\n  return {\n    bigquery: function(options) {\n      options = options || {};\n      return new BigQuery(util.extendGlobalConfig(config, options));\n    },\n    datastore: new Datastore(config),\n    pubsub: function(options) {\n      options = options || {};\n      return new PubSub(util.extendGlobalConfig(config, options));\n    },\n    storage: function(options) {\n      options = options || {};\n      return new Storage(util.extendGlobalConfig(config, options));\n    }\n  };\n}",
     "ctx": {
       "type": "constructor",
@@ -350,17 +407,7 @@
     "tags": [
       {
         "type": "type",
-        "types": [
-          "module:bigquery"
-        ],
-        "typesDescription": "module:<a href=\"module%3Abigquery.html\">bigquery</a>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "return",
+        "string": "{module:bigquery}\n",
         "types": [
           "module:bigquery"
         ],
@@ -369,11 +416,26 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "html": "<p>{module:bigquery}</p>"
+      },
+      {
+        "type": "return",
+        "string": "{module:bigquery}\n",
+        "types": [
+          "module:bigquery"
+        ],
+        "typesDescription": "module:<a href=\"module%3Abigquery.html\">bigquery</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:bigquery}</p>"
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\nvar bigquery = gcloud.bigquery({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});"
+        "string": "var gcloud = require('gcloud');\nvar bigquery = gcloud.bigquery({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var bigquery = gcloud.bigquery({<br />  projectId: &#39;project-id&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
       }
     ],
     "description": {
@@ -383,10 +445,11 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 137,
-    "codeStart": 154,
+    "line": 165,
+    "codeStart": 182,
     "code": "gcloud.bigquery = BigQuery;",
     "ctx": {
       "type": "property",
@@ -400,17 +463,7 @@
     "tags": [
       {
         "type": "type",
-        "types": [
-          "module:datastore"
-        ],
-        "typesDescription": "module:<a href=\"module%3Adatastore.html\">datastore</a>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "return",
+        "string": "{module:datastore}\n",
         "types": [
           "module:datastore"
         ],
@@ -419,11 +472,26 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "html": "<p>{module:datastore}</p>"
+      },
+      {
+        "type": "return",
+        "string": "{module:datastore}\n",
+        "types": [
+          "module:datastore"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adatastore.html\">datastore</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:datastore}</p>"
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\nvar datastore = gcloud.datastore;\nvar dataset = datastore.dataset({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});"
+        "string": "var gcloud = require('gcloud');\nvar datastore = gcloud.datastore;\nvar dataset = datastore.dataset({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var datastore = gcloud.datastore;<br />var dataset = datastore.dataset({<br />  projectId: &#39;project-id&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
       }
     ],
     "description": {
@@ -433,10 +501,11 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 156,
-    "codeStart": 174,
+    "line": 184,
+    "codeStart": 202,
     "code": "gcloud.datastore = Datastore;",
     "ctx": {
       "type": "property",
@@ -450,17 +519,7 @@
     "tags": [
       {
         "type": "type",
-        "types": [
-          "module:pubsub"
-        ],
-        "typesDescription": "module:<a href=\"module%3Apubsub.html\">pubsub</a>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "return",
+        "string": "{module:pubsub}\n",
         "types": [
           "module:pubsub"
         ],
@@ -469,11 +528,26 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "html": "<p>{module:pubsub}</p>"
+      },
+      {
+        "type": "return",
+        "string": "{module:pubsub}\n",
+        "types": [
+          "module:pubsub"
+        ],
+        "typesDescription": "module:<a href=\"module%3Apubsub.html\">pubsub</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:pubsub}</p>"
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\nvar pubsub = gcloud.pubsub({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});"
+        "string": "var gcloud = require('gcloud');\nvar pubsub = gcloud.pubsub({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var pubsub = gcloud.pubsub({<br />  projectId: &#39;project-id&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
       }
     ],
     "description": {
@@ -483,10 +557,11 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 176,
-    "codeStart": 200,
+    "line": 204,
+    "codeStart": 228,
     "code": "gcloud.pubsub = function(config) {\n  return new PubSub(config);\n};",
     "ctx": {
       "type": "method",
@@ -499,17 +574,7 @@
     "tags": [
       {
         "type": "type",
-        "types": [
-          "module:storage"
-        ],
-        "typesDescription": "module:<a href=\"module%3Astorage.html\">storage</a>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "return",
+        "string": "{module:storage}\n",
         "types": [
           "module:storage"
         ],
@@ -518,11 +583,26 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": ""
+        "html": "<p>{module:storage}</p>"
+      },
+      {
+        "type": "return",
+        "string": "{module:storage}\n",
+        "types": [
+          "module:storage"
+        ],
+        "typesDescription": "module:<a href=\"module%3Astorage.html\">storage</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:storage}</p>"
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\nvar storage = gcloud.storage({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});"
+        "string": "var gcloud = require('gcloud');\nvar storage = gcloud.storage({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var storage = gcloud.storage({<br />  projectId: &#39;project-id&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
       }
     ],
     "description": {
@@ -532,10 +612,11 @@
     },
     "isPrivate": false,
     "isConstructor": false,
+    "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 204,
-    "codeStart": 220,
+    "line": 232,
+    "codeStart": 248,
     "code": "gcloud.storage = Storage;\n\nmodule.exports = gcloud;",
     "ctx": {
       "type": "property",
