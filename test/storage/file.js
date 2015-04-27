@@ -1164,7 +1164,6 @@ describe('File', function() {
           expiration: expiration,
           startsWith: [['$<field>', '<value>']]
         }, function(err, signedPolicy) {
-          console.log(signedPolicy);
           var conditionString = '[\"starts-with\",\"$<field>\",\"<value>\"]';
           assert.ifError(err);
           assert(signedPolicy.string.indexOf(conditionString) > -1);
@@ -1178,7 +1177,6 @@ describe('File', function() {
           expiration: expiration,
           startsWith: ['$<field>', '<value>']
         }, function(err, signedPolicy) {
-          console.log(signedPolicy);
           var conditionString = '[\"starts-with\",\"$<field>\",\"<value>\"]';
           assert.ifError(err);
           assert(signedPolicy.string.indexOf(conditionString) > -1);
