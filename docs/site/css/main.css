@@ -725,6 +725,13 @@ ul {
   cursor: pointer;
 }
 
+.js {
+  display: block;
+  padding: .5em;
+  color: #333;
+  background: #F8F8F8;
+}
+
 /*
  Page Title
 */

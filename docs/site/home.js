@@ -1,6 +1,7 @@
 angular
   .module('gcloud', [
     'ngRoute',
+    'gcloud.authorization',
     'gcloud.docs',
     'gcloud.faq',
     'gcloud.troubleshooting',
