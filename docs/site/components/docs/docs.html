@@ -115,7 +115,7 @@ var pubsub = gcloud.pubsub({
         The <code>gcloud.storage</code> object contains a <code>bucket</code> function, which is how you will interact with your Google Cloud Storage bucket. See the guide on <a href="https://developers.google.com/storage">Google Cloud Storage</a> to create a bucket.
       </p>
       <div hljs>
-var bucket = gcloud.storage.bucket('my-bucket');</div>
+var bucket = gcloud.storage().bucket('my-bucket');</div>
       <h4>ACLs</h4>
       <p>
         Google Cloud Storage uses access control lists (ACLs) to manage object and bucket access. ACLs are the mechanism you use to share files with other users and allow other users to access your buckets and files.
