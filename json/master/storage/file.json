@@ -745,24 +745,30 @@
       },
       {
         "type": "param",
-        "string": "{object[][]=} options.equals - Array of request parameters and their\n    expected value (e.g. [['$<field>', '<value>']]). Values are translated\n    into equality constraints in the conditions field of the policy document\n    (e.g. ['eq', '$<field>', '<value>']). If only one equality condition is\n    to be specified, options.equals can be a one-dimensional array (e.g.\n    ['$<field>', '<value>']).",
+        "string": "{array|array[]=} options.equals - Array of request parameters and\n    their expected value (e.g. [['$<field>', '<value>']]). Values are\n    translated into equality constraints in the conditions field of the\n    policy document (e.g. ['eq', '$<field>', '<value>']). If only one\n    equality condition is to be specified, options.equals can be a one-\n    dimensional array (e.g. ['$<field>', '<value>']).",
         "name": "options.equals",
-        "description": "<ul>\n<li>Array of request parameters and their     expected value (e.g. [[&#39;$<field>&#39;, &#39;<value>&#39;]]). Values are translated<br />  into equality constraints in the conditions field of the policy document<br />  (e.g. [&#39;eq&#39;, &#39;$<field>&#39;, &#39;<value>&#39;]). If only one equality condition is<br />  to be specified, options.equals can be a one-dimensional array (e.g.<br />  [&#39;$<field>&#39;, &#39;<value>&#39;]).</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>?</code>",
-        "optional": false,
+        "description": "<ul>\n<li>Array of request parameters and     their expected value (e.g. [[&#39;$<field>&#39;, &#39;<value>&#39;]]). Values are<br />  translated into equality constraints in the conditions field of the<br />  policy document (e.g. [&#39;eq&#39;, &#39;$<field>&#39;, &#39;<value>&#39;]). If only one<br />  equality condition is to be specified, options.equals can be a one-<br />  dimensional array (e.g. [&#39;$<field>&#39;, &#39;<value>&#39;]).</li>\n</ul>\n",
+        "types": [
+          "array",
+          "Array.<array>"
+        ],
+        "typesDescription": "<code>array</code>|<code>Array</code>.&lt;<code>array</code>&gt;|<code>undefined</code>",
+        "optional": true,
         "nullable": false,
         "nonNullable": false,
         "variable": false
       },
       {
         "type": "param",
-        "string": "{object[][]=} options.startsWith - Array of request parameters and\n    their expected prefixes (e.g. [['$<field>', '<value>']). Values are\n    translated into starts-with constraints in the conditions field of the\n    policy document (e.g. ['starts-with', '$<field>', '<value>']). If only\n    one prefix condition is to be specified, options.startsWith can be a\n    one-dimensional array (e.g. ['$<field>', '<value>']).",
+        "string": "{array|array[]=} options.startsWith - Array of request parameters and\n    their expected prefixes (e.g. [['$<field>', '<value>']). Values are\n    translated into starts-with constraints in the conditions field of the\n    policy document (e.g. ['starts-with', '$<field>', '<value>']). If only\n    one prefix condition is to be specified, options.startsWith can be a one-\n    dimensional array (e.g. ['$<field>', '<value>']).",
         "name": "options.startsWith",
-        "description": "<ul>\n<li>Array of request parameters and     their expected prefixes (e.g. [[&#39;$<field>&#39;, &#39;<value>&#39;]). Values are<br />  translated into starts-with constraints in the conditions field of the<br />  policy document (e.g. [&#39;starts-with&#39;, &#39;$<field>&#39;, &#39;<value>&#39;]). If only<br />  one prefix condition is to be specified, options.startsWith can be a<br />  one-dimensional array (e.g. [&#39;$<field>&#39;, &#39;<value>&#39;]).</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>?</code>",
-        "optional": false,
+        "description": "<ul>\n<li>Array of request parameters and     their expected prefixes (e.g. [[&#39;$<field>&#39;, &#39;<value>&#39;]). Values are<br />  translated into starts-with constraints in the conditions field of the<br />  policy document (e.g. [&#39;starts-with&#39;, &#39;$<field>&#39;, &#39;<value>&#39;]). If only<br />  one prefix condition is to be specified, options.startsWith can be a one-<br />  dimensional array (e.g. [&#39;$<field>&#39;, &#39;<value>&#39;]).</li>\n</ul>\n",
+        "types": [
+          "array",
+          "Array.<array>"
+        ],
+        "typesDescription": "<code>array</code>|<code>Array</code>.&lt;<code>array</code>&gt;|<code>undefined</code>",
+        "optional": true,
         "nullable": false,
         "nonNullable": false,
         "variable": false
