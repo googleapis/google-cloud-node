@@ -693,6 +693,196 @@
     "tags": [
       {
         "type": "throws",
+        "string": "{Error} If an expiration timestamp from the past is given.",
+        "types": [
+          "Error"
+        ],
+        "description": "<p>If an expiration timestamp from the past is given.</p>"
+      },
+      {
+        "type": "throws",
+        "string": "{Error} If options.equals has an array with less or more than two\n    members.",
+        "types": [
+          "Error"
+        ],
+        "description": "<p>If options.equals has an array with less or more than two     members.</p>"
+      },
+      {
+        "type": "throws",
+        "string": "{Error} If options.startsWith has an array with less or more than two\n    members.\n",
+        "types": [
+          "Error"
+        ],
+        "description": "<p>If options.startsWith has an array with less or more than two     members.</p>"
+      },
+      {
+        "type": "param",
+        "string": "{object} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} options.expiration - Timestamp (seconds since epoch) when\n    this policy will expire.",
+        "name": "options.expiration",
+        "description": "<ul>\n<li>Timestamp (seconds since epoch) when     this policy will expire.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object[][]=} options.equals - Array of request parameters and their\n    expected value (e.g. [['$<field>', '<value>']]). Values are translated\n    into equality constraints in the conditions field of the policy document\n    (e.g. ['eq', '$<field>', '<value>']). If only one equality condition is\n    to be specified, options.equals can be a one-dimensional array (e.g.\n    ['$<field>', '<value>']).",
+        "name": "options.equals",
+        "description": "<ul>\n<li>Array of request parameters and their     expected value (e.g. [[&#39;$<field>&#39;, &#39;<value>&#39;]]). Values are translated<br />  into equality constraints in the conditions field of the policy document<br />  (e.g. [&#39;eq&#39;, &#39;$<field>&#39;, &#39;<value>&#39;]). If only one equality condition is<br />  to be specified, options.equals can be a one-dimensional array (e.g.<br />  [&#39;$<field>&#39;, &#39;<value>&#39;]).</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>?</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object[][]=} options.startsWith - Array of request parameters and\n    their expected prefixes (e.g. [['$<field>', '<value>']). Values are\n    translated into starts-with constraints in the conditions field of the\n    policy document (e.g. ['starts-with', '$<field>', '<value>']). If only\n    one prefix condition is to be specified, options.startsWith can be a\n    one-dimensional array (e.g. ['$<field>', '<value>']).",
+        "name": "options.startsWith",
+        "description": "<ul>\n<li>Array of request parameters and     their expected prefixes (e.g. [[&#39;$<field>&#39;, &#39;<value>&#39;]). Values are<br />  translated into starts-with constraints in the conditions field of the<br />  policy document (e.g. [&#39;starts-with&#39;, &#39;$<field>&#39;, &#39;<value>&#39;]). If only<br />  one prefix condition is to be specified, options.startsWith can be a<br />  one-dimensional array (e.g. [&#39;$<field>&#39;, &#39;<value>&#39;]).</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>?</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string=} options.acl - ACL for the object from possibly predefined\n    ACLs.",
+        "name": "options.acl",
+        "description": "<ul>\n<li>ACL for the object from possibly predefined     ACLs.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string=} options.successRedirect - The URL to which the user client\n    is redirected if the upload is successful.",
+        "name": "options.successRedirect",
+        "description": "<ul>\n<li>The URL to which the user client     is redirected if the upload is successful.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string=} options.successStatus - The status of the Google Storage\n    response if the upload is successful (must be string).",
+        "name": "options.successStatus",
+        "description": "<ul>\n<li>The status of the Google Storage     response if the upload is successful (must be string).</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object=} options.contentLengthRange",
+        "name": "options.contentLengthRange",
+        "description": "",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{object=} options.contentLengthRange</p>"
+      },
+      {
+        "type": "param",
+        "string": "{number} options.contentLengthRange.min - Minimum value for the\n    request's content length.",
+        "name": "options.contentLengthRange.min",
+        "description": "<ul>\n<li>Minimum value for the     request&#39;s content length.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.contentLengthRange.max - Maximum value for the\n    request's content length.\n",
+        "name": "options.contentLengthRange.max",
+        "description": "<ul>\n<li>Maximum value for the     request&#39;s content length.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "file.getSignedPolicy({\n  equals: ['$Content-Type', 'image/jpeg'],\n  contentLengthRange: { min: 0, max: 1024 },\n  expiration: Math.round(Date.now() / 1000) + (60 * 60 * 24 * 14) // 2 weeks.\n}, function(err, policy) {\n  // policy.string: the policy document in plain text.\n  // policy.base64: the policy document in base64.\n  // policy.signature: the policy signature in base64.\n});",
+        "html": "<p>file.getSignedPolicy({<br />  equals: [&#39;$Content-Type&#39;, &#39;image/jpeg&#39;],<br />  contentLengthRange: { min: 0, max: 1024 },<br />  expiration: Math.round(Date.now() / 1000) + (60 <em> 60 </em> 24 * 14) // 2 weeks.<br />}, function(err, policy) {<br />  // policy.string: the policy document in plain text.<br />  // policy.base64: the policy document in base64.<br />  // policy.signature: the policy signature in base64.<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a signed policy document to allow a user to upload data with a POST<br />request.</p><p><em><a href=\"http://goo.gl/JWJEkG\">Reference</a>.</em></p>",
+      "summary": "<p>Get a signed policy document to allow a user to upload data with a POST<br />request.</p>",
+      "body": "<p><em><a href=\"http://goo.gl/JWJEkG\">Reference</a>.</em></p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 769,
+    "codeStart": 819,
+    "code": "File.prototype.getSignedPolicy = function(options, callback) {\n  if (options.expiration < Math.floor(Date.now() / 1000)) {\n    throw new Error('An expiration date cannot be in the past.');\n  }\n\n  var expirationString = new Date(options.expiration).toISOString();\n  var conditions = [\n    ['eq', '$key', this.name],\n    {\n      bucket: this.bucket.name\n    }\n  ];\n\n  if (util.is(options.equals, 'array')) {\n    if (!util.is(options.equals[0], 'array')) {\n      options.equals = [options.equals];\n    }\n    options.equals.forEach(function(condition) {\n      if (!util.is(condition, 'array') || condition.length !== 2) {\n        throw new Error('Equals condition must be an array of 2 elements.');\n      }\n      conditions.push(['eq', condition[0], condition[1]]);\n    });\n  }\n\n  if (util.is(options.startsWith, 'array')) {\n    if (!util.is(options.startsWith[0], 'array')) {\n      options.startsWith = [options.startsWith];\n    }\n    options.startsWith.forEach(function(condition) {\n      if (!util.is(condition, 'array') || condition.length !== 2) {\n        throw new Error('StartsWith condition must be an array of 2 elements.');\n      }\n      conditions.push(['starts-with', condition[0], condition[1]]);\n    });\n  }\n\n  if (options.acl) {\n    conditions.push({\n      acl: options.acl\n    });\n  }\n\n  if (options.successRedirect) {\n    conditions.push({\n      success_action_redirect: options.successRedirect\n    });\n  }\n\n  if (options.successStatus) {\n    conditions.push({\n      success_action_status: options.successStatus\n    });\n  }\n\n  if (options.contentLengthRange) {\n    var min = options.contentLengthRange.min;\n    var max = options.contentLengthRange.max;\n    if (!util.is(min, 'number') || !util.is(max, 'number')) {\n      throw new Error('ContentLengthRange must have numeric min & max fields.');\n    }\n    conditions.push(['content-length-range', min, max]);\n  }\n\n  var policy = {\n    expiration: expirationString,\n    conditions: conditions\n  };\n\n  var makeAuthorizedRequest_ = this.bucket.storage.makeAuthorizedRequest_;\n\n  makeAuthorizedRequest_.getCredentials(function(err, credentials) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var sign = crypto.createSign('RSA-SHA256');\n    var policyString = JSON.stringify(policy);\n    var policyBase64 = new Buffer(policyString).toString('base64');\n\n    sign.update(policyBase64);\n\n    var signature = sign.sign(credentials.private_key, 'base64');\n\n    callback(null, {\n      string: policyString,\n      base64: policyBase64,\n      signature: signature\n    });\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "File",
+      "cons": "File",
+      "name": "getSignedPolicy",
+      "string": "File.prototype.getSignedPolicy()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "throws",
         "string": "{Error} if an expiration timestamp from the past is given.\n",
         "types": [
           "Error"
@@ -813,8 +1003,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 769,
-    "codeStart": 795,
+    "line": 912,
+    "codeStart": 938,
     "code": "File.prototype.getSignedUrl = function(options, callback) {\n  if (options.expires < Math.floor(Date.now() / 1000)) {\n    throw new Error('An expiration date cannot be in the past.');\n  }\n\n  options.action = {\n    read: 'GET',\n    write: 'PUT',\n    delete: 'DELETE'\n  }[options.action];\n\n  var name = encodeURIComponent(this.name);\n\n  options.resource = '/' + this.bucket.name + '/' + name;\n\n  var makeAuthorizedRequest_ = this.bucket.storage.makeAuthorizedRequest_;\n\n  makeAuthorizedRequest_.getCredentials(function(err, credentials) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var sign = crypto.createSign('RSA-SHA256');\n    sign.update([\n      options.action,\n      (options.contentMd5 || ''),\n      (options.contentType || ''),\n      options.expires,\n      (options.extensionHeaders || '') + options.resource\n    ].join('\\n'));\n    var signature = sign.sign(credentials.private_key, 'base64');\n\n    callback(null, [\n      'https://storage.googleapis.com' + options.resource,\n      '?GoogleAccessId=' + credentials.client_email,\n      '&Expires=' + options.expires,\n      '&Signature=' + encodeURIComponent(signature)\n    ].join(''));\n  });\n};",
     "ctx": {
       "type": "method",
@@ -870,8 +1060,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 837,
-    "codeStart": 852,
+    "line": 980,
+    "codeStart": 995,
     "code": "File.prototype.setMetadata = function(metadata, callback) {\n  callback = callback || util.noop;\n\n  var that = this;\n  var path = '/o/' + encodeURIComponent(this.name);\n  var query = {};\n\n  if (this.generation) {\n    query.generation = this.generation;\n  }\n\n  this.makeReq_('PATCH', path, query, metadata, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -941,8 +1131,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 875,
-    "codeStart": 896,
+    "line": 1018,
+    "codeStart": 1039,
     "code": "File.prototype.makePrivate = function(options, callback) {\n  var that = this;\n  if (util.is(options, 'function')) {\n      callback = options;\n      options = {};\n  }\n  var path = '/o/' + encodeURIComponent(this.name);\n  var query = { predefinedAcl: options.strict ? 'private' : 'projectPrivate' };\n\n  // You aren't allowed to set both predefinedAcl & acl properties on a file, so\n  // acl must explicitly be nullified, destroying all previous acls on the file.\n  var metadata = { acl: null };\n\n  callback = callback || util.noop;\n\n  this.makeReq_('PATCH', path, query, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -984,8 +1174,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 923,
-    "codeStart": 931,
+    "line": 1066,
+    "codeStart": 1074,
     "code": "File.prototype.makePublic = function(callback) {\n  callback = callback || util.noop;\n\n  this.acl.add({\n    entity: 'allUsers',\n    role: 'READER'\n  }, function(err, resp) {\n    callback(err, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1042,8 +1232,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 942,
-    "codeStart": 976,
+    "line": 1085,
+    "codeStart": 1119,
     "code": "File.prototype.startResumableUpload_ = function(stream, metadata) {\n  metadata = metadata || {};\n\n  var that = this;\n  var configStore = new ConfigStore('gcloud-node');\n  var config = configStore.get(that.name);\n  var makeAuthorizedRequest = that.bucket.storage.makeAuthorizedRequest_;\n\n  var numBytesWritten;\n  var resumableUri;\n  var RETRY_LIMIT = 5;\n  var retries = 0;\n\n  // This is used to hold all data coming in from the user's readable stream. If\n  // we need to abort a resumable upload to start a new one, this will hold the\n  // data until we're ready again.\n  var bufferStream = through();\n\n  if (config && config.uri) {\n    resumableUri = config.uri;\n    resumeUpload();\n  } else {\n    startUpload();\n  }\n\n  // Begin a new resumable upload. Send the metadata and cache the URI returned.\n  function startUpload() {\n    var headers = {};\n\n    if (metadata.contentType) {\n      headers['X-Upload-Content-Type'] = metadata.contentType;\n    }\n\n    var reqOpts = {\n      method: 'POST',\n      uri: util.format('{base}/{bucket}/o', {\n        base: STORAGE_UPLOAD_BASE_URL,\n        bucket: that.bucket.name\n      }),\n      qs: {\n        name: that.name,\n        uploadType: 'resumable'\n      },\n      headers: headers,\n      json: metadata\n    };\n\n    if (that.generation) {\n      reqOpts.qs.ifGenerationMatch = that.generation;\n    }\n\n    makeAuthorizedRequest(reqOpts, function(err, res, body) {\n      if (err) {\n        handleError(err);\n        return;\n      }\n\n      numBytesWritten = -1;\n      resumableUri = body.headers.location;\n\n      configStore.set(that.name, {\n        uri: resumableUri\n      });\n\n      resumeUpload();\n    });\n  }\n\n  // Given a byte offset, create an authorized request to the resumable URI. If\n  // resuming an upload, we first determine the last byte written, then create\n  // the authorized request.\n  function resumeUpload() {\n    if (util.is(numBytesWritten, 'number')) {\n      createUploadRequest(numBytesWritten);\n    } else {\n      getNumBytesWritten(createUploadRequest);\n    }\n\n    function createUploadRequest(offset) {\n      makeAuthorizedRequest({\n        method: 'PUT',\n        uri: resumableUri\n      }, {\n        onAuthorized: function(err, reqOpts) {\n          if (err) {\n            handleError(err);\n            return;\n          }\n\n          sendFile(reqOpts, offset + 1);\n        }\n      });\n    }\n  }\n\n  // Given an authorized request and a byte offset, begin sending data to the\n  // resumable URI from where the upload last left off.\n  function sendFile(reqOpts, offset) {\n    reqOpts.headers['Content-Range'] = 'bytes ' + offset + '-*/*';\n\n    var bytesWritten = 0;\n\n    var offsetStream = through(function(chunk, enc, next) {\n      // Determine if this is the same content uploaded previously. We do this\n      // by caching a slice of the first chunk, then comparing it with the first\n      // byte of incoming data.\n      if (bytesWritten === 0) {\n        var cachedFirstChunk = config && config.firstChunk;\n        var firstChunk = chunk.slice(0, 16);\n\n        if (!cachedFirstChunk) {\n          // This is a new upload. Cache the first chunk.\n          configStore.set(that.name, {\n            uri: reqOpts.uri,\n            firstChunk: firstChunk\n          });\n        } else {\n          // This is a continuation of an upload. Make sure the first bytes are\n          // the same.\n          cachedFirstChunk = new Buffer(cachedFirstChunk);\n          firstChunk = new Buffer(firstChunk);\n\n          if (!bufferEqual(cachedFirstChunk, firstChunk)) {\n            // The data being uploaded now is different than the original data.\n            // Give the chunk back to the stream and create a new upload stream.\n            bufferStream.unshift(chunk);\n            bufferStream.unpipe(this);\n\n            configStore.del(that.name);\n\n            startUpload();\n            return;\n          }\n        }\n      }\n\n      var length = chunk.length;\n\n      if (util.is(chunk, 'string')) {\n        length = Buffer.byteLength(chunk, enc);\n      }\n\n      if (bytesWritten < offset) {\n        chunk = chunk.slice(offset - bytesWritten);\n      }\n\n      bytesWritten += length;\n\n      // Only push data to the request stream from the byte after the one we\n      // left off on.\n      if (bytesWritten > offset) {\n        this.push(chunk);\n      }\n\n      next();\n    });\n\n    var writeStream = request(reqOpts);\n    writeStream.callback = util.noop;\n\n    writeStream.on('error', function(err) {\n      handleError(err);\n    });\n\n    writeStream.on('complete', function(res) {\n      util.handleResp(null, res, res.body, function(err, data) {\n        if (err) {\n          handleError(err);\n          return;\n        }\n\n        that.metadata = data;\n\n        stream.emit('complete', that.metadata);\n\n        configStore.del(that.name);\n      });\n    });\n\n    bufferStream.pipe(offsetStream).pipe(writeStream);\n    stream.setWritable(bufferStream);\n  }\n\n  // If an upload to this file has previously started, this will return the last\n  // byte written to it.\n  function getNumBytesWritten(callback) {\n    makeAuthorizedRequest({\n      method: 'PUT',\n      uri: resumableUri,\n      headers: {\n        'Content-Length': 0,\n        'Content-Range': 'bytes */*'\n      }\n    }, function(err) {\n      var RESUME_INCOMPLETE_STATUS = 308;\n\n      if (err && err.code === RESUME_INCOMPLETE_STATUS) {\n        // headers.range format: ##-## (e.g. 0-4915200)\n        if (err.response.headers.range) {\n          callback(parseInt(err.response.headers.range.split('-')[1]));\n          return;\n        }\n      }\n\n      // Start from the first byte.\n      callback(-1);\n    });\n  }\n\n  // Handle an error from API calls following the recommended best practices:\n  // http://goo.gl/AajKku\n  function handleError(err) {\n    if (err.code === 404 && retries < RETRY_LIMIT) {\n      retries++;\n      startUpload();\n      return;\n    }\n\n    if (err.code > 499 && err.code < 600 && retries < RETRY_LIMIT) {\n      // Exponential backoff: http://goo.gl/CifIFy\n      var randomMs = Math.round(Math.random() * 1000);\n      var waitTime = Math.pow(2, retries) * 1000 + randomMs;\n\n      retries++;\n\n      // Reset `numBytesWritten` so we update this value by pinging the API.\n      numBytesWritten = null;\n\n      setTimeout(resumeUpload, waitTime);\n      return;\n    }\n\n    stream.emit('error', err);\n  }\n};",
     "ctx": {
       "type": "method",
@@ -1100,8 +1290,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1212,
-    "codeStart": 1222,
+    "line": 1355,
+    "codeStart": 1365,
     "code": "File.prototype.startSimpleUpload_ = function(stream, metadata) {\n  var that = this;\n\n  var reqOpts = {\n    qs: {\n      name: that.name\n    },\n    uri: util.format('{base}/{bucket}/o', {\n      base: STORAGE_UPLOAD_BASE_URL,\n      bucket: that.bucket.name\n    })\n  };\n\n  if (this.generation) {\n    reqOpts.qs.ifGenerationMatch = this.generation;\n  }\n\n  util.makeWritableStream(stream, {\n    makeAuthorizedRequest: that.bucket.storage.makeAuthorizedRequest_,\n    metadata: metadata,\n    request: reqOpts\n  }, function(data) {\n    that.metadata = data;\n\n    stream.emit('complete', data);\n    stream.end();\n  });\n};\n\nmodule.exports = File;",
     "ctx": {
       "type": "method",
