@@ -1314,6 +1314,206 @@ describe('File', function() {
     });
   });
 
+  describe('getSignedPolicy', function() {
+    var credentials = require('../testdata/privateKeyFile.json');
+
+    beforeEach(function() {
+      var storage = bucket.storage;
+      storage.makeAuthorizedRequest_.getCredentials = function(callback) {
+        callback(null, credentials);
+      };
+    });
+
+    it('should create a signed policy', function(done) {
+      file.getSignedPolicy({
+        expiration: Math.round(Date.now() / 1000) + 5
+      }, function(err, signedPolicy) {
+        assert.ifError(err);
+        assert.equal(typeof signedPolicy.string, 'string');
+        assert.equal(typeof signedPolicy.base64, 'string');
+        assert.equal(typeof signedPolicy.signature, 'string');
+        done();
+      });
+    });
+
+    it('should add key equality condition', function(done) {
+      file.getSignedPolicy({
+        expiration: Math.round(Date.now() / 1000) + 5
+      }, function(err, signedPolicy) {
+          var conditionString = '[\"eq\",\"$key\",\"'+file.name+'\"]';
+          assert.ifError(err);
+          assert(signedPolicy.string.indexOf(conditionString) > -1);
+        done();
+      });
+    });
+
+    it('should add ACL condtion', function(done) {
+      file.getSignedPolicy({
+        expiration: Math.round(Date.now() / 1000) + 5,
+        acl: '<acl>'
+      }, function(err, signedPolicy) {
+          var conditionString = '{\"acl\":\"<acl>\"}';
+          assert.ifError(err);
+          assert(signedPolicy.string.indexOf(conditionString) > -1);
+        done();
+      });
+    });
+
+    describe('expiration', function() {
+      it('should ISO encode expiration', function(done) {
+        var expiration = Math.round(Date.now() / 1000) + 5;
+        var expireDate = new Date(expiration);
+        file.getSignedPolicy({
+          expiration: expiration
+        }, function(err, signedPolicy) {
+          assert.ifError(err);
+          assert(signedPolicy.string.indexOf(expireDate.toISOString()) > -1);
+          done();
+        });
+      });
+
+      it('should throw if a date from the past is given', function() {
+        var expirationTimestamp = Math.floor(Date.now() / 1000) - 1;
+        assert.throws(function() {
+          file.getSignedPolicy({
+            expiration: expirationTimestamp
+          }, function() {});
+        }, /cannot be in the past/);
+      });
+    });
+
+    describe('equality condition', function() {
+      it('should add equality conditions (array of arrays)', function(done) {
+        var expiration = Math.round(Date.now() / 1000) + 5;
+        file.getSignedPolicy({
+          expiration: expiration,
+          equals: [['$<field>', '<value>']]
+        }, function(err, signedPolicy) {
+          var conditionString = '[\"eq\",\"$<field>\",\"<value>\"]';
+          assert.ifError(err);
+          assert(signedPolicy.string.indexOf(conditionString) > -1);
+          done();
+        });
+      });
+
+      it('should add equality condition (array)', function(done) {
+        var expiration = Math.round(Date.now() / 1000) + 5;
+        file.getSignedPolicy({
+          expiration: expiration,
+          equals: ['$<field>', '<value>']
+        }, function(err, signedPolicy) {
+          var conditionString = '[\"eq\",\"$<field>\",\"<value>\"]';
+          assert.ifError(err);
+          assert(signedPolicy.string.indexOf(conditionString) > -1);
+          done();
+        });
+      });
+
+      it('should throw if equal condition is not an array', function() {
+        var expiration = Math.round(Date.now() / 1000) + 5;
+        assert.throws(function() {        
+          file.getSignedPolicy({
+            expiration: expiration,
+            equals: [{}]
+          }, function() {});
+        }, /Equals condition must be an array/);
+      });
+
+      it('should throw if equal condition length is not 2', function() {
+        var expiration = Math.round(Date.now() / 1000) + 5;
+        assert.throws(function() {        
+          file.getSignedPolicy({
+            expiration: expiration,
+            equals: [['1', '2', '3']]
+          }, function() {});
+        }, /Equals condition must be an array of 2 elements/);
+      });
+    });
+
+    describe('prefix conditions', function() {
+      it('should add prefix conditions (array of arrays)', function(done) {
+        var expiration = Math.round(Date.now() / 1000) + 5;
+        file.getSignedPolicy({
+          expiration: expiration,
+          startsWith: [['$<field>', '<value>']]
+        }, function(err, signedPolicy) {
+          var conditionString = '[\"starts-with\",\"$<field>\",\"<value>\"]';
+          assert.ifError(err);
+          assert(signedPolicy.string.indexOf(conditionString) > -1);
+          done();
+        });
+      });
+
+      it('should add prefix condition (array)', function(done) {
+        var expiration = Math.round(Date.now() / 1000) + 5;
+        file.getSignedPolicy({
+          expiration: expiration,
+          startsWith: ['$<field>', '<value>']
+        }, function(err, signedPolicy) {
+          var conditionString = '[\"starts-with\",\"$<field>\",\"<value>\"]';
+          assert.ifError(err);
+          assert(signedPolicy.string.indexOf(conditionString) > -1);
+          done();
+        });
+      });
+
+      it('should throw if prexif condition is not an array', function() {
+        var expiration = Math.round(Date.now() / 1000) + 5;
+        assert.throws(function() {        
+          file.getSignedPolicy({
+            expiration: expiration,
+            startsWith: [{}]
+          }, function() {});
+        }, /StartsWith condition must be an array/);
+      });
+
+      it('should throw if prefix condition length is not 2', function() {
+        var expiration = Math.round(Date.now() / 1000) + 5;
+        assert.throws(function() {        
+          file.getSignedPolicy({
+            expiration: expiration,
+            startsWith: [['1', '2', '3']]
+          }, function() {});
+        }, /StartsWith condition must be an array of 2 elements/);
+      });
+    });
+
+    describe('content length', function() {
+      it('should add content length condition', function(done) {
+        var expiration = Math.round(Date.now() / 1000) + 5;
+        file.getSignedPolicy({
+          expiration: expiration,
+          contentLengthRange: {min: 0, max: 1}
+        }, function(err, signedPolicy) {
+          var conditionString = '[\"content-length-range\",0,1]';
+          assert.ifError(err);
+          assert(signedPolicy.string.indexOf(conditionString) > -1);
+          done();
+        });
+      });
+
+      it('should throw if content length has no min', function() {
+        var expiration = Math.round(Date.now() / 1000) + 5;
+        assert.throws(function() {        
+          file.getSignedPolicy({
+            expiration: expiration,
+            contentLengthRange: [{max: 1}]
+          }, function() {});
+        }, /ContentLengthRange must have numeric min and max fields/);
+      });
+
+      it('should throw if content length has no max', function() {
+        var expiration = Math.round(Date.now() / 1000) + 5;
+        assert.throws(function() {        
+          file.getSignedPolicy({
+            expiration: expiration,
+            contentLengthRange: [{min: 0}]
+          }, function() {});
+        }, /ContentLengthRange must have numeric min and max fields/);
+      });
+    });
+  });
+
   describe('setMetadata', function() {
     var metadata = { fake: 'metadata' };
 
