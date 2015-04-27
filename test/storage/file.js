@@ -92,6 +92,7 @@ describe('File', function() {
   var bucket;
 
   before(function() {
+    mockery.registerMock('sse4_crc32', crc);
     mockery.registerMock('configstore', FakeConfigStore);
     mockery.registerMock('duplexify', FakeDuplexify);
     mockery.registerMock('request', fakeRequest);
