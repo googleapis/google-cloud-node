@@ -44,13 +44,13 @@
       <div hljs>$ npm install --save gcloud</div>
       <div hljs>var gcloud = require('gcloud');</div>
       <p>
-        If you are running your app on Google App Engine or Google Compute Engine, you won't need to worry about supplying connection configuration options to <code>gcloud</code>&mdash; we figure that out for you.
+        If you are running your app on Google Compute Engine, you won't need to worry about supplying connection configuration options to <code>gcloud</code>&mdash; we figure that out for you.
       </p>
       <p>
         However, if you're running your app elsewhere, you will need to provide project details to authenticate API requests.
       </p>
       <div hljs>
-// App Engine and Compute Engine
+// Compute Engine
 var gcloud = require('gcloud');
 
 // Elsewhere
@@ -59,7 +59,7 @@ var gcloud = require('gcloud')({
   keyFilename: '/path/to/keyfile.json'
 });</div>
       <p>
-        The full set of options which can be passed to gcloud and sub-modules are <a href="#/docs/?method=gcloud">outlined here</a>.
+        The full set of options which can be passed to gcloud and sub-modules are <a href="#/authorization">outlined here</a>.
       </p>
     </article>
     <hr>
@@ -69,10 +69,8 @@ var gcloud = require('gcloud')({
       <p>
         The object returned from <code>gcloud.bigquery</code> gives you complete access to and control of your BigQuery datasets. You can work with existing ones, by using the <code>dataset</code> method, or create new ones with <code>createDataset</code>.
       </p>
-      <div hljs>
-var bigquery = gcloud.bigquery();</div>
       <p>
-        Follow along with the examples below to see how to query your datasets, create tables, import data from your Cloud Storage buckets, and more.
+        To learn more about BigQuery, see <a href="https://cloud.google.com/bigquery/what-is-bigquery">What is BigQuery?</a>
       </p>
     </article>
 
@@ -81,13 +79,8 @@ var bigquery = gcloud.bigquery();</div>
       <p>
         The <code>gcloud.datastore</code> object gives you some convenience methods, as well as exposes a <code>dataset</code> function. This will allow you to create a <code>dataset</code>, which is the object from which you will interact with the Google Cloud Datastore.
       </p>
-      <div hljs>
-var dataset = gcloud.datastore.dataset({
-  projectId: 'project-id',
-  keyFilename: '/path/to/keyfile.json'
-});</div>
-      <p ng-if="!isActiveUrl('/docs/datastore/dataset')">
-        See <a href="#/docs/{{version}}/datastore/dataset">the Dataset documentation</a> for examples of how to query the datastore, save entities, run a transaction, and others.
+      <p>
+        To learn more about Datastore, read the <a href="https://cloud.google.com/datastore/docs/concepts/overview">Google Cloud Datastore Concepts Overview</a>.
       </p>
     </article>
 
@@ -97,41 +90,28 @@ var dataset = gcloud.datastore.dataset({
         Google Cloud Pub/Sub is in Alpha status. As a result, it might be changed in backward-incompatible ways and is not recommended for production use. It is not subject to any SLA or deprecation policy.
       </p>
       <p>
-        The <code>gcloud.pubsub</code> method will return a <code>pubsub</code> object, allowing you to create topics, publish messages, subscribe to topics, and more. See the <a href="https://developers.google.com/pubsub/overview">Google Cloud Pub/Sub overview</a> for more information.
+        The <code>gcloud.pubsub</code> method will return a <code>pubsub</code> object, allowing you to create topics, publish messages, subscribe to topics, and more.
       </p>
-      <div hljs>
-var pubsub = gcloud.pubsub({
-  projectId: 'project-id',
-  keyFilename: '/path/to/keyfile.json'
-});</div>
       <p>
-        See the examples below, which demonstrate everything from creating a topic to subscribing to messages on a topic.
+        To learn more about Pub/Sub, see the <a href="https://developers.google.com/pubsub/overview">Google Cloud Pub/Sub overview</a>.
       </p>
     </article>
 
     <article ng-if="isActiveDoc('storage')">
       <h3>Storage Overview</h3>
       <p>
-        The <code>gcloud.storage</code> object contains a <code>bucket</code> function, which is how you will interact with your Google Cloud Storage bucket. See the guide on <a href="https://developers.google.com/storage">Google Cloud Storage</a> to create a bucket.
+        The <code>gcloud.storage</code> object contains a <code>bucket</code> function, which is how you will interact with your Google Cloud Storage bucket.
       </p>
-      <div hljs>
-var bucket = gcloud.storage().bucket('my-bucket');</div>
+      <p>
+        To learn more about Cloud Storage, see the <a href="https://cloud.google.com/storage/docs/overview">Google Cloud Storage overview</a>.
+      </p>
+
       <h4>ACLs</h4>
       <p>
         Google Cloud Storage uses access control lists (ACLs) to manage object and bucket access. ACLs are the mechanism you use to share files with other users and allow other users to access your buckets and files.
       </p>
       <p>
-        Convenience methods are provided to perform common operations, such as the following.
-      </p>
-      <div hljs>
-// Allow a user to read files from a bucket.
-bucket.acl.readers.addUser('email@example.com', function(err, aclObject) {});
-
-// Revoke file ownership permissions from a group.
-var myFile = bucket.file('my-file.txt');
-myFile.acl.owners.deleteGroup('group-id', function(err, aclObject) {});</div>
-      <p>
-        See examples below for more on how to access your bucket to upload a file, read its files, create signed URLs, and more.
+        To learn more about ACLs, read this overview on <a href="https://cloud.google.com/storage/docs/access-control">Access Control</a>.
       </p>
     </article>
 
