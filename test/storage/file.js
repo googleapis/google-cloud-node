@@ -18,7 +18,7 @@
 
 var assert = require('assert');
 var Bucket = require('../../lib/storage/bucket.js');
-var crc = require('fast-crc32c');
+var crc = require('sse4_crc32');
 var crypto = require('crypto');
 var duplexify = require('duplexify');
 var extend = require('extend');
@@ -90,6 +90,7 @@ describe('File', function() {
   var bucket;
 
   before(function() {
+    mockery.registerMock('sse4_crc32', crc);
     mockery.registerMock('configstore', FakeConfigStore);
     mockery.registerMock('duplexify', FakeDuplexify);
     mockery.registerMock('request', fakeRequest);
