@@ -34,7 +34,7 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar bufferEqual = require('buffer-equal');\nvar ConfigStore = require('configstore');\nvar crc = require('fast-crc32c');\nvar crypto = require('crypto');\nvar duplexify = require('duplexify');\nvar fs = require('fs');\nvar once = require('once');\nvar request = require('request');\nvar streamEvents = require('stream-events');\nvar through = require('through2');",
+    "code": "'use strict';\n\nvar bufferEqual = require('buffer-equal');\nvar ConfigStore = require('configstore');\nvar crc = require('sse4_crc32');\nvar crypto = require('crypto');\nvar duplexify = require('duplexify');\nvar fs = require('fs');\nvar once = require('once');\nvar request = require('request');\nvar streamEvents = require('stream-events');\nvar through = require('through2');",
     "ctx": false
   },
   {

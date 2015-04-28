@@ -197,9 +197,23 @@
         "html": ""
       },
       {
+        "type": "param",
+        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).\n",
+        "name": "options",
+        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\n\n//-\n// Providing configuration details up-front.\n//-\nvar myProject = gcloud({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar dataset = gcloud.dataset();\n\n//-\n// Overriding default configuration details.\n//-\nvar dataset = myProject.datastore.dataset({\n  keyFilename: '/path/to/another/keyfile.json'\n});",
-        "html": "<p>var gcloud = require(&#39;gcloud&#39;);</p><p>//-<br />// Providing configuration details up-front.<br />//-<br />var myProject = gcloud({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;my-project&#39;<br />});</p><p>var dataset = gcloud.dataset();</p><p>//-<br />// Overriding default configuration details.<br />//-<br />var dataset = myProject.datastore.dataset({<br />  keyFilename: &#39;/path/to/another/keyfile.json&#39;<br />});</p>"
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar dataset = gcloud.dataset();",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;my-project&#39;<br />});</p><p>var dataset = gcloud.dataset();</p>"
       }
     ],
     "description": {
@@ -213,8 +227,8 @@
     "isEvent": false,
     "ignore": false,
     "line": 58,
-    "codeStart": 85,
-    "code": "function Datastore(config) {\n  this.config = config || {};\n}",
+    "codeStart": 75,
+    "code": "function Datastore(options) {\n  this.config = options || {};\n}",
     "ctx": {
       "type": "constructor",
       "name": "Datastore",
@@ -239,8 +253,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 89,
-    "codeStart": 102,
+    "line": 79,
+    "codeStart": 92,
     "code": "Datastore.dataset = Dataset;",
     "ctx": {
       "type": "property",
@@ -291,8 +305,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 104,
-    "codeStart": 112,
+    "line": 94,
+    "codeStart": 102,
     "code": "Datastore.prototype.dataset = function(options) {\n  options = options || {};\n  // Mix in global config data to the provided options.\n  return new Dataset(util.extendGlobalConfig(this.config, options));\n};",
     "ctx": {
       "type": "method",
@@ -348,8 +362,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 118,
-    "codeStart": 130,
+    "line": 108,
+    "codeStart": 120,
     "code": "Datastore.int = function(value) {\n  return new entity.Int(value);\n};",
     "ctx": {
       "type": "method",
@@ -404,8 +418,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 134,
-    "codeStart": 146,
+    "line": 124,
+    "codeStart": 136,
     "code": "Datastore.double = function(value) {\n  return new entity.Double(value);\n};\n\nmodule.exports = Datastore;",
     "ctx": {
       "type": "method",

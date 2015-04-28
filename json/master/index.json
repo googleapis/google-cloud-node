@@ -385,9 +385,9 @@
       }
     ],
     "description": {
-      "full": "<p>There are two key ways to use the <code>gcloud</code> module.</p><ol>\n<li><p>Provide connection &amp; configuration details up-front.</p></li>\n<li><p>Provide them at the time of instantiation of sub-modules, e.g. a Datastore<br />dataset, a Cloud Storage bucket, etc.</p></li>\n</ol>\n<p>If you are using Google App Engine or Google Compute Engine, your connection<br />details are handled for you. You won&#39;t have to worry about specifying these,<br />however you may find it advantageous to provide a <code>projectId</code> at<br />instantiation.</p><p>To specify the configuration details up-front, invoke the gcloud module,<br />passing in an object. The properties defined on this object will be persisted<br />to the instantiation of every sub-module. It&#39;s important to note that you can<br />override any of these defaults when you invoke a sub-module later.</p><p>You can invoke this module as many times as your project warrants. Each time,<br />your provided configuration will remain isolated to the returned gcloud<br />module.</p><p>To authenticate API requests,<br /><a href=\"https://github.com/google/google-auth-library-nodejs\">google-auth-library</a><br />is used to detect the environment your project is running in. Use the<br />following guide to determine the appropriate configuration.</p><h4>Google Compute Engine</h4>\n\n<ul>\n<li>No configuration necessary!</li>\n</ul>\n<h4>Google App Engine Production</h4>\n\n<ul>\n<li>No configuration necessary!</li>\n</ul>\n<h4>Other</h4>\n\n<ul>\n<li>Provide <code>config.projectId</code></li>\n<li><p>Use one of the following:</p><ul>\n<li><code>config.credentials</code> object containing <code>client_email</code> and <code>private_key</code><br />properties.</li>\n<li><code>config.keyFilename</code> path to a .json, .pem, or .p12 key file.</li>\n<li><code>GOOGLE_APPLICATION_CREDENTIALS</code> environment variable with a full path<br /> to your key file.</li>\n</ul>\n<p><strong>Note</strong>: When using a .pem or .p12 key file, <code>config.email</code> is also<br />required.</p></li>\n</ul>\n",
+      "full": "<p>There are two key ways to use the <code>gcloud</code> module.</p><ol>\n<li><p>Provide connection &amp; configuration details up-front.</p></li>\n<li><p>Provide them at the time of instantiation of sub-modules, e.g. a Datastore<br />dataset, a Cloud Storage bucket, etc.</p></li>\n</ol>\n<p>See our <a href=\"#/authorization\">Authorization Guide</a> for how to obtain the<br />necessary credentials for connecting to your project.</p>",
       "summary": "<p>There are two key ways to use the <code>gcloud</code> module.</p>",
-      "body": "<ol>\n<li><p>Provide connection &amp; configuration details up-front.</p></li>\n<li><p>Provide them at the time of instantiation of sub-modules, e.g. a Datastore<br />dataset, a Cloud Storage bucket, etc.</p></li>\n</ol>\n<p>If you are using Google App Engine or Google Compute Engine, your connection<br />details are handled for you. You won&#39;t have to worry about specifying these,<br />however you may find it advantageous to provide a <code>projectId</code> at<br />instantiation.</p><p>To specify the configuration details up-front, invoke the gcloud module,<br />passing in an object. The properties defined on this object will be persisted<br />to the instantiation of every sub-module. It&#39;s important to note that you can<br />override any of these defaults when you invoke a sub-module later.</p><p>You can invoke this module as many times as your project warrants. Each time,<br />your provided configuration will remain isolated to the returned gcloud<br />module.</p><p>To authenticate API requests,<br /><a href=\"https://github.com/google/google-auth-library-nodejs\">google-auth-library</a><br />is used to detect the environment your project is running in. Use the<br />following guide to determine the appropriate configuration.</p><h4>Google Compute Engine</h4>\n\n<ul>\n<li>No configuration necessary!</li>\n</ul>\n<h4>Google App Engine Production</h4>\n\n<ul>\n<li>No configuration necessary!</li>\n</ul>\n<h4>Other</h4>\n\n<ul>\n<li>Provide <code>config.projectId</code></li>\n<li><p>Use one of the following:</p><ul>\n<li><code>config.credentials</code> object containing <code>client_email</code> and <code>private_key</code><br />properties.</li>\n<li><code>config.keyFilename</code> path to a .json, .pem, or .p12 key file.</li>\n<li><code>GOOGLE_APPLICATION_CREDENTIALS</code> environment variable with a full path<br /> to your key file.</li>\n</ul>\n<p><strong>Note</strong>: When using a .pem or .p12 key file, <code>config.email</code> is also<br />required.</p></li>\n</ul>\n"
+      "body": "<ol>\n<li><p>Provide connection &amp; configuration details up-front.</p></li>\n<li><p>Provide them at the time of instantiation of sub-modules, e.g. a Datastore<br />dataset, a Cloud Storage bucket, etc.</p></li>\n</ol>\n<p>See our <a href=\"#/authorization\">Authorization Guide</a> for how to obtain the<br />necessary credentials for connecting to your project.</p>"
     },
     "isPrivate": false,
     "isConstructor": true,
@@ -395,7 +395,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 53,
-    "codeStart": 147,
+    "codeStart": 110,
     "code": "function gcloud(config) {\n  return {\n    bigquery: function(options) {\n      options = options || {};\n      return new BigQuery(util.extendGlobalConfig(config, options));\n    },\n    datastore: new Datastore(config),\n    pubsub: function(options) {\n      options = options || {};\n      return new PubSub(util.extendGlobalConfig(config, options));\n    },\n    storage: function(options) {\n      options = options || {};\n      return new Storage(util.extendGlobalConfig(config, options));\n    }\n  };\n}",
     "ctx": {
       "type": "constructor",
@@ -448,8 +448,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 165,
-    "codeStart": 182,
+    "line": 128,
+    "codeStart": 145,
     "code": "gcloud.bigquery = BigQuery;",
     "ctx": {
       "type": "property",
@@ -504,8 +504,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 184,
-    "codeStart": 202,
+    "line": 147,
+    "codeStart": 165,
     "code": "gcloud.datastore = Datastore;",
     "ctx": {
       "type": "property",
@@ -560,8 +560,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 204,
-    "codeStart": 228,
+    "line": 167,
+    "codeStart": 191,
     "code": "gcloud.pubsub = function(config) {\n  return new PubSub(config);\n};",
     "ctx": {
       "type": "method",
@@ -615,8 +615,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 232,
-    "codeStart": 248,
+    "line": 195,
+    "codeStart": 211,
     "code": "gcloud.storage = Storage;\n\nmodule.exports = gcloud;",
     "ctx": {
       "type": "property",

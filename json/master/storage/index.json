@@ -232,15 +232,29 @@
         "html": ""
       },
       {
+        "type": "param",
+        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).\n",
+        "name": "options",
+        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\n\n//-\n// Providing configuration details up-front.\n//-\nvar myProject = gcloud({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar storage = myProject.storage();\n\n//-\n// Overriding default configuration details.\n//-\nvar storage = myProject.storage({\n  keyFilename: '/path/to/another/keyfile.json'\n});",
-        "html": "<p>var gcloud = require(&#39;gcloud&#39;);</p><p>//-<br />// Providing configuration details up-front.<br />//-<br />var myProject = gcloud({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;my-project&#39;<br />});</p><p>var storage = myProject.storage();</p><p>//-<br />// Overriding default configuration details.<br />//-<br />var storage = myProject.storage({<br />  keyFilename: &#39;/path/to/another/keyfile.json&#39;<br />});</p>"
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar storage = myProject.storage();",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;my-project&#39;<br />});</p><p>var storage = myProject.storage();</p>"
       }
     ],
     "description": {
-      "full": "<p>To access your Cloud Storage buckets, you will use the <code>bucket</code> function<br />returned from this <code>storage</code> object.</p><p>The examples below will demonstrate the different usage patterns your app may<br />need to connect to <code>gcloud</code> and access your bucket.</p><p>The full set of options that can be passed to this method are<br /><a href=\"#/docs/?method=gcloud\">outlined here</a>.</p>",
+      "full": "<p>To access your Cloud Storage buckets, you will use the <code>bucket</code> function<br />returned from this <code>storage</code> object.</p><p>The examples below will demonstrate the different usage patterns your app may<br />need to connect to <code>gcloud</code> and access your bucket.</p>",
       "summary": "<p>To access your Cloud Storage buckets, you will use the <code>bucket</code> function<br />returned from this <code>storage</code> object.</p>",
-      "body": "<p>The examples below will demonstrate the different usage patterns your app may<br />need to connect to <code>gcloud</code> and access your bucket.</p><p>The full set of options that can be passed to this method are<br /><a href=\"#/docs/?method=gcloud\">outlined here</a>.</p>"
+      "body": "<p>The examples below will demonstrate the different usage patterns your app may<br />need to connect to <code>gcloud</code> and access your bucket.</p>"
     },
     "isPrivate": false,
     "isConstructor": true,
@@ -248,7 +262,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 59,
-    "codeStart": 92,
+    "codeStart": 79,
     "code": "function Storage(options) {\n  if (!(this instanceof Storage)) {\n    return new Storage(options);\n  }\n\n  options = options || {};\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId = options.projectId;\n}",
     "ctx": {
       "type": "constructor",
@@ -287,8 +301,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 109,
-    "codeStart": 155,
+    "line": 96,
+    "codeStart": 142,
     "code": "Storage.acl = {\n  OWNER_ROLE: 'OWNER',\n  READER_ROLE: 'READER',\n  WRITER_ROLE: 'WRITER'\n};\n\nStorage.prototype.acl = Storage.acl;",
     "ctx": {
       "type": "property",
@@ -345,8 +359,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 163,
-    "codeStart": 179,
+    "line": 150,
+    "codeStart": 166,
     "code": "Storage.prototype.bucket = function(name) {\n  return new Bucket(this, name);\n};",
     "ctx": {
       "type": "method",
@@ -424,8 +438,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 183,
-    "codeStart": 220,
+    "line": 170,
+    "codeStart": 207,
     "code": "Storage.prototype.createBucket = function(name, metadata, callback) {\n  var self = this;\n  if (!name) {\n    throw new Error('A name is required to create a bucket.');\n  }\n  if (!callback) {\n    callback = metadata;\n    metadata = {};\n  }\n  var query = {\n    project: this.projectId\n  };\n  var body = extend(metadata, {\n    name: name\n  });\n\n  this.makeReq_('POST', '', query, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n    var bucket = self.bucket(name);\n    bucket.metadata = resp;\n    callback(null, bucket, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -509,8 +523,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 247,
-    "codeStart": 281,
+    "line": 234,
+    "codeStart": 268,
     "code": "Storage.prototype.getBuckets = function(query, callback) {\n  var that = this;\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n  query.project = query.project || this.projectId;\n  this.makeReq_('GET', '', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n    var buckets = (resp.items || []).map(function(item) {\n      var bucket = that.bucket(item.id);\n      bucket.metadata = item;\n      return bucket;\n    });\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, { pageToken: resp.nextPageToken });\n    }\n    callback(null, buckets, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -605,8 +619,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 306,
-    "codeStart": 318,
+    "line": 293,
+    "codeStart": 305,
     "code": "Storage.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: STORAGE_BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};\n\nmodule.exports = Storage;",
     "ctx": {
       "type": "method",

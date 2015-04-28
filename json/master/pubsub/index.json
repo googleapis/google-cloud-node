@@ -245,70 +245,28 @@
       },
       {
         "type": "param",
-        "string": "{object=} options - Configuration object.",
+        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).\n",
         "name": "options",
-        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>. </li>\n</ul>\n",
         "types": [
           "object"
         ],
-        "typesDescription": "<code>object</code>|<code>undefined</code>",
-        "optional": true,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{string=} options.projectId - Google Developers Console Project ID.",
-        "name": "options.projectId",
-        "description": "<ul>\n<li>Google Developers Console Project ID.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>|<code>undefined</code>",
-        "optional": true,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{string=} options.keyFilename - Full path to the JSON key downloaded\n    from the Google Developers Console. Alternatively, you may provide a\n    `credentials` object.",
-        "name": "options.keyFilename",
-        "description": "<ul>\n<li>Full path to the JSON key downloaded     from the Google Developers Console. Alternatively, you may provide a<br />  <code>credentials</code> object.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>|<code>undefined</code>",
-        "optional": true,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{object=} options.credentials - Credentials object, used in place of\n    a `keyFilename`.\n",
-        "name": "options.credentials",
-        "description": "<ul>\n<li>Credentials object, used in place of     a <code>keyFilename</code>.</li>\n</ul>\n",
-        "types": [
-          "object"
-        ],
-        "typesDescription": "<code>object</code>|<code>undefined</code>",
-        "optional": true,
+        "typesDescription": "<code>object</code>",
+        "optional": false,
         "nullable": false,
         "nonNullable": false,
         "variable": false
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\n\n//-\n// Providing configuration details up-front.\n//-\nvar myProject = gcloud({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar pubsub = gcloud.pubsub();\n\n//-\n// Overriding default configuration details.\n//-\nvar pubsub = myProject.pubsub({\n  keyFilename: '/path/to/another/keyfile.json'\n});",
-        "html": "<p>var gcloud = require(&#39;gcloud&#39;);</p><p>//-<br />// Providing configuration details up-front.<br />//-<br />var myProject = gcloud({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;my-project&#39;<br />});</p><p>var pubsub = gcloud.pubsub();</p><p>//-<br />// Overriding default configuration details.<br />//-<br />var pubsub = myProject.pubsub({<br />  keyFilename: &#39;/path/to/another/keyfile.json&#39;<br />});</p>"
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar pubsub = gcloud.pubsub();",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;my-project&#39;<br />});</p><p>var pubsub = gcloud.pubsub();</p>"
       }
     ],
     "description": {
-      "full": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p><p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use<br />it by filling the <a href=\"http://goo.gl/sO0wTu\">Limited Preview application form</a>.</p><p>The full set of options that can be passed to this method are<br /><a href=\"#/docs/?method=gcloud\">outlined here</a>.</p>",
+      "full": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p><p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use<br />it by filling the <a href=\"http://goo.gl/sO0wTu\">Limited Preview application form</a>.</p>",
       "summary": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p>",
-      "body": "<p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use<br />it by filling the <a href=\"http://goo.gl/sO0wTu\">Limited Preview application form</a>.</p><p>The full set of options that can be passed to this method are<br /><a href=\"#/docs/?method=gcloud\">outlined here</a>.</p>"
+      "body": "<p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use<br />it by filling the <a href=\"http://goo.gl/sO0wTu\">Limited Preview application form</a>.</p>"
     },
     "isPrivate": false,
     "isConstructor": true,
@@ -316,7 +274,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 56,
-    "codeStart": 101,
+    "codeStart": 80,
     "code": "function PubSub(options) {\n  options = options || {};\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId = options.projectId;\n  this.projectName = 'projects/' + this.projectId;\n}",
     "ctx": {
       "type": "constructor",
@@ -398,8 +356,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 115,
-    "codeStart": 136,
+    "line": 94,
+    "codeStart": 115,
     "code": "PubSub.prototype.getTopics = function(query, callback) {\n  var self = this;\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n  var path = this.projectName + '/topics';\n  this.makeReq_('GET', path, query, true, function(err, result) {\n    if (err) {\n      callback(err, null, null, result);\n      return;\n    }\n    var topics = (result.topics || []).map(function(item) {\n      return new Topic(self, {\n        name: item.name\n      });\n    });\n    var nextQuery = null;\n    if (result.nextPageToken) {\n      nextQuery = query;\n      nextQuery.pageToken = result.nextPageToken;\n    }\n    callback(null, topics, nextQuery, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -455,8 +413,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 162,
-    "codeStart": 173,
+    "line": 141,
+    "codeStart": 152,
     "code": "PubSub.prototype.createTopic = function(name, callback) {\n  callback = callback || util.noop;\n  var topic = this.topic(name);\n  var path = this.projectName + '/topics/' + name;\n  this.makeReq_('PUT', path, null, null, function(err, result) {\n    if (err) {\n      callback(err, null, result);\n      return;\n    }\n    callback(null, topic, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -548,8 +506,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 186,
-    "codeStart": 203,
+    "line": 165,
+    "codeStart": 182,
     "code": "PubSub.prototype.topic = function(name, options) {\n  if (!name) {\n    throw new Error('A name must be specified for a new topic.');\n  }\n  options = options || {};\n  return new Topic(this, {\n    name: name,\n    autoCreate: options.autoCreate\n  });\n};",
     "ctx": {
       "type": "method",
@@ -633,8 +591,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 214,
-    "codeStart": 238,
+    "line": 193,
+    "codeStart": 217,
     "code": "PubSub.prototype.getSubscriptions = function(query, callback) {\n  var self = this;\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n\n  var path = this.projectName + '/subscriptions';\n  this.makeReq_('GET', path, query, true, function(err, result) {\n    if (err) {\n      callback(err, null, null, result);\n      return;\n    }\n\n    var subscriptions = (result.subscriptions || []).map(function(item) {\n      return new Subscription(self, {\n        name: item.name\n      });\n    });\n    var nextQuery = null;\n    if (result.nextPageToken) {\n      nextQuery = query;\n      nextQuery.pageToken = result.nextPageToken;\n    }\n    callback(null, subscriptions, nextQuery, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -729,8 +687,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 266,
-    "codeStart": 278,
+    "line": 245,
+    "codeStart": 257,
     "code": "PubSub.prototype.makeReq_ = function(method, path, q, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: q,\n    uri: PUBSUB_BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};\n\nmodule.exports = PubSub;",
     "ctx": {
       "type": "method",

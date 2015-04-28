@@ -300,27 +300,13 @@
       },
       {
         "type": "param",
-        "string": "{object=} options - Configuration object.",
+        "string": "{object=} options - [Configuration object](#/docs/?method=gcloud).",
         "name": "options",
-        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>.</li>\n</ul>\n",
         "types": [
           "object"
         ],
         "typesDescription": "<code>object</code>|<code>undefined</code>",
-        "optional": true,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{string=} options.projectId - Dataset ID. This is your project ID from\n    the Google Developers Console.",
-        "name": "options.projectId",
-        "description": "<ul>\n<li>Dataset ID. This is your project ID from     the Google Developers Console.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>|<code>undefined</code>",
         "optional": true,
         "nullable": false,
         "nonNullable": false,
@@ -356,14 +342,14 @@
       },
       {
         "type": "example",
-        "string": "var dataset = datastore.dataset({\n  projectId: 'my-project',\n  keyFilename: '/path/to/keyfile.json'\n});\n\n//-\n// Connect to your local Datastore server.\n//-\nvar dataset = datastore.dataset({\n  projectId: 'my-project',\n  apiEndpoint: 'http://localhost:8080'\n});",
-        "html": "<p>var dataset = datastore.dataset({<br />  projectId: &#39;my-project&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p><p>//-<br />// Connect to your local Datastore server.<br />//-<br />var dataset = datastore.dataset({<br />  projectId: &#39;my-project&#39;,<br />  apiEndpoint: &#39;<a href=\"http://localhost:8080\">http://localhost:8080</a>&#39;<br />});</p>"
+        "string": "var dataset = datastore.dataset({\n  projectId: 'my-project',\n  keyFilename: '/path/to/keyfile.json'\n});\n\n//-\n// Connect to your local Datastore server.\n//-\nvar dataset = datastore.dataset({\n  projectId: 'my-project',\n  apiEndpoint: 'http://localhost:8080'\n});\n\n//-\n// The `process.env.DATASTORE_HOST` environment variable is also recognized.\n// If set, you may omit the `apiEndpoint` option.\n//-",
+        "html": "<p>var dataset = datastore.dataset({<br />  projectId: &#39;my-project&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p><p>//-<br />// Connect to your local Datastore server.<br />//-<br />var dataset = datastore.dataset({<br />  projectId: &#39;my-project&#39;,<br />  apiEndpoint: &#39;<a href=\"http://localhost:8080\">http://localhost:8080</a>&#39;<br />});</p><p>//-<br />// The <code>process.env.DATASTORE_HOST</code> environment variable is also recognized.<br />// If set, you may omit the <code>apiEndpoint</code> option.<br />//-</p>"
       }
     ],
     "description": {
-      "full": "<p>Interact with a dataset from the<br /><a href=\"https://developers.google.com/datastore/\">Google Cloud Datastore</a>.</p><p>The full set of options that can be passed to this method are<br /><a href=\"#/docs/?method=gcloud\">outlined here</a>.</p>",
+      "full": "<p>Interact with a dataset from the<br /><a href=\"https://developers.google.com/datastore/\">Google Cloud Datastore</a>.</p>",
       "summary": "<p>Interact with a dataset from the<br /><a href=\"https://developers.google.com/datastore/\">Google Cloud Datastore</a>.</p>",
-      "body": "<p>The full set of options that can be passed to this method are<br /><a href=\"#/docs/?method=gcloud\">outlined here</a>.</p>"
+      "body": ""
     },
     "isPrivate": false,
     "isConstructor": true,
