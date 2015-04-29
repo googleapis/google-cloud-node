@@ -75,11 +75,11 @@
   },
   "scripts": {
     "docs": "./scripts/docs.sh",
-    "lint": "jshint lib/ regression/ test/",
+    "lint": "jshint lib/ system-test/ test/",
     "test": "mocha test/*",
-    "regression-test": "mocha regression/* --timeout 30000",
-    "cover": "istanbul cover -x 'regression/*' _mocha -- --timeout 30000 test/* regression/*",
-    "coveralls": "istanbul cover -x 'regression/*' _mocha --report lcovonly -- --timeout 30000 test/* regression/* -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "system-test": "mocha system-test/* --timeout 30000",
+    "cover": "istanbul cover -x 'system-test/*' _mocha -- --timeout 30000 test/* system-test/*",
+    "coveralls": "istanbul cover -x 'system-test/*' _mocha --report lcovonly -- --timeout 30000 test/* system-test/* -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "license": "Apache 2"
 }
