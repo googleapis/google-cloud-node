@@ -18,7 +18,7 @@
 
 if (!process.env.GCLOUD_TESTS_PROJECT_ID && !process.env.GCLOUD_TESTS_KEY) {
   var error = [
-    'To run the regression tests, you need to set some environment variables.',
+    'To run the system tests, you need to set some environment variables.',
     'Please check the Contributing guide for instructions.'
   ].join('\n');
   throw error;
