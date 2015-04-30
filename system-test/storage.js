@@ -35,10 +35,10 @@ var BUCKET_NAME = generateBucketName();
 
 var files = {
   logo: {
-    path: 'regression/data/CloudPlatform_128px_Retina.png'
+    path: 'system-test/data/CloudPlatform_128px_Retina.png'
   },
   big: {
-    path: 'regression/data/three-mb-file.tif'
+    path: 'system-test/data/three-mb-file.tif'
   }
 };
 

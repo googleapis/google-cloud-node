@@ -15,14 +15,14 @@ To run the unit tests, simply run:
 $ npm test
 ```
 
-### Regression Tests
+### System Tests
 
-To run the regression tests, first create and configure a project in the Google Developers Console following the [instructions on how to run gcloud-node][elsewhere]. After that, set the following environment variables:
+To run the system tests, first create and configure a project in the Google Developers Console following the [instructions on how to run gcloud-node][elsewhere]. After that, set the following environment variables:
 
 - **GCLOUD_TESTS_PROJECT_ID**: Developers Console project's ID (e.g. bamboo-shift-455)
 - **GCLOUD_TESTS_KEY**: The path to the JSON key file.
 
-Install the [gcloud command-line tool][gcloudcli] to your machine and use it to create the indexes used in the datastore regression tests with indexes found in `regression/data/index/yaml`:
+Install the [gcloud command-line tool][gcloudcli] to your machine and use it to create the indexes used in the datastore system tests with indexes found in `system-test/data/index/yaml`:
 
 From the project's root directory:
 
@@ -37,13 +37,13 @@ $ gcloud config set project $GCLOUD_TESTS_PROJECT_ID
 $ gcloud auth login
 
 # Create the indexes
-$ gcloud preview datastore create-indexes regression/data/
+$ gcloud preview datastore create-indexes system-test/data/
 ```
 
-You may now run the regression tests:
+You may now run the system tests:
 
 ``` sh
-$ npm run regression-test
+$ npm run system-test
 ```
 
 ### Test Coverage
