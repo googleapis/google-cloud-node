@@ -147,6 +147,8 @@ var gcloud = require('gcloud')({
       <h4 ng-show="method.example">Example</h4>
       <div docs-example ng-repeat-end
         ng-show="method.example" ng-bind-html="method.example"></div>
+      <div class="view-code-link">View the code
+      <a href="https://github.com/GoogleCloudPlatform/gcloud-node/blob/{{version}}/lib/{{module ? module + '/' : ''}}{{class}}.js{{method.lineNumLink}}">on GitHub</a>.</div>
       <hr ng-if="$index < methods.length - 1">
     </article>
   </article>
