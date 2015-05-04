@@ -135,7 +135,7 @@ angular
             if (alias && alias.string.indexOf('module:') !== 0) {
               alias = alias.string;
             } else {
-              alias = false
+              alias = false;
             }
 
             return {
@@ -149,6 +149,8 @@ angular
                 }),
               description: $sce.trustAsHtml(
                   formatHtml(detectLinks(detectModules(obj.description.full)))),
+              lineNum: obj.codeStart,
+              lineNumLink: obj.codeStart ? '#L' + obj.codeStart : '',
               params: obj.tags.filter(function(tag) {
                   return tag.type === 'param';
                 })
@@ -334,6 +336,7 @@ angular
     $scope.activeUrl = '#' + $location.path();
     $scope.singleMethod = methods.singleMethod;
     $scope.module = $routeParams.module;
+    $scope.class = $routeParams.class || 'index';
     $scope.methods = methods;
     $scope.version = $routeParams.version;
     $scope.versions = versions;
