@@ -1,0 +1,629 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
+  },
+  {
+    "tags": [
+      {
+        "type": "module",
+        "string": "gcloud",
+        "html": "<p>gcloud</p>"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 17,
+    "codeStart": 21,
+    "code": "'use strict';",
+    "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:bigquery}",
+        "types": [
+          "module:bigquery"
+        ],
+        "typesDescription": "module:<a href=\"module%3Abigquery.html\">bigquery</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:bigquery}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 23,
+    "codeStart": 27,
+    "code": "var BigQuery = require('./bigquery');",
+    "ctx": {
+      "type": "declaration",
+      "name": "BigQuery",
+      "value": "require('./bigquery')",
+      "string": "BigQuery"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:datastore}",
+        "types": [
+          "module:datastore"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adatastore.html\">datastore</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:datastore}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 29,
+    "codeStart": 33,
+    "code": "var Datastore = require('./datastore');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Datastore",
+      "value": "require('./datastore')",
+      "string": "Datastore"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:pubsub}",
+        "types": [
+          "module:pubsub"
+        ],
+        "typesDescription": "module:<a href=\"module%3Apubsub.html\">pubsub</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:pubsub}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 35,
+    "codeStart": 39,
+    "code": "var PubSub = require('./pubsub');",
+    "ctx": {
+      "type": "declaration",
+      "name": "PubSub",
+      "value": "require('./pubsub')",
+      "string": "PubSub"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:storage}",
+        "types": [
+          "module:storage"
+        ],
+        "typesDescription": "module:<a href=\"module%3Astorage.html\">storage</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:storage}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 41,
+    "codeStart": 45,
+    "code": "var Storage = require('./storage');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Storage",
+      "value": "require('./storage')",
+      "string": "Storage"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/util}",
+        "types": [
+          "module:common/util"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 47,
+    "codeStart": 51,
+    "code": "var util = require('./common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('./common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "module:gcloud",
+        "html": "<p>module:gcloud</p>"
+      },
+      {
+        "type": "constructor",
+        "string": "",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{object} config - Connection configuration options.",
+        "name": "config",
+        "description": "<ul>\n<li>Connection configuration options.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string=} config.keyFilename - Full path to the a .json, .pem, or .p12\n    key downloaded from the Google Developers Console. NOTE: .pem and .p12\n    require you to specify `config.email` as well.",
+        "name": "config.keyFilename",
+        "description": "<ul>\n<li>Full path to the a .json, .pem, or .p12     key downloaded from the Google Developers Console. NOTE: .pem and .p12<br />  require you to specify <code>config.email</code> as well.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string=} config.email - Account email address. Required when using a\n    .pem or .p12 keyFilename.",
+        "name": "config.email",
+        "description": "<ul>\n<li>Account email address. Required when using a     .pem or .p12 keyFilename.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object=} config.credentials - Credentials object.",
+        "name": "config.credentials",
+        "description": "<ul>\n<li>Credentials object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} config.credentials.client_email",
+        "name": "config.credentials.client_email",
+        "description": "",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{string} config.credentials.client_email</p>"
+      },
+      {
+        "type": "param",
+        "string": "{string} config.credentials.private_key",
+        "name": "config.credentials.private_key",
+        "description": "",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{string} config.credentials.private_key</p>"
+      },
+      {
+        "type": "param",
+        "string": "{boolean=} config.autoRetry - Automatically retry requests if the\n    response is related to rate limits or certain intermittent server errors.\n    We will exponentially backoff subsequent requests by default. (default:\n    true)",
+        "name": "config.autoRetry",
+        "description": "<ul>\n<li>Automatically retry requests if the     response is related to rate limits or certain intermittent server errors.<br />  We will exponentially backoff subsequent requests by default. (default:<br />  true)</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number=} config.maxRetries - Maximum number of automatic retries\n    attempted before returning the error. (default: 3)\n",
+        "name": "config.maxRetries",
+        "description": "<ul>\n<li>Maximum number of automatic retries     attempted before returning the error. (default: 3)</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar dataset = gcloud.datastore.dataset();\n// equal to:\n//   gcloud.datastore.dataset({\n//     keyFilename: '/path/to/keyfile.json',\n//     projectId: 'my-project'\n//   });\n\nvar storage = gcloud.storage();\nvar bucket = storage.bucket({\n  name: 'PhotosBucket',\n  // properties may be overridden:\n  keyFilename: '/path/to/other/keyfile.json'\n});\n",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;my-project&#39;<br />});</p><p>var dataset = gcloud.datastore.dataset();<br />// equal to:<br />//   gcloud.datastore.dataset({<br />//     keyFilename: &#39;/path/to/keyfile.json&#39;,<br />//     projectId: &#39;my-project&#39;<br />//   });</p><p>var storage = gcloud.storage();<br />var bucket = storage.bucket({<br />  name: &#39;PhotosBucket&#39;,<br />  // properties may be overridden:<br />  keyFilename: &#39;/path/to/other/keyfile.json&#39;<br />});</p>"
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project',\n  maxRetries: 5 // retry rate limited requests 5 times before giving up\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;my-project&#39;,<br />  maxRetries: 5 // retry rate limited requests 5 times before giving up<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>There are two key ways to use the <code>gcloud</code> module.</p><ol>\n<li><p>Provide connection &amp; configuration details up-front.</p></li>\n<li><p>Provide them at the time of instantiation of sub-modules, e.g. a Datastore<br />dataset, a Cloud Storage bucket, etc.</p></li>\n</ol>\n<p>See our <a href=\"#/authorization\">Authorization Guide</a> for how to obtain the<br />necessary credentials for connecting to your project.</p>",
+      "summary": "<p>There are two key ways to use the <code>gcloud</code> module.</p>",
+      "body": "<ol>\n<li><p>Provide connection &amp; configuration details up-front.</p></li>\n<li><p>Provide them at the time of instantiation of sub-modules, e.g. a Datastore<br />dataset, a Cloud Storage bucket, etc.</p></li>\n</ol>\n<p>See our <a href=\"#/authorization\">Authorization Guide</a> for how to obtain the<br />necessary credentials for connecting to your project.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": true,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 53,
+    "codeStart": 110,
+    "code": "function gcloud(config) {\n  return {\n    bigquery: function(options) {\n      options = options || {};\n      return new BigQuery(util.extendGlobalConfig(config, options));\n    },\n    datastore: new Datastore(config),\n    pubsub: function(options) {\n      options = options || {};\n      return new PubSub(util.extendGlobalConfig(config, options));\n    },\n    storage: function(options) {\n      options = options || {};\n      return new Storage(util.extendGlobalConfig(config, options));\n    }\n  };\n}",
+    "ctx": {
+      "type": "constructor",
+      "name": "gcloud",
+      "string": "gcloud()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:bigquery}\n",
+        "types": [
+          "module:bigquery"
+        ],
+        "typesDescription": "module:<a href=\"module%3Abigquery.html\">bigquery</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:bigquery}</p>"
+      },
+      {
+        "type": "return",
+        "string": "{module:bigquery}\n",
+        "types": [
+          "module:bigquery"
+        ],
+        "typesDescription": "module:<a href=\"module%3Abigquery.html\">bigquery</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:bigquery}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\nvar bigquery = gcloud.bigquery({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var bigquery = gcloud.bigquery({<br />  projectId: &#39;project-id&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Analyze Big Data in the cloud with<br /><a href=\"https://cloud.google.com/bigquery\">Google BigQuery</a>. Run fast, SQL-like<br />queries against multi-terabyte datasets in seconds. Scalable and easy to use,<br />BigQuery gives you real-time insights about your data.</p>",
+      "summary": "<p>Analyze Big Data in the cloud with<br /><a href=\"https://cloud.google.com/bigquery\">Google BigQuery</a>. Run fast, SQL-like<br />queries against multi-terabyte datasets in seconds. Scalable and easy to use,<br />BigQuery gives you real-time insights about your data.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 128,
+    "codeStart": 145,
+    "code": "gcloud.bigquery = BigQuery;",
+    "ctx": {
+      "type": "property",
+      "receiver": "gcloud",
+      "name": "bigquery",
+      "value": "BigQuery",
+      "string": "gcloud.bigquery"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:datastore}\n",
+        "types": [
+          "module:datastore"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adatastore.html\">datastore</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:datastore}</p>"
+      },
+      {
+        "type": "return",
+        "string": "{module:datastore}\n",
+        "types": [
+          "module:datastore"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adatastore.html\">datastore</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:datastore}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\nvar datastore = gcloud.datastore;\nvar dataset = datastore.dataset({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var datastore = gcloud.datastore;<br />var dataset = datastore.dataset({<br />  projectId: &#39;project-id&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p><a href=\"https://developers.google.com/datastore/\">Google Cloud Datastore</a> is a fully<br />managed, schemaless database for storing non-relational data. Use this object<br />to create a Dataset to interact with your data, an &quot;Int&quot;, and a &quot;Double&quot;<br />representation.</p>",
+      "summary": "<p><a href=\"https://developers.google.com/datastore/\">Google Cloud Datastore</a> is a fully<br />managed, schemaless database for storing non-relational data. Use this object<br />to create a Dataset to interact with your data, an &quot;Int&quot;, and a &quot;Double&quot;<br />representation.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 147,
+    "codeStart": 165,
+    "code": "gcloud.datastore = Datastore;",
+    "ctx": {
+      "type": "property",
+      "receiver": "gcloud",
+      "name": "datastore",
+      "value": "Datastore",
+      "string": "gcloud.datastore"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:pubsub}\n",
+        "types": [
+          "module:pubsub"
+        ],
+        "typesDescription": "module:<a href=\"module%3Apubsub.html\">pubsub</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:pubsub}</p>"
+      },
+      {
+        "type": "return",
+        "string": "{module:pubsub}\n",
+        "types": [
+          "module:pubsub"
+        ],
+        "typesDescription": "module:<a href=\"module%3Apubsub.html\">pubsub</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:pubsub}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\nvar pubsub = gcloud.pubsub({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var pubsub = gcloud.pubsub({<br />  projectId: &#39;project-id&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p><strong>Experimental</strong></p><p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p><p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use it<br />by filling the <a href=\"http://goo.gl/sO0wTu\">Limited Preview application form</a>.</p>",
+      "summary": "<p><strong>Experimental</strong></p>",
+      "body": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p><p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use it<br />by filling the <a href=\"http://goo.gl/sO0wTu\">Limited Preview application form</a>.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 167,
+    "codeStart": 191,
+    "code": "gcloud.pubsub = function(config) {\n  return new PubSub(config);\n};",
+    "ctx": {
+      "type": "method",
+      "receiver": "gcloud",
+      "name": "pubsub",
+      "string": "gcloud.pubsub()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:storage}\n",
+        "types": [
+          "module:storage"
+        ],
+        "typesDescription": "module:<a href=\"module%3Astorage.html\">storage</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:storage}</p>"
+      },
+      {
+        "type": "return",
+        "string": "{module:storage}\n",
+        "types": [
+          "module:storage"
+        ],
+        "typesDescription": "module:<a href=\"module%3Astorage.html\">storage</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:storage}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\nvar storage = gcloud.storage({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var storage = gcloud.storage({<br />  projectId: &#39;project-id&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Google Cloud Storage allows you to store data on Google infrastructure.<br />Read <a href=\"https://developers.google.com/storage/\">Google Cloud Storage API docs</a><br />for more information.</p>",
+      "summary": "<p>Google Cloud Storage allows you to store data on Google infrastructure.<br />Read <a href=\"https://developers.google.com/storage/\">Google Cloud Storage API docs</a><br />for more information.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 195,
+    "codeStart": 211,
+    "code": "gcloud.storage = Storage;\n\nmodule.exports = gcloud;",
+    "ctx": {
+      "type": "property",
+      "receiver": "gcloud",
+      "name": "storage",
+      "value": "Storage",
+      "string": "gcloud.storage"
+    }
+  }
+]

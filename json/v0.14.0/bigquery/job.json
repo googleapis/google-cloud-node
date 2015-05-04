@@ -1,0 +1,314 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
+  },
+  {
+    "tags": [
+      {
+        "type": "module",
+        "string": "bigquery/job",
+        "html": "<p>bigquery/job</p>"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 17,
+    "codeStart": 21,
+    "code": "'use strict';",
+    "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/util}",
+        "types": [
+          "module:common/util"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 23,
+    "codeStart": 27,
+    "code": "var util = require('../common/util');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{module:bigquery} bigQuery - BigQuery instance.",
+        "name": "bigQuery",
+        "description": "<ul>\n<li>BigQuery instance.</li>\n</ul>\n",
+        "types": [
+          "module:bigquery"
+        ],
+        "typesDescription": "module:<a href=\"module%3Abigquery.html\">bigquery</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} id - The ID of the table.",
+        "name": "id",
+        "description": "<ul>\n<li>The ID of the table.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Developer Documentation</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 29,
+    "codeStart": 34
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "module:bigquery/job",
+        "html": "<p>module:bigquery/job</p>"
+      },
+      {
+        "type": "constructor",
+        "string": "",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "<p>Job objects are returned from various places in the BigQuery API:</p><ul>\n<li>{module:bigquery#getJobs}</li>\n<li>{module:bigquery#job}</li>\n<li>{module:bigquery#query}</li>\n<li>{module:bigquery#startJob}</li>\n<li>{module:bigquery/table#copy}</li>\n<li>{module:bigquery/table#createWriteStream}</li>\n<li>{module:bigquery/table#export}</li>\n<li>{module:bigquery/table#import}</li>\n</ul>\n<p>They can be used to check the status of a running job or fetching the results<br />of a previously-executed one.</p>",
+      "summary": "<p>Job objects are returned from various places in the BigQuery API:</p>",
+      "body": "<ul>\n<li>{module:bigquery#getJobs}</li>\n<li>{module:bigquery#job}</li>\n<li>{module:bigquery#query}</li>\n<li>{module:bigquery#startJob}</li>\n<li>{module:bigquery/table#copy}</li>\n<li>{module:bigquery/table#createWriteStream}</li>\n<li>{module:bigquery/table#export}</li>\n<li>{module:bigquery/table#import}</li>\n</ul>\n<p>They can be used to check the status of a running job or fetching the results<br />of a previously-executed one.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": true,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 34,
+    "codeStart": 52,
+    "code": "function Job(bigQuery, id) {\n  this.bigQuery = bigQuery;\n  this.id = id;\n  this.metadata = {};\n}",
+    "ctx": {
+      "type": "constructor",
+      "name": "Job",
+      "string": "Job()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.\n",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "job.getMetadata(function(err, metadata, apiResponse) {});",
+        "html": "<p>job.getMetadata(function(err, metadata, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get the metadata of the job. This will mostly be useful for checking the<br />status of a previously-run job.</p>",
+      "summary": "<p>Get the metadata of the job. This will mostly be useful for checking the<br />status of a previously-run job.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 58,
+    "codeStart": 67,
+    "code": "Job.prototype.getMetadata = function(callback) {\n  var that = this;\n\n  var path = '/jobs/' + this.id;\n\n  this.bigQuery.makeReq_('GET', path, null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Job",
+      "cons": "Job",
+      "name": "getMetadata",
+      "string": "Job.prototype.getMetadata()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{object=} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.maxResults - Maximum number of results to read.",
+        "name": "options.maxResults",
+        "description": "<ul>\n<li>Maximum number of results to read.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} options.pageToken - Page token, returned by a previous call,\n    to request the next page of results. Note: This is automatically added to\n    the `nextQuery` argument of your callback.",
+        "name": "options.pageToken",
+        "description": "<ul>\n<li>Page token, returned by a previous call,     to request the next page of results. Note: This is automatically added to<br />  the <code>nextQuery</code> argument of your callback.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.startIndex - Zero-based index of the starting row.",
+        "name": "options.startIndex",
+        "description": "<ul>\n<li>Zero-based index of the starting row.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.timeoutMs - How long to wait for the query to\n    complete, in milliseconds, before returning. Default is to return\n    immediately. If the timeout passes before the job completes, the request\n    will fail with a `TIMEOUT` error.",
+        "name": "options.timeoutMs",
+        "description": "<ul>\n<li>How long to wait for the query to     complete, in milliseconds, before returning. Default is to return<br />  immediately. If the timeout passes before the job completes, the request<br />  will fail with a <code>TIMEOUT</code> error.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function. If you intend to\n    continuously run this query until all results are in as part of a stream,\n    do not pass a callback.\n",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. If you intend to     continuously run this query until all results are in as part of a stream,<br />  do not pass a callback.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Use the default options to get the results of a query.\n//-\njob.getQueryResults(function(err, rows, nextQuery, apiResponse) {});\n\n//-\n// Customize the results you want to fetch.\n//-\nvar options = {\n  maxResults: 100\n};\n\njob.getQueryResults(options, function(err, rows, nextQuery, apiResponse) {});\n\n//-\n// Consume the results from the query as a readable stream.\n//-\nvar through2 = require('through2');\n\njob.getQueryResults(options)\n  .pipe(through2.obj(function (row, enc, next) {\n    this.push(JSON.stringify(row) + '\\n');\n  }))\n  .pipe(fs.createWriteStream('./backup.json'));",
+        "html": "<p>//-<br />// Use the default options to get the results of a query.<br />//-<br />job.getQueryResults(function(err, rows, nextQuery, apiResponse) {});</p><p>//-<br />// Customize the results you want to fetch.<br />//-<br />var options = {<br />  maxResults: 100<br />};</p><p>job.getQueryResults(options, function(err, rows, nextQuery, apiResponse) {});</p><p>//-<br />// Consume the results from the query as a readable stream.<br />//-<br />var through2 = require(&#39;through2&#39;);</p><p>job.getQueryResults(options)<br />  .pipe(through2.obj(function (row, enc, next) {<br />    this.push(JSON.stringify(row) + &#39;\\n&#39;);<br />  }))<br />  .pipe(fs.createWriteStream(&#39;./backup.json&#39;));</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get the results of a job.</p>",
+      "summary": "<p>Get the results of a job.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 84,
+    "codeStart": 127,
+    "code": "Job.prototype.getQueryResults = function(options, callback) {\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.job = this;\n\n  return this.bigQuery.query(options, callback);\n};\n\nmodule.exports = Job;",
+    "ctx": {
+      "type": "method",
+      "constructor": "Job",
+      "cons": "Job",
+      "name": "getQueryResults",
+      "string": "Job.prototype.getQueryResults()"
+    }
+  }
+]
