@@ -274,37 +274,15 @@ describe('File', function() {
   });
 
   describe('createReadStream', function() {
-    var metadata = { mediaLink: 'filelink' };
-
-    it('should confirm file exists before reading', function(done) {
-      file.getMetadata = function() {
-        done();
-      };
-      file.createReadStream();
-    });
-
-    it('should emit error if stat returns error', function(done) {
-      var error = new Error('Error.');
-      file.getMetadata = function(callback) {
-        setImmediate(function() {
-          callback(error);
-        });
-      };
-      file.createReadStream()
-        .once('error', function(err) {
-          assert.equal(err, error);
-          done();
-        });
-    });
-
     it('should create an authorized request', function(done) {
-      file.bucket.storage.makeAuthorizedRequest_ = function(opts) {
-        assert.equal(opts.uri, metadata.mediaLink);
-        done();
-      };
+      var expectedPath = util.format('https://{b}.storage.googleapis.com/{o}', {
+        b: file.bucket.name,
+        o: encodeURIComponent(file.name)
+      });
 
-      file.getMetadata = function(callback) {
-        callback(null, metadata);
+      file.bucket.storage.makeAuthorizedRequest_ = function(opts) {
+        assert.equal(opts.uri, expectedPath);
+        done();
       };
 
       file.createReadStream();
@@ -313,11 +291,8 @@ describe('File', function() {
     it('should emit an error from authorizing', function(done) {
       var error = new Error('Error.');
       file.bucket.storage.makeAuthorizedRequest_ = function(opts, callback) {
-        (callback.onAuthorized || callback)(error);
-      };
-      file.getMetadata = function(callback) {
         setImmediate(function() {
-          callback(null, metadata);
+          (callback.onAuthorized || callback)(error);
         });
       };
       file.createReadStream()
@@ -345,10 +320,6 @@ describe('File', function() {
         done();
       };
       nodeutil.inherits(request_Override, stream.Readable);
-
-      file.getMetadata = function(callback) {
-        callback(null, metadata);
-      };
 
       file.bucket.storage.makeAuthorizedRequest_ = function(opts, callback) {
         (callback.onAuthorized || callback)(null, fakeRequest);
@@ -480,7 +451,6 @@ describe('File', function() {
         return duplexify();
       };
 
-      file.metadata = metadata;
       file.createReadStream({ start: startOffset });
     });
 
@@ -495,7 +465,6 @@ describe('File', function() {
         return duplexify();
       };
 
-      file.metadata = metadata;
       file.createReadStream({ end: endOffset });
     });
 
@@ -512,7 +481,6 @@ describe('File', function() {
         return duplexify();
       };
 
-      file.metadata = metadata;
       file.createReadStream({ start: startOffset, end: endOffset });
     });
 
@@ -529,7 +497,6 @@ describe('File', function() {
         return duplexify();
       };
 
-      file.metadata = metadata;
       file.createReadStream({ start: startOffset, end: endOffset });
     });
   });
