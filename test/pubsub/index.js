@@ -26,12 +26,14 @@ var Topic = require('../../lib/pubsub/topic.js');
 
 var request_Cached = request;
 var request_Override;
-
 function fakeRequest() {
-  var args = [].slice.apply(arguments);
-  var results = (request_Override || request_Cached).apply(null, args);
-  return results;
+  return (request_Override || request_Cached).apply(null, arguments);
 }
+fakeRequest.defaults = function() {
+  // Ignore the default values, so we don't have to test for them in every API
+  // call.
+  return fakeRequest;
+};
 
 describe('PubSub', function() {
   var PubSub;

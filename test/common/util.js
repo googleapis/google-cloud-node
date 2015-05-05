@@ -32,10 +32,17 @@ function fakeGoogleAuthLibrary() {
     .apply(null, arguments);
 }
 
+var REQUEST_DEFAULT_CONF;
 var request_Override;
 function fakeRequest() {
   return (request_Override || request).apply(null, arguments);
 }
+fakeRequest.defaults = function(defaultConfiguration) {
+  // Ignore the default values, so we don't have to test for them in every API
+  // call.
+  REQUEST_DEFAULT_CONF = defaultConfiguration;
+  return fakeRequest;
+};
 
 describe('common/util', function() {
   var util;
@@ -70,6 +77,10 @@ describe('common/util', function() {
     googleAuthLibrary_Override = null;
     request_Override = null;
     utilOverrides = {};
+  });
+
+  it('should have set correct defaults on Request', function() {
+    assert.deepEqual(REQUEST_DEFAULT_CONF, { pool: { maxSockets: Infinity } });
   });
 
   describe('arrayize', function() {
