@@ -58,14 +58,18 @@ var fakeUtil = extend({}, util, {
   }
 });
 
+var REQUEST_DEFAULT_CONF;
 var request_Cached = request;
 var request_Override;
-
 function fakeRequest() {
-  var args = util.toArray(arguments);
-  var results = (request_Override || request_Cached).apply(null, args);
-  return results;
+  return (request_Override || request_Cached).apply(null, arguments);
 }
+fakeRequest.defaults = function(defaultConfiguration) {
+  // Ignore the default values, so we don't have to test for them in every API
+  // call.
+  REQUEST_DEFAULT_CONF = defaultConfiguration;
+  return fakeRequest;
+};
 
 var configStoreData = {};
 function FakeConfigStore() {
@@ -123,6 +127,10 @@ describe('File', function() {
 
     makeWritableStream_Override = null;
     request_Override = null;
+  });
+
+  it('should have set correct defaults on Request', function() {
+    assert.deepEqual(REQUEST_DEFAULT_CONF, { pool: { maxSockets: Infinity } });
   });
 
   describe('initialization', function() {
