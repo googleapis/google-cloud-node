@@ -29,10 +29,17 @@ var requestModule = require('request');
 var stream = require('stream');
 var util = require('../../lib/common/util.js');
 
+var REQUEST_DEFAULT_CONF;
 var request_Override;
 function fakeRequest() {
   return (request_Override || requestModule).apply(null, arguments);
 }
+fakeRequest.defaults = function(defaultConfiguration) {
+  // Ignore the default values, so we don't have to test for them in every API
+  // call.
+  REQUEST_DEFAULT_CONF = defaultConfiguration;
+  return fakeRequest;
+};
 
 // Create a protobuf "FakeMethod" request & response.
 pb.FakeMethodRequest = function() {
@@ -81,6 +88,10 @@ describe('Request', function() {
     request.makeAuthorizedRequest_ = function(req, callback) {
       (callback.onAuthorized || callback)(null, req);
     };
+  });
+
+  it('should have set correct defaults on Request', function() {
+    assert.deepEqual(REQUEST_DEFAULT_CONF, { pool: { maxSockets: Infinity } });
   });
 
   describe('get', function() {

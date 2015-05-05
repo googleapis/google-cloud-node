@@ -47,10 +47,14 @@ function FakeFile(bucket, name) {
 
 var request_Cached = request;
 var request_Override;
-
 function fakeRequest() {
   return (request_Override || request_Cached).apply(null, arguments);
 }
+fakeRequest.defaults = function() {
+  // Ignore the default values, so we don't have to test for them in every API
+  // call.
+  return fakeRequest;
+};
 
 var eachLimit_Override;
 
