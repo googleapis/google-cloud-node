@@ -275,6 +275,20 @@
       },
       {
         "type": "param",
+        "string": "{string} config.projectId - The project ID from the Google Developer's\n    Console. E.g. 'purple-grape-123'.",
+        "name": "config.projectId",
+        "description": "<ul>\n<li>The project ID from the Google Developer&#39;s     Console. E.g. &#39;purple-grape-123&#39;.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
         "string": "{string=} config.keyFilename - Full path to the a .json, .pem, or .p12\n    key downloaded from the Google Developers Console. NOTE: .pem and .p12\n    require you to specify `config.email` as well.",
         "name": "config.keyFilename",
         "description": "<ul>\n<li>Full path to the a .json, .pem, or .p12     key downloaded from the Google Developers Console. NOTE: .pem and .p12<br />  require you to specify <code>config.email</code> as well.</li>\n</ul>\n",
@@ -395,7 +409,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 53,
-    "codeStart": 110,
+    "codeStart": 112,
     "code": "function gcloud(config) {\n  return {\n    bigquery: function(options) {\n      options = options || {};\n      return new BigQuery(util.extendGlobalConfig(config, options));\n    },\n    datastore: new Datastore(config),\n    pubsub: function(options) {\n      options = options || {};\n      return new PubSub(util.extendGlobalConfig(config, options));\n    },\n    storage: function(options) {\n      options = options || {};\n      return new Storage(util.extendGlobalConfig(config, options));\n    }\n  };\n}",
     "ctx": {
       "type": "constructor",
@@ -448,8 +462,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 128,
-    "codeStart": 145,
+    "line": 130,
+    "codeStart": 147,
     "code": "gcloud.bigquery = BigQuery;",
     "ctx": {
       "type": "property",
@@ -504,8 +518,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 147,
-    "codeStart": 165,
+    "line": 149,
+    "codeStart": 167,
     "code": "gcloud.datastore = Datastore;",
     "ctx": {
       "type": "property",
@@ -560,8 +574,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 167,
-    "codeStart": 191,
+    "line": 169,
+    "codeStart": 193,
     "code": "gcloud.pubsub = function(config) {\n  return new PubSub(config);\n};",
     "ctx": {
       "type": "method",
@@ -615,8 +629,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 195,
-    "codeStart": 211,
+    "line": 197,
+    "codeStart": 213,
     "code": "gcloud.storage = Storage;\n\nmodule.exports = gcloud;",
     "ctx": {
       "type": "property",
