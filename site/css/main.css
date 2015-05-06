@@ -732,7 +732,8 @@ ul {
   background: #F8F8F8;
 }
 
-.view-code-link {
+.view-code-link > a {
+  font-size: 80%;
   color: #888;
 }
 
