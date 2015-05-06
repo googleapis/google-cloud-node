@@ -120,6 +120,7 @@ var gcloud = require('gcloud')({
       ng-hide="singleMethod && method.name !== singleMethod">
       <h2 ng-if="method.name[0].toUpperCase() === method.name[0]">
         {{method.name}}
+        <span class="view-code-link" docs-code-link></span>
       </h2>
       <h3
         class="method-heading"
@@ -128,6 +129,7 @@ var gcloud = require('gcloud')({
           class="permalink"
           ng-href="{{activeUrl + '?method=' + method.name}}">#</a>
         {{method.name}}
+        <span class="view-code-link" docs-code-link></span>
       </h3>
       <p ng-if="method.description" ng-bind-html="method.description"></p>
       <h4 ng-show="method.params">Parameters</h4>
@@ -147,8 +149,6 @@ var gcloud = require('gcloud')({
       <h4 ng-show="method.example">Example</h4>
       <div docs-example ng-repeat-end
         ng-show="method.example" ng-bind-html="method.example"></div>
-      <div class="view-code-link">View the code
-      <a href="https://github.com/GoogleCloudPlatform/gcloud-node/blob/{{version}}/lib/{{module ? module + '/' : ''}}{{class}}.js{{method.lineNumLink}}">on GitHub</a>.</div>
       <hr ng-if="$index < methods.length - 1">
     </article>
   </article>

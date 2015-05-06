@@ -9,4 +9,18 @@ angular.module('gcloud.docs')
         }, true);
       }
     };
+  })
+
+  .directive('docsCodeLink', function($compile) {
+    'use strict';
+
+    var GITHUB_BASE = 'https://github.com/GoogleCloudPlatform/gcloud-node/blob/';
+
+    return {
+      template: '<a href="' + GITHUB_BASE + '{{version}}/lib/' +
+                '{{module ? module + \'/\' : \'\'}}{{class}}.js' +
+                '{{method.lineNumLink}}">' +
+                '(code on GitHub)' +
+                '</a>'
+    };
   });
