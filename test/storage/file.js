@@ -281,6 +281,94 @@ describe('File', function() {
     });
   });
 
+  describe('move', function() {
+    it('should throw if no destination is provided', function() {
+      assert.throws(function() {
+        file.move();
+      }, /should have a name/);
+    });
+
+    describe('copy to destination', function() {
+      function assertCopyFile(file, expectedDestination, callback) {
+        file.copy = function(destination) {
+          assert.equal(destination, expectedDestination);
+          callback();
+        };
+      }
+
+      it('should call copy with string', function(done) {
+        var newFileName = 'new-file-name.png';
+        assertCopyFile(file, newFileName, done);
+        file.move(newFileName);
+      });
+
+      it('should call copy with Bucket', function(done) {
+        var newBucket = new Bucket({}, 'new-bucket');
+        assertCopyFile(file, newBucket, done);
+        file.move(newBucket);
+      });
+
+      it('should call copy with File', function(done) {
+        var newBucket = new Bucket({}, 'new-bucket');
+        var newFile = new File(newBucket, 'new-file');
+        assertCopyFile(file, newFile, done);
+        file.move(newFile);
+      });
+
+      it('should fail if copy fails', function(done) {
+        var error = new Error('Error.');
+        file.copy = function(destination, callback) {
+          callback(error);
+        };
+        file.move('new-filename', function(err) {
+          assert.equal(err, error);
+          done();
+        });
+      });
+    });
+
+    describe('delete original file', function() {
+      it('should delete if copy is successful', function(done) {
+        file.copy = function(destination, callback) {
+          callback(null);
+        };
+        file.delete = function() {
+          assert.equal(this, file);
+          done();
+        };
+        file.move('new-filename');
+      });
+
+      it('should not delete if copy fails', function(done) {
+        var deleteCalled = false;
+        file.copy = function(destination, callback) {
+          callback(new Error('Error.'));
+        };
+        file.delete = function() {
+          deleteCalled = true;
+        };
+        file.move('new-filename', function() {
+          assert.equal(deleteCalled, false);
+          done();
+        });
+      });
+
+      it('should fail if delete fails', function(done) {
+        var error = new Error('Error.');
+        file.copy = function(destination, callback) {
+          callback();
+        };
+        file.delete = function(callback) {
+          callback(error);
+        };
+        file.move('new-filename', function(err) {
+          assert.equal(err, error);
+          done();
+        });
+      });
+    });
+  });
+
   describe('createReadStream', function() {
     it('should create an authorized request', function(done) {
       var expectedPath = util.format('https://{b}.storage.googleapis.com/{o}', {
