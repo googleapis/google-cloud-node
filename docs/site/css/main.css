@@ -586,6 +586,32 @@ ul {
     color: #4285f4;
 }
 
+.about .code-sample-tabs {
+  margin-top: 10px;
+  width: 450px;
+}
+
+.about .code-sample-tabs a {
+  display: inline-block;
+  padding: 2px 12px 0px 12px;
+  border: 1px solid rgba(0,0,0,0.2);
+  background-color: #fefefe;
+  margin-bottom: -3px;
+  margin-right: 8px;
+  color: #333;
+  text-decoration: none;
+}
+
+.about .code-sample-tabs a.selected {
+  background-color: #f8f8f8;
+  font-weight: bold;
+  border-bottom-color: #f8f8f8;
+}
+
+.about pre {
+  margin-top: 0;
+}
+
 /*
  Examples
  */

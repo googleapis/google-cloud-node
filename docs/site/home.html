@@ -80,9 +80,28 @@
       </div>
 
       <div class="quote-box--supplementary">
-        <h4>Retrieve Datastore Entities</h4>
+        <h4>Example: Retrieve an entity from Cloud Datastore</h4>
 
-        <div hljs language="js">
+        <div class="code-sample-tabs" ng-init="selected = 'compute engine'">
+          <a ng-click="selected = 'compute engine'"
+             ng-class="{selected: selected == 'compute engine'}"
+             >Run in Compute Engine</a>
+          <a ng-click="selected = 'elsewhere'"
+             ng-class="{selected: selected == 'elsewhere'}"
+             >Run elsewhere</a>
+        </div>
+
+        <div hljs language="js" ng-show="selected == 'compute engine'">
+// Auth is handled automatically inside GCE.
+var gcloud = require('gcloud');
+var dataset = gcloud.datastore.dataset();
+var productKey = dataset.key(['Product', 123]);
+
+dataset.get(productKey, function(err, entity) {
+  console.log(err, entity);
+});</div>
+
+        <div hljs language="js" ng-show="selected == 'elsewhere'">
 var gcloud = require('gcloud')({
   projectId: 'my-project',
   keyFilename: '/path/to/keyfile.json'
