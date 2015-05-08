@@ -5,9 +5,6 @@
 [![Travis Build Status](https://travis-ci.org/GoogleCloudPlatform/gcloud-node.svg)](https://travis-ci.org/GoogleCloudPlatform/gcloud-node/)
 [![Coverage Status](https://img.shields.io/coveralls/GoogleCloudPlatform/gcloud-node.svg)](https://coveralls.io/r/GoogleCloudPlatform/gcloud-node?branch=master)
 
-[![Issue Stats](http://issuestats.com/github/GoogleCloudPlatform/gcloud-node/badge/pr?style=flat)](http://issuestats.com/github/GoogleCloudPlatform/gcloud-node)
-[![Issue Stats](http://issuestats.com/github/GoogleCloudPlatform/gcloud-node/badge/issue?style=flat)](http://issuestats.com/github/GoogleCloudPlatform/gcloud-node)
-
 * [Homepage][gcloud-homepage]
 * [API Documentation][gcloud-docs]
 
