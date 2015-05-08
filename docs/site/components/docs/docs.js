@@ -256,10 +256,6 @@ angular
       return a.constructor ? -1: a.name > b.name ? 1 : -1;
     }
 
-    function getLinks($route, getLinks) {
-      return getLinks($route.current.params.version);
-    }
-
     $routeProvider
       .when('/docs', {
         redirectTo: '/docs/' + versions[0]
@@ -271,17 +267,17 @@ angular
       .when('/docs/:version', {
         controller: 'DocsCtrl',
         templateUrl: 'site/components/docs/docs.html',
-        resolve: { methods: getMethods, links: getLinks }
+        resolve: { methods: getMethods }
       })
       .when('/docs/:version/:module', {
         controller: 'DocsCtrl',
         templateUrl: 'site/components/docs/docs.html',
-        resolve: { methods: getMethods, links: getLinks }
+        resolve: { methods: getMethods }
       })
       .when('/docs/:version/:module/:class', {
         controller: 'DocsCtrl',
         templateUrl: 'site/components/docs/docs.html',
-        resolve: { methods: getMethods, links: getLinks }
+        resolve: { methods: getMethods }
       });
   })
 
@@ -290,22 +286,27 @@ angular
 
     $rootScope.$on('$routeChangeStart', function(event, route) {
       var url = $location.path();
+
       if (url.indexOf('/docs/') === -1 || (!route.params || !route.params.version)) {
         // This isn't a `docs` route or it's not one that expects a version.
         // No need to re-direct request.
         return;
       }
+
       if (versions.indexOf(route.params.version) === -1) {
         // No version specified where one was expected.
         // Route to same url with latest version prepended.
         event.preventDefault();
         $route.reload();
         $location.path(url.replace('docs/', 'docs/' + versions[0] + '/'));
+        return;
       }
+
+      $rootScope.ACTIVE_VERSION = route.params.version;
     });
   })
 
-  .controller('DocsCtrl', function($location, $scope, $routeParams, methods, $http, links, versions) {
+  .controller('DocsCtrl', function($location, $scope, $routeParams, methods, $http, versions) {
     'use strict';
 
     $scope.isActiveUrl = function(url) {
@@ -340,7 +341,6 @@ angular
     $scope.methods = methods;
     $scope.version = $routeParams.version;
     $scope.versions = versions;
-    $scope.links = links;
   })
 
   .controller('HistoryCtrl', function($scope, versions) {
