@@ -1,6 +1,6 @@
 angular
   .module('gcloud.subpage', ['gcloud.header'])
-  .directive('subpage', function($location, getLinks) {
+  .directive('subpage', function($location, $parse, getLinks) {
     'use strict';
 
     return {
