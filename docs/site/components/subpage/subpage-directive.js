@@ -1,6 +1,6 @@
 angular
   .module('gcloud.subpage', ['gcloud.header'])
-  .directive('subpage', function($location, $parse, getLinks) {
+  .directive('subpage', function($rootScope, $location, $parse, getLinks) {
     'use strict';
 
     return {
@@ -8,7 +8,7 @@ angular
       templateUrl: 'site/components/subpage/subpage.html',
       link: function($scope, elem, attrs) {
         $scope.title = attrs.title;
-        $scope.links = getLinks('master');
+        $scope.links = getLinks();
         $scope.headerTemplateUrl = attrs.headerTemplateurl;
 
         if (attrs.isActiveUrl) {
