@@ -132,6 +132,16 @@ var gcloud = require('gcloud')({
         <span class="view-code-link" docs-code-link></span>
       </h3>
       <p ng-if="method.description" ng-bind-html="method.description"></p>
+      <div ng-show="method.name[0].toUpperCase() === method.name[0]"
+        class="notice">
+        Available methods:
+        <span ng-repeat="method in methods">
+          <span ng-show="method.name[0].toUpperCase() !== method.name[0]">
+            <a href="{{activeUrl + '?method=' + method.name}}"
+              >{{method.name}}</a>{{$last ? '' : ', '}}
+          </span>
+        </span>
+      </div>
       <h4 ng-show="method.params">Parameters</h4>
       <table class="table" ng-show="method.params">
         <tbody>
