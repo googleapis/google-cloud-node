@@ -1,9 +1,13 @@
 angular.module('gcloud.docs')
-  .factory('getLinks', function(versions, pages) {
+  .factory('getLinks', function($rootScope, versions, pages) {
     'use strict';
 
     // `version` is the current version being browsed.
     return function(version) {
+      if (!version) {
+        version = $rootScope.ACTIVE_VERSION || $rootScope.latestVersion;
+      }
+
       var baseUrl = '#/docs/' + version;
       var VERSIONS = pages.VERSIONS;
 
