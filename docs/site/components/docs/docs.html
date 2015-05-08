@@ -127,8 +127,10 @@ var gcloud = require('gcloud')({
         ng-if="method.name[0].toUpperCase() !== method.name[0]">
         <a
           class="permalink"
-          ng-href="{{activeUrl + '?method=' + method.name}}">#</a>
-        {{method.name}}
+          ng-href="{{activeUrl + '?method=' + method.name}}">
+          <span>#</span>
+          {{method.name}}
+        </a>
         <span class="view-code-link" docs-code-link></span>
       </h3>
       <p ng-if="method.description" ng-bind-html="method.description"></p>

@@ -719,21 +719,18 @@ ul {
 }
 
 .permalink {
-    display: none;
-    position: absolute;
-    padding: 0 7px;
-    left: -24px;
     text-decoration: none;
     color: #2b70e2;
 }
 
 .permalink:hover {
     color: #4285f4;
-    display: block;
 }
 
-.method-heading:hover .permalink {
-    display: block;
+.permalink span {
+    position: absolute;
+    padding: 0 7px;
+    left: -24px;
 }
 
 .sub-heading {
