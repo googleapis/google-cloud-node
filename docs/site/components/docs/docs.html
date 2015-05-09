@@ -64,55 +64,9 @@ var gcloud = require('gcloud')({
     </article>
     <hr>
 
-    <article ng-if="isActiveDoc('bigquery')">
-      <h3>BigQuery Overview</h3>
-      <p>
-        The object returned from <code>gcloud.bigquery</code> gives you complete access to and control of your BigQuery datasets. You can work with existing ones, by using the <code>dataset</code> method, or create new ones with <code>createDataset</code>.
-      </p>
-      <p>
-        To learn more about BigQuery, see <a href="https://cloud.google.com/bigquery/what-is-bigquery">What is BigQuery?</a>
-      </p>
-    </article>
-
-    <article ng-if="isActiveDoc('datastore')">
-      <h3>Datastore Overview</h3>
-      <p>
-        The <code>gcloud.datastore</code> object gives you some convenience methods, as well as exposes a <code>dataset</code> function. This will allow you to create a <code>dataset</code>, which is the object from which you will interact with the Google Cloud Datastore.
-      </p>
-      <p>
-        To learn more about Datastore, read the <a href="https://cloud.google.com/datastore/docs/concepts/overview">Google Cloud Datastore Concepts Overview</a>.
-      </p>
-    </article>
-
-    <article ng-if="isActiveDoc('pubsub')">
-      <h3>Pub/Sub Overview</h3>
-      <p class="notice">
-        Google Cloud Pub/Sub is in Alpha status. As a result, it might be changed in backward-incompatible ways and is not recommended for production use. It is not subject to any SLA or deprecation policy.
-      </p>
-      <p>
-        The <code>gcloud.pubsub</code> method will return a <code>pubsub</code> object, allowing you to create topics, publish messages, subscribe to topics, and more.
-      </p>
-      <p>
-        To learn more about Pub/Sub, see the <a href="https://developers.google.com/pubsub/overview">Google Cloud Pub/Sub overview</a>.
-      </p>
-    </article>
-
-    <article ng-if="isActiveDoc('storage')">
-      <h3>Storage Overview</h3>
-      <p>
-        The <code>gcloud.storage</code> object contains a <code>bucket</code> function, which is how you will interact with your Google Cloud Storage bucket.
-      </p>
-      <p>
-        To learn more about Cloud Storage, see the <a href="https://cloud.google.com/storage/docs/overview">Google Cloud Storage overview</a>.
-      </p>
-
-      <h4>ACLs</h4>
-      <p>
-        Google Cloud Storage uses access control lists (ACLs) to manage object and bucket access. ACLs are the mechanism you use to share files with other users and allow other users to access your buckets and files.
-      </p>
-      <p>
-        To learn more about ACLs, read this overview on <a href="https://cloud.google.com/storage/docs/access-control">Access Control</a>.
-      </p>
+    <article ng-repeat="service in ['bigquery', 'datastore', 'pubsub', 'storage']"
+             ng-if="isActiveDoc(service)"
+             ng-include="'/site/components/docs/' + service + '-overview.html'">
     </article>
 
     <article
