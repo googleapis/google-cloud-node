@@ -1350,6 +1350,30 @@ describe('File', function() {
       });
     });
 
+    it('should add response content disposition parameter', function(done) {
+      var disposition = 'attachment; filename="fname.ext"';
+      directoryFile.getSignedUrl({
+        action: 'read',
+        expires: Math.round(Date.now() / 1000) + 5,
+        responseDisposition: disposition
+      }, function(err, signedUrl) {
+        assert(signedUrl.indexOf(encodeURIComponent(disposition)) > -1);
+        done();
+      });
+    });
+
+    it('should add response content type parameter', function(done) {
+      var type = 'application/json';
+      directoryFile.getSignedUrl({
+        action: 'read',
+        expires: Math.round(Date.now() / 1000) + 5,
+        responseType:  type
+      }, function(err, signedUrl) {
+        assert(signedUrl.indexOf(encodeURIComponent(type)) > -1);
+        done();
+      });
+    });
+
     describe('expires', function() {
       var nowInSeconds = Math.floor(Date.now() / 1000);
 
