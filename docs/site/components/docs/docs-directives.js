@@ -11,16 +11,43 @@ angular.module('gcloud.docs')
     };
   })
 
-  .directive('docsCodeLink', function($compile) {
+  .directive('docsCodeLink', function() {
     'use strict';
 
-    var GITHUB_BASE = 'https://github.com/GoogleCloudPlatform/gcloud-node/blob/';
+    var GITHUB_BASE = 'https://github.com/GoogleCloudPlatform/gcloud-node/blob';
+
+    function getFilenameFromConstructor(constructor) {
+      switch (constructor) {
+        case 'DatastoreRequest':
+          return 'request.js';
+        default:
+          return 'index.js';
+      }
+    }
 
     return {
-      template: '<a href="' + GITHUB_BASE + '{{version}}/lib/' +
-                '{{module ? module + \'/\' : \'\'}}{{class}}.js' +
-                '{{method.lineNumLink}}">' +
-                '(code on GitHub)' +
-                '</a>'
+      template: '<a href="{{link}}">(code on GitHub)</a>',
+
+      link: function($scope) {
+        var method = $scope.method;
+        var module = $scope.module;
+        var version = $scope.version;
+
+        var lineNumLink = method.lineNumLink;
+        var fileName = $scope.class + '.js';
+
+        if (method.data.ctx.hasOwnProperty('constructor')) {
+          fileName = getFilenameFromConstructor(method.data.ctx.constructor);
+        }
+
+        fileName = fileName.toLowerCase();
+
+        $scope.link =
+          GITHUB_BASE +
+          '/' + version +
+          '/lib' +
+          (module ? '/' + module : '') +
+          '/' + fileName + lineNumLink;
+      }
     };
   });
