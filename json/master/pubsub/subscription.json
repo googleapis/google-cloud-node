@@ -169,8 +169,8 @@
     "tags": [
       {
         "type": "alias",
-        "string": "pubsub/subscription",
-        "html": "<p>pubsub/subscription</p>"
+        "string": "module:pubsub/subscription",
+        "html": "<p>module:pubsub/subscription</p>"
       },
       {
         "type": "constructor",
