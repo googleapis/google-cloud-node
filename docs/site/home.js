@@ -4,6 +4,7 @@ angular
     'gcloud.authorization',
     'gcloud.docs',
     'gcloud.faq',
+    'gcloud.language-switcher',
     'gcloud.troubleshooting',
     'config',
     'hljs'
