@@ -1350,27 +1350,63 @@ describe('File', function() {
       });
     });
 
-    it('should add response content disposition parameter', function(done) {
-      var disposition = 'attachment; filename="fname.ext"';
-      directoryFile.getSignedUrl({
-        action: 'read',
-        expires: Math.round(Date.now() / 1000) + 5,
-        responseDisposition: disposition
-      }, function(err, signedUrl) {
-        assert(signedUrl.indexOf(encodeURIComponent(disposition)) > -1);
-        done();
-      });
-    });
-
-    it('should add response content type parameter', function(done) {
+    it('should add response-content-type parameter', function(done) {
       var type = 'application/json';
       directoryFile.getSignedUrl({
         action: 'read',
         expires: Math.round(Date.now() / 1000) + 5,
-        responseType:  type
+        responseType: type
       }, function(err, signedUrl) {
         assert(signedUrl.indexOf(encodeURIComponent(type)) > -1);
         done();
+      });
+    });
+
+    describe('promptSaveAs', function() {
+      it('should add response-content-disposition', function(done) {
+        var disposition = 'attachment; filename="fname.ext"';
+        directoryFile.getSignedUrl({
+          action: 'read',
+          expires: Math.round(Date.now() / 1000) + 5,
+          promptSaveAs: 'fname.ext'
+        }, function(err, signedUrl) {
+          assert(signedUrl.indexOf(disposition) > -1);
+          done();
+        });
+      });
+    });
+
+    describe('responseDisposition', function() {
+      it('should add response-content-disposition', function(done) {
+        var disposition = 'attachment; filename="fname.ext"';
+        directoryFile.getSignedUrl({
+          action: 'read',
+          expires: Math.round(Date.now() / 1000) + 5,
+          responseDisposition: disposition
+        }, function(err, signedUrl) {
+          assert(signedUrl.indexOf(encodeURIComponent(disposition)) > -1);
+          done();
+        });
+      });
+
+      it('should warn and ignore promptSaveAs if set', function(done) {
+        var disposition = 'attachment; filename="fname.ext"';
+        var saveAs = 'fname2.ext';
+        var oldWarn = console.warn;
+        console.warn = function(message) {
+          assert(message.indexOf('promptSaveAs') > -1);
+          console.warn = oldWarn;
+        };
+        directoryFile.getSignedUrl({
+          action: 'read',
+          expires: Math.round(Date.now() / 1000) + 5,
+          promptSaveAs: saveAs,
+          responseDisposition: disposition
+        }, function(err, signedUrl) {
+          assert(signedUrl.indexOf(encodeURIComponent(disposition)) > -1);
+          assert(signedUrl.indexOf(encodeURIComponent(saveAs)) === -1);
+          done();
+        });
       });
     });
 
