@@ -322,7 +322,7 @@ angular
     };
 
     $scope.isActiveDoc = function(doc) {
-      return doc.toLowerCase() === $routeParams.module;
+      return !$routeParams.class && doc.toLowerCase() === $routeParams.module;
     };
 
     if ($routeParams.version === 'master') {
