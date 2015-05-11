@@ -399,8 +399,8 @@
         "types": [
           "function"
         ],
-        "typesDescription": "<code>function</code>",
-        "optional": false,
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
         "nullable": false,
         "nonNullable": false,
         "variable": false
@@ -442,8 +442,8 @@
         "types": [
           "function"
         ],
-        "typesDescription": "<code>function</code>",
-        "optional": false,
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
         "nullable": false,
         "nonNullable": false,
         "variable": false

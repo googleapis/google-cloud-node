@@ -128,10 +128,8 @@
         "string": "{module:common/connection#Connection} connection - An authorized\n    connection to Google Cloud Datastore.",
         "name": "connection",
         "description": "<ul>\n<li>An authorized     connection to Google Cloud Datastore.</li>\n</ul>\n",
-        "types": [
-          "module:common/connection#Connection"
-        ],
-        "typesDescription": "module:<a href=\"module%3Acommon%2Fconnection%23Connection.html\">common/connection#Connection</a>",
+        "types": [],
+        "typesDescription": "<code>?</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
