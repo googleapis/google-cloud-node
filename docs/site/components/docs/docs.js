@@ -306,7 +306,7 @@ angular
     });
   })
 
-  .controller('DocsCtrl', function($location, $scope, $routeParams, methods, $http, versions) {
+  .controller('DocsCtrl', function($location, $scope, $routeParams, methods, $http, versions, getModule) {
     'use strict';
 
     $scope.isActiveUrl = function(url) {
@@ -333,14 +333,23 @@ angular
     }
 
     // Set the page title (used in the header).
-    var title = $routeParams.module;
-    if ($routeParams.class) {
-      title += ' » ' + $routeParams.class;
+    var pageTitle = [];
+
+    var moduleName = $routeParams.module;
+    if (moduleName) {
+      pageTitle.push(getModule($routeParams.module).title);
     }
-    // Capitalize words.
-    $scope.pageTitle = (title || 'Node.js').replace(/(?:^|\s)\S/g, function(a) {
-      return a.toUpperCase();
-    });
+
+    var className = $routeParams.class;
+    if (className) {
+      pageTitle.push(className[0].toUpperCase() + className.substr(1));
+    }
+
+    if (pageTitle.length > 0) {
+      $scope.pageTitle = pageTitle.join(' » ');
+    } else {
+      $scope.pageTitle = 'Node.js';
+    }
 
     $scope.showReference = true;
     $scope.activeUrl = '#' + $location.path();
