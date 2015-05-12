@@ -1,5 +1,10 @@
 angular
-  .module('gcloud.faq', ['ngRoute', 'gcloud.subpage', 'btford.markdown'])
+  .module('gcloud.faq', [
+    'btford.markdown',
+    'ngRoute',
+    'gcloud.how-to-get-help',
+    'gcloud.subpage'
+  ])
   .config(function($routeProvider) {
     'use strict';
 
