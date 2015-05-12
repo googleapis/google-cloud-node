@@ -24,6 +24,24 @@ html {
 }
 
 /*
+  target external links:
+  - that have an href attribute (excludes JavaScript links)
+  - that start with #/ (relative)
+  - that start with / (absolute)
+  - that link to "."
+  - that aren't ".ext-link" -- already styled external links on the site (found in the header and navigation)
+  - that aren't ".skip-external-link" -- a custom class used to indicate "don't style me as an external link" for complete control
+*/
+a[href]:not([href^="#/"]):not([href^="/"]):not([href="."]):not(.ext-link):not(.skip-external-link) {
+    text-decoration: none;
+}
+a[href]:not([href^="#/"]):not([href^="/"]):not([href="."]):not(.ext-link):not(.skip-external-link):after {
+    font: normal normal normal 14px/1 FontAwesome;
+    content: " \f08e";
+    color: #666;
+}
+
+/*
  * Remove text-shadow in selection highlight: h5bp.com/i
  * These selection rule sets have to be separate.
  * Customize the background color to match your design.
