@@ -306,7 +306,79 @@
     "isEvent": false,
     "ignore": true,
     "line": 94,
-    "codeStart": 102,
+    "codeStart": 102
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{object=} options - [Configuration object](#/docs/?method=gcloud).",
+        "name": "options",
+        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string=} options.apiEndpoint - Override the default API endpoint used\n    to reach Datastore. This is useful for connecting to your local Datastore\n    server (usually \"http://localhost:8080\").",
+        "name": "options.apiEndpoint",
+        "description": "<ul>\n<li>Override the default API endpoint used     to reach Datastore. This is useful for connecting to your local Datastore<br />  server (usually &quot;<a href=\"http://localhost:8080\">http://localhost:8080</a>&quot;).</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} options.namespace - Namespace to isolate transactions to.",
+        "name": "options.namespace",
+        "description": "<ul>\n<li>Namespace to isolate transactions to.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{module:datastore/dataset}",
+        "types": [
+          "module:datastore/dataset"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adatastore%2Fdataset.html\">datastore/dataset</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:datastore/dataset}</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a Dataset object to reference an existing dataset.</p>",
+      "summary": "<p>Create a Dataset object to reference an existing dataset.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 102,
+    "codeStart": 112,
     "code": "Datastore.prototype.dataset = function(options) {\n  options = options || {};\n  // Mix in global config data to the provided options.\n  return new Dataset(util.extendGlobalConfig(this.config, options));\n};",
     "ctx": {
       "type": "method",
@@ -362,8 +434,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 108,
-    "codeStart": 120,
+    "line": 118,
+    "codeStart": 130,
     "code": "Datastore.int = function(value) {\n  return new entity.Int(value);\n};",
     "ctx": {
       "type": "method",
@@ -418,8 +490,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 124,
-    "codeStart": 136,
+    "line": 134,
+    "codeStart": 146,
     "code": "Datastore.double = function(value) {\n  return new entity.Double(value);\n};\n\nmodule.exports = Datastore;",
     "ctx": {
       "type": "method",
