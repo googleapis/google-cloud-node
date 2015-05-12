@@ -1389,14 +1389,9 @@ describe('File', function() {
         });
       });
 
-      it('should warn and ignore promptSaveAs if set', function(done) {
+      it('should ignore promptSaveAs if set', function(done) {
         var disposition = 'attachment; filename="fname.ext"';
         var saveAs = 'fname2.ext';
-        var oldWarn = console.warn;
-        console.warn = function(message) {
-          assert(message.indexOf('promptSaveAs') > -1);
-          console.warn = oldWarn;
-        };
         directoryFile.getSignedUrl({
           action: 'read',
           expires: Math.round(Date.now() / 1000) + 5,
@@ -1405,7 +1400,6 @@ describe('File', function() {
         }, function(err, signedUrl) {
           assert(signedUrl.indexOf(encodeURIComponent(disposition)) > -1);
           assert(signedUrl.indexOf(encodeURIComponent(saveAs)) === -1);
-          assert.equal(console.warn, oldWarn);
           done();
         });
       });
