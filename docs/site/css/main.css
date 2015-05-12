@@ -240,6 +240,12 @@ ul {
     padding: 0;
 }
 
+.page-header-buttons {
+  position: fixed;
+  right: 20px;
+  top: 10px;
+}
+
 /*
  Logo
 */
@@ -848,6 +854,7 @@ ul {
 }
 
 .build-date {
+  float: right;
   font-style: italic;
   font-size: 0.8em;
 }
