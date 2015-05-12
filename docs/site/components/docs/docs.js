@@ -332,7 +332,16 @@ angular
         });
     }
 
-    $scope.pageTitle = 'Node.js';
+    // Set the page title (used in the header).
+    var title = $routeParams.module;
+    if ($routeParams.class) {
+      title += ' » ' + $routeParams.class;
+    }
+    // Capitalize words.
+    $scope.pageTitle = (title || 'Node.js').replace(/(?:^|\s)\S/g, function(a) {
+      return a.toUpperCase();
+    });
+
     $scope.showReference = true;
     $scope.activeUrl = '#' + $location.path();
     $scope.singleMethod = methods.singleMethod;
