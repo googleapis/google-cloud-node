@@ -727,7 +727,7 @@ ul {
     color: #4285f4;
 }
 
-.permalink span {
+.permalink.anchor {
     position: absolute;
     padding: 0 7px;
     left: -24px;

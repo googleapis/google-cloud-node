@@ -72,6 +72,7 @@ var gcloud = require('gcloud')({
     <article
       ng-repeat="method in methods"
       ng-hide="singleMethod && method.name !== singleMethod">
+
       <h2 ng-if="method.name[0].toUpperCase() === method.name[0]">
         {{method.name}}
         <span class="view-code-link" docs-code-link></span>
@@ -79,12 +80,25 @@ var gcloud = require('gcloud')({
       <h3
         class="method-heading"
         ng-if="method.name[0].toUpperCase() !== method.name[0]">
-        <a
-          class="permalink"
-          ng-href="{{activeUrl + '?method=' + method.name}}">
-          <span>#</span>
-          {{method.name}}
-        </a>
+        <span ng-init="methodLink = activeUrl + '?method=' + method.name">
+          <a href="{{methodLink}}" class="permalink anchor">#</a>
+
+          <!-- Single methods should get breadcrumbs -->
+          <span ng-if="singleMethod">
+            <a ng-href="#/docs/{{version}}/{{module}}" class="permalink">
+              {{module[0].toUpperCase() + module.substring(1)}}
+            </a>
+            &raquo;
+            <span ng-if="method.data.ctx.hasOwnProperty('constructor')"
+              ng-init="className = method.data.ctx.constructor">
+              <a ng-href="#/docs/{{version}}/{{module}}/{{className.toLowerCase()}}"
+                class="permalink">{{className}}</a>
+              &raquo;
+            </span>
+          </span>
+
+          <a href="{{methodLink}}" class="permalink">{{method.name}}</a>
+        </span>
         <span class="view-code-link" docs-code-link></span>
       </h3>
       <p ng-if="method.description" ng-bind-html="method.description"></p>
