@@ -306,7 +306,7 @@ angular
     });
   })
 
-  .controller('DocsCtrl', function($location, $scope, $routeParams, methods, $http, versions) {
+  .controller('DocsCtrl', function($location, $scope, $routeParams, methods, $http, versions, getModule) {
     'use strict';
 
     $scope.isActiveUrl = function(url) {
@@ -332,7 +332,25 @@ angular
         });
     }
 
-    $scope.pageTitle = 'Node.js';
+    // Set the page title (used in the header).
+    var pageTitle = [];
+
+    var moduleName = $routeParams.module;
+    if (moduleName) {
+      pageTitle.push(getModule($routeParams.module).title);
+    }
+
+    var className = $routeParams.class;
+    if (className) {
+      pageTitle.push(className[0].toUpperCase() + className.substr(1));
+    }
+
+    if (pageTitle.length > 0) {
+      $scope.pageTitle = pageTitle.join(' » ');
+    } else {
+      $scope.pageTitle = 'Node.js';
+    }
+
     $scope.showReference = true;
     $scope.activeUrl = '#' + $location.path();
     $scope.singleMethod = methods.singleMethod;
