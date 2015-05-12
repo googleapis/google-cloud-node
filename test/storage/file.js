@@ -1405,6 +1405,7 @@ describe('File', function() {
         }, function(err, signedUrl) {
           assert(signedUrl.indexOf(encodeURIComponent(disposition)) > -1);
           assert(signedUrl.indexOf(encodeURIComponent(saveAs)) === -1);
+          assert.equal(console.warn, oldWarn);
           done();
         });
       });
