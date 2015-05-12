@@ -6,7 +6,25 @@
         <span class="gcloud">gcloud</span>
       </a>
     </h1>
+
     <div language-switcher></div>
+
+    <div class="page-header-buttons">
+      <div class="col margin-vertical">
+        <a href="https://github.com/GoogleCloudPlatform/gcloud-node/issues/new"
+          class="v-btn">
+          <img src="site/img/icon-link-github.svg" />
+          Report an Issue
+        </a>
+      </div>
+      <div class="col margin-vertical">
+        <a href="#/docs/history" ng-show="showReference"
+          class="v-btn">
+          <img src="site/img/icon-arrow-bullet.svg" />
+          Version History (<i>{{version}}</i>)
+        </a>
+      </div>
+    </div>
   </header>
 
   <header ng-if="headerTemplateUrl" ng-include="headerTemplateUrl"></header>
