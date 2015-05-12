@@ -37,4 +37,13 @@ angular.module('gcloud.docs')
           return moduleA.title === 'gcloud' ? -1 : moduleA.title > moduleB.title;
         });
     };
+  })
+
+  .factory('getModule', function(pages) {
+    'use strict';
+
+    return function(moduleName) {
+      moduleName = moduleName.toLowerCase();
+      return pages[moduleName];
+    };
   });
