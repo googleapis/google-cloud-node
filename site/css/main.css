@@ -209,6 +209,13 @@ ul {
     margin: 10px 0;
 }
 
+.subtle {
+  background-color: #f8f8f8;
+}
+
+.warning {
+  color: #DB4437;
+}
 
 
 /* Header
@@ -688,6 +695,12 @@ ul {
     display: block;
 }
 
+/*
+  How to Get Help Directive
+ */
+.how-to-get-help--container {
+  margin-top: 2em;
+}
 
 /* Docs Content
    ========================================================================== */
