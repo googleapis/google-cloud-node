@@ -5,7 +5,3 @@ There are many types of keys that can be created through the Developer's Console
 See "I'm not using Compute Engine. What do I need to do?" from the [FAQ](https://googlecloudplatform.github.io/gcloud-node/#/faq) for detailed steps on how to create and obtain a JSON key.
 
 Reference Issue: [#261](https://github.com/GoogleCloudPlatform/gcloud-node/issues/261)
-
-## I'm using the correct key, but receiving a "Backend Error"
-
-Please see [#294](https://github.com/GoogleCloudPlatform/gcloud-node/issues/294).
