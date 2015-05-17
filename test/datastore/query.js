@@ -43,19 +43,6 @@ describe('Query', function() {
     assert.equal(query.namespace, 'ns');
   });
 
-  it('should support querying multiple kinds', function() {
-    var query = new Query(['kind1', 'kind2']);
-    var queryWithNamespace = new Query('ns', ['kind1', 'kind2']);
-
-    assert.strictEqual(query.namespace, null);
-    assert.equal(query.kinds[0], 'kind1');
-    assert.equal(query.kinds[1], 'kind2');
-
-    assert.equal(queryWithNamespace.namespace, 'ns');
-    assert.equal(queryWithNamespace.kinds[0], 'kind1');
-    assert.equal(queryWithNamespace.kinds[1], 'kind2');
-  });
-
   it('should support field selection by field name', function() {
     var query = new Query(['kind1'])
         .select(['name', 'title']);
