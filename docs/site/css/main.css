@@ -141,6 +141,11 @@ pre {
     line-height: 1.6em;
 }
 
+[hljs] > pre {
+  margin: 0 !important;
+  font-size: 1em;
+}
+
 pre,
 code {
   font-family: Monaco, 'Droid Sans Mono', monospace !important;

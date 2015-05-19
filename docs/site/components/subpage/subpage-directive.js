@@ -1,5 +1,6 @@
 angular
-  .module('gcloud.subpage', ['gcloud.header'])
+  .module('gcloud.subpage', ['gcloud.header', 'hljs'])
+
   .directive('subpage', function($rootScope, $location, $http, $parse, getLinks, versions) {
     'use strict';
 
@@ -32,6 +33,64 @@ angular
             return $location.path() === url.replace('#', '');
           };
         }
+      }
+    };
+  })
+
+  // A special class used in our MD files to tell the front end to syntax
+  // highlight the code blocks.
+  .directive('hljsClass', function() {
+    'use strict';
+
+    return {
+      // Concept borrowed from:
+      // http://www.bennadel.com/blog/2748-compiling-transcluded-content-in-angularjs-directives.htm
+      //
+      // <div class="hljs-class">
+      //   var hi = 'there';        <!-- We want this!
+      // </div>
+      //
+      // We want to replace that with:
+      //
+      // <div hljs language="javascript" source="var hi = 'there';"></div>
+      //
+      // To get the content we want, we have to use a higher priority than
+      // another same-named directive that uses transclude. This is our only
+      // chance to get it before it's clobbered.
+      priority: 1500.1,
+      restrict: 'C',
+      compile: function(element, attrs) {
+        attrs._contents = element.text();
+      }
+    };
+  })
+
+  .directive('hljsClass', function() {
+    'use strict';
+
+    return {
+      priority: 1500,
+      restrict: 'C',
+      transclude: true,
+      template: '<div hljs language="javascript" source="contents"></div>',
+      compile: function(element) {
+        return function($scope, element, attrs) {
+          $scope.contents = attrs._contents;
+        };
+      }
+    }
+  })
+
+  // Re-compile the Markdown, this time having the "hljs-class" blocks picked
+  // up.
+  .directive('highlightMarkdown', function($compile) {
+    'use strict';
+
+    return {
+      link: function(scope, element, attrs) {
+        scope.$watch(attrs.ngInclude, function() {
+          $compile(element.contents())(scope);
+        }, true);
       }
     };
   });
