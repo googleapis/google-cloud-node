@@ -432,7 +432,7 @@ describe('File', function() {
         .on('response', function(res) {
           assert.deepEqual(response, res);
           done();
-        })
+        });
     });
 
     it('should get readable stream from request', function(done) {
