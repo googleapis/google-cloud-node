@@ -232,14 +232,29 @@ ul {
     margin-bottom: 10px;
 }
 
-.subtle {
-  background-color: #f8f8f8;
+.subtle-bg {
+    background-color: #f8f8f8;
 }
 
 .warning {
-  color: #DB4437;
+    color: #DB4437;
 }
 
+.subtle--blue {
+    color: #A0C2F4;
+}
+
+.subtle {
+    color: #f8f8f8;
+}
+
+.white {
+    color: #fff;
+}
+
+.white:after {
+    color: #fff !important;
+}
 
 /* Header
    ========================================================================== */
@@ -248,6 +263,21 @@ ul {
 .hero-banner {
     background: #4285f4;
     color: #fff;
+}
+
+.hero-banner .quote-box--supplementary {
+    text-align: center;
+}
+
+.latest-release {
+    margin-top: 10px;
+}
+
+.latest-release--link {
+    color: #fff;
+    font-weight: bold;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .page-header {
@@ -1304,6 +1334,7 @@ ul {
 
     .quote-box--supplementary {
         float: right;
+        width: 46%;
     }
 
     .block-title {
@@ -1318,8 +1349,8 @@ ul {
         padding-bottom: 0;
     }
 
-    .hero-banner .col-right {
-        padding-top: 3.6em;
+    .hero-banner .quote-box--supplementary {
+        padding-top: 6.2em;
     }
 
     .hero-banner h1 {
