@@ -388,13 +388,14 @@
     "tags": [
       {
         "type": "param",
-        "string": "{array} fieldNames - Properties to return from the matched entities.",
+        "string": "{string|string[]} fieldNames - Properties to return from the matched\n    entities.",
         "name": "fieldNames",
-        "description": "<ul>\n<li>Properties to return from the matched entities.</li>\n</ul>\n",
+        "description": "<ul>\n<li>Properties to return from the matched     entities.</li>\n</ul>\n",
         "types": [
-          "array"
+          "string",
+          "Array.<string>"
         ],
-        "typesDescription": "<code>array</code>",
+        "typesDescription": "<code>string</code>|<code>Array</code>.&lt;<code>string</code>&gt;",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -416,8 +417,8 @@
       },
       {
         "type": "example",
-        "string": "// Only retrieve the name and size properties.\nvar selectQuery = companyQuery.select(['name', 'size']);",
-        "html": "<p>// Only retrieve the name and size properties.<br />var selectQuery = companyQuery.select([&#39;name&#39;, &#39;size&#39;]);</p>"
+        "string": "// Only retrieve the name property.\nvar selectQuery = companyQuery.select('name');\n\n// Only retrieve the name and size properties.\nvar selectQuery = companyQuery.select(['name', 'size']);",
+        "html": "<p>// Only retrieve the name property.<br />var selectQuery = companyQuery.select(&#39;name&#39;);</p><p>// Only retrieve the name and size properties.<br />var selectQuery = companyQuery.select([&#39;name&#39;, &#39;size&#39;]);</p>"
       }
     ],
     "description": {
@@ -431,8 +432,8 @@
     "isEvent": false,
     "ignore": false,
     "line": 176,
-    "codeStart": 190,
-    "code": "Query.prototype.select = function(fieldNames) {\n  var query = extend(new Query(), this);\n  query.selectVal = fieldNames;\n  return query;\n};",
+    "codeStart": 194,
+    "code": "Query.prototype.select = function(fieldNames) {\n  var query = extend(new Query(), this);\n  query.selectVal = util.arrayize(fieldNames);\n  return query;\n};",
     "ctx": {
       "type": "method",
       "constructor": "Query",
@@ -487,8 +488,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 196,
-    "codeStart": 210,
+    "line": 200,
+    "codeStart": 214,
     "code": "Query.prototype.start = function(start) {\n  var query = extend(new Query(), this);\n  query.startVal = start;\n  return query;\n};",
     "ctx": {
       "type": "method",
@@ -544,8 +545,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 216,
-    "codeStart": 230,
+    "line": 220,
+    "codeStart": 234,
     "code": "Query.prototype.end = function(end) {\n  var query = extend(new Query(), this);\n  query.endVal = end;\n  return query;\n};",
     "ctx": {
       "type": "method",
@@ -601,8 +602,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 236,
-    "codeStart": 248,
+    "line": 240,
+    "codeStart": 252,
     "code": "Query.prototype.limit = function(n) {\n  var query = extend(new Query(), this);\n  query.limitVal = n;\n  return query;\n};",
     "ctx": {
       "type": "method",
@@ -658,8 +659,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 254,
-    "codeStart": 266,
+    "line": 258,
+    "codeStart": 270,
     "code": "Query.prototype.offset = function(n) {\n  var query = extend(new Query(), this);\n  query.offsetVal = n;\n  return query;\n};\n\nmodule.exports = Query;",
     "ctx": {
       "type": "method",
