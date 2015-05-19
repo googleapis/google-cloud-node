@@ -84,18 +84,10 @@ See the [gcloud-node BigQuery API documentation][gcloud-bigquery-docs] to learn 
 
 ```js
 var gcloud = require('gcloud');
-var bigquery;
 
-// Authorizing on a per-API-basis. You don't need to do this if you
-// auth on a global basis (see Authorization section above).
-
-// From Google Compute Engine:
-bigquery = gcloud.bigquery({
-  projectId: 'my-project'
-});
-
-// Or from elsewhere:
-bigquery = gcloud.bigquery({
+// Authorizing on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authorization section above).
+var bigquery = gcloud.bigquery({
   projectId: 'my-project',
   keyFilename: '/path/to/keyfile.json'
 });
@@ -107,16 +99,13 @@ var schoolsDataset = bigquery.dataset('schools');
 schoolsDataset.import('/local/file.json', function(err, job) {});
 
 // Get results from a query job.
-bigquery.job('job-id').getQueryResults(function(err, rows, nextQuery) {});
+var job = bigquery.job('job-id');
 
-// Get the same results as a readable stream.
-bigquery.job('job-id')
-  .getQueryResults()
-  .pipe(require('through2').obj(function(row, enc, next) {
-    this.push(row.address + '\n');
-    next();
-  }))
-  .pipe(process.stdout);
+// Use a callback.
+job.getQueryResults(function(err, rows, nextQuery) {});
+
+// Or get the same results as a readable stream.
+job.getQueryResults().on('data', function(row) {});
 ```
 
 ## Google Cloud Datastore
@@ -129,18 +118,11 @@ See the [gcloud-node Datastore API documentation][gcloud-datastore-docs] to lear
 
 ```js
 var gcloud = require('gcloud');
-var dataset;
 
-// Authorizing on a per-API-basis. You don't need to do this if you
-// auth on a global basis (see Authorization section above).
+// Authorizing on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authorization section above).
 
-// From Google Compute Engine:
-dataset = gcloud.datastore.dataset({
-  projectId: 'my-project'
-});
-
-// Or from elsewhere:
-dataset = gcloud.datastore.dataset({
+var dataset = gcloud.datastore.dataset({
   projectId: 'my-project',
   keyFilename: '/path/to/keyfile.json'
 });
@@ -164,15 +146,17 @@ dataset.save({
   key: blogPostKey,
   data: blogPostData
 }, function(err) {
-  // `blogPostKey` has been updated with an id so you
-  // can do more operations with it. Such as an update:
+  // `blogPostKey` has been updated with an ID so you can do more operations
+  // with it, such as an update:
   dataset.save({
     key: blogPostKey,
     data: {
       isDraft: false
     }
   }, function(err) {
-    // The blog post is now published!
+    if (!err) {
+      // The blog post is now published!
+    }
   });
 });
 ```
@@ -186,18 +170,11 @@ See the [gcloud-node Storage API documentation][gcloud-storage-docs] to learn ho
 ```js
 var fs = require('fs');
 var gcloud = require('gcloud');
-var storage;
 
-// Authorizing on a per-API-basis. You don't need to do this if you
-// auth on a global basis (see Authorization section above).
+// Authorizing on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authorization section above).
 
-// From Google Compute Engine:
-storage = gcloud.storage({
-  projectId: 'my-project'
-});
-
-// Or from elsewhere:
-storage = gcloud.storage({
+var storage = gcloud.storage({
   keyFilename: '/path/to/keyfile.json',
   projectId: 'my-project'
 });
@@ -209,10 +186,12 @@ storage.createBucket('my-new-bucket', function(err, bucket) {});
 var bucket = storage.bucket('my-bucket');
 
 // Upload a local file to a new file to be created in your bucket.
-fs.createReadStream('/local/file.txt').pipe(bucket.file('file.txt').createWriteStream());
+var fileStream = fs.createReadStream('/local/file.txt');
+fileStream.pipe(bucket.file('file.txt').createWriteStream());
 
 // Download a remote file to a new local file.
-bucket.file('photo.jpg').createReadStream().pipe(fs.createWriteStream('/local/photo.jpg'));
+var fileStream = bucket.file('photo.jpg').createReadStream();
+fileStream.pipe(fs.createWriteStream('/local/photo.jpg'));
 ```
 
 ## Google Cloud Pub/Sub (Beta)
@@ -225,16 +204,11 @@ See the [gcloud-node Pub/Sub API documentation][gcloud-pubsub-docs] to learn how
 
 ```js
 var gcloud = require('gcloud');
-var pubsub;
 
 // Authorizing on a per-API-basis. You don't need to do this if you
 // auth on a global basis (see Authorization section above).
 
-// From Google Compute Engine:
-pubsub = gcloud.pubsub();
-
-// Or from elsewhere:
-pubsub = gcloud.pubsub({
+var pubsub = gcloud.pubsub({
   projectId: 'my-project',
   keyFilename: '/path/to/keyfile.json'
 });
