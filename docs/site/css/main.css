@@ -227,12 +227,24 @@ ul {
     margin: 10px 0;
 }
 
-.subtle {
-  background-color: #f8f8f8;
+.subtle-bg {
+    background-color: #f8f8f8;
 }
 
 .warning {
-  color: #DB4437;
+    color: #DB4437;
+}
+
+.subtle--blue {
+    color: #A0C2F4;
+}
+
+.subtle {
+    color: #f8f8f8;
+}
+
+.white {
+    color: #fff;
 }
 
 
@@ -243,6 +255,14 @@ ul {
 .hero-banner {
     background: #4285f4;
     color: #fff;
+}
+
+.hero-banner .quote-box--supplementary {
+    text-align: center;
+}
+
+.hero-banner .latest-release {
+    margin-top: 10px;
 }
 
 .page-header {
@@ -1300,6 +1320,7 @@ ul {
 
     .quote-box--supplementary {
         float: right;
+        width: 46%;
     }
 
     .block-title {
@@ -1314,8 +1335,8 @@ ul {
         padding-bottom: 0;
     }
 
-    .hero-banner .col-right {
-        padding-top: 3.6em;
+    .hero-banner .quote-box--supplementary {
+        padding-top: 6.2em;
     }
 
     .hero-banner h1 {

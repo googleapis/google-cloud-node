@@ -21,8 +21,16 @@ angular
       controller: 'HomeCtrl'
     });
   })
-  .controller('HomeCtrl', function() {
+  .controller('HomeCtrl', function($scope, $http) {
     'use strict';
+
+    $http.get('https://api.github.com/repos/GoogleCloudPlatform/gcloud-node/releases')
+      .then(function(releases) {
+        var latestRelease = releases.data[0];
+
+        $scope.latestRelease = latestRelease.tag_name;
+        $scope.latestReleasePublishedAt = new Date(latestRelease.published_at);
+      });
   })
   .run(function($rootScope, $location, versions) {
     'use strict';
