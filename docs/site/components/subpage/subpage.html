@@ -15,6 +15,19 @@
   <section class="content" ng-transclude></section>
 
   <nav class="side-nav">
+    <div class="side-nav--meta">
+      <small><em>Browsing Version</em></small>
+
+      <select
+        ng-model="versionSelected"
+        ng-options="version for version in versions"
+        ng-change="loadDocsVersion(versionSelected)"></select>
+
+      <div ng-if="lastBuiltDate">
+        <small><em>Docs last built {{lastBuiltDate}}.</em></small>
+      </div>
+    </div>
+
     <ul class="page-sections">
       <li ng-repeat="page in links">
         <a

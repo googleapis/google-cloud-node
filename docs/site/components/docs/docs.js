@@ -260,10 +260,6 @@ angular
       .when('/docs', {
         redirectTo: '/docs/' + versions[0]
       })
-      .when('/docs/history', {
-        controller: 'HistoryCtrl',
-        templateUrl: 'site/components/docs/docs.html'
-      })
       .when('/docs/:version', {
         controller: 'DocsCtrl',
         templateUrl: 'site/components/docs/docs.html',
@@ -325,13 +321,6 @@ angular
       return !$routeParams.class && doc.toLowerCase() === $routeParams.module;
     };
 
-    if ($routeParams.version === 'master') {
-      $http.get('https://api.github.com/repos/GoogleCloudPlatform/gcloud-node/commits?sha=gh-pages&per_page=1')
-        .then(function(resp) {
-          $scope.lastBuiltDate = moment(resp.data[0].commit.committer.date).format('MMMM Do, YYYY');
-        });
-    }
-
     // Set the page title (used in the header).
     var pageTitle = [];
 
@@ -358,13 +347,5 @@ angular
     $scope.class = $routeParams.class || 'index';
     $scope.methods = methods;
     $scope.version = $routeParams.version;
-    $scope.versions = versions;
-  })
-
-  .controller('HistoryCtrl', function($scope, versions) {
-    'use strict';
-
-    $scope.pageTitle = 'Node.js Docs Versions';
-    $scope.showHistory = true;
     $scope.versions = versions;
   });
