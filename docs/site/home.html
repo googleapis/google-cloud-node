@@ -15,8 +15,11 @@
       </div>
 
       <div class="quote-box--supplementary">
-        <h2>One-line npm install</h2>
-        <pre>$ npm install --save gcloud</pre>
+        <pre><code class="subtle--blue">$</code> npm install <code class="subtle--blue">--save</code> <strong>gcloud</strong></pre>
+        <h4 class="latest-release subtle" ng-if="latestRelease">
+          Latest Release <a ng-href="{{latestRelease.link}}" class="latest-release--link white">{{latestRelease.name}}</a>
+          {{latestRelease.date|date}}
+        </h4>
       </div>
     </div><!-- end of .container -->
   </section><!-- end of .hero-banner -->
