@@ -370,6 +370,30 @@ describe('File', function() {
   });
 
   describe('createReadStream', function() {
+
+    function getFakeRequest(data, fakeResponse) {
+      function FakeRequest(req) {
+        if (!(this instanceof FakeRequest)) {
+          return new FakeRequest(req);
+        }
+
+        var that = this;
+
+        stream.Readable.call(this);
+        this._read = function() {
+          this.push(data);
+          this.push(null);
+        };
+
+        setImmediate(function() {
+          that.emit('response', fakeResponse);
+          that.emit('complete', fakeResponse);
+        });
+      }
+      nodeutil.inherits(FakeRequest, stream.Readable);
+      return FakeRequest;
+    }
+
     it('should create an authorized request', function(done) {
       var expectedPath = util.format('https://{b}.storage.googleapis.com/{o}', {
         b: file.bucket.name,
@@ -396,6 +420,19 @@ describe('File', function() {
           assert.equal(err, error);
           done();
         });
+    });
+
+    it('should emit response event from request', function(done) {
+      var response = {
+        headers: { 'x-goog-hash': 'md5=fakefakefake' }
+      };
+      request_Override = getFakeRequest('body', response);
+
+      file.createReadStream({ validation: false })
+        .on('response', function(res) {
+          assert.deepEqual(response, res);
+          done();
+        })
     });
 
     it('should get readable stream from request', function(done) {
@@ -441,28 +478,6 @@ describe('File', function() {
           headers: { 'x-goog-hash': 'md5=' + md5HashBase64 }
         }
       };
-
-      function getFakeRequest(data, fakeResponse) {
-        function FakeRequest(req) {
-          if (!(this instanceof FakeRequest)) {
-            return new FakeRequest(req);
-          }
-
-          var that = this;
-
-          stream.Readable.call(this);
-          this._read = function() {
-            this.push(data);
-            this.push(null);
-          };
-
-          setImmediate(function() {
-            that.emit('complete', fakeResponse);
-          });
-        }
-        nodeutil.inherits(FakeRequest, stream.Readable);
-        return FakeRequest;
-      }
 
       beforeEach(function() {
         file.metadata.mediaLink = 'http://uri';
