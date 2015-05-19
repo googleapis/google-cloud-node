@@ -63,6 +63,12 @@ describe('Query', function() {
     assert.equal(query.selectVal[1], 'title');
   });
 
+  it('should support single field selection by field name', function() {
+    var query = new Query(['kind1'])
+        .select('name');
+    assert.equal(query.selectVal[0], 'name');
+  });
+
   it('should support ancestor filtering', function() {
     var query = new Query(['kind1'])
         .hasAncestor(['kind2', 123]);
