@@ -28,8 +28,11 @@ angular
       .then(function(releases) {
         var latestRelease = releases.data[0];
 
-        $scope.latestRelease = latestRelease.tag_name;
-        $scope.latestReleasePublishedAt = new Date(latestRelease.published_at);
+        $scope.latestRelease = {
+          name: latestRelease.tag_name,
+          date: new Date(latestRelease.published_at),
+          link: latestRelease.html_url
+        };
       });
   })
   .run(function($rootScope, $location, versions) {

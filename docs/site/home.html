@@ -17,8 +17,8 @@
       <div class="quote-box--supplementary">
         <pre><code class="subtle--blue">$</code> npm install <code class="subtle--blue">--save</code> <strong>gcloud</strong></pre>
         <h4 class="latest-release subtle" ng-if="latestRelease">
-          Latest Release <strong class="white">{{latestRelease}}</strong>
-          {{latestReleasePublishedAt|date}}
+          Latest Release <a ng-href="{{latestRelease.link}}" class="latest-release--link white">{{latestRelease.name}}</a>
+          {{latestRelease.date|date}}
         </h4>
       </div>
     </div><!-- end of .container -->

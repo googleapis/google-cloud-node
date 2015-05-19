@@ -247,6 +247,9 @@ ul {
     color: #fff;
 }
 
+.white:after {
+    color: #fff !important;
+}
 
 /* Header
    ========================================================================== */
@@ -261,8 +264,15 @@ ul {
     text-align: center;
 }
 
-.hero-banner .latest-release {
+.latest-release {
     margin-top: 10px;
+}
+
+.latest-release--link {
+    color: #fff;
+    font-weight: bold;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .page-header {
