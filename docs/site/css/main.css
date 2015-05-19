@@ -223,8 +223,13 @@ ul {
     margin: 10px;
 }
 
+.margin-left {
+    margin-left: 10px;
+}
+
 .margin-vertical {
-    margin: 10px 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .subtle {
@@ -926,6 +931,13 @@ ul {
     background: #efefef;
  }
 
+ .side-nav .side-nav--meta {
+    padding: 10px;
+    background-color: #f5f5f5;
+    text-align: center;
+    margin-bottom: 10px;
+ }
+
 .side-nav a {
     display: block;
     padding: 0.3em 2em;
@@ -1131,10 +1143,6 @@ ul {
         height: 0.6em;
     }
 
-    .build-date {
-      margin-left: 0em;
-    }
-
 }
 
 @media only screen and (min-width: 45em) {
@@ -1142,10 +1150,6 @@ ul {
         font-size: 0.7em;
         line-height: normal;
         margin-left: .5em;
-    }
-
-    .build-date {
-      margin-left: 0.5em;
     }
 }
 
