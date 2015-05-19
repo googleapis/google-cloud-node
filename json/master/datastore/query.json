@@ -107,13 +107,13 @@
       },
       {
         "type": "param",
-        "string": "{string[]} kinds - Kinds to query.\n",
-        "name": "kinds",
-        "description": "<ul>\n<li>Kinds to query. </li>\n</ul>\n",
+        "string": "{string} kind - Kind to query.\n",
+        "name": "kind",
+        "description": "<ul>\n<li>Kind to query. </li>\n</ul>\n",
         "types": [
-          "Array.<string>"
+          "string"
         ],
-        "typesDescription": "<code>Array</code>.&lt;<code>string</code>&gt;",
+        "typesDescription": "<code>string</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -121,8 +121,8 @@
       },
       {
         "type": "example",
-        "string": "// If your dataset was scoped to a namespace at initialization, your query\n// will likewise be scoped to that namespace.\ndataset.createQuery(['Lion', 'Chimp']);\n\n// However, you may override the namespace per query.\ndataset.createQuery('AnimalNamespace', ['Lion', 'Chimp']);\n\n// You may also remove the namespace altogether.\ndataset.createQuery(null, ['Lion', 'Chimp']);",
-        "html": "<p>// If your dataset was scoped to a namespace at initialization, your query<br />// will likewise be scoped to that namespace.<br />dataset.createQuery([&#39;Lion&#39;, &#39;Chimp&#39;]);</p><p>// However, you may override the namespace per query.<br />dataset.createQuery(&#39;AnimalNamespace&#39;, [&#39;Lion&#39;, &#39;Chimp&#39;]);</p><p>// You may also remove the namespace altogether.<br />dataset.createQuery(null, [&#39;Lion&#39;, &#39;Chimp&#39;]);</p>"
+        "string": "// If your dataset was scoped to a namespace at initialization, your query\n// will likewise be scoped to that namespace.\ndataset.createQuery('Lion');\n\n// However, you may override the namespace per query.\ndataset.createQuery('AnimalNamespace', 'Lion');\n\n// You may also remove the namespace altogether.\ndataset.createQuery(null, 'Lion');",
+        "html": "<p>// If your dataset was scoped to a namespace at initialization, your query<br />// will likewise be scoped to that namespace.<br />dataset.createQuery(&#39;Lion&#39;);</p><p>// However, you may override the namespace per query.<br />dataset.createQuery(&#39;AnimalNamespace&#39;, &#39;Lion&#39;);</p><p>// You may also remove the namespace altogether.<br />dataset.createQuery(null, &#39;Lion&#39;);</p>"
       }
     ],
     "description": {

@@ -547,14 +547,13 @@
       },
       {
         "type": "param",
-        "string": "{string|array} kinds - Kinds to query.",
-        "name": "kinds",
-        "description": "<ul>\n<li>Kinds to query.</li>\n</ul>\n",
+        "string": "{string} kind - Kind to query.",
+        "name": "kind",
+        "description": "<ul>\n<li>Kind to query.</li>\n</ul>\n",
         "types": [
-          "string",
-          "array"
+          "string"
         ],
-        "typesDescription": "<code>string</code>|<code>array</code>",
+        "typesDescription": "<code>string</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -576,8 +575,8 @@
       }
     ],
     "description": {
-      "full": "<p>Create a query from the current dataset to query the specified kinds, scoped<br />to the namespace provided at the initialization of the dataset.</p><p><em><a href=\"http://goo.gl/Cag0r6\">Reference</a>.</em></p>",
-      "summary": "<p>Create a query from the current dataset to query the specified kinds, scoped<br />to the namespace provided at the initialization of the dataset.</p>",
+      "full": "<p>Create a query from the current dataset to query the specified kind, scoped<br />to the namespace provided at the initialization of the dataset.</p><p><em><a href=\"http://goo.gl/Cag0r6\">Reference</a>.</em></p>",
+      "summary": "<p>Create a query from the current dataset to query the specified kind, scoped<br />to the namespace provided at the initialization of the dataset.</p>",
       "body": "<p><em><a href=\"http://goo.gl/Cag0r6\">Reference</a>.</em></p>"
     },
     "isPrivate": false,
@@ -587,7 +586,7 @@
     "ignore": false,
     "line": 187,
     "codeStart": 200,
-    "code": "Dataset.prototype.createQuery = function(namespace, kinds) {\n  if (arguments.length === 1) {\n    kinds = util.arrayize(namespace);\n    namespace = this.namespace;\n  }\n\n  return new Query(namespace, util.arrayize(kinds));\n};",
+    "code": "Dataset.prototype.createQuery = function(namespace, kind) {\n  if (arguments.length === 1) {\n    kind = util.arrayize(namespace);\n    namespace = this.namespace;\n  }\n\n  return new Query(namespace, util.arrayize(kind));\n};",
     "ctx": {
       "type": "method",
       "constructor": "Dataset",
