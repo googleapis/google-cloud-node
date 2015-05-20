@@ -84,7 +84,7 @@
       </div>
 
       <div class="quote-box--supplementary">
-        <h4>Example: Retrieve an entity from Cloud Datastore</h4>
+        <h4>Example: Upload a file to Cloud Storage</h4>
 
         <div class="code-sample-tabs" ng-init="selected = 'compute engine'">
           <a ng-click="selected = 'compute engine'"
@@ -96,26 +96,35 @@
         </div>
 
         <div hljs language="js" ng-show="selected == 'compute engine'">
-// Auth is handled automatically inside GCE.
-var gcloud = require('gcloud');
-var dataset = gcloud.datastore.dataset();
-var productKey = dataset.key(['Product', 123]);
+// Authentication is automatic
+// inside Google Compute Engine.
+var gcloud = require('gcloud')({
+  projectId: 'grape-spaceship-123'
+});
 
-dataset.get(productKey, function(err, entity) {
-  console.log(err, entity);
+var gcs = gcloud.storage();
+
+var backups = gcs.bucket('backups');
+backups.upload('db.zip', function(err, file) {
+  // file.createReadStream();
+  // file.getMetadata();
+  // ...
 });</div>
 
         <div hljs language="js" ng-show="selected == 'elsewhere'">
 var gcloud = require('gcloud')({
-  projectId: 'my-project',
+  projectId: 'grape-spaceship-123',
+  // Specify a path to a keyfile.
   keyFilename: '/path/to/keyfile.json'
 });
 
-var dataset = gcloud.datastore.dataset();
-var productKey = dataset.key(['Product', 123]);
+var gcs = gcloud.storage();
 
-dataset.get(productKey, function(err, entity) {
-  console.log(err, entity);
+var backups = gcs.bucket('backups');
+backups.upload('db.zip', function(err, file) {
+  // file.createReadStream();
+  // file.getMetadata();
+  // ...
 });</div>
 
       </div>
