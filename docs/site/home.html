@@ -102,9 +102,9 @@ var gcloud = require('gcloud')({
   projectId: 'grape-spaceship-123'
 });
 
-var gcs = gcloud.storage();
+var storage = gcloud.storage();
 
-var backups = gcs.bucket('backups');
+var backups = storage.bucket('backups');
 backups.upload('db.zip', function(err, file) {
   // file.createReadStream();
   // file.getMetadata();
@@ -118,9 +118,9 @@ var gcloud = require('gcloud')({
   keyFilename: '/path/to/keyfile.json'
 });
 
-var gcs = gcloud.storage();
+var storage = gcloud.storage();
 
-var backups = gcs.bucket('backups');
+var backups = storage.bucket('backups');
 backups.upload('db.zip', function(err, file) {
   // file.createReadStream();
   // file.getMetadata();
