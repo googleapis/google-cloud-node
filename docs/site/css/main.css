@@ -293,6 +293,32 @@ ul {
     padding: 0;
 }
 
+.header--right {
+    display: none;
+    position: absolute;
+}
+
+.page-header.fixed .v-btn {
+    background-color: #fff;
+    color: #444;
+    border-radius: 8px;
+    border: 0;
+    border-right: 2px solid #A0C2F4;
+    border-bottom: 2px solid #A0C2F4;
+    padding: 11px 10px;
+    font-size: .8em;
+    transition: border-color 1s, border-width .1s;
+}
+
+.page-header.fixed .v-btn:hover {
+    opacity: 1;
+    border-color: #aaa;
+}
+
+.page-header.fixed .v-btn:active {
+    border-width: 1px;
+}
+
 /*
  Logo
 */
@@ -1130,6 +1156,14 @@ ul {
    Modify as content requires.
    ========================================================================== */
 
+@media only screen and (min-width: 19em) {
+    .header--right {
+        display: block;
+        right: 54px;
+        top: 10px;
+    }
+}
+
 @media only screen and (min-width: 37em) {
 
     /*
@@ -1175,7 +1209,6 @@ ul {
         width: 0.6em;
         height: 0.6em;
     }
-
 }
 
 @media only screen and (min-width: 45em) {
@@ -1203,6 +1236,11 @@ ul {
         padding: 0 0 0 1em;
         height: 70px;
         line-height: 70px;
+    }
+
+    .header--right {
+        top: 20px;
+        right: 20px;
     }
 
     /*
