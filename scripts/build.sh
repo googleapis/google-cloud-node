@@ -17,6 +17,7 @@
 set -ev
 
 npm run lint
+npm run docs
 npm run test
 
 # if merging to master and not a pull request, execute system tests, create coverage report and update docs

@@ -91,7 +91,7 @@ describe('Dataset', function() {
     it('should begin transaction', function(done) {
       ds.createTransaction_ = function() {
         return {
-          begin: function() {
+          begin_: function() {
             done();
           }
         };
@@ -101,10 +101,10 @@ describe('Dataset', function() {
 
     it('should return transaction object to the callback', function(done) {
       var transaction = {
-        begin: function(callback) {
+        begin_: function(callback) {
           callback();
         },
-        commit: util.noop
+        commit_: util.noop
       };
       ds.createTransaction_ = function() {
         return transaction;
@@ -118,10 +118,10 @@ describe('Dataset', function() {
     it('should return correct done function to the callback', function(done) {
       ds.createTransaction_ = function() {
         return {
-          begin: function(callback) {
+          begin_: function(callback) {
             callback();
           },
-          commit: function() {
+          commit_: function() {
             done();
           }
         };

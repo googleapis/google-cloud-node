@@ -748,6 +748,25 @@ describe('Request', function() {
         };
       });
 
+      describe('rollback', function() {
+        it('should attach transacational properties', function(done) {
+          request.id = 'EeMXCSGvwcSWGkkABRmGMTWdbi_pa66VflNhQAGblQFMXf9HrmNGa' +
+            'GugEsO1M2_2x7wZvLencG51uwaDOTZCjTkkRh7bw_oyKUgTmtJ0iWJwath7';
+          var expected = new pb.RollbackRequest({
+            transaction: request.id
+          }).toBuffer();
+          request_Override = function() {
+            var stream = { on: util.noop, end: util.noop };
+            stream.end = function(data) {
+              assert.deepEqual(data, expected);
+              done();
+            };
+            return stream;
+          };
+          request.makeReq_('rollback', util.noop);
+        });
+      });
+
       describe('commit', function() {
         it('should attach transactional properties', function(done) {
           request.id = 'EeMXCSGvwcSWGkkABRmGMTWdbi_pa66VflNhQAGblQFMXf9HrmNGa' +
