@@ -25,16 +25,7 @@ var glob = require('glob');
 var mitm = require('mitm');
 var fs = require('fs');
 
-var sandbox = {
-  gcloud: gcloud,
-  require: require,
-  process: process,
-  Buffer: Buffer,
-  Date: Date,
-  Array: Array
-};
-
-function runCodeInSandbox(code) {
+function runCodeInSandbox(code, sandbox) {
   vm.createContext(sandbox);
   try {
     vm.runInNewContext(code, sandbox, {
@@ -54,7 +45,7 @@ describe('documentation', function() {
   before(function(done) {
     // Turn off the network so that API calls aren't actually made.
     MITM = mitm();
-    glob('docs/json/**/*.json', {}, function(err, files) {
+    glob('docs/json/master/**/*.json', function(err, files) {
       assert.ifError(err);
       FILES = files;
       done();
@@ -67,36 +58,43 @@ describe('documentation', function() {
   });
 
   it('should run docs examples without errors', function() {
-    for (var f in FILES) {
+    FILES.forEach(function(filename) {
       var fileDocBlocks = [];
-      var fileContents = fs.readFileSync(FILES[f], {
+      var fileContents = fs.readFileSync(filename, {
         encoding: 'utf8'
       });
 
       try {
         fileDocBlocks = JSON.parse(fileContents);
       } catch(e) {
-        throw new Error('Failed to parse one of the doc files (' + e.message +
-            ')\n\nFilename: ' + FILES[f] + '\n\nFile contents: \'' +
-            fileContents + '\'');
+        throw new Error([
+          'Failed to parse one of the doc files (' + e.message + ')',
+          'Filename: ' + filename,
+          'File contents: "' + fileContents + '"'
+        ].join('\n'));
       }
 
-      for (var i in fileDocBlocks) {
-        var tags = fileDocBlocks[i].tags;
-        for (var j in tags) {
-          var tag = tags[j];
+      var sandbox = {
+        gcloud: gcloud,
+        require: require,
+        process: process,
+        Buffer: Buffer,
+        Date: Date,
+        Array: Array
+      };
 
-          // Only blocks under @example are tested.
+      fileDocBlocks.forEach(function(block) {
+        block.tags.forEach(function(tag) {
           if (tag.type === 'example') {
             // Replace all references to require('gcloud') with a relative
             // version so that the code can be passed into the VM directly.
             var code = tag.string
-                .replace('require(\'gcloud\')', 'require(\'..\/..\/\')')
-                .replace('require(\'gcloud', 'require(\'..\/..');
-            assert.doesNotThrow(runCodeInSandbox.bind(null, code));
+                .replace(/require\(\'gcloud\'\)/g, 'require(\'..\/..\/\')')
+                .replace(/require\(\'gcloud/g, 'require(\'..\/..');
+            assert.doesNotThrow(runCodeInSandbox.bind(null, code, sandbox));
           }
-        }
-      }
-    }
+        });
+      });
+    });
   });
 });
