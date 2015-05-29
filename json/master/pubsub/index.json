@@ -492,8 +492,8 @@
       },
       {
         "type": "example",
-        "string": "var topic = pubsub.topic('my-existing-topic');\nvar topic = pubsub.topic('topic-that-maybe-exists', { autoCreate: true });\ntopic.publish('New message!');",
-        "html": "<p>var topic = pubsub.topic(&#39;my-existing-topic&#39;);<br />var topic = pubsub.topic(&#39;topic-that-maybe-exists&#39;, { autoCreate: true });<br />topic.publish(&#39;New message!&#39;);</p>"
+        "string": "var topic = pubsub.topic('my-existing-topic');\nvar topic = pubsub.topic('topic-that-maybe-exists', { autoCreate: true });",
+        "html": "<p>var topic = pubsub.topic(&#39;my-existing-topic&#39;);<br />var topic = pubsub.topic(&#39;topic-that-maybe-exists&#39;, { autoCreate: true });</p>"
       }
     ],
     "description": {
@@ -507,7 +507,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 165,
-    "codeStart": 182,
+    "codeStart": 181,
     "code": "PubSub.prototype.topic = function(name, options) {\n  if (!name) {\n    throw new Error('A name must be specified for a new topic.');\n  }\n  options = options || {};\n  return new Topic(this, {\n    name: name,\n    autoCreate: options.autoCreate\n  });\n};",
     "ctx": {
       "type": "method",
@@ -591,8 +591,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 193,
-    "codeStart": 217,
+    "line": 192,
+    "codeStart": 216,
     "code": "PubSub.prototype.getSubscriptions = function(query, callback) {\n  var self = this;\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n\n  var path = this.projectName + '/subscriptions';\n  this.makeReq_('GET', path, query, true, function(err, result) {\n    if (err) {\n      callback(err, null, null, result);\n      return;\n    }\n\n    var subscriptions = (result.subscriptions || []).map(function(item) {\n      return new Subscription(self, {\n        name: item.name\n      });\n    });\n    var nextQuery = null;\n    if (result.nextPageToken) {\n      nextQuery = query;\n      nextQuery.pageToken = result.nextPageToken;\n    }\n    callback(null, subscriptions, nextQuery, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -687,8 +687,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 245,
-    "codeStart": 257,
+    "line": 244,
+    "codeStart": 256,
     "code": "PubSub.prototype.makeReq_ = function(method, path, q, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: q,\n    uri: PUBSUB_BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};\n\nmodule.exports = PubSub;",
     "ctx": {
       "type": "method",

@@ -247,8 +247,8 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar storage = myProject.storage();",
-        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;my-project&#39;<br />});</p><p>var storage = myProject.storage();</p>"
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar storage = gcloud.storage();",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;my-project&#39;<br />});</p><p>var storage = gcloud.storage();</p>"
       }
     ],
     "description": {
@@ -287,8 +287,8 @@
       },
       {
         "type": "example",
-        "string": "var storage = gcloud.storage();\nvar albums = storage.bucket('albums');\n\n//-\n// Make all of the files currently in a bucket publicly readable.\n//-\nalbums.acl.add({\n  scope: 'allUsers',\n  permission: storage.acl.READER_ROLE\n}, function(err, aclObject) {});\n\n//-\n// Make any new objects added to a bucket publicly readable.\n//-\nalbums.acl.default.add({\n  scope: 'allUsers',\n  permission: storage.acl.READER_ROLE\n}, function(err, aclObject) {});\n\n//-\n// Grant a user ownership permissions to a bucket.\n//-\n\nalbums.acl.add({\n  scope: 'user-useremail@example.com',\n  permission: storage.acl.OWNER_ROLE\n}, function(err, aclObject) {});",
-        "html": "<p>var storage = gcloud.storage();<br />var albums = storage.bucket(&#39;albums&#39;);</p><p>//-<br />// Make all of the files currently in a bucket publicly readable.<br />//-<br />albums.acl.add({<br />  scope: &#39;allUsers&#39;,<br />  permission: storage.acl.READER_ROLE<br />}, function(err, aclObject) {});</p><p>//-<br />// Make any new objects added to a bucket publicly readable.<br />//-<br />albums.acl.default.add({<br />  scope: &#39;allUsers&#39;,<br />  permission: storage.acl.READER_ROLE<br />}, function(err, aclObject) {});</p><p>//-<br />// Grant a user ownership permissions to a bucket.<br />//-</p><p>albums.acl.add({<br />  scope: &#39;user-useremail@example.com&#39;,<br />  permission: storage.acl.OWNER_ROLE<br />}, function(err, aclObject) {});</p>"
+        "string": "var storage = gcloud.storage();\nvar albums = storage.bucket('albums');\n\n//-\n// Make all of the files currently in a bucket publicly readable.\n//-\nalbums.acl.add({\n  scope: 'allUsers',\n  role: storage.acl.READER_ROLE\n}, function(err, aclObject) {});\n\n//-\n// Make any new objects added to a bucket publicly readable.\n//-\nalbums.acl.default.add({\n  scope: 'allUsers',\n  role: storage.acl.READER_ROLE\n}, function(err, aclObject) {});\n\n//-\n// Grant a user ownership permissions to a bucket.\n//-\n\nalbums.acl.add({\n  scope: 'user-useremail@example.com',\n  role: storage.acl.OWNER_ROLE\n}, function(err, aclObject) {});",
+        "html": "<p>var storage = gcloud.storage();<br />var albums = storage.bucket(&#39;albums&#39;);</p><p>//-<br />// Make all of the files currently in a bucket publicly readable.<br />//-<br />albums.acl.add({<br />  scope: &#39;allUsers&#39;,<br />  role: storage.acl.READER_ROLE<br />}, function(err, aclObject) {});</p><p>//-<br />// Make any new objects added to a bucket publicly readable.<br />//-<br />albums.acl.default.add({<br />  scope: &#39;allUsers&#39;,<br />  role: storage.acl.READER_ROLE<br />}, function(err, aclObject) {});</p><p>//-<br />// Grant a user ownership permissions to a bucket.<br />//-</p><p>albums.acl.add({<br />  scope: &#39;user-useremail@example.com&#39;,<br />  role: storage.acl.OWNER_ROLE<br />}, function(err, aclObject) {});</p>"
       }
     ],
     "description": {

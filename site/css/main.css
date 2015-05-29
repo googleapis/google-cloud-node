@@ -301,22 +301,16 @@ ul {
 .page-header.fixed .v-btn {
     background-color: #fff;
     color: #444;
-    border-radius: 8px;
+    border-radius: 5px;
     border: 0;
-    border-right: 2px solid #A0C2F4;
-    border-bottom: 2px solid #A0C2F4;
     padding: 11px 10px;
     font-size: .8em;
-    transition: border-color 1s, border-width .1s;
+    transition: all 0.3s ease;
 }
 
 .page-header.fixed .v-btn:hover {
     opacity: 1;
-    border-color: #aaa;
-}
-
-.page-header.fixed .v-btn:active {
-    border-width: 1px;
+    background-color: #f6f6f6;
 }
 
 /*

@@ -97,9 +97,9 @@
       },
       {
         "type": "param",
-        "string": "{string} id - The ID of the table.",
+        "string": "{string} id - The ID of the job.\n",
         "name": "id",
-        "description": "<ul>\n<li>The ID of the table.</li>\n</ul>\n",
+        "description": "<ul>\n<li>The ID of the job. </li>\n</ul>\n",
         "types": [
           "string"
         ],
@@ -108,6 +108,11 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var bigquery = gcloud.bigquery();\nvar Job = require('gcloud/lib/bigquery/job');\nvar job = new Job(bigquery, 'job-id');",
+        "html": "<p>var bigquery = gcloud.bigquery();<br />var Job = require(&#39;gcloud/lib/bigquery/job&#39;);<br />var job = new Job(bigquery, &#39;job-id&#39;);</p>"
       }
     ],
     "description": {
@@ -121,7 +126,7 @@
     "isEvent": false,
     "ignore": true,
     "line": 29,
-    "codeStart": 34
+    "codeStart": 39
   },
   {
     "tags": [
@@ -146,8 +151,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 34,
-    "codeStart": 52,
+    "line": 39,
+    "codeStart": 57,
     "code": "function Job(bigQuery, id) {\n  this.bigQuery = bigQuery;\n  this.id = id;\n  this.metadata = {};\n}",
     "ctx": {
       "type": "constructor",
@@ -173,8 +178,8 @@
       },
       {
         "type": "example",
-        "string": "job.getMetadata(function(err, metadata, apiResponse) {});",
-        "html": "<p>job.getMetadata(function(err, metadata, apiResponse) {});</p>"
+        "string": "var job = bigquery.job('id');\njob.getMetadata(function(err, metadata, apiResponse) {});",
+        "html": "<p>var job = bigquery.job(&#39;id&#39;);<br />job.getMetadata(function(err, metadata, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -187,8 +192,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 58,
-    "codeStart": 67,
+    "line": 63,
+    "codeStart": 73,
     "code": "Job.prototype.getMetadata = function(callback) {\n  var that = this;\n\n  var path = '/jobs/' + this.id;\n\n  this.bigQuery.makeReq_('GET', path, null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -286,8 +291,8 @@
       },
       {
         "type": "example",
-        "string": "//-\n// Use the default options to get the results of a query.\n//-\njob.getQueryResults(function(err, rows, nextQuery, apiResponse) {});\n\n//-\n// Customize the results you want to fetch.\n//-\nvar options = {\n  maxResults: 100\n};\n\njob.getQueryResults(options, function(err, rows, nextQuery, apiResponse) {});\n\n//-\n// Consume the results from the query as a readable stream.\n//-\nvar through2 = require('through2');\n\njob.getQueryResults(options)\n  .pipe(through2.obj(function (row, enc, next) {\n    this.push(JSON.stringify(row) + '\\n');\n  }))\n  .pipe(fs.createWriteStream('./backup.json'));",
-        "html": "<p>//-<br />// Use the default options to get the results of a query.<br />//-<br />job.getQueryResults(function(err, rows, nextQuery, apiResponse) {});</p><p>//-<br />// Customize the results you want to fetch.<br />//-<br />var options = {<br />  maxResults: 100<br />};</p><p>job.getQueryResults(options, function(err, rows, nextQuery, apiResponse) {});</p><p>//-<br />// Consume the results from the query as a readable stream.<br />//-<br />var through2 = require(&#39;through2&#39;);</p><p>job.getQueryResults(options)<br />  .pipe(through2.obj(function (row, enc, next) {<br />    this.push(JSON.stringify(row) + &#39;\\n&#39;);<br />  }))<br />  .pipe(fs.createWriteStream(&#39;./backup.json&#39;));</p>"
+        "string": "//-\n// Use the default options to get the results of a query.\n//-\njob.getQueryResults(function(err, rows, nextQuery, apiResponse) {});\n\n//-\n// Customize the results you want to fetch.\n//-\nvar options = {\n  maxResults: 100\n};\n\njob.getQueryResults(options, function(err, rows, nextQuery, apiResponse) {});\n\n//-\n// Consume the results from the query as a readable stream.\n//-\nvar through2 = require('through2');\nvar fs = require('fs');\n\njob.getQueryResults(options)\n  .pipe(through2.obj(function (row, enc, next) {\n    this.push(JSON.stringify(row) + '\\n');\n  }))\n  .pipe(fs.createWriteStream('./test/testdata/testfile.json'));",
+        "html": "<p>//-<br />// Use the default options to get the results of a query.<br />//-<br />job.getQueryResults(function(err, rows, nextQuery, apiResponse) {});</p><p>//-<br />// Customize the results you want to fetch.<br />//-<br />var options = {<br />  maxResults: 100<br />};</p><p>job.getQueryResults(options, function(err, rows, nextQuery, apiResponse) {});</p><p>//-<br />// Consume the results from the query as a readable stream.<br />//-<br />var through2 = require(&#39;through2&#39;);<br />var fs = require(&#39;fs&#39;);</p><p>job.getQueryResults(options)<br />  .pipe(through2.obj(function (row, enc, next) {<br />    this.push(JSON.stringify(row) + &#39;\\n&#39;);<br />  }))<br />  .pipe(fs.createWriteStream(&#39;./test/testdata/testfile.json&#39;));</p>"
       }
     ],
     "description": {
@@ -300,8 +305,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 84,
-    "codeStart": 127,
+    "line": 90,
+    "codeStart": 134,
     "code": "Job.prototype.getQueryResults = function(options, callback) {\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.job = this;\n\n  return this.bigQuery.query(options, callback);\n};\n\nmodule.exports = Job;",
     "ctx": {
       "type": "method",

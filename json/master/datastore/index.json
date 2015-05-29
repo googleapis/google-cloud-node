@@ -167,14 +167,14 @@
     "tags": [
       {
         "type": "example",
-        "string": "var datastore = require('gcloud/lib/datastore')({\n  keyFilename: '/path/to/keyfile.json'\n});\n\nvar dataset = datastore.dataset();\n// equal to:\n//   datastore.dataset({\n//     keyFilename: '/path/to/keyfile.json'\n//   });",
-        "html": "<p>var datastore = require(&#39;gcloud/lib/datastore&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p><p>var dataset = datastore.dataset();<br />// equal to:<br />//   datastore.dataset({<br />//     keyFilename: &#39;/path/to/keyfile.json&#39;<br />//   });</p>"
+        "string": "var datastore = gcloud.datastore;\n\nvar dataset = datastore.dataset();\n// equal to:\n//   datastore.dataset({\n//     keyFilename: '/path/to/keyfile.json'\n//   });",
+        "html": "<p>var datastore = gcloud.datastore;</p><p>var dataset = datastore.dataset();<br />// equal to:<br />//   datastore.dataset({<br />//     keyFilename: &#39;/path/to/keyfile.json&#39;<br />//   });</p>"
       }
     ],
     "description": {
-      "full": "<p>Developer Documentation</p><p>Invoking the Datastore class allows you to provide configuration up-front.<br />This configuration will be used for future invokations of the returned<br /><code>dataset</code> method.</p>",
+      "full": "<p>Developer Documentation</p><p>Invoking the Datastore class allows you to provide configuration up-front.<br />This configuration will be used for future invocations of the returned<br /><code>dataset</code> method.</p>",
       "summary": "<p>Developer Documentation</p>",
-      "body": "<p>Invoking the Datastore class allows you to provide configuration up-front.<br />This configuration will be used for future invokations of the returned<br /><code>dataset</code> method.</p>"
+      "body": "<p>Invoking the Datastore class allows you to provide configuration up-front.<br />This configuration will be used for future invocations of the returned<br /><code>dataset</code> method.</p>"
     },
     "isPrivate": false,
     "isConstructor": false,
@@ -182,7 +182,7 @@
     "isEvent": false,
     "ignore": true,
     "line": 41,
-    "codeStart": 58
+    "codeStart": 56
   },
   {
     "tags": [
@@ -226,8 +226,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 58,
-    "codeStart": 75,
+    "line": 56,
+    "codeStart": 73,
     "code": "function Datastore(options) {\n  this.config = options || {};\n}",
     "ctx": {
       "type": "constructor",
@@ -239,8 +239,8 @@
     "tags": [
       {
         "type": "example",
-        "string": "var datastore = require('gcloud/lib/datastore');\n\n// Create a Dataset object.\nvar dataset = datastore.dataset({\n  keyFilename: '/path/to/keyfile.json'\n});",
-        "html": "<p>var datastore = require(&#39;gcloud/lib/datastore&#39;);</p><p>// Create a Dataset object.<br />var dataset = datastore.dataset({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
+        "string": "var datastore = gcloud.datastore;\n\n// Create a Dataset object.\nvar dataset = datastore.dataset({\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var datastore = gcloud.datastore;</p><p>// Create a Dataset object.<br />var dataset = datastore.dataset({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
       }
     ],
     "description": {
@@ -253,8 +253,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 79,
-    "codeStart": 92,
+    "line": 77,
+    "codeStart": 90,
     "code": "Datastore.dataset = Dataset;",
     "ctx": {
       "type": "property",
@@ -305,8 +305,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 94,
-    "codeStart": 102
+    "line": 92,
+    "codeStart": 100
   },
   {
     "tags": [
@@ -377,8 +377,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 102,
-    "codeStart": 112,
+    "line": 100,
+    "codeStart": 110,
     "code": "Datastore.prototype.dataset = function(options) {\n  options = options || {};\n  // Mix in global config data to the provided options.\n  return new Dataset(util.extendGlobalConfig(this.config, options));\n};",
     "ctx": {
       "type": "method",
@@ -434,8 +434,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 118,
-    "codeStart": 130,
+    "line": 116,
+    "codeStart": 128,
     "code": "Datastore.int = function(value) {\n  return new entity.Int(value);\n};",
     "ctx": {
       "type": "method",
@@ -490,8 +490,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 134,
-    "codeStart": 146,
+    "line": 132,
+    "codeStart": 144,
     "code": "Datastore.double = function(value) {\n  return new entity.Double(value);\n};\n\nmodule.exports = Datastore;",
     "ctx": {
       "type": "method",
