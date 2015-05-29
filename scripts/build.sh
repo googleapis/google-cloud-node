@@ -17,6 +17,7 @@
 set -ev
 
 npm run lint
+# generates docs and runs tests
 npm run test
 
 # if merging to master and not a pull request, execute system tests, create coverage report and update docs
@@ -25,8 +26,7 @@ if [ "${TRAVIS_BRANCH}" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]
   # create new coverage report (executes system tests)
   npm run coveralls
 
-  # generate new set of json files in docs/json/master
-  npm run docs
+  # add new docs to the gh-pages branch
   git submodule add -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} ghpages
   # copy all the docs file that might have changed, excluding versions.txt (to avoid overriding it)
   cd docs
