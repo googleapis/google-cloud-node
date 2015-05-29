@@ -67,8 +67,10 @@
     "bytebuffer": "^3.5.4",
     "coveralls": "^2.11.2",
     "dox": "^0.7.0",
+    "glob": "^5.0.9",
     "istanbul": "^0.3.5",
     "jshint": "^2.6.0",
+    "mitm": "^1.1.0",
     "mocha": "^2.1.0",
     "mockery": "^1.4.0",
     "tmp": "0.0.24"
@@ -76,7 +78,7 @@
   "scripts": {
     "docs": "./scripts/docs.sh",
     "lint": "jshint lib/ system-test/ test/",
-    "test": "mocha test/*",
+    "test": "npm run docs && mocha test/*",
     "system-test": "mocha system-test/* --timeout 30000",
     "cover": "istanbul cover -x 'system-test/*' _mocha -- --timeout 30000 test/* system-test/*",
     "coveralls": "istanbul cover -x 'system-test/*' _mocha --report lcovonly -- --timeout 30000 test/* system-test/* -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"

@@ -98,14 +98,14 @@ describe('Transaction', function() {
     });
   });
 
-  describe('begin', function() {
+  describe('begin_', function() {
     it('should begin', function(done) {
       transaction.makeReq_ = function(method, req, callback) {
         callback = callback || req;
         assert.equal(method, 'beginTransaction');
         done();
       };
-      transaction.begin();
+      transaction.begin_();
     });
 
     it('should set transaction id', function(done) {
@@ -113,7 +113,7 @@ describe('Transaction', function() {
         callback = callback || req;
         callback(null, { transaction: TRANSACTION_ID });
       };
-      transaction.begin(function(err) {
+      transaction.begin_(function(err) {
         assert.ifError(err);
         assert.equal(transaction.id, TRANSACTION_ID);
         done();
@@ -126,7 +126,7 @@ describe('Transaction', function() {
         callback = callback || req;
         callback(error);
       };
-      transaction.begin(function(err) {
+      transaction.begin_(function(err) {
         assert.deepEqual(err, error);
         done();
       });
@@ -138,7 +138,7 @@ describe('Transaction', function() {
         callback = callback || req;
         callback(null, resp);
       };
-      transaction.begin(function(err, apiResponse) {
+      transaction.begin_(function(err, apiResponse) {
         assert.ifError(err);
         assert.deepEqual(resp, apiResponse);
         done();
@@ -207,7 +207,7 @@ describe('Transaction', function() {
     });
   });
 
-  describe('commit', function() {
+  describe('commit_', function() {
     beforeEach(function() {
       transaction.id = TRANSACTION_ID;
     });
@@ -217,7 +217,7 @@ describe('Transaction', function() {
         assert.equal(method, 'commit');
         done();
       };
-      transaction.commit();
+      transaction.commit_();
     });
 
     it('should pass error to callback', function(done) {
@@ -226,7 +226,7 @@ describe('Transaction', function() {
         callback = callback || req;
         callback(error);
       };
-      transaction.commit(function(err) {
+      transaction.commit_(function(err) {
         assert.deepEqual(err, error);
         done();
       });
@@ -238,7 +238,7 @@ describe('Transaction', function() {
         callback = callback || req;
         callback(null, resp);
       };
-      transaction.commit(function(err, apiResponse) {
+      transaction.commit_(function(err, apiResponse) {
         assert.ifError(err);
         assert.deepEqual(resp, apiResponse);
         done();
@@ -274,7 +274,7 @@ describe('Transaction', function() {
 
       transaction.makeReq_ = util.noop;
 
-      transaction.commit();
+      transaction.commit_();
 
       assert.equal(deleteCalled, 1);
       assert.equal(saveCalled, 1);
@@ -303,7 +303,7 @@ describe('Transaction', function() {
 
       transaction.makeReq_ = util.noop;
 
-      transaction.commit();
+      transaction.commit_();
       assert.equal(deleteCalled, 0);
       assert.equal(saveCalled, 1);
     });
@@ -321,7 +321,7 @@ describe('Transaction', function() {
         done();
       };
 
-      transaction.commit();
+      transaction.commit_();
     });
 
     it('should execute the queued callbacks', function() {
@@ -337,7 +337,7 @@ describe('Transaction', function() {
         cb();
       };
 
-      transaction.commit();
+      transaction.commit_();
 
       assert(cb1Called);
       assert(cb2Called);
