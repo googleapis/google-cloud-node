@@ -20,7 +20,7 @@
 
 var vm = require('vm');
 var assert = require('assert');
-var gcloud = require('../../');
+var gcloud = require('../');
 var glob = require('glob');
 var mitm = require('mitm');
 var fs = require('fs');
@@ -89,8 +89,8 @@ describe('documentation', function() {
             // Replace all references to require('gcloud') with a relative
             // version so that the code can be passed into the VM directly.
             var code = tag.string
-                .replace(/require\(\'gcloud\'\)/g, 'require(\'..\/..\/\')')
-                .replace(/require\(\'gcloud/g, 'require(\'..\/..');
+                .replace(/require\(\'gcloud\'\)/g, 'require(\'..\/\')')
+                .replace(/require\(\'gcloud/g, 'require(\'..');
             assert.doesNotThrow(runCodeInSandbox.bind(null, code, sandbox));
           }
         });
