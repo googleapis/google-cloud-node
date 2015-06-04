@@ -395,7 +395,7 @@ describe('File', function() {
     }
 
     it('should create an authorized request', function(done) {
-      var expectedPath = util.format('https://{b}.storage.googleapis.com/{o}', {
+      var expectedPath = util.format('https://storage.googleapis.com/{b}/{o}', {
         b: file.bucket.name,
         o: encodeURIComponent(file.name)
       });
