@@ -14,31 +14,13 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach, before, after */
-
 'use strict';
 
 var assert = require('assert');
-var mockery = require('mockery');
+var Topic = require('../../lib/pubsub/topic');
 var util = require('../../lib/common/util.js');
 
-var SubscriptionCached = require('../../lib/pubsub/subscription.js');
-var formatName_Cached = SubscriptionCached.formatName_;
-var SubscriptionOverride;
-var formatName_Override;
-
-function Subscription(a, b) {
-  var OverrideFn = SubscriptionOverride || SubscriptionCached;
-  return new OverrideFn(a, b);
-}
-
-Subscription.formatName_ = function() {
-  var args = [].slice.apply(arguments);
-  return (formatName_Override || formatName_Cached).apply(null, args);
-};
-
 describe('Topic', function() {
-  var Topic;
   var PROJECT_ID = 'test-project';
   var TOPIC_NAME = 'test-topic';
   var pubsubMock = {
@@ -47,23 +29,7 @@ describe('Topic', function() {
   };
   var topic;
 
-  before(function() {
-    mockery.registerMock('./subscription.js', Subscription);
-    mockery.enable({
-      useCleanCache: true,
-      warnOnUnregistered: false
-    });
-    Topic = require('../../lib/pubsub/topic');
-  });
-
-  after(function() {
-    mockery.deregisterAll();
-    mockery.disable();
-  });
-
   beforeEach(function() {
-    SubscriptionOverride = null;
-    formatName_Override = null;
     topic = new Topic(pubsubMock, { name: TOPIC_NAME });
   });
 
@@ -245,176 +211,68 @@ describe('Topic', function() {
     });
   });
 
-  describe('subscriptions', function() {
-    var SUB_NAME = 'new-sub-name';
-    var SUB_FULL_NAME = 'projects/' + PROJECT_ID + '/subscriptions/' + SUB_NAME;
-    var CONFIG = { autoAck: true, interval: 90 };
+  describe('getSubscriptions', function() {
+    it('should accept just a callback', function(done) {
+      topic.pubsub.getSubscriptions = function(options, callback) {
+        assert.deepEqual(options, { topic: topic });
+        callback();
+      };
 
-    describe('getSubscriptions', function() {
-      it('should pass query', function(done) {
-        var query = { pageToken: 1, maxResults: 3 };
-        topic.getSubscriptions = function(q) {
-          assert.strictEqual(q.pageToken, query.pageToken);
-          assert.strictEqual(q.maxResults, query.maxResults);
-          done();
-        };
-        topic.getSubscriptions(query, assert.ifError);
-      });
-
-      it('should pass callback', function(done) {
-        topic.getSubscriptions = function(q, callback) {
-          callback();
-        };
-        topic.getSubscriptions({}, done);
-      });
-
-      it('should pass apiResponse with callback', function(done) {
-        var resp = { success: true };
-        topic.getSubscriptions = function(q, callback) {
-          callback(null, [], resp);
-        };
-        topic.getSubscriptions({}, function(err, subs, apiResponse) {
-          assert.deepEqual(resp, apiResponse);
-          done();
-        });
-      });
+      topic.getSubscriptions(done);
     });
 
-    describe('subscribe', function() {
-      it('should throw if no name is provided', function() {
-        assert.throws(function() {
-          topic.subscribe();
-        }, /name.*required/);
-      });
+    it('should pass correct args to pubsub#getSubscriptions', function(done) {
+      var opts = { a: 'b', c: 'd' };
 
-      it('should not require configuration options', function(done) {
-        topic.makeReq_ = function(method, path, qs, body, callback) {
+      topic.pubsub = {
+        getSubscriptions: function(options, callback) {
+          assert.deepEqual(options, opts);
+          assert.deepEqual(options.topic, topic);
           callback();
-        };
-        topic.subscribe(SUB_NAME, done);
-      });
+        }
+      };
 
-      it('should format provided name', function(done) {
-        formatName_Override = function() {
-          done();
-        };
-        topic.subscribe(SUB_NAME, assert.ifError);
-      });
+      topic.getSubscriptions(opts, done);
+    });
+  });
 
-      it('should send correct request', function(done) {
-        topic.makeReq_ = function(method, path, qs, body) {
-          assert.equal(method, 'PUT');
-          assert.equal(path, SUB_FULL_NAME);
-          assert.equal(body.topic, topic.name);
-          done();
-        };
-        topic.subscribe(SUB_NAME, assert.ifError);
-      });
+  describe('subscribe', function() {
+    it('should pass correct arguments to pubsub#subscribe', function(done) {
+      var subscriptionName = 'subName';
+      var opts = {};
 
-      it('should return an api error to the callback', function(done) {
-        var error = new Error('Error.');
-        topic.makeReq_ = function(method, path, qs, body, callback) {
-          callback(error);
-        };
-        topic.subscribe(SUB_NAME, function(err) {
-          assert.equal(err, error);
-          done();
-        });
-      });
+      topic.pubsub.subscribe = function(t, subName, options, callback) {
+        assert.deepEqual(t, topic);
+        assert.equal(subName, subscriptionName);
+        assert.deepEqual(options, opts);
+        callback();
+      };
 
-      it('should return apiResponse to the callback', function(done) {
-        var resp = { success: true };
-        topic.makeReq_ = function(method, path, qs, body, callback) {
-          callback(null, resp);
-        };
-        topic.subscribe(SUB_NAME, function(err, sub, apiResponse) {
-          assert.deepEqual(resp, apiResponse);
-          done();
-        });
-      });
+      topic.subscribe(subscriptionName, opts, done);
+    });
+  });
 
-      it('should create a new subscription', function(done) {
-        topic.subscription = function(name) {
-          assert.equal(name, SUB_NAME);
-          done();
-        };
-        topic.makeReq_ = function(method, path, qs, body, callback) {
-          callback();
-        };
-        topic.subscribe(SUB_NAME, assert.ifError);
-      });
+  describe('subscription', function() {
+    it('should pass correct arguments to pubsub#subscription', function(done) {
+      var subscriptionName = 'subName';
+      var opts = {};
 
-      it('should honor settings on the api request', function(done) {
-        var SEC = 90;
-        topic.makeReq_ = function(method, path, qs, body) {
-          assert.strictEqual(body.ackDeadlineSeconds, SEC);
-          done();
-        };
-        topic.subscribe(SUB_NAME, { ackDeadlineSeconds: SEC }, assert.ifError);
-      });
+      topic.pubsub.subscription = function(name, options) {
+        assert.equal(name, subscriptionName);
+        assert.deepEqual(options, opts);
+        done();
+      };
 
-      it('should honor settings on the subscription object', function(done) {
-        topic.subscription = function(name, options) {
-          assert.deepEqual(options, CONFIG);
-          done();
-        };
-        topic.makeReq_ = function(method, path, qs, body, callback) {
-          callback();
-        };
-        topic.subscribe(SUB_NAME, CONFIG, assert.ifError);
-      });
-
-      it('should re-use existing subscription if specified', function(done) {
-        topic.subscription = function() {
-          done();
-        };
-
-        topic.makeReq_ = function(method, path, qs, body, callback) {
-          callback({ code: 409 });
-        };
-
-        topic.subscribe(SUB_NAME, function(err) {
-          assert.equal(err.code, 409);
-        });
-
-        topic.subscribe(SUB_NAME, { reuseExisting: true }, assert.ifError);
-      });
+      topic.subscription(subscriptionName, opts);
     });
 
-    describe('subscription', function() {
-      it('should throw if no name is provided', function() {
-        assert.throws(function() {
-          topic.subscription();
-        }, /name.*required/);
-      });
+    it('should return the result', function(done) {
+      topic.pubsub.subscription = function() {
+        return done;
+      };
 
-      it('should return a Subscription object', function() {
-        SubscriptionOverride = function() {};
-        var subscription = topic.subscription(SUB_NAME, {});
-        assert(subscription instanceof SubscriptionOverride);
-      });
-
-      it('should honor settings', function(done) {
-        SubscriptionOverride = function(pubsub, options) {
-          assert.deepEqual(options, CONFIG);
-          done();
-        };
-        topic.subscription(SUB_NAME, CONFIG);
-      });
-
-      it('should pass specified name to the Subscription', function(done) {
-        SubscriptionOverride = function(pubsub, options) {
-          assert.equal(options.name, SUB_NAME);
-          done();
-        };
-        topic.subscription(SUB_NAME, {});
-      });
-
-      it('should not require options', function() {
-        assert.doesNotThrow(function() {
-          topic.subscription(SUB_NAME);
-        });
-      });
+      var doneFn = topic.subscription();
+      doneFn();
     });
   });
 });
