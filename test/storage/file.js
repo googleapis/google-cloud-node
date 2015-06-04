@@ -51,9 +51,14 @@ function FakeDuplexify() {
 nodeutil.inherits(FakeDuplexify, stream.Duplex);
 
 var makeWritableStream_Override;
+var handleResp_Override;
 var fakeUtil = extend({}, util, {
+  handleResp: function() {
+    (handleResp_Override || util.handleResp).apply(null, arguments);
+  },
+
   makeWritableStream: function() {
-    var args = util.toArray(arguments);
+    var args = arguments;
     (makeWritableStream_Override || util.makeWritableStream).apply(null, args);
   }
 });
@@ -125,6 +130,7 @@ describe('File', function() {
     directoryFile = new File(bucket, 'directory/file.jpg');
     directoryFile.makeReq_ = util.noop;
 
+    handleResp_Override = null;
     makeWritableStream_Override = null;
     request_Override = null;
   });
@@ -370,95 +376,262 @@ describe('File', function() {
   });
 
   describe('createReadStream', function() {
+    function getFakeRequest(data) {
+      var aborted = false;
+      var destroyed = false;
+      var requestOptions;
 
-    function getFakeRequest(data, fakeResponse) {
-      function FakeRequest(req) {
+      function FakeRequest(_requestOptions) {
         if (!(this instanceof FakeRequest)) {
-          return new FakeRequest(req);
+          return new FakeRequest(_requestOptions);
         }
 
-        var that = this;
+        requestOptions = _requestOptions;
 
         stream.Readable.call(this);
         this._read = function() {
-          this.push(data);
+          if (data) {
+            this.push(data);
+          }
           this.push(null);
         };
 
-        setImmediate(function() {
-          that.emit('response', fakeResponse);
-          that.emit('complete', fakeResponse);
-        });
+        this.abort = function() {
+          aborted = true;
+        };
+
+        this.destroy = function() {
+          destroyed = true;
+        };
       }
       nodeutil.inherits(FakeRequest, stream.Readable);
+
+      FakeRequest.getRequestOptions = function() { return requestOptions; };
+      FakeRequest.wasRequestAborted = function() { return aborted; };
+      FakeRequest.wasRequestDestroyed = function() { return destroyed; };
+
       return FakeRequest;
     }
 
-    it('should create an authorized request', function(done) {
-      var expectedPath = util.format('https://storage.googleapis.com/{b}/{o}', {
-        b: file.bucket.name,
-        o: encodeURIComponent(file.name)
-      });
+    function getFakeSuccessfulRequest(data, fakeResponse) {
+      var FakeRequest = getFakeRequest(data);
 
-      file.bucket.storage.makeAuthorizedRequest_ = function(opts) {
-        assert.equal(opts.uri, expectedPath);
-        done();
-      };
-
-      file.createReadStream();
-    });
-
-    it('should emit an error from authorizing', function(done) {
-      var error = new Error('Error.');
-      file.bucket.storage.makeAuthorizedRequest_ = function(opts, callback) {
-        setImmediate(function() {
-          (callback.onAuthorized || callback)(error);
-        });
-      };
-      file.createReadStream()
-        .once('error', function(err) {
-          assert.equal(err, error);
-          done();
-        });
-    });
-
-    it('should emit response event from request', function(done) {
-      var response = {
-        headers: { 'x-goog-hash': 'md5=fakefakefake' }
-      };
-      request_Override = getFakeRequest('body', response);
-
-      file.createReadStream({ validation: false })
-        .on('response', function(res) {
-          assert.deepEqual(response, res);
-          done();
-        });
-    });
-
-    it('should get readable stream from request', function(done) {
-      var fakeRequest = { a: 'b', c: 'd' };
-
-      // Faking a stream implementation so we can simulate an actual Request
-      // request. The only thing we want to know is if the data passed to
-      // request was correct.
-      request_Override = function(req) {
-        if (!(this instanceof request_Override)) {
-          return new request_Override(req);
+      function FakeSuccessfulRequest(req) {
+        if (!(this instanceof FakeSuccessfulRequest)) {
+          return new FakeSuccessfulRequest(req);
         }
 
-        stream.Readable.call(this);
-        this._read = util.noop;
+        FakeRequest.apply(this, arguments);
 
-        assert.deepEqual(req, fakeRequest);
+        var self = this;
+
+        setImmediate(function() {
+          self.emit('response', fakeResponse);
+          self.emit('complete', fakeResponse);
+        });
+      }
+      nodeutil.inherits(FakeSuccessfulRequest, FakeRequest);
+      extend(FakeSuccessfulRequest, FakeRequest);
+
+      return FakeSuccessfulRequest;
+    }
+
+    function getFakeFailedRequest(error) {
+      var FakeRequest = getFakeRequest();
+
+      function FakeFailedRequest() {
+        if (!(this instanceof FakeFailedRequest)) {
+          return new FakeFailedRequest();
+        }
+
+        FakeRequest.apply(this, arguments);
+
+        var self = this;
+
+        setImmediate(function() {
+          self.emit('error', error);
+        });
+      }
+      nodeutil.inherits(FakeFailedRequest, FakeRequest);
+      extend(FakeFailedRequest, FakeRequest);
+
+      return FakeFailedRequest;
+    }
+
+    it('should send query.generation if File has one', function(done) {
+      var versionedFile = new File(bucket, 'file.txt', { generation: 1 });
+
+      versionedFile.bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
+        assert.equal(reqOpts.qs.generation, 1);
         done();
       };
-      nodeutil.inherits(request_Override, stream.Readable);
 
-      file.bucket.storage.makeAuthorizedRequest_ = function(opts, callback) {
-        (callback.onAuthorized || callback)(null, fakeRequest);
-      };
+      versionedFile.createReadStream();
+    });
 
-      file.createReadStream();
+    it('should end request stream on error', function(done) {
+      request_Override = getFakeSuccessfulRequest('body', { body: null });
+
+      var readStream = file.createReadStream();
+
+      readStream.once('error', function() {
+        assert(request_Override.wasRequestAborted());
+        assert(request_Override.wasRequestDestroyed());
+        done();
+      });
+
+      readStream.emit('error');
+    });
+
+    describe('authorizing', function() {
+      it('should create an authorized request', function(done) {
+        var expectedPath = util.format('https://{host}/{b}/{o}', {
+          host: 'storage.googleapis.com',
+          b: file.bucket.name,
+          o: encodeURIComponent(file.name)
+        });
+
+        file.bucket.storage.makeAuthorizedRequest_ = function(opts) {
+          assert.equal(opts.uri, expectedPath);
+          done();
+        };
+
+        file.createReadStream();
+      });
+
+      describe('errors', function() {
+        var ERROR = new Error('Error.');
+
+        beforeEach(function() {
+          file.bucket.storage.makeAuthorizedRequest_ = function(opt, callback) {
+            setImmediate(function() {
+              (callback.onAuthorized || callback)(ERROR);
+            });
+          };
+        });
+
+        it('should emit an error from authorizing', function(done) {
+          file.createReadStream()
+            .once('error', function(err) {
+              assert.equal(err, ERROR);
+              done();
+            });
+        });
+
+        it('should destroy the through stream', function(done) {
+          var readStream = file.createReadStream();
+          readStream.once('error', util.noop);
+          readStream.destroy = done;
+        });
+      });
+    });
+
+    describe('request', function() {
+      it('should get readable stream from request', function(done) {
+        var fakeRequest = { a: 'b', c: 'd' };
+
+        request_Override = getFakeRequest();
+
+        file.bucket.storage.makeAuthorizedRequest_ = function(opts, callback) {
+          (callback.onAuthorized || callback)(null, fakeRequest);
+          assert.deepEqual(request_Override.getRequestOptions(), fakeRequest);
+          done();
+        };
+
+        file.createReadStream();
+      });
+
+      it('should emit response event from request', function(done) {
+        var response = {
+          headers: { 'x-goog-hash': 'md5=fakefakefake' }
+        };
+        request_Override = getFakeSuccessfulRequest('body', response);
+
+        file.createReadStream({ validation: false })
+          .on('response', function(res) {
+            assert.deepEqual(response, res);
+            done();
+          });
+      });
+
+      describe('errors', function() {
+        var ERROR = new Error('Error.');
+
+        beforeEach(function() {
+          request_Override = getFakeFailedRequest(ERROR);
+        });
+
+        it('should end the request stream', function(done) {
+          var readStream = file.createReadStream();
+
+          readStream.once('error', function() {
+            assert(request_Override.wasRequestAborted());
+            assert(request_Override.wasRequestDestroyed());
+            done();
+          });
+        });
+
+        it('should emit the error', function(done) {
+          file.createReadStream()
+            .once('error', function(err) {
+              assert.deepEqual(err, ERROR);
+              done();
+            });
+        });
+
+        it('should destroy the through stream', function(done) {
+          var readStream = file.createReadStream();
+          readStream.destroy = done;
+        });
+      });
+    });
+
+    describe('response', function() {
+      it('should use util.handleResp', function(done) {
+        var response = {
+          body: {
+            a: 'b',
+            c: 'd',
+          }
+        };
+
+        request_Override = getFakeSuccessfulRequest('body', response);
+
+        handleResp_Override = function(err, resp, body) {
+          assert.strictEqual(err, null);
+          assert.deepEqual(resp, response);
+          assert.deepEqual(body, response.body);
+          done();
+        };
+
+        file.createReadStream();
+      });
+
+      describe('errors', function() {
+        var ERROR = new Error('Error.');
+
+        beforeEach(function() {
+          request_Override = getFakeSuccessfulRequest('body', { body: null });
+
+          handleResp_Override = function(err, resp, body, callback) {
+            callback(ERROR);
+          };
+        });
+
+        it('should emit the error', function(done) {
+          var readStream = file.createReadStream();
+
+          readStream.once('error', function(err) {
+            assert.deepEqual(err, ERROR);
+            done();
+          });
+        });
+
+        it('should destroy the through stream', function(done) {
+          var readStream = file.createReadStream();
+          readStream.destroy = done;
+        });
+      });
     });
 
     describe('validation', function() {
@@ -488,7 +661,7 @@ describe('File', function() {
       });
 
       it('should validate with crc32c', function(done) {
-        request_Override = getFakeRequest(data, fakeResponse.crc32c);
+        request_Override = getFakeSuccessfulRequest(data, fakeResponse.crc32c);
 
         file.createReadStream({ validation: 'crc32c' })
           .on('error', done)
@@ -498,7 +671,8 @@ describe('File', function() {
       });
 
       it('should emit an error if crc32c validation fails', function(done) {
-        request_Override = getFakeRequest('bad-data', fakeResponse.crc32c);
+        request_Override = getFakeSuccessfulRequest(
+            'bad-data', fakeResponse.crc32c);
 
         file.createReadStream({ validation: 'crc32c' })
           .on('error', function(err) {
@@ -508,7 +682,7 @@ describe('File', function() {
       });
 
       it('should validate with md5', function(done) {
-        request_Override = getFakeRequest(data, fakeResponse.md5);
+        request_Override = getFakeSuccessfulRequest(data, fakeResponse.md5);
 
         file.createReadStream({ validation: 'md5' })
           .on('error', done)
@@ -518,7 +692,8 @@ describe('File', function() {
       });
 
       it('should emit an error if md5 validation fails', function(done) {
-        request_Override = getFakeRequest('bad-data', fakeResponse.crc32c);
+        request_Override = getFakeSuccessfulRequest(
+            'bad-data', fakeResponse.crc32c);
 
         file.createReadStream({ validation: 'md5' })
           .on('error', function(err) {
@@ -528,7 +703,7 @@ describe('File', function() {
       });
 
       it('should default to md5 validation', function(done) {
-        request_Override = getFakeRequest(data, {
+        request_Override = getFakeSuccessfulRequest(data, {
           headers: { 'x-goog-hash': 'md5=fakefakefake' }
         });
 
@@ -538,77 +713,93 @@ describe('File', function() {
             done();
           });
       });
-    });
 
-    it('should send query.generation if File has one', function(done) {
-      var versionedFile = new File(bucket, 'file.txt', { generation: 1 });
+      describe('destroying the through stream', function() {
+        it('should destroy after failed validation', function(done) {
+          request_Override = getFakeSuccessfulRequest(
+              'bad-data', fakeResponse.crc32c);
 
-      versionedFile.bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
-        assert.equal(reqOpts.qs.generation, 1);
-        done();
-      };
-
-      versionedFile.createReadStream();
-    });
-
-    it('should accept a start range', function(done) {
-      var startOffset = 100;
-
-      request_Override = function(opts) {
-        setImmediate(function () {
-          assert.equal(opts.headers.Range, 'bytes=' + startOffset + '-');
-          done();
+          var readStream = file.createReadStream({ validation: 'md5' });
+          readStream.destroy = done;
         });
-        return duplexify();
-      };
 
-      file.createReadStream({ start: startOffset });
+        it('should destroy after successful validation', function(done) {
+          request_Override = getFakeSuccessfulRequest(
+              data, fakeResponse.crc32c);
+
+          var readStream = file.createReadStream({ validation: 'crc32c' });
+          readStream.destroy = done;
+        });
+      });
     });
 
-    it('should accept an end range and set start to 0', function(done) {
-      var endOffset = 100;
+    describe('range requests', function() {
+      it('should accept a start range', function(done) {
+        var startOffset = 100;
 
-      request_Override = function(opts) {
-        setImmediate(function () {
-          assert.equal(opts.headers.Range, 'bytes=0-' + endOffset);
-          done();
-        });
-        return duplexify();
-      };
+        request_Override = function(opts) {
+          setImmediate(function () {
+            assert.equal(opts.headers.Range, 'bytes=' + startOffset + '-');
+            done();
+          });
+          return duplexify();
+        };
 
-      file.createReadStream({ end: endOffset });
-    });
+        file.createReadStream({ start: startOffset });
+      });
 
-    it('should accept both a start and end range', function(done) {
-      var startOffset = 100;
-      var endOffset = 101;
+      it('should accept an end range and set start to 0', function(done) {
+        var endOffset = 100;
 
-      request_Override = function(opts) {
-        setImmediate(function () {
-          var expectedRange = 'bytes=' + startOffset + '-' + endOffset;
-          assert.equal(opts.headers.Range, expectedRange);
-          done();
-        });
-        return duplexify();
-      };
+        request_Override = function(opts) {
+          setImmediate(function () {
+            assert.equal(opts.headers.Range, 'bytes=0-' + endOffset);
+            done();
+          });
+          return duplexify();
+        };
 
-      file.createReadStream({ start: startOffset, end: endOffset });
-    });
+        file.createReadStream({ end: endOffset });
+      });
 
-    it('should accept range start and end as 0', function(done) {
-      var startOffset = 0;
-      var endOffset = 0;
+      it('should accept both a start and end range', function(done) {
+        var startOffset = 100;
+        var endOffset = 101;
 
-      request_Override = function(opts) {
-        setImmediate(function () {
-          var expectedRange = 'bytes=0-0';
-          assert.equal(opts.headers.Range, expectedRange);
-          done();
-        });
-        return duplexify();
-      };
+        request_Override = function(opts) {
+          setImmediate(function () {
+            var expectedRange = 'bytes=' + startOffset + '-' + endOffset;
+            assert.equal(opts.headers.Range, expectedRange);
+            done();
+          });
+          return duplexify();
+        };
 
-      file.createReadStream({ start: startOffset, end: endOffset });
+        file.createReadStream({ start: startOffset, end: endOffset });
+      });
+
+      it('should accept range start and end as 0', function(done) {
+        var startOffset = 0;
+        var endOffset = 0;
+
+        request_Override = function(opts) {
+          setImmediate(function () {
+            var expectedRange = 'bytes=0-0';
+            assert.equal(opts.headers.Range, expectedRange);
+            done();
+          });
+          return duplexify();
+        };
+
+        file.createReadStream({ start: startOffset, end: endOffset });
+      });
+
+      it('should destroy the through stream', function(done) {
+        request_Override = getFakeSuccessfulRequest('body', { body: null });
+
+        var readStream = file.createReadStream({ start: 100 });
+        readStream.destroy = done;
+      });
     });
   });
 
