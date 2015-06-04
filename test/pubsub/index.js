@@ -64,6 +64,14 @@ describe('PubSub', function() {
     };
   });
 
+  describe('instantiation', function() {
+    it('should throw if a projectId is not specified', function() {
+      assert.throws(function() {
+        new PubSub();
+      }, /Sorry, we cannot connect/);
+    });
+  });
+
   describe('getTopics', function() {
     beforeEach(function() {
       pubsub.makeReq_ = function(method, path, q, body, callback) {
@@ -239,7 +247,7 @@ describe('PubSub', function() {
 
   describe('makeReq_', function() {
     it('should pass network requests to the connection object', function(done) {
-      var pubsub = new PubSub();
+      var pubsub = new PubSub({ projectId: PROJECT_ID });
 
       pubsub.makeAuthorizedRequest_ = function() {
         done();
