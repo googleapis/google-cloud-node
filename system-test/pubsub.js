@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-/*global describe, it, before, after */
-
 'use strict';
 
 var assert = require('assert');
@@ -175,7 +173,7 @@ describe('pubsub', function() {
       });
     });
 
-    it('should allow creation and deletion of a topic', function(done) {
+    it('should allow creation and deletion of a subscription', function(done) {
       var subName = generateSubName();
       topic.subscribe(subName, function(err, sub) {
         assert.ifError(err);
