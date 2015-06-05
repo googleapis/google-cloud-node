@@ -67,6 +67,14 @@ describe('BigQuery', function() {
     bq = new BigQuery({ projectId: PROJECT_ID });
   });
 
+  describe('instantiation', function() {
+    it('should throw if a projectId is not specified', function() {
+      assert.throws(function() {
+        new BigQuery();
+      }, /Sorry, we cannot connect/);
+    });
+  });
+
   describe('createDataset', function() {
     var DATASET_ID = 'kittens';
 
