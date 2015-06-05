@@ -153,8 +153,8 @@
       },
       {
         "type": "example",
-        "string": "var bigquery = gcloud.bigquery();\nvar Dataset = require('gcloud/lib/bigquery/dataset');\nvar dataset = new Dataset(bigquery, 'dataset-id');\nvar Table = require('gcloud/lib/bigquery/table');\nvar table = new Table(dataset, 'table-id');",
-        "html": "<p>var bigquery = gcloud.bigquery();<br />var Dataset = require(&#39;gcloud/lib/bigquery/dataset&#39;);<br />var dataset = new Dataset(bigquery, &#39;dataset-id&#39;);<br />var Table = require(&#39;gcloud/lib/bigquery/table&#39;);<br />var table = new Table(dataset, &#39;table-id&#39;);</p>"
+        "string": "var bigquery = gcloud.bigquery({ projectId: 'grape-spaceship-123' });\nvar Dataset = require('gcloud/lib/bigquery/dataset');\nvar dataset = new Dataset(bigquery, 'dataset-id');\nvar Table = require('gcloud/lib/bigquery/table');\nvar table = new Table(dataset, 'table-id');",
+        "html": "<p>var bigquery = gcloud.bigquery({ projectId: &#39;grape-spaceship-123&#39; });<br />var Dataset = require(&#39;gcloud/lib/bigquery/dataset&#39;);<br />var dataset = new Dataset(bigquery, &#39;dataset-id&#39;);<br />var Table = require(&#39;gcloud/lib/bigquery/table&#39;);<br />var table = new Table(dataset, &#39;table-id&#39;);</p>"
       }
     ],
     "description": {
@@ -666,8 +666,8 @@
       },
       {
         "type": "example",
-        "string": "var storage = gcloud.storage();\nvar exportedFile = storage.bucket('institutions').file('2014.csv');\n\n//-\n// To use the default options, just pass a {module:storage/file} object.\n//\n// Note: The exported format type will be inferred by the file's extension.\n// If you wish to override this, or provide an array of destination files,\n// you must provide an `options` object.\n//-\ntable.export(exportedFile, function(err, job, apiResponse) {});\n\n//-\n// If you need more customization, pass an `options` object.\n//-\nvar options = {\n  format: 'json',\n  gzip: true\n};\n\ntable.export(exportedFile, options, function(err, job, apiResponse) {});\n\n//-\n// You can also specify multiple destination files.\n//-\ntable.export([\n  storage.bucket('institutions').file('2014.json'),\n  storage.bucket('institutions-copy').file('2014.json')\n], options, function(err, job, apiResponse) {});",
-        "html": "<p>var storage = gcloud.storage();<br />var exportedFile = storage.bucket(&#39;institutions&#39;).file(&#39;2014.csv&#39;);</p><p>//-<br />// To use the default options, just pass a {module:storage/file} object.<br />//<br />// Note: The exported format type will be inferred by the file&#39;s extension.<br />// If you wish to override this, or provide an array of destination files,<br />// you must provide an <code>options</code> object.<br />//-<br />table.export(exportedFile, function(err, job, apiResponse) {});</p><p>//-<br />// If you need more customization, pass an <code>options</code> object.<br />//-<br />var options = {<br />  format: &#39;json&#39;,<br />  gzip: true<br />};</p><p>table.export(exportedFile, options, function(err, job, apiResponse) {});</p><p>//-<br />// You can also specify multiple destination files.<br />//-<br />table.export([<br />  storage.bucket(&#39;institutions&#39;).file(&#39;2014.json&#39;),<br />  storage.bucket(&#39;institutions-copy&#39;).file(&#39;2014.json&#39;)<br />], options, function(err, job, apiResponse) {});</p>"
+        "string": "var storage = gcloud.storage({\n  projectId: 'grape-spaceship-123'\n});\nvar exportedFile = storage.bucket('institutions').file('2014.csv');\n\n//-\n// To use the default options, just pass a {module:storage/file} object.\n//\n// Note: The exported format type will be inferred by the file's extension.\n// If you wish to override this, or provide an array of destination files,\n// you must provide an `options` object.\n//-\ntable.export(exportedFile, function(err, job, apiResponse) {});\n\n//-\n// If you need more customization, pass an `options` object.\n//-\nvar options = {\n  format: 'json',\n  gzip: true\n};\n\ntable.export(exportedFile, options, function(err, job, apiResponse) {});\n\n//-\n// You can also specify multiple destination files.\n//-\ntable.export([\n  storage.bucket('institutions').file('2014.json'),\n  storage.bucket('institutions-copy').file('2014.json')\n], options, function(err, job, apiResponse) {});",
+        "html": "<p>var storage = gcloud.storage({<br />  projectId: &#39;grape-spaceship-123&#39;<br />});<br />var exportedFile = storage.bucket(&#39;institutions&#39;).file(&#39;2014.csv&#39;);</p><p>//-<br />// To use the default options, just pass a {module:storage/file} object.<br />//<br />// Note: The exported format type will be inferred by the file&#39;s extension.<br />// If you wish to override this, or provide an array of destination files,<br />// you must provide an <code>options</code> object.<br />//-<br />table.export(exportedFile, function(err, job, apiResponse) {});</p><p>//-<br />// If you need more customization, pass an <code>options</code> object.<br />//-<br />var options = {<br />  format: &#39;json&#39;,<br />  gzip: true<br />};</p><p>table.export(exportedFile, options, function(err, job, apiResponse) {});</p><p>//-<br />// You can also specify multiple destination files.<br />//-<br />table.export([<br />  storage.bucket(&#39;institutions&#39;).file(&#39;2014.json&#39;),<br />  storage.bucket(&#39;institutions-copy&#39;).file(&#39;2014.json&#39;)<br />], options, function(err, job, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -681,7 +681,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 356,
-    "codeStart": 402,
+    "codeStart": 404,
     "code": "Table.prototype.export = function(destination, options, callback) {\n  var that = this;\n\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = {};\n  }\n\n  var formats = {\n    avro: 'AVRO',\n    csv: 'CSV',\n    json: 'NEWLINE_DELIMITED_JSON'\n  };\n\n  extend(true, options, {\n    destinationUris: util.arrayize(destination).map(function(dest) {\n      if (!(dest instanceof File)) {\n        throw new Error('Destination must be a File object.');\n      }\n\n      // If no explicit format was provided, attempt to find a match from the\n      // file's extension. If no match, don't set, and default upstream to CSV.\n      var format = path.extname(dest.name).substr(1).toLowerCase();\n      if (!options.destinationFormat && !options.format && formats[format]) {\n        options.destinationFormat = formats[format];\n      }\n\n      return 'gs://' + dest.bucket.name + '/' + dest.name;\n    })\n  });\n\n  if (options.format) {\n    options.format = options.format.toLowerCase();\n\n    if (formats[options.format]) {\n      options.destinationFormat = formats[options.format];\n      delete options.format;\n    } else {\n      throw new Error('Destination format not recognized: ' + options.format);\n    }\n  }\n\n  if (options.gzip) {\n    options.compression = 'GZIP';\n    delete options.gzip;\n  }\n\n  var body = {\n    configuration: {\n      extract: extend(true, options, {\n        sourceTable: {\n          datasetId: this.dataset.id,\n          projectId: this.bigQuery.projectId,\n          tableId: this.id\n        }\n      })\n    }\n  };\n\n  this.bigQuery.makeReq_('POST', '/jobs', null, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var job = that.bigQuery.job(resp.jobReference.jobId);\n    job.metadata = resp;\n\n    callback(null, job, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -723,8 +723,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 474,
-    "codeStart": 482,
+    "line": 476,
+    "codeStart": 484,
     "code": "Table.prototype.getMetadata = function(callback) {\n  var that = this;\n\n  this.makeReq_('GET', '', null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -794,8 +794,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 497,
-    "codeStart": 517,
+    "line": 499,
+    "codeStart": 519,
     "code": "Table.prototype.getRows = function(options, callback) {\n  var that = this;\n\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = {};\n  }\n\n  callback = callback || util.noop;\n\n  this.makeReq_('GET', '/data', options, null, function(err, resp) {\n    if (err) {\n      onComplete(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.pageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.pageToken\n      });\n    }\n\n    if (resp.rows && resp.rows.length > 0 && !that.metadata.schema) {\n      // We don't know the schema for this table yet. Do a quick stat.\n      that.getMetadata(function(err) {\n        if (err) {\n          onComplete(err);\n          return;\n        }\n\n        onComplete(null, resp.rows, nextQuery, resp);\n      });\n\n      return;\n    }\n\n    onComplete(null, resp.rows, nextQuery, resp);\n  });\n\n  function onComplete(err, rows, nextQuery, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    rows = Table.mergeSchemaWithRows_(that.metadata.schema, rows || []);\n\n    callback(null, rows, nextQuery, resp);\n  }\n};",
     "ctx": {
       "type": "method",
@@ -874,8 +874,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 570,
-    "codeStart": 620,
+    "line": 572,
+    "codeStart": 622,
     "code": "Table.prototype.import = function(source, metadata, callback) {\n  var that = this;\n\n  if (util.is(metadata, 'function')) {\n    callback = metadata;\n    metadata = {};\n  }\n\n  callback = callback || util.noop;\n  metadata = metadata || {};\n\n  var formats = {\n    csv: 'CSV',\n    json: 'NEWLINE_DELIMITED_JSON'\n  };\n\n  if (util.is(source, 'string')) {\n    // A path to a file was given. If a sourceFormat wasn't specified, try to\n    // find a match from the file's extension.\n    var format = formats[path.extname(source).substr(1).toLowerCase()];\n    if (!metadata.sourceFormat && format) {\n      metadata.sourceFormat = format;\n    }\n\n    // Read the file into a new write stream.\n    return fs.createReadStream(source)\n      .pipe(this.createWriteStream(metadata))\n      .on('error', function(err, resp) {\n        callback(err, null, resp);\n      })\n      .on('complete', function(resp) {\n        // TODO(ryanseys): Does this have to create a job object?\n        callback(null, resp, resp);\n      });\n  }\n\n  var body = {\n    configuration: {\n      load: {\n        destinationTable: {\n          projectId: this.bigQuery.projectId,\n          datasetId: this.dataset.id,\n          tableId: this.id\n        }\n      }\n    }\n  };\n\n  extend(true, body.configuration.load, metadata, {\n    sourceUris: util.arrayize(source).map(function(src) {\n      if (!(src instanceof File)) {\n        throw new Error('Source must be a File object.');\n      }\n\n      // If no explicit format was provided, attempt to find a match from\n      // the file's extension. If no match, don't set, and default upstream\n      // to CSV.\n      var format = formats[path.extname(src.name).substr(1).toLowerCase()];\n      if (!metadata.sourceFormat && format) {\n        body.configuration.load.sourceFormat = format;\n      }\n\n      return 'gs://' + src.bucket.name + '/' + src.name;\n    })\n  });\n\n  this.bigQuery.makeReq_('POST', '/jobs', null, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var job = that.bigQuery.job(resp.jobReference.jobId);\n    job.metadata = resp;\n\n    callback(null, job, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -932,8 +932,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 699,
-    "codeStart": 752,
+    "line": 701,
+    "codeStart": 754,
     "code": "Table.prototype.insert = function(rows, callback) {\n  var body = {\n    rows: util.arrayize(rows || []).map(function(row) {\n      var rowObject = {};\n      // Use the stringified contents of the row as a unique insert ID.\n      var md5 = crypto.createHash('md5');\n      md5.update(JSON.stringify(row));\n      rowObject.insertId = md5.digest('hex');\n      rowObject.json = row;\n      return rowObject;\n    })\n  };\n\n  this.makeReq_('POST', '/insertAll', null, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var failedToInsert = (resp.insertErrors || []).map(function(insertError) {\n      return {\n        errors: insertError.errors.map(function(error) {\n          return {\n            message: error.message,\n            reason: error.reason\n          };\n        }),\n        row: body.rows[insertError.index].json\n      };\n    });\n\n    callback(null, failedToInsert, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -955,8 +955,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 787,
-    "codeStart": 792,
+    "line": 789,
+    "codeStart": 794,
     "code": "Table.prototype.query = function(query, callback) {\n  return this.dataset.query(query, callback);\n};",
     "ctx": {
       "type": "method",
@@ -1055,8 +1055,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 796,
-    "codeStart": 819,
+    "line": 798,
+    "codeStart": 821,
     "code": "Table.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n\n  if (metadata.name) {\n    metadata.friendlyName = metadata.name;\n    delete metadata.name;\n  }\n\n  if (util.is(metadata.schema, 'string')) {\n    metadata.schema = Table.createSchemaFromString_(metadata.schema);\n  }\n\n  this.makeReq_('PUT', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1151,8 +1151,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 843,
-    "codeStart": 855,
+    "line": 845,
+    "codeStart": 857,
     "code": "Table.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/tables/' + this.id + path;\n  this.dataset.makeReq_(method, path, query, body, callback);\n};\n\nmodule.exports = Table;",
     "ctx": {
       "type": "method",

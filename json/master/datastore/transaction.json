@@ -151,8 +151,8 @@
       },
       {
         "type": "example",
-        "string": "// This is how to create a transaction object directly using this Transaction\n// class. The following transaction object is created for use in the examples\n// in this file below.\nvar dataset = gcloud.datastore.dataset();\nvar Transaction = require('gcloud/lib/datastore/transaction');\nvar transaction = new Transaction(dataset, 'my-project-id');\ntransaction.id = '1234'; // Give the transaction an ID.",
-        "html": "<p>// This is how to create a transaction object directly using this Transaction<br />// class. The following transaction object is created for use in the examples<br />// in this file below.<br />var dataset = gcloud.datastore.dataset();<br />var Transaction = require(&#39;gcloud/lib/datastore/transaction&#39;);<br />var transaction = new Transaction(dataset, &#39;my-project-id&#39;);<br />transaction.id = &#39;1234&#39;; // Give the transaction an ID.</p>"
+        "string": "// This is how to create a transaction object directly using this Transaction\n// class. The following transaction object is created for use in the examples\n// in this file below.\nvar dataset = gcloud.datastore.dataset({ projectId: 'project-id' });\nvar Transaction = require('gcloud/lib/datastore/transaction');\nvar transaction = new Transaction(dataset, 'my-project-id');\ntransaction.id = '1234'; // Give the transaction an ID.",
+        "html": "<p>// This is how to create a transaction object directly using this Transaction<br />// class. The following transaction object is created for use in the examples<br />// in this file below.<br />var dataset = gcloud.datastore.dataset({ projectId: &#39;project-id&#39; });<br />var Transaction = require(&#39;gcloud/lib/datastore/transaction&#39;);<br />var transaction = new Transaction(dataset, &#39;my-project-id&#39;);<br />transaction.id = &#39;1234&#39;; // Give the transaction an ID.</p>"
       }
     ],
     "description": {

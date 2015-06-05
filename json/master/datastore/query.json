@@ -121,8 +121,8 @@
       },
       {
         "type": "example",
-        "string": "var dataset = gcloud.datastore.dataset();\n\n// If your dataset was scoped to a namespace at initialization, your query\n// will likewise be scoped to that namespace.\nvar query = dataset.createQuery('Lion');\n\n// However, you may override the namespace per query.\nvar query = dataset.createQuery('AnimalNamespace', 'Lion');\n\n// You may also remove the namespace altogether.\nvar query = dataset.createQuery(null, 'Lion');",
-        "html": "<p>var dataset = gcloud.datastore.dataset();</p><p>// If your dataset was scoped to a namespace at initialization, your query<br />// will likewise be scoped to that namespace.<br />var query = dataset.createQuery(&#39;Lion&#39;);</p><p>// However, you may override the namespace per query.<br />var query = dataset.createQuery(&#39;AnimalNamespace&#39;, &#39;Lion&#39;);</p><p>// You may also remove the namespace altogether.<br />var query = dataset.createQuery(null, &#39;Lion&#39;);</p>"
+        "string": "var dataset = gcloud.datastore.dataset({\n  projectId: 'grape-spaceship-123'\n});\n\n// If your dataset was scoped to a namespace at initialization, your query\n// will likewise be scoped to that namespace.\nvar query = dataset.createQuery('Lion');\n\n// However, you may override the namespace per query.\nvar query = dataset.createQuery('AnimalNamespace', 'Lion');\n\n// You may also remove the namespace altogether.\nvar query = dataset.createQuery(null, 'Lion');",
+        "html": "<p>var dataset = gcloud.datastore.dataset({<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>// If your dataset was scoped to a namespace at initialization, your query<br />// will likewise be scoped to that namespace.<br />var query = dataset.createQuery(&#39;Lion&#39;);</p><p>// However, you may override the namespace per query.<br />var query = dataset.createQuery(&#39;AnimalNamespace&#39;, &#39;Lion&#39;);</p><p>// You may also remove the namespace altogether.<br />var query = dataset.createQuery(null, &#39;Lion&#39;);</p>"
       }
     ],
     "description": {
@@ -136,7 +136,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 31,
-    "codeStart": 59,
+    "codeStart": 61,
     "code": "function Query(namespace, kinds) {\n  if (!kinds) {\n    kinds = namespace;\n    namespace = null;\n  }\n\n  this.namespace = namespace || null;\n  this.kinds = kinds;\n\n  this.filters = [];\n  this.orders = [];\n  this.groupByVal = [];\n  this.selectVal = [];\n\n  // pagination\n  this.startVal = null;\n  this.endVal = null;\n  this.limitVal = -1;\n  this.offsetVal = -1;\n}",
     "ctx": {
       "type": "constructor",
@@ -202,8 +202,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 80,
-    "codeStart": 103,
+    "line": 82,
+    "codeStart": 105,
     "code": "Query.prototype.filter = function(filter, value) {\n  // TODO: Add filter validation.\n  var query = extend(new Query(), this);\n  filter = filter.trim();\n  var fieldName = filter.replace(/[>|<|=|>=|<=]*$/, '').trim();\n  var op = filter.substr(fieldName.length, filter.length).trim();\n  query.filters = query.filters || [];\n  query.filters.push({\n    name: fieldName,\n    op: op,\n    val: value\n  });\n  return query;\n};",
     "ctx": {
       "type": "method",
@@ -259,8 +259,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 118,
-    "codeStart": 129,
+    "line": 120,
+    "codeStart": 131,
     "code": "Query.prototype.hasAncestor = function(key) {\n  var query = extend(new Query(), this);\n  query.filters.push({ name: '__key__', op: 'HAS_ANCESTOR', val: key });\n  return query;\n};",
     "ctx": {
       "type": "method",
@@ -316,8 +316,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 135,
-    "codeStart": 151,
+    "line": 137,
+    "codeStart": 153,
     "code": "Query.prototype.order = function(property) {\n  var query = extend(new Query(), this);\n  var sign = '+';\n  if (property[0] === '-' || property[0] === '+') {\n    sign = property[0];\n    property = property.substr(1);\n  }\n  query.orders = query.orders || [];\n  query.orders.push({ name: property, sign: sign });\n  return query;\n};",
     "ctx": {
       "type": "method",
@@ -373,8 +373,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 163,
-    "codeStart": 172,
+    "line": 165,
+    "codeStart": 174,
     "code": "Query.prototype.groupBy = function(fieldNames) {\n  var query = extend(new Query(), this);\n  query.groupByVal = util.arrayize(fieldNames);\n  return query;\n};",
     "ctx": {
       "type": "method",
@@ -431,8 +431,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 178,
-    "codeStart": 196,
+    "line": 180,
+    "codeStart": 198,
     "code": "Query.prototype.select = function(fieldNames) {\n  var query = extend(new Query(), this);\n  query.selectVal = util.arrayize(fieldNames);\n  return query;\n};",
     "ctx": {
       "type": "method",
@@ -488,8 +488,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 202,
-    "codeStart": 216,
+    "line": 204,
+    "codeStart": 218,
     "code": "Query.prototype.start = function(start) {\n  var query = extend(new Query(), this);\n  query.startVal = start;\n  return query;\n};",
     "ctx": {
       "type": "method",
@@ -545,8 +545,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 222,
-    "codeStart": 236,
+    "line": 224,
+    "codeStart": 238,
     "code": "Query.prototype.end = function(end) {\n  var query = extend(new Query(), this);\n  query.endVal = end;\n  return query;\n};",
     "ctx": {
       "type": "method",
@@ -602,8 +602,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 242,
-    "codeStart": 254,
+    "line": 244,
+    "codeStart": 256,
     "code": "Query.prototype.limit = function(n) {\n  var query = extend(new Query(), this);\n  query.limitVal = n;\n  return query;\n};",
     "ctx": {
       "type": "method",
@@ -659,8 +659,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 260,
-    "codeStart": 272,
+    "line": 262,
+    "codeStart": 274,
     "code": "Query.prototype.offset = function(n) {\n  var query = extend(new Query(), this);\n  query.offsetVal = n;\n  return query;\n};\n\nmodule.exports = Query;",
     "ctx": {
       "type": "method",

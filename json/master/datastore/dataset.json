@@ -358,7 +358,7 @@
     "ignore": false,
     "line": 65,
     "codeStart": 100,
-    "code": "function Dataset(options) {\n  if (!(this instanceof Dataset)) {\n    return new Dataset(options);\n  }\n\n  options = options || {};\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    customEndpoint: typeof options.apiEndpoint !== 'undefined',\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.apiEndpoint = Dataset.determineApiEndpoint_(options);\n  this.namespace = options.namespace;\n  this.projectId = options.projectId;\n}\n\nnodeutil.inherits(Dataset, DatastoreRequest);",
+    "code": "function Dataset(options) {\n  if (!(this instanceof Dataset)) {\n    return new Dataset(options);\n  }\n\n  options = options || {};\n\n  if (!options.projectId) {\n    throw util.missingProjectIdError;\n  }\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    customEndpoint: typeof options.apiEndpoint !== 'undefined',\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.apiEndpoint = Dataset.determineApiEndpoint_(options);\n  this.namespace = options.namespace;\n  this.projectId = options.projectId;\n}\n\nnodeutil.inherits(Dataset, DatastoreRequest);",
     "ctx": {
       "type": "constructor",
       "name": "Dataset",
@@ -412,8 +412,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 122,
-    "codeStart": 132,
+    "line": 126,
+    "codeStart": 136,
     "code": "Dataset.determineApiEndpoint_ = function(options) {\n  var apiEndpoint = 'https://www.googleapis.com';\n  var trailingSlashes = new RegExp('/*$');\n\n  if (options.apiEndpoint) {\n    apiEndpoint = options.apiEndpoint;\n  } else if (process.env.DATASTORE_HOST) {\n    apiEndpoint = process.env.DATASTORE_HOST;\n  }\n\n  if (apiEndpoint.indexOf('http') !== 0) {\n    apiEndpoint = 'http://' + apiEndpoint;\n  }\n\n  return apiEndpoint.replace(trailingSlashes, '');\n};",
     "ctx": {
       "type": "method",
@@ -505,8 +505,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 149,
-    "codeStart": 180,
+    "line": 153,
+    "codeStart": 184,
     "code": "Dataset.prototype.key = function(options) {\n  options = util.is(options, 'object') ? options : {\n    namespace: this.namespace,\n    path: util.arrayize(options)\n  };\n\n  return new entity.Key(options);\n};",
     "ctx": {
       "type": "method",
@@ -584,8 +584,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 189,
-    "codeStart": 202,
+    "line": 193,
+    "codeStart": 206,
     "code": "Dataset.prototype.createQuery = function(namespace, kind) {\n  if (arguments.length === 1) {\n    kind = util.arrayize(namespace);\n    namespace = this.namespace;\n  }\n\n  return new Query(namespace, util.arrayize(kind));\n};",
     "ctx": {
       "type": "method",
@@ -648,8 +648,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 211,
-    "codeStart": 237,
+    "line": 215,
+    "codeStart": 241,
     "code": "Dataset.prototype.runInTransaction = function(fn, callback) {\n  var newTransaction = this.createTransaction_();\n\n  newTransaction.begin_(function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    fn(newTransaction, newTransaction.commit_.bind(newTransaction, callback));\n  });\n};",
     "ctx": {
       "type": "method",
@@ -692,8 +692,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 250,
-    "codeStart": 256,
+    "line": 254,
+    "codeStart": 260,
     "code": "Dataset.prototype.createTransaction_ = function() {\n  return new Transaction(this, this.projectId);\n};\n\nmodule.exports = Dataset;",
     "ctx": {
       "type": "method",

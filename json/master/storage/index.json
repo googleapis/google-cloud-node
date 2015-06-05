@@ -263,7 +263,7 @@
     "ignore": false,
     "line": 59,
     "codeStart": 79,
-    "code": "function Storage(options) {\n  if (!(this instanceof Storage)) {\n    return new Storage(options);\n  }\n\n  options = options || {};\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId = options.projectId;\n}",
+    "code": "function Storage(options) {\n  if (!(this instanceof Storage)) {\n    return new Storage(options);\n  }\n\n  options = options || {};\n\n  if (!options.projectId) {\n    throw util.missingProjectIdError;\n  }\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId = options.projectId;\n}",
     "ctx": {
       "type": "constructor",
       "name": "Storage",
@@ -287,8 +287,8 @@
       },
       {
         "type": "example",
-        "string": "var storage = gcloud.storage();\nvar albums = storage.bucket('albums');\n\n//-\n// Make all of the files currently in a bucket publicly readable.\n//-\nalbums.acl.add({\n  scope: 'allUsers',\n  role: storage.acl.READER_ROLE\n}, function(err, aclObject) {});\n\n//-\n// Make any new objects added to a bucket publicly readable.\n//-\nalbums.acl.default.add({\n  scope: 'allUsers',\n  role: storage.acl.READER_ROLE\n}, function(err, aclObject) {});\n\n//-\n// Grant a user ownership permissions to a bucket.\n//-\n\nalbums.acl.add({\n  scope: 'user-useremail@example.com',\n  role: storage.acl.OWNER_ROLE\n}, function(err, aclObject) {});",
-        "html": "<p>var storage = gcloud.storage();<br />var albums = storage.bucket(&#39;albums&#39;);</p><p>//-<br />// Make all of the files currently in a bucket publicly readable.<br />//-<br />albums.acl.add({<br />  scope: &#39;allUsers&#39;,<br />  role: storage.acl.READER_ROLE<br />}, function(err, aclObject) {});</p><p>//-<br />// Make any new objects added to a bucket publicly readable.<br />//-<br />albums.acl.default.add({<br />  scope: &#39;allUsers&#39;,<br />  role: storage.acl.READER_ROLE<br />}, function(err, aclObject) {});</p><p>//-<br />// Grant a user ownership permissions to a bucket.<br />//-</p><p>albums.acl.add({<br />  scope: &#39;user-useremail@example.com&#39;,<br />  role: storage.acl.OWNER_ROLE<br />}, function(err, aclObject) {});</p>"
+        "string": "var storage = gcloud.storage({\n  projectId: 'grape-spaceship-123'\n});\n\nvar albums = storage.bucket('albums');\n\n//-\n// Make all of the files currently in a bucket publicly readable.\n//-\nalbums.acl.add({\n  scope: 'allUsers',\n  role: storage.acl.READER_ROLE\n}, function(err, aclObject) {});\n\n//-\n// Make any new objects added to a bucket publicly readable.\n//-\nalbums.acl.default.add({\n  scope: 'allUsers',\n  role: storage.acl.READER_ROLE\n}, function(err, aclObject) {});\n\n//-\n// Grant a user ownership permissions to a bucket.\n//-\n\nalbums.acl.add({\n  scope: 'user-useremail@example.com',\n  role: storage.acl.OWNER_ROLE\n}, function(err, aclObject) {});",
+        "html": "<p>var storage = gcloud.storage({<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>var albums = storage.bucket(&#39;albums&#39;);</p><p>//-<br />// Make all of the files currently in a bucket publicly readable.<br />//-<br />albums.acl.add({<br />  scope: &#39;allUsers&#39;,<br />  role: storage.acl.READER_ROLE<br />}, function(err, aclObject) {});</p><p>//-<br />// Make any new objects added to a bucket publicly readable.<br />//-<br />albums.acl.default.add({<br />  scope: &#39;allUsers&#39;,<br />  role: storage.acl.READER_ROLE<br />}, function(err, aclObject) {});</p><p>//-<br />// Grant a user ownership permissions to a bucket.<br />//-</p><p>albums.acl.add({<br />  scope: &#39;user-useremail@example.com&#39;,<br />  role: storage.acl.OWNER_ROLE<br />}, function(err, aclObject) {});</p>"
       }
     ],
     "description": {
@@ -301,8 +301,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 96,
-    "codeStart": 142,
+    "line": 100,
+    "codeStart": 149,
     "code": "Storage.acl = {\n  OWNER_ROLE: 'OWNER',\n  READER_ROLE: 'READER',\n  WRITER_ROLE: 'WRITER'\n};\n\nStorage.prototype.acl = Storage.acl;",
     "ctx": {
       "type": "property",
@@ -345,8 +345,8 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json'\n});\n\nvar storage = gcloud.storage();\n\nvar albums = storage.bucket('albums');\nvar photos = storage.bucket('photos');",
-        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p><p>var storage = gcloud.storage();</p><p>var albums = storage.bucket(&#39;albums&#39;);<br />var photos = storage.bucket(&#39;photos&#39;);</p>"
+        "string": "var gcloud = require('gcloud')({\n  projectId: 'grape-spaceship-123',\n  keyFilename: '/path/to/keyfile.json'\n});\n\nvar storage = gcloud.storage();\n\nvar albums = storage.bucket('albums');\nvar photos = storage.bucket('photos');",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  projectId: &#39;grape-spaceship-123&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p><p>var storage = gcloud.storage();</p><p>var albums = storage.bucket(&#39;albums&#39;);<br />var photos = storage.bucket(&#39;photos&#39;);</p>"
       }
     ],
     "description": {
@@ -359,8 +359,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 150,
-    "codeStart": 166,
+    "line": 157,
+    "codeStart": 174,
     "code": "Storage.prototype.bucket = function(name) {\n  return new Bucket(this, name);\n};",
     "ctx": {
       "type": "method",
@@ -438,8 +438,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 170,
-    "codeStart": 207,
+    "line": 178,
+    "codeStart": 215,
     "code": "Storage.prototype.createBucket = function(name, metadata, callback) {\n  var self = this;\n  if (!name) {\n    throw new Error('A name is required to create a bucket.');\n  }\n  if (!callback) {\n    callback = metadata;\n    metadata = {};\n  }\n  var query = {\n    project: this.projectId\n  };\n  var body = extend(metadata, {\n    name: name\n  });\n\n  this.makeReq_('POST', '', query, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n    var bucket = self.bucket(name);\n    bucket.metadata = resp;\n    callback(null, bucket, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -523,8 +523,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 234,
-    "codeStart": 268,
+    "line": 242,
+    "codeStart": 276,
     "code": "Storage.prototype.getBuckets = function(query, callback) {\n  var that = this;\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n  query.project = query.project || this.projectId;\n  this.makeReq_('GET', '', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n    var buckets = (resp.items || []).map(function(item) {\n      var bucket = that.bucket(item.id);\n      bucket.metadata = item;\n      return bucket;\n    });\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, { pageToken: resp.nextPageToken });\n    }\n    callback(null, buckets, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -619,8 +619,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 293,
-    "codeStart": 305,
+    "line": 301,
+    "codeStart": 313,
     "code": "Storage.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: STORAGE_BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};\n\nmodule.exports = Storage;",
     "ctx": {
       "type": "method",

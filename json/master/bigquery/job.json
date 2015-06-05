@@ -111,8 +111,8 @@
       },
       {
         "type": "example",
-        "string": "var bigquery = gcloud.bigquery();\nvar Job = require('gcloud/lib/bigquery/job');\nvar job = new Job(bigquery, 'job-id');",
-        "html": "<p>var bigquery = gcloud.bigquery();<br />var Job = require(&#39;gcloud/lib/bigquery/job&#39;);<br />var job = new Job(bigquery, &#39;job-id&#39;);</p>"
+        "string": "var bigquery = gcloud.bigquery({ projectId: 'grape-spaceship-123' });\nvar Job = require('gcloud/lib/bigquery/job');\nvar job = new Job(bigquery, 'job-id');",
+        "html": "<p>var bigquery = gcloud.bigquery({ projectId: &#39;grape-spaceship-123&#39; });<br />var Job = require(&#39;gcloud/lib/bigquery/job&#39;);<br />var job = new Job(bigquery, &#39;job-id&#39;);</p>"
       }
     ],
     "description": {

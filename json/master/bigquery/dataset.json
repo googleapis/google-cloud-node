@@ -258,8 +258,8 @@
       },
       {
         "type": "example",
-        "string": "var tableConfig = {\n  id: 'institution_data',\n\n  // From the data.gov CSV dataset (http://goo.gl/kSE7z6):\n  schema: 'UNITID,INSTNM,ADDR,CITY,STABBR,ZIP,FIPS,OBEREG,CHFNM,...'\n};\n\nvar bigquery = gcloud.bigquery();\nvar dataset = bigquery.dataset();\ndataset.createTable(tableConfig, function(err, table, apiResponse) {});",
-        "html": "<p>var tableConfig = {<br />  id: &#39;institution_data&#39;,</p><p>  // From the data.gov CSV dataset (<a href=\"http://goo.gl/kSE7z6\">http://goo.gl/kSE7z6</a>):<br />  schema: &#39;UNITID,INSTNM,ADDR,CITY,STABBR,ZIP,FIPS,OBEREG,CHFNM,...&#39;<br />};</p><p>var bigquery = gcloud.bigquery();<br />var dataset = bigquery.dataset();<br />dataset.createTable(tableConfig, function(err, table, apiResponse) {});</p>"
+        "string": "var tableConfig = {\n  id: 'institution_data',\n\n  // From the data.gov CSV dataset (http://goo.gl/kSE7z6):\n  schema: 'UNITID,INSTNM,ADDR,CITY,STABBR,ZIP,FIPS,OBEREG,CHFNM,...'\n};\n\nvar bigquery = gcloud.bigquery({\n  projectId: 'grape-spaceship-123'\n});\nvar dataset = bigquery.dataset();\n\ndataset.createTable(tableConfig, function(err, table, apiResponse) {});",
+        "html": "<p>var tableConfig = {<br />  id: &#39;institution_data&#39;,</p><p>  // From the data.gov CSV dataset (<a href=\"http://goo.gl/kSE7z6\">http://goo.gl/kSE7z6</a>):<br />  schema: &#39;UNITID,INSTNM,ADDR,CITY,STABBR,ZIP,FIPS,OBEREG,CHFNM,...&#39;<br />};</p><p>var bigquery = gcloud.bigquery({<br />  projectId: &#39;grape-spaceship-123&#39;<br />});<br />var dataset = bigquery.dataset();</p><p>dataset.createTable(tableConfig, function(err, table, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -273,7 +273,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 55,
-    "codeStart": 80,
+    "codeStart": 83,
     "code": "Dataset.prototype.createTable = function(options, callback) {\n  var that = this;\n\n  extend(true, options, {\n    tableReference: {\n      datasetId: this.id,\n      projectId: this.bigQuery.projectId,\n      tableId: options.id\n    }\n  });\n\n  if (util.is(options.schema, 'string')) {\n    options.schema = Table.createSchemaFromString_(options.schema);\n  }\n\n  delete options.id;\n\n  this.makeReq_('POST', '/tables', null, options, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var table = that.table(resp.tableReference.tableId);\n    table.metadata = resp;\n\n    callback(null, table, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -343,8 +343,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 110,
-    "codeStart": 129,
+    "line": 113,
+    "codeStart": 132,
     "code": "Dataset.prototype.delete = function(options, callback) {\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  var query = {\n    deleteContents: !!options.force\n  };\n\n  this.makeReq_('DELETE', '', query, null, callback);\n};",
     "ctx": {
       "type": "method",
@@ -386,8 +386,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 142,
-    "codeStart": 150,
+    "line": 145,
+    "codeStart": 153,
     "code": "Dataset.prototype.getMetadata = function(callback) {\n  var that = this;\n  this.makeReq_('GET', '', null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -471,8 +471,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 164,
-    "codeStart": 178,
+    "line": 167,
+    "codeStart": 181,
     "code": "Dataset.prototype.getTables = function(query, callback) {\n  var that = this;\n\n  if (util.is(query, 'function')) {\n    callback = query;\n    query = {};\n  }\n\n  query = query || {};\n\n  this.makeReq_('GET', '/tables', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var tables = (resp.tables || []).map(function(tableObject) {\n      var table = that.table(tableObject.id);\n      table.metadata = tableObject;\n      return table;\n    });\n\n    callback(null, tables, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -494,8 +494,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 212,
-    "codeStart": 217,
+    "line": 215,
+    "codeStart": 220,
     "code": "Dataset.prototype.query = function(options, callback) {\n  if (util.is(options, 'string')) {\n    options = {\n      query: options\n    };\n  }\n\n  options = extend(true, {}, options, {\n    defaultDataset: {\n      datasetId: this.id\n    }\n  });\n\n  return this.bigQuery.query(options, callback);\n};",
     "ctx": {
       "type": "method",
@@ -551,8 +551,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 233,
-    "codeStart": 246,
+    "line": 236,
+    "codeStart": 249,
     "code": "Dataset.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n\n  this.makeReq_('PATCH', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -608,8 +608,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 261,
-    "codeStart": 270,
+    "line": 264,
+    "codeStart": 273,
     "code": "Dataset.prototype.table = function(id) {\n  return new Table(this, id);\n};",
     "ctx": {
       "type": "method",
@@ -704,8 +704,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 274,
-    "codeStart": 286,
+    "line": 277,
+    "codeStart": 289,
     "code": "Dataset.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/datasets/' + this.id + path;\n  this.bigQuery.makeReq_(method, path, query, body, callback);\n};\n\nmodule.exports = Dataset;",
     "ctx": {
       "type": "method",

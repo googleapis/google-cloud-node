@@ -275,7 +275,7 @@
     "ignore": false,
     "line": 56,
     "codeStart": 80,
-    "code": "function PubSub(options) {\n  options = options || {};\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId = options.projectId;\n  this.projectName = 'projects/' + this.projectId;\n}",
+    "code": "function PubSub(options) {\n  options = options || {};\n\n  if (!options.projectId) {\n    throw util.missingProjectIdError;\n  }\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId = options.projectId;\n  this.projectName = 'projects/' + this.projectId;\n}",
     "ctx": {
       "type": "constructor",
       "name": "PubSub",
@@ -356,8 +356,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 94,
-    "codeStart": 115,
+    "line": 98,
+    "codeStart": 119,
     "code": "PubSub.prototype.getTopics = function(query, callback) {\n  var self = this;\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n  var path = this.projectName + '/topics';\n  this.makeReq_('GET', path, query, true, function(err, result) {\n    if (err) {\n      callback(err, null, null, result);\n      return;\n    }\n    var topics = (result.topics || []).map(function(item) {\n      return new Topic(self, {\n        name: item.name\n      });\n    });\n    var nextQuery = null;\n    if (result.nextPageToken) {\n      nextQuery = query;\n      nextQuery.pageToken = result.nextPageToken;\n    }\n    callback(null, topics, nextQuery, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -413,8 +413,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 141,
-    "codeStart": 152,
+    "line": 145,
+    "codeStart": 156,
     "code": "PubSub.prototype.createTopic = function(name, callback) {\n  callback = callback || util.noop;\n  var topic = this.topic(name);\n  var path = this.projectName + '/topics/' + name;\n  this.makeReq_('PUT', path, null, null, function(err, result) {\n    if (err) {\n      callback(err, null, result);\n      return;\n    }\n    callback(null, topic, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -506,8 +506,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 165,
-    "codeStart": 181,
+    "line": 169,
+    "codeStart": 185,
     "code": "PubSub.prototype.topic = function(name, options) {\n  if (!name) {\n    throw new Error('A name must be specified for a new topic.');\n  }\n  options = options || {};\n  return new Topic(this, {\n    name: name,\n    autoCreate: options.autoCreate\n  });\n};",
     "ctx": {
       "type": "method",
@@ -591,8 +591,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 192,
-    "codeStart": 216,
+    "line": 196,
+    "codeStart": 220,
     "code": "PubSub.prototype.getSubscriptions = function(query, callback) {\n  var self = this;\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n\n  var path = this.projectName + '/subscriptions';\n  this.makeReq_('GET', path, query, true, function(err, result) {\n    if (err) {\n      callback(err, null, null, result);\n      return;\n    }\n\n    var subscriptions = (result.subscriptions || []).map(function(item) {\n      return new Subscription(self, {\n        name: item.name\n      });\n    });\n    var nextQuery = null;\n    if (result.nextPageToken) {\n      nextQuery = query;\n      nextQuery.pageToken = result.nextPageToken;\n    }\n    callback(null, subscriptions, nextQuery, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -687,8 +687,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 244,
-    "codeStart": 256,
+    "line": 248,
+    "codeStart": 260,
     "code": "PubSub.prototype.makeReq_ = function(method, path, q, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: q,\n    uri: PUBSUB_BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};\n\nmodule.exports = PubSub;",
     "ctx": {
       "type": "method",
