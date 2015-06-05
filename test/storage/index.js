@@ -31,7 +31,13 @@ describe('Storage', function() {
     storage = new Storage({ projectId: 'project-id' });
   });
 
-  describe('initialization', function() {
+  describe('instantiation', function() {
+    it('should throw if a projectId is not specified', function() {
+      assert.throws(function() {
+        new Storage();
+      }, /Sorry, we cannot connect/);
+    });
+
     it('should set the project id', function() {
       assert.equal(storage.projectId, 'project-id');
     });

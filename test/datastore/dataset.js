@@ -28,8 +28,14 @@ describe('Dataset', function() {
   });
 
   describe('instantiation', function() {
+    it('should throw if a projectId is not specified', function() {
+      assert.throws(function() {
+        new Dataset();
+      }, /Sorry, we cannot connect/);
+    });
+
     it('should set default API connection details', function() {
-      var options = { a: 'b', c: 'd' };
+      var options = { a: 'b', c: 'd', projectId: 'project-id' };
       var mockApiEndpoint = 'http://localhost:8080';
 
       Dataset.determineApiEndpoint_ = function (opts) {

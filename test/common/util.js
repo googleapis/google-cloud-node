@@ -61,6 +61,10 @@ describe('common/util', function() {
     // Override all util methods, allowing them to be mocked. Overrides are
     // removed before each test.
     Object.keys(util).forEach(function(utilMethod) {
+      if (typeof util[utilMethod] !== 'function') {
+        return;
+      }
+
       util[utilMethod] = function() {
         return (utilOverrides[utilMethod] || util_Cached[utilMethod])
           .apply(this, arguments);
@@ -81,6 +85,16 @@ describe('common/util', function() {
 
   it('should have set correct defaults on Request', function() {
     assert.deepEqual(REQUEST_DEFAULT_CONF, { pool: { maxSockets: Infinity } });
+  });
+
+  it('should export an error for module instantiation errors', function() {
+    var missingProjectIdError = new Error([
+      'Sorry, we cannot connect to Google Cloud Services without a project ID.',
+      'See https://googlecloudplatform.github.io/gcloud-node/#/authorization',
+      'for a detailed guide on creating an authorized connection.'
+    ].join(' '));
+
+    assert.deepEqual(util.missingProjectIdError, missingProjectIdError);
   });
 
   describe('arrayize', function() {
