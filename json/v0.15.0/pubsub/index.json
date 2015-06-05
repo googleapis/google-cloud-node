@@ -1,0 +1,981 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
+  },
+  {
+    "tags": [
+      {
+        "type": "module",
+        "string": "pubsub",
+        "html": "<p>pubsub</p>"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 17,
+    "codeStart": 21,
+    "code": "'use strict';",
+    "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:pubsub/subscription}",
+        "types": [
+          "module:pubsub/subscription"
+        ],
+        "typesDescription": "module:<a href=\"module%3Apubsub%2Fsubscription.html\">pubsub/subscription</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:pubsub/subscription}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 23,
+    "codeStart": 27,
+    "code": "var Subscription = require('./subscription.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Subscription",
+      "value": "require('./subscription.js')",
+      "string": "Subscription"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:pubsub/topic}",
+        "types": [
+          "module:pubsub/topic"
+        ],
+        "typesDescription": "module:<a href=\"module%3Apubsub%2Ftopic.html\">pubsub/topic</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:pubsub/topic}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 29,
+    "codeStart": 33,
+    "code": "var Topic = require('./topic.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Topic",
+      "value": "require('./topic.js')",
+      "string": "Topic"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/util}",
+        "types": [
+          "module:common/util"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 35,
+    "codeStart": 39,
+    "code": "var util = require('../common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "const",
+        "string": "{string} Base URL for Pub/Sub API.",
+        "html": "<p>{string} Base URL for Pub/Sub API.</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 41,
+    "codeStart": 45,
+    "code": "var PUBSUB_BASE_URL = 'https://pubsub.googleapis.com/v1beta2/';",
+    "ctx": {
+      "type": "declaration",
+      "name": "PUBSUB_BASE_URL",
+      "value": "'https://pubsub.googleapis.com/v1beta2/'",
+      "string": "PUBSUB_BASE_URL"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "const",
+        "string": "{array} Required scopes for Pub/Sub API.",
+        "html": "<p>{array} Required scopes for Pub/Sub API.</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 47,
+    "codeStart": 51,
+    "code": "var SCOPES = [\n  'https://www.googleapis.com/auth/pubsub',\n  'https://www.googleapis.com/auth/cloud-platform'\n];",
+    "ctx": {
+      "type": "declaration",
+      "name": "SCOPES",
+      "value": "[",
+      "string": "SCOPES"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "constructor",
+        "string": "",
+        "html": ""
+      },
+      {
+        "type": "alias",
+        "string": "module:pubsub ",
+        "html": "<p>module:pubsub </p>"
+      },
+      {
+        "type": "param",
+        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).\n",
+        "name": "options",
+        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar pubsub = gcloud.pubsub();",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;my-project&#39;<br />});</p><p>var pubsub = gcloud.pubsub();</p>"
+      }
+    ],
+    "description": {
+      "full": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p><p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use<br />it by filling the <a href=\"http://goo.gl/sO0wTu\">Limited Preview application form</a>.</p>",
+      "summary": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p>",
+      "body": "<p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use<br />it by filling the <a href=\"http://goo.gl/sO0wTu\">Limited Preview application form</a>.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": true,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 56,
+    "codeStart": 80,
+    "code": "function PubSub(options) {\n  options = options || {};\n\n  if (!options.projectId) {\n    throw util.missingProjectIdError;\n  }\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId = options.projectId;\n  this.projectName = 'projects/' + this.projectId;\n}",
+    "ctx": {
+      "type": "constructor",
+      "name": "PubSub",
+      "string": "PubSub()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{object=} query - Query object.",
+        "name": "query",
+        "description": "<ul>\n<li>Query object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string=} query.pageToken - Page token.",
+        "name": "query.pageToken",
+        "description": "<ul>\n<li>Page token.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number=} query.pageSize - Max number of results to return.",
+        "name": "query.pageSize",
+        "description": "<ul>\n<li>Max number of results to return.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.\n",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "// Get all topics.\npubsub.getTopics(function(err, topics, nextQuery, apiResponse) {\n  // If `nextQuery` is non-null, there may be more results to fetch. To do\n  // so, run `pubsub.getTopics(nextQuery, callback);`.\n});\n\n// Customize the query.\npubsub.getTopics({\n  pageSize: 3\n}, function(err, topics, nextQuery, apiResponse) {});",
+        "html": "<p>// Get all topics.<br />pubsub.getTopics(function(err, topics, nextQuery, apiResponse) {<br />  // If <code>nextQuery</code> is non-null, there may be more results to fetch. To do<br />  // so, run <code>pubsub.getTopics(nextQuery, callback);</code>.<br />});</p><p>// Customize the query.<br />pubsub.getTopics({<br />  pageSize: 3<br />}, function(err, topics, nextQuery, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a list of the topics registered to your project. You may optionally<br />provide a query object as the first argument to customize the response.</p>",
+      "summary": "<p>Get a list of the topics registered to your project. You may optionally<br />provide a query object as the first argument to customize the response.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 98,
+    "codeStart": 119,
+    "code": "PubSub.prototype.getTopics = function(query, callback) {\n  var self = this;\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n  var path = this.projectName + '/topics';\n  this.makeReq_('GET', path, query, true, function(err, result) {\n    if (err) {\n      callback(err, null, null, result);\n      return;\n    }\n    var topics = (result.topics || []).map(function(item) {\n      return new Topic(self, {\n        name: item.name\n      });\n    });\n    var nextQuery = null;\n    if (result.nextPageToken) {\n      nextQuery = query;\n      nextQuery.pageToken = result.nextPageToken;\n    }\n    callback(null, topics, nextQuery, result);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "PubSub",
+      "cons": "PubSub",
+      "name": "getTopics",
+      "string": "PubSub.prototype.getTopics()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{string} name - Name of the topic.",
+        "name": "name",
+        "description": "<ul>\n<li>Name of the topic.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function.\n",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "pubsub.createTopic('my-new-topic', function(err, topic, apiResponse) {\n  topic.publish('New message!', function(err) {});\n});",
+        "html": "<p>pubsub.createTopic(&#39;my-new-topic&#39;, function(err, topic, apiResponse) {<br />  topic.publish(&#39;New message!&#39;, function(err) {});<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a topic with the given name.</p>",
+      "summary": "<p>Create a topic with the given name.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 145,
+    "codeStart": 156,
+    "code": "PubSub.prototype.createTopic = function(name, callback) {\n  callback = callback || util.noop;\n  var topic = this.topic(name);\n  var path = this.projectName + '/topics/' + name;\n  this.makeReq_('PUT', path, null, null, function(err, result) {\n    if (err) {\n      callback(err, null, result);\n      return;\n    }\n    callback(null, topic, result);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "PubSub",
+      "cons": "PubSub",
+      "name": "createTopic",
+      "string": "PubSub.prototype.createTopic()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "throws",
+        "string": "{Error} If a Topic instance or topic name is not provided.",
+        "types": [
+          "Error"
+        ],
+        "description": "<p>If a Topic instance or topic name is not provided.</p>"
+      },
+      {
+        "type": "throws",
+        "string": "{Error} If a subName is not provided.\n",
+        "types": [
+          "Error"
+        ],
+        "description": "<p>If a subName is not provided. </p>"
+      },
+      {
+        "type": "param",
+        "string": "{module:pubsub/topic|string} - topic - The Topic to create a\n    subscription to.",
+        "name": "-",
+        "description": "<p>topic - The Topic to create a     subscription to.</p>",
+        "types": [
+          "module:pubsub/topic",
+          "string"
+        ],
+        "typesDescription": "module:<a href=\"module%3Apubsub%2Ftopic.html\">pubsub/topic</a>|<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} subName - The name of the subscription.",
+        "name": "subName",
+        "description": "<ul>\n<li>The name of the subscription.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object=} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.ackDeadlineSeconds - The maximum time after receiving\n    a message that you must ack a message before it is redelivered.",
+        "name": "options.ackDeadlineSeconds",
+        "description": "<ul>\n<li>The maximum time after receiving     a message that you must ack a message before it is redelivered.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.autoAck - Automatically acknowledge the message once\n    it's pulled. (default: false)",
+        "name": "options.autoAck",
+        "description": "<ul>\n<li>Automatically acknowledge the message once     it&#39;s pulled. (default: false)</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.interval - Interval in milliseconds to check for new\n    messages. (default: 10)",
+        "name": "options.interval",
+        "description": "<ul>\n<li>Interval in milliseconds to check for new     messages. (default: 10)</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.reuseExisting - If the subscription already exists,\n    reuse it. The options of the existing subscription are not changed. If\n    false, attempting to create a subscription that already exists will fail.\n    (default: false)",
+        "name": "options.reuseExisting",
+        "description": "<ul>\n<li>If the subscription already exists,     reuse it. The options of the existing subscription are not changed. If<br />  false, attempting to create a subscription that already exists will fail.<br />  (default: false)</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.\n",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Subscribe to a topic. (Also see {module:pubsub/topic#subscribe}).\n//-\nvar topic = 'messageCenter';\nvar name = 'newMessages';\n\npubsub.subscribe(topic, name, function(err, subscription, apiResponse) {});\n\n//-\n// Customize the subscription.\n//-\npubsub.subscribe(topic, name, {\n  ackDeadlineSeconds: 90,\n  autoAck: true,\n  interval: 30\n}, function(err, subscription, apiResponse) {});\n\n//-\n// Create a subscription to a topic from another project.\n//-\nvar anotherProject = gcloud.pubsub({\n  projectId: 'another-project'\n});\n\nvar topic = anotherProject.topic('messageCenter');\n\npubsub.subscribe(topic, name, function(err, subscription, apiResponse) {});",
+        "html": "<p>//-<br />// Subscribe to a topic. (Also see {module:pubsub/topic#subscribe}).<br />//-<br />var topic = &#39;messageCenter&#39;;<br />var name = &#39;newMessages&#39;;</p><p>pubsub.subscribe(topic, name, function(err, subscription, apiResponse) {});</p><p>//-<br />// Customize the subscription.<br />//-<br />pubsub.subscribe(topic, name, {<br />  ackDeadlineSeconds: 90,<br />  autoAck: true,<br />  interval: 30<br />}, function(err, subscription, apiResponse) {});</p><p>//-<br />// Create a subscription to a topic from another project.<br />//-<br />var anotherProject = gcloud.pubsub({<br />  projectId: &#39;another-project&#39;<br />});</p><p>var topic = anotherProject.topic(&#39;messageCenter&#39;);</p><p>pubsub.subscribe(topic, name, function(err, subscription, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a subscription to a topic. You may optionally provide an object to<br />customize the subscription.</p><p>Your provided callback will be invoked with an error object if an API error<br />occurred or a {@linkcode module:pubsub/subscription} object.</p>",
+      "summary": "<p>Create a subscription to a topic. You may optionally provide an object to<br />customize the subscription.</p>",
+      "body": "<p>Your provided callback will be invoked with an error object if an API error<br />occurred or a {@linkcode module:pubsub/subscription} object.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 169,
+    "codeStart": 224,
+    "code": "PubSub.prototype.subscribe = function(topic, subName, options, callback) {\n  if (!util.is(topic, 'string') && !(topic instanceof Topic)) {\n    throw new Error('A Topic is required for a new subscription.');\n  }\n\n  if (!util.is(subName, 'string')) {\n    throw new Error('A subscription name is required for a new subscription.');\n  }\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  if (util.is(topic, 'string')) {\n    topic = this.topic(topic);\n  }\n\n  var body = {\n    topic: topic.name\n  };\n\n  if (options.ackDeadlineSeconds) {\n    body.ackDeadlineSeconds = options.ackDeadlineSeconds;\n  }\n\n  var subscription = this.subscription(subName, options);\n\n  this.makeReq_('PUT', subscription.name, null, body, function(err, result) {\n    if (err && !(err.code === 409 && options.reuseExisting)) {\n      callback(err, null, result);\n      return;\n    }\n\n    callback(null, subscription, result);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "PubSub",
+      "cons": "PubSub",
+      "name": "subscribe",
+      "string": "PubSub.prototype.subscribe()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "throws",
+        "string": "{Error} If a name is not provided.\n",
+        "types": [
+          "Error"
+        ],
+        "description": "<p>If a name is not provided. </p>"
+      },
+      {
+        "type": "param",
+        "string": "{string} name - The name of the subscription.",
+        "name": "name",
+        "description": "<ul>\n<li>The name of the subscription.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object=} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.autoAck - Automatically acknowledge the message once\n    it's pulled.",
+        "name": "options.autoAck",
+        "description": "<ul>\n<li>Automatically acknowledge the message once     it&#39;s pulled.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.interval - Interval in milliseconds to check for new\n    messages.",
+        "name": "options.interval",
+        "description": "<ul>\n<li>Interval in milliseconds to check for new     messages.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{module:pubsub/subscription}\n",
+        "types": [
+          "module:pubsub/subscription"
+        ],
+        "typesDescription": "module:<a href=\"module%3Apubsub%2Fsubscription.html\">pubsub/subscription</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:pubsub/subscription}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var subscription = pubsub.subscription('my-existing-subscription');\n\n// Register a listener for `message` events.\nsubscription.on('message', function(message) {\n  // Called every time a message is received.\n  // message.id = ID used to acknowledge its receival.\n  // message.data = Contents of the message.\n  // message.attributes = Attributes of the message.\n});",
+        "html": "<p>var subscription = pubsub.subscription(&#39;my-existing-subscription&#39;);</p><p>// Register a listener for <code>message</code> events.<br />subscription.on(&#39;message&#39;, function(message) {<br />  // Called every time a message is received.<br />  // message.id = ID used to acknowledge its receival.<br />  // message.data = Contents of the message.<br />  // message.attributes = Attributes of the message.<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a Subscription object in reference to an existing subscription. This<br />command by itself will not run any API requests. You will receive a<br />{@linkcode module:pubsub/subscription} object, which will allow you to<br />interact with your subscription.</p>",
+      "summary": "<p>Create a Subscription object in reference to an existing subscription. This<br />command by itself will not run any API requests. You will receive a<br />{@linkcode module:pubsub/subscription} object, which will allow you to<br />interact with your subscription.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 264,
+    "codeStart": 291,
+    "code": "PubSub.prototype.subscription = function(name, options) {\n  if (!name) {\n    throw new Error('The name of a subscription is required.');\n  }\n\n  options = options || {};\n  options.name = name;\n  return new Subscription(this, options);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "PubSub",
+      "cons": "PubSub",
+      "name": "subscription",
+      "string": "PubSub.prototype.subscription()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "throws",
+        "string": "{Error} If a name is not provided.\n",
+        "types": [
+          "Error"
+        ],
+        "description": "<p>If a name is not provided. </p>"
+      },
+      {
+        "type": "param",
+        "string": "{string} name - The name of the topic.",
+        "name": "name",
+        "description": "<ul>\n<li>The name of the topic.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object=} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean=} options.autoCreate - Automatically create topic if it\n    doesn't exist. Note that messages published to a topic with no\n    subscribers will not be delivered.",
+        "name": "options.autoCreate",
+        "description": "<ul>\n<li>Automatically create topic if it     doesn&#39;t exist. Note that messages published to a topic with no<br />  subscribers will not be delivered.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{module:pubsub/topic}\n",
+        "types": [
+          "module:pubsub/topic"
+        ],
+        "typesDescription": "module:<a href=\"module%3Apubsub%2Ftopic.html\">pubsub/topic</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:pubsub/topic}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var topic = pubsub.topic('my-existing-topic');\nvar topic = pubsub.topic('topic-that-maybe-exists', { autoCreate: true });",
+        "html": "<p>var topic = pubsub.topic(&#39;my-existing-topic&#39;);<br />var topic = pubsub.topic(&#39;topic-that-maybe-exists&#39;, { autoCreate: true });</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a Topic object to reference an existing topic.</p>",
+      "summary": "<p>Create a Topic object to reference an existing topic.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 301,
+    "codeStart": 317,
+    "code": "PubSub.prototype.topic = function(name, options) {\n  if (!name) {\n    throw new Error('A name must be specified for a new topic.');\n  }\n  options = options || {};\n  return new Topic(this, {\n    name: name,\n    autoCreate: options.autoCreate\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "PubSub",
+      "cons": "PubSub",
+      "name": "topic",
+      "string": "PubSub.prototype.topic()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{object=} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string|module:pubsub/topic} options.topic - The name of the topic to\n    list subscriptions from.",
+        "name": "options.topic",
+        "description": "<ul>\n<li>The name of the topic to     list subscriptions from.</li>\n</ul>\n",
+        "types": [
+          "string",
+          "module:pubsub/topic"
+        ],
+        "typesDescription": "<code>string</code>|module:<a href=\"module%3Apubsub%2Ftopic.html\">pubsub/topic</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.pageSize - Maximum number of results to return.",
+        "name": "options.pageSize",
+        "description": "<ul>\n<li>Maximum number of results to return.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} options.pageToken - Page token.",
+        "name": "options.pageToken",
+        "description": "<ul>\n<li>Page token.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.\n",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var callback = function(err, subscriptions, nextQuery, apiResponse) {\n  // If `nextQuery` is non-null, there may be more results to fetch. To do\n  // so, run `pubsub.getSubscriptions(nextQuery, callback);`.\n};\n\n//-\n// Get all subscriptions for this project.\n//-\npubsub.getSubscriptions(callback);\n\n//-\n// Customize the query.\n//-\npubsub.getSubscriptions({\n  pageSize: 3\n}, callback);",
+        "html": "<p>var callback = function(err, subscriptions, nextQuery, apiResponse) {<br />  // If <code>nextQuery</code> is non-null, there may be more results to fetch. To do<br />  // so, run <code>pubsub.getSubscriptions(nextQuery, callback);</code>.<br />};</p><p>//-<br />// Get all subscriptions for this project.<br />//-<br />pubsub.getSubscriptions(callback);</p><p>//-<br />// Customize the query.<br />//-<br />pubsub.getSubscriptions({<br />  pageSize: 3<br />}, callback);</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a list of the subscriptions registered to all of your project&#39;s topics.<br />You may optionally provide a query object as the first argument to customize<br />the response.</p><p>Your provided callback will be invoked with an error object if an API error<br />occurred or an array of {@linkcode module:pubsub/subscription} objects.</p><p>To get subscriptions for a topic, see {module:pubsub/topic}.</p>",
+      "summary": "<p>Get a list of the subscriptions registered to all of your project&#39;s topics.<br />You may optionally provide a query object as the first argument to customize<br />the response.</p>",
+      "body": "<p>Your provided callback will be invoked with an error object if an API error<br />occurred or an array of {@linkcode module:pubsub/subscription} objects.</p><p>To get subscriptions for a topic, see {module:pubsub/topic}.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 328,
+    "codeStart": 363,
+    "code": "PubSub.prototype.getSubscriptions = function(options, callback) {\n  var self = this;\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  var topicName;\n\n  if (util.is(options.topic, 'string')) {\n    topicName = options.topic;\n  } else if (options.topic instanceof Topic) {\n    topicName = options.topic.unformattedName;\n  }\n\n  var query = {};\n\n  if (options.pageSize) {\n    query.pageSize = options.pageSize;\n  }\n\n  if (options.pageToken) {\n    query.pageToken = options.pageToken;\n  }\n\n  var apiPath = util.format('{projectPath}{topicPath}/subscriptions', {\n    projectPath: 'projects/' + this.projectId,\n    topicPath: topicName ? '/topics/' + topicName : ''\n  });\n\n  this.makeReq_('GET', apiPath, query, null, function(err, result) {\n    if (err) {\n      callback(err, null, null, result);\n      return;\n    }\n\n    var subscriptions = (result.subscriptions || []).map(function(sub) {\n      return new Subscription(self, {\n        // Depending on if we're using a subscriptions.list or\n        // topics.subscriptions.list API endpoint, we will get back a\n        // Subscription resource or just the name of the subscription.\n        name: sub.name || sub\n      });\n    });\n\n    var nextQuery = null;\n\n    if (result.nextPageToken) {\n      nextQuery = options;\n      nextQuery.pageToken = result.nextPageToken;\n    }\n\n    callback(null, subscriptions, nextQuery, result);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "PubSub",
+      "cons": "PubSub",
+      "name": "getSubscriptions",
+      "string": "PubSub.prototype.getSubscriptions()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "\n",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{string} method - Action.",
+        "name": "method",
+        "description": "<ul>\n<li>Action.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} path - Request path.",
+        "name": "path",
+        "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{*} query - Request query object.",
+        "name": "query",
+        "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{*} body - Request body contents.",
+        "name": "body",
+        "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
+      "summary": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 422,
+    "codeStart": 434,
+    "code": "PubSub.prototype.makeReq_ = function(method, path, q, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: q,\n    uri: PUBSUB_BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};\n\nmodule.exports = PubSub;",
+    "ctx": {
+      "type": "method",
+      "constructor": "PubSub",
+      "cons": "PubSub",
+      "name": "makeReq_",
+      "string": "PubSub.prototype.makeReq_()"
+    }
+  }
+]
