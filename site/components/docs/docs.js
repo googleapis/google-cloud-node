@@ -160,6 +160,7 @@ angular
                   tag.types = $sce.trustAsHtml(tag.types.reduceRight(
                       reduceModules, []).join(', '));
                   tag.optional = tag.types.toString().indexOf('=') > -1;
+                  tag.subparam = tag.name.indexOf('.') > -1;
                   return tag;
                 }),
               returns: obj.tags.filter(function(tag) {

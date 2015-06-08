@@ -554,7 +554,7 @@
       },
       {
         "type": "param",
-        "string": "{function=} callback - The callback function. If omitted, a readable\n    stream instance is returned.\n",
+        "string": "{function=} callback - The callback function. If omitted, a readable\n    stream instance is returned.",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. If omitted, a readable     stream instance is returned.</li>\n</ul>\n",
         "types": [
@@ -562,6 +562,62 @@
         ],
         "typesDescription": "<code>function</code>|<code>undefined</code>",
         "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?Error} callback.err - An error returned while making this request\n    (may be null).",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request     (may be null).</li>\n</ul>\n",
+        "types": [
+          "Error"
+        ],
+        "typesDescription": "<code>Error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{Array} callback.entities - The list of entities returned by this\n    query. Note that this is a single page of entities, not necessarily\n    all of the entities.",
+        "name": "callback.entities",
+        "description": "<ul>\n<li>The list of entities returned by this     query. Note that this is a single page of entities, not necessarily<br />  all of the entities.</li>\n</ul>\n",
+        "types": [
+          "Array"
+        ],
+        "typesDescription": "<code>Array</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{String} callback.endCursor - The end cursor of this current query,\n    which can be used as the starting cursor of the next query.",
+        "name": "callback.endCursor",
+        "description": "<ul>\n<li>The end cursor of this current query,     which can be used as the starting cursor of the next query.</li>\n</ul>\n",
+        "types": [
+          "String"
+        ],
+        "typesDescription": "<code>String</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{Object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "Object"
+        ],
+        "typesDescription": "<code>Object</code>",
+        "optional": false,
         "nullable": false,
         "nonNullable": false,
         "variable": false
@@ -583,7 +639,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 458,
-    "codeStart": 499,
+    "codeStart": 507,
     "code": "DatastoreRequest.prototype.runQuery = function(q, callback) {\n  var that = this;\n  var stream;\n  var resultsToSend = q.limitVal;\n\n  var req = {\n    read_options: {},\n    query: entity.queryToQueryProto(q)\n  };\n\n  if (q.namespace) {\n    req.partition_id = {\n      namespace: q.namespace\n    };\n  }\n\n  if (!util.is(callback, 'function')) {\n    stream = streamEvents(through.obj());\n    stream.once('reading', runQuery);\n    return stream;\n  } else {\n    runQuery();\n  }\n\n  function runQuery() {\n    that.makeReq_('runQuery', req, function(err, resp) {\n      if (err) {\n        if (stream) {\n          stream.emit('error', err, resp);\n          stream.end();\n        } else {\n          callback(err, null, null, resp);\n        }\n        return;\n      }\n\n      var entities = entity.formatArray(resp.batch.entity_result);\n\n      var cursor = '';\n      if (resp.batch.end_cursor) {\n        cursor = resp.batch.end_cursor.toBase64();\n      }\n\n      if (!stream) {\n        callback(null, entities, cursor, resp);\n        return;\n      }\n\n      if (!cursor || entities.length === 0) {\n        stream.end();\n        return;\n      }\n\n      var result;\n      while ((result = entities.shift()) && resultsToSend !== 0) {\n        stream.push(result);\n        resultsToSend--;\n      }\n\n      if (resultsToSend === 0) {\n        stream.end();\n        return;\n      }\n\n      req.query = entity.queryToQueryProto(q.start(cursor).offset(0));\n      runQuery();\n    });\n  }\n};",
     "ctx": {
       "type": "method",
@@ -653,8 +709,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 569,
-    "codeStart": 599,
+    "line": 577,
+    "codeStart": 607,
     "code": "DatastoreRequest.prototype.allocateIds = function(incompleteKey, n, callback) {\n  if (entity.isKeyComplete(incompleteKey)) {\n    throw new Error('An incomplete key should be provided.');\n  }\n\n  var incompleteKeys = [];\n  for (var i = 0; i < n; i++) {\n    incompleteKeys.push(entity.keyToKeyProto(incompleteKey));\n  }\n\n  var req = {\n    key: incompleteKeys\n  };\n\n  this.makeReq_('allocateIds', req, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var keys = (resp.key || []).map(entity.keyFromKeyProto);\n\n    callback(null, keys, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -676,8 +732,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 625,
-    "codeStart": 628,
+    "line": 633,
+    "codeStart": 636,
     "code": "DatastoreRequest.prototype.update = function(entities, callback) {\n  entities = util.arrayize(entities).map(util.propAssign('method', 'update'));\n  this.save(entities, callback);\n};",
     "ctx": {
       "type": "method",
@@ -699,8 +755,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 633,
-    "codeStart": 636,
+    "line": 641,
+    "codeStart": 644,
     "code": "DatastoreRequest.prototype.upsert = function(entities, callback) {\n  entities = util.arrayize(entities).map(util.propAssign('method', 'upsert'));\n  this.save(entities, callback);\n};",
     "ctx": {
       "type": "method",
@@ -776,8 +832,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 641,
-    "codeStart": 664,
+    "line": 649,
+    "codeStart": 672,
     "code": "DatastoreRequest.prototype.makeReq_ = function(method, body, callback) {\n  // TODO: Handle non-HTTP 200 cases.\n  if (!callback) {\n    callback = body;\n    body = {};\n  }\n\n  callback = callback || util.noop;\n\n  // Set properties to indicate if we're in a transaction or not.\n  if (method === 'commit') {\n    if (this.id) {\n      body.mode = MODE_TRANSACTIONAL;\n      body.transaction = this.id;\n    } else {\n      body.mode = MODE_NON_TRANSACTIONAL;\n    }\n  }\n\n  if (method === 'rollback') {\n    body.transaction = this.id;\n  }\n\n  if (method === 'lookup' && this.id) {\n    body.read_options = body.read_options || {};\n    body.read_options.transaction = this.id;\n  }\n\n  var pbKey = method[0].toUpperCase() + method.substr(1);\n  var pbRequest = new pb[pbKey + 'Request'](body).toBuffer();\n  var pbResponse = pb[pbKey + 'Response'];\n\n  var reqOpts = {\n    method: 'POST',\n    uri: util.format('{apiEndpoint}/{path}/{projectId}/{method}', {\n      apiEndpoint: this.apiEndpoint,\n      path: 'datastore/v1beta2/datasets',\n      projectId: this.projectId,\n      method: method\n    }),\n    headers: {\n      'Content-Type': 'application/x-protobuf'\n    }\n  };\n\n  this.makeAuthorizedRequest_(reqOpts, {\n    onAuthorized: function(err, authorizedReqOpts) {\n      if (err) {\n        callback(err, null); // TODO(ryanseys): What goes as third parameter?\n        return;\n      }\n\n      authorizedReqOpts.headers = authorizedReqOpts.headers || {};\n      authorizedReqOpts.headers['Content-Length'] = pbRequest.length;\n\n      var apiRequest = request(authorizedReqOpts);\n\n      apiRequest.on('error', callback);\n\n      apiRequest.on('response', function(resp) {\n        var buffer = new Buffer('');\n        resp.on('data', function(chunk) {\n          buffer = Buffer.concat([buffer, chunk]);\n        });\n        resp.on('end', function() {\n          util.handleResp(null, resp, buffer.toString(), function(err, result) {\n            if (err) {\n              callback(err, null, result);\n              return;\n            }\n            callback(null, pbResponse.decode(buffer), result);\n          });\n        });\n      });\n\n      apiRequest.end(pbRequest);\n    }\n  });\n};\n\nmodule.exports = DatastoreRequest;",
     "ctx": {
       "type": "method",
