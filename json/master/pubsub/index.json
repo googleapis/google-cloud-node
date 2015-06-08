@@ -328,13 +328,69 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error from the API call, may be null.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error from the API call, may be null.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:pubsub/topic[]} callback.topics - The list of topics returned.",
+        "name": "callback.topics",
+        "description": "<ul>\n<li>The list of topics returned.</li>\n</ul>\n",
+        "types": [
+          "Array.<module:pubsub/topic>"
+        ],
+        "typesDescription": "<code>Array</code>.&lt;module:<a href=\"module%3Apubsub%2Ftopic.html\">pubsub/topic</a>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.nextQuery - A query object representing the next\n    page of topics.",
+        "name": "callback.nextQuery",
+        "description": "<ul>\n<li>A query object representing the next     page of topics.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response from the\n    service.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response from the     service.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -357,7 +413,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 98,
-    "codeStart": 119,
+    "codeStart": 125,
     "code": "PubSub.prototype.getTopics = function(query, callback) {\n  var self = this;\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n  var path = this.projectName + '/topics';\n  this.makeReq_('GET', path, query, true, function(err, result) {\n    if (err) {\n      callback(err, null, null, result);\n      return;\n    }\n    var topics = (result.topics || []).map(function(item) {\n      return new Topic(self, {\n        name: item.name\n      });\n    });\n    var nextQuery = null;\n    if (result.nextPageToken) {\n      nextQuery = query;\n      nextQuery.pageToken = result.nextPageToken;\n    }\n    callback(null, topics, nextQuery, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -385,14 +441,56 @@
       },
       {
         "type": "param",
-        "string": "{function=} callback - The callback function.\n",
+        "string": "{function=} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>|<code>undefined</code>",
         "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error from the API call, may be null.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error from the API call, may be null.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:pubsub/topic} callback.topic - The newly created topic.",
+        "name": "callback.topic",
+        "description": "<ul>\n<li>The newly created topic.</li>\n</ul>\n",
+        "types": [
+          "module:pubsub/topic"
+        ],
+        "typesDescription": "module:<a href=\"module%3Apubsub%2Ftopic.html\">pubsub/topic</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response from the\n    service.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response from the     service.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
         "nullable": false,
         "nonNullable": false,
         "variable": false
@@ -413,8 +511,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 145,
-    "codeStart": 156,
+    "line": 151,
+    "codeStart": 166,
     "code": "PubSub.prototype.createTopic = function(name, callback) {\n  callback = callback || util.noop;\n  var topic = this.topic(name);\n  var path = this.projectName + '/topics/' + name;\n  this.makeReq_('PUT', path, null, null, function(err, result) {\n    if (err) {\n      callback(err, null, result);\n      return;\n    }\n    callback(null, topic, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -571,8 +669,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 169,
-    "codeStart": 224,
+    "line": 179,
+    "codeStart": 234,
     "code": "PubSub.prototype.subscribe = function(topic, subName, options, callback) {\n  if (!util.is(topic, 'string') && !(topic instanceof Topic)) {\n    throw new Error('A Topic is required for a new subscription.');\n  }\n\n  if (!util.is(subName, 'string')) {\n    throw new Error('A subscription name is required for a new subscription.');\n  }\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  if (util.is(topic, 'string')) {\n    topic = this.topic(topic);\n  }\n\n  var body = {\n    topic: topic.name\n  };\n\n  if (options.ackDeadlineSeconds) {\n    body.ackDeadlineSeconds = options.ackDeadlineSeconds;\n  }\n\n  var subscription = this.subscription(subName, options);\n\n  this.makeReq_('PUT', subscription.name, null, body, function(err, result) {\n    if (err && !(err.code === 409 && options.reuseExisting)) {\n      callback(err, null, result);\n      return;\n    }\n\n    callback(null, subscription, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -678,8 +776,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 264,
-    "codeStart": 291,
+    "line": 274,
+    "codeStart": 301,
     "code": "PubSub.prototype.subscription = function(name, options) {\n  if (!name) {\n    throw new Error('The name of a subscription is required.');\n  }\n\n  options = options || {};\n  options.name = name;\n  return new Subscription(this, options);\n};",
     "ctx": {
       "type": "method",
@@ -771,8 +869,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 301,
-    "codeStart": 317,
+    "line": 311,
+    "codeStart": 327,
     "code": "PubSub.prototype.topic = function(name, options) {\n  if (!name) {\n    throw new Error('A name must be specified for a new topic.');\n  }\n  options = options || {};\n  return new Topic(this, {\n    name: name,\n    autoCreate: options.autoCreate\n  });\n};",
     "ctx": {
       "type": "method",
@@ -843,13 +941,69 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error from the API call, may be null.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error from the API call, may be null.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:pubsub/subscription[]} callback.subscriptions - The list of\n    subscriptions returned.",
+        "name": "callback.subscriptions",
+        "description": "<ul>\n<li>The list of     subscriptions returned.</li>\n</ul>\n",
+        "types": [
+          "Array.<module:pubsub/subscription>"
+        ],
+        "typesDescription": "<code>Array</code>.&lt;module:<a href=\"module%3Apubsub%2Fsubscription.html\">pubsub/subscription</a>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.nextQuery - A query object representing the next\n    page of topics.",
+        "name": "callback.nextQuery",
+        "description": "<ul>\n<li>A query object representing the next     page of topics.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response from the\n    service.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response from the     service.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -871,8 +1025,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 328,
-    "codeStart": 363,
+    "line": 338,
+    "codeStart": 380,
     "code": "PubSub.prototype.getSubscriptions = function(options, callback) {\n  var self = this;\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  var topicName;\n\n  if (util.is(options.topic, 'string')) {\n    topicName = options.topic;\n  } else if (options.topic instanceof Topic) {\n    topicName = options.topic.unformattedName;\n  }\n\n  var query = {};\n\n  if (options.pageSize) {\n    query.pageSize = options.pageSize;\n  }\n\n  if (options.pageToken) {\n    query.pageToken = options.pageToken;\n  }\n\n  var apiPath = util.format('{projectPath}{topicPath}/subscriptions', {\n    projectPath: 'projects/' + this.projectId,\n    topicPath: topicName ? '/topics/' + topicName : ''\n  });\n\n  this.makeReq_('GET', apiPath, query, null, function(err, result) {\n    if (err) {\n      callback(err, null, null, result);\n      return;\n    }\n\n    var subscriptions = (result.subscriptions || []).map(function(sub) {\n      return new Subscription(self, {\n        // Depending on if we're using a subscriptions.list or\n        // topics.subscriptions.list API endpoint, we will get back a\n        // Subscription resource or just the name of the subscription.\n        name: sub.name || sub\n      });\n    });\n\n    var nextQuery = null;\n\n    if (result.nextPageToken) {\n      nextQuery = options;\n      nextQuery.pageToken = result.nextPageToken;\n    }\n\n    callback(null, subscriptions, nextQuery, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -967,8 +1121,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 422,
-    "codeStart": 434,
+    "line": 439,
+    "codeStart": 451,
     "code": "PubSub.prototype.makeReq_ = function(method, path, q, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: q,\n    uri: PUBSUB_BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};\n\nmodule.exports = PubSub;",
     "ctx": {
       "type": "method",
