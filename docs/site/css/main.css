@@ -747,10 +747,11 @@ ul {
   font-style: italic;
 }
 
-.param-optional .param-description:before {
-  content: "optional. ";
+.param-optional .param-types:after {
+  content: " (optional)";
   color: #aaa;
   font-style: italic;
+  font-size: 85%;
 }
 
 .method-heading {
