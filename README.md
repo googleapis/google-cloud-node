@@ -10,10 +10,10 @@
 
 This client supports the following Google Cloud Platform services:
 
-* [Google BigQuery][cloud-bigquery]
-* [Google Cloud Datastore][cloud-datastore]
-* [Google Cloud Storage][cloud-storage]
-* [Google Cloud Pub/Sub][cloud-pubsub] (Alpha)
+* [Google BigQuery](#google-bigquery)
+* [Google Cloud Datastore](#google-cloud-datastore)
+* [Google Cloud Storage](#google-cloud-storage)
+* [Google Cloud Pub/Sub](#google-cloud-pubsub-beta) (Beta)
 
 If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
 
