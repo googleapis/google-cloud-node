@@ -366,9 +366,7 @@ describe('BigQuery', function() {
       };
 
       bq.makeReq_ = function(method, path, query, body) {
-        assert.equal(body.query, QUERY_STRING);
-        assert.equal(body.a, 'b');
-        assert.equal(body.c, 'd');
+        assert.deepEqual(body, options);
         done();
       };
 
@@ -376,13 +374,25 @@ describe('BigQuery', function() {
     });
 
     it('should get the results of a job if one is provided', function(done) {
-      bq.makeReq_ = function(method, path) {
+      var options = {
+        job: bq.job(JOB_ID),
+        maxResults: 10,
+        timeoutMs: 8
+      };
+
+      var expectedRequestQuery = {
+        maxResults: 10,
+        timeoutMs: 8
+      };
+
+      bq.makeReq_ = function(method, path, query) {
         assert.equal(method, 'GET');
         assert.equal(path, '/queries/' + JOB_ID);
+        assert.deepEqual(query, expectedRequestQuery);
         done();
       };
 
-      bq.query({ job: bq.job(JOB_ID) }, assert.ifError);
+      bq.query(options, assert.ifError);
     });
 
     it('should be a stream if a callback is omitted', function() {
