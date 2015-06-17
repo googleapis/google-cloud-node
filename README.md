@@ -174,16 +174,16 @@ var gcloud = require('gcloud');
 // Authorizing on a per-API-basis. You don't need to do this if you auth on a
 // global basis (see Authorization section above).
 
-var storage = gcloud.storage({
+var gcs = gcloud.storage({
   keyFilename: '/path/to/keyfile.json',
   projectId: 'my-project'
 });
 
 // Create a new bucket.
-storage.createBucket('my-new-bucket', function(err, bucket) {});
+gcs.createBucket('my-new-bucket', function(err, bucket) {});
 
 // Reference an existing bucket.
-var bucket = storage.bucket('my-bucket');
+var bucket = gcs.bucket('my-bucket');
 
 // Upload a local file to a new file to be created in your bucket.
 var fileStream = fs.createReadStream('/local/file.txt');
