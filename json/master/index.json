@@ -389,8 +389,8 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar dataset = gcloud.datastore.dataset();\n// equal to:\n//   gcloud.datastore.dataset({\n//     keyFilename: '/path/to/keyfile.json',\n//     projectId: 'my-project'\n//   });\n\nvar storage = gcloud.storage();\nvar bucket = storage.bucket({\n  name: 'PhotosBucket',\n  // properties may be overridden:\n  keyFilename: '/path/to/other/keyfile.json'\n});\n",
-        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;my-project&#39;<br />});</p><p>var dataset = gcloud.datastore.dataset();<br />// equal to:<br />//   gcloud.datastore.dataset({<br />//     keyFilename: &#39;/path/to/keyfile.json&#39;,<br />//     projectId: &#39;my-project&#39;<br />//   });</p><p>var storage = gcloud.storage();<br />var bucket = storage.bucket({<br />  name: &#39;PhotosBucket&#39;,<br />  // properties may be overridden:<br />  keyFilename: &#39;/path/to/other/keyfile.json&#39;<br />});</p>"
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar dataset = gcloud.datastore.dataset();\n// equal to:\n//   gcloud.datastore.dataset({\n//     keyFilename: '/path/to/keyfile.json',\n//     projectId: 'my-project'\n//   });\n\nvar gcs = gcloud.storage();\nvar bucket = gcs.bucket({\n  name: 'PhotosBucket',\n  // properties may be overridden:\n  keyFilename: '/path/to/other/keyfile.json'\n});\n",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;my-project&#39;<br />});</p><p>var dataset = gcloud.datastore.dataset();<br />// equal to:<br />//   gcloud.datastore.dataset({<br />//     keyFilename: &#39;/path/to/keyfile.json&#39;,<br />//     projectId: &#39;my-project&#39;<br />//   });</p><p>var gcs = gcloud.storage();<br />var bucket = gcs.bucket({<br />  name: &#39;PhotosBucket&#39;,<br />  // properties may be overridden:<br />  keyFilename: &#39;/path/to/other/keyfile.json&#39;<br />});</p>"
       },
       {
         "type": "example",
@@ -615,8 +615,8 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\nvar storage = gcloud.storage({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});",
-        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var storage = gcloud.storage({<br />  projectId: &#39;project-id&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
+        "string": "var gcloud = require('gcloud');\nvar gcs = gcloud.storage({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var gcs = gcloud.storage({<br />  projectId: &#39;project-id&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
       }
     ],
     "description": {

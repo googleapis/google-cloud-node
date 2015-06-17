@@ -309,8 +309,8 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\n\nvar storage = gcloud.storage({\n  projectId: 'grape-spaceship-123'\n});\n\nvar albums = storage.bucket('albums');",
-        "html": "<p>var gcloud = require(&#39;gcloud&#39;);</p><p>var storage = gcloud.storage({<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>var albums = storage.bucket(&#39;albums&#39;);</p>"
+        "string": "var gcloud = require('gcloud');\n\nvar gcs = gcloud.storage({\n  projectId: 'grape-spaceship-123'\n});\n\nvar albums = gcs.bucket('albums');",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);</p><p>var gcs = gcloud.storage({<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>var albums = gcs.bucket(&#39;albums&#39;);</p>"
       }
     ],
     "description": {
@@ -341,8 +341,8 @@
       },
       {
         "type": "example",
-        "string": "//-\n// Make a bucket's contents publicly readable.\n//-\nvar myBucket = storage.bucket('my-bucket');\nmyBucket.acl.add({\n  scope: 'allUsers',\n  role: storage.acl.READER_ROLE\n}, function(err, aclObject) {});",
-        "html": "<p>//-<br />// Make a bucket&#39;s contents publicly readable.<br />//-<br />var myBucket = storage.bucket(&#39;my-bucket&#39;);<br />myBucket.acl.add({<br />  scope: &#39;allUsers&#39;,<br />  role: storage.acl.READER_ROLE<br />}, function(err, aclObject) {});</p>"
+        "string": "//-\n// Make a bucket's contents publicly readable.\n//-\nvar myBucket = gcs.bucket('my-bucket');\nmyBucket.acl.add({\n  scope: 'allUsers',\n  role: gcs.acl.READER_ROLE\n}, function(err, aclObject) {});",
+        "html": "<p>//-<br />// Make a bucket&#39;s contents publicly readable.<br />//-<br />var myBucket = gcs.bucket(&#39;my-bucket&#39;);<br />myBucket.acl.add({<br />  scope: &#39;allUsers&#39;,<br />  role: gcs.acl.READER_ROLE<br />}, function(err, aclObject) {});</p>"
       }
     ],
     "description": {
@@ -680,8 +680,8 @@
       },
       {
         "type": "example",
-        "string": "var logBucket = storage.bucket('log-bucket');\n\nvar logs2013 = logBucket.file('2013-logs.txt');\nvar logs2014 = logBucket.file('2014-logs.txt');\n\nvar allLogs = logBucket.file('all-logs.txt');\n\nlogBucket.combine([\n  logs2013,\n  logs2014\n], allLogs, function(err, newFile, apiResponse) {\n  // newFile === allLogs\n});",
-        "html": "<p>var logBucket = storage.bucket(&#39;log-bucket&#39;);</p><p>var logs2013 = logBucket.file(&#39;2013-logs.txt&#39;);<br />var logs2014 = logBucket.file(&#39;2014-logs.txt&#39;);</p><p>var allLogs = logBucket.file(&#39;all-logs.txt&#39;);</p><p>logBucket.combine([<br />  logs2013,<br />  logs2014<br />], allLogs, function(err, newFile, apiResponse) {<br />  // newFile === allLogs<br />});</p>"
+        "string": "var logBucket = gcs.bucket('log-bucket');\n\nvar logs2013 = logBucket.file('2013-logs.txt');\nvar logs2014 = logBucket.file('2014-logs.txt');\n\nvar allLogs = logBucket.file('all-logs.txt');\n\nlogBucket.combine([\n  logs2013,\n  logs2014\n], allLogs, function(err, newFile, apiResponse) {\n  // newFile === allLogs\n});",
+        "html": "<p>var logBucket = gcs.bucket(&#39;log-bucket&#39;);</p><p>var logs2013 = logBucket.file(&#39;2013-logs.txt&#39;);<br />var logs2014 = logBucket.file(&#39;2014-logs.txt&#39;);</p><p>var allLogs = logBucket.file(&#39;all-logs.txt&#39;);</p><p>logBucket.combine([<br />  logs2013,<br />  logs2014<br />], allLogs, function(err, newFile, apiResponse) {<br />  // newFile === allLogs<br />});</p>"
       }
     ],
     "description": {
@@ -723,8 +723,8 @@
       },
       {
         "type": "example",
-        "string": "var bucket = storage.bucket('delete-me');\nbucket.delete(function(err, apiResponse) {});",
-        "html": "<p>var bucket = storage.bucket(&#39;delete-me&#39;);<br />bucket.delete(function(err, apiResponse) {});</p>"
+        "string": "var bucket = gcs.bucket('delete-me');\nbucket.delete(function(err, apiResponse) {});",
+        "html": "<p>var bucket = gcs.bucket(&#39;delete-me&#39;);<br />bucket.delete(function(err, apiResponse) {});</p>"
       }
     ],
     "description": {

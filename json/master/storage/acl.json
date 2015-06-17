@@ -134,8 +134,8 @@
       },
       {
         "type": "example",
-        "string": "var storage = gcloud.storage({\n  projectId: 'grape-spaceship-123'\n});\n\n//-\n// Add a user as an owner of a file.\n//-\nvar myBucket = storage.bucket('my-bucket');\nvar myFile = myBucket.file('my-file');\nmyFile.acl.owners.addUser('email@example.com', function(err, aclObject) {});\n\n//-\n// For reference, the above command is the same as running the following.\n//-\nmyFile.acl.add({\n  entity: 'user-email@example.com',\n  role: storage.acl.OWNER_ROLE\n}, function(err, aclObject) {});",
-        "html": "<p>var storage = gcloud.storage({<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>//-<br />// Add a user as an owner of a file.<br />//-<br />var myBucket = storage.bucket(&#39;my-bucket&#39;);<br />var myFile = myBucket.file(&#39;my-file&#39;);<br />myFile.acl.owners.addUser(&#39;email@example.com&#39;, function(err, aclObject) {});</p><p>//-<br />// For reference, the above command is the same as running the following.<br />//-<br />myFile.acl.add({<br />  entity: &#39;user-email@example.com&#39;,<br />  role: storage.acl.OWNER_ROLE<br />}, function(err, aclObject) {});</p>"
+        "string": "var gcs = gcloud.storage({\n  projectId: 'grape-spaceship-123'\n});\n\n//-\n// Add a user as an owner of a file.\n//-\nvar myBucket = gcs.bucket('my-bucket');\nvar myFile = myBucket.file('my-file');\nmyFile.acl.owners.addUser('email@example.com', function(err, aclObject) {});\n\n//-\n// For reference, the above command is the same as running the following.\n//-\nmyFile.acl.add({\n  entity: 'user-email@example.com',\n  role: gcs.acl.OWNER_ROLE\n}, function(err, aclObject) {});",
+        "html": "<p>var gcs = gcloud.storage({<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>//-<br />// Add a user as an owner of a file.<br />//-<br />var myBucket = gcs.bucket(&#39;my-bucket&#39;);<br />var myFile = myBucket.file(&#39;my-file&#39;);<br />myFile.acl.owners.addUser(&#39;email@example.com&#39;, function(err, aclObject) {});</p><p>//-<br />// For reference, the above command is the same as running the following.<br />//-<br />myFile.acl.add({<br />  entity: &#39;user-email@example.com&#39;,<br />  role: gcs.acl.OWNER_ROLE<br />}, function(err, aclObject) {});</p>"
       }
     ],
     "description": {
@@ -183,8 +183,8 @@
       },
       {
         "type": "example",
-        "string": "//-\n// Add a user as a reader of a file.\n//-\nmyFile.acl.readers.addUser('email@example.com', function(err, aclObject) {});\n\n//-\n// For reference, the above command is the same as running the following.\n//-\nmyFile.acl.add({\n  entity: 'user-email@example.com',\n  role: storage.acl.READER_ROLE\n}, function(err, aclObject) {});",
-        "html": "<p>//-<br />// Add a user as a reader of a file.<br />//-<br />myFile.acl.readers.addUser(&#39;email@example.com&#39;, function(err, aclObject) {});</p><p>//-<br />// For reference, the above command is the same as running the following.<br />//-<br />myFile.acl.add({<br />  entity: &#39;user-email@example.com&#39;,<br />  role: storage.acl.READER_ROLE<br />}, function(err, aclObject) {});</p>"
+        "string": "//-\n// Add a user as a reader of a file.\n//-\nmyFile.acl.readers.addUser('email@example.com', function(err, aclObject) {});\n\n//-\n// For reference, the above command is the same as running the following.\n//-\nmyFile.acl.add({\n  entity: 'user-email@example.com',\n  role: gcs.acl.READER_ROLE\n}, function(err, aclObject) {});",
+        "html": "<p>//-<br />// Add a user as a reader of a file.<br />//-<br />myFile.acl.readers.addUser(&#39;email@example.com&#39;, function(err, aclObject) {});</p><p>//-<br />// For reference, the above command is the same as running the following.<br />//-<br />myFile.acl.add({<br />  entity: &#39;user-email@example.com&#39;,<br />  role: gcs.acl.READER_ROLE<br />}, function(err, aclObject) {});</p>"
       }
     ],
     "description": {
@@ -232,8 +232,8 @@
       },
       {
         "type": "example",
-        "string": "//-\n// Add a user as a writer of a file.\n//-\nmyFile.acl.writers.addUser('email@example.com', function(err, aclObject) {});\n\n//-\n// For reference, the above command is the same as running the following.\n//-\nmyFile.acl.add({\n  entity: 'user-email@example.com',\n  role: storage.acl.WRITER_ROLE\n}, function(err, aclObject) {});",
-        "html": "<p>//-<br />// Add a user as a writer of a file.<br />//-<br />myFile.acl.writers.addUser(&#39;email@example.com&#39;, function(err, aclObject) {});</p><p>//-<br />// For reference, the above command is the same as running the following.<br />//-<br />myFile.acl.add({<br />  entity: &#39;user-email@example.com&#39;,<br />  role: storage.acl.WRITER_ROLE<br />}, function(err, aclObject) {});</p>"
+        "string": "//-\n// Add a user as a writer of a file.\n//-\nmyFile.acl.writers.addUser('email@example.com', function(err, aclObject) {});\n\n//-\n// For reference, the above command is the same as running the following.\n//-\nmyFile.acl.add({\n  entity: 'user-email@example.com',\n  role: gcs.acl.WRITER_ROLE\n}, function(err, aclObject) {});",
+        "html": "<p>//-<br />// Add a user as a writer of a file.<br />//-<br />myFile.acl.writers.addUser(&#39;email@example.com&#39;, function(err, aclObject) {});</p><p>//-<br />// For reference, the above command is the same as running the following.<br />//-<br />myFile.acl.add({<br />  entity: &#39;user-email@example.com&#39;,<br />  role: gcs.acl.WRITER_ROLE<br />}, function(err, aclObject) {});</p>"
       }
     ],
     "description": {
@@ -337,8 +337,8 @@
       },
       {
         "type": "example",
-        "string": "myBucket.acl.add({\n  entity: 'user-useremail@example.com',\n  role: storage.acl.OWNER_ROLE\n}, function(err, aclObject, apiResponse) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n// Here is how you would grant ownership permissions to a user on a specific\n// revision of a file.\n//-\nmyFile.acl.add({\n  entity: 'user-useremail@example.com',\n  role: storage.acl.OWNER_ROLE,\n  generation: 1\n}, function(err, aclObject, apiResponse) {});",
-        "html": "<p>myBucket.acl.add({<br />  entity: &#39;user-useremail@example.com&#39;,<br />  role: storage.acl.OWNER_ROLE<br />}, function(err, aclObject, apiResponse) {});</p><p>//-<br />// For file ACL operations, you can also specify a <code>generation</code> property.<br />// Here is how you would grant ownership permissions to a user on a specific<br />// revision of a file.<br />//-<br />myFile.acl.add({<br />  entity: &#39;user-useremail@example.com&#39;,<br />  role: storage.acl.OWNER_ROLE,<br />  generation: 1<br />}, function(err, aclObject, apiResponse) {});</p>"
+        "string": "myBucket.acl.add({\n  entity: 'user-useremail@example.com',\n  role: gcs.acl.OWNER_ROLE\n}, function(err, aclObject, apiResponse) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n// Here is how you would grant ownership permissions to a user on a specific\n// revision of a file.\n//-\nmyFile.acl.add({\n  entity: 'user-useremail@example.com',\n  role: gcs.acl.OWNER_ROLE,\n  generation: 1\n}, function(err, aclObject, apiResponse) {});",
+        "html": "<p>myBucket.acl.add({<br />  entity: &#39;user-useremail@example.com&#39;,<br />  role: gcs.acl.OWNER_ROLE<br />}, function(err, aclObject, apiResponse) {});</p><p>//-<br />// For file ACL operations, you can also specify a <code>generation</code> property.<br />// Here is how you would grant ownership permissions to a user on a specific<br />// revision of a file.<br />//-<br />myFile.acl.add({<br />  entity: &#39;user-useremail@example.com&#39;,<br />  role: gcs.acl.OWNER_ROLE,<br />  generation: 1<br />}, function(err, aclObject, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -622,8 +622,8 @@
       },
       {
         "type": "example",
-        "string": "var storage = gcloud.storage({\n  projectId: 'grape-spaceship-123'\n});\n\nmyBucket.acl.update({\n  entity: 'user-useremail@example.com',\n  role: storage.acl.WRITER_ROLE\n}, function(err, apiResponse) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.update({\n  entity: 'user-useremail@example.com',\n  role: storage.acl.WRITER_ROLE,\n  generation: 1\n}, function(err, apiResponse) {});",
-        "html": "<p>var storage = gcloud.storage({<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>myBucket.acl.update({<br />  entity: &#39;user-useremail@example.com&#39;,<br />  role: storage.acl.WRITER_ROLE<br />}, function(err, apiResponse) {});</p><p>//-<br />// For file ACL operations, you can also specify a <code>generation</code> property.<br />//-<br />myFile.acl.update({<br />  entity: &#39;user-useremail@example.com&#39;,<br />  role: storage.acl.WRITER_ROLE,<br />  generation: 1<br />}, function(err, apiResponse) {});</p>"
+        "string": "var gcs = gcloud.storage({\n  projectId: 'grape-spaceship-123'\n});\n\nmyBucket.acl.update({\n  entity: 'user-useremail@example.com',\n  role: gcs.acl.WRITER_ROLE\n}, function(err, apiResponse) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.update({\n  entity: 'user-useremail@example.com',\n  role: gcs.acl.WRITER_ROLE,\n  generation: 1\n}, function(err, apiResponse) {});",
+        "html": "<p>var gcs = gcloud.storage({<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>myBucket.acl.update({<br />  entity: &#39;user-useremail@example.com&#39;,<br />  role: gcs.acl.WRITER_ROLE<br />}, function(err, apiResponse) {});</p><p>//-<br />// For file ACL operations, you can also specify a <code>generation</code> property.<br />//-<br />myFile.acl.update({<br />  entity: &#39;user-useremail@example.com&#39;,<br />  role: gcs.acl.WRITER_ROLE,<br />  generation: 1<br />}, function(err, apiResponse) {});</p>"
       }
     ],
     "description": {
