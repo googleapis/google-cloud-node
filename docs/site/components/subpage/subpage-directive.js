@@ -22,7 +22,7 @@ angular
         if ($scope.versionSelected === 'master') {
           $http.get('https://api.github.com/repos/GoogleCloudPlatform/gcloud-node/commits?sha=gh-pages&per_page=1')
             .then(function(resp) {
-              $scope.lastBuiltDate = moment(resp.data[0].commit.committer.date).format('MMMM Do, YYYY');
+              $scope.lastBuiltDate = moment(resp.data[0].commit.committer.date);
             });
         }
 

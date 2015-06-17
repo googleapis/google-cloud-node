@@ -21,10 +21,26 @@
   <header ng-if="headerTemplateUrl" ng-include="headerTemplateUrl"></header>
   <header ng-if="!headerTemplateUrl" header title="{{title}}"></header>
 
+  <div class="side-nav--meta side-nav--meta--top invisible-lg">
+    <div class="row row--sm">
+      <div class="col">
+        <small><em>Browsing Version</em></small>
+
+        <select
+          ng-model="versionSelected"
+          ng-options="version for version in versions"
+          ng-change="loadDocsVersion(versionSelected)"></select>
+      </div>
+      <div ng-if="lastBuiltDate" class="col--right">
+        <small><em>Last built {{lastBuiltDate.format('M/D/YY')}}.</em></small>
+      </div>
+    </div>
+  </div>
+
   <section class="content" ng-transclude></section>
 
   <nav class="side-nav">
-    <div class="side-nav--meta">
+    <div class="side-nav--meta visible-lg">
       <small><em>Browsing Version</em></small>
 
       <select
@@ -33,7 +49,7 @@
         ng-change="loadDocsVersion(versionSelected)"></select>
 
       <div ng-if="lastBuiltDate">
-        <small><em>Docs last built {{lastBuiltDate}}.</em></small>
+        <small><em>Docs last built {{lastBuiltDate.format('MMMM Do, YYYY')}}.</em></small>
       </div>
     </div>
 
