@@ -88,6 +88,25 @@ angular.module('gcloud.docs')
       ]
     },
 
+    search: {
+      title: 'Search',
+      _url: '{baseUrl}/search',
+      pages: [
+        {
+          title: 'Index',
+          url: '/index'
+        },
+        {
+          title: 'Document',
+          url: '/document'
+        },
+        {
+          title: 'Field',
+          url: '/field'
+        }
+      ]
+    },
+
     storage: {
       title: 'Storage',
       _url: '{baseUrl}/storage'
@@ -135,6 +154,10 @@ angular.module('gcloud.docs')
       // introduce new storage api.
       '>=0.9.0': ['storageWithFiles'],
 
-      '>=0.10.0': ['bigquery']
+      // introduce bigquery api.
+      '>=0.10.0': ['bigquery'],
+
+      // introduce search api.
+      '>=0.16.0': ['search']
     }
   });

@@ -31,6 +31,11 @@
 ./node_modules/.bin/dox < lib/pubsub/subscription.js > docs/json/master/pubsub/subscription.json &
 ./node_modules/.bin/dox < lib/pubsub/topic.js > docs/json/master/pubsub/topic.json &
 
+./node_modules/.bin/dox < lib/search/index.js > docs/json/master/search/index.json &
+./node_modules/.bin/dox < lib/search/index-class.js > docs/json/master/search/index-class.json &
+./node_modules/.bin/dox < lib/search/document.js > docs/json/master/search/document.json &
+./node_modules/.bin/dox < lib/search/field.js > docs/json/master/search/field.json &
+
 ./node_modules/.bin/dox < lib/storage/acl.js > docs/json/master/storage/acl.json &
 ./node_modules/.bin/dox < lib/storage/bucket.js > docs/json/master/storage/bucket.json &
 ./node_modules/.bin/dox < lib/storage/file.js > docs/json/master/storage/file.json &
