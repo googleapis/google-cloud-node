@@ -44,7 +44,7 @@ var gcloud = require('gcloud')({
     </article>
     <hr>
 
-    <article ng-repeat="service in ['bigquery', 'datastore', 'pubsub', 'storage']"
+    <article ng-repeat="service in ['bigquery', 'datastore', 'pubsub', 'search', 'storage']"
              ng-if="isActiveDoc(service)"
              ng-include="'site/components/docs/' + service + '-overview.html'">
     </article>
