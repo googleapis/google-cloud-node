@@ -208,6 +208,58 @@ describe('streamRouter', function() {
         var rs = streamRouter.router_(ARGS_WITHOUT_CALLBACK, originalMethod);
         rs.on('data', util.noop); // Trigger the underlying `_read` event.
       });
+
+      it('should not push more results if stream ends early', function(done) {
+        var results = ['a', 'b', 'c'];
+
+        function originalMethod() {
+          var callback = [].slice.call(arguments).pop();
+          setImmediate(function() {
+            callback(null, results);
+          });
+        }
+
+        var rs = streamRouter.router_(ARGS_WITHOUT_CALLBACK, originalMethod);
+        rs.on('data', function(result) {
+          if (result === 'b') {
+            // Pre-maturely end the stream.
+            this.end();
+          }
+
+          assert.notEqual(result, 'c');
+        });
+        rs.on('end', function() {
+          done();
+        });
+      });
+
+      it('should not get more results if stream ends early', function(done) {
+        var results = ['a', 'b', 'c'];
+
+        var originalMethodCalledCount = 0;
+
+        function originalMethod() {
+          originalMethodCalledCount++;
+
+          var callback = [].slice.call(arguments).pop();
+
+          setImmediate(function() {
+            callback(null, results, {});
+          });
+        }
+
+        var rs = streamRouter.router_(ARGS_WITHOUT_CALLBACK, originalMethod);
+        rs.on('data', function(result) {
+          if (result === 'b') {
+            // Pre-maturely end the stream.
+            this.end();
+          }
+        });
+        rs.on('end', function() {
+          assert.equal(originalMethodCalledCount, 1);
+          done();
+        });
+      });
     });
 
     describe('callback mode', function() {
