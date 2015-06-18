@@ -146,7 +146,9 @@ describe('Search', function() {
 
       search.getIndexes()
         .on('error', done)
-        .on('data', function() { resultsMatched++; })
+        .on('data', function() {
+          resultsMatched++;
+        })
         .on('end', function() {
           assert(resultsMatched > 0);
           done();
