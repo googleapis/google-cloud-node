@@ -365,8 +365,8 @@
       },
       {
         "type": "example",
-        "string": "var registerMessage = {\n  data: {\n    userId: 3,\n    name: 'Stephen',\n    event: 'new user'\n  },\n  attributes: {\n    key: 'value',\n    hello: 'world'\n  }\n};\ntopic.publish(registerMessage, function(err, messageIds, apiResponse) {});\n\n//-\n// You can publish a batch of messages at once by supplying an array.\n//-\nvar purchaseMessage = {\n  data: {\n    userId: 3,\n    product: 'computer',\n    event: 'purchase'\n  }\n};\n\ntopic.publish([\n  registerMessage,\n  purchaseMessage\n], function(err, messageIds, apiResponse) {});",
-        "html": "<p>var registerMessage = {<br />  data: {<br />    userId: 3,<br />    name: &#39;Stephen&#39;,<br />    event: &#39;new user&#39;<br />  },<br />  attributes: {<br />    key: &#39;value&#39;,<br />    hello: &#39;world&#39;<br />  }<br />};<br />topic.publish(registerMessage, function(err, messageIds, apiResponse) {});</p><p>//-<br />// You can publish a batch of messages at once by supplying an array.<br />//-<br />var purchaseMessage = {<br />  data: {<br />    userId: 3,<br />    product: &#39;computer&#39;,<br />    event: &#39;purchase&#39;<br />  }<br />};</p><p>topic.publish([<br />  registerMessage,<br />  purchaseMessage<br />], function(err, messageIds, apiResponse) {});</p>"
+        "string": "topic.publish({\n  data: 'Hello, world!'\n}, function(err, messageIds, apiResponse) {});\n\n//-\n// The data property can be a JSON object as well.\n//-\nvar registerMessage = {\n  data: {\n    userId: 3,\n    name: 'Stephen',\n    event: 'new user'\n  },\n  attributes: {\n    key: 'value',\n    hello: 'world'\n  }\n};\n\ntopic.publish(registerMessage, function(err, messageIds, apiResponse) {});\n\n//-\n// You can publish a batch of messages at once by supplying an array.\n//-\nvar purchaseMessage = {\n  data: {\n    userId: 3,\n    product: 'computer',\n    event: 'purchase'\n  }\n};\n\ntopic.publish([\n  registerMessage,\n  purchaseMessage\n], function(err, messageIds, apiResponse) {});",
+        "html": "<p>topic.publish({<br />  data: &#39;Hello, world!&#39;<br />}, function(err, messageIds, apiResponse) {});</p><p>//-<br />// The data property can be a JSON object as well.<br />//-<br />var registerMessage = {<br />  data: {<br />    userId: 3,<br />    name: &#39;Stephen&#39;,<br />    event: &#39;new user&#39;<br />  },<br />  attributes: {<br />    key: &#39;value&#39;,<br />    hello: &#39;world&#39;<br />  }<br />};</p><p>topic.publish(registerMessage, function(err, messageIds, apiResponse) {});</p><p>//-<br />// You can publish a batch of messages at once by supplying an array.<br />//-<br />var purchaseMessage = {<br />  data: {<br />    userId: 3,<br />    product: &#39;computer&#39;,<br />    event: &#39;purchase&#39;<br />  }<br />};</p><p>topic.publish([<br />  registerMessage,<br />  purchaseMessage<br />], function(err, messageIds, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -380,7 +380,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 130,
-    "codeStart": 173,
+    "codeStart": 181,
     "code": "Topic.prototype.publish = function(messages, callback) {\n  messages = util.arrayize(messages);\n\n  if (messages.length === 0) {\n    throw new Error('Cannot publish without a message.');\n  }\n\n  if (!messages.every(util.prop('data'))) {\n    throw new Error('Cannot publish message without a `data` property.');\n  }\n\n  callback = callback || util.noop;\n\n  var body = {\n    messages: messages.map(Topic.formatMessage_)\n  };\n\n  var path = this.name + ':publish';\n  this.makeReq_('POST', path, null, body, function(err, result) {\n    if (err) {\n      callback(err, null, result);\n      return;\n    }\n    callback(null, result && result.messageIds || [], result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -422,8 +422,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 200,
-    "codeStart": 208,
+    "line": 208,
+    "codeStart": 216,
     "code": "Topic.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('DELETE', this.name, null, null, callback);\n};",
     "ctx": {
       "type": "method",
@@ -507,8 +507,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 213,
-    "codeStart": 239,
+    "line": 221,
+    "codeStart": 247,
     "code": "Topic.prototype.getSubscriptions = function(options, callback) {\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.topic = this;\n\n  this.pubsub.getSubscriptions(options, callback);\n};",
     "ctx": {
       "type": "method",
@@ -634,8 +634,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 251,
-    "codeStart": 283,
+    "line": 259,
+    "codeStart": 291,
     "code": "Topic.prototype.subscribe = function(subName, options, callback) {\n  this.pubsub.subscribe(this, subName, options, callback);\n};",
     "ctx": {
       "type": "method",
@@ -733,8 +733,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 287,
-    "codeStart": 312,
+    "line": 295,
+    "codeStart": 320,
     "code": "Topic.prototype.subscription = function(name, options) {\n  return this.pubsub.subscription(name, options);\n};\n\nmodule.exports = Topic;",
     "ctx": {
       "type": "method",
