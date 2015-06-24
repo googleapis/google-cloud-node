@@ -53,7 +53,31 @@
       </div>
     </div>
 
+    <ul class="page-sections external-links">
+      <li>
+        <h4 class="list-item--heading">Getting Started</h4>
+      </li>
+      <li>
+        <a href="#/authorization" ng-class="{ current: isActiveUrl('/authorization') }" title="Authorization">
+          Authorization
+        </a>
+      </li>
+      <li>
+        <a href="#/faq" ng-class="{ current: isActiveUrl('/faq') }" title="Frequently Asked Questions">
+          FAQ
+        </a>
+      </li>
+      <li>
+        <a href="#/troubleshooting" ng-class="{ current: isActiveUrl('/troubleshooting') }" title="Troubleshooting">
+          Troubleshooting
+        </a>
+      </li>
+    </ul>
+
     <ul class="page-sections">
+      <li>
+        <h4 class="list-item--heading">API</h4>
+      </li>
       <li ng-repeat="page in links">
         <a
           ng-class="{ current: isActiveUrl(page.url) }"
@@ -69,24 +93,6 @@
             </a>
           </li>
         </ul>
-      </li>
-    </ul>
-
-    <ul class="page-sections external-links">
-      <li>
-        <a href="#/authorization" ng-class="{ current: isActiveUrl('/authorization') }" title="Authorization">
-          Authorization
-        </a>
-      </li>
-      <li>
-        <a href="#/faq" ng-class="{ current: isActiveUrl('/faq') }" title="Frequently Asked Questions">
-          FAQ
-        </a>
-      </li>
-      <li>
-        <a href="#/troubleshooting" ng-class="{ current: isActiveUrl('/troubleshooting') }" title="Troubleshooting">
-          Troubleshooting
-        </a>
       </li>
     </ul>
 

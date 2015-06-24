@@ -1070,6 +1070,12 @@ ul {
     padding: 0;
 }
 
+.side-nav .list-item--heading {
+    color: #999;
+    margin-bottom: 0;
+    padding-left: 1em;
+}
+
 .side-nav .sub-sections a {
     padding-left: 4em;
 }
@@ -1558,7 +1564,6 @@ ul {
     .side-nav a {
         padding-left: 2.5em;
     }
-
 }
 
 @media print,
