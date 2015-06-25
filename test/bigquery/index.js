@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach, before, after */
-
 'use strict';
 
 var assert = require('assert');
 var mockery = require('mockery');
-var Stream = require('stream').Stream;
-var Table = require('../../lib/bigquery/table');
-var util = require('../../lib/common/util');
+var Table = require('../../lib/bigquery/table.js');
+var util = require('../../lib/common/util.js');
 
 function FakeTable(a, b) {
   Table.call(this, a, b);
@@ -35,11 +32,19 @@ FakeTable.mergeSchemaWithRows_ = function() {
     .apply(null, args);
 };
 
-function fakeGsa() {
-  return function(req, callback) {
-    callback(null, req);
-  };
-}
+var extended = false;
+var fakeStreamRouter = {
+  extend: function(Class, methods) {
+    if (Class.name !== 'BigQuery') {
+      return;
+    }
+
+    methods = util.arrayize(methods);
+    assert.equal(Class.name, 'BigQuery');
+    assert.deepEqual(methods, ['getDatasets', 'getJobs', 'query']);
+    extended = true;
+  }
+};
 
 describe('BigQuery', function() {
   var JOB_ID = 'JOB_ID';
@@ -50,7 +55,7 @@ describe('BigQuery', function() {
 
   before(function() {
     mockery.registerMock('./table.js', FakeTable);
-    mockery.registerMock('google-service-account', fakeGsa);
+    mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
@@ -68,6 +73,10 @@ describe('BigQuery', function() {
   });
 
   describe('instantiation', function() {
+    it('should extend the correct methods', function() {
+      assert(extended); // See `fakeStreamRouter.extend`
+    });
+
     it('should throw if a projectId is not specified', function() {
       assert.throws(function() {
         new BigQuery();
@@ -395,19 +404,6 @@ describe('BigQuery', function() {
       bq.query(options, assert.ifError);
     });
 
-    it('should be a stream if a callback is omitted', function() {
-      assert(bq.query() instanceof Stream);
-    });
-
-    it('should run the query after being read from', function(done) {
-      bq.makeReq_ = function() {
-        done();
-      };
-
-      var stream = bq.query();
-      stream.emit('reading');
-    });
-
     describe('job is incomplete', function() {
       var options = {};
 
@@ -503,113 +499,38 @@ describe('BigQuery', function() {
       bq.query({}, assert.ifError);
     });
 
-    describe('errors', function() {
+    it('should pass errors to the callback', function(done) {
       var error = new Error('Error.');
 
-      beforeEach(function() {
-        bq.makeReq_ = function(method, path, query, body, callback) {
-          callback(error);
-        };
-      });
+      bq.makeReq_ = function(method, path, query, body, callback) {
+        callback(error);
+      };
 
-      describe('serial', function() {
-        it('should pass errors to the callback', function(done) {
-          bq.query({}, function(err) {
-            assert.equal(err, error);
-            done();
-          });
-        });
-      });
-
-      describe('streams', function() {
-        it('should emit errors', function(done) {
-          bq.query()
-            .once('error', function(err) {
-              assert.equal(err, error);
-              done();
-            })
-            .emit('reading');
-        });
-
-        it('should end the stream', function(done) {
-          bq.query()
-            .once('error', util.noop)
-            .once('finish', done)
-            .emit('reading');
-        });
+      bq.query({}, function(err) {
+        assert.equal(err, error);
+        done();
       });
     });
 
-    describe('results', function() {
+    it('should return rows to the callback', function(done) {
       var ROWS = [{ a: 'b' }, { c: 'd' }];
 
-      beforeEach(function() {
-        bq.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, {
-            jobReference: { jobId: JOB_ID },
-            rows: [],
-            schema: {}
-          });
-        };
-
-        mergeSchemaWithRows_Override = function() {
-          mergeSchemaWithRows_Override = null;
-          return ROWS;
-        };
-      });
-
-      describe('serial', function() {
-        it('should return rows to callback', function(done) {
-          bq.query({}, function(err, rows) {
-            assert.deepEqual(rows, ROWS);
-            done();
-          });
+      bq.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, {
+          jobReference: { jobId: JOB_ID },
+          rows: [],
+          schema: {}
         });
-      });
+      };
 
-      describe('streams', function() {
-        it('should emit rows to stream', function(done) {
-          var rowsEmitted = 0;
-          bq.query()
-            .on('data', function(row) {
-              assert.deepEqual(row, ROWS[rowsEmitted]);
-              rowsEmitted++;
-            })
-            .on('end', function() {
-              assert.equal(rowsEmitted, ROWS.length);
-              done();
-            });
-        });
+      mergeSchemaWithRows_Override = function() {
+        mergeSchemaWithRows_Override = null;
+        return ROWS;
+      };
 
-        it('should call .query() with nextQuery automatically', function(done) {
-          var queryCalled = 0;
-          var pageToken = 'token';
-
-          bq.makeReq_ = function(method, path, query, body, callback) {
-            callback(null, {
-              jobReference: { jobId: JOB_ID },
-              pageToken: pageToken
-            });
-          };
-
-          var query = bq.query;
-          bq.query = function(options) {
-            queryCalled++;
-
-            if (queryCalled === 1) {
-              return query.apply(bq, [].slice.call(arguments));
-            } else {
-              assert.deepEqual(options.pageToken, pageToken);
-              done();
-            }
-          };
-
-          bq.query().emit('reading');
-        });
-
-        it('should end the stream if there is no nextQuery', function(done) {
-          bq.query().on('finish', done).emit('reading');
-        });
+      bq.query({}, function(err, rows) {
+        assert.deepEqual(rows, ROWS);
+        done();
       });
     });
   });
