@@ -325,7 +325,7 @@
     "ignore": false,
     "line": 62,
     "codeStart": 87,
-    "code": "function Bucket(storage, name) {\n  this.metadata = {};\n  this.name = name;\n  this.storage = storage;\n\n  if (!this.name) {\n    throw Error('A bucket name is needed to use Google Cloud Storage.');\n  }",
+    "code": "function Bucket(storage, name) {\n  this.metadata = {};\n  this.name = name;\n  this.storage = storage;\n\n  if (!this.name) {\n    throw new Error('A bucket name is needed to use Google Cloud Storage.');\n  }",
     "ctx": {
       "type": "constructor",
       "name": "Bucket",

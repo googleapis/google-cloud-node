@@ -167,6 +167,48 @@
     "tags": [
       {
         "type": "type",
+        "string": "{module:search}",
+        "types": [
+          "module:search"
+        ],
+        "typesDescription": "module:<a href=\"module%3Asearch.html\">search</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:search}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 41,
+    "codeStart": 45,
+    "code": "var Search = require('./search');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Search",
+      "value": "require('./search')",
+      "string": "Search"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
         "string": "{module:storage}",
         "types": [
           "module:storage"
@@ -195,8 +237,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 41,
-    "codeStart": 45,
+    "line": 47,
+    "codeStart": 51,
     "code": "var Storage = require('./storage');",
     "ctx": {
       "type": "declaration",
@@ -237,8 +279,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 47,
-    "codeStart": 51,
+    "line": 53,
+    "codeStart": 57,
     "code": "var util = require('./common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -408,9 +450,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 53,
-    "codeStart": 112,
-    "code": "function gcloud(config) {\n  return {\n    bigquery: function(options) {\n      options = options || {};\n      return new BigQuery(util.extendGlobalConfig(config, options));\n    },\n    datastore: new Datastore(config),\n    pubsub: function(options) {\n      options = options || {};\n      return new PubSub(util.extendGlobalConfig(config, options));\n    },\n    storage: function(options) {\n      options = options || {};\n      return new Storage(util.extendGlobalConfig(config, options));\n    }\n  };\n}",
+    "line": 59,
+    "codeStart": 118,
+    "code": "function gcloud(config) {\n  return {\n    bigquery: function(options) {\n      options = options || {};\n      return new BigQuery(util.extendGlobalConfig(config, options));\n    },\n    datastore: new Datastore(config),\n    pubsub: function(options) {\n      options = options || {};\n      return new PubSub(util.extendGlobalConfig(config, options));\n    },\n    search: function(options) {\n      options = options || {};\n      return new Search(util.extendGlobalConfig(config, options));\n    },\n    storage: function(options) {\n      options = options || {};\n      return new Storage(util.extendGlobalConfig(config, options));\n    }\n  };\n}",
     "ctx": {
       "type": "constructor",
       "name": "gcloud",
@@ -462,8 +504,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 130,
-    "codeStart": 147,
+    "line": 140,
+    "codeStart": 157,
     "code": "gcloud.bigquery = BigQuery;",
     "ctx": {
       "type": "property",
@@ -518,8 +560,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 149,
-    "codeStart": 167,
+    "line": 159,
+    "codeStart": 177,
     "code": "gcloud.datastore = Datastore;",
     "ctx": {
       "type": "property",
@@ -565,23 +607,78 @@
       }
     ],
     "description": {
-      "full": "<p><strong>Experimental</strong></p><p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p><p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use it<br />by filling the <a href=\"http://goo.gl/sO0wTu\">Limited Preview application form</a>.</p>",
+      "full": "<p><strong>Experimental</strong></p><p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p><p>Note: This is a <em>Beta</em> release of Google Cloud Pub/Sub. This feature is not<br />covered by any SLA or deprecation policy and may be subject to backward-<br />incompatible changes.</p>",
       "summary": "<p><strong>Experimental</strong></p>",
-      "body": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p><p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use it<br />by filling the <a href=\"http://goo.gl/sO0wTu\">Limited Preview application form</a>.</p>"
+      "body": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p><p>Note: This is a <em>Beta</em> release of Google Cloud Pub/Sub. This feature is not<br />covered by any SLA or deprecation policy and may be subject to backward-<br />incompatible changes.</p>"
     },
     "isPrivate": false,
     "isConstructor": false,
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 169,
-    "codeStart": 193,
+    "line": 179,
+    "codeStart": 201,
     "code": "gcloud.pubsub = function(config) {\n  return new PubSub(config);\n};",
     "ctx": {
       "type": "method",
       "receiver": "gcloud",
       "name": "pubsub",
       "string": "gcloud.pubsub()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:search}\n",
+        "types": [
+          "module:search"
+        ],
+        "typesDescription": "module:<a href=\"module%3Asearch.html\">search</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:search}</p>"
+      },
+      {
+        "type": "return",
+        "string": "{module:search}\n",
+        "types": [
+          "module:search"
+        ],
+        "typesDescription": "module:<a href=\"module%3Asearch.html\">search</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:search}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\nvar search = gcloud.search({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var search = gcloud.search({<br />  projectId: &#39;project-id&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p><strong>Experimental</strong></p><p><a href=\"https://cloud.google.com/search/\">Google Cloud Search</a> allows you to quickly<br />perform full-text and geospatial searches against your data without having to<br />spin up your own instances and without the hassle of managing and maintaining<br />a search service.</p><p>Note: This is an <em>Alpha</em> release of Google Cloud Search. This feature is not<br />covered by any SLA or deprecation policy and may be subject to backward-<br />incompatible changes.</p>",
+      "summary": "<p><strong>Experimental</strong></p>",
+      "body": "<p><a href=\"https://cloud.google.com/search/\">Google Cloud Search</a> allows you to quickly<br />perform full-text and geospatial searches against your data without having to<br />spin up your own instances and without the hassle of managing and maintaining<br />a search service.</p><p>Note: This is an <em>Alpha</em> release of Google Cloud Search. This feature is not<br />covered by any SLA or deprecation policy and may be subject to backward-<br />incompatible changes.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 205,
+    "codeStart": 228,
+    "code": "gcloud.search = function (config) {\n  return new Search(config);\n};",
+    "ctx": {
+      "type": "method",
+      "receiver": "gcloud",
+      "name": "search",
+      "string": "gcloud.search()"
     }
   },
   {
@@ -629,8 +726,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 197,
-    "codeStart": 213,
+    "line": 232,
+    "codeStart": 248,
     "code": "gcloud.storage = Storage;\n\nmodule.exports = gcloud;",
     "ctx": {
       "type": "property",
