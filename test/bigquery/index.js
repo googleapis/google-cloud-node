@@ -42,7 +42,7 @@ function fakeGsa() {
 }
 
 describe('BigQuery', function() {
-  var JOB_ID = JOB_ID;
+  var JOB_ID = 'JOB_ID';
   var PROJECT_ID = 'test-project';
 
   var BigQuery;
