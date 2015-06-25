@@ -20,6 +20,7 @@ var assert = require('assert');
 var mockery = require('mockery');
 var request = require('request');
 var Topic = require('../../lib/pubsub/topic.js');
+var util = require('../../lib/common/util.js');
 
 var SubscriptionCached = require('../../lib/pubsub/subscription.js');
 var SubscriptionOverride;
@@ -40,12 +41,27 @@ fakeRequest.defaults = function() {
   return fakeRequest;
 };
 
+var extended = false;
+var fakeStreamRouter = {
+  extend: function(Class, methods) {
+    if (Class.name !== 'PubSub') {
+      return;
+    }
+
+    methods = util.arrayize(methods);
+    assert.equal(Class.name, 'PubSub');
+    assert.deepEqual(methods, ['getSubscriptions', 'getTopics']);
+    extended = true;
+  }
+};
+
 describe('PubSub', function() {
   var PubSub;
   var PROJECT_ID = 'test-project';
   var pubsub;
 
   before(function() {
+    mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
     mockery.registerMock('./subscription.js', Subscription);
     mockery.registerMock('./topic.js', Topic);
     mockery.registerMock('request', fakeRequest);
@@ -71,6 +87,10 @@ describe('PubSub', function() {
   });
 
   describe('instantiation', function() {
+    it('should extend the correct methods', function() {
+      assert(extended); // See `fakeStreamRouter.extend`
+    });
+
     it('should throw if a projectId is not specified', function() {
       assert.throws(function() {
         new PubSub();
