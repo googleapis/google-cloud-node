@@ -139,10 +139,28 @@ describe('streamRouter', function() {
             assert.strictEqual(args[index], arg);
           });
 
+          // The callback should have been appended to the original arguments.
+          assert.strictEqual(args.length, ARGS_WITHOUT_CALLBACK.length + 1);
+
           done();
         }
 
         var rs = streamRouter.router_(ARGS_WITHOUT_CALLBACK, originalMethod);
+        rs.on('data', util.noop); // Trigger the underlying `_read` event.
+      });
+
+      it('should replace last argument if it is undefined', function(done) {
+        var argsWithHangingUndefined = ARGS_WITHOUT_CALLBACK.concat(undefined);
+
+        function originalMethod() {
+          // If the last argument was replaced, the arguments array length will
+          // not have increased.
+          assert.strictEqual(arguments.length, argsWithHangingUndefined.length);
+
+          done();
+        }
+
+        var rs = streamRouter.router_(argsWithHangingUndefined, originalMethod);
         rs.on('data', util.noop); // Trigger the underlying `_read` event.
       });
 
