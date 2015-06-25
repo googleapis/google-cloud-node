@@ -413,8 +413,8 @@
       }
     ],
     "description": {
-      "full": "<p>Delete the topic. This will also delete any subscriptions to this topic.</p>",
-      "summary": "<p>Delete the topic. This will also delete any subscriptions to this topic.</p>",
+      "full": "<p>Delete the topic. This will not delete subscriptions to this topic.</p>",
+      "summary": "<p>Delete the topic. This will not delete subscriptions to this topic.</p>",
       "body": ""
     },
     "isPrivate": false,
