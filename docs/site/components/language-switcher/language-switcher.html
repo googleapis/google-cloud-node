@@ -1,6 +1,78 @@
 <nav class="main-nav" ng-class="{ open: showNavDropdown }">
   <div class="nav-current" ng-click="showNavDropdown = !showNavDropdown">Node.js</div>
-  <ul class="menu">
+  <ul class="menu" ng-click="showNavDropdown = false">
+
+    <!-- Getting Started -->
+    <li ng-if="extraLinks.length > 0" class="invisible-lg">
+      <h4 class="list-item--heading">Getting Started</h4>
+    </li>
+    <li ng-if="extraLinks.length > 0" class="invisible-lg">
+      <a href="#/authorization" ng-class="{ current: isActiveUrl('/authorization') }" title="Authorization">
+        Authorization
+      </a>
+    </li>
+    <li ng-if="extraLinks.length > 0" class="invisible-lg">
+      <a href="#/faq" ng-class="{ current: isActiveUrl('/faq') }" title="Frequently Asked Questions">
+        FAQ
+      </a>
+    </li>
+    <li ng-if="extraLinks.length > 0" class="invisible-lg">
+      <a href="#/troubleshooting" ng-class="{ current: isActiveUrl('/troubleshooting') }" title="Troubleshooting">
+        Troubleshooting
+      </a>
+    </li>
+
+    <!-- API -->
+    <li ng-if="extraLinks.length > 0" class="invisible-lg">
+      <h4 class="list-item--heading">API</h4>
+    </li>
+    <li class="menu--extra-links-item invisible-lg"
+      ng-repeat="page in extraLinks">
+      <a ng-href="{{page.url}}">
+        {{page.title}}
+      </a>
+      <ul class="sub-sections" ng-if="page.pages">
+        <li ng-repeat="innerPage in page.pages">
+          <a ng-href="{{page.url + innerPage.url}}">
+            {{innerPage.title}}
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <!-- External -->
+    <li ng-if="extraLinks.length > 0" class="invisible-lg">
+      <h4 class="list-item--heading">External Resources</h4>
+    </li>
+    <li ng-if="extraLinks.length > 0" class="invisible-lg">
+      <a href="https://github.com/GoogleCloudPlatform/gcloud-node" title="gcloud-node on Github" class="skip-external-link">
+        <img src="site/img/icon-link-github.svg" alt="GitHub icon" class="menu-icon" />
+        GitHub
+      </a>
+    </li>
+    <li ng-if="extraLinks.length > 0" class="invisible-lg">
+      <a href="https://github.com/GoogleCloudPlatform/gcloud-node/issues" title="gcloud-node issues on Github" class="skip-external-link">
+        <img src="site/img/icon-link-github.svg" alt="GitHub icon" class="menu-icon" />
+        Issues
+      </a>
+    </li>
+    <li ng-if="extraLinks.length > 0" class="invisible-lg">
+      <a href="http://stackoverflow.com/questions/tagged/gcloud-node" title="gcloud-node on StackOverflow" class="skip-external-link">
+        <img src="site/img/icon-link-stackoverflow.svg" alt="StackOverflow icon" class="menu-icon" />
+        StackOverflow
+      </a>
+    </li>
+    <li ng-if="extraLinks.length > 0" class="invisible-lg">
+      <a href="http://npmjs.org/package/gcloud" title="gcloud-node on npm" class="skip-external-link">
+        <img src="site/img/icon-link-package-manager.svg" alt="npm icon" class="menu-icon" />
+        npm
+      </a>
+    </li>
+
+    <!-- Other Languages -->
+    <li ng-if="extraLinks.length > 0" class="invisible-lg">
+      <h4 class="list-item--heading">gcloud Libraries</h4>
+    </li>
     <li>
       <a href="#" title="gcloud-node Documentation" class="skip-external-link">
         <img src="site/img/icon-lang-nodejs-white.svg" alt="gcloud-node" class="menu-icon">
