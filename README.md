@@ -14,6 +14,7 @@ This client supports the following Google Cloud Platform services:
 * [Google Cloud Datastore](#google-cloud-datastore)
 * [Google Cloud Storage](#google-cloud-storage)
 * [Google Cloud Pub/Sub](#google-cloud-pubsub-beta) (Beta)
+* [Google Cloud Search](#google-cloud-search-alpha) (Alpha)
 
 If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
 
@@ -238,6 +239,48 @@ topic.subscribe('new-subscription', function(err, subscription) {
 });
 ```
 
+## Google Cloud Search (Alpha)
+> This is an *Alpha* release of Google Cloud Search. This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
+
+[Google Cloud Search][cloud-search] ([docs][cloud-search-docs]) allows you to quickly perform full-text and geospatial searches against your data without having to spin up your own instances and without the hassle of managing and maintaining a search service.
+
+See the [gcloud-node Search API documentation][gcloud-search-docs] to learn how to store and query your indexes and documents using this library.
+
+```js
+var gcloud = require('gcloud');
+
+// Authorizing on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authorization section above).
+
+var search = gcloud.search({
+  keyFilename: '/path/to/keyfile.json',
+  projectId: 'my-project'
+});
+
+// Create a document in a new index.
+var index = search.index('memberData');
+
+var document = index.document('member-id-34211');
+document.addField('preferredContactForm').addTextValue('phone');
+
+index.createDocument(document, function(err, document) {
+  console.log(err || document);
+});
+
+// Search an index and get the results as a readable object stream.
+var index = search.index('memberData');
+
+index.search('preferredContactForm:phone')
+  .on('error', console.error)
+  .on('data', function(document) {
+    // document.id = 'member-id-34211';
+  })
+  .on('end', function() {
+    // All results consumed.
+  });
+```
+
+
 ## Contributing
 
 Contributions to this library are always welcome and highly encouraged.
@@ -253,6 +296,7 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [gcloud-bigquery-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/bigquery
 [gcloud-datastore-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/datastore
 [gcloud-pubsub-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/pubsub
+[gcloud-search-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/search
 [gcloud-storage-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/storage
 [gcloud-todos]: https://github.com/GoogleCloudPlatform/gcloud-node-todos
 [gitnpm]: https://github.com/stephenplusplus/gitnpm
@@ -273,8 +317,12 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [cloud-pubsub]: https://cloud.google.com/pubsub/
 [cloud-pubsub-docs]: https://cloud.google.com/pubsub/docs
 
+[cloud-search]: https://cloud.google.com/search/
+[cloud-search-docs]: https://cloud.google.com/search/
+
 [cloud-storage]: https://cloud.google.com/storage/
 [cloud-storage-docs]: https://cloud.google.com/storage/docs/overview
 [cloud-storage-create-bucket]: https://cloud.google.com/storage/docs/cloud-console#_creatingbuckets
+
 [hya-wave]: https://wav.hya.io
 [hya-io]: https://hya.io
