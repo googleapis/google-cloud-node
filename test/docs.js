@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-/*global describe, it */
-
 'use strict';
 
-var vm = require('vm');
 var assert = require('assert');
+var fs = require('fs');
 var gcloud = require('../');
 var glob = require('glob');
 var mitm = require('mitm');
-var fs = require('fs');
+var vm = require('vm');
+
+var util = require('../lib/common/util.js');
 
 function runCodeInSandbox(code, sandbox) {
   vm.createContext(sandbox);
@@ -74,10 +74,16 @@ describe('documentation', function() {
         ].join('\n'));
       }
 
+      var mockConsole = Object.keys(console).reduce(function(console, method) {
+        console[method] = util.noop;
+        return console;
+      }, {});
+
       var sandbox = {
         gcloud: gcloud,
         require: require,
         process: process,
+        console: mockConsole,
         Buffer: Buffer,
         Date: Date,
         Array: Array
