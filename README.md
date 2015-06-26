@@ -214,13 +214,11 @@ var pubsub = gcloud.pubsub({
   keyFilename: '/path/to/keyfile.json'
 });
 
-// Create a new topic.
-pubsub.createTopic('my-new-topic', function(err, topic) {});
-
-// Reference an existing topic.
-var topic = pubsub.topic('my-existing-topic');
+// Reference a topic.
+var topic = pubsub.topic('my-topic');
 
 // Publish a message to the topic.
+// The topic will be created if it doesn't exist.
 topic.publish({
   data: 'New message!'
 }, function(err) {});

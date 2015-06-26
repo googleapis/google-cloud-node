@@ -50,6 +50,18 @@ describe('Topic', function() {
     it('should assign pubsub object to `this`', function() {
       assert.deepEqual(topic.pubsub, pubsubMock);
     });
+
+    it('should set `autoCreate` to true by default', function() {
+      assert.strictEqual(topic.autoCreate, true);
+    });
+
+    it('should allow overriding autoCreate', function() {
+      var topic = new Topic(pubsubMock, {
+        name: TOPIC_NAME,
+        autoCreate: false
+      });
+      assert.strictEqual(topic.autoCreate, false);
+    });
   });
 
   describe('formatMessage_', function() {
@@ -145,43 +157,6 @@ describe('Topic', function() {
     });
   });
 
-  describe('publish to non-existing topic', function() {
-    var messageObject = { data: 'howdy' };
-
-    it('should generate 404 error without autoCreate', function(done) {
-      topic.makeReq_ = function(method, path, query, body, callback) {
-        callback({ code: 404 });
-      };
-
-      topic.publish(messageObject, function(err) {
-        assert.equal(err.code, 404);
-        done();
-      });
-    });
-
-    it('should publish successfully with autoCreate', function(done) {
-      var acTopic = new Topic(pubsubMock, {
-        name: TOPIC_NAME, autoCreate: true
-      });
-      var created = false;
-
-      acTopic.origMakeReq_ = function(method, path, query, body, callback) {
-        if (!created) {
-          callback({ code: 404 });
-        } else {
-          callback(null);
-        }
-      };
-
-      pubsubMock.createTopic = function(name, callback) {
-        created = true;
-        callback();
-      };
-
-      acTopic.publish(messageObject, done);
-    });
-  });
-
   describe('delete', function() {
     it('should delete a topic', function(done) {
       topic.makeReq_ = function(method, path) {
@@ -273,6 +248,127 @@ describe('Topic', function() {
 
       var doneFn = topic.subscription();
       doneFn();
+    });
+  });
+
+  describe('makeReq_', function() {
+    var method = 'POST';
+    var path = '/path';
+    var query = 'query';
+    var body = 'body';
+
+    it('should call through to pubsub.makeReq_', function(done) {
+      topic.pubsub.makeReq_ = function(m, p, q, b) {
+        assert.equal(m, method);
+        assert.equal(p, path);
+        assert.equal(q, query);
+        assert.equal(b, body);
+
+        done();
+      };
+
+      topic.makeReq_(method, path, query, body, util.noop);
+    });
+
+    describe('autoCreate: false', function() {
+      it('should execute callback with response', function(done) {
+        var error = new Error('Error.');
+        var apiResponse = { a: 'b', c: 'd' };
+
+        topic.pubsub.makeReq_ = function(method, path, query, body, callback) {
+          callback(error, apiResponse);
+        };
+
+        topic.makeReq_(method, path, query, body, function(err, apiResp) {
+          assert.deepEqual(err, error);
+          assert.deepEqual(apiResp, apiResponse);
+
+          done();
+        });
+      });
+    });
+
+    describe('autoCreate: true', function() {
+      it('should not create a topic if doing a DELETE', function(done) {
+        var topicCreated = false;
+
+        topic.pubsub.createTopic = function() {
+          topicCreated = true;
+        };
+
+        topic.pubsub.makeReq_ = function(method, path, query, body, callback) {
+          callback({ code: 404 });
+        };
+
+        topic.makeReq_('DELETE', path, query, body, function() {
+          assert.strictEqual(topicCreated, false);
+
+          done();
+        });
+      });
+
+      it('should create a non-DELETE API request returns 404', function(done) {
+        topic.pubsub.createTopic = function(topicName) {
+          assert.equal(topicName, TOPIC_NAME);
+
+          done();
+        };
+
+        topic.pubsub.makeReq_ = function(method, path, query, body, callback) {
+          callback({ code: 404 });
+        };
+
+        topic.makeReq_(method, path, query, body, util.noop);
+      });
+
+      describe('creating topic failed', function() {
+        var error = new Error('Error.');
+        var apiResponse = { a: 'b', c: 'd' };
+
+        beforeEach(function() {
+          topic.pubsub.createTopic = function(topicName, callback) {
+            callback(error, null, apiResponse);
+          };
+
+          topic.pubsub.makeReq_ = function(m, p, q, b, callback) {
+            callback({ code: 404 });
+          };
+        });
+
+        it('should execute the callback with error & apiResp', function(done) {
+          topic.makeReq_(method, path, query, body, function(err, t, apiResp) {
+            assert.deepEqual(err, error);
+            assert.strictEqual(t, null);
+            assert.deepEqual(apiResp, apiResponse);
+
+            done();
+          });
+        });
+      });
+
+      describe('creating topic succeeded', function() {
+        it('should call makeReq_ again with the original args', function(done) {
+          topic.pubsub.createTopic = function(topicName, callback) {
+            callback();
+          };
+
+          topic.pubsub.makeReq_ = function(m, p, q, b, callback) {
+            // Overwrite the method to confirm it is called again.
+            topic.pubsub.makeReq_ = function(m, p, q, b, callback) {
+              assert.equal(m, method);
+              assert.equal(p, path);
+              assert.equal(q, query);
+              assert.equal(b, body);
+
+              callback(); // (should be the done function)
+            };
+
+            callback({ code: 404 });
+          };
+
+          topic.makeReq_(method, path, query, body, done);
+        });
+      });
     });
   });
 });
