@@ -280,17 +280,17 @@ describe('datastore', function() {
     });
 
     it('should limit queries', function(done) {
-      var q = ds.createQuery('Character').hasAncestor(ancestor)
-          .limit(5);
-      ds.runQuery(q, function(err, firstEntities, firstEndCursor) {
+      var q = ds.createQuery('Character').hasAncestor(ancestor).limit(5);
+
+      ds.runQuery(q, function(err, firstEntities, secondQuery) {
         assert.ifError(err);
         assert.equal(firstEntities.length, 5);
-        var secondQ = q.start(firstEndCursor);
-        ds.runQuery(secondQ, function(err, secondEntities, secondEndCursor) {
+
+        ds.runQuery(secondQuery, function(err, secondEntities, thirdQuery) {
           assert.ifError(err);
           assert.equal(secondEntities.length, 3);
-          var thirdQ = q.start(secondEndCursor);
-          ds.runQuery(thirdQ, function(err, thirdEntities) {
+
+          ds.runQuery(thirdQuery, function(err, thirdEntities) {
             assert.ifError(err);
             assert.equal(thirdEntities.length, 0);
             done();
@@ -398,17 +398,22 @@ describe('datastore', function() {
     });
 
     it('should paginate with offset and limit', function(done) {
-      var q = ds.createQuery('Character').hasAncestor(ancestor)
-          .offset(2)
-          .limit(3)
-          .order('appearances');
-      ds.runQuery(q, function(err, entities, endCursor) {
+      var q = ds.createQuery('Character')
+        .hasAncestor(ancestor)
+        .offset(2)
+        .limit(3)
+        .order('appearances');
+
+      ds.runQuery(q, function(err, entities, secondQuery) {
         assert.ifError(err);
+
         assert.equal(entities.length, 3);
         assert.equal(entities[0].data.name, 'Robb');
         assert.equal(entities[2].data.name, 'Catelyn');
-        var secondQuery = q.start(endCursor).offset(0);
-        ds.runQuery(secondQuery, function(err, secondEntities) {
+
+        ds.runQuery(secondQuery.offset(0), function(err, secondEntities) {
+          assert.ifError(err);
+
           assert.equal(secondEntities.length, 3);
           assert.equal(secondEntities[0].data.name, 'Sansa');
           assert.equal(secondEntities[2].data.name, 'Arya');
@@ -418,17 +423,16 @@ describe('datastore', function() {
     });
 
     it('should resume from a start cursor', function(done) {
-      var q = ds.createQuery('Character').hasAncestor(ancestor)
-          .offset(2)
-          .limit(2)
-          .order('appearances');
-      ds.runQuery(q, function(err, entities, endCursor) {
+      var q = ds.createQuery('Character')
+        .hasAncestor(ancestor)
+        .offset(2)
+        .limit(2)
+        .order('appearances');
+
+      ds.runQuery(q, function(err, entities, nextQuery) {
         assert.ifError(err);
-        var cursorQuery =
-            ds.createQuery('Character').hasAncestor(ancestor)
-              .order('appearances')
-              .start(endCursor);
-        ds.runQuery(cursorQuery, function(err, secondEntities) {
+
+        ds.runQuery(nextQuery.limit(-1), function(err, secondEntities) {
           assert.ifError(err);
           assert.equal(secondEntities.length, 4);
           assert.equal(secondEntities[0].data.name, 'Catelyn');
