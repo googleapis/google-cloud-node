@@ -198,8 +198,41 @@ describe('streamRouter', function() {
           resultsReceived.push(result);
         });
         rs.on('end', function() {
-          assert.deepEqual(results, resultsReceived);
+          assert.deepEqual(resultsReceived, ['a', 'b', 'c']);
           done();
+        });
+      });
+
+      describe('limits', function() {
+        var limit = 1;
+
+        function originalMethod() {
+          var callback = [].slice.call(arguments).pop();
+          setImmediate(function() {
+            callback(null, [1, 2, 3]);
+          });
+        }
+
+        it('should respect query.maxResults', function(done) {
+          var numResultsReceived = 0;
+
+          streamRouter.router_([{ maxResults: limit }], originalMethod)
+            .on('data', function() { numResultsReceived++; })
+            .on('end', function() {
+              assert.strictEqual(numResultsReceived, limit);
+              done();
+            });
+        });
+
+        it('should respect query.limitVal', function(done) {
+          var numResultsReceived = 0;
+
+          streamRouter.router_([{ limitVal: limit }], originalMethod)
+            .on('data', function() { numResultsReceived++; })
+            .on('end', function() {
+              assert.strictEqual(numResultsReceived, limit);
+              done();
+            });
         });
       });
 
