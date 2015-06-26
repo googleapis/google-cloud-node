@@ -63,7 +63,6 @@ describe('pubsub', function() {
   });
 
   describe('Topic', function() {
-
     it('should be listed', function(done) {
       pubsub.getTopics(function(err, topics) {
         assert.ifError(err);
@@ -95,6 +94,25 @@ describe('pubsub', function() {
       pubsub.createTopic(TOPIC_NAME, function(err) {
         assert.ifError(err);
         pubsub.topic(TOPIC_NAME).delete(done);
+      });
+    });
+
+    it('should lazily create by default', function(done) {
+      var newTopicName = generateTopicName();
+      var newTopic = pubsub.topic(newTopicName);
+
+      newTopic.publish({ data: 'message from me' }, function(err) {
+        assert.ifError(err);
+
+        pubsub.getTopics(function(err, topics) {
+          assert.ifError(err);
+
+          assert(topics.some(function(topic) {
+            return topic.name.indexOf(newTopicName) > -1;
+          }));
+
+          newTopic.delete(done);
+        });
       });
     });
 
