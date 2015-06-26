@@ -56,6 +56,20 @@ pb.FakeMethodResponse = {
   }
 };
 
+var extended = false;
+var fakeStreamRouter = {
+  extend: function(Class, methods) {
+    if (Class.name !== 'DatastoreRequest') {
+      return;
+    }
+
+    methods = util.arrayize(methods);
+    assert.equal(Class.name, 'DatastoreRequest');
+    assert.deepEqual(methods, ['runQuery']);
+    extended = true;
+  }
+};
+
 describe('Request', function() {
   var Request;
   var key;
@@ -64,6 +78,7 @@ describe('Request', function() {
 
   before(function() {
     mockery.registerMock('./pb.js', pb);
+    mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
     mockery.registerMock('request', fakeRequest);
     mockery.enable({
       useCleanCache: true,
@@ -90,8 +105,18 @@ describe('Request', function() {
     };
   });
 
-  it('should have set correct defaults on Request', function() {
-    assert.deepEqual(REQUEST_DEFAULT_CONF, { pool: { maxSockets: Infinity } });
+  describe('instantiation', function() {
+    it('should extend the correct methods', function() {
+      assert(extended); // See `fakeStreamRouter.extend`
+    });
+
+    it('should have set correct defaults on Request', function() {
+      assert.deepEqual(REQUEST_DEFAULT_CONF, {
+        pool: {
+          maxSockets: Infinity
+        }
+      });
+    });
   });
 
   describe('get', function() {
@@ -469,108 +494,29 @@ describe('Request', function() {
       });
     });
 
-    it('should return an empty string if no end cursor exists', function(done) {
+    it('should return null nextQuery if no end cursor exists', function(done) {
       request.makeReq_ = function(method, req, callback) {
         callback(null, mockResponse.withResults);
       };
 
-      request.runQuery(query, function(err, entities, endCursor) {
+      request.runQuery(query, function(err, entities, nextQuery) {
         assert.ifError(err);
-        assert.strictEqual(endCursor, '');
+        assert.strictEqual(nextQuery, null);
         done();
       });
     });
 
-    it('should return the end cursor from the last query', function(done) {
+    it('should return a nextQuery', function(done) {
       var response = mockResponse.withResultsAndEndCursor;
 
       request.makeReq_ = function(method, req, callback) {
         callback(null, response);
       };
 
-      request.runQuery(query, function(err, entities, endCursor) {
+      request.runQuery(query, function(err, entities, nextQuery) {
         assert.ifError(err);
-        assert.equal(endCursor, response.batch.end_cursor.toBase64());
+        assert.equal(nextQuery.startVal, response.batch.end_cursor.toBase64());
         done();
-      });
-    });
-
-    describe('streams', function() {
-      it('should be a stream if a callback is omitted', function() {
-        assert(request.runQuery(query) instanceof stream.Stream);
-      });
-
-      it('should run the query after being read from', function(done) {
-        request.makeReq_ = function() {
-          done();
-        };
-
-        request.runQuery(query).emit('reading');
-      });
-
-      it('should continuosly run until there are no results', function(done) {
-        var run = 0;
-        var timesToRun = 2;
-
-        request.makeReq_ = function(method, req, callback) {
-          run++;
-
-          if (run < timesToRun) {
-            callback(null, mockResponse.withResultsAndEndCursor);
-          } else {
-            var lastEndCursor =
-              mockResponse.withResultsAndEndCursor.batch.end_cursor.toBase64();
-            lastEndCursor = new Buffer(lastEndCursor, 'base64').toString();
-
-            assert.equal(String(req.query.start_cursor), lastEndCursor);
-            assert.strictEqual(req.query.offset, undefined);
-
-            callback(null, mockResponse.withResults);
-          }
-        };
-
-        var resultsReturned = 0;
-
-        request.runQuery(query)
-          .on('data', function() { resultsReturned++; })
-          .on('end', function() {
-            assert.equal(resultsReturned, mockRespGet.found.length);
-            done();
-          });
-      });
-
-      it('should only emit the limited number of results', function(done) {
-        var limit = 2;
-
-        query.limitVal = limit;
-
-        request.makeReq_ = function(method, req, callback) {
-          callback(null, mockResponse.withResultsAndEndCursor);
-        };
-
-        var resultsReturned = 0;
-
-        request.runQuery(query)
-          .on('data', function() { resultsReturned++; })
-          .on('end', function() {
-            assert.equal(resultsReturned, limit);
-            done();
-          });
-      });
-
-      it('should emit an error', function(done) {
-        var error = new Error('Error.');
-
-        request.makeReq_ = function(method, req, callback) {
-          callback(error);
-        };
-
-        request.runQuery(query)
-          .on('error', function(err) {
-            assert.equal(err, error);
-            done();
-          })
-          .emit('reading');
       });
     });
   });
