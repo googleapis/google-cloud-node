@@ -14,24 +14,63 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach */
-
 'use strict';
 
+// If we don't stub see4_crc32 and use mockery, we get "Module did not self-
+// register".
+var crc = require('sse4_crc32');
+
 var assert = require('assert');
-var Bucket = require('../../lib/storage/bucket.js');
 var extend = require('extend');
-var Storage = require('../../lib/storage');
+var mockery = require('mockery');
+
 var util = require('../../lib/common/util.js');
 
+var extended = false;
+var fakeStreamRouter = {
+  extend: function(Class, methods) {
+    if (Class.name !== 'Storage') {
+      return;
+    }
+
+    methods = util.arrayize(methods);
+    assert.equal(Class.name, 'Storage');
+    assert.deepEqual(methods, ['getBuckets']);
+    extended = true;
+  }
+};
+
 describe('Storage', function() {
+  var Storage;
   var storage;
+  var Bucket;
+
+  before(function() {
+    mockery.registerMock('sse4_crc32', crc);
+    mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+
+    Bucket = require('../../lib/storage/bucket.js');
+    Storage = require('../../lib/storage');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
 
   beforeEach(function() {
     storage = new Storage({ projectId: 'project-id' });
   });
 
   describe('instantiation', function() {
+    it('should extend the correct methods', function() {
+      assert(extended); // See `fakeStreamRouter.extend`
+    });
+
     it('should throw if a projectId is not specified', function() {
       assert.throws(function() {
         new Storage();
