@@ -18,12 +18,14 @@
 
 var assert = require('assert');
 var async = require('async');
+var Bucket = require('../lib/storage/bucket.js');
 var crypto = require('crypto');
+var File = require('../lib/storage/file.js');
 var fs = require('fs');
 var request = require('request');
 var through = require('through2');
 var tmp = require('tmp');
-var util = require('../lib/common/util');
+var util = require('../lib/common/util.js');
 var uuid = require('node-uuid');
 
 var prop = util.prop;
@@ -419,6 +421,20 @@ describe('storage', function() {
         done();
       }
     });
+
+    it('should get buckets as a stream', function(done) {
+      var bucketEmitted = false;
+
+      storage.getBuckets()
+        .on('error', done)
+        .on('data', function(bucket) {
+          bucketEmitted = bucket instanceof Bucket;
+        })
+        .on('end', function() {
+          assert.strictEqual(bucketEmitted, true);
+          done();
+        });
+    });
   });
 
   describe('bucket metadata', function() {
@@ -697,6 +713,20 @@ describe('storage', function() {
         assert.equal(nextQuery, null);
         done();
       });
+    });
+
+    it('should get files as a stream', function(done) {
+      var fileEmitted = false;
+
+      bucket.getFiles()
+        .on('error', done)
+        .on('data', function(file) {
+          fileEmitted = file instanceof File;
+        })
+        .on('end', function() {
+          assert.strictEqual(fileEmitted, true);
+          done();
+        });
     });
 
     it('should paginate the list', function(done) {
