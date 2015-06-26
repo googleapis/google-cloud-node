@@ -497,8 +497,8 @@
       },
       {
         "type": "example",
-        "string": "pubsub.createTopic('my-new-topic', function(err, topic, apiResponse) {\n  topic.publish('New message!', function(err) {});\n});",
-        "html": "<p>pubsub.createTopic(&#39;my-new-topic&#39;, function(err, topic, apiResponse) {<br />  topic.publish(&#39;New message!&#39;, function(err) {});<br />});</p>"
+        "string": "pubsub.createTopic('my-new-topic', function(err, topic, apiResponse) {\n  topic.publish({\n    data: 'New message!'\n  }, function(err) {});\n});\n\n//-\n// <strong>Note:</strong> For cases like the one above, it is simpler to use\n// {module:pubsub#topic}, which will create the topic for you at the time you\n// publish a message.\n//-",
+        "html": "<p>pubsub.createTopic(&#39;my-new-topic&#39;, function(err, topic, apiResponse) {<br />  topic.publish({<br />    data: &#39;New message!&#39;<br />  }, function(err) {});<br />});</p><p>//-<br />// <strong>Note:</strong> For cases like the one above, it is simpler to use<br />// {module:pubsub#topic}, which will create the topic for you at the time you<br />// publish a message.<br />//-</p>"
       }
     ],
     "description": {
@@ -512,7 +512,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 151,
-    "codeStart": 166,
+    "codeStart": 174,
     "code": "PubSub.prototype.createTopic = function(name, callback) {\n  callback = callback || util.noop;\n  var topic = this.topic(name);\n  var path = this.projectName + '/topics/' + name;\n  this.makeReq_('PUT', path, null, null, function(err, result) {\n    if (err) {\n      callback(err, null, result);\n      return;\n    }\n    callback(null, topic, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -669,8 +669,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 179,
-    "codeStart": 234,
+    "line": 187,
+    "codeStart": 242,
     "code": "PubSub.prototype.subscribe = function(topic, subName, options, callback) {\n  if (!util.is(topic, 'string') && !(topic instanceof Topic)) {\n    throw new Error('A Topic is required for a new subscription.');\n  }\n\n  if (!util.is(subName, 'string')) {\n    throw new Error('A subscription name is required for a new subscription.');\n  }\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  if (util.is(topic, 'string')) {\n    topic = this.topic(topic);\n  }\n\n  var body = {\n    topic: topic.name\n  };\n\n  if (options.ackDeadlineSeconds) {\n    body.ackDeadlineSeconds = options.ackDeadlineSeconds;\n  }\n\n  var subscription = this.subscription(subName, options);\n\n  this.makeReq_('PUT', subscription.name, null, body, function(err, result) {\n    if (err && !(err.code === 409 && options.reuseExisting)) {\n      callback(err, null, result);\n      return;\n    }\n\n    callback(null, subscription, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -776,8 +776,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 274,
-    "codeStart": 301,
+    "line": 282,
+    "codeStart": 309,
     "code": "PubSub.prototype.subscription = function(name, options) {\n  if (!name) {\n    throw new Error('The name of a subscription is required.');\n  }\n\n  options = options || {};\n  options.name = name;\n  return new Subscription(this, options);\n};",
     "ctx": {
       "type": "method",
@@ -827,14 +827,14 @@
       },
       {
         "type": "param",
-        "string": "{boolean=} options.autoCreate - Automatically create topic if it\n    doesn't exist. Note that messages published to a topic with no\n    subscribers will not be delivered.",
+        "string": "{boolean} options.autoCreate - Automatically create topic if it\n    doesn't exist. Note that messages published to a topic with no\n    subscribers will not be delivered. Default: true.",
         "name": "options.autoCreate",
-        "description": "<ul>\n<li>Automatically create topic if it     doesn&#39;t exist. Note that messages published to a topic with no<br />  subscribers will not be delivered.</li>\n</ul>\n",
+        "description": "<ul>\n<li>Automatically create topic if it     doesn&#39;t exist. Note that messages published to a topic with no<br />  subscribers will not be delivered. Default: true.</li>\n</ul>\n",
         "types": [
           "boolean"
         ],
-        "typesDescription": "<code>boolean</code>|<code>undefined</code>",
-        "optional": true,
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
         "nullable": false,
         "nonNullable": false,
         "variable": false
@@ -855,8 +855,8 @@
       },
       {
         "type": "example",
-        "string": "var topic = pubsub.topic('my-existing-topic');\nvar topic = pubsub.topic('topic-that-maybe-exists', { autoCreate: true });",
-        "html": "<p>var topic = pubsub.topic(&#39;my-existing-topic&#39;);<br />var topic = pubsub.topic(&#39;topic-that-maybe-exists&#39;, { autoCreate: true });</p>"
+        "string": "//-\n// By default, it isn't required to specify a topic that already exists. The\n// first time you publish a message, the topic will be created for you.\n//\n// This will only cost one additional API request at the time of publishing.\n// If the topic doesn't need to be created, there is no performance penalty.\n//-\nvar topic = pubsub.topic('my-topic');\n\ntopic.publish({\n  data: 'New message!'\n}, function(err) {});\n\n//-\n// If you prefer an error when trying to publish to a topic that doesn't\n// exist, set `autoCreate` to `false`.\n//-\nvar nonExistentTopic = pubsub.topic('my-non-existent-topic', {\n  autoCreate: false\n});\n\nnonExistentTopic.publish({\n  data: 'New message!'\n}, function(err) {\n  if (err) {\n    // API error from trying to publish a message to a non-existent topic.\n  }\n});",
+        "html": "<p>//-<br />// By default, it isn&#39;t required to specify a topic that already exists. The<br />// first time you publish a message, the topic will be created for you.<br />//<br />// This will only cost one additional API request at the time of publishing.<br />// If the topic doesn&#39;t need to be created, there is no performance penalty.<br />//-<br />var topic = pubsub.topic(&#39;my-topic&#39;);</p><p>topic.publish({<br />  data: &#39;New message!&#39;<br />}, function(err) {});</p><p>//-<br />// If you prefer an error when trying to publish to a topic that doesn&#39;t<br />// exist, set <code>autoCreate</code> to <code>false</code>.<br />//-<br />var nonExistentTopic = pubsub.topic(&#39;my-non-existent-topic&#39;, {<br />  autoCreate: false<br />});</p><p>nonExistentTopic.publish({<br />  data: &#39;New message!&#39;<br />}, function(err) {<br />  if (err) {<br />    // API error from trying to publish a message to a non-existent topic.<br />  }<br />});</p>"
       }
     ],
     "description": {
@@ -869,8 +869,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 311,
-    "codeStart": 327,
+    "line": 319,
+    "codeStart": 361,
     "code": "PubSub.prototype.topic = function(name, options) {\n  if (!name) {\n    throw new Error('A name must be specified for a new topic.');\n  }\n  options = options || {};\n  return new Topic(this, {\n    name: name,\n    autoCreate: options.autoCreate\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1025,8 +1025,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 338,
-    "codeStart": 380,
+    "line": 372,
+    "codeStart": 414,
     "code": "PubSub.prototype.getSubscriptions = function(options, callback) {\n  var self = this;\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  var topicName;\n\n  if (util.is(options.topic, 'string')) {\n    topicName = options.topic;\n  } else if (options.topic instanceof Topic) {\n    topicName = options.topic.unformattedName;\n  }\n\n  var query = {};\n\n  if (options.pageSize) {\n    query.pageSize = options.pageSize;\n  }\n\n  if (options.pageToken) {\n    query.pageToken = options.pageToken;\n  }\n\n  var apiPath = util.format('{projectPath}{topicPath}/subscriptions', {\n    projectPath: 'projects/' + this.projectId,\n    topicPath: topicName ? '/topics/' + topicName : ''\n  });\n\n  this.makeReq_('GET', apiPath, query, null, function(err, result) {\n    if (err) {\n      callback(err, null, null, result);\n      return;\n    }\n\n    var subscriptions = (result.subscriptions || []).map(function(sub) {\n      return new Subscription(self, {\n        // Depending on if we're using a subscriptions.list or\n        // topics.subscriptions.list API endpoint, we will get back a\n        // Subscription resource or just the name of the subscription.\n        name: sub.name || sub\n      });\n    });\n\n    var nextQuery = null;\n\n    if (result.nextPageToken) {\n      nextQuery = options;\n      nextQuery.pageToken = result.nextPageToken;\n    }\n\n    callback(null, subscriptions, nextQuery, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1121,8 +1121,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 439,
-    "codeStart": 451,
+    "line": 473,
+    "codeStart": 485,
     "code": "PubSub.prototype.makeReq_ = function(method, path, q, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: q,\n    uri: PUBSUB_BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};\n\nmodule.exports = PubSub;",
     "ctx": {
       "type": "method",
