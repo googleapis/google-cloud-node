@@ -801,6 +801,22 @@ describe('File', function() {
         readStream.destroy = done;
       });
     });
+
+    describe('tail requests', function() {
+      it('should make a request for the tail bytes', function(done) {
+        var endOffset = -10;
+
+        request_Override = function(opts) {
+          setImmediate(function () {
+            assert.equal(opts.headers.Range, 'bytes=' + endOffset);
+            done();
+          });
+          return duplexify();
+        };
+
+        file.createReadStream({ end: endOffset });
+      });
+    });
   });
 
   describe('createWriteStream', function() {
