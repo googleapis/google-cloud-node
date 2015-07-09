@@ -181,10 +181,14 @@ var gcs = gcloud.storage({
 });
 
 // Create a new bucket.
-gcs.createBucket('my-new-bucket', function(err, bucket) {});
+gcs.createBucket('my-new-bucket', function(err, bucket) {
+  if (!err) {
+    // "my-new-bucket" was successfully created.
+  }
+});
 
 // Reference an existing bucket.
-var bucket = gcs.bucket('my-bucket');
+var bucket = gcs.bucket('my-existing-bucket');
 
 // Upload a local file to a new file to be created in your bucket.
 var fileStream = fs.createReadStream('/local/file.txt');
