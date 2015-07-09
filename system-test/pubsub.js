@@ -238,7 +238,7 @@ describe('pubsub', function() {
           assert.ifError(err);
 
           var options = {
-            ackId: msgs[0].ackId,
+            ackIds: [msgs[0].ackId],
             seconds: 10
           };
           subscription.setAckDeadline(options, done);
