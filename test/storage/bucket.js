@@ -340,6 +340,125 @@ describe('Bucket', function() {
     });
   });
 
+  describe('deleteFiles', function() {
+    it('should get files from the bucket', function(done) {
+      var query = { a: 'b', c: 'd' };
+
+      bucket.getFiles = function(query_) {
+        assert.deepEqual(query_, query);
+        done();
+      };
+
+      bucket.deleteFiles(query, assert.ifError);
+    });
+
+    it('should process 10 files at a time', function(done) {
+      eachLimit_Override = function(arr, limit) {
+        assert.equal(limit, 10);
+        done();
+      };
+
+      bucket.getFiles = function(query, callback) {
+        callback(null, []);
+      };
+
+      bucket.deleteFiles({}, assert.ifError);
+    });
+
+    it('should delete the files', function(done) {
+      var timesCalled = 0;
+
+      var files = [
+        bucket.file('1'),
+        bucket.file('2')
+      ].map(util.propAssign('delete', function(callback) {
+        timesCalled++;
+        callback();
+      }));
+
+      bucket.getFiles = function(query, callback) {
+        callback(null, files);
+      };
+
+      bucket.deleteFiles({}, function(err) {
+        assert.ifError(err);
+        assert.equal(timesCalled, files.length);
+        done();
+      });
+    });
+
+    it('should get more files if more exist', function(done) {
+      var fakeNextQuery = { a: 'b', c: 'd' };
+
+      bucket.getFiles = function(query, callback) {
+        if (Object.keys(query).length === 0) {
+          // First time through, return a `nextQuery` value.
+          callback(null, [], fakeNextQuery);
+        } else {
+          // Second time through.
+          assert.deepEqual(query, fakeNextQuery);
+          done();
+        }
+      };
+
+      bucket.deleteFiles({}, assert.ifError);
+    });
+
+    it('should execute callback with error from getting files', function(done) {
+      var error = new Error('Error.');
+
+      bucket.getFiles = function(query, callback) {
+        callback(error);
+      };
+
+      bucket.deleteFiles({}, function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    it('should execute callback with error from deleting file', function(done) {
+      var error = new Error('Error.');
+
+      var files = [
+        bucket.file('1'),
+        bucket.file('2')
+      ].map(util.propAssign('delete', function(callback) {
+        callback(error);
+      }));
+
+      bucket.getFiles = function(query, callback) {
+        callback(null, files);
+      };
+
+      bucket.deleteFiles({}, function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    it('should execute callback with queued errors', function(done) {
+      var error = new Error('Error.');
+
+      var files = [
+        bucket.file('1'),
+        bucket.file('2')
+      ].map(util.propAssign('delete', function(callback) {
+        callback(error);
+      }));
+
+      bucket.getFiles = function(query, callback) {
+        callback(null, files);
+      };
+
+      bucket.deleteFiles({ force: true }, function(errs) {
+        assert.strictEqual(errs[0], error);
+        assert.strictEqual(errs[1], error);
+        done();
+      });
+    });
+  });
+
   describe('file', function() {
     var FILE_NAME = 'remote-file-name.jpg';
     var file;
