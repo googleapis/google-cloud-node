@@ -554,10 +554,10 @@ describe('Subscription', function() {
         assert.equal(method, 'POST');
         assert.equal(path, this.name + ':modifyAckDeadline');
         assert.equal(qs, null);
-        assert.deepEqual(body, { ackId: 123, ackDeadlineSeconds: 10 });
+        assert.deepEqual(body, { ackIds: [123], ackDeadlineSeconds: 10 });
         done();
       };
-      subscription.setAckDeadline({ ackId: 123, seconds: 10 }, done);
+      subscription.setAckDeadline({ ackIds: [123], seconds: 10 }, done);
     });
 
     it('should execute the callback', function(done) {
