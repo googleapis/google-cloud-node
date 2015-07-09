@@ -110,9 +110,19 @@ angular
           'bucket',
           'file',
           'job',
-          'table'
+          'table',
+          'index',
+          'document',
+          'field',
+          'topic',
+          'subscription'
         ];
-        type = type.replace('=', '');
+
+        var arrayRegex = /Array\.<([^>]+)>/g;
+        type = type.replace('=', '')
+          .replace('?', '')
+          .replace(arrayRegex, '$1[]');
+
         if (CUSTOM_TYPES.indexOf(type.toLowerCase()) > -1) {
           if (types[index - 1]) {
             type = types[index - 1] + '/' + type;

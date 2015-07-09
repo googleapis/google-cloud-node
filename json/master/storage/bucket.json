@@ -752,6 +752,92 @@
     "tags": [
       {
         "type": "param",
+        "string": "{object=} query - Query object. See {module:storage/bucket#getFiles}\n    for all of the supported properties.",
+        "name": "query",
+        "description": "<ul>\n<li>Query object. See {module:storage/bucket#getFiles}     for all of the supported properties.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} query.force - Supress errors until all files have been\n    processed.",
+        "name": "query.force",
+        "description": "<ul>\n<li>Supress errors until all files have been     processed.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error|?error[]} callback.err - An API error or array of errors from\n    files that were not able to be deleted.\n",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An API error or array of errors from     files that were not able to be deleted.</li>\n</ul>\n",
+        "types": [
+          "error",
+          "Array.<error>"
+        ],
+        "typesDescription": "<code>error</code>|<code>Array</code>.&lt;<code>error</code>&gt;|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Delete all of the files in the bucket.\n//-\nbucket.deleteFiles(function(err) {});\n\n//-\n// By default, if a file cannot be deleted, this method will stop deleting\n// files from your bucket. You can override this setting with `force: true`.\n//-\nbucket.deleteFiles({\n  force: true\n}, function(errors) {\n  // `errors`:\n  //    Array of errors if any occurred, otherwise null.\n});\n\n//-\n// The first argument to this method acts as a query to\n// {module:storage/bucket#getFiles}. As an example, you can delete files\n// which match a prefix.\n//-\nbucket.deleteFiles({\n  prefix: 'images/'\n}, function(err) {\n  if (!err) {\n    // All files in the `images` directory have been deleted.\n  }\n});",
+        "html": "<p>//-<br />// Delete all of the files in the bucket.<br />//-<br />bucket.deleteFiles(function(err) {});</p><p>//-<br />// By default, if a file cannot be deleted, this method will stop deleting<br />// files from your bucket. You can override this setting with <code>force: true</code>.<br />//-<br />bucket.deleteFiles({<br />  force: true<br />}, function(errors) {<br />  // <code>errors</code>:<br />  //    Array of errors if any occurred, otherwise null.<br />});</p><p>//-<br />// The first argument to this method acts as a query to<br />// {module:storage/bucket#getFiles}. As an example, you can delete files<br />// which match a prefix.<br />//-<br />bucket.deleteFiles({<br />  prefix: &#39;images/&#39;<br />}, function(err) {<br />  if (!err) {<br />    // All files in the <code>images</code> directory have been deleted.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Iterate over the bucket&#39;s files, calling <code>file.delete()</code> on each.</p><p><strong>This is not an atomic request.</strong> A delete attempt will be made<br />for each file individually. Any one can fail, in which case only a portion of<br />the files you intended to be deleted would have.</p><p>Operations are performed in parallel, up to 10 at once. The first error<br />breaks the loop and will execute the provided callback with it. Specify<br /><code>{ force: true }</code> to suppress the errors until all files have had a chance to<br />be processed.</p><p>The <code>query</code> object passed as the first argument will also be passed to<br />{module:storage/bucket#getFiles}.</p>",
+      "summary": "<p>Iterate over the bucket&#39;s files, calling <code>file.delete()</code> on each.</p>",
+      "body": "<p><strong>This is not an atomic request.</strong> A delete attempt will be made<br />for each file individually. Any one can fail, in which case only a portion of<br />the files you intended to be deleted would have.</p><p>Operations are performed in parallel, up to 10 at once. The first error<br />breaks the loop and will execute the provided callback with it. Specify<br /><code>{ force: true }</code> to suppress the errors until all files have had a chance to<br />be processed.</p><p>The <code>query</code> object passed as the first argument will also be passed to<br />{module:storage/bucket#getFiles}.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 313,
+    "codeStart": 366,
+    "code": "Bucket.prototype.deleteFiles = function(query, callback) {\n  if (util.is(query, 'function')) {\n    callback = query;\n    query = {};\n  }\n\n  query = query || {};\n\n  var self = this;\n\n  var MAX_PARALLEL_LIMIT = 10;\n  var errors = [];\n\n  // Start deleting files, iteratively fetching more as necessary.\n  deleteFiles(query, function(err) {\n    if (err || errors.length > 0) {\n      callback(err || errors);\n      return;\n    }\n\n    callback(null);\n  });\n\n  function deleteFiles(query, callback) {\n    self.getFiles(query, function(err, files, nextQuery) {\n      if (err) {\n        callback(err);\n        return;\n      }\n\n      // Iterate through each file and attempt to delete it.\n      async.eachLimit(files, MAX_PARALLEL_LIMIT, deleteFile, function(err) {\n        if (err) {\n          callback(err);\n          return;\n        }\n\n        if (nextQuery) {\n          deleteFiles(nextQuery, callback);\n          return;\n        }\n\n        callback();\n      });\n    });\n  }\n\n  function deleteFile(file, callback) {\n    file.delete(function(err) {\n      if (err) {\n        if (query.force) {\n          errors.push(err);\n          callback();\n          return;\n        }\n\n        callback(err);\n        return;\n      }\n\n      callback();\n    });\n  }\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "deleteFiles",
+      "string": "Bucket.prototype.deleteFiles()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
         "string": "{string} name - The name of the file in this bucket.",
         "name": "name",
         "description": "<ul>\n<li>The name of the file in this bucket.</li>\n</ul>\n",
@@ -823,8 +909,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 313,
-    "codeStart": 326,
+    "line": 431,
+    "codeStart": 444,
     "code": "Bucket.prototype.file = function(name, options) {\n  return new File(this, name, options);\n};",
     "ctx": {
       "type": "method",
@@ -950,8 +1036,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 330,
-    "codeStart": 382,
+    "line": 448,
+    "codeStart": 500,
     "code": "Bucket.prototype.getFiles = function(query, callback) {\n  var self = this;\n\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n\n  this.makeReq_('GET', '/o', query, true, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var files = (resp.items || []).map(function(item) {\n      var options = {};\n\n      if (query.versions) {\n        options.generation = item.generation;\n      }\n\n      var file = self.file(item.name, options);\n      file.metadata = item;\n\n      return file;\n    });\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, { pageToken: resp.nextPageToken });\n    }\n\n    callback(null, files, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -993,8 +1079,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 419,
-    "codeStart": 429,
+    "line": 537,
+    "codeStart": 547,
     "code": "Bucket.prototype.getMetadata = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('GET', '', null, true, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n    this.metadata = resp;\n    callback(null, this.metadata, resp);\n  }.bind(this));\n};",
     "ctx": {
       "type": "method",
@@ -1078,8 +1164,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 441,
-    "codeStart": 502,
+    "line": 559,
+    "codeStart": 620,
     "code": "Bucket.prototype.makePrivate = function(options, callback) {\n  var self = this;\n\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.private = true;\n\n  async.series([setPredefinedAcl, makeFilesPrivate], callback);\n\n  function setPredefinedAcl(done) {\n    var query = {\n      predefinedAcl: 'projectPrivate'\n    };\n\n    // You aren't allowed to set both predefinedAcl & acl properties on a bucket\n    // so acl must explicitly be nullified.\n    var metadata = { acl: null };\n\n    self.makeReq_('PATCH', '', query, metadata, function(err, resp) {\n      if (err) {\n        done(err);\n        return;\n      }\n\n      self.metadata = resp;\n\n      done();\n    });\n  }\n\n  function makeFilesPrivate(done) {\n    if (!options.includeFiles) {\n      done();\n      return;\n    }\n\n    self.makeAllFilesPublicPrivate_(options, done);\n  }\n};",
     "ctx": {
       "type": "method",
@@ -1163,8 +1249,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 546,
-    "codeStart": 607,
+    "line": 664,
+    "codeStart": 725,
     "code": "Bucket.prototype.makePublic = function(options, callback) {\n  var self = this;\n\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.public = true;\n\n  async.series([\n    addAclPermissions,\n    addDefaultAclPermissions,\n    makeFilesPublic\n  ], callback);\n\n  function addAclPermissions(done) {\n    // Allow reading bucket contents while preserving original permissions.\n    self.acl.add({\n      entity: 'allUsers',\n      role: 'READER'\n    }, done);\n  }\n\n  function addDefaultAclPermissions(done) {\n    self.acl.default.add({\n      entity: 'allUsers',\n      role: 'READER'\n    }, done);\n  }\n\n  function makeFilesPublic(done) {\n    if (!options.includeFiles) {\n      done();\n      return;\n    }\n\n    self.makeAllFilesPublicPrivate_(options, done);\n  }\n};",
     "ctx": {
       "type": "method",
@@ -1220,8 +1306,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 649,
-    "codeStart": 675,
+    "line": 767,
+    "codeStart": 793,
     "code": "Bucket.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n  callback = callback || util.noop;\n\n  this.makeReq_('PATCH', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1349,8 +1435,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 691,
-    "codeStart": 769,
+    "line": 809,
+    "codeStart": 887,
     "code": "Bucket.prototype.upload = function(localPath, options, callback) {\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = {};\n  }\n\n  var newFile;\n  if (options.destination instanceof File) {\n    newFile = options.destination;\n  } else if (util.is(options.destination, 'string')) {\n    // Use the string as the name of the file.\n    newFile = this.file(options.destination);\n  } else {\n    // Resort to using the name of the incoming file.\n    newFile = this.file(path.basename(localPath));\n  }\n\n  var metadata = options.metadata || {};\n  var contentType = mime.contentType(path.basename(localPath));\n\n  if (contentType && !metadata.contentType) {\n    metadata.contentType = contentType;\n  }\n\n  var resumable;\n  if (util.is(options.resumable, 'boolean')) {\n    resumable = options.resumable;\n    upload();\n  } else {\n    // Determine if the upload should be resumable if it's over the threshold.\n    fs.stat(localPath, function(err, fd) {\n      if (err) {\n        callback(err);\n        return;\n      }\n\n      resumable = fd.size > RESUMABLE_THRESHOLD;\n\n      upload();\n    });\n  }\n\n  function upload() {\n    fs.createReadStream(localPath)\n      .pipe(newFile.createWriteStream({\n        validation: options.validation,\n        resumable: resumable,\n        metadata: metadata\n      }))\n      .on('error', function(err) {\n        callback(err);\n      })\n      .on('complete', function() {\n        callback(null, newFile);\n      });\n  }\n};",
     "ctx": {
       "type": "method",
@@ -1449,9 +1535,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 827,
-    "codeStart": 844,
-    "code": "Bucket.prototype.makeAllFilesPublicPrivate_ = function(options, callback) {\n  var self = this;\n\n  var MAX_PARALLEL_LIMIT = 10;\n  var errors = [];\n  var updatedFiles = [];\n\n  // Start processing files, iteratively fetching more as necessary.\n  processFiles({}, function (err) {\n    if (err || errors.length > 0) {\n      callback(err || errors, updatedFiles);\n      return;\n    }\n\n    callback(null, updatedFiles);\n  });\n\n  function processFiles(query, callback) {\n    self.getFiles(query, function(err, files, nextQuery) {\n      if (err) {\n        callback(err);\n        return;\n      }\n\n      // Iterate through each file and make it public or private.\n      async.eachLimit(files, MAX_PARALLEL_LIMIT, processFile, function(err) {\n        if (err) {\n          callback(err);\n          return;\n        }\n\n        if (nextQuery) {\n          processFiles(nextQuery, callback);\n          return;\n        }\n\n        callback();\n      });\n    });\n  }\n\n  function processFile(file, callback) {\n    if (options.public) {\n      file.makePublic(processedCallback);\n    } else if (options.private) {\n      file.makePrivate(processedCallback);\n    }\n\n    function processedCallback(err) {\n      if (err) {\n        if (options.force) {\n          errors.push(err);\n          callback();\n          return;\n        }\n\n        callback(err);\n        return;\n      }\n\n      updatedFiles.push(file);\n      callback();\n    }\n  }\n};",
+    "line": 945,
+    "codeStart": 962,
+    "code": "Bucket.prototype.makeAllFilesPublicPrivate_ = function(options, callback) {\n  var self = this;\n\n  var MAX_PARALLEL_LIMIT = 10;\n  var errors = [];\n  var updatedFiles = [];\n\n  // Start processing files, iteratively fetching more as necessary.\n  processFiles({}, function(err) {\n    if (err || errors.length > 0) {\n      callback(err || errors, updatedFiles);\n      return;\n    }\n\n    callback(null, updatedFiles);\n  });\n\n  function processFiles(query, callback) {\n    self.getFiles(query, function(err, files, nextQuery) {\n      if (err) {\n        callback(err);\n        return;\n      }\n\n      // Iterate through each file and make it public or private.\n      async.eachLimit(files, MAX_PARALLEL_LIMIT, processFile, function(err) {\n        if (err) {\n          callback(err);\n          return;\n        }\n\n        if (nextQuery) {\n          processFiles(nextQuery, callback);\n          return;\n        }\n\n        callback();\n      });\n    });\n  }\n\n  function processFile(file, callback) {\n    if (options.public) {\n      file.makePublic(processedCallback);\n    } else if (options.private) {\n      file.makePrivate(processedCallback);\n    }\n\n    function processedCallback(err) {\n      if (err) {\n        if (options.force) {\n          errors.push(err);\n          callback();\n          return;\n        }\n\n        callback(err);\n        return;\n      }\n\n      updatedFiles.push(file);\n      callback();\n    }\n  }\n};",
     "ctx": {
       "type": "method",
       "constructor": "Bucket",
@@ -1545,8 +1631,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 910,
-    "codeStart": 922,
+    "line": 1028,
+    "codeStart": 1040,
     "code": "Bucket.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: STORAGE_BASE_URL + '/' + this.name + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.storage.makeAuthorizedRequest_(reqOpts, callback);\n};\n\nmodule.exports = Bucket;",
     "ctx": {
       "type": "method",
