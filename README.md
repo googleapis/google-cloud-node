@@ -77,11 +77,13 @@ var gcloud = require('gcloud')({
 
 You can also set auth on a per-API-instance basis. The examples below show you how.
 
+
 ## Google BigQuery
 
-Analyze Big Data in the cloud with [Google BigQuery][cloud-bigquery] ([docs][cloud-bigquery-docs]) . Run fast, SQL-like queries against multi-terabyte datasets in seconds. Scalable and easy to use, BigQuery gives you real-time insights about your data.
+- [API Documentation][gcloud-bigquery-docs]
+- [Official Documentation][cloud-bigquery-docs]
 
-See the [gcloud-node BigQuery API documentation][gcloud-bigquery-docs] to learn how to access your BigQuery datasets using this library.
+#### Preview
 
 ```js
 var gcloud = require('gcloud');
@@ -109,13 +111,15 @@ job.getQueryResults(function(err, rows, nextQuery) {});
 job.getQueryResults().on('data', function(row) {});
 ```
 
+
 ## Google Cloud Datastore
 
-[Google Cloud Datastore][cloud-datastore] ([docs][cloud-datastore-docs]) is a fully managed, schemaless database for storing non-relational data. Cloud Datastore automatically scales with your users and supports ACID transactions, high availability of reads and writes, strong consistency for reads and ancestor queries, and eventual consistency for all other queries.
+- [API Documentation][gcloud-datastore-docs]
+- [Official Documentation][cloud-datastore-docs]
 
-Follow the [activation instructions][cloud-datastore-activation] to use the Google Cloud Datastore API with your project.
+*Follow the [activation instructions][cloud-datastore-activation] to use the Google Cloud Datastore API with your project.*
 
-See the [gcloud-node Datastore API documentation][gcloud-datastore-docs] to learn how to interact with the Cloud Datastore using this library.
+#### Preview
 
 ```js
 var gcloud = require('gcloud');
@@ -135,10 +139,8 @@ dataset.get(dataset.key(['Product', 'Computer']), function(err, entity) {
 // Save data to your dataset.
 var blogPostData = {
   title: 'How to make the perfect homemade pasta',
-  tags: ['pasta', 'homemade'],
   author: 'Andrew Chilton',
-  isDraft: true,
-  wordCount: 450
+  isDraft: true
 };
 
 var blogPostKey = dataset.key('BlogPost');
@@ -162,11 +164,13 @@ dataset.save({
 });
 ```
 
+
 ## Google Cloud Storage
 
-[Google Cloud Storage][cloud-storage] ([docs][cloud-storage-docs]) allows you to store data on Google infrastructure with very high reliability, performance and availability, and can be used to distribute large data objects to users via direct download.
+- [API Documentation][gcloud-storage-docs]
+- [Official Documentation][cloud-storage-docs]
 
-See the [gcloud-node Storage API documentation][gcloud-storage-docs] to learn how to connect to Cloud Storage using this library.
+#### Preview
 
 ```js
 var fs = require('fs');
@@ -199,13 +203,15 @@ var fileStream = bucket.file('photo.jpg').createReadStream();
 fileStream.pipe(fs.createWriteStream('/local/photo.jpg'));
 ```
 
+
 ## Google Cloud Pub/Sub (Beta)
 
 > This is a *Beta* release of Google Cloud Pub/Sub. This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
 
-[Google Cloud Pub/Sub][cloud-pubsub] ([docs][cloud-pubsub-docs]) allows you to connect your services with reliable, many-to-many, asynchronous messaging hosted on Google's infrastructure. Cloud Pub/Sub automatically scales as you need it and provides a foundation for building your own robust, global services.
+- [API Documentation][gcloud-pubsub-docs]
+- [Official Documentation][cloud-pubsub-docs]
 
-See the [gcloud-node Pub/Sub API documentation][gcloud-pubsub-docs] to learn how to use Cloud Pub/Sub with this library.
+#### Preview
 
 ```js
 var gcloud = require('gcloud');
@@ -241,12 +247,15 @@ topic.subscribe('new-subscription', function(err, subscription) {
 });
 ```
 
+
 ## Google Cloud Search (Alpha)
+
 > This is an *Alpha* release of Google Cloud Search. This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
 
-[Google Cloud Search][cloud-search] ([docs][cloud-search-docs]) allows you to quickly perform full-text and geospatial searches against your data without having to spin up your own instances and without the hassle of managing and maintaining a search service.
+- [API Documentation][gcloud-search-docs]
+- [Official Documentation][cloud-search-docs]
 
-See the [gcloud-node Search API documentation][gcloud-search-docs] to learn how to store and query your indexes and documents using this library.
+#### Preview
 
 ```js
 var gcloud = require('gcloud');
@@ -300,31 +309,25 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [gcloud-pubsub-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/pubsub
 [gcloud-search-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/search
 [gcloud-storage-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/storage
+
 [gcloud-todos]: https://github.com/GoogleCloudPlatform/gcloud-node-todos
 [gitnpm]: https://github.com/stephenplusplus/gitnpm
 [gcloud-kvstore]: https://github.com/stephenplusplus/gcloud-kvstore
+[hya-wave]: https://wav.hya.io
+[hya-io]: https://hya.io
 
 [dev-console]: https://console.developers.google.com/project
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 
 [googleapis]: https://github.com/google/google-api-nodejs-client
 
-[cloud-bigquery]: https://cloud.google.com/bigquery/
 [cloud-bigquery-docs]: https://cloud.google.com/bigquery/what-is-bigquery
 
-[cloud-datastore]: https://cloud.google.com/datastore/
 [cloud-datastore-docs]: https://cloud.google.com/datastore/docs
 [cloud-datastore-activation]: https://cloud.google.com/datastore/docs/activate
 
-[cloud-pubsub]: https://cloud.google.com/pubsub/
 [cloud-pubsub-docs]: https://cloud.google.com/pubsub/docs
 
-[cloud-search]: https://cloud.google.com/search/
 [cloud-search-docs]: https://cloud.google.com/search/
 
-[cloud-storage]: https://cloud.google.com/storage/
 [cloud-storage-docs]: https://cloud.google.com/storage/docs/overview
-[cloud-storage-create-bucket]: https://cloud.google.com/storage/docs/cloud-console#_creatingbuckets
-
-[hya-wave]: https://wav.hya.io
-[hya-io]: https://hya.io
