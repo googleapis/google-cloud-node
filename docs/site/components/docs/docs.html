@@ -83,7 +83,10 @@ var gcloud = require('gcloud')({
         <tbody>
           <tr
             ng-repeat="param in method.params"
-            ng-class="{ 'param-optional': param.optional }">
+            ng-class="{
+              'param-optional': param.optional,
+              'param-nullable': param.nullable
+            }">
             <th scope="row" class="param">
               <span ng-if="param.subparam" class="param-parent">
                 <div>{{param.name.split('.').slice(0, -1).join('.')}}</div>
