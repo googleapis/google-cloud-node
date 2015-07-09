@@ -547,13 +547,14 @@
       },
       {
         "type": "param",
-        "string": "{number} options.ackId - The ack id to change.",
-        "name": "options.ackId",
-        "description": "<ul>\n<li>The ack id to change.</li>\n</ul>\n",
+        "string": "{number|number[]} options.ackIds - The ack id(s) to change.",
+        "name": "options.ackIds",
+        "description": "<ul>\n<li>The ack id(s) to change.</li>\n</ul>\n",
         "types": [
-          "number"
+          "number",
+          "Array.<number>"
         ],
-        "typesDescription": "<code>number</code>",
+        "typesDescription": "<code>number</code>|<code>Array</code>.&lt;<code>number</code>&gt;",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -605,7 +606,7 @@
     "ignore": false,
     "line": 383,
     "codeStart": 402,
-    "code": "Subscription.prototype.setAckDeadline = function(options, callback) {\n  var body = {\n    ackId: options.ackId,\n    ackDeadlineSeconds: options.seconds\n  };\n\n  callback = callback || util.noop;\n\n  var path = this.name + ':modifyAckDeadline';\n  this.makeReq_('POST', path, null, body, callback);\n};\n\nmodule.exports = Subscription;",
+    "code": "Subscription.prototype.setAckDeadline = function(options, callback) {\n  var body = {\n    ackIds: util.arrayize(options.ackIds),\n    ackDeadlineSeconds: options.seconds\n  };\n\n  callback = callback || util.noop;\n\n  var path = this.name + ':modifyAckDeadline';\n  this.makeReq_('POST', path, null, body, callback);\n};\n\nmodule.exports = Subscription;",
     "ctx": {
       "type": "method",
       "constructor": "Subscription",

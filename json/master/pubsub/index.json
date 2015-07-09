@@ -189,11 +189,11 @@
     "ignore": false,
     "line": 41,
     "codeStart": 45,
-    "code": "var PUBSUB_BASE_URL = 'https://pubsub.googleapis.com/v1beta2/';",
+    "code": "var PUBSUB_BASE_URL = 'https://pubsub.googleapis.com/v1/';",
     "ctx": {
       "type": "declaration",
       "name": "PUBSUB_BASE_URL",
-      "value": "'https://pubsub.googleapis.com/v1beta2/'",
+      "value": "'https://pubsub.googleapis.com/v1/'",
       "string": "PUBSUB_BASE_URL"
     }
   },
