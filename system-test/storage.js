@@ -42,27 +42,6 @@ var files = {
   }
 };
 
-function deleteVersionedFiles(bucket, callback) {
-  bucket.getFiles({ versions: true }, function(err, files) {
-    if (err) {
-      callback(err);
-      return;
-    }
-
-    async.each(files, deleteFile, callback);
-  });
-}
-
-function deleteFiles(bucket, callback) {
-  bucket.getFiles(function(err, files) {
-    if (err) {
-      callback(err);
-      return;
-    }
-    async.map(files, deleteFile, callback);
-  });
-}
-
 function deleteFile(file, callback) {
   file.delete(callback);
 }
@@ -100,7 +79,7 @@ describe('storage', function() {
   });
 
   after(function(done) {
-    deleteFiles(bucket, function(err) {
+    bucket.deleteFiles(function(err) {
       assert.ifError(err);
       bucket.delete(done);
     });
@@ -221,7 +200,7 @@ describe('storage', function() {
                     bucket.acl.default.delete({ entity: 'allUsers' }, next);
                   },
                   function(next) {
-                    deleteFiles(bucket, next);
+                    bucket.deleteFiles(next);
                   }
                 ], done);
               });
@@ -278,7 +257,7 @@ describe('storage', function() {
               async.each(files, isFilePrivate, function(err) {
                 assert.ifError(err);
 
-                deleteFiles(bucket, done);
+                bucket.deleteFiles(done);
               });
             });
           });
@@ -686,7 +665,7 @@ describe('storage', function() {
     var filenames = ['CloudLogo1', 'CloudLogo2', 'CloudLogo3'];
 
     before(function(done) {
-      deleteFiles(bucket, function(err) {
+      bucket.deleteFiles(function(err) {
         assert.ifError(err);
 
         var file = bucket.file(filenames[0]);
@@ -750,7 +729,7 @@ describe('storage', function() {
     });
 
     afterEach(function(done) {
-      deleteVersionedFiles(versionedBucket, done);
+      versionedBucket.deleteFiles({ versions: true }, done);
     });
 
     after(function(done) {
