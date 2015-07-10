@@ -428,6 +428,11 @@ ul {
         transition: all 0.3s ease;
 }
 
+.language-switcher--home .menu {
+    position: absolute;
+    bottom: initial;
+}
+
 .page-header.fixed .menu {
     top: 3.3em;
 }
@@ -1425,6 +1430,10 @@ ul {
     /*
      Menu
      */
+    .menu {
+        position: absolute;
+    }
+
     .main-nav {
         position: absolute;
         top: 1.2em;
