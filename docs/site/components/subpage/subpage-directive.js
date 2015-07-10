@@ -72,6 +72,7 @@ angular
       priority: 1500,
       restrict: 'C',
       transclude: true,
+      scope: {},
       template: '<div hljs language="javascript" source="contents"></div>',
       compile: function(element) {
         return function($scope, element, attrs) {
