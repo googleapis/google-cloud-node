@@ -141,6 +141,14 @@ describe('Search', function() {
       });
     });
 
+    it('should get all indexes with autoPaginate', function(done) {
+      search.getIndexes({ autoPaginate: true }, function(err, indexes) {
+        assert.ifError(err);
+        assert(indexes.length > 0);
+        done();
+      });
+    });
+
     it('should get all indexes in stream mode', function(done) {
       var resultsMatched = 0;
 
@@ -183,6 +191,14 @@ describe('Search', function() {
 
     it('should get all documents', function(done) {
       index.getDocuments(function(err, documents) {
+        assert.ifError(err);
+        assert.strictEqual(documents.length, 1);
+        done();
+      });
+    });
+
+    it('should get all documents with autoPaginate', function(done) {
+      index.getDocuments({ autoPaginate: true }, function(err, documents) {
         assert.ifError(err);
         assert.strictEqual(documents.length, 1);
         done();
@@ -278,6 +294,18 @@ describe('Search', function() {
 
     it('should search document', function(done) {
       index.search(query, function(err, results) {
+        assert.ifError(err);
+        assert.equal(results.length, 1);
+        assert.equal(results[0].id, DOCUMENT_NAME);
+        done();
+      });
+    });
+
+    it('should search document with autoPaginate', function(done) {
+      index.search({
+        query: query,
+        autoPaginate: true
+      }, function(err, results) {
         assert.ifError(err);
         assert.equal(results.length, 1);
         assert.equal(results[0].id, DOCUMENT_NAME);
