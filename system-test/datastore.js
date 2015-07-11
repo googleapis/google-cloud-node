@@ -299,6 +299,33 @@ describe('datastore', function() {
       });
     });
 
+    it('should run query with autoPaginate', function(done) {
+      var q = ds.createQuery('Character')
+        .hasAncestor(ancestor)
+        .autoPaginate();
+
+      ds.runQuery(q, function(err, results) {
+        assert.ifError(err);
+        assert.equal(results.length, characters.length);
+        done();
+      });
+    });
+
+    it('should not go over a limit with autoPaginate', function(done) {
+      var limit = 3;
+
+      var q = ds.createQuery('Character')
+        .hasAncestor(ancestor)
+        .limit(limit)
+        .autoPaginate();
+
+      ds.runQuery(q, function(err, results) {
+        assert.ifError(err);
+        assert.equal(results.length, limit);
+        done();
+      });
+    });
+
     it('should run a query as a stream', function(done) {
       var q = ds.createQuery('Character').hasAncestor(ancestor);
 

@@ -422,6 +422,18 @@ describe('storage', function() {
       }
     });
 
+    it('should get buckets with autoPaginate', function(done) {
+      storage.getBuckets({
+        autoPaginate: true
+      }, function(err, buckets) {
+        assert.ifError(err);
+
+        assert(buckets.length > 0);
+        assert(buckets[0] instanceof Bucket);
+        done();
+      });
+    });
+
     it('should get buckets as a stream', function(done) {
       var bucketEmitted = false;
 
@@ -715,6 +727,15 @@ describe('storage', function() {
       });
     });
 
+    it('should get files with autoPaginate', function(done) {
+      bucket.getFiles({ autoPaginate: true }, function(err, files) {
+        assert.ifError(err);
+        assert.strictEqual(files.length, filenames.length);
+        assert(files[0] instanceof File);
+        done();
+      });
+    });
+
     it('should get files as a stream', function(done) {
       var fileEmitted = false;
 
@@ -793,7 +814,6 @@ describe('storage', function() {
           });
         });
       });
-
     });
 
     it('should get all files scoped to their version', function(done) {
