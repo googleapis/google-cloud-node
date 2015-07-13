@@ -37,7 +37,7 @@ $ gcloud config set project $GCLOUD_TESTS_PROJECT_ID
 $ gcloud auth login
 
 # Create the indexes
-$ gcloud preview datastore create-indexes system-test/data/
+$ gcloud preview datastore create-indexes system-test/data/index.yaml
 ```
 
 You may now run the system tests:
