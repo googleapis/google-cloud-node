@@ -129,7 +129,7 @@ angular
             delete types[index - 1];
           }
         }
-        acc.push(detectModules(type));
+        acc.push(detectModules(type).replace('[]', ''));
         return acc;
       }
       return function(data) {
