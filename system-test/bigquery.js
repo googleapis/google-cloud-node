@@ -139,7 +139,7 @@ describe('BigQuery', function() {
   });
 
   it('should list datasets with autoPaginate', function(done) {
-    bigquery.getDatasets({ autoPaginate: true }, function(err, datasets) {
+    bigquery.getDatasets(function(err, datasets) {
       assert(datasets.length > 0);
       assert(datasets[0] instanceof Dataset);
       done();
@@ -166,6 +166,7 @@ describe('BigQuery', function() {
       assert(job instanceof Job);
 
       job.getQueryResults(function(err, rows) {
+        assert.ifError(err);
         assert.equal(rows.length, 100);
         assert.equal(typeof rows[0].url, 'string');
         done();
@@ -207,6 +208,14 @@ describe('BigQuery', function() {
       });
   });
 
+  it('should query', function(done) {
+    bigquery.query(query, function(err, rows) {
+      assert.ifError(err);
+      assert.equal(rows.length, 100);
+      done();
+    });
+  });
+
   it('should allow querying in series', function(done) {
     bigquery.query({
       query: query,
@@ -215,17 +224,6 @@ describe('BigQuery', function() {
       assert.ifError(err);
       assert.equal(rows.length, 10);
       assert.equal(typeof nextQuery.pageToken, 'string');
-      done();
-    });
-  });
-
-  it('should query with autoPaginate', function(done) {
-    bigquery.query({
-      query: query,
-      autoPaginate: true
-    }, function(err, rows) {
-      assert.ifError(err);
-      assert.equal(rows.length, 100);
       done();
     });
   });
@@ -239,7 +237,7 @@ describe('BigQuery', function() {
   });
 
   it('should list jobs with autoPaginate', function(done) {
-    bigquery.getJobs({ autoPaginate: true }, function(err, jobs) {
+    bigquery.getJobs(function(err, jobs) {
       assert.ifError(err);
       assert(jobs[0] instanceof Job);
       done();
@@ -299,7 +297,7 @@ describe('BigQuery', function() {
     });
 
     it('should get the rows in a table with autoPaginate', function(done) {
-      table.getRows({ autoPaginate: true }, function(err, rows) {
+      table.getRows(function(err, rows) {
         assert.ifError(err);
         assert(Array.isArray(rows));
         done();

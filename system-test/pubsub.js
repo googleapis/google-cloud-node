@@ -95,14 +95,14 @@ describe('pubsub', function() {
         });
     });
 
-    it('should return a nextQuery if there are more results', function(done) {
+    it('should allow manual paging', function(done) {
       pubsub.getTopics({
         pageSize: TOPIC_NAMES.length - 1
-      }, function(err, topics, next) {
+      }, function(err, topics, nextQuery) {
         assert.ifError(err);
         assert(topics.length, TOPIC_NAMES.length - 1);
-        assert(next.pageSize, TOPIC_NAMES.length - 1);
-        assert(!!next.pageToken, true);
+        assert(nextQuery.pageSize, TOPIC_NAMES.length - 1);
+        assert(!!nextQuery.pageToken, true);
         done();
       });
     });

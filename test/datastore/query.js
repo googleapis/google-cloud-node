@@ -45,13 +45,19 @@ describe('Query', function() {
 
   it('should default autoPaginate to false', function() {
     var query = new Query(['kind1']);
-    assert.strictEqual(query.autoPaginateVal, false);
+    assert.strictEqual(query.autoPaginateVal, true);
   });
 
-  it('should support setting autoPagination', function() {
+  it('should default autoPaginate() to true', function() {
     var query = new Query(['kind1'])
         .autoPaginate();
     assert.strictEqual(query.autoPaginateVal, true);
+  });
+
+  it('should support setting autoPaginate to false', function() {
+    var query = new Query(['kind1'])
+        .autoPaginate(false);
+    assert.strictEqual(query.autoPaginateVal, false);
   });
 
   it('should support field selection by field name', function() {
