@@ -145,6 +145,15 @@ describe('streamRouter', function() {
   });
 
   describe('parseArguments_', function() {
+    it('should set defaults', function() {
+      var parsedArguments = streamRouter.parseArguments_([]);
+
+      assert.strictEqual(Object.keys(parsedArguments.query).length, 0);
+      assert.strictEqual(parsedArguments.callback, undefined);
+      assert.strictEqual(parsedArguments.maxResults, -1);
+      assert.strictEqual(parsedArguments.autoPaginate, true);
+    });
+
     it('should detect a callback if first argument is a function', function() {
       var args = [ util.noop ];
       var parsedArguments = streamRouter.parseArguments_(args);
@@ -157,6 +166,13 @@ describe('streamRouter', function() {
       var parsedArguments = streamRouter.parseArguments_(args);
 
       assert.strictEqual(parsedArguments.query, args[0]);
+    });
+
+    it('should not make an undefined value the query', function() {
+      var args = [ undefined, util.noop ];
+      var parsedArguments = streamRouter.parseArguments_(args);
+
+      assert.deepEqual(parsedArguments.query, {});
     });
 
     it('should detect a callback if last argument is a function', function() {
@@ -172,6 +188,48 @@ describe('streamRouter', function() {
 
       assert.strictEqual(parsedArguments.callback, undefined);
     });
+
+    it('should set maxResults from query.maxResults', function() {
+      var args = [ { maxResults: 10 } ];
+      var parsedArguments = streamRouter.parseArguments_(args);
+
+      assert.strictEqual(parsedArguments.maxResults, args[0].maxResults);
+    });
+
+    it('should set maxResults from query.limitVal', function() {
+      var args = [ { limitVal: 10 } ];
+      var parsedArguments = streamRouter.parseArguments_(args);
+
+      assert.strictEqual(parsedArguments.maxResults, args[0].limitVal);
+    });
+
+    it('should set maxResults from query.pageSize', function() {
+      var args = [ { pageSize: 10 } ];
+      var parsedArguments = streamRouter.parseArguments_(args);
+
+      assert.strictEqual(parsedArguments.maxResults, args[0].pageSize);
+    });
+
+    it('should set autoPaginate: false if there is a maxResults', function() {
+      var args = [ { maxResults: 10 }, util.noop ];
+      var parsedArguments = streamRouter.parseArguments_(args);
+
+      assert.strictEqual(parsedArguments.autoPaginate, false);
+    });
+
+    it('should set autoPaginate: false query.autoPaginate', function() {
+      var args = [ { autoPaginate: false }, util.noop ];
+      var parsedArguments = streamRouter.parseArguments_(args);
+
+      assert.strictEqual(parsedArguments.autoPaginate, false);
+    });
+
+    it('should set autoPaginate: false with query.autoPaginateVal', function() {
+      var args = [ { autoPaginateVal: false }, util.noop ];
+      var parsedArguments = streamRouter.parseArguments_(args);
+
+      assert.strictEqual(parsedArguments.autoPaginate, false);
+    });
   });
 
   describe('router_', function() {
@@ -181,82 +239,14 @@ describe('streamRouter', function() {
 
     describe('callback mode', function() {
       describe('autoPaginate', function() {
-        it('should recognize autoPaginate', function(done) {
+        it('should call runAsStream_ when autoPaginate:true', function(done) {
           var parsedArguments = {
-            query: {
-              autoPaginate: true
-            },
+            autoPaginate: true,
             callback: util.noop
           };
 
-          streamRouterOverrides.runAsStream_ = function() {
-            done();
-            return through();
-          };
-
-          streamRouter.router_(parsedArguments, util.noop);
-        });
-
-        it('should recognize autoPaginateVal', function(done) {
-          var parsedArguments = {
-            query: {
-              autoPaginateVal: true
-            },
-            callback: util.noop
-          };
-
-          streamRouterOverrides.runAsStream_ = function() {
-            done();
-            return through();
-          };
-
-          streamRouter.router_(parsedArguments, util.noop);
-        });
-
-        it('should delete the autoPaginate property', function(done) {
-          var parsedArguments = {
-            query: {
-              autoPaginate: true
-            },
-            callback: util.noop
-          };
-
-          streamRouterOverrides.runAsStream_ = function(query) {
-            assert.strictEqual(query.autoPaginate, undefined);
-            done();
-            return through();
-          };
-
-          streamRouter.router_(parsedArguments, util.noop);
-        });
-
-        it('should delete the autoPaginateVal property', function(done) {
-          var parsedArguments = {
-            query: {
-              autoPaginateVal: true
-            },
-            callback: util.noop
-          };
-
-          streamRouterOverrides.runAsStream_ = function(query) {
-            assert.strictEqual(query.autoPaginateVal, undefined);
-            done();
-            return through();
-          };
-
-          streamRouter.router_(parsedArguments, util.noop);
-        });
-
-        it('should runAsStream', function(done) {
-          var parsedArguments = {
-            query: {
-              autoPaginate: true
-            },
-            callback: util.noop
-          };
-
-          streamRouterOverrides.runAsStream_ = function(query, originalMethod) {
-            assert.deepEqual(query, {});
+          streamRouterOverrides.runAsStream_ = function(args, originalMethod) {
+            assert.strictEqual(args, parsedArguments);
             originalMethod();
             return through();
           };
@@ -268,9 +258,7 @@ describe('streamRouter', function() {
           var error = new Error('Error.');
 
           var parsedArguments = {
-            query: {
-              autoPaginate: true
-            },
+            autoPaginate: true,
             callback: function(err) {
               assert.strictEqual(err, error);
               done();
@@ -292,9 +280,7 @@ describe('streamRouter', function() {
           var results = ['a', 'b', 'c'];
 
           var parsedArguments = {
-            query: {
-              autoPaginate: true
-            },
+            autoPaginate: true,
             callback: function(err, results_) {
               assert.deepEqual(results_.toString().split(''), results);
               done();
@@ -320,14 +306,19 @@ describe('streamRouter', function() {
       });
 
       describe('manual pagination', function() {
-        it('should call original method', function(done) {
+        it('should recoginze autoPaginate: false', function(done) {
           var parsedArguments = {
-            query: { a: 'b', c: 'd' },
+            autoPaginate: false,
+            query: {
+              a: 'b',
+              c: 'd'
+            },
             callback: done
           };
 
           streamRouter.router_(parsedArguments, function(query, callback) {
             assert.deepEqual(query, parsedArguments.query);
+
             callback();
           });
         });
@@ -340,8 +331,8 @@ describe('streamRouter', function() {
           query: { a: 'b', c: 'd' }
         };
 
-        streamRouterOverrides.runAsStream_ = function(query, originalMethod) {
-          assert.deepEqual(query, parsedArguments.query);
+        streamRouterOverrides.runAsStream_ = function(args, originalMethod) {
+          assert.deepEqual(args, parsedArguments);
           originalMethod();
         };
 
@@ -367,15 +358,19 @@ describe('streamRouter', function() {
 
   describe('runAsStream_', function() {
     describe('stream mode', function() {
-      var QUERY = { a: 'b', c: 'd' };
+      var PARSED_ARGUMENTS = {
+        query: {
+          a: 'b', c: 'd'
+        }
+      };
 
       it('should call original method when stream opens', function(done) {
         function originalMethod(query) {
-          assert.strictEqual(query, QUERY);
+          assert.strictEqual(query, PARSED_ARGUMENTS.query);
           done();
         }
 
-        var rs = streamRouter.runAsStream_(QUERY, originalMethod);
+        var rs = streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
         rs.on('data', util.noop); // Trigger the underlying `_read` event.
       });
 
@@ -388,7 +383,7 @@ describe('streamRouter', function() {
           });
         }
 
-        var rs = streamRouter.runAsStream_(QUERY, originalMethod);
+        var rs = streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
         rs.on('data', util.noop); // Trigger the underlying `_read` event.
         rs.on('error', function(err) {
           assert.deepEqual(err, error);
@@ -406,7 +401,7 @@ describe('streamRouter', function() {
           });
         }
 
-        var rs = streamRouter.runAsStream_(QUERY, originalMethod);
+        var rs = streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
         rs.on('data', function(result) {
           resultsReceived.push(result);
         });
@@ -425,21 +420,10 @@ describe('streamRouter', function() {
           });
         }
 
-        it('should respect query.maxResults', function(done) {
+        it('should respect maxResults', function(done) {
           var numResultsReceived = 0;
 
           streamRouter.runAsStream_({ maxResults: limit }, originalMethod)
-            .on('data', function() { numResultsReceived++; })
-            .on('end', function() {
-              assert.strictEqual(numResultsReceived, limit);
-              done();
-            });
-        });
-
-        it('should respect query.limitVal', function(done) {
-          var numResultsReceived = 0;
-
-          streamRouter.runAsStream_({ limitVal: limit }, originalMethod)
             .on('data', function() { numResultsReceived++; })
             .on('end', function() {
               assert.strictEqual(numResultsReceived, limit);
@@ -465,7 +449,7 @@ describe('streamRouter', function() {
           });
         }
 
-        var rs = streamRouter.runAsStream_(QUERY, originalMethod);
+        var rs = streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
         rs.on('data', util.noop); // Trigger the underlying `_read` event.
       });
 
@@ -478,7 +462,7 @@ describe('streamRouter', function() {
           });
         }
 
-        var rs = streamRouter.runAsStream_(QUERY, originalMethod);
+        var rs = streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
         rs.on('data', function(result) {
           if (result === 'b') {
             // Pre-maturely end the stream.
@@ -505,7 +489,7 @@ describe('streamRouter', function() {
           });
         }
 
-        var rs = streamRouter.runAsStream_(QUERY, originalMethod);
+        var rs = streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
         rs.on('data', function(result) {
           if (result === 'b') {
             // Pre-maturely end the stream.

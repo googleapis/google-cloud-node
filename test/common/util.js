@@ -851,13 +851,17 @@ describe('common/util', function() {
   });
 
   describe('makeRequest', function() {
-    var PKG = require('../../package.json');
-    var USER_AGENT = 'gcloud-node/' + PKG.version;
-    var reqOpts = { a: 'b', c: 'd' };
-    var expectedReqOpts = extend(true, {}, reqOpts, {
-      headers: {
-        'User-Agent': USER_AGENT
-      }
+    it('should decorate the request', function(done) {
+      var reqOpts = { a: 'b', c: 'd' };
+
+      request_Override = util.noop;
+
+      utilOverrides.decorateRequest = function(reqOpts_) {
+        assert.strictEqual(reqOpts_, reqOpts);
+        done();
+      };
+
+      util.makeRequest(reqOpts, {}, assert.ifError);
     });
 
     it('should make a request', function(done) {
@@ -866,15 +870,6 @@ describe('common/util', function() {
       };
 
       util.makeRequest({}, assert.ifError, {});
-    });
-
-    it('should add the user agent', function(done) {
-      request_Override = function(rOpts) {
-        assert.deepEqual(rOpts, expectedReqOpts);
-        done();
-      };
-
-      util.makeRequest(reqOpts, assert.ifError, {});
     });
 
     it('should let handleResp handle the response', function(done) {
@@ -1004,6 +999,64 @@ describe('common/util', function() {
 
         util.makeRequest({}, {}, assert.ifError);
       });
+    });
+  });
+
+  describe('decorateRequest', function() {
+    it('should add the user agent', function() {
+      var PKG = require('../../package.json');
+      var USER_AGENT = 'gcloud-node/' + PKG.version;
+
+      var reqOpts = { a: 'b', c: 'd' };
+
+      var expectedReqOpts = extend({}, reqOpts, {
+        headers: {
+          'User-Agent': USER_AGENT
+        }
+      });
+
+      var decoratedReqOpts = util.decorateRequest(reqOpts);
+      assert.deepEqual(decoratedReqOpts, expectedReqOpts);
+    });
+
+    it('should delete qs.autoPaginate', function() {
+      var decoratedReqOpts = util.decorateRequest({
+        qs: {
+          autoPaginate: true
+        }
+      });
+
+      assert.strictEqual(decoratedReqOpts.autoPaginate, undefined);
+    });
+
+    it('should delete qs.autoPaginateVal', function() {
+      var decoratedReqOpts = util.decorateRequest({
+        qs: {
+          autoPaginateVal: true
+        }
+      });
+
+      assert.strictEqual(decoratedReqOpts.autoPaginate, undefined);
+    });
+
+    it('should delete json.autoPaginate', function() {
+      var decoratedReqOpts = util.decorateRequest({
+        json: {
+          autoPaginate: true
+        }
+      });
+
+      assert.strictEqual(decoratedReqOpts.autoPaginate, undefined);
+    });
+
+    it('should delete json.autoPaginateVal', function() {
+      var decoratedReqOpts = util.decorateRequest({
+        json: {
+          autoPaginateVal: true
+        }
+      });
+
+      assert.strictEqual(decoratedReqOpts.autoPaginate, undefined);
     });
   });
 });

@@ -34,53 +34,25 @@ function deleteDocument(document, callback) {
 }
 
 function deleteIndexContents(index, callback) {
-  function handleResp(err, documents, nextQuery) {
+  index.getDocuments(function(err, documents) {
     if (err) {
       callback(err);
       return;
     }
 
-    async.eachLimit(documents, MAX_PARALLEL, deleteDocument, function(err) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      if (nextQuery) {
-        index.getDocuments(nextQuery, handleResp);
-        return;
-      }
-
-      callback();
-    });
-  }
-
-  index.getDocuments(handleResp);
+    async.eachLimit(documents, MAX_PARALLEL, deleteDocument, callback);
+  });
 }
 
 function deleteAllDocuments(callback) {
-  function handleResp(err, indexes, nextQuery) {
+  search.getIndexes(function(err, indexes) {
     if (err) {
       callback(err);
       return;
     }
 
-    async.eachLimit(indexes, MAX_PARALLEL, deleteIndexContents, function(err) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      if (nextQuery) {
-        search.getIndexes(nextQuery, handleResp);
-        return;
-      }
-
-      callback();
-    });
-  }
-
-  search.getIndexes(handleResp);
+    async.eachLimit(indexes, MAX_PARALLEL, deleteIndexContents, callback);
+  });
 }
 
 function generateIndexName() {
@@ -294,18 +266,6 @@ describe('Search', function() {
 
     it('should search document', function(done) {
       index.search(query, function(err, results) {
-        assert.ifError(err);
-        assert.equal(results.length, 1);
-        assert.equal(results[0].id, DOCUMENT_NAME);
-        done();
-      });
-    });
-
-    it('should search document with autoPaginate', function(done) {
-      index.search({
-        query: query,
-        autoPaginate: true
-      }, function(err, results) {
         assert.ifError(err);
         assert.equal(results.length, 1);
         assert.equal(results[0].id, DOCUMENT_NAME);

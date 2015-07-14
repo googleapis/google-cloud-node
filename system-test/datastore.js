@@ -280,7 +280,8 @@ describe('datastore', function() {
     });
 
     it('should limit queries', function(done) {
-      var q = ds.createQuery('Character').hasAncestor(ancestor).limit(5);
+      var q = ds.createQuery('Character').hasAncestor(ancestor).limit(5)
+          .autoPaginate(false);
 
       ds.runQuery(q, function(err, firstEntities, secondQuery) {
         assert.ifError(err);
@@ -301,8 +302,7 @@ describe('datastore', function() {
 
     it('should run query with autoPaginate', function(done) {
       var q = ds.createQuery('Character')
-        .hasAncestor(ancestor)
-        .autoPaginate();
+        .hasAncestor(ancestor);
 
       ds.runQuery(q, function(err, results) {
         assert.ifError(err);
@@ -316,8 +316,7 @@ describe('datastore', function() {
 
       var q = ds.createQuery('Character')
         .hasAncestor(ancestor)
-        .limit(limit)
-        .autoPaginate();
+        .limit(limit);
 
       ds.runQuery(q, function(err, results) {
         assert.ifError(err);
@@ -429,7 +428,8 @@ describe('datastore', function() {
         .hasAncestor(ancestor)
         .offset(2)
         .limit(3)
-        .order('appearances');
+        .order('appearances')
+        .autoPaginate(false);
 
       ds.runQuery(q, function(err, entities, secondQuery) {
         assert.ifError(err);
@@ -454,7 +454,8 @@ describe('datastore', function() {
         .hasAncestor(ancestor)
         .offset(2)
         .limit(2)
-        .order('appearances');
+        .order('appearances')
+        .autoPaginate(false);
 
       ds.runQuery(q, function(err, entities, nextQuery) {
         assert.ifError(err);

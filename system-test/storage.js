@@ -395,31 +395,14 @@ describe('storage', function() {
     });
 
     it('should get buckets', function(done) {
-      storage.getBuckets(getBucketsHandler);
-
-      var createdBuckets = [];
-      var retries = 0;
-      var MAX_RETRIES = 2;
-
-      function getBucketsHandler(err, buckets, nextQuery) {
-        buckets.forEach(function(bucket) {
-          if (bucketsToCreate.indexOf(bucket.name) > -1) {
-            createdBuckets.push(bucket);
-          }
+      storage.getBuckets(function(err, buckets) {
+        var createdBuckets = buckets.filter(function(bucket) {
+          return bucketsToCreate.indexOf(bucket.name) > -1;
         });
-
-        if (createdBuckets.length < bucketsToCreate.length && nextQuery) {
-          retries++;
-
-          if (retries <= MAX_RETRIES) {
-            storage.getBuckets(nextQuery, getBucketsHandler);
-            return;
-          }
-        }
 
         assert.equal(createdBuckets.length, bucketsToCreate.length);
         done();
-      }
+      });
     });
 
     it('should get buckets with autoPaginate', function(done) {
@@ -719,10 +702,9 @@ describe('storage', function() {
     });
 
     it('should get files', function(done) {
-      bucket.getFiles(function(err, files, nextQuery) {
+      bucket.getFiles(function(err, files) {
         assert.ifError(err);
         assert.equal(files.length, filenames.length);
-        assert.equal(nextQuery, null);
         done();
       });
     });
@@ -751,7 +733,10 @@ describe('storage', function() {
     });
 
     it('should paginate the list', function(done) {
-      var query = { maxResults: filenames.length - 1 };
+      var query = {
+        maxResults: filenames.length - 1
+      };
+
       bucket.getFiles(query, function(err, files, nextQuery) {
         assert.ifError(err);
         assert.equal(files.length, filenames.length - 1);
