@@ -105,7 +105,7 @@ schoolsDataset.import('/local/file.json', function(err, job) {});
 var job = bigquery.job('job-id');
 
 // Use a callback.
-job.getQueryResults(function(err, rows, nextQuery) {});
+job.getQueryResults(function(err, rows) {});
 
 // Or get the same results as a readable stream.
 job.getQueryResults().on('data', function(row) {});
