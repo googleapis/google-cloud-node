@@ -43,6 +43,23 @@ describe('Query', function() {
     assert.equal(query.namespace, 'ns');
   });
 
+  it('should default autoPaginate to false', function() {
+    var query = new Query(['kind1']);
+    assert.strictEqual(query.autoPaginateVal, true);
+  });
+
+  it('should default autoPaginate() to true', function() {
+    var query = new Query(['kind1'])
+        .autoPaginate();
+    assert.strictEqual(query.autoPaginateVal, true);
+  });
+
+  it('should support setting autoPaginate to false', function() {
+    var query = new Query(['kind1'])
+        .autoPaginate(false);
+    assert.strictEqual(query.autoPaginateVal, false);
+  });
+
   it('should support field selection by field name', function() {
     var query = new Query(['kind1'])
         .select(['name', 'title']);

@@ -138,16 +138,58 @@ describe('BigQuery', function() {
     });
   });
 
+  it('should list datasets with autoPaginate', function(done) {
+    bigquery.getDatasets(function(err, datasets) {
+      assert(datasets.length > 0);
+      assert(datasets[0] instanceof Dataset);
+      done();
+    });
+  });
+
+  it('should list datasets as a stream', function(done) {
+    var datasetEmitted = false;
+
+    bigquery.getDatasets()
+      .on('error', done)
+      .on('data', function(dataset) {
+        datasetEmitted = dataset instanceof Dataset;
+      })
+      .on('end', function() {
+        assert.strictEqual(datasetEmitted, true);
+        done();
+      });
+  });
+
   it('should run a query job, then get results', function(done) {
     bigquery.startQuery(query, function(err, job) {
       assert.ifError(err);
       assert(job instanceof Job);
 
       job.getQueryResults(function(err, rows) {
+        assert.ifError(err);
         assert.equal(rows.length, 100);
         assert.equal(typeof rows[0].url, 'string');
         done();
       });
+    });
+  });
+
+  it('should get query results as a stream', function(done) {
+    bigquery.startQuery(query, function(err, job) {
+      assert.ifError(err);
+
+      var rowsEmitted = [];
+
+      job.getQueryResults()
+        .on('error', done)
+        .on('data', function(row) {
+          rowsEmitted.push(row);
+        })
+        .on('end', function() {
+          assert.equal(rowsEmitted.length, 100);
+          assert.equal(typeof rowsEmitted[0].url, 'string');
+          done();
+        });
     });
   });
 
@@ -160,10 +202,18 @@ describe('BigQuery', function() {
         assert.equal(typeof row.url, 'string');
       })
       .on('error', done)
-      .on('finish', function() {
+      .on('end', function() {
         assert.equal(rowsEmitted, 100);
         done();
       });
+  });
+
+  it('should query', function(done) {
+    bigquery.query(query, function(err, rows) {
+      assert.ifError(err);
+      assert.equal(rows.length, 100);
+      done();
+    });
   });
 
   it('should allow querying in series', function(done) {
@@ -184,6 +234,28 @@ describe('BigQuery', function() {
       assert(jobs[0] instanceof Job);
       done();
     });
+  });
+
+  it('should list jobs with autoPaginate', function(done) {
+    bigquery.getJobs(function(err, jobs) {
+      assert.ifError(err);
+      assert(jobs[0] instanceof Job);
+      done();
+    });
+  });
+
+  it('should list jobs as a stream', function(done) {
+    var jobEmitted = false;
+
+    bigquery.getJobs()
+      .on('error', done)
+      .on('data', function(job) {
+        jobEmitted = job instanceof Job;
+      })
+      .on('end', function() {
+        assert.strictEqual(jobEmitted, true);
+        done();
+      });
   });
 
   describe('BigQuery/Dataset', function() {
@@ -216,12 +288,27 @@ describe('BigQuery', function() {
       });
     });
 
-    it('should insert rows', function(done) {
-      table.insert([
-        { name: 'silvano', breed: 'the cat kind', id: 1, dob: Date.now() },
-        { name: 'ryan', breed: 'golden retriever?', id: 2, dob: Date.now() },
-        { name: 'stephen', breed: 'idkanycatbreeds', id: 3, dob: Date.now() }
-      ], done);
+    it('should get the rows in a table', function(done) {
+      table.getRows(function(err, rows) {
+        assert.ifError(err);
+        assert(Array.isArray(rows));
+        done();
+      });
+    });
+
+    it('should get the rows in a table with autoPaginate', function(done) {
+      table.getRows(function(err, rows) {
+        assert.ifError(err);
+        assert(Array.isArray(rows));
+        done();
+      });
+    });
+
+    it('should get the rows in a table via stream', function(done) {
+      table.getRows()
+        .on('error', done)
+        .on('data', function() {})
+        .on('end', done);
     });
 
     it('should insert rows via stream', function(done) {

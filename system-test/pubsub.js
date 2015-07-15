@@ -77,14 +77,32 @@ describe('pubsub', function() {
       });
     });
 
-    it('should return a nextQuery if there are more results', function(done) {
+    it('should list topics in a stream', function(done) {
+      var topicsEmitted = [];
+
+      pubsub.getTopics()
+        .on('error', done)
+        .on('data', function(topic) {
+          topicsEmitted.push(topic);
+        })
+        .on('end', function() {
+          var results = topicsEmitted.filter(function(topic) {
+            return TOPIC_FULL_NAMES.indexOf(topic.name) !== -1;
+          });
+
+          assert.equal(results.length, TOPIC_NAMES.length);
+          done();
+        });
+    });
+
+    it('should allow manual paging', function(done) {
       pubsub.getTopics({
         pageSize: TOPIC_NAMES.length - 1
-      }, function(err, topics, next) {
+      }, function(err, topics, nextQuery) {
         assert.ifError(err);
         assert(topics.length, TOPIC_NAMES.length - 1);
-        assert(next.pageSize, TOPIC_NAMES.length - 1);
-        assert(!!next.pageToken, true);
+        assert(nextQuery.pageSize, TOPIC_NAMES.length - 1);
+        assert(!!nextQuery.pageToken, true);
         done();
       });
     });
@@ -183,12 +201,40 @@ describe('pubsub', function() {
       });
     });
 
+    it('should list all topic subscriptions as a stream', function(done) {
+      var subscriptionsEmitted = [];
+
+      topic.getSubscriptions()
+        .on('error', done)
+        .on('data', function(subscription) {
+          subscriptionsEmitted.push(subscription);
+        })
+        .on('end', function() {
+          assert.equal(subscriptionsEmitted.length, SUBSCRIPTIONS.length);
+          done();
+        });
+    });
+
     it('should list all subscriptions regardless of topic', function(done) {
       pubsub.getSubscriptions(function(err, subscriptions) {
         assert.ifError(err);
         assert(subscriptions instanceof Array);
         done();
       });
+    });
+
+    it('should list all subscriptions as a stream', function(done) {
+      var subscriptionEmitted = false;
+
+      pubsub.getSubscriptions()
+        .on('error', done)
+        .on('data', function(subscription) {
+          subscriptionEmitted = subscription instanceof Subscription;
+        })
+        .on('end', function() {
+          assert.strictEqual(subscriptionEmitted, true);
+          done();
+        });
     });
 
     it('should allow creation and deletion of a subscription', function(done) {

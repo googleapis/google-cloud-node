@@ -34,53 +34,25 @@ function deleteDocument(document, callback) {
 }
 
 function deleteIndexContents(index, callback) {
-  function handleResp(err, documents, nextQuery) {
+  index.getDocuments(function(err, documents) {
     if (err) {
       callback(err);
       return;
     }
 
-    async.eachLimit(documents, MAX_PARALLEL, deleteDocument, function(err) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      if (nextQuery) {
-        index.getDocuments(nextQuery, handleResp);
-        return;
-      }
-
-      callback();
-    });
-  }
-
-  index.getDocuments(handleResp);
+    async.eachLimit(documents, MAX_PARALLEL, deleteDocument, callback);
+  });
 }
 
 function deleteAllDocuments(callback) {
-  function handleResp(err, indexes, nextQuery) {
+  search.getIndexes(function(err, indexes) {
     if (err) {
       callback(err);
       return;
     }
 
-    async.eachLimit(indexes, MAX_PARALLEL, deleteIndexContents, function(err) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      if (nextQuery) {
-        search.getIndexes(nextQuery, handleResp);
-        return;
-      }
-
-      callback();
-    });
-  }
-
-  search.getIndexes(handleResp);
+    async.eachLimit(indexes, MAX_PARALLEL, deleteIndexContents, callback);
+  });
 }
 
 function generateIndexName() {
@@ -141,6 +113,14 @@ describe('Search', function() {
       });
     });
 
+    it('should get all indexes with autoPaginate', function(done) {
+      search.getIndexes({ autoPaginate: true }, function(err, indexes) {
+        assert.ifError(err);
+        assert(indexes.length > 0);
+        done();
+      });
+    });
+
     it('should get all indexes in stream mode', function(done) {
       var resultsMatched = 0;
 
@@ -183,6 +163,14 @@ describe('Search', function() {
 
     it('should get all documents', function(done) {
       index.getDocuments(function(err, documents) {
+        assert.ifError(err);
+        assert.strictEqual(documents.length, 1);
+        done();
+      });
+    });
+
+    it('should get all documents with autoPaginate', function(done) {
+      index.getDocuments({ autoPaginate: true }, function(err, documents) {
         assert.ifError(err);
         assert.strictEqual(documents.length, 1);
         done();
