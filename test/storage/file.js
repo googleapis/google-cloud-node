@@ -119,7 +119,11 @@ describe('File', function() {
   beforeEach(function() {
     var options = {
       makeAuthorizedRequest_: function(req, callback) {
-        (callback.onAuthorized || callback)(null, req);
+        if (callback) {
+          (callback.onAuthorized || callback)(null, req);
+        } else {
+          return (request_Override || request_Cached)(req);
+        }
       }
     };
     bucket = new Bucket(options, 'bucket-name');
@@ -463,7 +467,10 @@ describe('File', function() {
 
       versionedFile.bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
         assert.equal(reqOpts.qs.generation, 1);
-        done();
+        setImmediate(function() {
+          done();
+        });
+        return new FakeDuplexify();
       };
 
       versionedFile.createReadStream();
@@ -493,7 +500,10 @@ describe('File', function() {
 
         file.bucket.storage.makeAuthorizedRequest_ = function(opts) {
           assert.equal(opts.uri, expectedPath);
-          done();
+          setImmediate(function() {
+            done();
+          });
+          return new FakeDuplexify();
         };
 
         file.createReadStream();
@@ -503,10 +513,14 @@ describe('File', function() {
         var ERROR = new Error('Error.');
 
         beforeEach(function() {
-          file.bucket.storage.makeAuthorizedRequest_ = function(opt, callback) {
+          file.bucket.storage.makeAuthorizedRequest_ = function(opts) {
+            var stream = (request_Override || request)(opts);
+
             setImmediate(function() {
-              (callback.onAuthorized || callback)(ERROR);
+              stream.emit('error', ERROR);
             });
+
+            return stream;
           };
         });
 
@@ -532,10 +546,13 @@ describe('File', function() {
 
         request_Override = getFakeRequest();
 
-        file.bucket.storage.makeAuthorizedRequest_ = function(opts, callback) {
-          (callback.onAuthorized || callback)(null, fakeRequest);
-          assert.deepEqual(request_Override.getRequestOptions(), fakeRequest);
-          done();
+        file.bucket.storage.makeAuthorizedRequest_ = function() {
+          setImmediate(function() {
+            assert.deepEqual(request_Override.getRequestOptions(), fakeRequest);
+            done();
+          });
+
+          return request_Override(fakeRequest);
         };
 
         file.createReadStream();
@@ -561,70 +578,12 @@ describe('File', function() {
           request_Override = getFakeFailedRequest(ERROR);
         });
 
-        it('should end the request stream', function(done) {
-          var readStream = file.createReadStream();
-
-          readStream.once('error', function() {
-            assert(request_Override.wasRequestAborted());
-            assert(request_Override.wasRequestDestroyed());
-            done();
-          });
-        });
-
         it('should emit the error', function(done) {
           file.createReadStream()
             .once('error', function(err) {
               assert.deepEqual(err, ERROR);
               done();
             });
-        });
-
-        it('should destroy the through stream', function(done) {
-          var readStream = file.createReadStream();
-          readStream.destroy = done;
-        });
-      });
-    });
-
-    describe('response', function() {
-      it('should use util.handleResp', function(done) {
-        var response = {
-          body: {
-            a: 'b',
-            c: 'd',
-          }
-        };
-
-        request_Override = getFakeSuccessfulRequest('body', response);
-
-        handleResp_Override = function(err, resp, body) {
-          assert.strictEqual(err, null);
-          assert.deepEqual(resp, response);
-          assert.deepEqual(body, response.body);
-          done();
-        };
-
-        file.createReadStream();
-      });
-
-      describe('errors', function() {
-        var ERROR = new Error('Error.');
-
-        beforeEach(function() {
-          request_Override = getFakeSuccessfulRequest('body', { body: null });
-
-          handleResp_Override = function(err, resp, body, callback) {
-            callback(ERROR);
-          };
-        });
-
-        it('should emit the error', function(done) {
-          var readStream = file.createReadStream();
-
-          readStream.once('error', function(err) {
-            assert.deepEqual(err, ERROR);
-            done();
-          });
         });
 
         it('should destroy the through stream', function(done) {
@@ -656,7 +615,11 @@ describe('File', function() {
         file.metadata.mediaLink = 'http://uri';
 
         file.bucket.storage.makeAuthorizedRequest_ = function(opts, callback) {
-          (callback.onAuthorized || callback)(null, {});
+          if (callback) {
+            (callback.onAuthorized || callback)(null, {});
+          } else {
+            return (request_Override || request_Cached)(opts);
+          }
         };
       });
 

@@ -609,6 +609,7 @@ describe('storage', function() {
 
           writable.on('complete', function() {
             file.createReadStream()
+              .on('error', done)
               .pipe(fs.createWriteStream(tmpFilePath))
               .on('error', done)
               .on('finish', function() {
