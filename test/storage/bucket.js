@@ -63,6 +63,20 @@ fakeAsync.eachLimit = function() {
   (eachLimit_Override || async.eachLimit).apply(null, arguments);
 };
 
+var extended = false;
+var fakeStreamRouter = {
+  extend: function(Class, methods) {
+    if (Class.name !== 'Bucket') {
+      return;
+    }
+
+    methods = util.arrayize(methods);
+    assert.equal(Class.name, 'Bucket');
+    assert.deepEqual(methods, ['getFiles']);
+    extended = true;
+  }
+};
+
 describe('Bucket', function() {
   var Bucket;
   var BUCKET_NAME = 'test-bucket';
@@ -75,6 +89,7 @@ describe('Bucket', function() {
 
   before(function() {
     mockery.registerMock('./file.js', FakeFile);
+    mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
     mockery.registerMock('async', fakeAsync);
     mockery.registerMock('request', fakeRequest);
     mockery.enable({
@@ -95,7 +110,11 @@ describe('Bucket', function() {
     bucket = new Bucket(options, BUCKET_NAME);
   });
 
-  describe('initialization', function() {
+  describe('instantiation', function() {
+    it('should extend the correct methods', function() {
+      assert(extended); // See `fakeStreamRouter.extend`
+    });
+
     it('should re-use provided connection', function() {
       assert.deepEqual(bucket.authorizeReq_, options.authorizeReq_);
     });

@@ -18,12 +18,14 @@
 
 var assert = require('assert');
 var async = require('async');
+var Bucket = require('../lib/storage/bucket.js');
 var crypto = require('crypto');
+var File = require('../lib/storage/file.js');
 var fs = require('fs');
 var request = require('request');
 var through = require('through2');
 var tmp = require('tmp');
-var util = require('../lib/common/util');
+var util = require('../lib/common/util.js');
 var uuid = require('node-uuid');
 
 var prop = util.prop;
@@ -393,31 +395,40 @@ describe('storage', function() {
     });
 
     it('should get buckets', function(done) {
-      storage.getBuckets(getBucketsHandler);
-
-      var createdBuckets = [];
-      var retries = 0;
-      var MAX_RETRIES = 2;
-
-      function getBucketsHandler(err, buckets, nextQuery) {
-        buckets.forEach(function(bucket) {
-          if (bucketsToCreate.indexOf(bucket.name) > -1) {
-            createdBuckets.push(bucket);
-          }
+      storage.getBuckets(function(err, buckets) {
+        var createdBuckets = buckets.filter(function(bucket) {
+          return bucketsToCreate.indexOf(bucket.name) > -1;
         });
-
-        if (createdBuckets.length < bucketsToCreate.length && nextQuery) {
-          retries++;
-
-          if (retries <= MAX_RETRIES) {
-            storage.getBuckets(nextQuery, getBucketsHandler);
-            return;
-          }
-        }
 
         assert.equal(createdBuckets.length, bucketsToCreate.length);
         done();
-      }
+      });
+    });
+
+    it('should get buckets with autoPaginate', function(done) {
+      storage.getBuckets({
+        autoPaginate: true
+      }, function(err, buckets) {
+        assert.ifError(err);
+
+        assert(buckets.length > 0);
+        assert(buckets[0] instanceof Bucket);
+        done();
+      });
+    });
+
+    it('should get buckets as a stream', function(done) {
+      var bucketEmitted = false;
+
+      storage.getBuckets()
+        .on('error', done)
+        .on('data', function(bucket) {
+          bucketEmitted = bucket instanceof Bucket;
+        })
+        .on('end', function() {
+          assert.strictEqual(bucketEmitted, true);
+          done();
+        });
     });
   });
 
@@ -691,16 +702,41 @@ describe('storage', function() {
     });
 
     it('should get files', function(done) {
-      bucket.getFiles(function(err, files, nextQuery) {
+      bucket.getFiles(function(err, files) {
         assert.ifError(err);
         assert.equal(files.length, filenames.length);
-        assert.equal(nextQuery, null);
         done();
       });
     });
 
+    it('should get files with autoPaginate', function(done) {
+      bucket.getFiles({ autoPaginate: true }, function(err, files) {
+        assert.ifError(err);
+        assert.strictEqual(files.length, filenames.length);
+        assert(files[0] instanceof File);
+        done();
+      });
+    });
+
+    it('should get files as a stream', function(done) {
+      var fileEmitted = false;
+
+      bucket.getFiles()
+        .on('error', done)
+        .on('data', function(file) {
+          fileEmitted = file instanceof File;
+        })
+        .on('end', function() {
+          assert.strictEqual(fileEmitted, true);
+          done();
+        });
+    });
+
     it('should paginate the list', function(done) {
-      var query = { maxResults: filenames.length - 1 };
+      var query = {
+        maxResults: filenames.length - 1
+      };
+
       bucket.getFiles(query, function(err, files, nextQuery) {
         assert.ifError(err);
         assert.equal(files.length, filenames.length - 1);
@@ -763,7 +799,6 @@ describe('storage', function() {
           });
         });
       });
-
     });
 
     it('should get all files scoped to their version', function(done) {
