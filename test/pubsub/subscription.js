@@ -66,11 +66,13 @@ describe('Subscription', function() {
       var CONFIG = {
         name: SUB_NAME,
         autoAck: true,
-        interval: 100
+        interval: 100,
+        maxInProgress: 3
       };
       var sub = new Subscription(pubsubMock, CONFIG);
       assert.strictEqual(sub.autoAck, CONFIG.autoAck);
       assert.strictEqual(sub.interval, CONFIG.interval);
+      assert.strictEqual(sub.maxInProgress, 3);
     });
 
     it('should not be closed', function() {
@@ -85,6 +87,25 @@ describe('Subscription', function() {
     it('should set default interval if one is not specified', function() {
       var sub = new Subscription(pubsubMock, { name: SUB_NAME });
       assert.equal(sub.interval, 10);
+    });
+
+    it('should start inProgressAckIds as an empty object', function() {
+      var sub = new Subscription(pubsubMock, { name: SUB_NAME });
+      assert.equal(Object.keys(sub.inProgressAckIds).length, 0);
+    });
+
+    it('should default maxInProgress to Infinity if not specified', function() {
+      var sub = new Subscription(pubsubMock, { name: SUB_NAME });
+      assert.strictEqual(sub.maxInProgress, Infinity);
+    });
+
+    it('should set messageListeners to 0', function() {
+      var sub = new Subscription(pubsubMock, { name: SUB_NAME });
+      assert.strictEqual(sub.messageListeners, 0);
+    });
+
+    it('should not be paused', function() {
+      assert.strictEqual(subscription.paused, false);
     });
   });
 
@@ -110,6 +131,18 @@ describe('Subscription', function() {
         done();
       };
       subscription.on('message', util.noop);
+    });
+
+    it('should track the number of listeners', function() {
+      subscription.startPulling_ = util.noop;
+
+      assert.strictEqual(subscription.messageListeners, 0);
+
+      subscription.on('message', util.noop);
+      assert.strictEqual(subscription.messageListeners, 1);
+
+      subscription.removeListener('message', util.noop);
+      assert.strictEqual(subscription.messageListeners, 0);
     });
 
     it('should close when no more message listeners are bound', function() {
@@ -168,11 +201,63 @@ describe('Subscription', function() {
       subscription.ack(IDS, assert.ifError);
     });
 
-    it('should pass callback to request', function(done) {
-      subscription.makeReq_ = function(method, path, qs, body, callback) {
+    it('should unmark the ack ids as being in progress', function(done) {
+      subscription.makeReq_ = function(method, path, query, body, callback) {
         callback();
       };
-      subscription.ack(1, done);
+
+      subscription.inProgressAckIds = { id1: true, id2: true, id3: true };
+
+      subscription.ack(['id1', 'id2'], function(err) {
+        assert.ifError(err);
+
+        var inProgressAckIds = subscription.inProgressAckIds;
+        assert.strictEqual(inProgressAckIds.id1, undefined);
+        assert.strictEqual(inProgressAckIds.id2, undefined);
+        assert.strictEqual(inProgressAckIds.id3, true);
+
+        done();
+      });
+    });
+
+    it('should not unmark if there was an error', function(done) {
+      subscription.makeReq_ = function(method, path, query, body, callback) {
+        callback(new Error('Error.'));
+      };
+
+      subscription.inProgressAckIds = { id1: true, id2: true, id3: true };
+
+      subscription.ack(['id1', 'id2'], function() {
+        var inProgressAckIds = subscription.inProgressAckIds;
+        assert.strictEqual(inProgressAckIds.id1, true);
+        assert.strictEqual(inProgressAckIds.id2, true);
+        assert.strictEqual(inProgressAckIds.id3, true);
+
+        done();
+      });
+    });
+
+    it('should refresh paused status', function(done) {
+      subscription.makeReq_ = function(method, path, query, body, callback) {
+        callback();
+      };
+
+      subscription.refreshPausedStatus_ = done;
+
+      subscription.ack(1, assert.ifError);
+    });
+
+    it('should pass error to callback', function(done) {
+      var error = new Error('Error.');
+
+      subscription.makeReq_ = function(method, path, query, body, callback) {
+        callback(error);
+      };
+
+      subscription.ack(1, function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
     });
 
     it('should pass apiResponse to callback', function(done) {
@@ -227,29 +312,6 @@ describe('Subscription', function() {
       subscription.pull({ maxResults: 1 }, assert.ifError);
     });
 
-    it('should execute callback with a message', function(done) {
-      var apiResponse = {
-        receivedMessages: [{
-          ackId: 1,
-          message: {
-            messageId: '123',
-            data: new Buffer('message').toString('base64')
-          }
-        }]
-      };
-
-      subscription.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, apiResponse);
-      };
-
-      subscription.pull(function(err, msgs) {
-        assert.ifError(err);
-        var msg = Subscription.formatMessage_(apiResponse.receivedMessages[0]);
-        assert.deepEqual(msgs, [msg]);
-        done();
-      });
-    });
-
     it('should pass error to callback', function(done) {
       var error = new Error('Error.');
       subscription.makeReq_ = function(method, path, qs, body, callback) {
@@ -261,23 +323,20 @@ describe('Subscription', function() {
       });
     });
 
-    it('should pass apiResponse to callback', function(done) {
-      var resp = {
-        receivedMessages: [{
-          ackId: 1,
-          message: {
-            messageId: '123',
-            data: new Buffer('message').toString('base64')
-          }
-        }]
-      };
-      subscription.makeReq_ = function(method, path, qs, body, callback) {
-        callback(null, resp);
-      };
-      subscription.pull(function(err, msgs, apiResponse) {
-        assert.deepEqual(resp, apiResponse);
+    it('should decorate the message', function(done) {
+      subscription.decorateMessage_ = function() {
         done();
-      });
+      };
+
+      subscription.pull({}, assert.ifError);
+    });
+
+    it('should refresh paused status', function(done) {
+      subscription.refreshPausedStatus_ = function() {
+        done();
+      };
+
+      subscription.pull({}, assert.ifError);
     });
 
     describe('autoAck false', function() {
@@ -293,8 +352,18 @@ describe('Subscription', function() {
       });
 
       it('should execute callback with message', function(done) {
+        subscription.decorateMessage_ = function(msg) { return msg; };
         subscription.pull({}, function(err, msgs) {
+          assert.ifError(err);
           assert.deepEqual(msgs, [expectedMessage]);
+          done();
+        });
+      });
+
+      it('should pass apiResponse to callback', function(done) {
+        subscription.pull(function(err, msgs, apiResponse) {
+          assert.ifError(err);
+          assert.strictEqual(apiResponse, messageObj);
           done();
         });
       });
@@ -386,40 +455,21 @@ describe('Subscription', function() {
       subscription.pull = util.noop;
     });
 
-    it('should pull at specified interval', function(done) {
-      var INTERVAL = 5;
-      subscription.pull = function(options, callback) {
-        assert.strictEqual(options.returnImmediately, false);
-        // After pull is called once, overwrite with `done`.
-        // This is to override the function passed to `setTimeout`, so we are
-        // sure it's the same pull function when we execute it.
-        subscription.pull = function() {
-          done();
-        };
-        callback();
+    it('should not pull if subscription is closed', function() {
+      subscription.pull = function() {
+        throw new Error('Should not be called.');
       };
-      var setTimeout = global.setTimeout;
-      global.setTimeout = function(fn, interval) {
-        global.setTimeout = setTimeout;
-        assert.equal(interval, INTERVAL);
-        // This should execute the `done` function from when we overrided it
-        // above.
-        fn();
-      };
-      subscription.interval = INTERVAL;
+
+      subscription.closed = true;
       subscription.startPulling_();
     });
 
-    it('should stop pulling if subscription is closed', function() {
-      var pulledCount = 0;
+    it('should not pull if subscription is paused', function() {
       subscription.pull = function() {
-        if (++pulledCount === 3) {
-          subscription.pull = function() {
-            throw Error('Should have stopped pulling.');
-          };
-          subscription.close();
-        }
+        throw new Error('Should not be called.');
       };
+
+      subscription.paused = true;
       subscription.startPulling_();
     });
 
@@ -428,6 +478,24 @@ describe('Subscription', function() {
         assert.strictEqual(options.returnImmediately, false);
         done();
       };
+      subscription.startPulling_();
+    });
+
+    it('should not set maxResults if no maxInProgress is set', function(done) {
+      subscription.pull = function(options) {
+        assert.strictEqual(options.maxResults, undefined);
+        done();
+      };
+      subscription.startPulling_();
+    });
+
+    it('should set maxResults properly with maxInProgress', function(done) {
+      subscription.pull = function(options) {
+        assert.strictEqual(options.maxResults, 1);
+        done();
+      };
+      subscription.maxInProgress = 4;
+      subscription.inProgressAckIds = { id1: true, id2: true, id3: true };
       subscription.startPulling_();
     });
 
@@ -486,6 +554,30 @@ describe('Subscription', function() {
           assert.deepEqual(resp, apiResponse);
           done();
         });
+    });
+
+    it('should pull at specified interval', function(done) {
+      var INTERVAL = 5;
+      subscription.pull = function(options, callback) {
+        assert.strictEqual(options.returnImmediately, false);
+        // After pull is called once, overwrite with `done`.
+        // This is to override the function passed to `setTimeout`, so we are
+        // sure it's the same pull function when we execute it.
+        subscription.pull = function() {
+          done();
+        };
+        callback();
+      };
+      var setTimeout = global.setTimeout;
+      global.setTimeout = function(fn, interval) {
+        global.setTimeout = setTimeout;
+        assert.equal(interval, INTERVAL);
+        // This should execute the `done` function from when we overrided it
+        // above.
+        fn();
+      };
+      subscription.interval = INTERVAL;
+      subscription.startPulling_();
     });
   });
 
@@ -576,6 +668,85 @@ describe('Subscription', function() {
         assert.deepEqual(resp, apiResponse);
         done();
       });
+    });
+  });
+
+  describe('decorateMessage_', function() {
+    var message = {
+      ackId: 'b'
+    };
+
+    it('should return the message', function() {
+      var decoratedMessage = subscription.decorateMessage_(message);
+      assert.strictEqual(decoratedMessage.ackId, message.ackId);
+    });
+
+    it('should mark the message as being in progress', function() {
+      subscription.decorateMessage_(message);
+      assert.strictEqual(subscription.inProgressAckIds[message.ackId], true);
+    });
+
+    describe('ack', function() {
+      it('should add an ack function to ack', function() {
+        var decoratedMessage = subscription.decorateMessage_(message);
+        assert.equal(typeof decoratedMessage.ack, 'function');
+      });
+
+      it('should pass the ackId to subscription.ack', function(done) {
+        subscription.ack = function(ackId, callback) {
+          assert.strictEqual(ackId, message.ackId);
+          callback();
+        };
+
+        subscription.decorateMessage_(message).ack(done);
+      });
+    });
+
+    describe('skip', function() {
+      it('should add a skip function', function() {
+        var decoratedMessage = subscription.decorateMessage_(message);
+        assert.equal(typeof decoratedMessage.skip, 'function');
+      });
+
+      it('should unmark the message as being in progress', function() {
+        subscription.decorateMessage_(message).skip();
+
+        var inProgressAckIds = subscription.inProgressAckIds;
+        assert.strictEqual(inProgressAckIds[message.ackId], undefined);
+      });
+
+      it('should refresh the paused status', function(done) {
+        subscription.refreshPausedStatus_ = done;
+        subscription.decorateMessage_(message).skip();
+      });
+    });
+  });
+
+  describe('refreshPausedStatus_', function() {
+    it('should pause if the ackIds in progress is too high', function() {
+      subscription.inProgressAckIds = { id1: true, id2: true, id3: true };
+
+      subscription.maxInProgress = 2;
+      subscription.refreshPausedStatus_();
+      assert.strictEqual(subscription.paused, true);
+
+      subscription.maxInProgress = 3;
+      subscription.refreshPausedStatus_();
+      assert.strictEqual(subscription.paused, true);
+
+      subscription.maxInProgress = Infinity;
+      subscription.refreshPausedStatus_();
+      assert.strictEqual(subscription.paused, false);
+    });
+
+    it('should start pulling if paused and listeners exist', function(done) {
+      subscription.startPulling_ = done;
+
+      subscription.inProgressAckIds = { id1: true, id2: true, id3: true };
+      subscription.paused = true;
+      subscription.maxInProgress = Infinity;
+      subscription.messageListeners = 1;
+      subscription.refreshPausedStatus_();
     });
   });
 
