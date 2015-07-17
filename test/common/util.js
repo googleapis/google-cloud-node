@@ -28,16 +28,16 @@ var retryRequest = require('retry-request');
 var stream = require('stream');
 var streamForward = require('stream-forward');
 
-var googleAuthLibrary_Override;
+var googleAuthLibraryOverride;
 function fakeGoogleAuthLibrary() {
-  return (googleAuthLibrary_Override || googleAuthLibrary)
+  return (googleAuthLibraryOverride || googleAuthLibrary)
     .apply(null, arguments);
 }
 
 var REQUEST_DEFAULT_CONF;
-var request_Override;
+var requestOverride;
 function fakeRequest() {
-  return (request_Override || request).apply(null, arguments);
+  return (requestOverride || request).apply(null, arguments);
 }
 fakeRequest.defaults = function(defaultConfiguration) {
   // Ignore the default values, so we don't have to test for them in every API
@@ -46,14 +46,14 @@ fakeRequest.defaults = function(defaultConfiguration) {
   return fakeRequest;
 };
 
-var retryRequest_Override;
+var retryRequestOverride;
 function fakeRetryRequest() {
-  return (retryRequest_Override || retryRequest).apply(null, arguments);
+  return (retryRequestOverride || retryRequest).apply(null, arguments);
 }
 
-var streamForward_Override;
+var streamForwardOverride;
 function fakeStreamForward() {
-  return (streamForward_Override || streamForward).apply(null, arguments);
+  return (streamForwardOverride || streamForward).apply(null, arguments);
 }
 
 describe('common/util', function() {
@@ -70,7 +70,7 @@ describe('common/util', function() {
       warnOnUnregistered: false
     });
     util = require('../../lib/common/util');
-    var util_Cached = extend(true, {}, util);
+    var utilCached = extend(true, {}, util);
 
     // Override all util methods, allowing them to be mocked. Overrides are
     // removed before each test.
@@ -80,7 +80,7 @@ describe('common/util', function() {
       }
 
       util[utilMethod] = function() {
-        return (utilOverrides[utilMethod] || util_Cached[utilMethod])
+        return (utilOverrides[utilMethod] || utilCached[utilMethod])
           .apply(this, arguments);
       };
     });
@@ -92,10 +92,10 @@ describe('common/util', function() {
   });
 
   beforeEach(function() {
-    googleAuthLibrary_Override = null;
-    request_Override = null;
-    retryRequest_Override = null;
-    streamForward_Override = null;
+    googleAuthLibraryOverride = null;
+    requestOverride = null;
+    retryRequestOverride = null;
+    streamForwardOverride = null;
     utilOverrides = {};
   });
 
@@ -294,7 +294,7 @@ describe('common/util', function() {
       var boundary;
       var metadata = { a: 'b', c: 'd' };
 
-      request_Override = function() {
+      requestOverride = function() {
         var written = [];
 
         var req = duplexify();
@@ -342,7 +342,7 @@ describe('common/util', function() {
       var ws = new stream.Writable();
       ws.write = function() {};
 
-      request_Override = function() {
+      requestOverride = function() {
         return ws;
       };
 
@@ -363,7 +363,7 @@ describe('common/util', function() {
       var ws = new stream.Writable();
       ws.write = function() {};
 
-      request_Override = function() {
+      requestOverride = function() {
         return ws;
       };
 
@@ -384,7 +384,7 @@ describe('common/util', function() {
     it('should use google-auth-library', function() {
       var googleAuthLibraryCalled = false;
 
-      googleAuthLibrary_Override = function() {
+      googleAuthLibraryOverride = function() {
         googleAuthLibraryCalled = true;
         return {
           getApplicationDefault: util.noop
@@ -399,7 +399,7 @@ describe('common/util', function() {
     it('should create a JWT auth client from a keyFile', function(done) {
       var jwt = {};
 
-      googleAuthLibrary_Override = function() {
+      googleAuthLibraryOverride = function() {
         return {
           JWT: function() { return jwt; }
         };
@@ -427,7 +427,7 @@ describe('common/util', function() {
     it('should create an auth client from credentials', function(done) {
       var credentialsSet;
 
-      googleAuthLibrary_Override = function() {
+      googleAuthLibraryOverride = function() {
         return {
           fromJSON: function(credentials, callback) {
             credentialsSet = credentials;
@@ -447,7 +447,7 @@ describe('common/util', function() {
     });
 
     it('should create an auth client from magic', function(done) {
-      googleAuthLibrary_Override = function() {
+      googleAuthLibraryOverride = function() {
         return {
           getApplicationDefault: function(callback) {
             callback(null, {});
@@ -474,7 +474,7 @@ describe('common/util', function() {
         getAccessToken: function() {}
       };
 
-      googleAuthLibrary_Override = function() {
+      googleAuthLibraryOverride = function() {
         return {
           getApplicationDefault: function(callback) {
             callback(null, fakeAuthClient);
@@ -984,7 +984,7 @@ describe('common/util', function() {
     it('should decorate the request', function(done) {
       var reqOpts = { a: 'b', c: 'd' };
 
-      retryRequest_Override = util.noop;
+      retryRequestOverride = util.noop;
 
       utilOverrides.decorateRequest = function(reqOpts_) {
         assert.strictEqual(reqOpts_, reqOpts);
@@ -996,17 +996,17 @@ describe('common/util', function() {
 
     describe('stream mode', function() {
       it('should pass the default options to retryRequest', function(done) {
-        retryRequest_Override = testDefaultRetryRequestConfig(done);
+        retryRequestOverride = testDefaultRetryRequestConfig(done);
         util.makeRequest(reqOpts, {});
       });
 
       it('should allow turning off retries to retryRequest', function(done) {
-        retryRequest_Override = testNoRetryRequestConfig(done);
+        retryRequestOverride = testNoRetryRequestConfig(done);
         util.makeRequest(reqOpts, noRetryRequestConfig);
       });
 
       it('should override number of retries to retryRequest', function(done) {
-        retryRequest_Override = testCustomRetryRequestConfig(done);
+        retryRequestOverride = testCustomRetryRequestConfig(done);
         util.makeRequest(reqOpts, customRetryRequestConfig);
       });
 
@@ -1014,11 +1014,11 @@ describe('common/util', function() {
         var requestStream = new stream.Stream();
         var userStream = new stream.Stream();
 
-        retryRequest_Override = function() {
+        retryRequestOverride = function() {
           return requestStream;
         };
 
-        streamForward_Override = function(stream_) {
+        streamForwardOverride = function(stream_) {
           assert.strictEqual(stream_, requestStream);
           done();
           return stream_;
@@ -1030,17 +1030,17 @@ describe('common/util', function() {
 
     describe('callback mode', function() {
       it('should pass the default options to retryRequest', function(done) {
-        retryRequest_Override = testDefaultRetryRequestConfig(done);
+        retryRequestOverride = testDefaultRetryRequestConfig(done);
         util.makeRequest(reqOpts, {}, assert.ifError);
       });
 
       it('should allow turning off retries to retryRequest', function(done) {
-        retryRequest_Override = testNoRetryRequestConfig(done);
+        retryRequestOverride = testNoRetryRequestConfig(done);
         util.makeRequest(reqOpts, noRetryRequestConfig, assert.ifError);
       });
 
       it('should override number of retries to retryRequest', function(done) {
-        retryRequest_Override = testCustomRetryRequestConfig(done);
+        retryRequestOverride = testCustomRetryRequestConfig(done);
         util.makeRequest(reqOpts, customRetryRequestConfig, assert.ifError);
       });
 
@@ -1049,7 +1049,7 @@ describe('common/util', function() {
         var response = { a: 'b', c: 'd' };
         var body = response.a;
 
-        request_Override = function(rOpts, callback) {
+        requestOverride = function(rOpts, callback) {
           callback(error, response, body);
         };
 

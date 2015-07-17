@@ -38,7 +38,7 @@ describe('Dataset', function() {
       var options = { a: 'b', c: 'd', projectId: 'project-id' };
       var mockApiEndpoint = 'http://localhost:8080';
 
-      Dataset.determineApiEndpoint_ = function (opts) {
+      Dataset.determineApiEndpoint_ = function(opts) {
         assert.deepEqual(opts, options);
         return mockApiEndpoint;
       };

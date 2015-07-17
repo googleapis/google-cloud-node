@@ -491,14 +491,14 @@ describe('storage', function() {
 
         var fileSize = file.metadata.size;
         var byteRange = {
-          start: Math.floor(fileSize * 1/3),
-          end: Math.floor(fileSize * 2/3)
+          start: Math.floor(fileSize * 1 / 3),
+          end: Math.floor(fileSize * 2 / 3)
         };
         var expectedContentSize = byteRange.start + 1;
 
         var sizeStreamed = 0;
         file.createReadStream(byteRange)
-          .on('data', function (chunk) {
+          .on('data', function(chunk) {
             sizeStreamed += chunk.length;
           })
           .on('error', done)

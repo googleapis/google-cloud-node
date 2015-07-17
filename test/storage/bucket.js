@@ -45,10 +45,10 @@ function FakeFile(bucket, name) {
   };
 }
 
-var request_Cached = request;
-var request_Override;
+var requestCached = request;
+var requestOverride;
 function fakeRequest() {
-  return (request_Override || request_Cached).apply(null, arguments);
+  return (requestOverride || requestCached).apply(null, arguments);
 }
 fakeRequest.defaults = function() {
   // Ignore the default values, so we don't have to test for them in every API
@@ -56,11 +56,11 @@ fakeRequest.defaults = function() {
   return fakeRequest;
 };
 
-var eachLimit_Override;
+var eachLimitOverride;
 
 var fakeAsync = extend({}, async);
 fakeAsync.eachLimit = function() {
-  (eachLimit_Override || async.eachLimit).apply(null, arguments);
+  (eachLimitOverride || async.eachLimit).apply(null, arguments);
 };
 
 var extended = false;
@@ -105,8 +105,8 @@ describe('Bucket', function() {
   });
 
   beforeEach(function() {
-    request_Override = null;
-    eachLimit_Override = null;
+    requestOverride = null;
+    eachLimitOverride = null;
     bucket = new Bucket(options, BUCKET_NAME);
   });
 
@@ -372,7 +372,7 @@ describe('Bucket', function() {
     });
 
     it('should process 10 files at a time', function(done) {
-      eachLimit_Override = function(arr, limit) {
+      eachLimitOverride = function(arr, limit) {
         assert.equal(limit, 10);
         done();
       };
@@ -1004,7 +1004,7 @@ describe('Bucket', function() {
     });
 
     it('should process 10 files at a time', function(done) {
-      eachLimit_Override = function(arr, limit) {
+      eachLimitOverride = function(arr, limit) {
         assert.equal(limit, 10);
         done();
       };

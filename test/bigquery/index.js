@@ -25,10 +25,10 @@ function FakeTable(a, b) {
   Table.call(this, a, b);
 }
 
-var mergeSchemaWithRows_Override;
+var mergeSchemaWithRowsOverride;
 FakeTable.mergeSchemaWithRows_ = function() {
   var args = [].slice.apply(arguments);
-  return (mergeSchemaWithRows_Override || Table.mergeSchemaWithRows_)
+  return (mergeSchemaWithRowsOverride || Table.mergeSchemaWithRows_)
     .apply(null, args);
 };
 
@@ -481,8 +481,8 @@ describe('BigQuery', function() {
       var rows = [{ row: 'a' }, { row: 'b' }, { row: 'c' }];
       var schema = [{ fields: [] }];
 
-      mergeSchemaWithRows_Override = function(s, r) {
-        mergeSchemaWithRows_Override = null;
+      mergeSchemaWithRowsOverride = function(s, r) {
+        mergeSchemaWithRowsOverride = null;
         assert.deepEqual(s, schema);
         assert.deepEqual(r, rows);
         done();
@@ -523,8 +523,8 @@ describe('BigQuery', function() {
         });
       };
 
-      mergeSchemaWithRows_Override = function() {
-        mergeSchemaWithRows_Override = null;
+      mergeSchemaWithRowsOverride = function() {
+        mergeSchemaWithRowsOverride = null;
         return ROWS;
       };
 
