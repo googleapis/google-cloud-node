@@ -24,7 +24,7 @@ var extend = require('extend');
 var mockery = require('mockery');
 var util = require('../../lib/common/util.js');
 
-var DatastoreRequest_Override = {
+var DatastoreRequestOverride = {
   delete: util.noop,
   save: util.noop
 };
@@ -33,15 +33,15 @@ var FakeDatastoreRequest = {
   prototype: {
     delete: function() {
       var args = [].slice.apply(arguments);
-      var results = DatastoreRequest_Override.delete.apply(null, args);
-      DatastoreRequest_Override.delete = util.noop;
+      var results = DatastoreRequestOverride.delete.apply(null, args);
+      DatastoreRequestOverride.delete = util.noop;
       return results;
     },
 
     save: function() {
       var args = [].slice.apply(arguments);
-      var results = DatastoreRequest_Override.save.apply(null, args);
-      DatastoreRequest_Override.save = util.noop;
+      var results = DatastoreRequestOverride.save.apply(null, args);
+      DatastoreRequestOverride.save = util.noop;
       return results;
     }
   }
@@ -261,13 +261,13 @@ describe('Transaction', function() {
       var args = [];
 
       var deleteCalled = 0;
-      DatastoreRequest_Override.delete = function() {
+      DatastoreRequestOverride.delete = function() {
         args.push(arguments[0]);
         deleteCalled++;
       };
 
       var saveCalled = 0;
-      DatastoreRequest_Override.save = function() {
+      DatastoreRequestOverride.save = function() {
         args.push(arguments[0]);
         saveCalled++;
       };
@@ -292,12 +292,12 @@ describe('Transaction', function() {
       transaction.save({ key: key(['Product', 123]), data: '' });
 
       var deleteCalled = 0;
-      DatastoreRequest_Override.delete = function() {
+      DatastoreRequestOverride.delete = function() {
         deleteCalled++;
       };
 
       var saveCalled = 0;
-      DatastoreRequest_Override.save = function() {
+      DatastoreRequestOverride.save = function() {
         saveCalled++;
       };
 
@@ -356,7 +356,7 @@ describe('Transaction', function() {
 
       assert.equal(transaction.modifiedEntities_.length, keys.length);
 
-      transaction.modifiedEntities_.forEach(function (queuedEntity) {
+      transaction.modifiedEntities_.forEach(function(queuedEntity) {
         assert.equal(queuedEntity.method, 'delete');
         assert(keys.indexOf(queuedEntity.entity.key) > -1);
         assert.deepEqual(queuedEntity.args, [queuedEntity.entity.key]);
@@ -376,7 +376,7 @@ describe('Transaction', function() {
 
       assert.equal(transaction.modifiedEntities_.length, entities.length);
 
-      transaction.modifiedEntities_.forEach(function (queuedEntity) {
+      transaction.modifiedEntities_.forEach(function(queuedEntity) {
         assert.equal(queuedEntity.method, 'save');
 
         var match = entities.filter(function(ent) {

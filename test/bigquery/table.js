@@ -30,11 +30,11 @@ function FakeFile(a, b) {
   File.call(this, a, b);
 }
 
-var makeWritableStream_Override;
+var makeWritableStreamOverride;
 var fakeUtil = extend({}, util, {
   makeWritableStream: function() {
     var args = [].slice.call(arguments);
-    (makeWritableStream_Override || util.makeWritableStream).apply(null, args);
+    (makeWritableStreamOverride || util.makeWritableStream).apply(null, args);
   }
 });
 
@@ -95,7 +95,7 @@ describe('BigQuery/Table', function() {
   });
 
   beforeEach(function() {
-    makeWritableStream_Override = null;
+    makeWritableStreamOverride = null;
     table = new Table(DATASET, TABLE_ID);
   });
 
@@ -271,7 +271,7 @@ describe('BigQuery/Table', function() {
     it('should use a string as the file type', function(done) {
       var fileType = 'csv';
 
-      makeWritableStream_Override = function(stream, options) {
+      makeWritableStreamOverride = function(stream, options) {
         var load = options.metadata.configuration.load;
         assert.equal(load.sourceFormat, 'CSV');
         done();
@@ -305,7 +305,7 @@ describe('BigQuery/Table', function() {
       it('should make a writable stream when written to', function(done) {
         var stream;
 
-        makeWritableStream_Override = function(s) {
+        makeWritableStreamOverride = function(s) {
           assert.equal(s, stream);
           done();
         };
@@ -315,7 +315,7 @@ describe('BigQuery/Table', function() {
       });
 
       it('should pass the connection', function(done) {
-        makeWritableStream_Override = function(stream, options) {
+        makeWritableStreamOverride = function(stream, options) {
           assert.deepEqual(options.connection, table.connection);
           done();
         };
@@ -324,7 +324,7 @@ describe('BigQuery/Table', function() {
       });
 
       it('should pass extended metadata', function(done) {
-        makeWritableStream_Override = function(stream, options) {
+        makeWritableStreamOverride = function(stream, options) {
           assert.deepEqual(options.metadata, {
             configuration: {
               load: {
@@ -345,7 +345,7 @@ describe('BigQuery/Table', function() {
       });
 
       it('should pass the correct request uri', function(done) {
-        makeWritableStream_Override = function(stream, options) {
+        makeWritableStreamOverride = function(stream, options) {
           var uri = 'https://www.googleapis.com/upload/bigquery/v2/projects/' +
             table.bigQuery.projectId + '/jobs';
           assert.equal(options.request.uri, uri);
@@ -363,7 +363,7 @@ describe('BigQuery/Table', function() {
           return { id: id };
         };
 
-        makeWritableStream_Override = function(stream, options, callback) {
+        makeWritableStreamOverride = function(stream, options, callback) {
           callback(metadata);
         };
 

@@ -39,11 +39,11 @@ var fakeStreamRouter = {
   }
 };
 
-var makeAuthorizedRequestFactory_Override;
+var makeAuthorizedRequestFactoryOverride;
 var fakeUtil = extend({}, util, {
   makeAuthorizedRequestFactory: function() {
-    if (makeAuthorizedRequestFactory_Override) {
-      return makeAuthorizedRequestFactory_Override.apply(null, arguments);
+    if (makeAuthorizedRequestFactoryOverride) {
+      return makeAuthorizedRequestFactoryOverride.apply(null, arguments);
     } else {
       return util.makeAuthorizedRequestFactory.apply(null, arguments);
     }
@@ -74,7 +74,7 @@ describe('Search', function() {
   });
 
   beforeEach(function() {
-    makeAuthorizedRequestFactory_Override = null;
+    makeAuthorizedRequestFactoryOverride = null;
 
     search = new Search({
       projectId: PROJECT_ID
@@ -100,7 +100,7 @@ describe('Search', function() {
         keyFilename: 'keyFile'
       };
 
-      makeAuthorizedRequestFactory_Override = function(options_) {
+      makeAuthorizedRequestFactoryOverride = function(options_) {
         assert.deepEqual(options_, {
           credentials: options.credentials,
           email: options.email,
@@ -184,8 +184,10 @@ describe('Search', function() {
 
       search.index = function(indexId) {
         assert(indexIds.indexOf(indexId) > -1);
-        return true; // Used in the test callback to assure the value returned
-                     // to the callback is what's returned from this method.
+
+        // Used in the test callback to assure the value returned
+        // to the callback is what's returned from this method.
+        return true;
       };
 
       search.makeReq_ = function(method, path, query, body, callback) {
@@ -196,7 +198,7 @@ describe('Search', function() {
         assert.ifError(err);
 
         assert.strictEqual(indexes.length, indexObjects.length);
-        assert(indexes.every(function (index) { return index; }));
+        assert(indexes.every(function(index) { return index; }));
 
         assert.strictEqual(nextQuery, null);
         assert.deepEqual(apiResp, apiResponse);
