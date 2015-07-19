@@ -30,10 +30,10 @@ function Subscription(a, b) {
   return new OverrideFn(a, b);
 }
 
-var request_Cached = request;
-var request_Override;
+var requestCached = request;
+var requestOverride;
 function fakeRequest() {
-  return (request_Override || request_Cached).apply(null, arguments);
+  return (requestOverride || requestCached).apply(null, arguments);
 }
 fakeRequest.defaults = function() {
   // Ignore the default values, so we don't have to test for them in every API
@@ -79,7 +79,7 @@ describe('PubSub', function() {
 
   beforeEach(function() {
     SubscriptionOverride = null;
-    request_Override = null;
+    requestOverride = null;
     pubsub = new PubSub({ projectId: PROJECT_ID });
     pubsub.makeReq_ = function(method, path, q, body, callback) {
       callback();

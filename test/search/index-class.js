@@ -218,8 +218,10 @@ describe('Index', function() {
 
       index.documentFromObject_ = function(documentObject) {
         assert(documentObjects.indexOf(documentObject) > -1);
-        return true; // Used in the test callback to assure the value returned
-                     // to the callback is what's returned from this method.
+
+        // Used in the test callback to assure the value returned
+        // to the callback is what's returned from this method.
+        return true;
       };
 
       index.makeReq_ = function(method, path, query, body, callback) {
@@ -230,7 +232,7 @@ describe('Index', function() {
         assert.ifError(err);
 
         assert.strictEqual(documents.length, documentObjects.length);
-        assert(documents.every(function (document) { return document; }));
+        assert(documents.every(function(document) { return document; }));
 
         assert.strictEqual(nextQuery, null);
         assert.deepEqual(apiResp, apiResponse);
@@ -321,8 +323,10 @@ describe('Index', function() {
 
       index.documentFromObject_ = function(documentObject) {
         assert(documentObjects.indexOf(documentObject) > -1);
-        return true; // Used in the test callback to assure the value returned
-                     // to the callback is what's returned from this method.
+
+        // Used in the test callback to assure the value returned
+        // to the callback is what's returned from this method.
+        return true;
       };
 
       index.makeReq_ = function(method, path, query, body, callback) {
@@ -333,7 +337,7 @@ describe('Index', function() {
         assert.ifError(err);
 
         assert.strictEqual(documents.length, documentObjects.length);
-        assert(documents.every(function (document) { return document; }));
+        assert(documents.every(function(document) { return document; }));
 
         assert.strictEqual(nextQuery, null);
         assert.deepEqual(apiResp, apiResponse);

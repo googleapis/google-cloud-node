@@ -24,58 +24,58 @@ var datastore = require('../../lib/datastore');
 var ByteBuffer = require('bytebuffer');
 
 var entityProto = {
-  'property': [{
-    'name': 'linkedTo',
-    'value': {
-        'key_value': {
-            'path_element': [{
-                'kind': 'Kind',
-                'name': '123'
-            }]
-        }
+  property: [{
+    name: 'linkedTo',
+    value: {
+      key_value: {
+        path_element: [{
+          kind: 'Kind',
+          name: '123'
+        }]
+      }
     }
   }, {
-      'name': 'name',
-      'value': {
-          'string_value': 'Some name'
-      }
+    name: 'name',
+    value: {
+      string_value: 'Some name'
+    }
   }, {
-      'name': 'flagged',
-      'value': {
-          'boolean_value': false
-      }
+    name: 'flagged',
+    value: {
+      boolean_value: false
+    }
   }, {
-      'name': 'count',
-      'value': {
-          'integer_value': 5
-      }
+    name: 'count',
+    value: {
+      integer_value: 5
+    }
   }, {
-      'name': 'total',
-      'value': {
-          'double_value': 7.8
-      }
+    name: 'total',
+    value: {
+      double_value: 7.8
+    }
   }, {
-      'name': 'author',
-      'value': {
-          'entity_value': {
-              'property': [{
-                  'name': 'name',
-                  'value': {
-                      'string_value': 'Burcu Dogan'
-                  }
-              }]
-          },
-          'indexed': false
-      }
+    name: 'author',
+    value: {
+      entity_value: {
+        property: [{
+          name: 'name',
+          value: {
+            string_value: 'Burcu Dogan'
+          }
+        }]
+      },
+      indexed: false
+    }
   }, {
-      'name': 'list',
-      'value': {
-          'list_value': [{
-              'integer_value': 6
-          }, {
-              'boolean_value': false
-          }]
-      }
+    name: 'list',
+    value: {
+      list_value: [{
+        integer_value: 6
+      }, {
+        boolean_value: false
+      }]
+    }
   }]
 };
 
@@ -147,7 +147,7 @@ describe('keyFromKeyProto', function() {
     assert.deepEqual(key, new entity.Key({ path: [ 'Kind', 'Name' ] }));
   });
 
-  it('should not inject null into path if no id set', function(){
+  it('should not inject null into path if no id set', function() {
     var key = entity.keyFromKeyProto(protoIncomplete);
     assert.deepEqual(key, new entity.Key({
       namespace: 'Test',

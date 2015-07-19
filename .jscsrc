@@ -1,0 +1,18 @@
+{
+  "preset": "node-style-guide",
+  "requireTrailingComma": null,
+  "requireCapitalizedComments": null,
+  "requireSpaceAfterKeywords": [
+    "if",
+    "else",
+    "for",
+    "while",
+    "do",
+    "switch",
+    "case",
+    "return",
+    "try",
+    "typeof"
+  ],
+  "requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties"
+}

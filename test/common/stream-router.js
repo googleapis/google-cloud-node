@@ -37,7 +37,7 @@ describe('streamRouter', function() {
       warnOnUnregistered: false
     });
     streamRouter = require('../../lib/common/stream-router.js');
-    var streamRouter_Cached = extend(true, {}, streamRouter);
+    var streamRouterCached = extend(true, {}, streamRouter);
 
     Object.keys(streamRouter).forEach(function(streamRouterMethod) {
       if (typeof streamRouter[streamRouterMethod] !== 'function') {
@@ -50,7 +50,7 @@ describe('streamRouter', function() {
         if (streamRouterOverrides[streamRouterMethod]) {
           return streamRouterOverrides[streamRouterMethod].apply(this, args);
         } else {
-          return streamRouter_Cached[streamRouterMethod].apply(this, args);
+          return streamRouterCached[streamRouterMethod].apply(this, args);
         }
       };
     });

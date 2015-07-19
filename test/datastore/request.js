@@ -30,9 +30,9 @@ var stream = require('stream');
 var util = require('../../lib/common/util.js');
 
 var REQUEST_DEFAULT_CONF;
-var request_Override;
+var requestOverride;
 function fakeRequest() {
-  return (request_Override || requestModule).apply(null, arguments);
+  return (requestOverride || requestModule).apply(null, arguments);
 }
 fakeRequest.defaults = function(defaultConfiguration) {
   // Ignore the default values, so we don't have to test for them in every API
@@ -97,7 +97,7 @@ describe('Request', function() {
       namespace: 'namespace',
       path: ['Company', 123]
     });
-    request_Override = null;
+    requestOverride = null;
     request = new Request();
     request.apiEndpoint = CUSTOM_ENDPOINT;
     request.makeAuthorizedRequest_ = function(req, callback) {
@@ -471,7 +471,7 @@ describe('Request', function() {
         callback(null, mockResponse.withResults);
       };
 
-      request.runQuery(query, function (err, entities) {
+      request.runQuery(query, function(err, entities) {
         assert.ifError(err);
         assert.deepEqual(entities[0].key.path, ['Kind', 5732568548769792]);
 
@@ -487,7 +487,7 @@ describe('Request', function() {
         callback(null, mockResponse.withResults);
       };
 
-      request.runQuery(query, function (err, entities, nextQuery, apiResponse) {
+      request.runQuery(query, function(err, entities, nextQuery, apiResponse) {
         assert.ifError(err);
         assert.deepEqual(mockResponse.withResults, apiResponse);
         done();
@@ -634,7 +634,7 @@ describe('Request', function() {
 
     it('should make API request', function(done) {
       var mockRequest = { mock: 'request' };
-      request_Override = function(req) {
+      requestOverride = function(req) {
         assert.equal(req.headers['Content-Length'], 2);
         assert.deepEqual(req, mockRequest);
         done();
@@ -649,7 +649,7 @@ describe('Request', function() {
     it('should send protobuf request', function(done) {
       var requestOptions = { mode: 'NON_TRANSACTIONAL' };
       var decoded = new pb.CommitRequest(requestOptions).toBuffer();
-      request_Override = function() {
+      requestOverride = function() {
         var stream = { on: util.noop };
         stream.end = function(data) {
           assert.equal(String(data), String(decoded));
@@ -664,9 +664,9 @@ describe('Request', function() {
       pbFakeMethodResponseDecode = function() {
         done();
       };
-      request_Override = function() {
+      requestOverride = function() {
         var ws = new stream.Writable();
-        setImmediate(function () {
+        setImmediate(function() {
           ws.emit('response', ws);
           ws.emit('end');
         });
@@ -678,7 +678,7 @@ describe('Request', function() {
     it('should respect API host and port configuration', function(done) {
       request.apiEndpoint = CUSTOM_ENDPOINT;
 
-      request_Override = function(req) {
+      requestOverride = function(req) {
         assert.equal(req.uri.indexOf(CUSTOM_ENDPOINT), 0);
         done();
         return new stream.Writable();
@@ -701,7 +701,7 @@ describe('Request', function() {
           var expected = new pb.RollbackRequest({
             transaction: request.id
           }).toBuffer();
-          request_Override = function() {
+          requestOverride = function() {
             var stream = { on: util.noop, end: util.noop };
             stream.end = function(data) {
               assert.deepEqual(data, expected);
@@ -721,7 +721,7 @@ describe('Request', function() {
             mode: 'TRANSACTIONAL',
             transaction: request.id
           }).toBuffer();
-          request_Override = function() {
+          requestOverride = function() {
             var stream = { on: util.noop, end: util.noop };
             stream.end = function(data) {
               assert.deepEqual(data, expected);
@@ -736,7 +736,7 @@ describe('Request', function() {
           var expected = new pb.CommitRequest({
             mode: 'NON_TRANSACTIONAL'
           }).toBuffer();
-          request_Override = function() {
+          requestOverride = function() {
             var stream = { on: util.noop, end: util.noop };
             stream.end = function(data) {
               assert.deepEqual(data, expected);
@@ -757,7 +757,7 @@ describe('Request', function() {
               transaction: request.id
             }
           }).toBuffer();
-          request_Override = function() {
+          requestOverride = function() {
             var stream = { on: util.noop, end: util.noop };
             stream.end = function(data) {
               assert.deepEqual(data, expected);
@@ -770,7 +770,7 @@ describe('Request', function() {
 
         it('should not attach transactional properties', function(done) {
           var expected = new pb.LookupRequest().toBuffer();
-          request_Override = function() {
+          requestOverride = function() {
             var ws = new stream.Writable();
             ws.end = function(data) {
               assert.deepEqual(data, expected);

@@ -84,7 +84,7 @@ describe('datastore', function() {
         buf: new Buffer('010100000000000000000059400000000000006940', 'hex')
       };
 
-      ds.save({ key: postKey, data: data }, function (err) {
+      ds.save({ key: postKey, data: data }, function(err) {
         assert.ifError(err);
 
         var assignedId = postKey.path[1];
