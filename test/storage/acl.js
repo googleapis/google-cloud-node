@@ -60,7 +60,7 @@ describe('storage/acl', function() {
       var apiResponse = { entity: ENTITY, role: ROLE };
       var expectedAclObject = { entity: ENTITY, role: ROLE };
 
-      acl.makeAclObject_ = function (obj) {
+      acl.makeAclObject_ = function(obj) {
         assert.deepEqual(obj, apiResponse);
         return expectedAclObject;
       };
@@ -180,7 +180,7 @@ describe('storage/acl', function() {
           { entity: ENTITY, role: ROLE }
         ];
 
-        acl.makeAclObject_ = function (obj, index) {
+        acl.makeAclObject_ = function(obj, index) {
           return expectedAclObjects[index];
         };
 
@@ -226,7 +226,7 @@ describe('storage/acl', function() {
         var apiResponse = { entity: ENTITY, role: ROLE };
         var expectedAclObject = { entity: ENTITY, role: ROLE };
 
-        acl.makeAclObject_ = function () {
+        acl.makeAclObject_ = function() {
           return expectedAclObject;
         };
 
@@ -284,7 +284,7 @@ describe('storage/acl', function() {
       var apiResponse = { entity: ENTITY, role: ROLE };
       var expectedAclObject = { entity: ENTITY, role: ROLE };
 
-      acl.makeAclObject_ = function () {
+      acl.makeAclObject_ = function() {
         return expectedAclObject;
       };
 
@@ -416,7 +416,7 @@ describe('storage/AclRoleAccessorMethods', function() {
       var userName = 'email@example.com';
       var role = 'fakerole';
 
-      aclEntity.add = function (options, callback) {
+      aclEntity.add = function(options, callback) {
         assert.deepEqual(options, {
           entity: 'user-' + userName,
           role: role
@@ -425,7 +425,7 @@ describe('storage/AclRoleAccessorMethods', function() {
         callback();
       };
 
-      aclEntity.delete = function (options, callback) {
+      aclEntity.delete = function(options, callback) {
         assert.deepEqual(options, {
           entity: 'user-' + userName,
           role: role

@@ -72,6 +72,7 @@
     "dox": "^0.7.0",
     "glob": "^5.0.9",
     "istanbul": "^0.3.5",
+    "jscs": "^1.13.1",
     "jshint": "^2.6.0",
     "mitm": "^1.1.0",
     "mocha": "^2.1.0",
@@ -80,7 +81,7 @@
   },
   "scripts": {
     "docs": "./scripts/docs.sh",
-    "lint": "jshint lib/ system-test/ test/",
+    "lint": "jshint lib/ system-test/ test/ && jscs lib/ system-test/ test/",
     "test": "npm run docs && mocha test/*/*.js test/docs.js",
     "system-test": "mocha system-test/* --timeout 30000",
     "cover": "istanbul cover -x 'system-test/*' _mocha -- --timeout 30000 test/*/*.js test/docs.js system-test/*",
