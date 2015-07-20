@@ -25,116 +25,324 @@ var Query = require('../../lib/datastore/query.js');
 var queryProto = require('../testdata/proto_query.json');
 
 describe('Query', function() {
-  it('should use null for all falsy namespace values', function() {
-    [
-      new Query('', 'Kind'),
-      new Query(null, 'Kind'),
-      new Query(undefined, 'Kind'),
-      new Query(0, 'Kind'),
-      new Query('Kind')
-    ].forEach(function(query) {
-      assert.strictEqual(query.namespace, null);
-      assert.equal(query.kinds, 'Kind');
+
+  describe('instantiation', function() {
+
+    it('should use null for all falsy namespace values', function() {
+      [
+        new Query('', 'Kind'),
+        new Query(null, 'Kind'),
+        new Query(undefined, 'Kind'),
+        new Query(0, 'Kind'),
+        new Query('Kind')
+      ].forEach(function(query) {
+        assert.strictEqual(query.namespace, null);
+        assert.equal(query.kinds, 'Kind');
+      });
     });
+
+    it('should support custom namespaces', function() {
+      var query = new Query('ns', ['kind1']);
+      assert.equal(query.namespace, 'ns');
+    });
+
+    it('should enable auto pagination by default', function() {
+      var query = new Query(['kind1']);
+      assert.strictEqual(query.autoPaginateVal, true);
+    });
+
   });
 
-  it('should support custom namespaces', function() {
-    var query = new Query('ns', ['kind1']);
-    assert.equal(query.namespace, 'ns');
+  describe('autoPaginate', function() {
+
+    it('should enable auto pagination', function() {
+      var query = new Query(['kind1']).autoPaginate();
+
+      assert.strictEqual(query.autoPaginateVal, true);
+    });
+
+    it('should disable auto pagination when false is passed in', function() {
+      var query = new Query(['kind1']).autoPaginate(false);
+
+      assert.strictEqual(query.autoPaginateVal, false);
+    });
+
+    it('should not disable auto pagination with falsy values', function() {
+      var query = new Query(['kind1']).autoPaginate(null);
+
+      assert.strictEqual(query.autoPaginateVal, true);
+    });
+
+    it('should return a new query', function() {
+      var query = new Query(['kind1']);
+      var newQuery = query.autoPaginate(false);
+
+      assert.notEqual(query.autoPaginateVal, newQuery.autoPaginateVal);
+    });
+
   });
 
-  it('should default autoPaginate to false', function() {
-    var query = new Query(['kind1']);
-    assert.strictEqual(query.autoPaginateVal, true);
-  });
+  describe('filter', function() {
 
-  it('should default autoPaginate() to true', function() {
-    var query = new Query(['kind1'])
-        .autoPaginate();
-    assert.strictEqual(query.autoPaginateVal, true);
-  });
+    it('should support filtering', function() {
+      var now = new Date();
+      var query = new Query(['kind1']).filter('date <=', now);
+      var filter = query.filters[0];
 
-  it('should support setting autoPaginate to false', function() {
-    var query = new Query(['kind1'])
-        .autoPaginate(false);
-    assert.strictEqual(query.autoPaginateVal, false);
-  });
+      assert.equal(filter.name, 'date');
+      assert.equal(filter.op, '<=');
+      assert.equal(filter.val, now);
+    });
 
-  it('should support field selection by field name', function() {
-    var query = new Query(['kind1'])
-        .select(['name', 'title']);
-    assert.equal(query.selectVal[0], 'name');
-    assert.equal(query.selectVal[1], 'title');
-  });
-
-  it('should support single field selection by field name', function() {
-    var query = new Query(['kind1'])
-        .select('name');
-    assert.equal(query.selectVal[0], 'name');
-  });
-
-  it('should support ancestor filtering', function() {
-    var query = new Query(['kind1'])
-        .hasAncestor(['kind2', 123]);
-    assert.equal(query.filters[0].name, '__key__');
-    assert.equal(query.filters[0].op, 'HAS_ANCESTOR');
-    assert.deepEqual(query.filters[0].val, ['kind2', 123]);
-  });
-
-  it('should support multiple filters', function() {
-    var now = new Date();
-    var query = new Query(['kind1'])
+    it('should recognize all the different operators', function() {
+      var now = new Date();
+      var query = new Query(['kind1'])
         .filter('date <=', now)
         .filter('name =', 'Title')
-        .filter('count >', 20);
+        .filter('count >', 20)
+        .filter('size <', 10)
+        .filter('something >=', 11);
 
-    assert.equal(query.filters[0].name, 'date');
-    assert.equal(query.filters[0].op, '<=');
-    assert.strictEqual(query.filters[0].val, now);
+      assert.equal(query.filters[0].name, 'date');
+      assert.equal(query.filters[0].op, '<=');
+      assert.strictEqual(query.filters[0].val, now);
 
-    assert.equal(query.filters[1].name, 'name');
-    assert.equal(query.filters[1].op, '=');
-    assert.equal(query.filters[1].val, 'Title');
+      assert.equal(query.filters[1].name, 'name');
+      assert.equal(query.filters[1].op, '=');
+      assert.equal(query.filters[1].val, 'Title');
 
-    assert.equal(query.filters[2].name, 'count');
-    assert.equal(query.filters[2].op, '>');
-    assert.strictEqual(query.filters[2].val, 20);
+      assert.equal(query.filters[2].name, 'count');
+      assert.equal(query.filters[2].op, '>');
+      assert.strictEqual(query.filters[2].val, 20);
+
+      assert.equal(query.filters[3].name, 'size');
+      assert.equal(query.filters[3].op, '<');
+      assert.strictEqual(query.filters[3].val, 10);
+
+      assert.equal(query.filters[4].name, 'something');
+      assert.equal(query.filters[4].op, '>=');
+      assert.strictEqual(query.filters[4].val, 11);
+    });
+
+    it('should remove any whitespace surrounding the filter name', function() {
+      var query = new Query(['kind1']).filter('   count    >', 123);
+
+      assert.equal(query.filters[0].name, 'count');
+    });
+
+    it('should remove any whitespace surrounding the operator', function() {
+      var query = new Query(['kind1']).filter('count           <        ', 123);
+
+      assert.equal(query.filters[0].op, '<');
+    });
+
+    it('should create the filters property if it is a falsy value', function() {
+      var query = new Query(['kind1']);
+
+      query.filters = false;
+      query = query.filter('count <=', 5);
+
+      assert.equal(query.filters.length, 1);
+    });
+
+    it('should return a new query', function() {
+      var query = new Query(['kind1']);
+      var newQuery = query.filter('count <', 5);
+
+      assert.notDeepEqual(query.filters, newQuery.filters);
+    });
+
   });
 
-  it('should support ordering asc and desc', function() {
-    var query = new Query(['kind1'])
+  describe('hasAncestor', function() {
+
+    it('should support ancestor filtering', function() {
+      var query = new Query(['kind1']).hasAncestor(['kind2', 123]);
+
+      assert.equal(query.filters[0].name, '__key__');
+      assert.equal(query.filters[0].op, 'HAS_ANCESTOR');
+      assert.deepEqual(query.filters[0].val, ['kind2', 123]);
+    });
+
+    it('should return a new query', function() {
+      var query = new Query(['kind1']);
+      var newQuery = query.hasAncestor(['kind2', 123]);
+
+      assert.notDeepEqual(query.filters, newQuery.filters);
+    });
+
+  });
+
+  describe('order', function() {
+
+    it('should default ordering to ascending', function() {
+      var query = new Query(['kind1']).order('name');
+
+      assert.equal(query.orders[0].name, 'name');
+      assert.equal(query.orders[0].sign, '+');
+    });
+
+    it('should support ascending order', function() {
+      var query = new Query(['kind1']).order('+name');
+
+      assert.equal(query.orders[0].name, 'name');
+      assert.equal(query.orders[0].sign, '+');
+    });
+
+    it('should support descending order', function() {
+      var query = new Query(['kind1']).order('-count');
+
+      assert.equal(query.orders[0].name, 'count');
+      assert.equal(query.orders[0].sign, '-');
+    });
+
+    it('should support both ascending and descending', function() {
+      var query = new Query(['kind1'])
         .order('+name')
         .order('-count');
-    assert.equal(query.orders[0].name, 'name');
-    assert.equal(query.orders[0].sign, '+');
-    assert.equal(query.orders[1].name, 'count');
-    assert.equal(query.orders[1].sign, '-');
+
+      assert.equal(query.orders[0].name, 'name');
+      assert.equal(query.orders[0].sign, '+');
+      assert.equal(query.orders[1].name, 'count');
+      assert.equal(query.orders[1].sign, '-');
+    });
+
+    it('should create the orders property if it is a falsy value', function() {
+      var query = new Query(['kind1']);
+
+      query.orders = false;
+      query = query.order('size');
+
+      assert.equal(query.orders.length, 1);
+    });
+
+    it('should return a new query', function() {
+      var query = new Query(['kind1']);
+      var newQuery = query.order('count');
+
+      assert.notDeepEqual(query.orders, newQuery.orders);
+    });
+
   });
 
-  it('should default ordering to ascending', function() {
-    var query = new Query(['kind1']).order('name');
-    assert.equal(query.orders[0].name, 'name');
-    assert.equal(query.orders[0].sign, '+');
+  describe('groupBy', function() {
+
+    it('should store an array of properties to group by', function() {
+      var query = new Query(['kind1']).groupBy(['name', 'size']);
+
+      assert.deepEqual(query.groupByVal, ['name', 'size']);
+    });
+
+    it('should convert a single property into an array', function() {
+      var query = new Query(['kind1']).groupBy('name');
+
+      assert.deepEqual(query.groupByVal, ['name']);
+    });
+
+    it('should return a new query', function() {
+      var query = new Query(['kind1']);
+      var newQuery = query.groupBy(['name']);
+
+      assert.notDeepEqual(query.groupByVal, newQuery.groupByVal);
+    });
+
   });
 
-  it('should provide pagination with offset and limit', function() {
-    var query = new Query(['kind1'])
-        .offset(20)
-        .limit(100);
-    assert.strictEqual(query.offsetVal, 20);
-    assert.strictEqual(query.limitVal, 100);
+  describe('select', function() {
+
+    it('should store an array of properties to select', function() {
+      var query = new Query(['kind1']).select(['name', 'size']);
+
+      assert.deepEqual(query.selectVal, ['name', 'size']);
+    });
+
+    it('should convert a single property into an array', function() {
+      var query = new Query(['kind1']).select('name');
+
+      assert.deepEqual(query.selectVal, ['name']);
+    });
+
+    it('should return a new query', function() {
+      var query = new Query(['kind1']);
+      var newQuery = query.select('name');
+
+      assert.notDeepEqual(query.selectVal, newQuery.selectVal);
+    });
+
   });
 
-  it('should allow page start and end tokens', function() {
-    var query = new Query(['kind1'])
-        .start('abc123')
-        .end('def987');
-    assert.equal(query.startVal, 'abc123');
-    assert.equal(query.endVal, 'def987');
+  describe('start', function() {
+
+    it('should capture the starting cursor value', function() {
+      var query = new Query(['kind1']).start('X');
+
+      assert.equal(query.startVal, 'X');
+    });
+
+    it('should return a new query', function() {
+      var query = new Query(['kind1']);
+      var newQuery = query.start('Y');
+
+      assert.notEqual(query.startVal, newQuery.startVal);
+    });
+
   });
 
-  it('should be converted to a query proto successfully', function() {
-    var query = new Query(['Kind'])
+  describe('end', function() {
+
+    it('should capture the ending cursor value', function() {
+      var query = new Query(['kind1']).end('Z');
+
+      assert.equal(query.endVal, 'Z');
+    });
+
+    it('should return a new query', function() {
+      var query = new Query(['kind1']);
+      var newQuery = query.end('W');
+
+      assert.notEqual(query.endVal, newQuery.endVal);
+    });
+
+  });
+
+  describe('limit', function() {
+
+    it('should capture the number of results to limit to', function() {
+      var query = new Query(['kind1']).limit(20);
+
+      assert.strictEqual(query.limitVal, 20);
+    });
+
+    it('should return a new query', function() {
+      var query = new Query(['kind1']);
+      var newQuery = query.limit(20);
+
+      assert.notEqual(query.limitVal, newQuery.limitVal);
+    });
+
+  });
+
+  describe('offset', function() {
+
+    it('should capture the number of results to offset by', function() {
+      var query = new Query(['kind1']).offset(100);
+
+      assert.strictEqual(query.offsetVal, 100);
+    });
+
+    it('should return a new query', function() {
+      var query = new Query(['kind1']);
+      var newQuery = query.offset(10);
+
+      assert.notEqual(query.offsetVal, newQuery.offsetVal);
+    });
+
+  });
+
+  describe('proto conversion', function() {
+
+    it('should be converted to a query proto successfully', function() {
+      var query = new Query(['Kind'])
         .select(['name', 'count'])
         .filter('count >=', datastore.int(5))
         .filter('name =', 'Burcu')
@@ -142,6 +350,10 @@ describe('Query', function() {
         .groupBy(['count'])
         .offset(5)
         .limit(10);
-    assert.deepEqual(entity.queryToQueryProto(query), queryProto);
+
+      assert.deepEqual(entity.queryToQueryProto(query), queryProto);
+    });
+
   });
+
 });
