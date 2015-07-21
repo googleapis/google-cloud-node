@@ -2,7 +2,7 @@
   <header header title="Troubleshooting">
     <div class="row row--right">
       <div class="col margin-vertical">
-        <a href="https://github.com/GoogleCloudPlatform/gcloud-node/edit/master/docs/troubleshooting.md"
+        <a href="https://github.com/GoogleCloudPlatform/gcloud-common/edit/master/troubleshooting/readme.md"
           class="v-btn">
           <img src="site/img/icon-link-github.svg" />
           Edit on GitHub
@@ -15,6 +15,8 @@
 <div subpage
   header-templateUrl="troubleshooting-header.html"
   title="Troubleshooting">
-  <btf-markdown ng-include="'troubleshooting.md'"></btf-markdown>
+  <div
+    gcloud-markdown="https://raw.githubusercontent.com/GoogleCloudPlatform/gcloud-common/master/troubleshooting/readme.md"></div>
+  <div gcloud-markdown="troubleshooting.md"></div>
   <div how-to-get-help></div>
 </div>

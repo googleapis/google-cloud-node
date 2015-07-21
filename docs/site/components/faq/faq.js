@@ -1,6 +1,6 @@
 angular
   .module('gcloud.faq', [
-    'btford.markdown',
+    'gcloud.markdown',
     'ngRoute',
     'gcloud.how-to-get-help',
     'gcloud.subpage'
@@ -10,7 +10,8 @@ angular
 
     $routeProvider.when('/faq', {
       controller: 'FaqCtrl',
-      templateUrl: 'site/components/faq/faq.html'
+      templateUrl: 'site/components/faq/faq.html',
+      reloadOnSearch: false
     });
   })
 
