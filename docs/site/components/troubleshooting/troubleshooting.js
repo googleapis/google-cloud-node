@@ -1,6 +1,6 @@
 angular
   .module('gcloud.troubleshooting', [
-    'btford.markdown',
+    'gcloud.markdown',
     'ngRoute',
     'gcloud.how-to-get-help',
     'gcloud.subpage'
@@ -10,7 +10,8 @@ angular
 
     $routeProvider.when('/troubleshooting', {
       controller: 'TroubleshootingCtrl',
-      templateUrl: 'site/components/troubleshooting/troubleshooting.html'
+      templateUrl: 'site/components/troubleshooting/troubleshooting.html',
+      reloadOnSearch: false
     });
   })
 
