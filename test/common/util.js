@@ -158,32 +158,35 @@ describe('common/util', function() {
     it('should handle errors', function(done) {
       var error = new Error('Error.');
 
-      util.handleResp(error, null, null, function(err) {
+      util.handleResp(error, {}, null, function(err) {
         assert.strictEqual(err, error);
         done();
       });
     });
 
     it('should parse response', function(done) {
+      var err = { a: 'b', c: 'd' };
       var resp = { a: 'b', c: 'd' };
       var body = { a: 'b', c: 'd' };
 
+      var returnedErr = { a: 'b', c: 'd' };
       var returnedBody = { a: 'b', c: 'd' };
       var returnedResp = { a: 'b', c: 'd' };
 
-      utilOverrides.parseApiResp = function(resp_, body_) {
+      utilOverrides.parseApiResp = function(err_, resp_, body_) {
+        assert.strictEqual(err_, err);
         assert.strictEqual(resp_, resp);
         assert.strictEqual(body_, body);
 
         return {
-          err: null,
+          err: returnedErr,
           body: returnedBody,
           resp: returnedResp
         };
       };
 
-      util.handleResp(null, resp, body, function(err, body, resp) {
-        assert.ifError(err);
+      util.handleResp(err, resp, body, function(err, body, resp) {
+        assert.strictEqual(err, returnedErr);
         assert.strictEqual(body, returnedBody);
         assert.strictEqual(resp, returnedResp);
         done();
@@ -206,7 +209,7 @@ describe('common/util', function() {
 
   describe('parseApiResp', function() {
     it('should return err code if there are not other errors', function() {
-      var parsedApiResp = util.parseApiResp({ statusCode: 400 });
+      var parsedApiResp = util.parseApiResp(null, { statusCode: 400 });
 
       assert.strictEqual(parsedApiResp.err.code, 400);
       assert.strictEqual(parsedApiResp.err.message, 'Error during request.');
@@ -219,7 +222,7 @@ describe('common/util', function() {
         message: 'an error occurred'
       };
 
-      var parsedApiResp = util.parseApiResp({}, { error: apiErr });
+      var parsedApiResp = util.parseApiResp(null, {}, { error: apiErr });
 
       assert.deepEqual(parsedApiResp.err.errors, apiErr.errors);
       assert.strictEqual(parsedApiResp.err.code, apiErr.code);
@@ -229,7 +232,7 @@ describe('common/util', function() {
     it('should try to parse JSON if body is string', function() {
       var body = '{ "foo": "bar" }';
 
-      var parsedApiResp = util.parseApiResp({}, body);
+      var parsedApiResp = util.parseApiResp(null, {}, body);
 
       assert.strictEqual(parsedApiResp.body.foo, 'bar');
     });
