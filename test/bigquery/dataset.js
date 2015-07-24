@@ -18,18 +18,60 @@
 
 'use strict';
 
+// If we don't stub see4_crc32 and use mockery, we get "Module did not self-
+// register".
+var crc = require('sse4_crc32');
+
 var assert = require('assert');
-var Dataset = require('../../lib/bigquery/dataset');
-var Table = require('../../lib/bigquery/table');
 var util = require('../../lib/common/util');
+var mockery = require('mockery');
+
+var extended = false;
+var fakeStreamRouter = {
+  extend: function(Class, methods) {
+    if (Class.name !== 'Dataset') {
+      return;
+    }
+
+    methods = util.arrayize(methods);
+    assert.equal(Class.name, 'Dataset');
+    assert.deepEqual(methods, ['getTables']);
+    extended = true;
+  }
+};
 
 describe('BigQuery/Dataset', function() {
   var BIGQUERY = { projectId: 'my-project' };
   var DATASET_ID = 'kittens';
+  var Dataset;
+  var Table;
   var ds;
+
+  before(function() {
+    mockery.registerMock('sse4_crc32', crc);
+    mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+
+    Dataset = require('../../lib/bigquery/dataset');
+    Table = require('../../lib/bigquery/table');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
 
   beforeEach(function() {
     ds = new Dataset(BIGQUERY, DATASET_ID);
+  });
+
+  describe('instantiation', function() {
+    it('should extend the correct methods', function() {
+      assert(extended); // See `fakeStreamRouter.extend`
+    });
   });
 
   describe('createTable', function() {
@@ -299,9 +341,10 @@ describe('BigQuery/Dataset', function() {
       ds.makeReq_ = function(method, path, query, body, callback) {
         callback(null, { nextPageToken: token });
       };
-      ds.getTables(function(err, tables, nextQuery) {
+      ds.getTables({ maxResults: 5 }, function(err, tables, nextQuery) {
         assert.deepEqual(nextQuery, {
-          pageToken: token
+          pageToken: token,
+          maxResults: 5
         });
         done();
       });
