@@ -21,6 +21,7 @@
 var assert = require('assert');
 var async = require('async');
 var Dataset = require('../lib/bigquery/dataset');
+var Table = require('../lib/bigquery/table');
 var env = require('./env');
 var fs = require('fs');
 var Job = require('../lib/bigquery/job');
@@ -271,6 +272,28 @@ describe('BigQuery', function() {
           done();
         });
       });
+    });
+
+    it('should get tables', function(done) {
+      dataset.getTables(function(err, tables) {
+        assert.ifError(err);
+        assert(tables[0] instanceof Table);
+        done();
+      });
+    });
+
+    it('should get tables as a stream', function(done) {
+      var tableEmitted = false;
+
+      dataset.getTables()
+        .on('error', done)
+        .on('data', function(table) {
+          tableEmitted = table instanceof Table;
+        })
+        .on('end', function() {
+          assert.strictEqual(tableEmitted, true);
+          done();
+        });
     });
   });
 
