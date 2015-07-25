@@ -115,30 +115,20 @@ describe('pubsub', function() {
       });
     });
 
-    it('should lazily create by default', function(done) {
-      var newTopicName = generateTopicName();
-      var newTopic = pubsub.topic(newTopicName);
-
-      newTopic.publish({ data: 'message from me' }, function(err) {
-        assert.ifError(err);
-
-        pubsub.getTopics(function(err, topics) {
-          assert.ifError(err);
-
-          assert(topics.some(function(topic) {
-            return topic.name.indexOf(newTopicName) > -1;
-          }));
-
-          newTopic.delete(done);
-        });
-      });
-    });
-
     it('should publish a message', function(done) {
       var topic = pubsub.topic(TOPIC_NAMES[0]);
       topic.publish({ data: 'message from me' }, function(err, messageIds) {
         assert.ifError(err);
         assert.equal(messageIds.length, 1);
+        done();
+      });
+    });
+
+    it('should get the metadata of a topic', function(done) {
+      var topic = pubsub.topic(TOPIC_NAMES[0]);
+      topic.getMetadata(function(err, metadata) {
+        assert.ifError(err);
+        assert.strictEqual(metadata.name, topic.name);
         done();
       });
     });
