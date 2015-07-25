@@ -84,7 +84,7 @@
           ng-href="{{page.url}}">
           {{page.title}}
         </a>
-        <ul class="sub-sections" ng-if="page.pages">
+        <ul class="sub-sections" ng-if="page.pages && isActiveClass(page)">
           <li ng-repeat="innerPage in page.pages">
             <a
               ng-class="{ current: isActiveUrl(page.url + innerPage.url) }"

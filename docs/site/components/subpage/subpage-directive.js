@@ -20,10 +20,13 @@ angular
         };
 
         if ($scope.versionSelected === 'master') {
-          $http.get('https://api.github.com/repos/GoogleCloudPlatform/gcloud-node/commits?sha=gh-pages&per_page=1')
-            .then(function(resp) {
-              $scope.lastBuiltDate = moment(resp.data[0].commit.committer.date);
-            });
+          $http({
+            method: 'get',
+            url: 'https://api.github.com/repos/GoogleCloudPlatform/gcloud-node/commits?sha=gh-pages&per_page=1',
+            cache: true
+          }).then(function(resp) {
+            $scope.lastBuiltDate = moment(resp.data[0].commit.committer.date);
+          });
         }
 
         if (attrs.isActiveUrl) {
@@ -33,6 +36,10 @@ angular
             return $location.path() === url.replace('#', '');
           };
         }
+
+        $scope.isActiveClass = function(module) {
+          return $location.path().indexOf(module.url.replace('#', '')) === 0;
+        };
       }
     };
   })
