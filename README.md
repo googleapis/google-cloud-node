@@ -195,12 +195,25 @@ gcs.createBucket('my-new-bucket', function(err, bucket) {
 var bucket = gcs.bucket('my-existing-bucket');
 
 // Upload a local file to a new file to be created in your bucket.
-var fileStream = fs.createReadStream('/local/file.txt');
-fileStream.pipe(bucket.file('file.txt').createWriteStream());
+bucket.upload('/photos/zoo/zebra.jpg', function(err, file) {
+  if (!err) {
+    // "zebra.jpg" is now in your bucket.
+  }
+});
 
-// Download a remote file to a new local file.
-var fileStream = bucket.file('photo.jpg').createReadStream();
-fileStream.pipe(fs.createWriteStream('/local/photo.jpg'));
+// Download a file from your bucket.
+bucket.file('giraffe.jpg').download({
+  destination: '/photos/zoo/giraffe.jpg'
+}, function(err) {});
+
+// Streams are also supported for reading and writing files.
+var remoteReadStream = bucket.file('giraffe.jpg').createReadStream();
+var localWriteStream = fs.createWriteStream('/photos/zoo/giraffe.jpg');
+remoteReadStream.pipe(localWriteStream);
+
+var localReadStream = fs.createReadStream('/photos/zoo/zebra.jpg');
+var remoteWriteStream = bucket.file('zebra.jpg').createWriteStream();
+localReadStream.pipe(remoteWriteStream);
 ```
 
 
