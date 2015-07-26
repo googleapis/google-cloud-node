@@ -526,6 +526,15 @@ describe('storage', function() {
       });
     });
 
+    it('should handle non-network errors', function(done) {
+      var file = bucket.file('hi.jpg');
+      file.download(function(err) {
+        assert.strictEqual(err.code, 404);
+        assert.strictEqual(err.message, 'Not Found');
+        done();
+      });
+    });
+
     it('should upload a gzipped file and download it', function(done) {
       var options = {
         metadata: {

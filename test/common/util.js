@@ -132,6 +132,36 @@ describe('common/util', function() {
     });
   });
 
+  describe('ApiError', function() {
+    it('should build correct ApiError', function() {
+      var error = {
+        errors: [ new Error(), new Error() ],
+        code: 100,
+        message: 'Uh oh',
+        response: { a: 'b', c: 'd' }
+      };
+
+      var apiError = new util.ApiError(error);
+
+      assert.strictEqual(apiError.errors, error.errors);
+      assert.strictEqual(apiError.code, error.code);
+      assert.strictEqual(apiError.message, error.message);
+      assert.strictEqual(apiError.response, error.response);
+    });
+
+    it('should build ApiError with default status message', function() {
+      var error = {
+        errors: [],
+        code: 100,
+        response: { a: 'b', c: 'd' }
+      };
+
+      var apiError = new util.ApiError(error);
+
+      assert.strictEqual(apiError.message, 'Error during request.');
+    });
+  });
+
   describe('extendGlobalConfig', function() {
     it('should favor `keyFilename` when `credentials` is global', function() {
       var globalConfig = { credentials: {} };
@@ -208,11 +238,20 @@ describe('common/util', function() {
   });
 
   describe('parseApiResp', function() {
-    it('should return err code if there are not other errors', function() {
-      var parsedApiResp = util.parseApiResp(null, { statusCode: 400 });
+    describe('non-200s response status', function() {
+      it('should build ApiError with status and message', function(done) {
+        var error = { statusCode: 400, statusMessage: 'Not Good' };
 
-      assert.strictEqual(parsedApiResp.err.code, 400);
-      assert.strictEqual(parsedApiResp.err.message, 'Error during request.');
+        utilOverrides.ApiError = function(error_) {
+          assert.strictEqual(error_.code, error.statusCode);
+          assert.strictEqual(error_.message, error.statusMessage);
+          assert.strictEqual(error_.response, error);
+
+          done();
+        };
+
+        util.parseApiResp(null, error);
+      });
     });
 
     it('should detect body errors', function() {
@@ -1002,6 +1041,19 @@ describe('common/util', function() {
       it('should pass the default options to retryRequest', function(done) {
         retryRequestOverride = testDefaultRetryRequestConfig(done);
         util.makeRequest(reqOpts, {});
+      });
+
+      it('should expose the abort method from retryRequest', function(done) {
+        var userStream = new stream.Stream();
+
+        retryRequestOverride = function() {
+          var requestStream = new stream.Stream();
+          requestStream.abort = done;
+          return requestStream;
+        };
+
+        util.makeRequest(reqOpts, { stream: userStream });
+        userStream.abort();
       });
 
       it('should allow turning off retries to retryRequest', function(done) {
