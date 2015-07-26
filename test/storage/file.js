@@ -585,6 +585,27 @@ describe('File', function() {
           });
       });
 
+      it('should let util.handleResp handle the response', function(done) {
+        var response = { a: 'b', c: 'd' };
+
+        handleRespOverride = function(err, response_, body) {
+          assert.strictEqual(err, null);
+          assert.strictEqual(response_, response);
+          assert.strictEqual(body, null);
+          done();
+        };
+
+        file.bucket.storage.makeAuthorizedRequest_ = function() {
+          var stream = through();
+          setImmediate(function() {
+            stream.emit('complete', response);
+          });
+          return stream;
+        };
+
+        file.createReadStream();
+      });
+
       describe('errors', function() {
         var ERROR = new Error('Error.');
 
