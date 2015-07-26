@@ -41,6 +41,9 @@ var files = {
   },
   big: {
     path: 'system-test/data/three-mb-file.tif'
+  },
+  gzip: {
+    path: 'system-test/data/long-html-file.html'
   }
 };
 
@@ -520,6 +523,19 @@ describe('storage', function() {
           assert.equal(String(fileContents), String(remoteContents));
           done();
         });
+      });
+    });
+
+    it('should upload a gzipped file and download it', function(done) {
+      var options = {
+        metadata: {
+          contentEncoding: 'gzip'
+        }
+      };
+
+      bucket.upload(files.gzip.path, options, function(err, file) {
+        assert.ifError(err);
+        file.download(done);
       });
     });
 

@@ -430,8 +430,14 @@ describe('File', function() {
         var self = this;
 
         setImmediate(function() {
-          self.emit('response', fakeResponse);
-          self.emit('complete', fakeResponse);
+          var responseStream = through();
+          self.emit('response', responseStream);
+          responseStream.push(data);
+          responseStream.push(null);
+
+          setImmediate(function() {
+            self.emit('complete', fakeResponse);
+          });
         });
       }
       nodeutil.inherits(FakeSuccessfulRequest, FakeRequest);
@@ -509,6 +515,18 @@ describe('File', function() {
         file.createReadStream();
       });
 
+      it('should accept gzip encoding', function(done) {
+        file.bucket.storage.makeAuthorizedRequest_ = function(opts) {
+          assert.strictEqual(opts.gzip, true);
+          setImmediate(function() {
+            done();
+          });
+          return new FakeDuplexify();
+        };
+
+        file.createReadStream();
+      });
+
       describe('errors', function() {
         var ERROR = new Error('Error.');
 
@@ -559,14 +577,10 @@ describe('File', function() {
       });
 
       it('should emit response event from request', function(done) {
-        var response = {
-          headers: { 'x-goog-hash': 'md5=fakefakefake' }
-        };
-        requestOverride = getFakeSuccessfulRequest('body', response);
+        requestOverride = getFakeSuccessfulRequest('body');
 
         file.createReadStream({ validation: false })
-          .on('response', function(res) {
-            assert.deepEqual(response, res);
+          .on('response', function() {
             done();
           });
       });
