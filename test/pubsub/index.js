@@ -99,9 +99,12 @@ describe('PubSub', function() {
   });
 
   describe('getTopics', function() {
+    var topicName = 'fake-topic';
+    var apiResponse = { topics: [{ name: topicName }]};
+
     beforeEach(function() {
       pubsub.makeReq_ = function(method, path, q, body, callback) {
-        callback(null, { topics: [{ name: 'fake-topic' }] });
+        callback(null, apiResponse);
       };
     });
 
@@ -121,10 +124,19 @@ describe('PubSub', function() {
       pubsub.getTopics(function() {});
     });
 
-    it('should return Topic instances', function() {
+    it('should return Topic instances with metadata', function(done) {
+      var topic = {};
+
+      pubsub.topic = function(name) {
+        assert.strictEqual(name, topicName);
+        return topic;
+      };
+
       pubsub.getTopics(function(err, topics) {
         assert.ifError(err);
-        assert(topics[0] instanceof Topic);
+        assert.strictEqual(topics[0], topic);
+        assert.strictEqual(topics[0].metadata, apiResponse.topics[0]);
+        done();
       });
     });
 
@@ -237,7 +249,7 @@ describe('PubSub', function() {
         'projects/' + PROJECT_ID + '/topics/' + TOPIC_NAME + '/subscriptions';
 
       before(function() {
-        TOPIC = new Topic(pubsub, { name: TOPIC_NAME });
+        TOPIC = new Topic(pubsub, TOPIC_NAME);
       });
 
       it('should subscribe to a topic by string', function(done) {
