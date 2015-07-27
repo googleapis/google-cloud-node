@@ -30,7 +30,7 @@ describe('Topic', function() {
   var topic;
 
   beforeEach(function() {
-    topic = new Topic(pubsubMock, { name: TOPIC_NAME });
+    topic = new Topic(pubsubMock, TOPIC_NAME);
   });
 
   describe('initialization', function() {
@@ -40,7 +40,7 @@ describe('Topic', function() {
         Topic.formatName_ = formatName_;
         done();
       };
-      new Topic(pubsubMock, { name: TOPIC_NAME });
+      new Topic(pubsubMock, TOPIC_NAME);
     });
 
     it('should assign projectId to `this`', function() {
@@ -49,18 +49,6 @@ describe('Topic', function() {
 
     it('should assign pubsub object to `this`', function() {
       assert.deepEqual(topic.pubsub, pubsubMock);
-    });
-
-    it('should set `autoCreate` to true by default', function() {
-      assert.strictEqual(topic.autoCreate, true);
-    });
-
-    it('should allow overriding autoCreate', function() {
-      var topic = new Topic(pubsubMock, {
-        name: TOPIC_NAME,
-        autoCreate: false
-      });
-      assert.strictEqual(topic.autoCreate, false);
     });
   });
 
@@ -186,6 +174,68 @@ describe('Topic', function() {
     });
   });
 
+  describe('getMetadata', function() {
+    it('should make the correct API request', function(done) {
+      topic.makeReq_ = function(method, path, query, body) {
+        assert.strictEqual(method, 'GET');
+        assert.strictEqual(path, topic.name);
+        assert.strictEqual(query, null);
+        assert.strictEqual(body, null);
+
+        done();
+      };
+
+      topic.getMetadata(assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = { a: 'b', c: 'd' };
+
+      beforeEach(function() {
+        topic.makeReq_ = function(method, path, query, body, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        topic.getMetadata(function(err, metadata, apiResponse_) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(metadata, null);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = { a: 'b', c: 'd' };
+
+      beforeEach(function() {
+        topic.makeReq_ = function(method, path, query, body, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should assign the response to the metadata property', function(done) {
+        topic.getMetadata(function(err) {
+          assert.ifError(err);
+          assert.strictEqual(topic.metadata, apiResponse);
+          done();
+        });
+      });
+
+      it('should exec callback with metadata & API response', function(done) {
+        topic.getMetadata(function(err, metadata, apiResponse_) {
+          assert.ifError(err);
+          assert.strictEqual(metadata, apiResponse);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
+    });
+  });
+
   describe('getSubscriptions', function() {
     it('should accept just a callback', function(done) {
       topic.pubsub.getSubscriptions = function(options, callback) {
@@ -248,127 +298,6 @@ describe('Topic', function() {
 
       var doneFn = topic.subscription();
       doneFn();
-    });
-  });
-
-  describe('makeReq_', function() {
-    var method = 'POST';
-    var path = '/path';
-    var query = 'query';
-    var body = 'body';
-
-    it('should call through to pubsub.makeReq_', function(done) {
-      topic.pubsub.makeReq_ = function(m, p, q, b) {
-        assert.equal(m, method);
-        assert.equal(p, path);
-        assert.equal(q, query);
-        assert.equal(b, body);
-
-        done();
-      };
-
-      topic.makeReq_(method, path, query, body, util.noop);
-    });
-
-    describe('autoCreate: false', function() {
-      it('should execute callback with response', function(done) {
-        var error = new Error('Error.');
-        var apiResponse = { a: 'b', c: 'd' };
-
-        topic.pubsub.makeReq_ = function(method, path, query, body, callback) {
-          callback(error, apiResponse);
-        };
-
-        topic.makeReq_(method, path, query, body, function(err, apiResp) {
-          assert.deepEqual(err, error);
-          assert.deepEqual(apiResp, apiResponse);
-
-          done();
-        });
-      });
-    });
-
-    describe('autoCreate: true', function() {
-      it('should not create a topic if doing a DELETE', function(done) {
-        var topicCreated = false;
-
-        topic.pubsub.createTopic = function() {
-          topicCreated = true;
-        };
-
-        topic.pubsub.makeReq_ = function(method, path, query, body, callback) {
-          callback({ code: 404 });
-        };
-
-        topic.makeReq_('DELETE', path, query, body, function() {
-          assert.strictEqual(topicCreated, false);
-
-          done();
-        });
-      });
-
-      it('should create a non-DELETE API request returns 404', function(done) {
-        topic.pubsub.createTopic = function(topicName) {
-          assert.equal(topicName, TOPIC_NAME);
-
-          done();
-        };
-
-        topic.pubsub.makeReq_ = function(method, path, query, body, callback) {
-          callback({ code: 404 });
-        };
-
-        topic.makeReq_(method, path, query, body, util.noop);
-      });
-
-      describe('creating topic failed', function() {
-        var error = new Error('Error.');
-        var apiResponse = { a: 'b', c: 'd' };
-
-        beforeEach(function() {
-          topic.pubsub.createTopic = function(topicName, callback) {
-            callback(error, null, apiResponse);
-          };
-
-          topic.pubsub.makeReq_ = function(m, p, q, b, callback) {
-            callback({ code: 404 });
-          };
-        });
-
-        it('should execute the callback with error & apiResp', function(done) {
-          topic.makeReq_(method, path, query, body, function(err, t, apiResp) {
-            assert.deepEqual(err, error);
-            assert.strictEqual(t, null);
-            assert.deepEqual(apiResp, apiResponse);
-
-            done();
-          });
-        });
-      });
-
-      describe('creating topic succeeded', function() {
-        it('should call makeReq_ again with the original args', function(done) {
-          topic.pubsub.createTopic = function(topicName, callback) {
-            callback();
-          };
-
-          topic.pubsub.makeReq_ = function(m, p, q, b, callback) {
-            // Overwrite the method to confirm it is called again.
-            topic.pubsub.makeReq_ = function(m, p, q, b, callback) {
-              assert.equal(m, method);
-              assert.equal(p, path);
-              assert.equal(q, query);
-              assert.equal(b, body);
-
-              callback(); // (should be the done function)
-            };
-
-            callback({ code: 404 });
-          };
-
-          topic.makeReq_(method, path, query, body, done);
-        });
-      });
     });
   });
 });
