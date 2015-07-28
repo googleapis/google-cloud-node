@@ -75,8 +75,8 @@ describe('Subscription', function() {
       assert.strictEqual(sub.maxInProgress, 3);
     });
 
-    it('should not be closed', function() {
-      assert.strictEqual(subscription.closed, false);
+    it('should be closed', function() {
+      assert.strictEqual(subscription.closed, true);
     });
 
     it('should default autoAck to false if not specified', function() {
@@ -143,6 +143,19 @@ describe('Subscription', function() {
 
       subscription.removeListener('message', util.noop);
       assert.strictEqual(subscription.messageListeners, 0);
+    });
+
+    it('should only run a single pulling loop', function() {
+      var startPullingCallCount = 0;
+
+      subscription.startPulling_ = function() {
+        startPullingCallCount++;
+      };
+
+      subscription.on('message', util.noop);
+      subscription.on('message', util.noop);
+
+      assert.strictEqual(startPullingCallCount, 1);
     });
 
     it('should close when no more message listeners are bound', function() {
@@ -478,6 +491,8 @@ describe('Subscription', function() {
         assert.strictEqual(options.returnImmediately, false);
         done();
       };
+
+      subscription.closed = false;
       subscription.startPulling_();
     });
 
@@ -486,6 +501,8 @@ describe('Subscription', function() {
         assert.strictEqual(options.maxResults, undefined);
         done();
       };
+
+      subscription.closed = false;
       subscription.startPulling_();
     });
 
@@ -494,6 +511,8 @@ describe('Subscription', function() {
         assert.strictEqual(options.maxResults, 1);
         done();
       };
+
+      subscription.closed = false;
       subscription.maxInProgress = 4;
       subscription.inProgressAckIds = { id1: true, id2: true, id3: true };
       subscription.startPulling_();
@@ -507,6 +526,8 @@ describe('Subscription', function() {
           callback(error);
         });
       };
+
+      subscription.closed = false;
       subscription
         .once('error', function(err) {
           assert.equal(err, error);
@@ -524,6 +545,8 @@ describe('Subscription', function() {
           callback(error, null, resp);
         });
       };
+
+      subscription.closed = false;
       subscription
         .once('error', function(err, apiResponse) {
           assert.equal(err, error);
@@ -537,6 +560,7 @@ describe('Subscription', function() {
       subscription.pull = function(options, callback) {
         callback(null, [{ hi: 'there' }]);
       };
+
       subscription
         .once('message', function(msg) {
           assert.deepEqual(msg, { hi: 'there' });
@@ -576,6 +600,8 @@ describe('Subscription', function() {
         // above.
         fn();
       };
+
+      subscription.closed = false;
       subscription.interval = INTERVAL;
       subscription.startPulling_();
     });
