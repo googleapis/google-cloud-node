@@ -42,8 +42,11 @@ var files = {
   big: {
     path: 'system-test/data/three-mb-file.tif'
   },
-  gzip: {
+  html: {
     path: 'system-test/data/long-html-file.html'
+  },
+  gzip: {
+    path: 'system-test/data/long-html-file.html.gz'
   }
 };
 
@@ -535,6 +538,24 @@ describe('storage', function() {
       });
     });
 
+    it('should gzip a file on the fly and download it', function(done) {
+      var options = {
+        gzip: true
+      };
+
+      var expectedContents = fs.readFileSync(files.html.path, 'utf-8');
+
+      bucket.upload(files.html.path, options, function(err, file) {
+        assert.ifError(err);
+
+        file.download(function(err, contents) {
+          assert.ifError(err);
+          assert.strictEqual(contents.toString(), expectedContents);
+          file.delete(done);
+        });
+      });
+    });
+
     it('should upload a gzipped file and download it', function(done) {
       var options = {
         metadata: {
@@ -542,9 +563,16 @@ describe('storage', function() {
         }
       };
 
+      var expectedContents = fs.readFileSync(files.html.path, 'utf-8');
+
       bucket.upload(files.gzip.path, options, function(err, file) {
         assert.ifError(err);
-        file.download(done);
+
+        file.download(function(err, contents) {
+          assert.ifError(err);
+          assert.strictEqual(contents.toString(), expectedContents);
+          file.delete(done);
+        });
       });
     });
 
