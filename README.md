@@ -12,6 +12,7 @@ This client supports the following Google Cloud Platform services:
 
 * [Google BigQuery](#google-bigquery)
 * [Google Cloud Datastore](#google-cloud-datastore)
+* [Google Cloud DNS](#google-cloud-dns)
 * [Google Cloud Storage](#google-cloud-storage)
 * [Google Cloud Pub/Sub](#google-cloud-pubsub-beta) (Beta)
 * [Google Cloud Search](#google-cloud-search-alpha) (Alpha)
@@ -162,6 +163,46 @@ dataset.save({
     }
   });
 });
+```
+
+
+## Google Cloud DNS
+
+- [API Documentation][gcloud-dns-docs]
+- [Official Documentation][cloud-dns-docs]
+
+#### Preview
+
+```js
+var gcloud = require('gcloud');
+
+// Authorizing on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authorization section above).
+
+var dns = gcloud.dns({
+  keyFilename: '/path/to/keyfile.json',
+  projectId: 'my-project'
+});
+
+// Create a managed zone.
+dns.createZone('my-new-zone', {
+  dnsName: 'my-domain.com.'
+}, function(err, zone) {});
+
+// Reference an existing zone.
+var zone = dns.zone('my-existing-zone');
+
+// Create an NS record.
+var nsRecord = zone.record('ns', {
+  ttl: 86400,
+  name: 'my-domain.com.',
+  data: 'ns-cloud1.googledomains.com.'
+});
+
+zone.addRecord(nsRecord, function(err, change) {});
+
+// Create a zonefile from the records in your zone.
+zone.export('/zonefile.zone', function(err) {});
 ```
 
 
@@ -319,6 +360,7 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [gcloud-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs
 [gcloud-bigquery-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/bigquery
 [gcloud-datastore-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/datastore
+[gcloud-dns-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/dns
 [gcloud-pubsub-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/pubsub
 [gcloud-search-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/search
 [gcloud-storage-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/storage
@@ -338,6 +380,8 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 
 [cloud-datastore-docs]: https://cloud.google.com/datastore/docs
 [cloud-datastore-activation]: https://cloud.google.com/datastore/docs/activate
+
+[cloud-dns-docs]: https://cloud.google.com/dns/docs
 
 [cloud-pubsub-docs]: https://cloud.google.com/pubsub/docs
 
