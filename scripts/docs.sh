@@ -21,6 +21,11 @@
 ./node_modules/.bin/dox < lib/bigquery/job.js > docs/json/master/bigquery/job.json &
 ./node_modules/.bin/dox < lib/bigquery/table.js > docs/json/master/bigquery/table.json &
 
+./node_modules/.bin/dox < lib/dns/change.js > docs/json/master/dns/change.json &
+./node_modules/.bin/dox < lib/dns/index.js > docs/json/master/dns/index.json &
+./node_modules/.bin/dox < lib/dns/record.js > docs/json/master/dns/record.json &
+./node_modules/.bin/dox < lib/dns/zone.js > docs/json/master/dns/zone.json &
+
 ./node_modules/.bin/dox < lib/datastore/dataset.js > docs/json/master/datastore/dataset.json &
 ./node_modules/.bin/dox < lib/datastore/index.js > docs/json/master/datastore/index.json &
 ./node_modules/.bin/dox < lib/datastore/query.js > docs/json/master/datastore/query.json &
