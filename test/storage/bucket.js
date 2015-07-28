@@ -960,6 +960,21 @@ describe('Bucket', function() {
       bucket.upload(filepath, options, assert.ifError);
     });
 
+    it('should allow specifying options.gzip', function(done) {
+      var fakeFile = new FakeFile(bucket, 'file-name');
+      var options = { destination: fakeFile, gzip: true };
+      fakeFile.createWriteStream = function(options) {
+        var ws = new stream.Writable();
+        ws.write = util.noop;
+        setImmediate(function() {
+          assert.strictEqual(options.gzip, true);
+          done();
+        });
+        return ws;
+      };
+      bucket.upload(filepath, options, assert.ifError);
+    });
+
     it('should allow specifying options.resumable', function(done) {
       var fakeFile = new FakeFile(bucket, 'file-name');
       var options = { destination: fakeFile, resumable: false };
