@@ -920,6 +920,17 @@ describe('File', function() {
       writable.write('data');
     });
 
+    it('should set metadata.contentEncoding with gzip', function(done) {
+      var writable = file.createWriteStream({ gzip: true });
+
+      file.startResumableUpload_ = function(stream, metadata) {
+        assert.strictEqual(metadata.contentEncoding, 'gzip');
+        done();
+      };
+
+      writable.write('data');
+    });
+
     describe('validation', function() {
       var data = 'test';
 
