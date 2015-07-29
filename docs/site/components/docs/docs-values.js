@@ -73,6 +73,25 @@ angular.module('gcloud.docs')
       ]
     },
 
+    dns: {
+      title: 'DNS',
+      _url: '{baseUrl}/dns',
+      pages: [
+        {
+          title: 'Zone',
+          url: '/zone'
+        },
+        {
+          title: 'Record',
+          url: '/record'
+        },
+        {
+          title: 'Change',
+          url: '/change'
+        }
+      ]
+    },
+
     pubsub: {
       title: 'PubSub',
       _url: '{baseUrl}/pubsub',
@@ -158,6 +177,9 @@ angular.module('gcloud.docs')
       '>=0.10.0': ['bigquery'],
 
       // introduce search api.
-      '>=0.16.0': ['search']
+      '>=0.16.0': ['search'],
+
+      // introduce dns api.
+      '>=0.18.0': ['dns']
     }
   });
