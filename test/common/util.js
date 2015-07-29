@@ -932,6 +932,36 @@ describe('common/util', function() {
     });
   });
 
+  describe('exec', function() {
+    it('should execute the function specified', function() {
+      var people = [
+        {
+          getName: function() { return 'Stephen'; }
+        },
+        {
+          getName: function() { return 'Dave'; }
+        }
+      ];
+
+      assert.deepEqual(people.map(util.exec('getName')), ['Stephen', 'Dave']);
+    });
+
+    it('should accept arguments', function() {
+      var people = [
+        {
+          getName: function(prefix) { return prefix + ' Stephen'; }
+        },
+        {
+          getName: function(prefix) { return prefix + ' Dave'; }
+        }
+      ];
+
+      var expectedNames = ['Mr. Stephen', 'Mr. Dave'];
+
+      assert.deepEqual(people.map(util.exec('getName', 'Mr.')), expectedNames);
+    });
+  });
+
   describe('prop', function() {
     it('should return objects that match the property name', function() {
       var people = [
