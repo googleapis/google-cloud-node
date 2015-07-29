@@ -241,14 +241,42 @@
     "tags": [
       {
         "type": "param",
-        "string": "{function=} callback - The callback function.\n",
+        "string": "{function=} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>|<code>undefined</code>",
         "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
         "nullable": false,
         "nonNullable": false,
         "variable": false
@@ -270,7 +298,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 82,
-    "codeStart": 90,
+    "codeStart": 92,
     "code": "Document.prototype.delete = function(callback) {\n  this.makeReq_('DELETE', '', null, null, function(err, resp) {\n    (callback || util.noop)(err, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -284,13 +312,55 @@
     "tags": [
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:search/document} callback.doc - The Document reference.",
+        "name": "callback.doc",
+        "description": "<ul>\n<li>The Document reference.</li>\n</ul>\n",
+        "types": [
+          "module:search/document"
+        ],
+        "typesDescription": "module:<a href=\"module%3Asearch%2Fdocument.html\">search/document</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -312,8 +382,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 96,
-    "codeStart": 116,
+    "line": 98,
+    "codeStart": 121,
     "code": "Document.prototype.getMetadata = function(callback) {\n  var self = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('GET', '/', null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.fields = {};\n    delete self.rank;\n\n    if (util.is(resp.fields, 'object')) {\n      Object.keys(resp.fields).forEach(function(fieldName) {\n        var fieldInstance = self.addField(fieldName);\n        fieldInstance.values = resp.fields[fieldName].values;\n      });\n    }\n\n    if (util.is(resp.rank, 'number')) {\n      self.rank = resp.rank;\n    }\n\n    callback(null, self, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -363,8 +433,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 145,
-    "codeStart": 158,
+    "line": 150,
+    "codeStart": 163,
     "code": "Document.prototype.setRank = function(rank) {\n  if (!util.is(rank, 'number') || rank < 0) {\n    throw new Error('rank should be a positive integer.');\n  }\n\n  this.rank = rank;\n};",
     "ctx": {
       "type": "method",
@@ -392,8 +462,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 166,
-    "codeStart": 179,
+    "line": 171,
+    "codeStart": 184,
     "code": "Document.prototype.toJSON = function() {\n  var documentObject = {\n    fields: this.fields\n  };\n\n  if (util.is(this.id, 'string')) {\n    documentObject.docId = this.id;\n  }\n\n  if (util.is(this.rank, 'number')) {\n    documentObject.rank = this.rank;\n  }\n\n  return documentObject;\n};",
     "ctx": {
       "type": "method",
@@ -488,8 +558,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 195,
-    "codeStart": 207,
+    "line": 200,
+    "codeStart": 212,
     "code": "Document.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/documents/' + this.id + path;\n\n  this.index_.makeReq_(method, path, query, body, callback);\n};\n\nmodule.exports = Document;",
     "ctx": {
       "type": "method",

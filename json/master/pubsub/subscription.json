@@ -150,6 +150,20 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.maxInProgress - Maximum messages to consume\n    simultaneously.",
+        "name": "options.maxInProgress",
+        "description": "<ul>\n<li>Maximum messages to consume     simultaneously.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
       }
     ],
     "description": {
@@ -163,7 +177,7 @@
     "isEvent": false,
     "ignore": true,
     "line": 32,
-    "codeStart": 42
+    "codeStart": 44
   },
   {
     "tags": [
@@ -179,8 +193,8 @@
       },
       {
         "type": "example",
-        "string": "var pubsub = gcloud.pubsub({\n  projectId: 'grape-spaceship-123'\n});\n\n//-\n// From {@linkcode module:pubsub#getSubscriptions}:\n//-\npubsub.getSubscriptions(function(err, subscriptions) {\n  // `subscriptions` is an array of Subscription objects.\n});\n\n//-\n// From {@linkcode module:pubsub/topic#getSubscriptions}:\n//-\nvar topic = pubsub.topic('my-topic');\ntopic.getSubscriptions(function(err, subscriptions) {\n  // `subscriptions` is an array of Subscription objects.\n});\n\n//-\n// From {@linkcode module:pubsub/topic#subscribe}:\n//-\nvar topic = pubsub.topic('my-topic');\ntopic.subscribe('new-subscription', function(err, subscription) {\n  // `subscription` is a Subscription object.\n});\n\n//-\n// From {@linkcode module:pubsub/topic#subscription}:\n//-\nvar topic = pubsub.topic('my-topic');\nvar subscription = topic.subscription('my-existing-subscription');\n// `subscription` is a Subscription object.\n\n//-\n// Once you have obtained a subscription object, you may begin to register\n// listeners. This will automatically trigger pulling for messages.\n//-\n// Register an error handler.\nsubscription.on('error', function(err) {});\n\n// Register a listener for `message` events.\nfunction onMessage(message) {\n  // Called every time a message is received.\n  // message.id = ID of the message.\n  // message.ackId = ID used to acknowledge the message receival.\n  // message.data = Contents of the message.\n}\nsubscription.on('message', onMessage);\n\n// Remove the listener from receiving `message` events.\nsubscription.removeListener('message', onMessage);",
-        "html": "<p>var pubsub = gcloud.pubsub({<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>//-<br />// From {@linkcode module:pubsub#getSubscriptions}:<br />//-<br />pubsub.getSubscriptions(function(err, subscriptions) {<br />  // <code>subscriptions</code> is an array of Subscription objects.<br />});</p><p>//-<br />// From {@linkcode module:pubsub/topic#getSubscriptions}:<br />//-<br />var topic = pubsub.topic(&#39;my-topic&#39;);<br />topic.getSubscriptions(function(err, subscriptions) {<br />  // <code>subscriptions</code> is an array of Subscription objects.<br />});</p><p>//-<br />// From {@linkcode module:pubsub/topic#subscribe}:<br />//-<br />var topic = pubsub.topic(&#39;my-topic&#39;);<br />topic.subscribe(&#39;new-subscription&#39;, function(err, subscription) {<br />  // <code>subscription</code> is a Subscription object.<br />});</p><p>//-<br />// From {@linkcode module:pubsub/topic#subscription}:<br />//-<br />var topic = pubsub.topic(&#39;my-topic&#39;);<br />var subscription = topic.subscription(&#39;my-existing-subscription&#39;);<br />// <code>subscription</code> is a Subscription object.</p><p>//-<br />// Once you have obtained a subscription object, you may begin to register<br />// listeners. This will automatically trigger pulling for messages.<br />//-<br />// Register an error handler.<br />subscription.on(&#39;error&#39;, function(err) {});</p><p>// Register a listener for <code>message</code> events.<br />function onMessage(message) {<br />  // Called every time a message is received.<br />  // message.id = ID of the message.<br />  // message.ackId = ID used to acknowledge the message receival.<br />  // message.data = Contents of the message.<br />}<br />subscription.on(&#39;message&#39;, onMessage);</p><p>// Remove the listener from receiving <code>message</code> events.<br />subscription.removeListener(&#39;message&#39;, onMessage);</p>"
+        "string": "var pubsub = gcloud.pubsub({\n  projectId: 'grape-spaceship-123'\n});\n\n//-\n// From {@linkcode module:pubsub#getSubscriptions}:\n//-\npubsub.getSubscriptions(function(err, subscriptions) {\n  // `subscriptions` is an array of Subscription objects.\n});\n\n//-\n// From {@linkcode module:pubsub/topic#getSubscriptions}:\n//-\nvar topic = pubsub.topic('my-topic');\ntopic.getSubscriptions(function(err, subscriptions) {\n  // `subscriptions` is an array of Subscription objects.\n});\n\n//-\n// From {@linkcode module:pubsub/topic#subscribe}:\n//-\nvar topic = pubsub.topic('my-topic');\ntopic.subscribe('new-subscription', function(err, subscription) {\n  // `subscription` is a Subscription object.\n});\n\n//-\n// From {@linkcode module:pubsub/topic#subscription}:\n//-\nvar topic = pubsub.topic('my-topic');\nvar subscription = topic.subscription('my-existing-subscription');\n// `subscription` is a Subscription object.\n\n//-\n// Once you have obtained a subscription object, you may begin to register\n// listeners. This will automatically trigger pulling for messages.\n//-\n// Register an error handler.\nsubscription.on('error', function(err) {});\n\n// Register a listener for `message` events.\nfunction onMessage(message) {\n  // Called every time a message is received.\n\n  // message.id = ID of the message.\n  // message.ackId = ID used to acknowledge the message receival.\n  // message.data = Contents of the message.\n\n  // Ack the message:\n  // message.ack(callback);\n\n  // Skip the message. This is useful with `maxInProgress` option when\n  // creating your subscription. This doesn't ack the message, but allows\n  // more messages to be retrieved if your limit was hit.\n  // message.skip();\n}\nsubscription.on('message', onMessage);\n\n// Remove the listener from receiving `message` events.\nsubscription.removeListener('message', onMessage);",
+        "html": "<p>var pubsub = gcloud.pubsub({<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>//-<br />// From {@linkcode module:pubsub#getSubscriptions}:<br />//-<br />pubsub.getSubscriptions(function(err, subscriptions) {<br />  // <code>subscriptions</code> is an array of Subscription objects.<br />});</p><p>//-<br />// From {@linkcode module:pubsub/topic#getSubscriptions}:<br />//-<br />var topic = pubsub.topic(&#39;my-topic&#39;);<br />topic.getSubscriptions(function(err, subscriptions) {<br />  // <code>subscriptions</code> is an array of Subscription objects.<br />});</p><p>//-<br />// From {@linkcode module:pubsub/topic#subscribe}:<br />//-<br />var topic = pubsub.topic(&#39;my-topic&#39;);<br />topic.subscribe(&#39;new-subscription&#39;, function(err, subscription) {<br />  // <code>subscription</code> is a Subscription object.<br />});</p><p>//-<br />// From {@linkcode module:pubsub/topic#subscription}:<br />//-<br />var topic = pubsub.topic(&#39;my-topic&#39;);<br />var subscription = topic.subscription(&#39;my-existing-subscription&#39;);<br />// <code>subscription</code> is a Subscription object.</p><p>//-<br />// Once you have obtained a subscription object, you may begin to register<br />// listeners. This will automatically trigger pulling for messages.<br />//-<br />// Register an error handler.<br />subscription.on(&#39;error&#39;, function(err) {});</p><p>// Register a listener for <code>message</code> events.<br />function onMessage(message) {<br />  // Called every time a message is received.</p><p>  // message.id = ID of the message.<br />  // message.ackId = ID used to acknowledge the message receival.<br />  // message.data = Contents of the message.</p><p>  // Ack the message:<br />  // message.ack(callback);</p><p>  // Skip the message. This is useful with <code>maxInProgress</code> option when<br />  // creating your subscription. This doesn&#39;t ack the message, but allows<br />  // more messages to be retrieved if your limit was hit.<br />  // message.skip();<br />}<br />subscription.on(&#39;message&#39;, onMessage);</p><p>// Remove the listener from receiving <code>message</code> events.<br />subscription.removeListener(&#39;message&#39;, onMessage);</p>"
       }
     ],
     "description": {
@@ -193,9 +207,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 42,
-    "codeStart": 118,
-    "code": "function Subscription(pubsub, options) {\n  events.EventEmitter.call(this);\n\n  this.name = Subscription.formatName_(pubsub.projectId, options.name);\n\n  this.makeReq_ = pubsub.makeReq_.bind(pubsub);\n\n  this.autoAck = util.is(options.autoAck, 'boolean') ? options.autoAck : false;\n  this.closed = false;\n  this.interval = util.is(options.interval, 'number') ? options.interval : 10;\n\n  this.listenForEvents_();\n}\n\nnodeutil.inherits(Subscription, events.EventEmitter);",
+    "line": 44,
+    "codeStart": 129,
+    "code": "function Subscription(pubsub, options) {\n  events.EventEmitter.call(this);\n\n  this.name = Subscription.formatName_(pubsub.projectId, options.name);\n\n  this.makeReq_ = pubsub.makeReq_.bind(pubsub);\n\n  this.autoAck = util.is(options.autoAck, 'boolean') ? options.autoAck : false;\n  this.closed = true;\n  this.interval = util.is(options.interval, 'number') ? options.interval : 10;\n  this.inProgressAckIds = {};\n  this.maxInProgress =\n    util.is(options.maxInProgress, 'number') ? options.maxInProgress : Infinity;\n  this.messageListeners = 0;\n  this.paused = false;\n\n  this.listenForEvents_();\n}\n\nnodeutil.inherits(Subscription, events.EventEmitter);",
     "ctx": {
       "type": "constructor",
       "name": "Subscription",
@@ -221,8 +235,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 134,
-    "codeStart": 140,
+    "line": 150,
+    "codeStart": 156,
     "code": "Subscription.formatName_ = function(projectId, name) {\n  // Simple check if the name is already formatted.\n  if (name.indexOf('/') > -1) {\n    return name;\n  }\n  return 'projects/' + projectId + '/subscriptions/' + name;\n};",
     "ctx": {
       "type": "method",
@@ -250,8 +264,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 148,
-    "codeStart": 154,
+    "line": 164,
+    "codeStart": 170,
     "code": "Subscription.formatMessage_ = function(msg) {\n  var innerMessage = msg.message;\n  var message = {\n    ackId: msg.ackId\n  };\n\n  if (innerMessage) {\n    message.id = innerMessage.messageId;\n\n    if (innerMessage.data) {\n      message.data = new Buffer(innerMessage.data, 'base64').toString('utf-8');\n\n      try {\n        message.data = JSON.parse(message.data);\n      } catch(e) {}\n    }\n\n    if (innerMessage.attributes) {\n      message.attributes = innerMessage.attributes;\n    }\n  }\n\n  return message;\n};",
     "ctx": {
       "type": "method",
@@ -284,9 +298,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 179,
-    "codeStart": 192,
-    "code": "Subscription.prototype.listenForEvents_ = function() {\n  var self = this;\n  var messageListeners = 0;\n\n  this.on('newListener', function(event) {\n    if (event === 'message') {\n      messageListeners++;\n      if (self.closed) {\n        self.closed = false;\n      }\n      self.startPulling_();\n    }\n  });\n\n  this.on('removeListener', function(event) {\n    if (event === 'message' && --messageListeners === 0) {\n      self.closed = true;\n    }\n  });\n};",
+    "line": 195,
+    "codeStart": 208,
+    "code": "Subscription.prototype.listenForEvents_ = function() {\n  var self = this;\n\n  this.on('newListener', function(event) {\n    if (event === 'message') {\n      self.messageListeners++;\n      if (self.closed) {\n        self.closed = false;\n        self.startPulling_();\n      }\n    }\n  });\n\n  this.on('removeListener', function(event) {\n    if (event === 'message' && --self.messageListeners === 0) {\n      self.closed = true;\n    }\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Subscription",
@@ -319,9 +333,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 213,
-    "codeStart": 230,
-    "code": "Subscription.prototype.startPulling_ = function() {\n  var self = this;\n  if (this.closed) {\n    return;\n  }\n  this.pull({\n    returnImmediately: false\n  }, function(err, messages, apiResponse) {\n    if (err) {\n      self.emit('error', err, apiResponse);\n    }\n    if (messages) {\n      messages.forEach(function(message) {\n        self.emit('message', message, apiResponse);\n      });\n    }\n    setTimeout(self.startPulling_.bind(self), self.interval);\n  });\n};",
+    "line": 228,
+    "codeStart": 245,
+    "code": "Subscription.prototype.startPulling_ = function() {\n  var self = this;\n\n  if (this.closed || this.paused) {\n    return;\n  }\n\n  var maxResults;\n\n  if (this.maxInProgress < Infinity) {\n    maxResults = this.maxInProgress - Object.keys(this.inProgressAckIds).length;\n  }\n\n  this.pull({\n    returnImmediately: false,\n    maxResults: maxResults\n  }, function(err, messages, apiResponse) {\n    if (err) {\n      self.emit('error', err, apiResponse);\n    }\n\n    if (messages) {\n      messages.forEach(function(message) {\n        self.emit('message', message, apiResponse);\n      });\n    }\n\n    setTimeout(self.startPulling_.bind(self), self.interval);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Subscription",
@@ -385,9 +399,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 250,
-    "codeStart": 262,
-    "code": "Subscription.prototype.ack = function(ackIds, callback) {\n  if (!ackIds || ackIds.length === 0) {\n    throw new Error(\n        'At least one ID must be specified before it can be acknowledged.');\n  }\n  ackIds = util.arrayize(ackIds);\n  var body = {\n    ackIds: ackIds\n  };\n  var path = this.name + ':acknowledge';\n  this.makeReq_('POST', path, null, body, callback || util.noop);\n};",
+    "line": 276,
+    "codeStart": 288,
+    "code": "Subscription.prototype.ack = function(ackIds, callback) {\n  var self = this;\n\n  if (!ackIds || ackIds.length === 0) {\n    throw new Error(\n        'At least one ID must be specified before it can be acknowledged.');\n  }\n\n  ackIds = util.arrayize(ackIds);\n\n  var body = {\n    ackIds: ackIds\n  };\n\n  callback = callback || util.noop;\n\n  var path = this.name + ':acknowledge';\n\n  this.makeReq_('POST', path, null, body, function(err, resp) {\n    if (!err) {\n      ackIds.forEach(function(ackId) {\n        delete self.inProgressAckIds[ackId];\n      });\n      self.refreshPausedStatus_();\n    }\n\n    callback(err, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Subscription",
@@ -428,8 +442,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 275,
-    "codeStart": 284,
+    "line": 318,
+    "codeStart": 327,
     "code": "Subscription.prototype.delete = function(callback) {\n  var self = this;\n  callback = callback || util.noop;\n  this.makeReq_('DELETE', this.name, null, true, function(err, result) {\n    if (err) {\n      callback(err, result);\n      return;\n    }\n    self.closed = true;\n    self.removeAllListeners();\n    callback(null, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -504,8 +518,8 @@
       },
       {
         "type": "example",
-        "string": "//-\n// Pull all available messages.\n//-\nsubscription.pull(function(err, messages) {\n  // messages = [\n  //   {\n  //     ackId: '',     // ID used to acknowledge its receival.\n  //     id: '',        // Unique message ID.\n  //     data: '',      // Contents of the message.\n  //     attributes: {} // Attributes of the message.\n  //   },\n  //   // ...\n  // ]\n});\n\n//-\n// Pull a single message.\n//-\nvar opts = {\n  maxResults: 1\n};\n\nsubscription.pull(opts, function(err, messages, apiResponse) {});",
-        "html": "<p>//-<br />// Pull all available messages.<br />//-<br />subscription.pull(function(err, messages) {<br />  // messages = [<br />  //   {<br />  //     ackId: &#39;&#39;,     // ID used to acknowledge its receival.<br />  //     id: &#39;&#39;,        // Unique message ID.<br />  //     data: &#39;&#39;,      // Contents of the message.<br />  //     attributes: {} // Attributes of the message.<br />  //   },<br />  //   // ...<br />  // ]<br />});</p><p>//-<br />// Pull a single message.<br />//-<br />var opts = {<br />  maxResults: 1<br />};</p><p>subscription.pull(opts, function(err, messages, apiResponse) {});</p>"
+        "string": "//-\n// Pull all available messages.\n//-\nsubscription.pull(function(err, messages) {\n  // messages = [\n  //   {\n  //     ackId: '',     // ID used to acknowledge its receival.\n  //     id: '',        // Unique message ID.\n  //     data: '',      // Contents of the message.\n  //     attributes: {} // Attributes of the message.\n  //\n  //     Helper functions:\n  //     ack(callback): // Ack the message.\n  //     skip():        // Free up 1 slot on the sub's maxInProgress value.\n  //   },\n  //   // ...\n  // ]\n});\n\n//-\n// Pull a single message.\n//-\nvar opts = {\n  maxResults: 1\n};\n\nsubscription.pull(opts, function(err, messages, apiResponse) {});",
+        "html": "<p>//-<br />// Pull all available messages.<br />//-<br />subscription.pull(function(err, messages) {<br />  // messages = [<br />  //   {<br />  //     ackId: &#39;&#39;,     // ID used to acknowledge its receival.<br />  //     id: &#39;&#39;,        // Unique message ID.<br />  //     data: &#39;&#39;,      // Contents of the message.<br />  //     attributes: {} // Attributes of the message.<br />  //<br />  //     Helper functions:<br />  //     ack(callback): // Ack the message.<br />  //     skip():        // Free up 1 slot on the sub&#39;s maxInProgress value.<br />  //   },<br />  //   // ...<br />  // ]<br />});</p><p>//-<br />// Pull a single message.<br />//-<br />var opts = {<br />  maxResults: 1<br />};</p><p>subscription.pull(opts, function(err, messages, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -518,9 +532,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 298,
-    "codeStart": 341,
-    "code": "Subscription.prototype.pull = function(options, callback) {\n  var self = this;\n  var MAX_EVENTS_LIMIT = 1000;\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  if (!util.is(options.maxResults, 'number')) {\n    options.maxResults = MAX_EVENTS_LIMIT;\n  }\n\n  var body = {\n    returnImmediately: !!options.returnImmediately,\n    maxMessages: options.maxResults\n  };\n\n  var path = this.name + ':pull';\n  this.makeReq_('POST', path, null, body, function(err, response) {\n    if (err) {\n      callback(err, null, response);\n      return;\n    }\n\n    var messages = response.receivedMessages || [];\n    messages = messages.map(Subscription.formatMessage_);\n\n    if (self.autoAck && messages.length !== 0) {\n      var ackIds = messages.map(function(message) {\n        return message.ackId;\n      });\n\n      self.ack(ackIds, function(err) {\n        callback(err, messages, response);\n      });\n    } else {\n      callback(null, messages, response);\n    }\n  });\n};",
+    "line": 341,
+    "codeStart": 388,
+    "code": "Subscription.prototype.pull = function(options, callback) {\n  var self = this;\n  var MAX_EVENTS_LIMIT = 1000;\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  if (!util.is(options.maxResults, 'number')) {\n    options.maxResults = MAX_EVENTS_LIMIT;\n  }\n\n  var body = {\n    returnImmediately: !!options.returnImmediately,\n    maxMessages: options.maxResults\n  };\n\n  var path = this.name + ':pull';\n  this.makeReq_('POST', path, null, body, function(err, response) {\n    if (err) {\n      callback(err, null, response);\n      return;\n    }\n\n    var messages = response.receivedMessages || [];\n    messages = messages\n      .map(Subscription.formatMessage_)\n      .map(self.decorateMessage_.bind(self));\n\n    self.refreshPausedStatus_();\n\n    if (self.autoAck && messages.length !== 0) {\n      var ackIds = messages.map(function(message) {\n        return message.ackId;\n      });\n\n      self.ack(ackIds, function(err) {\n        callback(err, messages, response);\n      });\n    } else {\n      callback(null, messages, response);\n    }\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Subscription",
@@ -590,8 +604,8 @@
       },
       {
         "type": "example",
-        "string": "var options = {\n  ackId: 123,\n  seconds: 10 // Expire in 10 seconds from call.\n};\nsubscription.setAckDeadline(options, function(err, apiResponse) {});",
-        "html": "<p>var options = {<br />  ackId: 123,<br />  seconds: 10 // Expire in 10 seconds from call.<br />};<br />subscription.setAckDeadline(options, function(err, apiResponse) {});</p>"
+        "string": "var options = {\n  ackIds: [123],\n  seconds: 10 // Expire in 10 seconds from call.\n};\n\nsubscription.setAckDeadline(options, function(err, apiResponse) {});",
+        "html": "<p>var options = {<br />  ackIds: [123],<br />  seconds: 10 // Expire in 10 seconds from call.<br />};</p><p>subscription.setAckDeadline(options, function(err, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -604,15 +618,130 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 383,
-    "codeStart": 402,
-    "code": "Subscription.prototype.setAckDeadline = function(options, callback) {\n  var body = {\n    ackIds: util.arrayize(options.ackIds),\n    ackDeadlineSeconds: options.seconds\n  };\n\n  callback = callback || util.noop;\n\n  var path = this.name + ':modifyAckDeadline';\n  this.makeReq_('POST', path, null, body, callback);\n};\n\nmodule.exports = Subscription;",
+    "line": 434,
+    "codeStart": 454,
+    "code": "Subscription.prototype.setAckDeadline = function(options, callback) {\n  var body = {\n    ackIds: util.arrayize(options.ackIds),\n    ackDeadlineSeconds: options.seconds\n  };\n\n  callback = callback || util.noop;\n\n  var path = this.name + ':modifyAckDeadline';\n  this.makeReq_('POST', path, null, body, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Subscription",
       "cons": "Subscription",
       "name": "setAckDeadline",
       "string": "Subscription.prototype.setAckDeadline()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "\n",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{object} message - A message object.",
+        "name": "message",
+        "description": "<ul>\n<li>A message object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{object} message - The original message after being decorated.",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "<p>message - The original message after being decorated.</p>"
+      },
+      {
+        "type": "param",
+        "string": "{function} message.ack - Ack the message.",
+        "name": "message.ack",
+        "description": "<ul>\n<li>Ack the message.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} message.skip - Increate the number of available messages to\n    simultaneously receive.",
+        "name": "message.skip",
+        "description": "<ul>\n<li>Increate the number of available messages to     simultaneously receive.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Add functionality on top of a message returned from the API, including the<br />ability to <code>ack</code> and <code>skip</code> the message.</p><p>This also records the message as being &quot;in progress&quot;. See<br />{module:subscription#refreshPausedStatus_}.</p>",
+      "summary": "<p>Add functionality on top of a message returned from the API, including the<br />ability to <code>ack</code> and <code>skip</code> the message.</p>",
+      "body": "<p>This also records the message as being &quot;in progress&quot;. See<br />{module:subscription#refreshPausedStatus_}.</p>"
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 466,
+    "codeStart": 481,
+    "code": "Subscription.prototype.decorateMessage_ = function(message) {\n  var self = this;\n\n  this.inProgressAckIds[message.ackId] = true;\n\n  message.ack = self.ack.bind(self, message.ackId);\n\n  message.skip = function() {\n    delete self.inProgressAckIds[message.ackId];\n    self.refreshPausedStatus_();\n  };\n\n  return message;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Subscription",
+      "cons": "Subscription",
+      "name": "decorateMessage_",
+      "string": "Subscription.prototype.decorateMessage_()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "<p>Update the status of <code>maxInProgress</code>. Å subscription becomes &quot;paused&quot; (not<br />pulling) when the number of messages that have yet to be ack&#39;d or skipped<br />exceeds the user&#39;s specified <code>maxInProgress</code> value.</p><p>This will start pulling when that event reverses: we were paused, but one or<br />more messages were just ack&#39;d or skipped, freeing up room for more messages<br />to be consumed.</p>",
+      "summary": "<p>Update the status of <code>maxInProgress</code>. Å subscription becomes &quot;paused&quot; (not<br />pulling) when the number of messages that have yet to be ack&#39;d or skipped<br />exceeds the user&#39;s specified <code>maxInProgress</code> value.</p>",
+      "body": "<p>This will start pulling when that event reverses: we were paused, but one or<br />more messages were just ack&#39;d or skipped, freeing up room for more messages<br />to be consumed.</p>"
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 496,
+    "codeStart": 507,
+    "code": "Subscription.prototype.refreshPausedStatus_ = function() {\n  var isCurrentlyPaused = this.paused;\n  var inProgress = Object.keys(this.inProgressAckIds).length;\n  this.paused = inProgress >= this.maxInProgress;\n\n  if (isCurrentlyPaused && !this.paused && this.messageListeners > 0) {\n    this.startPulling_();\n  }\n};\n\nmodule.exports = Subscription;",
+    "ctx": {
+      "type": "method",
+      "constructor": "Subscription",
+      "cons": "Subscription",
+      "name": "refreshPausedStatus_",
+      "string": "Subscription.prototype.refreshPausedStatus_()"
     }
   }
 ]

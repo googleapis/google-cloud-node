@@ -673,7 +673,7 @@
     "ignore": false,
     "line": 205,
     "codeStart": 228,
-    "code": "gcloud.search = function (config) {\n  return new Search(config);\n};",
+    "code": "gcloud.search = function(config) {\n  return new Search(config);\n};",
     "ctx": {
       "type": "method",
       "receiver": "gcloud",

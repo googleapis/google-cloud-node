@@ -164,13 +164,55 @@
     "tags": [
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.metadata - The metadata of the job.",
+        "name": "callback.metadata",
+        "description": "<ul>\n<li>The metadata of the job.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -193,7 +235,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 63,
-    "codeStart": 73,
+    "codeStart": 76,
     "code": "Job.prototype.getMetadata = function(callback) {\n  var that = this;\n\n  var path = '/jobs/' + this.id;\n\n  this.bigQuery.makeReq_('GET', path, null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -215,6 +257,20 @@
         ],
         "typesDescription": "<code>object</code>|<code>undefined</code>",
         "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.autoPaginate - Have pagination handled\n    automatically. Default: true.",
+        "name": "options.autoPaginate",
+        "description": "<ul>\n<li>Have pagination handled     automatically. Default: true.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
         "nullable": false,
         "nonNullable": false,
         "variable": false
@@ -277,7 +333,7 @@
       },
       {
         "type": "param",
-        "string": "{function=} callback - The callback function. If you intend to\n    continuously run this query until all results are in as part of a stream,\n    do not pass a callback.\n",
+        "string": "{function=} callback - The callback function. If you intend to\n    continuously run this query until all results are in as part of a stream,\n    do not pass a callback.",
         "name": "callback",
         "description": "<ul>\n<li>The callback function. If you intend to     continuously run this query until all results are in as part of a stream,<br />  do not pass a callback.</li>\n</ul>\n",
         "types": [
@@ -290,9 +346,65 @@
         "variable": false
       },
       {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{array} callback.rows - The results of a job.",
+        "name": "callback.rows",
+        "description": "<ul>\n<li>The results of a job.</li>\n</ul>\n",
+        "types": [
+          "array"
+        ],
+        "typesDescription": "<code>array</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?object} callback.nextQuery - If present, query with this object to\n    check for more results.",
+        "name": "callback.nextQuery",
+        "description": "<ul>\n<li>If present, query with this object to     check for more results.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
         "type": "example",
-        "string": "//-\n// Use the default options to get the results of a query.\n//-\njob.getQueryResults(function(err, rows, nextQuery, apiResponse) {});\n\n//-\n// Customize the results you want to fetch.\n//-\nvar options = {\n  maxResults: 100\n};\n\njob.getQueryResults(options, function(err, rows, nextQuery, apiResponse) {});\n\n//-\n// Consume the results from the query as a readable stream.\n//-\nvar through2 = require('through2');\nvar fs = require('fs');\n\njob.getQueryResults(options)\n  .pipe(through2.obj(function (row, enc, next) {\n    this.push(JSON.stringify(row) + '\\n');\n  }))\n  .pipe(fs.createWriteStream('./test/testdata/testfile.json'));",
-        "html": "<p>//-<br />// Use the default options to get the results of a query.<br />//-<br />job.getQueryResults(function(err, rows, nextQuery, apiResponse) {});</p><p>//-<br />// Customize the results you want to fetch.<br />//-<br />var options = {<br />  maxResults: 100<br />};</p><p>job.getQueryResults(options, function(err, rows, nextQuery, apiResponse) {});</p><p>//-<br />// Consume the results from the query as a readable stream.<br />//-<br />var through2 = require(&#39;through2&#39;);<br />var fs = require(&#39;fs&#39;);</p><p>job.getQueryResults(options)<br />  .pipe(through2.obj(function (row, enc, next) {<br />    this.push(JSON.stringify(row) + &#39;\\n&#39;);<br />  }))<br />  .pipe(fs.createWriteStream(&#39;./test/testdata/testfile.json&#39;));</p>"
+        "string": "var callback = function(err, rows, nextQuery, apiResponse) {\n  if (nextQuery) {\n    // More results exist.\n    job.getQueryResults(nextQuery, callback);\n  }\n};\n\n//-\n// Use the default options to get the results of a query.\n//-\njob.getQueryResults(callback);\n\n//-\n// Customize the results you want to fetch.\n//-\njob.getQueryResults({\n  maxResults: 100\n}, callback);\n\n//-\n// To have pagination handled for you, set `autoPaginate`. Note the changed\n// callback parameters.\n//-\njob.getQueryResults({\n  autoPaginate: true\n}, function(err, rows) {\n  // Called after all rows have been retrieved.\n});\n\n//-\n// Consume the results from the query as a readable object stream.\n//-\nvar through2 = require('through2');\nvar fs = require('fs');\n\njob.getQueryResults()\n  .pipe(through2.obj(function (row, enc, next) {\n    this.push(JSON.stringify(row) + '\\n');\n  }))\n  .pipe(fs.createWriteStream('./test/testdata/testfile.json'));",
+        "html": "<p>var callback = function(err, rows, nextQuery, apiResponse) {<br />  if (nextQuery) {<br />    // More results exist.<br />    job.getQueryResults(nextQuery, callback);<br />  }<br />};</p><p>//-<br />// Use the default options to get the results of a query.<br />//-<br />job.getQueryResults(callback);</p><p>//-<br />// Customize the results you want to fetch.<br />//-<br />job.getQueryResults({<br />  maxResults: 100<br />}, callback);</p><p>//-<br />// To have pagination handled for you, set <code>autoPaginate</code>. Note the changed<br />// callback parameters.<br />//-<br />job.getQueryResults({<br />  autoPaginate: true<br />}, function(err, rows) {<br />  // Called after all rows have been retrieved.<br />});</p><p>//-<br />// Consume the results from the query as a readable object stream.<br />//-<br />var through2 = require(&#39;through2&#39;);<br />var fs = require(&#39;fs&#39;);</p><p>job.getQueryResults()<br />  .pipe(through2.obj(function (row, enc, next) {<br />    this.push(JSON.stringify(row) + &#39;\\n&#39;);<br />  }))<br />  .pipe(fs.createWriteStream(&#39;./test/testdata/testfile.json&#39;));</p>"
       }
     ],
     "description": {
@@ -305,8 +417,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 90,
-    "codeStart": 134,
+    "line": 93,
+    "codeStart": 159,
     "code": "Job.prototype.getQueryResults = function(options, callback) {\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.job = this;\n\n  return this.bigQuery.query(options, callback);\n};\n\nmodule.exports = Job;",
     "ctx": {
       "type": "method",

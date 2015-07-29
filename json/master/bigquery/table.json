@@ -34,7 +34,7 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar crypto = require('crypto');\nvar duplexify = require('duplexify');\nvar extend = require('extend');\nvar fs = require('fs');\nvar path = require('path');\nvar streamEvents = require('stream-events');\nvar through = require('through2');",
+    "code": "'use strict';\n\nvar crypto = require('crypto');\nvar duplexify = require('duplexify');\nvar extend = require('extend');\nvar fs = require('fs');\nvar path = require('path');\nvar streamEvents = require('stream-events');",
     "ctx": false
   },
   {
@@ -69,14 +69,56 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 31,
-    "codeStart": 35,
+    "line": 30,
+    "codeStart": 34,
     "code": "var File = require('../storage/file');",
     "ctx": {
       "type": "declaration",
       "name": "File",
       "value": "require('../storage/file')",
       "string": "File"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/streamrouter}",
+        "types": [
+          "module:common/streamrouter"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Fstreamrouter.html\">common/streamrouter</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/streamrouter}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 36,
+    "codeStart": 40,
+    "code": "var streamRouter = require('../common/stream-router.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "streamRouter",
+      "value": "require('../common/stream-router.js')",
+      "string": "streamRouter"
     }
   },
   {
@@ -111,8 +153,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 37,
-    "codeStart": 41,
+    "line": 42,
+    "codeStart": 46,
     "code": "var util = require('../common/util');",
     "ctx": {
       "type": "declaration",
@@ -167,8 +209,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 43,
-    "codeStart": 55
+    "line": 48,
+    "codeStart": 60
   },
   {
     "tags": [
@@ -198,8 +240,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 55,
-    "codeStart": 66,
+    "line": 60,
+    "codeStart": 71,
     "code": "function Table(dataset, id) {\n  this.bigQuery = dataset.bigQuery;\n  this.dataset = dataset;\n  this.id = id;\n  this.metadata = {};\n}",
     "ctx": {
       "type": "constructor",
@@ -258,8 +300,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 73,
-    "codeStart": 82,
+    "line": 78,
+    "codeStart": 87,
     "code": "Table.createSchemaFromString_ = function(str) {\n  return str.split(/\\s*,\\s*/).reduce(function(acc, pair) {\n    acc.fields.push({\n      name: pair.split(':')[0],\n      type: pair.split(':')[1] || 'string'\n    });\n\n    return acc;\n  }, {\n    fields: []\n  });\n};",
     "ctx": {
       "type": "method",
@@ -335,8 +377,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 95,
-    "codeStart": 105,
+    "line": 100,
+    "codeStart": 110,
     "code": "Table.mergeSchemaWithRows_ = function(schema, rows) {\n  return rows.map(mergeSchema).map(flattenRows);\n\n  function mergeSchema(row) {\n    return row.f.map(function(field, index) {\n      var fieldObject = {};\n      fieldObject[schema.fields[index].name] = field.v;\n      return fieldObject;\n    });\n  }\n\n  function flattenRows(rows) {\n    return rows.reduce(function(acc, row) {\n      var key = Object.keys(row)[0];\n      acc[key] = row[key];\n      return acc;\n    }, {});\n  }\n};",
     "ctx": {
       "type": "method",
@@ -377,13 +419,55 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:bigquery/job} callback.job - The job used to copy your table.",
+        "name": "callback.job",
+        "description": "<ul>\n<li>The job used to copy your table.</li>\n</ul>\n",
+        "types": [
+          "module:bigquery/job"
+        ],
+        "typesDescription": "module:<a href=\"module%3Abigquery%2Fjob.html\">bigquery/job</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -413,8 +497,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 125,
-    "codeStart": 151,
+    "line": 130,
+    "codeStart": 159,
     "code": "Table.prototype.copy = function(destination, metadata, callback) {\n  var that = this;\n\n  if (!(destination instanceof Table)) {\n    throw new Error('Destination must be a Table object.');\n  }\n\n  if (util.is(metadata, 'function')) {\n    callback = metadata;\n    metadata = {};\n  }\n\n  var body = {\n    configuration: {\n      copy: extend(true, metadata || {}, {\n        destinationTable: {\n          datasetId: destination.dataset.id,\n          projectId: destination.bigQuery.projectId,\n          tableId: destination.id\n        },\n        sourceTable: {\n          datasetId: this.dataset.id,\n          projectId: this.bigQuery.projectId,\n          tableId: this.id\n        }\n      })\n    }\n  };\n\n  this.bigQuery.makeReq_('POST', '/jobs', null, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var job = that.bigQuery.job(resp.jobReference.jobId);\n    job.metadata = resp;\n\n    callback(null, job, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -447,8 +531,8 @@
       }
     ],
     "description": {
-      "full": "<p>Create a readable stream of the rows of data in your table.</p>",
-      "summary": "<p>Create a readable stream of the rows of data in your table.</p>",
+      "full": "<p>Create a readable stream of the rows of data in your table. This method is<br />simply a wrapper around {module:bigquery/table#getRows}.</p>",
+      "summary": "<p>Create a readable stream of the rows of data in your table. This method is<br />simply a wrapper around {module:bigquery/table#getRows}.</p>",
       "body": ""
     },
     "isPrivate": false,
@@ -456,9 +540,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 193,
-    "codeStart": 208,
-    "code": "Table.prototype.createReadStream = function() {\n  var that = this;\n\n  var stream = streamEvents(through.obj());\n  stream.once('reading', function() {\n    that.getRows(handleResponse);\n  });\n  return stream;\n\n  function handleResponse(err, rows, nextQuery) {\n    if (err) {\n      stream.emit('error', err);\n      stream.end();\n      return;\n    }\n\n    rows.forEach(function(row) {\n      stream.push(row);\n    });\n\n    if (nextQuery) {\n      that.getRows(nextQuery, handleResponse);\n    } else {\n      stream.end();\n    }\n  }\n};",
+    "line": 201,
+    "codeStart": 217,
+    "code": "Table.prototype.createReadStream = function() {\n  return this.getRows();\n};",
     "ctx": {
       "type": "method",
       "constructor": "Table",
@@ -522,8 +606,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 236,
-    "codeStart": 280,
+    "line": 221,
+    "codeStart": 265,
     "code": "Table.prototype.createWriteStream = function(metadata) {\n  var that = this;\n\n  metadata = metadata || {};\n\n  var fileTypeMap = {\n    csv: 'CSV',\n    json: 'NEWLINE_DELIMITED_JSON'\n  };\n  var fileTypes = Object.keys(fileTypeMap).map(function(key) {\n    return fileTypeMap[key];\n  });\n\n  if (util.is(metadata, 'string')) {\n    metadata = {\n      sourceFormat: fileTypeMap[metadata.toLowerCase()]\n    };\n  }\n\n  if (util.is(metadata.schema, 'string')) {\n    metadata.schema = Table.createSchemaFromString_(metadata.schema);\n  }\n\n  extend(true, metadata, {\n    destinationTable: {\n      projectId: that.bigQuery.projectId,\n      datasetId: that.dataset.id,\n      tableId: that.id\n    }\n  });\n\n  if (metadata.hasOwnProperty('sourceFormat') &&\n      fileTypes.indexOf(metadata.sourceFormat) < 0) {\n    throw new Error('Source format not recognized: ' + metadata.sourceFormat);\n  }\n\n  var dup = streamEvents(duplexify());\n\n  dup.once('writing', function() {\n    util.makeWritableStream(dup, {\n      makeAuthorizedRequest: that.bigQuery.makeAuthorizedRequest_,\n      metadata: {\n        configuration: {\n          load: metadata\n        }\n      },\n      request: {\n        uri: util.format('{base}/{projectId}/jobs', {\n          base: 'https://www.googleapis.com/upload/bigquery/v2/projects',\n          projectId: that.bigQuery.projectId\n        })\n      }\n    }, function(data) {\n      var job = that.bigQuery.job(data.jobReference.jobId);\n      job.metadata = data;\n\n      dup.emit('complete', job);\n      dup.end();\n    });\n  });\n\n  return dup;\n};",
     "ctx": {
       "type": "method",
@@ -537,13 +621,41 @@
     "tags": [
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -565,8 +677,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 344,
-    "codeStart": 352,
+    "line": 329,
+    "codeStart": 339,
     "code": "Table.prototype.delete = function(callback) {\n  this.makeReq_('DELETE', '', null, null, callback);\n};",
     "ctx": {
       "type": "method",
@@ -636,13 +748,55 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:bigquery/job} callback.job - The job used to export the table.",
+        "name": "callback.job",
+        "description": "<ul>\n<li>The job used to export the table.</li>\n</ul>\n",
+        "types": [
+          "module:bigquery/job"
+        ],
+        "typesDescription": "module:<a href=\"module%3Abigquery%2Fjob.html\">bigquery/job</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -680,8 +834,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 356,
-    "codeStart": 404,
+    "line": 343,
+    "codeStart": 394,
     "code": "Table.prototype.export = function(destination, options, callback) {\n  var that = this;\n\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = {};\n  }\n\n  var formats = {\n    avro: 'AVRO',\n    csv: 'CSV',\n    json: 'NEWLINE_DELIMITED_JSON'\n  };\n\n  extend(true, options, {\n    destinationUris: util.arrayize(destination).map(function(dest) {\n      if (!(dest instanceof File)) {\n        throw new Error('Destination must be a File object.');\n      }\n\n      // If no explicit format was provided, attempt to find a match from the\n      // file's extension. If no match, don't set, and default upstream to CSV.\n      var format = path.extname(dest.name).substr(1).toLowerCase();\n      if (!options.destinationFormat && !options.format && formats[format]) {\n        options.destinationFormat = formats[format];\n      }\n\n      return 'gs://' + dest.bucket.name + '/' + dest.name;\n    })\n  });\n\n  if (options.format) {\n    options.format = options.format.toLowerCase();\n\n    if (formats[options.format]) {\n      options.destinationFormat = formats[options.format];\n      delete options.format;\n    } else {\n      throw new Error('Destination format not recognized: ' + options.format);\n    }\n  }\n\n  if (options.gzip) {\n    options.compression = 'GZIP';\n    delete options.gzip;\n  }\n\n  var body = {\n    configuration: {\n      extract: extend(true, options, {\n        sourceTable: {\n          datasetId: this.dataset.id,\n          projectId: this.bigQuery.projectId,\n          tableId: this.id\n        }\n      })\n    }\n  };\n\n  this.bigQuery.makeReq_('POST', '/jobs', null, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var job = that.bigQuery.job(resp.jobReference.jobId);\n    job.metadata = resp;\n\n    callback(null, job, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -695,13 +849,55 @@
     "tags": [
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.metadata - The metadata of the Table.",
+        "name": "callback.metadata",
+        "description": "<ul>\n<li>The metadata of the Table.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -723,8 +919,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 476,
-    "codeStart": 484,
+    "line": 466,
+    "codeStart": 477,
     "code": "Table.prototype.getMetadata = function(callback) {\n  var that = this;\n\n  this.makeReq_('GET', '', null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -752,6 +948,20 @@
       },
       {
         "type": "param",
+        "string": "{boolean} options.autoPaginate - Have pagination handled\n    automatically. Default: true.",
+        "name": "options.autoPaginate",
+        "description": "<ul>\n<li>Have pagination handled     automatically. Default: true.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
         "string": "{number} options.maxResults - Maximum number of results to return.",
         "name": "options.maxResults",
         "description": "<ul>\n<li>Maximum number of results to return.</li>\n</ul>\n",
@@ -766,9 +976,9 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
@@ -779,9 +989,65 @@
         "variable": false
       },
       {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{array} callback.rows - The table data from specified set of rows.",
+        "name": "callback.rows",
+        "description": "<ul>\n<li>The table data from specified set of rows.</li>\n</ul>\n",
+        "types": [
+          "array"
+        ],
+        "typesDescription": "<code>array</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?object} callback.nextQuery - If present, query with this object to\n    check for more results.",
+        "name": "callback.nextQuery",
+        "description": "<ul>\n<li>If present, query with this object to     check for more results.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
         "type": "example",
-        "string": "var options = {\n  maxResults: 100\n};\n\ntable.getRows(options, function(err, rows, nextQuery, apiResponse) {\n  // If `nextQuery` is non-null, there are more results to fetch.\n  if (nextQuery) {\n    table.getRows(nextQuery, function(err, rows, nextQuery, apiResponse) {});\n  }\n});",
-        "html": "<p>var options = {<br />  maxResults: 100<br />};</p><p>table.getRows(options, function(err, rows, nextQuery, apiResponse) {<br />  // If <code>nextQuery</code> is non-null, there are more results to fetch.<br />  if (nextQuery) {<br />    table.getRows(nextQuery, function(err, rows, nextQuery, apiResponse) {});<br />  }<br />});</p>"
+        "string": "table.getRows(function(err, rows) {\n  if (!err) {\n    // Handle results here.\n  }\n});\n\n//-\n// To control how many API requests are made and page through the results\n// manually, set `autoPaginate` to `false`.\n//-\nvar callback = function(err, rows, nextQuery, apiResponse) {\n  if (nextQuery) {\n    // More results exist.\n    table.getRows(nextQuery, callback);\n  }\n};\n\ntable.getRows({\n  autoPaginate: false\n}, callback);\n\n//-\n// Get the rows as a readable object stream.\n//-\ntable.getRows(options)\n  .on('error', console.error)\n  .on('data', function(row) {})\n  .on('end', function() {\n    // All rows have been retrieved.\n  });\n\n//-\n// If you anticipate many results, you can end a stream early to prevent\n// unnecessary processing and API requests.\n//-\ntable.getRows()\n  .on('data', function(row) {\n    this.end();\n  });",
+        "html": "<p>table.getRows(function(err, rows) {<br />  if (!err) {<br />    // Handle results here.<br />  }<br />});</p><p>//-<br />// To control how many API requests are made and page through the results<br />// manually, set <code>autoPaginate</code> to <code>false</code>.<br />//-<br />var callback = function(err, rows, nextQuery, apiResponse) {<br />  if (nextQuery) {<br />    // More results exist.<br />    table.getRows(nextQuery, callback);<br />  }<br />};</p><p>table.getRows({<br />  autoPaginate: false<br />}, callback);</p><p>//-<br />// Get the rows as a readable object stream.<br />//-<br />table.getRows(options)<br />  .on(&#39;error&#39;, console.error)<br />  .on(&#39;data&#39;, function(row) {})<br />  .on(&#39;end&#39;, function() {<br />    // All rows have been retrieved.<br />  });</p><p>//-<br />// If you anticipate many results, you can end a stream early to prevent<br />// unnecessary processing and API requests.<br />//-<br />table.getRows()<br />  .on(&#39;data&#39;, function(row) {<br />    this.end();<br />  });</p>"
       }
     ],
     "description": {
@@ -794,8 +1060,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 499,
-    "codeStart": 519,
+    "line": 492,
+    "codeStart": 548,
     "code": "Table.prototype.getRows = function(options, callback) {\n  var that = this;\n\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = {};\n  }\n\n  callback = callback || util.noop;\n\n  this.makeReq_('GET', '/data', options, null, function(err, resp) {\n    if (err) {\n      onComplete(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.pageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.pageToken\n      });\n    }\n\n    if (resp.rows && resp.rows.length > 0 && !that.metadata.schema) {\n      // We don't know the schema for this table yet. Do a quick stat.\n      that.getMetadata(function(err) {\n        if (err) {\n          onComplete(err);\n          return;\n        }\n\n        onComplete(null, resp.rows, nextQuery, resp);\n      });\n\n      return;\n    }\n\n    onComplete(null, resp.rows, nextQuery, resp);\n  });\n\n  function onComplete(err, rows, nextQuery, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    rows = Table.mergeSchemaWithRows_(that.metadata.schema, rows || []);\n\n    callback(null, rows, nextQuery, resp);\n  }\n};",
     "ctx": {
       "type": "method",
@@ -838,13 +1104,55 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:bigquery/job} callback.job - The job used to import your data.",
+        "name": "callback.job",
+        "description": "<ul>\n<li>The job used to import your data.</li>\n</ul>\n",
+        "types": [
+          "module:bigquery/job"
+        ],
+        "typesDescription": "module:<a href=\"module%3Abigquery%2Fjob.html\">bigquery/job</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -874,8 +1182,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 572,
-    "codeStart": 622,
+    "line": 601,
+    "codeStart": 654,
     "code": "Table.prototype.import = function(source, metadata, callback) {\n  var that = this;\n\n  if (util.is(metadata, 'function')) {\n    callback = metadata;\n    metadata = {};\n  }\n\n  callback = callback || util.noop;\n  metadata = metadata || {};\n\n  var formats = {\n    csv: 'CSV',\n    json: 'NEWLINE_DELIMITED_JSON'\n  };\n\n  if (util.is(source, 'string')) {\n    // A path to a file was given. If a sourceFormat wasn't specified, try to\n    // find a match from the file's extension.\n    var format = formats[path.extname(source).substr(1).toLowerCase()];\n    if (!metadata.sourceFormat && format) {\n      metadata.sourceFormat = format;\n    }\n\n    // Read the file into a new write stream.\n    return fs.createReadStream(source)\n      .pipe(this.createWriteStream(metadata))\n      .on('error', function(err, resp) {\n        callback(err, null, resp);\n      })\n      .on('complete', function(resp) {\n        // TODO(ryanseys): Does this have to create a job object?\n        callback(null, resp, resp);\n      });\n  }\n\n  var body = {\n    configuration: {\n      load: {\n        destinationTable: {\n          projectId: this.bigQuery.projectId,\n          datasetId: this.dataset.id,\n          tableId: this.id\n        }\n      }\n    }\n  };\n\n  extend(true, body.configuration.load, metadata, {\n    sourceUris: util.arrayize(source).map(function(src) {\n      if (!(src instanceof File)) {\n        throw new Error('Source must be a File object.');\n      }\n\n      // If no explicit format was provided, attempt to find a match from\n      // the file's extension. If no match, don't set, and default upstream\n      // to CSV.\n      var format = formats[path.extname(src.name).substr(1).toLowerCase()];\n      if (!metadata.sourceFormat && format) {\n        body.configuration.load.sourceFormat = format;\n      }\n\n      return 'gs://' + src.bucket.name + '/' + src.name;\n    })\n  });\n\n  this.bigQuery.makeReq_('POST', '/jobs', null, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var job = that.bigQuery.job(resp.jobReference.jobId);\n    job.metadata = resp;\n\n    callback(null, job, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -904,13 +1212,55 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{array} callback.insertErrors - A list of errors for insert failures.",
+        "name": "callback.insertErrors",
+        "description": "<ul>\n<li>A list of errors for insert failures.</li>\n</ul>\n",
+        "types": [
+          "array"
+        ],
+        "typesDescription": "<code>array</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -932,8 +1282,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 701,
-    "codeStart": 754,
+    "line": 733,
+    "codeStart": 789,
     "code": "Table.prototype.insert = function(rows, callback) {\n  var body = {\n    rows: util.arrayize(rows || []).map(function(row) {\n      var rowObject = {};\n      // Use the stringified contents of the row as a unique insert ID.\n      var md5 = crypto.createHash('md5');\n      md5.update(JSON.stringify(row));\n      rowObject.insertId = md5.digest('hex');\n      rowObject.json = row;\n      return rowObject;\n    })\n  };\n\n  this.makeReq_('POST', '/insertAll', null, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var failedToInsert = (resp.insertErrors || []).map(function(insertError) {\n      return {\n        errors: insertError.errors.map(function(error) {\n          return {\n            message: error.message,\n            reason: error.reason\n          };\n        }),\n        row: body.rows[insertError.index].json\n      };\n    });\n\n    callback(null, failedToInsert, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -955,8 +1305,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 789,
-    "codeStart": 794,
+    "line": 824,
+    "codeStart": 829,
     "code": "Table.prototype.query = function(query, callback) {\n  return this.dataset.query(query, callback);\n};",
     "ctx": {
       "type": "method",
@@ -1027,13 +1377,55 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.metadata - The metadata of the Table.",
+        "name": "callback.metadata",
+        "description": "<ul>\n<li>The metadata of the Table.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -1055,8 +1447,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 798,
-    "codeStart": 821,
+    "line": 833,
+    "codeStart": 859,
     "code": "Table.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n\n  if (metadata.name) {\n    metadata.friendlyName = metadata.name;\n    delete metadata.name;\n  }\n\n  if (util.is(metadata.schema, 'string')) {\n    metadata.schema = Table.createSchemaFromString_(metadata.schema);\n  }\n\n  this.makeReq_('PUT', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1151,9 +1543,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 845,
-    "codeStart": 857,
-    "code": "Table.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/tables/' + this.id + path;\n  this.dataset.makeReq_(method, path, query, body, callback);\n};\n\nmodule.exports = Table;",
+    "line": 883,
+    "codeStart": 895,
+    "code": "Table.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/tables/' + this.id + path;\n  this.dataset.makeReq_(method, path, query, body, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Table",
@@ -1161,5 +1553,22 @@
       "name": "makeReq_",
       "string": "Table.prototype.makeReq_()"
     }
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Developer Documentation</p><p>These methods can be used with either a callback or as a readable object<br />stream. <code>streamRouter</code> is used to add this dual behavior.</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": "<p>These methods can be used with either a callback or as a readable object<br />stream. <code>streamRouter</code> is used to add this dual behavior.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 900,
+    "codeStart": 905,
+    "code": "streamRouter.extend(Table, 'getRows');\n\nmodule.exports = Table;",
+    "ctx": false
   }
 ]

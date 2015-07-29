@@ -34,7 +34,7 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar bufferEqual = require('buffer-equal');\nvar ConfigStore = require('configstore');\nvar crc = require('sse4_crc32');\nvar crypto = require('crypto');\nvar duplexify = require('duplexify');\nvar fs = require('fs');\nvar once = require('once');\nvar request = require('request').defaults({\n  pool: {\n    maxSockets: Infinity\n  }\n});\nvar streamEvents = require('stream-events');\nvar through = require('through2');",
+    "code": "'use strict';\n\nvar bufferEqual = require('buffer-equal');\nvar ConfigStore = require('configstore');\nvar crc = require('sse4_crc32');\nvar crypto = require('crypto');\nvar duplexify = require('duplexify');\nvar fs = require('fs');\nvar once = require('once');\nvar request = require('request').defaults({\n  pool: {\n    maxSockets: Infinity\n  }\n});\nvar streamEvents = require('stream-events');\nvar through = require('through2');\nvar zlib = require('zlib');",
     "ctx": false
   },
   {
@@ -69,8 +69,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 38,
-    "codeStart": 42,
+    "line": 39,
+    "codeStart": 43,
     "code": "var Acl = require('./acl.js');",
     "ctx": {
       "type": "declaration",
@@ -111,8 +111,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 44,
-    "codeStart": 48,
+    "line": 45,
+    "codeStart": 49,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -145,8 +145,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 50,
-    "codeStart": 54,
+    "line": 51,
+    "codeStart": 55,
     "code": "var STORAGE_UPLOAD_BASE_URL = 'https://www.googleapis.com/upload/storage/v1/b';",
     "ctx": {
       "type": "declaration",
@@ -224,8 +224,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 56,
-    "codeStart": 64
+    "line": 57,
+    "codeStart": 65
   },
   {
     "tags": [
@@ -250,8 +250,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 64,
-    "codeStart": 71,
+    "line": 65,
+    "codeStart": 72,
     "code": "function File(bucket, name, options) {\n  if (!name) {\n    throw Error('A file name must be specified.');\n  }\n\n  options = options || {};\n\n  this.bucket = bucket;\n  this.generation = parseInt(options.generation, 10);\n  this.makeReq_ = bucket.makeReq_.bind(bucket);\n  this.metadata = {};\n\n  Object.defineProperty(this, 'name', {\n    enumerable: true,\n    value: name\n  });",
     "ctx": {
       "type": "constructor",
@@ -282,8 +282,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 88,
-    "codeStart": 121,
+    "line": 89,
+    "codeStart": 122,
     "code": "this.acl = new Acl({\n  makeReq: this.makeReq_,\n  pathPrefix: '/o/' + encodeURIComponent(this.name) + '/acl'\n});\n}",
     "ctx": {
       "type": "property",
@@ -321,14 +321,56 @@
       },
       {
         "type": "param",
-        "string": "{function=} callback - The callback function.\n",
+        "string": "{function=} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>|<code>undefined</code>",
         "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:storage/file} callback.copiedFile - The copied File.",
+        "name": "callback.copiedFile",
+        "description": "<ul>\n<li>The copied File.</li>\n</ul>\n",
+        "types": [
+          "module:storage/file"
+        ],
+        "typesDescription": "module:<a href=\"module%3Astorage%2Ffile.html\">storage/file</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
         "nullable": false,
         "nonNullable": false,
         "variable": false
@@ -349,8 +391,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 127,
-    "codeStart": 193,
+    "line": 128,
+    "codeStart": 197,
     "code": "File.prototype.copy = function(destination, callback) {\n  var noDestinationError = new Error('Destination file should have a name.');\n\n  if (!destination) {\n    throw noDestinationError;\n  }\n\n  callback = callback || util.noop;\n\n  var destBucket;\n  var destName;\n  var newFile;\n\n  if (util.is(destination, 'string')) {\n    destBucket = this.bucket;\n    destName = destination;\n  } else if (destination.constructor &&\n        destination.constructor.name === 'Bucket') {\n    destBucket = destination;\n    destName = this.name;\n  } else if (destination instanceof File) {\n    destBucket = destination.bucket;\n    destName = destination.name;\n    newFile = destination;\n  } else {\n    throw noDestinationError;\n  }\n\n  var path = util.format('/o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {\n    srcName: encodeURIComponent(this.name),\n    destBucket: destBucket.name,\n    destName: encodeURIComponent(destName)\n  });\n\n  var query = {};\n\n  if (this.generation) {\n    query.sourceGeneration = this.generation;\n  }\n\n  this.makeReq_('POST', path, query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, newFile || destBucket.file(destName), resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -388,14 +430,56 @@
       },
       {
         "type": "param",
-        "string": "{function=} callback - The callback function.\n",
+        "string": "{function=} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>|<code>undefined</code>",
         "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:storage/file} callback.destinationFile - The destination File.",
+        "name": "callback.destinationFile",
+        "description": "<ul>\n<li>The destination File.</li>\n</ul>\n",
+        "types": [
+          "module:storage/file"
+        ],
+        "typesDescription": "module:<a href=\"module%3Astorage%2Ffile.html\">storage/file</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
         "nullable": false,
         "nonNullable": false,
         "variable": false
@@ -416,8 +500,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 243,
-    "codeStart": 320,
+    "line": 247,
+    "codeStart": 327,
     "code": "File.prototype.move = function(destination, callback) {\n  var self = this;\n\n  callback = callback || util.noop;\n\n  this.copy(destination, function(err, destinationFile, apiResponse) {\n    if (err) {\n      callback(err, null, apiResponse);\n      return;\n    }\n\n    self.delete(function(err, apiResponse) {\n      callback(err, destinationFile, apiResponse);\n    });\n  });\n};",
     "ctx": {
       "type": "method",
@@ -502,9 +586,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 337,
-    "codeStart": 411,
-    "code": "File.prototype.createReadStream = function(options) {\n  options = options || {};\n\n  var that = this;\n  var rangeRequest =\n    util.is(options.start, 'number') || util.is(options.end, 'number');\n  var tailRequest = options.end < 0;\n  var throughStream = streamEvents(through());\n\n  var requestStream;\n\n  var validations = ['crc32c', 'md5'];\n  var validation;\n\n  if (util.is(options.validation, 'string')) {\n    options.validation = options.validation.toLowerCase();\n\n    if (validations.indexOf(options.validation) > -1) {\n      validation = options.validation;\n    } else {\n      validation = 'all';\n    }\n  }\n\n  if (util.is(options.validation, 'undefined')) {\n    validation = 'all';\n  }\n\n  if (rangeRequest) {\n    validation = false;\n  }\n\n  var crc32c = validation === 'crc32c' || validation === 'all';\n  var md5 = validation === 'md5' || validation === 'all';\n\n  var remoteFilePath = util.format('https://storage.googleapis.com/{b}/{o}', {\n    b: this.bucket.name,\n    o: encodeURIComponent(this.name)\n  });\n\n  // End the stream, first emitting an error or complete event.\n  var endThroughStream = once(function(err, resp) {\n    if (err) {\n      throughStream.emit('error', err, resp);\n    } else {\n      throughStream.emit('complete', resp);\n    }\n\n    throughStream.destroy();\n  });\n\n  var endRequestStream = once(function() {\n    requestStream.abort();\n    requestStream.destroy();\n  });\n\n  createAuthorizedReq(remoteFilePath);\n\n  return throughStream;\n\n  // Authenticate the request, then pipe the remote API request to the stream\n  // returned to the user.\n  function createAuthorizedReq(uri) {\n    var reqOpts = {\n      uri: uri\n    };\n\n    if (that.generation) {\n      reqOpts.qs = {\n        generation: that.generation\n      };\n    }\n\n    if (rangeRequest) {\n      var start = util.is(options.start, 'number') ? options.start : '0';\n      var end = util.is(options.end, 'number') ? options.end : '';\n      reqOpts.headers = {\n        Range: 'bytes=' + start + '-' + end\n      };\n    }\n\n    if (tailRequest) {\n      reqOpts.headers = {\n        Range: 'bytes=' + options.end\n      };\n    }\n\n    that.bucket.storage.makeAuthorizedRequest_(reqOpts, {\n      onAuthorized: function(err, authorizedReqOpts) {\n        if (err) {\n          endThroughStream(err);\n          return;\n        }\n\n        // For data integrity, hash the contents of the stream as we receive it\n        // from the server.\n        var localCrcHash;\n        var localMd5Hash = crypto.createHash('md5');\n\n        requestStream = request(authorizedReqOpts);\n\n        requestStream\n          .on('error', function(err) {\n            endRequestStream();\n            endThroughStream(err);\n          })\n\n          .on('response', throughStream.emit.bind(throughStream, 'response'))\n\n          .on('data', function(chunk) {\n            if (crc32c) {\n              localCrcHash = crc.calculate(chunk, localCrcHash);\n            }\n\n            if (md5) {\n              localMd5Hash.update(chunk);\n            }\n          })\n\n          .on('complete', function(res) {\n            util.handleResp(null, res, res.body, function(err, resp) {\n              if (err) {\n                endThroughStream(err, resp);\n                return;\n              }\n\n              if (rangeRequest) {\n                // Range requests can't receive data integrity checks.\n                endThroughStream(null, resp);\n                return;\n              }\n\n              var failed = false;\n              var crcFail = true;\n              var md5Fail = true;\n\n              var hashes = {};\n              res.headers['x-goog-hash'].split(',').forEach(function(hash) {\n                var hashType = hash.split('=')[0];\n                hashes[hashType] = hash.substr(hash.indexOf('=') + 1);\n              });\n\n              var remoteMd5 = hashes.md5;\n              var remoteCrc = hashes.crc32c && hashes.crc32c.substr(4);\n\n              if (crc32c) {\n                crcFail =\n                  new Buffer([localCrcHash]).toString('base64') !== remoteCrc;\n                failed = crcFail;\n              }\n\n              if (md5) {\n                md5Fail = localMd5Hash.digest('base64') !== remoteMd5;\n                failed = md5Fail;\n              }\n\n              if (validation === 'all') {\n                failed = remoteMd5 ? md5Fail : crcFail;\n              }\n\n              if (failed) {\n                var mismatchError = new Error([\n                  'The downloaded data did not match the data from the server.',\n                  'To be sure the content is the same, you should download the',\n                  'file again.'\n                ].join(' '));\n                mismatchError.code = 'CONTENT_DOWNLOAD_MISMATCH';\n\n                endThroughStream(mismatchError, resp);\n              } else {\n                endThroughStream(null, resp);\n              }\n            });\n          })\n\n          .pipe(throughStream)\n\n          .on('error', endRequestStream);\n      }\n    });\n  }\n};",
+    "line": 344,
+    "codeStart": 418,
+    "code": "File.prototype.createReadStream = function(options) {\n  options = options || {};\n\n  var that = this;\n  var rangeRequest =\n    util.is(options.start, 'number') || util.is(options.end, 'number');\n  var tailRequest = options.end < 0;\n  var throughStream = streamEvents(through());\n\n  var validations = ['crc32c', 'md5'];\n  var validation;\n\n  // For data integrity, hash the contents of the stream as we receive it\n  // from the server.\n  var localCrcHash;\n  var localMd5Hash = crypto.createHash('md5');\n\n  if (util.is(options.validation, 'string')) {\n    options.validation = options.validation.toLowerCase();\n\n    if (validations.indexOf(options.validation) > -1) {\n      validation = options.validation;\n    } else {\n      validation = 'all';\n    }\n  }\n\n  if (util.is(options.validation, 'undefined')) {\n    validation = 'all';\n  }\n\n  if (rangeRequest) {\n    validation = false;\n  }\n\n  var crc32c = validation === 'crc32c' || validation === 'all';\n  var md5 = validation === 'md5' || validation === 'all';\n\n  var remoteFilePath = util.format('https://storage.googleapis.com/{b}/{o}', {\n    b: this.bucket.name,\n    o: encodeURIComponent(this.name)\n  });\n\n  // End the stream, first emitting an error or complete event.\n  var endThroughStream = once(function(err, resp) {\n    if (err) {\n      throughStream.emit('error', err, resp);\n    } else {\n      throughStream.emit('complete', resp);\n    }\n\n    throughStream.destroy();\n  });\n\n  makeAuthorizedReq(remoteFilePath);\n\n  // Calculate the hashes from the http.IncomingMessage response stream, which\n  // will return the bytes from the source without decompressing gzip'd content.\n  // The request stream will do the decompression so the user receives the\n  // expected content.\n  //\n  // incomingMessage's end event will always occur before request's complete\n  // event.\n  throughStream.on('response', function(incomingMessage) {\n    incomingMessage\n      .on('data', function(chunk) {\n        if (crc32c) {\n          localCrcHash = crc.calculate(chunk, localCrcHash);\n        }\n\n        if (md5) {\n          localMd5Hash.update(chunk);\n        }\n      })\n\n      .on('end', function() {\n        if (crc32c) {\n          localCrcHash = new Buffer([localCrcHash]).toString('base64');\n        }\n\n        if (md5) {\n          localMd5Hash = localMd5Hash.digest('base64');\n        }\n      });\n  });\n\n  return throughStream;\n\n  // Authenticate the request, then pipe the remote API request to the stream\n  // returned to the user.\n  function makeAuthorizedReq(uri) {\n    var reqOpts = {\n      uri: uri,\n      gzip: true\n    };\n\n    if (that.generation) {\n      reqOpts.qs = {\n        generation: that.generation\n      };\n    }\n\n    if (rangeRequest) {\n      var start = util.is(options.start, 'number') ? options.start : '0';\n      var end = util.is(options.end, 'number') ? options.end : '';\n      reqOpts.headers = {\n        Range: 'bytes=' + start + '-' + end\n      };\n    }\n\n    if (tailRequest) {\n      reqOpts.headers = {\n        Range: 'bytes=' + options.end\n      };\n    }\n\n    var requestStream = that.bucket.storage.makeAuthorizedRequest_(reqOpts);\n\n    requestStream\n      .on('error', endThroughStream)\n\n      .on('response', throughStream.emit.bind(throughStream, 'response'))\n\n      .on('complete', function(res) {\n        util.handleResp(null, res, null, function(err) {\n          if (err) {\n            endThroughStream(err);\n            return;\n          }\n\n          if (rangeRequest) {\n            // Range requests can't receive data integrity checks.\n            endThroughStream(null, res);\n            return;\n          }\n\n          var failed = false;\n          var crcFail = true;\n          var md5Fail = true;\n\n          var hashes = {};\n          res.headers['x-goog-hash'].split(',').forEach(function(hash) {\n            var hashType = hash.split('=')[0].trim();\n            hashes[hashType] = hash.substr(hash.indexOf('=') + 1);\n          });\n\n          var remoteMd5 = hashes.md5;\n          var remoteCrc = hashes.crc32c && hashes.crc32c.substr(4);\n\n          if (crc32c) {\n            crcFail = localCrcHash !== remoteCrc;\n            failed = crcFail;\n          }\n\n          if (md5) {\n            md5Fail = localMd5Hash !== remoteMd5;\n            failed = md5Fail;\n          }\n\n          if (validation === 'all') {\n            failed = remoteMd5 ? md5Fail : crcFail;\n          }\n\n          if (failed) {\n            var mismatchError = new Error([\n              'The downloaded data did not match the data from the server.',\n              'To be sure the content is the same, you should download the',\n              'file again.'\n            ].join(' '));\n            mismatchError.code = 'CONTENT_DOWNLOAD_MISMATCH';\n\n            endThroughStream(mismatchError, res);\n          } else {\n            endThroughStream(null, res);\n          }\n        });\n      })\n\n      .pipe(throughStream)\n\n      .on('error', function() {\n        requestStream.abort();\n        requestStream.destroy();\n      });\n  }\n};",
     "ctx": {
       "type": "method",
       "constructor": "File",
@@ -531,28 +615,42 @@
       },
       {
         "type": "param",
-        "string": "{object=} options.metadata - Set the metadata for this file.",
-        "name": "options.metadata",
-        "description": "<ul>\n<li>Set the metadata for this file.</li>\n</ul>\n",
+        "string": "{boolean} options.gzip - Automatically gzip the file. This will set\n    `options.metadata.contentEncoding` to `gzip`.",
+        "name": "options.gzip",
+        "description": "<ul>\n<li>Automatically gzip the file. This will set     <code>options.metadata.contentEncoding</code> to <code>gzip</code>.</li>\n</ul>\n",
         "types": [
-          "object"
+          "boolean"
         ],
-        "typesDescription": "<code>object</code>|<code>undefined</code>",
-        "optional": true,
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
         "nullable": false,
         "nonNullable": false,
         "variable": false
       },
       {
         "type": "param",
-        "string": "{boolean=} options.resumable - Force a resumable upload. NOTE: When\n    working with streams, the file format and size is unknown until it's\n    completely consumed. Because of this, it's best for you to be explicit\n    for what makes sense given your input. Read more about resumable uploads\n    [here](http://goo.gl/1JWqCF).",
+        "string": "{object} options.metadata - Set the metadata for this file.",
+        "name": "options.metadata",
+        "description": "<ul>\n<li>Set the metadata for this file.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.resumable - Force a resumable upload. NOTE: When\n    working with streams, the file format and size is unknown until it's\n    completely consumed. Because of this, it's best for you to be explicit\n    for what makes sense given your input. Read more about resumable uploads\n    [here](http://goo.gl/1JWqCF).",
         "name": "options.resumable",
         "description": "<ul>\n<li>Force a resumable upload. NOTE: When     working with streams, the file format and size is unknown until it&#39;s<br />  completely consumed. Because of this, it&#39;s best for you to be explicit<br />  for what makes sense given your input. Read more about resumable uploads<br />  <a href=\"http://goo.gl/1JWqCF\">here</a>.</li>\n</ul>\n",
         "types": [
           "boolean"
         ],
-        "typesDescription": "<code>boolean</code>|<code>undefined</code>",
-        "optional": true,
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
         "nullable": false,
         "nonNullable": false,
         "variable": false
@@ -574,8 +672,8 @@
       },
       {
         "type": "example",
-        "string": "//-\n// <h4>Uploading a File</h4>\n//\n// Now, consider a case where we want to upload a file to your bucket. You\n// have the option of using {module:storage/bucket#upload}, but that is just\n// a convenience method which will do the following.\n//-\nvar fs = require('fs');\nvar image = myBucket.file('image.png');\n\nfs.createReadStream('/Users/stephen/Photos/birthday-at-the-zoo/panda.jpg')\n  .pipe(image.createWriteStream())\n  .on('error', function(err) {})\n  .on('complete', function(metadata) {\n    // The file upload is complete.\n  });\n\n//-\n// <h4>Uploading a File with Metadata</h4>\n//\n// One last case you may run into is when you want to upload a file to your\n// bucket and set its metadata at the same time. Like above, you can use\n// {module:storage/bucket#upload} to do this, which is just a wrapper around\n// the following.\n//-\nvar fs = require('fs');\nvar image = myBucket.file('image.png');\n\nfs.createReadStream('/Users/stephen/Photos/birthday-at-the-zoo/panda.jpg')\n  .pipe(image.createWriteStream({\n    metadata: {\n      contentType: 'image/jpeg',\n      metadata: {\n        custom: 'metadata'\n      }\n    }\n  }))\n  .on('error', function(err) {});",
-        "html": "<p>//-<br />// <h4>Uploading a File</h4><br />//<br />// Now, consider a case where we want to upload a file to your bucket. You<br />// have the option of using {module:storage/bucket#upload}, but that is just<br />// a convenience method which will do the following.<br />//-<br />var fs = require(&#39;fs&#39;);<br />var image = myBucket.file(&#39;image.png&#39;);</p><p>fs.createReadStream(&#39;/Users/stephen/Photos/birthday-at-the-zoo/panda.jpg&#39;)<br />  .pipe(image.createWriteStream())<br />  .on(&#39;error&#39;, function(err) {})<br />  .on(&#39;complete&#39;, function(metadata) {<br />    // The file upload is complete.<br />  });</p><p>//-<br />// <h4>Uploading a File with Metadata</h4><br />//<br />// One last case you may run into is when you want to upload a file to your<br />// bucket and set its metadata at the same time. Like above, you can use<br />// {module:storage/bucket#upload} to do this, which is just a wrapper around<br />// the following.<br />//-<br />var fs = require(&#39;fs&#39;);<br />var image = myBucket.file(&#39;image.png&#39;);</p><p>fs.createReadStream(&#39;/Users/stephen/Photos/birthday-at-the-zoo/panda.jpg&#39;)<br />  .pipe(image.createWriteStream({<br />    metadata: {<br />      contentType: &#39;image/jpeg&#39;,<br />      metadata: {<br />        custom: &#39;metadata&#39;<br />      }<br />    }<br />  }))<br />  .on(&#39;error&#39;, function(err) {});</p>"
+        "string": "//-\n// <h4>Uploading a File</h4>\n//\n// Now, consider a case where we want to upload a file to your bucket. You\n// have the option of using {module:storage/bucket#upload}, but that is just\n// a convenience method which will do the following.\n//-\nvar fs = require('fs');\nvar image = myBucket.file('image.png');\n\nfs.createReadStream('/Users/stephen/Photos/birthday-at-the-zoo/panda.jpg')\n  .pipe(image.createWriteStream())\n  .on('error', function(err) {})\n  .on('complete', function(metadata) {\n    // The file upload is complete.\n  });\n\n//-\n// <h4>Uploading a File with gzip compression</h4>\n//-\nvar fs = require('fs');\nvar htmlFile = myBucket.file('index.html');\n\nfs.createReadStream('/Users/stephen/site/index.html')\n  .pipe(htmlFile.createWriteStream({ gzip: true }))\n  .on('error', function(err) {})\n  .on('complete', function(metadata) {\n    // The file upload is complete.\n  });\n\n//-\n// Downloading the file with `createReadStream` will automatically decode the\n// file.\n//-\n\n//-\n// <h4>Uploading a File with Metadata</h4>\n//\n// One last case you may run into is when you want to upload a file to your\n// bucket and set its metadata at the same time. Like above, you can use\n// {module:storage/bucket#upload} to do this, which is just a wrapper around\n// the following.\n//-\nvar fs = require('fs');\nvar image = myBucket.file('image.png');\n\nfs.createReadStream('/Users/stephen/Photos/birthday-at-the-zoo/panda.jpg')\n  .pipe(image.createWriteStream({\n    metadata: {\n      contentType: 'image/jpeg',\n      metadata: {\n        custom: 'metadata'\n      }\n    }\n  }))\n  .on('error', function(err) {})\n  .on('complete', function(metadata) {\n    // The file upload is complete.\n  });",
+        "html": "<p>//-<br />// <h4>Uploading a File</h4><br />//<br />// Now, consider a case where we want to upload a file to your bucket. You<br />// have the option of using {module:storage/bucket#upload}, but that is just<br />// a convenience method which will do the following.<br />//-<br />var fs = require(&#39;fs&#39;);<br />var image = myBucket.file(&#39;image.png&#39;);</p><p>fs.createReadStream(&#39;/Users/stephen/Photos/birthday-at-the-zoo/panda.jpg&#39;)<br />  .pipe(image.createWriteStream())<br />  .on(&#39;error&#39;, function(err) {})<br />  .on(&#39;complete&#39;, function(metadata) {<br />    // The file upload is complete.<br />  });</p><p>//-<br />// <h4>Uploading a File with gzip compression</h4><br />//-<br />var fs = require(&#39;fs&#39;);<br />var htmlFile = myBucket.file(&#39;index.html&#39;);</p><p>fs.createReadStream(&#39;/Users/stephen/site/index.html&#39;)<br />  .pipe(htmlFile.createWriteStream({ gzip: true }))<br />  .on(&#39;error&#39;, function(err) {})<br />  .on(&#39;complete&#39;, function(metadata) {<br />    // The file upload is complete.<br />  });</p><p>//-<br />// Downloading the file with <code>createReadStream</code> will automatically decode the<br />// file.<br />//-</p><p>//-<br />// <h4>Uploading a File with Metadata</h4><br />//<br />// One last case you may run into is when you want to upload a file to your<br />// bucket and set its metadata at the same time. Like above, you can use<br />// {module:storage/bucket#upload} to do this, which is just a wrapper around<br />// the following.<br />//-<br />var fs = require(&#39;fs&#39;);<br />var image = myBucket.file(&#39;image.png&#39;);</p><p>fs.createReadStream(&#39;/Users/stephen/Photos/birthday-at-the-zoo/panda.jpg&#39;)<br />  .pipe(image.createWriteStream({<br />    metadata: {<br />      contentType: &#39;image/jpeg&#39;,<br />      metadata: {<br />        custom: &#39;metadata&#39;<br />      }<br />    }<br />  }))<br />  .on(&#39;error&#39;, function(err) {})<br />  .on(&#39;complete&#39;, function(metadata) {<br />    // The file upload is complete.<br />  });</p>"
       }
     ],
     "description": {
@@ -588,9 +686,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 594,
-    "codeStart": 656,
-    "code": "File.prototype.createWriteStream = function(options) {\n  options = options || {};\n\n  var that = this;\n  var metadata = options.metadata || {};\n  var validations = ['crc32c', 'md5'];\n  var validation;\n\n  if (util.is(options.validation, 'string')) {\n    options.validation = options.validation.toLowerCase();\n\n    if (validations.indexOf(options.validation) > -1) {\n      validation = options.validation;\n    } else {\n      validation = 'all';\n    }\n  }\n\n  if (util.is(options.validation, 'undefined')) {\n    validation = 'all';\n  }\n\n  var crc32c = validation === 'crc32c' || validation === 'all';\n  var md5 = validation === 'md5' || validation === 'all';\n\n  // Collect data as it comes in to store in a hash. This is compared to the\n  // checksum value on the returned metadata from the API.\n  var localCrc32cHash;\n  var localMd5Hash = crypto.createHash('md5');\n\n  var dup = streamEvents(duplexify());\n\n  var throughStream = through(function(chunk, enc, next) {\n    if (crc32c) {\n      localCrc32cHash = crc.calculate(chunk, localCrc32cHash);\n    }\n\n    if (md5) {\n      localMd5Hash.update(chunk);\n    }\n\n    this.push(chunk);\n    next();\n  });\n\n  throughStream\n    .on('end', function() {\n      if (crc32c) {\n        localCrc32cHash = new Buffer([localCrc32cHash]).toString('base64');\n      }\n\n      if (md5) {\n        localMd5Hash = localMd5Hash.digest('base64');\n      }\n    })\n\n    .pipe(dup)\n\n    // Wait until we've received data to determine what upload technique to use.\n    .once('writing', function() {\n      if (util.is(options.resumable, 'boolean') && !options.resumable) {\n        that.startSimpleUpload_(dup, metadata);\n      } else {\n        that.startResumableUpload_(dup, metadata);\n      }\n    })\n\n    // Catch any errors from the writable stream and patch them upstream.\n    .on('error', function(err) {\n      throughStream.emit('error', err);\n      throughStream.end();\n    })\n\n    // Compare our hashed version vs the completed upload's version.\n    .on('complete', function(metadata) {\n      var failed = false;\n\n      // We must remove the first four bytes from the returned checksum.\n      // http://stackoverflow.com/questions/25096737/\n      //   base64-encoding-of-crc32c-long-value\n\n      if (validation === 'all') {\n        if (metadata.md5Hash) {\n          failed = localMd5Hash !== metadata.md5Hash;\n        } else if (metadata.crc32c) {\n          failed = localCrc32cHash !== metadata.crc32c.substr(4);\n        }\n      } else if (md5) {\n        failed = localMd5Hash !== metadata.md5Hash;\n      } else if (crc32c) {\n        failed = localCrc32cHash !== metadata.crc32c.substr(4);\n      }\n\n      if (failed) {\n        that.delete(function(err) {\n          var code;\n          var message;\n\n          if (err) {\n            code = 'FILE_NO_UPLOAD_DELETE';\n            message = [\n              'The uploaded data did not match the data from the server. As a',\n              'precaution, we attempted to delete the file, but it was not',\n              'successful. To be sure the content is the same, you should try',\n              'removing the file manually, then uploading the file again.',\n              '\\n\\nThe delete attempt failed with this message:',\n              '\\n\\n  ' + err.message\n            ].join(' ');\n          } else {\n            code = 'FILE_NO_UPLOAD';\n            message = [\n              'The uploaded data did not match the data from the server. As a',\n              'precaution, the file has been deleted. To be sure the content',\n              'is the same, you should try uploading the file again.'\n            ].join(' ');\n          }\n\n          var error = new Error(message);\n          error.code = code;\n          error.errors = [err];\n\n          throughStream.emit('error', error);\n        });\n      } else {\n        throughStream.emit('complete', metadata);\n      }\n\n      throughStream.end();\n    });\n\n  return throughStream;\n};",
+    "line": 605,
+    "codeStart": 690,
+    "code": "File.prototype.createWriteStream = function(options) {\n  options = options || {};\n\n  var that = this;\n\n  var gzip = options.gzip;\n\n  var metadata = options.metadata || {};\n  if (gzip) {\n    metadata.contentEncoding = 'gzip';\n  }\n\n  var validations = ['crc32c', 'md5'];\n  var validation;\n\n  if (util.is(options.validation, 'string')) {\n    options.validation = options.validation.toLowerCase();\n\n    if (validations.indexOf(options.validation) > -1) {\n      validation = options.validation;\n    } else {\n      validation = 'all';\n    }\n  }\n\n  if (util.is(options.validation, 'undefined')) {\n    validation = 'all';\n  }\n\n  var crc32c = validation === 'crc32c' || validation === 'all';\n  var md5 = validation === 'md5' || validation === 'all';\n\n  // Collect data as it comes in to store in a hash. This is compared to the\n  // checksum value on the returned metadata from the API.\n  var localCrc32cHash;\n  var localMd5Hash = crypto.createHash('md5');\n\n  var writableStream = streamEvents(duplexify());\n\n  var throughStream = through();\n\n  var validationStream = through(function(chunk, enc, next) {\n    if (crc32c) {\n      localCrc32cHash = crc.calculate(chunk, localCrc32cHash);\n    }\n\n    if (md5) {\n      localMd5Hash.update(chunk);\n    }\n\n    this.push(chunk);\n    next();\n  });\n\n  validationStream.on('end', function() {\n    if (crc32c) {\n      localCrc32cHash = new Buffer([localCrc32cHash]).toString('base64');\n    }\n\n    if (md5) {\n      localMd5Hash = localMd5Hash.digest('base64');\n    }\n  });\n\n  throughStream\n\n    .pipe(gzip ? zlib.createGzip() : through())\n\n    .pipe(validationStream)\n\n    .pipe(writableStream)\n\n    // Wait until we've received data to determine what upload technique to use.\n    .once('writing', function() {\n      if (options.resumable === false) {\n        that.startSimpleUpload_(writableStream, metadata);\n      } else {\n        that.startResumableUpload_(writableStream, metadata);\n      }\n    })\n\n    // Catch any errors from the writable stream and patch them upstream.\n    .on('error', function(err) {\n      throughStream.emit('error', err);\n      throughStream.end();\n    })\n\n    // Compare our hashed version vs the completed upload's version.\n    .on('complete', function(metadata) {\n      var failed = false;\n\n      // We must remove the first four bytes from the returned checksum.\n      // http://stackoverflow.com/questions/25096737/\n      //   base64-encoding-of-crc32c-long-value\n\n      if (validation === 'all') {\n        if (metadata.md5Hash) {\n          failed = localMd5Hash !== metadata.md5Hash;\n        } else if (metadata.crc32c) {\n          failed = localCrc32cHash !== metadata.crc32c.substr(4);\n        }\n      } else if (md5) {\n        failed = localMd5Hash !== metadata.md5Hash;\n      } else if (crc32c) {\n        failed = localCrc32cHash !== metadata.crc32c.substr(4);\n      }\n\n      if (failed) {\n        that.delete(function(err) {\n          var code;\n          var message;\n\n          if (err) {\n            code = 'FILE_NO_UPLOAD_DELETE';\n            message = [\n              'The uploaded data did not match the data from the server. As a',\n              'precaution, we attempted to delete the file, but it was not',\n              'successful. To be sure the content is the same, you should try',\n              'removing the file manually, then uploading the file again.',\n              '\\n\\nThe delete attempt failed with this message:',\n              '\\n\\n  ' + err.message\n            ].join(' ');\n          } else {\n            code = 'FILE_NO_UPLOAD';\n            message = [\n              'The uploaded data did not match the data from the server. As a',\n              'precaution, the file has been deleted. To be sure the content',\n              'is the same, you should try uploading the file again.'\n            ].join(' ');\n          }\n\n          var error = new Error(message);\n          error.code = code;\n          error.errors = [err];\n\n          throughStream.emit('error', error);\n        });\n      } else {\n        throughStream.emit('complete', metadata);\n      }\n\n      throughStream.end();\n    });\n\n  return throughStream;\n};",
     "ctx": {
       "type": "method",
       "constructor": "File",
@@ -603,14 +701,42 @@
     "tags": [
       {
         "type": "param",
-        "string": "{function=} callback - The callback function.\n",
+        "string": "{function=} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>|<code>undefined</code>",
         "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
         "nullable": false,
         "nonNullable": false,
         "variable": false
@@ -631,8 +757,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 789,
-    "codeStart": 797,
+    "line": 837,
+    "codeStart": 847,
     "code": "File.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n\n  var path = '/o/' + encodeURIComponent(this.name);\n\n  var query = {};\n\n  if (this.generation) {\n    query.generation = this.generation;\n  }\n\n  this.makeReq_('DELETE', path, query, null, function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    callback(null, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -674,13 +800,41 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{buffer} callback.contents - The contents of a File.\n",
+        "name": "callback.contents",
+        "description": "<ul>\n<li>The contents of a File. </li>\n</ul>\n",
+        "types": [
+          "buffer"
+        ],
+        "typesDescription": "<a href=\"buffer.html\">buffer</a>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -702,8 +856,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 818,
-    "codeStart": 841,
+    "line": 868,
+    "codeStart": 893,
     "code": "File.prototype.download = function(options, callback) {\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = {};\n  }\n\n  callback = once(callback);\n\n  var destination = options.destination;\n  delete options.destination;\n\n  var fileStream = this.createReadStream(options);\n\n  if (destination) {\n    fileStream\n      .on('error', callback)\n      .pipe(fs.createWriteStream(destination))\n      .on('error', callback)\n      .on('finish', callback);\n  } else {\n    var fileContents = new Buffer('');\n\n    fileStream\n      .on('error', callback)\n      .on('data', function(chunk) {\n        fileContents = Buffer.concat([fileContents, chunk]);\n      })\n      .on('complete', function() {\n        callback(null, fileContents);\n      });\n  }\n};",
     "ctx": {
       "type": "method",
@@ -717,14 +871,56 @@
     "tags": [
       {
         "type": "param",
-        "string": "{function=} callback - The callback function.\n",
+        "string": "{function=} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>|<code>undefined</code>",
         "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.metadata - The File's metadata.",
+        "name": "callback.metadata",
+        "description": "<ul>\n<li>The File&#39;s metadata.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
         "nullable": false,
         "nonNullable": false,
         "variable": false
@@ -745,8 +941,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 874,
-    "codeStart": 882,
+    "line": 926,
+    "codeStart": 937,
     "code": "File.prototype.getMetadata = function(callback) {\n  var self = this;\n  callback = callback || util.noop;\n\n  var path = '/o/' + encodeURIComponent(this.name);\n\n  var query = {};\n\n  if (this.generation) {\n    query.generation = this.generation;\n  }\n\n  this.makeReq_('GET', path, query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.metadata = resp;\n    callback(null, self.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -913,13 +1109,55 @@
       },
       {
         "type": "param",
-        "string": "{number} options.contentLengthRange.max - Maximum value for the\n    request's content length.\n",
+        "string": "{number} options.contentLengthRange.max - Maximum value for the\n    request's content length.",
         "name": "options.contentLengthRange.max",
         "description": "<ul>\n<li>Maximum value for the     request&#39;s content length.</li>\n</ul>\n",
         "types": [
           "number"
         ],
         "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.policy - The document policy.\n",
+        "name": "callback.policy",
+        "description": "<ul>\n<li>The document policy. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -941,8 +1179,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 905,
-    "codeStart": 955,
+    "line": 960,
+    "codeStart": 1013,
     "code": "File.prototype.getSignedPolicy = function(options, callback) {\n  if (options.expiration < Math.floor(Date.now() / 1000)) {\n    throw new Error('An expiration date cannot be in the past.');\n  }\n\n  var expirationString = new Date(options.expiration).toISOString();\n  var conditions = [\n    ['eq', '$key', this.name],\n    {\n      bucket: this.bucket.name\n    }\n  ];\n\n  if (util.is(options.equals, 'array')) {\n    if (!util.is(options.equals[0], 'array')) {\n      options.equals = [options.equals];\n    }\n    options.equals.forEach(function(condition) {\n      if (!util.is(condition, 'array') || condition.length !== 2) {\n        throw new Error('Equals condition must be an array of 2 elements.');\n      }\n      conditions.push(['eq', condition[0], condition[1]]);\n    });\n  }\n\n  if (util.is(options.startsWith, 'array')) {\n    if (!util.is(options.startsWith[0], 'array')) {\n      options.startsWith = [options.startsWith];\n    }\n    options.startsWith.forEach(function(condition) {\n      if (!util.is(condition, 'array') || condition.length !== 2) {\n        throw new Error('StartsWith condition must be an array of 2 elements.');\n      }\n      conditions.push(['starts-with', condition[0], condition[1]]);\n    });\n  }\n\n  if (options.acl) {\n    conditions.push({\n      acl: options.acl\n    });\n  }\n\n  if (options.successRedirect) {\n    conditions.push({\n      success_action_redirect: options.successRedirect\n    });\n  }\n\n  if (options.successStatus) {\n    conditions.push({\n      success_action_status: options.successStatus\n    });\n  }\n\n  if (options.contentLengthRange) {\n    var min = options.contentLengthRange.min;\n    var max = options.contentLengthRange.max;\n    if (!util.is(min, 'number') || !util.is(max, 'number')) {\n      throw new Error('ContentLengthRange must have numeric min & max fields.');\n    }\n    conditions.push(['content-length-range', min, max]);\n  }\n\n  var policy = {\n    expiration: expirationString,\n    conditions: conditions\n  };\n\n  var makeAuthorizedRequest_ = this.bucket.storage.makeAuthorizedRequest_;\n\n  makeAuthorizedRequest_.getCredentials(function(err, credentials) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var sign = crypto.createSign('RSA-SHA256');\n    var policyString = JSON.stringify(policy);\n    var policyBase64 = new Buffer(policyString).toString('base64');\n\n    sign.update(policyBase64);\n\n    var signature = sign.sign(credentials.private_key, 'base64');\n\n    callback(null, {\n      string: policyString,\n      base64: policyBase64,\n      signature: signature\n    });\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1090,14 +1328,42 @@
       },
       {
         "type": "param",
-        "string": "{function=} callback - The callback function.\n",
+        "string": "{function=} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>|<code>undefined</code>",
         "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} callback.url - The signed URL.\n",
+        "name": "callback.url",
+        "description": "<ul>\n<li>The signed URL. </li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
         "nullable": false,
         "nonNullable": false,
         "variable": false
@@ -1118,8 +1384,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1048,
-    "codeStart": 1083,
+    "line": 1106,
+    "codeStart": 1143,
     "code": "File.prototype.getSignedUrl = function(options, callback) {\n  if (options.expires < Math.floor(Date.now() / 1000)) {\n    throw new Error('An expiration date cannot be in the past.');\n  }\n\n  options.action = {\n    read: 'GET',\n    write: 'PUT',\n    delete: 'DELETE'\n  }[options.action];\n\n  var name = encodeURIComponent(this.name);\n\n  options.resource = '/' + this.bucket.name + '/' + name;\n\n  var makeAuthorizedRequest_ = this.bucket.storage.makeAuthorizedRequest_;\n\n  makeAuthorizedRequest_.getCredentials(function(err, credentials) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var sign = crypto.createSign('RSA-SHA256');\n    sign.update([\n      options.action,\n      (options.contentMd5 || ''),\n      (options.contentType || ''),\n      options.expires,\n      (options.extensionHeaders || '') + options.resource\n    ].join('\\n'));\n    var signature = sign.sign(credentials.private_key, 'base64');\n\n    var responseContentType = '';\n    if (util.is(options.responseType, 'string')) {\n      responseContentType =\n        '&response-content-type=' +\n        encodeURIComponent(options.responseType);\n    }\n\n    var responseContentDisposition = '';\n    if (util.is(options.promptSaveAs, 'string')) {\n      responseContentDisposition =\n        '&response-content-disposition=attachment; filename=\"' +\n        encodeURIComponent(options.promptSaveAs) + '\"';\n    }\n    if (util.is(options.responseDisposition, 'string')) {\n      responseContentDisposition =\n        '&response-content-disposition=' +\n        encodeURIComponent(options.responseDisposition);\n    }\n\n    callback(null, [\n      'https://storage.googleapis.com' + options.resource,\n      '?GoogleAccessId=' + credentials.client_email,\n      '&Expires=' + options.expires,\n      '&Signature=' + encodeURIComponent(signature),\n      responseContentType,\n      responseContentDisposition\n    ].join(''));\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1147,14 +1413,56 @@
       },
       {
         "type": "param",
-        "string": "{function=} callback - The callback function.\n",
+        "string": "{function=} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>|<code>undefined</code>",
         "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.metadata - The File's metadata.",
+        "name": "callback.metadata",
+        "description": "<ul>\n<li>The File&#39;s metadata.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
         "nullable": false,
         "nonNullable": false,
         "variable": false
@@ -1175,8 +1483,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1146,
-    "codeStart": 1180,
+    "line": 1206,
+    "codeStart": 1243,
     "code": "File.prototype.setMetadata = function(metadata, callback) {\n  callback = callback || util.noop;\n\n  var that = this;\n  var path = '/o/' + encodeURIComponent(this.name);\n  var query = {};\n\n  if (this.generation) {\n    query.generation = this.generation;\n  }\n\n  this.makeReq_('PATCH', path, query, metadata, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1218,15 +1526,29 @@
       },
       {
         "type": "param",
-        "string": "{function=} callback - The callback function.\n",
+        "string": "{function=} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>|<code>undefined</code>",
         "optional": true,
         "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request\n",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request </li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
         "nonNullable": false,
         "variable": false
       },
@@ -1246,9 +1568,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1203,
-    "codeStart": 1224,
-    "code": "File.prototype.makePrivate = function(options, callback) {\n  var that = this;\n  if (util.is(options, 'function')) {\n      callback = options;\n      options = {};\n  }\n  var path = '/o/' + encodeURIComponent(this.name);\n  var query = { predefinedAcl: options.strict ? 'private' : 'projectPrivate' };\n\n  // You aren't allowed to set both predefinedAcl & acl properties on a file, so\n  // acl must explicitly be nullified, destroying all previous acls on the file.\n  var metadata = { acl: null };\n\n  callback = callback || util.noop;\n\n  this.makeReq_('PATCH', path, query, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null);\n  });\n};",
+    "line": 1266,
+    "codeStart": 1288,
+    "code": "File.prototype.makePrivate = function(options, callback) {\n  var that = this;\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = {};\n  }\n  var path = '/o/' + encodeURIComponent(this.name);\n  var query = { predefinedAcl: options.strict ? 'private' : 'projectPrivate' };\n\n  // You aren't allowed to set both predefinedAcl & acl properties on a file, so\n  // acl must explicitly be nullified, destroying all previous acls on the file.\n  var metadata = { acl: null };\n\n  callback = callback || util.noop;\n\n  this.makeReq_('PATCH', path, query, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "File",
@@ -1261,14 +1583,42 @@
     "tags": [
       {
         "type": "param",
-        "string": "{function=} callback - The callback function.\n",
+        "string": "{function=} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>|<code>undefined</code>",
         "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
         "nullable": false,
         "nonNullable": false,
         "variable": false
@@ -1289,8 +1639,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1251,
-    "codeStart": 1259,
+    "line": 1315,
+    "codeStart": 1325,
     "code": "File.prototype.makePublic = function(callback) {\n  callback = callback || util.noop;\n\n  this.acl.add({\n    entity: 'allUsers',\n    role: 'READER'\n  }, function(err, resp) {\n    callback(err, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1347,8 +1697,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1270,
-    "codeStart": 1304,
+    "line": 1336,
+    "codeStart": 1370,
     "code": "File.prototype.startResumableUpload_ = function(stream, metadata) {\n  metadata = metadata || {};\n\n  var that = this;\n  var configStore = new ConfigStore('gcloud-node');\n  var config = configStore.get(that.name);\n  var makeAuthorizedRequest = that.bucket.storage.makeAuthorizedRequest_;\n\n  var numBytesWritten;\n  var resumableUri;\n  var RETRY_LIMIT = 5;\n  var retries = 0;\n\n  // This is used to hold all data coming in from the user's readable stream. If\n  // we need to abort a resumable upload to start a new one, this will hold the\n  // data until we're ready again.\n  var bufferStream = through();\n\n  if (config && config.uri) {\n    resumableUri = config.uri;\n    resumeUpload();\n  } else {\n    startUpload();\n  }\n\n  // Begin a new resumable upload. Send the metadata and cache the URI returned.\n  function startUpload() {\n    var headers = {};\n\n    if (metadata.contentType) {\n      headers['X-Upload-Content-Type'] = metadata.contentType;\n    }\n\n    var reqOpts = {\n      method: 'POST',\n      uri: util.format('{base}/{bucket}/o', {\n        base: STORAGE_UPLOAD_BASE_URL,\n        bucket: that.bucket.name\n      }),\n      qs: {\n        name: that.name,\n        uploadType: 'resumable'\n      },\n      headers: headers,\n      json: metadata\n    };\n\n    if (that.generation) {\n      reqOpts.qs.ifGenerationMatch = that.generation;\n    }\n\n    makeAuthorizedRequest(reqOpts, function(err, res, body) {\n      if (err) {\n        handleError(err);\n        return;\n      }\n\n      numBytesWritten = -1;\n      resumableUri = body.headers.location;\n\n      configStore.set(that.name, {\n        uri: resumableUri\n      });\n\n      resumeUpload();\n    });\n  }\n\n  // Given a byte offset, create an authorized request to the resumable URI. If\n  // resuming an upload, we first determine the last byte written, then create\n  // the authorized request.\n  function resumeUpload() {\n    if (util.is(numBytesWritten, 'number')) {\n      createUploadRequest(numBytesWritten);\n    } else {\n      getNumBytesWritten(createUploadRequest);\n    }\n\n    function createUploadRequest(offset) {\n      makeAuthorizedRequest({\n        method: 'PUT',\n        uri: resumableUri\n      }, {\n        onAuthorized: function(err, reqOpts) {\n          if (err) {\n            handleError(err);\n            return;\n          }\n\n          sendFile(reqOpts, offset + 1);\n        }\n      });\n    }\n  }\n\n  // Given an authorized request and a byte offset, begin sending data to the\n  // resumable URI from where the upload last left off.\n  function sendFile(reqOpts, offset) {\n    reqOpts.headers['Content-Range'] = 'bytes ' + offset + '-*/*';\n\n    var bytesWritten = 0;\n\n    var offsetStream = through(function(chunk, enc, next) {\n      // Determine if this is the same content uploaded previously. We do this\n      // by caching a slice of the first chunk, then comparing it with the first\n      // byte of incoming data.\n      if (bytesWritten === 0) {\n        var cachedFirstChunk = config && config.firstChunk;\n        var firstChunk = chunk.slice(0, 16).valueOf();\n\n        if (!cachedFirstChunk) {\n          // This is a new upload. Cache the first chunk.\n          configStore.set(that.name, {\n            uri: reqOpts.uri,\n            firstChunk: firstChunk\n          });\n        } else {\n          // This is a continuation of an upload. Make sure the first bytes are\n          // the same.\n          cachedFirstChunk = new Buffer(cachedFirstChunk);\n          firstChunk = new Buffer(firstChunk);\n\n          if (!bufferEqual(cachedFirstChunk, firstChunk)) {\n            // The data being uploaded now is different than the original data.\n            // Give the chunk back to the stream and create a new upload stream.\n            bufferStream.unshift(chunk);\n            bufferStream.unpipe(this);\n\n            configStore.del(that.name);\n\n            startUpload();\n            return;\n          }\n        }\n      }\n\n      var length = chunk.length;\n\n      if (util.is(chunk, 'string')) {\n        length = Buffer.byteLength(chunk, enc);\n      }\n\n      if (bytesWritten < offset) {\n        chunk = chunk.slice(offset - bytesWritten);\n      }\n\n      bytesWritten += length;\n\n      // Only push data to the request stream from the byte after the one we\n      // left off on.\n      if (bytesWritten > offset) {\n        this.push(chunk);\n      }\n\n      next();\n    });\n\n    var writeStream = request(reqOpts);\n    writeStream.callback = util.noop;\n\n    writeStream.on('error', function(err) {\n      handleError(err);\n    });\n\n    writeStream.on('complete', function(res) {\n      util.handleResp(null, res, res.body, function(err, data) {\n        if (err) {\n          handleError(err);\n          return;\n        }\n\n        that.metadata = data;\n\n        stream.emit('complete', that.metadata);\n\n        configStore.del(that.name);\n      });\n    });\n\n    bufferStream.pipe(offsetStream).pipe(writeStream);\n    stream.setWritable(bufferStream);\n  }\n\n  // If an upload to this file has previously started, this will return the last\n  // byte written to it.\n  function getNumBytesWritten(callback) {\n    makeAuthorizedRequest({\n      method: 'PUT',\n      uri: resumableUri,\n      headers: {\n        'Content-Length': 0,\n        'Content-Range': 'bytes */*'\n      }\n    }, function(err) {\n      var RESUME_INCOMPLETE_STATUS = 308;\n\n      if (err && err.code === RESUME_INCOMPLETE_STATUS) {\n        // headers.range format: ##-## (e.g. 0-4915200)\n        if (err.response.headers.range) {\n          callback(parseInt(err.response.headers.range.split('-')[1]));\n          return;\n        }\n      }\n\n      // Start from the first byte.\n      callback(-1);\n    });\n  }\n\n  // Handle an error from API calls following the recommended best practices:\n  // http://goo.gl/AajKku\n  function handleError(err) {\n    if (err.code === 404 && retries < RETRY_LIMIT) {\n      retries++;\n      startUpload();\n      return;\n    }\n\n    if (err.code > 499 && err.code < 600 && retries < RETRY_LIMIT) {\n      // Exponential backoff: http://goo.gl/CifIFy\n      var randomMs = Math.round(Math.random() * 1000);\n      var waitTime = Math.pow(2, retries) * 1000 + randomMs;\n\n      retries++;\n\n      // Reset `numBytesWritten` so we update this value by pinging the API.\n      numBytesWritten = null;\n\n      setTimeout(resumeUpload, waitTime);\n      return;\n    }\n\n    stream.emit('error', err);\n  }\n};",
     "ctx": {
       "type": "method",
@@ -1405,8 +1755,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1540,
-    "codeStart": 1550,
+    "line": 1606,
+    "codeStart": 1616,
     "code": "File.prototype.startSimpleUpload_ = function(stream, metadata) {\n  var that = this;\n\n  var reqOpts = {\n    qs: {\n      name: that.name\n    },\n    uri: util.format('{base}/{bucket}/o', {\n      base: STORAGE_UPLOAD_BASE_URL,\n      bucket: that.bucket.name\n    })\n  };\n\n  if (this.generation) {\n    reqOpts.qs.ifGenerationMatch = this.generation;\n  }\n\n  util.makeWritableStream(stream, {\n    makeAuthorizedRequest: that.bucket.storage.makeAuthorizedRequest_,\n    metadata: metadata,\n    request: reqOpts\n  }, function(data) {\n    that.metadata = data;\n\n    stream.emit('complete', data);\n    stream.end();\n  });\n};\n\nmodule.exports = File;",
     "ctx": {
       "type": "method",

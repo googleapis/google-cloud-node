@@ -620,15 +620,57 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
-        "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "string": "{module:datastore/transaction} fn.transaction - The Transaction.",
+        "name": "fn.transaction",
+        "description": "<ul>\n<li>The Transaction.</li>\n</ul>\n",
+        "types": [
+          "module:datastore/transaction"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adatastore%2Ftransaction.html\">datastore/transaction</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} fn.done - Function used to commit changes.",
+        "name": "fn.done",
+        "description": "<ul>\n<li>Function used to commit changes.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>",
         "optional": false,
         "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request\n\n",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request </li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
         "nonNullable": false,
         "variable": false
       },
@@ -649,7 +691,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 215,
-    "codeStart": 241,
+    "codeStart": 245,
     "code": "Dataset.prototype.runInTransaction = function(fn, callback) {\n  var newTransaction = this.createTransaction_();\n\n  newTransaction.begin_(function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    fn(newTransaction, newTransaction.commit_.bind(newTransaction, callback));\n  });\n};",
     "ctx": {
       "type": "method",
@@ -692,8 +734,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 254,
-    "codeStart": 260,
+    "line": 258,
+    "codeStart": 264,
     "code": "Dataset.prototype.createTransaction_ = function() {\n  return new Transaction(this, this.projectId);\n};\n\nmodule.exports = Dataset;",
     "ctx": {
       "type": "method",

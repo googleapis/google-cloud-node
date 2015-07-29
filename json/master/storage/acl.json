@@ -318,13 +318,55 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.aclObject - The Acl Object.",
+        "name": "callback.aclObject",
+        "description": "<ul>\n<li>The Acl Object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -352,7 +394,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 203,
-    "codeStart": 233,
+    "codeStart": 236,
     "code": "Acl.prototype.add = function(options, callback) {\n  var that = this;\n\n  var body = {\n    entity: options.entity,\n    role: options.role.toUpperCase()\n  };\n\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  this.makeReq_('POST', '', query, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, that.makeAclObject_(resp), resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -408,13 +450,41 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -441,8 +511,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 259,
-    "codeStart": 283,
+    "line": 262,
+    "codeStart": 288,
     "code": "Acl.prototype.delete = function(options, callback) {\n  var path = '/' + encodeURIComponent(options.entity);\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  this.makeReq_('DELETE', path, query, null, callback);\n};",
     "ctx": {
       "type": "method",
@@ -499,13 +569,56 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object|array} callback.aclObject - Single or Array of Acl Objects.",
+        "name": "callback.aclObject",
+        "description": "<ul>\n<li>Single or Array of Acl Objects.</li>\n</ul>\n",
+        "types": [
+          "object",
+          "array"
+        ],
+        "typesDescription": "<code>object</code>|<code>array</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -532,8 +645,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 296,
-    "codeStart": 336,
+    "line": 301,
+    "codeStart": 344,
     "code": "Acl.prototype.get = function(options, callback) {\n  var that = this;\n  var path = '';\n  var query = null;\n\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = null;\n  } else {\n    path = '/' + encodeURIComponent(options.entity);\n\n    if (options.generation) {\n      query = {\n        generation: options.generation\n      };\n    }\n  }\n\n  this.makeReq_('GET', path, query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var results = resp;\n\n    if (resp.items) {\n      results = (resp.items || []).map(that.makeAclObject_);\n    } else {\n      results = that.makeAclObject_(results);\n    }\n\n    callback(null, results, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -603,13 +716,55 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.aclObject - The updated Acl Object.",
+        "name": "callback.aclObject",
+        "description": "<ul>\n<li>The updated Acl Object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -622,8 +777,8 @@
       },
       {
         "type": "example",
-        "string": "var gcs = gcloud.storage({\n  projectId: 'grape-spaceship-123'\n});\n\nmyBucket.acl.update({\n  entity: 'user-useremail@example.com',\n  role: gcs.acl.WRITER_ROLE\n}, function(err, apiResponse) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.update({\n  entity: 'user-useremail@example.com',\n  role: gcs.acl.WRITER_ROLE,\n  generation: 1\n}, function(err, apiResponse) {});",
-        "html": "<p>var gcs = gcloud.storage({<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>myBucket.acl.update({<br />  entity: &#39;user-useremail@example.com&#39;,<br />  role: gcs.acl.WRITER_ROLE<br />}, function(err, apiResponse) {});</p><p>//-<br />// For file ACL operations, you can also specify a <code>generation</code> property.<br />//-<br />myFile.acl.update({<br />  entity: &#39;user-useremail@example.com&#39;,<br />  role: gcs.acl.WRITER_ROLE,<br />  generation: 1<br />}, function(err, apiResponse) {});</p>"
+        "string": "var gcs = gcloud.storage({\n  projectId: 'grape-spaceship-123'\n});\n\nmyBucket.acl.update({\n  entity: 'user-useremail@example.com',\n  role: gcs.acl.WRITER_ROLE\n}, function(err, aclObject, apiResponse) {});\n\n//-\n// For file ACL operations, you can also specify a `generation` property.\n//-\nmyFile.acl.update({\n  entity: 'user-useremail@example.com',\n  role: gcs.acl.WRITER_ROLE,\n  generation: 1\n}, function(err, aclObject, apiResponse) {});",
+        "html": "<p>var gcs = gcloud.storage({<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>myBucket.acl.update({<br />  entity: &#39;user-useremail@example.com&#39;,<br />  role: gcs.acl.WRITER_ROLE<br />}, function(err, aclObject, apiResponse) {});</p><p>//-<br />// For file ACL operations, you can also specify a <code>generation</code> property.<br />//-<br />myFile.acl.update({<br />  entity: &#39;user-useremail@example.com&#39;,<br />  role: gcs.acl.WRITER_ROLE,<br />  generation: 1<br />}, function(err, aclObject, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -636,8 +791,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 372,
-    "codeStart": 404,
+    "line": 380,
+    "codeStart": 415,
     "code": "Acl.prototype.update = function(options, callback) {\n  var that = this;\n  var path = '/' + encodeURIComponent(options.entity);\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  var body = {\n    role: options.role.toUpperCase()\n  };\n\n  this.makeReq_('PUT', path, query, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, that.makeAclObject_(resp), resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -666,8 +821,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 429,
-    "codeStart": 434,
+    "line": 440,
+    "codeStart": 445,
     "code": "Acl.prototype.makeAclObject_ = function(accessControlObject) {\n  var obj = {\n    entity: accessControlObject.entity,\n    role: accessControlObject.role\n  };\n\n  if (accessControlObject.projectTeam) {\n    obj.projectTeam = accessControlObject.projectTeam;\n  }\n\n  return obj;\n};",
     "ctx": {
       "type": "method",
@@ -762,8 +917,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 447,
-    "codeStart": 458,
+    "line": 458,
+    "codeStart": 469,
     "code": "Acl.prototype.makeReq_ = function(method, path, query, body, callback) {\n  this.makeReq(method, this.pathPrefix + path, query, body, callback);\n};\n\nmodule.exports = Acl;",
     "ctx": {
       "type": "method",
@@ -792,8 +947,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 464,
-    "codeStart": 479,
+    "line": 475,
+    "codeStart": 490,
     "code": "function AclRoleAccessorMethods() {\n  AclRoleAccessorMethods.roles.forEach(this._assignAccessMethods.bind(this));\n}\n\nAclRoleAccessorMethods.accessMethods = [\n  'add',\n  'delete'\n];\n\nAclRoleAccessorMethods.entities = [\n  // Special entity groups that do not require further specification.\n  'allAuthenticatedUsers',\n  'allUsers',\n\n  // Entity groups that require specification, e.g. `user-email@example.com`.\n  'domain-',\n  'group-',\n  'project-',\n  'user-'\n];\n\nAclRoleAccessorMethods.roles = [\n  'OWNER',\n  'READER',\n  'WRITER'\n];\n\nAclRoleAccessorMethods.prototype._assignAccessMethods = function(role) {\n  var that = this;\n\n  var accessMethods = AclRoleAccessorMethods.accessMethods;\n  var entities = AclRoleAccessorMethods.entities;\n  var roleGroup = role.toLowerCase() + 's';\n\n  this[roleGroup] = entities.reduce(function(acc, entity) {\n    var isPrefix = entity.charAt(entity.length - 1) === '-';\n\n    accessMethods.forEach(function(accessMethod) {\n      var method = accessMethod + entity[0].toUpperCase() + entity.substr(1);\n\n      if (isPrefix) {\n        method = method.replace('-', '');\n      }\n\n      // Wrap the parent accessor method (e.g. `add` or `delete`) to avoid the\n      // more complex API of specifying an `entity` and `role`.\n      acc[method] = function(entityId, callback) {\n        var apiEntity;\n\n        if (isPrefix) {\n          apiEntity = entity + entityId;\n        } else {\n          // If the entity is not a prefix, it is a special entity group that\n          // does not require further details. The accessor methods only accept\n          // a callback.\n          apiEntity = entity;\n          callback = entityId;\n        }\n\n        that[accessMethod]({\n          entity: apiEntity,\n          role: role\n        }, callback);\n      };\n    });\n\n    return acc;\n  }, {});\n};\n\nmodule.exports.AclRoleAccessorMethods = AclRoleAccessorMethods;",
     "ctx": {
       "type": "function",

@@ -233,13 +233,55 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:search/document} callback.document - The Document object.",
+        "name": "callback.document",
+        "description": "<ul>\n<li>The Document object.</li>\n</ul>\n",
+        "types": [
+          "module:search/document"
+        ],
+        "typesDescription": "module:<a href=\"module%3Asearch%2Fdocument.html\">search/document</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -262,7 +304,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 69,
-    "codeStart": 114,
+    "codeStart": 117,
     "code": "Index.prototype.createDocument = function(documentObj, callback) {\n  var document;\n\n  if (documentObj instanceof Document) {\n    document = documentObj;\n    documentObj = document.toJSON();\n  } else {\n    document = this.documentFromObject_(documentObj);\n  }\n\n  this.makeReq_('POST', '/documents', null, documentObj, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, document, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -318,8 +360,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 134,
-    "codeStart": 143,
+    "line": 137,
+    "codeStart": 146,
     "code": "Index.prototype.document = function(id) {\n  return new Document(this, id);\n};",
     "ctx": {
       "type": "method",
@@ -341,6 +383,20 @@
         ],
         "typesDescription": "<code>object</code>|<code>undefined</code>",
         "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.autoPaginate - Have pagination handled\n    automatically. Default: true.",
+        "name": "options.autoPaginate",
+        "description": "<ul>\n<li>Have pagination handled     automatically. Default: true.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
         "nullable": false,
         "nonNullable": false,
         "variable": false
@@ -389,13 +445,69 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function=} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
-        "typesDescription": "<code>function</code>",
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:search/document[]} callback.documents - A list of Documents.",
+        "name": "callback.documents",
+        "description": "<ul>\n<li>A list of Documents.</li>\n</ul>\n",
+        "types": [
+          "Array.<module:search/document>"
+        ],
+        "typesDescription": "<code>Array</code>.&lt;module:<a href=\"module%3Asearch%2Fdocument.html\">search/document</a>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?object} callback.nextQuery - If present, query with this object to\n    check for more results.",
+        "name": "callback.nextQuery",
+        "description": "<ul>\n<li>If present, query with this object to     check for more results.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -403,8 +515,8 @@
       },
       {
         "type": "example",
-        "string": "function onApiResponse(err, documents, nextQuery, apiResponse) {\n  if (err) {\n    console.error(err);\n    return;\n  }\n\n  // `documents` is an array of Document objects in this index.\n\n  if (nextQuery) {\n    index.getDocuments(nextQuery, onApiResponse);\n  }\n}\n\nindex.getDocuments(onApiResponse);\n\n//-\n// Customize the request using a query object.\n//-\nindex.getDocuments({\n  pageSize: 10\n}, onApiResponse);\n\n//-\n// Get the documents as a readable object stream.\n//-\nindex.getDocuments()\n  .on('error', console.error)\n  .on('data', function(document) {\n    // document is a Document object.\n  })\n  .on('end', function() {\n    // All documents retrieved.\n  });",
-        "html": "<p>function onApiResponse(err, documents, nextQuery, apiResponse) {<br />  if (err) {<br />    console.error(err);<br />    return;<br />  }</p><p>  // <code>documents</code> is an array of Document objects in this index.</p><p>  if (nextQuery) {<br />    index.getDocuments(nextQuery, onApiResponse);<br />  }<br />}</p><p>index.getDocuments(onApiResponse);</p><p>//-<br />// Customize the request using a query object.<br />//-<br />index.getDocuments({<br />  pageSize: 10<br />}, onApiResponse);</p><p>//-<br />// Get the documents as a readable object stream.<br />//-<br />index.getDocuments()<br />  .on(&#39;error&#39;, console.error)<br />  .on(&#39;data&#39;, function(document) {<br />    // document is a Document object.<br />  })<br />  .on(&#39;end&#39;, function() {<br />    // All documents retrieved.<br />  });</p>"
+        "string": "index.getDocuments(function(err, documents) {\n  if (!err) {\n    // documents is an array of Document objects.\n  }\n});\n\n//-\n// To control how many API requests are made and page through the results\n// manually, set `autoPaginate` to `false`.\n//-\nfunction onApiResponse(err, documents, nextQuery, apiResponse) {\n  if (err) {\n    console.error(err);\n    return;\n  }\n\n  // `documents` is an array of Document objects.\n\n  if (nextQuery) {\n    index.getDocuments(nextQuery, onApiResponse);\n  }\n}\n\nindex.getDocuments({\n  autoPaginate: false\n}, onApiResponse);\n\n//-\n// Get the documents as a readable object stream.\n//-\nindex.getDocuments()\n  .on('error', console.error)\n  .on('data', function(document) {\n    // document is a Document object.\n  })\n  .on('end', function() {\n    // All documents retrieved.\n  });\n\n//-\n// If you anticipate many results, you can end a stream early to prevent\n// unnecessary processing and API requests.\n//-\nindex.getDocuments()\n  .on('data', function(document) {\n    this.end();\n  });",
+        "html": "<p>index.getDocuments(function(err, documents) {<br />  if (!err) {<br />    // documents is an array of Document objects.<br />  }<br />});</p><p>//-<br />// To control how many API requests are made and page through the results<br />// manually, set <code>autoPaginate</code> to <code>false</code>.<br />//-<br />function onApiResponse(err, documents, nextQuery, apiResponse) {<br />  if (err) {<br />    console.error(err);<br />    return;<br />  }</p><p>  // <code>documents</code> is an array of Document objects.</p><p>  if (nextQuery) {<br />    index.getDocuments(nextQuery, onApiResponse);<br />  }<br />}</p><p>index.getDocuments({<br />  autoPaginate: false<br />}, onApiResponse);</p><p>//-<br />// Get the documents as a readable object stream.<br />//-<br />index.getDocuments()<br />  .on(&#39;error&#39;, console.error)<br />  .on(&#39;data&#39;, function(document) {<br />    // document is a Document object.<br />  })<br />  .on(&#39;end&#39;, function() {<br />    // All documents retrieved.<br />  });</p><p>//-<br />// If you anticipate many results, you can end a stream early to prevent<br />// unnecessary processing and API requests.<br />//-<br />index.getDocuments()<br />  .on(&#39;data&#39;, function(document) {<br />    this.end();<br />  });</p>"
       }
     ],
     "description": {
@@ -417,8 +529,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 147,
-    "codeStart": 194,
+    "line": 150,
+    "codeStart": 218,
     "code": "Index.prototype.getDocuments = function(query, callback) {\n  var self = this;\n\n  if (util.is(query, 'function')) {\n    callback = query;\n    query = {};\n  }\n\n  this.makeReq_('GET', '/documents', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var documents = (resp.documents || [])\n      .map(self.documentFromObject_.bind(self));\n\n    callback(null, documents, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -448,6 +560,20 @@
           "object"
         ],
         "typesDescription": "<code>string</code>|<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} query.autoPaginate - Have pagination handled automatically.\n    Default: true.",
+        "name": "query.autoPaginate",
+        "description": "<ul>\n<li>Have pagination handled automatically.     Default: true.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -497,9 +623,9 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
@@ -510,9 +636,65 @@
         "variable": false
       },
       {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:search/document[]} callback.documents - A list of Documents",
+        "name": "callback.documents",
+        "description": "<ul>\n<li>A list of Documents</li>\n</ul>\n",
+        "types": [
+          "Array.<module:search/document>"
+        ],
+        "typesDescription": "<code>Array</code>.&lt;module:<a href=\"module%3Asearch%2Fdocument.html\">search/document</a>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?object} callback.nextQuery - If present, query with this object to\n    check for more results.",
+        "name": "callback.nextQuery",
+        "description": "<ul>\n<li>If present, query with this object to     check for more results.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
         "type": "example",
-        "string": "function onApiResponse(err, documents, nextQuery, apiResponse) {\n  if (err) {\n    console.error(err);\n    return;\n  }\n\n  // `documents` is an array of Document objects that matched your query.\n\n  if (nextQuery) {\n    index.search(nextQuery, onApiResponse);\n  }\n}\n\n//-\n// Run a simple query against all documents.\n//-\nvar query = 'person:stephen';\n\nindex.search(query, onApiResponse);\n\n//-\n// Configure the query.\n//-\nvar query = {\n  query: 'person:stephen',\n  pageSize: 10\n};\n\nindex.search(query, onApiResponse);\n\n//-\n// Get the documents that match your query as a readable object stream.\n//-\nindex.search('person:stephen')\n  .on('error', console.error)\n  .on('data', function(document) {\n    // document is a Document object.\n  })\n  .on('end', function() {\n    // All search results retrieved.\n  });",
-        "html": "<p>function onApiResponse(err, documents, nextQuery, apiResponse) {<br />  if (err) {<br />    console.error(err);<br />    return;<br />  }</p><p>  // <code>documents</code> is an array of Document objects that matched your query.</p><p>  if (nextQuery) {<br />    index.search(nextQuery, onApiResponse);<br />  }<br />}</p><p>//-<br />// Run a simple query against all documents.<br />//-<br />var query = &#39;person:stephen&#39;;</p><p>index.search(query, onApiResponse);</p><p>//-<br />// Configure the query.<br />//-<br />var query = {<br />  query: &#39;person:stephen&#39;,<br />  pageSize: 10<br />};</p><p>index.search(query, onApiResponse);</p><p>//-<br />// Get the documents that match your query as a readable object stream.<br />//-<br />index.search(&#39;person:stephen&#39;)<br />  .on(&#39;error&#39;, console.error)<br />  .on(&#39;data&#39;, function(document) {<br />    // document is a Document object.<br />  })<br />  .on(&#39;end&#39;, function() {<br />    // All search results retrieved.<br />  });</p>"
+        "string": "var query = 'person:stephen';\n\nindex.search(query, function(err, documents) {\n  if (!err) {\n    // `documents` is an array of Document objects.\n  }\n});\n\n//-\n// To control how many API requests are made and page through the results\n// manually, set `autoPaginate` to `false`.\n//-\nfunction onApiResponse(err, documents, nextQuery, apiResponse) {\n  if (err) {\n    console.error(err);\n    return;\n  }\n\n  // `documents` is an array of Document objects.\n\n  if (nextQuery) {\n    index.search(nextQuery, onApiResponse);\n  }\n}\n\nindex.search({\n  autoPaginate: false,\n  query: query\n}, onApiResponse);\n\n//-\n// Get the documents that match your query as a readable object stream.\n//-\nindex.search(query)\n  .on('error', console.error)\n  .on('data', function(document) {\n    // document is a Document object.\n  })\n  .on('end', function() {\n    // All search results retrieved.\n  });",
+        "html": "<p>var query = &#39;person:stephen&#39;;</p><p>index.search(query, function(err, documents) {<br />  if (!err) {<br />    // <code>documents</code> is an array of Document objects.<br />  }<br />});</p><p>//-<br />// To control how many API requests are made and page through the results<br />// manually, set <code>autoPaginate</code> to <code>false</code>.<br />//-<br />function onApiResponse(err, documents, nextQuery, apiResponse) {<br />  if (err) {<br />    console.error(err);<br />    return;<br />  }</p><p>  // <code>documents</code> is an array of Document objects.</p><p>  if (nextQuery) {<br />    index.search(nextQuery, onApiResponse);<br />  }<br />}</p><p>index.search({<br />  autoPaginate: false,<br />  query: query<br />}, onApiResponse);</p><p>//-<br />// Get the documents that match your query as a readable object stream.<br />//-<br />index.search(query)<br />  .on(&#39;error&#39;, console.error)<br />  .on(&#39;data&#39;, function(document) {<br />    // document is a Document object.<br />  })<br />  .on(&#39;end&#39;, function() {<br />    // All search results retrieved.<br />  });</p>"
       }
     ],
     "description": {
@@ -525,8 +707,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 223,
-    "codeStart": 283,
+    "line": 247,
+    "codeStart": 314,
     "code": "Index.prototype.search = function(query, callback) {\n  var self = this;\n\n  if (util.is(query, 'string')) {\n    query = {\n      query: query\n    };\n  }\n\n  if (!util.is(query, 'object')) {\n    throw new Error('A query must be either a string or object.');\n  }\n\n  this.makeReq_('GET', '/search', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var documents = (resp.results || [])\n      .map(self.documentFromObject_.bind(self));\n\n    callback(null, documents, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -616,8 +798,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 317,
-    "codeStart": 345,
+    "line": 348,
+    "codeStart": 376,
     "code": "Index.prototype.documentFromObject_ = function(documentObj) {\n  var document = this.document(documentObj.docId);\n\n  if (util.is(documentObj.fields, 'object')) {\n    document.fields = documentObj.fields;\n  }\n\n  if (util.is(documentObj.rank, 'number')) {\n    document.rank = documentObj.rank;\n  }\n\n  return document;\n};",
     "ctx": {
       "type": "method",
@@ -712,8 +894,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 359,
-    "codeStart": 371,
+    "line": 390,
+    "codeStart": 402,
     "code": "Index.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/indexes/' + this.id + path;\n\n  this.search_.makeReq_(method, path, query, body, callback);\n};",
     "ctx": {
       "type": "method",
@@ -735,8 +917,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 377,
-    "codeStart": 383,
+    "line": 408,
+    "codeStart": 414,
     "code": "streamRouter.extend(Index, ['getDocuments', 'search']);\n\nmodule.exports = Index;",
     "ctx": false
   }

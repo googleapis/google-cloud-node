@@ -263,9 +263,9 @@
     "tags": [
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
@@ -276,9 +276,37 @@
         "variable": false
       },
       {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
         "type": "example",
-        "string": "transaction.rollback(function(err) {\n  if (err) {\n    // Transaction could not be rolled back.\n  }\n});",
-        "html": "<p>transaction.rollback(function(err) {<br />  if (err) {<br />    // Transaction could not be rolled back.<br />  }<br />});</p>"
+        "string": "transaction.rollback(function(err, apiResponse) {\n  if (err) {\n    // Transaction could not be rolled back.\n  }\n});",
+        "html": "<p>transaction.rollback(function(err, apiResponse) {<br />  if (err) {<br />    // Transaction could not be rolled back.<br />  }<br />});</p>"
       }
     ],
     "description": {
@@ -292,7 +320,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 120,
-    "codeStart": 132,
+    "codeStart": 134,
     "code": "Transaction.prototype.rollback = function(callback) {\n  var that = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('rollback', function(err, resp) {\n    that.skipCommit = true;\n\n    callback(err || null, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -340,8 +368,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 144,
-    "codeStart": 160,
+    "line": 146,
+    "codeStart": 162,
     "code": "Transaction.prototype.commit_ = function(callback) {\n  var that = this;\n\n  callback = callback || util.noop;\n\n  if (this.skipCommit) {\n    setImmediate(callback);\n    return;\n  }\n\n  var keys = {};\n\n  this.modifiedEntities_\n\n    // Reverse the order of the queue to respect the \"last queued request wins\"\n    // behavior.\n    .reverse()\n\n    // Limit the operations we're going to send through to only the most\n    // recently queued operations. E.g., if a user tries to save with the same\n    // key they just asked to be deleted, the delete request will be ignored,\n    // giving preference to the save operation.\n    .filter(function(modifiedEntity) {\n      var key = JSON.stringify(modifiedEntity.entity.key);\n\n      if (!keys[key]) {\n        keys[key] = true;\n        return true;\n      }\n    })\n\n    // Group entities together by action (delete or save).\n    .sort(function(a, b) {\n      return a.method > b.method ? 1 : a.method < b.method ? -1 : 0;\n    })\n\n    // Group arguments together so that we only make one call to each method.\n    // This is important for `DatastoreRequest.save`, especially, as that method\n    // handles assigning auto-generated IDs to the original keys passed in. When\n    // we eventually execute the `save` method's API callback, having all the\n    // keys together is necessary to maintain order.\n    .reduce(function(acc, entityObject) {\n      var lastEntityObject = acc[acc.length - 1];\n      var sameMethod = lastEntityObject &&\n        entityObject.method === lastEntityObject.method;\n\n      if (!lastEntityObject || !sameMethod) {\n        acc.push(entityObject);\n      } else {\n        lastEntityObject.args = lastEntityObject.args.concat(entityObject.args);\n      }\n\n      return acc;\n    }, [])\n\n    // Call each of the mutational methods (DatastoreRequest[save,delete]) to\n    // build up a `req` array on this instance. This will also build up a\n    // `callbacks` array, that is the same callback that would run if we were\n    // using `save` and `delete` outside of a transaction, to process the\n    // response from the API.\n    .forEach(function(modifiedEntity) {\n      var method = modifiedEntity.method;\n      var args = modifiedEntity.args.reverse();\n\n      DatastoreRequest.prototype[method].call(that, args, util.noop);\n    });\n\n  // Take the `req` array built previously, and merge them into one request to\n  // send as the final transactional commit.\n  var req = this.requests_.reduce(function(acc, req) {\n    return extend(true, acc, req);\n  }, {});\n\n  this.makeReq_('commit', req, function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    // The `callbacks` array was built previously. These are the callbacks that\n    // handle the API response normally when using the DatastoreRequest.save and\n    // .delete methods.\n    that.requestCallbacks_.forEach(function(cb) {\n      cb(null, resp);\n    });\n\n    callback(null, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -363,8 +391,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 250,
-    "codeStart": 259
+    "line": 252,
+    "codeStart": 261
   },
   {
     "tags": [
@@ -399,8 +427,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 259,
-    "codeStart": 275,
+    "line": 261,
+    "codeStart": 277,
     "code": "Transaction.prototype.delete = function(entities) {\n  var that = this;\n\n  util.arrayize(entities).forEach(function(ent) {\n    that.modifiedEntities_.push({\n      entity: {\n        key: ent\n      },\n      method: 'delete',\n      args: [ent]\n    });\n  });\n};",
     "ctx": {
       "type": "method",
@@ -472,8 +500,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 289,
-    "codeStart": 363,
+    "line": 291,
+    "codeStart": 365,
     "code": "Transaction.prototype.save = function(entities) {\n  var that = this;\n\n  util.arrayize(entities).forEach(function(ent) {\n    that.modifiedEntities_.push({\n      entity: {\n        key: ent.key\n      },\n      method: 'save',\n      args: [ent]\n    });\n  });\n};",
     "ctx": {
       "type": "method",
@@ -507,8 +535,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 377,
-    "codeStart": 384,
+    "line": 379,
+    "codeStart": 386,
     "code": "Transaction.prototype.mapQuery = function() {\n  throw new Error('not yet implemented');\n};\n\nmodule.exports = Transaction;",
     "ctx": {
       "type": "method",

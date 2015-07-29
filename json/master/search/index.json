@@ -300,6 +300,20 @@
       },
       {
         "type": "param",
+        "string": "{boolean} options.autoPaginate - Have pagination handled\n    automatically. Default: true.",
+        "name": "options.autoPaginate",
+        "description": "<ul>\n<li>Have pagination handled     automatically. Default: true.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
         "string": "{string} query.pageSize - The maximum number of indexes to return per\n    page. If not specified, 100 indexes are returned per page.",
         "name": "query.pageSize",
         "description": "<ul>\n<li>The maximum number of indexes to return per     page. If not specified, 100 indexes are returned per page.</li>\n</ul>\n",
@@ -356,9 +370,9 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
@@ -369,9 +383,65 @@
         "variable": false
       },
       {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:search/index[]} callback.indexes - A list of Indexes.",
+        "name": "callback.indexes",
+        "description": "<ul>\n<li>A list of Indexes.</li>\n</ul>\n",
+        "types": [
+          "Array.<module:search/index>"
+        ],
+        "typesDescription": "<code>Array</code>.&lt;module:<a href=\"module%3Asearch%2Findex.html\">search/index</a>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?object} callback.nextQuery - If present, query with this object to\n    check for more results.",
+        "name": "callback.nextQuery",
+        "description": "<ul>\n<li>If present, query with this object to     check for more results.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
         "type": "example",
-        "string": "function onApiResponse(err, indexes, nextQuery, apiResponse) {\n  if (err) {\n    console.error(err);\n    return;\n  }\n\n  if (nextQuery) {\n    search.getIndexes(nextQuery, onApiResponse);\n  }\n}\n\nsearch.getIndexes(onApiResponse);\n\n//-\n// Customize the request using a query object.\n//-\nsearch.getIndexes({\n  pageSize: 10\n}, onApiResponse);\n\n//-\n// Get the indexes as a readable object stream.\n//-\nsearch.getIndexes()\n  .on('error', console.error)\n  .on('data', function(index) {\n    // index is an Index object.\n  })\n  .on('end', function() {\n    // All indexes retrieved.\n  });",
-        "html": "<p>function onApiResponse(err, indexes, nextQuery, apiResponse) {<br />  if (err) {<br />    console.error(err);<br />    return;<br />  }</p><p>  if (nextQuery) {<br />    search.getIndexes(nextQuery, onApiResponse);<br />  }<br />}</p><p>search.getIndexes(onApiResponse);</p><p>//-<br />// Customize the request using a query object.<br />//-<br />search.getIndexes({<br />  pageSize: 10<br />}, onApiResponse);</p><p>//-<br />// Get the indexes as a readable object stream.<br />//-<br />search.getIndexes()<br />  .on(&#39;error&#39;, console.error)<br />  .on(&#39;data&#39;, function(index) {<br />    // index is an Index object.<br />  })<br />  .on(&#39;end&#39;, function() {<br />    // All indexes retrieved.<br />  });</p>"
+        "string": "search.getIndexes(function(err, indexes) {\n  // indexes is an array of Index objects.\n});\n\n//-\n// To control how many API requests are made and page through the results\n// manually, set `autoPaginate` to `false`.\n//-\nfunction onApiResponse(err, indexes, nextQuery, apiResponse) {\n  if (err) {\n    console.error(err);\n    return;\n  }\n\n  // indexes is an array of Index objects.\n\n  if (nextQuery) {\n    search.getIndexes(nextQuery, onApiResponse);\n  }\n}\n\nsearch.getIndexes({\n  autoPaginate: false\n}, onApiResponse);\n\n//-\n// Get the indexes as a readable object stream.\n//-\nsearch.getIndexes()\n  .on('error', console.error)\n  .on('data', function(index) {\n    // index is an Index object.\n  })\n  .on('end', function() {\n    // All indexes retrieved.\n  });\n\n//-\n// If you anticipate many results, you can end a stream early to prevent\n// unnecessary processing and API requests.\n//-\nsearch.getIndexes()\n  .on('data', function(index) {\n    this.end();\n  });",
+        "html": "<p>search.getIndexes(function(err, indexes) {<br />  // indexes is an array of Index objects.<br />});</p><p>//-<br />// To control how many API requests are made and page through the results<br />// manually, set <code>autoPaginate</code> to <code>false</code>.<br />//-<br />function onApiResponse(err, indexes, nextQuery, apiResponse) {<br />  if (err) {<br />    console.error(err);<br />    return;<br />  }</p><p>  // indexes is an array of Index objects.</p><p>  if (nextQuery) {<br />    search.getIndexes(nextQuery, onApiResponse);<br />  }<br />}</p><p>search.getIndexes({<br />  autoPaginate: false<br />}, onApiResponse);</p><p>//-<br />// Get the indexes as a readable object stream.<br />//-<br />search.getIndexes()<br />  .on(&#39;error&#39;, console.error)<br />  .on(&#39;data&#39;, function(index) {<br />    // index is an Index object.<br />  })<br />  .on(&#39;end&#39;, function() {<br />    // All indexes retrieved.<br />  });</p><p>//-<br />// If you anticipate many results, you can end a stream early to prevent<br />// unnecessary processing and API requests.<br />//-<br />search.getIndexes()<br />  .on(&#39;data&#39;, function(index) {<br />    this.end();<br />  });</p>"
       }
     ],
     "description": {
@@ -385,7 +455,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 95,
-    "codeStart": 142,
+    "codeStart": 163,
     "code": "Search.prototype.getIndexes = function(query, callback) {\n  var self = this;\n\n  if (util.is(query, 'function')) {\n    callback = query;\n    query = {};\n  }\n\n  query = extend({}, query);\n\n  if (query.prefix) {\n    query.indexNamePrefix = query.prefix;\n    delete query.prefix;\n  }\n\n  this.makeReq_('GET', '/indexes', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var indexes = (resp.indexes || []).map(function(indexObject) {\n      var index = self.index(indexObject.indexId);\n\n      if (util.is(resp.indexedField, 'object')) {\n        index.fields = resp.indexedField;\n      }\n\n      return index;\n    });\n\n    callback(null, indexes, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -436,8 +506,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 185,
-    "codeStart": 191,
+    "line": 206,
+    "codeStart": 212,
     "code": "Search.prototype.index = function(id) {\n  return new Index(this, id);\n};",
     "ctx": {
       "type": "method",
@@ -532,8 +602,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 195,
-    "codeStart": 207,
+    "line": 216,
+    "codeStart": 228,
     "code": "Search.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: util.format('{base}projects/{projectId}{path}', {\n      base: SEARCH_BASE_URL,\n      projectId: this.projectId_,\n      path: path\n    })\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};",
     "ctx": {
       "type": "method",
@@ -555,8 +625,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 225,
-    "codeStart": 230,
+    "line": 246,
+    "codeStart": 251,
     "code": "streamRouter.extend(Search, 'getIndexes');\n\nmodule.exports = Search;",
     "ctx": false
   }
