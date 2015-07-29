@@ -263,17 +263,15 @@ describe('Topic', function() {
 
   describe('subscribe', function() {
     it('should pass correct arguments to pubsub#subscribe', function(done) {
-      var subscriptionName = 'subName';
       var opts = {};
 
-      topic.pubsub.subscribe = function(t, subName, options, callback) {
-        assert.deepEqual(t, topic);
-        assert.equal(subName, subscriptionName);
-        assert.deepEqual(options, opts);
+      topic.pubsub.subscribe = function(topic_, opts_, callback) {
+        assert.strictEqual(topic_, topic);
+        assert.deepEqual(opts_, opts);
         callback();
       };
 
-      topic.subscribe(subscriptionName, opts, done);
+      topic.subscribe(opts, done);
     });
   });
 
