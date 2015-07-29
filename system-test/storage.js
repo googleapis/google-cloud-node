@@ -105,7 +105,7 @@ describe('storage', function() {
         });
       });
 
-      it('should add entity to default access controls', function(done) {
+      it.skip('should add entity to default access controls', function(done) {
         bucket.acl.default.add({
           entity: USER_ACCOUNT,
           role: storage.acl.OWNER_ROLE
@@ -140,7 +140,7 @@ describe('storage', function() {
         });
       });
 
-      it('should grant an account access', function(done) {
+      it.skip('should grant an account access', function(done) {
         bucket.acl.add({
           entity: USER_ACCOUNT,
           role: storage.acl.OWNER_ROLE
@@ -159,7 +159,7 @@ describe('storage', function() {
         });
       });
 
-      it('should update an account', function(done) {
+      it.skip('should update an account', function(done) {
         bucket.acl.add({
           entity: USER_ACCOUNT,
           role: storage.acl.OWNER_ROLE
@@ -317,7 +317,7 @@ describe('storage', function() {
         assert.equal(typeof file.default, 'undefined');
       });
 
-      it('should grant an account access', function(done) {
+      it.skip('should grant an account access', function(done) {
         file.acl.add({
           entity: USER_ACCOUNT,
           role: storage.acl.OWNER_ROLE
@@ -334,7 +334,7 @@ describe('storage', function() {
         });
       });
 
-      it('should update an account', function(done) {
+      it.skip('should update an account', function(done) {
         file.acl.add({
           entity: USER_ACCOUNT,
           role: storage.acl.OWNER_ROLE
