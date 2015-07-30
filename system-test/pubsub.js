@@ -156,15 +156,24 @@ describe('pubsub', function() {
     var topic;
 
     before(function(done) {
-      // Create a new test topic.
       pubsub.createTopic(TOPIC_NAME, function(err, newTopic) {
         assert.ifError(err);
         topic = newTopic;
 
-        // Create subscriptions.
-        async.parallel(SUBSCRIPTIONS.map(function(sub) {
-          return topic.subscribe.bind(topic, sub.name, sub.options);
-        }), done);
+        function createSubscription(subscription, callback) {
+          topic.subscribe(subscription.name, subscription.options, callback);
+        }
+
+        async.each(SUBSCRIPTIONS, createSubscription, function(err) {
+          if (err) {
+            done(err);
+            return;
+          }
+
+          async.times(10, function(_, next) {
+            topic.publish({ data: 'hello' }, next);
+          }, done);
+        });
       });
     });
 
@@ -248,125 +257,66 @@ describe('pubsub', function() {
     it('should be able to pull and ack', function(done) {
       var subscription = topic.subscription(SUB_NAMES[0]);
 
-      topic.publish({ data: 'hello' }, function(err) {
+      subscription.pull({
+        returnImmediately: true,
+        maxResults: 1
+      }, function(err, msgs) {
         assert.ifError(err);
 
-        subscription.pull({
-          returnImmediately: false,
-          maxResults: 1
-        }, function(err, msgs) {
-          assert.ifError(err);
-          subscription.ack(msgs[0].ackId, done);
-        });
+        assert.strictEqual(msgs.length, 1);
+
+        subscription.ack(msgs[0].ackId, done);
       });
     });
 
     it('should be able to set a new ack deadline', function(done) {
       var subscription = topic.subscription(SUB_NAMES[0]);
 
-      topic.publish({ data: 'hello' }, function(err) {
+      subscription.pull({
+        returnImmediately: true,
+        maxResults: 1
+      }, function(err, msgs) {
         assert.ifError(err);
 
-        subscription.pull({
-          returnImmediately: false,
-          maxResults: 1
-        }, function(err, msgs) {
-          assert.ifError(err);
+        assert.strictEqual(msgs.length, 1);
 
-          var options = {
-            ackIds: [msgs[0].ackId],
-            seconds: 10
-          };
-          subscription.setAckDeadline(options, done);
-        });
+        var options = {
+          ackIds: [msgs[0].ackId],
+          seconds: 10
+        };
+
+        subscription.setAckDeadline(options, done);
       });
     });
 
     it('should receive the published message', function(done) {
       var subscription = topic.subscription(SUB_NAMES[1]);
 
-      topic.publish([
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' }
-      ], function(err) {
+      subscription.pull({
+        returnImmediately: true,
+        maxResults: 1
+      }, function(err, msgs) {
         assert.ifError(err);
-
-        subscription.pull({
-          returnImmediately: false,
-          maxResults: 1
-        }, function(err, msgs) {
-          assert.ifError(err);
-          assert.equal(msgs[0].data, 'hello');
-          subscription.ack(msgs[0].ackId, done);
-        });
-      });
-    });
-
-    it('should receive a raw published message', function(done) {
-      var subscription = topic.subscription(SUB_NAMES[0]);
-
-      topic.publish([
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' }
-      ], function(err) {
-        assert.ifError(err);
-
-        subscription.pull({
-          returnImmediately: false,
-          maxResults: 1
-        }, function(err, msgs) {
-          assert.ifError(err);
-          assert.equal(msgs[0].data, 'hello');
-          subscription.ack(msgs[0].ackId, done);
-        });
+        assert.strictEqual(msgs.length, 1);
+        assert.equal(msgs[0].data, 'hello');
+        subscription.ack(msgs[0].ackId, done);
       });
     });
 
     it('should receive the chosen amount of results', function(done) {
       var subscription = topic.subscription(SUB_NAMES[1]);
-      var opts = { returnImmediately: false, maxResults: 3 };
+      var opts = { returnImmediately: true, maxResults: 3 };
 
-      topic.publish([
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' },
-        { data: 'hello' }
-      ], function(err) {
+      subscription.pull(opts, function(err, messages) {
         assert.ifError(err);
 
-        subscription.pull(opts, function(err, messages) {
-          assert.ifError(err);
+        assert.equal(messages.length, opts.maxResults);
 
-          assert.equal(messages.length, opts.maxResults);
-
-          var ackIds = messages.map(function(message) {
-            return message.ackId;
-          });
-
-          subscription.ack(ackIds, done);
+        var ackIds = messages.map(function(message) {
+          return message.ackId;
         });
+
+        subscription.ack(ackIds, done);
       });
     });
   });
