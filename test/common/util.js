@@ -132,6 +132,33 @@ describe('common/util', function() {
     });
   });
 
+  describe('format', function() {
+    it('should replace denoated keys with corresponding values', function() {
+      var formatted = util.format('{greeting} {thing}!', {
+        greeting: 'Hello',
+        thing: 'world'
+      });
+
+      assert.strictEqual(formatted, 'Hello world!');
+    });
+
+    it('should leave any unsatisfied keys unchanged', function() {
+      var formatted = util.format('{greeting} {thing}!', {
+        greeting: 'swamp'
+      });
+
+      assert.strictEqual(formatted, 'swamp {thing}!');
+    });
+
+    it('should inject falsy values', function() {
+      var formatted = util.format('{num}', {
+        num: 0
+      });
+
+      assert.strictEqual(formatted, '0');
+    });
+  });
+
   describe('ApiError', function() {
     it('should build correct ApiError', function() {
       var error = {
@@ -420,9 +447,85 @@ describe('common/util', function() {
         }
       });
     });
+
+    it('should emit an error if the request fails', function(done) {
+      var dup = duplexify();
+      var fakeStream = new stream.Writable();
+      var error = new Error('Error.');
+
+      fakeStream.write = function() {};
+      dup.end = function() {};
+
+      utilOverrides.handleResp = function(err, res, body, callback) {
+        callback(error);
+      };
+
+      requestOverride = function() {
+        return fakeStream;
+      };
+
+      var options = {
+        makeAuthorizedRequest: function(request, opts) {
+          opts.onAuthorized();
+        }
+      };
+
+      util.makeWritableStream(dup, options);
+
+      dup.on('error', function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
+
+      setImmediate(function() {
+        fakeStream.emit('complete', {});
+      });
+    });
+
+    it('should pass back the response data to the callback', function(done) {
+      var dup = duplexify();
+      var fakeStream = new stream.Writable();
+      var fakeResponse = {};
+
+      fakeStream.write = function() {};
+
+      utilOverrides.handleResp = function(err, res, body, callback) {
+        callback(null, fakeResponse);
+      };
+
+      requestOverride = function() {
+        return fakeStream;
+      };
+
+      var options = {
+        makeAuthorizedRequest: function(request, opts) {
+          opts.onAuthorized();
+        }
+      };
+
+      util.makeWritableStream(dup, options, function(data) {
+        assert.strictEqual(data, fakeResponse);
+        done();
+      });
+
+      setImmediate(function() {
+        fakeStream.emit('complete', {});
+      });
+    });
   });
 
   describe('getAuthClient', function() {
+    it('should use any authClient provided as a config', function(done) {
+      var config = {
+        authClient: {}
+      };
+
+      util.getAuthClient(config, function(err, authClient) {
+        assert.strictEqual(authClient, config.authClient);
+        done();
+      });
+    });
+
     it('should use google-auth-library', function() {
       var googleAuthLibraryCalled = false;
 
@@ -525,6 +628,23 @@ describe('common/util', function() {
       };
 
       util.getAuthClient(config, done);
+    });
+
+    it('should pass back any errors from the authClient', function(done) {
+      var error = new Error('Error!');
+
+      googleAuthLibraryOverride = function() {
+        return {
+          getApplicationDefault: function(callback) {
+            callback(error);
+          }
+        };
+      };
+
+      util.getAuthClient({}, function(err) {
+        assert.strictEqual(error, err);
+        done();
+      });
     });
   });
 
@@ -952,6 +1072,29 @@ describe('common/util', function() {
     });
   });
 
+  describe('is', function() {
+    it('should check if an object is of the given type', function() {
+      assert(new Buffer(''), 'buffer');
+      assert(util.is('Hi!', 'string'));
+      assert(util.is([1, 2, 3], 'array'));
+      assert(util.is({}, 'object'));
+      assert(util.is(5, 'number'));
+      assert(util.is(true, 'boolean'));
+    });
+  });
+
+  describe('toArray', function() {
+    it('should convert an arguments object into an array', function() {
+      function stub() {
+        var args = util.toArray(arguments);
+
+        assert.deepEqual(args, [1, 2, 3]);
+      }
+
+      stub(1, 2, 3);
+    });
+  });
+
   describe('shouldRetryRequest', function() {
     it('should return false if there is no error', function() {
       assert.strictEqual(util.shouldRetryRequest(), false);
@@ -1085,6 +1228,11 @@ describe('common/util', function() {
     });
 
     describe('callback mode', function() {
+      it('should optionally accept config', function(done) {
+        retryRequestOverride = testDefaultRetryRequestConfig(done);
+        util.makeRequest(reqOpts, assert.ifError);
+      });
+
       it('should pass the default options to retryRequest', function(done) {
         retryRequestOverride = testDefaultRetryRequestConfig(done);
         util.makeRequest(reqOpts, {}, assert.ifError);
