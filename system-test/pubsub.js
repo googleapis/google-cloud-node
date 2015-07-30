@@ -145,11 +145,11 @@ describe('pubsub', function() {
     var SUBSCRIPTIONS = [
       {
         name: SUB_NAMES[0],
-        options: { ackDeadlineSeconds: 30 }
+        ackDeadlineSeconds: 30
       },
       {
         name: SUB_NAMES[1],
-        options: { ackDeadlineSeconds: 60 }
+        ackDeadlineSeconds: 60
       }
     ];
 
@@ -162,9 +162,7 @@ describe('pubsub', function() {
         topic = newTopic;
 
         // Create subscriptions.
-        async.parallel(SUBSCRIPTIONS.map(function(sub) {
-          return topic.subscribe.bind(topic, sub.name, sub.options);
-        }), done);
+        async.each(SUBSCRIPTIONS, topic.subscribe.bind(topic), done);
       });
     });
 
@@ -227,11 +225,24 @@ describe('pubsub', function() {
         });
     });
 
-    it('should allow creation and deletion of a subscription', function(done) {
+    it('should create and delete a named subscription', function(done) {
       var subName = generateSubName();
-      topic.subscribe(subName, function(err, sub) {
+      var fullSubName = Subscription.formatName_(pubsub.projectId, subName);
+
+      topic.subscribe({
+        name: subName
+      }, function(err, sub) {
         assert.ifError(err);
         assert(sub instanceof Subscription);
+        assert.strictEqual(sub.name, fullSubName);
+        sub.delete(done);
+      });
+    });
+
+    it('should automatically assign a subscription name', function(done) {
+      topic.subscribe(function(err, sub) {
+        assert.ifError(err);
+        assert.notStrictEqual(sub.name, '');
         sub.delete(done);
       });
     });

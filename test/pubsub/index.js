@@ -17,6 +17,7 @@
 'use strict';
 
 var assert = require('assert');
+var extend = require('extend');
 var mockery = require('mockery');
 var request = require('request');
 var Topic = require('../../lib/pubsub/topic.js');
@@ -29,6 +30,12 @@ function Subscription(a, b) {
   var OverrideFn = SubscriptionOverride || SubscriptionCached;
   return new OverrideFn(a, b);
 }
+
+var formatNameOverride;
+Subscription.formatName_ = function() {
+  var fn = formatNameOverride || SubscriptionCached.formatName_;
+  return fn.apply(null, arguments);
+};
 
 var requestCached = request;
 var requestOverride;
@@ -80,9 +87,10 @@ describe('PubSub', function() {
   beforeEach(function() {
     SubscriptionOverride = null;
     requestOverride = null;
+    formatNameOverride = null;
     pubsub = new PubSub({ projectId: PROJECT_ID });
     pubsub.makeReq_ = function(method, path, q, body, callback) {
-      callback();
+      callback(null, {});
     };
   });
 
@@ -366,132 +374,136 @@ describe('PubSub', function() {
       name: 'projects/' + PROJECT_ID + '/subscriptions/' + SUB_NAME
     };
 
+    beforeEach(function() {
+      pubsub.makeReq_ = function(method, path, query, body, callback) {
+        callback(null, { name: SUB_NAME });
+      };
+    });
+
     it('should throw if no Topic is provided', function() {
       assert.throws(function() {
         pubsub.subscribe();
       }, /A Topic is required.*/);
     });
 
-    it('should throw if no sub name is provided', function() {
-      assert.throws(function() {
-        pubsub.subscribe('topic');
-      }, /A subscription name is required.*/);
-    });
-
     it('should not require configuration options', function(done) {
-      pubsub.makeReq_ = function(method, path, qs, body, callback) {
-        callback();
-      };
-
-      pubsub.subscribe(TOPIC_NAME, SUB_NAME, done);
+      pubsub.subscribe(TOPIC_NAME, done);
     });
 
-    it('should cretae a topic object from a string', function(done) {
+    it('should create a Topic from a string', function(done) {
       pubsub.topic = function(topicName) {
         assert.equal(topicName, TOPIC_NAME);
         done();
         return TOPIC;
       };
 
-      pubsub.subscribe(TOPIC_NAME, SUB_NAME, assert.ifError);
+      pubsub.subscribe(TOPIC_NAME, assert.ifError);
     });
 
-    it('should create a subscription object from a string', function(done) {
-      var opts = {};
+    it('should build full subscription name if one is given', function(done) {
+      var opts = { name: SUB_NAME };
 
-      pubsub.subscription = function(subName, options) {
-        assert.equal(subName, SUB_NAME);
-        assert.deepEqual(options, opts);
+      formatNameOverride = function(projectId, subName) {
+        assert.strictEqual(projectId, PROJECT_ID);
+        assert.strictEqual(subName, opts.name);
         done();
-        return SUBSCRIPTION;
       };
 
-      pubsub.subscribe(TOPIC_NAME, SUB_NAME, opts, assert.ifError);
-    });
-
-    it('should pass options to a created subscription object', function(done) {
-      var opts = { a: 'b', c: 'd' };
-
-      pubsub.subscription = function(subName, options) {
-        assert.equal(subName, SUB_NAME);
-        assert.deepEqual(options, opts);
-        done();
-        return SUBSCRIPTION;
-      };
-
-      pubsub.subscribe(TOPIC_NAME, SUB_NAME, opts, assert.ifError);
+      pubsub.subscribe(TOPIC_NAME, opts, assert.ifError);
     });
 
     it('should send correct request', function(done) {
-      pubsub.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'PUT');
-        assert.equal(path, SUBSCRIPTION.name);
-        assert.equal(body.topic, TOPIC.name);
-        done();
+      var opts = {
+        name: SUB_NAME,
+        ackDeadlineSeconds: 90
       };
-
-      pubsub.subscribe(TOPIC_NAME, SUB_NAME, assert.ifError);
-    });
-
-    it('should re-use existing subscription if specified', function(done) {
-      pubsub.subscription = function() {
-        return SUBSCRIPTION;
-      };
-
-      pubsub.makeReq_ = function(method, path, query, body, callback) {
-        callback({ code: 409 });
-      };
-
-      // Don't re-use an existing subscription (error if one exists).
-      pubsub.subscribe(TOPIC_NAME, SUB_NAME, function(err) {
-        assert.equal(err.code, 409);
-      });
-
-      // Re-use an existing subscription (ignore error if one exists).
-      var opts = { reuseExisting: true };
-      pubsub.subscribe(TOPIC_NAME, SUB_NAME, opts, function(err, sub) {
-        assert.ifError(err);
-        assert.deepEqual(sub, SUBSCRIPTION);
-
-        done();
-      });
-    });
-
-    it('should return an api error to the callback', function(done) {
-      var error = new Error('Error.');
-
-      pubsub.makeReq_ = function(method, path, query, body, callback) {
-        callback(error);
-      };
-
-      pubsub.subscribe(TOPIC_NAME, SUB_NAME, function(err) {
-        assert.equal(err, error);
-        done();
-      });
-    });
-
-    it('should return apiResponse to the callback', function(done) {
-      var resp = { success: true };
-
-      pubsub.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, resp);
-      };
-
-      pubsub.subscribe(TOPIC_NAME, SUB_NAME, function(err, sub, apiResponse) {
-        assert.deepEqual(resp, apiResponse);
-        done();
-      });
-    });
-
-    it('should pass options to the api request', function(done) {
-      var opts = { ackDeadlineSeconds: 90 };
 
       pubsub.makeReq_ = function(method, path, query, body) {
+        assert.strictEqual(method, 'PUT');
+        assert.strictEqual(path, SUBSCRIPTION.name);
+        assert.strictEqual(body.topic, TOPIC.name);
         assert.strictEqual(body.ackDeadlineSeconds, opts.ackDeadlineSeconds);
         done();
       };
 
-      pubsub.subscribe(TOPIC_NAME, SUB_NAME, opts, assert.ifError);
+      pubsub.subscribe(TOPIC_NAME, opts, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = { name: SUB_NAME };
+
+      beforeEach(function() {
+        pubsub.makeReq_ = function(method, path, query, body, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should re-use existing subscription if specified', function(done) {
+        var error = new Error('Error');
+        error.code = 409;
+
+        pubsub.makeReq_ = function(method, path, query, body, callback) {
+          callback(error, apiResponse);
+        };
+
+        // Don't re-use an existing subscription (error if one exists).
+        pubsub.subscribe(TOPIC_NAME, function(err) {
+          assert.strictEqual(err, error);
+        });
+
+        // Re-use an existing subscription (ignore error if one exists).
+        var opts = { reuseExisting: true };
+
+        pubsub.subscription = function() {
+          return SUBSCRIPTION;
+        };
+
+        pubsub.subscribe(TOPIC_NAME, opts, function(err, sub) {
+          assert.ifError(err);
+          assert.strictEqual(sub, SUBSCRIPTION);
+
+          done();
+        });
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        pubsub.subscribe(TOPIC_NAME, function(err, sub, apiResponse_) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(sub, null);
+          assert.strictEqual(apiResponse_, apiResponse);
+
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = { name: SUB_NAME };
+
+      beforeEach(function() {
+        pubsub.makeReq_ = function(method, path, query, body, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should exec callback w/ Subscription & API response', function(done) {
+        var opts = { ackDeadlineSeconds: 90 };
+        var expectedOptions = extend({}, apiResponse, opts);
+
+        pubsub.subscription = function(subName, opts_) {
+          assert.strictEqual(subName, SUB_NAME);
+          assert.deepEqual(opts_, expectedOptions);
+          return SUBSCRIPTION;
+        };
+
+        pubsub.subscribe(TOPIC_NAME, opts, function(err, sub, apiResponse_) {
+          assert.ifError(err);
+          assert.strictEqual(sub, SUBSCRIPTION);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
     });
   });
 
