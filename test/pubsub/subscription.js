@@ -19,8 +19,13 @@
 'use strict';
 
 var assert = require('assert');
+var mockery = require('mockery');
 var util = require('../../lib/common/util.js');
-var Subscription = require('../../lib/pubsub/subscription.js');
+var Subscription;
+
+function FakeIAM() {
+  this.calledWith_ = [].slice.call(arguments);
+}
 
 describe('Subscription', function() {
   var PROJECT_ID = 'test-project';
@@ -47,6 +52,15 @@ describe('Subscription', function() {
     id: 7
   };
   var subscription;
+
+  before(function() {
+    mockery.registerMock('./iam', FakeIAM);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+    Subscription = require('../../lib/pubsub/subscription.js');
+  });
 
   beforeEach(function() {
     subscription = new Subscription(pubsubMock, { name: SUB_NAME });
@@ -106,6 +120,13 @@ describe('Subscription', function() {
 
     it('should not be paused', function() {
       assert.strictEqual(subscription.paused, false);
+    });
+
+    it('should create an iam object', function() {
+      assert.deepEqual(subscription.iam.calledWith_, [
+        pubsubMock,
+        SUB_FULL_NAME
+      ]);
     });
   });
 
