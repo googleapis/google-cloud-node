@@ -183,6 +183,33 @@ describe('datastore', function() {
       });
     });
 
+    it('should get multiple entities in a stream', function(done) {
+      var key1 = ds.key('Post');
+      var key2 = ds.key('Post');
+
+      ds.save([
+        { key: key1, data: post },
+        { key: key2, data: post }
+      ], function(err) {
+        assert.ifError(err);
+
+        var firstKey = ds.key(['Post', key1.path[1]]);
+        var secondKey = ds.key(['Post', key2.path[1]]);
+
+        var numEntitiesEmitted = 0;
+
+        ds.get([firstKey, secondKey])
+          .on('error', done)
+          .on('data', function() {
+            numEntitiesEmitted++;
+          })
+          .on('end', function() {
+            assert.strictEqual(numEntitiesEmitted, 2);
+
+            ds.delete([firstKey, secondKey], done);
+          });
+      });
+    });
   });
 
   it('should save keys as a part of entity and query by key', function(done) {
