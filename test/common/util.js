@@ -1150,6 +1150,13 @@ describe('common/util', function() {
       assert.strictEqual(util.shouldRetryRequest(error), true);
     });
 
+    it('should return true with error code 502', function() {
+      var error = new Error('502');
+      error.code = 502;
+
+      assert.strictEqual(util.shouldRetryRequest(error), true);
+    });
+
     it('should return true with error code 503', function() {
       var error = new Error('503');
       error.code = 503;
