@@ -21,6 +21,8 @@
 var assert = require('assert');
 var ByteBuffer = require('bytebuffer');
 var entity = require('../../lib/datastore/entity.js');
+var extend = require('extend');
+var isStreamEnded = require('is-stream-ended');
 var mockery = require('mockery');
 var mockRespGet = require('../testdata/response_get.json');
 var pb = require('../../lib/datastore/pb.js');
@@ -56,6 +58,16 @@ pb.FakeMethodResponse = {
   }
 };
 
+var entityOverrides = {};
+var fakeEntity;
+fakeEntity = Object.keys(entity).reduce(function(fakeEntity, methodName) {
+  fakeEntity[methodName] = function() {
+    var method = entityOverrides[methodName] || entity[methodName];
+    return method.apply(this, arguments);
+  };
+  return fakeEntity;
+}, {});
+
 var extended = false;
 var fakeStreamRouter = {
   extend: function(Class, methods) {
@@ -77,6 +89,7 @@ describe('Request', function() {
   var CUSTOM_ENDPOINT = 'http://localhost:8080';
 
   before(function() {
+    mockery.registerMock('./entity.js', fakeEntity);
     mockery.registerMock('./pb.js', pb);
     mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
     mockery.registerMock('request', fakeRequest);
@@ -97,6 +110,7 @@ describe('Request', function() {
       namespace: 'namespace',
       path: ['Company', 123]
     });
+    entityOverrides = {};
     requestOverride = null;
     request = new Request();
     request.apiEndpoint = CUSTOM_ENDPOINT;
@@ -120,67 +134,214 @@ describe('Request', function() {
   });
 
   describe('get', function() {
-    it('should get by key', function(done) {
-      request.makeReq_ = function(method, req, callback) {
-        assert.equal(method, 'lookup');
-        assert.equal(req.key.length, 1);
-        callback(null, mockRespGet);
-      };
-      request.get(key, function(err, entity) {
-        var data = entity.data;
-        assert.deepEqual(entity.key.path, ['Kind', 5732568548769792]);
-        assert.strictEqual(data.author, 'Silvano');
-        assert.strictEqual(data.isDraft, false);
-        assert.deepEqual(data.publishedAt, new Date(978336000000));
+    beforeEach(function() {
+      request.makeReq_ = function() {};
+    });
+
+    it('should throw if no keys are provided', function() {
+      assert.throws(function() {
+        request.get();
+      }, /At least one Key object is required/);
+    });
+
+    it('should return a stream if no callback is provided', function() {
+      assert(request.get(key) instanceof stream);
+    });
+
+    it('should convert key to key proto', function(done) {
+      entityOverrides.keyToKeyProto = function(key_) {
+        assert.strictEqual(key_, key);
         done();
+      };
+
+      request.get(key, assert.ifError);
+    });
+
+    it('should make correct request', function(done) {
+      request.makeReq_ = function(method, req) {
+        assert.equal(method, 'lookup');
+        assert.deepEqual(req.key[0], entity.keyToKeyProto(key));
+
+        done();
+      };
+
+      request.get(key, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = { a: 'b', c: 'd' };
+
+      beforeEach(function() {
+        request.makeReq_ = function(method, req, callback) {
+          setImmediate(function() {
+            callback(error, apiResponse);
+          });
+        };
+      });
+
+      describe('callback mode', function() {
+        it('should execute callback with error & API response', function(done) {
+          request.get(key, function(err, entity, apiResponse_) {
+            assert.strictEqual(err, error);
+            assert.strictEqual(entity, null);
+            assert.strictEqual(apiResponse_, apiResponse);
+            done();
+          });
+        });
+      });
+
+      describe('stream mode', function() {
+        it('should emit error & API response', function(done) {
+          request.get(key)
+            .on('error', function(err, apiResponse_) {
+              assert.strictEqual(err, error);
+              assert.strictEqual(apiResponse_, apiResponse);
+
+              done();
+            });
+        });
+
+        it('should end stream', function(done) {
+          var stream = request.get(key);
+
+          stream.on('error', function() {
+            setImmediate(function() {
+              assert.strictEqual(isStreamEnded(stream), true);
+              done();
+            });
+          });
+        });
       });
     });
 
-    it('should return apiResponse in callback', function(done) {
-      request.makeReq_ = function(method, req, callback) {
-        callback(null, mockRespGet);
-      };
-      request.get(key, function(err, entity, apiResponse) {
-        assert.ifError(err);
-        assert.deepEqual(mockRespGet, apiResponse);
-        done();
-      });
-    });
+    describe('success', function() {
+      var apiResponse = extend(true, {}, mockRespGet);
+      var expectedResult = entity.formatArray(apiResponse.found)[0];
 
-    it('should multi get by keys', function(done) {
-      request.makeReq_ = function(method, req, callback) {
-        assert.equal(method, 'lookup');
-        assert.equal(req.key.length, 1);
-        callback(null, mockRespGet);
-      };
-      request.get([key], function(err, entities) {
-        var entity = entities[0];
-        var data = entity.data;
-        assert.deepEqual(entity.key.path, ['Kind', 5732568548769792]);
-        assert.strictEqual(data.author, 'Silvano');
-        assert.strictEqual(data.isDraft, false);
-        assert.deepEqual(data.publishedAt, new Date(978336000000));
-        done();
-      });
-    });
+      var apiResponseWithMultiEntities = extend(true, {}, apiResponse);
+      var entities = apiResponseWithMultiEntities.found;
+      entities.push(entities[0]);
+      var expectedResults = entity.formatArray(entities);
 
-    it('should continue looking for deferred results', function(done) {
-      var lookupCount = 0;
-      request.makeReq_ = function(method, req, callback) {
-        lookupCount++;
-        assert.equal(method, 'lookup');
-        if (mockRespGet.deferred.length) {
-          // Revert deferred to original state.
-          mockRespGet.deferred = [];
-        } else {
-          mockRespGet.deferred = [ entity.keyToKeyProto(key) ];
-        }
-        callback(null, mockRespGet);
-      };
-      request.get([key, key], function(err, entities) {
-        assert.equal(entities.length, 2);
-        assert.equal(lookupCount, 2);
-        done();
+      var apiResponseWithDeferred = extend(true, {}, apiResponse);
+      apiResponseWithDeferred.deferred = [
+        apiResponseWithDeferred.found[0].entity.key
+      ];
+
+      beforeEach(function() {
+        request.makeReq_ = function(method, req, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should format the results', function(done) {
+        entityOverrides.formatArray = function(arr) {
+          assert.strictEqual(arr, apiResponse.found);
+          done();
+        };
+
+        request.get(key, assert.ifError);
+      });
+
+      it('should continue looking for deferred results', function(done) {
+        var lookupCount = 0;
+
+        request.makeReq_ = function(method, req, callback) {
+          lookupCount++;
+
+          if (lookupCount === 1) {
+            callback(null, apiResponseWithDeferred);
+            return;
+          }
+
+          if (lookupCount > 1) {
+            done();
+          }
+        };
+
+        request.get(key, assert.ifError);
+      });
+
+      describe('callback mode', function() {
+        it('should exec callback with results & API response', function(done) {
+          request.get(key, function(err, entity, apiResponse_) {
+            assert.ifError(err);
+
+            assert.deepEqual(entity, expectedResult);
+            assert.strictEqual(apiResponse_, apiResponse);
+
+            done();
+          });
+        });
+
+        it('should exec callback w/ array from multiple keys', function(done) {
+          request.makeReq_ = function(method, req, callback) {
+            callback(null, apiResponseWithMultiEntities);
+          };
+
+          request.get([key, key], function(err, entities, apiResponse) {
+            assert.ifError(err);
+
+            assert.strictEqual(util.is(entities, 'array'), true);
+            assert.deepEqual(entities, expectedResults);
+
+            assert.strictEqual(apiResponse, apiResponseWithMultiEntities);
+            done();
+          });
+        });
+      });
+
+      describe('stream mode', function() {
+        it('should push results to the stream', function(done) {
+          request.get(key)
+            .on('error', done)
+            .on('data', function(entity) {
+              assert.deepEqual(entity, expectedResult);
+            })
+            .on('end', done);
+        });
+
+        it('should not push more results if stream was ended', function(done) {
+          var entitiesEmitted = 0;
+
+          request.makeReq_ = function(method, req, callback) {
+            setImmediate(function() {
+              callback(null, apiResponseWithMultiEntities);
+            });
+          };
+
+          request.get([key, key])
+            .on('data', function() {
+              entitiesEmitted++;
+              this.end();
+            })
+            .on('end', function() {
+              assert.strictEqual(entitiesEmitted, 1);
+              done();
+            });
+        });
+
+        it('should not get more results if stream was ended', function(done) {
+          var lookupCount = 0;
+
+          request.makeReq_ = function(method, req, callback) {
+            lookupCount++;
+            setImmediate(function() {
+              callback(null, apiResponseWithDeferred);
+            });
+          };
+
+          request.get(key)
+            .on('error', done)
+            .on('data', function() {
+              this.end();
+            })
+            .on('end', function() {
+              assert.strictEqual(lookupCount, 1);
+              done();
+            });
+        });
       });
     });
   });
