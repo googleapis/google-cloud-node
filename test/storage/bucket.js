@@ -406,23 +406,6 @@ describe('Bucket', function() {
       });
     });
 
-    it('should get more files if more exist', function(done) {
-      var fakeNextQuery = { a: 'b', c: 'd' };
-
-      bucket.getFiles = function(query, callback) {
-        if (Object.keys(query).length === 0) {
-          // First time through, return a `nextQuery` value.
-          callback(null, [], fakeNextQuery);
-        } else {
-          // Second time through.
-          assert.deepEqual(query, fakeNextQuery);
-          done();
-        }
-      };
-
-      bucket.deleteFiles({}, assert.ifError);
-    });
-
     it('should execute callback with error from getting files', function(done) {
       var error = new Error('Error.');
 
@@ -1024,7 +1007,7 @@ describe('Bucket', function() {
         done();
       };
 
-      bucket.getFiles = function(query, callback) {
+      bucket.getFiles = function(callback) {
         callback(null, []);
       };
 
@@ -1042,7 +1025,7 @@ describe('Bucket', function() {
         callback();
       }));
 
-      bucket.getFiles = function(query, callback) {
+      bucket.getFiles = function(callback) {
         callback(null, files);
       };
 
@@ -1064,7 +1047,7 @@ describe('Bucket', function() {
         callback();
       }));
 
-      bucket.getFiles = function(query, callback) {
+      bucket.getFiles = function(callback) {
         callback(null, files);
       };
 
@@ -1075,27 +1058,10 @@ describe('Bucket', function() {
       });
     });
 
-    it('should get more files if more exist', function(done) {
-      var fakeNextQuery = { a: 'b', c: 'd' };
-
-      bucket.getFiles = function(query, callback) {
-        if (Object.keys(query).length === 0) {
-          // First time through, return a `nextQuery` value.
-          callback(null, [], fakeNextQuery);
-        } else {
-          // Second time through.
-          assert.deepEqual(query, fakeNextQuery);
-          done();
-        }
-      };
-
-      bucket.makeAllFilesPublicPrivate_({}, assert.ifError);
-    });
-
     it('should execute callback with error from getting files', function(done) {
       var error = new Error('Error.');
 
-      bucket.getFiles = function(query, callback) {
+      bucket.getFiles = function(callback) {
         callback(error);
       };
 
@@ -1115,7 +1081,7 @@ describe('Bucket', function() {
         callback(error);
       }));
 
-      bucket.getFiles = function(query, callback) {
+      bucket.getFiles = function(callback) {
         callback(null, files);
       };
 
@@ -1135,7 +1101,7 @@ describe('Bucket', function() {
         callback(error);
       }));
 
-      bucket.getFiles = function(query, callback) {
+      bucket.getFiles = function(callback) {
         callback(null, files);
       };
 
@@ -1165,7 +1131,7 @@ describe('Bucket', function() {
         callback(error);
       }));
 
-      bucket.getFiles = function(query, callback) {
+      bucket.getFiles = function(callback) {
         callback(null, successFiles.concat(errorFiles));
       };
 

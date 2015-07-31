@@ -818,12 +818,15 @@ describe('storage', function() {
       });
     });
 
-    afterEach(function(done) {
-      versionedBucket.deleteFiles({ versions: true }, done);
-    });
-
     after(function(done) {
-      versionedBucket.delete(done);
+      versionedBucket.deleteFiles({ versions: true }, function(err) {
+        if (err) {
+          done(err);
+          return;
+        }
+
+        versionedBucket.delete(done);
+      });
     });
 
     it('should overwrite file, then get older version', function(done) {
