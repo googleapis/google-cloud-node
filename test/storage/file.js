@@ -585,6 +585,35 @@ describe('File', function() {
           });
       });
 
+      it('should unpipe stream from an error on the response', function(done) {
+        var requestStream = through();
+
+        file.bucket.storage.makeAuthorizedRequest_ = function() {
+          setImmediate(function() {
+            // Must be a stream. Doesn't matter for the tests, though.
+            requestStream.emit('response', through());
+          });
+
+          return requestStream;
+        };
+
+        handleRespOverride = function(err, resp, body, callback) {
+          assert.strictEqual(requestStream._readableState.pipesCount, 1);
+          assert.strictEqual(requestStream._readableState.pipes, readStream);
+
+          // Triggers the unpipe.
+          callback(new Error());
+
+          setImmediate(function() {
+            assert.strictEqual(requestStream._readableState.pipesCount, 0);
+            assert.strictEqual(requestStream._readableState.pipes, null);
+            done();
+          });
+        };
+
+        var readStream = file.createReadStream();
+      });
+
       it('should let util.handleResp handle the response', function(done) {
         var response = { a: 'b', c: 'd' };
 
