@@ -125,6 +125,48 @@
     "tags": [
       {
         "type": "type",
+        "string": "{module:dns}",
+        "types": [
+          "module:dns"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns.html\">dns</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:dns}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 35,
+    "codeStart": 39,
+    "code": "var DNS = require('./dns');",
+    "ctx": {
+      "type": "declaration",
+      "name": "DNS",
+      "value": "require('./dns')",
+      "string": "DNS"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
         "string": "{module:pubsub}",
         "types": [
           "module:pubsub"
@@ -153,8 +195,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 35,
-    "codeStart": 39,
+    "line": 41,
+    "codeStart": 45,
     "code": "var PubSub = require('./pubsub');",
     "ctx": {
       "type": "declaration",
@@ -195,8 +237,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 41,
-    "codeStart": 45,
+    "line": 47,
+    "codeStart": 51,
     "code": "var Search = require('./search');",
     "ctx": {
       "type": "declaration",
@@ -237,8 +279,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 47,
-    "codeStart": 51,
+    "line": 53,
+    "codeStart": 57,
     "code": "var Storage = require('./storage');",
     "ctx": {
       "type": "declaration",
@@ -279,8 +321,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 53,
-    "codeStart": 57,
+    "line": 59,
+    "codeStart": 63,
     "code": "var util = require('./common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -450,9 +492,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 59,
-    "codeStart": 118,
-    "code": "function gcloud(config) {\n  return {\n    bigquery: function(options) {\n      options = options || {};\n      return new BigQuery(util.extendGlobalConfig(config, options));\n    },\n    datastore: new Datastore(config),\n    pubsub: function(options) {\n      options = options || {};\n      return new PubSub(util.extendGlobalConfig(config, options));\n    },\n    search: function(options) {\n      options = options || {};\n      return new Search(util.extendGlobalConfig(config, options));\n    },\n    storage: function(options) {\n      options = options || {};\n      return new Storage(util.extendGlobalConfig(config, options));\n    }\n  };\n}",
+    "line": 65,
+    "codeStart": 124,
+    "code": "function gcloud(config) {\n  return {\n    bigquery: function(options) {\n      options = options || {};\n      return new BigQuery(util.extendGlobalConfig(config, options));\n    },\n    datastore: new Datastore(config),\n    dns: function(options) {\n      options = options || {};\n      return new DNS(util.extendGlobalConfig(config, options));\n    },\n    pubsub: function(options) {\n      options = options || {};\n      return new PubSub(util.extendGlobalConfig(config, options));\n    },\n    search: function(options) {\n      options = options || {};\n      return new Search(util.extendGlobalConfig(config, options));\n    },\n    storage: function(options) {\n      options = options || {};\n      return new Storage(util.extendGlobalConfig(config, options));\n    }\n  };\n}",
     "ctx": {
       "type": "constructor",
       "name": "gcloud",
@@ -504,8 +546,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 140,
-    "codeStart": 157,
+    "line": 150,
+    "codeStart": 167,
     "code": "gcloud.bigquery = BigQuery;",
     "ctx": {
       "type": "property",
@@ -560,9 +602,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 159,
-    "codeStart": 177,
-    "code": "gcloud.datastore = Datastore;",
+    "line": 169,
+    "codeStart": 187,
+    "code": "gcloud.datastore = Datastore;\n\ngcloud.dns = DNS;",
     "ctx": {
       "type": "property",
       "receiver": "gcloud",
@@ -616,8 +658,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 179,
-    "codeStart": 201,
+    "line": 191,
+    "codeStart": 213,
     "code": "gcloud.pubsub = function(config) {\n  return new PubSub(config);\n};",
     "ctx": {
       "type": "method",
@@ -671,8 +713,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 205,
-    "codeStart": 228,
+    "line": 217,
+    "codeStart": 240,
     "code": "gcloud.search = function(config) {\n  return new Search(config);\n};",
     "ctx": {
       "type": "method",
@@ -726,8 +768,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 232,
-    "codeStart": 248,
+    "line": 244,
+    "codeStart": 260,
     "code": "gcloud.storage = Storage;\n\nmodule.exports = gcloud;",
     "ctx": {
       "type": "property",

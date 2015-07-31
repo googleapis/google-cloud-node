@@ -1,0 +1,433 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
+  },
+  {
+    "tags": [
+      {
+        "type": "module",
+        "string": "dns/record",
+        "html": "<p>dns/record</p>"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 17,
+    "codeStart": 21,
+    "code": "'use strict';\n\nvar extend = require('extend');",
+    "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/util}",
+        "types": [
+          "module:common/util"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 25,
+    "codeStart": 29,
+    "code": "var util = require('../common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "constructor",
+        "string": "",
+        "html": ""
+      },
+      {
+        "type": "alias",
+        "string": "module:dns/record ",
+        "html": "<p>module:dns/record </p>"
+      },
+      {
+        "type": "param",
+        "string": "{object} type - The record type, e.g. `A`, `AAAA`, `MX`.",
+        "name": "type",
+        "description": "<ul>\n<li>The record type, e.g. <code>A</code>, <code>AAAA</code>, <code>MX</code>.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} metadata - The metadata of this record.",
+        "name": "metadata",
+        "description": "<ul>\n<li>The metadata of this record.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} metadata.name - The name of the record, e.g.\n    `www.example.com.`.",
+        "name": "metadata.name",
+        "description": "<ul>\n<li>The name of the record, e.g.     <code>www.example.com.</code>.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string[]} metadata.data - Defined in\n    [RFC 1035, section 5](https://goo.gl/9EiM0e) and\n    [RFC 1034, section 3.6.1](https://goo.gl/Hwhsu9).",
+        "name": "metadata.data",
+        "description": "<ul>\n<li>Defined in     <a href=\"https://goo.gl/9EiM0e\">RFC 1035, section 5</a> and<br />  <a href=\"https://goo.gl/Hwhsu9\">RFC 1034, section 3.6.1</a>.</li>\n</ul>\n",
+        "types": [
+          "Array.<string>"
+        ],
+        "typesDescription": "<code>Array</code>.&lt;<code>string</code>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} metadata.ttl - Seconds that the resource is cached by\n    resolvers.\n",
+        "name": "metadata.ttl",
+        "description": "<ul>\n<li>Seconds that the resource is cached by     resolvers.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\n\nvar dns = gcloud.dns({\n  projectId: 'grape-spaceship-123'\n});\n\nvar zone = dns.zone('my-awesome-zone');\n\nvar record = zone.record('a', {\n  name: 'example.com.',\n  ttl: 86400,\n  data: '1.2.3.4'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);</p><p>var dns = gcloud.dns({<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>var zone = dns.zone(&#39;my-awesome-zone&#39;);</p><p>var record = zone.record(&#39;a&#39;, {<br />  name: &#39;example.com.&#39;,<br />  ttl: 86400,<br />  data: &#39;1.2.3.4&#39;<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a Resource Record object.</p>",
+      "summary": "<p>Create a Resource Record object.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": true,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 31,
+    "codeStart": 62,
+    "code": "function Record(zone, type, metadata) {\n  this.zone_ = zone;\n\n  this.type = type;\n  this.metadata = metadata;\n\n  extend(this, this.toJSON());\n\n  if (this.rrdatas) {\n    this.data = this.rrdatas;\n    delete this.rrdatas;\n  }\n}",
+    "ctx": {
+      "type": "constructor",
+      "name": "Record",
+      "string": "Record()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "\n",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{module:dns/zone} zone     [description]",
+        "name": "zone",
+        "description": "<p>[description]</p>",
+        "types": [
+          "module:dns/zone"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Fzone.html\">dns/zone</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} type - The record type, e.g. `A`, `AAAA`, `MX`.",
+        "name": "type",
+        "description": "<ul>\n<li>The record type, e.g. <code>A</code>, <code>AAAA</code>, <code>MX</code>.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} bindData - Metadata parsed from dns-zonefile. Properties vary\n    based on the type of record.",
+        "name": "bindData",
+        "description": "<ul>\n<li>Metadata parsed from dns-zonefile. Properties vary     based on the type of record.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{module:dns/record}",
+        "types": [
+          "module:dns/record"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Frecord.html\">dns/record</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:dns/record}</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a Record instance from a resource record set in a zone file.</p>",
+      "summary": "<p>Create a Record instance from a resource record set in a zone file.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 76,
+    "codeStart": 87,
+    "code": "Record.fromZoneRecord_ = function(zone, type, bindData) {\n  var typeToZoneFormat = {\n    a: '{ip}',\n    aaaa: '{ip}',\n    cname: '{alias}',\n    mx: '{preference} {host}',\n    ns: '{host}',\n    soa: '{mname} {rname} {serial} {retry} {refresh} {expire} {minimum}',\n    spf: '{data}',\n    srv: '{priority} {weight} {port} {target}',\n    txt: '{txt}'\n  };\n\n  var metadata = {\n    data: util.format(typeToZoneFormat[type.toLowerCase()], bindData),\n    name: bindData.name,\n    ttl: bindData.ttl\n  };\n\n  return new Record(zone, type, metadata);\n};",
+    "ctx": {
+      "type": "method",
+      "receiver": "Record",
+      "name": "fromZoneRecord_",
+      "string": "Record.fromZoneRecord_()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An API error.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An API error.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?module:dns/change} callback.change - A {module:dns/change} object.",
+        "name": "callback.change",
+        "description": "<ul>\n<li>A {module:dns/change} object.</li>\n</ul>\n",
+        "types": [
+          "module:dns/change"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Fchange.html\">dns/change</a>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - Raw API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>Raw API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "record.delete(function(err, change, apiResponse) {\n  if (!err) {\n    // Delete change modification was created.\n  }\n});",
+        "html": "<p>record.delete(function(err, change, apiResponse) {<br />  if (!err) {<br />    // Delete change modification was created.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Delete this record by creating a change on your zone. This is a convenience<br />method for:</p><pre><code>zone.createChange({\n  delete: record\n}, function(err, change, apiResponse) {});\n</code></pre>",
+      "summary": "<p>Delete this record by creating a change on your zone. This is a convenience<br />method for:</p>",
+      "body": "<pre><code>zone.createChange({\n  delete: record\n}, function(err, change, apiResponse) {});\n</code></pre>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 109,
+    "codeStart": 129,
+    "code": "Record.prototype.delete = function(callback) {\n  this.zone_.deleteRecords(this, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Record",
+      "cons": "Record",
+      "name": "delete",
+      "string": "Record.prototype.delete()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "<p>Serialize the record instance to the format the API expects.</p>",
+      "summary": "<p>Serialize the record instance to the format the API expects.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 133,
+    "codeStart": 138,
+    "code": "Record.prototype.toJSON = function() {\n  var recordObject = extend({}, this.metadata, {\n    type: this.type.toUpperCase()\n  });\n\n  if (recordObject.data) {\n    recordObject.rrdatas = util.arrayize(recordObject.data);\n    delete recordObject.data;\n  }\n\n  return recordObject;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Record",
+      "cons": "Record",
+      "name": "toJSON",
+      "string": "Record.prototype.toJSON()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "\n",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "return",
+        "string": "{string}",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{string}</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Convert the record to a string, formatted for a zone file.</p>",
+      "summary": "<p>Convert the record to a string, formatted for a zone file.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 151,
+    "codeStart": 158,
+    "code": "Record.prototype.toString = function() {\n  var json = this.toJSON();\n\n  return (json.rrdatas || [{}]).map(function(data) {\n    json.rrdata = data;\n    return util.format('{name} {ttl} IN {type} {rrdata}', json);\n  }).join('\\n');\n};\n\nmodule.exports = Record;",
+    "ctx": {
+      "type": "method",
+      "constructor": "Record",
+      "cons": "Record",
+      "name": "toString",
+      "string": "Record.prototype.toString()"
+    }
+  }
+]
