@@ -491,6 +491,21 @@ describe('storage', function() {
       });
     });
 
+    it('should not push data when a file cannot be read', function(done) {
+      var file = bucket.file('non-existing-file');
+      var dataEmitted = false;
+
+      file.createReadStream()
+        .on('data', function() {
+          dataEmitted = true;
+        })
+        .on('error', function(err) {
+          assert.strictEqual(dataEmitted, false);
+          assert.strictEqual(err.code, 404);
+          done();
+        });
+    });
+
     it('should read a byte range from a file', function(done) {
       bucket.upload(files.big.path, function(err, file) {
         assert.ifError(err);
