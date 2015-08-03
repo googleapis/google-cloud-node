@@ -22,7 +22,6 @@ var assert = require('assert');
 var ByteBuffer = require('bytebuffer');
 var entity = require('../../lib/datastore/entity.js');
 var extend = require('extend');
-var isStreamEnded = require('is-stream-ended');
 var mockery = require('mockery');
 var mockRespGet = require('../testdata/response_get.json');
 var pb = require('../../lib/datastore/pb.js');
@@ -181,23 +180,19 @@ describe('Request', function() {
       });
 
       describe('callback mode', function() {
-        it('should execute callback with error & API response', function(done) {
-          request.get(key, function(err, entity, apiResponse_) {
+        it('should execute callback with error', function(done) {
+          request.get(key, function(err) {
             assert.strictEqual(err, error);
-            assert.strictEqual(entity, null);
-            assert.strictEqual(apiResponse_, apiResponse);
             done();
           });
         });
       });
 
       describe('stream mode', function() {
-        it('should emit error & API response', function(done) {
+        it('should emit error', function(done) {
           request.get(key)
-            .on('error', function(err, apiResponse_) {
+            .on('error', function(err) {
               assert.strictEqual(err, error);
-              assert.strictEqual(apiResponse_, apiResponse);
-
               done();
             });
         });
@@ -207,7 +202,7 @@ describe('Request', function() {
 
           stream.on('error', function() {
             setImmediate(function() {
-              assert.strictEqual(isStreamEnded(stream), true);
+              assert.strictEqual(stream._readableState.ended, true);
               done();
             });
           });
@@ -238,39 +233,34 @@ describe('Request', function() {
       it('should format the results', function(done) {
         entityOverrides.formatArray = function(arr) {
           assert.strictEqual(arr, apiResponse.found);
-          done();
+          setImmediate(done);
+          return arr;
         };
 
         request.get(key, assert.ifError);
       });
 
       it('should continue looking for deferred results', function(done) {
-        var lookupCount = 0;
-
         request.makeReq_ = function(method, req, callback) {
-          lookupCount++;
-
-          if (lookupCount === 1) {
-            callback(null, apiResponseWithDeferred);
-            return;
-          }
-
-          if (lookupCount > 1) {
-            done();
-          }
+          callback(null, apiResponseWithDeferred);
         };
 
         request.get(key, assert.ifError);
+
+        request.get = function(keys) {
+          var expectedKeys = apiResponseWithDeferred.deferred
+            .map(entity.keyFromKeyProto);
+
+          assert.deepEqual(keys, expectedKeys);
+          done();
+        };
       });
 
       describe('callback mode', function() {
-        it('should exec callback with results & API response', function(done) {
-          request.get(key, function(err, entity, apiResponse_) {
+        it('should exec callback with results', function(done) {
+          request.get(key, function(err, entity) {
             assert.ifError(err);
-
             assert.deepEqual(entity, expectedResult);
-            assert.strictEqual(apiResponse_, apiResponse);
-
             done();
           });
         });
@@ -280,13 +270,12 @@ describe('Request', function() {
             callback(null, apiResponseWithMultiEntities);
           };
 
-          request.get([key, key], function(err, entities, apiResponse) {
+          request.get([key, key], function(err, entities) {
             assert.ifError(err);
 
             assert.strictEqual(util.is(entities, 'array'), true);
             assert.deepEqual(entities, expectedResults);
 
-            assert.strictEqual(apiResponse, apiResponseWithMultiEntities);
             done();
           });
         });
