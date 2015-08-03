@@ -113,52 +113,6 @@ describe('common/util', function() {
     assert.deepEqual(util.missingProjectIdError, missingProjectIdError);
   });
 
-  describe('arrayize', function() {
-    it('should arrayize if the input is not an array', function() {
-      assert.deepEqual(util.arrayize('text'), ['text']);
-    });
-
-    it('should return the same array if given an array', function() {
-      var arr = [1, 2, 3];
-      assert.deepEqual(util.arrayize(arr), arr);
-    });
-
-    it('should return an empty array in correct circumstance', function() {
-      assert.deepEqual(util.arrayize(undefined), []);
-      assert.deepEqual(util.arrayize(null), []);
-
-      assert.deepEqual(util.arrayize(false), [false]);
-      assert.deepEqual(util.arrayize(0), [0]);
-    });
-  });
-
-  describe('format', function() {
-    it('should replace denoated keys with corresponding values', function() {
-      var formatted = util.format('{greeting} {thing}!', {
-        greeting: 'Hello',
-        thing: 'world'
-      });
-
-      assert.strictEqual(formatted, 'Hello world!');
-    });
-
-    it('should leave any unsatisfied keys unchanged', function() {
-      var formatted = util.format('{greeting} {thing}!', {
-        greeting: 'swamp'
-      });
-
-      assert.strictEqual(formatted, 'swamp {thing}!');
-    });
-
-    it('should inject falsy values', function() {
-      var formatted = util.format('{num}', {
-        num: 0
-      });
-
-      assert.strictEqual(formatted, '0');
-    });
-  });
-
   describe('ApiError', function() {
     it('should build correct ApiError', function() {
       var error = {
@@ -1049,79 +1003,6 @@ describe('common/util', function() {
           done();
         });
       });
-    });
-  });
-
-  describe('exec', function() {
-    it('should execute the function specified', function() {
-      var people = [
-        {
-          getName: function() { return 'Stephen'; }
-        },
-        {
-          getName: function() { return 'Dave'; }
-        }
-      ];
-
-      assert.deepEqual(people.map(util.exec('getName')), ['Stephen', 'Dave']);
-    });
-
-    it('should accept arguments', function() {
-      var people = [
-        {
-          getName: function(prefix) { return prefix + ' Stephen'; }
-        },
-        {
-          getName: function(prefix) { return prefix + ' Dave'; }
-        }
-      ];
-
-      var expectedNames = ['Mr. Stephen', 'Mr. Dave'];
-
-      assert.deepEqual(people.map(util.exec('getName', 'Mr.')), expectedNames);
-    });
-  });
-
-  describe('prop', function() {
-    it('should return objects that match the property name', function() {
-      var people = [
-        { name: 'Stephen', origin: 'USA', beenToNYC: false },
-        { name: 'Ryan', origin: 'Canada', beenToNYC: true }
-      ];
-
-      assert.deepEqual(people.map(util.prop('name')), ['Stephen', 'Ryan']);
-      assert.deepEqual(people.filter(util.prop('beenToNYC')), [people[1]]);
-    });
-  });
-
-  describe('propAssign', function() {
-    it('should assign a property and value to an object', function() {
-      var obj = {};
-      util.propAssign('prop', 'value')(obj);
-      assert.equal(obj.prop, 'value');
-    });
-  });
-
-  describe('is', function() {
-    it('should check if an object is of the given type', function() {
-      assert(new Buffer(''), 'buffer');
-      assert(util.is('Hi!', 'string'));
-      assert(util.is([1, 2, 3], 'array'));
-      assert(util.is({}, 'object'));
-      assert(util.is(5, 'number'));
-      assert(util.is(true, 'boolean'));
-    });
-  });
-
-  describe('toArray', function() {
-    it('should convert an arguments object into an array', function() {
-      function stub() {
-        var args = util.toArray(arguments);
-
-        assert.deepEqual(args, [1, 2, 3]);
-      }
-
-      stub(1, 2, 3);
     });
   });
 
