@@ -5,9 +5,9 @@ script: ./scripts/build.sh
 before_deploy: ./scripts/release.sh
 deploy:
   provider: npm
-  email: silvano.luciani@gmail.com
+  email: jj@geewax.org
   api_key:
-    secure: W8J++FLVJYKeZL9R5R/tpBJbmaVhYRyjiYDCAFg+HCaX/aa9THql7iYpTlk5ezQw3CXAqPZhWqvoxQMUJNFiAkdmsNhiopD7zInomCzQhlCazWqGsv0a/m5qfdlhlesv31/WZzqr+gA3PEOjG6ED893YMhDi8SluMfHZYbYJPXk=
+    secure: fdOPQR6qYjw7vIRtQgbIGZnM3/OOXNHznYEObtTkUXl4mpVIstZ7gTn6MVHTYeAqpBtLpIIXGxocwLqie1HIbs5tSMWmY+7yzi2Igb9xDWlq36fBOIUbv9FkSRXjgQrtvKFdsJlgTIpTtK3KHCcY/9o/YCTYgj2ejMWhDq1zo3c=
   on:
     tags: true
     repo: GoogleCloudPlatform/gcloud-node
