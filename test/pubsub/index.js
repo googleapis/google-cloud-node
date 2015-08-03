@@ -16,11 +16,11 @@
 
 'use strict';
 
+var arrify = require('arrify');
 var assert = require('assert');
 var mockery = require('mockery');
 var request = require('request');
 var Topic = require('../../lib/pubsub/topic.js');
-var util = require('../../lib/common/util.js');
 
 var SubscriptionCached = require('../../lib/pubsub/subscription.js');
 var SubscriptionOverride;
@@ -48,7 +48,7 @@ var fakeStreamRouter = {
       return;
     }
 
-    methods = util.arrayize(methods);
+    methods = arrify(methods);
     assert.equal(Class.name, 'PubSub');
     assert.deepEqual(methods, ['getSubscriptions', 'getTopics']);
     extended = true;

@@ -20,6 +20,7 @@
 // register".
 var crc = require('sse4_crc32');
 
+var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
 var mockery = require('mockery');
@@ -33,7 +34,7 @@ var fakeStreamRouter = {
       return;
     }
 
-    methods = util.arrayize(methods);
+    methods = arrify(methods);
     assert.equal(Class.name, 'Storage');
     assert.deepEqual(methods, ['getBuckets']);
     extended = true;

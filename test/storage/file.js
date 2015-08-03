@@ -22,6 +22,7 @@ var crc = require('sse4_crc32');
 var crypto = require('crypto');
 var duplexify = require('duplexify');
 var extend = require('extend');
+var format = require('string-format-obj');
 var fs = require('fs');
 var mockery = require('mockery');
 var nodeutil = require('util');
@@ -171,7 +172,7 @@ describe('File', function() {
       var newFile = new File(bucket, 'nested/file.jpg');
 
       var expectedPath =
-        util.format('/o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {
+        format('/o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {
           srcName: encodeURIComponent(directoryFile.name),
           destBucket: file.bucket.name,
           destName: encodeURIComponent(newFile.name)
@@ -208,7 +209,7 @@ describe('File', function() {
       it('should allow a string', function(done) {
         var newFileName = 'new-file-name.png';
         var expectedPath =
-          util.format('/o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {
+          format('/o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {
             srcName: file.name,
             destBucket: file.bucket.name,
             destName: newFileName
@@ -220,7 +221,7 @@ describe('File', function() {
       it('should allow a Bucket', function(done) {
         var newBucket = new Bucket({}, 'new-bucket');
         var expectedPath =
-          util.format('/o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {
+          format('/o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {
             srcName: file.name,
             destBucket: newBucket.name,
             destName: file.name
@@ -233,7 +234,7 @@ describe('File', function() {
         var newBucket = new Bucket({}, 'new-bucket');
         var newFile = new File(newBucket, 'new-file');
         var expectedPath =
-          util.format('/o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {
+          format('/o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {
             srcName: file.name,
             destBucket: newBucket.name,
             destName: newFile.name
@@ -498,7 +499,7 @@ describe('File', function() {
 
     describe('authorizing', function() {
       it('should create an authorized request', function(done) {
-        var expectedPath = util.format('https://{host}/{b}/{o}', {
+        var expectedPath = format('https://{host}/{b}/{o}', {
           host: 'storage.googleapis.com',
           b: file.bucket.name,
           o: encodeURIComponent(file.name)

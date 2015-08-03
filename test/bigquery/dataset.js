@@ -22,6 +22,7 @@
 // register".
 var crc = require('sse4_crc32');
 
+var arrify = require('arrify');
 var assert = require('assert');
 var util = require('../../lib/common/util');
 var mockery = require('mockery');
@@ -33,7 +34,7 @@ var fakeStreamRouter = {
       return;
     }
 
-    methods = util.arrayize(methods);
+    methods = arrify(methods);
     assert.equal(Class.name, 'Dataset');
     assert.deepEqual(methods, ['getTables']);
     extended = true;

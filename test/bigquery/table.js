@@ -18,6 +18,7 @@
 
 'use strict';
 
+var arrify = require('arrify');
 var assert = require('assert');
 var crypto = require('crypto');
 var extend = require('extend');
@@ -45,7 +46,7 @@ var fakeStreamRouter = {
       return;
     }
 
-    methods = util.arrayize(methods);
+    methods = arrify(methods);
     assert.equal(Class.name, 'Table');
     assert.deepEqual(methods, ['getRows']);
     extended = true;

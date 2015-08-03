@@ -104,7 +104,7 @@ describe('Topic', function() {
 
     it('should throw if a message has no data', function() {
       assert.throws(function() {
-        topic.publish(message);
+        topic.publish({});
       }, /Cannot publish message without a `data` property/);
     });
 
