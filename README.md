@@ -1,4 +1,6 @@
 # Google Cloud Node.js Client
+
+[![Join the chat at https://gitter.im/GoogleCloudPlatform/gcloud-node](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/GoogleCloudPlatform/gcloud-node?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 > Node.js idiomatic client for [Google Cloud Platform](https://cloud.google.com/) services.
 
 [![NPM Version](https://img.shields.io/npm/v/gcloud.svg)](https://www.npmjs.org/package/gcloud)
