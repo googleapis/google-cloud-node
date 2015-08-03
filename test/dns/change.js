@@ -18,6 +18,7 @@
 
 var assert = require('assert');
 var extend = require('extend');
+var format = require('string-format-obj');
 
 var Change = require('../../lib/dns/change.js');
 var util = require('../../lib/common/util.js');
@@ -66,7 +67,7 @@ describe('Change', function() {
       change.makeReq_ = function(method, path, query, body) {
         assert.strictEqual(method, 'GET');
 
-        var expectedPath = util.format('/managedZones/{z}/changes/{c}', {
+        var expectedPath = format('/managedZones/{z}/changes/{c}', {
           z: ZONE.name,
           c: CHANGE_ID
         });

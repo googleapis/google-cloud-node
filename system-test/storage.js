@@ -22,13 +22,11 @@ var Bucket = require('../lib/storage/bucket.js');
 var crypto = require('crypto');
 var File = require('../lib/storage/file.js');
 var fs = require('fs');
+var prop = require('propprop');
 var request = require('request');
 var through = require('through2');
 var tmp = require('tmp');
-var util = require('../lib/common/util.js');
 var uuid = require('node-uuid');
-
-var prop = util.prop;
 
 var env = require('./env.js');
 var storage = require('../lib/storage')(env);

@@ -18,13 +18,14 @@
 
 var assert = require('assert');
 var async = require('async');
+var exec = require('methmeth');
+var format = require('string-format-obj');
 var fs = require('fs');
 var tmp = require('tmp');
 var uuid = require('node-uuid');
 
 var env = require('./env.js');
 var DNS = require('../lib/dns');
-var util = require('../lib/common/util.js');
 
 var dns = new DNS(env);
 var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
@@ -121,7 +122,7 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
         return;
       }
 
-      async.each(zones, util.exec('delete', { force: true }), function(err) {
+      async.each(zones, exec('delete', { force: true }), function(err) {
         if (err) {
           done(err);
           return;
@@ -198,7 +199,7 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
     it('should import records from a zone file', function(done) {
       var zoneFilename = require.resolve('./data/zonefile.zone');
       var zoneFileTemplate = fs.readFileSync(zoneFilename, 'utf-8');
-      zoneFileTemplate = util.format(zoneFileTemplate, {
+      zoneFileTemplate = format(zoneFileTemplate, {
         DNS_DOMAIN: DNS_DOMAIN
       });
 

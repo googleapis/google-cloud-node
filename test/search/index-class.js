@@ -16,13 +16,14 @@
 
 'use strict';
 
+var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
 var mockery = require('mockery');
 var util = require('../../lib/common/util.js');
 
 function FakeDocument() {
-  this.calledWith_ = util.toArray(arguments);
+  this.calledWith_ = [].slice.call(arguments);
 }
 FakeDocument.prototype.toJSON = util.noop;
 
@@ -30,7 +31,7 @@ var extended = false;
 var fakeStreamRouter = {
   extend: function(Class, methods) {
     extended = true;
-    methods = util.arrayize(methods);
+    methods = arrify(methods);
     assert.equal(Class.name, 'Index');
     assert.deepEqual(methods, ['getDocuments', 'search']);
   }

@@ -18,6 +18,7 @@
 
 'use strict';
 
+var arrify = require('arrify');
 var assert = require('assert');
 var entity = require('../../lib/datastore/entity.js');
 var extend = require('extend');
@@ -53,7 +54,7 @@ describe('Transaction', function() {
   var TRANSACTION_ID = 'transaction-id';
 
   function key(path) {
-    return new entity.Key({ path: util.arrayize(path) });
+    return new entity.Key({ path: arrify(path) });
   }
 
   before(function() {

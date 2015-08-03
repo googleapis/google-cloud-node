@@ -16,11 +16,14 @@
 
 'use strict';
 
+var arrify = require('arrify');
 var assert = require('assert');
 var async = require('async');
 var extend = require('extend');
+var format = require('string-format-obj');
 var mime = require('mime-types');
 var mockery = require('mockery');
+var propAssign = require('prop-assign');
 var request = require('request');
 var stream = require('stream');
 var util = require('../../lib/common/util.js');
@@ -70,7 +73,7 @@ var fakeStreamRouter = {
       return;
     }
 
-    methods = util.arrayize(methods);
+    methods = arrify(methods);
     assert.equal(Class.name, 'Bucket');
     assert.deepEqual(methods, ['getFiles']);
     extended = true;
@@ -237,7 +240,7 @@ describe('Bucket', function() {
       var destination = bucket.file('destination.txt');
 
       bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
-        var expectedUri = util.format('{base}/{bucket}/o/{file}/compose', {
+        var expectedUri = format('{base}/{bucket}/o/{file}/compose', {
           base: 'https://www.googleapis.com/storage/v1/b',
           bucket: destination.bucket.name,
           file: encodeURIComponent(destination.name)
@@ -390,7 +393,7 @@ describe('Bucket', function() {
       var files = [
         bucket.file('1'),
         bucket.file('2')
-      ].map(util.propAssign('delete', function(callback) {
+      ].map(propAssign('delete', function(callback) {
         timesCalled++;
         callback();
       }));
@@ -425,7 +428,7 @@ describe('Bucket', function() {
       var files = [
         bucket.file('1'),
         bucket.file('2')
-      ].map(util.propAssign('delete', function(callback) {
+      ].map(propAssign('delete', function(callback) {
         callback(error);
       }));
 
@@ -445,7 +448,7 @@ describe('Bucket', function() {
       var files = [
         bucket.file('1'),
         bucket.file('2')
-      ].map(util.propAssign('delete', function(callback) {
+      ].map(propAssign('delete', function(callback) {
         callback(error);
       }));
 
@@ -1020,7 +1023,7 @@ describe('Bucket', function() {
       var files = [
         bucket.file('1'),
         bucket.file('2')
-      ].map(util.propAssign('makePublic', function(callback) {
+      ].map(propAssign('makePublic', function(callback) {
         timesCalled++;
         callback();
       }));
@@ -1042,7 +1045,7 @@ describe('Bucket', function() {
       var files = [
         bucket.file('1'),
         bucket.file('2')
-      ].map(util.propAssign('makePrivate', function(callback) {
+      ].map(propAssign('makePrivate', function(callback) {
         timesCalled++;
         callback();
       }));
@@ -1077,7 +1080,7 @@ describe('Bucket', function() {
       var files = [
         bucket.file('1'),
         bucket.file('2')
-      ].map(util.propAssign('makePublic', function(callback) {
+      ].map(propAssign('makePublic', function(callback) {
         callback(error);
       }));
 
@@ -1097,7 +1100,7 @@ describe('Bucket', function() {
       var files = [
         bucket.file('1'),
         bucket.file('2')
-      ].map(util.propAssign('makePublic', function(callback) {
+      ].map(propAssign('makePublic', function(callback) {
         callback(error);
       }));
 
@@ -1120,14 +1123,14 @@ describe('Bucket', function() {
       var successFiles = [
         bucket.file('1'),
         bucket.file('2')
-      ].map(util.propAssign('makePublic', function(callback) {
+      ].map(propAssign('makePublic', function(callback) {
         callback();
       }));
 
       var errorFiles = [
         bucket.file('3'),
         bucket.file('4')
-      ].map(util.propAssign('makePublic', function(callback) {
+      ].map(propAssign('makePublic', function(callback) {
         callback(error);
       }));
 
