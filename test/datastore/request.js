@@ -18,10 +18,13 @@
 
 'use strict';
 
+var arrify = require('arrify');
 var assert = require('assert');
 var ByteBuffer = require('bytebuffer');
 var entity = require('../../lib/datastore/entity.js');
 var extend = require('extend');
+var format = require('string-format-obj');
+var is = require('is');
 var mockery = require('mockery');
 var mockRespGet = require('../testdata/response_get.json');
 var pb = require('../../lib/datastore/pb.js');
@@ -53,7 +56,7 @@ pb.FakeMethodResponse = {
   decode: function() {
     var decodeFn = pbFakeMethodResponseDecode;
     pbFakeMethodResponseDecode = util.noop;
-    return decodeFn.apply(this, util.toArray(arguments));
+    return decodeFn.apply(this, arguments);
   }
 };
 
@@ -74,7 +77,7 @@ var fakeStreamRouter = {
       return;
     }
 
-    methods = util.arrayize(methods);
+    methods = arrify(methods);
     assert.equal(Class.name, 'DatastoreRequest');
     assert.deepEqual(methods, ['runQuery']);
     extended = true;
@@ -273,7 +276,7 @@ describe('Request', function() {
           request.get([key, key], function(err, entities) {
             assert.ifError(err);
 
-            assert.strictEqual(util.is(entities, 'array'), true);
+            assert.strictEqual(is.array(entities), true);
             assert.deepEqual(entities, expectedResults);
 
             done();
@@ -766,7 +769,7 @@ describe('Request', function() {
       var method = 'commit';
       var projectId = 'project-id';
       var expectedUri =
-        util.format('{apiEndpoint}/datastore/v1beta2/datasets/{pId}/{method}', {
+        format('{apiEndpoint}/datastore/v1beta2/datasets/{pId}/{method}', {
           apiEndpoint: CUSTOM_ENDPOINT,
           pId: projectId,
           method: method

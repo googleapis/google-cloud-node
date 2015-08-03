@@ -16,10 +16,10 @@
 
 'use strict';
 
+var arrify = require('arrify');
 var assert = require('assert');
 var mockery = require('mockery');
 var Table = require('../../lib/bigquery/table.js');
-var util = require('../../lib/common/util.js');
 
 function FakeTable(a, b) {
   Table.call(this, a, b);
@@ -39,7 +39,7 @@ var fakeStreamRouter = {
       return;
     }
 
-    methods = util.arrayize(methods);
+    methods = arrify(methods);
     assert.equal(Class.name, 'BigQuery');
     assert.deepEqual(methods, ['getDatasets', 'getJobs', 'query']);
     extended = true;

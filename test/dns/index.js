@@ -16,6 +16,7 @@
 
 'use strict';
 
+var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
 var mockery = require('mockery');
@@ -30,7 +31,7 @@ var fakeStreamRouter = {
     }
 
     extended = true;
-    methods = util.arrayize(methods);
+    methods = arrify(methods);
     assert.equal(Class.name, 'DNS');
     assert.deepEqual(methods, ['getZones']);
   }

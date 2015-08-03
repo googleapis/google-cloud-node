@@ -16,13 +16,15 @@
 
 'use strict';
 
+var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
 var mockery = require('mockery');
+var prop = require('propprop');
 var util = require('../../lib/common/util.js');
 
 function FakeIndex() {
-  this.calledWith_ = util.toArray(arguments);
+  this.calledWith_ = [].slice.call(arguments);
 }
 
 var extended = false;
@@ -32,7 +34,7 @@ var fakeStreamRouter = {
       return;
     }
 
-    methods = util.arrayize(methods);
+    methods = arrify(methods);
     assert.equal(Class.name, 'Search');
     assert.deepEqual(methods, ['getIndexes']);
     extended = true;
@@ -178,7 +180,7 @@ describe('Search', function() {
 
     it('should execute callback with index objects', function(done) {
       var indexObjects = [{ indexId: 'a' }, { indexId: 'b' }, { indexId: 'c' }];
-      var indexIds = indexObjects.map(util.prop('indexId'));
+      var indexIds = indexObjects.map(prop('indexId'));
 
       var apiResponse = { indexes: indexObjects };
 
