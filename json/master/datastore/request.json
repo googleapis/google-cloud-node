@@ -34,7 +34,7 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar isStreamEnded = require('is-stream-ended');\nvar request = require('request').defaults({\n  pool: {\n    maxSockets: Infinity\n  }\n});\nvar through = require('through2');",
+    "code": "'use strict';\n\nvar concat = require('concat-stream');\nvar request = require('request').defaults({\n  pool: {\n    maxSockets: Infinity\n  }\n});\nvar split = require('split-array-stream');\nvar through = require('through2');",
     "ctx": false
   },
   {
@@ -69,8 +69,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 31,
-    "codeStart": 35,
+    "line": 32,
+    "codeStart": 36,
     "code": "var entity = require('./entity.js');",
     "ctx": {
       "type": "declaration",
@@ -111,8 +111,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 37,
-    "codeStart": 41,
+    "line": 38,
+    "codeStart": 42,
     "code": "var pb = require('./pb.js');",
     "ctx": {
       "type": "declaration",
@@ -153,8 +153,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 43,
-    "codeStart": 47,
+    "line": 44,
+    "codeStart": 48,
     "code": "var streamRouter = require('../common/stream-router.js');",
     "ctx": {
       "type": "declaration",
@@ -195,8 +195,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 49,
-    "codeStart": 53,
+    "line": 50,
+    "codeStart": 54,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -229,8 +229,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 55,
-    "codeStart": 59,
+    "line": 56,
+    "codeStart": 60,
     "code": "var MODE_NON_TRANSACTIONAL = 'NON_TRANSACTIONAL';",
     "ctx": {
       "type": "declaration",
@@ -263,8 +263,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 61,
-    "codeStart": 65,
+    "line": 62,
+    "codeStart": 66,
     "code": "var MODE_TRANSACTIONAL = 'TRANSACTIONAL';",
     "ctx": {
       "type": "declaration",
@@ -291,8 +291,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 67,
-    "codeStart": 83
+    "line": 68,
+    "codeStart": 84
   },
   {
     "tags": [
@@ -322,8 +322,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 83,
-    "codeStart": 90,
+    "line": 84,
+    "codeStart": 91,
     "code": "function DatastoreRequest() {}",
     "ctx": {
       "type": "constructor",
@@ -386,7 +386,7 @@
       },
       {
         "type": "param",
-        "string": "{module:datastore/entity|module:datastore/entity[]} callback.entity -\n    Will return either a single Entity or a list of Entities.",
+        "string": "{module:datastore/entity|module:datastore/entity[]} callback.entity -\n    Will return either a single Entity or a list of Entities.\n",
         "name": "callback.entity",
         "description": "<ul>\n<li>Will return either a single Entity or a list of Entities.</li>\n</ul>\n",
         "types": [
@@ -400,23 +400,9 @@
         "variable": false
       },
       {
-        "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
-        "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
-        "types": [
-          "object"
-        ],
-        "typesDescription": "<code>object</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
         "type": "example",
-        "string": "//-\n// Where you see `transaction`, assume this is the context that's relevant to\n// your use, whether that be a Dataset or Transaction object.\n//-\n\n//-\n// Get a single entity.\n//-\nvar key = dataset.key(['Company', 123]);\n\ntransaction.get(key, function(err, entity, apiResponse) {});\n\n//-\n// Get multiple entities at once with a callback.\n//-\nvar keys = [\n  dataset.key(['Company', 123]),\n  dataset.key(['Product', 'Computer'])\n];\n\ntransaction.get(keys, function(err, entities, apiResponse) {});\n\n//-\n// Or, get the entities as a readable object stream.\n//-\ntransaction.get(keys)\n  .on('error', function(err, apiResponse) {})\n  .on('data', function(entity) {\n    // entity is an entity object.\n  })\n  .on('end', function() {\n    // All entities retrieved.\n  });",
-        "html": "<p>//-<br />// Where you see <code>transaction</code>, assume this is the context that&#39;s relevant to<br />// your use, whether that be a Dataset or Transaction object.<br />//-</p><p>//-<br />// Get a single entity.<br />//-<br />var key = dataset.key([&#39;Company&#39;, 123]);</p><p>transaction.get(key, function(err, entity, apiResponse) {});</p><p>//-<br />// Get multiple entities at once with a callback.<br />//-<br />var keys = [<br />  dataset.key([&#39;Company&#39;, 123]),<br />  dataset.key([&#39;Product&#39;, &#39;Computer&#39;])<br />];</p><p>transaction.get(keys, function(err, entities, apiResponse) {});</p><p>//-<br />// Or, get the entities as a readable object stream.<br />//-<br />transaction.get(keys)<br />  .on(&#39;error&#39;, function(err, apiResponse) {})<br />  .on(&#39;data&#39;, function(entity) {<br />    // entity is an entity object.<br />  })<br />  .on(&#39;end&#39;, function() {<br />    // All entities retrieved.<br />  });</p>"
+        "string": "//-\n// Where you see `transaction`, assume this is the context that's relevant to\n// your use, whether that be a Dataset or Transaction object.\n//-\n\n//-\n// Get a single entity.\n//-\nvar key = dataset.key(['Company', 123]);\n\ntransaction.get(key, function(err, entity) {});\n\n//-\n// Get multiple entities at once with a callback.\n//-\nvar keys = [\n  dataset.key(['Company', 123]),\n  dataset.key(['Product', 'Computer'])\n];\n\ntransaction.get(keys, function(err, entities) {});\n\n//-\n// Or, get the entities as a readable object stream.\n//-\ntransaction.get(keys)\n  .on('error', function(err) {})\n  .on('data', function(entity) {\n    // entity is an entity object.\n  })\n  .on('end', function() {\n    // All entities retrieved.\n  });",
+        "html": "<p>//-<br />// Where you see <code>transaction</code>, assume this is the context that&#39;s relevant to<br />// your use, whether that be a Dataset or Transaction object.<br />//-</p><p>//-<br />// Get a single entity.<br />//-<br />var key = dataset.key([&#39;Company&#39;, 123]);</p><p>transaction.get(key, function(err, entity) {});</p><p>//-<br />// Get multiple entities at once with a callback.<br />//-<br />var keys = [<br />  dataset.key([&#39;Company&#39;, 123]),<br />  dataset.key([&#39;Product&#39;, &#39;Computer&#39;])<br />];</p><p>transaction.get(keys, function(err, entities) {});</p><p>//-<br />// Or, get the entities as a readable object stream.<br />//-<br />transaction.get(keys)<br />  .on(&#39;error&#39;, function(err) {})<br />  .on(&#39;data&#39;, function(entity) {<br />    // entity is an entity object.<br />  })<br />  .on(&#39;end&#39;, function() {<br />    // All entities retrieved.<br />  });</p>"
       }
     ],
     "description": {
@@ -429,9 +415,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 92,
+    "line": 93,
     "codeStart": 141,
-    "code": "DatastoreRequest.prototype.get = function(keys, callback) {\n  var self = this;\n\n  var isStreamMode = !callback;\n  var stream;\n\n  if (isStreamMode) {\n    stream = through.obj();\n  }\n\n  var isSingleLookup = !util.is(keys, 'array');\n  keys = util.arrayize(keys).map(entity.keyToKeyProto);\n\n  if (keys.length === 0) {\n    throw new Error('At least one Key object is required.');\n  }\n\n  var request = {\n    key: keys\n  };\n\n  var entities = [];\n  this.makeReq_('lookup', request, onApiResponse);\n\n  function onApiResponse(err, resp) {\n    if (err) {\n      if (isStreamMode) {\n        stream.emit('error', err, resp);\n        stream.end();\n      } else {\n        callback(err, null, resp);\n      }\n      return;\n    }\n\n    var results = entity.formatArray(resp.found);\n    var nextKeys = (resp.deferred || []).map(entity.keyFromKeyProto);\n\n    if (isStreamMode) {\n      var result;\n      while ((result = results.shift()) && !isStreamEnded(stream)) {\n        stream.push(result);\n      }\n    } else {\n      entities = entities.concat(results);\n    }\n\n    if (isStreamMode && isStreamEnded(stream)) {\n      return;\n    }\n\n    if (nextKeys.length > 0) {\n      self.get(nextKeys, onApiResponse);\n      return;\n    }\n\n    if (isStreamMode) {\n      stream.push(null);\n      stream.end();\n    } else {\n      callback(null, isSingleLookup ? entities[0] : entities, resp);\n    }\n  }\n\n  if (isStreamMode) {\n    return stream;\n  }\n};",
+    "code": "DatastoreRequest.prototype.get = function(keys, callback) {\n  if (util.is(callback, 'function')) {\n    // Run this method in stream mode and send the results back to the callback.\n    this.get(keys)\n      .on('error', callback)\n      .pipe(concat(function(results) {\n        var isSingleLookup = !util.is(keys, 'array');\n        callback(null, isSingleLookup ? results[0] : results);\n      }));\n    return;\n  }\n\n  keys = util.arrayize(keys).map(entity.keyToKeyProto);\n\n  if (keys.length === 0) {\n    throw new Error('At least one Key object is required.');\n  }\n\n  var self = this;\n  var stream = through.obj();\n\n  function onApiResponse(err, resp) {\n    if (err) {\n      stream.emit('error', err);\n      stream.end();\n      return;\n    }\n\n    var entities = entity.formatArray(resp.found);\n    var nextKeys = (resp.deferred || []).map(entity.keyFromKeyProto);\n\n    split(entities, stream, function(streamEnded) {\n      if (streamEnded) {\n        return;\n      }\n\n      if (nextKeys.length > 0) {\n        self.get(nextKeys, onApiResponse);\n        return;\n      }\n\n      stream.push(null);\n      stream.end();\n    });\n  }\n\n  this.makeReq_('lookup', { key: keys }, onApiResponse);\n\n  return stream;\n};",
     "ctx": {
       "type": "method",
       "constructor": "DatastoreRequest",
@@ -452,8 +438,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 210,
-    "codeStart": 213,
+    "line": 192,
+    "codeStart": 195,
     "code": "DatastoreRequest.prototype.insert = function(entities, callback) {\n  entities = util.arrayize(entities).map(util.propAssign('method', 'insert'));\n  this.save(entities, callback);\n};",
     "ctx": {
       "type": "method",
@@ -588,8 +574,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 218,
-    "codeStart": 385,
+    "line": 200,
+    "codeStart": 367,
     "code": "DatastoreRequest.prototype.save = function(entities, callback) {\n  entities = util.arrayize(entities);\n\n  var insertIndexes = [];\n\n  var req = {\n    mutation: entities.reduce(function(acc, entityObject, index) {\n      var ent = {};\n      var method = entityObject.method;\n      delete entityObject.method;\n\n      if (Array.isArray(entityObject.data)) {\n        ent.property = entityObject.data.map(function(data) {\n          data.value = entity.valueToProperty(data.value);\n\n          if (util.is(data.excludeFromIndexes, 'boolean')) {\n            var indexed = !data.excludeFromIndexes;\n\n            if (util.is(data.value.list_value, 'array')) {\n              data.value.list_value =\n                data.value.list_value.map(util.propAssign('indexed', indexed));\n            } else {\n              data.value.indexed = indexed;\n            }\n\n            delete data.excludeFromIndexes;\n          }\n\n          return data;\n        });\n      } else {\n        ent = entity.entityToEntityProto(entityObject.data);\n      }\n\n      ent.key = entity.keyToKeyProto(entityObject.key);\n\n      if (method) {\n        switch (method) {\n          case 'insert': {\n            acc.insert.push(ent);\n            break;\n          }\n          case 'update': {\n            acc.update.push(ent);\n            break;\n          }\n          case 'upsert': {\n            acc.upsert.push(ent);\n            break;\n          }\n          case 'insert_auto_id': {\n            insertIndexes.push(index);\n            acc.insert_auto_id.push(ent);\n            break;\n          }\n        }\n      } else {\n        if (entity.isKeyComplete(entityObject.key)) {\n          acc.upsert.push(ent);\n        } else {\n          insertIndexes.push(index);\n          acc.insert_auto_id.push(ent);\n        }\n      }\n\n      return acc;\n    }, {\n      insert: [],\n      update: [],\n      upsert: [],\n      insert_auto_id: []\n    })\n  };\n\n  if (this.id) {\n    this.requests_.push(req);\n    this.requestCallbacks_.push(onCommit);\n    return;\n  } else {\n    this.makeReq_('commit', req, onCommit);\n  }\n\n  function onCommit(err, resp) {\n    if (err || !resp) {\n      callback(err, resp);\n      return;\n    }\n\n    var autoInserted = (resp.mutation_result.insert_auto_id_key || []);\n    autoInserted.forEach(function(key, index) {\n      var path = entity.keyFromKeyProto(key).path;\n      entities[insertIndexes[index]].key.path = path;\n    });\n\n    callback(null, resp);\n  }\n};",
     "ctx": {
       "type": "method",
@@ -674,8 +660,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 483,
-    "codeStart": 506,
+    "line": 465,
+    "codeStart": 488,
     "code": "DatastoreRequest.prototype.delete = function(keys, callback) {\n  callback = callback || util.noop;\n\n  var req = {\n    mutation: {\n      delete: util.arrayize(keys).map(entity.keyToKeyProto)\n    }\n  };\n\n  if (this.id) {\n    this.requests_.push(req);\n    return;\n  }\n\n  this.makeReq_('commit', req, callback);\n};",
     "ctx": {
       "type": "method",
@@ -843,8 +829,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 523,
-    "codeStart": 606,
+    "line": 505,
+    "codeStart": 588,
     "code": "DatastoreRequest.prototype.runQuery = function(query, callback) {\n  var req = {\n    read_options: {},\n    query: entity.queryToQueryProto(query)\n  };\n\n  if (query.namespace) {\n    req.partition_id = {\n      namespace: query.namespace\n    };\n  }\n\n  this.makeReq_('runQuery', req, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var entities = entity.formatArray(resp.batch.entity_result);\n    var nextQuery = null;\n\n    if (resp.batch.end_cursor && entities.length > 0) {\n      var endCursor = resp.batch.end_cursor.toBase64();\n      nextQuery = query.start(endCursor).offset(0);\n    }\n\n    callback(null, entities, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -956,8 +942,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 636,
-    "codeStart": 669,
+    "line": 618,
+    "codeStart": 651,
     "code": "DatastoreRequest.prototype.allocateIds = function(incompleteKey, n, callback) {\n  if (entity.isKeyComplete(incompleteKey)) {\n    throw new Error('An incomplete key should be provided.');\n  }\n\n  var incompleteKeys = [];\n  for (var i = 0; i < n; i++) {\n    incompleteKeys.push(entity.keyToKeyProto(incompleteKey));\n  }\n\n  var req = {\n    key: incompleteKeys\n  };\n\n  this.makeReq_('allocateIds', req, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var keys = (resp.key || []).map(entity.keyFromKeyProto);\n\n    callback(null, keys, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -979,8 +965,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 695,
-    "codeStart": 698,
+    "line": 677,
+    "codeStart": 680,
     "code": "DatastoreRequest.prototype.update = function(entities, callback) {\n  entities = util.arrayize(entities).map(util.propAssign('method', 'update'));\n  this.save(entities, callback);\n};",
     "ctx": {
       "type": "method",
@@ -1002,8 +988,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 703,
-    "codeStart": 706,
+    "line": 685,
+    "codeStart": 688,
     "code": "DatastoreRequest.prototype.upsert = function(entities, callback) {\n  entities = util.arrayize(entities).map(util.propAssign('method', 'upsert'));\n  this.save(entities, callback);\n};",
     "ctx": {
       "type": "method",
@@ -1079,8 +1065,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 711,
-    "codeStart": 734,
+    "line": 693,
+    "codeStart": 716,
     "code": "DatastoreRequest.prototype.makeReq_ = function(method, body, callback) {\n  // TODO: Handle non-HTTP 200 cases.\n  if (!callback) {\n    callback = body;\n    body = {};\n  }\n\n  callback = callback || util.noop;\n\n  // Set properties to indicate if we're in a transaction or not.\n  if (method === 'commit') {\n    if (this.id) {\n      body.mode = MODE_TRANSACTIONAL;\n      body.transaction = this.id;\n    } else {\n      body.mode = MODE_NON_TRANSACTIONAL;\n    }\n  }\n\n  if (method === 'rollback') {\n    body.transaction = this.id;\n  }\n\n  if (method === 'lookup' && this.id) {\n    body.read_options = body.read_options || {};\n    body.read_options.transaction = this.id;\n  }\n\n  var pbKey = method[0].toUpperCase() + method.substr(1);\n  var pbRequest = new pb[pbKey + 'Request'](body).toBuffer();\n  var pbResponse = pb[pbKey + 'Response'];\n\n  var reqOpts = {\n    method: 'POST',\n    uri: util.format('{apiEndpoint}/{path}/{projectId}/{method}', {\n      apiEndpoint: this.apiEndpoint,\n      path: 'datastore/v1beta2/datasets',\n      projectId: this.projectId,\n      method: method\n    }),\n    headers: {\n      'Content-Type': 'application/x-protobuf'\n    }\n  };\n\n  this.makeAuthorizedRequest_(reqOpts, {\n    onAuthorized: function(err, authorizedReqOpts) {\n      if (err) {\n        callback(err, null); // TODO(ryanseys): What goes as third parameter?\n        return;\n      }\n\n      authorizedReqOpts.headers = authorizedReqOpts.headers || {};\n      authorizedReqOpts.headers['Content-Length'] = pbRequest.length;\n\n      var apiRequest = request(authorizedReqOpts);\n\n      apiRequest.on('error', callback);\n\n      apiRequest.on('response', function(resp) {\n        var buffer = new Buffer('');\n        resp.on('data', function(chunk) {\n          buffer = Buffer.concat([buffer, chunk]);\n        });\n        resp.on('end', function() {\n          util.handleResp(null, resp, buffer.toString(), function(err, result) {\n            if (err) {\n              callback(err, null, result);\n              return;\n            }\n            callback(null, pbResponse.decode(buffer), result);\n          });\n        });\n      });\n\n      apiRequest.end(pbRequest);\n    }\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1102,8 +1088,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 814,
-    "codeStart": 819,
+    "line": 796,
+    "codeStart": 801,
     "code": "streamRouter.extend(DatastoreRequest, 'runQuery');\n\nmodule.exports = DatastoreRequest;",
     "ctx": false
   }
