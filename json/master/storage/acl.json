@@ -34,50 +34,8 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar nodeutil = require('util');",
+    "code": "'use strict';\n\nvar is = require('is');\nvar nodeutil = require('util');",
     "ctx": false
-  },
-  {
-    "tags": [
-      {
-        "type": "type",
-        "string": "{module:common/util}",
-        "types": [
-          "module:common/util"
-        ],
-        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false,
-        "html": "<p>{module:common/util}</p>"
-      },
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      }
-    ],
-    "description": {
-      "full": "",
-      "summary": "",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 25,
-    "codeStart": 29,
-    "code": "var util = require('../common/util.js');",
-    "ctx": {
-      "type": "declaration",
-      "name": "util",
-      "value": "require('../common/util.js')",
-      "string": "util"
-    }
   },
   {
     "tags": [
@@ -102,8 +60,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 31,
-    "codeStart": 71,
+    "line": 26,
+    "codeStart": 66,
     "code": "function Acl(options) {\n  AclRoleAccessorMethods.call(this);\n\n  this.makeReq = options.makeReq;\n  this.pathPrefix = options.pathPrefix;\n}",
     "ctx": {
       "type": "constructor",
@@ -148,8 +106,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 78,
-    "codeStart": 121,
+    "line": 73,
+    "codeStart": 116,
     "code": "Acl.prototype.owners = {};",
     "ctx": {
       "type": "property",
@@ -197,8 +155,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 123,
-    "codeStart": 160,
+    "line": 118,
+    "codeStart": 155,
     "code": "Acl.prototype.readers = {};",
     "ctx": {
       "type": "property",
@@ -246,8 +204,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 162,
-    "codeStart": 199,
+    "line": 157,
+    "codeStart": 194,
     "code": "Acl.prototype.writers = {};\n\nnodeutil.inherits(Acl, AclRoleAccessorMethods);",
     "ctx": {
       "type": "property",
@@ -393,8 +351,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 203,
-    "codeStart": 236,
+    "line": 198,
+    "codeStart": 231,
     "code": "Acl.prototype.add = function(options, callback) {\n  var that = this;\n\n  var body = {\n    entity: options.entity,\n    role: options.role.toUpperCase()\n  };\n\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  this.makeReq_('POST', '', query, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, that.makeAclObject_(resp), resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -511,8 +469,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 262,
-    "codeStart": 288,
+    "line": 257,
+    "codeStart": 283,
     "code": "Acl.prototype.delete = function(options, callback) {\n  var path = '/' + encodeURIComponent(options.entity);\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  this.makeReq_('DELETE', path, query, null, callback);\n};",
     "ctx": {
       "type": "method",
@@ -645,9 +603,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 301,
-    "codeStart": 344,
-    "code": "Acl.prototype.get = function(options, callback) {\n  var that = this;\n  var path = '';\n  var query = null;\n\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = null;\n  } else {\n    path = '/' + encodeURIComponent(options.entity);\n\n    if (options.generation) {\n      query = {\n        generation: options.generation\n      };\n    }\n  }\n\n  this.makeReq_('GET', path, query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var results = resp;\n\n    if (resp.items) {\n      results = (resp.items || []).map(that.makeAclObject_);\n    } else {\n      results = that.makeAclObject_(results);\n    }\n\n    callback(null, results, resp);\n  });\n};",
+    "line": 296,
+    "codeStart": 339,
+    "code": "Acl.prototype.get = function(options, callback) {\n  var that = this;\n  var path = '';\n  var query = null;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = null;\n  } else {\n    path = '/' + encodeURIComponent(options.entity);\n\n    if (options.generation) {\n      query = {\n        generation: options.generation\n      };\n    }\n  }\n\n  this.makeReq_('GET', path, query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var results = resp;\n\n    if (resp.items) {\n      results = (resp.items || []).map(that.makeAclObject_);\n    } else {\n      results = that.makeAclObject_(results);\n    }\n\n    callback(null, results, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Acl",
@@ -791,8 +749,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 380,
-    "codeStart": 415,
+    "line": 375,
+    "codeStart": 410,
     "code": "Acl.prototype.update = function(options, callback) {\n  var that = this;\n  var path = '/' + encodeURIComponent(options.entity);\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  var body = {\n    role: options.role.toUpperCase()\n  };\n\n  this.makeReq_('PUT', path, query, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, that.makeAclObject_(resp), resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -821,8 +779,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 440,
-    "codeStart": 445,
+    "line": 435,
+    "codeStart": 440,
     "code": "Acl.prototype.makeAclObject_ = function(accessControlObject) {\n  var obj = {\n    entity: accessControlObject.entity,\n    role: accessControlObject.role\n  };\n\n  if (accessControlObject.projectTeam) {\n    obj.projectTeam = accessControlObject.projectTeam;\n  }\n\n  return obj;\n};",
     "ctx": {
       "type": "method",
@@ -917,8 +875,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 458,
-    "codeStart": 469,
+    "line": 453,
+    "codeStart": 464,
     "code": "Acl.prototype.makeReq_ = function(method, path, query, body, callback) {\n  this.makeReq(method, this.pathPrefix + path, query, body, callback);\n};\n\nmodule.exports = Acl;",
     "ctx": {
       "type": "method",
@@ -947,8 +905,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 475,
-    "codeStart": 490,
+    "line": 470,
+    "codeStart": 485,
     "code": "function AclRoleAccessorMethods() {\n  AclRoleAccessorMethods.roles.forEach(this._assignAccessMethods.bind(this));\n}\n\nAclRoleAccessorMethods.accessMethods = [\n  'add',\n  'delete'\n];\n\nAclRoleAccessorMethods.entities = [\n  // Special entity groups that do not require further specification.\n  'allAuthenticatedUsers',\n  'allUsers',\n\n  // Entity groups that require specification, e.g. `user-email@example.com`.\n  'domain-',\n  'group-',\n  'project-',\n  'user-'\n];\n\nAclRoleAccessorMethods.roles = [\n  'OWNER',\n  'READER',\n  'WRITER'\n];\n\nAclRoleAccessorMethods.prototype._assignAccessMethods = function(role) {\n  var that = this;\n\n  var accessMethods = AclRoleAccessorMethods.accessMethods;\n  var entities = AclRoleAccessorMethods.entities;\n  var roleGroup = role.toLowerCase() + 's';\n\n  this[roleGroup] = entities.reduce(function(acc, entity) {\n    var isPrefix = entity.charAt(entity.length - 1) === '-';\n\n    accessMethods.forEach(function(accessMethod) {\n      var method = accessMethod + entity[0].toUpperCase() + entity.substr(1);\n\n      if (isPrefix) {\n        method = method.replace('-', '');\n      }\n\n      // Wrap the parent accessor method (e.g. `add` or `delete`) to avoid the\n      // more complex API of specifying an `entity` and `role`.\n      acc[method] = function(entityId, callback) {\n        var apiEntity;\n\n        if (isPrefix) {\n          apiEntity = entity + entityId;\n        } else {\n          // If the entity is not a prefix, it is a special entity group that\n          // does not require further details. The accessor methods only accept\n          // a callback.\n          apiEntity = entity;\n          callback = entityId;\n        }\n\n        that[accessMethod]({\n          entity: apiEntity,\n          role: role\n        }, callback);\n      };\n    });\n\n    return acc;\n  }, {});\n};\n\nmodule.exports.AclRoleAccessorMethods = AclRoleAccessorMethods;",
     "ctx": {
       "type": "function",

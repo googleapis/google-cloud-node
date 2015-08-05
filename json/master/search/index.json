@@ -34,7 +34,7 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar extend = require('extend');",
+    "code": "'use strict';\n\nvar extend = require('extend');\nvar format = require('string-format-obj');\nvar is = require('is');",
     "ctx": false
   },
   {
@@ -69,8 +69,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 25,
-    "codeStart": 29,
+    "line": 27,
+    "codeStart": 31,
     "code": "var Index = require('./index-class.js');",
     "ctx": {
       "type": "declaration",
@@ -111,8 +111,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 31,
-    "codeStart": 35,
+    "line": 33,
+    "codeStart": 37,
     "code": "var streamRouter = require('../common/stream-router.js');",
     "ctx": {
       "type": "declaration",
@@ -153,8 +153,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 37,
-    "codeStart": 41,
+    "line": 39,
+    "codeStart": 43,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -187,8 +187,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 43,
-    "codeStart": 47,
+    "line": 45,
+    "codeStart": 49,
     "code": "var SCOPES = [\n  'https://www.googleapis.com/auth/cloud-platform',\n  'https://www.googleapis.com/auth/cloudsearch',\n  'https://www.googleapis.com/auth/userinfo.email'\n];",
     "ctx": {
       "type": "declaration",
@@ -221,8 +221,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 53,
-    "codeStart": 57,
+    "line": 55,
+    "codeStart": 59,
     "code": "var SEARCH_BASE_URL = 'https://cloudsearch.googleapis.com/v1/';",
     "ctx": {
       "type": "declaration",
@@ -273,8 +273,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 59,
-    "codeStart": 80,
+    "line": 61,
+    "codeStart": 82,
     "code": "function Search(options) {\n  if (!options || !options.projectId) {\n    throw util.missingProjectIdError;\n  }\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    email: options.email,\n    keyFile: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  this.projectId_ = options.projectId;\n}",
     "ctx": {
       "type": "constructor",
@@ -454,9 +454,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 95,
-    "codeStart": 163,
-    "code": "Search.prototype.getIndexes = function(query, callback) {\n  var self = this;\n\n  if (util.is(query, 'function')) {\n    callback = query;\n    query = {};\n  }\n\n  query = extend({}, query);\n\n  if (query.prefix) {\n    query.indexNamePrefix = query.prefix;\n    delete query.prefix;\n  }\n\n  this.makeReq_('GET', '/indexes', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var indexes = (resp.indexes || []).map(function(indexObject) {\n      var index = self.index(indexObject.indexId);\n\n      if (util.is(resp.indexedField, 'object')) {\n        index.fields = resp.indexedField;\n      }\n\n      return index;\n    });\n\n    callback(null, indexes, nextQuery, resp);\n  });\n};",
+    "line": 97,
+    "codeStart": 165,
+    "code": "Search.prototype.getIndexes = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  query = extend({}, query);\n\n  if (query.prefix) {\n    query.indexNamePrefix = query.prefix;\n    delete query.prefix;\n  }\n\n  this.makeReq_('GET', '/indexes', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var indexes = (resp.indexes || []).map(function(indexObject) {\n      var index = self.index(indexObject.indexId);\n\n      if (is.object(resp.indexedField)) {\n        index.fields = resp.indexedField;\n      }\n\n      return index;\n    });\n\n    callback(null, indexes, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Search",
@@ -506,8 +506,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 206,
-    "codeStart": 212,
+    "line": 208,
+    "codeStart": 214,
     "code": "Search.prototype.index = function(id) {\n  return new Index(this, id);\n};",
     "ctx": {
       "type": "method",
@@ -602,9 +602,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 216,
-    "codeStart": 228,
-    "code": "Search.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: util.format('{base}projects/{projectId}{path}', {\n      base: SEARCH_BASE_URL,\n      projectId: this.projectId_,\n      path: path\n    })\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};",
+    "line": 218,
+    "codeStart": 230,
+    "code": "Search.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: format('{base}projects/{projectId}{path}', {\n      base: SEARCH_BASE_URL,\n      projectId: this.projectId_,\n      path: path\n    })\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Search",
@@ -625,8 +625,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 246,
-    "codeStart": 251,
+    "line": 248,
+    "codeStart": 253,
     "code": "streamRouter.extend(Search, 'getIndexes');\n\nmodule.exports = Search;",
     "ctx": false
   }

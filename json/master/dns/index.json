@@ -34,7 +34,7 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar extend = require('extend');",
+    "code": "'use strict';\n\nvar extend = require('extend');\nvar is = require('is');",
     "ctx": false
   },
   {
@@ -69,8 +69,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 25,
-    "codeStart": 29,
+    "line": 26,
+    "codeStart": 30,
     "code": "var streamRouter = require('../common/stream-router.js');",
     "ctx": {
       "type": "declaration",
@@ -111,8 +111,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 31,
-    "codeStart": 35,
+    "line": 32,
+    "codeStart": 36,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -153,8 +153,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 37,
-    "codeStart": 41,
+    "line": 38,
+    "codeStart": 42,
     "code": "var Zone = require('./zone.js');",
     "ctx": {
       "type": "declaration",
@@ -187,8 +187,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 43,
-    "codeStart": 47,
+    "line": 44,
+    "codeStart": 48,
     "code": "var DNS_BASE_URL = 'https://www.googleapis.com/dns/v1/projects/';",
     "ctx": {
       "type": "declaration",
@@ -221,8 +221,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 49,
-    "codeStart": 53,
+    "line": 50,
+    "codeStart": 54,
     "code": "var SCOPES = [\n  'https://www.googleapis.com/auth/ndev.clouddns.readwrite',\n  'https://www.googleapis.com/auth/cloud-platform'\n];",
     "ctx": {
       "type": "declaration",
@@ -273,8 +273,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 58,
-    "codeStart": 76,
+    "line": 59,
+    "codeStart": 77,
     "code": "function DNS(options) {\n  if (!(this instanceof DNS)) {\n    return new DNS(options);\n  }\n\n  options = options || {};\n\n  if (!options.projectId) {\n    throw util.missingProjectIdError;\n  }\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId_ = options.projectId;\n}",
     "ctx": {
       "type": "constructor",
@@ -428,8 +428,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 97,
-    "codeStart": 122,
+    "line": 98,
+    "codeStart": 123,
     "code": "DNS.prototype.createZone = function(name, config, callback) {\n  var self = this;\n\n  if (!name) {\n    throw new Error('A zone name is required.');\n  }\n\n  if (!config || !config.dnsName) {\n    throw new Error('A zone dnsName is required.');\n  }\n\n  config.name = name;\n\n  // Required by the API.\n  config.description = config.description || '';\n\n  this.makeReq_('POST', '/managedZones', null, config, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var zone = self.zone(resp.name);\n    zone.metadata = resp;\n\n    callback(null, zone, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -555,9 +555,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 151,
-    "codeStart": 166,
-    "code": "DNS.prototype.getZones = function(query, callback) {\n  var self = this;\n\n  if (util.is(query, 'function')) {\n    callback = query;\n    query = {};\n  }\n\n  this.makeReq_('GET', '/managedZones', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var zones = (resp.managedZones || []).map(function(zone) {\n      var zoneInstance = self.zone(zone.name);\n      zoneInstance.metadata = zone;\n      return zoneInstance;\n    });\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    callback(null, zones, nextQuery, resp);\n  });\n};",
+    "line": 152,
+    "codeStart": 167,
+    "code": "DNS.prototype.getZones = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  this.makeReq_('GET', '/managedZones', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var zones = (resp.managedZones || []).map(function(zone) {\n      var zoneInstance = self.zone(zone.name);\n      zoneInstance.metadata = zone;\n      return zoneInstance;\n    });\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    callback(null, zones, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "DNS",
@@ -620,8 +620,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 198,
-    "codeStart": 209,
+    "line": 199,
+    "codeStart": 210,
     "code": "DNS.prototype.zone = function(name) {\n  if (!name) {\n    throw new Error('A zone name is required.');\n  }\n\n  return new Zone(this, name);\n};",
     "ctx": {
       "type": "method",
@@ -716,8 +716,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 217,
-    "codeStart": 229,
+    "line": 218,
+    "codeStart": 230,
     "code": "DNS.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri:  DNS_BASE_URL + this.projectId_ + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};",
     "ctx": {
       "type": "method",
@@ -739,8 +739,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 243,
-    "codeStart": 248,
+    "line": 244,
+    "codeStart": 249,
     "code": "streamRouter.extend(DNS, 'getZones');\n\nmodule.exports = DNS;",
     "ctx": false
   }

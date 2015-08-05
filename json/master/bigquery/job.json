@@ -34,50 +34,8 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';",
+    "code": "'use strict';\n\nvar is = require('is');",
     "ctx": false
-  },
-  {
-    "tags": [
-      {
-        "type": "type",
-        "string": "{module:common/util}",
-        "types": [
-          "module:common/util"
-        ],
-        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false,
-        "html": "<p>{module:common/util}</p>"
-      },
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      }
-    ],
-    "description": {
-      "full": "",
-      "summary": "",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 23,
-    "codeStart": 27,
-    "code": "var util = require('../common/util');",
-    "ctx": {
-      "type": "declaration",
-      "name": "util",
-      "value": "require('../common/util')",
-      "string": "util"
-    }
   },
   {
     "tags": [
@@ -125,8 +83,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 29,
-    "codeStart": 39
+    "line": 25,
+    "codeStart": 35
   },
   {
     "tags": [
@@ -151,8 +109,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 39,
-    "codeStart": 57,
+    "line": 35,
+    "codeStart": 53,
     "code": "function Job(bigQuery, id) {\n  this.bigQuery = bigQuery;\n  this.id = id;\n  this.metadata = {};\n}",
     "ctx": {
       "type": "constructor",
@@ -234,8 +192,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 63,
-    "codeStart": 76,
+    "line": 59,
+    "codeStart": 72,
     "code": "Job.prototype.getMetadata = function(callback) {\n  var that = this;\n\n  var path = '/jobs/' + this.id;\n\n  this.bigQuery.makeReq_('GET', path, null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -417,9 +375,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 93,
-    "codeStart": 161,
-    "code": "Job.prototype.getQueryResults = function(options, callback) {\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.job = this;\n\n  return this.bigQuery.query(options, callback);\n};\n\nmodule.exports = Job;",
+    "line": 89,
+    "codeStart": 157,
+    "code": "Job.prototype.getQueryResults = function(options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.job = this;\n\n  return this.bigQuery.query(options, callback);\n};\n\nmodule.exports = Job;",
     "ctx": {
       "type": "method",
       "constructor": "Job",

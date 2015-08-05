@@ -34,7 +34,7 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar extend = require('extend');\nvar fs = require('fs');\nvar zonefile = require('dns-zonefile');",
+    "code": "'use strict';\n\nvar arrify = require('arrify');\nvar exec = require('methmeth');\nvar extend = require('extend');\nvar fs = require('fs');\nvar is = require('is');\nvar zonefile = require('dns-zonefile');",
     "ctx": false
   },
   {
@@ -69,8 +69,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 27,
-    "codeStart": 31,
+    "line": 30,
+    "codeStart": 34,
     "code": "var Change = require('./change.js');",
     "ctx": {
       "type": "declaration",
@@ -111,8 +111,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 33,
-    "codeStart": 37,
+    "line": 36,
+    "codeStart": 40,
     "code": "var Record = require('./record.js');",
     "ctx": {
       "type": "declaration",
@@ -153,56 +153,14 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 39,
-    "codeStart": 43,
+    "line": 42,
+    "codeStart": 46,
     "code": "var streamRouter = require('../common/stream-router.js');",
     "ctx": {
       "type": "declaration",
       "name": "streamRouter",
       "value": "require('../common/stream-router.js')",
       "string": "streamRouter"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "type",
-        "string": "{module:common/util}",
-        "types": [
-          "module:common/util"
-        ],
-        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false,
-        "html": "<p>{module:common/util}</p>"
-      },
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      }
-    ],
-    "description": {
-      "full": "",
-      "summary": "",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 45,
-    "codeStart": 49,
-    "code": "var util = require('../common/util.js');",
-    "ctx": {
-      "type": "declaration",
-      "name": "util",
-      "value": "require('../common/util.js')",
-      "string": "util"
     }
   },
   {
@@ -233,8 +191,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 51,
-    "codeStart": 69,
+    "line": 48,
+    "codeStart": 66,
     "code": "function Zone(dns, name) {\n  this.dns = dns;\n  this.name = name;\n  this.metadata = {};\n\n  this.makeReq_ = this.dns.makeReq_.bind(dns);\n}",
     "ctx": {
       "type": "constructor",
@@ -312,8 +270,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 77,
-    "codeStart": 87,
+    "line": 74,
+    "codeStart": 84,
     "code": "Zone.prototype.addRecords = function(records, callback) {\n  this.createChange({\n    add: records\n  }, callback);\n};",
     "ctx": {
       "type": "method",
@@ -377,8 +335,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 93,
-    "codeStart": 104,
+    "line": 90,
+    "codeStart": 101,
     "code": "Zone.prototype.change = function(id) {\n  if (!id) {\n    throw new Error('A change id is required.');\n  }\n\n  return new Change(this, id);\n};",
     "ctx": {
       "type": "method",
@@ -506,9 +464,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 112,
-    "codeStart": 148,
-    "code": "Zone.prototype.createChange = function(options, callback) {\n  var self = this;\n\n  if (!options || !options.add && !options.delete) {\n    throw new Error('Cannot create a change with no additions or deletions.');\n  }\n\n  var body = extend({}, options, {\n    additions: util.arrayize(options.add).map(util.exec('toJSON')),\n    deletions: util.arrayize(options.delete).map(util.exec('toJSON'))\n  });\n\n  delete body.add;\n  delete body.delete;\n\n  var path = '/managedZones/' + this.name + '/changes';\n\n  this.makeReq_('POST', path, null, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var change = self.change(resp.id);\n    change.metadata = resp;\n\n    callback(null, change, resp);\n  });\n};",
+    "line": 109,
+    "codeStart": 145,
+    "code": "Zone.prototype.createChange = function(options, callback) {\n  var self = this;\n\n  if (!options || !options.add && !options.delete) {\n    throw new Error('Cannot create a change with no additions or deletions.');\n  }\n\n  var body = extend({}, options, {\n    additions: arrify(options.add).map(exec('toJSON')),\n    deletions: arrify(options.delete).map(exec('toJSON'))\n  });\n\n  delete body.add;\n  delete body.delete;\n\n  var path = '/managedZones/' + this.name + '/changes';\n\n  this.makeReq_('POST', path, null, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var change = self.change(resp.id);\n    change.metadata = resp;\n\n    callback(null, change, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Zone",
@@ -605,9 +563,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 178,
-    "codeStart": 210,
-    "code": "Zone.prototype.delete = function(options, callback) {\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = {};\n  }\n\n  if (options.force) {\n    this.empty(this.delete.bind(this, callback));\n    return;\n  }\n\n  var path = '/managedZones/' + this.name;\n  this.makeReq_('DELETE', path, null, null, function(err, resp) {\n    callback(err, resp);\n  });\n};",
+    "line": 175,
+    "codeStart": 207,
+    "code": "Zone.prototype.delete = function(options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  if (options.force) {\n    this.empty(this.delete.bind(this, callback));\n    return;\n  }\n\n  var path = '/managedZones/' + this.name;\n  this.makeReq_('DELETE', path, null, null, function(err, resp) {\n    callback(err, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Zone",
@@ -692,9 +650,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 227,
-    "codeStart": 291,
-    "code": "Zone.prototype.deleteRecords = function(records, callback) {\n  records = util.arrayize(records);\n\n  if (util.is(records[0], 'string')) {\n    this.deleteRecordsByType_(records, callback);\n    return;\n  }\n\n  this.createChange({\n    delete: records\n  }, callback);\n};",
+    "line": 224,
+    "codeStart": 288,
+    "code": "Zone.prototype.deleteRecords = function(records, callback) {\n  records = arrify(records);\n\n  if (is.string(records[0])) {\n    this.deleteRecordsByType_(records, callback);\n    return;\n  }\n\n  this.createChange({\n    delete: records\n  }, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Zone",
@@ -772,8 +730,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 304,
-    "codeStart": 315,
+    "line": 301,
+    "codeStart": 312,
     "code": "Zone.prototype.empty = function(callback) {\n  var self = this;\n\n  this.getRecords(function(err, records) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var recordsToDelete = records.filter(function(record) {\n      return record.type !== 'NS' && record.type !== 'SOA';\n    });\n\n    if (recordsToDelete.length === 0) {\n      callback();\n    } else {\n      self.deleteRecords(recordsToDelete, callback);\n    }\n  });\n};",
     "ctx": {
       "type": "method",
@@ -843,9 +801,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 336,
-    "codeStart": 352,
-    "code": "Zone.prototype.export = function(localPath, callback) {\n  this.getRecords(function(err, records) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var stringRecords = records.map(util.exec('toString')).join('\\n');\n\n    fs.writeFile(localPath, stringRecords, 'utf-8', function(err) {\n      callback(err || null);\n    });\n  });\n};",
+    "line": 333,
+    "codeStart": 349,
+    "code": "Zone.prototype.export = function(localPath, callback) {\n  this.getRecords(function(err, records) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var stringRecords = records.map(exec('toString')).join('\\n');\n\n    fs.writeFile(localPath, stringRecords, 'utf-8', function(err) {\n      callback(err || null);\n    });\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Zone",
@@ -998,9 +956,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 367,
-    "codeStart": 423,
-    "code": "Zone.prototype.getChanges = function(query, callback) {\n  var self = this;\n\n  if (util.is(query, 'function')) {\n    callback = query;\n    query = {};\n  }\n\n  if (query.sort) {\n    query.sortOrder = query.sort === 'asc' ? 'ascending' : 'descending';\n    delete query.sort;\n  }\n\n  var path = '/managedZones/' + this.name + '/changes';\n\n  this.makeReq_('GET', path, query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var changes = (resp.changes || []).map(function(change) {\n      var changeInstance = self.change(change.id);\n      changeInstance.metadata = change;\n      return changeInstance;\n    });\n\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    callback(null, changes, nextQuery, resp);\n  });\n};",
+    "line": 364,
+    "codeStart": 420,
+    "code": "Zone.prototype.getChanges = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  if (query.sort) {\n    query.sortOrder = query.sort === 'asc' ? 'ascending' : 'descending';\n    delete query.sort;\n  }\n\n  var path = '/managedZones/' + this.name + '/changes';\n\n  this.makeReq_('GET', path, query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var changes = (resp.changes || []).map(function(change) {\n      var changeInstance = self.change(change.id);\n      changeInstance.metadata = change;\n      return changeInstance;\n    });\n\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    callback(null, changes, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Zone",
@@ -1083,8 +1041,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 461,
-    "codeStart": 472,
+    "line": 458,
+    "codeStart": 469,
     "code": "Zone.prototype.getMetadata = function(callback) {\n  var self = this;\n  var path = '/managedZones/' + this.name;\n\n  this.makeReq_('GET', path, null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.metadata = resp;\n\n    callback(null, self.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1252,9 +1210,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 488,
-    "codeStart": 570,
-    "code": "Zone.prototype.getRecords = function(query, callback) {\n  var self = this;\n\n  if (util.is(query, 'function')) {\n    callback = query;\n    query = {};\n  }\n\n  if (util.is(query, 'string') || util.is(query, 'array')) {\n    var filterByTypes_ = {};\n\n    // For faster lookups, store the record types the user wants in an object.\n    util.arrayize(query).forEach(function(type) {\n      filterByTypes_[type.toUpperCase()] = true;\n    });\n\n    query = {\n      filterByTypes_: filterByTypes_\n    };\n  }\n\n  var requestQuery = extend({}, query);\n  delete requestQuery.filterByTypes_;\n\n  var path = '/managedZones/' + this.name + '/rrsets';\n  this.makeReq_('GET', path, requestQuery, true, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var records = (resp.rrsets || []).map(function(record) {\n      return self.record(record.type, record);\n    });\n\n    if (query.filterByTypes_) {\n      records = records.filter(function(record) {\n        return query.filterByTypes_[record.type];\n      });\n    }\n\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    callback(null, records, nextQuery, resp);\n  });\n};",
+    "line": 485,
+    "codeStart": 567,
+    "code": "Zone.prototype.getRecords = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  if (is.string(query) || is.array(query)) {\n    var filterByTypes_ = {};\n\n    // For faster lookups, store the record types the user wants in an object.\n    arrify(query).forEach(function(type) {\n      filterByTypes_[type.toUpperCase()] = true;\n    });\n\n    query = {\n      filterByTypes_: filterByTypes_\n    };\n  }\n\n  var requestQuery = extend({}, query);\n  delete requestQuery.filterByTypes_;\n\n  var path = '/managedZones/' + this.name + '/rrsets';\n  this.makeReq_('GET', path, requestQuery, true, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var records = (resp.rrsets || []).map(function(record) {\n      return self.record(record.type, record);\n    });\n\n    if (query.filterByTypes_) {\n      records = records.filter(function(record) {\n        return query.filterByTypes_[record.type];\n      });\n    }\n\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    callback(null, records, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Zone",
@@ -1351,9 +1309,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 622,
-    "codeStart": 640,
-    "code": "Zone.prototype.import = function(localPath, callback) {\n  var self = this;\n\n  fs.readFile(localPath, 'utf-8', function(err, file) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var parsedZonefile = zonefile.parse(file);\n\n    var recordsToCreate = [];\n    function addRecordToCreate(record) {\n      var recordInstance = new Record.fromZoneRecord_(self, recordType, record);\n      recordsToCreate.push(recordInstance);\n    }\n\n    for (var recordType in parsedZonefile) {\n      var recordTypeSet = util.arrayize(parsedZonefile[recordType]);\n      recordTypeSet.forEach(addRecordToCreate);\n    }\n\n    self.addRecords(recordsToCreate, callback);\n  });\n};",
+    "line": 619,
+    "codeStart": 637,
+    "code": "Zone.prototype.import = function(localPath, callback) {\n  var self = this;\n\n  fs.readFile(localPath, 'utf-8', function(err, file) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var parsedZonefile = zonefile.parse(file);\n\n    var recordsToCreate = [];\n    function addRecordToCreate(record) {\n      var recordInstance = new Record.fromZoneRecord_(self, recordType, record);\n      recordsToCreate.push(recordInstance);\n    }\n\n    for (var recordType in parsedZonefile) {\n      var recordTypeSet = arrify(parsedZonefile[recordType]);\n      recordTypeSet.forEach(addRecordToCreate);\n    }\n\n    self.addRecords(recordsToCreate, callback);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Zone",
@@ -1464,8 +1422,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 666,
-    "codeStart": 713,
+    "line": 663,
+    "codeStart": 710,
     "code": "Zone.prototype.record = function(type, metadata) {\n  return new Record(this, type, metadata);\n};",
     "ctx": {
       "type": "method",
@@ -1579,8 +1537,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 717,
-    "codeStart": 757,
+    "line": 714,
+    "codeStart": 754,
     "code": "Zone.prototype.replaceRecords = function(recordType, newRecords, callback) {\n  var self = this;\n\n  this.getRecords(recordType, function(err, recordsToDelete) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    self.createChange({\n      add: newRecords,\n      delete: recordsToDelete\n    }, callback);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1684,8 +1642,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 773,
-    "codeStart": 791,
+    "line": 770,
+    "codeStart": 788,
     "code": "Zone.prototype.deleteRecordsByType_ = function(recordTypes, callback) {\n  var self = this;\n\n  this.getRecords(recordTypes, function(err, records) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    if (records.length === 0) {\n      callback();\n      return;\n    }\n\n    self.deleteRecords(records, callback);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1707,8 +1665,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 809,
-    "codeStart": 814,
+    "line": 806,
+    "codeStart": 811,
     "code": "streamRouter.extend(Zone, ['getChanges', 'getRecords']);\n\nmodule.exports = Zone;",
     "ctx": false
   }

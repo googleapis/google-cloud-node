@@ -34,7 +34,7 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar extend = require('extend');",
+    "code": "'use strict';\n\nvar extend = require('extend');\nvar is = require('is');",
     "ctx": false
   },
   {
@@ -69,8 +69,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 25,
-    "codeStart": 29,
+    "line": 26,
+    "codeStart": 30,
     "code": "var Document = require('./document.js');",
     "ctx": {
       "type": "declaration",
@@ -111,56 +111,14 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 31,
-    "codeStart": 35,
+    "line": 32,
+    "codeStart": 36,
     "code": "var streamRouter = require('../common/stream-router.js');",
     "ctx": {
       "type": "declaration",
       "name": "streamRouter",
       "value": "require('../common/stream-router.js')",
       "string": "streamRouter"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "type",
-        "string": "{module:common/util}",
-        "types": [
-          "module:common/util"
-        ],
-        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false,
-        "html": "<p>{module:common/util}</p>"
-      },
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      }
-    ],
-    "description": {
-      "full": "",
-      "summary": "",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 37,
-    "codeStart": 41,
-    "code": "var util = require('../common/util.js');",
-    "ctx": {
-      "type": "declaration",
-      "name": "util",
-      "value": "require('../common/util.js')",
-      "string": "util"
     }
   },
   {
@@ -205,8 +163,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 43,
-    "codeStart": 60,
+    "line": 38,
+    "codeStart": 55,
     "code": "function Index(search, id) {\n  this.search_ = search;\n  this.id = id;\n\n  if (!this.id) {\n    throw new Error('An ID is needed to access a Google Cloud Search index.');\n  }\n}",
     "ctx": {
       "type": "constructor",
@@ -303,8 +261,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 69,
-    "codeStart": 117,
+    "line": 64,
+    "codeStart": 112,
     "code": "Index.prototype.createDocument = function(documentObj, callback) {\n  var document;\n\n  if (documentObj instanceof Document) {\n    document = documentObj;\n    documentObj = document.toJSON();\n  } else {\n    document = this.documentFromObject_(documentObj);\n  }\n\n  this.makeReq_('POST', '/documents', null, documentObj, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, document, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -360,8 +318,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 137,
-    "codeStart": 146,
+    "line": 132,
+    "codeStart": 141,
     "code": "Index.prototype.document = function(id) {\n  return new Document(this, id);\n};",
     "ctx": {
       "type": "method",
@@ -529,9 +487,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 150,
-    "codeStart": 218,
-    "code": "Index.prototype.getDocuments = function(query, callback) {\n  var self = this;\n\n  if (util.is(query, 'function')) {\n    callback = query;\n    query = {};\n  }\n\n  this.makeReq_('GET', '/documents', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var documents = (resp.documents || [])\n      .map(self.documentFromObject_.bind(self));\n\n    callback(null, documents, nextQuery, resp);\n  });\n};",
+    "line": 145,
+    "codeStart": 213,
+    "code": "Index.prototype.getDocuments = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  this.makeReq_('GET', '/documents', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var documents = (resp.documents || [])\n      .map(self.documentFromObject_.bind(self));\n\n    callback(null, documents, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Index",
@@ -707,9 +665,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 247,
-    "codeStart": 314,
-    "code": "Index.prototype.search = function(query, callback) {\n  var self = this;\n\n  if (util.is(query, 'string')) {\n    query = {\n      query: query\n    };\n  }\n\n  if (!util.is(query, 'object')) {\n    throw new Error('A query must be either a string or object.');\n  }\n\n  this.makeReq_('GET', '/search', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var documents = (resp.results || [])\n      .map(self.documentFromObject_.bind(self));\n\n    callback(null, documents, nextQuery, resp);\n  });\n};",
+    "line": 242,
+    "codeStart": 309,
+    "code": "Index.prototype.search = function(query, callback) {\n  var self = this;\n\n  if (is.string(query)) {\n    query = {\n      query: query\n    };\n  }\n\n  if (!is.object(query)) {\n    throw new Error('A query must be either a string or object.');\n  }\n\n  this.makeReq_('GET', '/search', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var documents = (resp.results || [])\n      .map(self.documentFromObject_.bind(self));\n\n    callback(null, documents, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Index",
@@ -798,9 +756,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 348,
-    "codeStart": 376,
-    "code": "Index.prototype.documentFromObject_ = function(documentObj) {\n  var document = this.document(documentObj.docId);\n\n  if (util.is(documentObj.fields, 'object')) {\n    document.fields = documentObj.fields;\n  }\n\n  if (util.is(documentObj.rank, 'number')) {\n    document.rank = documentObj.rank;\n  }\n\n  return document;\n};",
+    "line": 343,
+    "codeStart": 371,
+    "code": "Index.prototype.documentFromObject_ = function(documentObj) {\n  var document = this.document(documentObj.docId);\n\n  if (is.object(documentObj.fields)) {\n    document.fields = documentObj.fields;\n  }\n\n  if (is.number(documentObj.rank)) {\n    document.rank = documentObj.rank;\n  }\n\n  return document;\n};",
     "ctx": {
       "type": "method",
       "constructor": "Index",
@@ -894,8 +852,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 390,
-    "codeStart": 402,
+    "line": 385,
+    "codeStart": 397,
     "code": "Index.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/indexes/' + this.id + path;\n\n  this.search_.makeReq_(method, path, query, body, callback);\n};",
     "ctx": {
       "type": "method",
@@ -917,8 +875,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 408,
-    "codeStart": 414,
+    "line": 403,
+    "codeStart": 409,
     "code": "streamRouter.extend(Index, ['getDocuments', 'search']);\n\nmodule.exports = Index;",
     "ctx": false
   }

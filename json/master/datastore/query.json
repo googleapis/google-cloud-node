@@ -34,50 +34,8 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar extend = require('extend');",
+    "code": "'use strict';\n\nvar arrify = require('arrify');\nvar extend = require('extend');",
     "ctx": false
-  },
-  {
-    "tags": [
-      {
-        "type": "type",
-        "string": "{module:common/util}",
-        "types": [
-          "module:common/util"
-        ],
-        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false,
-        "html": "<p>{module:common/util}</p>"
-      },
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      }
-    ],
-    "description": {
-      "full": "",
-      "summary": "",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 25,
-    "codeStart": 29,
-    "code": "var util = require('../common/util.js');",
-    "ctx": {
-      "type": "declaration",
-      "name": "util",
-      "value": "require('../common/util.js')",
-      "string": "util"
-    }
   },
   {
     "tags": [
@@ -135,8 +93,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 31,
-    "codeStart": 61,
+    "line": 26,
+    "codeStart": 56,
     "code": "function Query(namespace, kinds) {\n  if (!kinds) {\n    kinds = namespace;\n    namespace = null;\n  }\n\n  this.namespace = namespace || null;\n  this.kinds = kinds;\n\n  this.filters = [];\n  this.orders = [];\n  this.groupByVal = [];\n  this.selectVal = [];\n\n  // pagination\n  this.autoPaginateVal = true;\n  this.startVal = null;\n  this.endVal = null;\n  this.limitVal = -1;\n  this.offsetVal = -1;\n}",
     "ctx": {
       "type": "constructor",
@@ -171,8 +129,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 83,
-    "codeStart": 86,
+    "line": 78,
+    "codeStart": 81,
     "code": "Query.prototype.autoPaginate = function(autoPaginateVal) {\n  var query = extend(true, new Query(), this);\n  query.autoPaginateVal = autoPaginateVal !== false;\n  return query;\n};",
     "ctx": {
       "type": "method",
@@ -240,8 +198,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 92,
-    "codeStart": 115,
+    "line": 87,
+    "codeStart": 110,
     "code": "Query.prototype.filter = function(filter, value) {\n  // TODO: Add filter validation.\n  var query = extend(true, new Query(), this);\n  var operatorRegex = /[><=]/g;\n  filter = filter.trim();\n  var fieldName = filter.replace(operatorRegex, '').trim();\n  var op = filter.substr(fieldName.length, filter.length).trim();\n  query.filters = query.filters || [];\n  query.filters.push({\n    name: fieldName,\n    op: op,\n    val: value\n  });\n  return query;\n};",
     "ctx": {
       "type": "method",
@@ -297,8 +255,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 131,
-    "codeStart": 142,
+    "line": 126,
+    "codeStart": 137,
     "code": "Query.prototype.hasAncestor = function(key) {\n  var query = extend(true, new Query(), this);\n  query.filters.push({ name: '__key__', op: 'HAS_ANCESTOR', val: key });\n  return query;\n};",
     "ctx": {
       "type": "method",
@@ -354,8 +312,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 148,
-    "codeStart": 164,
+    "line": 143,
+    "codeStart": 159,
     "code": "Query.prototype.order = function(property) {\n  var query = extend(true, new Query(), this);\n  var sign = '+';\n  if (property[0] === '-' || property[0] === '+') {\n    sign = property[0];\n    property = property.substr(1);\n  }\n  query.orders = query.orders || [];\n  query.orders.push({ name: property, sign: sign });\n  return query;\n};",
     "ctx": {
       "type": "method",
@@ -411,9 +369,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 176,
-    "codeStart": 185,
-    "code": "Query.prototype.groupBy = function(fieldNames) {\n  var query = extend(true, new Query(), this);\n  query.groupByVal = util.arrayize(fieldNames);\n  return query;\n};",
+    "line": 171,
+    "codeStart": 180,
+    "code": "Query.prototype.groupBy = function(fieldNames) {\n  var query = extend(true, new Query(), this);\n  query.groupByVal = arrify(fieldNames);\n  return query;\n};",
     "ctx": {
       "type": "method",
       "constructor": "Query",
@@ -469,9 +427,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 191,
-    "codeStart": 209,
-    "code": "Query.prototype.select = function(fieldNames) {\n  var query = extend(true, new Query(), this);\n  query.selectVal = util.arrayize(fieldNames);\n  return query;\n};",
+    "line": 186,
+    "codeStart": 204,
+    "code": "Query.prototype.select = function(fieldNames) {\n  var query = extend(true, new Query(), this);\n  query.selectVal = arrify(fieldNames);\n  return query;\n};",
     "ctx": {
       "type": "method",
       "constructor": "Query",
@@ -526,8 +484,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 215,
-    "codeStart": 229,
+    "line": 210,
+    "codeStart": 224,
     "code": "Query.prototype.start = function(start) {\n  var query = extend(true, new Query(), this);\n  query.startVal = start;\n  return query;\n};",
     "ctx": {
       "type": "method",
@@ -583,8 +541,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 235,
-    "codeStart": 249,
+    "line": 230,
+    "codeStart": 244,
     "code": "Query.prototype.end = function(end) {\n  var query = extend(true, new Query(), this);\n  query.endVal = end;\n  return query;\n};",
     "ctx": {
       "type": "method",
@@ -640,8 +598,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 255,
-    "codeStart": 267,
+    "line": 250,
+    "codeStart": 262,
     "code": "Query.prototype.limit = function(n) {\n  var query = extend(true, new Query(), this);\n  query.limitVal = n;\n  return query;\n};",
     "ctx": {
       "type": "method",
@@ -697,8 +655,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 273,
-    "codeStart": 285,
+    "line": 268,
+    "codeStart": 280,
     "code": "Query.prototype.offset = function(n) {\n  var query = extend(true, new Query(), this);\n  query.offsetVal = n;\n  return query;\n};\n\nmodule.exports = Query;",
     "ctx": {
       "type": "method",

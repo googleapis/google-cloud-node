@@ -34,50 +34,8 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';",
+    "code": "'use strict';\n\nvar format = require('string-format-obj');\nvar is = require('is');",
     "ctx": false
-  },
-  {
-    "tags": [
-      {
-        "type": "type",
-        "string": "{module:common/util}",
-        "types": [
-          "module:common/util"
-        ],
-        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false,
-        "html": "<p>{module:common/util}</p>"
-      },
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      }
-    ],
-    "description": {
-      "full": "",
-      "summary": "",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 23,
-    "codeStart": 27,
-    "code": "var util = require('../common/util.js');",
-    "ctx": {
-      "type": "declaration",
-      "name": "util",
-      "value": "require('../common/util.js')",
-      "string": "util"
-    }
   },
   {
     "tags": [
@@ -107,8 +65,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 29,
-    "codeStart": 45,
+    "line": 26,
+    "codeStart": 42,
     "code": "function Field() {\n  this.values = [];\n}",
     "ctx": {
       "type": "constructor",
@@ -148,8 +106,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 49,
-    "codeStart": 59,
+    "line": 46,
+    "codeStart": 56,
     "code": "Field.prototype.addAtomValue = function(atom) {\n  this.addTextValue(atom, { format: 'ATOM' });\n};",
     "ctx": {
       "type": "method",
@@ -220,9 +178,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 63,
-    "codeStart": 85,
-    "code": "Field.prototype.addGeoValue = function(geo) {\n  if (util.is(geo, 'object')) {\n    geo = util.format('{latitude}, {longitude}', geo);\n  }\n\n  this.values.push({\n    geoValue: geo\n  });\n};",
+    "line": 60,
+    "codeStart": 82,
+    "code": "Field.prototype.addGeoValue = function(geo) {\n  if (is.object(geo)) {\n    geo = format('{latitude}, {longitude}', geo);\n  }\n\n  this.values.push({\n    geoValue: geo\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Field",
@@ -263,8 +221,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 95,
-    "codeStart": 105,
+    "line": 92,
+    "codeStart": 102,
     "code": "Field.prototype.addHtmlValue = function(html) {\n  this.addTextValue(html, { format: 'HTML' });\n};",
     "ctx": {
       "type": "method",
@@ -314,9 +272,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 109,
-    "codeStart": 119,
-    "code": "Field.prototype.addNumberValue = function(number) {\n  if (!util.is(number, 'number')) {\n    throw new Error('number must be a number.');\n  }\n\n  this.values.push({\n    numberValue: number\n  });\n};",
+    "line": 106,
+    "codeStart": 116,
+    "code": "Field.prototype.addNumberValue = function(number) {\n  if (!is.number(number)) {\n    throw new Error('number must be a number.');\n  }\n\n  this.values.push({\n    numberValue: number\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Field",
@@ -385,8 +343,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 129,
-    "codeStart": 140,
+    "line": 126,
+    "codeStart": 137,
     "code": "Field.prototype.addTextValue = function(text, options) {\n  options = options || {};\n  var format = options.format || 'TEXT';\n\n  this.values.push({\n    stringValue: text.toLowerCase(),\n    stringFormat: format.toUpperCase()\n  });\n};",
     "ctx": {
       "type": "method",
@@ -429,8 +387,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 150,
-    "codeStart": 165,
+    "line": 147,
+    "codeStart": 162,
     "code": "Field.prototype.addTimestampValue = function(timestamp) {\n  if (timestamp instanceof Date) {\n    timestamp = timestamp.toJSON();\n  }\n\n  this.values.push({\n    timestampValue: timestamp\n  });\n};\n\nmodule.exports = Field;",
     "ctx": {
       "type": "method",

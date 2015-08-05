@@ -34,7 +34,7 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';",
+    "code": "'use strict';\n\nvar arrify = require('arrify');\nvar is = require('is');\nvar prop = require('propprop');",
     "ctx": false
   },
   {
@@ -69,8 +69,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 23,
-    "codeStart": 27,
+    "line": 27,
+    "codeStart": 31,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -120,8 +120,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 29,
-    "codeStart": 34
+    "line": 33,
+    "codeStart": 38
   },
   {
     "tags": [
@@ -151,8 +151,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 34,
-    "codeStart": 47,
+    "line": 38,
+    "codeStart": 51,
     "code": "function Topic(pubsub, name) {\n  this.name = Topic.formatName_(pubsub.projectId, name);\n\n  this.projectId = pubsub.projectId;\n  this.pubsub = pubsub;\n  this.unformattedName = name;\n\n  this.makeReq_ = this.pubsub.makeReq_.bind(this.pubsub);\n}",
     "ctx": {
       "type": "constructor",
@@ -193,9 +193,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 57,
-    "codeStart": 64,
-    "code": "Topic.formatMessage_ = function(message) {\n  if (!util.is(message.data, 'buffer')) {\n    message.data = new Buffer(JSON.stringify(message.data));\n  }\n\n  message.data = message.data.toString('base64');\n\n  return message;\n};",
+    "line": 61,
+    "codeStart": 68,
+    "code": "Topic.formatMessage_ = function(message) {\n  if (!(message.data instanceof Buffer)) {\n    message.data = new Buffer(JSON.stringify(message.data));\n  }\n\n  message.data = message.data.toString('base64');\n\n  return message;\n};",
     "ctx": {
       "type": "method",
       "receiver": "Topic",
@@ -236,8 +236,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 74,
-    "codeStart": 82,
+    "line": 78,
+    "codeStart": 86,
     "code": "Topic.formatName_ = function(projectId, name) {\n  // Simple check if the name is already formatted.\n  if (name.indexOf('/') > -1) {\n    return name;\n  }\n  return 'projects/' + projectId + '/topics/' + name;\n};",
     "ctx": {
       "type": "method",
@@ -335,9 +335,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 90,
-    "codeStart": 141,
-    "code": "Topic.prototype.publish = function(messages, callback) {\n  messages = util.arrayize(messages);\n\n  if (messages.length === 0) {\n    throw new Error('Cannot publish without a message.');\n  }\n\n  if (!messages.every(util.prop('data'))) {\n    throw new Error('Cannot publish message without a `data` property.');\n  }\n\n  callback = callback || util.noop;\n\n  var body = {\n    messages: messages.map(Topic.formatMessage_)\n  };\n\n  var path = this.name + ':publish';\n  this.makeReq_('POST', path, null, body, function(err, result) {\n    if (err) {\n      callback(err, null, result);\n      return;\n    }\n    callback(null, result && result.messageIds || [], result);\n  });\n};",
+    "line": 94,
+    "codeStart": 145,
+    "code": "Topic.prototype.publish = function(messages, callback) {\n  messages = arrify(messages);\n\n  if (messages.length === 0) {\n    throw new Error('Cannot publish without a message.');\n  }\n\n  if (!messages.every(prop('data'))) {\n    throw new Error('Cannot publish message without a `data` property.');\n  }\n\n  callback = callback || util.noop;\n\n  var body = {\n    messages: messages.map(Topic.formatMessage_)\n  };\n\n  var path = this.name + ':publish';\n  this.makeReq_('POST', path, null, body, function(err, result) {\n    if (err) {\n      callback(err, null, result);\n      return;\n    }\n    callback(null, result && result.messageIds || [], result);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Topic",
@@ -378,8 +378,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 168,
-    "codeStart": 176,
+    "line": 172,
+    "codeStart": 180,
     "code": "Topic.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('DELETE', this.name, null, null, callback);\n};",
     "ctx": {
       "type": "method",
@@ -458,8 +458,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 181,
-    "codeStart": 189,
+    "line": 185,
+    "codeStart": 193,
     "code": "Topic.prototype.getMetadata = function(callback) {\n  var self = this;\n\n  this.makeReq_('GET', this.name, null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.metadata = resp;\n    callback(null, self.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -543,9 +543,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 203,
-    "codeStart": 250,
-    "code": "Topic.prototype.getSubscriptions = function(options, callback) {\n  if (util.is(options, 'function')) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.topic = this;\n\n  return this.pubsub.getSubscriptions(options, callback);\n};",
+    "line": 207,
+    "codeStart": 254,
+    "code": "Topic.prototype.getSubscriptions = function(options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.topic = this;\n\n  return this.pubsub.getSubscriptions(options, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Topic",
@@ -670,8 +670,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 262,
-    "codeStart": 294,
+    "line": 266,
+    "codeStart": 298,
     "code": "Topic.prototype.subscribe = function(subName, options, callback) {\n  this.pubsub.subscribe(this, subName, options, callback);\n};",
     "ctx": {
       "type": "method",
@@ -769,8 +769,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 298,
-    "codeStart": 323,
+    "line": 302,
+    "codeStart": 327,
     "code": "Topic.prototype.subscription = function(name, options) {\n  return this.pubsub.subscription(name, options);\n};\n\nmodule.exports = Topic;",
     "ctx": {
       "type": "method",
