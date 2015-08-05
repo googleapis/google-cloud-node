@@ -2,7 +2,7 @@
   <header header title="FAQ">
     <div class="row row--right">
       <div class="col margin-vertical">
-        <a href="https://github.com/GoogleCloudPlatform/gcloud-node/edit/master/docs/faq.md"
+        <a href="https://github.com/GoogleCloudPlatform/gcloud-common/edit/master/faq/readme.md"
           class="v-btn">
           <img src="site/img/icon-link-github.svg" />
           Edit on GitHub
@@ -15,7 +15,8 @@
 <div subpage
   header-templateUrl="faq-header.html"
   title="FAQ">
-  <btf-markdown ng-include="'faq.md'"></btf-markdown>
+  <div gcloud-markdown="https://raw.githubusercontent.com/GoogleCloudPlatform/gcloud-common/master/faq/readme.md"></div>
+  <div gcloud-markdown="faq.md"></div>
   <div how-to-get-help></div>
 </div>
 
