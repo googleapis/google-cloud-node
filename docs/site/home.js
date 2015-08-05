@@ -4,8 +4,10 @@ angular
     'gcloud.authorization',
     'gcloud.docs',
     'gcloud.faq',
+    'gcloud.contributing',
     'gcloud.language-switcher',
     'gcloud.troubleshooting',
+    'gcloud.markdown',
     'config',
     'hljs'
   ])
