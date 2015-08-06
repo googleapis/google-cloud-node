@@ -139,14 +139,6 @@ describe('BigQuery', function() {
     });
   });
 
-  it('should list datasets with autoPaginate', function(done) {
-    bigquery.getDatasets(function(err, datasets) {
-      assert(datasets.length > 0);
-      assert(datasets[0] instanceof Dataset);
-      done();
-    });
-  });
-
   it('should list datasets as a stream', function(done) {
     var datasetEmitted = false;
 
@@ -237,14 +229,6 @@ describe('BigQuery', function() {
     });
   });
 
-  it('should list jobs with autoPaginate', function(done) {
-    bigquery.getJobs(function(err, jobs) {
-      assert.ifError(err);
-      assert(jobs[0] instanceof Job);
-      done();
-    });
-  });
-
   it('should list jobs as a stream', function(done) {
     var jobEmitted = false;
 
@@ -312,14 +296,6 @@ describe('BigQuery', function() {
     });
 
     it('should get the rows in a table', function(done) {
-      table.getRows(function(err, rows) {
-        assert.ifError(err);
-        assert(Array.isArray(rows));
-        done();
-      });
-    });
-
-    it('should get the rows in a table with autoPaginate', function(done) {
       table.getRows(function(err, rows) {
         assert.ifError(err);
         assert(Array.isArray(rows));
