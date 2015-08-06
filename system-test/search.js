@@ -34,24 +34,13 @@ function deleteDocument(document, callback) {
 }
 
 function deleteIndexContents(index, callback) {
-  index.getDocuments(function(err, documents) {
+  index.getDocuments({ view: 'ID_ONLY' }, function(err, documents) {
     if (err) {
       callback(err);
       return;
     }
 
     async.eachLimit(documents, MAX_PARALLEL, deleteDocument, callback);
-  });
-}
-
-function deleteAllDocuments(callback) {
-  search.getIndexes(function(err, indexes) {
-    if (err) {
-      callback(err);
-      return;
-    }
-
-    async.eachLimit(indexes, MAX_PARALLEL, deleteIndexContents, callback);
   });
 }
 
@@ -67,12 +56,8 @@ describe('Search', function() {
   var INDEX_NAME = generateIndexName();
   var index = search.index(INDEX_NAME);
 
-  before(function(done) {
-    deleteAllDocuments(done);
-  });
-
   after(function(done) {
-    deleteAllDocuments(done);
+    deleteIndexContents(index, done);
   });
 
   describe('creating an index', function() {
@@ -140,21 +125,15 @@ describe('Search', function() {
     var document;
 
     before(function(done) {
-      async.series([
-        deleteAllDocuments,
-
-        function(next) {
-          index.createDocument(TEST_DOCUMENT_JSON, function(err, doc) {
-            if (err) {
-              next(err);
-              return;
-            }
-
-            document = doc;
-            next();
-          });
+      index.createDocument(TEST_DOCUMENT_JSON, function(err, doc) {
+        if (err) {
+          done(err);
+          return;
         }
-      ], done);
+
+        document = doc;
+        done();
+      });
     });
 
     after(function(done) {
@@ -163,14 +142,6 @@ describe('Search', function() {
 
     it('should get all documents', function(done) {
       index.getDocuments(function(err, documents) {
-        assert.ifError(err);
-        assert.strictEqual(documents.length, 1);
-        done();
-      });
-    });
-
-    it('should get all documents with autoPaginate', function(done) {
-      index.getDocuments({ autoPaginate: true }, function(err, documents) {
         assert.ifError(err);
         assert.strictEqual(documents.length, 1);
         done();
@@ -228,7 +199,8 @@ describe('Search', function() {
         document.getMetadata(function(err) {
           assert.ifError(err);
           assert.deepEqual(document.toJSON(), TEST_DOCUMENT_JSON);
-          done();
+
+          document.delete(done);
         });
       });
     });
@@ -239,7 +211,8 @@ describe('Search', function() {
         document.getMetadata(function(err) {
           assert.ifError(err);
           assert.deepEqual(document.toJSON(), TEST_DOCUMENT_JSON);
-          done();
+
+          document.delete(done);
         });
       });
     });
