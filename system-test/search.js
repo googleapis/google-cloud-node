@@ -98,14 +98,6 @@ describe('Search', function() {
       });
     });
 
-    it('should get all indexes with autoPaginate', function(done) {
-      search.getIndexes({ autoPaginate: true }, function(err, indexes) {
-        assert.ifError(err);
-        assert(indexes.length > 0);
-        done();
-      });
-    });
-
     it('should get all indexes in stream mode', function(done) {
       var resultsMatched = 0;
 
