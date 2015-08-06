@@ -235,6 +235,13 @@ describe('common/util', function() {
       });
     });
 
+    it('should not throw when there is just an error', function() {
+      assert.doesNotThrow(function() {
+        var error = {};
+        util.parseApiResp(error);
+      });
+    });
+
     it('should detect body errors', function() {
       var apiErr = {
         errors: [{ foo: 'bar' }],
