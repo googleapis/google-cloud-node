@@ -327,18 +327,7 @@ describe('datastore', function() {
       });
     });
 
-    it('should run query with autoPaginate', function(done) {
-      var q = ds.createQuery('Character')
-        .hasAncestor(ancestor);
-
-      ds.runQuery(q, function(err, results) {
-        assert.ifError(err);
-        assert.equal(results.length, characters.length);
-        done();
-      });
-    });
-
-    it('should not go over a limit with autoPaginate', function(done) {
+    it('should not go over a limit', function(done) {
       var limit = 3;
 
       var q = ds.createQuery('Character')
