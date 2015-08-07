@@ -173,6 +173,23 @@ describe('Storage', function() {
         done();
       });
     });
+
+    it('should expand the Nearline option', function(done) {
+      storage.makeReq_ = function(method, path, query, body) {
+        assert.strictEqual(body.storageClass, 'NEARLINE');
+        done();
+      };
+      storage.createBucket(BUCKET_NAME, { nearline: true }, function() {});
+    });
+
+    it('should expand the Durable Reduced Availability option', function(done) {
+      storage.makeReq_ = function(method, path, query, body) {
+        assert.strictEqual(body.storageClass, 'DURABLE_REDUCED_AVAILABILITY');
+        done();
+      };
+      storage.createBucket(BUCKET_NAME, { dra: true }, function() {});
+    });
+
   });
 
   describe('getBuckets', function() {
