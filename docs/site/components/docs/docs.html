@@ -54,7 +54,6 @@ var gcloud = require('gcloud')({
       ng-hide="singleMethod && method.name !== singleMethod">
       <h2 ng-if="method.name[0].toUpperCase() === method.name[0]">
         {{method.name}}
-        <span class="view-code-link" docs-code-link></span>
       </h2>
       <h3
         class="method-heading"
@@ -65,7 +64,6 @@ var gcloud = require('gcloud')({
           <span>#</span>
           {{method.name}}
         </a>
-        <span class="view-code-link" docs-code-link></span>
       </h3>
       <p ng-if="method.description" ng-bind-html="method.description"></p>
       <div ng-show="method.name[0].toUpperCase() === method.name[0]"
@@ -104,6 +102,11 @@ var gcloud = require('gcloud')({
       <h4 ng-show="method.example">Example</h4>
       <div docs-example ng-repeat-end
         ng-show="method.example" ng-bind-html="method.example"></div>
+      <h4>More information</h4>
+      <ul class="resource-links">
+        <li docs-code-link></li>
+        <li ng-repeat="doc in method.docs" ng-bind-html="doc"></li>
+      </ul>
       <hr ng-if="$index < methods.length - 1">
     </article>
   </article>
