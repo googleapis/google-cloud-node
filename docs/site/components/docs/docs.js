@@ -184,7 +184,13 @@ angular
                 })
                 .map(function(tag) {
                   return $sce.trustAsHtml(formatComments(tag.string));
-                })[0]
+                })[0],
+              docs: obj.tags.filter(function(tag) {
+                  return tag.type === 'resource'
+                })
+                .map(function(tag) {
+                  return $sce.trustAsHtml(formatHtml(detectLinks(tag.string)));
+                })
             };
           })
           .sort(compareMethods);

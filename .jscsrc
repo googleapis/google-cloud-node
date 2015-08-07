@@ -14,5 +14,9 @@
     "try",
     "typeof"
   ],
-  "requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties"
+  "requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties",
+  "maximumLineLength": {
+    "value": 80,
+    "allowUrlComments": true
+  }
 }
