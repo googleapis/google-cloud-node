@@ -56,6 +56,7 @@
     "dns-zonefile": "0.1.9",
     "duplexify": "^3.2.0",
     "extend": "^2.0.0",
+    "gce-images": "^0.1.0",
     "google-auth-library": "^0.9.4",
     "is": "^3.0.1",
     "methmeth": "^1.0.0",

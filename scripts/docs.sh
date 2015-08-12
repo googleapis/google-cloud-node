@@ -21,6 +21,17 @@
 ./node_modules/.bin/dox < lib/bigquery/job.js > docs/json/master/bigquery/job.json &
 ./node_modules/.bin/dox < lib/bigquery/table.js > docs/json/master/bigquery/table.json &
 
+./node_modules/.bin/dox < lib/compute/address.js > docs/json/master/compute/address.json &
+./node_modules/.bin/dox < lib/compute/disk.js > docs/json/master/compute/disk.json &
+./node_modules/.bin/dox < lib/compute/firewall.js > docs/json/master/compute/firewall.json &
+./node_modules/.bin/dox < lib/compute/index.js > docs/json/master/compute/index.json &
+./node_modules/.bin/dox < lib/compute/network.js > docs/json/master/compute/network.json &
+./node_modules/.bin/dox < lib/compute/operation.js > docs/json/master/compute/operation.json &
+./node_modules/.bin/dox < lib/compute/region.js > docs/json/master/compute/region.json &
+./node_modules/.bin/dox < lib/compute/snapshot.js > docs/json/master/compute/snapshot.json &
+./node_modules/.bin/dox < lib/compute/vm.js > docs/json/master/compute/vm.json &
+./node_modules/.bin/dox < lib/compute/zone.js > docs/json/master/compute/zone.json &
+
 ./node_modules/.bin/dox < lib/dns/change.js > docs/json/master/dns/change.json &
 ./node_modules/.bin/dox < lib/dns/index.js > docs/json/master/dns/index.json &
 ./node_modules/.bin/dox < lib/dns/record.js > docs/json/master/dns/record.json &
