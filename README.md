@@ -15,6 +15,7 @@ This client supports the following Google Cloud Platform services:
 * [Google Cloud DNS](#google-cloud-dns)
 * [Google Cloud Pub/Sub](#google-cloud-pubsub)
 * [Google Cloud Storage](#google-cloud-storage)
+* [Google Compute Engine](#google-compute-engine)
 * [Google Cloud Search](#google-cloud-search-alpha) (Alpha)
 
 If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
@@ -300,6 +301,40 @@ localReadStream.pipe(remoteWriteStream);
 ```
 
 
+## Google Compute Engine
+
+- [API Documentation][gcloud-compute-docs]
+- [Official Documentation][cloud-compute-docs]
+
+#### Preview
+
+```js
+var gcloud = require('gcloud');
+
+// Authorizing on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authorization section above).
+
+var gce = gcloud.compute({
+  projectId: 'my-project',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+// Create a new VM using the latest OS image of your choice.
+var zone = gce.zone('us-central1-a');
+var name = 'ubuntu-http';
+
+zone.createVM(name, { os: 'ubuntu' }, function(err, vm, operation) {
+  // `operation` lets you check the status of long-running tasks.
+
+  operation.onComplete(function(err, metadata) {
+    if (!err) {
+      // Virtual machine created!
+    }
+  });
+});
+```
+
+
 ## Google Cloud Search (Alpha)
 
 > This is an *Alpha* release of Google Cloud Search. This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
@@ -357,6 +392,7 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [gcloud-homepage]: https://googlecloudplatform.github.io/gcloud-node/
 [gcloud-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs
 [gcloud-bigquery-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/bigquery
+[gcloud-compute-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/compute
 [gcloud-datastore-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/datastore
 [gcloud-dns-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/dns
 [gcloud-pubsub-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/pubsub
@@ -375,6 +411,8 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [googleapis]: https://github.com/google/google-api-nodejs-client
 
 [cloud-bigquery-docs]: https://cloud.google.com/bigquery/what-is-bigquery
+
+[cloud-compute-docs]: https://cloud.google.com/compute/docs
 
 [cloud-datastore-docs]: https://cloud.google.com/datastore/docs
 [cloud-datastore-activation]: https://cloud.google.com/datastore/docs/activate
