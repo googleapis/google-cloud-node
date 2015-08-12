@@ -473,13 +473,8 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar dataset = gcloud.datastore.dataset();\n// equal to:\n//   gcloud.datastore.dataset({\n//     keyFilename: '/path/to/keyfile.json',\n//     projectId: 'my-project'\n//   });\n\nvar gcs = gcloud.storage();\nvar bucket = gcs.bucket({\n  name: 'PhotosBucket',\n  // properties may be overridden:\n  keyFilename: '/path/to/other/keyfile.json'\n});\n",
-        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;my-project&#39;<br />});</p><p>var dataset = gcloud.datastore.dataset();<br />// equal to:<br />//   gcloud.datastore.dataset({<br />//     keyFilename: &#39;/path/to/keyfile.json&#39;,<br />//     projectId: &#39;my-project&#39;<br />//   });</p><p>var gcs = gcloud.storage();<br />var bucket = gcs.bucket({<br />  name: &#39;PhotosBucket&#39;,<br />  // properties may be overridden:<br />  keyFilename: &#39;/path/to/other/keyfile.json&#39;<br />});</p>"
-      },
-      {
-        "type": "example",
-        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project',\n  maxRetries: 5 // retry rate limited requests 5 times before giving up\n});",
-        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;my-project&#39;,<br />  maxRetries: 5 // retry rate limited requests 5 times before giving up<br />});</p>"
+        "string": "var gcloud = require('gcloud')({\n  projectId: 'grape-spaceship-123',\n  keyFilename: '/path/to/keyfile.json'\n});\n\n//-\n// From the same authentication credentials, you may now access your Google\n// Cloud Storage buckets, for example.\n//-\nvar gcs = gcloud.storage();\nvar bucket = gcs.bucket('photos');\n\n//-\n// However, if you need to override the global credentials, you may provide\n// new ones.\n//-\nvar otherGcs = gcloud.storage({\n  keyFilename: '/path/to/other/keyfile.json'\n});\nvar otherBucket = otherGcs.bucket('other-photos');\n\n//-\n// `gcs` and `otherGcs` will use their respective credentials for all future\n// API requests.\n//-",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  projectId: &#39;grape-spaceship-123&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p><p>//-<br />// From the same authentication credentials, you may now access your Google<br />// Cloud Storage buckets, for example.<br />//-<br />var gcs = gcloud.storage();<br />var bucket = gcs.bucket(&#39;photos&#39;);</p><p>//-<br />// However, if you need to override the global credentials, you may provide<br />// new ones.<br />//-<br />var otherGcs = gcloud.storage({<br />  keyFilename: &#39;/path/to/other/keyfile.json&#39;<br />});<br />var otherBucket = otherGcs.bucket(&#39;other-photos&#39;);</p><p>//-<br />// <code>gcs</code> and <code>otherGcs</code> will use their respective credentials for all future<br />// API requests.<br />//-</p>"
       }
     ],
     "description": {
@@ -532,8 +527,8 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\nvar bigquery = gcloud.bigquery({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});",
-        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var bigquery = gcloud.bigquery({<br />  projectId: &#39;project-id&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
+        "string": "var gcloud = require('gcloud');\nvar bigquery = gcloud.bigquery({\n  projectId: 'grape-spaceship-123',\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var bigquery = gcloud.bigquery({<br />  projectId: &#39;grape-spaceship-123&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
       }
     ],
     "description": {
@@ -588,8 +583,8 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\nvar datastore = gcloud.datastore;\nvar dataset = datastore.dataset({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});",
-        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var datastore = gcloud.datastore;<br />var dataset = datastore.dataset({<br />  projectId: &#39;project-id&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
+        "string": "var gcloud = require('gcloud');\nvar datastore = gcloud.datastore;\nvar dataset = datastore.dataset({\n  projectId: 'grape-spaceship-123',\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var datastore = gcloud.datastore;<br />var dataset = datastore.dataset({<br />  projectId: &#39;grape-spaceship-123&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
       }
     ],
     "description": {
@@ -604,7 +599,7 @@
     "ignore": false,
     "line": 169,
     "codeStart": 187,
-    "code": "gcloud.datastore = Datastore;\n\ngcloud.dns = DNS;",
+    "code": "gcloud.datastore = Datastore;",
     "ctx": {
       "type": "property",
       "receiver": "gcloud",
@@ -617,6 +612,62 @@
     "tags": [
       {
         "type": "type",
+        "string": "{module:dns}\n",
+        "types": [
+          "module:dns"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns.html\">dns</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:dns}</p>"
+      },
+      {
+        "type": "return",
+        "string": "{module:dns}\n",
+        "types": [
+          "module:dns"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns.html\">dns</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:dns}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\nvar dns = gcloud.dns({\n  projectId: 'grape-spaceship-123',\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var dns = gcloud.dns({<br />  projectId: &#39;grape-spaceship-123&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p><a href=\"https://cloud.google.com/dns/what-is-cloud-dns\">Google Cloud DNS</a> is a high-<br />performance, resilient, global DNS service that provides a cost-effective way<br />to make your applications and services available to your users. This<br />programmable, authoritative DNS service can be used to easily publish and<br />manage DNS records using the same infrastructure relied upon by Google.</p>",
+      "summary": "<p><a href=\"https://cloud.google.com/dns/what-is-cloud-dns\">Google Cloud DNS</a> is a high-<br />performance, resilient, global DNS service that provides a cost-effective way<br />to make your applications and services available to your users. This<br />programmable, authoritative DNS service can be used to easily publish and<br />manage DNS records using the same infrastructure relied upon by Google.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 189,
+    "codeStart": 207,
+    "code": "gcloud.dns = DNS;",
+    "ctx": {
+      "type": "property",
+      "receiver": "gcloud",
+      "name": "dns",
+      "value": "DNS",
+      "string": "gcloud.dns"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
         "string": "{module:pubsub}\n",
         "types": [
           "module:pubsub"
@@ -644,28 +695,29 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\nvar pubsub = gcloud.pubsub({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});",
-        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var pubsub = gcloud.pubsub({<br />  projectId: &#39;project-id&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
+        "string": "var gcloud = require('gcloud');\nvar pubsub = gcloud.pubsub({\n  projectId: 'grape-spaceship-123',\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var pubsub = gcloud.pubsub({<br />  projectId: &#39;grape-spaceship-123&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
       }
     ],
     "description": {
-      "full": "<p><strong>Experimental</strong></p><p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p><p>Note: This is a <em>Beta</em> release of Google Cloud Pub/Sub. This feature is not<br />covered by any SLA or deprecation policy and may be subject to backward-<br />incompatible changes.</p>",
-      "summary": "<p><strong>Experimental</strong></p>",
-      "body": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p><p>Note: This is a <em>Beta</em> release of Google Cloud Pub/Sub. This feature is not<br />covered by any SLA or deprecation policy and may be subject to backward-<br />incompatible changes.</p>"
+      "full": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p><p class=\"notice\"><br />  <strong>This is a Beta release of Google Cloud Pub/Sub.</strong> This feature is not<br />  covered by any SLA or deprecation policy and may be subject to backward-<br />  incompatible changes.<br /></p>\n",
+      "summary": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p>",
+      "body": "<p class=\"notice\"><br />  <strong>This is a Beta release of Google Cloud Pub/Sub.</strong> This feature is not<br />  covered by any SLA or deprecation policy and may be subject to backward-<br />  incompatible changes.<br /></p>\n"
     },
     "isPrivate": false,
     "isConstructor": false,
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 191,
-    "codeStart": 213,
-    "code": "gcloud.pubsub = function(config) {\n  return new PubSub(config);\n};",
+    "line": 209,
+    "codeStart": 231,
+    "code": "gcloud.pubsub = PubSub;",
     "ctx": {
-      "type": "method",
+      "type": "property",
       "receiver": "gcloud",
       "name": "pubsub",
-      "string": "gcloud.pubsub()"
+      "value": "PubSub",
+      "string": "gcloud.pubsub"
     }
   },
   {
@@ -699,28 +751,29 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\nvar search = gcloud.search({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});",
-        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var search = gcloud.search({<br />  projectId: &#39;project-id&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
+        "string": "var gcloud = require('gcloud');\nvar search = gcloud.search({\n  projectId: 'grape-spaceship-123',\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var search = gcloud.search({<br />  projectId: &#39;grape-spaceship-123&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
       }
     ],
     "description": {
-      "full": "<p><strong>Experimental</strong></p><p><a href=\"https://cloud.google.com/search/\">Google Cloud Search</a> allows you to quickly<br />perform full-text and geospatial searches against your data without having to<br />spin up your own instances and without the hassle of managing and maintaining<br />a search service.</p><p>Note: This is an <em>Alpha</em> release of Google Cloud Search. This feature is not<br />covered by any SLA or deprecation policy and may be subject to backward-<br />incompatible changes.</p>",
-      "summary": "<p><strong>Experimental</strong></p>",
-      "body": "<p><a href=\"https://cloud.google.com/search/\">Google Cloud Search</a> allows you to quickly<br />perform full-text and geospatial searches against your data without having to<br />spin up your own instances and without the hassle of managing and maintaining<br />a search service.</p><p>Note: This is an <em>Alpha</em> release of Google Cloud Search. This feature is not<br />covered by any SLA or deprecation policy and may be subject to backward-<br />incompatible changes.</p>"
+      "full": "<p><a href=\"https://cloud.google.com/search/\">Google Cloud Search</a> allows you to quickly<br />perform full-text and geospatial searches against your data without having to<br />spin up your own instances and without the hassle of managing and maintaining<br />a search service.</p><p class=\"notice\"><br />  <strong>This is an <em>Alpha</em> release of Google Cloud Search.</strong> This feature is<br />  not covered by any SLA or deprecation policy and may be subject to<br />  backward-incompatible changes.<br /></p>\n",
+      "summary": "<p><a href=\"https://cloud.google.com/search/\">Google Cloud Search</a> allows you to quickly<br />perform full-text and geospatial searches against your data without having to<br />spin up your own instances and without the hassle of managing and maintaining<br />a search service.</p>",
+      "body": "<p class=\"notice\"><br />  <strong>This is an <em>Alpha</em> release of Google Cloud Search.</strong> This feature is<br />  not covered by any SLA or deprecation policy and may be subject to<br />  backward-incompatible changes.<br /></p>\n"
     },
     "isPrivate": false,
     "isConstructor": false,
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 217,
-    "codeStart": 240,
-    "code": "gcloud.search = function(config) {\n  return new Search(config);\n};",
+    "line": 233,
+    "codeStart": 256,
+    "code": "gcloud.search = Search;",
     "ctx": {
-      "type": "method",
+      "type": "property",
       "receiver": "gcloud",
       "name": "search",
-      "string": "gcloud.search()"
+      "value": "Search",
+      "string": "gcloud.search"
     }
   },
   {
@@ -754,8 +807,8 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud');\nvar gcs = gcloud.storage({\n  projectId: 'project-id',\n  keyFilename: '/path/to/keyfile.json'\n});",
-        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var gcs = gcloud.storage({<br />  projectId: &#39;project-id&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
+        "string": "var gcloud = require('gcloud');\nvar gcs = gcloud.storage({\n  projectId: 'grape-spaceship-123',\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var gcs = gcloud.storage({<br />  projectId: &#39;grape-spaceship-123&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
       }
     ],
     "description": {
@@ -768,8 +821,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 244,
-    "codeStart": 260,
+    "line": 258,
+    "codeStart": 274,
     "code": "gcloud.storage = Storage;\n\nmodule.exports = gcloud;",
     "ctx": {
       "type": "property",
