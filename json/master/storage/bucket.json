@@ -383,14 +383,14 @@
       },
       {
         "type": "example",
-        "string": "//-\n// Make a bucket's contents publicly readable.\n//-\nvar myBucket = gcs.bucket('my-bucket');\nmyBucket.acl.add({\n  scope: 'allUsers',\n  role: gcs.acl.READER_ROLE\n}, function(err, aclObject) {});",
-        "html": "<p>//-<br />// Make a bucket&#39;s contents publicly readable.<br />//-<br />var myBucket = gcs.bucket(&#39;my-bucket&#39;);<br />myBucket.acl.add({<br />  scope: &#39;allUsers&#39;,<br />  role: gcs.acl.READER_ROLE<br />}, function(err, aclObject) {});</p>"
+        "string": "//-\n// Make a bucket's contents publicly readable.\n//-\nvar myBucket = gcs.bucket('my-bucket');\nmyBucket.acl.add({\n  entity: 'allUsers',\n  role: gcs.acl.READER_ROLE\n}, function(err, aclObject) {});",
+        "html": "<p>//-<br />// Make a bucket&#39;s contents publicly readable.<br />//-<br />var myBucket = gcs.bucket(&#39;my-bucket&#39;);<br />myBucket.acl.add({<br />  entity: &#39;allUsers&#39;,<br />  role: gcs.acl.READER_ROLE<br />}, function(err, aclObject) {});</p>"
       }
     ],
     "description": {
-      "full": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p><p>An ACL consists of one or more entries, where each entry grants permissions<br />to a scope. Permissions define the actions that can be performed against an<br />object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the scope defines who<br />the permission applies to (for example, a specific user or group of users).</p><p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p><p>The <code>acl</code> object on a Bucket instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p><p>Buckets also have<br /><a href=\"https://cloud.google.com/storage/docs/accesscontrol#default\">default ACLs</a><br />for all created files. Default ACLs specify permissions that all new<br />objects added to the bucket will inherit by default. You can add, delete,<br />get, and update scopes and permissions for these as well with<br />{module:storage/bucket#acl.default}.</p>",
+      "full": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p><p>An ACL consists of one or more entries, where each entry grants permissions<br />to an entity. Permissions define the actions that can be performed against<br />an object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the entity defines<br />who the permission applies to (for example, a specific user or group of<br />users).</p><p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p><p>The <code>acl</code> object on a Bucket instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p><p>Buckets also have<br /><a href=\"https://cloud.google.com/storage/docs/accesscontrol#default\">default ACLs</a><br />for all created files. Default ACLs specify permissions that all new<br />objects added to the bucket will inherit by default. You can add, delete,<br />get, and update entities and permissions for these as well with<br />{module:storage/bucket#acl.default}.</p>",
       "summary": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p>",
-      "body": "<p>An ACL consists of one or more entries, where each entry grants permissions<br />to a scope. Permissions define the actions that can be performed against an<br />object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the scope defines who<br />the permission applies to (for example, a specific user or group of users).</p><p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p><p>The <code>acl</code> object on a Bucket instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p><p>Buckets also have<br /><a href=\"https://cloud.google.com/storage/docs/accesscontrol#default\">default ACLs</a><br />for all created files. Default ACLs specify permissions that all new<br />objects added to the bucket will inherit by default. You can add, delete,<br />get, and update scopes and permissions for these as well with<br />{module:storage/bucket#acl.default}.</p>"
+      "body": "<p>An ACL consists of one or more entries, where each entry grants permissions<br />to an entity. Permissions define the actions that can be performed against<br />an object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the entity defines<br />who the permission applies to (for example, a specific user or group of<br />users).</p><p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p><p>The <code>acl</code> object on a Bucket instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p><p>Buckets also have<br /><a href=\"https://cloud.google.com/storage/docs/accesscontrol#default\">default ACLs</a><br />for all created files. Default ACLs specify permissions that all new<br />objects added to the bucket will inherit by default. You can add, delete,<br />get, and update entities and permissions for these as well with<br />{module:storage/bucket#acl.default}.</p>"
     },
     "isPrivate": false,
     "isConstructor": false,
@@ -398,7 +398,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 104,
-    "codeStart": 139,
+    "codeStart": 140,
     "code": "this.acl = new Acl({\n  makeReq: this.makeReq_.bind(this),\n  pathPrefix: '/acl'\n});\n\nthis.acl.default = new Acl({\n  makeReq: this.makeReq_.bind(this),\n  pathPrefix: '/defaultObjectAcl'\n});",
     "ctx": {
       "type": "property",
@@ -420,8 +420,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 150,
-    "codeStart": 157
+    "line": 151,
+    "codeStart": 158
   },
   {
     "tags": [
@@ -432,8 +432,8 @@
       }
     ],
     "description": {
-      "full": "<p>Google Cloud Storage Buckets have <a href=\"http://goo.gl/YpGdyv\">default ACLs</a> for<br />all created files. You can add, delete, get, and update scopes and<br />permissions for these as well. The method signatures and examples are all<br />the same, after only prefixing the method call with <code>default</code>.</p>",
-      "summary": "<p>Google Cloud Storage Buckets have <a href=\"http://goo.gl/YpGdyv\">default ACLs</a> for<br />all created files. You can add, delete, get, and update scopes and<br />permissions for these as well. The method signatures and examples are all<br />the same, after only prefixing the method call with <code>default</code>.</p>",
+      "full": "<p>Google Cloud Storage Buckets have <a href=\"http://goo.gl/YpGdyv\">default ACLs</a> for<br />all created files. You can add, delete, get, and update entities and<br />permissions for these as well. The method signatures and examples are all<br />the same, after only prefixing the method call with <code>default</code>.</p>",
+      "summary": "<p>Google Cloud Storage Buckets have <a href=\"http://goo.gl/YpGdyv\">default ACLs</a> for<br />all created files. You can add, delete, get, and update entities and<br />permissions for these as well. The method signatures and examples are all<br />the same, after only prefixing the method call with <code>default</code>.</p>",
       "body": ""
     },
     "isPrivate": false,
@@ -441,8 +441,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 157,
-    "codeStart": 165,
+    "line": 158,
+    "codeStart": 166,
     "code": "var aclDefault = true;",
     "ctx": {
       "type": "declaration",
@@ -469,8 +469,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 167,
-    "codeStart": 171,
+    "line": 168,
+    "codeStart": 172,
     "code": "var aclDefaultAdd = true;",
     "ctx": {
       "type": "declaration",
@@ -497,8 +497,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 173,
-    "codeStart": 177,
+    "line": 174,
+    "codeStart": 178,
     "code": "var aclDefaultDelete = true;",
     "ctx": {
       "type": "declaration",
@@ -525,8 +525,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 179,
-    "codeStart": 183,
+    "line": 180,
+    "codeStart": 184,
     "code": "var aclDefaultGet = true;",
     "ctx": {
       "type": "declaration",
@@ -553,8 +553,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 185,
-    "codeStart": 189,
+    "line": 186,
+    "codeStart": 190,
     "code": "var aclDefaultUpdate = true;",
     "ctx": {
       "type": "declaration",
@@ -581,8 +581,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 191,
-    "codeStart": 195,
+    "line": 192,
+    "codeStart": 196,
     "code": "var aclDefaultOwners = true;",
     "ctx": {
       "type": "declaration",
@@ -609,8 +609,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 197,
-    "codeStart": 201,
+    "line": 198,
+    "codeStart": 202,
     "code": "var aclDefaultReaders = true;",
     "ctx": {
       "type": "declaration",
@@ -637,8 +637,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 203,
-    "codeStart": 207,
+    "line": 204,
+    "codeStart": 208,
     "code": "}",
     "ctx": false
   },
@@ -778,8 +778,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 211,
-    "codeStart": 243,
+    "line": 212,
+    "codeStart": 244,
     "code": "Bucket.prototype.combine = function(sources, destination, callback) {\n  if (!is.array(sources) || sources.length < 2) {\n    throw new Error('You must provide at least two source files.');\n  }\n\n  if (!destination) {\n    throw new Error('A destination file must be specified.');\n  }\n\n  var self = this;\n\n  sources = sources.map(convertToFile);\n  destination = convertToFile(destination);\n  callback = callback || util.noop;\n\n  if (!destination.metadata.contentType) {\n    var destinationContentType = mime.contentType(destination.name);\n\n    if (destinationContentType) {\n      destination.metadata.contentType = destinationContentType;\n    } else {\n      throw new Error(\n        'A content type could not be detected for the destination file.');\n    }\n  }\n\n  this.storage.makeAuthorizedRequest_({\n    method: 'POST',\n    uri: format('{base}/{destBucket}/o/{destFile}/compose', {\n      base: STORAGE_BASE_URL,\n      destBucket: destination.bucket.name,\n      destFile: encodeURIComponent(destination.name)\n    }),\n    json: {\n      destination: {\n        contentType: destination.metadata.contentType\n      },\n      sourceObjects: sources.map(function(source) {\n        var sourceObject = {\n          name: source.name\n        };\n\n        if (source.metadata && source.metadata.generation) {\n          sourceObject.generation = source.metadata.generation;\n        }\n\n        return sourceObject;\n      })\n    }\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, destination, resp);\n  });\n\n  function convertToFile(file) {\n    if (file instanceof File) {\n      return file;\n    } else {\n      return self.file(file);\n    }\n  }\n};",
     "ctx": {
       "type": "method",
@@ -849,8 +849,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 310,
-    "codeStart": 321,
+    "line": 311,
+    "codeStart": 322,
     "code": "Bucket.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('DELETE', '', null, true, callback);\n};",
     "ctx": {
       "type": "method",
@@ -935,8 +935,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 326,
-    "codeStart": 379,
+    "line": 327,
+    "codeStart": 380,
     "code": "Bucket.prototype.deleteFiles = function(query, callback) {\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  query = query || {};\n\n  var MAX_PARALLEL_LIMIT = 10;\n  var errors = [];\n\n  this.getFiles(query, function(err, files) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    function deleteFile(file, callback) {\n      file.delete(function(err) {\n        if (err) {\n          if (query.force) {\n            errors.push(err);\n            callback();\n            return;\n          }\n\n          callback(err);\n          return;\n        }\n\n        callback();\n      });\n    }\n\n    // Iterate through each file and attempt to delete it.\n    async.eachLimit(files, MAX_PARALLEL_LIMIT, deleteFile, function(err) {\n      if (err || errors.length > 0) {\n        callback(err || errors);\n        return;\n      }\n\n      callback();\n    });\n  });\n\n};",
     "ctx": {
       "type": "method",
@@ -1021,8 +1021,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 426,
-    "codeStart": 439,
+    "line": 427,
+    "codeStart": 440,
     "code": "Bucket.prototype.file = function(name, options) {\n  return new File(this, name, options);\n};",
     "ctx": {
       "type": "method",
@@ -1218,8 +1218,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 443,
-    "codeStart": 530,
+    "line": 444,
+    "codeStart": 531,
     "code": "Bucket.prototype.getFiles = function(query, callback) {\n  var self = this;\n\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n\n  this.makeReq_('GET', '/o', query, true, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var files = (resp.items || []).map(function(item) {\n      var options = {};\n\n      if (query.versions) {\n        options.generation = item.generation;\n      }\n\n      var file = self.file(item.name, options);\n      file.metadata = item;\n\n      return file;\n    });\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, { pageToken: resp.nextPageToken });\n    }\n\n    callback(null, files, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1303,8 +1303,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 567,
-    "codeStart": 580,
+    "line": 568,
+    "codeStart": 581,
     "code": "Bucket.prototype.getMetadata = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('GET', '', null, true, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n    this.metadata = resp;\n    callback(null, this.metadata, resp);\n  }.bind(this));\n};",
     "ctx": {
       "type": "method",
@@ -1416,8 +1416,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 592,
-    "codeStart": 655,
+    "line": 593,
+    "codeStart": 656,
     "code": "Bucket.prototype.makePrivate = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.private = true;\n\n  async.series([setPredefinedAcl, makeFilesPrivate], callback);\n\n  function setPredefinedAcl(done) {\n    var query = {\n      predefinedAcl: 'projectPrivate'\n    };\n\n    // You aren't allowed to set both predefinedAcl & acl properties on a bucket\n    // so acl must explicitly be nullified.\n    var metadata = { acl: null };\n\n    self.makeReq_('PATCH', '', query, metadata, function(err, resp) {\n      if (err) {\n        done(err);\n        return;\n      }\n\n      self.metadata = resp;\n\n      done();\n    });\n  }\n\n  function makeFilesPrivate(done) {\n    if (!options.includeFiles) {\n      done();\n      return;\n    }\n\n    self.makeAllFilesPublicPrivate_(options, done);\n  }\n};",
     "ctx": {
       "type": "method",
@@ -1529,8 +1529,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 699,
-    "codeStart": 762,
+    "line": 700,
+    "codeStart": 763,
     "code": "Bucket.prototype.makePublic = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.public = true;\n\n  async.series([\n    addAclPermissions,\n    addDefaultAclPermissions,\n    makeFilesPublic\n  ], callback);\n\n  function addAclPermissions(done) {\n    // Allow reading bucket contents while preserving original permissions.\n    self.acl.add({\n      entity: 'allUsers',\n      role: 'READER'\n    }, done);\n  }\n\n  function addDefaultAclPermissions(done) {\n    self.acl.default.add({\n      entity: 'allUsers',\n      role: 'READER'\n    }, done);\n  }\n\n  function makeFilesPublic(done) {\n    if (!options.includeFiles) {\n      done();\n      return;\n    }\n\n    self.makeAllFilesPublicPrivate_(options, done);\n  }\n};",
     "ctx": {
       "type": "method",
@@ -1628,8 +1628,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 804,
-    "codeStart": 833,
+    "line": 805,
+    "codeStart": 834,
     "code": "Bucket.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n  callback = callback || util.noop;\n\n  this.makeReq_('PATCH', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1813,8 +1813,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 849,
-    "codeStart": 943,
+    "line": 850,
+    "codeStart": 944,
     "code": "Bucket.prototype.upload = function(localPath, options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  var newFile;\n  if (options.destination instanceof File) {\n    newFile = options.destination;\n  } else if (is.string(options.destination)) {\n    // Use the string as the name of the file.\n    newFile = this.file(options.destination);\n  } else {\n    // Resort to using the name of the incoming file.\n    newFile = this.file(path.basename(localPath));\n  }\n\n  var metadata = options.metadata || {};\n  var contentType = mime.contentType(path.basename(localPath));\n\n  if (contentType && !metadata.contentType) {\n    metadata.contentType = contentType;\n  }\n\n  var resumable;\n  if (is.boolean(options.resumable)) {\n    resumable = options.resumable;\n    upload();\n  } else {\n    // Determine if the upload should be resumable if it's over the threshold.\n    fs.stat(localPath, function(err, fd) {\n      if (err) {\n        callback(err);\n        return;\n      }\n\n      resumable = fd.size > RESUMABLE_THRESHOLD;\n\n      upload();\n    });\n  }\n\n  function upload() {\n    fs.createReadStream(localPath)\n      .pipe(newFile.createWriteStream({\n        validation: options.validation,\n        resumable: resumable,\n        metadata: metadata,\n        gzip: options.gzip\n      }))\n      .on('error', function(err) {\n        callback(err);\n      })\n      .on('complete', function() {\n        callback(null, newFile);\n      });\n  }\n};",
     "ctx": {
       "type": "method",
@@ -1913,8 +1913,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1002,
-    "codeStart": 1019,
+    "line": 1003,
+    "codeStart": 1020,
     "code": "Bucket.prototype.makeAllFilesPublicPrivate_ = function(options, callback) {\n  var MAX_PARALLEL_LIMIT = 10;\n  var errors = [];\n  var updatedFiles = [];\n\n  this.getFiles(function(err, files) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    function processFile(file, callback) {\n      if (options.public) {\n        file.makePublic(processedCallback);\n      } else if (options.private) {\n        file.makePrivate(processedCallback);\n      }\n\n      function processedCallback(err) {\n        if (err) {\n          if (options.force) {\n            errors.push(err);\n            callback();\n            return;\n          }\n\n          callback(err);\n          return;\n        }\n\n        updatedFiles.push(file);\n        callback();\n      }\n    }\n\n    // Iterate through each file and make it public or private.\n    async.eachLimit(files, MAX_PARALLEL_LIMIT, processFile, function(err) {\n      if (err || errors.length > 0) {\n        callback(err || errors, updatedFiles);\n        return;\n      }\n\n      callback(null, updatedFiles);\n    });\n  });\n};",
     "ctx": {
       "type": "method",
@@ -2009,8 +2009,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1066,
-    "codeStart": 1078,
+    "line": 1067,
+    "codeStart": 1079,
     "code": "Bucket.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: STORAGE_BASE_URL + '/' + this.name + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.storage.makeAuthorizedRequest_(reqOpts, callback);\n};",
     "ctx": {
       "type": "method",
@@ -2032,8 +2032,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 1092,
-    "codeStart": 1097,
+    "line": 1093,
+    "codeStart": 1098,
     "code": "streamRouter.extend(Bucket, 'getFiles');\n\nmodule.exports = Bucket;",
     "ctx": false
   }
