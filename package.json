@@ -90,7 +90,7 @@
   "scripts": {
     "docs": "./scripts/docs.sh",
     "lint": "jshint lib/ system-test/ test/ && jscs lib/ system-test/ test/",
-    "test": "npm run docs && mocha test/*/*.js test/docs.js",
+    "test": "npm run docs && mocha test/*/*.js test/index.js test/docs.js",
     "system-test": "mocha system-test/* --timeout 45000",
     "cover": "istanbul cover -x 'system-test/*' _mocha -- --timeout 45000 test/*/*.js test/docs.js system-test/*",
     "coveralls": "istanbul cover -x 'system-test/*' _mocha --report lcovonly -- --timeout 45000 test/*/*.js test/docs.js system-test/* -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
