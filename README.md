@@ -13,8 +13,8 @@ This client supports the following Google Cloud Platform services:
 * [Google BigQuery](#google-bigquery)
 * [Google Cloud Datastore](#google-cloud-datastore)
 * [Google Cloud DNS](#google-cloud-dns)
+* [Google Cloud Pub/Sub](#google-cloud-pubsub)
 * [Google Cloud Storage](#google-cloud-storage)
-* [Google Cloud Pub/Sub](#google-cloud-pubsub-beta) (Beta)
 * [Google Cloud Search](#google-cloud-search-alpha) (Alpha)
 
 If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
@@ -206,6 +206,48 @@ zone.export('/zonefile.zone', function(err) {});
 ```
 
 
+## Google Cloud Pub/Sub
+
+- [API Documentation][gcloud-pubsub-docs]
+- [Official Documentation][cloud-pubsub-docs]
+
+#### Preview
+
+```js
+var gcloud = require('gcloud');
+
+// Authorizing on a per-API-basis. You don't need to do this if you
+// auth on a global basis (see Authorization section above).
+
+var pubsub = gcloud.pubsub({
+  projectId: 'my-project',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+// Reference a topic.
+var topic = pubsub.topic('my-topic');
+
+// Publish a message to the topic.
+// The topic will be created if it doesn't exist.
+topic.publish({
+  data: 'New message!'
+}, function(err) {});
+
+// Subscribe to the topic.
+topic.subscribe('new-subscription', function(err, subscription) {
+  // Register listeners to start pulling for messages.
+  function onError(err) {}
+  function onMessage(message) {}
+  subscription.on('error', onError);
+  subscription.on('message', onMessage);
+
+  // Remove listeners to stop pulling for messages.
+  subscription.removeListener('message', onMessage);
+  subscription.removeListener('error', onError);
+});
+```
+
+
 ## Google Cloud Storage
 
 - [API Documentation][gcloud-storage-docs]
@@ -255,50 +297,6 @@ remoteReadStream.pipe(localWriteStream);
 var localReadStream = fs.createReadStream('/photos/zoo/zebra.jpg');
 var remoteWriteStream = bucket.file('zebra.jpg').createWriteStream();
 localReadStream.pipe(remoteWriteStream);
-```
-
-
-## Google Cloud Pub/Sub (Beta)
-
-> This is a *Beta* release of Google Cloud Pub/Sub. This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
-
-- [API Documentation][gcloud-pubsub-docs]
-- [Official Documentation][cloud-pubsub-docs]
-
-#### Preview
-
-```js
-var gcloud = require('gcloud');
-
-// Authorizing on a per-API-basis. You don't need to do this if you
-// auth on a global basis (see Authorization section above).
-
-var pubsub = gcloud.pubsub({
-  projectId: 'my-project',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-// Reference a topic.
-var topic = pubsub.topic('my-topic');
-
-// Publish a message to the topic.
-// The topic will be created if it doesn't exist.
-topic.publish({
-  data: 'New message!'
-}, function(err) {});
-
-// Subscribe to the topic.
-topic.subscribe('new-subscription', function(err, subscription) {
-  // Register listeners to start pulling for messages.
-  function onError(err) {}
-  function onMessage(message) {}
-  subscription.on('error', onError);
-  subscription.on('message', onMessage);
-
-  // Remove listeners to stop pulling for messages.
-  subscription.removeListener('message', onMessage);
-  subscription.removeListener('error', onError);
-});
 ```
 
 
