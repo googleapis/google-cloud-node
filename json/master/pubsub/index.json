@@ -306,9 +306,9 @@
       }
     ],
     "description": {
-      "full": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p><p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use<br />it by filling the <a href=\"http://goo.gl/sO0wTu\">Limited Preview application form</a>.</p>",
+      "full": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p>",
       "summary": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p>",
-      "body": "<p>Note: Google Cloud Pub/Sub API is available as a Limited Preview and the<br />client library we provide is currently experimental. The API and/or the<br />client might be changed in backward-incompatible ways. This API is not<br />subject to any SLA or deprecation policy. Request to be whitelisted to use<br />it by filling the <a href=\"http://goo.gl/sO0wTu\">Limited Preview application form</a>.</p>"
+      "body": ""
     },
     "isPrivate": false,
     "isConstructor": true,
@@ -316,7 +316,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 65,
-    "codeStart": 89,
+    "codeStart": 83,
     "code": "function PubSub(options) {\n  if (!(this instanceof PubSub)) {\n    return new PubSub(options);\n  }\n\n  options = options || {};\n\n  if (!options.projectId) {\n    throw util.missingProjectIdError;\n  }\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId = options.projectId;\n  this.projectName = 'projects/' + this.projectId;\n}",
     "ctx": {
       "type": "constructor",
@@ -468,8 +468,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 111,
-    "codeStart": 178,
+    "line": 105,
+    "codeStart": 172,
     "code": "PubSub.prototype.getTopics = function(query, callback) {\n  var self = this;\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n  var path = this.projectName + '/topics';\n  this.makeReq_('GET', path, query, true, function(err, result) {\n    if (err) {\n      callback(err, null, null, result);\n      return;\n    }\n    var topics = (result.topics || []).map(function(item) {\n      var topicInstance = self.topic(item.name);\n      topicInstance.metadata = item;\n      return topicInstance;\n    });\n    var nextQuery = null;\n    if (result.nextPageToken) {\n      nextQuery = query;\n      nextQuery.pageToken = result.nextPageToken;\n    }\n    callback(null, topics, nextQuery, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -567,8 +567,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 204,
-    "codeStart": 221,
+    "line": 198,
+    "codeStart": 215,
     "code": "PubSub.prototype.createTopic = function(name, callback) {\n  callback = callback || util.noop;\n  var topic = this.topic(name);\n  var path = this.projectName + '/topics/' + name;\n  this.makeReq_('PUT', path, null, null, function(err, result) {\n    if (err) {\n      callback(err, null, result);\n      return;\n    }\n    callback(null, topic, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -767,8 +767,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 234,
-    "codeStart": 292,
+    "line": 228,
+    "codeStart": 286,
     "code": "PubSub.prototype.subscribe = function(topic, subName, options, callback) {\n  if (!is.string(topic) && !(topic instanceof Topic)) {\n    throw new Error('A Topic is required for a new subscription.');\n  }\n\n  if (!is.string(subName)) {\n    throw new Error('A subscription name is required for a new subscription.');\n  }\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  if (is.string(topic)) {\n    topic = this.topic(topic);\n  }\n\n  var body = {\n    topic: topic.name\n  };\n\n  if (options.ackDeadlineSeconds) {\n    body.ackDeadlineSeconds = options.ackDeadlineSeconds;\n  }\n\n  var subscription = this.subscription(subName, options);\n\n  this.makeReq_('PUT', subscription.name, null, body, function(err, result) {\n    if (err && !(err.code === 409 && options.reuseExisting)) {\n      callback(err, null, result);\n      return;\n    }\n\n    callback(null, subscription, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -874,8 +874,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 332,
-    "codeStart": 359,
+    "line": 326,
+    "codeStart": 353,
     "code": "PubSub.prototype.subscription = function(name, options) {\n  if (!name) {\n    throw new Error('The name of a subscription is required.');\n  }\n\n  options = options || {};\n  options.name = name;\n  return new Subscription(this, options);\n};",
     "ctx": {
       "type": "method",
@@ -939,8 +939,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 369,
-    "codeStart": 385,
+    "line": 363,
+    "codeStart": 379,
     "code": "PubSub.prototype.topic = function(name) {\n  if (!name) {\n    throw new Error('A name must be specified for a new topic.');\n  }\n\n  return new Topic(this, name);\n};",
     "ctx": {
       "type": "method",
@@ -1109,8 +1109,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 393,
-    "codeStart": 462,
+    "line": 387,
+    "codeStart": 456,
     "code": "PubSub.prototype.getSubscriptions = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  var topicName;\n\n  if (is.string(options.topic)) {\n    topicName = options.topic;\n  } else if (options.topic instanceof Topic) {\n    topicName = options.topic.unformattedName;\n  }\n\n  var query = {};\n\n  if (options.pageSize) {\n    query.pageSize = options.pageSize;\n  }\n\n  if (options.pageToken) {\n    query.pageToken = options.pageToken;\n  }\n\n  var apiPath = format('{projectPath}{topicPath}/subscriptions', {\n    projectPath: 'projects/' + this.projectId,\n    topicPath: topicName ? '/topics/' + topicName : ''\n  });\n\n  this.makeReq_('GET', apiPath, query, null, function(err, result) {\n    if (err) {\n      callback(err, null, null, result);\n      return;\n    }\n\n    var subscriptions = (result.subscriptions || []).map(function(sub) {\n      return new Subscription(self, {\n        // Depending on if we're using a subscriptions.list or\n        // topics.subscriptions.list API endpoint, we will get back a\n        // Subscription resource or just the name of the subscription.\n        name: sub.name || sub\n      });\n    });\n\n    var nextQuery = null;\n\n    if (result.nextPageToken) {\n      nextQuery = options;\n      nextQuery.pageToken = result.nextPageToken;\n    }\n\n    callback(null, subscriptions, nextQuery, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1205,8 +1205,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 521,
-    "codeStart": 533,
+    "line": 515,
+    "codeStart": 527,
     "code": "PubSub.prototype.makeReq_ = function(method, path, q, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: q,\n    uri: PUBSUB_BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};",
     "ctx": {
       "type": "method",
@@ -1228,8 +1228,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 547,
-    "codeStart": 552,
+    "line": 541,
+    "codeStart": 546,
     "code": "streamRouter.extend(PubSub, ['getSubscriptions', 'getTopics']);\n\nmodule.exports = PubSub;",
     "ctx": false
   }

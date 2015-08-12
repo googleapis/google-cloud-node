@@ -700,9 +700,9 @@
       }
     ],
     "description": {
-      "full": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p><p class=\"notice\"><br />  <strong>This is a Beta release of Google Cloud Pub/Sub.</strong> This feature is not<br />  covered by any SLA or deprecation policy and may be subject to backward-<br />  incompatible changes.<br /></p>\n",
+      "full": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p>",
       "summary": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p>",
-      "body": "<p class=\"notice\"><br />  <strong>This is a Beta release of Google Cloud Pub/Sub.</strong> This feature is not<br />  covered by any SLA or deprecation policy and may be subject to backward-<br />  incompatible changes.<br /></p>\n"
+      "body": ""
     },
     "isPrivate": false,
     "isConstructor": false,
@@ -710,7 +710,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 209,
-    "codeStart": 231,
+    "codeStart": 225,
     "code": "gcloud.pubsub = PubSub;",
     "ctx": {
       "type": "property",
@@ -765,8 +765,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 233,
-    "codeStart": 256,
+    "line": 227,
+    "codeStart": 250,
     "code": "gcloud.search = Search;",
     "ctx": {
       "type": "property",
@@ -821,8 +821,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 258,
-    "codeStart": 274,
+    "line": 252,
+    "codeStart": 268,
     "code": "gcloud.storage = Storage;\n\nmodule.exports = gcloud;",
     "ctx": {
       "type": "property",
