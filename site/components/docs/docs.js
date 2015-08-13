@@ -266,7 +266,15 @@ angular
     }
 
     function compareMethods(a, b) {
-      return a.constructor ? -1: a.name > b.name ? 1 : -1;
+      if (a.constructor) {
+        return -1;
+      }
+
+      if (b.constructor) {
+        return 1;
+      }
+
+      return a.name > b.name ? 1 : -1;
     }
 
     $routeProvider
