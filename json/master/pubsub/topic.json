@@ -82,6 +82,48 @@
   {
     "tags": [
       {
+        "type": "type",
+        "string": "{module:pubsub/iam}",
+        "types": [
+          "module:pubsub/iam"
+        ],
+        "typesDescription": "module:<a href=\"module%3Apubsub%2Fiam.html\">pubsub/iam</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:pubsub/iam}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 33,
+    "codeStart": 37,
+    "code": "var IAM = require('./iam');",
+    "ctx": {
+      "type": "declaration",
+      "name": "IAM",
+      "value": "require('./iam')",
+      "string": "IAM"
+    }
+  },
+  {
+    "tags": [
+      {
         "type": "param",
         "string": "{module:pubsub} pubsub - PubSub object.",
         "name": "pubsub",
@@ -120,8 +162,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 33,
-    "codeStart": 38
+    "line": 39,
+    "codeStart": 44
   },
   {
     "tags": [
@@ -151,13 +193,57 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 38,
-    "codeStart": 51,
-    "code": "function Topic(pubsub, name) {\n  this.name = Topic.formatName_(pubsub.projectId, name);\n\n  this.projectId = pubsub.projectId;\n  this.pubsub = pubsub;\n  this.unformattedName = name;\n\n  this.makeReq_ = this.pubsub.makeReq_.bind(this.pubsub);\n}",
+    "line": 44,
+    "codeStart": 57,
+    "code": "function Topic(pubsub, name) {\n  this.name = Topic.formatName_(pubsub.projectId, name);\n\n  this.projectId = pubsub.projectId;\n  this.pubsub = pubsub;\n  this.unformattedName = name;\n\n  this.makeReq_ = this.pubsub.makeReq_.bind(this.pubsub);",
     "ctx": {
       "type": "constructor",
       "name": "Topic",
       "string": "Topic()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "mixes",
+        "string": "module:pubsub/iam ",
+        "html": "<p>module:pubsub/iam </p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Access Control Overview]{@link https://cloud.google.com/pubsub/access_control}",
+        "html": "<p>[Access Control Overview]{@link <a href=\"https://cloud.google.com/pubsub/access_control}\">https://cloud.google.com/pubsub/access_control}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[What is Cloud IAM?]{@link https://cloud.google.com/iam/} ",
+        "html": "<p>[What is Cloud IAM?]{@link <a href=\"https://cloud.google.com/iam/}\">https://cloud.google.com/iam/}</a> </p>"
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Get the IAM policy for your topic.\n//-\ntopic.iam.getPolicy(function(err, policy) {\n  console.log(policy);\n});",
+        "html": "<p>//-<br />// Get the IAM policy for your topic.<br />//-<br />topic.iam.getPolicy(function(err, policy) {<br />  console.log(policy);<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p><a href=\"https://cloud.google.com/pubsub/access_control\">IAM (Identity and Access Management)</a><br />allows you to set permissions on invidual resources and offers a wider<br />range of roles: editor, owner, publisher, subscriber, and viewer. This<br />gives you greater flexibility and allows you to set more fine-grained<br />access control.</p><p><em>The IAM access control features described in this document are Beta,<br />including the API methods to get and set IAM policies, and to test IAM<br />permissions. Google Cloud Pub/Sub&#39;s use of IAM features is not covered by<br />any SLA or deprecation policy, and may be subject to backward-incompatible<br />changes.</em></p>",
+      "summary": "<p><a href=\"https://cloud.google.com/pubsub/access_control\">IAM (Identity and Access Management)</a><br />allows you to set permissions on invidual resources and offers a wider<br />range of roles: editor, owner, publisher, subscriber, and viewer. This<br />gives you greater flexibility and allows you to set more fine-grained<br />access control.</p>",
+      "body": "<p><em>The IAM access control features described in this document are Beta,<br />including the API methods to get and set IAM policies, and to test IAM<br />permissions. Google Cloud Pub/Sub&#39;s use of IAM features is not covered by<br />any SLA or deprecation policy, and may be subject to backward-incompatible<br />changes.</em></p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 66,
+    "codeStart": 92,
+    "code": "this.iam = new IAM(pubsub, this.name);\n}",
+    "ctx": {
+      "type": "property",
+      "receiver": "this",
+      "name": "iam",
+      "value": "new IAM(pubsub, this.name)",
+      "string": "this.iam"
     }
   },
   {
@@ -193,8 +279,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 61,
-    "codeStart": 68,
+    "line": 95,
+    "codeStart": 102,
     "code": "Topic.formatMessage_ = function(message) {\n  if (!(message.data instanceof Buffer)) {\n    message.data = new Buffer(JSON.stringify(message.data));\n  }\n\n  message.data = message.data.toString('base64');\n\n  return message;\n};",
     "ctx": {
       "type": "method",
@@ -236,8 +322,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 78,
-    "codeStart": 86,
+    "line": 112,
+    "codeStart": 120,
     "code": "Topic.formatName_ = function(projectId, name) {\n  // Simple check if the name is already formatted.\n  if (name.indexOf('/') > -1) {\n    return name;\n  }\n  return 'projects/' + projectId + '/topics/' + name;\n};",
     "ctx": {
       "type": "method",
@@ -340,8 +426,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 94,
-    "codeStart": 147,
+    "line": 128,
+    "codeStart": 181,
     "code": "Topic.prototype.publish = function(messages, callback) {\n  messages = arrify(messages);\n\n  if (messages.length === 0) {\n    throw new Error('Cannot publish without a message.');\n  }\n\n  if (!messages.every(prop('data'))) {\n    throw new Error('Cannot publish message without a `data` property.');\n  }\n\n  callback = callback || util.noop;\n\n  var body = {\n    messages: messages.map(Topic.formatMessage_)\n  };\n\n  var path = this.name + ':publish';\n  this.makeReq_('POST', path, null, body, function(err, result) {\n    if (err) {\n      callback(err, null, result);\n      return;\n    }\n    callback(null, result && result.messageIds || [], result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -388,8 +474,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 174,
-    "codeStart": 184,
+    "line": 208,
+    "codeStart": 218,
     "code": "Topic.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('DELETE', this.name, null, null, callback);\n};",
     "ctx": {
       "type": "method",
@@ -473,8 +559,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 189,
-    "codeStart": 199,
+    "line": 223,
+    "codeStart": 233,
     "code": "Topic.prototype.getMetadata = function(callback) {\n  var self = this;\n\n  this.makeReq_('GET', this.name, null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.metadata = resp;\n    callback(null, self.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -563,8 +649,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 213,
-    "codeStart": 262,
+    "line": 247,
+    "codeStart": 296,
     "code": "Topic.prototype.getSubscriptions = function(options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.topic = this;\n\n  return this.pubsub.getSubscriptions(options, callback);\n};",
     "ctx": {
       "type": "method",
@@ -695,8 +781,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 274,
-    "codeStart": 308,
+    "line": 308,
+    "codeStart": 342,
     "code": "Topic.prototype.subscribe = function(subName, options, callback) {\n  this.pubsub.subscribe(this, subName, options, callback);\n};",
     "ctx": {
       "type": "method",
@@ -794,8 +880,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 312,
-    "codeStart": 337,
+    "line": 346,
+    "codeStart": 371,
     "code": "Topic.prototype.subscription = function(name, options) {\n  return this.pubsub.subscription(name, options);\n};\n\nmodule.exports = Topic;",
     "ctx": {
       "type": "method",
