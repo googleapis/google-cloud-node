@@ -421,8 +421,23 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Buckets: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/insert} ",
-        "html": "<p>[Buckets: insert API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/insert}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/insert}</a> </p>"
+        "string": "[Buckets: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/insert}",
+        "html": "<p>[Buckets: insert API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/insert}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/insert}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Durable Reduced Availability]{@link https://cloud.google.com/storage/docs/durable-reduced-availability}",
+        "html": "<p>[Durable Reduced Availability]{@link <a href=\"https://cloud.google.com/storage/docs/durable-reduced-availability}\">https://cloud.google.com/storage/docs/durable-reduced-availability}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Nearline]{@link https://cloud.google.com/storage/docs/nearline}",
+        "html": "<p>[Nearline]{@link <a href=\"https://cloud.google.com/storage/docs/nearline}\">https://cloud.google.com/storage/docs/nearline}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Storage Classes]{@link https://cloud.google.com/storage/docs/storage-classes} ",
+        "html": "<p>[Storage Classes]{@link <a href=\"https://cloud.google.com/storage/docs/storage-classes}\">https://cloud.google.com/storage/docs/storage-classes}</a> </p>"
       },
       {
         "type": "throws",
@@ -455,6 +470,34 @@
           "object"
         ],
         "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean=} metadata.dra - Specify the storage class as\n    [Durable Reduced Availability](https://goo.gl/26lthK).",
+        "name": "metadata.dra",
+        "description": "<ul>\n<li>Specify the storage class as     <a href=\"https://goo.gl/26lthK\">Durable Reduced Availability</a>.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean=} metadata.nearline - Specify the storage class as\n    [Nearline](https://goo.gl/sN5wNh).",
+        "name": "metadata.nearline",
+        "description": "<ul>\n<li>Specify the storage class as     <a href=\"https://goo.gl/sN5wNh\">Nearline</a>.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>|<code>undefined</code>",
         "optional": true,
         "nullable": false,
         "nonNullable": false,
@@ -518,8 +561,8 @@
       },
       {
         "type": "example",
-        "string": "var callback = function(err, bucket, apiResponse) {\n  // `bucket` is a Bucket object.\n};\n\ngcs.createBucket('new-bucket', callback);\n\n//-\n// Create a bucket in a specific location and region. <em>See the <a\n// href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/insert\">\n// Official JSON API docs</a> for complete details on the `location` option.\n// </em>\n//-\nvar metadata = {\n  location: 'US-CENTRAL1',\n  storageClass: 'DURABLE_REDUCED_AVAILABILITY'\n};\n\ngcs.createBucket('new-bucket', metadata, callback);\n\n//-\n// Enable versioning on a new bucket.\n//-\nvar metadata = {\n  versioning: {\n    enabled: true\n  }\n};\n\ngcs.createBucket('new-bucket', metadata, callback);",
-        "html": "<p>var callback = function(err, bucket, apiResponse) {<br />  // <code>bucket</code> is a Bucket object.<br />};</p><p>gcs.createBucket(&#39;new-bucket&#39;, callback);</p><p>//-<br />// Create a bucket in a specific location and region. <em>See the <a\n// href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/insert\"><br />// Official JSON API docs</a> for complete details on the <code>location</code> option.<br />// </em><br />//-<br />var metadata = {<br />  location: &#39;US-CENTRAL1&#39;,<br />  storageClass: &#39;DURABLE_REDUCED_AVAILABILITY&#39;<br />};</p><p>gcs.createBucket(&#39;new-bucket&#39;, metadata, callback);</p><p>//-<br />// Enable versioning on a new bucket.<br />//-<br />var metadata = {<br />  versioning: {<br />    enabled: true<br />  }<br />};</p><p>gcs.createBucket(&#39;new-bucket&#39;, metadata, callback);</p>"
+        "string": "var callback = function(err, bucket, apiResponse) {\n  // `bucket` is a Bucket object.\n};\n\ngcs.createBucket('new-bucket', callback);\n\n//-\n// Create a bucket in a specific location and region. <em>See the <a\n// href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/insert\">\n// Official JSON API docs</a> for complete details on the `location` option.\n// </em>\n//-\nvar metadata = {\n  location: 'US-CENTRAL1',\n  dra: true\n};\n\ngcs.createBucket('new-bucket', metadata, callback);\n\n//-\n// Enable versioning on a new bucket.\n//-\nvar metadata = {\n  versioning: {\n    enabled: true\n  }\n};\n\ngcs.createBucket('new-bucket', metadata, callback);",
+        "html": "<p>var callback = function(err, bucket, apiResponse) {<br />  // <code>bucket</code> is a Bucket object.<br />};</p><p>gcs.createBucket(&#39;new-bucket&#39;, callback);</p><p>//-<br />// Create a bucket in a specific location and region. <em>See the <a\n// href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/insert\"><br />// Official JSON API docs</a> for complete details on the <code>location</code> option.<br />// </em><br />//-<br />var metadata = {<br />  location: &#39;US-CENTRAL1&#39;,<br />  dra: true<br />};</p><p>gcs.createBucket(&#39;new-bucket&#39;, metadata, callback);</p><p>//-<br />// Enable versioning on a new bucket.<br />//-<br />var metadata = {<br />  versioning: {<br />    enabled: true<br />  }<br />};</p><p>gcs.createBucket(&#39;new-bucket&#39;, metadata, callback);</p>"
       }
     ],
     "description": {
@@ -533,8 +576,8 @@
     "isEvent": false,
     "ignore": false,
     "line": 183,
-    "codeStart": 228,
-    "code": "Storage.prototype.createBucket = function(name, metadata, callback) {\n  var self = this;\n  if (!name) {\n    throw new Error('A name is required to create a bucket.');\n  }\n  if (!callback) {\n    callback = metadata;\n    metadata = {};\n  }\n  var query = {\n    project: this.projectId\n  };\n  var body = extend(metadata, {\n    name: name\n  });\n\n  this.makeReq_('POST', '', query, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n    var bucket = self.bucket(name);\n    bucket.metadata = resp;\n    callback(null, bucket, resp);\n  });\n};",
+    "codeStart": 235,
+    "code": "Storage.prototype.createBucket = function(name, metadata, callback) {\n  var self = this;\n  if (!name) {\n    throw new Error('A name is required to create a bucket.');\n  }\n  if (!callback) {\n    callback = metadata;\n    metadata = {};\n  }\n  var query = {\n    project: this.projectId\n  };\n  var body = extend(metadata, {\n    name: name\n  });\n  var storageClasses = {\n    dra: 'DURABLE_REDUCED_AVAILABILITY',\n    nearline: 'NEARLINE'\n  };\n\n  Object.keys(storageClasses).forEach(function(storageClass) {\n    if (body[storageClass]) {\n      body.storageClass = storageClasses[storageClass];\n      delete body[storageClass];\n    }\n  });\n\n  this.makeReq_('POST', '', query, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n    var bucket = self.bucket(name);\n    bucket.metadata = resp;\n    callback(null, bucket, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Storage",
@@ -692,8 +735,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 255,
-    "codeStart": 325,
+    "line": 273,
+    "codeStart": 343,
     "code": "Storage.prototype.getBuckets = function(query, callback) {\n  var that = this;\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n  query.project = query.project || this.projectId;\n  this.makeReq_('GET', '', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n    var buckets = (resp.items || []).map(function(item) {\n      var bucket = that.bucket(item.id);\n      bucket.metadata = item;\n      return bucket;\n    });\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, { pageToken: resp.nextPageToken });\n    }\n    callback(null, buckets, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -788,8 +831,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 350,
-    "codeStart": 362,
+    "line": 368,
+    "codeStart": 380,
     "code": "Storage.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: STORAGE_BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};",
     "ctx": {
       "type": "method",
@@ -811,8 +854,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 376,
-    "codeStart": 381,
+    "line": 394,
+    "codeStart": 399,
     "code": "streamRouter.extend(Storage, 'getBuckets');\n\nmodule.exports = Storage;",
     "ctx": false
   }
