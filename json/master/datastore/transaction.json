@@ -171,6 +171,11 @@
   {
     "tags": [
       {
+        "type": "resource",
+        "string": "[Transactions Reference]{@link https://cloud.google.com/datastore/docs/concepts/transactions} ",
+        "html": "<p>[Transactions Reference]{@link <a href=\"https://cloud.google.com/datastore/docs/concepts/transactions}\">https://cloud.google.com/datastore/docs/concepts/transactions}</a> </p>"
+      },
+      {
         "type": "constructor",
         "string": "",
         "html": ""
@@ -192,9 +197,9 @@
       }
     ],
     "description": {
-      "full": "<p>Build a Transaction object. Transactions will be created for you by<br />{@linkcode module:datastore/dataset}. When you need to run a transactional<br />operation, use {@linkcode module:datastore/dataset#runInTransaction}.</p><p><em><a href=\"http://goo.gl/n4oSjt\">Reference</a>.</em></p>",
+      "full": "<p>Build a Transaction object. Transactions will be created for you by<br />{@linkcode module:datastore/dataset}. When you need to run a transactional<br />operation, use {@linkcode module:datastore/dataset#runInTransaction}.</p>",
       "summary": "<p>Build a Transaction object. Transactions will be created for you by<br />{@linkcode module:datastore/dataset}. When you need to run a transactional<br />operation, use {@linkcode module:datastore/dataset#runInTransaction}.</p>",
-      "body": "<p><em><a href=\"http://goo.gl/n4oSjt\">Reference</a>.</em></p>"
+      "body": ""
     },
     "isPrivate": false,
     "isConstructor": true,
@@ -262,6 +267,11 @@
   {
     "tags": [
       {
+        "type": "resource",
+        "string": "[Datasets: rollback API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/rollback} ",
+        "html": "<p>[Datasets: rollback API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/rollback}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/rollback}</a> </p>"
+      },
+      {
         "type": "param",
         "string": "{function} callback - The callback function.",
         "name": "callback",
@@ -320,7 +330,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 121,
-    "codeStart": 135,
+    "codeStart": 137,
     "code": "Transaction.prototype.rollback = function(callback) {\n  var that = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('rollback', function(err, resp) {\n    that.skipCommit = true;\n\n    callback(err || null, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -368,8 +378,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 147,
-    "codeStart": 163,
+    "line": 149,
+    "codeStart": 165,
     "code": "Transaction.prototype.commit_ = function(callback) {\n  var that = this;\n\n  callback = callback || util.noop;\n\n  if (this.skipCommit) {\n    setImmediate(callback);\n    return;\n  }\n\n  var keys = {};\n\n  this.modifiedEntities_\n\n    // Reverse the order of the queue to respect the \"last queued request wins\"\n    // behavior.\n    .reverse()\n\n    // Limit the operations we're going to send through to only the most\n    // recently queued operations. E.g., if a user tries to save with the same\n    // key they just asked to be deleted, the delete request will be ignored,\n    // giving preference to the save operation.\n    .filter(function(modifiedEntity) {\n      var key = JSON.stringify(modifiedEntity.entity.key);\n\n      if (!keys[key]) {\n        keys[key] = true;\n        return true;\n      }\n    })\n\n    // Group entities together by action (delete or save).\n    .sort(function(a, b) {\n      return a.method > b.method ? 1 : a.method < b.method ? -1 : 0;\n    })\n\n    // Group arguments together so that we only make one call to each method.\n    // This is important for `DatastoreRequest.save`, especially, as that method\n    // handles assigning auto-generated IDs to the original keys passed in. When\n    // we eventually execute the `save` method's API callback, having all the\n    // keys together is necessary to maintain order.\n    .reduce(function(acc, entityObject) {\n      var lastEntityObject = acc[acc.length - 1];\n      var sameMethod = lastEntityObject &&\n        entityObject.method === lastEntityObject.method;\n\n      if (!lastEntityObject || !sameMethod) {\n        acc.push(entityObject);\n      } else {\n        lastEntityObject.args = lastEntityObject.args.concat(entityObject.args);\n      }\n\n      return acc;\n    }, [])\n\n    // Call each of the mutational methods (DatastoreRequest[save,delete]) to\n    // build up a `req` array on this instance. This will also build up a\n    // `callbacks` array, that is the same callback that would run if we were\n    // using `save` and `delete` outside of a transaction, to process the\n    // response from the API.\n    .forEach(function(modifiedEntity) {\n      var method = modifiedEntity.method;\n      var args = modifiedEntity.args.reverse();\n\n      DatastoreRequest.prototype[method].call(that, args, util.noop);\n    });\n\n  // Take the `req` array built previously, and merge them into one request to\n  // send as the final transactional commit.\n  var req = this.requests_.reduce(function(acc, req) {\n    return extend(true, acc, req);\n  }, {});\n\n  this.makeReq_('commit', req, function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    // The `callbacks` array was built previously. These are the callbacks that\n    // handle the API response normally when using the DatastoreRequest.save and\n    // .delete methods.\n    that.requestCallbacks_.forEach(function(cb) {\n      cb(null, resp);\n    });\n\n    callback(null, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -391,11 +401,16 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 253,
-    "codeStart": 262
+    "line": 255,
+    "codeStart": 264
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Datasets: commit API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit#mutation.delete} ",
+        "html": "<p>[Datasets: commit API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit#mutation.delete}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit#mutation.delete}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{Key|Key[]} key - Datastore key object(s).\n",
@@ -427,8 +442,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 262,
-    "codeStart": 278,
+    "line": 264,
+    "codeStart": 282,
     "code": "Transaction.prototype.delete = function(entities) {\n  var that = this;\n\n  arrify(entities).forEach(function(ent) {\n    that.modifiedEntities_.push({\n      entity: {\n        key: ent\n      },\n      method: 'delete',\n      args: [ent]\n    });\n  });\n};",
     "ctx": {
       "type": "method",
@@ -440,6 +455,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Datasets: commit API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit} ",
+        "html": "<p>[Datasets: commit API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object|object[]} entities - Datastore key object(s).",
@@ -500,8 +520,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 292,
-    "codeStart": 366,
+    "line": 296,
+    "codeStart": 372,
     "code": "Transaction.prototype.save = function(entities) {\n  var that = this;\n\n  arrify(entities).forEach(function(ent) {\n    that.modifiedEntities_.push({\n      entity: {\n        key: ent.key\n      },\n      method: 'save',\n      args: [ent]\n    });\n  });\n};",
     "ctx": {
       "type": "method",
@@ -535,8 +555,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 380,
-    "codeStart": 387,
+    "line": 386,
+    "codeStart": 393,
     "code": "Transaction.prototype.mapQuery = function() {\n  throw new Error('not yet implemented');\n};\n\nmodule.exports = Transaction;",
     "ctx": {
       "type": "method",

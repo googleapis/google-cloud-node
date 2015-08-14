@@ -121,6 +121,11 @@
   {
     "tags": [
       {
+        "type": "resource",
+        "string": "[Jobs: get API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/get} ",
+        "html": "<p>[Jobs: get API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/jobs/get}\">https://cloud.google.com/bigquery/docs/reference/v2/jobs/get}</a> </p>"
+      },
+      {
         "type": "param",
         "string": "{function} callback - The callback function.",
         "name": "callback",
@@ -193,7 +198,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 59,
-    "codeStart": 72,
+    "codeStart": 74,
     "code": "Job.prototype.getMetadata = function(callback) {\n  var that = this;\n\n  var path = '/jobs/' + this.id;\n\n  this.bigQuery.makeReq_('GET', path, null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -205,6 +210,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Jobs: getQueryResults API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/getQueryResults} ",
+        "html": "<p>[Jobs: getQueryResults API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/jobs/getQueryResults}\">https://cloud.google.com/bigquery/docs/reference/v2/jobs/getQueryResults}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object=} options - Configuration object.",
@@ -375,8 +385,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 89,
-    "codeStart": 157,
+    "line": 91,
+    "codeStart": 161,
     "code": "Job.prototype.getQueryResults = function(options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.job = this;\n\n  return this.bigQuery.query(options, callback);\n};\n\nmodule.exports = Job;",
     "ctx": {
       "type": "method",

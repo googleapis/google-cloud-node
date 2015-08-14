@@ -105,6 +105,11 @@
   {
     "tags": [
       {
+        "type": "resource",
+        "string": "[Changes: get API Documentation]{@link https://cloud.google.com/dns/api/v1/changes/get} ",
+        "html": "<p>[Changes: get API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/changes/get}\">https://cloud.google.com/dns/api/v1/changes/get}</a> </p>"
+      },
+      {
         "type": "param",
         "string": "{function} callback - The callback function.",
         "name": "callback",
@@ -177,7 +182,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 49,
-    "codeStart": 71,
+    "codeStart": 73,
     "code": "Change.prototype.getMetadata = function(callback) {\n  var self = this;\n  var path = '/managedZones/' + this.zoneName + '/changes/' + this.id;\n\n  this.makeReq_('GET', path, null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.metadata = resp;\n\n    callback(null, self.metadata, resp);\n  });\n};\n\nmodule.exports = Change;",
     "ctx": {
       "type": "method",

@@ -175,6 +175,11 @@
   {
     "tags": [
       {
+        "type": "resource",
+        "string": "[Documents: create API Documentation]{@link https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/create} ",
+        "html": "<p>[Documents: create API Documentation]{@link <a href=\"https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/create}\">https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/create}</a> </p>"
+      },
+      {
         "type": "param",
         "string": "{object|module:search/document} documentObj - A properly-formed\n    Document object as outlined in the\n    [official docs](https://goo.gl/AYhSgI).",
         "name": "documentObj",
@@ -262,7 +267,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 64,
-    "codeStart": 112,
+    "codeStart": 114,
     "code": "Index.prototype.createDocument = function(documentObj, callback) {\n  var document;\n\n  if (documentObj instanceof Document) {\n    document = documentObj;\n    documentObj = document.toJSON();\n  } else {\n    document = this.documentFromObject_(documentObj);\n  }\n\n  this.makeReq_('POST', '/documents', null, documentObj, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, document, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -318,8 +323,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 132,
-    "codeStart": 141,
+    "line": 134,
+    "codeStart": 143,
     "code": "Index.prototype.document = function(id) {\n  return new Document(this, id);\n};",
     "ctx": {
       "type": "method",
@@ -331,6 +336,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Documents: list API Documentation]{@link https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/list} ",
+        "html": "<p>[Documents: list API Documentation]{@link <a href=\"https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/list}\">https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/list}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object=} query - Query object.",
@@ -487,8 +497,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 145,
-    "codeStart": 213,
+    "line": 147,
+    "codeStart": 217,
     "code": "Index.prototype.getDocuments = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  this.makeReq_('GET', '/documents', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var documents = (resp.documents || [])\n      .map(self.documentFromObject_.bind(self));\n\n    callback(null, documents, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -500,6 +510,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Indexes: search API Documentation]{@link https://cloud.google.com/search/reference/rest/v1/projects/indexes/search} ",
+        "html": "<p>[Indexes: search API Documentation]{@link <a href=\"https://cloud.google.com/search/reference/rest/v1/projects/indexes/search}\">https://cloud.google.com/search/reference/rest/v1/projects/indexes/search}</a> </p>"
+      },
       {
         "type": "throws",
         "string": "{error} If a query string or object isn't provided.\n",
@@ -656,17 +671,17 @@
       }
     ],
     "description": {
-      "full": "<p>Run a query against the documents in this index.</p><p>For a full list of supported query parameters, see the<br /><a href=\"https://goo.gl/706zrP\">JSON API documentation</a>.</p>",
+      "full": "<p>Run a query against the documents in this index.</p>",
       "summary": "<p>Run a query against the documents in this index.</p>",
-      "body": "<p>For a full list of supported query parameters, see the<br /><a href=\"https://goo.gl/706zrP\">JSON API documentation</a>.</p>"
+      "body": ""
     },
     "isPrivate": false,
     "isConstructor": false,
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 242,
-    "codeStart": 309,
+    "line": 246,
+    "codeStart": 312,
     "code": "Index.prototype.search = function(query, callback) {\n  var self = this;\n\n  if (is.string(query)) {\n    query = {\n      query: query\n    };\n  }\n\n  if (!is.object(query)) {\n    throw new Error('A query must be either a string or object.');\n  }\n\n  this.makeReq_('GET', '/search', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var documents = (resp.results || [])\n      .map(self.documentFromObject_.bind(self));\n\n    callback(null, documents, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -756,8 +771,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 343,
-    "codeStart": 371,
+    "line": 346,
+    "codeStart": 374,
     "code": "Index.prototype.documentFromObject_ = function(documentObj) {\n  var document = this.document(documentObj.docId);\n\n  if (is.object(documentObj.fields)) {\n    document.fields = documentObj.fields;\n  }\n\n  if (is.number(documentObj.rank)) {\n    document.rank = documentObj.rank;\n  }\n\n  return document;\n};",
     "ctx": {
       "type": "method",
@@ -852,8 +867,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 385,
-    "codeStart": 397,
+    "line": 388,
+    "codeStart": 400,
     "code": "Index.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/indexes/' + this.id + path;\n\n  this.search_.makeReq_(method, path, query, body, callback);\n};",
     "ctx": {
       "type": "method",
@@ -875,8 +890,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 403,
-    "codeStart": 409,
+    "line": 406,
+    "codeStart": 412,
     "code": "streamRouter.extend(Index, ['getDocuments', 'search']);\n\nmodule.exports = Index;",
     "ctx": false
   }

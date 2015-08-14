@@ -315,6 +315,11 @@
   {
     "tags": [
       {
+        "type": "resource",
+        "string": "[About Access Control Lists]{@link https://cloud.google.com/storage/docs/access-control#About-Access-Control-Lists} ",
+        "html": "<p>[About Access Control Lists]{@link <a href=\"https://cloud.google.com/storage/docs/access-control#About-Access-Control-Lists}\">https://cloud.google.com/storage/docs/access-control#About-Access-Control-Lists}</a> </p>"
+      },
+      {
         "type": "type",
         "string": "{object}\n",
         "types": [
@@ -334,9 +339,9 @@
       }
     ],
     "description": {
-      "full": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p><p>This object provides constants to refer to the three permission levels that<br />can be granted to an entity:</p><ul>\n<li><code>gcs.acl.OWNER_ROLE</code> - (&quot;OWNER&quot;)</li>\n<li><code>gcs.acl.READER_ROLE</code> - (&quot;READER&quot;)</li>\n<li><code>gcs.acl.WRITER_ROLE</code> - (&quot;WRITER&quot;)</li>\n</ul>\n<p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p>",
+      "full": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p><p>This object provides constants to refer to the three permission levels that<br />can be granted to an entity:</p><ul>\n<li><code>gcs.acl.OWNER_ROLE</code> - (&quot;OWNER&quot;)</li>\n<li><code>gcs.acl.READER_ROLE</code> - (&quot;READER&quot;)</li>\n<li><code>gcs.acl.WRITER_ROLE</code> - (&quot;WRITER&quot;)</li>\n</ul>\n",
       "summary": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p>",
-      "body": "<p>This object provides constants to refer to the three permission levels that<br />can be granted to an entity:</p><ul>\n<li><code>gcs.acl.OWNER_ROLE</code> - (&quot;OWNER&quot;)</li>\n<li><code>gcs.acl.READER_ROLE</code> - (&quot;READER&quot;)</li>\n<li><code>gcs.acl.WRITER_ROLE</code> - (&quot;WRITER&quot;)</li>\n</ul>\n<p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p>"
+      "body": "<p>This object provides constants to refer to the three permission levels that<br />can be granted to an entity:</p><ul>\n<li><code>gcs.acl.OWNER_ROLE</code> - (&quot;OWNER&quot;)</li>\n<li><code>gcs.acl.READER_ROLE</code> - (&quot;READER&quot;)</li>\n<li><code>gcs.acl.WRITER_ROLE</code> - (&quot;WRITER&quot;)</li>\n</ul>\n"
     },
     "isPrivate": false,
     "isConstructor": false,
@@ -344,7 +349,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 106,
-    "codeStart": 155,
+    "codeStart": 154,
     "code": "Storage.acl = {\n  OWNER_ROLE: 'OWNER',\n  READER_ROLE: 'READER',\n  WRITER_ROLE: 'WRITER'\n};\n\nStorage.prototype.acl = Storage.acl;",
     "ctx": {
       "type": "property",
@@ -401,8 +406,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 163,
-    "codeStart": 180,
+    "line": 162,
+    "codeStart": 179,
     "code": "Storage.prototype.bucket = function(name) {\n  return new Bucket(this, name);\n};",
     "ctx": {
       "type": "method",
@@ -414,6 +419,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Buckets: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/insert} ",
+        "html": "<p>[Buckets: insert API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/insert}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/insert}</a> </p>"
+      },
       {
         "type": "throws",
         "string": "{Error} If a name is not provided.\n",
@@ -522,8 +532,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 184,
-    "codeStart": 227,
+    "line": 183,
+    "codeStart": 228,
     "code": "Storage.prototype.createBucket = function(name, metadata, callback) {\n  var self = this;\n  if (!name) {\n    throw new Error('A name is required to create a bucket.');\n  }\n  if (!callback) {\n    callback = metadata;\n    metadata = {};\n  }\n  var query = {\n    project: this.projectId\n  };\n  var body = extend(metadata, {\n    name: name\n  });\n\n  this.makeReq_('POST', '', query, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n    var bucket = self.bucket(name);\n    bucket.metadata = resp;\n    callback(null, bucket, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -535,6 +545,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Buckets: list API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/list} ",
+        "html": "<p>[Buckets: list API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/list}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/list}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object=} query - Query object.",
@@ -677,8 +692,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 254,
-    "codeStart": 322,
+    "line": 255,
+    "codeStart": 325,
     "code": "Storage.prototype.getBuckets = function(query, callback) {\n  var that = this;\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n  query.project = query.project || this.projectId;\n  this.makeReq_('GET', '', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n    var buckets = (resp.items || []).map(function(item) {\n      var bucket = that.bucket(item.id);\n      bucket.metadata = item;\n      return bucket;\n    });\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, { pageToken: resp.nextPageToken });\n    }\n    callback(null, buckets, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -773,8 +788,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 347,
-    "codeStart": 359,
+    "line": 350,
+    "codeStart": 362,
     "code": "Storage.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: STORAGE_BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};",
     "ctx": {
       "type": "method",
@@ -796,8 +811,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 373,
-    "codeStart": 378,
+    "line": 376,
+    "codeStart": 381,
     "code": "streamRouter.extend(Storage, 'getBuckets');\n\nmodule.exports = Storage;",
     "ctx": false
   }

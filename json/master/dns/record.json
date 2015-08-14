@@ -232,6 +232,11 @@
   {
     "tags": [
       {
+        "type": "resource",
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create} ",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a> </p>"
+      },
+      {
         "type": "param",
         "string": "{function} callback - The callback function.",
         "name": "callback",
@@ -304,7 +309,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 105,
-    "codeStart": 125,
+    "codeStart": 127,
     "code": "Record.prototype.delete = function(callback) {\n  this.zone_.deleteRecords(this, callback);\n};",
     "ctx": {
       "type": "method",
@@ -333,8 +338,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 129,
-    "codeStart": 134,
+    "line": 131,
+    "codeStart": 136,
     "code": "Record.prototype.toJSON = function() {\n  var recordObject = extend({}, this.metadata, {\n    type: this.type.toUpperCase()\n  });\n\n  if (recordObject.data) {\n    recordObject.rrdatas = arrify(recordObject.data);\n    delete recordObject.data;\n  }\n\n  return recordObject;\n};",
     "ctx": {
       "type": "method",
@@ -377,8 +382,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 147,
-    "codeStart": 154,
+    "line": 149,
+    "codeStart": 156,
     "code": "Record.prototype.toString = function() {\n  var json = this.toJSON();\n\n  return (json.rrdatas || [{}]).map(function(data) {\n    json.rrdata = data;\n    return format('{name} {ttl} IN {type} {rrdata}', json);\n  }).join('\\n');\n};\n\nmodule.exports = Record;",
     "ctx": {
       "type": "method",

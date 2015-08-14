@@ -519,6 +519,11 @@
   {
     "tags": [
       {
+        "type": "resource",
+        "string": "[Datastore Queries]{@link http://goo.gl/Cag0r6} ",
+        "html": "<p>[Datastore Queries]{@link <a href=\"http://goo.gl/Cag0r6}\">http://goo.gl/Cag0r6}</a> </p>"
+      },
+      {
         "type": "borrows",
         "string": "{module:datastore/query} as createQuery",
         "otherMemberName": "{module:datastore/query}",
@@ -575,9 +580,9 @@
       }
     ],
     "description": {
-      "full": "<p>Create a query from the current dataset to query the specified kind, scoped<br />to the namespace provided at the initialization of the dataset.</p><p><em><a href=\"http://goo.gl/Cag0r6\">Reference</a>.</em></p>",
+      "full": "<p>Create a query from the current dataset to query the specified kind, scoped<br />to the namespace provided at the initialization of the dataset.</p>",
       "summary": "<p>Create a query from the current dataset to query the specified kind, scoped<br />to the namespace provided at the initialization of the dataset.</p>",
-      "body": "<p><em><a href=\"http://goo.gl/Cag0r6\">Reference</a>.</em></p>"
+      "body": ""
     },
     "isPrivate": false,
     "isConstructor": false,
@@ -597,6 +602,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Datasets: beginTransaction API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/beginTransaction} ",
+        "html": "<p>[Datasets: beginTransaction API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/beginTransaction}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/beginTransaction}</a> </p>"
+      },
       {
         "type": "borrows",
         "string": "{module:datastore/transaction#begin} as runInTransaction\n",
@@ -691,7 +701,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 217,
-    "codeStart": 247,
+    "codeStart": 249,
     "code": "Dataset.prototype.runInTransaction = function(fn, callback) {\n  var newTransaction = this.createTransaction_();\n\n  newTransaction.begin_(function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    fn(newTransaction, newTransaction.commit_.bind(newTransaction, callback));\n  });\n};",
     "ctx": {
       "type": "method",
@@ -734,8 +744,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 260,
-    "codeStart": 266,
+    "line": 262,
+    "codeStart": 268,
     "code": "Dataset.prototype.createTransaction_ = function() {\n  return new Transaction(this, this.projectId);\n};\n\nmodule.exports = Dataset;",
     "ctx": {
       "type": "method",

@@ -203,6 +203,11 @@
   {
     "tags": [
       {
+        "type": "resource",
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create} ",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a> </p>"
+      },
+      {
         "type": "param",
         "string": "{module:dns/record|module:dns/record[]} record - The record objects to\n    add.",
         "name": "record",
@@ -271,7 +276,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 74,
-    "codeStart": 84,
+    "codeStart": 86,
     "code": "Zone.prototype.addRecords = function(records, callback) {\n  this.createChange({\n    add: records\n  }, callback);\n};",
     "ctx": {
       "type": "method",
@@ -335,8 +340,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 90,
-    "codeStart": 101,
+    "line": 92,
+    "codeStart": 103,
     "code": "Zone.prototype.change = function(id) {\n  if (!id) {\n    throw new Error('A change id is required.');\n  }\n\n  return new Change(this, id);\n};",
     "ctx": {
       "type": "method",
@@ -348,6 +353,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create} ",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object} options - The configuration object.",
@@ -464,8 +474,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 109,
-    "codeStart": 145,
+    "line": 111,
+    "codeStart": 149,
     "code": "Zone.prototype.createChange = function(options, callback) {\n  var self = this;\n\n  if (!options || !options.add && !options.delete) {\n    throw new Error('Cannot create a change with no additions or deletions.');\n  }\n\n  var body = extend({}, options, {\n    additions: arrify(options.add).map(exec('toJSON')),\n    deletions: arrify(options.delete).map(exec('toJSON'))\n  });\n\n  delete body.add;\n  delete body.delete;\n\n  var path = '/managedZones/' + this.name + '/changes';\n\n  this.makeReq_('POST', path, null, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var change = self.change(resp.id);\n    change.metadata = resp;\n\n    callback(null, change, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -477,6 +487,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[ManagedZones: delete API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/delete} ",
+        "html": "<p>[ManagedZones: delete API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/delete}\">https://cloud.google.com/dns/api/v1/managedZones/delete}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object=} options - Configuration object.",
@@ -563,8 +578,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 175,
-    "codeStart": 207,
+    "line": 179,
+    "codeStart": 213,
     "code": "Zone.prototype.delete = function(options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  if (options.force) {\n    this.empty(this.delete.bind(this, callback));\n    return;\n  }\n\n  var path = '/managedZones/' + this.name;\n  this.makeReq_('DELETE', path, null, null, function(err, resp) {\n    callback(err, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -576,6 +591,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create} ",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{module:dns/record|module:dns/record[]|string} record - If given a\n    string, it is interpreted as a record type. All records that match that\n    type will be retrieved and then deleted. You can also provide a\n    {module:dns/record} object or array of objects.",
@@ -650,8 +670,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 224,
-    "codeStart": 288,
+    "line": 230,
+    "codeStart": 296,
     "code": "Zone.prototype.deleteRecords = function(records, callback) {\n  records = arrify(records);\n\n  if (is.string(records[0])) {\n    this.deleteRecordsByType_(records, callback);\n    return;\n  }\n\n  this.createChange({\n    delete: records\n  }, callback);\n};",
     "ctx": {
       "type": "method",
@@ -663,6 +683,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create} ",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{function} callback - The callback function.",
@@ -730,8 +755,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 301,
-    "codeStart": 312,
+    "line": 309,
+    "codeStart": 322,
     "code": "Zone.prototype.empty = function(callback) {\n  var self = this;\n\n  this.getRecords(function(err, records) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var recordsToDelete = records.filter(function(record) {\n      return record.type !== 'NS' && record.type !== 'SOA';\n    });\n\n    if (recordsToDelete.length === 0) {\n      callback();\n    } else {\n      self.deleteRecords(recordsToDelete, callback);\n    }\n  });\n};",
     "ctx": {
       "type": "method",
@@ -743,6 +768,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[ResourceRecordSets: list API Documentation]{@link https://cloud.google.com/dns/api/v1/resourceRecordSets/list} ",
+        "html": "<p>[ResourceRecordSets: list API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/resourceRecordSets/list}\">https://cloud.google.com/dns/api/v1/resourceRecordSets/list}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{string} localPath - The fully qualified path to the zone file.",
@@ -801,8 +831,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 333,
-    "codeStart": 349,
+    "line": 343,
+    "codeStart": 361,
     "code": "Zone.prototype.export = function(localPath, callback) {\n  this.getRecords(function(err, records) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var stringRecords = records.map(exec('toString')).join('\\n');\n\n    fs.writeFile(localPath, stringRecords, 'utf-8', function(err) {\n      callback(err || null);\n    });\n  });\n};",
     "ctx": {
       "type": "method",
@@ -814,6 +844,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Changes: get API Documentation]{@link https://cloud.google.com/dns/api/v1/changes/get} ",
+        "html": "<p>[Changes: get API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/changes/get}\">https://cloud.google.com/dns/api/v1/changes/get}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object=} query - The query object.",
@@ -956,8 +991,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 364,
-    "codeStart": 420,
+    "line": 376,
+    "codeStart": 434,
     "code": "Zone.prototype.getChanges = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  if (query.sort) {\n    query.sortOrder = query.sort === 'asc' ? 'ascending' : 'descending';\n    delete query.sort;\n  }\n\n  var path = '/managedZones/' + this.name + '/changes';\n\n  this.makeReq_('GET', path, query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var changes = (resp.changes || []).map(function(change) {\n      var changeInstance = self.change(change.id);\n      changeInstance.metadata = change;\n      return changeInstance;\n    });\n\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    callback(null, changes, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -969,6 +1004,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[ManagedZones: get API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/get} ",
+        "html": "<p>[ManagedZones: get API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/get}\">https://cloud.google.com/dns/api/v1/managedZones/get}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{function} callback - The callback function.",
@@ -1041,8 +1081,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 458,
-    "codeStart": 469,
+    "line": 472,
+    "codeStart": 485,
     "code": "Zone.prototype.getMetadata = function(callback) {\n  var self = this;\n  var path = '/managedZones/' + this.name;\n\n  this.makeReq_('GET', path, null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.metadata = resp;\n\n    callback(null, self.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1054,6 +1094,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[ResourceRecordSets: list API Documentation]{@link https://cloud.google.com/dns/api/v1/resourceRecordSets/list} ",
+        "html": "<p>[ResourceRecordSets: list API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/resourceRecordSets/list}\">https://cloud.google.com/dns/api/v1/resourceRecordSets/list}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object=} query - The query object.",
@@ -1210,8 +1255,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 485,
-    "codeStart": 567,
+    "line": 501,
+    "codeStart": 585,
     "code": "Zone.prototype.getRecords = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  if (is.string(query) || is.array(query)) {\n    var filterByTypes_ = {};\n\n    // For faster lookups, store the record types the user wants in an object.\n    arrify(query).forEach(function(type) {\n      filterByTypes_[type.toUpperCase()] = true;\n    });\n\n    query = {\n      filterByTypes_: filterByTypes_\n    };\n  }\n\n  var requestQuery = extend({}, query);\n  delete requestQuery.filterByTypes_;\n\n  var path = '/managedZones/' + this.name + '/rrsets';\n  this.makeReq_('GET', path, requestQuery, true, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var records = (resp.rrsets || []).map(function(record) {\n      return self.record(record.type, record);\n    });\n\n    if (query.filterByTypes_) {\n      records = records.filter(function(record) {\n        return query.filterByTypes_[record.type];\n      });\n    }\n\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    callback(null, records, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1223,6 +1268,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create} ",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{string} localPath - The fully qualified path to the zone file.",
@@ -1309,8 +1359,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 619,
-    "codeStart": 637,
+    "line": 637,
+    "codeStart": 657,
     "code": "Zone.prototype.import = function(localPath, callback) {\n  var self = this;\n\n  fs.readFile(localPath, 'utf-8', function(err, file) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var parsedZonefile = zonefile.parse(file);\n\n    var recordsToCreate = [];\n    function addRecordToCreate(record) {\n      var recordInstance = new Record.fromZoneRecord_(self, recordType, record);\n      recordsToCreate.push(recordInstance);\n    }\n\n    for (var recordType in parsedZonefile) {\n      var recordTypeSet = arrify(parsedZonefile[recordType]);\n      recordTypeSet.forEach(addRecordToCreate);\n    }\n\n    self.addRecords(recordsToCreate, callback);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1422,8 +1472,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 663,
-    "codeStart": 710,
+    "line": 683,
+    "codeStart": 730,
     "code": "Zone.prototype.record = function(type, metadata) {\n  return new Record(this, type, metadata);\n};",
     "ctx": {
       "type": "method",
@@ -1435,6 +1485,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create} ",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{string|string[]} recordTypes - Type(s) of records to replace.",
@@ -1537,8 +1592,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 714,
-    "codeStart": 754,
+    "line": 734,
+    "codeStart": 776,
     "code": "Zone.prototype.replaceRecords = function(recordType, newRecords, callback) {\n  var self = this;\n\n  this.getRecords(recordType, function(err, recordsToDelete) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    self.createChange({\n      add: newRecords,\n      delete: recordsToDelete\n    }, callback);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1642,8 +1697,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 770,
-    "codeStart": 788,
+    "line": 792,
+    "codeStart": 810,
     "code": "Zone.prototype.deleteRecordsByType_ = function(recordTypes, callback) {\n  var self = this;\n\n  this.getRecords(recordTypes, function(err, records) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    if (records.length === 0) {\n      callback();\n      return;\n    }\n\n    self.deleteRecords(records, callback);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1665,8 +1720,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 806,
-    "codeStart": 811,
+    "line": 828,
+    "codeStart": 833,
     "code": "streamRouter.extend(Zone, ['getChanges', 'getRecords']);\n\nmodule.exports = Zone;",
     "ctx": false
   }

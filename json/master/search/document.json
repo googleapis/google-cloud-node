@@ -240,6 +240,11 @@
   {
     "tags": [
       {
+        "type": "resource",
+        "string": "[Documents: delete API Documentation]{@link https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/delete} ",
+        "html": "<p>[Documents: delete API Documentation]{@link <a href=\"https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/delete}\">https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/delete}</a> </p>"
+      },
+      {
         "type": "param",
         "string": "{function=} callback - The callback function.",
         "name": "callback",
@@ -298,7 +303,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 84,
-    "codeStart": 94,
+    "codeStart": 96,
     "code": "Document.prototype.delete = function(callback) {\n  this.makeReq_('DELETE', '', null, null, function(err, resp) {\n    (callback || util.noop)(err, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -310,6 +315,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Documents: get API Documentation]{@link https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/get} ",
+        "html": "<p>[Documents: get API Documentation]{@link <a href=\"https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/get}\">https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/get}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{function} callback - The callback function.",
@@ -382,8 +392,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 100,
-    "codeStart": 123,
+    "line": 102,
+    "codeStart": 127,
     "code": "Document.prototype.getMetadata = function(callback) {\n  var self = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('GET', '/', null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.fields = {};\n    delete self.rank;\n\n    if (is.object(resp.fields)) {\n      Object.keys(resp.fields).forEach(function(fieldName) {\n        var fieldInstance = self.addField(fieldName);\n        fieldInstance.values = resp.fields[fieldName].values;\n      });\n    }\n\n    if (is.number(resp.rank)) {\n      self.rank = resp.rank;\n    }\n\n    callback(null, self, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -433,8 +443,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 152,
-    "codeStart": 165,
+    "line": 156,
+    "codeStart": 169,
     "code": "Document.prototype.setRank = function(rank) {\n  if (!is.number(rank) || rank < 0) {\n    throw new Error('rank should be a positive integer.');\n  }\n\n  this.rank = rank;\n};",
     "ctx": {
       "type": "method",
@@ -462,8 +472,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 173,
-    "codeStart": 186,
+    "line": 177,
+    "codeStart": 190,
     "code": "Document.prototype.toJSON = function() {\n  var documentObject = {\n    fields: this.fields\n  };\n\n  if (is.string(this.id)) {\n    documentObject.docId = this.id;\n  }\n\n  if (is.number(this.rank)) {\n    documentObject.rank = this.rank;\n  }\n\n  return documentObject;\n};",
     "ctx": {
       "type": "method",
@@ -558,8 +568,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 202,
-    "codeStart": 214,
+    "line": 206,
+    "codeStart": 218,
     "code": "Document.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/documents/' + this.id + path;\n\n  this.index_.makeReq_(method, path, query, body, callback);\n};\n\nmodule.exports = Document;",
     "ctx": {
       "type": "method",

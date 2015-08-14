@@ -377,6 +377,16 @@
   {
     "tags": [
       {
+        "type": "resource",
+        "string": "[About Access Control Lists]{@link http://goo.gl/6qBBPO}",
+        "html": "<p>[About Access Control Lists]{@link <a href=\"http://goo.gl/6qBBPO}\">http://goo.gl/6qBBPO}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Default ACLs]{@link https://cloud.google.com/storage/docs/accesscontrol#default} ",
+        "html": "<p>[Default ACLs]{@link <a href=\"https://cloud.google.com/storage/docs/accesscontrol#default}\">https://cloud.google.com/storage/docs/accesscontrol#default}</a> </p>"
+      },
+      {
         "type": "mixes",
         "string": "module:storage/acl ",
         "html": "<p>module:storage/acl </p>"
@@ -388,9 +398,9 @@
       }
     ],
     "description": {
-      "full": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p><p>An ACL consists of one or more entries, where each entry grants permissions<br />to an entity. Permissions define the actions that can be performed against<br />an object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the entity defines<br />who the permission applies to (for example, a specific user or group of<br />users).</p><p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p><p>The <code>acl</code> object on a Bucket instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p><p>Buckets also have<br /><a href=\"https://cloud.google.com/storage/docs/accesscontrol#default\">default ACLs</a><br />for all created files. Default ACLs specify permissions that all new<br />objects added to the bucket will inherit by default. You can add, delete,<br />get, and update entities and permissions for these as well with<br />{module:storage/bucket#acl.default}.</p>",
+      "full": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p><p>An ACL consists of one or more entries, where each entry grants permissions<br />to an entity. Permissions define the actions that can be performed against<br />an object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the entity defines<br />who the permission applies to (for example, a specific user or group of<br />users).</p><p>The <code>acl</code> object on a Bucket instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p><p>Buckets also have<br /><a href=\"https://cloud.google.com/storage/docs/accesscontrol#default\">default ACLs</a><br />for all created files. Default ACLs specify permissions that all new<br />objects added to the bucket will inherit by default. You can add, delete,<br />get, and update entities and permissions for these as well with<br />{module:storage/bucket#acl.default}.</p>",
       "summary": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p>",
-      "body": "<p>An ACL consists of one or more entries, where each entry grants permissions<br />to an entity. Permissions define the actions that can be performed against<br />an object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the entity defines<br />who the permission applies to (for example, a specific user or group of<br />users).</p><p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p><p>The <code>acl</code> object on a Bucket instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p><p>Buckets also have<br /><a href=\"https://cloud.google.com/storage/docs/accesscontrol#default\">default ACLs</a><br />for all created files. Default ACLs specify permissions that all new<br />objects added to the bucket will inherit by default. You can add, delete,<br />get, and update entities and permissions for these as well with<br />{module:storage/bucket#acl.default}.</p>"
+      "body": "<p>An ACL consists of one or more entries, where each entry grants permissions<br />to an entity. Permissions define the actions that can be performed against<br />an object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the entity defines<br />who the permission applies to (for example, a specific user or group of<br />users).</p><p>The <code>acl</code> object on a Bucket instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p><p>Buckets also have<br /><a href=\"https://cloud.google.com/storage/docs/accesscontrol#default\">default ACLs</a><br />for all created files. Default ACLs specify permissions that all new<br />objects added to the bucket will inherit by default. You can add, delete,<br />get, and update entities and permissions for these as well with<br />{module:storage/bucket#acl.default}.</p>"
     },
     "isPrivate": false,
     "isConstructor": false,
@@ -645,6 +655,11 @@
   {
     "tags": [
       {
+        "type": "resource",
+        "string": "[Objects: compose API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/compose} ",
+        "html": "<p>[Objects: compose API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/compose}\">https://cloud.google.com/storage/docs/json_api/v1/objects/compose}</a> </p>"
+      },
+      {
         "type": "throws",
         "string": "{Error} if a non-array is provided as sources argument.",
         "types": [
@@ -779,7 +794,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 212,
-    "codeStart": 244,
+    "codeStart": 246,
     "code": "Bucket.prototype.combine = function(sources, destination, callback) {\n  if (!is.array(sources) || sources.length < 2) {\n    throw new Error('You must provide at least two source files.');\n  }\n\n  if (!destination) {\n    throw new Error('A destination file must be specified.');\n  }\n\n  var self = this;\n\n  sources = sources.map(convertToFile);\n  destination = convertToFile(destination);\n  callback = callback || util.noop;\n\n  if (!destination.metadata.contentType) {\n    var destinationContentType = mime.contentType(destination.name);\n\n    if (destinationContentType) {\n      destination.metadata.contentType = destinationContentType;\n    } else {\n      throw new Error(\n        'A content type could not be detected for the destination file.');\n    }\n  }\n\n  this.storage.makeAuthorizedRequest_({\n    method: 'POST',\n    uri: format('{base}/{destBucket}/o/{destFile}/compose', {\n      base: STORAGE_BASE_URL,\n      destBucket: destination.bucket.name,\n      destFile: encodeURIComponent(destination.name)\n    }),\n    json: {\n      destination: {\n        contentType: destination.metadata.contentType\n      },\n      sourceObjects: sources.map(function(source) {\n        var sourceObject = {\n          name: source.name\n        };\n\n        if (source.metadata && source.metadata.generation) {\n          sourceObject.generation = source.metadata.generation;\n        }\n\n        return sourceObject;\n      })\n    }\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, destination, resp);\n  });\n\n  function convertToFile(file) {\n    if (file instanceof File) {\n      return file;\n    } else {\n      return self.file(file);\n    }\n  }\n};",
     "ctx": {
       "type": "method",
@@ -791,6 +806,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Buckets: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/delete} ",
+        "html": "<p>[Buckets: delete API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/delete}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/delete}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{function=} callback - The callback function.",
@@ -849,8 +869,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 311,
-    "codeStart": 322,
+    "line": 313,
+    "codeStart": 326,
     "code": "Bucket.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('DELETE', '', null, true, callback);\n};",
     "ctx": {
       "type": "method",
@@ -862,6 +882,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Objects: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/delete} ",
+        "html": "<p>[Objects: delete API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/delete}\">https://cloud.google.com/storage/docs/json_api/v1/objects/delete}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object=} query - Query object. See {module:storage/bucket#getFiles}\n    for all of the supported properties.",
@@ -935,8 +960,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 327,
-    "codeStart": 380,
+    "line": 331,
+    "codeStart": 386,
     "code": "Bucket.prototype.deleteFiles = function(query, callback) {\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  query = query || {};\n\n  var MAX_PARALLEL_LIMIT = 10;\n  var errors = [];\n\n  this.getFiles(query, function(err, files) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    function deleteFile(file, callback) {\n      file.delete(function(err) {\n        if (err) {\n          if (query.force) {\n            errors.push(err);\n            callback();\n            return;\n          }\n\n          callback(err);\n          return;\n        }\n\n        callback();\n      });\n    }\n\n    // Iterate through each file and attempt to delete it.\n    async.eachLimit(files, MAX_PARALLEL_LIMIT, deleteFile, function(err) {\n      if (err || errors.length > 0) {\n        callback(err || errors);\n        return;\n      }\n\n      callback();\n    });\n  });\n\n};",
     "ctx": {
       "type": "method",
@@ -1021,8 +1046,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 427,
-    "codeStart": 440,
+    "line": 433,
+    "codeStart": 446,
     "code": "Bucket.prototype.file = function(name, options) {\n  return new File(this, name, options);\n};",
     "ctx": {
       "type": "method",
@@ -1034,6 +1059,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Objects: list API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/list} ",
+        "html": "<p>[Objects: list API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/list}\">https://cloud.google.com/storage/docs/json_api/v1/objects/list}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object=} query - Query object.",
@@ -1218,8 +1248,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 444,
-    "codeStart": 531,
+    "line": 450,
+    "codeStart": 539,
     "code": "Bucket.prototype.getFiles = function(query, callback) {\n  var self = this;\n\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n\n  this.makeReq_('GET', '/o', query, true, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var files = (resp.items || []).map(function(item) {\n      var options = {};\n\n      if (query.versions) {\n        options.generation = item.generation;\n      }\n\n      var file = self.file(item.name, options);\n      file.metadata = item;\n\n      return file;\n    });\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, { pageToken: resp.nextPageToken });\n    }\n\n    callback(null, files, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1231,6 +1261,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Buckets: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/get} ",
+        "html": "<p>[Buckets: get API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/get}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/get}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{function=} callback - The callback function.",
@@ -1303,8 +1338,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 568,
-    "codeStart": 581,
+    "line": 576,
+    "codeStart": 591,
     "code": "Bucket.prototype.getMetadata = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('GET', '', null, true, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n    this.metadata = resp;\n    callback(null, this.metadata, resp);\n  }.bind(this));\n};",
     "ctx": {
       "type": "method",
@@ -1316,6 +1351,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch} ",
+        "html": "<p>[Buckets: patch API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object=} options - The configuration object.",
@@ -1416,8 +1456,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 593,
-    "codeStart": 656,
+    "line": 603,
+    "codeStart": 668,
     "code": "Bucket.prototype.makePrivate = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.private = true;\n\n  async.series([setPredefinedAcl, makeFilesPrivate], callback);\n\n  function setPredefinedAcl(done) {\n    var query = {\n      predefinedAcl: 'projectPrivate'\n    };\n\n    // You aren't allowed to set both predefinedAcl & acl properties on a bucket\n    // so acl must explicitly be nullified.\n    var metadata = { acl: null };\n\n    self.makeReq_('PATCH', '', query, metadata, function(err, resp) {\n      if (err) {\n        done(err);\n        return;\n      }\n\n      self.metadata = resp;\n\n      done();\n    });\n  }\n\n  function makeFilesPrivate(done) {\n    if (!options.includeFiles) {\n      done();\n      return;\n    }\n\n    self.makeAllFilesPublicPrivate_(options, done);\n  }\n};",
     "ctx": {
       "type": "method",
@@ -1429,6 +1469,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch} ",
+        "html": "<p>[Buckets: patch API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object=} options - The configuration object.",
@@ -1529,8 +1574,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 700,
-    "codeStart": 763,
+    "line": 712,
+    "codeStart": 777,
     "code": "Bucket.prototype.makePublic = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.public = true;\n\n  async.series([\n    addAclPermissions,\n    addDefaultAclPermissions,\n    makeFilesPublic\n  ], callback);\n\n  function addAclPermissions(done) {\n    // Allow reading bucket contents while preserving original permissions.\n    self.acl.add({\n      entity: 'allUsers',\n      role: 'READER'\n    }, done);\n  }\n\n  function addDefaultAclPermissions(done) {\n    self.acl.default.add({\n      entity: 'allUsers',\n      role: 'READER'\n    }, done);\n  }\n\n  function makeFilesPublic(done) {\n    if (!options.includeFiles) {\n      done();\n      return;\n    }\n\n    self.makeAllFilesPublicPrivate_(options, done);\n  }\n};",
     "ctx": {
       "type": "method",
@@ -1542,6 +1587,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch} ",
+        "html": "<p>[Buckets: patch API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object} metadata - The metadata you wish to set.",
@@ -1628,8 +1678,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 805,
-    "codeStart": 834,
+    "line": 819,
+    "codeStart": 850,
     "code": "Bucket.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n  callback = callback || util.noop;\n\n  this.makeReq_('PATCH', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1641,6 +1691,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Objects: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert} ",
+        "html": "<p>[Objects: insert API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/insert}\">https://cloud.google.com/storage/docs/json_api/v1/objects/insert}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{string} localPath - The fully qualified path to the file you wish to\n    upload to your bucket.",
@@ -1813,8 +1868,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 850,
-    "codeStart": 944,
+    "line": 866,
+    "codeStart": 962,
     "code": "Bucket.prototype.upload = function(localPath, options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  var newFile;\n  if (options.destination instanceof File) {\n    newFile = options.destination;\n  } else if (is.string(options.destination)) {\n    // Use the string as the name of the file.\n    newFile = this.file(options.destination);\n  } else {\n    // Resort to using the name of the incoming file.\n    newFile = this.file(path.basename(localPath));\n  }\n\n  var metadata = options.metadata || {};\n  var contentType = mime.contentType(path.basename(localPath));\n\n  if (contentType && !metadata.contentType) {\n    metadata.contentType = contentType;\n  }\n\n  var resumable;\n  if (is.boolean(options.resumable)) {\n    resumable = options.resumable;\n    upload();\n  } else {\n    // Determine if the upload should be resumable if it's over the threshold.\n    fs.stat(localPath, function(err, fd) {\n      if (err) {\n        callback(err);\n        return;\n      }\n\n      resumable = fd.size > RESUMABLE_THRESHOLD;\n\n      upload();\n    });\n  }\n\n  function upload() {\n    fs.createReadStream(localPath)\n      .pipe(newFile.createWriteStream({\n        validation: options.validation,\n        resumable: resumable,\n        metadata: metadata,\n        gzip: options.gzip\n      }))\n      .on('error', function(err) {\n        callback(err);\n      })\n      .on('complete', function() {\n        callback(null, newFile);\n      });\n  }\n};",
     "ctx": {
       "type": "method",
@@ -1913,8 +1968,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1003,
-    "codeStart": 1020,
+    "line": 1021,
+    "codeStart": 1038,
     "code": "Bucket.prototype.makeAllFilesPublicPrivate_ = function(options, callback) {\n  var MAX_PARALLEL_LIMIT = 10;\n  var errors = [];\n  var updatedFiles = [];\n\n  this.getFiles(function(err, files) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    function processFile(file, callback) {\n      if (options.public) {\n        file.makePublic(processedCallback);\n      } else if (options.private) {\n        file.makePrivate(processedCallback);\n      }\n\n      function processedCallback(err) {\n        if (err) {\n          if (options.force) {\n            errors.push(err);\n            callback();\n            return;\n          }\n\n          callback(err);\n          return;\n        }\n\n        updatedFiles.push(file);\n        callback();\n      }\n    }\n\n    // Iterate through each file and make it public or private.\n    async.eachLimit(files, MAX_PARALLEL_LIMIT, processFile, function(err) {\n      if (err || errors.length > 0) {\n        callback(err || errors, updatedFiles);\n        return;\n      }\n\n      callback(null, updatedFiles);\n    });\n  });\n};",
     "ctx": {
       "type": "method",
@@ -2009,8 +2064,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1067,
-    "codeStart": 1079,
+    "line": 1085,
+    "codeStart": 1097,
     "code": "Bucket.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: STORAGE_BASE_URL + '/' + this.name + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.storage.makeAuthorizedRequest_(reqOpts, callback);\n};",
     "ctx": {
       "type": "method",
@@ -2032,8 +2087,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 1093,
-    "codeStart": 1098,
+    "line": 1111,
+    "codeStart": 1116,
     "code": "streamRouter.extend(Bucket, 'getFiles');\n\nmodule.exports = Bucket;",
     "ctx": false
   }

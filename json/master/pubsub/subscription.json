@@ -347,6 +347,11 @@
   {
     "tags": [
       {
+        "type": "resource",
+        "string": "[Subscriptions: acknowledge API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/acknowledge} ",
+        "html": "<p>[Subscriptions: acknowledge API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/acknowledge}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/acknowledge}</a> </p>"
+      },
+      {
         "type": "throws",
         "string": "{Error} If at least one ackId is not provided.\n",
         "types": [
@@ -400,7 +405,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 278,
-    "codeStart": 290,
+    "codeStart": 292,
     "code": "Subscription.prototype.ack = function(ackIds, callback) {\n  var self = this;\n\n  if (!ackIds || ackIds.length === 0) {\n    throw new Error(\n        'At least one ID must be specified before it can be acknowledged.');\n  }\n\n  ackIds = arrify(ackIds);\n\n  var body = {\n    ackIds: ackIds\n  };\n\n  callback = callback || util.noop;\n\n  var path = this.name + ':acknowledge';\n\n  this.makeReq_('POST', path, null, body, function(err, resp) {\n    if (!err) {\n      ackIds.forEach(function(ackId) {\n        delete self.inProgressAckIds[ackId];\n      });\n      self.refreshPausedStatus_();\n    }\n\n    callback(err, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -412,6 +417,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Subscriptions: delete API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/delete} ",
+        "html": "<p>[Subscriptions: delete API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/delete}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/delete}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{function=} callback - The callback function.\n",
@@ -442,8 +452,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 320,
-    "codeStart": 329,
+    "line": 322,
+    "codeStart": 333,
     "code": "Subscription.prototype.delete = function(callback) {\n  var self = this;\n  callback = callback || util.noop;\n  this.makeReq_('DELETE', this.name, null, true, function(err, result) {\n    if (err) {\n      callback(err, result);\n      return;\n    }\n    self.closed = true;\n    self.removeAllListeners();\n    callback(null, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -459,6 +469,11 @@
         "type": "todo",
         "string": "Should not be racing with other pull. ",
         "html": "<p>Should not be racing with other pull. </p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Subscriptions: pull API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/pull} ",
+        "html": "<p>[Subscriptions: pull API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/pull}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/pull}</a> </p>"
       },
       {
         "type": "param",
@@ -532,8 +547,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 343,
-    "codeStart": 390,
+    "line": 347,
+    "codeStart": 396,
     "code": "Subscription.prototype.pull = function(options, callback) {\n  var self = this;\n  var MAX_EVENTS_LIMIT = 1000;\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  if (!is.number(options.maxResults)) {\n    options.maxResults = MAX_EVENTS_LIMIT;\n  }\n\n  var body = {\n    returnImmediately: !!options.returnImmediately,\n    maxMessages: options.maxResults\n  };\n\n  var path = this.name + ':pull';\n  this.makeReq_('POST', path, null, body, function(err, response) {\n    if (err) {\n      callback(err, null, response);\n      return;\n    }\n\n    var messages = response.receivedMessages || [];\n    messages = messages\n      .map(Subscription.formatMessage_)\n      .map(self.decorateMessage_.bind(self));\n\n    self.refreshPausedStatus_();\n\n    if (self.autoAck && messages.length !== 0) {\n      var ackIds = messages.map(function(message) {\n        return message.ackId;\n      });\n\n      self.ack(ackIds, function(err) {\n        callback(err, messages, response);\n      });\n    } else {\n      callback(null, messages, response);\n    }\n  });\n};",
     "ctx": {
       "type": "method",
@@ -545,6 +560,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Subscriptions: modifyAckDeadline API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/modifyAckDeadline} ",
+        "html": "<p>[Subscriptions: modifyAckDeadline API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/modifyAckDeadline}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/modifyAckDeadline}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object} options - The configuration object.",
@@ -618,8 +638,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 436,
-    "codeStart": 456,
+    "line": 442,
+    "codeStart": 464,
     "code": "Subscription.prototype.setAckDeadline = function(options, callback) {\n  var body = {\n    ackIds: arrify(options.ackIds),\n    ackDeadlineSeconds: options.seconds\n  };\n\n  callback = callback || util.noop;\n\n  var path = this.name + ':modifyAckDeadline';\n  this.makeReq_('POST', path, null, body, callback);\n};",
     "ctx": {
       "type": "method",
@@ -703,8 +723,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 468,
-    "codeStart": 483,
+    "line": 476,
+    "codeStart": 491,
     "code": "Subscription.prototype.decorateMessage_ = function(message) {\n  var self = this;\n\n  this.inProgressAckIds[message.ackId] = true;\n\n  message.ack = self.ack.bind(self, message.ackId);\n\n  message.skip = function() {\n    delete self.inProgressAckIds[message.ackId];\n    self.refreshPausedStatus_();\n  };\n\n  return message;\n};",
     "ctx": {
       "type": "method",
@@ -733,8 +753,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 498,
-    "codeStart": 509,
+    "line": 506,
+    "codeStart": 517,
     "code": "Subscription.prototype.refreshPausedStatus_ = function() {\n  var isCurrentlyPaused = this.paused;\n  var inProgress = Object.keys(this.inProgressAckIds).length;\n  this.paused = inProgress >= this.maxInProgress;\n\n  if (isCurrentlyPaused && !this.paused && this.messageListeners > 0) {\n    this.startPulling_();\n  }\n};\n\nmodule.exports = Subscription;",
     "ctx": {
       "type": "method",

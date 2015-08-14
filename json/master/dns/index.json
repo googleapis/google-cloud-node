@@ -285,6 +285,11 @@
   {
     "tags": [
       {
+        "type": "resource",
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create} ",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a> </p>"
+      },
+      {
         "type": "throws",
         "string": "{error} If a zone name is not provided.",
         "types": [
@@ -429,7 +434,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 100,
-    "codeStart": 125,
+    "codeStart": 127,
     "code": "DNS.prototype.createZone = function(name, config, callback) {\n  var self = this;\n\n  if (!name) {\n    throw new Error('A zone name is required.');\n  }\n\n  if (!config || !config.dnsName) {\n    throw new Error('A zone dnsName is required.');\n  }\n\n  config.name = name;\n\n  // Required by the API.\n  config.description = config.description || '';\n\n  this.makeReq_('POST', '/managedZones', null, config, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var zone = self.zone(resp.name);\n    zone.metadata = resp;\n\n    callback(null, zone, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -441,6 +446,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[ManagedZones: list API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/list} ",
+        "html": "<p>[ManagedZones: list API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/list}\">https://cloud.google.com/dns/api/v1/managedZones/list}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object=} query - Query object.",
@@ -555,8 +565,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 154,
-    "codeStart": 169,
+    "line": 156,
+    "codeStart": 173,
     "code": "DNS.prototype.getZones = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  this.makeReq_('GET', '/managedZones', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var zones = (resp.managedZones || []).map(function(zone) {\n      var zoneInstance = self.zone(zone.name);\n      zoneInstance.metadata = zone;\n      return zoneInstance;\n    });\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    callback(null, zones, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -620,8 +630,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 201,
-    "codeStart": 212,
+    "line": 205,
+    "codeStart": 216,
     "code": "DNS.prototype.zone = function(name) {\n  if (!name) {\n    throw new Error('A zone name is required.');\n  }\n\n  return new Zone(this, name);\n};",
     "ctx": {
       "type": "method",
@@ -716,8 +726,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 220,
-    "codeStart": 232,
+    "line": 224,
+    "codeStart": 236,
     "code": "DNS.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri:  DNS_BASE_URL + this.projectId_ + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};",
     "ctx": {
       "type": "method",
@@ -739,8 +749,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 246,
-    "codeStart": 251,
+    "line": 250,
+    "codeStart": 255,
     "code": "streamRouter.extend(DNS, 'getZones');\n\nmodule.exports = DNS;",
     "ctx": false
   }

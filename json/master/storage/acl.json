@@ -219,6 +219,16 @@
   {
     "tags": [
       {
+        "type": "resource",
+        "string": "[BucketAccessControls: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/insert}",
+        "html": "<p>[BucketAccessControls: insert API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/insert}\">https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/insert}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[ObjectAccessControls: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert} ",
+        "html": "<p>[ObjectAccessControls: insert API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert}\">https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert}</a> </p>"
+      },
+      {
         "type": "param",
         "string": "{object} options - Configuration object.",
         "name": "options",
@@ -352,7 +362,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 198,
-    "codeStart": 231,
+    "codeStart": 234,
     "code": "Acl.prototype.add = function(options, callback) {\n  var that = this;\n\n  var body = {\n    entity: options.entity,\n    role: options.role.toUpperCase()\n  };\n\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  this.makeReq_('POST', '', query, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, that.makeAclObject_(resp), resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -364,6 +374,16 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[BucketAccessControls: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/delete}",
+        "html": "<p>[BucketAccessControls: delete API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/delete}\">https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/delete}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[ObjectAccessControls: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/delete} ",
+        "html": "<p>[ObjectAccessControls: delete API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/delete}\">https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/delete}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object=} options - Configuration object.",
@@ -469,8 +489,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 257,
-    "codeStart": 283,
+    "line": 260,
+    "codeStart": 289,
     "code": "Acl.prototype.delete = function(options, callback) {\n  var path = '/' + encodeURIComponent(options.entity);\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  this.makeReq_('DELETE', path, query, null, callback);\n};",
     "ctx": {
       "type": "method",
@@ -482,6 +502,16 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[BucketAccessControls: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/get}",
+        "html": "<p>[BucketAccessControls: get API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/get}\">https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/get}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[ObjectAccessControls: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/get} ",
+        "html": "<p>[ObjectAccessControls: get API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/get}\">https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/get}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object|function} options - Configuration object. If you want to\n    receive a list of all access controls, pass the callback function as the\n    only argument.",
@@ -603,8 +633,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 296,
-    "codeStart": 339,
+    "line": 302,
+    "codeStart": 348,
     "code": "Acl.prototype.get = function(options, callback) {\n  var that = this;\n  var path = '';\n  var query = null;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = null;\n  } else {\n    path = '/' + encodeURIComponent(options.entity);\n\n    if (options.generation) {\n      query = {\n        generation: options.generation\n      };\n    }\n  }\n\n  this.makeReq_('GET', path, query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var results = resp;\n\n    if (resp.items) {\n      results = (resp.items || []).map(that.makeAclObject_);\n    } else {\n      results = that.makeAclObject_(results);\n    }\n\n    callback(null, results, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -616,6 +646,16 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[BucketAccessControls: update API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/update}",
+        "html": "<p>[BucketAccessControls: update API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/update}\">https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls/update}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[ObjectAccessControls: update API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/update} ",
+        "html": "<p>[ObjectAccessControls: update API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/update}\">https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/update}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object=} options - Configuration object.",
@@ -749,8 +789,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 375,
-    "codeStart": 410,
+    "line": 384,
+    "codeStart": 422,
     "code": "Acl.prototype.update = function(options, callback) {\n  var that = this;\n  var path = '/' + encodeURIComponent(options.entity);\n  var query = null;\n\n  if (options.generation) {\n    query = {\n      generation: options.generation\n    };\n  }\n\n  var body = {\n    role: options.role.toUpperCase()\n  };\n\n  this.makeReq_('PUT', path, query, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, that.makeAclObject_(resp), resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -779,8 +819,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 435,
-    "codeStart": 440,
+    "line": 447,
+    "codeStart": 452,
     "code": "Acl.prototype.makeAclObject_ = function(accessControlObject) {\n  var obj = {\n    entity: accessControlObject.entity,\n    role: accessControlObject.role\n  };\n\n  if (accessControlObject.projectTeam) {\n    obj.projectTeam = accessControlObject.projectTeam;\n  }\n\n  return obj;\n};",
     "ctx": {
       "type": "method",
@@ -875,8 +915,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 453,
-    "codeStart": 464,
+    "line": 465,
+    "codeStart": 476,
     "code": "Acl.prototype.makeReq_ = function(method, path, query, body, callback) {\n  this.makeReq(method, this.pathPrefix + path, query, body, callback);\n};\n\nmodule.exports = Acl;",
     "ctx": {
       "type": "method",
@@ -905,8 +945,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 470,
-    "codeStart": 485,
+    "line": 482,
+    "codeStart": 497,
     "code": "function AclRoleAccessorMethods() {\n  AclRoleAccessorMethods.roles.forEach(this._assignAccessMethods.bind(this));\n}\n\nAclRoleAccessorMethods.accessMethods = [\n  'add',\n  'delete'\n];\n\nAclRoleAccessorMethods.entities = [\n  // Special entity groups that do not require further specification.\n  'allAuthenticatedUsers',\n  'allUsers',\n\n  // Entity groups that require specification, e.g. `user-email@example.com`.\n  'domain-',\n  'group-',\n  'project-',\n  'user-'\n];\n\nAclRoleAccessorMethods.roles = [\n  'OWNER',\n  'READER',\n  'WRITER'\n];\n\nAclRoleAccessorMethods.prototype._assignAccessMethods = function(role) {\n  var that = this;\n\n  var accessMethods = AclRoleAccessorMethods.accessMethods;\n  var entities = AclRoleAccessorMethods.entities;\n  var roleGroup = role.toLowerCase() + 's';\n\n  this[roleGroup] = entities.reduce(function(acc, entity) {\n    var isPrefix = entity.charAt(entity.length - 1) === '-';\n\n    accessMethods.forEach(function(accessMethod) {\n      var method = accessMethod + entity[0].toUpperCase() + entity.substr(1);\n\n      if (isPrefix) {\n        method = method.replace('-', '');\n      }\n\n      // Wrap the parent accessor method (e.g. `add` or `delete`) to avoid the\n      // more complex API of specifying an `entity` and `role`.\n      acc[method] = function(entityId, callback) {\n        var apiEntity;\n\n        if (isPrefix) {\n          apiEntity = entity + entityId;\n        } else {\n          // If the entity is not a prefix, it is a special entity group that\n          // does not require further details. The accessor methods only accept\n          // a callback.\n          apiEntity = entity;\n          callback = entityId;\n        }\n\n        that[accessMethod]({\n          entity: apiEntity,\n          role: role\n        }, callback);\n      };\n    });\n\n    return acc;\n  }, {});\n};\n\nmodule.exports.AclRoleAccessorMethods = AclRoleAccessorMethods;",
     "ctx": {
       "type": "function",

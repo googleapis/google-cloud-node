@@ -933,6 +933,12 @@ ul {
   color: #888;
 }
 
+.resource-links {
+  margin: 0;
+  padding: 8px;
+  background-color: #f5f8ff;
+}
+
 /*
  Page Title
 */

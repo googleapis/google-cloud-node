@@ -262,6 +262,11 @@
   {
     "tags": [
       {
+        "type": "resource",
+        "string": "[About Access Control lists]{@link http://goo.gl/6qBBPO} ",
+        "html": "<p>[About Access Control lists]{@link <a href=\"http://goo.gl/6qBBPO}\">http://goo.gl/6qBBPO}</a> </p>"
+      },
+      {
         "type": "mixes",
         "string": "module:storage/acl ",
         "html": "<p>module:storage/acl </p>"
@@ -273,9 +278,9 @@
       }
     ],
     "description": {
-      "full": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p><p>An ACL consists of one or more entries, where each entry grants permissions<br />to an entity. Permissions define the actions that can be performed against<br />an object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the entity defines<br />who the permission applies to (for example, a specific user or group of<br />users).</p><p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p><p>The <code>acl</code> object on a File instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p>",
+      "full": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p><p>An ACL consists of one or more entries, where each entry grants permissions<br />to an entity. Permissions define the actions that can be performed against<br />an object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the entity defines<br />who the permission applies to (for example, a specific user or group of<br />users).</p><p>The <code>acl</code> object on a File instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p>",
       "summary": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p>",
-      "body": "<p>An ACL consists of one or more entries, where each entry grants permissions<br />to an entity. Permissions define the actions that can be performed against<br />an object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the entity defines<br />who the permission applies to (for example, a specific user or group of<br />users).</p><p>For more detailed information, see<br /><a href=\"http://goo.gl/6qBBPO\">About Access Control Lists</a>.</p><p>The <code>acl</code> object on a File instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p>"
+      "body": "<p>An ACL consists of one or more entries, where each entry grants permissions<br />to an entity. Permissions define the actions that can be performed against<br />an object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the entity defines<br />who the permission applies to (for example, a specific user or group of<br />users).</p><p>The <code>acl</code> object on a File instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p>"
     },
     "isPrivate": false,
     "isConstructor": false,
@@ -283,7 +288,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 91,
-    "codeStart": 125,
+    "codeStart": 124,
     "code": "this.acl = new Acl({\n  makeReq: this.makeReq_,\n  pathPrefix: '/o/' + encodeURIComponent(this.name) + '/acl'\n});\n}",
     "ctx": {
       "type": "property",
@@ -295,6 +300,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Objects: copy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/copy} ",
+        "html": "<p>[Objects: copy API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/copy}\">https://cloud.google.com/storage/docs/json_api/v1/objects/copy}</a> </p>"
+      },
       {
         "type": "throws",
         "string": "{Error} If the destination file is not provided.\n",
@@ -391,8 +401,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 131,
-    "codeStart": 200,
+    "line": 130,
+    "codeStart": 201,
     "code": "File.prototype.copy = function(destination, callback) {\n  var noDestinationError = new Error('Destination file should have a name.');\n\n  if (!destination) {\n    throw noDestinationError;\n  }\n\n  callback = callback || util.noop;\n\n  var destBucket;\n  var destName;\n  var newFile;\n\n  if (is.string(destination)) {\n    destBucket = this.bucket;\n    destName = destination;\n  } else if (destination.constructor &&\n        destination.constructor.name === 'Bucket') {\n    destBucket = destination;\n    destName = this.name;\n  } else if (destination instanceof File) {\n    destBucket = destination.bucket;\n    destName = destination.name;\n    newFile = destination;\n  } else {\n    throw noDestinationError;\n  }\n\n  var path = format('/o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {\n    srcName: encodeURIComponent(this.name),\n    destBucket: destBucket.name,\n    destName: encodeURIComponent(destName)\n  });\n\n  var query = {};\n\n  if (this.generation) {\n    query.sourceGeneration = this.generation;\n  }\n\n  this.makeReq_('POST', path, query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, newFile || destBucket.file(destName), resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -404,6 +414,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Objects: copy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/copy} ",
+        "html": "<p>[Objects: copy API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/copy}\">https://cloud.google.com/storage/docs/json_api/v1/objects/copy}</a> </p>"
+      },
       {
         "type": "throws",
         "string": "{Error} If the destination file is not provided.\n",
@@ -500,8 +515,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 250,
-    "codeStart": 330,
+    "line": 251,
+    "codeStart": 333,
     "code": "File.prototype.move = function(destination, callback) {\n  var self = this;\n\n  callback = callback || util.noop;\n\n  this.copy(destination, function(err, destinationFile, apiResponse) {\n    if (err) {\n      callback(err, null, apiResponse);\n      return;\n    }\n\n    self.delete(function(err, apiResponse) {\n      callback(err, destinationFile, apiResponse);\n    });\n  });\n};",
     "ctx": {
       "type": "method",
@@ -586,8 +601,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 347,
-    "codeStart": 421,
+    "line": 350,
+    "codeStart": 424,
     "code": "File.prototype.createReadStream = function(options) {\n  options = options || {};\n\n  var that = this;\n  var rangeRequest = is.number(options.start) || is.number(options.end);\n  var tailRequest = options.end < 0;\n  var throughStream = streamEvents(through());\n\n  var validations = ['crc32c', 'md5'];\n  var validation;\n\n  // For data integrity, hash the contents of the stream as we receive it\n  // from the server.\n  var localCrcHash;\n  var localMd5Hash = crypto.createHash('md5');\n\n  if (is.string(options.validation)) {\n    options.validation = options.validation.toLowerCase();\n\n    if (validations.indexOf(options.validation) > -1) {\n      validation = options.validation;\n    } else {\n      validation = 'all';\n    }\n  }\n\n  if (is.undef(options.validation)) {\n    validation = 'all';\n  }\n\n  if (rangeRequest) {\n    validation = false;\n  }\n\n  var crc32c = validation === 'crc32c' || validation === 'all';\n  var md5 = validation === 'md5' || validation === 'all';\n\n  var remoteFilePath = format('https://storage.googleapis.com/{b}/{o}', {\n    b: this.bucket.name,\n    o: encodeURIComponent(this.name)\n  });\n\n  // End the stream, first emitting an error or complete event.\n  var endThroughStream = once(function(err, resp) {\n    if (err) {\n      throughStream.emit('error', err, resp);\n    } else {\n      throughStream.emit('complete', resp);\n    }\n\n    throughStream.destroy();\n  });\n\n  makeAuthorizedReq(remoteFilePath);\n\n  // Calculate the hashes from the http.IncomingMessage response stream, which\n  // will return the bytes from the source without decompressing gzip'd content.\n  // The request stream will do the decompression so the user receives the\n  // expected content.\n  //\n  // incomingMessage's end event will always occur before request's complete\n  // event.\n  throughStream.on('response', function(incomingMessage) {\n    incomingMessage\n      .on('data', function(chunk) {\n        if (crc32c) {\n          localCrcHash = crc.calculate(chunk, localCrcHash);\n        }\n\n        if (md5) {\n          localMd5Hash.update(chunk);\n        }\n      })\n\n      .on('end', function() {\n        if (crc32c) {\n          localCrcHash = new Buffer([localCrcHash]).toString('base64');\n        }\n\n        if (md5) {\n          localMd5Hash = localMd5Hash.digest('base64');\n        }\n      });\n  });\n\n  return throughStream;\n\n  // Authenticate the request, then pipe the remote API request to the stream\n  // returned to the user.\n  function makeAuthorizedReq(uri) {\n    var reqOpts = {\n      uri: uri,\n      gzip: true\n    };\n\n    if (that.generation) {\n      reqOpts.qs = {\n        generation: that.generation\n      };\n    }\n\n    if (rangeRequest) {\n      var start = is.number(options.start) ? options.start : '0';\n      var end = is.number(options.end) ? options.end : '';\n      reqOpts.headers = {\n        Range: 'bytes=' + start + '-' + end\n      };\n    }\n\n    if (tailRequest) {\n      reqOpts.headers = {\n        Range: 'bytes=' + options.end\n      };\n    }\n\n    var requestStream = that.bucket.storage.makeAuthorizedRequest_(reqOpts);\n\n    requestStream\n      .on('error', endThroughStream)\n\n      .on('response', function(incomingMessage) {\n        throughStream.emit('response', incomingMessage);\n\n        util.handleResp(null, incomingMessage, null, function(err) {\n          if (err) {\n            requestStream.unpipe(throughStream);\n          }\n        });\n      })\n\n      .on('complete', function(res) {\n        util.handleResp(null, res, null, function(err) {\n          if (err) {\n            endThroughStream(err);\n            return;\n          }\n\n          if (rangeRequest) {\n            // Range requests can't receive data integrity checks.\n            endThroughStream(null, res);\n            return;\n          }\n\n          var failed = false;\n          var crcFail = true;\n          var md5Fail = true;\n\n          var hashes = {};\n          res.headers['x-goog-hash'].split(',').forEach(function(hash) {\n            var hashType = hash.split('=')[0].trim();\n            hashes[hashType] = hash.substr(hash.indexOf('=') + 1);\n          });\n\n          var remoteMd5 = hashes.md5;\n          var remoteCrc = hashes.crc32c && hashes.crc32c.substr(4);\n\n          if (crc32c) {\n            crcFail = localCrcHash !== remoteCrc;\n            failed = crcFail;\n          }\n\n          if (md5) {\n            md5Fail = localMd5Hash !== remoteMd5;\n            failed = md5Fail;\n          }\n\n          if (validation === 'all') {\n            failed = remoteMd5 ? md5Fail : crcFail;\n          }\n\n          if (failed) {\n            var mismatchError = new Error([\n              'The downloaded data did not match the data from the server.',\n              'To be sure the content is the same, you should download the',\n              'file again.'\n            ].join(' '));\n            mismatchError.code = 'CONTENT_DOWNLOAD_MISMATCH';\n\n            endThroughStream(mismatchError, res);\n          } else {\n            endThroughStream(null, res);\n          }\n        });\n      })\n\n      .pipe(throughStream)\n\n      .on('error', function() {\n        requestStream.abort();\n        requestStream.destroy();\n      });\n  }\n};",
     "ctx": {
       "type": "method",
@@ -599,6 +614,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Objects: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert} ",
+        "html": "<p>[Objects: insert API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/insert}\">https://cloud.google.com/storage/docs/json_api/v1/objects/insert}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object=} options - Configuration object.",
@@ -686,8 +706,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 615,
-    "codeStart": 700,
+    "line": 618,
+    "codeStart": 705,
     "code": "File.prototype.createWriteStream = function(options) {\n  options = options || {};\n\n  var that = this;\n\n  var gzip = options.gzip;\n\n  var metadata = options.metadata || {};\n  if (gzip) {\n    metadata.contentEncoding = 'gzip';\n  }\n\n  var validations = ['crc32c', 'md5'];\n  var validation;\n\n  if (is.string(options.validation)) {\n    options.validation = options.validation.toLowerCase();\n\n    if (validations.indexOf(options.validation) > -1) {\n      validation = options.validation;\n    } else {\n      validation = 'all';\n    }\n  }\n\n  if (is.undef(options.validation)) {\n    validation = 'all';\n  }\n\n  var crc32c = validation === 'crc32c' || validation === 'all';\n  var md5 = validation === 'md5' || validation === 'all';\n\n  // Collect data as it comes in to store in a hash. This is compared to the\n  // checksum value on the returned metadata from the API.\n  var localCrc32cHash;\n  var localMd5Hash = crypto.createHash('md5');\n\n  var writableStream = streamEvents(duplexify());\n\n  var throughStream = through();\n\n  var validationStream = through(function(chunk, enc, next) {\n    if (crc32c) {\n      localCrc32cHash = crc.calculate(chunk, localCrc32cHash);\n    }\n\n    if (md5) {\n      localMd5Hash.update(chunk);\n    }\n\n    this.push(chunk);\n    next();\n  });\n\n  validationStream.on('end', function() {\n    if (crc32c) {\n      localCrc32cHash = new Buffer([localCrc32cHash]).toString('base64');\n    }\n\n    if (md5) {\n      localMd5Hash = localMd5Hash.digest('base64');\n    }\n  });\n\n  throughStream\n\n    .pipe(gzip ? zlib.createGzip() : through())\n\n    .pipe(validationStream)\n\n    .pipe(writableStream)\n\n    // Wait until we've received data to determine what upload technique to use.\n    .once('writing', function() {\n      if (options.resumable === false) {\n        that.startSimpleUpload_(writableStream, metadata);\n      } else {\n        that.startResumableUpload_(writableStream, metadata);\n      }\n    })\n\n    // Catch any errors from the writable stream and patch them upstream.\n    .on('error', function(err) {\n      throughStream.emit('error', err);\n      throughStream.end();\n    })\n\n    // Compare our hashed version vs the completed upload's version.\n    .on('complete', function(metadata) {\n      var failed = false;\n\n      // We must remove the first four bytes from the returned checksum.\n      // http://stackoverflow.com/questions/25096737/\n      //   base64-encoding-of-crc32c-long-value\n\n      if (validation === 'all') {\n        if (metadata.md5Hash) {\n          failed = localMd5Hash !== metadata.md5Hash;\n        } else if (metadata.crc32c) {\n          failed = localCrc32cHash !== metadata.crc32c.substr(4);\n        }\n      } else if (md5) {\n        failed = localMd5Hash !== metadata.md5Hash;\n      } else if (crc32c) {\n        failed = localCrc32cHash !== metadata.crc32c.substr(4);\n      }\n\n      if (failed) {\n        that.delete(function(err) {\n          var code;\n          var message;\n\n          if (err) {\n            code = 'FILE_NO_UPLOAD_DELETE';\n            message = [\n              'The uploaded data did not match the data from the server. As a',\n              'precaution, we attempted to delete the file, but it was not',\n              'successful. To be sure the content is the same, you should try',\n              'removing the file manually, then uploading the file again.',\n              '\\n\\nThe delete attempt failed with this message:',\n              '\\n\\n  ' + err.message\n            ].join(' ');\n          } else {\n            code = 'FILE_NO_UPLOAD';\n            message = [\n              'The uploaded data did not match the data from the server. As a',\n              'precaution, the file has been deleted. To be sure the content',\n              'is the same, you should try uploading the file again.'\n            ].join(' ');\n          }\n\n          var error = new Error(message);\n          error.code = code;\n          error.errors = [err];\n\n          throughStream.emit('error', error);\n        });\n      } else {\n        throughStream.emit('complete', metadata);\n      }\n\n      throughStream.end();\n    });\n\n  return throughStream;\n};",
     "ctx": {
       "type": "method",
@@ -699,6 +719,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Objects: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/delete} ",
+        "html": "<p>[Objects: delete API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/delete}\">https://cloud.google.com/storage/docs/json_api/v1/objects/delete}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{function=} callback - The callback function.",
@@ -757,8 +782,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 847,
-    "codeStart": 857,
+    "line": 852,
+    "codeStart": 864,
     "code": "File.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n\n  var path = '/o/' + encodeURIComponent(this.name);\n\n  var query = {};\n\n  if (this.generation) {\n    query.generation = this.generation;\n  }\n\n  this.makeReq_('DELETE', path, query, null, function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    callback(null, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -856,8 +881,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 878,
-    "codeStart": 903,
+    "line": 885,
+    "codeStart": 910,
     "code": "File.prototype.download = function(options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  callback = once(callback);\n\n  var destination = options.destination;\n  delete options.destination;\n\n  var fileStream = this.createReadStream(options);\n\n  if (destination) {\n    fileStream\n      .on('error', callback)\n      .pipe(fs.createWriteStream(destination))\n      .on('error', callback)\n      .on('finish', callback);\n  } else {\n    var fileContents = new Buffer('');\n\n    fileStream\n      .on('error', callback)\n      .on('data', function(chunk) {\n        fileContents = Buffer.concat([fileContents, chunk]);\n      })\n      .on('complete', function() {\n        callback(null, fileContents);\n      });\n  }\n};",
     "ctx": {
       "type": "method",
@@ -869,6 +894,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Objects: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/get} ",
+        "html": "<p>[Objects: get API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/get}\">https://cloud.google.com/storage/docs/json_api/v1/objects/get}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{function=} callback - The callback function.",
@@ -941,8 +971,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 936,
-    "codeStart": 947,
+    "line": 943,
+    "codeStart": 956,
     "code": "File.prototype.getMetadata = function(callback) {\n  var self = this;\n  callback = callback || util.noop;\n\n  var path = '/o/' + encodeURIComponent(this.name);\n\n  var query = {};\n\n  if (this.generation) {\n    query.generation = this.generation;\n  }\n\n  this.makeReq_('GET', path, query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.metadata = resp;\n    callback(null, self.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -954,6 +984,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Policy Document Reference]{@link https://cloud.google.com/storage/docs/reference-methods#policydocument} ",
+        "html": "<p>[Policy Document Reference]{@link <a href=\"https://cloud.google.com/storage/docs/reference-methods#policydocument}\">https://cloud.google.com/storage/docs/reference-methods#policydocument}</a> </p>"
+      },
       {
         "type": "throws",
         "string": "{Error} If an expiration timestamp from the past is given.",
@@ -1170,17 +1205,17 @@
       }
     ],
     "description": {
-      "full": "<p>Get a signed policy document to allow a user to upload data with a POST<br />request.</p><p><em><a href=\"http://goo.gl/JWJEkG\">Reference</a>.</em></p>",
+      "full": "<p>Get a signed policy document to allow a user to upload data with a POST<br />request.</p>",
       "summary": "<p>Get a signed policy document to allow a user to upload data with a POST<br />request.</p>",
-      "body": "<p><em><a href=\"http://goo.gl/JWJEkG\">Reference</a>.</em></p>"
+      "body": ""
     },
     "isPrivate": false,
     "isConstructor": false,
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 970,
-    "codeStart": 1023,
+    "line": 979,
+    "codeStart": 1032,
     "code": "File.prototype.getSignedPolicy = function(options, callback) {\n  if (options.expiration < Math.floor(Date.now() / 1000)) {\n    throw new Error('An expiration date cannot be in the past.');\n  }\n\n  var expirationString = new Date(options.expiration).toISOString();\n  var conditions = [\n    ['eq', '$key', this.name],\n    {\n      bucket: this.bucket.name\n    }\n  ];\n\n  if (is.array(options.equals)) {\n    if (!is.array(options.equals[0])) {\n      options.equals = [options.equals];\n    }\n    options.equals.forEach(function(condition) {\n      if (!is.array(condition) || condition.length !== 2) {\n        throw new Error('Equals condition must be an array of 2 elements.');\n      }\n      conditions.push(['eq', condition[0], condition[1]]);\n    });\n  }\n\n  if (is.array(options.startsWith)) {\n    if (!is.array(options.startsWith[0])) {\n      options.startsWith = [options.startsWith];\n    }\n    options.startsWith.forEach(function(condition) {\n      if (!is.array(condition) || condition.length !== 2) {\n        throw new Error('StartsWith condition must be an array of 2 elements.');\n      }\n      conditions.push(['starts-with', condition[0], condition[1]]);\n    });\n  }\n\n  if (options.acl) {\n    conditions.push({\n      acl: options.acl\n    });\n  }\n\n  if (options.successRedirect) {\n    conditions.push({\n      success_action_redirect: options.successRedirect\n    });\n  }\n\n  if (options.successStatus) {\n    conditions.push({\n      success_action_status: options.successStatus\n    });\n  }\n\n  if (options.contentLengthRange) {\n    var min = options.contentLengthRange.min;\n    var max = options.contentLengthRange.max;\n    if (!is.number(min) || !is.number(max)) {\n      throw new Error('ContentLengthRange must have numeric min & max fields.');\n    }\n    conditions.push(['content-length-range', min, max]);\n  }\n\n  var policy = {\n    expiration: expirationString,\n    conditions: conditions\n  };\n\n  var makeAuthorizedRequest_ = this.bucket.storage.makeAuthorizedRequest_;\n\n  makeAuthorizedRequest_.getCredentials(function(err, credentials) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var sign = crypto.createSign('RSA-SHA256');\n    var policyString = JSON.stringify(policy);\n    var policyBase64 = new Buffer(policyString).toString('base64');\n\n    sign.update(policyBase64);\n\n    var signature = sign.sign(credentials.private_key, 'base64');\n\n    callback(null, {\n      string: policyString,\n      base64: policyBase64,\n      signature: signature\n    });\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1192,6 +1227,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Signed URLs Reference]{@link https://cloud.google.com/storage/docs/access-control#Signed-URLs} ",
+        "html": "<p>[Signed URLs Reference]{@link <a href=\"https://cloud.google.com/storage/docs/access-control#Signed-URLs}\">https://cloud.google.com/storage/docs/access-control#Signed-URLs}</a> </p>"
+      },
       {
         "type": "throws",
         "string": "{Error} if an expiration timestamp from the past is given.\n",
@@ -1375,17 +1415,17 @@
       }
     ],
     "description": {
-      "full": "<p>Get a signed URL to allow limited time access to the file.</p><p><em><a href=\"http://goo.gl/LcqhjU\">Reference</a>.</em></p>",
+      "full": "<p>Get a signed URL to allow limited time access to the file.</p>",
       "summary": "<p>Get a signed URL to allow limited time access to the file.</p>",
-      "body": "<p><em><a href=\"http://goo.gl/LcqhjU\">Reference</a>.</em></p>"
+      "body": ""
     },
     "isPrivate": false,
     "isConstructor": false,
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1116,
-    "codeStart": 1153,
+    "line": 1125,
+    "codeStart": 1162,
     "code": "File.prototype.getSignedUrl = function(options, callback) {\n  if (options.expires < Math.floor(Date.now() / 1000)) {\n    throw new Error('An expiration date cannot be in the past.');\n  }\n\n  options.action = {\n    read: 'GET',\n    write: 'PUT',\n    delete: 'DELETE'\n  }[options.action];\n\n  var name = encodeURIComponent(this.name);\n\n  options.resource = '/' + this.bucket.name + '/' + name;\n\n  var makeAuthorizedRequest_ = this.bucket.storage.makeAuthorizedRequest_;\n\n  makeAuthorizedRequest_.getCredentials(function(err, credentials) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var sign = crypto.createSign('RSA-SHA256');\n    sign.update([\n      options.action,\n      (options.contentMd5 || ''),\n      (options.contentType || ''),\n      options.expires,\n      (options.extensionHeaders || '') + options.resource\n    ].join('\\n'));\n    var signature = sign.sign(credentials.private_key, 'base64');\n\n    var responseContentType = '';\n    if (is.string(options.responseType)) {\n      responseContentType =\n        '&response-content-type=' +\n        encodeURIComponent(options.responseType);\n    }\n\n    var responseContentDisposition = '';\n    if (is.string(options.promptSaveAs)) {\n      responseContentDisposition =\n        '&response-content-disposition=attachment; filename=\"' +\n        encodeURIComponent(options.promptSaveAs) + '\"';\n    }\n    if (is.string(options.responseDisposition)) {\n      responseContentDisposition =\n        '&response-content-disposition=' +\n        encodeURIComponent(options.responseDisposition);\n    }\n\n    callback(null, [\n      'https://storage.googleapis.com' + options.resource,\n      '?GoogleAccessId=' + credentials.client_email,\n      '&Expires=' + options.expires,\n      '&Signature=' + encodeURIComponent(signature),\n      responseContentType,\n      responseContentDisposition\n    ].join(''));\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1397,6 +1437,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Objects: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/patch} ",
+        "html": "<p>[Objects: patch API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/patch}\">https://cloud.google.com/storage/docs/json_api/v1/objects/patch}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object} metadata - The metadata you wish to update.",
@@ -1483,8 +1528,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1216,
-    "codeStart": 1253,
+    "line": 1225,
+    "codeStart": 1264,
     "code": "File.prototype.setMetadata = function(metadata, callback) {\n  callback = callback || util.noop;\n\n  var that = this;\n  var path = '/o/' + encodeURIComponent(this.name);\n  var query = {};\n\n  if (this.generation) {\n    query.generation = this.generation;\n  }\n\n  this.makeReq_('PATCH', path, query, metadata, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1496,6 +1541,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[Objects: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/patch} ",
+        "html": "<p>[Objects: patch API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/patch}\">https://cloud.google.com/storage/docs/json_api/v1/objects/patch}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{object=} options - The configuration object.",
@@ -1568,8 +1618,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1276,
-    "codeStart": 1298,
+    "line": 1287,
+    "codeStart": 1311,
     "code": "File.prototype.makePrivate = function(options, callback) {\n  var that = this;\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n  var path = '/o/' + encodeURIComponent(this.name);\n  var query = { predefinedAcl: options.strict ? 'private' : 'projectPrivate' };\n\n  // You aren't allowed to set both predefinedAcl & acl properties on a file, so\n  // acl must explicitly be nullified, destroying all previous acls on the file.\n  var metadata = { acl: null };\n\n  callback = callback || util.noop;\n\n  this.makeReq_('PATCH', path, query, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1581,6 +1631,11 @@
   },
   {
     "tags": [
+      {
+        "type": "resource",
+        "string": "[ObjectAccessControls: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert} ",
+        "html": "<p>[ObjectAccessControls: insert API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert}\">https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert}</a> </p>"
+      },
       {
         "type": "param",
         "string": "{function=} callback - The callback function.",
@@ -1639,8 +1694,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1325,
-    "codeStart": 1335,
+    "line": 1338,
+    "codeStart": 1350,
     "code": "File.prototype.makePublic = function(callback) {\n  callback = callback || util.noop;\n\n  this.acl.add({\n    entity: 'allUsers',\n    role: 'READER'\n  }, function(err, resp) {\n    callback(err, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1697,8 +1752,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1346,
-    "codeStart": 1380,
+    "line": 1361,
+    "codeStart": 1395,
     "code": "File.prototype.startResumableUpload_ = function(stream, metadata) {\n  metadata = metadata || {};\n\n  var that = this;\n  var configStore = new ConfigStore('gcloud-node');\n  var config = configStore.get(that.name);\n  var makeAuthorizedRequest = that.bucket.storage.makeAuthorizedRequest_;\n\n  var numBytesWritten;\n  var resumableUri;\n  var RETRY_LIMIT = 5;\n  var retries = 0;\n\n  // This is used to hold all data coming in from the user's readable stream. If\n  // we need to abort a resumable upload to start a new one, this will hold the\n  // data until we're ready again.\n  var bufferStream = through();\n\n  if (config && config.uri) {\n    resumableUri = config.uri;\n    resumeUpload();\n  } else {\n    startUpload();\n  }\n\n  // Begin a new resumable upload. Send the metadata and cache the URI returned.\n  function startUpload() {\n    var headers = {};\n\n    if (metadata.contentType) {\n      headers['X-Upload-Content-Type'] = metadata.contentType;\n    }\n\n    var reqOpts = {\n      method: 'POST',\n      uri: format('{base}/{bucket}/o', {\n        base: STORAGE_UPLOAD_BASE_URL,\n        bucket: that.bucket.name\n      }),\n      qs: {\n        name: that.name,\n        uploadType: 'resumable'\n      },\n      headers: headers,\n      json: metadata\n    };\n\n    if (that.generation) {\n      reqOpts.qs.ifGenerationMatch = that.generation;\n    }\n\n    makeAuthorizedRequest(reqOpts, function(err, res, body) {\n      if (err) {\n        handleError(err);\n        return;\n      }\n\n      numBytesWritten = -1;\n      resumableUri = body.headers.location;\n\n      configStore.set(that.name, {\n        uri: resumableUri\n      });\n\n      resumeUpload();\n    });\n  }\n\n  // Given a byte offset, create an authorized request to the resumable URI. If\n  // resuming an upload, we first determine the last byte written, then create\n  // the authorized request.\n  function resumeUpload() {\n    if (is.number(numBytesWritten)) {\n      createUploadRequest(numBytesWritten);\n    } else {\n      getNumBytesWritten(createUploadRequest);\n    }\n\n    function createUploadRequest(offset) {\n      makeAuthorizedRequest({\n        method: 'PUT',\n        uri: resumableUri\n      }, {\n        onAuthorized: function(err, reqOpts) {\n          if (err) {\n            handleError(err);\n            return;\n          }\n\n          sendFile(reqOpts, offset + 1);\n        }\n      });\n    }\n  }\n\n  // Given an authorized request and a byte offset, begin sending data to the\n  // resumable URI from where the upload last left off.\n  function sendFile(reqOpts, offset) {\n    reqOpts.headers['Content-Range'] = 'bytes ' + offset + '-*/*';\n\n    var bytesWritten = 0;\n\n    var offsetStream = through(function(chunk, enc, next) {\n      // Determine if this is the same content uploaded previously. We do this\n      // by caching a slice of the first chunk, then comparing it with the first\n      // byte of incoming data.\n      if (bytesWritten === 0) {\n        var cachedFirstChunk = config && config.firstChunk;\n        var firstChunk = chunk.slice(0, 16).valueOf();\n\n        if (!cachedFirstChunk) {\n          // This is a new upload. Cache the first chunk.\n          configStore.set(that.name, {\n            uri: reqOpts.uri,\n            firstChunk: firstChunk\n          });\n        } else {\n          // This is a continuation of an upload. Make sure the first bytes are\n          // the same.\n          cachedFirstChunk = new Buffer(cachedFirstChunk);\n          firstChunk = new Buffer(firstChunk);\n\n          if (!bufferEqual(cachedFirstChunk, firstChunk)) {\n            // The data being uploaded now is different than the original data.\n            // Give the chunk back to the stream and create a new upload stream.\n            bufferStream.unshift(chunk);\n            bufferStream.unpipe(this);\n\n            configStore.del(that.name);\n\n            startUpload();\n            return;\n          }\n        }\n      }\n\n      var length = chunk.length;\n\n      if (is.string(chunk)) {\n        length = Buffer.byteLength(chunk, enc);\n      }\n\n      if (bytesWritten < offset) {\n        chunk = chunk.slice(offset - bytesWritten);\n      }\n\n      bytesWritten += length;\n\n      // Only push data to the request stream from the byte after the one we\n      // left off on.\n      if (bytesWritten > offset) {\n        this.push(chunk);\n      }\n\n      next();\n    });\n\n    var writeStream = request(reqOpts);\n    writeStream.callback = util.noop;\n\n    writeStream.on('error', function(err) {\n      handleError(err);\n    });\n\n    writeStream.on('complete', function(res) {\n      util.handleResp(null, res, res.body, function(err, data) {\n        if (err) {\n          handleError(err);\n          return;\n        }\n\n        that.metadata = data;\n\n        stream.emit('complete', that.metadata);\n\n        configStore.del(that.name);\n      });\n    });\n\n    bufferStream.pipe(offsetStream).pipe(writeStream);\n    stream.setWritable(bufferStream);\n  }\n\n  // If an upload to this file has previously started, this will return the last\n  // byte written to it.\n  function getNumBytesWritten(callback) {\n    makeAuthorizedRequest({\n      method: 'PUT',\n      uri: resumableUri,\n      headers: {\n        'Content-Length': 0,\n        'Content-Range': 'bytes */*'\n      }\n    }, function(err) {\n      var RESUME_INCOMPLETE_STATUS = 308;\n\n      if (err && err.code === RESUME_INCOMPLETE_STATUS) {\n        // headers.range format: ##-## (e.g. 0-4915200)\n        if (err.response.headers.range) {\n          callback(parseInt(err.response.headers.range.split('-')[1]));\n          return;\n        }\n      }\n\n      // Start from the first byte.\n      callback(-1);\n    });\n  }\n\n  // Handle an error from API calls following the recommended best practices:\n  // http://goo.gl/AajKku\n  function handleError(err) {\n    if (err.code === 404 && retries < RETRY_LIMIT) {\n      retries++;\n      startUpload();\n      return;\n    }\n\n    if (err.code > 499 && err.code < 600 && retries < RETRY_LIMIT) {\n      // Exponential backoff: http://goo.gl/CifIFy\n      var randomMs = Math.round(Math.random() * 1000);\n      var waitTime = Math.pow(2, retries) * 1000 + randomMs;\n\n      retries++;\n\n      // Reset `numBytesWritten` so we update this value by pinging the API.\n      numBytesWritten = null;\n\n      setTimeout(resumeUpload, waitTime);\n      return;\n    }\n\n    stream.emit('error', err);\n  }\n};",
     "ctx": {
       "type": "method",
@@ -1755,8 +1810,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1616,
-    "codeStart": 1626,
+    "line": 1631,
+    "codeStart": 1641,
     "code": "File.prototype.startSimpleUpload_ = function(stream, metadata) {\n  var that = this;\n\n  var reqOpts = {\n    qs: {\n      name: that.name\n    },\n    uri: format('{base}/{bucket}/o', {\n      base: STORAGE_UPLOAD_BASE_URL,\n      bucket: that.bucket.name\n    })\n  };\n\n  if (this.generation) {\n    reqOpts.qs.ifGenerationMatch = this.generation;\n  }\n\n  util.makeWritableStream(stream, {\n    makeAuthorizedRequest: that.bucket.storage.makeAuthorizedRequest_,\n    metadata: metadata,\n    request: reqOpts\n  }, function(data) {\n    that.metadata = data;\n\n    stream.emit('complete', data);\n    stream.end();\n  });\n};\n\nmodule.exports = File;",
     "ctx": {
       "type": "method",

@@ -285,6 +285,11 @@
   {
     "tags": [
       {
+        "type": "resource",
+        "string": "[Indexes: list API Documentation]{@link https://cloud.google.com/search/reference/rest/v1/projects/indexes/list} ",
+        "html": "<p>[Indexes: list API Documentation]{@link <a href=\"https://cloud.google.com/search/reference/rest/v1/projects/indexes/list}\">https://cloud.google.com/search/reference/rest/v1/projects/indexes/list}</a> </p>"
+      },
+      {
         "type": "param",
         "string": "{object=} query - Query object.",
         "name": "query",
@@ -455,7 +460,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 103,
-    "codeStart": 171,
+    "codeStart": 173,
     "code": "Search.prototype.getIndexes = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  query = extend({}, query);\n\n  if (query.prefix) {\n    query.indexNamePrefix = query.prefix;\n    delete query.prefix;\n  }\n\n  this.makeReq_('GET', '/indexes', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var indexes = (resp.indexes || []).map(function(indexObject) {\n      var index = self.index(indexObject.indexId);\n\n      if (is.object(resp.indexedField)) {\n        index.fields = resp.indexedField;\n      }\n\n      return index;\n    });\n\n    callback(null, indexes, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -506,8 +511,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 214,
-    "codeStart": 220,
+    "line": 216,
+    "codeStart": 222,
     "code": "Search.prototype.index = function(id) {\n  return new Index(this, id);\n};",
     "ctx": {
       "type": "method",
@@ -602,8 +607,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 224,
-    "codeStart": 236,
+    "line": 226,
+    "codeStart": 238,
     "code": "Search.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: format('{base}projects/{projectId}{path}', {\n      base: SEARCH_BASE_URL,\n      projectId: this.projectId_,\n      path: path\n    })\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};",
     "ctx": {
       "type": "method",
@@ -625,8 +630,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 254,
-    "codeStart": 259,
+    "line": 256,
+    "codeStart": 261,
     "code": "streamRouter.extend(Search, 'getIndexes');\n\nmodule.exports = Search;",
     "ctx": false
   }
