@@ -42,7 +42,7 @@ angular
           .replace(/(<div[^>]*>)\n+/g, '$1\n')
           .replace(/\n<\/div>/g, '</div>');
         function wrapCode(code) {
-          return '<div hljs language="javascript">\n' + code + '</div>';
+          return '<div hljs no-escape language="javascript">\n' + code + '</div>';
         }
       }
       function detectLinks(str) {
