@@ -35,6 +35,7 @@
 ./node_modules/.bin/dox < lib/pubsub/index.js > docs/json/master/pubsub/index.json &
 ./node_modules/.bin/dox < lib/pubsub/subscription.js > docs/json/master/pubsub/subscription.json &
 ./node_modules/.bin/dox < lib/pubsub/topic.js > docs/json/master/pubsub/topic.json &
+./node_modules/.bin/dox < lib/pubsub/iam.js > docs/json/master/pubsub/iam.json &
 
 ./node_modules/.bin/dox < lib/search/index.js > docs/json/master/search/index.json &
 ./node_modules/.bin/dox < lib/search/index-class.js > docs/json/master/search/index-class.json &

@@ -17,17 +17,32 @@
 'use strict';
 
 var assert = require('assert');
-var Topic = require('../../lib/pubsub/topic');
+var mockery = require('mockery');
 var util = require('../../lib/common/util.js');
+var Topic;
+
+function FakeIAM() {
+  this.calledWith_ = [].slice.call(arguments);
+}
 
 describe('Topic', function() {
   var PROJECT_ID = 'test-project';
   var TOPIC_NAME = 'test-topic';
+  var TOPIC_FULL_NAME = 'projects/' + PROJECT_ID + '/topics/' + TOPIC_NAME;
   var pubsubMock = {
     projectId: PROJECT_ID,
     makeReq_: util.noop
   };
   var topic;
+
+  before(function() {
+    mockery.registerMock('./iam', FakeIAM);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+    Topic = require('../../lib/pubsub/topic');
+  });
 
   beforeEach(function() {
     topic = new Topic(pubsubMock, TOPIC_NAME);
@@ -49,6 +64,13 @@ describe('Topic', function() {
 
     it('should assign pubsub object to `this`', function() {
       assert.deepEqual(topic.pubsub, pubsubMock);
+    });
+
+    it('should create an iam object', function() {
+      assert.deepEqual(topic.iam.calledWith_, [
+        pubsubMock,
+        TOPIC_FULL_NAME
+      ]);
     });
   });
 

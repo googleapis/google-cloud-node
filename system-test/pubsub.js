@@ -320,4 +320,51 @@ describe('pubsub', function() {
       });
     });
   });
+
+  describe('IAM', function() {
+
+    it('should get a policy', function(done) {
+      var topic = pubsub.topic(TOPIC_NAMES[0]);
+
+      topic.iam.getPolicy(function(err, policy) {
+        assert.ifError(err);
+        assert.deepEqual(policy, { etag: 'ACAB' });
+        done();
+      });
+    });
+
+    it('should set a policy', function(done) {
+      var topic = pubsub.topic(TOPIC_NAMES[0]);
+      var policy = {
+        bindings: [{
+          role: 'roles/pubsub.publisher',
+          members: ['serviceAccount:gmail-api-push@system.gserviceaccount.com']
+        }]
+      };
+
+      topic.iam.setPolicy(policy, function(err, newPolicy) {
+        assert.ifError(err);
+        assert.deepEqual(newPolicy.bindings, policy.bindings);
+        done();
+      });
+    });
+
+    it('should test the iam permissions', function(done) {
+      var topic = pubsub.topic(TOPIC_NAMES[0]);
+      var testPermissions = [
+        'pubsub.topics.get',
+        'pubsub.topics.update'
+      ];
+
+      topic.iam.testPermissions(testPermissions, function(err, permissions) {
+        assert.ifError(err);
+        assert.deepEqual(permissions, {
+          'pubsub.topics.get': true,
+          'pubsub.topics.update': true
+        });
+        done();
+      });
+    });
+
+  });
 });
