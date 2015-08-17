@@ -73,11 +73,11 @@ describe('Query', function() {
       assert.strictEqual(query.autoPaginateVal, true);
     });
 
-    it('should return a new query', function() {
+    it('should return the query instance', function() {
       var query = new Query(['kind1']);
-      var newQuery = query.autoPaginate(false);
+      var nextQuery = query.autoPaginate(false);
 
-      assert.notEqual(query.autoPaginateVal, newQuery.autoPaginateVal);
+      assert.strictEqual(query, nextQuery);
     });
 
   });
@@ -136,20 +136,11 @@ describe('Query', function() {
       assert.equal(query.filters[0].op, '<');
     });
 
-    it('should create the filters property if it is a falsy value', function() {
+    it('should return the query instance', function() {
       var query = new Query(['kind1']);
+      var nextQuery = query.filter('count <', 5);
 
-      query.filters = false;
-      query = query.filter('count <=', 5);
-
-      assert.equal(query.filters.length, 1);
-    });
-
-    it('should return a new query', function() {
-      var query = new Query(['kind1']);
-      var newQuery = query.filter('count <', 5);
-
-      assert.notDeepEqual(query.filters, newQuery.filters);
+      assert.strictEqual(query, nextQuery);
     });
 
   });
@@ -164,11 +155,11 @@ describe('Query', function() {
       assert.deepEqual(query.filters[0].val, ['kind2', 123]);
     });
 
-    it('should return a new query', function() {
+    it('should return the query instance', function() {
       var query = new Query(['kind1']);
-      var newQuery = query.hasAncestor(['kind2', 123]);
+      var nextQuery = query.hasAncestor(['kind2', 123]);
 
-      assert.notDeepEqual(query.filters, newQuery.filters);
+      assert.strictEqual(query, nextQuery);
     });
 
   });
@@ -207,20 +198,11 @@ describe('Query', function() {
       assert.equal(query.orders[1].sign, '-');
     });
 
-    it('should create the orders property if it is a falsy value', function() {
+    it('should return the query instance', function() {
       var query = new Query(['kind1']);
+      var nextQuery = query.order('name');
 
-      query.orders = false;
-      query = query.order('size');
-
-      assert.equal(query.orders.length, 1);
-    });
-
-    it('should return a new query', function() {
-      var query = new Query(['kind1']);
-      var newQuery = query.order('count');
-
-      assert.notDeepEqual(query.orders, newQuery.orders);
+      assert.strictEqual(query, nextQuery);
     });
 
   });
@@ -239,11 +221,11 @@ describe('Query', function() {
       assert.deepEqual(query.groupByVal, ['name']);
     });
 
-    it('should return a new query', function() {
+    it('should return the query instance', function() {
       var query = new Query(['kind1']);
-      var newQuery = query.groupBy(['name']);
+      var nextQuery = query.groupBy(['name', 'size']);
 
-      assert.notDeepEqual(query.groupByVal, newQuery.groupByVal);
+      assert.strictEqual(query, nextQuery);
     });
 
   });
@@ -262,11 +244,11 @@ describe('Query', function() {
       assert.deepEqual(query.selectVal, ['name']);
     });
 
-    it('should return a new query', function() {
+    it('should return the query instance', function() {
       var query = new Query(['kind1']);
-      var newQuery = query.select('name');
+      var nextQuery = query.select(['name', 'size']);
 
-      assert.notDeepEqual(query.selectVal, newQuery.selectVal);
+      assert.strictEqual(query, nextQuery);
     });
 
   });
@@ -279,11 +261,11 @@ describe('Query', function() {
       assert.equal(query.startVal, 'X');
     });
 
-    it('should return a new query', function() {
+    it('should return the query instance', function() {
       var query = new Query(['kind1']);
-      var newQuery = query.start('Y');
+      var nextQuery = query.start('X');
 
-      assert.notEqual(query.startVal, newQuery.startVal);
+      assert.strictEqual(query, nextQuery);
     });
 
   });
@@ -296,11 +278,11 @@ describe('Query', function() {
       assert.equal(query.endVal, 'Z');
     });
 
-    it('should return a new query', function() {
+    it('should return the query instance', function() {
       var query = new Query(['kind1']);
-      var newQuery = query.end('W');
+      var nextQuery = query.end('Z');
 
-      assert.notEqual(query.endVal, newQuery.endVal);
+      assert.strictEqual(query, nextQuery);
     });
 
   });
@@ -313,11 +295,11 @@ describe('Query', function() {
       assert.strictEqual(query.limitVal, 20);
     });
 
-    it('should return a new query', function() {
+    it('should return the query instance', function() {
       var query = new Query(['kind1']);
-      var newQuery = query.limit(20);
+      var nextQuery = query.limit(20);
 
-      assert.notEqual(query.limitVal, newQuery.limitVal);
+      assert.strictEqual(query, nextQuery);
     });
 
   });
@@ -330,11 +312,11 @@ describe('Query', function() {
       assert.strictEqual(query.offsetVal, 100);
     });
 
-    it('should return a new query', function() {
+    it('should return the query instance', function() {
       var query = new Query(['kind1']);
-      var newQuery = query.offset(10);
+      var nextQuery = query.offset(100);
 
-      assert.notEqual(query.offsetVal, newQuery.offsetVal);
+      assert.strictEqual(query, nextQuery);
     });
 
   });
