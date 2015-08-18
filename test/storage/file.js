@@ -48,6 +48,13 @@ function FakeDuplexify() {
   this.setWritable = function(setWritableStream) {
     writableStream = setWritableStream;
   };
+  this.destroy = function(err) {
+    if (err) {
+      this.emit('error', err);
+    } else {
+      this.end();
+    }
+  };
 }
 nodeutil.inherits(FakeDuplexify, stream.Duplex);
 
@@ -550,12 +557,6 @@ describe('File', function() {
               done();
             });
         });
-
-        it('should destroy the through stream', function(done) {
-          var readStream = file.createReadStream();
-          readStream.once('error', util.noop);
-          readStream.destroy = done;
-        });
       });
     });
 
@@ -650,11 +651,6 @@ describe('File', function() {
               done();
             });
         });
-
-        it('should destroy the through stream', function(done) {
-          var readStream = file.createReadStream();
-          readStream.destroy = done;
-        });
       });
     });
 
@@ -748,15 +744,14 @@ describe('File', function() {
               'bad-data', fakeResponse.crc32c);
 
           var readStream = file.createReadStream({ validation: 'md5' });
-          readStream.destroy = done;
+          readStream.end = done;
         });
 
         it('should destroy after successful validation', function(done) {
-          requestOverride = getFakeSuccessfulRequest(
-              data, fakeResponse.crc32c);
+          requestOverride = getFakeSuccessfulRequest(data, fakeResponse.crc32c);
 
           var readStream = file.createReadStream({ validation: 'crc32c' });
-          readStream.destroy = done;
+          readStream.end = done;
         });
       });
     });
@@ -822,11 +817,11 @@ describe('File', function() {
         file.createReadStream({ start: startOffset, end: endOffset });
       });
 
-      it('should destroy the through stream', function(done) {
+      it('should end the through stream', function(done) {
         requestOverride = getFakeSuccessfulRequest('body', { body: null });
 
         var readStream = file.createReadStream({ start: 100 });
-        readStream.destroy = done;
+        readStream.end = done;
       });
     });
 
