@@ -205,7 +205,7 @@ describe('Request', function() {
 
           stream.on('error', function() {
             setImmediate(function() {
-              assert.strictEqual(stream._readableState.ended, true);
+              assert.strictEqual(stream._destroyed, true);
               done();
             });
           });
