@@ -1693,6 +1693,11 @@
     "tags": [
       {
         "type": "resource",
+        "string": "[Upload Options (Simple or Resumable)]{@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload#uploads}",
+        "html": "<p>[Upload Options (Simple or Resumable)]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload#uploads}\">https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload#uploads}</a></p>"
+      },
+      {
+        "type": "resource",
         "string": "[Objects: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert} ",
         "html": "<p>[Objects: insert API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/insert}\">https://cloud.google.com/storage/docs/json_api/v1/objects/insert}</a> </p>"
       },
@@ -1769,9 +1774,9 @@
       },
       {
         "type": "param",
-        "string": "{boolean=} options.resumable - Force a resumable upload. (default:\n    true for files larger than 5MB). Read more about resumable uploads\n    [here](http://goo.gl/1JWqCF). NOTE: This behavior is only possible with\n    this method, and not {module:storage/file#createWriteStream}. When\n    working with streams, the file format and size is unknown until it's\n    completely consumed. Because of this, it's best for you to be explicit\n    for what makes sense given your input.",
+        "string": "{boolean=} options.resumable - Force a resumable upload. (default:\n    true for files larger than 5 MB).",
         "name": "options.resumable",
-        "description": "<ul>\n<li>Force a resumable upload. (default:     true for files larger than 5MB). Read more about resumable uploads<br />  <a href=\"http://goo.gl/1JWqCF\">here</a>. NOTE: This behavior is only possible with<br />  this method, and not {module:storage/file#createWriteStream}. When<br />  working with streams, the file format and size is unknown until it&#39;s<br />  completely consumed. Because of this, it&#39;s best for you to be explicit<br />  for what makes sense given your input.</li>\n</ul>\n",
+        "description": "<ul>\n<li>Force a resumable upload. (default:     true for files larger than 5 MB).</li>\n</ul>\n",
         "types": [
           "boolean"
         ],
@@ -1859,9 +1864,9 @@
       }
     ],
     "description": {
-      "full": "<p>Upload a file to the bucket. This is a convenience method that wraps the<br />functionality provided by a File object, {module:storage/file}.</p>",
-      "summary": "<p>Upload a file to the bucket. This is a convenience method that wraps the<br />functionality provided by a File object, {module:storage/file}.</p>",
-      "body": ""
+      "full": "<p>Upload a file to the bucket. This is a convenience method that wraps<br />{module:storage/file#createWriteStream}.</p><p>You can specify whether or not an upload is resumable by setting<br /><code>options.resumable</code>. <em>Resumable uploads are enabled by default if your input<br />file is larger than 5 MB.</em></p>",
+      "summary": "<p>Upload a file to the bucket. This is a convenience method that wraps<br />{module:storage/file#createWriteStream}.</p>",
+      "body": "<p>You can specify whether or not an upload is resumable by setting<br /><code>options.resumable</code>. <em>Resumable uploads are enabled by default if your input<br />file is larger than 5 MB.</em></p>"
     },
     "isPrivate": false,
     "isConstructor": false,
