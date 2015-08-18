@@ -27,6 +27,7 @@ var request = require('request');
 var retryRequest = require('retry-request');
 var stream = require('stream');
 var streamForward = require('stream-forward');
+var through = require('through2');
 
 var googleAuthLibraryOverride;
 function fakeGoogleAuthLibrary() {
@@ -306,7 +307,7 @@ describe('common/util', function() {
     it('should emit an error', function(done) {
       var error = new Error('Error.');
 
-      var ws = new stream.Writable();
+      var ws = through();
       ws.on('error', function(err) {
         assert.equal(err, error);
         done();
@@ -840,7 +841,7 @@ describe('common/util', function() {
 
             var stream = this;
             setImmediate(function() {
-              assert.strictEqual(stream._readableState.ended, true);
+              assert.strictEqual(stream._destroyed, true);
               done();
             });
           });
