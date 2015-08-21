@@ -39,6 +39,49 @@ angular.module('gcloud.docs')
       ]
     },
 
+    compute: {
+      title: 'Compute',
+      _url: '{baseUrl}/compute',
+      pages: [
+        {
+          title: 'Address',
+          url: '/address'
+        },
+        {
+          title: 'Disk',
+          url: '/disk'
+        },
+        {
+          title: 'Firewall',
+          url: '/firewall'
+        },
+        {
+          title: 'Network',
+          url: '/network'
+        },
+        {
+          title: 'Operation',
+          url: '/operation'
+        },
+        {
+          title: 'Region',
+          url: '/region'
+        },
+        {
+          title: 'Snapshot',
+          url: '/snapshot'
+        },
+        {
+          title: 'VM',
+          url: '/vm'
+        },
+        {
+          title: 'Zone',
+          url: '/zone'
+        }
+      ]
+    },
+
     datastore: {
       title: 'Datastore',
       _url: '{baseUrl}/datastore',
@@ -180,6 +223,9 @@ angular.module('gcloud.docs')
       '>=0.16.0': ['search'],
 
       // introduce dns api.
-      '>=0.18.0': ['dns']
+      '>=0.18.0': ['dns'],
+
+      // introduce compute api.
+      '>=0.20.0': ['compute']
     }
   });
