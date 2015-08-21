@@ -180,6 +180,61 @@
     "tags": [
       {
         "type": "type",
+        "string": "{module:compute}\n",
+        "types": [
+          "module:compute"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acompute.html\">compute</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:compute}</p>"
+      },
+      {
+        "type": "return",
+        "string": "{module:compute}\n",
+        "types": [
+          "module:compute"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acompute.html\">compute</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:compute}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\nvar gce = gcloud.compute({\n  projectId: 'grape-spaceship-123',\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var gce = gcloud.compute({<br />  projectId: &#39;grape-spaceship-123&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>With <a href=\"https://cloud.google.com/compute/\">Compute Engine</a>, you can run<br />large-scale workloads on virtual machines hosted on Google&#39;s<br />infrastructure. Choose a VM that fits your needs and gain the performance<br />of Google’s worldwide fiber network.</p>",
+      "summary": "<p>With <a href=\"https://cloud.google.com/compute/\">Compute Engine</a>, you can run<br />large-scale workloads on virtual machines hosted on Google&#39;s<br />infrastructure. Choose a VM that fits your needs and gain the performance<br />of Google’s worldwide fiber network.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 57,
+    "codeStart": 74,
+    "code": "compute: require('./compute'),",
+    "ctx": {
+      "type": "property",
+      "name": "compute",
+      "value": "require('./compute'),",
+      "string": "compute"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
         "string": "{module:datastore}\n",
         "types": [
           "module:datastore"
@@ -221,8 +276,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 57,
-    "codeStart": 75,
+    "line": 76,
+    "codeStart": 94,
     "code": "datastore: require('./datastore'),",
     "ctx": {
       "type": "property",
@@ -276,8 +331,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 77,
-    "codeStart": 96,
+    "line": 96,
+    "codeStart": 115,
     "code": "dns: require('./dns'),",
     "ctx": {
       "type": "property",
@@ -331,8 +386,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 98,
-    "codeStart": 114,
+    "line": 117,
+    "codeStart": 133,
     "code": "pubsub: require('./pubsub'),",
     "ctx": {
       "type": "property",
@@ -386,8 +441,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 116,
-    "codeStart": 139,
+    "line": 135,
+    "codeStart": 158,
     "code": "search: require('./search'),",
     "ctx": {
       "type": "property",
@@ -441,8 +496,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 141,
-    "codeStart": 157,
+    "line": 160,
+    "codeStart": 176,
     "code": "storage: require('./storage')\n};",
     "ctx": {
       "type": "property",
@@ -483,8 +538,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 160,
-    "codeStart": 168,
+    "line": 179,
+    "codeStart": 187,
     "code": "var scopedApis = {\n  datastore: true\n};",
     "ctx": {
       "type": "declaration",
@@ -649,8 +704,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 172,
-    "codeStart": 231,
+    "line": 191,
+    "codeStart": 250,
     "code": "function gcloud(config) {\n  return Object.keys(apis).reduce(function(gcloudExposedApi, apiName) {\n    var Class = apis[apiName];\n\n    if (scopedApis[apiName]) {\n      gcloudExposedApi[apiName] = new Class(config);\n    } else {\n      gcloudExposedApi[apiName] = function(options) {\n        return new Class(util.extendGlobalConfig(config, options));\n      };\n    }\n\n    // Extend each API to pick up static members, e.g. Datastore.int and\n    // Storage.acl.\n    extend(gcloudExposedApi[apiName], Class);\n\n    return gcloudExposedApi;\n  }, {});\n}\n\nmodule.exports = extend(gcloud, apis);",
     "ctx": {
       "type": "function",
