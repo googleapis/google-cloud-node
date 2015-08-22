@@ -1,0 +1,195 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
+  },
+  {
+    "tags": [
+      {
+        "type": "module",
+        "string": "dns/change",
+        "html": "<p>dns/change</p>"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 17,
+    "codeStart": 21,
+    "code": "'use strict';",
+    "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "constructor",
+        "string": "",
+        "html": ""
+      },
+      {
+        "type": "alias",
+        "string": "module:dns/change ",
+        "html": "<p>module:dns/change </p>"
+      },
+      {
+        "type": "param",
+        "string": "{module:dns/zone} zone - The parent zone object.",
+        "name": "zone",
+        "description": "<ul>\n<li>The parent zone object.</li>\n</ul>\n",
+        "types": [
+          "module:dns/zone"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Fzone.html\">dns/zone</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} id - ID of the change.\n",
+        "name": "id",
+        "description": "<ul>\n<li>ID of the change. </li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\n\nvar dns = gcloud.dns({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'grape-spaceship-123'\n});\n\nvar zone = dns.zone('zone-id');\nvar change = zone.change('change-id');",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);</p><p>var dns = gcloud.dns({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>var zone = dns.zone(&#39;zone-id&#39;);<br />var change = zone.change(&#39;change-id&#39;);</p>"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": true,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 23,
+    "codeStart": 41,
+    "code": "function Change(zone, id) {\n  this.zoneName = zone.name;\n  this.id = id;\n\n  this.metadata = {};\n  this.makeReq_ = zone.dns.makeReq_.bind(zone.dns);\n}",
+    "ctx": {
+      "type": "constructor",
+      "name": "Change",
+      "string": "Change()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Changes: get API Documentation]{@link https://cloud.google.com/dns/api/v1/changes/get} ",
+        "html": "<p>[Changes: get API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/changes/get}\">https://cloud.google.com/dns/api/v1/changes/get}</a> </p>"
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An API error.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An API error.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?object} callback.metadata - Metadata of the change from the API.",
+        "name": "callback.metadata",
+        "description": "<ul>\n<li>Metadata of the change from the API.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - Raw API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>Raw API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "change.getMetadata(function(err, metadata, apiResponse) {\n  if (!err) {\n    // metadata = {\n    //   kind: 'dns#change',\n    //   additions: [{...}],\n    //   deletions: [{...}],\n    //   startTime: '2015-07-21T14:40:06.056Z',\n    //   id: '1',\n    //   status: 'done'\n    // }\n  }\n});",
+        "html": "<p>change.getMetadata(function(err, metadata, apiResponse) {<br />  if (!err) {<br />    // metadata = {<br />    //   kind: &#39;dns#change&#39;,<br />    //   additions: [{...}],<br />    //   deletions: [{...}],<br />    //   startTime: &#39;2015-07-21T14:40:06.056Z&#39;,<br />    //   id: &#39;1&#39;,<br />    //   status: &#39;done&#39;<br />    // }<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get the metadata for the change in the zone.</p>",
+      "summary": "<p>Get the metadata for the change in the zone.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 49,
+    "codeStart": 73,
+    "code": "Change.prototype.getMetadata = function(callback) {\n  var self = this;\n  var path = '/managedZones/' + this.zoneName + '/changes/' + this.id;\n\n  this.makeReq_('GET', path, null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.metadata = resp;\n\n    callback(null, self.metadata, resp);\n  });\n};\n\nmodule.exports = Change;",
+    "ctx": {
+      "type": "method",
+      "constructor": "Change",
+      "cons": "Change",
+      "name": "getMetadata",
+      "string": "Change.prototype.getMetadata()"
+    }
+  }
+]
