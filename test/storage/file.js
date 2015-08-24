@@ -18,8 +18,6 @@
 
 var assert = require('assert');
 var Bucket = require('../../lib/storage/bucket.js');
-var crc = require('sse4_crc32');
-var crypto = require('crypto');
 var duplexify = require('duplexify');
 var extend = require('extend');
 var format = require('string-format-obj');
@@ -107,7 +105,11 @@ describe('File', function() {
   var bucket;
 
   before(function() {
-    mockery.registerMock('sse4_crc32', crc);
+    // If we don't stub see4_crc32 and use mockery, we get "Module did not self-
+    // register".
+    var crc32c = require('hash-stream-validation/node_modules/sse4_crc32');
+    mockery.registerMock('sse4_crc32', crc32c);
+
     mockery.registerMock('configstore', FakeConfigStore);
     mockery.registerMock('duplexify', FakeDuplexify);
     mockery.registerMock('request', fakeRequest);
@@ -438,10 +440,8 @@ describe('File', function() {
         var self = this;
 
         setImmediate(function() {
-          var responseStream = through();
-          self.emit('response', responseStream);
-          responseStream.push(data);
-          responseStream.push(null);
+          var stream = new FakeRequest();
+          self.emit('response', stream);
 
           setImmediate(function() {
             self.emit('complete', fakeResponse);
@@ -657,18 +657,12 @@ describe('File', function() {
     describe('validation', function() {
       var data = 'test';
 
-      var crc32cBase64 = new Buffer([crc.calculate(data)]).toString('base64');
-
-      var md5HashBase64 = crypto.createHash('md5');
-      md5HashBase64.update(data);
-      md5HashBase64 = md5HashBase64.digest('base64');
-
       var fakeResponse = {
         crc32c: {
-          headers: { 'x-goog-hash': 'crc32c=####' + crc32cBase64 }
+          headers: { 'x-goog-hash': 'crc32c=####wA==' }
         },
         md5: {
-          headers: { 'x-goog-hash': 'md5=' + md5HashBase64 }
+          headers: { 'x-goog-hash': 'md5=CY9rzUYh03PK3k6DJie09g==' }
         }
       };
 
@@ -717,7 +711,7 @@ describe('File', function() {
 
       it('should emit an error if md5 validation fails', function(done) {
         requestOverride = getFakeSuccessfulRequest(
-            'bad-data', fakeResponse.crc32c);
+            'bad-data', fakeResponse.md5);
 
         file.createReadStream({ validation: 'md5' })
           .on('error', function(err) {
@@ -959,15 +953,9 @@ describe('File', function() {
     describe('validation', function() {
       var data = 'test';
 
-      var crc32cBase64 = new Buffer([crc.calculate(data)]).toString('base64');
-
-      var md5HashBase64 = crypto.createHash('md5');
-      md5HashBase64.update(data);
-      md5HashBase64 = md5HashBase64.digest('base64');
-
       var fakeMetadata = {
-        crc32c: { crc32c: '####' + crc32cBase64 },
-        md5: { md5Hash: md5HashBase64 }
+        crc32c: { crc32c: '####wA==' },
+        md5: { md5Hash: 'CY9rzUYh03PK3k6DJie09g==' }
       };
 
       it('should validate with crc32c', function(done) {
