@@ -55,7 +55,7 @@ function deleteFile(file, callback) {
 function writeToFile(file, contents, callback) {
   var writeStream = file.createWriteStream();
   writeStream.once('error', callback);
-  writeStream.once('complete', callback.bind(null, null));
+  writeStream.once('finish', callback.bind(null, null));
   writeStream.end(contents);
 }
 
@@ -462,7 +462,7 @@ describe('storage', function() {
       writeStream.end();
 
       writeStream.on('error', done);
-      writeStream.on('complete', function() {
+      writeStream.on('finish', function() {
         var data = new Buffer('');
 
         file.createReadStream()
@@ -583,8 +583,8 @@ describe('storage', function() {
         fs.createReadStream(files.big.path)
           .pipe(file.createWriteStream({ resumable: false }))
           .on('error', done)
-          .on('complete', function(fileObject) {
-            assert.equal(fileObject.md5Hash, files.big.hash);
+          .on('finish', function() {
+            assert.equal(file.metadata.md5Hash, files.big.hash);
             file.delete(done);
           });
       });
@@ -616,10 +616,10 @@ describe('storage', function() {
           upload({ interrupt: true }, function(err) {
             assert.ifError(err);
 
-            upload({ interrupt: false }, function(err, metadata) {
+            upload({ interrupt: false }, function(err) {
               assert.ifError(err);
 
-              assert.equal(metadata.size, fileSize);
+              assert.equal(file.metadata.size, fileSize);
               file.delete(done);
             });
           });
@@ -641,9 +641,7 @@ describe('storage', function() {
               }))
               .pipe(file.createWriteStream())
               .on('error', callback)
-              .on('complete', function(fileObject) {
-                callback(null, fileObject);
-              });
+              .on('finish', callback);
           }
         });
       });
@@ -661,7 +659,7 @@ describe('storage', function() {
           writable.write(fileContent);
           writable.end();
 
-          writable.on('complete', function() {
+          writable.on('finish', function() {
             file.createReadStream()
               .on('error', done)
               .pipe(fs.createWriteStream(tmpFilePath))
@@ -738,7 +736,7 @@ describe('storage', function() {
         fs.createReadStream(files.logo.path)
           .pipe(file.createWriteStream())
           .on('error', done)
-          .on('complete', function() {
+          .on('finish', function() {
             file.copy(filenames[1], function(err, copiedFile) {
               assert.ifError(err);
               copiedFile.copy(filenames[2], done);
@@ -890,7 +888,7 @@ describe('storage', function() {
       fs.createReadStream(files.logo.path)
         .pipe(file.createWriteStream())
         .on('error', done)
-        .on('complete', done.bind(null, null));
+        .on('finish', done.bind(null, null));
     });
 
     it('should create a signed read url', function(done) {

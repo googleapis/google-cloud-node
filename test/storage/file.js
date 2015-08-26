@@ -31,31 +31,6 @@ var tmp = require('tmp');
 var url = require('url');
 var util = require('../../lib/common/util');
 
-var readableStream;
-var writableStream;
-function FakeDuplexify() {
-  if (!(this instanceof FakeDuplexify)) {
-    return new FakeDuplexify();
-  }
-  stream.Duplex.call(this);
-  this._read = util.noop;
-  this._write = util.noop;
-  this.setReadable = function(setReadableStream) {
-    readableStream = setReadableStream;
-  };
-  this.setWritable = function(setWritableStream) {
-    writableStream = setWritableStream;
-  };
-  this.destroy = function(err) {
-    if (err) {
-      this.emit('error', err);
-    } else {
-      this.end();
-    }
-  };
-}
-nodeutil.inherits(FakeDuplexify, stream.Duplex);
-
 var makeWritableStreamOverride;
 var handleRespOverride;
 var fakeUtil = extend({}, util, {
@@ -111,7 +86,7 @@ describe('File', function() {
     mockery.registerMock('sse4_crc32', crc32c);
 
     mockery.registerMock('configstore', FakeConfigStore);
-    mockery.registerMock('duplexify', FakeDuplexify);
+    // mockery.registerMock('duplexify', FakeDuplexify);
     mockery.registerMock('request', fakeRequest);
     mockery.registerMock('../common/util.js', fakeUtil);
     mockery.enable({
@@ -484,7 +459,7 @@ describe('File', function() {
         setImmediate(function() {
           done();
         });
-        return new FakeDuplexify();
+        return duplexify();
       };
 
       versionedFile.createReadStream().resume();
@@ -519,7 +494,7 @@ describe('File', function() {
           setImmediate(function() {
             done();
           });
-          return new FakeDuplexify();
+          return duplexify();
         };
 
         file.createReadStream().resume();
@@ -531,7 +506,7 @@ describe('File', function() {
           setImmediate(function() {
             done();
           });
-          return new FakeDuplexify();
+          return duplexify();
         };
 
         file.createReadStream().resume();
@@ -954,6 +929,19 @@ describe('File', function() {
       writable.write('data');
     });
 
+    it('should cork data on prefinish', function(done) {
+      var writable = file.createWriteStream();
+
+      file.startResumableUpload_ = function(stream) {
+        assert.strictEqual(writable._corked, 0);
+        stream.emit('prefinish');
+        assert.strictEqual(writable._corked, 1);
+        done();
+      };
+
+      writable.end('data');
+    });
+
     describe('validation', function() {
       var data = 'test';
 
@@ -961,6 +949,23 @@ describe('File', function() {
         crc32c: { crc32c: '####wA==' },
         md5: { md5Hash: 'CY9rzUYh03PK3k6DJie09g==' }
       };
+
+      it('should uncork after successful write', function(done) {
+        var writable = file.createWriteStream({ validation: 'crc32c' });
+
+        file.startResumableUpload_ = function(stream) {
+          setImmediate(function() {
+            assert.strictEqual(writable._corked, 1);
+            stream.emit('complete', fakeMetadata.crc32c);
+            assert.strictEqual(writable._corked, 0);
+            done();
+          });
+        };
+
+        writable.end(data);
+
+        writable.on('error', done);
+      });
 
       it('should validate with crc32c', function(done) {
         var writable = file.createWriteStream({ validation: 'crc32c' });
@@ -971,14 +976,11 @@ describe('File', function() {
           });
         };
 
-        writable.write(data);
-        writable.end();
+        writable.end(data);
 
         writable
           .on('error', done)
-          .on('complete', function() {
-            done();
-          });
+          .on('finish', done);
       });
 
       it('should emit an error if crc32c validation fails', function(done) {
@@ -1017,9 +1019,7 @@ describe('File', function() {
 
         writable
           .on('error', done)
-          .on('complete', function() {
-            done();
-          });
+          .on('finish', done);
       });
 
       it('should emit an error if md5 validation fails', function(done) {
