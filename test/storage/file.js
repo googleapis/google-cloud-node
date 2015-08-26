@@ -487,7 +487,7 @@ describe('File', function() {
         return new FakeDuplexify();
       };
 
-      versionedFile.createReadStream();
+      versionedFile.createReadStream().resume();
     });
 
     it('should end request stream on error', function(done) {
@@ -495,13 +495,15 @@ describe('File', function() {
 
       var readStream = file.createReadStream();
 
-      readStream.once('error', function() {
+      readStream.resume();
+
+      // Let the error handler from createReadStream assign.
+      setImmediate(function() {
+        readStream.emit('error');
         assert(requestOverride.wasRequestAborted());
         assert(requestOverride.wasRequestDestroyed());
         done();
       });
-
-      readStream.emit('error');
     });
 
     describe('authorizing', function() {
@@ -520,7 +522,7 @@ describe('File', function() {
           return new FakeDuplexify();
         };
 
-        file.createReadStream();
+        file.createReadStream().resume();
       });
 
       it('should accept gzip encoding', function(done) {
@@ -532,7 +534,7 @@ describe('File', function() {
           return new FakeDuplexify();
         };
 
-        file.createReadStream();
+        file.createReadStream().resume();
       });
 
       describe('errors', function() {
@@ -555,7 +557,8 @@ describe('File', function() {
             .once('error', function(err) {
               assert.equal(err, ERROR);
               done();
-            });
+            })
+            .resume();
         });
       });
     });
@@ -575,7 +578,7 @@ describe('File', function() {
           return requestOverride(fakeRequest);
         };
 
-        file.createReadStream();
+        file.createReadStream().resume();
       });
 
       it('should emit response event from request', function(done) {
@@ -584,7 +587,8 @@ describe('File', function() {
         file.createReadStream({ validation: false })
           .on('response', function() {
             done();
-          });
+          })
+          .resume();
       });
 
       it('should unpipe stream from an error on the response', function(done) {
@@ -613,7 +617,7 @@ describe('File', function() {
           });
         };
 
-        var readStream = file.createReadStream();
+        var readStream = file.createReadStream().resume();
       });
 
       it('should let util.handleResp handle the response', function(done) {
@@ -634,7 +638,7 @@ describe('File', function() {
           return stream;
         };
 
-        file.createReadStream();
+        file.createReadStream().resume();
       });
 
       describe('errors', function() {
@@ -649,7 +653,8 @@ describe('File', function() {
             .once('error', function(err) {
               assert.deepEqual(err, ERROR);
               done();
-            });
+            })
+            .resume();
         });
       });
     });
@@ -683,9 +688,8 @@ describe('File', function() {
 
         file.createReadStream({ validation: 'crc32c' })
           .on('error', done)
-          .on('complete', function() {
-            done();
-          });
+          .on('end', done)
+          .resume();
       });
 
       it('should emit an error if crc32c validation fails', function(done) {
@@ -694,9 +698,10 @@ describe('File', function() {
 
         file.createReadStream({ validation: 'crc32c' })
           .on('error', function(err) {
-            assert.equal(err.code, 'CONTENT_DOWNLOAD_MISMATCH');
+            assert.strictEqual(err.code, 'CONTENT_DOWNLOAD_MISMATCH');
             done();
-          });
+          })
+          .resume();
       });
 
       it('should validate with md5', function(done) {
@@ -704,9 +709,8 @@ describe('File', function() {
 
         file.createReadStream({ validation: 'md5' })
           .on('error', done)
-          .on('complete', function() {
-            done();
-          });
+          .on('end', done)
+          .resume();
       });
 
       it('should emit an error if md5 validation fails', function(done) {
@@ -715,9 +719,10 @@ describe('File', function() {
 
         file.createReadStream({ validation: 'md5' })
           .on('error', function(err) {
-            assert.equal(err.code, 'CONTENT_DOWNLOAD_MISMATCH');
+            assert.strictEqual(err.code, 'CONTENT_DOWNLOAD_MISMATCH');
             done();
-          });
+          })
+          .resume();
       });
 
       it('should default to md5 validation', function(done) {
@@ -727,9 +732,10 @@ describe('File', function() {
 
         file.createReadStream()
           .on('error', function(err) {
-            assert.equal(err.code, 'CONTENT_DOWNLOAD_MISMATCH');
+            assert.strictEqual(err.code, 'CONTENT_DOWNLOAD_MISMATCH');
             done();
-          });
+          })
+          .resume();
       });
 
       describe('destroying the through stream', function() {
@@ -738,14 +744,11 @@ describe('File', function() {
               'bad-data', fakeResponse.crc32c);
 
           var readStream = file.createReadStream({ validation: 'md5' });
-          readStream.end = done;
-        });
-
-        it('should destroy after successful validation', function(done) {
-          requestOverride = getFakeSuccessfulRequest(data, fakeResponse.crc32c);
-
-          var readStream = file.createReadStream({ validation: 'crc32c' });
-          readStream.end = done;
+          readStream.destroy = function(err) {
+            assert.strictEqual(err.code, 'CONTENT_DOWNLOAD_MISMATCH');
+            done();
+          };
+          readStream.resume();
         });
       });
     });
@@ -762,7 +765,7 @@ describe('File', function() {
           return duplexify();
         };
 
-        file.createReadStream({ start: startOffset });
+        file.createReadStream({ start: startOffset }).resume();
       });
 
       it('should accept an end range and set start to 0', function(done) {
@@ -776,7 +779,7 @@ describe('File', function() {
           return duplexify();
         };
 
-        file.createReadStream({ end: endOffset });
+        file.createReadStream({ end: endOffset }).resume();
       });
 
       it('should accept both a start and end range', function(done) {
@@ -792,7 +795,7 @@ describe('File', function() {
           return duplexify();
         };
 
-        file.createReadStream({ start: startOffset, end: endOffset });
+        file.createReadStream({ start: startOffset, end: endOffset }).resume();
       });
 
       it('should accept range start and end as 0', function(done) {
@@ -808,7 +811,7 @@ describe('File', function() {
           return duplexify();
         };
 
-        file.createReadStream({ start: startOffset, end: endOffset });
+        file.createReadStream({ start: startOffset, end: endOffset }).resume();
       });
 
       it('should end the through stream', function(done) {
@@ -816,6 +819,7 @@ describe('File', function() {
 
         var readStream = file.createReadStream({ start: 100 });
         readStream.end = done;
+        readStream.resume();
       });
     });
 
@@ -831,7 +835,7 @@ describe('File', function() {
           return duplexify();
         };
 
-        file.createReadStream({ end: endOffset });
+        file.createReadStream({ end: endOffset }).resume();
       });
     });
   });
