@@ -21,7 +21,7 @@
 var assert = require('assert');
 var duplexify = require('duplexify');
 var extend = require('extend');
-var googleAuthLibrary = require('google-auth-library');
+var googleAuth = require('google-auto-auth');
 var mockery = require('mockery');
 var request = require('request');
 var retryRequest = require('retry-request');
@@ -29,10 +29,9 @@ var stream = require('stream');
 var streamForward = require('stream-forward');
 var through = require('through2');
 
-var googleAuthLibraryOverride;
-function fakeGoogleAuthLibrary() {
-  return (googleAuthLibraryOverride || googleAuthLibrary)
-    .apply(null, arguments);
+var googleAutoAuthOverride;
+function fakeGoogleAutoAuth() {
+  return (googleAutoAuthOverride || googleAuth).apply(null, arguments);
 }
 
 var REQUEST_DEFAULT_CONF;
@@ -62,7 +61,7 @@ describe('common/util', function() {
   var utilOverrides = {};
 
   before(function() {
-    mockery.registerMock('google-auth-library', fakeGoogleAuthLibrary);
+    mockery.registerMock('google-auto-auth', fakeGoogleAutoAuth);
     mockery.registerMock('request', fakeRequest);
     mockery.registerMock('retry-request', fakeRetryRequest);
     mockery.registerMock('stream-forward', fakeStreamForward);
@@ -93,7 +92,7 @@ describe('common/util', function() {
   });
 
   beforeEach(function() {
-    googleAuthLibraryOverride = null;
+    googleAutoAuthOverride = null;
     requestOverride = null;
     retryRequestOverride = null;
     streamForwardOverride = null;
@@ -476,253 +475,42 @@ describe('common/util', function() {
     });
   });
 
-  describe('getAuthClient', function() {
-    it('should use any authClient provided as a config', function(done) {
-      var config = {
-        authClient: {}
-      };
-
-      util.getAuthClient(config, function(err, authClient) {
-        assert.strictEqual(authClient, config.authClient);
-        done();
-      });
-    });
-
-    it('should use google-auth-library', function() {
-      var googleAuthLibraryCalled = false;
-
-      googleAuthLibraryOverride = function() {
-        googleAuthLibraryCalled = true;
-        return {
-          getApplicationDefault: util.noop
-        };
-      };
-
-      util.getAuthClient({});
-
-      assert.strictEqual(googleAuthLibraryCalled, true);
-    });
-
-    it('should create a JWT auth client from a keyFile', function(done) {
-      var jwt = {};
-
-      googleAuthLibraryOverride = function() {
-        return {
-          JWT: function() { return jwt; }
-        };
-      };
-
-      var config = {
-        keyFile: 'key.json',
-        email: 'example@example.com',
-        scopes: ['dev.scope']
-      };
-
-      util.getAuthClient(config, function(err, authClient) {
-        assert.ifError(err);
-
-        assert.equal(jwt.keyFile, config.keyFile);
-        assert.equal(jwt.email, config.email);
-        assert.deepEqual(jwt.scopes, config.scopes);
-
-        assert.deepEqual(authClient, jwt);
-
-        done();
-      });
-    });
-
-    it('should create an auth client from credentials', function(done) {
-      var credentialsSet;
-
-      googleAuthLibraryOverride = function() {
-        return {
-          fromJSON: function(credentials, callback) {
-            credentialsSet = credentials;
-            callback(null, {});
-          }
-        };
-      };
-
-      var config = {
-        credentials: { a: 'b', c: 'd' }
-      };
-
-      util.getAuthClient(config, function() {
-        assert.deepEqual(credentialsSet, config.credentials);
-        done();
-      });
-    });
-
-    it('should create an auth client from magic', function(done) {
-      googleAuthLibraryOverride = function() {
-        return {
-          getApplicationDefault: function(callback) {
-            callback(null, {});
-          }
-        };
-      };
-
-      util.getAuthClient({}, done);
-    });
-
-    it('should scope an auth client if necessary', function(done) {
-      var config = {
-        scopes: ['a.scope', 'b.scope']
-      };
-
-      var fakeAuthClient = {
-        createScopedRequired: function() {
-          return true;
-        },
-        createScoped: function(scopes) {
-          assert.deepEqual(scopes, config.scopes);
-          return fakeAuthClient;
-        },
-        getAccessToken: function() {}
-      };
-
-      googleAuthLibraryOverride = function() {
-        return {
-          getApplicationDefault: function(callback) {
-            callback(null, fakeAuthClient);
-          }
-        };
-      };
-
-      util.getAuthClient(config, done);
-    });
-
-    it('should pass back any errors from the authClient', function(done) {
-      var error = new Error('Error!');
-
-      googleAuthLibraryOverride = function() {
-        return {
-          getApplicationDefault: function(callback) {
-            callback(error);
-          }
-        };
-      };
-
-      util.getAuthClient({}, function(err) {
-        assert.strictEqual(error, err);
-        done();
-      });
-    });
-  });
-
-  describe('authorizeRequest', function() {
-    it('should get an auth client', function(done) {
-      var config = { a: 'b', c: 'd' };
-
-      utilOverrides.getAuthClient = function(cfg) {
-        assert.deepEqual(cfg, config);
-        done();
-      };
-
-      util.authorizeRequest(config);
-    });
-
-    it('should ignore "Could not load" error from google-auth', function(done) {
-      var reqOpts = { a: 'b', c: 'd' };
-      var couldNotLoadError = new Error('Could not load');
-
-      utilOverrides.getAuthClient = function(config, callback) {
-        callback(couldNotLoadError);
-      };
-
-      util.authorizeRequest({}, reqOpts, function(err, authorizedReqOpts) {
-        assert.ifError(err);
-        assert.deepEqual(reqOpts, authorizedReqOpts);
-        done();
-      });
-    });
-
-    it('should return an error to the callback', function(done) {
-      var error = new Error('Error.');
-
-      utilOverrides.getAuthClient = function(config, callback) {
-        callback(error);
-      };
-
-      util.authorizeRequest({}, {}, function(err) {
-        assert.deepEqual(err, error);
-        done();
-      });
-    });
-
-    it('should get an access token', function(done) {
-      var fakeAuthClient = {
-        getAccessToken: function() {
-          done();
-        }
-      };
-
-      utilOverrides.getAuthClient = function(config, callback) {
-        callback(null, fakeAuthClient);
-      };
-
-      util.authorizeRequest();
-    });
-
-    it('should return an access token error to callback', function(done) {
-      var error = new Error('Error.');
-
-      var fakeAuthClient = {
-        getAccessToken: function(callback) {
-          callback(error);
-        }
-      };
-
-      utilOverrides.getAuthClient = function(config, callback) {
-        callback(null, fakeAuthClient);
-      };
-
-      util.authorizeRequest({}, {}, function(err) {
-        assert.deepEqual(err, error);
-        done();
-      });
-    });
-
-    it('should extend the request options with token', function(done) {
-      var token = 'abctoken';
-
-      var reqOpts = {
-        uri: 'a',
-        headers: {
-          a: 'b',
-          c: 'd'
-        }
-      };
-
-      var expectedAuthorizedReqOpts = extend(true, {}, reqOpts, {
-        headers: {
-          Authorization: 'Bearer ' + token
-        }
-      });
-
-      var fakeAuthClient = {
-        getAccessToken: function(callback) {
-          callback(null, token);
-        }
-      };
-
-      utilOverrides.getAuthClient = function(config, callback) {
-        callback(null, fakeAuthClient);
-      };
-
-      util.authorizeRequest({}, reqOpts, function(err, authorizedReqOpts) {
-        assert.ifError(err);
-
-        assert.deepEqual(authorizedReqOpts, expectedAuthorizedReqOpts);
-
-        done();
-      });
-    });
-  });
-
   describe('makeAuthorizedRequestFactory', function() {
+    var authClient = { getCredentials: function() {} };
+
+    beforeEach(function() {
+      googleAutoAuthOverride = function() {
+        return authClient;
+      };
+    });
+
+    it('should create an authClient', function(done) {
+      var config = {};
+
+      googleAutoAuthOverride = function(config_) {
+        assert.strictEqual(config_, config);
+        setImmediate(done);
+        return authClient;
+      };
+
+      util.makeAuthorizedRequestFactory(config);
+    });
+
     it('should return a function', function() {
       assert.equal(typeof util.makeAuthorizedRequestFactory(), 'function');
+    });
+
+    it('should return a getCredentials method', function(done) {
+      function getCredentials() {
+        done();
+      }
+
+      googleAutoAuthOverride = function() {
+        return { getCredentials: getCredentials };
+      };
+
+      var makeAuthorizedRequest = util.makeAuthorizedRequestFactory();
+      makeAuthorizedRequest.getCredentials();
     });
 
     describe('customEndpoint (no authorization attempted)', function() {
@@ -771,49 +559,53 @@ describe('common/util', function() {
 
     describe('needs authorization', function() {
       it('should pass correct arguments to authorizeRequest', function(done) {
-        var config = { a: 'b', c: 'd' };
         var reqOpts = { e: 'f', g: 'h' };
 
-        utilOverrides.authorizeRequest = function(cfg, rOpts) {
-          assert.deepEqual(cfg, config);
+        authClient.authorizeRequest = function(rOpts) {
           assert.deepEqual(rOpts, reqOpts);
           done();
         };
 
-        var makeAuthorizedRequest = util.makeAuthorizedRequestFactory(config);
+        var makeAuthorizedRequest = util.makeAuthorizedRequestFactory();
         makeAuthorizedRequest(reqOpts, {});
       });
 
       it('should return a stream if callback is missing', function() {
-        utilOverrides.authorizeRequest = function() {};
+        authClient.authorizeRequest = function() {};
 
         var makeAuthorizedRequest = util.makeAuthorizedRequestFactory({});
         assert(makeAuthorizedRequest({}) instanceof stream.Stream);
-      });
-
-      it('should provide stream to authorizeRequest', function(done) {
-        var stream;
-
-        utilOverrides.authorizeRequest = function(cfg) {
-          setImmediate(function() {
-            assert.strictEqual(cfg.stream, stream);
-            done();
-          });
-        };
-
-        var makeAuthorizedRequest = util.makeAuthorizedRequestFactory();
-        stream = makeAuthorizedRequest();
       });
 
       describe('authorization errors', function() {
         var error = new Error('Error.');
 
         beforeEach(function() {
-          utilOverrides.authorizeRequest = function(cfg, rOpts, callback) {
+          authClient.authorizeRequest = function(rOpts, callback) {
             setImmediate(function() {
               callback(error);
             });
           };
+        });
+
+        it('should not care about "Could not load" errors', function(done) {
+          var error = new Error('Could not load');
+
+          utilOverrides.decorateRequest = function() {};
+
+          authClient.authorizeRequest = function(rOpts, callback) {
+            setImmediate(function() {
+              callback(error);
+            });
+          };
+
+          var makeAuthorizedRequest = util.makeAuthorizedRequestFactory();
+          makeAuthorizedRequest({}, {
+            onAuthorized: function(err) {
+              assert.strictEqual(err, null);
+              done();
+            }
+          });
         });
 
         it('should invoke the callback with error', function(done) {
@@ -852,7 +644,7 @@ describe('common/util', function() {
         var reqOpts = { a: 'b', c: 'd' };
 
         beforeEach(function() {
-          utilOverrides.authorizeRequest = function(cfg, rOpts, callback) {
+          authClient.authorizeRequest = function(rOpts, callback) {
             callback(null, rOpts);
           };
         });
@@ -902,113 +694,6 @@ describe('common/util', function() {
 
           var makeAuthorizedRequest = util.makeAuthorizedRequestFactory({});
           stream = makeAuthorizedRequest(reqOpts);
-        });
-      });
-    });
-
-    describe('getCredentials', function() {
-      var fakeAuthClient = {
-        email: 'fake-email@example.com',
-        key: 'fake-key',
-
-        authorize: function(callback) { callback(); }
-      };
-      var config = { a: 'b', c: 'd' };
-
-      it('should return getCredentials method', function() {
-        utilOverrides.getAuthClient = function(config, callback) {
-          callback(null, fakeAuthClient);
-        };
-
-        var makeAuthorizedRequest =
-          util.makeAuthorizedRequestFactory(config, assert.ifError);
-
-        assert.equal(typeof makeAuthorizedRequest.getCredentials, 'function');
-      });
-
-      it('should pass config to getAuthClient', function(done) {
-        utilOverrides.getAuthClient = function(cfg) {
-          assert.deepEqual(cfg, config);
-          done();
-        };
-
-        var makeAuthorizedRequest =
-          util.makeAuthorizedRequestFactory(config, assert.ifError);
-
-        makeAuthorizedRequest.getCredentials();
-      });
-
-      it('should execute callback with error', function(done) {
-        var error = new Error('Error.');
-
-        utilOverrides.getAuthClient = function(config, callback) {
-          callback(error);
-        };
-
-        var makeAuthorizedRequest =
-          util.makeAuthorizedRequestFactory(config, assert.ifError);
-
-        makeAuthorizedRequest.getCredentials(function(err) {
-          assert.deepEqual(err, error);
-          done();
-        });
-      });
-
-      it('should authorize the connection', function(done) {
-        fakeAuthClient.authorize = function(callback) {
-          callback();
-        };
-
-        utilOverrides.getAuthClient = function(config, callback) {
-          callback(null, fakeAuthClient);
-        };
-
-        var makeAuthorizedRequest =
-          util.makeAuthorizedRequestFactory(config, assert.ifError);
-
-        makeAuthorizedRequest.getCredentials(done);
-      });
-
-
-      it('should execute callback with authorization error', function(done) {
-        var error = new Error('Error.');
-
-        fakeAuthClient.authorize = function(cb) {
-          cb(error);
-        };
-
-        utilOverrides.getAuthClient = function(config, callback) {
-          callback(null, fakeAuthClient);
-        };
-
-        var makeAuthorizedRequest =
-          util.makeAuthorizedRequestFactory(config, assert.ifError);
-
-        makeAuthorizedRequest.getCredentials(function(err) {
-          assert.deepEqual(err, error);
-          done();
-        });
-      });
-
-      it('should exec callback with client_email & client_key', function(done) {
-        fakeAuthClient.authorize = function(callback) {
-          callback();
-        };
-
-        utilOverrides.getAuthClient = function(config, callback) {
-          callback(null, fakeAuthClient);
-        };
-
-        var makeAuthorizedRequest =
-          util.makeAuthorizedRequestFactory(config, assert.ifError);
-
-        makeAuthorizedRequest.getCredentials(function(err, credentials) {
-          assert.deepEqual(credentials, {
-            client_email: fakeAuthClient.email,
-            private_key: fakeAuthClient.key
-          });
-
-          done();
         });
       });
     });
