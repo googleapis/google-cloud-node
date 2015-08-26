@@ -470,7 +470,7 @@ describe('storage', function() {
           .on('data', function(chunk) {
             data = Buffer.concat([data, chunk]);
           })
-          .on('complete', function() {
+          .on('end', function() {
             assert.equal(data.toString(), contents);
             done();
           });
@@ -509,7 +509,7 @@ describe('storage', function() {
             sizeStreamed += chunk.length;
           })
           .on('error', done)
-          .on('complete', function() {
+          .on('end', function() {
             assert.equal(sizeStreamed, expectedContentSize);
             file.delete(done);
           });
