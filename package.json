@@ -57,7 +57,7 @@
     "duplexify": "^3.2.0",
     "extend": "^2.0.0",
     "gce-images": "^0.1.0",
-    "google-auth-library": "^0.9.4",
+    "google-auto-auth": "^0.2.0",
     "is": "^3.0.1",
     "methmeth": "^1.0.0",
     "mime-types": "^2.0.8",
