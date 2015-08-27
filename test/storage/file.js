@@ -86,7 +86,6 @@ describe('File', function() {
     mockery.registerMock('sse4_crc32', crc32c);
 
     mockery.registerMock('configstore', FakeConfigStore);
-    // mockery.registerMock('duplexify', FakeDuplexify);
     mockery.registerMock('request', fakeRequest);
     mockery.registerMock('../common/util.js', fakeUtil);
     mockery.enable({
@@ -450,6 +449,37 @@ describe('File', function() {
 
       return FakeFailedRequest;
     }
+
+    it('should throw if both a range and validation is given', function() {
+      assert.throws(function() {
+        file.createReadStream({
+          validation: true,
+          start: 3,
+          end: 8
+        });
+      }, /Cannot use validation with file ranges/);
+
+      assert.throws(function() {
+        file.createReadStream({
+          validation: true,
+          start: 3
+        });
+      }, /Cannot use validation with file ranges/);
+
+      assert.throws(function() {
+        file.createReadStream({
+          validation: true,
+          end: 8
+        });
+      }, /Cannot use validation with file ranges/);
+
+      assert.doesNotThrow(function() {
+        file.createReadStream({
+          start: 3,
+          end: 8
+        });
+      });
+    });
 
     it('should send query.generation if File has one', function(done) {
       var versionedFile = new File(bucket, 'file.txt', { generation: 1 });
