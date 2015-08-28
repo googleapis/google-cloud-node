@@ -27,7 +27,6 @@ var request = require('request');
 var retryRequest = require('retry-request');
 var stream = require('stream');
 var streamForward = require('stream-forward');
-var through = require('through2');
 
 var googleAutoAuthOverride;
 function fakeGoogleAutoAuth() {
@@ -268,13 +267,25 @@ describe('common/util', function() {
   describe('makeWritableStream', function() {
     it('should use defaults', function(done) {
       var dup = duplexify();
+      var metadata = { a: 'b', c: 'd' };
+
       util.makeWritableStream(dup, {
+        metadata: metadata,
         makeAuthorizedRequest: function(request) {
           assert.equal(request.method, 'POST');
           assert.equal(request.qs.uploadType, 'multipart');
 
-          var contentType = request.headers['Content-Type'];
-          assert.equal(contentType.indexOf('multipart/related'), 0);
+          assert.strictEqual(Array.isArray(request.multipart), true);
+
+          var mp = request.multipart;
+
+          assert.strictEqual(mp[0]['Content-Type'], 'application/json');
+          assert.strictEqual(mp[0].body, JSON.stringify(metadata));
+
+          assert.strictEqual(mp[1]['Content-Type'], 'application/octet-stream');
+          // (is a writable stream:)
+          assert.strictEqual(typeof mp[1].body._writableState, 'object');
+
           done();
         }
       });
@@ -292,10 +303,17 @@ describe('common/util', function() {
       };
 
       util.makeWritableStream(dup, {
+        metadata: {
+          contentType: 'application/json'
+        },
         makeAuthorizedRequest: function(request) {
           assert.equal(request.method, req.method);
           assert.deepEqual(request.qs, req.qs);
           assert.equal(request.something, req.something);
+
+          var mp = request.multipart;
+          assert.strictEqual(mp[1]['Content-Type'], 'application/json');
+
           done();
         },
 
@@ -306,7 +324,7 @@ describe('common/util', function() {
     it('should emit an error', function(done) {
       var error = new Error('Error.');
 
-      var ws = through();
+      var ws = duplexify();
       ws.on('error', function(err) {
         assert.equal(err, error);
         done();
@@ -319,93 +337,15 @@ describe('common/util', function() {
       });
     });
 
-    it('should write request', function(done) {
-      var dup = duplexify();
-      var boundary;
-      var metadata = { a: 'b', c: 'd' };
-
-      requestOverride = function() {
-        var written = [];
-
-        var req = duplexify();
-
-        req.write = function(data) {
-          written.push(data);
-        };
-
-        req.end = function() {
-          var boundaryLine = '--' + boundary + '\n';
-
-          var startFirstBoundaryIdx = written.indexOf(boundaryLine);
-          var endFirstBoundaryIdx = written.lastIndexOf(boundaryLine);
-          var endBoundaryIdx = written.indexOf('\n--' + boundary + '--\n');
-
-          assert(startFirstBoundaryIdx > -1);
-          assert(endFirstBoundaryIdx > startFirstBoundaryIdx);
-          assert(endBoundaryIdx > -1);
-
-          assert(written.indexOf(JSON.stringify(metadata)) > -1);
-
-          done();
-        };
-
-        setImmediate(function() {
-          req.end();
-        });
-
-        return req;
-      };
-
-      util.makeWritableStream(dup, {
-        metadata: metadata,
-
-        makeAuthorizedRequest: function(request, opts) {
-          var contentType = request.headers['Content-Type'];
-          boundary = contentType.match(/boundary="([^"]*)/)[1];
-          opts.onAuthorized();
-        }
-      });
-    });
-
     it('should set the writable stream', function(done) {
       var dup = duplexify();
-      var ws = new stream.Writable();
-      ws.write = function() {};
 
-      requestOverride = function() {
-        return ws;
-      };
-
-      dup.setWritable = function(writable) {
-        assert.equal(writable, ws);
+      dup.setWritable = function() {
         done();
       };
 
       util.makeWritableStream(dup, {
-        makeAuthorizedRequest: function(request, opts) {
-          opts.onAuthorized();
-        }
-      });
-    });
-
-    it('should keep the pipe open on the stream', function(done) {
-      var dup = duplexify();
-      var ws = new stream.Writable();
-      ws.write = function() {};
-
-      requestOverride = function() {
-        return ws;
-      };
-
-      dup.pipe = function(writable) {
-        assert.equal(writable, ws);
-        done();
-      };
-
-      util.makeWritableStream(dup, {
-        makeAuthorizedRequest: function(request, opts) {
-          opts.onAuthorized();
-        }
+        makeAuthorizedRequest: function() {}
       });
     });
 
@@ -421,21 +361,19 @@ describe('common/util', function() {
         callback(error);
       };
 
-      requestOverride = function() {
-        return fakeStream;
+      requestOverride = function(reqOpts, callback) {
+        callback(error);
       };
-
-      var options = {
-        makeAuthorizedRequest: function(request, opts) {
-          opts.onAuthorized();
-        }
-      };
-
-      util.makeWritableStream(dup, options);
 
       dup.on('error', function(err) {
         assert.strictEqual(err, error);
         done();
+      });
+
+      util.makeWritableStream(dup, {
+        makeAuthorizedRequest: function(request, opts) {
+          opts.onAuthorized();
+        }
       });
 
       setImmediate(function() {
@@ -454,8 +392,8 @@ describe('common/util', function() {
         callback(null, fakeResponse);
       };
 
-      requestOverride = function() {
-        return fakeStream;
+      requestOverride = function(reqOpts, callback) {
+        callback();
       };
 
       var options = {
