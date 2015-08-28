@@ -1772,8 +1772,8 @@
     "tags": [
       {
         "type": "param",
-        "string": "{Duplexify} stream - Duplexify stream of data to pipe to the file.",
-        "name": "stream",
+        "string": "{Duplexify} dup - Duplexify stream of data to pipe to the file.",
+        "name": "dup",
         "description": "<ul>\n<li>Duplexify stream of data to pipe to the file.</li>\n</ul>\n",
         "types": [
           "Duplexify"
@@ -1817,7 +1817,7 @@
     "ignore": false,
     "line": 1586,
     "codeStart": 1596,
-    "code": "File.prototype.startSimpleUpload_ = function(stream, metadata) {\n  var that = this;\n\n  var reqOpts = {\n    qs: {\n      name: that.name\n    },\n    uri: format('{base}/{bucket}/o', {\n      base: STORAGE_UPLOAD_BASE_URL,\n      bucket: that.bucket.name\n    })\n  };\n\n  if (this.generation) {\n    reqOpts.qs.ifGenerationMatch = this.generation;\n  }\n\n  util.makeWritableStream(stream, {\n    makeAuthorizedRequest: that.bucket.storage.makeAuthorizedRequest_,\n    metadata: metadata,\n    request: reqOpts\n  }, function(data) {\n    that.metadata = data;\n\n    stream.emit('complete', data);\n  });\n};\n\nmodule.exports = File;",
+    "code": "File.prototype.startSimpleUpload_ = function(dup, metadata) {\n  var self = this;\n\n  var reqOpts = {\n    qs: {\n      name: self.name\n    },\n    uri: format('{base}/{bucket}/o', {\n      base: STORAGE_UPLOAD_BASE_URL,\n      bucket: self.bucket.name\n    })\n  };\n\n  if (this.generation) {\n    reqOpts.qs.ifGenerationMatch = this.generation;\n  }\n\n  util.makeWritableStream(dup, {\n    makeAuthorizedRequest: self.bucket.storage.makeAuthorizedRequest_,\n    metadata: metadata,\n    request: reqOpts\n  }, function(data) {\n    self.metadata = data;\n    dup.emit('complete', data);\n  });\n};\n\nmodule.exports = File;",
     "ctx": {
       "type": "method",
       "constructor": "File",
