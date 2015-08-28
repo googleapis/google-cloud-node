@@ -610,11 +610,12 @@ describe('storage', function() {
         fs.stat(files.big.path, function(err, metadata) {
           assert.ifError(err);
 
+          // Use a random name to force an empty ConfigStore cache.
+          var file = bucket.file('LargeFile' + Date.now());
           var fileSize = metadata.size;
-          var file = bucket.file('LargeFile');
 
           upload({ interrupt: true }, function(err) {
-            assert.ifError(err);
+            assert.strictEqual(err.message, 'Interrupted.');
 
             upload({ interrupt: false }, function(err) {
               assert.ifError(err);
@@ -625,6 +626,7 @@ describe('storage', function() {
           });
 
           function upload(opts, callback) {
+            var ws = file.createWriteStream();
             var sizeStreamed = 0;
 
             fs.createReadStream(files.big.path)
@@ -633,13 +635,15 @@ describe('storage', function() {
 
                 if (opts.interrupt && sizeStreamed >= fileSize / 2) {
                   // stop sending data half way through.
-                  next();
+                  this.push(chunk);
+                  this.destroy();
+                  ws.destroy(new Error('Interrupted.'));
                 } else {
                   this.push(chunk);
                   next();
                 }
               }))
-              .pipe(file.createWriteStream())
+              .pipe(ws)
               .on('error', callback)
               .on('finish', callback);
           }
