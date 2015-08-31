@@ -894,7 +894,7 @@ describe('storage', function() {
     it('should create a signed read url', function(done) {
       file.getSignedUrl({
         action: 'read',
-        expires: Math.round(Date.now() / 1000) + 5
+        expires: Date.now() + 5,
       }, function(err, signedReadUrl) {
         assert.ifError(err);
         request.get(signedReadUrl, function(err, resp, body) {
@@ -907,7 +907,7 @@ describe('storage', function() {
     it('should create a signed delete url', function(done) {
       file.getSignedUrl({
         action: 'delete',
-        expires: Math.round(Date.now() / 1000) + 283473274
+        expires: Date.now() + 5,
       }, function(err, signedDeleteUrl) {
         assert.ifError(err);
         request.del(signedDeleteUrl, function() {
@@ -916,6 +916,52 @@ describe('storage', function() {
             done();
           });
         });
+      });
+    });
+  });
+
+  describe('sign policy', function() {
+    var file;
+
+    before(function(done) {
+      file = bucket.file('LogoToSign.jpg');
+      fs.createReadStream(files.logo.path)
+        .pipe(file.createWriteStream())
+        .on('error', done)
+        .on('finish', done.bind(null, null));
+    });
+
+    after(function(done) {
+      file.delete(done);
+    });
+
+    it('should create a policy', function(done) {
+      var expires = new Date('10-25-2022');
+      var expectedExpiration = new Date(expires).toISOString();
+
+      var options = {
+        equals: ['$Content-Type', 'image/jpeg'],
+        expires: expires,
+        contentLengthRange: {
+          min: 0,
+          max: 1024
+        }
+      };
+
+      file.getSignedPolicy(options, function(err, policy) {
+        assert.ifError(err);
+
+        var policyJson;
+
+        try {
+          policyJson = JSON.parse(policy.string);
+        } catch (e) {
+          done(e);
+          return;
+        }
+
+        assert.strictEqual(policyJson.expiration, expectedExpiration);
+        done();
       });
     });
   });
