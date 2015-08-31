@@ -898,10 +898,11 @@ describe('storage', function() {
     it('should create a signed read url', function(done) {
       file.getSignedUrl({
         action: 'read',
-        expires: Date.now() + 5,
+        expires: Date.now() + 5000
       }, function(err, signedReadUrl) {
         assert.ifError(err);
         request.get(signedReadUrl, function(err, resp, body) {
+          assert.ifError(err);
           assert.equal(body, localFile);
           file.delete(done);
         });
@@ -911,10 +912,11 @@ describe('storage', function() {
     it('should create a signed delete url', function(done) {
       file.getSignedUrl({
         action: 'delete',
-        expires: Date.now() + 5,
+        expires: Date.now() + 5000
       }, function(err, signedDeleteUrl) {
         assert.ifError(err);
-        request.del(signedDeleteUrl, function() {
+        request.del(signedDeleteUrl, function(err) {
+          assert.ifError(err);
           file.getMetadata(function(err) {
             assert.equal(err.code, 404);
             done();
