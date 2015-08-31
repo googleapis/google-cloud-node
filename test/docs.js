@@ -58,6 +58,8 @@ describe('documentation', function() {
   });
 
   it('should run docs examples without errors', function() {
+    this.timeout(5000);
+
     FILES.forEach(function(filename) {
       var fileDocBlocks = [];
       var fileContents = fs.readFileSync(filename, {
