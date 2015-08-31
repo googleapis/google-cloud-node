@@ -57,19 +57,10 @@ fakeRequest.defaults = function(defaultConfiguration) {
   return fakeRequest;
 };
 
-var configStoreData = {};
-function FakeConfigStore() {
-  this.del = function(key) {
-    delete configStoreData[key];
-  };
-
-  this.get = function(key) {
-    return configStoreData[key];
-  };
-
-  this.set = function(key, value) {
-    configStoreData[key] = value;
-  };
+var resumableUploadOverride;
+var resumableUpload = require('gcs-resumable-upload');
+function fakeResumableUpload() {
+  return (resumableUploadOverride || resumableUpload).apply(null, arguments);
 }
 
 describe('File', function() {
@@ -85,8 +76,8 @@ describe('File', function() {
     var crc32c = require('hash-stream-validation/node_modules/sse4_crc32');
     mockery.registerMock('sse4_crc32', crc32c);
 
-    mockery.registerMock('configstore', FakeConfigStore);
     mockery.registerMock('request', fakeRequest);
+    mockery.registerMock('gcs-resumable-upload', fakeResumableUpload);
     mockery.registerMock('../common/util.js', fakeUtil);
     mockery.enable({
       useCleanCache: true,
@@ -121,10 +112,7 @@ describe('File', function() {
     handleRespOverride = null;
     makeWritableStreamOverride = null;
     requestOverride = null;
-  });
-
-  it('should have set correct defaults on Request', function() {
-    assert.deepEqual(REQUEST_DEFAULT_CONF, { pool: { maxSockets: Infinity } });
+    resumableUploadOverride = null;
   });
 
   describe('initialization', function() {
@@ -854,57 +842,21 @@ describe('File', function() {
 
     it('should emit errors', function(done) {
       var error = new Error('Error.');
+      var uploadStream = new stream.PassThrough();
 
-      file.bucket.storage.makeAuthorizedRequest_ = function(reqOpts, cb) {
-        cb(error);
+      file.startResumableUpload_ = function(dup) {
+        dup.setWritable(uploadStream);
+        uploadStream.emit('error', error);
       };
 
       var writable = file.createWriteStream();
 
       writable.on('error', function(err) {
-        assert.equal(err, error);
+        assert.strictEqual(err, error);
         done();
       });
 
       writable.write('data');
-    });
-
-    it('should re-emit errors', function(done) {
-      var error = new Error('Error.');
-      var requestCount = 0;
-      file.bucket.storage.makeAuthorizedRequest_ = function(reqOpts, cb) {
-        requestCount++;
-
-        // respond to creation POST.
-        if (requestCount === 1) {
-          cb(null, null, { headers: { location: 'http://resume' }});
-          return;
-        }
-
-        // create an authorized request for the first PUT.
-        if (requestCount === 2) {
-          cb.onAuthorized(null, { headers: {} });
-        }
-      };
-
-      // respond to first upload PUT request.
-      requestOverride = function() {
-        var stream = through();
-        setImmediate(function() {
-          stream.emit('error', error);
-        });
-        return stream;
-      };
-
-      var stream = duplexify();
-
-      stream
-        .on('error', function(err) {
-          assert.equal(err, error);
-          done();
-        });
-
-      file.startResumableUpload_(stream);
     });
 
     it('should start a simple upload if specified', function(done) {
@@ -986,7 +938,10 @@ describe('File', function() {
         file.startResumableUpload_ = function(stream) {
           setImmediate(function() {
             assert.strictEqual(writable._corked, 1);
-            stream.emit('complete', fakeMetadata.crc32c);
+
+            file.metadata = fakeMetadata.crc32c;
+            stream.emit('complete');
+
             assert.strictEqual(writable._corked, 0);
             done();
           });
@@ -1002,7 +957,8 @@ describe('File', function() {
 
         file.startResumableUpload_ = function(stream) {
           setImmediate(function() {
-            stream.emit('complete', fakeMetadata.crc32c);
+            file.metadata = fakeMetadata.crc32c;
+            stream.emit('complete');
           });
         };
 
@@ -1018,7 +974,8 @@ describe('File', function() {
 
         file.startResumableUpload_ = function(stream) {
           setImmediate(function() {
-            stream.emit('complete', fakeMetadata.crc32c);
+            file.metadata = fakeMetadata.crc32c;
+            stream.emit('complete');
           });
         };
 
@@ -1040,7 +997,8 @@ describe('File', function() {
 
         file.startResumableUpload_ = function(stream) {
           setImmediate(function() {
-            stream.emit('complete', fakeMetadata.md5);
+            file.metadata = fakeMetadata.md5;
+            stream.emit('complete');
           });
         };
 
@@ -1057,7 +1015,8 @@ describe('File', function() {
 
         file.startResumableUpload_ = function(stream) {
           setImmediate(function() {
-            stream.emit('complete', fakeMetadata.md5);
+            file.metadata = fakeMetadata.md5;
+            stream.emit('complete');
           });
         };
 
@@ -1079,7 +1038,8 @@ describe('File', function() {
 
         file.startResumableUpload_ = function(stream) {
           setImmediate(function() {
-            stream.emit('complete', { md5Hash: 'bad-hash' });
+            file.metadata = { md5Hash: 'bad-hash' };
+            stream.emit('complete');
           });
         };
 
@@ -1101,7 +1061,8 @@ describe('File', function() {
 
         file.startResumableUpload_ = function(stream) {
           setImmediate(function() {
-            stream.emit('complete', { md5Hash: 'bad-hash' });
+            file.metadata = { md5Hash: 'bad-hash' };
+            stream.emit('complete');
           });
         };
 
@@ -1118,7 +1079,8 @@ describe('File', function() {
 
         file.startResumableUpload_ = function(stream) {
           setImmediate(function() {
-            stream.emit('complete', { md5Hash: 'bad-hash' });
+            file.metadata = { md5Hash: 'bad-hash' };
+            stream.emit('complete');
           });
         };
 
@@ -1826,161 +1788,82 @@ describe('File', function() {
   });
 
   describe('startResumableUpload_', function() {
-    var RESUMABLE_URI = 'http://resume';
-
-    beforeEach(function() {
-      configStoreData = {};
-    });
-
     describe('starting', function() {
       it('should start a resumable upload', function(done) {
-        file.bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
-          var uri = 'https://www.googleapis.com/upload/storage/v1/b/' +
-            file.bucket.name + '/o';
-
-          assert.equal(reqOpts.method, 'POST');
-          assert.equal(reqOpts.uri, uri);
-          assert.equal(reqOpts.qs.name, file.name);
-          assert.equal(reqOpts.qs.uploadType, 'resumable');
-
-          assert.deepEqual(reqOpts.headers, {
-            'X-Upload-Content-Type': 'custom'
-          });
-          assert.deepEqual(reqOpts.json, { contentType: 'custom' });
-
-          done();
+        var metadata = {
+          contentType: 'application/json'
         };
 
-        file.startResumableUpload_(duplexify(), { contentType: 'custom' });
+        file.generation = 3;
+
+        resumableUploadOverride = function(opts) {
+          var bucket = file.bucket;
+          var storage = bucket.storage;
+          var authClient = storage.makeAuthorizedRequest_.authClient;
+
+          assert.strictEqual(opts.authClient, authClient);
+          assert.strictEqual(opts.bucket, bucket.name);
+          assert.strictEqual(opts.file, file.name);
+          assert.strictEqual(opts.generation, file.generation);
+          assert.strictEqual(opts.metadata, metadata);
+
+          setImmediate(done);
+          return through();
+        };
+
+        file.startResumableUpload_(duplexify(), metadata);
       });
 
-      it('should send query.ifGenerationMatch if File has one', function(done) {
-        var versionedFile = new File(bucket, 'new-file.txt', { generation: 1 });
+      it('should set the metadata from the response', function(done) {
+        var metadata = {};
+        var uploadStream = through();
 
-        versionedFile.bucket.storage.makeAuthorizedRequest_ = function(rOpts) {
-          assert.equal(rOpts.qs.ifGenerationMatch, 1);
-          done();
-        };
-
-        versionedFile.startResumableUpload_(duplexify(), {});
-      });
-
-      it('should upload file', function(done) {
-        var requestCount = 0;
-        file.bucket.storage.makeAuthorizedRequest_ = function(reqOpts, cb) {
-          requestCount++;
-
-          // respond to creation POST.
-          if (requestCount === 1) {
-            cb(null, null, { headers: { location: RESUMABLE_URI }});
-            assert.deepEqual(configStoreData[file.name].uri, RESUMABLE_URI);
-            return;
-          }
-
-          // create an authorized request for the first PUT.
-          if (requestCount === 2) {
-            assert.equal(reqOpts.method, 'PUT');
-            assert.equal(reqOpts.uri, RESUMABLE_URI);
-            cb.onAuthorized(null, { headers: {} });
-          }
-        };
-
-        // respond to first upload PUT request.
-        var metadata = { a: 'b', c: 'd' };
-        requestOverride = function(reqOpts) {
-          assert.equal(reqOpts.headers['Content-Range'], 'bytes 0-*/*');
-
-          var stream = through();
+        resumableUploadOverride = function() {
           setImmediate(function() {
-            stream.emit('complete', { body: metadata });
-          });
-          return stream;
-        };
-
-        var stream = duplexify();
-
-        stream
-          .on('error', done)
-          .on('complete', function(data) {
-            assert.deepEqual(data, metadata);
+            uploadStream.emit('response', null, metadata);
 
             setImmediate(function() {
-              // cache deleted.
-              assert(!configStoreData[file.name]);
+              assert.strictEqual(file.metadata, metadata);
               done();
             });
           });
-
-        file.startResumableUpload_(stream);
-      });
-    });
-
-    describe('resuming', function() {
-      beforeEach(function() {
-        configStoreData[file.name] = {
-          uri: RESUMABLE_URI
-        };
-      });
-
-      it('should resume uploading from last sent byte', function(done) {
-        var lastByte = 135;
-
-        var requestCount = 0;
-        file.bucket.storage.makeAuthorizedRequest_ = function(reqOpts, cb) {
-          requestCount++;
-
-          if (requestCount === 1) {
-            assert.equal(reqOpts.method, 'PUT');
-            assert.equal(reqOpts.uri, RESUMABLE_URI);
-            assert.deepEqual(reqOpts.headers, {
-              'Content-Length': 0,
-              'Content-Range': 'bytes */*'
-            });
-
-            cb({
-              code: 308, // resumable upload status code
-              response: { headers: { range: '0-' + lastByte } }
-            });
-
-            return;
-          }
-
-          if (requestCount === 2) {
-            assert.equal(reqOpts.method, 'PUT');
-            assert.equal(reqOpts.uri, RESUMABLE_URI);
-
-            cb.onAuthorized(null, { headers: {} });
-          }
+          return uploadStream;
         };
 
-        var metadata = { a: 'b', c: 'd' };
-        requestOverride = function(reqOpts) {
-          var startByte = lastByte + 1;
-          assert.equal(
-            reqOpts.headers['Content-Range'], 'bytes ' + startByte + '-*/*');
 
-          var stream = through();
+        file.startResumableUpload_(duplexify());
+      });
+
+      it('should emit complete after the stream finishes', function(done) {
+        var dup = duplexify();
+
+        dup.on('complete', done);
+
+        resumableUploadOverride = function() {
+          var uploadStream = through();
           setImmediate(function() {
-            stream.emit('complete', { body: metadata });
+            uploadStream.emit('finish');
           });
-          return stream;
+          return uploadStream;
         };
 
-        var stream = duplexify();
+        file.startResumableUpload_(dup);
+      });
 
-        stream
-          .on('error', done)
-          .on('complete', function(data) {
-            assert.deepEqual(data, metadata);
+      it('should set the writable stream', function(done) {
+        var dup = duplexify();
+        var uploadStream = through();
 
-            setImmediate(function() {
-              // cache deleted.
-              assert(!configStoreData[file.name]);
-              done();
-            });
-          });
+        dup.setWritable = function(stream) {
+          assert.strictEqual(stream, uploadStream);
+          done();
+        };
 
-        file.startResumableUpload_(stream);
+        resumableUploadOverride = function() {
+          return uploadStream;
+        };
+
+        file.startResumableUpload_(dup);
       });
     });
   });
@@ -2034,9 +1917,8 @@ describe('File', function() {
 
       ws
         .on('error', done)
-        .on('complete', function(meta) {
-          assert.deepEqual(meta, metadata);
-          assert.deepEqual(file.metadata, metadata);
+        .on('complete', function() {
+          assert.strictEqual(file.metadata, metadata);
           done();
         });
 

@@ -451,6 +451,17 @@ describe('common/util', function() {
       makeAuthorizedRequest.getCredentials();
     });
 
+    it('should return the authClient', function() {
+      var authClient = { getCredentials: function() {} };
+
+      googleAutoAuthOverride = function() {
+        return authClient;
+      };
+
+      var makeAuthorizedRequest = util.makeAuthorizedRequestFactory();
+      assert.strictEqual(makeAuthorizedRequest.authClient, authClient);
+    });
+
     describe('customEndpoint (no authorization attempted)', function() {
       var makeAuthorizedRequest;
 
