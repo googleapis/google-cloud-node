@@ -1371,7 +1371,7 @@ describe('File', function() {
 
     it('should create a signed policy', function(done) {
       file.getSignedPolicy({
-        expiration: Math.round(Date.now() / 1000) + 5
+        expires: Date.now() + 5
       }, function(err, signedPolicy) {
         assert.ifError(err);
         assert.equal(typeof signedPolicy.string, 'string');
@@ -1383,7 +1383,7 @@ describe('File', function() {
 
     it('should add key equality condition', function(done) {
       file.getSignedPolicy({
-        expiration: Math.round(Date.now() / 1000) + 5
+        expires: Date.now() + 5
       }, function(err, signedPolicy) {
         var conditionString = '[\"eq\",\"$key\",\"' + file.name + '\"]';
         assert.ifError(err);
@@ -1394,7 +1394,7 @@ describe('File', function() {
 
     it('should add ACL condtion', function(done) {
       file.getSignedPolicy({
-        expiration: Math.round(Date.now() / 1000) + 5,
+        expires: Date.now() + 5,
         acl: '<acl>'
       }, function(err, signedPolicy) {
         var conditionString = '{\"acl\":\"<acl>\"}';
@@ -1404,24 +1404,52 @@ describe('File', function() {
       });
     });
 
-    describe('expiration', function() {
-      it('should ISO encode expiration', function(done) {
-        var expiration = Math.round(Date.now() / 1000) + 5;
-        var expireDate = new Date(expiration);
+    describe('expires', function() {
+      it('should accept Date objects', function(done) {
+        var expires = new Date(Date.now() + 1000 * 60);
+
         file.getSignedPolicy({
-          expiration: expiration
-        }, function(err, signedPolicy) {
+          expires: expires
+        }, function(err, policy) {
           assert.ifError(err);
-          assert(signedPolicy.string.indexOf(expireDate.toISOString()) > -1);
+          var expires_ = JSON.parse(policy.string).expiration;
+          assert.strictEqual(expires_, expires.toISOString());
+          done();
+        });
+      });
+
+      it('should accept numbers', function(done) {
+        var expires = Date.now() + 1000 * 60;
+
+        file.getSignedPolicy({
+          expires: expires
+        }, function(err, policy) {
+          assert.ifError(err);
+          var expires_ = JSON.parse(policy.string).expiration;
+          assert.strictEqual(expires_, new Date(expires).toISOString());
+          done();
+        });
+      });
+
+      it('should accept strings', function(done) {
+        var expires = '12-12-2099';
+
+        file.getSignedPolicy({
+          expires: expires
+        }, function(err, policy) {
+          assert.ifError(err);
+          var expires_ = JSON.parse(policy.string).expiration;
+          assert.strictEqual(expires_, new Date(expires).toISOString());
           done();
         });
       });
 
       it('should throw if a date from the past is given', function() {
-        var expirationTimestamp = Math.floor(Date.now() / 1000) - 1;
+        var expires = Date.now() - 5;
+
         assert.throws(function() {
           file.getSignedPolicy({
-            expiration: expirationTimestamp
+            expires: expires
           }, function() {});
         }, /cannot be in the past/);
       });
@@ -1429,9 +1457,8 @@ describe('File', function() {
 
     describe('equality condition', function() {
       it('should add equality conditions (array of arrays)', function(done) {
-        var expiration = Math.round(Date.now() / 1000) + 5;
         file.getSignedPolicy({
-          expiration: expiration,
+          expires: Date.now() + 5,
           equals: [['$<field>', '<value>']]
         }, function(err, signedPolicy) {
           var conditionString = '[\"eq\",\"$<field>\",\"<value>\"]';
@@ -1442,9 +1469,8 @@ describe('File', function() {
       });
 
       it('should add equality condition (array)', function(done) {
-        var expiration = Math.round(Date.now() / 1000) + 5;
         file.getSignedPolicy({
-          expiration: expiration,
+          expires: Date.now() + 5,
           equals: ['$<field>', '<value>']
         }, function(err, signedPolicy) {
           var conditionString = '[\"eq\",\"$<field>\",\"<value>\"]';
@@ -1455,20 +1481,18 @@ describe('File', function() {
       });
 
       it('should throw if equal condition is not an array', function() {
-        var expiration = Math.round(Date.now() / 1000) + 5;
         assert.throws(function() {
           file.getSignedPolicy({
-            expiration: expiration,
+            expires: Date.now() + 5,
             equals: [{}]
           }, function() {});
         }, /Equals condition must be an array/);
       });
 
       it('should throw if equal condition length is not 2', function() {
-        var expiration = Math.round(Date.now() / 1000) + 5;
         assert.throws(function() {
           file.getSignedPolicy({
-            expiration: expiration,
+            expires: Date.now() + 5,
             equals: [['1', '2', '3']]
           }, function() {});
         }, /Equals condition must be an array of 2 elements/);
@@ -1477,9 +1501,8 @@ describe('File', function() {
 
     describe('prefix conditions', function() {
       it('should add prefix conditions (array of arrays)', function(done) {
-        var expiration = Math.round(Date.now() / 1000) + 5;
         file.getSignedPolicy({
-          expiration: expiration,
+          expires: Date.now() + 5,
           startsWith: [['$<field>', '<value>']]
         }, function(err, signedPolicy) {
           var conditionString = '[\"starts-with\",\"$<field>\",\"<value>\"]';
@@ -1490,9 +1513,8 @@ describe('File', function() {
       });
 
       it('should add prefix condition (array)', function(done) {
-        var expiration = Math.round(Date.now() / 1000) + 5;
         file.getSignedPolicy({
-          expiration: expiration,
+          expires: Date.now() + 5,
           startsWith: ['$<field>', '<value>']
         }, function(err, signedPolicy) {
           var conditionString = '[\"starts-with\",\"$<field>\",\"<value>\"]';
@@ -1503,20 +1525,18 @@ describe('File', function() {
       });
 
       it('should throw if prexif condition is not an array', function() {
-        var expiration = Math.round(Date.now() / 1000) + 5;
         assert.throws(function() {
           file.getSignedPolicy({
-            expiration: expiration,
+            expires: Date.now() + 5,
             startsWith: [{}]
           }, function() {});
         }, /StartsWith condition must be an array/);
       });
 
       it('should throw if prefix condition length is not 2', function() {
-        var expiration = Math.round(Date.now() / 1000) + 5;
         assert.throws(function() {
           file.getSignedPolicy({
-            expiration: expiration,
+            expires: Date.now() + 5,
             startsWith: [['1', '2', '3']]
           }, function() {});
         }, /StartsWith condition must be an array of 2 elements/);
@@ -1525,9 +1545,8 @@ describe('File', function() {
 
     describe('content length', function() {
       it('should add content length condition', function(done) {
-        var expiration = Math.round(Date.now() / 1000) + 5;
         file.getSignedPolicy({
-          expiration: expiration,
+          expires: Date.now() + 5,
           contentLengthRange: {min: 0, max: 1}
         }, function(err, signedPolicy) {
           var conditionString = '[\"content-length-range\",0,1]';
@@ -1538,20 +1557,18 @@ describe('File', function() {
       });
 
       it('should throw if content length has no min', function() {
-        var expiration = Math.round(Date.now() / 1000) + 5;
         assert.throws(function() {
           file.getSignedPolicy({
-            expiration: expiration,
+            expires: Date.now() + 5,
             contentLengthRange: [{max: 1}]
           }, function() {});
         }, /ContentLengthRange must have numeric min & max fields/);
       });
 
       it('should throw if content length has no max', function() {
-        var expiration = Math.round(Date.now() / 1000) + 5;
         assert.throws(function() {
           file.getSignedPolicy({
-            expiration: expiration,
+            expires: Date.now() + 5,
             contentLengthRange: [{min: 0}]
           }, function() {});
         }, /ContentLengthRange must have numeric min & max fields/);
@@ -1572,7 +1589,7 @@ describe('File', function() {
     it('should create a signed url', function(done) {
       file.getSignedUrl({
         action: 'read',
-        expires: Math.round(Date.now() / 1000) + 5
+        expires: Date.now() + 5,
       }, function(err, signedUrl) {
         assert.ifError(err);
         assert.equal(typeof signedUrl, 'string');
@@ -1583,7 +1600,7 @@ describe('File', function() {
     it('should URI encode file names', function(done) {
       directoryFile.getSignedUrl({
         action: 'read',
-        expires: Math.round(Date.now() / 1000) + 5
+        expires: Date.now() + 5,
       }, function(err, signedUrl) {
         assert(signedUrl.indexOf(encodeURIComponent(directoryFile.name)) > -1);
         done();
@@ -1594,7 +1611,7 @@ describe('File', function() {
       var type = 'application/json';
       directoryFile.getSignedUrl({
         action: 'read',
-        expires: Math.round(Date.now() / 1000) + 5,
+        expires: Date.now() + 5,
         responseType: type
       }, function(err, signedUrl) {
         assert(signedUrl.indexOf(encodeURIComponent(type)) > -1);
@@ -1607,7 +1624,7 @@ describe('File', function() {
         var disposition = 'attachment; filename="fname.ext"';
         directoryFile.getSignedUrl({
           action: 'read',
-          expires: Math.round(Date.now() / 1000) + 5,
+          expires: Date.now() + 5,
           promptSaveAs: 'fname.ext'
         }, function(err, signedUrl) {
           assert(signedUrl.indexOf(disposition) > -1);
@@ -1621,7 +1638,7 @@ describe('File', function() {
         var disposition = 'attachment; filename="fname.ext"';
         directoryFile.getSignedUrl({
           action: 'read',
-          expires: Math.round(Date.now() / 1000) + 5,
+          expires: Date.now() + 5,
           responseDisposition: disposition
         }, function(err, signedUrl) {
           assert(signedUrl.indexOf(encodeURIComponent(disposition)) > -1);
@@ -1634,7 +1651,7 @@ describe('File', function() {
         var saveAs = 'fname2.ext';
         directoryFile.getSignedUrl({
           action: 'read',
-          expires: Math.round(Date.now() / 1000) + 5,
+          expires: Date.now() + 5,
           promptSaveAs: saveAs,
           responseDisposition: disposition
         }, function(err, signedUrl) {
@@ -1646,27 +1663,58 @@ describe('File', function() {
     });
 
     describe('expires', function() {
-      var nowInSeconds = Math.floor(Date.now() / 1000);
+      it('should accept Date objects', function(done) {
+        var expires = new Date(Date.now() + 1000 * 60);
+        var expectedExpires = Math.round(expires / 1000);
 
-      it('should use the provided expiration date', function(done) {
-        var expirationTimestamp = nowInSeconds + 60;
         file.getSignedUrl({
           action: 'read',
-          expires: expirationTimestamp
+          expires: expires
         }, function(err, signedUrl) {
           assert.ifError(err);
-          var expires = url.parse(signedUrl, true).query.Expires;
-          assert.equal(expires, expirationTimestamp);
+          var expires_ = url.parse(signedUrl, true).query.Expires;
+          assert.equal(expires_, expectedExpires);
+          done();
+        });
+      });
+
+      it('should accept numbers', function(done) {
+        var expires = Date.now() + 1000 * 60;
+        var expectedExpires = Math.round(new Date(expires) / 1000);
+
+        file.getSignedUrl({
+          action: 'read',
+          expires: expires
+        }, function(err, signedUrl) {
+          assert.ifError(err);
+          var expires_ = url.parse(signedUrl, true).query.Expires;
+          assert.equal(expires_, expectedExpires);
+          done();
+        });
+      });
+
+      it('should accept strings', function(done) {
+        var expires = '12-12-2099';
+        var expectedExpires = Math.round(new Date(expires) / 1000);
+
+        file.getSignedUrl({
+          action: 'read',
+          expires: expires
+        }, function(err, signedUrl) {
+          assert.ifError(err);
+          var expires_ = url.parse(signedUrl, true).query.Expires;
+          assert.equal(expires_, expectedExpires);
           done();
         });
       });
 
       it('should throw if a date from the past is given', function() {
-        var expirationTimestamp = nowInSeconds - 1;
+        var expires = Date.now() - 5;
+
         assert.throws(function() {
           file.getSignedUrl({
             action: 'read',
-            expires: expirationTimestamp
+            expires: expires
           }, function() {});
         }, /cannot be in the past/);
       });
