@@ -1034,20 +1034,6 @@
       },
       {
         "type": "param",
-        "string": "{object} options.expiration - Timestamp (seconds since epoch) when\n    this policy will expire.",
-        "name": "options.expiration",
-        "description": "<ul>\n<li>Timestamp (seconds since epoch) when     this policy will expire.</li>\n</ul>\n",
-        "types": [
-          "object"
-        ],
-        "typesDescription": "<code>object</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
         "string": "{array|array[]=} options.equals - Array of request parameters and\n    their expected value (e.g. [['$<field>', '<value>']]). Values are\n    translated into equality constraints in the conditions field of the\n    policy document (e.g. ['eq', '$<field>', '<value>']). If only one\n    equality condition is to be specified, options.equals can be a one-\n    dimensional array (e.g. ['$<field>', '<value>']).",
         "name": "options.equals",
         "description": "<ul>\n<li>Array of request parameters and     their expected value (e.g. [[&#39;$<field>&#39;, &#39;<value>&#39;]]). Values are<br />  translated into equality constraints in the conditions field of the<br />  policy document (e.g. [&#39;eq&#39;, &#39;$<field>&#39;, &#39;<value>&#39;]). If only one<br />  equality condition is to be specified, options.equals can be a one-<br />  dimensional array (e.g. [&#39;$<field>&#39;, &#39;<value>&#39;]).</li>\n</ul>\n",
@@ -1057,6 +1043,18 @@
         ],
         "typesDescription": "<code>array</code>|<code>Array</code>.&lt;<code>array</code>&gt;|<code>undefined</code>",
         "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{*} options.expires - A timestamp when this policy will expire. Any\n    value given is passed to `new Date()`.",
+        "name": "options.expires",
+        "description": "<ul>\n<li>A timestamp when this policy will expire. Any     value given is passed to <code>new Date()</code>.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
         "nullable": false,
         "nonNullable": false,
         "variable": false
@@ -1205,8 +1203,8 @@
       },
       {
         "type": "example",
-        "string": "file.getSignedPolicy({\n  equals: ['$Content-Type', 'image/jpeg'],\n  contentLengthRange: { min: 0, max: 1024 },\n  expiration: Math.round(Date.now() / 1000) + (60 * 60 * 24 * 14) // 2 weeks.\n}, function(err, policy) {\n  // policy.string: the policy document in plain text.\n  // policy.base64: the policy document in base64.\n  // policy.signature: the policy signature in base64.\n});",
-        "html": "<p>file.getSignedPolicy({<br />  equals: [&#39;$Content-Type&#39;, &#39;image/jpeg&#39;],<br />  contentLengthRange: { min: 0, max: 1024 },<br />  expiration: Math.round(Date.now() / 1000) + (60 <em> 60 </em> 24 * 14) // 2 weeks.<br />}, function(err, policy) {<br />  // policy.string: the policy document in plain text.<br />  // policy.base64: the policy document in base64.<br />  // policy.signature: the policy signature in base64.<br />});</p>"
+        "string": "var options = {\n  equals: ['$Content-Type', 'image/jpeg'],\n  expires: '10-25-2022',\n  contentLengthRange: {\n    min: 0,\n    max: 1024\n  }\n};\n\nfile.getSignedPolicy(options, function(err, policy) {\n  // policy.string: the policy document in plain text.\n  // policy.base64: the policy document in base64.\n  // policy.signature: the policy signature in base64.\n});",
+        "html": "<p>var options = {<br />  equals: [&#39;$Content-Type&#39;, &#39;image/jpeg&#39;],<br />  expires: &#39;10-25-2022&#39;,<br />  contentLengthRange: {<br />    min: 0,<br />    max: 1024<br />  }<br />};</p><p>file.getSignedPolicy(options, function(err, policy) {<br />  // policy.string: the policy document in plain text.<br />  // policy.base64: the policy document in base64.<br />  // policy.signature: the policy signature in base64.<br />});</p>"
       }
     ],
     "description": {
@@ -1220,8 +1218,8 @@
     "isEvent": false,
     "ignore": false,
     "line": 887,
-    "codeStart": 940,
-    "code": "File.prototype.getSignedPolicy = function(options, callback) {\n  if (options.expiration < Math.floor(Date.now() / 1000)) {\n    throw new Error('An expiration date cannot be in the past.');\n  }\n\n  var expirationString = new Date(options.expiration).toISOString();\n  var conditions = [\n    ['eq', '$key', this.name],\n    {\n      bucket: this.bucket.name\n    }\n  ];\n\n  if (is.array(options.equals)) {\n    if (!is.array(options.equals[0])) {\n      options.equals = [options.equals];\n    }\n    options.equals.forEach(function(condition) {\n      if (!is.array(condition) || condition.length !== 2) {\n        throw new Error('Equals condition must be an array of 2 elements.');\n      }\n      conditions.push(['eq', condition[0], condition[1]]);\n    });\n  }\n\n  if (is.array(options.startsWith)) {\n    if (!is.array(options.startsWith[0])) {\n      options.startsWith = [options.startsWith];\n    }\n    options.startsWith.forEach(function(condition) {\n      if (!is.array(condition) || condition.length !== 2) {\n        throw new Error('StartsWith condition must be an array of 2 elements.');\n      }\n      conditions.push(['starts-with', condition[0], condition[1]]);\n    });\n  }\n\n  if (options.acl) {\n    conditions.push({\n      acl: options.acl\n    });\n  }\n\n  if (options.successRedirect) {\n    conditions.push({\n      success_action_redirect: options.successRedirect\n    });\n  }\n\n  if (options.successStatus) {\n    conditions.push({\n      success_action_status: options.successStatus\n    });\n  }\n\n  if (options.contentLengthRange) {\n    var min = options.contentLengthRange.min;\n    var max = options.contentLengthRange.max;\n    if (!is.number(min) || !is.number(max)) {\n      throw new Error('ContentLengthRange must have numeric min & max fields.');\n    }\n    conditions.push(['content-length-range', min, max]);\n  }\n\n  var policy = {\n    expiration: expirationString,\n    conditions: conditions\n  };\n\n  var makeAuthorizedRequest_ = this.bucket.storage.makeAuthorizedRequest_;\n\n  makeAuthorizedRequest_.getCredentials(function(err, credentials) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var sign = crypto.createSign('RSA-SHA256');\n    var policyString = JSON.stringify(policy);\n    var policyBase64 = new Buffer(policyString).toString('base64');\n\n    sign.update(policyBase64);\n\n    var signature = sign.sign(credentials.private_key, 'base64');\n\n    callback(null, {\n      string: policyString,\n      base64: policyBase64,\n      signature: signature\n    });\n  });\n};",
+    "codeStart": 945,
+    "code": "File.prototype.getSignedPolicy = function(options, callback) {\n  var expires = new Date(options.expires);\n\n  if (expires < Date.now()) {\n    throw new Error('An expiration date cannot be in the past.');\n  }\n\n  var conditions = [\n    ['eq', '$key', this.name],\n    {\n      bucket: this.bucket.name\n    }\n  ];\n\n  if (is.array(options.equals)) {\n    if (!is.array(options.equals[0])) {\n      options.equals = [options.equals];\n    }\n    options.equals.forEach(function(condition) {\n      if (!is.array(condition) || condition.length !== 2) {\n        throw new Error('Equals condition must be an array of 2 elements.');\n      }\n      conditions.push(['eq', condition[0], condition[1]]);\n    });\n  }\n\n  if (is.array(options.startsWith)) {\n    if (!is.array(options.startsWith[0])) {\n      options.startsWith = [options.startsWith];\n    }\n    options.startsWith.forEach(function(condition) {\n      if (!is.array(condition) || condition.length !== 2) {\n        throw new Error('StartsWith condition must be an array of 2 elements.');\n      }\n      conditions.push(['starts-with', condition[0], condition[1]]);\n    });\n  }\n\n  if (options.acl) {\n    conditions.push({\n      acl: options.acl\n    });\n  }\n\n  if (options.successRedirect) {\n    conditions.push({\n      success_action_redirect: options.successRedirect\n    });\n  }\n\n  if (options.successStatus) {\n    conditions.push({\n      success_action_status: options.successStatus\n    });\n  }\n\n  if (options.contentLengthRange) {\n    var min = options.contentLengthRange.min;\n    var max = options.contentLengthRange.max;\n    if (!is.number(min) || !is.number(max)) {\n      throw new Error('ContentLengthRange must have numeric min & max fields.');\n    }\n    conditions.push(['content-length-range', min, max]);\n  }\n\n  var policy = {\n    expiration: expires.toISOString(),\n    conditions: conditions\n  };\n\n  var makeAuthorizedRequest_ = this.bucket.storage.makeAuthorizedRequest_;\n\n  makeAuthorizedRequest_.getCredentials(function(err, credentials) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var sign = crypto.createSign('RSA-SHA256');\n    var policyString = JSON.stringify(policy);\n    var policyBase64 = new Buffer(policyString).toString('base64');\n\n    sign.update(policyBase64);\n\n    var signature = sign.sign(credentials.private_key, 'base64');\n\n    callback(null, {\n      string: policyString,\n      base64: policyBase64,\n      signature: signature\n    });\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "File",
@@ -1303,13 +1301,11 @@
       },
       {
         "type": "param",
-        "string": "{number} options.expires - Timestamp (seconds since epoch) when this\n    link will expire.",
+        "string": "{*} options.expires - A timestamp when this link will expire. Any\n    value given is passed to `new Date()`.",
         "name": "options.expires",
-        "description": "<ul>\n<li>Timestamp (seconds since epoch) when this     link will expire.</li>\n</ul>\n",
-        "types": [
-          "number"
-        ],
-        "typesDescription": "<code>number</code>",
+        "description": "<ul>\n<li>A timestamp when this link will expire. Any     value given is passed to <code>new Date()</code>.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -1415,8 +1411,8 @@
       },
       {
         "type": "example",
-        "string": "var TWO_WEEKS_MS = Math.round(Date.now() / 1000) + (60 * 60 * 24 * 14);\n\n//-\n// Generate a URL that allows temporary access to download your file.\n//-\nvar request = require('request');\n\nfile.getSignedUrl({\n  action: 'read',\n  expires: TWO_WEEKS_MS\n}, function(err, url) {\n  if (err) {\n    console.error(err);\n    return;\n  }\n\n  // The file is now available to read from this URL.\n  request(url, function(err, resp) {\n    // resp.statusCode = 200\n  });\n});\n\n//-\n// Generate a URL to allow write permissions. This means anyone with this URL\n// can send a POST request with new data that will overwrite the file.\n//-\nfile.getSignedUrl({\n  action: 'write',\n  expires: TWO_WEEKS_MS\n}, function(err, url) {\n  if (err) {\n    console.error(err);\n    return;\n  }\n\n  // The file is now available to be written to.\n  var writeStream = request.post(url);\n  writeStream.end('New data');\n\n  writeStream.on('complete', function(resp) {\n    // Confirm the new content was saved.\n    file.download(function(err, fileContents) {\n      console.log('Contents:', fileContents.toString());\n      // Contents: New data\n    });\n  });\n});",
-        "html": "<p>var TWO_WEEKS_MS = Math.round(Date.now() / 1000) + (60 <em> 60 </em> 24 * 14);</p><p>//-<br />// Generate a URL that allows temporary access to download your file.<br />//-<br />var request = require(&#39;request&#39;);</p><p>file.getSignedUrl({<br />  action: &#39;read&#39;,<br />  expires: TWO_WEEKS_MS<br />}, function(err, url) {<br />  if (err) {<br />    console.error(err);<br />    return;<br />  }</p><p>  // The file is now available to read from this URL.<br />  request(url, function(err, resp) {<br />    // resp.statusCode = 200<br />  });<br />});</p><p>//-<br />// Generate a URL to allow write permissions. This means anyone with this URL<br />// can send a POST request with new data that will overwrite the file.<br />//-<br />file.getSignedUrl({<br />  action: &#39;write&#39;,<br />  expires: TWO_WEEKS_MS<br />}, function(err, url) {<br />  if (err) {<br />    console.error(err);<br />    return;<br />  }</p><p>  // The file is now available to be written to.<br />  var writeStream = request.post(url);<br />  writeStream.end(&#39;New data&#39;);</p><p>  writeStream.on(&#39;complete&#39;, function(resp) {<br />    // Confirm the new content was saved.<br />    file.download(function(err, fileContents) {<br />      console.log(&#39;Contents:&#39;, fileContents.toString());<br />      // Contents: New data<br />    });<br />  });<br />});</p>"
+        "string": "//-\n// Generate a URL that allows temporary access to download your file.\n//-\nvar request = require('request');\n\nfile.getSignedUrl({\n  action: 'read',\n  expires: '03-17-2025'\n}, function(err, url) {\n  if (err) {\n    console.error(err);\n    return;\n  }\n\n  // The file is now available to read from this URL.\n  request(url, function(err, resp) {\n    // resp.statusCode = 200\n  });\n});\n\n//-\n// Generate a URL to allow write permissions. This means anyone with this URL\n// can send a POST request with new data that will overwrite the file.\n//-\nfile.getSignedUrl({\n  action: 'write',\n  expires: '03-17-2025'\n}, function(err, url) {\n  if (err) {\n    console.error(err);\n    return;\n  }\n\n  // The file is now available to be written to.\n  var writeStream = request.post(url);\n  writeStream.end('New data');\n\n  writeStream.on('complete', function(resp) {\n    // Confirm the new content was saved.\n    file.download(function(err, fileContents) {\n      console.log('Contents:', fileContents.toString());\n      // Contents: New data\n    });\n  });\n});",
+        "html": "<p>//-<br />// Generate a URL that allows temporary access to download your file.<br />//-<br />var request = require(&#39;request&#39;);</p><p>file.getSignedUrl({<br />  action: &#39;read&#39;,<br />  expires: &#39;03-17-2025&#39;<br />}, function(err, url) {<br />  if (err) {<br />    console.error(err);<br />    return;<br />  }</p><p>  // The file is now available to read from this URL.<br />  request(url, function(err, resp) {<br />    // resp.statusCode = 200<br />  });<br />});</p><p>//-<br />// Generate a URL to allow write permissions. This means anyone with this URL<br />// can send a POST request with new data that will overwrite the file.<br />//-<br />file.getSignedUrl({<br />  action: &#39;write&#39;,<br />  expires: &#39;03-17-2025&#39;<br />}, function(err, url) {<br />  if (err) {<br />    console.error(err);<br />    return;<br />  }</p><p>  // The file is now available to be written to.<br />  var writeStream = request.post(url);<br />  writeStream.end(&#39;New data&#39;);</p><p>  writeStream.on(&#39;complete&#39;, function(resp) {<br />    // Confirm the new content was saved.<br />    file.download(function(err, fileContents) {<br />      console.log(&#39;Contents:&#39;, fileContents.toString());<br />      // Contents: New data<br />    });<br />  });<br />});</p>"
       }
     ],
     "description": {
@@ -1429,9 +1425,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1033,
-    "codeStart": 1112,
-    "code": "File.prototype.getSignedUrl = function(options, callback) {\n  if (options.expires < Math.floor(Date.now() / 1000)) {\n    throw new Error('An expiration date cannot be in the past.');\n  }\n\n  options.action = {\n    read: 'GET',\n    write: 'PUT',\n    delete: 'DELETE'\n  }[options.action];\n\n  var name = encodeURIComponent(this.name);\n\n  options.resource = '/' + this.bucket.name + '/' + name;\n\n  var makeAuthorizedRequest_ = this.bucket.storage.makeAuthorizedRequest_;\n\n  makeAuthorizedRequest_.getCredentials(function(err, credentials) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var sign = crypto.createSign('RSA-SHA256');\n    sign.update([\n      options.action,\n      (options.contentMd5 || ''),\n      (options.contentType || ''),\n      options.expires,\n      (options.extensionHeaders || '') + options.resource\n    ].join('\\n'));\n    var signature = sign.sign(credentials.private_key, 'base64');\n\n    var responseContentType = '';\n    if (is.string(options.responseType)) {\n      responseContentType =\n        '&response-content-type=' +\n        encodeURIComponent(options.responseType);\n    }\n\n    var responseContentDisposition = '';\n    if (is.string(options.promptSaveAs)) {\n      responseContentDisposition =\n        '&response-content-disposition=attachment; filename=\"' +\n        encodeURIComponent(options.promptSaveAs) + '\"';\n    }\n    if (is.string(options.responseDisposition)) {\n      responseContentDisposition =\n        '&response-content-disposition=' +\n        encodeURIComponent(options.responseDisposition);\n    }\n\n    callback(null, [\n      'https://storage.googleapis.com' + options.resource,\n      '?GoogleAccessId=' + credentials.client_email,\n      '&Expires=' + options.expires,\n      '&Signature=' + encodeURIComponent(signature),\n      responseContentType,\n      responseContentDisposition\n    ].join(''));\n  });\n};",
+    "line": 1039,
+    "codeStart": 1116,
+    "code": "File.prototype.getSignedUrl = function(options, callback) {\n  var expires = new Date(options.expires);\n  var expiresInSeconds = Math.round(expires / 1000); // The API expects seconds.\n\n  if (expires < Date.now()) {\n    throw new Error('An expiration date cannot be in the past.');\n  }\n\n  options.action = {\n    read: 'GET',\n    write: 'PUT',\n    delete: 'DELETE'\n  }[options.action];\n\n  var name = encodeURIComponent(this.name);\n\n  options.resource = '/' + this.bucket.name + '/' + name;\n\n  var makeAuthorizedRequest_ = this.bucket.storage.makeAuthorizedRequest_;\n\n  makeAuthorizedRequest_.getCredentials(function(err, credentials) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var sign = crypto.createSign('RSA-SHA256');\n    sign.update([\n      options.action,\n      (options.contentMd5 || ''),\n      (options.contentType || ''),\n      expiresInSeconds,\n      (options.extensionHeaders || '') + options.resource\n    ].join('\\n'));\n    var signature = sign.sign(credentials.private_key, 'base64');\n\n    var responseContentType = '';\n    if (is.string(options.responseType)) {\n      responseContentType =\n        '&response-content-type=' +\n        encodeURIComponent(options.responseType);\n    }\n\n    var responseContentDisposition = '';\n    if (is.string(options.promptSaveAs)) {\n      responseContentDisposition =\n        '&response-content-disposition=attachment; filename=\"' +\n        encodeURIComponent(options.promptSaveAs) + '\"';\n    }\n    if (is.string(options.responseDisposition)) {\n      responseContentDisposition =\n        '&response-content-disposition=' +\n        encodeURIComponent(options.responseDisposition);\n    }\n\n    callback(null, [\n      'https://storage.googleapis.com' + options.resource,\n      '?GoogleAccessId=' + credentials.client_email,\n      '&Expires=' + expiresInSeconds,\n      '&Signature=' + encodeURIComponent(signature),\n      responseContentType,\n      responseContentDisposition\n    ].join(''));\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "File",
@@ -1533,8 +1529,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1175,
-    "codeStart": 1214,
+    "line": 1182,
+    "codeStart": 1221,
     "code": "File.prototype.setMetadata = function(metadata, callback) {\n  callback = callback || util.noop;\n\n  var that = this;\n  var path = '/o/' + encodeURIComponent(this.name);\n  var query = {};\n\n  if (this.generation) {\n    query.generation = this.generation;\n  }\n\n  this.makeReq_('PATCH', path, query, metadata, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1623,8 +1619,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1237,
-    "codeStart": 1261,
+    "line": 1244,
+    "codeStart": 1268,
     "code": "File.prototype.makePrivate = function(options, callback) {\n  var that = this;\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n  var path = '/o/' + encodeURIComponent(this.name);\n  var query = { predefinedAcl: options.strict ? 'private' : 'projectPrivate' };\n\n  // You aren't allowed to set both predefinedAcl & acl properties on a file, so\n  // acl must explicitly be nullified, destroying all previous acls on the file.\n  var metadata = { acl: null };\n\n  callback = callback || util.noop;\n\n  this.makeReq_('PATCH', path, query, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1699,8 +1695,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1288,
-    "codeStart": 1300,
+    "line": 1295,
+    "codeStart": 1307,
     "code": "File.prototype.makePublic = function(callback) {\n  callback = callback || util.noop;\n\n  this.acl.add({\n    entity: 'allUsers',\n    role: 'READER'\n  }, function(err, resp) {\n    callback(err, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1757,8 +1753,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1311,
-    "codeStart": 1319,
+    "line": 1318,
+    "codeStart": 1326,
     "code": "File.prototype.startResumableUpload_ = function(dup, metadata) {\n  var self = this;\n\n  var uploadStream = resumableUpload({\n    authClient: this.bucket.storage.makeAuthorizedRequest_.authClient,\n    bucket: this.bucket.name,\n    file: this.name,\n    generation: this.generation,\n    metadata: metadata || {}\n  });\n\n  uploadStream\n    .on('response', function(resp, metadata) {\n      if (metadata) {\n        self.metadata = metadata;\n      }\n    })\n    .on('finish', function() {\n      dup.emit('complete');\n    });\n\n  dup.setWritable(uploadStream);\n};",
     "ctx": {
       "type": "method",
@@ -1815,8 +1811,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1343,
-    "codeStart": 1353,
+    "line": 1350,
+    "codeStart": 1360,
     "code": "File.prototype.startSimpleUpload_ = function(dup, metadata) {\n  var self = this;\n\n  var reqOpts = {\n    qs: {\n      name: self.name\n    },\n    uri: format('{base}/{bucket}/o', {\n      base: STORAGE_UPLOAD_BASE_URL,\n      bucket: self.bucket.name\n    })\n  };\n\n  if (this.generation) {\n    reqOpts.qs.ifGenerationMatch = this.generation;\n  }\n\n  util.makeWritableStream(dup, {\n    makeAuthorizedRequest: self.bucket.storage.makeAuthorizedRequest_,\n    metadata: metadata,\n    request: reqOpts\n  }, function(data) {\n    self.metadata = data;\n    dup.emit('complete');\n  });\n};\n\nmodule.exports = File;",
     "ctx": {
       "type": "method",
