@@ -105,8 +105,8 @@ describe('common/util', function() {
   it('should export an error for module instantiation errors', function() {
     var missingProjectIdError = new Error([
       'Sorry, we cannot connect to Google Cloud Services without a project ID.',
-      'See https://googlecloudplatform.github.io/gcloud-node/#/authorization',
-      'for a detailed guide on creating an authorized connection.'
+      'See https://googlecloudplatform.github.io/gcloud-node/#/authentication',
+      'for a detailed guide on creating an authenticated connection.'
     ].join(' '));
 
     assert.deepEqual(util.missingProjectIdError, missingProjectIdError);
@@ -271,7 +271,7 @@ describe('common/util', function() {
 
       util.makeWritableStream(dup, {
         metadata: metadata,
-        makeAuthorizedRequest: function(request) {
+        makeAuthenticatedRequest: function(request) {
           assert.equal(request.method, 'POST');
           assert.equal(request.qs.uploadType, 'multipart');
 
@@ -306,7 +306,7 @@ describe('common/util', function() {
         metadata: {
           contentType: 'application/json'
         },
-        makeAuthorizedRequest: function(request) {
+        makeAuthenticatedRequest: function(request) {
           assert.equal(request.method, req.method);
           assert.deepEqual(request.qs, req.qs);
           assert.equal(request.something, req.something);
@@ -331,8 +331,8 @@ describe('common/util', function() {
       });
 
       util.makeWritableStream(ws, {
-        makeAuthorizedRequest: function(request, opts) {
-          opts.onAuthorized(error);
+        makeAuthenticatedRequest: function(request, opts) {
+          opts.onAuthenticated(error);
         }
       });
     });
@@ -345,7 +345,7 @@ describe('common/util', function() {
       };
 
       util.makeWritableStream(dup, {
-        makeAuthorizedRequest: function() {}
+        makeAuthenticatedRequest: function() {}
       });
     });
 
@@ -371,8 +371,8 @@ describe('common/util', function() {
       });
 
       util.makeWritableStream(dup, {
-        makeAuthorizedRequest: function(request, opts) {
-          opts.onAuthorized();
+        makeAuthenticatedRequest: function(request, opts) {
+          opts.onAuthenticated();
         }
       });
 
@@ -397,8 +397,8 @@ describe('common/util', function() {
       };
 
       var options = {
-        makeAuthorizedRequest: function(request, opts) {
-          opts.onAuthorized();
+        makeAuthenticatedRequest: function(request, opts) {
+          opts.onAuthenticated();
         }
       };
 
@@ -413,7 +413,7 @@ describe('common/util', function() {
     });
   });
 
-  describe('makeAuthorizedRequestFactory', function() {
+  describe('makeAuthenticatedRequestFactory', function() {
     var authClient = { getCredentials: function() {} };
 
     beforeEach(function() {
@@ -431,11 +431,11 @@ describe('common/util', function() {
         return authClient;
       };
 
-      util.makeAuthorizedRequestFactory(config);
+      util.makeAuthenticatedRequestFactory(config);
     });
 
     it('should return a function', function() {
-      assert.equal(typeof util.makeAuthorizedRequestFactory(), 'function');
+      assert.equal(typeof util.makeAuthenticatedRequestFactory(), 'function');
     });
 
     it('should return a getCredentials method', function(done) {
@@ -447,8 +447,8 @@ describe('common/util', function() {
         return { getCredentials: getCredentials };
       };
 
-      var makeAuthorizedRequest = util.makeAuthorizedRequestFactory();
-      makeAuthorizedRequest.getCredentials();
+      var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory();
+      makeAuthenticatedRequest.getCredentials();
     });
 
     it('should return the authClient', function() {
@@ -458,15 +458,15 @@ describe('common/util', function() {
         return authClient;
       };
 
-      var makeAuthorizedRequest = util.makeAuthorizedRequestFactory();
-      assert.strictEqual(makeAuthorizedRequest.authClient, authClient);
+      var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory();
+      assert.strictEqual(makeAuthenticatedRequest.authClient, authClient);
     });
 
-    describe('customEndpoint (no authorization attempted)', function() {
-      var makeAuthorizedRequest;
+    describe('customEndpoint (no authentication attempted)', function() {
+      var makeAuthenticatedRequest;
 
       beforeEach(function() {
-        makeAuthorizedRequest = util.makeAuthorizedRequestFactory({
+        makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory({
           customEndpoint: true
         });
       });
@@ -479,16 +479,16 @@ describe('common/util', function() {
           done();
         };
 
-        makeAuthorizedRequest(reqOpts, { onAuthorized: assert.ifError });
+        makeAuthenticatedRequest(reqOpts, { onAuthenticated: assert.ifError });
       });
 
-      it('should pass options back to onAuthorized callback', function(done) {
+      it('should pass options back to onAuthenticated callback', function(done) {
         var reqOpts = { a: 'b', c: 'd' };
 
-        makeAuthorizedRequest(reqOpts, {
-          onAuthorized: function(err, authorizedReqOpts) {
+        makeAuthenticatedRequest(reqOpts, {
+          onAuthenticated: function(err, authenticatedReqOpts) {
             assert.ifError(err);
-            assert.deepEqual(reqOpts, authorizedReqOpts);
+            assert.deepEqual(reqOpts, authenticatedReqOpts);
             done();
           }
         });
@@ -502,35 +502,35 @@ describe('common/util', function() {
           done();
         };
 
-        makeAuthorizedRequest(reqOpts, assert.ifError);
+        makeAuthenticatedRequest(reqOpts, assert.ifError);
       });
     });
 
-    describe('needs authorization', function() {
-      it('should pass correct arguments to authorizeRequest', function(done) {
+    describe('needs authentication', function() {
+      it('should pass correct arguments to authenticateRequest', function(done) {
         var reqOpts = { e: 'f', g: 'h' };
 
-        authClient.authorizeRequest = function(rOpts) {
+        authClient.authenticateRequest = function(rOpts) {
           assert.deepEqual(rOpts, reqOpts);
           done();
         };
 
-        var makeAuthorizedRequest = util.makeAuthorizedRequestFactory();
-        makeAuthorizedRequest(reqOpts, {});
+        var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory();
+        makeAuthenticatedRequest(reqOpts, {});
       });
 
       it('should return a stream if callback is missing', function() {
-        authClient.authorizeRequest = function() {};
+        authClient.authenticateRequest = function() {};
 
-        var makeAuthorizedRequest = util.makeAuthorizedRequestFactory({});
-        assert(makeAuthorizedRequest({}) instanceof stream.Stream);
+        var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory({});
+        assert(makeAuthenticatedRequest({}) instanceof stream.Stream);
       });
 
-      describe('authorization errors', function() {
+      describe('authentication errors', function() {
         var error = new Error('Error.');
 
         beforeEach(function() {
-          authClient.authorizeRequest = function(rOpts, callback) {
+          authClient.authenticateRequest = function(rOpts, callback) {
             setImmediate(function() {
               callback(error);
             });
@@ -542,15 +542,15 @@ describe('common/util', function() {
 
           utilOverrides.decorateRequest = function() {};
 
-          authClient.authorizeRequest = function(rOpts, callback) {
+          authClient.authenticateRequest = function(rOpts, callback) {
             setImmediate(function() {
               callback(error);
             });
           };
 
-          var makeAuthorizedRequest = util.makeAuthorizedRequestFactory();
-          makeAuthorizedRequest({}, {
-            onAuthorized: function(err) {
+          var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory();
+          makeAuthenticatedRequest({}, {
+            onAuthenticated: function(err) {
               assert.strictEqual(err, null);
               done();
             }
@@ -558,17 +558,17 @@ describe('common/util', function() {
         });
 
         it('should invoke the callback with error', function(done) {
-          var makeAuthorizedRequest = util.makeAuthorizedRequestFactory();
-          makeAuthorizedRequest({}, function(err) {
+          var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory();
+          makeAuthenticatedRequest({}, function(err) {
             assert.strictEqual(err, error);
             done();
           });
         });
 
-        it('should invoke the onAuthorized handler with error', function(done) {
-          var makeAuthorizedRequest = util.makeAuthorizedRequestFactory();
-          makeAuthorizedRequest({}, {
-            onAuthorized: function(err) {
+        it('should invoke the onAuthenticated handler with error', function(done) {
+          var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory();
+          makeAuthenticatedRequest({}, {
+            onAuthenticated: function(err) {
               assert.strictEqual(err, error);
               done();
             }
@@ -576,8 +576,8 @@ describe('common/util', function() {
         });
 
         it('should emit an error and end the stream', function(done) {
-          var makeAuthorizedRequest = util.makeAuthorizedRequestFactory();
-          makeAuthorizedRequest({}).on('error', function(err) {
+          var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory();
+          makeAuthenticatedRequest({}).on('error', function(err) {
             assert.strictEqual(err, error);
 
             var stream = this;
@@ -589,25 +589,25 @@ describe('common/util', function() {
         });
       });
 
-      describe('authorization success', function() {
+      describe('authentication success', function() {
         var reqOpts = { a: 'b', c: 'd' };
 
         beforeEach(function() {
-          authClient.authorizeRequest = function(rOpts, callback) {
+          authClient.authenticateRequest = function(rOpts, callback) {
             callback(null, rOpts);
           };
         });
 
-        it('should return the authorized request to callback', function(done) {
+        it('should return the authenticated request to callback', function(done) {
           utilOverrides.decorateRequest = function(reqOpts_) {
             assert.strictEqual(reqOpts_, reqOpts);
             return reqOpts;
           };
 
-          var makeAuthorizedRequest = util.makeAuthorizedRequestFactory();
-          makeAuthorizedRequest(reqOpts, {
-            onAuthorized: function(err, authorizedReqOpts) {
-              assert.strictEqual(authorizedReqOpts, reqOpts);
+          var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory();
+          makeAuthenticatedRequest(reqOpts, {
+            onAuthenticated: function(err, authenticatedReqOpts) {
+              assert.strictEqual(authenticatedReqOpts, reqOpts);
               done();
             }
           });
@@ -621,28 +621,28 @@ describe('common/util', function() {
             return reqOpts;
           };
 
-          utilOverrides.makeRequest = function(authorizedReqOpts, cfg, cb) {
-            assert.strictEqual(authorizedReqOpts, reqOpts);
+          utilOverrides.makeRequest = function(authenticatedReqOpts, cfg, cb) {
+            assert.strictEqual(authenticatedReqOpts, reqOpts);
             assert.deepEqual(cfg, config);
             cb();
           };
 
-          var makeAuthorizedRequest = util.makeAuthorizedRequestFactory(config);
-          makeAuthorizedRequest(reqOpts, done);
+          var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory(config);
+          makeAuthenticatedRequest(reqOpts, done);
         });
 
         it('should provide stream to makeRequest', function(done) {
           var stream;
 
-          utilOverrides.makeRequest = function(authorizedReqOpts, cfg) {
+          utilOverrides.makeRequest = function(authenticatedReqOpts, cfg) {
             setImmediate(function() {
               assert.strictEqual(cfg.stream, stream);
               done();
             });
           };
 
-          var makeAuthorizedRequest = util.makeAuthorizedRequestFactory({});
-          stream = makeAuthorizedRequest(reqOpts);
+          var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory({});
+          stream = makeAuthenticatedRequest(reqOpts);
         });
       });
     });

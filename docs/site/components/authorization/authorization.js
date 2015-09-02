@@ -1,16 +1,16 @@
 angular
-  .module('gcloud.authorization', ['ngRoute', 'gcloud.subpage', 'gcloud.markdown'])
+  .module('gcloud.authentication', ['ngRoute', 'gcloud.subpage', 'gcloud.markdown'])
   .config(function($routeProvider) {
     'use strict';
 
-    $routeProvider.when('/authorization', {
-      controller: 'AuthorizationCtrl',
-      templateUrl: 'site/components/authorization/authorization.html',
+    $routeProvider.when('/authentication', {
+      controller: 'AuthenticationCtrl',
+      templateUrl: 'site/components/authentication/authentication.html',
       reloadOnSearch: false
     });
   })
 
-  .controller('AuthorizationCtrl', function($scope) {
+  .controller('AuthenticationCtrl', function($scope) {
     'use strict';
 
   });
