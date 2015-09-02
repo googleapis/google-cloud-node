@@ -29,7 +29,8 @@ var tmp = require('tmp');
 var uuid = require('node-uuid');
 
 var env = require('./env.js');
-var storage = require('../lib/storage')(env);
+var gcloud = require('../lib')(env);
+var storage = gcloud.storage();
 
 var BUCKET_NAME = generateBucketName();
 

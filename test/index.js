@@ -17,47 +17,26 @@
 'use strict';
 
 var assert = require('assert');
-var extend = require('extend');
 var mockery = require('mockery');
-var util = require('../lib/common/util.js');
 
-var extendGlobalConfigOverride = null;
-var fakeUtil = extend({}, util, {
-  extendGlobalConfig: function() {
-    var method = extendGlobalConfigOverride || util.extendGlobalConfig;
-    return method.apply(null, arguments);
-  }
-});
+function createFakeApi() {
+  return function FakeApi() {
+    if (!(this instanceof FakeApi)) {
+      var instance = new FakeApi();
+      FakeApi.apply(instance, arguments);
+      return instance;
+    }
 
-function FakeBigQuery() {
-  this.calledWith_ = [].slice.call(arguments);
+    this.calledWith_ = [].slice.call(arguments);
+  };
 }
-FakeBigQuery.static = true;
 
-function FakeDatastore() {
-  this.calledWith_ = [].slice.call(arguments);
-}
-FakeDatastore.static = true;
-
-function FakeDNS() {
-  this.calledWith_ = [].slice.call(arguments);
-}
-FakeDNS.static = true;
-
-function FakePubSub() {
-  this.calledWith_ = [].slice.call(arguments);
-}
-FakePubSub.static = true;
-
-function FakeSearch() {
-  this.calledWith_ = [].slice.call(arguments);
-}
-FakeSearch.static = true;
-
-function FakeStorage() {
-  this.calledWith_ = [].slice.call(arguments);
-}
-FakeStorage.static = true;
+var FakeBigQuery = createFakeApi();
+var FakeDatastore = createFakeApi();
+var FakeDNS = createFakeApi();
+var FakePubSub = createFakeApi();
+var FakeSearch = createFakeApi();
+var FakeStorage = createFakeApi();
 
 describe('gcloud', function() {
   var gcloud;
@@ -69,16 +48,11 @@ describe('gcloud', function() {
     mockery.registerMock('./pubsub', FakePubSub);
     mockery.registerMock('./search', FakeSearch);
     mockery.registerMock('./storage', FakeStorage);
-    mockery.registerMock('./common/util.js', fakeUtil);
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
     });
     gcloud = require('../lib/index.js');
-  });
-
-  beforeEach(function() {
-    extendGlobalConfigOverride = null;
   });
 
   after(function() {
@@ -118,109 +92,62 @@ describe('gcloud', function() {
     var localGcloud;
     var config = { a: 'b', c: 'd' };
     var options = { e: 'f', g: 'h' };
-    var extendedOptions = { a: 'b', c: 'd' };
 
     beforeEach(function() {
       localGcloud = gcloud(config);
     });
 
     describe('bigquery', function() {
-      it('should create new BigQuery with extended options', function() {
-        extendGlobalConfigOverride = function(config_, options_) {
-          assert.strictEqual(config_, config);
-          assert.strictEqual(options_, options);
-          return extendedOptions;
-        };
-
+      it('should create a new BigQuery', function() {
         var bigquery = localGcloud.bigquery(options);
 
-        assert.strictEqual(bigquery.calledWith_[0], extendedOptions);
-      });
-
-      it('should extend the original API', function() {
-        assert.strictEqual(localGcloud.bigquery.static, FakeBigQuery.static);
+        assert(bigquery instanceof FakeBigQuery);
+        assert.strictEqual(bigquery.calledWith_[0], options);
       });
     });
 
     describe('datastore', function() {
-      it('should create new Datastore from original config', function() {
-        assert.strictEqual(localGcloud.datastore.calledWith_[0], config);
-      });
+      it('should create a single Datastore', function() {
+        var datastore = localGcloud.datastore;
 
-      it('should extend the original API', function() {
-        assert.strictEqual(localGcloud.datastore.static, FakeDatastore.static);
+        assert(datastore instanceof FakeDatastore);
+        assert.strictEqual(datastore.calledWith_[0], config);
       });
     });
 
     describe('dns', function() {
-      it('should create new BigQuery with extended options', function() {
-        extendGlobalConfigOverride = function(config_, options_) {
-          assert.strictEqual(config_, config);
-          assert.strictEqual(options_, options);
-          return extendedOptions;
-        };
-
+      it('should create a new DNS', function() {
         var dns = localGcloud.dns(options);
 
-        assert.strictEqual(dns.calledWith_[0], extendedOptions);
-      });
-
-      it('should extend the original API', function() {
-        assert.strictEqual(localGcloud.dns.static, FakeDNS.static);
+        assert(dns instanceof FakeDNS);
+        assert.strictEqual(dns.calledWith_[0], options);
       });
     });
 
     describe('pubsub', function() {
-      it('should create new BigQuery with extended options', function() {
-        extendGlobalConfigOverride = function(config_, options_) {
-          assert.strictEqual(config_, config);
-          assert.strictEqual(options_, options);
-          return extendedOptions;
-        };
-
+      it('should create a new PubSub', function() {
         var pubsub = localGcloud.pubsub(options);
 
-        assert.strictEqual(pubsub.calledWith_[0], extendedOptions);
-      });
-
-      it('should extend the original API', function() {
-        assert.strictEqual(localGcloud.pubsub.static, FakePubSub.static);
+        assert(pubsub instanceof FakePubSub);
+        assert.strictEqual(pubsub.calledWith_[0], options);
       });
     });
 
     describe('search', function() {
-      it('should create new BigQuery with extended options', function() {
-        extendGlobalConfigOverride = function(config_, options_) {
-          assert.strictEqual(config_, config);
-          assert.strictEqual(options_, options);
-          return extendedOptions;
-        };
-
+      it('should create a new Search', function() {
         var search = localGcloud.search(options);
 
-        assert.strictEqual(search.calledWith_[0], extendedOptions);
-      });
-
-      it('should extend the original API', function() {
-        assert.strictEqual(localGcloud.search.static, FakeSearch.static);
+        assert(search instanceof FakeSearch);
+        assert.strictEqual(search.calledWith_[0], options);
       });
     });
 
     describe('storage', function() {
-      it('should create new BigQuery with extended options', function() {
-        extendGlobalConfigOverride = function(config_, options_) {
-          assert.strictEqual(config_, config);
-          assert.strictEqual(options_, options);
-          return extendedOptions;
-        };
-
+      it('should create a new Storage', function() {
         var storage = localGcloud.storage(options);
 
-        assert.strictEqual(storage.calledWith_[0], extendedOptions);
-      });
-
-      it('should extend the original API', function() {
-        assert.strictEqual(localGcloud.storage.static, FakeStorage.static);
+        assert(storage instanceof FakeStorage);
+        assert.strictEqual(storage.calledWith_[0], options);
       });
     });
   });
