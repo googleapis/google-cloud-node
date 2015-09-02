@@ -32,31 +32,43 @@ var fakeUtil = extend({}, util, {
 function FakeBigQuery() {
   this.calledWith_ = [].slice.call(arguments);
 }
+FakeBigQuery.prototype.method = function() { return true; };
+FakeBigQuery.method = function() { return false; };
 FakeBigQuery.static = true;
 
 function FakeDatastore() {
   this.calledWith_ = [].slice.call(arguments);
 }
+FakeDatastore.prototype.method = function() { return true; };
+FakeDatastore.method = function() { return false; };
 FakeDatastore.static = true;
 
 function FakeDNS() {
   this.calledWith_ = [].slice.call(arguments);
 }
+FakeDNS.prototype.method = function() { return true; };
+FakeDNS.method = function() { return false; };
 FakeDNS.static = true;
 
 function FakePubSub() {
   this.calledWith_ = [].slice.call(arguments);
 }
+FakePubSub.prototype.method = function() { return true; };
+FakePubSub.method = function() { return false; };
 FakePubSub.static = true;
 
 function FakeSearch() {
   this.calledWith_ = [].slice.call(arguments);
 }
+FakeSearch.prototype.method = function() { return true; };
+FakeSearch.method = function() { return false; };
 FakeSearch.static = true;
 
 function FakeStorage() {
   this.calledWith_ = [].slice.call(arguments);
 }
+FakeStorage.prototype.method = function() { return true; };
+FakeStorage.method = function() { return false; };
 FakeStorage.static = true;
 
 describe('gcloud', function() {
@@ -140,6 +152,10 @@ describe('gcloud', function() {
       it('should extend the original API', function() {
         assert.strictEqual(localGcloud.bigquery.static, FakeBigQuery.static);
       });
+
+      it('should favor the prototype method', function() {
+        assert.strictEqual(localGcloud.bigquery.method(), true);
+      });
     });
 
     describe('datastore', function() {
@@ -149,6 +165,10 @@ describe('gcloud', function() {
 
       it('should extend the original API', function() {
         assert.strictEqual(localGcloud.datastore.static, FakeDatastore.static);
+      });
+
+      it('should favor the prototype method', function() {
+        assert.strictEqual(localGcloud.datastore.method(), true);
       });
     });
 
@@ -168,6 +188,10 @@ describe('gcloud', function() {
       it('should extend the original API', function() {
         assert.strictEqual(localGcloud.dns.static, FakeDNS.static);
       });
+
+      it('should favor the prototype method', function() {
+        assert.strictEqual(localGcloud.dns.method(), true);
+      });
     });
 
     describe('pubsub', function() {
@@ -185,6 +209,10 @@ describe('gcloud', function() {
 
       it('should extend the original API', function() {
         assert.strictEqual(localGcloud.pubsub.static, FakePubSub.static);
+      });
+
+      it('should favor the prototype method', function() {
+        assert.strictEqual(localGcloud.pubsub.method(), true);
       });
     });
 
@@ -204,6 +232,10 @@ describe('gcloud', function() {
       it('should extend the original API', function() {
         assert.strictEqual(localGcloud.search.static, FakeSearch.static);
       });
+
+      it('should favor the prototype method', function() {
+        assert.strictEqual(localGcloud.search.method(), true);
+      });
     });
 
     describe('storage', function() {
@@ -221,6 +253,10 @@ describe('gcloud', function() {
 
       it('should extend the original API', function() {
         assert.strictEqual(localGcloud.storage.static, FakeStorage.static);
+      });
+
+      it('should favor the prototype method', function() {
+        assert.strictEqual(localGcloud.storage.method(), true);
       });
     });
   });
