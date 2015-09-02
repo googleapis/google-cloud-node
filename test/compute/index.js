@@ -126,8 +126,22 @@ describe('Compute', function() {
       assert(compute instanceof Compute);
     });
 
-    it('should throw if projectId is not provided', function() {
-      assert.throws(Compute, new RegExp(util.missingProjectIdError));
+    it('should normalize the arguments', function() {
+      var normalizeArguments = fakeUtil.normalizeArguments;
+      var normalizeArgumentsCalled = false;
+      var fakeContext = {};
+
+      fakeUtil.normalizeArguments = function(context, options_) {
+        normalizeArgumentsCalled = true;
+        assert.strictEqual(context, fakeContext);
+        assert.strictEqual(options, options_);
+        return options_;
+      };
+
+      Compute.call(fakeContext, options);
+      assert(normalizeArgumentsCalled);
+
+      fakeUtil.normalizeArguments = normalizeArguments;
     });
 
     it('should localize authConfig', function() {
