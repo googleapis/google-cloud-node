@@ -36,7 +36,10 @@
     "CONTRIBUTORS",
     "COPYING"
   ],
-  "repository": "googlecloudplatform/gcloud-node",
+  "repository": {
+    "type": "git", 
+    "url": "https://github.com/GoogleCloudPlatform/gcloud-node.git"
+  },
   "keywords": [
     "google",
     "api",
