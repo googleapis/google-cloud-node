@@ -41,13 +41,13 @@ var fakeStreamRouter = {
   }
 };
 
-var makeAuthorizedRequestFactoryOverride;
+var makeAuthenticatedRequestFactoryOverride;
 var fakeUtil = extend({}, util, {
-  makeAuthorizedRequestFactory: function() {
-    if (makeAuthorizedRequestFactoryOverride) {
-      return makeAuthorizedRequestFactoryOverride.apply(null, arguments);
+  makeAuthenticatedRequestFactory: function() {
+    if (makeAuthenticatedRequestFactoryOverride) {
+      return makeAuthenticatedRequestFactoryOverride.apply(null, arguments);
     } else {
-      return util.makeAuthorizedRequestFactory.apply(null, arguments);
+      return util.makeAuthenticatedRequestFactory.apply(null, arguments);
     }
   }
 });
@@ -76,7 +76,7 @@ describe('Search', function() {
   });
 
   beforeEach(function() {
-    makeAuthorizedRequestFactoryOverride = null;
+    makeAuthenticatedRequestFactoryOverride = null;
 
     search = new Search({
       projectId: PROJECT_ID
@@ -94,7 +94,7 @@ describe('Search', function() {
       }, /Sorry, we cannot connect/);
     });
 
-    it('should create an authorized request function', function(done) {
+    it('should create an authenticated request function', function(done) {
       var options = {
         projectId: 'projectId',
         credentials: 'credentials',
@@ -102,7 +102,7 @@ describe('Search', function() {
         keyFilename: 'keyFile'
       };
 
-      makeAuthorizedRequestFactoryOverride = function(options_) {
+      makeAuthenticatedRequestFactoryOverride = function(options_) {
         assert.deepEqual(options_, {
           credentials: options.credentials,
           email: options.email,
@@ -117,7 +117,7 @@ describe('Search', function() {
       };
 
       var search = new Search(options);
-      search.makeAuthorizedRequest_();
+      search.makeAuthenticatedRequest_();
     });
 
     it('should localize the projectId', function() {
@@ -261,13 +261,13 @@ describe('Search', function() {
   });
 
   describe('makeReq_', function() {
-    it('should make correct authorized request', function(done) {
+    it('should make correct authenticated request', function(done) {
       var method = 'POST';
       var path = '/';
       var query = 'query';
       var body = 'body';
 
-      search.makeAuthorizedRequest_ = function(reqOpts, callback) {
+      search.makeAuthenticatedRequest_ = function(reqOpts, callback) {
         assert.equal(reqOpts.method, method);
         assert.equal(reqOpts.qs, query);
 
