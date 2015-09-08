@@ -20,6 +20,8 @@ var arrify = require('arrify');
 var assert = require('assert');
 var mockery = require('mockery');
 var request = require('request');
+var extend = require('extend');
+var util = require('../../lib/common/util');
 var Topic = require('../../lib/pubsub/topic.js');
 
 var SubscriptionCached = require('../../lib/pubsub/subscription.js');
@@ -40,6 +42,8 @@ fakeRequest.defaults = function() {
   // call.
   return fakeRequest;
 };
+
+var fakeUtil = extend({}, util);
 
 var extended = false;
 var fakeStreamRouter = {
@@ -62,6 +66,7 @@ describe('PubSub', function() {
 
   before(function() {
     mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
+    mockery.registerMock('../common/util.js', fakeUtil);
     mockery.registerMock('./subscription.js', Subscription);
     mockery.registerMock('./topic.js', Topic);
     mockery.registerMock('request', fakeRequest);
@@ -91,10 +96,23 @@ describe('PubSub', function() {
       assert(extended); // See `fakeStreamRouter.extend`
     });
 
-    it('should throw if a projectId is not specified', function() {
-      assert.throws(function() {
-        new PubSub();
-      }, /Sorry, we cannot connect/);
+    it('should normalize the arguments', function() {
+      var normalizeArguments = fakeUtil.normalizeArguments;
+      var normalizeArgumentsCalled = false;
+      var fakeOptions = { projectId: PROJECT_ID };
+      var fakeContext = {};
+
+      fakeUtil.normalizeArguments = function(context, options) {
+        normalizeArgumentsCalled = true;
+        assert.strictEqual(context, fakeContext);
+        assert.strictEqual(options, fakeOptions);
+        return options;
+      };
+
+      PubSub.call(fakeContext, fakeOptions);
+      assert(normalizeArgumentsCalled);
+
+      fakeUtil.normalizeArguments = normalizeArguments;
     });
   });
 

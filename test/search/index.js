@@ -88,10 +88,23 @@ describe('Search', function() {
       assert(extended); // See `fakeStreamRouter.extend`
     });
 
-    it('should throw if a projectId is not specified', function() {
-      assert.throws(function() {
-        new Search();
-      }, /Sorry, we cannot connect/);
+    it('should normalize the arguments', function() {
+      var normalizeArguments = fakeUtil.normalizeArguments;
+      var normalizeArgumentsCalled = false;
+      var fakeOptions = { projectId: PROJECT_ID };
+      var fakeContext = {};
+
+      fakeUtil.normalizeArguments = function(context, options) {
+        normalizeArgumentsCalled = true;
+        assert.strictEqual(context, fakeContext);
+        assert.strictEqual(options, fakeOptions);
+        return options;
+      };
+
+      Search.call(fakeContext, fakeOptions);
+      assert(normalizeArgumentsCalled);
+
+      fakeUtil.normalizeArguments = normalizeArguments;
     });
 
     it('should create an authorized request function', function(done) {
