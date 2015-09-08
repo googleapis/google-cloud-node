@@ -62,6 +62,15 @@ var resumableUpload = require('gcs-resumable-upload');
 function fakeResumableUpload() {
   return (resumableUploadOverride || resumableUpload).apply(null, arguments);
 }
+fakeResumableUpload.createURI = function() {
+  var createURI = resumableUpload.createURI;
+
+  if (resumableUploadOverride && resumableUploadOverride.createURI) {
+    createURI = resumableUploadOverride.createURI;
+  }
+
+  return createURI.apply(null, arguments);
+};
 
 describe('File', function() {
   var File;
@@ -830,6 +839,45 @@ describe('File', function() {
 
         file.createReadStream({ end: endOffset }).resume();
       });
+    });
+  });
+
+  describe('createResumableUpload', function() {
+    it('should not require metadata', function(done) {
+      resumableUploadOverride = {
+        createURI: function(opts, callback) {
+          assert.deepEqual(opts.metadata, {});
+          callback();
+        }
+      };
+
+      file.createResumableUpload(done);
+    });
+
+    it('should create a resumable upload URI', function(done) {
+      var metadata = {
+        contentType: 'application/json'
+      };
+
+      file.generation = 3;
+
+      resumableUploadOverride = {
+        createURI: function(opts, callback) {
+          var bucket = file.bucket;
+          var storage = bucket.storage;
+          var authClient = storage.makeAuthorizedRequest_.authClient;
+
+          assert.strictEqual(opts.authClient, authClient);
+          assert.strictEqual(opts.bucket, bucket.name);
+          assert.strictEqual(opts.file, file.name);
+          assert.strictEqual(opts.generation, file.generation);
+          assert.strictEqual(opts.metadata, metadata);
+
+          callback();
+        }
+      };
+
+      file.createResumableUpload(metadata, done);
     });
   });
 
