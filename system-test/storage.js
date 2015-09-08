@@ -590,6 +590,26 @@ describe('storage', function() {
           });
       });
 
+      it('should write without chunked transfer-encoding', function(done) {
+        var file = bucket.file('LargeFile');
+
+        fs.stat(files.big.path, function(err, metadata) {
+          var ws = file.createWriteStream({
+            metadata: {
+              contentLength: metadata.size
+            }
+          });
+
+          fs.createReadStream(files.big.path)
+            .pipe(ws)
+            .on('error', done)
+            .on('finish', function() {
+              assert.equal(file.metadata.size, metadata.size);
+              file.delete(done);
+            });
+        });
+      });
+
       it('should write metadata', function(done) {
         var options = {
           metadata: { contentType: 'image/png' },
