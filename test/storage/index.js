@@ -23,6 +23,8 @@ var mockery = require('mockery');
 
 var util = require('../../lib/common/util.js');
 
+var fakeUtil = extend({}, util);
+
 var extended = false;
 var fakeStreamRouter = {
   extend: function(Class, methods) {
@@ -38,6 +40,7 @@ var fakeStreamRouter = {
 };
 
 describe('Storage', function() {
+  var PROJECT_ID = 'project-id';
   var Storage;
   var storage;
   var Bucket;
@@ -48,6 +51,7 @@ describe('Storage', function() {
     var crc32c = require('hash-stream-validation/node_modules/sse4_crc32');
     mockery.registerMock('sse4_crc32', crc32c);
 
+    mockery.registerMock('../common/util.js', fakeUtil);
     mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
     mockery.enable({
       useCleanCache: true,
@@ -64,7 +68,7 @@ describe('Storage', function() {
   });
 
   beforeEach(function() {
-    storage = new Storage({ projectId: 'project-id' });
+    storage = new Storage({ projectId: PROJECT_ID });
   });
 
   describe('instantiation', function() {
@@ -72,10 +76,23 @@ describe('Storage', function() {
       assert(extended); // See `fakeStreamRouter.extend`
     });
 
-    it('should throw if a projectId is not specified', function() {
-      assert.throws(function() {
-        new Storage();
-      }, /Sorry, we cannot connect/);
+    it('should normalize the arguments', function() {
+      var normalizeArguments = fakeUtil.normalizeArguments;
+      var normalizeArgumentsCalled = false;
+      var fakeOptions = { projectId: PROJECT_ID };
+      var fakeContext = {};
+
+      fakeUtil.normalizeArguments = function(context, options) {
+        normalizeArgumentsCalled = true;
+        assert.strictEqual(context, fakeContext);
+        assert.strictEqual(options, fakeOptions);
+        return options;
+      };
+
+      Storage.call(fakeContext, fakeOptions);
+      assert(normalizeArgumentsCalled);
+
+      fakeUtil.normalizeArguments = normalizeArguments;
     });
 
     it('should set the project id', function() {

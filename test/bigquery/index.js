@@ -19,7 +19,11 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var mockery = require('mockery');
+var extend = require('extend');
+var util = require('../../lib/common/util');
 var Table = require('../../lib/bigquery/table.js');
+
+var fakeUtil = extend({}, util);
 
 function FakeTable(a, b) {
   Table.call(this, a, b);
@@ -56,6 +60,7 @@ describe('BigQuery', function() {
   before(function() {
     mockery.registerMock('./table.js', FakeTable);
     mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
+    mockery.registerMock('../common/util.js', fakeUtil);
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
@@ -77,10 +82,23 @@ describe('BigQuery', function() {
       assert(extended); // See `fakeStreamRouter.extend`
     });
 
-    it('should throw if a projectId is not specified', function() {
-      assert.throws(function() {
-        new BigQuery();
-      }, /Sorry, we cannot connect/);
+    it('should normalize the arguments', function() {
+      var normalizeArguments = fakeUtil.normalizeArguments;
+      var normalizeArgumentsCalled = false;
+      var fakeOptions = { projectId: PROJECT_ID };
+      var fakeContext = {};
+
+      fakeUtil.normalizeArguments = function(context, options) {
+        normalizeArgumentsCalled = true;
+        assert.strictEqual(context, fakeContext);
+        assert.strictEqual(options, fakeOptions);
+        return options;
+      };
+
+      BigQuery.call(fakeContext, fakeOptions);
+      assert(normalizeArgumentsCalled);
+
+      fakeUtil.normalizeArguments = normalizeArguments;
     });
   });
 

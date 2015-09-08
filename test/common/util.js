@@ -886,4 +886,43 @@ describe('common/util', function() {
       assert.strictEqual(decoratedReqOpts.autoPaginate, undefined);
     });
   });
+
+  describe('normalizeArguments', function() {
+    var fakeContext = {
+      config_: {
+        projectId: 'grapespaceship911'
+      }
+    };
+
+    it('should return an extended object', function() {
+      var local = { a: 'b' };
+      var config;
+
+      util.extendGlobalConfig = function(globalConfig, localConfig) {
+        assert.strictEqual(globalConfig, fakeContext.config_);
+        assert.strictEqual(localConfig, local);
+        return fakeContext.config_;
+      };
+
+      config = util.normalizeArguments(fakeContext, local);
+      assert.strictEqual(config, fakeContext.config_);
+    });
+
+    it('should default the global config when missing', function() {
+      util.extendGlobalConfig = function(globalConfig, options) {
+        assert.deepEqual(globalConfig, {});
+        return options;
+      };
+
+      util.normalizeArguments(null, fakeContext.config_);
+    });
+
+    it('should throw an error if the projectId is missing', function() {
+      var errMsg = new RegExp(util.missingProjectIdError.message);
+
+      assert.throws(function() {
+        util.normalizeArguments({ a: 'b' }, { c: 'd' });
+      }, errMsg);
+    });
+  });
 });
