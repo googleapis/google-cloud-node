@@ -305,7 +305,7 @@
     "ignore": false,
     "line": 65,
     "codeStart": 85,
-    "code": "function Storage(options) {\n  if (!(this instanceof Storage)) {\n    return new Storage(options);\n  }\n\n  options = options || {};\n\n  if (!options.projectId) {\n    throw util.missingProjectIdError;\n  }\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId = options.projectId;\n}",
+    "code": "function Storage(options) {\n  if (!(this instanceof Storage)) {\n    options = util.normalizeArguments(this, options);\n    return new Storage(options);\n  }\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId = options.projectId;\n}",
     "ctx": {
       "type": "constructor",
       "name": "Storage",
@@ -348,8 +348,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 106,
-    "codeStart": 154,
+    "line": 101,
+    "codeStart": 149,
     "code": "Storage.acl = {\n  OWNER_ROLE: 'OWNER',\n  READER_ROLE: 'READER',\n  WRITER_ROLE: 'WRITER'\n};\n\nStorage.prototype.acl = Storage.acl;",
     "ctx": {
       "type": "property",
@@ -406,8 +406,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 162,
-    "codeStart": 179,
+    "line": 157,
+    "codeStart": 174,
     "code": "Storage.prototype.bucket = function(name) {\n  return new Bucket(this, name);\n};",
     "ctx": {
       "type": "method",
@@ -575,8 +575,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 183,
-    "codeStart": 235,
+    "line": 178,
+    "codeStart": 230,
     "code": "Storage.prototype.createBucket = function(name, metadata, callback) {\n  var self = this;\n  if (!name) {\n    throw new Error('A name is required to create a bucket.');\n  }\n  if (!callback) {\n    callback = metadata;\n    metadata = {};\n  }\n  var query = {\n    project: this.projectId\n  };\n  var body = extend(metadata, {\n    name: name\n  });\n  var storageClasses = {\n    dra: 'DURABLE_REDUCED_AVAILABILITY',\n    nearline: 'NEARLINE'\n  };\n\n  Object.keys(storageClasses).forEach(function(storageClass) {\n    if (body[storageClass]) {\n      body.storageClass = storageClasses[storageClass];\n      delete body[storageClass];\n    }\n  });\n\n  this.makeReq_('POST', '', query, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n    var bucket = self.bucket(name);\n    bucket.metadata = resp;\n    callback(null, bucket, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -735,8 +735,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 273,
-    "codeStart": 343,
+    "line": 268,
+    "codeStart": 338,
     "code": "Storage.prototype.getBuckets = function(query, callback) {\n  var that = this;\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n  query.project = query.project || this.projectId;\n  this.makeReq_('GET', '', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n    var buckets = (resp.items || []).map(function(item) {\n      var bucket = that.bucket(item.id);\n      bucket.metadata = item;\n      return bucket;\n    });\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, { pageToken: resp.nextPageToken });\n    }\n    callback(null, buckets, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -831,8 +831,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 368,
-    "codeStart": 380,
+    "line": 363,
+    "codeStart": 375,
     "code": "Storage.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: STORAGE_BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};",
     "ctx": {
       "type": "method",
@@ -854,8 +854,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 394,
-    "codeStart": 399,
+    "line": 389,
+    "codeStart": 394,
     "code": "streamRouter.extend(Storage, 'getBuckets');\n\nmodule.exports = Storage;",
     "ctx": false
   }

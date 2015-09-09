@@ -275,7 +275,7 @@
     "ignore": false,
     "line": 61,
     "codeStart": 82,
-    "code": "function Search(options) {\n  if (!(this instanceof Search)) {\n    return new Search(options);\n  }\n\n  options = options || {};\n\n  if (!options.projectId) {\n    throw util.missingProjectIdError;\n  }\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    email: options.email,\n    keyFile: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  this.projectId_ = options.projectId;\n}",
+    "code": "function Search(options) {\n  if (!(this instanceof Search)) {\n    options = util.normalizeArguments(this, options);\n    return new Search(options);\n  }\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    email: options.email,\n    keyFile: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  this.projectId_ = options.projectId;\n}",
     "ctx": {
       "type": "constructor",
       "name": "Search",
@@ -459,8 +459,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 103,
-    "codeStart": 173,
+    "line": 98,
+    "codeStart": 168,
     "code": "Search.prototype.getIndexes = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  query = extend({}, query);\n\n  if (query.prefix) {\n    query.indexNamePrefix = query.prefix;\n    delete query.prefix;\n  }\n\n  this.makeReq_('GET', '/indexes', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var indexes = (resp.indexes || []).map(function(indexObject) {\n      var index = self.index(indexObject.indexId);\n\n      if (is.object(resp.indexedField)) {\n        index.fields = resp.indexedField;\n      }\n\n      return index;\n    });\n\n    callback(null, indexes, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -511,8 +511,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 216,
-    "codeStart": 222,
+    "line": 211,
+    "codeStart": 217,
     "code": "Search.prototype.index = function(id) {\n  return new Index(this, id);\n};",
     "ctx": {
       "type": "method",
@@ -607,8 +607,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 226,
-    "codeStart": 238,
+    "line": 221,
+    "codeStart": 233,
     "code": "Search.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: format('{base}projects/{projectId}{path}', {\n      base: SEARCH_BASE_URL,\n      projectId: this.projectId_,\n      path: path\n    })\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};",
     "ctx": {
       "type": "method",
@@ -630,8 +630,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 256,
-    "codeStart": 261,
+    "line": 251,
+    "codeStart": 256,
     "code": "streamRouter.extend(Search, 'getIndexes');\n\nmodule.exports = Search;",
     "ctx": false
   }
