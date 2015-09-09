@@ -173,6 +173,12 @@
   {
     "tags": [
       {
+        "type": "private",
+        "string": "\n",
+        "visibility": "private",
+        "html": ""
+      },
+      {
         "type": "param",
         "string": "{module:compute/zone} zone - The Zone this disk belongs to.",
         "name": "zone",
@@ -219,13 +225,13 @@
       "summary": "<p>Format a disk&#39;s name how the API expects.</p>",
       "body": ""
     },
-    "isPrivate": false,
+    "isPrivate": true,
     "isConstructor": false,
     "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 67,
-    "codeStart": 74,
+    "codeStart": 76,
     "code": "Disk.formatName_ = function(zone, name) {\n  return format('projects/{pId}/zones/{zoneName}/disks/{diskName}', {\n    pId: zone.compute.projectId,\n    zoneName: zone.name,\n    diskName: name\n  });\n};",
     "ctx": {
       "type": "method",
@@ -360,8 +366,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 82,
-    "codeStart": 110,
+    "line": 84,
+    "codeStart": 112,
     "code": "Disk.prototype.createSnapshot = function(name, options, callback) {\n  var zone = this.zone;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  var body = extend({}, options, {\n    name: name\n  });\n\n  this.makeReq_('POST', '/createSnapshot', null, body, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var snapshot = zone.compute.snapshot(name);\n\n    var operation = zone.operation(resp.name);\n    operation.metadata = resp;\n\n    callback(null, snapshot, operation, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -450,8 +456,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 137,
-    "codeStart": 154,
+    "line": 139,
+    "codeStart": 156,
     "code": "Disk.prototype.delete = function(callback) {\n  var zone = this.zone;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('DELETE', '', null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var operation = zone.operation(resp.name);\n    operation.metadata = resp;\n\n    callback(null, operation, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -545,8 +551,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 172,
-    "codeStart": 186,
+    "line": 174,
+    "codeStart": 188,
     "code": "Disk.prototype.getMetadata = function(callback) {\n  var self = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('GET', '', null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.metadata = resp;\n\n    callback(null, self.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -641,8 +647,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 203,
-    "codeStart": 215,
+    "line": 205,
+    "codeStart": 217,
     "code": "Disk.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/disks/' + this.name + path;\n  this.zone.makeReq_(method, path, query, body, callback);\n};\n\nmodule.exports = Disk;",
     "ctx": {
       "type": "method",

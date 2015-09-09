@@ -173,6 +173,12 @@
   {
     "tags": [
       {
+        "type": "private",
+        "string": "\n",
+        "visibility": "private",
+        "html": ""
+      },
+      {
         "type": "param",
         "string": "{module:compute} compute - The Compute object this network belongs to.",
         "name": "compute",
@@ -219,13 +225,13 @@
       "summary": "<p>Format a network&#39;s name how the API expects.</p>",
       "body": ""
     },
-    "isPrivate": false,
+    "isPrivate": true,
     "isConstructor": false,
     "isClass": false,
     "isEvent": false,
     "ignore": false,
     "line": 65,
-    "codeStart": 72,
+    "codeStart": 74,
     "code": "Network.formatName_ = function(compute, name) {\n  return format('projects/{projectId}/global/networks/{name}', {\n    projectId: compute.projectId,\n    name: name\n  });\n};",
     "ctx": {
       "type": "method",
@@ -388,8 +394,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 79,
-    "codeStart": 122,
+    "line": 81,
+    "codeStart": 124,
     "code": "Network.prototype.createFirewall = function(name, config, callback) {\n  config = extend({}, config, {\n    network: this.formattedName\n  });\n\n  this.compute.createFirewall(name, config, callback);\n};",
     "ctx": {
       "type": "method",
@@ -478,8 +484,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 130,
-    "codeStart": 147,
+    "line": 132,
+    "codeStart": 149,
     "code": "Network.prototype.delete = function(callback) {\n  var compute = this.compute;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('DELETE', '', null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var operation = compute.operation(resp.name);\n    operation.metadata = resp;\n\n    callback(null, operation, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -526,8 +532,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 165,
-    "codeStart": 175,
+    "line": 167,
+    "codeStart": 177,
     "code": "Network.prototype.firewall = function(name) {\n  var firewall = this.compute.firewall(name);\n\n  firewall.metadata = {\n    network: this.formattedName\n  };\n\n  return firewall;\n};",
     "ctx": {
       "type": "method",
@@ -691,8 +697,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 185,
-    "codeStart": 246,
+    "line": 187,
+    "codeStart": 248,
     "code": "Network.prototype.getFirewalls = function(options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = extend({}, options, {\n    filter: 'network eq .*' + this.formattedName\n  });\n\n  return this.compute.getFirewalls(options, callback);\n};",
     "ctx": {
       "type": "method",
@@ -786,8 +792,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 259,
-    "codeStart": 273,
+    "line": 261,
+    "codeStart": 275,
     "code": "Network.prototype.getMetadata = function(callback) {\n  var self = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('GET', '', null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.metadata = resp;\n\n    callback(null, self.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -882,8 +888,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 290,
-    "codeStart": 302,
+    "line": 292,
+    "codeStart": 304,
     "code": "Network.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/global/networks/' + this.name + path;\n  this.compute.makeReq_(method, path, query, body, callback);\n};\n\nmodule.exports = Network;",
     "ctx": {
       "type": "method",
