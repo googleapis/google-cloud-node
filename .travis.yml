@@ -1,6 +1,20 @@
 language: node_js
 node_js:
-- 0.12
+  - 4
+  - 0.12
+
+# To test Node v4, Travis needs to use a newer C++ compiler.
+# Source: https://github.com/nodejs/nan/issues/435#issuecomment-136063745
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
+before_install:
+  - export CXX=g++-4.8
+  - $CXX --version
+
 script: ./scripts/build.sh
 before_deploy: ./scripts/release.sh
 deploy:
