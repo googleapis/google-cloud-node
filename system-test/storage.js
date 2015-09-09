@@ -593,18 +593,23 @@ describe('storage', function() {
       it('should write without chunked transfer-encoding', function(done) {
         var file = bucket.file('LargeFile');
 
-        fs.stat(files.big.path, function(err, metadata) {
+        fs.stat(files.big.path, function(err, fd) {
+          var metadata = {
+            contentLength: fd.size,
+            contentType: 'image/png'
+          };
+
           var ws = file.createWriteStream({
-            metadata: {
-              contentLength: metadata.size
-            }
+            simple: true,
+            metadata: metadata
           });
 
           fs.createReadStream(files.big.path)
             .pipe(ws)
             .on('error', done)
             .on('finish', function() {
-              assert.equal(file.metadata.size, metadata.size);
+              assert.equal(file.metadata.size, metadata.contentLength);
+              assert.equal(file.metadata.contentType, metadata.contentType);
               file.delete(done);
             });
         });
