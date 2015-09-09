@@ -1,0 +1,757 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
+  },
+  {
+    "tags": [
+      {
+        "type": "module",
+        "string": "dns",
+        "html": "<p>dns</p>"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 17,
+    "codeStart": 21,
+    "code": "'use strict';\n\nvar extend = require('extend');\nvar is = require('is');",
+    "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/streamrouter}",
+        "types": [
+          "module:common/streamrouter"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Fstreamrouter.html\">common/streamrouter</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/streamrouter}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 26,
+    "codeStart": 30,
+    "code": "var streamRouter = require('../common/stream-router.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "streamRouter",
+      "value": "require('../common/stream-router.js')",
+      "string": "streamRouter"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/util}",
+        "types": [
+          "module:common/util"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 32,
+    "codeStart": 36,
+    "code": "var util = require('../common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:dns/zone}",
+        "types": [
+          "module:dns/zone"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Fzone.html\">dns/zone</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:dns/zone}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 38,
+    "codeStart": 42,
+    "code": "var Zone = require('./zone.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Zone",
+      "value": "require('./zone.js')",
+      "string": "Zone"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "const",
+        "string": "{string} Base URL for DNS API.",
+        "html": "<p>{string} Base URL for DNS API.</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 44,
+    "codeStart": 48,
+    "code": "var DNS_BASE_URL = 'https://www.googleapis.com/dns/v1/projects/';",
+    "ctx": {
+      "type": "declaration",
+      "name": "DNS_BASE_URL",
+      "value": "'https://www.googleapis.com/dns/v1/projects/'",
+      "string": "DNS_BASE_URL"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "const",
+        "string": "{array} Required scopes for the DNS API.",
+        "html": "<p>{array} Required scopes for the DNS API.</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 50,
+    "codeStart": 54,
+    "code": "var SCOPES = [\n  'https://www.googleapis.com/auth/ndev.clouddns.readwrite',\n  'https://www.googleapis.com/auth/cloud-platform'\n];",
+    "ctx": {
+      "type": "declaration",
+      "name": "SCOPES",
+      "value": "[",
+      "string": "SCOPES"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "constructor",
+        "string": "",
+        "html": ""
+      },
+      {
+        "type": "alias",
+        "string": "module:dns ",
+        "html": "<p>module:dns </p>"
+      },
+      {
+        "type": "param",
+        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).\n",
+        "name": "options",
+        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'grape-spaceship-123'\n});\n\nvar dns = gcloud.dns();",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>var dns = gcloud.dns();</p>"
+      }
+    ],
+    "description": {
+      "full": "<p><a href=\"https://cloud.google.com/dns/what-is-cloud-dns\">Google Cloud DNS</a> is a high-<br />performance, resilient, global DNS service that provides a cost-effective way<br />to make your applications and services available to your users. This<br />programmable, authoritative DNS service can be used to easily publish and<br />manage DNS records using the same infrastructure relied upon by Google.</p>",
+      "summary": "<p><a href=\"https://cloud.google.com/dns/what-is-cloud-dns\">Google Cloud DNS</a> is a high-<br />performance, resilient, global DNS service that provides a cost-effective way<br />to make your applications and services available to your users. This<br />programmable, authoritative DNS service can be used to easily publish and<br />manage DNS records using the same infrastructure relied upon by Google.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": true,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 59,
+    "codeStart": 79,
+    "code": "function DNS(options) {\n  if (!(this instanceof DNS)) {\n    options = util.normalizeArguments(this, options);\n    return new DNS(options);\n  }\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId_ = options.projectId;\n}",
+    "ctx": {
+      "type": "constructor",
+      "name": "DNS",
+      "string": "DNS()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create} ",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a> </p>"
+      },
+      {
+        "type": "throws",
+        "string": "{error} If a zone name is not provided.",
+        "types": [
+          "error"
+        ],
+        "description": "<p>If a zone name is not provided.</p>"
+      },
+      {
+        "type": "throws",
+        "string": "{error} If a zone dnsName is not provided.\n",
+        "types": [
+          "error"
+        ],
+        "description": "<p>If a zone dnsName is not provided. </p>"
+      },
+      {
+        "type": "param",
+        "string": "{string} name - Unique name for the zone. E.g. \"my-zone\"",
+        "name": "name",
+        "description": "<ul>\n<li>Unique name for the zone. E.g. &quot;my-zone&quot;</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} config - Configuration object.",
+        "name": "config",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} config.dnsName - DNS name for the zone. E.g. \"example.com.\"",
+        "name": "config.dnsName",
+        "description": "<ul>\n<li>DNS name for the zone. E.g. &quot;example.com.&quot;</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string=} config.description - Description text for the zone.",
+        "name": "config.description",
+        "description": "<ul>\n<li>Description text for the zone.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An API error.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An API error.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?module:dns/zone} callback.zone - A new {module:dns/zone} object.",
+        "name": "callback.zone",
+        "description": "<ul>\n<li>A new {module:dns/zone} object.</li>\n</ul>\n",
+        "types": [
+          "module:dns/zone"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Fzone.html\">dns/zone</a>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - Raw API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>Raw API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "dns.createZone('my-awesome-zone', {\n  dnsName: 'example.com.', // note the period at the end of the domain.\n  description: 'This zone is awesome!'\n}, function(err, zone, apiResponse) {\n  if (!err) {\n    // The zone was created successfully.\n  }\n});",
+        "html": "<p>dns.createZone(&#39;my-awesome-zone&#39;, {<br />  dnsName: &#39;example.com.&#39;, // note the period at the end of the domain.<br />  description: &#39;This zone is awesome!&#39;<br />}, function(err, zone, apiResponse) {<br />  if (!err) {<br />    // The zone was created successfully.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a managed zone.</p>",
+      "summary": "<p>Create a managed zone.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 95,
+    "codeStart": 122,
+    "code": "DNS.prototype.createZone = function(name, config, callback) {\n  var self = this;\n\n  if (!name) {\n    throw new Error('A zone name is required.');\n  }\n\n  if (!config || !config.dnsName) {\n    throw new Error('A zone dnsName is required.');\n  }\n\n  config.name = name;\n\n  // Required by the API.\n  config.description = config.description || '';\n\n  this.makeReq_('POST', '/managedZones', null, config, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var zone = self.zone(resp.name);\n    zone.metadata = resp;\n\n    callback(null, zone, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "DNS",
+      "cons": "DNS",
+      "name": "createZone",
+      "string": "DNS.prototype.createZone()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[ManagedZones: list API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/list} ",
+        "html": "<p>[ManagedZones: list API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/list}\">https://cloud.google.com/dns/api/v1/managedZones/list}</a> </p>"
+      },
+      {
+        "type": "param",
+        "string": "{object=} query - Query object.",
+        "name": "query",
+        "description": "<ul>\n<li>Query object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} query.maxResults - Maximum number of results to return.",
+        "name": "query.maxResults",
+        "description": "<ul>\n<li>Maximum number of results to return.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} query.pageToken - Page token.",
+        "name": "query.pageToken",
+        "description": "<ul>\n<li>Page token.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An API error.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An API error.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?module:dns/zone[]} callback.zones - An array of {module:dns/zone}\n    objects.",
+        "name": "callback.zones",
+        "description": "<ul>\n<li>An array of {module:dns/zone}     objects.</li>\n</ul>\n",
+        "types": [
+          "Array.<module:dns/zone>"
+        ],
+        "typesDescription": "<code>Array</code>.&lt;module:<a href=\"module%3Adns%2Fzone.html\">dns/zone</a>&gt;|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - Raw API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>Raw API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "dns.getZones(function(err, zones, apiResponse) {});",
+        "html": "<p>dns.getZones(function(err, zones, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Gets a list of managed zones for the project.</p>",
+      "summary": "<p>Gets a list of managed zones for the project.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 151,
+    "codeStart": 168,
+    "code": "DNS.prototype.getZones = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  this.makeReq_('GET', '/managedZones', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var zones = (resp.managedZones || []).map(function(zone) {\n      var zoneInstance = self.zone(zone.name);\n      zoneInstance.metadata = zone;\n      return zoneInstance;\n    });\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    callback(null, zones, nextQuery, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "DNS",
+      "cons": "DNS",
+      "name": "getZones",
+      "string": "DNS.prototype.getZones()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "throws",
+        "string": "{error} If a zone name is not provided.\n",
+        "types": [
+          "error"
+        ],
+        "description": "<p>If a zone name is not provided. </p>"
+      },
+      {
+        "type": "param",
+        "string": "{string} name - The unique name of the zone.",
+        "name": "name",
+        "description": "<ul>\n<li>The unique name of the zone.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{module:dns/zone}\n",
+        "types": [
+          "module:dns/zone"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Fzone.html\">dns/zone</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:dns/zone}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var zone = dns.zone('my-zone');",
+        "html": "<p>var zone = dns.zone(&#39;my-zone&#39;);</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a zone object representing an existing managed zone.</p>",
+      "summary": "<p>Create a zone object representing an existing managed zone.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 200,
+    "codeStart": 211,
+    "code": "DNS.prototype.zone = function(name) {\n  if (!name) {\n    throw new Error('A zone name is required.');\n  }\n\n  return new Zone(this, name);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "DNS",
+      "cons": "DNS",
+      "name": "zone",
+      "string": "DNS.prototype.zone()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "\n",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{string} method - Action.",
+        "name": "method",
+        "description": "<ul>\n<li>Action.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} path - Request path.",
+        "name": "path",
+        "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{*} query - Request query object.",
+        "name": "query",
+        "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{*} body - Request body contents.",
+        "name": "body",
+        "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
+      "summary": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 219,
+    "codeStart": 231,
+    "code": "DNS.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri:  DNS_BASE_URL + this.projectId_ + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "DNS",
+      "cons": "DNS",
+      "name": "makeReq_",
+      "string": "DNS.prototype.makeReq_()"
+    }
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Developer Documentation</p><p>These methods can be used with either a callback or as a readable object<br />stream. <code>streamRouter</code> is used to add this dual behavior.</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": "<p>These methods can be used with either a callback or as a readable object<br />stream. <code>streamRouter</code> is used to add this dual behavior.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 245,
+    "codeStart": 250,
+    "code": "streamRouter.extend(DNS, 'getZones');\n\nmodule.exports = DNS;",
+    "ctx": false
+  }
+]
