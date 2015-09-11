@@ -675,7 +675,7 @@ describe('Zone', function() {
       });
 
       it('should execute callback with error & API response', function(done) {
-        zone.getChanges({}, function(err, changes, nextQuery, apiResponse_) {
+        zone.getRecords({}, function(err, changes, nextQuery, apiResponse_) {
           assert.strictEqual(err, error);
           assert.strictEqual(apiResponse_, apiResponse);
           done();
