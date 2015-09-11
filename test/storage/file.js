@@ -1429,6 +1429,43 @@ describe('File', function() {
       });
     });
 
+    it('should return an error if getCredentials errors', function(done) {
+      var error = new Error('Error.');
+
+      var storage = bucket.storage;
+      storage.makeAuthorizedRequest_.getCredentials = function(callback) {
+        callback(error);
+      };
+
+      file.getSignedPolicy({
+        expires: Date.now() + 5
+      }, function(err) {
+        var errorMessage = 'Signing failed. See `error` property.';
+        assert.strictEqual(err.message, errorMessage);
+        assert.strictEqual(err.error, error);
+        done();
+      });
+    });
+
+    it('should return an error if credentials are not present', function(done) {
+      var storage = bucket.storage;
+      storage.makeAuthorizedRequest_.getCredentials = function(callback) {
+        callback(null, {});
+      };
+
+      file.getSignedPolicy({
+        expires: Date.now() + 5
+      }, function(err) {
+        var errorMessage = [
+          'Signing failed. Could not find a `private_key`.',
+          'Please verify you are authorized with this property available.'
+        ].join(' ');
+
+        assert.strictEqual(err.message, errorMessage);
+        done();
+      });
+    });
+
     it('should add key equality condition', function(done) {
       file.getSignedPolicy({
         expires: Date.now() + 5
@@ -1637,10 +1674,49 @@ describe('File', function() {
     it('should create a signed url', function(done) {
       file.getSignedUrl({
         action: 'read',
-        expires: Date.now() + 5,
+        expires: Date.now() + 5
       }, function(err, signedUrl) {
         assert.ifError(err);
         assert.equal(typeof signedUrl, 'string');
+        done();
+      });
+    });
+
+    it('should return an error if getCredentials errors', function(done) {
+      var error = new Error('Error.');
+
+      var storage = bucket.storage;
+      storage.makeAuthorizedRequest_.getCredentials = function(callback) {
+        callback(error);
+      };
+
+      file.getSignedUrl({
+        action: 'read',
+        expires: Date.now() + 5
+      }, function(err) {
+        var errorMessage = 'Signing failed. See `error` property.';
+        assert.strictEqual(err.message, errorMessage);
+        assert.strictEqual(err.error, error);
+        done();
+      });
+    });
+
+    it('should return an error if credentials are not present', function(done) {
+      var storage = bucket.storage;
+      storage.makeAuthorizedRequest_.getCredentials = function(callback) {
+        callback(null, {});
+      };
+
+      file.getSignedUrl({
+        action: 'read',
+        expires: Date.now() + 5
+      }, function(err) {
+        var errorMessage = [
+          'Signing failed. Could not find a `private_key` or `client_email`.',
+          'Please verify you are authorized with these credentials available.'
+        ].join(' ');
+
+        assert.strictEqual(err.message, errorMessage);
         done();
       });
     });
