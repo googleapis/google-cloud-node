@@ -566,9 +566,9 @@
       }
     ],
     "description": {
-      "full": "<p>Create a bucket.</p>",
+      "full": "<p>Create a bucket.</p><p>Google Cloud Storage uses a flat namespace, so you can&#39;t create a bucket with<br />a name that is already in use. For more information, see<br /><a href=\"https://cloud.google.com/storage/docs/bucketnaming.html#requirements\">Bucket Naming Guidelines</a>.</p>",
       "summary": "<p>Create a bucket.</p>",
-      "body": ""
+      "body": "<p>Google Cloud Storage uses a flat namespace, so you can&#39;t create a bucket with<br />a name that is already in use. For more information, see<br /><a href=\"https://cloud.google.com/storage/docs/bucketnaming.html#requirements\">Bucket Naming Guidelines</a>.</p>"
     },
     "isPrivate": false,
     "isConstructor": false,
@@ -576,7 +576,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 178,
-    "codeStart": 230,
+    "codeStart": 234,
     "code": "Storage.prototype.createBucket = function(name, metadata, callback) {\n  var self = this;\n  if (!name) {\n    throw new Error('A name is required to create a bucket.');\n  }\n  if (!callback) {\n    callback = metadata;\n    metadata = {};\n  }\n  var query = {\n    project: this.projectId\n  };\n  var body = extend(metadata, {\n    name: name\n  });\n  var storageClasses = {\n    dra: 'DURABLE_REDUCED_AVAILABILITY',\n    nearline: 'NEARLINE'\n  };\n\n  Object.keys(storageClasses).forEach(function(storageClass) {\n    if (body[storageClass]) {\n      body.storageClass = storageClasses[storageClass];\n      delete body[storageClass];\n    }\n  });\n\n  this.makeReq_('POST', '', query, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n    var bucket = self.bucket(name);\n    bucket.metadata = resp;\n    callback(null, bucket, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -735,8 +735,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 268,
-    "codeStart": 338,
+    "line": 272,
+    "codeStart": 342,
     "code": "Storage.prototype.getBuckets = function(query, callback) {\n  var that = this;\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n  query.project = query.project || this.projectId;\n  this.makeReq_('GET', '', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n    var buckets = (resp.items || []).map(function(item) {\n      var bucket = that.bucket(item.id);\n      bucket.metadata = item;\n      return bucket;\n    });\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, { pageToken: resp.nextPageToken });\n    }\n    callback(null, buckets, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -831,8 +831,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 363,
-    "codeStart": 375,
+    "line": 367,
+    "codeStart": 379,
     "code": "Storage.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: STORAGE_BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};",
     "ctx": {
       "type": "method",
@@ -854,8 +854,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 389,
-    "codeStart": 394,
+    "line": 393,
+    "codeStart": 398,
     "code": "streamRouter.extend(Storage, 'getBuckets');\n\nmodule.exports = Storage;",
     "ctx": false
   }
