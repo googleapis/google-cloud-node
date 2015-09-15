@@ -16,6 +16,7 @@ This client supports the following Google Cloud Platform services:
 * [Google Cloud Pub/Sub](#google-cloud-pubsub)
 * [Google Cloud Storage](#google-cloud-storage)
 * [Google Compute Engine](#google-compute-engine)
+* [Google Cloud Resource Manager](#google-cloud-resource-manager-beta) (Beta)
 * [Google Cloud Search](#google-cloud-search-alpha) (Alpha)
 
 If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
@@ -181,8 +182,8 @@ var gcloud = require('gcloud');
 // global basis (see Authorization section above).
 
 var dns = gcloud.dns({
-  keyFilename: '/path/to/keyfile.json',
-  projectId: 'my-project'
+  projectId: 'my-project',
+  keyFilename: '/path/to/keyfile.json'
 });
 
 // Create a managed zone.
@@ -264,8 +265,8 @@ var gcloud = require('gcloud');
 // global basis (see Authorization section above).
 
 var gcs = gcloud.storage({
-  keyFilename: '/path/to/keyfile.json',
-  projectId: 'my-project'
+  projectId: 'my-project',
+  keyFilename: '/path/to/keyfile.json'
 });
 
 // Create a new bucket.
@@ -335,6 +336,42 @@ zone.createVM(name, { os: 'ubuntu' }, function(err, vm, operation) {
 ```
 
 
+## Google Cloud Resource Manager (Beta)
+
+> This is a *Beta* release of Google Cloud Resource Manager. This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
+
+- [API Documentation][gcloud-resource-docs]
+- [Official Documentation][cloud-resource-docs]
+
+#### Preview
+
+```js
+var gcloud = require('gcloud');
+
+// Authorizing on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authorization section above).
+
+var resource = gcloud.resource({
+  projectId: 'my-project',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+// Get all of the projects you maintain.
+resource.getProjects(function(err, projects) {
+  if (!err) {
+    // `projects` contains all of your projects.
+  }
+});
+
+// Get the metadata from your project. (defaults to `my-project`)
+var project = resource.project();
+
+project.getMetadata(function(err, metadata) {
+  // `metadata` describes your project.
+});
+```
+
+
 ## Google Cloud Search (Alpha)
 
 > This is an *Alpha* release of Google Cloud Search. This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
@@ -351,8 +388,8 @@ var gcloud = require('gcloud');
 // global basis (see Authorization section above).
 
 var search = gcloud.search({
-  keyFilename: '/path/to/keyfile.json',
-  projectId: 'my-project'
+  projectId: 'my-project',
+  keyFilename: '/path/to/keyfile.json'
 });
 
 // Create a document in a new index.
@@ -396,6 +433,7 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [gcloud-datastore-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/datastore
 [gcloud-dns-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/dns
 [gcloud-pubsub-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/pubsub
+[gcloud-resource-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/resource
 [gcloud-search-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/search
 [gcloud-storage-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/storage
 
@@ -420,6 +458,8 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [cloud-dns-docs]: https://cloud.google.com/dns/docs
 
 [cloud-pubsub-docs]: https://cloud.google.com/pubsub/docs
+
+[cloud-resource-docs]: https://cloud.google.com/resource-manager
 
 [cloud-search-docs]: https://cloud.google.com/search/
 
