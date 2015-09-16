@@ -275,7 +275,7 @@
     "ignore": false,
     "line": 59,
     "codeStart": 79,
-    "code": "function DNS(options) {\n  if (!(this instanceof DNS)) {\n    options = util.normalizeArguments(this, options);\n    return new DNS(options);\n  }\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId_ = options.projectId;\n}",
+    "code": "function DNS(options) {\n  if (!(this instanceof DNS)) {\n    options = util.normalizeArguments(this, options);\n    return new DNS(options);\n  }\n\n  this.makeAuthenticatedRequest_ = util.makeAuthenticatedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId_ = options.projectId;\n}",
     "ctx": {
       "type": "constructor",
       "name": "DNS",
@@ -728,7 +728,7 @@
     "ignore": false,
     "line": 219,
     "codeStart": 231,
-    "code": "DNS.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri:  DNS_BASE_URL + this.projectId_ + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};",
+    "code": "DNS.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri:  DNS_BASE_URL + this.projectId_ + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthenticatedRequest_(reqOpts, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "DNS",

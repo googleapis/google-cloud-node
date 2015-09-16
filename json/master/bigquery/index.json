@@ -359,7 +359,7 @@
     "ignore": false,
     "line": 70,
     "codeStart": 97,
-    "code": "function BigQuery(options) {\n  if (!(this instanceof BigQuery)) {\n    options = util.normalizeArguments(this, options);\n    return new BigQuery(options);\n  }\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId = options.projectId;\n}",
+    "code": "function BigQuery(options) {\n  if (!(this instanceof BigQuery)) {\n    options = util.normalizeArguments(this, options);\n    return new BigQuery(options);\n  }\n\n  this.makeAuthenticatedRequest_ = util.makeAuthenticatedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId = options.projectId;\n}",
     "ctx": {
       "type": "constructor",
       "name": "BigQuery",
@@ -1371,7 +1371,7 @@
     "ignore": false,
     "line": 602,
     "codeStart": 614,
-    "code": "BigQuery.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: BIGQUERY_BASE_URL + this.projectId + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};",
+    "code": "BigQuery.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: BIGQUERY_BASE_URL + this.projectId + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthenticatedRequest_(reqOpts, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "BigQuery",

@@ -305,7 +305,7 @@
     "ignore": false,
     "line": 65,
     "codeStart": 85,
-    "code": "function Storage(options) {\n  if (!(this instanceof Storage)) {\n    options = util.normalizeArguments(this, options);\n    return new Storage(options);\n  }\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId = options.projectId;\n}",
+    "code": "function Storage(options) {\n  if (!(this instanceof Storage)) {\n    options = util.normalizeArguments(this, options);\n    return new Storage(options);\n  }\n\n  this.makeAuthenticatedRequest_ = util.makeAuthenticatedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId = options.projectId;\n}",
     "ctx": {
       "type": "constructor",
       "name": "Storage",
@@ -833,7 +833,7 @@
     "ignore": false,
     "line": 367,
     "codeStart": 379,
-    "code": "Storage.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: STORAGE_BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};",
+    "code": "Storage.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: STORAGE_BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthenticatedRequest_(reqOpts, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Storage",

@@ -718,9 +718,9 @@
       }
     ],
     "description": {
-      "full": "<p>There are two key ways to use the <code>gcloud</code> module.</p><ol>\n<li><p>Provide connection &amp; configuration details up-front.</p></li>\n<li><p>Provide them at the time of instantiation of sub-modules, e.g. a Datastore<br />dataset, a Cloud Storage bucket, etc.</p></li>\n</ol>\n<p>See our <a href=\"#/authorization\">Authorization Guide</a> for how to obtain the<br />necessary credentials for connecting to your project.</p>",
+      "full": "<p>There are two key ways to use the <code>gcloud</code> module.</p><ol>\n<li><p>Provide connection &amp; configuration details up-front.</p></li>\n<li><p>Provide them at the time of instantiation of sub-modules, e.g. a Datastore<br />dataset, a Cloud Storage bucket, etc.</p></li>\n</ol>\n<p>See our <a href=\"#/authentication\">Authentication Guide</a> for how to obtain the<br />necessary credentials for connecting to your project.</p>",
       "summary": "<p>There are two key ways to use the <code>gcloud</code> module.</p>",
-      "body": "<ol>\n<li><p>Provide connection &amp; configuration details up-front.</p></li>\n<li><p>Provide them at the time of instantiation of sub-modules, e.g. a Datastore<br />dataset, a Cloud Storage bucket, etc.</p></li>\n</ol>\n<p>See our <a href=\"#/authorization\">Authorization Guide</a> for how to obtain the<br />necessary credentials for connecting to your project.</p>"
+      "body": "<ol>\n<li><p>Provide connection &amp; configuration details up-front.</p></li>\n<li><p>Provide them at the time of instantiation of sub-modules, e.g. a Datastore<br />dataset, a Cloud Storage bucket, etc.</p></li>\n</ol>\n<p>See our <a href=\"#/authentication\">Authentication Guide</a> for how to obtain the<br />necessary credentials for connecting to your project.</p>"
     },
     "isPrivate": false,
     "isConstructor": true,

@@ -275,7 +275,7 @@
     "ignore": false,
     "line": 59,
     "codeStart": 83,
-    "code": "function Resource(options) {\n  if (!(this instanceof Resource)) {\n    options = util.normalizeArguments(this, options, {\n      projectIdRequired: false\n    });\n    return new Resource(options);\n  }\n\n  this.defaultProjectId_ = options.projectId;\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n}",
+    "code": "function Resource(options) {\n  if (!(this instanceof Resource)) {\n    options = util.normalizeArguments(this, options, {\n      projectIdRequired: false\n    });\n    return new Resource(options);\n  }\n\n  this.defaultProjectId_ = options.projectId;\n\n  this.makeAuthenticatedRequest_ = util.makeAuthenticatedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n}",
     "ctx": {
       "type": "constructor",
       "name": "Resource",
@@ -742,7 +742,7 @@
     "ignore": false,
     "line": 268,
     "codeStart": 280,
-    "code": "Resource.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};",
+    "code": "Resource.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthenticatedRequest_(reqOpts, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Resource",

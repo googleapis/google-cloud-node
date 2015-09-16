@@ -125,9 +125,9 @@
     "tags": [
       {
         "type": "param",
-        "string": "{module:common/connection#Connection} connection - An authorized\n    connection to Google Cloud Datastore.",
+        "string": "{module:common/connection#Connection} connection - An authenticated\n    connection to Google Cloud Datastore.",
         "name": "connection",
-        "description": "<ul>\n<li>An authorized     connection to Google Cloud Datastore.</li>\n</ul>\n",
+        "description": "<ul>\n<li>An authenticated     connection to Google Cloud Datastore.</li>\n</ul>\n",
         "types": [],
         "typesDescription": "<code>?</code>",
         "optional": false,
@@ -208,7 +208,7 @@
     "ignore": false,
     "line": 56,
     "codeStart": 72,
-    "code": "function Transaction(dataset, projectId) {\n  this.id = null;\n  this.apiEndpoint = dataset.apiEndpoint;\n  this.makeAuthorizedRequest_ = dataset.makeAuthorizedRequest_;\n  this.projectId = projectId;\n\n  // A queue for entity modifications made during the transaction.\n  this.modifiedEntities_ = [];\n\n  // Queue the callbacks that process the API responses.\n  this.requestCallbacks_ = [];\n\n  // Queue the requests to make when we send the transactional commit.\n  this.requests_ = [];\n}\n\nnodeutil.inherits(Transaction, DatastoreRequest);",
+    "code": "function Transaction(dataset, projectId) {\n  this.id = null;\n  this.apiEndpoint = dataset.apiEndpoint;\n  this.makeAuthenticatedRequest_ = dataset.makeAuthenticatedRequest_;\n  this.projectId = projectId;\n\n  // A queue for entity modifications made during the transaction.\n  this.modifiedEntities_ = [];\n\n  // Queue the callbacks that process the API responses.\n  this.requestCallbacks_ = [];\n\n  // Queue the requests to make when we send the transactional commit.\n  this.requests_ = [];\n}\n\nnodeutil.inherits(Transaction, DatastoreRequest);",
     "ctx": {
       "type": "constructor",
       "name": "Transaction",

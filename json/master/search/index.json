@@ -275,7 +275,7 @@
     "ignore": false,
     "line": 61,
     "codeStart": 82,
-    "code": "function Search(options) {\n  if (!(this instanceof Search)) {\n    options = util.normalizeArguments(this, options);\n    return new Search(options);\n  }\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    email: options.email,\n    keyFile: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  this.projectId_ = options.projectId;\n}",
+    "code": "function Search(options) {\n  if (!(this instanceof Search)) {\n    options = util.normalizeArguments(this, options);\n    return new Search(options);\n  }\n\n  this.makeAuthenticatedRequest_ = util.makeAuthenticatedRequestFactory({\n    credentials: options.credentials,\n    email: options.email,\n    keyFile: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  this.projectId_ = options.projectId;\n}",
     "ctx": {
       "type": "constructor",
       "name": "Search",
@@ -609,7 +609,7 @@
     "ignore": false,
     "line": 221,
     "codeStart": 233,
-    "code": "Search.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: format('{base}projects/{projectId}{path}', {\n      base: SEARCH_BASE_URL,\n      projectId: this.projectId_,\n      path: path\n    })\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};",
+    "code": "Search.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: format('{base}projects/{projectId}{path}', {\n      base: SEARCH_BASE_URL,\n      projectId: this.projectId_,\n      path: path\n    })\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthenticatedRequest_(reqOpts, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Search",

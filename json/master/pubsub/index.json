@@ -317,7 +317,7 @@
     "ignore": false,
     "line": 65,
     "codeStart": 83,
-    "code": "function PubSub(options) {\n  if (!(this instanceof PubSub)) {\n    options = util.normalizeArguments(this, options);\n    return new PubSub(options);\n  }\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId = options.projectId;\n  this.projectName = 'projects/' + this.projectId;\n}",
+    "code": "function PubSub(options) {\n  if (!(this instanceof PubSub)) {\n    options = util.normalizeArguments(this, options);\n    return new PubSub(options);\n  }\n\n  this.makeAuthenticatedRequest_ = util.makeAuthenticatedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId = options.projectId;\n  this.projectName = 'projects/' + this.projectId;\n}",
     "ctx": {
       "type": "constructor",
       "name": "PubSub",
@@ -1227,7 +1227,7 @@
     "ignore": false,
     "line": 518,
     "codeStart": 530,
-    "code": "PubSub.prototype.makeReq_ = function(method, path, q, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: q,\n    uri: PUBSUB_BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};",
+    "code": "PubSub.prototype.makeReq_ = function(method, path, q, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: q,\n    uri: PUBSUB_BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthenticatedRequest_(reqOpts, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "PubSub",

@@ -358,7 +358,7 @@
     "ignore": false,
     "line": 67,
     "codeStart": 102,
-    "code": "function Dataset(options) {\n  if (!(this instanceof Dataset)) {\n    return new Dataset(options);\n  }\n\n  options = options || {};\n\n  if (!options.projectId) {\n    throw util.missingProjectIdError;\n  }\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    customEndpoint: typeof options.apiEndpoint !== 'undefined',\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.apiEndpoint = Dataset.determineApiEndpoint_(options);\n  this.namespace = options.namespace;\n  this.projectId = options.projectId;\n}\n\nnodeutil.inherits(Dataset, DatastoreRequest);",
+    "code": "function Dataset(options) {\n  if (!(this instanceof Dataset)) {\n    return new Dataset(options);\n  }\n\n  options = options || {};\n\n  if (!options.projectId) {\n    throw util.missingProjectIdError;\n  }\n\n  this.makeAuthenticatedRequest_ = util.makeAuthenticatedRequestFactory({\n    customEndpoint: typeof options.apiEndpoint !== 'undefined',\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.apiEndpoint = Dataset.determineApiEndpoint_(options);\n  this.namespace = options.namespace;\n  this.projectId = options.projectId;\n}\n\nnodeutil.inherits(Dataset, DatastoreRequest);",
     "ctx": {
       "type": "constructor",
       "name": "Dataset",
