@@ -556,7 +556,7 @@ describe('PubSub', function() {
     it('should pass network requests to the connection object', function(done) {
       var pubsub = new PubSub({ projectId: PROJECT_ID });
 
-      pubsub.makeAuthorizedRequest_ = function() {
+      pubsub.makeAuthenticatedRequest_ = function() {
         done();
       };
 

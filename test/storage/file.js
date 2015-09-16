@@ -102,9 +102,9 @@ describe('File', function() {
 
   beforeEach(function() {
     var options = {
-      makeAuthorizedRequest_: function(req, callback) {
+      makeAuthenticatedRequest_: function(req, callback) {
         if (callback) {
-          (callback.onAuthorized || callback)(null, req);
+          (callback.onAuthenticated || callback)(null, req);
         } else {
           return (requestOverride || requestCached)(req);
         }
@@ -481,8 +481,8 @@ describe('File', function() {
     it('should send query.generation if File has one', function(done) {
       var versionedFile = new File(bucket, 'file.txt', { generation: 1 });
 
-      versionedFile.bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
-        assert.equal(reqOpts.qs.generation, 1);
+      versionedFile.bucket.storage.makeAuthenticatedRequest_ = function(rOpts) {
+        assert.equal(rOpts.qs.generation, 1);
         setImmediate(function() {
           done();
         });
@@ -508,15 +508,15 @@ describe('File', function() {
       });
     });
 
-    describe('authorizing', function() {
-      it('should create an authorized request', function(done) {
+    describe('authenticating', function() {
+      it('should create an authenticated request', function(done) {
         var expectedPath = format('https://{host}/{b}/{o}', {
           host: 'storage.googleapis.com',
           b: file.bucket.name,
           o: encodeURIComponent(file.name)
         });
 
-        file.bucket.storage.makeAuthorizedRequest_ = function(opts) {
+        file.bucket.storage.makeAuthenticatedRequest_ = function(opts) {
           assert.equal(opts.uri, expectedPath);
           setImmediate(function() {
             done();
@@ -528,7 +528,7 @@ describe('File', function() {
       });
 
       it('should accept gzip encoding', function(done) {
-        file.bucket.storage.makeAuthorizedRequest_ = function(opts) {
+        file.bucket.storage.makeAuthenticatedRequest_ = function(opts) {
           assert.strictEqual(opts.gzip, true);
           setImmediate(function() {
             done();
@@ -543,7 +543,7 @@ describe('File', function() {
         var ERROR = new Error('Error.');
 
         beforeEach(function() {
-          file.bucket.storage.makeAuthorizedRequest_ = function(opts) {
+          file.bucket.storage.makeAuthenticatedRequest_ = function(opts) {
             var stream = (requestOverride || request)(opts);
 
             setImmediate(function() {
@@ -554,7 +554,7 @@ describe('File', function() {
           };
         });
 
-        it('should emit an error from authorizing', function(done) {
+        it('should emit an error from authenticating', function(done) {
           file.createReadStream()
             .once('error', function(err) {
               assert.equal(err, ERROR);
@@ -571,7 +571,7 @@ describe('File', function() {
 
         requestOverride = getFakeRequest();
 
-        file.bucket.storage.makeAuthorizedRequest_ = function() {
+        file.bucket.storage.makeAuthenticatedRequest_ = function() {
           setImmediate(function() {
             assert.deepEqual(requestOverride.getRequestOptions(), fakeRequest);
             done();
@@ -596,7 +596,7 @@ describe('File', function() {
       it('should unpipe stream from an error on the response', function(done) {
         var requestStream = through();
 
-        file.bucket.storage.makeAuthorizedRequest_ = function() {
+        file.bucket.storage.makeAuthenticatedRequest_ = function() {
           setImmediate(function() {
             // Must be a stream. Doesn't matter for the tests, though.
             requestStream.emit('response', through());
@@ -632,7 +632,7 @@ describe('File', function() {
           done();
         };
 
-        file.bucket.storage.makeAuthorizedRequest_ = function() {
+        file.bucket.storage.makeAuthenticatedRequest_ = function() {
           var stream = through();
           setImmediate(function() {
             stream.emit('complete', response);
@@ -676,9 +676,9 @@ describe('File', function() {
       beforeEach(function() {
         file.metadata.mediaLink = 'http://uri';
 
-        file.bucket.storage.makeAuthorizedRequest_ = function(opts, callback) {
-          if (callback) {
-            (callback.onAuthorized || callback)(null, {});
+        file.bucket.storage.makeAuthenticatedRequest_ = function(opts, cb) {
+          if (cb) {
+            (cb.onAuthenticated || cb)(null, {});
           } else {
             return (requestOverride || requestCached)(opts);
           }
@@ -865,7 +865,7 @@ describe('File', function() {
         createURI: function(opts, callback) {
           var bucket = file.bucket;
           var storage = bucket.storage;
-          var authClient = storage.makeAuthorizedRequest_.authClient;
+          var authClient = storage.makeAuthenticatedRequest_.authClient;
 
           assert.strictEqual(opts.authClient, authClient);
           assert.strictEqual(opts.bucket, bucket.name);
@@ -1412,7 +1412,7 @@ describe('File', function() {
 
     beforeEach(function() {
       var storage = bucket.storage;
-      storage.makeAuthorizedRequest_.getCredentials = function(callback) {
+      storage.makeAuthenticatedRequest_.getCredentials = function(callback) {
         callback(null, credentials);
       };
     });
@@ -1433,7 +1433,7 @@ describe('File', function() {
       var error = new Error('Error.');
 
       var storage = bucket.storage;
-      storage.makeAuthorizedRequest_.getCredentials = function(callback) {
+      storage.makeAuthenticatedRequest_.getCredentials = function(callback) {
         callback(error);
       };
 
@@ -1449,7 +1449,7 @@ describe('File', function() {
 
     it('should return an error if credentials are not present', function(done) {
       var storage = bucket.storage;
-      storage.makeAuthorizedRequest_.getCredentials = function(callback) {
+      storage.makeAuthenticatedRequest_.getCredentials = function(callback) {
         callback(null, {});
       };
 
@@ -1666,7 +1666,7 @@ describe('File', function() {
 
     beforeEach(function() {
       var storage = bucket.storage;
-      storage.makeAuthorizedRequest_.getCredentials = function(callback) {
+      storage.makeAuthenticatedRequest_.getCredentials = function(callback) {
         callback(null, credentials);
       };
     });
@@ -1686,7 +1686,7 @@ describe('File', function() {
       var error = new Error('Error.');
 
       var storage = bucket.storage;
-      storage.makeAuthorizedRequest_.getCredentials = function(callback) {
+      storage.makeAuthenticatedRequest_.getCredentials = function(callback) {
         callback(error);
       };
 
@@ -1703,7 +1703,7 @@ describe('File', function() {
 
     it('should return an error if credentials are not present', function(done) {
       var storage = bucket.storage;
-      storage.makeAuthorizedRequest_.getCredentials = function(callback) {
+      storage.makeAuthenticatedRequest_.getCredentials = function(callback) {
         callback(null, {});
       };
 
@@ -1971,7 +1971,7 @@ describe('File', function() {
         resumableUploadOverride = function(opts) {
           var bucket = file.bucket;
           var storage = bucket.storage;
-          var authClient = storage.makeAuthorizedRequest_.authClient;
+          var authClient = storage.makeAuthenticatedRequest_.authClient;
 
           assert.strictEqual(opts.authClient, authClient);
           assert.strictEqual(opts.bucket, bucket.name);

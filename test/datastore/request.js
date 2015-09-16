@@ -116,8 +116,8 @@ describe('Request', function() {
     requestOverride = null;
     request = new Request();
     request.apiEndpoint = CUSTOM_ENDPOINT;
-    request.makeAuthorizedRequest_ = function(req, callback) {
-      (callback.onAuthorized || callback)(null, req);
+    request.makeAuthenticatedRequest_ = function(req, callback) {
+      (callback.onAuthenticated || callback)(null, req);
     };
   });
 
@@ -761,7 +761,7 @@ describe('Request', function() {
   describe('makeReq_', function() {
     beforeEach(function() {
       request.connection = {
-        createAuthorizedReq: util.noop
+        createAuthenticatedReq: util.noop
       };
     });
 
@@ -776,7 +776,7 @@ describe('Request', function() {
         });
 
       request.projectId = projectId;
-      request.makeAuthorizedRequest_ = function(opts) {
+      request.makeAuthenticatedRequest_ = function(opts) {
         assert.equal(opts.method, 'POST');
         assert.equal(opts.uri, expectedUri);
         assert.equal(opts.headers['Content-Type'], 'application/x-protobuf');
@@ -793,8 +793,8 @@ describe('Request', function() {
         done();
         return new stream.Writable();
       };
-      request.makeAuthorizedRequest_ = function(opts, callback) {
-        (callback.onAuthorized || callback)(null, mockRequest);
+      request.makeAuthenticatedRequest_ = function(opts, callback) {
+        (callback.onAuthenticated || callback)(null, mockRequest);
       };
       request.makeReq_('commit', {}, util.noop);
     });
@@ -842,8 +842,8 @@ describe('Request', function() {
 
     describe('transactional and non-transactional properties', function() {
       beforeEach(function() {
-        request.createAuthorizedRequest_ = function(opts, callback) {
-          (callback.onAuthorized || callback)();
+        request.createAuthenticatedRequest_ = function(opts, callback) {
+          (callback.onAuthenticated || callback)();
         };
       });
 

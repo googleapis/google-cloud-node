@@ -40,13 +40,13 @@ var fakeStreamRouter = {
   }
 };
 
-var makeAuthorizedRequestFactoryOverride;
+var makeAuthenticatedRequestFactoryOverride;
 var fakeUtil = extend({}, util, {
-  makeAuthorizedRequestFactory: function() {
-    if (makeAuthorizedRequestFactoryOverride) {
-      return makeAuthorizedRequestFactoryOverride.apply(null, arguments);
+  makeAuthenticatedRequestFactory: function() {
+    if (makeAuthenticatedRequestFactoryOverride) {
+      return makeAuthenticatedRequestFactoryOverride.apply(null, arguments);
     } else {
-      return util.makeAuthorizedRequestFactory.apply(null, arguments);
+      return util.makeAuthenticatedRequestFactory.apply(null, arguments);
     }
   }
 });
@@ -75,7 +75,7 @@ describe('Resource', function() {
   });
 
   beforeEach(function() {
-    makeAuthorizedRequestFactoryOverride = null;
+    makeAuthenticatedRequestFactoryOverride = null;
 
     resource = new Resource({
       projectId: PROJECT_ID
@@ -106,7 +106,7 @@ describe('Resource', function() {
       fakeUtil.normalizeArguments = normalizeArguments;
     });
 
-    it('should create an authorized request function', function(done) {
+    it('should create an authenticated request function', function(done) {
       var options = {
         projectId: 'projectId',
         credentials: 'credentials',
@@ -114,7 +114,7 @@ describe('Resource', function() {
         keyFilename: 'keyFile'
       };
 
-      makeAuthorizedRequestFactoryOverride = function(options_) {
+      makeAuthenticatedRequestFactoryOverride = function(options_) {
         assert.deepEqual(options_, {
           credentials: options.credentials,
           email: options.email,
@@ -127,7 +127,7 @@ describe('Resource', function() {
       };
 
       var resource = new Resource(options);
-      resource.makeAuthorizedRequest_();
+      resource.makeAuthenticatedRequest_();
     });
 
     it('should localize the projectId', function() {
@@ -354,7 +354,7 @@ describe('Resource', function() {
         c: 'd'
       };
 
-      resource.makeAuthorizedRequest_ = function(reqOpts, callback) {
+      resource.makeAuthenticatedRequest_ = function(reqOpts, callback) {
         assert.strictEqual(reqOpts.method, method);
 
         assert.strictEqual(reqOpts.uri, base + path);

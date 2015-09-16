@@ -25,7 +25,7 @@ var util = require('../../lib/common/util.js');
 var slice = Array.prototype.slice;
 
 var fakeUtil = extend({}, util, {
-  makeAuthorizedRequestFactory: util.noop
+  makeAuthenticatedRequestFactory: util.noop
 });
 
 var extended = false;
@@ -155,20 +155,20 @@ describe('Compute', function() {
       });
     });
 
-    it('should create a makeAuthorizedRequest method', function(done) {
-      fakeUtil.makeAuthorizedRequestFactory = function(options_) {
+    it('should create a makeAuthenticatedRequest method', function(done) {
+      fakeUtil.makeAuthenticatedRequestFactory = function(options_) {
         assert.deepEqual(options_, {
           credentials: options.credentials,
           email: options.email,
           keyFile: options.keyFilename,
           scopes: ['https://www.googleapis.com/auth/compute']
         });
-        fakeUtil.makeAuthorizedRequestFactory = util.noop;
+        fakeUtil.makeAuthenticatedRequestFactory = util.noop;
         return done;
       };
 
       var compute = new Compute(options);
-      compute.makeAuthorizedRequest_();
+      compute.makeAuthenticatedRequest_();
     });
 
     it('should localize the project id', function() {
@@ -1399,7 +1399,7 @@ describe('Compute', function() {
       var query = 'query';
       var body = 'body';
 
-      compute.makeAuthorizedRequest_ = function(reqOpts, callback) {
+      compute.makeAuthenticatedRequest_ = function(reqOpts, callback) {
         assert.equal(reqOpts.method, method);
         assert.equal(reqOpts.qs, query);
 
