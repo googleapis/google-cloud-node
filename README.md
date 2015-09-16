@@ -34,16 +34,16 @@ $ npm install --save gcloud
 - [gcloud-kvstore][gcloud-kvstore] - Use Datastore as a simple key-value store.
 - [hya-wave][hya-wave] - Cloud-based web sample editor. Part of the [hya-io][hya-io] family of products.
 
-## Authorization
+## Authentication
 
-With `gcloud-node` it's incredibly easy to get authorized and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Google Cloud services.
+With `gcloud-node` it's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Google Cloud services.
 
 ### On Google Compute Engine
 
-If you are running this client on Google Compute Engine, we handle authorization for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
+If you are running this client on Google Compute Engine, we handle authentication for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
 
 ``` js
-// Authorizing on a global basis.
+// Authenticating on a global basis.
 var projectId = process.env.GCLOUD_PROJECT_ID; // E.g. 'grape-spaceship-123'
 var gcloud = require('gcloud')({
   projectId: projectId
@@ -63,11 +63,11 @@ If you are not running this client on Google Compute Engine, you need a Google D
   * Google Cloud Storage
   * Google Cloud Storage JSON API
 4. Navigate to **APIs & auth** >  **Credentials** and then:
-  * If you want to use a new service account, click on **Create new Client ID** and select **Service account**. After the account is created, you will be prompted to download the JSON key file that the library uses to authorize your requests.
+  * If you want to use a new service account, click on **Create new Client ID** and select **Service account**. After the account is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
   * If you want to generate a new key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
 
 ``` js
-// Authorizing on a global basis.
+// Authenticating on a global basis.
 var projectId = process.env.GCLOUD_PROJECT_ID; // E.g. 'grape-spaceship-123'
 
 var gcloud = require('gcloud')({
@@ -91,8 +91,8 @@ You can also set auth on a per-API-instance basis. The examples below show you h
 ```js
 var gcloud = require('gcloud');
 
-// Authorizing on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authorization section above).
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
 var bigquery = gcloud.bigquery({
   projectId: 'my-project',
   keyFilename: '/path/to/keyfile.json'
@@ -127,8 +127,8 @@ job.getQueryResults().on('data', function(row) {});
 ```js
 var gcloud = require('gcloud');
 
-// Authorizing on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authorization section above).
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
 
 var dataset = gcloud.datastore.dataset({
   projectId: 'my-project',
@@ -178,8 +178,8 @@ dataset.save({
 ```js
 var gcloud = require('gcloud');
 
-// Authorizing on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authorization section above).
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
 
 var dns = gcloud.dns({
   projectId: 'my-project',
@@ -218,8 +218,8 @@ zone.export('/zonefile.zone', function(err) {});
 ```js
 var gcloud = require('gcloud');
 
-// Authorizing on a per-API-basis. You don't need to do this if you
-// auth on a global basis (see Authorization section above).
+// Authenticating on a per-API-basis. You don't need to do this if you
+// auth on a global basis (see Authentication section above).
 
 var pubsub = gcloud.pubsub({
   projectId: 'my-project',
@@ -261,8 +261,8 @@ topic.subscribe('new-subscription', function(err, subscription) {
 var fs = require('fs');
 var gcloud = require('gcloud');
 
-// Authorizing on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authorization section above).
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
 
 var gcs = gcloud.storage({
   projectId: 'my-project',
@@ -312,8 +312,8 @@ localReadStream.pipe(remoteWriteStream);
 ```js
 var gcloud = require('gcloud');
 
-// Authorizing on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authorization section above).
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
 
 var gce = gcloud.compute({
   projectId: 'my-project',
@@ -384,8 +384,8 @@ project.getMetadata(function(err, metadata) {
 ```js
 var gcloud = require('gcloud');
 
-// Authorizing on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authorization section above).
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
 
 var search = gcloud.search({
   projectId: 'my-project',

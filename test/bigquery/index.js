@@ -688,7 +688,7 @@ describe('BigQuery', function() {
     var body = { hi: 'there' };
 
     it('should make correct request', function(done) {
-      bq.makeAuthorizedRequest_ = function(request) {
+      bq.makeAuthenticatedRequest_ = function(request) {
         var basePath = 'https://www.googleapis.com/bigquery/v2/projects/';
         assert.equal(request.method, method);
         assert.equal(request.uri, basePath + bq.projectId + path);
@@ -700,7 +700,7 @@ describe('BigQuery', function() {
     });
 
     it('should execute callback', function(done) {
-      bq.makeAuthorizedRequest_ = function(request, callback) {
+      bq.makeAuthenticatedRequest_ = function(request, callback) {
         callback();
       };
       bq.makeReq_(method, path, query, body, done);

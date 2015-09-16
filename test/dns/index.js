@@ -37,13 +37,13 @@ var fakeStreamRouter = {
   }
 };
 
-var makeAuthorizedRequestFactoryOverride;
+var makeAuthenticatedRequestFactoryOverride;
 var fakeUtil = extend({}, util, {
-  makeAuthorizedRequestFactory: function() {
-    if (makeAuthorizedRequestFactoryOverride) {
-      return makeAuthorizedRequestFactoryOverride.apply(null, arguments);
+  makeAuthenticatedRequestFactory: function() {
+    if (makeAuthenticatedRequestFactoryOverride) {
+      return makeAuthenticatedRequestFactoryOverride.apply(null, arguments);
     } else {
-      return util.makeAuthorizedRequestFactory.apply(null, arguments);
+      return util.makeAuthenticatedRequestFactory.apply(null, arguments);
     }
   }
 });
@@ -76,7 +76,7 @@ describe('DNS', function() {
   });
 
   beforeEach(function() {
-    makeAuthorizedRequestFactoryOverride = null;
+    makeAuthenticatedRequestFactoryOverride = null;
 
     dns = new DNS({
       projectId: PROJECT_ID
@@ -107,7 +107,7 @@ describe('DNS', function() {
       fakeUtil.normalizeArguments = normalizeArguments;
     });
 
-    it('should create an authorized request function', function(done) {
+    it('should create an authenticated request function', function(done) {
       var options = {
         projectId: 'projectId',
         credentials: 'credentials',
@@ -115,7 +115,7 @@ describe('DNS', function() {
         keyFilename: 'keyFile'
       };
 
-      makeAuthorizedRequestFactoryOverride = function(options_) {
+      makeAuthenticatedRequestFactoryOverride = function(options_) {
         assert.deepEqual(options_, {
           credentials: options.credentials,
           email: options.email,
@@ -129,7 +129,7 @@ describe('DNS', function() {
       };
 
       var dns = new DNS(options);
-      dns.makeAuthorizedRequest_();
+      dns.makeAuthenticatedRequest_();
     });
 
     it('should localize the projectId', function() {
@@ -395,13 +395,13 @@ describe('DNS', function() {
   });
 
   describe('makeReq_', function() {
-    it('should make correct authorized request', function(done) {
+    it('should make correct authenticated request', function(done) {
       var method = 'POST';
       var path = '/';
       var query = 'query';
       var body = 'body';
 
-      dns.makeAuthorizedRequest_ = function(reqOpts, callback) {
+      dns.makeAuthenticatedRequest_ = function(reqOpts, callback) {
         assert.equal(reqOpts.method, method);
         assert.equal(reqOpts.qs, query);
 

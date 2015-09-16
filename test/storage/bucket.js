@@ -85,7 +85,7 @@ describe('Bucket', function() {
   var BUCKET_NAME = 'test-bucket';
   var bucket;
   var options = {
-    makeAuthorizedRequest_: function(req, callback) {
+    makeAuthenticatedRequest_: function(req, callback) {
       callback(null, req);
     }
   };
@@ -119,7 +119,7 @@ describe('Bucket', function() {
     });
 
     it('should re-use provided connection', function() {
-      assert.deepEqual(bucket.authorizeReq_, options.authorizeReq_);
+      assert.deepEqual(bucket.authenticateReq_, options.authenticateReq_);
     });
 
     it('should default metadata to an empty object', function() {
@@ -158,7 +158,7 @@ describe('Bucket', function() {
       var file1 = bucket.file('1.txt');
       var file2 = '2.txt';
 
-      bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
+      bucket.storage.makeAuthenticatedRequest_ = function(reqOpts) {
         assert.equal(reqOpts.json.sourceObjects[0].name, file1.name);
         assert.equal(reqOpts.json.sourceObjects[1].name, file2);
         done();
@@ -174,7 +174,7 @@ describe('Bucket', function() {
       ];
 
       async.each(destinations, function(destination, next) {
-        bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
+        bucket.storage.makeAuthenticatedRequest_ = function(reqOpts) {
           assert(reqOpts.uri.indexOf(bucket.name + '/o/destination.txt') > -1);
           next();
         };
@@ -186,7 +186,7 @@ describe('Bucket', function() {
     it('should use content type from the destination metadata', function(done) {
       var destination = 'destination.txt';
 
-      bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
+      bucket.storage.makeAuthenticatedRequest_ = function(reqOpts) {
         assert.equal(
           reqOpts.json.destination.contentType,
           mime.contentType(destination)
@@ -201,7 +201,7 @@ describe('Bucket', function() {
       var destination = bucket.file('destination.txt');
       destination.metadata = { contentType: 'content-type' };
 
-      bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
+      bucket.storage.makeAuthenticatedRequest_ = function(reqOpts) {
         assert.equal(
           reqOpts.json.destination.contentType,
           destination.metadata.contentType
@@ -215,7 +215,7 @@ describe('Bucket', function() {
     it('should detect dest content type if not in metadata', function(done) {
       var destination = 'destination.txt';
 
-      bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
+      bucket.storage.makeAuthenticatedRequest_ = function(reqOpts) {
         assert.equal(
           reqOpts.json.destination.contentType,
           mime.contentType(destination)
@@ -239,7 +239,7 @@ describe('Bucket', function() {
       var sources = [bucket.file('1.txt'), bucket.file('2.txt')];
       var destination = bucket.file('destination.txt');
 
-      bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
+      bucket.storage.makeAuthenticatedRequest_ = function(reqOpts) {
         var expectedUri = format('{base}/{bucket}/o/{file}/compose', {
           base: 'https://www.googleapis.com/storage/v1/b',
           bucket: destination.bucket.name,
@@ -261,7 +261,7 @@ describe('Bucket', function() {
       var sources = [bucket.file('1.txt'), bucket.file('2.txt')];
       var destination = 'needs encoding.jpg';
 
-      bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
+      bucket.storage.makeAuthenticatedRequest_ = function(reqOpts) {
         assert.equal(reqOpts.uri.indexOf(destination), -1);
         done();
       };
@@ -276,7 +276,7 @@ describe('Bucket', function() {
 
       var destination = bucket.file('destination.txt');
 
-      bucket.storage.makeAuthorizedRequest_ = function(reqOpts) {
+      bucket.storage.makeAuthenticatedRequest_ = function(reqOpts) {
         assert.deepEqual(reqOpts.json.sourceObjects, [
           { name: sources[0].name, generation: sources[0].metadata.generation },
           { name: sources[1].name, generation: sources[1].metadata.generation }
@@ -292,7 +292,7 @@ describe('Bucket', function() {
       var sources = [bucket.file('1.txt'), bucket.file('2.txt')];
       var destination = 'destination.txt';
 
-      bucket.storage.makeAuthorizedRequest_ = function(reqOpts, callback) {
+      bucket.storage.makeAuthenticatedRequest_ = function(reqOpts, callback) {
         callback();
       };
 
@@ -305,7 +305,7 @@ describe('Bucket', function() {
 
       var error = new Error('Error.');
 
-      bucket.storage.makeAuthorizedRequest_ = function(reqOpts, callback) {
+      bucket.storage.makeAuthenticatedRequest_ = function(reqOpts, callback) {
         callback(error);
       };
 
@@ -320,7 +320,7 @@ describe('Bucket', function() {
       var destination = 'destination.txt';
       var resp = { success: true };
 
-      bucket.storage.makeAuthorizedRequest_ = function(reqOpts, callback) {
+      bucket.storage.makeAuthenticatedRequest_ = function(reqOpts, callback) {
         callback(null, resp);
       };
 
@@ -1156,7 +1156,7 @@ describe('Bucket', function() {
     var body = { hi: 'there' };
 
     it('should make correct request', function(done) {
-      bucket.storage.makeAuthorizedRequest_ = function(request) {
+      bucket.storage.makeAuthenticatedRequest_ = function(request) {
         var basePath = 'https://www.googleapis.com/storage/v1/b';
         assert.equal(request.method, method);
         assert.equal(request.uri, basePath + '/' + bucket.name + path);
@@ -1168,7 +1168,7 @@ describe('Bucket', function() {
     });
 
     it('should execute callback', function(done) {
-      bucket.storage.makeAuthorizedRequest_ = function(request, callback) {
+      bucket.storage.makeAuthenticatedRequest_ = function(request, callback) {
         callback();
       };
       bucket.makeReq_(method, path, query, body, done);
