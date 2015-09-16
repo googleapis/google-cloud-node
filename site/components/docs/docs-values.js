@@ -150,6 +150,17 @@ angular.module('gcloud.docs')
       ]
     },
 
+    resource: {
+      title: 'Resource',
+      _url: '{baseUrl}/resource',
+      pages: [
+        {
+          title: 'Project',
+          url: '/project'
+        }
+      ]
+    },
+
     search: {
       title: 'Search',
       _url: '{baseUrl}/search',
@@ -226,6 +237,9 @@ angular.module('gcloud.docs')
       '>=0.18.0': ['dns'],
 
       // introduce compute api.
-      '>=0.20.0': ['compute']
+      '>=0.20.0': ['compute'],
+
+      // introduce resource api.
+      '>=0.22.0': ['resource']
     }
   });

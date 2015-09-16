@@ -358,6 +358,56 @@
     "tags": [
       {
         "type": "type",
+        "string": "{module:resource}\n",
+        "types": [
+          "module:resource"
+        ],
+        "typesDescription": "module:<a href=\"module%3Aresource.html\">resource</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:resource}</p>"
+      },
+      {
+        "type": "return",
+        "string": "{module:resource}",
+        "types": [
+          "module:resource"
+        ],
+        "typesDescription": "module:<a href=\"module%3Aresource.html\">resource</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:resource}</p>"
+      }
+    ],
+    "description": {
+      "full": "<p><a href=\"https://cloud.google.com/resource-manager/\">The Cloud Resource Manager</a><br />provides methods that you can use to programmatically manage your projects<br />in the Google Cloud Platform. With this API, you can do the following:</p><ul>\n<li>Get a list of all projects associated with an account.</li>\n<li>Create new projects.</li>\n<li>Update existing projects.</li>\n<li>Delete projects.</li>\n<li>Recover projects.</li>\n</ul>\n<p class=\"notice\"><br />  <strong>This is a <em>Beta</em> release of Cloud Resource Manager.</strong> This feature is<br />  not covered by any SLA or deprecation policy and may be subject to<br />  backward-incompatible changes.<br /></p>\n",
+      "summary": "<p><a href=\"https://cloud.google.com/resource-manager/\">The Cloud Resource Manager</a><br />provides methods that you can use to programmatically manage your projects<br />in the Google Cloud Platform. With this API, you can do the following:</p>",
+      "body": "<ul>\n<li>Get a list of all projects associated with an account.</li>\n<li>Create new projects.</li>\n<li>Update existing projects.</li>\n<li>Delete projects.</li>\n<li>Recover projects.</li>\n</ul>\n<p class=\"notice\"><br />  <strong>This is a <em>Beta</em> release of Cloud Resource Manager.</strong> This feature is<br />  not covered by any SLA or deprecation policy and may be subject to<br />  backward-incompatible changes.<br /></p>\n"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 129,
+    "codeStart": 150,
+    "code": "resource: require('./resource'),",
+    "ctx": {
+      "type": "property",
+      "name": "resource",
+      "value": "require('./resource'),",
+      "string": "resource"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
         "string": "{module:search}\n",
         "types": [
           "module:search"
@@ -399,8 +449,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 129,
-    "codeStart": 152,
+    "line": 152,
+    "codeStart": 175,
     "code": "search: require('./search'),",
     "ctx": {
       "type": "property",
@@ -454,8 +504,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 154,
-    "codeStart": 170,
+    "line": 177,
+    "codeStart": 193,
     "code": "storage: require('./storage')\n};",
     "ctx": {
       "type": "property",
@@ -496,8 +546,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 173,
-    "codeStart": 181,
+    "line": 196,
+    "codeStart": 204,
     "code": "var scopedApis = {\n  datastore: true\n};",
     "ctx": {
       "type": "declaration",
@@ -518,8 +568,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 185,
-    "codeStart": 200
+    "line": 208,
+    "codeStart": 223
   },
   {
     "tags": [
@@ -677,8 +727,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 200,
-    "codeStart": 259,
+    "line": 223,
+    "codeStart": 282,
     "code": "function gcloud(config) {\n  return Object.keys(apis).reduce(function(gcloudExposedApi, apiName) {\n    var Class = apis[apiName];\n\n    if (scopedApis[apiName]) {\n      gcloudExposedApi[apiName] = new Class(config);\n    } else {\n      gcloudExposedApi[apiName] = Class;\n    }\n\n    return gcloudExposedApi;\n  }, { config_: config });\n}\n\nmodule.exports = extend(gcloud, apis);",
     "ctx": {
       "type": "function",

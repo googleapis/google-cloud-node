@@ -1,0 +1,771 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2015 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2015 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
+  },
+  {
+    "tags": [
+      {
+        "type": "module",
+        "string": "resource",
+        "html": "<p>resource</p>"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 17,
+    "codeStart": 21,
+    "code": "'use strict';\n\nvar extend = require('extend');\nvar is = require('is');",
+    "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:resource/project}",
+        "types": [
+          "module:resource/project"
+        ],
+        "typesDescription": "module:<a href=\"module%3Aresource%2Fproject.html\">resource/project</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:resource/project}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 26,
+    "codeStart": 30,
+    "code": "var Project = require('./project.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Project",
+      "value": "require('./project.js')",
+      "string": "Project"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/streamrouter}",
+        "types": [
+          "module:common/streamrouter"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Fstreamrouter.html\">common/streamrouter</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/streamrouter}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 32,
+    "codeStart": 36,
+    "code": "var streamRouter = require('../common/stream-router.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "streamRouter",
+      "value": "require('../common/stream-router.js')",
+      "string": "streamRouter"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/util}",
+        "types": [
+          "module:common/util"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 38,
+    "codeStart": 42,
+    "code": "var util = require('../common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "const",
+        "string": "{string}",
+        "html": "<p>{string}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 44,
+    "codeStart": 48,
+    "code": "var BASE_URL = 'https://cloudresourcemanager.googleapis.com/v1beta1/projects';",
+    "ctx": {
+      "type": "declaration",
+      "name": "BASE_URL",
+      "value": "'https://cloudresourcemanager.googleapis.com/v1beta1/projects'",
+      "string": "BASE_URL"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "const",
+        "string": "{array}",
+        "html": "<p>{array}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "<p>Required scopes for Google Cloud Resource Manager API.</p>",
+      "summary": "<p>Required scopes for Google Cloud Resource Manager API.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 50,
+    "codeStart": 55,
+    "code": "var SCOPES = [\n  'https://www.googleapis.com/auth/cloud-platform'\n];",
+    "ctx": {
+      "type": "declaration",
+      "name": "SCOPES",
+      "value": "[",
+      "string": "SCOPES"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "module:resource",
+        "html": "<p>module:resource</p>"
+      },
+      {
+        "type": "constructor",
+        "string": "",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).\n",
+        "name": "options",
+        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'grape-spaceship-123'\n});\n\nvar resource = gcloud.resource();",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>var resource = gcloud.resource();</p>"
+      }
+    ],
+    "description": {
+      "full": "<p><a href=\"https://cloud.google.com/resource-manager/\">The Cloud Resource Manager</a><br />provides methods that you can use to programmatically manage your projects<br />in the Google Cloud Platform. With this API, you can do the following:</p><ul>\n<li>Get a list of all projects associated with an account.</li>\n<li>Create new projects.</li>\n<li>Update existing projects.</li>\n<li>Delete projects.</li>\n<li>Recover projects.</li>\n</ul>\n",
+      "summary": "<p><a href=\"https://cloud.google.com/resource-manager/\">The Cloud Resource Manager</a><br />provides methods that you can use to programmatically manage your projects<br />in the Google Cloud Platform. With this API, you can do the following:</p>",
+      "body": "<ul>\n<li>Get a list of all projects associated with an account.</li>\n<li>Create new projects.</li>\n<li>Update existing projects.</li>\n<li>Delete projects.</li>\n<li>Recover projects.</li>\n</ul>\n"
+    },
+    "isPrivate": false,
+    "isConstructor": true,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 59,
+    "codeStart": 83,
+    "code": "function Resource(options) {\n  if (!(this instanceof Resource)) {\n    options = util.normalizeArguments(this, options, {\n      projectIdRequired: false\n    });\n    return new Resource(options);\n  }\n\n  this.defaultProjectId_ = options.projectId;\n\n  this.makeAuthorizedRequest_ = util.makeAuthorizedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n}",
+    "ctx": {
+      "type": "constructor",
+      "name": "Resource",
+      "string": "Resource()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Projects Overview]{@link https://cloud.google.com/compute/docs/networking#networks}",
+        "html": "<p>[Projects Overview]{@link <a href=\"https://cloud.google.com/compute/docs/networking#networks}\">https://cloud.google.com/compute/docs/networking#networks}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[projects: create API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/create} ",
+        "html": "<p>[projects: create API Documentation]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/create}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/create}</a> </p>"
+      },
+      {
+        "type": "private",
+        "string": "\n",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{string} name - Name of the project.",
+        "name": "name",
+        "description": "<ul>\n<li>Name of the project.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object=} options - See a\n    [Project resource](https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project).",
+        "name": "options",
+        "description": "<ul>\n<li>See a     <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project\">Project resource</a>.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:resource/project} callback.project - The created Project\n    object.",
+        "name": "callback.project",
+        "description": "<ul>\n<li>The created Project     object.</li>\n</ul>\n",
+        "types": [
+          "module:resource/project"
+        ],
+        "typesDescription": "module:<a href=\"module%3Aresource%2Fproject.html\">resource/project</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "resource.createProject('new project name', function(err, project) {\n  if (!err) {\n    // `project` is a new Project instance.\n  }\n});",
+        "html": "<p>resource.createProject(&#39;new project name&#39;, function(err, project) {<br />  if (!err) {<br />    // <code>project</code> is a new Project instance.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a project.</p>",
+      "summary": "<p>Create a project.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 101,
+    "codeStart": 125,
+    "code": "Resource.prototype.createProject = function(id, options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  var body = extend({}, options, {\n    projectId: id\n  });\n\n  this.makeReq_('POST', '/', null, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var project = self.project(resp.projectId);\n    project.metadata = resp;\n\n    callback(null, project, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Resource",
+      "cons": "Resource",
+      "name": "createProject",
+      "string": "Resource.prototype.createProject()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Projects Overview]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects}",
+        "html": "<p>[Projects Overview]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[projects: list API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/list} ",
+        "html": "<p>[projects: list API Documentation]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/list}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/list}</a> </p>"
+      },
+      {
+        "type": "param",
+        "string": "{object=} options - Operation search options.",
+        "name": "options",
+        "description": "<ul>\n<li>Operation search options.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.autoPaginate - Have pagination handled\n    automatically. Default: true.",
+        "name": "options.autoPaginate",
+        "description": "<ul>\n<li>Have pagination handled     automatically. Default: true.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} options.filter - An expression for filtering the results.",
+        "name": "options.filter",
+        "description": "<ul>\n<li>An expression for filtering the results.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.pageSize - Maximum number of projects to return.",
+        "name": "options.pageSize",
+        "description": "<ul>\n<li>Maximum number of projects to return.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} options.pageToken - A previously-returned page token\n    representing part of the larger set of results to view.",
+        "name": "options.pageToken",
+        "description": "<ul>\n<li>A previously-returned page token     representing part of the larger set of results to view.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:resource/project} callback.operations - Project objects from\n    your account.",
+        "name": "callback.operations",
+        "description": "<ul>\n<li>Project objects from     your account.</li>\n</ul>\n",
+        "types": [
+          "module:resource/project"
+        ],
+        "typesDescription": "module:<a href=\"module%3Aresource%2Fproject.html\">resource/project</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?object} callback.nextQuery - If present, query with this object to\n    check for more results.",
+        "name": "callback.nextQuery",
+        "description": "<ul>\n<li>If present, query with this object to     check for more results.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.\n",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "resource.getProjects(function(err, projects) {\n  // `projects` is an array of `Project` objects.\n});\n\n//-\n// To control how many API requests are made and page through the results\n// manually, set `autoPaginate` to `false`.\n//-\nfunction callback(err, projects, nextQuery, apiResponse) {\n  if (nextQuery) {\n    // More results exist.\n    resource.getProjects(nextQuery, callback);\n  }\n}\n\nresource.getProjects({\n  autoPaginate: false\n}, callback);\n\n//-\n// Get the projects from your account as a readable object stream.\n//-\nresource.getProjects()\n  .on('error', console.error)\n  .on('data', function(project) {\n    // `project` is a `Project` object.\n  })\n  .on('end', function() {\n    // All projects retrieved.\n  });\n\n//-\n// If you anticipate many results, you can end a stream early to prevent\n// unnecessary processing and API requests.\n//-\nresource.getProjects()\n  .on('data', function(project) {\n    this.end();\n  });",
+        "html": "<p>resource.getProjects(function(err, projects) {<br />  // <code>projects</code> is an array of <code>Project</code> objects.<br />});</p><p>//-<br />// To control how many API requests are made and page through the results<br />// manually, set <code>autoPaginate</code> to <code>false</code>.<br />//-<br />function callback(err, projects, nextQuery, apiResponse) {<br />  if (nextQuery) {<br />    // More results exist.<br />    resource.getProjects(nextQuery, callback);<br />  }<br />}</p><p>resource.getProjects({<br />  autoPaginate: false<br />}, callback);</p><p>//-<br />// Get the projects from your account as a readable object stream.<br />//-<br />resource.getProjects()<br />  .on(&#39;error&#39;, console.error)<br />  .on(&#39;data&#39;, function(project) {<br />    // <code>project</code> is a <code>Project</code> object.<br />  })<br />  .on(&#39;end&#39;, function() {<br />    // All projects retrieved.<br />  });</p><p>//-<br />// If you anticipate many results, you can end a stream early to prevent<br />// unnecessary processing and API requests.<br />//-<br />resource.getProjects()<br />  .on(&#39;data&#39;, function(project) {<br />    this.end();<br />  });</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a list of projects.</p>",
+      "summary": "<p>Get a list of projects.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 150,
+    "codeStart": 212,
+    "code": "Resource.prototype.getProjects = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  this.makeReq_('GET', '/', options, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var projects = (resp.projects || []).map(function(project) {\n      var projectInstance = self.project(project.name);\n      projectInstance.metadata = project;\n      return projectInstance;\n    });\n\n    callback(null, projects, nextQuery, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Resource",
+      "cons": "Resource",
+      "name": "getProjects",
+      "string": "Resource.prototype.getProjects()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "throws",
+        "string": "{Error} If an ID is not provided.\n",
+        "types": [
+          "Error"
+        ],
+        "description": "<p>If an ID is not provided. </p>"
+      },
+      {
+        "type": "param",
+        "string": "{string} id - The ID of the project (eg: `grape-spaceship-123`).",
+        "name": "id",
+        "description": "<ul>\n<li>The ID of the project (eg: <code>grape-spaceship-123</code>).</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{module:resource/project}\n",
+        "types": [
+          "module:resource/project"
+        ],
+        "typesDescription": "module:<a href=\"module%3Aresource%2Fproject.html\">resource/project</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:resource/project}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var project = resource.project('grape-spaceship-123');",
+        "html": "<p>var project = resource.project(&#39;grape-spaceship-123&#39;);</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a Project object to reference an existing project. See<br />{module:resoucemanager/createProject} to create a project.</p>",
+      "summary": "<p>Create a Project object to reference an existing project. See<br />{module:resoucemanager/createProject} to create a project.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 246,
+    "codeStart": 258,
+    "code": "Resource.prototype.project = function(id) {\n  id = id || this.defaultProjectId_;\n\n  if (!id) {\n    throw new Error('A project ID is required.');\n  }\n\n  return new Project(this, id);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Resource",
+      "cons": "Resource",
+      "name": "project",
+      "string": "Resource.prototype.project()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "\n",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{string} method - Action.",
+        "name": "method",
+        "description": "<ul>\n<li>Action.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} path - Request path.",
+        "name": "path",
+        "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{*} query - Request query object.",
+        "name": "query",
+        "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{*} body - Request body contents.",
+        "name": "body",
+        "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
+      "summary": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 268,
+    "codeStart": 280,
+    "code": "Resource.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthorizedRequest_(reqOpts, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Resource",
+      "cons": "Resource",
+      "name": "makeReq_",
+      "string": "Resource.prototype.makeReq_()"
+    }
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Developer Documentation</p><p>These methods can be used with either a callback or as a readable object<br />stream. <code>streamRouter</code> is used to add this dual behavior.</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": "<p>These methods can be used with either a callback or as a readable object<br />stream. <code>streamRouter</code> is used to add this dual behavior.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 294,
+    "codeStart": 299,
+    "code": "streamRouter.extend(Resource, ['getProjects']);\n\nmodule.exports = Resource;",
+    "ctx": false
+  }
+]
