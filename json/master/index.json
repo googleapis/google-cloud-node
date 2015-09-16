@@ -371,7 +371,7 @@
       },
       {
         "type": "return",
-        "string": "{module:resource}",
+        "string": "{module:resource}\n",
         "types": [
           "module:resource"
         ],
@@ -382,6 +382,11 @@
         "variable": false,
         "description": "",
         "html": "<p>{module:resource}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\nvar resource = gcloud.resource({\n  projectId: 'grape-spaceship-123',\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var resource = gcloud.resource({<br />  projectId: &#39;grape-spaceship-123&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
       }
     ],
     "description": {
@@ -395,7 +400,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 129,
-    "codeStart": 150,
+    "codeStart": 157,
     "code": "resource: require('./resource'),",
     "ctx": {
       "type": "property",
@@ -449,8 +454,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 152,
-    "codeStart": 175,
+    "line": 159,
+    "codeStart": 182,
     "code": "search: require('./search'),",
     "ctx": {
       "type": "property",
@@ -504,8 +509,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 177,
-    "codeStart": 193,
+    "line": 184,
+    "codeStart": 200,
     "code": "storage: require('./storage')\n};",
     "ctx": {
       "type": "property",
@@ -546,8 +551,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 196,
-    "codeStart": 204,
+    "line": 203,
+    "codeStart": 211,
     "code": "var scopedApis = {\n  datastore: true\n};",
     "ctx": {
       "type": "declaration",
@@ -568,8 +573,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 208,
-    "codeStart": 223
+    "line": 215,
+    "codeStart": 230
   },
   {
     "tags": [
@@ -727,8 +732,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 223,
-    "codeStart": 282,
+    "line": 230,
+    "codeStart": 289,
     "code": "function gcloud(config) {\n  return Object.keys(apis).reduce(function(gcloudExposedApi, apiName) {\n    var Class = apis[apiName];\n\n    if (scopedApis[apiName]) {\n      gcloudExposedApi[apiName] = new Class(config);\n    } else {\n      gcloudExposedApi[apiName] = Class;\n    }\n\n    return gcloudExposedApi;\n  }, { config_: config });\n}\n\nmodule.exports = extend(gcloud, apis);",
     "ctx": {
       "type": "function",
