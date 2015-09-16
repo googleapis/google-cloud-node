@@ -919,12 +919,20 @@ describe('common/util', function() {
       util.normalizeArguments(null, fakeContext.config_);
     });
 
-    it('should throw an error if the projectId is missing', function() {
-      var errMsg = new RegExp(util.missingProjectIdError.message);
+    describe('projectIdRequired', function() {
+      it('should throw if true', function() {
+        var errMsg = new RegExp(util.missingProjectIdError.message);
 
-      assert.throws(function() {
-        util.normalizeArguments({ a: 'b' }, { c: 'd' });
-      }, errMsg);
+        assert.throws(function() {
+          util.normalizeArguments({ a: 'b' }, { c: 'd' });
+        }, errMsg);
+      });
+
+      it('should not throw if false', function() {
+        assert.doesNotThrow(function() {
+          util.normalizeArguments({}, {}, { projectIdRequired: false });
+        });
+      });
     });
   });
 });
