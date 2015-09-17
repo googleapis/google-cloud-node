@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach */
-
 'use strict';
 
 var assert = require('assert');

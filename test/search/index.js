@@ -223,7 +223,12 @@ describe('Search', function() {
     });
 
     it('should assign fields property on new Index', function(done) {
-      var indexObjects = [{ indexId: 'a', indexedField: 'b' }];
+      var indexObjects = [
+        {
+          indexId: 'a',
+          indexedField: {}
+        }
+      ];
 
       var apiResponse = { indexes: indexObjects };
 
@@ -237,7 +242,7 @@ describe('Search', function() {
 
       search.getIndexes({}, function(err, indexes) {
         assert.ifError(err);
-        assert.equal(indexes[0].fields, indexObjects.indexedField);
+        assert.strictEqual(indexes[0].fields, indexObjects[0].indexedField);
         done();
       });
     });

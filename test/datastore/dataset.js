@@ -105,6 +105,25 @@ describe('Dataset', function() {
       ds.runInTransaction();
     });
 
+    it('should execute callback with error if one occurred', function(done) {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      ds.createTransaction_ = function() {
+        return {
+          begin_: function(callback) {
+            callback(error, apiResponse);
+          }
+        };
+      };
+
+      ds.runInTransaction(util.noop, function(err, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(apiResponse_, apiResponse);
+        done();
+      });
+    });
+
     it('should return transaction object to the callback', function(done) {
       var transaction = {
         begin_: function(callback) {

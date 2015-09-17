@@ -681,6 +681,13 @@ describe('Zone', function() {
           done();
         });
       });
+
+      it('should not require a query', function(done) {
+        zone.getRecords(function(err) {
+          assert.strictEqual(err, error);
+          done();
+        });
+      });
     });
 
     describe('success', function() {
@@ -731,6 +738,10 @@ describe('Zone', function() {
           assert.strictEqual(apiResponse_, apiResponse);
 
           done();
+        });
+
+        it('should not require a query', function(done) {
+          zone.getRecords(done);
         });
       });
 

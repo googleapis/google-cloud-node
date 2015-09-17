@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach, afterEach */
-
 'use strict';
 
 var assert = require('assert');
@@ -801,19 +799,22 @@ describe('Subscription', function() {
     it('should decode stringified JSON to object', function() {
       var obj = { hi: 'there' };
       var stringified = new Buffer(JSON.stringify(obj)).toString('base64');
+      var attributes = {};
 
       var msg = Subscription.formatMessage_({
         ackId: 3,
         message: {
           data: stringified,
-          messageId: 7
+          messageId: 7,
+          attributes: attributes
         }
       });
 
       assert.deepEqual(msg, {
         ackId: 3,
         id: 7,
-        data: obj
+        data: obj,
+        attributes: attributes
       });
     });
 

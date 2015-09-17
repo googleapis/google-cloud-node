@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-/*global describe, it */
-
 'use strict';
 
 var assert = require('assert');
@@ -109,6 +107,7 @@ var queryFilterProto = {
       operator: 'AND'
     }
   },
+  end_cursor: new Buffer('end', 'base64'),
   order: [],
   group_by: []
 };
@@ -262,6 +261,12 @@ describe('isKeyComplete', function() {
       assert.strictEqual(entity.isKeyComplete(test.key), test.expected);
     });
   });
+
+  it('should return false if there is no kind', function() {
+    var key = new entity.Key({ path: [ '' ] });
+
+    assert.strictEqual(entity.isKeyComplete(key), false);
+  });
 });
 
 describe('entityFromEntityProto', function() {
@@ -303,6 +308,7 @@ describe('queryToQueryProto', function() {
     var ds = datastore.dataset({ projectId: 'project-id' });
     var q = ds.createQuery('Kind1')
       .filter('name =', 'John')
+      .end('end')
       .hasAncestor(new entity.Key({ path: [ 'Kind2', 'somename' ] }));
     var proto = entity.queryToQueryProto(q);
     assert.deepEqual(proto, queryFilterProto);
