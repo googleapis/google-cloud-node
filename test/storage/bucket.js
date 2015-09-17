@@ -571,6 +571,24 @@ describe('Bucket', function() {
       });
     });
 
+    it('should execute callback with error & API response', function(done) {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      bucket.makeReq_ = function(method, path, query, body, callback) {
+        callback(error, apiResponse);
+      };
+
+      bucket.getFiles(function(err, files, nextQuery, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(files, null);
+        assert.strictEqual(nextQuery, null);
+        assert.strictEqual(apiResponse_, apiResponse);
+
+        done();
+      });
+    });
+
     it('should populate returned File object with metadata', function(done) {
       var fileMetadata = {
         name: 'filename',
@@ -639,6 +657,23 @@ describe('Bucket', function() {
       };
       bucket.getMetadata(function(err, fileMetadata, apiResponse) {
         assert.deepEqual(resp, apiResponse);
+        done();
+      });
+    });
+
+    it('should execute callback with error & API response', function(done) {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      bucket.makeReq_ = function(method, path, query, body, callback) {
+        callback(error, apiResponse);
+      };
+
+      bucket.getMetadata(function(err, metadata, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(metadata, null);
+        assert.strictEqual(apiResponse_, apiResponse);
+
         done();
       });
     });
@@ -803,6 +838,22 @@ describe('Bucket', function() {
       };
       bucket.setMetadata(metadata, function(err, apiResponse) {
         assert.deepEqual(resp, apiResponse);
+        done();
+      });
+    });
+
+    it('should execute callback with error & API response', function(done) {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      bucket.makeReq_ = function(method, path, query, body, callback) {
+        callback(error, apiResponse);
+      };
+
+      bucket.setMetadata(metadata, function(err, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(apiResponse_, apiResponse);
+
         done();
       });
     });
