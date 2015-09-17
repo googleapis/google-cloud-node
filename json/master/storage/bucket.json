@@ -1636,20 +1636,6 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.metadata - The bucket's metadata.",
-        "name": "callback.metadata",
-        "description": "<ul>\n<li>The bucket&#39;s metadata.</li>\n</ul>\n",
-        "types": [
-          "object"
-        ],
-        "typesDescription": "<code>object</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
         "string": "{object} callback.apiResponse - The full API response.\n",
         "name": "callback.apiResponse",
         "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
@@ -1664,8 +1650,8 @@
       },
       {
         "type": "example",
-        "string": "//-\n// Set website metadata field on the bucket.\n//-\nbucket.setMetadata({\n  website: {\n    mainPageSuffix: 'http://example.com',\n    notFoundPage: 'http://example.com/404.html'\n  }\n}, function(err, metadata, apiResponse) {});\n\n//-\n// Enable versioning for your bucket.\n//-\nbucket.setMetadata({\n  versioning: {\n    enabled: true\n  }\n}, function(err, metadata, apiResponse) {});",
-        "html": "<p>//-<br />// Set website metadata field on the bucket.<br />//-<br />bucket.setMetadata({<br />  website: {<br />    mainPageSuffix: &#39;<a href=\"http://example.com\">http://example.com</a>&#39;,<br />    notFoundPage: &#39;<a href=\"http://example.com/404.html\">http://example.com/404.html</a>&#39;<br />  }<br />}, function(err, metadata, apiResponse) {});</p><p>//-<br />// Enable versioning for your bucket.<br />//-<br />bucket.setMetadata({<br />  versioning: {<br />    enabled: true<br />  }<br />}, function(err, metadata, apiResponse) {});</p>"
+        "string": "//-\n// Set website metadata field on the bucket.\n//-\nbucket.setMetadata({\n  website: {\n    mainPageSuffix: 'http://example.com',\n    notFoundPage: 'http://example.com/404.html'\n  }\n}, function(err, apiResponse) {});\n\n//-\n// Enable versioning for your bucket.\n//-\nbucket.setMetadata({\n  versioning: {\n    enabled: true\n  }\n}, function(err, apiResponse) {});",
+        "html": "<p>//-<br />// Set website metadata field on the bucket.<br />//-<br />bucket.setMetadata({<br />  website: {<br />    mainPageSuffix: &#39;<a href=\"http://example.com\">http://example.com</a>&#39;,<br />    notFoundPage: &#39;<a href=\"http://example.com/404.html\">http://example.com/404.html</a>&#39;<br />  }<br />}, function(err, apiResponse) {});</p><p>//-<br />// Enable versioning for your bucket.<br />//-<br />bucket.setMetadata({<br />  versioning: {<br />    enabled: true<br />  }<br />}, function(err, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -1679,8 +1665,8 @@
     "isEvent": false,
     "ignore": false,
     "line": 819,
-    "codeStart": 850,
-    "code": "Bucket.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n  callback = callback || util.noop;\n\n  this.makeReq_('PATCH', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
+    "codeStart": 849,
+    "code": "Bucket.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n  callback = callback || util.noop;\n\n  this.makeReq_('PATCH', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Bucket",
@@ -1873,8 +1859,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 866,
-    "codeStart": 962,
+    "line": 865,
+    "codeStart": 961,
     "code": "Bucket.prototype.upload = function(localPath, options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  var newFile;\n  if (options.destination instanceof File) {\n    newFile = options.destination;\n  } else if (is.string(options.destination)) {\n    // Use the string as the name of the file.\n    newFile = this.file(options.destination);\n  } else {\n    // Resort to using the name of the incoming file.\n    newFile = this.file(path.basename(localPath));\n  }\n\n  var metadata = options.metadata || {};\n  var contentType = mime.contentType(path.basename(localPath));\n\n  if (contentType && !metadata.contentType) {\n    metadata.contentType = contentType;\n  }\n\n  var resumable;\n  if (is.boolean(options.resumable)) {\n    resumable = options.resumable;\n    upload();\n  } else {\n    // Determine if the upload should be resumable if it's over the threshold.\n    fs.stat(localPath, function(err, fd) {\n      if (err) {\n        callback(err);\n        return;\n      }\n\n      resumable = fd.size > RESUMABLE_THRESHOLD;\n\n      upload();\n    });\n  }\n\n  function upload() {\n    fs.createReadStream(localPath)\n      .pipe(newFile.createWriteStream({\n        validation: options.validation,\n        resumable: resumable,\n        metadata: metadata,\n        gzip: options.gzip\n      }))\n      .on('error', function(err) {\n        callback(err);\n      })\n      .on('finish', function() {\n        callback(null, newFile);\n      });\n  }\n};",
     "ctx": {
       "type": "method",
@@ -1973,8 +1959,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1021,
-    "codeStart": 1038,
+    "line": 1020,
+    "codeStart": 1037,
     "code": "Bucket.prototype.makeAllFilesPublicPrivate_ = function(options, callback) {\n  var MAX_PARALLEL_LIMIT = 10;\n  var errors = [];\n  var updatedFiles = [];\n\n  this.getFiles(function(err, files) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    function processFile(file, callback) {\n      if (options.public) {\n        file.makePublic(processedCallback);\n      } else if (options.private) {\n        file.makePrivate(processedCallback);\n      }\n\n      function processedCallback(err) {\n        if (err) {\n          if (options.force) {\n            errors.push(err);\n            callback();\n            return;\n          }\n\n          callback(err);\n          return;\n        }\n\n        updatedFiles.push(file);\n        callback();\n      }\n    }\n\n    // Iterate through each file and make it public or private.\n    async.eachLimit(files, MAX_PARALLEL_LIMIT, processFile, function(err) {\n      if (err || errors.length > 0) {\n        callback(err || errors, updatedFiles);\n        return;\n      }\n\n      callback(null, updatedFiles);\n    });\n  });\n};",
     "ctx": {
       "type": "method",
@@ -2069,8 +2055,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1085,
-    "codeStart": 1097,
+    "line": 1084,
+    "codeStart": 1096,
     "code": "Bucket.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: STORAGE_BASE_URL + '/' + this.name + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.storage.makeAuthenticatedRequest_(reqOpts, callback);\n};",
     "ctx": {
       "type": "method",
@@ -2092,8 +2078,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 1111,
-    "codeStart": 1116,
+    "line": 1110,
+    "codeStart": 1115,
     "code": "streamRouter.extend(Bucket, 'getFiles');\n\nmodule.exports = Bucket;",
     "ctx": false
   }

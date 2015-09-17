@@ -302,9 +302,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.metadata - The zone's metadata.",
+        "string": "{object} callback.metadata - The snapshot's metadata.",
         "name": "callback.metadata",
-        "description": "<ul>\n<li>The zone&#39;s metadata.</li>\n</ul>\n",
+        "description": "<ul>\n<li>The snapshot&#39;s metadata.</li>\n</ul>\n",
         "types": [
           "object"
         ],

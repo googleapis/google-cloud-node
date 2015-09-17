@@ -471,9 +471,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.metadata - The Dataset metadata",
+        "string": "{object} callback.metadata - The dataset's metadata.",
         "name": "callback.metadata",
-        "description": "<ul>\n<li>The Dataset metadata</li>\n</ul>\n",
+        "description": "<ul>\n<li>The dataset&#39;s metadata.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -744,20 +744,6 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.metadata - The metadata of the Dataset object.",
-        "name": "callback.metadata",
-        "description": "<ul>\n<li>The metadata of the Dataset object.</li>\n</ul>\n",
-        "types": [
-          "object"
-        ],
-        "typesDescription": "<code>object</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
         "string": "{object} callback.apiResponse - The full API response.\n",
         "name": "callback.apiResponse",
         "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
@@ -772,8 +758,8 @@
       },
       {
         "type": "example",
-        "string": "var metadata = {\n  description: 'Information for every institution in the 2013 IPEDS universe'\n};\n\ndataset.setMetadata(metadata, function(err, metadata, apiResponse) {});",
-        "html": "<p>var metadata = {<br />  description: &#39;Information for every institution in the 2013 IPEDS universe&#39;<br />};</p><p>dataset.setMetadata(metadata, function(err, metadata, apiResponse) {});</p>"
+        "string": "var metadata = {\n  description: 'Information for every institution in the 2013 IPEDS universe'\n};\n\ndataset.setMetadata(metadata, function(err, apiResponse) {});",
+        "html": "<p>var metadata = {<br />  description: &#39;Information for every institution in the 2013 IPEDS universe&#39;<br />};</p><p>dataset.setMetadata(metadata, function(err, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -787,8 +773,8 @@
     "isEvent": false,
     "ignore": false,
     "line": 279,
-    "codeStart": 297,
-    "code": "Dataset.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n\n  this.makeReq_('PATCH', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
+    "codeStart": 296,
+    "code": "Dataset.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n\n  this.makeReq_('PATCH', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Dataset",
@@ -843,8 +829,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 312,
-    "codeStart": 321,
+    "line": 311,
+    "codeStart": 320,
     "code": "Dataset.prototype.table = function(id) {\n  return new Table(this, id);\n};",
     "ctx": {
       "type": "method",
@@ -939,8 +925,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 325,
-    "codeStart": 337,
+    "line": 324,
+    "codeStart": 336,
     "code": "Dataset.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/datasets/' + this.id + path;\n  this.bigQuery.makeReq_(method, path, query, body, callback);\n};",
     "ctx": {
       "type": "method",
@@ -962,8 +948,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 342,
-    "codeStart": 347,
+    "line": 341,
+    "codeStart": 346,
     "code": "streamRouter.extend(Dataset, 'getTables');\n\nmodule.exports = Dataset;",
     "ctx": false
   }

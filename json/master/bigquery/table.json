@@ -1097,7 +1097,7 @@
     "ignore": false,
     "line": 506,
     "codeStart": 564,
-    "code": "Table.prototype.getRows = function(options, callback) {\n  var that = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  callback = callback || util.noop;\n\n  this.makeReq_('GET', '/data', options, null, function(err, resp) {\n    if (err) {\n      onComplete(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.pageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.pageToken\n      });\n    }\n\n    if (resp.rows && resp.rows.length > 0 && !that.metadata.schema) {\n      // We don't know the schema for this table yet. Do a quick stat.\n      that.getMetadata(function(err) {\n        if (err) {\n          onComplete(err);\n          return;\n        }\n\n        onComplete(null, resp.rows, nextQuery, resp);\n      });\n\n      return;\n    }\n\n    onComplete(null, resp.rows, nextQuery, resp);\n  });\n\n  function onComplete(err, rows, nextQuery, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    rows = Table.mergeSchemaWithRows_(that.metadata.schema, rows || []);\n\n    callback(null, rows, nextQuery, resp);\n  }\n};",
+    "code": "Table.prototype.getRows = function(options, callback) {\n  var that = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  callback = callback || util.noop;\n\n  this.makeReq_('GET', '/data', options, null, function(err, resp) {\n    if (err) {\n      onComplete(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.pageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.pageToken\n      });\n    }\n\n    if (resp.rows && resp.rows.length > 0 && !that.metadata.schema) {\n      // We don't know the schema for this table yet. Do a quick stat.\n      that.getMetadata(function(err, metadata, apiResponse) {\n        if (err) {\n          onComplete(err, null, null, apiResponse);\n          return;\n        }\n\n        onComplete(null, resp.rows, nextQuery, resp);\n      });\n\n      return;\n    }\n\n    onComplete(null, resp.rows, nextQuery, resp);\n  });\n\n  function onComplete(err, rows, nextQuery, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    rows = Table.mergeSchemaWithRows_(that.metadata.schema, rows || []);\n\n    callback(null, rows, nextQuery, resp);\n  }\n};",
     "ctx": {
       "type": "method",
       "constructor": "Table",
@@ -1455,20 +1455,6 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.metadata - The metadata of the Table.",
-        "name": "callback.metadata",
-        "description": "<ul>\n<li>The metadata of the Table.</li>\n</ul>\n",
-        "types": [
-          "object"
-        ],
-        "typesDescription": "<code>object</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
         "string": "{object} callback.apiResponse - The full API response.\n",
         "name": "callback.apiResponse",
         "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
@@ -1498,8 +1484,8 @@
     "isEvent": false,
     "ignore": false,
     "line": 853,
-    "codeStart": 881,
-    "code": "Table.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n\n  if (metadata.name) {\n    metadata.friendlyName = metadata.name;\n    delete metadata.name;\n  }\n\n  if (is.string(metadata.schema)) {\n    metadata.schema = Table.createSchemaFromString_(metadata.schema);\n  }\n\n  this.makeReq_('PUT', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
+    "codeStart": 880,
+    "code": "Table.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n\n  if (metadata.name) {\n    metadata.friendlyName = metadata.name;\n    delete metadata.name;\n  }\n\n  if (is.string(metadata.schema)) {\n    metadata.schema = Table.createSchemaFromString_(metadata.schema);\n  }\n\n  this.makeReq_('PUT', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Table",
@@ -1593,8 +1579,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 905,
-    "codeStart": 917,
+    "line": 904,
+    "codeStart": 916,
     "code": "Table.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/tables/' + this.id + path;\n  this.dataset.makeReq_(method, path, query, body, callback);\n};",
     "ctx": {
       "type": "method",
@@ -1616,8 +1602,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 922,
-    "codeStart": 927,
+    "line": 921,
+    "codeStart": 926,
     "code": "streamRouter.extend(Table, 'getRows');\n\nmodule.exports = Table;",
     "ctx": false
   }

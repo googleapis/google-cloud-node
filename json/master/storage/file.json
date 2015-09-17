@@ -1577,20 +1577,6 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.metadata - The File's metadata.",
-        "name": "callback.metadata",
-        "description": "<ul>\n<li>The File&#39;s metadata.</li>\n</ul>\n",
-        "types": [
-          "object"
-        ],
-        "typesDescription": "<code>object</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
         "string": "{object} callback.apiResponse - The full API response.\n",
         "name": "callback.apiResponse",
         "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
@@ -1605,8 +1591,8 @@
       },
       {
         "type": "example",
-        "string": "file.setMetadata({\n  contentType: 'application/x-font-ttf',\n  metadata: {\n    my: 'custom',\n    properties: 'go here'\n  }\n}, function(err, metadata, apiResponse) {});\n\n// Assuming current metadata = { hello: 'world', unsetMe: 'will do' }\nfile.setMetadata({\n  metadata: {\n    abc: '123', // will be set.\n    unsetMe: null, // will be unset (deleted).\n    hello: 'goodbye' // will be updated from 'hello' to 'goodbye'.\n  }\n}, function(err, metadata, apiResponse) {\n  // metadata should now be { abc: '123', hello: 'goodbye' }\n});",
-        "html": "<p>file.setMetadata({<br />  contentType: &#39;application/x-font-ttf&#39;,<br />  metadata: {<br />    my: &#39;custom&#39;,<br />    properties: &#39;go here&#39;<br />  }<br />}, function(err, metadata, apiResponse) {});</p><p>// Assuming current metadata = { hello: &#39;world&#39;, unsetMe: &#39;will do&#39; }<br />file.setMetadata({<br />  metadata: {<br />    abc: &#39;123&#39;, // will be set.<br />    unsetMe: null, // will be unset (deleted).<br />    hello: &#39;goodbye&#39; // will be updated from &#39;hello&#39; to &#39;goodbye&#39;.<br />  }<br />}, function(err, metadata, apiResponse) {<br />  // metadata should now be { abc: &#39;123&#39;, hello: &#39;goodbye&#39; }<br />});</p>"
+        "string": "file.setMetadata({\n  contentType: 'application/x-font-ttf',\n  metadata: {\n    my: 'custom',\n    properties: 'go here'\n  }\n}, function(err, apiResponse) {});\n\n// Assuming current metadata = { hello: 'world', unsetMe: 'will do' }\nfile.setMetadata({\n  metadata: {\n    abc: '123', // will be set.\n    unsetMe: null, // will be unset (deleted).\n    hello: 'goodbye' // will be updated from 'hello' to 'goodbye'.\n  }\n}, function(err, apiResponse) {\n  // metadata should now be { abc: '123', hello: 'goodbye' }\n});",
+        "html": "<p>file.setMetadata({<br />  contentType: &#39;application/x-font-ttf&#39;,<br />  metadata: {<br />    my: &#39;custom&#39;,<br />    properties: &#39;go here&#39;<br />  }<br />}, function(err, apiResponse) {});</p><p>// Assuming current metadata = { hello: &#39;world&#39;, unsetMe: &#39;will do&#39; }<br />file.setMetadata({<br />  metadata: {<br />    abc: &#39;123&#39;, // will be set.<br />    unsetMe: null, // will be unset (deleted).<br />    hello: &#39;goodbye&#39; // will be updated from &#39;hello&#39; to &#39;goodbye&#39;.<br />  }<br />}, function(err, apiResponse) {<br />  // metadata should now be { abc: &#39;123&#39;, hello: &#39;goodbye&#39; }<br />});</p>"
       }
     ],
     "description": {
@@ -1620,8 +1606,8 @@
     "isEvent": false,
     "ignore": false,
     "line": 1251,
-    "codeStart": 1290,
-    "code": "File.prototype.setMetadata = function(metadata, callback) {\n  callback = callback || util.noop;\n\n  var that = this;\n  var path = '/o/' + encodeURIComponent(this.name);\n  var query = {};\n\n  if (this.generation) {\n    query.generation = this.generation;\n  }\n\n  this.makeReq_('PATCH', path, query, metadata, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
+    "codeStart": 1289,
+    "code": "File.prototype.setMetadata = function(metadata, callback) {\n  callback = callback || util.noop;\n\n  var that = this;\n  var path = '/o/' + encodeURIComponent(this.name);\n  var query = {};\n\n  if (this.generation) {\n    query.generation = this.generation;\n  }\n\n  this.makeReq_('PATCH', path, query, metadata, function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "File",
@@ -1709,9 +1695,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1313,
-    "codeStart": 1337,
-    "code": "File.prototype.makePrivate = function(options, callback) {\n  var that = this;\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n  var path = '/o/' + encodeURIComponent(this.name);\n  var query = { predefinedAcl: options.strict ? 'private' : 'projectPrivate' };\n\n  // You aren't allowed to set both predefinedAcl & acl properties on a file, so\n  // acl must explicitly be nullified, destroying all previous acls on the file.\n  var metadata = { acl: null };\n\n  callback = callback || util.noop;\n\n  this.makeReq_('PATCH', path, query, metadata, function(err, resp) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null);\n  });\n};",
+    "line": 1312,
+    "codeStart": 1336,
+    "code": "File.prototype.makePrivate = function(options, callback) {\n  var that = this;\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n  var path = '/o/' + encodeURIComponent(this.name);\n  var query = { predefinedAcl: options.strict ? 'private' : 'projectPrivate' };\n\n  // You aren't allowed to set both predefinedAcl & acl properties on a file, so\n  // acl must explicitly be nullified, destroying all previous acls on the file.\n  var metadata = { acl: null };\n\n  callback = callback || util.noop;\n\n  this.makeReq_('PATCH', path, query, metadata, function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "File",
@@ -1785,8 +1771,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1364,
-    "codeStart": 1376,
+    "line": 1363,
+    "codeStart": 1375,
     "code": "File.prototype.makePublic = function(callback) {\n  callback = callback || util.noop;\n\n  this.acl.add({\n    entity: 'allUsers',\n    role: 'READER'\n  }, function(err, resp) {\n    callback(err, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1848,8 +1834,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1387,
-    "codeStart": 1397,
+    "line": 1386,
+    "codeStart": 1396,
     "code": "File.prototype.startResumableUpload_ = function(dup, metadata) {\n  var self = this;\n\n  var uploadStream = resumableUpload({\n    authClient: this.bucket.storage.makeAuthenticatedRequest_.authClient,\n    bucket: this.bucket.name,\n    file: this.name,\n    generation: this.generation,\n    metadata: metadata || {}\n  });\n\n  uploadStream\n    .on('response', function(resp, metadata) {\n      if (metadata) {\n        self.metadata = metadata;\n      }\n    })\n    .on('finish', function() {\n      dup.emit('complete');\n    });\n\n  dup.setWritable(uploadStream);\n};",
     "ctx": {
       "type": "method",
@@ -1906,8 +1892,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1421,
-    "codeStart": 1431,
+    "line": 1420,
+    "codeStart": 1430,
     "code": "File.prototype.startSimpleUpload_ = function(dup, metadata) {\n  var self = this;\n\n  var reqOpts = {\n    qs: {\n      name: self.name\n    },\n    uri: format('{base}/{bucket}/o', {\n      base: STORAGE_UPLOAD_BASE_URL,\n      bucket: self.bucket.name\n    })\n  };\n\n  if (this.generation) {\n    reqOpts.qs.ifGenerationMatch = this.generation;\n  }\n\n  util.makeWritableStream(dup, {\n    makeAuthenticatedRequest: self.bucket.storage.makeAuthenticatedRequest_,\n    metadata: metadata,\n    request: reqOpts\n  }, function(data) {\n    self.metadata = data;\n    dup.emit('complete');\n  });\n};\n\nmodule.exports = File;",
     "ctx": {
       "type": "method",

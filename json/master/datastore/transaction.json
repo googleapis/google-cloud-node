@@ -522,48 +522,13 @@
     "ignore": false,
     "line": 296,
     "codeStart": 372,
-    "code": "Transaction.prototype.save = function(entities) {\n  var that = this;\n\n  arrify(entities).forEach(function(ent) {\n    that.modifiedEntities_.push({\n      entity: {\n        key: ent.key\n      },\n      method: 'save',\n      args: [ent]\n    });\n  });\n};",
+    "code": "Transaction.prototype.save = function(entities) {\n  var that = this;\n\n  arrify(entities).forEach(function(ent) {\n    that.modifiedEntities_.push({\n      entity: {\n        key: ent.key\n      },\n      method: 'save',\n      args: [ent]\n    });\n  });\n};\n\nmodule.exports = Transaction;",
     "ctx": {
       "type": "method",
       "constructor": "Transaction",
       "cons": "Transaction",
       "name": "save",
       "string": "Transaction.prototype.save()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "todo",
-        "string": "Implement. ",
-        "html": "<p>Implement. </p>"
-      },
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      }
-    ],
-    "description": {
-      "full": "<p>mapQuery</p>",
-      "summary": "<p>mapQuery</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 386,
-    "codeStart": 393,
-    "code": "Transaction.prototype.mapQuery = function() {\n  throw new Error('not yet implemented');\n};\n\nmodule.exports = Transaction;",
-    "ctx": {
-      "type": "method",
-      "constructor": "Transaction",
-      "cons": "Transaction",
-      "name": "mapQuery",
-      "string": "Transaction.prototype.mapQuery()"
     }
   }
 ]

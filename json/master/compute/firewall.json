@@ -302,9 +302,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.metadata - The network's metadata.",
+        "string": "{object} callback.metadata - The firewall's metadata.",
         "name": "callback.metadata",
-        "description": "<ul>\n<li>The network&#39;s metadata.</li>\n</ul>\n",
+        "description": "<ul>\n<li>The firewall&#39;s metadata.</li>\n</ul>\n",
         "types": [
           "object"
         ],

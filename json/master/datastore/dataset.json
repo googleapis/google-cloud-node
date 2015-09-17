@@ -686,8 +686,8 @@
       },
       {
         "type": "example",
-        "string": "dataset.runInTransaction(function(transaction, done) {\n  // From the `transaction` object, execute dataset methods as usual.\n  // Call `done` when you're ready to commit all of the changes.\n  transaction.get(dataset.key(['Company', 123]), function(err, entity) {\n    if (err) {\n      transaction.rollback(done);\n      return;\n    }\n\n    done();\n  });\n}, function(err) {});",
-        "html": "<p>dataset.runInTransaction(function(transaction, done) {<br />  // From the <code>transaction</code> object, execute dataset methods as usual.<br />  // Call <code>done</code> when you&#39;re ready to commit all of the changes.<br />  transaction.get(dataset.key([&#39;Company&#39;, 123]), function(err, entity) {<br />    if (err) {<br />      transaction.rollback(done);<br />      return;<br />    }</p><pre><code>done();\n</code></pre><p>  });<br />}, function(err) {});</p>"
+        "string": "dataset.runInTransaction(function(transaction, done) {\n  // From the `transaction` object, execute dataset methods as usual.\n  // Call `done` when you're ready to commit all of the changes.\n  transaction.get(dataset.key(['Company', 123]), function(err, entity) {\n    if (err) {\n      transaction.rollback(done);\n      return;\n    }\n\n    done();\n  });\n}, function(err, apiResponse) {});",
+        "html": "<p>dataset.runInTransaction(function(transaction, done) {<br />  // From the <code>transaction</code> object, execute dataset methods as usual.<br />  // Call <code>done</code> when you&#39;re ready to commit all of the changes.<br />  transaction.get(dataset.key([&#39;Company&#39;, 123]), function(err, entity) {<br />    if (err) {<br />      transaction.rollback(done);<br />      return;<br />    }</p><pre><code>done();\n</code></pre><p>  });<br />}, function(err, apiResponse) {});</p>"
       }
     ],
     "description": {
@@ -702,7 +702,7 @@
     "ignore": false,
     "line": 217,
     "codeStart": 249,
-    "code": "Dataset.prototype.runInTransaction = function(fn, callback) {\n  var newTransaction = this.createTransaction_();\n\n  newTransaction.begin_(function(err) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    fn(newTransaction, newTransaction.commit_.bind(newTransaction, callback));\n  });\n};",
+    "code": "Dataset.prototype.runInTransaction = function(fn, callback) {\n  var newTransaction = this.createTransaction_();\n\n  newTransaction.begin_(function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    fn(newTransaction, newTransaction.commit_.bind(newTransaction, callback));\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Dataset",
