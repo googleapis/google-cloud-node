@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach */
-
 'use strict';
 
 var arrify = require('arrify');
@@ -441,13 +439,17 @@ describe('BigQuery/Dataset', function() {
       ds.setMetadata(METADATA, assert.ifError);
     });
 
-    it('should execute callback with error', function(done) {
+    it('should execute callback with error & API response', function(done) {
       var error = new Error('Error.');
+      var apiResponse = {};
+
       ds.makeReq_ = function(method, path, query, body, callback) {
-        callback(error);
+        callback(error, apiResponse);
       };
-      ds.setMetadata(METADATA, function(err) {
-        assert.equal(err, error);
+
+      ds.setMetadata(METADATA, function(err, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(apiResponse_, apiResponse);
         done();
       });
     });
@@ -467,16 +469,8 @@ describe('BigQuery/Dataset', function() {
         });
       });
 
-      it('should execute callback with metadata', function(done) {
-        ds.setMetadata(METADATA, function(err, metadata) {
-          assert.ifError(err);
-          assert.deepEqual(metadata, METADATA);
-          done();
-        });
-      });
-
       it('should execute callback with apiResponse', function(done) {
-        ds.setMetadata(METADATA, function(err, metadata, apiResponse) {
+        ds.setMetadata(METADATA, function(err, apiResponse) {
           assert.ifError(err);
           assert.deepEqual(apiResponse, METADATA);
           done();

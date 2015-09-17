@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach, before, after */
-
 'use strict';
 
 var arrify = require('arrify');
@@ -78,6 +76,7 @@ describe('BigQuery/Table', function() {
   var Table;
   var TABLE_ID = 'kittens';
   var table;
+  var tableOverrides = {};
 
   before(function() {
     mockery.registerMock('../storage/file', FakeFile);
@@ -87,7 +86,23 @@ describe('BigQuery/Table', function() {
       useCleanCache: true,
       warnOnUnregistered: false
     });
+
     Table = require('../../lib/bigquery/table');
+
+    var tableCached = extend(true, {}, Table);
+
+    // Override all util methods, allowing them to be mocked. Overrides are
+    // removed before each test.
+    Object.keys(Table).forEach(function(tableMethod) {
+      if (typeof Table[tableMethod] !== 'function') {
+        return;
+      }
+
+      Table[tableMethod] = function() {
+        return (tableOverrides[tableMethod] || tableCached[tableMethod])
+          .apply(this, arguments);
+      };
+    });
   });
 
   after(function() {
@@ -97,6 +112,7 @@ describe('BigQuery/Table', function() {
 
   beforeEach(function() {
     makeWritableStreamOverride = null;
+    tableOverrides = {};
     table = new Table(DATASET, TABLE_ID);
   });
 
@@ -279,6 +295,23 @@ describe('BigQuery/Table', function() {
       };
 
       table.createWriteStream(fileType).emit('writing');
+    });
+
+    it('should format a schema', function(done) {
+      var expectedSchema = {};
+
+      tableOverrides.createSchemaFromString_ = function(string) {
+        assert.strictEqual(string, SCHEMA_STRING);
+        return expectedSchema;
+      };
+
+      makeWritableStreamOverride = function(stream, options) {
+        var load = options.metadata.configuration.load;
+        assert.deepEqual(load.schema, expectedSchema);
+        done();
+      };
+
+      table.createWriteStream({ schema: SCHEMA_STRING }).emit('writing');
     });
 
     it('should throw if a given source format is not recognized', function() {
@@ -620,31 +653,76 @@ describe('BigQuery/Table', function() {
       table.getRows(options, done);
     });
 
-    it('should refresh metadata if it does not have a schema', function(done) {
-      // Step 0: use "Stephen" so you know who to blame for this test.
+    it('should execute callback with error & API response', function(done) {
+      var apiResponse = {};
+      var error = new Error('Error.');
+
+      table.makeReq_ = function(method, path, query, body, callback) {
+        callback(error, apiResponse);
+      };
+
+      table.getRows(function(err, rows, nextQuery, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(rows, null);
+        assert.strictEqual(nextQuery, null);
+        assert.strictEqual(apiResponse_, apiResponse);
+
+        done();
+      });
+    });
+
+    describe('refreshing metadata', function() {
+      // Using "Stephen" so you know who to blame for these tests.
       var rows = [{ f: [{ v: 'stephen' }] }];
       var schema = { fields: [{ name: 'name', type: 'string' }] };
 
-      // Step 1: makes the request.
-      table.makeReq_ = function(method, path, query, body, callback) {
-        // Respond with a row, so it grabs the schema.
-        // Use setImmediate to let our getMetadata overwrite process.
-        setImmediate(callback, null, { rows: rows });
-      };
-      table.getRows(responseHandler);
+      beforeEach(function() {
+        table.makeReq_ = function(method, path, query, body, callback) {
+          // Respond with a row, so it grabs the schema.
+          // Use setImmediate to let our getMetadata overwrite process.
+          setImmediate(callback, null, { rows: rows });
+        };
+      });
 
-      // Step 2: refreshes the metadata to pull down the schema.
-      table.getMetadata = function(callback) {
-        table.metadata = { schema: schema };
-        callback();
-      };
+      it('should refresh', function(done) {
+        // Step 1: makes the request.
+        table.getRows(responseHandler);
 
-      // Step 3: execute original complete handler with schema-merged rows.
-      function responseHandler(err, rows) {
-        assert.ifError(err);
-        assert.deepEqual(rows, [{ name: 'stephen' }]);
-        done();
-      }
+        // Step 2: refreshes the metadata to pull down the schema.
+        table.getMetadata = function(callback) {
+          table.metadata = { schema: schema };
+          callback();
+        };
+
+        // Step 3: execute original complete handler with schema-merged rows.
+        function responseHandler(err, rows) {
+          assert.ifError(err);
+          assert.deepEqual(rows, [{ name: 'stephen' }]);
+          done();
+        }
+      });
+
+      it('should execute callback from refreshing metadata', function(done) {
+        var apiResponse = {};
+        var error = new Error('Error.');
+
+        // Step 1: makes the request.
+        table.getRows(responseHandler);
+
+        // Step 2: refreshes the metadata to pull down the schema.
+        table.getMetadata = function(callback) {
+          callback(error, {}, apiResponse);
+        };
+
+        // Step 3: execute original complete handler with schema-merged rows.
+        function responseHandler(err, rows, nextQuery, apiResponse_) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(rows, null);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        }
+      });
     });
 
     it('should return schema-merged rows', function(done) {
@@ -872,31 +950,38 @@ describe('BigQuery/Table', function() {
       table.insert(data, done);
     });
 
-    it('should execute callback', function(done) {
+    it('should execute callback with API response', function(done) {
+      var apiResponse = { insertErrors: [] };
+
       table.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, { insertErrors: [] });
+        callback(null, apiResponse);
       };
 
-      table.insert(data, function(err, insertErrors) {
+      table.insert(data, function(err, insertErrors, apiResponse_) {
         assert.ifError(err);
         assert.deepEqual(insertErrors, []);
+        assert.strictEqual(apiResponse_, apiResponse);
         done();
       });
     });
 
-    it('should execute callback with apiResponse', function(done) {
+    it('should execute callback with error & API response', function(done) {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
       table.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, { insertErrors: [] });
+        callback(error, apiResponse);
       };
 
-      table.insert(data, function(err, insertErrors, apiResponse) {
-        assert.ifError(err);
-        assert.deepEqual(apiResponse, { insertErrors: [] });
+      table.insert(data, function(err, insertErrors, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(insertErrors, null);
+        assert.strictEqual(apiResponse_, apiResponse);
         done();
       });
     });
 
-    it('should return errors to the callback', function(done) {
+    it('should return insert failures to the callback', function(done) {
       var row0Error = { message: 'Error.', reason: 'notFound' };
       var row1Error = { message: 'Error.', reason: 'notFound' };
 
@@ -967,13 +1052,17 @@ describe('BigQuery/Table', function() {
       table.setMetadata({ schema: 'schema' });
     });
 
-    it('should execute callback with error', function(done) {
+    it('should execute callback with error & API response', function(done) {
       var error = new Error('Error.');
+      var apiResponse = {};
+
       table.makeReq_ = function(method, path, query, body, callback) {
-        callback(error);
+        callback(error, apiResponse);
       };
-      table.setMetadata(METADATA, function(err) {
-        assert.equal(err, error);
+
+      table.setMetadata(METADATA, function(err, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(apiResponse_, apiResponse);
         done();
       });
     });
@@ -994,15 +1083,15 @@ describe('BigQuery/Table', function() {
       });
 
       it('should execute callback with metadata', function(done) {
-        table.setMetadata(METADATA, function(err, metadata) {
+        table.setMetadata(METADATA, function(err, apiResponse) {
           assert.ifError(err);
-          assert.deepEqual(metadata, METADATA);
+          assert.deepEqual(apiResponse, METADATA);
           done();
         });
       });
 
       it('should execute callback with apiResponse', function(done) {
-        table.setMetadata(METADATA, function(err, metadata, apiResponse) {
+        table.setMetadata(METADATA, function(err, apiResponse) {
           assert.ifError(err);
           assert.deepEqual(apiResponse, METADATA);
           done();

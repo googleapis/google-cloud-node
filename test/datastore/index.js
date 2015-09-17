@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-/*global describe, it, before, after */
-
 'use strict';
 
 var entity = {

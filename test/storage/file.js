@@ -166,6 +166,25 @@ describe('File', function() {
       directoryFile.copy(newFile);
     });
 
+    it('should execute callback with error & API response', function(done) {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      var newFile = new File(bucket, 'new-file');
+
+      file.makeReq_ = function(method, path, query, body, callback) {
+        callback(error, apiResponse);
+      };
+
+      file.copy(newFile, function(err, file, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(file, null);
+        assert.strictEqual(apiResponse_, apiResponse);
+
+        done();
+      });
+    });
+
     it('should send query.sourceGeneration if File has one', function(done) {
       var versionedFile = new File(bucket, 'name', { generation: 1 });
       var newFile = new File(bucket, 'new-file');
@@ -221,6 +240,12 @@ describe('File', function() {
           });
         assertPathEquals(file, expectedPath, done);
         file.copy(newFile);
+      });
+
+      it('should throw if a destination cannot be parsed', function() {
+        assert.throws(function() {
+          file.copy(function() {});
+        }, /should have a name/);
       });
     });
 
@@ -1162,6 +1187,22 @@ describe('File', function() {
       file.delete();
     });
 
+    it('should execute callback with error & API response', function(done) {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      file.makeReq_ = function(method, path, query, body, callback) {
+        callback(error, apiResponse);
+      };
+
+      file.delete(function(err, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(apiResponse_, apiResponse);
+
+        done();
+      });
+    });
+
     it('should URI encode file names', function(done) {
       directoryFile.makeReq_ = function(method, path) {
         assert.equal(path, '/o/' + encodeURIComponent(directoryFile.name));
@@ -1485,6 +1526,42 @@ describe('File', function() {
         var conditionString = '{\"acl\":\"<acl>\"}';
         assert.ifError(err);
         assert(signedPolicy.string.indexOf(conditionString) > -1);
+        done();
+      });
+    });
+
+    it('should add success redirect', function(done) {
+      var redirectUrl = 'http://redirect';
+
+      file.getSignedPolicy({
+        expires: Date.now() + 5,
+        successRedirect: redirectUrl
+      }, function(err, signedPolicy) {
+        assert.ifError(err);
+
+        var policy = JSON.parse(signedPolicy.string);
+        assert(policy.conditions.some(function(condition) {
+          return condition.success_action_redirect === redirectUrl;
+        }));
+
+        done();
+      });
+    });
+
+    it('should add success status', function(done) {
+      var successStatus = '200';
+
+      file.getSignedPolicy({
+        expires: Date.now() + 5,
+        successStatus: successStatus
+      }, function(err, signedPolicy) {
+        assert.ifError(err);
+
+        var policy = JSON.parse(signedPolicy.string);
+        assert(policy.conditions.some(function(condition) {
+          return condition.success_action_status === successStatus;
+        }));
+
         done();
       });
     });
@@ -1885,6 +1962,21 @@ describe('File', function() {
       file.setMetadata(metadata, done);
     });
 
+    it('should execute callback with error & API response', function(done) {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      file.makeReq_ = function(method, path, query, body, callback) {
+        callback(error, apiResponse);
+      };
+
+      file.setMetadata(metadata, function(err, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(apiResponse_, apiResponse);
+        done();
+      });
+    });
+
     it('should execute callback with apiResponse', function(done) {
       var resp = { success: true };
       file.makeReq_ = function(method, path, query, body, callback) {
@@ -1926,12 +2018,35 @@ describe('File', function() {
   });
 
   describe('makePrivate', function() {
-    it('should execute callback', function(done) {
+    it('should execute callback with API response', function(done) {
+      var apiResponse = {};
+
       file.makeReq_ = function(method, path, query, body, callback) {
-        callback();
+        callback(null, apiResponse);
       };
 
-      file.makePrivate(done);
+      file.makePrivate(function(err, apiResponse_) {
+        assert.ifError(err);
+        assert.strictEqual(apiResponse_, apiResponse);
+
+        done();
+      });
+    });
+
+    it('should execute callback with error & API response', function(done) {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      file.makeReq_ = function(method, path, query, body, callback) {
+        callback(error, apiResponse);
+      };
+
+      file.makePrivate(function(err, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(apiResponse_, apiResponse);
+
+        done();
+      });
     });
 
     it('should make the file private to project by default', function(done) {
