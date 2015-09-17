@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach */
-
 'use strict';
 
 var Acl = require('../../lib/storage/acl.js');
@@ -427,7 +425,7 @@ describe('storage/AclRoleAccessorMethods', function() {
 
       aclEntity.delete = function(options, callback) {
         assert.deepEqual(options, {
-          entity: 'user-' + userName,
+          entity: 'allUsers',
           role: role
         });
 
@@ -442,7 +440,7 @@ describe('storage/AclRoleAccessorMethods', function() {
           aclEntity.fakeroles.addUser(userName, next);
         },
         function(next) {
-          aclEntity.fakeroles.deleteUser(userName, next);
+          aclEntity.fakeroles.deleteAllUsers(next);
         }
       ], done);
     });

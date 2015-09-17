@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-/*global describe, it, after, before */
-
 'use strict';
 
 var env = require('./env.js');

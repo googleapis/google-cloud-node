@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-/*global describe, it, beforeEach, before, after */
-
 'use strict';
 
 var arrify = require('arrify');
@@ -219,6 +217,15 @@ describe('Transaction', function() {
         done();
       };
       transaction.commit_();
+    });
+
+    it('should skip the commit', function(done) {
+      transaction.skipCommit = true;
+
+      // If called, the test will blow up.
+      transaction.makeReq_ = done;
+
+      transaction.commit_(done);
     });
 
     it('should pass error to callback', function(done) {
