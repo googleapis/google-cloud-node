@@ -192,12 +192,20 @@ describe('keyToKeyProto', function() {
   it('should handle incomplete keys with & without namespaces', function() {
     var key = new entity.Key({ path: [ 'Kind1' ] });
     var keyWithNS = new entity.Key({
-        namespace: 'Namespace',
-        path: [ 'Kind1' ]
-      });
+      namespace: 'Namespace',
+      path: [ 'Kind1' ]
+    });
+    var keyWithNumericID = new entity.Key({
+      path: [ 'Kind1', 234 ]
+    });
+    var keyWithStringID = new entity.Key({
+      path: [ 'Kind1', 'StringId' ]
+    });
 
     var proto = entity.keyToKeyProto(key);
     var protoWithNS = entity.keyToKeyProto(keyWithNS);
+    var protoWithNumericID = entity.keyToKeyProto(keyWithNumericID);
+    var protoWithStringID = entity.keyToKeyProto(keyWithStringID);
 
     assert.strictEqual(proto.partition_id, undefined);
     assert.strictEqual(proto.path_element[0].kind, 'Kind1');
@@ -208,6 +216,9 @@ describe('keyToKeyProto', function() {
     assert.strictEqual(protoWithNS.path_element[0].kind, 'Kind1');
     assert.strictEqual(protoWithNS.path_element[0].id, undefined);
     assert.strictEqual(protoWithNS.path_element[0].name, undefined);
+
+    assert.strictEqual(protoWithNumericID.path_element[0].id, 234);
+    assert.strictEqual(protoWithStringID.path_element[0].name, 'StringId');
   });
 
   it('should throw if key contains 0 items', function() {
