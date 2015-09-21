@@ -533,6 +533,24 @@ describe('File', function() {
       });
     });
 
+    it('should confirm the abort method exists', function(done) {
+      var reqStream = through();
+
+      file.bucket.storage.makeAuthenticatedRequest_ = function() {
+        return reqStream;
+      };
+
+      var readStream = file.createReadStream();
+      readStream.resume();
+
+      setImmediate(function() {
+        assert.doesNotThrow(function() {
+          reqStream.emit('error', new Error('Error.'));
+          setImmediate(done);
+        });
+      });
+    });
+
     describe('authenticating', function() {
       it('should create an authenticated request', function(done) {
         var expectedPath = format('https://{host}/{b}/{o}', {
