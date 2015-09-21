@@ -455,6 +455,32 @@ describe('Request', function() {
       ], done);
     });
 
+    it('should not alter the provided data object', function(done) {
+      var entities = [
+        {
+          key: key,
+          method: 'insert',
+          indexed: false,
+          data: {
+            value: {
+              a: 'b',
+              c: [1, 2, 3]
+            }
+          }
+        }
+      ];
+      var expectedEntities = extend(true, {}, entities);
+
+      request.makeReq_ = function() {
+        // By the time the request is made, the original object has already been
+        // transformed into a raw request.
+        assert.deepEqual(entities, expectedEntities);
+        done();
+      };
+
+      request.save(entities, assert.ifError);
+    });
+
     it('should return apiResponse in callback', function(done) {
       var key = new entity.Key({ namespace: 'ns', path: ['Company'] });
       var mockCommitResponse = {
