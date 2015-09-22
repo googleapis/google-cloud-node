@@ -49,11 +49,11 @@
   ],
   "dependencies": {
     "arrify": "^1.0.0",
-    "async": "^0.9.0",
+    "async": "^1.4.2",
     "concat-stream": "^1.5.0",
-    "dns-zonefile": "0.1.9",
+    "dns-zonefile": "0.1.10",
     "duplexify": "^3.2.0",
-    "extend": "^2.0.0",
+    "extend": "^3.0.0",
     "gce-images": "^0.1.0",
     "gcs-resumable-upload": "^0.2.1",
     "google-auto-auth": "^0.2.0",
@@ -64,7 +64,7 @@
     "once": "^1.3.1",
     "prop-assign": "^1.0.0",
     "propprop": "^0.3.0",
-    "protobufjs": "^3.8.2",
+    "protobufjs": "^4.0.0",
     "pumpify": "^1.3.3",
     "request": "^2.53.0",
     "retry-request": "^1.2.1",
@@ -75,18 +75,18 @@
     "through2": "^2.0.0"
   },
   "devDependencies": {
-    "bytebuffer": "^3.5.4",
+    "bytebuffer": "^4.0.0",
     "coveralls": "^2.11.2",
-    "dox": "^0.7.0",
+    "dox": "^0.8.0",
     "glob": "^5.0.9",
     "istanbul": "^0.3.5",
-    "jscs": "^1.13.1",
+    "jscs": "^2.1.1",
     "jshint": "^2.6.0",
     "mitm": "^1.1.0",
     "mocha": "^2.1.0",
     "mockery": "^1.4.0",
     "node-uuid": "^1.4.3",
-    "tmp": "0.0.24"
+    "tmp": "0.0.27"
   },
   "scripts": {
     "docs": "./scripts/docs.sh",
