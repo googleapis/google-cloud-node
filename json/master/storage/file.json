@@ -592,9 +592,9 @@
       }
     ],
     "description": {
-      "full": "<p>Create a readable stream to read the contents of the remote file. It can be<br />piped to a writable stream or listened to for &#39;data&#39; events to read a file&#39;s<br />contents.</p><p>In the unlikely event there is a mismatch between what you downloaded and the<br />version in your Bucket, your error handler will receive an error with code<br />&quot;CONTENT_DOWNLOAD_MISMATCH&quot;. If you receive this error, the best recourse is<br />to try downloading the file again.</p><p>NOTE: Readable streams will emit the <code>complete</code> event when the file is fully<br />downloaded.</p>",
+      "full": "<p>Create a readable stream to read the contents of the remote file. It can be<br />piped to a writable stream or listened to for &#39;data&#39; events to read a file&#39;s<br />contents.</p><p>In the unlikely event there is a mismatch between what you downloaded and the<br />version in your Bucket, your error handler will receive an error with code<br />&quot;CONTENT_DOWNLOAD_MISMATCH&quot;. If you receive this error, the best recourse is<br />to try downloading the file again.</p><p>NOTE: Readable streams will emit the <code>end</code> event when the file is fully<br />downloaded.</p>",
       "summary": "<p>Create a readable stream to read the contents of the remote file. It can be<br />piped to a writable stream or listened to for &#39;data&#39; events to read a file&#39;s<br />contents.</p>",
-      "body": "<p>In the unlikely event there is a mismatch between what you downloaded and the<br />version in your Bucket, your error handler will receive an error with code<br />&quot;CONTENT_DOWNLOAD_MISMATCH&quot;. If you receive this error, the best recourse is<br />to try downloading the file again.</p><p>NOTE: Readable streams will emit the <code>complete</code> event when the file is fully<br />downloaded.</p>"
+      "body": "<p>In the unlikely event there is a mismatch between what you downloaded and the<br />version in your Bucket, your error handler will receive an error with code<br />&quot;CONTENT_DOWNLOAD_MISMATCH&quot;. If you receive this error, the best recourse is<br />to try downloading the file again.</p><p>NOTE: Readable streams will emit the <code>end</code> event when the file is fully<br />downloaded.</p>"
     },
     "isPrivate": false,
     "isConstructor": false,
@@ -792,9 +792,9 @@
       }
     ],
     "description": {
-      "full": "<p>Create a writable stream to overwrite the contents of the file in your<br />bucket.</p><p>A File object can also be used to create files for the first time.</p><p>Resumable uploads are automatically enabled and must be shut off explicitly<br />by setting <code>options.resumable</code> to <code>false</code>.</p><p>NOTE: Writable streams will emit the <code>complete</code> event when the file is fully<br />uploaded.</p>",
+      "full": "<p>Create a writable stream to overwrite the contents of the file in your<br />bucket.</p><p>A File object can also be used to create files for the first time.</p><p>Resumable uploads are automatically enabled and must be shut off explicitly<br />by setting <code>options.resumable</code> to <code>false</code>.</p><p>NOTE: Writable streams will emit the <code>finish</code> event when the file is fully<br />uploaded.</p>",
       "summary": "<p>Create a writable stream to overwrite the contents of the file in your<br />bucket.</p>",
-      "body": "<p>A File object can also be used to create files for the first time.</p><p>Resumable uploads are automatically enabled and must be shut off explicitly<br />by setting <code>options.resumable</code> to <code>false</code>.</p><p>NOTE: Writable streams will emit the <code>complete</code> event when the file is fully<br />uploaded.</p>"
+      "body": "<p>A File object can also be used to create files for the first time.</p><p>Resumable uploads are automatically enabled and must be shut off explicitly<br />by setting <code>options.resumable</code> to <code>false</code>.</p><p>NOTE: Writable streams will emit the <code>finish</code> event when the file is fully<br />uploaded.</p>"
     },
     "isPrivate": false,
     "isConstructor": false,
