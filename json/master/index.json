@@ -83,7 +83,7 @@
     "tags": [
       {
         "type": "type",
-        "string": "{module:bigquery}\n",
+        "string": "{module:bigquery}",
         "types": [
           "module:bigquery"
         ],
@@ -96,7 +96,7 @@
       },
       {
         "type": "return",
-        "string": "{module:bigquery}\n",
+        "string": "{module:bigquery}",
         "types": [
           "module:bigquery"
         ],
@@ -138,7 +138,7 @@
     "tags": [
       {
         "type": "type",
-        "string": "{module:compute}\n",
+        "string": "{module:compute}",
         "types": [
           "module:compute"
         ],
@@ -151,7 +151,7 @@
       },
       {
         "type": "return",
-        "string": "{module:compute}\n",
+        "string": "{module:compute}",
         "types": [
           "module:compute"
         ],
@@ -193,7 +193,7 @@
     "tags": [
       {
         "type": "type",
-        "string": "{module:datastore}\n",
+        "string": "{module:datastore}",
         "types": [
           "module:datastore"
         ],
@@ -206,7 +206,7 @@
       },
       {
         "type": "return",
-        "string": "{module:datastore}\n",
+        "string": "{module:datastore}",
         "types": [
           "module:datastore"
         ],
@@ -248,7 +248,7 @@
     "tags": [
       {
         "type": "type",
-        "string": "{module:dns}\n",
+        "string": "{module:dns}",
         "types": [
           "module:dns"
         ],
@@ -261,7 +261,7 @@
       },
       {
         "type": "return",
-        "string": "{module:dns}\n",
+        "string": "{module:dns}",
         "types": [
           "module:dns"
         ],
@@ -303,7 +303,7 @@
     "tags": [
       {
         "type": "type",
-        "string": "{module:pubsub}\n",
+        "string": "{module:pubsub}",
         "types": [
           "module:pubsub"
         ],
@@ -316,7 +316,7 @@
       },
       {
         "type": "return",
-        "string": "{module:pubsub}\n",
+        "string": "{module:pubsub}",
         "types": [
           "module:pubsub"
         ],
@@ -358,7 +358,7 @@
     "tags": [
       {
         "type": "type",
-        "string": "{module:resource}\n",
+        "string": "{module:resource}",
         "types": [
           "module:resource"
         ],
@@ -371,7 +371,7 @@
       },
       {
         "type": "return",
-        "string": "{module:resource}\n",
+        "string": "{module:resource}",
         "types": [
           "module:resource"
         ],
@@ -390,9 +390,9 @@
       }
     ],
     "description": {
-      "full": "<p><a href=\"https://cloud.google.com/resource-manager/\">The Cloud Resource Manager</a><br />provides methods that you can use to programmatically manage your projects<br />in the Google Cloud Platform. With this API, you can do the following:</p><ul>\n<li>Get a list of all projects associated with an account.</li>\n<li>Create new projects.</li>\n<li>Update existing projects.</li>\n<li>Delete projects.</li>\n<li>Recover projects.</li>\n</ul>\n<p class=\"notice\"><br />  <strong>This is a <em>Beta</em> release of Cloud Resource Manager.</strong> This feature is<br />  not covered by any SLA or deprecation policy and may be subject to<br />  backward-incompatible changes.<br /></p>\n",
+      "full": "<p><a href=\"https://cloud.google.com/resource-manager/\">The Cloud Resource Manager</a><br />provides methods that you can use to programmatically manage your projects<br />in the Google Cloud Platform. With this API, you can do the following:</p><ul>\n<li>Get a list of all projects associated with an account.</li>\n<li>Create new projects.</li>\n<li>Update existing projects.</li>\n<li>Delete projects.</li>\n<li>Recover projects.</li>\n</ul>\n<p class=\"notice\"><br />  <strong>This is a <em>Beta</em> release of Cloud Resource Manager.</strong> This feature is<br />  not covered by any SLA or deprecation policy and may be subject to<br />  backward-incompatible changes.<br /></p>",
       "summary": "<p><a href=\"https://cloud.google.com/resource-manager/\">The Cloud Resource Manager</a><br />provides methods that you can use to programmatically manage your projects<br />in the Google Cloud Platform. With this API, you can do the following:</p>",
-      "body": "<ul>\n<li>Get a list of all projects associated with an account.</li>\n<li>Create new projects.</li>\n<li>Update existing projects.</li>\n<li>Delete projects.</li>\n<li>Recover projects.</li>\n</ul>\n<p class=\"notice\"><br />  <strong>This is a <em>Beta</em> release of Cloud Resource Manager.</strong> This feature is<br />  not covered by any SLA or deprecation policy and may be subject to<br />  backward-incompatible changes.<br /></p>\n"
+      "body": "<ul>\n<li>Get a list of all projects associated with an account.</li>\n<li>Create new projects.</li>\n<li>Update existing projects.</li>\n<li>Delete projects.</li>\n<li>Recover projects.</li>\n</ul>\n<p class=\"notice\"><br />  <strong>This is a <em>Beta</em> release of Cloud Resource Manager.</strong> This feature is<br />  not covered by any SLA or deprecation policy and may be subject to<br />  backward-incompatible changes.<br /></p>"
     },
     "isPrivate": false,
     "isConstructor": false,
@@ -413,7 +413,7 @@
     "tags": [
       {
         "type": "type",
-        "string": "{module:search}\n",
+        "string": "{module:search}",
         "types": [
           "module:search"
         ],
@@ -426,7 +426,7 @@
       },
       {
         "type": "return",
-        "string": "{module:search}\n",
+        "string": "{module:search}",
         "types": [
           "module:search"
         ],
@@ -445,9 +445,9 @@
       }
     ],
     "description": {
-      "full": "<p><a href=\"https://cloud.google.com/search/\">Google Cloud Search</a> allows you to<br />quickly perform full-text and geospatial searches against your data without<br />having to spin up your own instances and without the hassle of managing and<br />maintaining a search service.</p><p class=\"notice\"><br />  <strong>This is an <em>Alpha</em> release of Google Cloud Search.</strong> This feature is<br />  not covered by any SLA or deprecation policy and may be subject to<br />  backward-incompatible changes.<br /></p>\n",
+      "full": "<p><a href=\"https://cloud.google.com/search/\">Google Cloud Search</a> allows you to<br />quickly perform full-text and geospatial searches against your data without<br />having to spin up your own instances and without the hassle of managing and<br />maintaining a search service.</p><p class=\"notice\"><br />  <strong>This is an <em>Alpha</em> release of Google Cloud Search.</strong> This feature is<br />  not covered by any SLA or deprecation policy and may be subject to<br />  backward-incompatible changes.<br /></p>",
       "summary": "<p><a href=\"https://cloud.google.com/search/\">Google Cloud Search</a> allows you to<br />quickly perform full-text and geospatial searches against your data without<br />having to spin up your own instances and without the hassle of managing and<br />maintaining a search service.</p>",
-      "body": "<p class=\"notice\"><br />  <strong>This is an <em>Alpha</em> release of Google Cloud Search.</strong> This feature is<br />  not covered by any SLA or deprecation policy and may be subject to<br />  backward-incompatible changes.<br /></p>\n"
+      "body": "<p class=\"notice\"><br />  <strong>This is an <em>Alpha</em> release of Google Cloud Search.</strong> This feature is<br />  not covered by any SLA or deprecation policy and may be subject to<br />  backward-incompatible changes.<br /></p>"
     },
     "isPrivate": false,
     "isConstructor": false,
@@ -468,7 +468,7 @@
     "tags": [
       {
         "type": "type",
-        "string": "{module:storage}\n",
+        "string": "{module:storage}",
         "types": [
           "module:storage"
         ],
@@ -481,7 +481,7 @@
       },
       {
         "type": "return",
-        "string": "{module:storage}\n",
+        "string": "{module:storage}",
         "types": [
           "module:storage"
         ],
@@ -704,7 +704,7 @@
       },
       {
         "type": "param",
-        "string": "{number=} config.maxRetries - Maximum number of automatic retries\n    attempted before returning the error. (default: 3)\n",
+        "string": "{number=} config.maxRetries - Maximum number of automatic retries\n    attempted before returning the error. (default: 3)",
         "name": "config.maxRetries",
         "description": "<ul>\n<li>Maximum number of automatic retries     attempted before returning the error. (default: 3)</li>\n</ul>\n",
         "types": [

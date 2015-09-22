@@ -41,8 +41,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Datastore Queries]{@link http://goo.gl/Cag0r6} ",
-        "html": "<p>[Datastore Queries]{@link <a href=\"http://goo.gl/Cag0r6}\">http://goo.gl/Cag0r6}</a> </p>"
+        "string": "[Datastore Queries]{@link http://goo.gl/Cag0r6}",
+        "html": "<p>[Datastore Queries]{@link <a href=\"http://goo.gl/Cag0r6}\">http://goo.gl/Cag0r6}</a></p>"
       },
       {
         "type": "constructor",
@@ -51,8 +51,8 @@
       },
       {
         "type": "alias",
-        "string": "module:datastore/query ",
-        "html": "<p>module:datastore/query </p>"
+        "string": "module:datastore/query",
+        "html": "<p>module:datastore/query</p>"
       },
       {
         "type": "param",
@@ -70,9 +70,9 @@
       },
       {
         "type": "param",
-        "string": "{string} kind - Kind to query.\n",
+        "string": "{string} kind - Kind to query.",
         "name": "kind",
-        "description": "<ul>\n<li>Kind to query. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Kind to query.</li>\n</ul>\n",
         "types": [
           "string"
         ],
@@ -149,8 +149,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Datastore Filters]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Filters} ",
-        "html": "<p>[Datastore Filters]{@link <a href=\"https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Filters}\">https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Filters}</a> </p>"
+        "string": "[Datastore Filters]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Filters}",
+        "html": "<p>[Datastore Filters]{@link <a href=\"https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Filters}\">https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Filters}</a></p>"
       },
       {
         "type": "param",
@@ -180,7 +180,7 @@
       },
       {
         "type": "return",
-        "string": "{module:datastore/query}\n",
+        "string": "{module:datastore/query}",
         "types": [
           "module:datastore/query"
         ],
@@ -223,8 +223,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Datastore Ancestor Filters]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Ancestor_filters} ",
-        "html": "<p>[Datastore Ancestor Filters]{@link <a href=\"https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Ancestor_filters}\">https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Ancestor_filters}</a> </p>"
+        "string": "[Datastore Ancestor Filters]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Ancestor_filters}",
+        "html": "<p>[Datastore Ancestor Filters]{@link <a href=\"https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Ancestor_filters}\">https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Ancestor_filters}</a></p>"
       },
       {
         "type": "param",
@@ -242,7 +242,7 @@
       },
       {
         "type": "return",
-        "string": "{module:datastore/query}\n",
+        "string": "{module:datastore/query}",
         "types": [
           "module:datastore/query"
         ],
@@ -285,8 +285,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Datastore Sort Orders]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Sort_orders} ",
-        "html": "<p>[Datastore Sort Orders]{@link <a href=\"https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Sort_orders}\">https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Sort_orders}</a> </p>"
+        "string": "[Datastore Sort Orders]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Sort_orders}",
+        "html": "<p>[Datastore Sort Orders]{@link <a href=\"https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Sort_orders}\">https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Sort_orders}</a></p>"
       },
       {
         "type": "param",
@@ -304,7 +304,7 @@
       },
       {
         "type": "return",
-        "string": "{module:datastore/query}\n",
+        "string": "{module:datastore/query}",
         "types": [
           "module:datastore/query"
         ],
@@ -361,7 +361,7 @@
       },
       {
         "type": "return",
-        "string": "{module:datastore/query}\n",
+        "string": "{module:datastore/query}",
         "types": [
           "module:datastore/query"
         ],
@@ -404,8 +404,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Projection Queries]{@link https://cloud.google.com/datastore/docs/concepts/projectionqueries} ",
-        "html": "<p>[Projection Queries]{@link <a href=\"https://cloud.google.com/datastore/docs/concepts/projectionqueries}\">https://cloud.google.com/datastore/docs/concepts/projectionqueries}</a> </p>"
+        "string": "[Projection Queries]{@link https://cloud.google.com/datastore/docs/concepts/projectionqueries}",
+        "html": "<p>[Projection Queries]{@link <a href=\"https://cloud.google.com/datastore/docs/concepts/projectionqueries}\">https://cloud.google.com/datastore/docs/concepts/projectionqueries}</a></p>"
       },
       {
         "type": "param",
@@ -424,7 +424,7 @@
       },
       {
         "type": "return",
-        "string": "{module:datastore/query}\n",
+        "string": "{module:datastore/query}",
         "types": [
           "module:datastore/query"
         ],
@@ -467,8 +467,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Query Cursors]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Query_cursors} ",
-        "html": "<p>[Query Cursors]{@link <a href=\"https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Query_cursors}\">https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Query_cursors}</a> </p>"
+        "string": "[Query Cursors]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Query_cursors}",
+        "html": "<p>[Query Cursors]{@link <a href=\"https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Query_cursors}\">https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Query_cursors}</a></p>"
       },
       {
         "type": "param",
@@ -486,7 +486,7 @@
       },
       {
         "type": "return",
-        "string": "{module:datastore/query}\n",
+        "string": "{module:datastore/query}",
         "types": [
           "module:datastore/query"
         ],
@@ -529,8 +529,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Query Cursors]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Query_cursors} ",
-        "html": "<p>[Query Cursors]{@link <a href=\"https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Query_cursors}\">https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Query_cursors}</a> </p>"
+        "string": "[Query Cursors]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Query_cursors}",
+        "html": "<p>[Query Cursors]{@link <a href=\"https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Query_cursors}\">https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Query_cursors}</a></p>"
       },
       {
         "type": "param",
@@ -548,7 +548,7 @@
       },
       {
         "type": "return",
-        "string": "{module:datastore/query}\n",
+        "string": "{module:datastore/query}",
         "types": [
           "module:datastore/query"
         ],
@@ -591,8 +591,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Query Limits]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Retrieving_results} ",
-        "html": "<p>[Query Limits]{@link <a href=\"https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Retrieving_results}\">https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Retrieving_results}</a> </p>"
+        "string": "[Query Limits]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Retrieving_results}",
+        "html": "<p>[Query Limits]{@link <a href=\"https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Retrieving_results}\">https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Retrieving_results}</a></p>"
       },
       {
         "type": "param",
@@ -610,7 +610,7 @@
       },
       {
         "type": "return",
-        "string": "{module:datastore/query}\n",
+        "string": "{module:datastore/query}",
         "types": [
           "module:datastore/query"
         ],
@@ -653,8 +653,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Query Offsets]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Retrieving_results} ",
-        "html": "<p>[Query Offsets]{@link <a href=\"https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Retrieving_results}\">https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Retrieving_results}</a> </p>"
+        "string": "[Query Offsets]{@link https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Retrieving_results}",
+        "html": "<p>[Query Offsets]{@link <a href=\"https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Retrieving_results}\">https://cloud.google.com/datastore/docs/concepts/queries#Datastore_Retrieving_results}</a></p>"
       },
       {
         "type": "param",
@@ -672,7 +672,7 @@
       },
       {
         "type": "return",
-        "string": "{module:datastore/query}\n",
+        "string": "{module:datastore/query}",
         "types": [
           "module:datastore/query"
         ],

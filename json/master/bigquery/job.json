@@ -55,9 +55,9 @@
       },
       {
         "type": "param",
-        "string": "{string} id - The ID of the job.\n",
+        "string": "{string} id - The ID of the job.",
         "name": "id",
-        "description": "<ul>\n<li>The ID of the job. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The ID of the job.</li>\n</ul>\n",
         "types": [
           "string"
         ],
@@ -122,8 +122,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Jobs: get API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/get} ",
-        "html": "<p>[Jobs: get API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/jobs/get}\">https://cloud.google.com/bigquery/docs/reference/v2/jobs/get}</a> </p>"
+        "string": "[Jobs: get API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/get}",
+        "html": "<p>[Jobs: get API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/jobs/get}\">https://cloud.google.com/bigquery/docs/reference/v2/jobs/get}</a></p>"
       },
       {
         "type": "param",
@@ -169,9 +169,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -212,8 +212,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Jobs: getQueryResults API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/getQueryResults} ",
-        "html": "<p>[Jobs: getQueryResults API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/jobs/getQueryResults}\">https://cloud.google.com/bigquery/docs/reference/v2/jobs/getQueryResults}</a> </p>"
+        "string": "[Jobs: getQueryResults API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/getQueryResults}",
+        "html": "<p>[Jobs: getQueryResults API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/jobs/getQueryResults}\">https://cloud.google.com/bigquery/docs/reference/v2/jobs/getQueryResults}</a></p>"
       },
       {
         "type": "param",
@@ -357,9 +357,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],

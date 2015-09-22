@@ -295,8 +295,8 @@
       },
       {
         "type": "mixes",
-        "string": "module:datastore/request ",
-        "html": "<p>module:datastore/request </p>"
+        "string": "module:datastore/request",
+        "html": "<p>module:datastore/request</p>"
       },
       {
         "type": "param",
@@ -328,9 +328,9 @@
       },
       {
         "type": "param",
-        "string": "{string} options.namespace - Namespace to isolate transactions to.\n",
+        "string": "{string} options.namespace - Namespace to isolate transactions to.",
         "name": "options.namespace",
-        "description": "<ul>\n<li>Namespace to isolate transactions to. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Namespace to isolate transactions to.</li>\n</ul>\n",
         "types": [
           "string"
         ],
@@ -369,7 +369,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },
@@ -478,7 +478,7 @@
       },
       {
         "type": "return",
-        "string": "{Key} A newly created Key from the options given.\n",
+        "string": "{Key} A newly created Key from the options given.",
         "types": [
           "Key"
         ],
@@ -487,7 +487,7 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": "<p>A newly created Key from the options given. </p>"
+        "description": "<p>A newly created Key from the options given.</p>"
       },
       {
         "type": "example",
@@ -520,8 +520,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Datastore Queries]{@link http://goo.gl/Cag0r6} ",
-        "html": "<p>[Datastore Queries]{@link <a href=\"http://goo.gl/Cag0r6}\">http://goo.gl/Cag0r6}</a> </p>"
+        "string": "[Datastore Queries]{@link http://goo.gl/Cag0r6}",
+        "html": "<p>[Datastore Queries]{@link <a href=\"http://goo.gl/Cag0r6}\">http://goo.gl/Cag0r6}</a></p>"
       },
       {
         "type": "borrows",
@@ -532,8 +532,8 @@
       },
       {
         "type": "see",
-        "string": "{module:datastore/query}\n",
-        "local": "{module:datastore/query} ",
+        "string": "{module:datastore/query}",
+        "local": "{module:datastore/query}",
         "html": "<p>{module:datastore/query}</p>"
       },
       {
@@ -604,14 +604,14 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Datasets: beginTransaction API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/beginTransaction} ",
-        "html": "<p>[Datasets: beginTransaction API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/beginTransaction}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/beginTransaction}</a> </p>"
+        "string": "[Datasets: beginTransaction API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/beginTransaction}",
+        "html": "<p>[Datasets: beginTransaction API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/beginTransaction}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/beginTransaction}</a></p>"
       },
       {
         "type": "borrows",
-        "string": "{module:datastore/transaction#begin} as runInTransaction\n",
+        "string": "{module:datastore/transaction#begin} as runInTransaction",
         "otherMemberName": "{module:datastore/transaction#begin}",
-        "thisMemberName": "runInTransaction ",
+        "thisMemberName": "runInTransaction",
         "html": "<p>{module:datastore/transaction#begin} as runInTransaction</p>"
       },
       {
@@ -672,9 +672,9 @@
       },
       {
         "type": "param",
-        "string": "{?error} callback.err - An error returned while making this request\n\n",
+        "string": "{?error} callback.err - An error returned while making this request",
         "name": "callback.err",
-        "description": "<ul>\n<li>An error returned while making this request </li>\n</ul>\n",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
         "types": [
           "error"
         ],

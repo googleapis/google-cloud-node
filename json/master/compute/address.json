@@ -132,8 +132,8 @@
       },
       {
         "type": "resource",
-        "string": "[Address Resource]{@link https://cloud.google.com/compute/docs/reference/v1/addresses} * ",
-        "html": "<p>[Address Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/addresses}\">https://cloud.google.com/compute/docs/reference/v1/addresses}</a> * </p>"
+        "string": "[Address Resource]{@link https://cloud.google.com/compute/docs/reference/v1/addresses} *",
+        "html": "<p>[Address Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/addresses}\">https://cloud.google.com/compute/docs/reference/v1/addresses}</a> *</p>"
       },
       {
         "type": "constructor",
@@ -142,8 +142,8 @@
       },
       {
         "type": "alias",
-        "string": "module:compute/address ",
-        "html": "<p>module:compute/address </p>"
+        "string": "module:compute/address",
+        "html": "<p>module:compute/address</p>"
       },
       {
         "type": "example",
@@ -174,8 +174,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Addresses: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/delete} ",
-        "html": "<p>[Addresses: delete API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/addresses/delete}\">https://cloud.google.com/compute/docs/reference/v1/addresses/delete}</a> </p>"
+        "string": "[Addresses: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/delete}",
+        "html": "<p>[Addresses: delete API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/addresses/delete}\">https://cloud.google.com/compute/docs/reference/v1/addresses/delete}</a></p>"
       },
       {
         "type": "param",
@@ -221,9 +221,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -269,8 +269,8 @@
       },
       {
         "type": "resource",
-        "string": "[Addresses: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/get} ",
-        "html": "<p>[Addresses: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/addresses/get}\">https://cloud.google.com/compute/docs/reference/v1/addresses/get}</a> </p>"
+        "string": "[Addresses: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/get}",
+        "html": "<p>[Addresses: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/addresses/get}\">https://cloud.google.com/compute/docs/reference/v1/addresses/get}</a></p>"
       },
       {
         "type": "param",
@@ -316,9 +316,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -359,7 +359,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },

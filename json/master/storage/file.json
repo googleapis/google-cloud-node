@@ -263,13 +263,13 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[About Access Control lists]{@link http://goo.gl/6qBBPO} ",
-        "html": "<p>[About Access Control lists]{@link <a href=\"http://goo.gl/6qBBPO}\">http://goo.gl/6qBBPO}</a> </p>"
+        "string": "[About Access Control lists]{@link http://goo.gl/6qBBPO}",
+        "html": "<p>[About Access Control lists]{@link <a href=\"http://goo.gl/6qBBPO}\">http://goo.gl/6qBBPO}</a></p>"
       },
       {
         "type": "mixes",
-        "string": "module:storage/acl ",
-        "html": "<p>module:storage/acl </p>"
+        "string": "module:storage/acl",
+        "html": "<p>module:storage/acl</p>"
       },
       {
         "type": "example",
@@ -302,16 +302,16 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Objects: copy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/copy} ",
-        "html": "<p>[Objects: copy API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/copy}\">https://cloud.google.com/storage/docs/json_api/v1/objects/copy}</a> </p>"
+        "string": "[Objects: copy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/copy}",
+        "html": "<p>[Objects: copy API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/copy}\">https://cloud.google.com/storage/docs/json_api/v1/objects/copy}</a></p>"
       },
       {
         "type": "throws",
-        "string": "{Error} If the destination file is not provided.\n",
+        "string": "{Error} If the destination file is not provided.",
         "types": [
           "Error"
         ],
-        "description": "<p>If the destination file is not provided. </p>"
+        "description": "<p>If the destination file is not provided.</p>"
       },
       {
         "type": "param",
@@ -373,9 +373,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -416,16 +416,16 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Objects: copy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/copy} ",
-        "html": "<p>[Objects: copy API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/copy}\">https://cloud.google.com/storage/docs/json_api/v1/objects/copy}</a> </p>"
+        "string": "[Objects: copy API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/copy}",
+        "html": "<p>[Objects: copy API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/copy}\">https://cloud.google.com/storage/docs/json_api/v1/objects/copy}</a></p>"
       },
       {
         "type": "throws",
-        "string": "{Error} If the destination file is not provided.\n",
+        "string": "{Error} If the destination file is not provided.",
         "types": [
           "Error"
         ],
-        "description": "<p>If the destination file is not provided. </p>"
+        "description": "<p>If the destination file is not provided.</p>"
       },
       {
         "type": "param",
@@ -487,9 +487,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -573,7 +573,7 @@
       },
       {
         "type": "param",
-        "string": "{number} options.end - A byte offset to stop reading the file at.\n    NOTE: Byte ranges are inclusive; that is, `options.start = 0` and\n    `options.end = 999` represent the first 1000 bytes in a file or object.\n    NOTE: when specifying a byte range, data integrity is not available.\n",
+        "string": "{number} options.end - A byte offset to stop reading the file at.\n    NOTE: Byte ranges are inclusive; that is, `options.start = 0` and\n    `options.end = 999` represent the first 1000 bytes in a file or object.\n    NOTE: when specifying a byte range, data integrity is not available.",
         "name": "options.end",
         "description": "<ul>\n<li>A byte offset to stop reading the file at.     NOTE: Byte ranges are inclusive; that is, <code>options.start = 0</code> and<br />  <code>options.end = 999</code> represent the first 1000 bytes in a file or object.<br />  NOTE: when specifying a byte range, data integrity is not available.</li>\n</ul>\n",
         "types": [
@@ -616,8 +616,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Resumable upload guide]{@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload#resumable} ",
-        "html": "<p>[Resumable upload guide]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload#resumable}\">https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload#resumable}</a> </p>"
+        "string": "[Resumable upload guide]{@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload#resumable}",
+        "html": "<p>[Resumable upload guide]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload#resumable}\">https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload#resumable}</a></p>"
       },
       {
         "type": "param",
@@ -663,9 +663,9 @@
       },
       {
         "type": "param",
-        "string": "{string} callback.uri - The resumable upload's unique session URI.\n",
+        "string": "{string} callback.uri - The resumable upload's unique session URI.",
         "name": "callback.uri",
-        "description": "<ul>\n<li>The resumable upload&#39;s unique session URI. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The resumable upload&#39;s unique session URI.</li>\n</ul>\n",
         "types": [
           "string"
         ],
@@ -711,8 +711,8 @@
       },
       {
         "type": "resource",
-        "string": "[Objects: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert} ",
-        "html": "<p>[Objects: insert API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/insert}\">https://cloud.google.com/storage/docs/json_api/v1/objects/insert}</a> </p>"
+        "string": "[Objects: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert}",
+        "html": "<p>[Objects: insert API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/insert}\">https://cloud.google.com/storage/docs/json_api/v1/objects/insert}</a></p>"
       },
       {
         "type": "param",
@@ -772,7 +772,7 @@
       },
       {
         "type": "param",
-        "string": "{string|boolean} options.validation - Possible values: `\"md5\"`,\n    `\"crc32c\"`, or `false`. By default, data integrity is validated with an\n    MD5 checksum for maximum reliability. CRC32c will provide better\n    performance with less reliability. You may also choose to skip validation\n    completely, however this is **not recommended**.\n",
+        "string": "{string|boolean} options.validation - Possible values: `\"md5\"`,\n    `\"crc32c\"`, or `false`. By default, data integrity is validated with an\n    MD5 checksum for maximum reliability. CRC32c will provide better\n    performance with less reliability. You may also choose to skip validation\n    completely, however this is **not recommended**.",
         "name": "options.validation",
         "description": "<ul>\n<li>Possible values: <code>&quot;md5&quot;</code>,     <code>&quot;crc32c&quot;</code>, or <code>false</code>. By default, data integrity is validated with an<br />  MD5 checksum for maximum reliability. CRC32c will provide better<br />  performance with less reliability. You may also choose to skip validation<br />  completely, however this is <strong>not recommended</strong>.</li>\n</ul>\n",
         "types": [
@@ -816,8 +816,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Objects: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/delete} ",
-        "html": "<p>[Objects: delete API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/delete}\">https://cloud.google.com/storage/docs/json_api/v1/objects/delete}</a> </p>"
+        "string": "[Objects: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/delete}",
+        "html": "<p>[Objects: delete API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/delete}\">https://cloud.google.com/storage/docs/json_api/v1/objects/delete}</a></p>"
       },
       {
         "type": "param",
@@ -849,9 +849,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -948,9 +948,9 @@
       },
       {
         "type": "param",
-        "string": "{buffer} callback.contents - The contents of a File.\n",
+        "string": "{buffer} callback.contents - The contents of a File.",
         "name": "callback.contents",
-        "description": "<ul>\n<li>The contents of a File. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The contents of a File.</li>\n</ul>\n",
         "types": [
           "buffer"
         ],
@@ -991,8 +991,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Objects: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/get} ",
-        "html": "<p>[Objects: get API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/get}\">https://cloud.google.com/storage/docs/json_api/v1/objects/get}</a> </p>"
+        "string": "[Objects: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/get}",
+        "html": "<p>[Objects: get API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/get}\">https://cloud.google.com/storage/docs/json_api/v1/objects/get}</a></p>"
       },
       {
         "type": "param",
@@ -1038,9 +1038,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1081,8 +1081,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Policy Document Reference]{@link https://cloud.google.com/storage/docs/reference-methods#policydocument} ",
-        "html": "<p>[Policy Document Reference]{@link <a href=\"https://cloud.google.com/storage/docs/reference-methods#policydocument}\">https://cloud.google.com/storage/docs/reference-methods#policydocument}</a> </p>"
+        "string": "[Policy Document Reference]{@link https://cloud.google.com/storage/docs/reference-methods#policydocument}",
+        "html": "<p>[Policy Document Reference]{@link <a href=\"https://cloud.google.com/storage/docs/reference-methods#policydocument}\">https://cloud.google.com/storage/docs/reference-methods#policydocument}</a></p>"
       },
       {
         "type": "throws",
@@ -1102,7 +1102,7 @@
       },
       {
         "type": "throws",
-        "string": "{Error} If options.startsWith has an array with less or more than two\n    members.\n",
+        "string": "{Error} If options.startsWith has an array with less or more than two\n    members.",
         "types": [
           "Error"
         ],
@@ -1279,9 +1279,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.policy - The document policy.\n",
+        "string": "{object} callback.policy - The document policy.",
         "name": "callback.policy",
-        "description": "<ul>\n<li>The document policy. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The document policy.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1322,16 +1322,16 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Signed URLs Reference]{@link https://cloud.google.com/storage/docs/access-control#Signed-URLs} ",
-        "html": "<p>[Signed URLs Reference]{@link <a href=\"https://cloud.google.com/storage/docs/access-control#Signed-URLs}\">https://cloud.google.com/storage/docs/access-control#Signed-URLs}</a> </p>"
+        "string": "[Signed URLs Reference]{@link https://cloud.google.com/storage/docs/access-control#Signed-URLs}",
+        "html": "<p>[Signed URLs Reference]{@link <a href=\"https://cloud.google.com/storage/docs/access-control#Signed-URLs}\">https://cloud.google.com/storage/docs/access-control#Signed-URLs}</a></p>"
       },
       {
         "type": "throws",
-        "string": "{Error} if an expiration timestamp from the past is given.\n",
+        "string": "{Error} if an expiration timestamp from the past is given.",
         "types": [
           "Error"
         ],
-        "description": "<p>if an expiration timestamp from the past is given. </p>"
+        "description": "<p>if an expiration timestamp from the past is given.</p>"
       },
       {
         "type": "param",
@@ -1487,9 +1487,9 @@
       },
       {
         "type": "param",
-        "string": "{string} callback.url - The signed URL.\n",
+        "string": "{string} callback.url - The signed URL.",
         "name": "callback.url",
-        "description": "<ul>\n<li>The signed URL. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The signed URL.</li>\n</ul>\n",
         "types": [
           "string"
         ],
@@ -1530,8 +1530,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Objects: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/patch} ",
-        "html": "<p>[Objects: patch API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/patch}\">https://cloud.google.com/storage/docs/json_api/v1/objects/patch}</a> </p>"
+        "string": "[Objects: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/patch}",
+        "html": "<p>[Objects: patch API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/patch}\">https://cloud.google.com/storage/docs/json_api/v1/objects/patch}</a></p>"
       },
       {
         "type": "param",
@@ -1577,9 +1577,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1620,8 +1620,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Objects: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/patch} ",
-        "html": "<p>[Objects: patch API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/patch}\">https://cloud.google.com/storage/docs/json_api/v1/objects/patch}</a> </p>"
+        "string": "[Objects: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/patch}",
+        "html": "<p>[Objects: patch API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/patch}\">https://cloud.google.com/storage/docs/json_api/v1/objects/patch}</a></p>"
       },
       {
         "type": "param",
@@ -1667,9 +1667,9 @@
       },
       {
         "type": "param",
-        "string": "{?error} callback.err - An error returned while making this request\n",
+        "string": "{?error} callback.err - An error returned while making this request",
         "name": "callback.err",
-        "description": "<ul>\n<li>An error returned while making this request </li>\n</ul>\n",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
         "types": [
           "error"
         ],
@@ -1710,8 +1710,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[ObjectAccessControls: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert} ",
-        "html": "<p>[ObjectAccessControls: insert API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert}\">https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert}</a> </p>"
+        "string": "[ObjectAccessControls: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert}",
+        "html": "<p>[ObjectAccessControls: insert API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert}\">https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert}</a></p>"
       },
       {
         "type": "param",
@@ -1743,9 +1743,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1786,8 +1786,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[gcs-resumable-upload]{@link https://github.com/stephenplusplus/gcs-resumable-upload} ",
-        "html": "<p>[gcs-resumable-upload]{@link <a href=\"https://github.com/stephenplusplus/gcs-resumable-upload}\">https://github.com/stephenplusplus/gcs-resumable-upload}</a> </p>"
+        "string": "[gcs-resumable-upload]{@link https://github.com/stephenplusplus/gcs-resumable-upload}",
+        "html": "<p>[gcs-resumable-upload]{@link <a href=\"https://github.com/stephenplusplus/gcs-resumable-upload}\">https://github.com/stephenplusplus/gcs-resumable-upload}</a></p>"
       },
       {
         "type": "param",
@@ -1805,9 +1805,9 @@
       },
       {
         "type": "param",
-        "string": "{object=} metadata - Optional metadata to set on the file.\n",
+        "string": "{object=} metadata - Optional metadata to set on the file.",
         "name": "metadata",
-        "description": "<ul>\n<li>Optional metadata to set on the file. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Optional metadata to set on the file.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1863,9 +1863,9 @@
       },
       {
         "type": "param",
-        "string": "{object=} metadata - Optional metadata to set on the file.\n",
+        "string": "{object=} metadata - Optional metadata to set on the file.",
         "name": "metadata",
-        "description": "<ul>\n<li>Optional metadata to set on the file. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Optional metadata to set on the file.</li>\n</ul>\n",
         "types": [
           "object"
         ],

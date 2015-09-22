@@ -132,8 +132,8 @@
       },
       {
         "type": "alias",
-        "string": "module:compute/operation ",
-        "html": "<p>module:compute/operation </p>"
+        "string": "module:compute/operation",
+        "html": "<p>module:compute/operation</p>"
       },
       {
         "type": "example",
@@ -174,8 +174,8 @@
       },
       {
         "type": "resource",
-        "string": "[ZoneOperations: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations/delete} ",
-        "html": "<p>[ZoneOperations: delete API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/zoneOperations/delete}\">https://cloud.google.com/compute/docs/reference/v1/zoneOperations/delete}</a> </p>"
+        "string": "[ZoneOperations: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations/delete}",
+        "html": "<p>[ZoneOperations: delete API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/zoneOperations/delete}\">https://cloud.google.com/compute/docs/reference/v1/zoneOperations/delete}</a></p>"
       },
       {
         "type": "param",
@@ -207,9 +207,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -260,8 +260,8 @@
       },
       {
         "type": "resource",
-        "string": "[ZoneOperations: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations/get} ",
-        "html": "<p>[ZoneOperations: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/zoneOperations/get}\">https://cloud.google.com/compute/docs/reference/v1/zoneOperations/get}</a> </p>"
+        "string": "[ZoneOperations: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations/get}",
+        "html": "<p>[ZoneOperations: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/zoneOperations/get}\">https://cloud.google.com/compute/docs/reference/v1/zoneOperations/get}</a></p>"
       },
       {
         "type": "param",
@@ -307,9 +307,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -420,9 +420,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.metadata - The operation's metadata.\n",
+        "string": "{object} callback.metadata - The operation's metadata.",
         "name": "callback.metadata",
-        "description": "<ul>\n<li>The operation&#39;s metadata. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The operation&#39;s metadata.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -463,7 +463,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },

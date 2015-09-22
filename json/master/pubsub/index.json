@@ -282,14 +282,14 @@
       },
       {
         "type": "alias",
-        "string": "module:pubsub ",
-        "html": "<p>module:pubsub </p>"
+        "string": "module:pubsub",
+        "html": "<p>module:pubsub</p>"
       },
       {
         "type": "param",
-        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).\n",
+        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).",
         "name": "options",
-        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>. </li>\n</ul>\n",
+        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -328,8 +328,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Topics: list API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/list} ",
-        "html": "<p>[Topics: list API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/list}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/list}</a> </p>"
+        "string": "[Topics: list API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/list}",
+        "html": "<p>[Topics: list API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/list}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/list}</a></p>"
       },
       {
         "type": "param",
@@ -445,7 +445,7 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response from the\n    service.\n",
+        "string": "{object} callback.apiResponse - The full API response from the\n    service.",
         "name": "callback.apiResponse",
         "description": "<ul>\n<li>The full API response from the     service.</li>\n</ul>\n",
         "types": [
@@ -488,8 +488,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Topics: create API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/create} ",
-        "html": "<p>[Topics: create API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/create}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/create}</a> </p>"
+        "string": "[Topics: create API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/create}",
+        "html": "<p>[Topics: create API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/create}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/create}</a></p>"
       },
       {
         "type": "param",
@@ -549,7 +549,7 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response from the\n    service.\n",
+        "string": "{object} callback.apiResponse - The full API response from the\n    service.",
         "name": "callback.apiResponse",
         "description": "<ul>\n<li>The full API response from the     service.</li>\n</ul>\n",
         "types": [
@@ -592,8 +592,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Subscriptions: create API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/create} ",
-        "html": "<p>[Subscriptions: create API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/create}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/create}</a> </p>"
+        "string": "[Subscriptions: create API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/create}",
+        "html": "<p>[Subscriptions: create API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/create}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/create}</a></p>"
       },
       {
         "type": "throws",
@@ -605,11 +605,11 @@
       },
       {
         "type": "throws",
-        "string": "{Error} If a subName is not provided.\n",
+        "string": "{Error} If a subName is not provided.",
         "types": [
           "Error"
         ],
-        "description": "<p>If a subName is not provided. </p>"
+        "description": "<p>If a subName is not provided.</p>"
       },
       {
         "type": "param",
@@ -754,9 +754,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -797,11 +797,11 @@
     "tags": [
       {
         "type": "throws",
-        "string": "{Error} If a name is not provided.\n",
+        "string": "{Error} If a name is not provided.",
         "types": [
           "Error"
         ],
-        "description": "<p>If a name is not provided. </p>"
+        "description": "<p>If a name is not provided.</p>"
       },
       {
         "type": "param",
@@ -861,7 +861,7 @@
       },
       {
         "type": "return",
-        "string": "{module:pubsub/subscription}\n",
+        "string": "{module:pubsub/subscription}",
         "types": [
           "module:pubsub/subscription"
         ],
@@ -904,11 +904,11 @@
     "tags": [
       {
         "type": "throws",
-        "string": "{Error} If a name is not provided.\n",
+        "string": "{Error} If a name is not provided.",
         "types": [
           "Error"
         ],
-        "description": "<p>If a name is not provided. </p>"
+        "description": "<p>If a name is not provided.</p>"
       },
       {
         "type": "param",
@@ -926,7 +926,7 @@
       },
       {
         "type": "return",
-        "string": "{module:pubsub/topic}\n",
+        "string": "{module:pubsub/topic}",
         "types": [
           "module:pubsub/topic"
         ],
@@ -969,8 +969,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Subscriptions: list API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/list} ",
-        "html": "<p>[Subscriptions: list API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/list}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/list}</a> </p>"
+        "string": "[Subscriptions: list API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/list}",
+        "html": "<p>[Subscriptions: list API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/list}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/list}</a></p>"
       },
       {
         "type": "param",
@@ -1101,7 +1101,7 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response from the\n    service.\n",
+        "string": "{object} callback.apiResponse - The full API response from the\n    service.",
         "name": "callback.apiResponse",
         "description": "<ul>\n<li>The full API response from the     service.</li>\n</ul>\n",
         "types": [
@@ -1144,7 +1144,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },

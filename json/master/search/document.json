@@ -130,14 +130,14 @@
       },
       {
         "type": "alias",
-        "string": "module:search/document ",
-        "html": "<p>module:search/document </p>"
+        "string": "module:search/document",
+        "html": "<p>module:search/document</p>"
       },
       {
         "type": "param",
-        "string": "{string=} id - ID of the document.\n",
+        "string": "{string=} id - ID of the document.",
         "name": "id",
-        "description": "<ul>\n<li>ID of the document. </li>\n</ul>\n",
+        "description": "<ul>\n<li>ID of the document.</li>\n</ul>\n",
         "types": [
           "string"
         ],
@@ -176,11 +176,11 @@
     "tags": [
       {
         "type": "throws",
-        "string": "{error} if a name is not provided.\n",
+        "string": "{error} if a name is not provided.",
         "types": [
           "error"
         ],
-        "description": "<p>if a name is not provided. </p>"
+        "description": "<p>if a name is not provided.</p>"
       },
       {
         "type": "param",
@@ -198,7 +198,7 @@
       },
       {
         "type": "return",
-        "string": "{module:search/field}\n",
+        "string": "{module:search/field}",
         "types": [
           "module:search/field"
         ],
@@ -241,8 +241,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Documents: delete API Documentation]{@link https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/delete} ",
-        "html": "<p>[Documents: delete API Documentation]{@link <a href=\"https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/delete}\">https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/delete}</a> </p>"
+        "string": "[Documents: delete API Documentation]{@link https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/delete}",
+        "html": "<p>[Documents: delete API Documentation]{@link <a href=\"https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/delete}\">https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/delete}</a></p>"
       },
       {
         "type": "param",
@@ -274,9 +274,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -317,8 +317,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Documents: get API Documentation]{@link https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/get} ",
-        "html": "<p>[Documents: get API Documentation]{@link <a href=\"https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/get}\">https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/get}</a> </p>"
+        "string": "[Documents: get API Documentation]{@link https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/get}",
+        "html": "<p>[Documents: get API Documentation]{@link <a href=\"https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/get}\">https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/get}</a></p>"
       },
       {
         "type": "param",
@@ -364,9 +364,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -407,17 +407,17 @@
     "tags": [
       {
         "type": "throws",
-        "string": "{error} If a rank is not a number.\n",
+        "string": "{error} If a rank is not a number.",
         "types": [
           "error"
         ],
-        "description": "<p>If a rank is not a number. </p>"
+        "description": "<p>If a rank is not a number.</p>"
       },
       {
         "type": "param",
-        "string": "{number} rank - The rank of this document.\n",
+        "string": "{number} rank - The rank of this document.",
         "name": "rank",
-        "description": "<ul>\n<li>The rank of this document. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The rank of this document.</li>\n</ul>\n",
         "types": [
           "number"
         ],
@@ -487,7 +487,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },

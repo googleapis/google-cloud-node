@@ -282,16 +282,16 @@
       },
       {
         "type": "alias",
-        "string": "module:storage/bucket ",
-        "html": "<p>module:storage/bucket </p>"
+        "string": "module:storage/bucket",
+        "html": "<p>module:storage/bucket</p>"
       },
       {
         "type": "throws",
-        "string": "{Error} if a bucket name isn't provided.\n",
+        "string": "{Error} if a bucket name isn't provided.",
         "types": [
           "Error"
         ],
-        "description": "<p>if a bucket name isn&#39;t provided. </p>"
+        "description": "<p>if a bucket name isn&#39;t provided.</p>"
       },
       {
         "type": "param",
@@ -337,7 +337,7 @@
       },
       {
         "type": "param",
-        "string": "{object=} options.credentials - Credentials object, used in place of\n    a `keyFilename`.\n",
+        "string": "{object=} options.credentials - Credentials object, used in place of\n    a `keyFilename`.",
         "name": "options.credentials",
         "description": "<ul>\n<li>Credentials object, used in place of     a <code>keyFilename</code>.</li>\n</ul>\n",
         "types": [
@@ -383,13 +383,13 @@
       },
       {
         "type": "resource",
-        "string": "[Default ACLs]{@link https://cloud.google.com/storage/docs/accesscontrol#default} ",
-        "html": "<p>[Default ACLs]{@link <a href=\"https://cloud.google.com/storage/docs/accesscontrol#default}\">https://cloud.google.com/storage/docs/accesscontrol#default}</a> </p>"
+        "string": "[Default ACLs]{@link https://cloud.google.com/storage/docs/accesscontrol#default}",
+        "html": "<p>[Default ACLs]{@link <a href=\"https://cloud.google.com/storage/docs/accesscontrol#default}\">https://cloud.google.com/storage/docs/accesscontrol#default}</a></p>"
       },
       {
         "type": "mixes",
-        "string": "module:storage/acl ",
-        "html": "<p>module:storage/acl </p>"
+        "string": "module:storage/acl",
+        "html": "<p>module:storage/acl</p>"
       },
       {
         "type": "example",
@@ -656,8 +656,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Objects: compose API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/compose} ",
-        "html": "<p>[Objects: compose API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/compose}\">https://cloud.google.com/storage/docs/json_api/v1/objects/compose}</a> </p>"
+        "string": "[Objects: compose API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/compose}",
+        "html": "<p>[Objects: compose API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/compose}\">https://cloud.google.com/storage/docs/json_api/v1/objects/compose}</a></p>"
       },
       {
         "type": "throws",
@@ -685,11 +685,11 @@
       },
       {
         "type": "throws",
-        "string": "{Error} if content type can't be determined for the destination file.\n",
+        "string": "{Error} if content type can't be determined for the destination file.",
         "types": [
           "Error"
         ],
-        "description": "<p>if content type can&#39;t be determined for the destination file. </p>"
+        "description": "<p>if content type can&#39;t be determined for the destination file.</p>"
       },
       {
         "type": "param",
@@ -765,9 +765,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -808,8 +808,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Buckets: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/delete} ",
-        "html": "<p>[Buckets: delete API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/delete}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/delete}</a> </p>"
+        "string": "[Buckets: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/delete}",
+        "html": "<p>[Buckets: delete API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/delete}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/delete}</a></p>"
       },
       {
         "type": "param",
@@ -841,9 +841,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -884,8 +884,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Objects: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/delete} ",
-        "html": "<p>[Objects: delete API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/delete}\">https://cloud.google.com/storage/docs/json_api/v1/objects/delete}</a> </p>"
+        "string": "[Objects: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/delete}",
+        "html": "<p>[Objects: delete API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/delete}\">https://cloud.google.com/storage/docs/json_api/v1/objects/delete}</a></p>"
       },
       {
         "type": "param",
@@ -931,7 +931,7 @@
       },
       {
         "type": "param",
-        "string": "{?error|?error[]} callback.err - An API error or array of errors from\n    files that were not able to be deleted.\n",
+        "string": "{?error|?error[]} callback.err - An API error or array of errors from\n    files that were not able to be deleted.",
         "name": "callback.err",
         "description": "<ul>\n<li>An API error or array of errors from     files that were not able to be deleted.</li>\n</ul>\n",
         "types": [
@@ -1018,7 +1018,7 @@
       },
       {
         "type": "return",
-        "string": "{module:storage/file}\n",
+        "string": "{module:storage/file}",
         "types": [
           "module:storage/file"
         ],
@@ -1061,8 +1061,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Objects: list API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/list} ",
-        "html": "<p>[Objects: list API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/list}\">https://cloud.google.com/storage/docs/json_api/v1/objects/list}</a> </p>"
+        "string": "[Objects: list API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/list}",
+        "html": "<p>[Objects: list API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/list}\">https://cloud.google.com/storage/docs/json_api/v1/objects/list}</a></p>"
       },
       {
         "type": "param",
@@ -1220,9 +1220,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1263,8 +1263,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Buckets: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/get} ",
-        "html": "<p>[Buckets: get API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/get}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/get}</a> </p>"
+        "string": "[Buckets: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/get}",
+        "html": "<p>[Buckets: get API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/get}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/get}</a></p>"
       },
       {
         "type": "param",
@@ -1310,9 +1310,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1353,8 +1353,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch} ",
-        "html": "<p>[Buckets: patch API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}</a> </p>"
+        "string": "[Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}",
+        "html": "<p>[Buckets: patch API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}</a></p>"
       },
       {
         "type": "param",
@@ -1428,9 +1428,9 @@
       },
       {
         "type": "param",
-        "string": "{module:storage/file[]} callback.files - List of files made private.\n",
+        "string": "{module:storage/file[]} callback.files - List of files made private.",
         "name": "callback.files",
-        "description": "<ul>\n<li>List of files made private. </li>\n</ul>\n",
+        "description": "<ul>\n<li>List of files made private.</li>\n</ul>\n",
         "types": [
           "Array.<module:storage/file>"
         ],
@@ -1471,8 +1471,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch} ",
-        "html": "<p>[Buckets: patch API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}</a> </p>"
+        "string": "[Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}",
+        "html": "<p>[Buckets: patch API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}</a></p>"
       },
       {
         "type": "param",
@@ -1546,9 +1546,9 @@
       },
       {
         "type": "param",
-        "string": "{module:storage/file[]} callback.files - List of files made public.\n",
+        "string": "{module:storage/file[]} callback.files - List of files made public.",
         "name": "callback.files",
-        "description": "<ul>\n<li>List of files made public. </li>\n</ul>\n",
+        "description": "<ul>\n<li>List of files made public.</li>\n</ul>\n",
         "types": [
           "Array.<module:storage/file>"
         ],
@@ -1589,8 +1589,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch} ",
-        "html": "<p>[Buckets: patch API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}</a> </p>"
+        "string": "[Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}",
+        "html": "<p>[Buckets: patch API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}</a></p>"
       },
       {
         "type": "param",
@@ -1636,9 +1636,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1684,8 +1684,8 @@
       },
       {
         "type": "resource",
-        "string": "[Objects: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert} ",
-        "html": "<p>[Objects: insert API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/insert}\">https://cloud.google.com/storage/docs/json_api/v1/objects/insert}</a> </p>"
+        "string": "[Objects: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert}",
+        "html": "<p>[Objects: insert API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/insert}\">https://cloud.google.com/storage/docs/json_api/v1/objects/insert}</a></p>"
       },
       {
         "type": "param",
@@ -1830,7 +1830,7 @@
       },
       {
         "type": "param",
-        "string": "{string|boolean} options.validation - Possible values: `\"md5\"`,\n    `\"crc32c\"`, or `false`. By default, data integrity is validated with an\n    MD5 checksum for maximum reliability. CRC32c will provide better\n    performance with less reliability. You may also choose to skip validation\n    completely, however this is **not recommended**.\n",
+        "string": "{string|boolean} options.validation - Possible values: `\"md5\"`,\n    `\"crc32c\"`, or `false`. By default, data integrity is validated with an\n    MD5 checksum for maximum reliability. CRC32c will provide better\n    performance with less reliability. You may also choose to skip validation\n    completely, however this is **not recommended**.",
         "name": "options.validation",
         "description": "<ul>\n<li>Possible values: <code>&quot;md5&quot;</code>,     <code>&quot;crc32c&quot;</code>, or <code>false</code>. By default, data integrity is validated with an<br />  MD5 checksum for maximum reliability. CRC32c will provide better<br />  performance with less reliability. You may also choose to skip validation<br />  completely, however this is <strong>not recommended</strong>.</li>\n</ul>\n",
         "types": [
@@ -1874,7 +1874,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },
@@ -1974,7 +1974,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },

@@ -275,9 +275,9 @@
       },
       {
         "type": "param",
-        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).\n",
+        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).",
         "name": "options",
-        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>. </li>\n</ul>\n",
+        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -316,12 +316,12 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[About Access Control Lists]{@link https://cloud.google.com/storage/docs/access-control#About-Access-Control-Lists} ",
-        "html": "<p>[About Access Control Lists]{@link <a href=\"https://cloud.google.com/storage/docs/access-control#About-Access-Control-Lists}\">https://cloud.google.com/storage/docs/access-control#About-Access-Control-Lists}</a> </p>"
+        "string": "[About Access Control Lists]{@link https://cloud.google.com/storage/docs/access-control#About-Access-Control-Lists}",
+        "html": "<p>[About Access Control Lists]{@link <a href=\"https://cloud.google.com/storage/docs/access-control#About-Access-Control-Lists}\">https://cloud.google.com/storage/docs/access-control#About-Access-Control-Lists}</a></p>"
       },
       {
         "type": "type",
-        "string": "{object}\n",
+        "string": "{object}",
         "types": [
           "object"
         ],
@@ -378,7 +378,7 @@
       },
       {
         "type": "return",
-        "string": "{module:storage/bucket}\n",
+        "string": "{module:storage/bucket}",
         "types": [
           "module:storage/bucket"
         ],
@@ -436,16 +436,16 @@
       },
       {
         "type": "resource",
-        "string": "[Storage Classes]{@link https://cloud.google.com/storage/docs/storage-classes} ",
-        "html": "<p>[Storage Classes]{@link <a href=\"https://cloud.google.com/storage/docs/storage-classes}\">https://cloud.google.com/storage/docs/storage-classes}</a> </p>"
+        "string": "[Storage Classes]{@link https://cloud.google.com/storage/docs/storage-classes}",
+        "html": "<p>[Storage Classes]{@link <a href=\"https://cloud.google.com/storage/docs/storage-classes}\">https://cloud.google.com/storage/docs/storage-classes}</a></p>"
       },
       {
         "type": "throws",
-        "string": "{Error} If a name is not provided.\n",
+        "string": "{Error} If a name is not provided.",
         "types": [
           "Error"
         ],
-        "description": "<p>If a name is not provided. </p>"
+        "description": "<p>If a name is not provided.</p>"
       },
       {
         "type": "param",
@@ -547,9 +547,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -590,8 +590,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Buckets: list API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/list} ",
-        "html": "<p>[Buckets: list API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/list}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/list}</a> </p>"
+        "string": "[Buckets: list API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/list}",
+        "html": "<p>[Buckets: list API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/list}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/list}</a></p>"
       },
       {
         "type": "param",
@@ -707,9 +707,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -750,7 +750,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },

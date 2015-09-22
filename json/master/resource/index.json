@@ -245,9 +245,9 @@
       },
       {
         "type": "param",
-        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).\n",
+        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).",
         "name": "options",
-        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>. </li>\n</ul>\n",
+        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -291,12 +291,12 @@
       },
       {
         "type": "resource",
-        "string": "[projects: create API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/create} ",
-        "html": "<p>[projects: create API Documentation]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/create}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/create}</a> </p>"
+        "string": "[projects: create API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/create}",
+        "html": "<p>[projects: create API Documentation]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/create}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/create}</a></p>"
       },
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },
@@ -372,9 +372,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -420,8 +420,8 @@
       },
       {
         "type": "resource",
-        "string": "[projects: list API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/list} ",
-        "html": "<p>[projects: list API Documentation]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/list}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/list}</a> </p>"
+        "string": "[projects: list API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/list}",
+        "html": "<p>[projects: list API Documentation]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/list}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/list}</a></p>"
       },
       {
         "type": "param",
@@ -551,9 +551,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -594,11 +594,11 @@
     "tags": [
       {
         "type": "throws",
-        "string": "{Error} If an ID is not provided.\n",
+        "string": "{Error} If an ID is not provided.",
         "types": [
           "Error"
         ],
-        "description": "<p>If an ID is not provided. </p>"
+        "description": "<p>If an ID is not provided.</p>"
       },
       {
         "type": "param",
@@ -616,7 +616,7 @@
       },
       {
         "type": "return",
-        "string": "{module:resource/project}\n",
+        "string": "{module:resource/project}",
         "types": [
           "module:resource/project"
         ],
@@ -659,7 +659,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },

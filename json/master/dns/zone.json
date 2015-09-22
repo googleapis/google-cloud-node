@@ -172,8 +172,8 @@
       },
       {
         "type": "alias",
-        "string": "module:dns/zone ",
-        "html": "<p>module:dns/zone </p>"
+        "string": "module:dns/zone",
+        "html": "<p>module:dns/zone</p>"
       },
       {
         "type": "example",
@@ -204,8 +204,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create} ",
-        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a> </p>"
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a></p>"
       },
       {
         "type": "param",
@@ -290,11 +290,11 @@
     "tags": [
       {
         "type": "throws",
-        "string": "{error} If an id is not provided.\n",
+        "string": "{error} If an id is not provided.",
         "types": [
           "error"
         ],
-        "description": "<p>If an id is not provided. </p>"
+        "description": "<p>If an id is not provided.</p>"
       },
       {
         "type": "param",
@@ -312,7 +312,7 @@
       },
       {
         "type": "return",
-        "string": "{module:dns/change}\n",
+        "string": "{module:dns/change}",
         "types": [
           "module:dns/change"
         ],
@@ -355,8 +355,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create} ",
-        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a> </p>"
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a></p>"
       },
       {
         "type": "param",
@@ -446,9 +446,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - Raw API response.\n",
+        "string": "{object} callback.apiResponse - Raw API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>Raw API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -489,8 +489,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[ManagedZones: delete API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/delete} ",
-        "html": "<p>[ManagedZones: delete API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/delete}\">https://cloud.google.com/dns/api/v1/managedZones/delete}</a> </p>"
+        "string": "[ManagedZones: delete API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/delete}",
+        "html": "<p>[ManagedZones: delete API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/delete}\">https://cloud.google.com/dns/api/v1/managedZones/delete}</a></p>"
       },
       {
         "type": "param",
@@ -550,9 +550,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - Raw API response.\n",
+        "string": "{object} callback.apiResponse - Raw API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>Raw API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -593,8 +593,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create} ",
-        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a> </p>"
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a></p>"
       },
       {
         "type": "param",
@@ -642,9 +642,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - Raw API response.\n",
+        "string": "{object} callback.apiResponse - Raw API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>Raw API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -685,8 +685,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create} ",
-        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a> </p>"
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a></p>"
       },
       {
         "type": "param",
@@ -770,8 +770,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[ResourceRecordSets: list API Documentation]{@link https://cloud.google.com/dns/api/v1/resourceRecordSets/list} ",
-        "html": "<p>[ResourceRecordSets: list API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/resourceRecordSets/list}\">https://cloud.google.com/dns/api/v1/resourceRecordSets/list}</a> </p>"
+        "string": "[ResourceRecordSets: list API Documentation]{@link https://cloud.google.com/dns/api/v1/resourceRecordSets/list}",
+        "html": "<p>[ResourceRecordSets: list API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/resourceRecordSets/list}\">https://cloud.google.com/dns/api/v1/resourceRecordSets/list}</a></p>"
       },
       {
         "type": "param",
@@ -803,9 +803,9 @@
       },
       {
         "type": "param",
-        "string": "{?error} callback.err - An API or file system error.\n",
+        "string": "{?error} callback.err - An API or file system error.",
         "name": "callback.err",
-        "description": "<ul>\n<li>An API or file system error. </li>\n</ul>\n",
+        "description": "<ul>\n<li>An API or file system error.</li>\n</ul>\n",
         "types": [
           "error"
         ],
@@ -846,8 +846,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Changes: get API Documentation]{@link https://cloud.google.com/dns/api/v1/changes/get} ",
-        "html": "<p>[Changes: get API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/changes/get}\">https://cloud.google.com/dns/api/v1/changes/get}</a> </p>"
+        "string": "[Changes: get API Documentation]{@link https://cloud.google.com/dns/api/v1/changes/get}",
+        "html": "<p>[Changes: get API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/changes/get}\">https://cloud.google.com/dns/api/v1/changes/get}</a></p>"
       },
       {
         "type": "param",
@@ -963,9 +963,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - Raw API response.\n",
+        "string": "{object} callback.apiResponse - Raw API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>Raw API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1006,8 +1006,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[ManagedZones: get API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/get} ",
-        "html": "<p>[ManagedZones: get API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/get}\">https://cloud.google.com/dns/api/v1/managedZones/get}</a> </p>"
+        "string": "[ManagedZones: get API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/get}",
+        "html": "<p>[ManagedZones: get API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/get}\">https://cloud.google.com/dns/api/v1/managedZones/get}</a></p>"
       },
       {
         "type": "param",
@@ -1053,9 +1053,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - Raw API response.\n",
+        "string": "{object} callback.apiResponse - Raw API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>Raw API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1096,8 +1096,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[ResourceRecordSets: list API Documentation]{@link https://cloud.google.com/dns/api/v1/resourceRecordSets/list} ",
-        "html": "<p>[ResourceRecordSets: list API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/resourceRecordSets/list}\">https://cloud.google.com/dns/api/v1/resourceRecordSets/list}</a> </p>"
+        "string": "[ResourceRecordSets: list API Documentation]{@link https://cloud.google.com/dns/api/v1/resourceRecordSets/list}",
+        "html": "<p>[ResourceRecordSets: list API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/resourceRecordSets/list}\">https://cloud.google.com/dns/api/v1/resourceRecordSets/list}</a></p>"
       },
       {
         "type": "param",
@@ -1227,9 +1227,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - Raw API response.\n",
+        "string": "{object} callback.apiResponse - Raw API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>Raw API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1270,8 +1270,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create} ",
-        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a> </p>"
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a></p>"
       },
       {
         "type": "param",
@@ -1331,9 +1331,9 @@
       },
       {
         "type": "param",
-        "string": "{?object} callback.apiResponse - Raw API response.\n",
+        "string": "{?object} callback.apiResponse - Raw API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>Raw API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1444,7 +1444,7 @@
       },
       {
         "type": "return",
-        "string": "{module:dns/record}\n",
+        "string": "{module:dns/record}",
         "types": [
           "module:dns/record"
         ],
@@ -1487,8 +1487,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create} ",
-        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a> </p>"
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a></p>"
       },
       {
         "type": "param",
@@ -1564,9 +1564,9 @@
       },
       {
         "type": "param",
-        "string": "{?object} callback.apiResponse - Raw API response.\n",
+        "string": "{?object} callback.apiResponse - Raw API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>Raw API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1607,7 +1607,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },
@@ -1669,9 +1669,9 @@
       },
       {
         "type": "param",
-        "string": "{?object} callback.apiResponse - Raw API response.\n",
+        "string": "{?object} callback.apiResponse - Raw API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>Raw API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],

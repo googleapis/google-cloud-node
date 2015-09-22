@@ -181,9 +181,9 @@
       },
       {
         "type": "param",
-        "string": "{string} id - The ID of the table.\n",
+        "string": "{string} id - The ID of the table.",
         "name": "id",
-        "description": "<ul>\n<li>The ID of the table. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The ID of the table.</li>\n</ul>\n",
         "types": [
           "string"
         ],
@@ -258,7 +258,7 @@
       },
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },
@@ -319,7 +319,7 @@
       },
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },
@@ -391,8 +391,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert} ",
-        "html": "<p>[Jobs: insert API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}\">https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}</a> </p>"
+        "string": "[Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}",
+        "html": "<p>[Jobs: insert API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}\">https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}</a></p>"
       },
       {
         "type": "param",
@@ -466,9 +466,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -480,11 +480,11 @@
       },
       {
         "type": "throws",
-        "string": "{Error} If a destination other than a Table object is provided.\n",
+        "string": "{Error} If a destination other than a Table object is provided.",
         "types": [
           "Error"
         ],
-        "description": "<p>If a destination other than a Table object is provided. </p>"
+        "description": "<p>If a destination other than a Table object is provided.</p>"
       },
       {
         "type": "example",
@@ -517,12 +517,12 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Tabledata: list API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/tabledata/list} ",
-        "html": "<p>[Tabledata: list API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/tabledata/list}\">https://cloud.google.com/bigquery/docs/reference/v2/tabledata/list}</a> </p>"
+        "string": "[Tabledata: list API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/tabledata/list}",
+        "html": "<p>[Tabledata: list API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/tabledata/list}\">https://cloud.google.com/bigquery/docs/reference/v2/tabledata/list}</a></p>"
       },
       {
         "type": "return",
-        "string": "{ReadStream}\n",
+        "string": "{ReadStream}",
         "types": [
           "ReadStream"
         ],
@@ -565,8 +565,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert} ",
-        "html": "<p>[Jobs: insert API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}\">https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}</a> </p>"
+        "string": "[Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}",
+        "html": "<p>[Jobs: insert API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}\">https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}</a></p>"
       },
       {
         "type": "param",
@@ -585,7 +585,7 @@
       },
       {
         "type": "return",
-        "string": "{WriteStream}\n",
+        "string": "{WriteStream}",
         "types": [
           "WriteStream"
         ],
@@ -599,11 +599,11 @@
       },
       {
         "type": "throws",
-        "string": "{Error} If source format isn't recognized.\n",
+        "string": "{Error} If source format isn't recognized.",
         "types": [
           "Error"
         ],
-        "description": "<p>If source format isn&#39;t recognized. </p>"
+        "description": "<p>If source format isn&#39;t recognized.</p>"
       },
       {
         "type": "example",
@@ -636,8 +636,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Tables: delete API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/tables/delete} ",
-        "html": "<p>[Tables: delete API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/tables/delete}\">https://cloud.google.com/bigquery/docs/reference/v2/tables/delete}</a> </p>"
+        "string": "[Tables: delete API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/tables/delete}",
+        "html": "<p>[Tables: delete API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/tables/delete}\">https://cloud.google.com/bigquery/docs/reference/v2/tables/delete}</a></p>"
       },
       {
         "type": "param",
@@ -669,9 +669,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -712,8 +712,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert} ",
-        "html": "<p>[Jobs: insert API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}\">https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}</a> </p>"
+        "string": "[Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}",
+        "html": "<p>[Jobs: insert API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}\">https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}</a></p>"
       },
       {
         "type": "param",
@@ -815,9 +815,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -837,11 +837,11 @@
       },
       {
         "type": "throws",
-        "string": "{Error} If destination format isn't recongized.\n",
+        "string": "{Error} If destination format isn't recongized.",
         "types": [
           "Error"
         ],
-        "description": "<p>If destination format isn&#39;t recongized. </p>"
+        "description": "<p>If destination format isn&#39;t recongized.</p>"
       },
       {
         "type": "example",
@@ -874,8 +874,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Tables: get API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/tables/get} ",
-        "html": "<p>[Tables: get API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/tables/get}\">https://cloud.google.com/bigquery/docs/reference/v2/tables/get}</a> </p>"
+        "string": "[Tables: get API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/tables/get}",
+        "html": "<p>[Tables: get API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/tables/get}\">https://cloud.google.com/bigquery/docs/reference/v2/tables/get}</a></p>"
       },
       {
         "type": "param",
@@ -921,9 +921,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -964,8 +964,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Tabledata: list API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/tabledata/list} ",
-        "html": "<p>[Tabledata: list API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/tabledata/list}\">https://cloud.google.com/bigquery/docs/reference/v2/tabledata/list}</a> </p>"
+        "string": "[Tabledata: list API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/tabledata/list}",
+        "html": "<p>[Tabledata: list API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/tabledata/list}\">https://cloud.google.com/bigquery/docs/reference/v2/tabledata/list}</a></p>"
       },
       {
         "type": "param",
@@ -1067,9 +1067,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1110,8 +1110,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert} ",
-        "html": "<p>[Jobs: insert API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}\">https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}</a> </p>"
+        "string": "[Jobs: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}",
+        "html": "<p>[Jobs: insert API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}\">https://cloud.google.com/bigquery/docs/reference/v2/jobs/insert}</a></p>"
       },
       {
         "type": "param",
@@ -1186,9 +1186,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1200,11 +1200,11 @@
       },
       {
         "type": "throws",
-        "string": "{Error} If the source isn't a string file name or a File instance.\n",
+        "string": "{Error} If the source isn't a string file name or a File instance.",
         "types": [
           "Error"
         ],
-        "description": "<p>If the source isn&#39;t a string file name or a File instance. </p>"
+        "description": "<p>If the source isn&#39;t a string file name or a File instance.</p>"
       },
       {
         "type": "example",
@@ -1237,8 +1237,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Tabledata: insertAll API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll} ",
-        "html": "<p>[Tabledata: insertAll API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll}\">https://cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll}</a> </p>"
+        "string": "[Tabledata: insertAll API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll}",
+        "html": "<p>[Tabledata: insertAll API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll}\">https://cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll}</a></p>"
       },
       {
         "type": "param",
@@ -1299,9 +1299,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1365,8 +1365,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Tables: update API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/tables/update} ",
-        "html": "<p>[Tables: update API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/tables/update}\">https://cloud.google.com/bigquery/docs/reference/v2/tables/update}</a> </p>"
+        "string": "[Tables: update API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/tables/update}",
+        "html": "<p>[Tables: update API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/tables/update}\">https://cloud.google.com/bigquery/docs/reference/v2/tables/update}</a></p>"
       },
       {
         "type": "param",
@@ -1455,9 +1455,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1498,7 +1498,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },

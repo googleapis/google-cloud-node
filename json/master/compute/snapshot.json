@@ -132,8 +132,8 @@
       },
       {
         "type": "resource",
-        "string": "[Snapshot Resource]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots} ",
-        "html": "<p>[Snapshot Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/snapshots}\">https://cloud.google.com/compute/docs/reference/v1/snapshots}</a> </p>"
+        "string": "[Snapshot Resource]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots}",
+        "html": "<p>[Snapshot Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/snapshots}\">https://cloud.google.com/compute/docs/reference/v1/snapshots}</a></p>"
       },
       {
         "type": "constructor",
@@ -142,8 +142,8 @@
       },
       {
         "type": "alias",
-        "string": "module:compute/snapshot ",
-        "html": "<p>module:compute/snapshot </p>"
+        "string": "module:compute/snapshot",
+        "html": "<p>module:compute/snapshot</p>"
       },
       {
         "type": "example",
@@ -174,8 +174,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Snapshots: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots/delete} ",
-        "html": "<p>[Snapshots: delete API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/snapshots/delete}\">https://cloud.google.com/compute/docs/reference/v1/snapshots/delete}</a> </p>"
+        "string": "[Snapshots: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots/delete}",
+        "html": "<p>[Snapshots: delete API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/snapshots/delete}\">https://cloud.google.com/compute/docs/reference/v1/snapshots/delete}</a></p>"
       },
       {
         "type": "param",
@@ -221,9 +221,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -269,8 +269,8 @@
       },
       {
         "type": "resource",
-        "string": "[Snapshots: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots/get} ",
-        "html": "<p>[Snapshots: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/snapshots/get}\">https://cloud.google.com/compute/docs/reference/v1/snapshots/get}</a> </p>"
+        "string": "[Snapshots: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots/get}",
+        "html": "<p>[Snapshots: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/snapshots/get}\">https://cloud.google.com/compute/docs/reference/v1/snapshots/get}</a></p>"
       },
       {
         "type": "param",
@@ -316,9 +316,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -359,7 +359,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },

@@ -90,8 +90,8 @@
       },
       {
         "type": "alias",
-        "string": "module:pubsub/iam ",
-        "html": "<p>module:pubsub/iam </p>"
+        "string": "module:pubsub/iam",
+        "html": "<p>module:pubsub/iam</p>"
       },
       {
         "type": "resource",
@@ -100,8 +100,8 @@
       },
       {
         "type": "resource",
-        "string": "[What is Cloud IAM?]{@link https://cloud.google.com/iam/} ",
-        "html": "<p>[What is Cloud IAM?]{@link <a href=\"https://cloud.google.com/iam/}\">https://cloud.google.com/iam/}</a> </p>"
+        "string": "[What is Cloud IAM?]{@link https://cloud.google.com/iam/}",
+        "html": "<p>[What is Cloud IAM?]{@link <a href=\"https://cloud.google.com/iam/}\">https://cloud.google.com/iam/}</a></p>"
       },
       {
         "type": "example",
@@ -174,9 +174,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -188,8 +188,8 @@
       },
       {
         "type": "alias",
-        "string": "iam.getPolicy ",
-        "html": "<p>iam.getPolicy </p>"
+        "string": "iam.getPolicy",
+        "html": "<p>iam.getPolicy</p>"
       },
       {
         "type": "resource",
@@ -198,8 +198,8 @@
       },
       {
         "type": "resource",
-        "string": "[Subscriptions: getIamPolicy API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/getIamPolicy} ",
-        "html": "<p>[Subscriptions: getIamPolicy API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/getIamPolicy}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/getIamPolicy}</a> </p>"
+        "string": "[Subscriptions: getIamPolicy API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/getIamPolicy}",
+        "html": "<p>[Subscriptions: getIamPolicy API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/getIamPolicy}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/getIamPolicy}</a></p>"
       },
       {
         "type": "example",
@@ -232,11 +232,11 @@
     "tags": [
       {
         "type": "throws",
-        "string": "{Error} If no policy is provided.\n",
+        "string": "{Error} If no policy is provided.",
         "types": [
           "Error"
         ],
-        "description": "<p>If no policy is provided. </p>"
+        "description": "<p>If no policy is provided.</p>"
       },
       {
         "type": "param",
@@ -338,9 +338,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -352,8 +352,8 @@
       },
       {
         "type": "alias",
-        "string": "iam.setPolicy ",
-        "html": "<p>iam.setPolicy </p>"
+        "string": "iam.setPolicy",
+        "html": "<p>iam.setPolicy</p>"
       },
       {
         "type": "resource",
@@ -367,8 +367,8 @@
       },
       {
         "type": "resource",
-        "string": "[Policy]{@link https://cloud.google.com/pubsub/reference/rest/Shared.Types/Policy} ",
-        "html": "<p>[Policy]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/Shared.Types/Policy}\">https://cloud.google.com/pubsub/reference/rest/Shared.Types/Policy}</a> </p>"
+        "string": "[Policy]{@link https://cloud.google.com/pubsub/reference/rest/Shared.Types/Policy}",
+        "html": "<p>[Policy]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/Shared.Types/Policy}\">https://cloud.google.com/pubsub/reference/rest/Shared.Types/Policy}</a></p>"
       },
       {
         "type": "example",
@@ -401,11 +401,11 @@
     "tags": [
       {
         "type": "throws",
-        "string": "{Error} If permissions are not provided.\n",
+        "string": "{Error} If permissions are not provided.",
         "types": [
           "Error"
         ],
-        "description": "<p>If permissions are not provided. </p>"
+        "description": "<p>If permissions are not provided.</p>"
       },
       {
         "type": "param",
@@ -466,9 +466,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -480,8 +480,8 @@
       },
       {
         "type": "alias",
-        "string": "iam.testPermissions ",
-        "html": "<p>iam.testPermissions </p>"
+        "string": "iam.testPermissions",
+        "html": "<p>iam.testPermissions</p>"
       },
       {
         "type": "resource",
@@ -495,8 +495,8 @@
       },
       {
         "type": "resource",
-        "string": "[Permissions Reference]{@link https://cloud.google.com/pubsub/access_control#permissions} ",
-        "html": "<p>[Permissions Reference]{@link <a href=\"https://cloud.google.com/pubsub/access_control#permissions}\">https://cloud.google.com/pubsub/access_control#permissions}</a> </p>"
+        "string": "[Permissions Reference]{@link https://cloud.google.com/pubsub/access_control#permissions}",
+        "html": "<p>[Permissions Reference]{@link <a href=\"https://cloud.google.com/pubsub/access_control#permissions}\">https://cloud.google.com/pubsub/access_control#permissions}</a></p>"
       },
       {
         "type": "example",

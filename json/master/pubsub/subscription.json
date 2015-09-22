@@ -262,8 +262,8 @@
     "tags": [
       {
         "type": "mixes",
-        "string": "module:pubsub/iam ",
-        "html": "<p>module:pubsub/iam </p>"
+        "string": "module:pubsub/iam",
+        "html": "<p>module:pubsub/iam</p>"
       },
       {
         "type": "resource",
@@ -272,8 +272,8 @@
       },
       {
         "type": "resource",
-        "string": "[What is Cloud IAM?]{@link https://cloud.google.com/iam/} ",
-        "html": "<p>[What is Cloud IAM?]{@link <a href=\"https://cloud.google.com/iam/}\">https://cloud.google.com/iam/}</a> </p>"
+        "string": "[What is Cloud IAM?]{@link https://cloud.google.com/iam/}",
+        "html": "<p>[What is Cloud IAM?]{@link <a href=\"https://cloud.google.com/iam/}\">https://cloud.google.com/iam/}</a></p>"
       },
       {
         "type": "example",
@@ -364,7 +364,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },
@@ -399,7 +399,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },
@@ -434,16 +434,16 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Subscriptions: acknowledge API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/acknowledge} ",
-        "html": "<p>[Subscriptions: acknowledge API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/acknowledge}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/acknowledge}</a> </p>"
+        "string": "[Subscriptions: acknowledge API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/acknowledge}",
+        "html": "<p>[Subscriptions: acknowledge API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/acknowledge}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/acknowledge}</a></p>"
       },
       {
         "type": "throws",
-        "string": "{Error} If at least one ackId is not provided.\n",
+        "string": "{Error} If at least one ackId is not provided.",
         "types": [
           "Error"
         ],
-        "description": "<p>If at least one ackId is not provided. </p>"
+        "description": "<p>If at least one ackId is not provided.</p>"
       },
       {
         "type": "param",
@@ -462,9 +462,9 @@
       },
       {
         "type": "param",
-        "string": "{function=} callback - The callback function.\n",
+        "string": "{function=} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
@@ -505,14 +505,14 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Subscriptions: delete API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/delete} ",
-        "html": "<p>[Subscriptions: delete API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/delete}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/delete}</a> </p>"
+        "string": "[Subscriptions: delete API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/delete}",
+        "html": "<p>[Subscriptions: delete API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/delete}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/delete}</a></p>"
       },
       {
         "type": "param",
-        "string": "{function=} callback - The callback function.\n",
+        "string": "{function=} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
@@ -553,13 +553,13 @@
     "tags": [
       {
         "type": "todo",
-        "string": "Should not be racing with other pull. ",
-        "html": "<p>Should not be racing with other pull. </p>"
+        "string": "Should not be racing with other pull.",
+        "html": "<p>Should not be racing with other pull.</p>"
       },
       {
         "type": "resource",
-        "string": "[Subscriptions: pull API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/pull} ",
-        "html": "<p>[Subscriptions: pull API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/pull}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/pull}</a> </p>"
+        "string": "[Subscriptions: pull API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/pull}",
+        "html": "<p>[Subscriptions: pull API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/pull}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/pull}</a></p>"
       },
       {
         "type": "param",
@@ -605,9 +605,9 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
@@ -648,8 +648,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Subscriptions: modifyAckDeadline API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/modifyAckDeadline} ",
-        "html": "<p>[Subscriptions: modifyAckDeadline API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/modifyAckDeadline}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/modifyAckDeadline}</a> </p>"
+        "string": "[Subscriptions: modifyAckDeadline API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/modifyAckDeadline}",
+        "html": "<p>[Subscriptions: modifyAckDeadline API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/modifyAckDeadline}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/modifyAckDeadline}</a></p>"
       },
       {
         "type": "param",
@@ -696,9 +696,9 @@
       },
       {
         "type": "param",
-        "string": "{Function=} callback - The callback function.\n",
+        "string": "{Function=} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "Function"
         ],
@@ -739,7 +739,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },

@@ -174,8 +174,8 @@
       },
       {
         "type": "alias",
-        "string": "module:pubsub/topic ",
-        "html": "<p>module:pubsub/topic </p>"
+        "string": "module:pubsub/topic",
+        "html": "<p>module:pubsub/topic</p>"
       },
       {
         "type": "example",
@@ -206,8 +206,8 @@
     "tags": [
       {
         "type": "mixes",
-        "string": "module:pubsub/iam ",
-        "html": "<p>module:pubsub/iam </p>"
+        "string": "module:pubsub/iam",
+        "html": "<p>module:pubsub/iam</p>"
       },
       {
         "type": "resource",
@@ -216,8 +216,8 @@
       },
       {
         "type": "resource",
-        "string": "[What is Cloud IAM?]{@link https://cloud.google.com/iam/} ",
-        "html": "<p>[What is Cloud IAM?]{@link <a href=\"https://cloud.google.com/iam/}\">https://cloud.google.com/iam/}</a> </p>"
+        "string": "[What is Cloud IAM?]{@link https://cloud.google.com/iam/}",
+        "html": "<p>[What is Cloud IAM?]{@link <a href=\"https://cloud.google.com/iam/}\">https://cloud.google.com/iam/}</a></p>"
       },
       {
         "type": "example",
@@ -250,7 +250,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },
@@ -293,7 +293,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },
@@ -336,8 +336,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Topics: publish API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/publish} ",
-        "html": "<p>[Topics: publish API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/publish}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/publish}</a> </p>"
+        "string": "[Topics: publish API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/publish}",
+        "html": "<p>[Topics: publish API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/publish}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/publish}</a></p>"
       },
       {
         "type": "throws",
@@ -349,11 +349,11 @@
       },
       {
         "type": "throws",
-        "string": "{Error} If a message is missing a data property.\n",
+        "string": "{Error} If a message is missing a data property.",
         "types": [
           "Error"
         ],
-        "description": "<p>If a message is missing a data property. </p>"
+        "description": "<p>If a message is missing a data property.</p>"
       },
       {
         "type": "param",
@@ -398,9 +398,9 @@
       },
       {
         "type": "param",
-        "string": "{function=} callback - The callback function.\n",
+        "string": "{function=} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
@@ -441,14 +441,14 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Topics: delete API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/delete} ",
-        "html": "<p>[Topics: delete API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/delete}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/delete}</a> </p>"
+        "string": "[Topics: delete API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/delete}",
+        "html": "<p>[Topics: delete API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/delete}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/delete}</a></p>"
       },
       {
         "type": "param",
-        "string": "{function=} callback - The callback function.\n",
+        "string": "{function=} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
@@ -489,8 +489,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Topics: get API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/get} ",
-        "html": "<p>[Topics: get API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/get}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/get}</a> </p>"
+        "string": "[Topics: get API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/get}",
+        "html": "<p>[Topics: get API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/get}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/get}</a></p>"
       },
       {
         "type": "param",
@@ -574,8 +574,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Subscriptions: list API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics.subscriptions/list} ",
-        "html": "<p>[Subscriptions: list API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.topics.subscriptions/list}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.topics.subscriptions/list}</a> </p>"
+        "string": "[Subscriptions: list API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics.subscriptions/list}",
+        "html": "<p>[Subscriptions: list API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.topics.subscriptions/list}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.topics.subscriptions/list}</a></p>"
       },
       {
         "type": "param",
@@ -621,9 +621,9 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
@@ -664,8 +664,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Subscriptions: create API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/create} ",
-        "html": "<p>[Subscriptions: create API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/create}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/create}</a> </p>"
+        "string": "[Subscriptions: create API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/create}",
+        "html": "<p>[Subscriptions: create API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/create}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/create}</a></p>"
       },
       {
         "type": "param",
@@ -753,9 +753,9 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
@@ -852,7 +852,7 @@
       },
       {
         "type": "return",
-        "string": "{module:pubsub/subscription}\n",
+        "string": "{module:pubsub/subscription}",
         "types": [
           "module:pubsub/subscription"
         ],

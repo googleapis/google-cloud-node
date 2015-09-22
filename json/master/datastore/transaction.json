@@ -137,7 +137,7 @@
       },
       {
         "type": "param",
-        "string": "{string} projectId - Dataset ID. This is your project ID from the\n    Google Developers Console.\n",
+        "string": "{string} projectId - Dataset ID. This is your project ID from the\n    Google Developers Console.",
         "name": "projectId",
         "description": "<ul>\n<li>Dataset ID. This is your project ID from the     Google Developers Console.</li>\n</ul>\n",
         "types": [
@@ -172,8 +172,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Transactions Reference]{@link https://cloud.google.com/datastore/docs/concepts/transactions} ",
-        "html": "<p>[Transactions Reference]{@link <a href=\"https://cloud.google.com/datastore/docs/concepts/transactions}\">https://cloud.google.com/datastore/docs/concepts/transactions}</a> </p>"
+        "string": "[Transactions Reference]{@link https://cloud.google.com/datastore/docs/concepts/transactions}",
+        "html": "<p>[Transactions Reference]{@link <a href=\"https://cloud.google.com/datastore/docs/concepts/transactions}\">https://cloud.google.com/datastore/docs/concepts/transactions}</a></p>"
       },
       {
         "type": "constructor",
@@ -187,8 +187,8 @@
       },
       {
         "type": "mixes",
-        "string": "module:datastore/request ",
-        "html": "<p>module:datastore/request </p>"
+        "string": "module:datastore/request",
+        "html": "<p>module:datastore/request</p>"
       },
       {
         "type": "example",
@@ -219,7 +219,7 @@
     "tags": [
       {
         "type": "param",
-        "string": "{function} callback - The function to execute within the context of\n    a transaction.\n",
+        "string": "{function} callback - The function to execute within the context of\n    a transaction.",
         "name": "callback",
         "description": "<ul>\n<li>The function to execute within the context of     a transaction.</li>\n</ul>\n",
         "types": [
@@ -233,7 +233,7 @@
       },
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },
@@ -268,8 +268,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Datasets: rollback API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/rollback} ",
-        "html": "<p>[Datasets: rollback API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/rollback}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/rollback}</a> </p>"
+        "string": "[Datasets: rollback API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/rollback}",
+        "html": "<p>[Datasets: rollback API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/rollback}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/rollback}</a></p>"
       },
       {
         "type": "param",
@@ -301,9 +301,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -344,9 +344,9 @@
     "tags": [
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
@@ -358,7 +358,7 @@
       },
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },
@@ -408,14 +408,14 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Datasets: commit API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit#mutation.delete} ",
-        "html": "<p>[Datasets: commit API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit#mutation.delete}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit#mutation.delete}</a> </p>"
+        "string": "[Datasets: commit API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit#mutation.delete}",
+        "html": "<p>[Datasets: commit API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit#mutation.delete}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit#mutation.delete}</a></p>"
       },
       {
         "type": "param",
-        "string": "{Key|Key[]} key - Datastore key object(s).\n",
+        "string": "{Key|Key[]} key - Datastore key object(s).",
         "name": "key",
-        "description": "<ul>\n<li>Datastore key object(s). </li>\n</ul>\n",
+        "description": "<ul>\n<li>Datastore key object(s).</li>\n</ul>\n",
         "types": [
           "Key",
           "Array.<Key>"
@@ -457,8 +457,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Datasets: commit API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit} ",
-        "html": "<p>[Datasets: commit API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit}</a> </p>"
+        "string": "[Datasets: commit API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit}",
+        "html": "<p>[Datasets: commit API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit}</a></p>"
       },
       {
         "type": "param",
@@ -491,7 +491,7 @@
       },
       {
         "type": "param",
-        "string": "{object|object[]} entities.data - Data to save with the provided key.\n    If you provide an array of objects, you must use the explicit syntax:\n    `name` for the name of the property and `value` for its value. You may\n    also specify an `excludeFromIndexes` property, set to `true` or `false`.\n",
+        "string": "{object|object[]} entities.data - Data to save with the provided key.\n    If you provide an array of objects, you must use the explicit syntax:\n    `name` for the name of the property and `value` for its value. You may\n    also specify an `excludeFromIndexes` property, set to `true` or `false`.",
         "name": "entities.data",
         "description": "<ul>\n<li>Data to save with the provided key.     If you provide an array of objects, you must use the explicit syntax:<br />  <code>name</code> for the name of the property and <code>value</code> for its value. You may<br />  also specify an <code>excludeFromIndexes</code> property, set to <code>true</code> or <code>false</code>.</li>\n</ul>\n",
         "types": [

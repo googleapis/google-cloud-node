@@ -132,8 +132,8 @@
       },
       {
         "type": "resource",
-        "string": "[Project Resource]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project} ",
-        "html": "<p>[Project Resource]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project}</a> </p>"
+        "string": "[Project Resource]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project}",
+        "html": "<p>[Project Resource]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project}</a></p>"
       },
       {
         "type": "constructor",
@@ -142,8 +142,8 @@
       },
       {
         "type": "alias",
-        "string": "module:resource/project ",
-        "html": "<p>module:resource/project </p>"
+        "string": "module:resource/project",
+        "html": "<p>module:resource/project</p>"
       },
       {
         "type": "example",
@@ -174,12 +174,12 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[projects: delete API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/delete} ",
-        "html": "<p>[projects: delete API Documentation]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/delete}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/delete}</a> </p>"
+        "string": "[projects: delete API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/delete}",
+        "html": "<p>[projects: delete API Documentation]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/delete}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/delete}</a></p>"
       },
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },
@@ -213,9 +213,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -256,8 +256,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[projects: get API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/get} ",
-        "html": "<p>[projects: get API Documentation]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/get}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/get}</a> </p>"
+        "string": "[projects: get API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/get}",
+        "html": "<p>[projects: get API Documentation]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/get}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/get}</a></p>"
       },
       {
         "type": "param",
@@ -303,9 +303,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - Raw API response.\n",
+        "string": "{object} callback.apiResponse - Raw API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>Raw API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -346,12 +346,12 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[projects: undelete API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/undelete} ",
-        "html": "<p>[projects: undelete API Documentation]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/undelete}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/undelete}</a> </p>"
+        "string": "[projects: undelete API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/undelete}",
+        "html": "<p>[projects: undelete API Documentation]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/undelete}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/undelete}</a></p>"
       },
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },
@@ -385,9 +385,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - Raw API response.\n",
+        "string": "{object} callback.apiResponse - Raw API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>Raw API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -433,12 +433,12 @@
       },
       {
         "type": "resource",
-        "string": "[Project Resource]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project} ",
-        "html": "<p>[Project Resource]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project}</a> </p>"
+        "string": "[Project Resource]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project}",
+        "html": "<p>[Project Resource]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project}</a></p>"
       },
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },
@@ -486,9 +486,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -529,7 +529,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },

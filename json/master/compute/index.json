@@ -455,9 +455,9 @@
       },
       {
         "type": "param",
-        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).\n",
+        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).",
         "name": "options",
-        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>. </li>\n</ul>\n",
+        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -501,8 +501,8 @@
       },
       {
         "type": "resource",
-        "string": "[Firewalls: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls/insert} ",
-        "html": "<p>[Firewalls: insert API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/firewalls/insert}\">https://cloud.google.com/compute/docs/reference/v1/firewalls/insert}</a> </p>"
+        "string": "[Firewalls: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls/insert}",
+        "html": "<p>[Firewalls: insert API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/firewalls/insert}\">https://cloud.google.com/compute/docs/reference/v1/firewalls/insert}</a></p>"
       },
       {
         "type": "throws",
@@ -514,11 +514,11 @@
       },
       {
         "type": "throws",
-        "string": "{Error} if a config object is not provided.\n",
+        "string": "{Error} if a config object is not provided.",
         "types": [
           "Error"
         ],
-        "description": "<p>if a config object is not provided. </p>"
+        "description": "<p>if a config object is not provided.</p>"
       },
       {
         "type": "param",
@@ -648,9 +648,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -696,8 +696,8 @@
       },
       {
         "type": "resource",
-        "string": "[Networks: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/networks/insert} ",
-        "html": "<p>[Networks: insert API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/networks/insert}\">https://cloud.google.com/compute/docs/reference/v1/networks/insert}</a> </p>"
+        "string": "[Networks: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/networks/insert}",
+        "html": "<p>[Networks: insert API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/networks/insert}\">https://cloud.google.com/compute/docs/reference/v1/networks/insert}</a></p>"
       },
       {
         "type": "param",
@@ -813,9 +813,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -856,8 +856,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Firewalls Overview]{@link https://cloud.google.com/compute/docs/networking#firewalls} ",
-        "html": "<p>[Firewalls Overview]{@link <a href=\"https://cloud.google.com/compute/docs/networking#firewalls}\">https://cloud.google.com/compute/docs/networking#firewalls}</a> </p>"
+        "string": "[Firewalls Overview]{@link https://cloud.google.com/compute/docs/networking#firewalls}",
+        "html": "<p>[Firewalls Overview]{@link <a href=\"https://cloud.google.com/compute/docs/networking#firewalls}\">https://cloud.google.com/compute/docs/networking#firewalls}</a></p>"
       },
       {
         "type": "param",
@@ -875,7 +875,7 @@
       },
       {
         "type": "return",
-        "string": "{module:compute/firewall}\n",
+        "string": "{module:compute/firewall}",
         "types": [
           "module:compute/firewall"
         ],
@@ -923,8 +923,8 @@
       },
       {
         "type": "resource",
-        "string": "[Addresses: aggregatedList API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/aggregatedList} ",
-        "html": "<p>[Addresses: aggregatedList API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/addresses/aggregatedList}\">https://cloud.google.com/compute/docs/reference/v1/addresses/aggregatedList}</a> </p>"
+        "string": "[Addresses: aggregatedList API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/aggregatedList}",
+        "html": "<p>[Addresses: aggregatedList API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/addresses/aggregatedList}\">https://cloud.google.com/compute/docs/reference/v1/addresses/aggregatedList}</a></p>"
       },
       {
         "type": "param",
@@ -1054,9 +1054,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1102,8 +1102,8 @@
       },
       {
         "type": "resource",
-        "string": "[Disks: aggregatedList API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/disks/aggregatedList} ",
-        "html": "<p>[Disks: aggregatedList API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/disks/aggregatedList}\">https://cloud.google.com/compute/docs/reference/v1/disks/aggregatedList}</a> </p>"
+        "string": "[Disks: aggregatedList API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/disks/aggregatedList}",
+        "html": "<p>[Disks: aggregatedList API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/disks/aggregatedList}\">https://cloud.google.com/compute/docs/reference/v1/disks/aggregatedList}</a></p>"
       },
       {
         "type": "param",
@@ -1233,9 +1233,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1281,8 +1281,8 @@
       },
       {
         "type": "resource",
-        "string": "[Firewalls: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls/list} ",
-        "html": "<p>[Firewalls: list API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/firewalls/list}\">https://cloud.google.com/compute/docs/reference/v1/firewalls/list}</a> </p>"
+        "string": "[Firewalls: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls/list}",
+        "html": "<p>[Firewalls: list API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/firewalls/list}\">https://cloud.google.com/compute/docs/reference/v1/firewalls/list}</a></p>"
       },
       {
         "type": "param",
@@ -1412,9 +1412,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1460,8 +1460,8 @@
       },
       {
         "type": "resource",
-        "string": "[Networks: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/networks/list} ",
-        "html": "<p>[Networks: list API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/networks/list}\">https://cloud.google.com/compute/docs/reference/v1/networks/list}</a> </p>"
+        "string": "[Networks: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/networks/list}",
+        "html": "<p>[Networks: list API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/networks/list}\">https://cloud.google.com/compute/docs/reference/v1/networks/list}</a></p>"
       },
       {
         "type": "param",
@@ -1591,9 +1591,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1639,8 +1639,8 @@
       },
       {
         "type": "resource",
-        "string": "[GlobalOperations: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations/list} ",
-        "html": "<p>[GlobalOperations: list API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/globalOperations/list}\">https://cloud.google.com/compute/docs/reference/v1/globalOperations/list}</a> </p>"
+        "string": "[GlobalOperations: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations/list}",
+        "html": "<p>[GlobalOperations: list API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/globalOperations/list}\">https://cloud.google.com/compute/docs/reference/v1/globalOperations/list}</a></p>"
       },
       {
         "type": "param",
@@ -1770,9 +1770,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1818,8 +1818,8 @@
       },
       {
         "type": "resource",
-        "string": "[Regions: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regions/list} ",
-        "html": "<p>[Regions: list API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/regions/list}\">https://cloud.google.com/compute/docs/reference/v1/regions/list}</a> </p>"
+        "string": "[Regions: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regions/list}",
+        "html": "<p>[Regions: list API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/regions/list}\">https://cloud.google.com/compute/docs/reference/v1/regions/list}</a></p>"
       },
       {
         "type": "param",
@@ -1949,9 +1949,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1997,8 +1997,8 @@
       },
       {
         "type": "resource",
-        "string": "[Snapshots: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots/list} ",
-        "html": "<p>[Snapshots: list API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/snapshots/list}\">https://cloud.google.com/compute/docs/reference/v1/snapshots/list}</a> </p>"
+        "string": "[Snapshots: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots/list}",
+        "html": "<p>[Snapshots: list API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/snapshots/list}\">https://cloud.google.com/compute/docs/reference/v1/snapshots/list}</a></p>"
       },
       {
         "type": "param",
@@ -2128,9 +2128,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -2176,8 +2176,8 @@
       },
       {
         "type": "resource",
-        "string": "[Instances: aggregatedList API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/aggregatedList} ",
-        "html": "<p>[Instances: aggregatedList API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances/aggregatedList}\">https://cloud.google.com/compute/docs/reference/v1/instances/aggregatedList}</a> </p>"
+        "string": "[Instances: aggregatedList API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/aggregatedList}",
+        "html": "<p>[Instances: aggregatedList API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances/aggregatedList}\">https://cloud.google.com/compute/docs/reference/v1/instances/aggregatedList}</a></p>"
       },
       {
         "type": "param",
@@ -2307,9 +2307,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -2355,8 +2355,8 @@
       },
       {
         "type": "resource",
-        "string": "[Zones: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zones/list} ",
-        "html": "<p>[Zones: list API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/zones/list}\">https://cloud.google.com/compute/docs/reference/v1/zones/list}</a> </p>"
+        "string": "[Zones: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zones/list}",
+        "html": "<p>[Zones: list API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/zones/list}\">https://cloud.google.com/compute/docs/reference/v1/zones/list}</a></p>"
       },
       {
         "type": "param",
@@ -2486,9 +2486,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -2529,8 +2529,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Networks Overview]{@link https://cloud.google.com/compute/docs/networking#networks} ",
-        "html": "<p>[Networks Overview]{@link <a href=\"https://cloud.google.com/compute/docs/networking#networks}\">https://cloud.google.com/compute/docs/networking#networks}</a> </p>"
+        "string": "[Networks Overview]{@link https://cloud.google.com/compute/docs/networking#networks}",
+        "html": "<p>[Networks Overview]{@link <a href=\"https://cloud.google.com/compute/docs/networking#networks}\">https://cloud.google.com/compute/docs/networking#networks}</a></p>"
       },
       {
         "type": "param",
@@ -2548,7 +2548,7 @@
       },
       {
         "type": "return",
-        "string": "{module:compute/network}\n",
+        "string": "{module:compute/network}",
         "types": [
           "module:compute/network"
         ],
@@ -2591,8 +2591,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Global Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations} ",
-        "html": "<p>[Global Operation Overview]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/globalOperations}\">https://cloud.google.com/compute/docs/reference/v1/globalOperations}</a> </p>"
+        "string": "[Global Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations}",
+        "html": "<p>[Global Operation Overview]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/globalOperations}\">https://cloud.google.com/compute/docs/reference/v1/globalOperations}</a></p>"
       },
       {
         "type": "param",
@@ -2610,7 +2610,7 @@
       },
       {
         "type": "return",
-        "string": "{module:compute/operation}\n",
+        "string": "{module:compute/operation}",
         "types": [
           "module:compute/operation"
         ],
@@ -2653,8 +2653,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Regions & Zones Overview]{@link https://cloud.google.com/compute/docs/zones} ",
-        "html": "<p>[Regions &amp; Zones Overview]{@link <a href=\"https://cloud.google.com/compute/docs/zones}\">https://cloud.google.com/compute/docs/zones}</a> </p>"
+        "string": "[Regions & Zones Overview]{@link https://cloud.google.com/compute/docs/zones}",
+        "html": "<p>[Regions &amp; Zones Overview]{@link <a href=\"https://cloud.google.com/compute/docs/zones}\">https://cloud.google.com/compute/docs/zones}</a></p>"
       },
       {
         "type": "param",
@@ -2672,7 +2672,7 @@
       },
       {
         "type": "return",
-        "string": "{module:compute/region}\n",
+        "string": "{module:compute/region}",
         "types": [
           "module:compute/region"
         ],
@@ -2715,8 +2715,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Snapshots Overview]{@link https://cloud.google.com/compute/docs/disks/persistent-disks#snapshots} ",
-        "html": "<p>[Snapshots Overview]{@link <a href=\"https://cloud.google.com/compute/docs/disks/persistent-disks#snapshots}\">https://cloud.google.com/compute/docs/disks/persistent-disks#snapshots}</a> </p>"
+        "string": "[Snapshots Overview]{@link https://cloud.google.com/compute/docs/disks/persistent-disks#snapshots}",
+        "html": "<p>[Snapshots Overview]{@link <a href=\"https://cloud.google.com/compute/docs/disks/persistent-disks#snapshots}\">https://cloud.google.com/compute/docs/disks/persistent-disks#snapshots}</a></p>"
       },
       {
         "type": "param",
@@ -2734,7 +2734,7 @@
       },
       {
         "type": "return",
-        "string": "{module:compute/snapshot}\n",
+        "string": "{module:compute/snapshot}",
         "types": [
           "module:compute/snapshot"
         ],
@@ -2777,8 +2777,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Regions & Zones Overview]{@link https://cloud.google.com/compute/docs/zones} ",
-        "html": "<p>[Regions &amp; Zones Overview]{@link <a href=\"https://cloud.google.com/compute/docs/zones}\">https://cloud.google.com/compute/docs/zones}</a> </p>"
+        "string": "[Regions & Zones Overview]{@link https://cloud.google.com/compute/docs/zones}",
+        "html": "<p>[Regions &amp; Zones Overview]{@link <a href=\"https://cloud.google.com/compute/docs/zones}\">https://cloud.google.com/compute/docs/zones}</a></p>"
       },
       {
         "type": "param",
@@ -2796,7 +2796,7 @@
       },
       {
         "type": "return",
-        "string": "{module:compute/zone}\n",
+        "string": "{module:compute/zone}",
         "types": [
           "module:compute/zone"
         ],
@@ -2839,7 +2839,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },

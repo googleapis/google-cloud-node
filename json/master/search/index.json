@@ -245,9 +245,9 @@
       },
       {
         "type": "param",
-        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).\n",
+        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).",
         "name": "options",
-        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>. </li>\n</ul>\n",
+        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -286,8 +286,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Indexes: list API Documentation]{@link https://cloud.google.com/search/reference/rest/v1/projects/indexes/list} ",
-        "html": "<p>[Indexes: list API Documentation]{@link <a href=\"https://cloud.google.com/search/reference/rest/v1/projects/indexes/list}\">https://cloud.google.com/search/reference/rest/v1/projects/indexes/list}</a> </p>"
+        "string": "[Indexes: list API Documentation]{@link https://cloud.google.com/search/reference/rest/v1/projects/indexes/list}",
+        "html": "<p>[Indexes: list API Documentation]{@link <a href=\"https://cloud.google.com/search/reference/rest/v1/projects/indexes/list}\">https://cloud.google.com/search/reference/rest/v1/projects/indexes/list}</a></p>"
       },
       {
         "type": "param",
@@ -431,9 +431,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -526,7 +526,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },

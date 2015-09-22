@@ -258,8 +258,8 @@
       },
       {
         "type": "resource",
-        "string": "[Region Resource]{@link https://cloud.google.com/compute/docs/reference/v1/regions} ",
-        "html": "<p>[Region Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/regions}\">https://cloud.google.com/compute/docs/reference/v1/regions}</a> </p>"
+        "string": "[Region Resource]{@link https://cloud.google.com/compute/docs/reference/v1/regions}",
+        "html": "<p>[Region Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/regions}\">https://cloud.google.com/compute/docs/reference/v1/regions}</a></p>"
       },
       {
         "type": "constructor",
@@ -268,8 +268,8 @@
       },
       {
         "type": "alias",
-        "string": "module:compute/region ",
-        "html": "<p>module:compute/region </p>"
+        "string": "module:compute/region",
+        "html": "<p>module:compute/region</p>"
       },
       {
         "type": "example",
@@ -300,8 +300,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network} ",
-        "html": "<p>[Instances and Networks]{@link <a href=\"https://cloud.google.com/compute/docs/instances-and-network}\">https://cloud.google.com/compute/docs/instances-and-network}</a> </p>"
+        "string": "[Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}",
+        "html": "<p>[Instances and Networks]{@link <a href=\"https://cloud.google.com/compute/docs/instances-and-network}\">https://cloud.google.com/compute/docs/instances-and-network}</a></p>"
       },
       {
         "type": "param",
@@ -319,7 +319,7 @@
       },
       {
         "type": "return",
-        "string": "{module:compute/address}\n",
+        "string": "{module:compute/address}",
         "types": [
           "module:compute/address"
         ],
@@ -372,8 +372,8 @@
       },
       {
         "type": "resource",
-        "string": "[Addresses: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/insert} ",
-        "html": "<p>[Addresses: insert API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/addresses/insert}\">https://cloud.google.com/compute/docs/reference/v1/addresses/insert}</a> </p>"
+        "string": "[Addresses: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/insert}",
+        "html": "<p>[Addresses: insert API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/addresses/insert}\">https://cloud.google.com/compute/docs/reference/v1/addresses/insert}</a></p>"
       },
       {
         "type": "param",
@@ -461,9 +461,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -509,8 +509,8 @@
       },
       {
         "type": "resource",
-        "string": "[Addresses: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/list} ",
-        "html": "<p>[Addresses: list API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/addresses/list}\">https://cloud.google.com/compute/docs/reference/v1/addresses/list}</a> </p>"
+        "string": "[Addresses: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/list}",
+        "html": "<p>[Addresses: list API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/addresses/list}\">https://cloud.google.com/compute/docs/reference/v1/addresses/list}</a></p>"
       },
       {
         "type": "param",
@@ -640,9 +640,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -688,8 +688,8 @@
       },
       {
         "type": "resource",
-        "string": "[Regions: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regions/get} ",
-        "html": "<p>[Regions: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/regions/get}\">https://cloud.google.com/compute/docs/reference/v1/regions/get}</a> </p>"
+        "string": "[Regions: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regions/get}",
+        "html": "<p>[Regions: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/regions/get}\">https://cloud.google.com/compute/docs/reference/v1/regions/get}</a></p>"
       },
       {
         "type": "param",
@@ -735,9 +735,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -783,8 +783,8 @@
       },
       {
         "type": "resource",
-        "string": "[RegionOperations: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations/list} ",
-        "html": "<p>[RegionOperations: list API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/regionOperations/list}\">https://cloud.google.com/compute/docs/reference/v1/regionOperations/list}</a> </p>"
+        "string": "[RegionOperations: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations/list}",
+        "html": "<p>[RegionOperations: list API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/regionOperations/list}\">https://cloud.google.com/compute/docs/reference/v1/regionOperations/list}</a></p>"
       },
       {
         "type": "param",
@@ -914,9 +914,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -957,8 +957,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Region Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations} ",
-        "html": "<p>[Region Operation Overview]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/regionOperations}\">https://cloud.google.com/compute/docs/reference/v1/regionOperations}</a> </p>"
+        "string": "[Region Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations}",
+        "html": "<p>[Region Operation Overview]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/regionOperations}\">https://cloud.google.com/compute/docs/reference/v1/regionOperations}</a></p>"
       },
       {
         "type": "param",
@@ -976,7 +976,7 @@
       },
       {
         "type": "return",
-        "string": "{module:compute/operation}\n",
+        "string": "{module:compute/operation}",
         "types": [
           "module:compute/operation"
         ],
@@ -1019,7 +1019,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },

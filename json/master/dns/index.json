@@ -240,14 +240,14 @@
       },
       {
         "type": "alias",
-        "string": "module:dns ",
-        "html": "<p>module:dns </p>"
+        "string": "module:dns",
+        "html": "<p>module:dns</p>"
       },
       {
         "type": "param",
-        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).\n",
+        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).",
         "name": "options",
-        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>. </li>\n</ul>\n",
+        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -286,8 +286,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create} ",
-        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a> </p>"
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a></p>"
       },
       {
         "type": "throws",
@@ -299,11 +299,11 @@
       },
       {
         "type": "throws",
-        "string": "{error} If a zone dnsName is not provided.\n",
+        "string": "{error} If a zone dnsName is not provided.",
         "types": [
           "error"
         ],
-        "description": "<p>If a zone dnsName is not provided. </p>"
+        "description": "<p>If a zone dnsName is not provided.</p>"
       },
       {
         "type": "param",
@@ -405,9 +405,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - Raw API response.\n",
+        "string": "{object} callback.apiResponse - Raw API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>Raw API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -448,8 +448,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[ManagedZones: list API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/list} ",
-        "html": "<p>[ManagedZones: list API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/list}\">https://cloud.google.com/dns/api/v1/managedZones/list}</a> </p>"
+        "string": "[ManagedZones: list API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/list}",
+        "html": "<p>[ManagedZones: list API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/list}\">https://cloud.google.com/dns/api/v1/managedZones/list}</a></p>"
       },
       {
         "type": "param",
@@ -537,9 +537,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - Raw API response.\n",
+        "string": "{object} callback.apiResponse - Raw API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>Raw API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -580,11 +580,11 @@
     "tags": [
       {
         "type": "throws",
-        "string": "{error} If a zone name is not provided.\n",
+        "string": "{error} If a zone name is not provided.",
         "types": [
           "error"
         ],
-        "description": "<p>If a zone name is not provided. </p>"
+        "description": "<p>If a zone name is not provided.</p>"
       },
       {
         "type": "param",
@@ -602,7 +602,7 @@
       },
       {
         "type": "return",
-        "string": "{module:dns/zone}\n",
+        "string": "{module:dns/zone}",
         "types": [
           "module:dns/zone"
         ],
@@ -645,7 +645,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },

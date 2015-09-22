@@ -132,8 +132,8 @@
       },
       {
         "type": "resource",
-        "string": "[Disk Resource]{@link https://cloud.google.com/compute/docs/reference/v1/disks} ",
-        "html": "<p>[Disk Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/disks}\">https://cloud.google.com/compute/docs/reference/v1/disks}</a> </p>"
+        "string": "[Disk Resource]{@link https://cloud.google.com/compute/docs/reference/v1/disks}",
+        "html": "<p>[Disk Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/disks}\">https://cloud.google.com/compute/docs/reference/v1/disks}</a></p>"
       },
       {
         "type": "constructor",
@@ -142,8 +142,8 @@
       },
       {
         "type": "alias",
-        "string": "module:compute/disk ",
-        "html": "<p>module:compute/disk </p>"
+        "string": "module:compute/disk",
+        "html": "<p>module:compute/disk</p>"
       },
       {
         "type": "example",
@@ -174,7 +174,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },
@@ -249,8 +249,8 @@
       },
       {
         "type": "resource",
-        "string": "[Disks: createSnapshot API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/disks/createSnapshot} ",
-        "html": "<p>[Disks: createSnapshot API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/disks/createSnapshot}\">https://cloud.google.com/compute/docs/reference/v1/disks/createSnapshot}</a> </p>"
+        "string": "[Disks: createSnapshot API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/disks/createSnapshot}",
+        "html": "<p>[Disks: createSnapshot API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/disks/createSnapshot}\">https://cloud.google.com/compute/docs/reference/v1/disks/createSnapshot}</a></p>"
       },
       {
         "type": "param",
@@ -338,9 +338,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -381,8 +381,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Disks: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/disks/delete} ",
-        "html": "<p>[Disks: delete API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/disks/delete}\">https://cloud.google.com/compute/docs/reference/v1/disks/delete}</a> </p>"
+        "string": "[Disks: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/disks/delete}",
+        "html": "<p>[Disks: delete API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/disks/delete}\">https://cloud.google.com/compute/docs/reference/v1/disks/delete}</a></p>"
       },
       {
         "type": "param",
@@ -428,9 +428,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -476,8 +476,8 @@
       },
       {
         "type": "resource",
-        "string": "[Disks: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/disks/get} ",
-        "html": "<p>[Disks: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/disks/get}\">https://cloud.google.com/compute/docs/reference/v1/disks/get}</a> </p>"
+        "string": "[Disks: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/disks/get}",
+        "html": "<p>[Disks: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/disks/get}\">https://cloud.google.com/compute/docs/reference/v1/disks/get}</a></p>"
       },
       {
         "type": "param",
@@ -523,9 +523,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -566,7 +566,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },

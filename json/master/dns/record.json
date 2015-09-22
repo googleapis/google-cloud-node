@@ -46,8 +46,8 @@
       },
       {
         "type": "alias",
-        "string": "module:dns/record ",
-        "html": "<p>module:dns/record </p>"
+        "string": "module:dns/record",
+        "html": "<p>module:dns/record</p>"
       },
       {
         "type": "param",
@@ -107,7 +107,7 @@
       },
       {
         "type": "param",
-        "string": "{number} metadata.ttl - Seconds that the resource is cached by\n    resolvers.\n",
+        "string": "{number} metadata.ttl - Seconds that the resource is cached by\n    resolvers.",
         "name": "metadata.ttl",
         "description": "<ul>\n<li>Seconds that the resource is cached by     resolvers.</li>\n</ul>\n",
         "types": [
@@ -148,7 +148,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },
@@ -233,8 +233,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create} ",
-        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a> </p>"
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a></p>"
       },
       {
         "type": "param",
@@ -280,9 +280,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - Raw API response.\n",
+        "string": "{object} callback.apiResponse - Raw API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>Raw API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -353,7 +353,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },

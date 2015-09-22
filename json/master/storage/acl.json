@@ -73,12 +73,12 @@
     "tags": [
       {
         "type": "alias",
-        "string": "acl.owners ",
-        "html": "<p>acl.owners </p>"
+        "string": "acl.owners",
+        "html": "<p>acl.owners</p>"
       },
       {
         "type": "return",
-        "string": "{object}\n",
+        "string": "{object}",
         "types": [
           "object"
         ],
@@ -122,12 +122,12 @@
     "tags": [
       {
         "type": "alias",
-        "string": "acl.readers ",
-        "html": "<p>acl.readers </p>"
+        "string": "acl.readers",
+        "html": "<p>acl.readers</p>"
       },
       {
         "type": "return",
-        "string": "{object}\n",
+        "string": "{object}",
         "types": [
           "object"
         ],
@@ -171,12 +171,12 @@
     "tags": [
       {
         "type": "alias",
-        "string": "acl.writers ",
-        "html": "<p>acl.writers </p>"
+        "string": "acl.writers",
+        "html": "<p>acl.writers</p>"
       },
       {
         "type": "return",
-        "string": "{object}\n",
+        "string": "{object}",
         "types": [
           "object"
         ],
@@ -225,8 +225,8 @@
       },
       {
         "type": "resource",
-        "string": "[ObjectAccessControls: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert} ",
-        "html": "<p>[ObjectAccessControls: insert API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert}\">https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert}</a> </p>"
+        "string": "[ObjectAccessControls: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert}",
+        "html": "<p>[ObjectAccessControls: insert API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert}\">https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/insert}</a></p>"
       },
       {
         "type": "param",
@@ -328,9 +328,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -342,8 +342,8 @@
       },
       {
         "type": "alias",
-        "string": "acl.add ",
-        "html": "<p>acl.add </p>"
+        "string": "acl.add",
+        "html": "<p>acl.add</p>"
       },
       {
         "type": "example",
@@ -381,8 +381,8 @@
       },
       {
         "type": "resource",
-        "string": "[ObjectAccessControls: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/delete} ",
-        "html": "<p>[ObjectAccessControls: delete API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/delete}\">https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/delete}</a> </p>"
+        "string": "[ObjectAccessControls: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/delete}",
+        "html": "<p>[ObjectAccessControls: delete API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/delete}\">https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/delete}</a></p>"
       },
       {
         "type": "param",
@@ -456,9 +456,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -470,8 +470,8 @@
       },
       {
         "type": "alias",
-        "string": "acl.delete ",
-        "html": "<p>acl.delete </p>"
+        "string": "acl.delete",
+        "html": "<p>acl.delete</p>"
       },
       {
         "type": "example",
@@ -509,8 +509,8 @@
       },
       {
         "type": "resource",
-        "string": "[ObjectAccessControls: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/get} ",
-        "html": "<p>[ObjectAccessControls: get API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/get}\">https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/get}</a> </p>"
+        "string": "[ObjectAccessControls: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/get}",
+        "html": "<p>[ObjectAccessControls: get API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/get}\">https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/get}</a></p>"
       },
       {
         "type": "param",
@@ -600,9 +600,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -614,8 +614,8 @@
       },
       {
         "type": "alias",
-        "string": "acl.get ",
-        "html": "<p>acl.get </p>"
+        "string": "acl.get",
+        "html": "<p>acl.get</p>"
       },
       {
         "type": "example",
@@ -653,8 +653,8 @@
       },
       {
         "type": "resource",
-        "string": "[ObjectAccessControls: update API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/update} ",
-        "html": "<p>[ObjectAccessControls: update API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/update}\">https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/update}</a> </p>"
+        "string": "[ObjectAccessControls: update API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/update}",
+        "html": "<p>[ObjectAccessControls: update API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/update}\">https://cloud.google.com/storage/docs/json_api/v1/objectAccessControls/update}</a></p>"
       },
       {
         "type": "param",
@@ -756,9 +756,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -770,8 +770,8 @@
       },
       {
         "type": "alias",
-        "string": "acl.update ",
-        "html": "<p>acl.update </p>"
+        "string": "acl.update",
+        "html": "<p>acl.update</p>"
       },
       {
         "type": "example",
@@ -834,7 +834,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },

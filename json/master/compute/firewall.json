@@ -132,8 +132,8 @@
       },
       {
         "type": "resource",
-        "string": "[Firewall Resource]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls} ",
-        "html": "<p>[Firewall Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/firewalls}\">https://cloud.google.com/compute/docs/reference/v1/firewalls}</a> </p>"
+        "string": "[Firewall Resource]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls}",
+        "html": "<p>[Firewall Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/firewalls}\">https://cloud.google.com/compute/docs/reference/v1/firewalls}</a></p>"
       },
       {
         "type": "constructor",
@@ -142,8 +142,8 @@
       },
       {
         "type": "alias",
-        "string": "module:compute/firewall ",
-        "html": "<p>module:compute/firewall </p>"
+        "string": "module:compute/firewall",
+        "html": "<p>module:compute/firewall</p>"
       },
       {
         "type": "example",
@@ -174,8 +174,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Firewalls: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls/delete} ",
-        "html": "<p>[Firewalls: delete API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/firewalls/delete}\">https://cloud.google.com/compute/docs/reference/v1/firewalls/delete}</a> </p>"
+        "string": "[Firewalls: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls/delete}",
+        "html": "<p>[Firewalls: delete API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/firewalls/delete}\">https://cloud.google.com/compute/docs/reference/v1/firewalls/delete}</a></p>"
       },
       {
         "type": "param",
@@ -221,9 +221,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -269,8 +269,8 @@
       },
       {
         "type": "resource",
-        "string": "[Firewall Resource]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls} ",
-        "html": "<p>[Firewall Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/firewalls}\">https://cloud.google.com/compute/docs/reference/v1/firewalls}</a> </p>"
+        "string": "[Firewall Resource]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls}",
+        "html": "<p>[Firewall Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/firewalls}\">https://cloud.google.com/compute/docs/reference/v1/firewalls}</a></p>"
       },
       {
         "type": "param",
@@ -316,9 +316,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -359,8 +359,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Firewall Resource]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls} ",
-        "html": "<p>[Firewall Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/firewalls}\">https://cloud.google.com/compute/docs/reference/v1/firewalls}</a> </p>"
+        "string": "[Firewall Resource]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls}",
+        "html": "<p>[Firewall Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/firewalls}\">https://cloud.google.com/compute/docs/reference/v1/firewalls}</a></p>"
       },
       {
         "type": "param",
@@ -420,9 +420,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -463,7 +463,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },

@@ -46,8 +46,8 @@
       },
       {
         "type": "alias",
-        "string": "module:dns/change ",
-        "html": "<p>module:dns/change </p>"
+        "string": "module:dns/change",
+        "html": "<p>module:dns/change</p>"
       },
       {
         "type": "param",
@@ -65,9 +65,9 @@
       },
       {
         "type": "param",
-        "string": "{string} id - ID of the change.\n",
+        "string": "{string} id - ID of the change.",
         "name": "id",
-        "description": "<ul>\n<li>ID of the change. </li>\n</ul>\n",
+        "description": "<ul>\n<li>ID of the change.</li>\n</ul>\n",
         "types": [
           "string"
         ],
@@ -106,8 +106,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Changes: get API Documentation]{@link https://cloud.google.com/dns/api/v1/changes/get} ",
-        "html": "<p>[Changes: get API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/changes/get}\">https://cloud.google.com/dns/api/v1/changes/get}</a> </p>"
+        "string": "[Changes: get API Documentation]{@link https://cloud.google.com/dns/api/v1/changes/get}",
+        "html": "<p>[Changes: get API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/changes/get}\">https://cloud.google.com/dns/api/v1/changes/get}</a></p>"
       },
       {
         "type": "param",
@@ -153,9 +153,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - Raw API response.\n",
+        "string": "{object} callback.apiResponse - Raw API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>Raw API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],

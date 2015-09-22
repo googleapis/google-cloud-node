@@ -174,8 +174,8 @@
       },
       {
         "type": "resource",
-        "string": "[Instance Resource]{@link https://cloud.google.com/compute/docs/reference/v1/instances} ",
-        "html": "<p>[Instance Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances}\">https://cloud.google.com/compute/docs/reference/v1/instances}</a> </p>"
+        "string": "[Instance Resource]{@link https://cloud.google.com/compute/docs/reference/v1/instances}",
+        "html": "<p>[Instance Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances}\">https://cloud.google.com/compute/docs/reference/v1/instances}</a></p>"
       },
       {
         "type": "constructor",
@@ -184,8 +184,8 @@
       },
       {
         "type": "alias",
-        "string": "module:compute/vm ",
-        "html": "<p>module:compute/vm </p>"
+        "string": "module:compute/vm",
+        "html": "<p>module:compute/vm</p>"
       },
       {
         "type": "example",
@@ -226,16 +226,16 @@
       },
       {
         "type": "resource",
-        "string": "[Instance: attachDisk API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/attachDisk} ",
-        "html": "<p>[Instance: attachDisk API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances/attachDisk}\">https://cloud.google.com/compute/docs/reference/v1/instances/attachDisk}</a> </p>"
+        "string": "[Instance: attachDisk API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/attachDisk}",
+        "html": "<p>[Instance: attachDisk API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances/attachDisk}\">https://cloud.google.com/compute/docs/reference/v1/instances/attachDisk}</a></p>"
       },
       {
         "type": "throws",
-        "string": "{Error} if a {module:compute/disk} is not provided.\n",
+        "string": "{Error} if a {module:compute/disk} is not provided.",
         "types": [
           "Error"
         ],
-        "description": "<p>if a {module:compute/disk} is not provided. </p>"
+        "description": "<p>if a {module:compute/disk} is not provided.</p>"
       },
       {
         "type": "param",
@@ -323,9 +323,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -366,8 +366,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Instance: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/delete} ",
-        "html": "<p>[Instance: delete API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances/delete}\">https://cloud.google.com/compute/docs/reference/v1/instances/delete}</a> </p>"
+        "string": "[Instance: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/delete}",
+        "html": "<p>[Instance: delete API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances/delete}\">https://cloud.google.com/compute/docs/reference/v1/instances/delete}</a></p>"
       },
       {
         "type": "param",
@@ -413,9 +413,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -456,16 +456,16 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Instance: detachDisk API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/detachDisk} ",
-        "html": "<p>[Instance: detachDisk API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances/detachDisk}\">https://cloud.google.com/compute/docs/reference/v1/instances/detachDisk}</a> </p>"
+        "string": "[Instance: detachDisk API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/detachDisk}",
+        "html": "<p>[Instance: detachDisk API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances/detachDisk}\">https://cloud.google.com/compute/docs/reference/v1/instances/detachDisk}</a></p>"
       },
       {
         "type": "throws",
-        "string": "{Error} if a {module:compute/disk} is not provided.\n",
+        "string": "{Error} if a {module:compute/disk} is not provided.",
         "types": [
           "Error"
         ],
-        "description": "<p>if a {module:compute/disk} is not provided. </p>"
+        "description": "<p>if a {module:compute/disk} is not provided.</p>"
       },
       {
         "type": "param",
@@ -525,9 +525,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -573,8 +573,8 @@
       },
       {
         "type": "resource",
-        "string": "[Instance: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/get} ",
-        "html": "<p>[Instance: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances/get}\">https://cloud.google.com/compute/docs/reference/v1/instances/get}</a> </p>"
+        "string": "[Instance: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/get}",
+        "html": "<p>[Instance: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances/get}\">https://cloud.google.com/compute/docs/reference/v1/instances/get}</a></p>"
       },
       {
         "type": "param",
@@ -620,9 +620,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -663,8 +663,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Instances: getSerialPortOutput API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/getSerialPortOutput} ",
-        "html": "<p>[Instances: getSerialPortOutput API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances/getSerialPortOutput}\">https://cloud.google.com/compute/docs/reference/v1/instances/getSerialPortOutput}</a> </p>"
+        "string": "[Instances: getSerialPortOutput API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/getSerialPortOutput}",
+        "html": "<p>[Instances: getSerialPortOutput API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances/getSerialPortOutput}\">https://cloud.google.com/compute/docs/reference/v1/instances/getSerialPortOutput}</a></p>"
       },
       {
         "type": "param",
@@ -724,9 +724,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -823,9 +823,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -866,8 +866,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Instances: reset API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/reset} ",
-        "html": "<p>[Instances: reset API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances/reset}\">https://cloud.google.com/compute/docs/reference/v1/instances/reset}</a> </p>"
+        "string": "[Instances: reset API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/reset}",
+        "html": "<p>[Instances: reset API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances/reset}\">https://cloud.google.com/compute/docs/reference/v1/instances/reset}</a></p>"
       },
       {
         "type": "param",
@@ -913,9 +913,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -956,8 +956,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Instances: setTags API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/setTags} ",
-        "html": "<p>[Instances: setTags API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances/setTags}\">https://cloud.google.com/compute/docs/reference/v1/instances/setTags}</a> </p>"
+        "string": "[Instances: setTags API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/setTags}",
+        "html": "<p>[Instances: setTags API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances/setTags}\">https://cloud.google.com/compute/docs/reference/v1/instances/setTags}</a></p>"
       },
       {
         "type": "param",
@@ -1031,9 +1031,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1074,8 +1074,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Instances: start API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/start} ",
-        "html": "<p>[Instances: start API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances/start}\">https://cloud.google.com/compute/docs/reference/v1/instances/start}</a> </p>"
+        "string": "[Instances: start API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/start}",
+        "html": "<p>[Instances: start API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances/start}\">https://cloud.google.com/compute/docs/reference/v1/instances/start}</a></p>"
       },
       {
         "type": "param",
@@ -1121,9 +1121,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1164,8 +1164,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Instances: stop API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/stop} ",
-        "html": "<p>[Instances: stop API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances/stop}\">https://cloud.google.com/compute/docs/reference/v1/instances/stop}</a> </p>"
+        "string": "[Instances: stop API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/stop}",
+        "html": "<p>[Instances: stop API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/instances/stop}\">https://cloud.google.com/compute/docs/reference/v1/instances/stop}</a></p>"
       },
       {
         "type": "param",
@@ -1211,9 +1211,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1254,7 +1254,7 @@
     "tags": [
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },

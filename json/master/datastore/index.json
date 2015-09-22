@@ -198,9 +198,9 @@
       },
       {
         "type": "param",
-        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).\n",
+        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).",
         "name": "options",
-        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>. </li>\n</ul>\n",
+        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -406,7 +406,7 @@
       },
       {
         "type": "return",
-        "string": "{object}\n",
+        "string": "{object}",
         "types": [
           "object"
         ],
@@ -462,7 +462,7 @@
       },
       {
         "type": "return",
-        "string": "{object}\n",
+        "string": "{object}",
         "types": [
           "object"
         ],

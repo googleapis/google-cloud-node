@@ -46,8 +46,8 @@
       },
       {
         "type": "alias",
-        "string": "module:search/field ",
-        "html": "<p>module:search/field </p>"
+        "string": "module:search/field",
+        "html": "<p>module:search/field</p>"
       },
       {
         "type": "example",
@@ -78,9 +78,9 @@
     "tags": [
       {
         "type": "param",
-        "string": "{string} atom - String value.\n",
+        "string": "{string} atom - String value.",
         "name": "atom",
-        "description": "<ul>\n<li>String value. </li>\n</ul>\n",
+        "description": "<ul>\n<li>String value.</li>\n</ul>\n",
         "types": [
           "string"
         ],
@@ -150,9 +150,9 @@
       },
       {
         "type": "param",
-        "string": "{number} geo.longitude - Longitudinal value.\n",
+        "string": "{number} geo.longitude - Longitudinal value.",
         "name": "geo.longitude",
-        "description": "<ul>\n<li>Longitudinal value. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Longitudinal value.</li>\n</ul>\n",
         "types": [
           "number"
         ],
@@ -193,9 +193,9 @@
     "tags": [
       {
         "type": "param",
-        "string": "{string} html - HTML value.\n",
+        "string": "{string} html - HTML value.",
         "name": "html",
-        "description": "<ul>\n<li>HTML value. </li>\n</ul>\n",
+        "description": "<ul>\n<li>HTML value.</li>\n</ul>\n",
         "types": [
           "string"
         ],
@@ -236,17 +236,17 @@
     "tags": [
       {
         "type": "throws",
-        "string": "{error} If a number is not provided.\n",
+        "string": "{error} If a number is not provided.",
         "types": [
           "error"
         ],
-        "description": "<p>If a number is not provided. </p>"
+        "description": "<p>If a number is not provided.</p>"
       },
       {
         "type": "param",
-        "string": "{number} number - Number value.\n",
+        "string": "{number} number - Number value.",
         "name": "number",
-        "description": "<ul>\n<li>Number value. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Number value.</li>\n</ul>\n",
         "types": [
           "number"
         ],
@@ -315,7 +315,7 @@
       },
       {
         "type": "param",
-        "string": "{string} options.format - One of `ATOM`, `HTML`, or `TEXT`. (Default:\n    `TEXT`).\n",
+        "string": "{string} options.format - One of `ATOM`, `HTML`, or `TEXT`. (Default:\n    `TEXT`).",
         "name": "options.format",
         "description": "<ul>\n<li>One of <code>ATOM</code>, <code>HTML</code>, or <code>TEXT</code>. (Default:     <code>TEXT</code>).</li>\n</ul>\n",
         "types": [
@@ -358,9 +358,9 @@
     "tags": [
       {
         "type": "param",
-        "string": "{string|date} timestamp - Timestamp value.\n",
+        "string": "{string|date} timestamp - Timestamp value.",
         "name": "timestamp",
-        "description": "<ul>\n<li>Timestamp value. </li>\n</ul>\n",
+        "description": "<ul>\n<li>Timestamp value.</li>\n</ul>\n",
         "types": [
           "string",
           "date"

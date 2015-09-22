@@ -377,16 +377,16 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Datasets: lookup API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/lookup} ",
-        "html": "<p>[Datasets: lookup API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/lookup}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/lookup}</a> </p>"
+        "string": "[Datasets: lookup API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/lookup}",
+        "html": "<p>[Datasets: lookup API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/lookup}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/lookup}</a></p>"
       },
       {
         "type": "throws",
-        "string": "{Error} If at least one Key object is not provided.\n",
+        "string": "{Error} If at least one Key object is not provided.",
         "types": [
           "Error"
         ],
-        "description": "<p>If at least one Key object is not provided. </p>"
+        "description": "<p>If at least one Key object is not provided.</p>"
       },
       {
         "type": "param",
@@ -433,7 +433,7 @@
       },
       {
         "type": "param",
-        "string": "{module:datastore/entity|module:datastore/entity[]} callback.entity -\n    Will return either a single Entity or a list of Entities.\n",
+        "string": "{module:datastore/entity|module:datastore/entity[]} callback.entity -\n    Will return either a single Entity or a list of Entities.",
         "name": "callback.entity",
         "description": "<ul>\n<li>Will return either a single Entity or a list of Entities.</li>\n</ul>\n",
         "types": [
@@ -500,14 +500,14 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Datasets: commit API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit} ",
-        "html": "<p>[Datasets: commit API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit}</a> </p>"
+        "string": "[Datasets: commit API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit}",
+        "html": "<p>[Datasets: commit API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit}</a></p>"
       },
       {
         "type": "borrows",
-        "string": "{module:datastore/transaction#save} as save\n",
+        "string": "{module:datastore/transaction#save} as save",
         "otherMemberName": "{module:datastore/transaction#save}",
-        "thisMemberName": "save ",
+        "thisMemberName": "save",
         "html": "<p>{module:datastore/transaction#save} as save</p>"
       },
       {
@@ -598,9 +598,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -641,8 +641,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Datasets: commit API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit#mutation.delete} ",
-        "html": "<p>[Datasets: commit API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit#mutation.delete}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit#mutation.delete}</a> </p>"
+        "string": "[Datasets: commit API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit#mutation.delete}",
+        "html": "<p>[Datasets: commit API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit#mutation.delete}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/commit#mutation.delete}</a></p>"
       },
       {
         "type": "param",
@@ -689,9 +689,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -732,8 +732,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Datasets: runQuery API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/runQuery} ",
-        "html": "<p>[Datasets: runQuery API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/runQuery}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/runQuery}</a> </p>"
+        "string": "[Datasets: runQuery API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/runQuery}",
+        "html": "<p>[Datasets: runQuery API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/runQuery}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/runQuery}</a></p>"
       },
       {
         "type": "param",
@@ -863,9 +863,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -906,8 +906,8 @@
     "tags": [
       {
         "type": "resource",
-        "string": "[Datasets: allocateIds API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/allocateIds} ",
-        "html": "<p>[Datasets: allocateIds API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/allocateIds}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/allocateIds}</a> </p>"
+        "string": "[Datasets: allocateIds API Documentation]{@link https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/allocateIds}",
+        "html": "<p>[Datasets: allocateIds API Documentation]{@link <a href=\"https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/allocateIds}\">https://cloud.google.com/datastore/docs/apis/v1beta2/datasets/allocateIds}</a></p>"
       },
       {
         "type": "param",
@@ -981,9 +981,9 @@
       },
       {
         "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.\n",
+        "string": "{object} callback.apiResponse - The full API response.",
         "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -1098,9 +1098,9 @@
       },
       {
         "type": "param",
-        "string": "{function} callback - The callback function.\n",
+        "string": "{function} callback - The callback function.",
         "name": "callback",
-        "description": "<ul>\n<li>The callback function. </li>\n</ul>\n",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
         "types": [
           "function"
         ],
@@ -1112,7 +1112,7 @@
       },
       {
         "type": "private",
-        "string": "\n",
+        "string": "",
         "visibility": "private",
         "html": ""
       },
