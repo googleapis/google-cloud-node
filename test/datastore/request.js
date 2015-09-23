@@ -455,6 +455,18 @@ describe('Request', function() {
       ], done);
     });
 
+    it('should throw if a given method is not recognized', function() {
+      assert.throws(function() {
+        request.save({
+          key: key,
+          method: 'auto_insert_id',
+          data: {
+            k: 'v'
+          }
+        }, assert.ifError);
+      }, /Method auto_insert_id not recognized/);
+    });
+
     it('should not alter the provided data object', function(done) {
       var entities = [
         {
