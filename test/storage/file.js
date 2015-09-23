@@ -1499,9 +1499,8 @@ describe('File', function() {
       file.getSignedPolicy({
         expires: Date.now() + 5
       }, function(err) {
-        var errorMessage = 'Signing failed. See `error` property.';
-        assert.strictEqual(err.message, errorMessage);
-        assert.strictEqual(err.error, error);
+        assert.strictEqual(err.name, 'SigningError');
+        assert.strictEqual(err.message, error.message);
         done();
       });
     });
@@ -1516,10 +1515,11 @@ describe('File', function() {
         expires: Date.now() + 5
       }, function(err) {
         var errorMessage = [
-          'Signing failed. Could not find a `private_key`.',
+          'Could not find a `private_key`.',
           'Please verify you are authorized with this property available.'
         ].join(' ');
 
+        assert.strictEqual(err.name, 'SigningError');
         assert.strictEqual(err.message, errorMessage);
         done();
       });
@@ -1789,9 +1789,8 @@ describe('File', function() {
         action: 'read',
         expires: Date.now() + 5
       }, function(err) {
-        var errorMessage = 'Signing failed. See `error` property.';
-        assert.strictEqual(err.message, errorMessage);
-        assert.strictEqual(err.error, error);
+        assert.strictEqual(err.name, 'SigningError');
+        assert.strictEqual(err.message, error.message);
         done();
       });
     });
@@ -1807,10 +1806,11 @@ describe('File', function() {
         expires: Date.now() + 5
       }, function(err) {
         var errorMessage = [
-          'Signing failed. Could not find a `private_key` or `client_email`.',
+          'Could not find a `private_key` or `client_email`.',
           'Please verify you are authorized with these credentials available.'
         ].join(' ');
 
+        assert.strictEqual(err.name, 'SigningError');
         assert.strictEqual(err.message, errorMessage);
         done();
       });
