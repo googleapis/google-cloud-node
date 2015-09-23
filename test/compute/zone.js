@@ -60,7 +60,12 @@ describe('Zone', function() {
   var zone;
 
   var COMPUTE = {
-    authConfig: { a: 'b', c: 'd' }
+    makeAuthenticatedRequest_: {
+      authClient: {
+        a: 'b',
+        c: 'd'
+      }
+    }
   };
   var ZONE_NAME = 'us-central1-a';
 
@@ -111,7 +116,8 @@ describe('Zone', function() {
       var gceVal = 'ok';
 
       gceImagesOverride = function(authConfig) {
-        assert.strictEqual(authConfig, COMPUTE.authConfig);
+        var expectedAuthClient = COMPUTE.makeAuthenticatedRequest_.authClient;
+        assert.strictEqual(authConfig.authClient, expectedAuthClient);
         return gceVal;
       };
 
