@@ -51,6 +51,7 @@
     "arrify": "^1.0.0",
     "async": "^1.4.2",
     "concat-stream": "^1.5.0",
+    "create-error-class": "^2.0.1",
     "dns-zonefile": "0.1.10",
     "duplexify": "^3.2.0",
     "extend": "^3.0.0",
