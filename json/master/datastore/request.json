@@ -511,6 +511,14 @@
         "html": "<p>{module:datastore/transaction#save} as save</p>"
       },
       {
+        "type": "throws",
+        "string": "{Error} If an unrecognized method is provided.",
+        "types": [
+          "Error"
+        ],
+        "description": "<p>If an unrecognized method is provided.</p>"
+      },
+      {
         "type": "param",
         "string": "{object|object[]} entities - Datastore key object(s).",
         "name": "entities",
@@ -541,9 +549,9 @@
       },
       {
         "type": "param",
-        "string": "{string=} entities.method - Optional method to explicity use for save.\n    The choices include 'insert', 'update', 'upsert' and 'auto_insert_id'.",
+        "string": "{string=} entities.method - Optional method to explicity use for save.\n    The choices include 'insert', 'update', 'upsert' and 'insert_auto_id'.",
         "name": "entities.method",
-        "description": "<ul>\n<li>Optional method to explicity use for save.     The choices include &#39;insert&#39;, &#39;update&#39;, &#39;upsert&#39; and &#39;auto_insert_id&#39;.</li>\n</ul>\n",
+        "description": "<ul>\n<li>Optional method to explicity use for save.     The choices include &#39;insert&#39;, &#39;update&#39;, &#39;upsert&#39; and &#39;insert_auto_id&#39;.</li>\n</ul>\n",
         "types": [
           "string"
         ],
@@ -627,8 +635,8 @@
     "isEvent": false,
     "ignore": false,
     "line": 211,
-    "codeStart": 380,
-    "code": "DatastoreRequest.prototype.save = function(entities, callback) {\n  entities = arrify(entities);\n\n  var insertIndexes = [];\n\n  var req = {\n    mutation: entities.reduce(function(acc, entityObject, index) {\n      entityObject = extend(true, {}, entityObject);\n\n      var ent = {};\n      var method = entityObject.method;\n      delete entityObject.method;\n\n      if (Array.isArray(entityObject.data)) {\n        ent.property = entityObject.data.map(function(data) {\n          data.value = entity.valueToProperty(data.value);\n\n          if (is.boolean(data.excludeFromIndexes)) {\n            var indexed = !data.excludeFromIndexes;\n\n            if (is.array(data.value.list_value)) {\n              data.value.list_value =\n                data.value.list_value.map(propAssign('indexed', indexed));\n            } else {\n              data.value.indexed = indexed;\n            }\n\n            delete data.excludeFromIndexes;\n          }\n\n          return data;\n        });\n      } else {\n        ent = entity.entityToEntityProto(entityObject.data);\n      }\n\n      ent.key = entity.keyToKeyProto(entityObject.key);\n\n      if (method) {\n        switch (method) {\n          case 'insert': {\n            acc.insert.push(ent);\n            break;\n          }\n          case 'update': {\n            acc.update.push(ent);\n            break;\n          }\n          case 'upsert': {\n            acc.upsert.push(ent);\n            break;\n          }\n          case 'insert_auto_id': {\n            insertIndexes.push(index);\n            acc.insert_auto_id.push(ent);\n            break;\n          }\n        }\n      } else {\n        if (entity.isKeyComplete(entityObject.key)) {\n          acc.upsert.push(ent);\n        } else {\n          insertIndexes.push(index);\n          acc.insert_auto_id.push(ent);\n        }\n      }\n\n      return acc;\n    }, {\n      insert: [],\n      update: [],\n      upsert: [],\n      insert_auto_id: []\n    })\n  };\n\n  if (this.id) {\n    this.requests_.push(req);\n    this.requestCallbacks_.push(onCommit);\n    return;\n  } else {\n    this.makeReq_('commit', req, onCommit);\n  }\n\n  function onCommit(err, resp) {\n    if (err || !resp) {\n      callback(err, resp);\n      return;\n    }\n\n    var autoInserted = (resp.mutation_result.insert_auto_id_key || []);\n    autoInserted.forEach(function(key, index) {\n      var path = entity.keyFromKeyProto(key).path;\n      entities[insertIndexes[index]].key.path = path;\n    });\n\n    callback(null, resp);\n  }\n};",
+    "codeStart": 382,
+    "code": "DatastoreRequest.prototype.save = function(entities, callback) {\n  entities = arrify(entities);\n\n  var insertIndexes = [];\n\n  var mutation = {\n    insert: [],\n    update: [],\n    upsert: [],\n    insert_auto_id: []\n  };\n\n  // Iterate over the entity objects, build a proto from all keys and values,\n  // then place in the correct mutation array (insert, update, etc).\n  entities.forEach(function(entityObject, index) {\n    entityObject = extend(true, {}, entityObject);\n\n    var entityProto = {};\n    var method = entityObject.method;\n\n    if (is.array(entityObject.data)) {\n      entityProto.property = entityObject.data.map(function(data) {\n        data.value = entity.valueToProperty(data.value);\n\n        if (is.boolean(data.excludeFromIndexes)) {\n          var indexed = !data.excludeFromIndexes;\n\n          if (is.array(data.value.list_value)) {\n            data.value.list_value =\n              data.value.list_value.map(propAssign('indexed', indexed));\n          } else {\n            data.value.indexed = indexed;\n          }\n\n          delete data.excludeFromIndexes;\n        }\n\n        return data;\n      });\n    } else {\n      entityProto = entity.entityToEntityProto(entityObject.data);\n    }\n\n    entityProto.key = entity.keyToKeyProto(entityObject.key);\n\n    if (method) {\n      if (mutation[method]) {\n        mutation[method].push(entityProto);\n\n        if (method === 'insert_auto_id') {\n          insertIndexes.push(index);\n        }\n      } else {\n        throw new Error('Method ' + method + ' not recognized.');\n      }\n    } else {\n      if (entity.isKeyComplete(entityObject.key)) {\n        mutation.upsert.push(entityProto);\n      } else {\n        insertIndexes.push(index);\n        mutation.insert_auto_id.push(entityProto);\n      }\n    }\n  });\n\n  var req = {\n    mutation: mutation\n  };\n\n  if (this.id) {\n    this.requests_.push(req);\n    this.requestCallbacks_.push(onCommit);\n    return;\n  } else {\n    this.makeReq_('commit', req, onCommit);\n  }\n\n  function onCommit(err, resp) {\n    if (err || !resp) {\n      callback(err, resp);\n      return;\n    }\n\n    var autoInserted = (resp.mutation_result.insert_auto_id_key || []);\n    autoInserted.forEach(function(key, index) {\n      var path = entity.keyFromKeyProto(key).path;\n      entities[insertIndexes[index]].key.path = path;\n    });\n\n    callback(null, resp);\n  }\n};",
     "ctx": {
       "type": "method",
       "constructor": "DatastoreRequest",
@@ -717,8 +725,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 480,
-    "codeStart": 505,
+    "line": 475,
+    "codeStart": 500,
     "code": "DatastoreRequest.prototype.delete = function(keys, callback) {\n  callback = callback || util.noop;\n\n  var req = {\n    mutation: {\n      delete: arrify(keys).map(entity.keyToKeyProto)\n    }\n  };\n\n  if (this.id) {\n    this.requests_.push(req);\n    return;\n  }\n\n  this.makeReq_('commit', req, callback);\n};",
     "ctx": {
       "type": "method",
@@ -891,8 +899,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 522,
-    "codeStart": 607,
+    "line": 517,
+    "codeStart": 602,
     "code": "DatastoreRequest.prototype.runQuery = function(query, callback) {\n  var req = {\n    read_options: {},\n    query: entity.queryToQueryProto(query)\n  };\n\n  if (query.namespace) {\n    req.partition_id = {\n      namespace: query.namespace\n    };\n  }\n\n  this.makeReq_('runQuery', req, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var entities = entity.formatArray(resp.batch.entity_result);\n    var nextQuery = null;\n\n    if (resp.batch.end_cursor && entities.length > 0) {\n      var endCursor = resp.batch.end_cursor.toBase64();\n\n      nextQuery = extend(true, new Query(), query);\n      nextQuery.start(endCursor).offset(0);\n    }\n\n    callback(null, entities, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1009,8 +1017,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 639,
-    "codeStart": 674,
+    "line": 634,
+    "codeStart": 669,
     "code": "DatastoreRequest.prototype.allocateIds = function(incompleteKey, n, callback) {\n  if (entity.isKeyComplete(incompleteKey)) {\n    throw new Error('An incomplete key should be provided.');\n  }\n\n  var incompleteKeys = [];\n  for (var i = 0; i < n; i++) {\n    incompleteKeys.push(entity.keyToKeyProto(incompleteKey));\n  }\n\n  var req = {\n    key: incompleteKeys\n  };\n\n  this.makeReq_('allocateIds', req, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var keys = (resp.key || []).map(entity.keyFromKeyProto);\n\n    callback(null, keys, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1032,8 +1040,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 700,
-    "codeStart": 703,
+    "line": 695,
+    "codeStart": 698,
     "code": "DatastoreRequest.prototype.update = function(entities, callback) {\n  entities = arrify(entities).map(propAssign('method', 'update'));\n  this.save(entities, callback);\n};",
     "ctx": {
       "type": "method",
@@ -1055,8 +1063,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 708,
-    "codeStart": 711,
+    "line": 703,
+    "codeStart": 706,
     "code": "DatastoreRequest.prototype.upsert = function(entities, callback) {\n  entities = arrify(entities).map(propAssign('method', 'upsert'));\n  this.save(entities, callback);\n};",
     "ctx": {
       "type": "method",
@@ -1132,8 +1140,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 716,
-    "codeStart": 739,
+    "line": 711,
+    "codeStart": 734,
     "code": "DatastoreRequest.prototype.makeReq_ = function(method, body, callback) {\n  // TODO: Handle non-HTTP 200 cases.\n  if (!callback) {\n    callback = body;\n    body = {};\n  }\n\n  callback = callback || util.noop;\n\n  // Set properties to indicate if we're in a transaction or not.\n  if (method === 'commit') {\n    if (this.id) {\n      body.mode = MODE_TRANSACTIONAL;\n      body.transaction = this.id;\n    } else {\n      body.mode = MODE_NON_TRANSACTIONAL;\n    }\n  }\n\n  if (method === 'rollback') {\n    body.transaction = this.id;\n  }\n\n  if (method === 'lookup' && this.id) {\n    body.read_options = body.read_options || {};\n    body.read_options.transaction = this.id;\n  }\n\n  var pbKey = method[0].toUpperCase() + method.substr(1);\n  var pbRequest = new pb[pbKey + 'Request'](body).toBuffer();\n  var pbResponse = pb[pbKey + 'Response'];\n\n  var reqOpts = {\n    method: 'POST',\n    uri: format('{apiEndpoint}/{path}/{projectId}/{method}', {\n      apiEndpoint: this.apiEndpoint,\n      path: 'datastore/v1beta2/datasets',\n      projectId: this.projectId,\n      method: method\n    }),\n    headers: {\n      'Content-Type': 'application/x-protobuf'\n    }\n  };\n\n  this.makeAuthenticatedRequest_(reqOpts, {\n    onAuthenticated: function(err, authenticatedReqOpts) {\n      if (err) {\n        callback(err, null); // TODO(ryanseys): What goes as third parameter?\n        return;\n      }\n\n      authenticatedReqOpts.headers = authenticatedReqOpts.headers || {};\n      authenticatedReqOpts.headers['Content-Length'] = pbRequest.length;\n\n      var apiRequest = request(authenticatedReqOpts);\n\n      apiRequest.on('error', callback);\n\n      apiRequest.on('response', function(resp) {\n        var buffer = new Buffer('');\n        resp.on('data', function(chunk) {\n          buffer = Buffer.concat([buffer, chunk]);\n        });\n        resp.on('end', function() {\n          util.handleResp(null, resp, buffer.toString(), function(err, result) {\n            if (err) {\n              callback(err, null, result);\n              return;\n            }\n            callback(null, pbResponse.decode(buffer), result);\n          });\n        });\n      });\n\n      apiRequest.end(pbRequest);\n    }\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1155,8 +1163,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 819,
-    "codeStart": 824,
+    "line": 814,
+    "codeStart": 819,
     "code": "streamRouter.extend(DatastoreRequest, 'runQuery');\n\nmodule.exports = DatastoreRequest;",
     "ctx": false
   }
