@@ -144,17 +144,6 @@ describe('Compute', function() {
       fakeUtil.normalizeArguments = normalizeArguments;
     });
 
-    it('should localize authConfig', function() {
-      var compute = new Compute(options);
-
-      assert.deepEqual(compute.authConfig, {
-        credentials: options.credentials,
-        keyFile: options.keyFilename,
-        email: options.email,
-        scopes: ['https://www.googleapis.com/auth/compute']
-      });
-    });
-
     it('should create a makeAuthenticatedRequest method', function(done) {
       fakeUtil.makeAuthenticatedRequestFactory = function(options_) {
         assert.deepEqual(options_, {
