@@ -89,7 +89,7 @@
     "dns-zonefile": "0.1.10",
     "duplexify": "^3.2.0",
     "extend": "^3.0.0",
-    "gce-images": "^0.1.0",
+    "gce-images": "^0.2.0",
     "gcs-resumable-upload": "^0.2.1",
     "google-auto-auth": "^0.2.0",
     "hash-stream-validation": "^0.1.0",
