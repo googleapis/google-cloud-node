@@ -1,0 +1,558 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2015 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2015 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
+  },
+  {
+    "tags": [
+      {
+        "type": "module",
+        "string": "compute/operation",
+        "html": "<p>compute/operation</p>"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 17,
+    "codeStart": 21,
+    "code": "'use strict';\n\nvar extend = require('extend');\nvar is = require('is');",
+    "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/util}",
+        "types": [
+          "module:common/util"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 26,
+    "codeStart": 30,
+    "code": "var util = require('../common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{module:compute} scope - The scope of the operation: a `Compute`,\n    `Zone`, or `Region` object.",
+        "name": "scope",
+        "description": "<ul>\n<li>The scope of the operation: a <code>Compute</code>,     <code>Zone</code>, or <code>Region</code> object.</li>\n</ul>\n",
+        "types": [
+          "module:compute"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acompute.html\">compute</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} name - Operation name.",
+        "name": "name",
+        "description": "<ul>\n<li>Operation name.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Developer Documentation</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 32,
+    "codeStart": 38
+  },
+  {
+    "tags": [
+      {
+        "type": "constructor",
+        "string": "",
+        "html": ""
+      },
+      {
+        "type": "alias",
+        "string": "module:compute/operation",
+        "html": "<p>module:compute/operation</p>"
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'grape-spaceship-123'\n});\n\nvar gce = gcloud.compute();\n\n//-\n// Reference a global operation.\n//-\nvar operation = gce.operation('operation-id');\n\n//-\n// Reference a region operation.\n//-\nvar region = gce.region('us-central1');\nvar operation = region.operation('operation-id');\n\n//-\n// Reference a zone operation.\n//-\nvar zone = gce.zone('us-central1-a');\nvar operation = zone.operation('operation-id');",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>var gce = gcloud.compute();</p><p>//-<br />// Reference a global operation.<br />//-<br />var operation = gce.operation(&#39;operation-id&#39;);</p><p>//-<br />// Reference a region operation.<br />//-<br />var region = gce.region(&#39;us-central1&#39;);<br />var operation = region.operation(&#39;operation-id&#39;);</p><p>//-<br />// Reference a zone operation.<br />//-<br />var zone = gce.zone(&#39;us-central1-a&#39;);<br />var operation = zone.operation(&#39;operation-id&#39;);</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>An Operation object allows you to interact with a Google Compute Engine<br />operation.</p><p>An operation can be a<br /><a href=\"https://cloud.google.com/compute/docs/reference/v1/globalOperations\">GlobalOperation</a>,<br /><a href=\"https://cloud.google.com/compute/docs/reference/v1/regionOperations\">RegionOperation</a>,<br />or<br /><a href=\"https://cloud.google.com/compute/docs/reference/v1/zoneOperations\">ZoneOperation</a>.</p>",
+      "summary": "<p>An Operation object allows you to interact with a Google Compute Engine<br />operation.</p>",
+      "body": "<p>An operation can be a<br /><a href=\"https://cloud.google.com/compute/docs/reference/v1/globalOperations\">GlobalOperation</a>,<br /><a href=\"https://cloud.google.com/compute/docs/reference/v1/regionOperations\">RegionOperation</a>,<br />or<br /><a href=\"https://cloud.google.com/compute/docs/reference/v1/zoneOperations\">ZoneOperation</a>.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": true,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 38,
+    "codeStart": 76,
+    "code": "function Operation(scope, name) {\n  this.scope = scope;\n  this.name = name;\n  this.metadata = {};\n}",
+    "ctx": {
+      "type": "constructor",
+      "name": "Operation",
+      "string": "Operation()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[GlobalOperations: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations/delete}",
+        "html": "<p>[GlobalOperations: delete API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/globalOperations/delete}\">https://cloud.google.com/compute/docs/reference/v1/globalOperations/delete}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[RegionOperations: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations/delete}",
+        "html": "<p>[RegionOperations: delete API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/regionOperations/delete}\">https://cloud.google.com/compute/docs/reference/v1/regionOperations/delete}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[ZoneOperations: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations/delete}",
+        "html": "<p>[ZoneOperations: delete API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/zoneOperations/delete}\">https://cloud.google.com/compute/docs/reference/v1/zoneOperations/delete}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "operation.delete(function(err, apiResponse) {});",
+        "html": "<p>operation.delete(function(err, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Delete the operation.</p>",
+      "summary": "<p>Delete the operation.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 82,
+    "codeStart": 96,
+    "code": "Operation.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n\n  this.makeReq_('DELETE', '', null, null, function(err, resp) {\n    callback(err, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Operation",
+      "cons": "Operation",
+      "name": "delete",
+      "string": "Operation.prototype.delete()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[GlobalOperations: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations/get}",
+        "html": "<p>[GlobalOperations: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/globalOperations/get}\">https://cloud.google.com/compute/docs/reference/v1/globalOperations/get}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[RegionOperations: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations/get}",
+        "html": "<p>[RegionOperations: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/regionOperations/get}\">https://cloud.google.com/compute/docs/reference/v1/regionOperations/get}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[ZoneOperations: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations/get}",
+        "html": "<p>[ZoneOperations: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/zoneOperations/get}\">https://cloud.google.com/compute/docs/reference/v1/zoneOperations/get}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.metadata - The disk's metadata.",
+        "name": "callback.metadata",
+        "description": "<ul>\n<li>The disk&#39;s metadata.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "operation.getMetadata(function(err, metadata, apiResponse) {\n  // `metadata.error`: Contains errors if the operation failed.\n  // `metadata.warnings`: Contains warnings.\n});",
+        "html": "<p>operation.getMetadata(function(err, metadata, apiResponse) {<br />  // <code>metadata.error</code>: Contains errors if the operation failed.<br />  // <code>metadata.warnings</code>: Contains warnings.<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get the operation&#39;s metadata. For a detailed description of metadata see<br /><a href=\"https://goo.gl/sWm1rt\">Operation resource</a>.</p>",
+      "summary": "<p>Get the operation&#39;s metadata. For a detailed description of metadata see<br /><a href=\"https://goo.gl/sWm1rt\">Operation resource</a>.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 104,
+    "codeStart": 123,
+    "code": "Operation.prototype.getMetadata = function(callback) {\n  var self = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('GET', '', null, null, function(err, resp) {\n    // An Operation entity contains a property named `error`. This makes\n    // `makeReq_` think the operation failed, and will return an ApiError to\n    // this callback. We have to make sure this isn't a false error by seeing if\n    // the response body contains a property that wouldn't exist on a failed API\n    // request (`name`).\n    var isActualError = err && (!resp || resp.name !== self.name);\n\n    if (isActualError) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.metadata = resp;\n\n    callback(null, self.metadata, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Operation",
+      "cons": "Operation",
+      "name": "getMetadata",
+      "string": "Operation.prototype.getMetadata()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{object=} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.maxAttempts - Maximum number of attempts to make an\n    API request to check if the operation is complete. (Default: `10`)",
+        "name": "options.maxAttempts",
+        "description": "<ul>\n<li>Maximum number of attempts to make an     API request to check if the operation is complete. (Default: <code>10</code>)</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.interval - Amount of time in milliseconds between\n    each request. (Default: `3000`)",
+        "name": "options.interval",
+        "description": "<ul>\n<li>Amount of time in milliseconds between     each request. (Default: <code>3000</code>)</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.metadata - The operation's metadata.",
+        "name": "callback.metadata",
+        "description": "<ul>\n<li>The operation&#39;s metadata.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "operation.onComplete(function(err, metadata) {\n  if (err.code === 'OPERATION_INCOMPLETE') {\n    // The operation is not complete yet. You may want to register another\n    // `onComplete` listener or queue for later.\n  }\n\n  if (!err) {\n    // Operation complete!\n  }\n});",
+        "html": "<p>operation.onComplete(function(err, metadata) {<br />  if (err.code === &#39;OPERATION_INCOMPLETE&#39;) {<br />    // The operation is not complete yet. You may want to register another<br />    // <code>onComplete</code> listener or queue for later.<br />  }</p><p>  if (!err) {<br />    // Operation complete!<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Register a callback for when the operation is complete.</p><p>If the operation doesn&#39;t complete after the maximum number of attempts have<br />been made (see <code>options.maxAttempts</code> and <code>options.interval</code>), an error will<br />be provided to your callback with code: <code>OPERATION_INCOMPLETE</code>.</p>",
+      "summary": "<p>Register a callback for when the operation is complete.</p>",
+      "body": "<p>If the operation doesn&#39;t complete after the maximum number of attempts have<br />been made (see <code>options.maxAttempts</code> and <code>options.interval</code>), an error will<br />be provided to your callback with code: <code>OPERATION_INCOMPLETE</code>.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 147,
+    "codeStart": 175,
+    "code": "Operation.prototype.onComplete = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = extend({\n    maxAttempts: 10,\n    interval: 3000\n  }, options);\n\n  var didNotCompleteError = new Error('Operation did not complete.');\n  didNotCompleteError.code = 'OPERATION_INCOMPLETE';\n\n  var numAttempts = 0;\n\n  function checkMetadata() {\n    numAttempts++;\n\n    if (numAttempts > options.maxAttempts) {\n      callback(didNotCompleteError, self.metadata);\n      return;\n    }\n\n    setTimeout(function() {\n      self.getMetadata(onMetadata);\n    }, options.interval);\n  }\n\n  function onMetadata(err, metadata) {\n    if (err) {\n      callback(err, metadata);\n      return;\n    }\n\n    if (metadata.status !== 'DONE') {\n      checkMetadata();\n      return;\n    }\n\n    // The operation is complete.\n    callback(null, metadata);\n  }\n\n  checkMetadata();\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Operation",
+      "cons": "Operation",
+      "name": "onComplete",
+      "string": "Operation.prototype.onComplete()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{string} method - Action.",
+        "name": "method",
+        "description": "<ul>\n<li>Action.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} path - Request path.",
+        "name": "path",
+        "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{*} query - Request query object.",
+        "name": "query",
+        "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{*} body - Request body contents.",
+        "name": "body",
+        "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
+      "summary": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 224,
+    "codeStart": 236,
+    "code": "Operation.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/operations/' + this.name + path;\n\n  if (this.scope.constructor.name === 'Compute') {\n    path = '/global' + path;\n  }\n\n  this.scope.makeReq_(method, path, query, body, callback);\n};\n\nmodule.exports = Operation;",
+    "ctx": {
+      "type": "method",
+      "constructor": "Operation",
+      "cons": "Operation",
+      "name": "makeReq_",
+      "string": "Operation.prototype.makeReq_()"
+    }
+  }
+]
