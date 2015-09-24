@@ -783,6 +783,17 @@ describe('File', function() {
           .resume();
       });
 
+      it('should ignore a data mismatch if validation: false', function(done) {
+        requestOverride = getFakeSuccessfulRequest(data, {
+          headers: { 'x-goog-hash': 'md5=fakefakefake' }
+        });
+
+        file.createReadStream({ validation: false })
+          .resume()
+          .on('error', done)
+          .on('end', done);
+      });
+
       describe('destroying the through stream', function() {
         it('should destroy after failed validation', function(done) {
           requestOverride = getFakeSuccessfulRequest(
@@ -1145,6 +1156,23 @@ describe('File', function() {
           assert.equal(err.code, 'FILE_NO_UPLOAD');
           done();
         });
+      });
+
+      it('should ignore a data mismatch if validation: false', function(done) {
+        var writable = file.createWriteStream({ validation: false });
+
+        file.startResumableUpload_ = function(stream) {
+          setImmediate(function() {
+            file.metadata = { md5Hash: 'bad-hash' };
+            stream.emit('complete');
+          });
+        };
+
+        writable.write(data);
+        writable.end();
+
+        writable.on('error', done);
+        writable.on('finish', done);
       });
 
       it('should delete the file if validation fails', function(done) {
