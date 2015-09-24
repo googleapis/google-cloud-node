@@ -27,7 +27,7 @@ npm run coveralls
 npm run docs
 git submodule add -f -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} ghpages
 # copy set of json to tag folder
-mkdir ghpages/json/${TRAVIS_TAG}
+test -d "ghpages/json/${TRAVIS_TAG}" && exit 0 || mkdir ghpages/json/${TRAVIS_TAG}
 cp -R docs/json/master/* ghpages/json/${TRAVIS_TAG}
 cd ghpages
 git add json/${TRAVIS_TAG}
