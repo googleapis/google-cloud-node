@@ -43,11 +43,6 @@ describe('BigQuery/Dataset', function() {
   var ds;
 
   before(function() {
-    // If we don't stub see4_crc32 and use mockery, we get "Module did not self-
-    // register".
-    var crc32c = require('hash-stream-validation/node_modules/sse4_crc32');
-    mockery.registerMock('sse4_crc32', crc32c);
-
     mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
     mockery.enable({
       useCleanCache: true,
