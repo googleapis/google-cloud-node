@@ -41,37 +41,22 @@ describe('BigQuery', function() {
 
   before(function(done) {
     async.series([
-      function(next) {
-        // Delete the test dataset, if it exists.
-        bigquery.dataset(DATASET_ID).delete({ force: true }, function() {
-          next();
-        });
-      },
-
       // Create the test dataset.
       function(next) {
-        bigquery.createDataset(DATASET_ID, function(err, ds) {
+        bigquery.dataset(DATASET_ID).create(function(err, dataset_) {
           if (err) {
             next(err);
             return;
           }
 
-          dataset = ds;
-          next();
-        });
-      },
-
-      // Delete the test table, if it exists.
-      function(next) {
-        dataset.table(TABLE_ID).delete(function() {
+          dataset = dataset_;
           next();
         });
       },
 
       // Create the test table.
       function(next) {
-        dataset.createTable({
-          id: TABLE_ID,
+        dataset.table(TABLE_ID).create({
           schema: 'id:integer,breed,name,dob:timestamp'
         }, function(err, t) {
           if (err) {
@@ -86,13 +71,13 @@ describe('BigQuery', function() {
 
       // Create a Bucket.
       function(next) {
-        storage.createBucket(BUCKET_NAME, function(err, b) {
+        storage.createBucket(BUCKET_NAME, function(err, bucket_) {
           if (err) {
             next(err);
             return;
           }
 
-          bucket = b;
+          bucket = bucket_;
           next();
         });
       }
