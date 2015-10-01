@@ -60,7 +60,7 @@ describe('Compute', function() {
     before(function(done) {
       ADDRESS_NAME = generateName();
 
-      region.createAddress(ADDRESS_NAME, function(err, address_, operation) {
+      region.address(ADDRESS_NAME).create(function(err, address_, operation) {
         assert.ifError(err);
         address = address_;
         operation.onComplete(done);
@@ -113,7 +113,7 @@ describe('Compute', function() {
         os: 'ubuntu'
       };
 
-      zone.createDisk(DISK_NAME, config, function(err, disk_, operation) {
+      zone.disk(DISK_NAME).create(config, function(err, disk_, operation) {
         assert.ifError(err);
         disk = disk_;
         operation.onComplete(done);
@@ -155,7 +155,13 @@ describe('Compute', function() {
     });
 
     it('should take a snapshot', function(done) {
-      disk.createSnapshot(generateName(), done);
+      var MAX_TIME_ALLOWED = 90000;
+      this.timeout(MAX_TIME_ALLOWED);
+
+      disk.snapshot(generateName()).create(function(err, snapshot, operation) {
+        assert.ifError(err);
+        operation.onComplete(getOperationOptions(MAX_TIME_ALLOWED), done);
+      });
     });
   });
 
@@ -190,8 +196,9 @@ describe('Compute', function() {
     before(function(done) {
       FIREWALL_NAME = generateName();
 
-      compute.createFirewall(
-        FIREWALL_NAME, CONFIG, function(err, firewall_, operation) {
+      compute
+        .firewall(FIREWALL_NAME)
+        .create(CONFIG, function(err, firewall_, operation) {
           assert.ifError(err);
           firewall = firewall_;
           operation.onComplete(done);
@@ -242,8 +249,9 @@ describe('Compute', function() {
     before(function(done) {
       NETWORK_NAME = generateName();
 
-      compute.createNetwork(
-        NETWORK_NAME, CONFIG, function(err, network_, operation) {
+      compute
+        .network(NETWORK_NAME)
+        .create(CONFIG, function(err, network_, operation) {
           assert.ifError(err);
           network = network_;
           operation.onComplete(done);
@@ -409,7 +417,7 @@ describe('Compute', function() {
         http: true
       };
 
-      zone.createVM(VM_NAME, config, function(err, vm_, operation) {
+      zone.vm(VM_NAME).create(config, function(err, vm_, operation) {
         assert.ifError(err);
         vm = vm_;
         operation.onComplete(done);
@@ -430,10 +438,7 @@ describe('Compute', function() {
           return;
         }
 
-        operation.onComplete({
-          maxAttempts: MAX_TIME_ALLOWED / 10000,
-          interval: 10000
-        }, done);
+        operation.onComplete(getOperationOptions(MAX_TIME_ALLOWED), done);
       });
     });
 
@@ -472,20 +477,48 @@ describe('Compute', function() {
     });
 
     it('should attach and detach a disk', function(done) {
-      compute.getDisks()
-        .on('error', done)
-        .once('data', function(disk) {
-          this.end();
+      var disk;
 
-          vm.attachDisk(disk, function(err) {
-            assert.ifError(err);
+      // This test waits on a lot of operations.
+      this.timeout(90000);
 
-            vm.detachDisk(disk, function(err, operation) {
-              assert.ifError(err);
-              operation.onComplete(done);
-            });
+      async.series([
+        createDisk,
+        attachDisk,
+        detachDisk
+      ], done);
+
+      function createDisk(callback) {
+        var diskName = generateName();
+        var config = {
+          os: 'ubuntu'
+        };
+
+        zone.disk(diskName).create(config, function(err, disk_, operation) {
+          if (err) {
+            callback(err);
+            return;
+          }
+
+          operation.onComplete(function(err) {
+            if (err) {
+              callback(err);
+              return;
+            }
+
+            disk = disk_;
+            callback();
           });
         });
+      }
+
+      function attachDisk(callback) {
+        vm.attachDisk(disk, execAfterOperationComplete(callback));
+      }
+
+      function detachDisk(callback) {
+        vm.detachDisk(disk, execAfterOperationComplete(callback));
+      }
     });
 
     it('should get serial port output', function(done) {
@@ -517,15 +550,19 @@ describe('Compute', function() {
     });
 
     it('should reset', function(done) {
-      vm.reset(done);
+      vm.reset(execAfterOperationComplete(done));
     });
 
     it('should start', function(done) {
-      vm.start(done);
+      vm.start(execAfterOperationComplete(done));
     });
 
     it('should stop', function(done) {
-      vm.stop(done);
+      var MAX_TIME_ALLOWED = 90000 * 2;
+      this.timeout(MAX_TIME_ALLOWED);
+
+      var options = getOperationOptions(MAX_TIME_ALLOWED);
+      vm.stop(execAfterOperationComplete(options, done));
     });
   });
 
@@ -623,5 +660,25 @@ describe('Compute', function() {
 
       async.each(objects, exec('delete'), callback);
     });
+  }
+
+  function getOperationOptions(maxTimeAllowed) {
+    var interval = 10000;
+
+    return {
+      maxAttempts: maxTimeAllowed / interval,
+      interval: interval
+    };
+  }
+
+  function execAfterOperationComplete(options, callback) {
+    return function(err, operation) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      operation.onComplete(options || {}, callback);
+    };
   }
 });
