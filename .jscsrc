@@ -18,5 +18,9 @@
   "maximumLineLength": {
     "value": 80,
     "allowUrlComments": true
-  }
+  },
+  "excludeFiles": [
+    "system-test/data/*",
+    "test/testdata/*"
+  ]
 }
