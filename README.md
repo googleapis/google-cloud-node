@@ -29,7 +29,7 @@ $ npm install --save gcloud
 
 ## Example Applications
 
-- [nodejs-getting-started][nodejs-getting-started] - A sample and [tutorial][nodejs-getting-started-tutorial] that demonstrates how to build a complete web application using Cloud Datastore, Cloud Storage, and Cloud Pub/Sub and deploy it to Google App Engine or Google Compute Engine.  
+- [nodejs-getting-started][nodejs-getting-started] - A sample and [tutorial][nodejs-getting-started-tutorial] that demonstrates how to build a complete web application using Cloud Datastore, Cloud Storage, and Cloud Pub/Sub and deploy it to Google App Engine or Google Compute Engine.
 - [gcloud-node-todos][gcloud-todos] - A TodoMVC backend using gcloud-node and Datastore.
 - [gitnpm][gitnpm] - Easily lookup an npm package's GitHub repo using gcloud-node and Google App Engine.
 - [gcloud-kvstore][gcloud-kvstore] - Use Datastore as a simple key-value store.
