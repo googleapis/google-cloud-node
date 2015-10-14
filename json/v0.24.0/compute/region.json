@@ -1,0 +1,1131 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2015 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2015 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
+  },
+  {
+    "tags": [
+      {
+        "type": "module",
+        "string": "compute/region",
+        "html": "<p>compute/region</p>"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 17,
+    "codeStart": 21,
+    "code": "'use strict';\n\nvar extend = require('extend');\nvar is = require('is');",
+    "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:compute/address}",
+        "types": [
+          "module:compute/address"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acompute%2Faddress.html\">compute/address</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:compute/address}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 26,
+    "codeStart": 30,
+    "code": "var Address = require('./address.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Address",
+      "value": "require('./address.js')",
+      "string": "Address"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:compute/operation}",
+        "types": [
+          "module:compute/operation"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acompute%2Foperation.html\">compute/operation</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:compute/operation}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 32,
+    "codeStart": 36,
+    "code": "var Operation = require('./operation.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Operation",
+      "value": "require('./operation.js')",
+      "string": "Operation"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/streamrouter}",
+        "types": [
+          "module:common/streamrouter"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Fstreamrouter.html\">common/streamrouter</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/streamrouter}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 38,
+    "codeStart": 42,
+    "code": "var streamRouter = require('../common/stream-router.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "streamRouter",
+      "value": "require('../common/stream-router.js')",
+      "string": "streamRouter"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/util}",
+        "types": [
+          "module:common/util"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 44,
+    "codeStart": 48,
+    "code": "var util = require('../common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{module:compute} compute - Compute object this region belongs to.",
+        "name": "compute",
+        "description": "<ul>\n<li>Compute object this region belongs to.</li>\n</ul>\n",
+        "types": [
+          "module:compute"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acompute.html\">compute</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} name - Name of the region.",
+        "name": "name",
+        "description": "<ul>\n<li>Name of the region.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Developer Documentation</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 50,
+    "codeStart": 55
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Regions & Zones Overview]{@link https://cloud.google.com/compute/docs/zones}",
+        "html": "<p>[Regions &amp; Zones Overview]{@link <a href=\"https://cloud.google.com/compute/docs/zones}\">https://cloud.google.com/compute/docs/zones}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Region Resource]{@link https://cloud.google.com/compute/docs/reference/v1/regions}",
+        "html": "<p>[Region Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/regions}\">https://cloud.google.com/compute/docs/reference/v1/regions}</a></p>"
+      },
+      {
+        "type": "constructor",
+        "string": "",
+        "html": ""
+      },
+      {
+        "type": "alias",
+        "string": "module:compute/region",
+        "html": "<p>module:compute/region</p>"
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'grape-spaceship-123'\n});\n\nvar gce = gcloud.compute();\n\nvar region = gce.region('us-central1');",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>var gce = gcloud.compute();</p><p>var region = gce.region(&#39;us-central1&#39;);</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>A Region object allows you to interact with a Google Compute Engine region.</p>",
+      "summary": "<p>A Region object allows you to interact with a Google Compute Engine region.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": true,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 55,
+    "codeStart": 74,
+    "code": "function Region(compute, name) {\n  this.compute = compute;\n  this.name = name;\n  this.metadata = {};\n}",
+    "ctx": {
+      "type": "constructor",
+      "name": "Region",
+      "string": "Region()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}",
+        "html": "<p>[Instances and Networks]{@link <a href=\"https://cloud.google.com/compute/docs/instances-and-network}\">https://cloud.google.com/compute/docs/instances-and-network}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{string} name - Name of the existing address.",
+        "name": "name",
+        "description": "<ul>\n<li>Name of the existing address.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{module:compute/address}",
+        "types": [
+          "module:compute/address"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acompute%2Faddress.html\">compute/address</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:compute/address}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var address = region.address('address-name');",
+        "html": "<p>var address = region.address(&#39;address-name&#39;);</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a reference to a Google Compute Engine address in this region.</p>",
+      "summary": "<p>Get a reference to a Google Compute Engine address in this region.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 80,
+    "codeStart": 91,
+    "code": "Region.prototype.address = function(name) {\n  return new Address(this, name);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Region",
+      "cons": "Region",
+      "name": "address",
+      "string": "Region.prototype.address()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}",
+        "html": "<p>[Instances and Networks]{@link <a href=\"https://cloud.google.com/compute/docs/instances-and-network}\">https://cloud.google.com/compute/docs/instances-and-network}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Address Resource]{@link https://cloud.google.com/compute/docs/reference/v1/addresses}",
+        "html": "<p>[Address Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/addresses}\">https://cloud.google.com/compute/docs/reference/v1/addresses}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Addresses: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/insert}",
+        "html": "<p>[Addresses: insert API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/addresses/insert}\">https://cloud.google.com/compute/docs/reference/v1/addresses/insert}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{string} name - Name of the address.",
+        "name": "name",
+        "description": "<ul>\n<li>Name of the address.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object=} options - See an\n    [Address resource](https://cloud.google.com/compute/docs/reference/v1/addresses).",
+        "name": "options",
+        "description": "<ul>\n<li>See an     <a href=\"https://cloud.google.com/compute/docs/reference/v1/addresses\">Address resource</a>.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:compute/address} callback.address - The created Address\n    object.",
+        "name": "callback.address",
+        "description": "<ul>\n<li>The created Address     object.</li>\n</ul>\n",
+        "types": [
+          "module:compute/address"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acompute%2Faddress.html\">compute/address</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:compute/operation} callback.operation - An operation object\n    that can be used to check the status of the request.",
+        "name": "callback.operation",
+        "description": "<ul>\n<li>An operation object     that can be used to check the status of the request.</li>\n</ul>\n",
+        "types": [
+          "module:compute/operation"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acompute%2Foperation.html\">compute/operation</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "function callback(err, address, operation, apiResponse) {\n  // `address` is an Address object.\n\n  // `operation` is an Operation object that can be used to check the status\n  // of the request.\n}\n\nregion.createAddress('new-address', callback);",
+        "html": "<p>function callback(err, address, operation, apiResponse) {<br />  // <code>address</code> is an Address object.</p><p>  // <code>operation</code> is an Operation object that can be used to check the status<br />  // of the request.<br />}</p><p>region.createAddress(&#39;new-address&#39;, callback);</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create an address in this region.</p>",
+      "summary": "<p>Create an address in this region.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 95,
+    "codeStart": 123,
+    "code": "Region.prototype.createAddress = function(name, options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  var body = extend({}, options, {\n    name: name\n  });\n\n  this.makeReq_('POST', '/addresses', null, body, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var address = self.address(name);\n\n    var operation = self.operation(resp.name);\n    operation.metadata = resp;\n\n    callback(null, address, operation, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Region",
+      "cons": "Region",
+      "name": "createAddress",
+      "string": "Region.prototype.createAddress()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}",
+        "html": "<p>[Instances and Networks]{@link <a href=\"https://cloud.google.com/compute/docs/instances-and-network}\">https://cloud.google.com/compute/docs/instances-and-network}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Addresses: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/list}",
+        "html": "<p>[Addresses: list API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/addresses/list}\">https://cloud.google.com/compute/docs/reference/v1/addresses/list}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{object=} options - Address search options.",
+        "name": "options",
+        "description": "<ul>\n<li>Address search options.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.autoPaginate - Have pagination handled\n    automatically. Default: true.",
+        "name": "options.autoPaginate",
+        "description": "<ul>\n<li>Have pagination handled     automatically. Default: true.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} options.filter - Search filter in the format of\n    `{name} {comparison} {filterString}`.\n    - **`name`**: the name of the field to compare\n    - **`comparison`**: the comparison operator, `eq` (equal) or `ne`\n      (not equal)\n    - **`filterString`**: the string to filter to. For string fields, this\n      can be a regular expression.",
+        "name": "options.filter",
+        "description": "<ul>\n<li>Search filter in the format of     <code>{name} {comparison} {filterString}</code>.<ul>\n<li><strong><code>name</code></strong>: the name of the field to compare</li>\n<li><strong><code>comparison</code></strong>: the comparison operator, <code>eq</code> (equal) or <code>ne</code><br />(not equal)</li>\n<li><strong><code>filterString</code></strong>: the string to filter to. For string fields, this<br />can be a regular expression.</li>\n</ul>\n</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.maxResults - Maximum number of addresses to return.",
+        "name": "options.maxResults",
+        "description": "<ul>\n<li>Maximum number of addresses to return.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} options.pageToken - A previously-returned page token\n    representing part of the larger set of results to view.",
+        "name": "options.pageToken",
+        "description": "<ul>\n<li>A previously-returned page token     representing part of the larger set of results to view.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:compute/address} callback.addresses - Address objects from\n    this region.",
+        "name": "callback.addresses",
+        "description": "<ul>\n<li>Address objects from     this region.</li>\n</ul>\n",
+        "types": [
+          "module:compute/address"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acompute%2Faddress.html\">compute/address</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?object} callback.nextQuery - If present, query with this object to\n    check for more results.",
+        "name": "callback.nextQuery",
+        "description": "<ul>\n<li>If present, query with this object to     check for more results.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "region.getAddresses(function (err, addresses) {\n  // `addresses` is an array of `Address` objects.\n});\n\n//-\n// To control how many API requests are made and page through the results\n// manually, set `autoPaginate` to `false`.\n//-\nfunction callback(err, addresses, nextQuery, apiResponse) {\n  if (nextQuery) {\n    // More results exist.\n    region.getAddresses(nextQuery, callback);\n  }\n}\n\nregion.getAddresses({\n  autoPaginate: false\n}, callback);\n\n//-\n// Get the addresses from your project as a readable object stream.\n//-\nregion.getAddresses()\n  .on('error', console.error)\n  .on('data', function(address) {\n    // `address` is an `Address` object.\n  })\n  .on('end', function() {\n    // All addresses retrieved.\n  });\n\n//-\n// If you anticipate many results, you can end a stream early to prevent\n// unnecessary processing and API requests.\n//-\nregion.getAddresses()\n  .on('data', function(address) {\n    this.end();\n  });",
+        "html": "<p>region.getAddresses(function (err, addresses) {<br />  // <code>addresses</code> is an array of <code>Address</code> objects.<br />});</p><p>//-<br />// To control how many API requests are made and page through the results<br />// manually, set <code>autoPaginate</code> to <code>false</code>.<br />//-<br />function callback(err, addresses, nextQuery, apiResponse) {<br />  if (nextQuery) {<br />    // More results exist.<br />    region.getAddresses(nextQuery, callback);<br />  }<br />}</p><p>region.getAddresses({<br />  autoPaginate: false<br />}, callback);</p><p>//-<br />// Get the addresses from your project as a readable object stream.<br />//-<br />region.getAddresses()<br />  .on(&#39;error&#39;, console.error)<br />  .on(&#39;data&#39;, function(address) {<br />    // <code>address</code> is an <code>Address</code> object.<br />  })<br />  .on(&#39;end&#39;, function() {<br />    // All addresses retrieved.<br />  });</p><p>//-<br />// If you anticipate many results, you can end a stream early to prevent<br />// unnecessary processing and API requests.<br />//-<br />region.getAddresses()<br />  .on(&#39;data&#39;, function(address) {<br />    this.end();<br />  });</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a list of addresses in this region.</p>",
+      "summary": "<p>Get a list of addresses in this region.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 150,
+    "codeStart": 218,
+    "code": "Region.prototype.getAddresses = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  this.makeReq_('GET', '/addresses', options, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var addresses = (resp.items || []).map(function(address) {\n      var addressInstance = self.address(address.name);\n      addressInstance.metadata = address;\n      return addressInstance;\n    });\n\n    callback(null, addresses, nextQuery, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Region",
+      "cons": "Region",
+      "name": "getAddresses",
+      "string": "Region.prototype.getAddresses()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Region Resource]{@link https://cloud.google.com/compute/docs/reference/v1/regions}",
+        "html": "<p>[Region Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/regions}\">https://cloud.google.com/compute/docs/reference/v1/regions}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Regions: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regions/get}",
+        "html": "<p>[Regions: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/regions/get}\">https://cloud.google.com/compute/docs/reference/v1/regions/get}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.metadata - The region's metadata.",
+        "name": "callback.metadata",
+        "description": "<ul>\n<li>The region&#39;s metadata.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "region.getMetadata(function(err, metadata, apiResponse) {});",
+        "html": "<p>region.getMetadata(function(err, metadata, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get the region&#39;s metadata.</p>",
+      "summary": "<p>Get the region&#39;s metadata.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 252,
+    "codeStart": 266,
+    "code": "Region.prototype.getMetadata = function(callback) {\n  var self = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('GET', '', null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.metadata = resp;\n\n    callback(null, self.metadata, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Region",
+      "cons": "Region",
+      "name": "getMetadata",
+      "string": "Region.prototype.getMetadata()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Region Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations}",
+        "html": "<p>[Region Operation Overview]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/regionOperations}\">https://cloud.google.com/compute/docs/reference/v1/regionOperations}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[RegionOperations: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations/list}",
+        "html": "<p>[RegionOperations: list API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/regionOperations/list}\">https://cloud.google.com/compute/docs/reference/v1/regionOperations/list}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{object=} options - Operation search options.",
+        "name": "options",
+        "description": "<ul>\n<li>Operation search options.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.autoPaginate - Have pagination handled\n    automatically. Default: true.",
+        "name": "options.autoPaginate",
+        "description": "<ul>\n<li>Have pagination handled     automatically. Default: true.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} options.filter - Search filter in the format of\n    `{name} {comparison} {filterString}`.\n    - **`name`**: the name of the field to compare\n    - **`comparison`**: the comparison operator, `eq` (equal) or `ne`\n      (not equal)\n    - **`filterString`**: the string to filter to. For string fields, this\n      can be a regular expression.",
+        "name": "options.filter",
+        "description": "<ul>\n<li>Search filter in the format of     <code>{name} {comparison} {filterString}</code>.<ul>\n<li><strong><code>name</code></strong>: the name of the field to compare</li>\n<li><strong><code>comparison</code></strong>: the comparison operator, <code>eq</code> (equal) or <code>ne</code><br />(not equal)</li>\n<li><strong><code>filterString</code></strong>: the string to filter to. For string fields, this<br />can be a regular expression.</li>\n</ul>\n</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.maxResults - Maximum number of operations to return.",
+        "name": "options.maxResults",
+        "description": "<ul>\n<li>Maximum number of operations to return.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} options.pageToken - A previously-returned page token\n    representing part of the larger set of results to view.",
+        "name": "options.pageToken",
+        "description": "<ul>\n<li>A previously-returned page token     representing part of the larger set of results to view.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:compute/operation} callback.operations - Operation objects\n    from this region.",
+        "name": "callback.operations",
+        "description": "<ul>\n<li>Operation objects     from this region.</li>\n</ul>\n",
+        "types": [
+          "module:compute/operation"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acompute%2Foperation.html\">compute/operation</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?object} callback.nextQuery - If present, query with this object to\n    check for more results.",
+        "name": "callback.nextQuery",
+        "description": "<ul>\n<li>If present, query with this object to     check for more results.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "region.getOperations(function(err, operations) {\n  // `operations` is an array of `Operation` objects.\n});\n\n//-\n// To control how many API requests are made and page through the results\n// manually, set `autoPaginate` to `false`.\n//-\nfunction callback(err, operations, nextQuery, apiResponse) {\n  if (nextQuery) {\n    // More results exist.\n    region.getOperations(nextQuery, callback);\n  }\n}\n\nregion.getOperations({\n  autoPaginate: false\n}, callback);\n\n//-\n// Get the operations from your project as a readable object stream.\n//-\nregion.getOperations()\n  .on('error', console.error)\n  .on('data', function(operation) {\n    // `operation` is an `Operation` object.\n  })\n  .on('end', function() {\n    // All operations retrieved.\n  });\n\n//-\n// If you anticipate many results, you can end a stream early to prevent\n// unnecessary processing and API requests.\n//-\nregion.getOperations()\n  .on('data', function(operation) {\n    this.end();\n  });",
+        "html": "<p>region.getOperations(function(err, operations) {<br />  // <code>operations</code> is an array of <code>Operation</code> objects.<br />});</p><p>//-<br />// To control how many API requests are made and page through the results<br />// manually, set <code>autoPaginate</code> to <code>false</code>.<br />//-<br />function callback(err, operations, nextQuery, apiResponse) {<br />  if (nextQuery) {<br />    // More results exist.<br />    region.getOperations(nextQuery, callback);<br />  }<br />}</p><p>region.getOperations({<br />  autoPaginate: false<br />}, callback);</p><p>//-<br />// Get the operations from your project as a readable object stream.<br />//-<br />region.getOperations()<br />  .on(&#39;error&#39;, console.error)<br />  .on(&#39;data&#39;, function(operation) {<br />    // <code>operation</code> is an <code>Operation</code> object.<br />  })<br />  .on(&#39;end&#39;, function() {<br />    // All operations retrieved.<br />  });</p><p>//-<br />// If you anticipate many results, you can end a stream early to prevent<br />// unnecessary processing and API requests.<br />//-<br />region.getOperations()<br />  .on(&#39;data&#39;, function(operation) {<br />    this.end();<br />  });</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a list of operations for this region.</p>",
+      "summary": "<p>Get a list of operations for this region.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 283,
+    "codeStart": 351,
+    "code": "Region.prototype.getOperations = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  this.makeReq_('GET', '/operations', options, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var operations = (resp.items || []).map(function(operation) {\n      var operationInstance = self.operation(operation.name);\n      operationInstance.metadata = operation;\n      return operationInstance;\n    });\n\n    callback(null, operations, nextQuery, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Region",
+      "cons": "Region",
+      "name": "getOperations",
+      "string": "Region.prototype.getOperations()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Region Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/regionOperations}",
+        "html": "<p>[Region Operation Overview]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/regionOperations}\">https://cloud.google.com/compute/docs/reference/v1/regionOperations}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{string} name - Name of the existing operation.",
+        "name": "name",
+        "description": "<ul>\n<li>Name of the existing operation.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{module:compute/operation}",
+        "types": [
+          "module:compute/operation"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acompute%2Foperation.html\">compute/operation</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:compute/operation}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var operation = region.operation('operation-name');",
+        "html": "<p>var operation = region.operation(&#39;operation-name&#39;);</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a reference to a Google Compute Engine region operation.</p>",
+      "summary": "<p>Get a reference to a Google Compute Engine region operation.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 385,
+    "codeStart": 396,
+    "code": "Region.prototype.operation = function(name) {\n  return new Operation(this, name);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Region",
+      "cons": "Region",
+      "name": "operation",
+      "string": "Region.prototype.operation()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{string} method - Action.",
+        "name": "method",
+        "description": "<ul>\n<li>Action.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} path - Request path.",
+        "name": "path",
+        "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{*} query - Request query object.",
+        "name": "query",
+        "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{*} body - Request body contents.",
+        "name": "body",
+        "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
+      "summary": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 400,
+    "codeStart": 412,
+    "code": "Region.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/regions/' + this.name + path;\n  this.compute.makeReq_(method, path, query, body, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Region",
+      "cons": "Region",
+      "name": "makeReq_",
+      "string": "Region.prototype.makeReq_()"
+    }
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Developer Documentation</p><p>These methods can be used with either a callback or as a readable object<br />stream. <code>streamRouter</code> is used to add this dual behavior.</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": "<p>These methods can be used with either a callback or as a readable object<br />stream. <code>streamRouter</code> is used to add this dual behavior.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 417,
+    "codeStart": 422,
+    "code": "streamRouter.extend(Region, ['getAddresses', 'getOperations']);\n\nmodule.exports = Region;",
+    "ctx": false
+  }
+]

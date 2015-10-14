@@ -1,0 +1,853 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
+  },
+  {
+    "tags": [
+      {
+        "type": "module",
+        "string": "pubsub/subscription",
+        "html": "<p>pubsub/subscription</p>"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 17,
+    "codeStart": 21,
+    "code": "'use strict';\n\nvar arrify = require('arrify');\nvar events = require('events');\nvar is = require('is');\nvar nodeutil = require('util');",
+    "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/util}",
+        "types": [
+          "module:common/util"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 28,
+    "codeStart": 32,
+    "code": "var util = require('../common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:pubsub/iam}",
+        "types": [
+          "module:pubsub/iam"
+        ],
+        "typesDescription": "module:<a href=\"module%3Apubsub%2Fiam.html\">pubsub/iam</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:pubsub/iam}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 34,
+    "codeStart": 38,
+    "code": "var IAM = require('./iam');",
+    "ctx": {
+      "type": "declaration",
+      "name": "IAM",
+      "value": "require('./iam')",
+      "string": "IAM"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{module:pubsub} pubsub - PubSub object.",
+        "name": "pubsub",
+        "description": "<ul>\n<li>PubSub object.</li>\n</ul>\n",
+        "types": [
+          "module:pubsub"
+        ],
+        "typesDescription": "module:<a href=\"module%3Apubsub.html\">pubsub</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.autoAck - Automatically acknowledge the message\n    once it's pulled. (default: false)",
+        "name": "options.autoAck",
+        "description": "<ul>\n<li>Automatically acknowledge the message     once it&#39;s pulled. (default: false)</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.interval - Interval in milliseconds to check for new\n    messages. (default: 10)",
+        "name": "options.interval",
+        "description": "<ul>\n<li>Interval in milliseconds to check for new     messages. (default: 10)</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} options.name - Name of the subscription.",
+        "name": "options.name",
+        "description": "<ul>\n<li>Name of the subscription.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.maxInProgress - Maximum messages to consume\n    simultaneously.",
+        "name": "options.maxInProgress",
+        "description": "<ul>\n<li>Maximum messages to consume     simultaneously.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Developer Documentation</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 40,
+    "codeStart": 52
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "module:pubsub/subscription",
+        "html": "<p>module:pubsub/subscription</p>"
+      },
+      {
+        "type": "constructor",
+        "string": "",
+        "html": ""
+      },
+      {
+        "type": "example",
+        "string": "var pubsub = gcloud.pubsub({\n  projectId: 'grape-spaceship-123'\n});\n\n//-\n// From {@linkcode module:pubsub#getSubscriptions}:\n//-\npubsub.getSubscriptions(function(err, subscriptions) {\n  // `subscriptions` is an array of Subscription objects.\n});\n\n//-\n// From {@linkcode module:pubsub/topic#getSubscriptions}:\n//-\nvar topic = pubsub.topic('my-topic');\ntopic.getSubscriptions(function(err, subscriptions) {\n  // `subscriptions` is an array of Subscription objects.\n});\n\n//-\n// From {@linkcode module:pubsub/topic#subscribe}:\n//-\nvar topic = pubsub.topic('my-topic');\ntopic.subscribe('new-subscription', function(err, subscription) {\n  // `subscription` is a Subscription object.\n});\n\n//-\n// From {@linkcode module:pubsub/topic#subscription}:\n//-\nvar topic = pubsub.topic('my-topic');\nvar subscription = topic.subscription('my-existing-subscription');\n// `subscription` is a Subscription object.\n\n//-\n// Once you have obtained a subscription object, you may begin to register\n// listeners. This will automatically trigger pulling for messages.\n//-\n// Register an error handler.\nsubscription.on('error', function(err) {});\n\n// Register a listener for `message` events.\nfunction onMessage(message) {\n  // Called every time a message is received.\n\n  // message.id = ID of the message.\n  // message.ackId = ID used to acknowledge the message receival.\n  // message.data = Contents of the message.\n\n  // Ack the message:\n  // message.ack(callback);\n\n  // Skip the message. This is useful with `maxInProgress` option when\n  // creating your subscription. This doesn't ack the message, but allows\n  // more messages to be retrieved if your limit was hit.\n  // message.skip();\n}\nsubscription.on('message', onMessage);\n\n// Remove the listener from receiving `message` events.\nsubscription.removeListener('message', onMessage);",
+        "html": "<p>var pubsub = gcloud.pubsub({<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>//-<br />// From {@linkcode module:pubsub#getSubscriptions}:<br />//-<br />pubsub.getSubscriptions(function(err, subscriptions) {<br />  // <code>subscriptions</code> is an array of Subscription objects.<br />});</p><p>//-<br />// From {@linkcode module:pubsub/topic#getSubscriptions}:<br />//-<br />var topic = pubsub.topic(&#39;my-topic&#39;);<br />topic.getSubscriptions(function(err, subscriptions) {<br />  // <code>subscriptions</code> is an array of Subscription objects.<br />});</p><p>//-<br />// From {@linkcode module:pubsub/topic#subscribe}:<br />//-<br />var topic = pubsub.topic(&#39;my-topic&#39;);<br />topic.subscribe(&#39;new-subscription&#39;, function(err, subscription) {<br />  // <code>subscription</code> is a Subscription object.<br />});</p><p>//-<br />// From {@linkcode module:pubsub/topic#subscription}:<br />//-<br />var topic = pubsub.topic(&#39;my-topic&#39;);<br />var subscription = topic.subscription(&#39;my-existing-subscription&#39;);<br />// <code>subscription</code> is a Subscription object.</p><p>//-<br />// Once you have obtained a subscription object, you may begin to register<br />// listeners. This will automatically trigger pulling for messages.<br />//-<br />// Register an error handler.<br />subscription.on(&#39;error&#39;, function(err) {});</p><p>// Register a listener for <code>message</code> events.<br />function onMessage(message) {<br />  // Called every time a message is received.</p><p>  // message.id = ID of the message.<br />  // message.ackId = ID used to acknowledge the message receival.<br />  // message.data = Contents of the message.</p><p>  // Ack the message:<br />  // message.ack(callback);</p><p>  // Skip the message. This is useful with <code>maxInProgress</code> option when<br />  // creating your subscription. This doesn&#39;t ack the message, but allows<br />  // more messages to be retrieved if your limit was hit.<br />  // message.skip();<br />}<br />subscription.on(&#39;message&#39;, onMessage);</p><p>// Remove the listener from receiving <code>message</code> events.<br />subscription.removeListener(&#39;message&#39;, onMessage);</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>A Subscription object will give you access to your Google Cloud Pub/Sub<br />subscription.</p><p>Subscriptions are sometimes retrieved when using various methods:</p><ul>\n<li>{@linkcode module:pubsub#getSubscriptions}</li>\n<li>{@linkcode module:pubsub/topic#getSubscriptions}</li>\n<li>{@linkcode module:pubsub/topic#subscribe}</li>\n</ul>\n<p>Subscription objects may be created directly with:</p><ul>\n<li>{@linkcode module:pubsub/topic#subscription}</li>\n</ul>\n<p>All Subscription objects are instances of an<br /><a href=\"http://nodejs.org/api/events.html\">EventEmitter</a>. The subscription will pull<br />for messages automatically as long as there is at least one listener assigned<br />for the <code>message</code> event.</p>",
+      "summary": "<p>A Subscription object will give you access to your Google Cloud Pub/Sub<br />subscription.</p>",
+      "body": "<p>Subscriptions are sometimes retrieved when using various methods:</p><ul>\n<li>{@linkcode module:pubsub#getSubscriptions}</li>\n<li>{@linkcode module:pubsub/topic#getSubscriptions}</li>\n<li>{@linkcode module:pubsub/topic#subscribe}</li>\n</ul>\n<p>Subscription objects may be created directly with:</p><ul>\n<li>{@linkcode module:pubsub/topic#subscription}</li>\n</ul>\n<p>All Subscription objects are instances of an<br /><a href=\"http://nodejs.org/api/events.html\">EventEmitter</a>. The subscription will pull<br />for messages automatically as long as there is at least one listener assigned<br />for the <code>message</code> event.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": true,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 52,
+    "codeStart": 137,
+    "code": "function Subscription(pubsub, options) {\n  events.EventEmitter.call(this);\n\n  this.name = Subscription.formatName_(pubsub.projectId, options.name);\n\n  this.makeReq_ = pubsub.makeReq_.bind(pubsub);\n\n  this.autoAck = is.boolean(options.autoAck) ? options.autoAck : false;\n  this.closed = true;\n  this.interval = is.number(options.interval) ? options.interval : 10;\n  this.inProgressAckIds = {};\n  this.maxInProgress =\n    is.number(options.maxInProgress) ? options.maxInProgress : Infinity;\n  this.messageListeners = 0;\n  this.paused = false;",
+    "ctx": {
+      "type": "constructor",
+      "name": "Subscription",
+      "string": "Subscription()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "mixes",
+        "string": "module:pubsub/iam",
+        "html": "<p>module:pubsub/iam</p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Access Control Overview]{@link https://cloud.google.com/pubsub/access_control}",
+        "html": "<p>[Access Control Overview]{@link <a href=\"https://cloud.google.com/pubsub/access_control}\">https://cloud.google.com/pubsub/access_control}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[What is Cloud IAM?]{@link https://cloud.google.com/iam/}",
+        "html": "<p>[What is Cloud IAM?]{@link <a href=\"https://cloud.google.com/iam/}\">https://cloud.google.com/iam/}</a></p>"
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Get the IAM policy for your subscription.\n//-\nsubscription.iam.getPolicy(function(err, policy) {\n  console.log(policy);\n});",
+        "html": "<p>//-<br />// Get the IAM policy for your subscription.<br />//-<br />subscription.iam.getPolicy(function(err, policy) {<br />  console.log(policy);<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p><a href=\"https://cloud.google.com/pubsub/access_control\">IAM (Identity and Access Management)</a><br />allows you to set permissions on invidual resources and offers a wider<br />range of roles: editor, owner, publisher, subscriber, and viewer. This<br />gives you greater flexibility and allows you to set more fine-grained<br />access control.</p><p><em>The IAM access control features described in this document are Beta,<br />including the API methods to get and set IAM policies, and to test IAM<br />permissions. Google Cloud Pub/Sub&#39;s use of IAM features is not covered by<br />any SLA or deprecation policy, and may be subject to backward-incompatible<br />changes.</em></p>",
+      "summary": "<p><a href=\"https://cloud.google.com/pubsub/access_control\">IAM (Identity and Access Management)</a><br />allows you to set permissions on invidual resources and offers a wider<br />range of roles: editor, owner, publisher, subscriber, and viewer. This<br />gives you greater flexibility and allows you to set more fine-grained<br />access control.</p>",
+      "body": "<p><em>The IAM access control features described in this document are Beta,<br />including the API methods to get and set IAM policies, and to test IAM<br />permissions. Google Cloud Pub/Sub&#39;s use of IAM features is not covered by<br />any SLA or deprecation policy, and may be subject to backward-incompatible<br />changes.</em></p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 153,
+    "codeStart": 179,
+    "code": "this.iam = new IAM(pubsub, this.name);\n\nthis.listenForEvents_();\n}\n\nnodeutil.inherits(Subscription, events.EventEmitter);",
+    "ctx": {
+      "type": "property",
+      "receiver": "this",
+      "name": "iam",
+      "value": "new IAM(pubsub, this.name)",
+      "string": "this.iam"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "<p>Format the name of a subscription. A subscription&#39;s full name is in the<br />format of projects/{projectId}/subscriptions/{subName}.</p>",
+      "summary": "<p>Format the name of a subscription. A subscription&#39;s full name is in the<br />format of projects/{projectId}/subscriptions/{subName}.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 186,
+    "codeStart": 192,
+    "code": "Subscription.formatName_ = function(projectId, name) {\n  // Simple check if the name is already formatted.\n  if (name.indexOf('/') > -1) {\n    return name;\n  }\n  return 'projects/' + projectId + '/subscriptions/' + name;\n};",
+    "ctx": {
+      "type": "method",
+      "receiver": "Subscription",
+      "name": "formatName_",
+      "string": "Subscription.formatName_()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "<p>Simplify a message from an API response to have three properties, <code>id</code>,<br /><code>data</code> and <code>attributes</code>. <code>data</code> is always converted to a string.</p>",
+      "summary": "<p>Simplify a message from an API response to have three properties, <code>id</code>,<br /><code>data</code> and <code>attributes</code>. <code>data</code> is always converted to a string.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 200,
+    "codeStart": 206,
+    "code": "Subscription.formatMessage_ = function(msg) {\n  var innerMessage = msg.message;\n  var message = {\n    ackId: msg.ackId\n  };\n\n  if (innerMessage) {\n    message.id = innerMessage.messageId;\n\n    if (innerMessage.data) {\n      message.data = new Buffer(innerMessage.data, 'base64').toString('utf-8');\n\n      try {\n        message.data = JSON.parse(message.data);\n      } catch(e) {}\n    }\n\n    if (innerMessage.attributes) {\n      message.attributes = innerMessage.attributes;\n    }\n  }\n\n  return message;\n};",
+    "ctx": {
+      "type": "method",
+      "receiver": "Subscription",
+      "name": "formatMessage_",
+      "string": "Subscription.formatMessage_()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "example",
+        "string": "subscription.listenForEvents_();",
+        "html": "<p>subscription.listenForEvents_();</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Begin listening for events on the subscription. This method keeps track of<br />how many message listeners are assigned, and then removed, making sure<br />polling is handled automatically.</p><p>As long as there is one active message listener, the connection is open. As<br />soon as there are no more message listeners, the connection is closed.</p>",
+      "summary": "<p>Begin listening for events on the subscription. This method keeps track of<br />how many message listeners are assigned, and then removed, making sure<br />polling is handled automatically.</p>",
+      "body": "<p>As long as there is one active message listener, the connection is open. As<br />soon as there are no more message listeners, the connection is closed.</p>"
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 231,
+    "codeStart": 244,
+    "code": "Subscription.prototype.listenForEvents_ = function() {\n  var self = this;\n\n  this.on('newListener', function(event) {\n    if (event === 'message') {\n      self.messageListeners++;\n      if (self.closed) {\n        self.closed = false;\n        self.startPulling_();\n      }\n    }\n  });\n\n  this.on('removeListener', function(event) {\n    if (event === 'message' && --self.messageListeners === 0) {\n      self.closed = true;\n    }\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Subscription",
+      "cons": "Subscription",
+      "name": "listenForEvents_",
+      "string": "Subscription.prototype.listenForEvents_()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "example",
+        "string": "subscription.startPulling_();",
+        "html": "<p>subscription.startPulling_();</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Poll the backend for new messages. This runs a loop to ping the API at the<br />provided interval from the subscription&#39;s instantiation. If one wasn&#39;t<br />provided, the default value is 10 milliseconds.</p><p>If messages are received, they are emitted on the <code>message</code> event.</p><p>Note: This method is automatically called once a message event handler is<br />assigned to the description.</p><p>To stop pulling, see {@linkcode module:pubsub/subscription#close}.</p>",
+      "summary": "<p>Poll the backend for new messages. This runs a loop to ping the API at the<br />provided interval from the subscription&#39;s instantiation. If one wasn&#39;t<br />provided, the default value is 10 milliseconds.</p>",
+      "body": "<p>If messages are received, they are emitted on the <code>message</code> event.</p><p>Note: This method is automatically called once a message event handler is<br />assigned to the description.</p><p>To stop pulling, see {@linkcode module:pubsub/subscription#close}.</p>"
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 264,
+    "codeStart": 281,
+    "code": "Subscription.prototype.startPulling_ = function() {\n  var self = this;\n\n  if (this.closed || this.paused) {\n    return;\n  }\n\n  var maxResults;\n\n  if (this.maxInProgress < Infinity) {\n    maxResults = this.maxInProgress - Object.keys(this.inProgressAckIds).length;\n  }\n\n  this.pull({\n    returnImmediately: false,\n    maxResults: maxResults\n  }, function(err, messages, apiResponse) {\n    if (err) {\n      self.emit('error', err, apiResponse);\n    }\n\n    if (messages) {\n      messages.forEach(function(message) {\n        self.emit('message', message, apiResponse);\n      });\n    }\n\n    setTimeout(self.startPulling_.bind(self), self.interval);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Subscription",
+      "cons": "Subscription",
+      "name": "startPulling_",
+      "string": "Subscription.prototype.startPulling_()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Subscriptions: acknowledge API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/acknowledge}",
+        "html": "<p>[Subscriptions: acknowledge API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/acknowledge}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/acknowledge}</a></p>"
+      },
+      {
+        "type": "throws",
+        "string": "{Error} If at least one ackId is not provided.",
+        "types": [
+          "Error"
+        ],
+        "description": "<p>If at least one ackId is not provided.</p>"
+      },
+      {
+        "type": "param",
+        "string": "{string|string[]} ackIds - An ackId or array of ackIds.",
+        "name": "ackIds",
+        "description": "<ul>\n<li>An ackId or array of ackIds.</li>\n</ul>\n",
+        "types": [
+          "string",
+          "Array.<string>"
+        ],
+        "typesDescription": "<code>string</code>|<code>Array</code>.&lt;<code>string</code>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "subscription.ack('ePHEESyhuE8e...', function(err, apiResponse) {});",
+        "html": "<p>subscription.ack(&#39;ePHEESyhuE8e...&#39;, function(err, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Acknowledge to the backend that the message was retrieved. You must provide<br />either a single ackId or an array of ackIds.</p>",
+      "summary": "<p>Acknowledge to the backend that the message was retrieved. You must provide<br />either a single ackId or an array of ackIds.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 312,
+    "codeStart": 326,
+    "code": "Subscription.prototype.ack = function(ackIds, callback) {\n  var self = this;\n\n  if (!ackIds || ackIds.length === 0) {\n    throw new Error(\n        'At least one ID must be specified before it can be acknowledged.');\n  }\n\n  ackIds = arrify(ackIds);\n\n  var body = {\n    ackIds: ackIds\n  };\n\n  callback = callback || util.noop;\n\n  var path = this.name + ':acknowledge';\n\n  this.makeReq_('POST', path, null, body, function(err, resp) {\n    if (!err) {\n      ackIds.forEach(function(ackId) {\n        delete self.inProgressAckIds[ackId];\n      });\n      self.refreshPausedStatus_();\n    }\n\n    callback(err, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Subscription",
+      "cons": "Subscription",
+      "name": "ack",
+      "string": "Subscription.prototype.ack()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Subscriptions: delete API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/delete}",
+        "html": "<p>[Subscriptions: delete API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/delete}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/delete}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "subscription.delete(function(err, apiResponse) {});",
+        "html": "<p>subscription.delete(function(err, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Delete the subscription. Pull requests from the current subscription will be<br />errored once unsubscription is complete.</p>",
+      "summary": "<p>Delete the subscription. Pull requests from the current subscription will be<br />errored once unsubscription is complete.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 356,
+    "codeStart": 367,
+    "code": "Subscription.prototype.delete = function(callback) {\n  var self = this;\n  callback = callback || util.noop;\n  this.makeReq_('DELETE', this.name, null, true, function(err, result) {\n    if (err) {\n      callback(err, result);\n      return;\n    }\n    self.closed = true;\n    self.removeAllListeners();\n    callback(null, result);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Subscription",
+      "cons": "Subscription",
+      "name": "delete",
+      "string": "Subscription.prototype.delete()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "todo",
+        "string": "Should not be racing with other pull.",
+        "html": "<p>Should not be racing with other pull.</p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Subscriptions: pull API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/pull}",
+        "html": "<p>[Subscriptions: pull API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/pull}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/pull}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{object=} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.returnImmediately - If set, the system will respond\n    immediately. Otherwise, wait until new messages are available. Returns if\n    timeout is reached.",
+        "name": "options.returnImmediately",
+        "description": "<ul>\n<li>If set, the system will respond     immediately. Otherwise, wait until new messages are available. Returns if<br />  timeout is reached.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.maxResults - Limit the amount of messages pulled.",
+        "name": "options.maxResults",
+        "description": "<ul>\n<li>Limit the amount of messages pulled.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Pull all available messages.\n//-\nsubscription.pull(function(err, messages) {\n  // messages = [\n  //   {\n  //     ackId: '',     // ID used to acknowledge its receival.\n  //     id: '',        // Unique message ID.\n  //     data: '',      // Contents of the message.\n  //     attributes: {} // Attributes of the message.\n  //\n  //     Helper functions:\n  //     ack(callback): // Ack the message.\n  //     skip():        // Free up 1 slot on the sub's maxInProgress value.\n  //   },\n  //   // ...\n  // ]\n});\n\n//-\n// Pull a single message.\n//-\nvar opts = {\n  maxResults: 1\n};\n\nsubscription.pull(opts, function(err, messages, apiResponse) {});",
+        "html": "<p>//-<br />// Pull all available messages.<br />//-<br />subscription.pull(function(err, messages) {<br />  // messages = [<br />  //   {<br />  //     ackId: &#39;&#39;,     // ID used to acknowledge its receival.<br />  //     id: &#39;&#39;,        // Unique message ID.<br />  //     data: &#39;&#39;,      // Contents of the message.<br />  //     attributes: {} // Attributes of the message.<br />  //<br />  //     Helper functions:<br />  //     ack(callback): // Ack the message.<br />  //     skip():        // Free up 1 slot on the sub&#39;s maxInProgress value.<br />  //   },<br />  //   // ...<br />  // ]<br />});</p><p>//-<br />// Pull a single message.<br />//-<br />var opts = {<br />  maxResults: 1<br />};</p><p>subscription.pull(opts, function(err, messages, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Pull messages from the subscribed topic. If messages were found, your<br />callback is executed with an array of message objects.</p><p>Note that messages are pulled automatically once you register your first<br />event listener to the subscription, thus the call to <code>pull</code> is handled for<br />you. If you don&#39;t want to start pulling, simply don&#39;t register a<br /><code>subscription.on(&#39;message&#39;, function() {})</code> event handler.</p>",
+      "summary": "<p>Pull messages from the subscribed topic. If messages were found, your<br />callback is executed with an array of message objects.</p>",
+      "body": "<p>Note that messages are pulled automatically once you register your first<br />event listener to the subscription, thus the call to <code>pull</code> is handled for<br />you. If you don&#39;t want to start pulling, simply don&#39;t register a<br /><code>subscription.on(&#39;message&#39;, function() {})</code> event handler.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 381,
+    "codeStart": 430,
+    "code": "Subscription.prototype.pull = function(options, callback) {\n  var self = this;\n  var MAX_EVENTS_LIMIT = 1000;\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  if (!is.number(options.maxResults)) {\n    options.maxResults = MAX_EVENTS_LIMIT;\n  }\n\n  var body = {\n    returnImmediately: !!options.returnImmediately,\n    maxMessages: options.maxResults\n  };\n\n  var path = this.name + ':pull';\n  this.makeReq_('POST', path, null, body, function(err, response) {\n    if (err) {\n      callback(err, null, response);\n      return;\n    }\n\n    var messages = response.receivedMessages || [];\n    messages = messages\n      .map(Subscription.formatMessage_)\n      .map(self.decorateMessage_.bind(self));\n\n    self.refreshPausedStatus_();\n\n    if (self.autoAck && messages.length !== 0) {\n      var ackIds = messages.map(function(message) {\n        return message.ackId;\n      });\n\n      self.ack(ackIds, function(err) {\n        callback(err, messages, response);\n      });\n    } else {\n      callback(null, messages, response);\n    }\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Subscription",
+      "cons": "Subscription",
+      "name": "pull",
+      "string": "Subscription.prototype.pull()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Subscriptions: modifyAckDeadline API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/modifyAckDeadline}",
+        "html": "<p>[Subscriptions: modifyAckDeadline API Documentation]{@link <a href=\"https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/modifyAckDeadline}\">https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/modifyAckDeadline}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{object} options - The configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>The configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number|number[]} options.ackIds - The ack id(s) to change.",
+        "name": "options.ackIds",
+        "description": "<ul>\n<li>The ack id(s) to change.</li>\n</ul>\n",
+        "types": [
+          "number",
+          "Array.<number>"
+        ],
+        "typesDescription": "<code>number</code>|<code>Array</code>.&lt;<code>number</code>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.seconds - Number of seconds after call is made to\n    set the deadline of the ack.",
+        "name": "options.seconds",
+        "description": "<ul>\n<li>Number of seconds after call is made to     set the deadline of the ack.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{Function=} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "Function"
+        ],
+        "typesDescription": "<code>Function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var options = {\n  ackIds: [123],\n  seconds: 10 // Expire in 10 seconds from call.\n};\n\nsubscription.setAckDeadline(options, function(err, apiResponse) {});",
+        "html": "<p>var options = {<br />  ackIds: [123],<br />  seconds: 10 // Expire in 10 seconds from call.<br />};</p><p>subscription.setAckDeadline(options, function(err, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Modify the ack deadline for a specific message. This method is useful to<br />indicate that more time is needed to process a message by the subscriber, or<br />to make the message available for redelivery if the processing was<br />interrupted.</p>",
+      "summary": "<p>Modify the ack deadline for a specific message. This method is useful to<br />indicate that more time is needed to process a message by the subscriber, or<br />to make the message available for redelivery if the processing was<br />interrupted.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 476,
+    "codeStart": 498,
+    "code": "Subscription.prototype.setAckDeadline = function(options, callback) {\n  var body = {\n    ackIds: arrify(options.ackIds),\n    ackDeadlineSeconds: options.seconds\n  };\n\n  callback = callback || util.noop;\n\n  var path = this.name + ':modifyAckDeadline';\n  this.makeReq_('POST', path, null, body, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Subscription",
+      "cons": "Subscription",
+      "name": "setAckDeadline",
+      "string": "Subscription.prototype.setAckDeadline()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{object} message - A message object.",
+        "name": "message",
+        "description": "<ul>\n<li>A message object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{object} message - The original message after being decorated.",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "<p>message - The original message after being decorated.</p>"
+      },
+      {
+        "type": "param",
+        "string": "{function} message.ack - Ack the message.",
+        "name": "message.ack",
+        "description": "<ul>\n<li>Ack the message.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} message.skip - Increate the number of available messages to\n    simultaneously receive.",
+        "name": "message.skip",
+        "description": "<ul>\n<li>Increate the number of available messages to     simultaneously receive.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Add functionality on top of a message returned from the API, including the<br />ability to <code>ack</code> and <code>skip</code> the message.</p><p>This also records the message as being &quot;in progress&quot;. See<br />{module:subscription#refreshPausedStatus_}.</p>",
+      "summary": "<p>Add functionality on top of a message returned from the API, including the<br />ability to <code>ack</code> and <code>skip</code> the message.</p>",
+      "body": "<p>This also records the message as being &quot;in progress&quot;. See<br />{module:subscription#refreshPausedStatus_}.</p>"
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 510,
+    "codeStart": 525,
+    "code": "Subscription.prototype.decorateMessage_ = function(message) {\n  var self = this;\n\n  this.inProgressAckIds[message.ackId] = true;\n\n  message.ack = self.ack.bind(self, message.ackId);\n\n  message.skip = function() {\n    delete self.inProgressAckIds[message.ackId];\n    self.refreshPausedStatus_();\n  };\n\n  return message;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Subscription",
+      "cons": "Subscription",
+      "name": "decorateMessage_",
+      "string": "Subscription.prototype.decorateMessage_()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "<p>Update the status of <code>maxInProgress</code>. Å subscription becomes &quot;paused&quot; (not<br />pulling) when the number of messages that have yet to be ack&#39;d or skipped<br />exceeds the user&#39;s specified <code>maxInProgress</code> value.</p><p>This will start pulling when that event reverses: we were paused, but one or<br />more messages were just ack&#39;d or skipped, freeing up room for more messages<br />to be consumed.</p>",
+      "summary": "<p>Update the status of <code>maxInProgress</code>. Å subscription becomes &quot;paused&quot; (not<br />pulling) when the number of messages that have yet to be ack&#39;d or skipped<br />exceeds the user&#39;s specified <code>maxInProgress</code> value.</p>",
+      "body": "<p>This will start pulling when that event reverses: we were paused, but one or<br />more messages were just ack&#39;d or skipped, freeing up room for more messages<br />to be consumed.</p>"
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 540,
+    "codeStart": 551,
+    "code": "Subscription.prototype.refreshPausedStatus_ = function() {\n  var isCurrentlyPaused = this.paused;\n  var inProgress = Object.keys(this.inProgressAckIds).length;\n  this.paused = inProgress >= this.maxInProgress;\n\n  if (isCurrentlyPaused && !this.paused && this.messageListeners > 0) {\n    this.startPulling_();\n  }\n};\n\nmodule.exports = Subscription;",
+    "ctx": {
+      "type": "method",
+      "constructor": "Subscription",
+      "cons": "Subscription",
+      "name": "refreshPausedStatus_",
+      "string": "Subscription.prototype.refreshPausedStatus_()"
+    }
+  }
+]
