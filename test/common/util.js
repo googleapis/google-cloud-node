@@ -535,26 +535,6 @@ describe('common/util', function() {
           };
         });
 
-        it('should not care about "Could not load" errors', function(done) {
-          var error = new Error('Could not load');
-
-          utilOverrides.decorateRequest = function() {};
-
-          authClient.authorizeRequest = function(rOpts, callback) {
-            setImmediate(function() {
-              callback(error);
-            });
-          };
-
-          var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory();
-          makeAuthenticatedRequest({}, {
-            onAuthenticated: function(err) {
-              assert.strictEqual(err, null);
-              done();
-            }
-          });
-        });
-
         it('should invoke the callback with error', function(done) {
           var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory();
           makeAuthenticatedRequest({}, function(err) {
