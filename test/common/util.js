@@ -181,22 +181,26 @@ describe('common/util', function() {
       var returnedBody = { a: 'b', c: 'd' };
       var returnedResp = { a: 'b', c: 'd' };
 
-      utilOverrides.parseApiResp = function(err_, resp_, body_) {
-        assert.strictEqual(err_, err);
+      utilOverrides.parseHttpRespMessage = function(resp_) {
         assert.strictEqual(resp_, resp);
-        assert.strictEqual(body_, body);
 
         return {
-          err: returnedErr,
-          body: returnedBody,
           resp: returnedResp
         };
       };
 
+      utilOverrides.parseHttpRespBody = function(body_) {
+        assert.strictEqual(body_, body);
+
+        return {
+          body: returnedBody
+        };
+      };
+
       util.handleResp(err, resp, body, function(err, body, resp) {
-        assert.strictEqual(err, returnedErr);
-        assert.strictEqual(body, returnedBody);
-        assert.strictEqual(resp, returnedResp);
+        assert.deepEqual(err, returnedErr);
+        assert.deepEqual(body, returnedBody);
+        assert.deepEqual(resp, returnedResp);
         done();
       });
     });
@@ -204,41 +208,53 @@ describe('common/util', function() {
     it('should parse response for error', function(done) {
       var error = new Error('Error.');
 
-      utilOverrides.parseApiResp = function() {
+      utilOverrides.parseHttpRespMessage = function() {
         return { err: error };
       };
 
       util.handleResp(null, {}, {}, function(err) {
-        assert.strictEqual(err, error);
+        assert.deepEqual(err, error);
+        done();
+      });
+    });
+
+    it('should parse body for error', function(done) {
+      var error = new Error('Error.');
+
+      utilOverrides.parseHttpRespBody = function() {
+        return { err: error };
+      };
+
+      util.handleResp(null, {}, {}, function(err) {
+        assert.deepEqual(err, error);
         done();
       });
     });
   });
 
-  describe('parseApiResp', function() {
-    describe('non-200s response status', function() {
-      it('should build ApiError with status and message', function(done) {
-        var error = { statusCode: 400, statusMessage: 'Not Good' };
+  describe('parseHttpRespMessage', function() {
+    it('should build ApiError with non-200 status and message', function(done) {
+      var httpRespMessage = { statusCode: 400, statusMessage: 'Not Good' };
 
-        utilOverrides.ApiError = function(error_) {
-          assert.strictEqual(error_.code, error.statusCode);
-          assert.strictEqual(error_.message, error.statusMessage);
-          assert.strictEqual(error_.response, error);
+      utilOverrides.ApiError = function(error_) {
+        assert.strictEqual(error_.code, httpRespMessage.statusCode);
+        assert.strictEqual(error_.message, httpRespMessage.statusMessage);
+        assert.strictEqual(error_.response, httpRespMessage);
 
-          done();
-        };
+        done();
+      };
 
-        util.parseApiResp(null, error);
-      });
+      util.parseHttpRespMessage(httpRespMessage);
     });
 
-    it('should not throw when there is just an error', function() {
-      assert.doesNotThrow(function() {
-        var error = {};
-        util.parseApiResp(error);
-      });
+    it('should return the original response message', function() {
+      var httpRespMessage = {};
+      var parsedHttpRespMessage = util.parseHttpRespMessage(httpRespMessage);
+      assert.strictEqual(parsedHttpRespMessage.resp, httpRespMessage);
     });
+  });
 
+  describe('parseHttpRespBody', function() {
     it('should detect body errors', function() {
       var apiErr = {
         errors: [{ foo: 'bar' }],
@@ -246,19 +262,25 @@ describe('common/util', function() {
         message: 'an error occurred'
       };
 
-      var parsedApiResp = util.parseApiResp(null, {}, { error: apiErr });
+      var parsedHttpRespBody = util.parseHttpRespBody({ error: apiErr });
 
-      assert.deepEqual(parsedApiResp.err.errors, apiErr.errors);
-      assert.strictEqual(parsedApiResp.err.code, apiErr.code);
-      assert.deepEqual(parsedApiResp.err.message, apiErr.message);
+      assert.deepEqual(parsedHttpRespBody.err.errors, apiErr.errors);
+      assert.strictEqual(parsedHttpRespBody.err.code, apiErr.code);
+      assert.deepEqual(parsedHttpRespBody.err.message, apiErr.message);
     });
 
     it('should try to parse JSON if body is string', function() {
-      var body = '{ "foo": "bar" }';
+      var httpRespBody = '{ "foo": "bar" }';
+      var parsedHttpRespBody = util.parseHttpRespBody(httpRespBody);
 
-      var parsedApiResp = util.parseApiResp(null, {}, body);
+      assert.strictEqual(parsedHttpRespBody.body.foo, 'bar');
+    });
 
-      assert.strictEqual(parsedApiResp.body.foo, 'bar');
+    it('should return the original body', function() {
+      var httpRespBody = {};
+      var parsedHttpRespBody = util.parseHttpRespBody(httpRespBody);
+
+      assert.strictEqual(parsedHttpRespBody.body, httpRespBody);
     });
   });
 
@@ -692,7 +714,7 @@ describe('common/util', function() {
         assert.strictEqual(config.request, fakeRequest);
 
         var error = new Error('Error.');
-        utilOverrides.parseApiResp = function() {
+        utilOverrides.parseHttpRespMessage = function() {
           return { err: error };
         };
         utilOverrides.shouldRetryRequest = function(err) {
