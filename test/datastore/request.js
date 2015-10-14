@@ -68,6 +68,16 @@ fakeEntity = Object.keys(entity).reduce(function(fakeEntity, methodName) {
   return fakeEntity;
 }, {});
 
+var utilOverrides = {};
+var fakeUtil;
+fakeUtil = Object.keys(util).reduce(function(fakeUtil, methodName) {
+  fakeUtil[methodName] = function() {
+    var method = utilOverrides[methodName] || util[methodName];
+    return method.apply(this, arguments);
+  };
+  return fakeUtil;
+}, {});
+
 var extended = false;
 var fakeStreamRouter = {
   extend: function(Class, methods) {
@@ -90,6 +100,7 @@ describe('Request', function() {
 
   before(function() {
     mockery.registerMock('./entity.js', fakeEntity);
+    mockery.registerMock('../common/util.js', fakeUtil);
     mockery.registerMock('./pb.js', pb);
     mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
     mockery.registerMock('request', fakeRequest);
@@ -111,6 +122,7 @@ describe('Request', function() {
       path: ['Company', 123]
     });
     entityOverrides = {};
+    utilOverrides = {};
     requestOverride = null;
     request = new Request();
     request.apiEndpoint = CUSTOM_ENDPOINT;
@@ -870,7 +882,6 @@ describe('Request', function() {
     it('should make API request', function(done) {
       var mockRequest = { mock: 'request' };
       requestOverride = function(req) {
-        assert.equal(req.headers['Content-Length'], 2);
         assert.deepEqual(req, mockRequest);
         done();
         return new stream.Writable();
@@ -897,30 +908,11 @@ describe('Request', function() {
     it('should send protobuf request', function(done) {
       var requestOptions = { mode: 'NON_TRANSACTIONAL' };
       var decoded = new pb.CommitRequest(requestOptions).toBuffer();
-      requestOverride = function() {
-        var stream = { on: util.noop };
-        stream.end = function(data) {
-          assert.equal(String(data), String(decoded));
-          done();
-        };
-        return stream;
-      };
-      request.makeReq_('commit', requestOptions, util.noop);
-    });
-
-    it('should decode protobuf response', function(done) {
-      pbFakeMethodResponseDecode = function() {
+      requestOverride = function(req) {
+        assert.equal(String(req.body), String(decoded));
         done();
       };
-      requestOverride = function() {
-        var ws = new stream.Writable();
-        setImmediate(function() {
-          ws.emit('response', ws);
-          ws.emit('end');
-        });
-        return ws;
-      };
-      request.makeReq_('fakeMethod', util.noop);
+      request.makeReq_('commit', requestOptions, util.noop);
     });
 
     it('should respect API host and port configuration', function(done) {
@@ -929,9 +921,116 @@ describe('Request', function() {
       requestOverride = function(req) {
         assert.equal(req.uri.indexOf(CUSTOM_ENDPOINT), 0);
         done();
-        return new stream.Writable();
       };
 
+      request.makeReq_('fakeMethod', util.noop);
+    });
+
+    it('should execute callback with error from request', function(done) {
+      var error = new Error('Error.');
+
+      requestOverride = function(req, callback) {
+        callback(error);
+      };
+
+      request.makeReq_('fakeMethod', function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    it('should parse response', function(done) {
+      var resp = {};
+
+      requestOverride = function(req, callback) {
+        callback(null, resp);
+      };
+
+      utilOverrides.parseHttpRespMessage = function(resp_) {
+        assert.strictEqual(resp_, resp);
+        setImmediate(done);
+        return resp;
+      };
+
+      request.makeReq_('fakeMethod', util.noop);
+    });
+
+    it('should return error from parsed response', function(done) {
+      var error = new Error('Error.');
+      var resp = {};
+
+      requestOverride = function(req, callback) {
+        callback(null, resp);
+      };
+
+      utilOverrides.parseHttpRespMessage = function() {
+        return {
+          err: error,
+          resp: resp
+        };
+      };
+
+      request.makeReq_('fakeMethod', function(err, results, apiResponse) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(results, null);
+        assert.strictEqual(apiResponse, resp);
+        done();
+      });
+    });
+
+    it('should parse body', function(done) {
+      var resp = {};
+      var body = {};
+
+      requestOverride = function(req, callback) {
+        callback(null, resp, body);
+      };
+
+      utilOverrides.parseHttpRespBody = function() {
+        return {
+          body: body
+        };
+      };
+
+      request.makeReq_('fakeMethod', function(err, results, apiResponse) {
+        assert.strictEqual(err, null);
+        assert.strictEqual(results, body);
+        assert.strictEqual(apiResponse, resp);
+        done();
+      });
+    });
+
+    it('should return error from parsed body', function(done) {
+      var error = new Error('Error.');
+      var resp = {};
+      var body = {};
+
+      requestOverride = function(req, callback) {
+        callback(null, resp, body);
+      };
+
+      utilOverrides.parseHttpRespBody = function() {
+        return {
+          err: error,
+          body: body
+        };
+      };
+
+      request.makeReq_('fakeMethod', function(err, results, apiResponse) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(results, null);
+        assert.strictEqual(apiResponse, resp);
+        done();
+      });
+    });
+
+    it('should decode the protobuf response', function(done) {
+      pbFakeMethodResponseDecode = function() {
+        done();
+      };
+      requestOverride = function(req, callback) {
+        callback(null, {}, new Buffer(''));
+      };
       request.makeReq_('fakeMethod', util.noop);
     });
 
@@ -949,13 +1048,9 @@ describe('Request', function() {
           var expected = new pb.RollbackRequest({
             transaction: request.id
           }).toBuffer();
-          requestOverride = function() {
-            var stream = { on: util.noop, end: util.noop };
-            stream.end = function(data) {
-              assert.deepEqual(data, expected);
-              done();
-            };
-            return stream;
+          requestOverride = function(req) {
+            assert.deepEqual(req.body, expected);
+            done();
           };
           request.makeReq_('rollback', util.noop);
         });
@@ -969,13 +1064,9 @@ describe('Request', function() {
             mode: 'TRANSACTIONAL',
             transaction: request.id
           }).toBuffer();
-          requestOverride = function() {
-            var stream = { on: util.noop, end: util.noop };
-            stream.end = function(data) {
-              assert.deepEqual(data, expected);
-              done();
-            };
-            return stream;
+          requestOverride = function(req) {
+            assert.deepEqual(req.body, expected);
+            done();
           };
           request.makeReq_('commit', util.noop);
         });
@@ -984,13 +1075,9 @@ describe('Request', function() {
           var expected = new pb.CommitRequest({
             mode: 'NON_TRANSACTIONAL'
           }).toBuffer();
-          requestOverride = function() {
-            var stream = { on: util.noop, end: util.noop };
-            stream.end = function(data) {
-              assert.deepEqual(data, expected);
-              done();
-            };
-            return stream;
+          requestOverride = function(req) {
+            assert.deepEqual(req.body, expected);
+            done();
           };
           request.makeReq_('commit', util.noop);
         });
@@ -1005,26 +1092,17 @@ describe('Request', function() {
               transaction: request.id
             }
           }).toBuffer();
-          requestOverride = function() {
-            var stream = { on: util.noop, end: util.noop };
-            stream.end = function(data) {
-              assert.deepEqual(data, expected);
-              done();
-            };
-            return stream;
+          requestOverride = function(req) {
+            assert.deepEqual(req.body, expected);
+            done();
           };
           request.makeReq_('lookup', util.noop);
         });
 
         it('should not attach transactional properties', function(done) {
-          var expected = new pb.LookupRequest().toBuffer();
-          requestOverride = function() {
-            var ws = new stream.Writable();
-            ws.end = function(data) {
-              assert.deepEqual(data, expected);
-              done();
-            };
-            return ws;
+          requestOverride = function(req) {
+            assert.strictEqual(req.body, '');
+            done();
           };
           request.makeReq_('lookup', util.noop);
         });
