@@ -341,6 +341,20 @@ describe('Zone', function() {
         http: true
       };
 
+      beforeEach(function() {
+        zone.createHttpServerFirewall_ = function(callback) {
+          callback();
+        };
+      });
+
+      it('should create a firewall rule', function(done) {
+        zone.createHttpServerFirewall_ = function() {
+          done();
+        };
+
+        zone.createVM(NAME, CONFIG, assert.ifError);
+      });
+
       it('should add a network interface accessConfig', function(done) {
         zone.makeReq_ = function(method, path, query, body) {
           assert.deepEqual(body.networkInterfaces[0].accessConfigs[0], {
@@ -393,6 +407,20 @@ describe('Zone', function() {
       var CONFIG = {
         https: true
       };
+
+      beforeEach(function() {
+        zone.createHttpsServerFirewall_ = function(callback) {
+          callback();
+        };
+      });
+
+      it('should create a firewall rule', function(done) {
+        zone.createHttpsServerFirewall_ = function() {
+          done();
+        };
+
+        zone.createVM(NAME, CONFIG, assert.ifError);
+      });
 
       it('should add a network interface accessConfig', function(done) {
         zone.makeReq_ = function(method, path, query, body) {
@@ -978,6 +1006,100 @@ describe('Zone', function() {
       assert(vm instanceof FakeVM);
       assert.strictEqual(vm.calledWith_[0], zone);
       assert.strictEqual(vm.calledWith_[1], NAME);
+    });
+  });
+
+  describe('createHttpServerFirewall_', function() {
+    it('should create a firewall rule', function(done) {
+      zone.compute.createFirewall = function(name, config) {
+        assert.strictEqual(name, 'default-allow-http');
+        assert.deepEqual(config, {
+          protocols: {
+            tcp: [80]
+          },
+          ranges: ['0.0.0.0/0'],
+          tags: ['http-server']
+        });
+
+        done();
+      };
+
+      zone.createHttpServerFirewall_(assert.ifError);
+    });
+
+    it('should execute callback with error & API response', function(done) {
+      var error = new Error('Error.');
+
+      zone.compute.createFirewall = function(name, config, callback) {
+        callback(error);
+      };
+
+      zone.createHttpServerFirewall_(function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    it('should not execute callback with error if 409', function(done) {
+      var error = new Error('Error.');
+      error.code = 409;
+
+      var apiResponse = {};
+
+      zone.compute.createFirewall = function(name, config, callback) {
+        callback(error, null, apiResponse);
+      };
+
+      zone.createHttpServerFirewall_(function(err) {
+        assert.strictEqual(err, null);
+        done();
+      });
+    });
+  });
+
+  describe('createHttpsServerFirewall_', function() {
+    it('should create a firewall rule', function(done) {
+      zone.compute.createFirewall = function(name, config) {
+        assert.strictEqual(name, 'default-allow-https');
+        assert.deepEqual(config, {
+          protocols: {
+            tcp: [443]
+          },
+          ranges: ['0.0.0.0/0'],
+          tags: ['https-server']
+        });
+
+        done();
+      };
+
+      zone.createHttpsServerFirewall_(assert.ifError);
+    });
+
+    it('should execute callback with error & API response', function(done) {
+      var error = new Error('Error.');
+
+      zone.compute.createFirewall = function(name, config, callback) {
+        callback(error);
+      };
+
+      zone.createHttpsServerFirewall_(function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    it('should not execute callback with error if 409', function(done) {
+      var error = new Error('Error.');
+      error.code = 409;
+
+      zone.compute.createFirewall = function(name, config, callback) {
+        callback(error);
+      };
+
+      zone.createHttpsServerFirewall_(function(err) {
+        assert.strictEqual(err, null);
+        done();
+      });
     });
   });
 
