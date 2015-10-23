@@ -54,15 +54,12 @@ describe('Compute', function() {
   });
 
   describe('addresses', function() {
-    var ADDRESS_NAME;
-    var address;
+    var ADDRESS_NAME = generateName();
+    var address = region.address(ADDRESS_NAME);
 
     before(function(done) {
-      ADDRESS_NAME = generateName();
-
-      region.address(ADDRESS_NAME).create(function(err, address_, operation) {
+      address.create(function(err, disk, operation) {
         assert.ifError(err);
-        address = address_;
         operation.onComplete(done);
       });
     });
@@ -103,19 +100,16 @@ describe('Compute', function() {
   });
 
   describe('disks', function() {
-    var DISK_NAME;
-    var disk;
+    var DISK_NAME = generateName();
+    var disk = zone.disk(DISK_NAME);
 
     before(function(done) {
-      DISK_NAME = generateName();
-
       var config = {
         os: 'ubuntu'
       };
 
-      zone.disk(DISK_NAME).create(config, function(err, disk_, operation) {
+      disk.create(config, function(err, disk, operation) {
         assert.ifError(err);
-        disk = disk_;
         operation.onComplete(done);
       });
     });
@@ -166,7 +160,8 @@ describe('Compute', function() {
   });
 
   describe('firewalls', function() {
-    var FIREWALL_NAME;
+    var FIREWALL_NAME = generateName();
+    var firewall = compute.firewall(FIREWALL_NAME);
 
     var CONFIG = {
       protocols: {
@@ -191,18 +186,11 @@ describe('Compute', function() {
       sourceRanges: CONFIG.ranges
     };
 
-    var firewall;
-
     before(function(done) {
-      FIREWALL_NAME = generateName();
-
-      compute
-        .firewall(FIREWALL_NAME)
-        .create(CONFIG, function(err, firewall_, operation) {
-          assert.ifError(err);
-          firewall = firewall_;
-          operation.onComplete(done);
-        });
+      firewall.create(CONFIG, function(err, firewall, operation) {
+        assert.ifError(err);
+        operation.onComplete(done);
+      });
     });
 
     it('should have opened the correct connections', function(done) {
@@ -238,24 +226,18 @@ describe('Compute', function() {
   });
 
   describe('networks', function() {
-    var NETWORK_NAME;
+    var NETWORK_NAME = generateName();
+    var network = compute.network(NETWORK_NAME);
 
     var CONFIG = {
       range: '10.240.0.0/16'
     };
 
-    var network;
-
     before(function(done) {
-      NETWORK_NAME = generateName();
-
-      compute
-        .network(NETWORK_NAME)
-        .create(CONFIG, function(err, network_, operation) {
-          assert.ifError(err);
-          network = network_;
-          operation.onComplete(done);
-        });
+      network.create(CONFIG, function(err, network, operation) {
+        assert.ifError(err);
+        operation.onComplete(done);
+      });
     });
 
     it('should have opened the correct range', function(done) {
@@ -406,20 +388,17 @@ describe('Compute', function() {
   });
 
   describe('vms', function() {
-    var VM_NAME;
-    var vm;
+    var VM_NAME = generateName();
+    var vm = zone.vm(VM_NAME);
 
     before(function(done) {
-      VM_NAME = generateName();
-
       var config = {
         os: 'ubuntu',
         http: true
       };
 
-      zone.vm(VM_NAME).create(config, function(err, vm_, operation) {
+      vm.create(config, function(err, vm, operation) {
         assert.ifError(err);
-        vm = vm_;
         operation.onComplete(done);
       });
     });
@@ -477,7 +456,7 @@ describe('Compute', function() {
     });
 
     it('should attach and detach a disk', function(done) {
-      var disk;
+      var disk = zone.disk(generateName());
 
       // This test waits on a lot of operations.
       this.timeout(90000);
@@ -489,27 +468,11 @@ describe('Compute', function() {
       ], done);
 
       function createDisk(callback) {
-        var diskName = generateName();
         var config = {
           os: 'ubuntu'
         };
 
-        zone.disk(diskName).create(config, function(err, disk_, operation) {
-          if (err) {
-            callback(err);
-            return;
-          }
-
-          operation.onComplete(function(err) {
-            if (err) {
-              callback(err);
-              return;
-            }
-
-            disk = disk_;
-            callback();
-          });
-        });
+        disk.create(config, execAfterOperationComplete(callback));
       }
 
       function attachDisk(callback) {
@@ -533,19 +496,15 @@ describe('Compute', function() {
 
         tags.push(newTagName);
 
-        vm.setTags(tags, fingerprint, function(err, operation) {
+        vm.setTags(tags, fingerprint, execAfterOperationComplete(function(err) {
           assert.ifError(err);
 
-          operation.onComplete(function(err) {
+          vm.getTags(function(err, tags) {
             assert.ifError(err);
-
-            vm.getTags(function(err, tags) {
-              assert.ifError(err);
-              assert(tags.indexOf(newTagName) > -1);
-              done();
-            });
+            assert(tags.indexOf(newTagName) > -1);
+            done();
           });
-        });
+        }));
       });
     });
 

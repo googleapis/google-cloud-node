@@ -31,9 +31,9 @@ var storage = gcloud.storage();
 
 describe('BigQuery', function() {
   var DATASET_ID = ('gcloud_test_dataset_temp' + uuid.v1()).replace(/-/g, '_');
-  var dataset;
+  var dataset = bigquery.dataset(DATASET_ID);
   var TABLE_ID = 'myKittens';
-  var table;
+  var table = dataset.table(TABLE_ID);
   var BUCKET_NAME = 'gcloud-test-bucket-temp-' + uuid.v1();
   var bucket;
 
@@ -43,30 +43,12 @@ describe('BigQuery', function() {
     async.series([
       // Create the test dataset.
       function(next) {
-        bigquery.dataset(DATASET_ID).create(function(err, dataset_) {
-          if (err) {
-            next(err);
-            return;
-          }
-
-          dataset = dataset_;
-          next();
-        });
+        dataset.create(next);
       },
 
       // Create the test table.
       function(next) {
-        dataset.table(TABLE_ID).create({
-          schema: 'id:integer,breed,name,dob:timestamp'
-        }, function(err, t) {
-          if (err) {
-            next(err);
-            return;
-          }
-
-          table = t;
-          next();
-        });
+        table.create({ schema: 'id:integer,breed,name,dob:timestamp' }, next);
       },
 
       // Create a Bucket.
