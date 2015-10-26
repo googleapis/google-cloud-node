@@ -65,7 +65,9 @@ describe('Search', function() {
       var newIndexName = generateIndexName();
       var newIndex = search.index(newIndexName);
 
-      newIndex.createDocument(TEST_DOCUMENT_JSON, function(err, document) {
+      var document = newIndex.document(TEST_DOCUMENT_JSON);
+
+      document.create(function(err) {
         assert.ifError(err);
         document.delete(done);
       });
@@ -80,7 +82,9 @@ describe('Search', function() {
       var newIndexName = generateIndexName();
       var newIndex = search.index(newIndexName);
 
-      newIndex.createDocument(TEST_DOCUMENT_JSON, function(err, document) {
+      var document = newIndex.document(TEST_DOCUMENT_JSON);
+
+      document.create(function(err) {
         if (err) {
           done(err);
           return;
@@ -114,18 +118,10 @@ describe('Search', function() {
   });
 
   describe('listing documents', function() {
-    var document;
+    var document = index.document(TEST_DOCUMENT_JSON);
 
     before(function(done) {
-      index.createDocument(TEST_DOCUMENT_JSON, function(err, doc) {
-        if (err) {
-          done(err);
-          return;
-        }
-
-        document = doc;
-        done();
-      });
+      document.create(done);
     });
 
     after(function(done) {
@@ -186,25 +182,31 @@ describe('Search', function() {
         });
       });
 
-      index.createDocument(newDocument, function(err, document) {
+      newDocument.create(function(err) {
         assert.ifError(err);
-        document.getMetadata(function(err) {
-          assert.ifError(err);
-          assert.deepEqual(document.toJSON(), TEST_DOCUMENT_JSON);
 
-          document.delete(done);
+        newDocument.getMetadata(function(err) {
+          assert.ifError(err);
+
+          assert.deepEqual(newDocument.toJSON(), TEST_DOCUMENT_JSON);
+
+          newDocument.delete(done);
         });
       });
     });
 
     it('should create a document from JSON', function(done) {
-      index.createDocument(TEST_DOCUMENT_JSON, function(err, document) {
-        assert.ifError(err);
-        document.getMetadata(function(err) {
-          assert.ifError(err);
-          assert.deepEqual(document.toJSON(), TEST_DOCUMENT_JSON);
+      var newDocument = index.document(TEST_DOCUMENT_JSON);
 
-          document.delete(done);
+      newDocument.create(function(err) {
+        assert.ifError(err);
+
+        newDocument.getMetadata(function(err) {
+          assert.ifError(err);
+
+          assert.deepEqual(newDocument.toJSON(), TEST_DOCUMENT_JSON);
+
+          newDocument.delete(done);
         });
       });
     });
@@ -213,16 +215,15 @@ describe('Search', function() {
   describe('search', function() {
     var query = 'ryan';
     var DOCUMENT_NAME = generateDocumentName();
-    var document;
+    var document = index.document(DOCUMENT_NAME);
 
     before(function(done) {
-      document = index.document(DOCUMENT_NAME);
-
       var questions = document.addField('question');
+
       questions.addTextValue('Where did Ryan go?');
       questions.addTextValue('Where did Silvano go?');
 
-      index.createDocument(document, done);
+      document.create(done);
     });
 
     after(function(done) {
