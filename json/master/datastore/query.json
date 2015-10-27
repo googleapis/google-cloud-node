@@ -110,6 +110,20 @@
   {
     "tags": [
       {
+        "type": "param",
+        "string": "{boolean=} autoPaginateVal - Have pagination handled automatically.\n    Default: true.",
+        "name": "autoPaginateVal",
+        "description": "<ul>\n<li>Have pagination handled automatically.     Default: true.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
         "type": "return",
         "string": "{module:datastore/query}",
         "types": [
@@ -122,6 +136,11 @@
         "variable": false,
         "description": "",
         "html": "<p>{module:datastore/query}</p>"
+      },
+      {
+        "type": "example",
+        "string": "// Retrieve a list of people related to person \"1234\",\n// disabling auto pagination\nvar query = dataset.createQuery('Person')\n  .hasAncestor(dataset.key(['Person', 1234]))\n  .autoPaginate(false);\n\nvar callback = function(err, entities, nextQuery, apiResponse) {\n  if (nextQuery) {\n    // More results might exist, so we'll manually fetch them\n    dataset.runQuery(nextQuery, callback);\n  }\n};\n\ndataset.runQuery(query, callback);",
+        "html": "<p>// Retrieve a list of people related to person &quot;1234&quot;,<br />// disabling auto pagination<br />var query = dataset.createQuery(&#39;Person&#39;)<br />  .hasAncestor(dataset.key([&#39;Person&#39;, 1234]))<br />  .autoPaginate(false);</p><p>var callback = function(err, entities, nextQuery, apiResponse) {<br />  if (nextQuery) {<br />    // More results might exist, so we&#39;ll manually fetch them<br />    dataset.runQuery(nextQuery, callback);<br />  }<br />};</p><p>dataset.runQuery(query, callback);</p>"
       }
     ],
     "description": {
@@ -135,7 +154,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 77,
-    "codeStart": 80,
+    "codeStart": 98,
     "code": "Query.prototype.autoPaginate = function(autoPaginateVal) {\n  this.autoPaginateVal = autoPaginateVal !== false;\n  return this;\n};",
     "ctx": {
       "type": "method",
@@ -208,8 +227,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 85,
-    "codeStart": 108,
+    "line": 103,
+    "codeStart": 126,
     "code": "Query.prototype.filter = function(filter, value) {\n  // TODO: Add filter validation.\n  var operatorRegex = /[><=]/g;\n  filter = filter.trim();\n  var fieldName = filter.replace(operatorRegex, '').trim();\n  var op = filter.substr(fieldName.length, filter.length).trim();\n  this.filters.push({\n    name: fieldName,\n    op: op,\n    val: value\n  });\n  return this;\n};",
     "ctx": {
       "type": "method",
@@ -270,8 +289,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 122,
-    "codeStart": 133,
+    "line": 140,
+    "codeStart": 151,
     "code": "Query.prototype.hasAncestor = function(key) {\n  this.filters.push({ name: '__key__', op: 'HAS_ANCESTOR', val: key });\n  return this;\n};",
     "ctx": {
       "type": "method",
@@ -332,8 +351,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 138,
-    "codeStart": 154,
+    "line": 156,
+    "codeStart": 172,
     "code": "Query.prototype.order = function(property) {\n  var sign = '+';\n  if (property[0] === '-' || property[0] === '+') {\n    sign = property[0];\n    property = property.substr(1);\n  }\n  this.orders.push({ name: property, sign: sign });\n  return this;\n};",
     "ctx": {
       "type": "method",
@@ -389,8 +408,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 164,
-    "codeStart": 173,
+    "line": 182,
+    "codeStart": 191,
     "code": "Query.prototype.groupBy = function(fieldNames) {\n  this.groupByVal = arrify(fieldNames);\n  return this;\n};",
     "ctx": {
       "type": "method",
@@ -452,8 +471,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 178,
-    "codeStart": 196,
+    "line": 196,
+    "codeStart": 214,
     "code": "Query.prototype.select = function(fieldNames) {\n  this.selectVal = arrify(fieldNames);\n  return this;\n};",
     "ctx": {
       "type": "method",
@@ -514,8 +533,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 201,
-    "codeStart": 215,
+    "line": 219,
+    "codeStart": 233,
     "code": "Query.prototype.start = function(start) {\n  this.startVal = start;\n  return this;\n};",
     "ctx": {
       "type": "method",
@@ -576,8 +595,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 220,
-    "codeStart": 234,
+    "line": 238,
+    "codeStart": 252,
     "code": "Query.prototype.end = function(end) {\n  this.endVal = end;\n  return this;\n};",
     "ctx": {
       "type": "method",
@@ -638,8 +657,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 239,
-    "codeStart": 251,
+    "line": 257,
+    "codeStart": 269,
     "code": "Query.prototype.limit = function(n) {\n  this.limitVal = n;\n  return this;\n};",
     "ctx": {
       "type": "method",
@@ -700,8 +719,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 256,
-    "codeStart": 268,
+    "line": 274,
+    "codeStart": 286,
     "code": "Query.prototype.offset = function(n) {\n  this.offsetVal = n;\n  return this;\n};\n\nmodule.exports = Query;",
     "ctx": {
       "type": "method",

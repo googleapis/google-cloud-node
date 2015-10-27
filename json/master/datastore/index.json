@@ -365,6 +365,11 @@
         "variable": false,
         "description": "",
         "html": "<p>{module:datastore/dataset}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'my-project'\n});\n\nvar datastore = gcloud.datastore;\nvar dataset = datastore.dataset();",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;my-project&#39;<br />});</p><p>var datastore = gcloud.datastore;<br />var dataset = datastore.dataset();</p>"
       }
     ],
     "description": {
@@ -378,7 +383,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 104,
-    "codeStart": 114,
+    "codeStart": 123,
     "code": "Datastore.prototype.dataset = function(options) {\n  options = options || {};\n  // Mix in global config data to the provided options.\n  return new Dataset(util.extendGlobalConfig(this.config, options));\n};",
     "ctx": {
       "type": "method",
@@ -434,8 +439,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 120,
-    "codeStart": 132,
+    "line": 129,
+    "codeStart": 141,
     "code": "Datastore.int = function(value) {\n  return new entity.Int(value);\n};",
     "ctx": {
       "type": "method",
@@ -490,8 +495,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 136,
-    "codeStart": 148,
+    "line": 145,
+    "codeStart": 157,
     "code": "Datastore.double = function(value) {\n  return new entity.Double(value);\n};\n\nmodule.exports = Datastore;",
     "ctx": {
       "type": "method",
