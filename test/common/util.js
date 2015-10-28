@@ -230,6 +230,22 @@ describe('common/util', function() {
         done();
       });
     });
+
+    it('should not parse undefined response', function(done) {
+      utilOverrides.parseHttpRespMessage = function() {
+        done(); // Will throw.
+      };
+
+      util.handleResp(null, null, null, done);
+    });
+
+    it('should not parse undefined body', function(done) {
+      utilOverrides.parseHttpRespBody = function() {
+        done(); // Will throw.
+      };
+
+      util.handleResp(null, null, null, done);
+    });
   });
 
   describe('parseHttpRespMessage', function() {
