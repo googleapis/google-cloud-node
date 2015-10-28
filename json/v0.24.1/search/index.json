@@ -1,0 +1,638 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2015 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2015 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
+  },
+  {
+    "tags": [
+      {
+        "type": "module",
+        "string": "search",
+        "html": "<p>search</p>"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 17,
+    "codeStart": 21,
+    "code": "'use strict';\n\nvar extend = require('extend');\nvar format = require('string-format-obj');\nvar is = require('is');",
+    "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:search/index}",
+        "types": [
+          "module:search/index"
+        ],
+        "typesDescription": "module:<a href=\"module%3Asearch%2Findex.html\">search/index</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:search/index}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 27,
+    "codeStart": 31,
+    "code": "var Index = require('./index-class.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Index",
+      "value": "require('./index-class.js')",
+      "string": "Index"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/streamrouter}",
+        "types": [
+          "module:common/streamrouter"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Fstreamrouter.html\">common/streamrouter</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/streamrouter}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 33,
+    "codeStart": 37,
+    "code": "var streamRouter = require('../common/stream-router.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "streamRouter",
+      "value": "require('../common/stream-router.js')",
+      "string": "streamRouter"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/util}",
+        "types": [
+          "module:common/util"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 39,
+    "codeStart": 43,
+    "code": "var util = require('../common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "const",
+        "string": "{array} Required scopes for the Search API.",
+        "html": "<p>{array} Required scopes for the Search API.</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 45,
+    "codeStart": 49,
+    "code": "var SCOPES = [\n  'https://www.googleapis.com/auth/cloud-platform',\n  'https://www.googleapis.com/auth/cloudsearch',\n  'https://www.googleapis.com/auth/userinfo.email'\n];",
+    "ctx": {
+      "type": "declaration",
+      "name": "SCOPES",
+      "value": "[",
+      "string": "SCOPES"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "const",
+        "string": "{string} Base URL for the Search API.",
+        "html": "<p>{string} Base URL for the Search API.</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 55,
+    "codeStart": 59,
+    "code": "var SEARCH_BASE_URL = 'https://cloudsearch.googleapis.com/v1/';",
+    "ctx": {
+      "type": "declaration",
+      "name": "SEARCH_BASE_URL",
+      "value": "'https://cloudsearch.googleapis.com/v1/'",
+      "string": "SEARCH_BASE_URL"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "module:search",
+        "html": "<p>module:search</p>"
+      },
+      {
+        "type": "constructor",
+        "string": "",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).",
+        "name": "options",
+        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'grape-spaceship-123'\n});\n\nvar search = gcloud.search();",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>var search = gcloud.search();</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a Search object to Interact with the Cloud Search API. Using this<br />object, you can access your indexes with {module:search/index} and documents<br />with {module:search/document}.</p><p>Follow along with the examples to see how to do everything from creating<br />documents to searching indexes.</p>",
+      "summary": "<p>Create a Search object to Interact with the Cloud Search API. Using this<br />object, you can access your indexes with {module:search/index} and documents<br />with {module:search/document}.</p>",
+      "body": "<p>Follow along with the examples to see how to do everything from creating<br />documents to searching indexes.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": true,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 61,
+    "codeStart": 82,
+    "code": "function Search(options) {\n  if (!(this instanceof Search)) {\n    options = util.normalizeArguments(this, options);\n    return new Search(options);\n  }\n\n  this.makeAuthenticatedRequest_ = util.makeAuthenticatedRequestFactory({\n    credentials: options.credentials,\n    email: options.email,\n    keyFile: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  this.projectId_ = options.projectId;\n}",
+    "ctx": {
+      "type": "constructor",
+      "name": "Search",
+      "string": "Search()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Indexes: list API Documentation]{@link https://cloud.google.com/search/reference/rest/v1/projects/indexes/list}",
+        "html": "<p>[Indexes: list API Documentation]{@link <a href=\"https://cloud.google.com/search/reference/rest/v1/projects/indexes/list}\">https://cloud.google.com/search/reference/rest/v1/projects/indexes/list}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{object=} query - Query object.",
+        "name": "query",
+        "description": "<ul>\n<li>Query object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.autoPaginate - Have pagination handled\n    automatically. Default: true.",
+        "name": "options.autoPaginate",
+        "description": "<ul>\n<li>Have pagination handled     automatically. Default: true.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} query.pageSize - The maximum number of indexes to return per\n    page. If not specified, 100 indexes are returned per page.",
+        "name": "query.pageSize",
+        "description": "<ul>\n<li>The maximum number of indexes to return per     page. If not specified, 100 indexes are returned per page.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} query.pageToken - A previously-returned page token\n    representing part of the larger set of results to view.",
+        "name": "query.pageToken",
+        "description": "<ul>\n<li>A previously-returned page token     representing part of the larger set of results to view.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} query.prefix - The prefix of the index name. It is used to\n    list all indexes with names that have this prefix.",
+        "name": "query.prefix",
+        "description": "<ul>\n<li>The prefix of the index name. It is used to     list all indexes with names that have this prefix.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} query.view - See [this table](https://goo.gl/sY6Lpt) for a\n    list of accepted values and what each will do.",
+        "name": "query.view",
+        "description": "<ul>\n<li>See <a href=\"https://goo.gl/sY6Lpt\">this table</a> for a     list of accepted values and what each will do.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:search/index[]} callback.indexes - A list of Indexes.",
+        "name": "callback.indexes",
+        "description": "<ul>\n<li>A list of Indexes.</li>\n</ul>\n",
+        "types": [
+          "Array.<module:search/index>"
+        ],
+        "typesDescription": "<code>Array</code>.&lt;module:<a href=\"module%3Asearch%2Findex.html\">search/index</a>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?object} callback.nextQuery - If present, query with this object to\n    check for more results.",
+        "name": "callback.nextQuery",
+        "description": "<ul>\n<li>If present, query with this object to     check for more results.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "search.getIndexes(function(err, indexes) {\n  // indexes is an array of Index objects.\n});\n\n//-\n// To control how many API requests are made and page through the results\n// manually, set `autoPaginate` to `false`.\n//-\nfunction onApiResponse(err, indexes, nextQuery, apiResponse) {\n  if (err) {\n    console.error(err);\n    return;\n  }\n\n  // indexes is an array of Index objects.\n\n  if (nextQuery) {\n    search.getIndexes(nextQuery, onApiResponse);\n  }\n}\n\nsearch.getIndexes({\n  autoPaginate: false\n}, onApiResponse);\n\n//-\n// Get the indexes as a readable object stream.\n//-\nsearch.getIndexes()\n  .on('error', console.error)\n  .on('data', function(index) {\n    // index is an Index object.\n  })\n  .on('end', function() {\n    // All indexes retrieved.\n  });\n\n//-\n// If you anticipate many results, you can end a stream early to prevent\n// unnecessary processing and API requests.\n//-\nsearch.getIndexes()\n  .on('data', function(index) {\n    this.end();\n  });",
+        "html": "<p>search.getIndexes(function(err, indexes) {<br />  // indexes is an array of Index objects.<br />});</p><p>//-<br />// To control how many API requests are made and page through the results<br />// manually, set <code>autoPaginate</code> to <code>false</code>.<br />//-<br />function onApiResponse(err, indexes, nextQuery, apiResponse) {<br />  if (err) {<br />    console.error(err);<br />    return;<br />  }</p><p>  // indexes is an array of Index objects.</p><p>  if (nextQuery) {<br />    search.getIndexes(nextQuery, onApiResponse);<br />  }<br />}</p><p>search.getIndexes({<br />  autoPaginate: false<br />}, onApiResponse);</p><p>//-<br />// Get the indexes as a readable object stream.<br />//-<br />search.getIndexes()<br />  .on(&#39;error&#39;, console.error)<br />  .on(&#39;data&#39;, function(index) {<br />    // index is an Index object.<br />  })<br />  .on(&#39;end&#39;, function() {<br />    // All indexes retrieved.<br />  });</p><p>//-<br />// If you anticipate many results, you can end a stream early to prevent<br />// unnecessary processing and API requests.<br />//-<br />search.getIndexes()<br />  .on(&#39;data&#39;, function(index) {<br />    this.end();<br />  });</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get {module:search/index} objects for all of the indexes in your project.</p>",
+      "summary": "<p>Get {module:search/index} objects for all of the indexes in your project.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 98,
+    "codeStart": 168,
+    "code": "Search.prototype.getIndexes = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  query = extend({}, query);\n\n  if (query.prefix) {\n    query.indexNamePrefix = query.prefix;\n    delete query.prefix;\n  }\n\n  this.makeReq_('GET', '/indexes', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var indexes = (resp.indexes || []).map(function(indexObject) {\n      var index = self.index(indexObject.indexId);\n\n      if (is.object(indexObject.indexedField)) {\n        index.fields = indexObject.indexedField;\n      }\n\n      return index;\n    });\n\n    callback(null, indexes, nextQuery, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Search",
+      "cons": "Search",
+      "name": "getIndexes",
+      "string": "Search.prototype.getIndexes()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{string} id - Name of the index.",
+        "name": "id",
+        "description": "<ul>\n<li>Name of the index.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{module:search/index}",
+        "types": [
+          "module:search/index"
+        ],
+        "typesDescription": "module:<a href=\"module%3Asearch%2Findex.html\">search/index</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:search/index}</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a reference to a Google Cloud Search index.</p>",
+      "summary": "<p>Get a reference to a Google Cloud Search index.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 211,
+    "codeStart": 217,
+    "code": "Search.prototype.index = function(id) {\n  return new Index(this, id);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Search",
+      "cons": "Search",
+      "name": "index",
+      "string": "Search.prototype.index()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{string} method - Action.",
+        "name": "method",
+        "description": "<ul>\n<li>Action.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} path - Request path.",
+        "name": "path",
+        "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{*} query - Request query object.",
+        "name": "query",
+        "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{*} body - Request body contents.",
+        "name": "body",
+        "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
+      "summary": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 221,
+    "codeStart": 233,
+    "code": "Search.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: format('{base}projects/{projectId}{path}', {\n      base: SEARCH_BASE_URL,\n      projectId: this.projectId_,\n      path: path\n    })\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthenticatedRequest_(reqOpts, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Search",
+      "cons": "Search",
+      "name": "makeReq_",
+      "string": "Search.prototype.makeReq_()"
+    }
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Developer Documentation</p><p>{module:search#getIndexes} can be used with either a callback or as a<br />readable object stream. <code>streamRouter</code> is used to add this dual behavior.</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": "<p>{module:search#getIndexes} can be used with either a callback or as a<br />readable object stream. <code>streamRouter</code> is used to add this dual behavior.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 251,
+    "codeStart": 256,
+    "code": "streamRouter.extend(Search, 'getIndexes');\n\nmodule.exports = Search;",
+    "ctx": false
+  }
+]

@@ -1,0 +1,2086 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
+  },
+  {
+    "tags": [
+      {
+        "type": "module",
+        "string": "storage/bucket",
+        "html": "<p>storage/bucket</p>"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 17,
+    "codeStart": 21,
+    "code": "'use strict';\n\nvar async = require('async');\nvar extend = require('extend');\nvar format = require('string-format-obj');\nvar fs = require('fs');\nvar is = require('is');\nvar mime = require('mime-types');\nvar path = require('path');",
+    "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:storage/acl}",
+        "types": [
+          "module:storage/acl"
+        ],
+        "typesDescription": "module:<a href=\"module%3Astorage%2Facl.html\">storage/acl</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:storage/acl}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 31,
+    "codeStart": 35,
+    "code": "var Acl = require('./acl.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Acl",
+      "value": "require('./acl.js')",
+      "string": "Acl"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:storage/file}",
+        "types": [
+          "module:storage/file"
+        ],
+        "typesDescription": "module:<a href=\"module%3Astorage%2Ffile.html\">storage/file</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:storage/file}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 37,
+    "codeStart": 41,
+    "code": "var File = require('./file.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "File",
+      "value": "require('./file.js')",
+      "string": "File"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/streamrouter}",
+        "types": [
+          "module:common/streamrouter"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Fstreamrouter.html\">common/streamrouter</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/streamrouter}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 43,
+    "codeStart": 47,
+    "code": "var streamRouter = require('../common/stream-router.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "streamRouter",
+      "value": "require('../common/stream-router.js')",
+      "string": "streamRouter"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/util}",
+        "types": [
+          "module:common/util"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 49,
+    "codeStart": 53,
+    "code": "var util = require('../common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "const",
+        "string": "{string}",
+        "html": "<p>{string}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 55,
+    "codeStart": 59,
+    "code": "var STORAGE_BASE_URL = 'https://www.googleapis.com/storage/v1/b';",
+    "ctx": {
+      "type": "declaration",
+      "name": "STORAGE_BASE_URL",
+      "value": "'https://www.googleapis.com/storage/v1/b'",
+      "string": "STORAGE_BASE_URL"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "const",
+        "string": "{number}",
+        "html": "<p>{number}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "<p>The size of a file (in bytes) must be greater than this number to<br />automatically trigger a resumable upload.</p>",
+      "summary": "<p>The size of a file (in bytes) must be greater than this number to<br />automatically trigger a resumable upload.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 61,
+    "codeStart": 68,
+    "code": "var RESUMABLE_THRESHOLD = 5000000;",
+    "ctx": {
+      "type": "declaration",
+      "name": "RESUMABLE_THRESHOLD",
+      "value": "5000000",
+      "string": "RESUMABLE_THRESHOLD"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "constructor",
+        "string": "",
+        "html": ""
+      },
+      {
+        "type": "alias",
+        "string": "module:storage/bucket",
+        "html": "<p>module:storage/bucket</p>"
+      },
+      {
+        "type": "throws",
+        "string": "{Error} if a bucket name isn't provided.",
+        "types": [
+          "Error"
+        ],
+        "description": "<p>if a bucket name isn&#39;t provided.</p>"
+      },
+      {
+        "type": "param",
+        "string": "{object} options - Configuration options.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration options.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} options.bucketName - Name of the bucket.",
+        "name": "options.bucketName",
+        "description": "<ul>\n<li>Name of the bucket.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string=} options.keyFilename - Full path to the JSON key downloaded\n    from the Google Developers Console. Alternatively, you may provide a\n    `credentials` object.",
+        "name": "options.keyFilename",
+        "description": "<ul>\n<li>Full path to the JSON key downloaded     from the Google Developers Console. Alternatively, you may provide a<br />  <code>credentials</code> object.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object=} options.credentials - Credentials object, used in place of\n    a `keyFilename`.",
+        "name": "options.credentials",
+        "description": "<ul>\n<li>Credentials object, used in place of     a <code>keyFilename</code>.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\n\nvar gcs = gcloud.storage({\n  projectId: 'grape-spaceship-123'\n});\n\nvar albums = gcs.bucket('albums');",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);</p><p>var gcs = gcloud.storage({<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>var albums = gcs.bucket(&#39;albums&#39;);</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a Bucket object to interact with a Google Cloud Storage bucket.</p>",
+      "summary": "<p>Create a Bucket object to interact with a Google Cloud Storage bucket.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": true,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 70,
+    "codeStart": 95,
+    "code": "function Bucket(storage, name) {\n  this.metadata = {};\n  this.name = name;\n  this.storage = storage;\n\n  if (!this.name) {\n    throw new Error('A bucket name is needed to use Google Cloud Storage.');\n  }",
+    "ctx": {
+      "type": "constructor",
+      "name": "Bucket",
+      "string": "Bucket()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[About Access Control Lists]{@link http://goo.gl/6qBBPO}",
+        "html": "<p>[About Access Control Lists]{@link <a href=\"http://goo.gl/6qBBPO}\">http://goo.gl/6qBBPO}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Default ACLs]{@link https://cloud.google.com/storage/docs/accesscontrol#default}",
+        "html": "<p>[Default ACLs]{@link <a href=\"https://cloud.google.com/storage/docs/accesscontrol#default}\">https://cloud.google.com/storage/docs/accesscontrol#default}</a></p>"
+      },
+      {
+        "type": "mixes",
+        "string": "module:storage/acl",
+        "html": "<p>module:storage/acl</p>"
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Make a bucket's contents publicly readable.\n//-\nvar myBucket = gcs.bucket('my-bucket');\nmyBucket.acl.add({\n  entity: 'allUsers',\n  role: gcs.acl.READER_ROLE\n}, function(err, aclObject) {});",
+        "html": "<p>//-<br />// Make a bucket&#39;s contents publicly readable.<br />//-<br />var myBucket = gcs.bucket(&#39;my-bucket&#39;);<br />myBucket.acl.add({<br />  entity: &#39;allUsers&#39;,<br />  role: gcs.acl.READER_ROLE<br />}, function(err, aclObject) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p><p>An ACL consists of one or more entries, where each entry grants permissions<br />to an entity. Permissions define the actions that can be performed against<br />an object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the entity defines<br />who the permission applies to (for example, a specific user or group of<br />users).</p><p>The <code>acl</code> object on a Bucket instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p><p>Buckets also have<br /><a href=\"https://cloud.google.com/storage/docs/accesscontrol#default\">default ACLs</a><br />for all created files. Default ACLs specify permissions that all new<br />objects added to the bucket will inherit by default. You can add, delete,<br />get, and update entities and permissions for these as well with<br />{module:storage/bucket#acl.default}.</p>",
+      "summary": "<p>Google Cloud Storage uses access control lists (ACLs) to manage object and<br />bucket access. ACLs are the mechanism you use to share objects with other<br />users and allow other users to access your buckets and objects.</p>",
+      "body": "<p>An ACL consists of one or more entries, where each entry grants permissions<br />to an entity. Permissions define the actions that can be performed against<br />an object or bucket (for example, <code>READ</code> or <code>WRITE</code>); the entity defines<br />who the permission applies to (for example, a specific user or group of<br />users).</p><p>The <code>acl</code> object on a Bucket instance provides methods to get you a list of<br />the ACLs defined on your bucket, as well as set, update, and delete them.</p><p>Buckets also have<br /><a href=\"https://cloud.google.com/storage/docs/accesscontrol#default\">default ACLs</a><br />for all created files. Default ACLs specify permissions that all new<br />objects added to the bucket will inherit by default. You can add, delete,<br />get, and update entities and permissions for these as well with<br />{module:storage/bucket#acl.default}.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 104,
+    "codeStart": 140,
+    "code": "this.acl = new Acl({\n  makeReq: this.makeReq_.bind(this),\n  pathPrefix: '/acl'\n});\n\nthis.acl.default = new Acl({\n  makeReq: this.makeReq_.bind(this),\n  pathPrefix: '/defaultObjectAcl'\n});",
+    "ctx": {
+      "type": "property",
+      "receiver": "this",
+      "name": "acl",
+      "value": "new Acl({",
+      "string": "this.acl"
+    }
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Developer Documentation</p><p>Sadly, to generate the documentation properly, this comment block describes<br />a useless variable named <code>ignored</code> and aliases it to <code>acl.default</code>. This is<br />done so the doc building process picks this up, without adding cruft to the<br />Bucket class itself.</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": "<p>Sadly, to generate the documentation properly, this comment block describes<br />a useless variable named <code>ignored</code> and aliases it to <code>acl.default</code>. This is<br />done so the doc building process picks this up, without adding cruft to the<br />Bucket class itself.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 151,
+    "codeStart": 158
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "acl.default",
+        "html": "<p>acl.default</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Google Cloud Storage Buckets have <a href=\"http://goo.gl/YpGdyv\">default ACLs</a> for<br />all created files. You can add, delete, get, and update entities and<br />permissions for these as well. The method signatures and examples are all<br />the same, after only prefixing the method call with <code>default</code>.</p>",
+      "summary": "<p>Google Cloud Storage Buckets have <a href=\"http://goo.gl/YpGdyv\">default ACLs</a> for<br />all created files. You can add, delete, get, and update entities and<br />permissions for these as well. The method signatures and examples are all<br />the same, after only prefixing the method call with <code>default</code>.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 158,
+    "codeStart": 166,
+    "code": "var aclDefault = true;",
+    "ctx": {
+      "type": "declaration",
+      "name": "aclDefault",
+      "value": "true",
+      "string": "aclDefault"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "acl.default.add",
+        "html": "<p>acl.default.add</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Maps to {module:storage/bucket#acl.add}.</p>",
+      "summary": "<p>Maps to {module:storage/bucket#acl.add}.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 168,
+    "codeStart": 172,
+    "code": "var aclDefaultAdd = true;",
+    "ctx": {
+      "type": "declaration",
+      "name": "aclDefaultAdd",
+      "value": "true",
+      "string": "aclDefaultAdd"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "acl.default.delete",
+        "html": "<p>acl.default.delete</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Maps to {module:storage/bucket#acl.delete}.</p>",
+      "summary": "<p>Maps to {module:storage/bucket#acl.delete}.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 174,
+    "codeStart": 178,
+    "code": "var aclDefaultDelete = true;",
+    "ctx": {
+      "type": "declaration",
+      "name": "aclDefaultDelete",
+      "value": "true",
+      "string": "aclDefaultDelete"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "acl.default.get",
+        "html": "<p>acl.default.get</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Maps to {module:storage/bucket#acl.get}.</p>",
+      "summary": "<p>Maps to {module:storage/bucket#acl.get}.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 180,
+    "codeStart": 184,
+    "code": "var aclDefaultGet = true;",
+    "ctx": {
+      "type": "declaration",
+      "name": "aclDefaultGet",
+      "value": "true",
+      "string": "aclDefaultGet"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "acl.default.update",
+        "html": "<p>acl.default.update</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Maps to {module:storage/bucket#acl.update}.</p>",
+      "summary": "<p>Maps to {module:storage/bucket#acl.update}.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 186,
+    "codeStart": 190,
+    "code": "var aclDefaultUpdate = true;",
+    "ctx": {
+      "type": "declaration",
+      "name": "aclDefaultUpdate",
+      "value": "true",
+      "string": "aclDefaultUpdate"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "acl.default.owners",
+        "html": "<p>acl.default.owners</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Maps to {module:storage/bucket#acl.owners}.</p>",
+      "summary": "<p>Maps to {module:storage/bucket#acl.owners}.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 192,
+    "codeStart": 196,
+    "code": "var aclDefaultOwners = true;",
+    "ctx": {
+      "type": "declaration",
+      "name": "aclDefaultOwners",
+      "value": "true",
+      "string": "aclDefaultOwners"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "acl.default.readers",
+        "html": "<p>acl.default.readers</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Maps to {module:storage/bucket#acl.readers}.</p>",
+      "summary": "<p>Maps to {module:storage/bucket#acl.readers}.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 198,
+    "codeStart": 202,
+    "code": "var aclDefaultReaders = true;",
+    "ctx": {
+      "type": "declaration",
+      "name": "aclDefaultReaders",
+      "value": "true",
+      "string": "aclDefaultReaders"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "alias",
+        "string": "acl.default.writers",
+        "html": "<p>acl.default.writers</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Maps to {module:storage/bucket#acl.writers}.</p>",
+      "summary": "<p>Maps to {module:storage/bucket#acl.writers}.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 204,
+    "codeStart": 208,
+    "code": "}",
+    "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Objects: compose API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/compose}",
+        "html": "<p>[Objects: compose API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/compose}\">https://cloud.google.com/storage/docs/json_api/v1/objects/compose}</a></p>"
+      },
+      {
+        "type": "throws",
+        "string": "{Error} if a non-array is provided as sources argument.",
+        "types": [
+          "Error"
+        ],
+        "description": "<p>if a non-array is provided as sources argument.</p>"
+      },
+      {
+        "type": "throws",
+        "string": "{Error} if less than two sources are provided.",
+        "types": [
+          "Error"
+        ],
+        "description": "<p>if less than two sources are provided.</p>"
+      },
+      {
+        "type": "throws",
+        "string": "{Error} if no destination is provided.",
+        "types": [
+          "Error"
+        ],
+        "description": "<p>if no destination is provided.</p>"
+      },
+      {
+        "type": "throws",
+        "string": "{Error} if content type can't be determined for the destination file.",
+        "types": [
+          "Error"
+        ],
+        "description": "<p>if content type can&#39;t be determined for the destination file.</p>"
+      },
+      {
+        "type": "param",
+        "string": "{string[]|module:storage/file} sources - The source files that will be\n    combined.",
+        "name": "sources",
+        "description": "<ul>\n<li>The source files that will be     combined.</li>\n</ul>\n",
+        "types": [
+          "Array.<string>",
+          "module:storage/file"
+        ],
+        "typesDescription": "<code>Array</code>.&lt;<code>string</code>&gt;|module:<a href=\"module%3Astorage%2Ffile.html\">storage/file</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string|module:storage/file} destination - The file you would like the\n    source files combined into.",
+        "name": "destination",
+        "description": "<ul>\n<li>The file you would like the     source files combined into.</li>\n</ul>\n",
+        "types": [
+          "string",
+          "module:storage/file"
+        ],
+        "typesDescription": "<code>string</code>|module:<a href=\"module%3Astorage%2Ffile.html\">storage/file</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:storage/file} callback.newFile - The combined file.",
+        "name": "callback.newFile",
+        "description": "<ul>\n<li>The combined file.</li>\n</ul>\n",
+        "types": [
+          "module:storage/file"
+        ],
+        "typesDescription": "module:<a href=\"module%3Astorage%2Ffile.html\">storage/file</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var logBucket = gcs.bucket('log-bucket');\n\nvar logs2013 = logBucket.file('2013-logs.txt');\nvar logs2014 = logBucket.file('2014-logs.txt');\n\nvar allLogs = logBucket.file('all-logs.txt');\n\nlogBucket.combine([\n  logs2013,\n  logs2014\n], allLogs, function(err, newFile, apiResponse) {\n  // newFile === allLogs\n});",
+        "html": "<p>var logBucket = gcs.bucket(&#39;log-bucket&#39;);</p><p>var logs2013 = logBucket.file(&#39;2013-logs.txt&#39;);<br />var logs2014 = logBucket.file(&#39;2014-logs.txt&#39;);</p><p>var allLogs = logBucket.file(&#39;all-logs.txt&#39;);</p><p>logBucket.combine([<br />  logs2013,<br />  logs2014<br />], allLogs, function(err, newFile, apiResponse) {<br />  // newFile === allLogs<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Combine mutliple files into one new file.</p>",
+      "summary": "<p>Combine mutliple files into one new file.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 212,
+    "codeStart": 246,
+    "code": "Bucket.prototype.combine = function(sources, destination, callback) {\n  if (!is.array(sources) || sources.length < 2) {\n    throw new Error('You must provide at least two source files.');\n  }\n\n  if (!destination) {\n    throw new Error('A destination file must be specified.');\n  }\n\n  var self = this;\n\n  sources = sources.map(convertToFile);\n  destination = convertToFile(destination);\n  callback = callback || util.noop;\n\n  if (!destination.metadata.contentType) {\n    var destinationContentType = mime.contentType(destination.name);\n\n    if (destinationContentType) {\n      destination.metadata.contentType = destinationContentType;\n    } else {\n      throw new Error(\n        'A content type could not be detected for the destination file.');\n    }\n  }\n\n  this.storage.makeAuthenticatedRequest_({\n    method: 'POST',\n    uri: format('{base}/{destBucket}/o/{destFile}/compose', {\n      base: STORAGE_BASE_URL,\n      destBucket: destination.bucket.name,\n      destFile: encodeURIComponent(destination.name)\n    }),\n    json: {\n      destination: {\n        contentType: destination.metadata.contentType\n      },\n      sourceObjects: sources.map(function(source) {\n        var sourceObject = {\n          name: source.name\n        };\n\n        if (source.metadata && source.metadata.generation) {\n          sourceObject.generation = source.metadata.generation;\n        }\n\n        return sourceObject;\n      })\n    }\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, destination, resp);\n  });\n\n  function convertToFile(file) {\n    if (file instanceof File) {\n      return file;\n    } else {\n      return self.file(file);\n    }\n  }\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "combine",
+      "string": "Bucket.prototype.combine()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Buckets: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/delete}",
+        "html": "<p>[Buckets: delete API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/delete}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/delete}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var bucket = gcs.bucket('delete-me');\nbucket.delete(function(err, apiResponse) {});",
+        "html": "<p>var bucket = gcs.bucket(&#39;delete-me&#39;);<br />bucket.delete(function(err, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Delete the bucket.</p>",
+      "summary": "<p>Delete the bucket.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 313,
+    "codeStart": 326,
+    "code": "Bucket.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('DELETE', '', null, true, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "delete",
+      "string": "Bucket.prototype.delete()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Objects: delete API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/delete}",
+        "html": "<p>[Objects: delete API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/delete}\">https://cloud.google.com/storage/docs/json_api/v1/objects/delete}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{object=} query - Query object. See {module:storage/bucket#getFiles}\n    for all of the supported properties.",
+        "name": "query",
+        "description": "<ul>\n<li>Query object. See {module:storage/bucket#getFiles}     for all of the supported properties.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} query.force - Supress errors until all files have been\n    processed.",
+        "name": "query.force",
+        "description": "<ul>\n<li>Supress errors until all files have been     processed.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error|?error[]} callback.err - An API error or array of errors from\n    files that were not able to be deleted.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An API error or array of errors from     files that were not able to be deleted.</li>\n</ul>\n",
+        "types": [
+          "error",
+          "Array.<error>"
+        ],
+        "typesDescription": "<code>error</code>|<code>Array</code>.&lt;<code>error</code>&gt;|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Delete all of the files in the bucket.\n//-\nbucket.deleteFiles(function(err) {});\n\n//-\n// By default, if a file cannot be deleted, this method will stop deleting\n// files from your bucket. You can override this setting with `force: true`.\n//-\nbucket.deleteFiles({\n  force: true\n}, function(errors) {\n  // `errors`:\n  //    Array of errors if any occurred, otherwise null.\n});\n\n//-\n// The first argument to this method acts as a query to\n// {module:storage/bucket#getFiles}. As an example, you can delete files\n// which match a prefix.\n//-\nbucket.deleteFiles({\n  prefix: 'images/'\n}, function(err) {\n  if (!err) {\n    // All files in the `images` directory have been deleted.\n  }\n});",
+        "html": "<p>//-<br />// Delete all of the files in the bucket.<br />//-<br />bucket.deleteFiles(function(err) {});</p><p>//-<br />// By default, if a file cannot be deleted, this method will stop deleting<br />// files from your bucket. You can override this setting with <code>force: true</code>.<br />//-<br />bucket.deleteFiles({<br />  force: true<br />}, function(errors) {<br />  // <code>errors</code>:<br />  //    Array of errors if any occurred, otherwise null.<br />});</p><p>//-<br />// The first argument to this method acts as a query to<br />// {module:storage/bucket#getFiles}. As an example, you can delete files<br />// which match a prefix.<br />//-<br />bucket.deleteFiles({<br />  prefix: &#39;images/&#39;<br />}, function(err) {<br />  if (!err) {<br />    // All files in the <code>images</code> directory have been deleted.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Iterate over the bucket&#39;s files, calling <code>file.delete()</code> on each.</p><p><strong>This is not an atomic request.</strong> A delete attempt will be made<br />for each file individually. Any one can fail, in which case only a portion of<br />the files you intended to be deleted would have.</p><p>Operations are performed in parallel, up to 10 at once. The first error<br />breaks the loop and will execute the provided callback with it. Specify<br /><code>{ force: true }</code> to suppress the errors until all files have had a chance to<br />be processed.</p><p>The <code>query</code> object passed as the first argument will also be passed to<br />{module:storage/bucket#getFiles}.</p>",
+      "summary": "<p>Iterate over the bucket&#39;s files, calling <code>file.delete()</code> on each.</p>",
+      "body": "<p><strong>This is not an atomic request.</strong> A delete attempt will be made<br />for each file individually. Any one can fail, in which case only a portion of<br />the files you intended to be deleted would have.</p><p>Operations are performed in parallel, up to 10 at once. The first error<br />breaks the loop and will execute the provided callback with it. Specify<br /><code>{ force: true }</code> to suppress the errors until all files have had a chance to<br />be processed.</p><p>The <code>query</code> object passed as the first argument will also be passed to<br />{module:storage/bucket#getFiles}.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 331,
+    "codeStart": 386,
+    "code": "Bucket.prototype.deleteFiles = function(query, callback) {\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  query = query || {};\n\n  var MAX_PARALLEL_LIMIT = 10;\n  var errors = [];\n\n  this.getFiles(query, function(err, files) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    function deleteFile(file, callback) {\n      file.delete(function(err) {\n        if (err) {\n          if (query.force) {\n            errors.push(err);\n            callback();\n            return;\n          }\n\n          callback(err);\n          return;\n        }\n\n        callback();\n      });\n    }\n\n    // Iterate through each file and attempt to delete it.\n    async.eachLimit(files, MAX_PARALLEL_LIMIT, deleteFile, function(err) {\n      if (err || errors.length > 0) {\n        callback(err || errors);\n        return;\n      }\n\n      callback();\n    });\n  });\n\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "deleteFiles",
+      "string": "Bucket.prototype.deleteFiles()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{string} name - The name of the file in this bucket.",
+        "name": "name",
+        "description": "<ul>\n<li>The name of the file in this bucket.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object=} options - Configuration options.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration options.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string|number} options.generation - Only use a specific revision of\n    this file.",
+        "name": "options.generation",
+        "description": "<ul>\n<li>Only use a specific revision of     this file.</li>\n</ul>\n",
+        "types": [
+          "string",
+          "number"
+        ],
+        "typesDescription": "<code>string</code>|<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{module:storage/file}",
+        "types": [
+          "module:storage/file"
+        ],
+        "typesDescription": "module:<a href=\"module%3Astorage%2Ffile.html\">storage/file</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:storage/file}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var file = bucket.file('my-existing-file.png');",
+        "html": "<p>var file = bucket.file(&#39;my-existing-file.png&#39;);</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a File object. See {module:storage/file} to see how to handle<br />the different use cases you may have.</p>",
+      "summary": "<p>Create a File object. See {module:storage/file} to see how to handle<br />the different use cases you may have.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 433,
+    "codeStart": 446,
+    "code": "Bucket.prototype.file = function(name, options) {\n  return new File(this, name, options);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "file",
+      "string": "Bucket.prototype.file()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Objects: list API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/list}",
+        "html": "<p>[Objects: list API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/list}\">https://cloud.google.com/storage/docs/json_api/v1/objects/list}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{object=} query - Query object.",
+        "name": "query",
+        "description": "<ul>\n<li>Query object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} query.autoPaginate - Have pagination handled automatically.\n    Default: true.",
+        "name": "query.autoPaginate",
+        "description": "<ul>\n<li>Have pagination handled automatically.     Default: true.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} query.delimiter - Results will contain only objects whose\n    names, aside from the prefix, do not contain delimiter. Objects whose\n    names, aside from the prefix, contain delimiter will have their name\n    truncated after the delimiter, returned in `apiResponse.prefixes`.\n    Duplicate prefixes are omitted.",
+        "name": "query.delimiter",
+        "description": "<ul>\n<li>Results will contain only objects whose     names, aside from the prefix, do not contain delimiter. Objects whose<br />  names, aside from the prefix, contain delimiter will have their name<br />  truncated after the delimiter, returned in <code>apiResponse.prefixes</code>.<br />  Duplicate prefixes are omitted.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} query.prefix - Filter results to objects whose names begin\n    with this prefix.",
+        "name": "query.prefix",
+        "description": "<ul>\n<li>Filter results to objects whose names begin     with this prefix.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} query.maxResults - Maximum number of items plus prefixes to\n    return.",
+        "name": "query.maxResults",
+        "description": "<ul>\n<li>Maximum number of items plus prefixes to     return.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} query.pageToken - A previously-returned page token\n    representing part of the larger set of results to view.",
+        "name": "query.pageToken",
+        "description": "<ul>\n<li>A previously-returned page token     representing part of the larger set of results to view.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{bool} query.versions - If true, returns File objects scoped to their\n    versions.",
+        "name": "query.versions",
+        "description": "<ul>\n<li>If true, returns File objects scoped to their     versions.</li>\n</ul>\n",
+        "types": [
+          "bool"
+        ],
+        "typesDescription": "<a href=\"bool.html\">bool</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:storage/file[]} callback.files - List of files.",
+        "name": "callback.files",
+        "description": "<ul>\n<li>List of files.</li>\n</ul>\n",
+        "types": [
+          "Array.<module:storage/file>"
+        ],
+        "typesDescription": "<code>Array</code>.&lt;module:<a href=\"module%3Astorage%2Ffile.html\">storage/file</a>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?object} callback.nextQuery - If present, query with this object to\n    check for more results.",
+        "name": "callback.nextQuery",
+        "description": "<ul>\n<li>If present, query with this object to     check for more results.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "bucket.getFiles(function(err, files) {\n  if (!err) {\n    // files is an array of File objects.\n  }\n});\n\n//-\n// If your bucket has versioning enabled, you can get all of your files\n// scoped to their generation.\n//-\nbucket.getFiles({\n  versions: true\n}, function(err, files) {\n  // Each file is scoped to its generation.\n});\n\n//-\n// To control how many API requests are made and page through the results\n// manually, set `autoPaginate` to `false`.\n//-\nvar callback = function(err, files, nextQuery, apiResponse) {\n  if (nextQuery) {\n    // More results exist.\n    bucket.getFiles(nextQuery, callback);\n  }\n\n  // The `metadata` property is populated for you with the metadata at the\n  // time of fetching.\n  files[0].metadata;\n\n  // However, in cases where you are concerned the metadata could have\n  // changed, use the `getMetadata` method.\n  files[0].getMetadata(function(err, metadata) {});\n};\n\nbucket.getFiles({\n  autoPaginate: false\n}, callback);\n\n//-\n// Get the files from your bucket as a readable object stream.\n//-\nbucket.getFiles()\n  .on('error', console.error)\n  .on('data', function(file) {\n    // file is a File object.\n  })\n  .on('end', function() {\n    // All files retrieved.\n  });\n\n//-\n// If you anticipate many results, you can end a stream early to prevent\n// unnecessary processing and API requests.\n//-\nbucket.getFiles()\n  .on('data', function(file) {\n    this.end();\n  });",
+        "html": "<p>bucket.getFiles(function(err, files) {<br />  if (!err) {<br />    // files is an array of File objects.<br />  }<br />});</p><p>//-<br />// If your bucket has versioning enabled, you can get all of your files<br />// scoped to their generation.<br />//-<br />bucket.getFiles({<br />  versions: true<br />}, function(err, files) {<br />  // Each file is scoped to its generation.<br />});</p><p>//-<br />// To control how many API requests are made and page through the results<br />// manually, set <code>autoPaginate</code> to <code>false</code>.<br />//-<br />var callback = function(err, files, nextQuery, apiResponse) {<br />  if (nextQuery) {<br />    // More results exist.<br />    bucket.getFiles(nextQuery, callback);<br />  }</p><p>  // The <code>metadata</code> property is populated for you with the metadata at the<br />  // time of fetching.<br />  files[0].metadata;</p><p>  // However, in cases where you are concerned the metadata could have<br />  // changed, use the <code>getMetadata</code> method.<br />  files[0].getMetadata(function(err, metadata) {});<br />};</p><p>bucket.getFiles({<br />  autoPaginate: false<br />}, callback);</p><p>//-<br />// Get the files from your bucket as a readable object stream.<br />//-<br />bucket.getFiles()<br />  .on(&#39;error&#39;, console.error)<br />  .on(&#39;data&#39;, function(file) {<br />    // file is a File object.<br />  })<br />  .on(&#39;end&#39;, function() {<br />    // All files retrieved.<br />  });</p><p>//-<br />// If you anticipate many results, you can end a stream early to prevent<br />// unnecessary processing and API requests.<br />//-<br />bucket.getFiles()<br />  .on(&#39;data&#39;, function(file) {<br />    this.end();<br />  });</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get File objects for the files currently in the bucket.</p>",
+      "summary": "<p>Get File objects for the files currently in the bucket.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 450,
+    "codeStart": 539,
+    "code": "Bucket.prototype.getFiles = function(query, callback) {\n  var self = this;\n\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n\n  this.makeReq_('GET', '/o', query, true, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var files = (resp.items || []).map(function(item) {\n      var options = {};\n\n      if (query.versions) {\n        options.generation = item.generation;\n      }\n\n      var file = self.file(item.name, options);\n      file.metadata = item;\n\n      return file;\n    });\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, { pageToken: resp.nextPageToken });\n    }\n\n    callback(null, files, nextQuery, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "getFiles",
+      "string": "Bucket.prototype.getFiles()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Buckets: get API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/get}",
+        "html": "<p>[Buckets: get API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/get}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/get}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.metadata - Tbe bucket's metadata.",
+        "name": "callback.metadata",
+        "description": "<ul>\n<li>Tbe bucket&#39;s metadata.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "bucket.getMetadata(function(err, metadata, apiResponse) {});",
+        "html": "<p>bucket.getMetadata(function(err, metadata, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get the bucket&#39;s metadata.</p><p>To set metadata, see {module:storage/bucket#setMetadata}.</p>",
+      "summary": "<p>Get the bucket&#39;s metadata.</p>",
+      "body": "<p>To set metadata, see {module:storage/bucket#setMetadata}.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 576,
+    "codeStart": 591,
+    "code": "Bucket.prototype.getMetadata = function(callback) {\n  callback = callback || util.noop;\n  this.makeReq_('GET', '', null, true, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n    this.metadata = resp;\n    callback(null, this.metadata, resp);\n  }.bind(this));\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "getMetadata",
+      "string": "Bucket.prototype.getMetadata()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}",
+        "html": "<p>[Buckets: patch API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{object=} options - The configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>The configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.includeFiles - Make each file in the bucket private.\n    Default: `false`.",
+        "name": "options.includeFiles",
+        "description": "<ul>\n<li>Make each file in the bucket private.     Default: <code>false</code>.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.force - Queue errors occurred while making files\n    private until all files have been processed.",
+        "name": "options.force",
+        "description": "<ul>\n<li>Queue errors occurred while making files     private until all files have been processed.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:storage/file[]} callback.files - List of files made private.",
+        "name": "callback.files",
+        "description": "<ul>\n<li>List of files made private.</li>\n</ul>\n",
+        "types": [
+          "Array.<module:storage/file>"
+        ],
+        "typesDescription": "<code>Array</code>.&lt;module:<a href=\"module%3Astorage%2Ffile.html\">storage/file</a>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Make the bucket private.\n//-\nbucket.makePrivate(function(err) {});\n\n//-\n// Make the bucket and its contents private.\n//-\nvar opts = {\n  includeFiles: true\n};\n\nbucket.makePrivate(opts, function(err, files) {\n  // `err`:\n  //    The first error to occur, otherwise null.\n  //\n  // `files`:\n  //    Array of files successfully made private in the bucket.\n});\n\n//-\n// Make the bucket and its contents private, using force to suppress errors\n// until all files have been processed.\n//-\nvar opts = {\n  includeFiles: true,\n  force: true\n};\n\nbucket.makePrivate(opts, function(errors, files) {\n  // `errors`:\n  //    Array of errors if any occurred, otherwise null.\n  //\n  // `files`:\n  //    Array of files successfully made private in the bucket.\n});",
+        "html": "<p>//-<br />// Make the bucket private.<br />//-<br />bucket.makePrivate(function(err) {});</p><p>//-<br />// Make the bucket and its contents private.<br />//-<br />var opts = {<br />  includeFiles: true<br />};</p><p>bucket.makePrivate(opts, function(err, files) {<br />  // <code>err</code>:<br />  //    The first error to occur, otherwise null.<br />  //<br />  // <code>files</code>:<br />  //    Array of files successfully made private in the bucket.<br />});</p><p>//-<br />// Make the bucket and its contents private, using force to suppress errors<br />// until all files have been processed.<br />//-<br />var opts = {<br />  includeFiles: true,<br />  force: true<br />};</p><p>bucket.makePrivate(opts, function(errors, files) {<br />  // <code>errors</code>:<br />  //    Array of errors if any occurred, otherwise null.<br />  //<br />  // <code>files</code>:<br />  //    Array of files successfully made private in the bucket.<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Make the bucket listing private.</p><p>You may also choose to make the contents of the bucket private by specifying<br /><code>includeFiles: true</code>. This will automatically run<br />{module:storage/file#makePrivate} for every file in the bucket.</p><p>When specifying <code>includeFiles: true</code>, use <code>force: true</code> to delay execution of<br />your callback until all files have been processed. By default, the callback<br />is executed after the first error. Use <code>force</code> to queue such errors until all<br />files have been procssed, after which they will be returned as an array as<br />the first argument to your callback.</p><p>NOTE: This may cause the process to be long-running and use a high number of<br />requests. Use with caution.</p>",
+      "summary": "<p>Make the bucket listing private.</p>",
+      "body": "<p>You may also choose to make the contents of the bucket private by specifying<br /><code>includeFiles: true</code>. This will automatically run<br />{module:storage/file#makePrivate} for every file in the bucket.</p><p>When specifying <code>includeFiles: true</code>, use <code>force: true</code> to delay execution of<br />your callback until all files have been processed. By default, the callback<br />is executed after the first error. Use <code>force</code> to queue such errors until all<br />files have been procssed, after which they will be returned as an array as<br />the first argument to your callback.</p><p>NOTE: This may cause the process to be long-running and use a high number of<br />requests. Use with caution.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 603,
+    "codeStart": 668,
+    "code": "Bucket.prototype.makePrivate = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.private = true;\n\n  async.series([setPredefinedAcl, makeFilesPrivate], callback);\n\n  function setPredefinedAcl(done) {\n    var query = {\n      predefinedAcl: 'projectPrivate'\n    };\n\n    // You aren't allowed to set both predefinedAcl & acl properties on a bucket\n    // so acl must explicitly be nullified.\n    var metadata = { acl: null };\n\n    self.makeReq_('PATCH', '', query, metadata, function(err, resp) {\n      if (err) {\n        done(err);\n        return;\n      }\n\n      self.metadata = resp;\n\n      done();\n    });\n  }\n\n  function makeFilesPrivate(done) {\n    if (!options.includeFiles) {\n      done();\n      return;\n    }\n\n    self.makeAllFilesPublicPrivate_(options, done);\n  }\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "makePrivate",
+      "string": "Bucket.prototype.makePrivate()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}",
+        "html": "<p>[Buckets: patch API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{object=} options - The configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>The configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.includeFiles - Make each file in the bucket publicly\n    readable. Default: `false`.",
+        "name": "options.includeFiles",
+        "description": "<ul>\n<li>Make each file in the bucket publicly     readable. Default: <code>false</code>.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.force - Queue errors occurred while making files\n    public until all files have been processed.",
+        "name": "options.force",
+        "description": "<ul>\n<li>Queue errors occurred while making files     public until all files have been processed.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:storage/file[]} callback.files - List of files made public.",
+        "name": "callback.files",
+        "description": "<ul>\n<li>List of files made public.</li>\n</ul>\n",
+        "types": [
+          "Array.<module:storage/file>"
+        ],
+        "typesDescription": "<code>Array</code>.&lt;module:<a href=\"module%3Astorage%2Ffile.html\">storage/file</a>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Make the bucket publicly readable.\n//-\nbucket.makePublic(function(err) {});\n\n//-\n// Make the bucket and its contents publicly readable.\n//-\nvar opts = {\n  includeFiles: true\n};\n\nbucket.makePublic(opts, function(err, files) {\n  // `err`:\n  //    The first error to occur, otherwise null.\n  //\n  // `files`:\n  //    Array of files successfully made public in the bucket.\n});\n\n//-\n// Make the bucket and its contents publicly readable, using force to\n// suppress errors until all files have been processed.\n//-\nvar opts = {\n  includeFiles: true,\n  force: true\n};\n\nbucket.makePublic(opts, function(errors, files) {\n  // `errors`:\n  //    Array of errors if any occurred, otherwise null.\n  //\n  // `files`:\n  //    Array of files successfully made public in the bucket.\n});",
+        "html": "<p>//-<br />// Make the bucket publicly readable.<br />//-<br />bucket.makePublic(function(err) {});</p><p>//-<br />// Make the bucket and its contents publicly readable.<br />//-<br />var opts = {<br />  includeFiles: true<br />};</p><p>bucket.makePublic(opts, function(err, files) {<br />  // <code>err</code>:<br />  //    The first error to occur, otherwise null.<br />  //<br />  // <code>files</code>:<br />  //    Array of files successfully made public in the bucket.<br />});</p><p>//-<br />// Make the bucket and its contents publicly readable, using force to<br />// suppress errors until all files have been processed.<br />//-<br />var opts = {<br />  includeFiles: true,<br />  force: true<br />};</p><p>bucket.makePublic(opts, function(errors, files) {<br />  // <code>errors</code>:<br />  //    Array of errors if any occurred, otherwise null.<br />  //<br />  // <code>files</code>:<br />  //    Array of files successfully made public in the bucket.<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Make the bucket publicly readable.</p><p>You may also choose to make the contents of the bucket publicly readable by<br />specifying <code>includeFiles: true</code>. This will automatically run<br />{module:storage/file#makePublic} for every file in the bucket.</p><p>When specifying <code>includeFiles: true</code>, use <code>force: true</code> to delay execution of<br />your callback until all files have been processed. By default, the callback<br />is executed after the first error. Use <code>force</code> to queue such errors until all<br />files have been procssed, after which they will be returned as an array as<br />the first argument to your callback.</p><p>NOTE: This may cause the process to be long-running and use a high number of<br />requests. Use with caution.</p>",
+      "summary": "<p>Make the bucket publicly readable.</p>",
+      "body": "<p>You may also choose to make the contents of the bucket publicly readable by<br />specifying <code>includeFiles: true</code>. This will automatically run<br />{module:storage/file#makePublic} for every file in the bucket.</p><p>When specifying <code>includeFiles: true</code>, use <code>force: true</code> to delay execution of<br />your callback until all files have been processed. By default, the callback<br />is executed after the first error. Use <code>force</code> to queue such errors until all<br />files have been procssed, after which they will be returned as an array as<br />the first argument to your callback.</p><p>NOTE: This may cause the process to be long-running and use a high number of<br />requests. Use with caution.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 712,
+    "codeStart": 777,
+    "code": "Bucket.prototype.makePublic = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.public = true;\n\n  async.series([\n    addAclPermissions,\n    addDefaultAclPermissions,\n    makeFilesPublic\n  ], callback);\n\n  function addAclPermissions(done) {\n    // Allow reading bucket contents while preserving original permissions.\n    self.acl.add({\n      entity: 'allUsers',\n      role: 'READER'\n    }, done);\n  }\n\n  function addDefaultAclPermissions(done) {\n    self.acl.default.add({\n      entity: 'allUsers',\n      role: 'READER'\n    }, done);\n  }\n\n  function makeFilesPublic(done) {\n    if (!options.includeFiles) {\n      done();\n      return;\n    }\n\n    self.makeAllFilesPublicPrivate_(options, done);\n  }\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "makePublic",
+      "string": "Bucket.prototype.makePublic()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Buckets: patch API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}",
+        "html": "<p>[Buckets: patch API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}\">https://cloud.google.com/storage/docs/json_api/v1/buckets/patch}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{object} metadata - The metadata you wish to set.",
+        "name": "metadata",
+        "description": "<ul>\n<li>The metadata you wish to set.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Set website metadata field on the bucket.\n//-\nbucket.setMetadata({\n  website: {\n    mainPageSuffix: 'http://example.com',\n    notFoundPage: 'http://example.com/404.html'\n  }\n}, function(err, apiResponse) {});\n\n//-\n// Enable versioning for your bucket.\n//-\nbucket.setMetadata({\n  versioning: {\n    enabled: true\n  }\n}, function(err, apiResponse) {});",
+        "html": "<p>//-<br />// Set website metadata field on the bucket.<br />//-<br />bucket.setMetadata({<br />  website: {<br />    mainPageSuffix: &#39;<a href=\"http://example.com\">http://example.com</a>&#39;,<br />    notFoundPage: &#39;<a href=\"http://example.com/404.html\">http://example.com/404.html</a>&#39;<br />  }<br />}, function(err, apiResponse) {});</p><p>//-<br />// Enable versioning for your bucket.<br />//-<br />bucket.setMetadata({<br />  versioning: {<br />    enabled: true<br />  }<br />}, function(err, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Set the bucket&#39;s metadata.</p>",
+      "summary": "<p>Set the bucket&#39;s metadata.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 819,
+    "codeStart": 849,
+    "code": "Bucket.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n  callback = callback || util.noop;\n\n  this.makeReq_('PATCH', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "setMetadata",
+      "string": "Bucket.prototype.setMetadata()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Upload Options (Simple or Resumable)]{@link https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload#uploads}",
+        "html": "<p>[Upload Options (Simple or Resumable)]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload#uploads}\">https://cloud.google.com/storage/docs/json_api/v1/how-tos/upload#uploads}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Objects: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/insert}",
+        "html": "<p>[Objects: insert API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/insert}\">https://cloud.google.com/storage/docs/json_api/v1/objects/insert}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{string} localPath - The fully qualified path to the file you wish to\n    upload to your bucket.",
+        "name": "localPath",
+        "description": "<ul>\n<li>The fully qualified path to the file you wish to     upload to your bucket.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object=} options - Configuration options.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration options.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string|module:storage/file} options.destination - The place to save\n    your file. If given a string, the file will be uploaded to the bucket\n    using the string as a filename. When given a File object, your local file\n    will be uploaded to the File object's bucket and under the File object's\n    name. Lastly, when this argument is omitted, the file is uploaded to your\n    bucket using the name of the local file.",
+        "name": "options.destination",
+        "description": "<ul>\n<li>The place to save     your file. If given a string, the file will be uploaded to the bucket<br />  using the string as a filename. When given a File object, your local file<br />  will be uploaded to the File object&#39;s bucket and under the File object&#39;s<br />  name. Lastly, when this argument is omitted, the file is uploaded to your<br />  bucket using the name of the local file.</li>\n</ul>\n",
+        "types": [
+          "string",
+          "module:storage/file"
+        ],
+        "typesDescription": "<code>string</code>|module:<a href=\"module%3Astorage%2Ffile.html\">storage/file</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.gzip - Automatically gzip the file. This will set\n    `options.metadata.contentEncoding` to `gzip`.",
+        "name": "options.gzip",
+        "description": "<ul>\n<li>Automatically gzip the file. This will set     <code>options.metadata.contentEncoding</code> to <code>gzip</code>.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object=} options.metadata - Metadata to set for your file.",
+        "name": "options.metadata",
+        "description": "<ul>\n<li>Metadata to set for your file.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean=} options.resumable - Force a resumable upload. (default:\n    true for files larger than 5 MB).",
+        "name": "options.resumable",
+        "description": "<ul>\n<li>Force a resumable upload. (default:     true for files larger than 5 MB).</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:storage/file} callback.file - The uploaded File.",
+        "name": "callback.file",
+        "description": "<ul>\n<li>The uploaded File.</li>\n</ul>\n",
+        "types": [
+          "module:storage/file"
+        ],
+        "typesDescription": "module:<a href=\"module%3Astorage%2Ffile.html\">storage/file</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string|boolean} options.validation - Possible values: `\"md5\"`,\n    `\"crc32c\"`, or `false`. By default, data integrity is validated with an\n    MD5 checksum for maximum reliability. CRC32c will provide better\n    performance with less reliability. You may also choose to skip validation\n    completely, however this is **not recommended**.",
+        "name": "options.validation",
+        "description": "<ul>\n<li>Possible values: <code>&quot;md5&quot;</code>,     <code>&quot;crc32c&quot;</code>, or <code>false</code>. By default, data integrity is validated with an<br />  MD5 checksum for maximum reliability. CRC32c will provide better<br />  performance with less reliability. You may also choose to skip validation<br />  completely, however this is <strong>not recommended</strong>.</li>\n</ul>\n",
+        "types": [
+          "string",
+          "boolean"
+        ],
+        "typesDescription": "<code>string</code>|<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "//-\n// The easiest way to upload a file.\n//-\nbucket.upload('/local/path/image.png', function(err, file, apiResponse) {\n  // Your bucket now contains:\n  // - \"image.png\" (with the contents of `/local/path/image.png')\n\n  // `file` is an instance of a File object that refers to your new file.\n});\n\n//-\n// It's not always that easy. You will likely want to specify the filename\n// used when your new file lands in your bucket.\n//\n// You may also want to set metadata or customize other options.\n//-\nvar options = {\n  destination: 'new-image.png',\n  resumable: true,\n  validation: 'crc32c',\n  metadata: {\n    event: 'Fall trip to the zoo'\n  }\n};\n\nbucket.upload('local-image.png', options, function(err, file) {\n  // Your bucket now contains:\n  // - \"new-image.png\" (with the contents of `local-image.png')\n\n  // `file` is an instance of a File object that refers to your new file.\n});\n\n//-\n// You can also have a file gzip'd on the fly.\n//-\nbucket.upload('index.html', { gzip: true }, function(err, file) {\n  // Your bucket now contains:\n  // - \"index.html\" (automatically compressed with gzip)\n\n  // Downloading the file with `file.download` will automatically decode the\n  // file.\n});\n\n//-\n// You may also re-use a File object, {module:storage/file}, that references\n// the file you wish to create or overwrite.\n//-\nvar options = {\n  destination: bucket.file('existing-file.png'),\n  resumable: false\n};\n\nbucket.upload('local-img.png', options, function(err, newFile) {\n  // Your bucket now contains:\n  // - \"existing-file.png\" (with the contents of `local-img.png')\n\n  // Note:\n  // The `newFile` parameter is equal to `file`.\n});",
+        "html": "<p>//-<br />// The easiest way to upload a file.<br />//-<br />bucket.upload(&#39;/local/path/image.png&#39;, function(err, file, apiResponse) {<br />  // Your bucket now contains:<br />  // - &quot;image.png&quot; (with the contents of `/local/path/image.png&#39;)</p><p>  // <code>file</code> is an instance of a File object that refers to your new file.<br />});</p><p>//-<br />// It&#39;s not always that easy. You will likely want to specify the filename<br />// used when your new file lands in your bucket.<br />//<br />// You may also want to set metadata or customize other options.<br />//-<br />var options = {<br />  destination: &#39;new-image.png&#39;,<br />  resumable: true,<br />  validation: &#39;crc32c&#39;,<br />  metadata: {<br />    event: &#39;Fall trip to the zoo&#39;<br />  }<br />};</p><p>bucket.upload(&#39;local-image.png&#39;, options, function(err, file) {<br />  // Your bucket now contains:<br />  // - &quot;new-image.png&quot; (with the contents of `local-image.png&#39;)</p><p>  // <code>file</code> is an instance of a File object that refers to your new file.<br />});</p><p>//-<br />// You can also have a file gzip&#39;d on the fly.<br />//-<br />bucket.upload(&#39;index.html&#39;, { gzip: true }, function(err, file) {<br />  // Your bucket now contains:<br />  // - &quot;index.html&quot; (automatically compressed with gzip)</p><p>  // Downloading the file with <code>file.download</code> will automatically decode the<br />  // file.<br />});</p><p>//-<br />// You may also re-use a File object, {module:storage/file}, that references<br />// the file you wish to create or overwrite.<br />//-<br />var options = {<br />  destination: bucket.file(&#39;existing-file.png&#39;),<br />  resumable: false<br />};</p><p>bucket.upload(&#39;local-img.png&#39;, options, function(err, newFile) {<br />  // Your bucket now contains:<br />  // - &quot;existing-file.png&quot; (with the contents of `local-img.png&#39;)</p><p>  // Note:<br />  // The <code>newFile</code> parameter is equal to <code>file</code>.<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Upload a file to the bucket. This is a convenience method that wraps<br />{module:storage/file#createWriteStream}.</p><p>You can specify whether or not an upload is resumable by setting<br /><code>options.resumable</code>. <em>Resumable uploads are enabled by default if your input<br />file is larger than 5 MB.</em></p>",
+      "summary": "<p>Upload a file to the bucket. This is a convenience method that wraps<br />{module:storage/file#createWriteStream}.</p>",
+      "body": "<p>You can specify whether or not an upload is resumable by setting<br /><code>options.resumable</code>. <em>Resumable uploads are enabled by default if your input<br />file is larger than 5 MB.</em></p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 865,
+    "codeStart": 961,
+    "code": "Bucket.prototype.upload = function(localPath, options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  var newFile;\n  if (options.destination instanceof File) {\n    newFile = options.destination;\n  } else if (is.string(options.destination)) {\n    // Use the string as the name of the file.\n    newFile = this.file(options.destination);\n  } else {\n    // Resort to using the name of the incoming file.\n    newFile = this.file(path.basename(localPath));\n  }\n\n  var metadata = options.metadata || {};\n  var contentType = mime.contentType(path.basename(localPath));\n\n  if (contentType && !metadata.contentType) {\n    metadata.contentType = contentType;\n  }\n\n  var resumable;\n  if (is.boolean(options.resumable)) {\n    resumable = options.resumable;\n    upload();\n  } else {\n    // Determine if the upload should be resumable if it's over the threshold.\n    fs.stat(localPath, function(err, fd) {\n      if (err) {\n        callback(err);\n        return;\n      }\n\n      resumable = fd.size > RESUMABLE_THRESHOLD;\n\n      upload();\n    });\n  }\n\n  function upload() {\n    fs.createReadStream(localPath)\n      .pipe(newFile.createWriteStream({\n        validation: options.validation,\n        resumable: resumable,\n        metadata: metadata,\n        gzip: options.gzip\n      }))\n      .on('error', function(err) {\n        callback(err);\n      })\n      .on('finish', function() {\n        callback(null, newFile);\n      });\n  }\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "upload",
+      "string": "Bucket.prototype.upload()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{object} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.force - Supress errors until all files have been\n    processed.",
+        "name": "options.force",
+        "description": "<ul>\n<li>Supress errors until all files have been     processed.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.private - Make files private.",
+        "name": "options.private",
+        "description": "<ul>\n<li>Make files private.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.public - Make files public.",
+        "name": "options.public",
+        "description": "<ul>\n<li>Make files public.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Iterate over all of a bucket&#39;s files, calling <code>file.makePublic()</code> (public)<br />or <code>file.makePrivate()</code> (private) on each.</p><p>Operations are performed in parallel, up to 10 at once. The first error<br />breaks the loop, and will execute the provided callback with it. Specify<br /><code>{ force: true }</code> to suppress the errors.</p>",
+      "summary": "<p>Iterate over all of a bucket&#39;s files, calling <code>file.makePublic()</code> (public)<br />or <code>file.makePrivate()</code> (private) on each.</p>",
+      "body": "<p>Operations are performed in parallel, up to 10 at once. The first error<br />breaks the loop, and will execute the provided callback with it. Specify<br /><code>{ force: true }</code> to suppress the errors.</p>"
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 1020,
+    "codeStart": 1037,
+    "code": "Bucket.prototype.makeAllFilesPublicPrivate_ = function(options, callback) {\n  var MAX_PARALLEL_LIMIT = 10;\n  var errors = [];\n  var updatedFiles = [];\n\n  this.getFiles(function(err, files) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    function processFile(file, callback) {\n      if (options.public) {\n        file.makePublic(processedCallback);\n      } else if (options.private) {\n        file.makePrivate(processedCallback);\n      }\n\n      function processedCallback(err) {\n        if (err) {\n          if (options.force) {\n            errors.push(err);\n            callback();\n            return;\n          }\n\n          callback(err);\n          return;\n        }\n\n        updatedFiles.push(file);\n        callback();\n      }\n    }\n\n    // Iterate through each file and make it public or private.\n    async.eachLimit(files, MAX_PARALLEL_LIMIT, processFile, function(err) {\n      if (err || errors.length > 0) {\n        callback(err || errors, updatedFiles);\n        return;\n      }\n\n      callback(null, updatedFiles);\n    });\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "makeAllFilesPublicPrivate_",
+      "string": "Bucket.prototype.makeAllFilesPublicPrivate_()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{string} method - Action.",
+        "name": "method",
+        "description": "<ul>\n<li>Action.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} path - Request path.",
+        "name": "path",
+        "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{*} query - Request query object.",
+        "name": "query",
+        "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{*} body - Request body contents.",
+        "name": "body",
+        "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
+        "types": [],
+        "typesDescription": "<code>*</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
+      "summary": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 1084,
+    "codeStart": 1096,
+    "code": "Bucket.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: STORAGE_BASE_URL + '/' + this.name + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.storage.makeAuthenticatedRequest_(reqOpts, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "makeReq_",
+      "string": "Bucket.prototype.makeReq_()"
+    }
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Developer Documentation</p><p>This method can be used with either a callback or as a readable object<br />stream. <code>streamRouter</code> is used to add this dual behavior.</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": "<p>This method can be used with either a callback or as a readable object<br />stream. <code>streamRouter</code> is used to add this dual behavior.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1110,
+    "codeStart": 1115,
+    "code": "streamRouter.extend(Bucket, 'getFiles');\n\nmodule.exports = Bucket;",
+    "ctx": false
+  }
+]
