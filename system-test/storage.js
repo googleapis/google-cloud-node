@@ -88,7 +88,7 @@ describe('storage', function() {
     });
   });
 
-  describe.only('acls', function() {
+  describe('acls', function() {
     var USER_ACCOUNT = 'user-spsawchuk@gmail.com';
 
     describe('buckets', function() {
