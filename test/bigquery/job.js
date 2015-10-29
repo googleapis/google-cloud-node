@@ -17,16 +17,41 @@
 'use strict';
 
 var assert = require('assert');
-var Job = require('../../lib/bigquery/job');
-var util = require('../../lib/common/util');
+var mockery = require('mockery');
+var nodeutil = require('util');
+
+var ServiceObject = require('../../lib/common/service-object.js');
+var util = require('../../lib/common/util.js');
+
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('BigQuery/Job', function() {
   var BIGQUERY = {
-    projectId: 'test-project',
-    makeReq_: util.noop
+    projectId: 'my-project'
   };
   var JOB_ID = 'job_XYrk_3z';
+  var Job;
   var job;
+
+  before(function() {
+    mockery.registerMock('../common/service-object.js', FakeServiceObject);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+
+    Job = require('../../lib/bigquery/job.js');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
 
   beforeEach(function() {
     job = new Job(BIGQUERY, JOB_ID);
@@ -37,69 +62,16 @@ describe('BigQuery/Job', function() {
       assert.deepEqual(job.bigQuery, BIGQUERY);
     });
 
-    it('should assign the given id', function() {
-      assert.equal(job.id, JOB_ID);
-    });
+    it('should inherit from ServiceObject', function() {
+      var calledWith = job.calledWith_[0];
 
-    it('should assign empty metadata object', function() {
-      assert.equal(JSON.stringify(job.metadata), '{}');
-    });
-  });
-
-  describe('getMetadata', function() {
-    it('should get metadata from api', function(done) {
-      job.bigQuery.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'GET');
-        assert.equal(path, '/jobs/' + job.id);
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
-        done();
-      };
-      job.getMetadata(assert.ifError);
-    });
-
-    it('should execute callback with error', function(done) {
-      var error = new Error('Error.');
-      job.bigQuery.makeReq_ = function(method, path, query, body, callback) {
-        callback(error);
-      };
-      job.getMetadata(function(err) {
-        assert.equal(err, error);
-        done();
-      });
-    });
-
-    describe('metadata', function() {
-      var METADATA = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        job.bigQuery.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, METADATA);
-        };
-      });
-
-      it('should update metadata on Dataset object', function(done) {
-        job.getMetadata(function(err) {
-          assert.ifError(err);
-          assert.deepEqual(job.metadata, METADATA);
-          done();
-        });
-      });
-
-      it('should execute callback with metadata', function(done) {
-        job.getMetadata(function(err, metadata) {
-          assert.ifError(err);
-          assert.deepEqual(metadata, METADATA);
-          done();
-        });
-      });
-
-      it('should execute callback with apiResponse', function(done) {
-        job.getMetadata(function(err, metadata, apiResponse) {
-          assert.ifError(err);
-          assert.deepEqual(apiResponse, METADATA);
-          done();
-        });
+      assert.strictEqual(calledWith.parent, BIGQUERY);
+      assert.strictEqual(calledWith.baseUrl, '/jobs');
+      assert.strictEqual(calledWith.id, JOB_ID);
+      assert.deepEqual(calledWith.methods, {
+        exists: true,
+        get: true,
+        getMetadata: true
       });
     });
   });
