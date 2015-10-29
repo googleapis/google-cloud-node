@@ -134,6 +134,8 @@ describe('BigQuery/Table', function() {
     });
 
     it('should inherit from ServiceObject', function(done) {
+      assert(table instanceof ServiceObject);
+
       var datasetInstance = extend({}, DATASET, {
         createTable: {
           bind: function(context) {

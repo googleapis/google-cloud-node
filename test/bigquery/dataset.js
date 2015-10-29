@@ -83,6 +83,8 @@ describe('BigQuery/Dataset', function() {
     });
 
     it('should inherit from ServiceObject', function(done) {
+      assert(ds instanceof ServiceObject);
+
       var bigQueryInstance = extend({}, BIGQUERY, {
         createDataset: {
           bind: function(context) {

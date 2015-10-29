@@ -63,6 +63,8 @@ describe('BigQuery/Job', function() {
     });
 
     it('should inherit from ServiceObject', function() {
+      assert(job instanceof ServiceObject);
+
       var calledWith = job.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, BIGQUERY);
