@@ -18,8 +18,12 @@
 
 var arrify = require('arrify');
 var assert = require('assert');
-var util = require('../../lib/common/util');
+var extend = require('extend');
 var mockery = require('mockery');
+var nodeutil = require('util');
+
+var ServiceObject = require('../../lib/common/service-object.js');
+var util = require('../../lib/common/util.js');
 
 var extended = false;
 var fakeStreamRouter = {
@@ -35,8 +39,18 @@ var fakeStreamRouter = {
   }
 };
 
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeServiceObject, ServiceObject);
+
 describe('BigQuery/Dataset', function() {
-  var BIGQUERY = { projectId: 'my-project' };
+  var BIGQUERY = {
+    projectId: 'my-project',
+    createDataset: util.noop
+  };
   var DATASET_ID = 'kittens';
   var Dataset;
   var Table;
@@ -44,6 +58,7 @@ describe('BigQuery/Dataset', function() {
 
   before(function() {
     mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
+    mockery.registerMock('../common/service-object.js', FakeServiceObject);
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
@@ -66,6 +81,32 @@ describe('BigQuery/Dataset', function() {
     it('should extend the correct methods', function() {
       assert(extended); // See `fakeStreamRouter.extend`
     });
+
+    it('should inherit from ServiceObject', function(done) {
+      var bigQueryInstance = extend({}, BIGQUERY, {
+        createDataset: {
+          bind: function(context) {
+            assert.strictEqual(context, bigQueryInstance);
+            done();
+          }
+        }
+      });
+
+      var ds = new Dataset(bigQueryInstance, DATASET_ID);
+
+      var calledWith = ds.calledWith_[0];
+
+      assert.strictEqual(calledWith.parent, bigQueryInstance);
+      assert.strictEqual(calledWith.baseUrl, '/datasets');
+      assert.strictEqual(calledWith.id, DATASET_ID);
+      assert.deepEqual(calledWith.methods, {
+        create: true,
+        exists: true,
+        get: true,
+        getMetadata: true,
+        setMetadata: true
+      });
+    });
   });
 
   describe('createTable', function() {
@@ -80,45 +121,62 @@ describe('BigQuery/Dataset', function() {
     var SCHEMA_STRING = 'id:integer,breed,name,dob:timestamp';
     var TABLE_ID = 'kittens';
 
+    var API_RESPONSE = {
+      tableReference: {
+        tableId: TABLE_ID
+      }
+    };
+
     it('should create a table', function(done) {
-      ds.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'POST');
-        assert.equal(path, '/tables');
-        assert.strictEqual(query, null);
+      var options = {
+        schema: SCHEMA_OBJECT
+      };
+
+      ds.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/tables');
+
+        var body = reqOpts.json;
+        assert.strictEqual(body, options);
         assert.deepEqual(body.schema, SCHEMA_OBJECT);
         assert.equal(body.tableReference.datasetId, DATASET_ID);
         assert.equal(body.tableReference.projectId, ds.bigQuery.projectId);
         assert.equal(body.tableReference.tableId, TABLE_ID);
+
         done();
       };
-      ds.createTable({ id: TABLE_ID, schema: SCHEMA_OBJECT }, assert.ifError);
+
+      ds.createTable(TABLE_ID, options, assert.ifError);
     });
 
     it('should create a schema object from a string', function(done) {
-      ds.makeReq_ = function(method, path, query, body) {
-        assert.deepEqual(body.schema, SCHEMA_OBJECT);
+      ds.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.json.schema, SCHEMA_OBJECT);
         done();
       };
-      ds.createTable({ id: TABLE_ID, schema: SCHEMA_STRING }, assert.ifError);
+
+      ds.createTable(TABLE_ID, { schema: SCHEMA_STRING }, assert.ifError);
     });
 
     it('should return an error to the callback', function(done) {
       var error = new Error('Error.');
-      ds.makeReq_ = function(method, path, query, body, callback) {
+
+      ds.request = function(reqOpts, callback) {
         callback(error);
       };
-      ds.createTable({ id: TABLE_ID, schema: SCHEMA_OBJECT }, function(err) {
-        assert.equal(err, error);
+
+      ds.createTable(TABLE_ID, { schema: SCHEMA_OBJECT }, function(err) {
+        assert.strictEqual(err, error);
         done();
       });
     });
 
     it('should return a Table object', function(done) {
-      ds.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, { tableReference: { tableId: TABLE_ID } });
+      ds.request = function(reqOpts, callback) {
+        callback(null, API_RESPONSE);
       };
-      var options = { id: TABLE_ID, schema: SCHEMA_OBJECT };
-      ds.createTable(options, function(err, table) {
+
+      ds.createTable(TABLE_ID, { schema: SCHEMA_OBJECT }, function(err, table) {
         assert.ifError(err);
         assert(table instanceof Table);
         done();
@@ -126,31 +184,32 @@ describe('BigQuery/Dataset', function() {
     });
 
     it('should return an apiResponse', function(done) {
-      var resp = { tableReference: { tableId: TABLE_ID } };
-      ds.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, resp);
+      var opts = { id: TABLE_ID, schema: SCHEMA_OBJECT };
+
+      ds.request = function(reqOpts, callback) {
+        callback(null, API_RESPONSE);
       };
-      var options = { id: TABLE_ID, schema: SCHEMA_OBJECT };
-      ds.createTable(options, function(err, table, apiResponse) {
+
+      ds.createTable(TABLE_ID, opts, function(err, table, apiResponse) {
         assert.ifError(err);
-        assert.deepEqual(apiResponse, resp);
+        assert.strictEqual(apiResponse, API_RESPONSE);
         done();
       });
     });
 
     it('should assign metadata to the Table object', function(done) {
-      var metadata = {
+      var apiResponse = extend({
         a: 'b',
-        c: 'd',
-        tableReference: { tableId: TABLE_ID }
+        c: 'd'
+      }, API_RESPONSE);
+
+      ds.request = function(reqOpts, callback) {
+        callback(null, apiResponse);
       };
-      ds.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, metadata);
-      };
-      var options = { id: TABLE_ID, schema: SCHEMA_OBJECT };
-      ds.createTable(options, function(e, table) {
-        assert.ifError(e);
-        assert.deepEqual(table.metadata, metadata);
+
+      ds.createTable(TABLE_ID, { schema: SCHEMA_OBJECT }, function(err, table) {
+        assert.ifError(err);
+        assert.strictEqual(table.metadata, apiResponse);
         done();
       });
     });
@@ -158,189 +217,153 @@ describe('BigQuery/Dataset', function() {
 
   describe('delete', function() {
     it('should delete the dataset via the api', function(done) {
-      ds.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'DELETE');
-        assert.equal(path, '');
-        assert.deepEqual(query, { deleteContents: false });
-        assert.strictEqual(body, null);
+      ds.request = function(reqOpts) {
+        assert.equal(reqOpts.method, 'DELETE');
+        assert.equal(reqOpts.uri, '');
+        assert.deepEqual(reqOpts.qs, { deleteContents: false });
         done();
       };
+
       ds.delete(assert.ifError);
     });
 
     it('should allow a force delete', function(done) {
-      ds.makeReq_ = function(method, path, query) {
-        assert.deepEqual(query, { deleteContents: true });
+      ds.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, { deleteContents: true });
         done();
       };
+
       ds.delete({ force: true }, assert.ifError);
     });
 
     it('should execute callback when done', function(done) {
-      ds.makeReq_ = function(method, path, query, body, callback) {
+      ds.request = function(reqOpts, callback) {
         callback();
       };
+
       ds.delete(done);
     });
 
     it('should pass error to callback', function(done) {
       var error = new Error('Error.');
-      ds.makeReq_ = function(method, path, query, body, callback) {
+
+      ds.request = function(reqOpts, callback) {
         callback(error);
       };
+
       ds.delete(function(err) {
-        assert.equal(err, error);
+        assert.strictEqual(err, error);
         done();
       });
     });
 
     it('should pass apiResponse to callback', function(done) {
-      var resp = { success: true };
-      ds.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, resp);
+      var apiResponse = {};
+
+      ds.request = function(reqOpts, callback) {
+        callback(null, apiResponse);
       };
-      ds.delete(function(err, apiResponse) {
-        assert.deepEqual(apiResponse, { success: true });
+
+      ds.delete(function(err, apiResponse_) {
+        assert.strictEqual(apiResponse_, apiResponse);
         done();
-      });
-    });
-  });
-
-  describe('getMetadata', function() {
-    it('should get metadata from api', function(done) {
-      ds.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'GET');
-        assert.equal(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
-        done();
-      };
-      ds.getMetadata(assert.ifError);
-    });
-
-    it('should execute callback with error', function(done) {
-      var error = new Error('Error.');
-      ds.makeReq_ = function(method, path, query, body, callback) {
-        callback(error);
-      };
-      ds.getMetadata(function(err) {
-        assert.equal(err, error);
-        done();
-      });
-    });
-
-    describe('metadata', function() {
-      var METADATA = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        ds.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, METADATA);
-        };
-      });
-
-      it('should update metadata on Dataset object', function(done) {
-        ds.getMetadata(function(err) {
-          assert.ifError(err);
-          assert.deepEqual(ds.metadata, METADATA);
-          done();
-        });
-      });
-
-      it('should execute callback with metadata', function(done) {
-        ds.getMetadata(function(err, metadata) {
-          assert.ifError(err);
-          assert.deepEqual(metadata, METADATA);
-          done();
-        });
-      });
-
-      it('should execute callback with apiResponse', function(done) {
-        ds.getMetadata(function(err, metadata, apiResponse) {
-          assert.ifError(err);
-          assert.deepEqual(apiResponse, METADATA);
-          done();
-        });
       });
     });
   });
 
   describe('getTables', function() {
     it('should get tables from the api', function(done) {
-      ds.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'GET');
-        assert.equal(path, '/tables');
-        assert.deepEqual(query, {});
-        assert.strictEqual(body, null);
+      ds.request = function(reqOpts) {
+        assert.equal(reqOpts.uri, '/tables');
+        assert.deepEqual(reqOpts.qs, {});
         done();
       };
+
       ds.getTables(assert.ifError);
     });
 
-    it('should accept query', function(done) {
-      var queryObject = { maxResults: 8, pageToken: 'token' };
-      ds.makeReq_ = function(method, path, query) {
-        assert.deepEqual(query, queryObject);
+    it('should accept a query', function(done) {
+      var query = {
+        maxResults: 8,
+        pageToken: 'token'
+      };
+
+      ds.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs, query);
         done();
       };
-      ds.getTables(queryObject, assert.ifError);
+
+      ds.getTables(query, assert.ifError);
     });
 
     it('should return error to callback', function(done) {
       var error = new Error('Error.');
-      ds.makeReq_ = function(method, path, query, body, callback) {
+
+      ds.request = function(reqOpts, callback) {
         callback(error);
       };
+
       ds.getTables(function(err) {
-        assert.equal(err, error);
+        assert.strictEqual(err, error);
         done();
       });
     });
 
-    it('should return Table objects', function(done) {
-      ds.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, { tables: [{ id: 'tableName' }] });
+    describe('success', function() {
+      var apiResponse = {
+        tables: [
+          {
+            a: 'b',
+            c: 'd',
+            id: 'tableName'
+          }
+        ]
       };
-      ds.getTables(function(err, tables) {
-        assert.ifError(err);
-        assert(tables[0] instanceof Table);
-        done();
-      });
-    });
 
-    it('should return apiResponse', function(done) {
-      ds.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, { tables: [{ id: 'tableName' }] });
-      };
-      ds.getTables(function(err, tables, nextQuery, apiResponse) {
-        assert.ifError(err);
-        assert.deepEqual(apiResponse, { tables: [{ id: 'tableName' }] });
-        done();
+      beforeEach(function() {
+        ds.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
       });
-    });
 
-    it('should assign metadata to the Table objects', function(done) {
-      var tableObjects = [{ a: 'b', c: 'd', id: 'tableName' }];
-      ds.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, { tables: tableObjects });
-      };
-      ds.getTables(function(err, tables) {
-        assert.ifError(err);
-        assert(tables[0].metadata, tableObjects[0]);
-        done();
-      });
-    });
-
-    it('should return token if more results exist', function(done) {
-      var token = 'token';
-      ds.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, { nextPageToken: token });
-      };
-      ds.getTables({ maxResults: 5 }, function(err, tables, nextQuery) {
-        assert.deepEqual(nextQuery, {
-          pageToken: token,
-          maxResults: 5
+      it('should return Table & apiResponse', function(done) {
+        ds.getTables(function(err, tables, nextQuery, apiResponse_) {
+          assert.ifError(err);
+          assert(tables[0] instanceof Table);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
         });
-        done();
+      });
+
+      it('should assign metadata to the Table objects', function(done) {
+        ds.getTables(function(err, tables) {
+          assert.ifError(err);
+          assert.strictEqual(tables[0].metadata, apiResponse.tables[0]);
+          done();
+        });
+      });
+
+      it('should return token if more results exist', function(done) {
+        var pageToken = 'token';
+
+        var query = {
+          maxResults: 5
+        };
+
+        var expectedNextQuery = {
+          maxResults: 5,
+          pageToken: pageToken
+        };
+
+        ds.request = function(reqOpts, callback) {
+          callback(null, { nextPageToken: pageToken });
+        };
+
+        ds.getTables(query, function(err, tables, nextQuery) {
+          assert.ifError(err);
+          assert.deepEqual(nextQuery, expectedNextQuery);
+          done();
+        });
       });
     });
   });
@@ -420,96 +443,12 @@ describe('BigQuery/Dataset', function() {
     });
   });
 
-  describe('setMetadata', function() {
-    var METADATA = { a: 'b', c: 'd' };
-
-    it('should send request to the api', function(done) {
-      ds.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'PATCH');
-        assert.equal(path, '');
-        assert.strictEqual(query, null);
-        assert.deepEqual(body, METADATA);
-        done();
-      };
-      ds.setMetadata(METADATA, assert.ifError);
-    });
-
-    it('should execute callback with error & API response', function(done) {
-      var error = new Error('Error.');
-      var apiResponse = {};
-
-      ds.makeReq_ = function(method, path, query, body, callback) {
-        callback(error, apiResponse);
-      };
-
-      ds.setMetadata(METADATA, function(err, apiResponse_) {
-        assert.strictEqual(err, error);
-        assert.strictEqual(apiResponse_, apiResponse);
-        done();
-      });
-    });
-
-    describe('metadata', function() {
-      beforeEach(function() {
-        ds.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, METADATA);
-        };
-      });
-
-      it('should update metadata on Dataset object', function(done) {
-        ds.setMetadata(METADATA, function(err) {
-          assert.ifError(err);
-          assert.deepEqual(ds.metadata, METADATA);
-          done();
-        });
-      });
-
-      it('should execute callback with apiResponse', function(done) {
-        ds.setMetadata(METADATA, function(err, apiResponse) {
-          assert.ifError(err);
-          assert.deepEqual(apiResponse, METADATA);
-          done();
-        });
-      });
-    });
-  });
-
   describe('table', function() {
     it('should return a Table object', function() {
       var tableId = 'tableId';
       var table = ds.table(tableId);
       assert(table instanceof Table);
       assert.equal(table.id, tableId);
-    });
-  });
-
-  describe('makeReq_', function() {
-    it('should prefix the path', function(done) {
-      var path = '/test-path';
-
-      ds.bigQuery.makeReq_ = function(method, p) {
-        assert.equal(p, '/datasets/' + ds.id + path);
-        done();
-      };
-
-      ds.makeReq_('POST', path);
-    });
-
-    it('should pass through arguments', function(done) {
-      var method = 'POST';
-      var query = { a: 'b', c: 'd', e: { f: 'g' } };
-      var body = { a: 'b', c: 'd', e: { f: 'g' } };
-      var callback = util.noop;
-
-      ds.bigQuery.makeReq_ = function(m, p, q, b, c) {
-        assert.equal(m, method);
-        assert.deepEqual(q, query);
-        assert.deepEqual(b, body);
-        assert.equal(c, callback);
-        done();
-      };
-
-      ds.makeReq_(method, '/path', query, body, callback);
     });
   });
 });
