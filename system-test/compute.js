@@ -456,32 +456,16 @@ describe('Compute', function() {
     });
 
     it('should attach and detach a disk', function(done) {
-      var disk = zone.disk(generateName());
+      compute.getDisks()
+        .on('error', done)
+        .once('data', function(disk) {
+          this.end();
 
-      // This test waits on a lot of operations.
-      this.timeout(90000);
-
-      async.series([
-        createDisk,
-        attachDisk,
-        detachDisk
-      ], done);
-
-      function createDisk(callback) {
-        var config = {
-          os: 'ubuntu'
-        };
-
-        disk.create(config, execAfterOperationComplete(callback));
-      }
-
-      function attachDisk(callback) {
-        vm.attachDisk(disk, execAfterOperationComplete(callback));
-      }
-
-      function detachDisk(callback) {
-        vm.detachDisk(disk, execAfterOperationComplete(callback));
-      }
+          vm.attachDisk(disk, function(err) {
+            assert.ifError(err);
+            vm.detachDisk(disk, done);
+          });
+        });
     });
 
     it('should get serial port output', function(done) {
