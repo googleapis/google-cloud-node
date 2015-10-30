@@ -125,6 +125,8 @@ describe('Zone', function() {
     });
 
     it('should inherit from ServiceObject', function() {
+      assert(zone instanceof ServiceObject);
+
       var calledWith = zone.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, COMPUTE);

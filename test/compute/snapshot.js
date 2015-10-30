@@ -89,6 +89,7 @@ describe('Snapshot', function() {
       };
 
       var snapshot = new Snapshot(scope, SNAPSHOT_NAME);
+      assert(snapshot instanceof ServiceObject);
 
       var calledWith = snapshot.calledWith_[0];
       assert.strictEqual(calledWith.methods.create, true);

@@ -95,6 +95,8 @@ describe('Region', function() {
     });
 
     it('should inherit from ServiceObject', function() {
+      assert(region instanceof ServiceObject);
+
       var calledWith = region.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, COMPUTE);
