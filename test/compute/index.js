@@ -16,12 +16,15 @@
 
 'use strict';
 
-var assert = require('assert');
-var mockery = require('mockery');
-var extend = require('extend');
 var arrify = require('arrify');
+var assert = require('assert');
+var extend = require('extend');
+var mockery = require('mockery');
+var nodeutil = require('util');
 
+var Service = require('../../lib/common/service.js');
 var util = require('../../lib/common/util.js');
+
 var slice = Array.prototype.slice;
 
 var fakeUtil = extend({}, util, {
@@ -78,6 +81,13 @@ function FakeZone() {
   this.vm = function() { return {}; };
 }
 
+function FakeService() {
+  this.calledWith_ = arguments;
+  Service.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeService, Service);
+
 describe('Compute', function() {
   var Compute;
   var compute;
@@ -86,6 +96,7 @@ describe('Compute', function() {
 
   before(function() {
     mockery.registerMock('../common/util.js', fakeUtil);
+    mockery.registerMock('../common/service.js', FakeService);
     mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
     mockery.registerMock('./firewall.js', FakeFirewall);
     mockery.registerMock('./network.js', FakeNetwork);
@@ -144,24 +155,16 @@ describe('Compute', function() {
       fakeUtil.normalizeArguments = normalizeArguments;
     });
 
-    it('should create a makeAuthenticatedRequest method', function(done) {
-      fakeUtil.makeAuthenticatedRequestFactory = function(options_) {
-        assert.deepEqual(options_, {
-          credentials: options.credentials,
-          email: options.email,
-          keyFile: options.keyFilename,
-          scopes: ['https://www.googleapis.com/auth/compute']
-        });
-        fakeUtil.makeAuthenticatedRequestFactory = util.noop;
-        return done;
-      };
+    it('should inherit from Service', function() {
+      assert(compute instanceof Service);
 
-      var compute = new Compute(options);
-      compute.makeAuthenticatedRequest_();
-    });
+      var calledWith = compute.calledWith_[0];
 
-    it('should localize the project id', function() {
-      assert.strictEqual(compute.projectId, PROJECT_ID);
+      var baseUrl = 'https://www.googleapis.com/compute/v1';
+      assert.strictEqual(calledWith.baseUrl, baseUrl);
+      assert.deepEqual(calledWith.scopes, [
+        'https://www.googleapis.com/auth/compute'
+      ]);
     });
   });
 
@@ -192,14 +195,14 @@ describe('Compute', function() {
           }
         };
 
-        compute.makeReq_ = function(method, path, query, body) {
-          assert.deepEqual(body.allowed, [
+        compute.request = function(reqOpts) {
+          assert.deepEqual(reqOpts.json.allowed, [
             { IPProtocol: 'http', ports: [8000] },
             { IPProtocol: 'https', ports: [8080, 9000] },
             { IPProtocol: 'ssh', ports: [22] },
             { IPProtocol: 'ftp' }
           ]);
-          assert.strictEqual(body.protocols, undefined);
+          assert.strictEqual(reqOpts.json.protocols, undefined);
           done();
         };
 
@@ -213,9 +216,9 @@ describe('Compute', function() {
           ranges: '0.0.0.0/0' // non-array to test that it's arrified.
         };
 
-        compute.makeReq_ = function(method, path, query, body) {
-          assert.deepEqual(body.sourceRanges, [options.ranges]);
-          assert.strictEqual(body.ranges, undefined);
+        compute.request = function(reqOpts) {
+          assert.deepEqual(reqOpts.json.sourceRanges, [options.ranges]);
+          assert.strictEqual(reqOpts.json.ranges, undefined);
           done();
         };
 
@@ -229,9 +232,9 @@ describe('Compute', function() {
           tags: 'tag' // non-array to test that it's arrified.
         };
 
-        compute.makeReq_ = function(method, path, query, body) {
-          assert.deepEqual(body.sourceTags, [options.tags]);
-          assert.strictEqual(body.tags, undefined);
+        compute.request = function(reqOpts) {
+          assert.deepEqual(reqOpts.json.sourceTags, [options.tags]);
+          assert.strictEqual(reqOpts.json.tags, undefined);
           done();
         };
 
@@ -242,11 +245,10 @@ describe('Compute', function() {
     it('should make the correct API request', function(done) {
       var name = 'new-firewall-name';
 
-      compute.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'POST');
-        assert.strictEqual(path, '/global/firewalls');
-        assert.strictEqual(query, null);
-        assert.deepEqual(body, { name: name });
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/global/firewalls');
+        assert.deepEqual(reqOpts.json, { name: name });
         done();
       };
 
@@ -258,7 +260,7 @@ describe('Compute', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -280,7 +282,7 @@ describe('Compute', function() {
       };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -319,9 +321,9 @@ describe('Compute', function() {
           range: '10.240.0.0/16'
         };
 
-        compute.makeReq_ = function(method, path, query, body) {
-          assert.strictEqual(body.IPv4Range, options.range);
-          assert.strictEqual(body.range, undefined);
+        compute.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.json.IPv4Range, options.range);
+          assert.strictEqual(reqOpts.json.range, undefined);
           done();
         };
 
@@ -335,9 +337,9 @@ describe('Compute', function() {
           gateway: '10.1.1.1'
         };
 
-        compute.makeReq_ = function(method, path, query, body) {
-          assert.strictEqual(body.gatewayIPv4, options.gateway);
-          assert.strictEqual(body.gateway, undefined);
+        compute.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.json.gatewayIPv4, options.gateway);
+          assert.strictEqual(reqOpts.json.gateway, undefined);
           done();
         };
 
@@ -348,11 +350,10 @@ describe('Compute', function() {
     it('should make the correct API request', function(done) {
       var name = 'new-network';
 
-      compute.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'POST');
-        assert.strictEqual(path, '/global/networks');
-        assert.strictEqual(query, null);
-        assert.deepEqual(body, { name: name });
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/global/networks');
+        assert.deepEqual(reqOpts.json, { name: name });
         done();
       };
 
@@ -364,7 +365,7 @@ describe('Compute', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -387,7 +388,7 @@ describe('Compute', function() {
       };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -431,8 +432,8 @@ describe('Compute', function() {
 
   describe('getAddresses', function() {
     it('should accept only a callback', function(done) {
-      compute.makeReq_ = function(method, path, query) {
-        assert.deepEqual(query, {});
+      compute.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
         done();
       };
 
@@ -442,11 +443,9 @@ describe('Compute', function() {
     it('should make the correct API request', function(done) {
       var options = {};
 
-      compute.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '/aggregated/addresses');
-        assert.strictEqual(query, options);
-        assert.strictEqual(body, null);
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/aggregated/addresses');
+        assert.strictEqual(reqOpts.qs, options);
         done();
       };
 
@@ -458,7 +457,7 @@ describe('Compute', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -489,7 +488,7 @@ describe('Compute', function() {
       };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -519,7 +518,7 @@ describe('Compute', function() {
         var query = { a: 'b', c: 'd' };
         var originalQuery = extend({}, query);
 
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -540,8 +539,8 @@ describe('Compute', function() {
 
   describe('getDisks', function() {
     it('should accept only a callback', function(done) {
-      compute.makeReq_ = function(method, path, query) {
-        assert.deepEqual(query, {});
+      compute.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
         done();
       };
 
@@ -551,11 +550,9 @@ describe('Compute', function() {
     it('should make the correct API request', function(done) {
       var options = {};
 
-      compute.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '/aggregated/disks');
-        assert.strictEqual(query, options);
-        assert.strictEqual(body, null);
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/aggregated/disks');
+        assert.strictEqual(reqOpts.qs, options);
         done();
       };
 
@@ -567,7 +564,7 @@ describe('Compute', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -598,7 +595,7 @@ describe('Compute', function() {
       };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -628,7 +625,7 @@ describe('Compute', function() {
         var query = { a: 'b', c: 'd' };
         var originalQuery = extend({}, query);
 
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -649,8 +646,8 @@ describe('Compute', function() {
 
   describe('getFirewalls', function() {
     it('should accept only a callback', function(done) {
-      compute.makeReq_ = function(method, path, query) {
-        assert.deepEqual(query, {});
+      compute.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
         done();
       };
 
@@ -660,11 +657,9 @@ describe('Compute', function() {
     it('should make the correct API request', function(done) {
       var options = {};
 
-      compute.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '/global/firewalls');
-        assert.strictEqual(query, options);
-        assert.strictEqual(body, null);
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/global/firewalls');
+        assert.strictEqual(reqOpts.qs, options);
         done();
       };
 
@@ -676,7 +671,7 @@ describe('Compute', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -700,7 +695,7 @@ describe('Compute', function() {
       };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -723,7 +718,7 @@ describe('Compute', function() {
         var query = { a: 'b', c: 'd' };
         var originalQuery = extend({}, query);
 
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -744,8 +739,8 @@ describe('Compute', function() {
 
   describe('getNetworks', function() {
     it('should work with only a callback', function(done) {
-      compute.makeReq_ = function(method, path, query) {
-        assert.deepEqual(query, {});
+      compute.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
         done();
       };
 
@@ -755,11 +750,9 @@ describe('Compute', function() {
     it('should make the correct API request', function(done) {
       var options = {};
 
-      compute.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '/global/networks');
-        assert.strictEqual(query, options);
-        assert.strictEqual(body, null);
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/global/networks');
+        assert.strictEqual(reqOpts.qs, options);
         done();
       };
 
@@ -771,7 +764,7 @@ describe('Compute', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -795,7 +788,7 @@ describe('Compute', function() {
       };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -818,7 +811,7 @@ describe('Compute', function() {
         var query = { a: 'b', c: 'd' };
         var originalQuery = extend({}, query);
 
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -839,8 +832,8 @@ describe('Compute', function() {
 
   describe('getOperations', function() {
     it('should work with only a callback', function(done) {
-      compute.makeReq_ = function(method, path, query) {
-        assert.deepEqual(query, {});
+      compute.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
         done();
       };
 
@@ -850,11 +843,9 @@ describe('Compute', function() {
     it('should make the correct API request', function(done) {
       var options = {};
 
-      compute.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '/global/operations');
-        assert.strictEqual(query, options);
-        assert.strictEqual(body, null);
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/global/operations');
+        assert.strictEqual(reqOpts.qs, options);
         done();
       };
 
@@ -866,7 +857,7 @@ describe('Compute', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -890,7 +881,7 @@ describe('Compute', function() {
       };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -913,7 +904,7 @@ describe('Compute', function() {
         var query = { a: 'b', c: 'd' };
         var originalQuery = extend({}, query);
 
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -934,8 +925,8 @@ describe('Compute', function() {
 
   describe('getRegions', function() {
     it('should work with only a callback', function(done) {
-      compute.makeReq_ = function(method, path, query) {
-        assert.deepEqual(query, {});
+      compute.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
         done();
       };
 
@@ -945,11 +936,9 @@ describe('Compute', function() {
     it('should make the correct API request', function(done) {
       var options = {};
 
-      compute.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '/regions');
-        assert.strictEqual(query, options);
-        assert.strictEqual(body, null);
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/regions');
+        assert.strictEqual(reqOpts.qs, options);
         done();
       };
 
@@ -961,7 +950,7 @@ describe('Compute', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -985,7 +974,7 @@ describe('Compute', function() {
       };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -1008,7 +997,7 @@ describe('Compute', function() {
         var query = { a: 'b', c: 'd' };
         var originalQuery = extend({}, query);
 
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -1029,8 +1018,8 @@ describe('Compute', function() {
 
   describe('getSnapshots', function() {
     it('should work with only a callback', function(done) {
-      compute.makeReq_ = function(method, path, query) {
-        assert.deepEqual(query, {});
+      compute.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1040,11 +1029,9 @@ describe('Compute', function() {
     it('should make the correct API request', function(done) {
       var options = {};
 
-      compute.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '/global/snapshots');
-        assert.strictEqual(query, options);
-        assert.strictEqual(body, null);
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/global/snapshots');
+        assert.strictEqual(reqOpts.qs, options);
         done();
       };
 
@@ -1056,7 +1043,7 @@ describe('Compute', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -1080,7 +1067,7 @@ describe('Compute', function() {
       };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -1103,7 +1090,7 @@ describe('Compute', function() {
         var query = { a: 'b', c: 'd' };
         var originalQuery = extend({}, query);
 
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -1124,8 +1111,8 @@ describe('Compute', function() {
 
   describe('getVMs', function() {
     it('should work with only a callback', function(done) {
-      compute.makeReq_ = function(method, path, query) {
-        assert.deepEqual(query, {});
+      compute.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1135,11 +1122,9 @@ describe('Compute', function() {
     it('should make the correct API request', function(done) {
       var options = {};
 
-      compute.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '/aggregated/instances');
-        assert.strictEqual(query, options);
-        assert.strictEqual(body, null);
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/aggregated/instances');
+        assert.strictEqual(reqOpts.qs, options);
         done();
       };
 
@@ -1151,7 +1136,7 @@ describe('Compute', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -1182,7 +1167,7 @@ describe('Compute', function() {
       };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -1212,7 +1197,7 @@ describe('Compute', function() {
         var query = { a: 'b', c: 'd' };
         var originalQuery = extend({}, query);
 
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -1233,8 +1218,8 @@ describe('Compute', function() {
 
   describe('getZones', function() {
     it('should work with only a callback', function(done) {
-      compute.makeReq_ = function(method, path, query) {
-        assert.deepEqual(query, {});
+      compute.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1244,11 +1229,9 @@ describe('Compute', function() {
     it('should make the correct API request', function(done) {
       var options = {};
 
-      compute.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '/zones');
-        assert.strictEqual(query, options);
-        assert.strictEqual(body, null);
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/zones');
+        assert.strictEqual(reqOpts.qs, options);
         done();
       };
 
@@ -1260,7 +1243,7 @@ describe('Compute', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -1284,7 +1267,7 @@ describe('Compute', function() {
       };
 
       beforeEach(function() {
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -1307,7 +1290,7 @@ describe('Compute', function() {
         var query = { a: 'b', c: 'd' };
         var originalQuery = extend({}, query);
 
-        compute.makeReq_ = function(method, path, query, body, callback) {
+        compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -1378,29 +1361,6 @@ describe('Compute', function() {
       assert(zone instanceof FakeZone);
       assert.strictEqual(zone.calledWith_[0], compute);
       assert.strictEqual(zone.calledWith_[1], NAME);
-    });
-  });
-
-  describe('makeReq_', function() {
-    it('should make the correct request to Compute', function(done) {
-      var method = 'POST';
-      var path = '/';
-      var query = 'query';
-      var body = 'body';
-
-      compute.makeAuthenticatedRequest_ = function(reqOpts, callback) {
-        assert.equal(reqOpts.method, method);
-        assert.equal(reqOpts.qs, query);
-
-        var baseUri = 'https://www.googleapis.com/compute/v1/';
-        assert.equal(reqOpts.uri, baseUri + 'projects/' + PROJECT_ID + path);
-
-        assert.equal(reqOpts.json, body);
-
-        callback();
-      };
-
-      compute.makeReq_(method, path, query, body, done);
     });
   });
 });
