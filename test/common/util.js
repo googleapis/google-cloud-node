@@ -127,16 +127,63 @@ describe('common/util', function() {
       assert.strictEqual(apiError.response, error.response);
     });
 
-    it('should build ApiError with default status message', function() {
+    it('should detect ApiError message from response body', function() {
+      var errorMessage = 'API error message';
+
       var error = {
-        errors: [],
+        errors: [ new Error(errorMessage) ],
         code: 100,
         response: { a: 'b', c: 'd' }
       };
 
       var apiError = new util.ApiError(error);
 
-      assert.strictEqual(apiError.message, 'Error during request.');
+      assert.strictEqual(apiError.message, errorMessage);
+    });
+
+    it('should favor an explicit message over response body', function() {
+      var errorMessage = 'API error message';
+      var expectedErrorMessage = 'Custom error message';
+
+      var error = {
+        errors: [ new Error(errorMessage) ],
+        code: 100,
+        response: { a: 'b', c: 'd' },
+        message: expectedErrorMessage
+      };
+
+      var apiError = new util.ApiError(error);
+
+      assert.strictEqual(apiError.message, expectedErrorMessage);
+    });
+
+    it('should use default message if there are no errors', function() {
+      var expectedErrorMessage = 'Error during request.';
+
+      var error = {
+        code: 100,
+        response: { a: 'b', c: 'd' },
+        message: expectedErrorMessage
+      };
+
+      var apiError = new util.ApiError(error);
+
+      assert.strictEqual(apiError.message, expectedErrorMessage);
+    });
+
+    it('should use default message if too many errors', function() {
+      var expectedErrorMessage = 'Error during request.';
+
+      var error = {
+        errors: [ new Error(), new Error() ],
+        code: 100,
+        response: { a: 'b', c: 'd' },
+        message: expectedErrorMessage
+      };
+
+      var apiError = new util.ApiError(error);
+
+      assert.strictEqual(apiError.message, expectedErrorMessage);
     });
   });
 
