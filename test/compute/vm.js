@@ -18,22 +18,54 @@
 
 var assert = require('assert');
 var extend = require('extend');
+var mockery = require('mockery');
+var nodeutil = require('util');
 
-var Disk = require('../../lib/compute/disk.js');
 var util = require('../../lib/common/util.js');
-var VM = require('../../lib/compute/vm.js');
+var ServiceObject = require('../../lib/common/service-object.js');
+
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('VM', function() {
+  var VM;
   var vm;
 
+  var Disk;
+  var DISK;
+
   var COMPUTE = { projectId: 'project-id' };
-  var ZONE = { compute: COMPUTE, name: 'us-central1-a' };
+  var ZONE = {
+    compute: COMPUTE,
+    name: 'us-central1-a',
+    createDisk: util.noop,
+    createVM: util.noop
+  };
   var VM_NAME = 'vm-name';
 
-  var DISK = new Disk(ZONE, 'disk-name');
+  before(function() {
+    mockery.registerMock('../common/service-object.js', FakeServiceObject);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+
+    Disk = require('../../lib/compute/disk.js');
+    VM = require('../../lib/compute/vm.js');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
 
   beforeEach(function() {
     vm = new VM(ZONE, VM_NAME);
+    DISK = new Disk(ZONE, 'disk-name');
   });
 
   describe('instantiation', function() {
@@ -44,11 +76,44 @@ describe('VM', function() {
     it('should localize the name', function() {
       assert.strictEqual(vm.name, VM_NAME);
     });
+
+    it('should inherit from ServiceObject', function(done) {
+      var zoneInstance = extend({}, ZONE, {
+        createVM: {
+          bind: function(context) {
+            assert.strictEqual(context, zoneInstance);
+            done();
+          }
+        }
+      });
+
+      var vm = new VM(zoneInstance, VM_NAME);
+      assert(vm instanceof ServiceObject);
+
+      var calledWith = vm.calledWith_[0];
+
+      assert.strictEqual(calledWith.parent, zoneInstance);
+      assert.strictEqual(calledWith.baseUrl, '/instances');
+      assert.strictEqual(calledWith.id, VM_NAME);
+      assert.deepEqual(calledWith.methods, {
+        create: true,
+        exists: true,
+        get: true,
+        getMetadata: true
+      });
+    });
   });
 
   describe('attachDisk', function() {
     var CONFIG = {};
-    var EXPECTED_BODY = { source: DISK.formattedName };
+    var EXPECTED_BODY;
+
+    beforeEach(function() {
+      EXPECTED_BODY = {
+        deviceName: DISK.name,
+        source: DISK.formattedName
+      };
+    });
 
     it('should throw if a Disk object is not provided', function() {
       assert.throws(function() {
@@ -56,14 +121,14 @@ describe('VM', function() {
       }, /A Disk object must be provided/);
 
       assert.doesNotThrow(function() {
-        vm.makeReq_ = util.noop;
+        vm.request = util.noop;
         vm.attachDisk(DISK, CONFIG, assert.ifError);
       });
     });
 
     it('should not require an options object', function(done) {
-      vm.makeReq_ = function(method, path, query, body) {
-        assert.deepEqual(body, EXPECTED_BODY);
+      vm.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.json, EXPECTED_BODY);
         done();
       };
 
@@ -76,8 +141,8 @@ describe('VM', function() {
       it('should set the correct mode', function(done) {
         var expectedBody = extend({}, EXPECTED_BODY, { mode: 'READ_ONLY' });
 
-        vm.makeReq_ = function(method, path, query, body) {
-          assert.deepEqual(body, expectedBody);
+        vm.request = function(reqOpts) {
+          assert.deepEqual(reqOpts.json, expectedBody);
           done();
         };
 
@@ -85,8 +150,8 @@ describe('VM', function() {
       });
 
       it('should delete the readOnly property', function(done) {
-        vm.makeReq_ = function(method, path, query, body) {
-          assert.strictEqual(typeof body.readOnly, 'undefined');
+        vm.request = function(reqOpts) {
+          assert.strictEqual(typeof reqOpts.json.readOnly, 'undefined');
           done();
         };
 
@@ -95,11 +160,10 @@ describe('VM', function() {
     });
 
     it('should make the correct API request', function(done) {
-      vm.makeReq_ = function(method, path, query, body, callback) {
-        assert.strictEqual(method, 'POST');
-        assert.strictEqual(path, '/attachDisk');
-        assert.strictEqual(query, null);
-        assert.deepEqual(body, EXPECTED_BODY);
+      vm.request = function(reqOpts, callback) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/attachDisk');
+        assert.deepEqual(reqOpts.json, EXPECTED_BODY);
 
         callback();
       };
@@ -110,11 +174,9 @@ describe('VM', function() {
 
   describe('delete', function() {
     it('should make the correct API request', function(done) {
-      vm.makeReq_ = function(method, path, query, body, callback) {
-        assert.strictEqual(method, 'DELETE');
-        assert.strictEqual(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
+      vm.request = function(reqOpts, callback) {
+        assert.strictEqual(reqOpts.method, 'DELETE');
+        assert.strictEqual(reqOpts.uri, '');
 
         callback();
       };
@@ -123,7 +185,7 @@ describe('VM', function() {
     });
 
     it('should not require a callback', function(done) {
-      vm.makeReq_ = function(method, path, query, body, callback) {
+      vm.request = function(reqOpts, callback) {
         assert.doesNotThrow(function() {
           callback();
           done();
@@ -141,17 +203,16 @@ describe('VM', function() {
       }, /A Disk object must be provided/);
 
       assert.doesNotThrow(function() {
-        vm.makeReq_ = util.noop;
+        vm.request = util.noop;
         vm.detachDisk(DISK);
       });
     });
 
     it('should make the correct API request', function(done) {
-      vm.makeReq_ = function(method, path, query, body, callback) {
-        assert.strictEqual(method, 'POST');
-        assert.strictEqual(path, '/detachDisk');
-        assert.deepEqual(query, { deviceName: DISK.name });
-        assert.strictEqual(body, null);
+      vm.request = function(reqOpts, callback) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/detachDisk');
+        assert.deepEqual(reqOpts.qs, { deviceName: DISK.name });
 
         callback();
       };
@@ -160,7 +221,7 @@ describe('VM', function() {
     });
 
     it('should not require a callback', function(done) {
-      vm.makeReq_ = function(method, path, query, body, callback) {
+      vm.request = function(reqOpts, callback) {
         assert.doesNotThrow(function() {
           callback();
           done();
@@ -171,86 +232,12 @@ describe('VM', function() {
     });
   });
 
-  describe('getMetadata', function() {
-    it('should make the correct API request', function(done) {
-      vm.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
-
-        done();
-      };
-
-      vm.getMetadata(assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        vm.makeReq_ = function(method, path, query, body, callback) {
-          callback(error, null/*usually an operation*/, apiResponse);
-        };
-      });
-
-      it('should execute callback with error and API response', function(done) {
-        vm.getMetadata(function(err, metadata, apiResponse_) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(metadata, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          vm.getMetadata();
-        });
-      });
-    });
-
-    describe('success', function() {
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        vm.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, null/*usually an operation*/, apiResponse);
-        };
-      });
-
-      it('should update the metadata to the API response', function(done) {
-        vm.getMetadata(function(err) {
-          assert.ifError(err);
-          assert.strictEqual(vm.metadata, apiResponse);
-          done();
-        });
-      });
-
-      it('should exec callback with metadata and API response', function(done) {
-        vm.getMetadata(function(err, metadata, apiResponse_) {
-          assert.ifError(err);
-          assert.strictEqual(metadata, apiResponse);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          vm.getMetadata();
-        });
-      });
-    });
-  });
-
   describe('getSerialPortOutput', function() {
     var EXPECTED_QUERY = { port: 1 };
 
     it('should default to port 1', function(done) {
-      vm.makeReq_ = function(method, path, query) {
-        assert.strictEqual(query.port, 1);
+      FakeServiceObject.prototype.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.port, 1);
         done();
       };
 
@@ -260,8 +247,8 @@ describe('VM', function() {
     it('should override the default port', function(done) {
       var port = 8001;
 
-      vm.makeReq_ = function(method, path, query) {
-        assert.strictEqual(query.port, port);
+      FakeServiceObject.prototype.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.port, port);
         done();
       };
 
@@ -269,11 +256,9 @@ describe('VM', function() {
     });
 
     it('should make the correct API request', function(done) {
-      vm.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '/serialPort');
-        assert.deepEqual(query, EXPECTED_QUERY);
-        assert.strictEqual(body, null);
+      FakeServiceObject.prototype.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/serialPort');
+        assert.deepEqual(reqOpts.qs, EXPECTED_QUERY);
 
         done();
       };
@@ -286,8 +271,8 @@ describe('VM', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        vm.makeReq_ = function(method, path, query, body, callback) {
-          callback(error, null/*usually an operation*/, apiResponse);
+        FakeServiceObject.prototype.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
         };
       });
 
@@ -306,8 +291,8 @@ describe('VM', function() {
       var apiResponse = { contents: 'contents' };
 
       beforeEach(function() {
-        vm.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, null/*usually an operation*/, apiResponse);
+        FakeServiceObject.prototype.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
         };
       });
 
@@ -386,11 +371,9 @@ describe('VM', function() {
 
   describe('reset', function() {
     it('should make the correct API request', function(done) {
-      vm.makeReq_ = function(method, path, query, body, callback) {
-        assert.strictEqual(method, 'POST');
-        assert.strictEqual(path, '/reset');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
+      vm.request = function(reqOpts, callback) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/reset');
 
         callback();
       };
@@ -399,7 +382,7 @@ describe('VM', function() {
     });
 
     it('should not require a callback', function(done) {
-      vm.makeReq_ = function(method, path, query, body, callback) {
+      vm.request = function(reqOpts, callback) {
         assert.doesNotThrow(function() {
           callback();
           done();
@@ -412,11 +395,9 @@ describe('VM', function() {
 
   describe('start', function() {
     it('should make the correct API request', function(done) {
-      vm.makeReq_ = function(method, path, query, body, callback) {
-        assert.strictEqual(method, 'POST');
-        assert.strictEqual(path, '/start');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
+      vm.request = function(reqOpts, callback) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/start');
 
         callback();
       };
@@ -425,7 +406,7 @@ describe('VM', function() {
     });
 
     it('should not require a callback', function(done) {
-      vm.makeReq_ = function(method, path, query, body, callback) {
+      vm.request = function(reqOpts, callback) {
         assert.doesNotThrow(function() {
           callback();
           done();
@@ -438,11 +419,9 @@ describe('VM', function() {
 
   describe('stop', function() {
     it('should make the correct API request', function(done) {
-      vm.makeReq_ = function(method, path, query, body, callback) {
-        assert.strictEqual(method, 'POST');
-        assert.strictEqual(path, '/stop');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
+      vm.request = function(reqOpts, callback) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/stop');
 
         callback();
       };
@@ -451,7 +430,7 @@ describe('VM', function() {
     });
 
     it('should not require a callback', function(done) {
-      vm.makeReq_ = function(method, path, query, body, callback) {
+      vm.request = function(reqOpts, callback) {
         assert.doesNotThrow(function() {
           callback();
           done();
@@ -462,76 +441,63 @@ describe('VM', function() {
     });
   });
 
-  describe('makeReq_', function() {
+  describe('request', function() {
     it('should make the correct request to Compute', function(done) {
-      var expectedPathPrefix = '/instances/' + vm.name;
+      var reqOpts = {};
 
-      var method = 'POST';
-      var path = '/test';
-      var query = {
-        a: 'b',
-        c: 'd'
-      };
-      var body = {
-        a: 'b',
-        c: 'd'
-      };
-
-      vm.zone.makeReq_ = function(method_, path_, query_, body_) {
-        assert.strictEqual(method_, method);
-        assert.strictEqual(path_, expectedPathPrefix + path);
-        assert.strictEqual(query_, query);
-        assert.strictEqual(body_, body);
+      FakeServiceObject.prototype.request = function(reqOpts_) {
+        assert.strictEqual(this, vm);
+        assert.strictEqual(reqOpts_, reqOpts);
 
         done();
       };
 
-      vm.makeReq_(method, path, query, body, assert.ifError);
-    });
-  });
-
-  describe('error', function() {
-    var error = new Error('Error.');
-    var apiResponse = { a: 'b', c: 'd' };
-
-    beforeEach(function() {
-      vm.zone.makeReq_ = function(method, path, query, body, callback) {
-        callback(error, apiResponse);
-      };
+      vm.request(reqOpts, assert.ifError);
     });
 
-    it('should execute callback with error & API response', function(done) {
-      vm.makeReq_('POST', '/', {}, {}, function(err, operation, resp) {
-        assert.strictEqual(err, error);
-        assert.strictEqual(operation, null);
-        assert.strictEqual(resp, apiResponse);
-        done();
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = { a: 'b', c: 'd' };
+
+      beforeEach(function() {
+        FakeServiceObject.prototype.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        vm.request({}, function(err, operation, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(operation, null);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
       });
     });
-  });
 
-  describe('success', function() {
-    var apiResponse = { name: 'operation-name' };
+    describe('success', function() {
+      var apiResponse = { name: 'operation-name' };
 
-    beforeEach(function() {
-      vm.zone.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, apiResponse);
-      };
-    });
+      beforeEach(function() {
+        FakeServiceObject.prototype.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
 
-    it('should execute callback with a Zone object & API resp', function(done) {
-      var operation = {};
+      it('should execute callback with Zone object & API resp', function(done) {
+        var operation = {};
 
-      vm.zone.operation = function(name) {
-        assert.strictEqual(name, apiResponse.name);
-        return operation;
-      };
+        vm.zone.operation = function(name) {
+          assert.strictEqual(name, apiResponse.name);
+          return operation;
+        };
 
-      vm.makeReq_('POST', '/', {}, {}, function(err, operation_, resp) {
-        assert.ifError(err);
-        assert.strictEqual(operation_, operation);
-        assert.strictEqual(resp, apiResponse);
-        done();
+        vm.request({}, function(err, operation_, resp) {
+          assert.ifError(err);
+          assert.strictEqual(operation_, operation);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
       });
     });
   });
