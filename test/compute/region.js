@@ -20,6 +20,9 @@ var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
 var mockery = require('mockery');
+var nodeutil = require('util');
+
+var ServiceObject = require('../../lib/common/service-object.js');
 
 function FakeAddress() {
   this.calledWith_ = [].slice.call(arguments);
@@ -28,6 +31,13 @@ function FakeAddress() {
 function FakeOperation() {
   this.calledWith_ = [].slice.call(arguments);
 }
+
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 var extended = false;
 var fakeStreamRouter = {
@@ -53,6 +63,7 @@ describe('Region', function() {
   var REGION_NAME = 'us-central1';
 
   before(function() {
+    mockery.registerMock('../common/service-object.js', FakeServiceObject);
     mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
     mockery.registerMock('./address.js', FakeAddress);
     mockery.registerMock('./operation.js', FakeOperation);
@@ -79,17 +90,21 @@ describe('Region', function() {
       assert(extended); // See `fakeStreamRouter.extend`
     });
 
-    it('should localize the compute instance', function() {
-      assert.strictEqual(region.compute, COMPUTE);
-    });
-
     it('should localize the name', function() {
       assert.strictEqual(region.name, REGION_NAME);
     });
 
-    it('should default metadata to an empty object', function() {
-      assert.strictEqual(typeof region.metadata, 'object');
-      assert.strictEqual(Object.keys(region.metadata).length, 0);
+    it('should inherit from ServiceObject', function() {
+      var calledWith = region.calledWith_[0];
+
+      assert.strictEqual(calledWith.parent, COMPUTE);
+      assert.strictEqual(calledWith.baseUrl, '/regions');
+      assert.strictEqual(calledWith.id, REGION_NAME);
+      assert.deepEqual(calledWith.methods, {
+        exists: true,
+        get: true,
+        getMetadata: true
+      });
     });
   });
 
@@ -112,8 +127,8 @@ describe('Region', function() {
     it('should not require any options', function(done) {
       var expectedBody = { name: NAME };
 
-      region.makeReq_ = function(method, path, query, body) {
-        assert.deepEqual(body, expectedBody);
+      region.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.json, expectedBody);
         done();
       };
 
@@ -121,11 +136,10 @@ describe('Region', function() {
     });
 
     it('should make the correct API request', function(done) {
-      region.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'POST');
-        assert.strictEqual(path, '/addresses');
-        assert.strictEqual(query, null);
-        assert.deepEqual(body, EXPECTED_BODY);
+      region.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/addresses');
+        assert.deepEqual(reqOpts.json, EXPECTED_BODY);
 
         done();
       };
@@ -138,7 +152,7 @@ describe('Region', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        region.makeReq_ = function(method, path, query, body, callback) {
+        region.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -158,7 +172,7 @@ describe('Region', function() {
       var apiResponse = { name: 'operation-name' };
 
       beforeEach(function() {
-        region.makeReq_ = function(method, path, query, body, callback) {
+        region.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -194,8 +208,8 @@ describe('Region', function() {
 
   describe('getAddresses', function() {
     it('should accept only a callback', function(done) {
-      region.makeReq_ = function(method, path, query) {
-        assert.deepEqual(query, {});
+      region.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
         done();
       };
 
@@ -205,11 +219,9 @@ describe('Region', function() {
     it('should make the correct API request', function(done) {
       var query = { a: 'b', c: 'd' };
 
-      region.makeReq_ = function(method, path, query_, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '/addresses');
-        assert.strictEqual(query_, query);
-        assert.strictEqual(body, null);
+      region.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/addresses');
+        assert.strictEqual(reqOpts.qs, query);
 
         done();
       };
@@ -222,7 +234,7 @@ describe('Region', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        region.makeReq_ = function(method, path, query, body, callback) {
+        region.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -246,7 +258,7 @@ describe('Region', function() {
       };
 
       beforeEach(function() {
-        region.makeReq_ = function(method, path, query, body, callback) {
+        region.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -260,7 +272,7 @@ describe('Region', function() {
           pageToken: nextPageToken
         };
 
-        region.makeReq_ = function(method, path, query, body, callback) {
+        region.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -295,84 +307,10 @@ describe('Region', function() {
     });
   });
 
-  describe('getMetadata', function() {
-    it('should make the correct API request', function(done) {
-      region.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
-
-        done();
-      };
-
-      region.getMetadata(assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        region.makeReq_ = function(method, path, query, body, callback) {
-          callback(error, apiResponse);
-        };
-      });
-
-      it('should execute callback with error and API response', function(done) {
-        region.getMetadata(function(err, metadata, apiResponse_) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(metadata, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          region.getMetadata();
-        });
-      });
-    });
-
-    describe('success', function() {
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        region.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should update the metadata to the API response', function(done) {
-        region.getMetadata(function(err) {
-          assert.ifError(err);
-          assert.strictEqual(region.metadata, apiResponse);
-          done();
-        });
-      });
-
-      it('should exec callback with metadata and API response', function(done) {
-        region.getMetadata(function(err, metadata, apiResponse_) {
-          assert.ifError(err);
-          assert.strictEqual(metadata, apiResponse);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          region.getMetadata();
-        });
-      });
-    });
-  });
-
   describe('getOperations', function() {
     it('should accept only a callback', function(done) {
-      region.makeReq_ = function(method, path, query) {
-        assert.deepEqual(query, {});
+      region.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
         done();
       };
 
@@ -382,11 +320,9 @@ describe('Region', function() {
     it('should make the correct API request', function(done) {
       var query = { a: 'b', c: 'd' };
 
-      region.makeReq_ = function(method, path, query_, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '/operations');
-        assert.strictEqual(query_, query);
-        assert.strictEqual(body, null);
+      region.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/operations');
+        assert.strictEqual(reqOpts.qs, query);
 
         done();
       };
@@ -399,7 +335,7 @@ describe('Region', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        region.makeReq_ = function(method, path, query, body, callback) {
+        region.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -423,7 +359,7 @@ describe('Region', function() {
       };
 
       beforeEach(function() {
-        region.makeReq_ = function(method, path, query, body, callback) {
+        region.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -437,7 +373,7 @@ describe('Region', function() {
           pageToken: nextPageToken
         };
 
-        region.makeReq_ = function(method, path, query, body, callback) {
+        region.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -480,33 +416,6 @@ describe('Region', function() {
       assert(operation instanceof FakeOperation);
       assert.strictEqual(operation.calledWith_[0], region);
       assert.strictEqual(operation.calledWith_[1], NAME);
-    });
-  });
-
-  describe('makeReq_', function() {
-    it('should make the correct request to Compute', function(done) {
-      var expectedPathPrefix = '/regions/' + region.name;
-
-      var method = 'POST';
-      var path = '/test';
-      var query = {
-        a: 'b',
-        c: 'd'
-      };
-      var body = {
-        a: 'b',
-        c: 'd'
-      };
-
-      region.compute.makeReq_ = function(method_, path_, query_, body_, cb) {
-        assert.strictEqual(method_, method);
-        assert.strictEqual(path_, expectedPathPrefix + path);
-        assert.strictEqual(query_, query);
-        assert.strictEqual(body_, body);
-        cb();
-      };
-
-      region.makeReq_(method, path, query, body, done);
     });
   });
 });
