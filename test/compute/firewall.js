@@ -17,14 +17,45 @@
 'use strict';
 
 var assert = require('assert');
-var Firewall = require('../../lib/compute/firewall');
+var extend = require('extend');
+var mockery = require('mockery');
+var nodeutil = require('util');
+
+var ServiceObject = require('../../lib/common/service-object.js');
+var util = require('../../lib/common/util.js');
+
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Firewall', function() {
+  var Firewall;
   var firewall;
 
-  var COMPUTE = { projectId: 'project-id' };
+  var COMPUTE = {
+    projectId: 'project-id',
+    createFirewall: util.noop
+  };
   var FIREWALL_NAME = 'tcp-3000';
   var FIREWALL_NETWORK = 'global/networks/default';
+
+  before(function() {
+    mockery.registerMock('../common/service-object.js', FakeServiceObject);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+
+    Firewall = require('../../lib/compute/firewall.js');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
 
   beforeEach(function() {
     firewall = new Firewall(COMPUTE, FIREWALL_NAME);
@@ -39,22 +70,45 @@ describe('Firewall', function() {
       assert.strictEqual(firewall.name, FIREWALL_NAME);
     });
 
-    it('should create default metadata', function() {
+    it('should default to the global network', function() {
       assert.deepEqual(firewall.metadata, { network: FIREWALL_NETWORK });
+    });
+
+    it('should inherit from ServiceObject', function(done) {
+      var computeInstance = extend({}, COMPUTE, {
+        createFirewall: {
+          bind: function(context) {
+            assert.strictEqual(context, computeInstance);
+            done();
+          }
+        }
+      });
+
+      var firewall = new Firewall(computeInstance, FIREWALL_NAME);
+      assert(firewall instanceof ServiceObject);
+
+      var calledWith = firewall.calledWith_[0];
+
+      assert.strictEqual(calledWith.parent, computeInstance);
+      assert.strictEqual(calledWith.baseUrl, '/global/firewalls');
+      assert.strictEqual(calledWith.id, FIREWALL_NAME);
+      assert.deepEqual(calledWith.methods, {
+        create: true,
+        exists: true,
+        get: true,
+        getMetadata: true
+      });
     });
   });
 
   describe('delete', function() {
-    it('should make the correct API request', function(done) {
-      firewall.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'DELETE');
-        assert.strictEqual(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
+    it('should call ServiceObject.delete', function(done) {
+      FakeServiceObject.prototype.delete = function() {
+        assert.strictEqual(this, firewall);
         done();
       };
 
-      firewall.delete(assert.ifError);
+      firewall.delete();
     });
 
     describe('error', function() {
@@ -62,7 +116,7 @@ describe('Firewall', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        firewall.makeReq_ = function(method, path, query, body, callback) {
+        FakeServiceObject.prototype.delete = function(callback) {
           callback(error, apiResponse);
         };
       });
@@ -89,7 +143,7 @@ describe('Firewall', function() {
       };
 
       beforeEach(function() {
-        firewall.makeReq_ = function(method, path, query, body, callback) {
+        FakeServiceObject.prototype.delete = function(callback) {
           callback(null, apiResponse);
         };
       });
@@ -105,6 +159,7 @@ describe('Firewall', function() {
         firewall.delete(function(err, operation_, apiResponse_) {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
+          assert.strictEqual(operation_.metadata, apiResponse);
           assert.strictEqual(apiResponse_, apiResponse);
           done();
         });
@@ -118,96 +173,23 @@ describe('Firewall', function() {
     });
   });
 
-  describe('getMetadata', function() {
-    it('should make the correct API request', function(done) {
-      firewall.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
-
-        done();
-      };
-
-      firewall.getMetadata(assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        firewall.makeReq_ = function(method, path, query, body, callback) {
-          callback(error, apiResponse);
-        };
-      });
-
-      it('should execute callback with error and API response', function(done) {
-        firewall.getMetadata(function(err, metadata, apiResponse_) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(metadata, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          firewall.getMetadata();
-        });
-      });
-    });
-
-    describe('success', function() {
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        firewall.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should update the metadata to the API response', function(done) {
-        firewall.getMetadata(function(err) {
-          assert.ifError(err);
-          assert.strictEqual(firewall.metadata, apiResponse);
-          done();
-        });
-      });
-
-      it('should exec callback with metadata and API response', function(done) {
-        firewall.getMetadata(function(err, metadata, apiResponse_) {
-          assert.ifError(err);
-          assert.strictEqual(metadata, apiResponse);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          firewall.getMetadata();
-        });
-      });
-    });
-  });
-
   describe('setMetadata', function() {
     it('should make the correct API request', function(done) {
-      firewall.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'PATCH');
-        assert.strictEqual(path, '');
-        assert.strictEqual(query, null);
-        assert.deepEqual(body, {
-          name: FIREWALL_NAME,
-          network: FIREWALL_NETWORK,
-          a: 'b'
+      var metadata = {};
+
+      firewall.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'PATCH');
+        assert.strictEqual(reqOpts.uri, '');
+        assert.strictEqual(reqOpts.json, metadata);
+        assert.deepEqual(metadata, {
+          name: firewall.name,
+          network: FIREWALL_NETWORK
         });
 
         done();
       };
 
-      firewall.setMetadata({ a: 'b' }, assert.ifError);
+      firewall.setMetadata(metadata, assert.ifError);
     });
 
     describe('error', function() {
@@ -215,7 +197,7 @@ describe('Firewall', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        firewall.makeReq_ = function(method, path, query, body, callback) {
+        firewall.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -236,7 +218,7 @@ describe('Firewall', function() {
       };
 
       beforeEach(function() {
-        firewall.makeReq_ = function(method, path, query, body, callback) {
+        firewall.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -264,33 +246,6 @@ describe('Firewall', function() {
           firewall.setMetadata({ a: 'b' });
         });
       });
-    });
-  });
-
-  describe('makeReq_', function() {
-    it('should make the correct request to Compute', function(done) {
-      var expectedPathPrefix = '/global/firewalls/' + firewall.name;
-
-      var method = 'POST';
-      var path = '/test';
-      var query = {
-        a: 'b',
-        c: 'd'
-      };
-      var body = {
-        a: 'b',
-        c: 'd'
-      };
-
-      firewall.compute.makeReq_ = function(method_, path_, query_, body_, cb) {
-        assert.strictEqual(method_, method);
-        assert.strictEqual(path_, expectedPathPrefix + path);
-        assert.strictEqual(query_, query);
-        assert.strictEqual(body_, body);
-        cb();
-      };
-
-      firewall.makeReq_(method, path, query, body, done);
     });
   });
 });
