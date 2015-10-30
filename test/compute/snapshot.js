@@ -17,13 +17,39 @@
 'use strict';
 
 var assert = require('assert');
-var Snapshot = require('../../lib/compute/snapshot.js');
+var mockery = require('mockery');
+var nodeutil = require('util');
+
+var ServiceObject = require('../../lib/common/service-object.js');
+
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Snapshot', function() {
+  var Snapshot;
+  var snapshot;
+
   var COMPUTE = {};
   var SNAPSHOT_NAME = 'snapshot-name';
 
-  var snapshot;
+  before(function() {
+    mockery.registerMock('../common/service-object.js', FakeServiceObject);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+
+    Snapshot = require('../../lib/compute/snapshot.js');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
 
   beforeEach(function() {
     snapshot = new Snapshot(COMPUTE, SNAPSHOT_NAME);
@@ -38,24 +64,47 @@ describe('Snapshot', function() {
       assert.strictEqual(snapshot.name, SNAPSHOT_NAME);
     });
 
-    it('should default metadata to an empty object', function() {
-      assert.strictEqual(typeof snapshot.metadata, 'object');
-      assert.strictEqual(Object.keys(snapshot.metadata).length, 0);
+    it('should inherit from ServiceObject', function() {
+      var calledWith = snapshot.calledWith_[0];
+
+      assert.strictEqual(calledWith.parent, COMPUTE);
+      assert.strictEqual(calledWith.baseUrl, '/global/snapshots');
+      assert.strictEqual(calledWith.id, SNAPSHOT_NAME);
+      assert.deepEqual(calledWith.methods, {
+        exists: true,
+        get: true,
+        getMetadata: true
+      });
+    });
+
+    it('should allow creating for a Disk object snapshot', function(done) {
+      var scope = {
+        constructor: {
+          name: 'Disk'
+        },
+        createSnapshot: function() {
+          assert.strictEqual(this, scope);
+          done();
+        }
+      };
+
+      var snapshot = new Snapshot(scope, SNAPSHOT_NAME);
+
+      var calledWith = snapshot.calledWith_[0];
+      assert.strictEqual(calledWith.methods.create, true);
+
+      calledWith.createMethod(); // (scope.createSnapshot)
     });
   });
 
   describe('delete', function() {
-    it('should make the correct API request', function(done) {
-      snapshot.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'DELETE');
-        assert.strictEqual(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
-
+    it('should call ServiceObject.delete', function(done) {
+      FakeServiceObject.prototype.delete = function() {
+        assert.strictEqual(this, snapshot);
         done();
       };
 
-      snapshot.delete(assert.ifError);
+      snapshot.delete();
     });
 
     describe('error', function() {
@@ -63,7 +112,7 @@ describe('Snapshot', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        snapshot.makeReq_ = function(method, path, query, body, callback) {
+        FakeServiceObject.prototype.delete = function(callback) {
           callback(error, apiResponse);
         };
       });
@@ -88,7 +137,7 @@ describe('Snapshot', function() {
       var apiResponse = { name: 'operation-name' };
 
       beforeEach(function() {
-        snapshot.makeReq_ = function(method, path, query, body, callback) {
+        FakeServiceObject.prototype.delete = function(callback) {
           callback(null, apiResponse);
         };
       });
@@ -117,107 +166,6 @@ describe('Snapshot', function() {
           snapshot.delete();
         });
       });
-    });
-  });
-
-  describe('getMetadata', function() {
-    it('should make the correct API request', function(done) {
-      snapshot.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
-
-        done();
-      };
-
-      snapshot.getMetadata(assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        snapshot.makeReq_ = function(method, path, query, body, callback) {
-          callback(error, apiResponse);
-        };
-      });
-
-      it('should execute callback with error and API response', function(done) {
-        snapshot.getMetadata(function(err, metadata, apiResponse_) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(metadata, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          snapshot.getMetadata();
-        });
-      });
-    });
-
-    describe('success', function() {
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        snapshot.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should update the metadata to the API response', function(done) {
-        snapshot.getMetadata(function(err) {
-          assert.ifError(err);
-          assert.strictEqual(snapshot.metadata, apiResponse);
-          done();
-        });
-      });
-
-      it('should exec callback with metadata and API response', function(done) {
-        snapshot.getMetadata(function(err, metadata, apiResponse_) {
-          assert.ifError(err);
-          assert.strictEqual(metadata, apiResponse);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          snapshot.getMetadata();
-        });
-      });
-    });
-  });
-
-  describe('makeReq_', function() {
-    it('should make the correct request to Compute', function(done) {
-      var expectedPathPrefix = '/global/snapshots/' + snapshot.name;
-
-      var method = 'POST';
-      var path = '/test';
-      var query = {
-        a: 'b',
-        c: 'd'
-      };
-      var body = {
-        a: 'b',
-        c: 'd'
-      };
-
-      snapshot.compute.makeReq_ = function(method_, path_, query_, body_, cb) {
-        assert.strictEqual(method_, method);
-        assert.strictEqual(path_, expectedPathPrefix + path);
-        assert.strictEqual(query_, query);
-        assert.strictEqual(body_, body);
-        cb();
-      };
-
-      snapshot.makeReq_(method, path, query, body, done);
     });
   });
 });
