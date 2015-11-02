@@ -96,6 +96,12 @@ describe('Storage', function() {
   });
 
   describe('bucket', function() {
+    it('should throw if no name was provided', function() {
+      assert.throws(function() {
+        storage.bucket();
+      }, /A bucket name is needed/);
+    });
+
     it('should accept a string for a name', function() {
       var newBucketName = 'new-bucket-name';
       var bucket = storage.bucket(newBucketName);
