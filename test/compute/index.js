@@ -95,9 +95,9 @@ describe('Compute', function() {
   var PROJECT_ID = 'project-id';
 
   before(function() {
-    mockery.registerMock('../common/util.js', fakeUtil);
     mockery.registerMock('../common/service.js', FakeService);
     mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
+    mockery.registerMock('../common/util.js', fakeUtil);
     mockery.registerMock('./firewall.js', FakeFirewall);
     mockery.registerMock('./network.js', FakeNetwork);
     mockery.registerMock('./operation.js', FakeOperation);
