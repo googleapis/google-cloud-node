@@ -270,6 +270,12 @@ describe('Search', function() {
   });
 
   describe('index', function() {
+    it('should throw if an ID is not provided', function() {
+      assert.throws(function() {
+        search.index();
+      }, /An ID is needed/);
+    });
+
     it('should return a new Index object', function() {
       var indexId = 'index-id';
       var index = search.index(indexId);
