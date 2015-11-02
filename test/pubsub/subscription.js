@@ -74,6 +74,11 @@ describe('Subscription', function() {
     Subscription = require('../../lib/pubsub/subscription.js');
   });
 
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
+
   beforeEach(function() {
     subscription = new Subscription(PUBSUB, { name: SUB_NAME });
   });
