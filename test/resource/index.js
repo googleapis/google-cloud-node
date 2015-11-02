@@ -20,6 +20,9 @@ var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
 var mockery = require('mockery');
+var nodeutil = require('util');
+
+var Service = require('../../lib/common/service.js');
 var util = require('../../lib/common/util.js');
 
 function FakeProject() {
@@ -51,6 +54,13 @@ var fakeUtil = extend({}, util, {
   }
 });
 
+function FakeService() {
+  this.calledWith_ = arguments;
+  Service.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeService, Service);
+
 describe('Resource', function() {
   var PROJECT_ID = 'test-project-id';
 
@@ -58,9 +68,11 @@ describe('Resource', function() {
   var resource;
 
   before(function() {
+    mockery.registerMock('../common/service.js', FakeService);
     mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
     mockery.registerMock('../common/util.js', fakeUtil);
     mockery.registerMock('./project.js', FakeProject);
+
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
@@ -106,32 +118,21 @@ describe('Resource', function() {
       fakeUtil.normalizeArguments = normalizeArguments;
     });
 
-    it('should create an authenticated request function', function(done) {
-      var options = {
-        projectId: 'projectId',
-        credentials: 'credentials',
-        email: 'email',
-        keyFilename: 'keyFile'
-      };
-
-      makeAuthenticatedRequestFactoryOverride = function(options_) {
-        assert.deepEqual(options_, {
-          credentials: options.credentials,
-          email: options.email,
-          keyFile: options.keyFilename,
-          scopes: [
-            'https://www.googleapis.com/auth/cloud-platform'
-          ]
-        });
-        return done;
-      };
-
-      var resource = new Resource(options);
-      resource.makeAuthenticatedRequest_();
-    });
-
     it('should localize the projectId', function() {
       assert.equal(resource.defaultProjectId_, PROJECT_ID);
+    });
+
+    it('should inherit from Service', function() {
+      assert(resource instanceof Service);
+
+      var calledWith = resource.calledWith_[0];
+
+      var baseUrl = 'https://cloudresourcemanager.googleapis.com/v1beta1';
+      assert.strictEqual(calledWith.baseUrl, baseUrl);
+      assert.deepEqual(calledWith.scopes, [
+        'https://www.googleapis.com/auth/cloud-platform'
+      ]);
+      assert.strictEqual(resource.projectIdRequired, false);
     });
   });
 
@@ -143,8 +144,8 @@ describe('Resource', function() {
     it('should not require any options', function(done) {
       var expectedBody = { projectId: NEW_PROJECT_ID };
 
-      resource.makeReq_ = function(method, path, query, body) {
-        assert.deepEqual(body, expectedBody);
+      resource.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.json, expectedBody);
         done();
       };
 
@@ -152,11 +153,10 @@ describe('Resource', function() {
     });
 
     it('should make the correct API request', function(done) {
-      resource.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'POST');
-        assert.strictEqual(path, '/');
-        assert.strictEqual(query, null);
-        assert.deepEqual(body, EXPECTED_BODY);
+      resource.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/projects');
+        assert.deepEqual(reqOpts.json, EXPECTED_BODY);
 
         done();
       };
@@ -169,7 +169,7 @@ describe('Resource', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        resource.makeReq_ = function(method, path, query, body, callback) {
+        resource.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -188,7 +188,7 @@ describe('Resource', function() {
       var apiResponse = { projectId: NEW_PROJECT_ID };
 
       beforeEach(function() {
-        resource.makeReq_ = function(method, path, query, body, callback) {
+        resource.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -215,8 +215,8 @@ describe('Resource', function() {
 
   describe('getProjects', function() {
     it('should accept only a callback', function(done) {
-      resource.makeReq_ = function(method, path, query) {
-        assert.deepEqual(query, {});
+      resource.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
         done();
       };
 
@@ -226,11 +226,9 @@ describe('Resource', function() {
     it('should make the correct API request', function(done) {
       var query = { a: 'b', c: 'd' };
 
-      resource.makeReq_ = function(method, path, query_, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '/');
-        assert.strictEqual(query_, query);
-        assert.strictEqual(body, null);
+      resource.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/projects');
+        assert.strictEqual(reqOpts.qs, query);
 
         done();
       };
@@ -243,7 +241,7 @@ describe('Resource', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        resource.makeReq_ = function(method, path, query, body, callback) {
+        resource.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -267,7 +265,7 @@ describe('Resource', function() {
       };
 
       beforeEach(function() {
-        resource.makeReq_ = function(method, path, query, body, callback) {
+        resource.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -281,7 +279,7 @@ describe('Resource', function() {
           pageToken: nextPageToken
         };
 
-        resource.makeReq_ = function(method, path, query, body, callback) {
+        resource.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -336,34 +334,6 @@ describe('Resource', function() {
       assert.throws(function() {
         resourceWithoutProjectId.project();
       }, /A project ID is required/);
-    });
-  });
-
-  describe('makeReq_', function() {
-    it('should make the correct request', function(done) {
-      var base = 'https://cloudresourcemanager.googleapis.com/v1beta1/projects';
-
-      var method = 'POST';
-      var path = '/test';
-      var query = {
-        a: 'b',
-        c: 'd'
-      };
-      var body = {
-        a: 'b',
-        c: 'd'
-      };
-
-      resource.makeAuthenticatedRequest_ = function(reqOpts, callback) {
-        assert.strictEqual(reqOpts.method, method);
-
-        assert.strictEqual(reqOpts.uri, base + path);
-        assert.strictEqual(reqOpts.qs, query);
-        assert.strictEqual(reqOpts.json, body);
-        callback();
-      };
-
-      resource.makeReq_(method, path, query, body, done);
     });
   });
 });
