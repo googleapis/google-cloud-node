@@ -504,6 +504,12 @@ describe('Bucket', function() {
       file = bucket.file(FILE_NAME, options);
     });
 
+    it('should throw if no name is provided', function() {
+      assert.throws(function() {
+        bucket.file();
+      }, /A file name must be specified/);
+    });
+
     it('should return a File object', function() {
       assert(file instanceof FakeFile);
     });
