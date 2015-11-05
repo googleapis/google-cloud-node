@@ -163,12 +163,6 @@ describe('Zone', function() {
   });
 
   describe('change', function() {
-    it('should throw if an ID is not provided', function() {
-      assert.throws(function() {
-        zone.change();
-      }, /A change id is required/);
-    });
-
     it('should return a Change object', function() {
       var changeId = 'change-id';
 

@@ -17,7 +17,6 @@
 'use strict';
 
 var assert = require('assert');
-var extend = require('extend');
 var mockery = require('mockery');
 var nodeutil = require('util');
 
@@ -63,28 +62,88 @@ describe('Change', function() {
   });
 
   describe('instantiation', function() {
-    it('should inherit from ServiceObject', function(done) {
-      var zoneInstance = extend({}, ZONE, {
-        createChange: {
-          bind: function(context) {
-            assert.strictEqual(context, zoneInstance);
-            done();
-          }
-        }
-      });
-
-      var change = new Change(zoneInstance, CHANGE_ID);
+    it('should inherit from ServiceObject', function() {
       assert(change instanceof ServiceObject);
 
       var calledWith = change.calledWith_[0];
 
-      assert.strictEqual(calledWith.parent, zoneInstance);
+      assert.strictEqual(calledWith.parent, ZONE);
       assert.strictEqual(calledWith.baseUrl, '/changes');
       assert.strictEqual(calledWith.id, CHANGE_ID);
       assert.deepEqual(calledWith.methods, {
         exists: true,
         get: true,
         getMetadata: true
+      });
+    });
+  });
+
+  describe('change', function() {
+    it('should call the parent change method', function(done) {
+      var config = {};
+
+      change.parent.createChange = function(config_) {
+        assert.strictEqual(config, config_);
+        done();
+      };
+
+      change.create(config, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      beforeEach(function() {
+        change.parent.createChange = function(config, callback) {
+          callback(error, null, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & apiResponse', function(done) {
+        change.create({}, function(err, change, apiResponse_) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(change, null);
+          assert.strictEqual(apiResponse_, apiResponse);
+
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var changeInstance = {
+        id: 'id',
+        metadata: {}
+      };
+      var apiResponse = {};
+
+      beforeEach(function() {
+        change.parent.createChange = function(config, callback) {
+          callback(null, changeInstance, apiResponse);
+        };
+      });
+
+      it('should execute callback with self & API response', function(done) {
+        change.create({}, function(err, change_, apiResponse_) {
+          assert.ifError(err);
+
+          assert.strictEqual(change_, change);
+          assert.strictEqual(apiResponse_, apiResponse);
+
+          done();
+        });
+      });
+
+      it('should assign the ID and metadata from the change', function(done) {
+        change.create({}, function(err, change_) {
+          assert.ifError(err);
+
+          assert.strictEqual(change_.id, changeInstance.id);
+          assert.strictEqual(change_.metadata, changeInstance.metadata);
+
+          done();
+        });
       });
     });
   });

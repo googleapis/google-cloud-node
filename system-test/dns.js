@@ -251,7 +251,9 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
           data: '10 0 5222 127.0.0.1.'
         });
 
-        ZONE.createChange({ add: record }, function(err, change) {
+        var change = ZONE.change();
+
+        change.create({ add: record }, function(err) {
           assert.ifError(err);
 
           var addition = change.metadata.additions[0];
