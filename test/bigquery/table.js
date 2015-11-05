@@ -20,12 +20,16 @@ var arrify = require('arrify');
 var assert = require('assert');
 var crypto = require('crypto');
 var extend = require('extend');
-var File = require('../../lib/storage/file');
 var mockery = require('mockery');
+var nodeutil = require('util');
 var stream = require('stream');
-var util = require('../../lib/common/util');
+
+var File = require('../../lib/storage/file.js');
+var ServiceObject = require('../../lib/common/service-object.js');
+var util = require('../../lib/common/util.js');
 
 function FakeFile(a, b) {
+  this.request = util.noop;
   File.call(this, a, b);
 }
 
@@ -51,15 +55,22 @@ var fakeStreamRouter = {
   }
 };
 
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeServiceObject, ServiceObject);
+
 describe('BigQuery/Table', function() {
   var DATASET = {
     id: 'dataset-id',
+    createTable: util.noop,
     bigQuery: {
-      makeReq_: util.noop,
+      projectId: 'project-id',
       job: function(id) {
         return { id: id };
-      },
-      projectId: 'project-id'
+      }
     }
   };
 
@@ -79,15 +90,16 @@ describe('BigQuery/Table', function() {
   var tableOverrides = {};
 
   before(function() {
-    mockery.registerMock('../storage/file', FakeFile);
+    mockery.registerMock('../storage/file.js', FakeFile);
+    mockery.registerMock('../common/service-object.js', FakeServiceObject);
     mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
-    mockery.registerMock('../common/util', fakeUtil);
+    mockery.registerMock('../common/util.js', fakeUtil);
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
     });
 
-    Table = require('../../lib/bigquery/table');
+    Table = require('../../lib/bigquery/table.js');
 
     var tableCached = extend(true, {}, Table);
 
@@ -119,6 +131,33 @@ describe('BigQuery/Table', function() {
   describe('instantiation', function() {
     it('should extend the correct methods', function() {
       assert(extended); // See `fakeStreamRouter.extend`
+    });
+
+    it('should inherit from ServiceObject', function(done) {
+      var datasetInstance = extend({}, DATASET, {
+        createTable: {
+          bind: function(context) {
+            assert.strictEqual(context, datasetInstance);
+            done();
+          }
+        }
+      });
+
+      var table = new Table(datasetInstance, TABLE_ID);
+      assert(table instanceof ServiceObject);
+
+      var calledWith = table.calledWith_[0];
+
+      assert.strictEqual(calledWith.parent, datasetInstance);
+      assert.strictEqual(calledWith.baseUrl, '/tables');
+      assert.strictEqual(calledWith.id, TABLE_ID);
+      assert.deepEqual(calledWith.methods, {
+        create: true,
+        delete: true,
+        exists: true,
+        get: true,
+        getMetadata: true
+      });
     });
   });
 
@@ -179,11 +218,10 @@ describe('BigQuery/Table', function() {
     });
 
     it('should send correct request to the API', function(done) {
-      table.bigQuery.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'POST');
-        assert.equal(path, '/jobs');
-        assert.strictEqual(query, null);
-        assert.deepEqual(body, {
+      table.bigQuery.request = function(reqOpts) {
+        assert.equal(reqOpts.method, 'POST');
+        assert.equal(reqOpts.uri, '/jobs');
+        assert.deepEqual(reqOpts.json, {
           configuration: {
             copy: {
               a: 'b',
@@ -201,6 +239,7 @@ describe('BigQuery/Table', function() {
             }
           }
         });
+
         done();
       };
 
@@ -210,7 +249,7 @@ describe('BigQuery/Table', function() {
     it('should create and return a Job', function(done) {
       var jobId = 'job-id';
 
-      table.bigQuery.makeReq_ = function(method, path, query, body, callback) {
+      table.bigQuery.request = function(reqOpts, callback) {
         callback(null, { jobReference: { jobId: jobId } });
       };
 
@@ -224,7 +263,7 @@ describe('BigQuery/Table', function() {
     it('should assign metadata on the job', function(done) {
       var jobMetadata = { jobReference: { jobId: 'job-id' }, a: 'b', c: 'd' };
 
-      table.bigQuery.makeReq_ = function(method, path, query, body, callback) {
+      table.bigQuery.request = function(reqOpts, callback) {
         callback(null, jobMetadata);
       };
 
@@ -236,7 +275,7 @@ describe('BigQuery/Table', function() {
     });
 
     it('should accept just a destination and callback', function(done) {
-      table.bigQuery.makeReq_ = function(method, path, query, body, callback) {
+      table.bigQuery.request = function(reqOpts, callback) {
         callback(null, { jobReference: { jobId: 'job-id' } });
       };
 
@@ -246,7 +285,7 @@ describe('BigQuery/Table', function() {
     it('should pass an error to the callback', function(done) {
       var error = new Error('Error.');
 
-      table.bigQuery.makeReq_ = function(method, path, query, body, callback) {
+      table.bigQuery.request = function(reqOpts, callback) {
         callback(error);
       };
 
@@ -259,7 +298,7 @@ describe('BigQuery/Table', function() {
     it('should pass an apiResponse to the callback', function(done) {
       var jobMetadata = { jobReference: { jobId: 'job-id' }, a: 'b', c: 'd' };
 
-      table.bigQuery.makeReq_ = function(method, path, query, body, callback) {
+      table.bigQuery.request = function(reqOpts, callback) {
         callback(null, jobMetadata);
       };
 
@@ -412,36 +451,9 @@ describe('BigQuery/Table', function() {
     });
   });
 
-  describe('delete', function() {
-    it('should send the correct API request to delete', function(done) {
-      table.makeReq_ = function(method, path, query, body, callback) {
-        assert.equal(method, 'DELETE');
-        assert.equal(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
-        callback();
-      };
-
-      table.delete(done);
-    });
-
-    it('should return apiResponse in callback', function(done) {
-      var resp = { success: true };
-      table.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, resp);
-      };
-
-      table.delete(function(err, apiResponse) {
-        assert.deepEqual(apiResponse, resp);
-        done();
-      });
-    });
-  });
-
   describe('export', function() {
     var FILE = new FakeFile({
-      name: 'bucket-name',
-      makeReq_: util.noop
+      name: 'bucket-name'
     }, 'file.json');
 
     beforeEach(function() {
@@ -451,15 +463,15 @@ describe('BigQuery/Table', function() {
     });
 
     it('should send the correct API request', function(done) {
-      table.bigQuery.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'POST');
-        assert.equal(path, '/jobs');
-        assert.strictEqual(query, null);
-        assert.deepEqual(body.configuration.extract.sourceTable, {
+      table.bigQuery.request = function(reqOpts) {
+        assert.equal(reqOpts.method, 'POST');
+        assert.equal(reqOpts.uri, '/jobs');
+        assert.deepEqual(reqOpts.json.configuration.extract.sourceTable, {
           datasetId: table.dataset.id,
           projectId: table.bigQuery.projectId,
           tableId: table.id
         });
+
         done();
       };
 
@@ -467,7 +479,7 @@ describe('BigQuery/Table', function() {
     });
 
     it('should accept just a destination and a callback', function(done) {
-      table.bigQuery.makeReq_ = function(method, path, query, body, callback) {
+      table.bigQuery.request = function(reqOpts, callback) {
         callback(null, { jobReference: { jobId: 'job-id' }});
       };
 
@@ -475,8 +487,8 @@ describe('BigQuery/Table', function() {
     });
 
     it('should parse out full gs:// urls from files', function(done) {
-      table.bigQuery.makeReq_ = function(method, path, query, body) {
-        assert.deepEqual(body.configuration.extract.destinationUris, [
+      table.bigQuery.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.json.configuration.extract.destinationUris, [
           'gs://' + FILE.bucket.name + '/' + FILE.name
         ]);
         done();
@@ -496,9 +508,9 @@ describe('BigQuery/Table', function() {
     });
 
     it('should detect file format if a format is not provided', function(done) {
-      table.bigQuery.makeReq_ = function(method, path, query, body) {
-        var destinationFormat = body.configuration.extract.destinationFormat;
-        assert.equal(destinationFormat, 'NEWLINE_DELIMITED_JSON');
+      table.bigQuery.request = function(reqOpts) {
+        var destFormat = reqOpts.json.configuration.extract.destinationFormat;
+        assert.equal(destFormat, 'NEWLINE_DELIMITED_JSON');
         done();
       };
 
@@ -506,9 +518,10 @@ describe('BigQuery/Table', function() {
     });
 
     it('should assign the provided format if matched', function(done) {
-      table.bigQuery.makeReq_ = function(method, path, query, body) {
-        assert.equal(body.configuration.extract.destinationFormat, 'CSV');
-        assert.strictEqual(body.configuration.extract.format, undefined);
+      table.bigQuery.request = function(reqOpts) {
+        var extract = reqOpts.json.configuration.extract;
+        assert.equal(extract.destinationFormat, 'CSV');
+        assert.strictEqual(extract.format, undefined);
         done();
       };
 
@@ -522,9 +535,9 @@ describe('BigQuery/Table', function() {
     });
 
     it('should assign GZIP compression with gzip: true', function(done) {
-      table.bigQuery.makeReq_ = function(method, path, query, body) {
-        assert.equal(body.configuration.extract.compression, 'GZIP');
-        assert.strictEqual(body.configuration.extract.gzip, undefined);
+      table.bigQuery.request = function(reqOpts) {
+        assert.equal(reqOpts.json.configuration.extract.compression, 'GZIP');
+        assert.strictEqual(reqOpts.json.configuration.extract.gzip, undefined);
         done();
       };
 
@@ -534,12 +547,12 @@ describe('BigQuery/Table', function() {
     it('should execute the callback with error', function(done) {
       var error = new Error('Error.');
 
-      table.bigQuery.makeReq_ = function(method, path, query, body, callback) {
+      table.bigQuery.request = function(reqOpts, callback) {
         callback(error);
       };
 
       table.export(FILE, function(err) {
-        assert.equal(err, error);
+        assert.strictEqual(err, error);
         done();
       });
     });
@@ -547,7 +560,7 @@ describe('BigQuery/Table', function() {
     it('should create a Job and returns it to the callback', function(done) {
       var jobMetadata = { jobReference: { jobId: 'job-id' }, a: 'b', c: 'd' };
 
-      table.bigQuery.makeReq_ = function(method, path, query, body, callback) {
+      table.bigQuery.request = function(reqOpts, callback) {
         callback(null, jobMetadata);
       };
 
@@ -561,7 +574,7 @@ describe('BigQuery/Table', function() {
     it('should return apiResponse to callback', function(done) {
       var jobMetadata = { jobReference: { jobId: 'job-id' }, a: 'b', c: 'd' };
 
-      table.bigQuery.makeReq_ = function(method, path, query, body, callback) {
+      table.bigQuery.request = function(reqOpts, callback) {
         callback(null, jobMetadata);
       };
 
@@ -573,67 +586,9 @@ describe('BigQuery/Table', function() {
     });
   });
 
-  describe('getMetadata', function() {
-    it('should get metadata from api', function(done) {
-      table.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'GET');
-        assert.equal(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
-        done();
-      };
-      table.getMetadata(assert.ifError);
-    });
-
-    it('should execute callback with error', function(done) {
-      var error = new Error('Error.');
-      table.makeReq_ = function(method, path, query, body, callback) {
-        callback(error);
-      };
-      table.getMetadata(function(err) {
-        assert.equal(err, error);
-        done();
-      });
-    });
-
-    describe('metadata', function() {
-      var METADATA = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        table.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, METADATA);
-        };
-      });
-
-      it('should update metadata on Table object', function(done) {
-        table.getMetadata(function(err) {
-          assert.ifError(err);
-          assert.deepEqual(table.metadata, METADATA);
-          done();
-        });
-      });
-
-      it('should execute callback with metadata', function(done) {
-        table.getMetadata(function(err, metadata) {
-          assert.ifError(err);
-          assert.deepEqual(metadata, METADATA);
-          done();
-        });
-      });
-
-      it('should execute callback with apiResponse', function(done) {
-        table.getMetadata(function(err, metadata, apiResponse) {
-          assert.ifError(err);
-          assert.deepEqual(apiResponse, METADATA);
-          done();
-        });
-      });
-    });
-  });
-
   describe('getRows', function() {
     it('should accept just a callback', function(done) {
-      table.makeReq_ = function(method, path, query, body, callback) {
+      table.request = function(reqOpts, callback) {
         callback(null, {});
       };
       table.getRows(done);
@@ -642,11 +597,9 @@ describe('BigQuery/Table', function() {
     it('should make correct API request', function(done) {
       var options = { a: 'b', c: 'd' };
 
-      table.makeReq_ = function(method, path, query, body, callback) {
-        assert.equal(method, 'GET');
-        assert.equal(path, '/data');
-        assert.deepEqual(query, options);
-        assert.strictEqual(body, null);
+      table.request = function(reqOpts, callback) {
+        assert.strictEqual(reqOpts.uri, '/data');
+        assert.strictEqual(reqOpts.qs, options);
         callback(null, {});
       };
 
@@ -657,7 +610,7 @@ describe('BigQuery/Table', function() {
       var apiResponse = {};
       var error = new Error('Error.');
 
-      table.makeReq_ = function(method, path, query, body, callback) {
+      table.request = function(reqOpts, callback) {
         callback(error, apiResponse);
       };
 
@@ -677,7 +630,7 @@ describe('BigQuery/Table', function() {
       var schema = { fields: [{ name: 'name', type: 'string' }] };
 
       beforeEach(function() {
-        table.makeReq_ = function(method, path, query, body, callback) {
+        table.request = function(reqOpts, callback) {
           // Respond with a row, so it grabs the schema.
           // Use setImmediate to let our getMetadata overwrite process.
           setImmediate(callback, null, { rows: rows });
@@ -730,7 +683,7 @@ describe('BigQuery/Table', function() {
       var schema = { fields: [{ name: 'name', type: 'string' }] };
       table.metadata = { schema: schema };
 
-      table.makeReq_ = function(method, path, query, body, callback) {
+      table.request = function(reqOpts, callback) {
         callback(null, { rows: rows });
       };
 
@@ -746,7 +699,7 @@ describe('BigQuery/Table', function() {
       var schema = { fields: [{ name: 'name', type: 'string' }] };
       table.metadata = { schema: schema };
 
-      table.makeReq_ = function(method, path, query, body, callback) {
+      table.request = function(reqOpts, callback) {
         callback(null, { rows: rows });
       };
 
@@ -764,7 +717,7 @@ describe('BigQuery/Table', function() {
       // Set a schema so it doesn't try to refresh the metadata.
       table.metadata = { schema: {} };
 
-      table.makeReq_ = function(method, path, query, body, callback) {
+      table.request = function(reqOpts, callback) {
         callback(null, { pageToken: pageToken });
       };
 
@@ -797,8 +750,8 @@ describe('BigQuery/Table', function() {
         return ws;
       };
 
-      table.import(FILEPATH, function(error, job) {
-        assert.strictEqual(error, null);
+      table.import(FILEPATH, function(err, job) {
+        assert.strictEqual(err, null);
         assert.deepEqual(job, mockJob);
         done();
       });
@@ -847,8 +800,8 @@ describe('BigQuery/Table', function() {
     });
 
     it('should convert File objects to gs:// urls', function(done) {
-      table.bigQuery.makeReq_ = function(method, path, query, body) {
-        var sourceUri = body.configuration.load.sourceUris[0];
+      table.bigQuery.request = function(reqOpts) {
+        var sourceUri = reqOpts.json.configuration.load.sourceUris[0];
         assert.equal(sourceUri, 'gs://' + FILE.bucket.name + '/' + FILE.name);
         done();
       };
@@ -857,8 +810,8 @@ describe('BigQuery/Table', function() {
     });
 
     it('should infer the file format from a File object', function(done) {
-      table.bigQuery.makeReq_ = function(method, path, query, body) {
-        var sourceFormat = body.configuration.load.sourceFormat;
+      table.bigQuery.request = function(reqOpts) {
+        var sourceFormat = reqOpts.json.configuration.load.sourceFormat;
         assert.equal(sourceFormat, 'NEWLINE_DELIMITED_JSON');
         done();
       };
@@ -867,8 +820,8 @@ describe('BigQuery/Table', function() {
     });
 
     it('should not override a provided format with a File', function(done) {
-      table.bigQuery.makeReq_ = function(method, path, query, body) {
-        var sourceFormat = body.configuration.load.sourceFormat;
+      table.bigQuery.request = function(reqOpts) {
+        var sourceFormat = reqOpts.json.configuration.load.sourceFormat;
         assert.equal(sourceFormat, 'CSV');
         done();
       };
@@ -879,7 +832,7 @@ describe('BigQuery/Table', function() {
     it('should execute the callback with error', function(done) {
       var error = new Error('Error.');
 
-      table.bigQuery.makeReq_ = function(method, path, query, body, callback) {
+      table.bigQuery.request = function(reqOpts, callback) {
         callback(error);
       };
 
@@ -892,7 +845,7 @@ describe('BigQuery/Table', function() {
     it('should create a Job and return it to the callback', function(done) {
       var jobMetadata = { jobReference: { jobId: 'job-id' }, a: 'b', c: 'd' };
 
-      table.bigQuery.makeReq_ = function(method, path, query, body, callback) {
+      table.bigQuery.request = function(reqOpts, callback) {
         callback(null, jobMetadata);
       };
 
@@ -906,7 +859,7 @@ describe('BigQuery/Table', function() {
     it('should return apiResponse to callback', function(done) {
       var jobMetadata = { jobReference: { jobId: 'job-id' }, a: 'b', c: 'd' };
 
-      table.bigQuery.makeReq_ = function(method, path, query, body, callback) {
+      table.bigQuery.request = function(reqOpts, callback) {
         callback(null, jobMetadata);
       };
 
@@ -939,11 +892,10 @@ describe('BigQuery/Table', function() {
     };
 
     it('should save data', function(done) {
-      table.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'POST');
-        assert.equal(path, '/insertAll');
-        assert.strictEqual(query, null);
-        assert.deepEqual(body, dataApiFormat);
+      table.request = function(reqOpts) {
+        assert.equal(reqOpts.method, 'POST');
+        assert.equal(reqOpts.uri, '/insertAll');
+        assert.deepEqual(reqOpts.json, dataApiFormat);
         done();
       };
 
@@ -953,7 +905,7 @@ describe('BigQuery/Table', function() {
     it('should execute callback with API response', function(done) {
       var apiResponse = { insertErrors: [] };
 
-      table.makeReq_ = function(method, path, query, body, callback) {
+      table.request = function(reqOpts, callback) {
         callback(null, apiResponse);
       };
 
@@ -969,7 +921,7 @@ describe('BigQuery/Table', function() {
       var error = new Error('Error.');
       var apiResponse = {};
 
-      table.makeReq_ = function(method, path, query, body, callback) {
+      table.request = function(reqOpts, callback) {
         callback(error, apiResponse);
       };
 
@@ -985,7 +937,7 @@ describe('BigQuery/Table', function() {
       var row0Error = { message: 'Error.', reason: 'notFound' };
       var row1Error = { message: 'Error.', reason: 'notFound' };
 
-      table.makeReq_ = function(method, path, query, body, callback) {
+      table.request = function(reqOpts, callback) {
         callback(null, {
           insertErrors: [
             { index: 0, errors: [row0Error] },
@@ -1023,28 +975,30 @@ describe('BigQuery/Table', function() {
     var METADATA = { a: 'b', c: 'd' };
 
     it('should send request to the api', function(done) {
-      table.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'PUT');
-        assert.equal(path, '');
-        assert.strictEqual(query, null);
-        assert.deepEqual(body, METADATA);
+      table.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'PUT');
+        assert.strictEqual(reqOpts.uri, '');
+        assert.deepEqual(reqOpts.json, METADATA);
         done();
       };
+
       table.setMetadata(METADATA, assert.ifError);
     });
 
     it('should convert a name to a friendly name', function(done) {
       var name = 'a new name';
-      table.makeReq_ = function(method, path, query, body) {
-        assert.equal(body.friendlyName, name);
+
+      table.request = function(reqOpts) {
+        assert.equal(reqOpts.json.friendlyName, name);
         done();
       };
+
       table.setMetadata({ name: name }, assert.ifError);
     });
 
     it('should accept a schema', function(done) {
-      table.makeReq_ = function(method, path, query, body) {
-        assert.deepEqual(body.schema, {
+      table.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.json.schema, {
           fields: [{ name: 'schema', type: 'string' }]
         });
         done();
@@ -1056,7 +1010,7 @@ describe('BigQuery/Table', function() {
       var error = new Error('Error.');
       var apiResponse = {};
 
-      table.makeReq_ = function(method, path, query, body, callback) {
+      table.request = function(reqOpts, callback) {
         callback(error, apiResponse);
       };
 
@@ -1069,7 +1023,7 @@ describe('BigQuery/Table', function() {
 
     describe('metadata', function() {
       beforeEach(function() {
-        table.makeReq_ = function(method, path, query, body, callback) {
+        table.request = function(reqOpts, callback) {
           callback(null, METADATA);
         };
       });
@@ -1097,36 +1051,6 @@ describe('BigQuery/Table', function() {
           done();
         });
       });
-    });
-  });
-
-  describe('makeReq_', function() {
-    it('should prefix the path', function(done) {
-      var path = '/test-path';
-
-      table.dataset.makeReq_ = function(method, p) {
-        assert.equal(p, '/tables/' + table.id + path);
-        done();
-      };
-
-      table.makeReq_('POST', path);
-    });
-
-    it('should pass through arguments', function(done) {
-      var method = 'POST';
-      var query = { a: 'b', c: 'd', e: { f: 'g' } };
-      var body = { a: 'b', c: 'd', e: { f: 'g' } };
-      var callback = util.noop;
-
-      table.dataset.makeReq_ = function(m, p, q, b, c) {
-        assert.equal(m, method);
-        assert.deepEqual(q, query);
-        assert.deepEqual(b, body);
-        assert.equal(c, callback);
-        done();
-      };
-
-      table.makeReq_(method, '/path', query, body, callback);
     });
   });
 });

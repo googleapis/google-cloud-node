@@ -32,61 +32,59 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
 
 // Only run the tests if there is a domain to test with.
 (DNS_DOMAIN ? describe : describe.skip)('dns', function() {
-  var ZONE;
-  var ZONENAME = 'test-zone-' + uuid.v4().substr(0, 18);
+  var ZONE_NAME = 'test-zone-' + uuid.v4().substr(0, 18);
+  var ZONE = dns.zone(ZONE_NAME);
 
-  var records = {};
-
-  function createRecords() {
-    records.a = ZONE.record('a', {
+  var records = {
+    a: ZONE.record('a', {
       ttl: 86400,
       name: DNS_DOMAIN,
       data: '1.2.3.4'
-    });
+    }),
 
-    records.aaaa = ZONE.record('aaaa', {
+    aaaa: ZONE.record('aaaa', {
       ttl: 86400,
       name: DNS_DOMAIN,
       data: '2607:f8b0:400a:801::1005'
-    });
+    }),
 
-    records.cname = ZONE.record('cname', {
+    cname: ZONE.record('cname', {
       ttl: 86400,
       name: 'mail.' + DNS_DOMAIN,
       data: 'example.com.'
-    });
+    }),
 
-    records.mx = ZONE.record('mx', {
+    mx: ZONE.record('mx', {
       ttl: 86400,
       name: DNS_DOMAIN,
       data: [
         '10 mail.' + DNS_DOMAIN,
         '20 mail2.' + DNS_DOMAIN
       ]
-    });
+    }),
 
-    records.naptr = ZONE.record('naptr', {
+    naptr: ZONE.record('naptr', {
       ttl: 300,
       name: '2.1.2.1.5.5.5.0.7.7.1.e164.arpa.',
       data: [
         '100 10 \"u\" \"sip+E2U\" \"!^.*$!sip:information@foo.se!i\" .',
         '102 10 \"u\" \"smtp+E2U\" \"!^.*$!mailto:information@foo.se!i\" .'
       ]
-    });
+    }),
 
-    records.ns = ZONE.record('ns', {
+    ns: ZONE.record('ns', {
       ttl: 86400,
       name: DNS_DOMAIN,
       data: 'ns-cloud1.googledomains.com.'
-    });
+    }),
 
-    records.ptr = ZONE.record('ptr', {
+    ptr: ZONE.record('ptr', {
       ttl: 60,
       name: '2.1.0.10.in-addr.arpa.',
       data: 'server.' + DNS_DOMAIN
-    });
+    }),
 
-    records.soa = ZONE.record('soa', {
+    soa: ZONE.record('soa', {
       ttl: 21600,
       name: DNS_DOMAIN,
       data: [
@@ -94,26 +92,26 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
         'dns-admin.google.com.',
         '1 21600 3600 1209600 300'
       ].join(' ')
-    });
+    }),
 
-    records.spf = ZONE.record('spf', {
+    spf: ZONE.record('spf', {
       ttl: 21600,
       name: DNS_DOMAIN,
       data: 'v=spf1 mx:' + DNS_DOMAIN.replace(/.$/, '') + ' -all'
-    });
+    }),
 
-    records.srv = ZONE.record('srv', {
+    srv: ZONE.record('srv', {
       ttl: 21600,
       name: 'sip.' + DNS_DOMAIN,
       data: '0 5 5060 sip.' + DNS_DOMAIN
-    });
+    }),
 
-    records.txt = ZONE.record('txt', {
+    txt: ZONE.record('txt', {
       ttl: 21600,
       name: DNS_DOMAIN,
       data: 'google-site-verification=xxxxxxxxxxxxYYYYYYXXX'
-    });
-  }
+    })
+  };
 
   before(function(done) {
     dns.getZones(function(err, zones) {
@@ -128,28 +126,13 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
           return;
         }
 
-        dns.createZone(ZONENAME, { dnsName: DNS_DOMAIN }, function(err, zone) {
-          assert.ifError(err);
-          ZONE = zone;
-          createRecords();
-          done();
-        });
+        ZONE.create({ dnsName: DNS_DOMAIN }, done);
       });
     });
   });
 
   after(function(done) {
     ZONE.delete({ force: true }, done);
-  });
-
-  it('should create a zone', function(done) {
-    var tempName = 'test-zone-' + uuid.v4().substr(0, 18);
-
-    dns.createZone(tempName, { dnsName: DNS_DOMAIN }, function(err, zone) {
-      assert.ifError(err);
-      assert.equal(zone.name, tempName);
-      zone.delete(done);
-    });
   });
 
   it('should return 0 or more zones', function(done) {
@@ -164,17 +147,8 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
     it('should get the metadata for a zone', function(done) {
       ZONE.getMetadata(function(err, metadata) {
         assert.ifError(err);
-        assert.equal(metadata.name, ZONENAME);
+        assert.equal(metadata.name, ZONE_NAME);
         done();
-      });
-    });
-
-    it('should delete a zone', function(done) {
-      var name = 'test-zone-' + uuid.v4().substr(0, 18);
-
-      dns.createZone(name, { dnsName: DNS_DOMAIN }, function(err, zone) {
-        assert.ifError(err);
-        zone.delete(done);
       });
     });
 
@@ -249,23 +223,23 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
         assert.ifError(err);
 
         async.series([
-            function(next) {
-              ZONE.empty(next);
-            },
+          function(next) {
+            ZONE.empty(next);
+          },
 
-            function(next) {
-              var recordsToCreate = [
-                records.spf,
-                records.srv
-              ];
+          function(next) {
+            var recordsToCreate = [
+              records.spf,
+              records.srv
+            ];
 
-              ZONE.addRecords(recordsToCreate, next);
-            },
+            ZONE.addRecords(recordsToCreate, next);
+          },
 
-            function(next) {
-              ZONE.export(tmpFilename, next);
-            }
-          ], done);
+          function(next) {
+            ZONE.export(tmpFilename, next);
+          }
+        ], done);
       });
     });
 
@@ -277,7 +251,9 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
           data: '10 0 5222 127.0.0.1.'
         });
 
-        ZONE.createChange({ add: record }, function(err, change) {
+        var change = ZONE.change();
+
+        change.create({ add: record }, function(err) {
           assert.ifError(err);
 
           var addition = change.metadata.additions[0];
@@ -343,25 +319,26 @@ var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;
       ZONE.replaceRecords('cname', newRecords, function(err) {
         assert.ifError(err);
 
-        var callback = function(err, records, nextQuery) {
+        function onRecordsReceived(err, records, nextQuery) {
           if (nextQuery) {
-            ZONE.getRecords(nextQuery, callback);
+            ZONE.getRecords(nextQuery, onRecordsReceived);
             return;
           }
 
           ZONE.deleteRecords(newRecords, done);
-        };
+        }
 
         ZONE.getRecords({
           types: 'cname',
           maxResults: 2
-        }, callback);
+        }, onRecordsReceived);
       });
     });
 
     it('should replace records', function(done) {
       var name = 'test-zone-' + uuid.v4().substr(0, 18);
 
+      // Do this in a new zone so no existing records are affected.
       dns.createZone(name, { dnsName: DNS_DOMAIN }, function(err, zone) {
         assert.ifError(err);
 

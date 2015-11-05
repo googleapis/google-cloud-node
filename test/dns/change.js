@@ -17,112 +17,131 @@
 'use strict';
 
 var assert = require('assert');
-var extend = require('extend');
-var format = require('string-format-obj');
+var mockery = require('mockery');
+var nodeutil = require('util');
 
-var Change = require('../../lib/dns/change.js');
+var ServiceObject = require('../../lib/common/service-object.js');
 var util = require('../../lib/common/util.js');
 
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeServiceObject, ServiceObject);
+
 describe('Change', function() {
+  var Change;
+  var change;
+
   var ZONE = {
     name: 'zone-name',
-    dns: {
-      makeReq_: util.noop
-    }
+    createChange: util.noop
   };
 
   var CHANGE_ID = 'change-id';
 
-  var change;
+  before(function() {
+    mockery.registerMock('../common/service-object.js', FakeServiceObject);
+
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+
+    Change = require('../../lib/dns/change.js');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
 
   beforeEach(function() {
     change = new Change(ZONE, CHANGE_ID);
   });
 
   describe('instantiation', function() {
-    it('should localize the zone name', function() {
-      assert.strictEqual(change.zoneName, ZONE.name);
-    });
+    it('should inherit from ServiceObject', function() {
+      assert(change instanceof ServiceObject);
 
-    it('should localize the id', function() {
-      assert.strictEqual(change.id, CHANGE_ID);
-    });
+      var calledWith = change.calledWith_[0];
 
-    it('should create a makeReq_ function from the Zone', function(done) {
-      var zone = extend({}, ZONE, {
-        dns: {
-          makeReq_: function() {
-            assert.strictEqual(this, zone.dns);
-            done();
-          }
-        }
+      assert.strictEqual(calledWith.parent, ZONE);
+      assert.strictEqual(calledWith.baseUrl, '/changes');
+      assert.strictEqual(calledWith.id, CHANGE_ID);
+      assert.deepEqual(calledWith.methods, {
+        exists: true,
+        get: true,
+        getMetadata: true
       });
-
-      new Change(zone, CHANGE_ID).makeReq_();
     });
   });
 
-  describe('getMetadata', function() {
-    it('should make the correct API request', function(done) {
-      change.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
+  describe('change', function() {
+    it('should call the parent change method', function(done) {
+      var config = {};
 
-        var expectedPath = format('/managedZones/{z}/changes/{c}', {
-          z: ZONE.name,
-          c: CHANGE_ID
-        });
-        assert.strictEqual(path, expectedPath);
-
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
-
+      change.parent.createChange = function(config_) {
+        assert.strictEqual(config, config_);
         done();
       };
 
-      change.getMetadata(assert.ifError);
+      change.create(config, assert.ifError);
     });
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
+      var apiResponse = {};
 
       beforeEach(function() {
-        change.makeReq_ = function(method, path, query, body, callback) {
-          callback(error, apiResponse);
+        change.parent.createChange = function(config, callback) {
+          callback(error, null, apiResponse);
         };
       });
 
-      it('should execute callback with error and API response', function(done) {
-        change.getMetadata(function(err, metadata, apiResponse_) {
+      it('should execute callback with error & apiResponse', function(done) {
+        change.create({}, function(err, change, apiResponse_) {
           assert.strictEqual(err, error);
+          assert.strictEqual(change, null);
           assert.strictEqual(apiResponse_, apiResponse);
+
           done();
         });
       });
     });
 
     describe('success', function() {
-      var metadata = { e: 'f', g: 'h' };
+      var changeInstance = {
+        id: 'id',
+        metadata: {}
+      };
+      var apiResponse = {};
 
       beforeEach(function() {
-        change.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, metadata, metadata);
+        change.parent.createChange = function(config, callback) {
+          callback(null, changeInstance, apiResponse);
         };
       });
 
-      it('should update the metadata', function(done) {
-        change.getMetadata(function(err) {
+      it('should execute callback with self & API response', function(done) {
+        change.create({}, function(err, change_, apiResponse_) {
           assert.ifError(err);
-          assert.strictEqual(change.metadata, metadata);
+
+          assert.strictEqual(change_, change);
+          assert.strictEqual(apiResponse_, apiResponse);
+
           done();
         });
       });
 
-      it('should execute callback with metadata & API resp', function(done) {
-        change.getMetadata(function(err, metadata_, apiResponse_) {
+      it('should assign the ID and metadata from the change', function(done) {
+        change.create({}, function(err, change_) {
           assert.ifError(err);
-          assert.strictEqual(metadata_, metadata);
-          assert.strictEqual(apiResponse_, metadata);
+
+          assert.strictEqual(change_.id, changeInstance.id);
+          assert.strictEqual(change_.metadata, changeInstance.metadata);
+
           done();
         });
       });

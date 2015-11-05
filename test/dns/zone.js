@@ -20,7 +20,17 @@ var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
 var mockery = require('mockery');
+var nodeutil = require('util');
+
+var ServiceObject = require('../../lib/common/service-object.js');
 var util = require('../../lib/common/util.js');
+
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 var parseOverride;
 var fakeDnsZonefile = {
@@ -72,13 +82,14 @@ describe('Zone', function() {
   var zone;
 
   var DNS = {
-    makeReq_: function() {}
+    createZone: util.noop
   };
   var ZONE_NAME = 'zone-name';
 
   before(function() {
     mockery.registerMock('dns-zonefile', fakeDnsZonefile);
     mockery.registerMock('fs', fakeFs);
+    mockery.registerMock('../common/service-object.js', FakeServiceObject);
     mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
     mockery.registerMock('./change.js', FakeChange);
     mockery.registerMock('./record.js', FakeRecord);
@@ -107,24 +118,34 @@ describe('Zone', function() {
       assert(extended); // See `fakeStreamRouter.extend`
     });
 
-    it('should localize the DNS instance', function() {
-      assert.strictEqual(zone.dns, DNS);
-    });
-
     it('should localize the name', function() {
       assert.strictEqual(zone.name, ZONE_NAME);
     });
 
-    it('should create a makeReq_ function', function(done) {
-      var dns = {
-        makeReq_: function() {
-          assert.strictEqual(this, dns);
-          done();
+    it('should inherit from ServiceObject', function(done) {
+      var dnsInstance = extend({}, DNS, {
+        createZone: {
+          bind: function(context) {
+            assert.strictEqual(context, dnsInstance);
+            done();
+          }
         }
-      };
+      });
 
-      var zone = new Zone(dns, ZONE_NAME);
-      zone.makeReq_();
+      var zone = new Zone(dnsInstance, ZONE_NAME);
+      assert(zone instanceof ServiceObject);
+
+      var calledWith = zone.calledWith_[0];
+
+      assert.strictEqual(calledWith.parent, dnsInstance);
+      assert.strictEqual(calledWith.baseUrl, '/managedZones');
+      assert.strictEqual(calledWith.id, ZONE_NAME);
+      assert.deepEqual(calledWith.methods, {
+        create: true,
+        exists: true,
+        get: true,
+        getMetadata: true
+      });
     });
   });
 
@@ -142,12 +163,6 @@ describe('Zone', function() {
   });
 
   describe('change', function() {
-    it('should throw if an ID is not provided', function() {
-      assert.throws(function() {
-        zone.change();
-      }, /A change id is required/);
-    });
-
     it('should return a Change object', function() {
       var changeId = 'change-id';
 
@@ -173,9 +188,9 @@ describe('Zone', function() {
       ];
       var expectedAdditions = ['a', 'a'];
 
-      zone.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(body.add, undefined);
-        assert.deepEqual(body.additions, expectedAdditions);
+      zone.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.json.add, undefined);
+        assert.deepEqual(reqOpts.json.additions, expectedAdditions);
         done();
       };
 
@@ -189,9 +204,9 @@ describe('Zone', function() {
       ];
       var expectedDeletions = ['a', 'a'];
 
-      zone.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(body.delete, undefined);
-        assert.deepEqual(body.deletions, expectedDeletions);
+      zone.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.json.delete, undefined);
+        assert.deepEqual(reqOpts.json.deletions, expectedDeletions);
         done();
       };
 
@@ -199,10 +214,10 @@ describe('Zone', function() {
     });
 
     it('should make correct API request', function(done) {
-      zone.makeReq_ = function(method, path, query) {
-        assert.strictEqual(method, 'POST');
-        assert.strictEqual(path, '/managedZones/' + ZONE_NAME + '/changes');
-        assert.strictEqual(query, null);
+      zone.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/changes');
+
         done();
       };
 
@@ -214,7 +229,7 @@ describe('Zone', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        zone.makeReq_ = function(method, path, query, body, callback) {
+        zone.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -232,7 +247,7 @@ describe('Zone', function() {
       var apiResponse = { id: 1, a: 'b', c: 'd' };
 
       beforeEach(function() {
-        zone.makeReq_ = function(method, path, query, body, callback) {
+        zone.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -270,7 +285,7 @@ describe('Zone', function() {
       });
 
       it('should try to delete again after emptying', function(done) {
-        zone.makeReq_ = function() {
+        FakeServiceObject.prototype.delete = function() {
           done();
         };
 
@@ -283,24 +298,12 @@ describe('Zone', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
-      var ignoreThisArgument = { e: 'f', g: 'h' };
-
-      zone.makeReq_ = function(method, path, query, body, callback) {
-        assert.strictEqual(method, 'DELETE');
-        assert.strictEqual(path, '/managedZones/' + ZONE_NAME);
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
-        callback(error, apiResponse, ignoreThisArgument);
+      FakeServiceObject.prototype.delete = function(callback) {
+        assert.strictEqual(this, zone);
+        callback();
       };
 
-      zone.delete(function(err, apiResponse_) {
-        assert.strictEqual(arguments.length, 2);
-        assert.strictEqual(err, error);
-        assert.strictEqual(apiResponse_, apiResponse);
-        done();
-      });
+      zone.delete(done);
     });
   });
 
@@ -492,8 +495,8 @@ describe('Zone', function() {
 
   describe('getChanges', function() {
     it('should accept only a callback', function(done) {
-      zone.makeReq_ = function(method, path, query) {
-        assert.strictEqual(Object.keys(query).length, 0);
+      zone.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
         done();
       };
 
@@ -503,9 +506,9 @@ describe('Zone', function() {
     it('should accept a sort', function(done) {
       var query = { sort: 'desc' };
 
-      zone.makeReq_ = function(method, path, query) {
-        assert.strictEqual(query.sortOrder, 'descending');
-        assert.strictEqual(query.sort, undefined);
+      zone.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.sortOrder, 'descending');
+        assert.strictEqual(reqOpts.qs.sort, undefined);
 
         done();
       };
@@ -516,11 +519,9 @@ describe('Zone', function() {
     it('should make the correct API request', function(done) {
       var query = { a: 'b', c: 'd' };
 
-      zone.makeReq_ = function(method, path, query_, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '/managedZones/' + ZONE_NAME + '/changes');
-        assert.strictEqual(query_, query);
-        assert.strictEqual(body, null);
+      zone.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/changes');
+        assert.strictEqual(reqOpts.qs, query);
 
         done();
       };
@@ -533,7 +534,7 @@ describe('Zone', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        zone.makeReq_ = function(method, path, query, body, callback) {
+        zone.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -553,7 +554,7 @@ describe('Zone', function() {
       };
 
       beforeEach(function() {
-        zone.makeReq_ = function(method, path, query, body, callback) {
+        zone.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -567,7 +568,7 @@ describe('Zone', function() {
           pageToken: nextPageToken
         };
 
-        zone.makeReq_ = function(method, path, query, body, callback) {
+        zone.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -602,74 +603,13 @@ describe('Zone', function() {
     });
   });
 
-  describe('getMetadata', function() {
-    it('should make the correct API request', function(done) {
-      zone.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '/managedZones/' + ZONE_NAME);
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
-
-        done();
-      };
-
-      zone.getMetadata(assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        zone.makeReq_ = function(method, path, query, body, callback) {
-          callback(error, apiResponse);
-        };
-      });
-
-      it('should execute callback with error and API response', function(done) {
-        zone.getMetadata(function(err, metadata, apiResponse_) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-    });
-
-    describe('success', function() {
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        zone.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should update the metadata to the API response', function(done) {
-        zone.getMetadata(function(err) {
-          assert.ifError(err);
-          assert.strictEqual(zone.metadata, apiResponse);
-          done();
-        });
-      });
-
-      it('should exec callback with metadata and API response', function(done) {
-        zone.getMetadata(function(err, metadata, apiResponse_) {
-          assert.ifError(err);
-          assert.strictEqual(metadata, apiResponse);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-    });
-  });
-
   describe('getRecords', function() {
     describe('error', function() {
       var error = new Error('Error.');
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        zone.makeReq_ = function(method, path, query, body, callback) {
+        zone.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -696,7 +636,7 @@ describe('Zone', function() {
       };
 
       beforeEach(function() {
-        zone.makeReq_ = function(method, path, query, body, callback) {
+        zone.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -708,7 +648,7 @@ describe('Zone', function() {
         });
         var expectedNextQuery = { pageToken: nextPageToken };
 
-        zone.makeReq_ = function(method, path, query, body, callback) {
+        zone.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -771,8 +711,8 @@ describe('Zone', function() {
         });
 
         it('should not send filterByTypes_ in API request', function(done) {
-          zone.makeReq_ = function(method, path, query) {
-            assert.strictEqual(query.filterByTypes_, undefined);
+          zone.request = function(reqOpts) {
+            assert.strictEqual(reqOpts.qs.filterByTypes_, undefined);
             done();
           };
 

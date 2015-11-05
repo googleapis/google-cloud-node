@@ -17,168 +17,75 @@
 'use strict';
 
 var assert = require('assert');
+var extend = require('extend');
+var mockery = require('mockery');
+var nodeutil = require('util');
 
-var Project = require('../../lib/resource/project.js');
+var ServiceObject = require('../../lib/common/service-object.js');
+var util = require('../../lib/common/util.js');
+
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Project', function() {
-  var RESOURCE = {};
+  var Project;
+  var project;
+
+  var RESOURCE = {
+    createProject: util.noop
+  };
   var ID = 'project-id';
 
-  var project;
+  before(function() {
+    mockery.registerMock('../common/service-object.js', FakeServiceObject);
+
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+
+    Project = require('../../lib/resource/project.js');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
 
   beforeEach(function() {
     project = new Project(RESOURCE, ID);
   });
 
   describe('instantiation', function() {
-    it('should localize the resource', function() {
-      assert.strictEqual(project.resource, RESOURCE);
-    });
-
-    it('should localize the ID', function() {
-      assert.strictEqual(project.id, ID);
-    });
-
-    it('should default metadata to an empty object', function() {
-      assert.deepEqual(project.metadata, {});
-    });
-  });
-
-  describe('delete', function() {
-    it('should make the correct API request', function(done) {
-      project.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'DELETE');
-        assert.strictEqual(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
-        done();
-      };
-
-      project.delete(assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        project.makeReq_ = function(method, path, query, body, callback) {
-          callback(error, apiResponse);
-        };
+    it('should inherit from ServiceObject', function(done) {
+      var resourceInstance = extend({}, RESOURCE, {
+        createProject: {
+          bind: function(context) {
+            assert.strictEqual(context, resourceInstance);
+            done();
+          }
+        }
       });
 
-      it('should return an error if the request fails', function(done) {
-        project.delete(function(err, apiResponse_) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
+      var project = new Project(resourceInstance, ID);
+      assert(project instanceof ServiceObject);
 
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          project.delete();
-        });
-      });
-    });
+      var calledWith = project.calledWith_[0];
 
-    describe('success', function() {
-      var apiResponse = {
-        projectId: ID
-      };
-
-      beforeEach(function() {
-        project.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should execute callback with error and API response', function(done) {
-        project.delete(function(err, apiResponse_) {
-          assert.ifError(err);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          project.delete();
-        });
-      });
-    });
-  });
-
-  describe('getMetadata', function() {
-    it('should make the correct API request', function(done) {
-      project.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
-
-        done();
-      };
-
-      project.getMetadata(assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        project.makeReq_ = function(method, path, query, body, callback) {
-          callback(error, apiResponse);
-        };
-      });
-
-      it('should execute callback with error and API response', function(done) {
-        project.getMetadata(function(err, metadata, apiResponse_) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(metadata, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          project.getMetadata();
-        });
-      });
-    });
-
-    describe('success', function() {
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        project.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should update the metadata to the API response', function(done) {
-        project.getMetadata(function(err) {
-          assert.ifError(err);
-          assert.strictEqual(project.metadata, apiResponse);
-          done();
-        });
-      });
-
-      it('should exec callback with metadata and API response', function(done) {
-        project.getMetadata(function(err, metadata, apiResponse_) {
-          assert.ifError(err);
-          assert.strictEqual(metadata, apiResponse);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          project.getMetadata();
-        });
+      assert.strictEqual(calledWith.parent, resourceInstance);
+      assert.strictEqual(calledWith.baseUrl, '/projects');
+      assert.strictEqual(calledWith.id, ID);
+      assert.deepEqual(calledWith.methods, {
+        create: true,
+        delete: true,
+        exists: true,
+        get: true,
+        getMetadata: true,
+        setMetadata: true
       });
     });
   });
@@ -188,17 +95,15 @@ describe('Project', function() {
     var apiResponse = { a: 'b', c: 'd' };
 
     beforeEach(function() {
-      project.makeReq_ = function(method, path, query, body, callback) {
+      project.request = function(reqOpts, callback) {
         callback(error, apiResponse);
       };
     });
 
     it('should make the correct API request', function(done) {
-      project.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'POST');
-        assert.strictEqual(path, ':undelete');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
+      project.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, ':undelete');
 
         done();
       };
@@ -218,101 +123,6 @@ describe('Project', function() {
       assert.doesNotThrow(function() {
         project.restore();
       });
-    });
-  });
-
-  describe('setMetadata', function() {
-    var METADATA = { a: 'b', c: 'd' };
-
-    it('should make the correct API request', function(done) {
-      project.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'PUT');
-        assert.strictEqual(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, METADATA);
-
-        done();
-      };
-
-      project.setMetadata(METADATA, assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        project.makeReq_ = function(method, path, query, body, callback) {
-          callback(error, apiResponse);
-        };
-      });
-
-      it('should return an error if the request fails', function(done) {
-        project.setMetadata(METADATA, function(err, apiResponse_) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          project.setMetadata(METADATA);
-        });
-      });
-    });
-
-    describe('success', function() {
-      var apiResponse = {
-        projectId: ID
-      };
-
-      beforeEach(function() {
-        project.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should execute callback with API response', function(done) {
-        project.setMetadata(METADATA, function(err, apiResponse_) {
-          assert.ifError(err);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          project.setMetadata(METADATA);
-        });
-      });
-    });
-  });
-
-  describe('makeReq_', function() {
-    it('should make the correct request to Resource', function(done) {
-      var expectedPathPrefix = '/' + project.id;
-
-      var method = 'POST';
-      var path = '/test';
-      var query = {
-        a: 'b',
-        c: 'd'
-      };
-      var body = {
-        a: 'b',
-        c: 'd'
-      };
-
-      project.resource.makeReq_ = function(method_, path_, query_, body_, cb) {
-        assert.strictEqual(method_, method);
-        assert.strictEqual(path_, expectedPathPrefix + path);
-        assert.strictEqual(query_, query);
-        assert.strictEqual(body_, body);
-        cb();
-      };
-
-      project.makeReq_(method, path, query, body, done);
     });
   });
 });

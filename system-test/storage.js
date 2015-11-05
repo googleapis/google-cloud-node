@@ -75,14 +75,10 @@ function setHash(obj, file, done) {
 }
 
 describe('storage', function() {
-  var bucket;
+  var bucket = storage.bucket(BUCKET_NAME);
 
   before(function(done) {
-    storage.createBucket(BUCKET_NAME, function(err, newBucket) {
-      assert.ifError(err);
-      bucket = newBucket;
-      done();
-    });
+    bucket.create(done);
   });
 
   after(function(done) {
@@ -384,7 +380,8 @@ describe('storage', function() {
 
   describe('getting buckets', function() {
     var bucketsToCreate = [
-      generateBucketName(), generateBucketName()
+      generateBucketName(),
+      generateBucketName()
     ];
 
     before(function(done) {
@@ -685,10 +682,11 @@ describe('storage', function() {
     });
 
     it('should copy an existing file', function(done) {
-      bucket.upload(files.logo.path, 'CloudLogo', function(err, file) {
+      var opts = { destination: 'CloudLogo' };
+      bucket.upload(files.logo.path, opts, function(err, file) {
         assert.ifError(err);
+
         file.copy('CloudLogoCopy', function(err, copiedFile) {
-          assert.ifError(err);
           async.parallel([
             file.delete.bind(file),
             copiedFile.delete.bind(copiedFile)
@@ -801,20 +799,20 @@ describe('storage', function() {
 
   describe('file generations', function() {
     var VERSIONED_BUCKET_NAME = generateBucketName();
-    var versionedBucket;
+    var versionedBucket = storage.bucket(VERSIONED_BUCKET_NAME);
 
     before(function(done) {
-      var opts = { versioning: { enabled: true } };
-
-      storage.createBucket(VERSIONED_BUCKET_NAME, opts, function(err, bucket) {
-        assert.ifError(err);
-        versionedBucket = bucket;
-        done();
-      });
+      versionedBucket.create({
+        versioning: {
+          enabled: true
+        }
+      }, done);
     });
 
     after(function(done) {
-      versionedBucket.deleteFiles({ versions: true }, function(err) {
+      versionedBucket.deleteFiles({
+        versions: true
+      }, function(err) {
         if (err) {
           done(err);
           return;
