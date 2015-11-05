@@ -460,7 +460,7 @@ describe('ServiceObject', function() {
     });
   });
 
-  describe.only('request', function() {
+  describe('request', function() {
     var reqOpts;
 
     beforeEach(function() {
