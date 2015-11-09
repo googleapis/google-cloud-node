@@ -472,20 +472,32 @@ describe('Compute', function() {
     });
 
     it('should attach and detach a disk', function(done) {
-      compute.getDisks()
-        .on('error', done)
-        .once('data', function(disk) {
-          this.end();
+      var name = generateName();
 
-          vm.attachDisk(disk, function(err) {
-            assert.ifError(err);
+      // This test waits on a lot of operations.
+      this.timeout(90000);
 
-            vm.detachDisk(disk, function(err, operation) {
-              assert.ifError(err);
-              operation.onComplete(done);
-            });
-          });
-        });
+      async.series([
+        createDisk,
+        attachDisk,
+        detachDisk
+      ], done);
+
+      function createDisk(callback) {
+        var config = {
+          os: 'ubuntu'
+        };
+
+        zone.createDisk(name, config, execAfterOperationComplete(callback));
+      }
+
+      function attachDisk(callback) {
+        vm.attachDisk(zone.disk(name), execAfterOperationComplete(callback));
+      }
+
+      function detachDisk(callback) {
+        vm.detachDisk(zone.disk(name), execAfterOperationComplete(callback));
+      }
     });
 
     it('should get serial port output', function(done) {
@@ -623,5 +635,19 @@ describe('Compute', function() {
 
       async.each(objects, exec('delete'), callback);
     });
+  }
+
+  function execAfterOperationComplete(options, callback) {
+    callback = callback || options;
+
+    return function(err) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      var operation = arguments[arguments.length - 2]; // [..., op, apiResponse]
+      operation.onComplete(options || {}, callback);
+    };
   }
 });
