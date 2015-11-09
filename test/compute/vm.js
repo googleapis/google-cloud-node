@@ -18,6 +18,7 @@
 
 var assert = require('assert');
 var extend = require('extend');
+var format = require('string-format-obj');
 
 var Disk = require('../../lib/compute/disk.js');
 var util = require('../../lib/common/util.js');
@@ -135,6 +136,22 @@ describe('VM', function() {
   });
 
   describe('detachDisk', function() {
+    var DEVICE_NAME = format('{uri}/{name}', {
+      uri: 'https://www.googleapis.com/compute/v1',
+      name: DISK.formattedName
+    });
+
+    beforeEach(function() {
+      vm.metadata = {
+        disks: [
+          {
+            source: DEVICE_NAME,
+            deviceName: DEVICE_NAME
+          }
+        ]
+      };
+    });
+
     it('should throw if a Disk is not provided', function() {
       assert.throws(function() {
         vm.detachDisk('disk-name');
@@ -146,11 +163,31 @@ describe('VM', function() {
       });
     });
 
+    it('should return an error if device name not found', function(done) {
+      vm.metadata = {
+        disks: [
+          {
+            source: 'a',
+            deviceName: 'b'
+          }
+        ]
+      };
+
+      vm.detachDisk(DISK, function(err) {
+        assert.strictEqual(err.name, 'DetachDiskError');
+
+        var errorMessage = 'A device name for this disk was not found.';
+        assert.strictEqual(err.message, errorMessage);
+
+        done();
+      });
+    });
+
     it('should make the correct API request', function(done) {
       vm.makeReq_ = function(method, path, query, body, callback) {
         assert.strictEqual(method, 'POST');
         assert.strictEqual(path, '/detachDisk');
-        assert.deepEqual(query, { deviceName: DISK.name });
+        assert.deepEqual(query, { deviceName: DEVICE_NAME });
         assert.strictEqual(body, null);
 
         callback();
@@ -168,6 +205,51 @@ describe('VM', function() {
       };
 
       vm.detachDisk(DISK);
+    });
+
+    describe('refreshing metadata', function() {
+      beforeEach(function() {
+        vm.metadata = {};
+      });
+
+      describe('error', function() {
+        var ERROR = new Error('Error.');
+
+        beforeEach(function() {
+          vm.getMetadata = function(callback) {
+            callback(ERROR);
+          };
+        });
+
+        it('should return DetachDisk error', function(done) {
+          vm.detachDisk(DISK, function(err) {
+            assert.strictEqual(err.name, 'DetachDiskError');
+            assert.strictEqual(err.message, ERROR.message);
+            done();
+          });
+        });
+      });
+
+      describe('success', function() {
+        beforeEach(function() {
+          vm.getMetadata = function(callback) {
+            callback();
+          };
+        });
+
+        it('should call detachDisk again', function(done) {
+          vm.getMetadata = function(callback) {
+            vm.detachDisk = function(disk, callback) {
+              assert.strictEqual(disk, DISK);
+              callback(); // done()
+            };
+
+            callback();
+          };
+
+          vm.detachDisk(DISK, done);
+        });
+      });
     });
   });
 
