@@ -17,111 +17,86 @@
 'use strict';
 
 var assert = require('assert');
+var mockery = require('mockery');
+var nodeutil = require('util');
 
-var Operation = require('../../lib/compute/operation.js');
+var ServiceObject = require('../../lib/common/service-object.js');
 var util = require('../../lib/common/util.js');
 
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeServiceObject, ServiceObject);
+
 describe('Operation', function() {
+  var Operation;
+  var operation;
+
   var SCOPE = {};
   var OPERATION_NAME = 'operation-name';
 
-  var operation;
+  before(function() {
+    mockery.registerMock('../common/service-object.js', FakeServiceObject);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+
+    Operation = require('../../lib/compute/operation.js');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
 
   beforeEach(function() {
     operation = new Operation(SCOPE, OPERATION_NAME);
   });
 
   describe('instantiation', function() {
-    it('should localize the scope', function() {
-      assert.strictEqual(operation.scope, SCOPE);
-    });
-
     it('should localize the name', function() {
       assert.strictEqual(operation.name, OPERATION_NAME);
     });
 
-    it('should default metadata to an empty object', function() {
-      assert.strictEqual(typeof operation.metadata, 'object');
-      assert.strictEqual(Object.keys(operation.metadata).length, 0);
-    });
-  });
+    it('should inherit from ServiceObject', function() {
+      var operation = new Operation(SCOPE, OPERATION_NAME);
+      assert(operation instanceof ServiceObject);
 
-  describe('delete', function() {
-    it('should make the correct API request', function(done) {
-      operation.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'DELETE');
-        assert.strictEqual(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
+      var calledWith = operation.calledWith_[0];
 
-        done();
-      };
-
-      operation.delete(assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {};
-
-      beforeEach(function() {
-        operation.makeReq_ = function(method, path, query, body, callback) {
-          callback(error, apiResponse);
-        };
-      });
-
-      it('should execute callback with error & API resp', function(done) {
-        operation.delete(function(err, apiResponse_) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          operation.delete();
-        });
+      assert.strictEqual(calledWith.parent, SCOPE);
+      assert.strictEqual(calledWith.baseUrl, '/operations');
+      assert.strictEqual(calledWith.id, OPERATION_NAME);
+      assert.deepEqual(calledWith.methods, {
+        delete: true,
+        exists: true,
+        get: true
       });
     });
 
-    describe('success', function() {
-      var apiResponse = {};
+    it('should give the right baseUrl for a global Operation', function() {
+      var operation = new Operation({
+        constructor: {
+          name: 'Compute'
+        }
+      }, OPERATION_NAME);
 
-      beforeEach(function() {
-        operation.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should execute callback with error & API resp', function(done) {
-        operation.delete(function(err, apiResponse_) {
-          assert.ifError(err);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          operation.delete();
-        });
-      });
+      var calledWith = operation.calledWith_[0];
+      assert.strictEqual(calledWith.baseUrl, '/global/operations');
     });
   });
 
   describe('getMetadata', function() {
-    it('should make the correct API request', function(done) {
-      operation.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
-
+    it('should call ServiceObject.delete', function(done) {
+      FakeServiceObject.prototype.getMetadata = function() {
+        assert.strictEqual(this, operation);
         done();
       };
 
-      operation.getMetadata(assert.ifError);
+      operation.getMetadata();
     });
 
     describe('error', function() {
@@ -129,7 +104,7 @@ describe('Operation', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        operation.makeReq_ = function(method, path, query, body, callback) {
+        FakeServiceObject.prototype.getMetadata = function(callback) {
           callback(error, apiResponse);
         };
       });
@@ -142,7 +117,7 @@ describe('Operation', function() {
           }
         };
 
-        operation.makeReq_ = function(method, path, query, body, callback) {
+        FakeServiceObject.prototype.getMetadata = function(callback) {
           callback(apiResponse.error, apiResponse);
         };
 
@@ -174,7 +149,7 @@ describe('Operation', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        operation.makeReq_ = function(method, path, query, body, callback) {
+        FakeServiceObject.prototype.getMetadata = function(callback) {
           callback(null, apiResponse);
         };
       });
@@ -335,47 +310,6 @@ describe('Operation', function() {
           });
         });
       });
-    });
-  });
-
-  describe('makeReq_', function() {
-    it('should make the correct request to Scope', function(done) {
-      var expectedPathPrefix = '/operations/' + operation.name;
-
-      var method = 'POST';
-      var path = '/test';
-      var query = {
-        a: 'b',
-        c: 'd'
-      };
-      var body = {
-        a: 'b',
-        c: 'd'
-      };
-
-      operation.scope.makeReq_ = function(method_, path_, query_, body_, cb) {
-        assert.strictEqual(method_, method);
-        assert.strictEqual(path_, expectedPathPrefix + path);
-        assert.strictEqual(query_, query);
-        assert.strictEqual(body_, body);
-        cb();
-      };
-
-      operation.makeReq_(method, path, query, body, done);
-    });
-
-    it('should prefix the path with /global if Compute', function(done) {
-      var expectedPathPrefix = '/global/operations/' + operation.name;
-
-      function Compute() {}
-      operation.scope = new Compute();
-
-      operation.scope.makeReq_ = function(method, path) {
-        assert.strictEqual(path, expectedPathPrefix + '/test');
-        done();
-      };
-
-      operation.makeReq_(null, '/test');
     });
   });
 });
