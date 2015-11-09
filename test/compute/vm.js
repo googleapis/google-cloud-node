@@ -141,14 +141,18 @@ describe('VM', function() {
       name: DISK.formattedName
     });
 
+    var METADATA = {
+      disks: [
+        {
+          source: DEVICE_NAME,
+          deviceName: DEVICE_NAME
+        }
+      ]
+    };
+
     beforeEach(function() {
-      vm.metadata = {
-        disks: [
-          {
-            source: DEVICE_NAME,
-            deviceName: DEVICE_NAME
-          }
-        ]
+      vm.getMetadata = function(callback) {
+        callback(null, METADATA, METADATA);
       };
     });
 
@@ -164,7 +168,7 @@ describe('VM', function() {
     });
 
     it('should return an error if device name not found', function(done) {
-      vm.metadata = {
+      var metadata = {
         disks: [
           {
             source: 'a',
@@ -173,10 +177,14 @@ describe('VM', function() {
         ]
       };
 
+      vm.getMetadata = function(callback) {
+        callback(null, metadata, metadata);
+      };
+
       vm.detachDisk(DISK, function(err) {
         assert.strictEqual(err.name, 'DetachDiskError');
 
-        var errorMessage = 'A device name for this disk was not found.';
+        var errorMessage = 'Device name for this disk was not found.';
         assert.strictEqual(err.message, errorMessage);
 
         done();
@@ -208,10 +216,6 @@ describe('VM', function() {
     });
 
     describe('refreshing metadata', function() {
-      beforeEach(function() {
-        vm.metadata = {};
-      });
-
       describe('error', function() {
         var ERROR = new Error('Error.');
 
@@ -227,27 +231,6 @@ describe('VM', function() {
             assert.strictEqual(err.message, ERROR.message);
             done();
           });
-        });
-      });
-
-      describe('success', function() {
-        beforeEach(function() {
-          vm.getMetadata = function(callback) {
-            callback();
-          };
-        });
-
-        it('should call detachDisk again', function(done) {
-          vm.getMetadata = function(callback) {
-            vm.detachDisk = function(disk, callback) {
-              assert.strictEqual(disk, DISK);
-              callback(); // done()
-            };
-
-            callback();
-          };
-
-          vm.detachDisk(DISK, done);
         });
       });
     });
