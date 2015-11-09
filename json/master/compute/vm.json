@@ -34,7 +34,7 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar extend = require('extend');\nvar is = require('is');",
+    "code": "'use strict';\n\nvar createErrorClass = require('create-error-class');\nvar extend = require('extend');\nvar is = require('is');",
     "ctx": false
   },
   {
@@ -69,8 +69,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 26,
-    "codeStart": 30,
+    "line": 27,
+    "codeStart": 31,
     "code": "var Disk = require('./disk.js');",
     "ctx": {
       "type": "declaration",
@@ -111,14 +111,65 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 32,
-    "codeStart": 36,
+    "line": 33,
+    "codeStart": 37,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
       "name": "util",
       "value": "require('../common/util.js')",
       "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{string} message - Custom error message.",
+        "name": "message",
+        "description": "<ul>\n<li>Custom error message.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{Error}",
+        "types": [
+          "Error"
+        ],
+        "typesDescription": "<code>Error</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{Error}</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Custom error type for errors related to detaching a disk.</p>",
+      "summary": "<p>Custom error type for errors related to detaching a disk.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 39,
+    "codeStart": 45,
+    "code": "var DetachDiskError = createErrorClass('DetachDiskError', function(message) {\n  this.message = message;\n});",
+    "ctx": {
+      "type": "declaration",
+      "name": "DetachDiskError",
+      "value": "createErrorClass('DetachDiskError', function(message) {",
+      "string": "DetachDiskError"
     }
   },
   {
@@ -162,8 +213,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 38,
-    "codeStart": 43
+    "line": 49,
+    "codeStart": 54
   },
   {
     "tags": [
@@ -203,9 +254,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 43,
-    "codeStart": 65,
-    "code": "function VM(zone, name) {\n  this.zone = zone;\n  this.name = name;\n}",
+    "line": 54,
+    "codeStart": 76,
+    "code": "function VM(zone, name) {\n  this.zone = zone;\n  this.name = name;\n  this.metadata = {};\n}",
     "ctx": {
       "type": "constructor",
       "name": "VM",
@@ -351,8 +402,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 70,
-    "codeStart": 111,
+    "line": 82,
+    "codeStart": 123,
     "code": "VM.prototype.attachDisk = function(disk, options, callback) {\n  if (!(disk instanceof Disk)) {\n    throw new Error('A Disk object must be provided.');\n  }\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  var body = extend({}, options, {\n    source: disk.formattedName\n  });\n\n  if (body.readOnly) {\n    body.mode = 'READ_ONLY';\n    delete body.readOnly;\n  }\n\n  this.makeReq_('POST', '/attachDisk', null, body, callback);\n};",
     "ctx": {
       "type": "method",
@@ -441,8 +492,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 133,
-    "codeStart": 150,
+    "line": 145,
+    "codeStart": 162,
     "code": "VM.prototype.delete = function(callback) {\n  this.makeReq_('DELETE', '', null, null, callback || util.noop);\n};",
     "ctx": {
       "type": "method",
@@ -553,9 +604,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 154,
-    "codeStart": 176,
-    "code": "VM.prototype.detachDisk = function(disk, callback) {\n  if (!(disk instanceof Disk)) {\n    throw new Error('A Disk object must be provided.');\n  }\n\n  var query = {\n    deviceName: disk.name\n  };\n\n  this.makeReq_('POST', '/detachDisk', query, null, callback || util.noop);\n};",
+    "line": 166,
+    "codeStart": 188,
+    "code": "VM.prototype.detachDisk = function(disk, callback) {\n  var self = this;\n\n  if (!(disk instanceof Disk)) {\n    throw new Error('A Disk object must be provided.');\n  }\n\n  this.getMetadata(function(err, metadata) {\n    if (err) {\n      callback(new DetachDiskError(err.message));\n      return;\n    }\n\n    var deviceName;\n    var baseUrl = 'https://www.googleapis.com/compute/v1/';\n    var disks = metadata.disks || [];\n\n    // Try to find the deviceName by matching the source of the attached disks\n    // to the name of the disk provided by the user.\n    for (var i = 0; !deviceName && i < disks.length; i++) {\n      var attachedDisk = disks[i];\n      var source = attachedDisk.source.replace(baseUrl, '');\n\n      if (source === disk.formattedName) {\n        deviceName = attachedDisk.deviceName;\n      }\n    }\n\n    if (!deviceName) {\n      callback(new DetachDiskError('Device name for this disk was not found.'));\n      return;\n    }\n\n    var query = {\n      deviceName: deviceName\n    };\n\n    self.makeReq_('POST', '/detachDisk', query, null, callback || util.noop);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "VM",
@@ -648,8 +699,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 188,
-    "codeStart": 202,
+    "line": 229,
+    "codeStart": 243,
     "code": "VM.prototype.getMetadata = function(callback) {\n  var self = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('GET', '', null, null, function(err, _, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.metadata = resp;\n\n    callback(null, self.metadata, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -752,8 +803,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 219,
-    "codeStart": 234,
+    "line": 260,
+    "codeStart": 275,
     "code": "VM.prototype.getSerialPortOutput = function(port, callback) {\n  if (is.fn(port)) {\n    callback = port;\n    port = 1;\n  }\n\n  var query = {\n    port: port\n  };\n\n  this.makeReq_('GET', '/serialPort', query, null, function(err, _, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, resp.contents, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -851,8 +902,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 254,
-    "codeStart": 269,
+    "line": 295,
+    "codeStart": 310,
     "code": "VM.prototype.getTags = function(callback) {\n  this.getMetadata(function(err, metadata, apiResponse) {\n    if (err) {\n      callback(err, null, null, apiResponse);\n      return;\n    }\n\n    callback(null, metadata.tags.items, metadata.tags.fingerprint, apiResponse);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -941,8 +992,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 280,
-    "codeStart": 297,
+    "line": 321,
+    "codeStart": 338,
     "code": "VM.prototype.reset = function(callback) {\n  this.makeReq_('POST', '/reset', null, null, callback || util.noop);\n};",
     "ctx": {
       "type": "method",
@@ -1059,8 +1110,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 301,
-    "codeStart": 325,
+    "line": 342,
+    "codeStart": 366,
     "code": "VM.prototype.setTags = function(tags, fingerprint, callback) {\n  var body = {\n    items: tags,\n    fingerprint: fingerprint\n  };\n\n  this.makeReq_('POST', '/setTags', null, body, callback || util.noop);\n};",
     "ctx": {
       "type": "method",
@@ -1149,8 +1200,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 334,
-    "codeStart": 351,
+    "line": 375,
+    "codeStart": 392,
     "code": "VM.prototype.start = function(callback) {\n  this.makeReq_('POST', '/start', null, null, callback || util.noop);\n};",
     "ctx": {
       "type": "method",
@@ -1239,8 +1290,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 355,
-    "codeStart": 372,
+    "line": 396,
+    "codeStart": 413,
     "code": "VM.prototype.stop = function(callback) {\n  this.makeReq_('POST', '/stop', null, null, callback || util.noop);\n};",
     "ctx": {
       "type": "method",
@@ -1335,8 +1386,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 376,
-    "codeStart": 393,
+    "line": 417,
+    "codeStart": 434,
     "code": "VM.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/instances/' + this.name + path;\n\n  var zone = this.zone;\n\n  zone.makeReq_(method, path, query, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var operation = zone.operation(resp.name);\n    operation.metadata = resp;\n\n    callback(null, operation, resp);\n  });\n};\n\nmodule.exports = VM;",
     "ctx": {
       "type": "method",
