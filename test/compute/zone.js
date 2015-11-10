@@ -509,6 +509,7 @@ describe('Zone', function() {
         var expectedConfig = extend({}, EXPECTED_CONFIG, {
           disks: [
             {
+              autoDelete: true,
               boot: true,
               initializeParams: {
                 sourceImage: gceImagesResp.selfLink
