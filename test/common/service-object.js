@@ -116,7 +116,7 @@ describe('ServiceObject', function() {
       var apiResponse = {};
 
       function createMethod(id, options_, callback) {
-        callback(error, {}, apiResponse);
+        callback(error, null, apiResponse);
       }
 
       var serviceObject = new ServiceObject(config);
@@ -167,6 +167,25 @@ describe('ServiceObject', function() {
       serviceObject.create(options, function(err, instance_) {
         assert.ifError(err);
         assert.strictEqual(instance_.metadata, instance.metadata);
+        done();
+      });
+    });
+
+    it('should execute callback with any amount of arguments', function(done) {
+      var config = extend({}, CONFIG, {
+        createMethod: createMethod
+      });
+      var options = {};
+
+      var args = ['a', 'b', 'c', 'd', 'e', 'f'];
+
+      function createMethod(id, options_, callback) {
+        callback.apply(null, args);
+      }
+
+      var serviceObject = new ServiceObject(config);
+      serviceObject.create(options, function() {
+        assert.deepEqual([].slice.call(arguments), args);
         done();
       });
     });
