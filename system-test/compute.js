@@ -54,15 +54,12 @@ describe('Compute', function() {
   });
 
   describe('addresses', function() {
-    var ADDRESS_NAME;
-    var address;
+    var ADDRESS_NAME = generateName();
+    var address = region.address(ADDRESS_NAME);
 
     before(function(done) {
-      ADDRESS_NAME = generateName();
-
-      region.createAddress(ADDRESS_NAME, function(err, address_, operation) {
+      address.create(function(err, disk, operation) {
         assert.ifError(err);
-        address = address_;
         operation.onComplete(done);
       });
     });
@@ -103,19 +100,16 @@ describe('Compute', function() {
   });
 
   describe('disks', function() {
-    var DISK_NAME;
-    var disk;
+    var DISK_NAME = generateName();
+    var disk = zone.disk(DISK_NAME);
 
     before(function(done) {
-      DISK_NAME = generateName();
-
       var config = {
         os: 'ubuntu'
       };
 
-      zone.createDisk(DISK_NAME, config, function(err, disk_, operation) {
+      disk.create(config, function(err, disk, operation) {
         assert.ifError(err);
-        disk = disk_;
         operation.onComplete(done);
       });
     });
@@ -155,12 +149,19 @@ describe('Compute', function() {
     });
 
     it('should take a snapshot', function(done) {
-      disk.createSnapshot(generateName(), done);
+      var MAX_TIME_ALLOWED = 90000;
+      this.timeout(MAX_TIME_ALLOWED);
+
+      disk.snapshot(generateName()).create(function(err, snapshot, operation) {
+        assert.ifError(err);
+        operation.onComplete(getOperationOptions(MAX_TIME_ALLOWED), done);
+      });
     });
   });
 
   describe('firewalls', function() {
-    var FIREWALL_NAME;
+    var FIREWALL_NAME = generateName();
+    var firewall = compute.firewall(FIREWALL_NAME);
 
     var CONFIG = {
       protocols: {
@@ -185,17 +186,14 @@ describe('Compute', function() {
       sourceRanges: CONFIG.ranges
     };
 
-    var firewall;
-
     before(function(done) {
-      FIREWALL_NAME = generateName();
+      var MAX_TIME_ALLOWED = 90000;
+      this.timeout(MAX_TIME_ALLOWED);
 
-      compute.createFirewall(
-        FIREWALL_NAME, CONFIG, function(err, firewall_, operation) {
-          assert.ifError(err);
-          firewall = firewall_;
-          operation.onComplete(done);
-        });
+      firewall.create(CONFIG, function(err, firewall, operation) {
+        assert.ifError(err);
+        operation.onComplete(getOperationOptions(MAX_TIME_ALLOWED), done);
+      });
     });
 
     it('should have opened the correct connections', function(done) {
@@ -231,23 +229,18 @@ describe('Compute', function() {
   });
 
   describe('networks', function() {
-    var NETWORK_NAME;
+    var NETWORK_NAME = generateName();
+    var network = compute.network(NETWORK_NAME);
 
     var CONFIG = {
       range: '10.240.0.0/16'
     };
 
-    var network;
-
     before(function(done) {
-      NETWORK_NAME = generateName();
-
-      compute.createNetwork(
-        NETWORK_NAME, CONFIG, function(err, network_, operation) {
-          assert.ifError(err);
-          network = network_;
-          operation.onComplete(done);
-        });
+      network.create(CONFIG, function(err, network, operation) {
+        assert.ifError(err);
+        operation.onComplete(done);
+      });
     });
 
     it('should have opened the correct range', function(done) {
@@ -398,20 +391,17 @@ describe('Compute', function() {
   });
 
   describe('vms', function() {
-    var VM_NAME;
-    var vm;
+    var VM_NAME = generateName();
+    var vm = zone.vm(VM_NAME);
 
     before(function(done) {
-      VM_NAME = generateName();
-
       var config = {
         os: 'ubuntu',
         http: true
       };
 
-      zone.createVM(VM_NAME, config, function(err, vm_, operation) {
+      vm.create(config, function(err, vm, operation) {
         assert.ifError(err);
-        vm = vm_;
         operation.onComplete(done);
       });
     });
@@ -430,10 +420,7 @@ describe('Compute', function() {
           return;
         }
 
-        operation.onComplete({
-          maxAttempts: MAX_TIME_ALLOWED / 10000,
-          interval: 10000
-        }, done);
+        operation.onComplete(getOperationOptions(MAX_TIME_ALLOWED), done);
       });
     });
 
@@ -512,32 +499,32 @@ describe('Compute', function() {
 
         tags.push(newTagName);
 
-        vm.setTags(tags, fingerprint, function(err, operation) {
+        vm.setTags(tags, fingerprint, execAfterOperationComplete(function(err) {
           assert.ifError(err);
 
-          operation.onComplete(function(err) {
+          vm.getTags(function(err, tags) {
             assert.ifError(err);
-
-            vm.getTags(function(err, tags) {
-              assert.ifError(err);
-              assert(tags.indexOf(newTagName) > -1);
-              done();
-            });
+            assert(tags.indexOf(newTagName) > -1);
+            done();
           });
-        });
+        }));
       });
     });
 
     it('should reset', function(done) {
-      vm.reset(done);
+      vm.reset(execAfterOperationComplete(done));
     });
 
     it('should start', function(done) {
-      vm.start(done);
+      vm.start(execAfterOperationComplete(done));
     });
 
     it('should stop', function(done) {
-      vm.stop(done);
+      var MAX_TIME_ALLOWED = 90000 * 2;
+      this.timeout(MAX_TIME_ALLOWED);
+
+      var options = getOperationOptions(MAX_TIME_ALLOWED);
+      vm.stop(execAfterOperationComplete(options, done));
     });
   });
 
@@ -635,6 +622,15 @@ describe('Compute', function() {
 
       async.each(objects, exec('delete'), callback);
     });
+  }
+
+  function getOperationOptions(maxTimeAllowed) {
+    var interval = 10000;
+
+    return {
+      maxAttempts: maxTimeAllowed / interval,
+      interval: interval
+    };
   }
 
   function execAfterOperationComplete(options, callback) {

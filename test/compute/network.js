@@ -19,17 +19,46 @@
 var assert = require('assert');
 var extend = require('extend');
 var format = require('string-format-obj');
+var mockery = require('mockery');
+var nodeutil = require('util');
 
-var Network = require('../../lib/compute/network.js');
+var ServiceObject = require('../../lib/common/service-object.js');
+var util = require('../../lib/common/util.js');
+
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Network', function() {
+  var Network;
   var network;
 
-  var COMPUTE = { projectId: 'project-id' };
+  var COMPUTE = {
+    projectId: 'project-id',
+    createNetwork: util.noop
+  };
   var NETWORK_NAME = 'network-name';
   var NETWORK_FULL_NAME = format('projects/{pId}/global/networks/{name}', {
     pId: COMPUTE.projectId,
     name: NETWORK_NAME
+  });
+
+  before(function() {
+    mockery.registerMock('../common/service-object.js', FakeServiceObject);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+
+    Network = require('../../lib/compute/network.js');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
   });
 
   beforeEach(function() {
@@ -43,11 +72,6 @@ describe('Network', function() {
 
     it('should localize the name', function() {
       assert.strictEqual(network.name, NETWORK_NAME);
-    });
-
-    it('should default metadata to an empty object', function() {
-      assert.strictEqual(typeof network.metadata, 'object');
-      assert.strictEqual(Object.keys(network.metadata).length, 0);
     });
 
     it('should format the network name', function() {
@@ -65,6 +89,32 @@ describe('Network', function() {
 
       var network = new Network(COMPUTE, NETWORK_NAME);
       assert(network.formattedName, formattedName);
+    });
+
+    it('should inherit from ServiceObject', function(done) {
+      var computeInstance = extend({}, COMPUTE, {
+        createNetwork: {
+          bind: function(context) {
+            assert.strictEqual(context, computeInstance);
+            done();
+          }
+        }
+      });
+
+      var network = new Network(computeInstance, NETWORK_NAME);
+      assert(network instanceof ServiceObject);
+
+      var calledWith = network.calledWith_[0];
+
+      assert.strictEqual(calledWith.parent, computeInstance);
+      assert.strictEqual(calledWith.baseUrl, '/global/networks');
+      assert.strictEqual(calledWith.id, NETWORK_NAME);
+      assert.deepEqual(calledWith.methods, {
+        create: true,
+        exists: true,
+        get: true,
+        getMetadata: true
+      });
     });
   });
 
@@ -94,16 +144,13 @@ describe('Network', function() {
   });
 
   describe('delete', function() {
-    it('should make the correct API request', function(done) {
-      network.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'DELETE');
-        assert.strictEqual(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
+    it('should call ServiceObject.delete', function(done) {
+      FakeServiceObject.prototype.delete = function() {
+        assert.strictEqual(this, network);
         done();
       };
 
-      network.delete(assert.ifError);
+      network.delete();
     });
 
     describe('error', function() {
@@ -111,7 +158,7 @@ describe('Network', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        network.makeReq_ = function(method, path, query, body, callback) {
+        FakeServiceObject.prototype.delete = function(callback) {
           callback(error, apiResponse);
         };
       });
@@ -138,7 +185,7 @@ describe('Network', function() {
       };
 
       beforeEach(function() {
-        network.makeReq_ = function(method, path, query, body, callback) {
+        FakeServiceObject.prototype.delete = function(callback) {
           callback(null, apiResponse);
         };
       });
@@ -228,107 +275,6 @@ describe('Network', function() {
       };
 
       assert.strictEqual(network.getFirewalls(), resultOfGetFirewalls);
-    });
-  });
-
-  describe('getMetadata', function() {
-    it('should make the correct API request', function(done) {
-      network.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
-
-        done();
-      };
-
-      network.getMetadata(assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        network.makeReq_ = function(method, path, query, body, callback) {
-          callback(error, apiResponse);
-        };
-      });
-
-      it('should execute callback with error and API response', function(done) {
-        network.getMetadata(function(err, metadata, apiResponse_) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(metadata, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          network.getMetadata();
-        });
-      });
-    });
-
-    describe('success', function() {
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        network.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should update the metadata to the API response', function(done) {
-        network.getMetadata(function(err) {
-          assert.ifError(err);
-          assert.strictEqual(network.metadata, apiResponse);
-          done();
-        });
-      });
-
-      it('should exec callback with metadata and API response', function(done) {
-        network.getMetadata(function(err, metadata, apiResponse_) {
-          assert.ifError(err);
-          assert.strictEqual(metadata, apiResponse);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          network.getMetadata();
-        });
-      });
-    });
-  });
-
-  describe('makeReq_', function() {
-    it('should make the correct request to Compute', function(done) {
-      var expectedPathPrefix = '/global/networks/' + network.name;
-
-      var method = 'POST';
-      var path = '/test';
-      var query = {
-        a: 'b',
-        c: 'd'
-      };
-      var body = {
-        a: 'b',
-        c: 'd'
-      };
-
-      network.compute.makeReq_ = function(method_, path_, query_, body_, cb) {
-        assert.strictEqual(method_, method);
-        assert.strictEqual(path_, expectedPathPrefix + path);
-        assert.strictEqual(query_, query);
-        assert.strictEqual(body_, body);
-        cb();
-      };
-
-      network.makeReq_(method, path, query, body, done);
     });
   });
 });
