@@ -34,8 +34,50 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';",
+    "code": "'use strict';\n\nvar nodeutil = require('util');",
     "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/serviceObject}",
+        "types": [
+          "module:common/serviceObject"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2FserviceObject.html\">common/serviceObject</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/serviceObject}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 25,
+    "codeStart": 29,
+    "code": "var ServiceObject = require('../common/service-object.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "ServiceObject",
+      "value": "require('../common/service-object.js')",
+      "string": "ServiceObject"
+    }
   },
   {
     "tags": [
@@ -69,8 +111,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 23,
-    "codeStart": 27,
+    "line": 31,
+    "codeStart": 35,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -120,8 +162,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 29,
-    "codeStart": 34
+    "line": 37,
+    "codeStart": 42
   },
   {
     "tags": [
@@ -161,13 +203,275 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 34,
-    "codeStart": 54,
-    "code": "function Firewall(compute, name) {\n  this.compute = compute;\n  this.name = name;\n\n  this.metadata = {\n    network: 'global/networks/default'\n  };\n}",
+    "line": 42,
+    "codeStart": 62,
+    "code": "function Firewall(compute, name) {\n  var methods = {",
     "ctx": {
       "type": "constructor",
       "name": "Firewall",
       "string": "Firewall()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{object} config - See {module:compute#createFirewall}.",
+        "name": "config",
+        "description": "<ul>\n<li>See {module:compute#createFirewall}.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var config = {\n  // ...\n};\n\nfirewall.create(config, function(err, firewall, operation, apiResponse) {\n  // `firewall` is a Firewall object.\n\n  // `operation` is an Operation object that can be used to check the\n  // status of the request.\n});",
+        "html": "<p>var config = {<br />  // ...<br />};</p><p>firewall.create(config, function(err, firewall, operation, apiResponse) {<br />  // <code>firewall</code> is a Firewall object.</p><p>  // <code>operation</code> is an Operation object that can be used to check the<br />  // status of the request.<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a firewall.</p>",
+      "summary": "<p>Create a firewall.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 64,
+    "codeStart": 81,
+    "code": "create: true,",
+    "ctx": {
+      "type": "property",
+      "name": "create",
+      "value": "true,",
+      "string": "create"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this\n    request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this     request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} callback.exists - Whether the firewall exists or not.",
+        "name": "callback.exists",
+        "description": "<ul>\n<li>Whether the firewall exists or not.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "firewall.exists(function(err, exists) {});",
+        "html": "<p>firewall.exists(function(err, exists) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Check if the firewall exists.</p>",
+      "summary": "<p>Check if the firewall exists.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 83,
+    "codeStart": 94,
+    "code": "exists: true,",
+    "ctx": {
+      "type": "property",
+      "name": "exists",
+      "value": "true,",
+      "string": "exists"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{options=} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "options"
+        ],
+        "typesDescription": "<a href=\"options.html\">options</a>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.autoCreate - Automatically create the object if\n    it does not exist. Default: `false`",
+        "name": "options.autoCreate",
+        "description": "<ul>\n<li>Automatically create the object if     it does not exist. Default: <code>false</code></li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "firewall.get(function(err, firewall, apiResponse) {\n  // `firewall` is a Firewall object.\n});",
+        "html": "<p>firewall.get(function(err, firewall, apiResponse) {<br />  // <code>firewall</code> is a Firewall object.<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a firewall if it exists.</p><p>You may optionally use this to &quot;get or create&quot; an object by providing an<br />object with <code>autoCreate</code> set to <code>true</code>. Any extra configuration that is<br />normally required for the <code>create</code> method must be contained within this<br />object as well.</p>",
+      "summary": "<p>Get a firewall if it exists.</p>",
+      "body": "<p>You may optionally use this to &quot;get or create&quot; an object by providing an<br />object with <code>autoCreate</code> set to <code>true</code>. Any extra configuration that is<br />normally required for the <code>create</code> method must be contained within this<br />object as well.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 96,
+    "codeStart": 113,
+    "code": "get: true,",
+    "ctx": {
+      "type": "property",
+      "name": "get",
+      "value": "true,",
+      "string": "get"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Firewalls: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls/get}",
+        "html": "<p>[Firewalls: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/firewalls/get}\">https://cloud.google.com/compute/docs/reference/v1/firewalls/get}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Firewall Resource]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls}",
+        "html": "<p>[Firewall Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/firewalls}\">https://cloud.google.com/compute/docs/reference/v1/firewalls}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this\n    request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this     request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.metadata - The firewall's metadata.",
+        "name": "callback.metadata",
+        "description": "<ul>\n<li>The firewall&#39;s metadata.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "firewall.getMetadata(function(err, metadata, apiResponse) {});",
+        "html": "<p>firewall.getMetadata(function(err, metadata, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get the firewall&#39;s metadata.</p>",
+      "summary": "<p>Get the firewall&#39;s metadata.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 115,
+    "codeStart": 130,
+    "code": "getMetadata: true\n  };\n\n  ServiceObject.call(this, {\nparent: compute,\nbaseUrl: '/global/firewalls',\nid: name,\ncreateMethod: compute.createFirewall.bind(compute),\nmethods: methods,\n  });\n\n  this.compute = compute;\n  this.name = name;\n  this.metadata.network = 'global/networks/default';\n}\n\nnodeutil.inherits(Firewall, ServiceObject);",
+    "ctx": {
+      "type": "property",
+      "name": "getMetadata",
+      "value": "true",
+      "string": "getMetadata"
     }
   },
   {
@@ -249,110 +553,15 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 63,
-    "codeStart": 80,
-    "code": "Firewall.prototype.delete = function(callback) {\n  var compute = this.compute;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('DELETE', '', null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var operation = compute.operation(resp.name);\n    operation.metadata = resp;\n\n    callback(null, operation, resp);\n  });\n};",
+    "line": 148,
+    "codeStart": 165,
+    "code": "Firewall.prototype.delete = function(callback) {\n  var compute = this.compute;\n\n  callback = callback || util.noop;\n\n  ServiceObject.prototype.delete.call(this, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var operation = compute.operation(resp.name);\n    operation.metadata = resp;\n\n    callback(null, operation, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Firewall",
       "cons": "Firewall",
       "name": "delete",
       "string": "Firewall.prototype.delete()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "resource",
-        "string": "[Firewalls: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls/get}",
-        "html": "<p>[Firewalls: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/firewalls/get}\">https://cloud.google.com/compute/docs/reference/v1/firewalls/get}</a></p>"
-      },
-      {
-        "type": "resource",
-        "string": "[Firewall Resource]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls}",
-        "html": "<p>[Firewall Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/firewalls}\">https://cloud.google.com/compute/docs/reference/v1/firewalls}</a></p>"
-      },
-      {
-        "type": "param",
-        "string": "{function=} callback - The callback function.",
-        "name": "callback",
-        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
-        "types": [
-          "function"
-        ],
-        "typesDescription": "<code>function</code>|<code>undefined</code>",
-        "optional": true,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{?error} callback.err - An error returned while making this request",
-        "name": "callback.err",
-        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
-        "types": [
-          "error"
-        ],
-        "typesDescription": "<code>error</code>|<code>null</code>",
-        "optional": false,
-        "nullable": true,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{object} callback.metadata - The firewall's metadata.",
-        "name": "callback.metadata",
-        "description": "<ul>\n<li>The firewall&#39;s metadata.</li>\n</ul>\n",
-        "types": [
-          "object"
-        ],
-        "typesDescription": "<code>object</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.",
-        "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
-        "types": [
-          "object"
-        ],
-        "typesDescription": "<code>object</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "example",
-        "string": "firewall.getMetadata(function(err, metadata, apiResponse) {});",
-        "html": "<p>firewall.getMetadata(function(err, metadata, apiResponse) {});</p>"
-      }
-    ],
-    "description": {
-      "full": "<p>Get the firewall&#39;s metadata.</p>",
-      "summary": "<p>Get the firewall&#39;s metadata.</p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 98,
-    "codeStart": 112,
-    "code": "Firewall.prototype.getMetadata = function(callback) {\n  var self = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('GET', '', null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.metadata = resp;\n\n    callback(null, self.metadata, resp);\n  });\n};",
-    "ctx": {
-      "type": "method",
-      "constructor": "Firewall",
-      "cons": "Firewall",
-      "name": "getMetadata",
-      "string": "Firewall.prototype.getMetadata()"
     }
   },
   {
@@ -448,111 +657,15 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 129,
-    "codeStart": 152,
-    "code": "Firewall.prototype.setMetadata = function(metadata, callback) {\n  var compute = this.compute;\n\n  callback = callback || util.noop;\n\n  metadata = metadata || {};\n  metadata.name = this.name;\n  metadata.network = this.metadata.network;\n\n  this.makeReq_('PATCH', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var operation = compute.operation(resp.name);\n    operation.metadata = resp;\n\n    callback(null, operation, resp);\n  });\n};",
+    "line": 183,
+    "codeStart": 206,
+    "code": "Firewall.prototype.setMetadata = function(metadata, callback) {\n  var compute = this.compute;\n\n  callback = callback || util.noop;\n\n  metadata = metadata || {};\n  metadata.name = this.name;\n  metadata.network = this.metadata.network;\n\n  this.request({\n    method: 'PATCH',\n    uri: '',\n    json: metadata\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var operation = compute.operation(resp.name);\n    operation.metadata = resp;\n\n    callback(null, operation, resp);\n  });\n};\n\nmodule.exports = Firewall;",
     "ctx": {
       "type": "method",
       "constructor": "Firewall",
       "cons": "Firewall",
       "name": "setMetadata",
       "string": "Firewall.prototype.setMetadata()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      },
-      {
-        "type": "param",
-        "string": "{string} method - Action.",
-        "name": "method",
-        "description": "<ul>\n<li>Action.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{string} path - Request path.",
-        "name": "path",
-        "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{*} query - Request query object.",
-        "name": "query",
-        "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>*</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{*} body - Request body contents.",
-        "name": "body",
-        "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>*</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{function} callback - The callback function.",
-        "name": "callback",
-        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
-        "types": [
-          "function"
-        ],
-        "typesDescription": "<code>function</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      }
-    ],
-    "description": {
-      "full": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
-      "summary": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 174,
-    "codeStart": 186,
-    "code": "Firewall.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/global/firewalls/' + this.name + path;\n  this.compute.makeReq_(method, path, query, body, callback);\n};\n\nmodule.exports = Firewall;",
-    "ctx": {
-      "type": "method",
-      "constructor": "Firewall",
-      "cons": "Firewall",
-      "name": "makeReq_",
-      "string": "Firewall.prototype.makeReq_()"
     }
   }
 ]

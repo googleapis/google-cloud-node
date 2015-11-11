@@ -34,8 +34,50 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar extend = require('extend');\nvar is = require('is');",
+    "code": "'use strict';\n\nvar extend = require('extend');\nvar is = require('is');\nvar nodeutil = require('util');",
     "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/serviceObject}",
+        "types": [
+          "module:common/serviceObject"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2FserviceObject.html\">common/serviceObject</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/serviceObject}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 27,
+    "codeStart": 31,
+    "code": "var ServiceObject = require('../common/service-object.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "ServiceObject",
+      "value": "require('../common/service-object.js')",
+      "string": "ServiceObject"
+    }
   },
   {
     "tags": [
@@ -69,8 +111,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 26,
-    "codeStart": 30,
+    "line": 33,
+    "codeStart": 37,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -120,8 +162,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 32,
-    "codeStart": 38
+    "line": 39,
+    "codeStart": 45
   },
   {
     "tags": [
@@ -151,9 +193,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 38,
-    "codeStart": 76,
-    "code": "function Operation(scope, name) {\n  this.scope = scope;\n  this.name = name;\n  this.metadata = {};\n}",
+    "line": 45,
+    "codeStart": 83,
+    "code": "function Operation(scope, name) {\n  var isCompute = scope.constructor.name === 'Compute';\n\n  var methods = {",
     "ctx": {
       "type": "constructor",
       "name": "Operation",
@@ -193,9 +235,9 @@
       },
       {
         "type": "param",
-        "string": "{?error} callback.err - An error returned while making this request.",
+        "string": "{?error} callback.err - An error returned while making this\n    request.",
         "name": "callback.err",
-        "description": "<ul>\n<li>An error returned while making this request.</li>\n</ul>\n",
+        "description": "<ul>\n<li>An error returned while making this     request.</li>\n</ul>\n",
         "types": [
           "error"
         ],
@@ -235,15 +277,112 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 82,
-    "codeStart": 96,
-    "code": "Operation.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n\n  this.makeReq_('DELETE', '', null, null, function(err, resp) {\n    callback(err, resp);\n  });\n};",
+    "line": 87,
+    "codeStart": 102,
+    "code": "delete: true,",
     "ctx": {
-      "type": "method",
-      "constructor": "Operation",
-      "cons": "Operation",
+      "type": "property",
       "name": "delete",
-      "string": "Operation.prototype.delete()"
+      "value": "true,",
+      "string": "delete"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this\n    request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this     request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} callback.exists - Whether the operation exists or not.",
+        "name": "callback.exists",
+        "description": "<ul>\n<li>Whether the operation exists or not.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "operation.exists(function(err, exists) {});",
+        "html": "<p>operation.exists(function(err, exists) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Check if the operation exists.</p>",
+      "summary": "<p>Check if the operation exists.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 104,
+    "codeStart": 115,
+    "code": "exists: true,",
+    "ctx": {
+      "type": "property",
+      "name": "exists",
+      "value": "true,",
+      "string": "exists"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "example",
+        "string": "operation.get(function(err, operation, apiResponse) {\n  // `operation` is an Operation object.\n});",
+        "html": "<p>operation.get(function(err, operation, apiResponse) {<br />  // <code>operation</code> is an Operation object.<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get an operation if it exists.</p>",
+      "summary": "<p>Get an operation if it exists.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 117,
+    "codeStart": 125,
+    "code": "get: true\n  };\n\n  ServiceObject.call(this, {\nparent: scope,\nbaseUrl: isCompute ? '/global/operations' : '/operations',\nid: name,\nmethods: methods\n  });\n\n  this.name = name;\n}\n\nnodeutil.inherits(Operation, ServiceObject);",
+    "ctx": {
+      "type": "property",
+      "name": "get",
+      "value": "true",
+      "string": "get"
     }
   },
   {
@@ -335,9 +474,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 104,
-    "codeStart": 123,
-    "code": "Operation.prototype.getMetadata = function(callback) {\n  var self = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('GET', '', null, null, function(err, resp) {\n    // An Operation entity contains a property named `error`. This makes\n    // `makeReq_` think the operation failed, and will return an ApiError to\n    // this callback. We have to make sure this isn't a false error by seeing if\n    // the response body contains a property that wouldn't exist on a failed API\n    // request (`name`).\n    var isActualError = err && (!resp || resp.name !== self.name);\n\n    if (isActualError) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.metadata = resp;\n\n    callback(null, self.metadata, resp);\n  });\n};",
+    "line": 140,
+    "codeStart": 159,
+    "code": "Operation.prototype.getMetadata = function(callback) {\n  var self = this;\n\n  callback = callback || util.noop;\n\n  ServiceObject.prototype.getMetadata.call(this, function(err, apiResponse) {\n    // An Operation entity contains a property named `error`. This makes\n    // `request` think the operation failed, and will return an ApiError to\n    // this callback. We have to make sure this isn't a false error by seeing if\n    // the response body contains a property that wouldn't exist on a failed API\n    // request (`name`).\n    var isActualError = err && (!apiResponse || apiResponse.name !== self.name);\n\n    if (isActualError) {\n      callback(err, null, apiResponse);\n      return;\n    }\n\n    self.metadata = apiResponse;\n\n    callback(null, self.metadata, apiResponse);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Operation",
@@ -448,111 +587,15 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 147,
-    "codeStart": 175,
-    "code": "Operation.prototype.onComplete = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = extend({\n    maxAttempts: 10,\n    interval: 3000\n  }, options);\n\n  var didNotCompleteError = new Error('Operation did not complete.');\n  didNotCompleteError.code = 'OPERATION_INCOMPLETE';\n\n  var numAttempts = 0;\n\n  function checkMetadata() {\n    numAttempts++;\n\n    if (numAttempts > options.maxAttempts) {\n      callback(didNotCompleteError, self.metadata);\n      return;\n    }\n\n    setTimeout(function() {\n      self.getMetadata(onMetadata);\n    }, options.interval);\n  }\n\n  function onMetadata(err, metadata) {\n    if (err) {\n      callback(err, metadata);\n      return;\n    }\n\n    if (metadata.status !== 'DONE') {\n      checkMetadata();\n      return;\n    }\n\n    // The operation is complete.\n    callback(null, metadata);\n  }\n\n  checkMetadata();\n};",
+    "line": 183,
+    "codeStart": 211,
+    "code": "Operation.prototype.onComplete = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = extend({\n    maxAttempts: 10,\n    interval: 3000\n  }, options);\n\n  var didNotCompleteError = new Error('Operation did not complete.');\n  didNotCompleteError.code = 'OPERATION_INCOMPLETE';\n\n  var numAttempts = 0;\n\n  function checkMetadata() {\n    numAttempts++;\n\n    if (numAttempts > options.maxAttempts) {\n      callback(didNotCompleteError, self.metadata);\n      return;\n    }\n\n    setTimeout(function() {\n      self.getMetadata(onMetadata);\n    }, options.interval);\n  }\n\n  function onMetadata(err, metadata) {\n    if (err) {\n      callback(err, metadata);\n      return;\n    }\n\n    if (metadata.status !== 'DONE') {\n      checkMetadata();\n      return;\n    }\n\n    // The operation is complete.\n    callback(null, metadata);\n  }\n\n  checkMetadata();\n};\n\nmodule.exports = Operation;",
     "ctx": {
       "type": "method",
       "constructor": "Operation",
       "cons": "Operation",
       "name": "onComplete",
       "string": "Operation.prototype.onComplete()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      },
-      {
-        "type": "param",
-        "string": "{string} method - Action.",
-        "name": "method",
-        "description": "<ul>\n<li>Action.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{string} path - Request path.",
-        "name": "path",
-        "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{*} query - Request query object.",
-        "name": "query",
-        "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>*</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{*} body - Request body contents.",
-        "name": "body",
-        "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>*</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{function} callback - The callback function.",
-        "name": "callback",
-        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
-        "types": [
-          "function"
-        ],
-        "typesDescription": "<code>function</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      }
-    ],
-    "description": {
-      "full": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
-      "summary": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 224,
-    "codeStart": 236,
-    "code": "Operation.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/operations/' + this.name + path;\n\n  if (this.scope.constructor.name === 'Compute') {\n    path = '/global' + path;\n  }\n\n  this.scope.makeReq_(method, path, query, body, callback);\n};\n\nmodule.exports = Operation;",
-    "ctx": {
-      "type": "method",
-      "constructor": "Operation",
-      "cons": "Operation",
-      "name": "makeReq_",
-      "string": "Operation.prototype.makeReq_()"
     }
   }
 ]

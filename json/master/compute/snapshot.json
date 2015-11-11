@@ -34,8 +34,50 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';",
+    "code": "'use strict';\n\nvar nodeutil = require('util');",
     "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/serviceObject}",
+        "types": [
+          "module:common/serviceObject"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2FserviceObject.html\">common/serviceObject</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/serviceObject}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 25,
+    "codeStart": 29,
+    "code": "var ServiceObject = require('../common/service-object.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "ServiceObject",
+      "value": "require('../common/service-object.js')",
+      "string": "ServiceObject"
+    }
   },
   {
     "tags": [
@@ -69,8 +111,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 23,
-    "codeStart": 27,
+    "line": 31,
+    "codeStart": 35,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -83,13 +125,14 @@
     "tags": [
       {
         "type": "param",
-        "string": "{module:compute} compute - Compute object this snapshot belongs to.",
-        "name": "compute",
-        "description": "<ul>\n<li>Compute object this snapshot belongs to.</li>\n</ul>\n",
+        "string": "{module:compute|module:compute/disk} scope - The parent scope this\n    snapshot belongs to. If it's a Disk, we expose the `create` methods.",
+        "name": "scope",
+        "description": "<ul>\n<li>The parent scope this     snapshot belongs to. If it&#39;s a Disk, we expose the <code>create</code> methods.</li>\n</ul>\n",
         "types": [
-          "module:compute"
+          "module:compute",
+          "module:compute/disk"
         ],
-        "typesDescription": "module:<a href=\"module%3Acompute.html\">compute</a>",
+        "typesDescription": "module:<a href=\"module%3Acompute.html\">compute</a>|module:<a href=\"module%3Acompute%2Fdisk.html\">compute/disk</a>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -120,8 +163,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 29,
-    "codeStart": 34
+    "line": 37,
+    "codeStart": 43
   },
   {
     "tags": [
@@ -147,8 +190,8 @@
       },
       {
         "type": "example",
-        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'grape-spaceship-123'\n});\n\nvar gce = gcloud.compute();\n\nvar snapshot = gce.snapshot('snapshot-name');",
-        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>var gce = gcloud.compute();</p><p>var snapshot = gce.snapshot(&#39;snapshot-name&#39;);</p>"
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'grape-spaceship-123'\n});\n\nvar gce = gcloud.compute();\n\nvar snapshot = gce.snapshot('snapshot-name');\n\n//-\n// Or, access through a disk.\n//-\nvar disk = gce.zone('us-central1-a').disk('disk-name');\nvar snapshot = disk.snapshot('disk-snapshot-name');",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>var gce = gcloud.compute();</p><p>var snapshot = gce.snapshot(&#39;snapshot-name&#39;);</p><p>//-<br />// Or, access through a disk.<br />//-<br />var disk = gce.zone(&#39;us-central1-a&#39;).disk(&#39;disk-name&#39;);<br />var snapshot = disk.snapshot(&#39;disk-snapshot-name&#39;);</p>"
       }
     ],
     "description": {
@@ -161,13 +204,276 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 34,
-    "codeStart": 54,
-    "code": "function Snapshot(compute, name) {\n  this.compute = compute;\n  this.name = name;\n  this.metadata = {};\n}",
+    "line": 43,
+    "codeStart": 69,
+    "code": "function Snapshot(scope, name) {\n  var isDisk = scope.constructor.name === 'Disk';\n\n  var methods = {",
     "ctx": {
       "type": "constructor",
       "name": "Snapshot",
       "string": "Snapshot()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this\n    request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this     request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} callback.exists - Whether the snapshot exists or not.",
+        "name": "callback.exists",
+        "description": "<ul>\n<li>Whether the snapshot exists or not.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "snapshot.exists(function(err, exists) {});",
+        "html": "<p>snapshot.exists(function(err, exists) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Check if the snapshot exists.</p>",
+      "summary": "<p>Check if the snapshot exists.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 73,
+    "codeStart": 84,
+    "code": "exists: true,",
+    "ctx": {
+      "type": "property",
+      "name": "exists",
+      "value": "true,",
+      "string": "exists"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{options=} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "options"
+        ],
+        "typesDescription": "<a href=\"options.html\">options</a>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.autoCreate - Automatically create the object if\n    it does not exist. Default: `false`",
+        "name": "options.autoCreate",
+        "description": "<ul>\n<li>Automatically create the object if     it does not exist. Default: <code>false</code></li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "snapshot.get(function(err, snapshot, apiResponse) {\n  // `snapshot` is a Snapshot object.\n});",
+        "html": "<p>snapshot.get(function(err, snapshot, apiResponse) {<br />  // <code>snapshot</code> is a Snapshot object.<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a snapshot if it exists.</p><p>If you access this snapshot through a Disk object, this can be used as a<br />&quot;get or create&quot; method. Pass an object with <code>autoCreate</code> set to <code>true</code>.<br />Any extra configuration that is normally required for the <code>create</code> method<br />must be contained within this object as well.</p>",
+      "summary": "<p>Get a snapshot if it exists.</p>",
+      "body": "<p>If you access this snapshot through a Disk object, this can be used as a<br />&quot;get or create&quot; method. Pass an object with <code>autoCreate</code> set to <code>true</code>.<br />Any extra configuration that is normally required for the <code>create</code> method<br />must be contained within this object as well.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 86,
+    "codeStart": 103,
+    "code": "get: true,",
+    "ctx": {
+      "type": "property",
+      "name": "get",
+      "value": "true,",
+      "string": "get"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Snapshot Resource]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots}",
+        "html": "<p>[Snapshot Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/snapshots}\">https://cloud.google.com/compute/docs/reference/v1/snapshots}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Snapshots: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots/get}",
+        "html": "<p>[Snapshots: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/snapshots/get}\">https://cloud.google.com/compute/docs/reference/v1/snapshots/get}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this\n    request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this     request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.metadata - The snapshot's metadata.",
+        "name": "callback.metadata",
+        "description": "<ul>\n<li>The snapshot&#39;s metadata.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "snapshot.getMetadata(function(err, metadata, apiResponse) {});",
+        "html": "<p>snapshot.getMetadata(function(err, metadata, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get the snapshots&#39;s metadata.</p>",
+      "summary": "<p>Get the snapshots&#39;s metadata.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 105,
+    "codeStart": 120,
+    "code": "getMetadata: true\n  };\n\n  var config = {\nparent: scope,\nbaseUrl: '/global/snapshots',\nid: name,\nmethods: methods\n  };\n\n  if (isDisk) {\nconfig.createMethod = scope.createSnapshot.bind(scope);",
+    "ctx": {
+      "type": "property",
+      "name": "getMetadata",
+      "value": "true",
+      "string": "getMetadata"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{object} config - See {module:compute/disk#createSnapshot}.",
+        "name": "config",
+        "description": "<ul>\n<li>See {module:compute/disk#createSnapshot}.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "snapshot.create(function(err, snapshot, operation, apiResponse) {\n  // `snapshot` is a Snapshot object.\n\n  // `operation` is an Operation object that can be used to check the\n  // status of the request.\n});",
+        "html": "<p>snapshot.create(function(err, snapshot, operation, apiResponse) {<br />  // <code>snapshot</code> is a Snapshot object.</p><p>  // <code>operation</code> is an Operation object that can be used to check the<br />  // status of the request.<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a snapshot.</p><p><strong>This is only available if you accessed this object through<br />{module:compute/disk#snapshot}.</strong></p>",
+      "summary": "<p>Create a snapshot.</p>",
+      "body": "<p><strong>This is only available if you accessed this object through<br />{module:compute/disk#snapshot}.</strong></p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 133,
+    "codeStart": 149,
+    "code": "config.methods.create = true;\n  }\n\n  ServiceObject.call(this, config);\n\n  this.compute = isDisk ? scope.compute : scope;\n  this.name = name;\n}\n\nnodeutil.inherits(Snapshot, ServiceObject);",
+    "ctx": {
+      "type": "property",
+      "receiver": "config.methods",
+      "name": "create",
+      "value": "true",
+      "string": "config.methods.create"
     }
   },
   {
@@ -249,206 +555,15 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 60,
-    "codeStart": 77,
-    "code": "Snapshot.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n\n  var compute = this.compute;\n\n  this.makeReq_('DELETE', '', null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var operation = compute.operation(resp.name);\n    operation.metadata = resp;\n\n    callback(null, operation, resp);\n  });\n};",
+    "line": 160,
+    "codeStart": 177,
+    "code": "Snapshot.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n\n  var compute = this.compute;\n\n  ServiceObject.prototype.delete.call(this, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var operation = compute.operation(resp.name);\n    operation.metadata = resp;\n\n    callback(null, operation, resp);\n  });\n};\n\nmodule.exports = Snapshot;",
     "ctx": {
       "type": "method",
       "constructor": "Snapshot",
       "cons": "Snapshot",
       "name": "delete",
       "string": "Snapshot.prototype.delete()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "resource",
-        "string": "[Snapshot Resource]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots}",
-        "html": "<p>[Snapshot Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/snapshots}\">https://cloud.google.com/compute/docs/reference/v1/snapshots}</a></p>"
-      },
-      {
-        "type": "resource",
-        "string": "[Snapshots: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots/get}",
-        "html": "<p>[Snapshots: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/snapshots/get}\">https://cloud.google.com/compute/docs/reference/v1/snapshots/get}</a></p>"
-      },
-      {
-        "type": "param",
-        "string": "{function=} callback - The callback function.",
-        "name": "callback",
-        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
-        "types": [
-          "function"
-        ],
-        "typesDescription": "<code>function</code>|<code>undefined</code>",
-        "optional": true,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{?error} callback.err - An error returned while making this request",
-        "name": "callback.err",
-        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
-        "types": [
-          "error"
-        ],
-        "typesDescription": "<code>error</code>|<code>null</code>",
-        "optional": false,
-        "nullable": true,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{object} callback.metadata - The snapshot's metadata.",
-        "name": "callback.metadata",
-        "description": "<ul>\n<li>The snapshot&#39;s metadata.</li>\n</ul>\n",
-        "types": [
-          "object"
-        ],
-        "typesDescription": "<code>object</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.",
-        "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
-        "types": [
-          "object"
-        ],
-        "typesDescription": "<code>object</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "example",
-        "string": "snapshot.getMetadata(function(err, metadata, apiResponse) {});",
-        "html": "<p>snapshot.getMetadata(function(err, metadata, apiResponse) {});</p>"
-      }
-    ],
-    "description": {
-      "full": "<p>Get the snapshots&#39;s metadata.</p>",
-      "summary": "<p>Get the snapshots&#39;s metadata.</p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 95,
-    "codeStart": 109,
-    "code": "Snapshot.prototype.getMetadata = function(callback) {\n  var self = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('GET', '', null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.metadata = resp;\n\n    callback(null, self.metadata, resp);\n  });\n};",
-    "ctx": {
-      "type": "method",
-      "constructor": "Snapshot",
-      "cons": "Snapshot",
-      "name": "getMetadata",
-      "string": "Snapshot.prototype.getMetadata()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      },
-      {
-        "type": "param",
-        "string": "{string} method - Action.",
-        "name": "method",
-        "description": "<ul>\n<li>Action.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{string} path - Request path.",
-        "name": "path",
-        "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{*} query - Request query object.",
-        "name": "query",
-        "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>*</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{*} body - Request body contents.",
-        "name": "body",
-        "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>*</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{function} callback - The callback function.",
-        "name": "callback",
-        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
-        "types": [
-          "function"
-        ],
-        "typesDescription": "<code>function</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      }
-    ],
-    "description": {
-      "full": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
-      "summary": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 126,
-    "codeStart": 138,
-    "code": "Snapshot.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/global/snapshots/' + this.name + path;\n  this.compute.makeReq_(method, path, query, body, callback);\n};\n\nmodule.exports = Snapshot;",
-    "ctx": {
-      "type": "method",
-      "constructor": "Snapshot",
-      "cons": "Snapshot",
-      "name": "makeReq_",
-      "string": "Snapshot.prototype.makeReq_()"
     }
   }
 ]

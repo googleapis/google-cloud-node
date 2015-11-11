@@ -34,7 +34,7 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar arrify = require('arrify');\nvar extend = require('extend');\nvar is = require('is');",
+    "code": "'use strict';\n\nvar arrify = require('arrify');\nvar extend = require('extend');\nvar is = require('is');\nvar nodeutil = require('util');",
     "ctx": false
   },
   {
@@ -69,8 +69,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 27,
-    "codeStart": 31,
+    "line": 28,
+    "codeStart": 32,
     "code": "var Firewall = require('./firewall.js');",
     "ctx": {
       "type": "declaration",
@@ -111,8 +111,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 33,
-    "codeStart": 37,
+    "line": 34,
+    "codeStart": 38,
     "code": "var Network = require('./network.js');",
     "ctx": {
       "type": "declaration",
@@ -153,8 +153,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 39,
-    "codeStart": 43,
+    "line": 40,
+    "codeStart": 44,
     "code": "var Operation = require('./operation.js');",
     "ctx": {
       "type": "declaration",
@@ -195,14 +195,56 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 45,
-    "codeStart": 49,
+    "line": 46,
+    "codeStart": 50,
     "code": "var Region = require('./region.js');",
     "ctx": {
       "type": "declaration",
       "name": "Region",
       "value": "require('./region.js')",
       "string": "Region"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/service}",
+        "types": [
+          "module:common/service"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Fservice.html\">common/service</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/service}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 52,
+    "codeStart": 56,
+    "code": "var Service = require('../common/service.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Service",
+      "value": "require('../common/service.js')",
+      "string": "Service"
     }
   },
   {
@@ -237,8 +279,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 51,
-    "codeStart": 55,
+    "line": 58,
+    "codeStart": 62,
     "code": "var Snapshot = require('./snapshot.js');",
     "ctx": {
       "type": "declaration",
@@ -279,8 +321,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 57,
-    "codeStart": 61,
+    "line": 64,
+    "codeStart": 68,
     "code": "var streamRouter = require('../common/stream-router.js');",
     "ctx": {
       "type": "declaration",
@@ -321,8 +363,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 63,
-    "codeStart": 67,
+    "line": 70,
+    "codeStart": 74,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -363,82 +405,14 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 69,
-    "codeStart": 73,
+    "line": 76,
+    "codeStart": 80,
     "code": "var Zone = require('./zone.js');",
     "ctx": {
       "type": "declaration",
       "name": "Zone",
       "value": "require('./zone.js')",
       "string": "Zone"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "const",
-        "string": "{string}",
-        "html": "<p>{string}</p>"
-      },
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      }
-    ],
-    "description": {
-      "full": "",
-      "summary": "",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 75,
-    "codeStart": 79,
-    "code": "var COMPUTE_BASE_URL = 'https://www.googleapis.com/compute/v1/projects/';",
-    "ctx": {
-      "type": "declaration",
-      "name": "COMPUTE_BASE_URL",
-      "value": "'https://www.googleapis.com/compute/v1/projects/'",
-      "string": "COMPUTE_BASE_URL"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "const",
-        "string": "{array}",
-        "html": "<p>{array}</p>"
-      },
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      }
-    ],
-    "description": {
-      "full": "<p>Required scopes for Google Compute Engine API.</p>",
-      "summary": "<p>Required scopes for Google Compute Engine API.</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 81,
-    "codeStart": 86,
-    "code": "var SCOPES = ['https://www.googleapis.com/auth/compute'];",
-    "ctx": {
-      "type": "declaration",
-      "name": "SCOPES",
-      "value": "['https://www.googleapis.com/auth/compute']",
-      "string": "SCOPES"
     }
   },
   {
@@ -483,9 +457,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 88,
-    "codeStart": 107,
-    "code": "function Compute(options) {\n  if (!(this instanceof Compute)) {\n    options = util.normalizeArguments(this, options);\n    return new Compute(options);\n  }\n\n  this.makeAuthenticatedRequest_ = util.makeAuthenticatedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n\n  this.projectId = options.projectId;\n}",
+    "line": 82,
+    "codeStart": 101,
+    "code": "function Compute(options) {\n  if (!(this instanceof Compute)) {\n    options = util.normalizeArguments(this, options);\n    return new Compute(options);\n  }\n\n  var config = {\n    baseUrl: 'https://www.googleapis.com/compute/v1',\n    scopes: ['https://www.googleapis.com/auth/compute']\n  };\n\n  Service.call(this, config, options);\n}\n\nnodeutil.inherits(Compute, Service);",
     "ctx": {
       "type": "constructor",
       "name": "Compute",
@@ -676,9 +650,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 123,
-    "codeStart": 170,
-    "code": "Compute.prototype.createFirewall = function(name, config, callback) {\n  var self = this;\n\n  if (!is.string(name)) {\n    throw new Error('A firewall name must be provided.');\n  }\n\n  if (!is.object(config)) {\n    throw new Error('A firewall configuration object must be provided.');\n  }\n\n  var body = extend({}, config, {\n    name: name\n  });\n\n  if (body.protocols) {\n    body.allowed = arrify(body.allowed);\n\n    for (var protocol in body.protocols) {\n      var allowedConfig = {\n        IPProtocol: protocol\n      };\n\n      var ports = arrify(body.protocols[protocol]);\n      if (ports.length > 0) {\n        allowedConfig.ports = ports;\n      }\n\n      body.allowed.push(allowedConfig);\n    }\n\n    delete body.protocols;\n  }\n\n  if (body.ranges) {\n    body.sourceRanges = arrify(body.ranges);\n    delete body.ranges;\n  }\n\n  if (body.tags) {\n    body.sourceTags = arrify(body.tags);\n    delete body.tags;\n  }\n\n  var path = '/global/firewalls';\n\n  this.makeReq_('POST', path, null, body, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var firewall = self.firewall(name);\n\n    var operation = self.operation(resp.name);\n    operation.metadata = resp;\n\n    callback(null, firewall, operation, resp);\n  });\n};",
+    "line": 117,
+    "codeStart": 164,
+    "code": "Compute.prototype.createFirewall = function(name, config, callback) {\n  var self = this;\n\n  if (!is.string(name)) {\n    throw new Error('A firewall name must be provided.');\n  }\n\n  if (!is.object(config)) {\n    throw new Error('A firewall configuration object must be provided.');\n  }\n\n  var body = extend({}, config, {\n    name: name\n  });\n\n  if (body.protocols) {\n    body.allowed = arrify(body.allowed);\n\n    for (var protocol in body.protocols) {\n      var allowedConfig = {\n        IPProtocol: protocol\n      };\n\n      var ports = arrify(body.protocols[protocol]);\n      if (ports.length > 0) {\n        allowedConfig.ports = ports;\n      }\n\n      body.allowed.push(allowedConfig);\n    }\n\n    delete body.protocols;\n  }\n\n  if (body.ranges) {\n    body.sourceRanges = arrify(body.ranges);\n    delete body.ranges;\n  }\n\n  if (body.tags) {\n    body.sourceTags = arrify(body.tags);\n    delete body.tags;\n  }\n\n  this.request({\n    method: 'POST',\n    uri: '/global/firewalls',\n    json: body\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var firewall = self.firewall(name);\n\n    var operation = self.operation(resp.name);\n    operation.metadata = resp;\n\n    callback(null, firewall, operation, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Compute",
@@ -827,8 +801,8 @@
       },
       {
         "type": "example",
-        "string": "var config = {\n  range: '10.240.0.0/16'\n};\n\nfunction callback(err, network, operation, apiResponse) {\n  // `network` is a Network object.\n\n  // `operation` is an Operation object and can be used to check the status\n  // of network creation.\n}\n\ngce.createNetwork('new-network', config, callback);",
-        "html": "<p>var config = {<br />  range: &#39;10.240.0.0/16&#39;<br />};</p><p>function callback(err, network, operation, apiResponse) {<br />  // <code>network</code> is a Network object.</p><p>  // <code>operation</code> is an Operation object and can be used to check the status<br />  // of network creation.<br />}</p><p>gce.createNetwork(&#39;new-network&#39;, config, callback);</p>"
+        "string": "var config = {\n  range: '10.240.0.0/16'\n};\n\nfunction callback(err, network, operation, apiResponse) {\n  // `network` is a Network object.\n\n  // `operation` is an Operation object that can be used to check the status\n  // of network creation.\n}\n\ngce.createNetwork('new-network', config, callback);",
+        "html": "<p>var config = {<br />  range: &#39;10.240.0.0/16&#39;<br />};</p><p>function callback(err, network, operation, apiResponse) {<br />  // <code>network</code> is a Network object.</p><p>  // <code>operation</code> is an Operation object that can be used to check the status<br />  // of network creation.<br />}</p><p>gce.createNetwork(&#39;new-network&#39;, config, callback);</p>"
       }
     ],
     "description": {
@@ -841,9 +815,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 231,
-    "codeStart": 268,
-    "code": "Compute.prototype.createNetwork = function(name, config, callback) {\n  var self = this;\n\n  var body = extend({}, config, {\n    name: name\n  });\n\n  if (body.range) {\n    body.IPv4Range = body.range;\n    delete body.range;\n  }\n\n  if (body.gateway) {\n    body.gatewayIPv4 = body.gateway;\n    delete body.gateway;\n  }\n\n  this.makeReq_('POST', '/global/networks', null, body, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var network = self.network(name);\n\n    var operation = self.operation(resp.name);\n    operation.metadata = resp;\n\n    callback(null, network, operation, resp);\n  });\n};",
+    "line": 227,
+    "codeStart": 264,
+    "code": "Compute.prototype.createNetwork = function(name, config, callback) {\n  var self = this;\n\n  var body = extend({}, config, {\n    name: name\n  });\n\n  if (body.range) {\n    body.IPv4Range = body.range;\n    delete body.range;\n  }\n\n  if (body.gateway) {\n    body.gatewayIPv4 = body.gateway;\n    delete body.gateway;\n  }\n\n  this.request({\n    method: 'POST',\n    uri: '/global/networks',\n    json: body\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var network = self.network(name);\n\n    var operation = self.operation(resp.name);\n    operation.metadata = resp;\n\n    callback(null, network, operation, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Compute",
@@ -861,9 +835,9 @@
       },
       {
         "type": "param",
-        "string": "{string} name - Name of the existing firewall.",
+        "string": "{string} name - Name of the firewall.",
         "name": "name",
-        "description": "<ul>\n<li>Name of the existing firewall.</li>\n</ul>\n",
+        "description": "<ul>\n<li>Name of the firewall.</li>\n</ul>\n",
         "types": [
           "string"
         ],
@@ -889,8 +863,8 @@
       },
       {
         "type": "example",
-        "string": "var firewall = gce.firewall('existing-firewall');",
-        "html": "<p>var firewall = gce.firewall(&#39;existing-firewall&#39;);</p>"
+        "string": "var firewall = gce.firewall('firewall-name');",
+        "html": "<p>var firewall = gce.firewall(&#39;firewall-name&#39;);</p>"
       }
     ],
     "description": {
@@ -1084,7 +1058,7 @@
     "ignore": false,
     "line": 318,
     "codeStart": 387,
-    "code": "Compute.prototype.getAddresses = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  var path = '/aggregated/addresses';\n\n  this.makeReq_('GET', path, options, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var regions = resp.items || {};\n\n    var addresses = Object.keys(regions).reduce(function(acc, regionName) {\n      var region = self.region(regionName.replace('regions/', ''));\n      var regionAddresses = regions[regionName].addresses || [];\n\n      regionAddresses.forEach(function(address) {\n        var addressInstance = region.address(address.name);\n        addressInstance.metadata = address;\n        acc.push(addressInstance);\n      });\n\n      return acc;\n    }, []);\n\n    callback(null, addresses, nextQuery, resp);\n  });\n};",
+    "code": "Compute.prototype.getAddresses = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  this.request({\n    uri: '/aggregated/addresses',\n    qs: options\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var regions = resp.items || {};\n\n    var addresses = Object.keys(regions).reduce(function(acc, regionName) {\n      var region = self.region(regionName.replace('regions/', ''));\n      var regionAddresses = regions[regionName].addresses || [];\n\n      regionAddresses.forEach(function(address) {\n        var addressInstance = region.address(address.name);\n        addressInstance.metadata = address;\n        acc.push(addressInstance);\n      });\n\n      return acc;\n    }, []);\n\n    callback(null, addresses, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Compute",
@@ -1261,9 +1235,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 432,
-    "codeStart": 499,
-    "code": "Compute.prototype.getDisks = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  this.makeReq_('GET', '/aggregated/disks', options, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var zones = resp.items || {};\n\n    var disks = Object.keys(zones).reduce(function(acc, zoneName) {\n      var zone = self.zone(zoneName.replace('zones/', ''));\n      var disks = zones[zoneName].disks || [];\n\n      disks.forEach(function(disk) {\n        var diskInstance = zone.disk(disk.name);\n        diskInstance.metadata = disk;\n        acc.push(diskInstance);\n      });\n\n      return acc;\n    }, []);\n\n    callback(null, disks, nextQuery, resp);\n  });\n};",
+    "line": 433,
+    "codeStart": 500,
+    "code": "Compute.prototype.getDisks = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  this.request({\n    uri: '/aggregated/disks',\n    qs: options\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var zones = resp.items || {};\n\n    var disks = Object.keys(zones).reduce(function(acc, zoneName) {\n      var zone = self.zone(zoneName.replace('zones/', ''));\n      var disks = zones[zoneName].disks || [];\n\n      disks.forEach(function(disk) {\n        var diskInstance = zone.disk(disk.name);\n        diskInstance.metadata = disk;\n        acc.push(diskInstance);\n      });\n\n      return acc;\n    }, []);\n\n    callback(null, disks, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Compute",
@@ -1440,9 +1414,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 542,
-    "codeStart": 610,
-    "code": "Compute.prototype.getFirewalls = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  this.makeReq_('GET', '/global/firewalls', options, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var firewalls = (resp.items || []).map(function(firewall) {\n      var firewallInstance = self.firewall(firewall.name);\n      firewallInstance.metadata = firewall;\n      return firewallInstance;\n    });\n\n    callback(null, firewalls, nextQuery, resp);\n  });\n};",
+    "line": 546,
+    "codeStart": 614,
+    "code": "Compute.prototype.getFirewalls = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  this.request({\n    uri: '/global/firewalls',\n    qs: options\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var firewalls = (resp.items || []).map(function(firewall) {\n      var firewallInstance = self.firewall(firewall.name);\n      firewallInstance.metadata = firewall;\n      return firewallInstance;\n    });\n\n    callback(null, firewalls, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Compute",
@@ -1619,9 +1593,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 644,
-    "codeStart": 712,
-    "code": "Compute.prototype.getNetworks = function(options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  var self = this;\n  this.makeReq_('GET', '/global/networks', options, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var networks = (resp.items || []).map(function(network) {\n      var networkInstance = self.network(network.name);\n      networkInstance.metadata = network;\n      return networkInstance;\n    });\n\n    callback(null, networks, nextQuery, resp);\n  });\n};",
+    "line": 651,
+    "codeStart": 719,
+    "code": "Compute.prototype.getNetworks = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  this.request({\n    uri: '/global/networks',\n    qs: options\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var networks = (resp.items || []).map(function(network) {\n      var networkInstance = self.network(network.name);\n      networkInstance.metadata = network;\n      return networkInstance;\n    });\n\n    callback(null, networks, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Compute",
@@ -1798,9 +1772,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 745,
-    "codeStart": 813,
-    "code": "Compute.prototype.getOperations = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  var path = '/global/operations';\n\n  this.makeReq_('GET', path, options, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var operations = (resp.items || []).map(function(operation) {\n      var operationInstance = self.operation(operation.name);\n      operationInstance.metadata = operation;\n      return operationInstance;\n    });\n\n    callback(null, operations, nextQuery, resp);\n  });\n};",
+    "line": 756,
+    "codeStart": 824,
+    "code": "Compute.prototype.getOperations = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  this.request({\n    uri: '/global/operations',\n    qs: options\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var operations = (resp.items || []).map(function(operation) {\n      var operationInstance = self.operation(operation.name);\n      operationInstance.metadata = operation;\n      return operationInstance;\n    });\n\n    callback(null, operations, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Compute",
@@ -1977,9 +1951,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 849,
-    "codeStart": 917,
-    "code": "Compute.prototype.getRegions = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  this.makeReq_('GET', '/regions', options, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var regions = resp.items.map(function(region) {\n      var regionInstance = self.region(region.name);\n      regionInstance.metadata = region;\n      return regionInstance;\n    });\n\n    callback(null, regions, nextQuery, resp);\n  });\n};",
+    "line": 861,
+    "codeStart": 929,
+    "code": "Compute.prototype.getRegions = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  this.request({\n    uri: '/regions',\n    qs: options\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var regions = resp.items.map(function(region) {\n      var regionInstance = self.region(region.name);\n      regionInstance.metadata = region;\n      return regionInstance;\n    });\n\n    callback(null, regions, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Compute",
@@ -2156,9 +2130,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 949,
-    "codeStart": 1017,
-    "code": "Compute.prototype.getSnapshots = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n\n  this.makeReq_('GET', '/global/snapshots', options, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var snapshots = (resp.items || []).map(function(snapshot) {\n      var snapshotInstance = self.snapshot(snapshot.name);\n      snapshotInstance.metadata = snapshot;\n      return snapshotInstance;\n    });\n\n    callback(null, snapshots, nextQuery, resp);\n  });\n};",
+    "line": 964,
+    "codeStart": 1032,
+    "code": "Compute.prototype.getSnapshots = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  this.request({\n    uri: '/global/snapshots',\n    qs: options\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var snapshots = (resp.items || []).map(function(snapshot) {\n      var snapshotInstance = self.snapshot(snapshot.name);\n      snapshotInstance.metadata = snapshot;\n      return snapshotInstance;\n    });\n\n    callback(null, snapshots, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Compute",
@@ -2335,9 +2309,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1052,
-    "codeStart": 1119,
-    "code": "Compute.prototype.getVMs = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  var path = '/aggregated/instances';\n\n  this.makeReq_('GET', path, options, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var zones = resp.items || {};\n\n    var vms = Object.keys(zones).reduce(function(acc, zoneName) {\n      var zone = self.zone(zoneName.replace('zones/', ''));\n      var instances = zones[zoneName].instances || [];\n\n      instances.forEach(function(instance) {\n        var vmInstance = zone.vm(instance.name);\n        vmInstance.metadata = instance;\n        acc.push(vmInstance);\n      });\n\n      return acc;\n    }, []);\n\n    callback(null, vms, nextQuery, resp);\n  });\n};",
+    "line": 1069,
+    "codeStart": 1136,
+    "code": "Compute.prototype.getVMs = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  this.request({\n    uri: '/aggregated/instances',\n    qs: options\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var zones = resp.items || {};\n\n    var vms = Object.keys(zones).reduce(function(acc, zoneName) {\n      var zone = self.zone(zoneName.replace('zones/', ''));\n      var instances = zones[zoneName].instances || [];\n\n      instances.forEach(function(instance) {\n        var vmInstance = zone.vm(instance.name);\n        vmInstance.metadata = instance;\n        acc.push(vmInstance);\n      });\n\n      return acc;\n    }, []);\n\n    callback(null, vms, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Compute",
@@ -2514,9 +2488,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1164,
-    "codeStart": 1232,
-    "code": "Compute.prototype.getZones = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  this.makeReq_('GET', '/zones', options, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var zones = resp.items.map(function(zone) {\n      var zoneInstance = self.zone(zone.name);\n      zoneInstance.metadata = zone;\n      return zoneInstance;\n    });\n\n    callback(null, zones, nextQuery, resp);\n  });\n};",
+    "line": 1182,
+    "codeStart": 1250,
+    "code": "Compute.prototype.getZones = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  this.request({\n    uri: '/zones',\n    qs: options\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var zones = resp.items.map(function(zone) {\n      var zoneInstance = self.zone(zone.name);\n      zoneInstance.metadata = zone;\n      return zoneInstance;\n    });\n\n    callback(null, zones, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Compute",
@@ -2534,9 +2508,9 @@
       },
       {
         "type": "param",
-        "string": "{string} name - Name of the existing network.",
+        "string": "{string} name - Name of the network.",
         "name": "name",
-        "description": "<ul>\n<li>Name of the existing network.</li>\n</ul>\n",
+        "description": "<ul>\n<li>Name of the network.</li>\n</ul>\n",
         "types": [
           "string"
         ],
@@ -2576,8 +2550,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1264,
-    "codeStart": 1275,
+    "line": 1285,
+    "codeStart": 1296,
     "code": "Compute.prototype.network = function(name) {\n  return new Network(this, name);\n};",
     "ctx": {
       "type": "method",
@@ -2638,8 +2612,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1279,
-    "codeStart": 1290,
+    "line": 1300,
+    "codeStart": 1311,
     "code": "Compute.prototype.operation = function(name) {\n  return new Operation(this, name);\n};",
     "ctx": {
       "type": "method",
@@ -2700,8 +2674,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1294,
-    "codeStart": 1305,
+    "line": 1315,
+    "codeStart": 1326,
     "code": "Compute.prototype.region = function(name) {\n  return new Region(this, name);\n};",
     "ctx": {
       "type": "method",
@@ -2762,8 +2736,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1309,
-    "codeStart": 1320,
+    "line": 1330,
+    "codeStart": 1341,
     "code": "Compute.prototype.snapshot = function(name) {\n  return new Snapshot(this, name);\n};",
     "ctx": {
       "type": "method",
@@ -2824,8 +2798,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1324,
-    "codeStart": 1335,
+    "line": 1345,
+    "codeStart": 1356,
     "code": "Compute.prototype.zone = function(name) {\n  return new Zone(this, name);\n};",
     "ctx": {
       "type": "method",
@@ -2833,102 +2807,6 @@
       "cons": "Compute",
       "name": "zone",
       "string": "Compute.prototype.zone()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      },
-      {
-        "type": "param",
-        "string": "{string} method - Action.",
-        "name": "method",
-        "description": "<ul>\n<li>Action.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{string} path - Request path.",
-        "name": "path",
-        "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{*} query - Request query object.",
-        "name": "query",
-        "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>*</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{*} body - Request body contents.",
-        "name": "body",
-        "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>*</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{function} callback - The callback function.",
-        "name": "callback",
-        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
-        "types": [
-          "function"
-        ],
-        "typesDescription": "<code>function</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      }
-    ],
-    "description": {
-      "full": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
-      "summary": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 1339,
-    "codeStart": 1351,
-    "code": "Compute.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: COMPUTE_BASE_URL + this.projectId + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthenticatedRequest_(reqOpts, callback);\n};",
-    "ctx": {
-      "type": "method",
-      "constructor": "Compute",
-      "cons": "Compute",
-      "name": "makeReq_",
-      "string": "Compute.prototype.makeReq_()"
     }
   },
   {
@@ -2943,8 +2821,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 1365,
-    "codeStart": 1370,
+    "line": 1360,
+    "codeStart": 1365,
     "code": "streamRouter.extend(Compute, [\n  'getAddresses',\n  'getDisks',\n  'getFirewalls',\n  'getNetworks',\n  'getOperations',\n  'getRegions',\n  'getSnapshots',\n  'getVMs',\n  'getZones'\n]);\n\nmodule.exports = Compute;",
     "ctx": false
   }
