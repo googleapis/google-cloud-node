@@ -60,7 +60,12 @@ describe('Compute', function() {
     before(function(done) {
       address.create(function(err, disk, operation) {
         assert.ifError(err);
-        operation.onComplete(done);
+
+        operation
+          .on('error', done)
+          .on('complete', function() {
+            done();
+          });
       });
     });
 
@@ -110,7 +115,12 @@ describe('Compute', function() {
 
       disk.create(config, function(err, disk, operation) {
         assert.ifError(err);
-        operation.onComplete(done);
+
+        operation
+          .on('error', done)
+          .on('complete', function() {
+            done();
+          });
       });
     });
 
@@ -154,7 +164,12 @@ describe('Compute', function() {
 
       disk.snapshot(generateName()).create(function(err, snapshot, operation) {
         assert.ifError(err);
-        operation.onComplete(getOperationOptions(MAX_TIME_ALLOWED), done);
+
+        operation
+          .on('error', done)
+          .on('complete', function() {
+            done();
+          });
       });
     });
   });
@@ -192,7 +207,12 @@ describe('Compute', function() {
 
       firewall.create(CONFIG, function(err, firewall, operation) {
         assert.ifError(err);
-        operation.onComplete(getOperationOptions(MAX_TIME_ALLOWED), done);
+
+        operation
+          .on('error', done)
+          .on('complete', function() {
+            done();
+          });
       });
     });
 
@@ -239,7 +259,12 @@ describe('Compute', function() {
     before(function(done) {
       network.create(CONFIG, function(err, network, operation) {
         assert.ifError(err);
-        operation.onComplete(done);
+
+        operation
+          .on('error', done)
+          .on('complete', function() {
+            done();
+          });
       });
     });
 
@@ -402,7 +427,12 @@ describe('Compute', function() {
 
       vm.create(config, function(err, vm, operation) {
         assert.ifError(err);
-        operation.onComplete(done);
+
+        operation
+          .on('error', done)
+          .on('complete', function() {
+            done();
+          });
       });
     });
 
@@ -420,7 +450,11 @@ describe('Compute', function() {
           return;
         }
 
-        operation.onComplete(getOperationOptions(MAX_TIME_ALLOWED), done);
+        operation
+          .on('error', done)
+          .on('complete', function() {
+            done();
+          });
       });
     });
 
@@ -460,6 +494,7 @@ describe('Compute', function() {
 
     it('should attach and detach a disk', function(done) {
       var name = generateName();
+      var disk = zone.disk(name);
 
       // This test waits on a lot of operations.
       this.timeout(90000);
@@ -468,22 +503,29 @@ describe('Compute', function() {
         createDisk,
         attachDisk,
         detachDisk
-      ], done);
+      ], function(err) {
+        if (err) {
+          done(err);
+          return;
+        }
+
+        disk.delete(execAfterOperationComplete(done));
+      });
 
       function createDisk(callback) {
         var config = {
           os: 'ubuntu'
         };
 
-        zone.createDisk(name, config, execAfterOperationComplete(callback));
+        disk.create(config, execAfterOperationComplete(callback));
       }
 
       function attachDisk(callback) {
-        vm.attachDisk(zone.disk(name), execAfterOperationComplete(callback));
+        vm.attachDisk(disk, execAfterOperationComplete(callback));
       }
 
       function detachDisk(callback) {
-        vm.detachDisk(zone.disk(name), execAfterOperationComplete(callback));
+        vm.detachDisk(disk, execAfterOperationComplete(callback));
       }
     });
 
@@ -523,8 +565,7 @@ describe('Compute', function() {
       var MAX_TIME_ALLOWED = 90000 * 2;
       this.timeout(MAX_TIME_ALLOWED);
 
-      var options = getOperationOptions(MAX_TIME_ALLOWED);
-      vm.stop(execAfterOperationComplete(options, done));
+      vm.stop(execAfterOperationComplete(done));
     });
   });
 
@@ -624,18 +665,7 @@ describe('Compute', function() {
     });
   }
 
-  function getOperationOptions(maxTimeAllowed) {
-    var interval = 10000;
-
-    return {
-      maxAttempts: maxTimeAllowed / interval,
-      interval: interval
-    };
-  }
-
-  function execAfterOperationComplete(options, callback) {
-    callback = callback || options;
-
+  function execAfterOperationComplete(callback) {
     return function(err) {
       if (err) {
         callback(err);
@@ -643,7 +673,12 @@ describe('Compute', function() {
       }
 
       var operation = arguments[arguments.length - 2]; // [..., op, apiResponse]
-      operation.onComplete(options || {}, callback);
+
+      operation
+        .on('error', callback)
+        .on('complete', function() {
+          callback();
+        });
     };
   }
 });
