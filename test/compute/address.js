@@ -17,13 +17,43 @@
 'use strict';
 
 var assert = require('assert');
-var Address = require('../../lib/compute/address');
+var extend = require('extend');
+var mockery = require('mockery');
+var nodeutil = require('util');
+
+var ServiceObject = require('../../lib/common/service-object.js');
+var util = require('../../lib/common/util.js');
+
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Address', function() {
+  var Address;
   var address;
 
   var ADDRESS_NAME = 'us-central1';
-  var REGION = {};
+  var REGION = {
+    createAddress: util.noop
+  };
+
+  before(function() {
+    mockery.registerMock('../common/service-object.js', FakeServiceObject);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+
+    Address = require('../../lib/compute/address.js');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
 
   beforeEach(function() {
     address = new Address(REGION, ADDRESS_NAME);
@@ -38,19 +68,38 @@ describe('Address', function() {
       assert.strictEqual(address.name, ADDRESS_NAME);
     });
 
-    it('should default metadata to an empty object', function() {
-      assert.strictEqual(typeof address.metadata, 'object');
-      assert.strictEqual(Object.keys(address.metadata).length, 0);
+    it('should inherit from ServiceObject', function(done) {
+      var regionInstance = extend({}, REGION, {
+        createAddress: {
+          bind: function(context) {
+            assert.strictEqual(context, regionInstance);
+            done();
+          }
+        }
+      });
+
+      var address = new Address(regionInstance, ADDRESS_NAME);
+      assert(address instanceof ServiceObject);
+
+      var calledWith = address.calledWith_[0];
+
+      assert.strictEqual(calledWith.parent, regionInstance);
+      assert.strictEqual(calledWith.baseUrl, '/addresses');
+      assert.strictEqual(calledWith.id, ADDRESS_NAME);
+      assert.deepEqual(calledWith.methods, {
+        create: true,
+        exists: true,
+        get: true,
+        getMetadata: true
+      });
     });
   });
 
   describe('delete', function() {
     it('should make the correct API request', function(done) {
-      address.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'DELETE');
-        assert.strictEqual(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
+      address.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'DELETE');
+        assert.strictEqual(reqOpts.uri, '');
         done();
       };
 
@@ -62,7 +111,7 @@ describe('Address', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        address.makeReq_ = function(method, path, query, body, callback) {
+        address.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -89,7 +138,7 @@ describe('Address', function() {
       };
 
       beforeEach(function() {
-        address.makeReq_ = function(method, path, query, body, callback) {
+        address.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -115,107 +164,6 @@ describe('Address', function() {
           address.delete();
         });
       });
-    });
-  });
-
-  describe('getMetadata', function() {
-    it('should make the correct API request', function(done) {
-      address.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
-
-        done();
-      };
-
-      address.getMetadata(assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        address.makeReq_ = function(method, path, query, body, callback) {
-          callback(error, apiResponse);
-        };
-      });
-
-      it('should execute callback with error and API response', function(done) {
-        address.getMetadata(function(err, metadata, apiResponse_) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(metadata, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          address.getMetadata();
-        });
-      });
-    });
-
-    describe('success', function() {
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        address.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should update the metadata to the API response', function(done) {
-        address.getMetadata(function(err) {
-          assert.ifError(err);
-          assert.strictEqual(address.metadata, apiResponse);
-          done();
-        });
-      });
-
-      it('should exec callback with metadata and API response', function(done) {
-        address.getMetadata(function(err, metadata, apiResponse_) {
-          assert.ifError(err);
-          assert.strictEqual(metadata, apiResponse);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          address.getMetadata();
-        });
-      });
-    });
-  });
-
-  describe('makeReq_', function() {
-    it('should make the correct request to Compute', function(done) {
-      var expectedPathPrefix = '/addresses/' + address.name;
-
-      var method = 'POST';
-      var path = '/test';
-      var query = {
-        a: 'b',
-        c: 'd'
-      };
-      var body = {
-        a: 'b',
-        c: 'd'
-      };
-
-      address.region.makeReq_ = function(method_, path_, query_, body_, cb) {
-        assert.strictEqual(method_, method);
-        assert.strictEqual(path_, expectedPathPrefix + path);
-        assert.strictEqual(query_, query);
-        assert.strictEqual(body_, body);
-        cb();
-      };
-
-      address.makeReq_(method, path, query, body, done);
     });
   });
 });

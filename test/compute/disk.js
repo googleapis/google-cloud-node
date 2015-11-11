@@ -17,21 +17,60 @@
 'use strict';
 
 var assert = require('assert');
+var extend = require('extend');
 var format = require('string-format-obj');
+var mockery = require('mockery');
+var nodeutil = require('util');
 
-var Disk = require('../../lib/compute/disk');
-var util = require('../../lib/common/util');
+var ServiceObject = require('../../lib/common/service-object.js');
+var util = require('../../lib/common/util.js');
+
+function FakeSnapshot() {
+  this.calledWith_ = [].slice.call(arguments);
+}
+
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Disk', function() {
+  var Disk;
   var disk;
 
-  var COMPUTE = { projectId: 'project-id' };
-  var ZONE = { compute: COMPUTE, name: 'us-central1-a' };
+  var COMPUTE = {
+    projectId: 'project-id'
+  };
+
+  var ZONE = {
+    compute: COMPUTE,
+    name: 'us-central1-a',
+    createDisk: util.noop
+  };
+
   var DISK_NAME = 'disk-name';
   var DISK_FULL_NAME = format('projects/{pId}/zones/{zName}/disks/{dName}', {
     pId: COMPUTE.projectId,
     zName: ZONE.name,
     dName: DISK_NAME
+  });
+
+  before(function() {
+    mockery.registerMock('../common/service-object.js', FakeServiceObject);
+    mockery.registerMock('./snapshot.js', FakeSnapshot);
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+
+    Disk = require('../../lib/compute/disk.js');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
   });
 
   beforeEach(function() {
@@ -45,11 +84,6 @@ describe('Disk', function() {
 
     it('should localize the name', function() {
       assert.strictEqual(disk.name, DISK_NAME);
-    });
-
-    it('should default metadata to an empty object', function() {
-      assert.strictEqual(typeof disk.metadata, 'object');
-      assert.strictEqual(Object.keys(disk.metadata).length, 0);
     });
 
     it('should format the disk name', function() {
@@ -68,6 +102,32 @@ describe('Disk', function() {
       var disk = new Disk(ZONE, DISK_NAME);
       assert(disk.formattedName, formattedName);
     });
+
+    it('should inherit from ServiceObject', function(done) {
+      var zoneInstance = extend({}, ZONE, {
+        createDisk: {
+          bind: function(context) {
+            assert.strictEqual(context, zoneInstance);
+            done();
+          }
+        }
+      });
+
+      var disk = new Disk(zoneInstance, DISK_NAME);
+      assert(disk instanceof ServiceObject);
+
+      var calledWith = disk.calledWith_[0];
+
+      assert.strictEqual(calledWith.parent, zoneInstance);
+      assert.strictEqual(calledWith.baseUrl, '/disks');
+      assert.strictEqual(calledWith.id, DISK_NAME);
+      assert.deepEqual(calledWith.methods, {
+        create: true,
+        exists: true,
+        get: true,
+        getMetadata: true
+      });
+    });
   });
 
   describe('formatName_', function() {
@@ -79,11 +139,10 @@ describe('Disk', function() {
 
   describe('createSnapshot', function() {
     it('should make the correct API request', function(done) {
-      disk.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'POST');
-        assert.strictEqual(path, '/createSnapshot');
-        assert.strictEqual(query, null);
-        assert.deepEqual(body, { name: 'test', a: 'b' });
+      disk.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/createSnapshot');
+        assert.deepEqual(reqOpts.json, { name: 'test', a: 'b' });
         done();
       };
 
@@ -95,7 +154,7 @@ describe('Disk', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        disk.makeReq_ = function(method, path, query, body, callback) {
+        disk.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -123,7 +182,7 @@ describe('Disk', function() {
       };
 
       beforeEach(function() {
-        disk.makeReq_ = function(method, path, query, body, callback) {
+        disk.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -132,7 +191,7 @@ describe('Disk', function() {
         var snapshot = {};
         var operation = {};
 
-        disk.zone.compute.snapshot = function(name) {
+        disk.snapshot = function(name) {
           assert.strictEqual(name, 'test');
           return snapshot;
         };
@@ -163,16 +222,13 @@ describe('Disk', function() {
   });
 
   describe('delete', function() {
-    it('should make the correct API request', function(done) {
-      disk.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'DELETE');
-        assert.strictEqual(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
+    it('should call ServiceObject.delete', function(done) {
+      FakeServiceObject.prototype.delete = function() {
+        assert.strictEqual(this, disk);
         done();
       };
 
-      disk.delete(assert.ifError);
+      disk.delete();
     });
 
     describe('error', function() {
@@ -180,7 +236,7 @@ describe('Disk', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        disk.makeReq_ = function(method, path, query, body, callback) {
+        FakeServiceObject.prototype.delete = function(callback) {
           callback(error, apiResponse);
         };
       });
@@ -207,7 +263,7 @@ describe('Disk', function() {
       };
 
       beforeEach(function() {
-        disk.makeReq_ = function(method, path, query, body, callback) {
+        FakeServiceObject.prototype.delete = function(callback) {
           callback(null, apiResponse);
         };
       });
@@ -237,104 +293,14 @@ describe('Disk', function() {
     });
   });
 
-  describe('getMetadata', function() {
-    it('should make the correct API request', function(done) {
-      disk.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
+  describe('snapshot', function() {
+    var NAME = 'snapshot-name';
 
-        done();
-      };
-
-      disk.getMetadata(assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        disk.makeReq_ = function(method, path, query, body, callback) {
-          callback(error, apiResponse);
-        };
-      });
-
-      it('should execute callback with error and API response', function(done) {
-        disk.getMetadata(function(err, metadata, apiResponse_) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(metadata, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          disk.getMetadata();
-        });
-      });
-    });
-
-    describe('success', function() {
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        disk.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should update the metadata to the API response', function(done) {
-        disk.getMetadata(function(err) {
-          assert.ifError(err);
-          assert.strictEqual(disk.metadata, apiResponse);
-          done();
-        });
-      });
-
-      it('should exec callback with metadata and API response', function(done) {
-        disk.getMetadata(function(err, metadata, apiResponse_) {
-          assert.ifError(err);
-          assert.strictEqual(metadata, apiResponse);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          disk.getMetadata();
-        });
-      });
-    });
-  });
-
-  describe('makeReq_', function() {
-    it('should make the correct request to Compute', function(done) {
-      var expectedPathPrefix = '/disks/' + disk.name;
-
-      var method = 'POST';
-      var path = '/test';
-      var query = {
-        a: 'b',
-        c: 'd'
-      };
-      var body = {
-        a: 'b',
-        c: 'd'
-      };
-
-      disk.zone.makeReq_ = function(method_, path_, query_, body_, cb) {
-        assert.strictEqual(method_, method);
-        assert.strictEqual(path_, expectedPathPrefix + path);
-        assert.strictEqual(query_, query);
-        assert.strictEqual(body_, body);
-        cb();
-      };
-
-      disk.makeReq_(method, path, query, body, done);
+    it('should return a Snapshot object', function() {
+      var snapshot = disk.snapshot(NAME);
+      assert(snapshot instanceof FakeSnapshot);
+      assert.strictEqual(snapshot.calledWith_[0], disk);
+      assert.strictEqual(snapshot.calledWith_[1], NAME);
     });
   });
 });
