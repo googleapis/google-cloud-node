@@ -34,8 +34,50 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar is = require('is');",
+    "code": "'use strict';\n\nvar is = require('is');\nvar nodeutil = require('util');",
     "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/serviceObject}",
+        "types": [
+          "module:common/serviceObject"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2FserviceObject.html\">common/serviceObject</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/serviceObject}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 26,
+    "codeStart": 30,
+    "code": "var ServiceObject = require('../common/service-object.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "ServiceObject",
+      "value": "require('../common/service-object.js')",
+      "string": "ServiceObject"
+    }
   },
   {
     "tags": [
@@ -83,8 +125,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 25,
-    "codeStart": 35
+    "line": 32,
+    "codeStart": 42
   },
   {
     "tags": [
@@ -109,13 +151,111 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 35,
-    "codeStart": 53,
-    "code": "function Job(bigQuery, id) {\n  this.bigQuery = bigQuery;\n  this.id = id;\n  this.metadata = {};\n}",
+    "line": 42,
+    "codeStart": 60,
+    "code": "function Job(bigQuery, id) {\n  var methods = {",
     "ctx": {
       "type": "constructor",
       "name": "Job",
       "string": "Job()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this\n    request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this     request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} callback.exists - Whether the job exists or not.",
+        "name": "callback.exists",
+        "description": "<ul>\n<li>Whether the job exists or not.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "job.exists(function(err, exists) {});",
+        "html": "<p>job.exists(function(err, exists) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Check if the job exists.</p>",
+      "summary": "<p>Check if the job exists.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 62,
+    "codeStart": 73,
+    "code": "exists: true,",
+    "ctx": {
+      "type": "property",
+      "name": "exists",
+      "value": "true,",
+      "string": "exists"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "example",
+        "string": "job.get(function(err, job, apiResponse) {\n  if (!err) {\n    // `job.metadata` has been populated.\n  }\n});",
+        "html": "<p>job.get(function(err, job, apiResponse) {<br />  if (!err) {<br />    // <code>job.metadata</code> has been populated.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a job if it exists.</p>",
+      "summary": "<p>Get a job if it exists.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 75,
+    "codeStart": 85,
+    "code": "get: true,",
+    "ctx": {
+      "type": "property",
+      "name": "get",
+      "value": "true,",
+      "string": "get"
     }
   },
   {
@@ -141,9 +281,9 @@
       },
       {
         "type": "param",
-        "string": "{?error} callback.err - An error returned while making this request",
+        "string": "{?error} callback.err - An error returned while making this\n    request.",
         "name": "callback.err",
-        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "description": "<ul>\n<li>An error returned while making this     request.</li>\n</ul>\n",
         "types": [
           "error"
         ],
@@ -197,15 +337,14 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 59,
-    "codeStart": 74,
-    "code": "Job.prototype.getMetadata = function(callback) {\n  var that = this;\n\n  var path = '/jobs/' + this.id;\n\n  this.bigQuery.makeReq_('GET', path, null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, that.metadata, resp);\n  });\n};",
+    "line": 87,
+    "codeStart": 103,
+    "code": "getMetadata: true\n  };\n\n  ServiceObject.call(this, {\nparent: bigQuery,\nbaseUrl: '/jobs',\nid: id,\nmethods: methods\n  });\n\n  this.bigQuery = bigQuery;\n}\n\nnodeutil.inherits(Job, ServiceObject);",
     "ctx": {
-      "type": "method",
-      "constructor": "Job",
-      "cons": "Job",
+      "type": "property",
       "name": "getMetadata",
-      "string": "Job.prototype.getMetadata()"
+      "value": "true",
+      "string": "getMetadata"
     }
   },
   {
@@ -385,8 +524,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 91,
-    "codeStart": 161,
+    "line": 118,
+    "codeStart": 188,
     "code": "Job.prototype.getQueryResults = function(options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.job = this;\n\n  return this.bigQuery.query(options, callback);\n};\n\nmodule.exports = Job;",
     "ctx": {
       "type": "method",
