@@ -17,14 +17,52 @@
 'use strict';
 
 var assert = require('assert');
+var extend = require('extend');
+var mockery = require('mockery');
 var util = require('../../lib/common/util.js');
+
+var makeAuthenticatedRequestFactoryCache = util.makeAuthenticatedRequestFactory;
+var makeAuthenticatedRequestFactoryOverride;
+util.makeAuthenticatedRequestFactory = function() {
+  if (makeAuthenticatedRequestFactoryOverride) {
+    return makeAuthenticatedRequestFactoryOverride.apply(this, arguments);
+  } else {
+    return makeAuthenticatedRequestFactoryCache.apply(this, arguments);
+  }
+};
 
 describe('Dataset', function() {
   var Dataset;
+  var dataset;
+
+  var OPTIONS = {
+    projectId: 'project-id',
+    apiEndpoint: 'endpoint',
+    credentials: {},
+    keyFilename: 'key/file',
+    email: 'email',
+    namespace: 'namespace'
+  };
+
+  before(function() {
+    mockery.registerMock('../common/util.js', util);
+
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+
+    Dataset = require('../../lib/datastore/dataset');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
 
   beforeEach(function() {
-    delete require.cache[require.resolve('../../lib/datastore/dataset')];
-    Dataset = require('../../lib/datastore/dataset');
+    makeAuthenticatedRequestFactoryOverride = null;
+    dataset = new Dataset(OPTIONS);
   });
 
   describe('instantiation', function() {
@@ -34,17 +72,53 @@ describe('Dataset', function() {
       }, /Sorry, we cannot connect/);
     });
 
-    it('should set default API connection details', function() {
-      var options = { a: 'b', c: 'd', projectId: 'project-id' };
-      var mockApiEndpoint = 'http://localhost:8080';
+    it('should set default API connection details', function(done) {
+      var determineApiEndpoint_ = Dataset.prototype.determineApiEndpoint_;
 
-      Dataset.determineApiEndpoint_ = function(opts) {
-        assert.deepEqual(opts, options);
-        return mockApiEndpoint;
+      Dataset.prototype.determineApiEndpoint_ = function(customApiEndpoint) {
+        Dataset.prototype.determineApiEndpoint_ = determineApiEndpoint_;
+
+        assert.strictEqual(customApiEndpoint, OPTIONS.apiEndpoint);
+        done();
       };
 
-      var ds = new Dataset(options);
-      assert.equal(ds.apiEndpoint, mockApiEndpoint);
+      new Dataset(OPTIONS);
+    });
+
+    it('should create an authenticated request factory', function() {
+      var authenticatedRequest = {};
+      var customEndpoint = 'custom-endpoint';
+
+      var determineApiEndpoint_ = Dataset.prototype.determineApiEndpoint_;
+      Dataset.prototype.determineApiEndpoint_ = function() {
+        Dataset.prototype.determineApiEndpoint_ = determineApiEndpoint_;
+        this.customEndpoint = customEndpoint;
+      };
+
+      makeAuthenticatedRequestFactoryOverride = function(config) {
+        assert.strictEqual(config.customEndpoint, customEndpoint);
+        assert.strictEqual(config.credentials, OPTIONS.credentials);
+        assert.strictEqual(config.keyFile, OPTIONS.keyFilename);
+        assert.strictEqual(config.email, OPTIONS.email);
+
+        assert.deepEqual(config.scopes, [
+          'https://www.googleapis.com/auth/datastore',
+          'https://www.googleapis.com/auth/userinfo.email'
+        ]);
+
+        return authenticatedRequest;
+      };
+
+      var ds = new Dataset(OPTIONS);
+      assert.strictEqual(ds.makeAuthenticatedRequest_, authenticatedRequest);
+    });
+
+    it('should localize the project id', function() {
+      assert.strictEqual(dataset.projectId, OPTIONS.projectId);
+    });
+
+    it('should localize the namespace', function() {
+      assert.strictEqual(dataset.namespace, OPTIONS.namespace);
     });
   });
 
@@ -196,35 +270,47 @@ describe('Dataset', function() {
   describe('determineApiEndpoint_', function() {
     it('should default to googleapis.com', function() {
       delete process.env.DATASTORE_HOST;
+
+      dataset.determineApiEndpoint_();
+
       var expectedApiEndpoint = 'https://www.googleapis.com';
-      assert.equal(Dataset.determineApiEndpoint_({}), expectedApiEndpoint);
+      assert.strictEqual(dataset.apiEndpoint, expectedApiEndpoint);
     });
 
     it('should remove slashes from the apiEndpoint', function() {
       var expectedApiEndpoint = 'http://localhost:8080';
 
-      assert.equal(Dataset.determineApiEndpoint_({
-        apiEndpoint: expectedApiEndpoint
-      }), expectedApiEndpoint);
+      dataset.determineApiEndpoint_(expectedApiEndpoint);
+      assert.strictEqual(dataset.apiEndpoint, expectedApiEndpoint);
 
-      assert.equal(Dataset.determineApiEndpoint_({
-        apiEndpoint: 'http://localhost:8080/'
-      }), expectedApiEndpoint);
+      dataset.determineApiEndpoint_('http://localhost:8080/');
+      assert.strictEqual(dataset.apiEndpoint, expectedApiEndpoint);
 
-      assert.equal(Dataset.determineApiEndpoint_({
-        apiEndpoint: 'http://localhost:8080//'
-      }), expectedApiEndpoint);
+      dataset.determineApiEndpoint_('http://localhost:8080//');
+      assert.strictEqual(dataset.apiEndpoint, expectedApiEndpoint);
     });
 
     it('should default to http if protocol is unspecified', function() {
-      var apiEndpoint = Dataset.determineApiEndpoint_({
-        apiEndpoint: 'localhost:8080'
-      });
-      assert.equal(apiEndpoint, 'http://localhost:8080');
+      dataset.determineApiEndpoint_('localhost:8080');
+      assert.strictEqual(dataset.apiEndpoint, 'http://localhost:8080');
+    });
+
+    it('should set customEndpoint when using explicit endpoint', function() {
+      dataset.determineApiEndpoint_('http://localhost:8080');
+      assert.strictEqual(dataset.customEndpoint, true);
+    });
+
+    it('should not set customEndpoint when using default endpoint', function() {
+      var options = extend({}, OPTIONS);
+      delete options.apiEndpoint;
+
+      var dataset = new Dataset(options);
+      dataset.determineApiEndpoint_();
+      assert.strictEqual(dataset.customEndpoint, undefined);
     });
 
     describe('with DATASTORE_HOST environment variable', function() {
-      var DATASTORE_HOST = 'http://localhost:8080';
+      var DATASTORE_HOST = 'http://localhost:9090';
 
       before(function() {
         process.env.DATASTORE_HOST = DATASTORE_HOST;
@@ -235,15 +321,19 @@ describe('Dataset', function() {
       });
 
       it('should use the DATASTORE_HOST env var', function() {
-        assert.equal(Dataset.determineApiEndpoint_({}), DATASTORE_HOST);
+        dataset.determineApiEndpoint_();
+        assert.strictEqual(dataset.apiEndpoint, DATASTORE_HOST);
       });
 
       it('should favor an explicit apiEndpoint option', function() {
-        var expectedApiEndpoint = 'http://apiendpointoverride';
+        var explicitApiEndpoint = 'http://apiendpointoverride';
+        dataset.determineApiEndpoint_(explicitApiEndpoint);
+        assert.strictEqual(dataset.apiEndpoint, explicitApiEndpoint);
+      });
 
-        assert.equal(Dataset.determineApiEndpoint_({
-          apiEndpoint: expectedApiEndpoint
-        }), expectedApiEndpoint);
+      it('should set customEndpoint', function() {
+        dataset.determineApiEndpoint_();
+        assert.strictEqual(dataset.customEndpoint, true);
       });
     });
   });
