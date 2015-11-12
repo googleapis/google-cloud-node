@@ -135,6 +135,25 @@ angular.module('gcloud.docs')
       ]
     },
 
+    logging: {
+      title: 'Logging',
+      _url: '{baseUrl}/logging',
+      pages: [
+        {
+          title: 'Entry',
+          url: '/entry'
+        },
+        {
+          title: 'Log',
+          url: '/log'
+        },
+        {
+          title: 'Sink',
+          url: '/sink'
+        }
+      ]
+    },
+
     prediction: {
       title: 'Prediction',
       _url: '{baseUrl}/prediction',
@@ -275,7 +294,7 @@ angular.module('gcloud.docs')
       // introduce Storage#Channel.
       '>=0.26.0': ['storageWithChannels'],
 
-      // introduce prediction api.
-      '>=0.27.0': ['prediction']
+      // introduce prediction & logging api.
+      '>=0.27.0': ['prediction', 'logging']
     }
   });

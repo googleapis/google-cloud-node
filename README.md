@@ -17,6 +17,7 @@ This client supports the following Google Cloud Platform services:
 * [Google Cloud Storage](#google-cloud-storage)
 * [Google Compute Engine](#google-compute-engine)
 * [Google Prediction API](#google-prediction-api)
+* [Google Cloud Logging](#google-cloud-logging-beta) (Beta)
 * [Google Cloud Resource Manager](#google-cloud-resource-manager-beta) (Beta)
 * [Google Cloud Search](#google-cloud-search-alpha) (Alpha)
 
@@ -385,12 +386,62 @@ model.query('Hello', function(err, results) {
     // ]
   }
 });
+
+
+## Google Cloud Logging (Beta)
+
+> **This is a Beta release of Google Cloud Logging.** This API is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
+
+- [API Documentation][gcloud-logging-docs]
+- [Official Documentation][cloud-logging-docs]
+
+```js
+// Authenticating on a global-basis. You can also authenticate on a per-API-
+// basis (see Authentication section above).
+
+var gcloud = require('gcloud')({
+  projectId: 'my-project',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+var logging = gcloud.logging();
+
+// Create a sink using a Bucket as a destination.
+var gcs = gcloud.storage();
+
+logging.createSink('my-new-sink', {
+  destination: gcs.bucket('my-sink')
+}, function(err, sink) {});
+
+// Write a critical entry to a log.
+var syslog = logging.log('syslog');
+
+var resource = {
+  type: 'gce_instance',
+  labels: {
+    zone: 'global',
+    instance_id: 3
+  }
+};
+
+var entry = syslog.entry(resource, {
+  delegate: process.env.user
+});
+
+syslog.critical(entry, function(err) {});
+
+// Get all entries in your project.
+logging.getEntries(function(err, entries) {
+  if (!err) {
+    // `entries` contains all of the entries from the logs in your project.
+  }
+});
 ```
 
 
 ## Google Cloud Resource Manager (Beta)
 
-> This is a *Beta* release of Google Cloud Resource Manager. This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
+> **This is a Beta release of Google Cloud Resource Manager.** This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
 
 - [API Documentation][gcloud-resource-docs]
 - [Official Documentation][cloud-resource-docs]
@@ -426,7 +477,7 @@ project.getMetadata(function(err, metadata) {
 
 ## Google Cloud Search (Alpha)
 
-> This is an *Alpha* release of Google Cloud Search. This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
+> **This is an Alpha release of Google Cloud Search.** This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
 
 - [API Documentation][gcloud-search-docs]
 - [Official Documentation][cloud-search-docs]
@@ -485,6 +536,7 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [gcloud-datastore-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/datastore
 [gcloud-dns-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/dns
 [gcloud-prediction-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/prediction
+[gcloud-logging-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/logging
 [gcloud-pubsub-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/pubsub
 [gcloud-resource-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/resource
 [gcloud-search-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/search
@@ -513,6 +565,8 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [cloud-dns-docs]: https://cloud.google.com/dns/docs
 
 [cloud-prediction-docs]: https://cloud.google.com/prediction/docs
+
+[cloud-logging-docs]: https://cloud.google.com/logging/docs
 
 [cloud-pubsub-docs]: https://cloud.google.com/pubsub/docs
 
