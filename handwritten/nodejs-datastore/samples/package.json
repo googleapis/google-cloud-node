@@ -1,0 +1,11 @@
+{
+  "name": "nodejs-docs-samples-datastore",
+  "description": "Node.js samples for Google Cloud Datastore.",
+  "version": "0.0.1",
+  "private": true,
+  "license": "Apache Version 2.0",
+  "dependencies": {
+    "async": "^1.5.0",
+    "gcloud": "stephenplusplus/gcloud-node#spp--datastore-v1beta3"
+  }
+}
