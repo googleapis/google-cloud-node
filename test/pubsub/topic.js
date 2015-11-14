@@ -17,60 +17,105 @@
 'use strict';
 
 var assert = require('assert');
+var extend = require('extend');
 var mockery = require('mockery');
+var nodeutil = require('util');
+
 var util = require('../../lib/common/util.js');
-var Topic;
+var ServiceObject = require('../../lib/common/service-object.js');
 
 function FakeIAM() {
   this.calledWith_ = [].slice.call(arguments);
 }
 
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeServiceObject, ServiceObject);
+
 describe('Topic', function() {
-  var PROJECT_ID = 'test-project';
-  var TOPIC_NAME = 'test-topic';
-  var TOPIC_FULL_NAME = 'projects/' + PROJECT_ID + '/topics/' + TOPIC_NAME;
-  var pubsubMock = {
-    projectId: PROJECT_ID,
-    makeReq_: util.noop
-  };
+  var Topic;
   var topic;
 
+  var PROJECT_ID = 'test-project';
+  var TOPIC_NAME = 'test-topic';
+  var PUBSUB = {
+    projectId: PROJECT_ID,
+    createTopic: util.noop
+  };
+
   before(function() {
+    mockery.registerMock('../common/service-object.js', FakeServiceObject);
     mockery.registerMock('./iam', FakeIAM);
+
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
     });
+
     Topic = require('../../lib/pubsub/topic');
   });
 
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
+
   beforeEach(function() {
-    topic = new Topic(pubsubMock, TOPIC_NAME);
+    topic = new Topic(PUBSUB, TOPIC_NAME);
   });
 
   describe('initialization', function() {
+    it('should inherit from ServiceObject', function(done) {
+      var pubsubInstance = extend({}, PUBSUB, {
+        createTopic: {
+          bind: function(context) {
+            assert.strictEqual(context, pubsubInstance);
+            done();
+          }
+        }
+      });
+
+      var topic = new Topic(pubsubInstance, TOPIC_NAME);
+      assert(topic instanceof ServiceObject);
+
+      var calledWith = topic.calledWith_[0];
+
+      assert.strictEqual(calledWith.parent, pubsubInstance);
+      assert.strictEqual(calledWith.baseUrl, '/topics');
+      assert.strictEqual(calledWith.id, TOPIC_NAME);
+      assert.deepEqual(calledWith.methods, {
+        create: true,
+        delete: true,
+        exists: true,
+        get: true,
+        getMetadata: true
+      });
+    });
+
+    it('should create an iam object', function() {
+      assert.deepEqual(topic.iam.calledWith_, [
+        PUBSUB,
+        {
+          baseUrl: '/topics',
+          id: TOPIC_NAME
+        }
+      ]);
+    });
+
     it('should format name', function(done) {
       var formatName_ = Topic.formatName_;
       Topic.formatName_ = function() {
         Topic.formatName_ = formatName_;
         done();
       };
-      new Topic(pubsubMock, TOPIC_NAME);
-    });
-
-    it('should assign projectId to `this`', function() {
-      assert.equal(topic.projectId, PROJECT_ID);
+      new Topic(PUBSUB, TOPIC_NAME);
     });
 
     it('should assign pubsub object to `this`', function() {
-      assert.deepEqual(topic.pubsub, pubsubMock);
-    });
-
-    it('should create an iam object', function() {
-      assert.deepEqual(topic.iam.calledWith_, [
-        pubsubMock,
-        TOPIC_FULL_NAME
-      ]);
+      assert.deepEqual(topic.pubsub, PUBSUB);
     });
   });
 
@@ -110,154 +155,6 @@ describe('Topic', function() {
     });
   });
 
-  describe('publish', function() {
-    var message = 'howdy';
-    var messageObject = { data: message };
-
-    it('should throw if no message is provided', function() {
-      assert.throws(function() {
-        topic.publish();
-      }, /Cannot publish without a message/);
-
-      assert.throws(function() {
-        topic.publish([]);
-      }, /Cannot publish without a message/);
-    });
-
-    it('should throw if a message has no data', function() {
-      assert.throws(function() {
-        topic.publish({});
-      }, /Cannot publish message without a `data` property/);
-    });
-
-    it('should send correct api request', function(done) {
-      topic.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'POST');
-        assert.equal(path, topic.name + ':publish');
-        assert.strictEqual(query, null);
-        assert.deepEqual(body, {
-          messages: [
-            { data: new Buffer(JSON.stringify(message)).toString('base64') }
-          ]
-        });
-        done();
-      };
-
-      topic.publish(messageObject, assert.ifError);
-    });
-
-    it('should execute callback', function(done) {
-      topic.makeReq_ = function(method, path, query, body, callback) {
-        callback();
-      };
-
-      topic.publish(messageObject, done);
-    });
-
-    it('should execute callback with apiResponse', function(done) {
-      var resp = { success: true };
-      topic.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, resp);
-      };
-
-      topic.publish(messageObject, function(err, ackIds, apiResponse) {
-        assert.deepEqual(resp, apiResponse);
-        done();
-      });
-    });
-  });
-
-  describe('delete', function() {
-    it('should delete a topic', function(done) {
-      topic.makeReq_ = function(method, path) {
-        assert.equal(method, 'DELETE');
-        assert.equal(path, topic.name);
-        done();
-      };
-      topic.delete();
-    });
-
-    it('should call the callback', function(done) {
-      topic.makeReq_ = function(method, path, q, body, callback) {
-        callback();
-      };
-      topic.delete(done);
-    });
-
-    it('should call the callback with apiResponse', function(done) {
-      var resp = { success: true };
-      topic.makeReq_ = function(method, path, q, body, callback) {
-        callback(null, resp);
-      };
-      topic.delete(function(err, apiResponse) {
-        assert.deepEqual(resp, apiResponse);
-        done();
-      });
-    });
-  });
-
-  describe('getMetadata', function() {
-    it('should make the correct API request', function(done) {
-      topic.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, topic.name);
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
-
-        done();
-      };
-
-      topic.getMetadata(assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        topic.makeReq_ = function(method, path, query, body, callback) {
-          callback(error, apiResponse);
-        };
-      });
-
-      it('should execute callback with error & API response', function(done) {
-        topic.getMetadata(function(err, metadata, apiResponse_) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(metadata, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-    });
-
-    describe('success', function() {
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        topic.makeReq_ = function(method, path, query, body, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should assign the response to the metadata property', function(done) {
-        topic.getMetadata(function(err) {
-          assert.ifError(err);
-          assert.strictEqual(topic.metadata, apiResponse);
-          done();
-        });
-      });
-
-      it('should exec callback with metadata & API response', function(done) {
-        topic.getMetadata(function(err, metadata, apiResponse_) {
-          assert.ifError(err);
-          assert.strictEqual(metadata, apiResponse);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-    });
-  });
-
   describe('getSubscriptions', function() {
     it('should accept just a callback', function(done) {
       topic.pubsub.getSubscriptions = function(options, callback) {
@@ -280,6 +177,80 @@ describe('Topic', function() {
       };
 
       topic.getSubscriptions(opts, done);
+    });
+  });
+
+  describe('publish', function() {
+    var message = 'howdy';
+    var messageObject = { data: message };
+
+    it('should throw if no message is provided', function() {
+      assert.throws(function() {
+        topic.publish();
+      }, /Cannot publish without a message/);
+
+      assert.throws(function() {
+        topic.publish([]);
+      }, /Cannot publish without a message/);
+    });
+
+    it('should throw if a message has no data', function() {
+      assert.throws(function() {
+        topic.publish({});
+      }, /Cannot publish message without a `data` property/);
+    });
+
+    it('should send correct api request', function(done) {
+      topic.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, ':publish');
+        assert.deepEqual(reqOpts.json, {
+          messages: [
+            { data: new Buffer(JSON.stringify(message)).toString('base64') }
+          ]
+        });
+        done();
+      };
+
+      topic.publish(messageObject, assert.ifError);
+    });
+
+    it('should execute callback', function(done) {
+      topic.request = function(reqOpts, callback) {
+        callback(null, {});
+      };
+
+      topic.publish(messageObject, done);
+    });
+
+    it('should execute callback with error', function(done) {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      topic.request = function(reqOpts, callback) {
+        callback(error, apiResponse);
+      };
+
+      topic.publish(messageObject, function(err, ackIds, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(ackIds, null);
+        assert.strictEqual(apiResponse_, apiResponse);
+
+        done();
+      });
+    });
+
+    it('should execute callback with apiResponse', function(done) {
+      var resp = { success: true };
+
+      topic.request = function(reqOpts, callback) {
+        callback(null, resp);
+      };
+
+      topic.publish(messageObject, function(err, ackIds, apiResponse) {
+        assert.deepEqual(resp, apiResponse);
+        done();
+      });
     });
   });
 
@@ -311,6 +282,15 @@ describe('Topic', function() {
       };
 
       topic.subscription(subscriptionName, opts);
+    });
+
+    it('should attach the topic instance to the options', function(done) {
+      topic.pubsub.subscription = function(name, options) {
+        assert.strictEqual(options.topic, topic);
+        done();
+      };
+
+      topic.subscription();
     });
 
     it('should return the result', function(done) {

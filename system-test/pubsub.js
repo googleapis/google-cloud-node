@@ -42,16 +42,22 @@ describe('pubsub', function() {
     generateTopicName()
   ];
 
-  var TOPICS = TOPIC_NAMES.map(pubsub.topic.bind(pubsub));
+  var TOPICS = [
+    pubsub.topic(TOPIC_NAMES[0]),
+    pubsub.topic(TOPIC_NAMES[1]),
+    pubsub.topic(TOPIC_NAMES[2])
+  ];
 
-  var TOPIC_FULL_NAMES = TOPICS.map(function(topic) {
-    return topic.name;
-  });
+  var TOPIC_FULL_NAMES = [
+    TOPICS[0].name,
+    TOPICS[1].name,
+    TOPICS[2].name
+  ];
 
   before(function(done) {
     // create all needed topics
-    async.each(TOPIC_NAMES, function(name, cb) {
-      pubsub.createTopic(name, cb);
+    async.each(TOPICS, function(topic, cb) {
+      topic.create(cb);
     }, done);
   });
 
@@ -136,6 +142,7 @@ describe('pubsub', function() {
 
   describe('Subscription', function() {
     var TOPIC_NAME = generateTopicName();
+    var topic = pubsub.topic(TOPIC_NAME);
 
     var SUB_NAMES = [
       generateSubName(),
@@ -143,25 +150,16 @@ describe('pubsub', function() {
     ];
 
     var SUBSCRIPTIONS = [
-      {
-        name: SUB_NAMES[0],
-        options: { ackDeadlineSeconds: 30 }
-      },
-      {
-        name: SUB_NAMES[1],
-        options: { ackDeadlineSeconds: 60 }
-      }
+      topic.subscription(SUB_NAMES[0], { ackDeadlineSeconds: 30 }),
+      topic.subscription(SUB_NAMES[1], { ackDeadlineSeconds: 60 })
     ];
 
-    var topic;
-
     before(function(done) {
-      pubsub.createTopic(TOPIC_NAME, function(err, newTopic) {
+      topic.create(function(err) {
         assert.ifError(err);
-        topic = newTopic;
 
         function createSubscription(subscription, callback) {
-          topic.subscribe(subscription.name, subscription.options, callback);
+          subscription.create(callback);
         }
 
         async.each(SUBSCRIPTIONS, createSubscription, function(err) {
@@ -178,12 +176,8 @@ describe('pubsub', function() {
     });
 
     after(function(done) {
-      var SUBS = SUB_NAMES.map(function(name) {
-        return topic.subscription(name);
-      });
-
       // Delete subscriptions
-      async.each(SUBS, function(sub, callback) {
+      async.each(SUBSCRIPTIONS, function(sub, callback) {
         sub.delete(callback);
       }, function(err) {
         assert.ifError(err);
@@ -194,8 +188,8 @@ describe('pubsub', function() {
     it('should list all subscriptions registered to the topic', function(done) {
       topic.getSubscriptions(function(err, subs) {
         assert.ifError(err);
-        assert(subs[0] instanceof Subscription);
         assert.equal(subs.length, SUBSCRIPTIONS.length);
+        assert(subs[0] instanceof Subscription);
         done();
       });
     });
@@ -322,7 +316,6 @@ describe('pubsub', function() {
   });
 
   describe('IAM', function() {
-
     it('should get a policy', function(done) {
       var topic = pubsub.topic(TOPIC_NAMES[0]);
 
@@ -365,6 +358,5 @@ describe('pubsub', function() {
         done();
       });
     });
-
   });
 });
