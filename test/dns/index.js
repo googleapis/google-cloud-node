@@ -20,8 +20,14 @@ var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
 var mockery = require('mockery');
+var nodeutil = require('util');
 
+var Service = require('../../lib/common/service.js');
 var util = require('../../lib/common/util.js');
+
+var fakeUtil = extend({}, util, {
+  makeAuthenticatedRequestFactory: util.noop
+});
 
 var extended = false;
 var fakeStreamRouter = {
@@ -37,20 +43,16 @@ var fakeStreamRouter = {
   }
 };
 
-var makeAuthenticatedRequestFactoryOverride;
-var fakeUtil = extend({}, util, {
-  makeAuthenticatedRequestFactory: function() {
-    if (makeAuthenticatedRequestFactoryOverride) {
-      return makeAuthenticatedRequestFactoryOverride.apply(null, arguments);
-    } else {
-      return util.makeAuthenticatedRequestFactory.apply(null, arguments);
-    }
-  }
-});
-
 function FakeZone() {
   this.calledWith_ = arguments;
 }
+
+function FakeService() {
+  this.calledWith_ = arguments;
+  Service.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeService, Service);
 
 describe('DNS', function() {
   var DNS;
@@ -59,6 +61,7 @@ describe('DNS', function() {
   var PROJECT_ID = 'project-id';
 
   before(function() {
+    mockery.registerMock('../common/service.js', FakeService);
     mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
     mockery.registerMock('../common/util.js', fakeUtil);
     mockery.registerMock('./zone.js', FakeZone);
@@ -76,8 +79,6 @@ describe('DNS', function() {
   });
 
   beforeEach(function() {
-    makeAuthenticatedRequestFactoryOverride = null;
-
     dns = new DNS({
       projectId: PROJECT_ID
     });
@@ -107,33 +108,17 @@ describe('DNS', function() {
       fakeUtil.normalizeArguments = normalizeArguments;
     });
 
-    it('should create an authenticated request function', function(done) {
-      var options = {
-        projectId: 'projectId',
-        credentials: 'credentials',
-        email: 'email',
-        keyFilename: 'keyFile'
-      };
+    it('should inherit from Service', function() {
+      assert(dns instanceof Service);
 
-      makeAuthenticatedRequestFactoryOverride = function(options_) {
-        assert.deepEqual(options_, {
-          credentials: options.credentials,
-          email: options.email,
-          keyFile: options.keyFilename,
-          scopes: [
-            'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
-            'https://www.googleapis.com/auth/cloud-platform'
-          ]
-        });
-        return done;
-      };
+      var calledWith = dns.calledWith_[0];
 
-      var dns = new DNS(options);
-      dns.makeAuthenticatedRequest_();
-    });
-
-    it('should localize the projectId', function() {
-      assert.equal(dns.projectId_, PROJECT_ID);
+      var baseUrl = 'https://www.googleapis.com/dns/v1';
+      assert.strictEqual(calledWith.baseUrl, baseUrl);
+      assert.deepEqual(calledWith.scopes, [
+        'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
+        'https://www.googleapis.com/auth/cloud-platform'
+      ]);
     });
   });
 
@@ -160,8 +145,8 @@ describe('DNS', function() {
     it('should use a provided description', function(done) {
       var cfg = extend({}, config, { description: 'description' });
 
-      dns.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(body.description, cfg.description);
+      dns.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.json.description, cfg.description);
         done();
       };
 
@@ -169,8 +154,8 @@ describe('DNS', function() {
     });
 
     it('should default a description to ""', function(done) {
-      dns.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(body.description, '');
+      dns.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.json.description, '');
         done();
       };
 
@@ -178,16 +163,15 @@ describe('DNS', function() {
     });
 
     it('should make the correct API request', function(done) {
-      dns.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(method, 'POST');
-        assert.strictEqual(path, '/managedZones');
-        assert.strictEqual(query, null);
+      dns.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/managedZones');
 
         var expectedBody = extend({}, config, {
           name: zoneName,
           description: ''
         });
-        assert.deepEqual(body, expectedBody);
+        assert.deepEqual(reqOpts.json, expectedBody);
 
         done();
       };
@@ -200,7 +184,7 @@ describe('DNS', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        dns.makeReq_ = function(method, path, query, body, callback) {
+        dns.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -220,7 +204,7 @@ describe('DNS', function() {
       var zone = {};
 
       beforeEach(function() {
-        dns.makeReq_ = function(method, path, query, body, callback) {
+        dns.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
 
@@ -262,11 +246,9 @@ describe('DNS', function() {
     it('should make the correct request', function(done) {
       var query = { a: 'b', c: 'd' };
 
-      dns.makeReq_ = function(method, path, query_, body) {
-        assert.strictEqual(method, 'GET');
-        assert.strictEqual(path, '/managedZones');
-        assert.strictEqual(query, query);
-        assert.strictEqual(body, null);
+      dns.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/managedZones');
+        assert.strictEqual(reqOpts.qs, query);
 
         done();
       };
@@ -275,8 +257,8 @@ describe('DNS', function() {
     });
 
     it('should use an empty query if one was not provided', function(done) {
-      dns.makeReq_ = function(method, path, query) {
-        assert.equal(Object.keys(query).length, 0);
+      dns.request = function(reqOpts) {
+        assert.equal(Object.keys(reqOpts.qs).length, 0);
         done();
       };
 
@@ -288,7 +270,7 @@ describe('DNS', function() {
       var apiResponse = { a: 'b', c: 'd' };
 
       beforeEach(function() {
-        dns.makeReq_ = function(method, path, query, body, callback) {
+        dns.request = function(reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -310,7 +292,7 @@ describe('DNS', function() {
       var apiResponse = { managedZones: [zone] };
 
       beforeEach(function() {
-        dns.makeReq_ = function(method, path, query, body, callback) {
+        dns.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
 
@@ -337,7 +319,7 @@ describe('DNS', function() {
         var query = { a: 'b', c: 'd' };
         var originalQuery = extend({}, query);
 
-        dns.makeReq_ = function(method, path, query, body, callback) {
+        dns.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -391,29 +373,6 @@ describe('DNS', function() {
       assert(newZone instanceof FakeZone);
       assert.strictEqual(newZone.calledWith_[0], dns);
       assert.strictEqual(newZone.calledWith_[1], newZoneName);
-    });
-  });
-
-  describe('makeReq_', function() {
-    it('should make correct authenticated request', function(done) {
-      var method = 'POST';
-      var path = '/';
-      var query = 'query';
-      var body = 'body';
-
-      dns.makeAuthenticatedRequest_ = function(reqOpts, callback) {
-        assert.equal(reqOpts.method, method);
-        assert.equal(reqOpts.qs, query);
-
-        var baseUri = 'https://www.googleapis.com/dns/v1/';
-        assert.equal(reqOpts.uri, baseUri + 'projects/' + PROJECT_ID + path);
-
-        assert.equal(reqOpts.json, body);
-
-        callback();
-      };
-
-      dns.makeReq_(method, path, query, body, done);
     });
   });
 });
