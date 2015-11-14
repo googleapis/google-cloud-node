@@ -17,36 +17,66 @@
 'use strict';
 
 var assert = require('assert');
-var IAM = require('../../lib/pubsub/iam');
-var noop = function() {};
+var mockery = require('mockery');
+var nodeutil = require('util');
+
+var ServiceObject = require('../../lib/common/service-object.js');
+var util = require('../../lib/common/util.js');
+
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('IAM', function() {
-  var RESOURCE = 'projects/test-project/topics/test-topic';
-  var pubsubMock = {
-    makeReq_: noop
-  };
+  var IAM;
   var iam;
 
+  var PUBSUB = {};
+  var CONFIG = {
+    baseUrl: '/baseurl',
+    id: 'id'
+  };
+
+  before(function() {
+    mockery.registerMock('../common/service-object.js', FakeServiceObject);
+
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+
+    IAM = require('../../lib/pubsub/iam.js');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
+
   beforeEach(function() {
-    iam = new IAM(pubsubMock, RESOURCE);
+    iam = new IAM(PUBSUB, CONFIG);
   });
 
   describe('initialization', function() {
-    it('should localize the resource', function() {
-      assert.strictEqual(iam.resource, RESOURCE);
+    it('should inherit from ServiceObject', function() {
+      assert(iam instanceof ServiceObject);
+
+      var calledWith = iam.calledWith_[0];
+
+      assert.strictEqual(calledWith.parent, PUBSUB);
+      assert.strictEqual(calledWith.baseUrl, CONFIG.baseUrl);
+      assert.strictEqual(calledWith.id, CONFIG.id);
+      assert.deepEqual(calledWith.methods, {});
     });
   });
 
   describe('getPolicy', function() {
     it('should make the correct API request', function(done) {
-      iam.makeReq_ = function(method, path, q, body) {
-        assert.strictEqual(method, 'GET');
-
-        var expectedPath = RESOURCE + ':getIamPolicy';
-        assert.strictEqual(path, expectedPath);
-
-        assert.strictEqual(q, null);
-        assert.strictEqual(body, null);
+      iam.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, ':getIamPolicy');
 
         done();
       };
@@ -54,37 +84,35 @@ describe('IAM', function() {
       iam.getPolicy(assert.ifError);
     });
 
-    it('should pass the callback the expected params', function(done) {
-      var _policy = {
-        bindings: [{ yo: 'yo' }]
+    it('should handle errors properly', function(done) {
+      var apiResponse = {};
+      var error = new Error('Error.');
+
+      iam.request = function(reqOpts, callback) {
+        callback(error, apiResponse);
       };
 
-      iam.makeReq_ = function(method, path, q, body, callback) {
-        callback(null, _policy, _policy);
-      };
-
-      iam.getPolicy(function(err, policy, apiResponse) {
-        assert.ifError(err);
-        assert.deepEqual(policy, _policy);
-        assert.deepEqual(apiResponse, _policy);
+      iam.getPolicy(function(err, policy, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(policy, null);
+        assert.strictEqual(apiResponse_, apiResponse);
         done();
       });
     });
 
-    it('should handle errors properly', function(done) {
-      var fakeResponse = {
-        error: 'Ohnoes'
-      };
-      var error = new Error(fakeResponse.error);
-
-      iam.makeReq_ = function(method, path, q, body, callback) {
-        callback(error, fakeResponse);
+    it('should pass the callback the expected params', function(done) {
+      var apiResponse = {
+        bindings: [{ yo: 'yo' }]
       };
 
-      iam.getPolicy(function(err, policy, apiResponse) {
-        assert.strictEqual(err, error);
-        assert.strictEqual(policy, null);
-        assert.strictEqual(apiResponse, fakeResponse);
+      iam.request = function(reqOpts, callback) {
+        callback(null, apiResponse);
+      };
+
+      iam.getPolicy(function(err, policy, apiResponse_) {
+        assert.ifError(err);
+        assert.strictEqual(policy, apiResponse);
+        assert.strictEqual(apiResponse_, apiResponse);
         done();
       });
     });
@@ -93,23 +121,17 @@ describe('IAM', function() {
   describe('setPolicy', function() {
     it('should throw an error if a policy is not supplied', function() {
       assert.throws(function() {
-        iam.setPolicy(noop);
-      }, /A policy is required/);
+        iam.setPolicy(util.noop);
+      }, /A policy object is required/);
     });
 
     it('should make the correct API request', function(done) {
       var policy = { etag: 'ACAB' };
 
-      iam.makeReq_ = function(method, path, q, body) {
-        assert.strictEqual(method, 'POST');
-
-        var expectedPath = RESOURCE + ':setIamPolicy';
-        assert.strictEqual(path, expectedPath);
-
-        assert.strictEqual(q, null);
-
-        var expectedBody = { policy: policy };
-        assert.deepEqual(body, expectedBody);
+      iam.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, ':setIamPolicy');
+        assert.deepEqual(reqOpts.json, { policy: policy });
 
         done();
       };
@@ -117,37 +139,35 @@ describe('IAM', function() {
       iam.setPolicy(policy, assert.ifError);
     });
 
-    it('should pass the callback the expected params', function(done) {
-      var _policy = {
-        bindings: [{ yo: 'yo' }]
+    it('should handle errors properly', function(done) {
+      var apiResponse = {};
+      var error = new Error('Error.');
+
+      iam.request = function(reqOpts, callback) {
+        callback(error, apiResponse);
       };
 
-      iam.makeReq_ = function(method, path, q, body, callback) {
-        callback(null, body.policy, body.policy);
-      };
-
-      iam.setPolicy(_policy, function(err, policy, apiResponse) {
-        assert.ifError(err);
-        assert.deepEqual(_policy, policy);
-        assert.deepEqual(_policy, apiResponse);
+      iam.setPolicy({}, function(err, policy, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(policy, null);
+        assert.strictEqual(apiResponse_, apiResponse);
         done();
       });
     });
 
-    it('should handle errors properly', function(done) {
-      var fakeResponse = {
-        error: 'Ohnoes'
-      };
-      var error = new Error(fakeResponse.error);
-
-      iam.makeReq_ = function(method, path, q, body, callback) {
-        callback(error, fakeResponse);
+    it('should pass the callback the expected params', function(done) {
+      var apiResponse = {
+        bindings: [{ yo: 'yo' }]
       };
 
-      iam.setPolicy({}, function(err, policy, apiResponse) {
-        assert.strictEqual(err, error);
-        assert.strictEqual(policy, null);
-        assert.strictEqual(apiResponse, fakeResponse);
+      iam.request = function(reqOpts, callback) {
+        callback(null, apiResponse);
+      };
+
+      iam.setPolicy({}, function(err, policy, apiResponse_) {
+        assert.ifError(err);
+        assert.strictEqual(policy, apiResponse);
+        assert.strictEqual(apiResponse_, apiResponse);
         done();
       });
     });
@@ -156,23 +176,17 @@ describe('IAM', function() {
   describe('testPermissions', function() {
     it('should throw an error if permissions are missing', function() {
       assert.throws(function() {
-        iam.testPermissions(noop);
+        iam.testPermissions(util.noop);
       }, /Permissions are required/);
     });
 
     it('should make the correct API request', function(done) {
       var permissions = 'storage.bucket.list';
 
-      iam.makeReq_ = function(method, path, q, body) {
-        assert.strictEqual(method, 'POST');
-
-        var expectedPath = RESOURCE + ':testIamPermissions';
-        assert.strictEqual(path, expectedPath);
-
-        assert.strictEqual(q, null);
-
-        var expectedBody = { permissions: [permissions] };
-        assert.deepEqual(body, expectedBody);
+      iam.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, ':testIamPermissions');
+        assert.deepEqual(reqOpts.json, { permissions: [permissions] });
 
         done();
       };
@@ -183,16 +197,16 @@ describe('IAM', function() {
     it('should send an error back if the request fails', function(done) {
       var permissions = ['storage.bucket.list'];
       var error = new Error('Error.');
-      var fakeResponse = {};
+      var apiResponse = {};
 
-      iam.makeReq_ = function(method, path, q, body, callback) {
-        callback(error, fakeResponse);
+      iam.request = function(reqOpts, callback) {
+        callback(error, apiResponse);
       };
 
-      iam.testPermissions(permissions, function(err, perms, resp) {
+      iam.testPermissions(permissions, function(err, permissions, apiResp) {
         assert.strictEqual(err, error);
-        assert.strictEqual(perms, null);
-        assert.strictEqual(resp, fakeResponse);
+        assert.strictEqual(permissions, null);
+        assert.strictEqual(apiResp, apiResponse);
         done();
       });
     });
@@ -202,21 +216,22 @@ describe('IAM', function() {
         'storage.bucket.list',
         'storage.bucket.consume'
       ];
-      var fakeResponse = {
+      var apiResponse = {
         permissions: ['storage.bucket.consume']
       };
 
-      iam.makeReq_ = function(method, path, q, body, callback) {
-        callback(null, fakeResponse);
+      iam.request = function(reqOpts, callback) {
+        callback(null, apiResponse);
       };
 
-      iam.testPermissions(permissions, function(err, perms, resp) {
+      iam.testPermissions(permissions, function(err, permissions, apiResp) {
         assert.ifError(err);
-        assert.deepEqual(perms, {
+        assert.deepEqual(permissions, {
           'storage.bucket.list': false,
           'storage.bucket.consume': true
         });
-        assert.strictEqual(resp, fakeResponse);
+        assert.strictEqual(apiResp, apiResponse);
+
         done();
       });
     });
