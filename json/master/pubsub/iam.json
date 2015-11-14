@@ -34,16 +34,58 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar is = require('is');\nvar arrify = require('arrify');",
+    "code": "'use strict';\n\nvar arrify = require('arrify');\nvar is = require('is');\nvar nodeutil = require('util');",
     "ctx": false
   },
   {
     "tags": [
       {
+        "type": "type",
+        "string": "{module:common/serviceObject}",
+        "types": [
+          "module:common/serviceObject"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2FserviceObject.html\">common/serviceObject</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/serviceObject}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 27,
+    "codeStart": 31,
+    "code": "var ServiceObject = require('../common/service-object.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "ServiceObject",
+      "value": "require('../common/service-object.js')",
+      "string": "ServiceObject"
+    }
+  },
+  {
+    "tags": [
+      {
         "type": "param",
-        "string": "{module:pubsub} pubsub - PubSub Object",
+        "string": "{module:pubsub} pubsub - PubSub Object.",
         "name": "pubsub",
-        "description": "<ul>\n<li>PubSub Object</li>\n</ul>\n",
+        "description": "<ul>\n<li>PubSub Object.</li>\n</ul>\n",
         "types": [
           "module:pubsub"
         ],
@@ -55,9 +97,37 @@
       },
       {
         "type": "param",
-        "string": "{string} resource - topic or subscription name",
-        "name": "resource",
-        "description": "<ul>\n<li>topic or subscription name</li>\n</ul>\n",
+        "string": "{object} config - Configuration object.",
+        "name": "config",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} config.baseUrl - The base URL to apply to API requests.",
+        "name": "config.baseUrl",
+        "description": "<ul>\n<li>The base URL to apply to API requests.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} config.id - The name of the topic or subscription.",
+        "name": "config.id",
+        "description": "<ul>\n<li>The name of the topic or subscription.</li>\n</ul>\n",
         "types": [
           "string"
         ],
@@ -78,8 +148,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 26,
-    "codeStart": 31
+    "line": 33,
+    "codeStart": 40
   },
   {
     "tags": [
@@ -119,9 +189,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 31,
-    "codeStart": 69,
-    "code": "function IAM(pubsub, resource) {\n  this.resource = resource;\n  this.makeReq_ = pubsub.makeReq_.bind(pubsub);\n}",
+    "line": 40,
+    "codeStart": 78,
+    "code": "function IAM(pubsub, scope) {\n  ServiceObject.call(this, {\n    parent: pubsub,\n    baseUrl: scope.baseUrl,\n    id: scope.id,\n    methods: {\n      // Nothing needed other than the `request` method.\n    }\n  });\n}\n\nnodeutil.inherits(IAM, ServiceObject);",
     "ctx": {
       "type": "constructor",
       "name": "IAM",
@@ -217,9 +287,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 74,
-    "codeStart": 92,
-    "code": "IAM.prototype.getPolicy = function(callback) {\n  var path = this.resource + ':getIamPolicy';\n\n  this.makeReq_('GET', path, null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, resp, resp);\n  });\n};",
+    "line": 91,
+    "codeStart": 109,
+    "code": "IAM.prototype.getPolicy = function(callback) {\n  this.request({\n    uri: ':getIamPolicy'\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, resp, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "IAM",
@@ -386,9 +456,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 105,
-    "codeStart": 139,
-    "code": "IAM.prototype.setPolicy = function(policy, callback) {\n  if (!is.object(policy)) {\n    throw new Error('A policy is required');\n  }\n\n  var path = this.resource + ':setIamPolicy';\n  var body = {\n    policy: policy\n  };\n\n  this.makeReq_('POST', path, null, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, resp, resp);\n  });\n};",
+    "line": 122,
+    "codeStart": 156,
+    "code": "IAM.prototype.setPolicy = function(policy, callback) {\n  if (!is.object(policy)) {\n    throw new Error('A policy object is required.');\n  }\n\n  this.request({\n    method: 'POST',\n    uri: ':setIamPolicy',\n    json: {\n      policy: policy\n    }\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, resp, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "IAM",
@@ -514,9 +584,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 159,
-    "codeStart": 208,
-    "code": "IAM.prototype.testPermissions = function(permissions, callback) {\n  if (!is.array(permissions) && !is.string(permissions)) {\n    throw new Error('Permissions are required');\n  }\n\n  var path = this.resource + ':testIamPermissions';\n  var body = {\n    permissions: arrify(permissions)\n  };\n\n  this.makeReq_('POST', path, null, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var availablePermissions = resp.permissions || [];\n\n    var permissionsHash = body.permissions.reduce(function(acc, permission) {\n      acc[permission] = availablePermissions.indexOf(permission) > -1;\n      return acc;\n    }, {});\n\n    callback(null, permissionsHash, resp);\n  });\n};\n\nmodule.exports = IAM;",
+    "line": 177,
+    "codeStart": 226,
+    "code": "IAM.prototype.testPermissions = function(permissions, callback) {\n  if (!is.array(permissions) && !is.string(permissions)) {\n    throw new Error('Permissions are required.');\n  }\n\n  permissions = arrify(permissions);\n\n  this.request({\n    method: 'POST',\n    uri: ':testIamPermissions',\n    json: {\n      permissions: permissions\n    }\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var availablePermissions = arrify(resp.permissions);\n\n    var permissionsHash = permissions.reduce(function(acc, permission) {\n      acc[permission] = availablePermissions.indexOf(permission) > -1;\n      return acc;\n    }, {});\n\n    callback(null, permissionsHash, resp);\n  });\n};\n\nmodule.exports = IAM;",
     "ctx": {
       "type": "method",
       "constructor": "IAM",
