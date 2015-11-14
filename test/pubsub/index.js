@@ -18,11 +18,14 @@
 
 var arrify = require('arrify');
 var assert = require('assert');
-var mockery = require('mockery');
-var request = require('request');
 var extend = require('extend');
-var util = require('../../lib/common/util');
+var mockery = require('mockery');
+var nodeutil = require('util');
+var request = require('request');
+
+var Service = require('../../lib/common/service.js');
 var Topic = require('../../lib/pubsub/topic.js');
+var util = require('../../lib/common/util.js');
 
 var SubscriptionCached = require('../../lib/pubsub/subscription.js');
 var SubscriptionOverride;
@@ -45,6 +48,13 @@ fakeRequest.defaults = function() {
 
 var fakeUtil = extend({}, util);
 
+function FakeService() {
+  this.calledWith_ = arguments;
+  Service.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeService, Service);
+
 var extended = false;
 var fakeStreamRouter = {
   extend: function(Class, methods) {
@@ -65,15 +75,18 @@ describe('PubSub', function() {
   var pubsub;
 
   before(function() {
+    mockery.registerMock('../common/service.js', FakeService);
     mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
     mockery.registerMock('../common/util.js', fakeUtil);
     mockery.registerMock('./subscription.js', Subscription);
     mockery.registerMock('./topic.js', Topic);
     mockery.registerMock('request', fakeRequest);
+
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
     });
+
     PubSub = require('../../lib/pubsub');
   });
 
@@ -86,7 +99,7 @@ describe('PubSub', function() {
     SubscriptionOverride = null;
     requestOverride = null;
     pubsub = new PubSub({ projectId: PROJECT_ID });
-    pubsub.makeReq_ = function(method, path, q, body, callback) {
+    pubsub.request = function(method, path, q, body, callback) {
       callback();
     };
   });
@@ -114,130 +127,92 @@ describe('PubSub', function() {
 
       fakeUtil.normalizeArguments = normalizeArguments;
     });
-  });
 
-  describe('getTopics', function() {
-    var topicName = 'fake-topic';
-    var apiResponse = { topics: [{ name: topicName }]};
+    it('should inherit from Service', function() {
+      assert(pubsub instanceof Service);
 
-    beforeEach(function() {
-      pubsub.makeReq_ = function(method, path, q, body, callback) {
-        callback(null, apiResponse);
-      };
-    });
+      var calledWith = pubsub.calledWith_[0];
 
-    it('should accept a query and a callback', function(done) {
-      pubsub.getTopics({}, done);
-    });
-
-    it('should accept just a callback', function(done) {
-      pubsub.getTopics(done);
-    });
-
-    it('should build the right request', function() {
-      pubsub.makeReq_ = function(method, path) {
-        assert.equal(method, 'GET');
-        assert.equal(path, 'projects/' + PROJECT_ID + '/topics');
-      };
-      pubsub.getTopics(function() {});
-    });
-
-    it('should return Topic instances with metadata', function(done) {
-      var topic = {};
-
-      pubsub.topic = function(name) {
-        assert.strictEqual(name, topicName);
-        return topic;
-      };
-
-      pubsub.getTopics(function(err, topics) {
-        assert.ifError(err);
-        assert.strictEqual(topics[0], topic);
-        assert.strictEqual(topics[0].metadata, apiResponse.topics[0]);
-        done();
-      });
-    });
-
-    it('should return a query if more results exist', function() {
-      var token = 'next-page-token';
-      pubsub.makeReq_ = function(method, path, q, body, callback) {
-        callback(null, { nextPageToken: token });
-      };
-      var query = { pageSize: 1 };
-      pubsub.getTopics(query, function(err, topics, nextQuery) {
-        assert.ifError(err);
-        assert.strictEqual(query.pageSize, nextQuery.pageSize);
-        assert.equal(query.pageToken, token);
-      });
-    });
-
-    it('should pass error if api returns an error', function() {
-      var error = new Error('Error');
-      pubsub.makeReq_ = function(method, path, q, body, callback) {
-        callback(error);
-      };
-      pubsub.getTopics(function(err) {
-        assert.equal(err, error);
-      });
-    });
-
-    it('should pass apiResponse to callback', function(done) {
-      var resp = { success: true };
-      pubsub.makeReq_ = function(method, path, q, body, callback) {
-        callback(null, resp);
-      };
-      pubsub.getTopics(function(err, topics, nextQuery, apiResponse) {
-        assert.equal(resp, apiResponse);
-        done();
-      });
+      var baseUrl = 'https://pubsub.googleapis.com/v1';
+      assert.strictEqual(calledWith.baseUrl, baseUrl);
+      assert.deepEqual(calledWith.scopes, [
+        'https://www.googleapis.com/auth/pubsub',
+        'https://www.googleapis.com/auth/cloud-platform'
+      ]);
     });
   });
 
   describe('createTopic', function() {
-    it('should create a topic', function() {
+    it('should make the correct API request', function(done) {
       var topicName = 'new-topic-name';
-      pubsub.makeReq_ = function(method, path, q, body) {
-        assert.equal(method, 'PUT');
-        assert.equal(path, 'projects/' + PROJECT_ID + '/topics/' + topicName);
-        assert.equal(body, null);
+
+      pubsub.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'PUT');
+        assert.strictEqual(reqOpts.uri, '/topics/' + topicName);
+        done();
       };
+
       pubsub.createTopic(topicName, function() {});
     });
 
-    it('should return a Topic object', function() {
-      pubsub.createTopic('new-topic', function(err, topic) {
-        assert.ifError(err);
-        assert(topic instanceof Topic);
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      beforeEach(function() {
+        pubsub.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should return an error & API response', function(done) {
+        pubsub.createTopic('new-topic', function(err, topic, apiResponse_) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(topic, null);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
       });
     });
 
-    it('should pass apiResponse to callback', function(done) {
-      var resp = { success: true };
-      pubsub.makeReq_ = function(method, path, q, body, callback) {
-        callback(null, resp);
-      };
-      pubsub.createTopic('new-topic', function(err, topic, apiResponse) {
-        assert.equal(resp, apiResponse);
-        done();
+    describe('success', function() {
+      var apiResponse = {};
+
+      beforeEach(function() {
+        pubsub.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
       });
-    });
-  });
 
-  describe('topic', function() {
-    it('should throw if a name is not provided', function() {
-      assert.throws(function() {
-        pubsub.topic();
-      }, /name must be specified/);
-    });
+      it('should return a Topic object', function(done) {
+        var topicName = 'new-topic';
+        var topicInstance = {};
 
-    it('should return a Topic object', function() {
-      assert(pubsub.topic('new-topic') instanceof Topic);
+        pubsub.topic = function(name) {
+          assert.strictEqual(name, topicName);
+          return topicInstance;
+        };
+
+        pubsub.createTopic(topicName, function(err, topic) {
+          assert.ifError(err);
+          assert.strictEqual(topic, topicInstance);
+          done();
+        });
+      });
+
+      it('should pass apiResponse to callback', function(done) {
+        pubsub.createTopic('new-topic', function(err, topic, apiResponse_) {
+          assert.ifError(err);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
     });
   });
 
   describe('getSubscriptions', function() {
     beforeEach(function() {
-      pubsub.makeReq_ = function(method, path, q, body, callback) {
+      pubsub.request = function(reqOpts, callback) {
         callback(null, { subscriptions: [{ name: 'fake-subscription' }] });
       };
     });
@@ -250,11 +225,11 @@ describe('PubSub', function() {
       pubsub.getSubscriptions(done);
     });
 
-    it('should pass the correct arguments to the API', function() {
-      pubsub.makeReq_ = function(method, path, query) {
-        assert.equal(method, 'GET');
-        assert.equal(path, 'projects/' + PROJECT_ID + '/subscriptions');
-        assert.equal(query.query, undefined);
+    it('should pass the correct arguments to the API', function(done) {
+      pubsub.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/subscriptions');
+        assert.deepEqual(reqOpts.qs, {});
+        done();
       };
 
       pubsub.getSubscriptions(assert.ifError);
@@ -263,16 +238,15 @@ describe('PubSub', function() {
     describe('topics', function() {
       var TOPIC;
       var TOPIC_NAME = 'topic';
-      var TOPIC_SUBCRIPTION_NAME =
-        'projects/' + PROJECT_ID + '/topics/' + TOPIC_NAME + '/subscriptions';
+      var TOPIC_SUBCRIPTION_NAME = '/topics/' + TOPIC_NAME + '/subscriptions';
 
       before(function() {
         TOPIC = new Topic(pubsub, TOPIC_NAME);
       });
 
       it('should subscribe to a topic by string', function(done) {
-        pubsub.makeReq_ = function(method, path) {
-          assert.equal(path, TOPIC_SUBCRIPTION_NAME);
+        pubsub.request = function(reqOpts) {
+          assert.equal(reqOpts.uri, TOPIC_SUBCRIPTION_NAME);
           done();
         };
 
@@ -280,8 +254,8 @@ describe('PubSub', function() {
       });
 
       it('should subscribe to a topic by Topic instance', function(done) {
-        pubsub.makeReq_ = function(method, path) {
-          assert.equal(path, TOPIC_SUBCRIPTION_NAME);
+        pubsub.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.uri, TOPIC_SUBCRIPTION_NAME);
           done();
         };
 
@@ -292,9 +266,9 @@ describe('PubSub', function() {
     it('should pass options to API request', function(done) {
       var opts = { pageSize: 10, pageToken: 'abc' };
 
-      pubsub.makeReq_ = function(method, path, query) {
-        assert.equal(query.pageSize, opts.pageSize);
-        assert.equal(query.pageToken, opts.pageToken);
+      pubsub.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.pageSize, opts.pageSize);
+        assert.strictEqual(reqOpts.qs.pageToken, opts.pageToken);
         done();
       };
 
@@ -305,7 +279,7 @@ describe('PubSub', function() {
       var error = new Error('Error');
       var resp = { error: true };
 
-      pubsub.makeReq_ = function(method, path, q, body, callback) {
+      pubsub.request = function(reqOpts, callback) {
         callback(error, resp);
       };
 
@@ -330,7 +304,7 @@ describe('PubSub', function() {
         var subFullName =
           'projects/' + PROJECT_ID + '/subscriptions/' + subName;
 
-        pubsub.makeReq_ = function(method, path, query, body, callback) {
+        pubsub.request = function(reqOpts, callback) {
           callback(null, { subscriptions: [subName] });
         };
 
@@ -346,7 +320,7 @@ describe('PubSub', function() {
     it('should return a query if more results exist', function() {
       var token = 'next-page-token';
 
-      pubsub.makeReq_ = function(method, path, q, body, callback) {
+      pubsub.request = function(reqOpts, callback) {
         callback(null, { nextPageToken: token });
       };
 
@@ -362,7 +336,7 @@ describe('PubSub', function() {
     it('should pass apiResponse to callback', function(done) {
       var resp = { success: true };
 
-      pubsub.makeReq_ = function(method, path, q, body, callback) {
+      pubsub.request = function(reqOpts, callback) {
         callback(null, resp);
       };
 
@@ -373,15 +347,96 @@ describe('PubSub', function() {
     });
   });
 
+  describe('getTopics', function() {
+    var topicName = 'fake-topic';
+    var apiResponse = { topics: [{ name: topicName }]};
+
+    beforeEach(function() {
+      pubsub.request = function(reqOpts, callback) {
+        callback(null, apiResponse);
+      };
+    });
+
+    it('should accept a query and a callback', function(done) {
+      pubsub.getTopics({}, done);
+    });
+
+    it('should accept just a callback', function(done) {
+      pubsub.getTopics(done);
+    });
+
+    it('should build the right request', function(done) {
+      pubsub.request = function(reqOpts) {
+        assert.equal(reqOpts.uri, '/topics');
+        done();
+      };
+      pubsub.getTopics(function() {});
+    });
+
+    it('should return Topic instances with metadata', function(done) {
+      var topic = {};
+
+      pubsub.topic = function(name) {
+        assert.strictEqual(name, topicName);
+        return topic;
+      };
+
+      pubsub.getTopics(function(err, topics) {
+        assert.ifError(err);
+        assert.strictEqual(topics[0], topic);
+        assert.strictEqual(topics[0].metadata, apiResponse.topics[0]);
+        done();
+      });
+    });
+
+    it('should return a query if more results exist', function() {
+      var token = 'next-page-token';
+      pubsub.request = function(reqOpts, callback) {
+        callback(null, { nextPageToken: token });
+      };
+      var query = { pageSize: 1 };
+      pubsub.getTopics(query, function(err, topics, nextQuery) {
+        assert.ifError(err);
+        assert.strictEqual(query.pageSize, nextQuery.pageSize);
+        assert.equal(query.pageToken, token);
+      });
+    });
+
+    it('should pass error if api returns an error', function() {
+      var error = new Error('Error');
+      pubsub.request = function(reqOpts, callback) {
+        callback(error);
+      };
+      pubsub.getTopics(function(err) {
+        assert.equal(err, error);
+      });
+    });
+
+    it('should pass apiResponse to callback', function(done) {
+      var resp = { success: true };
+      pubsub.request = function(reqOpts, callback) {
+        callback(null, resp);
+      };
+      pubsub.getTopics(function(err, topics, nextQuery, apiResponse) {
+        assert.equal(resp, apiResponse);
+        done();
+      });
+    });
+  });
+
   describe('subscribe', function() {
     var TOPIC_NAME = 'topic';
     var TOPIC = {
-      name: 'projects/' + PROJECT_ID + '/topics/' + TOPIC_NAME
+      name: '/topics/' + TOPIC_NAME
     };
 
     var SUB_NAME = 'subscription';
     var SUBSCRIPTION = {
-      name: 'projects/' + PROJECT_ID + '/subscriptions/' + SUB_NAME
+      name: '/subscriptions/' + SUB_NAME
+    };
+
+    var apiResponse = {
+      name: 'subscription-name'
     };
 
     it('should throw if no Topic is provided', function() {
@@ -397,119 +452,133 @@ describe('PubSub', function() {
     });
 
     it('should not require configuration options', function(done) {
-      pubsub.makeReq_ = function(method, path, qs, body, callback) {
-        callback();
+      pubsub.request = function(reqOpts, callback) {
+        callback(null, apiResponse);
       };
 
       pubsub.subscribe(TOPIC_NAME, SUB_NAME, done);
     });
 
-    it('should cretae a topic object from a string', function(done) {
+    it('should create a topic object from a string', function(done) {
+      pubsub.request = util.noop;
+
       pubsub.topic = function(topicName) {
-        assert.equal(topicName, TOPIC_NAME);
-        done();
+        assert.strictEqual(topicName, TOPIC_NAME);
+        setImmediate(done);
         return TOPIC;
       };
 
       pubsub.subscribe(TOPIC_NAME, SUB_NAME, assert.ifError);
     });
 
-    it('should create a subscription object from a string', function(done) {
-      var opts = {};
-
-      pubsub.subscription = function(subName, options) {
-        assert.equal(subName, SUB_NAME);
-        assert.deepEqual(options, opts);
-        done();
-        return SUBSCRIPTION;
-      };
-
-      pubsub.subscribe(TOPIC_NAME, SUB_NAME, opts, assert.ifError);
-    });
-
-    it('should pass options to a created subscription object', function(done) {
-      var opts = { a: 'b', c: 'd' };
-
-      pubsub.subscription = function(subName, options) {
-        assert.equal(subName, SUB_NAME);
-        assert.deepEqual(options, opts);
-        done();
-        return SUBSCRIPTION;
-      };
-
-      pubsub.subscribe(TOPIC_NAME, SUB_NAME, opts, assert.ifError);
-    });
-
     it('should send correct request', function(done) {
-      pubsub.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'PUT');
-        assert.equal(path, SUBSCRIPTION.name);
-        assert.equal(body.topic, TOPIC.name);
+      pubsub.topic = function(topicName) {
+        return {
+          name: topicName
+        };
+      };
+
+      pubsub.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'PUT');
+        assert.strictEqual(reqOpts.uri, SUBSCRIPTION.name);
+        assert.strictEqual(reqOpts.json.topic, TOPIC_NAME);
         done();
       };
 
       pubsub.subscribe(TOPIC_NAME, SUB_NAME, assert.ifError);
     });
 
-    it('should re-use existing subscription if specified', function(done) {
-      pubsub.subscription = function() {
-        return SUBSCRIPTION;
-      };
-
-      pubsub.makeReq_ = function(method, path, query, body, callback) {
-        callback({ code: 409 });
-      };
-
-      // Don't re-use an existing subscription (error if one exists).
-      pubsub.subscribe(TOPIC_NAME, SUB_NAME, function(err) {
-        assert.equal(err.code, 409);
-      });
-
-      // Re-use an existing subscription (ignore error if one exists).
-      var opts = { reuseExisting: true };
-      pubsub.subscribe(TOPIC_NAME, SUB_NAME, opts, function(err, sub) {
-        assert.ifError(err);
-        assert.deepEqual(sub, SUBSCRIPTION);
-
-        done();
-      });
-    });
-
-    it('should return an api error to the callback', function(done) {
-      var error = new Error('Error.');
-
-      pubsub.makeReq_ = function(method, path, query, body, callback) {
-        callback(error);
-      };
-
-      pubsub.subscribe(TOPIC_NAME, SUB_NAME, function(err) {
-        assert.equal(err, error);
-        done();
-      });
-    });
-
-    it('should return apiResponse to the callback', function(done) {
-      var resp = { success: true };
-
-      pubsub.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, resp);
-      };
-
-      pubsub.subscribe(TOPIC_NAME, SUB_NAME, function(err, sub, apiResponse) {
-        assert.deepEqual(resp, apiResponse);
-        done();
-      });
-    });
-
     it('should pass options to the api request', function(done) {
       var opts = { ackDeadlineSeconds: 90 };
 
-      pubsub.makeReq_ = function(method, path, query, body) {
-        assert.strictEqual(body.ackDeadlineSeconds, opts.ackDeadlineSeconds);
+      pubsub.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.json.ackDeadlineSeconds, 90);
         done();
       };
 
       pubsub.subscribe(TOPIC_NAME, SUB_NAME, opts, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = { name: SUB_NAME };
+
+      beforeEach(function() {
+        pubsub.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should re-use existing subscription if specified', function(done) {
+        pubsub.subscription = function() {
+          return SUBSCRIPTION;
+        };
+
+        pubsub.request = function(reqOpts, callback) {
+          callback({ code: 409 }, apiResponse);
+        };
+
+        // Don't re-use an existing subscription (error if one exists).
+        pubsub.subscribe(TOPIC_NAME, SUB_NAME, function(err) {
+          assert.equal(err.code, 409);
+        });
+
+        // Re-use an existing subscription (ignore error if one exists).
+        var opts = { reuseExisting: true };
+        pubsub.subscribe(TOPIC_NAME, SUB_NAME, opts, function(err, sub) {
+          assert.ifError(err);
+          assert.deepEqual(sub, SUBSCRIPTION);
+
+          done();
+        });
+      });
+
+      it('should return error & API response to the callback', function(done) {
+        pubsub.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+
+        pubsub.subscribe(TOPIC_NAME, SUB_NAME, function(err, sub, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(sub, null);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = { name: SUB_NAME };
+
+      beforeEach(function() {
+        pubsub.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should pass options to a new subscription object', function(done) {
+        var opts = { a: 'b', c: 'd' };
+
+        pubsub.subscription = function(subName, options) {
+          assert.strictEqual(subName, SUB_NAME);
+          assert.deepEqual(options, opts);
+          setImmediate(done);
+          return SUBSCRIPTION;
+        };
+
+        pubsub.subscribe(TOPIC_NAME, SUB_NAME, opts, assert.ifError);
+      });
+
+      it('should return apiResponse to the callback', function(done) {
+        pubsub.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+
+        pubsub.subscribe(TOPIC_NAME, SUB_NAME, function(err, sub, resp) {
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
     });
   });
 
@@ -552,15 +621,15 @@ describe('PubSub', function() {
     });
   });
 
-  describe('makeReq_', function() {
-    it('should pass network requests to the connection object', function(done) {
-      var pubsub = new PubSub({ projectId: PROJECT_ID });
+  describe('topic', function() {
+    it('should throw if a name is not provided', function() {
+      assert.throws(function() {
+        pubsub.topic();
+      }, /name must be specified/);
+    });
 
-      pubsub.makeAuthenticatedRequest_ = function() {
-        done();
-      };
-
-      pubsub.makeReq_(null, null, null, null, assert.ifError);
+    it('should return a Topic object', function() {
+      assert(pubsub.topic('new-topic') instanceof Topic);
     });
   });
 });
