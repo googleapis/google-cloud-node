@@ -20,7 +20,10 @@ var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
 var mockery = require('mockery');
+var nodeutil = require('util');
 var prop = require('propprop');
+
+var Service = require('../../lib/common/service.js');
 var util = require('../../lib/common/util.js');
 
 function FakeIndex() {
@@ -52,6 +55,13 @@ var fakeUtil = extend({}, util, {
   }
 });
 
+function FakeService() {
+  this.calledWith_ = arguments;
+  Service.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeService, Service);
+
 describe('Search', function() {
   var Search;
   var search;
@@ -59,9 +69,11 @@ describe('Search', function() {
   var PROJECT_ID = 'project-id';
 
   before(function() {
-    mockery.registerMock('./index-class.js', FakeIndex);
+    mockery.registerMock('../common/service.js', FakeService);
     mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
     mockery.registerMock('../common/util.js', fakeUtil);
+    mockery.registerMock('./index-class.js', FakeIndex);
+
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
@@ -76,8 +88,6 @@ describe('Search', function() {
   });
 
   beforeEach(function() {
-    makeAuthenticatedRequestFactoryOverride = null;
-
     search = new Search({
       projectId: PROJECT_ID
     });
@@ -107,34 +117,18 @@ describe('Search', function() {
       fakeUtil.normalizeArguments = normalizeArguments;
     });
 
-    it('should create an authenticated request function', function(done) {
-      var options = {
-        projectId: 'projectId',
-        credentials: 'credentials',
-        email: 'email',
-        keyFilename: 'keyFile'
-      };
+    it('should inherit from Service', function() {
+      assert(search instanceof Service);
 
-      makeAuthenticatedRequestFactoryOverride = function(options_) {
-        assert.deepEqual(options_, {
-          credentials: options.credentials,
-          email: options.email,
-          keyFile: options.keyFilename,
-          scopes: [
-            'https://www.googleapis.com/auth/cloud-platform',
-            'https://www.googleapis.com/auth/cloudsearch',
-            'https://www.googleapis.com/auth/userinfo.email'
-          ]
-        });
-        return done;
-      };
+      var calledWith = search.calledWith_[0];
 
-      var search = new Search(options);
-      search.makeAuthenticatedRequest_();
-    });
-
-    it('should localize the projectId', function() {
-      assert.equal(search.projectId_, PROJECT_ID);
+      var baseUrl = 'https://cloudsearch.googleapis.com/v1';
+      assert.strictEqual(calledWith.baseUrl, baseUrl);
+      assert.deepEqual(calledWith.scopes, [
+        'https://www.googleapis.com/auth/cloud-platform',
+        'https://www.googleapis.com/auth/cloudsearch',
+        'https://www.googleapis.com/auth/userinfo.email'
+      ]);
     });
   });
 
@@ -142,11 +136,9 @@ describe('Search', function() {
     it('should get indexes from the API', function(done) {
       var query = { a: 'b', c: 'd' };
 
-      search.makeReq_ = function(method, path, q, body) {
-        assert.equal(method, 'GET');
-        assert.equal(path, '/indexes');
-        assert.deepEqual(q, query);
-        assert.strictEqual(body, null);
+      search.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/indexes');
+        assert.deepEqual(reqOpts.qs, query);
         done();
       };
 
@@ -156,9 +148,9 @@ describe('Search', function() {
     it('should rename query.prefix to indexNamePrefix', function(done) {
       var query = { prefix: 'prefix' };
 
-      search.makeReq_ = function(method, path, q) {
-        assert.equal(typeof q.prefix, 'undefined');
-        assert.equal(q.indexNamePrefix, query.prefix);
+      search.request = function(reqOpts) {
+        assert.strictEqual(typeof reqOpts.qs.prefix, 'undefined');
+        assert.strictEqual(reqOpts.qs.indexNamePrefix, query.prefix);
         done();
       };
 
@@ -166,8 +158,8 @@ describe('Search', function() {
     });
 
     it('should send empty query if only a callback is given', function(done) {
-      search.makeReq_ = function(method, path, query) {
-        assert.deepEqual(query, {});
+      search.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
         done();
       };
 
@@ -178,7 +170,7 @@ describe('Search', function() {
       var error = new Error('Error.');
       var apiResponse = { a: 'b', c: 'd' };
 
-      search.makeReq_ = function(method, path, query, body, callback) {
+      search.request = function(reqOpts, callback) {
         callback(error, apiResponse);
       };
 
@@ -205,7 +197,7 @@ describe('Search', function() {
         return true;
       };
 
-      search.makeReq_ = function(method, path, query, body, callback) {
+      search.request = function(reqOpts, callback) {
         callback(null, apiResponse);
       };
 
@@ -236,7 +228,7 @@ describe('Search', function() {
         return {};
       };
 
-      search.makeReq_ = function(method, path, query, body, callback) {
+      search.request = function(reqOpts, callback) {
         callback(null, apiResponse);
       };
 
@@ -256,7 +248,7 @@ describe('Search', function() {
         pageToken: apiResponse.nextPageToken
       });
 
-      search.makeReq_ = function(method, path, query, body, callback) {
+      search.request = function(reqOpts, callback) {
         callback(null, apiResponse);
       };
 
@@ -270,34 +262,17 @@ describe('Search', function() {
   });
 
   describe('index', function() {
+    it('should throw if an ID is not provided', function() {
+      assert.throws(function() {
+        search.index();
+      }, /An ID is needed/);
+    });
+
     it('should return a new Index object', function() {
       var indexId = 'index-id';
       var index = search.index(indexId);
 
       assert.deepEqual(index.calledWith_, [search, indexId]);
-    });
-  });
-
-  describe('makeReq_', function() {
-    it('should make correct authenticated request', function(done) {
-      var method = 'POST';
-      var path = '/';
-      var query = 'query';
-      var body = 'body';
-
-      search.makeAuthenticatedRequest_ = function(reqOpts, callback) {
-        assert.equal(reqOpts.method, method);
-        assert.equal(reqOpts.qs, query);
-
-        var baseUri = 'https://cloudsearch.googleapis.com/v1/';
-        assert.equal(reqOpts.uri, baseUri + 'projects/' + PROJECT_ID + path);
-
-        assert.equal(reqOpts.json, body);
-
-        callback();
-      };
-
-      search.makeReq_(method, path, query, body, done);
     });
   });
 });
