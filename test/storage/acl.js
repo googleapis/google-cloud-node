@@ -31,23 +31,22 @@ describe('storage/acl', function() {
   var ENTITY = 'user-user@example.com';
 
   beforeEach(function() {
-    acl = new Acl({ makeReq: MAKE_REQ, pathPrefix: PATH_PREFIX });
+    acl = new Acl({ request: MAKE_REQ, pathPrefix: PATH_PREFIX });
   });
 
   describe('initialization', function() {
     it('should assign makeReq and pathPrefix', function() {
-      assert.equal(acl.makeReq, MAKE_REQ);
-      assert.equal(acl.pathPrefix, PATH_PREFIX);
+      assert.strictEqual(acl.pathPrefix, PATH_PREFIX);
+      assert.strictEqual(acl.request_, MAKE_REQ);
     });
   });
 
   describe('add', function() {
     it('makes the correct api request', function(done) {
-      acl.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'POST');
-        assert.equal(path, '');
-        assert.strictEqual(query, null);
-        assert.deepEqual(body, { entity: ENTITY, role: ROLE });
+      acl.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '');
+        assert.deepEqual(reqOpts.json, { entity: ENTITY, role: ROLE });
         done();
       };
 
@@ -63,7 +62,7 @@ describe('storage/acl', function() {
         return expectedAclObject;
       };
 
-      acl.makeReq_ = function(method, path, query, body, callback) {
+      acl.request = function(reqOpts, callback) {
         callback(null, apiResponse);
       };
 
@@ -75,7 +74,7 @@ describe('storage/acl', function() {
     });
 
     it('executes the callback with an error', function(done) {
-      acl.makeReq_ = function(method, path, query, body, callback) {
+      acl.request = function(reqOpts, callback) {
         callback(ERROR);
       };
 
@@ -87,7 +86,8 @@ describe('storage/acl', function() {
 
     it('executes the callback with apiResponse', function(done) {
       var resp = { success: true };
-      acl.makeReq_ = function(method, path, query, body, callback) {
+
+      acl.request = function(reqOpts, callback) {
         callback(null, resp);
       };
 
@@ -100,11 +100,9 @@ describe('storage/acl', function() {
 
   describe('delete', function() {
     it('makes the correct api request', function(done) {
-      acl.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'DELETE');
-        assert.equal(path, '/' + encodeURIComponent(ENTITY));
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
+      acl.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'DELETE');
+        assert.strictEqual(reqOpts.uri, '/' + encodeURIComponent(ENTITY));
 
         done();
       };
@@ -113,7 +111,7 @@ describe('storage/acl', function() {
     });
 
     it('should execute the callback with an error', function(done) {
-      acl.makeReq_ = function(method, path, query, body, callback) {
+      acl.request = function(reqOpts, callback) {
         callback(ERROR);
       };
 
@@ -125,7 +123,8 @@ describe('storage/acl', function() {
 
     it('should execute the callback with apiResponse', function(done) {
       var resp = { success: true };
-      acl.makeReq_ = function(method, path, query, body, callback) {
+
+      acl.request = function(reqOpts, callback) {
         callback(null, resp);
       };
 
@@ -139,11 +138,8 @@ describe('storage/acl', function() {
   describe('get', function() {
     describe('all ACL objects', function() {
       it('should make the correct API request', function(done) {
-        acl.makeReq_ = function(method, path, query, body) {
-          assert.equal(method, 'GET');
-          assert.equal(path, '');
-          assert.strictEqual(query, null);
-          assert.strictEqual(body, null);
+        acl.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.uri, '');
 
           done();
         };
@@ -154,8 +150,8 @@ describe('storage/acl', function() {
       it('should accept a configuration object', function(done) {
         var generation = 1;
 
-        acl.makeReq_ = function(method, path, query) {
-          assert.equal(query.generation, generation);
+        acl.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.qs.generation, generation);
 
           done();
         };
@@ -182,7 +178,7 @@ describe('storage/acl', function() {
           return expectedAclObjects[index];
         };
 
-        acl.makeReq_ = function(method, path, query, body, callback) {
+        acl.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
 
@@ -196,11 +192,8 @@ describe('storage/acl', function() {
 
     describe('ACL object for an entity', function() {
       it('should get a specific ACL object', function(done) {
-        acl.makeReq_ = function(method, path, query, body) {
-          assert.equal(method, 'GET');
-          assert.equal(path, '/' + encodeURIComponent(ENTITY));
-          assert.strictEqual(query, null);
-          assert.strictEqual(body, null);
+        acl.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.uri, '/' + encodeURIComponent(ENTITY));
 
           done();
         };
@@ -211,8 +204,8 @@ describe('storage/acl', function() {
       it('should accept a configuration object', function(done) {
         var generation = 1;
 
-        acl.makeReq_ = function(method, path, query) {
-          assert.equal(query.generation, generation);
+        acl.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.qs.generation, generation);
 
           done();
         };
@@ -228,7 +221,7 @@ describe('storage/acl', function() {
           return expectedAclObject;
         };
 
-        acl.makeReq_ = function(method, path, query, body, callback) {
+        acl.request = function(reqOpts, callback) {
           callback(null, apiResponse);
         };
 
@@ -241,7 +234,7 @@ describe('storage/acl', function() {
     });
 
     it('should execute the callback with an error', function(done) {
-      acl.makeReq_ = function(method, path, query, body, callback) {
+      acl.request = function(reqOpts, callback) {
         callback(ERROR);
       };
 
@@ -253,7 +246,8 @@ describe('storage/acl', function() {
 
     it('should execute the callback with apiResponse', function(done) {
       var resp = { success: true };
-      acl.makeReq_ = function(method, path, query, body, callback) {
+
+      acl.request = function(reqOpts, callback) {
         callback(null, resp);
       };
 
@@ -266,11 +260,10 @@ describe('storage/acl', function() {
 
   describe('update', function() {
     it('should make the correct API request', function(done) {
-      acl.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'PUT');
-        assert.equal(path, '/' + encodeURIComponent(ENTITY));
-        assert.strictEqual(query, null);
-        assert.deepEqual(body, { role: ROLE });
+      acl.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'PUT');
+        assert.strictEqual(reqOpts.uri, '/' + encodeURIComponent(ENTITY));
+        assert.deepEqual(reqOpts.json, { role: ROLE });
 
         done();
       };
@@ -286,7 +279,7 @@ describe('storage/acl', function() {
         return expectedAclObject;
       };
 
-      acl.makeReq_ = function(method, path, query, body, callback) {
+      acl.request = function(reqOpts, callback) {
         callback(null, apiResponse);
       };
 
@@ -298,7 +291,7 @@ describe('storage/acl', function() {
     });
 
     it('should execute the callback with an error', function(done) {
-      acl.makeReq_ = function(method, path, query, body, callback) {
+      acl.request = function(reqOpts, callback) {
         callback(ERROR);
       };
 
@@ -310,7 +303,8 @@ describe('storage/acl', function() {
 
     it('should execute the callback with apiResponse', function(done) {
       var resp = { success: true };
-      acl.makeReq_ = function(method, path, query, body, callback) {
+
+      acl.request = function(reqOpts, callback) {
         callback(null, resp);
       };
 
@@ -342,29 +336,6 @@ describe('storage/acl', function() {
         role: ROLE,
         projectTeam: projectTeam
       });
-    });
-  });
-
-  describe('makeReq_', function() {
-    it('patches requests through to the makeReq function', function(done) {
-      var method = 'POST';
-      var path = '/path';
-      var query = { a: 'b', c: 'd' };
-      var body = { a: 'b', c: 'd' };
-      var callback = util.noop;
-
-      // This is overriding the method we passed on instantiation.
-      acl.makeReq = function(m, p, q, b, c) {
-        assert.equal(m, method);
-        assert.equal(p, PATH_PREFIX + path);
-        assert.deepEqual(q, query);
-        assert.deepEqual(b, body);
-        assert.equal(c, callback);
-
-        done();
-      };
-
-      acl.makeReq_(method, path, query, body, callback);
     });
   });
 });
