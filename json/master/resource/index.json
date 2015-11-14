@@ -34,7 +34,7 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar extend = require('extend');\nvar is = require('is');",
+    "code": "'use strict';\n\nvar extend = require('extend');\nvar is = require('is');\nvar nodeutil = require('util');",
     "ctx": false
   },
   {
@@ -69,14 +69,56 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 26,
-    "codeStart": 30,
+    "line": 27,
+    "codeStart": 31,
     "code": "var Project = require('./project.js');",
     "ctx": {
       "type": "declaration",
       "name": "Project",
       "value": "require('./project.js')",
       "string": "Project"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/service}",
+        "types": [
+          "module:common/service"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Fservice.html\">common/service</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/service}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 33,
+    "codeStart": 37,
+    "code": "var Service = require('../common/service.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Service",
+      "value": "require('../common/service.js')",
+      "string": "Service"
     }
   },
   {
@@ -111,8 +153,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 32,
-    "codeStart": 36,
+    "line": 39,
+    "codeStart": 43,
     "code": "var streamRouter = require('../common/stream-router.js');",
     "ctx": {
       "type": "declaration",
@@ -153,82 +195,14 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 38,
-    "codeStart": 42,
+    "line": 45,
+    "codeStart": 49,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
       "name": "util",
       "value": "require('../common/util.js')",
       "string": "util"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "const",
-        "string": "{string}",
-        "html": "<p>{string}</p>"
-      },
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      }
-    ],
-    "description": {
-      "full": "",
-      "summary": "",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 44,
-    "codeStart": 48,
-    "code": "var BASE_URL = 'https://cloudresourcemanager.googleapis.com/v1beta1/projects';",
-    "ctx": {
-      "type": "declaration",
-      "name": "BASE_URL",
-      "value": "'https://cloudresourcemanager.googleapis.com/v1beta1/projects'",
-      "string": "BASE_URL"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "const",
-        "string": "{array}",
-        "html": "<p>{array}</p>"
-      },
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      }
-    ],
-    "description": {
-      "full": "<p>Required scopes for Google Cloud Resource Manager API.</p>",
-      "summary": "<p>Required scopes for Google Cloud Resource Manager API.</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 50,
-    "codeStart": 55,
-    "code": "var SCOPES = [\n  'https://www.googleapis.com/auth/cloud-platform'\n];",
-    "ctx": {
-      "type": "declaration",
-      "name": "SCOPES",
-      "value": "[",
-      "string": "SCOPES"
     }
   },
   {
@@ -273,9 +247,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 59,
-    "codeStart": 83,
-    "code": "function Resource(options) {\n  if (!(this instanceof Resource)) {\n    options = util.normalizeArguments(this, options, {\n      projectIdRequired: false\n    });\n    return new Resource(options);\n  }\n\n  this.defaultProjectId_ = options.projectId;\n\n  this.makeAuthenticatedRequest_ = util.makeAuthenticatedRequestFactory({\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n}",
+    "line": 51,
+    "codeStart": 75,
+    "code": "function Resource(options) {\n  if (!(this instanceof Resource)) {\n    options = util.normalizeArguments(this, options, {\n      projectIdRequired: false\n    });\n    return new Resource(options);\n  }\n\n  var config = {\n    baseUrl: 'https://cloudresourcemanager.googleapis.com/v1beta1',\n    scopes: ['https://www.googleapis.com/auth/cloud-platform'],\n    projectIdRequired: false\n  };\n\n  Service.call(this, config, options);\n\n  this.defaultProjectId_ = options.projectId;\n}\n\nnodeutil.inherits(Resource, Service);",
     "ctx": {
       "type": "constructor",
       "name": "Resource",
@@ -293,12 +267,6 @@
         "type": "resource",
         "string": "[projects: create API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/create}",
         "html": "<p>[projects: create API Documentation]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/create}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/create}</a></p>"
-      },
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
       },
       {
         "type": "param",
@@ -391,18 +359,18 @@
       }
     ],
     "description": {
-      "full": "<p>Create a project.</p>",
+      "full": "<p>Create a project.</p><p><strong>This method only works if you are authenticated as yourself, e.g. using the<br />gcloud SDK.</strong></p>",
       "summary": "<p>Create a project.</p>",
-      "body": ""
+      "body": "<p><strong>This method only works if you are authenticated as yourself, e.g. using the<br />gcloud SDK.</strong></p>"
     },
-    "isPrivate": true,
+    "isPrivate": false,
     "isConstructor": false,
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 101,
-    "codeStart": 125,
-    "code": "Resource.prototype.createProject = function(id, options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  var body = extend({}, options, {\n    projectId: id\n  });\n\n  this.makeReq_('POST', '/', null, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var project = self.project(resp.projectId);\n    project.metadata = resp;\n\n    callback(null, project, resp);\n  });\n};",
+    "line": 96,
+    "codeStart": 121,
+    "code": "Resource.prototype.createProject = function(id, options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  this.request({\n    method: 'POST',\n    uri: '/projects',\n    json: extend({}, options, {\n      projectId: id\n    })\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var project = self.project(resp.projectId);\n    project.metadata = resp;\n\n    callback(null, project, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Resource",
@@ -579,9 +547,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 150,
-    "codeStart": 212,
-    "code": "Resource.prototype.getProjects = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  this.makeReq_('GET', '/', options, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var projects = (resp.projects || []).map(function(project) {\n      var projectInstance = self.project(project.name);\n      projectInstance.metadata = project;\n      return projectInstance;\n    });\n\n    callback(null, projects, nextQuery, resp);\n  });\n};",
+    "line": 148,
+    "codeStart": 210,
+    "code": "Resource.prototype.getProjects = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  this.request({\n    uri: '/projects',\n    qs: options\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var projects = (resp.projects || []).map(function(project) {\n      var projectInstance = self.project(project.name);\n      projectInstance.metadata = project;\n      return projectInstance;\n    });\n\n    callback(null, projects, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Resource",
@@ -635,8 +603,8 @@
       }
     ],
     "description": {
-      "full": "<p>Create a Project object to reference an existing project. See<br />{module:resoucemanager/createProject} to create a project.</p>",
-      "summary": "<p>Create a Project object to reference an existing project. See<br />{module:resoucemanager/createProject} to create a project.</p>",
+      "full": "<p>Create a Project object. See {module:resoucemanager/createProject} to create<br />a project.</p>",
+      "summary": "<p>Create a Project object. See {module:resoucemanager/createProject} to create<br />a project.</p>",
       "body": ""
     },
     "isPrivate": false,
@@ -644,8 +612,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 246,
-    "codeStart": 258,
+    "line": 247,
+    "codeStart": 259,
     "code": "Resource.prototype.project = function(id) {\n  id = id || this.defaultProjectId_;\n\n  if (!id) {\n    throw new Error('A project ID is required.');\n  }\n\n  return new Project(this, id);\n};",
     "ctx": {
       "type": "method",
@@ -653,102 +621,6 @@
       "cons": "Resource",
       "name": "project",
       "string": "Resource.prototype.project()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      },
-      {
-        "type": "param",
-        "string": "{string} method - Action.",
-        "name": "method",
-        "description": "<ul>\n<li>Action.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{string} path - Request path.",
-        "name": "path",
-        "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{*} query - Request query object.",
-        "name": "query",
-        "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>*</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{*} body - Request body contents.",
-        "name": "body",
-        "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>*</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{function} callback - The callback function.",
-        "name": "callback",
-        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
-        "types": [
-          "function"
-        ],
-        "typesDescription": "<code>function</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      }
-    ],
-    "description": {
-      "full": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
-      "summary": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 268,
-    "codeStart": 280,
-    "code": "Resource.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: BASE_URL + path\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthenticatedRequest_(reqOpts, callback);\n};",
-    "ctx": {
-      "type": "method",
-      "constructor": "Resource",
-      "cons": "Resource",
-      "name": "makeReq_",
-      "string": "Resource.prototype.makeReq_()"
     }
   },
   {
@@ -763,8 +635,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 294,
-    "codeStart": 299,
+    "line": 269,
+    "codeStart": 274,
     "code": "streamRouter.extend(Resource, ['getProjects']);\n\nmodule.exports = Resource;",
     "ctx": false
   }

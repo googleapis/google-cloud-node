@@ -34,8 +34,50 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';",
+    "code": "'use strict';\n\nvar nodeutil = require('util');",
     "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/serviceObject}",
+        "types": [
+          "module:common/serviceObject"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2FserviceObject.html\">common/serviceObject</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/serviceObject}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 25,
+    "codeStart": 29,
+    "code": "var ServiceObject = require('../common/service-object.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "ServiceObject",
+      "value": "require('../common/service-object.js')",
+      "string": "ServiceObject"
+    }
   },
   {
     "tags": [
@@ -69,8 +111,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 23,
-    "codeStart": 27,
+    "line": 31,
+    "codeStart": 35,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -120,8 +162,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 29,
-    "codeStart": 34
+    "line": 37,
+    "codeStart": 42
   },
   {
     "tags": [
@@ -161,9 +203,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 34,
-    "codeStart": 61,
-    "code": "function Project(resource, id) {\n  this.resource = resource;\n  this.id = id;\n  this.metadata = {};\n}",
+    "line": 42,
+    "codeStart": 69,
+    "code": "function Project(resource, id) {\n  var methods = {",
     "ctx": {
       "type": "constructor",
       "name": "Project",
@@ -173,15 +215,51 @@
   {
     "tags": [
       {
+        "type": "param",
+        "string": "{object=} config - See {module:resource#createProject}.",
+        "name": "config",
+        "description": "<ul>\n<li>See {module:resource#createProject}.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "project.create(function(err, zone, apiResponse) {\n  if (!err) {\n    // The zone was created successfully.\n  }\n});",
+        "html": "<p>project.create(function(err, zone, apiResponse) {<br />  if (!err) {<br />    // The zone was created successfully.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a project.</p>",
+      "summary": "<p>Create a project.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 71,
+    "codeStart": 83,
+    "code": "create: true,",
+    "ctx": {
+      "type": "property",
+      "name": "create",
+      "value": "true,",
+      "string": "create"
+    }
+  },
+  {
+    "tags": [
+      {
         "type": "resource",
         "string": "[projects: delete API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/delete}",
         "html": "<p>[projects: delete API Documentation]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/delete}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/delete}</a></p>"
-      },
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
       },
       {
         "type": "param",
@@ -199,9 +277,9 @@
       },
       {
         "type": "param",
-        "string": "{?error} callback.err - An error returned while making this request.",
+        "string": "{?error} callback.err - An error returned while making this\n    request.",
         "name": "callback.err",
-        "description": "<ul>\n<li>An error returned while making this request.</li>\n</ul>\n",
+        "description": "<ul>\n<li>An error returned while making this     request.</li>\n</ul>\n",
         "types": [
           "error"
         ],
@@ -232,24 +310,149 @@
       }
     ],
     "description": {
-      "full": "<p>Delete the project.</p>",
+      "full": "<p>Delete the project.</p><p><strong>This method only works if you are authenticated as yourself, e.g. using<br />the gcloud SDK.</strong></p>",
       "summary": "<p>Delete the project.</p>",
-      "body": ""
+      "body": "<p><strong>This method only works if you are authenticated as yourself, e.g. using<br />the gcloud SDK.</strong></p>"
     },
-    "isPrivate": true,
+    "isPrivate": false,
     "isConstructor": false,
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 67,
-    "codeStart": 85,
-    "code": "Project.prototype.delete = function(callback) {\n  callback = callback || util.noop;\n\n  this.makeReq_('DELETE', '', null, null, function(err, resp) {\n    callback(err, resp);\n  });\n};",
+    "line": 85,
+    "codeStart": 105,
+    "code": "delete: true,",
     "ctx": {
-      "type": "method",
-      "constructor": "Project",
-      "cons": "Project",
+      "type": "property",
       "name": "delete",
-      "string": "Project.prototype.delete()"
+      "value": "true,",
+      "string": "delete"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this\n    request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this     request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} callback.exists - Whether the project exists or not.",
+        "name": "callback.exists",
+        "description": "<ul>\n<li>Whether the project exists or not.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "project.exists(function(err, exists) {});",
+        "html": "<p>project.exists(function(err, exists) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Check if the project exists.</p>",
+      "summary": "<p>Check if the project exists.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 107,
+    "codeStart": 118,
+    "code": "exists: true,",
+    "ctx": {
+      "type": "property",
+      "name": "exists",
+      "value": "true,",
+      "string": "exists"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{options=} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "options"
+        ],
+        "typesDescription": "<a href=\"options.html\">options</a>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.autoCreate - Automatically create the object if\n    it does not exist. Default: `false`",
+        "name": "options.autoCreate",
+        "description": "<ul>\n<li>Automatically create the object if     it does not exist. Default: <code>false</code></li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "project.get(function(err, project, apiResponse) {\n  // `project.metadata` has been populated.\n});",
+        "html": "<p>project.get(function(err, project, apiResponse) {<br />  // <code>project.metadata</code> has been populated.<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a project if it exists.</p><p>You may optionally use this to &quot;get or create&quot; an object by providing an<br />object with <code>autoCreate</code> set to <code>true</code>. Any extra configuration that is<br />normally required for the <code>create</code> method must be contained within this<br />object as well.</p>",
+      "summary": "<p>Get a project if it exists.</p>",
+      "body": "<p>You may optionally use this to &quot;get or create&quot; an object by providing an<br />object with <code>autoCreate</code> set to <code>true</code>. Any extra configuration that is<br />normally required for the <code>create</code> method must be contained within this<br />object as well.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 120,
+    "codeStart": 137,
+    "code": "get: true,",
+    "ctx": {
+      "type": "property",
+      "name": "get",
+      "value": "true,",
+      "string": "get"
     }
   },
   {
@@ -275,9 +478,9 @@
       },
       {
         "type": "param",
-        "string": "{?error} callback.err - An error returned while making this request.",
+        "string": "{?error} callback.err - An error returned while making this\n    request.",
         "name": "callback.err",
-        "description": "<ul>\n<li>An error returned while making this request.</li>\n</ul>\n",
+        "description": "<ul>\n<li>An error returned while making this     request.</li>\n</ul>\n",
         "types": [
           "error"
         ],
@@ -289,9 +492,9 @@
       },
       {
         "type": "param",
-        "string": "{?object} callback.metadata - Metadata of the project from the API.",
+        "string": "{?object} callback.metadata - Metadata of the project from the\n    API.",
         "name": "callback.metadata",
-        "description": "<ul>\n<li>Metadata of the project from the API.</li>\n</ul>\n",
+        "description": "<ul>\n<li>Metadata of the project from the     API.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -331,15 +534,108 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 93,
-    "codeStart": 106,
-    "code": "Project.prototype.getMetadata = function(callback) {\n  var self = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('GET', '', null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.metadata = resp;\n\n    callback(null, self.metadata, resp);\n  });\n};",
+    "line": 139,
+    "codeStart": 154,
+    "code": "getMetadata: true,",
     "ctx": {
-      "type": "method",
-      "constructor": "Project",
-      "cons": "Project",
+      "type": "property",
       "name": "getMetadata",
-      "string": "Project.prototype.getMetadata()"
+      "value": "true,",
+      "string": "getMetadata"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[projects: update API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/update}",
+        "html": "<p>[projects: update API Documentation]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/update}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/update}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Project Resource]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project}",
+        "html": "<p>[Project Resource]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{object} metadata - See a\n    [Project resource](https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project).",
+        "name": "metadata",
+        "description": "<ul>\n<li>See a     <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project\">Project resource</a>.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this\n    request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this     request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var metadata = {\n  name: 'New name'\n};\n\nproject.setMetadata(metadata, function(err, apiResponse) {\n  if (!err) {\n    // The project has been successfully updated.\n  }\n});",
+        "html": "<p>var metadata = {<br />  name: &#39;New name&#39;<br />};</p><p>project.setMetadata(metadata, function(err, apiResponse) {<br />  if (!err) {<br />    // The project has been successfully updated.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Set the project&#39;s metadata.</p><p><strong>This method only works if you are authenticated as yourself, e.g. using<br />the gcloud SDK.</strong></p>",
+      "summary": "<p>Set the project&#39;s metadata.</p>",
+      "body": "<p><strong>This method only works if you are authenticated as yourself, e.g. using<br />the gcloud SDK.</strong></p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 156,
+    "codeStart": 183,
+    "code": "setMetadata: true\n  };\n\n  ServiceObject.call(this, {\nparent: resource,\nbaseUrl: '/projects',\nid: id,\ncreateMethod: resource.createProject.bind(resource),\nmethods: methods\n  });\n}\n\nnodeutil.inherits(Project, ServiceObject);",
+    "ctx": {
+      "type": "property",
+      "name": "setMetadata",
+      "value": "true",
+      "string": "setMetadata"
     }
   },
   {
@@ -348,12 +644,6 @@
         "type": "resource",
         "string": "[projects: undelete API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/undelete}",
         "html": "<p>[projects: undelete API Documentation]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/undelete}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/undelete}</a></p>"
-      },
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
       },
       {
         "type": "param",
@@ -404,221 +694,24 @@
       }
     ],
     "description": {
-      "full": "<p>Restore a project.</p>",
+      "full": "<p>Restore a project.</p><p><strong>This method only works if you are authenticated as yourself, e.g. using the<br />gcloud SDK.</strong></p>",
       "summary": "<p>Restore a project.</p>",
-      "body": ""
+      "body": "<p><strong>This method only works if you are authenticated as yourself, e.g. using the<br />gcloud SDK.</strong></p>"
     },
-    "isPrivate": true,
+    "isPrivate": false,
     "isConstructor": false,
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 123,
-    "codeStart": 141,
-    "code": "Project.prototype.restore = function(callback) {\n  callback = callback || util.noop;\n\n  this.makeReq_('POST', ':undelete', null, null, function(err, resp) {\n    callback(err, resp);\n  });\n};",
+    "line": 197,
+    "codeStart": 216,
+    "code": "Project.prototype.restore = function(callback) {\n  callback = callback || util.noop;\n\n  this.request({\n    method: 'POST',\n    uri: ':undelete'\n  }, function(err, resp) {\n    callback(err, resp);\n  });\n};\n\nmodule.exports = Project;",
     "ctx": {
       "type": "method",
       "constructor": "Project",
       "cons": "Project",
       "name": "restore",
       "string": "Project.prototype.restore()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "resource",
-        "string": "[projects: update API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/update}",
-        "html": "<p>[projects: update API Documentation]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/update}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/update}</a></p>"
-      },
-      {
-        "type": "resource",
-        "string": "[Project Resource]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project}",
-        "html": "<p>[Project Resource]{@link <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project}\">https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project}</a></p>"
-      },
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      },
-      {
-        "type": "param",
-        "string": "{object} metadata - See a\n    [Project resource](https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project).",
-        "name": "metadata",
-        "description": "<ul>\n<li>See a     <a href=\"https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project\">Project resource</a>.</li>\n</ul>\n",
-        "types": [
-          "object"
-        ],
-        "typesDescription": "<code>object</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{function=} callback - The callback function.",
-        "name": "callback",
-        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
-        "types": [
-          "function"
-        ],
-        "typesDescription": "<code>function</code>|<code>undefined</code>",
-        "optional": true,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{?error} callback.err - An error returned while making this request.",
-        "name": "callback.err",
-        "description": "<ul>\n<li>An error returned while making this request.</li>\n</ul>\n",
-        "types": [
-          "error"
-        ],
-        "typesDescription": "<code>error</code>|<code>null</code>",
-        "optional": false,
-        "nullable": true,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.",
-        "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
-        "types": [
-          "object"
-        ],
-        "typesDescription": "<code>object</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "example",
-        "string": "var metadata = {\n  name: 'New name'\n};\n\nproject.setMetadata(metadata, function(err, apiResponse) {\n  if (!err) {\n    // The project has been successfully updated.\n  }\n});",
-        "html": "<p>var metadata = {<br />  name: &#39;New name&#39;<br />};</p><p>project.setMetadata(metadata, function(err, apiResponse) {<br />  if (!err) {<br />    // The project has been successfully updated.<br />  }<br />});</p>"
-      }
-    ],
-    "description": {
-      "full": "<p>Set the project&#39;s metadata.</p>",
-      "summary": "<p>Set the project&#39;s metadata.</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 149,
-    "codeStart": 174,
-    "code": "Project.prototype.setMetadata = function(metadata, callback) {\n  var self = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('PUT', '', null, metadata, function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    self.metadata = resp;\n\n    callback(null, resp);\n  });\n};",
-    "ctx": {
-      "type": "method",
-      "constructor": "Project",
-      "cons": "Project",
-      "name": "setMetadata",
-      "string": "Project.prototype.setMetadata()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      },
-      {
-        "type": "param",
-        "string": "{string} method - Action.",
-        "name": "method",
-        "description": "<ul>\n<li>Action.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{string} path - Request path.",
-        "name": "path",
-        "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{*} query - Request query object.",
-        "name": "query",
-        "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>*</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{*} body - Request body contents.",
-        "name": "body",
-        "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>*</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{function} callback - The callback function.",
-        "name": "callback",
-        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
-        "types": [
-          "function"
-        ],
-        "typesDescription": "<code>function</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      }
-    ],
-    "description": {
-      "full": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
-      "summary": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 191,
-    "codeStart": 203,
-    "code": "Project.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/' + this.id + path;\n  this.resource.makeReq_(method, path, query, body, callback);\n};\n\nmodule.exports = Project;",
-    "ctx": {
-      "type": "method",
-      "constructor": "Project",
-      "cons": "Project",
-      "name": "makeReq_",
-      "string": "Project.prototype.makeReq_()"
     }
   }
 ]
