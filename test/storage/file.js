@@ -17,7 +17,6 @@
 'use strict';
 
 var assert = require('assert');
-var Bucket = require('../../lib/storage/bucket.js');
 var duplexify = require('duplexify');
 var extend = require('extend');
 var format = require('string-format-obj');
@@ -29,7 +28,10 @@ var stream = require('stream');
 var through = require('through2');
 var tmp = require('tmp');
 var url = require('url');
-var util = require('../../lib/common/util');
+
+var Bucket = require('../../lib/storage/bucket.js');
+var ServiceObject = require('../../lib/common/service-object.js');
+var util = require('../../lib/common/util.js');
 
 var makeWritableStreamOverride;
 var handleRespOverride;
@@ -72,21 +74,34 @@ fakeResumableUpload.createURI = function() {
   return createURI.apply(null, arguments);
 };
 
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeServiceObject, ServiceObject);
+
 describe('File', function() {
   var File;
-  var FILE_NAME = 'file-name.png';
   var file;
+
+  var FILE_NAME = 'file-name.png';
   var directoryFile;
-  var bucket;
+
+  var STORAGE;
+  var BUCKET;
 
   before(function() {
-    mockery.registerMock('request', fakeRequest);
     mockery.registerMock('gcs-resumable-upload', fakeResumableUpload);
+    mockery.registerMock('request', fakeRequest);
+    mockery.registerMock('../common/service-object.js', FakeServiceObject);
     mockery.registerMock('../common/util.js', fakeUtil);
+
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
     });
+
     File = require('../../lib/storage/file.js');
   });
 
@@ -96,8 +111,10 @@ describe('File', function() {
   });
 
   beforeEach(function() {
-    var options = {
-      makeAuthenticatedRequest_: function(req, callback) {
+    STORAGE = {
+      createBucket: util.noop,
+      request: util.noop,
+      makeAuthenticatedRequest: function(req, callback) {
         if (callback) {
           (callback.onAuthenticated || callback)(null, req);
         } else {
@@ -105,13 +122,14 @@ describe('File', function() {
         }
       }
     };
-    bucket = new Bucket(options, 'bucket-name');
 
-    file = new File(bucket, FILE_NAME);
-    file.makeReq_ = util.noop;
+    BUCKET = new Bucket(STORAGE, 'bucket-name');
 
-    directoryFile = new File(bucket, 'directory/file.jpg');
-    directoryFile.makeReq_ = util.noop;
+    file = new File(BUCKET, FILE_NAME);
+    file.request = util.noop;
+
+    directoryFile = new File(BUCKET, 'directory/file.jpg');
+    directoryFile.request = util.noop;
 
     handleRespOverride = null;
     makeWritableStreamOverride = null;
@@ -120,19 +138,35 @@ describe('File', function() {
   });
 
   describe('initialization', function() {
-    it('should throw if no name is provided', function() {
-      assert.throws(function() {
-        new File(bucket);
-      }, /A file name must be specified/);
-    });
-
     it('should assign file name', function() {
       assert.equal(file.name, FILE_NAME);
     });
 
+    it('should assign the bucket instance', function() {
+      assert.strictEqual(file.bucket, BUCKET);
+    });
+
+    it('should assign the storage instance', function() {
+      assert.strictEqual(file.storage, BUCKET.storage);
+    });
+
     it('should accept specifying a generation', function() {
-      var file = new File(bucket, 'name', { generation: 2 });
+      var file = new File(BUCKET, 'name', { generation: 2 });
       assert.equal(file.generation, 2);
+    });
+
+    it('should inherit from ServiceObject', function() {
+      assert(file instanceof ServiceObject);
+
+      var calledWith = file.calledWith_[0];
+
+      assert.strictEqual(calledWith.parent, BUCKET);
+      assert.strictEqual(calledWith.baseUrl, '/o');
+      assert.strictEqual(calledWith.id, encodeURIComponent(FILE_NAME));
+      assert.deepEqual(calledWith.methods, {
+        exists: true,
+        get: true
+      });
     });
   });
 
@@ -144,17 +178,15 @@ describe('File', function() {
     });
 
     it('should URI encode file names', function(done) {
-      var newFile = new File(bucket, 'nested/file.jpg');
+      var newFile = new File(BUCKET, 'nested/file.jpg');
 
-      var expectedPath =
-        format('/o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {
-          srcName: encodeURIComponent(directoryFile.name),
-          destBucket: file.bucket.name,
-          destName: encodeURIComponent(newFile.name)
-        });
+      var expectedPath = format('/copyTo/b/{destBucket}/o/{destName}', {
+        destBucket: file.bucket.name,
+        destName: encodeURIComponent(newFile.name)
+      });
 
-      directoryFile.makeReq_ = function(method, path) {
-        assert.equal(path, expectedPath);
+      directoryFile.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, expectedPath);
         done();
       };
 
@@ -165,9 +197,9 @@ describe('File', function() {
       var error = new Error('Error.');
       var apiResponse = {};
 
-      var newFile = new File(bucket, 'new-file');
+      var newFile = new File(BUCKET, 'new-file');
 
-      file.makeReq_ = function(method, path, query, body, callback) {
+      file.request = function(reqOpts, callback) {
         callback(error, apiResponse);
       };
 
@@ -181,11 +213,11 @@ describe('File', function() {
     });
 
     it('should send query.sourceGeneration if File has one', function(done) {
-      var versionedFile = new File(bucket, 'name', { generation: 1 });
-      var newFile = new File(bucket, 'new-file');
+      var versionedFile = new File(BUCKET, 'name', { generation: 1 });
+      var newFile = new File(BUCKET, 'new-file');
 
-      versionedFile.makeReq_ = function(method, path, query) {
-        assert.equal(query.sourceGeneration, 1);
+      versionedFile.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.sourceGeneration, 1);
         done();
       };
 
@@ -194,45 +226,37 @@ describe('File', function() {
 
     describe('destination types', function() {
       function assertPathEquals(file, expectedPath, callback) {
-        file.makeReq_ = function(method, path) {
-          assert.equal(path, expectedPath);
+        file.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.uri, expectedPath);
           callback();
         };
       }
 
       it('should allow a string', function(done) {
         var newFileName = 'new-file-name.png';
-        var expectedPath =
-          format('/o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {
-            srcName: file.name,
-            destBucket: file.bucket.name,
-            destName: newFileName
-          });
+        var expectedPath = format('/copyTo/b/{destBucket}/o/{destName}', {
+          destBucket: file.bucket.name,
+          destName: newFileName
+        });
         assertPathEquals(file, expectedPath, done);
         file.copy(newFileName);
       });
 
       it('should allow a Bucket', function(done) {
-        var newBucket = new Bucket({}, 'new-bucket');
-        var expectedPath =
-          format('/o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {
-            srcName: file.name,
-            destBucket: newBucket.name,
-            destName: file.name
-          });
+        var expectedPath = format('/copyTo/b/{destBucket}/o/{destName}', {
+          destBucket: BUCKET.name,
+          destName: file.name
+        });
         assertPathEquals(file, expectedPath, done);
-        file.copy(newBucket);
+        file.copy(BUCKET);
       });
 
       it('should allow a File', function(done) {
-        var newBucket = new Bucket({}, 'new-bucket');
-        var newFile = new File(newBucket, 'new-file');
-        var expectedPath =
-          format('/o/{srcName}/copyTo/b/{destBucket}/o/{destName}', {
-            srcName: file.name,
-            destBucket: newBucket.name,
-            destName: newFile.name
-          });
+        var newFile = new File(BUCKET, 'new-file');
+        var expectedPath = format('/copyTo/b/{destBucket}/o/{destName}', {
+          destBucket: BUCKET.name,
+          destName: newFile.name
+        });
         assertPathEquals(file, expectedPath, done);
         file.copy(newFile);
       });
@@ -247,14 +271,13 @@ describe('File', function() {
     describe('returned File object', function() {
       beforeEach(function() {
         var resp = { success: true };
-        file.makeReq_ = function(method, path, qs, body, callback) {
+        file.request = function(reqOpts, callback) {
           callback(null, resp);
         };
       });
 
       it('should re-use file object if one is provided', function(done) {
-        var newBucket = new Bucket({}, 'new-bucket');
-        var newFile = new File(newBucket, 'new-file');
+        var newFile = new File(BUCKET, 'new-file');
         file.copy(newFile, function(err, copiedFile) {
           assert.ifError(err);
           assert.deepEqual(copiedFile, newFile);
@@ -266,114 +289,25 @@ describe('File', function() {
         var newFilename = 'new-filename';
         file.copy(newFilename, function(err, copiedFile) {
           assert.ifError(err);
-          assert.equal(copiedFile.bucket.name, bucket.name);
+          assert.equal(copiedFile.bucket.name, BUCKET.name);
           assert.equal(copiedFile.name, newFilename);
           done();
         });
       });
 
       it('should create new file on the destination bucket', function(done) {
-        var newBucket = new Bucket({}, 'new-bucket');
-        file.copy(newBucket, function(err, copiedFile) {
+        file.copy(BUCKET, function(err, copiedFile) {
           assert.ifError(err);
-          assert.equal(copiedFile.bucket.name, newBucket.name);
+          assert.equal(copiedFile.bucket.name, BUCKET.name);
           assert.equal(copiedFile.name, file.name);
           done();
         });
       });
 
       it('should pass apiResponse into callback', function(done) {
-        var newBucket = new Bucket({}, 'new-bucket');
-        file.copy(newBucket, function(err, copiedFile, apiResponse) {
+        file.copy(BUCKET, function(err, copiedFile, apiResponse) {
+          assert.ifError(err);
           assert.deepEqual({ success: true }, apiResponse);
-          done();
-        });
-      });
-    });
-  });
-
-  describe('move', function() {
-    it('should throw if no destination is provided', function() {
-      assert.throws(function() {
-        file.move();
-      }, /should have a name/);
-    });
-
-    describe('copy to destination', function() {
-      function assertCopyFile(file, expectedDestination, callback) {
-        file.copy = function(destination) {
-          assert.equal(destination, expectedDestination);
-          callback();
-        };
-      }
-
-      it('should call copy with string', function(done) {
-        var newFileName = 'new-file-name.png';
-        assertCopyFile(file, newFileName, done);
-        file.move(newFileName);
-      });
-
-      it('should call copy with Bucket', function(done) {
-        var newBucket = new Bucket({}, 'new-bucket');
-        assertCopyFile(file, newBucket, done);
-        file.move(newBucket);
-      });
-
-      it('should call copy with File', function(done) {
-        var newBucket = new Bucket({}, 'new-bucket');
-        var newFile = new File(newBucket, 'new-file');
-        assertCopyFile(file, newFile, done);
-        file.move(newFile);
-      });
-
-      it('should fail if copy fails', function(done) {
-        var error = new Error('Error.');
-        file.copy = function(destination, callback) {
-          callback(error);
-        };
-        file.move('new-filename', function(err) {
-          assert.equal(err, error);
-          done();
-        });
-      });
-    });
-
-    describe('delete original file', function() {
-      it('should delete if copy is successful', function(done) {
-        file.copy = function(destination, callback) {
-          callback(null);
-        };
-        file.delete = function() {
-          assert.equal(this, file);
-          done();
-        };
-        file.move('new-filename');
-      });
-
-      it('should not delete if copy fails', function(done) {
-        var deleteCalled = false;
-        file.copy = function(destination, callback) {
-          callback(new Error('Error.'));
-        };
-        file.delete = function() {
-          deleteCalled = true;
-        };
-        file.move('new-filename', function() {
-          assert.equal(deleteCalled, false);
-          done();
-        });
-      });
-
-      it('should fail if delete fails', function(done) {
-        var error = new Error('Error.');
-        file.copy = function(destination, callback) {
-          callback();
-        };
-        file.delete = function(callback) {
-          callback(error);
-        };
-        file.move('new-filename', function(err) {
-          assert.equal(err, error);
           done();
         });
       });
@@ -499,13 +433,11 @@ describe('File', function() {
     });
 
     it('should send query.generation if File has one', function(done) {
-      var versionedFile = new File(bucket, 'file.txt', { generation: 1 });
+      var versionedFile = new File(BUCKET, 'file.txt', { generation: 1 });
 
-      versionedFile.bucket.storage.makeAuthenticatedRequest_ = function(rOpts) {
+      versionedFile.bucket.storage.makeAuthenticatedRequest = function(rOpts) {
         assert.equal(rOpts.qs.generation, 1);
-        setImmediate(function() {
-          done();
-        });
+        setImmediate(done);
         return duplexify();
       };
 
@@ -531,7 +463,7 @@ describe('File', function() {
     it('should confirm the abort method exists', function(done) {
       var reqStream = through();
 
-      file.bucket.storage.makeAuthenticatedRequest_ = function() {
+      file.bucket.storage.makeAuthenticatedRequest = function() {
         return reqStream;
       };
 
@@ -554,7 +486,7 @@ describe('File', function() {
           o: encodeURIComponent(file.name)
         });
 
-        file.bucket.storage.makeAuthenticatedRequest_ = function(opts) {
+        file.bucket.storage.makeAuthenticatedRequest = function(opts) {
           assert.equal(opts.uri, expectedPath);
           setImmediate(function() {
             done();
@@ -566,7 +498,7 @@ describe('File', function() {
       });
 
       it('should accept gzip encoding', function(done) {
-        file.bucket.storage.makeAuthenticatedRequest_ = function(opts) {
+        file.bucket.storage.makeAuthenticatedRequest = function(opts) {
           assert.strictEqual(opts.gzip, true);
           setImmediate(function() {
             done();
@@ -581,7 +513,7 @@ describe('File', function() {
         var ERROR = new Error('Error.');
 
         beforeEach(function() {
-          file.bucket.storage.makeAuthenticatedRequest_ = function(opts) {
+          file.bucket.storage.makeAuthenticatedRequest = function(opts) {
             var stream = (requestOverride || request)(opts);
 
             setImmediate(function() {
@@ -609,7 +541,7 @@ describe('File', function() {
 
         requestOverride = getFakeRequest();
 
-        file.bucket.storage.makeAuthenticatedRequest_ = function() {
+        file.bucket.storage.makeAuthenticatedRequest = function() {
           setImmediate(function() {
             assert.deepEqual(requestOverride.getRequestOptions(), fakeRequest);
             done();
@@ -634,7 +566,7 @@ describe('File', function() {
       it('should unpipe stream from an error on the response', function(done) {
         var requestStream = through();
 
-        file.bucket.storage.makeAuthenticatedRequest_ = function() {
+        file.bucket.storage.makeAuthenticatedRequest = function() {
           setImmediate(function() {
             // Must be a stream. Doesn't matter for the tests, though.
             requestStream.emit('response', through());
@@ -670,7 +602,7 @@ describe('File', function() {
           done();
         };
 
-        file.bucket.storage.makeAuthenticatedRequest_ = function() {
+        file.bucket.storage.makeAuthenticatedRequest = function() {
           var stream = through();
           setImmediate(function() {
             stream.emit('complete', response);
@@ -714,7 +646,7 @@ describe('File', function() {
       beforeEach(function() {
         file.metadata.mediaLink = 'http://uri';
 
-        file.bucket.storage.makeAuthenticatedRequest_ = function(opts, cb) {
+        file.bucket.storage.makeAuthenticatedRequest = function(opts, cb) {
           if (cb) {
             (cb.onAuthenticated || cb)(null, {});
           } else {
@@ -914,7 +846,7 @@ describe('File', function() {
         createURI: function(opts, callback) {
           var bucket = file.bucket;
           var storage = bucket.storage;
-          var authClient = storage.makeAuthenticatedRequest_.authClient;
+          var authClient = storage.makeAuthenticatedRequest.authClient;
 
           assert.strictEqual(opts.authClient, authClient);
           assert.strictEqual(opts.bucket, bucket.name);
@@ -1218,13 +1150,14 @@ describe('File', function() {
 
   describe('delete', function() {
     it('should delete the file', function(done) {
-      file.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'DELETE');
-        assert.equal(path, '/o/' + FILE_NAME);
-        assert.deepEqual(query, {});
-        assert.strictEqual(body, null);
+      file.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'DELETE');
+        assert.equal(reqOpts.uri, '');
+        assert.deepEqual(reqOpts.qs, {});
+
         done();
       };
+
       file.delete();
     });
 
@@ -1232,7 +1165,7 @@ describe('File', function() {
       var error = new Error('Error.');
       var apiResponse = {};
 
-      file.makeReq_ = function(method, path, query, body, callback) {
+      file.request = function(reqOpts, callback) {
         callback(error, apiResponse);
       };
 
@@ -1244,20 +1177,12 @@ describe('File', function() {
       });
     });
 
-    it('should URI encode file names', function(done) {
-      directoryFile.makeReq_ = function(method, path) {
-        assert.equal(path, '/o/' + encodeURIComponent(directoryFile.name));
-        done();
-      };
-
-      directoryFile.delete();
-    });
-
     it('should send query.generation if File has one', function(done) {
-      var versionedFile = new File(bucket, 'new-file.txt', { generation: 1 });
+      var versionedFile = new File(BUCKET, 'new-file.txt', { generation: 1 });
 
-      versionedFile.makeReq_ = function(method, path, query) {
-        assert.equal(query.generation, 1);
+      versionedFile.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.generation, 1);
+
         done();
       };
 
@@ -1265,17 +1190,20 @@ describe('File', function() {
     });
 
     it('should execute callback', function(done) {
-      file.makeReq_ = function(method, path, query, body, callback) {
+      file.request = function(reqOpts, callback) {
         callback();
       };
+
       file.delete(done);
     });
 
     it('should execute callback with apiResponse', function(done) {
       var resp = { success: true };
-      file.makeReq_ = function(method, path, query, body, callback) {
+
+      file.request = function(reqOpts, callback) {
         callback(null, resp);
       };
+
       file.delete(function(err, apiResponse) {
         assert.deepEqual(resp, apiResponse);
         done();
@@ -1419,30 +1347,21 @@ describe('File', function() {
     var metadata = { a: 'b', c: 'd' };
 
     it('should get the metadata of a file', function(done) {
-      file.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'GET');
-        assert.equal(path, '/o/' + FILE_NAME);
-        assert.deepEqual(query, {});
-        assert.strictEqual(body, null);
+      file.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '');
+        assert.deepEqual(reqOpts.qs, {});
+
         done();
       };
+
       file.getMetadata();
     });
 
-    it('should URI encode file names', function(done) {
-      directoryFile.makeReq_ = function(method, path) {
-        assert.equal(path, '/o/' + encodeURIComponent(directoryFile.name));
-        done();
-      };
-
-      directoryFile.getMetadata();
-    });
-
     it('should send query.generation if File has one', function(done) {
-      var versionedFile = new File(bucket, 'new-file.txt', { generation: 1 });
+      var versionedFile = new File(BUCKET, 'new-file.txt', { generation: 1 });
 
-      versionedFile.makeReq_ = function(method, path, query) {
-        assert.equal(query.generation, 1);
+      versionedFile.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.generation, 1);
         done();
       };
 
@@ -1450,15 +1369,16 @@ describe('File', function() {
     });
 
     it('should execute callback', function(done) {
-      file.makeReq_ = function(method, path, query, body, callback) {
+      file.request = function(reqOpts, callback) {
         callback();
       };
+
       file.getMetadata(done);
     });
 
     it('should execute callback with apiResponse', function(done) {
       var resp = { success: true };
-      file.makeReq_ = function(method, path, query, body, callback) {
+      file.request = function(reqOpts, callback) {
         callback(null, resp);
       };
       file.getMetadata(function(err, metadata, apiResponse) {
@@ -1468,7 +1388,7 @@ describe('File', function() {
     });
 
     it('should update metadata property on object', function() {
-      file.makeReq_ = function(method, path, query, body, callback) {
+      file.request = function(reqOpts, callback) {
         callback(null, metadata);
       };
       assert.deepEqual(file.metadata, {});
@@ -1479,7 +1399,7 @@ describe('File', function() {
     });
 
     it('should pass metadata to callback', function(done) {
-      file.makeReq_ = function(method, path, query, body, callback) {
+      file.request = function(reqOpts, callback) {
         callback(null, metadata);
       };
       file.getMetadata(function(err, fileMetadata) {
@@ -1493,8 +1413,8 @@ describe('File', function() {
     var credentials = require('../testdata/privateKeyFile.json');
 
     beforeEach(function() {
-      var storage = bucket.storage;
-      storage.makeAuthenticatedRequest_.getCredentials = function(callback) {
+      var storage = BUCKET.storage;
+      storage.getCredentials = function(callback) {
         callback(null, credentials);
       };
     });
@@ -1514,8 +1434,8 @@ describe('File', function() {
     it('should return an error if getCredentials errors', function(done) {
       var error = new Error('Error.');
 
-      var storage = bucket.storage;
-      storage.makeAuthenticatedRequest_.getCredentials = function(callback) {
+      var storage = BUCKET.storage;
+      storage.getCredentials = function(callback) {
         callback(error);
       };
 
@@ -1529,8 +1449,8 @@ describe('File', function() {
     });
 
     it('should return an error if credentials are not present', function(done) {
-      var storage = bucket.storage;
-      storage.makeAuthenticatedRequest_.getCredentials = function(callback) {
+      var storage = BUCKET.storage;
+      storage.getCredentials = function(callback) {
         callback(null, {});
       };
 
@@ -1783,8 +1703,8 @@ describe('File', function() {
     var credentials = require('../testdata/privateKeyFile.json');
 
     beforeEach(function() {
-      var storage = bucket.storage;
-      storage.makeAuthenticatedRequest_.getCredentials = function(callback) {
+      var storage = BUCKET.storage;
+      storage.getCredentials = function(callback) {
         callback(null, credentials);
       };
     });
@@ -1803,8 +1723,8 @@ describe('File', function() {
     it('should return an error if getCredentials errors', function(done) {
       var error = new Error('Error.');
 
-      var storage = bucket.storage;
-      storage.makeAuthenticatedRequest_.getCredentials = function(callback) {
+      var storage = BUCKET.storage;
+      storage.getCredentials = function(callback) {
         callback(error);
       };
 
@@ -1819,8 +1739,8 @@ describe('File', function() {
     });
 
     it('should return an error if credentials are not present', function(done) {
-      var storage = bucket.storage;
-      storage.makeAuthenticatedRequest_.getCredentials = function(callback) {
+      var storage = BUCKET.storage;
+      storage.getCredentials = function(callback) {
         callback(null, {});
       };
 
@@ -1963,79 +1883,57 @@ describe('File', function() {
     });
   });
 
-  describe('setMetadata', function() {
-    var metadata = { fake: 'metadata' };
+  describe('makePrivate', function() {
+    it('should execute callback with API response', function(done) {
+      var apiResponse = {};
 
-    it('should set metadata', function(done) {
-      file.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'PATCH');
-        assert.equal(path, '/o/' + file.name);
-        assert.deepEqual(body, metadata);
+      file.request = function(reqOpts, callback) {
+        callback(null, apiResponse);
+      };
+
+      file.makePrivate(function(err, apiResponse_) {
+        assert.ifError(err);
+        assert.strictEqual(apiResponse_, apiResponse);
+
         done();
-      };
-      file.setMetadata(metadata);
-    });
-
-    it('should URI encode file names', function(done) {
-      directoryFile.makeReq_ = function(method, path) {
-        assert.equal(path, '/o/' + encodeURIComponent(directoryFile.name));
-        done();
-      };
-
-      directoryFile.setMetadata(metadata);
-    });
-
-    it('should send query.generation if File has one', function(done) {
-      var versionedFile = new File(bucket, 'new-file.txt', { generation: 1 });
-
-      versionedFile.makeReq_ = function(method, path, query) {
-        assert.equal(query.generation, 1);
-        done();
-      };
-
-      versionedFile.setMetadata();
-    });
-
-    it('should execute callback', function(done) {
-      file.makeReq_ = function(method, path, query, body, callback) {
-        callback();
-      };
-      file.setMetadata(metadata, done);
+      });
     });
 
     it('should execute callback with error & API response', function(done) {
       var error = new Error('Error.');
       var apiResponse = {};
 
-      file.makeReq_ = function(method, path, query, body, callback) {
+      file.request = function(reqOpts, callback) {
         callback(error, apiResponse);
       };
 
-      file.setMetadata(metadata, function(err, apiResponse_) {
+      file.makePrivate(function(err, apiResponse_) {
         assert.strictEqual(err, error);
         assert.strictEqual(apiResponse_, apiResponse);
+
         done();
       });
     });
 
-    it('should execute callback with apiResponse', function(done) {
-      var resp = { success: true };
-      file.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, resp);
-      };
-      file.setMetadata(metadata, function(err, apiResponse) {
-        assert.deepEqual(resp, apiResponse);
+    it('should make the file private to project by default', function(done) {
+      file.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'PATCH');
+        assert.strictEqual(reqOpts.uri, '');
+        assert.deepEqual(reqOpts.qs, { predefinedAcl: 'projectPrivate' });
+        assert.deepEqual(reqOpts.json, { acl: null });
         done();
-      });
+      };
+
+      file.makePrivate(util.noop);
     });
 
-    it('should update internal metadata property', function() {
-      file.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, metadata);
+    it('should make the file private to user if strict = true', function(done) {
+      file.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, { predefinedAcl: 'private' });
+        done();
       };
-      file.setMetadata(metadata, function() {
-        assert.deepEqual(file.metadata, metadata);
-      });
+
+      file.makePrivate({ strict: true }, util.noop);
     });
   });
 
@@ -2058,60 +1956,156 @@ describe('File', function() {
     });
   });
 
-  describe('makePrivate', function() {
-    it('should execute callback with API response', function(done) {
-      var apiResponse = {};
+  describe('move', function() {
+    it('should throw if no destination is provided', function() {
+      assert.throws(function() {
+        file.move();
+      }, /should have a name/);
+    });
 
-      file.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, apiResponse);
+    describe('copy to destination', function() {
+      function assertCopyFile(file, expectedDestination, callback) {
+        file.copy = function(destination) {
+          assert.strictEqual(destination, expectedDestination);
+          callback();
+        };
+      }
+
+      it('should call copy with string', function(done) {
+        var newFileName = 'new-file-name.png';
+        assertCopyFile(file, newFileName, done);
+        file.move(newFileName);
+      });
+
+      it('should call copy with Bucket', function(done) {
+        assertCopyFile(file, BUCKET, done);
+        file.move(BUCKET);
+      });
+
+      it('should call copy with File', function(done) {
+        var newFile = new File(BUCKET, 'new-file');
+        assertCopyFile(file, newFile, done);
+        file.move(newFile);
+      });
+
+      it('should fail if copy fails', function(done) {
+        var error = new Error('Error.');
+        file.copy = function(destination, callback) {
+          callback(error);
+        };
+        file.move('new-filename', function(err) {
+          assert.equal(err, error);
+          done();
+        });
+      });
+    });
+
+    describe('delete original file', function() {
+      it('should delete if copy is successful', function(done) {
+        file.copy = function(destination, callback) {
+          callback(null);
+        };
+        file.delete = function() {
+          assert.equal(this, file);
+          done();
+        };
+        file.move('new-filename');
+      });
+
+      it('should not delete if copy fails', function(done) {
+        var deleteCalled = false;
+        file.copy = function(destination, callback) {
+          callback(new Error('Error.'));
+        };
+        file.delete = function() {
+          deleteCalled = true;
+        };
+        file.move('new-filename', function() {
+          assert.equal(deleteCalled, false);
+          done();
+        });
+      });
+
+      it('should fail if delete fails', function(done) {
+        var error = new Error('Error.');
+        file.copy = function(destination, callback) {
+          callback();
+        };
+        file.delete = function(callback) {
+          callback(error);
+        };
+        file.move('new-filename', function(err) {
+          assert.equal(err, error);
+          done();
+        });
+      });
+    });
+  });
+
+  describe('setMetadata', function() {
+    var metadata = { fake: 'metadata' };
+
+    it('should set metadata', function(done) {
+      file.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'PATCH');
+        assert.strictEqual(reqOpts.uri, '');
+        assert.deepEqual(reqOpts.json, metadata);
+        done();
+      };
+      file.setMetadata(metadata);
+    });
+
+    it('should send query.generation if File has one', function(done) {
+      var versionedFile = new File(BUCKET, 'new-file.txt', { generation: 1 });
+
+      versionedFile.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.generation, 1);
+        done();
       };
 
-      file.makePrivate(function(err, apiResponse_) {
-        assert.ifError(err);
-        assert.strictEqual(apiResponse_, apiResponse);
+      versionedFile.setMetadata();
+    });
 
-        done();
-      });
+    it('should execute callback', function(done) {
+      file.request = function(reqOpts, callback) {
+        callback();
+      };
+      file.setMetadata(metadata, done);
     });
 
     it('should execute callback with error & API response', function(done) {
       var error = new Error('Error.');
       var apiResponse = {};
 
-      file.makeReq_ = function(method, path, query, body, callback) {
+      file.request = function(reqOpts, callback) {
         callback(error, apiResponse);
       };
 
-      file.makePrivate(function(err, apiResponse_) {
+      file.setMetadata(metadata, function(err, apiResponse_) {
         assert.strictEqual(err, error);
         assert.strictEqual(apiResponse_, apiResponse);
-
         done();
       });
     });
 
-    it('should make the file private to project by default', function(done) {
-      file.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'PATCH');
-        assert.equal(path, '/o/' + encodeURIComponent(file.name));
-        assert.deepEqual(query, { predefinedAcl: 'projectPrivate' });
-        assert.deepEqual(body, { acl: null });
-        done();
+    it('should execute callback with apiResponse', function(done) {
+      var resp = { success: true };
+      file.request = function(reqOpts, callback) {
+        callback(null, resp);
       };
-
-      file.makePrivate(util.noop);
+      file.setMetadata(metadata, function(err, apiResponse) {
+        assert.deepEqual(resp, apiResponse);
+        done();
+      });
     });
 
-    it('should make the file private to user if strict = true', function(done) {
-      file.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'PATCH');
-        assert.equal(path, '/o/' + encodeURIComponent(file.name));
-        assert.deepEqual(query, { predefinedAcl: 'private' });
-        assert.deepEqual(body, { acl: null });
-        done();
+    it('should update internal metadata property', function() {
+      file.request = function(reqOpts, callback) {
+        callback(null, metadata);
       };
-
-      file.makePrivate({ strict: true }, util.noop);
+      file.setMetadata(metadata, function() {
+        assert.deepEqual(file.metadata, metadata);
+      });
     });
   });
 
@@ -2127,7 +2121,7 @@ describe('File', function() {
         resumableUploadOverride = function(opts) {
           var bucket = file.bucket;
           var storage = bucket.storage;
-          var authClient = storage.makeAuthenticatedRequest_.authClient;
+          var authClient = storage.makeAuthenticatedRequest.authClient;
 
           assert.strictEqual(opts.authClient, authClient);
           assert.strictEqual(opts.bucket, bucket.name);
@@ -2224,7 +2218,7 @@ describe('File', function() {
     });
 
     it('should send query.ifGenerationMatch if File has one', function(done) {
-      var versionedFile = new File(bucket, 'new-file.txt', { generation: 1 });
+      var versionedFile = new File(BUCKET, 'new-file.txt', { generation: 1 });
 
       makeWritableStreamOverride = function(stream, options) {
         assert.equal(options.request.qs.ifGenerationMatch, 1);
