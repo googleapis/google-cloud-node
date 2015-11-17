@@ -489,14 +489,37 @@ describe('PubSub', function() {
     });
 
     it('should pass options to the api request', function(done) {
-      var opts = { ackDeadlineSeconds: 90 };
+      var options = {
+        autoAck: true,
+        interval: 3,
+        reuseExisting: false,
+        ackDeadlineSeconds: 90,
+        pushConfig: {
+          pushEndpoint: 'https://domain/push'
+        }
+      };
+
+      var expectedBody = extend({}, options, {
+        topic: TOPIC_NAME
+      });
+
+      delete expectedBody.autoAck;
+      delete expectedBody.interval;
+      delete expectedBody.reuseExisting;
+
+      pubsub.topic = function() {
+        return {
+          name: TOPIC_NAME
+        };
+      };
 
       pubsub.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.json.ackDeadlineSeconds, 90);
+        assert.notStrictEqual(reqOpts.json, options);
+        assert.deepEqual(reqOpts.json, expectedBody);
         done();
       };
 
-      pubsub.subscribe(TOPIC_NAME, SUB_NAME, opts, assert.ifError);
+      pubsub.subscribe(TOPIC_NAME, SUB_NAME, options, assert.ifError);
     });
 
     describe('error', function() {
