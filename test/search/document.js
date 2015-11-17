@@ -17,40 +17,70 @@
 'use strict';
 
 var assert = require('assert');
+var mockery = require('mockery');
+var nodeutil = require('util');
 
-var Document = require('../../lib/search/document.js');
-var Field = require('../../lib/search/field.js');
+var ServiceObject = require('../../lib/common/service-object.js');
 
 var DOCUMENT_JSON = require('../testdata/search-document.json');
 
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeServiceObject, ServiceObject);
+
 describe('Document', function() {
+  var Document;
   var document;
 
-  var SEARCH_INSTANCE = {
-    projectId: 'project-id'
-  };
-
-  var INDEX_INSTANCE = {
-    search_: SEARCH_INSTANCE
-  };
+  var INDEX_INSTANCE = {};
 
   var ID = 'document-id';
+
+  before(function() {
+    mockery.registerMock('../common/service-object.js', FakeServiceObject);
+
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+
+    Document = require('../../lib/search/document.js');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
 
   beforeEach(function() {
     document = new Document(INDEX_INSTANCE, ID);
   });
 
   describe('instantiation', function() {
-    it('should localize the Search instance', function() {
-      assert.deepEqual(document.search_, SEARCH_INSTANCE);
-    });
-
-    it('should localize the Index instance', function() {
-      assert.deepEqual(document.index_, INDEX_INSTANCE);
-    });
-
     it('should localize the id', function() {
       assert.equal(document.id, ID);
+    });
+
+    it('should create an empty fields object', function() {
+      assert.deepEqual(document.fields, {});
+    });
+
+    it('should inherit from ServiceObject', function() {
+      assert(document instanceof ServiceObject);
+
+      var calledWith = document.calledWith_[0];
+
+      assert.strictEqual(calledWith.parent, INDEX_INSTANCE);
+      assert.strictEqual(calledWith.baseUrl, '/documents');
+      assert.strictEqual(calledWith.id, ID);
+      assert.deepEqual(calledWith.methods, {
+        delete: true,
+        exists: true,
+        get: true
+      });
     });
   });
 
@@ -66,7 +96,7 @@ describe('Document', function() {
     it('should return a Field instance', function() {
       var field = document.addField(FIELD_NAME);
 
-      assert(field instanceof Field);
+      assert.strictEqual(field.constructor.name, 'Field');
     });
 
     it('should localize the Field instance', function() {
@@ -76,56 +106,21 @@ describe('Document', function() {
     });
   });
 
-  describe('delete', function() {
-    it('should delete the document', function(done) {
-      document.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'DELETE');
-        assert.equal(path, '');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
-        done();
+  describe('create', function() {
+    it('should call Index.createDocument', function(done) {
+      document.parent.createDocument = function(document_, callback) {
+        assert.strictEqual(document_, document);
+        callback();
       };
 
-      document.delete(assert.ifError);
-    });
-
-    it('should pass an error if one occurred', function(done) {
-      var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
-
-      document.makeReq_ = function(method, path, query, body, callback) {
-        callback(error, apiResponse);
-      };
-
-      document.delete(function(err, apiResponse_) {
-        assert.deepEqual(err, error);
-        assert.deepEqual(apiResponse_, apiResponse);
-        done();
-      });
-    });
-
-    it('should pass the API response to the callback', function(done) {
-      var apiResponse = { a: 'b', c: 'd' };
-
-      document.makeReq_ = function(method, path, query, body, callback) {
-        callback(null, apiResponse);
-      };
-
-      document.delete(function(err, apiResponse_) {
-        assert.ifError(err);
-        assert.deepEqual(apiResponse_, apiResponse);
-        done();
-      });
+      document.create(done);
     });
   });
 
   describe('getMetadata', function() {
-    it('should get the document from the API', function(done) {
-      document.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'GET');
-        assert.equal(path, '/');
-        assert.strictEqual(query, null);
-        assert.strictEqual(body, null);
+    it('should call ServiceObject.delete', function(done) {
+      FakeServiceObject.prototype.getMetadata = function() {
+        assert.strictEqual(this, document);
         done();
       };
 
@@ -136,7 +131,7 @@ describe('Document', function() {
       var error = new Error('Error.');
       var apiResponse = { a: 'b', c: 'd' };
 
-      document.makeReq_ = function(method, path, query, body, callback) {
+      FakeServiceObject.prototype.getMetadata = function(callback) {
         callback(error, apiResponse);
       };
 
@@ -148,7 +143,7 @@ describe('Document', function() {
     });
 
     it('should reset the localized fields', function(done) {
-      document.makeReq_ = function(method, path, query, body, callback) {
+      FakeServiceObject.prototype.getMetadata = function(callback) {
         callback(null, {});
       };
 
@@ -164,7 +159,7 @@ describe('Document', function() {
     });
 
     it('should create and localize Field instances', function(done) {
-      document.makeReq_ = function(method, path, query, body, callback) {
+      FakeServiceObject.prototype.getMetadata = function(callback) {
         callback(null, DOCUMENT_JSON);
       };
 
@@ -194,7 +189,7 @@ describe('Document', function() {
     });
 
     it('should reset the localized rank', function(done) {
-      document.makeReq_ = function(method, path, query, body, callback) {
+      FakeServiceObject.prototype.getMetadata = function(callback) {
         callback(null, {});
       };
 
@@ -208,7 +203,7 @@ describe('Document', function() {
     });
 
     it('should localize a new rank', function(done) {
-      document.makeReq_ = function(method, path, query, body, callback) {
+      FakeServiceObject.prototype.getMetadata = function(callback) {
         callback(null, DOCUMENT_JSON);
       };
 
@@ -220,7 +215,7 @@ describe('Document', function() {
     });
 
     it('should execute the callback with Document & api resp', function(done) {
-      document.makeReq_ = function(method, path, query, body, callback) {
+      FakeServiceObject.prototype.getMetadata = function(callback) {
         callback(null, DOCUMENT_JSON);
       };
 
@@ -278,27 +273,6 @@ describe('Document', function() {
       document.rank = 8;
       var documentJson = document.toJSON();
       assert.equal(documentJson.rank, 8);
-    });
-  });
-
-  describe('makeReq_', function() {
-    it('should call index instance makeReq_', function(done) {
-      var method = 'POST';
-      var path = '/';
-      var query = 'query';
-      var body = 'body';
-      var callback = 'callback';
-
-      document.index_.makeReq_ = function(m, p, q, b, c) {
-        assert.equal(m, method);
-        assert.equal(p, '/documents/' + ID + path);
-        assert.equal(q, query);
-        assert.equal(b, body);
-        assert.equal(c, callback);
-        done();
-      };
-
-      document.makeReq_(method, path, query, body, callback);
     });
   });
 });
