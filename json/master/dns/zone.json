@@ -34,7 +34,7 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar arrify = require('arrify');\nvar exec = require('methmeth');\nvar extend = require('extend');\nvar fs = require('fs');\nvar is = require('is');\nvar zonefile = require('dns-zonefile');",
+    "code": "'use strict';\n\nvar arrify = require('arrify');\nvar exec = require('methmeth');\nvar extend = require('extend');\nvar fs = require('fs');\nvar is = require('is');\nvar nodeutil = require('util');\nvar zonefile = require('dns-zonefile');",
     "ctx": false
   },
   {
@@ -69,8 +69,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 30,
-    "codeStart": 34,
+    "line": 31,
+    "codeStart": 35,
     "code": "var Change = require('./change.js');",
     "ctx": {
       "type": "declaration",
@@ -111,14 +111,56 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 36,
-    "codeStart": 40,
+    "line": 37,
+    "codeStart": 41,
     "code": "var Record = require('./record.js');",
     "ctx": {
       "type": "declaration",
       "name": "Record",
       "value": "require('./record.js')",
       "string": "Record"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/serviceObject}",
+        "types": [
+          "module:common/serviceObject"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2FserviceObject.html\">common/serviceObject</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/serviceObject}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 43,
+    "codeStart": 47,
+    "code": "var ServiceObject = require('../common/service-object.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "ServiceObject",
+      "value": "require('../common/service-object.js')",
+      "string": "ServiceObject"
     }
   },
   {
@@ -153,8 +195,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 42,
-    "codeStart": 46,
+    "line": 49,
+    "codeStart": 53,
     "code": "var streamRouter = require('../common/stream-router.js');",
     "ctx": {
       "type": "declaration",
@@ -191,13 +233,270 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 48,
-    "codeStart": 66,
-    "code": "function Zone(dns, name) {\n  this.dns = dns;\n  this.name = name;\n  this.metadata = {};\n\n  this.makeReq_ = this.dns.makeReq_.bind(dns);\n}",
+    "line": 55,
+    "codeStart": 73,
+    "code": "function Zone(dns, name) {\n  var methods = {",
     "ctx": {
       "type": "constructor",
       "name": "Zone",
       "string": "Zone()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{object} config - See {module:dns#createZone}.",
+        "name": "config",
+        "description": "<ul>\n<li>See {module:dns#createZone}.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var config = {\n  dnsName: 'example.com.',\n  // ...\n};\n\nzone.create(config, function(err, zone, apiResponse) {\n  if (!err) {\n    // The zone was created successfully.\n  }\n});",
+        "html": "<p>var config = {<br />  dnsName: &#39;example.com.&#39;,<br />  // ...<br />};</p><p>zone.create(config, function(err, zone, apiResponse) {<br />  if (!err) {<br />    // The zone was created successfully.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a zone.</p>",
+      "summary": "<p>Create a zone.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 75,
+    "codeStart": 92,
+    "code": "create: true,",
+    "ctx": {
+      "type": "property",
+      "name": "create",
+      "value": "true,",
+      "string": "create"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this\n    request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this     request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} callback.exists - Whether the zone exists or not.",
+        "name": "callback.exists",
+        "description": "<ul>\n<li>Whether the zone exists or not.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "zone.exists(function(err, exists) {});",
+        "html": "<p>zone.exists(function(err, exists) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Check if the zone exists.</p>",
+      "summary": "<p>Check if the zone exists.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 94,
+    "codeStart": 105,
+    "code": "exists: true,",
+    "ctx": {
+      "type": "property",
+      "name": "exists",
+      "value": "true,",
+      "string": "exists"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{options=} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "options"
+        ],
+        "typesDescription": "<a href=\"options.html\">options</a>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.autoCreate - Automatically create the object if\n    it does not exist. Default: `false`",
+        "name": "options.autoCreate",
+        "description": "<ul>\n<li>Automatically create the object if     it does not exist. Default: <code>false</code></li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "zone.get(function(err, zone, apiResponse) {\n  // `zone.metadata` has been populated.\n});",
+        "html": "<p>zone.get(function(err, zone, apiResponse) {<br />  // <code>zone.metadata</code> has been populated.<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a zone if it exists.</p><p>You may optionally use this to &quot;get or create&quot; an object by providing an<br />object with <code>autoCreate</code> set to <code>true</code>. Any extra configuration that is<br />normally required for the <code>create</code> method must be contained within this<br />object as well.</p>",
+      "summary": "<p>Get a zone if it exists.</p>",
+      "body": "<p>You may optionally use this to &quot;get or create&quot; an object by providing an<br />object with <code>autoCreate</code> set to <code>true</code>. Any extra configuration that is<br />normally required for the <code>create</code> method must be contained within this<br />object as well.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 107,
+    "codeStart": 124,
+    "code": "get: true,",
+    "ctx": {
+      "type": "property",
+      "name": "get",
+      "value": "true,",
+      "string": "get"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[ManagedZones: get API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/get}",
+        "html": "<p>[ManagedZones: get API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/get}\">https://cloud.google.com/dns/api/v1/managedZones/get}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An API error.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An API error.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?object} callback.metadata - Metadata of the zone from the API.",
+        "name": "callback.metadata",
+        "description": "<ul>\n<li>Metadata of the zone from the API.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - Raw API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "zone.getMetadata(function(err, metadata, apiResponse) {});",
+        "html": "<p>zone.getMetadata(function(err, metadata, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get the metadata for the zone.</p>",
+      "summary": "<p>Get the metadata for the zone.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 126,
+    "codeStart": 139,
+    "code": "getMetadata: true\n  };\n\n  ServiceObject.call(this, {\nparent: dns,\nbaseUrl: '/managedZones',\nid: name,\ncreateMethod: dns.createZone.bind(dns),\nmethods: methods\n  });\n\n  this.name = name;\n}\n\nnodeutil.inherits(Zone, ServiceObject);",
+    "ctx": {
+      "type": "property",
+      "name": "getMetadata",
+      "value": "true",
+      "string": "getMetadata"
     }
   },
   {
@@ -275,8 +574,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 74,
-    "codeStart": 86,
+    "line": 155,
+    "codeStart": 167,
     "code": "Zone.prototype.addRecords = function(records, callback) {\n  this.createChange({\n    add: records\n  }, callback);\n};",
     "ctx": {
       "type": "method",
@@ -288,14 +587,6 @@
   },
   {
     "tags": [
-      {
-        "type": "throws",
-        "string": "{error} If an id is not provided.",
-        "types": [
-          "error"
-        ],
-        "description": "<p>If an id is not provided.</p>"
-      },
       {
         "type": "param",
         "string": "{string} id - The change id.",
@@ -331,8 +622,8 @@
       }
     ],
     "description": {
-      "full": "<p>Create a reference to an existing change object in this zone.</p>",
-      "summary": "<p>Create a reference to an existing change object in this zone.</p>",
+      "full": "<p>Create a reference to a change object in this zone.</p>",
+      "summary": "<p>Create a reference to a change object in this zone.</p>",
       "body": ""
     },
     "isPrivate": false,
@@ -340,9 +631,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 92,
-    "codeStart": 103,
-    "code": "Zone.prototype.change = function(id) {\n  if (!id) {\n    throw new Error('A change id is required.');\n  }\n\n  return new Change(this, id);\n};",
+    "line": 173,
+    "codeStart": 182,
+    "code": "Zone.prototype.change = function(id) {\n  return new Change(this, id);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Zone",
@@ -360,8 +651,8 @@
       },
       {
         "type": "param",
-        "string": "{object} options - The configuration object.",
-        "name": "options",
+        "string": "{object} config - The configuration object.",
+        "name": "config",
         "description": "<ul>\n<li>The configuration object.</li>\n</ul>\n",
         "types": [
           "object"
@@ -374,8 +665,8 @@
       },
       {
         "type": "param",
-        "string": "{module:dns/record|module:dns/record[]} options.add - Record objects\n    to add to this zone.",
-        "name": "options.add",
+        "string": "{module:dns/record|module:dns/record[]} config.add - Record objects\n    to add to this zone.",
+        "name": "config.add",
         "description": "<ul>\n<li>Record objects     to add to this zone.</li>\n</ul>\n",
         "types": [
           "module:dns/record",
@@ -389,8 +680,8 @@
       },
       {
         "type": "param",
-        "string": "{module:dns/record|module:dns/record[]} options.delete - Record\n    objects to delete from this zone. Be aware that the resource records here\n    must match exactly to be deleted.",
-        "name": "options.delete",
+        "string": "{module:dns/record|module:dns/record[]} config.delete - Record\n    objects to delete from this zone. Be aware that the resource records here\n    must match exactly to be deleted.",
+        "name": "config.delete",
         "description": "<ul>\n<li>Record     objects to delete from this zone. Be aware that the resource records here<br />  must match exactly to be deleted.</li>\n</ul>\n",
         "types": [
           "module:dns/record",
@@ -474,9 +765,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 111,
-    "codeStart": 149,
-    "code": "Zone.prototype.createChange = function(options, callback) {\n  var self = this;\n\n  if (!options || !options.add && !options.delete) {\n    throw new Error('Cannot create a change with no additions or deletions.');\n  }\n\n  var body = extend({}, options, {\n    additions: arrify(options.add).map(exec('toJSON')),\n    deletions: arrify(options.delete).map(exec('toJSON'))\n  });\n\n  delete body.add;\n  delete body.delete;\n\n  var path = '/managedZones/' + this.name + '/changes';\n\n  this.makeReq_('POST', path, null, body, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var change = self.change(resp.id);\n    change.metadata = resp;\n\n    callback(null, change, resp);\n  });\n};",
+    "line": 186,
+    "codeStart": 224,
+    "code": "Zone.prototype.createChange = function(config, callback) {\n  var self = this;\n\n  if (!config || !config.add && !config.delete) {\n    throw new Error('Cannot create a change with no additions or deletions.');\n  }\n\n  var body = extend({}, config, {\n    additions: arrify(config.add).map(exec('toJSON')),\n    deletions: arrify(config.delete).map(exec('toJSON'))\n  });\n\n  delete body.add;\n  delete body.delete;\n\n  this.request({\n    method: 'POST',\n    uri: '/changes',\n    json: body\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var change = self.change(resp.id);\n    change.metadata = resp;\n\n    callback(null, change, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Zone",
@@ -578,9 +869,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 179,
-    "codeStart": 213,
-    "code": "Zone.prototype.delete = function(options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  if (options.force) {\n    this.empty(this.delete.bind(this, callback));\n    return;\n  }\n\n  var path = '/managedZones/' + this.name;\n  this.makeReq_('DELETE', path, null, null, function(err, resp) {\n    callback(err, resp);\n  });\n};",
+    "line": 256,
+    "codeStart": 290,
+    "code": "Zone.prototype.delete = function(options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  if (options.force) {\n    this.empty(this.delete.bind(this, callback));\n    return;\n  }\n\n  ServiceObject.prototype.delete.call(this, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Zone",
@@ -670,8 +961,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 230,
-    "codeStart": 296,
+    "line": 304,
+    "codeStart": 370,
     "code": "Zone.prototype.deleteRecords = function(records, callback) {\n  records = arrify(records);\n\n  if (is.string(records[0])) {\n    this.deleteRecordsByType_(records, callback);\n    return;\n  }\n\n  this.createChange({\n    delete: records\n  }, callback);\n};",
     "ctx": {
       "type": "method",
@@ -755,8 +1046,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 309,
-    "codeStart": 322,
+    "line": 383,
+    "codeStart": 396,
     "code": "Zone.prototype.empty = function(callback) {\n  var self = this;\n\n  this.getRecords(function(err, records) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var recordsToDelete = records.filter(function(record) {\n      return record.type !== 'NS' && record.type !== 'SOA';\n    });\n\n    if (recordsToDelete.length === 0) {\n      callback();\n    } else {\n      self.deleteRecords(recordsToDelete, callback);\n    }\n  });\n};",
     "ctx": {
       "type": "method",
@@ -831,8 +1122,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 343,
-    "codeStart": 361,
+    "line": 417,
+    "codeStart": 435,
     "code": "Zone.prototype.export = function(localPath, callback) {\n  this.getRecords(function(err, records) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var stringRecords = records.map(exec('toString')).join('\\n');\n\n    fs.writeFile(localPath, stringRecords, 'utf-8', function(err) {\n      callback(err || null);\n    });\n  });\n};",
     "ctx": {
       "type": "method",
@@ -991,105 +1282,15 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 376,
-    "codeStart": 434,
-    "code": "Zone.prototype.getChanges = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  if (query.sort) {\n    query.sortOrder = query.sort === 'asc' ? 'ascending' : 'descending';\n    delete query.sort;\n  }\n\n  var path = '/managedZones/' + this.name + '/changes';\n\n  this.makeReq_('GET', path, query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var changes = (resp.changes || []).map(function(change) {\n      var changeInstance = self.change(change.id);\n      changeInstance.metadata = change;\n      return changeInstance;\n    });\n\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    callback(null, changes, nextQuery, resp);\n  });\n};",
+    "line": 450,
+    "codeStart": 508,
+    "code": "Zone.prototype.getChanges = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  if (query.sort) {\n    query.sortOrder = query.sort === 'asc' ? 'ascending' : 'descending';\n    delete query.sort;\n  }\n\n  this.request({\n    uri: '/changes',\n    qs: query\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var changes = (resp.changes || []).map(function(change) {\n      var changeInstance = self.change(change.id);\n      changeInstance.metadata = change;\n      return changeInstance;\n    });\n\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    callback(null, changes, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Zone",
       "cons": "Zone",
       "name": "getChanges",
       "string": "Zone.prototype.getChanges()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "resource",
-        "string": "[ManagedZones: get API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/get}",
-        "html": "<p>[ManagedZones: get API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/get}\">https://cloud.google.com/dns/api/v1/managedZones/get}</a></p>"
-      },
-      {
-        "type": "param",
-        "string": "{function} callback - The callback function.",
-        "name": "callback",
-        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
-        "types": [
-          "function"
-        ],
-        "typesDescription": "<code>function</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{?error} callback.err - An API error.",
-        "name": "callback.err",
-        "description": "<ul>\n<li>An API error.</li>\n</ul>\n",
-        "types": [
-          "error"
-        ],
-        "typesDescription": "<code>error</code>|<code>null</code>",
-        "optional": false,
-        "nullable": true,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{?object} callback.metadata - Metadata of the zone from the API.",
-        "name": "callback.metadata",
-        "description": "<ul>\n<li>Metadata of the zone from the API.</li>\n</ul>\n",
-        "types": [
-          "object"
-        ],
-        "typesDescription": "<code>object</code>|<code>null</code>",
-        "optional": false,
-        "nullable": true,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{object} callback.apiResponse - Raw API response.",
-        "name": "callback.apiResponse",
-        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
-        "types": [
-          "object"
-        ],
-        "typesDescription": "<code>object</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "example",
-        "string": "zone.getMetadata(function(err, metadata, apiResponse) {});",
-        "html": "<p>zone.getMetadata(function(err, metadata, apiResponse) {});</p>"
-      }
-    ],
-    "description": {
-      "full": "<p>Get the metadata for the zone.</p>",
-      "summary": "<p>Get the metadata for the zone.</p>",
-      "body": ""
-    },
-    "isPrivate": false,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 472,
-    "codeStart": 485,
-    "code": "Zone.prototype.getMetadata = function(callback) {\n  var self = this;\n  var path = '/managedZones/' + this.name;\n\n  this.makeReq_('GET', path, null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.metadata = resp;\n\n    callback(null, self.metadata, resp);\n  });\n};",
-    "ctx": {
-      "type": "method",
-      "constructor": "Zone",
-      "cons": "Zone",
-      "name": "getMetadata",
-      "string": "Zone.prototype.getMetadata()"
     }
   },
   {
@@ -1255,9 +1456,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 501,
-    "codeStart": 585,
-    "code": "Zone.prototype.getRecords = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  if (is.string(query) || is.array(query)) {\n    var filterByTypes_ = {};\n\n    // For faster lookups, store the record types the user wants in an object.\n    arrify(query).forEach(function(type) {\n      filterByTypes_[type.toUpperCase()] = true;\n    });\n\n    query = {\n      filterByTypes_: filterByTypes_\n    };\n  }\n\n  var requestQuery = extend({}, query);\n  delete requestQuery.filterByTypes_;\n\n  var path = '/managedZones/' + this.name + '/rrsets';\n  this.makeReq_('GET', path, requestQuery, true, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var records = (resp.rrsets || []).map(function(record) {\n      return self.record(record.type, record);\n    });\n\n    if (query.filterByTypes_) {\n      records = records.filter(function(record) {\n        return query.filterByTypes_[record.type];\n      });\n    }\n\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    callback(null, records, nextQuery, resp);\n  });\n};",
+    "line": 547,
+    "codeStart": 631,
+    "code": "Zone.prototype.getRecords = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  if (is.string(query) || is.array(query)) {\n    var filterByTypes_ = {};\n\n    // For faster lookups, store the record types the user wants in an object.\n    arrify(query).forEach(function(type) {\n      filterByTypes_[type.toUpperCase()] = true;\n    });\n\n    query = {\n      filterByTypes_: filterByTypes_\n    };\n  }\n\n  var requestQuery = extend({}, query);\n  delete requestQuery.filterByTypes_;\n\n  this.request({\n    uri: '/rrsets',\n    qs: requestQuery\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var records = (resp.rrsets || []).map(function(record) {\n      return self.record(record.type, record);\n    });\n\n    if (query.filterByTypes_) {\n      records = records.filter(function(record) {\n        return query.filterByTypes_[record.type];\n      });\n    }\n\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    callback(null, records, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Zone",
@@ -1359,8 +1560,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 637,
-    "codeStart": 657,
+    "line": 685,
+    "codeStart": 705,
     "code": "Zone.prototype.import = function(localPath, callback) {\n  var self = this;\n\n  fs.readFile(localPath, 'utf-8', function(err, file) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var parsedZonefile = zonefile.parse(file);\n\n    var recordsToCreate = [];\n    function addRecordToCreate(record) {\n      var recordInstance = new Record.fromZoneRecord_(self, recordType, record);\n      recordsToCreate.push(recordInstance);\n    }\n\n    for (var recordType in parsedZonefile) {\n      var recordTypeSet = arrify(parsedZonefile[recordType]);\n      recordTypeSet.forEach(addRecordToCreate);\n    }\n\n    self.addRecords(recordsToCreate, callback);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1472,8 +1673,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 683,
-    "codeStart": 730,
+    "line": 731,
+    "codeStart": 778,
     "code": "Zone.prototype.record = function(type, metadata) {\n  return new Record(this, type, metadata);\n};",
     "ctx": {
       "type": "method",
@@ -1592,8 +1793,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 734,
-    "codeStart": 776,
+    "line": 782,
+    "codeStart": 824,
     "code": "Zone.prototype.replaceRecords = function(recordType, newRecords, callback) {\n  var self = this;\n\n  this.getRecords(recordType, function(err, recordsToDelete) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    self.createChange({\n      add: newRecords,\n      delete: recordsToDelete\n    }, callback);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1697,8 +1898,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 792,
-    "codeStart": 810,
+    "line": 840,
+    "codeStart": 858,
     "code": "Zone.prototype.deleteRecordsByType_ = function(recordTypes, callback) {\n  var self = this;\n\n  this.getRecords(recordTypes, function(err, records) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    if (records.length === 0) {\n      callback();\n      return;\n    }\n\n    self.deleteRecords(records, callback);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1720,8 +1921,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 828,
-    "codeStart": 833,
+    "line": 876,
+    "codeStart": 881,
     "code": "streamRouter.extend(Zone, ['getChanges', 'getRecords']);\n\nmodule.exports = Zone;",
     "ctx": false
   }

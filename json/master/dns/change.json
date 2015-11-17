@@ -34,8 +34,50 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';",
+    "code": "'use strict';\n\nvar nodeutil = require('util');",
     "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/serviceObject}",
+        "types": [
+          "module:common/serviceObject"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2FserviceObject.html\">common/serviceObject</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/serviceObject}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 25,
+    "codeStart": 29,
+    "code": "var ServiceObject = require('../common/service-object.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "ServiceObject",
+      "value": "require('../common/service-object.js')",
+      "string": "ServiceObject"
+    }
   },
   {
     "tags": [
@@ -93,13 +135,139 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 23,
-    "codeStart": 41,
-    "code": "function Change(zone, id) {\n  this.zoneName = zone.name;\n  this.id = id;\n\n  this.metadata = {};\n  this.makeReq_ = zone.dns.makeReq_.bind(zone.dns);\n}",
+    "line": 31,
+    "codeStart": 49,
+    "code": "function Change(zone, id) {\n  var methods = {",
     "ctx": {
       "type": "constructor",
       "name": "Change",
       "string": "Change()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this\n    request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this     request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} callback.exists - Whether the change exists or not.",
+        "name": "callback.exists",
+        "description": "<ul>\n<li>Whether the change exists or not.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "change.exists(function(err, exists) {});",
+        "html": "<p>change.exists(function(err, exists) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Check if the change exists.</p>",
+      "summary": "<p>Check if the change exists.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 51,
+    "codeStart": 62,
+    "code": "exists: true,",
+    "ctx": {
+      "type": "property",
+      "name": "exists",
+      "value": "true,",
+      "string": "exists"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{options=} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "options"
+        ],
+        "typesDescription": "<a href=\"options.html\">options</a>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.autoCreate - Automatically create the object if\n    it does not exist. Default: `false`",
+        "name": "options.autoCreate",
+        "description": "<ul>\n<li>Automatically create the object if     it does not exist. Default: <code>false</code></li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "change.get(function(err, change, apiResponse) {\n  // `change.metadata` has been populated.\n});",
+        "html": "<p>change.get(function(err, change, apiResponse) {<br />  // <code>change.metadata</code> has been populated.<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a change if it exists.</p><p>You may optionally use this to &quot;get or create&quot; an object by providing an<br />object with <code>autoCreate</code> set to <code>true</code>. Any extra configuration that is<br />normally required for the <code>create</code> method must be contained within this<br />object as well.</p>",
+      "summary": "<p>Get a change if it exists.</p>",
+      "body": "<p>You may optionally use this to &quot;get or create&quot; an object by providing an<br />object with <code>autoCreate</code> set to <code>true</code>. Any extra configuration that is<br />normally required for the <code>create</code> method must be contained within this<br />object as well.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 64,
+    "codeStart": 81,
+    "code": "get: true,",
+    "ctx": {
+      "type": "property",
+      "name": "get",
+      "value": "true,",
+      "string": "get"
     }
   },
   {
@@ -181,15 +349,57 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 49,
-    "codeStart": 73,
-    "code": "Change.prototype.getMetadata = function(callback) {\n  var self = this;\n  var path = '/managedZones/' + this.zoneName + '/changes/' + this.id;\n\n  this.makeReq_('GET', path, null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.metadata = resp;\n\n    callback(null, self.metadata, resp);\n  });\n};\n\nmodule.exports = Change;",
+    "line": 83,
+    "codeStart": 107,
+    "code": "getMetadata: true\n  };\n\n  ServiceObject.call(this, {\nparent: zone,\nbaseUrl: '/changes',\nid: id,\nmethods: methods\n  });\n}\n\nnodeutil.inherits(Change, ServiceObject);",
+    "ctx": {
+      "type": "property",
+      "name": "getMetadata",
+      "value": "true",
+      "string": "getMetadata"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{object} config - See {module:dns/zone#createChange}.",
+        "name": "config",
+        "description": "<ul>\n<li>See {module:dns/zone#createChange}.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var config = {\n  add: {\n    // ...\n  }\n};\n\nchange.create(config, function(err, change, apiResponse) {\n  if (!err) {\n    // The change was created successfully.\n  }\n});",
+        "html": "<p>var config = {<br />  add: {<br />    // ...<br />  }<br />};</p><p>change.create(config, function(err, change, apiResponse) {<br />  if (!err) {<br />    // The change was created successfully.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a change.</p>",
+      "summary": "<p>Create a change.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 120,
+    "codeStart": 138,
+    "code": "Change.prototype.create = function(config, callback) {\n  var self = this;\n\n  this.parent.createChange(config, function(err, change, apiResponse) {\n    if (err) {\n      callback(err, null, apiResponse);\n      return;\n    }\n\n    self.id = change.id;\n    self.metadata = change.metadata;\n\n    callback(null, self, apiResponse);\n  });\n};\n\nmodule.exports = Change;",
     "ctx": {
       "type": "method",
       "constructor": "Change",
       "cons": "Change",
-      "name": "getMetadata",
-      "string": "Change.prototype.getMetadata()"
+      "name": "create",
+      "string": "Change.prototype.create()"
     }
   }
 ]
