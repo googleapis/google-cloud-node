@@ -20,12 +20,22 @@ var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
 var mockery = require('mockery');
+var nodeutil = require('util');
+
+var ServiceObject = require('../../lib/common/service-object.js');
 var util = require('../../lib/common/util.js');
 
 function FakeDocument() {
   this.calledWith_ = [].slice.call(arguments);
 }
 FakeDocument.prototype.toJSON = util.noop;
+
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 var extended = false;
 var fakeStreamRouter = {
@@ -48,8 +58,10 @@ describe('Index', function() {
   var ID = 'index-id';
 
   before(function() {
-    mockery.registerMock('./document.js', FakeDocument);
+    mockery.registerMock('../common/service-object.js', FakeServiceObject);
     mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
+    mockery.registerMock('./document.js', FakeDocument);
+
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
@@ -72,24 +84,21 @@ describe('Index', function() {
       assert(extended); // See `fakeStreamRouter.extend`
     });
 
-    it('should localize the Search instance', function() {
-      assert.deepEqual(index.search_, SEARCH_INSTANCE);
-    });
+    it('should inherit from ServiceObject', function() {
+      assert(index instanceof ServiceObject);
 
-    it('should localize the id', function() {
-      assert.equal(index.id, ID);
-    });
+      var calledWith = index.calledWith_[0];
 
-    it('should throw if an ID is not provided', function() {
-      assert.throws(function() {
-        new Index(SEARCH_INSTANCE);
-      }, /An ID is needed/);
+      assert.strictEqual(calledWith.parent, SEARCH_INSTANCE);
+      assert.strictEqual(calledWith.baseUrl, '/indexes');
+      assert.strictEqual(calledWith.id, ID);
+      assert.deepEqual(calledWith.methods, {});
     });
   });
 
   describe('createDocument', function() {
     beforeEach(function() {
-      index.makeReq_ = util.noop;
+      index.request = util.noop;
     });
 
     it('should accept a Document object', function(done) {
@@ -116,11 +125,10 @@ describe('Index', function() {
       var document = new FakeDocument();
       document.toJSON = function() { return expectedDocumentJson; };
 
-      index.makeReq_ = function(method, path, query, body) {
-        assert.equal(method, 'POST');
-        assert.equal(path, '/documents');
-        assert.strictEqual(query, null);
-        assert.deepEqual(body, expectedDocumentJson);
+      index.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/documents');
+        assert.deepEqual(reqOpts.json, expectedDocumentJson);
         done();
       };
 
@@ -131,7 +139,7 @@ describe('Index', function() {
       var error = new Error('Error.');
       var apiResponse = { a: 'b', c: 'd' };
 
-      index.makeReq_ = function(method, path, query, body, callback) {
+      index.request = function(reqOpts, callback) {
         callback(error, apiResponse);
       };
 
@@ -148,7 +156,7 @@ describe('Index', function() {
     it('should execute callback with Document object', function(done) {
       var apiResponse = { a: 'b', c: 'd' };
 
-      index.makeReq_ = function(method, path, query, body, callback) {
+      index.request = function(reqOpts, callback) {
         callback(null, apiResponse);
       };
 
@@ -176,11 +184,9 @@ describe('Index', function() {
     it('should get document from the API', function(done) {
       var query = { a: 'b', c: 'd' };
 
-      index.makeReq_ = function(method, path, q, body) {
-        assert.equal(method, 'GET');
-        assert.equal(path, '/documents');
-        assert.deepEqual(q, query);
-        assert.strictEqual(body, null);
+      index.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/documents');
+        assert.deepEqual(reqOpts.qs, query);
         done();
       };
 
@@ -188,8 +194,8 @@ describe('Index', function() {
     });
 
     it('should send empty query if only a callback is given', function(done) {
-      index.makeReq_ = function(method, path, query) {
-        assert.deepEqual(query, {});
+      index.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
         done();
       };
 
@@ -200,7 +206,7 @@ describe('Index', function() {
       var error = new Error('Error.');
       var apiResponse = { a: 'b', c: 'd' };
 
-      index.makeReq_ = function(method, path, query, body, callback) {
+      index.request = function(reqOpts, callback) {
         callback(error, apiResponse);
       };
 
@@ -225,7 +231,7 @@ describe('Index', function() {
         return true;
       };
 
-      index.makeReq_ = function(method, path, query, body, callback) {
+      index.request = function(reqOpts, callback) {
         callback(null, apiResponse);
       };
 
@@ -251,7 +257,7 @@ describe('Index', function() {
         pageToken: apiResponse.nextPageToken
       });
 
-      index.makeReq_ = function(method, path, query, body, callback) {
+      index.request = function(reqOpts, callback) {
         callback(null, apiResponse);
       };
 
@@ -280,11 +286,9 @@ describe('Index', function() {
         query: 'completed=true'
       };
 
-      index.makeReq_ = function(method, path, q, body) {
-        assert.equal(method, 'GET');
-        assert.equal(path, '/search');
-        assert.deepEqual(q, query);
-        assert.strictEqual(body, null);
+      index.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/search');
+        assert.deepEqual(reqOpts.qs, query);
         done();
       };
 
@@ -294,8 +298,8 @@ describe('Index', function() {
     it('should build a query object from a string', function(done) {
       var query = 'completed=true';
 
-      index.makeReq_ = function(method, path, q) {
-        assert.deepEqual(q, { query: query });
+      index.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, { query: query });
         done();
       };
 
@@ -306,7 +310,7 @@ describe('Index', function() {
       var apiResponse = { a: 'b', c: 'd' };
       var error = new Error('Error.');
 
-      index.makeReq_ = function(method, path, query, body, callback) {
+      index.request = function(reqOpts, callback) {
         callback(error, apiResponse);
       };
 
@@ -330,7 +334,7 @@ describe('Index', function() {
         return true;
       };
 
-      index.makeReq_ = function(method, path, query, body, callback) {
+      index.request = function(reqOpts, callback) {
         callback(null, apiResponse);
       };
 
@@ -356,7 +360,7 @@ describe('Index', function() {
         pageToken: apiResponse.nextPageToken
       });
 
-      index.makeReq_ = function(method, path, query, body, callback) {
+      index.request = function(reqOpts, callback) {
         callback(null, apiResponse);
       };
 
@@ -405,27 +409,6 @@ describe('Index', function() {
 
       var document = index.documentFromObject_(documentObject);
       assert.equal(document.rank, documentObject.rank);
-    });
-  });
-
-  describe('makeReq_', function() {
-    it('should call search instance makeReq_', function(done) {
-      var method = 'POST';
-      var path = '/';
-      var query = 'query';
-      var body = 'body';
-      var callback = 'callback';
-
-      index.search_.makeReq_ = function(m, p, q, b, c) {
-        assert.equal(m, method);
-        assert.equal(p, '/indexes/' + ID + path);
-        assert.equal(q, query);
-        assert.equal(b, body);
-        assert.equal(c, callback);
-        done();
-      };
-
-      index.makeReq_(method, path, query, body, callback);
     });
   });
 });
