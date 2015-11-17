@@ -34,7 +34,7 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar extend = require('extend');\nvar is = require('is');",
+    "code": "'use strict';\n\nvar arrify = require('arrify');\nvar extend = require('extend');\nvar is = require('is');\nvar nodeutil = require('util');",
     "ctx": false
   },
   {
@@ -69,14 +69,56 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 26,
-    "codeStart": 30,
+    "line": 28,
+    "codeStart": 32,
     "code": "var Document = require('./document.js');",
     "ctx": {
       "type": "declaration",
       "name": "Document",
       "value": "require('./document.js')",
       "string": "Document"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/serviceObject}",
+        "types": [
+          "module:common/serviceObject"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2FserviceObject.html\">common/serviceObject</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/serviceObject}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 34,
+    "codeStart": 38,
+    "code": "var ServiceObject = require('../common/service-object.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "ServiceObject",
+      "value": "require('../common/service-object.js')",
+      "string": "ServiceObject"
     }
   },
   {
@@ -111,8 +153,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 32,
-    "codeStart": 36,
+    "line": 40,
+    "codeStart": 44,
     "code": "var streamRouter = require('../common/stream-router.js');",
     "ctx": {
       "type": "declaration",
@@ -163,9 +205,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 38,
-    "codeStart": 55,
-    "code": "function Index(search, id) {\n  this.search_ = search;\n  this.id = id;\n\n  if (!this.id) {\n    throw new Error('An ID is needed to access a Google Cloud Search index.');\n  }\n}",
+    "line": 46,
+    "codeStart": 63,
+    "code": "function Index(search, id) {\n  ServiceObject.call(this, {\n    parent: search,\n    baseUrl: '/indexes',\n    id: id,\n    methods: {\n      // Nothing needed other than the `request` method.\n    }\n  });\n\n  this.id = id;\n}\n\nnodeutil.inherits(Index, ServiceObject);",
     "ctx": {
       "type": "constructor",
       "name": "Index",
@@ -266,9 +308,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 64,
-    "codeStart": 114,
-    "code": "Index.prototype.createDocument = function(documentObj, callback) {\n  var document;\n\n  if (documentObj instanceof Document) {\n    document = documentObj;\n    documentObj = document.toJSON();\n  } else {\n    document = this.documentFromObject_(documentObj);\n  }\n\n  this.makeReq_('POST', '/documents', null, documentObj, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, document, resp);\n  });\n};",
+    "line": 78,
+    "codeStart": 128,
+    "code": "Index.prototype.createDocument = function(documentObj, callback) {\n  var document;\n\n  if (documentObj instanceof Document) {\n    document = documentObj;\n    documentObj = document.toJSON();\n  } else {\n    document = this.documentFromObject_(documentObj);\n  }\n\n  this.request({\n    method: 'POST',\n    uri: '/documents',\n    json: documentObj\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, document, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Index",
@@ -309,8 +351,8 @@
       },
       {
         "type": "example",
-        "string": "var myDocument = index.document('my-document');",
-        "html": "<p>var myDocument = index.document(&#39;my-document&#39;);</p>"
+        "string": "var myDocument = index.document('my-document');\n\n//-\n// Documents can also be created from objects.\n//-\nvar myDocument = index.document({\n  docId: 'my-document',\n  fields: {\n    person: {\n      values: [\n        {\n          stringFormat: 'TEXT',\n          stringValue: 'Stephen'\n        }\n      ]\n    }\n  }\n});",
+        "html": "<p>var myDocument = index.document(&#39;my-document&#39;);</p><p>//-<br />// Documents can also be created from objects.<br />//-<br />var myDocument = index.document({<br />  docId: &#39;my-document&#39;,<br />  fields: {<br />    person: {<br />      values: [<br />        {<br />          stringFormat: &#39;TEXT&#39;,<br />          stringValue: &#39;Stephen&#39;<br />        }<br />      ]<br />    }<br />  }<br />});</p>"
       }
     ],
     "description": {
@@ -323,9 +365,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 134,
-    "codeStart": 143,
-    "code": "Index.prototype.document = function(id) {\n  return new Document(this, id);\n};",
+    "line": 152,
+    "codeStart": 178,
+    "code": "Index.prototype.document = function(id) {\n  if (is.object(id)) {\n    return this.documentFromObject_(id);\n  }\n\n  return new Document(this, id);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Index",
@@ -497,9 +539,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 147,
-    "codeStart": 217,
-    "code": "Index.prototype.getDocuments = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  this.makeReq_('GET', '/documents', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var documents = (resp.documents || [])\n      .map(self.documentFromObject_.bind(self));\n\n    callback(null, documents, nextQuery, resp);\n  });\n};",
+    "line": 186,
+    "codeStart": 256,
+    "code": "Index.prototype.getDocuments = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  this.request({\n    uri: '/documents',\n    qs: query\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var documents = arrify(resp.documents)\n      .map(self.documentFromObject_.bind(self));\n\n    callback(null, documents, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Index",
@@ -680,9 +722,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 246,
-    "codeStart": 312,
-    "code": "Index.prototype.search = function(query, callback) {\n  var self = this;\n\n  if (is.string(query)) {\n    query = {\n      query: query\n    };\n  }\n\n  if (!is.object(query)) {\n    throw new Error('A query must be either a string or object.');\n  }\n\n  this.makeReq_('GET', '/search', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var documents = (resp.results || [])\n      .map(self.documentFromObject_.bind(self));\n\n    callback(null, documents, nextQuery, resp);\n  });\n};",
+    "line": 288,
+    "codeStart": 354,
+    "code": "Index.prototype.search = function(query, callback) {\n  var self = this;\n\n  if (is.string(query)) {\n    query = {\n      query: query\n    };\n  }\n\n  if (!is.object(query)) {\n    throw new Error('A query must be either a string or object.');\n  }\n\n  this.request({\n    uri: '/search',\n    qs: query\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var documents = arrify(resp.results)\n      .map(self.documentFromObject_.bind(self));\n\n    callback(null, documents, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Index",
@@ -771,8 +813,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 346,
-    "codeStart": 374,
+    "line": 391,
+    "codeStart": 419,
     "code": "Index.prototype.documentFromObject_ = function(documentObj) {\n  var document = this.document(documentObj.docId);\n\n  if (is.object(documentObj.fields)) {\n    document.fields = documentObj.fields;\n  }\n\n  if (is.number(documentObj.rank)) {\n    document.rank = documentObj.rank;\n  }\n\n  return document;\n};",
     "ctx": {
       "type": "method",
@@ -780,102 +822,6 @@
       "cons": "Index",
       "name": "documentFromObject_",
       "string": "Index.prototype.documentFromObject_()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      },
-      {
-        "type": "param",
-        "string": "{string} method - Action.",
-        "name": "method",
-        "description": "<ul>\n<li>Action.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{string} path - Request path.",
-        "name": "path",
-        "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{*} query - Request query object.",
-        "name": "query",
-        "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>*</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{*} body - Request body contents.",
-        "name": "body",
-        "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>*</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{function} callback - The callback function.",
-        "name": "callback",
-        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
-        "types": [
-          "function"
-        ],
-        "typesDescription": "<code>function</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      }
-    ],
-    "description": {
-      "full": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
-      "summary": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 388,
-    "codeStart": 400,
-    "code": "Index.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/indexes/' + this.id + path;\n\n  this.search_.makeReq_(method, path, query, body, callback);\n};",
-    "ctx": {
-      "type": "method",
-      "constructor": "Index",
-      "cons": "Index",
-      "name": "makeReq_",
-      "string": "Index.prototype.makeReq_()"
     }
   },
   {
@@ -890,8 +836,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 406,
-    "codeStart": 412,
+    "line": 433,
+    "codeStart": 439,
     "code": "streamRouter.extend(Index, ['getDocuments', 'search']);\n\nmodule.exports = Index;",
     "ctx": false
   }

@@ -34,7 +34,7 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar extend = require('extend');\nvar format = require('string-format-obj');\nvar is = require('is');",
+    "code": "'use strict';\n\nvar extend = require('extend');\nvar is = require('is');\nvar nodeutil = require('util');",
     "ctx": false
   },
   {
@@ -83,6 +83,48 @@
     "tags": [
       {
         "type": "type",
+        "string": "{module:common/service}",
+        "types": [
+          "module:common/service"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Fservice.html\">common/service</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/service}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 33,
+    "codeStart": 37,
+    "code": "var Service = require('../common/service.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Service",
+      "value": "require('../common/service.js')",
+      "string": "Service"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
         "string": "{module:common/streamrouter}",
         "types": [
           "module:common/streamrouter"
@@ -111,8 +153,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 33,
-    "codeStart": 37,
+    "line": 39,
+    "codeStart": 43,
     "code": "var streamRouter = require('../common/stream-router.js');",
     "ctx": {
       "type": "declaration",
@@ -153,82 +195,14 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 39,
-    "codeStart": 43,
+    "line": 45,
+    "codeStart": 49,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
       "name": "util",
       "value": "require('../common/util.js')",
       "string": "util"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "const",
-        "string": "{array} Required scopes for the Search API.",
-        "html": "<p>{array} Required scopes for the Search API.</p>"
-      },
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      }
-    ],
-    "description": {
-      "full": "",
-      "summary": "",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 45,
-    "codeStart": 49,
-    "code": "var SCOPES = [\n  'https://www.googleapis.com/auth/cloud-platform',\n  'https://www.googleapis.com/auth/cloudsearch',\n  'https://www.googleapis.com/auth/userinfo.email'\n];",
-    "ctx": {
-      "type": "declaration",
-      "name": "SCOPES",
-      "value": "[",
-      "string": "SCOPES"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "const",
-        "string": "{string} Base URL for the Search API.",
-        "html": "<p>{string} Base URL for the Search API.</p>"
-      },
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      }
-    ],
-    "description": {
-      "full": "",
-      "summary": "",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 55,
-    "codeStart": 59,
-    "code": "var SEARCH_BASE_URL = 'https://cloudsearch.googleapis.com/v1/';",
-    "ctx": {
-      "type": "declaration",
-      "name": "SEARCH_BASE_URL",
-      "value": "'https://cloudsearch.googleapis.com/v1/'",
-      "string": "SEARCH_BASE_URL"
     }
   },
   {
@@ -273,9 +247,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 61,
-    "codeStart": 82,
-    "code": "function Search(options) {\n  if (!(this instanceof Search)) {\n    options = util.normalizeArguments(this, options);\n    return new Search(options);\n  }\n\n  this.makeAuthenticatedRequest_ = util.makeAuthenticatedRequestFactory({\n    credentials: options.credentials,\n    email: options.email,\n    keyFile: options.keyFilename,\n    scopes: SCOPES\n  });\n\n  this.projectId_ = options.projectId;\n}",
+    "line": 51,
+    "codeStart": 72,
+    "code": "function Search(options) {\n  if (!(this instanceof Search)) {\n    options = util.normalizeArguments(this, options);\n    return new Search(options);\n  }\n\n  var config = {\n    baseUrl: 'https://cloudsearch.googleapis.com/v1',\n    scopes: [\n      'https://www.googleapis.com/auth/cloud-platform',\n      'https://www.googleapis.com/auth/cloudsearch',\n      'https://www.googleapis.com/auth/userinfo.email'\n    ]\n  };\n\n  Service.call(this, config, options);\n}\n\nnodeutil.inherits(Search, Service);",
     "ctx": {
       "type": "constructor",
       "name": "Search",
@@ -459,9 +433,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 98,
-    "codeStart": 168,
-    "code": "Search.prototype.getIndexes = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  query = extend({}, query);\n\n  if (query.prefix) {\n    query.indexNamePrefix = query.prefix;\n    delete query.prefix;\n  }\n\n  this.makeReq_('GET', '/indexes', query, null, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var indexes = (resp.indexes || []).map(function(indexObject) {\n      var index = self.index(indexObject.indexId);\n\n      if (is.object(indexObject.indexedField)) {\n        index.fields = indexObject.indexedField;\n      }\n\n      return index;\n    });\n\n    callback(null, indexes, nextQuery, resp);\n  });\n};",
+    "line": 92,
+    "codeStart": 162,
+    "code": "Search.prototype.getIndexes = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  query = extend({}, query);\n\n  if (query.prefix) {\n    query.indexNamePrefix = query.prefix;\n    delete query.prefix;\n  }\n\n  this.request({\n    uri: '/indexes',\n    qs: query\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var indexes = (resp.indexes || []).map(function(indexObject) {\n      var index = self.index(indexObject.indexId);\n\n      if (is.object(indexObject.indexedField)) {\n        index.fields = indexObject.indexedField;\n      }\n\n      return index;\n    });\n\n    callback(null, indexes, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Search",
@@ -511,111 +485,15 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 211,
-    "codeStart": 217,
-    "code": "Search.prototype.index = function(id) {\n  return new Index(this, id);\n};",
+    "line": 208,
+    "codeStart": 214,
+    "code": "Search.prototype.index = function(id) {\n  if (!id) {\n    throw new Error('An ID is needed to access a Google Cloud Search index.');\n  }\n\n  return new Index(this, id);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Search",
       "cons": "Search",
       "name": "index",
       "string": "Search.prototype.index()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      },
-      {
-        "type": "param",
-        "string": "{string} method - Action.",
-        "name": "method",
-        "description": "<ul>\n<li>Action.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{string} path - Request path.",
-        "name": "path",
-        "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{*} query - Request query object.",
-        "name": "query",
-        "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>*</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{*} body - Request body contents.",
-        "name": "body",
-        "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>*</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{function} callback - The callback function.",
-        "name": "callback",
-        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
-        "types": [
-          "function"
-        ],
-        "typesDescription": "<code>function</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      }
-    ],
-    "description": {
-      "full": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
-      "summary": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 221,
-    "codeStart": 233,
-    "code": "Search.prototype.makeReq_ = function(method, path, query, body, callback) {\n  var reqOpts = {\n    method: method,\n    qs: query,\n    uri: format('{base}projects/{projectId}{path}', {\n      base: SEARCH_BASE_URL,\n      projectId: this.projectId_,\n      path: path\n    })\n  };\n\n  if (body) {\n    reqOpts.json = body;\n  }\n\n  this.makeAuthenticatedRequest_(reqOpts, callback);\n};",
-    "ctx": {
-      "type": "method",
-      "constructor": "Search",
-      "cons": "Search",
-      "name": "makeReq_",
-      "string": "Search.prototype.makeReq_()"
     }
   },
   {
@@ -630,8 +508,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 251,
-    "codeStart": 256,
+    "line": 222,
+    "codeStart": 227,
     "code": "streamRouter.extend(Search, 'getIndexes');\n\nmodule.exports = Search;",
     "ctx": false
   }

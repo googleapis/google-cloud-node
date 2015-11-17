@@ -34,7 +34,7 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar is = require('is');",
+    "code": "'use strict';\n\nvar is = require('is');\nvar nodeutil = require('util');",
     "ctx": false
   },
   {
@@ -69,14 +69,56 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 25,
-    "codeStart": 29,
+    "line": 26,
+    "codeStart": 30,
     "code": "var Field = require('./field.js');",
     "ctx": {
       "type": "declaration",
       "name": "Field",
       "value": "require('./field.js')",
       "string": "Field"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/serviceObject}",
+        "types": [
+          "module:common/serviceObject"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2FserviceObject.html\">common/serviceObject</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/serviceObject}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 32,
+    "codeStart": 36,
+    "code": "var ServiceObject = require('../common/service-object.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "ServiceObject",
+      "value": "require('../common/service-object.js')",
+      "string": "ServiceObject"
     }
   },
   {
@@ -111,8 +153,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 31,
-    "codeStart": 35,
+    "line": 38,
+    "codeStart": 42,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -163,13 +205,186 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 37,
-    "codeStart": 54,
-    "code": "function Document(index, id) {\n  this.search_ = index.search_;\n  this.index_ = index;\n\n  this.id = id;\n  this.fields = {};\n}",
+    "line": 44,
+    "codeStart": 61,
+    "code": "function Document(index, id) {\n  var methods = {",
     "ctx": {
       "type": "constructor",
       "name": "Document",
       "string": "Document()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Documents: delete API Documentation]{@link https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/delete}",
+        "html": "<p>[Documents: delete API Documentation]{@link <a href=\"https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/delete}\">https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/delete}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this\n    request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this     request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "document.delete(function(err, apiResponse) {});",
+        "html": "<p>document.delete(function(err, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Delete this document.</p>",
+      "summary": "<p>Delete this document.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 63,
+    "codeStart": 76,
+    "code": "delete: true,",
+    "ctx": {
+      "type": "property",
+      "name": "delete",
+      "value": "true,",
+      "string": "delete"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this\n    request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this     request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} callback.exists - Whether the zone exists or not.",
+        "name": "callback.exists",
+        "description": "<ul>\n<li>Whether the zone exists or not.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "document.exists(function(err, exists) {});",
+        "html": "<p>document.exists(function(err, exists) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Check if the document exists.</p>",
+      "summary": "<p>Check if the document exists.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 78,
+    "codeStart": 89,
+    "code": "exists: true,",
+    "ctx": {
+      "type": "property",
+      "name": "exists",
+      "value": "true,",
+      "string": "exists"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "example",
+        "string": "document.get(function(err, document, apiResponse) {\n  // `document.fields` has been populated.\n});",
+        "html": "<p>document.get(function(err, document, apiResponse) {<br />  // <code>document.fields</code> has been populated.<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a document if it exists.</p>",
+      "summary": "<p>Get a document if it exists.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 91,
+    "codeStart": 99,
+    "code": "get: true\n  };\n\n  ServiceObject.call(this, {\nparent: index,\nbaseUrl: '/documents',\nid: id,\nmethods: methods\n  });\n\n  this.id = id;\n  this.fields = {};\n}\n\nnodeutil.inherits(Document, ServiceObject);",
+    "ctx": {
+      "type": "property",
+      "name": "get",
+      "value": "true",
+      "string": "get"
     }
   },
   {
@@ -226,8 +441,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 62,
-    "codeStart": 74,
+    "line": 115,
+    "codeStart": 127,
     "code": "Document.prototype.addField = function(name) {\n  if (!is.string(name)) {\n    throw new Error('A name is required to add a field to this document.');\n  }\n\n  this.fields[name] = new Field();\n\n  return this.fields[name];\n};",
     "ctx": {
       "type": "method",
@@ -240,61 +455,14 @@
   {
     "tags": [
       {
-        "type": "resource",
-        "string": "[Documents: delete API Documentation]{@link https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/delete}",
-        "html": "<p>[Documents: delete API Documentation]{@link <a href=\"https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/delete}\">https://cloud.google.com/search/reference/rest/v1/projects/indexes/documents/delete}</a></p>"
-      },
-      {
-        "type": "param",
-        "string": "{function=} callback - The callback function.",
-        "name": "callback",
-        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
-        "types": [
-          "function"
-        ],
-        "typesDescription": "<code>function</code>|<code>undefined</code>",
-        "optional": true,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{?error} callback.err - An error returned while making this request",
-        "name": "callback.err",
-        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
-        "types": [
-          "error"
-        ],
-        "typesDescription": "<code>error</code>|<code>null</code>",
-        "optional": false,
-        "nullable": true,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.",
-        "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
-        "types": [
-          "object"
-        ],
-        "typesDescription": "<code>object</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
         "type": "example",
-        "string": "document.delete(function(err, apiResponse) {});",
-        "html": "<p>document.delete(function(err, apiResponse) {});</p>"
+        "string": "document.create(function(err, document, apiResponse) {\n  if (!err) {\n    // The document was created successfully.\n  }\n});",
+        "html": "<p>document.create(function(err, document, apiResponse) {<br />  if (!err) {<br />    // The document was created successfully.<br />  }<br />});</p>"
       }
     ],
     "description": {
-      "full": "<p>Delete this document.</p>",
-      "summary": "<p>Delete this document.</p>",
+      "full": "<p>Create a document.</p>",
+      "summary": "<p>Create a document.</p>",
       "body": ""
     },
     "isPrivate": false,
@@ -302,15 +470,15 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 84,
-    "codeStart": 96,
-    "code": "Document.prototype.delete = function(callback) {\n  this.makeReq_('DELETE', '', null, null, function(err, resp) {\n    (callback || util.noop)(err, resp);\n  });\n};",
+    "line": 137,
+    "codeStart": 147,
+    "code": "Document.prototype.create = function(callback) {\n  this.parent.createDocument(this, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Document",
       "cons": "Document",
-      "name": "delete",
-      "string": "Document.prototype.delete()"
+      "name": "create",
+      "string": "Document.prototype.create()"
     }
   },
   {
@@ -392,9 +560,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 102,
-    "codeStart": 127,
-    "code": "Document.prototype.getMetadata = function(callback) {\n  var self = this;\n\n  callback = callback || util.noop;\n\n  this.makeReq_('GET', '/', null, null, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.fields = {};\n    delete self.rank;\n\n    if (is.object(resp.fields)) {\n      Object.keys(resp.fields).forEach(function(fieldName) {\n        var fieldInstance = self.addField(fieldName);\n        fieldInstance.values = resp.fields[fieldName].values;\n      });\n    }\n\n    if (is.number(resp.rank)) {\n      self.rank = resp.rank;\n    }\n\n    callback(null, self, resp);\n  });\n};",
+    "line": 151,
+    "codeStart": 176,
+    "code": "Document.prototype.getMetadata = function(callback) {\n  var self = this;\n\n  callback = callback || util.noop;\n\n  ServiceObject.prototype.getMetadata.call(this, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    self.fields = {};\n    delete self.rank;\n\n    if (is.object(resp.fields)) {\n      Object.keys(resp.fields).forEach(function(fieldName) {\n        var fieldInstance = self.addField(fieldName);\n        fieldInstance.values = resp.fields[fieldName].values;\n      });\n    }\n\n    if (is.number(resp.rank)) {\n      self.rank = resp.rank;\n    }\n\n    callback(null, self, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Document",
@@ -443,8 +611,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 156,
-    "codeStart": 169,
+    "line": 205,
+    "codeStart": 218,
     "code": "Document.prototype.setRank = function(rank) {\n  if (!is.number(rank) || rank < 0) {\n    throw new Error('rank should be a positive integer.');\n  }\n\n  this.rank = rank;\n};",
     "ctx": {
       "type": "method",
@@ -472,111 +640,15 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 177,
-    "codeStart": 190,
-    "code": "Document.prototype.toJSON = function() {\n  var documentObject = {\n    fields: this.fields\n  };\n\n  if (is.string(this.id)) {\n    documentObject.docId = this.id;\n  }\n\n  if (is.number(this.rank)) {\n    documentObject.rank = this.rank;\n  }\n\n  return documentObject;\n};",
+    "line": 226,
+    "codeStart": 239,
+    "code": "Document.prototype.toJSON = function() {\n  var documentObject = {\n    fields: this.fields\n  };\n\n  if (is.string(this.id)) {\n    documentObject.docId = this.id;\n  }\n\n  if (is.number(this.rank)) {\n    documentObject.rank = this.rank;\n  }\n\n  return documentObject;\n};\n\nmodule.exports = Document;",
     "ctx": {
       "type": "method",
       "constructor": "Document",
       "cons": "Document",
       "name": "toJSON",
       "string": "Document.prototype.toJSON()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "private",
-        "string": "",
-        "visibility": "private",
-        "html": ""
-      },
-      {
-        "type": "param",
-        "string": "{string} method - Action.",
-        "name": "method",
-        "description": "<ul>\n<li>Action.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{string} path - Request path.",
-        "name": "path",
-        "description": "<ul>\n<li>Request path.</li>\n</ul>\n",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{*} query - Request query object.",
-        "name": "query",
-        "description": "<ul>\n<li>Request query object.</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>*</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{*} body - Request body contents.",
-        "name": "body",
-        "description": "<ul>\n<li>Request body contents.</li>\n</ul>\n",
-        "types": [],
-        "typesDescription": "<code>*</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{function} callback - The callback function.",
-        "name": "callback",
-        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
-        "types": [
-          "function"
-        ],
-        "typesDescription": "<code>function</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      }
-    ],
-    "description": {
-      "full": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
-      "summary": "<p>Make a new request object from the provided arguments and wrap the callback<br />to intercept non-successful responses.</p>",
-      "body": ""
-    },
-    "isPrivate": true,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 206,
-    "codeStart": 218,
-    "code": "Document.prototype.makeReq_ = function(method, path, query, body, callback) {\n  path = '/documents/' + this.id + path;\n\n  this.index_.makeReq_(method, path, query, body, callback);\n};\n\nmodule.exports = Document;",
-    "ctx": {
-      "type": "method",
-      "constructor": "Document",
-      "cons": "Document",
-      "name": "makeReq_",
-      "string": "Document.prototype.makeReq_()"
     }
   }
 ]
