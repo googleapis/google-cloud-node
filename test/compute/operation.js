@@ -17,6 +17,7 @@
 'use strict';
 
 var assert = require('assert');
+var extend = require('extend');
 var mockery = require('mockery');
 var nodeutil = require('util');
 
@@ -30,6 +31,17 @@ function FakeServiceObject() {
 
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
+var parseHttpRespBodyOverride = null;
+var fakeUtil = extend({}, util, {
+  parseHttpRespBody: function() {
+    if (parseHttpRespBodyOverride) {
+      return parseHttpRespBodyOverride.apply(null, arguments);
+    } else {
+      return util.parseHttpRespBody.apply(this, arguments);
+    }
+  }
+});
+
 describe('Operation', function() {
   var Operation;
   var operation;
@@ -39,6 +51,7 @@ describe('Operation', function() {
 
   before(function() {
     mockery.registerMock('../common/service-object.js', FakeServiceObject);
+    mockery.registerMock('../common/util.js', fakeUtil);
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
@@ -53,7 +66,12 @@ describe('Operation', function() {
   });
 
   beforeEach(function() {
+    parseHttpRespBodyOverride = null;
     operation = new Operation(SCOPE, OPERATION_NAME);
+  });
+
+  afterEach(function() {
+    operation.removeAllListeners();
   });
 
   describe('instantiation', function() {
@@ -62,7 +80,6 @@ describe('Operation', function() {
     });
 
     it('should inherit from ServiceObject', function() {
-      var operation = new Operation(SCOPE, OPERATION_NAME);
       assert(operation instanceof ServiceObject);
 
       var calledWith = operation.calledWith_[0];
@@ -86,6 +103,11 @@ describe('Operation', function() {
 
       var calledWith = operation.calledWith_[0];
       assert.strictEqual(calledWith.baseUrl, '/global/operations');
+    });
+
+    it('should correctly initialize variables', function() {
+      assert.strictEqual(operation.completeListeners, 0);
+      assert.strictEqual(operation.hasActiveListeners, false);
     });
   });
 
@@ -179,136 +201,209 @@ describe('Operation', function() {
     });
   });
 
-  describe('onComplete', function() {
-    // Set interval to 0 so our tests don't waste time.
-    var OPTIONS = { interval: 0 };
-
-    var error = new Error('Error.');
-    var apiResponse = { a: 'b', c: 'd' };
-    var apiResponseWithIncompleteStatus = { status: 'INCOMPLETE' };
-    var apiResponseWithCompleteStatus = { status: 'DONE' };
-
-    function getMetadataRespondsWithError(callback) {
-      callback(error, apiResponse);
-    }
-
-    function getMetadataRespondsWithIncompleteStatus(callback) {
-      callback(null, apiResponseWithIncompleteStatus);
-    }
-
-    function getMetadataRespondsWithCompleteStatus(callback) {
-      callback(null, apiResponseWithCompleteStatus);
-    }
-
-    describe('options.maxAttempts', function() {
-      it('should default to 10', function(done) {
-        var numAttemptsMade = 0;
-
-        operation.getMetadata = function(callback) {
-          numAttemptsMade++;
-          getMetadataRespondsWithIncompleteStatus(callback);
-        };
-
-        operation.onComplete(OPTIONS, function() {
-          assert.strictEqual(numAttemptsMade, 10);
-          done();
-        });
-      });
-
-      it('should allow overriding', function(done) {
-        var options = { maxAttempts: 3, interval: 0 };
-        var numAttemptsMade = 0;
-
-        operation.getMetadata = function(callback) {
-          numAttemptsMade++;
-          getMetadataRespondsWithIncompleteStatus(callback);
-        };
-
-        operation.onComplete(options, function() {
-          assert.strictEqual(numAttemptsMade, options.maxAttempts);
-          done();
-        });
-      });
+  describe('listenForEvents_', function() {
+    beforeEach(function() {
+      operation.startPolling_ = util.noop;
     });
 
-    describe('options.interval', function() {
-      it('should default to 3000ms', function(done) {
-        this.timeout(3100);
-
-        operation.getMetadata = getMetadataRespondsWithIncompleteStatus;
-
-        var started = Date.now();
-        operation.onComplete({ maxAttempts: 1 }, function() {
-          var ended = Date.now();
-
-          assert(ended - started > 2900 && ended - started < 3100);
-          done();
-        });
-      });
-
-      it('should allow overriding', function(done) {
-        operation.getMetadata = getMetadataRespondsWithIncompleteStatus;
-
-        var started = Date.now();
-        operation.onComplete({ maxAttempts: 1, interval: 1000 }, function() {
-          var ended = Date.now();
-
-          assert(ended - started > 900 && ended - started < 1100);
-          done();
-        });
-      });
-    });
-
-    it('should put the interval on the leading side', function(done) {
-      // (It should wait interval before making first request)
-      var started = Date.now();
-      operation.getMetadata = function() {
-        var ended = Date.now();
-
-        assert(ended - started > 900 && ended - started < 1100);
+    it('should start polling when complete listener is bound', function(done) {
+      operation.startPolling_ = function() {
         done();
       };
 
-      operation.onComplete({ maxAttempts: 1, interval: 1000 }, util.noop);
+      operation.on('complete', util.noop);
     });
 
-    it('should return an error if maxAttempts is exceeded', function(done) {
-      var options = { maxAttempts: 1, interval: 0 };
+    it('should track the number of listeners', function() {
+      assert.strictEqual(operation.completeListeners, 0);
 
-      operation.getMetadata = getMetadataRespondsWithIncompleteStatus;
+      operation.on('complete', util.noop);
+      assert.strictEqual(operation.completeListeners, 1);
 
-      operation.onComplete(options, function(err, metadata) {
-        assert.strictEqual(err.code, 'OPERATION_INCOMPLETE');
-        assert.strictEqual(err.message, 'Operation did not complete.');
+      operation.removeListener('complete', util.noop);
+      assert.strictEqual(operation.completeListeners, 0);
+    });
 
-        assert.strictEqual(metadata, operation.metadata);
+    it('should only run a single pulling loop', function() {
+      var startPollingCallCount = 0;
+
+      operation.startPolling_ = function() {
+        startPollingCallCount++;
+      };
+
+      operation.on('complete', util.noop);
+      operation.on('complete', util.noop);
+
+      assert.strictEqual(startPollingCallCount, 1);
+    });
+
+    it('should close when no more message listeners are bound', function() {
+      operation.on('complete', util.noop);
+      operation.on('complete', util.noop);
+      assert.strictEqual(operation.hasActiveListeners, true);
+
+      operation.removeListener('complete', util.noop);
+      assert.strictEqual(operation.hasActiveListeners, true);
+
+      operation.removeListener('complete', util.noop);
+      assert.strictEqual(operation.hasActiveListeners, false);
+    });
+  });
+
+  describe('startPolling_', function() {
+    var listenForEvents_;
+    var operation;
+
+    before(function() {
+      listenForEvents_ = Operation.prototype.listenForEvents_;
+    });
+
+    after(function() {
+      Operation.prototype.listenForEvents_ = listenForEvents_;
+    });
+
+    beforeEach(function() {
+      Operation.prototype.listenForEvents_ = util.noop;
+      operation = new Operation(SCOPE, OPERATION_NAME);
+      operation.hasActiveListeners = true;
+    });
+
+    afterEach(function() {
+      operation.hasActiveListeners = false;
+    });
+
+    it('should not call getMetadata if no listeners', function(done) {
+      operation.hasActiveListeners = false;
+
+      operation.getMetadata = done; // if called, test will fail.
+
+      operation.startPolling_();
+      done();
+    });
+
+    it('should call getMetadata if listeners are registered', function(done) {
+      operation.hasActiveListeners = true;
+
+      operation.getMetadata = function() {
         done();
+      };
+
+      operation.startPolling_();
+    });
+
+    describe('API error', function() {
+      var error = new Error('Error.');
+
+      beforeEach(function() {
+        operation.getMetadata = function(callback) {
+          callback(error);
+        };
+      });
+
+      it('should emit the error', function(done) {
+        operation.on('error', function(err) {
+          assert.strictEqual(err, error);
+          done();
+        });
+
+        operation.startPolling_();
       });
     });
 
-    describe('getMetadata', function() {
-      describe('error', function() {
-        it('should execute callback with error & API response', function(done) {
-          operation.getMetadata = getMetadataRespondsWithError;
+    describe('operation failure', function() {
+      var error = new Error('Error.');
+      var apiResponse = { error: error };
 
-          operation.onComplete(OPTIONS, function(err, metadata) {
-            assert.strictEqual(err, error);
-            assert.strictEqual(metadata, apiResponse);
-            done();
-          });
-        });
+      beforeEach(function() {
+        operation.getMetadata = function(callback) {
+          callback(null, apiResponse, apiResponse);
+        };
       });
 
-      describe('success', function() {
-        it('should exec callback with metadata when done', function(done) {
-          operation.getMetadata = getMetadataRespondsWithCompleteStatus;
+      it('should parse the response body', function(done) {
+        parseHttpRespBodyOverride = function(body) {
+          assert.strictEqual(body, apiResponse);
+          setImmediate(done);
+          return {};
+        };
 
-          operation.onComplete(OPTIONS, function(err, metadata) {
-            assert.ifError(err);
-            assert.strictEqual(metadata, apiResponseWithCompleteStatus);
-            done();
-          });
+        operation.startPolling_();
+      });
+
+      it('should detect and emit the error', function(done) {
+        parseHttpRespBodyOverride = function(body) {
+          assert.strictEqual(body, apiResponse);
+
+          return {
+            err: error
+          };
+        };
+
+        operation.on('error', function(err) {
+          assert.strictEqual(err, error);
+          done();
         });
+
+        operation.startPolling_();
+      });
+    });
+
+    describe('operation pending', function() {
+      var apiResponse = { status: 'PENDING' };
+      var setTimeoutCached = global.setTimeout;
+
+      beforeEach(function() {
+        operation.getMetadata = function(callback) {
+          callback(null, apiResponse, apiResponse);
+        };
+      });
+
+      after(function() {
+        global.setTimeout = setTimeoutCached;
+      });
+
+      it('should call startPolling_ after 500 ms', function(done) {
+        var startPolling_ = operation.startPolling_;
+        var startPollingCalled = false;
+
+        global.setTimeout = function(fn, timeoutMs) {
+          fn(); // should call startPolling_
+          assert.strictEqual(timeoutMs, 500);
+        };
+
+        operation.startPolling_ = function() {
+          if (!startPollingCalled) {
+            // Call #1.
+            startPollingCalled = true;
+            startPolling_.apply(this, arguments);
+            return;
+          }
+
+          // This is from the setTimeout call.
+          assert.strictEqual(this, operation);
+          done();
+        };
+
+        operation.startPolling_();
+      });
+    });
+
+    describe('operation complete', function() {
+      var apiResponse = { status: 'DONE' };
+
+      beforeEach(function() {
+        operation.getMetadata = function(callback) {
+          callback(null, apiResponse, apiResponse);
+        };
+      });
+
+      it('should emit complete with metadata', function(done) {
+        operation.on('complete', function(metadata) {
+          assert.strictEqual(metadata, apiResponse);
+          done();
+        });
+
+        operation.startPolling_();
       });
     });
   });
