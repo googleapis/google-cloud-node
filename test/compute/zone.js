@@ -361,6 +361,19 @@ describe('Zone', function() {
         };
       });
 
+      it('should execute cb with error from creating firewall', function(done) {
+        var error = new Error('Error.');
+
+        zone.createHttpServerFirewall_ = function(callback) {
+          callback(error);
+        };
+
+        zone.createVM(NAME, CONFIG, function(err) {
+          assert.strictEqual(err, error);
+          done();
+        });
+      });
+
       it('should create a firewall rule', function(done) {
         zone.createHttpServerFirewall_ = function() {
           done();
@@ -426,6 +439,19 @@ describe('Zone', function() {
         zone.createHttpsServerFirewall_ = function(callback) {
           callback();
         };
+      });
+
+      it('should execute cb with error from creating firewall', function(done) {
+        var error = new Error('Error.');
+
+        zone.createHttpsServerFirewall_ = function(callback) {
+          callback(error);
+        };
+
+        zone.createVM(NAME, CONFIG, function(err) {
+          assert.strictEqual(err, error);
+          done();
+        });
       });
 
       it('should create a firewall rule', function(done) {

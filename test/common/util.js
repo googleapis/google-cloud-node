@@ -162,8 +162,7 @@ describe('common/util', function() {
 
       var error = {
         code: 100,
-        response: { a: 'b', c: 'd' },
-        message: expectedErrorMessage
+        response: { a: 'b', c: 'd' }
       };
 
       var apiError = new util.ApiError(error);
@@ -177,8 +176,7 @@ describe('common/util', function() {
       var error = {
         errors: [ new Error(), new Error() ],
         code: 100,
-        response: { a: 'b', c: 'd' },
-        message: expectedErrorMessage
+        response: { a: 'b', c: 'd' }
       };
 
       var apiError = new util.ApiError(error);
