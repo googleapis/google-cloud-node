@@ -144,6 +144,23 @@ describe('BigQuery', function() {
       bq.createDataset(DATASET_ID, assert.ifError);
     });
 
+    it('should not modify the original options object', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      var originalOptions = extend({}, options);
+
+      bq.request = function(reqOpts) {
+        assert.notStrictEqual(reqOpts.json, options);
+        assert.deepEqual(options, originalOptions);
+        done();
+      };
+
+      bq.createDataset(DATASET_ID, options, assert.ifError);
+    });
+
     it('should return an error to the callback', function(done) {
       var error = new Error('Error.');
 
