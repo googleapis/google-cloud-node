@@ -138,12 +138,28 @@ describe('BigQuery/Dataset', function() {
         assert.strictEqual(reqOpts.uri, '/tables');
 
         var body = reqOpts.json;
-        assert.strictEqual(body, options);
         assert.deepEqual(body.schema, SCHEMA_OBJECT);
         assert.equal(body.tableReference.datasetId, DATASET_ID);
         assert.equal(body.tableReference.projectId, ds.bigQuery.projectId);
         assert.equal(body.tableReference.tableId, TABLE_ID);
 
+        done();
+      };
+
+      ds.createTable(TABLE_ID, options, assert.ifError);
+    });
+
+    it('should not modify the original options object', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd'
+      };
+
+      var originalOptions = extend({}, options);
+
+      ds.request = function(reqOpts) {
+        assert.notStrictEqual(reqOpts.json, options);
+        assert.deepEqual(options, originalOptions);
         done();
       };
 
