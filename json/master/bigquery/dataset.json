@@ -599,9 +599,9 @@
       },
       {
         "type": "param",
-        "string": "{object=} options - Configuration object.",
+        "string": "{object=} options - See a\n    [Table resource](https://cloud.google.com/bigquery/docs/reference/v2/tables#resource).",
         "name": "options",
-        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "description": "<ul>\n<li>See a     <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/tables#resource\">Table resource</a>.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -699,8 +699,8 @@
     "isEvent": false,
     "ignore": false,
     "line": 164,
-    "codeStart": 192,
-    "code": "Dataset.prototype.createTable = function(id, options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  extend(true, options, {\n    tableReference: {\n      datasetId: this.id,\n      projectId: this.bigQuery.projectId,\n      tableId: id\n    }\n  });\n\n  if (is.string(options.schema)) {\n    options.schema = Table.createSchemaFromString_(options.schema);\n  }\n\n  this.request({\n    method: 'POST',\n    uri: '/tables',\n    json: options\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var table = self.table(resp.tableReference.tableId);\n    table.metadata = resp;\n\n    callback(null, table, resp);\n  });\n};",
+    "codeStart": 193,
+    "code": "Dataset.prototype.createTable = function(id, options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  var body = extend(true, {}, options, {\n    tableReference: {\n      datasetId: this.id,\n      projectId: this.bigQuery.projectId,\n      tableId: id\n    }\n  });\n\n  if (is.string(options.schema)) {\n    body.schema = Table.createSchemaFromString_(options.schema);\n  }\n\n  this.request({\n    method: 'POST',\n    uri: '/tables',\n    json: body\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var table = self.table(resp.tableReference.tableId);\n    table.metadata = resp;\n\n    callback(null, table, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Dataset",
@@ -802,8 +802,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 229,
-    "codeStart": 252,
+    "line": 230,
+    "codeStart": 253,
     "code": "Dataset.prototype.delete = function(options, callback) {\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  var query = {\n    deleteContents: !!options.force\n  };\n\n  this.request({\n    method: 'DELETE',\n    uri: '',\n    qs: query\n  }, callback);\n};",
     "ctx": {
       "type": "method",
@@ -948,8 +948,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 269,
-    "codeStart": 311,
+    "line": 270,
+    "codeStart": 312,
     "code": "Dataset.prototype.getTables = function(query, callback) {\n  var that = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  query = query || {};\n\n  this.request({\n    uri: '/tables',\n    qs: query\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var tables = (resp.tables || []).map(function(tableObject) {\n      var table = that.table(tableObject.id);\n      table.metadata = tableObject;\n      return table;\n    });\n\n    callback(null, tables, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -971,8 +971,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 347,
-    "codeStart": 352,
+    "line": 348,
+    "codeStart": 353,
     "code": "Dataset.prototype.query = function(options, callback) {\n  if (is.string(options)) {\n    options = {\n      query: options\n    };\n  }\n\n  options = extend(true, {}, options, {\n    defaultDataset: {\n      datasetId: this.id\n    }\n  });\n\n  return this.bigQuery.query(options, callback);\n};",
     "ctx": {
       "type": "method",
@@ -1028,8 +1028,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 368,
-    "codeStart": 377,
+    "line": 369,
+    "codeStart": 378,
     "code": "Dataset.prototype.table = function(id) {\n  return new Table(this, id);\n};",
     "ctx": {
       "type": "method",
@@ -1051,8 +1051,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 381,
-    "codeStart": 386,
+    "line": 382,
+    "codeStart": 387,
     "code": "streamRouter.extend(Dataset, ['getTables']);\n\nmodule.exports = Dataset;",
     "ctx": false
   }
