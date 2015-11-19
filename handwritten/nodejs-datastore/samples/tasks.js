@@ -13,7 +13,6 @@
 
 'use strict';
 
-var gcloud = require('gcloud');
 var input = process.argv.splice(2);
 var command = input.shift();
 
@@ -24,6 +23,8 @@ if (!projectId) {
 var keyFile = process.env.DATASTORE_KEYFILE ||
               process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
+// [START build_service]
+var gcloud = require('gcloud');
 var options = {
   projectId: projectId
 };
@@ -33,9 +34,10 @@ if (keyFile) {
 }
 
 var datastore = gcloud.datastore(options);
+// [END build_service]
 
 /*
-// [START build_service]
+Installation and setup instructions.
 1. Download the TaskList sample application from [here]
 (https://github.com/GoogleCloudPlatform/nodejs-docs-samples/archive/master.zip).
 
@@ -69,7 +71,6 @@ export DATASTORE_PROJECT_ID=<project-id>
 ```sh
 npm run tasks
 ```
-// [END build_service]
 */
 
 // [START add_entity]
@@ -138,7 +139,7 @@ function listTasks(callback) {
 }
 // [END retrieve_entities]
 
-// [START delete_task]
+// [START delete_entity]
 function deleteTask(taskId, callback) {
   var taskKey = datastore.key([
     'Task',
@@ -147,7 +148,7 @@ function deleteTask(taskId, callback) {
 
   datastore.delete(taskKey, callback);
 }
-// [END delete_task]
+// [END delete_entity]
 
 // [START format_results]
 function formatTasks(tasks) {

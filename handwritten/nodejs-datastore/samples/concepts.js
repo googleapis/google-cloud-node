@@ -270,7 +270,7 @@ Entity.prototype.testLookup = function(callback) {
       // };
     }
   });
-  // [End lookup]
+  // [END lookup]
 
   this.datastore.insert({
     key: taskKey,
@@ -345,7 +345,6 @@ Entity.prototype.testDelete = function(callback) {
 Entity.prototype.testBatchUpsert = function(callback) {
     datastore.key = this.datastore.key;
 
-  // [START batch_upsert]
   var taskKey1 = datastore.key(['Task', 1]);
   var taskKey2 = datastore.key(['Task', 2]);
 
@@ -363,6 +362,7 @@ Entity.prototype.testBatchUpsert = function(callback) {
     description: 'Integrate Cloud Datastore'
   };
 
+  // [START batch_upsert]
   datastore.upsert([
     {
       key: taskKey1,
@@ -400,19 +400,9 @@ Entity.prototype.testBatchLookup = function(callback) {
   datastore.get([
     taskKey1,
     taskKey2
-  ], function(err, entities) {
+  ], function(err, tasks) {
     if (!err) {
-      // entities[0].data = {
-      //   type: 'Personal',
-      //   done: false,
-      //   priority: 4,
-      //   description: 'Learn Cloud Datastore'
-      // };
-
-      // entities[1].data = {
-      //   type: 'Work',
-      //   // ...
-      // };
+      // Tasks retrieved successfully.
     }
   });
   // [END batch_lookup]
@@ -674,12 +664,12 @@ Query.prototype.getProjectionQuery = function() {
 Query.prototype.getAncestorQuery = function() {
   var datastore = this.datastore;
 
-  // [START anscestor_query]
+  // [START ancestor_query]
   var ancestorKey = datastore.key(['TaskList', 'default']);
 
   var query = datastore.createQuery('Task')
     .hasAncestor(ancestorKey);
-  // [END anscestor_query]
+  // [END ancestor_query]
 
   return query;
 };
@@ -875,11 +865,11 @@ Query.prototype.testArrayValueInequalityRange = function(callback) {
 Query.prototype.testArrayValueEquality = function(callback) {
   var datastore = this.datastore;
 
-  // [START array_value_equality_range]
+  // [START array_value_equality]
   var query = datastore.createQuery('Task')
     .filter('tag =', 'fun')
     .filter('tag =', 'programming');
-  // [END array_value_equality_range]
+  // [END array_value_equality]
 
   this.datastore.runQuery(query, callback);
 };
