@@ -33,7 +33,7 @@ if (keyFile) {
   options.keyFilename = keyFile;
 }
 
-var datastore = gcloud.datastore(options);
+var datastore = gcloud.datastore.dataset(options);
 // [END build_service]
 
 /*
@@ -169,72 +169,74 @@ function formatTasks(tasks) {
 }
 // [END format_results]
 
-switch (command) {
-  case 'new': {
-    addTask(input, function(err, taskKey) {
-      if (err) {
-        throw err;
+if (module === require.main) {
+  switch (command) {
+    case 'new': {
+      addTask(input, function(err, taskKey) {
+        if (err) {
+          throw err;
+        }
+
+        var taskId = taskKey.path.pop();
+
+        console.log('Task %d created successfully.', taskId);
+      });
+
+      break;
+    }
+
+    case 'done': {
+      var taskId = parseInt(input, 10);
+
+      markDone(taskId, function(err) {
+        if (err) {
+          throw err;
+        }
+
+        console.log('Task %d updated successfully.', taskId);
+      });
+
+      break;
+    }
+
+    case 'list': {
+      listTasks(function(err, tasks) {
+        if (err) {
+          throw err;
+        }
+
+        console.log(formatTasks(tasks));
+      });
+
+      break;
+    }
+
+    case 'delete': {
+      var taskId = parseInt(input, 10);
+
+      deleteTask(taskId, function(err) {
+        if (err) {
+          throw err;
+        }
+
+        console.log('Task %d deleted successfully.', taskId);
+      });
+
+      break;
+    }
+
+    default: {
+      // Only print usage if this file is being executed directly
+      if (module === require.main) {
+        console.log([
+          'Usage:',
+          '',
+          '  new <description> Adds a task with a description <description>',
+          '  done <task-id>    Marks a task as done',
+          '  list              Lists all tasks by creation time',
+          '  delete <task-id>  Deletes a task'
+        ].join('\n'));
       }
-
-      var taskId = taskKey.path.pop();
-
-      console.log('Task %d created successfully.', taskId);
-    });
-
-    break;
-  }
-
-  case 'done': {
-    var taskId = parseInt(input, 10);
-
-    markDone(taskId, function(err) {
-      if (err) {
-        throw err;
-      }
-
-      console.log('Task %d updated successfully.', taskId);
-    });
-
-    break;
-  }
-
-  case 'list': {
-    listTasks(function(err, tasks) {
-      if (err) {
-        throw err;
-      }
-
-      console.log(formatTasks(tasks));
-    });
-
-    break;
-  }
-
-  case 'delete': {
-    var taskId = parseInt(input, 10);
-
-    deleteTask(taskId, function(err) {
-      if (err) {
-        throw err;
-      }
-
-      console.log('Task %d deleted successfully.', taskId);
-    });
-
-    break;
-  }
-
-  default: {
-    // Only print usage if this file is being executed directly
-    if (module === require.main) {
-      console.log([
-        'Usage:',
-        '',
-        '  new <description> Adds a task with a description <description>',
-        '  done <task-id>    Marks a task as done',
-        '  list              Lists all tasks by creation time',
-        '  delete <task-id>  Deletes a task'
-      ].join('\n'));
     }
   }
 }

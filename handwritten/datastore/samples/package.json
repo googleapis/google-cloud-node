@@ -9,6 +9,6 @@
   },
   "dependencies": {
     "async": "^1.5.0",
-    "gcloud": "stephenplusplus/gcloud-node#spp--datastore-v1beta3"
+    "gcloud": "^0.25.0"
   }
 }
