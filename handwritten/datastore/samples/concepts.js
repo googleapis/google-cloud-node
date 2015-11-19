@@ -343,10 +343,8 @@ Entity.prototype.testDelete = function(callback) {
 };
 
 Entity.prototype.testBatchUpsert = function(callback) {
-    datastore.key = this.datastore.key;
-
-  var taskKey1 = datastore.key(['Task', 1]);
-  var taskKey2 = datastore.key(['Task', 2]);
+  var taskKey1 = this.datastore.key(['Task', 1]);
+  var taskKey2 = this.datastore.key(['Task', 2]);
 
   var task1 = {
     type: 'Personal',
@@ -654,8 +652,7 @@ Query.prototype.getProjectionQuery = function() {
 
   // [START projection_query]
   var query = datastore.createQuery('Task')
-    .select('priority')
-    .select('percent_complete');
+    .select(['priority', 'percent_complete']);
   // [END projection_query]
 
   return query;
