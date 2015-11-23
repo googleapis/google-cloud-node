@@ -684,8 +684,8 @@
       },
       {
         "type": "example",
-        "string": "var tableConfig = {\n  id: 'institution_data',\n\n  // From the data.gov CSV dataset (http://goo.gl/kSE7z6):\n  schema: 'UNITID,INSTNM,ADDR,CITY,STABBR,ZIP,FIPS,OBEREG,CHFNM,...'\n};\n\ndataset.createTable(tableConfig, function(err, table, apiResponse) {});",
-        "html": "<p>var tableConfig = {<br />  id: &#39;institution_data&#39;,</p><p>  // From the data.gov CSV dataset (<a href=\"http://goo.gl/kSE7z6\">http://goo.gl/kSE7z6</a>):<br />  schema: &#39;UNITID,INSTNM,ADDR,CITY,STABBR,ZIP,FIPS,OBEREG,CHFNM,...&#39;<br />};</p><p>dataset.createTable(tableConfig, function(err, table, apiResponse) {});</p>"
+        "string": "var tableId = 'institution_data';\n\nvar options = {\n  // From the data.gov CSV dataset (http://goo.gl/kSE7z6):\n  schema: 'UNITID,INSTNM,ADDR,CITY,STABBR,ZIP,FIPS,OBEREG,CHFNM,...'\n};\n\ndataset.createTable(tableId, options, function(err, table, apiResponse) {});",
+        "html": "<p>var tableId = &#39;institution_data&#39;;</p><p>var options = {<br />  // From the data.gov CSV dataset (<a href=\"http://goo.gl/kSE7z6\">http://goo.gl/kSE7z6</a>):<br />  schema: &#39;UNITID,INSTNM,ADDR,CITY,STABBR,ZIP,FIPS,OBEREG,CHFNM,...&#39;<br />};</p><p>dataset.createTable(tableId, options, function(err, table, apiResponse) {});</p>"
       }
     ],
     "description": {
