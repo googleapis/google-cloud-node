@@ -1107,6 +1107,31 @@ describe('Request', function() {
           request.makeReq_('lookup', util.noop);
         });
       });
+
+      describe('runQuery', function() {
+        it('should attach transactional properties', function(done) {
+          request.id = 'EeMXCSGvwcSWGkkABRmGMTWdbi_pa66VflNhQAGblQFMXf9HrmNGa' +
+            'GugEsO1M2_2x7wZvLencG51uwaDOTZCjTkkRh7bw_oyKUgTmtJ0iWJwath7';
+          var expected = new pb.RunQueryRequest({
+            read_options: {
+              transaction: request.id
+            }
+          }).toBuffer();
+          requestOverride = function(req) {
+            assert.deepEqual(req.body, expected);
+            done();
+          };
+          request.makeReq_('runQuery', util.noop);
+        });
+
+        it('should not attach transactional properties', function(done) {
+          requestOverride = function(req) {
+            assert.strictEqual(req.body, '');
+            done();
+          };
+          request.makeReq_('runQuery', util.noop);
+        });
+      });
     });
   });
 });
