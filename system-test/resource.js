@@ -17,6 +17,7 @@
 'use strict';
 
 var assert = require('assert');
+var googleAuth = require('google-auto-auth');
 
 var env = require('./env.js');
 var Resource = require('../lib/resource/index.js');
@@ -65,7 +66,9 @@ describe('Resource', function() {
   //   - Set metadata
   //   - Restore a project
   //   - Delete a project
-  describe('user-auth only functionality', function() {
+  describe('lifecycle', function() {
+    var CAN_RUN_TESTS = true;
+
     var resource = new Resource({
       projectId: env.projectId
     });
@@ -74,10 +77,36 @@ describe('Resource', function() {
     var project = resource.project(PROJECT_ID);
 
     before(function(done) {
-      project.create(done);
+      var authClient = googleAuth();
+
+      // See if an auth token exists.
+      authClient.getToken(function(err) {
+        if (err) {
+          if (err.code === 400) {
+            CAN_RUN_TESTS = false;
+            done();
+          } else {
+            done(err);
+          }
+          return;
+        }
+
+        project.create(done);
+      });
+    });
+
+    beforeEach(function() {
+      if (!CAN_RUN_TESTS) {
+        this.skip();
+      }
     });
 
     after(function(done) {
+      if (!CAN_RUN_TESTS) {
+        this.skip();
+        return;
+      }
+
       project.delete(done);
     });
 
