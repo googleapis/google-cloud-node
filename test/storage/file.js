@@ -164,8 +164,59 @@ describe('File', function() {
       assert.strictEqual(calledWith.baseUrl, '/o');
       assert.strictEqual(calledWith.id, encodeURIComponent(FILE_NAME));
       assert.deepEqual(calledWith.methods, {
+        delete: {
+          reqOpts: {
+            qs: {}
+          }
+        },
         exists: true,
-        get: true
+        get: true,
+        getMetadata: {
+          reqOpts: {
+            qs: {}
+          }
+        },
+        setMetadata: {
+          reqOpts: {
+            qs: {}
+          }
+        }
+      });
+    });
+
+    it('should set generation on the request methods', function() {
+      var options = {
+        generation: 82834
+      };
+
+      var file = new File(BUCKET, 'name', options);
+
+      var calledWith = file.calledWith_[0];
+
+      assert.deepEqual(calledWith.methods, {
+        delete: {
+          reqOpts: {
+            qs: {
+              generation: options.generation
+            }
+          }
+        },
+        exists: true,
+        get: true,
+        getMetadata: {
+          reqOpts: {
+            qs: {
+              generation: options.generation
+            }
+          }
+        },
+        setMetadata: {
+          reqOpts: {
+            qs: {
+              generation: options.generation
+            }
+          }
+        }
       });
     });
   });
@@ -1148,69 +1199,6 @@ describe('File', function() {
     });
   });
 
-  describe('delete', function() {
-    it('should delete the file', function(done) {
-      file.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.method, 'DELETE');
-        assert.equal(reqOpts.uri, '');
-        assert.deepEqual(reqOpts.qs, {});
-
-        done();
-      };
-
-      file.delete();
-    });
-
-    it('should execute callback with error & API response', function(done) {
-      var error = new Error('Error.');
-      var apiResponse = {};
-
-      file.request = function(reqOpts, callback) {
-        callback(error, apiResponse);
-      };
-
-      file.delete(function(err, apiResponse_) {
-        assert.strictEqual(err, error);
-        assert.strictEqual(apiResponse_, apiResponse);
-
-        done();
-      });
-    });
-
-    it('should send query.generation if File has one', function(done) {
-      var versionedFile = new File(BUCKET, 'new-file.txt', { generation: 1 });
-
-      versionedFile.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.qs.generation, 1);
-
-        done();
-      };
-
-      versionedFile.delete();
-    });
-
-    it('should execute callback', function(done) {
-      file.request = function(reqOpts, callback) {
-        callback();
-      };
-
-      file.delete(done);
-    });
-
-    it('should execute callback with apiResponse', function(done) {
-      var resp = { success: true };
-
-      file.request = function(reqOpts, callback) {
-        callback(null, resp);
-      };
-
-      file.delete(function(err, apiResponse) {
-        assert.deepEqual(resp, apiResponse);
-        done();
-      });
-    });
-  });
-
   describe('download', function() {
     var fileReadStream;
 
@@ -1339,72 +1327,6 @@ describe('File', function() {
             done();
           });
         });
-      });
-    });
-  });
-
-  describe('getMetadata', function() {
-    var metadata = { a: 'b', c: 'd' };
-
-    it('should get the metadata of a file', function(done) {
-      file.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.uri, '');
-        assert.deepEqual(reqOpts.qs, {});
-
-        done();
-      };
-
-      file.getMetadata();
-    });
-
-    it('should send query.generation if File has one', function(done) {
-      var versionedFile = new File(BUCKET, 'new-file.txt', { generation: 1 });
-
-      versionedFile.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.qs.generation, 1);
-        done();
-      };
-
-      versionedFile.getMetadata();
-    });
-
-    it('should execute callback', function(done) {
-      file.request = function(reqOpts, callback) {
-        callback();
-      };
-
-      file.getMetadata(done);
-    });
-
-    it('should execute callback with apiResponse', function(done) {
-      var resp = { success: true };
-      file.request = function(reqOpts, callback) {
-        callback(null, resp);
-      };
-      file.getMetadata(function(err, metadata, apiResponse) {
-        assert.deepEqual(resp, apiResponse);
-        done();
-      });
-    });
-
-    it('should update metadata property on object', function() {
-      file.request = function(reqOpts, callback) {
-        callback(null, metadata);
-      };
-      assert.deepEqual(file.metadata, {});
-      file.getMetadata(function(err, newMetadata) {
-        assert.deepEqual(newMetadata, metadata);
-      });
-      assert.deepEqual(file.metadata, metadata);
-    });
-
-    it('should pass metadata to callback', function(done) {
-      file.request = function(reqOpts, callback) {
-        callback(null, metadata);
-      };
-      file.getMetadata(function(err, fileMetadata) {
-        assert.deepEqual(fileMetadata, metadata);
-        done();
       });
     });
   });
@@ -2038,73 +1960,6 @@ describe('File', function() {
           assert.equal(err, error);
           done();
         });
-      });
-    });
-  });
-
-  describe('setMetadata', function() {
-    var metadata = { fake: 'metadata' };
-
-    it('should set metadata', function(done) {
-      file.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.method, 'PATCH');
-        assert.strictEqual(reqOpts.uri, '');
-        assert.deepEqual(reqOpts.json, metadata);
-        done();
-      };
-      file.setMetadata(metadata);
-    });
-
-    it('should send query.generation if File has one', function(done) {
-      var versionedFile = new File(BUCKET, 'new-file.txt', { generation: 1 });
-
-      versionedFile.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.qs.generation, 1);
-        done();
-      };
-
-      versionedFile.setMetadata();
-    });
-
-    it('should execute callback', function(done) {
-      file.request = function(reqOpts, callback) {
-        callback();
-      };
-      file.setMetadata(metadata, done);
-    });
-
-    it('should execute callback with error & API response', function(done) {
-      var error = new Error('Error.');
-      var apiResponse = {};
-
-      file.request = function(reqOpts, callback) {
-        callback(error, apiResponse);
-      };
-
-      file.setMetadata(metadata, function(err, apiResponse_) {
-        assert.strictEqual(err, error);
-        assert.strictEqual(apiResponse_, apiResponse);
-        done();
-      });
-    });
-
-    it('should execute callback with apiResponse', function(done) {
-      var resp = { success: true };
-      file.request = function(reqOpts, callback) {
-        callback(null, resp);
-      };
-      file.setMetadata(metadata, function(err, apiResponse) {
-        assert.deepEqual(resp, apiResponse);
-        done();
-      });
-    });
-
-    it('should update internal metadata property', function() {
-      file.request = function(reqOpts, callback) {
-        callback(null, metadata);
-      };
-      file.setMetadata(metadata, function() {
-        assert.deepEqual(file.metadata, metadata);
       });
     });
   });
