@@ -85,7 +85,11 @@ describe('Project', function() {
         exists: true,
         get: true,
         getMetadata: true,
-        setMetadata: true
+        setMetadata: {
+          reqOpts: {
+            method: 'PUT'
+          }
+        }
       });
     });
   });
