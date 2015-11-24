@@ -32,7 +32,7 @@ util.makeAuthenticatedRequestFactory = function() {
   }
 };
 
-describe('ServiceObject', function() {
+describe('Service', function() {
   var Service;
   var service;
 
