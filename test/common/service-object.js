@@ -59,6 +59,22 @@ describe('ServiceObject', function() {
       assert.strictEqual(serviceObject.createMethod, CONFIG.createMethod);
     });
 
+    it('should localize the methods', function() {
+      var methods = {};
+
+      var config = extend({}, CONFIG, {
+        methods: methods
+      });
+
+      var serviceObject = new ServiceObject(config);
+
+      assert.strictEqual(serviceObject.methods, methods);
+    });
+
+    it('should default methods to an empty object', function() {
+      assert.deepEqual(serviceObject.methods, {});
+    });
+
     it('should clear out methods that are not asked for', function() {
       var config = extend({}, CONFIG, {
         methods: {
@@ -205,6 +221,27 @@ describe('ServiceObject', function() {
 
       serviceObject = new ServiceObject(CONFIG);
       serviceObject.delete(assert.ifError);
+    });
+
+    it('should extend the request options with defaults', function(done) {
+      var method = {
+        reqOpts: {
+          method: 'override',
+          qs: {
+            custom: true
+          }
+        }
+      };
+
+      ServiceObject.prototype.request = function(reqOpts_) {
+        assert.strictEqual(reqOpts_.method, method.reqOpts.method);
+        assert.deepEqual(reqOpts_.qs, method.reqOpts.qs);
+        done();
+      };
+
+      var serviceObject = new ServiceObject(CONFIG);
+      serviceObject.methods.delete = method;
+      serviceObject.delete();
     });
 
     it('should not require a callback', function() {
@@ -384,6 +421,27 @@ describe('ServiceObject', function() {
       serviceObject.getMetadata();
     });
 
+    it('should extend the request options with defaults', function(done) {
+      var method = {
+        reqOpts: {
+          method: 'override',
+          qs: {
+            custom: true
+          }
+        }
+      };
+
+      ServiceObject.prototype.request = function(reqOpts_) {
+        assert.strictEqual(reqOpts_.method, method.reqOpts.method);
+        assert.deepEqual(reqOpts_.qs, method.reqOpts.qs);
+        done();
+      };
+
+      var serviceObject = new ServiceObject(CONFIG);
+      serviceObject.methods.getMetadata = method;
+      serviceObject.getMetadata();
+    });
+
     it('should execute callback with error & apiResponse', function(done) {
       var error = new Error('Error.');
       var apiResponse = {};
@@ -442,6 +500,39 @@ describe('ServiceObject', function() {
         done();
       };
 
+      serviceObject.setMetadata(metadata);
+    });
+
+    it('should extend the request options with defaults', function(done) {
+      var metadataDefault = {
+        a: 'b'
+      };
+
+      var metadata = {
+        c: 'd'
+      };
+
+      var method = {
+        reqOpts: {
+          method: 'override',
+          qs: {
+            custom: true
+          },
+          json: metadataDefault
+        }
+      };
+
+      var expectedJson = extend(true, {}, metadataDefault, metadata);
+
+      ServiceObject.prototype.request = function(reqOpts_) {
+        assert.strictEqual(reqOpts_.method, method.reqOpts.method);
+        assert.deepEqual(reqOpts_.qs, method.reqOpts.qs);
+        assert.deepEqual(reqOpts_.json, expectedJson);
+        done();
+      };
+
+      var serviceObject = new ServiceObject(CONFIG);
+      serviceObject.methods.setMetadata = method;
       serviceObject.setMetadata(metadata);
     });
 
