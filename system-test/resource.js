@@ -22,51 +22,8 @@ var env = require('./env.js');
 var Resource = require('../lib/resource/index.js');
 
 describe('Resource', function() {
-  // -------------
-  // >> Attention!
-  // -------------
-  // As of 9/14/15, creating projects is not supported. Once we have support,
-  // the following description outlines how we should run our tests.
-  // -------------
-  //
-  // Before the tests run, we create a project. That acts as the test for being
-  // able to create a project. Similarly, the after hook deletes it, testing if
-  // a project can be deleted.
-  //
-  // ----------
-  // >> Notice!
-  // ----------
-  // All tests should only manipulate a short-lived project. NOT the project the
-  // user has been running our test suite with. That would just be rude.
-  // ----------
-
-  // var PROJECT_ID = 'gcloud-tests-' + Date.now();
-  var PROJECT_NAME = 'gcloud-tests-project-name';
-
   var resource = new Resource(env);
-  var project;
-
-  before(function(done) {
-    // Uncomment after we support creating a project.
-    // resource.createProject(PROJECT_ID, function(err, project_) {
-    //   if (err) {
-    //     done(err);
-    //     return;
-    //   }
-    //
-    //   project = project_;
-    // });
-
-    // ** SEE "Notice!" SECTION ABOVE **
-    // Remove once we support creating a project.
-    project = resource.project();
-    done();
-  });
-
-  // Uncomment after we support creating a project.
-  // after(function(done) {
-  //   project.delete(done);
-  // });
+  var project = resource.project();
 
   describe('resource', function() {
     it('should get a list of projects', function(done) {
@@ -100,15 +57,45 @@ describe('Resource', function() {
         done();
       });
     });
+  });
 
-    it.skip('should set metadata', function(done) {
+  // Auth through the gcloud SDK is required to:
+  //
+  //   - Create a project
+  //   - Set metadata
+  //   - Restore a project
+  //   - Delete a project
+  describe('user-auth only functionality', function() {
+    var resource = new Resource({
+      projectId: env.projectId
+    });
+
+    var PROJECT_ID = 'gcloud-tests-' + Date.now();
+    var project = resource.project(PROJECT_ID);
+
+    before(function(done) {
+      project.create(done);
+    });
+
+    after(function(done) {
+      project.delete(done);
+    });
+
+    it('should have created the project', function() {
+      assert.strictEqual(project.metadata.projectId, PROJECT_ID);
+    });
+
+    it('should set metadata', function(done) {
+      var newProjectName = 'gcloud-tests-project-name';
+
       project.getMetadata(function(err, metadata) {
         assert.ifError(err);
 
         var originalProjectName = metadata.name;
+        assert.notStrictEqual(originalProjectName, newProjectName);
 
         project.setMetadata({
-          name: PROJECT_NAME
+          name: newProjectName
         }, function(err) {
           assert.ifError(err);
 
@@ -119,7 +106,7 @@ describe('Resource', function() {
       });
     });
 
-    it.skip('should delete and restore a project', function(done) {
+    it('should restore the project', function(done) {
       project.delete(function(err) {
         assert.ifError(err);
         project.restore(done);
