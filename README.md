@@ -154,12 +154,12 @@ dataset.save({
   data: blogPostData
 }, function(err) {
   // `blogPostKey` has been updated with an ID so you can do more operations
-  // with it, such as an update:
+  // with it, such as an update.
+  blogPostData.isDraft = false;
+
   dataset.save({
     key: blogPostKey,
-    data: {
-      isDraft: false
-    }
+    data: blogPostData
   }, function(err) {
     if (!err) {
       // The blog post is now published!
