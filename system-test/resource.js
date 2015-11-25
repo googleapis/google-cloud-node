@@ -82,12 +82,8 @@ describe('Resource', function() {
       // See if an auth token exists.
       authClient.getToken(function(err) {
         if (err) {
-          if (err.code === 400) {
-            CAN_RUN_TESTS = false;
-            done();
-          } else {
-            done(err);
-          }
+          CAN_RUN_TESTS = false;
+          done();
           return;
         }
 
