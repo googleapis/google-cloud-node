@@ -696,6 +696,25 @@ describe('storage', function() {
     });
   });
 
+  describe('channels', function() {
+    it('should create a channel', function(done) {
+      var config = {
+        address: 'https://yahoo.com'
+      };
+
+      bucket.createChannel('new-channel', config, function(err) {
+        // Actually creating a channel is pretty complicated. This will at least
+        // let us know we hit the right endpoint and it received "yahoo.com".
+        assert.strictEqual(
+          err.message,
+          'Unauthorized WebHook callback channel: ' + config.address
+        );
+
+        done();
+      });
+    });
+  });
+
   describe('combine files', function() {
     it('should combine multiple files into one', function(done) {
       var files = [
