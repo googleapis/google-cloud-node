@@ -18,9 +18,7 @@
 
 var assert = require('assert');
 var async = require('async');
-var Bucket = require('../lib/storage/bucket.js');
 var crypto = require('crypto');
-var File = require('../lib/storage/file.js');
 var fs = require('fs');
 var prop = require('propprop');
 var request = require('request');
@@ -28,63 +26,64 @@ var through = require('through2');
 var tmp = require('tmp');
 var uuid = require('node-uuid');
 
+var Bucket = require('../lib/storage/bucket.js');
 var env = require('./env.js');
-var gcloud = require('../lib')(env);
-var storage = gcloud.storage();
-
-var BUCKET_NAME = generateBucketName();
-
-var files = {
-  logo: {
-    path: 'system-test/data/CloudPlatform_128px_Retina.png'
-  },
-  big: {
-    path: 'system-test/data/three-mb-file.tif'
-  },
-  html: {
-    path: 'system-test/data/long-html-file.html'
-  },
-  gzip: {
-    path: 'system-test/data/long-html-file.html.gz'
-  }
-};
-
-function deleteFile(file, callback) {
-  file.delete(callback);
-}
-
-function writeToFile(file, contents, callback) {
-  var writeStream = file.createWriteStream();
-  writeStream.once('error', callback);
-  writeStream.once('finish', callback.bind(null, null));
-  writeStream.end(contents);
-}
-
-function generateBucketName() {
-  return 'gcloud-test-bucket-temp-' + uuid.v1();
-}
-
-function setHash(obj, file, done) {
-  var hash = crypto.createHash('md5');
-  fs.createReadStream(obj[file].path)
-    .on('data', hash.update.bind(hash))
-    .on('end', function() {
-      obj[file].hash = hash.digest('base64');
-      done();
-    });
-}
+var File = require('../lib/storage/file.js');
+var Storage = require('../lib/storage/index.js');
 
 describe('storage', function() {
-  var bucket = storage.bucket(BUCKET_NAME);
+  var TESTS_PREFIX = 'gcloud-test-';
+
+  var storage = new Storage(env);
+  var bucket = storage.bucket(generateName());
+
+  var FILES = {
+    logo: {
+      path: 'system-test/data/CloudPlatform_128px_Retina.png'
+    },
+    big: {
+      path: 'system-test/data/three-mb-file.tif'
+    },
+    html: {
+      path: 'system-test/data/long-html-file.html'
+    },
+    gzip: {
+      path: 'system-test/data/long-html-file.html.gz'
+    }
+  };
 
   before(function(done) {
     bucket.create(done);
   });
 
   after(function(done) {
-    bucket.deleteFiles(function(err) {
-      assert.ifError(err);
-      bucket.delete(done);
+    storage.getBuckets({
+      prefix: TESTS_PREFIX
+    }, function(err, buckets) {
+      if (err) {
+        done(err);
+        return;
+      }
+
+      function deleteBucket(bucket, callback) {
+        // After files are deleted, eventual consistency may require a bit of a
+        // delay to ensure that the bucket recognizes that the files don't exist
+        // anymore.
+        var CONSISTENCY_DELAY_MS = 250;
+
+        bucket.deleteFiles(function(err) {
+          if (err) {
+            callback(err);
+            return;
+          }
+
+          setTimeout(function() {
+            bucket.delete(callback);
+          }, CONSISTENCY_DELAY_MS);
+        });
+      }
+
+      async.each(buckets, deleteBucket, done);
     });
   });
 
@@ -212,7 +211,7 @@ describe('storage', function() {
         });
 
         function createFileWithContent(content, callback) {
-          writeToFile(bucket.file(uuid() + '.txt'), content, callback);
+          writeToFile(bucket.file(generateName() + '.txt'), content, callback);
         }
 
         function isFilePublic(file, callback) {
@@ -267,7 +266,7 @@ describe('storage', function() {
         });
 
         function createFileWithContent(content, callback) {
-          writeToFile(bucket.file(uuid() + '.txt'), content, callback);
+          writeToFile(bucket.file(generateName() + '.txt'), content, callback);
         }
 
         function isFilePrivate(file, callback) {
@@ -287,9 +286,10 @@ describe('storage', function() {
 
       beforeEach(function(done) {
         var options = {
-          destination: uuid.v1() + '.png'
+          destination: generateName() + '.png'
         };
-        bucket.upload(files.logo.path, options, function(err, f) {
+
+        bucket.upload(FILES.logo.path, options, function(err, f) {
           assert.ifError(err);
           file = f;
           done();
@@ -380,8 +380,8 @@ describe('storage', function() {
 
   describe('getting buckets', function() {
     var bucketsToCreate = [
-      generateBucketName(),
-      generateBucketName()
+      generateName(),
+      generateName()
     ];
 
     before(function(done) {
@@ -441,14 +441,19 @@ describe('storage', function() {
 
   describe('write, read, and remove files', function() {
     before(function(done) {
-      var doneCalled = 0;
-      Object.keys(files).forEach(function(file) {
-        setHash(files, file, function() {
-          if (++doneCalled === Object.keys(files).length) {
+      function setHash(filesKey, done) {
+        var file = FILES[filesKey];
+        var hash = crypto.createHash('md5');
+
+        fs.createReadStream(file.path)
+          .on('data', hash.update.bind(hash))
+          .on('end', function() {
+            file.hash = hash.digest('base64');
             done();
-          }
-        });
-      });
+          });
+      }
+
+      async.each(Object.keys(FILES), setHash, done);
     });
 
     it('should read/write from/to a file in a directory', function(done) {
@@ -491,7 +496,7 @@ describe('storage', function() {
     });
 
     it('should read a byte range from a file', function(done) {
-      bucket.upload(files.big.path, function(err, file) {
+      bucket.upload(FILES.big.path, function(err, file) {
         assert.ifError(err);
 
         var fileSize = file.metadata.size;
@@ -515,9 +520,9 @@ describe('storage', function() {
     });
 
     it('should download a file to memory', function(done) {
-      var fileContents = fs.readFileSync(files.big.path);
+      var fileContents = fs.readFileSync(FILES.big.path);
 
-      bucket.upload(files.big.path, function(err, file) {
+      bucket.upload(FILES.big.path, function(err, file) {
         assert.ifError(err);
 
         file.download(function(err, remoteContents) {
@@ -542,9 +547,9 @@ describe('storage', function() {
         gzip: true
       };
 
-      var expectedContents = fs.readFileSync(files.html.path, 'utf-8');
+      var expectedContents = fs.readFileSync(FILES.html.path, 'utf-8');
 
-      bucket.upload(files.html.path, options, function(err, file) {
+      bucket.upload(FILES.html.path, options, function(err, file) {
         assert.ifError(err);
 
         file.download(function(err, contents) {
@@ -562,9 +567,9 @@ describe('storage', function() {
         }
       };
 
-      var expectedContents = fs.readFileSync(files.html.path, 'utf-8');
+      var expectedContents = fs.readFileSync(FILES.html.path, 'utf-8');
 
-      bucket.upload(files.gzip.path, options, function(err, file) {
+      bucket.upload(FILES.gzip.path, options, function(err, file) {
         assert.ifError(err);
 
         file.download(function(err, contents) {
@@ -578,11 +583,11 @@ describe('storage', function() {
     describe('stream write', function() {
       it('should stream write, then remove file (3mb)', function(done) {
         var file = bucket.file('LargeFile');
-        fs.createReadStream(files.big.path)
+        fs.createReadStream(FILES.big.path)
           .pipe(file.createWriteStream({ resumable: false }))
           .on('error', done)
           .on('finish', function() {
-            assert.equal(file.metadata.md5Hash, files.big.hash);
+            assert.equal(file.metadata.md5Hash, FILES.big.hash);
             file.delete(done);
           });
       });
@@ -593,7 +598,7 @@ describe('storage', function() {
           resumable: false
         };
 
-        bucket.upload(files.logo.path, options, function(err, file) {
+        bucket.upload(FILES.logo.path, options, function(err, file) {
           assert.ifError(err);
 
           file.getMetadata(function(err, metadata) {
@@ -605,11 +610,11 @@ describe('storage', function() {
       });
 
       it('should resume an upload after an interruption', function(done) {
-        fs.stat(files.big.path, function(err, metadata) {
+        fs.stat(FILES.big.path, function(err, metadata) {
           assert.ifError(err);
 
           // Use a random name to force an empty ConfigStore cache.
-          var file = bucket.file('LargeFile' + Date.now());
+          var file = bucket.file(generateName());
           var fileSize = metadata.size;
 
           upload({ interrupt: true }, function(err) {
@@ -627,7 +632,7 @@ describe('storage', function() {
             var ws = file.createWriteStream();
             var sizeStreamed = 0;
 
-            fs.createReadStream(files.big.path)
+            fs.createReadStream(FILES.big.path)
               .pipe(through(function(chunk, enc, next) {
                 sizeStreamed += chunk.length;
 
@@ -683,7 +688,7 @@ describe('storage', function() {
 
     it('should copy an existing file', function(done) {
       var opts = { destination: 'CloudLogo' };
-      bucket.upload(files.logo.path, opts, function(err, file) {
+      bucket.upload(FILES.logo.path, opts, function(err, file) {
         assert.ifError(err);
 
         file.copy('CloudLogoCopy', function(err, copiedFile) {
@@ -729,38 +734,40 @@ describe('storage', function() {
   });
 
   describe('list files', function() {
-    var filenames = ['CloudLogo1', 'CloudLogo2', 'CloudLogo3'];
+    var NEW_FILES = [
+      bucket.file('CloudLogo1'),
+      bucket.file('CloudLogo2'),
+      bucket.file('CloudLogo3')
+    ];
 
     before(function(done) {
       bucket.deleteFiles(function(err) {
         assert.ifError(err);
 
-        var file = bucket.file(filenames[0]);
-        fs.createReadStream(files.logo.path)
-          .pipe(file.createWriteStream())
+        var originalFile = NEW_FILES[0];
+        var copiedFile1 = NEW_FILES[1];
+        var copiedFile2 = NEW_FILES[2];
+
+        fs.createReadStream(FILES.logo.path)
+          .pipe(originalFile.createWriteStream())
           .on('error', done)
           .on('finish', function() {
-            file.copy(filenames[1], function(err, copiedFile) {
+            originalFile.copy(copiedFile1, function(err) {
               assert.ifError(err);
-              copiedFile.copy(filenames[2], done);
+              copiedFile1.copy(copiedFile2, done);
             });
           });
       });
     });
 
     after(function(done) {
-      async.parallel(
-        filenames.map(function(filename) {
-          return function(callback) {
-            bucket.file(filename).delete(callback);
-          };
-        }), done);
+      async.each(NEW_FILES, deleteFile, done);
     });
 
     it('should get files', function(done) {
       bucket.getFiles(function(err, files) {
         assert.ifError(err);
-        assert.equal(files.length, filenames.length);
+        assert.equal(files.length, NEW_FILES.length);
         done();
       });
     });
@@ -781,12 +788,12 @@ describe('storage', function() {
 
     it('should paginate the list', function(done) {
       var query = {
-        maxResults: filenames.length - 1
+        maxResults: NEW_FILES.length - 1
       };
 
       bucket.getFiles(query, function(err, files, nextQuery) {
         assert.ifError(err);
-        assert.equal(files.length, filenames.length - 1);
+        assert.equal(files.length, NEW_FILES.length - 1);
         assert(nextQuery);
         bucket.getFiles(nextQuery, function(err, files) {
           assert.ifError(err);
@@ -798,11 +805,10 @@ describe('storage', function() {
   });
 
   describe('file generations', function() {
-    var VERSIONED_BUCKET_NAME = generateBucketName();
-    var versionedBucket = storage.bucket(VERSIONED_BUCKET_NAME);
+    var bucketWithVersioning = storage.bucket(generateName());
 
     before(function(done) {
-      versionedBucket.create({
+      bucketWithVersioning.create({
         versioning: {
           enabled: true
         }
@@ -810,7 +816,7 @@ describe('storage', function() {
     });
 
     after(function(done) {
-      versionedBucket.deleteFiles({
+      bucketWithVersioning.deleteFiles({
         versions: true
       }, function(err) {
         if (err) {
@@ -818,13 +824,12 @@ describe('storage', function() {
           return;
         }
 
-        versionedBucket.delete(done);
+        bucketWithVersioning.delete(done);
       });
     });
 
     it('should overwrite file, then get older version', function(done) {
-      var VERSIONED_FILE_NAME = Date.now();
-      var versionedFile = versionedBucket.file(VERSIONED_FILE_NAME);
+      var versionedFile = bucketWithVersioning.file(generateName());
 
       writeToFile(versionedFile, 'a', function(err) {
         assert.ifError(err);
@@ -837,7 +842,7 @@ describe('storage', function() {
           writeToFile(versionedFile, 'b', function(err) {
             assert.ifError(err);
 
-            var firstGenFile = versionedBucket.file(VERSIONED_FILE_NAME, {
+            var firstGenFile = bucketWithVersioning.file(versionedFile.name, {
               generation: initialGeneration
             });
 
@@ -853,14 +858,14 @@ describe('storage', function() {
 
     it('should get all files scoped to their version', function(done) {
       var filesToCreate = [
-        { file: versionedBucket.file('file-one.txt'), contents: '123' },
-        { file: versionedBucket.file('file-one.txt'), contents: '456' }
+        { file: bucketWithVersioning.file('file-one.txt'), contents: '123' },
+        { file: bucketWithVersioning.file('file-one.txt'), contents: '456' }
       ];
 
       async.each(filesToCreate, createFile, function(err) {
         assert.ifError(err);
 
-        versionedBucket.getFiles({ versions: true }, function(err, files) {
+        bucketWithVersioning.getFiles({ versions: true }, function(err, files) {
           assert.ifError(err);
 
           // same file.
@@ -883,12 +888,12 @@ describe('storage', function() {
   });
 
   describe('sign urls', function() {
-    var localFile = fs.readFileSync(files.logo.path);
+    var localFile = fs.readFileSync(FILES.logo.path);
     var file;
 
     before(function(done) {
       file = bucket.file('LogoToSign.jpg');
-      fs.createReadStream(files.logo.path)
+      fs.createReadStream(FILES.logo.path)
         .pipe(file.createWriteStream())
         .on('error', done)
         .on('finish', done.bind(null, null));
@@ -930,7 +935,7 @@ describe('storage', function() {
 
     before(function(done) {
       file = bucket.file('LogoToSign.jpg');
-      fs.createReadStream(files.logo.path)
+      fs.createReadStream(FILES.logo.path)
         .pipe(file.createWriteStream())
         .on('error', done)
         .on('finish', done.bind(null, null));
@@ -970,4 +975,19 @@ describe('storage', function() {
       });
     });
   });
+
+  function deleteFile(file, callback) {
+    file.delete(callback);
+  }
+
+  function generateName() {
+    return TESTS_PREFIX + uuid.v1();
+  }
+
+  function writeToFile(file, contents, callback) {
+    var writeStream = file.createWriteStream();
+    writeStream.once('error', callback);
+    writeStream.once('finish', callback.bind(null, null));
+    writeStream.end(contents);
+  }
 });
