@@ -630,11 +630,11 @@
     "ignore": false,
     "line": 156,
     "codeStart": 183,
-    "code": "setMetadata: true\n  };\n\n  ServiceObject.call(this, {\nparent: resource,\nbaseUrl: '/projects',\nid: id,\ncreateMethod: resource.createProject.bind(resource),\nmethods: methods\n  });\n}\n\nnodeutil.inherits(Project, ServiceObject);",
+    "code": "setMetadata: {\n  reqOpts: {\n    method: 'PUT'\n  }\n}\n  };\n\n  ServiceObject.call(this, {\nparent: resource,\nbaseUrl: '/projects',\nid: id,\ncreateMethod: resource.createProject.bind(resource),\nmethods: methods\n  });\n}\n\nnodeutil.inherits(Project, ServiceObject);",
     "ctx": {
       "type": "property",
       "name": "setMetadata",
-      "value": "true",
+      "value": "{",
       "string": "setMetadata"
     }
   },
@@ -703,8 +703,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 197,
-    "codeStart": 216,
+    "line": 201,
+    "codeStart": 220,
     "code": "Project.prototype.restore = function(callback) {\n  callback = callback || util.noop;\n\n  this.request({\n    method: 'POST',\n    uri: ':undelete'\n  }, function(err, resp) {\n    callback(err, resp);\n  });\n};\n\nmodule.exports = Project;",
     "ctx": {
       "type": "method",
