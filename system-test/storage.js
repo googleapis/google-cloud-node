@@ -78,12 +78,20 @@ describe('storage', function() {
           }
 
           setTimeout(function() {
-            bucket.delete(callback);
+            bucket.delete(function() {
+              // Ignoring this error:
+              // https://github.com/GoogleCloudPlatform/gcloud-node/issues/968
+              // if (err) {
+              //   callback(err);
+              //   return;
+              // }
+              callback();
+            });
           }, CONSISTENCY_DELAY_MS);
         });
       }
 
-      async.each(buckets, deleteBucket, done);
+      async.eachLimit(buckets, 10, deleteBucket, done);
     });
   });
 
