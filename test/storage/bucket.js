@@ -393,6 +393,104 @@ describe('Bucket', function() {
     });
   });
 
+  describe('createChannel', function() {
+    var ID = 'id';
+    var CONFIG = {
+      address: 'https://...'
+    };
+
+    it('should throw if an ID is not provided', function() {
+      assert.throws(function() {
+        bucket.createChannel();
+      }, 'An ID is required to create a channel.');
+    });
+
+    it('should throw if an address is not provided', function() {
+      assert.throws(function() {
+        bucket.createChannel(ID, {});
+      }, 'An address is required to create a channel.');
+    });
+
+    it('should make the correct request', function(done) {
+      var config = extend({}, CONFIG, {
+        a: 'b',
+        c: 'd'
+      });
+      var originalConfig = extend({}, config);
+
+      bucket.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/o/watch');
+
+        var expectedJson = extend({}, config, {
+          id: ID,
+          type: 'web_hook'
+        });
+        assert.deepEqual(reqOpts.json, expectedJson);
+        assert.deepEqual(config, originalConfig);
+
+        done();
+      };
+
+      bucket.createChannel(ID, config, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      beforeEach(function() {
+        bucket.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        bucket.createChannel(ID, CONFIG, function(err, channel, apiResponse_) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(channel, null);
+          assert.strictEqual(apiResponse_, apiResponse);
+
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = {
+        resourceId: 'resource-id'
+      };
+
+      beforeEach(function() {
+        bucket.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should exec a callback with Channel & API response', function(done) {
+        var channel = {};
+
+        bucket.storage.channel = function(id, resourceId) {
+          assert.strictEqual(id, ID);
+          assert.strictEqual(resourceId, apiResponse.resourceId);
+
+          return channel;
+        };
+
+        bucket.createChannel(ID, CONFIG, function(err, channel_, apiResponse_) {
+          assert.ifError(err);
+
+          assert.strictEqual(channel_, channel);
+          assert.strictEqual(channel_.metadata, apiResponse);
+
+          assert.strictEqual(apiResponse_, apiResponse);
+
+          done();
+        });
+      });
+    });
+  });
+
   describe('deleteFiles', function() {
     it('should get files from the bucket', function(done) {
       var query = { a: 'b', c: 'd' };
