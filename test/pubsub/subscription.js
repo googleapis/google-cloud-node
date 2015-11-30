@@ -116,13 +116,15 @@ describe('Subscription', function() {
         autoAck: true,
         interval: 100,
         maxInProgress: 3,
-        encoding: 'binary'
+        encoding: 'binary',
+        timeout: 30000
       };
       var sub = new Subscription(PUBSUB, CONFIG);
       assert.strictEqual(sub.autoAck, CONFIG.autoAck);
       assert.strictEqual(sub.interval, CONFIG.interval);
-      assert.strictEqual(sub.maxInProgress, 3);
       assert.strictEqual(sub.encoding, CONFIG.encoding);
+      assert.strictEqual(sub.maxInProgress, CONFIG.maxInProgress);
+      assert.strictEqual(sub.timeout, CONFIG.timeout);
     });
 
     it('should be closed', function() {
@@ -155,6 +157,10 @@ describe('Subscription', function() {
 
     it('should default encoding to utf-8 if not specified', function() {
       assert.strictEqual(subscription.encoding, 'utf-8');
+    });
+
+    it('should default timeout to 92 seconds', function() {
+      assert.strictEqual(subscription.timeout, 92000);
     });
 
     it('should create an iam object', function() {
@@ -465,7 +471,7 @@ describe('Subscription', function() {
     it('should make correct api request', function(done) {
       subscription.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
-        assert.strictEqual(reqOpts.timeout, 90000);
+        assert.strictEqual(reqOpts.timeout, 92000);
         assert.strictEqual(reqOpts.uri, ':pull');
         assert.strictEqual(reqOpts.json.returnImmediately, false);
         assert.strictEqual(reqOpts.json.maxMessages, 1);
@@ -475,6 +481,22 @@ describe('Subscription', function() {
       subscription.pull({ maxResults: 1 }, assert.ifError);
     });
 
+    it('should pass a timeout if specified', function(done) {
+      var timeout = 30000;
+
+      var subscription = new Subscription(PUBSUB, {
+        name: SUB_NAME,
+        timeout: timeout
+      });
+
+      subscription.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.timeout, 30000);
+        done();
+      };
+
+      subscription.pull(assert.ifError);
+    });
+
     it('should pass error to callback', function(done) {
       var error = new Error('Error.');
       subscription.request = function(reqOpts, callback) {
@@ -482,6 +504,21 @@ describe('Subscription', function() {
       };
       subscription.pull(function(err) {
         assert.equal(err, error);
+        done();
+      });
+    });
+
+    it('should not return messages if request timed out', function(done) {
+      subscription.request = function(reqOpts, callback) {
+        var error = new Error();
+        error.code = 'ETIMEDOUT';
+        error.connect = false;
+        callback(error);
+      };
+
+      subscription.pull({}, function(err, messages) {
+        assert.ifError(err);
+        assert.deepEqual(messages, []);
         done();
       });
     });
