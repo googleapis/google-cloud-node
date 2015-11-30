@@ -103,6 +103,8 @@ describe('common/util', function() {
   it('should export an error for module instantiation errors', function() {
     var missingProjectIdError = new Error([
       'Sorry, we cannot connect to Google Cloud Services without a project ID.',
+      'You may specify one with an environment variable named',
+      '"GCLOUD_PROJECT".',
       'See https://googlecloudplatform.github.io/gcloud-node/#/authentication',
       'for a detailed guide on creating an authenticated connection.'
     ].join(' '));
@@ -198,6 +200,26 @@ describe('common/util', function() {
       var globalConfig = { keyFilename: 'key.json' };
       var options = util.extendGlobalConfig(globalConfig, { credentials: {} });
       assert.deepEqual(options, { credentials: {} });
+    });
+
+    it('should honor the GCLOUD_PROJECT environment variable', function() {
+      var newProjectId = 'envvar-project-id';
+      var cachedProjectId = process.env.GCLOUD_PROJECT;
+      process.env.GCLOUD_PROJECT = newProjectId;
+
+      // No projectId specified:
+      var globalConfig = { keyFilename: 'key.json' };
+      var overrides = {};
+
+      var options = util.extendGlobalConfig(globalConfig, overrides);
+
+      if (cachedProjectId) {
+        process.env.GCLOUD_PROJECT = cachedProjectId;
+      } else {
+        delete process.env.GCLOUD_PROJECT;
+      }
+
+      assert.strictEqual(options.projectId, newProjectId);
     });
 
     it('should not modify original object', function() {
