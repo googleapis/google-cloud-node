@@ -17,6 +17,8 @@ A `config` object requires the following properties:
 
 1. `projectId`
 
+  If you wish, you can set an environment variable (`GCLOUD_PROJECT`) in place of specifying this inline.
+
 2. One of the following:
   1. `config.credentials` object containing `client_email` and `private_key` properties.
   2. `config.keyFilename` path to a .json, .pem, or .p12 key file.
