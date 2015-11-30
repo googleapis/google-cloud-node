@@ -83,6 +83,48 @@
     "tags": [
       {
         "type": "type",
+        "string": "{module:storage/channel}",
+        "types": [
+          "module:storage/channel"
+        ],
+        "typesDescription": "module:<a href=\"module%3Astorage%2Fchannel.html\">storage/channel</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:storage/channel}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 33,
+    "codeStart": 37,
+    "code": "var Channel = require('./channel.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Channel",
+      "value": "require('./channel.js')",
+      "string": "Channel"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
         "string": "{module:common/service}",
         "types": [
           "module:common/service"
@@ -111,8 +153,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 33,
-    "codeStart": 37,
+    "line": 39,
+    "codeStart": 43,
     "code": "var Service = require('../common/service.js');",
     "ctx": {
       "type": "declaration",
@@ -153,8 +195,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 39,
-    "codeStart": 43,
+    "line": 45,
+    "codeStart": 49,
     "code": "var streamRouter = require('../common/stream-router.js');",
     "ctx": {
       "type": "declaration",
@@ -195,8 +237,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 45,
-    "codeStart": 49,
+    "line": 51,
+    "codeStart": 55,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -232,8 +274,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 51,
-    "codeStart": 60
+    "line": 57,
+    "codeStart": 66
   },
   {
     "tags": [
@@ -277,8 +319,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 60,
-    "codeStart": 80,
+    "line": 66,
+    "codeStart": 86,
     "code": "function Storage(options) {\n  if (!(this instanceof Storage)) {\n    options = util.normalizeArguments(this, options);\n    return new Storage(options);\n  }\n\n  var config = {\n    baseUrl: 'https://www.googleapis.com/storage/v1',\n    projectIdRequired: false,\n    scopes: [\n      'https://www.googleapis.com/auth/devstorage.full_control'\n    ]\n  };\n\n  Service.call(this, config, options);\n}\n\nnodeutil.inherits(Storage, Service);",
     "ctx": {
       "type": "constructor",
@@ -322,8 +364,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 99,
-    "codeStart": 147,
+    "line": 105,
+    "codeStart": 153,
     "code": "Storage.acl = {\n  OWNER_ROLE: 'OWNER',\n  READER_ROLE: 'READER',\n  WRITER_ROLE: 'WRITER'\n};\n\nStorage.prototype.acl = Storage.acl;",
     "ctx": {
       "type": "property",
@@ -380,8 +422,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 155,
-    "codeStart": 172,
+    "line": 161,
+    "codeStart": 178,
     "code": "Storage.prototype.bucket = function(name) {\n  if (!name) {\n    throw new Error('A bucket name is needed to use Google Cloud Storage.');\n  }\n\n  return new Bucket(this, name);\n};",
     "ctx": {
       "type": "method",
@@ -389,6 +431,77 @@
       "cons": "Storage",
       "name": "bucket",
       "string": "Storage.prototype.bucket()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{string} id - The ID of the channel.",
+        "name": "id",
+        "description": "<ul>\n<li>The ID of the channel.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} resourceId - The resource ID of the channel.",
+        "name": "resourceId",
+        "description": "<ul>\n<li>The resource ID of the channel.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{module:storage/channel}",
+        "types": [
+          "module:storage/channel"
+        ],
+        "typesDescription": "module:<a href=\"module%3Astorage%2Fchannel.html\">storage/channel</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:storage/channel}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var channel = gcs.channel('id', 'resource-id');",
+        "html": "<p>var channel = gcs.channel(&#39;id&#39;, &#39;resource-id&#39;);</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Reference a channel to receive notifications about changes to your bucket.</p>",
+      "summary": "<p>Reference a channel to receive notifications about changes to your bucket.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 186,
+    "codeStart": 196,
+    "code": "Storage.prototype.channel = function(id, resourceId) {\n  return new Channel(this, id, resourceId);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Storage",
+      "cons": "Storage",
+      "name": "channel",
+      "string": "Storage.prototype.channel()"
     }
   },
   {
@@ -549,8 +662,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 180,
-    "codeStart": 236,
+    "line": 200,
+    "codeStart": 256,
     "code": "Storage.prototype.createBucket = function(name, metadata, callback) {\n  var self = this;\n\n  if (!name) {\n    throw new Error('A name is required to create a bucket.');\n  }\n\n  if (!callback) {\n    callback = metadata;\n    metadata = {};\n  }\n\n  var body = extend(metadata, {\n    name: name\n  });\n\n  var storageClasses = {\n    dra: 'DURABLE_REDUCED_AVAILABILITY',\n    nearline: 'NEARLINE'\n  };\n\n  Object.keys(storageClasses).forEach(function(storageClass) {\n    if (body[storageClass]) {\n      body.storageClass = storageClasses[storageClass];\n      delete body[storageClass];\n    }\n  });\n\n  this.request({\n    method: 'POST',\n    uri: '/b',\n    qs: {\n      project: this.projectId\n    },\n    json: body\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var bucket = self.bucket(name);\n    bucket.metadata = resp;\n\n    callback(null, bucket, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -709,8 +822,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 284,
-    "codeStart": 354,
+    "line": 304,
+    "codeStart": 374,
     "code": "Storage.prototype.getBuckets = function(query, callback) {\n  var self = this;\n\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n\n  query.project = query.project || this.projectId;\n\n  this.request({\n    uri: '/b',\n    qs: query\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var buckets = arrify(resp.items).map(function(bucket) {\n      var bucketInstance = self.bucket(bucket.id);\n      bucketInstance.metadata = bucket;\n      return bucketInstance;\n    });\n\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, { pageToken: resp.nextPageToken });\n    }\n\n    callback(null, buckets, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -732,8 +845,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 388,
-    "codeStart": 393,
+    "line": 408,
+    "codeStart": 413,
     "code": "streamRouter.extend(Storage, 'getBuckets');\n\nmodule.exports = Storage;",
     "ctx": false
   }

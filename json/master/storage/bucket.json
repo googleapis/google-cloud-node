@@ -294,14 +294,6 @@
         "html": "<p>module:storage/bucket</p>"
       },
       {
-        "type": "throws",
-        "string": "{Error} if a bucket name isn't provided.",
-        "types": [
-          "Error"
-        ],
-        "description": "<p>if a bucket name isn&#39;t provided.</p>"
-      },
-      {
         "type": "param",
         "string": "{object} options - Configuration options.",
         "name": "options",
@@ -374,7 +366,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 71,
-    "codeStart": 98,
+    "codeStart": 95,
     "code": "function Bucket(storage, name) {\n  var methods = {",
     "ctx": {
       "type": "constructor",
@@ -414,8 +406,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 100,
-    "codeStart": 112,
+    "line": 97,
+    "codeStart": 109,
     "code": "create: true,",
     "ctx": {
       "type": "property",
@@ -489,8 +481,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 114,
-    "codeStart": 127,
+    "line": 111,
+    "codeStart": 124,
     "code": "delete: true,",
     "ctx": {
       "type": "property",
@@ -559,8 +551,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 129,
-    "codeStart": 140,
+    "line": 126,
+    "codeStart": 137,
     "code": "exists: true,",
     "ctx": {
       "type": "property",
@@ -615,8 +607,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 142,
-    "codeStart": 159,
+    "line": 139,
+    "codeStart": 156,
     "code": "get: true,",
     "ctx": {
       "type": "property",
@@ -704,8 +696,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 161,
-    "codeStart": 177,
+    "line": 158,
+    "codeStart": 174,
     "code": "getMetadata: true,",
     "ctx": {
       "type": "property",
@@ -793,8 +785,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 179,
-    "codeStart": 210,
+    "line": 176,
+    "codeStart": 207,
     "code": "setMetadata: true\n  };\n\n  ServiceObject.call(this, {\nparent: storage,\nbaseUrl: '/b',\nid: name,\ncreateMethod: storage.createBucket.bind(storage),\nmethods: methods\n  });\n\n  this.name = name;\n  this.storage = storage;",
     "ctx": {
       "type": "property",
@@ -836,8 +828,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 224,
-    "codeStart": 260,
+    "line": 221,
+    "codeStart": 257,
     "code": "this.acl = new Acl({\n  request: this.request.bind(this),\n  pathPrefix: '/acl'\n});\n\nthis.acl.default = new Acl({\n  request: this.request.bind(this),\n  pathPrefix: '/defaultObjectAcl'\n});",
     "ctx": {
       "type": "property",
@@ -859,8 +851,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 271,
-    "codeStart": 278
+    "line": 268,
+    "codeStart": 275
   },
   {
     "tags": [
@@ -880,8 +872,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 278,
-    "codeStart": 286,
+    "line": 275,
+    "codeStart": 283,
     "code": "var aclDefault = true;",
     "ctx": {
       "type": "declaration",
@@ -908,8 +900,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 288,
-    "codeStart": 292,
+    "line": 285,
+    "codeStart": 289,
     "code": "var aclDefaultAdd = true;",
     "ctx": {
       "type": "declaration",
@@ -936,8 +928,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 294,
-    "codeStart": 298,
+    "line": 291,
+    "codeStart": 295,
     "code": "var aclDefaultDelete = true;",
     "ctx": {
       "type": "declaration",
@@ -964,8 +956,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 300,
-    "codeStart": 304,
+    "line": 297,
+    "codeStart": 301,
     "code": "var aclDefaultGet = true;",
     "ctx": {
       "type": "declaration",
@@ -992,8 +984,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 306,
-    "codeStart": 310,
+    "line": 303,
+    "codeStart": 307,
     "code": "var aclDefaultUpdate = true;",
     "ctx": {
       "type": "declaration",
@@ -1020,8 +1012,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 312,
-    "codeStart": 316,
+    "line": 309,
+    "codeStart": 313,
     "code": "var aclDefaultOwners = true;",
     "ctx": {
       "type": "declaration",
@@ -1048,8 +1040,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 318,
-    "codeStart": 322,
+    "line": 315,
+    "codeStart": 319,
     "code": "var aclDefaultReaders = true;",
     "ctx": {
       "type": "declaration",
@@ -1076,8 +1068,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 324,
-    "codeStart": 328,
+    "line": 321,
+    "codeStart": 325,
     "code": "}\n\nnodeutil.inherits(Bucket, ServiceObject);",
     "ctx": false
   },
@@ -1222,8 +1214,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 334,
-    "codeStart": 368,
+    "line": 331,
+    "codeStart": 365,
     "code": "Bucket.prototype.combine = function(sources, destination, callback) {\n  if (!is.array(sources) || sources.length < 2) {\n    throw new Error('You must provide at least two source files.');\n  }\n\n  if (!destination) {\n    throw new Error('A destination file must be specified.');\n  }\n\n  var self = this;\n\n  sources = sources.map(convertToFile);\n  destination = convertToFile(destination);\n  callback = callback || util.noop;\n\n  if (!destination.metadata.contentType) {\n    var destinationContentType = mime.contentType(destination.name);\n\n    if (destinationContentType) {\n      destination.metadata.contentType = destinationContentType;\n    } else {\n      throw new Error(\n        'A content type could not be detected for the destination file.');\n    }\n  }\n\n  // Make the request from the destination File object.\n  destination.request({\n    method: 'POST',\n    uri: '/compose',\n    json: {\n      destination: {\n        contentType: destination.metadata.contentType\n      },\n      sourceObjects: sources.map(function(source) {\n        var sourceObject = {\n          name: source.name\n        };\n\n        if (source.metadata && source.metadata.generation) {\n          sourceObject.generation = source.metadata.generation;\n        }\n\n        return sourceObject;\n      })\n    }\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    callback(null, destination, resp);\n  });\n\n  function convertToFile(file) {\n    if (file instanceof File) {\n      return file;\n    } else {\n      return self.file(file);\n    }\n  }\n};",
     "ctx": {
       "type": "method",
@@ -1231,6 +1223,154 @@
       "cons": "Bucket",
       "name": "combine",
       "string": "Bucket.prototype.combine()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "throws",
+        "string": "{Error} If an ID is not provided.",
+        "types": [
+          "Error"
+        ],
+        "description": "<p>If an ID is not provided.</p>"
+      },
+      {
+        "type": "throws",
+        "string": "{Error} If an address is not provided.",
+        "types": [
+          "Error"
+        ],
+        "description": "<p>If an address is not provided.</p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Objects: watchAll API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/objects/watchAll}",
+        "html": "<p>[Objects: watchAll API Documentation]{@link <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/watchAll}\">https://cloud.google.com/storage/docs/json_api/v1/objects/watchAll}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{string} id - The ID of the channel to create.",
+        "name": "id",
+        "description": "<ul>\n<li>The ID of the channel to create.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} config - See a\n    [Objects: watchAll request body](https://cloud.google.com/storage/docs/json_api/v1/objects/watchAll).",
+        "name": "config",
+        "description": "<ul>\n<li>See a     <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/watchAll\">Objects: watchAll request body</a>.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} config.address - The address where notifications are\n    delivered for this channel.",
+        "name": "config.address",
+        "description": "<ul>\n<li>The address where notifications are     delivered for this channel.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:storage/channel} callback.channel - The created Channel\n    object.",
+        "name": "callback.channel",
+        "description": "<ul>\n<li>The created Channel     object.</li>\n</ul>\n",
+        "types": [
+          "module:storage/channel"
+        ],
+        "typesDescription": "module:<a href=\"module%3Astorage%2Fchannel.html\">storage/channel</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var id = 'new-channel-id';\n\nvar config = {\n  address: 'https://...'\n};\n\nbucket.createChannel(id, config, function(err, channel, apiResponse) {\n  if (!err) {\n    // Channel created successfully.\n  }\n});",
+        "html": "<p>var id = &#39;new-channel-id&#39;;</p><p>var config = {<br />  address: &#39;https://...&#39;<br />};</p><p>bucket.createChannel(id, config, function(err, channel, apiResponse) {<br />  if (!err) {<br />    // Channel created successfully.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a channel that will be notified when objects in this bucket changes.</p>",
+      "summary": "<p>Create a channel that will be notified when objects in this bucket changes.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 429,
+    "codeStart": 461,
+    "code": "Bucket.prototype.createChannel = function(id, config, callback) {\n  var self = this;\n\n  if (!is.string(id)) {\n    throw new Error('An ID is required to create a channel.');\n  }\n\n  if (!is.string(config.address)) {\n    throw new Error('An address is required to create a channel.');\n  }\n\n  this.request({\n    method: 'POST',\n    uri: '/o/watch',\n    json: extend({\n      id: id,\n      type: 'web_hook'\n    }, config)\n  }, function(err, apiResponse) {\n    if (err) {\n      callback(err, null, apiResponse);\n      return;\n    }\n\n    var resourceId = apiResponse.resourceId;\n    var channel = self.storage.channel(id, resourceId);\n\n    channel.metadata = apiResponse;\n\n    callback(null, channel, apiResponse);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Bucket",
+      "cons": "Bucket",
+      "name": "createChannel",
+      "string": "Bucket.prototype.createChannel()"
     }
   },
   {
@@ -1313,8 +1453,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 432,
-    "codeStart": 487,
+    "line": 494,
+    "codeStart": 549,
     "code": "Bucket.prototype.deleteFiles = function(query, callback) {\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  query = query || {};\n\n  var MAX_PARALLEL_LIMIT = 10;\n  var errors = [];\n\n  this.getFiles(query, function(err, files) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    function deleteFile(file, callback) {\n      file.delete(function(err) {\n        if (err) {\n          if (query.force) {\n            errors.push(err);\n            callback();\n            return;\n          }\n\n          callback(err);\n          return;\n        }\n\n        callback();\n      });\n    }\n\n    // Iterate through each file and attempt to delete it.\n    async.eachLimit(files, MAX_PARALLEL_LIMIT, deleteFile, function(err) {\n      if (err || errors.length > 0) {\n        callback(err || errors);\n        return;\n      }\n\n      callback();\n    });\n  });\n\n};",
     "ctx": {
       "type": "method",
@@ -1399,8 +1539,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 534,
-    "codeStart": 547,
+    "line": 596,
+    "codeStart": 609,
     "code": "Bucket.prototype.file = function(name, options) {\n  if (!name) {\n    throw Error('A file name must be specified.');\n  }\n\n  return new File(this, name, options);\n};",
     "ctx": {
       "type": "method",
@@ -1601,8 +1741,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 555,
-    "codeStart": 644,
+    "line": 617,
+    "codeStart": 706,
     "code": "Bucket.prototype.getFiles = function(query, callback) {\n  var self = this;\n\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n\n  this.request({\n    uri: '/o',\n    qs: query\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var files = arrify(resp.items).map(function(file) {\n      var options = {};\n\n      if (query.versions) {\n        options.generation = file.generation;\n      }\n\n      var fileInstance = self.file(file.name, options);\n      fileInstance.metadata = file;\n\n      return fileInstance;\n    });\n\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    callback(null, files, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1719,8 +1859,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 685,
-    "codeStart": 750,
+    "line": 747,
+    "codeStart": 812,
     "code": "Bucket.prototype.makePrivate = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.private = true;\n\n  async.series([setPredefinedAcl, makeFilesPrivate], callback);\n\n  function setPredefinedAcl(done) {\n    var query = {\n      predefinedAcl: 'projectPrivate'\n    };\n\n    // You aren't allowed to set both predefinedAcl & acl properties on a bucket\n    // so acl must explicitly be nullified.\n    var metadata = {\n      acl: null\n    };\n\n    self.request({\n      method: 'PATCH',\n      uri: '',\n      qs: query,\n      json: metadata\n    }, function(err, resp) {\n      if (err) {\n        done(err);\n        return;\n      }\n\n      self.metadata = resp;\n\n      done();\n    });\n  }\n\n  function makeFilesPrivate(done) {\n    if (!options.includeFiles) {\n      done();\n      return;\n    }\n\n    self.makeAllFilesPublicPrivate_(options, done);\n  }\n};",
     "ctx": {
       "type": "method",
@@ -1837,8 +1977,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 801,
-    "codeStart": 866,
+    "line": 863,
+    "codeStart": 928,
     "code": "Bucket.prototype.makePublic = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.public = true;\n\n  async.series([\n    addAclPermissions,\n    addDefaultAclPermissions,\n    makeFilesPublic\n  ], callback);\n\n  function addAclPermissions(done) {\n    // Allow reading bucket contents while preserving original permissions.\n    self.acl.add({\n      entity: 'allUsers',\n      role: 'READER'\n    }, done);\n  }\n\n  function addDefaultAclPermissions(done) {\n    self.acl.default.add({\n      entity: 'allUsers',\n      role: 'READER'\n    }, done);\n  }\n\n  function makeFilesPublic(done) {\n    if (!options.includeFiles) {\n      done();\n      return;\n    }\n\n    self.makeAllFilesPublicPrivate_(options, done);\n  }\n};",
     "ctx": {
       "type": "method",
@@ -2032,8 +2172,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 908,
-    "codeStart": 1004,
+    "line": 970,
+    "codeStart": 1066,
     "code": "Bucket.prototype.upload = function(localPath, options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  var newFile;\n  if (options.destination instanceof File) {\n    newFile = options.destination;\n  } else if (is.string(options.destination)) {\n    // Use the string as the name of the file.\n    newFile = this.file(options.destination);\n  } else {\n    // Resort to using the name of the incoming file.\n    newFile = this.file(path.basename(localPath));\n  }\n\n  var metadata = options.metadata || {};\n  var contentType = mime.contentType(path.basename(localPath));\n\n  if (contentType && !metadata.contentType) {\n    metadata.contentType = contentType;\n  }\n\n  var resumable;\n  if (is.boolean(options.resumable)) {\n    resumable = options.resumable;\n    upload();\n  } else {\n    // Determine if the upload should be resumable if it's over the threshold.\n    fs.stat(localPath, function(err, fd) {\n      if (err) {\n        callback(err);\n        return;\n      }\n\n      resumable = fd.size > RESUMABLE_THRESHOLD;\n\n      upload();\n    });\n  }\n\n  function upload() {\n    fs.createReadStream(localPath)\n      .pipe(newFile.createWriteStream({\n        validation: options.validation,\n        resumable: resumable,\n        metadata: metadata,\n        gzip: options.gzip\n      }))\n      .on('error', function(err) {\n        callback(err);\n      })\n      .on('finish', function() {\n        callback(null, newFile);\n      });\n  }\n};",
     "ctx": {
       "type": "method",
@@ -2132,8 +2272,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1063,
-    "codeStart": 1080,
+    "line": 1125,
+    "codeStart": 1142,
     "code": "Bucket.prototype.makeAllFilesPublicPrivate_ = function(options, callback) {\n  var MAX_PARALLEL_LIMIT = 10;\n  var errors = [];\n  var updatedFiles = [];\n\n  this.getFiles(function(err, files) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    function processFile(file, callback) {\n      if (options.public) {\n        file.makePublic(processedCallback);\n      } else if (options.private) {\n        file.makePrivate(processedCallback);\n      }\n\n      function processedCallback(err) {\n        if (err) {\n          if (options.force) {\n            errors.push(err);\n            callback();\n            return;\n          }\n\n          callback(err);\n          return;\n        }\n\n        updatedFiles.push(file);\n        callback();\n      }\n    }\n\n    // Iterate through each file and make it public or private.\n    async.eachLimit(files, MAX_PARALLEL_LIMIT, processFile, function(err) {\n      if (err || errors.length > 0) {\n        callback(err || errors, updatedFiles);\n        return;\n      }\n\n      callback(null, updatedFiles);\n    });\n  });\n};",
     "ctx": {
       "type": "method",
@@ -2155,8 +2295,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 1127,
-    "codeStart": 1132,
+    "line": 1189,
+    "codeStart": 1194,
     "code": "streamRouter.extend(Bucket, 'getFiles');\n\nmodule.exports = Bucket;",
     "ctx": false
   }
