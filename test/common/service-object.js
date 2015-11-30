@@ -650,5 +650,23 @@ describe('ServiceObject', function() {
 
       serviceObject.request(reqOpts, assert.ifError);
     });
+
+    it('should pass a clone of the interceptors', function(done) {
+      serviceObject.interceptors.push({
+        request: function(reqOpts) {
+          reqOpts.one = true;
+          return reqOpts;
+        }
+      });
+
+      serviceObject.parent.request = function(reqOpts) {
+        var serviceObjectInterceptors = serviceObject.interceptors;
+        assert.deepEqual(reqOpts.interceptors_, serviceObjectInterceptors);
+        assert.notStrictEqual(reqOpts.interceptors_, serviceObjectInterceptors);
+        done();
+      };
+
+      serviceObject.request({ uri: '' }, assert.ifError);
+    });
   });
 });

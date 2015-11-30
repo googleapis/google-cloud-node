@@ -17,6 +17,7 @@
 'use strict';
 
 var assert = require('assert');
+var extend = require('extend');
 var mockery = require('mockery');
 
 function createFakeApi() {
@@ -88,13 +89,35 @@ describe('gcloud', function() {
     assert.strictEqual(gcloud.storage, FakeStorage);
   });
 
-  describe('localized auth', function() {
+  describe('localized configuration', function() {
     var localGcloud;
     var config = { a: 'b', c: 'd' };
     var options = { e: 'f', g: 'h' };
 
+    var expectedConfig = extend({}, config, {
+      interceptors_: []
+    });
+
     beforeEach(function() {
       localGcloud = gcloud(config);
+    });
+
+    describe('initialization', function() {
+      it('should persist the provided configuration', function() {
+        assert.notStrictEqual(localGcloud.config_, config);
+        assert.deepEqual(localGcloud.config_, expectedConfig);
+      });
+
+      it('should define an empty interceptors array', function() {
+        assert.deepEqual(localGcloud.interceptors, []);
+      });
+
+      it('should link interceptors to the persisted config object', function() {
+        assert.strictEqual(
+          localGcloud.interceptors,
+          localGcloud.config_.interceptors_
+        );
+      });
     });
 
     describe('bigquery', function() {
@@ -111,7 +134,7 @@ describe('gcloud', function() {
         var datastore = localGcloud.datastore;
 
         assert(datastore instanceof FakeDatastore);
-        assert.strictEqual(datastore.calledWith_[0], config);
+        assert.deepEqual(datastore.calledWith_[0], expectedConfig);
       });
     });
 

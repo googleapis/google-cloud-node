@@ -193,13 +193,13 @@ describe('common/util', function() {
       var options = util.extendGlobalConfig(globalConfig, {
         keyFilename: 'key.json'
       });
-      assert.deepEqual(options, { keyFilename: 'key.json' });
+      assert.strictEqual(options.credentials, undefined);
     });
 
     it('should favor `credentials` when `keyFilename` is global', function() {
       var globalConfig = { keyFilename: 'key.json' };
       var options = util.extendGlobalConfig(globalConfig, { credentials: {} });
-      assert.deepEqual(options, { credentials: {} });
+      assert.strictEqual(options.keyFilename, undefined);
     });
 
     it('should honor the GCLOUD_PROJECT environment variable', function() {
@@ -226,6 +226,13 @@ describe('common/util', function() {
       var globalConfig = { keyFilename: 'key.json' };
       util.extendGlobalConfig(globalConfig, { credentials: {} });
       assert.deepEqual(globalConfig, { keyFilename: 'key.json' });
+    });
+
+    it('should link the original interceptors_', function() {
+      var interceptors = [];
+      var globalConfig = { interceptors_: interceptors };
+      util.extendGlobalConfig(globalConfig, {});
+      assert.strictEqual(globalConfig.interceptors_, interceptors);
     });
   });
 
@@ -983,7 +990,7 @@ describe('common/util', function() {
       var local = { a: 'b' };
       var config;
 
-      util.extendGlobalConfig = function(globalConfig, localConfig) {
+      utilOverrides.extendGlobalConfig = function(globalConfig, localConfig) {
         assert.strictEqual(globalConfig, fakeContext.config_);
         assert.strictEqual(localConfig, local);
         return fakeContext.config_;
@@ -993,27 +1000,26 @@ describe('common/util', function() {
       assert.strictEqual(config, fakeContext.config_);
     });
 
-    it('should default the global config when missing', function() {
-      util.extendGlobalConfig = function(globalConfig, options) {
-        assert.deepEqual(globalConfig, {});
-        return options;
+    describe('projectIdRequired', function() {
+      var fakeContextWithoutProjectId = {
+        config_: {}
       };
 
-      util.normalizeArguments(null, fakeContext.config_);
-    });
-
-    describe('projectIdRequired', function() {
       it('should throw if true', function() {
         var errMsg = new RegExp(util.missingProjectIdError.message);
 
         assert.throws(function() {
-          util.normalizeArguments({ a: 'b' }, { c: 'd' });
+          util.normalizeArguments(fakeContextWithoutProjectId, { c: 'd' });
         }, errMsg);
       });
 
       it('should not throw if false', function() {
         assert.doesNotThrow(function() {
-          util.normalizeArguments({}, {}, { projectIdRequired: false });
+          util.normalizeArguments(
+            fakeContextWithoutProjectId,
+            {},
+            { projectIdRequired: false }
+          );
         });
       });
     });
