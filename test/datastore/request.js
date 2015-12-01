@@ -354,7 +354,8 @@ describe('Request', function() {
         assert.deepEqual(entities, [{
           key: {
             namespace: 'ns',
-            path: ['Company'],
+            kind: 'Company',
+            path: ['Company', undefined],
           },
           data: {},
           method: 'insert'
@@ -756,7 +757,8 @@ describe('Request', function() {
         assert.deepEqual(entities, [{
           key: {
             namespace: 'ns',
-            path: ['Company'],
+            kind: 'Company',
+            path: ['Company', undefined],
           },
           data: {},
           method: 'update'
@@ -776,7 +778,8 @@ describe('Request', function() {
         assert.deepEqual(entities, [{
           key: {
             namespace: 'ns',
-            path: ['Company'],
+            kind: 'Company',
+            path: ['Company', undefined],
           },
           data: {},
           method: 'upsert'

@@ -143,7 +143,7 @@ describe('Dataset', function() {
     it('should create incomplete key from string', function() {
       var ds = new Dataset({ projectId: 'test' });
       var key = ds.key('hello');
-      assert.deepEqual(key.path, ['hello']);
+      assert.deepEqual(key.path, ['hello', undefined]);
     });
 
     it('should create incomplete key from array in obj', function() {
@@ -151,13 +151,13 @@ describe('Dataset', function() {
       var key = ds.key({
         path: ['world']
       });
-      assert.deepEqual(key.path, ['world']);
+      assert.deepEqual(key.path, ['world', undefined]);
     });
 
     it('should create incomplete key from array', function() {
       var ds = new Dataset({ projectId: 'test' });
       var key = ds.key(['Company']);
-      assert.deepEqual(key.path, ['Company']);
+      assert.deepEqual(key.path, ['Company', undefined]);
     });
   });
 
