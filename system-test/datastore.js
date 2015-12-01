@@ -85,7 +85,7 @@ describe('datastore', function() {
       ds.save({ key: postKey, data: data }, function(err) {
         assert.ifError(err);
 
-        var assignedId = postKey.path[1];
+        var assignedId = postKey.id;
         assert(assignedId);
 
         ds.get(postKey, function(err, entity) {
@@ -105,7 +105,7 @@ describe('datastore', function() {
         assert.ifError(err);
 
         // The key's path should now be complete.
-        assert(postKey.path[1]);
+        assert(postKey.id);
 
         ds.get(postKey, function(err, entity) {
           assert.ifError(err);
@@ -124,7 +124,7 @@ describe('datastore', function() {
         assert.ifError(err);
 
         // The key's path should now be complete.
-        assert(postKey.path[1]);
+        assert(postKey.id);
 
         ds.save({ key: postKey, method: 'insert', data: post }, function(err) {
           assert.notEqual(err, null); // should fail insert
@@ -168,15 +168,12 @@ describe('datastore', function() {
       ], function(err) {
         assert.ifError(err);
 
-        var firstKey = ds.key(['Post', key1.path[1]]);
-        var secondKey = ds.key(['Post', key2.path[1]]);
-
-        ds.get([firstKey, secondKey], function(err, entities) {
+        ds.get([key1, key2], function(err, entities) {
           assert.ifError(err);
 
           assert.equal(entities.length, 2);
 
-          ds.delete([firstKey, secondKey], done);
+          ds.delete([key1, key2], done);
         });
       });
     });
@@ -191,12 +188,9 @@ describe('datastore', function() {
       ], function(err) {
         assert.ifError(err);
 
-        var firstKey = ds.key(['Post', key1.path[1]]);
-        var secondKey = ds.key(['Post', key2.path[1]]);
-
         var numEntitiesEmitted = 0;
 
-        ds.get([firstKey, secondKey])
+        ds.get([key1, key2])
           .on('error', done)
           .on('data', function() {
             numEntitiesEmitted++;
@@ -204,7 +198,7 @@ describe('datastore', function() {
           .on('end', function() {
             assert.strictEqual(numEntitiesEmitted, 2);
 
-            ds.delete([firstKey, secondKey], done);
+            ds.delete([key1, key2], done);
           });
       });
     });
