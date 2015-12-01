@@ -478,8 +478,8 @@
       },
       {
         "type": "example",
-        "string": "var key;\n\n// Create an incomplete key from the dataset namespace, kind='Company'\nkey = dataset.key('Company');\n\n// A complete key from the dataset namespace, kind='Company', id=123\nkey = dataset.key(['Company', 123]);\n\n// A complete key from the dataset namespace, kind='Company', name='Google'\n// Note: `id` is used for numeric identifiers and `name` is used otherwise\nkey = dataset.key(['Company', 'Google']);\n\n// A complete key from a provided namespace and path.\nkey = dataset.key({\n  namespace: 'My-NS',\n  path: ['Company', 123]\n});",
-        "html": "<p>var key;</p><p>// Create an incomplete key from the dataset namespace, kind=&#39;Company&#39;<br />key = dataset.key(&#39;Company&#39;);</p><p>// A complete key from the dataset namespace, kind=&#39;Company&#39;, id=123<br />key = dataset.key([&#39;Company&#39;, 123]);</p><p>// A complete key from the dataset namespace, kind=&#39;Company&#39;, name=&#39;Google&#39;<br />// Note: <code>id</code> is used for numeric identifiers and <code>name</code> is used otherwise<br />key = dataset.key([&#39;Company&#39;, &#39;Google&#39;]);</p><p>// A complete key from a provided namespace and path.<br />key = dataset.key({<br />  namespace: &#39;My-NS&#39;,<br />  path: [&#39;Company&#39;, 123]<br />});</p>"
+        "string": "//-\n// Create an incomplete key with a kind value of `Company`.\n//-\nvar key = dataset.key('Company');\n\n//-\n// Create a complete key with a kind value of `Company` and id `123`.\n//-\nvar key = dataset.key(['Company', 123]);\n\n//-\n// Create a complete key with a kind value of `Company` and name `Google`.\n// Note: `id` is used for numeric identifiers and `name` is used otherwise.\n//-\nvar key = dataset.key(['Company', 'Google']);\n\n//-\n// Create a complete key from a provided namespace and path.\n//-\nvar key = dataset.key({\n  namespace: 'My-NS',\n  path: ['Company', 123]\n});\n\n//-\n// All keys have helper properties that you can access or overwrite\n// directly.\n//-\nvar key = dataset.key(['Company', 123]);\n\n// key.path: ['Company', 123]\n// key.kind: 'Company'\n// key.id:   123\n\n// Change to a named identifier.\ndelete key.id;\nkey.name = 'Google';\n\n// key.path: ['Company', 'Google']\n// key.name: 'Google'\n\n//-\n// Ancestor keys are created as `Key` objects as well.\n//-\nvar key = dataset.key(['Company', 'Google', 'Employee', 'Jennifer']);\n\n// key.path: ['Company', 'Google', 'Employee', 'Jennifer']\n// key.parent.path: ['Company', 'Google']\n\n// Change the company Jennifer works for.\nkey.parent.name = 'Alphabet';\n\n// key.path: ['Company', 'Alphabet', 'Employee', 'Jennifer']\n// key.parent.path: ['Company', 'Alphabet']",
+        "html": "<p>//-<br />// Create an incomplete key with a kind value of <code>Company</code>.<br />//-<br />var key = dataset.key(&#39;Company&#39;);</p><p>//-<br />// Create a complete key with a kind value of <code>Company</code> and id <code>123</code>.<br />//-<br />var key = dataset.key([&#39;Company&#39;, 123]);</p><p>//-<br />// Create a complete key with a kind value of <code>Company</code> and name <code>Google</code>.<br />// Note: <code>id</code> is used for numeric identifiers and <code>name</code> is used otherwise.<br />//-<br />var key = dataset.key([&#39;Company&#39;, &#39;Google&#39;]);</p><p>//-<br />// Create a complete key from a provided namespace and path.<br />//-<br />var key = dataset.key({<br />  namespace: &#39;My-NS&#39;,<br />  path: [&#39;Company&#39;, 123]<br />});</p><p>//-<br />// All keys have helper properties that you can access or overwrite<br />// directly.<br />//-<br />var key = dataset.key([&#39;Company&#39;, 123]);</p><p>// key.path: [&#39;Company&#39;, 123]<br />// key.kind: &#39;Company&#39;<br />// key.id:   123</p><p>// Change to a named identifier.<br />delete key.id;<br />key.name = &#39;Google&#39;;</p><p>// key.path: [&#39;Company&#39;, &#39;Google&#39;]<br />// key.name: &#39;Google&#39;</p><p>//-<br />// Ancestor keys are created as <code>Key</code> objects as well.<br />//-<br />var key = dataset.key([&#39;Company&#39;, &#39;Google&#39;, &#39;Employee&#39;, &#39;Jennifer&#39;]);</p><p>// key.path: [&#39;Company&#39;, &#39;Google&#39;, &#39;Employee&#39;, &#39;Jennifer&#39;]<br />// key.parent.path: [&#39;Company&#39;, &#39;Google&#39;]</p><p>// Change the company Jennifer works for.<br />key.parent.name = &#39;Alphabet&#39;;</p><p>// key.path: [&#39;Company&#39;, &#39;Alphabet&#39;, &#39;Employee&#39;, &#39;Jennifer&#39;]<br />// key.parent.path: [&#39;Company&#39;, &#39;Alphabet&#39;]</p>"
       }
     ],
     "description": {
@@ -493,7 +493,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 158,
-    "codeStart": 189,
+    "codeStart": 226,
     "code": "Dataset.prototype.key = function(options) {\n  options = is.object(options) ? options : {\n    namespace: this.namespace,\n    path: arrify(options)\n  };\n\n  return new entity.Key(options);\n};",
     "ctx": {
       "type": "method",
@@ -576,8 +576,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 198,
-    "codeStart": 211,
+    "line": 235,
+    "codeStart": 248,
     "code": "Dataset.prototype.createQuery = function(namespace, kind) {\n  if (arguments.length === 1) {\n    kind = arrify(namespace);\n    namespace = this.namespace;\n  }\n\n  return new Query(namespace, arrify(kind));\n};",
     "ctx": {
       "type": "method",
@@ -687,8 +687,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 220,
-    "codeStart": 252,
+    "line": 257,
+    "codeStart": 289,
     "code": "Dataset.prototype.runInTransaction = function(fn, callback) {\n  var newTransaction = this.createTransaction_();\n\n  newTransaction.begin_(function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    fn(newTransaction, newTransaction.commit_.bind(newTransaction, callback));\n  });\n};",
     "ctx": {
       "type": "method",
@@ -731,8 +731,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 265,
-    "codeStart": 271,
+    "line": 302,
+    "codeStart": 308,
     "code": "Dataset.prototype.createTransaction_ = function() {\n  return new Transaction(this, this.projectId);\n};\n\nmodule.exports = Dataset;",
     "ctx": {
       "type": "method",
