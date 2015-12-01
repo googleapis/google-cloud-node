@@ -112,6 +112,47 @@ var queryFilterProto = {
   group_by: []
 };
 
+describe('Key', function() {
+  it('should assign the namespace', function() {
+    var namespace = 'NS';
+    var key = new entity.Key({ namespace: namespace, path: [] });
+    assert.strictEqual(key.namespace, namespace);
+  });
+
+  it('should assign the kind', function() {
+    var kind = 'kind';
+    var key = new entity.Key({ path: [kind] });
+    assert.strictEqual(key.kind, kind);
+  });
+
+  it('should assign the ID', function() {
+    var id = 11;
+    var key = new entity.Key({ path: ['Kind', id] });
+    assert.strictEqual(key.id, id);
+  });
+
+  it('should assign the name', function() {
+    var name = 'name';
+    var key = new entity.Key({ path: ['Kind', name] });
+    assert.strictEqual(key.name, name);
+  });
+
+  it('should assign a parent', function() {
+    var key = new entity.Key({ path: ['ParentKind', 1, 'Kind', 1] });
+    assert(key.parent instanceof entity.Key);
+  });
+
+  it('should always compute the correct path', function() {
+    var key = new entity.Key({ path: ['ParentKind', 1, 'Kind', 1] });
+    assert.deepEqual(key.path, ['ParentKind', 1, 'Kind', 1]);
+
+    key.parent.kind = 'GrandParentKind';
+    key.kind = 'ParentKind';
+
+    assert.deepEqual(key.path, ['GrandParentKind', 1, 'ParentKind', 1]);
+  });
+});
+
 describe('keyFromKeyProto', function() {
   var proto = {
     partition_id: { namespace: '', dataset_id: 'datasetId' },
@@ -273,8 +314,8 @@ describe('isKeyComplete', function() {
     });
   });
 
-  it('should return false if there is no kind', function() {
-    var key = new entity.Key({ path: [ '' ] });
+  it('should return false if there is no identifier', function() {
+    var key = new entity.Key({ path: [ 'Kind' ] });
 
     assert.strictEqual(entity.isKeyComplete(key), false);
   });
