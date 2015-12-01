@@ -118,6 +118,24 @@ describe('Service', function() {
       assert.strictEqual(service.getCredentials, getCredentials);
     });
 
+    it('should default globalInterceptors to an empty array', function() {
+      assert.deepEqual(service.globalInterceptors, []);
+    });
+
+    it('should preserve the original global interceptors', function() {
+      var globalInterceptors = [];
+
+      var options = extend({}, OPTIONS);
+      options.interceptors_ = globalInterceptors;
+
+      var service = new Service({}, options);
+      assert.strictEqual(service.globalInterceptors, globalInterceptors);
+    });
+
+    it('should default interceptors to an empty array', function() {
+      assert.deepEqual(service.interceptors, []);
+    });
+
     it('should localize the projectId', function() {
       assert.strictEqual(service.projectId, OPTIONS.projectId);
     });
@@ -238,6 +256,110 @@ describe('Service', function() {
 
           service.request(reqOpts, assert.ifError);
         });
+      });
+    });
+
+    describe('request interceptors', function() {
+      it('should call the request interceptors in order', function(done) {
+        var reqOpts = {
+          uri: '',
+          interceptors_: []
+        };
+
+        // Called first.
+        service.globalInterceptors.push({
+          request: function(reqOpts) {
+            reqOpts.order = '1';
+            return reqOpts;
+          }
+        });
+
+        // Called third.
+        service.interceptors.push({
+          request: function(reqOpts) {
+            reqOpts.order += '3';
+            return reqOpts;
+          }
+        });
+
+        // Called second.
+        service.globalInterceptors.push({
+          request: function(reqOpts) {
+            reqOpts.order += '2';
+            return reqOpts;
+          }
+        });
+
+        // Called fifth.
+        reqOpts.interceptors_.push({
+          request: function(reqOpts) {
+            reqOpts.order += '5';
+            return reqOpts;
+          }
+        });
+
+        // Called fourth.
+        service.interceptors.push({
+          request: function(reqOpts) {
+            reqOpts.order += '4';
+            return reqOpts;
+          }
+        });
+
+        // Called sixth.
+        reqOpts.interceptors_.push({
+          request: function(reqOpts) {
+            reqOpts.order += '6';
+            return reqOpts;
+          }
+        });
+
+        service.makeAuthenticatedRequest = function(reqOpts) {
+          assert.strictEqual(reqOpts.order, '123456');
+          done();
+        };
+
+        service.request(reqOpts, assert.ifError);
+      });
+
+      it('should not affect original interceptor arrays', function(done) {
+        function request(reqOpts) { return reqOpts; }
+
+        var globalInterceptors = [{ request: request }];
+        var localInterceptors = [{ request: request }];
+        var requestInterceptors = [{ request: request }];
+
+        var originalGlobalInterceptors = [].slice.call(globalInterceptors);
+        var originalLocalInterceptors = [].slice.call(localInterceptors);
+        var originalRequestInterceptors = [].slice.call(requestInterceptors);
+
+        service.makeAuthenticatedRequest = function() {
+          assert.deepEqual(globalInterceptors, originalGlobalInterceptors);
+          assert.deepEqual(localInterceptors, originalLocalInterceptors);
+          assert.deepEqual(requestInterceptors, originalRequestInterceptors);
+          done();
+        };
+
+        service.request({
+          uri: '',
+          interceptors_: requestInterceptors
+        }, assert.ifError);
+      });
+
+      it('should not call unrelated interceptors', function(done) {
+        service.interceptors.push({
+          anotherInterceptor: function() {
+            done(); // Will throw.
+          },
+          request: function() {
+            setImmediate(done);
+            return {};
+          }
+        });
+
+        service.makeAuthenticatedRequest = util.noop;
+
+        service.request({ uri: '' }, assert.ifError);
       });
     });
   });
