@@ -436,6 +436,7 @@ describe('Subscription', function() {
     it('should make correct api request', function(done) {
       subscription.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.timeout, 90000);
         assert.strictEqual(reqOpts.uri, ':pull');
         assert.strictEqual(reqOpts.json.returnImmediately, false);
         assert.strictEqual(reqOpts.json.maxMessages, 1);
