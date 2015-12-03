@@ -97,7 +97,12 @@ describe('common/util', function() {
   });
 
   it('should have set correct defaults on Request', function() {
-    assert.deepEqual(REQUEST_DEFAULT_CONF, { pool: { maxSockets: Infinity } });
+    assert.deepEqual(REQUEST_DEFAULT_CONF, {
+      timeout: 60000,
+      pool: {
+        maxSockets: Infinity
+      }
+    });
   });
 
   it('should export an error for module instantiation errors', function() {
