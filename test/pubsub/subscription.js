@@ -47,6 +47,7 @@ describe('Subscription', function() {
   };
   var message = 'howdy';
   var messageBuffer = new Buffer(message).toString('base64');
+  var messageBinary = new Buffer(message).toString('binary');
   var messageObj = {
     receivedMessages: [{
       ackId: 3,
@@ -59,6 +60,11 @@ describe('Subscription', function() {
   var expectedMessage = {
     ackId: 3,
     data: message,
+    id: 7
+  };
+  var expectedMessageAsBinary = {
+    ackId: 3,
+    data: messageBinary,
     id: 7
   };
 
@@ -98,12 +104,14 @@ describe('Subscription', function() {
         name: SUB_NAME,
         autoAck: true,
         interval: 100,
-        maxInProgress: 3
+        maxInProgress: 3,
+        encoding: 'binary'
       };
       var sub = new Subscription(PUBSUB, CONFIG);
       assert.strictEqual(sub.autoAck, CONFIG.autoAck);
       assert.strictEqual(sub.interval, CONFIG.interval);
       assert.strictEqual(sub.maxInProgress, 3);
+      assert.strictEqual(sub.encoding, CONFIG.encoding);
     });
 
     it('should be closed', function() {
@@ -132,6 +140,10 @@ describe('Subscription', function() {
 
     it('should not be paused', function() {
       assert.strictEqual(subscription.paused, false);
+    });
+
+    it('should default encoding to utf-8 if not specified', function() {
+      assert.strictEqual(subscription.encoding, 'utf-8');
     });
 
     it('should create an iam object', function() {
@@ -218,6 +230,12 @@ describe('Subscription', function() {
     it('should decode buffer to string', function() {
       var msg = Subscription.formatMessage_(messageObj.receivedMessages[0]);
       assert.deepEqual(msg, expectedMessage);
+    });
+
+    it('should decode buffer to specified encoding', function() {
+      var msg = Subscription
+        .formatMessage_(messageObj.receivedMessages[0], 'binary');
+      assert.deepEqual(msg, expectedMessageAsBinary);
     });
   });
 
@@ -471,6 +489,42 @@ describe('Subscription', function() {
       };
 
       subscription.pull({}, assert.ifError);
+    });
+
+    describe('with encoding option', function() {
+      var formatMessageMemo, encodingMemo, onFormatMessage;
+      beforeEach(function() {
+        encodingMemo = subscription.encoding;
+        formatMessageMemo = Subscription.formatMessage_;
+        Subscription.formatMessage_ = function(msg, encoding) {
+          onFormatMessage(msg, encoding);
+          return formatMessageMemo(msg, encoding);
+        };
+      });
+      afterEach(function() {
+        Subscription.formatMessage_ = formatMessageMemo;
+        subscription.encoding = encodingMemo;
+      });
+
+      it('should call formatMessage_ with binary', function(done) {
+        onFormatMessage = function(msg, encoding) {
+          assert.equal(encoding, 'binary');
+          done();
+        };
+        subscription.encoding = 'binary';
+
+        subscription.pull({}, assert.ifError);
+      });
+
+      it('should call formatMessage_ with utf-8', function(done) {
+        onFormatMessage = function(msg, encoding) {
+          assert.equal(encoding, 'utf-8');
+          done();
+        };
+        subscription.encoding = 'utf-8';
+
+        subscription.pull({}, assert.ifError);
+      });
     });
 
     describe('autoAck false', function() {
