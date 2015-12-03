@@ -35,6 +35,8 @@ function FakeServiceObject() {
 
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
+var formatMessageOverride;
+
 describe('Subscription', function() {
   var Subscription;
   var subscription;
@@ -78,6 +80,11 @@ describe('Subscription', function() {
     });
 
     Subscription = require('../../lib/pubsub/subscription.js');
+
+    var formatMessage = Subscription.formatMessage_;
+    Subscription.formatMessage_ = function() {
+      return (formatMessageOverride || formatMessage).apply(null, arguments);
+    };
   });
 
   after(function() {
@@ -87,6 +94,10 @@ describe('Subscription', function() {
 
   beforeEach(function() {
     subscription = new Subscription(PUBSUB, { name: SUB_NAME });
+  });
+
+  afterEach(function() {
+    formatMessageOverride = null;
   });
 
   describe('initialization', function() {
@@ -475,6 +486,19 @@ describe('Subscription', function() {
       });
     });
 
+    it('should call formatMessage_ with encoding', function(done) {
+      subscription.encoding = 'encoding-value';
+
+      formatMessageOverride = function(msg, encoding) {
+        assert.strictEqual(msg, messageObj.receivedMessages[0]);
+        assert.strictEqual(encoding, subscription.encoding);
+        setImmediate(done);
+        return msg;
+      };
+
+      subscription.pull({}, assert.ifError);
+    });
+
     it('should decorate the message', function(done) {
       subscription.decorateMessage_ = function() {
         done();
@@ -489,42 +513,6 @@ describe('Subscription', function() {
       };
 
       subscription.pull({}, assert.ifError);
-    });
-
-    describe('with encoding option', function() {
-      var formatMessageMemo, encodingMemo, onFormatMessage;
-      beforeEach(function() {
-        encodingMemo = subscription.encoding;
-        formatMessageMemo = Subscription.formatMessage_;
-        Subscription.formatMessage_ = function(msg, encoding) {
-          onFormatMessage(msg, encoding);
-          return formatMessageMemo(msg, encoding);
-        };
-      });
-      afterEach(function() {
-        Subscription.formatMessage_ = formatMessageMemo;
-        subscription.encoding = encodingMemo;
-      });
-
-      it('should call formatMessage_ with binary', function(done) {
-        onFormatMessage = function(msg, encoding) {
-          assert.equal(encoding, 'binary');
-          done();
-        };
-        subscription.encoding = 'binary';
-
-        subscription.pull({}, assert.ifError);
-      });
-
-      it('should call formatMessage_ with utf-8', function(done) {
-        onFormatMessage = function(msg, encoding) {
-          assert.equal(encoding, 'utf-8');
-          done();
-        };
-        subscription.encoding = 'utf-8';
-
-        subscription.pull({}, assert.ifError);
-      });
     });
 
     describe('autoAck false', function() {
