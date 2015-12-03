@@ -24,7 +24,6 @@ var mockery = require('mockery');
 var request = require('request');
 var retryRequest = require('retry-request');
 var stream = require('stream');
-var streamForward = require('stream-forward');
 
 var googleAutoAuthOverride;
 function fakeGoogleAutoAuth() {
@@ -48,11 +47,6 @@ function fakeRetryRequest() {
   return (retryRequestOverride || retryRequest).apply(null, arguments);
 }
 
-var streamForwardOverride;
-function fakeStreamForward() {
-  return (streamForwardOverride || streamForward).apply(null, arguments);
-}
-
 describe('common/util', function() {
   var util;
   var utilOverrides = {};
@@ -61,7 +55,6 @@ describe('common/util', function() {
     mockery.registerMock('google-auto-auth', fakeGoogleAutoAuth);
     mockery.registerMock('request', fakeRequest);
     mockery.registerMock('retry-request', fakeRetryRequest);
-    mockery.registerMock('stream-forward', fakeStreamForward);
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
@@ -92,7 +85,6 @@ describe('common/util', function() {
     googleAutoAuthOverride = null;
     requestOverride = null;
     retryRequestOverride = null;
-    streamForwardOverride = null;
     utilOverrides = {};
   });
 
@@ -706,7 +698,7 @@ describe('common/util', function() {
 
             var stream = this;
             setImmediate(function() {
-              assert.strictEqual(stream._destroyed, true);
+              assert.strictEqual(stream.destroyed, true);
               done();
             });
           });
@@ -829,7 +821,9 @@ describe('common/util', function() {
   });
 
   describe('makeRequest', function() {
-    var reqOpts = { a: 'b', c: 'd' };
+    var reqOpts = {
+      method: 'GET'
+    };
 
     function testDefaultRetryRequestConfig(done) {
       return function(reqOpts_, config) {
@@ -866,23 +860,10 @@ describe('common/util', function() {
       };
     }
 
-    describe('stream mode', function() {
+    describe('callback mode', function() {
       it('should pass the default options to retryRequest', function(done) {
         retryRequestOverride = testDefaultRetryRequestConfig(done);
         util.makeRequest(reqOpts, {});
-      });
-
-      it('should expose the abort method from retryRequest', function(done) {
-        var userStream = new stream.Stream();
-
-        retryRequestOverride = function() {
-          var requestStream = new stream.Stream();
-          requestStream.abort = done;
-          return requestStream;
-        };
-
-        util.makeRequest(reqOpts, { stream: userStream });
-        userStream.abort();
       });
 
       it('should allow turning off retries to retryRequest', function(done) {
@@ -894,22 +875,130 @@ describe('common/util', function() {
         retryRequestOverride = testCustomRetryRequestConfig(done);
         util.makeRequest(reqOpts, customRetryRequestConfig);
       });
+    });
 
+    describe('stream mode', function() {
       it('should forward the specified events to the stream', function(done) {
-        var requestStream = new stream.Stream();
-        var userStream = new stream.Stream();
+        var requestStream = duplexify();
+        var userStream = duplexify();
+
+        var error = new Error('Error.');
+        var response = {};
+        var complete = {};
+
+        userStream
+          .on('error', function(error_) {
+            assert.strictEqual(error_, error);
+            requestStream.emit('response', response);
+          })
+          .on('response', function(response_) {
+            assert.strictEqual(response_, response);
+            requestStream.emit('complete', complete);
+          })
+          .on('complete', function(complete_) {
+            assert.strictEqual(complete_, complete);
+            done();
+          });
 
         retryRequestOverride = function() {
+          setImmediate(function() {
+            requestStream.emit('error', error);
+          });
+
           return requestStream;
         };
 
-        streamForwardOverride = function(stream_) {
-          assert.strictEqual(stream_, requestStream);
-          done();
-          return stream_;
-        };
-
         util.makeRequest(reqOpts, { stream: userStream });
+      });
+
+      describe('GET requests', function() {
+        it('should use retryRequest', function(done) {
+          var userStream = duplexify();
+
+          retryRequestOverride = function(reqOpts_) {
+            assert.strictEqual(reqOpts_, reqOpts);
+            setImmediate(done);
+            return new stream.Stream();
+          };
+
+          util.makeRequest(reqOpts, { stream: userStream });
+        });
+
+        it('should set the readable stream', function(done) {
+          var userStream = duplexify();
+          var retryRequestStream = new stream.Stream();
+
+          retryRequestOverride = function() {
+            return retryRequestStream;
+          };
+
+          userStream.setReadable = function(stream) {
+            assert.strictEqual(stream, retryRequestStream);
+            done();
+          };
+
+          util.makeRequest(reqOpts, { stream: userStream });
+        });
+
+        it('should expose the abort method from retryRequest', function(done) {
+          var userStream = duplexify();
+
+          retryRequestOverride = function() {
+            var requestStream = new stream.Stream();
+            requestStream.abort = done;
+            return requestStream;
+          };
+
+          util.makeRequest(reqOpts, { stream: userStream });
+          userStream.abort();
+        });
+      });
+
+      describe('non-GET requests', function() {
+        it('should not use retryRequest', function(done) {
+          var userStream = duplexify();
+          var reqOpts = {
+            method: 'POST'
+          };
+
+          retryRequestOverride = done; // will throw.
+          requestOverride = function(reqOpts_) {
+            assert.strictEqual(reqOpts_, reqOpts);
+            setImmediate(done);
+            return userStream;
+          };
+
+          util.makeRequest(reqOpts, { stream: userStream });
+        });
+
+        it('should set the writable stream', function(done) {
+          var userStream = duplexify();
+          var requestStream = new stream.Stream();
+
+          requestOverride = function() {
+            return requestStream;
+          };
+
+          userStream.setWritable = function(stream) {
+            assert.strictEqual(stream, requestStream);
+            done();
+          };
+
+          util.makeRequest({ method: 'POST' }, { stream: userStream });
+        });
+
+        it('should expose the abort method from request', function(done) {
+          var userStream = duplexify();
+
+          requestOverride = function() {
+            var requestStream = duplexify();
+            requestStream.abort = done;
+            return requestStream;
+          };
+
+          util.makeRequest(reqOpts, { stream: userStream });
+          userStream.abort();
+        });
       });
     });
 

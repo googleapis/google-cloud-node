@@ -16,6 +16,7 @@ This client supports the following Google Cloud Platform services:
 * [Google Cloud Pub/Sub](#google-cloud-pubsub)
 * [Google Cloud Storage](#google-cloud-storage)
 * [Google Compute Engine](#google-compute-engine)
+* [Google Prediction API](#google-prediction-api)
 * [Google Cloud Resource Manager](#google-cloud-resource-manager-beta) (Beta)
 * [Google Cloud Search](#google-cloud-search-alpha) (Alpha)
 
@@ -337,6 +338,56 @@ zone.createVM(name, { os: 'ubuntu' }, function(err, vm, operation) {
 ```
 
 
+## Google Prediction API
+
+- [API Documentation][gcloud-prediction-docs]
+- [Official Documentation][prediction-docs]
+
+#### Preview
+
+```js
+var gcloud = require('gcloud');
+
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
+
+var prediction = gcloud.prediction({
+  projectId: 'my-project',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+// Get all of the trained models in your project.
+prediction.getModels(function(err, models) {
+  if (!err) {
+    // `models` is an array of Model objects.
+  }
+});
+
+// Reference an existing trained model.
+var model = prediction.model('my-existing-model');
+
+// Train a model.
+model.train('english', 'Hello from your friends at Google!', function(err) {});
+
+// Query a model.
+model.query('Hello', function(err, results) {
+  if (!err) {
+    // results.winner == 'english'
+    // results.scores == [
+    //   {
+    //     label: 'english',
+    //     score: 1
+    //   },
+    //   {
+    //     label: 'spanish',
+    //     score: 0
+    //   }
+    // ]
+  }
+});
+```
+
+
 ## Google Cloud Resource Manager (Beta)
 
 > This is a *Beta* release of Google Cloud Resource Manager. This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
@@ -433,6 +484,7 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [gcloud-compute-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/compute
 [gcloud-datastore-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/datastore
 [gcloud-dns-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/dns
+[gcloud-prediction-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/prediction
 [gcloud-pubsub-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/pubsub
 [gcloud-resource-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/resource
 [gcloud-search-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/search
@@ -459,6 +511,8 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [cloud-datastore-activation]: https://cloud.google.com/datastore/docs/activate
 
 [cloud-dns-docs]: https://cloud.google.com/dns/docs
+
+[cloud-prediction-docs]: https://cloud.google.com/prediction/docs
 
 [cloud-pubsub-docs]: https://cloud.google.com/pubsub/docs
 

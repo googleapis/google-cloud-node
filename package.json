@@ -82,6 +82,7 @@
     "search"
   ],
   "dependencies": {
+    "JSONStream": "^1.0.7",
     "arrify": "^1.0.0",
     "async": "^1.4.2",
     "concat-stream": "^1.5.0",
@@ -106,7 +107,6 @@
     "retry-request": "^1.2.1",
     "split-array-stream": "^1.0.0",
     "stream-events": "^1.0.1",
-    "stream-forward": "^3.0.0",
     "string-format-obj": "^1.0.0",
     "through2": "^2.0.0"
   },
