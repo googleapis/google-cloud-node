@@ -996,6 +996,20 @@
       },
       {
         "type": "param",
+        "string": "{string} options.encoding - When pulling for messages, this type is\n    used when converting a message's data to a string. (default: 'utf-8')",
+        "name": "options.encoding",
+        "description": "<ul>\n<li>When pulling for messages, this type is     used when converting a message&#39;s data to a string. (default: &#39;utf-8&#39;)</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
         "string": "{number} options.interval - Interval in milliseconds to check for new\n    messages.",
         "name": "options.interval",
         "description": "<ul>\n<li>Interval in milliseconds to check for new     messages.</li>\n</ul>\n",
@@ -1039,7 +1053,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 473,
-    "codeStart": 499,
+    "codeStart": 501,
     "code": "PubSub.prototype.subscription = function(name, options) {\n  if (!name) {\n    throw new Error('The name of a subscription is required.');\n  }\n\n  options = options || {};\n  options.name = name;\n  return new Subscription(this, options);\n};",
     "ctx": {
       "type": "method",
@@ -1103,8 +1117,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 509,
-    "codeStart": 524,
+    "line": 511,
+    "codeStart": 526,
     "code": "PubSub.prototype.topic = function(name) {\n  if (!name) {\n    throw new Error('A name must be specified for a new topic.');\n  }\n\n  return new Topic(this, name);\n};",
     "ctx": {
       "type": "method",
@@ -1126,8 +1140,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 532,
-    "codeStart": 537,
+    "line": 534,
+    "codeStart": 539,
     "code": "streamRouter.extend(PubSub, ['getSubscriptions', 'getTopics']);\n\nmodule.exports = PubSub;",
     "ctx": false
   }

@@ -209,6 +209,20 @@
       },
       {
         "type": "param",
+        "string": "{string} options.encoding - When pulling for messages, this type is\n    used when converting a message's data to a string. (default: 'utf-8')",
+        "name": "options.encoding",
+        "description": "<ul>\n<li>When pulling for messages, this type is     used when converting a message&#39;s data to a string. (default: &#39;utf-8&#39;)</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
         "string": "{number} options.interval - Interval in milliseconds to check for new\n    messages. (default: 10)",
         "name": "options.interval",
         "description": "<ul>\n<li>Interval in milliseconds to check for new     messages. (default: 10)</li>\n</ul>\n",
@@ -261,7 +275,7 @@
     "isEvent": false,
     "ignore": true,
     "line": 47,
-    "codeStart": 59
+    "codeStart": 61
   },
   {
     "tags": [
@@ -291,8 +305,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 59,
-    "codeStart": 144,
+    "line": 61,
+    "codeStart": 146,
     "code": "function Subscription(pubsub, options) {\n  var baseUrl = '/subscriptions';\n  var unformattedName = options.name.split('/').pop();\n\n  var methods = {",
     "ctx": {
       "type": "constructor",
@@ -360,8 +374,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 149,
-    "codeStart": 161,
+    "line": 151,
+    "codeStart": 163,
     "code": "exists: true,",
     "ctx": {
       "type": "property",
@@ -416,8 +430,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 163,
-    "codeStart": 183,
+    "line": 165,
+    "codeStart": 185,
     "code": "get: true,",
     "ctx": {
       "type": "property",
@@ -505,8 +519,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 185,
-    "codeStart": 199,
+    "line": 187,
+    "codeStart": 201,
     "code": "getMetadata: true\n  };\n\n  var config = {\nparent: pubsub,\nbaseUrl: baseUrl,\nid: unformattedName,\nmethods: methods\n  };\n\n  if (options.topic) {\n// Only a subscription with knowledge of its topic can be created.\nconfig.createMethod = pubsub.subscribe.bind(pubsub, options.topic);\ndelete options.topic;",
     "ctx": {
       "type": "property",
@@ -547,8 +561,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 214,
-    "codeStart": 229,
+    "line": 216,
+    "codeStart": 231,
     "code": "config.methods.create = true;\n  }\n\n  ServiceObject.call(this, config);\n  events.EventEmitter.call(this);",
     "ctx": {
       "type": "property",
@@ -591,9 +605,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 235,
-    "codeStart": 261,
-    "code": "this.iam = new IAM(pubsub, {\n  baseUrl: baseUrl,\n  id: unformattedName\n});\n\nthis.name = Subscription.formatName_(pubsub.projectId, options.name);\n\nthis.autoAck = is.boolean(options.autoAck) ? options.autoAck : false;\nthis.closed = true;\nthis.interval = is.number(options.interval) ? options.interval : 10;\nthis.inProgressAckIds = {};\nthis.maxInProgress =\n  is.number(options.maxInProgress) ? options.maxInProgress : Infinity;\nthis.messageListeners = 0;\nthis.paused = false;\nthis.encoding = is.string(options.encoding) ? options.encoding : 'utf-8';\n\nthis.listenForEvents_();\n}\n\nmodelo.inherits(Subscription, ServiceObject, events.EventEmitter);",
+    "line": 237,
+    "codeStart": 263,
+    "code": "this.iam = new IAM(pubsub, {\n  baseUrl: baseUrl,\n  id: unformattedName\n});\n\nthis.name = Subscription.formatName_(pubsub.projectId, options.name);\n\nthis.autoAck = is.boolean(options.autoAck) ? options.autoAck : false;\nthis.closed = true;\nthis.interval = is.number(options.interval) ? options.interval : 10;\nthis.inProgressAckIds = {};\nthis.maxInProgress =\n  is.number(options.maxInProgress) ? options.maxInProgress : Infinity;\nthis.messageListeners = 0;\nthis.paused = false;\nthis.encoding = options.encoding || 'utf-8';\n\nthis.listenForEvents_();\n}\n\nmodelo.inherits(Subscription, ServiceObject, events.EventEmitter);",
     "ctx": {
       "type": "property",
       "receiver": "this",
@@ -621,8 +635,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 283,
-    "codeStart": 289,
+    "line": 285,
+    "codeStart": 291,
     "code": "Subscription.formatMessage_ = function(msg, encoding) {\n  var innerMessage = msg.message;\n  var message = {\n    ackId: msg.ackId\n  };\n\n  if (innerMessage) {\n    message.id = innerMessage.messageId;\n\n    if (innerMessage.data) {\n      message.data = new Buffer(innerMessage.data, 'base64').toString(encoding);\n\n      try {\n        message.data = JSON.parse(message.data);\n      } catch(e) {}\n    }\n\n    if (innerMessage.attributes) {\n      message.attributes = innerMessage.attributes;\n    }\n  }\n\n  return message;\n};",
     "ctx": {
       "type": "method",
@@ -650,8 +664,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 314,
-    "codeStart": 320,
+    "line": 316,
+    "codeStart": 322,
     "code": "Subscription.formatName_ = function(projectId, name) {\n  // Simple check if the name is already formatted.\n  if (name.indexOf('/') > -1) {\n    return name;\n  }\n\n  return 'projects/' + projectId + '/subscriptions/' + name;\n};",
     "ctx": {
       "type": "method",
@@ -720,8 +734,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 329,
-    "codeStart": 343,
+    "line": 331,
+    "codeStart": 345,
     "code": "Subscription.prototype.ack = function(ackIds, callback) {\n  var self = this;\n\n  ackIds = arrify(ackIds);\n\n  if (ackIds.length === 0) {\n    throw new Error([\n      'At least one ID must be specified before it can be acknowledged.'\n    ].join(''));\n  }\n\n  callback = callback || util.noop;\n\n  this.request({\n    method: 'POST',\n    uri: ':acknowledge',\n    json: {\n      ackIds: ackIds\n    }\n  }, function(err, resp) {\n    if (!err) {\n      ackIds.forEach(function(ackId) {\n        delete self.inProgressAckIds[ackId];\n      });\n\n      self.refreshPausedStatus_();\n    }\n\n    callback(err, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -805,8 +819,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 375,
-    "codeStart": 390,
+    "line": 377,
+    "codeStart": 392,
     "code": "Subscription.prototype.decorateMessage_ = function(message) {\n  var self = this;\n\n  this.inProgressAckIds[message.ackId] = true;\n\n  message.ack = self.ack.bind(self, message.ackId);\n\n  message.skip = function() {\n    delete self.inProgressAckIds[message.ackId];\n    self.refreshPausedStatus_();\n  };\n\n  return message;\n};",
     "ctx": {
       "type": "method",
@@ -853,8 +867,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 405,
-    "codeStart": 416,
+    "line": 407,
+    "codeStart": 418,
     "code": "Subscription.prototype.delete = function(callback) {\n  var self = this;\n\n  callback = callback || util.noop;\n\n  ServiceObject.prototype.delete.call(this, function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    self.closed = true;\n    self.removeAllListeners();\n\n    callback(null, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -948,9 +962,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 434,
-    "codeStart": 483,
-    "code": "Subscription.prototype.pull = function(options, callback) {\n  var self = this;\n  var MAX_EVENTS_LIMIT = 1000;\n  var encoding = this.encoding;\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  if (!is.number(options.maxResults)) {\n    options.maxResults = MAX_EVENTS_LIMIT;\n  }\n\n  this.request({\n    // The default timeout set used in this library is 60s, but a pull request\n    // times out around 90 seconds.\n    timeout: 90000,\n    method: 'POST',\n    uri: ':pull',\n    json: {\n      returnImmediately: !!options.returnImmediately,\n      maxMessages: options.maxResults\n    }\n  }, function(err, response) {\n    if (err) {\n      callback(err, null, response);\n      return;\n    }\n\n    var messages = arrify(response.receivedMessages)\n      .map(function(msg) {\n        return Subscription.formatMessage_(msg, encoding);\n      })\n      .map(self.decorateMessage_.bind(self));\n\n    self.refreshPausedStatus_();\n\n    if (self.autoAck && messages.length !== 0) {\n      var ackIds = messages.map(prop('ackId'));\n\n      self.ack(ackIds, function(err) {\n        callback(err, messages, response);\n      });\n    } else {\n      callback(null, messages, response);\n    }\n  });\n};",
+    "line": 436,
+    "codeStart": 485,
+    "code": "Subscription.prototype.pull = function(options, callback) {\n  var self = this;\n  var MAX_EVENTS_LIMIT = 1000;\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  if (!is.number(options.maxResults)) {\n    options.maxResults = MAX_EVENTS_LIMIT;\n  }\n\n  this.request({\n    // The default timeout set used in this library is 60s, but a pull request\n    // times out around 90 seconds.\n    timeout: 90000,\n    method: 'POST',\n    uri: ':pull',\n    json: {\n      returnImmediately: !!options.returnImmediately,\n      maxMessages: options.maxResults\n    }\n  }, function(err, response) {\n    if (err) {\n      callback(err, null, response);\n      return;\n    }\n\n    var messages = arrify(response.receivedMessages)\n      .map(function(msg) {\n        return Subscription.formatMessage_(msg, self.encoding);\n      })\n      .map(self.decorateMessage_.bind(self));\n\n    self.refreshPausedStatus_();\n\n    if (self.autoAck && messages.length !== 0) {\n      var ackIds = messages.map(prop('ackId'));\n\n      self.ack(ackIds, function(err) {\n        callback(err, messages, response);\n      });\n    } else {\n      callback(null, messages, response);\n    }\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Subscription",
@@ -1039,8 +1053,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 533,
-    "codeStart": 555,
+    "line": 534,
+    "codeStart": 556,
     "code": "Subscription.prototype.setAckDeadline = function(options, callback) {\n  callback = callback || util.noop;\n\n  this.request({\n    method: 'POST',\n    uri: ':modifyAckDeadline',\n    json: {\n      ackIds: arrify(options.ackIds),\n      ackDeadlineSeconds: options.seconds\n    }\n  }, function(err, resp) {\n    callback(err, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1074,8 +1088,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 570,
-    "codeStart": 583,
+    "line": 571,
+    "codeStart": 584,
     "code": "Subscription.prototype.listenForEvents_ = function() {\n  var self = this;\n\n  this.on('newListener', function(event) {\n    if (event === 'message') {\n      self.messageListeners++;\n      if (self.closed) {\n        self.closed = false;\n        self.startPulling_();\n      }\n    }\n  });\n\n  this.on('removeListener', function(event) {\n    if (event === 'message' && --self.messageListeners === 0) {\n      self.closed = true;\n    }\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1104,8 +1118,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 603,
-    "codeStart": 614,
+    "line": 604,
+    "codeStart": 615,
     "code": "Subscription.prototype.refreshPausedStatus_ = function() {\n  var isCurrentlyPaused = this.paused;\n  var inProgress = Object.keys(this.inProgressAckIds).length;\n\n  this.paused = inProgress >= this.maxInProgress;\n\n  if (isCurrentlyPaused && !this.paused && this.messageListeners > 0) {\n    this.startPulling_();\n  }\n};",
     "ctx": {
       "type": "method",
@@ -1139,8 +1153,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 625,
-    "codeStart": 642,
+    "line": 626,
+    "codeStart": 643,
     "code": "Subscription.prototype.startPulling_ = function() {\n  var self = this;\n\n  if (this.closed || this.paused) {\n    return;\n  }\n\n  var maxResults;\n\n  if (this.maxInProgress < Infinity) {\n    maxResults = this.maxInProgress - Object.keys(this.inProgressAckIds).length;\n  }\n\n  this.pull({\n    returnImmediately: false,\n    maxResults: maxResults\n  }, function(err, messages, apiResponse) {\n    if (err) {\n      self.emit('error', err, apiResponse);\n    }\n\n    if (messages) {\n      messages.forEach(function(message) {\n        self.emit('message', message, apiResponse);\n      });\n    }\n\n    setTimeout(self.startPulling_.bind(self), self.interval);\n  });\n};\n\nmodule.exports = Subscription;",
     "ctx": {
       "type": "method",
