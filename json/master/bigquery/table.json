@@ -753,7 +753,7 @@
     "ignore": false,
     "line": 197,
     "codeStart": 207,
-    "code": "Table.mergeSchemaWithRows_ = function(schema, rows) {\n  return rows.map(mergeSchema).map(flattenRows);\n\n  function mergeSchema(row) {\n    return row.f.map(function(field, index) {\n      var fieldObject = {};\n      fieldObject[schema.fields[index].name] = field.v;\n      return fieldObject;\n    });\n  }\n\n  function flattenRows(rows) {\n    return rows.reduce(function(acc, row) {\n      var key = Object.keys(row)[0];\n      acc[key] = row[key];\n      return acc;\n    }, {});\n  }\n};",
+    "code": "Table.mergeSchemaWithRows_ = function(schema, rows) {\n  return rows.map(mergeSchema).map(flattenRows);\n\n  function mergeSchema(row) {\n    return row.f.map(function(field, index) {\n      var schemaField = schema.fields[index];\n      var value = field.v;\n\n      switch (schemaField.type) {\n        case 'BOOLEAN': {\n          value = Boolean(value).valueOf();\n          break;\n        }\n        case 'FLOAT': {\n          if (!is.nil(value)) {\n            value = parseFloat(value);\n          }\n          break;\n        }\n        case 'INTEGER': {\n          if (!is.nil(value)) {\n            value = parseInt(value, 10);\n          }\n          break;\n        }\n        case 'TIMESTAMP': {\n          value = new Date(value * 1000);\n          break;\n        }\n      }\n\n      var fieldObject = {};\n      fieldObject[schemaField.name] = value;\n      return fieldObject;\n    });\n  }\n\n  function flattenRows(rows) {\n    return rows.reduce(function(acc, row) {\n      var key = Object.keys(row)[0];\n      acc[key] = row[key];\n      return acc;\n    }, {});\n  }\n};",
     "ctx": {
       "type": "method",
       "receiver": "Table",
@@ -876,8 +876,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 227,
-    "codeStart": 258,
+    "line": 253,
+    "codeStart": 284,
     "code": "Table.prototype.copy = function(destination, metadata, callback) {\n  var that = this;\n\n  if (!(destination instanceof Table)) {\n    throw new Error('Destination must be a Table object.');\n  }\n\n  if (is.fn(metadata)) {\n    callback = metadata;\n    metadata = {};\n  }\n\n  var body = {\n    configuration: {\n      copy: extend(true, metadata || {}, {\n        destinationTable: {\n          datasetId: destination.dataset.id,\n          projectId: destination.bigQuery.projectId,\n          tableId: destination.id\n        },\n        sourceTable: {\n          datasetId: this.dataset.id,\n          projectId: this.bigQuery.projectId,\n          tableId: this.id\n        }\n      })\n    }\n  };\n\n  this.bigQuery.request({\n    method: 'POST',\n    uri: '/jobs',\n    json: body,\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var job = that.bigQuery.job(resp.jobReference.jobId);\n    job.metadata = resp;\n\n    callback(null, job, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -924,8 +924,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 304,
-    "codeStart": 322,
+    "line": 330,
+    "codeStart": 348,
     "code": "Table.prototype.createReadStream = function() {\n  return this.getRows();\n};",
     "ctx": {
       "type": "method",
@@ -995,8 +995,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 326,
-    "codeStart": 372,
+    "line": 352,
+    "codeStart": 398,
     "code": "Table.prototype.createWriteStream = function(metadata) {\n  var that = this;\n\n  metadata = metadata || {};\n\n  var fileTypeMap = {\n    csv: 'CSV',\n    json: 'NEWLINE_DELIMITED_JSON'\n  };\n  var fileTypes = Object.keys(fileTypeMap).map(function(key) {\n    return fileTypeMap[key];\n  });\n\n  if (is.string(metadata)) {\n    metadata = {\n      sourceFormat: fileTypeMap[metadata.toLowerCase()]\n    };\n  }\n\n  if (is.string(metadata.schema)) {\n    metadata.schema = Table.createSchemaFromString_(metadata.schema);\n  }\n\n  extend(true, metadata, {\n    destinationTable: {\n      projectId: that.bigQuery.projectId,\n      datasetId: that.dataset.id,\n      tableId: that.id\n    }\n  });\n\n  if (metadata.hasOwnProperty('sourceFormat') &&\n      fileTypes.indexOf(metadata.sourceFormat) < 0) {\n    throw new Error('Source format not recognized: ' + metadata.sourceFormat);\n  }\n\n  var dup = streamEvents(duplexify());\n\n  dup.once('writing', function() {\n    util.makeWritableStream(dup, {\n      makeAuthenticatedRequest: that.bigQuery.makeAuthenticatedRequest,\n      metadata: {\n        configuration: {\n          load: metadata\n        }\n      },\n      request: {\n        uri: format('{base}/{projectId}/jobs', {\n          base: 'https://www.googleapis.com/upload/bigquery/v2/projects',\n          projectId: that.bigQuery.projectId\n        })\n      }\n    }, function(data) {\n      var job = that.bigQuery.job(data.jobReference.jobId);\n      job.metadata = data;\n\n      dup.emit('complete', job);\n    });\n  });\n\n  return dup;\n};",
     "ctx": {
       "type": "method",
@@ -1157,8 +1157,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 435,
-    "codeStart": 488,
+    "line": 461,
+    "codeStart": 514,
     "code": "Table.prototype.export = function(destination, options, callback) {\n  var that = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  var formats = {\n    avro: 'AVRO',\n    csv: 'CSV',\n    json: 'NEWLINE_DELIMITED_JSON'\n  };\n\n  extend(true, options, {\n    destinationUris: arrify(destination).map(function(dest) {\n      if (!(dest instanceof File)) {\n        throw new Error('Destination must be a File object.');\n      }\n\n      // If no explicit format was provided, attempt to find a match from the\n      // file's extension. If no match, don't set, and default upstream to CSV.\n      var format = path.extname(dest.name).substr(1).toLowerCase();\n      if (!options.destinationFormat && !options.format && formats[format]) {\n        options.destinationFormat = formats[format];\n      }\n\n      return 'gs://' + dest.bucket.name + '/' + dest.name;\n    })\n  });\n\n  if (options.format) {\n    options.format = options.format.toLowerCase();\n\n    if (formats[options.format]) {\n      options.destinationFormat = formats[options.format];\n      delete options.format;\n    } else {\n      throw new Error('Destination format not recognized: ' + options.format);\n    }\n  }\n\n  if (options.gzip) {\n    options.compression = 'GZIP';\n    delete options.gzip;\n  }\n\n  var body = {\n    configuration: {\n      extract: extend(true, options, {\n        sourceTable: {\n          datasetId: this.dataset.id,\n          projectId: this.bigQuery.projectId,\n          tableId: this.id\n        }\n      })\n    }\n  };\n\n  this.bigQuery.request({\n    method: 'POST',\n    uri: '/jobs',\n    json: body\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var job = that.bigQuery.job(resp.jobReference.jobId);\n    job.metadata = resp;\n\n    callback(null, job, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1303,8 +1303,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 564,
-    "codeStart": 622,
+    "line": 590,
+    "codeStart": 648,
     "code": "Table.prototype.getRows = function(options, callback) {\n  var that = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  callback = callback || util.noop;\n\n  this.request({\n    uri: '/data',\n    qs: options\n  }, function(err, resp) {\n    if (err) {\n      onComplete(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.pageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.pageToken\n      });\n    }\n\n    if (resp.rows && resp.rows.length > 0 && !that.metadata.schema) {\n      // We don't know the schema for this table yet. Do a quick stat.\n      that.getMetadata(function(err, metadata, apiResponse) {\n        if (err) {\n          onComplete(err, null, null, apiResponse);\n          return;\n        }\n\n        onComplete(null, resp.rows, nextQuery, resp);\n      });\n\n      return;\n    }\n\n    onComplete(null, resp.rows, nextQuery, resp);\n  });\n\n  function onComplete(err, rows, nextQuery, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    rows = Table.mergeSchemaWithRows_(that.metadata.schema, rows || []);\n\n    callback(null, rows, nextQuery, resp);\n  }\n};",
     "ctx": {
       "type": "method",
@@ -1430,8 +1430,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 678,
-    "codeStart": 733,
+    "line": 704,
+    "codeStart": 759,
     "code": "Table.prototype.import = function(source, metadata, callback) {\n  var that = this;\n\n  if (is.fn(metadata)) {\n    callback = metadata;\n    metadata = {};\n  }\n\n  callback = callback || util.noop;\n  metadata = metadata || {};\n\n  var formats = {\n    csv: 'CSV',\n    json: 'NEWLINE_DELIMITED_JSON'\n  };\n\n  if (is.string(source)) {\n    // A path to a file was given. If a sourceFormat wasn't specified, try to\n    // find a match from the file's extension.\n    var format = formats[path.extname(source).substr(1).toLowerCase()];\n    if (!metadata.sourceFormat && format) {\n      metadata.sourceFormat = format;\n    }\n\n    // Read the file into a new write stream.\n    return fs.createReadStream(source)\n      .pipe(this.createWriteStream(metadata))\n      .on('error', function(err, resp) {\n        callback(err, null, resp);\n      })\n      .on('complete', function(resp) {\n        // TODO(ryanseys): Does this have to create a job object?\n        callback(null, resp, resp);\n      });\n  }\n\n  var body = {\n    configuration: {\n      load: {\n        destinationTable: {\n          projectId: this.bigQuery.projectId,\n          datasetId: this.dataset.id,\n          tableId: this.id\n        }\n      }\n    }\n  };\n\n  extend(true, body.configuration.load, metadata, {\n    sourceUris: arrify(source).map(function(src) {\n      if (!(src instanceof File)) {\n        throw new Error('Source must be a File object.');\n      }\n\n      // If no explicit format was provided, attempt to find a match from\n      // the file's extension. If no match, don't set, and default upstream\n      // to CSV.\n      var format = formats[path.extname(src.name).substr(1).toLowerCase()];\n      if (!metadata.sourceFormat && format) {\n        body.configuration.load.sourceFormat = format;\n      }\n\n      return 'gs://' + src.bucket.name + '/' + src.name;\n    })\n  });\n\n  this.bigQuery.request({\n    method: 'POST',\n    uri: '/jobs',\n    json: body\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var job = that.bigQuery.job(resp.jobReference.jobId);\n    job.metadata = resp;\n\n    callback(null, job, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1535,8 +1535,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 816,
-    "codeStart": 874,
+    "line": 842,
+    "codeStart": 900,
     "code": "Table.prototype.insert = function(rows, callback) {\n  var body = {\n    rows: arrify(rows).map(function(row) {\n      var rowObject = {};\n      // Use the stringified contents of the row as a unique insert ID.\n      var md5 = crypto.createHash('md5');\n      md5.update(JSON.stringify(row));\n      rowObject.insertId = md5.digest('hex');\n      rowObject.json = row;\n      return rowObject;\n    })\n  };\n\n  this.request({\n    method: 'POST',\n    uri: '/insertAll',\n    json: body\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var failedToInsert = (resp.insertErrors || []).map(function(insertError) {\n      return {\n        errors: insertError.errors.map(function(error) {\n          return {\n            message: error.message,\n            reason: error.reason\n          };\n        }),\n        row: body.rows[insertError.index].json\n      };\n    });\n\n    callback(null, failedToInsert, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1558,8 +1558,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 913,
-    "codeStart": 918,
+    "line": 939,
+    "codeStart": 944,
     "code": "Table.prototype.query = function(query, callback) {\n  return this.dataset.query(query, callback);\n};",
     "ctx": {
       "type": "method",
@@ -1691,8 +1691,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 922,
-    "codeStart": 950,
+    "line": 948,
+    "codeStart": 976,
     "code": "Table.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n\n  if (metadata.name) {\n    metadata.friendlyName = metadata.name;\n    delete metadata.name;\n  }\n\n  if (is.string(metadata.schema)) {\n    metadata.schema = Table.createSchemaFromString_(metadata.schema);\n  }\n\n  this.request({\n    method: 'PUT',\n    uri: '',\n    json: metadata\n  }, function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1714,8 +1714,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 978,
-    "codeStart": 983,
+    "line": 1004,
+    "codeStart": 1009,
     "code": "streamRouter.extend(Table, ['getRows']);\n\nmodule.exports = Table;",
     "ctx": false
   }
