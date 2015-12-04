@@ -35,7 +35,7 @@ describe('BigQuery', function() {
   var TABLE_ID = 'myKittens';
   var table = dataset.table(TABLE_ID);
   var BUCKET_NAME = 'gcloud-test-bucket-temp-' + uuid.v1();
-  var bucket;
+  var bucket = storage.bucket(BUCKET_NAME);
 
   var query = 'SELECT url FROM [publicdata:samples.github_nested] LIMIT 100';
 
@@ -53,15 +53,7 @@ describe('BigQuery', function() {
 
       // Create a Bucket.
       function(next) {
-        storage.createBucket(BUCKET_NAME, function(err, bucket_) {
-          if (err) {
-            next(err);
-            return;
-          }
-
-          bucket = bucket_;
-          next();
-        });
+        bucket.create(next);
       }
     ], done);
   });
@@ -298,20 +290,61 @@ describe('BigQuery', function() {
       });
     });
 
-    it('should import data from a file in your bucket', function(done) {
-      bucket.upload(TEST_DATA_JSON_PATH, function(err, file) {
-        assert.ifError(err);
+    describe('importing & exporting', function() {
+      var file = bucket.file('kitten-test-data-backup.json');
 
+      before(function(done) {
+        fs.createReadStream(TEST_DATA_JSON_PATH)
+          .pipe(file.createWriteStream())
+          .on('error', done)
+          .on('finish', done);
+      });
+
+      after(function(done) {
+        file.delete(done);
+      });
+
+      it('should import data from a file in your bucket', function(done) {
         table.import(file, function(err, job) {
           assert.ifError(err);
           assert(job instanceof Job);
           done();
         });
       });
-    });
 
-    it('should export data to a file in your bucket', function(done) {
-      table.export(bucket.file('kitten-test-data-backup.json'), done);
+      it('should convert values to their schema types', function(done) {
+        var now = new Date();
+
+        var data = {
+          name: 'dave',
+          breed: 'british shorthair',
+          id: 99,
+          dob: now.toJSON()
+        };
+
+        table.insert(data, function(err, insertErrors) {
+          assert.ifError(err);
+
+          if (insertErrors.length > 0) {
+            done(insertErrors[0].errors[0]);
+            return;
+          }
+
+          table.query('SELECT * FROM ' + TABLE_ID + ' WHERE id = ' + data.id)
+            .on('error', done)
+            .once('data', function(row) {
+              assert.strictEqual(row.name, data.name);
+              assert.strictEqual(row.breed, data.breed);
+              assert.strictEqual(row.id, data.id);
+              assert.deepEqual(row.dob, now);
+              done();
+            });
+        });
+      });
+
+      it('should export data to a file in your bucket', function(done) {
+        table.export(bucket.file('kitten-test-data-backup.json'), done);
+      });
     });
   });
 });
