@@ -58,5 +58,6 @@
 
 ./node_modules/.bin/dox < lib/storage/acl.js > docs/json/master/storage/acl.json &
 ./node_modules/.bin/dox < lib/storage/bucket.js > docs/json/master/storage/bucket.json &
+./node_modules/.bin/dox < lib/storage/channel.js > docs/json/master/storage/channel.json &
 ./node_modules/.bin/dox < lib/storage/file.js > docs/json/master/storage/file.json &
 ./node_modules/.bin/dox < lib/storage/index.js > docs/json/master/storage/index.json
