@@ -200,6 +200,25 @@ angular.module('gcloud.docs')
       ]
     },
 
+    storageWithChannels: {
+      title: 'Storage',
+      _url: '{baseUrl}/storage',
+      pages: [
+        {
+          title: 'Bucket',
+          url: '/bucket'
+        },
+        {
+          title: 'Channel',
+          url: '/channel'
+        },
+        {
+          title: 'File',
+          url: '/file'
+        }
+      ]
+    },
+
     VERSIONS: {
       //
       // Multiple keys may be used to match a version.
@@ -225,7 +244,7 @@ angular.module('gcloud.docs')
       '<0.9.0': ['storage'],
 
       // introduce new storage api.
-      '>=0.9.0': ['storageWithFiles'],
+      '>=0.9.0 && <0.26.0': ['storageWithFiles'],
 
       // introduce bigquery api.
       '>=0.10.0': ['bigquery'],
@@ -240,6 +259,9 @@ angular.module('gcloud.docs')
       '>=0.20.0': ['compute'],
 
       // introduce resource api.
-      '>=0.22.0': ['resource']
+      '>=0.22.0': ['resource'],
+
+      // introduce Storage#Channel
+      '>=0.26.0': ['storageWithChannels']
     }
   });
