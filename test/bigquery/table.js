@@ -22,6 +22,7 @@ var crypto = require('crypto');
 var extend = require('extend');
 var mockery = require('mockery');
 var nodeutil = require('util');
+var prop = require('propprop');
 var stream = require('stream');
 
 var File = require('../../lib/storage/file.js');
@@ -77,12 +78,15 @@ describe('BigQuery/Table', function() {
   var SCHEMA_OBJECT = {
     fields: [
       { name: 'id', type: 'integer' },
-      { name: 'breed', type: 'string' },
       { name: 'name', type: 'string' },
-      { name: 'dob', type: 'timestamp' }
+      { name: 'dob', type: 'timestamp' },
+      { name: 'has_claws', type: 'boolean' },
+      { name: 'hair_count', type: 'float' }
     ]
   };
-  var SCHEMA_STRING = 'id:integer,breed,name,dob:timestamp';
+  var SCHEMA_STRING = [
+    'id:integer,name,dob:timestamp,has_claws:boolean,hair_count:float'
+  ].join('');
 
   var Table;
   var TABLE_ID = 'kittens';
@@ -172,27 +176,60 @@ describe('BigQuery/Table', function() {
     it('should merge the schema and flatten the rows', function() {
       var rows = [
         {
-          f: [
-            { v: 3 },
-            { v: 'dogbreed' },
-            { v: 'dogname' },
-            { v: '234234' }
-          ]
+          raw: { f: [] }, // populated below
+          expected: {
+            id: 1,
+            name: 'Milo',
+            dob: new Date().toJSON(),
+            has_claws: '1',
+            hair_count: 5.222330009847
+          }
         },
         {
-          f: [
-            { v: 4 },
-            { v: 'dogbreed2' },
-            { v: 'dogname2' },
-            { v: '2342342' }
-          ]
+          raw: { f: [] }, // populated below
+          expected: {
+            id: 2,
+            name: 'Otis',
+            dob: new Date().toJSON(),
+            has_claws: 'true',
+            hair_count: 5.222330009847
+          }
+        },
+        {
+          raw: { f: [] }, // populated below
+          expected: {
+            id: 3,
+            name: 'Milo',
+            dob: new Date().toJSON(),
+            has_claws: 'false',
+            hair_count: 5.222330009847
+          }
+        },
+        {
+          raw: { f: [] }, // populated below
+          expected: {
+            id: 3,
+            name: 'Milo',
+            dob: new Date().toJSON(),
+            has_claws: '0',
+            hair_count: 5.222330009847
+          }
         }
       ];
 
-      assert.deepEqual(Table.mergeSchemaWithRows_(SCHEMA_OBJECT, rows), [
-        { id: 3, breed: 'dogbreed', name: 'dogname', dob: '234234' },
-        { id: 4, breed: 'dogbreed2', name: 'dogname2', dob: '2342342' }
-      ]);
+      rows = rows.map(function(row) {
+        for (var prop in row.expected) {
+          row.raw.f.push({ v: row.expected[prop] });
+        }
+        return row;
+      });
+
+      var rawRows = rows.map(prop('raw'));
+      var mergedRows = Table.mergeSchemaWithRows_(SCHEMA_OBJECT, rawRows);
+
+      mergedRows.forEach(function(mergedRow, index) {
+        assert.deepEqual(mergedRow, rows[index].expected);
+      });
     });
   });
 
