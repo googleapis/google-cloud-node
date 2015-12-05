@@ -244,7 +244,7 @@ angular.module('gcloud.docs')
       '<0.9.0': ['storage'],
 
       // introduce new storage api.
-      '>=0.9.0 && <0.26.0': ['storageWithFiles'],
+      '>=0.9.0 <0.26.0': ['storageWithFiles'],
 
       // introduce bigquery api.
       '>=0.10.0': ['bigquery'],
