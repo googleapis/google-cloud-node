@@ -494,6 +494,7 @@ describe('PubSub', function() {
         interval: 3,
         reuseExisting: false,
         ackDeadlineSeconds: 90,
+        maxInProgress: 5,
         pushConfig: {
           pushEndpoint: 'https://domain/push'
         }
@@ -505,6 +506,7 @@ describe('PubSub', function() {
 
       delete expectedBody.autoAck;
       delete expectedBody.interval;
+      delete expectedBody.maxInProgress;
       delete expectedBody.reuseExisting;
 
       pubsub.topic = function() {
