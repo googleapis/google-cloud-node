@@ -847,6 +847,20 @@
       },
       {
         "type": "param",
+        "string": "{number} options.maxInProgress - Maximum messages to consume\n    simultaneously.",
+        "name": "options.maxInProgress",
+        "description": "<ul>\n<li>Maximum messages to consume     simultaneously.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
         "string": "{boolean} options.reuseExisting - If the subscription already exists,\n    reuse it. The options of the existing subscription are not changed. If\n    false, attempting to create a subscription that already exists will fail.\n    (default: false)",
         "name": "options.reuseExisting",
         "description": "<ul>\n<li>If the subscription already exists,     reuse it. The options of the existing subscription are not changed. If<br />  false, attempting to create a subscription that already exists will fail.<br />  (default: false)</li>\n</ul>\n",
@@ -932,8 +946,8 @@
     "isEvent": false,
     "ignore": false,
     "line": 369,
-    "codeStart": 430,
-    "code": "PubSub.prototype.subscribe = function(topic, subName, options, callback) {\n  var self = this;\n\n  if (!is.string(topic) && !(topic instanceof Topic)) {\n    throw new Error('A Topic is required for a new subscription.');\n  }\n\n  if (!is.string(subName)) {\n    throw new Error('A subscription name is required for a new subscription.');\n  }\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  if (is.string(topic)) {\n    topic = this.topic(topic);\n  }\n\n  var body = extend(true, {}, options, {\n    topic: topic.name\n  });\n\n  delete body.autoAck;\n  delete body.interval;\n  delete body.reuseExisting;\n\n  this.request({\n    method: 'PUT',\n    uri: '/subscriptions/' + subName,\n    json: body\n  }, function(err, resp) {\n    if (err && !(err.code === 409 && options.reuseExisting)) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var subscription = self.subscription(resp.name, options);\n    callback(null, subscription, resp);\n  });\n};",
+    "codeStart": 432,
+    "code": "PubSub.prototype.subscribe = function(topic, subName, options, callback) {\n  var self = this;\n\n  if (!is.string(topic) && !(topic instanceof Topic)) {\n    throw new Error('A Topic is required for a new subscription.');\n  }\n\n  if (!is.string(subName)) {\n    throw new Error('A subscription name is required for a new subscription.');\n  }\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  if (is.string(topic)) {\n    topic = this.topic(topic);\n  }\n\n  var body = extend(true, {}, options, {\n    topic: topic.name\n  });\n\n  delete body.autoAck;\n  delete body.interval;\n  delete body.maxInProgress;\n  delete body.reuseExisting;\n\n  this.request({\n    method: 'PUT',\n    uri: '/subscriptions/' + subName,\n    json: body\n  }, function(err, resp) {\n    if (err && !(err.code === 409 && options.reuseExisting)) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var subscription = self.subscription(resp.name, options);\n    callback(null, subscription, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "PubSub",
@@ -1052,8 +1066,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 473,
-    "codeStart": 501,
+    "line": 476,
+    "codeStart": 504,
     "code": "PubSub.prototype.subscription = function(name, options) {\n  if (!name) {\n    throw new Error('The name of a subscription is required.');\n  }\n\n  options = options || {};\n  options.name = name;\n  return new Subscription(this, options);\n};",
     "ctx": {
       "type": "method",
@@ -1117,8 +1131,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 511,
-    "codeStart": 526,
+    "line": 514,
+    "codeStart": 529,
     "code": "PubSub.prototype.topic = function(name) {\n  if (!name) {\n    throw new Error('A name must be specified for a new topic.');\n  }\n\n  return new Topic(this, name);\n};",
     "ctx": {
       "type": "method",
@@ -1140,8 +1154,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 534,
-    "codeStart": 539,
+    "line": 537,
+    "codeStart": 542,
     "code": "streamRouter.extend(PubSub, ['getSubscriptions', 'getTopics']);\n\nmodule.exports = PubSub;",
     "ctx": false
   }
