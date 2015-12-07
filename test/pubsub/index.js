@@ -535,6 +535,8 @@ describe('PubSub', function() {
       });
 
       it('should re-use existing subscription if specified', function(done) {
+        var apiResponse = { code: 409 };
+
         pubsub.subscription = function() {
           return SUBSCRIPTION;
         };
@@ -544,8 +546,9 @@ describe('PubSub', function() {
         };
 
         // Don't re-use an existing subscription (error if one exists).
-        pubsub.subscribe(TOPIC_NAME, SUB_NAME, function(err) {
+        pubsub.subscribe(TOPIC_NAME, SUB_NAME, function(err, sub, resp) {
           assert.equal(err.code, 409);
+          assert.strictEqual(resp, apiResponse);
         });
 
         // Re-use an existing subscription (ignore error if one exists).
