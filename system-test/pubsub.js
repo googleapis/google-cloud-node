@@ -239,6 +239,10 @@ describe('pubsub', function() {
       });
     });
 
+    it('should re-use an existing subscription', function(done) {
+      pubsub.subscribe(topic, SUB_NAMES[0], { reuseExisting: true }, done);
+    });
+
     it('should error when using a non-existent subscription', function(done) {
       var subscription = topic.subscription(generateSubName());
 
