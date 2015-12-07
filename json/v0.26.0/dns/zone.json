@@ -1,0 +1,1929 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2014 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
+  },
+  {
+    "tags": [
+      {
+        "type": "module",
+        "string": "dns/zone",
+        "html": "<p>dns/zone</p>"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 17,
+    "codeStart": 21,
+    "code": "'use strict';\n\nvar arrify = require('arrify');\nvar exec = require('methmeth');\nvar extend = require('extend');\nvar fs = require('fs');\nvar is = require('is');\nvar nodeutil = require('util');\nvar zonefile = require('dns-zonefile');",
+    "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:dns/change}",
+        "types": [
+          "module:dns/change"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Fchange.html\">dns/change</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:dns/change}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 31,
+    "codeStart": 35,
+    "code": "var Change = require('./change.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Change",
+      "value": "require('./change.js')",
+      "string": "Change"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:dns/record}",
+        "types": [
+          "module:dns/record"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Frecord.html\">dns/record</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:dns/record}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 37,
+    "codeStart": 41,
+    "code": "var Record = require('./record.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Record",
+      "value": "require('./record.js')",
+      "string": "Record"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/serviceObject}",
+        "types": [
+          "module:common/serviceObject"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2FserviceObject.html\">common/serviceObject</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/serviceObject}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 43,
+    "codeStart": 47,
+    "code": "var ServiceObject = require('../common/service-object.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "ServiceObject",
+      "value": "require('../common/service-object.js')",
+      "string": "ServiceObject"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/streamrouter}",
+        "types": [
+          "module:common/streamrouter"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Fstreamrouter.html\">common/streamrouter</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/streamrouter}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 49,
+    "codeStart": 53,
+    "code": "var streamRouter = require('../common/stream-router.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "streamRouter",
+      "value": "require('../common/stream-router.js')",
+      "string": "streamRouter"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "constructor",
+        "string": "",
+        "html": ""
+      },
+      {
+        "type": "alias",
+        "string": "module:dns/zone",
+        "html": "<p>module:dns/zone</p>"
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\n\nvar dns = gcloud.dns({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'grape-spaceship-123'\n});\n\nvar zone = dns.zone('zone-id');",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);</p><p>var dns = gcloud.dns({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>var zone = dns.zone(&#39;zone-id&#39;);</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>A Zone object is used to interact with your project&#39;s managed zone. It will<br />help you add or delete records, delete your zone, and many other convenience<br />methods.</p>",
+      "summary": "<p>A Zone object is used to interact with your project&#39;s managed zone. It will<br />help you add or delete records, delete your zone, and many other convenience<br />methods.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": true,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 55,
+    "codeStart": 73,
+    "code": "function Zone(dns, name) {\n  var methods = {",
+    "ctx": {
+      "type": "constructor",
+      "name": "Zone",
+      "string": "Zone()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{object} config - See {module:dns#createZone}.",
+        "name": "config",
+        "description": "<ul>\n<li>See {module:dns#createZone}.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var config = {\n  dnsName: 'example.com.',\n  // ...\n};\n\nzone.create(config, function(err, zone, apiResponse) {\n  if (!err) {\n    // The zone was created successfully.\n  }\n});",
+        "html": "<p>var config = {<br />  dnsName: &#39;example.com.&#39;,<br />  // ...<br />};</p><p>zone.create(config, function(err, zone, apiResponse) {<br />  if (!err) {<br />    // The zone was created successfully.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a zone.</p>",
+      "summary": "<p>Create a zone.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 75,
+    "codeStart": 92,
+    "code": "create: true,",
+    "ctx": {
+      "type": "property",
+      "name": "create",
+      "value": "true,",
+      "string": "create"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this\n    request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this     request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} callback.exists - Whether the zone exists or not.",
+        "name": "callback.exists",
+        "description": "<ul>\n<li>Whether the zone exists or not.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "zone.exists(function(err, exists) {});",
+        "html": "<p>zone.exists(function(err, exists) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Check if the zone exists.</p>",
+      "summary": "<p>Check if the zone exists.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 94,
+    "codeStart": 105,
+    "code": "exists: true,",
+    "ctx": {
+      "type": "property",
+      "name": "exists",
+      "value": "true,",
+      "string": "exists"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{options=} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "options"
+        ],
+        "typesDescription": "<a href=\"options.html\">options</a>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.autoCreate - Automatically create the object if\n    it does not exist. Default: `false`",
+        "name": "options.autoCreate",
+        "description": "<ul>\n<li>Automatically create the object if     it does not exist. Default: <code>false</code></li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "zone.get(function(err, zone, apiResponse) {\n  // `zone.metadata` has been populated.\n});",
+        "html": "<p>zone.get(function(err, zone, apiResponse) {<br />  // <code>zone.metadata</code> has been populated.<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a zone if it exists.</p><p>You may optionally use this to &quot;get or create&quot; an object by providing an<br />object with <code>autoCreate</code> set to <code>true</code>. Any extra configuration that is<br />normally required for the <code>create</code> method must be contained within this<br />object as well.</p>",
+      "summary": "<p>Get a zone if it exists.</p>",
+      "body": "<p>You may optionally use this to &quot;get or create&quot; an object by providing an<br />object with <code>autoCreate</code> set to <code>true</code>. Any extra configuration that is<br />normally required for the <code>create</code> method must be contained within this<br />object as well.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 107,
+    "codeStart": 124,
+    "code": "get: true,",
+    "ctx": {
+      "type": "property",
+      "name": "get",
+      "value": "true,",
+      "string": "get"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[ManagedZones: get API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/get}",
+        "html": "<p>[ManagedZones: get API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/get}\">https://cloud.google.com/dns/api/v1/managedZones/get}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An API error.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An API error.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?object} callback.metadata - Metadata of the zone from the API.",
+        "name": "callback.metadata",
+        "description": "<ul>\n<li>Metadata of the zone from the API.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - Raw API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "zone.getMetadata(function(err, metadata, apiResponse) {});",
+        "html": "<p>zone.getMetadata(function(err, metadata, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get the metadata for the zone.</p>",
+      "summary": "<p>Get the metadata for the zone.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 126,
+    "codeStart": 139,
+    "code": "getMetadata: true\n  };\n\n  ServiceObject.call(this, {\nparent: dns,\nbaseUrl: '/managedZones',\nid: name,\ncreateMethod: dns.createZone.bind(dns),\nmethods: methods\n  });\n\n  this.name = name;\n}\n\nnodeutil.inherits(Zone, ServiceObject);",
+    "ctx": {
+      "type": "property",
+      "name": "getMetadata",
+      "value": "true",
+      "string": "getMetadata"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{module:dns/record|module:dns/record[]} record - The record objects to\n    add.",
+        "name": "record",
+        "description": "<ul>\n<li>The record objects to     add.</li>\n</ul>\n",
+        "types": [
+          "module:dns/record",
+          "Array.<module:dns/record>"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Frecord.html\">dns/record</a>|<code>Array</code>.&lt;module:<a href=\"module%3Adns%2Frecord.html\">dns/record</a>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An API error.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An API error.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?module:dns/change} callback.change - A {module:dns/change} object.",
+        "name": "callback.change",
+        "description": "<ul>\n<li>A {module:dns/change} object.</li>\n</ul>\n",
+        "types": [
+          "module:dns/change"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Fchange.html\">dns/change</a>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - Raw API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Add records to this zone. This is a convenience wrapper around<br />{module:dns/zone#createChange}.</p>",
+      "summary": "<p>Add records to this zone. This is a convenience wrapper around<br />{module:dns/zone#createChange}.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 155,
+    "codeStart": 167,
+    "code": "Zone.prototype.addRecords = function(records, callback) {\n  this.createChange({\n    add: records\n  }, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Zone",
+      "cons": "Zone",
+      "name": "addRecords",
+      "string": "Zone.prototype.addRecords()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{string} id - The change id.",
+        "name": "id",
+        "description": "<ul>\n<li>The change id.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{module:dns/change}",
+        "types": [
+          "module:dns/change"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Fchange.html\">dns/change</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:dns/change}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var change = zone.change('change-id');",
+        "html": "<p>var change = zone.change(&#39;change-id&#39;);</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a reference to a change object in this zone.</p>",
+      "summary": "<p>Create a reference to a change object in this zone.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 173,
+    "codeStart": 182,
+    "code": "Zone.prototype.change = function(id) {\n  return new Change(this, id);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Zone",
+      "cons": "Zone",
+      "name": "change",
+      "string": "Zone.prototype.change()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{object} config - The configuration object.",
+        "name": "config",
+        "description": "<ul>\n<li>The configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:dns/record|module:dns/record[]} config.add - Record objects\n    to add to this zone.",
+        "name": "config.add",
+        "description": "<ul>\n<li>Record objects     to add to this zone.</li>\n</ul>\n",
+        "types": [
+          "module:dns/record",
+          "Array.<module:dns/record>"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Frecord.html\">dns/record</a>|<code>Array</code>.&lt;module:<a href=\"module%3Adns%2Frecord.html\">dns/record</a>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:dns/record|module:dns/record[]} config.delete - Record\n    objects to delete from this zone. Be aware that the resource records here\n    must match exactly to be deleted.",
+        "name": "config.delete",
+        "description": "<ul>\n<li>Record     objects to delete from this zone. Be aware that the resource records here<br />  must match exactly to be deleted.</li>\n</ul>\n",
+        "types": [
+          "module:dns/record",
+          "Array.<module:dns/record>"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Frecord.html\">dns/record</a>|<code>Array</code>.&lt;module:<a href=\"module%3Adns%2Frecord.html\">dns/record</a>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An API error.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An API error.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?module:dns/change} callback.change - A {module:dns/change} object.",
+        "name": "callback.change",
+        "description": "<ul>\n<li>A {module:dns/change} object.</li>\n</ul>\n",
+        "types": [
+          "module:dns/change"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Fchange.html\">dns/change</a>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - Raw API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var oldARecord = zone.record('a', {\n  name: 'example.com.',\n  data: '1.2.3.4',\n  ttl: 86400\n});\n\nvar newARecord = zone.record('a', {\n  name: 'example.com.',\n  data: '5.6.7.8',\n  ttl: 86400\n});\n\nzone.createChange({\n  add: newARecord,\n  delete: oldARecord\n}, function(err, change, apiResponse) {\n  if (!err) {\n    // The change was created successfully.\n  }\n});",
+        "html": "<p>var oldARecord = zone.record(&#39;a&#39;, {<br />  name: &#39;example.com.&#39;,<br />  data: &#39;1.2.3.4&#39;,<br />  ttl: 86400<br />});</p><p>var newARecord = zone.record(&#39;a&#39;, {<br />  name: &#39;example.com.&#39;,<br />  data: &#39;5.6.7.8&#39;,<br />  ttl: 86400<br />});</p><p>zone.createChange({<br />  add: newARecord,<br />  delete: oldARecord<br />}, function(err, change, apiResponse) {<br />  if (!err) {<br />    // The change was created successfully.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a change of resource record sets for the zone.</p>",
+      "summary": "<p>Create a change of resource record sets for the zone.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 186,
+    "codeStart": 224,
+    "code": "Zone.prototype.createChange = function(config, callback) {\n  var self = this;\n\n  if (!config || !config.add && !config.delete) {\n    throw new Error('Cannot create a change with no additions or deletions.');\n  }\n\n  var body = extend({}, config, {\n    additions: arrify(config.add).map(exec('toJSON')),\n    deletions: arrify(config.delete).map(exec('toJSON'))\n  });\n\n  delete body.add;\n  delete body.delete;\n\n  this.request({\n    method: 'POST',\n    uri: '/changes',\n    json: body\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var change = self.change(resp.id);\n    change.metadata = resp;\n\n    callback(null, change, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Zone",
+      "cons": "Zone",
+      "name": "createChange",
+      "string": "Zone.prototype.createChange()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[ManagedZones: delete API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/delete}",
+        "html": "<p>[ManagedZones: delete API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/delete}\">https://cloud.google.com/dns/api/v1/managedZones/delete}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{object=} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.force - Empty the zone before deleting.",
+        "name": "options.force",
+        "description": "<ul>\n<li>Empty the zone before deleting.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An API error.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An API error.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - Raw API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "zone.delete(function(err, apiResponse) {\n  if (!err) {\n    // The zone is now deleted.\n  }\n});\n\n//-\n// Use `force` to first empty the zone before deleting it.\n//-\nzone.delete({\n  force: true\n}, function(err, apiResponse) {\n  if (!err) {\n    // The zone is now deleted.\n  }\n});",
+        "html": "<p>zone.delete(function(err, apiResponse) {<br />  if (!err) {<br />    // The zone is now deleted.<br />  }<br />});</p><p>//-<br />// Use <code>force</code> to first empty the zone before deleting it.<br />//-<br />zone.delete({<br />  force: true<br />}, function(err, apiResponse) {<br />  if (!err) {<br />    // The zone is now deleted.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Delete the zone.</p><p>Only empty zones can be deleted. Set options.force to <code>true</code> to call<br />{module:dns/zone#empty} before deleting the zone. Two API calls will then be<br />made (one to empty, another to delete), which means <strong> this is not an<br />atomic request</strong>.</p>",
+      "summary": "<p>Delete the zone.</p>",
+      "body": "<p>Only empty zones can be deleted. Set options.force to <code>true</code> to call<br />{module:dns/zone#empty} before deleting the zone. Two API calls will then be<br />made (one to empty, another to delete), which means <strong> this is not an<br />atomic request</strong>.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 256,
+    "codeStart": 290,
+    "code": "Zone.prototype.delete = function(options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  if (options.force) {\n    this.empty(this.delete.bind(this, callback));\n    return;\n  }\n\n  ServiceObject.prototype.delete.call(this, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Zone",
+      "cons": "Zone",
+      "name": "delete",
+      "string": "Zone.prototype.delete()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{module:dns/record|module:dns/record[]|string} record - If given a\n    string, it is interpreted as a record type. All records that match that\n    type will be retrieved and then deleted. You can also provide a\n    {module:dns/record} object or array of objects.",
+        "name": "record",
+        "description": "<ul>\n<li>If given a     string, it is interpreted as a record type. All records that match that<br />  type will be retrieved and then deleted. You can also provide a<br />  {module:dns/record} object or array of objects.</li>\n</ul>\n",
+        "types": [
+          "module:dns/record",
+          "Array.<module:dns/record>",
+          "string"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Frecord.html\">dns/record</a>|<code>Array</code>.&lt;module:<a href=\"module%3Adns%2Frecord.html\">dns/record</a>&gt;|<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An API error.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An API error.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?module:dns/change} callback.change - A {module:dns/change} object.",
+        "name": "callback.change",
+        "description": "<ul>\n<li>A {module:dns/change} object.</li>\n</ul>\n",
+        "types": [
+          "module:dns/change"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Fchange.html\">dns/change</a>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - Raw API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var oldARecord = zone.record('a', {\n  name: 'example.com.',\n  data: '1.2.3.4',\n  ttl: 86400\n});\n\nvar callback = function(err, change, apiResponse) {\n  if (!err) {\n    // Delete change modification was created.\n  }\n};\n\nzone.deleteRecords(oldARecord, callback);\n\n//-\n// Delete multiple records at once.\n//-\nvar oldNs1Record = zone.record('ns', {\n  name: 'example.com.',\n  data: 'ns-cloud1.googledomains.com.',\n  ttl: 86400\n});\n\nvar oldNs2Record = zone.record('ns', {\n  name: 'example.com.',\n  data: 'ns-cloud2.googledomains.com.',\n  ttl: 86400\n});\n\nzone.deleteRecords([\n  oldNs1Record,\n  oldNs2Record\n], callback);\n\n//-\n// Possibly a simpler way to perform the above change is deleting records by\n// type.\n//-\nzone.deleteRecords('ns', callback);\n\n//-\n// You can also delete records of multiple types.\n//-\nzone.deleteRecords(['ns', 'a'], callback);",
+        "html": "<p>var oldARecord = zone.record(&#39;a&#39;, {<br />  name: &#39;example.com.&#39;,<br />  data: &#39;1.2.3.4&#39;,<br />  ttl: 86400<br />});</p><p>var callback = function(err, change, apiResponse) {<br />  if (!err) {<br />    // Delete change modification was created.<br />  }<br />};</p><p>zone.deleteRecords(oldARecord, callback);</p><p>//-<br />// Delete multiple records at once.<br />//-<br />var oldNs1Record = zone.record(&#39;ns&#39;, {<br />  name: &#39;example.com.&#39;,<br />  data: &#39;ns-cloud1.googledomains.com.&#39;,<br />  ttl: 86400<br />});</p><p>var oldNs2Record = zone.record(&#39;ns&#39;, {<br />  name: &#39;example.com.&#39;,<br />  data: &#39;ns-cloud2.googledomains.com.&#39;,<br />  ttl: 86400<br />});</p><p>zone.deleteRecords([<br />  oldNs1Record,<br />  oldNs2Record<br />], callback);</p><p>//-<br />// Possibly a simpler way to perform the above change is deleting records by<br />// type.<br />//-<br />zone.deleteRecords(&#39;ns&#39;, callback);</p><p>//-<br />// You can also delete records of multiple types.<br />//-<br />zone.deleteRecords([&#39;ns&#39;, &#39;a&#39;], callback);</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Delete records from this zone. This is a convenience wrapper around<br />{module:dns/zone#createChange}.</p><p>This method accepts {module:dns/record} objects or string record types in<br />its place. This means that you can delete all A records or NS records, etc.<br />If used this way, two API requests are made (one to get, then another to<br />delete), which means <strong>the operation is not atomic</strong> and could<br />result in unexpected changes.</p>",
+      "summary": "<p>Delete records from this zone. This is a convenience wrapper around<br />{module:dns/zone#createChange}.</p>",
+      "body": "<p>This method accepts {module:dns/record} objects or string record types in<br />its place. This means that you can delete all A records or NS records, etc.<br />If used this way, two API requests are made (one to get, then another to<br />delete), which means <strong>the operation is not atomic</strong> and could<br />result in unexpected changes.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 304,
+    "codeStart": 370,
+    "code": "Zone.prototype.deleteRecords = function(records, callback) {\n  records = arrify(records);\n\n  if (is.string(records[0])) {\n    this.deleteRecordsByType_(records, callback);\n    return;\n  }\n\n  this.createChange({\n    delete: records\n  }, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Zone",
+      "cons": "Zone",
+      "name": "deleteRecords",
+      "string": "Zone.prototype.deleteRecords()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An API error.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An API error.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?module:dns/change} callback.change - A {module:dns/change} object.",
+        "name": "callback.change",
+        "description": "<ul>\n<li>A {module:dns/change} object.</li>\n</ul>\n",
+        "types": [
+          "module:dns/change"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Fchange.html\">dns/change</a>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - Raw API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Emptying your zone means leaving only &#39;NS&#39; and &#39;SOA&#39; records. This method<br />will first fetch the non-NS and non-SOA records from your zone using<br />{module:dns/zone#getRecords}, then use {module:dns/zone#createChange} to<br />create a deletion change.</p>",
+      "summary": "<p>Emptying your zone means leaving only &#39;NS&#39; and &#39;SOA&#39; records. This method<br />will first fetch the non-NS and non-SOA records from your zone using<br />{module:dns/zone#getRecords}, then use {module:dns/zone#createChange} to<br />create a deletion change.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 383,
+    "codeStart": 396,
+    "code": "Zone.prototype.empty = function(callback) {\n  var self = this;\n\n  this.getRecords(function(err, records) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var recordsToDelete = records.filter(function(record) {\n      return record.type !== 'NS' && record.type !== 'SOA';\n    });\n\n    if (recordsToDelete.length === 0) {\n      callback();\n    } else {\n      self.deleteRecords(recordsToDelete, callback);\n    }\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Zone",
+      "cons": "Zone",
+      "name": "empty",
+      "string": "Zone.prototype.empty()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[ResourceRecordSets: list API Documentation]{@link https://cloud.google.com/dns/api/v1/resourceRecordSets/list}",
+        "html": "<p>[ResourceRecordSets: list API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/resourceRecordSets/list}\">https://cloud.google.com/dns/api/v1/resourceRecordSets/list}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{string} localPath - The fully qualified path to the zone file.",
+        "name": "localPath",
+        "description": "<ul>\n<li>The fully qualified path to the zone file.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An API or file system error.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An API or file system error.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var zoneFilename = '/Users/stephen/zonefile.zone';\n\nzone.export(zoneFilename, function(err) {\n  if (!err) {\n    // The zone file was created successfully.\n  }\n});",
+        "html": "<p>var zoneFilename = &#39;/Users/stephen/zonefile.zone&#39;;</p><p>zone.export(zoneFilename, function(err) {<br />  if (!err) {<br />    // The zone file was created successfully.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Provide a path to a zone file to copy records into the zone.</p>",
+      "summary": "<p>Provide a path to a zone file to copy records into the zone.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 417,
+    "codeStart": 435,
+    "code": "Zone.prototype.export = function(localPath, callback) {\n  this.getRecords(function(err, records) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var stringRecords = records.map(exec('toString')).join('\\n');\n\n    fs.writeFile(localPath, stringRecords, 'utf-8', function(err) {\n      callback(err || null);\n    });\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Zone",
+      "cons": "Zone",
+      "name": "export",
+      "string": "Zone.prototype.export()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Changes: get API Documentation]{@link https://cloud.google.com/dns/api/v1/changes/get}",
+        "html": "<p>[Changes: get API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/changes/get}\">https://cloud.google.com/dns/api/v1/changes/get}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{object=} query - The query object.",
+        "name": "query",
+        "description": "<ul>\n<li>The query object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} query.maxResults - Maximum number of results to return.",
+        "name": "query.maxResults",
+        "description": "<ul>\n<li>Maximum number of results to return.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} query.pageToken - The page token.",
+        "name": "query.pageToken",
+        "description": "<ul>\n<li>The page token.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} query.sort - Set to 'asc' for ascending, and 'desc' for\n    descending or omit for no sorting.",
+        "name": "query.sort",
+        "description": "<ul>\n<li>Set to &#39;asc&#39; for ascending, and &#39;desc&#39; for     descending or omit for no sorting.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An API error.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An API error.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?module:dns/change[]} callback.changes - An array of\n    {module:dns/change} objects.",
+        "name": "callback.changes",
+        "description": "<ul>\n<li>An array of     {module:dns/change} objects.</li>\n</ul>\n",
+        "types": [
+          "Array.<module:dns/change>"
+        ],
+        "typesDescription": "<code>Array</code>.&lt;module:<a href=\"module%3Adns%2Fchange.html\">dns/change</a>&gt;|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?object} callback.nextQuery - A query object representing the next\n    page of results.",
+        "name": "callback.nextQuery",
+        "description": "<ul>\n<li>A query object representing the next     page of results.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - Raw API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var callback = function(err, changes, nextQuery, apiResponse) {\n  // The `metadata` property is populated for you with the metadata at the\n  // time of fetching.\n  changes[0].metadata;\n\n  // However, in cases where you are concerned the metadata could have\n  // changed, use the `getMetadata` method.\n  changes[0].getMetadata(function(err, metadata) {});\n\n  if (nextQuery) {\n    // nextQuery will be non-null if there are more results.\n    zone.getChanges(nextQuery, callback);\n  }\n};\n\nzone.getChanges(callback);\n\n//-\n// Get the changes from your zone as a readable object stream.\n//-\nzone.getChanges()\n  .on('error', console.error)\n  .on('data', function(change) {\n    // change is a Change object.\n  })\n  .on('end', function() {\n    // All changes retrieved.\n  });\n\n//-\n// If you anticipate many results, you can end a stream early to prevent\n// unnecessary processing and API requests.\n//-\nzone.getChanges()\n  .on('data', function(change) {\n    this.end();\n  });",
+        "html": "<p>var callback = function(err, changes, nextQuery, apiResponse) {<br />  // The <code>metadata</code> property is populated for you with the metadata at the<br />  // time of fetching.<br />  changes[0].metadata;</p><p>  // However, in cases where you are concerned the metadata could have<br />  // changed, use the <code>getMetadata</code> method.<br />  changes[0].getMetadata(function(err, metadata) {});</p><p>  if (nextQuery) {<br />    // nextQuery will be non-null if there are more results.<br />    zone.getChanges(nextQuery, callback);<br />  }<br />};</p><p>zone.getChanges(callback);</p><p>//-<br />// Get the changes from your zone as a readable object stream.<br />//-<br />zone.getChanges()<br />  .on(&#39;error&#39;, console.error)<br />  .on(&#39;data&#39;, function(change) {<br />    // change is a Change object.<br />  })<br />  .on(&#39;end&#39;, function() {<br />    // All changes retrieved.<br />  });</p><p>//-<br />// If you anticipate many results, you can end a stream early to prevent<br />// unnecessary processing and API requests.<br />//-<br />zone.getChanges()<br />  .on(&#39;data&#39;, function(change) {<br />    this.end();<br />  });</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get the list of changes associated with this zone. A change is an atomic<br />update to a collection of records.</p>",
+      "summary": "<p>Get the list of changes associated with this zone. A change is an atomic<br />update to a collection of records.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 450,
+    "codeStart": 508,
+    "code": "Zone.prototype.getChanges = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  if (query.sort) {\n    query.sortOrder = query.sort === 'asc' ? 'ascending' : 'descending';\n    delete query.sort;\n  }\n\n  this.request({\n    uri: '/changes',\n    qs: query\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var changes = (resp.changes || []).map(function(change) {\n      var changeInstance = self.change(change.id);\n      changeInstance.metadata = change;\n      return changeInstance;\n    });\n\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    callback(null, changes, nextQuery, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Zone",
+      "cons": "Zone",
+      "name": "getChanges",
+      "string": "Zone.prototype.getChanges()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[ResourceRecordSets: list API Documentation]{@link https://cloud.google.com/dns/api/v1/resourceRecordSets/list}",
+        "html": "<p>[ResourceRecordSets: list API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/resourceRecordSets/list}\">https://cloud.google.com/dns/api/v1/resourceRecordSets/list}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{object=} query - The query object.",
+        "name": "query",
+        "description": "<ul>\n<li>The query object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} query.name - Restricts the list to return only records with\n    this fully qualified domain name.",
+        "name": "query.name",
+        "description": "<ul>\n<li>Restricts the list to return only records with     this fully qualified domain name.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} query.type - Restricts the list to return only records of\n    this type. If present, the \"name\" parameter must also be present.",
+        "name": "query.type",
+        "description": "<ul>\n<li>Restricts the list to return only records of     this type. If present, the &quot;name&quot; parameter must also be present.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} query.maxResults - Maximum number of results to be returned.",
+        "name": "query.maxResults",
+        "description": "<ul>\n<li>Maximum number of results to be returned.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} query.pageToken - The page token.",
+        "name": "query.pageToken",
+        "description": "<ul>\n<li>The page token.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An API error.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An API error.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?module:dns/record[]} callback.records - An array of\n    {module:dns/record} objects.",
+        "name": "callback.records",
+        "description": "<ul>\n<li>An array of     {module:dns/record} objects.</li>\n</ul>\n",
+        "types": [
+          "Array.<module:dns/record>"
+        ],
+        "typesDescription": "<code>Array</code>.&lt;module:<a href=\"module%3Adns%2Frecord.html\">dns/record</a>&gt;|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?object} callback.nextQuery - A query object representing the next\n    page of results.",
+        "name": "callback.nextQuery",
+        "description": "<ul>\n<li>A query object representing the next     page of results.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - Raw API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var callback = function(err, records, nextQuery, apiResponse) {\n  if (!err) {\n    // records is an array of Record objects.\n  }\n\n  if (nextQuery) {\n    zone.getRecords(nextQuery, callback);\n  }\n};\n\nzone.getRecords(callback);\n\n//-\n// Provide a query for further customization.\n//-\n// Get the namespace records for example.com.\nvar query = {\n  name: 'example.com.',\n  type: 'NS'\n};\n\nzone.getRecords(query, callback);\n\n//-\n// Get the records from your zone as a readable object stream.\n//-\nzone.getRecords()\n  .on('error', console.error)\n  .on('data', function(record) {\n    // record is a Record object.\n  })\n  .on('end', function() {\n    // All records retrieved.\n  });\n\n//-\n// If you anticipate many results, you can end a stream early to prevent\n// unnecessary processing and API requests.\n//-\nzone.getRecords()\n  .on('data', function(change) {\n    this.end();\n  });\n\n//-\n// If you only want records of a specific type or types, provide them in\n// place of the query object.\n//-\nzone.getRecords('ns', function(err, records) {\n  if (!err) {\n    // records is an array of NS Record objects in your zone.\n  }\n});\n\n//-\n// You can also specify multiple record types.\n//-\nzone.getRecords(['ns', 'a', 'cname'], function(err, records) {\n  if (!err) {\n    // records is an array of NS, A, and CNAME records in your zone.\n  }\n});",
+        "html": "<p>var callback = function(err, records, nextQuery, apiResponse) {<br />  if (!err) {<br />    // records is an array of Record objects.<br />  }</p><p>  if (nextQuery) {<br />    zone.getRecords(nextQuery, callback);<br />  }<br />};</p><p>zone.getRecords(callback);</p><p>//-<br />// Provide a query for further customization.<br />//-<br />// Get the namespace records for example.com.<br />var query = {<br />  name: &#39;example.com.&#39;,<br />  type: &#39;NS&#39;<br />};</p><p>zone.getRecords(query, callback);</p><p>//-<br />// Get the records from your zone as a readable object stream.<br />//-<br />zone.getRecords()<br />  .on(&#39;error&#39;, console.error)<br />  .on(&#39;data&#39;, function(record) {<br />    // record is a Record object.<br />  })<br />  .on(&#39;end&#39;, function() {<br />    // All records retrieved.<br />  });</p><p>//-<br />// If you anticipate many results, you can end a stream early to prevent<br />// unnecessary processing and API requests.<br />//-<br />zone.getRecords()<br />  .on(&#39;data&#39;, function(change) {<br />    this.end();<br />  });</p><p>//-<br />// If you only want records of a specific type or types, provide them in<br />// place of the query object.<br />//-<br />zone.getRecords(&#39;ns&#39;, function(err, records) {<br />  if (!err) {<br />    // records is an array of NS Record objects in your zone.<br />  }<br />});</p><p>//-<br />// You can also specify multiple record types.<br />//-<br />zone.getRecords([&#39;ns&#39;, &#39;a&#39;, &#39;cname&#39;], function(err, records) {<br />  if (!err) {<br />    // records is an array of NS, A, and CNAME records in your zone.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get the list of records for this zone.</p>",
+      "summary": "<p>Get the list of records for this zone.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 547,
+    "codeStart": 631,
+    "code": "Zone.prototype.getRecords = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  if (is.string(query) || is.array(query)) {\n    var filterByTypes_ = {};\n\n    // For faster lookups, store the record types the user wants in an object.\n    arrify(query).forEach(function(type) {\n      filterByTypes_[type.toUpperCase()] = true;\n    });\n\n    query = {\n      filterByTypes_: filterByTypes_\n    };\n  }\n\n  var requestQuery = extend({}, query);\n  delete requestQuery.filterByTypes_;\n\n  this.request({\n    uri: '/rrsets',\n    qs: requestQuery\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var records = (resp.rrsets || []).map(function(record) {\n      return self.record(record.type, record);\n    });\n\n    if (query.filterByTypes_) {\n      records = records.filter(function(record) {\n        return query.filterByTypes_[record.type];\n      });\n    }\n\n    var nextQuery = null;\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    callback(null, records, nextQuery, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Zone",
+      "cons": "Zone",
+      "name": "getRecords",
+      "string": "Zone.prototype.getRecords()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{string} localPath - The fully qualified path to the zone file.",
+        "name": "localPath",
+        "description": "<ul>\n<li>The fully qualified path to the zone file.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An API or file system error.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An API or file system error.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?module:dns/change} callback.change - A {module:dns/change} object.",
+        "name": "callback.change",
+        "description": "<ul>\n<li>A {module:dns/change} object.</li>\n</ul>\n",
+        "types": [
+          "module:dns/change"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Fchange.html\">dns/change</a>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?object} callback.apiResponse - Raw API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var zoneFilename = '/Users/dave/zonefile.zone';\n\nzone.import(zoneFilename, function(err, change, apiResponse) {\n  if (!err) {\n    // The change was created successfully.\n  }\n});",
+        "html": "<p>var zoneFilename = &#39;/Users/dave/zonefile.zone&#39;;</p><p>zone.import(zoneFilename, function(err, change, apiResponse) {<br />  if (!err) {<br />    // The change was created successfully.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Copy the records from a zone file into this zone.</p>",
+      "summary": "<p>Copy the records from a zone file into this zone.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 685,
+    "codeStart": 705,
+    "code": "Zone.prototype.import = function(localPath, callback) {\n  var self = this;\n\n  fs.readFile(localPath, 'utf-8', function(err, file) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var parsedZonefile = zonefile.parse(file);\n\n    var recordsToCreate = [];\n    function addRecordToCreate(record) {\n      var recordInstance = new Record.fromZoneRecord_(self, recordType, record);\n      recordsToCreate.push(recordInstance);\n    }\n\n    for (var recordType in parsedZonefile) {\n      var recordTypeSet = arrify(parsedZonefile[recordType]);\n      recordTypeSet.forEach(addRecordToCreate);\n    }\n\n    self.addRecords(recordsToCreate, callback);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Zone",
+      "cons": "Zone",
+      "name": "import",
+      "string": "Zone.prototype.import()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{string} type - The type of record to construct or the type of record\n    you are referencing.",
+        "name": "type",
+        "description": "<ul>\n<li>The type of record to construct or the type of record     you are referencing.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} metadata - The metadata of this record.",
+        "name": "metadata",
+        "description": "<ul>\n<li>The metadata of this record.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} metadata.name - The name of the record, e.g.\n    `www.example.com.`.",
+        "name": "metadata.name",
+        "description": "<ul>\n<li>The name of the record, e.g.     <code>www.example.com.</code>.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string[]} metadata.data - Defined in\n    [RFC 1035, section 5](https://goo.gl/9EiM0e) and\n    [RFC 1034, section 3.6.1](https://goo.gl/Hwhsu9).",
+        "name": "metadata.data",
+        "description": "<ul>\n<li>Defined in     <a href=\"https://goo.gl/9EiM0e\">RFC 1035, section 5</a> and<br />  <a href=\"https://goo.gl/Hwhsu9\">RFC 1034, section 3.6.1</a>.</li>\n</ul>\n",
+        "types": [
+          "Array.<string>"
+        ],
+        "typesDescription": "<code>Array</code>.&lt;<code>string</code>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} metadata.ttl - Seconds that the resource is cached by\n    resolvers.",
+        "name": "metadata.ttl",
+        "description": "<ul>\n<li>Seconds that the resource is cached by     resolvers.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{module:dns/record}",
+        "types": [
+          "module:dns/record"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Frecord.html\">dns/record</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:dns/record}</p>"
+      },
+      {
+        "type": "example",
+        "string": "//-\n// Reference an existing record to delete from your zone.\n//-\nvar oldARecord = zone.record('a', {\n  name: 'example.com.',\n  data: '1.2.3.4',\n  ttl: 86400\n});\n\n//-\n// Construct a record to add to your zone.\n//-\nvar newARecord = zone.record('a', {\n  name: 'example.com.',\n  data: '5.6.7.8',\n  ttl: 86400\n});\n\n//-\n// Use these records together to create a change.\n//-\nzone.createChange({\n  add: newARecord,\n  delete: oldARecord\n}, function(err, change, apiResponse) {});",
+        "html": "<p>//-<br />// Reference an existing record to delete from your zone.<br />//-<br />var oldARecord = zone.record(&#39;a&#39;, {<br />  name: &#39;example.com.&#39;,<br />  data: &#39;1.2.3.4&#39;,<br />  ttl: 86400<br />});</p><p>//-<br />// Construct a record to add to your zone.<br />//-<br />var newARecord = zone.record(&#39;a&#39;, {<br />  name: &#39;example.com.&#39;,<br />  data: &#39;5.6.7.8&#39;,<br />  ttl: 86400<br />});</p><p>//-<br />// Use these records together to create a change.<br />//-<br />zone.createChange({<br />  add: newARecord,<br />  delete: oldARecord<br />}, function(err, change, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>A {module:dns/record} object can be used to construct a record you want to<br />add to your zone, or to refer to an existing one.</p><p>Note that using this method will not itself make any API requests. You will<br />use the object returned in other API calls, for example to add a record to<br />your zone or to delete an existing one.</p>",
+      "summary": "<p>A {module:dns/record} object can be used to construct a record you want to<br />add to your zone, or to refer to an existing one.</p>",
+      "body": "<p>Note that using this method will not itself make any API requests. You will<br />use the object returned in other API calls, for example to add a record to<br />your zone or to delete an existing one.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 731,
+    "codeStart": 778,
+    "code": "Zone.prototype.record = function(type, metadata) {\n  return new Record(this, type, metadata);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Zone",
+      "cons": "Zone",
+      "name": "record",
+      "string": "Zone.prototype.record()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}",
+        "html": "<p>[ManagedZones: create API Documentation]{@link <a href=\"https://cloud.google.com/dns/api/v1/managedZones/create}\">https://cloud.google.com/dns/api/v1/managedZones/create}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{string|string[]} recordTypes - Type(s) of records to replace.",
+        "name": "recordTypes",
+        "description": "<ul>\n<li>Type(s) of records to replace.</li>\n</ul>\n",
+        "types": [
+          "string",
+          "Array.<string>"
+        ],
+        "typesDescription": "<code>string</code>|<code>Array</code>.&lt;<code>string</code>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:dns/record|module:dns/record[]} newRecords - The record\n    objects to add.",
+        "name": "newRecords",
+        "description": "<ul>\n<li>The record     objects to add.</li>\n</ul>\n",
+        "types": [
+          "module:dns/record",
+          "Array.<module:dns/record>"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Frecord.html\">dns/record</a>|<code>Array</code>.&lt;module:<a href=\"module%3Adns%2Frecord.html\">dns/record</a>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An API error.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An API error.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?module:dns/change} callback.change - A {module:dns/change} object.",
+        "name": "callback.change",
+        "description": "<ul>\n<li>A {module:dns/change} object.</li>\n</ul>\n",
+        "types": [
+          "module:dns/change"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Fchange.html\">dns/change</a>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?object} callback.apiResponse - Raw API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var newNs1Record = zone.record('ns', {\n  name: 'example.com.',\n  data: 'ns-cloud1.googledomains.com.',\n  ttl: 86400\n});\n\nvar newNs2Record = zone.record('ns', {\n  name: 'example.com.',\n  data: 'ns-cloud2.googledomains.com.',\n  ttl: 86400\n});\n\nvar newNsRecords = [\n  newNs1Record,\n  newNs2Record\n];\n\nzone.replaceRecords('ns', newNsRecords, function(err, change, apiResponse) {\n  if (!err) {\n    // The change was created successfully.\n  }\n});",
+        "html": "<p>var newNs1Record = zone.record(&#39;ns&#39;, {<br />  name: &#39;example.com.&#39;,<br />  data: &#39;ns-cloud1.googledomains.com.&#39;,<br />  ttl: 86400<br />});</p><p>var newNs2Record = zone.record(&#39;ns&#39;, {<br />  name: &#39;example.com.&#39;,<br />  data: &#39;ns-cloud2.googledomains.com.&#39;,<br />  ttl: 86400<br />});</p><p>var newNsRecords = [<br />  newNs1Record,<br />  newNs2Record<br />];</p><p>zone.replaceRecords(&#39;ns&#39;, newNsRecords, function(err, change, apiResponse) {<br />  if (!err) {<br />    // The change was created successfully.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Provide a record type that should be deleted and replaced with other records.</p><p><strong>This is not an atomic request.</strong> Two API requests are made<br />(one to get records of the type that you&#39;ve requested, then another to<br />replace them), which means the operation is not atomic and could result in<br />unexpected changes.</p>",
+      "summary": "<p>Provide a record type that should be deleted and replaced with other records.</p>",
+      "body": "<p><strong>This is not an atomic request.</strong> Two API requests are made<br />(one to get records of the type that you&#39;ve requested, then another to<br />replace them), which means the operation is not atomic and could result in<br />unexpected changes.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 782,
+    "codeStart": 824,
+    "code": "Zone.prototype.replaceRecords = function(recordType, newRecords, callback) {\n  var self = this;\n\n  this.getRecords(recordType, function(err, recordsToDelete) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    self.createChange({\n      add: newRecords,\n      delete: recordsToDelete\n    }, callback);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Zone",
+      "cons": "Zone",
+      "name": "replaceRecords",
+      "string": "Zone.prototype.replaceRecords()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{string[]} recordTypes - Types of records to delete. Ex: 'NS', 'A'.",
+        "name": "recordTypes",
+        "description": "<ul>\n<li>Types of records to delete. Ex: &#39;NS&#39;, &#39;A&#39;.</li>\n</ul>\n",
+        "types": [
+          "Array.<string>"
+        ],
+        "typesDescription": "<code>Array</code>.&lt;<code>string</code>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An API error.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An API error.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?module:dns/change} callback.change - A {module:dns/change} object.",
+        "name": "callback.change",
+        "description": "<ul>\n<li>A {module:dns/change} object.</li>\n</ul>\n",
+        "types": [
+          "module:dns/change"
+        ],
+        "typesDescription": "module:<a href=\"module%3Adns%2Fchange.html\">dns/change</a>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?object} callback.apiResponse - Raw API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>Raw API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "zone.deleteRecordsByType_(['NS', 'A'], function(err, change, apiResponse) {\n  if (!err) {\n    // The change was created successfully.\n  }\n});",
+        "html": "<p>zone.deleteRecordsByType_([&#39;NS&#39;, &#39;A&#39;], function(err, change, apiResponse) {<br />  if (!err) {<br />    // The change was created successfully.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Delete records from the zone matching an array of types.</p>",
+      "summary": "<p>Delete records from the zone matching an array of types.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 840,
+    "codeStart": 858,
+    "code": "Zone.prototype.deleteRecordsByType_ = function(recordTypes, callback) {\n  var self = this;\n\n  this.getRecords(recordTypes, function(err, records) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    if (records.length === 0) {\n      callback();\n      return;\n    }\n\n    self.deleteRecords(records, callback);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Zone",
+      "cons": "Zone",
+      "name": "deleteRecordsByType_",
+      "string": "Zone.prototype.deleteRecordsByType_()"
+    }
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Developer Documentation</p><p>These methods can be used with either a callback or as a readable object<br />stream. <code>streamRouter</code> is used to add this dual behavior.</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": "<p>These methods can be used with either a callback or as a readable object<br />stream. <code>streamRouter</code> is used to add this dual behavior.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 876,
+    "codeStart": 881,
+    "code": "streamRouter.extend(Zone, ['getChanges', 'getRecords']);\n\nmodule.exports = Zone;",
+    "ctx": false
+  }
+]
