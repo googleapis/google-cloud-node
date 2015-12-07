@@ -34,7 +34,19 @@ angular.module('gcloud.docs')
         }, [])
         .sort(function(moduleA, moduleB) {
           // A title matching `gcloud` will come first in the list.
-          return moduleA.title === 'gcloud' ? -1 : moduleA.title > moduleB.title;
+          if (moduleA.title === 'gcloud') {
+            return -1;
+          } else if (moduleB.title === 'gcloud') {
+            return 1;
+          }
+
+          if (moduleA.title < moduleB.title) {
+            return -1;
+          } else if (moduleA.title > moduleB.title) {
+            return 1;
+          }
+
+          return 0;
         });
     };
   })
