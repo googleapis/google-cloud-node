@@ -330,15 +330,27 @@ describe('BigQuery', function() {
             return;
           }
 
-          table.query('SELECT * FROM ' + TABLE_ID + ' WHERE id = ' + data.id)
-            .on('error', done)
-            .once('data', function(row) {
-              assert.strictEqual(row.name, data.name);
-              assert.strictEqual(row.breed, data.breed);
-              assert.strictEqual(row.id, data.id);
-              assert.deepEqual(row.dob, now);
-              done();
-            });
+          function query(callback) {
+            var row;
+
+            table.query('SELECT * FROM ' + TABLE_ID + ' WHERE id = ' + data.id)
+              .on('error', callback)
+              .once('data', function(row_) { row = row_; })
+              .on('end', function() {
+                if (!row) {
+                  callback(new Error('Query returned 0 results.'));
+                  return;
+                }
+
+                assert.strictEqual(row.name, data.name);
+                assert.strictEqual(row.breed, data.breed);
+                assert.strictEqual(row.id, data.id);
+                assert.deepEqual(row.dob, now);
+                callback();
+              });
+          }
+
+          async.retry({ times: 3, interval: 2000 }, query, done);
         });
       });
 
