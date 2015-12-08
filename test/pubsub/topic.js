@@ -40,7 +40,8 @@ describe('Topic', function() {
   var topic;
 
   var PROJECT_ID = 'test-project';
-  var TOPIC_NAME = 'test-topic';
+  var TOPIC_NAME = 'projects/' + PROJECT_ID + '/topics/test-topic';
+  var TOPIC_UNFORMATTED_NAME = TOPIC_NAME.split('/').pop();
   var PUBSUB = {
     projectId: PROJECT_ID,
     createTopic: util.noop
@@ -85,7 +86,7 @@ describe('Topic', function() {
 
       assert.strictEqual(calledWith.parent, pubsubInstance);
       assert.strictEqual(calledWith.baseUrl, '/topics');
-      assert.strictEqual(calledWith.id, TOPIC_NAME);
+      assert.strictEqual(calledWith.id, TOPIC_UNFORMATTED_NAME);
       assert.deepEqual(calledWith.methods, {
         create: true,
         delete: true,
@@ -100,7 +101,7 @@ describe('Topic', function() {
         PUBSUB,
         {
           baseUrl: '/topics',
-          id: TOPIC_NAME
+          id: TOPIC_UNFORMATTED_NAME
         }
       ]);
     });
@@ -116,6 +117,10 @@ describe('Topic', function() {
 
     it('should assign pubsub object to `this`', function() {
       assert.deepEqual(topic.pubsub, PUBSUB);
+    });
+
+    it('should localize the unformatted name', function() {
+      assert.strictEqual(topic.unformattedName, TOPIC_UNFORMATTED_NAME);
     });
   });
 
@@ -142,16 +147,14 @@ describe('Topic', function() {
   });
 
   describe('formatName_', function() {
-    var fullName = 'projects/' + PROJECT_ID + '/topics/' + TOPIC_NAME;
-
     it('should format name', function() {
-      var formattedName = Topic.formatName_(PROJECT_ID, TOPIC_NAME);
-      assert.equal(formattedName, fullName);
+      var formattedName = Topic.formatName_(PROJECT_ID, TOPIC_UNFORMATTED_NAME);
+      assert.equal(formattedName, TOPIC_NAME);
     });
 
     it('should format name when given a complete name', function() {
-      var formattedName = Topic.formatName_(PROJECT_ID, fullName);
-      assert.equal(formattedName, fullName);
+      var formattedName = Topic.formatName_(PROJECT_ID, TOPIC_NAME);
+      assert.equal(formattedName, TOPIC_NAME);
     });
   });
 
