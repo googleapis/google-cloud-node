@@ -70,7 +70,7 @@ Entity.prototype.getNamedKey = function() {
   // [START named_key]
   var taskKey = datastore.key([
     'Task',
-    'sampletask'
+    'sampleTask'
   ]);
   // [END named_key]
 
