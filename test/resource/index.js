@@ -48,9 +48,9 @@ var fakeUtil = extend({}, util, {
   makeAuthenticatedRequestFactory: function() {
     if (makeAuthenticatedRequestFactoryOverride) {
       return makeAuthenticatedRequestFactoryOverride.apply(null, arguments);
-    } else {
-      return util.makeAuthenticatedRequestFactory.apply(null, arguments);
     }
+
+    return util.makeAuthenticatedRequestFactory.apply(null, arguments);
   }
 });
 

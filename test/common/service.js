@@ -27,9 +27,9 @@ var makeAuthenticatedRequestFactoryOverride;
 util.makeAuthenticatedRequestFactory = function() {
   if (makeAuthenticatedRequestFactoryOverride) {
     return makeAuthenticatedRequestFactoryOverride.apply(this, arguments);
-  } else {
-    return makeAuthenticatedRequestFactoryCache.apply(this, arguments);
   }
+
+  return makeAuthenticatedRequestFactoryCache.apply(this, arguments);
 };
 
 describe('Service', function() {
