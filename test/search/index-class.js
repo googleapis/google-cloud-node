@@ -306,6 +306,15 @@ describe('Index', function() {
       index.search(query, assert.ifError);
     });
 
+    it('should use default querystring module', function(done) {
+      index.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.useQuerystring, true);
+        done();
+      };
+
+      index.search('', assert.ifError);
+    });
+
     it('should execute callback with error & API response', function(done) {
       var apiResponse = { a: 'b', c: 'd' };
       var error = new Error('Error.');
