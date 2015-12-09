@@ -1353,6 +1353,20 @@ describe('File', function() {
       });
     });
 
+    it('should not modify the configuration object', function(done) {
+      var config = {
+        expires: Date.now() + 5
+      };
+
+      var originalConfig = extend({}, config);
+
+      file.getSignedPolicy(config, function(err) {
+        assert.ifError(err);
+        assert.deepEqual(config, originalConfig);
+        done();
+      });
+    });
+
     it('should return an error if getCredentials errors', function(done) {
       var error = new Error('Error.');
 
@@ -1638,6 +1652,21 @@ describe('File', function() {
       }, function(err, signedUrl) {
         assert.ifError(err);
         assert.equal(typeof signedUrl, 'string');
+        done();
+      });
+    });
+
+    it('should not modify the configuration object', function(done) {
+      var config = {
+        action: 'read',
+        expires: Date.now() + 5
+      };
+
+      var originalConfig = extend({}, config);
+
+      file.getSignedUrl(config, function(err) {
+        assert.ifError(err);
+        assert.deepEqual(config, originalConfig);
         done();
       });
     });
