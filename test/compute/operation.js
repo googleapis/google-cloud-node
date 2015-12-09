@@ -36,9 +36,9 @@ var fakeUtil = extend({}, util, {
   parseHttpRespBody: function() {
     if (parseHttpRespBodyOverride) {
       return parseHttpRespBodyOverride.apply(null, arguments);
-    } else {
-      return util.parseHttpRespBody.apply(this, arguments);
     }
+
+    return util.parseHttpRespBody.apply(this, arguments);
   }
 });
 
