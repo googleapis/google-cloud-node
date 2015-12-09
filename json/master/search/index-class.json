@@ -724,7 +724,7 @@
     "ignore": false,
     "line": 288,
     "codeStart": 354,
-    "code": "Index.prototype.search = function(query, callback) {\n  var self = this;\n\n  if (is.string(query)) {\n    query = {\n      query: query\n    };\n  }\n\n  if (!is.object(query)) {\n    throw new Error('A query must be either a string or object.');\n  }\n\n  this.request({\n    uri: '/search',\n    qs: query\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var documents = arrify(resp.results)\n      .map(self.documentFromObject_.bind(self));\n\n    callback(null, documents, nextQuery, resp);\n  });\n};",
+    "code": "Index.prototype.search = function(query, callback) {\n  var self = this;\n\n  if (is.string(query)) {\n    query = {\n      query: query\n    };\n  }\n\n  if (!is.object(query)) {\n    throw new Error('A query must be either a string or object.');\n  }\n\n  this.request({\n    uri: '/search',\n    qs: query,\n    useQuerystring: true // See #986.\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var documents = arrify(resp.results)\n      .map(self.documentFromObject_.bind(self));\n\n    callback(null, documents, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Index",
@@ -813,8 +813,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 391,
-    "codeStart": 419,
+    "line": 392,
+    "codeStart": 420,
     "code": "Index.prototype.documentFromObject_ = function(documentObj) {\n  var document = this.document(documentObj.docId);\n\n  if (is.object(documentObj.fields)) {\n    document.fields = documentObj.fields;\n  }\n\n  if (is.number(documentObj.rank)) {\n    document.rank = documentObj.rank;\n  }\n\n  return document;\n};",
     "ctx": {
       "type": "method",
@@ -836,8 +836,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 433,
-    "codeStart": 439,
+    "line": 434,
+    "codeStart": 440,
     "code": "streamRouter.extend(Index, ['getDocuments', 'search']);\n\nmodule.exports = Index;",
     "ctx": false
   }
