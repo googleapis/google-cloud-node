@@ -49,9 +49,9 @@ describe('streamRouter', function() {
 
         if (streamRouterOverrides[streamRouterMethod]) {
           return streamRouterOverrides[streamRouterMethod].apply(this, args);
-        } else {
-          return streamRouterCached[streamRouterMethod].apply(this, args);
         }
+
+        return streamRouterCached[streamRouterMethod].apply(this, args);
       };
     });
   });
