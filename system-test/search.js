@@ -219,9 +219,12 @@ describe('Search', function() {
 
     before(function(done) {
       var questions = document.addField('question');
+      var answers = document.addField('answer');
 
       questions.addTextValue('Where did Ryan go?');
       questions.addTextValue('Where did Silvano go?');
+
+      answers.addTextValue('Where DIDN\'T they go?');
 
       document.create(done);
     });
@@ -231,10 +234,18 @@ describe('Search', function() {
     });
 
     it('should search document', function(done) {
-      index.search(query, function(err, results) {
+      var fields = ['question', 'answer'];
+
+      index.search({
+        query: query,
+        returnFields: fields,
+      }, function(err, results) {
         assert.ifError(err);
-        assert.equal(results.length, 1);
-        assert.equal(results[0].id, DOCUMENT_NAME);
+        assert.strictEqual(results.length, 1);
+
+        var document = results[0];
+        assert.strictEqual(document.id, DOCUMENT_NAME);
+        assert.strictEqual(Object.keys(document.fields).length, fields.length);
         done();
       });
     });
