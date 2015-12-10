@@ -991,6 +991,22 @@ describe('File', function() {
       writable.write('data');
     });
 
+    it('should re-emit response event', function(done) {
+      var writable = file.createWriteStream();
+      var resp = {};
+
+      file.startResumableUpload_ = function(stream) {
+        stream.emit('response', resp);
+      };
+
+      writable.on('response', function(resp_) {
+        assert.strictEqual(resp_, resp);
+        done();
+      });
+
+      writable.write('data');
+    });
+
     it('should cork data on prefinish', function(done) {
       var writable = file.createWriteStream();
 
@@ -2020,13 +2036,32 @@ describe('File', function() {
         file.startResumableUpload_(duplexify(), metadata);
       });
 
-      it('should set the metadata from the response', function(done) {
+      it('should emit the response', function(done) {
+        var resp = {};
+        var uploadStream = through();
+
+        resumableUploadOverride = function() {
+          setImmediate(function() {
+            uploadStream.emit('response', resp);
+          });
+          return uploadStream;
+        };
+
+        uploadStream.on('response', function(resp_) {
+          assert.strictEqual(resp_, resp);
+          done();
+        });
+
+        file.startResumableUpload_(duplexify());
+      });
+
+      it('should set the metadata from the metadata event', function(done) {
         var metadata = {};
         var uploadStream = through();
 
         resumableUploadOverride = function() {
           setImmediate(function() {
-            uploadStream.emit('response', null, metadata);
+            uploadStream.emit('metadata', metadata);
 
             setImmediate(function() {
               assert.strictEqual(file.metadata, metadata);
@@ -2035,7 +2070,6 @@ describe('File', function() {
           });
           return uploadStream;
         };
-
 
         file.startResumableUpload_(duplexify());
       });
