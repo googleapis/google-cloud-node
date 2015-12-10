@@ -496,6 +496,35 @@ describe('common/util', function() {
       });
     });
 
+    it('should emit the response', function(done) {
+      var dup = duplexify();
+      var fakeStream = new stream.Writable();
+      var fakeResponse = {};
+
+      fakeStream.write = function() {};
+
+      utilOverrides.handleResp = function(err, res, body, callback) {
+        callback();
+      };
+
+      requestOverride = function(reqOpts, callback) {
+        callback(null, fakeResponse);
+      };
+
+      var options = {
+        makeAuthenticatedRequest: function(request, opts) {
+          opts.onAuthenticated();
+        }
+      };
+
+      dup.on('response', function(resp) {
+        assert.strictEqual(resp, fakeResponse);
+        done();
+      });
+
+      util.makeWritableStream(dup, options, util.noop);
+    });
+
     it('should pass back the response data to the callback', function(done) {
       var dup = duplexify();
       var fakeStream = new stream.Writable();
