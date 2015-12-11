@@ -933,6 +933,20 @@
       },
       {
         "type": "param",
+        "string": "{string} options.encoding - When pulling for messages, this type is\n    used when converting a message's data to a string. (default: 'utf-8')",
+        "name": "options.encoding",
+        "description": "<ul>\n<li>When pulling for messages, this type is     used when converting a message&#39;s data to a string. (default: &#39;utf-8&#39;)</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
         "string": "{number=} options.interval - Interval in milliseconds to check for new\n    messages. (default: 10)",
         "name": "options.interval",
         "description": "<ul>\n<li>Interval in milliseconds to check for new     messages. (default: 10)</li>\n</ul>\n",
@@ -947,6 +961,20 @@
       },
       {
         "type": "param",
+        "string": "{number} options.maxInProgress - Maximum messages to consume\n    simultaneously.",
+        "name": "options.maxInProgress",
+        "description": "<ul>\n<li>Maximum messages to consume     simultaneously.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
         "string": "{boolean=} options.reuseExisting - If the subscription already exists,\n    reuse it. The options of the existing subscription are not changed. If\n    false, attempting to create a subscription that already exists will fail.\n    (default: false)",
         "name": "options.reuseExisting",
         "description": "<ul>\n<li>If the subscription already exists,     reuse it. The options of the existing subscription are not changed. If<br />  false, attempting to create a subscription that already exists will fail.<br />  (default: false)</li>\n</ul>\n",
@@ -955,6 +983,20 @@
         ],
         "typesDescription": "<code>boolean</code>|<code>undefined</code>",
         "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.timeout - Set a maximum amount of time in\n    milliseconds on an HTTP request to pull new messages to wait for a\n    response before the connection is broken.",
+        "name": "options.timeout",
+        "description": "<ul>\n<li>Set a maximum amount of time in     milliseconds on an HTTP request to pull new messages to wait for a<br />  response before the connection is broken.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
         "nullable": false,
         "nonNullable": false,
         "variable": false
@@ -990,7 +1032,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 362,
-    "codeStart": 396,
+    "codeStart": 403,
     "code": "Topic.prototype.subscribe = function(subName, options, callback) {\n  this.pubsub.subscribe(this, subName, options, callback);\n};",
     "ctx": {
       "type": "method",
@@ -1088,8 +1130,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 400,
-    "codeStart": 424,
+    "line": 407,
+    "codeStart": 431,
     "code": "Topic.prototype.subscription = function(name, options) {\n  options = options || {};\n  options.topic = this;\n\n  return this.pubsub.subscription(name, options);\n};\n\nmodule.exports = Topic;",
     "ctx": {
       "type": "method",

@@ -833,6 +833,20 @@
       },
       {
         "type": "param",
+        "string": "{string} options.encoding - When pulling for messages, this type is\n    used when converting a message's data to a string. (default: 'utf-8')",
+        "name": "options.encoding",
+        "description": "<ul>\n<li>When pulling for messages, this type is     used when converting a message&#39;s data to a string. (default: &#39;utf-8&#39;)</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
         "string": "{number} options.interval - Interval in milliseconds to check for new\n    messages. (default: 10)",
         "name": "options.interval",
         "description": "<ul>\n<li>Interval in milliseconds to check for new     messages. (default: 10)</li>\n</ul>\n",
@@ -868,6 +882,20 @@
           "boolean"
         ],
         "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.timeout - Set a maximum amount of time in\n    milliseconds on an HTTP request to pull new messages to wait for a\n    response before the connection is broken.",
+        "name": "options.timeout",
+        "description": "<ul>\n<li>Set a maximum amount of time in     milliseconds on an HTTP request to pull new messages to wait for a<br />  response before the connection is broken.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -946,8 +974,8 @@
     "isEvent": false,
     "ignore": false,
     "line": 369,
-    "codeStart": 432,
-    "code": "PubSub.prototype.subscribe = function(topic, subName, options, callback) {\n  var self = this;\n\n  if (!is.string(topic) && !(topic instanceof Topic)) {\n    throw new Error('A Topic is required for a new subscription.');\n  }\n\n  if (!is.string(subName)) {\n    throw new Error('A subscription name is required for a new subscription.');\n  }\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  if (is.string(topic)) {\n    topic = this.topic(topic);\n  }\n\n  var body = extend(true, {}, options, {\n    topic: topic.name\n  });\n\n  delete body.autoAck;\n  delete body.interval;\n  delete body.maxInProgress;\n  delete body.reuseExisting;\n\n  this.request({\n    method: 'PUT',\n    uri: '/subscriptions/' + subName,\n    json: body\n  }, function(err, resp) {\n    if (err && !(err.code === 409 && options.reuseExisting)) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var subscription = self.subscription(subName, options);\n    callback(null, subscription, resp);\n  });\n};",
+    "codeStart": 437,
+    "code": "PubSub.prototype.subscribe = function(topic, subName, options, callback) {\n  var self = this;\n\n  if (!is.string(topic) && !(topic instanceof Topic)) {\n    throw new Error('A Topic is required for a new subscription.');\n  }\n\n  if (!is.string(subName)) {\n    throw new Error('A subscription name is required for a new subscription.');\n  }\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  if (is.string(topic)) {\n    topic = this.topic(topic);\n  }\n\n  var body = extend(true, {}, options, {\n    topic: topic.name\n  });\n\n  delete body.autoAck;\n  delete body.encoding;\n  delete body.interval;\n  delete body.maxInProgress;\n  delete body.reuseExisting;\n  delete body.timeout;\n\n  this.request({\n    method: 'PUT',\n    uri: '/subscriptions/' + subName,\n    json: body\n  }, function(err, resp) {\n    if (err && !(err.code === 409 && options.reuseExisting)) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var subscription = self.subscription(subName, options);\n    callback(null, subscription, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "PubSub",
@@ -1094,8 +1122,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 476,
-    "codeStart": 509,
+    "line": 483,
+    "codeStart": 516,
     "code": "PubSub.prototype.subscription = function(name, options) {\n  if (!name) {\n    throw new Error('The name of a subscription is required.');\n  }\n\n  options = options || {};\n  options.name = name;\n  return new Subscription(this, options);\n};",
     "ctx": {
       "type": "method",
@@ -1159,8 +1187,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 519,
-    "codeStart": 534,
+    "line": 526,
+    "codeStart": 541,
     "code": "PubSub.prototype.topic = function(name) {\n  if (!name) {\n    throw new Error('A name must be specified for a new topic.');\n  }\n\n  return new Topic(this, name);\n};",
     "ctx": {
       "type": "method",
@@ -1182,8 +1210,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 542,
-    "codeStart": 547,
+    "line": 549,
+    "codeStart": 554,
     "code": "streamRouter.extend(PubSub, ['getSubscriptions', 'getTopics']);\n\nmodule.exports = PubSub;",
     "ctx": false
   }
