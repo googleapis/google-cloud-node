@@ -490,14 +490,16 @@ describe('PubSub', function() {
 
     it('should pass options to the api request', function(done) {
       var options = {
-        autoAck: true,
-        interval: 3,
-        reuseExisting: false,
         ackDeadlineSeconds: 90,
+        autoAck: true,
+        encoding: 'utf-8',
+        interval: 3,
         maxInProgress: 5,
         pushConfig: {
           pushEndpoint: 'https://domain/push'
-        }
+        },
+        reuseExisting: false,
+        timeout: 30000
       };
 
       var expectedBody = extend({}, options, {
@@ -505,9 +507,11 @@ describe('PubSub', function() {
       });
 
       delete expectedBody.autoAck;
+      delete expectedBody.encoding;
       delete expectedBody.interval;
       delete expectedBody.maxInProgress;
       delete expectedBody.reuseExisting;
+      delete expectedBody.timeout;
 
       pubsub.topic = function() {
         return {
