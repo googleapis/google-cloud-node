@@ -17,6 +17,7 @@ This client supports the following Google Cloud Platform services:
 * [Google Cloud Storage](#google-cloud-storage)
 * [Google Compute Engine](#google-compute-engine)
 * [Google Prediction API](#google-prediction-api)
+* [Google Translate API](#google-translate-api)
 * [Google Cloud Logging](#google-cloud-logging-beta) (Beta)
 * [Google Cloud Resource Manager](#google-cloud-resource-manager-beta) (Beta)
 * [Google Cloud Search](#google-cloud-search-alpha) (Alpha)
@@ -389,6 +390,56 @@ model.query('Hello', function(err, results) {
 ```
 
 
+## Google Translate API
+
+- [API Documentation][gcloud-translate-docs]
+- [Official Documentation][cloud-translate-docs]
+
+**An API key is required for Translate.** See [Identifying your application to Google][api-key-howto].
+
+#### Preview
+
+```js
+var gcloud = require('gcloud');
+
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
+var translate = gcloud.translate({
+  key: 'API Key'
+});
+
+// Translate a string of text.
+translate.translate('Hello', 'es', function(err, translation) {
+  if (!err) {
+    // translation = 'Hola'
+  }
+});
+
+// Detect a language from a string of text.
+translate.detect('Hello', function(err, results) {
+  if (!err) {
+    // results = {
+    //   language: 'en',
+    //   confidence: 1,
+    //   input: 'Hello'
+    // }
+  }
+});
+
+// Get a list of supported languages.
+translate.getLanguages(function(err, languages) {
+  if (!err) {
+    // languages = [
+    //   'af',
+    //   'ar',
+    //   'az',
+    //   ...
+    // ]
+  }
+});
+```
+
+
 ## Google Cloud Logging (Beta)
 
 > **This is a Beta release of Google Cloud Logging.** This API is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
@@ -542,6 +593,7 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [gcloud-resource-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/resource
 [gcloud-search-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/search
 [gcloud-storage-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/storage
+[gcloud-translate-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/translate
 
 [nodejs-getting-started]: https://github.com/GoogleCloudPlatform/nodejs-getting-started
 [nodejs-getting-started-tutorial]: https://cloud.google.com/nodejs/getting-started/hello-world
@@ -553,6 +605,7 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 
 [dev-console]: https://console.developers.google.com/project
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
+[api-key-howto]: https://cloud.google.com/translate/v2/using_rest#auth
 
 [googleapis]: https://github.com/google/google-api-nodejs-client
 
@@ -573,6 +626,8 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 
 [cloud-resource-docs]: https://cloud.google.com/resource-manager
 
-[cloud-search-docs]: https://cloud.google.com/search/
+[cloud-search-docs]: https://cloud.google.com/search
 
 [cloud-storage-docs]: https://cloud.google.com/storage/docs/overview
+
+[cloud-translate-docs]: https://cloud.google.com/translate/docs
