@@ -18,7 +18,6 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var mockery = require('mockery');
 var through = require('through2');
 var util = require('../../lib/common/util.js');
 var uuid = require('node-uuid');
@@ -32,10 +31,6 @@ describe('streamRouter', function() {
   function FakeClass() {}
 
   before(function() {
-    mockery.enable({
-      useCleanCache: true,
-      warnOnUnregistered: false
-    });
     streamRouter = require('../../lib/common/stream-router.js');
     var streamRouterCached = extend(true, {}, streamRouter);
 
@@ -54,11 +49,6 @@ describe('streamRouter', function() {
         return streamRouterCached[streamRouterMethod].apply(this, args);
       };
     });
-  });
-
-  after(function() {
-    mockery.deregisterAll();
-    mockery.disable();
   });
 
   beforeEach(function() {
