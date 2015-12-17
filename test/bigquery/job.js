@@ -78,6 +78,21 @@ describe('BigQuery/Job', function() {
     });
   });
 
+  describe('cancel', function() {
+    it('should pass a cancelJobResponse to the callback', function(done) {
+      var cancelJobResponse = {job: JOB_ID, kind: 'kind'};
+      job.bigQuery.request = function(reqOpts, cb) {
+        cb(null, cancelJobResponse);
+      };
+
+      job.cancel(function(err, response) {
+        assert.ifError(err);
+        assert.deepEqual(response, cancelJobResponse);
+        done();
+      });
+    });
+  });
+
   describe('getQueryResults', function() {
     var options = {
       a: 'b',
