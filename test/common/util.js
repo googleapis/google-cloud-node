@@ -17,7 +17,7 @@
 'use strict';
 
 var assert = require('assert');
-var duplexify = require('duplexify');
+var duplexify;
 var extend = require('extend');
 var googleAuth = require('google-auto-auth');
 var mockery = require('mockery');
@@ -74,6 +74,8 @@ describe('common/util', function() {
           .apply(this, arguments);
       };
     });
+
+    duplexify = require('duplexify');
   });
 
   after(function() {
