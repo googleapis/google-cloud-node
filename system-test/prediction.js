@@ -193,7 +193,30 @@ describe('Prediction', function() {
       before(function(done) {
         model.create({
           data: file
-        }, done);
+        }, function(err) {
+          if (err) {
+            done(err);
+            return;
+          }
+
+          function isModelTrained(callback) {
+            model.getMetadata(function(err, metadata) {
+              if (err) {
+                callback(err);
+                return;
+              }
+
+              if (metadata.trainingStatus === 'RUNNING') {
+                callback(new Error('Model still training.'));
+                return;
+              }
+
+              callback();
+            });
+          }
+
+          async.retry({ times: 5, interval: 10000 }, isModelTrained, done);
+        });
       });
 
       after(function(done) {
@@ -201,36 +224,16 @@ describe('Prediction', function() {
       });
 
       it('should return results', function(done) {
-        // The model needs to process the new data before it can be queried.
-        async.retry(
-          {
-            times: 5,
-            interval: 7500
-          },
-
-          function(callback) {
-            model.query('hello', callback);
-          },
-
-          function(err, results) {
-            assert.ifError(err);
-            assert.strictEqual(results.winner, 'English');
-            assert.strictEqual(results.scores[0].score, 1);
-            done();
-          });
+        model.query('hello', function(err, results) {
+          assert.ifError(err);
+          assert.strictEqual(results.winner, 'English');
+          assert.strictEqual(results.scores[0].score, 1);
+          done();
+        });
       });
 
       it('should return analysis', function(done) {
-        var model = prediction.model(generateName());
-
-        model.create(function(err, model) {
-          assert.ifError(err);
-
-          model.analyze(function(err) {
-            assert.ifError(err);
-            model.delete(done);
-          });
-        });
+        model.analyze(done);
       });
     });
   });
