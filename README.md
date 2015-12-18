@@ -341,7 +341,7 @@ zone.createVM(name, { os: 'ubuntu' }, function(err, vm, operation) {
 ## Google Prediction API
 
 - [API Documentation][gcloud-prediction-docs]
-- [Official Documentation][prediction-docs]
+- [Official Documentation][cloud-prediction-docs]
 
 #### Preview
 
