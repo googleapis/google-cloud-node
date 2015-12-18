@@ -17,7 +17,7 @@
 'use strict';
 
 var assert = require('assert');
-var duplexify = require('duplexify');
+var duplexify;
 var extend = require('extend');
 var format = require('string-format-obj');
 var fs = require('fs');
@@ -103,6 +103,7 @@ describe('File', function() {
     });
 
     File = require('../../lib/storage/file.js');
+    duplexify = require('duplexify');
   });
 
   after(function() {
@@ -2082,7 +2083,7 @@ describe('File', function() {
         resumableUploadOverride = function() {
           var uploadStream = through();
           setImmediate(function() {
-            uploadStream.emit('finish');
+            uploadStream.end();
           });
           return uploadStream;
         };
