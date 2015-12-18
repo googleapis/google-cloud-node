@@ -135,6 +135,17 @@ angular.module('gcloud.docs')
       ]
     },
 
+    prediction: {
+      title: 'Prediction',
+      _url: '{baseUrl}/prediction',
+      pages: [
+        {
+          title: 'Model',
+          url: '/model'
+        }
+      ]
+    },
+
     pubsub: {
       title: 'PubSub',
       _url: '{baseUrl}/pubsub',
@@ -261,7 +272,10 @@ angular.module('gcloud.docs')
       // introduce resource api.
       '>=0.22.0': ['resource'],
 
-      // introduce Storage#Channel
-      '>=0.26.0': ['storageWithChannels']
+      // introduce Storage#Channel.
+      '>=0.26.0': ['storageWithChannels'],
+
+      // introduce prediction api.
+      '>=0.27.0': ['prediction']
     }
   });
