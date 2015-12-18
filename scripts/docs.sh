@@ -43,6 +43,9 @@
 ./node_modules/.bin/dox < lib/datastore/request.js > docs/json/master/datastore/request.json &
 ./node_modules/.bin/dox < lib/datastore/transaction.js > docs/json/master/datastore/transaction.json &
 
+./node_modules/.bin/dox < lib/prediction/index.js > docs/json/master/prediction/index.json &
+./node_modules/.bin/dox < lib/prediction/model.js > docs/json/master/prediction/model.json &
+
 ./node_modules/.bin/dox < lib/pubsub/index.js > docs/json/master/pubsub/index.json &
 ./node_modules/.bin/dox < lib/pubsub/subscription.js > docs/json/master/pubsub/subscription.json &
 ./node_modules/.bin/dox < lib/pubsub/topic.js > docs/json/master/pubsub/topic.json &
