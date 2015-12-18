@@ -303,6 +303,61 @@
     "tags": [
       {
         "type": "type",
+        "string": "{module:prediction}",
+        "types": [
+          "module:prediction"
+        ],
+        "typesDescription": "module:<a href=\"module%3Aprediction.html\">prediction</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:prediction}</p>"
+      },
+      {
+        "type": "return",
+        "string": "{module:prediction}",
+        "types": [
+          "module:prediction"
+        ],
+        "typesDescription": "module:<a href=\"module%3Aprediction.html\">prediction</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:prediction}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\nvar dns = gcloud.prediction({\n  projectId: 'grape-spaceship-123',\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var dns = gcloud.prediction({<br />  projectId: &#39;grape-spaceship-123&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>The <a href=\"https://cloud.google.com/prediction/docs/getting-started\">Google Prediction API</a><br />provides pattern-matching and machine learning capabilities. Given a set of<br />data examples to train against, you can create applications that can<br />perform the following tasks:</p><ul>\n<li>Given a user&#39;s past viewing habits, predict what other movies or<br />products a user might like.</li>\n<li>Categorize emails as spam or non-spam.</li>\n<li>Analyze posted comments about your product to determine whether they<br />have a positive or negative tone.</li>\n<li>Guess how much a user might spend on a given day, given his spending<br />history.</li>\n</ul>\n",
+      "summary": "<p>The <a href=\"https://cloud.google.com/prediction/docs/getting-started\">Google Prediction API</a><br />provides pattern-matching and machine learning capabilities. Given a set of<br />data examples to train against, you can create applications that can<br />perform the following tasks:</p>",
+      "body": "<ul>\n<li>Given a user&#39;s past viewing habits, predict what other movies or<br />products a user might like.</li>\n<li>Categorize emails as spam or non-spam.</li>\n<li>Analyze posted comments about your product to determine whether they<br />have a positive or negative tone.</li>\n<li>Guess how much a user might spend on a given day, given his spending<br />history.</li>\n</ul>\n"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 111,
+    "codeStart": 136,
+    "code": "prediction: require('./prediction'),",
+    "ctx": {
+      "type": "property",
+      "name": "prediction",
+      "value": "require('./prediction'),",
+      "string": "prediction"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
         "string": "{module:pubsub}",
         "types": [
           "module:pubsub"
@@ -344,8 +399,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 111,
-    "codeStart": 127,
+    "line": 138,
+    "codeStart": 154,
     "code": "pubsub: require('./pubsub'),",
     "ctx": {
       "type": "property",
@@ -399,8 +454,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 129,
-    "codeStart": 157,
+    "line": 156,
+    "codeStart": 184,
     "code": "resource: require('./resource'),",
     "ctx": {
       "type": "property",
@@ -454,8 +509,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 159,
-    "codeStart": 182,
+    "line": 186,
+    "codeStart": 209,
     "code": "search: require('./search'),",
     "ctx": {
       "type": "property",
@@ -509,8 +564,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 184,
-    "codeStart": 200,
+    "line": 211,
+    "codeStart": 227,
     "code": "storage: require('./storage')\n};",
     "ctx": {
       "type": "property",
@@ -551,8 +606,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 203,
-    "codeStart": 211,
+    "line": 230,
+    "codeStart": 238,
     "code": "var scopedApis = {\n  datastore: true\n};",
     "ctx": {
       "type": "declaration",
@@ -573,8 +628,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 215,
-    "codeStart": 230
+    "line": 242,
+    "codeStart": 257
   },
   {
     "tags": [
@@ -732,8 +787,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 230,
-    "codeStart": 343,
+    "line": 257,
+    "codeStart": 370,
     "code": "function gcloud(config) {\n  config = extend(true, { interceptors_: [] }, config);\n\n  var gcloudExposedApi = {\n    config_: config,\n    interceptors: config.interceptors_\n  };\n\n  return Object.keys(apis).reduce(function(gcloudExposedApi, apiName) {\n    var Class = apis[apiName];\n\n    if (scopedApis[apiName]) {\n      gcloudExposedApi[apiName] = new Class(config);\n    } else {\n      gcloudExposedApi[apiName] = Class;\n    }\n\n    return gcloudExposedApi;\n  }, gcloudExposedApi);\n}\n\nmodule.exports = extend(gcloud, apis);",
     "ctx": {
       "type": "function",
