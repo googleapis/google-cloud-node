@@ -43,6 +43,11 @@
 ./node_modules/.bin/dox < lib/datastore/request.js > docs/json/master/datastore/request.json &
 ./node_modules/.bin/dox < lib/datastore/transaction.js > docs/json/master/datastore/transaction.json &
 
+./node_modules/.bin/dox < lib/logging/entry.js > docs/json/master/logging/entry.json &
+./node_modules/.bin/dox < lib/logging/index.js > docs/json/master/logging/index.json &
+./node_modules/.bin/dox < lib/logging/log.js > docs/json/master/logging/log.json &
+./node_modules/.bin/dox < lib/logging/sink.js > docs/json/master/logging/sink.json &
+
 ./node_modules/.bin/dox < lib/prediction/index.js > docs/json/master/prediction/index.json &
 ./node_modules/.bin/dox < lib/prediction/model.js > docs/json/master/prediction/model.json &
 
