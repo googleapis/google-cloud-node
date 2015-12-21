@@ -1,0 +1,203 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2015 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2015 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
+  },
+  {
+    "tags": [
+      {
+        "type": "module",
+        "string": "logging/entry",
+        "html": "<p>logging/entry</p>"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 17,
+    "codeStart": 21,
+    "code": "'use strict';\n\nvar extend = require('extend');\nvar is = require('is');",
+    "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[LogEntry JSON representation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry}",
+        "html": "<p>[LogEntry JSON representation]{@link <a href=\"https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry}\">https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{object=|string=} resource - See a\n    [Monitored Resource](https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource).",
+        "name": "resource",
+        "description": "<ul>\n<li>See a     <a href=\"https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource\">Monitored Resource</a>.</li>\n</ul>\n",
+        "types": [
+          "object",
+          "string"
+        ],
+        "typesDescription": "<code>object</code>|<code>string</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object|string} data - The data to use as the value for this log\n    entry.",
+        "name": "data",
+        "description": "<ul>\n<li>The data to use as the value for this log     entry.</li>\n</ul>\n",
+        "types": [
+          "object",
+          "string"
+        ],
+        "typesDescription": "<code>object</code>|<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{module:logging/entry}",
+        "types": [
+          "module:logging/entry"
+        ],
+        "typesDescription": "module:<a href=\"module%3Alogging%2Fentry.html\">logging/entry</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:logging/entry}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'grape-spaceship-123'\n});\n\nvar logging = gcloud.logging();\n\nvar syslog = logging.log('syslog');\n\nvar resource = {\n  type: 'gce_instance',\n  labels: {\n    zone: 'global',\n    instance_id: 3\n  }\n};\n\nvar entry = syslog.entry(resource, {\n  delegate: process.env.user\n});\n\nsyslog.alert(entry, function(err, apiResponse) {\n  if (!error) {\n    // Log entry inserted successfully.\n  }\n});\n\n//-\n// You will also receive `Entry` objects when using\n// {module:logging#getEntries} and {module:logging/log#getEntries}.\n//-\nlogging.getEntries(function(err, entries) {\n  if (!err) {\n    // entries[0].data = The data value from the log entry.\n  }\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>var logging = gcloud.logging();</p><p>var syslog = logging.log(&#39;syslog&#39;);</p><p>var resource = {<br />  type: &#39;gce_instance&#39;,<br />  labels: {<br />    zone: &#39;global&#39;,<br />    instance_id: 3<br />  }<br />};</p><p>var entry = syslog.entry(resource, {<br />  delegate: process.env.user<br />});</p><p>syslog.alert(entry, function(err, apiResponse) {<br />  if (!error) {<br />    // Log entry inserted successfully.<br />  }<br />});</p><p>//-<br />// You will also receive <code>Entry</code> objects when using<br />// {module:logging#getEntries} and {module:logging/log#getEntries}.<br />//-<br />logging.getEntries(function(err, entries) {<br />  if (!err) {<br />    // entries[0].data = The data value from the log entry.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create an entry object to define new data to insert into a log.</p>",
+      "summary": "<p>Create an entry object to define new data to insert into a log.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 26,
+    "codeStart": 75,
+    "code": "function Entry(resource, data) {\n  if (!data) {\n    this.data = resource;\n    return;\n  }\n\n  this.resource = resource;\n  this.data = data;\n}",
+    "ctx": {
+      "type": "function",
+      "name": "Entry",
+      "string": "Entry()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{object} entry - An API representation of an entry. See a\n    [LogEntry](https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry).",
+        "name": "entry",
+        "description": "<ul>\n<li>An API representation of an entry. See a     <a href=\"https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry\">LogEntry</a>.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{module:logging/entity}",
+        "types": [
+          "module:logging/entity"
+        ],
+        "typesDescription": "module:<a href=\"module%3Alogging%2Fentity.html\">logging/entity</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:logging/entity}</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create an Entry object from an API response, such as <code>entries:list</code>.</p>",
+      "summary": "<p>Create an Entry object from an API response, such as <code>entries:list</code>.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 85,
+    "codeStart": 94,
+    "code": "Entry.fromApiResponse_ = function(entry) {\n  // Only one of these are populated.\n  var data = entry.protoPayload || entry.jsonPayload || entry.textPayload;\n  return extend(new Entry(entry.resource, data), entry);\n};",
+    "ctx": {
+      "type": "method",
+      "receiver": "Entry",
+      "name": "fromApiResponse_",
+      "string": "Entry.fromApiResponse_()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "<p>Serialize an entry to the format the API expects.</p>",
+      "summary": "<p>Serialize an entry to the format the API expects.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 100,
+    "codeStart": 105,
+    "code": "Entry.prototype.toJSON = function() {\n  var entry = extend(true, {}, this);\n\n  var whitelist = [\n    'logName',\n    'resource',\n    'timestamp',\n    'severity',\n    'insertId',\n    'httpRequest',\n    'labels',\n    'operation'\n  ];\n\n  for (var prop in entry) {\n    if (whitelist.indexOf(prop) === -1) {\n      delete entry[prop];\n    }\n  }\n\n  if (is.string(this.resource)) {\n    entry.resource = {\n      type: this.resource\n    };\n  }\n\n  if (is.object(this.data)) {\n    entry.jsonPayload = this.data;\n  } else if (is.string(this.data)) {\n    entry.textPayload = this.data;\n  }\n\n  return entry;\n};\n\nmodule.exports = Entry;",
+    "ctx": {
+      "type": "method",
+      "constructor": "Entry",
+      "cons": "Entry",
+      "name": "toJSON",
+      "string": "Entry.prototype.toJSON()"
+    }
+  }
+]

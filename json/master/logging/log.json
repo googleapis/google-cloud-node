@@ -1,0 +1,1074 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2015 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2015 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
+  },
+  {
+    "tags": [
+      {
+        "type": "module",
+        "string": "logging/log",
+        "html": "<p>logging/log</p>"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 17,
+    "codeStart": 21,
+    "code": "'use strict';\n\nvar arrify = require('arrify');\nvar extend = require('extend');\nvar is = require('is');\nvar JSONStream = require('JSONStream');\nvar nodeutil = require('util');\nvar propAssign = require('prop-assign');\nvar pumpify = require('pumpify');\nvar streamEvents = require('stream-events');\nvar through = require('through2');",
+    "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:logging/entry}",
+        "types": [
+          "module:logging/entry"
+        ],
+        "typesDescription": "module:<a href=\"module%3Alogging%2Fentry.html\">logging/entry</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:logging/entry}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 33,
+    "codeStart": 37,
+    "code": "var Entry = require('./entry.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Entry",
+      "value": "require('./entry.js')",
+      "string": "Entry"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/serviceObject}",
+        "types": [
+          "module:common/serviceObject"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2FserviceObject.html\">common/serviceObject</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/serviceObject}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 39,
+    "codeStart": 43,
+    "code": "var ServiceObject = require('../common/service-object.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "ServiceObject",
+      "value": "require('../common/service-object.js')",
+      "string": "ServiceObject"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Introduction to Logs]{@link https://cloud.google.com/logging/docs/api/#logs}",
+        "html": "<p>[Introduction to Logs]{@link <a href=\"https://cloud.google.com/logging/docs/api/#logs}\">https://cloud.google.com/logging/docs/api/#logs}</a></p>"
+      },
+      {
+        "type": "alias",
+        "string": "module:logging/log",
+        "html": "<p>module:logging/log</p>"
+      },
+      {
+        "type": "constructor",
+        "string": "",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{object} options - [Configuration object](#/docs/?method=gcloud).",
+        "name": "options",
+        "description": "<ul>\n<li><a href=\"#/docs/?method=gcloud\">Configuration object</a>.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'grape-spaceship-123'\n});\n\nvar logging = gcloud.logging();\nvar log = logging.log('syslog');",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>var logging = gcloud.logging();<br />var log = logging.log(&#39;syslog&#39;);</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>A log is a named collection of entries, each entry representing a timestamped<br />event. Logs can be produced by Google Cloud Platform services, by third-party<br />services, or by your applications. For example, the log <code>apache-access</code> is<br />produced by the Apache Web Server, but the log<br /><code>compute.googleapis.com/activity_log</code> is produced by Google Compute Engine.</p>",
+      "summary": "<p>A log is a named collection of entries, each entry representing a timestamped<br />event. Logs can be produced by Google Cloud Platform services, by third-party<br />services, or by your applications. For example, the log <code>apache-access</code> is<br />produced by the Apache Web Server, but the log<br /><code>compute.googleapis.com/activity_log</code> is produced by Google Compute Engine.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": true,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 45,
+    "codeStart": 68,
+    "code": "function Log(logging, name) {\n  var methods = {",
+    "ctx": {
+      "type": "constructor",
+      "name": "Log",
+      "string": "Log()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[projects.logs.delete API Documentation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.logs/delete}",
+        "html": "<p>[projects.logs.delete API Documentation]{@link <a href=\"https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.logs/delete}\">https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.logs/delete}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this\n    request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this     request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "log.delete(function(err, apiResponse) {\n  if (!err) {\n    // The log was deleted.\n  }\n});",
+        "html": "<p>log.delete(function(err, apiResponse) {<br />  if (!err) {<br />    // The log was deleted.<br />  }<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Delete the log.</p>",
+      "summary": "<p>Delete the log.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 70,
+    "codeStart": 87,
+    "code": "delete: true\n  };\n\n  this.formattedName_ = Log.formatName_(logging.projectId, name);\n  this.name = this.formattedName_.split('/').pop();\n\n  ServiceObject.call(this, {\nparent: logging,\nbaseUrl: '/logs',\nid: this.name,\nmethods: methods\n  });\n}\n\nnodeutil.inherits(Log, ServiceObject);",
+    "ctx": {
+      "type": "property",
+      "name": "delete",
+      "value": "true",
+      "string": "delete"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{object|object[]} entries - Log entries.",
+        "name": "entries",
+        "description": "<ul>\n<li>Log entries.</li>\n</ul>\n",
+        "types": [
+          "object",
+          "Array.<object>"
+        ],
+        "typesDescription": "<code>object</code>|<code>Array</code>.&lt;<code>object</code>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} severity - The desired severity level.",
+        "name": "severity",
+        "description": "<ul>\n<li>The desired severity level.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Return an array of log entries with the desired severity assigned.</p>",
+      "summary": "<p>Return an array of log entries with the desired severity assigned.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 103,
+    "codeStart": 111,
+    "code": "Log.assignSeverityToEntries_ = function(entries, severity) {\n  var entriesClone = [].slice.call(entries);\n  return arrify(entriesClone).map(propAssign('severity', severity));\n};",
+    "ctx": {
+      "type": "method",
+      "receiver": "Log",
+      "name": "assignSeverityToEntries_",
+      "string": "Log.assignSeverityToEntries_()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "return",
+        "string": "{string}",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{string}</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Format the name of a log. A log&#39;s full name is in the format of<br />&#39;projects/{projectId}/logs/{logName}&#39;.</p>",
+      "summary": "<p>Format the name of a log. A log&#39;s full name is in the format of<br />&#39;projects/{projectId}/logs/{logName}&#39;.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 116,
+    "codeStart": 124,
+    "code": "Log.formatName_ = function(projectId, name) {\n  var path = 'projects/' + projectId + '/logs/';\n  name = name.replace(path, '');\n\n  if (decodeURIComponent(name) === name) {\n    // The name has not been encoded yet.\n    name = encodeURIComponent(name);\n  }\n\n  return path + name;\n};",
+    "ctx": {
+      "type": "method",
+      "receiver": "Log",
+      "name": "formatName_",
+      "string": "Log.formatName_()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "example",
+        "string": "var entry = log.entry('compute.googleapis.com', {\n  user: process.env.USER\n});\n\nlog.alert(entry, function(err, apiResponse) {});",
+        "html": "<p>var entry = log.entry(&#39;compute.googleapis.com&#39;, {<br />  user: process.env.USER<br />});</p><p>log.alert(entry, function(err, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Write a log entry with a severity of &quot;ALERT&quot;.</p><p>This is a simple wrapper around {module:logging/log#write}. All arguments are<br />the same as documented there.</p>",
+      "summary": "<p>Write a log entry with a severity of &quot;ALERT&quot;.</p>",
+      "body": "<p>This is a simple wrapper around {module:logging/log#write}. All arguments are<br />the same as documented there.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 136,
+    "codeStart": 149,
+    "code": "Log.prototype.alert = function(entry, options, callback) {\n  this.write(Log.assignSeverityToEntries_(entry, 'ALERT'), options, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Log",
+      "cons": "Log",
+      "name": "alert",
+      "string": "Log.prototype.alert()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "return",
+        "string": "{WritableStream}",
+        "types": [
+          "WritableStream"
+        ],
+        "typesDescription": "<a href=\"WritableStream.html\">WritableStream</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{WritableStream}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var logStream = log.createWriteStream();\n\nlogStream.on('finish', function(err) {\n  // All entries have been written.\n});\n\nlogStream.end({\n  // Log entry.\n});",
+        "html": "<p>var logStream = log.createWriteStream();</p><p>logStream.on(&#39;finish&#39;, function(err) {<br />  // All entries have been written.<br />});</p><p>logStream.end({<br />  // Log entry.<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Write log entries from a streaming object input.</p>",
+      "summary": "<p>Write log entries from a streaming object input.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 153,
+    "codeStart": 169,
+    "code": "Log.prototype.createWriteStream = function() {\n  var self = this;\n  var writeStream = streamEvents(pumpify.obj());\n\n  writeStream.once('writing', function() {\n    var requestStream = self.parent.request({\n      method: 'POST',\n      uri: '/entries:write'\n    });\n\n    requestStream.on('response', function(response) {\n      writeStream.emit('response', response);\n    });\n\n    function formatEntryForApi_(entry, enc, next) {\n      next(null, self.formatEntryForApi_(entry));\n    }\n\n    writeStream.setPipeline([\n      through.obj(formatEntryForApi_),\n      JSONStream.stringify('{\"entries\":[', ',', ']}'),\n      requestStream\n    ]);\n  });\n\n  return writeStream;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Log",
+      "cons": "Log",
+      "name": "createWriteStream",
+      "string": "Log.prototype.createWriteStream()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "example",
+        "string": "var entry = log.entry('compute.googleapis.com', {\n  user: process.env.USER\n});\n\nlog.critical(entry, function(err, apiResponse) {});",
+        "html": "<p>var entry = log.entry(&#39;compute.googleapis.com&#39;, {<br />  user: process.env.USER<br />});</p><p>log.critical(entry, function(err, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Write a log entry with a severity of &quot;CRITICAL&quot;.</p><p>This is a simple wrapper around {module:logging/log#write}. All arguments are<br />the same as documented there.</p>",
+      "summary": "<p>Write a log entry with a severity of &quot;CRITICAL&quot;.</p>",
+      "body": "<p>This is a simple wrapper around {module:logging/log#write}. All arguments are<br />the same as documented there.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 197,
+    "codeStart": 210,
+    "code": "Log.prototype.critical = function(entry, options, callback) {\n  var entries = Log.assignSeverityToEntries_(entry, 'CRITICAL');\n  this.write(entries, options, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Log",
+      "cons": "Log",
+      "name": "critical",
+      "string": "Log.prototype.critical()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "example",
+        "string": "var entry = log.entry('compute.googleapis.com', {\n  user: process.env.USER\n});\n\nlog.debug(entry, function(err, apiResponse) {});",
+        "html": "<p>var entry = log.entry(&#39;compute.googleapis.com&#39;, {<br />  user: process.env.USER<br />});</p><p>log.debug(entry, function(err, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Write a log entry with a severity of &quot;DEBUG&quot;.</p><p>This is a simple wrapper around {module:logging/log#write}. All arguments are<br />the same as documented there.</p>",
+      "summary": "<p>Write a log entry with a severity of &quot;DEBUG&quot;.</p>",
+      "body": "<p>This is a simple wrapper around {module:logging/log#write}. All arguments are<br />the same as documented there.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 215,
+    "codeStart": 228,
+    "code": "Log.prototype.debug = function(entry, options, callback) {\n  this.write(Log.assignSeverityToEntries_(entry, 'DEBUG'), options, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Log",
+      "cons": "Log",
+      "name": "debug",
+      "string": "Log.prototype.debug()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "example",
+        "string": "var entry = log.entry('compute.googleapis.com', {\n  user: process.env.USER\n});\n\nlog.emergency(entry, function(err, apiResponse) {});",
+        "html": "<p>var entry = log.entry(&#39;compute.googleapis.com&#39;, {<br />  user: process.env.USER<br />});</p><p>log.emergency(entry, function(err, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Write a log entry with a severity of &quot;EMERGENCY&quot;.</p><p>This is a simple wrapper around {module:logging/log#write}. All arguments are<br />the same as documented there.</p>",
+      "summary": "<p>Write a log entry with a severity of &quot;EMERGENCY&quot;.</p>",
+      "body": "<p>This is a simple wrapper around {module:logging/log#write}. All arguments are<br />the same as documented there.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 232,
+    "codeStart": 245,
+    "code": "Log.prototype.emergency = function(entry, options, callback) {\n  var entries = Log.assignSeverityToEntries_(entry, 'EMERGENCY');\n  this.write(entries, options, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Log",
+      "cons": "Log",
+      "name": "emergency",
+      "string": "Log.prototype.emergency()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[LogEntry JSON representation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry}",
+        "html": "<p>[LogEntry JSON representation]{@link <a href=\"https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry}\">https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{object=|string=} resource - See a\n    [Monitored Resource]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource}.",
+        "name": "resource",
+        "description": "<ul>\n<li>See a     [Monitored Resource]{@link <a href=\"https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource}\">https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource}</a>.</li>\n</ul>\n",
+        "types": [
+          "object",
+          "string"
+        ],
+        "typesDescription": "<code>object</code>|<code>string</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object|string} data - The data to use as the value for this log\n    entry.",
+        "name": "data",
+        "description": "<ul>\n<li>The data to use as the value for this log     entry.</li>\n</ul>\n",
+        "types": [
+          "object",
+          "string"
+        ],
+        "typesDescription": "<code>object</code>|<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{module:logging/entry}",
+        "types": [
+          "module:logging/entry"
+        ],
+        "typesDescription": "module:<a href=\"module%3Alogging%2Fentry.html\">logging/entry</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:logging/entry}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var resource = {\n  type: 'gce_instance',\n  labels: {\n    zone: 'global',\n    instance_id: 3\n  }\n};\n\nvar entry = log.entry(resource, {\n  delegate: process.env.USER\n});\n\nentry.toJSON();\n// {\n//   logName: 'projects/grape-spaceship-123/logs/syslog',\n//   resource: {\n//     type: 'gce_instance',\n//     labels: {\n//       zone: 'global',\n//       instance_id: 3\n//     }\n//   },\n//   jsonPayload: {\n//     delegate: process.env.USER\n//   }\n// }",
+        "html": "<p>var resource = {<br />  type: &#39;gce_instance&#39;,<br />  labels: {<br />    zone: &#39;global&#39;,<br />    instance_id: 3<br />  }<br />};</p><p>var entry = log.entry(resource, {<br />  delegate: process.env.USER<br />});</p><p>entry.toJSON();<br />// {<br />//   logName: &#39;projects/grape-spaceship-123/logs/syslog&#39;,<br />//   resource: {<br />//     type: &#39;gce_instance&#39;,<br />//     labels: {<br />//       zone: &#39;global&#39;,<br />//       instance_id: 3<br />//     }<br />//   },<br />//   jsonPayload: {<br />//     delegate: process.env.USER<br />//   }<br />// }</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create an entry object for this log.</p><p>Note that using this method will not itself make any API requests. You will<br />use the object returned in other API calls, such as<br />{module:logging/log#write}.</p>",
+      "summary": "<p>Create an entry object for this log.</p>",
+      "body": "<p>Note that using this method will not itself make any API requests. You will<br />use the object returned in other API calls, such as<br />{module:logging/log#write}.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 250,
+    "codeStart": 293,
+    "code": "Log.prototype.entry = function(resource, data) {\n  var entryInstance = this.parent.entry(resource, data);\n  entryInstance.logName = this.formattedName_;\n  return entryInstance;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Log",
+      "cons": "Log",
+      "name": "entry",
+      "string": "Log.prototype.entry()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "example",
+        "string": "var entry = log.entry('compute.googleapis.com', {\n  user: process.env.USER\n});\n\nlog.error(entry, function(err, apiResponse) {});",
+        "html": "<p>var entry = log.entry(&#39;compute.googleapis.com&#39;, {<br />  user: process.env.USER<br />});</p><p>log.error(entry, function(err, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Write a log entry with a severity of &quot;ERROR&quot;.</p><p>This is a simple wrapper around {module:logging/log#write}. All arguments are<br />the same as documented there.</p>",
+      "summary": "<p>Write a log entry with a severity of &quot;ERROR&quot;.</p>",
+      "body": "<p>This is a simple wrapper around {module:logging/log#write}. All arguments are<br />the same as documented there.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 299,
+    "codeStart": 312,
+    "code": "Log.prototype.error = function(entry, options, callback) {\n  this.write(Log.assignSeverityToEntries_(entry, 'ERROR'), options, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Log",
+      "cons": "Log",
+      "name": "error",
+      "string": "Log.prototype.error()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[entries.list API Documentation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/entries/list}",
+        "html": "<p>[entries.list API Documentation]{@link <a href=\"https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/entries/list}\">https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/entries/list}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{object=} options - Filtering options.",
+        "name": "options",
+        "description": "<ul>\n<li>Filtering options.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.autoPaginate - Have pagination handled\n    automatically. Default: true.",
+        "name": "options.autoPaginate",
+        "description": "<ul>\n<li>Have pagination handled     automatically. Default: true.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} options.filter - An\n    [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced_filters).\n    An empty filter matches all log entries.",
+        "name": "options.filter",
+        "description": "<ul>\n<li>An     <a href=\"https://cloud.google.com/logging/docs/view/advanced_filters\">advanced logs filter</a>.<br />  An empty filter matches all log entries.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} options.orderBy - How the results should be sorted,\n    `timestamp` (oldest first) and `timestamp desc` (newest first,\n    **default**).",
+        "name": "options.orderBy",
+        "description": "<ul>\n<li>How the results should be sorted,     <code>timestamp</code> (oldest first) and <code>timestamp desc</code> (newest first,<br />  <strong>default</strong>).</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} options.pageSize - Maximum number of logs to return.",
+        "name": "options.pageSize",
+        "description": "<ul>\n<li>Maximum number of logs to return.</li>\n</ul>\n",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} options.pageToken - A previously-returned page token\n    representing part of the larger set of results to view.",
+        "name": "options.pageToken",
+        "description": "<ul>\n<li>A previously-returned page token     representing part of the larger set of results to view.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:logging/entry[]} callback.entries - Entries from this log.",
+        "name": "callback.entries",
+        "description": "<ul>\n<li>Entries from this log.</li>\n</ul>\n",
+        "types": [
+          "Array.<module:logging/entry>"
+        ],
+        "typesDescription": "<code>Array</code>.&lt;module:<a href=\"module%3Alogging%2Fentry.html\">logging/entry</a>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?object} callback.nextQuery - If present, query with this object to\n    check for more results.",
+        "name": "callback.nextQuery",
+        "description": "<ul>\n<li>If present, query with this object to     check for more results.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "log.getEntries(function(err, entries) {\n  // `entries` is an array of Cloud Logging entry objects.\n  // See the `data` property to read the data from the entry.\n});\n\n//-\n// To control how many API requests are made and page through the results\n// manually, set `autoPaginate` to `false`.\n//-\nfunction callback(err, entries, nextQuery, apiResponse) {\n  if (nextQuery) {\n    // More results exist.\n    log.getEntries(nextQuery, callback);\n  }\n}\n\nlog.getEntries({\n  autoPaginate: false\n}, callback);\n\n//-\n// Get the entries from your project as a readable object stream.\n//-\nlog.getEntries()\n  .on('error', console.error)\n  .on('data', function(entry) {\n    // `entry` is a Cloud Logging entry object.\n    // See the `data` property to read the data from the entry.\n  })\n  .on('end', function() {\n    // All entries retrieved.\n  });\n\n//-\n// If you anticipate many results, you can end a stream early to prevent\n// unnecessary processing and API requests.\n//-\nlog.getEntries()\n  .on('data', function(entry) {\n    this.end();\n  });",
+        "html": "<p>log.getEntries(function(err, entries) {<br />  // <code>entries</code> is an array of Cloud Logging entry objects.<br />  // See the <code>data</code> property to read the data from the entry.<br />});</p><p>//-<br />// To control how many API requests are made and page through the results<br />// manually, set <code>autoPaginate</code> to <code>false</code>.<br />//-<br />function callback(err, entries, nextQuery, apiResponse) {<br />  if (nextQuery) {<br />    // More results exist.<br />    log.getEntries(nextQuery, callback);<br />  }<br />}</p><p>log.getEntries({<br />  autoPaginate: false<br />}, callback);</p><p>//-<br />// Get the entries from your project as a readable object stream.<br />//-<br />log.getEntries()<br />  .on(&#39;error&#39;, console.error)<br />  .on(&#39;data&#39;, function(entry) {<br />    // <code>entry</code> is a Cloud Logging entry object.<br />    // See the <code>data</code> property to read the data from the entry.<br />  })<br />  .on(&#39;end&#39;, function() {<br />    // All entries retrieved.<br />  });</p><p>//-<br />// If you anticipate many results, you can end a stream early to prevent<br />// unnecessary processing and API requests.<br />//-<br />log.getEntries()<br />  .on(&#39;data&#39;, function(entry) {<br />    this.end();<br />  });</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>This method is a wrapper around {module:logging#getEntries}, but with a<br />filter specified to only return entries from this log.</p>",
+      "summary": "<p>This method is a wrapper around {module:logging#getEntries}, but with a<br />filter specified to only return entries from this log.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 316,
+    "codeStart": 384,
+    "code": "Log.prototype.getEntries = function(options, callback) {\n  if (is.function(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = extend({\n    filter: 'logName=\"' + this.formattedName_ + '\"'\n  }, options);\n\n  return this.parent.getEntries(options, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Log",
+      "cons": "Log",
+      "name": "getEntries",
+      "string": "Log.prototype.getEntries()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "example",
+        "string": "var entry = log.entry('compute.googleapis.com', {\n  user: process.env.USER\n});\n\nlog.info(entry, function(err, apiResponse) {});",
+        "html": "<p>var entry = log.entry(&#39;compute.googleapis.com&#39;, {<br />  user: process.env.USER<br />});</p><p>log.info(entry, function(err, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Write a log entry with a severity of &quot;INFO&quot;.</p><p>This is a simple wrapper around {module:logging/log#write}. All arguments are<br />the same as documented there.</p>",
+      "summary": "<p>Write a log entry with a severity of &quot;INFO&quot;.</p>",
+      "body": "<p>This is a simple wrapper around {module:logging/log#write}. All arguments are<br />the same as documented there.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 397,
+    "codeStart": 410,
+    "code": "Log.prototype.info = function(entry, options, callback) {\n  this.write(Log.assignSeverityToEntries_(entry, 'INFO'), options, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Log",
+      "cons": "Log",
+      "name": "info",
+      "string": "Log.prototype.info()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "example",
+        "string": "var entry = log.entry('compute.googleapis.com', {\n  user: process.env.USER\n});\n\nlog.notice(entry, function(err, apiResponse) {});",
+        "html": "<p>var entry = log.entry(&#39;compute.googleapis.com&#39;, {<br />  user: process.env.USER<br />});</p><p>log.notice(entry, function(err, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Write a log entry with a severity of &quot;NOTICE&quot;.</p><p>This is a simple wrapper around {module:logging/log#write}. All arguments are<br />the same as documented there.</p>",
+      "summary": "<p>Write a log entry with a severity of &quot;NOTICE&quot;.</p>",
+      "body": "<p>This is a simple wrapper around {module:logging/log#write}. All arguments are<br />the same as documented there.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 414,
+    "codeStart": 427,
+    "code": "Log.prototype.notice = function(entry, options, callback) {\n  this.write(Log.assignSeverityToEntries_(entry, 'NOTICE'), options, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Log",
+      "cons": "Log",
+      "name": "notice",
+      "string": "Log.prototype.notice()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "example",
+        "string": "var entry = log.entry('compute.googleapis.com', {\n  user: process.env.USER\n});\n\nlog.warning(entry, function(err, apiResponse) {});",
+        "html": "<p>var entry = log.entry(&#39;compute.googleapis.com&#39;, {<br />  user: process.env.USER<br />});</p><p>log.warning(entry, function(err, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Write a log entry with a severity of &quot;WARNING&quot;.</p><p>This is a simple wrapper around {module:logging/log#write}. All arguments are<br />the same as documented there.</p>",
+      "summary": "<p>Write a log entry with a severity of &quot;WARNING&quot;.</p>",
+      "body": "<p>This is a simple wrapper around {module:logging/log#write}. All arguments are<br />the same as documented there.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 431,
+    "codeStart": 444,
+    "code": "Log.prototype.warning = function(entry, options, callback) {\n  this.write(Log.assignSeverityToEntries_(entry, 'WARNING'), options, callback);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Log",
+      "cons": "Log",
+      "name": "warning",
+      "string": "Log.prototype.warning()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[entries.write API Documentation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/entries/write}",
+        "html": "<p>[entries.write API Documentation]{@link <a href=\"https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/entries/write}\">https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/entries/write}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{module:logging/entry|module:logging/entry[]} entry - A log entry, or\n    array of entries, to write.",
+        "name": "entry",
+        "description": "<ul>\n<li>A log entry, or     array of entries, to write.</li>\n</ul>\n",
+        "types": [
+          "module:logging/entry",
+          "Array.<module:logging/entry>"
+        ],
+        "typesDescription": "module:<a href=\"module%3Alogging%2Fentry.html\">logging/entry</a>|<code>Array</code>.&lt;module:<a href=\"module%3Alogging%2Fentry.html\">logging/entry</a>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object=} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object[]} options.labels - Labels to set on the log.",
+        "name": "options.labels",
+        "description": "<ul>\n<li>Labels to set on the log.</li>\n</ul>\n",
+        "types": [
+          "Array.<object>"
+        ],
+        "typesDescription": "<code>Array</code>.&lt;<code>object</code>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} options.resource - A default monitored resource for entries\n    where one isn't specified.",
+        "name": "options.resource",
+        "description": "<ul>\n<li>A default monitored resource for entries     where one isn&#39;t specified.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var entry = log.entry('compute.googleapis.com', {\n  user: process.env.USER\n});\n\nlog.write(entry, function(err, apiResponse) {\n  if (!err) {\n    // The log entry was written.\n  }\n});\n\n//-\n// You may also pass multiple log entries to write.\n//-\nvar secondEntry = log.entry('compute.googleapis.com', {\n  user: process.env.USER\n});\n\nlog.write([\n  entry,\n  secondEntry\n], function(err, apiResponse) {\n  if (!err) {\n    // The log entries were written.\n  }\n});\n\n//-\n// To save some steps, you can also pass in plain values as your entries.\n// Note, however, that you must provide a configuration object to specify the\n// resource.\n//-\nvar entries = [\n  {\n    user: process.env.USER\n  },\n  {\n    home: process.env.HOME\n  }\n];\n\nvar options = {\n  resource: 'compute.googleapis.com'\n};\n\nlog.write(entries, options, function(err, apiResponse) {});",
+        "html": "<p>var entry = log.entry(&#39;compute.googleapis.com&#39;, {<br />  user: process.env.USER<br />});</p><p>log.write(entry, function(err, apiResponse) {<br />  if (!err) {<br />    // The log entry was written.<br />  }<br />});</p><p>//-<br />// You may also pass multiple log entries to write.<br />//-<br />var secondEntry = log.entry(&#39;compute.googleapis.com&#39;, {<br />  user: process.env.USER<br />});</p><p>log.write([<br />  entry,<br />  secondEntry<br />], function(err, apiResponse) {<br />  if (!err) {<br />    // The log entries were written.<br />  }<br />});</p><p>//-<br />// To save some steps, you can also pass in plain values as your entries.<br />// Note, however, that you must provide a configuration object to specify the<br />// resource.<br />//-<br />var entries = [<br />  {<br />    user: process.env.USER<br />  },<br />  {<br />    home: process.env.HOME<br />  }<br />];</p><p>var options = {<br />  resource: &#39;compute.googleapis.com&#39;<br />};</p><p>log.write(entries, options, function(err, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Write log entries to Cloud Logging.</p><p>While you may write a single entry at a time, batching multiple entries<br />together is preferred to avoid reaching the queries per second limit.</p>",
+      "summary": "<p>Write log entries to Cloud Logging.</p>",
+      "body": "<p>While you may write a single entry at a time, batching multiple entries<br />together is preferred to avoid reaching the queries per second limit.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 448,
+    "codeStart": 513,
+    "code": "Log.prototype.write = function(entry, options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  this.parent.request({\n    method: 'POST',\n    uri: '/entries:write',\n    json: extend({\n      entries: arrify(entry).map(this.formatEntryForApi_.bind(this))\n    }, options)\n  }, function(err, resp) {\n    callback(err, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Log",
+      "cons": "Log",
+      "name": "write",
+      "string": "Log.prototype.write()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{object} entry - An entry object.",
+        "name": "entry",
+        "description": "<ul>\n<li>An entry object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>All entries are passed through here to make sure this log is attached to the<br />entry.</p>",
+      "summary": "<p>All entries are passed through here to make sure this log is attached to the<br />entry.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 530,
+    "codeStart": 538,
+    "code": "Log.prototype.formatEntryForApi_ = function(entry) {\n  if (!(entry instanceof Entry)) {\n    entry = this.entry(entry);\n  }\n\n  var formattedEntry = entry.toJSON();\n  formattedEntry.logName = this.formattedName_;\n  return formattedEntry;\n};\n\nmodule.exports = Log;",
+    "ctx": {
+      "type": "method",
+      "constructor": "Log",
+      "cons": "Log",
+      "name": "formatEntryForApi_",
+      "string": "Log.prototype.formatEntryForApi_()"
+    }
+  }
+]

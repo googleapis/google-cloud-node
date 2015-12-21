@@ -358,6 +358,61 @@
     "tags": [
       {
         "type": "type",
+        "string": "{module:logging}",
+        "types": [
+          "module:logging"
+        ],
+        "typesDescription": "module:<a href=\"module%3Alogging.html\">logging</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:logging}</p>"
+      },
+      {
+        "type": "return",
+        "string": "{module:logging}",
+        "types": [
+          "module:logging"
+        ],
+        "typesDescription": "module:<a href=\"module%3Alogging.html\">logging</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:logging}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\nvar logging = gcloud.logging({\n  projectId: 'grape-spaceship-123',\n  keyFilename: '/path/to/keyfile.json'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var logging = gcloud.logging({<br />  projectId: &#39;grape-spaceship-123&#39;,<br />  keyFilename: &#39;/path/to/keyfile.json&#39;<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p><a href=\"https://cloud.google.com/logging/docs\">Google Cloud Logging</a> collects and<br />stores logs from applications and services on the Google Cloud Platform:</p><ul>\n<li>Export your logs to Google Cloud Storage, Google BigQuery, or Google<br />Cloud Pub/Sub.</li>\n<li>Integrate third-party logs from your virtual machine instances by<br />installing the logging agent, <code>google-fluentd</code>.</li>\n</ul>\n<p class=\"notice\"><br />  <strong>This is a Beta release of Google Cloud Logging.</strong> This API is not<br />  covered by any SLA or deprecation policy and may be subject to backward-<br />  incompatible changes.<br /></p>",
+      "summary": "<p><a href=\"https://cloud.google.com/logging/docs\">Google Cloud Logging</a> collects and<br />stores logs from applications and services on the Google Cloud Platform:</p>",
+      "body": "<ul>\n<li>Export your logs to Google Cloud Storage, Google BigQuery, or Google<br />Cloud Pub/Sub.</li>\n<li>Integrate third-party logs from your virtual machine instances by<br />installing the logging agent, <code>google-fluentd</code>.</li>\n</ul>\n<p class=\"notice\"><br />  <strong>This is a Beta release of Google Cloud Logging.</strong> This API is not<br />  covered by any SLA or deprecation policy and may be subject to backward-<br />  incompatible changes.<br /></p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 138,
+    "codeStart": 164,
+    "code": "logging: require('./logging'),",
+    "ctx": {
+      "type": "property",
+      "name": "logging",
+      "value": "require('./logging'),",
+      "string": "logging"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
         "string": "{module:pubsub}",
         "types": [
           "module:pubsub"
@@ -399,8 +454,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 138,
-    "codeStart": 154,
+    "line": 166,
+    "codeStart": 182,
     "code": "pubsub: require('./pubsub'),",
     "ctx": {
       "type": "property",
@@ -445,17 +500,17 @@
       }
     ],
     "description": {
-      "full": "<p><a href=\"https://cloud.google.com/resource-manager/\">The Cloud Resource Manager</a><br />provides methods that you can use to programmatically manage your projects<br />in the Google Cloud Platform. With this API, you can do the following:</p><ul>\n<li>Get a list of all projects associated with an account.</li>\n<li>Create new projects.</li>\n<li>Update existing projects.</li>\n<li>Delete projects.</li>\n<li>Recover projects.</li>\n</ul>\n<p class=\"notice\"><br />  <strong>This is a <em>Beta</em> release of Cloud Resource Manager.</strong> This feature is<br />  not covered by any SLA or deprecation policy and may be subject to<br />  backward-incompatible changes.<br /></p>",
+      "full": "<p><a href=\"https://cloud.google.com/resource-manager/\">The Cloud Resource Manager</a><br />provides methods that you can use to programmatically manage your projects<br />in the Google Cloud Platform. With this API, you can do the following:</p><ul>\n<li>Get a list of all projects associated with an account.</li>\n<li>Create new projects.</li>\n<li>Update existing projects.</li>\n<li>Delete projects.</li>\n<li>Recover projects.</li>\n</ul>\n<p class=\"notice\"><br />  <strong>This is a Beta release of Cloud Resource Manager.</strong> This feature is not<br />  covered by any SLA or deprecation policy and may be subject to backward-<br />  incompatible changes.<br /></p>",
       "summary": "<p><a href=\"https://cloud.google.com/resource-manager/\">The Cloud Resource Manager</a><br />provides methods that you can use to programmatically manage your projects<br />in the Google Cloud Platform. With this API, you can do the following:</p>",
-      "body": "<ul>\n<li>Get a list of all projects associated with an account.</li>\n<li>Create new projects.</li>\n<li>Update existing projects.</li>\n<li>Delete projects.</li>\n<li>Recover projects.</li>\n</ul>\n<p class=\"notice\"><br />  <strong>This is a <em>Beta</em> release of Cloud Resource Manager.</strong> This feature is<br />  not covered by any SLA or deprecation policy and may be subject to<br />  backward-incompatible changes.<br /></p>"
+      "body": "<ul>\n<li>Get a list of all projects associated with an account.</li>\n<li>Create new projects.</li>\n<li>Update existing projects.</li>\n<li>Delete projects.</li>\n<li>Recover projects.</li>\n</ul>\n<p class=\"notice\"><br />  <strong>This is a Beta release of Cloud Resource Manager.</strong> This feature is not<br />  covered by any SLA or deprecation policy and may be subject to backward-<br />  incompatible changes.<br /></p>"
     },
     "isPrivate": false,
     "isConstructor": false,
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 156,
-    "codeStart": 184,
+    "line": 184,
+    "codeStart": 212,
     "code": "resource: require('./resource'),",
     "ctx": {
       "type": "property",
@@ -500,17 +555,17 @@
       }
     ],
     "description": {
-      "full": "<p><a href=\"https://cloud.google.com/search/\">Google Cloud Search</a> allows you to<br />quickly perform full-text and geospatial searches against your data without<br />having to spin up your own instances and without the hassle of managing and<br />maintaining a search service.</p><p class=\"notice\"><br />  <strong>This is an <em>Alpha</em> release of Google Cloud Search.</strong> This feature is<br />  not covered by any SLA or deprecation policy and may be subject to<br />  backward-incompatible changes.<br /></p>",
+      "full": "<p><a href=\"https://cloud.google.com/search/\">Google Cloud Search</a> allows you to<br />quickly perform full-text and geospatial searches against your data without<br />having to spin up your own instances and without the hassle of managing and<br />maintaining a search service.</p><p class=\"notice\"><br />  <strong>This is an Alpha release of Google Cloud Search.</strong> This feature is not<br />  covered by any SLA or deprecation policy and may be subject to backward-<br />  incompatible changes.<br /></p>",
       "summary": "<p><a href=\"https://cloud.google.com/search/\">Google Cloud Search</a> allows you to<br />quickly perform full-text and geospatial searches against your data without<br />having to spin up your own instances and without the hassle of managing and<br />maintaining a search service.</p>",
-      "body": "<p class=\"notice\"><br />  <strong>This is an <em>Alpha</em> release of Google Cloud Search.</strong> This feature is<br />  not covered by any SLA or deprecation policy and may be subject to<br />  backward-incompatible changes.<br /></p>"
+      "body": "<p class=\"notice\"><br />  <strong>This is an Alpha release of Google Cloud Search.</strong> This feature is not<br />  covered by any SLA or deprecation policy and may be subject to backward-<br />  incompatible changes.<br /></p>"
     },
     "isPrivate": false,
     "isConstructor": false,
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 186,
-    "codeStart": 209,
+    "line": 214,
+    "codeStart": 237,
     "code": "search: require('./search'),",
     "ctx": {
       "type": "property",
@@ -564,8 +619,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 211,
-    "codeStart": 227,
+    "line": 239,
+    "codeStart": 255,
     "code": "storage: require('./storage')\n};",
     "ctx": {
       "type": "property",
@@ -606,8 +661,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 230,
-    "codeStart": 238,
+    "line": 258,
+    "codeStart": 266,
     "code": "var scopedApis = {\n  datastore: true\n};",
     "ctx": {
       "type": "declaration",
@@ -628,8 +683,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 242,
-    "codeStart": 257
+    "line": 270,
+    "codeStart": 285
   },
   {
     "tags": [
@@ -787,8 +842,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 257,
-    "codeStart": 370,
+    "line": 285,
+    "codeStart": 398,
     "code": "function gcloud(config) {\n  config = extend(true, { interceptors_: [] }, config);\n\n  var gcloudExposedApi = {\n    config_: config,\n    interceptors: config.interceptors_\n  };\n\n  return Object.keys(apis).reduce(function(gcloudExposedApi, apiName) {\n    var Class = apis[apiName];\n\n    if (scopedApis[apiName]) {\n      gcloudExposedApi[apiName] = new Class(config);\n    } else {\n      gcloudExposedApi[apiName] = Class;\n    }\n\n    return gcloudExposedApi;\n  }, gcloudExposedApi);\n}\n\nmodule.exports = extend(gcloud, apis);",
     "ctx": {
       "type": "function",
