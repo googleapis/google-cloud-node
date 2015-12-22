@@ -82,6 +82,48 @@
   {
     "tags": [
       {
+        "type": "type",
+        "string": "{module:common/util}",
+        "types": [
+          "module:common/util"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 32,
+    "codeStart": 36,
+    "code": "var util = require('../common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
         "type": "param",
         "string": "{module:bigquery} bigQuery - BigQuery instance.",
         "name": "bigQuery",
@@ -125,8 +167,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 32,
-    "codeStart": 42
+    "line": 38,
+    "codeStart": 48
   },
   {
     "tags": [
@@ -151,8 +193,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 42,
-    "codeStart": 60,
+    "line": 48,
+    "codeStart": 66,
     "code": "function Job(bigQuery, id) {\n  var methods = {",
     "ctx": {
       "type": "constructor",
@@ -220,8 +262,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 62,
-    "codeStart": 73,
+    "line": 68,
+    "codeStart": 79,
     "code": "exists: true,",
     "ctx": {
       "type": "property",
@@ -248,8 +290,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 75,
-    "codeStart": 85,
+    "line": 81,
+    "codeStart": 91,
     "code": "get: true,",
     "ctx": {
       "type": "property",
@@ -337,14 +379,90 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 87,
-    "codeStart": 103,
-    "code": "getMetadata: true\n  };\n\n  ServiceObject.call(this, {\nparent: bigQuery,\nbaseUrl: '/jobs',\nid: id,\nmethods: methods\n  });\n\n  this.bigQuery = bigQuery;\n}\n\nnodeutil.inherits(Job, ServiceObject);",
+    "line": 93,
+    "codeStart": 109,
+    "code": "getMetadata: true\n  };\n\n  ServiceObject.call(this, {\nparent: bigQuery,\nbaseUrl: '/jobs',\nid: id,\nmethods: methods\n  });\n\n  this.bigQuery = bigQuery;\n\n  // The API endpoint for cancel is:    .../bigquery/v2/project/projectId/...\n  // The rest of the API endpoints are: .../bigquery/v2/projects/projectId/...\n  // Reference: https://github.com/GoogleCloudPlatform/gcloud-node/issues/1027\n  this.interceptors.push({\nrequest: function(reqOpts) {\n  if (reqOpts.uri.indexOf('/cancel') > -1) {\n    reqOpts.uri = reqOpts.uri.replace('/projects/', '/project/');\n  }\n  return reqOpts;\n}\n  });\n}\n\nnodeutil.inherits(Job, ServiceObject);",
     "ctx": {
       "type": "property",
       "name": "getMetadata",
       "value": "true",
       "string": "getMetadata"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Jobs: get API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/cancel}",
+        "html": "<p>[Jobs: get API Documentation]{@link <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/jobs/cancel}\">https://cloud.google.com/bigquery/docs/reference/v2/jobs/cancel}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "job.cancel(function(err, apiResponse) {\n  // Check to see if the job completes successfully.\n  onJobComplete(function(err) {\n    if (!err) {\n      // Job cancelled successfully.\n    }\n  });\n});\n\nfunction onJobComplete(callback) {\n  // Start a loop to check the status of the operation.\n  checkJobStatus();\n\n  function checkJobStatus() {\n    job.getMetadata(function(err, apiResponse) {\n      if (err) {\n        callback(err);\n        return;\n      }\n\n      if (apiResponse.status.state !== 'DONE') {\n        // Job has not completed yet. Check again in 3 seconds.\n        setTimeout(checkJobStatus, 3000);\n        return;\n      }\n\n      // Job completed sucessfully.\n      callback();\n    });\n  }\n}",
+        "html": "<p>job.cancel(function(err, apiResponse) {<br />  // Check to see if the job completes successfully.<br />  onJobComplete(function(err) {<br />    if (!err) {<br />      // Job cancelled successfully.<br />    }<br />  });<br />});</p><p>function onJobComplete(callback) {<br />  // Start a loop to check the status of the operation.<br />  checkJobStatus();</p><p>  function checkJobStatus() {<br />    job.getMetadata(function(err, apiResponse) {<br />      if (err) {<br />        callback(err);<br />        return;<br />      }</p><pre><code>  if (apiResponse.status.state !== &#39;DONE&#39;) {\n    // Job has not completed yet. Check again in 3 seconds.\n    setTimeout(checkJobStatus, 3000);\n    return;\n  }\n\n  // Job completed sucessfully.\n  callback();\n});\n</code></pre><p>  }<br />}</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Cancel a job. Use {module:bigquery/job#getMetadata} to see if the cancel<br />completes successfully. See an example implementation below.</p>",
+      "summary": "<p>Cancel a job. Use {module:bigquery/job#getMetadata} to see if the cancel<br />completes successfully. See an example implementation below.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 136,
+    "codeStart": 179,
+    "code": "Job.prototype.cancel = function(callback) {\n  callback = callback || util.noop;\n\n  this.request({\n    method: 'POST',\n    uri: '/cancel'\n  }, function(err, resp) {\n    callback(err, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Job",
+      "cons": "Job",
+      "name": "cancel",
+      "string": "Job.prototype.cancel()"
     }
   },
   {
@@ -524,9 +642,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 118,
-    "codeStart": 189,
-    "code": "Job.prototype.getQueryResults = function(options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.job = this;\n\n  return this.bigQuery.query(options, callback);\n};\n\nmodule.exports = Job;",
+    "line": 190,
+    "codeStart": 261,
+    "code": "Job.prototype.getQueryResults = function(options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n  options.job = this;\n  return this.bigQuery.query(options, callback);\n};\n\nmodule.exports = Job;",
     "ctx": {
       "type": "method",
       "constructor": "Job",
