@@ -18,6 +18,7 @@
 
 var assert = require('assert');
 var mockery = require('mockery');
+var is = require('is');
 var nodeutil = require('util');
 
 var ServiceObject = require('../../lib/common/service-object.js');
@@ -74,6 +75,78 @@ describe('BigQuery/Job', function() {
         exists: true,
         get: true,
         getMetadata: true
+      });
+    });
+
+    describe('request interceptor', function() {
+      it('should assign a request interceptor for /cancel', function() {
+        var requestInterceptor = job.interceptors.pop().request;
+        assert(is.fn(requestInterceptor));
+      });
+
+      it('should transform `projects` -> `project` for /cancel', function() {
+        var reqOpts = {
+          uri: '/bigquery/v2/projects/projectId/jobs/jobId/cancel'
+        };
+        var expectedReqOpts = {
+          uri: '/bigquery/v2/project/projectId/jobs/jobId/cancel'
+        };
+
+        var requestInterceptor = job.interceptors.pop().request;
+        assert.deepEqual(requestInterceptor(reqOpts), expectedReqOpts);
+      });
+
+      it('should not affect non-cancel requests', function() {
+        var reqOpts = {
+          uri: '/bigquery/v2/projects/projectId/jobs/jobId/getQueryResults'
+        };
+        var expectedReqOpts = {
+          uri: '/bigquery/v2/projects/projectId/jobs/jobId/getQueryResults'
+        };
+
+        var requestInterceptor = job.interceptors.pop().request;
+        assert.deepEqual(requestInterceptor(reqOpts), expectedReqOpts);
+      });
+    });
+
+  });
+
+  describe('cancel', function() {
+    it('should make the correct API request', function(done) {
+      job.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/cancel');
+        done();
+      };
+
+      job.cancel(assert.ifError);
+    });
+
+    it('should not require a callback', function(done) {
+      job.request = function(reqOpts, callback) {
+        assert.doesNotThrow(function() {
+          callback();
+          done();
+        });
+      };
+
+      job.cancel();
+    });
+
+    it('should execute callback with only error & API resp', function(done) {
+      var arg1 = {};
+      var arg2 = {};
+      var arg3 = {};
+
+      job.request = function(reqOpts, callback) {
+        callback(arg1, arg2, arg3);
+      };
+
+      job.cancel(function(arg1_, arg2_) {
+        assert.strictEqual(arguments.length, 2);
+        assert.strictEqual(arg1_, arg1);
+        assert.strictEqual(arg2_, arg2);
+        done();
       });
     });
   });
