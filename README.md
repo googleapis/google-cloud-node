@@ -386,6 +386,7 @@ model.query('Hello', function(err, results) {
     // ]
   }
 });
+```
 
 
 ## Google Cloud Logging (Beta)
@@ -535,8 +536,8 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [gcloud-compute-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/compute
 [gcloud-datastore-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/datastore
 [gcloud-dns-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/dns
-[gcloud-prediction-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/prediction
 [gcloud-logging-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/logging
+[gcloud-prediction-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/prediction
 [gcloud-pubsub-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/pubsub
 [gcloud-resource-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/resource
 [gcloud-search-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/search
@@ -564,9 +565,9 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 
 [cloud-dns-docs]: https://cloud.google.com/dns/docs
 
-[cloud-prediction-docs]: https://cloud.google.com/prediction/docs
-
 [cloud-logging-docs]: https://cloud.google.com/logging/docs
+
+[cloud-prediction-docs]: https://cloud.google.com/prediction/docs
 
 [cloud-pubsub-docs]: https://cloud.google.com/pubsub/docs
 
