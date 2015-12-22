@@ -1,0 +1,878 @@
+[
+  {
+    "tags": [],
+    "description": {
+      "full": "<p>Copyright 2015 Google Inc. All Rights Reserved.</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>",
+      "summary": "<p>Copyright 2015 Google Inc. All Rights Reserved.</p>",
+      "body": "<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);<br />you may not use this file except in compliance with the License.<br />You may obtain a copy of the License at</p><pre><code> http://www.apache.org/licenses/LICENSE-2.0\n</code></pre><p>Unless required by applicable law or agreed to in writing, software<br />distributed under the License is distributed on an &quot;AS IS&quot; BASIS,<br />WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />See the License for the specific language governing permissions and<br />limitations under the License.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 1,
+    "codeStart": 16
+  },
+  {
+    "tags": [
+      {
+        "type": "module",
+        "string": "compute/disk",
+        "html": "<p>compute/disk</p>"
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 17,
+    "codeStart": 21,
+    "code": "'use strict';\n\nvar extend = require('extend');\nvar format = require('string-format-obj');\nvar is = require('is');\nvar nodeutil = require('util');",
+    "ctx": false
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/serviceObject}",
+        "types": [
+          "module:common/serviceObject"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2FserviceObject.html\">common/serviceObject</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/serviceObject}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 28,
+    "codeStart": 32,
+    "code": "var ServiceObject = require('../common/service-object.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "ServiceObject",
+      "value": "require('../common/service-object.js')",
+      "string": "ServiceObject"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:compute/snapshot}",
+        "types": [
+          "module:compute/snapshot"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acompute%2Fsnapshot.html\">compute/snapshot</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:compute/snapshot}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 34,
+    "codeStart": 38,
+    "code": "var Snapshot = require('./snapshot.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "Snapshot",
+      "value": "require('./snapshot.js')",
+      "string": "Snapshot"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:common/util}",
+        "types": [
+          "module:common/util"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acommon%2Futil.html\">common/util</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:common/util}</p>"
+      },
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 40,
+    "codeStart": 44,
+    "code": "var util = require('../common/util.js');",
+    "ctx": {
+      "type": "declaration",
+      "name": "util",
+      "value": "require('../common/util.js')",
+      "string": "util"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{module:zone} zone - Zone this disk belongs to.",
+        "name": "zone",
+        "description": "<ul>\n<li>Zone this disk belongs to.</li>\n</ul>\n",
+        "types": [
+          "module:zone"
+        ],
+        "typesDescription": "module:<a href=\"module%3Azone.html\">zone</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} name - The name of the disk.",
+        "name": "name",
+        "description": "<ul>\n<li>The name of the disk.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "<p>Developer Documentation</p>",
+      "summary": "<p>Developer Documentation</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": true,
+    "line": 46,
+    "codeStart": 51
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Disks Overview]{@link https://cloud.google.com/compute/docs/disks}",
+        "html": "<p>[Disks Overview]{@link <a href=\"https://cloud.google.com/compute/docs/disks}\">https://cloud.google.com/compute/docs/disks}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Disk Resource]{@link https://cloud.google.com/compute/docs/reference/v1/disks}",
+        "html": "<p>[Disk Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/disks}\">https://cloud.google.com/compute/docs/reference/v1/disks}</a></p>"
+      },
+      {
+        "type": "constructor",
+        "string": "",
+        "html": ""
+      },
+      {
+        "type": "alias",
+        "string": "module:compute/disk",
+        "html": "<p>module:compute/disk</p>"
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud')({\n  keyFilename: '/path/to/keyfile.json',\n  projectId: 'grape-spaceship-123'\n});\n\nvar gce = gcloud.compute();\n\nvar zone = gce.zone('zone-name');\n\nvar disk = zone.disk('disk1');",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;)({<br />  keyFilename: &#39;/path/to/keyfile.json&#39;,<br />  projectId: &#39;grape-spaceship-123&#39;<br />});</p><p>var gce = gcloud.compute();</p><p>var zone = gce.zone(&#39;zone-name&#39;);</p><p>var disk = zone.disk(&#39;disk1&#39;);</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>A Disk object allows you to interact with a Google Compute Engine disk.</p>",
+      "summary": "<p>A Disk object allows you to interact with a Google Compute Engine disk.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": true,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 51,
+    "codeStart": 72,
+    "code": "function Disk(zone, name) {\n  var methods = {",
+    "ctx": {
+      "type": "constructor",
+      "name": "Disk",
+      "string": "Disk()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{object} config - See {module:compute/zone#createDisk}.",
+        "name": "config",
+        "description": "<ul>\n<li>See {module:compute/zone#createDisk}.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "var config = {\n  // ...\n};\n\ndisk.create(config, function(err, disk, operation, apiResponse) {\n  // `disk` is a Disk object.\n\n  // `operation` is an Operation object that can be used to check the\n  // status of the request.\n});",
+        "html": "<p>var config = {<br />  // ...<br />};</p><p>disk.create(config, function(err, disk, operation, apiResponse) {<br />  // <code>disk</code> is a Disk object.</p><p>  // <code>operation</code> is an Operation object that can be used to check the<br />  // status of the request.<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a persistent disk.</p>",
+      "summary": "<p>Create a persistent disk.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 74,
+    "codeStart": 91,
+    "code": "create: true,",
+    "ctx": {
+      "type": "property",
+      "name": "create",
+      "value": "true,",
+      "string": "create"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this\n    request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this     request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} callback.exists - Whether the disk exists or not.",
+        "name": "callback.exists",
+        "description": "<ul>\n<li>Whether the disk exists or not.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "disk.exists(function(err, exists) {});",
+        "html": "<p>disk.exists(function(err, exists) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Check if the disk exists.</p>",
+      "summary": "<p>Check if the disk exists.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 93,
+    "codeStart": 104,
+    "code": "exists: true,",
+    "ctx": {
+      "type": "property",
+      "name": "exists",
+      "value": "true,",
+      "string": "exists"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{options=} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "options"
+        ],
+        "typesDescription": "<a href=\"options.html\">options</a>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.autoCreate - Automatically create the object if\n    it does not exist. Default: `false`",
+        "name": "options.autoCreate",
+        "description": "<ul>\n<li>Automatically create the object if     it does not exist. Default: <code>false</code></li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "disk.get(function(err, disk, apiResponse) {\n  // `disk` is a Disk object.\n});",
+        "html": "<p>disk.get(function(err, disk, apiResponse) {<br />  // <code>disk</code> is a Disk object.<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a disk if it exists.</p><p>You may optionally use this to &quot;get or create&quot; an object by providing an<br />object with <code>autoCreate</code> set to <code>true</code>. Any extra configuration that is<br />normally required for the <code>create</code> method must be contained within this<br />object as well.</p>",
+      "summary": "<p>Get a disk if it exists.</p>",
+      "body": "<p>You may optionally use this to &quot;get or create&quot; an object by providing an<br />object with <code>autoCreate</code> set to <code>true</code>. Any extra configuration that is<br />normally required for the <code>create</code> method must be contained within this<br />object as well.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 106,
+    "codeStart": 123,
+    "code": "get: true,",
+    "ctx": {
+      "type": "property",
+      "name": "get",
+      "value": "true,",
+      "string": "get"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Disk Resource]{@link https://cloud.google.com/compute/docs/reference/v1/disks}",
+        "html": "<p>[Disk Resource]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/disks}\">https://cloud.google.com/compute/docs/reference/v1/disks}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Disks: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/disks/get}",
+        "html": "<p>[Disks: get API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/disks/get}\">https://cloud.google.com/compute/docs/reference/v1/disks/get}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this\n    request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this     request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.metadata - The disk's metadata.",
+        "name": "callback.metadata",
+        "description": "<ul>\n<li>The disk&#39;s metadata.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "disk.getMetadata(function(err, metadata, apiResponse) {});",
+        "html": "<p>disk.getMetadata(function(err, metadata, apiResponse) {});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get the disk&#39;s metadata.</p>",
+      "summary": "<p>Get the disk&#39;s metadata.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 125,
+    "codeStart": 140,
+    "code": "getMetadata: true\n  };\n\n  ServiceObject.call(this, {\nparent: zone,\nbaseUrl: '/disks',\nid: name,\ncreateMethod: zone.createDisk.bind(zone),\nmethods: methods\n  });\n\n  this.name = name;\n  this.zone = zone;\n\n  this.formattedName = Disk.formatName_(zone, name);\n}\n\nnodeutil.inherits(Disk, ServiceObject);",
+    "ctx": {
+      "type": "property",
+      "name": "getMetadata",
+      "value": "true",
+      "string": "getMetadata"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "private",
+        "string": "",
+        "visibility": "private",
+        "html": ""
+      },
+      {
+        "type": "param",
+        "string": "{module:compute/zone} zone - The Zone this disk belongs to.",
+        "name": "zone",
+        "description": "<ul>\n<li>The Zone this disk belongs to.</li>\n</ul>\n",
+        "types": [
+          "module:compute/zone"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acompute%2Fzone.html\">compute/zone</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} name - The name of the disk.",
+        "name": "name",
+        "description": "<ul>\n<li>The name of the disk.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{string} - The formatted name.",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "<ul>\n<li>The formatted name.</li>\n</ul>\n"
+      }
+    ],
+    "description": {
+      "full": "<p>Format a disk&#39;s name how the API expects.</p>",
+      "summary": "<p>Format a disk&#39;s name how the API expects.</p>",
+      "body": ""
+    },
+    "isPrivate": true,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 159,
+    "codeStart": 168,
+    "code": "Disk.formatName_ = function(zone, name) {\n  return format('projects/{pId}/zones/{zoneName}/disks/{diskName}', {\n    pId: zone.compute.projectId,\n    zoneName: zone.name,\n    diskName: name\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "receiver": "Disk",
+      "name": "formatName_",
+      "string": "Disk.formatName_()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Snapshots Overview]{@link https://cloud.google.com/compute/docs/disks/persistent-disks#snapshots}",
+        "html": "<p>[Snapshots Overview]{@link <a href=\"https://cloud.google.com/compute/docs/disks/persistent-disks#snapshots}\">https://cloud.google.com/compute/docs/disks/persistent-disks#snapshots}</a></p>"
+      },
+      {
+        "type": "resource",
+        "string": "[Disks: createSnapshot API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/disks/createSnapshot}",
+        "html": "<p>[Disks: createSnapshot API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/disks/createSnapshot}\">https://cloud.google.com/compute/docs/reference/v1/disks/createSnapshot}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{string} name - Name of the snapshot.",
+        "name": "name",
+        "description": "<ul>\n<li>Name of the snapshot.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object=} options - See the\n    [Disks: createSnapshot](https://cloud.google.com/compute/docs/reference/v1/disks/createSnapshot)\n    request body.",
+        "name": "options",
+        "description": "<ul>\n<li>See the     <a href=\"https://cloud.google.com/compute/docs/reference/v1/disks/createSnapshot\">Disks: createSnapshot</a><br />  request body.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{function} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:compute/snapshot} callback.snapshot - The created Snapshot\n    object.",
+        "name": "callback.snapshot",
+        "description": "<ul>\n<li>The created Snapshot     object.</li>\n</ul>\n",
+        "types": [
+          "module:compute/snapshot"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acompute%2Fsnapshot.html\">compute/snapshot</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:compute/operation} callback.operation - An operation object\n    that can be used to check the status of the request.",
+        "name": "callback.operation",
+        "description": "<ul>\n<li>An operation object     that can be used to check the status of the request.</li>\n</ul>\n",
+        "types": [
+          "module:compute/operation"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acompute%2Foperation.html\">compute/operation</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "function callback(err, snapshot, operation, apiResponse) {\n  // `snapshot` is a Snapshot object.\n\n  // `operation` is an Operation object that can be used to check the status\n  // of the request.\n}\n\ndisk.createSnapshot('new-snapshot-name', callback);",
+        "html": "<p>function callback(err, snapshot, operation, apiResponse) {<br />  // <code>snapshot</code> is a Snapshot object.</p><p>  // <code>operation</code> is an Operation object that can be used to check the status<br />  // of the request.<br />}</p><p>disk.createSnapshot(&#39;new-snapshot-name&#39;, callback);</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Create a snapshot of a disk.</p>",
+      "summary": "<p>Create a snapshot of a disk.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 176,
+    "codeStart": 204,
+    "code": "Disk.prototype.createSnapshot = function(name, options, callback) {\n  var self = this;\n  var zone = this.zone;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  this.request({\n    method: 'POST',\n    uri: '/createSnapshot',\n    json: extend({}, options, {\n      name: name\n    })\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var snapshot = self.snapshot(name);\n\n    var operation = zone.operation(resp.name);\n    operation.metadata = resp;\n\n    callback(null, snapshot, operation, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Disk",
+      "cons": "Disk",
+      "name": "createSnapshot",
+      "string": "Disk.prototype.createSnapshot()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Disks: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/disks/delete}",
+        "html": "<p>[Disks: delete API Documentation]{@link <a href=\"https://cloud.google.com/compute/docs/reference/v1/disks/delete}\">https://cloud.google.com/compute/docs/reference/v1/disks/delete}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{function=} callback - The callback function.",
+        "name": "callback",
+        "description": "<ul>\n<li>The callback function.</li>\n</ul>\n",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{?error} callback.err - An error returned while making this request.",
+        "name": "callback.err",
+        "description": "<ul>\n<li>An error returned while making this request.</li>\n</ul>\n",
+        "types": [
+          "error"
+        ],
+        "typesDescription": "<code>error</code>|<code>null</code>",
+        "optional": false,
+        "nullable": true,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{module:compute/operation} callback.operation - An operation object\n    that can be used to check the status of the request.",
+        "name": "callback.operation",
+        "description": "<ul>\n<li>An operation object     that can be used to check the status of the request.</li>\n</ul>\n",
+        "types": [
+          "module:compute/operation"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acompute%2Foperation.html\">compute/operation</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object} callback.apiResponse - The full API response.",
+        "name": "callback.apiResponse",
+        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "example",
+        "string": "disk.delete(function(err, operation, apiResponse) {\n  // `operation` is an Operation object that can be used to check the status\n  // of the request.\n});",
+        "html": "<p>disk.delete(function(err, operation, apiResponse) {<br />  // <code>operation</code> is an Operation object that can be used to check the status<br />  // of the request.<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Delete the disk.</p>",
+      "summary": "<p>Delete the disk.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 234,
+    "codeStart": 251,
+    "code": "Disk.prototype.delete = function(callback) {\n  var zone = this.zone;\n\n  callback = callback || util.noop;\n\n  ServiceObject.prototype.delete.call(this, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var operation = zone.operation(resp.name);\n    operation.metadata = resp;\n\n    callback(null, operation, resp);\n  });\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Disk",
+      "cons": "Disk",
+      "name": "delete",
+      "string": "Disk.prototype.delete()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "resource",
+        "string": "[Snapshots Overview]{@link https://cloud.google.com/compute/docs/disks/persistent-disks#snapshots}",
+        "html": "<p>[Snapshots Overview]{@link <a href=\"https://cloud.google.com/compute/docs/disks/persistent-disks#snapshots}\">https://cloud.google.com/compute/docs/disks/persistent-disks#snapshots}</a></p>"
+      },
+      {
+        "type": "param",
+        "string": "{string} name - Name of the snapshot.",
+        "name": "name",
+        "description": "<ul>\n<li>Name of the snapshot.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{module:compute/snapshot}",
+        "types": [
+          "module:compute/snapshot"
+        ],
+        "typesDescription": "module:<a href=\"module%3Acompute%2Fsnapshot.html\">compute/snapshot</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:compute/snapshot}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var snapshot = disk.snapshot('snapshot-name');",
+        "html": "<p>var snapshot = disk.snapshot(&#39;snapshot-name&#39;);</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>Get a reference to a snapshot from this disk.</p>",
+      "summary": "<p>Get a reference to a snapshot from this disk.</p>",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 269,
+    "codeStart": 280,
+    "code": "Disk.prototype.snapshot = function(name) {\n  return new Snapshot(this, name);\n};\n\nmodule.exports = Disk;",
+    "ctx": {
+      "type": "method",
+      "constructor": "Disk",
+      "cons": "Disk",
+      "name": "snapshot",
+      "string": "Disk.prototype.snapshot()"
+    }
+  }
+]
