@@ -200,6 +200,42 @@ describe('BigQuery', function() {
       });
   });
 
+  it('should cancel a job', function(done) {
+    var query = 'SELECT * FROM [publicdata:samples.github_nested]';
+
+    bigquery.startQuery(query, function(err, job) {
+      assert.ifError(err);
+
+      job.cancel(function(err) {
+        assert.ifError(err);
+        onJobComplete(done);
+      });
+
+      function onJobComplete(callback) {
+        // Start a loop to check the status of the operation.
+        checkJobStatus();
+
+        function checkJobStatus() {
+          job.getMetadata(function(err, apiResponse) {
+            if (err) {
+              callback(err);
+              return;
+            }
+
+            if (apiResponse.status.state !== 'DONE') {
+              // Job has not completed yet. Check again in 3 seconds.
+              setTimeout(checkJobStatus, 3000);
+              return;
+            }
+
+            // Job completed sucessfully.
+            callback();
+          });
+        }
+      }
+    });
+  });
+
   describe('BigQuery/Dataset', function() {
     it('should set & get metadata', function(done) {
       dataset.setMetadata({
