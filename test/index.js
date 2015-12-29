@@ -33,9 +33,12 @@ function createFakeApi() {
 }
 
 var FakeBigQuery = createFakeApi();
+var FakeCompute = createFakeApi();
 var FakeDatastore = createFakeApi();
 var FakeDNS = createFakeApi();
+var FakePrediction = createFakeApi();
 var FakePubSub = createFakeApi();
+var FakeResource = createFakeApi();
 var FakeSearch = createFakeApi();
 var FakeStorage = createFakeApi();
 
@@ -44,9 +47,12 @@ describe('gcloud', function() {
 
   before(function() {
     mockery.registerMock('./bigquery', FakeBigQuery);
+    mockery.registerMock('./compute', FakeCompute);
     mockery.registerMock('./datastore', FakeDatastore);
     mockery.registerMock('./dns', FakeDNS);
+    mockery.registerMock('./prediction', FakePrediction);
     mockery.registerMock('./pubsub', FakePubSub);
+    mockery.registerMock('./resource', FakeResource);
     mockery.registerMock('./search', FakeSearch);
     mockery.registerMock('./storage', FakeStorage);
     mockery.enable({
@@ -69,6 +75,10 @@ describe('gcloud', function() {
     assert.strictEqual(gcloud.bigquery, FakeBigQuery);
   });
 
+  it('should export static compute', function() {
+    assert.strictEqual(gcloud.compute, FakeCompute);
+  });
+
   it('should export static datastore', function() {
     assert.strictEqual(gcloud.datastore, FakeDatastore);
   });
@@ -77,8 +87,16 @@ describe('gcloud', function() {
     assert.strictEqual(gcloud.dns, FakeDNS);
   });
 
+  it('should export static prediction', function() {
+    assert.strictEqual(gcloud.prediction, FakePrediction);
+  });
+
   it('should export static pubsub', function() {
     assert.strictEqual(gcloud.pubsub, FakePubSub);
+  });
+
+  it('should export static resource', function() {
+    assert.strictEqual(gcloud.resource, FakeResource);
   });
 
   it('should export static search', function() {
@@ -129,6 +147,15 @@ describe('gcloud', function() {
       });
     });
 
+    describe('compute', function() {
+      it('should create a new Compute', function() {
+        var compute = localGcloud.compute(options);
+
+        assert(compute instanceof FakeCompute);
+        assert.strictEqual(compute.calledWith_[0], options);
+      });
+    });
+
     describe('datastore', function() {
       it('should create a single Datastore', function() {
         var datastore = localGcloud.datastore;
@@ -147,12 +174,30 @@ describe('gcloud', function() {
       });
     });
 
+    describe('prediction', function() {
+      it('should create a new Prediction', function() {
+        var prediction = localGcloud.prediction(options);
+
+        assert(prediction instanceof FakePrediction);
+        assert.strictEqual(prediction.calledWith_[0], options);
+      });
+    });
+
     describe('pubsub', function() {
       it('should create a new PubSub', function() {
         var pubsub = localGcloud.pubsub(options);
 
         assert(pubsub instanceof FakePubSub);
         assert.strictEqual(pubsub.calledWith_[0], options);
+      });
+    });
+
+    describe('resource', function() {
+      it('should create a new Prediction', function() {
+        var resource = localGcloud.resource(options);
+
+        assert(resource instanceof FakeResource);
+        assert.strictEqual(resource.calledWith_[0], options);
       });
     });
 
