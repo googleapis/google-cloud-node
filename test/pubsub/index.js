@@ -140,6 +140,17 @@ describe('PubSub', function() {
         'https://www.googleapis.com/auth/cloud-platform'
       ]);
     });
+
+    it('should use the PUBSUB_HOST env var', function() {
+      var pubSubHost = 'pubsub-host';
+      process.env.PUBSUB_HOST = pubSubHost;
+
+      var pubsub = new PubSub({ projectId: 'project-id' });
+      delete process.env.PUBSUB_HOST;
+
+      var calledWith = pubsub.calledWith_[0];
+      assert.strictEqual(calledWith.baseUrl, pubSubHost);
+    });
   });
 
   describe('createTopic', function() {
