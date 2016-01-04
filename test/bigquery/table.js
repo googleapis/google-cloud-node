@@ -940,6 +940,30 @@ describe('BigQuery/Table', function() {
       table.insert(data, done);
     });
 
+    describe('duplicates', function() {
+      it('should default to false', function(done) {
+        table.request = function(reqOpts) {
+          assert.deepEqual(reqOpts.json, dataApiFormat);
+          done();
+        };
+
+        table.insert(data, assert.ifError);
+      });
+
+      it('should not set an insertId when set to true', function(done) {
+        table.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.json.rows[0].insertId, undefined);
+          done();
+        };
+
+        var options = {
+          duplicates: true
+        };
+
+        table.insert(data, options, assert.ifError);
+      });
+    });
+
     it('should execute callback with API response', function(done) {
       var apiResponse = { insertErrors: [] };
 
