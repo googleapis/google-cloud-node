@@ -864,15 +864,15 @@ describe('Request', function() {
 
     it('should assemble correct request', function(done) {
       var method = 'commit';
-      var projectId = 'project-id';
+      var datasetId = 'dataset-id';
       var expectedUri =
-        format('{apiEndpoint}/datastore/v1beta2/datasets/{pId}/{method}', {
+        format('{apiEndpoint}/datastore/v1beta2/datasets/{dId}/{method}', {
           apiEndpoint: CUSTOM_ENDPOINT,
-          pId: projectId,
+          dId: datasetId,
           method: method
         });
 
-      request.projectId = projectId;
+      request.datasetId = datasetId;
       request.makeAuthenticatedRequest_ = function(opts) {
         assert.equal(opts.method, 'POST');
         assert.equal(opts.uri, expectedUri);
