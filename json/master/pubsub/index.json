@@ -280,9 +280,9 @@
       }
     ],
     "description": {
-      "full": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p>",
+      "full": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p><p>The <code>PUBSUB_HOST</code> environment variable from the gcloud SDK is honored,<br />otherwise the actual API endpoint will be used.</p>",
       "summary": "<p><a href=\"https://developers.google.com/pubsub/overview\">Google Cloud Pub/Sub</a> is a<br />reliable, many-to-many, asynchronous messaging service from Google Cloud<br />Platform.</p>",
-      "body": ""
+      "body": "<p>The <code>PUBSUB_HOST</code> environment variable from the gcloud SDK is honored,<br />otherwise the actual API endpoint will be used.</p>"
     },
     "isPrivate": false,
     "isConstructor": true,
@@ -290,8 +290,8 @@
     "isEvent": false,
     "ignore": false,
     "line": 58,
-    "codeStart": 76,
-    "code": "function PubSub(options) {\n  if (!(this instanceof PubSub)) {\n    options = util.normalizeArguments(this, options);\n    return new PubSub(options);\n  }\n\n  var config = {\n    baseUrl: 'https://pubsub.googleapis.com/v1',\n    scopes: [\n      'https://www.googleapis.com/auth/pubsub',\n      'https://www.googleapis.com/auth/cloud-platform'\n    ]\n  };\n\n  Service.call(this, config, options);\n}\n\nnodeutil.inherits(PubSub, Service);",
+    "codeStart": 79,
+    "code": "function PubSub(options) {\n  if (!(this instanceof PubSub)) {\n    options = util.normalizeArguments(this, options);\n    return new PubSub(options);\n  }\n\n  var config = {\n    baseUrl: process.env.PUBSUB_HOST || 'https://pubsub.googleapis.com/v1',\n    scopes: [\n      'https://www.googleapis.com/auth/pubsub',\n      'https://www.googleapis.com/auth/cloud-platform'\n    ]\n  };\n\n  Service.call(this, config, options);\n}\n\nnodeutil.inherits(PubSub, Service);",
     "ctx": {
       "type": "constructor",
       "name": "PubSub",
@@ -391,8 +391,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 95,
-    "codeStart": 114,
+    "line": 98,
+    "codeStart": 117,
     "code": "PubSub.prototype.createTopic = function(name, callback) {\n  var self = this;\n\n  callback = callback || util.noop;\n\n  this.request({\n    method: 'PUT',\n    uri: '/topics/' + name,\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var topic = self.topic(name);\n    topic.metadata = resp;\n\n    callback(null, topic, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -566,8 +566,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 135,
-    "codeStart": 206,
+    "line": 138,
+    "codeStart": 209,
     "code": "PubSub.prototype.getSubscriptions = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  options = options || {};\n\n  var topicName;\n\n  if (is.string(options.topic)) {\n    topicName = options.topic;\n  } else if (options.topic instanceof Topic) {\n    topicName = options.topic.unformattedName;\n  }\n\n  var query = {};\n\n  if (options.pageSize) {\n    query.pageSize = options.pageSize;\n  }\n\n  if (options.pageToken) {\n    query.pageToken = options.pageToken;\n  }\n\n  this.request({\n    uri: (topicName ? '/topics/' + topicName : '') + '/subscriptions',\n    qs: query\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var subscriptions = arrify(resp.subscriptions).map(function(sub) {\n      // Depending on if we're using a subscriptions.list or\n      // topics.subscriptions.list API endpoint, we will get back a\n      // Subscription resource or just the name of the subscription.\n      var subscriptionInstance = self.subscription(sub.name || sub);\n\n      if (sub.name) {\n        subscriptionInstance.metadata = sub;\n      }\n\n      return subscriptionInstance;\n    });\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = options;\n      nextQuery.pageToken = resp.nextPageToken;\n    }\n\n    callback(null, subscriptions, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -726,8 +726,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 267,
-    "codeStart": 336,
+    "line": 270,
+    "codeStart": 339,
     "code": "PubSub.prototype.getTopics = function(query, callback) {\n  var self = this;\n\n  if (!callback) {\n    callback = query;\n    query = {};\n  }\n\n  this.request({\n    uri: '/topics',\n    qs: query\n  }, function(err, result) {\n    if (err) {\n      callback(err, null, null, result);\n      return;\n    }\n\n    var topics = arrify(result.topics).map(function(topic) {\n      var topicInstance = self.topic(topic.name);\n      topicInstance.metadata = topic;\n      return topicInstance;\n    });\n\n    var nextQuery = null;\n    if (result.nextPageToken) {\n      nextQuery = query;\n      nextQuery.pageToken = result.nextPageToken;\n    }\n\n    callback(null, topics, nextQuery, result);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -973,8 +973,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 369,
-    "codeStart": 437,
+    "line": 372,
+    "codeStart": 440,
     "code": "PubSub.prototype.subscribe = function(topic, subName, options, callback) {\n  var self = this;\n\n  if (!is.string(topic) && !(topic instanceof Topic)) {\n    throw new Error('A Topic is required for a new subscription.');\n  }\n\n  if (!is.string(subName)) {\n    throw new Error('A subscription name is required for a new subscription.');\n  }\n\n  if (!callback) {\n    callback = options;\n    options = {};\n  }\n\n  if (is.string(topic)) {\n    topic = this.topic(topic);\n  }\n\n  var body = extend(true, {}, options, {\n    topic: topic.name\n  });\n\n  delete body.autoAck;\n  delete body.encoding;\n  delete body.interval;\n  delete body.maxInProgress;\n  delete body.reuseExisting;\n  delete body.timeout;\n\n  this.request({\n    method: 'PUT',\n    uri: '/subscriptions/' + subName,\n    json: body\n  }, function(err, resp) {\n    if (err && !(err.code === 409 && options.reuseExisting)) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var subscription = self.subscription(subName, options);\n    callback(null, subscription, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1122,8 +1122,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 483,
-    "codeStart": 516,
+    "line": 486,
+    "codeStart": 519,
     "code": "PubSub.prototype.subscription = function(name, options) {\n  if (!name) {\n    throw new Error('The name of a subscription is required.');\n  }\n\n  options = options || {};\n  options.name = name;\n  return new Subscription(this, options);\n};",
     "ctx": {
       "type": "method",
@@ -1187,8 +1187,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 526,
-    "codeStart": 541,
+    "line": 529,
+    "codeStart": 544,
     "code": "PubSub.prototype.topic = function(name) {\n  if (!name) {\n    throw new Error('A name must be specified for a new topic.');\n  }\n\n  return new Topic(this, name);\n};",
     "ctx": {
       "type": "method",
@@ -1210,8 +1210,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 549,
-    "codeStart": 554,
+    "line": 552,
+    "codeStart": 557,
     "code": "streamRouter.extend(PubSub, ['getSubscriptions', 'getTopics']);\n\nmodule.exports = PubSub;",
     "ctx": false
   }
