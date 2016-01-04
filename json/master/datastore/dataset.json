@@ -347,9 +347,9 @@
       }
     ],
     "description": {
-      "full": "<p>Interact with a dataset from the<br /><a href=\"https://developers.google.com/datastore/\">Google Cloud Datastore</a>.</p>",
+      "full": "<p>Interact with a dataset from the<br /><a href=\"https://developers.google.com/datastore/\">Google Cloud Datastore</a>.</p><p>If a project ID is not specified, the <code>DATASTORE_DATASET</code> environment<br />variable from the gcloud SDK is used.</p>",
       "summary": "<p>Interact with a dataset from the<br /><a href=\"https://developers.google.com/datastore/\">Google Cloud Datastore</a>.</p>",
-      "body": ""
+      "body": "<p>If a project ID is not specified, the <code>DATASTORE_DATASET</code> environment<br />variable from the gcloud SDK is used.</p>"
     },
     "isPrivate": false,
     "isConstructor": true,
@@ -357,8 +357,8 @@
     "isEvent": false,
     "ignore": false,
     "line": 67,
-    "codeStart": 102,
-    "code": "function Dataset(options) {\n  if (!(this instanceof Dataset)) {\n    return new Dataset(options);\n  }\n\n  options = options || {};\n\n  if (!options.projectId) {\n    throw util.missingProjectIdError;\n  }\n\n  this.determineApiEndpoint_(options.apiEndpoint);\n  this.namespace = options.namespace;\n  this.projectId = options.projectId;\n\n  this.makeAuthenticatedRequest_ = util.makeAuthenticatedRequestFactory({\n    customEndpoint: this.customEndpoint,\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n}\n\nnodeutil.inherits(Dataset, DatastoreRequest);",
+    "codeStart": 105,
+    "code": "function Dataset(options) {\n  if (!(this instanceof Dataset)) {\n    return new Dataset(options);\n  }\n\n  options = options || {};\n\n  this.datasetId = options.projectId || process.env.DATASTORE_DATASET;\n\n  if (!this.datasetId) {\n    throw new Error('A project or dataset ID is required to use a Dataset.');\n  }\n\n  this.determineApiEndpoint_(options.apiEndpoint);\n  this.namespace = options.namespace;\n\n  this.makeAuthenticatedRequest_ = util.makeAuthenticatedRequestFactory({\n    customEndpoint: this.customEndpoint,\n    credentials: options.credentials,\n    keyFile: options.keyFilename,\n    scopes: SCOPES,\n    email: options.email\n  });\n}\n\nnodeutil.inherits(Dataset, DatastoreRequest);",
     "ctx": {
       "type": "constructor",
       "name": "Dataset",
@@ -398,8 +398,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 128,
-    "codeStart": 137,
+    "line": 132,
+    "codeStart": 141,
     "code": "Dataset.prototype.determineApiEndpoint_ = function(customApiEndpoint) {\n  var apiEndpoint;\n  var trailingSlashes = new RegExp('/*$');\n\n  if (customApiEndpoint) {\n    apiEndpoint = customApiEndpoint;\n    this.customEndpoint = true;\n  } else if (process.env.DATASTORE_HOST) {\n    apiEndpoint = process.env.DATASTORE_HOST;\n    this.customEndpoint = true;\n  } else {\n    apiEndpoint = 'https://www.googleapis.com';\n  }\n\n  if (apiEndpoint.indexOf('http') !== 0) {\n    apiEndpoint = 'http://' + apiEndpoint;\n  }\n\n  this.apiEndpoint = apiEndpoint.replace(trailingSlashes, '');\n};",
     "ctx": {
       "type": "method",
@@ -492,8 +492,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 158,
-    "codeStart": 226,
+    "line": 162,
+    "codeStart": 230,
     "code": "Dataset.prototype.key = function(options) {\n  options = is.object(options) ? options : {\n    namespace: this.namespace,\n    path: arrify(options)\n  };\n\n  return new entity.Key(options);\n};",
     "ctx": {
       "type": "method",
@@ -576,8 +576,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 235,
-    "codeStart": 248,
+    "line": 239,
+    "codeStart": 252,
     "code": "Dataset.prototype.createQuery = function(namespace, kind) {\n  if (arguments.length === 1) {\n    kind = arrify(namespace);\n    namespace = this.namespace;\n  }\n\n  return new Query(namespace, arrify(kind));\n};",
     "ctx": {
       "type": "method",
@@ -687,8 +687,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 257,
-    "codeStart": 289,
+    "line": 261,
+    "codeStart": 293,
     "code": "Dataset.prototype.runInTransaction = function(fn, callback) {\n  var newTransaction = this.createTransaction_();\n\n  newTransaction.begin_(function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    fn(newTransaction, newTransaction.commit_.bind(newTransaction, callback));\n  });\n};",
     "ctx": {
       "type": "method",
@@ -731,9 +731,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 302,
-    "codeStart": 308,
-    "code": "Dataset.prototype.createTransaction_ = function() {\n  return new Transaction(this, this.projectId);\n};\n\nmodule.exports = Dataset;",
+    "line": 306,
+    "codeStart": 312,
+    "code": "Dataset.prototype.createTransaction_ = function() {\n  return new Transaction(this, this.datasetId);\n};\n\nmodule.exports = Dataset;",
     "ctx": {
       "type": "method",
       "constructor": "Dataset",
