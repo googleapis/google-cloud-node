@@ -79,13 +79,13 @@ describe('Transaction', function() {
 
   describe('instantiation', function() {
     it('should assign default properties', function() {
-      var projectId = 'abc';
+      var datasetId = 'abc';
       var fakeDataset = {
         apiEndpoint: 'http://localhost:8080',
         makeAuthenticatedRequest_: function fakeMakeAuthenticatedRequest_() {}
       };
 
-      var transaction = new Transaction(fakeDataset, projectId);
+      var transaction = new Transaction(fakeDataset, datasetId);
 
       assert.strictEqual(transaction.id, null);
       assert.deepEqual(transaction.apiEndpoint, fakeDataset.apiEndpoint);
@@ -93,7 +93,7 @@ describe('Transaction', function() {
         transaction.makeAuthenticatedRequest_,
         fakeDataset.makeAuthenticatedRequest_
       );
-      assert.equal(transaction.projectId, projectId);
+      assert.equal(transaction.datasetId, datasetId);
     });
   });
 

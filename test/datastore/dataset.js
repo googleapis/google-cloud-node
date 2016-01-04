@@ -31,6 +31,10 @@ util.makeAuthenticatedRequestFactory = function() {
   return makeAuthenticatedRequestFactoryCache.apply(this, arguments);
 };
 
+function FakeTransaction() {
+  this.calledWith_ = arguments;
+}
+
 describe('Dataset', function() {
   var Dataset;
   var dataset;
@@ -46,6 +50,7 @@ describe('Dataset', function() {
 
   before(function() {
     mockery.registerMock('../common/util.js', util);
+    mockery.registerMock('./transaction.js', FakeTransaction);
 
     mockery.enable({
       useCleanCache: true,
@@ -61,15 +66,30 @@ describe('Dataset', function() {
   });
 
   beforeEach(function() {
+    delete process.env.DATASTORE_DATASET;
     makeAuthenticatedRequestFactoryOverride = null;
     dataset = new Dataset(OPTIONS);
   });
 
   describe('instantiation', function() {
+    it('should localize the dataset id', function() {
+      assert.strictEqual(dataset.datasetId, OPTIONS.projectId);
+    });
+
+    it('should detect the dataset ID', function() {
+      var datasetId = 'dataset-id';
+      process.env.DATASTORE_DATASET = datasetId;
+
+      var ds = new Dataset();
+      assert.strictEqual(ds.datasetId, datasetId);
+
+      delete process.env.DATASTORE_DATASET;
+    });
+
     it('should throw if a projectId is not specified', function() {
       assert.throws(function() {
         new Dataset();
-      }, /Sorry, we cannot connect/);
+      }, 'A project or dataset ID is required to use a Dataset.');
     });
 
     it('should set default API connection details', function(done) {
@@ -83,6 +103,10 @@ describe('Dataset', function() {
       };
 
       new Dataset(OPTIONS);
+    });
+
+    it('should localize the namespace', function() {
+      assert.strictEqual(dataset.namespace, OPTIONS.namespace);
     });
 
     it('should create an authenticated request factory', function() {
@@ -111,14 +135,6 @@ describe('Dataset', function() {
 
       var ds = new Dataset(OPTIONS);
       assert.strictEqual(ds.makeAuthenticatedRequest_, authenticatedRequest);
-    });
-
-    it('should localize the project id', function() {
-      assert.strictEqual(dataset.projectId, OPTIONS.projectId);
-    });
-
-    it('should localize the namespace', function() {
-      assert.strictEqual(dataset.namespace, OPTIONS.namespace);
     });
   });
 
@@ -335,6 +351,15 @@ describe('Dataset', function() {
         dataset.determineApiEndpoint_();
         assert.strictEqual(dataset.customEndpoint, true);
       });
+    });
+  });
+
+  describe('createTransaction_', function() {
+    it('should create and return a Transaction', function() {
+      var transaction = dataset.createTransaction_();
+      assert(transaction instanceof FakeTransaction);
+      assert.strictEqual(transaction.calledWith_[0], dataset);
+      assert.strictEqual(transaction.calledWith_[1], dataset.datasetId);
     });
   });
 });
