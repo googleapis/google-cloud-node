@@ -621,12 +621,67 @@
     "ignore": false,
     "line": 239,
     "codeStart": 255,
-    "code": "storage: require('./storage')\n};",
+    "code": "storage: require('./storage'),",
     "ctx": {
       "type": "property",
       "name": "storage",
-      "value": "require('./storage')",
+      "value": "require('./storage'),",
       "string": "storage"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{module:translate}",
+        "types": [
+          "module:translate"
+        ],
+        "typesDescription": "module:<a href=\"module%3Atranslate.html\">translate</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "html": "<p>{module:translate}</p>"
+      },
+      {
+        "type": "return",
+        "string": "{module:translate}",
+        "types": [
+          "module:translate"
+        ],
+        "typesDescription": "module:<a href=\"module%3Atranslate.html\">translate</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "",
+        "html": "<p>{module:translate}</p>"
+      },
+      {
+        "type": "example",
+        "string": "var gcloud = require('gcloud');\nvar translate = gcloud.translate({\n  key: 'API Key'\n});",
+        "html": "<p>var gcloud = require(&#39;gcloud&#39;);<br />var translate = gcloud.translate({<br />  key: &#39;API Key&#39;<br />});</p>"
+      }
+    ],
+    "description": {
+      "full": "<p>With <a href=\"https://cloud.google.com/translate\">Google Translate</a>, you can<br />dynamically translate text between thousands of language pairs.</p><p>The Google Translate API lets websites and programs integrate with Google<br />Translate programmatically.</p><p>Google Translate API is available as a paid service. See the<br /><a href=\"https://cloud.google.com/translate/v2/pricing.html\">Pricing</a> and<br /><a href=\"https://cloud.google.com/translate/v2/faq.html\">FAQ</a> pages for details.</p><p><strong>An API key is required for Translate.</strong> See<br /><a href=\"https://cloud.google.com/translate/v2/using_rest#auth\">Identifying your application to Google</a>.</p>",
+      "summary": "<p>With <a href=\"https://cloud.google.com/translate\">Google Translate</a>, you can<br />dynamically translate text between thousands of language pairs.</p>",
+      "body": "<p>The Google Translate API lets websites and programs integrate with Google<br />Translate programmatically.</p><p>Google Translate API is available as a paid service. See the<br /><a href=\"https://cloud.google.com/translate/v2/pricing.html\">Pricing</a> and<br /><a href=\"https://cloud.google.com/translate/v2/faq.html\">FAQ</a> pages for details.</p><p><strong>An API key is required for Translate.</strong> See<br /><a href=\"https://cloud.google.com/translate/v2/using_rest#auth\">Identifying your application to Google</a>.</p>"
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 257,
+    "codeStart": 281,
+    "code": "translate: require('./translate')\n};",
+    "ctx": {
+      "type": "property",
+      "name": "translate",
+      "value": "require('./translate')",
+      "string": "translate"
     }
   },
   {
@@ -661,8 +716,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 258,
-    "codeStart": 266,
+    "line": 284,
+    "codeStart": 292,
     "code": "var scopedApis = {\n  datastore: true\n};",
     "ctx": {
       "type": "declaration",
@@ -683,8 +738,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 270,
-    "codeStart": 285
+    "line": 296,
+    "codeStart": 311
   },
   {
     "tags": [
@@ -842,8 +897,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 285,
-    "codeStart": 398,
+    "line": 311,
+    "codeStart": 424,
     "code": "function gcloud(config) {\n  config = extend(true, { interceptors_: [] }, config);\n\n  var gcloudExposedApi = {\n    config_: config,\n    interceptors: config.interceptors_\n  };\n\n  return Object.keys(apis).reduce(function(gcloudExposedApi, apiName) {\n    var Class = apis[apiName];\n\n    if (scopedApis[apiName]) {\n      gcloudExposedApi[apiName] = new Class(config);\n    } else {\n      gcloudExposedApi[apiName] = Class;\n    }\n\n    return gcloudExposedApi;\n  }, gcloudExposedApi);\n}\n\nmodule.exports = extend(gcloud, apis);",
     "ctx": {
       "type": "function",

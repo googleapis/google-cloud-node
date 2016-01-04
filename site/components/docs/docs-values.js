@@ -249,6 +249,11 @@ angular.module('gcloud.docs')
       ]
     },
 
+    translate: {
+      title: 'Translate',
+      _url: '{baseUrl}/translate'
+    },
+
     VERSIONS: {
       //
       // Multiple keys may be used to match a version.
@@ -295,6 +300,9 @@ angular.module('gcloud.docs')
       '>=0.26.0': ['storageWithChannels'],
 
       // introduce prediction & logging api.
-      '>=0.27.0': ['prediction', 'logging']
+      '>=0.27.0': ['prediction', 'logging'],
+
+      // introduce translate api.
+      '>=0.28.0': ['translate']
     }
   });
