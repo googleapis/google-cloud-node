@@ -142,15 +142,34 @@ describe('common/util', function() {
       assert.strictEqual(apiError.message, errorMessage);
     });
 
-    it('should favor an explicit message over response body', function() {
+    it('should append the custom error message', function() {
       var errorMessage = 'API error message';
-      var expectedErrorMessage = 'Custom error message';
+      var customErrorMessage = 'Custom error message';
+      var expectedErrorMessage = [customErrorMessage, errorMessage].join(' - ');
 
       var error = {
         errors: [ new Error(errorMessage) ],
         code: 100,
         response: { a: 'b', c: 'd' },
-        message: expectedErrorMessage
+        message: customErrorMessage
+      };
+
+      var apiError = new util.ApiError(error);
+
+      assert.strictEqual(apiError.message, expectedErrorMessage);
+    });
+
+    it('should parse and append the response body', function() {
+      var errorMessage = 'API error message';
+      var responseBodyMsg = 'Response body message';
+      var expectedErrorMessage = [errorMessage, responseBodyMsg].join(' - ');
+
+      var error = {
+        message: errorMessage,
+        code: 100,
+        response: {
+          body: new Buffer(responseBodyMsg)
+        }
       };
 
       var apiError = new util.ApiError(error);
@@ -346,16 +365,20 @@ describe('common/util', function() {
   describe('parseHttpRespBody', function() {
     it('should detect body errors', function() {
       var apiErr = {
-        errors: [{ foo: 'bar' }],
+        errors: [{ message: 'bar' }],
         code: 400,
         message: 'an error occurred'
       };
 
       var parsedHttpRespBody = util.parseHttpRespBody({ error: apiErr });
+      var expectedErrorMessage = [
+        apiErr.message,
+        apiErr.errors[0].message
+      ].join(' - ');
 
       assert.deepEqual(parsedHttpRespBody.err.errors, apiErr.errors);
       assert.strictEqual(parsedHttpRespBody.err.code, apiErr.code);
-      assert.deepEqual(parsedHttpRespBody.err.message, apiErr.message);
+      assert.deepEqual(parsedHttpRespBody.err.message, expectedErrorMessage);
     });
 
     it('should try to parse JSON if body is string', function() {
