@@ -230,7 +230,7 @@ var pubsub = gcloud.pubsub({
   keyFilename: '/path/to/keyfile.json'
 });
 
-// Reference a topic that has been previously created
+// Reference a topic that has been previously created.
 var topic = pubsub.topic('my-topic');
 
 // Publish a message to the topic.
