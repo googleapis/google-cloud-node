@@ -203,6 +203,22 @@ describe('common/util', function() {
 
       assert.strictEqual(apiError.message, expectedErrorMessage);
     });
+
+    it('should filter out duplicate errors', function() {
+      var expectedErrorMessage = 'Error during request.';
+
+      var error = {
+        code: 100,
+        message: expectedErrorMessage,
+        response: {
+          body: expectedErrorMessage
+        }
+      };
+
+      var apiError = new util.ApiError(error);
+
+      assert.strictEqual(apiError.message, expectedErrorMessage);
+    });
   });
 
   describe('extendGlobalConfig', function() {
