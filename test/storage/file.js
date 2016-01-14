@@ -1749,6 +1749,18 @@ describe('File', function() {
       });
     });
 
+    it('should add generation parameter', function(done) {
+      var generation = 10003320000;
+      var file = new File(BUCKET, 'name', { generation: generation });
+      file.getSignedUrl({
+        action: 'read',
+        expires: Date.now() + 5,
+      }, function(err, signedUrl) {
+        assert(signedUrl.indexOf(encodeURIComponent(generation)) > -1);
+        done();
+      });
+    });
+
     describe('promptSaveAs', function() {
       it('should add response-content-disposition', function(done) {
         var disposition = 'attachment; filename="fname.ext"';
