@@ -1,0 +1,18 @@
+{
+  "name": "nodejs-docs-samples-logging",
+  "description": "Node.js samples for Google Cloud Logging.",
+  "version": "0.0.1",
+  "private": true,
+  "license": "Apache Version 2.0",
+  "engines": {
+    "node": ">=0.10.x"
+  },
+  "scripts": {
+    "list": "node list.js",
+    "write": "node write.js",
+    "export": "node export.js"
+  },
+  "dependencies": {
+    "gcloud": "^0.27.0"
+  }
+}
