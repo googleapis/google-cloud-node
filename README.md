@@ -531,7 +531,7 @@ project.getMetadata(function(err, metadata) {
 > **This is an Alpha release of Google Cloud Search.** This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
 
 - [API Documentation][gcloud-search-docs]
-- [Official Documentation][cloud-search-docs]
+- [Official Documentation][cloud-search-docs] - *If you are not a tester, this documentation is unavailable.*
 
 #### Preview
 
