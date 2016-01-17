@@ -617,6 +617,7 @@ describe('File', function() {
 
       it('should unpipe stream from an error on the response', function(done) {
         var requestStream = through();
+        var readStream = file.createReadStream();
 
         file.bucket.storage.makeAuthenticatedRequest = function() {
           setImmediate(function() {
@@ -641,7 +642,7 @@ describe('File', function() {
           });
         };
 
-        var readStream = file.createReadStream().resume();
+        readStream.resume();
       });
 
       it('should let util.handleResp handle the response', function(done) {
