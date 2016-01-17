@@ -1562,7 +1562,7 @@
     "ignore": false,
     "line": 685,
     "codeStart": 705,
-    "code": "Zone.prototype.import = function(localPath, callback) {\n  var self = this;\n\n  fs.readFile(localPath, 'utf-8', function(err, file) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var parsedZonefile = zonefile.parse(file);\n\n    var recordsToCreate = [];\n    function addRecordToCreate(record) {\n      var recordInstance = new Record.fromZoneRecord_(self, recordType, record);\n      recordsToCreate.push(recordInstance);\n    }\n\n    for (var recordType in parsedZonefile) {\n      var recordTypeSet = arrify(parsedZonefile[recordType]);\n      recordTypeSet.forEach(addRecordToCreate);\n    }\n\n    self.addRecords(recordsToCreate, callback);\n  });\n};",
+    "code": "Zone.prototype.import = function(localPath, callback) {\n  var self = this;\n\n  fs.readFile(localPath, 'utf-8', function(err, file) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    var parsedZonefile = zonefile.parse(file);\n    var recordTypes = Object.keys(parsedZonefile);\n    var recordsToCreate = [];\n\n    recordTypes.forEach(function(recordType) {\n      var recordTypeSet = arrify(parsedZonefile[recordType]);\n\n      recordTypeSet.forEach(function(record) {\n        recordsToCreate.push(Record.fromZoneRecord_(self, recordType, record));\n      });\n    });\n\n    self.addRecords(recordsToCreate, callback);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Zone",
@@ -1673,8 +1673,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 731,
-    "codeStart": 778,
+    "line": 730,
+    "codeStart": 777,
     "code": "Zone.prototype.record = function(type, metadata) {\n  return new Record(this, type, metadata);\n};",
     "ctx": {
       "type": "method",
@@ -1793,8 +1793,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 782,
-    "codeStart": 824,
+    "line": 781,
+    "codeStart": 823,
     "code": "Zone.prototype.replaceRecords = function(recordType, newRecords, callback) {\n  var self = this;\n\n  this.getRecords(recordType, function(err, recordsToDelete) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    self.createChange({\n      add: newRecords,\n      delete: recordsToDelete\n    }, callback);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1898,8 +1898,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 840,
-    "codeStart": 858,
+    "line": 839,
+    "codeStart": 857,
     "code": "Zone.prototype.deleteRecordsByType_ = function(recordTypes, callback) {\n  var self = this;\n\n  this.getRecords(recordTypes, function(err, records) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    if (records.length === 0) {\n      callback();\n      return;\n    }\n\n    self.deleteRecords(records, callback);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1921,8 +1921,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 876,
-    "codeStart": 881,
+    "line": 875,
+    "codeStart": 880,
     "code": "streamRouter.extend(Zone, ['getChanges', 'getRecords']);\n\nmodule.exports = Zone;",
     "ctx": false
   }
