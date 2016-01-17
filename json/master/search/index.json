@@ -238,9 +238,9 @@
       }
     ],
     "description": {
-      "full": "<p>Create a Search object to Interact with the Cloud Search API. Using this<br />object, you can access your indexes with {module:search/index} and documents<br />with {module:search/document}.</p><p>Follow along with the examples to see how to do everything from creating<br />documents to searching indexes.</p>",
-      "summary": "<p>Create a Search object to Interact with the Cloud Search API. Using this<br />object, you can access your indexes with {module:search/index} and documents<br />with {module:search/document}.</p>",
-      "body": "<p>Follow along with the examples to see how to do everything from creating<br />documents to searching indexes.</p>"
+      "full": "<p>Create a Search object to interact with the Cloud Search API. Using this<br />object, you can access your indexes with {module:search/index} and documents<br />with {module:search/document}.</p><p>Follow along with the examples to see how to do everything from creating<br />documents to searching indexes.</p><p><strong><br />  If you are not a tester, official documentation is unavailable.<br /></strong></p>",
+      "summary": "<p>Create a Search object to interact with the Cloud Search API. Using this<br />object, you can access your indexes with {module:search/index} and documents<br />with {module:search/document}.</p>",
+      "body": "<p>Follow along with the examples to see how to do everything from creating<br />documents to searching indexes.</p><p><strong><br />  If you are not a tester, official documentation is unavailable.<br /></strong></p>"
     },
     "isPrivate": false,
     "isConstructor": true,
@@ -248,7 +248,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 51,
-    "codeStart": 72,
+    "codeStart": 76,
     "code": "function Search(options) {\n  if (!(this instanceof Search)) {\n    options = util.normalizeArguments(this, options);\n    return new Search(options);\n  }\n\n  var config = {\n    baseUrl: 'https://cloudsearch.googleapis.com/v1',\n    scopes: [\n      'https://www.googleapis.com/auth/cloud-platform',\n      'https://www.googleapis.com/auth/cloudsearch',\n      'https://www.googleapis.com/auth/userinfo.email'\n    ]\n  };\n\n  Service.call(this, config, options);\n}\n\nnodeutil.inherits(Search, Service);",
     "ctx": {
       "type": "constructor",
@@ -433,8 +433,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 92,
-    "codeStart": 162,
+    "line": 96,
+    "codeStart": 166,
     "code": "Search.prototype.getIndexes = function(query, callback) {\n  var self = this;\n\n  if (is.fn(query)) {\n    callback = query;\n    query = {};\n  }\n\n  query = extend({}, query);\n\n  if (query.prefix) {\n    query.indexNamePrefix = query.prefix;\n    delete query.prefix;\n  }\n\n  this.request({\n    uri: '/indexes',\n    qs: query\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.nextPageToken) {\n      nextQuery = extend({}, query, {\n        pageToken: resp.nextPageToken\n      });\n    }\n\n    var indexes = (resp.indexes || []).map(function(indexObject) {\n      var index = self.index(indexObject.indexId);\n\n      if (is.object(indexObject.indexedField)) {\n        index.fields = indexObject.indexedField;\n      }\n\n      return index;\n    });\n\n    callback(null, indexes, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -485,8 +485,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 208,
-    "codeStart": 214,
+    "line": 212,
+    "codeStart": 218,
     "code": "Search.prototype.index = function(id) {\n  if (!id) {\n    throw new Error('An ID is needed to access a Google Cloud Search index.');\n  }\n\n  return new Index(this, id);\n};",
     "ctx": {
       "type": "method",
@@ -508,8 +508,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 222,
-    "codeStart": 227,
+    "line": 226,
+    "codeStart": 231,
     "code": "streamRouter.extend(Search, 'getIndexes');\n\nmodule.exports = Search;",
     "ctx": false
   }
