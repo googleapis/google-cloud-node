@@ -102,11 +102,12 @@ var bigquery = gcloud.bigquery({
   keyFilename: '/path/to/keyfile.json'
 });
 
-// Access an existing dataset.
+// Access an existing dataset and table.
 var schoolsDataset = bigquery.dataset('schools');
+var schoolsTable = schoolsDataset.table('schoolsData');
 
-// Import data into a dataset.
-schoolsDataset.import('/local/file.json', function(err, job) {});
+// Import data into a table.
+schoolsTable.import('/local/file.json', function(err, job) {});
 
 // Get results from a query job.
 var job = bigquery.job('job-id');
