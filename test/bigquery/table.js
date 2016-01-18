@@ -917,6 +917,13 @@ describe('BigQuery/Table', function() {
       { state: 'MI', gender: 'M', year: '2015', name: 'Berkley', count: '0' },
       { state: 'MI', gender: 'M', year: '2015', name: 'Berkley', count: '0' }
     ];
+    var rawData = [
+      { insertId: 1, json: data[0] },
+      { insertId: 2, json: data[1] },
+      { insertId: 3, json: data[2] },
+      { insertId: 4, json: data[3] },
+      { insertId: 5, json: data[4] },
+    ];
 
     var dataApiFormat = {
       rows: data.map(function(row) {
@@ -994,6 +1001,37 @@ describe('BigQuery/Table', function() {
 
         done();
       });
+    });
+
+    it('should insert raw data', function(done) {
+      table.request = function(reqOpts) {
+        assert.equal(reqOpts.method, 'POST');
+        assert.equal(reqOpts.uri, '/insertAll');
+        assert.deepEqual(reqOpts.json, { rows: rawData });
+        done();
+      };
+
+      var opts = { raw: true };
+      table.insert(rawData, opts, done);
+    });
+
+    it('should accept opts', function(done) {
+      table.request = function(reqOpts) {
+        assert.equal(reqOpts.method, 'POST');
+        assert.equal(reqOpts.uri, '/insertAll');
+        dataApiFormat.ignoreUnknownValues = true;
+        dataApiFormat.skipInvalidRows = true;
+        dataApiFormat.templateSuffix = 'test';
+        assert.deepEqual(reqOpts.json, dataApiFormat);
+        done();
+      };
+
+      var opts = {
+        skipInvalidRows: true,
+        ignoreUnknownValues: true,
+        templateSuffix: 'test'
+      };
+      table.insert(data, opts, done);
     });
   });
 
