@@ -34,7 +34,7 @@
     "ignore": true,
     "line": 17,
     "codeStart": 21,
-    "code": "'use strict';\n\nvar arrify = require('arrify');\nvar crypto = require('crypto');\nvar duplexify = require('duplexify');\nvar extend = require('extend');\nvar format = require('string-format-obj');\nvar fs = require('fs');\nvar is = require('is');\nvar nodeutil = require('util');\nvar path = require('path');\nvar streamEvents = require('stream-events');",
+    "code": "'use strict';\n\nvar arrify = require('arrify');\nvar duplexify = require('duplexify');\nvar extend = require('extend');\nvar format = require('string-format-obj');\nvar fs = require('fs');\nvar is = require('is');\nvar nodeutil = require('util');\nvar path = require('path');\nvar streamEvents = require('stream-events');",
     "ctx": false
   },
   {
@@ -69,8 +69,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 34,
-    "codeStart": 38,
+    "line": 33,
+    "codeStart": 37,
     "code": "var File = require('../storage/file.js');",
     "ctx": {
       "type": "declaration",
@@ -111,8 +111,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 40,
-    "codeStart": 44,
+    "line": 39,
+    "codeStart": 43,
     "code": "var ServiceObject = require('../common/service-object.js');",
     "ctx": {
       "type": "declaration",
@@ -153,8 +153,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 46,
-    "codeStart": 50,
+    "line": 45,
+    "codeStart": 49,
     "code": "var streamRouter = require('../common/stream-router.js');",
     "ctx": {
       "type": "declaration",
@@ -195,8 +195,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 52,
-    "codeStart": 56,
+    "line": 51,
+    "codeStart": 55,
     "code": "var util = require('../common/util.js');",
     "ctx": {
       "type": "declaration",
@@ -251,8 +251,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 58,
-    "codeStart": 70
+    "line": 57,
+    "codeStart": 69
   },
   {
     "tags": [
@@ -282,8 +282,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 70,
-    "codeStart": 81,
+    "line": 69,
+    "codeStart": 80,
     "code": "function Table(dataset, id) {\n  var methods = {",
     "ctx": {
       "type": "constructor",
@@ -323,8 +323,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 83,
-    "codeStart": 95,
+    "line": 82,
+    "codeStart": 94,
     "code": "create: true,",
     "ctx": {
       "type": "property",
@@ -398,8 +398,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 97,
-    "codeStart": 110,
+    "line": 96,
+    "codeStart": 109,
     "code": "delete: true,",
     "ctx": {
       "type": "property",
@@ -468,8 +468,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 112,
-    "codeStart": 123,
+    "line": 111,
+    "codeStart": 122,
     "code": "exists: true,",
     "ctx": {
       "type": "property",
@@ -524,8 +524,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 125,
-    "codeStart": 142,
+    "line": 124,
+    "codeStart": 141,
     "code": "get: true,",
     "ctx": {
       "type": "property",
@@ -613,8 +613,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 144,
-    "codeStart": 158,
+    "line": 143,
+    "codeStart": 157,
     "code": "getMetadata: true\n  };\n\n  ServiceObject.call(this, {\nparent: dataset,\nbaseUrl: '/tables',\nid: id,\ncreateMethod: dataset.createTable.bind(dataset),\nmethods: methods\n  });\n\n  this.bigQuery = dataset.bigQuery;\n  this.dataset = dataset;\n}\n\nnodeutil.inherits(Table, ServiceObject);",
     "ctx": {
       "type": "property",
@@ -674,8 +674,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 175,
-    "codeStart": 184,
+    "line": 174,
+    "codeStart": 183,
     "code": "Table.createSchemaFromString_ = function(str) {\n  return str.split(/\\s*,\\s*/).reduce(function(acc, pair) {\n    acc.fields.push({\n      name: pair.split(':')[0],\n      type: pair.split(':')[1] || 'string'\n    });\n\n    return acc;\n  }, {\n    fields: []\n  });\n};",
     "ctx": {
       "type": "method",
@@ -751,8 +751,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 197,
-    "codeStart": 207,
+    "line": 196,
+    "codeStart": 206,
     "code": "Table.mergeSchemaWithRows_ = function(schema, rows) {\n  return rows.map(mergeSchema).map(flattenRows);\n\n  function mergeSchema(row) {\n    return row.f.map(function(field, index) {\n      var schemaField = schema.fields[index];\n      var value = field.v;\n\n      switch (schemaField.type) {\n        case 'BOOLEAN': {\n          value = Boolean(value).valueOf();\n          break;\n        }\n        case 'FLOAT': {\n          if (!is.nil(value)) {\n            value = parseFloat(value);\n          }\n          break;\n        }\n        case 'INTEGER': {\n          if (!is.nil(value)) {\n            value = parseInt(value, 10);\n          }\n          break;\n        }\n        case 'TIMESTAMP': {\n          value = new Date(value * 1000);\n          break;\n        }\n      }\n\n      var fieldObject = {};\n      fieldObject[schemaField.name] = value;\n      return fieldObject;\n    });\n  }\n\n  function flattenRows(rows) {\n    return rows.reduce(function(acc, row) {\n      var key = Object.keys(row)[0];\n      acc[key] = row[key];\n      return acc;\n    }, {});\n  }\n};",
     "ctx": {
       "type": "method",
@@ -876,8 +876,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 253,
-    "codeStart": 284,
+    "line": 252,
+    "codeStart": 283,
     "code": "Table.prototype.copy = function(destination, metadata, callback) {\n  var that = this;\n\n  if (!(destination instanceof Table)) {\n    throw new Error('Destination must be a Table object.');\n  }\n\n  if (is.fn(metadata)) {\n    callback = metadata;\n    metadata = {};\n  }\n\n  var body = {\n    configuration: {\n      copy: extend(true, metadata || {}, {\n        destinationTable: {\n          datasetId: destination.dataset.id,\n          projectId: destination.bigQuery.projectId,\n          tableId: destination.id\n        },\n        sourceTable: {\n          datasetId: this.dataset.id,\n          projectId: this.bigQuery.projectId,\n          tableId: this.id\n        }\n      })\n    }\n  };\n\n  this.bigQuery.request({\n    method: 'POST',\n    uri: '/jobs',\n    json: body,\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var job = that.bigQuery.job(resp.jobReference.jobId);\n    job.metadata = resp;\n\n    callback(null, job, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -924,8 +924,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 330,
-    "codeStart": 348,
+    "line": 329,
+    "codeStart": 347,
     "code": "Table.prototype.createReadStream = function() {\n  return this.getRows();\n};",
     "ctx": {
       "type": "method",
@@ -995,8 +995,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 352,
-    "codeStart": 398,
+    "line": 351,
+    "codeStart": 397,
     "code": "Table.prototype.createWriteStream = function(metadata) {\n  var that = this;\n\n  metadata = metadata || {};\n\n  var fileTypeMap = {\n    csv: 'CSV',\n    json: 'NEWLINE_DELIMITED_JSON'\n  };\n  var fileTypes = Object.keys(fileTypeMap).map(function(key) {\n    return fileTypeMap[key];\n  });\n\n  if (is.string(metadata)) {\n    metadata = {\n      sourceFormat: fileTypeMap[metadata.toLowerCase()]\n    };\n  }\n\n  if (is.string(metadata.schema)) {\n    metadata.schema = Table.createSchemaFromString_(metadata.schema);\n  }\n\n  extend(true, metadata, {\n    destinationTable: {\n      projectId: that.bigQuery.projectId,\n      datasetId: that.dataset.id,\n      tableId: that.id\n    }\n  });\n\n  if (metadata.hasOwnProperty('sourceFormat') &&\n      fileTypes.indexOf(metadata.sourceFormat) < 0) {\n    throw new Error('Source format not recognized: ' + metadata.sourceFormat);\n  }\n\n  var dup = streamEvents(duplexify());\n\n  dup.once('writing', function() {\n    util.makeWritableStream(dup, {\n      makeAuthenticatedRequest: that.bigQuery.makeAuthenticatedRequest,\n      metadata: {\n        configuration: {\n          load: metadata\n        }\n      },\n      request: {\n        uri: format('{base}/{projectId}/jobs', {\n          base: 'https://www.googleapis.com/upload/bigquery/v2/projects',\n          projectId: that.bigQuery.projectId\n        })\n      }\n    }, function(data) {\n      var job = that.bigQuery.job(data.jobReference.jobId);\n      job.metadata = data;\n\n      dup.emit('complete', job);\n    });\n  });\n\n  return dup;\n};",
     "ctx": {
       "type": "method",
@@ -1157,8 +1157,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 461,
-    "codeStart": 514,
+    "line": 460,
+    "codeStart": 513,
     "code": "Table.prototype.export = function(destination, options, callback) {\n  var that = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  var formats = {\n    avro: 'AVRO',\n    csv: 'CSV',\n    json: 'NEWLINE_DELIMITED_JSON'\n  };\n\n  extend(true, options, {\n    destinationUris: arrify(destination).map(function(dest) {\n      if (!(dest instanceof File)) {\n        throw new Error('Destination must be a File object.');\n      }\n\n      // If no explicit format was provided, attempt to find a match from the\n      // file's extension. If no match, don't set, and default upstream to CSV.\n      var format = path.extname(dest.name).substr(1).toLowerCase();\n      if (!options.destinationFormat && !options.format && formats[format]) {\n        options.destinationFormat = formats[format];\n      }\n\n      return 'gs://' + dest.bucket.name + '/' + dest.name;\n    })\n  });\n\n  if (options.format) {\n    options.format = options.format.toLowerCase();\n\n    if (formats[options.format]) {\n      options.destinationFormat = formats[options.format];\n      delete options.format;\n    } else {\n      throw new Error('Destination format not recognized: ' + options.format);\n    }\n  }\n\n  if (options.gzip) {\n    options.compression = 'GZIP';\n    delete options.gzip;\n  }\n\n  var body = {\n    configuration: {\n      extract: extend(true, options, {\n        sourceTable: {\n          datasetId: this.dataset.id,\n          projectId: this.bigQuery.projectId,\n          tableId: this.id\n        }\n      })\n    }\n  };\n\n  this.bigQuery.request({\n    method: 'POST',\n    uri: '/jobs',\n    json: body\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var job = that.bigQuery.job(resp.jobReference.jobId);\n    job.metadata = resp;\n\n    callback(null, job, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1303,8 +1303,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 590,
-    "codeStart": 648,
+    "line": 589,
+    "codeStart": 647,
     "code": "Table.prototype.getRows = function(options, callback) {\n  var that = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  callback = callback || util.noop;\n\n  this.request({\n    uri: '/data',\n    qs: options\n  }, function(err, resp) {\n    if (err) {\n      onComplete(err, null, null, resp);\n      return;\n    }\n\n    var nextQuery = null;\n\n    if (resp.pageToken) {\n      nextQuery = extend({}, options, {\n        pageToken: resp.pageToken\n      });\n    }\n\n    if (resp.rows && resp.rows.length > 0 && !that.metadata.schema) {\n      // We don't know the schema for this table yet. Do a quick stat.\n      that.getMetadata(function(err, metadata, apiResponse) {\n        if (err) {\n          onComplete(err, null, null, apiResponse);\n          return;\n        }\n\n        onComplete(null, resp.rows, nextQuery, resp);\n      });\n\n      return;\n    }\n\n    onComplete(null, resp.rows, nextQuery, resp);\n  });\n\n  function onComplete(err, rows, nextQuery, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    rows = Table.mergeSchemaWithRows_(that.metadata.schema, rows || []);\n\n    callback(null, rows, nextQuery, resp);\n  }\n};",
     "ctx": {
       "type": "method",
@@ -1430,8 +1430,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 704,
-    "codeStart": 759,
+    "line": 703,
+    "codeStart": 758,
     "code": "Table.prototype.import = function(source, metadata, callback) {\n  var that = this;\n\n  if (is.fn(metadata)) {\n    callback = metadata;\n    metadata = {};\n  }\n\n  callback = callback || util.noop;\n  metadata = metadata || {};\n\n  var formats = {\n    csv: 'CSV',\n    json: 'NEWLINE_DELIMITED_JSON'\n  };\n\n  if (is.string(source)) {\n    // A path to a file was given. If a sourceFormat wasn't specified, try to\n    // find a match from the file's extension.\n    var format = formats[path.extname(source).substr(1).toLowerCase()];\n    if (!metadata.sourceFormat && format) {\n      metadata.sourceFormat = format;\n    }\n\n    // Read the file into a new write stream.\n    return fs.createReadStream(source)\n      .pipe(this.createWriteStream(metadata))\n      .on('error', function(err, resp) {\n        callback(err, null, resp);\n      })\n      .on('complete', function(resp) {\n        // TODO(ryanseys): Does this have to create a job object?\n        callback(null, resp, resp);\n      });\n  }\n\n  var body = {\n    configuration: {\n      load: {\n        destinationTable: {\n          projectId: this.bigQuery.projectId,\n          datasetId: this.dataset.id,\n          tableId: this.id\n        }\n      }\n    }\n  };\n\n  extend(true, body.configuration.load, metadata, {\n    sourceUris: arrify(source).map(function(src) {\n      if (!(src instanceof File)) {\n        throw new Error('Source must be a File object.');\n      }\n\n      // If no explicit format was provided, attempt to find a match from\n      // the file's extension. If no match, don't set, and default upstream\n      // to CSV.\n      var format = formats[path.extname(src.name).substr(1).toLowerCase()];\n      if (!metadata.sourceFormat && format) {\n        body.configuration.load.sourceFormat = format;\n      }\n\n      return 'gs://' + src.bucket.name + '/' + src.name;\n    })\n  });\n\n  this.bigQuery.request({\n    method: 'POST',\n    uri: '/jobs',\n    json: body\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var job = that.bigQuery.job(resp.jobReference.jobId);\n    job.metadata = resp;\n\n    callback(null, job, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1458,6 +1458,76 @@
           "Array.<object>"
         ],
         "typesDescription": "<code>object</code>|<code>Array</code>.&lt;<code>object</code>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object=} options - Configuration object.",
+        "name": "options",
+        "description": "<ul>\n<li>Configuration object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.ignoreUnknownValues - Accept rows that contain\n    values that do not match the schema. The unknown values are ignored.\n    Default: `false`.",
+        "name": "options.ignoreUnknownValues",
+        "description": "<ul>\n<li>Accept rows that contain     values that do not match the schema. The unknown values are ignored.<br />  Default: <code>false</code>.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.raw - If `true`, the `rows` argument is expected to\n    be formatted as according to the\n    [specification](https://cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll).",
+        "name": "options.raw",
+        "description": "<ul>\n<li>If <code>true</code>, the <code>rows</code> argument is expected to     be formatted as according to the<br />  <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll\">specification</a>.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.skipInvalidRows - Insert all valid rows of a\n    request, even if invalid rows exist. Default: `false`.",
+        "name": "options.skipInvalidRows",
+        "description": "<ul>\n<li>Insert all valid rows of a     request, even if invalid rows exist. Default: <code>false</code>.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string} options.templateSuffix - Treat the destination table as a\n    base template, and insert the rows into an instance table named\n    \"{destination}{templateSuffix}\". BigQuery will manage creation of\n    the instance table, using the schema of the base template table. See\n    [Automatic table creation using template tables](https://cloud.google.com/bigquery/streaming-data-into-bigquery#template-tables)\n    for considerations when working with templates tables.",
+        "name": "options.templateSuffix",
+        "description": "<ul>\n<li>Treat the destination table as a     base template, and insert the rows into an instance table named<br />  &quot;{destination}{templateSuffix}&quot;. BigQuery will manage creation of<br />  the instance table, using the schema of the base template table. See<br />  <a href=\"https://cloud.google.com/bigquery/streaming-data-into-bigquery#template-tables\">Automatic table creation using template tables</a><br />  for considerations when working with templates tables.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -1521,8 +1591,8 @@
       },
       {
         "type": "example",
-        "string": "//-\n// Insert a single row.\n//-\ntable.insert({\n  INSTNM: 'Motion Picture Institute of Michigan',\n  CITY: 'Troy',\n  STABBR: 'MI'\n}, insertHandler);\n\n//-\n// Insert multiple rows at a time.\n//-\nvar rows = [\n  {\n    INSTNM: 'Motion Picture Institute of Michigan',\n    CITY: 'Troy',\n    STABBR: 'MI'\n  },\n  // ...\n];\n\ntable.insert(rows, insertHandler);\n\n//-\n// Handling the response.\n//-\nfunction insertHandler(err, insertErrors, apiResponse) {\n  // err (object):\n  //   An API error occurred.\n\n  // insertErrors (object[]):\n  //   If populated, some rows failed to insert, while others may have\n  //   succeeded.\n  //\n  // insertErrors[].row (original individual row object passed to `insert`)\n  // insertErrors[].errors[].reason\n  // insertErrors[].errors[].message\n\n  // See https://developers.google.com/bigquery/troubleshooting-errors for\n  // recommendations on handling errors.\n}",
-        "html": "<p>//-<br />// Insert a single row.<br />//-<br />table.insert({<br />  INSTNM: &#39;Motion Picture Institute of Michigan&#39;,<br />  CITY: &#39;Troy&#39;,<br />  STABBR: &#39;MI&#39;<br />}, insertHandler);</p><p>//-<br />// Insert multiple rows at a time.<br />//-<br />var rows = [<br />  {<br />    INSTNM: &#39;Motion Picture Institute of Michigan&#39;,<br />    CITY: &#39;Troy&#39;,<br />    STABBR: &#39;MI&#39;<br />  },<br />  // ...<br />];</p><p>table.insert(rows, insertHandler);</p><p>//-<br />// Handling the response.<br />//-<br />function insertHandler(err, insertErrors, apiResponse) {<br />  // err (object):<br />  //   An API error occurred.</p><p>  // insertErrors (object[]):<br />  //   If populated, some rows failed to insert, while others may have<br />  //   succeeded.<br />  //<br />  // insertErrors[].row (original individual row object passed to <code>insert</code>)<br />  // insertErrors[].errors[].reason<br />  // insertErrors[].errors[].message</p><p>  // See <a href=\"https://developers.google.com/bigquery/troubleshooting-errors\">https://developers.google.com/bigquery/troubleshooting-errors</a> for<br />  // recommendations on handling errors.<br />}</p>"
+        "string": "//-\n// Insert a single row.\n//-\ntable.insert({\n  INSTNM: 'Motion Picture Institute of Michigan',\n  CITY: 'Troy',\n  STABBR: 'MI'\n}, insertHandler);\n\n//-\n// Insert multiple rows at a time.\n//-\nvar rows = [\n  {\n    INSTNM: 'Motion Picture Institute of Michigan',\n    CITY: 'Troy',\n    STABBR: 'MI'\n  },\n  // ...\n];\n\ntable.insert(rows, insertHandler);\n\n//-\n// Insert a row as according to the <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll\">\n// specification</a>.\n//-\nvar row = {\n  insertId: '1',\n  json: {\n    INSTNM: 'Motion Picture Institute of Michigan',\n    CITY: 'Troy',\n    STABBR: 'MI'\n  }\n};\n\nvar options = {\n  raw: true\n};\n\ntable.insert(row, options, insertHandler);\n\n//-\n// Handling the response.\n//-\nfunction insertHandler(err, insertErrors, apiResponse) {\n  // err (object):\n  //   An API error occurred.\n\n  // insertErrors (object[]):\n  //   If populated, some rows failed to insert, while others may have\n  //   succeeded.\n  //\n  // insertErrors[].row (original individual row object passed to `insert`)\n  // insertErrors[].errors[].reason\n  // insertErrors[].errors[].message\n\n  // See https://developers.google.com/bigquery/troubleshooting-errors for\n  // recommendations on handling errors.\n}",
+        "html": "<p>//-<br />// Insert a single row.<br />//-<br />table.insert({<br />  INSTNM: &#39;Motion Picture Institute of Michigan&#39;,<br />  CITY: &#39;Troy&#39;,<br />  STABBR: &#39;MI&#39;<br />}, insertHandler);</p><p>//-<br />// Insert multiple rows at a time.<br />//-<br />var rows = [<br />  {<br />    INSTNM: &#39;Motion Picture Institute of Michigan&#39;,<br />    CITY: &#39;Troy&#39;,<br />    STABBR: &#39;MI&#39;<br />  },<br />  // ...<br />];</p><p>table.insert(rows, insertHandler);</p><p>//-<br />// Insert a row as according to the <a href=\"https://cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll\"><br />// specification</a>.<br />//-<br />var row = {<br />  insertId: &#39;1&#39;,<br />  json: {<br />    INSTNM: &#39;Motion Picture Institute of Michigan&#39;,<br />    CITY: &#39;Troy&#39;,<br />    STABBR: &#39;MI&#39;<br />  }<br />};</p><p>var options = {<br />  raw: true<br />};</p><p>table.insert(row, options, insertHandler);</p><p>//-<br />// Handling the response.<br />//-<br />function insertHandler(err, insertErrors, apiResponse) {<br />  // err (object):<br />  //   An API error occurred.</p><p>  // insertErrors (object[]):<br />  //   If populated, some rows failed to insert, while others may have<br />  //   succeeded.<br />  //<br />  // insertErrors[].row (original individual row object passed to <code>insert</code>)<br />  // insertErrors[].errors[].reason<br />  // insertErrors[].errors[].message</p><p>  // See <a href=\"https://developers.google.com/bigquery/troubleshooting-errors\">https://developers.google.com/bigquery/troubleshooting-errors</a> for<br />  // recommendations on handling errors.<br />}</p>"
       }
     ],
     "description": {
@@ -1535,9 +1605,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 842,
-    "codeStart": 900,
-    "code": "Table.prototype.insert = function(rows, callback) {\n  var body = {\n    rows: arrify(rows).map(function(row) {\n      var rowObject = {};\n      // Use the stringified contents of the row as a unique insert ID.\n      var md5 = crypto.createHash('md5');\n      md5.update(JSON.stringify(row));\n      rowObject.insertId = md5.digest('hex');\n      rowObject.json = row;\n      return rowObject;\n    })\n  };\n\n  this.request({\n    method: 'POST',\n    uri: '/insertAll',\n    json: body\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var failedToInsert = (resp.insertErrors || []).map(function(insertError) {\n      return {\n        errors: insertError.errors.map(function(error) {\n          return {\n            message: error.message,\n            reason: error.reason\n          };\n        }),\n        row: body.rows[insertError.index].json\n      };\n    });\n\n    callback(null, failedToInsert, resp);\n  });\n};",
+    "line": 841,
+    "codeStart": 933,
+    "code": "Table.prototype.insert = function(rows, options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  var json = extend(true, options, {\n    rows: arrify(rows)\n  });\n\n  if (!options.raw) {\n    json.rows = arrify(rows).map(function(row) {\n      return {\n        json: row\n      };\n    });\n  }\n\n  delete options.raw;\n\n  this.request({\n    method: 'POST',\n    uri: '/insertAll',\n    json: json\n  }, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var failedToInsert = (resp.insertErrors || []).map(function(insertError) {\n      return {\n        errors: insertError.errors.map(function(error) {\n          return {\n            message: error.message,\n            reason: error.reason\n          };\n        }),\n        row: json.rows[insertError.index].json\n      };\n    });\n\n    callback(null, failedToInsert, resp);\n  });\n};",
     "ctx": {
       "type": "method",
       "constructor": "Table",
@@ -1558,8 +1628,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 939,
-    "codeStart": 944,
+    "line": 979,
+    "codeStart": 984,
     "code": "Table.prototype.query = function(query, callback) {\n  return this.dataset.query(query, callback);\n};",
     "ctx": {
       "type": "method",
@@ -1691,8 +1761,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 948,
-    "codeStart": 976,
+    "line": 988,
+    "codeStart": 1016,
     "code": "Table.prototype.setMetadata = function(metadata, callback) {\n  var that = this;\n\n  if (metadata.name) {\n    metadata.friendlyName = metadata.name;\n    delete metadata.name;\n  }\n\n  if (is.string(metadata.schema)) {\n    metadata.schema = Table.createSchemaFromString_(metadata.schema);\n  }\n\n  this.request({\n    method: 'PUT',\n    uri: '',\n    json: metadata\n  }, function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    that.metadata = resp;\n\n    callback(null, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1714,8 +1784,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 1004,
-    "codeStart": 1009,
+    "line": 1044,
+    "codeStart": 1049,
     "code": "streamRouter.extend(Table, ['getRows']);\n\nmodule.exports = Table;",
     "ctx": false
   }
