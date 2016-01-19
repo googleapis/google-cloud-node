@@ -215,7 +215,7 @@ describe('datastore', function() {
     }, function(err) {
       assert.ifError(err);
       var q = ds.createQuery('Person')
-          .filter('linkedTo =', personKey);
+          .filter('linkedTo', '=', personKey);
       ds.runQuery(q, function(err, results) {
         assert.ifError(err);
         assert.strictEqual(results[0].data.fullName, 'Full name');
@@ -364,7 +364,7 @@ describe('datastore', function() {
 
     it('should filter queries with simple indexes', function(done) {
       var q = ds.createQuery('Character').hasAncestor(ancestor)
-          .filter('appearances >=', 20);
+          .filter('appearances', '>=', 20);
       ds.runQuery(q, function(err, entities) {
         assert.ifError(err);
         assert.equal(entities.length, 6);
@@ -374,8 +374,8 @@ describe('datastore', function() {
 
     it('should filter queries with defined indexes', function(done) {
       var q = ds.createQuery('Character').hasAncestor(ancestor)
-          .filter('family =', 'Stark')
-          .filter('appearances >=', 20);
+          .filter('family', '=', 'Stark')
+          .filter('appearances', '>=', 20);
       ds.runQuery(q, function(err, entities) {
         assert.ifError(err);
         assert.equal(entities.length, 6);
@@ -394,8 +394,9 @@ describe('datastore', function() {
     });
 
     it('should filter by key', function(done) {
+      var key = ds.key(['Book', 'GoT', 'Character', 'Rickard']);
       var q = ds.createQuery('Character').hasAncestor(ancestor)
-          .filter('__key__ =', ds.key(['Book', 'GoT', 'Character', 'Rickard']));
+          .filter('__key__',  '=', key);
       ds.runQuery(q, function(err, entities) {
         assert.ifError(err);
         assert.equal(entities.length, 1);
