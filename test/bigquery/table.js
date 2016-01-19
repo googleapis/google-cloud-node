@@ -18,7 +18,6 @@
 
 var arrify = require('arrify');
 var assert = require('assert');
-var crypto = require('crypto');
 var extend = require('extend');
 var mockery = require('mockery');
 var nodeutil = require('util');
@@ -918,14 +917,19 @@ describe('BigQuery/Table', function() {
       { state: 'MI', gender: 'M', year: '2015', name: 'Berkley', count: '0' }
     ];
 
+    var rawData = [
+      { insertId: 1, json: data[0] },
+      { insertId: 2, json: data[1] },
+      { insertId: 3, json: data[2] },
+      { insertId: 4, json: data[3] },
+      { insertId: 5, json: data[4] },
+    ];
+
     var dataApiFormat = {
       rows: data.map(function(row) {
-        var rowObject = {};
-        var md5 = crypto.createHash('md5');
-        md5.update(JSON.stringify(row));
-        rowObject.insertId = md5.digest('hex');
-        rowObject.json = row;
-        return rowObject;
+        return {
+          json: row
+        };
       })
     };
 
@@ -994,6 +998,50 @@ describe('BigQuery/Table', function() {
 
         done();
       });
+    });
+
+    it('should insert raw data', function(done) {
+      table.request = function(reqOpts) {
+        assert.equal(reqOpts.method, 'POST');
+        assert.equal(reqOpts.uri, '/insertAll');
+        assert.deepEqual(reqOpts.json, { rows: rawData });
+        assert.strictEqual(reqOpts.json.raw, undefined);
+        done();
+      };
+
+      var opts = { raw: true };
+      table.insert(rawData, opts, done);
+    });
+
+    it('should accept options', function(done) {
+      var opts = {
+        ignoreUnknownValues: true,
+        skipInvalidRows: true,
+        templateSuffix: 'test'
+      };
+
+      table.request = function(reqOpts) {
+        assert.equal(reqOpts.method, 'POST');
+        assert.equal(reqOpts.uri, '/insertAll');
+
+        assert.strictEqual(
+          reqOpts.json.ignoreUnknownValues,
+          opts.ignoreUnknownValues
+        );
+        assert.strictEqual(
+          reqOpts.json.skipInvalidRows,
+          opts.skipInvalidRows
+        );
+        assert.strictEqual(
+          reqOpts.json.templateSuffix,
+          opts.templateSuffix
+        );
+
+        assert.deepEqual(reqOpts.json.rows, dataApiFormat.rows);
+        done();
+      };
+
+      table.insert(data, opts, done);
     });
   });
 
