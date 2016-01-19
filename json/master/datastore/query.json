@@ -173,14 +173,28 @@
       },
       {
         "type": "param",
-        "string": "{string} filter - Property + Operator (=, <, >, <=, >=).",
-        "name": "filter",
-        "description": "<ul>\n<li>Property + Operator (=, &lt;, &gt;, &lt;=, &gt;=).</li>\n</ul>\n",
+        "string": "{string} property - The field name.",
+        "name": "property",
+        "description": "<ul>\n<li>The field name.</li>\n</ul>\n",
         "types": [
           "string"
         ],
         "typesDescription": "<code>string</code>",
         "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{string=} operator - Operator (=, <, >, <=, >=). Default: `=`.",
+        "name": "operator",
+        "description": "<ul>\n<li>Operator (=, &lt;, &gt;, &lt;=, &gt;=). Default: <code>=</code>.</li>\n</ul>\n",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>|<code>undefined</code>",
+        "optional": true,
         "nullable": false,
         "nonNullable": false,
         "variable": false
@@ -213,8 +227,8 @@
       },
       {
         "type": "example",
-        "string": "// List all companies named Google that have less than 400 employees.\nvar companyQuery = query\n  .filter('name =', 'Google')\n  .filter('size <', 400);\n\n// To filter by key, use `__key__` for the property name. Filter on keys\n// stored as properties is not currently supported.\nvar keyQuery = query.filter('__key__ =', dataset.key(['Company', 'Google']));",
-        "html": "<p>// List all companies named Google that have less than 400 employees.<br />var companyQuery = query<br />  .filter(&#39;name =&#39;, &#39;Google&#39;)<br />  .filter(&#39;size &lt;&#39;, 400);</p><p>// To filter by key, use <code>__key__</code> for the property name. Filter on keys<br />// stored as properties is not currently supported.<br />var keyQuery = query.filter(&#39;<strong>key</strong> =&#39;, dataset.key([&#39;Company&#39;, &#39;Google&#39;]));</p>"
+        "string": "//-\n// List all companies that are located in California.\n//-\nvar caliQuery = query.filter('state', 'CA');\n\n//-\n// List all companies named Google that have less than 400 employees.\n//-\nvar companyQuery = query\n  .filter('name', '=', 'Google')\n  .filter('size', '<', 400);\n\n// To filter by key, use `__key__` for the property name. Filter on keys\n// stored as properties is not currently supported.\nvar key = dataset.key(['Company', 'Google']);\nvar keyQuery = query.filter('__key__', '=', key);",
+        "html": "<p>//-<br />// List all companies that are located in California.<br />//-<br />var caliQuery = query.filter(&#39;state&#39;, &#39;CA&#39;);</p><p>//-<br />// List all companies named Google that have less than 400 employees.<br />//-<br />var companyQuery = query<br />  .filter(&#39;name&#39;, &#39;=&#39;, &#39;Google&#39;)<br />  .filter(&#39;size&#39;, &#39;&lt;&#39;, 400);</p><p>// To filter by key, use <code>__key__</code> for the property name. Filter on keys<br />// stored as properties is not currently supported.<br />var key = dataset.key([&#39;Company&#39;, &#39;Google&#39;]);<br />var keyQuery = query.filter(&#39;<strong>key</strong>&#39;, &#39;=&#39;, key);</p>"
       }
     ],
     "description": {
@@ -228,8 +242,8 @@
     "isEvent": false,
     "ignore": false,
     "line": 103,
-    "codeStart": 126,
-    "code": "Query.prototype.filter = function(filter, value) {\n  // TODO: Add filter validation.\n  var operatorRegex = /[><=]/g;\n  filter = filter.trim();\n  var fieldName = filter.replace(operatorRegex, '').trim();\n  var op = filter.substr(fieldName.length, filter.length).trim();\n  this.filters.push({\n    name: fieldName,\n    op: op,\n    val: value\n  });\n  return this;\n};",
+    "codeStart": 135,
+    "code": "Query.prototype.filter = function(property, operator, value) {\n  if (arguments.length === 2) {\n    value = operator;\n    operator = '=';\n  }\n\n  // TODO: Add filter validation.\n  this.filters.push({\n    name: property.trim(),\n    op: operator.trim(),\n    val: value\n  });\n  return this;\n};",
     "ctx": {
       "type": "method",
       "constructor": "Query",
@@ -289,8 +303,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 140,
-    "codeStart": 151,
+    "line": 150,
+    "codeStart": 161,
     "code": "Query.prototype.hasAncestor = function(key) {\n  this.filters.push({ name: '__key__', op: 'HAS_ANCESTOR', val: key });\n  return this;\n};",
     "ctx": {
       "type": "method",
@@ -309,13 +323,41 @@
       },
       {
         "type": "param",
-        "string": "{string} property - Optional operator (+, -) and property to order by.",
+        "string": "{string} property - The property to order by.",
         "name": "property",
-        "description": "<ul>\n<li>Optional operator (+, -) and property to order by.</li>\n</ul>\n",
+        "description": "<ul>\n<li>The property to order by.</li>\n</ul>\n",
         "types": [
           "string"
         ],
         "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{object=} options - Options object.",
+        "name": "options",
+        "description": "<ul>\n<li>Options object.</li>\n</ul>\n",
+        "types": [
+          "object"
+        ],
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{boolean} options.descending - Sort the results by a property name\n    in descending order. Default: `false`.",
+        "name": "options.descending",
+        "description": "<ul>\n<li>Sort the results by a property name     in descending order. Default: <code>false</code>.</li>\n</ul>\n",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -337,8 +379,8 @@
       },
       {
         "type": "example",
-        "string": "// Sort by size ascendingly.\nvar companiesAscending = companyQuery.order('size');\n\n// Sort by size descendingly.\nvar companiesDescending = companyQuery.order('-size');",
-        "html": "<p>// Sort by size ascendingly.<br />var companiesAscending = companyQuery.order(&#39;size&#39;);</p><p>// Sort by size descendingly.<br />var companiesDescending = companyQuery.order(&#39;-size&#39;);</p>"
+        "string": "// Sort by size ascendingly.\nvar companiesAscending = companyQuery.order('size');\n\n// Sort by size descendingly.\nvar companiesDescending = companyQuery.order('size', {\n  descending: true\n});",
+        "html": "<p>// Sort by size ascendingly.<br />var companiesAscending = companyQuery.order(&#39;size&#39;);</p><p>// Sort by size descendingly.<br />var companiesDescending = companyQuery.order(&#39;size&#39;, {<br />  descending: true<br />});</p>"
       }
     ],
     "description": {
@@ -351,9 +393,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 156,
-    "codeStart": 172,
-    "code": "Query.prototype.order = function(property) {\n  var sign = '+';\n  if (property[0] === '-' || property[0] === '+') {\n    sign = property[0];\n    property = property.substr(1);\n  }\n  this.orders.push({ name: property, sign: sign });\n  return this;\n};",
+    "line": 166,
+    "codeStart": 187,
+    "code": "Query.prototype.order = function(property, options) {\n  var sign = options && options.descending ? '-' : '+';\n\n  this.orders.push({ name: property, sign: sign });\n  return this;\n};",
     "ctx": {
       "type": "method",
       "constructor": "Query",
@@ -408,8 +450,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 182,
-    "codeStart": 191,
+    "line": 194,
+    "codeStart": 203,
     "code": "Query.prototype.groupBy = function(fieldNames) {\n  this.groupByVal = arrify(fieldNames);\n  return this;\n};",
     "ctx": {
       "type": "method",
@@ -471,8 +513,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 196,
-    "codeStart": 214,
+    "line": 208,
+    "codeStart": 226,
     "code": "Query.prototype.select = function(fieldNames) {\n  this.selectVal = arrify(fieldNames);\n  return this;\n};",
     "ctx": {
       "type": "method",
@@ -533,8 +575,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 219,
-    "codeStart": 233,
+    "line": 231,
+    "codeStart": 245,
     "code": "Query.prototype.start = function(start) {\n  this.startVal = start;\n  return this;\n};",
     "ctx": {
       "type": "method",
@@ -595,8 +637,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 238,
-    "codeStart": 252,
+    "line": 250,
+    "codeStart": 264,
     "code": "Query.prototype.end = function(end) {\n  this.endVal = end;\n  return this;\n};",
     "ctx": {
       "type": "method",
@@ -657,8 +699,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 257,
-    "codeStart": 269,
+    "line": 269,
+    "codeStart": 281,
     "code": "Query.prototype.limit = function(n) {\n  this.limitVal = n;\n  return this;\n};",
     "ctx": {
       "type": "method",
@@ -719,8 +761,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 274,
-    "codeStart": 286,
+    "line": 286,
+    "codeStart": 298,
     "code": "Query.prototype.offset = function(n) {\n  this.offsetVal = n;\n  return this;\n};\n\nmodule.exports = Query;",
     "ctx": {
       "type": "method",
