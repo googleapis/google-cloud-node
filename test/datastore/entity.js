@@ -359,7 +359,7 @@ describe('queryToQueryProto', function() {
   it('should support filters and ancestory filtering', function() {
     var ds = datastore.dataset({ projectId: 'project-id' });
     var q = ds.createQuery('Kind1')
-      .filter('name =', 'John')
+      .filter('name', '=', 'John')
       .end('end')
       .hasAncestor(new entity.Key({ path: [ 'Kind2', 'somename' ] }));
     var proto = entity.queryToQueryProto(q);
