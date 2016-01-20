@@ -15,13 +15,17 @@
 
 // [START list]
 // [START auth]
+// You must set these environment variables to run this sample
 var projectId = process.env.TEST_PROJECT_ID;
 var keyFilename = process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
+// If you don't set the environment variables, then you can modify this file
+// to set the values
 projectId = projectId || '<your-project-id>';
 keyFilename = keyFilename || '/path/to/keyfile.json';
 
 // [START require]
+// Provide projectId and authentication to gcloud
 var gcloud = require('gcloud')({
   projectId: projectId,
   keyFilename: keyFilename
@@ -29,10 +33,11 @@ var gcloud = require('gcloud')({
 // [END require]
 // [END auth]
 
+// Get a reference to the logging component
 var logging = gcloud.logging();
 
 function list(callback) {
-  // Retrieve 3 log entries.
+  // Retrieve the latest 3 log entries from the authenticated project.
   logging.getEntries({
     pageSize: 3
   }, callback);
@@ -42,6 +47,7 @@ function list(callback) {
 exports.list = list;
 
 if (module === require.main) {
+  console.log('retrieving latest 3 log entries...');
   list(function (err, apiResponse) {
     console.log(err, 'apiResponse:', apiResponse);
   });
