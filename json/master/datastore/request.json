@@ -787,62 +787,6 @@
       },
       {
         "type": "param",
-        "string": "{array} callback.entities - The list of entities returned by this\n    query. Note that this is a single page of entities, not necessarily\n    all of the entities.",
-        "name": "callback.entities",
-        "description": "<ul>\n<li>The list of entities returned by this     query. Note that this is a single page of entities, not necessarily<br />  all of the entities.</li>\n</ul>\n",
-        "types": [
-          "array"
-        ],
-        "typesDescription": "<code>array</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{?module:datastore/query} callback.nextQuery - If present, run another\n    query with this object to check for more results.",
-        "name": "callback.nextQuery",
-        "description": "<ul>\n<li>If present, run another     query with this object to check for more results.</li>\n</ul>\n",
-        "types": [
-          "module:datastore/query"
-        ],
-        "typesDescription": "module:<a href=\"module%3Adatastore%2Fquery.html\">datastore/query</a>|<code>null</code>",
-        "optional": false,
-        "nullable": true,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{object} callback.apiResponse - The full API response.",
-        "name": "callback.apiResponse",
-        "description": "<ul>\n<li>The full API response.</li>\n</ul>\n",
-        "types": [
-          "object"
-        ],
-        "typesDescription": "<code>object</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{?error} callback.err - An error returned while making this request",
-        "name": "callback.err",
-        "description": "<ul>\n<li>An error returned while making this request</li>\n</ul>\n",
-        "types": [
-          "error"
-        ],
-        "typesDescription": "<code>error</code>|<code>null</code>",
-        "optional": false,
-        "nullable": true,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
         "string": "{object[]} callback.entities - A list of entity objects which match\n    the provided keys.",
         "name": "callback.entities",
         "description": "<ul>\n<li>A list of entity objects which match     the provided keys.</li>\n</ul>\n",
@@ -857,13 +801,13 @@
       },
       {
         "type": "param",
-        "string": "{?object} callback.nextQuery - If present, query with this object to\n    check for more results.",
+        "string": "{?module:datastore/query} callback.nextQuery - If present, run another\n    query with this object to check for more results.",
         "name": "callback.nextQuery",
-        "description": "<ul>\n<li>If present, query with this object to     check for more results.</li>\n</ul>\n",
+        "description": "<ul>\n<li>If present, run another     query with this object to check for more results.</li>\n</ul>\n",
         "types": [
-          "object"
+          "module:datastore/query"
         ],
-        "typesDescription": "<code>object</code>|<code>null</code>",
+        "typesDescription": "module:<a href=\"module%3Adatastore%2Fquery.html\">datastore/query</a>|<code>null</code>",
         "optional": false,
         "nullable": true,
         "nonNullable": false,
@@ -900,7 +844,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 533,
-    "codeStart": 621,
+    "codeStart": 614,
     "code": "DatastoreRequest.prototype.runQuery = function(query, callback) {\n  var req = {\n    read_options: {},\n    query: entity.queryToQueryProto(query)\n  };\n\n  if (query.namespace) {\n    req.partition_id = {\n      namespace: query.namespace\n    };\n  }\n\n  this.makeReq_('runQuery', req, function(err, resp) {\n    if (err) {\n      callback(err, null, null, resp);\n      return;\n    }\n\n    var entities = entity.formatArray(resp.batch.entity_result);\n    var nextQuery = null;\n\n    if (resp.batch.end_cursor && entities.length > 0) {\n      var endCursor = resp.batch.end_cursor.toBase64();\n\n      nextQuery = extend(true, new Query(), query);\n      nextQuery.start(endCursor).offset(0);\n    }\n\n    callback(null, entities, nextQuery, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1017,8 +961,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 653,
-    "codeStart": 689,
+    "line": 646,
+    "codeStart": 682,
     "code": "DatastoreRequest.prototype.allocateIds = function(incompleteKey, n, callback) {\n  if (entity.isKeyComplete(incompleteKey)) {\n    throw new Error('An incomplete key should be provided.');\n  }\n\n  var incompleteKeys = [];\n  for (var i = 0; i < n; i++) {\n    incompleteKeys.push(entity.keyToKeyProto(incompleteKey));\n  }\n\n  var req = {\n    key: incompleteKeys\n  };\n\n  this.makeReq_('allocateIds', req, function(err, resp) {\n    if (err) {\n      callback(err, null, resp);\n      return;\n    }\n\n    var keys = (resp.key || []).map(entity.keyFromKeyProto);\n\n    callback(null, keys, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1040,8 +984,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 715,
-    "codeStart": 718,
+    "line": 708,
+    "codeStart": 711,
     "code": "DatastoreRequest.prototype.update = function(entities, callback) {\n  entities = arrify(entities).map(propAssign('method', 'update'));\n  this.save(entities, callback);\n};",
     "ctx": {
       "type": "method",
@@ -1063,8 +1007,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 723,
-    "codeStart": 726,
+    "line": 716,
+    "codeStart": 719,
     "code": "DatastoreRequest.prototype.upsert = function(entities, callback) {\n  entities = arrify(entities).map(propAssign('method', 'upsert'));\n  this.save(entities, callback);\n};",
     "ctx": {
       "type": "method",
@@ -1140,8 +1084,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 731,
-    "codeStart": 754,
+    "line": 724,
+    "codeStart": 747,
     "code": "DatastoreRequest.prototype.makeReq_ = function(method, body, callback) {\n  // TODO: Handle non-HTTP 200 cases.\n  if (!callback) {\n    callback = body;\n    body = {};\n  }\n\n  callback = callback || util.noop;\n\n  // Set properties to indicate if we're in a transaction or not.\n  if (method === 'commit') {\n    if (this.id) {\n      body.mode = MODE_TRANSACTIONAL;\n      body.transaction = this.id;\n    } else {\n      body.mode = MODE_NON_TRANSACTIONAL;\n    }\n  }\n\n  if (method === 'rollback') {\n    body.transaction = this.id;\n  }\n\n  if (this.id && (method === 'lookup' || method === 'runQuery')) {\n    body.read_options = body.read_options || {};\n    body.read_options.transaction = this.id;\n  }\n\n  var pbKey = method[0].toUpperCase() + method.substr(1);\n  var pbRequest = new pb[pbKey + 'Request'](body).toBuffer();\n  var pbResponse = pb[pbKey + 'Response'];\n\n  var reqOpts = {\n    method: 'POST',\n    uri: format('{apiEndpoint}/{path}/{datasetId}/{method}', {\n      apiEndpoint: this.apiEndpoint,\n      path: 'datastore/v1beta2/datasets',\n      datasetId: this.datasetId,\n      method: method\n    }),\n    body: is.empty(body) ? '' : pbRequest,\n    encoding: null,\n    headers: {\n      'Content-Type': 'application/x-protobuf'\n    }\n  };\n\n  this.makeAuthenticatedRequest_(reqOpts, {\n    onAuthenticated: function(err, authenticatedReqOpts) {\n      if (err) {\n        callback(err, null);\n        return;\n      }\n\n      request(authenticatedReqOpts, function(err, resp, body) {\n        if (err) {\n          callback(err, null);\n          return;\n        }\n\n        var parsedResp = util.parseHttpRespMessage(resp);\n\n        if (parsedResp.err) {\n          callback(parsedResp.err, null, parsedResp.resp);\n          return;\n        }\n\n        var parsedBody = util.parseHttpRespBody(pbResponse.decode(body));\n\n        if (parsedBody.err) {\n          callback(parsedBody.err, null, parsedResp.resp);\n          return;\n        }\n\n        callback(null, parsedBody.body, resp);\n      });\n    }\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1163,8 +1107,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 834,
-    "codeStart": 839,
+    "line": 827,
+    "codeStart": 832,
     "code": "streamRouter.extend(DatastoreRequest, 'runQuery');\n\nmodule.exports = DatastoreRequest;",
     "ctx": false
   }
