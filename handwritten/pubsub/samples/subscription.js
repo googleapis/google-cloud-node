@@ -169,6 +169,7 @@ function pullMessages(callback) {
 exports.createTopic = createTopic;
 exports.subscribe = subscribe;
 exports.runSample = runSample;
+exports.pubsub = pubsub;
 
 function runSample(callback) {
   var _subscription;

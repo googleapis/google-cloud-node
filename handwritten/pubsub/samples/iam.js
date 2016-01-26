@@ -14,13 +14,17 @@
 'use strict';
 
 var async = require('async');
-var utils = require('./subscription');
-var createTopic = utils.createTopic;
-var subscribe = utils.subscribe;
+var subscriptionSample = require('./subscription');
+var createTopic = subscriptionSample.createTopic;
+var subscribe = subscriptionSample.subscribe;
+var pubsub = subscriptionSample.pubsub;
 
 // [START get_topic_policy]
-function getTopicPolicy(topic, callback) {
-  // Retrieve the IAM policy for the provided topic
+function getTopicPolicy(callback) {
+  // Grab a reference to an existing topic
+  var topic = pubsub.topic('messageCenter');
+
+  // Retrieve the IAM policy for the topic
   topic.iam.getPolicy(function (err, policy) {
     if (err) {
       return callback(err);
@@ -32,8 +36,11 @@ function getTopicPolicy(topic, callback) {
 // [END get_topic_policy]
 
 // [START get_subscription_policy]
-function getSubscriptionPolicy(subscription, callback) {
-  // Retrieve the IAM policy for the provided subscription
+function getSubscriptionPolicy(callback) {
+  // Grab a reference to an existing subscription
+  var subscription = pubsub.subscription('newMessages');
+
+  // Retrieve the IAM policy for the subscription
   subscription.iam.getPolicy(function (err, policy) {
     if (err) {
       return callback(err);
@@ -45,7 +52,10 @@ function getSubscriptionPolicy(subscription, callback) {
 // [END get_subscription_policy]
 
 // [START set_topic_policy]
-function setTopicPolicy(topic, callback) {
+function setTopicPolicy(callback) {
+  // Grab a reference to an existing topic
+  var topic = pubsub.topic('messageCenter');
+
   // Policy update
   var myPolicy = {
     bindings: [
@@ -62,7 +72,10 @@ function setTopicPolicy(topic, callback) {
 // [END set_topic_policy]
 
 // [START set_subscription_policy]
-function setSubscriptionPolicy(subscription, callback) {
+function setSubscriptionPolicy(callback) {
+  // Grab a reference to an existing subscription
+  var subscription = pubsub.subscription('newMessages');
+
   // Policy update
   var myPolicy = {
     bindings: [
@@ -79,7 +92,10 @@ function setSubscriptionPolicy(subscription, callback) {
 // [END set_subscription_policy]
 
 // [START test_topic_permissions]
-function testTopicPermissions(topic, callback) {
+function testTopicPermissions(callback) {
+  // Grab a reference to an existing topic
+  var topic = pubsub.topic('messageCenter');
+
   var tests = [
     'pubsub.topics.attachSubscription',
     'pubsub.topics.publish',
@@ -92,7 +108,10 @@ function testTopicPermissions(topic, callback) {
 // [END test_topic_permissions]
 
 // [START test_subscription_permissions]
-function testSubscriptionPermissions(subscription, callback) {
+function testSubscriptionPermissions(callback) {
+  // Grab a reference to an existing subscription
+  var subscription = pubsub.subscription('newMessages');
+
   var tests = [
     'pubsub.subscriptions.consume',
     'pubsub.subscriptions.update'
@@ -122,13 +141,13 @@ function runSample(callback) {
       responses.push([topic, apiResponse]);
       console.log('created topic');
       console.log('get topic IAM policy...');
-      getTopicPolicy(topic, cb);
+      getTopicPolicy(cb);
     },
     function (policy, cb) {
       responses.push([policy]);
       console.log('got topic policy', policy);
       console.log('testing topic permissions...');
-      testTopicPermissions(_topic, cb);
+      testTopicPermissions(cb);
     },
     function (permissions, apiResponse, cb) {
       responses.push([permissions, apiResponse]);
@@ -141,13 +160,13 @@ function runSample(callback) {
       responses.push([subscription, apiResponse]);
       console.log('created subscription');
       console.log('get subscription IAM policy...');
-      getSubscriptionPolicy(subscription, cb);
+      getSubscriptionPolicy(cb);
     },
     function (policy, cb) {
       responses.push([policy]);
       console.log('got subscription policy', policy);
       console.log('testing subscription permissions...');
-      testSubscriptionPermissions(_subscription, cb);
+      testSubscriptionPermissions(cb);
     },
     function (permissions, apiResponse, cb) {
       responses.push([permissions, apiResponse]);
