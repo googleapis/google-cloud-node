@@ -4,7 +4,7 @@ These samples require two environment variables to be set:
 
 - `GOOGLE_APPLICATION_CREDENTIALS` - Path to a service account file. You can
 download one from your Google project's "permissions" page.
-- `TEST_PROJECT_ID` - Id of your Google project.
+- `GCLOUD_PROJECT` - Id of your Google project.
 
 ## Run a sample
 
