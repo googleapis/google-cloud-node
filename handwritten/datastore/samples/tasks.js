@@ -16,9 +16,9 @@
 var input = process.argv.splice(2);
 var command = input.shift();
 
-var projectId = process.env.DATASTORE_PROJECT_ID || process.env.TEST_PROJECT_ID;
+var projectId = process.env.DATASTORE_PROJECT_ID || process.env.GCLOUD_PROJECT;
 if (!projectId) {
-  throw new Error('TEST_PROJECT_ID environment variable required.');
+  throw new Error('GCLOUD_PROJECT environment variable required.');
 }
 var keyFile = process.env.DATASTORE_KEYFILE ||
               process.env.GOOGLE_APPLICATION_CREDENTIALS;
