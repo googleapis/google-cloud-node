@@ -1113,14 +1113,14 @@
       },
       {
         "type": "param",
-        "string": "{object} options.metadata - Set the metadata for this file.",
+        "string": "{object=} options.metadata - See an\n    [Objects: insert request body](https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request_properties_JSON).",
         "name": "options.metadata",
-        "description": "<ul>\n<li>Set the metadata for this file.</li>\n</ul>\n",
+        "description": "<ul>\n<li>See an     <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request_properties_JSON\">Objects: insert request body</a>.</li>\n</ul>\n",
         "types": [
           "object"
         ],
-        "typesDescription": "<code>object</code>",
-        "optional": false,
+        "typesDescription": "<code>object</code>|<code>undefined</code>",
+        "optional": true,
         "nullable": false,
         "nonNullable": false,
         "variable": false
@@ -1171,7 +1171,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 670,
-    "codeStart": 753,
+    "codeStart": 754,
     "code": "File.prototype.createWriteStream = function(options) {\n  options = options || {};\n\n  var self = this;\n\n  var gzip = options.gzip;\n\n  var metadata = options.metadata || {};\n  if (gzip) {\n    metadata.contentEncoding = 'gzip';\n  }\n\n  var crc32c = options.validation !== false;\n  var md5 = options.validation !== false;\n\n  if (is.string(options.validation)) {\n    options.validation = options.validation.toLowerCase();\n    crc32c = options.validation === 'crc32c';\n    md5 = options.validation === 'md5';\n  }\n\n  // Collect data as it comes in to store in a hash. This is compared to the\n  // checksum value on the returned metadata from the API.\n  var validateStream = hashStreamValidation({\n    crc32c: crc32c,\n    md5: md5\n  });\n\n  var fileWriteStream = duplexify();\n\n  var stream = streamEvents(pumpify([\n    gzip ? zlib.createGzip() : through(),\n    validateStream,\n    fileWriteStream\n  ]));\n\n  // Wait until we've received data to determine what upload technique to use.\n  stream.on('writing', function() {\n    if (options.resumable === false) {\n      self.startSimpleUpload_(fileWriteStream, metadata);\n    } else {\n      self.startResumableUpload_(fileWriteStream, metadata);\n    }\n  });\n\n  fileWriteStream.on('response', stream.emit.bind(stream, 'response'));\n\n  // This is to preserve the `finish` event. We wait until the request stream\n  // emits \"complete\", as that is when we do validation of the data. After that\n  // is successful, we can allow the stream to naturally finish.\n  //\n  // Reference for tracking when we can use a non-hack solution:\n  // https://github.com/nodejs/node/pull/2314\n  fileWriteStream.on('prefinish', function() {\n    stream.cork();\n  });\n\n  // Compare our hashed version vs the completed upload's version.\n  fileWriteStream.on('complete', function() {\n    var metadata = self.metadata;\n\n    // If we're doing validation, assume the worst-- a data integrity mismatch.\n    // If not, these tests won't be performed, and we can assume the best.\n    var failed = crc32c || md5;\n\n    if (crc32c && metadata.crc32c) {\n      // We must remove the first four bytes from the returned checksum.\n      // http://stackoverflow.com/questions/25096737/\n      //   base64-encoding-of-crc32c-long-value\n      failed = !validateStream.test('crc32c', metadata.crc32c.substr(4));\n    }\n\n    if (md5 && metadata.md5Hash) {\n      failed = !validateStream.test('md5', metadata.md5Hash);\n    }\n\n    if (failed) {\n      self.delete(function(err) {\n        var code;\n        var message;\n\n        if (err) {\n          code = 'FILE_NO_UPLOAD_DELETE';\n          message = [\n            'The uploaded data did not match the data from the server. As a',\n            'precaution, we attempted to delete the file, but it was not',\n            'successful. To be sure the content is the same, you should try',\n            'removing the file manually, then uploading the file again.',\n            '\\n\\nThe delete attempt failed with this message:',\n            '\\n\\n  ' + err.message\n          ].join(' ');\n        } else {\n          code = 'FILE_NO_UPLOAD';\n          message = [\n            'The uploaded data did not match the data from the server. As a',\n            'precaution, the file has been deleted. To be sure the content',\n            'is the same, you should try uploading the file again.'\n          ].join(' ');\n        }\n\n        var error = new Error(message);\n        error.code = code;\n        error.errors = [err];\n\n        fileWriteStream.destroy(error);\n      });\n\n      return;\n    }\n\n    stream.uncork();\n  });\n\n  return stream;\n};",
     "ctx": {
       "type": "method",
@@ -1269,8 +1269,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 869,
-    "codeStart": 894,
+    "line": 870,
+    "codeStart": 895,
     "code": "File.prototype.download = function(options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  callback = once(callback);\n\n  var destination = options.destination;\n  delete options.destination;\n\n  var fileStream = this.createReadStream(options);\n\n  if (destination) {\n    fileStream\n      .on('error', callback)\n      .pipe(fs.createWriteStream(destination))\n      .on('error', callback)\n      .on('finish', callback);\n  } else {\n    fileStream\n      .on('error', callback)\n      .pipe(concat(callback.bind(null, null)));\n  }\n};",
     "ctx": {
       "type": "method",
@@ -1510,8 +1510,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 920,
-    "codeStart": 978,
+    "line": 921,
+    "codeStart": 979,
     "code": "File.prototype.getSignedPolicy = function(options, callback) {\n  var expires = new Date(options.expires);\n\n  if (expires < Date.now()) {\n    throw new Error('An expiration date cannot be in the past.');\n  }\n\n  options = extend({}, options);\n\n  var conditions = [\n    ['eq', '$key', this.name],\n    {\n      bucket: this.bucket.name\n    }\n  ];\n\n  if (is.array(options.equals)) {\n    if (!is.array(options.equals[0])) {\n      options.equals = [options.equals];\n    }\n    options.equals.forEach(function(condition) {\n      if (!is.array(condition) || condition.length !== 2) {\n        throw new Error('Equals condition must be an array of 2 elements.');\n      }\n      conditions.push(['eq', condition[0], condition[1]]);\n    });\n  }\n\n  if (is.array(options.startsWith)) {\n    if (!is.array(options.startsWith[0])) {\n      options.startsWith = [options.startsWith];\n    }\n    options.startsWith.forEach(function(condition) {\n      if (!is.array(condition) || condition.length !== 2) {\n        throw new Error('StartsWith condition must be an array of 2 elements.');\n      }\n      conditions.push(['starts-with', condition[0], condition[1]]);\n    });\n  }\n\n  if (options.acl) {\n    conditions.push({\n      acl: options.acl\n    });\n  }\n\n  if (options.successRedirect) {\n    conditions.push({\n      success_action_redirect: options.successRedirect\n    });\n  }\n\n  if (options.successStatus) {\n    conditions.push({\n      success_action_status: options.successStatus\n    });\n  }\n\n  if (options.contentLengthRange) {\n    var min = options.contentLengthRange.min;\n    var max = options.contentLengthRange.max;\n    if (!is.number(min) || !is.number(max)) {\n      throw new Error('ContentLengthRange must have numeric min & max fields.');\n    }\n    conditions.push(['content-length-range', min, max]);\n  }\n\n  var policy = {\n    expiration: expires.toISOString(),\n    conditions: conditions\n  };\n\n  this.storage.getCredentials(function(err, credentials) {\n    if (err) {\n      callback(new SigningError(err.message));\n      return;\n    }\n\n    if (!credentials.private_key) {\n      var errorMessage = [\n        'Could not find a `private_key`.',\n        'Please verify you are authorized with this property available.'\n      ].join(' ');\n\n      callback(new SigningError(errorMessage));\n      return;\n    }\n\n    var sign = crypto.createSign('RSA-SHA256');\n    var policyString = JSON.stringify(policy);\n    var policyBase64 = new Buffer(policyString).toString('base64');\n\n    sign.update(policyBase64);\n\n    var signature = sign.sign(credentials.private_key, 'base64');\n\n    callback(null, {\n      string: policyString,\n      base64: policyBase64,\n      signature: signature\n    });\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1718,8 +1718,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1082,
-    "codeStart": 1159,
+    "line": 1083,
+    "codeStart": 1160,
     "code": "File.prototype.getSignedUrl = function(options, callback) {\n  var expires = new Date(options.expires);\n  var expiresInSeconds = Math.round(expires / 1000); // The API expects seconds.\n\n  if (expires < Date.now()) {\n    throw new Error('An expiration date cannot be in the past.');\n  }\n\n  options = extend({}, options);\n\n  options.action = {\n    read: 'GET',\n    write: 'PUT',\n    delete: 'DELETE'\n  }[options.action];\n\n  var name = encodeURIComponent(this.name);\n  var targetGeneration = this.generation;\n\n  options.resource = '/' + this.bucket.name + '/' + name;\n\n  this.storage.getCredentials(function(err, credentials) {\n    if (err) {\n      callback(new SigningError(err.message));\n      return;\n    }\n\n    if (!credentials.private_key || !credentials.client_email) {\n      var errorMessage = [\n        'Could not find a `private_key` or `client_email`.',\n        'Please verify you are authorized with these credentials available.'\n      ].join(' ');\n\n      callback(new SigningError(errorMessage));\n      return;\n    }\n\n    var sign = crypto.createSign('RSA-SHA256');\n    sign.update([\n      options.action,\n      (options.contentMd5 || ''),\n      (options.contentType || ''),\n      expiresInSeconds,\n      (options.extensionHeaders || '') + options.resource\n    ].join('\\n'));\n    var signature = sign.sign(credentials.private_key, 'base64');\n\n    var responseContentType = '';\n    if (is.string(options.responseType)) {\n      responseContentType =\n        '&response-content-type=' +\n        encodeURIComponent(options.responseType);\n    }\n\n    var responseContentDisposition = '';\n    if (is.string(options.promptSaveAs)) {\n      responseContentDisposition =\n        '&response-content-disposition=attachment; filename=\"' +\n        encodeURIComponent(options.promptSaveAs) + '\"';\n    }\n    if (is.string(options.responseDisposition)) {\n      responseContentDisposition =\n        '&response-content-disposition=' +\n        encodeURIComponent(options.responseDisposition);\n    }\n\n    var generation = '';\n    if (!is.undefined(targetGeneration)) {\n      generation = '&generation=' + targetGeneration;\n    }\n\n    callback(null, [\n      'https://storage.googleapis.com' + options.resource,\n      '?GoogleAccessId=' + credentials.client_email,\n      '&Expires=' + expiresInSeconds,\n      '&Signature=' + encodeURIComponent(signature),\n      responseContentType,\n      responseContentDisposition,\n      generation\n    ].join(''));\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1808,8 +1808,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1242,
-    "codeStart": 1266,
+    "line": 1243,
+    "codeStart": 1267,
     "code": "File.prototype.makePrivate = function(options, callback) {\n  var self = this;\n\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  var query = {\n    predefinedAcl: options.strict ? 'private' : 'projectPrivate'\n  };\n\n  // You aren't allowed to set both predefinedAcl & acl properties on a file, so\n  // acl must explicitly be nullified, destroying all previous acls on the file.\n  var metadata = {\n    acl: null\n  };\n\n  callback = callback || util.noop;\n\n  this.request({\n    method: 'PATCH',\n    uri: '',\n    qs: query,\n    json: metadata\n  }, function(err, resp) {\n    if (err) {\n      callback(err, resp);\n      return;\n    }\n\n    self.metadata = resp;\n\n    callback(null, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1884,8 +1884,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1303,
-    "codeStart": 1315,
+    "line": 1304,
+    "codeStart": 1316,
     "code": "File.prototype.makePublic = function(callback) {\n  callback = callback || util.noop;\n\n  this.acl.add({\n    entity: 'allUsers',\n    role: 'READER'\n  }, function(err, resp) {\n    callback(err, resp);\n  });\n};",
     "ctx": {
       "type": "method",
@@ -1998,8 +1998,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1326,
-    "codeStart": 1408,
+    "line": 1327,
+    "codeStart": 1409,
     "code": "File.prototype.move = function(destination, callback) {\n  var self = this;\n\n  callback = callback || util.noop;\n\n  this.copy(destination, function(err, destinationFile, apiResponse) {\n    if (err) {\n      callback(err, null, apiResponse);\n      return;\n    }\n\n    self.delete(function(err, apiResponse) {\n      callback(err, destinationFile, apiResponse);\n    });\n  });\n};",
     "ctx": {
       "type": "method",
@@ -2061,8 +2061,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1425,
-    "codeStart": 1435,
+    "line": 1426,
+    "codeStart": 1436,
     "code": "File.prototype.startResumableUpload_ = function(dup, metadata) {\n  var self = this;\n\n  var uploadStream = resumableUpload({\n    authClient: this.storage.authClient,\n    bucket: this.bucket.name,\n    file: this.name,\n    generation: this.generation,\n    metadata: metadata || {}\n  });\n\n  uploadStream\n    .on('response', function(resp) {\n      dup.emit('response', resp);\n    })\n    .on('metadata', function(metadata) {\n      self.metadata = metadata;\n    })\n    .on('finish', function() {\n      dup.emit('complete');\n    });\n\n  dup.setWritable(uploadStream);\n};",
     "ctx": {
       "type": "method",
@@ -2119,8 +2119,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1460,
-    "codeStart": 1470,
+    "line": 1461,
+    "codeStart": 1471,
     "code": "File.prototype.startSimpleUpload_ = function(dup, metadata) {\n  var self = this;\n\n  var reqOpts = {\n    qs: {\n      name: self.name\n    },\n    uri: format('{uploadBaseUrl}/{bucket}/o', {\n      uploadBaseUrl: STORAGE_UPLOAD_BASE_URL,\n      bucket: self.bucket.name\n    })\n  };\n\n  if (is.defined(this.generation)) {\n    reqOpts.qs.ifGenerationMatch = this.generation;\n  }\n\n  util.makeWritableStream(dup, {\n    makeAuthenticatedRequest: this.storage.makeAuthenticatedRequest,\n    metadata: metadata,\n    request: reqOpts\n  }, function(data) {\n    self.metadata = data;\n    dup.emit('complete');\n  });\n};\n\nmodule.exports = File;",
     "ctx": {
       "type": "method",

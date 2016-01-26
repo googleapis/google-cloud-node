@@ -2059,9 +2059,9 @@
       },
       {
         "type": "param",
-        "string": "{object=} options.metadata - Metadata to set for your file.",
+        "string": "{object=} options.metadata - See an\n    [Objects: insert request body](https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request_properties_JSON).",
         "name": "options.metadata",
-        "description": "<ul>\n<li>Metadata to set for your file.</li>\n</ul>\n",
+        "description": "<ul>\n<li>See an     <a href=\"https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request_properties_JSON\">Objects: insert request body</a>.</li>\n</ul>\n",
         "types": [
           "object"
         ],
@@ -2173,7 +2173,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 970,
-    "codeStart": 1066,
+    "codeStart": 1067,
     "code": "Bucket.prototype.upload = function(localPath, options, callback) {\n  if (is.fn(options)) {\n    callback = options;\n    options = {};\n  }\n\n  var newFile;\n  if (options.destination instanceof File) {\n    newFile = options.destination;\n  } else if (is.string(options.destination)) {\n    // Use the string as the name of the file.\n    newFile = this.file(options.destination);\n  } else {\n    // Resort to using the name of the incoming file.\n    newFile = this.file(path.basename(localPath));\n  }\n\n  var metadata = options.metadata || {};\n  var contentType = mime.contentType(path.basename(localPath));\n\n  if (contentType && !metadata.contentType) {\n    metadata.contentType = contentType;\n  }\n\n  var resumable;\n  if (is.boolean(options.resumable)) {\n    resumable = options.resumable;\n    upload();\n  } else {\n    // Determine if the upload should be resumable if it's over the threshold.\n    fs.stat(localPath, function(err, fd) {\n      if (err) {\n        callback(err);\n        return;\n      }\n\n      resumable = fd.size > RESUMABLE_THRESHOLD;\n\n      upload();\n    });\n  }\n\n  function upload() {\n    fs.createReadStream(localPath)\n      .pipe(newFile.createWriteStream({\n        validation: options.validation,\n        resumable: resumable,\n        metadata: metadata,\n        gzip: options.gzip\n      }))\n      .on('error', function(err) {\n        callback(err);\n      })\n      .on('finish', function() {\n        callback(null, newFile);\n      });\n  }\n};",
     "ctx": {
       "type": "method",
@@ -2272,8 +2272,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1125,
-    "codeStart": 1142,
+    "line": 1126,
+    "codeStart": 1143,
     "code": "Bucket.prototype.makeAllFilesPublicPrivate_ = function(options, callback) {\n  var MAX_PARALLEL_LIMIT = 10;\n  var errors = [];\n  var updatedFiles = [];\n\n  this.getFiles(function(err, files) {\n    if (err) {\n      callback(err);\n      return;\n    }\n\n    function processFile(file, callback) {\n      if (options.public) {\n        file.makePublic(processedCallback);\n      } else if (options.private) {\n        file.makePrivate(processedCallback);\n      }\n\n      function processedCallback(err) {\n        if (err) {\n          if (options.force) {\n            errors.push(err);\n            callback();\n            return;\n          }\n\n          callback(err);\n          return;\n        }\n\n        updatedFiles.push(file);\n        callback();\n      }\n    }\n\n    // Iterate through each file and make it public or private.\n    async.eachLimit(files, MAX_PARALLEL_LIMIT, processFile, function(err) {\n      if (err || errors.length > 0) {\n        callback(err || errors, updatedFiles);\n        return;\n      }\n\n      callback(null, updatedFiles);\n    });\n  });\n};",
     "ctx": {
       "type": "method",
@@ -2295,8 +2295,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": true,
-    "line": 1189,
-    "codeStart": 1194,
+    "line": 1190,
+    "codeStart": 1195,
     "code": "streamRouter.extend(Bucket, 'getFiles');\n\nmodule.exports = Bucket;",
     "ctx": false
   }
