@@ -50,7 +50,7 @@ function setTopicPolicy(topic, callback) {
   var myPolicy = {
     bindings: [
       {
-        role: 'roles/pubsub.subscriber',
+        role: 'roles/pubsub.publisher',
         members: ['serviceAccount:myotherproject@appspot.gserviceaccount.com']
       }
     ]
