@@ -14,19 +14,13 @@
 'use strict';
 
 // [START setup]
-// You must set these environment variables to run this sample
-var projectId = process.env.TEST_PROJECT_ID;
-var keyFilename = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+// You must set the GOOGLE_APPLICATION_CREDENTIALS and GCLOUD_PROJECT
+// environment variables to run this sample
+var projectId = process.env.GCLOUD_PROJECT;
 
-// If you don't set the environment variables, then you can modify this file
-// to set the values
-projectId = projectId || '<your-project-id>';
-keyFilename = keyFilename || '/path/to/keyfile.json';
-
-// Provide projectId and authentication to gcloud
+// Initialize gcloud
 var gcloud = require('gcloud')({
-  projectId: projectId,
-  keyFilename: keyFilename
+  projectId: projectId
 });
 
 // Get a reference to the logging component
