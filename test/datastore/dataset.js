@@ -21,6 +21,13 @@ var extend = require('extend');
 var mockery = require('mockery');
 var util = require('../../lib/common/util.js');
 
+var normalizeArgumentsCache = util.normalizeArguments;
+var normalizeArgumentsOverride;
+util.normalizeArguments = function() {
+  return (normalizeArgumentsOverride || normalizeArgumentsCache)
+    .apply(this, arguments);
+};
+
 var makeAuthenticatedRequestFactoryCache = util.makeAuthenticatedRequestFactory;
 var makeAuthenticatedRequestFactoryOverride;
 util.makeAuthenticatedRequestFactory = function() {
@@ -68,10 +75,22 @@ describe('Dataset', function() {
   beforeEach(function() {
     delete process.env.DATASTORE_DATASET;
     makeAuthenticatedRequestFactoryOverride = null;
+    normalizeArgumentsOverride = null;
     dataset = new Dataset(OPTIONS);
   });
 
   describe('instantiation', function() {
+    var defaultProjectId;
+
+    before(function() {
+      defaultProjectId = process.env.GCLOUD_PROJECT;
+      delete process.env.GCLOUD_PROJECT;
+    });
+
+    after(function() {
+      process.env.GCLOUD_PROJECT = defaultProjectId;
+    });
+
     it('should localize the dataset id', function() {
       assert.strictEqual(dataset.datasetId, OPTIONS.projectId);
     });
@@ -86,7 +105,7 @@ describe('Dataset', function() {
       delete process.env.DATASTORE_DATASET;
     });
 
-    it('should throw if a projectId is not specified', function() {
+    it('should throw if a datasetId can not be found', function() {
       assert.throws(function() {
         new Dataset();
       }, 'A project or dataset ID is required to use a Dataset.');
@@ -107,6 +126,22 @@ describe('Dataset', function() {
 
     it('should localize the namespace', function() {
       assert.strictEqual(dataset.namespace, OPTIONS.namespace);
+    });
+
+    it('should normalize the arguments', function() {
+      var normalizeArgumentsCalled = false;
+      var fakeOptions = { projectId: 'project-id' };
+      var fakeContext = {};
+
+      normalizeArgumentsOverride = function(context, options) {
+        normalizeArgumentsCalled = true;
+        assert.strictEqual(context, fakeContext);
+        assert.strictEqual(options, fakeOptions);
+        return options;
+      };
+
+      Dataset.call(fakeContext, fakeOptions);
+      assert(normalizeArgumentsCalled);
     });
 
     it('should create an authenticated request factory', function() {

@@ -1165,6 +1165,17 @@ describe('common/util', function() {
     });
 
     describe('projectIdRequired', function() {
+      var defaultProjectId;
+
+      before(function() {
+        defaultProjectId = process.env.GCLOUD_PROJECT;
+        delete process.env.GCLOUD_PROJECT;
+      });
+
+      after(function() {
+        process.env.GCLOUD_PROJECT = defaultProjectId;
+      });
+
       var fakeContextWithoutProjectId = {
         config_: {}
       };
