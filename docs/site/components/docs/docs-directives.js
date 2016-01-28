@@ -26,7 +26,7 @@ angular.module('gcloud.docs')
     }
 
     return {
-      template: '<a href="{{link}}">Source Code</a>',
+      template: '<a href="{{link}}" target="_blank">Source Code</a>',
 
       link: function($scope) {
         var method = $scope.method;
