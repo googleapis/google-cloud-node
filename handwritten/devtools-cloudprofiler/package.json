@@ -22,7 +22,7 @@
   "dependencies": {
     "bindings": "^1.2.1",
     "nan": "^2.1.0",
-    "protobufjs": "^4.0.0-b2"
+    "protobufjs": "~5.0.1"
   },
   "devDependencies": {
     "clang-format": "^1.0.33"
