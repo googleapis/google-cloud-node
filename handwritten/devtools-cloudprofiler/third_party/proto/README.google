@@ -1,0 +1,8 @@
+URL: https://github.com/google/pprof/blob/d174bbe741d0e8039ecf6504b15f708d1ee5c0f2
+Version: d174bbe741d0e8039ecf6504b15f708d1ee5c0f2
+License: Apache 2.0
+License File: # LICENSE
+Description:
+       pprof is a tool for visualization and analysis of profiling data.
+Local Modifications:
+       All code except the profile.proto file has been removed.
