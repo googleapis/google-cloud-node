@@ -29,11 +29,12 @@ git submodule add -f -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER
 # copy set of json to tag folder
 test -d "ghpages/json/${TRAVIS_TAG}" && exit 0 || mkdir ghpages/json/${TRAVIS_TAG}
 cp -R docs/json/master/* ghpages/json/${TRAVIS_TAG}
+cp docs/*{.md,.html} ghpages/json/${TRAVIS_TAG}
+cp docs/home.html ghpages/json
+cp docs/manifest.json ghpages
 cd ghpages
-git add json/${TRAVIS_TAG}
-# add new tag to versions
-echo "${TRAVIS_TAG}" >> versions.txt
-git add versions.txt
+git add json
+git add manifest.json
 # commit to gh-pages branch
 git config user.name "selfiebot"
 git commit -m "Update docs for ${TRAVIS_TAG}"

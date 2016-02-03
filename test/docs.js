@@ -61,10 +61,10 @@ describe('documentation', function() {
     this.timeout(5000);
 
     FILES.forEach(function(filename) {
-      var fileDocBlocks = [];
       var fileContents = fs.readFileSync(filename, {
         encoding: 'utf8'
       });
+      var fileDocBlocks;
 
       try {
         fileDocBlocks = JSON.parse(fileContents);
@@ -91,17 +91,17 @@ describe('documentation', function() {
         Array: Array
       };
 
-      fileDocBlocks.forEach(function(block) {
-        block.tags.forEach(function(tag) {
-          if (tag.type === 'example') {
-            // Replace all references to require('gcloud') with a relative
-            // version so that the code can be passed into the VM directly.
-            var code = tag.string
-                .replace(/require\(\'gcloud\'\)/g, 'require(\'..\/\')')
-                .replace(/require\(\'gcloud/g, 'require(\'..');
-            assert.doesNotThrow(runCodeInSandbox.bind(null, code, sandbox));
-          }
+      fileDocBlocks.methods.forEach(function(method) {
+        var examples = method.metadata.examples.map(function(example) {
+          return example.code;
         });
+
+        var code = examples
+          .join('\n')
+          .replace(/require\(\'gcloud\'\)/g, 'require(\'..\/\')')
+          .replace(/require\(\'gcloud/g, 'require(\'..');
+
+        assert.doesNotThrow(runCodeInSandbox.bind(null, code, sandbox));
       });
     });
   });
