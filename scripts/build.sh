@@ -29,9 +29,10 @@ if [ "${TRAVIS_BRANCH}" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]
   # add new docs to the gh-pages branch
   git submodule add -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} ghpages
   # copy all the docs file that might have changed, excluding versions.txt (to avoid overriding it)
-  cd docs
-  cp -R `ls --ignore 'versions.txt'` ../ghpages/
-  cd ../ghpages
+  cp -R docs/json/master/* ghpages/json/master
+  cp docs/*{.md,.html} ghpages/json/master
+  cp docs/home.html ghpages/json
+  cp docs/manifest.json ghpages
   # allow "git add" to fail if there aren't new files.
   set +e
   git add .
