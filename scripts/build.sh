@@ -33,6 +33,7 @@ if [ "${TRAVIS_BRANCH}" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]
   cp docs/*{.md,.html} ghpages/json/master
   cp docs/home.html ghpages/json
   cp docs/manifest.json ghpages
+  cd ghpages
   # allow "git add" to fail if there aren't new files.
   set +e
   git add .
