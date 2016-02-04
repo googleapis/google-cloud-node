@@ -789,6 +789,35 @@ describe('common/util', function() {
           makeAuthenticatedRequest(reqOpts, done);
         });
 
+        it('should return abort() from the active request', function(done) {
+          var retryRequest = {
+            abort: done
+          };
+
+          utilOverrides.makeRequest = function() {
+            return retryRequest;
+          };
+
+          var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory();
+          makeAuthenticatedRequest(reqOpts, assert.ifError).abort();
+        });
+
+        it('should only abort() once', function(done) {
+          var retryRequest = {
+            abort: done // Will throw if called more than once.
+          };
+
+          utilOverrides.makeRequest = function() {
+            return retryRequest;
+          };
+
+          var makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory();
+          var request = makeAuthenticatedRequest(reqOpts, assert.ifError);
+
+          request.abort(); // done()
+          request.abort(); // done()
+        });
+
         it('should provide stream to makeRequest', function(done) {
           var stream;
 
@@ -915,6 +944,17 @@ describe('common/util', function() {
       it('should override number of retries to retryRequest', function(done) {
         retryRequestOverride = testCustomRetryRequestConfig(done);
         util.makeRequest(reqOpts, customRetryRequestConfig);
+      });
+
+      it('should return the instance of retryRequest', function() {
+        var requestInstance = {};
+
+        retryRequestOverride = function() {
+          return requestInstance;
+        };
+
+        var request = util.makeRequest(reqOpts, assert.ifError);
+        assert.strictEqual(request, requestInstance);
       });
     });
 
