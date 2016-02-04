@@ -877,10 +877,10 @@ describe('File', function() {
   });
 
   describe('createResumableUpload', function() {
-    it('should not require metadata', function(done) {
+    it('should not require options', function(done) {
       resumableUploadOverride = {
         createURI: function(opts, callback) {
-          assert.deepEqual(opts.metadata, {});
+          assert.strictEqual(opts.metadata, undefined);
           callback();
         }
       };
@@ -889,8 +889,11 @@ describe('File', function() {
     });
 
     it('should create a resumable upload URI', function(done) {
-      var metadata = {
-        contentType: 'application/json'
+      var options = {
+        metadata: {
+          contentType: 'application/json'
+        },
+        origin: '*'
       };
 
       file.generation = 3;
@@ -905,13 +908,14 @@ describe('File', function() {
           assert.strictEqual(opts.bucket, bucket.name);
           assert.strictEqual(opts.file, file.name);
           assert.strictEqual(opts.generation, file.generation);
-          assert.strictEqual(opts.metadata, metadata);
+          assert.strictEqual(opts.metadata, options.metadata);
+          assert.strictEqual(opts.origin, options.origin);
 
           callback();
         }
       };
 
-      file.createResumableUpload(metadata, done);
+      file.createResumableUpload(options, done);
     });
   });
 
