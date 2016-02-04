@@ -497,6 +497,33 @@ describe('Subscription', function() {
       subscription.pull(assert.ifError);
     });
 
+    it('should store the active request', function() {
+      var requestInstance = {};
+
+      subscription.request = function() {
+        return requestInstance;
+      };
+
+      subscription.pull(assert.ifError);
+      assert.strictEqual(subscription.activeRequest_, requestInstance);
+    });
+
+    it('should clear the active request', function(done) {
+      var requestInstance = {};
+
+      subscription.request = function(reqOpts, callback) {
+        setImmediate(function() {
+          callback(null, {});
+          assert.strictEqual(subscription.activeRequest_, null);
+          done();
+        });
+
+        return requestInstance;
+      };
+
+      subscription.pull(assert.ifError);
+    });
+
     it('should pass error to callback', function(done) {
       var error = new Error('Error.');
       subscription.request = function(reqOpts, callback) {
@@ -824,6 +851,17 @@ describe('Subscription', function() {
       subscription.removeListener('message', util.noop);
       // 0 listeners: sub should be closed.
       assert.strictEqual(subscription.closed, true);
+    });
+
+    it('should abort the HTTP request when listeners removed', function(done) {
+      subscription.startPulling_ = util.noop;
+
+      subscription.activeRequest_ = {
+        abort: done
+      };
+
+      subscription.on('message', util.noop);
+      subscription.removeAllListeners();
     });
   });
 
