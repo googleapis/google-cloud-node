@@ -583,17 +583,17 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 
 [gcloud-homepage]: https://googlecloudplatform.github.io/gcloud-node/
 [gcloud-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs
-[gcloud-bigquery-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/bigquery
-[gcloud-compute-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/compute
-[gcloud-datastore-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/datastore
-[gcloud-dns-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/dns
-[gcloud-logging-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/logging
-[gcloud-prediction-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/prediction
-[gcloud-pubsub-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/pubsub
-[gcloud-resource-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/resource
-[gcloud-search-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/search
-[gcloud-storage-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/storage
-[gcloud-translate-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/translate
+[gcloud-bigquery-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/latest/bigquery
+[gcloud-compute-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/latest/compute
+[gcloud-datastore-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/latest/datastore
+[gcloud-dns-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/latest/dns
+[gcloud-logging-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/latest/logging
+[gcloud-prediction-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/latest/prediction
+[gcloud-pubsub-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/latest/pubsub
+[gcloud-resource-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/latest/resource
+[gcloud-search-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/latest/search
+[gcloud-storage-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/latest/storage
+[gcloud-translate-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/latest/translate
 
 [nodejs-getting-started]: https://github.com/GoogleCloudPlatform/nodejs-getting-started
 [nodejs-getting-started-tutorial]: https://cloud.google.com/nodejs/getting-started/hello-world
