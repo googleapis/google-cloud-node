@@ -80,13 +80,13 @@
       "id": "dataset",
       "contents": "bigquery/dataset.json"
     }, {
-      "title": "Job",
-      "id": "job",
-      "contents": "bigquery/job.json"
-    }, {
       "title": "Table",
       "id": "table",
       "contents": "bigquery/table.json"
+    }, {
+      "title": "Job",
+      "id": "job",
+      "contents": "bigquery/job.json"
     }]
   }, {
     "title": "Compute",
@@ -157,14 +157,14 @@
       "id": "dataset",
       "contents": "datastore/dataset.json"
     }, {
+      "title": "Query",
+      "id": "query",
+      "contents": "datastore/query.json"
+    }, {
       "title": "Transaction",
       "id": "transaction",
       "implemented": ">=0.8.0",
       "contents": "datastore/transaction.json"
-    }, {
-      "title": "Query",
-      "id": "query",
-      "contents": "datastore/query.json"
     }]
   }, {
     "title": "Logging",
@@ -172,17 +172,17 @@
     "implemented": ">=0.27.0",
     "contents": "logging/index.json",
     "nav": [{
-      "title": "Entry",
-      "id": "entry",
-      "contents": "logging/entry.json"
+      "title": "Sink",
+      "id": "sink",
+      "contents": "logging/sink.json"
     }, {
       "title": "Log",
       "id": "log",
       "contents": "logging/log.json"
     }, {
-      "title": "Sink",
-      "id": "sink",
-      "contents": "logging/sink.json"
+      "title": "Entry",
+      "id": "entry",
+      "contents": "logging/entry.json"
     }]
   }, {
     "title": "Prediction",
@@ -246,16 +246,21 @@
       "implemented": ">=0.9.0",
       "contents": "storage/bucket.json"
     }, {
-      "title": "Channel",
-      "id": "channel",
-      "implemented": ">=0.26.0",
-      "contents": "storage/channel.json"
-    }, {
       "title": "File",
       "id": "file",
       "implemented": ">=0.9.0",
       "contents": "storage/file.json"
+    }, {
+      "title": "Channel",
+      "id": "channel",
+      "implemented": ">=0.26.0",
+      "contents": "storage/channel.json"
     }]
+  }, {
+    "title": "Translate",
+    "id": "translate",
+    "implemented": ">=0.28.0",
+    "contents": "translate/index.json"
   }],
   "package": {
     "title": "npm",
