@@ -332,7 +332,9 @@ describe('BigQuery/Dataset', function() {
           {
             a: 'b',
             c: 'd',
-            id: 'tableName'
+            tableReference: {
+              tableId: 'tableName'
+            }
           }
         ]
       };
@@ -347,6 +349,7 @@ describe('BigQuery/Dataset', function() {
         ds.getTables(function(err, tables, nextQuery, apiResponse_) {
           assert.ifError(err);
           assert(tables[0] instanceof Table);
+          assert(tables[0].id, apiResponse.tables[0].tableReference.tableId);
           assert.strictEqual(apiResponse_, apiResponse);
           done();
         });
