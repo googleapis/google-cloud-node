@@ -97,6 +97,18 @@ function formatHtml(str) {
   return detectLinks(detectCustomType(formatted));
 }
 
+function createUniqueMethodList(list, method) {
+  var matches = list.filter(function(item) {
+    return item.metadata.name === method.metadata.name;
+  });
+
+  if (!matches.length) {
+    list.push(method);
+  }
+
+  return list;
+}
+
 function createCaption(comment) {
   var caption = formatHtml(comment)
     .replace(/\/\/-*\s*/g, '\n')
@@ -250,6 +262,7 @@ function parseDocs(file, contents, isInherited) {
     methods: comments
       .map(createMethod.bind(null, file))
       .concat(detectMixinMethods(comments))
+      .reduce(createUniqueMethodList, [])
   };
 }
 
