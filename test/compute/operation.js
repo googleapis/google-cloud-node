@@ -406,5 +406,50 @@ describe('Operation', function() {
         operation.startPolling_();
       });
     });
+
+    describe('operation status', function() {
+      var apiResponse;
+
+      beforeEach(function() {
+        apiResponse = { status: 'RUNNING' };
+
+        operation.getMetadata = function(callback) {
+          callback(null, apiResponse, apiResponse);
+        };
+      });
+
+      it('should emit the running event when running', function(done) {
+        operation.on('running', function(metadata) {
+          assert.strictEqual(metadata, apiResponse);
+          done();
+        });
+
+        operation.startPolling_();
+      });
+
+      it('should only emit the running event once', function(done) {
+        var statusSteps = ['PENDING', 'RUNNING', 'RUNNING', 'DONE'];
+        var metadataCallCount = 0;
+        var runningCallCount = 0;
+
+        this.timeout(2000);
+
+        operation.getMetadata = function(callback) {
+          apiResponse.status = statusSteps[metadataCallCount++];
+          callback(null, apiResponse, apiResponse);
+        };
+
+        operation.on('running', function() {
+          runningCallCount++;
+        });
+
+        operation.on('complete', function() {
+          assert.strictEqual(runningCallCount, 1);
+          done();
+        });
+
+        operation.startPolling_();
+      });
+    });
   });
 });
