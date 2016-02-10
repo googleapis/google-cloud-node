@@ -140,17 +140,6 @@ describe('PubSub', function() {
         'https://www.googleapis.com/auth/cloud-platform'
       ]);
     });
-
-    it('should use the PUBSUB_HOST env var', function() {
-      var pubSubHost = 'pubsub-host';
-      process.env.PUBSUB_HOST = pubSubHost;
-
-      var pubsub = new PubSub({ projectId: 'project-id' });
-      delete process.env.PUBSUB_HOST;
-
-      var calledWith = pubsub.calledWith_[0];
-      assert.strictEqual(calledWith.baseUrl, pubSubHost);
-    });
   });
 
   describe('createTopic', function() {
@@ -673,6 +662,69 @@ describe('PubSub', function() {
 
     it('should return a Topic object', function() {
       assert(pubsub.topic('new-topic') instanceof Topic);
+    });
+  });
+
+  describe('determineBaseUrl_', function() {
+    function setHost(host) {
+      process.env.PUBSUB_EMULATOR_HOST = host;
+    }
+
+    beforeEach(function() {
+      delete process.env.PUBSUB_EMULATOR_HOST;
+    });
+
+    it('should default to pubsub.googleapis.com/v1', function() {
+      pubsub.determineBaseUrl_();
+
+      var expectedBaseUrl = 'https://pubsub.googleapis.com/v1';
+      assert.strictEqual(pubsub.baseUrl, expectedBaseUrl);
+    });
+
+    it('should remove slashes from the baseUrl', function() {
+      var expectedBaseUrl = 'http://localhost:8080';
+
+      setHost('http://localhost:8080/');
+      pubsub.determineBaseUrl_();
+      assert.strictEqual(pubsub.baseUrl, expectedBaseUrl);
+
+      setHost('http://localhost:8080//');
+      pubsub.determineBaseUrl_();
+      assert.strictEqual(pubsub.baseUrl, expectedBaseUrl);
+    });
+
+    it('should default to http if protocol is unspecified', function() {
+      setHost('localhost:8080');
+      pubsub.determineBaseUrl_();
+      assert.strictEqual(pubsub.baseUrl, 'http://localhost:8080');
+    });
+
+    it('should not set customEndpoint when using default endpoint', function() {
+      var pubsub = new PubSub({ projectId: PROJECT_ID });
+      pubsub.determineBaseUrl_();
+      assert.strictEqual(pubsub.customEndpoint, undefined);
+    });
+
+    describe('with PUBSUB_EMULATOR_HOST environment variable', function() {
+      var PUBSUB_EMULATOR_HOST = 'http://localhost:9090';
+
+      beforeEach(function() {
+        setHost(PUBSUB_EMULATOR_HOST);
+      });
+
+      after(function() {
+        delete process.env.PUBSUB_EMULATOR_HOST;
+      });
+
+      it('should use the PUBSUB_EMULATOR_HOST env var', function() {
+        pubsub.determineBaseUrl_();
+        assert.strictEqual(pubsub.baseUrl, PUBSUB_EMULATOR_HOST);
+      });
+
+      it('should set customEndpoint', function() {
+        pubsub.determineBaseUrl_();
+        assert.strictEqual(pubsub.customEndpoint, true);
+      });
     });
   });
 });

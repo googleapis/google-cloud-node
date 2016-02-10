@@ -155,15 +155,15 @@ describe('Dataset', function() {
       };
 
       makeAuthenticatedRequestFactoryOverride = function(config) {
-        assert.strictEqual(config.customEndpoint, customEndpoint);
-        assert.strictEqual(config.credentials, OPTIONS.credentials);
-        assert.strictEqual(config.keyFile, OPTIONS.keyFilename);
-        assert.strictEqual(config.email, OPTIONS.email);
+        var expectedConfig = extend({}, OPTIONS, {
+          customEndpoint: customEndpoint,
+          scopes: [
+            'https://www.googleapis.com/auth/datastore',
+            'https://www.googleapis.com/auth/userinfo.email'
+          ]
+        });
 
-        assert.deepEqual(config.scopes, [
-          'https://www.googleapis.com/auth/datastore',
-          'https://www.googleapis.com/auth/userinfo.email'
-        ]);
+        assert.deepEqual(config, expectedConfig);
 
         return authenticatedRequest;
       };
