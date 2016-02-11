@@ -75,10 +75,13 @@ describe('Service', function() {
       var authenticatedRequest = {};
 
       makeAuthenticatedRequestFactoryOverride = function(config) {
-        assert.strictEqual(config.scopes, CONFIG.scopes);
-        assert.strictEqual(config.credentials, OPTIONS.credentials);
-        assert.strictEqual(config.keyFile, OPTIONS.keyFilename);
-        assert.strictEqual(config.email, OPTIONS.email);
+        var expectedConfig = extend({}, CONFIG, {
+          credentials: OPTIONS.credentials,
+          keyFile: OPTIONS.keyFilename,
+          email: OPTIONS.email
+        });
+
+        assert.deepEqual(config, expectedConfig);
 
         return authenticatedRequest;
       };
