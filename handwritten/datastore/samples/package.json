@@ -9,6 +9,7 @@
     "node": ">=0.10.x"
   },
   "scripts": {
+    "error": "node error.js",
     "tasks": "node tasks.js"
   },
   "dependencies": {
