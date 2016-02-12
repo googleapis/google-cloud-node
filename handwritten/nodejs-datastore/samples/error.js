@@ -21,7 +21,7 @@ var dataset = gcloud.datastore.dataset({
 
 // [START error]
 function runQuery(cb) {
-  var query = dataset.createQuery(['foo']).start('badrequest');
+  var query = dataset.createQuery(['Company']).start('badrequest');
 
   dataset.runQuery(query, function (err, entities) {
     // Check for an error
