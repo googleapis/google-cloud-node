@@ -142,6 +142,25 @@ describe('common/util', function() {
       assert.strictEqual(apiError.message, errorMessage);
     });
 
+    it('should parse the response body for errors', function() {
+      var error = new Error('Error.');
+      var errors = [error, error];
+
+      var errorBody = {
+        response: {
+          body: JSON.stringify({
+            error: {
+              errors: errors
+            }
+          })
+        }
+      };
+
+      var apiError = new util.ApiError(errorBody);
+
+      assert.deepEqual(apiError.errors, errors);
+    });
+
     it('should append the custom error message', function() {
       var errorMessage = 'API error message';
       var customErrorMessage = 'Custom error message';
@@ -159,10 +178,13 @@ describe('common/util', function() {
       assert.strictEqual(apiError.message, expectedErrorMessage);
     });
 
-    it('should parse and append the response body', function() {
+    it('should parse and append the decoded response body', function() {
       var errorMessage = 'API error message';
-      var responseBodyMsg = 'Response body message';
-      var expectedErrorMessage = [errorMessage, responseBodyMsg].join(' - ');
+      var responseBodyMsg = 'Response body message &lt;';
+      var expectedErrorMessage = [
+        errorMessage,
+        'Response body message <'
+      ].join(' - ');
 
       var error = {
         message: errorMessage,
