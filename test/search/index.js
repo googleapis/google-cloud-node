@@ -19,7 +19,7 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var nodeutil = require('util');
 var prop = require('propprop');
 
@@ -69,10 +69,10 @@ describe('Search', function() {
   var PROJECT_ID = 'project-id';
 
   before(function() {
-    mockery.registerMock('../common/service.js', FakeService);
-    mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
-    mockery.registerMock('../common/util.js', fakeUtil);
-    mockery.registerMock('./index-class.js', FakeIndex);
+    mockery.registerMock('../../lib/common/service.js', FakeService);
+    mockery.registerMock('../../lib/common/stream-router.js', fakeStreamRouter);
+    mockery.registerMock('../../lib/common/util.js', fakeUtil);
+    mockery.registerMock('../../lib/search/index-class.js', FakeIndex);
 
     mockery.enable({
       useCleanCache: true,

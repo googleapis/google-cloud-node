@@ -317,6 +317,41 @@ describe('pubsub', function() {
         subscription.ack(ackIds, done);
       });
     });
+
+    it('should allow a custom timeout', function(done) {
+      var timeout = 5000;
+      this.timeout(timeout * 2);
+
+      // We need to use a topic without any pending messages to allow the
+      // connection to stay open.
+      var topic = pubsub.topic(generateTopicName());
+      var subscription = topic.subscription(generateSubName(), {
+        timeout: timeout
+      });
+
+      async.series([
+        topic.create.bind(topic),
+        subscription.create.bind(subscription),
+      ], function(err) {
+        assert.ifError(err);
+
+        var times = [Date.now()];
+
+        subscription.pull({
+          returnImmediately: false
+        }, function(err) {
+          assert.ifError(err);
+
+          times.push(Date.now());
+          var runTime = times.pop() - times.pop();
+
+          assert(runTime >= timeout - 1000);
+          assert(runTime <= timeout + 1000);
+
+          done();
+        });
+      });
+    });
   });
 
   describe('IAM', function() {
@@ -325,7 +360,12 @@ describe('pubsub', function() {
 
       topic.iam.getPolicy(function(err, policy) {
         assert.ifError(err);
-        assert.deepEqual(policy, { etag: 'ACAB' });
+
+        assert.deepEqual(policy, {
+          bindings: [],
+          etag: 'ACAB',
+          version: 0
+        });
         done();
       });
     });

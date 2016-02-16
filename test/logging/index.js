@@ -19,7 +19,7 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var nodeutil = require('util');
 
 var Service = require('../../lib/common/service.js');
@@ -87,15 +87,15 @@ describe('Logging', function() {
   var PROJECT_ID = 'project-id';
 
   before(function() {
-    mockery.registerMock('../common/service.js', FakeService);
-    mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
-    mockery.registerMock('../common/util.js', fakeUtil);
-    mockery.registerMock('../bigquery/dataset.js', FakeDataset);
-    mockery.registerMock('../pubsub/topic.js', FakeTopic);
-    mockery.registerMock('../storage/bucket.js', FakeBucket);
-    mockery.registerMock('./log.js', FakeLog);
-    mockery.registerMock('./entry.js', FakeEntry);
-    mockery.registerMock('./sink.js', FakeSink);
+    mockery.registerMock('../../lib/common/service.js', FakeService);
+    mockery.registerMock('../../lib/common/stream-router.js', fakeStreamRouter);
+    mockery.registerMock('../../lib/common/util.js', fakeUtil);
+    mockery.registerMock('../../lib/bigquery/dataset.js', FakeDataset);
+    mockery.registerMock('../../lib/pubsub/topic.js', FakeTopic);
+    mockery.registerMock('../../lib/storage/bucket.js', FakeBucket);
+    mockery.registerMock('../../lib/logging/log.js', FakeLog);
+    mockery.registerMock('../../lib/logging/entry.js', FakeEntry);
+    mockery.registerMock('../../lib/logging/sink.js', FakeSink);
 
     mockery.enable({
       useCleanCache: true,

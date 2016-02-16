@@ -19,7 +19,7 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var nodeutil = require('util');
 
 var Service = require('../../lib/common/service.js');
@@ -55,9 +55,9 @@ describe('Storage', function() {
   var Bucket;
 
   before(function() {
-    mockery.registerMock('../common/service.js', FakeService);
-    mockery.registerMock('../common/util.js', fakeUtil);
-    mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
+    mockery.registerMock('../../lib/common/service.js', FakeService);
+    mockery.registerMock('../../lib/common/util.js', fakeUtil);
+    mockery.registerMock('../../lib/common/stream-router.js', fakeStreamRouter);
 
     mockery.enable({
       useCleanCache: true,

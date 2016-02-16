@@ -19,7 +19,7 @@
 var assert = require('assert');
 var concat = require('concat-stream');
 var extend = require('extend');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var nodeutil = require('util');
 var through = require('through2');
 
@@ -53,8 +53,11 @@ describe('Index', function() {
   var ID = 'model-id';
 
   before(function() {
-    mockery.registerMock('../common/service-object.js', FakeServiceObject);
-    mockery.registerMock('../common/util.js', fakeUtil);
+    mockery.registerMock(
+      '../../lib/common/service-object.js',
+      FakeServiceObject
+    );
+    mockery.registerMock('../../lib/common/util.js', fakeUtil);
 
     mockery.enable({
       useCleanCache: true,

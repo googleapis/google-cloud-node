@@ -19,7 +19,7 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var nodeutil = require('util');
 
 var Service = require('../../lib/common/service.js');
@@ -95,15 +95,15 @@ describe('Compute', function() {
   var PROJECT_ID = 'project-id';
 
   before(function() {
-    mockery.registerMock('../common/service.js', FakeService);
-    mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
-    mockery.registerMock('../common/util.js', fakeUtil);
-    mockery.registerMock('./firewall.js', FakeFirewall);
-    mockery.registerMock('./network.js', FakeNetwork);
-    mockery.registerMock('./operation.js', FakeOperation);
-    mockery.registerMock('./region.js', FakeRegion);
-    mockery.registerMock('./snapshot.js', FakeSnapshot);
-    mockery.registerMock('./zone.js', FakeZone);
+    mockery.registerMock('../../lib/common/service.js', FakeService);
+    mockery.registerMock('../../lib/common/stream-router.js', fakeStreamRouter);
+    mockery.registerMock('../../lib/common/util.js', fakeUtil);
+    mockery.registerMock('../../lib/compute/firewall.js', FakeFirewall);
+    mockery.registerMock('../../lib/compute/network.js', FakeNetwork);
+    mockery.registerMock('../../lib/compute/operation.js', FakeOperation);
+    mockery.registerMock('../../lib/compute/region.js', FakeRegion);
+    mockery.registerMock('../../lib/compute/snapshot.js', FakeSnapshot);
+    mockery.registerMock('../../lib/compute/zone.js', FakeZone);
 
     mockery.enable({
       useCleanCache: true,

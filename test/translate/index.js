@@ -18,7 +18,7 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var prop = require('propprop');
 
 var util = require('../../lib/common/util.js');
@@ -41,7 +41,7 @@ describe('Resource', function() {
   var translate;
 
   before(function() {
-    mockery.registerMock('../common/util.js', fakeUtil);
+    mockery.registerMock('../../lib/common/util.js', fakeUtil);
 
     mockery.enable({
       useCleanCache: true,

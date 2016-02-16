@@ -81,6 +81,10 @@ describe('documentation', function() {
         return console;
       }, {});
 
+      // Set a global to indicate to any interested function inside of gcloud
+      // that this is a sandbox environment.
+      global.GCLOUD_SANDBOX_ENV = true;
+
       var sandbox = {
         gcloud: gcloud,
         require: require,
@@ -88,7 +92,8 @@ describe('documentation', function() {
         console: mockConsole,
         Buffer: Buffer,
         Date: Date,
-        Array: Array
+        Array: Array,
+        global: global
       };
 
       fileDocBlocks.methods.forEach(function(method) {
@@ -103,6 +108,8 @@ describe('documentation', function() {
 
         assert.doesNotThrow(runCodeInSandbox.bind(null, code, sandbox));
       });
+
+      delete global.GCLOUD_SANDBOX_ENV;
     });
   });
 });

@@ -17,31 +17,31 @@
 'use strict';
 
 var assert = require('assert');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var nodeutil = require('util');
 
-var ServiceObject = require('../../lib/common/service-object.js');
+var GrpcService = require('../../lib/common/grpc-service.js');
 var util = require('../../lib/common/util.js');
 
-function FakeServiceObject() {
+function FakeGrpcService() {
   this.calledWith_ = arguments;
-  ServiceObject.apply(this, arguments);
+  GrpcService.apply(this, arguments);
 }
 
-nodeutil.inherits(FakeServiceObject, ServiceObject);
+nodeutil.inherits(FakeGrpcService, GrpcService);
 
 describe('IAM', function() {
   var IAM;
   var iam;
 
-  var PUBSUB = {};
-  var CONFIG = {
-    baseUrl: '/baseurl',
-    id: 'id'
+  var PUBSUB = {
+    defaultBaseUrl_: 'base-url',
+    options: {}
   };
+  var ID = 'id';
 
   before(function() {
-    mockery.registerMock('../common/service-object.js', FakeServiceObject);
+    mockery.registerMock('../../lib/common/grpc-service.js', FakeGrpcService);
 
     mockery.enable({
       useCleanCache: true,
@@ -57,64 +57,44 @@ describe('IAM', function() {
   });
 
   beforeEach(function() {
-    iam = new IAM(PUBSUB, CONFIG);
+    iam = new IAM(PUBSUB, ID);
   });
 
   describe('initialization', function() {
-    it('should inherit from ServiceObject', function() {
-      assert(iam instanceof ServiceObject);
+    it('should inherit from GrpcService', function() {
+      assert(iam instanceof GrpcService);
 
-      var calledWith = iam.calledWith_[0];
+      var config = iam.calledWith_[0];
+      var options = iam.calledWith_[1];
 
-      assert.strictEqual(calledWith.parent, PUBSUB);
-      assert.strictEqual(calledWith.baseUrl, CONFIG.baseUrl);
-      assert.strictEqual(calledWith.id, CONFIG.id);
-      assert.deepEqual(calledWith.methods, {});
+      assert.strictEqual(config.baseUrl, PUBSUB.defaultBaseUrl_);
+      assert.strictEqual(config.service, 'iam');
+      assert.strictEqual(config.apiVersion, 'v1');
+      assert.deepEqual(config.scopes, [
+        'https://www.googleapis.com/auth/pubsub',
+        'https://www.googleapis.com/auth/cloud-platform'
+      ]);
+
+      assert.strictEqual(options, PUBSUB.options);
+    });
+
+    it('should localize the ID', function() {
+      assert.strictEqual(iam.id, ID);
     });
   });
 
   describe('getPolicy', function() {
     it('should make the correct API request', function(done) {
-      iam.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.uri, ':getIamPolicy');
+      iam.request = function(protoOpts, reqOpts, callback) {
+        assert.strictEqual(protoOpts.service, 'IAMPolicy');
+        assert.strictEqual(protoOpts.method, 'getIamPolicy');
 
-        done();
+        assert.strictEqual(reqOpts.resource, iam.id);
+
+        callback(); // done()
       };
 
-      iam.getPolicy(assert.ifError);
-    });
-
-    it('should handle errors properly', function(done) {
-      var apiResponse = {};
-      var error = new Error('Error.');
-
-      iam.request = function(reqOpts, callback) {
-        callback(error, apiResponse);
-      };
-
-      iam.getPolicy(function(err, policy, apiResponse_) {
-        assert.strictEqual(err, error);
-        assert.strictEqual(policy, null);
-        assert.strictEqual(apiResponse_, apiResponse);
-        done();
-      });
-    });
-
-    it('should pass the callback the expected params', function(done) {
-      var apiResponse = {
-        bindings: [{ yo: 'yo' }]
-      };
-
-      iam.request = function(reqOpts, callback) {
-        callback(null, apiResponse);
-      };
-
-      iam.getPolicy(function(err, policy, apiResponse_) {
-        assert.ifError(err);
-        assert.strictEqual(policy, apiResponse);
-        assert.strictEqual(apiResponse_, apiResponse);
-        done();
-      });
+      iam.getPolicy(done);
     });
   });
 
@@ -128,48 +108,17 @@ describe('IAM', function() {
     it('should make the correct API request', function(done) {
       var policy = { etag: 'ACAB' };
 
-      iam.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.method, 'POST');
-        assert.strictEqual(reqOpts.uri, ':setIamPolicy');
-        assert.deepEqual(reqOpts.json, { policy: policy });
+      iam.request = function(protoOpts, reqOpts, callback) {
+        assert.strictEqual(protoOpts.service, 'IAMPolicy');
+        assert.strictEqual(protoOpts.method, 'setIamPolicy');
 
-        done();
+        assert.strictEqual(reqOpts.resource, iam.id);
+        assert.strictEqual(reqOpts.policy, policy);
+
+        callback(); // done()
       };
 
-      iam.setPolicy(policy, assert.ifError);
-    });
-
-    it('should handle errors properly', function(done) {
-      var apiResponse = {};
-      var error = new Error('Error.');
-
-      iam.request = function(reqOpts, callback) {
-        callback(error, apiResponse);
-      };
-
-      iam.setPolicy({}, function(err, policy, apiResponse_) {
-        assert.strictEqual(err, error);
-        assert.strictEqual(policy, null);
-        assert.strictEqual(apiResponse_, apiResponse);
-        done();
-      });
-    });
-
-    it('should pass the callback the expected params', function(done) {
-      var apiResponse = {
-        bindings: [{ yo: 'yo' }]
-      };
-
-      iam.request = function(reqOpts, callback) {
-        callback(null, apiResponse);
-      };
-
-      iam.setPolicy({}, function(err, policy, apiResponse_) {
-        assert.ifError(err);
-        assert.strictEqual(policy, apiResponse);
-        assert.strictEqual(apiResponse_, apiResponse);
-        done();
-      });
+      iam.setPolicy(policy, done);
     });
   });
 
@@ -183,10 +132,12 @@ describe('IAM', function() {
     it('should make the correct API request', function(done) {
       var permissions = 'storage.bucket.list';
 
-      iam.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.method, 'POST');
-        assert.strictEqual(reqOpts.uri, ':testIamPermissions');
-        assert.deepEqual(reqOpts.json, { permissions: [permissions] });
+      iam.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(protoOpts.service, 'IAMPolicy');
+        assert.strictEqual(protoOpts.method, 'testIamPermissions');
+
+        assert.strictEqual(reqOpts.resource, iam.id);
+        assert.deepEqual(reqOpts.permissions, [permissions]);
 
         done();
       };
@@ -199,7 +150,7 @@ describe('IAM', function() {
       var error = new Error('Error.');
       var apiResponse = {};
 
-      iam.request = function(reqOpts, callback) {
+      iam.request = function(protoOpts, reqOpts, callback) {
         callback(error, apiResponse);
       };
 
@@ -220,7 +171,7 @@ describe('IAM', function() {
         permissions: ['storage.bucket.consume']
       };
 
-      iam.request = function(reqOpts, callback) {
+      iam.request = function(protoOpts, reqOpts, callback) {
         callback(null, apiResponse);
       };
 

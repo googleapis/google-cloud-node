@@ -18,22 +18,22 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var nodeutil = require('util');
 
 var util = require('../../lib/common/util.js');
-var ServiceObject = require('../../lib/common/service-object.js');
+var GrpcServiceObject = require('../../lib/common/grpc-service-object.js');
 
 function FakeIAM() {
   this.calledWith_ = [].slice.call(arguments);
 }
 
-function FakeServiceObject() {
+function FakeGrpcServiceObject() {
   this.calledWith_ = arguments;
-  ServiceObject.apply(this, arguments);
+  GrpcServiceObject.apply(this, arguments);
 }
 
-nodeutil.inherits(FakeServiceObject, ServiceObject);
+nodeutil.inherits(FakeGrpcServiceObject, GrpcServiceObject);
 
 describe('Topic', function() {
   var Topic;
@@ -48,15 +48,18 @@ describe('Topic', function() {
   };
 
   before(function() {
-    mockery.registerMock('../common/service-object.js', FakeServiceObject);
-    mockery.registerMock('./iam', FakeIAM);
+    mockery.registerMock(
+      '../../lib/common/grpc-service-object.js',
+      FakeGrpcServiceObject
+    );
+    mockery.registerMock('../../lib/pubsub/iam.js', FakeIAM);
 
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
     });
 
-    Topic = require('../../lib/pubsub/topic');
+    Topic = require('../../lib/pubsub/topic.js');
   });
 
   after(function() {
@@ -69,41 +72,49 @@ describe('Topic', function() {
   });
 
   describe('initialization', function() {
-    it('should inherit from ServiceObject', function(done) {
+    it('should inherit from GrpcServiceObject', function() {
       var pubsubInstance = extend({}, PUBSUB, {
         createTopic: {
           bind: function(context) {
             assert.strictEqual(context, pubsubInstance);
-            done();
           }
         }
       });
 
       var topic = new Topic(pubsubInstance, TOPIC_NAME);
-      assert(topic instanceof ServiceObject);
+      assert(topic instanceof GrpcServiceObject);
 
       var calledWith = topic.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, pubsubInstance);
-      assert.strictEqual(calledWith.baseUrl, '/topics');
-      assert.strictEqual(calledWith.id, TOPIC_UNFORMATTED_NAME);
+      assert.strictEqual(calledWith.id, TOPIC_NAME);
       assert.deepEqual(calledWith.methods, {
         create: true,
-        delete: true,
+        delete: {
+          protoOpts: {
+            service: 'Publisher',
+            method: 'deleteTopic'
+          },
+          reqOpts: {
+            topic: TOPIC_NAME
+          }
+        },
         exists: true,
         get: true,
-        getMetadata: true
+        getMetadata: {
+          protoOpts: {
+            service: 'Publisher',
+            method: 'getTopic'
+          },
+          reqOpts: {
+            topic: TOPIC_NAME
+          }
+        }
       });
     });
 
     it('should create an iam object', function() {
-      assert.deepEqual(topic.iam.calledWith_, [
-        PUBSUB,
-        {
-          baseUrl: '/topics',
-          id: TOPIC_UNFORMATTED_NAME
-        }
-      ]);
+      assert.deepEqual(topic.iam.calledWith_, [PUBSUB, TOPIC_NAME]);
     });
 
     it('should format name', function(done) {
@@ -117,10 +128,6 @@ describe('Topic', function() {
 
     it('should assign pubsub object to `this`', function() {
       assert.deepEqual(topic.pubsub, PUBSUB);
-    });
-
-    it('should localize the unformatted name', function() {
-      assert.strictEqual(topic.unformattedName, TOPIC_UNFORMATTED_NAME);
     });
   });
 
@@ -204,14 +211,15 @@ describe('Topic', function() {
     });
 
     it('should send correct api request', function(done) {
-      topic.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.method, 'POST');
-        assert.strictEqual(reqOpts.uri, ':publish');
-        assert.deepEqual(reqOpts.json, {
-          messages: [
-            { data: new Buffer(JSON.stringify(message)).toString('base64') }
-          ]
-        });
+      topic.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(protoOpts.service, 'Publisher');
+        assert.strictEqual(protoOpts.method, 'publish');
+
+        assert.strictEqual(reqOpts.topic, topic.name);
+        assert.deepEqual(reqOpts.messages, [
+          { data: new Buffer(JSON.stringify(message)).toString('base64') }
+        ]);
+
         done();
       };
 
@@ -219,7 +227,7 @@ describe('Topic', function() {
     });
 
     it('should execute callback', function(done) {
-      topic.request = function(reqOpts, callback) {
+      topic.request = function(protoOpts, reqOpts, callback) {
         callback(null, {});
       };
 
@@ -230,7 +238,7 @@ describe('Topic', function() {
       var error = new Error('Error.');
       var apiResponse = {};
 
-      topic.request = function(reqOpts, callback) {
+      topic.request = function(protoOpts, reqOpts, callback) {
         callback(error, apiResponse);
       };
 
@@ -246,7 +254,7 @@ describe('Topic', function() {
     it('should execute callback with apiResponse', function(done) {
       var resp = { success: true };
 
-      topic.request = function(reqOpts, callback) {
+      topic.request = function(protoOpts, reqOpts, callback) {
         callback(null, resp);
       };
 

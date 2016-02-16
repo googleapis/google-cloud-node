@@ -20,7 +20,7 @@ var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
 var gceImages = require('gce-images');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var nodeutil = require('util');
 
 var ServiceObject = require('../../lib/common/service-object.js');
@@ -75,11 +75,14 @@ describe('Zone', function() {
 
   before(function() {
     mockery.registerMock('gce-images', fakeGceImages);
-    mockery.registerMock('../common/service-object.js', FakeServiceObject);
-    mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
-    mockery.registerMock('./disk.js', FakeDisk);
-    mockery.registerMock('./operation.js', FakeOperation);
-    mockery.registerMock('./vm.js', FakeVM);
+    mockery.registerMock(
+      '../../lib/common/service-object.js',
+      FakeServiceObject
+    );
+    mockery.registerMock('../../lib/common/stream-router.js', fakeStreamRouter);
+    mockery.registerMock('../../lib/compute/disk.js', FakeDisk);
+    mockery.registerMock('../../lib/compute/operation.js', FakeOperation);
+    mockery.registerMock('../../lib/compute/vm.js', FakeVM);
 
     mockery.enable({
       useCleanCache: true,

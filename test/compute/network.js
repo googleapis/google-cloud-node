@@ -19,7 +19,7 @@
 var assert = require('assert');
 var extend = require('extend');
 var format = require('string-format-obj');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var nodeutil = require('util');
 
 var ServiceObject = require('../../lib/common/service-object.js');
@@ -47,7 +47,10 @@ describe('Network', function() {
   });
 
   before(function() {
-    mockery.registerMock('../common/service-object.js', FakeServiceObject);
+    mockery.registerMock(
+      '../../lib/common/service-object.js',
+      FakeServiceObject
+    );
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false

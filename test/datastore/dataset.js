@@ -18,7 +18,7 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var util = require('../../lib/common/util.js');
 
 var normalizeArgumentsCache = util.normalizeArguments;
@@ -56,8 +56,8 @@ describe('Dataset', function() {
   };
 
   before(function() {
-    mockery.registerMock('../common/util.js', util);
-    mockery.registerMock('./transaction.js', FakeTransaction);
+    mockery.registerMock('../../lib/common/util.js', util);
+    mockery.registerMock('../../lib/datastore/transaction.js', FakeTransaction);
 
     mockery.enable({
       useCleanCache: true,

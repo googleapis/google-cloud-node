@@ -17,7 +17,7 @@
 'use strict';
 
 var assert = require('assert');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var is = require('is');
 var nodeutil = require('util');
 
@@ -40,7 +40,10 @@ describe('BigQuery/Job', function() {
   var job;
 
   before(function() {
-    mockery.registerMock('../common/service-object.js', FakeServiceObject);
+    mockery.registerMock(
+      '../../lib/common/service-object.js',
+      FakeServiceObject
+    );
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false

@@ -18,7 +18,7 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var nodeutil = require('util');
 
 var util = require('../../lib/common/util.js');
@@ -48,7 +48,10 @@ describe('VM', function() {
   var VM_NAME = 'vm-name';
 
   before(function() {
-    mockery.registerMock('../common/service-object.js', FakeServiceObject);
+    mockery.registerMock(
+      '../../lib/common/service-object.js',
+      FakeServiceObject
+    );
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false

@@ -23,9 +23,7 @@ var Query = require('../../lib/datastore/query.js');
 var queryProto = require('../testdata/proto_query.json');
 
 describe('Query', function() {
-
   describe('instantiation', function() {
-
     it('should use null for all falsy namespace values', function() {
       [
         new Query('', 'Kind'),
@@ -48,11 +46,9 @@ describe('Query', function() {
       var query = new Query(['kind1']);
       assert.strictEqual(query.autoPaginateVal, true);
     });
-
   });
 
   describe('autoPaginate', function() {
-
     it('should enable auto pagination', function() {
       var query = new Query(['kind1']).autoPaginate();
 
@@ -77,11 +73,9 @@ describe('Query', function() {
 
       assert.strictEqual(query, nextQuery);
     });
-
   });
 
   describe('filter', function() {
-
     it('should support filtering', function() {
       var now = new Date();
       var query = new Query(['kind1']).filter('date', '<=', now);
@@ -149,11 +143,9 @@ describe('Query', function() {
       assert.equal(filter.op, '=');
       assert.equal(filter.val, 'Stephen');
     });
-
   });
 
   describe('hasAncestor', function() {
-
     it('should support ancestor filtering', function() {
       var query = new Query(['kind1']).hasAncestor(['kind2', 123]);
 
@@ -168,11 +160,9 @@ describe('Query', function() {
 
       assert.strictEqual(query, nextQuery);
     });
-
   });
 
   describe('order', function() {
-
     it('should default ordering to ascending', function() {
       var query = new Query(['kind1']).order('name');
 
@@ -211,11 +201,9 @@ describe('Query', function() {
 
       assert.strictEqual(query, nextQuery);
     });
-
   });
 
   describe('groupBy', function() {
-
     it('should store an array of properties to group by', function() {
       var query = new Query(['kind1']).groupBy(['name', 'size']);
 
@@ -234,11 +222,9 @@ describe('Query', function() {
 
       assert.strictEqual(query, nextQuery);
     });
-
   });
 
   describe('select', function() {
-
     it('should store an array of properties to select', function() {
       var query = new Query(['kind1']).select(['name', 'size']);
 
@@ -257,11 +243,9 @@ describe('Query', function() {
 
       assert.strictEqual(query, nextQuery);
     });
-
   });
 
   describe('start', function() {
-
     it('should capture the starting cursor value', function() {
       var query = new Query(['kind1']).start('X');
 
@@ -274,11 +258,9 @@ describe('Query', function() {
 
       assert.strictEqual(query, nextQuery);
     });
-
   });
 
   describe('end', function() {
-
     it('should capture the ending cursor value', function() {
       var query = new Query(['kind1']).end('Z');
 
@@ -291,11 +273,9 @@ describe('Query', function() {
 
       assert.strictEqual(query, nextQuery);
     });
-
   });
 
   describe('limit', function() {
-
     it('should capture the number of results to limit to', function() {
       var query = new Query(['kind1']).limit(20);
 
@@ -308,11 +288,9 @@ describe('Query', function() {
 
       assert.strictEqual(query, nextQuery);
     });
-
   });
 
   describe('offset', function() {
-
     it('should capture the number of results to offset by', function() {
       var query = new Query(['kind1']).offset(100);
 
@@ -325,11 +303,9 @@ describe('Query', function() {
 
       assert.strictEqual(query, nextQuery);
     });
-
   });
 
   describe('proto conversion', function() {
-
     it('should be converted to a query proto successfully', function() {
       var query = new Query(['Kind'])
         .select(['name', 'count'])
@@ -342,7 +318,5 @@ describe('Query', function() {
 
       assert.deepEqual(entity.queryToQueryProto(query), queryProto);
     });
-
   });
-
 });
