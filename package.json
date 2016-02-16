@@ -90,6 +90,7 @@
     "create-error-class": "^2.0.1",
     "dns-zonefile": "0.1.10",
     "duplexify": "^3.2.0",
+    "ent": "^2.2.0",
     "extend": "^3.0.0",
     "gce-images": "^0.2.0",
     "gcs-resumable-upload": "^0.4.0",
