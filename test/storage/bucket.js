@@ -21,7 +21,7 @@ var assert = require('assert');
 var async = require('async');
 var extend = require('extend');
 var mime = require('mime-types');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var nodeutil = require('util');
 var propAssign = require('prop-assign');
 var request = require('request');
@@ -105,10 +105,13 @@ describe('Bucket', function() {
   before(function() {
     mockery.registerMock('async', fakeAsync);
     mockery.registerMock('request', fakeRequest);
-    mockery.registerMock('../common/service-object.js', FakeServiceObject);
-    mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
-    mockery.registerMock('./acl.js', FakeAcl);
-    mockery.registerMock('./file.js', FakeFile);
+    mockery.registerMock(
+      '../../lib/common/service-object.js',
+      FakeServiceObject
+    );
+    mockery.registerMock('../../lib/common/stream-router.js', fakeStreamRouter);
+    mockery.registerMock('../../lib/storage/acl.js', FakeAcl);
+    mockery.registerMock('../../lib/storage/file.js', FakeFile);
 
     mockery.enable({
       useCleanCache: true,

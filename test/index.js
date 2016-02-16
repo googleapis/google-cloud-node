@@ -18,7 +18,7 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 
 function createFakeApi() {
   return function FakeApi() {
@@ -46,15 +46,15 @@ describe('gcloud', function() {
   var gcloud;
 
   before(function() {
-    mockery.registerMock('./bigquery', FakeBigQuery);
-    mockery.registerMock('./compute', FakeCompute);
-    mockery.registerMock('./datastore', FakeDatastore);
-    mockery.registerMock('./dns', FakeDNS);
-    mockery.registerMock('./prediction', FakePrediction);
-    mockery.registerMock('./pubsub', FakePubSub);
-    mockery.registerMock('./resource', FakeResource);
-    mockery.registerMock('./search', FakeSearch);
-    mockery.registerMock('./storage', FakeStorage);
+    mockery.registerMock('../lib/bigquery', FakeBigQuery);
+    mockery.registerMock('../lib/compute', FakeCompute);
+    mockery.registerMock('../lib/datastore', FakeDatastore);
+    mockery.registerMock('../lib/dns', FakeDNS);
+    mockery.registerMock('../lib/prediction', FakePrediction);
+    mockery.registerMock('../lib/pubsub', FakePubSub);
+    mockery.registerMock('../lib/resource', FakeResource);
+    mockery.registerMock('../lib/search', FakeSearch);
+    mockery.registerMock('../lib/storage', FakeStorage);
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false

@@ -23,7 +23,7 @@ var entity = require('../../lib/datastore/entity.js');
 var extend = require('extend');
 var format = require('string-format-obj');
 var is = require('is');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var mockRespGet = require('../testdata/response_get.json');
 var pb = require('../../lib/datastore/pb.js');
 var Query = require('../../lib/datastore/query.js');
@@ -99,10 +99,10 @@ describe('Request', function() {
   var CUSTOM_ENDPOINT = 'http://localhost:8080';
 
   before(function() {
-    mockery.registerMock('./entity.js', fakeEntity);
-    mockery.registerMock('../common/util.js', fakeUtil);
-    mockery.registerMock('./pb.js', pb);
-    mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
+    mockery.registerMock('../../lib/datastore/entity.js', fakeEntity);
+    mockery.registerMock('../../lib/common/util.js', fakeUtil);
+    mockery.registerMock('../../lib/datastore/pb.js', pb);
+    mockery.registerMock('../../lib/common/stream-router.js', fakeStreamRouter);
     mockery.registerMock('request', fakeRequest);
     mockery.enable({
       useCleanCache: true,

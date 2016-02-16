@@ -19,11 +19,10 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var nodeutil = require('util');
-var request = require('request');
 
-var Service = require('../../lib/common/service.js');
+var GrpcService = require('../../lib/common/grpc-service.js');
 var Topic = require('../../lib/pubsub/topic.js');
 var util = require('../../lib/common/util.js');
 
@@ -35,25 +34,14 @@ function Subscription(a, b) {
   return new OverrideFn(a, b);
 }
 
-var requestCached = request;
-var requestOverride;
-function fakeRequest() {
-  return (requestOverride || requestCached).apply(null, arguments);
-}
-fakeRequest.defaults = function() {
-  // Ignore the default values, so we don't have to test for them in every API
-  // call.
-  return fakeRequest;
-};
-
 var fakeUtil = extend({}, util);
 
-function FakeService() {
+function FakeGrpcService() {
   this.calledWith_ = arguments;
-  Service.apply(this, arguments);
+  GrpcService.apply(this, arguments);
 }
 
-nodeutil.inherits(FakeService, Service);
+nodeutil.inherits(FakeGrpcService, GrpcService);
 
 var extended = false;
 var fakeStreamRouter = {
@@ -73,35 +61,38 @@ describe('PubSub', function() {
   var PubSub;
   var PROJECT_ID = 'test-project';
   var pubsub;
+  var OPTIONS = { projectId: PROJECT_ID };
+
+  var PUBSUB_EMULATOR_HOST = process.env.PUBSUB_EMULATOR_HOST;
 
   before(function() {
-    mockery.registerMock('../common/service.js', FakeService);
-    mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
-    mockery.registerMock('../common/util.js', fakeUtil);
-    mockery.registerMock('./subscription.js', Subscription);
-    mockery.registerMock('./topic.js', Topic);
-    mockery.registerMock('request', fakeRequest);
+    mockery.registerMock('../../lib/common/grpc-service.js', FakeGrpcService);
+    mockery.registerMock('../../lib/common/stream-router.js', fakeStreamRouter);
+    mockery.registerMock('../../lib/common/util.js', fakeUtil);
+    mockery.registerMock('../../lib/pubsub/subscription.js', Subscription);
+    mockery.registerMock('../../lib/pubsub/topic.js', Topic);
 
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
     });
 
+    delete process.env.PUBSUB_EMULATOR_HOST;
     PubSub = require('../../lib/pubsub');
   });
 
   after(function() {
+    if (PUBSUB_EMULATOR_HOST) {
+      process.env.PUBSUB_EMULATOR_HOST = PUBSUB_EMULATOR_HOST;
+    }
+
     mockery.deregisterAll();
     mockery.disable();
   });
 
   beforeEach(function() {
     SubscriptionOverride = null;
-    requestOverride = null;
-    pubsub = new PubSub({ projectId: PROJECT_ID });
-    pubsub.request = function(method, path, q, body, callback) {
-      callback();
-    };
+    pubsub = new PubSub(OPTIONS);
   });
 
   describe('instantiation', function() {
@@ -128,27 +119,58 @@ describe('PubSub', function() {
       fakeUtil.normalizeArguments = normalizeArguments;
     });
 
-    it('should inherit from Service', function() {
-      assert(pubsub instanceof Service);
+    it('should inherit from GrpcService', function() {
+      assert(pubsub instanceof GrpcService);
 
       var calledWith = pubsub.calledWith_[0];
 
-      var baseUrl = 'https://pubsub.googleapis.com/v1';
+      var baseUrl = 'pubsub.googleapis.com';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
+      assert.strictEqual(calledWith.service, 'pubsub');
+      assert.strictEqual(calledWith.apiVersion, 'v1');
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/pubsub',
         'https://www.googleapis.com/auth/cloud-platform'
       ]);
+    });
+
+    it('should set the defaultBaseUrl_', function() {
+      assert.strictEqual(pubsub.defaultBaseUrl_, 'pubsub.googleapis.com');
+    });
+
+    it('should use the PUBSUB_EMULATOR_HOST env var', function() {
+      var pubSubHost = 'pubsub-host';
+      process.env.PUBSUB_EMULATOR_HOST = pubSubHost;
+
+      var pubsub = new PubSub({ projectId: 'project-id' });
+      delete process.env.PUBSUB_EMULATOR_HOST;
+
+      var calledWith = pubsub.calledWith_[0];
+      assert.strictEqual(calledWith.baseUrl, pubSubHost);
+    });
+
+    it('should localize the options provided', function() {
+      assert.strictEqual(pubsub.options, OPTIONS);
     });
   });
 
   describe('createTopic', function() {
     it('should make the correct API request', function(done) {
       var topicName = 'new-topic-name';
+      var formattedName = 'formatted-name';
 
-      pubsub.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.method, 'PUT');
-        assert.strictEqual(reqOpts.uri, '/topics/' + topicName);
+      var formatName_ = Topic.formatName_;
+      Topic.formatName_ = function(projectId, name) {
+        Topic.formatName_ = formatName_;
+        assert.strictEqual(projectId, pubsub.projectId);
+        assert.strictEqual(name, topicName);
+        return formattedName;
+      };
+
+      pubsub.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(protoOpts.service, 'Publisher');
+        assert.strictEqual(protoOpts.method, 'createTopic');
+        assert.strictEqual(reqOpts.name, formattedName);
         done();
       };
 
@@ -160,7 +182,7 @@ describe('PubSub', function() {
       var apiResponse = {};
 
       beforeEach(function() {
-        pubsub.request = function(reqOpts, callback) {
+        pubsub.request = function(protoOpts, reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -179,7 +201,7 @@ describe('PubSub', function() {
       var apiResponse = {};
 
       beforeEach(function() {
-        pubsub.request = function(reqOpts, callback) {
+        pubsub.request = function(protoOpts, reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -212,7 +234,7 @@ describe('PubSub', function() {
 
   describe('getSubscriptions', function() {
     beforeEach(function() {
-      pubsub.request = function(reqOpts, callback) {
+      pubsub.request = function(protoOpts, reqOpts, callback) {
         callback(null, { subscriptions: [{ name: 'fake-subscription' }] });
       };
     });
@@ -226,9 +248,10 @@ describe('PubSub', function() {
     });
 
     it('should pass the correct arguments to the API', function(done) {
-      pubsub.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.uri, '/subscriptions');
-        assert.deepEqual(reqOpts.qs, {});
+      pubsub.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(protoOpts.service, 'Subscriber');
+        assert.strictEqual(protoOpts.method, 'listSubscriptions');
+        assert.strictEqual(reqOpts.project, 'projects/' + pubsub.projectId);
         done();
       };
 
@@ -238,15 +261,16 @@ describe('PubSub', function() {
     describe('topics', function() {
       var TOPIC;
       var TOPIC_NAME = 'topic';
-      var TOPIC_SUBCRIPTION_NAME = '/topics/' + TOPIC_NAME + '/subscriptions';
 
-      before(function() {
+      beforeEach(function() {
         TOPIC = new Topic(pubsub, TOPIC_NAME);
       });
 
       it('should subscribe to a topic by string', function(done) {
-        pubsub.request = function(reqOpts) {
-          assert.equal(reqOpts.uri, TOPIC_SUBCRIPTION_NAME);
+        pubsub.request = function(protoOpts, reqOpts) {
+          assert.strictEqual(protoOpts.service, 'Publisher');
+          assert.strictEqual(protoOpts.method, 'listTopicSubscriptions');
+          assert.strictEqual(reqOpts.topic, TOPIC_NAME);
           done();
         };
 
@@ -254,8 +278,8 @@ describe('PubSub', function() {
       });
 
       it('should subscribe to a topic by Topic instance', function(done) {
-        pubsub.request = function(reqOpts) {
-          assert.strictEqual(reqOpts.uri, TOPIC_SUBCRIPTION_NAME);
+        pubsub.request = function(protoOpts, reqOpts) {
+          assert.strictEqual(reqOpts.topic, TOPIC.name);
           done();
         };
 
@@ -266,9 +290,9 @@ describe('PubSub', function() {
     it('should pass options to API request', function(done) {
       var opts = { pageSize: 10, pageToken: 'abc' };
 
-      pubsub.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.qs.pageSize, opts.pageSize);
-        assert.strictEqual(reqOpts.qs.pageToken, opts.pageToken);
+      pubsub.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(reqOpts.pageSize, opts.pageSize);
+        assert.strictEqual(reqOpts.pageToken, opts.pageToken);
         done();
       };
 
@@ -279,7 +303,7 @@ describe('PubSub', function() {
       var error = new Error('Error');
       var resp = { error: true };
 
-      pubsub.request = function(reqOpts, callback) {
+      pubsub.request = function(protoOpts, reqOpts, callback) {
         callback(error, resp);
       };
 
@@ -304,7 +328,7 @@ describe('PubSub', function() {
         var subFullName =
           'projects/' + PROJECT_ID + '/subscriptions/' + subName;
 
-        pubsub.request = function(reqOpts, callback) {
+        pubsub.request = function(protoOpts, reqOpts, callback) {
           callback(null, { subscriptions: [subName] });
         };
 
@@ -320,7 +344,7 @@ describe('PubSub', function() {
     it('should return a query if more results exist', function() {
       var token = 'next-page-token';
 
-      pubsub.request = function(reqOpts, callback) {
+      pubsub.request = function(protoOpts, reqOpts, callback) {
         callback(null, { nextPageToken: token });
       };
 
@@ -336,7 +360,7 @@ describe('PubSub', function() {
     it('should pass apiResponse to callback', function(done) {
       var resp = { success: true };
 
-      pubsub.request = function(reqOpts, callback) {
+      pubsub.request = function(protoOpts, reqOpts, callback) {
         callback(null, resp);
       };
 
@@ -352,7 +376,7 @@ describe('PubSub', function() {
     var apiResponse = { topics: [{ name: topicName }]};
 
     beforeEach(function() {
-      pubsub.request = function(reqOpts, callback) {
+      pubsub.request = function(protoOpts, reqOpts, callback) {
         callback(null, apiResponse);
       };
     });
@@ -366,11 +390,20 @@ describe('PubSub', function() {
     });
 
     it('should build the right request', function(done) {
-      pubsub.request = function(reqOpts) {
-        assert.equal(reqOpts.uri, '/topics');
+      var options = { a: 'b', c: 'd' };
+      var originalOptions = extend({}, options);
+      var expectedOptions = extend({}, options, {
+        project: 'projects/' + pubsub.projectId
+      });
+
+      pubsub.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(protoOpts.service, 'Publisher');
+        assert.strictEqual(protoOpts.method, 'listTopics');
+        assert.deepEqual(reqOpts, expectedOptions);
+        assert.deepEqual(options, originalOptions);
         done();
       };
-      pubsub.getTopics(function() {});
+      pubsub.getTopics(options, function() {});
     });
 
     it('should return Topic instances with metadata', function(done) {
@@ -391,7 +424,7 @@ describe('PubSub', function() {
 
     it('should return a query if more results exist', function() {
       var token = 'next-page-token';
-      pubsub.request = function(reqOpts, callback) {
+      pubsub.request = function(protoOpts, reqOpts, callback) {
         callback(null, { nextPageToken: token });
       };
       var query = { pageSize: 1 };
@@ -404,7 +437,7 @@ describe('PubSub', function() {
 
     it('should pass error if api returns an error', function() {
       var error = new Error('Error');
-      pubsub.request = function(reqOpts, callback) {
+      pubsub.request = function(protoOpts, reqOpts, callback) {
         callback(error);
       };
       pubsub.getTopics(function(err) {
@@ -414,7 +447,7 @@ describe('PubSub', function() {
 
     it('should pass apiResponse to callback', function(done) {
       var resp = { success: true };
-      pubsub.request = function(reqOpts, callback) {
+      pubsub.request = function(protoOpts, reqOpts, callback) {
         callback(null, resp);
       };
       pubsub.getTopics(function(err, topics, nextQuery, apiResponse) {
@@ -427,12 +460,12 @@ describe('PubSub', function() {
   describe('subscribe', function() {
     var TOPIC_NAME = 'topic';
     var TOPIC = {
-      name: '/topics/' + TOPIC_NAME
+      name: 'projects/' + PROJECT_ID + '/topics/' + TOPIC_NAME
     };
 
     var SUB_NAME = 'subscription';
     var SUBSCRIPTION = {
-      name: '/subscriptions/' + SUB_NAME
+      name: 'projects/' + PROJECT_ID + '/subscriptions/' + SUB_NAME
     };
 
     var apiResponse = {
@@ -452,14 +485,27 @@ describe('PubSub', function() {
     });
 
     it('should not require configuration options', function(done) {
-      pubsub.request = function(reqOpts, callback) {
+      pubsub.request = function(protoOpts, reqOpts, callback) {
         callback(null, apiResponse);
       };
 
       pubsub.subscribe(TOPIC_NAME, SUB_NAME, done);
     });
 
-    it('should create a topic object from a string', function(done) {
+    it('should create a Subscription', function(done) {
+      var opts = { a: 'b', c: 'd' };
+
+      pubsub.subscription = function(subName, options) {
+        assert.strictEqual(subName, SUB_NAME);
+        assert.deepEqual(options, opts);
+        setImmediate(done);
+        return SUBSCRIPTION;
+      };
+
+      pubsub.subscribe(TOPIC_NAME, SUB_NAME, opts, assert.ifError);
+    });
+
+    it('should create a Topic object from a string', function(done) {
       pubsub.request = util.noop;
 
       pubsub.topic = function(topicName) {
@@ -478,10 +524,18 @@ describe('PubSub', function() {
         };
       };
 
-      pubsub.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.method, 'PUT');
-        assert.strictEqual(reqOpts.uri, SUBSCRIPTION.name);
-        assert.strictEqual(reqOpts.json.topic, TOPIC_NAME);
+      pubsub.subscription = function(subName) {
+        return {
+          name: subName
+        };
+      };
+
+      pubsub.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(protoOpts.service, 'Subscriber');
+        assert.strictEqual(protoOpts.method, 'createSubscription');
+        assert.strictEqual(protoOpts.timeout, pubsub.timeout);
+        assert.strictEqual(reqOpts.topic, TOPIC_NAME);
+        assert.strictEqual(reqOpts.name, SUB_NAME);
         done();
       };
 
@@ -502,9 +556,10 @@ describe('PubSub', function() {
         timeout: 30000
       };
 
-      var expectedBody = extend({}, options, {
-        topic: TOPIC_NAME
-      });
+      var expectedBody = extend({
+        topic: TOPIC_NAME,
+        name: SUB_NAME
+      }, options);
 
       delete expectedBody.autoAck;
       delete expectedBody.encoding;
@@ -519,9 +574,15 @@ describe('PubSub', function() {
         };
       };
 
-      pubsub.request = function(reqOpts) {
-        assert.notStrictEqual(reqOpts.json, options);
-        assert.deepEqual(reqOpts.json, expectedBody);
+      pubsub.subscription = function() {
+        return {
+          name: SUB_NAME
+        };
+      };
+
+      pubsub.request = function(protoOpts, reqOpts) {
+        assert.notStrictEqual(reqOpts, options);
+        assert.deepEqual(reqOpts, expectedBody);
         done();
       };
 
@@ -533,7 +594,7 @@ describe('PubSub', function() {
       var apiResponse = { name: SUB_NAME };
 
       beforeEach(function() {
-        pubsub.request = function(reqOpts, callback) {
+        pubsub.request = function(protoOpts, reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -545,7 +606,7 @@ describe('PubSub', function() {
           return SUBSCRIPTION;
         };
 
-        pubsub.request = function(reqOpts, callback) {
+        pubsub.request = function(protoOpts, reqOpts, callback) {
           callback({ code: 409 }, apiResponse);
         };
 
@@ -566,7 +627,7 @@ describe('PubSub', function() {
       });
 
       it('should return error & API response to the callback', function(done) {
-        pubsub.request = function(reqOpts, callback) {
+        pubsub.request = function(protoOpts, reqOpts, callback) {
           callback(error, apiResponse);
         };
 
@@ -583,30 +644,25 @@ describe('PubSub', function() {
       var apiResponse = { name: SUB_NAME };
 
       beforeEach(function() {
-        pubsub.request = function(reqOpts, callback) {
+        pubsub.request = function(protoOpts, reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
 
-      it('should pass options to a new subscription object', function(done) {
-        var opts = { a: 'b', c: 'd' };
+      it('should return Subscription & resp to the callback', function(done) {
+        var subscription = {};
 
-        pubsub.subscription = function(subName, options) {
-          assert.strictEqual(subName, SUB_NAME);
-          assert.deepEqual(options, opts);
-          setImmediate(done);
-          return SUBSCRIPTION;
+        pubsub.subscription = function() {
+          return subscription;
         };
 
-        pubsub.subscribe(TOPIC_NAME, SUB_NAME, opts, assert.ifError);
-      });
-
-      it('should return apiResponse to the callback', function(done) {
-        pubsub.request = function(reqOpts, callback) {
+        pubsub.request = function(protoOpts, reqOpts, callback) {
           callback(null, apiResponse);
         };
 
         pubsub.subscribe(TOPIC_NAME, SUB_NAME, function(err, sub, resp) {
+          assert.ifError(err);
+          assert.strictEqual(sub, subscription);
           assert.strictEqual(resp, apiResponse);
           done();
         });
@@ -674,39 +730,44 @@ describe('PubSub', function() {
       delete process.env.PUBSUB_EMULATOR_HOST;
     });
 
-    it('should default to pubsub.googleapis.com/v1', function() {
-      pubsub.determineBaseUrl_();
+    it('should default to defaultBaseUrl_', function() {
+      var defaultBaseUrl_ = 'defaulturl';
+      pubsub.defaultBaseUrl_ = defaultBaseUrl_;
 
-      var expectedBaseUrl = 'https://pubsub.googleapis.com/v1';
-      assert.strictEqual(pubsub.baseUrl, expectedBaseUrl);
+      pubsub.determineBaseUrl_();
+      assert.strictEqual(pubsub.baseUrl_, defaultBaseUrl_);
     });
 
     it('should remove slashes from the baseUrl', function() {
-      var expectedBaseUrl = 'http://localhost:8080';
+      var expectedBaseUrl = 'localhost:8080';
 
-      setHost('http://localhost:8080/');
+      setHost('localhost:8080/');
       pubsub.determineBaseUrl_();
-      assert.strictEqual(pubsub.baseUrl, expectedBaseUrl);
+      assert.strictEqual(pubsub.baseUrl_, expectedBaseUrl);
 
-      setHost('http://localhost:8080//');
+      setHost('localhost:8080//');
       pubsub.determineBaseUrl_();
-      assert.strictEqual(pubsub.baseUrl, expectedBaseUrl);
+      assert.strictEqual(pubsub.baseUrl_, expectedBaseUrl);
     });
 
-    it('should default to http if protocol is unspecified', function() {
-      setHost('localhost:8080');
+    it('should remove the protocol if specified', function() {
+      setHost('http://localhost:8080');
       pubsub.determineBaseUrl_();
-      assert.strictEqual(pubsub.baseUrl, 'http://localhost:8080');
+      assert.strictEqual(pubsub.baseUrl_, 'localhost:8080');
+
+      setHost('https://localhost:8080');
+      pubsub.determineBaseUrl_();
+      assert.strictEqual(pubsub.baseUrl_, 'localhost:8080');
     });
 
-    it('should not set customEndpoint when using default endpoint', function() {
+    it('should not set customEndpoint_ when using default baseurl', function() {
       var pubsub = new PubSub({ projectId: PROJECT_ID });
       pubsub.determineBaseUrl_();
-      assert.strictEqual(pubsub.customEndpoint, undefined);
+      assert.strictEqual(pubsub.customEndpoint_, undefined);
     });
 
     describe('with PUBSUB_EMULATOR_HOST environment variable', function() {
-      var PUBSUB_EMULATOR_HOST = 'http://localhost:9090';
+      var PUBSUB_EMULATOR_HOST = 'localhost:9090';
 
       beforeEach(function() {
         setHost(PUBSUB_EMULATOR_HOST);
@@ -718,12 +779,12 @@ describe('PubSub', function() {
 
       it('should use the PUBSUB_EMULATOR_HOST env var', function() {
         pubsub.determineBaseUrl_();
-        assert.strictEqual(pubsub.baseUrl, PUBSUB_EMULATOR_HOST);
+        assert.strictEqual(pubsub.baseUrl_, PUBSUB_EMULATOR_HOST);
       });
 
-      it('should set customEndpoint', function() {
+      it('should set customEndpoint_', function() {
         pubsub.determineBaseUrl_();
-        assert.strictEqual(pubsub.customEndpoint, true);
+        assert.strictEqual(pubsub.customEndpoint_, true);
       });
     });
   });

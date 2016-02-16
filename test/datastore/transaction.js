@@ -20,7 +20,7 @@ var arrify = require('arrify');
 var assert = require('assert');
 var entity = require('../../lib/datastore/entity.js');
 var extend = require('extend');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var util = require('../../lib/common/util.js');
 
 var DatastoreRequestOverride = {
@@ -56,7 +56,10 @@ describe('Transaction', function() {
   }
 
   before(function() {
-    mockery.registerMock('./request.js', FakeDatastoreRequest);
+    mockery.registerMock(
+      '../../lib/datastore/request.js',
+      FakeDatastoreRequest
+    );
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false

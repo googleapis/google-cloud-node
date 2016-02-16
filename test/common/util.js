@@ -20,7 +20,7 @@ var assert = require('assert');
 var duplexify;
 var extend = require('extend');
 var googleAuth = require('google-auto-auth');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var request = require('request');
 var retryRequest = require('retry-request');
 var stream = require('stream');

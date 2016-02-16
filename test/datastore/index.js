@@ -28,13 +28,13 @@ var entity = {
 };
 
 var assert = require('assert');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 
 describe('Datastore', function() {
   var datastore;
 
   before(function() {
-    mockery.registerMock('./entity', entity);
+    mockery.registerMock('../../lib/datastore/entity.js', entity);
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false

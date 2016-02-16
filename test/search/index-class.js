@@ -19,7 +19,7 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var nodeutil = require('util');
 
 var ServiceObject = require('../../lib/common/service-object.js');
@@ -58,9 +58,12 @@ describe('Index', function() {
   var ID = 'index-id';
 
   before(function() {
-    mockery.registerMock('../common/service-object.js', FakeServiceObject);
-    mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
-    mockery.registerMock('./document.js', FakeDocument);
+    mockery.registerMock(
+      '../../lib/common/service-object.js',
+      FakeServiceObject
+    );
+    mockery.registerMock('../../lib/common/stream-router.js', fakeStreamRouter);
+    mockery.registerMock('../../lib/search/document.js', FakeDocument);
 
     mockery.enable({
       useCleanCache: true,

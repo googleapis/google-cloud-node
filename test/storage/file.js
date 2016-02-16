@@ -21,7 +21,7 @@ var duplexify;
 var extend = require('extend');
 var format = require('string-format-obj');
 var fs = require('fs');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var nodeutil = require('util');
 var request = require('request');
 var stream = require('stream');
@@ -94,8 +94,11 @@ describe('File', function() {
   before(function() {
     mockery.registerMock('gcs-resumable-upload', fakeResumableUpload);
     mockery.registerMock('request', fakeRequest);
-    mockery.registerMock('../common/service-object.js', FakeServiceObject);
-    mockery.registerMock('../common/util.js', fakeUtil);
+    mockery.registerMock(
+      '../../lib/common/service-object.js',
+      FakeServiceObject
+    );
+    mockery.registerMock('../../lib/common/util.js', fakeUtil);
 
     mockery.enable({
       useCleanCache: true,

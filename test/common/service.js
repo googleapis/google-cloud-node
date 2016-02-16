@@ -18,7 +18,7 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 
 var util = require('../../lib/common/util.js');
 
@@ -50,7 +50,7 @@ describe('Service', function() {
   };
 
   before(function() {
-    mockery.registerMock('./util.js', util);
+    mockery.registerMock('../../lib/common/util.js', util);
 
     mockery.enable({
       useCleanCache: true,

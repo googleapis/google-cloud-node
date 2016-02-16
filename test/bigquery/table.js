@@ -19,7 +19,7 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var nodeutil = require('util');
 var prop = require('propprop');
 var stream = require('stream');
@@ -93,10 +93,13 @@ describe('BigQuery/Table', function() {
   var tableOverrides = {};
 
   before(function() {
-    mockery.registerMock('../storage/file.js', FakeFile);
-    mockery.registerMock('../common/service-object.js', FakeServiceObject);
-    mockery.registerMock('../common/stream-router.js', fakeStreamRouter);
-    mockery.registerMock('../common/util.js', fakeUtil);
+    mockery.registerMock('../../lib/storage/file.js', FakeFile);
+    mockery.registerMock(
+      '../../lib/common/service-object.js',
+      FakeServiceObject
+    );
+    mockery.registerMock('../../lib/common/stream-router.js', fakeStreamRouter);
+    mockery.registerMock('../../lib/common/util.js', fakeUtil);
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false

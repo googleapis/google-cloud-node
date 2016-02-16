@@ -21,7 +21,7 @@
 'use strict';
 
 var assert = require('assert');
-var mockery = require('mockery');
+var mockery = require('mockery-next');
 var nodeutil = require('util');
 
 var ServiceObject = require('../../lib/common/service-object.js');
@@ -42,7 +42,10 @@ describe('Channel', function() {
   var channel;
 
   before(function() {
-    mockery.registerMock('../common/service-object.js', FakeServiceObject);
+    mockery.registerMock(
+      '../../lib/common/service-object.js',
+      FakeServiceObject
+    );
 
     mockery.enable({
       useCleanCache: true,
