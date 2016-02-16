@@ -335,12 +335,35 @@ describe('Logging', function() {
     });
 
     it('should list log entries as a stream', function(done) {
-      log.getEntries({ pageSize: 1 })
+      logging.getEntries({ pageSize: 1 })
         .on('error', done)
         .once('data', function() {
           this.end();
           done();
         });
+    });
+
+    describe('log-specific entries', function() {
+      before(function(done) {
+        log.write(logEntries, options, done);
+      });
+
+      it('should list log entries', function(done) {
+        log.getEntries({ pageSize: 1 }, function(err, entries) {
+          assert.ifError(err);
+          assert.strictEqual(entries.length, 1);
+          done();
+        });
+      });
+
+      it('should list log entries as a stream', function(done) {
+        log.getEntries({ pageSize: 1 })
+          .on('error', done)
+          .once('data', function() {
+            this.end();
+            done();
+          });
+      });
     });
 
     it('should write to a log', function(done) {
