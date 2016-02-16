@@ -193,26 +193,50 @@ describe('GrpcService', function() {
       delete global.GCLOUD_SANDBOX_ENV;
     });
 
-    it('should get an auth client', function(done) {
-      delete grpcService.grpcCredentials;
+    describe('getting gRPC credentials', function() {
+      beforeEach(function() {
+        delete grpcService.grpcCredentials;
+      });
 
-      var timesCalled = 0;
+      describe('error', function() {
+        var error = new Error('Error.');
 
-      grpcService.getGrpcCredentials_ = function(continueFn) {
-        // It should call once to get the credentials, then again after.
-        // To test this, we simply don't set `grpcCredentials` like
-        // `getGrpcCredentials_` normally would.
-        timesCalled++;
+        beforeEach(function() {
+          grpcService.getGrpcCredentials_ = function(callback) {
+            callback(error);
+          };
+        });
 
-        if (timesCalled === 1) {
-          continueFn();
-          return;
-        }
+        it('should execute callback with error', function(done) {
+          grpcService.request(PROTO_OPTS, REQ_OPTS, function(err) {
+            assert.strictEqual(err, error);
+            done();
+          });
+        });
+      });
 
-        done();
-      };
+      describe('success', function() {
+        var authClient = {};
 
-      grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
+        beforeEach(function() {
+          grpcService.getGrpcCredentials_ = function(callback) {
+            callback(null, authClient);
+          };
+        });
+
+        it('should make the gRPC request again', function(done) {
+          grpcService.proto = {};
+          grpcService.proto.service = function() {
+            assert.strictEqual(grpcService.grpcCredentials, authClient);
+
+            setImmediate(done);
+
+            return new ProtoService();
+          };
+
+          grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
+        });
+      });
     });
 
     it('should create an instance of the proto service', function(done) {
@@ -473,7 +497,7 @@ describe('GrpcService', function() {
   describe('getGrpcCredentials_', function() {
     it('should get credentials from the auth client', function(done) {
       grpcService.authClient = {
-        getCredentials: function() {
+        getAuthClient: function() {
           done();
         }
       };
@@ -486,7 +510,7 @@ describe('GrpcService', function() {
 
       beforeEach(function() {
         grpcService.authClient = {
-          getCredentials: function(callback) {
+          getAuthClient: function(callback) {
             callback(error);
           }
         };
@@ -505,21 +529,15 @@ describe('GrpcService', function() {
 
       beforeEach(function() {
         grpcService.authClient = {
-          getCredentials: function(callback) {
-            grpcService.authClient = {
-              authClient: AUTH_CLIENT
-            };
-
-            callback();
+          getAuthClient: function(callback) {
+            callback(null, AUTH_CLIENT);
           }
         };
       });
 
-      it('should set grpcCredentials', function(done) {
-        grpcService.getGrpcCredentials_(function(err) {
+      it('should return grpcCredentials', function(done) {
+        grpcService.getGrpcCredentials_(function(err, grpcCredentials) {
           assert.ifError(err);
-
-          var grpcCredentials = grpcService.grpcCredentials;
 
           assert.strictEqual(
             grpcCredentials.name,
