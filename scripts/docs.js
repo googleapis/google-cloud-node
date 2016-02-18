@@ -23,6 +23,8 @@ var dox = require('dox');
 var path = require('path');
 var prop = require('propprop');
 
+
+var OUTPUT_FOLDER = './docs/json/master';
 var IGNORE = [
   './lib/common/*',
   './lib/datastore/entity.js',
@@ -32,25 +34,25 @@ var IGNORE = [
   './lib/storage/acl.js'
 ];
 
-function getId(fileName) {
-  var hooks = {
-    'index': 'gcloud',
-    'index-class': 'index'
-  };
-
-  var id = fileName
-    .replace('./lib/', '')
-    .replace('/index.js', '')
-    .replace('.js', '')
-    .replace(/.+\//, '');
-
-  return hooks[id] || id;
+function isPublic(block) {
+  return !block.isPrivate && !block.ignore;
 }
 
-function getByType(block, type) {
-  return block.tags.filter(function(tag) {
-    return tag.type === type;
+function detectLinks(str) {
+  var reg = /\[([^\]]*)]{@link ([^}]*)}/g;
+
+  return str.replace(reg, function(match, title, link) {
+    return '<a href="' + link.trim() + '">' + title.trim() + '</a>';
   });
+}
+
+function formatHtml(html) {
+  var formatted = (html || '')
+    .replace(/\s+/g, ' ')
+    .replace(/<br *\/*>/g, ' ')
+    .replace(/`([^`]*)`/g, '<code>$1</code>');
+
+  return detectLinks(detectCustomType(formatted));
 }
 
 function detectCustomType(str) {
@@ -66,20 +68,44 @@ function detectCustomType(str) {
     });
 }
 
-function detectLinks(str) {
-  var reg = /\[([^\]]*)]{@link ([^}]*)}/g;
-
-  return str.replace(reg, function(match, title, link) {
-    return '<a href="' + link.trim() + '">' + title.trim() + '</a>';
+function getTagsByType(block, type) {
+  return block.tags.filter(function(tag) {
+    return tag.type === type;
   });
 }
 
-function detectName(block) {
-  if (!block) {
-    return null;
+function createUniqueMethodList(list, method) {
+  var matches = list.filter(function(item) {
+    return item.name === method.name;
+  });
+
+  if (!matches.length) {
+    list.push(method);
   }
 
-  var alias = getByType(block, 'alias')[0];
+  return list;
+}
+
+function getId(fileName) {
+  var hooks = {
+    'index': 'gcloud',
+    'search/index-class': 'search/index'
+  };
+
+  var id = fileName
+    .replace('./lib/', '')
+    .replace('/index.js', '')
+    .replace('.js', '');
+
+  return hooks[id] || id;
+}
+
+function getName(block) {
+  if (!block) {
+    return;
+  }
+
+  var alias = getTagsByType(block, 'alias')[0]
 
   if (alias && !/^module/.test(alias.string)) {
     return alias.string;
@@ -88,25 +114,55 @@ function detectName(block) {
   return block.ctx.name;
 }
 
-function formatHtml(str) {
-  var formatted = str
-    .replace(/\s+/g, ' ')
-    .replace(/<br *\/*>/g, ' ')
-    .replace(/`([^`]*)`/g, '<code>$1</code>');
-
-  return detectLinks(detectCustomType(formatted));
-}
-
-function createUniqueMethodList(list, method) {
-  var matches = list.filter(function(item) {
-    return item.metadata.name === method.metadata.name;
-  });
-
-  if (!matches.length) {
-    list.push(method);
+function getClassDesc(block) {
+  if (!block) {
+    return;
   }
 
-  return list;
+  var classdesc = getTagsByType(block, 'classdesc')[0] || {};
+
+  return formatHtml(classdesc.html);
+}
+
+function getParent(id) {
+  var parent = id.replace(/\/.+/, '');
+
+  return parent === id ? null : parent;
+}
+
+function getChildren(id) {
+  var childrenGlob = './lib/' + id + '/*';
+
+  return globby
+    .sync(childrenGlob, { ignore: IGNORE })
+    .map(getId)
+    .filter(function(child) {
+      return child !== id;
+    });
+}
+
+function getMethodType(block) {
+  if (block.isConstructor) {
+    return 'constructor';
+  }
+
+  if (getTagsByType(block, 'static').length > 0) {
+    return 'static';
+  }
+
+  return 'instance';
+}
+
+function createResource(tag) {
+  var reg = /\[([^\]]*)]{@link ([^}]*)}/g;
+  var resource = {};
+
+  (tag.string || tag).replace(reg, function(match, title, link) {
+    resource.title = title.trim();
+    resource.link = link.trim();
+  });
+
+  return resource;
 }
 
 function createCaption(comment) {
@@ -122,7 +178,7 @@ function createCaption(comment) {
 }
 
 function createExamples(block) {
-  var examples = getByType(block, 'example')[0];
+  var examples = getTagsByType(block, 'example')[0];
 
   if (!examples) {
     return [];
@@ -156,18 +212,6 @@ function createExamples(block) {
     });
 }
 
-function createResource(tag) {
-  var reg = /\[([^\]]*)]{@link ([^}]*)}/g;
-  var resource = {};
-
-  (tag.string || tag).replace(reg, function(match, title, link) {
-    resource.title = title.trim();
-    resource.link = link.trim();
-  });
-
-  return resource;
-}
-
 function createParam(tag) {
   return {
     name: tag.name,
@@ -192,99 +236,123 @@ function createReturn(tag) {
   };
 }
 
-function createMethod(file, block) {
+function createMethod(fileName, parent, block) {
+  var name = getName(block);
+
   return {
-    metadata: {
-      constructor: !!block.isConstructor,
-      name: detectName(block),
-      source: file.replace(/^\./, '') + '#L' + block.codeStart,
-      description: formatHtml(block.description.full),
-      examples: createExamples(block),
-      resources: getByType(block, 'resource').map(createResource)
-    },
-    params: getByType(block, 'param').map(createParam),
-    exceptions: getByType(block, 'throws').map(createException),
-    returns: getByType(block, 'returns').map(createReturn)
+    id: [parent, name].join('#'),
+    name: name,
+    type: getMethodType(block),
+    description: formatHtml(block.description.full),
+    source: path.normalize(fileName) + '#L' + block.codeStart,
+    resources: getTagsByType(block, 'resource').map(createResource),
+    examples: createExamples(block),
+    params: getTagsByType(block, 'param').map(createParam),
+    exceptions: getTagsByType(block, 'throws').map(createException),
+    returns: getTagsByType(block, 'return').map(createReturn)
   };
 }
 
-function detectMixinMethods(comments) {
+function getMixinMethods(comments) {
   return comments.filter(function(block) {
-    return getByType(block, 'mixes').length;
+    return getTagsByType(block, 'mixes').length;
   }).map(function(block) {
-    var mixin = getByType(block, 'mixes')[0];
+    var mixin = getTagsByType(block, 'mixes')[0];
     var mixinFile = path.join('./lib', mixin.string.replace('module:', '') + '.js');
     var mixinContents = fs.readFileSync(mixinFile, 'utf8', true);
-    var docs = parseDocs(mixinFile, mixinContents, true);
+    var docs = parseFile(mixinFile, mixinContents);
+    var methods = docs.methods.filter(function(method) {
+      return method.type === 'instance';
+    });
     var type = block.ctx.type;
     var name;
 
     if (block.ctx.type === 'property') {
       name = block.ctx.string.replace(/^\w+\./, '');
-      docs.methods.forEach(function(method) {
-        method.metadata.name = [name, method.metadata.name].join('.');
+      methods.forEach(function(method) {
+        method.name = [name, method.name].join('.');
       });
     }
 
-    return docs;
-  }).reduce(function(methods, mixin) {
-    return methods.concat(mixin.methods);
+    return methods;
+  }).reduce(function(methods, mixinMethods) {
+    return methods.concat(mixinMethods);
   }, []);
 }
 
-function getOverview(block) {
-  if (!block) {
-    return null;
-  }
-
-  var overview = getByType(block, 'classdesc')[0];
-
-  return overview ? formatHtml(overview.html) : null;
-}
-
-function parseDocs(file, contents, isInherited) {
-  var comments = dox.parseComments(contents).filter(function(block) {
-    return !block.isPrivate && !block.ignore;
-  });
+function parseFile(fileName, contents) {
+  var comments = dox.parseComments(contents).filter(isPublic);
   var constructor = comments.filter(prop('isConstructor'))[0];
-  var id = getId(file);
-
-  if (isInherited) {
-    comments.splice(comments.indexOf(constructor), 1);
-  }
+  var id = getId(fileName);
 
   return {
     id: id,
-    metadata: {
-      name: detectName(constructor),
-      description: getOverview(constructor)
-    },
+    type: 'class',
+    name: getName(constructor),
+    description: getClassDesc(constructor),
+    source: path.normalize(fileName),
+    parent: getParent(id),
+    children: getChildren(id),
     methods: comments
-      .map(createMethod.bind(null, file))
-      .concat(detectMixinMethods(comments))
+      .map(createMethod.bind(null, fileName, id))
+      .concat(getMixinMethods(comments))
       .reduce(createUniqueMethodList, [])
   };
 }
 
+function createTypesDictionary(docs) {
+  return docs.map(function(service) {
+    var id = service.id;
+    var title = [id === 'gcloud' ? 'Node.js' : service.name];
+    var contents = service.path.replace('docs/json/master/', '');
+
+    if (service.parent) {
+      for (var i = 0, l = docs.length; i < l; i++) {
+        if (docs[i].id === service.parent) {
+          title.unshift(docs[i].name);
+        }
+      }
+    }
+
+    return {
+      id: id,
+      title: title.join(' » '),
+      contents: contents
+    };
+  });
+}
+
 globby('./lib/*{,/*}.js', { ignore: IGNORE }).then(function(files) {
-  async.each(files, function(file, callback) {
+  async.map(files, function(file, callback) {
     fs.readFile(file, 'utf8', function(err, contents) {
       if (err) {
         callback(err);
         return;
       }
 
-      var docs = parseDocs(file, contents, 0);
+      var docs = parseFile(file, contents);
       var outputFile = path.join(
-        './docs/json/master',
+        OUTPUT_FOLDER,
         file.replace('/lib', '').replace('.js', '.json')
       );
 
-      fs.writeFile(outputFile, JSON.stringify(docs), callback);
+      fs.writeFile(outputFile, JSON.stringify(docs), function(err) {
+        docs.path = outputFile;
+        callback(err, docs);
+      });
     });
-  }, function(err) {
+  }, function(err, docs) {
     if (err) {
       throw err;
     }
+
+    var types = createTypesDictionary(docs);
+    var outputFile = path.join(OUTPUT_FOLDER, 'types.json');
+
+    fs.writeFile(outputFile, JSON.stringify(types), function(err) {
+      if (err) {
+        throw err;
+      }
+    });
   });
 });
