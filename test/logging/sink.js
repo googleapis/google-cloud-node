@@ -19,31 +19,27 @@
 var assert = require('assert');
 var extend = require('extend');
 var mockery = require('mockery-next');
-var nodeutil = require('util');
 
-var ServiceObject = require('../../lib/common/service-object.js');
 var util = require('../../lib/common/util.js');
 
-function FakeServiceObject() {
+function FakeGrpcServiceObject() {
   this.calledWith_ = arguments;
-  ServiceObject.apply(this, arguments);
 }
-
-nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Sink', function() {
   var Sink;
   var sink;
 
   var LOGGING = {
-    createSink: util.noop
+    createSink: util.noop,
+    projectId: 'project-id'
   };
   var SINK_NAME = 'sink-name';
 
   before(function() {
     mockery.registerMock(
       '../../lib/common/service-object.js',
-      FakeServiceObject
+      FakeGrpcServiceObject
     );
 
     mockery.enable({
@@ -64,18 +60,17 @@ describe('Sink', function() {
   });
 
   describe('instantiation', function() {
-    it('should inherit from ServiceObject', function(done) {
+    it('should inherit from GrpcServiceObject', function() {
       var loggingInstance = extend({}, LOGGING, {
         createSink: {
           bind: function(context) {
             assert.strictEqual(context, loggingInstance);
-            done();
           }
         }
       });
 
       var sink = new Sink(loggingInstance, SINK_NAME);
-      assert(sink instanceof ServiceObject);
+      assert(sink instanceof FakeGrpcServiceObject);
 
       var calledWith = sink.calledWith_[0];
 
@@ -84,13 +79,36 @@ describe('Sink', function() {
       assert.strictEqual(calledWith.id, SINK_NAME);
       assert.deepEqual(calledWith.methods, {
         create: true,
-        delete: true,
-        getMetadata: true
+        delete: {
+          protoOpts: {
+            service: 'ConfigServiceV2',
+            method: 'deleteSink'
+          },
+          reqOpts: {
+            sinkName: sink.formattedName_
+          }
+        },
+        getMetadata: {
+          protoOpts: {
+            service: 'ConfigServiceV2',
+            method: 'getSink'
+          },
+          reqOpts: {
+            sinkName: sink.formattedName_
+          }
+        }
       });
     });
 
     it('should localize the name', function() {
       assert.strictEqual(sink.name, SINK_NAME);
+    });
+
+    it('should localize the formatted name', function() {
+      assert.strictEqual(
+        sink.formattedName_,
+        'projects/' + LOGGING.projectId + '/sinks/' + SINK_NAME
+      );
     });
   });
 
@@ -140,12 +158,14 @@ describe('Sink', function() {
         callback(null, currentMetadata);
       };
 
-      sink.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.uri, '');
-        assert.strictEqual(reqOpts.method, 'PUT');
+      sink.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(protoOpts.service, 'ConfigServiceV2');
+        assert.strictEqual(protoOpts.method, 'updateSink');
+
+        assert.strictEqual(reqOpts.sinkName, sink.formattedName_);
 
         var expectedMetadata = extend({}, currentMetadata, METADATA);
-        assert.deepEqual(reqOpts.json, expectedMetadata);
+        assert.deepEqual(reqOpts.sink, expectedMetadata);
 
         done();
       };
@@ -162,7 +182,7 @@ describe('Sink', function() {
           callback();
         };
 
-        sink.request = function(reqOpts, callback) {
+        sink.request = function(protoOpts, reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -185,7 +205,7 @@ describe('Sink', function() {
           callback();
         };
 
-        sink.request = function(reqOpts, callback) {
+        sink.request = function(protoOpts, reqOpts, callback) {
           callback(null, apiResponse);
         };
       });

@@ -67,6 +67,7 @@ var fakeGrpc = {
 };
 
 describe('GrpcService', function() {
+  var GrpcServiceCached;
   var GrpcService;
   var grpcService;
 
@@ -98,6 +99,7 @@ describe('GrpcService', function() {
     });
 
     GrpcService = require('../../lib/common/grpc-service.js');
+    GrpcServiceCached = extend(true, {}, GrpcService);
   });
 
   after(function() {
@@ -113,6 +115,8 @@ describe('GrpcService', function() {
     grpcLoadOverride = function() {
       return MOCK_GRPC_API;
     };
+
+    extend(GrpcService, GrpcServiceCached);
 
     grpcService = new GrpcService(CONFIG, OPTIONS);
   });
@@ -131,10 +135,6 @@ describe('GrpcService', function() {
       assert.strictEqual(calledWith[1], OPTIONS);
     });
 
-    it('should localize the proto opts', function() {
-      assert.strictEqual(grpcService.protoOpts, CONFIG.proto);
-    });
-
     it('should get the root directory for the proto files', function(done) {
       googleProtoFilesOverride = function(path) {
         assert.strictEqual(path, '..');
@@ -151,21 +151,46 @@ describe('GrpcService', function() {
       assert.strictEqual(grpcService.grpcCredentials.name, 'createInsecure');
     });
 
-    it('should call grpc.load correctly', function(done) {
+    it('should localize the service', function() {
+      assert.strictEqual(grpcService.service, CONFIG.service);
+    });
+
+    it('should call grpc.load correctly', function() {
       grpcLoadOverride = function(opts) {
         assert.strictEqual(opts.root, ROOT_DIR);
 
         var expectedFilePath = path.relative(ROOT_DIR, PROTO_FILE_PATH);
         assert.strictEqual(opts.file, expectedFilePath);
 
-        setImmediate(done);
-
         return MOCK_GRPC_API;
       };
 
       var grpcService = new GrpcService(CONFIG, OPTIONS);
       assert.strictEqual(
-        grpcService.proto,
+        grpcService.protos[CONFIG.service],
+        MOCK_GRPC_API.google[CONFIG.service][CONFIG.apiVersion]
+      );
+    });
+
+    it('should allow proto file paths to be given', function() {
+      grpcLoadOverride = function(opts) {
+        assert.strictEqual(opts.root, ROOT_DIR);
+
+        var expectedFilePath = path.relative(ROOT_DIR, '../file/path.proto');
+        assert.strictEqual(opts.file, expectedFilePath);
+
+        return MOCK_GRPC_API;
+      };
+
+      var config = extend(true, {}, CONFIG, {
+        protoServices: {
+          CustomServiceName: '../file/path.proto'
+        }
+      });
+
+      var grpcService = new GrpcService(config, OPTIONS);
+      assert.strictEqual(
+        grpcService.protos.CustomServiceName,
         MOCK_GRPC_API.google[CONFIG.service][CONFIG.apiVersion]
       );
     });
@@ -232,13 +257,14 @@ describe('GrpcService', function() {
         });
 
         it('should make the gRPC request again', function(done) {
-          grpcService.proto = {};
-          grpcService.proto.service = function() {
-            assert.strictEqual(grpcService.grpcCredentials, authClient);
+          grpcService.protos.Service = {
+            service: function() {
+              assert.strictEqual(grpcService.grpcCredentials, authClient);
 
-            setImmediate(done);
+              setImmediate(done);
 
-            return new ProtoService();
+              return new ProtoService();
+            }
           };
 
           grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
@@ -247,29 +273,50 @@ describe('GrpcService', function() {
     });
 
     it('should create an instance of the proto service', function(done) {
-      grpcService.proto = {};
-      grpcService.proto.service = function(baseUrl, credentials) {
-        assert.strictEqual(baseUrl, grpcService.baseUrl);
-        assert.strictEqual(credentials, GRPC_CREDENTIALS);
+      grpcService.protos.Service = {
+        service: function(baseUrl, credentials) {
+          assert.strictEqual(baseUrl, grpcService.baseUrl);
+          assert.strictEqual(credentials, GRPC_CREDENTIALS);
 
-        setImmediate(done);
+          setImmediate(done);
 
-        return new ProtoService();
+          return new ProtoService();
+        }
       };
 
       grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
     });
 
+    it('should accept the name of a proto service', function(done) {
+      grpcService.protos.Service = {
+        service: function(baseUrl, credentials) {
+          assert.strictEqual(baseUrl, grpcService.baseUrl);
+          assert.strictEqual(credentials, GRPC_CREDENTIALS);
+
+          setImmediate(done);
+
+          return new ProtoService();
+        }
+      };
+
+      var protoOpts = extend(true, {}, PROTO_OPTS, {
+        service: 'service'
+      });
+
+      grpcService.request(protoOpts, REQ_OPTS, assert.ifError);
+    });
+
     it('should make the correct request on the proto service', function(done) {
-      grpcService.proto = {};
-      grpcService.proto.service = function() {
-        return {
-          method: function(reqOpts) {
-            assert.strictEqual(reqOpts.camelOption, undefined);
-            assert.strictEqual(reqOpts.camel_option, REQ_OPTS.camelOption);
-            done();
-          }
-        };
+      grpcService.protos.Service = {
+        service: function() {
+          return {
+            method: function(reqOpts) {
+              assert.strictEqual(reqOpts.camelOption, undefined);
+              assert.strictEqual(reqOpts.camel_option, REQ_OPTS.camelOption);
+              done();
+            }
+          };
+        }
       };
 
       grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
@@ -281,33 +328,35 @@ describe('GrpcService', function() {
         Date.now() + PROTO_OPTS.timeout + 250
       ];
 
-      grpcService.proto = {};
-      grpcService.proto.service = function() {
-        return {
-          method: function(reqOpts, callback, _, grpcOpts) {
-            assert(is.date(grpcOpts.deadline));
+      grpcService.protos.Service = {
+        service: function() {
+          return {
+            method: function(reqOpts, callback, _, grpcOpts) {
+              assert(is.date(grpcOpts.deadline));
 
-            assert(grpcOpts.deadline.getTime() > expectedDeadlineRange[0]);
-            assert(grpcOpts.deadline.getTime() < expectedDeadlineRange[1]);
+              assert(grpcOpts.deadline.getTime() > expectedDeadlineRange[0]);
+              assert(grpcOpts.deadline.getTime() < expectedDeadlineRange[1]);
 
-            done();
-          }
-        };
+              done();
+            }
+          };
+        }
       };
 
       grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
     });
 
     it('should remove gcloud-specific options', function(done) {
-      grpcService.proto = {};
-      grpcService.proto.service = function() {
-        return {
-          method: function(reqOpts) {
-            assert.strictEqual(reqOpts.autoPaginate, undefined);
-            assert.strictEqual(reqOpts.autoPaginateVal, undefined);
-            done();
-          }
-        };
+      grpcService.protos.Service = {
+        service: function() {
+          return {
+            method: function(reqOpts) {
+              assert.strictEqual(reqOpts.autoPaginate, undefined);
+              assert.strictEqual(reqOpts.autoPaginateVal, undefined);
+              done();
+            }
+          };
+        }
       };
 
       grpcService.request(PROTO_OPTS, {
@@ -410,13 +459,14 @@ describe('GrpcService', function() {
           var grpcError = { code: grpcErrorCode };
           var httpError = HTTP_ERROR_CODE_MAP[grpcErrorCode];
 
-          grpcService.proto = {};
-          grpcService.proto.service = function() {
-            return {
-              method: function(reqOpts, callback) {
-                callback(grpcError);
-              }
-            };
+          grpcService.protos.Service = {
+            service: function() {
+              return {
+                method: function(reqOpts, callback) {
+                  callback(grpcError);
+                }
+              };
+            }
           };
 
           grpcService.request(PROTO_OPTS, REQ_OPTS, function(err) {
@@ -434,20 +484,21 @@ describe('GrpcService', function() {
       };
 
       beforeEach(function() {
-        grpcService.proto = {};
-        grpcService.proto.service = function() {
-          return {
-            method: function(reqOpts, callback) {
-              callback(null, RESPONSE);
-            }
-          };
+        grpcService.protos.Service = {
+          service: function() {
+            return {
+              method: function(reqOpts, callback) {
+                callback(null, RESPONSE);
+              }
+            };
+          }
         };
       });
 
       it('should execute callback with response', function(done) {
         var expectedResponse = {};
 
-        grpcService.convertBuffers_ = function(response) {
+        GrpcService.convertBuffers_ = function(response) {
           assert.strictEqual(response.snake_property, undefined);
           assert.strictEqual(response.snakeProperty, RESPONSE.snake_property);
           return expectedResponse;
@@ -467,28 +518,28 @@ describe('GrpcService', function() {
     var DATA = [DATA_OBJECT];
 
     it('should check if data is buffer-like', function(done) {
-      grpcService.isBufferLike_ = function(data) {
+      GrpcService.isBufferLike_ = function(data) {
         assert.strictEqual(data, DATA_OBJECT.prop);
         done();
       };
 
-      grpcService.convertBuffers_(DATA);
+      GrpcService.convertBuffers_(DATA);
     });
 
     it('should convert buffer-like data into base64 strings', function() {
       var buffer = new Buffer([1, 2, 3]);
       var expectedString = buffer.toString('base64');
 
-      grpcService.isBufferLike_ = function() {
+      GrpcService.isBufferLike_ = function() {
         return true;
       };
 
-      grpcService.objToArr_ = function(data) {
+      GrpcService.objToArr_ = function(data) {
         assert.strictEqual(data, DATA_OBJECT.prop);
         return buffer;
       };
 
-      var convertedData = grpcService.convertBuffers_(DATA);
+      var convertedData = GrpcService.convertBuffers_(DATA);
       assert.strictEqual(convertedData[0].prop, expectedString);
     });
 
@@ -496,8 +547,121 @@ describe('GrpcService', function() {
       var buffer = new Buffer([1, 2, 3]);
       var expectedString = buffer.toString('base64');
 
-      var convertedData = grpcService.convertBuffers_([{ prop: buffer }]);
+      var convertedData = GrpcService.convertBuffers_([{ prop: buffer }]);
       assert.strictEqual(convertedData[0].prop, expectedString);
+    });
+  });
+
+  describe('convertValue_', function() {
+    it('should convert primitive values correctly', function() {
+      var convertedValues = extend(
+        GrpcService.convertValue_(null),
+        GrpcService.convertValue_(1),
+        GrpcService.convertValue_('Hi'),
+        GrpcService.convertValue_(true)
+      );
+
+      assert.deepEqual(convertedValues, {
+        nullValue: null,
+        numberValue: 1,
+        stringValue: 'Hi',
+        booleanValue: true
+      });
+    });
+
+    it('should convert objects', function() {
+      var value = {};
+
+      GrpcService.objToStruct_ = function() {
+        return value;
+      };
+
+      var convertedValue = GrpcService.convertValue_({});
+
+      assert.strictEqual(convertedValue, value);
+    });
+
+    it('should convert arrays', function() {
+      var convertedValue = GrpcService.convertValue_([1, 2, 3]);
+
+      assert.deepEqual(convertedValue.listValue, [
+        GrpcService.convertValue_(1),
+        GrpcService.convertValue_(2),
+        GrpcService.convertValue_(3)
+      ]);
+    });
+
+    it('should throw if a type is not recognized', function() {
+      assert.throws(function() {
+        GrpcService.convertValue_(new Date());
+      }, 'Value of type Date not recognized.');
+    });
+  });
+
+  describe('isBufferLike_', function() {
+    it('should return false if not an object', function() {
+      assert.strictEqual(GrpcService.isBufferLike_(0), false);
+      assert.strictEqual(GrpcService.isBufferLike_(true), false);
+      assert.strictEqual(GrpcService.isBufferLike_('not-buffer'), false);
+    });
+
+    it('should return false if empty', function() {
+      assert.strictEqual(GrpcService.isBufferLike_({}), false);
+    });
+
+    it('should filter out `length` and `parent` properties', function() {
+      var obj = {
+        1: 1,
+        2: 2,
+        3: 3,
+        length: 3,
+        parent: 'parent'
+      };
+
+      assert.strictEqual(GrpcService.isBufferLike_(obj), true);
+    });
+
+    it('require every property name to be a number', function() {
+      var isBufferLike = { 1: 1, 2: 2, 3: 3 };
+      var isNotBufferLike = { 1: 1, 2: 2, 3: 3, a: 'a' };
+      var isNotBufferLike2 = { 1: 1, 2: 2, 3: 3, '4a': '4a' };
+      var isNotBufferLike3 = { 1: 1, 2: 2, 3: 3, a4: 'a4' };
+      var isNotBufferLike4 = { 1: 1, 3: 3, 5: 5 };
+
+      assert.strictEqual(GrpcService.isBufferLike_(isBufferLike), true);
+      assert.strictEqual(GrpcService.isBufferLike_(isNotBufferLike), false);
+      assert.strictEqual(GrpcService.isBufferLike_(isNotBufferLike2), false);
+      assert.strictEqual(GrpcService.isBufferLike_(isNotBufferLike3), false);
+      assert.strictEqual(GrpcService.isBufferLike_(isNotBufferLike4), false);
+    });
+  });
+
+  describe('objToArr_', function() {
+    it('should convert an object into an array', function() {
+      assert.deepEqual(
+        GrpcService.objToArr_({ a: 'a', b: 'b', c: 'c' }),
+        ['a', 'b', 'c']
+      );
+    });
+  });
+
+  describe('objToStruct_', function() {
+    it('should convert values in an Object', function() {
+      var inputValue = {};
+      var convertedValue = {};
+
+      GrpcService.convertValue_ = function(value) {
+        assert.strictEqual(value, inputValue);
+        return convertedValue;
+      };
+
+      var obj = {
+        a: inputValue
+      };
+
+      var struct = GrpcService.objToStruct_(obj);
+
+      assert.strictEqual(struct.fields.a, convertedValue);
     });
   });
 
@@ -568,53 +732,6 @@ describe('GrpcService', function() {
           done();
         });
       });
-    });
-  });
-
-  describe('isBufferLike_', function() {
-    it('should return false if not an object', function() {
-      assert.strictEqual(grpcService.isBufferLike_(0), false);
-      assert.strictEqual(grpcService.isBufferLike_(true), false);
-      assert.strictEqual(grpcService.isBufferLike_('not-buffer'), false);
-    });
-
-    it('should return false if empty', function() {
-      assert.strictEqual(grpcService.isBufferLike_({}), false);
-    });
-
-    it('should filter out `length` and `parent` properties', function() {
-      var obj = {
-        1: 1,
-        2: 2,
-        3: 3,
-        length: 3,
-        parent: 'parent'
-      };
-
-      assert.strictEqual(grpcService.isBufferLike_(obj), true);
-    });
-
-    it('require every property name to be a number', function() {
-      var isBufferLike = { 1: 1, 2: 2, 3: 3 };
-      var isNotBufferLike = { 1: 1, 2: 2, 3: 3, a: 'a' };
-      var isNotBufferLike2 = { 1: 1, 2: 2, 3: 3, '4a': '4a' };
-      var isNotBufferLike3 = { 1: 1, 2: 2, 3: 3, a4: 'a4' };
-      var isNotBufferLike4 = { 1: 1, 3: 3, 5: 5 };
-
-      assert.strictEqual(grpcService.isBufferLike_(isBufferLike), true);
-      assert.strictEqual(grpcService.isBufferLike_(isNotBufferLike), false);
-      assert.strictEqual(grpcService.isBufferLike_(isNotBufferLike2), false);
-      assert.strictEqual(grpcService.isBufferLike_(isNotBufferLike3), false);
-      assert.strictEqual(grpcService.isBufferLike_(isNotBufferLike4), false);
-    });
-  });
-
-  describe('objToArr_', function() {
-    it('should convert an object into an array', function() {
-      assert.deepEqual(
-        grpcService.objToArr_({ a: 'a', b: 'b', c: 'c' }),
-        ['a', 'b', 'c']
-      );
     });
   });
 });

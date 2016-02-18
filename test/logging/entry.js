@@ -18,16 +18,37 @@
 
 var assert = require('assert');
 var extend = require('extend');
+var mockery = require('mockery-next');
 
-var Entry = require('../../lib/logging/entry.js');
+var GrpcService = require('../../lib/common/grpc-service.js');
+
+function FakeGrpcService() {}
 
 describe('Entry', function() {
+  var Entry;
   var entry;
 
   var RESOURCE = {};
   var DATA = {};
 
+  before(function() {
+    mockery.registerMock('../../lib/common/grpc-service.js', FakeGrpcService);
+
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
+    });
+
+    Entry = require('../../lib/logging/entry.js');
+  });
+
+  after(function() {
+    mockery.deregisterAll();
+    mockery.disable();
+  });
+
   beforeEach(function() {
+    extend(FakeGrpcService, GrpcService);
     entry = new Entry(RESOURCE, DATA);
   });
 
@@ -141,10 +162,18 @@ describe('Entry', function() {
       });
     });
 
-    it('should assign json data as jsonPayload', function() {
-      entry.data = {};
+    it('should convert data as a struct and assign to jsonPayload', function() {
+      var input = {};
+      var converted = {};
+
+      FakeGrpcService.objToStruct_ = function(obj) {
+        assert.strictEqual(obj, input);
+        return converted;
+      };
+
+      entry.data = input;
       var json = entry.toJSON();
-      assert.strictEqual(json.jsonPayload, entry.data);
+      assert.strictEqual(json.jsonPayload, converted);
     });
 
     it('should assign string data as textPayload', function() {
