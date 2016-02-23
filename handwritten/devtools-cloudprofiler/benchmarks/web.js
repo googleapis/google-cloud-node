@@ -19,11 +19,11 @@
 var http = require('http');
 var cp = require('child_process');
 
-var server = http.createServer(function(req, res) {
+var server = http.createServer(function handler(req, res) {
   res.end(new Array(100).join(','));
 });
 
-server.listen(8080, function() {
+server.listen(8080, function listened() {
   cp.spawn('ab', [ '-n', '110000', '-c', '10', 'http://127.0.0.1:8080/' ])
-      .on('close', function() { server.close(); });
+      .on('close', function closer() { server.close(); });
 });
