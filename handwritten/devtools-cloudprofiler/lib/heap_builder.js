@@ -92,36 +92,19 @@ function getLocation(stackNode) {
   return location;
 }
 
-var sampleValue =
+var countValue =
     new ValueType(getStringIndex('objects'), getStringIndex('count'));
-var timeValue =
+var bytesValue =
     new ValueType(getStringIndex('space'), getStringIndex('bytes'));
-
-function reduce(allocations) {
-  var allocs = {};
-  allocations.forEach(function(alloc) {
-    if (!allocs[alloc.size]) {
-      allocs[alloc.size] = alloc.count;
-    } else {
-      allocs[alloc.size] += alloc.count;
-    }
-  });
-  return allocs;
-}
 
 function serializeNode(node, stack) {
   var location = getLocation(node);
   stack.unshift(location.id); // leaf is first in the stack
-  var reducedAllocations = reduce(node.allocations);
-  for (var weight in reducedAllocations) {
-    var count = reducedAllocations[weight];
-    var avgSize = weight / count;
-    var scale = 1.0 / (1.0 - Math.exp(-(avgSize) / SAMPLE_PERIOD));
-    count = count * scale;
-    weight = weight * scale;
+  for (var i in node.allocations) {
+    var alloc = node.allocations[i];
     var sample = new Sample({
       location_id : stack,
-      value : [ count, weight ]
+      value : [ alloc.count, alloc.count * alloc.size ]
       // label?
     });
     samples.push(sample);
@@ -141,7 +124,7 @@ function serialize(prof, startTimeNanos, endTimeNanos) {
   functionIds = functionIds.slice(0, 1);
   serializeNode(prof, []);
   var profile = new Profile({
-    sample_type : [ timeValue, sampleValue ],
+    sample_type : [ countValue, bytesValue ],
     sample : samples,
     // mapping: mappings,
     location : locations, "function" : functions,
@@ -151,7 +134,7 @@ function serialize(prof, startTimeNanos, endTimeNanos) {
     time_nanos : startTimeNanos,                    // Nanos
     duration_nanos : endTimeNanos - startTimeNanos, // Nanos
 
-    period_type : timeValue,
+    period_type : bytesValue,
     period : SAMPLE_PERIOD
   });
   return profile;
