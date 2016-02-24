@@ -38,7 +38,7 @@ function list(callback) {
 }
 // [END list]
 
-exports.runExample = function runExample(cb) {
+exports.runExample = function (cb) {
   console.log('retrieving latest 3 log entries...');
   list(function (err, entries, apiResponse) {
     console.log(err, 'entries:', entries, 'apiResponse:', apiResponse);
@@ -46,8 +46,8 @@ exports.runExample = function runExample(cb) {
       cb(err, entries, apiResponse);
     }
   });
-}
+};
 
 if (module === require.main) {
-  runExample();
+  exports.runExample();
 }

@@ -80,15 +80,18 @@ function deleteSink(callback) {
 }
 // [END deleteSink]
 
-exports.runExample = function runExample(cb) {
+exports.runExample = function (cb) {
   listSinks(function (err, sinks, apiResponse) {
     console.log(err, 'sinks:', sinks, 'apiResponse:', apiResponse);
     if (typeof cb === 'function') {
       cb(err, sinks);
     }
   });
-}
+};
+exports.createSink = createSink;
+exports.updateSink = updateSink;
+exports.deleteSink = deleteSink;
 
 if (module === require.main) {
-  runExample();
+  exports.runExample();
 }

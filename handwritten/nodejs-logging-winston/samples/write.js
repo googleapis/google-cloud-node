@@ -75,7 +75,7 @@ function deleteLog(callback) {
 }
 // [END deleteLog]
 
-exports.runExample = function runExample(cb) {
+exports.runExample = function (cb) {
   var result = [];
   console.log('writing 2 log entries...');
   write(function (err, apiResponse) {
@@ -102,8 +102,8 @@ exports.runExample = function runExample(cb) {
       }
     });
   });
-}
+};
 
 if (module === require.main) {
-  runExample();
+  exports.runExample();
 }
