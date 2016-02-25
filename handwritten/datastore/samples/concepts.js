@@ -47,7 +47,7 @@ function Entity(projectId) {
   if (keyFile) {
     options.keyFilename = keyFile;
   }
-  this.datastore = gcloud.datastore(options);
+  this.datastore = gcloud.datastore.dataset(options);
 
   // To create the keys, we have to use this instance of Datastore.
   datastore.key = this.datastore.key;
@@ -210,27 +210,6 @@ Entity.prototype.testBasicEntity = function(callback) {
   }, callback);
 };
 
-Entity.prototype.testUpsert = function(callback) {
-  var taskKey = this.getIncompleteKey();
-  var task = this.getTask();
-
-  // [START upsert]
-  datastore.upsert({
-    key: taskKey,
-    data: task
-  }, function(err) {
-    if (!err) {
-      // Task inserted successfully.
-    }
-  });
-  // [END upsert]
-
-  this.datastore.upsert({
-    key: taskKey,
-    data: task
-  }, callback);
-};
-
 Entity.prototype.testInsert = function(callback) {
   var taskKey = this.getIncompleteKey();
   var task = this.getTask();
@@ -246,7 +225,8 @@ Entity.prototype.testInsert = function(callback) {
   });
   // [END insert]
 
-  this.datastore.insert({
+  this.datastore.save({
+    method: 'insert_auto_id',
     key: taskKey,
     data: task
   }, callback);
@@ -272,7 +252,8 @@ Entity.prototype.testLookup = function(callback) {
   });
   // [END lookup]
 
-  this.datastore.insert({
+  this.datastore.save({
+    method: 'insert_auto_id',
     key: taskKey,
     data: {}
   }, function(err) {
@@ -301,7 +282,8 @@ Entity.prototype.testUpdate = function(callback) {
   });
   // [END update]
 
-  this.datastore.insert({
+  this.datastore.save({
+    method: 'insert_auto_id',
     key: taskKey,
     data: {}
   }, function(err) {
@@ -329,7 +311,8 @@ Entity.prototype.testDelete = function(callback) {
   });
   // [END delete]
 
-  this.datastore.insert({
+  this.datastore.save({
+    method: 'insert_auto_id',
     key: taskKey,
     data: {}
   }, function(err) {
@@ -440,7 +423,7 @@ function Index(projectId) {
   if (keyFile) {
     options.keyFilename = keyFile;
   }
-  this.datastore = gcloud.datastore(options);
+  this.datastore = gcloud.datastore.dataset(options);
 }
 
 Index.prototype.testUnindexedPropertyQuery = function(callback) {
@@ -448,7 +431,7 @@ Index.prototype.testUnindexedPropertyQuery = function(callback) {
 
   // [START unindexed_property_query]
   var query = datastore.createQuery('Task')
-    .filter('description =', 'A task description.');
+    .filter('description', '=', 'A task description.');
   // [END unindexed_property_query]
 
   this.datastore.runQuery(query, callback);
@@ -459,6 +442,7 @@ Index.prototype.testExplodingProperties = function(callback) {
 
   // [START exploding_properties]
   var task = {
+    method: 'insert_auto_id',
     key: datastore.key('Task'),
     data: {
       tags: [
@@ -478,7 +462,7 @@ Index.prototype.testExplodingProperties = function(callback) {
 
   delete datastore.key;
 
-  this.datastore.insert(task, callback);
+  this.datastore.save(task, callback);
 };
 
 function Metadata(projectId) {
@@ -489,7 +473,7 @@ function Metadata(projectId) {
   if (keyFile) {
     options.keyFilename = keyFile;
   }
-  this.datastore = gcloud.datastore(options);
+  this.datastore = gcloud.datastore.dataset(options);
 }
 
 Metadata.prototype.testNamespaceRunQuery = function(callback) {
@@ -519,8 +503,8 @@ Metadata.prototype.testNamespaceRunQuery = function(callback) {
     // [START namespace_run_query]
     var query = datastore.createQuery('__namespace__')
       .select('__key__')
-      .filter('__key__ >=', datastore.key(['__namespace__', startNamespace]))
-      .filter('__key__ <', datastore.key(['__namespace__', endNamespace]));
+      .filter('__key__', '>=', datastore.key(['__namespace__', startNamespace]))
+      .filter('__key__', '<', datastore.key(['__namespace__', endNamespace]));
 
     datastore.runQuery(query, function(err, entities) {
       if (err) {
@@ -627,7 +611,7 @@ function Query(projectId) {
   if (keyFile) {
     options.keyFilename = keyFile;
   }
-  this.datastore = gcloud.datastore(options);
+  this.datastore = gcloud.datastore.dataset(options);
 
   this.basicQuery = this.getBasicQuery();
   this.projectionQuery = this.getProjectionQuery();
@@ -639,9 +623,11 @@ Query.prototype.getBasicQuery = function() {
 
   // [START basic_query]
   var query = datastore.createQuery('Task')
-    .filter('done =', false)
-    .filter('priority >=', 4)
-    .order('-priority');
+    .filter('done', '=', false)
+    .filter('priority', '>=', 4)
+    .order('priority', {
+      descending: true
+    });
   // [END basic_query]
 
   return query;
@@ -691,7 +677,7 @@ Query.prototype.testPropertyFilter = function(callback) {
 
   // [START property_filter]
   var query = datastore.createQuery('Task')
-    .filter('done =', false);
+    .filter('done', '=', false);
   // [END property_filter]
 
   this.datastore.runQuery(query, callback);
@@ -702,8 +688,8 @@ Query.prototype.testCompositeFilter = function(callback) {
 
   // [START composite_filter]
   var query = datastore.createQuery('Task')
-    .filter('done =', false)
-    .filter('priority =', 4);
+    .filter('done', '=', false)
+    .filter('priority', '=', 4);
   // [END composite_filter]
 
   this.datastore.runQuery(query, callback);
@@ -714,7 +700,7 @@ Query.prototype.testKeyFilter = function(callback) {
 
   // [START key_filter]
   var query = datastore.createQuery('Task')
-    .filter('__key__ >', datastore.key(['Task', 'someTask']));
+    .filter('__key__', '>', datastore.key(['Task', 'someTask']));
   // [END key_filter]
 
   this.datastore.runQuery(query, callback);
@@ -736,7 +722,9 @@ Query.prototype.testDescendingSort = function(callback) {
 
   // [START descending_sort]
   var query = datastore.createQuery('Task')
-    .order('-created');
+    .order('created', {
+      descending: true
+    });
   // [END descending_sort]
 
   this.datastore.runQuery(query, callback);
@@ -747,7 +735,9 @@ Query.prototype.testMultiSort = function(callback) {
 
   // [START multi_sort]
   var query = datastore.createQuery('Task')
-    .order('-priority')
+    .order('priority', {
+      descending: true
+    })
     .order('created');
   // [END multi_sort]
 
@@ -760,7 +750,7 @@ Query.prototype.testKindlessQuery = function(callback) {
 
   // [START kindless_query]
   var query = datastore.createQuery()
-    .filter('__key__ >', lastSeenKey);
+    .filter('__key__', '>', lastSeenKey);
   // [END kindless_query]
 
   this.datastore.runQuery(query, callback);
@@ -852,8 +842,8 @@ Query.prototype.testArrayValueInequalityRange = function(callback) {
 
   // [START array_value_inequality_range]
   var query = datastore.createQuery('Task')
-    .filter('tag >', 'learn')
-    .filter('tag <', 'math');
+    .filter('tag', '>', 'learn')
+    .filter('tag', '<', 'math');
   // [END array_value_inequality_range]
 
   this.datastore.runQuery(query, callback);
@@ -864,8 +854,8 @@ Query.prototype.testArrayValueEquality = function(callback) {
 
   // [START array_value_equality]
   var query = datastore.createQuery('Task')
-    .filter('tag =', 'fun')
-    .filter('tag =', 'programming');
+    .filter('tag', '=', 'fun')
+    .filter('tag', '=', 'programming');
   // [END array_value_equality]
 
   this.datastore.runQuery(query, callback);
@@ -876,8 +866,8 @@ Query.prototype.testInequalityRange = function(callback) {
 
   // [START inequality_range]
   var query = datastore.createQuery('Task')
-    .filter('created >', new Date('1990-01-01T00:00:00z'))
-    .filter('created <', new Date('2000-12-31T23:59:59z'));
+    .filter('created', '>', new Date('1990-01-01T00:00:00z'))
+    .filter('created', '<', new Date('2000-12-31T23:59:59z'));
   // [END inequality_range]
 
   this.datastore.runQuery(query, callback);
@@ -888,8 +878,8 @@ Query.prototype.testInequalityInvalid = function(callback) {
 
   // [START inequality_invalid]
   var query = datastore.createQuery('Task')
-    .filter('priority >', 3)
-    .filter('created >', new Date('1990-01-01T00:00:00z'));
+    .filter('priority', '>', 3)
+    .filter('created', '>', new Date('1990-01-01T00:00:00z'));
   // [END inequality_invalid]
 
   this.datastore.runQuery(query, callback);
@@ -900,10 +890,10 @@ Query.prototype.testEqualAndInequalityRange = function(callback) {
 
   // [START equal_and_inequality_range]
   var query = datastore.createQuery('Task')
-    .filter('priority =', 4)
-    .filter('done =', false)
-    .filter('created >', new Date('1990-01-01T00:00:00z'))
-    .filter('created <', new Date('2000-12-31T23:59:59z'));
+    .filter('priority', '=', 4)
+    .filter('done', '=', false)
+    .filter('created', '>', new Date('1990-01-01T00:00:00z'))
+    .filter('created', '<', new Date('2000-12-31T23:59:59z'));
   // [END equal_and_inequality_range]
 
   this.datastore.runQuery(query, callback);
@@ -914,7 +904,7 @@ Query.prototype.testInequalitySort = function(callback) {
 
   // [START inequality_sort]
   var query = datastore.createQuery('Task')
-    .filter('priority >', 3)
+    .filter('priority', '>', 3)
     .order('priority')
     .order('created');
   // [END inequality_sort]
@@ -927,7 +917,7 @@ Query.prototype.testInequalitySortInvalidNotSame = function(callback) {
 
   // [START inequality_sort_invalid_not_same]
   var query = datastore.createQuery('Task')
-    .filter('priority >', 3)
+    .filter('priority', '>', 3)
     .order('created');
   // [END inequality_sort_invalid_not_same]
 
@@ -939,7 +929,7 @@ Query.prototype.testInequalitySortInvalidNotFirst = function(callback) {
 
   // [START inequality_sort_invalid_not_first]
   var query = datastore.createQuery('Task')
-    .filter('priority >', 3)
+    .filter('priority', '>', 3)
     .order('created')
     .order('priority');
   // [END inequality_sort_invalid_not_first]
@@ -1056,7 +1046,7 @@ function Transaction(projectId) {
   if (keyFile) {
     options.keyFilename = keyFile;
   }
-  this.datastore = gcloud.datastore(options);
+  this.datastore = gcloud.datastore.dataset(options);
 
   this.fromKey = this.datastore.key(['Bank', 1, 'Account', 1]);
   this.toKey = this.datastore.key(['Bank', 1, 'Account', 2]);
