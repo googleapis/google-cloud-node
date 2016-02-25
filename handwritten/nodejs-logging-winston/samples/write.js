@@ -92,6 +92,7 @@ exports.runExample = function (cb) {
       console.log(err, 'apiResponse:', apiResponse);
       if (err && err.code === 404) {
         err = undefined;
+        apiResponse = {};
       }
       if (!err) {
         console.log('success!');
