@@ -33,7 +33,7 @@ if (keyFile) {
   options.keyFilename = keyFile;
 }
 
-var datastore = gcloud.datastore(options);
+var datastore = gcloud.datastore.dataset(options);
 // [END build_service]
 
 /*
