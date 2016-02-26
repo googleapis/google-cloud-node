@@ -104,6 +104,128 @@ describe('Compute', function() {
     });
   });
 
+  describe('autoscalers', function() {
+    var INSTANCE_GROUP_NAME = generateName();
+    var AUTOSCALER_NAME = generateName();
+    var autoscaler = zone.autoscaler(AUTOSCALER_NAME);
+
+    before(function(done) {
+      function createInstanceGroup(callback) {
+        zone.request({
+          method: 'POST',
+          uri: '/instanceGroups',
+          json: {
+            name: INSTANCE_GROUP_NAME
+          }
+        }, function(err, resp) {
+          if (err) {
+            callback(err);
+            return;
+          }
+
+          var operation = zone.operation(resp.name);
+          operation
+            .on('error', callback)
+            .on('complete', function() {
+              callback();
+            });
+        });
+      }
+
+      function createAutoscaler(callback) {
+        autoscaler.create({
+          coolDown: 30,
+          cpu: 80,
+          loadBalance: 40,
+          maxReplicas: 5,
+          minReplicas: 0,
+          target: INSTANCE_GROUP_NAME
+        }, execAfterOperationComplete(callback));
+      }
+
+      async.series([createInstanceGroup, createAutoscaler], done);
+    });
+
+    after(function(done) {
+      zone.request({
+        method: 'DELETE',
+        uri: '/instanceGroups/' + INSTANCE_GROUP_NAME
+      }, function(err, resp) {
+          if (err) {
+            done(err);
+            return;
+          }
+
+          var operation = zone.operation(resp.name);
+          operation
+            .on('error', done)
+            .on('complete', function() {
+              done();
+            });
+        });
+    });
+
+    it('should have created the autoscaler', function(done) {
+      autoscaler.getMetadata(function(err, metadata) {
+        assert.ifError(err);
+
+        assert.strictEqual(metadata.name, AUTOSCALER_NAME);
+
+        assert.deepEqual(metadata.autoscalingPolicy, {
+          coolDownPeriodSec: 30,
+          cpuUtilization: {
+            utilizationTarget: 0.8
+          },
+          loadBalancingUtilization: {
+            utilizationTarget: 0.4
+          },
+          maxNumReplicas: 5,
+          minNumReplicas: 0
+        });
+
+        done();
+      });
+    });
+
+    it('should get a list of autoscalers', function(done) {
+      compute.getAutoscalers(function(err, autoscalers) {
+        assert.ifError(err);
+        assert(autoscalers.length > 0);
+        done();
+      });
+    });
+
+    it('should get a list of autoscalers in stream mode', function(done) {
+      var resultsMatched = 0;
+
+      compute.getAutoscalers()
+        .on('error', done)
+        .on('data', function() {
+          resultsMatched++;
+        })
+        .on('end', function() {
+          assert(resultsMatched > 0);
+          done();
+        });
+    });
+
+    it('should set & get metadata', function(done) {
+      var description = 'description';
+
+      autoscaler.setMetadata({
+        description: description
+      }, function(err) {
+        assert.ifError(err);
+
+        autoscaler.getMetadata(function(err, metadata) {
+          assert.ifError(err);
+          assert.strictEqual(metadata.description, description);
+          done();
+        });
+      });
+    });
+  });
+
   describe('disks', function() {
     var DISK_NAME = generateName();
     var disk = zone.disk(DISK_NAME);
@@ -644,6 +766,7 @@ describe('Compute', function() {
   function deleteAllTestObjects(callback) {
     async.each([
       'getAddresses',
+      'getAutoscalers',
       'getDisks',
       'getFirewalls',
       'getNetworks',
