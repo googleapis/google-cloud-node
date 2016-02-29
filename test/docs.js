@@ -43,8 +43,13 @@ describe('documentation', function() {
   var FILES;
 
   before(function(done) {
+    // Set a global to indicate to any interested function inside of gcloud that
+    // this is a sandbox environment.
+    global.GCLOUD_SANDBOX_ENV = true;
+
     // Turn off the network so that API calls aren't actually made.
     MITM = mitm();
+
     glob('docs/json/master/**/*.json', function(err, files) {
       assert.ifError(err);
       FILES = files;
@@ -53,6 +58,8 @@ describe('documentation', function() {
   });
 
   after(function() {
+    delete global.GCLOUD_SANDBOX_ENV;
+
     // Re-enable the network.
     MITM.disable();
   });
@@ -81,10 +88,6 @@ describe('documentation', function() {
         return console;
       }, {});
 
-      // Set a global to indicate to any interested function inside of gcloud
-      // that this is a sandbox environment.
-      global.GCLOUD_SANDBOX_ENV = true;
-
       var sandbox = {
         gcloud: gcloud,
         require: require,
@@ -108,8 +111,6 @@ describe('documentation', function() {
 
         assert.doesNotThrow(runCodeInSandbox.bind(null, code, sandbox));
       });
-
-      delete global.GCLOUD_SANDBOX_ENV;
     });
   });
 });
