@@ -181,7 +181,6 @@ function runSample(callback) {
     }
   ], function (err) {
     if (err) {
-      console.log('ERROR');
       console.error(err);
     } else {
       console.log('deleted topic');
