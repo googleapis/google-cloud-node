@@ -210,6 +210,27 @@ Entity.prototype.testBasicEntity = function(callback) {
   }, callback);
 };
 
+Entity.prototype.testUpsert = function(callback) {
+  var taskKey = this.getIncompleteKey();
+  var task = this.getTask();
+
+  // [START upsert]
+  datastore.upsert({
+    key: taskKey,
+    data: task
+  }, function(err) {
+    if (!err) {
+      // Task inserted successfully.
+    }
+  });
+  // [END upsert]
+
+  this.datastore.upsert({
+    key: this.datastore.key(['Task', 1]),
+    data: task
+  }, callback);
+};
+
 Entity.prototype.testInsert = function(callback) {
   var taskKey = this.getIncompleteKey();
   var task = this.getTask();
