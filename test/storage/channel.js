@@ -72,7 +72,7 @@ describe('Channel', function() {
 
       assert.strictEqual(calledWith.parent, STORAGE);
       assert.strictEqual(calledWith.baseUrl, '/channels');
-      assert.strictEqual(calledWith.id, ID);
+      assert.strictEqual(calledWith.id, '');
       assert.deepEqual(calledWith.methods, {});
     });
 
