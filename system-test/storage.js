@@ -71,22 +71,16 @@ describe('storage', function() {
         // anymore.
         var CONSISTENCY_DELAY_MS = 250;
 
-        bucket.deleteFiles(function(err) {
+        bucket.deleteFiles({
+          versions: true
+        }, function(err) {
           if (err) {
             callback(err);
             return;
           }
 
           setTimeout(function() {
-            bucket.delete(function() {
-              // Ignoring this error:
-              // https://github.com/GoogleCloudPlatform/gcloud-node/issues/968
-              // if (err) {
-              //   callback(err);
-              //   return;
-              // }
-              callback();
-            });
+            bucket.delete(done);
           }, CONSISTENCY_DELAY_MS);
         });
       }
