@@ -18,6 +18,7 @@
 
 var assert = require('assert');
 var extend = require('extend');
+var Promise = require('bluebird');
 
 var ServiceObject = require('../../lib/common/service-object.js');
 var util = require('../../lib/common/util.js');
@@ -411,17 +412,27 @@ describe('ServiceObject', function() {
   });
 
   describe('getMetadata', function() {
-    it('should make the correct request', function(done) {
+    it('should make the correct request', function() {
       ServiceObject.prototype.request = function(reqOpts) {
         assert.strictEqual(this, serviceObject);
         assert.strictEqual(reqOpts.uri, '');
-        done();
+        return Promise.resolve();
       };
 
-      serviceObject.getMetadata();
+      return serviceObject.getMetadata();
     });
 
-    it('should extend the request options with defaults', function(done) {
+    it('should make the correct request (callback)', function(done) {
+      ServiceObject.prototype.request = function(reqOpts) {
+        assert.strictEqual(this, serviceObject);
+        assert.strictEqual(reqOpts.uri, '');
+        return Promise.resolve();
+      };
+
+      serviceObject.getMetadata(done);
+    });
+
+    it('should extend the request options with defaults', function() {
       var method = {
         reqOpts: {
           method: 'override',
@@ -434,35 +445,85 @@ describe('ServiceObject', function() {
       ServiceObject.prototype.request = function(reqOpts_) {
         assert.strictEqual(reqOpts_.method, method.reqOpts.method);
         assert.deepEqual(reqOpts_.qs, method.reqOpts.qs);
-        done();
+        return Promise.resolve();
       };
 
       var serviceObject = new ServiceObject(CONFIG);
       serviceObject.methods.getMetadata = method;
-      serviceObject.getMetadata();
+      return serviceObject.getMetadata();
     });
 
-    it('should execute callback with error & apiResponse', function(done) {
-      var error = new Error('Error.');
-      var apiResponse = {};
-
-      ServiceObject.prototype.request = function(reqOpts, callback) {
-        callback(error, apiResponse);
+    it('should extend the request options with defaults (callback)', function(done) {
+      var method = {
+        reqOpts: {
+          method: 'override',
+          qs: {
+            custom: true
+          }
+        }
       };
 
-      serviceObject.getMetadata(function(err, metadata, apiResponse_) {
+      ServiceObject.prototype.request = function(reqOpts_) {
+        assert.strictEqual(reqOpts_.method, method.reqOpts.method);
+        assert.deepEqual(reqOpts_.qs, method.reqOpts.qs);
+        return Promise.resolve();
+      };
+
+      var serviceObject = new ServiceObject(CONFIG);
+      serviceObject.methods.getMetadata = method;
+      serviceObject.getMetadata(done);
+    });
+
+    it('should execute callback with error & apiResponse', function() {
+      var error = new Error('Error.');
+      var apiResponse = {};
+      error.response = apiResponse;
+
+      ServiceObject.prototype.request = function() {
+        return Promise.reject(error);
+      };
+
+      return serviceObject.getMetadata().then(function () {
+        throw new Error('should have failed!');
+      }, function(err) {
         assert.strictEqual(err, error);
-        assert.strictEqual(metadata, null);
-        assert.strictEqual(apiResponse_, apiResponse);
+        assert.strictEqual(err.response, apiResponse);
+      });
+    });
+
+    it('should execute callback with error & apiResponse (callback)', function(done) {
+      var error = new Error('Error.');
+      var apiResponse = {};
+      error.response = apiResponse;
+
+      ServiceObject.prototype.request = function() {
+        return Promise.reject(error);
+      };
+
+      serviceObject.getMetadata(function(err) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(err.response, apiResponse);
         done();
       });
     });
 
-    it('should update metadata', function(done) {
+    it('should update metadata', function() {
       var apiResponse = {};
 
-      ServiceObject.prototype.request = function(reqOpts, callback) {
-        callback(null, apiResponse);
+      ServiceObject.prototype.request = function() {
+        return Promise.resolve(apiResponse);
+      };
+
+      return serviceObject.getMetadata().spread(function() {
+        assert.strictEqual(serviceObject.metadata, apiResponse);
+      });
+    });
+
+    it('should update metadata (callback)', function(done) {
+      var apiResponse = {};
+
+      ServiceObject.prototype.request = function() {
+        return Promise.resolve(apiResponse);
       };
 
       serviceObject.getMetadata(function(err) {
@@ -472,11 +533,24 @@ describe('ServiceObject', function() {
       });
     });
 
-    it('should execute callback with metadata & API response', function(done) {
+    it('should execute callback with metadata & API response', function() {
       var apiResponse = {};
 
-      ServiceObject.prototype.request = function(reqOpts, callback) {
-        callback(null, apiResponse);
+      ServiceObject.prototype.request = function() {
+        return Promise.resolve(apiResponse);
+      };
+
+      return serviceObject.getMetadata().spread(function(metadata, apiResponse_) {
+        assert.strictEqual(metadata, apiResponse);
+        assert.strictEqual(apiResponse_, apiResponse);
+      });
+    });
+
+    it('should execute callback with metadata & API response (callback)', function(done) {
+      var apiResponse = {};
+
+      ServiceObject.prototype.request = function() {
+        return Promise.resolve(apiResponse);
       };
 
       serviceObject.getMetadata(function(err, metadata, apiResponse_) {
@@ -489,7 +563,7 @@ describe('ServiceObject', function() {
   });
 
   describe('setMetadata', function() {
-    it('should make the correct request', function(done) {
+    it('should make the correct request', function() {
       var metadata = {};
 
       ServiceObject.prototype.request = function(reqOpts) {
@@ -497,13 +571,27 @@ describe('ServiceObject', function() {
         assert.strictEqual(reqOpts.method, 'PATCH');
         assert.strictEqual(reqOpts.uri, '');
         assert.strictEqual(reqOpts.json, metadata);
-        done();
+        return Promise.resolve({});
       };
 
-      serviceObject.setMetadata(metadata);
+      return serviceObject.setMetadata(metadata);
     });
 
-    it('should extend the request options with defaults', function(done) {
+    it('should make the correct request (callback)', function(done) {
+      var metadata = {};
+
+      ServiceObject.prototype.request = function(reqOpts) {
+        assert.strictEqual(this, serviceObject);
+        assert.strictEqual(reqOpts.method, 'PATCH');
+        assert.strictEqual(reqOpts.uri, '');
+        assert.strictEqual(reqOpts.json, metadata);
+        return Promise.resolve({});
+      };
+
+      serviceObject.setMetadata(metadata, done);
+    });
+
+    it('should extend the request options with defaults (callback)', function(done) {
       var metadataDefault = {
         a: 'b'
       };
@@ -528,34 +616,64 @@ describe('ServiceObject', function() {
         assert.strictEqual(reqOpts_.method, method.reqOpts.method);
         assert.deepEqual(reqOpts_.qs, method.reqOpts.qs);
         assert.deepEqual(reqOpts_.json, expectedJson);
-        done();
+        return Promise.resolve();
       };
 
       var serviceObject = new ServiceObject(CONFIG);
       serviceObject.methods.setMetadata = method;
-      serviceObject.setMetadata(metadata);
+      serviceObject.setMetadata(metadata, done);
     });
 
-    it('should execute callback with error & apiResponse', function(done) {
+    it('should execute callback with error & apiResponse', function() {
       var error = new Error('Error.');
       var apiResponse = {};
+      error.response = apiResponse;
 
-      ServiceObject.prototype.request = function(reqOpts, callback) {
-        callback(error, apiResponse);
+      ServiceObject.prototype.request = function() {
+        return Promise.reject(error);
       };
 
-      serviceObject.setMetadata({}, function(err, apiResponse_) {
+      return serviceObject.setMetadata({}).then(function () {
+        throw new Error('should have failed');
+      }, function(err) {
         assert.strictEqual(err, error);
-        assert.strictEqual(apiResponse_, apiResponse);
+        assert.strictEqual(err.response, apiResponse);
+      });
+    });
+
+    it('should execute callback with error & apiResponse (callback)', function(done) {
+      var error = new Error('Error.');
+      var apiResponse = {};
+      error.response = apiResponse;
+
+      ServiceObject.prototype.request = function() {
+        return Promise.reject(error);
+      };
+
+      serviceObject.setMetadata({}, function(err) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(err.response, apiResponse);
         done();
       });
     });
 
-    it('should update metadata', function(done) {
+    it('should update metadata', function() {
       var apiResponse = {};
 
-      ServiceObject.prototype.request = function(reqOpts, callback) {
-        callback(null, apiResponse);
+      ServiceObject.prototype.request = function() {
+        return Promise.resolve(apiResponse);
+      };
+
+      return serviceObject.setMetadata({}).spread(function() {
+        assert.strictEqual(serviceObject.metadata, apiResponse);
+      });
+    });
+
+    it('should update metadata (callback)', function(done) {
+      var apiResponse = {};
+
+      ServiceObject.prototype.request = function() {
+        return Promise.resolve(apiResponse);
       };
 
       serviceObject.setMetadata({}, function(err) {
@@ -565,11 +683,23 @@ describe('ServiceObject', function() {
       });
     });
 
-    it('should execute callback with metadata & API response', function(done) {
+    it('should execute callback with metadata & API response', function() {
       var apiResponse = {};
 
-      ServiceObject.prototype.request = function(reqOpts, callback) {
-        callback(null, apiResponse);
+      ServiceObject.prototype.request = function() {
+        return Promise.resolve(apiResponse);
+      };
+
+      return serviceObject.setMetadata({}).spread(function(apiResponse_) {
+        assert.strictEqual(apiResponse_, apiResponse);
+      });
+    });
+
+    it('should execute callback with metadata & API response (callback)', function(done) {
+      var apiResponse = {};
+
+      ServiceObject.prototype.request = function() {
+        return Promise.resolve(apiResponse);
       };
 
       serviceObject.setMetadata({}, function(err, apiResponse_) {

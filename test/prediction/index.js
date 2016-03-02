@@ -21,6 +21,7 @@ var assert = require('assert');
 var extend = require('extend');
 var mockery = require('mockery-next');
 var nodeutil = require('util');
+var Promise = require('bluebird');
 
 var Service = require('../../lib/common/service.js');
 var util = require('../../lib/common/util.js');
@@ -135,7 +136,7 @@ describe('Prediction', function() {
       }, /A model ID is required/);
     });
 
-    it('should make the correct API request', function(done) {
+    it('should make the correct API request', function() {
       prediction.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/trainedmodels');
@@ -145,20 +146,52 @@ describe('Prediction', function() {
         });
         assert.deepEqual(reqOpts.json, expectedBody);
 
-        done();
+        return Promise.resolve(reqOpts.json);
       };
 
-      prediction.createModel(ID, OPTIONS, assert.ifError);
+      return prediction.createModel(ID, OPTIONS);
     });
 
-    it('should not require any options', function() {
-      assert.doesNotThrow(function() {
-        prediction.request = util.noop;
-        prediction.createModel(ID, assert.ifError);
+    it('should make the correct API request (callback)', function(done) {
+      prediction.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/trainedmodels');
+
+        var expectedBody = extend({}, OPTIONS, {
+          id: ID
+        });
+        assert.deepEqual(reqOpts.json, expectedBody);
+
+        return Promise.resolve(reqOpts.json);
+      };
+
+      prediction.createModel(ID, OPTIONS, function (err, model, resp) {
+        if (err) {
+          assert.ifError(err);
+        }
+        assert.ok(model);
+        assert.ok(resp);
+        done();
       });
     });
 
-    it('should accept a File for input data source', function(done) {
+    it('should not require any options', function() {
+      prediction.request = function () {
+        return Promise.resolve({ id: ID });
+      };
+      return prediction.createModel(ID);
+    });
+
+    it('should not require any options (callback)', function(done) {
+      assert.doesNotThrow(function() {
+        prediction.request = function () {
+          return Promise.resolve({ id: ID });
+        };
+        prediction.createModel(ID, done);
+      });
+    });
+
+    it('should accept a File for input data source', function() {
       var file = {
         name: 'file-name',
         parent: {
@@ -170,43 +203,86 @@ describe('Prediction', function() {
         var expectedLocation = file.parent.name + '/' + file.name;
         assert.strictEqual(reqOpts.json.storageDataLocation, expectedLocation);
         assert.strictEqual(reqOpts.json.data, undefined);
-        done();
+        return Promise.resolve(reqOpts.json);
+      };
+
+      return prediction.createModel(ID, {
+        data: file
+      });
+    });
+
+    it('should accept a File for input data source (callback)', function(done) {
+      var file = {
+        name: 'file-name',
+        parent: {
+          name: 'bucket-name'
+        }
+      };
+
+      prediction.request = function(reqOpts) {
+        var expectedLocation = file.parent.name + '/' + file.name;
+        assert.strictEqual(reqOpts.json.storageDataLocation, expectedLocation);
+        assert.strictEqual(reqOpts.json.data, undefined);
+        return Promise.resolve(reqOpts.json);
       };
 
       prediction.createModel(ID, {
         data: file
-      }, assert.ifError);
+      }, done);
     });
 
-    it('should accept a model type', function(done) {
+    it('should accept a model type', function() {
       var type = 'classification';
 
       prediction.request = function(reqOpts) {
         assert.strictEqual(reqOpts.json.modelType, type.toUpperCase());
         assert.strictEqual(reqOpts.json.type, undefined);
-        done();
+        return Promise.resolve(reqOpts.json);
+      };
+
+      return prediction.createModel(ID, {
+        type: type
+      });
+    });
+
+    it('should accept a model type (callback)', function(done) {
+      var type = 'classification';
+
+      prediction.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.json.modelType, type.toUpperCase());
+        assert.strictEqual(reqOpts.json.type, undefined);
+        return Promise.resolve(reqOpts.json);
       };
 
       prediction.createModel(ID, {
         type: type
-      }, assert.ifError);
+      }, done);
     });
 
     describe('error', function() {
       var error = new Error('Error.');
       var apiResponse = {};
+      error.response = apiResponse;
 
       beforeEach(function() {
-        prediction.request = function(reqOpts, callback) {
-          callback(error, apiResponse);
+        prediction.request = function() {
+          return Promise.reject(error);
         };
       });
 
-      it('should execute callback with error and API response', function(done) {
-        prediction.createModel(ID, OPTIONS, function(err, model, apiResponse_) {
+      it('should execute callback with error and API response', function() {
+        return prediction.createModel(ID, OPTIONS).then(function () {
+          throw new Error('should have failed!');
+        }, function(err) {
           assert.strictEqual(err, error);
-          assert.strictEqual(model, null);
-          assert.strictEqual(apiResponse_, apiResponse);
+          assert.strictEqual(err.response, apiResponse);
+        });
+      });
+
+      it('should execute callback with error and API response (callback)', function(done) {
+        prediction.createModel(ID, OPTIONS, function(err) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(err.response, apiResponse);
           done();
         });
       });
@@ -220,7 +296,7 @@ describe('Prediction', function() {
 
       beforeEach(function() {
         prediction.request = function(reqOpts, callback) {
-          callback(null, apiResponse);
+          return Promise.resolve(apiResponse);
         };
 
         prediction.model = function() {
@@ -228,14 +304,22 @@ describe('Prediction', function() {
         };
       });
 
-      it('should create a model from the response', function(done) {
+      it('should create a model from the response', function() {
         prediction.model = function(id) {
           assert.strictEqual(id, apiResponse.id);
-          setImmediate(done);
           return model;
         };
 
-        prediction.createModel(ID, OPTIONS, assert.ifError);
+        return prediction.createModel(ID, OPTIONS);
+      });
+
+      it('should create a model from the response (callback)', function(done) {
+        prediction.model = function(id) {
+          assert.strictEqual(id, apiResponse.id);
+          return model;
+        };
+
+        prediction.createModel(ID, OPTIONS, done);
       });
 
       it('should execute callback with model and API response', function(done) {
@@ -259,44 +343,74 @@ describe('Prediction', function() {
   });
 
   describe('getModels', function() {
-    it('should make the correct request', function(done) {
+    it('should make the correct request', function() {
       var query = {};
 
       prediction.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/trainedmodels/list');
         assert.strictEqual(reqOpts.qs, query);
 
-        done();
+        return Promise.resolve({ items: [] });
       };
 
-      prediction.getModels(query, assert.ifError);
+      return prediction.getModels(query);
     });
 
-    it('should use an empty query if one was not provided', function(done) {
+    it('should make the correct request (callback)', function(done) {
+      var query = {};
+
       prediction.request = function(reqOpts) {
-        assert.equal(Object.keys(reqOpts.qs).length, 0);
-        done();
+        assert.strictEqual(reqOpts.uri, '/trainedmodels/list');
+        assert.strictEqual(reqOpts.qs, query);
+
+        return Promise.resolve({ items: [] });
       };
 
-      prediction.getModels(assert.ifError);
+      prediction.getModels(query, done);
+    });
+
+    it('should use an empty query if one was not provided', function() {
+      prediction.request = function(reqOpts) {
+        assert.equal(Object.keys(reqOpts.qs).length, 0);
+        return Promise.resolve({ items: [] });
+      };
+
+      return prediction.getModels();
+    });
+
+    it('should use an empty query if one was not provided (callback)', function(done) {
+      prediction.request = function(reqOpts) {
+        assert.equal(Object.keys(reqOpts.qs).length, 0);
+        return Promise.resolve({ items: [] });
+      };
+
+      prediction.getModels(done);
     });
 
     describe('error', function() {
       var error = new Error('Error.');
       var apiResponse = {};
+      error.response = apiResponse;
 
       beforeEach(function() {
-        prediction.request = function(reqOpts, callback) {
-          callback(error, apiResponse);
+        prediction.request = function() {
+          return Promise.reject(error);
         };
       });
 
-      it('should execute callback with error and API response', function(done) {
-        prediction.getModels({}, function(err, models, nextQ, apiResponse_) {
+      it('should execute callback with error and API response', function() {
+        return prediction.getModels({}).then(function () {
+          throw new Error('should have failed!');
+        }, function(err) {
           assert.strictEqual(err, error);
-          assert.strictEqual(models, null);
-          assert.strictEqual(nextQ, null);
-          assert.strictEqual(apiResponse_, apiResponse);
+          assert.strictEqual(err.response, apiResponse);
+        });
+      });
+
+      it('should execute callback with error and API response (callback)', function(done) {
+        prediction.getModels({}, function(err) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(err.response, apiResponse);
 
           done();
         });
@@ -313,7 +427,7 @@ describe('Prediction', function() {
 
       beforeEach(function() {
         prediction.request = function(reqOpts, callback) {
-          callback(null, apiResponse);
+          return Promise.resolve(apiResponse);
         };
 
         prediction.model = function() {
@@ -321,7 +435,16 @@ describe('Prediction', function() {
         };
       });
 
-      it('should create Models from the response', function(done) {
+      it('should create Models from the response', function() {
+        prediction.model = function(id) {
+          assert.strictEqual(id, MODEL.id);
+          return MODEL;
+        };
+
+        return prediction.getModels({});
+      });
+
+      it('should create Models from the response (callback)', function(done) {
         prediction.model = function(id) {
           assert.strictEqual(id, MODEL.id);
           setImmediate(done);
@@ -331,7 +454,7 @@ describe('Prediction', function() {
         prediction.getModels({}, assert.ifError);
       });
 
-      it('should set a nextQuery if necessary', function(done) {
+      it('should set a nextQuery if necessary', function() {
         var apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: 'next-page-token'
         });
@@ -340,7 +463,29 @@ describe('Prediction', function() {
         var originalQuery = extend({}, query);
 
         prediction.request = function(reqOpts, callback) {
-          callback(null, apiResponseWithNextPageToken);
+          return Promise.resolve(apiResponseWithNextPageToken);
+        };
+
+        return prediction.getModels(query).spread(function(models, nextQuery) {
+          // Check the original query wasn't modified.
+          assert.deepEqual(query, originalQuery);
+
+          assert.deepEqual(nextQuery, extend({}, query, {
+            pageToken: apiResponseWithNextPageToken.nextPageToken
+          }));
+        });
+      });
+
+      it('should set a nextQuery if necessary (callback)', function(done) {
+        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+          nextPageToken: 'next-page-token'
+        });
+
+        var query = { a: 'b', c: 'd' };
+        var originalQuery = extend({}, query);
+
+        prediction.request = function(reqOpts, callback) {
+          return Promise.resolve(apiResponseWithNextPageToken);
         };
 
         prediction.getModels(query, function(err, models, nextQuery) {

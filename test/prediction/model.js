@@ -22,6 +22,7 @@ var extend = require('extend');
 var mockery = require('mockery-next');
 var nodeutil = require('util');
 var through = require('through2');
+var Promise = require('bluebird');
 
 var ServiceObject = require('../../lib/common/service-object.js');
 var util = require('../../lib/common/util.js');
@@ -115,30 +116,48 @@ describe('Index', function() {
   });
 
   describe('analyze', function() {
-    it('should make the correct request', function(done) {
+    it('should make the correct request', function() {
       model.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/analyze');
-        done();
+        return Promise.resolve({});
       };
 
-      model.analyze(assert.ifError);
+      return model.analyze();
+    });
+
+    it('should make the correct request (callback)', function(done) {
+      model.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/analyze');
+        return Promise.resolve({});
+      };
+
+      model.analyze(done);
     });
 
     describe('error', function() {
       var error = new Error('Error.');
       var apiResponse = {};
+      error.response = apiResponse;
 
       beforeEach(function() {
-        model.request = function(reqOpts, callback) {
-          callback(error, apiResponse);
+        model.request = function() {
+          return Promise.reject(error);
         };
       });
 
-      it('should exec callback with the error & API response', function(done) {
-        model.analyze(function(err, analysis, apiResponse_) {
+      it('should exec callback with the error & API response', function() {
+        return model.analyze().then(function () {
+          throw new Error('should have failed!');
+        }, function(err) {
           assert.strictEqual(err, error);
-          assert.strictEqual(analysis, null);
-          assert.strictEqual(apiResponse_, apiResponse);
+          assert.strictEqual(err.response, apiResponse);
+        });
+      });
+
+      it('should exec callback with the error & API response (callback)', function(done) {
+        model.analyze(function(err) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(err.response, apiResponse);
           done();
         });
       });
@@ -151,12 +170,22 @@ describe('Index', function() {
       };
 
       beforeEach(function() {
-        model.request = function(reqOpts, callback) {
-          callback(null, apiResponse);
+        model.request = function() {
+          return Promise.resolve(apiResponse);
         };
       });
 
-      it('should exec callback with analysis & API response', function(done) {
+      it('should exec callback with analysis & API response', function() {
+        return model.analyze().spread(function(analysis, apiResponse_) {
+          assert.deepEqual(analysis, {
+            data: apiResponse.dataDescription,
+            model: apiResponse.modelDescription
+          });
+          assert.strictEqual(apiResponse_, apiResponse);
+        });
+      });
+
+      it('should exec callback with analysis & API response (callback)', function(done) {
         model.analyze(function(err, analysis, apiResponse_) {
           assert.ifError(err);
           assert.deepEqual(analysis, {
@@ -168,11 +197,24 @@ describe('Index', function() {
         });
       });
 
-      it('should default to empty analysis objects', function(done) {
+      it('should default to empty analysis objects', function() {
         var apiResponseWithoutData = {};
 
-        model.request = function(reqOpts, callback) {
-          callback(null, apiResponseWithoutData);
+        model.request = function() {
+          return Promise.resolve(apiResponseWithoutData);
+        };
+
+        return model.analyze().spread(function(analysis) {
+          assert.deepEqual(analysis.data, {});
+          assert.deepEqual(analysis.model, {});
+        });
+      });
+
+      it('should default to empty analysis objects (callback)', function(done) {
+        var apiResponseWithoutData = {};
+
+        model.request = function() {
+          return Promise.resolve(apiResponseWithoutData);
         };
 
         model.analyze(function(err, analysis) {
@@ -382,7 +424,7 @@ describe('Index', function() {
   });
 
   describe('query', function() {
-    it('should make the correct request', function(done) {
+    it('should make the correct request', function() {
       var input = 'input';
 
       model.request = function(reqOpts) {
@@ -393,27 +435,53 @@ describe('Index', function() {
             csvInstance: [input]
           }
         });
-        done();
+        return Promise.resolve({ outputMulti: [] });
       };
 
-      model.query(input, assert.ifError);
+      return model.query(input);
+    });
+
+    it('should make the correct request (callback)', function(done) {
+      var input = 'input';
+
+      model.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/predict');
+        assert.deepEqual(reqOpts.json, {
+          input: {
+            csvInstance: [input]
+          }
+        });
+        return Promise.resolve({ outputMulti: [] });
+      };
+
+      model.query(input, done);
     });
 
     describe('error', function() {
       var error = new Error('Error.');
       var apiResponse = {};
+      error.response = apiResponse;
 
       beforeEach(function() {
-        model.request = function(reqOpts, callback) {
-          callback(error, apiResponse);
+        model.request = function() {
+          return Promise.reject(error);
         };
       });
 
-      it('should exec callback with error & API response', function(done) {
-        model.query('input', function(err, results, apiResponse_) {
+      it('should exec callback with error & API response', function() {
+        return model.query('input').then(function () {
+          throw new Error('should have failed!');
+        }, function(err) {
           assert.strictEqual(err, error);
-          assert.strictEqual(results, null);
-          assert.strictEqual(apiResponse_, apiResponse);
+          assert.strictEqual(err.response, apiResponse);
+        });
+      });
+
+      it('should exec callback with error & API response (callback)', function(done) {
+        model.query('input', function(err) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(err.response, apiResponse);
           done();
         });
       });
@@ -433,12 +501,23 @@ describe('Index', function() {
       };
 
       beforeEach(function() {
-        model.request = function(reqOpts, callback) {
-          callback(null, apiResponse);
+        model.request = function() {
+          return Promise.resolve(apiResponse);
         };
       });
 
-      it('should return the results sorted by score', function(done) {
+      it('should return the results sorted by score', function() {
+        return model.query('input').spread(function(results) {
+          assert.strictEqual(results.winner, apiResponse.outputLabel);
+
+          assert.strictEqual(results.scores.length, 2);
+
+          assert.strictEqual(results.scores[0].score, 1);
+          assert.strictEqual(results.scores[1].score, 0);
+        });
+      });
+
+      it('should return the results sorted by score (callback)', function(done) {
         model.query('input', function(err, results) {
           assert.ifError(err);
 
@@ -453,15 +532,31 @@ describe('Index', function() {
         });
       });
 
-      it('should return the outputValue as the winner', function(done) {
+      it('should return the outputValue as the winner', function() {
         var apiResponseWithValue = extend({}, apiResponse, {
           outputValue: 44
         });
 
         delete apiResponseWithValue.outputLabel;
 
-        model.request = function(reqOpts, callback) {
-          callback(null, apiResponseWithValue);
+        model.request = function() {
+          return Promise.resolve(apiResponseWithValue);
+        };
+
+        return model.query('input').spread(function(results) {
+          assert.strictEqual(results.winner, apiResponseWithValue.outputValue);
+        });
+      });
+
+      it('should return the outputValue as the winner (callback)', function(done) {
+        var apiResponseWithValue = extend({}, apiResponse, {
+          outputValue: 44
+        });
+
+        delete apiResponseWithValue.outputLabel;
+
+        model.request = function() {
+          return Promise.resolve(apiResponseWithValue);
         };
 
         model.query('input', function(err, results) {
