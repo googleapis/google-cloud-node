@@ -726,6 +726,17 @@ describe('storage', function() {
         done();
       });
     });
+
+    it('should stop a channel', function(done) {
+      // We can't actually create a channel. But we can test to see that we're
+      // reaching the right endpoint with the API request.
+      var channel = storage.channel('id', 'resource-id');
+      channel.stop(function(err) {
+        assert.strictEqual(err.code, 404);
+        assert.strictEqual(err.message.indexOf('Channel \'id\' not found'), 0);
+        done();
+      });
+    });
   });
 
   describe('combine files', function() {
