@@ -78,6 +78,8 @@ describe('PubSub', function() {
     });
 
     delete process.env.PUBSUB_EMULATOR_HOST;
+
+    global.GCLOUD_SANDBOX_ENV = true;
     PubSub = require('../../lib/pubsub');
   });
 
@@ -88,6 +90,8 @@ describe('PubSub', function() {
 
     mockery.deregisterAll();
     mockery.disable();
+
+    delete global.GCLOUD_SANDBOX_ENV;
   });
 
   beforeEach(function() {
