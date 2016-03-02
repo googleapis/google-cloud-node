@@ -80,7 +80,7 @@ describe('storage', function() {
           }
 
           setTimeout(function() {
-            bucket.delete(done);
+            bucket.delete(callback);
           }, CONSISTENCY_DELAY_MS);
         });
       }
