@@ -117,6 +117,7 @@ function markDone(taskId, callback) {
 
       transaction.save(task);
 
+      // Commit the transaction.
       done();
     });
   }, function(transactionError) {
