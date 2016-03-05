@@ -113,7 +113,7 @@ function markDone(taskId, callback) {
         return;
       }
 
-      task.data.done = false;
+      task.data.done = true;
 
       transaction.save(task);
 
