@@ -41,6 +41,7 @@ var FakePubSub = createFakeApi();
 var FakeResource = createFakeApi();
 var FakeSearch = createFakeApi();
 var FakeStorage = createFakeApi();
+var FakeVision = createFakeApi();
 
 describe('gcloud', function() {
   var gcloud;
@@ -55,6 +56,7 @@ describe('gcloud', function() {
     mockery.registerMock('../lib/resource', FakeResource);
     mockery.registerMock('../lib/search', FakeSearch);
     mockery.registerMock('../lib/storage', FakeStorage);
+    mockery.registerMock('../lib/vision', FakeVision);
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
@@ -105,6 +107,10 @@ describe('gcloud', function() {
 
   it('should export static storage', function() {
     assert.strictEqual(gcloud.storage, FakeStorage);
+  });
+
+  it('should export static vision', function() {
+    assert.strictEqual(gcloud.vision, FakeVision);
   });
 
   describe('localized configuration', function() {
@@ -216,6 +222,15 @@ describe('gcloud', function() {
 
         assert(storage instanceof FakeStorage);
         assert.strictEqual(storage.calledWith_[0], options);
+      });
+    });
+
+    describe('vision', function() {
+      it('should create a new Vision', function() {
+        var vision = localGcloud.vision(options);
+
+        assert(vision instanceof FakeVision);
+        assert.strictEqual(vision.calledWith_[0], options);
       });
     });
   });

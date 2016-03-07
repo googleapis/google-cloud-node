@@ -20,6 +20,7 @@ This client supports the following Google Cloud Platform services:
 * [Google Translate API](#google-translate-api)
 * [Google Cloud Logging](#google-cloud-logging-beta) (Beta)
 * [Google Cloud Resource Manager](#google-cloud-resource-manager-beta) (Beta)
+* [Google Cloud Vision](#google-cloud-vision-beta) (Beta)
 * [Google Cloud Search](#google-cloud-search-alpha) (Alpha)
 
 If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
@@ -527,6 +528,118 @@ project.getMetadata(function(err, metadata) {
 ```
 
 
+## Google Cloud Vision (Beta)
+
+> **This is a Beta release of Google Cloud Vision.** This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
+
+- [API Documentation][gcloud-vision-docs]
+- [Official Documentation][cloud-vision-docs]
+
+#### Preview
+
+```js
+var gcloud = require('gcloud');
+
+// Authorizing on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authorization section above).
+
+var vision = gcloud.vision({
+  projectId: 'my-project',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+// Read the text from an image.
+vision.detectText('./image.jpg', function(err, text) {
+  // text = [
+  //   'This was text found in the image',
+  //   'This was more text found in the image'
+  // ]
+});
+
+// Detect faces and the locations of their features in an image.
+vision.detectFaces('./image.jpg', function(err, faces) {
+  // faces = [
+  //   {
+  //     angles: {pan,tilt,roll},
+  //     bounds: {
+  //       head: [{x,y},{x,y},{x,y},{x,y}],
+  //       face: [{x,y},{x,y},{x,y},{x,y}]
+  //     },
+  //     features: {
+  //       confidence: 34.489909,
+  //       chin: {
+  //         center: {x,y,z},
+  //         left: {x,y,z},
+  //         right: {x,y,z}
+  //       },
+  //       ears: {
+  //         left: {x,y,z},
+  //         right: {x,y,z}
+  //       },
+  //       eyebrows: {
+  //         left: {
+  //           left: {x,y,z},
+  //           right: {x,y,z},
+  //           top: {x,y,z}
+  //         },
+  //         right: {
+  //           left: {x,y,z},
+  //           right: {x,y,z},
+  //           top: {x,y,z}
+  //         }
+  //       },
+  //       eyes: {
+  //         left: {
+  //           bottom: {x,y,z},
+  //           center: {x,y,z},
+  //           left: {x,y,z},
+  //           pupil: {x,y,z},
+  //           right: {x,y,z},
+  //           top: {x,y,z}
+  //         },
+  //         right: {
+  //           bottom: {x,y,z},
+  //           center: {x,y,z},
+  //           left: {x,y,z},
+  //           pupil: {x,y,z},
+  //           right: {x,y,z},
+  //           top: {x,y,z}
+  //         }
+  //       },
+  //       forehead: {x,y,z},
+  //       lips: {
+  //         bottom: {x,y,z},
+  //         top: {x,y,z}
+  //       },
+  //       mouth: {
+  //         center: {x,y,z},
+  //         left: {x,y,z},
+  //         right: {x,y,z}
+  //       },
+  //       nose: {
+  //         bottom: {
+  //           center: {x,y,z},
+  //           left: {x,y,z},
+  //           right: {x,y,z}
+  //         },
+  //         tip: {x,y,z},
+  //         top: {x,y,z}
+  //       }
+  //     },
+  //     confidence: 56.748849,
+  //     blurry: false,
+  //     dark: false,
+  //     happy: false,
+  //     hat: false,
+  //     mad: false,
+  //     sad: false,
+  //     surprised: false
+  //   }
+  // ]
+});
+```
+
+
 ## Google Cloud Search (Alpha)
 
 > **This is an Alpha release of Google Cloud Search.** This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
@@ -594,6 +707,7 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [gcloud-search-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/search
 [gcloud-storage-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/storage
 [gcloud-translate-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/translate
+[gcloud-vision-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/vision
 
 [nodejs-getting-started]: https://github.com/GoogleCloudPlatform/nodejs-getting-started
 [nodejs-getting-started-tutorial]: https://cloud.google.com/nodejs/getting-started/hello-world
@@ -631,3 +745,5 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [cloud-storage-docs]: https://cloud.google.com/storage/docs/overview
 
 [cloud-translate-docs]: https://cloud.google.com/translate/docs
+
+[cloud-vision-docs]: https://cloud.google.com/vision/docs
