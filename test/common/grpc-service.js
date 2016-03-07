@@ -169,6 +169,13 @@ describe('GrpcService', function() {
         MOCK_GRPC_API.google[CONFIG.service][CONFIG.apiVersion]
       );
     });
+
+    it('should not run in the gcloud sandbox environment', function() {
+      global.GCLOUD_SANDBOX_ENV = {};
+      var grpcService = new GrpcService();
+      assert.strictEqual(grpcService, global.GCLOUD_SANDBOX_ENV);
+      delete global.GCLOUD_SANDBOX_ENV;
+    });
   });
 
   describe('request', function() {

@@ -31,6 +31,10 @@ function fakeGceImages() {
   return (gceImagesOverride || gceImages).apply(null, arguments);
 }
 
+function FakeAutoscaler() {
+  this.calledWith_ = [].slice.call(arguments);
+}
+
 function FakeDisk() {
   this.calledWith_ = [].slice.call(arguments);
 }
@@ -60,7 +64,12 @@ var fakeStreamRouter = {
     extended = true;
     methods = arrify(methods);
     assert.equal(Class.name, 'Zone');
-    assert.deepEqual(methods, ['getDisks', 'getOperations', 'getVMs']);
+    assert.deepEqual(methods, [
+      'getAutoscalers',
+      'getDisks',
+      'getOperations',
+      'getVMs'
+    ]);
   }
 };
 
@@ -69,7 +78,8 @@ describe('Zone', function() {
   var zone;
 
   var COMPUTE = {
-    authClient: {}
+    authClient: {},
+    projectId: 'project-id'
   };
   var ZONE_NAME = 'us-central1-a';
 
@@ -80,6 +90,7 @@ describe('Zone', function() {
       FakeServiceObject
     );
     mockery.registerMock('../../lib/common/stream-router.js', fakeStreamRouter);
+    mockery.registerMock('../../lib/compute/autoscaler.js', FakeAutoscaler);
     mockery.registerMock('../../lib/compute/disk.js', FakeDisk);
     mockery.registerMock('../../lib/compute/operation.js', FakeOperation);
     mockery.registerMock('../../lib/compute/vm.js', FakeVM);
@@ -139,6 +150,292 @@ describe('Zone', function() {
         exists: true,
         get: true,
         getMetadata: true
+      });
+    });
+  });
+
+  describe('autoscaler', function() {
+    var NAME = 'autoscaler-name';
+
+    it('should return an Autoscaler object', function() {
+      var autoscaler = zone.autoscaler(NAME);
+      assert(autoscaler instanceof FakeAutoscaler);
+      assert.strictEqual(autoscaler.calledWith_[0], zone);
+      assert.strictEqual(autoscaler.calledWith_[1], NAME);
+    });
+  });
+
+  describe('createAutoscaler', function() {
+    var NAME = 'autoscaler-name';
+    var TARGET = 'target';
+
+    beforeEach(function() {
+      zone.request = util.noop;
+    });
+
+    it('should throw if a target is not provided', function() {
+      assert.throws(function() {
+        zone.createAutoscaler(NAME, {}, assert.ifError);
+      }, 'Cannot create an autoscaler without a target.');
+    });
+
+    it('should make the correct request', function(done) {
+      var config = {
+        target: TARGET
+      };
+
+      zone.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.json.name, NAME);
+        done();
+      };
+
+      zone.createAutoscaler(NAME, config, assert.ifError);
+    });
+
+    it('should use a provided autoscalingPolicy', function(done) {
+      var config = {
+        autoscalingPolicy: {
+          a: 'b',
+          c: 'd'
+        },
+        target: TARGET
+      };
+
+      zone.request = function(reqOpts) {
+        var policy = reqOpts.json.autoscalingPolicy;
+        assert.deepEqual(policy, config.autoscalingPolicy);
+        done();
+      };
+
+      zone.createAutoscaler(NAME, config, assert.ifError);
+    });
+
+    describe('config.target', function() {
+      it('should use a provided http target', function(done) {
+        var config = {
+          target: 'http://my-target'
+        };
+
+        zone.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.json.target, config.target);
+          done();
+        };
+
+        zone.createAutoscaler(NAME, config, assert.ifError);
+      });
+
+      it('should use a provided https target', function(done) {
+        var config = {
+          target: 'https://my-target'
+        };
+
+        zone.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.json.target, config.target);
+          done();
+        };
+
+        zone.createAutoscaler(NAME, config, assert.ifError);
+      });
+
+      it('should create a full target URL', function(done) {
+        var config = {
+          target: 'my-target'
+        };
+
+        zone.request = function(reqOpts) {
+          var expectedTarget = [
+            'https://content.googleapis.com/compute/v1/projects/',
+            COMPUTE.projectId,
+            '/zones/',
+            zone.name,
+            '/instanceGroupManagers/',
+            config.target
+          ].join('');
+
+          assert.strictEqual(reqOpts.json.target, expectedTarget);
+
+          done();
+        };
+
+        zone.createAutoscaler(NAME, config, assert.ifError);
+      });
+    });
+
+    describe('config.coolDown', function() {
+      it('should set coolDownPeriodSec', function(done) {
+        var config = {
+          coolDown: 80,
+          target: TARGET
+        };
+
+        zone.request = function(reqOpts) {
+          var policy = reqOpts.json.autoscalingPolicy;
+          assert.strictEqual(policy.coolDownPeriodSec, config.coolDown);
+          assert.strictEqual(reqOpts.coolDown, undefined);
+          done();
+        };
+
+        zone.createAutoscaler(NAME, config, assert.ifError);
+      });
+    });
+
+    describe('config.cpu', function() {
+      it('should set cpuUtilization', function(done) {
+        var config = {
+          cpu: 80,
+          target: TARGET
+        };
+
+        zone.request = function(reqOpts) {
+          var policy = reqOpts.json.autoscalingPolicy;
+          var cpu = policy.cpuUtilization;
+          assert.strictEqual(cpu.utilizationTarget, config.cpu / 100);
+          assert.strictEqual(reqOpts.cpu, undefined);
+          done();
+        };
+
+        zone.createAutoscaler(NAME, config, assert.ifError);
+      });
+    });
+
+    describe('config.loadBalance', function() {
+      it('should set loadBalancingUtilization', function(done) {
+        var config = {
+          loadBalance: 80,
+          target: TARGET
+        };
+
+        zone.request = function(reqOpts) {
+          var policy = reqOpts.json.autoscalingPolicy;
+          var lb = policy.loadBalancingUtilization;
+          assert.strictEqual(lb.utilizationTarget, config.loadBalance / 100);
+          assert.strictEqual(reqOpts.loadBalance, undefined);
+          done();
+        };
+
+        zone.createAutoscaler(NAME, config, assert.ifError);
+      });
+    });
+
+    describe('config.maxReplicas', function() {
+      it('should set maxNumReplicas', function(done) {
+        var config = {
+          maxReplicas: 10,
+          target: TARGET
+        };
+
+        zone.request = function(reqOpts) {
+          var policy = reqOpts.json.autoscalingPolicy;
+          assert.strictEqual(policy.maxNumReplicas, config.maxReplicas);
+          assert.strictEqual(reqOpts.maxReplicas, undefined);
+          done();
+        };
+
+        zone.createAutoscaler(NAME, config, assert.ifError);
+      });
+    });
+
+    describe('config.minReplicas', function() {
+      it('should set minNumReplicas', function(done) {
+        var config = {
+          minReplicas: 10,
+          target: TARGET
+        };
+
+        zone.request = function(reqOpts) {
+          var policy = reqOpts.json.autoscalingPolicy;
+          assert.strictEqual(policy.minNumReplicas, config.minReplicas);
+          assert.strictEqual(reqOpts.minReplicas, undefined);
+          done();
+        };
+
+        zone.createAutoscaler(NAME, config, assert.ifError);
+      });
+    });
+
+    describe('API request', function() {
+      var CONFIG = {
+        a: 'b',
+        c: 'd',
+        target: 'http://target'
+      };
+
+      var expectedBody = {
+        name: NAME,
+        target: 'http://target',
+        autoscalingPolicy: {},
+        a: 'b',
+        c: 'd'
+      };
+
+      it('should make the correct API request', function(done) {
+        zone.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.method, 'POST');
+          assert.strictEqual(reqOpts.uri, '/autoscalers');
+          assert.deepEqual(reqOpts.json, expectedBody);
+
+          done();
+        };
+
+        zone.createAutoscaler(NAME, CONFIG, assert.ifError);
+      });
+
+      describe('error', function() {
+        var error = new Error('Error.');
+        var apiResponse = { a: 'b', c: 'd' };
+
+        beforeEach(function() {
+          zone.request = function(reqOpts, callback) {
+            callback(error, apiResponse);
+          };
+        });
+
+        it('should execute callback with error & API response', function(done) {
+          zone.createAutoscaler(NAME, CONFIG, function(err, as, op, apiResp) {
+            assert.strictEqual(err, error);
+            assert.strictEqual(as, null);
+            assert.strictEqual(op, null);
+            assert.strictEqual(apiResp, apiResponse);
+            done();
+          });
+        });
+      });
+
+      describe('success', function() {
+        var apiResponse = { name: 'operation-name' };
+
+        beforeEach(function() {
+          zone.request = function(reqOpts, callback) {
+            callback(null, apiResponse);
+          };
+        });
+
+        it('should exec callback with AutoS, Op & apiResponse', function(done) {
+          var autoscaler = {};
+          var operation = {};
+
+          zone.autoscaler = function(name) {
+            assert.strictEqual(name, NAME);
+            return autoscaler;
+          };
+
+          zone.operation = function(name) {
+            assert.strictEqual(name, apiResponse.name);
+            return operation;
+          };
+
+          zone.createAutoscaler(NAME, CONFIG, function(err, as, op, apiResp) {
+            assert.ifError(err);
+
+            assert.strictEqual(as, autoscaler);
+
+            assert.strictEqual(op, operation);
+            assert.strictEqual(op.metadata, apiResp);
+
+            assert.strictEqual(apiResp, apiResponse);
+            done();
+          });
+        });
       });
     });
   });
@@ -658,6 +955,107 @@ describe('Zone', function() {
       assert(disk instanceof FakeDisk);
       assert.strictEqual(disk.calledWith_[0], zone);
       assert.strictEqual(disk.calledWith_[1], NAME);
+    });
+  });
+
+  describe('getAutoscalers', function() {
+    it('should accept only a callback', function(done) {
+      zone.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
+
+      zone.getAutoscalers(assert.ifError);
+    });
+
+    it('should make the correct API request', function(done) {
+      var query = { a: 'b', c: 'd' };
+
+      zone.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/autoscalers');
+        assert.strictEqual(reqOpts.qs, query);
+
+        done();
+      };
+
+      zone.getAutoscalers(query, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = { a: 'b', c: 'd' };
+
+      beforeEach(function() {
+        zone.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        zone.getAutoscalers({}, function(err, autoscalers, nextQuery, apiResp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(autoscalers, null);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(apiResp, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = {
+        items: [
+          { name: 'autoscaler-name' }
+        ]
+      };
+
+      beforeEach(function() {
+        zone.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should build a nextQuery if necessary', function(done) {
+        var nextPageToken = 'next-page-token';
+        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+          nextPageToken: nextPageToken
+        });
+        var expectedNextQuery = {
+          pageToken: nextPageToken
+        };
+
+        zone.request = function(reqOpts, callback) {
+          callback(null, apiResponseWithNextPageToken);
+        };
+
+        zone.getAutoscalers({}, function(err, disks, nextQuery) {
+          assert.ifError(err);
+
+          assert.deepEqual(nextQuery, expectedNextQuery);
+
+          done();
+        });
+      });
+
+      it('should execute callback with Autoscalers & API resp', function(done) {
+        var autoscaler = {};
+
+        zone.autoscaler = function(name) {
+          assert.strictEqual(name, apiResponse.items[0].name);
+          return autoscaler;
+        };
+
+        zone.getAutoscalers({}, function(err, autoscalers, nextQuery, apiResp) {
+          assert.ifError(err);
+
+          assert.strictEqual(autoscalers[0], autoscaler);
+          assert.strictEqual(autoscalers[0].metadata, apiResponse.items[0]);
+
+          assert.strictEqual(apiResp, apiResponse);
+
+          done();
+        });
+      });
     });
   });
 

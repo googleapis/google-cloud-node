@@ -42,6 +42,7 @@ var fakeStreamRouter = {
     methods = arrify(methods);
     assert.deepEqual(methods, [
       'getAddresses',
+      'getAutoscalers',
       'getDisks',
       'getFirewalls',
       'getNetworks',
@@ -537,6 +538,115 @@ describe('Compute', function() {
     });
   });
 
+  describe('getAutoscalers', function() {
+    it('should accept only a callback', function(done) {
+      compute.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
+
+      compute.getAutoscalers(assert.ifError);
+    });
+
+    it('should make the correct API request', function(done) {
+      var options = {};
+
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/aggregated/autoscalers');
+        assert.strictEqual(reqOpts.qs, options);
+        done();
+      };
+
+      compute.getAutoscalers(options, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = { a: 'b', c: 'd' };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        compute.getAutoscalers({}, function(err, autoscalers, nextQuery, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(autoscalers, null);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(resp, apiResponse);
+
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var ZONE_NAME = 'us-central1-a';
+      var FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
+
+      var autoscaler = { name: 'autoscaler-1' };
+      var apiResponse = {
+        items: {}
+      };
+
+      apiResponse.items[FULL_ZONE_NAME] = {
+        autoscalers: [autoscaler]
+      };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should create Autoscaler objects from the response', function(done) {
+        var zone = {};
+
+        compute.zone = function(name) {
+          assert.strictEqual(name, ZONE_NAME);
+          return zone;
+        };
+
+        zone.autoscaler = function(name) {
+          assert.strictEqual(name, autoscaler.name);
+          setImmediate(done);
+          return autoscaler;
+        };
+
+        compute.getAutoscalers({}, assert.ifError);
+      });
+
+      it('should build a nextQuery if necessary', function(done) {
+        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+          nextPageToken: 'next-page-token'
+        });
+
+        delete apiResponseWithNextPageToken.items;
+
+        var query = { a: 'b', c: 'd' };
+        var originalQuery = extend({}, query);
+
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponseWithNextPageToken);
+        };
+
+        compute.getAutoscalers(query, function(err, autoscalers, nextQuery) {
+          assert.ifError(err);
+
+          assert.deepEqual(query, originalQuery);
+
+          assert.deepEqual(nextQuery, extend({}, query, {
+            pageToken: apiResponseWithNextPageToken.nextPageToken
+          }));
+
+          done();
+        });
+      });
+    });
+  });
+
   describe('getDisks', function() {
     it('should accept only a callback', function(done) {
       compute.request = function(reqOpts) {
@@ -629,7 +739,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getDisks(query, function(err, addresses, nextQuery) {
+        compute.getDisks(query, function(err, disks, nextQuery) {
           assert.ifError(err);
 
           assert.deepEqual(query, originalQuery);
@@ -722,7 +832,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getFirewalls(query, function(err, addresses, nextQuery) {
+        compute.getFirewalls(query, function(err, firewalls, nextQuery) {
           assert.ifError(err);
 
           assert.deepEqual(query, originalQuery);
@@ -815,7 +925,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getNetworks(query, function(err, addresses, nextQuery) {
+        compute.getNetworks(query, function(err, networks, nextQuery) {
           assert.ifError(err);
 
           assert.deepEqual(query, originalQuery);
@@ -908,7 +1018,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getOperations(query, function(err, addresses, nextQuery) {
+        compute.getOperations(query, function(err, operations, nextQuery) {
           assert.ifError(err);
 
           assert.deepEqual(query, originalQuery);
@@ -1001,7 +1111,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getRegions(query, function(err, addresses, nextQuery) {
+        compute.getRegions(query, function(err, regions, nextQuery) {
           assert.ifError(err);
 
           assert.deepEqual(query, originalQuery);
@@ -1201,7 +1311,7 @@ describe('Compute', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        compute.getVMs(query, function(err, addresses, nextQuery) {
+        compute.getVMs(query, function(err, vms, nextQuery) {
           assert.ifError(err);
 
           assert.deepEqual(query, originalQuery);

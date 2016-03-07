@@ -99,6 +99,11 @@
       "id": "address",
       "contents": "compute/address.json"
     }, {
+      "title": "Autoscaler",
+      "id": "autoscaler",
+      "implemented": ">=0.29.0",
+      "contents": "compute/autoscaler.json"
+    }, {
       "title": "Disk",
       "id": "disk",
       "contents": "compute/disk.json"
