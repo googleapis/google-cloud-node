@@ -34,7 +34,7 @@ var fakeUtil = extend({}, util, {
   }
 });
 
-describe('Resource', function() {
+describe('Translate', function() {
   var API_KEY = 'api-key';
 
   var Translate;

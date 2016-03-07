@@ -267,6 +267,11 @@
     "id": "translate",
     "implemented": ">=0.28.0",
     "contents": "translate/index.json"
+  }, {
+    "title": "Vision",
+    "id": "vision",
+    "implemented": ">=0.29.0",
+    "contents": "vision/index.json"
   }],
   "package": {
     "title": "npm",
