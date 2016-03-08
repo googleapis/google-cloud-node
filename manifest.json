@@ -3,6 +3,7 @@
   "friendlyLang": "Node.js",
   "markdown": "javascript",
   "versions": [
+    "v0.29.0",
     "v0.28.0",
     "v0.27.0",
     "v0.26.0",
@@ -98,6 +99,11 @@
       "title": "Address",
       "id": "address",
       "contents": "compute/address.json"
+    }, {
+      "title": "Autoscaler",
+      "id": "autoscaler",
+      "implemented": ">=0.29.0",
+      "contents": "compute/autoscaler.json"
     }, {
       "title": "Disk",
       "id": "disk",
@@ -262,6 +268,11 @@
     "id": "translate",
     "implemented": ">=0.28.0",
     "contents": "translate/index.json"
+  }, {
+    "title": "Vision",
+    "id": "vision",
+    "implemented": ">=0.29.0",
+    "contents": "vision/index.json"
   }],
   "package": {
     "title": "npm",
