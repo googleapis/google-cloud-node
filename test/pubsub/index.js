@@ -20,9 +20,7 @@ var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
 var mockery = require('mockery-next');
-var nodeutil = require('util');
 
-var GrpcService = require('../../lib/common/grpc-service.js');
 var Topic = require('../../lib/pubsub/topic.js');
 var util = require('../../lib/common/util.js');
 
@@ -38,10 +36,7 @@ var fakeUtil = extend({}, util);
 
 function FakeGrpcService() {
   this.calledWith_ = arguments;
-  GrpcService.apply(this, arguments);
 }
-
-nodeutil.inherits(FakeGrpcService, GrpcService);
 
 var extended = false;
 var fakeStreamRouter = {
@@ -93,6 +88,7 @@ describe('PubSub', function() {
   beforeEach(function() {
     SubscriptionOverride = null;
     pubsub = new PubSub(OPTIONS);
+    pubsub.projectId = PROJECT_ID;
   });
 
   describe('instantiation', function() {
@@ -120,7 +116,7 @@ describe('PubSub', function() {
     });
 
     it('should inherit from GrpcService', function() {
-      assert(pubsub instanceof GrpcService);
+      assert(pubsub instanceof FakeGrpcService);
 
       var calledWith = pubsub.calledWith_[0];
 
@@ -494,6 +490,8 @@ describe('PubSub', function() {
 
     it('should create a Subscription', function(done) {
       var opts = { a: 'b', c: 'd' };
+
+      pubsub.request = util.noop;
 
       pubsub.subscription = function(subName, options) {
         assert.strictEqual(subName, SUB_NAME);
