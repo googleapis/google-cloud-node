@@ -459,6 +459,7 @@ describe('Index', function() {
         });
 
         delete apiResponseWithValue.outputLabel;
+        delete apiResponseWithValue.outputMulti;
 
         model.request = function(reqOpts, callback) {
           callback(null, apiResponseWithValue);
