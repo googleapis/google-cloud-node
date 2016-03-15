@@ -31,6 +31,7 @@ if [ "${TRAVIS_BRANCH}" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]
   # copy all the docs file that might have changed, excluding versions.txt (to avoid overriding it)
   cp -R docs/json/master/* ghpages/json/master
   cp docs/*{.md,.html} ghpages/json/master
+  cp docs/toc.json ghpages/json/master
   cp docs/home.html ghpages/json
   cp docs/manifest.json ghpages
   cd ghpages
