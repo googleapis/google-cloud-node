@@ -50,7 +50,12 @@ describe('documentation', function() {
     // Turn off the network so that API calls aren't actually made.
     MITM = mitm();
 
-    glob('docs/json/master/**/*.json', function(err, files) {
+    var jsonGlob = 'docs/json/master/**/*.json';
+    var ignore = [
+      'docs/json/master/types.json'
+    ];
+
+    glob(jsonGlob, { ignore: ignore }, function(err, files) {
       assert.ifError(err);
       FILES = files;
       done();
@@ -100,7 +105,7 @@ describe('documentation', function() {
       };
 
       fileDocBlocks.methods.forEach(function(method) {
-        var examples = method.metadata.examples.map(function(example) {
+        var examples = method.examples.map(function(example) {
           return example.code;
         });
 
