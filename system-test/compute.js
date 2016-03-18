@@ -679,6 +679,31 @@ describe('Compute', function() {
       vm.reset(execAfterOperationComplete(done));
     });
 
+    it('should set metadata', function(done) {
+      var key = 'newKey';
+      var value = 'newValue';
+
+      var newMetadata = {};
+      newMetadata[key] = value;
+
+      vm.setMetadata(newMetadata, execAfterOperationComplete(function(err) {
+        assert.ifError(err);
+
+        vm.getMetadata(function(err, metadata) {
+          assert.ifError(err);
+
+          assert.deepEqual(metadata.metadata.items, [
+            {
+              key: key,
+              value: value
+            }
+          ]);
+
+          done();
+        });
+      }));
+    });
+
     it('should start', function(done) {
       vm.start(execAfterOperationComplete(done));
     });

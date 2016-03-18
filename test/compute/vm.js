@@ -460,6 +460,72 @@ describe('VM', function() {
     });
   });
 
+  describe('setMetadata', function() {
+    var METADATA = {
+      newKey: 'newValue'
+    };
+
+    describe('getting the current fingerprint', function() {
+      describe('error', function() {
+        var error = new Error('Error.');
+        var apiResponse = {};
+
+        beforeEach(function() {
+          vm.getMetadata = function(callback) {
+            callback(error, null, apiResponse);
+          };
+        });
+
+        it('should exec the callback with error & API resp', function(done) {
+          vm.setMetadata(METADATA, function(err, operation, apiResponse_) {
+            assert.strictEqual(err, error);
+            assert.strictEqual(operation, null);
+            assert.strictEqual(apiResponse_, apiResponse);
+
+            done();
+          });
+        });
+
+        describe('success', function() {
+          var metadata = {
+            metadata: {
+              fingerprint: '==='
+            }
+          };
+
+          var apiResponse = {};
+
+          beforeEach(function() {
+            vm.getMetadata = function(callback) {
+              callback(null, metadata, apiResponse);
+            };
+          });
+
+          it('should make the correct request', function(done) {
+            var expectedNewMetadata = extend(true, {}, metadata.metadata, {
+              items: [
+                {
+                  key: 'newKey',
+                  value: 'newValue'
+                }
+              ]
+            });
+
+            vm.request = function(reqOpts, callback) {
+              assert.strictEqual(reqOpts.method, 'POST');
+              assert.strictEqual(reqOpts.uri, '/setMetadata');
+              assert.deepEqual(reqOpts.json, expectedNewMetadata);
+
+              callback(); // done()
+            };
+
+            vm.setMetadata(METADATA, done);
+          });
+        });
+      });
+    });
+  });
+
   describe('start', function() {
     it('should make the correct API request', function(done) {
       vm.request = function(reqOpts, callback) {
