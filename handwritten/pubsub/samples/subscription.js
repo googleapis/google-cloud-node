@@ -20,7 +20,6 @@ var async = require('async');
 // environment variables to run this sample
 var projectId = process.env.GCLOUD_PROJECT;
 
-// [START require]
 // Initialize gcloud
 var gcloud = require('gcloud')({
   projectId: projectId
