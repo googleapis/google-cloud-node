@@ -93,7 +93,7 @@ function getId(fileName) {
   };
 
   var id = fileName
-    .replace('./lib/', '')
+    .replace(/^(\.\/)?lib\//, '')
     .replace('/index.js', '')
     .replace('.js', '');
 
