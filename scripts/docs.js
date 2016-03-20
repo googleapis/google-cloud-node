@@ -18,11 +18,15 @@
 
 var globby = require('globby');
 var async = require('async');
+var ent = require('ent');
 var fs = require('fs');
 var dox = require('dox');
 var path = require('path');
 var prop = require('propprop');
+var spellchecker = require('spellchecker');
+var striptags = require('striptags');
 
+require('./dictionary.json').forEach(spellchecker.add);
 
 var OUTPUT_FOLDER = './docs/json/master';
 var IGNORE = [
@@ -57,7 +61,7 @@ function formatHtml(html) {
 
 function detectCustomType(str) {
   var rCustomType = /\{*module\:([^\}|\>]*)\}*/g;
-  var rArray = /Array\.\<(.+)\>/g;
+  var rArray = /Array\.<(.+)>/g;
 
   return str
     .replace(rArray, function(match, module) {
@@ -105,7 +109,7 @@ function getName(block) {
     return;
   }
 
-  var alias = getTagsByType(block, 'alias')[0]
+  var alias = getTagsByType(block, 'alias')[0];
 
   if (alias && !/^module/.test(alias.string)) {
     return alias.string;
@@ -264,7 +268,6 @@ function getMixinMethods(comments) {
     var methods = docs.methods.filter(function(method) {
       return method.type === 'instance';
     });
-    var type = block.ctx.type;
     var name;
 
     if (block.ctx.type === 'property') {
@@ -337,14 +340,93 @@ globby('./lib/*{,/*}.js', { ignore: IGNORE }).then(function(files) {
       }
 
       var docs = parseFile(file, contents);
+
       var outputFile = path.join(
         OUTPUT_FOLDER,
         file.replace('/lib', '').replace('.js', '.json')
       );
 
-      fs.writeFile(outputFile, JSON.stringify(docs), function(err) {
-        docs.path = outputFile;
-        callback(err, docs);
+      function writeFile() {
+        fs.writeFile(outputFile, JSON.stringify(docs), function(err) {
+          docs.path = outputFile;
+          callback(err, docs);
+        });
+      }
+
+      if (!spellchecker) {
+        writeFile();
+        return;
+      }
+
+      var descriptions = [];
+      var misspellings = [];
+
+      function findDescription(obj, parentMetadata) {
+        // Remove code snippets.
+        var description = obj.description.replace(/<code>.*<\/code>/g, '');
+
+        if (obj.name) {
+          spellchecker.add(obj.name);
+        }
+
+        if (obj.description) {
+          descriptions.push({
+            source: (parentMetadata || obj).source,
+            text: ent.decode(striptags(description)).trim()
+          });
+        }
+      }
+
+      findDescription(docs);
+
+      docs.methods.forEach(function(method) {
+        findDescription(method);
+
+        method.params.forEach(function(param) {
+          findDescription(param, method);
+        });
+      });
+
+      function lintDescription(description, callback) {
+        var text = description.text
+          .toLowerCase()
+          .replace(/(\w)[.](\w)/g, '$1 $2') // "key.value" => "key value"
+          .replace(/(\w*):(\w*)/g, '$1 $2') // "key:value" => "key value"
+          .replace(/{(\w*)}/g, '$1 ') // "{key}" => "key "
+          .replace(/(\w*)\/(\w*)/g, '$1 $2') // "key/value" => "key value"
+          .replace(/-/g, ' ') // "hyphenated-word" => "hyphenated word"
+          .replace(/[^\w\s-']/g, ' ')
+          .split(' ');
+
+        text.forEach(function(word) {
+          if (word.indexOf('.') > -1) {
+            return;
+          }
+
+          if (spellchecker.isMisspelled(word)) {
+            misspellings.push('"' + word + '" (' + description.source + ')');
+          }
+        });
+
+        callback();
+      }
+
+      async.each(descriptions, lintDescription, function(err) {
+        if (!err && misspellings.length > 0) {
+          err = new Error([
+            'Misspellings found. Please correct them before pushing, or if the',
+            'word caught is not actually misspelled, please add it to',
+            'scripts/dictionary.json.',
+            '\n\n' + misspellings[0] + '\n'
+          ].join(' '));
+        }
+
+        if (err) {
+          callback(err);
+          return;
+        }
+
+        writeFile();
       });
     });
   }, function(err, docs) {
