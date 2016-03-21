@@ -301,25 +301,31 @@ function parseFile(fileName, contents) {
 }
 
 function createTypesDictionary(docs) {
-  return docs.map(function(service) {
-    var id = service.id;
-    var title = [id === 'gcloud' ? 'Node.js' : service.name];
-    var contents = service.path.replace('docs/json/master/', '');
+  var types = [];
 
-    if (service.parent) {
-      for (var i = 0, l = docs.length; i < l; i++) {
-        if (docs[i].id === service.parent) {
-          title.unshift(docs[i].name);
+  docs.forEach(function(service) {
+    service.methods.forEach(function(method) {
+      var id = method.type === 'constructor' ? service.id : method.id;
+      var contents = service.path.replace('docs/json/master/', '');
+      var title = [id === 'gcloud' ? 'Node.js' : service.name];
+
+      if (service.parent) {
+        for (var i = 0, l = docs.length; i < l; i++) {
+          if (docs[i].id === service.parent) {
+            title.unshift(docs[i].name);
+          }
         }
       }
-    }
 
-    return {
-      id: id,
-      title: title.join(' » '),
-      contents: contents
-    };
+      types.push({
+        id: id,
+        title: title.join(' » '),
+        contents: contents
+      });
+    });
   });
+
+  return types;
 }
 
 globby('./lib/*{,/*}.js', { ignore: IGNORE }).then(function(files) {
