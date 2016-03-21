@@ -19,10 +19,9 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
+var googleProtoFiles = require('google-proto-files');
 var mockery = require('mockery-next');
-var nodeutil = require('util');
 
-var Service = require('../../lib/common/service.js');
 var util = require('../../lib/common/util.js');
 
 var extended = false;
@@ -73,12 +72,9 @@ function FakeSink() {
   this.calledWith_ = arguments;
 }
 
-function FakeService() {
+function FakeGrpcService() {
   this.calledWith_ = arguments;
-  Service.apply(this, arguments);
 }
-
-nodeutil.inherits(FakeService, Service);
 
 describe('Logging', function() {
   var Logging;
@@ -87,7 +83,7 @@ describe('Logging', function() {
   var PROJECT_ID = 'project-id';
 
   before(function() {
-    mockery.registerMock('../../lib/common/service.js', FakeService);
+    mockery.registerMock('../../lib/common/grpc-service.js', FakeGrpcService);
     mockery.registerMock('../../lib/common/stream-router.js', fakeStreamRouter);
     mockery.registerMock('../../lib/common/util.js', fakeUtil);
     mockery.registerMock('../../lib/bigquery/dataset.js', FakeDataset);
@@ -114,6 +110,7 @@ describe('Logging', function() {
     logging = new Logging({
       projectId: PROJECT_ID
     });
+    logging.projectId = PROJECT_ID;
 
     logging.request = util.noop;
   });
@@ -153,33 +150,22 @@ describe('Logging', function() {
       fakeUtil.normalizeArguments = normalizeArguments;
     });
 
-    it('should inherit from Service', function() {
-      assert(logging instanceof Service);
+    it('should inherit from GrpcService', function() {
+      assert(logging instanceof FakeGrpcService);
 
       var calledWith = logging.calledWith_[0];
 
-      var baseUrl = 'https://logging.googleapis.com/v2beta1';
-      assert.strictEqual(calledWith.baseUrl, baseUrl);
+      assert.strictEqual(calledWith.baseUrl, 'logging.googleapis.com');
+      assert.strictEqual(calledWith.service, 'logging');
+      assert.strictEqual(calledWith.apiVersion, 'v2');
+      assert.deepEqual(calledWith.protoServices, {
+        ConfigServiceV2:
+          googleProtoFiles('logging', 'v2', 'logging_config.proto'),
+        LoggingServiceV2: googleProtoFiles.logging.v2
+      });
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/cloud-platform'
       ]);
-    });
-
-    it('should create an interceptor', function() {
-      var interceptor = logging.interceptors.pop();
-
-      var uriPrefix = 'http://.../';
-      var uriProjectInformation = 'projects/project-id-3/';
-
-      var listReqOpts = interceptor.request({
-        uri: uriPrefix + uriProjectInformation + 'entries:list'
-      });
-      assert.strictEqual(listReqOpts.uri, uriPrefix + 'entries:list');
-
-      var writeReqOpts = interceptor.request({
-        uri: uriPrefix + uriProjectInformation + 'entries:write'
-      });
-      assert.strictEqual(writeReqOpts.uri, uriPrefix + 'entries:write');
     });
   });
 
@@ -257,10 +243,13 @@ describe('Logging', function() {
           name: SINK_NAME
         });
 
-        logging.request = function(reqOpts) {
-          assert.strictEqual(reqOpts.method, 'POST');
-          assert.strictEqual(reqOpts.uri, '/sinks');
-          assert.deepEqual(reqOpts.json, expectedConfig);
+        logging.request = function(protoOpts, reqOpts) {
+          assert.strictEqual(protoOpts.service, 'ConfigServiceV2');
+          assert.strictEqual(protoOpts.method, 'createSink');
+
+          var expectedProjectName = 'projects/' + logging.projectId;
+          assert.strictEqual(reqOpts.projectName, expectedProjectName);
+          assert.deepEqual(reqOpts.sink, expectedConfig);
 
           done();
         };
@@ -273,7 +262,7 @@ describe('Logging', function() {
         var apiResponse = {};
 
         beforeEach(function() {
-          logging.request = function(reqOpts, callback) {
+          logging.request = function(protoOpts, reqOpts, callback) {
             callback(error, apiResponse);
           };
         });
@@ -295,7 +284,7 @@ describe('Logging', function() {
         };
 
         beforeEach(function() {
-          logging.request = function(reqOpts, callback) {
+          logging.request = function(protoOpts, reqOpts, callback) {
             callback(null, apiResponse);
           };
         });
@@ -336,10 +325,10 @@ describe('Logging', function() {
 
   describe('getEntries', function() {
     it('should accept only a callback', function(done) {
-      logging.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.json, {
+      logging.request = function(protoOpts, reqOpts) {
+        assert.deepEqual(reqOpts, {
           orderBy: 'timestamp desc',
-          projectIds: [PROJECT_ID]
+          projectIds: [logging.projectId]
         });
         done();
       };
@@ -350,13 +339,15 @@ describe('Logging', function() {
     it('should make the correct API request', function(done) {
       var options = {};
 
-      logging.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.method, 'POST');
-        assert.strictEqual(reqOpts.uri, '/entries:list');
-        assert.deepEqual(reqOpts.json, extend(options, {
+      logging.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(protoOpts.service, 'LoggingServiceV2');
+        assert.strictEqual(protoOpts.method, 'listLogEntries');
+
+        assert.deepEqual(reqOpts, extend(options, {
           orderBy: 'timestamp desc',
-          projectIds: [PROJECT_ID]
+          projectIds: [logging.projectId]
         }));
+
         done();
       };
 
@@ -368,8 +359,8 @@ describe('Logging', function() {
         orderBy: 'timestamp asc'
       };
 
-      logging.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.json.orderBy, options.orderBy);
+      logging.request = function(protoOpts, reqOpts) {
+        assert.deepEqual(reqOpts.orderBy, options.orderBy);
         done();
       };
 
@@ -381,7 +372,7 @@ describe('Logging', function() {
       var apiResponse = {};
 
       beforeEach(function() {
-        logging.request = function(reqOpts, callback) {
+        logging.request = function(protoOpts, reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -408,7 +399,7 @@ describe('Logging', function() {
       };
 
       beforeEach(function() {
-        logging.request = function(reqOpts, callback) {
+        logging.request = function(protoOpts, reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -420,11 +411,11 @@ describe('Logging', function() {
         });
         var expectedNextQuery = {
           orderBy: 'timestamp desc',
-          projectIds: [PROJECT_ID],
+          projectIds: [logging.projectId],
           pageToken: nextPageToken
         };
 
-        logging.request = function(reqOpts, callback) {
+        logging.request = function(protoOpts, reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 
@@ -465,8 +456,13 @@ describe('Logging', function() {
     });
 
     it('should make the correct API request', function(done) {
-      logging.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.uri, '/sinks');
+      logging.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(protoOpts.service, 'ConfigServiceV2');
+        assert.strictEqual(protoOpts.method, 'listSinks');
+
+        var expectedProjectName = 'projects/' + logging.projectId;
+        assert.strictEqual(reqOpts.projectName, expectedProjectName);
+
         done();
       };
 
@@ -478,7 +474,7 @@ describe('Logging', function() {
       var apiResponse = {};
 
       beforeEach(function() {
-        logging.request = function(reqOpts, callback) {
+        logging.request = function(protoOpts, reqOpts, callback) {
           callback(error, apiResponse);
         };
       });
@@ -505,7 +501,7 @@ describe('Logging', function() {
       };
 
       beforeEach(function() {
-        logging.request = function(reqOpts, callback) {
+        logging.request = function(protoOpts, reqOpts, callback) {
           callback(null, apiResponse);
         };
       });
@@ -519,7 +515,7 @@ describe('Logging', function() {
           pageToken: nextPageToken
         };
 
-        logging.request = function(reqOpts, callback) {
+        logging.request = function(protoOpts, reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
         };
 

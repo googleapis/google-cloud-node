@@ -17,22 +17,17 @@
 'use strict';
 
 var assert = require('assert');
-var concat = require('concat-stream');
 var extend = require('extend');
 var mockery = require('mockery-next');
-var nodeutil = require('util');
-var through = require('through2');
 
 var Entry = require('../../lib/logging/entry.js');
-var ServiceObject = require('../../lib/common/service-object.js');
+var GrpcServiceObject = require('../../lib/common/grpc-service-object.js');
 var util = require('../../lib/common/util.js');
 
-function FakeServiceObject() {
+function FakeGrpcServiceObject() {
   this.calledWith_ = arguments;
-  ServiceObject.apply(this, arguments);
+  this.parent = {};
 }
-
-nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Log', function() {
   var Log;
@@ -58,8 +53,8 @@ describe('Log', function() {
 
   before(function() {
     mockery.registerMock(
-      '../../lib/common/service-object.js',
-      FakeServiceObject
+      '../../lib/common/grpc-service-object.js',
+      FakeGrpcServiceObject
     );
     mockery.registerMock('../../lib/logging/entry.js', Entry);
 
@@ -83,6 +78,7 @@ describe('Log', function() {
 
   beforeEach(function() {
     assignSeverityToEntriesOverride = null;
+    extend(FakeGrpcServiceObject, GrpcServiceObject);
     log = new Log(LOGGING, LOG_NAME_FORMATTED);
   });
 
@@ -105,16 +101,23 @@ describe('Log', function() {
       assert.strictEqual(log.formattedName_, formattedName);
     });
 
-    it('should inherit from ServiceObject', function() {
-      assert(log instanceof ServiceObject);
+    it('should inherit from GrpcServiceObject', function() {
+      assert(log instanceof FakeGrpcServiceObject);
 
       var calledWith = log.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, LOGGING);
-      assert.strictEqual(calledWith.baseUrl, '/logs');
       assert.strictEqual(calledWith.id, LOG_NAME_ENCODED);
       assert.deepEqual(calledWith.methods, {
-        delete: true
+        delete: {
+          protoOpts: {
+            service: 'LoggingServiceV2',
+            method: 'deleteLog'
+          },
+          reqOpts: {
+            logName: log.formattedName_
+          }
+        }
       });
     });
   });
@@ -168,85 +171,6 @@ describe('Log', function() {
       var expectedName = 'projects/' + PROJECT_ID + '/logs/' + name;
 
       assert.strictEqual(Log.formatName_(PROJECT_ID, name), expectedName);
-    });
-  });
-
-  describe('createWriteStream', function() {
-    beforeEach(function() {
-      log.request = util.noop;
-    });
-
-    it('should return a writable object stream', function() {
-      var ws = log.createWriteStream();
-
-      assert.strictEqual(ws.writable, true);
-    });
-
-    it('should make a request once writing started', function(done) {
-      log.parent.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.method, 'POST');
-        assert.strictEqual(reqOpts.uri, '/entries:write');
-
-        setImmediate(done);
-
-        return through();
-      };
-
-      var ws = log.createWriteStream();
-      ws.emit('writing');
-    });
-
-    it('should emit the response from the request', function(done) {
-      var response = {};
-      var ws = log.createWriteStream();
-
-      log.parent.request = function() {
-        var stream = through();
-
-        setImmediate(function() {
-          stream.emit('response', response);
-        });
-
-        return stream;
-      };
-
-      ws.on('response', function(response_) {
-        assert.strictEqual(response_, response);
-        done();
-      });
-
-      ws.emit('writing');
-    });
-
-    it('should format each entry', function(done) {
-      var entry = { formatted: false };
-      var formattedEntry = { formatted: true };
-
-      var ws = log.createWriteStream();
-
-      var expectedData = {
-        entries: [
-          formattedEntry,
-          formattedEntry
-        ]
-      };
-
-      var requestStream = concat(function(data) {
-        assert.deepEqual(JSON.parse(data), expectedData);
-        done();
-      });
-
-      log.parent.request = function() {
-        return requestStream;
-      };
-
-      log.formatEntryForApi_ = function(entry_) {
-        assert.strictEqual(entry_, entry);
-        return formattedEntry;
-      };
-
-      ws.write(entry);
-      ws.end(entry);
     });
   });
 
@@ -319,11 +243,12 @@ describe('Log', function() {
         return formattedEntry;
       };
 
-      log.parent.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.method, 'POST');
-        assert.strictEqual(reqOpts.uri, '/entries:write');
-        assert.strictEqual(reqOpts.json.entries[0], formattedEntry);
-        assert.strictEqual(reqOpts.json.resource, OPTIONS.resource);
+      log.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(protoOpts.service, 'LoggingServiceV2');
+        assert.strictEqual(protoOpts.method, 'writeLogEntries');
+
+        assert.strictEqual(reqOpts.logName, log.formattedName_);
+        assert.strictEqual(reqOpts.entries[0], formattedEntry);
 
         done();
       };
@@ -336,7 +261,7 @@ describe('Log', function() {
 
       log.formatEntryForApi_ = util.noop;
 
-      log.parent.request = function(reqOpts, callback) {
+      log.request = function(protoOpts, reqOpts, callback) {
         callback.apply(null, args);
       };
 

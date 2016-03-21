@@ -401,13 +401,6 @@ describe('Logging', function() {
     it('should write to a log with warning helper', function(done) {
       log.warning(logEntries, options, done);
     });
-
-    it('should write from a stream', function(done) {
-      log.createWriteStream()
-        .on('error', done)
-        .on('finish', done)
-        .end(logEntries);
-    });
   });
 
   function generateName() {
