@@ -71,6 +71,9 @@
       "title": "Region",
       "type": "compute/region"
     }, {
+      "title": "Service",
+      "type": "compute/service"
+    }, {
       "title": "Snapshot",
       "type": "compute/snapshot"
     }, {

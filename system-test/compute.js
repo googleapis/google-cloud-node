@@ -19,6 +19,7 @@
 var assert = require('assert');
 var async = require('async');
 var exec = require('methmeth');
+var is = require('is');
 
 var env = require('./env.js');
 var Compute = require('../lib/compute/index.js');
@@ -105,64 +106,35 @@ describe('Compute', function() {
   });
 
   describe('autoscalers', function() {
-    var INSTANCE_GROUP_NAME = generateName();
     var AUTOSCALER_NAME = generateName();
     var autoscaler = zone.autoscaler(AUTOSCALER_NAME);
 
+    // Some of the services we support require an instance group to be created.
+    // Util `instanceGroups` are officially supported by gcloud-node, we make
+    // manual requests to create and delete them.
+    var INSTANCE_GROUP_NAME = generateName();
+
     before(function(done) {
-      function createInstanceGroup(callback) {
-        zone.request({
-          method: 'POST',
-          uri: '/instanceGroups',
-          json: {
-            name: INSTANCE_GROUP_NAME
-          }
-        }, function(err, resp) {
-          if (err) {
-            callback(err);
-            return;
-          }
+      async.series([
+        function(callback) {
+          createInstanceGroup(INSTANCE_GROUP_NAME, callback);
+        },
 
-          var operation = zone.operation(resp.name);
-          operation
-            .on('error', callback)
-            .on('complete', function() {
-              callback();
-            });
-        });
-      }
-
-      function createAutoscaler(callback) {
-        autoscaler.create({
-          coolDown: 30,
-          cpu: 80,
-          loadBalance: 40,
-          maxReplicas: 5,
-          minReplicas: 0,
-          target: INSTANCE_GROUP_NAME
-        }, execAfterOperationComplete(callback));
-      }
-
-      async.series([createInstanceGroup, createAutoscaler], done);
+        function(callback) {
+          autoscaler.create({
+            coolDown: 30,
+            cpu: 80,
+            loadBalance: 40,
+            maxReplicas: 5,
+            minReplicas: 0,
+            target: INSTANCE_GROUP_NAME
+          }, execAfterOperationComplete(callback));
+        }
+      ], done);
     });
 
     after(function(done) {
-      zone.request({
-        method: 'DELETE',
-        uri: '/instanceGroups/' + INSTANCE_GROUP_NAME
-      }, function(err, resp) {
-          if (err) {
-            done(err);
-            return;
-          }
-
-          var operation = zone.operation(resp.name);
-          operation
-            .on('error', done)
-            .on('complete', function() {
-              done();
-            });
-        });
+      deleteInstanceGroup(INSTANCE_GROUP_NAME, done);
     });
 
     it('should have created the autoscaler', function(done) {
@@ -513,6 +485,134 @@ describe('Compute', function() {
     });
   });
 
+  describe('services', function() {
+    var service = compute.service(generateName());
+
+    var INSTANCE_GROUP_NAME = generateName();
+    var groupUrl;
+
+    var HEALTH_CHECK_NAME = generateName();
+    var healthCheckUrl;
+
+    before(function(done) {
+      this.timeout(90000);
+
+      async.series([
+        function(callback) {
+          createInstanceGroup(INSTANCE_GROUP_NAME, function(err, metadata) {
+            if (err) {
+              callback(err);
+              return;
+            }
+
+            groupUrl = metadata.selfLink;
+
+            callback();
+          });
+        },
+
+        function(callback) {
+          createHttpHealthCheck(HEALTH_CHECK_NAME, function(err, metadata) {
+            if (err) {
+              callback(err);
+              return;
+            }
+
+            healthCheckUrl = metadata.selfLink;
+
+            callback();
+          });
+        },
+
+        function(callback) {
+          service.create({
+            backends: [
+              {
+                group: groupUrl
+              }
+            ],
+            healthChecks: [
+              healthCheckUrl
+            ]
+          }, execAfterOperationComplete(callback));
+        }
+      ], done);
+    });
+
+    after(function(done) {
+      async.series([
+        function(callback) {
+          service.delete(execAfterOperationComplete(callback));
+        },
+
+        function(callback) {
+          deleteHttpHealthCheck(HEALTH_CHECK_NAME, callback);
+        },
+
+        function(callback) {
+          deleteInstanceGroup(INSTANCE_GROUP_NAME, callback);
+        }
+      ], done);
+    });
+
+    it('should get a list of services', function(done) {
+      compute.getServices(function(err, services) {
+        assert.ifError(err);
+        assert(services.length > 0);
+        done();
+      });
+    });
+
+    it('should get a list of services in stream mode', function(done) {
+      var resultsMatched = 0;
+
+      compute.getServices()
+        .on('error', done)
+        .on('data', function() {
+          resultsMatched++;
+        })
+        .on('end', function() {
+          assert(resultsMatched > 0);
+          done();
+        });
+    });
+
+    it('should get the results of a health check', function(done) {
+      service.getHealth({
+        name: INSTANCE_GROUP_NAME,
+        zone: zone
+      }, function(err, status) {
+        assert.ifError(err);
+        assert.strictEqual(is.array(status), true);
+        done();
+      });
+    });
+
+    it('should set metadata', function(done) {
+      var description = 'The best description. Possibly ever.';
+
+      service.setMetadata({
+        description: description
+      }, execAfterOperationComplete(function(err) {
+        if (err) {
+          done(err);
+          return;
+        }
+
+        service.getMetadata(function(err, metadata) {
+          if (err) {
+            done(err);
+            return;
+          }
+
+          assert.strictEqual(metadata.description, description);
+
+          done();
+        });
+      }));
+    });
+  });
+
   describe('snapshots', function() {
     it('should get a list of snapshots', function(done) {
       compute.getSnapshots(function(err, snapshots) {
@@ -795,6 +895,7 @@ describe('Compute', function() {
       'getDisks',
       'getFirewalls',
       'getNetworks',
+      'getServices',
       'getSnapshots',
       'getVMs'
     ], callAndDelete, callback);
@@ -828,5 +929,95 @@ describe('Compute', function() {
           callback();
         });
     };
+  }
+
+  function createInstanceGroup(name, callback) {
+    zone.request({
+      method: 'POST',
+      uri: '/instanceGroups',
+      json: {
+        name: name
+      }
+    }, function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      var operation = zone.operation(resp.name);
+      operation
+        .on('error', callback)
+        .on('complete', function() {
+          zone.request({
+            uri: '/instanceGroups/' + name
+          }, function(err, resp) {
+            callback(null, resp);
+          });
+        });
+    });
+  }
+
+  function deleteInstanceGroup(name, callback) {
+    zone.request({
+      method: 'DELETE',
+      uri: '/instanceGroups/' + name
+    }, function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      var operation = zone.operation(resp.name);
+      operation
+        .on('error', callback)
+        .on('complete', function() {
+          callback();
+        });
+    });
+  }
+
+  function createHttpHealthCheck(name, callback) {
+    compute.request({
+      method: 'POST',
+      uri: '/global/httpHealthChecks',
+      json: {
+        name: name
+      }
+    }, function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      var operation = compute.operation(resp.name);
+      operation
+        .on('error', callback)
+        .on('complete', function() {
+          compute.request({
+            uri: '/global/httpHealthChecks/' + name
+          }, function(err, resp) {
+            callback(null, resp);
+          });
+        });
+    });
+  }
+
+  function deleteHttpHealthCheck(name, callback) {
+    compute.request({
+      method: 'DELETE',
+      uri: '/global/httpHealthChecks/' + name
+    }, function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      var operation = compute.operation(resp.name);
+      operation
+        .on('error', callback)
+        .on('complete', function() {
+          callback();
+        });
+    });
   }
 });

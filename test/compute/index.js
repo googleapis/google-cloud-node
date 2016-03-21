@@ -48,6 +48,7 @@ var fakeStreamRouter = {
       'getNetworks',
       'getOperations',
       'getRegions',
+      'getServices',
       'getSnapshots',
       'getVMs',
       'getZones'
@@ -411,6 +412,78 @@ describe('Compute', function() {
         compute.createNetwork(NAME, {}, function(err, network_, op, resp) {
           assert.strictEqual(err, null);
           assert.strictEqual(network_, network);
+          assert.strictEqual(op, operation);
+          assert.strictEqual(op.metadata, apiResponse);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
+    });
+  });
+
+  describe('createService', function() {
+    var NAME = 'new-service';
+
+    it('should make the correct API request', function(done) {
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/global/backendServices');
+        assert.deepEqual(reqOpts.json, { name: NAME });
+        done();
+      };
+
+      compute.createService(NAME, {}, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = { a: 'b', c: 'd' };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should exec the callback with error & API response', function(done) {
+        compute.createService(NAME, {}, function(err, service, op, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(service, null);
+          assert.strictEqual(op, null);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = {
+        name: 'op-name'
+      };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should exec cb with Service, Operation & apiResp', function(done) {
+        var service = {};
+        var operation = {};
+
+        compute.service = function(name) {
+          assert.strictEqual(name, NAME);
+          return service;
+        };
+
+        compute.operation = function(name) {
+          assert.strictEqual(name, apiResponse.name);
+          return operation;
+        };
+
+        compute.createService(NAME, {}, function(err, service_, op, resp) {
+          assert.strictEqual(err, null);
+          assert.strictEqual(service_, service);
           assert.strictEqual(op, operation);
           assert.strictEqual(op.metadata, apiResponse);
           assert.strictEqual(resp, apiResponse);
@@ -926,6 +999,104 @@ describe('Compute', function() {
         };
 
         compute.getNetworks(query, function(err, networks, nextQuery) {
+          assert.ifError(err);
+
+          assert.deepEqual(query, originalQuery);
+
+          assert.deepEqual(nextQuery, extend({}, query, {
+            pageToken: apiResponseWithNextPageToken.nextPageToken
+          }));
+
+          done();
+        });
+      });
+    });
+  });
+
+  describe('getServices', function() {
+    it('should work with only a callback', function(done) {
+      compute.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
+
+      compute.getServices(assert.ifError);
+    });
+
+    it('should make the correct API request', function(done) {
+      var options = {};
+
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/global/backendServices');
+        assert.strictEqual(reqOpts.qs, options);
+        done();
+      };
+
+      compute.getServices(options, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = { a: 'b', c: 'd' };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        compute.getServices({}, function(err, services, nextQuery, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(services, null);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(resp, apiResponse);
+
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var service = {
+        name: 'service-1'
+      };
+      var apiResponse = {
+        items: [service]
+      };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should create Service objects from the response', function(done) {
+        compute.service = function(name) {
+          assert.strictEqual(name, service.name);
+          setImmediate(done);
+          return service;
+        };
+
+        compute.getServices({}, assert.ifError);
+      });
+
+      it('should build a nextQuery if necessary', function(done) {
+        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+          nextPageToken: 'next-page-token'
+        });
+
+        var query = {
+          a: 'b',
+          c: 'd'
+        };
+        var originalQuery = extend({}, query);
+
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponseWithNextPageToken);
+        };
+
+        compute.getServices(query, function(err, services, nextQuery) {
           assert.ifError(err);
 
           assert.deepEqual(query, originalQuery);
