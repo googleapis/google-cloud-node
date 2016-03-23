@@ -163,11 +163,11 @@ describe('gcloud', function() {
     });
 
     describe('datastore', function() {
-      it('should create a single Datastore', function() {
-        var datastore = localGcloud.datastore;
+      it('should create a new Datastore', function() {
+        var datastore = localGcloud.datastore(options);
 
         assert(datastore instanceof FakeDatastore);
-        assert.deepEqual(datastore.calledWith_[0], expectedConfig);
+        assert.strictEqual(datastore.calledWith_[0], options);
       });
     });
 

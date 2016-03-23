@@ -878,7 +878,7 @@ describe('Bucket', function() {
   });
 
   describe('upload', function() {
-    var basename = 'proto_query.json';
+    var basename = 'testfile.json';
     var filepath = 'test/testdata/' + basename;
     var textFilepath = 'test/testdata/textfile.txt';
     var metadata = { a: 'b', c: 'd' };

@@ -161,11 +161,17 @@ describe('GrpcService', function() {
     });
 
     it('should call grpc.load correctly', function() {
-      grpcLoadOverride = function(opts) {
+      grpcLoadOverride = function(opts, format, grpcOpts) {
         assert.strictEqual(opts.root, ROOT_DIR);
 
         var expectedFilePath = path.relative(ROOT_DIR, PROTO_FILE_PATH);
         assert.strictEqual(opts.file, expectedFilePath);
+
+        assert.strictEqual(format, 'proto');
+        assert.deepEqual(grpcOpts, {
+          binaryAsBase64: true,
+          convertFieldsToCamelCase: true
+        });
 
         return MOCK_GRPC_API;
       };
@@ -210,7 +216,7 @@ describe('GrpcService', function() {
 
   describe('request', function() {
     var PROTO_OPTS = { service: 'service', method: 'method', timeout: 3000 };
-    var REQ_OPTS = { camelOption: true };
+    var REQ_OPTS = {};
     var GRPC_CREDENTIALS = {};
 
     function ProtoService() {}
@@ -522,59 +528,12 @@ describe('GrpcService', function() {
       });
 
       it('should execute callback with response', function(done) {
-        var expectedResponse = {};
-
-        GrpcService.convertBuffers_ = function(response) {
-          assert.strictEqual(response.snake_property, undefined);
-          assert.strictEqual(response.snakeProperty, RESPONSE.snake_property);
-          return expectedResponse;
-        };
-
         grpcService.request(PROTO_OPTS, REQ_OPTS, function(err, resp) {
           assert.ifError(err);
-          assert.strictEqual(resp, expectedResponse);
+          assert.strictEqual(resp, RESPONSE);
           done();
         });
       });
-    });
-  });
-
-  describe('convertBuffers_', function() {
-    var DATA_OBJECT = { prop: {} };
-    var DATA = [DATA_OBJECT];
-
-    it('should check if data is buffer-like', function(done) {
-      GrpcService.isBufferLike_ = function(data) {
-        assert.strictEqual(data, DATA_OBJECT.prop);
-        done();
-      };
-
-      GrpcService.convertBuffers_(DATA);
-    });
-
-    it('should convert buffer-like data into base64 strings', function() {
-      var buffer = new Buffer([1, 2, 3]);
-      var expectedString = buffer.toString('base64');
-
-      GrpcService.isBufferLike_ = function() {
-        return true;
-      };
-
-      GrpcService.objToArr_ = function(data) {
-        assert.strictEqual(data, DATA_OBJECT.prop);
-        return buffer;
-      };
-
-      var convertedData = GrpcService.convertBuffers_(DATA);
-      assert.strictEqual(convertedData[0].prop, expectedString);
-    });
-
-    it('should convert buffers into base64 strings', function() {
-      var buffer = new Buffer([1, 2, 3]);
-      var expectedString = buffer.toString('base64');
-
-      var convertedData = GrpcService.convertBuffers_([{ prop: buffer }]);
-      assert.strictEqual(convertedData[0].prop, expectedString);
     });
   });
 

@@ -17,10 +17,7 @@
 'use strict';
 
 var assert = require('assert');
-var datastore = require('../../lib/datastore');
-var entity = require('../../lib/datastore/entity.js');
 var Query = require('../../lib/datastore/query.js');
-var queryProto = require('../testdata/proto_query.json');
 
 describe('Query', function() {
   describe('instantiation', function() {
@@ -302,21 +299,6 @@ describe('Query', function() {
       var nextQuery = query.offset(100);
 
       assert.strictEqual(query, nextQuery);
-    });
-  });
-
-  describe('proto conversion', function() {
-    it('should be converted to a query proto successfully', function() {
-      var query = new Query(['Kind'])
-        .select(['name', 'count'])
-        .filter('count', '>=', datastore.int(5))
-        .filter('name', '=', 'Burcu')
-        .order('count', { descending: true })
-        .groupBy(['count'])
-        .offset(5)
-        .limit(10);
-
-      assert.deepEqual(entity.queryToQueryProto(query), queryProto);
     });
   });
 });

@@ -58,10 +58,3 @@ async.eachLimit(subscriptions, PARALLEL_LIMIT, deleteSubscription, function(err)
 This will only allow 10 at a time to go through, making it easier on the API to keep up with your requests.
 
 Reference Issue: [#1101](https://github.com/GoogleCloudPlatform/gcloud-node/issues/1101)
-
-
-## I cannot connect to Datastore from a Compute Engine instance.
-
-Currently, the version of Datastore our library supports (v1beta2) requires not only the `cloud-platform` auth scope, but the `userinfo.email` scope as well. When you create a VM, be sure to select both of these scopes (possibly referred to as "Cloud Datastore" and "User info") in order to access the API from gcloud-node without receiving a 401 error.
-
-Reference Issue: [#1169](https://github.com/GoogleCloudPlatform/gcloud-node/issues/1169#issuecomment-198428431)
