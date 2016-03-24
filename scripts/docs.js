@@ -22,6 +22,7 @@ var fs = require('fs');
 var dox = require('dox');
 var path = require('path');
 var prop = require('propprop');
+var format = require('string-format-obj');
 
 
 var OUTPUT_FOLDER = './docs/json/master';
@@ -56,6 +57,8 @@ function formatHtml(html) {
 }
 
 function detectCustomType(str) {
+  var tmpl = '<a data-custom-type="{module}" data-method="{method}">{text}</a>';
+  var templateFn = format.bind(null, tmpl);
   var rCustomType = /\{*module\:([^\}|\>]*)\}*/g;
   var rArray = /Array\.\<(.+)\>/g;
 
@@ -64,7 +67,13 @@ function detectCustomType(str) {
       return module + '[]';
     })
     .replace(rCustomType, function(match, module) {
-      return '<a data-custom-type="' + module + '"></a>';
+      var parts = module.split('#');
+
+      return templateFn({
+        module: parts[0],
+        method: parts[1] || '',
+        text: module
+      });
     });
 }
 
@@ -240,7 +249,7 @@ function createMethod(fileName, parent, block) {
   var name = getName(block);
 
   return {
-    id: [parent, name].join('#'),
+    id: name,
     name: name,
     type: getMethodType(block),
     description: formatHtml(block.description.full),
@@ -301,31 +310,25 @@ function parseFile(fileName, contents) {
 }
 
 function createTypesDictionary(docs) {
-  var types = [];
+  return docs.map(function(service) {
+    var id = service.id;
+    var title = [id === 'gcloud' ? 'Node.js' : service.name];
+    var contents = service.path.replace('docs/json/master/', '');
 
-  docs.forEach(function(service) {
-    service.methods.forEach(function(method) {
-      var id = method.type === 'constructor' ? service.id : method.id;
-      var contents = service.path.replace('docs/json/master/', '');
-      var title = [id === 'gcloud' ? 'Node.js' : service.name];
-
-      if (service.parent) {
-        for (var i = 0, l = docs.length; i < l; i++) {
-          if (docs[i].id === service.parent) {
-            title.unshift(docs[i].name);
-          }
+    if (service.parent) {
+      for (var i = 0, l = docs.length; i < l; i++) {
+        if (docs[i].id === service.parent) {
+          title.unshift(docs[i].name);
         }
       }
+    }
 
-      types.push({
-        id: id,
-        title: title.join(' » '),
-        contents: contents
-      });
-    });
+    return {
+      id: id,
+      title: title.join(' » '),
+      contents: contents
+    };
   });
-
-  return types;
 }
 
 globby('./lib/*{,/*}.js', { ignore: IGNORE }).then(function(files) {
