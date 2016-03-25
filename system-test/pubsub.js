@@ -320,7 +320,6 @@ describe('pubsub', function() {
 
     it('should allow a custom timeout', function(done) {
       var timeout = 5000;
-      this.timeout(timeout * 2);
 
       // We need to use a topic without any pending messages to allow the
       // connection to stay open.
