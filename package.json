@@ -86,6 +86,7 @@
     "array-uniq": "^1.0.2",
     "arrify": "^1.0.0",
     "async": "^1.4.2",
+    "bluebird": "^3.3.3",
     "camelize": "^1.0.0",
     "concat-stream": "^1.5.0",
     "create-error-class": "^2.0.1",
@@ -138,7 +139,8 @@
   "scripts": {
     "docs": "node ./scripts/docs.js",
     "lint": "jshint lib/ system-test/ test/ && jscs lib/ system-test/ test/",
-    "test": "npm run docs && mocha test/*/*.js test/index.js test/docs.js",
+    "mocha": "mocha test/*/*.js test/index.js test/docs.js",
+    "test": "npm run docs && npm run mocha",
     "system-test": "mocha system-test/* --timeout 60s --bail",
     "cover": "istanbul cover -x 'system-test/*' _mocha -- --timeout 60s --bail test/*/*.js test/docs.js system-test/*",
     "coveralls": "istanbul cover -x 'system-test/*' _mocha --report lcovonly -- --timeout 60s --bail test/*/*.js test/docs.js system-test/* -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
