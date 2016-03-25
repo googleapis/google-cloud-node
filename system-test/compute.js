@@ -253,9 +253,6 @@ describe('Compute', function() {
     });
 
     it('should take a snapshot', function(done) {
-      var MAX_TIME_ALLOWED = 90000;
-      this.timeout(MAX_TIME_ALLOWED);
-
       disk.snapshot(generateName()).create(function(err, snapshot, operation) {
         assert.ifError(err);
 
@@ -296,9 +293,6 @@ describe('Compute', function() {
     };
 
     before(function(done) {
-      var MAX_TIME_ALLOWED = 90000;
-      this.timeout(MAX_TIME_ALLOWED);
-
       firewall.create(CONFIG, function(err, firewall, operation) {
         assert.ifError(err);
 
@@ -495,8 +489,6 @@ describe('Compute', function() {
     var healthCheckUrl;
 
     before(function(done) {
-      this.timeout(90000);
-
       async.series([
         function(callback) {
           createInstanceGroup(INSTANCE_GROUP_NAME, function(err, metadata) {
@@ -659,13 +651,6 @@ describe('Compute', function() {
     });
 
     after(function(done) {
-      // 90s is the minimum time for this operation to complete as per:
-      // https://cloud.google.com/compute/docs/instances/#deleting_an_instance
-      //
-      // In practice, it seems to take around 1.5x that, so we allow 2x.
-      var MAX_TIME_ALLOWED = 90000 * 2;
-      this.timeout(MAX_TIME_ALLOWED);
-
       vm.delete(function(err, operation) {
         if (err) {
           done(err);
@@ -717,9 +702,6 @@ describe('Compute', function() {
     it('should attach and detach a disk', function(done) {
       var name = generateName();
       var disk = zone.disk(name);
-
-      // This test waits on a lot of operations.
-      this.timeout(90000);
 
       async.series([
         createDisk,
@@ -809,9 +791,6 @@ describe('Compute', function() {
     });
 
     it('should stop', function(done) {
-      var MAX_TIME_ALLOWED = 90000 * 2;
-      this.timeout(MAX_TIME_ALLOWED);
-
       vm.stop(execAfterOperationComplete(done));
     });
   });
