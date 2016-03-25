@@ -155,6 +155,11 @@ describe('GrpcService', function() {
       assert.strictEqual(grpcService.service, CONFIG.service);
     });
 
+    it('should localize an empty Map of services', function() {
+      assert(grpcService.activeServiceMap_ instanceof Map);
+      assert.strictEqual(grpcService.activeServiceMap_.size, 0);
+    });
+
     it('should call grpc.load correctly', function() {
       grpcLoadOverride = function(opts) {
         assert.strictEqual(opts.root, ROOT_DIR);
@@ -304,6 +309,27 @@ describe('GrpcService', function() {
       });
 
       grpcService.request(protoOpts, REQ_OPTS, assert.ifError);
+    });
+
+    it('should cache the service', function(done) {
+      grpcService.protos.Service = {
+        service: function() {
+          var protoService = new ProtoService();
+
+          setImmediate(function() {
+            var protoKey = JSON.stringify(PROTO_OPTS);
+            var cacheEntry = grpcService.activeServiceMap_.get(protoKey);
+
+            assert.strictEqual(cacheEntry, protoService);
+
+            done();
+          });
+
+          return protoService;
+        }
+      };
+
+      grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
     });
 
     it('should make the correct request on the proto service', function(done) {
