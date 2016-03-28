@@ -788,8 +788,7 @@ Query.prototype.testRunQueryProjection = function(callback) {
 
     self.datastore.runQuery(query, function(err) {
       if (err) {
-        callback(err);
-        return;
+        return callback(err);
       }
 
       queryCallback.apply(null, arguments);

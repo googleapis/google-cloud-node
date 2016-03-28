@@ -51,5 +51,5 @@ function runQuery(cb) {
 exports.runQuery = runQuery;
 
 if (module === require.main) {
-  runQuery(function () {});
+  runQuery(console.log);
 }
