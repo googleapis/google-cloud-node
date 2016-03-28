@@ -317,10 +317,10 @@ describe('GrpcService', function() {
           var protoService = new ProtoService();
 
           setImmediate(function() {
-            var protoKey = JSON.stringify(PROTO_OPTS);
-            var cacheEntry = grpcService.activeServiceMap_.get(protoKey);
-
-            assert.strictEqual(cacheEntry, protoService);
+            assert.strictEqual(
+              grpcService.activeServiceMap_.get(PROTO_OPTS.service),
+              protoService
+            );
 
             done();
           });
