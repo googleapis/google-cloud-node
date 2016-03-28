@@ -15,46 +15,64 @@
 
 var async = require('async');
 var subscriptionSample = require('./subscription');
-var createTopic = subscriptionSample.createTopic;
-var subscribe = subscriptionSample.subscribe;
+var createTopicExample = subscriptionSample.createTopicExample;
+var deleteTopicExample = subscriptionSample.deleteTopicExample;
+var subscribeExample = subscriptionSample.subscribeExample;
+var deleteSubscriptionExample = subscriptionSample.deleteSubscriptionExample;
 var pubsub = subscriptionSample.pubsub;
 
 // [START get_topic_policy]
-function getTopicPolicy(callback) {
+/**
+ * @param {string} topicName Name of the topic whose policy is to be retrieved.
+ * @param {Function} callback Callback function.
+ */
+function getTopicPolicyExample(topicName, callback) {
   // Grab a reference to an existing topic
-  var topic = pubsub.topic('messageCenter');
+  var topic = pubsub.topic(topicName);
 
   // Retrieve the IAM policy for the topic
-  topic.iam.getPolicy(function (err, policy) {
+  topic.iam.getPolicy(function (err, policy, apiResponse) {
     if (err) {
       return callback(err);
     }
+
+    // Received the policy
     console.log(policy); // { etag: 'ACAB' }
-    return callback(err, policy);
+    callback(null, policy, apiResponse);
   });
 }
 // [END get_topic_policy]
 
 // [START get_subscription_policy]
-function getSubscriptionPolicy(callback) {
+/**
+ * @param {string} subscriptionName Name of the subscription whose policy is to
+ * be retrieved.
+ * @param {Function} callback Callback function.
+ */
+function getSubscriptionPolicyExample(subscriptionName, callback) {
   // Grab a reference to an existing subscription
-  var subscription = pubsub.subscription('newMessages');
+  var subscription = pubsub.subscription(subscriptionName);
 
   // Retrieve the IAM policy for the subscription
-  subscription.iam.getPolicy(function (err, policy) {
+  subscription.iam.getPolicy(function (err, policy, apiResponse) {
     if (err) {
       return callback(err);
     }
+
     console.log(policy); // { etag: 'ACAB' }
-    return callback(err, policy);
+    callback(null, policy, apiResponse);
   });
 }
 // [END get_subscription_policy]
 
 // [START set_topic_policy]
-function setTopicPolicy(callback) {
+/**
+ * @param {string} topicName Name of the topic whose policy is to be updated.
+ * @param {Function} callback Callback function.
+ */
+function setTopicPolicyExample(topicName, callback) {
   // Grab a reference to an existing topic
-  var topic = pubsub.topic('messageCenter');
+  var topic = pubsub.topic(topicName);
 
   // Policy update
   var myPolicy = {
@@ -67,14 +85,26 @@ function setTopicPolicy(callback) {
   };
 
   // Retrieve the IAM policy for the provided topic
-  topic.iam.setPolicy(myPolicy, callback);
+  topic.iam.setPolicy(myPolicy, function (err, policy, apiResponse) {
+    if (err) {
+      return callback(err);
+    }
+
+    console.log('Updated policy for ' + topicName);
+    callback(null, policy, apiResponse);
+  });
 }
 // [END set_topic_policy]
 
 // [START set_subscription_policy]
-function setSubscriptionPolicy(callback) {
+/**
+ * @param {string} subscriptionName Name of the subscription whose policy is to
+ * be updated.
+ * @param {Function} callback Callback function.
+ */
+function setSubscriptionPolicyExample(subscriptionName, callback) {
   // Grab a reference to an existing subscription
-  var subscription = pubsub.subscription('newMessages');
+  var subscription = pubsub.subscription(subscriptionName);
 
   // Policy update
   var myPolicy = {
@@ -87,14 +117,25 @@ function setSubscriptionPolicy(callback) {
   };
 
   // Retrieve the IAM policy for the provided subscription
-  subscription.iam.setPolicy(myPolicy, callback);
+  subscription.iam.setPolicy(myPolicy, function (err, policy, apiResponse) {
+    if (err) {
+      return callback(err);
+    }
+
+    console.log('Updated policy for ' + subscriptionName);
+    callback(null, policy, apiResponse);
+  });
 }
 // [END set_subscription_policy]
 
 // [START test_topic_permissions]
-function testTopicPermissions(callback) {
+/**
+ * @param {string} topicName Name of the topic whose policy is to be tested.
+ * @param {Function} callback Callback function.
+ */
+function testTopicPermissionsExample(topicName, callback) {
   // Grab a reference to an existing topic
-  var topic = pubsub.topic('messageCenter');
+  var topic = pubsub.topic(topicName);
 
   var tests = [
     'pubsub.topics.attachSubscription',
@@ -103,14 +144,26 @@ function testTopicPermissions(callback) {
   ];
 
   // Retrieve the IAM policy for the provided topic
-  topic.iam.testPermissions(tests, callback);
+  topic.iam.testPermissions(tests, function (err, permissions, apiResponse) {
+    if (err) {
+      return callback(err);
+    }
+
+    console.log('Got permissions for ' + topicName);
+    callback(null, permissions, apiResponse);
+  });
 }
 // [END test_topic_permissions]
 
 // [START test_subscription_permissions]
-function testSubscriptionPermissions(callback) {
+/**
+ * @param {string} subscriptionName Name of the subscription whose policy is to
+ * be tested.
+ * @param {Function} callback Callback function.
+ */
+function testSubscriptionPermissionsExample(subscriptionName, callback) {
   // Grab a reference to an existing subscription
-  var subscription = pubsub.subscription('newMessages');
+  var subscription = pubsub.subscription(subscriptionName);
 
   var tests = [
     'pubsub.subscriptions.consume',
@@ -118,79 +171,55 @@ function testSubscriptionPermissions(callback) {
   ];
 
   // Retrieve the IAM policy for the provided subscription
-  subscription.iam.testPermissions(tests, callback);
+  subscription.iam.testPermissions(
+    tests,
+    function (err, permissions, apiResponse) {
+      if (err) {
+        return callback(err);
+      }
+
+      console.log('Got permissions for ' + subscriptionName);
+      callback(null, permissions, apiResponse);
+    }
+  );
 }
 // [END test_subscription_permissions]
 
-exports.setTopicPolicy = setTopicPolicy;
-exports.setSubscriptionPolicy = setSubscriptionPolicy;
-exports.runSample = runSample;
+exports.setTopicPolicyExample = setTopicPolicyExample;
+exports.setSubscriptionPolicyExample = setSubscriptionPolicyExample;
 
-function runSample(callback) {
-  var _subscription;
-  var _topic;
-  // Gather responses
-  var responses = [];
-  async.waterfall([
+// Run the examples
+exports.main = function (cb) {
+  var topicName = 'messageCenter2';
+  var subscriptionName = 'newMessages2';
+  async.series([
     function (cb) {
-      console.log('create topic...');
-      createTopic(cb);
+      createTopicExample(topicName, cb);
     },
-    function (topic, apiResponse, cb) {
-      _topic = topic;
-      responses.push([topic, apiResponse]);
-      console.log('created topic');
-      console.log('get topic IAM policy...');
-      getTopicPolicy(cb);
+    function (cb) {
+      getTopicPolicyExample(topicName, cb);
     },
-    function (policy, cb) {
-      responses.push([policy]);
-      console.log('got topic policy', policy);
-      console.log('testing topic permissions...');
-      testTopicPermissions(cb);
+    function (cb) {
+      testTopicPermissionsExample(topicName, cb);
     },
-    function (permissions, apiResponse, cb) {
-      responses.push([permissions, apiResponse]);
-      console.log('tested topic permissions', permissions);
-      console.log('create subscription...');
-      subscribe(cb);
+    function (cb) {
+      subscribeExample(topicName, subscriptionName, cb);
     },
-    function (subscription, apiResponse, cb) {
-      _subscription = subscription;
-      responses.push([subscription, apiResponse]);
-      console.log('created subscription');
-      console.log('get subscription IAM policy...');
-      getSubscriptionPolicy(cb);
+    function (cb) {
+      getSubscriptionPolicyExample(subscriptionName, cb);
     },
-    function (policy, cb) {
-      responses.push([policy]);
-      console.log('got subscription policy', policy);
-      console.log('testing subscription permissions...');
-      testSubscriptionPermissions(cb);
+    function (cb) {
+      testSubscriptionPermissionsExample(subscriptionName, cb);
     },
-    function (permissions, apiResponse, cb) {
-      responses.push([permissions, apiResponse]);
-      console.log('tested subscription permissions', permissions);
-      console.log('deleting subscription...');
-      _subscription.delete(cb);
+    function (cb) {
+      deleteSubscriptionExample(subscriptionName, cb);
     },
-    function (apiResponse, cb) {
-      console.log('deleted subscription');
-      console.log('deleting topic...');
-      _topic.delete(cb);
+    function (cb) {
+      deleteTopicExample(topicName, cb);
     }
-  ], function (err) {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log('deleted topic');
-    }
-    if (typeof callback === 'function') {
-      callback(err, responses);
-    }
-  });
-}
+  ], cb || console.log);
+};
 
 if (module === require.main) {
-  runSample();
+  exports.main();
 }

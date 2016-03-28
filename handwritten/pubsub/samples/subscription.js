@@ -31,110 +31,223 @@ var pubsub = gcloud.pubsub();
 // [END auth]
 
 // [START create_topic]
-function createTopic(callback) {
-  var topicName = 'messageCenter';
-
+/**
+ * @param {string} topicName Name for the new topic.
+ * @param {Function} callback Callback function.
+ */
+function createTopicExample(topicName, callback) {
   var topic = pubsub.topic(topicName);
 
   // Get the topic if it exists. Create it if it does not exist.
   topic.get({
     autoCreate: true
-  }, callback);
+  }, function (err, topic, apiResponse) {
+    if (err) {
+      return callback(err);
+    }
+
+    // Created the topic
+    console.log('Created topic ' + topicName);
+    callback(null, topic, apiResponse);
+  });
 }
 // [END create_topic]
 
-// [START publish]
-function publish(callback) {
-  var topicName = 'messageCenter';
+// [START delete_topic]
+/**
+ * @param {string} topicName Name of the topic to delete.
+ * @param {Function} callback Callback function.
+ */
+function deleteTopicExample(topicName, callback) {
+  var topic = pubsub.topic(topicName);
 
+  // Delete the topic
+  topic.delete(function (err, apiResponse) {
+    if (err) {
+      return callback(err);
+    }
+
+    // Deleted the topic
+    console.log('Deleted topic ' + topicName);
+    callback(null, apiResponse);
+  });
+}
+// [END delete_topic]
+
+// [START delete_subscription]
+/**
+ * @param {string} subscriptionName Name of the subscription to delete.
+ * @param {Function} callback Callback function.
+ */
+function deleteSubscriptionExample(subscriptionName, callback) {
+  var subscription = pubsub.subscription(subscriptionName);
+
+  // Delete the subscription
+  subscription.delete(function (err, apiResponse) {
+    if (err) {
+      return callback(err);
+    }
+
+    // Deleted the subscription
+    console.log('Deleted subscription ' + subscriptionName);
+    callback(null, apiResponse);
+  });
+}
+// [END delete_subscription]
+
+// [START publish]
+/**
+ * @param {string} topicName Name of the topic to which to publish.
+ * @param {Function} callback Callback function.
+ */
+function publishExample(topicName, callback) {
   // Grab a reference to an existing topic
   var topic = pubsub.topic(topicName);
 
   // Publish a message to the topic
   topic.publish({
     data: 'Hello, world!'
-  }, callback);
+  }, function (err, messageIds, apiResponse) {
+    if (err) {
+      return callback(err);
+    }
+
+    console.log('Published ' + messageIds.length + ' messages');
+    callback(null, messageIds, apiResponse);
+  });
 }
 // [END publish]
 
 // [START list_topics]
-function getAllTopics(callback) {
+/**
+ * @param {string} [pageToken] Page to retrieve.
+ * @param {Function} callback Callback function.
+ */
+function getAllTopicsExample(pageToken, callback) {
+  if (typeof pageToken === 'function') {
+    callback = pageToken;
+    pageToken = undefined;
+  }
+  var options = {};
+  if (pageToken) {
+    options.pageToken = pageToken;
+  }
+
   // Grab paginated topics
-  pubsub.getTopics(function (err, topics, nextQuery) {
+  pubsub.getTopics(options, function (err, topics, nextQuery) {
     // Quit on error
     if (err) {
       return callback(err);
     }
+
     // There is another page of topics
     if (nextQuery) {
       // Grab the remaining pages of topics recursively
-      return getAllTopics(function (err, _topics) {
+      return getAllTopicsExample(nextQuery.token, function (err, _topics) {
         if (_topics) {
           topics = topics.concat(_topics);
         }
-        callback(err, topics);
+        callback(null, topics);
       });
     }
     // Last page of topics
-    return callback(err, topics);
+    return callback(null, topics);
   });
 }
 // [END list_topics]
 
 // [START get_all_subscriptions]
-function getAllSubscriptions(callback) {
+/**
+ * @param {string} [pageToken] Page to retrieve.
+ * @param {Function} callback Callback function.
+ */
+function getAllSubscriptionsExample(pageToken, callback) {
+  if (typeof pageToken === 'function') {
+    callback = pageToken;
+    pageToken = undefined;
+  }
+  var options = {};
+  if (pageToken) {
+    options.pageToken = pageToken;
+  }
   // Grab paginated subscriptions
-  pubsub.getSubscriptions(function (err, subscriptions, nextQuery) {
-    // Quit on error
-    if (err) {
-      return callback(err);
+  pubsub.getSubscriptions(
+    options,
+    function (err, subscriptions, nextQuery) {
+      // Quit on error
+      if (err) {
+        return callback(err);
+      }
+
+      // There is another page of subscriptions
+      if (nextQuery) {
+        // Grab the remaining pages of subscriptions recursively
+        return getAllSubscriptionsExample(
+          nextQuery.token,
+          function (err, _subscriptions) {
+            if (_subscriptions) {
+              subscriptions = subscriptions.concat(_subscriptions);
+            }
+            callback(null, subscriptions);
+          }
+        );
+      }
+      // Last page of subscriptions
+      return callback(null, subscriptions);
     }
-    // There is another page of subscriptions
-    if (nextQuery) {
-      // Grab the remaining pages of subscriptions recursively
-      return getAllSubscriptions(function (err, _subscriptions) {
-        if (_subscriptions) {
-          subscriptions = subscriptions.concat(_subscriptions);
-        }
-        callback(err, subscriptions);
-      });
-    }
-    // Last page of subscriptions
-    return callback(err, subscriptions);
-  });
+  );
 }
 // [END get_all_subscriptions]
 
 // [START create_subscription]
-function subscribe(callback) {
-  var topicName = 'messageCenter';
-  var subscriptionName = 'newMessages';
-
+/**
+ * @param {string} topicName Name of the topic for the new subscription.
+ * @param {string} subscriptionName Name for the new subscription.
+ * @param {Function} callback Callback function.
+ */
+function subscribeExample(topicName, subscriptionName, callback) {
   var options = {
     reuseExisting: true
   };
-  pubsub.subscribe(topicName, subscriptionName, options, callback);
+  pubsub.subscribe(
+    topicName,
+    subscriptionName,
+    options,
+    function (err, subscription, apiResponse) {
+      if (err) {
+      return callback(err);
+    }
+
+      // Got the subscription
+      console.log('Subscribed to ' + topicName);
+      callback(null, subscription, apiResponse);
+    }
+  );
 }
 // [END create_subscription]
 
 // [START handle_message]
-function handleMessage(message) {
+function handleMessageExample(message) {
   console.log('received message: ' + message.data);
 }
 // [END handle_message]
 
 // [START pull_messages]
-function pullMessages(callback) {
-  // Create a topic
-  createTopic(function (err) {
-    if (err) {
-      return callback(err);
-    }
-    // Create a subscription to the topic
-    subscribe(function (err, subscription) {
-      if (err) {
-        return callback(err);
-      }
+/**
+ *
+ */
+function pullMessagesExample(topicName, subscriptionName, callback) {
+  // Use the "async" library to handle a chain of asynchronous functions
+  async.waterfall([
+    function (cb) {
+      // Create a topic
+      createTopicExample(topicName, cb);
+    },
+    function (topic, apiResponse, cb) {
+      // Create a subscription
+      subscribeExample(topicName, subscriptionName, cb);
+    },
+    function (subscription, apiResponse, cb) {
       var options = {
         // Limit the amount of messages pulled.
         maxResults: 100,
@@ -143,101 +256,70 @@ function pullMessages(callback) {
         returnImmediately: false
       };
       // Pull any messages on the subscription
-      subscription.pull(options, function (err, messages) {
+      subscription.pull(options, cb);
+    },
+    function (messages, apiResponse, cb) {
+      // Do something for each message
+      messages.forEach(handleMessageExample);
+
+      // Acknowledge messages
+      var subscription = pubsub.subscription(subscriptionName);
+      subscription.ack(messages.map(function (message) {
+        return message.ackId;
+      }), function (err) {
         if (err) {
-          return callback(err);
+          return cb(err);
         }
-
-        // Do something for each message
-        messages.forEach(handleMessage);
-
-        // Acknowledge messages
-        subscription.ack(messages.map(function (message) {
-          return message.ackId;
-        }), function (err) {
-          if (err) {
-            return callback(err);
-          }
-          callback(null, messages);
-        });
+        cb(null, messages);
       });
-    });
+    }
+  ], function (err, messages) {
+    if (err) {
+      return callback(err);
+    }
+
+    console.log('Pulled ' + messages.length + ' messages');
+    callback(null, messages);
   });
 }
 // [END pull_messages]
 
-exports.createTopic = createTopic;
-exports.subscribe = subscribe;
-exports.runSample = runSample;
+exports.createTopicExample = createTopicExample;
+exports.deleteTopicExample = deleteTopicExample;
+exports.subscribeExample = subscribeExample;
+exports.deleteSubscriptionExample = deleteSubscriptionExample;
 exports.pubsub = pubsub;
-
-function runSample(callback) {
-  var _subscription;
-  var _topic;
-  // Gather responses
-  var responses = [];
-  async.waterfall([
+exports.main = function (cb) {
+  var topicName = 'messageCenter';
+  var subscriptionName = 'newMessages';
+  async.series([
     function (cb) {
-      console.log('create topic...');
-      createTopic(cb);
+      createTopicExample(topicName, cb);
     },
-    function (topic, apiResponse, cb) {
-      _topic = topic;
-      responses.push([topic, apiResponse]);
-      console.log('created topic');
-      console.log('create subscription...');
-      subscribe(cb);
+    function (cb) {
+      subscribeExample(topicName, subscriptionName, cb);
     },
-    function (subscription, apiResponse, cb) {
-      _subscription = subscription;
-      responses.push([subscription, apiResponse]);
-      console.log('created subscription');
-      console.log('list all topics...');
-      getAllTopics(cb);
+    function (cb) {
+      getAllTopicsExample(cb);
     },
-    function (topics, cb) {
-      responses.push([topics]);
-      console.log('got all topics');
-      console.log('list all subscriptions...');
-      getAllSubscriptions(cb);
+    function (cb) {
+      getAllSubscriptionsExample(cb);
     },
-    function (subscriptions, cb) {
-      responses.push([subscriptions]);
-      console.log('got all subscriptions');
-      console.log('publishing a message...');
-      publish(cb);
+    function (cb) {
+      publishExample(topicName, cb);
     },
-    function (messageIds, apiResponse, cb) {
-      responses.push([messageIds, apiResponse]);
-      console.log('published message');
-      console.log('pulling messages...');
-      pullMessages(cb);
+    function (cb) {
+      pullMessagesExample(topicName, subscriptionName, cb);
     },
-    function (messages, cb) {
-      responses.push([messages]);
-      console.log('got messages', messages.map(function (message) {
-        return message.data;
-      }));
-      console.log('deleting subscription...');
-      _subscription.delete(cb);
+    function (cb) {
+      deleteSubscriptionExample(subscriptionName, cb);
     },
-    function (apiResponse, cb) {
-      console.log('deleted subscription');
-      console.log('deleting topic...');
-      _topic.delete(cb);
+    function (cb) {
+      deleteTopicExample(topicName, cb);
     }
-  ], function (err) {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log('deleted topic');
-    }
-    if (typeof callback === 'function') {
-      callback(err, responses);
-    }
-  });
-}
+  ], cb || console.log);
+};
 
 if (module === require.main) {
-  runSample();
+  exports.main();
 }
