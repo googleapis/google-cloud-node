@@ -28,70 +28,103 @@ var logging = gcloud.logging();
 // [END setup]
 
 // [START listSinks]
-function listSinks(callback) {
+/**
+ * @param {Function} callback Callback function.
+ */
+function listSinksExample(callback) {
   // list all sinks in the authenticated project
-  logging.getSinks(callback);
+  logging.getSinks(function (err, sinks) {
+    if (err) {
+      return callback(err);
+    }
+
+    // Should have received all sinks
+    console.log('Found ' + sinks.length + ' sinks');
+    callback(null, sinks);
+  });
 }
 // [END listSinks]
 
 // [START createSink]
-function createSink(callback) {
-  // Get a reference to the Cloud Storage component
-  var gcs = gcloud.storage();
-
+/**
+ * @param {string} sinkName Name of the new sink.
+ * @param {Object} config Configuration options for the new sink.
+ * @param {Function} callback Callback function.
+ */
+function createSinkExample(sinkName, config, callback) {
   // create a new sink in the authenticated project
   //
   // This method only works if you are authenticated as yourself, e.g. using the
   // gcloud SDK.
-  logging.createSink('mySink', {
-    destination: gcs.bucket('logging-bucket')
-  }, callback);
+  logging.createSink(sinkName, config, function (err, sink, apiResponse) {
+    if (err) {
+      return callback(err);
+    }
+
+    // Should have received newly created sink
+    console.log('Created ' + sinkName, sink);
+    callback(null, sink, apiResponse);
+  });
 }
 // [END createSink]
 
 // [START updateSink]
-function updateSink(callback) {
-  // Get a reference to the Cloud Storage component
-  var gcs = gcloud.storage();
+/**
+ * @param {string} sinkName Name of the sink to update.
+ * @param {Object} config New configuration options for the sink.
+ * @param {Function} callback Callback function.
+ */
+function updateSinkExample(sinkName, config, callback) {
   // Get a reference to an existing sink
-  var sink = logging.sink('mySink');
+  var sink = logging.sink(sinkName);
 
   // update a sink
   //
   // This method only works if you are authenticated as yourself, e.g. using the
   // gcloud SDK.
-  sink.setMetadata({
-    // change destination to something else
-    destination: gcs.bucket('other-logging-bucket')
-  }, callback);
+  sink.setMetadata(config, function (err, apiResponse) {
+    if (err) {
+      return callback(err);
+    }
+
+    console.log('Updated ' + sinkName);
+    callback(null, apiResponse);
+  });
 }
 // [END updateSink]
 
 // [START deleteSink]
-function deleteSink(callback) {
+/**
+ * @param {string} sinkName Name of the sink to delete.
+ * @param {Function} callback Callback function.
+ */
+function deleteSinkExample(sinkName, callback) {
   // Get a reference to an existing sink
-  var sink = logging.sink('mySink');
+  var sink = logging.sink(sinkName);
 
   // delete a sink
   //
   // This method only works if you are authenticated as yourself, e.g. using the
   // gcloud SDK.
-  sink.delete(callback);
+  sink.delete(function (err, apiResponse) {
+    if (err) {
+      return callback(err);
+    }
+
+    console.log('Deleted ' + sinkName);
+    callback(null, apiResponse);
+  });
 }
 // [END deleteSink]
 
-exports.runExample = function (cb) {
-  listSinks(function (err, sinks, apiResponse) {
-    console.log(err, 'sinks:', sinks, 'apiResponse:', apiResponse);
-    if (typeof cb === 'function') {
-      cb(err, sinks);
-    }
-  });
+// Run the examples
+exports.main = function (cb) {
+  listSinksExample(cb || console.log);
 };
-exports.createSink = createSink;
-exports.updateSink = updateSink;
-exports.deleteSink = deleteSink;
+exports.createSinkExample = createSinkExample;
+exports.updateSinkExample = updateSinkExample;
+exports.deleteSinkExample = deleteSinkExample;
 
 if (module === require.main) {
-  exports.runExample();
+  exports.main();
 }

@@ -14,6 +14,8 @@
 /* jshint camelcase:false */
 'use strict';
 
+var async = require('async');
+
 // [START write]
 // [START setup]
 // You must set the GOOGLE_APPLICATION_CREDENTIALS and GCLOUD_PROJECT
@@ -29,9 +31,13 @@ var gcloud = require('gcloud')({
 var logging = gcloud.logging();
 // [END setup]
 
-function write(callback) {
+/**
+ * @param {string} logName Name of the log to write to.
+ * @param {Function} callback Callback function.
+ */
+function writeExample(logName, callback) {
   // Get a reference to an existing log
-  var log = logging.log('myLog');
+  var log = logging.log(logName);
 
   // Modify this resource type to match a resource in your project
   // See https://cloud.google.com/logging/docs/api/ref_v2beta1/rest \
@@ -61,50 +67,50 @@ function write(callback) {
   log.write([
     entry,
     secondEntry
-  ], callback);
+  ], function (err, apiResponse) {
+    if (err) {
+      return callback(err);
+    }
+
+    console.log('Wrote to ' + logName);
+    callback(null, apiResponse);
+  });
 }
 // [END write]
 
 // [START deleteLog]
-function deleteLog(callback) {
+/**
+ * @param {string} logName Name of the log to delete.
+ * @param {Function} callback Callback function.
+ */
+function deleteLogExample(logName, callback) {
   // Get a reference to an existing log
-  var log = logging.log('myLog');
+  var log = logging.log(logName);
 
   // Delete the log
-  log.delete(callback);
+  log.delete(function (err, apiResponse) {
+    if (err) {
+      return callback(err);
+    }
+
+    console.log('Deleted ' + logName);
+    callback(null, apiResponse);
+  });
 }
 // [END deleteLog]
 
-exports.runExample = function (cb) {
-  var result = [];
-  console.log('writing 2 log entries...');
-  write(function (err, apiResponse) {
-    console.log(err, 'apiResponse:', apiResponse);
-    if (err) {
-      return typeof cb === 'function' ? cb(err) : undefined;
+// Run the examples
+exports.main = function (cb) {
+  async.series([
+    function (cb) {
+      writeExample('myLog', cb);
+    },
+    function (cb) {
+      deleteLogExample('myLog', cb);
     }
-    result.push(apiResponse);
-    console.log('success!');
-    console.log('deleting the log entries...');
-    // If you remove this code, then you can find the two log entries that
-    // were written in the log view in the cloud console.
-    deleteLog(function (err, apiResponse) {
-      console.log(err, 'apiResponse:', apiResponse);
-      if (err && err.code === 404) {
-        err = undefined;
-        apiResponse = {};
-      }
-      if (!err) {
-        console.log('success!');
-      }
-      result.push(apiResponse);
-      if (typeof cb === 'function') {
-        cb(err, result);
-      }
-    });
-  });
+  ], cb || console.log);
 };
 
 if (module === require.main) {
-  exports.runExample();
+  exports.main();
 }

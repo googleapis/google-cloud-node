@@ -30,24 +30,33 @@ var gcloud = require('gcloud')({
 // Get a reference to the logging component
 var logging = gcloud.logging();
 
-function list(callback) {
-  // Retrieve the latest 3 log entries from the authenticated project.
-  logging.getEntries({
-    pageSize: 3
-  }, callback);
+/**
+ * @param {Object} [options] Configuration options for the request.
+ * @param {Function} callback Callback function.
+ */
+function listExample(options, callback) {
+  if (typeof options === 'function') {
+    callback = options;
+  }
+
+  // Retrieve the latest some log entries from the authenticated project.
+  logging.getEntries(options, function (err, entries, nextQuery, apiResponse) {
+    if (err) {
+      return callback(err);
+    }
+
+    // Should have received some log entries
+    console.log('Found ' + entries.length + ' entries');
+    callback(null, entries, nextQuery, apiResponse);
+  });
 }
 // [END list]
 
-exports.runExample = function (cb) {
-  console.log('retrieving latest 3 log entries...');
-  list(function (err, entries, apiResponse) {
-    console.log(err, 'entries:', entries, 'apiResponse:', apiResponse);
-    if (typeof cb === 'function') {
-      cb(err, entries, apiResponse);
-    }
-  });
+// Run the examples
+exports.main = function (options, cb) {
+  listExample(options || { pageSize: 1 }, cb || console.log);
 };
 
 if (module === require.main) {
-  exports.runExample();
+  exports.main();
 }
