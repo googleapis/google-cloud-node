@@ -55,7 +55,7 @@ describe('Compute', function() {
   });
 
   describe('addresses', function() {
-    var ADDRESS_NAME = generateName();
+    var ADDRESS_NAME = generateName('address');
     var address = region.address(ADDRESS_NAME);
 
     before(function(done) {
@@ -106,13 +106,13 @@ describe('Compute', function() {
   });
 
   describe('autoscalers', function() {
-    var AUTOSCALER_NAME = generateName();
+    var AUTOSCALER_NAME = generateName('autoscaler');
     var autoscaler = zone.autoscaler(AUTOSCALER_NAME);
 
     // Some of the services we support require an instance group to be created.
     // Util `instanceGroups` are officially supported by gcloud-node, we make
     // manual requests to create and delete them.
-    var INSTANCE_GROUP_NAME = generateName();
+    var INSTANCE_GROUP_NAME = generateName('instance-group');
 
     before(function(done) {
       async.series([
@@ -199,7 +199,7 @@ describe('Compute', function() {
   });
 
   describe('disks', function() {
-    var DISK_NAME = generateName();
+    var DISK_NAME = generateName('disk');
     var disk = zone.disk(DISK_NAME);
 
     before(function(done) {
@@ -253,20 +253,21 @@ describe('Compute', function() {
     });
 
     it('should take a snapshot', function(done) {
-      disk.snapshot(generateName()).create(function(err, snapshot, operation) {
-        assert.ifError(err);
+      disk.snapshot(generateName('snapshot'))
+        .create(function(err, snapshot, operation) {
+          assert.ifError(err);
 
-        operation
-          .on('error', done)
-          .on('complete', function() {
-            done();
-          });
-      });
+          operation
+            .on('error', done)
+            .on('complete', function() {
+              done();
+            });
+        });
     });
   });
 
   describe('firewalls', function() {
-    var FIREWALL_NAME = generateName();
+    var FIREWALL_NAME = generateName('firewall');
     var firewall = compute.firewall(FIREWALL_NAME);
 
     var CONFIG = {
@@ -337,7 +338,7 @@ describe('Compute', function() {
   });
 
   describe('networks', function() {
-    var NETWORK_NAME = generateName();
+    var NETWORK_NAME = generateName('network');
     var network = compute.network(NETWORK_NAME);
 
     var CONFIG = {
@@ -479,53 +480,51 @@ describe('Compute', function() {
     });
   });
 
-  describe('services', function() {
-    var service = compute.service(generateName());
+  describe('rules', function() {
+    var RULE_NAME = generateName('rule');
+    var rule = compute.rule(RULE_NAME);
 
-    var INSTANCE_GROUP_NAME = generateName();
-    var groupUrl;
+    var service = compute.service(generateName('service'));
 
-    var HEALTH_CHECK_NAME = generateName();
-    var healthCheckUrl;
+    var INSTANCE_GROUP_NAME = generateName('instance-group');
+    var HEALTH_CHECK_NAME = generateName('health-check');
+
+    // To create a rule, we need to also create a TargetHttpProxy and UrlMap.
+    // Until they are officially supported by gcloud-node, we make manual
+    // requests to create and delete them.
+    var TARGET_PROXY_NAME = generateName('target-proxy');
+    var URL_MAP_NAME = generateName('url-map');
 
     before(function(done) {
       async.series([
         function(callback) {
-          createInstanceGroup(INSTANCE_GROUP_NAME, function(err, metadata) {
-            if (err) {
-              callback(err);
-              return;
-            }
-
-            groupUrl = metadata.selfLink;
-
-            callback();
-          });
+          createService(
+            service.name,
+            INSTANCE_GROUP_NAME,
+            HEALTH_CHECK_NAME,
+            callback
+          );
         },
 
         function(callback) {
-          createHttpHealthCheck(HEALTH_CHECK_NAME, function(err, metadata) {
-            if (err) {
-              callback(err);
-              return;
-            }
-
-            healthCheckUrl = metadata.selfLink;
-
-            callback();
-          });
+          createUrlMap({
+            name: URL_MAP_NAME,
+            defaultService: 'global/backendServices/' + service.name
+          }, callback);
         },
 
         function(callback) {
-          service.create({
-            backends: [
-              {
-                group: groupUrl
-              }
-            ],
-            healthChecks: [
-              healthCheckUrl
-            ]
+          createTargetProxy({
+            name: TARGET_PROXY_NAME,
+            urlMap: 'global/urlMaps/' + URL_MAP_NAME
+          }, callback);
+        },
+
+        function(callback) {
+          rule.create({
+            target: 'global/targetHttpProxies/' + TARGET_PROXY_NAME,
+            portRange: '8080',
+            IPProtocol: 'TCP'
           }, execAfterOperationComplete(callback));
         }
       ], done);
@@ -534,17 +533,152 @@ describe('Compute', function() {
     after(function(done) {
       async.series([
         function(callback) {
-          service.delete(execAfterOperationComplete(callback));
+          rule.delete(execAfterOperationComplete(callback));
         },
 
         function(callback) {
-          deleteHttpHealthCheck(HEALTH_CHECK_NAME, callback);
+          deleteTargetProxy(TARGET_PROXY_NAME, callback);
         },
 
         function(callback) {
-          deleteInstanceGroup(INSTANCE_GROUP_NAME, callback);
+          deleteUrlMap(URL_MAP_NAME, callback);
+        },
+
+        function(callback) {
+          deleteService(
+            service.name,
+            INSTANCE_GROUP_NAME,
+            HEALTH_CHECK_NAME,
+            callback
+          );
         }
       ], done);
+    });
+
+    it('should get a list of rules', function(done) {
+      compute.getRules(function(err, rules) {
+        assert.ifError(err);
+        assert(rules.length > 0);
+        done();
+      });
+    });
+
+    it('should have created the right rule', function(done) {
+      var target = [
+        'https://www.googleapis.com/compute/v1/projects/' + compute.projectId,
+        '/global/targetHttpProxies/' + TARGET_PROXY_NAME
+      ].join('');
+
+      rule.getMetadata(function(err, metadata) {
+        assert.ifError(err);
+        assert.strictEqual(metadata.name, RULE_NAME);
+        assert.strictEqual(metadata.IPProtocol, 'TCP');
+        assert.strictEqual(metadata.portRange, '8080-8080');
+        assert.strictEqual(metadata.target, target);
+        done();
+      });
+    });
+
+    it('should set a new target', function(done) {
+      var target = [
+        'https://www.googleapis.com/compute/v1/projects/' + compute.projectId,
+        '/global/targetHttpProxies/' + TARGET_PROXY_NAME
+      ].join('');
+
+      rule.setTarget(target, execAfterOperationComplete(function(err) {
+        assert.ifError(err);
+
+        rule.getMetadata(function(err, metadata) {
+          assert.ifError(err);
+          assert.strictEqual(metadata.target, target);
+          done();
+        });
+      }));
+    });
+  });
+
+  describe('rules (regional)', function() {
+    var RULE_NAME = generateName('rule');
+    var rule = region.rule(RULE_NAME);
+
+    var TARGET_INSTANCE_NAME = generateName('target-instance');
+
+    var VM_NAME = generateName('vm');
+    var vm = zone.vm(VM_NAME);
+
+    before(function(done) {
+      async.series([
+        function(callback) {
+          vm.create({
+            os: 'ubuntu',
+            http: true
+          }, execAfterOperationComplete(callback));
+        },
+
+        function(callback) {
+          createTargetInstance(TARGET_INSTANCE_NAME, VM_NAME, callback);
+        },
+
+        function(callback) {
+          rule.create({
+            target: [
+              'zones/' + zone.name + '/targetInstances/' + TARGET_INSTANCE_NAME
+            ].join(''),
+            range: '8000-9000'
+          }, execAfterOperationComplete(callback));
+        }
+      ], done);
+    });
+
+    after(function(done) {
+      async.series([
+        function(callback) {
+          rule.delete(execAfterOperationComplete(callback));
+        },
+
+        function(callback) {
+          vm.delete(execAfterOperationComplete(callback));
+        }
+      ], done);
+    });
+
+    it('should get a list of rules', function(done) {
+      region.getRules(function(err, rules) {
+        assert.ifError(err);
+        assert(rules.length > 0);
+        done();
+      });
+    });
+
+    it('should have created the right rule', function(done) {
+      var target = [
+        'https://www.googleapis.com/compute/v1/projects/' + compute.projectId,
+        '/zones/' + zone.name + '/targetInstances/' + TARGET_INSTANCE_NAME
+      ].join('');
+
+      rule.getMetadata(function(err, metadata) {
+        assert.ifError(err);
+        assert.strictEqual(metadata.name, RULE_NAME);
+        assert.strictEqual(metadata.IPProtocol, 'TCP');
+        assert.strictEqual(metadata.portRange, '8000-9000');
+        assert.strictEqual(metadata.target, target);
+        done();
+      });
+    });
+  });
+
+  describe('services', function() {
+    var service = compute.service(generateName('service'));
+
+    var INSTANCE_GROUP_NAME = generateName('instance-group');
+    var HEALTH_CHECK_NAME = generateName('health-check');
+
+    before(function(done) {
+      createService(service.name, INSTANCE_GROUP_NAME, HEALTH_CHECK_NAME, done);
+    });
+
+    after(function(done) {
+      deleteService(service.name, INSTANCE_GROUP_NAME, HEALTH_CHECK_NAME, done);
     });
 
     it('should get a list of services', function(done) {
@@ -630,7 +764,7 @@ describe('Compute', function() {
   });
 
   describe('vms', function() {
-    var VM_NAME = generateName();
+    var VM_NAME = generateName('vm');
     var vm = zone.vm(VM_NAME);
 
     before(function(done) {
@@ -700,7 +834,7 @@ describe('Compute', function() {
     });
 
     it('should attach and detach a disk', function(done) {
-      var name = generateName();
+      var name = generateName('disk');
       var disk = zone.disk(name);
 
       async.series([
@@ -863,8 +997,8 @@ describe('Compute', function() {
     });
   });
 
-  function generateName() {
-    return TESTS_PREFIX + Date.now();
+  function generateName(customPrefix) {
+    return TESTS_PREFIX + customPrefix + '-' + Date.now();
   }
 
   function deleteAllTestObjects(callback) {
@@ -874,6 +1008,7 @@ describe('Compute', function() {
       'getDisks',
       'getFirewalls',
       'getNetworks',
+      'getRules',
       'getServices',
       'getSnapshots',
       'getVMs'
@@ -908,6 +1043,71 @@ describe('Compute', function() {
           callback();
         });
     };
+  }
+
+  function createService(name, instanceGroupName, healthCheckName, callback) {
+    var service = compute.service(name);
+    var groupUrl;
+    var healthCheckUrl;
+
+    async.series([
+      function(callback) {
+        createInstanceGroup(instanceGroupName, function(err, metadata) {
+          if (err) {
+            callback(err);
+            return;
+          }
+
+          groupUrl = metadata.selfLink;
+
+          callback();
+        });
+      },
+
+      function(callback) {
+        createHttpHealthCheck(healthCheckName, function(err, metadata) {
+          if (err) {
+            callback(err);
+            return;
+          }
+
+          healthCheckUrl = metadata.selfLink;
+
+          callback();
+        });
+      },
+
+      function(callback) {
+        service.create({
+          backends: [
+            {
+              group: groupUrl
+            }
+          ],
+          healthChecks: [
+            healthCheckUrl
+          ]
+        }, execAfterOperationComplete(callback));
+      }
+    ], callback);
+  }
+
+  function deleteService(name, instanceGroupName, healthCheckName, callback) {
+    var service = compute.service(name);
+
+    async.series([
+      function(callback) {
+        service.delete(execAfterOperationComplete(callback));
+      },
+
+      function(callback) {
+        deleteHttpHealthCheck(healthCheckName, callback);
+      },
+
+      function(callback) {
+        deleteInstanceGroup(instanceGroupName, callback);
+      }
+    ], callback);
   }
 
   function createInstanceGroup(name, callback) {
@@ -992,6 +1192,107 @@ describe('Compute', function() {
       }
 
       var operation = compute.operation(resp.name);
+      operation
+        .on('error', callback)
+        .on('complete', function() {
+          callback();
+        });
+    });
+  }
+
+  function createUrlMap(config, callback) {
+    compute.request({
+      method: 'POST',
+      uri: '/global/urlMaps',
+      json: config
+    }, function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      var operation = compute.operation(resp.name);
+      operation
+        .on('error', callback)
+        .on('complete', function() {
+          callback();
+        });
+    });
+  }
+
+  function deleteUrlMap(name, callback) {
+    compute.request({
+      method: 'DELETE',
+      uri: '/global/urlMaps/' + name
+    }, function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      var operation = compute.operation(resp.name);
+      operation
+        .on('error', callback)
+        .on('complete', function() {
+          callback();
+        });
+    });
+  }
+
+  function createTargetProxy(config, callback) {
+    compute.request({
+      method: 'POST',
+      uri: '/global/targetHttpProxies',
+      json: config
+    }, function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      var operation = compute.operation(resp.name);
+      operation
+        .on('error', callback)
+        .on('complete', function() {
+          callback();
+        });
+    });
+  }
+
+  function deleteTargetProxy(name, callback) {
+    compute.request({
+      method: 'DELETE',
+      uri: '/global/targetHttpProxies/' + name
+    }, function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      var operation = compute.operation(resp.name);
+      operation
+        .on('error', callback)
+        .on('complete', function() {
+          callback();
+        });
+    });
+  }
+
+  function createTargetInstance(name, instanceName, callback) {
+    zone.request({
+      method: 'POST',
+      uri: '/targetInstances',
+      json: {
+        name: name,
+        instance: 'zones/' + zone.name + '/instances/' + instanceName
+      }
+    }, function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      var operation = zone.operation(resp.name);
       operation
         .on('error', callback)
         .on('complete', function() {

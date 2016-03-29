@@ -111,7 +111,6 @@ describe('BigQuery/Job', function() {
         assert.deepEqual(requestInterceptor(reqOpts), expectedReqOpts);
       });
     });
-
   });
 
   describe('cancel', function() {

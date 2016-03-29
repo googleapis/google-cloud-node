@@ -48,6 +48,7 @@ var fakeStreamRouter = {
       'getNetworks',
       'getOperations',
       'getRegions',
+      'getRules',
       'getServices',
       'getSnapshots',
       'getVMs',
@@ -71,6 +72,14 @@ function FakeOperation() {
 function FakeRegion() {
   this.calledWith_ = slice.call(arguments);
   this.address = function() { return {}; };
+}
+
+function FakeRule() {
+  this.calledWith_ = slice.call(arguments);
+}
+
+function FakeServiceClass() {
+  this.calledWith_ = slice.call(arguments);
 }
 
 function FakeSnapshot() {
@@ -104,6 +113,8 @@ describe('Compute', function() {
     mockery.registerMock('../../lib/compute/network.js', FakeNetwork);
     mockery.registerMock('../../lib/compute/operation.js', FakeOperation);
     mockery.registerMock('../../lib/compute/region.js', FakeRegion);
+    mockery.registerMock('../../lib/compute/rule.js', FakeRule);
+    mockery.registerMock('../../lib/compute/service.js', FakeServiceClass);
     mockery.registerMock('../../lib/compute/snapshot.js', FakeSnapshot);
     mockery.registerMock('../../lib/compute/zone.js', FakeZone);
 
@@ -412,6 +423,137 @@ describe('Compute', function() {
         compute.createNetwork(NAME, {}, function(err, network_, op, resp) {
           assert.strictEqual(err, null);
           assert.strictEqual(network_, network);
+          assert.strictEqual(op, operation);
+          assert.strictEqual(op.metadata, apiResponse);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
+    });
+  });
+
+  describe('createRule', function() {
+    var NAME = 'new-rule';
+
+    it('should make the correct API request', function(done) {
+      var config = { a: 'b' };
+      var originalConfig = extend({}, config);
+      var expectedConfig = extend({}, config, { name: NAME });
+
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/global/forwardingRules');
+        assert.deepEqual(config, originalConfig);
+        assert.deepEqual(reqOpts.json, expectedConfig);
+        done();
+      };
+
+      compute.createRule(NAME, config, assert.ifError);
+    });
+
+    describe('config.ip', function() {
+      var CONFIG = {
+        ip: '0.0.0.0'
+      };
+
+      it('should accept an array of tags', function(done) {
+        compute.request = function(reqOpts) {
+          assert.deepEqual(reqOpts.json, {
+            name: NAME,
+            IPAddress: CONFIG.ip
+          });
+          done();
+        };
+
+        compute.createRule(NAME, CONFIG, assert.ifError);
+      });
+    });
+
+    describe('config.protocol', function() {
+      var CONFIG = {
+        protocol: 'TCP'
+      };
+
+      it('should accept an array of tags', function(done) {
+        compute.request = function(reqOpts) {
+          assert.deepEqual(reqOpts.json, {
+            name: NAME,
+            IPProtocol: CONFIG.protocol
+          });
+          done();
+        };
+
+        compute.createRule(NAME, CONFIG, assert.ifError);
+      });
+    });
+
+    describe('config.range', function() {
+      var CONFIG = {
+        range: '200-300'
+      };
+
+      it('should accept an array of tags', function(done) {
+        compute.request = function(reqOpts) {
+          assert.deepEqual(reqOpts.json, {
+            name: NAME,
+            portRange: CONFIG.range
+          });
+          done();
+        };
+
+        compute.createRule(NAME, CONFIG, assert.ifError);
+      });
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = { a: 'b', c: 'd' };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should exec the callback with error & API response', function(done) {
+        compute.createRule(NAME, {}, function(err, rule, op, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(rule, null);
+          assert.strictEqual(op, null);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = {
+        name: 'op-name'
+      };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should exec cb with Rule, Operation & apiResp', function(done) {
+        var rule = {};
+        var operation = {};
+
+        compute.rule = function(name) {
+          assert.strictEqual(name, NAME);
+          return rule;
+        };
+
+        compute.operation = function(name) {
+          assert.strictEqual(name, apiResponse.name);
+          return operation;
+        };
+
+        compute.createRule(NAME, {}, function(err, rule_, op, resp) {
+          assert.strictEqual(err, null);
+          assert.strictEqual(rule_, rule);
           assert.strictEqual(op, operation);
           assert.strictEqual(op.metadata, apiResponse);
           assert.strictEqual(resp, apiResponse);
@@ -1036,104 +1178,6 @@ describe('Compute', function() {
     });
   });
 
-  describe('getServices', function() {
-    it('should work with only a callback', function(done) {
-      compute.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
-        done();
-      };
-
-      compute.getServices(assert.ifError);
-    });
-
-    it('should make the correct API request', function(done) {
-      var options = {};
-
-      compute.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.uri, '/global/backendServices');
-        assert.strictEqual(reqOpts.qs, options);
-        done();
-      };
-
-      compute.getServices(options, assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        compute.request = function(reqOpts, callback) {
-          callback(error, apiResponse);
-        };
-      });
-
-      it('should execute callback with error & API response', function(done) {
-        compute.getServices({}, function(err, services, nextQuery, resp) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(services, null);
-          assert.strictEqual(nextQuery, null);
-          assert.strictEqual(resp, apiResponse);
-
-          done();
-        });
-      });
-    });
-
-    describe('success', function() {
-      var service = {
-        name: 'service-1'
-      };
-      var apiResponse = {
-        items: [service]
-      };
-
-      beforeEach(function() {
-        compute.request = function(reqOpts, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should create Service objects from the response', function(done) {
-        compute.service = function(name) {
-          assert.strictEqual(name, service.name);
-          setImmediate(done);
-          return service;
-        };
-
-        compute.getServices({}, assert.ifError);
-      });
-
-      it('should build a nextQuery if necessary', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: 'next-page-token'
-        });
-
-        var query = {
-          a: 'b',
-          c: 'd'
-        };
-        var originalQuery = extend({}, query);
-
-        compute.request = function(reqOpts, callback) {
-          callback(null, apiResponseWithNextPageToken);
-        };
-
-        compute.getServices(query, function(err, services, nextQuery) {
-          assert.ifError(err);
-
-          assert.deepEqual(query, originalQuery);
-
-          assert.deepEqual(nextQuery, extend({}, query, {
-            pageToken: apiResponseWithNextPageToken.nextPageToken
-          }));
-
-          done();
-        });
-      });
-    });
-  });
-
   describe('getOperations', function() {
     it('should work with only a callback', function(done) {
       compute.request = function(reqOpts) {
@@ -1306,6 +1350,205 @@ describe('Compute', function() {
         };
 
         compute.getRegions(query, function(err, regions, nextQuery) {
+          assert.ifError(err);
+
+          assert.deepEqual(query, originalQuery);
+
+          assert.deepEqual(nextQuery, extend({}, query, {
+            pageToken: apiResponseWithNextPageToken.nextPageToken
+          }));
+
+          done();
+        });
+      });
+    });
+  });
+
+  describe('getRules', function() {
+    it('should work with only a callback', function(done) {
+      compute.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
+
+      compute.getRules(assert.ifError);
+    });
+
+    it('should make the correct API request', function(done) {
+      var options = {};
+
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/global/forwardingRules');
+        assert.strictEqual(reqOpts.qs, options);
+        done();
+      };
+
+      compute.getRules(options, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = { a: 'b', c: 'd' };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        compute.getRules({}, function(err, rules, nextQuery, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(rules, null);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(resp, apiResponse);
+
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var rule = {
+        name: 'rule-1'
+      };
+      var apiResponse = {
+        items: [rule]
+      };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should create Rule objects from the response', function(done) {
+        compute.rule = function(name) {
+          assert.strictEqual(name, rule.name);
+          return rule;
+        };
+
+        compute.getRules({}, function(err, rules) {
+          assert.ifError(err);
+          assert.deepEqual(rules, [rule]);
+          done();
+        });
+      });
+
+      it('should build a nextQuery if necessary', function(done) {
+        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+          nextPageToken: 'next-page-token'
+        });
+
+        var query = {
+          a: 'b',
+          c: 'd'
+        };
+        var originalQuery = extend({}, query);
+
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponseWithNextPageToken);
+        };
+
+        compute.getRules(query, function(err, rules, nextQuery) {
+          assert.ifError(err);
+
+          assert.deepEqual(query, originalQuery);
+
+          assert.deepEqual(nextQuery, extend({}, query, {
+            pageToken: apiResponseWithNextPageToken.nextPageToken
+          }));
+
+          done();
+        });
+      });
+    });
+  });
+
+  describe('getServices', function() {
+    it('should work with only a callback', function(done) {
+      compute.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
+
+      compute.getServices(assert.ifError);
+    });
+
+    it('should make the correct API request', function(done) {
+      var options = {};
+
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/global/backendServices');
+        assert.strictEqual(reqOpts.qs, options);
+        done();
+      };
+
+      compute.getServices(options, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = { a: 'b', c: 'd' };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        compute.getServices({}, function(err, services, nextQuery, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(services, null);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(resp, apiResponse);
+
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var service = {
+        name: 'service-1'
+      };
+      var apiResponse = {
+        items: [service]
+      };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should create Service objects from the response', function(done) {
+        compute.service = function(name) {
+          assert.strictEqual(name, service.name);
+          setImmediate(done);
+          return service;
+        };
+
+        compute.getServices({}, assert.ifError);
+      });
+
+      it('should build a nextQuery if necessary', function(done) {
+        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+          nextPageToken: 'next-page-token'
+        });
+
+        var query = {
+          a: 'b',
+          c: 'd'
+        };
+        var originalQuery = extend({}, query);
+
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponseWithNextPageToken);
+        };
+
+        compute.getServices(query, function(err, services, nextQuery) {
           assert.ifError(err);
 
           assert.deepEqual(query, originalQuery);
@@ -1643,6 +1886,28 @@ describe('Compute', function() {
       assert(region instanceof FakeRegion);
       assert.strictEqual(region.calledWith_[0], compute);
       assert.strictEqual(region.calledWith_[1], NAME);
+    });
+  });
+
+  describe('rule', function() {
+    var NAME = 'rule-name';
+
+    it('should return a Rule object', function() {
+      var rule = compute.rule(NAME);
+      assert(rule instanceof FakeRule);
+      assert.strictEqual(rule.calledWith_[0], compute);
+      assert.strictEqual(rule.calledWith_[1], NAME);
+    });
+  });
+
+  describe('service', function() {
+    var NAME = 'service-name';
+
+    it('should return a Service object', function() {
+      var service = compute.service(NAME);
+      assert(service instanceof FakeServiceClass);
+      assert.strictEqual(service.calledWith_[0], compute);
+      assert.strictEqual(service.calledWith_[1], NAME);
     });
   });
 
