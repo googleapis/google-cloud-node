@@ -36,6 +36,7 @@ var FakeBigQuery = createFakeApi();
 var FakeCompute = createFakeApi();
 var FakeDatastore = createFakeApi();
 var FakeDNS = createFakeApi();
+var FakeIAM = createFakeApi();
 var FakePrediction = createFakeApi();
 var FakePubSub = createFakeApi();
 var FakeResource = createFakeApi();
@@ -51,6 +52,7 @@ describe('gcloud', function() {
     mockery.registerMock('../lib/compute', FakeCompute);
     mockery.registerMock('../lib/datastore', FakeDatastore);
     mockery.registerMock('../lib/dns', FakeDNS);
+    mockery.registerMock('../lib/iam', FakeIAM);
     mockery.registerMock('../lib/prediction', FakePrediction);
     mockery.registerMock('../lib/pubsub', FakePubSub);
     mockery.registerMock('../lib/resource', FakeResource);
@@ -87,6 +89,10 @@ describe('gcloud', function() {
 
   it('should export static dns', function() {
     assert.strictEqual(gcloud.dns, FakeDNS);
+  });
+
+  it('should export static iam', function() {
+    assert.strictEqual(gcloud.iam, FakeIAM);
   });
 
   it('should export static prediction', function() {
@@ -177,6 +183,15 @@ describe('gcloud', function() {
 
         assert(dns instanceof FakeDNS);
         assert.strictEqual(dns.calledWith_[0], options);
+      });
+    });
+
+    describe('iam', function() {
+      it('should create a new IAM', function() {
+        var iam = localGcloud.iam(options);
+
+        assert(iam instanceof FakeIAM);
+        assert.strictEqual(iam.calledWith_[0], options);
       });
     });
 

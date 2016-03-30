@@ -110,6 +110,9 @@
       "type": "datastore/transaction"
     }]
   }, {
+    "title": "IAM",
+    "type": "iam"
+  }, {
     "title": "Logging",
     "type": "logging",
     "nav": [{

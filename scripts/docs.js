@@ -31,7 +31,6 @@ var IGNORE = [
   './lib/datastore/entity.js',
   './lib/datastore/pb.js',
   './lib/datastore/request.js',
-  './lib/pubsub/iam.js',
   './lib/storage/acl.js'
 ];
 
@@ -268,7 +267,13 @@ function getMixinMethods(comments) {
   }).map(function(block) {
     var mixin = getTagsByType(block, 'mixes')[0];
     var mixinFile = path.join('./lib', mixin.string.replace('module:', '') + '.js');
-    var mixinContents = fs.readFileSync(mixinFile, 'utf8', true);
+    var mixinContents;
+    try {
+      mixinContents = fs.readFileSync(mixinFile, 'utf8', true);
+    } catch (e) {
+      mixinFile = mixinFile.replace('.js', '/index.js');
+      mixinContents = fs.readFileSync(mixinFile, 'utf8', true);
+    }
     var docs = parseFile(mixinFile, mixinContents);
     var methods = docs.methods.filter(function(method) {
       return method.type === 'instance';

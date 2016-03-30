@@ -52,7 +52,7 @@ describe('Topic', function() {
       '../../lib/common/grpc-service-object.js',
       FakeGrpcServiceObject
     );
-    mockery.registerMock('../../lib/pubsub/iam.js', FakeIAM);
+    mockery.registerMock('../../lib/iam/index.js', FakeIAM);
 
     mockery.enable({
       useCleanCache: true,
@@ -113,8 +113,8 @@ describe('Topic', function() {
       });
     });
 
-    it('should create an iam object', function() {
-      assert.deepEqual(topic.iam.calledWith_, [PUBSUB, TOPIC_NAME]);
+    it('should return an iam object', function() {
+      assert.deepEqual(topic.iam.calledWith_[0], topic);
     });
 
     it('should format name', function(done) {
