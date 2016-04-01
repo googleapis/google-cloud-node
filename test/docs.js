@@ -40,26 +40,14 @@ function runCodeInSandbox(code, sandbox) {
 
 describe('documentation', function() {
   var MITM;
-  var FILES;
 
-  before(function(done) {
+  before(function() {
     // Set a global to indicate to any interested function inside of gcloud that
     // this is a sandbox environment.
     global.GCLOUD_SANDBOX_ENV = true;
 
     // Turn off the network so that API calls aren't actually made.
     MITM = mitm();
-
-    var jsonGlob = 'docs/json/master/**/*.json';
-    var ignore = [
-      'docs/json/master/types.json'
-    ];
-
-    glob(jsonGlob, { ignore: ignore }, function(err, files) {
-      assert.ifError(err);
-      FILES = files;
-      done();
-    });
   });
 
   after(function() {
@@ -69,53 +57,59 @@ describe('documentation', function() {
     MITM.disable();
   });
 
-  it('should run docs examples without errors', function() {
-    this.timeout(5000);
+  var jsonGlob = 'docs/json/master/**/*.json';
+  var ignore = [
+    'docs/json/master/types.json'
+  ];
 
-    FILES.forEach(function(filename) {
-      var fileContents = fs.readFileSync(filename, {
-        encoding: 'utf8'
-      });
-      var fileDocBlocks;
+  var FILES = glob.sync(jsonGlob, { ignore: ignore });
 
-      try {
-        fileDocBlocks = JSON.parse(fileContents);
-      } catch(e) {
-        throw new Error([
-          'Failed to parse one of the doc files (' + e.message + ')',
-          'Filename: ' + filename,
-          'File contents: "' + fileContents + '"'
-        ].join('\n'));
-      }
+  FILES.forEach(function(filename) {
+    var fileContents = fs.readFileSync(filename, {
+      encoding: 'utf8'
+    });
+    var fileDocBlocks;
 
-      var mockConsole = Object.keys(console).reduce(function(console, method) {
-        console[method] = util.noop;
-        return console;
-      }, {});
+    try {
+      fileDocBlocks = JSON.parse(fileContents);
+    } catch(e) {
+      throw new Error([
+        'Failed to parse one of the doc files (' + e.message + ')',
+        'Filename: ' + filename,
+        'File contents: "' + fileContents + '"'
+      ].join('\n'));
+    }
 
-      var sandbox = {
-        gcloud: gcloud,
-        require: require,
-        process: process,
-        console: mockConsole,
-        Buffer: Buffer,
-        Date: Date,
-        Array: Array,
-        global: global
-      };
+    var mockConsole = Object.keys(console).reduce(function(console, method) {
+      console[method] = util.noop;
+      return console;
+    }, {});
 
-      fileDocBlocks.methods.forEach(function(method) {
-        var examples = method.examples.map(function(example) {
-          return example.code;
-        });
+    var sandbox = {
+      gcloud: gcloud,
+      require: require,
+      process: process,
+      console: mockConsole,
+      Buffer: Buffer,
+      Date: Date,
+      Array: Array,
+      global: global
+    };
 
-        var code = examples
-          .join('\n')
-          .replace(/require\(\'gcloud\'\)/g, 'require(\'..\/\')')
-          .replace(/require\(\'gcloud/g, 'require(\'..');
+    var examples = fileDocBlocks.methods.map(function(method) {
+      return method.examples.map(function(example) {
+        return example.code;
+      }).join('\n');
+    });
 
-        assert.doesNotThrow(runCodeInSandbox.bind(null, code, sandbox));
-      });
+    var code = examples
+      .join('\n')
+      .replace(/require\(\'gcloud\'\)/g, 'require(\'..\/\')')
+      .replace(/require\(\'gcloud/g, 'require(\'..');
+
+    it('should run tests for ' + filename + ' without errors', function() {
+      this.timeout(5000);
+      assert.doesNotThrow(runCodeInSandbox.bind(null, code, sandbox));
     });
   });
 });
