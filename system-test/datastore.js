@@ -246,7 +246,7 @@ describe('Datastore', function() {
     });
 
     it('should save keys as a part of entity and query by key', function(done) {
-      var personKey = datastore.key(['Person', 'name']);
+      var personKey = datastore.key(['People', 'US', 'Person', 'name']);
 
       datastore.save({
         key: personKey,
@@ -258,6 +258,7 @@ describe('Datastore', function() {
         assert.ifError(err);
 
         var query = datastore.createQuery('Person')
+          .hasAncestor(datastore.key(['People', 'US']))
           .filter('linkedTo', personKey);
 
         datastore.runQuery(query, function(err, results) {
