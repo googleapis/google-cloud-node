@@ -772,7 +772,7 @@ describe('BigQuery/Table', function() {
   });
 
   describe('import', function() {
-    var FILEPATH = require.resolve('../testdata/response_get.json');
+    var FILEPATH = require.resolve('../testdata/testfile.json');
     var FILE = new FakeFile({
       name: 'bucket-name',
       makeReq_: util.noop

@@ -100,9 +100,6 @@
     "title": "Datastore",
     "type": "datastore",
     "nav": [{
-      "title": "Dataset",
-      "type": "datastore/dataset"
-    }, {
       "title": "Query",
       "type": "datastore/query"
     }, {

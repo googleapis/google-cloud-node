@@ -360,11 +360,10 @@ describe('pubsub', function() {
       topic.iam.getPolicy(function(err, policy) {
         assert.ifError(err);
 
-        assert.deepEqual(policy, {
-          bindings: [],
-          etag: 'ACAB',
-          version: 0
-        });
+        assert.deepEqual(policy.bindings, []);
+        assert.strictEqual(policy.etag.toString(), '\u0000 \u0001');
+        assert.strictEqual(policy.version, 0);
+
         done();
       });
     });

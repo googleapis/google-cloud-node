@@ -16,20 +16,52 @@
 
 'use strict';
 
-var env = require('./env.js');
-
 var assert = require('assert');
 var async = require('async');
-var datastore = require('../lib/datastore');
-var ds = datastore.dataset(env);
+
+var env = require('./env.js');
+var Datastore = require('../lib/datastore/index.js');
 var entity = require('../lib/datastore/entity.js');
 
-describe('datastore', function() {
+describe('Datastore', function() {
+  var testKinds = [];
+  var datastore = new Datastore(env);
+
+  // Override the Key method so we can track what keys are created during the
+  // tests. They are then deleted in the `after` hook.
+  var key = datastore.key;
+  datastore.key = function() {
+    var keyObject = key.apply(this, arguments);
+    testKinds.push(keyObject.kind);
+    return keyObject;
+  };
+
+  after(function(done) {
+    function deleteEntities(kind, callback) {
+      var query = datastore.createQuery(kind);
+
+      datastore.runQuery(query, function(err, entities) {
+        if (err) {
+          callback(err);
+          return;
+        }
+
+        var keys = entities.map(function(entity) {
+          return entity.key;
+        });
+
+        datastore.delete(keys, callback);
+      });
+    }
+
+    async.each(testKinds, deleteEntities, done);
+  });
+
   it('should allocate IDs', function(done) {
-    ds.allocateIds(ds.key('Kind'), 10, function(err, keys) {
+    datastore.allocateIds(datastore.key('Kind'), 10, function(err, keys) {
       assert.ifError(err);
-      assert.equal(keys.length, 10);
-      assert.equal(entity.isKeyComplete(keys[0]), true);
+      assert.strictEqual(keys.length, 10);
+      assert.strictEqual(entity.isKeyComplete(keys[0]), true);
       done();
     });
   });
@@ -42,109 +74,119 @@ describe('datastore', function() {
       author: 'Silvano',
       isDraft: false,
       wordCount: 400,
-      rating: 5.0
+      rating: 5.0,
+      likes: null
     };
 
     it('should save/get/delete with a key name', function(done) {
-      var postKey = ds.key(['Post', 'post1']);
-      ds.save({ key: postKey, data: post }, function(err) {
+      var postKey = datastore.key(['Post', 'post1']);
+
+      datastore.save({ key: postKey, data: post }, function(err) {
         assert.ifError(err);
 
-        ds.get(postKey, function(err, entity) {
+        datastore.get(postKey, function(err, entity) {
           assert.ifError(err);
 
           assert.deepEqual(entity.data, post);
 
-          ds.delete(postKey, done);
+          datastore.delete(postKey, done);
         });
       });
     });
 
     it('should save/get/delete with a numeric key id', function(done) {
-      var postKey = ds.key(['Post', 123456789]);
+      var postKey = datastore.key(['Post', 123456789]);
 
-      ds.save({ key: postKey, data: post }, function(err) {
+      datastore.save({ key: postKey, data: post }, function(err) {
         assert.ifError(err);
 
-        ds.get(postKey, function(err, entity) {
+        datastore.get(postKey, function(err, entity) {
           assert.ifError(err);
 
           assert.deepEqual(entity.data, post);
 
-          ds.delete(postKey, done);
+          datastore.delete(postKey, done);
         });
       });
     });
 
     it('should save/get/delete a buffer', function(done) {
-      var postKey = ds.key('Post');
+      var postKey = datastore.key(['Post']);
       var data = {
         buf: new Buffer('010100000000000000000059400000000000006940', 'hex')
       };
 
-      ds.save({ key: postKey, data: data }, function(err) {
+      datastore.save({ key: postKey, data: data }, function(err) {
         assert.ifError(err);
 
         var assignedId = postKey.id;
         assert(assignedId);
 
-        ds.get(postKey, function(err, entity) {
+        datastore.get(postKey, function(err, entity) {
           assert.ifError(err);
 
           assert.deepEqual(entity.data, data);
 
-          ds.delete(ds.key(['Post', assignedId]), done);
+          datastore.delete(datastore.key(['Post', assignedId]), done);
         });
       });
     });
 
     it('should save/get/delete with a generated key id', function(done) {
-      var postKey = ds.key('Post');
+      var postKey = datastore.key('Post');
 
-      ds.save({ key: postKey, data: post }, function(err) {
+      datastore.save({ key: postKey, data: post }, function(err) {
         assert.ifError(err);
 
         // The key's path should now be complete.
         assert(postKey.id);
 
-        ds.get(postKey, function(err, entity) {
+        datastore.get(postKey, function(err, entity) {
           assert.ifError(err);
 
           assert.deepEqual(entity.data, post);
 
-          ds.delete(postKey, done);
+          datastore.delete(postKey, done);
         });
       });
     });
 
     it('should fail explicitly set second insert on save', function(done) {
-      var postKey = ds.key('Post');
+      var postKey = datastore.key('Post');
 
-      ds.save({ key: postKey, data: post }, function(err) {
+      datastore.save({ key: postKey, data: post }, function(err) {
         assert.ifError(err);
 
         // The key's path should now be complete.
         assert(postKey.id);
 
-        ds.save({ key: postKey, method: 'insert', data: post }, function(err) {
-          assert.notEqual(err, null); // should fail insert
+        datastore.save({
+          key: postKey,
+          method: 'insert',
+          data: post
+        }, function(err) {
+          assert.notStrictEqual(err, null); // should fail insert
 
-          ds.get(postKey, function(err, entity) {
+          datastore.get(postKey, function(err, entity) {
             assert.ifError(err);
 
             assert.deepEqual(entity.data, post);
 
-            ds.delete(postKey, done);
+            datastore.delete(postKey, done);
           });
         });
       });
     });
 
     it('should fail explicitly set first update on save', function(done) {
-      var postKey = ds.key('Post');
+      var postKey = datastore.key('Post');
 
-      ds.save({ key: postKey, method: 'update', data: post }, function(err) {
-        assert.notEqual(err, null);
+      datastore.save({
+        key: postKey,
+        method: 'update',
+        data: post
+      }, function(err) {
+        assert.notStrictEqual(err, null);
         done();
       });
     });
@@ -159,30 +201,30 @@ describe('datastore', function() {
         wordCount: 450,
         rating: 4.5,
       };
-      var key1 = ds.key('Post');
-      var key2 = ds.key('Post');
 
-      ds.save([
+      var key1 = datastore.key('Post');
+      var key2 = datastore.key('Post');
+
+      datastore.save([
         { key: key1, data: post },
         { key: key2, data: post2 }
       ], function(err) {
         assert.ifError(err);
 
-        ds.get([key1, key2], function(err, entities) {
+        datastore.get([key1, key2], function(err, entities) {
           assert.ifError(err);
+          assert.strictEqual(entities.length, 2);
 
-          assert.equal(entities.length, 2);
-
-          ds.delete([key1, key2], done);
+          datastore.delete([key1, key2], done);
         });
       });
     });
 
     it('should get multiple entities in a stream', function(done) {
-      var key1 = ds.key('Post');
-      var key2 = ds.key('Post');
+      var key1 = datastore.key('Post');
+      var key2 = datastore.key('Post');
 
-      ds.save([
+      datastore.save([
         { key: key1, data: post },
         { key: key2, data: post }
       ], function(err) {
@@ -190,7 +232,7 @@ describe('datastore', function() {
 
         var numEntitiesEmitted = 0;
 
-        ds.get([key1, key2])
+        datastore.get([key1, key2])
           .on('error', done)
           .on('data', function() {
             numEntitiesEmitted++;
@@ -198,123 +240,207 @@ describe('datastore', function() {
           .on('end', function() {
             assert.strictEqual(numEntitiesEmitted, 2);
 
-            ds.delete([key1, key2], done);
+            datastore.delete([key1, key2], done);
           });
       });
     });
-  });
 
-  it('should save keys as a part of entity and query by key', function(done) {
-    var personKey = ds.key(['Person', 'name']);
-    ds.save({
-      key: personKey,
-      data: {
-        fullName: 'Full name',
-        linkedTo: personKey // himself
-      }
-    }, function(err) {
-      assert.ifError(err);
-      var q = ds.createQuery('Person')
-          .filter('linkedTo', '=', personKey);
-      ds.runQuery(q, function(err, results) {
+    it('should save keys as a part of entity and query by key', function(done) {
+      var personKey = datastore.key(['Person', 'name']);
+
+      datastore.save({
+        key: personKey,
+        data: {
+          fullName: 'Full name',
+          linkedTo: personKey // himself
+        }
+      }, function(err) {
         assert.ifError(err);
-        assert.strictEqual(results[0].data.fullName, 'Full name');
-        assert.deepEqual(results[0].data.linkedTo, personKey);
-        ds.delete(personKey, done);
+
+        var query = datastore.createQuery('Person')
+          .filter('linkedTo', personKey);
+
+        datastore.runQuery(query, function(err, results) {
+          assert.ifError(err);
+
+          assert.strictEqual(results[0].data.fullName, 'Full name');
+          assert.deepEqual(results[0].data.linkedTo, personKey);
+
+          datastore.delete(personKey, done);
+        });
+      });
+    });
+
+    describe('entity types', function() {
+      it('should save and decode an int', function(done) {
+        var integerValue = 2015;
+        var integerType = Datastore.int(integerValue);
+
+        var key = datastore.key('Person');
+
+        datastore.save({
+          key: key,
+          data: {
+            year: integerType
+          }
+        }, function(err) {
+          assert.ifError(err);
+
+          datastore.get(key, function(err, entity) {
+            assert.ifError(err);
+            assert.strictEqual(entity.data.year, integerValue);
+            done();
+          });
+        });
+      });
+
+      it('should save and decode a double', function(done) {
+        var doubleValue = 99.99;
+        var doubleType = Datastore.double(doubleValue);
+
+        var key = datastore.key('Person');
+
+        datastore.save({
+          key: key,
+          data: {
+            nines: doubleType
+          }
+        }, function(err) {
+          assert.ifError(err);
+
+          datastore.get(key, function(err, entity) {
+            assert.ifError(err);
+            assert.strictEqual(entity.data.nines, doubleValue);
+            done();
+          });
+        });
+      });
+
+      it('should save and decode a geo point', function(done) {
+        var geoPointValue = {
+          latitude: 40.6894,
+          longitude: -74.0447
+        };
+        var geoPointType = Datastore.geoPoint(geoPointValue);
+
+        var key = datastore.key('Person');
+
+        datastore.save({
+          key: key,
+          data: {
+            location: geoPointType
+          }
+        }, function(err) {
+          assert.ifError(err);
+
+          datastore.get(key, function(err, entity) {
+            assert.ifError(err);
+            assert.deepEqual(entity.data.location, geoPointValue);
+            done();
+          });
+        });
       });
     });
   });
 
   describe('querying the datastore', function() {
-    var ancestor = ds.key(['Book', 'GoT']);
+    var ancestor = datastore.key(['Book', 'GoT']);
 
     var keys = [
-      ds.key(['Book', 'GoT', 'Character', 'Rickard']),
-      ds.key(['Book', 'GoT', 'Character', 'Rickard', 'Character', 'Eddard']),
-      ds.key(['Book', 'GoT', 'Character', 'Catelyn']),
-      ds.key(['Book', 'GoT', 'Character', 'Rickard', 'Character', 'Eddard',
-          'Character', 'Arya']),
-      ds.key(['Book', 'GoT', 'Character', 'Rickard', 'Character', 'Eddard',
-          'Character', 'Sansa']),
-      ds.key(['Book', 'GoT', 'Character', 'Rickard', 'Character', 'Eddard',
-          'Character', 'Robb']),
-      ds.key(['Book', 'GoT', 'Character', 'Rickard', 'Character', 'Eddard',
-          'Character', 'Bran']),
-      ds.key(['Book', 'GoT', 'Character', 'Rickard', 'Character', 'Eddard',
-          'Character', 'Jon Snow'])
+      // Paths:
+      ['Rickard'],
+      ['Rickard', 'Character', 'Eddard'],
+      ['Catelyn'],
+      ['Rickard', 'Character', 'Eddard', 'Character', 'Arya'],
+      ['Rickard', 'Character', 'Eddard', 'Character', 'Sansa'],
+      ['Rickard', 'Character', 'Eddard', 'Character', 'Robb'],
+      ['Rickard', 'Character', 'Eddard', 'Character', 'Bran'],
+      ['Rickard', 'Character', 'Eddard', 'Character', 'Jon Snow']
+    ].map(function(path) {
+      return datastore.key(['Book', 'GoT', 'Character'].concat(path));
+    });
+
+    var characters = [
+      {
+        name: 'Rickard',
+        family: 'Stark',
+        appearances: 9,
+        alive: false
+      },
+      {
+        name: 'Eddard',
+        family: 'Stark',
+        appearances: 9,
+        alive: false
+      },
+      {
+        name: 'Catelyn',
+        family: ['Stark', 'Tully'],
+        appearances: 26,
+        alive: false
+      },
+      {
+        name: 'Arya',
+        family: 'Stark',
+        appearances: 33,
+        alive: true
+      },
+      {
+        name: 'Sansa',
+        family: 'Stark',
+        appearances: 31,
+        alive: true
+      },
+      {
+        name: 'Robb',
+        family: 'Stark',
+        appearances: 22,
+        alive: false
+      },
+      {
+        name: 'Bran',
+        family: 'Stark',
+        appearances: 25,
+        alive: true
+      },
+      {
+        name: 'Jon Snow',
+        family: 'Stark',
+        appearances: 32,
+        alive: true
+      }
     ];
 
-    var characters = [{
-      name: 'Rickard',
-      family: 'Stark',
-      appearances: 0,
-      alive: false
-    }, {
-      name: 'Eddard',
-      family: 'Stark',
-      appearances: 9,
-      alive: false
-    }, {
-      name: 'Catelyn',
-      family: ['Stark', 'Tully'],
-      appearances: 26,
-      alive: false
-    }, {
-      name: 'Arya',
-      family: 'Stark',
-      appearances: 33,
-      alive: true
-    }, {
-      name: 'Sansa',
-      family: 'Stark',
-      appearances: 31,
-      alive: true
-    }, {
-      name: 'Robb',
-      family: 'Stark',
-      appearances: 22,
-      alive: false
-    }, {
-      name: 'Bran',
-      family: 'Stark',
-      appearances: 25,
-      alive: true
-    }, {
-      name: 'Jon Snow',
-      family: 'Stark',
-      appearances: 32,
-      alive: true
-    }];
-
     before(function(done) {
-      ds.save(keys.map(function(key, index) {
+      var keysToSave = keys.map(function(key, index) {
         return {
           key: key,
           data: characters[index]
         };
-      }), function(err) {
-        assert.ifError(err);
-        done();
       });
+
+      datastore.save(keysToSave, done);
+    });
+
+    after(function(done) {
+      datastore.delete(keys, done);
     });
 
     it('should limit queries', function(done) {
-      var q = ds.createQuery('Character').hasAncestor(ancestor).limit(5)
-          .autoPaginate(false);
+      var firstQ = datastore.createQuery('Character')
+        .hasAncestor(ancestor)
+        .limit(5)
+        .autoPaginate(false);
 
-      ds.runQuery(q, function(err, firstEntities, secondQuery) {
+      datastore.runQuery(firstQ, function(err, firstEntities, secondQ) {
         assert.ifError(err);
-        assert.equal(firstEntities.length, 5);
+        assert.strictEqual(firstEntities.length, 5);
 
-        ds.runQuery(secondQuery, function(err, secondEntities, thirdQuery) {
+        datastore.runQuery(secondQ, function(err, secondEntities, thirdQ) {
           assert.ifError(err);
-          assert.equal(secondEntities.length, 3);
-
-          ds.runQuery(thirdQuery, function(err, thirdEntities) {
-            assert.ifError(err);
-            assert.equal(thirdEntities.length, 0);
-            done();
-          });
+          assert.strictEqual(secondEntities.length, 3);
+          assert.strictEqual(thirdQ, null);
+          done();
         });
       });
     });
@@ -322,176 +448,192 @@ describe('datastore', function() {
     it('should not go over a limit', function(done) {
       var limit = 3;
 
-      var q = ds.createQuery('Character')
-        .hasAncestor(ancestor)
-        .limit(limit);
+      var q = datastore.createQuery('Character')
+        .hasAncestor(ancestor).limit(limit);
 
-      ds.runQuery(q, function(err, results) {
+      datastore.runQuery(q, function(err, results) {
         assert.ifError(err);
-        assert.equal(results.length, limit);
+        assert.strictEqual(results.length, limit);
         done();
       });
     });
 
     it('should run a query as a stream', function(done) {
-      var q = ds.createQuery('Character').hasAncestor(ancestor);
+      var q = datastore.createQuery('Character').hasAncestor(ancestor);
 
       var resultsReturned = 0;
 
-      ds.runQuery(q)
+      datastore.runQuery(q)
         .on('error', done)
         .on('data', function() { resultsReturned++; })
         .on('end', function() {
-          assert.equal(resultsReturned, characters.length);
+          assert.strictEqual(resultsReturned, characters.length);
           done();
         });
     });
 
     it('should not go over a limit with a stream', function(done) {
       var limit = 3;
-      var q = ds.createQuery('Character').hasAncestor(ancestor).limit(limit);
+      var q = datastore.createQuery('Character')
+        .hasAncestor(ancestor)
+        .limit(limit);
 
       var resultsReturned = 0;
 
-      ds.runQuery(q)
+      datastore.runQuery(q)
         .on('error', done)
         .on('data', function() { resultsReturned++; })
         .on('end', function() {
-          assert.equal(resultsReturned, limit);
+          assert.strictEqual(resultsReturned, limit);
           done();
         });
     });
 
     it('should filter queries with simple indexes', function(done) {
-      var q = ds.createQuery('Character').hasAncestor(ancestor)
-          .filter('appearances', '>=', 20);
-      ds.runQuery(q, function(err, entities) {
+      var q = datastore.createQuery('Character')
+        .hasAncestor(ancestor)
+        .filter('appearances', '>=', 20);
+
+      datastore.runQuery(q, function(err, entities) {
         assert.ifError(err);
-        assert.equal(entities.length, 6);
+        assert.strictEqual(entities.length, 6);
         done();
       });
     });
 
     it('should filter queries with defined indexes', function(done) {
-      var q = ds.createQuery('Character').hasAncestor(ancestor)
-          .filter('family', '=', 'Stark')
-          .filter('appearances', '>=', 20);
-      ds.runQuery(q, function(err, entities) {
+      var q = datastore.createQuery('Character')
+        .hasAncestor(ancestor)
+        .filter('family', 'Stark')
+        .filter('appearances', '>=', 20);
+
+      datastore.runQuery(q, function(err, entities) {
         assert.ifError(err);
-        assert.equal(entities.length, 6);
+        assert.strictEqual(entities.length, 6);
         done();
       });
     });
 
     it('should filter by ancestor', function(done) {
-      var q = ds.createQuery('Character')
-          .hasAncestor(ancestor);
-      ds.runQuery(q, function(err, entities) {
+      var q = datastore.createQuery('Character').hasAncestor(ancestor);
+
+      datastore.runQuery(q, function(err, entities) {
         assert.ifError(err);
-        assert.equal(entities.length, 8);
+        assert.strictEqual(entities.length, characters.length);
         done();
       });
     });
 
     it('should filter by key', function(done) {
-      var key = ds.key(['Book', 'GoT', 'Character', 'Rickard']);
-      var q = ds.createQuery('Character').hasAncestor(ancestor)
-          .filter('__key__',  '=', key);
-      ds.runQuery(q, function(err, entities) {
+      var key = datastore.key(['Book', 'GoT', 'Character', 'Rickard']);
+
+      var q = datastore.createQuery('Character')
+        .hasAncestor(ancestor)
+        .filter('__key__', key);
+
+      datastore.runQuery(q, function(err, entities) {
         assert.ifError(err);
-        assert.equal(entities.length, 1);
+        assert.strictEqual(entities.length, 1);
         done();
       });
     });
 
     it('should order queries', function(done) {
-      var q = ds.createQuery('Character').hasAncestor(ancestor)
-          .order('appearances');
-      ds.runQuery(q, function(err, entities) {
+      var q = datastore.createQuery('Character')
+        .hasAncestor(ancestor)
+        .order('appearances');
+
+      datastore.runQuery(q, function(err, entities) {
         assert.ifError(err);
-        assert.equal(entities[0].data.name, characters[0].name);
-        assert.equal(entities[7].data.name, characters[3].name);
+
+        assert.strictEqual(entities[0].data.name, characters[0].name);
+        assert.strictEqual(entities[7].data.name, characters[3].name);
+
         done();
       });
     });
 
     it('should select projections', function(done) {
-      var q = ds.createQuery('Character').hasAncestor(ancestor)
-          .select(['name', 'family']);
-      ds.runQuery(q, function(err, entities) {
+      var q = datastore.createQuery('Character')
+        .hasAncestor(ancestor)
+        .select(['name', 'family']);
+
+      datastore.runQuery(q, function(err, entities) {
         assert.ifError(err);
+
         assert.deepEqual(entities[0].data, {
           name: 'Arya',
           family: 'Stark'
         });
+
         assert.deepEqual(entities[8].data, {
           name: 'Sansa',
           family: 'Stark'
         });
+
         done();
       });
     });
 
     it('should paginate with offset and limit', function(done) {
-      var q = ds.createQuery('Character')
+      var q = datastore.createQuery('Character')
         .hasAncestor(ancestor)
         .offset(2)
         .limit(3)
         .order('appearances')
         .autoPaginate(false);
 
-      ds.runQuery(q, function(err, entities, secondQuery) {
+      datastore.runQuery(q, function(err, entities, secondQuery) {
         assert.ifError(err);
 
-        assert.equal(entities.length, 3);
-        assert.equal(entities[0].data.name, 'Robb');
-        assert.equal(entities[2].data.name, 'Catelyn');
+        assert.strictEqual(entities.length, 3);
+        assert.strictEqual(entities[0].data.name, 'Robb');
+        assert.strictEqual(entities[2].data.name, 'Catelyn');
 
-        ds.runQuery(secondQuery.offset(0), function(err, secondEntities) {
+        var offsetQuery = secondQuery.offset(0);
+        datastore.runQuery(offsetQuery, function(err, secondEntities) {
           assert.ifError(err);
 
-          assert.equal(secondEntities.length, 3);
-          assert.equal(secondEntities[0].data.name, 'Sansa');
-          assert.equal(secondEntities[2].data.name, 'Arya');
+          assert.strictEqual(secondEntities.length, 3);
+          assert.strictEqual(secondEntities[0].data.name, 'Sansa');
+          assert.strictEqual(secondEntities[2].data.name, 'Arya');
+
           done();
         });
       });
     });
 
     it('should resume from a start cursor', function(done) {
-      var q = ds.createQuery('Character')
+      var q = datastore.createQuery('Character')
         .hasAncestor(ancestor)
         .offset(2)
         .limit(2)
         .order('appearances')
         .autoPaginate(false);
 
-      ds.runQuery(q, function(err, entities, nextQuery) {
+      datastore.runQuery(q, function(err, entities, nextQuery) {
         assert.ifError(err);
 
-        ds.runQuery(nextQuery.limit(-1), function(err, secondEntities) {
+        datastore.runQuery(nextQuery.limit(-1), function(err, secondEntities) {
           assert.ifError(err);
-          assert.equal(secondEntities.length, 4);
-          assert.equal(secondEntities[0].data.name, 'Catelyn');
-          assert.equal(secondEntities[3].data.name, 'Arya');
+
+          assert.strictEqual(secondEntities.length, 4);
+          assert.strictEqual(secondEntities[0].data.name, 'Catelyn');
+          assert.strictEqual(secondEntities[3].data.name, 'Arya');
+
           done();
         });
       });
     });
 
     it('should group queries', function(done) {
-      var q = ds.createQuery('Character').hasAncestor(ancestor)
-          .groupBy('alive');
-      ds.runQuery(q, function(err, entities) {
-        assert.ifError(err);
-        assert.equal(entities.length, 2);
-        done();
-      });
-    });
+      var q = datastore.createQuery('Character')
+        .hasAncestor(ancestor)
+        .groupBy('appearances');
 
-    after(function(done) {
-      ds.delete(keys, function(err) {
+      datastore.runQuery(q, function(err, entities) {
         assert.ifError(err);
+        assert.strictEqual(entities.length, characters.length - 1);
         done();
       });
     });
@@ -499,12 +641,12 @@ describe('datastore', function() {
 
   describe('transactions', function() {
     it('should run in a transaction', function(done) {
-      var key = ds.key(['Company', 'Google']);
+      var key = datastore.key(['Company', 'Google']);
       var obj = {
         url: 'www.google.com'
       };
 
-      ds.runInTransaction(function(t, tDone) {
+      datastore.runInTransaction(function(t, tDone) {
         t.get(key, function(err) {
           assert.ifError(err);
 
@@ -514,22 +656,22 @@ describe('datastore', function() {
       }, function(err) {
         assert.ifError(err);
 
-        ds.get(key, function(err, entity) {
+        datastore.get(key, function(err, entity) {
           assert.ifError(err);
 
           assert.deepEqual(entity.data, obj);
 
-          ds.delete(key, done);
+          datastore.delete(key, done);
         });
       });
     });
 
     it('should commit all saves and deletes at the end', function(done) {
-      var deleteKey = ds.key(['Company', 'Subway']);
-      var key = ds.key(['Company', 'Google']);
-      var incompleteKey = ds.key('Company');
+      var deleteKey = datastore.key(['Company', 'Subway']);
+      var key = datastore.key(['Company', 'Google']);
+      var incompleteKey = datastore.key('Company');
 
-      ds.runInTransaction(function(t, tDone) {
+      datastore.runInTransaction(function(t, tDone) {
         t.delete(deleteKey);
 
         t.save([
@@ -548,43 +690,50 @@ describe('datastore', function() {
         assert.ifError(err);
 
         // Incomplete key should have been given an ID.
-        assert.equal(incompleteKey.path.length, 2);
+        assert.strictEqual(incompleteKey.path.length, 2);
 
         async.parallel([
           // The key queued for deletion should have been deleted.
           function(done) {
-            ds.get(deleteKey, function(err, entity) {
+            datastore.get(deleteKey, function(err, entity) {
               assert.ifError(err);
-              assert.equal(typeof entity, 'undefined');
+              assert.strictEqual(typeof entity, 'undefined');
               done();
             });
           },
 
           // Data should have been updated on the key.
           function(done) {
-            ds.get(key, function(err, entity) {
+            datastore.get(key, function(err, entity) {
               assert.ifError(err);
-              assert.equal(entity.data.rating, 10);
+              assert.strictEqual(entity.data.rating, 10);
               done();
             });
           }
-        ], done);
+        ], function(err) {
+          assert.ifError(err);
+          datastore.delete([key, incompleteKey], done);
+        });
       });
     });
 
     it('should use the last modification to a key', function(done) {
-      var incompleteKey = ds.key('Company');
-      var key = ds.key(['Company', 'Google']);
+      var incompleteKey = datastore.key('Company');
+      var key = datastore.key(['Company', 'Google']);
 
-      ds.runInTransaction(function(t, tDone) {
+      datastore.runInTransaction(function(t, tDone) {
         t.save([
           {
             key: key,
-            data: { rating: 10 }
+            data: {
+              rating: 10
+            }
           },
           {
             key: incompleteKey,
-            data: { rating: 100 }
+            data: {
+              rating: 100
+            }
           }
         ]);
 
@@ -595,12 +744,12 @@ describe('datastore', function() {
         assert.ifError(err);
 
         // Should not return a result.
-        ds.get(key, function(err, entity) {
+        datastore.get(key, function(err, entity) {
           assert.ifError(err);
           assert.strictEqual(entity, undefined);
 
           // Incomplete key should have been given an id.
-          assert.equal(incompleteKey.path.length, 2);
+          assert.strictEqual(incompleteKey.path.length, 2);
           done();
         });
       });

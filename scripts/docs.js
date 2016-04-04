@@ -29,7 +29,6 @@ var OUTPUT_FOLDER = './docs/json/master';
 var IGNORE = [
   './lib/common/*',
   './lib/datastore/entity.js',
-  './lib/datastore/pb.js',
   './lib/datastore/request.js',
   './lib/pubsub/iam.js',
   './lib/storage/acl.js'

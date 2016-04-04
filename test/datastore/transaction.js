@@ -50,6 +50,7 @@ describe('Transaction', function() {
   var Transaction;
   var transaction;
   var TRANSACTION_ID = 'transaction-id';
+  var PROJECT_ID = 'project-id';
 
   function key(path) {
     return new entity.Key({ path: arrify(path) });
@@ -64,6 +65,7 @@ describe('Transaction', function() {
       useCleanCache: true,
       warnOnUnregistered: false
     });
+
     Transaction = require('../../lib/datastore/transaction.js');
   });
 
@@ -74,45 +76,59 @@ describe('Transaction', function() {
 
   beforeEach(function() {
     transaction = new Transaction({
-      authenticateReq_: function(req, callback) {
-        return callback(null, req);
-      }
-    }, 'project-id');
+      request: function() {},
+      projectId: PROJECT_ID
+    });
   });
 
   describe('instantiation', function() {
-    it('should assign default properties', function() {
-      var datasetId = 'abc';
+    it('should localize the project ID', function() {
+      assert.strictEqual(transaction.projectId, PROJECT_ID);
+    });
+
+    it('should localize request function', function(done) {
+      var transaction;
+
       var fakeDataset = {
-        apiEndpoint: 'http://localhost:8080',
-        makeAuthenticatedRequest_: function fakeMakeAuthenticatedRequest_() {}
+        request: {
+          bind: function(context) {
+            assert.strictEqual(context, fakeDataset);
+
+            setImmediate(function() {
+              assert.strictEqual(transaction.request, fakeDataset.request);
+              done();
+            });
+
+            return fakeDataset.request;
+          }
+        }
       };
 
-      var transaction = new Transaction(fakeDataset, datasetId);
+      transaction = new Transaction(fakeDataset);
+    });
 
-      assert.strictEqual(transaction.id, null);
-      assert.deepEqual(transaction.apiEndpoint, fakeDataset.apiEndpoint);
-      assert.equal(
-        transaction.makeAuthenticatedRequest_,
-        fakeDataset.makeAuthenticatedRequest_
-      );
-      assert.equal(transaction.datasetId, datasetId);
+    it('should localize default properties', function() {
+      assert.deepEqual(transaction.modifiedEntities_, []);
+      assert.deepEqual(transaction.requestCallbacks_, []);
+      assert.deepEqual(transaction.requests_, []);
     });
   });
 
   describe('begin_', function() {
     it('should begin', function(done) {
-      transaction.makeReq_ = function(method, req, callback) {
-        callback = callback || req;
-        assert.equal(method, 'beginTransaction');
+      transaction.request_ = function(protoOpts, reqOpts, callback) {
+        callback = callback || reqOpts;
+        assert.strictEqual(protoOpts.service, 'Datastore');
+        assert.equal(protoOpts.method, 'beginTransaction');
         done();
       };
+
       transaction.begin_();
     });
 
     it('should set transaction id', function(done) {
-      transaction.makeReq_ = function(method, req, callback) {
-        callback = callback || req;
+      transaction.request_ = function(protoOpts, reqOpts, callback) {
+        callback = callback || reqOpts;
         callback(null, { transaction: TRANSACTION_ID });
       };
       transaction.begin_(function(err) {
@@ -124,8 +140,8 @@ describe('Transaction', function() {
 
     it('should pass error to callback', function(done) {
       var error = new Error('Error.');
-      transaction.makeReq_ = function(method, req, callback) {
-        callback = callback || req;
+      transaction.request_ = function(protoOpts, reqOpts, callback) {
+        callback = callback || reqOpts;
         callback(error);
       };
       transaction.begin_(function(err) {
@@ -136,8 +152,8 @@ describe('Transaction', function() {
 
     it('should pass apiResponse to callback', function(done) {
       var resp = { success: true };
-      transaction.makeReq_ = function(method, req, callback) {
-        callback = callback || req;
+      transaction.request_ = function(protoOpts, reqOpts, callback) {
+        callback = callback || reqOpts;
         callback(null, resp);
       };
       transaction.begin_(function(err, apiResponse) {
@@ -154,8 +170,9 @@ describe('Transaction', function() {
     });
 
     it('should rollback', function(done) {
-      transaction.makeReq_ = function(method) {
-        assert.equal(method, 'rollback');
+      transaction.request_ = function(protoOpts) {
+        assert.strictEqual(protoOpts.service, 'Datastore');
+        assert.equal(protoOpts.method, 'rollback');
         done();
       };
       transaction.rollback();
@@ -163,8 +180,8 @@ describe('Transaction', function() {
 
     it('should pass error to callback', function(done) {
       var error = new Error('Error.');
-      transaction.makeReq_ = function(method, req, callback) {
-        callback = callback || req;
+      transaction.request_ = function(protoOpts, reqOpts, callback) {
+        callback = callback || reqOpts;
         callback(error);
       };
       transaction.rollback(function(err) {
@@ -175,8 +192,8 @@ describe('Transaction', function() {
 
     it('should pass apiResponse to callback', function(done) {
       var resp = { success: true };
-      transaction.makeReq_ = function(method, req, callback) {
-        callback = callback || req;
+      transaction.request_ = function(protoOpts, reqOpts, callback) {
+        callback = callback || reqOpts;
         callback(null, resp);
       };
       transaction.rollback(function(err, apiResponse) {
@@ -187,8 +204,8 @@ describe('Transaction', function() {
     });
 
     it('should set skipCommit', function(done) {
-      transaction.makeReq_ = function(method, req, callback) {
-        callback = callback || req;
+      transaction.request_ = function(protoOpts, reqOpts, callback) {
+        callback = callback || reqOpts;
         callback();
       };
       transaction.rollback(function() {
@@ -198,8 +215,8 @@ describe('Transaction', function() {
     });
 
     it('should set skipCommit when rollback errors', function(done) {
-      transaction.makeReq_ = function(method, req, callback) {
-        callback = callback || req;
+      transaction.request_ = function(protoOpts, reqOpts, callback) {
+        callback = callback || reqOpts;
         callback(new Error('Error.'));
       };
       transaction.rollback(function() {
@@ -215,8 +232,9 @@ describe('Transaction', function() {
     });
 
     it('should commit', function(done) {
-      transaction.makeReq_ = function(method) {
-        assert.equal(method, 'commit');
+      transaction.request_ = function(protoOpts) {
+        assert.equal(protoOpts.service, 'Datastore');
+        assert.equal(protoOpts.method, 'commit');
         done();
       };
       transaction.commit_();
@@ -226,15 +244,15 @@ describe('Transaction', function() {
       transaction.skipCommit = true;
 
       // If called, the test will blow up.
-      transaction.makeReq_ = done;
+      transaction.request_ = done;
 
       transaction.commit_(done);
     });
 
     it('should pass error to callback', function(done) {
       var error = new Error('Error.');
-      transaction.makeReq_ = function(method, req, callback) {
-        callback = callback || req;
+      transaction.request_ = function(protoOpts, reqOpts, callback) {
+        callback = callback || reqOpts;
         callback(error);
       };
       transaction.commit_(function(err) {
@@ -245,8 +263,8 @@ describe('Transaction', function() {
 
     it('should pass apiResponse to callback', function(done) {
       var resp = { success: true };
-      transaction.makeReq_ = function(method, req, callback) {
-        callback = callback || req;
+      transaction.request_ = function(protoOpts, reqOpts, callback) {
+        callback = callback || reqOpts;
         callback(null, resp);
       };
       transaction.commit_(function(err, apiResponse) {
@@ -283,7 +301,7 @@ describe('Transaction', function() {
         saveCalled++;
       };
 
-      transaction.makeReq_ = util.noop;
+      transaction.request_ = util.noop;
 
       transaction.commit_();
 
@@ -312,7 +330,7 @@ describe('Transaction', function() {
         saveCalled++;
       };
 
-      transaction.makeReq_ = util.noop;
+      transaction.request_ = util.noop;
 
       transaction.commit_();
       assert.equal(deleteCalled, 0);
@@ -325,10 +343,10 @@ describe('Transaction', function() {
         { e: 'f', g: 'h' }
       ];
 
-      transaction.makeReq_ = function(method, req) {
+      transaction.request_ = function(protoOpts, reqOpts) {
         var req1 = transaction.requests_[0];
         var req2 = transaction.requests_[1];
-        assert.deepEqual(req, extend(req1, req2));
+        assert.deepEqual(reqOpts, extend(req1, req2));
         done();
       };
 
@@ -344,7 +362,7 @@ describe('Transaction', function() {
         function() { cb2Called = true; }
       ];
 
-      transaction.makeReq_ = function(method, req, cb) {
+      transaction.request_ = function(protoOpts, reqOpts, cb) {
         cb();
       };
 

@@ -136,25 +136,27 @@ var gcloud = require('gcloud');
 // Authenticating on a per-API-basis. You don't need to do this if you auth on a
 // global basis (see Authentication section above).
 
-var dataset = gcloud.datastore.dataset({
+var datastore = gcloud.datastore({
   projectId: 'my-project',
   keyFilename: '/path/to/keyfile.json'
 });
 
-dataset.get(dataset.key(['Product', 'Computer']), function(err, entity) {
+var key = datastore.key(['Product', 'Computer']);
+
+datastore.get(key, function(err, entity) {
   console.log(err || entity);
 });
 
-// Save data to your dataset.
+// Save data to Datastore.
 var blogPostData = {
   title: 'How to make the perfect homemade pasta',
   author: 'Andrew Chilton',
   isDraft: true
 };
 
-var blogPostKey = dataset.key('BlogPost');
+var blogPostKey = datastore.key('BlogPost');
 
-dataset.save({
+datastore.save({
   key: blogPostKey,
   data: blogPostData
 }, function(err) {
@@ -162,7 +164,7 @@ dataset.save({
   // with it, such as an update.
   blogPostData.isDraft = false;
 
-  dataset.save({
+  datastore.save({
     key: blogPostKey,
     data: blogPostData
   }, function(err) {

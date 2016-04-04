@@ -17,467 +17,831 @@
 'use strict';
 
 var assert = require('assert');
-var entity = require('../../lib/datastore/entity.js');
-var datastore = require('../../lib/datastore');
-var ByteBuffer = require('bytebuffer');
-
-var entityProto = {
-  property: [{
-    name: 'linkedTo',
-    value: {
-      key_value: {
-        path_element: [{
-          kind: 'Kind',
-          name: '123'
-        }]
-      }
-    }
-  }, {
-    name: 'name',
-    value: {
-      string_value: 'Some name'
-    }
-  }, {
-    name: 'flagged',
-    value: {
-      boolean_value: false
-    }
-  }, {
-    name: 'count',
-    value: {
-      integer_value: 5
-    }
-  }, {
-    name: 'total',
-    value: {
-      double_value: 7.8
-    }
-  }, {
-    name: 'author',
-    value: {
-      entity_value: {
-        property: [{
-          name: 'name',
-          value: {
-            string_value: 'Burcu Dogan'
-          }
-        }]
-      },
-      indexed: false
-    }
-  }, {
-    name: 'list',
-    value: {
-      list_value: [{
-        integer_value: 6
-      }, {
-        boolean_value: false
-      }]
-    }
-  }]
+var deepStrictEqual = require('deep-strict-equal');
+assert.deepStrictEqual = assert.deepStrictEqual || function() {
+  return assert(deepStrictEqual.apply(this, arguments));
 };
 
-var queryFilterProto = {
-  projection: [],
-  kind: [{
-    name: 'Kind1'
-  }],
-  filter: {
-    composite_filter: {
-      filter: [
-        {
-          property_filter: {
-            property: { name: 'name' },
-            operator: 'EQUAL',
-            value: { string_value: 'John' }
+var Datastore = require('../../lib/datastore/index.js');
+
+describe('entity', function() {
+  var entity;
+
+  beforeEach(function() {
+    delete require.cache[require.resolve('../../lib/datastore/entity.js')];
+    entity = require('../../lib/datastore/entity.js');
+  });
+
+  describe('Double', function() {
+    it('should store the value', function() {
+      var value = 8.3;
+
+      var double = new entity.Double(value);
+      assert.strictEqual(double.value, value);
+    });
+  });
+
+  describe('Double', function() {
+    it('should store the value', function() {
+      var value = 8.3;
+
+      var double = new entity.Double(value);
+      assert.strictEqual(double.value, value);
+    });
+  });
+
+  describe('Int', function() {
+    it('should store the value', function() {
+      var value = 8;
+
+      var int = new entity.Int(value);
+      assert.strictEqual(int.value, value);
+    });
+  });
+
+  describe('GeoPoint', function() {
+    it('should store the value', function() {
+      var value = {
+        latitude: 24,
+        longitude: 88
+      };
+
+      var geoPoint = new entity.GeoPoint(value);
+      assert.strictEqual(geoPoint.value, value);
+    });
+  });
+
+  describe('Key', function() {
+    it('should assign the namespace', function() {
+      var namespace = 'NS';
+      var key = new entity.Key({ namespace: namespace, path: [] });
+      assert.strictEqual(key.namespace, namespace);
+    });
+
+    it('should assign the kind', function() {
+      var kind = 'kind';
+      var key = new entity.Key({ path: [kind] });
+      assert.strictEqual(key.kind, kind);
+    });
+
+    it('should assign the ID', function() {
+      var id = 11;
+      var key = new entity.Key({ path: ['Kind', id] });
+      assert.strictEqual(key.id, id);
+    });
+
+    it('should assign the name', function() {
+      var name = 'name';
+      var key = new entity.Key({ path: ['Kind', name] });
+      assert.strictEqual(key.name, name);
+    });
+
+    it('should assign a parent', function() {
+      var key = new entity.Key({ path: ['ParentKind', 1, 'Kind', 1] });
+      assert(key.parent instanceof entity.Key);
+    });
+
+    it('should always compute the correct path', function() {
+      var key = new entity.Key({ path: ['ParentKind', 1, 'Kind', 1] });
+      assert.deepEqual(key.path, ['ParentKind', 1, 'Kind', 1]);
+
+      key.parent.kind = 'GrandParentKind';
+      key.kind = 'ParentKind';
+
+      assert.deepEqual(key.path, ['GrandParentKind', 1, 'ParentKind', 1]);
+    });
+  });
+
+  describe('decodeValueProto', function() {
+    it('should decode arrays', function() {
+      var expectedValue = [{}];
+
+      var valueProto = {
+        value_type: 'arrayValue',
+        arrayValue: {
+          values: expectedValue
+        }
+      };
+
+      var run = false;
+
+      var decodeValueProto = entity.decodeValueProto;
+      entity.decodeValueProto = function(valueProto) {
+        if (!run) {
+          run = true;
+          return decodeValueProto.apply(null, arguments);
+        }
+
+        assert.strictEqual(valueProto, expectedValue[0]);
+        return valueProto;
+      };
+
+      assert.deepEqual(entity.decodeValueProto(valueProto), expectedValue);
+    });
+
+    it('should decode blobs', function() {
+      var expectedValue = new Buffer('Hi');
+
+      var valueProto = {
+        value_type: 'blobValue',
+        blobValue: expectedValue.toString('base64')
+      };
+
+      assert.deepEqual(entity.decodeValueProto(valueProto), expectedValue);
+    });
+
+    it('should decode null', function() {
+      var expectedValue = null;
+
+      var valueProto = {
+        value_type: 'nullValue',
+        nullValue: 0
+      };
+
+      var decodedValue = entity.decodeValueProto(valueProto);
+      assert.deepStrictEqual(decodedValue, expectedValue);
+    });
+
+    it('should decode doubles', function() {
+      var expectedValue = 8.3;
+
+      var valueProto = {
+        value_type: 'doubleValue',
+        doubleValue: expectedValue
+      };
+
+      assert.strictEqual(entity.decodeValueProto(valueProto), expectedValue);
+    });
+
+    it('should decode ints', function() {
+      var expectedValue = 8;
+
+      var valueProto = {
+        value_type: 'integerValue',
+        integerValue: expectedValue
+      };
+
+      assert.strictEqual(entity.decodeValueProto(valueProto), expectedValue);
+    });
+
+    it('should decode entities', function() {
+      var expectedValue = {};
+
+      var valueProto = {
+        value_type: 'entityValue',
+        entityValue: expectedValue
+      };
+
+      entity.entityFromEntityProto = function(entityProto) {
+        assert.strictEqual(entityProto, expectedValue);
+        return expectedValue;
+      };
+
+      assert.strictEqual(entity.decodeValueProto(valueProto), expectedValue);
+    });
+
+    it('should decode keys', function() {
+      var expectedValue = {};
+
+      var valueProto = {
+        value_type: 'keyValue',
+        keyValue: expectedValue
+      };
+
+      entity.keyFromKeyProto = function(keyProto) {
+        assert.strictEqual(keyProto, expectedValue);
+        return expectedValue;
+      };
+
+      assert.strictEqual(entity.decodeValueProto(valueProto), expectedValue);
+    });
+
+    it('should decode timestamps', function() {
+      var seconds = String(Date.now() / 1000);
+      var expectedValue = new Date(parseInt(seconds, 10) * 1000);
+
+      var valueProto = {
+        value_type: 'timestampValue',
+        timestampValue: {
+          seconds: seconds
+        }
+      };
+
+      assert.deepEqual(entity.decodeValueProto(valueProto), expectedValue);
+    });
+
+    it('should return the value if no conversions are necessary', function() {
+      var expectedValue = false;
+
+      var valueProto = {
+        value_type: 'booleanValue',
+        booleanValue: expectedValue
+      };
+
+      assert.strictEqual(entity.decodeValueProto(valueProto), expectedValue);
+    });
+  });
+
+  describe('encodeValue', function() {
+    it('should encode a boolean', function() {
+      var value = true;
+
+      var expectedValueProto = {
+        booleanValue: value
+      };
+
+      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+    });
+
+    it('should encode null', function() {
+      var value = null;
+
+      var expectedValueProto = {
+        nullValue: 0
+      };
+
+      assert.deepStrictEqual(entity.encodeValue(value), expectedValueProto);
+    });
+
+    it('should encode an int', function() {
+      var value = 8;
+
+      var expectedValueProto = {
+        integerValue: value
+      };
+
+      entity.Int = function(value_) {
+        assert.strictEqual(value_, value);
+        this.value = value_;
+      };
+
+      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+    });
+
+    it('should encode an Int object', function() {
+      var value = new entity.Int(3);
+
+      var expectedValueProto = {
+        integerValue: value.value
+      };
+
+      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+    });
+
+    it('should encode a double', function() {
+      var value = 8.3;
+
+      var expectedValueProto = {
+        doubleValue: value
+      };
+
+      entity.Double = function(value_) {
+        assert.strictEqual(value_, value);
+        this.value = value_;
+      };
+
+      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+    });
+
+    it('should encode a Double object', function() {
+      var value = new entity.Double(3);
+
+      var expectedValueProto = {
+        doubleValue: value.value
+      };
+
+      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+    });
+
+    it('should encode a date', function() {
+      var value = new Date();
+      var seconds = value.getTime() / 1000;
+      var secondsRounded = Math.floor(seconds);
+
+      var expectedValueProto = {
+        timestampValue: {
+          seconds: secondsRounded,
+          nanos: Math.floor((seconds - secondsRounded) * 1e9)
+        }
+      };
+
+      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+    });
+
+    it('should encode a string', function() {
+      var value = 'Hi';
+
+      var expectedValueProto = {
+        stringValue: value
+      };
+
+      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+    });
+
+    it('should encode a buffer', function() {
+      var value = new Buffer('Hi');
+
+      var expectedValueProto = {
+        blobValue: value.toString('base64')
+      };
+
+      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+    });
+
+    it('should encode an array', function() {
+      var value = [{}];
+
+      var expectedValueProto = {
+        arrayValue: {
+          values: value
+        }
+      };
+
+      var run = false;
+
+      var encodeValue = entity.encodeValue;
+      entity.encodeValue = function(value_) {
+        if (!run) {
+          run = true;
+          return encodeValue.apply(null, arguments);
+        }
+
+        assert.strictEqual(value_, value[0]);
+        return value_;
+      };
+
+      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+    });
+
+    it('should encode a Key', function() {
+      var value = new entity.Key({
+        namespace: 'ns',
+        path: ['Kind', 1]
+      });
+
+      var expectedValueProto = {
+        keyValue: value
+      };
+
+      entity.keyToKeyProto = function(key) {
+        assert.strictEqual(key, value);
+        return value;
+      };
+
+      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+    });
+
+    it('should encode an object', function() {
+      var value = {
+        key: 'value'
+      };
+
+      var expectedValueProto = {
+        entityValue: {
+          properties: [
+            {
+              name: 'key',
+              value: value.key
+            }
+          ]
+        }
+      };
+
+      var run = false;
+
+      var encodeValue = entity.encodeValue;
+      entity.encodeValue = function(value_) {
+        if (!run) {
+          run = true;
+          return encodeValue.apply(null, arguments);
+        }
+
+        assert.strictEqual(value_, value.key);
+        return value_;
+      };
+
+      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+    });
+
+    it('should throw if an invalid value was provided', function() {
+      assert.throws(function() {
+        entity.encodeValue({});
+      }, /Unsupported field value/);
+    });
+  });
+
+  describe('entityFromEntityProto', function() {
+    it('should convert entity proto to entity', function() {
+      var expectedEntity = {
+        name: 'Stephen'
+      };
+
+      var entityProto = {
+        properties: {
+          name: {
+            value_type: 'stringValue',
+            stringValue: expectedEntity.name
           }
+        }
+      };
+
+      assert.deepEqual(
+        entity.entityFromEntityProto(entityProto),
+        expectedEntity
+      );
+    });
+  });
+
+  describe('entityToEntityProto', function() {
+    it('should format an entity', function() {
+      var value = 'Stephen';
+
+      var entityObject = {
+        name: value
+      };
+
+      var expectedEntityProto = {
+        key: null,
+        properties: entityObject
+      };
+
+      entity.encodeValue = function(value_) {
+        assert.strictEqual(value_, value);
+        return value;
+      };
+
+      assert.deepEqual(
+        entity.entityToEntityProto(entityObject),
+        expectedEntityProto
+      );
+    });
+  });
+
+  describe('formatArray', function() {
+    it('should convert protos to key/data entity array', function() {
+      var key = {};
+
+      var entityProto = {
+        key: key
+      };
+
+      var results = [
+        {
+          entity: entityProto
+        }
+      ];
+
+      var expectedResults = [
+        {
+          key: key,
+          data: entityProto
+        }
+      ];
+
+      entity.keyFromKeyProto = function(key_) {
+        assert.strictEqual(key_, key);
+        return key;
+      };
+
+      entity.entityFromEntityProto = function(entityProto_) {
+        assert.strictEqual(entityProto_, entityProto);
+        return entityProto;
+      };
+
+      assert.deepEqual(entity.formatArray(results), expectedResults);
+    });
+  });
+
+  describe('isKeyComplete', function() {
+    it('should convert key to key proto', function(done) {
+      var key = new entity.Key({
+        path: ['Kind', 123]
+      });
+
+      entity.keyToKeyProto = function(key_) {
+        assert.strictEqual(key_, key);
+        setImmediate(done);
+        return key;
+      };
+
+      entity.isKeyComplete(key);
+    });
+
+    it('should return true if key has id', function() {
+      var key = new entity.Key({
+        path: ['Kind', 123]
+      });
+
+      assert.strictEqual(entity.isKeyComplete(key), true);
+    });
+
+    it('should return true if key has name', function() {
+      var key = new entity.Key({
+        path: ['Kind', 'name']
+      });
+
+      assert.strictEqual(entity.isKeyComplete(key), true);
+    });
+
+    it('should return false if key does not have name or ID', function() {
+      var key = new entity.Key({
+        path: ['Kind']
+      });
+
+      assert.strictEqual(entity.isKeyComplete(key), false);
+    });
+  });
+
+  describe('keyFromKeyProto', function() {
+    var NAMESPACE = 'Namespace';
+
+    var keyProto = {
+      partitionId: {
+        namespaceId: NAMESPACE,
+        projectId: 'project-id'
+      },
+      path: [
+        {
+          kind: 'Kind',
+          id: '111'
         },
         {
-          property_filter: {
-            property: { name: '__key__' },
-            operator: 'HAS_ANCESTOR',
-            value: {
-              key_value: {
-                path_element: [{ kind: 'Kind2', name: 'somename' }]
-              }
-            }
+          kind: 'Kind2',
+          name: 'name'
+        }
+      ]
+    };
+
+    it('should set the namespace', function(done) {
+      entity.Key = function(keyOptions) {
+        assert.strictEqual(keyOptions.namespaceId, NAMESPACE);
+        done();
+      };
+
+      entity.keyFromKeyProto(keyProto);
+    });
+
+    it('should create a proper Key', function(done) {
+      entity.Key = function(keyOptions) {
+        assert.deepEqual(keyOptions, {
+          namespaceId: NAMESPACE,
+          path: [
+            'Kind',
+            111,
+            'Kind2',
+            'name'
+          ]
+        });
+
+        done();
+      };
+
+      entity.keyFromKeyProto(keyProto);
+    });
+
+    it('should return the created Key', function() {
+      var expectedValue = {};
+
+      entity.Key = function() {
+        return expectedValue;
+      };
+
+      assert.strictEqual(entity.keyFromKeyProto(keyProto), expectedValue);
+    });
+
+    it('should throw if path is invalid', function(done) {
+      var keyProtoInvalid = {
+        partitionId: {
+          namespaceId: 'Namespace',
+          projectId: 'project-id'
+        },
+        path: [
+          {
+            kind: 'Kind'
+          },
+          {
+            kind: 'Kind2'
+          }
+        ]
+      };
+
+      try {
+        entity.keyFromKeyProto(keyProtoInvalid);
+      } catch(e) {
+        assert.strictEqual(e.name, 'InvalidKey');
+        assert.strictEqual(e.message, 'Ancestor keys require an id or name.');
+        done();
+      }
+    });
+  });
+
+  describe('keyToKeyProto', function() {
+    it('should handle hierarchical key definitions', function() {
+      var key = new entity.Key({
+        path: ['Kind1', 1, 'Kind2', 'name']
+      });
+
+      var keyProto = entity.keyToKeyProto(key);
+
+      assert.strictEqual(keyProto.partitionId, undefined);
+
+      assert.strictEqual(keyProto.path[0].kind, 'Kind1');
+      assert.strictEqual(keyProto.path[0].id, 1);
+      assert.strictEqual(keyProto.path[0].name, undefined);
+
+      assert.strictEqual(keyProto.path[1].kind, 'Kind2');
+      assert.strictEqual(keyProto.path[1].id, undefined);
+      assert.strictEqual(keyProto.path[1].name, 'name');
+    });
+
+    it('should detect the namespace of the hierarchical keys', function() {
+      var key = new entity.Key({
+        namespace: 'Namespace',
+        path: ['Kind1', 1, 'Kind2', 'name']
+      });
+
+      var keyProto = entity.keyToKeyProto(key);
+
+      assert.strictEqual(keyProto.partitionId.namespaceId, 'Namespace');
+
+      assert.strictEqual(keyProto.path[0].kind, 'Kind1');
+      assert.strictEqual(keyProto.path[0].id, 1);
+      assert.strictEqual(keyProto.path[0].name, undefined);
+
+      assert.strictEqual(keyProto.path[1].kind, 'Kind2');
+      assert.strictEqual(keyProto.path[1].id, undefined);
+      assert.strictEqual(keyProto.path[1].name, 'name');
+    });
+
+    it('should handle incomplete keys with & without namespaces', function() {
+      var incompleteKey = new entity.Key({
+        path: ['Kind']
+      });
+
+      var incompleteKeyWithNs = new entity.Key({
+        namespace: 'Namespace',
+        path: ['Kind']
+      });
+
+      var keyProto = entity.keyToKeyProto(incompleteKey);
+      var keyProtoWithNs = entity.keyToKeyProto(incompleteKeyWithNs);
+
+      assert.strictEqual(keyProto.partitionId, undefined);
+      assert.strictEqual(keyProto.path[0].kind, 'Kind');
+      assert.strictEqual(keyProto.path[0].id, undefined);
+      assert.strictEqual(keyProto.path[0].name, undefined);
+
+      assert.strictEqual(keyProtoWithNs.partitionId.namespaceId, 'Namespace');
+      assert.strictEqual(keyProtoWithNs.path[0].kind, 'Kind');
+      assert.strictEqual(keyProtoWithNs.path[0].id, undefined);
+      assert.strictEqual(keyProtoWithNs.path[0].name, undefined);
+    });
+
+    it('should throw if key contains 0 items', function(done) {
+      var key = new entity.Key({
+        path: []
+      });
+
+      try {
+        entity.keyToKeyProto(key);
+      } catch(e) {
+        assert.strictEqual(e.name, 'InvalidKey');
+        assert.strictEqual(e.message, 'A key should contain at least a kind.');
+        done();
+      }
+    });
+
+    it('should throw if key path contains null ids', function(done) {
+      var key = new entity.Key({
+        namespace: 'Namespace',
+        path: ['Kind1', null, 'Company']
+      });
+
+      try {
+        entity.keyToKeyProto(key);
+      } catch(e) {
+        assert.strictEqual(e.name, 'InvalidKey');
+        assert.strictEqual(e.message, 'Ancestor keys require an id or name.');
+        done();
+      }
+    });
+
+    it('should not throw if key is incomplete', function() {
+      var key = new entity.Key({
+        namespace: 'Namespace',
+        path: ['Kind1', 123, 'Company', null]
+      });
+
+      assert.doesNotThrow(function() {
+        entity.keyToKeyProto(key);
+      });
+    });
+  });
+
+  describe('queryToQueryProto', function() {
+    var queryProto = {
+      distinctOn: [
+        {
+          name: 'name'
+        }
+      ],
+      kind: [
+        {
+          name: 'Kind1'
+        }
+      ],
+      order: [
+        {
+          property: {
+            name: 'name'
+          },
+          direction: 'ASCENDING'
+        }
+      ],
+      projection: [
+        {
+          property: {
+            name: 'name'
           }
         }
       ],
-      operator: 'AND'
-    }
-  },
-  end_cursor: new Buffer('end', 'base64'),
-  order: [],
-  group_by: []
-};
-
-describe('Key', function() {
-  it('should assign the namespace', function() {
-    var namespace = 'NS';
-    var key = new entity.Key({ namespace: namespace, path: [] });
-    assert.strictEqual(key.namespace, namespace);
-  });
-
-  it('should assign the kind', function() {
-    var kind = 'kind';
-    var key = new entity.Key({ path: [kind] });
-    assert.strictEqual(key.kind, kind);
-  });
-
-  it('should assign the ID', function() {
-    var id = 11;
-    var key = new entity.Key({ path: ['Kind', id] });
-    assert.strictEqual(key.id, id);
-  });
-
-  it('should assign the name', function() {
-    var name = 'name';
-    var key = new entity.Key({ path: ['Kind', name] });
-    assert.strictEqual(key.name, name);
-  });
-
-  it('should assign a parent', function() {
-    var key = new entity.Key({ path: ['ParentKind', 1, 'Kind', 1] });
-    assert(key.parent instanceof entity.Key);
-  });
-
-  it('should always compute the correct path', function() {
-    var key = new entity.Key({ path: ['ParentKind', 1, 'Kind', 1] });
-    assert.deepEqual(key.path, ['ParentKind', 1, 'Kind', 1]);
-
-    key.parent.kind = 'GrandParentKind';
-    key.kind = 'ParentKind';
-
-    assert.deepEqual(key.path, ['GrandParentKind', 1, 'ParentKind', 1]);
-  });
-});
-
-describe('keyFromKeyProto', function() {
-  var proto = {
-    partition_id: { namespace: '', dataset_id: 'datasetId' },
-    path_element: [{ kind: 'Kind', name: 'Name' }]
-  };
-
-  var protoH = {
-    partition_id: { namespace: 'Test', dataset_id: 'datasetId' },
-    path_element: [{ kind: 'Kind', id: '111' }, { kind: 'Kind2', name: 'name' }]
-  };
-
-  var protoIncomplete = {
-    partition_id: { namespace: 'Test', dataset_id: 'datasetId' },
-    path_element: [{ kind: 'Kind', id: '111' }, { kind: 'Kind2' }]
-  };
-
-  var protoInvalid = {
-    partition_id: { namespace: 'Test', dataset_id: 'datasetId' },
-    path_element: [{ kind: 'Kind' }, { kind: 'Kind2' }]
-  };
-
-  it('should handle keys hierarchically', function() {
-    var key = entity.keyFromKeyProto(protoH);
-    assert.deepEqual(key, new entity.Key({
-      namespace: 'Test',
-      path: [ 'Kind', 111, 'Kind2', 'name' ]
-    }));
-  });
-
-  it('should not set namespace if default', function() {
-    var key = entity.keyFromKeyProto(proto);
-    assert.deepEqual(key, new entity.Key({ path: [ 'Kind', 'Name' ] }));
-  });
-
-  it('should not inject null into path if no id set', function() {
-    var key = entity.keyFromKeyProto(protoIncomplete);
-    assert.deepEqual(key, new entity.Key({
-      namespace: 'Test',
-      path: [ 'Kind', 111, 'Kind2' ]
-    }));
-  });
-
-  it('should throw if path is invalid', function() {
-    assert.throws(function() {
-      entity.keyFromKeyProto(protoInvalid);
-    }, /Invalid key. Ancestor keys require an id or name./);
-  });
-});
-
-describe('keyToKeyProto', function() {
-  it('should handle hierarchical key definitions', function() {
-    var key = new entity.Key({ path: [ 'Kind1', 1, 'Kind2', 'name' ] });
-    var proto = entity.keyToKeyProto(key);
-    assert.strictEqual(proto.partition_id, undefined);
-    assert.strictEqual(proto.path_element[0].kind, 'Kind1');
-    assert.strictEqual(proto.path_element[0].id, 1);
-    assert.strictEqual(proto.path_element[0].name, undefined);
-    assert.strictEqual(proto.path_element[1].kind, 'Kind2');
-    assert.strictEqual(proto.path_element[1].id, undefined);
-    assert.strictEqual(proto.path_element[1].name, 'name');
-  });
-
-  it('should detect the namespace of the hierarchical keys', function() {
-    var key = new entity.Key({
-        namespace: 'Namespace',
-        path: [ 'Kind1', 1, 'Kind2', 'name' ]
-      });
-    var proto = entity.keyToKeyProto(key);
-    assert.strictEqual(proto.partition_id.namespace, 'Namespace');
-    assert.strictEqual(proto.path_element[0].kind, 'Kind1');
-    assert.strictEqual(proto.path_element[0].id, 1);
-    assert.strictEqual(proto.path_element[0].name, undefined);
-    assert.strictEqual(proto.path_element[1].kind, 'Kind2');
-    assert.strictEqual(proto.path_element[1].id, undefined);
-    assert.strictEqual(proto.path_element[1].name, 'name');
-  });
-
-  it('should handle incomplete keys with & without namespaces', function() {
-    var key = new entity.Key({ path: [ 'Kind1' ] });
-    var keyWithNS = new entity.Key({
-      namespace: 'Namespace',
-      path: [ 'Kind1' ]
-    });
-    var keyWithNumericID = new entity.Key({
-      path: [ 'Kind1', 234 ]
-    });
-    var keyWithStringID = new entity.Key({
-      path: [ 'Kind1', 'StringId' ]
-    });
-
-    var proto = entity.keyToKeyProto(key);
-    var protoWithNS = entity.keyToKeyProto(keyWithNS);
-    var protoWithNumericID = entity.keyToKeyProto(keyWithNumericID);
-    var protoWithStringID = entity.keyToKeyProto(keyWithStringID);
-
-    assert.strictEqual(proto.partition_id, undefined);
-    assert.strictEqual(proto.path_element[0].kind, 'Kind1');
-    assert.strictEqual(proto.path_element[0].id, undefined);
-    assert.strictEqual(proto.path_element[0].name, undefined);
-
-    assert.strictEqual(protoWithNS.partition_id.namespace, 'Namespace');
-    assert.strictEqual(protoWithNS.path_element[0].kind, 'Kind1');
-    assert.strictEqual(protoWithNS.path_element[0].id, undefined);
-    assert.strictEqual(protoWithNS.path_element[0].name, undefined);
-
-    assert.strictEqual(protoWithNumericID.path_element[0].id, 234);
-    assert.strictEqual(protoWithStringID.path_element[0].name, 'StringId');
-  });
-
-  it('should throw if key contains 0 items', function() {
-    assert.throws(function() {
-      var key = new entity.Key({ path: [] });
-      entity.keyToKeyProto(key);
-    }, /A key should contain at least a kind/);
-  });
-
-  it('should throw if key path contains null ids', function() {
-    assert.throws(function() {
-      var key = new entity.Key({
-        namespace: 'Namespace',
-        path: [ 'Kind1', null, 'Company' ]
-      });
-      entity.keyToKeyProto(key);
-    }, /Invalid key. Ancestor keys require an id or name./);
-  });
-
-  it('should not throw if last key path item is null', function() {
-    assert.doesNotThrow(function() {
-      var key = new entity.Key({
-        namespace: 'Namespace',
-        path: [ 'Kind1', 123, 'Company', null ]
-      });
-      entity.keyToKeyProto(key);
-    });
-  });
-});
-
-describe('isKeyComplete', function() {
-  it('should ret true if kind and an identifier have !0 vals', function() {
-    [
-      {
-        key: new entity.Key({ path: [ 'Kind1' ] }),
-        expected: false
+      endCursor: 'end',
+      limit: {
+        value: 1
       },
-      {
-        key: new entity.Key({ path: [ 'Kind1', 3 ] }),
-        expected: true
-      },
-      {
-        key: new entity.Key({ namespace: 'NS', path: [ 'Kind1' ] }),
-        expected: false
-      },
-      {
-        key: new entity.Key({ namespace: 'NS', path: [ 'Kind1', 'name' ] }),
-        expected: true
-      }
-    ].forEach(function(test) {
-      assert.strictEqual(entity.isKeyComplete(test.key), test.expected);
-    });
-  });
-
-  it('should return false if there is no identifier', function() {
-    var key = new entity.Key({ path: [ 'Kind' ] });
-
-    assert.strictEqual(entity.isKeyComplete(key), false);
-  });
-});
-
-describe('entityFromEntityProto', function() {
-  it('should support bool, int, double, str, entity & list values', function() {
-    var obj = entity.entityFromEntityProto(entityProto);
-    assert.deepEqual(obj.linkedTo, new entity.Key({ path: [ 'Kind', '123' ]}));
-    assert.strictEqual(obj.name, 'Some name');
-    assert.strictEqual(obj.flagged, false);
-    assert.strictEqual(obj.count, 5);
-    assert.strictEqual(obj.total, 7.8);
-    assert.strictEqual(obj.author.name, 'Burcu Dogan');
-    assert.strictEqual(obj.list[0], 6);
-    assert.strictEqual(obj.list[1], false);
-  });
-});
-
-describe('entityToEntityProto', function() {
-  it('should format an entity', function() {
-    var val = entity.entityToEntityProto({
-      name: 'name'
-    });
-    var expected = {
-      key: null,
-      property: [
-        {
-          name: 'name',
-          value: {
-            string_value: 'name'
-          }
-        }
-      ]
-    };
-    assert.deepEqual(val, expected);
-  });
-});
-
-describe('queryToQueryProto', function() {
-  it('should support filters and ancestory filtering', function() {
-    var ds = datastore.dataset({ projectId: 'project-id' });
-    var q = ds.createQuery('Kind1')
-      .filter('name', '=', 'John')
-      .end('end')
-      .hasAncestor(new entity.Key({ path: [ 'Kind2', 'somename' ] }));
-    var proto = entity.queryToQueryProto(q);
-    assert.deepEqual(proto, queryFilterProto);
-  });
-});
-
-describe('propertyToValue', function() {
-  it('should translate a buffer', function() {
-    var buffer = new Buffer('010159406940');
-    var property = {
-      blob_value: ByteBuffer.wrap(buffer)
-    };
-    var returnedbuffer = entity.propertyToValue(property);
-    assert.deepEqual(buffer, returnedbuffer);
-  });
-});
-
-describe('valueToProperty', function() {
-  it('should translate a boolean', function() {
-    var val = entity.valueToProperty(true);
-    assert.deepEqual(val, {
-      boolean_value: true
-    });
-  });
-
-  it('should translate an int', function() {
-    var val1 = entity.valueToProperty(new entity.Int(3));
-    var val2 = entity.valueToProperty(3);
-    var expected = { integer_value: 3 };
-    assert.deepEqual(val1, expected);
-    assert.deepEqual(val2, expected);
-  });
-
-  it('should translate a double', function() {
-    var val1 = entity.valueToProperty(new entity.Double(3.1));
-    var val2 = entity.valueToProperty(3.1);
-    var expected = { double_value: 3.1 };
-    assert.deepEqual(val1, expected);
-    assert.deepEqual(val2, expected);
-  });
-
-  it('should translate a date', function() {
-    var date = new Date();
-    var val = entity.valueToProperty(date);
-    var expected = {
-      timestamp_microseconds_value: date.getTime() * 1000
-    };
-    assert.deepEqual(val, expected);
-  });
-
-  it('should translate a string', function() {
-    var val = entity.valueToProperty('Hi');
-    var expected = {
-      string_value: 'Hi'
-    };
-    assert.deepEqual(val, expected);
-  });
-
-  it('should translate a buffer', function() {
-    var buffer = new Buffer('Hi');
-    var val = entity.valueToProperty(buffer);
-    var expected = {
-      blob_value: buffer
-    };
-    assert.deepEqual(val, expected);
-  });
-
-  it('should translate an array', function() {
-    var array = [1, '2', true];
-    var val = entity.valueToProperty(array);
-    var expected = {
-      list_value: [
-        { integer_value: 1 },
-        { string_value: '2' },
-        { boolean_value: true }
-      ]
-    };
-    assert.deepEqual(val, expected);
-  });
-
-  it('should translate a Key', function() {
-    var key = new entity.Key({
-      namespace: 'ns',
-      path: ['Kind', 3]
-    });
-    var val = entity.valueToProperty(key);
-    var expected = {
-      key_value: entity.keyToKeyProto(key)
-    };
-    assert.deepEqual(val, expected);
-  });
-
-  describe('objects', function() {
-    it('should translate an object', function() {
-      var val = entity.valueToProperty({
-        name: 'value'
-      });
-      var expected = {
-        entity_value: {
-          property: [
+      offset: 1,
+      startCursor: 'start',
+      filter: {
+        compositeFilter: {
+          filters: [
             {
-              name: 'name',
-              value: {
-                string_value: 'value',
+              propertyFilter: {
+                property: {
+                  name: 'name'
+                },
+                op: 'EQUAL',
+                value: {
+                  stringValue: 'John'
+                }
+              }
+            },
+            {
+              propertyFilter: {
+                property: {
+                  name: '__key__'
+                },
+                op: 'HAS_ANCESTOR',
+                value: {
+                  keyValue: {
+                    path: [
+                      {
+                        kind: 'Kind2',
+                        name: 'somename'
+                      }
+                    ]
+                  }
+                }
               }
             }
-          ]
-        },
-        indexed: false
-      };
-      assert.deepEqual(val, expected);
+          ],
+          op: 'AND'
+        }
+      }
+    };
+
+    it('should support all configurations of a query', function() {
+      var ancestorKey = new entity.Key({
+        path: ['Kind2', 'somename']
+      });
+
+      var ds = new Datastore({ projectId: 'project-id' });
+
+      var query = ds.createQuery('Kind1')
+        .filter('name', 'John')
+        .start('start')
+        .end('end')
+        .groupBy(['name'])
+        .order('name')
+        .select('name')
+        .limit(1)
+        .offset(1)
+        .hasAncestor(ancestorKey);
+
+      assert.deepEqual(entity.queryToQueryProto(query), queryProto);
     });
 
-    it('should not translate a key-less object', function() {
-      assert.throws(function() {
-        entity.valueToProperty({});
-      }, /Unsupported field value/);
+    it('should handle buffer start and end values', function() {
+      var ds = new Datastore({ projectId: 'project-id' });
+      var startVal = new Buffer('start');
+      var endVal = new Buffer('end');
+
+      var query = ds.createQuery('Kind1')
+        .start(startVal)
+        .end(endVal);
+
+      var queryProto = entity.queryToQueryProto(query);
+      assert.strictEqual(queryProto.endCursor, endVal.toString('base64'));
+      assert.strictEqual(queryProto.startCursor, startVal.toString('base64'));
     });
   });
 });
