@@ -570,6 +570,61 @@ describe('Request', function() {
         });
       });
 
+      it('should re-run query if not finished', function(done) {
+        entityOverrides.formatArray = util.noop;
+
+        var nextQuery;
+        var queryProto = {};
+        var query = {
+          offsetVal: 8
+        };
+
+        var timesRequestCalled = 0;
+        var startCalled = false;
+        var offsetCalled = false;
+
+        request.request_ = function(protoOpts, reqOpts, callback) {
+          timesRequestCalled++;
+
+          if (timesRequestCalled === 1) {
+            assert.strictEqual(protoOpts.service, 'Datastore');
+            assert.strictEqual(protoOpts.method, 'runQuery');
+
+            var resp = extend(true, {}, apiResponse);
+            resp.batch.moreResults = 'NOT_FINISHED';
+
+            callback(null, resp);
+          } else {
+            assert.strictEqual(startCalled, true);
+            assert.strictEqual(offsetCalled, true);
+            assert.strictEqual(reqOpts.query, queryProto);
+            done();
+          }
+        };
+
+        FakeQuery.prototype.start = function(endCursor_) {
+          assert.strictEqual(endCursor_, endCursor);
+          startCalled = true;
+          return this;
+        };
+
+        FakeQuery.prototype.offset = function(offset_) {
+          var offset = query.offsetVal - apiResponse.batch.skippedResults;
+          assert.strictEqual(offset_, offset);
+          offsetCalled = true;
+          return this;
+        };
+
+        entityOverrides.queryToQueryProto = function(query_) {
+          if (timesRequestCalled > 1) {
+            assert.strictEqual(query_, nextQuery);
+          }
+          return queryProto;
+        };
+
+        request.runQuery(query, assert.ifError);
+      });
+
       it('should return nextQuery', function(done) {
         entityOverrides.formatArray = util.noop;
 
