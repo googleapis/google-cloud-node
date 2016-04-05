@@ -398,12 +398,9 @@ describe('entity', function() {
 
       var expectedValueProto = {
         entityValue: {
-          properties: [
-            {
-              name: 'key',
-              value: value.key
-            }
-          ]
+          properties: {
+            key: value.key
+          }
         }
       };
 
