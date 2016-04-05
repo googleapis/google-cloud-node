@@ -75,7 +75,10 @@ describe('Datastore', function() {
       isDraft: false,
       wordCount: 400,
       rating: 5.0,
-      likes: null
+      likes: null,
+      metadata: {
+        views: 100
+      }
     };
 
     it('should save/get/delete with a key name', function(done) {
