@@ -1,0 +1,21 @@
+{
+  "name": "computeengine",
+  "description": "Collection of Node.js samples on Google Compute Engine.",
+  "version": "0.0.1",
+  "private": true,
+  "license": "Apache Version 2.0",
+  "author": "Google Inc.",
+  "engines": {
+    "node": ">=0.10.x"
+  },
+  "scripts": {
+    "sendgrid": "node sendgrid.js",
+    "vms": "node vms.js",
+    "vms_api": "node vms_api.js"
+  },
+  "dependencies": {
+    "gcloud": "^0.30.2",
+    "googleapis": "^4.0.0",
+    "sendgrid": "^2.0.0"
+  }
+}
