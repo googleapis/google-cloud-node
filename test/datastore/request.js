@@ -565,32 +565,46 @@ describe('Request', function() {
 
         request.runQuery({}, function(err, entities) {
           assert.ifError(err);
-          assert.strictEqual(entities, entityResults);
+          assert.deepEqual(entities, entityResults);
           done();
         });
       });
 
       it('should re-run query if not finished', function(done) {
-        entityOverrides.formatArray = util.noop;
-
+        var entityResults = {
+          1: ['a'],
+          2: ['b', 'c']
+        };
         var nextQuery;
-        var queryProto = {};
         var query = {
+          limitVal: 1,
           offsetVal: 8
+        };
+        var queryProto = {
+          limit: {
+            value: query.limitVal
+          }
         };
 
         var timesRequestCalled = 0;
         var startCalled = false;
         var offsetCalled = false;
 
+        entityOverrides.formatArray = function(array) {
+          assert.strictEqual(array, entityResults[timesRequestCalled]);
+          return entityResults[timesRequestCalled];
+        };
+
         request.request_ = function(protoOpts, reqOpts, callback) {
           timesRequestCalled++;
+
+          var resp = extend(true, {}, apiResponse);
+          resp.batch.entityResults = entityResults[timesRequestCalled];
 
           if (timesRequestCalled === 1) {
             assert.strictEqual(protoOpts.service, 'Datastore');
             assert.strictEqual(protoOpts.method, 'runQuery');
 
-            var resp = extend(true, {}, apiResponse);
             resp.batch.moreResults = 'NOT_FINISHED';
 
             callback(null, resp);
@@ -598,11 +612,15 @@ describe('Request', function() {
             assert.strictEqual(startCalled, true);
             assert.strictEqual(offsetCalled, true);
             assert.strictEqual(reqOpts.query, queryProto);
-            done();
+
+            resp.batch.moreResults = 'MORE_RESULTS_AFTER_LIMIT';
+
+            callback(null, resp);
           }
         };
 
         FakeQuery.prototype.start = function(endCursor_) {
+          nextQuery = this;
           assert.strictEqual(endCursor_, endCursor);
           startCalled = true;
           return this;
@@ -615,6 +633,19 @@ describe('Request', function() {
           return this;
         };
 
+        FakeQuery.prototype.limit = function(limit_) {
+          if (timesRequestCalled === 1) {
+            assert.strictEqual(
+              limit_,
+              entityResults[1].length - query.limitVal
+            );
+          } else {
+            // Should restore the original limit.
+            assert.strictEqual(limit_, query.limitVal);
+          }
+          return this;
+        };
+
         entityOverrides.queryToQueryProto = function(query_) {
           if (timesRequestCalled > 1) {
             assert.strictEqual(query_, nextQuery);
@@ -622,7 +653,15 @@ describe('Request', function() {
           return queryProto;
         };
 
-        request.runQuery(query, assert.ifError);
+        request.runQuery(query, function(err, entities, nextQuery_) {
+          assert.ifError(err);
+          assert.deepEqual(
+            entities,
+            [].slice.call(entityResults[1]).concat(entityResults[2])
+          );
+          assert.strictEqual(nextQuery_, nextQuery);
+          done();
+        });
       });
 
       it('should return nextQuery', function(done) {
