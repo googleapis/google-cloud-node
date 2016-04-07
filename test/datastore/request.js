@@ -542,7 +542,7 @@ describe('Request', function() {
 
     describe('success', function() {
       var entityResults = ['a', 'b', 'c'];
-      var endCursor = 'endCursor';
+      var endCursor = new Buffer('abc');
 
       var apiResponse = {
         batch: {
@@ -623,7 +623,7 @@ describe('Request', function() {
 
         FakeQuery.prototype.start = function(endCursor_) {
           nextQuery = this;
-          assert.strictEqual(endCursor_, endCursor);
+          assert.strictEqual(endCursor_, endCursor.toString('base64'));
           startCalled = true;
           return this;
         };
@@ -677,7 +677,7 @@ describe('Request', function() {
         var offsetCalled = false;
 
         FakeQuery.prototype.start = function(endCursor_) {
-          assert.strictEqual(endCursor_, endCursor);
+          assert.strictEqual(endCursor_, endCursor.toString('base64'));
           startCalled = true;
           return this;
         };
