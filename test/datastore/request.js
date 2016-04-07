@@ -492,6 +492,10 @@ describe('Request', function() {
   });
 
   describe('runQuery', function() {
+    beforeEach(function() {
+      entityOverrides.queryToQueryProto = util.noop;
+    });
+
     it('should make correct request', function(done) {
       var query = { namespace: 'namespace' };
       var queryProto = {};
@@ -519,8 +523,6 @@ describe('Request', function() {
       var apiResponse = {};
 
       beforeEach(function() {
-        entity.queryToQueryProto = util.noop;
-
         request.request_ = function(protoOpts, reqOpts, callback) {
           callback(error, apiResponse);
         };
