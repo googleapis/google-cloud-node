@@ -178,6 +178,17 @@ describe('BigQuery/Dataset', function() {
       ds.createTable(TABLE_ID, { schema: SCHEMA_STRING }, assert.ifError);
     });
 
+    it('should wrap an array schema', function(done) {
+      ds.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.json.schema.fields, SCHEMA_OBJECT.fields);
+        done();
+      };
+
+      ds.createTable(TABLE_ID, {
+        schema: SCHEMA_OBJECT.fields
+      }, assert.ifError);
+    });
+
     it('should return an error to the callback', function(done) {
       var error = new Error('Error.');
 
