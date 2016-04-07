@@ -571,7 +571,7 @@ describe('entity', function() {
 
     it('should set the namespace', function(done) {
       entity.Key = function(keyOptions) {
-        assert.strictEqual(keyOptions.namespaceId, NAMESPACE);
+        assert.strictEqual(keyOptions.namespace, NAMESPACE);
         done();
       };
 
@@ -581,7 +581,7 @@ describe('entity', function() {
     it('should create a proper Key', function(done) {
       entity.Key = function(keyOptions) {
         assert.deepEqual(keyOptions, {
-          namespaceId: NAMESPACE,
+          namespace: NAMESPACE,
           path: [
             'Kind',
             111,
