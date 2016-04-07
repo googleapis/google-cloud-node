@@ -17,14 +17,13 @@
 set -ev
 
 npm run lint
-# generates docs and runs tests
-npm run test
+npm run test # generates docs and runs tests
+npm run coveralls
 
 # if merging to master and not a pull request, execute system tests, create coverage report and update docs
 if [ "${TRAVIS_BRANCH}" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then
   openssl aes-256-cbc -K $encrypted_b8aa0887832a_key -iv $encrypted_b8aa0887832a_iv -in key.json.enc -out key.json -d
-  # create new coverage report (executes system tests)
-  npm run coveralls
+  npm run system-test
 
   # add new docs to the gh-pages branch
   git submodule add -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} ghpages
