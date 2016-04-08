@@ -495,6 +495,15 @@ describe('Bucket', function() {
   });
 
   describe('deleteFiles', function() {
+    it('should accept only a callback', function(done) {
+      bucket.getFiles = function(query, callback) {
+        assert.deepEqual(query, {});
+        callback(null, []);
+      };
+
+      bucket.deleteFiles(done);
+    });
+
     it('should get files from the bucket', function(done) {
       var query = { a: 'b', c: 'd' };
 
@@ -954,6 +963,13 @@ describe('Bucket', function() {
         assert.ifError(err);
         assert(file.isSameFile());
         assert.deepEqual(file.metadata, metadata);
+        done();
+      });
+    });
+
+    it('should execute callback with error if file not found', function(done) {
+      bucket.upload('./not-real-file.json', function(err) {
+        assert.strictEqual(err.code, 'ENOENT');
         done();
       });
     });

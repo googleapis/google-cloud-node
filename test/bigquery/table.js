@@ -76,16 +76,20 @@ describe('BigQuery/Table', function() {
 
   var SCHEMA_OBJECT = {
     fields: [
-      { name: 'id', type: 'integer' },
-      { name: 'name', type: 'string' },
-      { name: 'dob', type: 'timestamp' },
-      { name: 'has_claws', type: 'boolean' },
-      { name: 'hair_count', type: 'float' }
+      { name: 'id', type: 'INTEGER' },
+      { name: 'name', type: 'STRING' },
+      { name: 'dob', type: 'TIMESTAMP' },
+      { name: 'has_claws', type: 'BOOLEAN' },
+      { name: 'hair_count', type: 'FLOAT' }
     ]
   };
   var SCHEMA_STRING = [
-    'id:integer,name,dob:timestamp,has_claws:boolean,hair_count:float'
-  ].join('');
+    'id:integer',
+    'name',
+    'dob:timestamp',
+    'has_claws:boolean',
+    'hair_count:float'
+  ].join(',');
 
   var Table;
   var TABLE_ID = 'kittens';
@@ -176,55 +180,28 @@ describe('BigQuery/Table', function() {
 
   describe('mergeSchemaWithRows_', function() {
     it('should merge the schema and flatten the rows', function() {
+      var now = new Date();
+
       var rows = [
         {
-          raw: { f: [] }, // populated below
-          expected: {
-            id: 1,
-            name: 'Milo',
-            dob: new Date().toJSON(),
-            has_claws: '1',
-            hair_count: 5.222330009847
-          }
-        },
-        {
-          raw: { f: [] }, // populated below
-          expected: {
-            id: 2,
-            name: 'Otis',
-            dob: new Date().toJSON(),
-            has_claws: 'true',
-            hair_count: 5.222330009847
-          }
-        },
-        {
-          raw: { f: [] }, // populated below
+          raw: {
+            f: [
+              { v: '3' },
+              { v: 'Milo' },
+              { v: String(now.valueOf() / 1000) },
+              { v: 'false' },
+              { v: '5.222330009847' }
+            ]
+          },
           expected: {
             id: 3,
             name: 'Milo',
-            dob: new Date().toJSON(),
-            has_claws: 'false',
-            hair_count: 5.222330009847
-          }
-        },
-        {
-          raw: { f: [] }, // populated below
-          expected: {
-            id: 3,
-            name: 'Milo',
-            dob: new Date().toJSON(),
-            has_claws: '0',
+            dob: now,
+            has_claws: false,
             hair_count: 5.222330009847
           }
         }
       ];
-
-      rows = rows.map(function(row) {
-        for (var prop in row.expected) {
-          row.raw.f.push({ v: row.expected[prop] });
-        }
-        return row;
-      });
 
       var rawRows = rows.map(prop('raw'));
       var mergedRows = Table.mergeSchemaWithRows_(SCHEMA_OBJECT, rawRows);
@@ -819,6 +796,25 @@ describe('BigQuery/Table', function() {
       table.import(FILEPATH, done);
     });
 
+    it('should execute callback with error from writestream', function(done) {
+      var error = new Error('Error.');
+
+      table.createWriteStream = function(metadata) {
+        assert.equal(metadata.sourceFormat, 'NEWLINE_DELIMITED_JSON');
+        var ws = new stream.Writable();
+        setImmediate(function() {
+          ws.emit('error', error);
+          ws.end();
+        });
+        return ws;
+      };
+
+      table.import(FILEPATH, function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
     it('should not infer the file format if one is given', function(done) {
       table.createWriteStream = function(metadata) {
         assert.equal(metadata.sourceFormat, 'CSV');
@@ -1088,7 +1084,7 @@ describe('BigQuery/Table', function() {
     it('should accept a schema', function(done) {
       table.request = function(reqOpts) {
         assert.deepEqual(reqOpts.json.schema, {
-          fields: [{ name: 'schema', type: 'string' }]
+          fields: [{ name: 'schema', type: 'STRING' }]
         });
         done();
       };

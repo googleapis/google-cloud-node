@@ -618,6 +618,27 @@ describe('File', function() {
           .resume();
       });
 
+      it('should let util.handleResp handle the response', function(done) {
+        var response = { a: 'b', c: 'd' };
+
+        handleRespOverride = function(err, response_, body) {
+          assert.strictEqual(err, null);
+          assert.strictEqual(response_, response);
+          assert.strictEqual(body, null);
+          done();
+        };
+
+        file.bucket.storage.makeAuthenticatedRequest = function() {
+          var stream = through();
+          setImmediate(function() {
+            stream.emit('response', response);
+          });
+          return stream;
+        };
+
+        file.createReadStream().resume();
+      });
+
       it('should unpipe stream from an error on the response', function(done) {
         var requestStream = through();
         var readStream = file.createReadStream();
@@ -648,7 +669,7 @@ describe('File', function() {
         readStream.resume();
       });
 
-      it('should let util.handleResp handle the response', function(done) {
+      it('should let handleResp handle the completed request', function(done) {
         var response = { a: 'b', c: 'd' };
 
         handleRespOverride = function(err, response_, body) {
@@ -709,6 +730,27 @@ describe('File', function() {
             return (requestOverride || requestCached)(opts);
           }
         };
+      });
+
+      it('should destroy the stream on error', function(done) {
+        var error = new Error('Error.');
+
+        requestOverride = getFakeSuccessfulRequest('data');
+
+        handleRespOverride = function(err, resp, body, callback) {
+          callback(error);
+        };
+
+        file.createReadStream({ validation: 'crc32c' })
+          .on('error', function(err) {
+            assert.strictEqual(err, error);
+
+            setImmediate(function() {
+              assert.strictEqual(requestOverride.wasRequestDestroyed(), true);
+              done();
+            });
+          })
+          .resume();
       });
 
       it('should validate with crc32c', function(done) {

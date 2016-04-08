@@ -42,7 +42,7 @@ describe('storage/acl', function() {
   });
 
   describe('add', function() {
-    it('makes the correct api request', function(done) {
+    it('should make the correct api request', function(done) {
       acl.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '');
@@ -53,7 +53,22 @@ describe('storage/acl', function() {
       acl.add({ entity: ENTITY, role: ROLE }, assert.ifError);
     });
 
-    it('executes the callback with an ACL object', function(done) {
+    it('should set the generation', function(done) {
+      var options = {
+        entity: ENTITY,
+        role: ROLE,
+        generation: 8
+      };
+
+      acl.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.generation, options.generation);
+        done();
+      };
+
+      acl.add(options, assert.ifError);
+    });
+
+    it('should execute the callback with an ACL object', function(done) {
       var apiResponse = { entity: ENTITY, role: ROLE };
       var expectedAclObject = { entity: ENTITY, role: ROLE };
 
@@ -73,7 +88,7 @@ describe('storage/acl', function() {
       });
     });
 
-    it('executes the callback with an error', function(done) {
+    it('should execute the callback with an error', function(done) {
       acl.request = function(reqOpts, callback) {
         callback(ERROR);
       };
@@ -84,7 +99,7 @@ describe('storage/acl', function() {
       });
     });
 
-    it('executes the callback with apiResponse', function(done) {
+    it('should execute the callback with apiResponse', function(done) {
       var resp = { success: true };
 
       acl.request = function(reqOpts, callback) {
@@ -99,7 +114,7 @@ describe('storage/acl', function() {
   });
 
   describe('delete', function() {
-    it('makes the correct api request', function(done) {
+    it('should make the correct api request', function(done) {
       acl.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'DELETE');
         assert.strictEqual(reqOpts.uri, '/' + encodeURIComponent(ENTITY));
@@ -108,6 +123,20 @@ describe('storage/acl', function() {
       };
 
       acl.delete({ entity: ENTITY }, assert.ifError);
+    });
+
+    it('should set the generation', function(done) {
+      var options = {
+        entity: ENTITY,
+        generation: 8
+      };
+
+      acl.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.generation, options.generation);
+        done();
+      };
+
+      acl.delete(options, assert.ifError);
     });
 
     it('should execute the callback with an error', function(done) {
@@ -271,6 +300,21 @@ describe('storage/acl', function() {
       acl.update({ entity: ENTITY, role: ROLE }, assert.ifError);
     });
 
+    it('should set the generation', function(done) {
+      var options = {
+        entity: ENTITY,
+        role: ROLE,
+        generation: 8
+      };
+
+      acl.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.qs.generation, options.generation);
+        done();
+      };
+
+      acl.update(options, assert.ifError);
+    });
+
     it('should pass an acl object to the callback', function(done) {
       var apiResponse = { entity: ENTITY, role: ROLE };
       var expectedAclObject = { entity: ENTITY, role: ROLE };
@@ -336,6 +380,24 @@ describe('storage/acl', function() {
         role: ROLE,
         projectTeam: projectTeam
       });
+    });
+  });
+
+  describe('request', function() {
+    it('should make the correct request', function(done) {
+      var uri = '/uri';
+
+      var reqOpts = {
+        uri: uri
+      };
+
+      acl.request_ = function(reqOpts_, callback) {
+        assert.strictEqual(reqOpts_, reqOpts);
+        assert.strictEqual(reqOpts_.uri, PATH_PREFIX + uri);
+        callback(); // done()
+      };
+
+      acl.request(reqOpts, done);
     });
   });
 });

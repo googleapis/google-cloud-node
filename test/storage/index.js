@@ -48,6 +48,10 @@ function FakeService() {
 
 nodeutil.inherits(FakeService, Service);
 
+function FakeChannel() {
+  this.calledWith_ = arguments;
+}
+
 describe('Storage', function() {
   var PROJECT_ID = 'project-id';
   var Storage;
@@ -58,6 +62,7 @@ describe('Storage', function() {
     mockery.registerMock('../../lib/common/service.js', FakeService);
     mockery.registerMock('../../lib/common/util.js', fakeUtil);
     mockery.registerMock('../../lib/common/stream-router.js', fakeStreamRouter);
+    mockery.registerMock('../../lib/storage/channel.js', FakeChannel);
 
     mockery.enable({
       useCleanCache: true,
@@ -127,6 +132,21 @@ describe('Storage', function() {
       var bucket = storage.bucket(newBucketName);
       assert(bucket instanceof Bucket);
       assert.equal(bucket.name, newBucketName);
+    });
+  });
+
+  describe('channel', function() {
+    var ID = 'channel-id';
+    var RESOURCE_ID = 'resource-id';
+
+    it('should create a Channel object', function() {
+      var channel = storage.channel(ID, RESOURCE_ID);
+
+      assert(channel instanceof FakeChannel);
+
+      assert.strictEqual(channel.calledWith_[0], storage);
+      assert.strictEqual(channel.calledWith_[1], ID);
+      assert.strictEqual(channel.calledWith_[2], RESOURCE_ID);
     });
   });
 
@@ -252,6 +272,23 @@ describe('Storage', function() {
         done();
       };
       storage.getBuckets({ maxResults: 5, pageToken: token }, util.noop);
+    });
+
+    it('should execute callback with error', function(done) {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      storage.request = function(reqOpts, callback) {
+        callback(error, apiResponse);
+      };
+
+      storage.getBuckets({}, function(err, buckets, nextQuery, resp) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(buckets, null);
+        assert.strictEqual(nextQuery, null);
+        assert.strictEqual(resp, apiResponse);
+        done();
+      });
     });
 
     it('should return nextQuery if more results exist', function() {

@@ -236,6 +236,21 @@ describe('GrpcService', function() {
       delete global.GCLOUD_SANDBOX_ENV;
     });
 
+    it('should access the specified service proto object', function(done) {
+      grpcService.protos.CustomService = {
+        CustomService: function() {
+          setImmediate(done);
+          return new ProtoService();
+        }
+      };
+
+      var protoOpts = extend(true, {}, PROTO_OPTS, {
+        service: 'CustomService'
+      });
+
+      grpcService.request(protoOpts, REQ_OPTS, assert.ifError);
+    });
+
     describe('getting gRPC credentials', function() {
       beforeEach(function() {
         delete grpcService.grpcCredentials;

@@ -175,6 +175,18 @@ describe('Index', function() {
   });
 
   describe('document', function() {
+    it('should accept an object', function() {
+      var docObj = {};
+      var returnedObj = {};
+
+      index.documentFromObject_ = function(id) {
+        assert.strictEqual(id, docObj);
+        return returnedObj;
+      };
+
+      assert.strictEqual(index.document(docObj), returnedObj);
+    });
+
     it('should return a new Document object', function() {
       var docId = 'doc-id';
       var document = index.document(docId);
