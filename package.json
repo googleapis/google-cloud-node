@@ -116,7 +116,7 @@
     "prop-assign": "^1.0.0",
     "propprop": "^0.3.0",
     "pumpify": "^1.3.3",
-    "request": "^2.53.0",
+    "request": "^2.70.0",
     "retry-request": "^1.2.3",
     "rgb-hex": "^1.0.0",
     "snake": "0.0.1",
