@@ -16,15 +16,11 @@
 
 set -ev
 
-# decrypt credentials
 openssl aes-256-cbc -K $encrypted_b8aa0887832a_key -iv $encrypted_b8aa0887832a_iv -in key.json.enc -out key.json -d
 
-# create new coverage report
-npm run coveralls
-
-### Update docs
-# generate new set of json files in docs/json/master
 npm run docs
+npm run system-test
+
 git submodule add -f -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} ghpages
 # copy set of json to tag folder
 test -d "ghpages/json/${TRAVIS_TAG}" && exit 0 || mkdir ghpages/json/${TRAVIS_TAG}
@@ -37,6 +33,8 @@ cd ghpages
 git add json
 git add manifest.json
 # commit to gh-pages branch
-git config user.name "selfiebot"
+git config user.name "travis-ci"
+git config user.email "travis@travis-ci.org"
 git commit -m "Update docs for ${TRAVIS_TAG}"
+git status
 git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages
