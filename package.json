@@ -62,6 +62,9 @@
     "cloud pubsub",
     "pub/sub",
     "pubsub",
+    "google cloud storage",
+    "cloud storage",
+    "gcs",
     "google compute engine",
     "compute engine",
     "computeengine",
@@ -71,12 +74,19 @@
     "google appengine",
     "appengine",
     "gae",
-    "google cloud storage",
-    "cloud storage",
-    "gcs",
+    "google prediction",
+    "prediction",
+    "google translate",
+    "translate",
+    "google cloud logging",
+    "cloud logging",
+    "logging",
     "google cloud resource manager",
     "cloud resource manager",
     "resource manager",
+    "google cloud vision",
+    "cloud vision",
+    "vision",
     "google cloud search",
     "cloud search",
     "search"
@@ -139,5 +149,8 @@
     "system-test": "mocha system-test/* --no-timeouts --bail",
     "coveralls": "istanbul cover -x 'system-test/*' _mocha --report lcovonly -- --no-timeouts --bail test/**/*.js -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=0.12.0"
+  }
 }
