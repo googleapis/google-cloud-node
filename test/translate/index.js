@@ -87,7 +87,7 @@ describe('Translate', function() {
 
     it('should throw if an API key is not provided', function() {
       assert.throws(function() {
-        new Translate();
+        new Translate({});
       }, 'An API key is required to use the Translate API.');
     });
 

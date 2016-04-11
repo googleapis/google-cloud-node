@@ -313,6 +313,16 @@ describe('entity', function() {
       assert.deepEqual(entity.encodeValue(value), expectedValueProto);
     });
 
+    it('should encode a GeoPoint object', function() {
+      var value = new entity.GeoPoint();
+
+      var expectedValueProto = {
+        geoPointValue: value.value
+      };
+
+      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+    });
+
     it('should encode a date', function() {
       var value = new Date();
       var seconds = value.getTime() / 1000;

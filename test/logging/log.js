@@ -274,6 +274,16 @@ describe('Log', function() {
         done();
       });
     });
+
+    it('should not require options', function(done) {
+      log.formatEntryForApi_ = util.noop;
+
+      log.request = function(protoOpts, reqOpts, callback) {
+        callback(); // done()
+      };
+
+      log.write(ENTRY, done);
+    });
   });
 
   describe('severity shortcuts', function() {

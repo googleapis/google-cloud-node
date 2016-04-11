@@ -664,6 +664,10 @@ describe('Compute', function() {
         items: {}
       };
 
+      apiResponse.items['not-zone-name'] = {
+        autoscalers: [autoscaler]
+      };
+
       apiResponse.items[FULL_ZONE_NAME] = {
         autoscalers: [autoscaler]
       };
@@ -689,6 +693,25 @@ describe('Compute', function() {
         };
 
         compute.getAutoscalers({}, assert.ifError);
+      });
+
+      it('should not create zone-less Autoscalers', function(done) {
+        var zone = {};
+
+        compute.zone = function() {
+          return zone;
+        };
+
+        zone.autoscaler = function() {
+          return autoscaler;
+        };
+
+        compute.getAutoscalers({}, function(err, autoscalers) {
+          assert.ifError(err);
+          assert(Object.keys(apiResponse.items).length > 1);
+          assert.strictEqual(autoscalers.length, 1);
+          done();
+        });
       });
 
       it('should build a nextQuery if necessary', function(done) {

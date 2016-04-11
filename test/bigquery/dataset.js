@@ -116,13 +116,14 @@ describe('BigQuery/Dataset', function() {
   describe('createTable', function() {
     var SCHEMA_OBJECT = {
       fields: [
-        { name: 'id', type: 'integer' },
-        { name: 'breed', type: 'string' },
-        { name: 'name', type: 'string' },
-        { name: 'dob', type: 'timestamp' }
+        { name: 'id', type: 'INTEGER' },
+        { name: 'breed', type: 'STRING' },
+        { name: 'name', type: 'STRING' },
+        { name: 'dob', type: 'TIMESTAMP' },
+        { name: 'around', type: 'BOOLEAN' }
       ]
     };
-    var SCHEMA_STRING = 'id:integer,breed,name,dob:timestamp';
+    var SCHEMA_STRING = 'id:integer,breed,name,dob:timestamp,around:boolean';
     var TABLE_ID = 'kittens';
 
     var API_RESPONSE = {
@@ -150,6 +151,14 @@ describe('BigQuery/Dataset', function() {
       };
 
       ds.createTable(TABLE_ID, options, assert.ifError);
+    });
+
+    it('should not require options', function(done) {
+      ds.request = function(reqOpts, callback) {
+        callback(null, API_RESPONSE);
+      };
+
+      ds.createTable(TABLE_ID, done);
     });
 
     it('should not modify the original options object', function(done) {

@@ -48,7 +48,9 @@ describe('BigQuery', function() {
 
       // Create the test table.
       function(next) {
-        table.create({ schema: 'id:integer,breed,name,dob:timestamp' }, next);
+        table.create({
+          schema: 'id:integer,breed,name,dob:timestamp,around:boolean'
+        }, next);
       },
 
       // Create a Bucket.
@@ -283,7 +285,8 @@ describe('BigQuery', function() {
           { name: 'id', type: 'INTEGER' },
           { name: 'breed', type: 'STRING' },
           { name: 'name', type: 'STRING' },
-          { name: 'dob', type: 'TIMESTAMP' }
+          { name: 'dob', type: 'TIMESTAMP' },
+          { name: 'around', type: 'BOOLEAN' }
         ]
       });
     });
@@ -355,7 +358,8 @@ describe('BigQuery', function() {
           name: 'dave',
           breed: 'british shorthair',
           id: 99,
-          dob: now.toJSON()
+          dob: now.toJSON(),
+          around: true
         };
 
         table.insert(data, function(err, insertErrors) {

@@ -191,6 +191,16 @@ describe('BigQuery/Job', function() {
       job.getQueryResults();
     });
 
+    it('should accept only a callback', function(done) {
+      job.bigQuery.query = function(opts, cb) {
+        assert.deepEqual(opts, { job: job });
+        assert.equal(cb, done);
+        cb(); // done()
+      };
+
+      job.getQueryResults(done);
+    });
+
     it('should assign job to the options object', function(done) {
       job.bigQuery.query = function(opts) {
         assert.deepEqual(opts.job, job);

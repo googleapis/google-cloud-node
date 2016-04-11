@@ -526,6 +526,33 @@ describe('VM', function() {
     });
   });
 
+  describe('setTags', function() {
+    var TAGS = [];
+    var FINGERPRINT = '';
+
+    it('should make the correct request', function(done) {
+      vm.request = function(reqOpts, callback) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/setTags');
+        assert.strictEqual(reqOpts.json.items, TAGS);
+        assert.strictEqual(reqOpts.json.fingerprint, FINGERPRINT);
+
+        callback(); // done()
+      };
+
+      vm.setTags(TAGS, FINGERPRINT, done);
+    });
+
+    it('should not require a callback', function(done) {
+      vm.request = function(reqOpts, callback) {
+        assert.doesNotThrow(callback);
+        done();
+      };
+
+      vm.setTags(TAGS, FINGERPRINT);
+    });
+  });
+
   describe('start', function() {
     it('should make the correct API request', function(done) {
       vm.request = function(reqOpts, callback) {

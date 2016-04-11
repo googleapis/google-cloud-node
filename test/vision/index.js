@@ -303,6 +303,18 @@ describe('Vision', function() {
       async.each(shortNames, checkConfig, done);
     });
 
+    it('should not return detections when none were found', function(done) {
+      vision.annotate = function(config, callback) {
+        callback(null, []);
+      };
+
+      vision.detect(IMAGE, TYPES, function(err, detections) {
+        assert.ifError(err);
+        assert.deepEqual(detections, []);
+        done();
+      });
+    });
+
     it('should return the correct detections', function(done) {
       var annotations = [
         {
@@ -368,6 +380,30 @@ describe('Vision', function() {
       vision.detect(IMAGE, types, function(err, detections) {
         assert.ifError(err);
         assert(deepStrictEqual(detections, expected));
+        done();
+      });
+    });
+
+    it('should return only the detection wanted', function(done) {
+      var annotations = [
+        {
+          faceAnnotations: {}
+        }
+      ];
+
+      var faceAnnotation = {};
+
+      Vision.formatFaceAnnotation_ = function() {
+        return faceAnnotation;
+      };
+
+      vision.annotate = function(config, callback) {
+        callback(null, annotations);
+      };
+
+      vision.detect(IMAGE, ['face'], function(err, detection) {
+        assert.ifError(err);
+        assert.strictEqual(detection, faceAnnotation);
         done();
       });
     });
@@ -734,6 +770,13 @@ describe('Vision', function() {
 
           done();
         });
+      });
+    });
+
+    it('should return an error when file cannot be found', function(done) {
+      Vision.findImages_('./not-real-file.png', function(err) {
+        assert.strictEqual(err.code, 'ENOENT');
+        done();
       });
     });
   });

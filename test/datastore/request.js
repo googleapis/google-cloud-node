@@ -880,6 +880,55 @@ describe('Request', function() {
       }, assert.ifError);
     });
 
+    it('should assign ID on keys without them', function(done) {
+      var incompleteKey = new entity.Key({ path: ['Incomplete'] });
+      var incompleteKey2 = new entity.Key({ path: ['Incomplete'] });
+      var completeKey = new entity.Key({ path: ['Complete', 'Key'] });
+
+      var keyProtos = [];
+      var ids = [1, 2];
+
+      var response = {
+        mutationResults: [
+          {
+            key: {}
+          },
+          {
+            key: {}
+          },
+          {}
+        ]
+      };
+
+      request.request_ = function(protoOpts, reqOpts, callback) {
+        callback(null, response);
+      };
+
+      entityOverrides.keyFromKeyProto = function(keyProto) {
+        keyProtos.push(keyProto);
+        return {
+          id: ids[keyProtos.length - 1]
+        };
+      };
+
+      request.save([
+        { key: incompleteKey, data: {} },
+        { key: incompleteKey2, data: {} },
+        { key: completeKey, data: {} }
+      ], function(err) {
+        assert.ifError(err);
+
+        assert.strictEqual(incompleteKey.id, ids[0]);
+        assert.strictEqual(incompleteKey2.id, ids[1]);
+
+        assert.strictEqual(keyProtos.length, 2);
+        assert.strictEqual(keyProtos[0], response.mutationResults[0].key);
+        assert.strictEqual(keyProtos[1], response.mutationResults[1].key);
+
+        done();
+      });
+    });
+
     describe('transactions', function() {
       beforeEach(function() {
         // Trigger transaction mode.
@@ -948,6 +997,14 @@ describe('Request', function() {
 
     beforeEach(function() {
       request.projectId = PROJECT_ID;
+    });
+
+    it('should not require reqOpts', function(done) {
+      request.request = function(protoOpts, reqOpts, callback) {
+        callback(); // done()
+      };
+
+      request.request_(PROTO_OPTS, done);
     });
 
     it('should make the correct request', function(done) {
