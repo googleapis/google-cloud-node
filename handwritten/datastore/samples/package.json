@@ -14,6 +14,6 @@
   },
   "dependencies": {
     "async": "^1.5.2",
-    "gcloud": "^0.28.0"
+    "gcloud": "^0.30.3"
   }
 }
