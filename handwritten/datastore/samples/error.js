@@ -15,7 +15,7 @@
 
 var gcloud = require('gcloud');
 
-var dataset = gcloud.datastore.dataset({
+var dataset = gcloud.datastore({
   projectId: process.env.GCLOUD_PROJECT
 });
 
