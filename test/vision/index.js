@@ -303,6 +303,29 @@ describe('Vision', function() {
       async.each(shortNames, checkConfig, done);
     });
 
+    it('should allow setting maxResults', function(done) {
+      var maxResults = 10;
+
+      vision.annotate = function(config) {
+        assert.deepEqual(config, [
+          {
+            image: IMAGES[0],
+            features: {
+              type: 'FACE_DETECTION',
+              maxResults: 10
+            }
+          }
+        ]);
+
+        done();
+      };
+
+      vision.detect(IMAGE, {
+        types: ['face'],
+        maxResults: maxResults
+      }, assert.ifError);
+    });
+
     it('should not return detections when none were found', function(done) {
       vision.annotate = function(config, callback) {
         callback(null, []);
