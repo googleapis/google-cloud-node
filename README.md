@@ -49,7 +49,7 @@ If you are running this client on Google Compute Engine, we handle authenticatio
 
 ``` js
 // Authenticating on a global basis.
-var projectId = process.env.GCLOUD_PROJECT_ID; // E.g. 'grape-spaceship-123'
+var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
 var gcloud = require('gcloud')({
   projectId: projectId
 });
@@ -73,7 +73,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
 
 ``` js
 // Authenticating on a global basis.
-var projectId = process.env.GCLOUD_PROJECT_ID; // E.g. 'grape-spaceship-123'
+var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
 
 var gcloud = require('gcloud')({
   projectId: projectId,
