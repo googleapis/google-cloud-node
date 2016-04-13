@@ -14,7 +14,7 @@
     "vms_api": "node vms_api.js"
   },
   "dependencies": {
-    "gcloud": "^0.30.2",
+    "gcloud": "^0.30.3",
     "googleapis": "^4.0.0",
     "sendgrid": "^2.0.0"
   }
