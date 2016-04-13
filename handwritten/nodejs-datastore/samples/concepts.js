@@ -47,7 +47,7 @@ function Entity(projectId) {
   if (keyFile) {
     options.keyFilename = keyFile;
   }
-  this.datastore = gcloud.datastore.dataset(options);
+  this.datastore = gcloud.datastore(options);
 
   // To create the keys, we have to use this instance of Datastore.
   datastore.key = this.datastore.key;
@@ -247,7 +247,7 @@ Entity.prototype.testInsert = function(callback) {
   // [END insert]
 
   this.datastore.save({
-    method: 'insert_auto_id',
+    method: 'insert',
     key: taskKey,
     data: task
   }, callback);
@@ -274,7 +274,7 @@ Entity.prototype.testLookup = function(callback) {
   // [END lookup]
 
   this.datastore.save({
-    method: 'insert_auto_id',
+    method: 'insert',
     key: taskKey,
     data: {}
   }, function(err) {
@@ -304,7 +304,7 @@ Entity.prototype.testUpdate = function(callback) {
   // [END update]
 
   this.datastore.save({
-    method: 'insert_auto_id',
+    method: 'insert',
     key: taskKey,
     data: {}
   }, function(err) {
@@ -333,7 +333,7 @@ Entity.prototype.testDelete = function(callback) {
   // [END delete]
 
   this.datastore.save({
-    method: 'insert_auto_id',
+    method: 'insert',
     key: taskKey,
     data: {}
   }, function(err) {
@@ -444,7 +444,7 @@ function Index(projectId) {
   if (keyFile) {
     options.keyFilename = keyFile;
   }
-  this.datastore = gcloud.datastore.dataset(options);
+  this.datastore = gcloud.datastore(options);
 }
 
 Index.prototype.testUnindexedPropertyQuery = function(callback) {
@@ -459,11 +459,12 @@ Index.prototype.testUnindexedPropertyQuery = function(callback) {
 };
 
 Index.prototype.testExplodingProperties = function(callback) {
+  var original = datastore.key;
   datastore.key = this.datastore.key;
 
   // [START exploding_properties]
   var task = {
-    method: 'insert_auto_id',
+    method: 'insert',
     key: datastore.key('Task'),
     data: {
       tags: [
@@ -481,7 +482,7 @@ Index.prototype.testExplodingProperties = function(callback) {
   };
   // [END exploding_properties]
 
-  delete datastore.key;
+  datastore.key = original;
 
   this.datastore.save(task, callback);
 };
@@ -494,7 +495,7 @@ function Metadata(projectId) {
   if (keyFile) {
     options.keyFilename = keyFile;
   }
-  this.datastore = gcloud.datastore.dataset(options);
+  this.datastore = gcloud.datastore(options);
 }
 
 Metadata.prototype.testNamespaceRunQuery = function(callback) {
@@ -632,7 +633,7 @@ function Query(projectId) {
   if (keyFile) {
     options.keyFilename = keyFile;
   }
-  this.datastore = gcloud.datastore.dataset(options);
+  this.datastore = gcloud.datastore(options);
 
   this.basicQuery = this.getBasicQuery();
   this.projectionQuery = this.getProjectionQuery();
@@ -771,7 +772,8 @@ Query.prototype.testKindlessQuery = function(callback) {
 
   // [START kindless_query]
   var query = datastore.createQuery()
-    .filter('__key__', '>', lastSeenKey);
+    .filter('__key__', '>', lastSeenKey)
+    .limit(1);
   // [END kindless_query]
 
   this.datastore.runQuery(query, callback);
@@ -825,7 +827,8 @@ Query.prototype.testKeysOnlyQuery = function(callback) {
 
   // [START keys_only_query]
   var query = datastore.createQuery()
-    .select('__key__');
+    .select('__key__')
+    .limit(1);
   // [END keys_only_query]
 
   this.datastore.runQuery(query, callback);
@@ -1066,7 +1069,7 @@ function Transaction(projectId) {
   if (keyFile) {
     options.keyFilename = keyFile;
   }
-  this.datastore = gcloud.datastore.dataset(options);
+  this.datastore = gcloud.datastore(options);
 
   this.fromKey = this.datastore.key(['Bank', 1, 'Account', 1]);
   this.toKey = this.datastore.key(['Bank', 1, 'Account', 2]);
