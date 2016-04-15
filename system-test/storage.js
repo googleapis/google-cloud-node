@@ -582,6 +582,22 @@ describe('storage', function() {
       });
     });
 
+    describe('simple write', function() {
+      it('should save arbitrary data', function(done) {
+        var file = bucket.file('TestFile');
+        var data = 'hello';
+
+        file.save(data, function(err) {
+          assert.ifError(err);
+
+          file.download(function(err, contents) {
+            assert.strictEqual(contents.toString(), data);
+            done();
+          });
+        });
+      });
+    });
+
     describe('stream write', function() {
       it('should stream write, then remove file (3mb)', function(done) {
         var file = bucket.file('LargeFile');

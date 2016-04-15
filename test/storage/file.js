@@ -2072,6 +2072,68 @@ describe('File', function() {
     });
   });
 
+  describe('save', function() {
+    var DATA = 'Data!';
+
+    it('should accept an options object', function(done) {
+      var options = {};
+
+      file.createWriteStream = function(options_) {
+        assert.strictEqual(options_, options);
+        setImmediate(done);
+        return new stream.PassThrough();
+      };
+
+      file.save(DATA, options, assert.ifError);
+    });
+
+    it('should not require options', function(done) {
+      file.createWriteStream = function(options_) {
+        assert.deepEqual(options_, {});
+        setImmediate(done);
+        return new stream.PassThrough();
+      };
+
+      file.save(DATA, assert.ifError);
+    });
+
+    it('should register the error listener', function(done) {
+      file.createWriteStream = function() {
+        var writeStream = new stream.PassThrough();
+        writeStream.on('error', done);
+        setImmediate(function() {
+          writeStream.emit('error');
+        });
+        return writeStream;
+      };
+
+      file.save(DATA, assert.ifError);
+    });
+
+    it('should register the finish listener', function(done) {
+      file.createWriteStream = function() {
+        var writeStream = new stream.PassThrough();
+        writeStream.once('finish', done);
+        return writeStream;
+      };
+
+      file.save(DATA, assert.ifError);
+    });
+
+    it('should write the data', function(done) {
+      file.createWriteStream = function() {
+        var writeStream = new stream.PassThrough();
+        writeStream.on('data', function(data) {
+          assert.strictEqual(data.toString(), DATA);
+          done();
+        });
+        return writeStream;
+      };
+
+      file.save(DATA, assert.ifError);
+    });
+  });
+
   describe('startResumableUpload_', function() {
     describe('starting', function() {
       it('should start a resumable upload', function(done) {
