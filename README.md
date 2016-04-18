@@ -475,7 +475,7 @@ var resource = {
   type: 'gce_instance',
   labels: {
     zone: 'global',
-    instance_id: 3
+    instance_id: '3'
   }
 };
 
