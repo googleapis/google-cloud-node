@@ -11,6 +11,7 @@
 This client supports the following Google Cloud Platform services:
 
 * [Google BigQuery](#google-bigquery)
+* [Google Cloud Bigtable](#google-bigtable)
 * [Google Cloud Datastore](#google-cloud-datastore)
 * [Google Cloud DNS](#google-cloud-dns)
 * [Google Cloud Pub/Sub](#google-cloud-pubsub)
@@ -117,6 +118,38 @@ job.getQueryResults(function(err, rows) {});
 
 // Or get the same results as a readable stream.
 job.getQueryResults().on('data', function(row) {});
+```
+
+
+## Google Cloud Bigtable
+
+- [API Documentation][gcloud-bigtable-docs]
+- [Official Documentation][cloud-bigtable-docs]
+
+*You may need to [create a cluster][gcloud-bigtable-cluster] to use the Google Cloud Bigtable API with your project.*
+
+#### Preview
+
+```js
+var gcloud = require('gcloud');
+
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
+var bigtable = gcloud.bigtable({
+  projectId: 'my-project',
+  keyFilename: '/path/to/keyfile.json',
+  zone: 'my-zone',
+  cluster: 'my-cluster'
+});
+
+var table = bigtable.table('prezzy');
+
+table.getRows(function(err, rows) {});
+
+// Update a row in your table.
+var row = table.row('alincoln');
+
+row.save('follows:gwashington', 1, function(err) {});
 ```
 
 
@@ -658,6 +691,7 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [gcloud-homepage]: https://googlecloudplatform.github.io/gcloud-node/
 [gcloud-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs
 [gcloud-bigquery-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/bigquery
+[gcloud-bigtable-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/bigtable
 [gcloud-compute-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/compute
 [gcloud-datastore-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/datastore
 [gcloud-dns-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/dns
@@ -684,6 +718,9 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [googleapis]: https://github.com/google/google-api-nodejs-client
 
 [cloud-bigquery-docs]: https://cloud.google.com/bigquery/what-is-bigquery
+
+[cloud-bigtable-docs]: https://cloud.google.com/bigtable/docs/
+[cloud-bigtable-cluster]: https://cloud.google.com/bigtable/docs/creating-cluster
 
 [cloud-compute-docs]: https://cloud.google.com/compute/docs
 

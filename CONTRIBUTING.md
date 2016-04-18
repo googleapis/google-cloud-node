@@ -23,6 +23,8 @@ To run the system tests, first create and configure a project in the Google Deve
 - **GCLOUD_TESTS_KEY**: The path to the JSON key file.
 - ***GCLOUD_TESTS_API_KEY*** (*optional*): An API key that can be used to test the Translate API.
 - ***GCLOUD_TESTS_DNS_DOMAIN*** (*optional*): A domain you own managed by Google Cloud DNS (expected format: `'gcloud-node.com.'`).
+- ***GCLOUD_TESTS_BIGTABLE_ZONE*** (*optional*): A zone containing a Google Cloud Bigtable cluster.
+- ***GCLOUD_TESTS_BIGTABLE_CLUSTER*** (*optional*): A cluster used to create Bigtable Tables on.
 
 Install the [gcloud command-line tool][gcloudcli] to your machine and use it to create the indexes used in the datastore system tests with indexes found in `system-test/data/index/yaml`:
 

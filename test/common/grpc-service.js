@@ -24,6 +24,7 @@ var is = require('is');
 var mockery = require('mockery-next');
 var path = require('path');
 var retryRequest = require('retry-request');
+var through = require('through2');
 
 var util = require('../../lib/common/util.js');
 
@@ -763,6 +764,30 @@ describe('GrpcService', function() {
         // the callback passed to retry-request. We will check if the grpc Error
         retryRequestOptions.request({}, retryRequestCallback);
       });
+
+      it('should exec callback with unknown error', function(done) {
+        var unknownError = { a: 'a' };
+
+        grpcService.protos.Service = {
+          service: function() {
+            return {
+              method: function(reqOpts, grpcOpts, callback) {
+                callback(unknownError, null);
+              }
+            };
+          }
+        };
+
+        grpcService.request(PROTO_OPTS, REQ_OPTS, function(err, resp) {
+          assert.strictEqual(err, unknownError);
+          assert.strictEqual(resp, null);
+          done();
+        });
+
+        // When the gRPC error is passed to "onResponse", it will just invoke
+        // the callback passed to retry-request. We will check if the grpc Error
+        retryRequestOptions.request({}, retryRequestCallback);
+      });
     });
 
     it('should make the correct request on the proto service', function(done) {
@@ -841,7 +866,6 @@ describe('GrpcService', function() {
           };
 
           grpcService.request(PROTO_OPTS, REQ_OPTS, function(err) {
-            assert.strictEqual(err, grpcError);
             assert.strictEqual(err.code, httpError.code);
           });
         }
@@ -871,6 +895,272 @@ describe('GrpcService', function() {
           done();
         });
       });
+    });
+  });
+
+  describe('requestStream', function() {
+    var PROTO_OPTS = { service: 'service', method: 'method', timeout: 3000 };
+    var REQ_OPTS = {};
+    var GRPC_CREDENTIALS = {};
+    var fakeStream;
+
+    function ProtoService() {}
+
+    beforeEach(function() {
+      ProtoService.prototype.method = function() {};
+
+      grpcService.grpcCredentials = GRPC_CREDENTIALS;
+      grpcService.baseUrl = 'http://base-url';
+      grpcService.proto = {};
+      grpcService.proto.service = ProtoService;
+
+      grpcService.getService_ = function() {
+        return new ProtoService();
+      };
+
+      fakeStream = through.obj();
+      retryRequestOverride = function() {
+        return fakeStream;
+      };
+    });
+
+    afterEach(function() {
+      retryRequestOverride = null;
+    });
+
+    it('should not run in the gcloud sandbox environment', function() {
+      delete grpcService.grpcCredentials;
+
+      grpcService.getGrpcCredentials_ = function() {
+        throw new Error('Should not be called.');
+      };
+
+      global.GCLOUD_SANDBOX_ENV = true;
+      grpcService.requestStream();
+
+      delete global.GCLOUD_SANDBOX_ENV;
+    });
+
+    it('should get the proto service', function(done) {
+      grpcService.getService_ = function(protoOpts) {
+        assert.strictEqual(protoOpts, PROTO_OPTS);
+        setImmediate(done);
+        return new ProtoService();
+      };
+
+      grpcService.requestStream(PROTO_OPTS, REQ_OPTS, assert.ifError);
+    });
+
+    it('should set the deadline', function(done) {
+      var createDeadline = GrpcService.createDeadline_;
+      var fakeDeadline = createDeadline(PROTO_OPTS.timeout);
+
+      GrpcService.createDeadline_ = function(timeout) {
+        assert.strictEqual(timeout, PROTO_OPTS.timeout);
+        return fakeDeadline;
+      };
+
+      ProtoService.prototype.method = function(reqOpts, grpcOpts) {
+        assert.strictEqual(grpcOpts.deadline, fakeDeadline);
+
+        GrpcService.createDeadline_ = createDeadline;
+        setImmediate(done);
+
+        return through.obj();
+      };
+
+      retryRequestOverride = function(_, retryOpts) {
+        return retryOpts.request();
+      };
+
+      grpcService.requestStream(PROTO_OPTS, REQ_OPTS);
+    });
+
+    describe('getting gRPC credentials', function() {
+      beforeEach(function() {
+        delete grpcService.grpcCredentials;
+      });
+
+      describe('error', function() {
+        var error = new Error('err');
+
+        beforeEach(function() {
+          grpcService.getGrpcCredentials_ = function(callback) {
+            callback(error);
+          };
+        });
+
+        it('should execute callback with error', function(done) {
+          grpcService.requestStream(PROTO_OPTS, REQ_OPTS)
+            .on('error', function(err) {
+              assert.strictEqual(err, error);
+              done();
+            });
+        });
+      });
+
+      describe('success', function() {
+        var authClient = {};
+
+        beforeEach(function() {
+          grpcService.getGrpcCredentials_ = function(callback) {
+            callback(null, authClient);
+          };
+        });
+
+        it('should make the gRPC request again', function(done) {
+          grpcService.getService_ = function() {
+            assert.strictEqual(grpcService.grpcCredentials, authClient);
+            setImmediate(done);
+            return new ProtoService();
+          };
+
+          grpcService.requestStream(PROTO_OPTS, REQ_OPTS)
+            .on('error', done);
+        });
+      });
+    });
+
+    describe('retry strategy', function() {
+      var retryRequestReqOpts;
+      var retryRequestOptions;
+      var retryStream;
+
+      beforeEach(function() {
+        retryRequestReqOpts = retryRequestOptions = null;
+        retryStream = through.obj();
+
+        retryRequestOverride = function(reqOpts, options) {
+          retryRequestReqOpts = reqOpts;
+          retryRequestOptions = options;
+          return retryStream;
+        };
+      });
+
+      afterEach(function() {
+        retryRequestOverride = null;
+      });
+
+      it('should use retry-request', function() {
+        var reqOpts = extend({
+          objectMode: true
+        }, REQ_OPTS);
+
+        grpcService.requestStream(PROTO_OPTS, reqOpts);
+
+        assert.strictEqual(retryRequestReqOpts, null);
+        assert.strictEqual(
+          retryRequestOptions.retries,
+          grpcService.maxRetries
+        );
+        assert.strictEqual(retryRequestOptions.objectMode, true);
+        assert.strictEqual(
+          retryRequestOptions.shouldRetryFn,
+          GrpcService.shouldRetryRequest_
+        );
+      });
+
+      it('should emit the status as a response event', function(done) {
+        var grpcError500 = { code: 2 };
+        var fakeStream = through.obj();
+
+        ProtoService.prototype.method = function() {
+          return fakeStream;
+        };
+
+        retryRequestOverride = function(reqOpts, options) {
+          return options.request();
+        };
+
+        fakeStream
+          .on('response', function(resp) {
+            assert.deepEqual(resp, GrpcService.GRPC_ERROR_CODE_TO_HTTP[2]);
+            done();
+          });
+
+        grpcService.requestStream(PROTO_OPTS, REQ_OPTS);
+        fakeStream.emit('status', grpcError500);
+      });
+
+      it('should emit the response error', function(done) {
+        var grpcError500 = { code: 2 };
+        var requestStream = grpcService.requestStream(PROTO_OPTS, REQ_OPTS);
+
+        requestStream.destroy = function(err) {
+          assert.deepEqual(err, GrpcService.GRPC_ERROR_CODE_TO_HTTP[2]);
+          done();
+        };
+
+        retryStream.emit('error', grpcError500);
+      });
+    });
+  });
+
+  describe('createDeadline_', function() {
+    var nowTimestamp = Date.now();
+    var now;
+
+    before(function() {
+      now = Date.now;
+
+      Date.now = function() {
+        return nowTimestamp;
+      };
+    });
+
+    after(function() {
+      Date.now = now;
+    });
+
+    it('should create a deadline', function() {
+      var timeout = 3000;
+      var deadline = GrpcService.createDeadline_(timeout);
+
+      assert.strictEqual(deadline.getTime(), nowTimestamp + timeout);
+    });
+  });
+
+  describe('getError_', function() {
+    it('should retrieve the HTTP error from the gRPC error map', function() {
+      var errorMap = GrpcService.GRPC_ERROR_CODE_TO_HTTP;
+      var codes = Object.keys(errorMap);
+
+      codes.forEach(function(code) {
+        var error = GrpcService.getError_({ code: code });
+
+        assert.notStrictEqual(error, errorMap[code]);
+        assert.deepEqual(error, errorMap[code]);
+      });
+    });
+
+    it('should return null for unknown errors', function() {
+      var error = GrpcService.getError_({ code: 9999 });
+
+      assert.strictEqual(error, null);
+    });
+  });
+
+  describe('shouldRetryRequest_', function() {
+    it('should retry on 429, 500, 502, and 503', function() {
+      var shouldRetryFn = GrpcService.shouldRetryRequest_;
+
+      var retryErrors = [
+        { code: 429 },
+        { code: 500 },
+        { code: 502 },
+        { code: 503 }
+      ];
+
+      var nonRetryErrors = [
+        { code: 200 },
+        { code: 401 },
+        { code: 404 },
+        { code: 409 },
+        { code: 412 }
+      ];
+
+      assert.strictEqual(retryErrors.every(shouldRetryFn), true);
+      assert.strictEqual(nonRetryErrors.every(shouldRetryFn), false);
     });
   });
 
@@ -941,6 +1231,132 @@ describe('GrpcService', function() {
           done();
         });
       });
+    });
+  });
+
+  describe('loadProtoFile_', function() {
+    var fakeServices = {
+      google: {
+        FakeService: {
+          v1: {}
+        }
+      }
+    };
+
+    it('should load a proto file', function() {
+      var fakeProtoConfig = {
+        path: '/root/dir/path',
+        service: 'FakeService',
+        apiVersion: 'v1'
+      };
+
+      var fakeMainConfig = {
+        service: 'OtherFakeService',
+        apiVersion: 'v2'
+      };
+
+      grpcLoadOverride = function(pathOpts, type, grpOpts) {
+        assert.strictEqual(pathOpts.root, ROOT_DIR);
+        assert.strictEqual(pathOpts.file, 'path');
+        assert.strictEqual(type, 'proto');
+
+        assert.deepEqual(grpOpts, {
+          binaryAsBase64: true,
+          convertFieldsToCamelCase: true
+        });
+
+        return fakeServices;
+      };
+
+      var service = grpcService.loadProtoFile_(fakeProtoConfig, fakeMainConfig);
+      assert.strictEqual(service, fakeServices.google.FakeService.v1);
+    });
+
+    it('should use the main config if protoConfig is not set', function() {
+      var fakeProtoConfig = '/root/dir/path';
+
+      var fakeMainConfig = {
+        service: 'FakeService',
+        apiVersion: 'v1'
+      };
+
+      grpcLoadOverride = function(pathOpts, type, grpOpts) {
+        assert.strictEqual(pathOpts.root, ROOT_DIR);
+        assert.strictEqual(pathOpts.file, 'path');
+        assert.strictEqual(type, 'proto');
+
+        assert.deepEqual(grpOpts, {
+          binaryAsBase64: true,
+          convertFieldsToCamelCase: true
+        });
+
+        return fakeServices;
+      };
+
+      var service = grpcService.loadProtoFile_(fakeProtoConfig, fakeMainConfig);
+      assert.strictEqual(service, fakeServices.google.FakeService.v1);
+    });
+  });
+
+  describe('getService_', function() {
+    it('should get a new service instance', function() {
+      var fakeService = {};
+
+      grpcService.protos = {
+        Service: {
+          Service: function(baseUrl, grpcCredentials) {
+            assert.strictEqual(baseUrl, grpcService.baseUrl);
+            assert.strictEqual(grpcCredentials, grpcService.grpcCredentials);
+            return fakeService;
+          }
+        }
+      };
+
+      var service = grpcService.getService_({ service: 'Service' });
+      assert.strictEqual(service, fakeService);
+
+      var cachedService = grpcService.activeServiceMap_.get('Service');
+      assert.strictEqual(cachedService, fakeService);
+    });
+
+    it('should return the default service', function() {
+      var fakeService = {};
+
+      grpcService.protos = {
+        Service: {
+          OtherService: function(baseUrl, grpcCredentials) {
+            assert.strictEqual(baseUrl, grpcService.baseUrl);
+            assert.strictEqual(grpcCredentials, grpcService.grpcCredentials);
+            return fakeService;
+          }
+        }
+      };
+
+      var service = grpcService.getService_({ service: 'OtherService' });
+      assert.strictEqual(service, fakeService);
+
+      var cachedService = grpcService.activeServiceMap_.get('OtherService');
+      assert.strictEqual(cachedService, fakeService);
+    });
+
+    it('should return the cached version of a service', function() {
+      var fakeService = {};
+
+      grpcService.protos = {
+        Service: {
+          Service: function() {
+            throw new Error('should not be called');
+          }
+        }
+      };
+
+      grpcService.activeServiceMap_.set('Service', fakeService);
+
+      var service = grpcService.getService_({ service: 'Service' });
+      assert.strictEqual(service, fakeService);
+
+      var cachedService = grpcService.activeServiceMap_.get('Service');
+      assert.strictEqual(cachedService, fakeService);
     });
   });
 });

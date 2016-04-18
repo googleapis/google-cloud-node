@@ -47,6 +47,22 @@
       "type": "bigquery/job"
     }]
   }, {
+    "title": "Bigtable",
+    "type": "bigtable",
+    "nav": [{
+      "title": "Table",
+      "type": "bigtable/table"
+    }, {
+      "title": "Family",
+      "type": "bigtable/family"
+    }, {
+      "title": "Row",
+      "type": "bigtable/row"
+    }, {
+      "title": "Filter",
+      "type": "bigtable/filter"
+    }]
+  }, {
     "title": "Compute",
     "type": "compute",
     "nav": [{
