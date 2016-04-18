@@ -19,6 +19,7 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
+var is = require('is');
 var mockery = require('mockery-next');
 var nodeutil = require('util');
 
@@ -29,6 +30,10 @@ function FakeAddress() {
 }
 
 function FakeOperation() {
+  this.calledWith_ = [].slice.call(arguments);
+}
+
+function FakeRule() {
   this.calledWith_ = [].slice.call(arguments);
 }
 
@@ -49,7 +54,7 @@ var fakeStreamRouter = {
     extended = true;
     methods = arrify(methods);
     assert.equal(Class.name, 'Region');
-    assert.deepEqual(methods, ['getAddresses', 'getOperations']);
+    assert.deepEqual(methods, ['getAddresses', 'getOperations', 'getRules']);
   }
 };
 
@@ -70,6 +75,7 @@ describe('Region', function() {
     mockery.registerMock('../../lib/common/stream-router.js', fakeStreamRouter);
     mockery.registerMock('../../lib/compute/address.js', FakeAddress);
     mockery.registerMock('../../lib/compute/operation.js', FakeOperation);
+    mockery.registerMock('../../lib/compute/rule.js', FakeRule);
 
     mockery.enable({
       useCleanCache: true,
@@ -109,6 +115,37 @@ describe('Region', function() {
         exists: true,
         get: true,
         getMetadata: true
+      });
+    });
+
+    describe('request interceptor', function() {
+      it('should assign a request interceptor', function() {
+        var requestInterceptor = region.interceptors.pop().request;
+        assert(is.fn(requestInterceptor));
+      });
+
+      it('should strip `/global` from forwardingRules requests', function() {
+        var reqOpts = {
+          uri: '/compute/v1/projects/projectId/global/forwardingRules'
+        };
+        var expectedReqOpts = {
+          uri: '/compute/v1/projects/projectId/forwardingRules'
+        };
+
+        var requestInterceptor = region.interceptors.pop().request;
+        assert.deepEqual(requestInterceptor(reqOpts), expectedReqOpts);
+      });
+
+      it('should not affect non-cancel requests', function() {
+        var reqOpts = {
+          uri: '/compute/v1/projects/projectId/other/request'
+        };
+        var expectedReqOpts = {
+          uri: '/compute/v1/projects/projectId/other/request'
+        };
+
+        var requestInterceptor = region.interceptors.pop().request;
+        assert.deepEqual(requestInterceptor(reqOpts), expectedReqOpts);
       });
     });
   });
@@ -208,6 +245,22 @@ describe('Region', function() {
           done();
         });
       });
+    });
+  });
+
+  describe('createRule', function() {
+    var NAME = 'rule-name';
+    var CONFIG = {};
+
+    it('should call compute#createRule', function(done) {
+      region.parent.createRule = function(name, config, callback) {
+        assert.strictEqual(this, region);
+        assert.strictEqual(name, NAME);
+        assert.strictEqual(config, CONFIG);
+        callback(); // done()
+      };
+
+      region.createRule(NAME, CONFIG, done);
     });
   });
 
@@ -413,6 +466,107 @@ describe('Region', function() {
     });
   });
 
+  describe('getRules', function() {
+    it('should accept only a callback', function(done) {
+      region.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
+
+      region.getRules(assert.ifError);
+    });
+
+    it('should make the correct API request', function(done) {
+      var query = { a: 'b', c: 'd' };
+
+      region.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/forwardingRules');
+        assert.strictEqual(reqOpts.qs, query);
+
+        done();
+      };
+
+      region.getRules(query, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = { a: 'b', c: 'd' };
+
+      beforeEach(function() {
+        region.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        region.getRules({}, function(err, rules, nextQuery, apiResp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(rules, null);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(apiResp, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = {
+        items: [
+          { name: 'operation-name' }
+        ]
+      };
+
+      beforeEach(function() {
+        region.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should build a nextQuery if necessary', function(done) {
+        var nextPageToken = 'next-page-token';
+        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+          nextPageToken: nextPageToken
+        });
+        var expectedNextQuery = {
+          pageToken: nextPageToken
+        };
+
+        region.request = function(reqOpts, callback) {
+          callback(null, apiResponseWithNextPageToken);
+        };
+
+        region.getRules({}, function(err, rules, nextQuery) {
+          assert.ifError(err);
+
+          assert.deepEqual(nextQuery, expectedNextQuery);
+
+          done();
+        });
+      });
+
+      it('should execute callback with Operations & API resp', function(done) {
+        var rule = {};
+
+        region.rule = function(name) {
+          assert.strictEqual(name, apiResponse.items[0].name);
+          return rule;
+        };
+
+        region.getRules({}, function(err, rules, nextQuery, apiResp) {
+          assert.ifError(err);
+
+          assert.strictEqual(rules[0], rule);
+          assert.strictEqual(rules[0].metadata, apiResponse.items[0]);
+
+          assert.strictEqual(apiResp, apiResponse);
+
+          done();
+        });
+      });
+    });
+  });
+
   describe('operation', function() {
     var NAME = 'operation-name';
 
@@ -421,6 +575,17 @@ describe('Region', function() {
       assert(operation instanceof FakeOperation);
       assert.strictEqual(operation.calledWith_[0], region);
       assert.strictEqual(operation.calledWith_[1], NAME);
+    });
+  });
+
+  describe('rule', function() {
+    var NAME = 'rule-name';
+
+    it('should return a Operation object', function() {
+      var rule = region.rule(NAME);
+      assert(rule instanceof FakeRule);
+      assert.strictEqual(rule.calledWith_[0], region);
+      assert.strictEqual(rule.calledWith_[1], NAME);
     });
   });
 });
