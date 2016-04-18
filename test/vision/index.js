@@ -42,6 +42,11 @@ function FakeFile() {
   this.calledWith_ = arguments;
 }
 
+var requestOverride = null;
+var fakeRequest = function() {
+  return (requestOverride || util.noop).apply(this, arguments);
+};
+
 describe('Vision', function() {
   var IMAGE = './image.jpg';
   var PROJECT_ID = 'project-id';
@@ -50,6 +55,7 @@ describe('Vision', function() {
   var vision;
 
   before(function() {
+    mockery.registerMock('request', fakeRequest);
     mockery.registerMock('../../lib/storage/file.js', FakeFile);
     mockery.registerMock('../../lib/common/service.js', FakeService);
     mockery.registerMock('../../lib/common/util.js', fakeUtil);
@@ -68,6 +74,8 @@ describe('Vision', function() {
   });
 
   beforeEach(function() {
+    requestOverride = null;
+
     vision = new Vision({
       projectId: PROJECT_ID
     });
@@ -762,6 +770,44 @@ describe('Vision', function() {
           }
         ]);
 
+        done();
+      });
+    });
+
+    it('should get a file from a URL', function(done) {
+      var imageUri = 'http://www.google.com/logo.png';
+      var body = 'body';
+
+      requestOverride = function(reqOpts, callback) {
+        assert.strictEqual(reqOpts.method, 'GET');
+        assert.strictEqual(reqOpts.uri, imageUri);
+        assert.strictEqual(reqOpts.encoding, 'base64');
+
+        callback(null, {}, body);
+      };
+
+      Vision.findImages_(imageUri, function(err, images) {
+        assert.ifError(err);
+        assert.deepEqual(images, [
+          {
+            content: body
+          }
+        ]);
+        done();
+      });
+    });
+
+    it('should return an error from reading a URL', function(done) {
+      var imageUri = 'http://www.google.com/logo.png';
+
+      var error = new Error('Error.');
+
+      requestOverride = function(reqOpts, callback) {
+        callback(error);
+      };
+
+      Vision.findImages_(imageUri, function(err) {
+        assert.strictEqual(err, error);
         done();
       });
     });
