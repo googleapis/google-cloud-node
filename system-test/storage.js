@@ -569,7 +569,8 @@ describe('storage', function() {
         }
       };
 
-      var expectedContents = fs.readFileSync(FILES.html.path, 'utf-8');
+      var expectedContents = fs.readFileSync(FILES.html.path, 'utf-8')
+        .replace(/\r\n/g, '\n'); // Normalize line endings.
 
       bucket.upload(FILES.gzip.path, options, function(err, file) {
         assert.ifError(err);
