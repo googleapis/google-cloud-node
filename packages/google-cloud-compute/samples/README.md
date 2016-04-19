@@ -14,9 +14,16 @@ Install dependencies:
 
 ### sendgrid.js
 
-Also required a `SENDGRID_API_KEY` environment variable to be set.
+Requires a `SENDGRID_API_KEY` environment variable to be set.
 
     npm run sendgrid
+
+### mailjet.js
+
+Requires `MAILJET_API_KEY` and `MAILJET_API_SECRET` environment variables to be
+set.
+
+    npm run mailjet
 
 ### vms.js
 

@@ -10,12 +10,15 @@
   },
   "scripts": {
     "sendgrid": "node sendgrid.js",
+    "mailjet": "node mailjet.js",
     "vms": "node vms.js",
     "vms_api": "node vms_api.js"
   },
   "dependencies": {
     "gcloud": "^0.30.3",
     "googleapis": "^4.0.0",
+    "nodemailer": "^2.3.2",
+    "nodemailer-smtp-transport": "^2.4.2",
     "sendgrid": "^2.0.0"
   }
 }
