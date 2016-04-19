@@ -19,6 +19,7 @@
 var assert = require('assert');
 var is = require('is');
 var multiline = require('multiline');
+var normalizeNewline = require('normalize-newline');
 var path = require('path');
 
 var env = require('./env.js');
@@ -311,12 +312,12 @@ describe('Vision', function() {
 
   describe('text', function() {
     var expectedResults = [
-      multiline.stripIndent(function() {/*
+      normalizeNewline(multiline.stripIndent(function() {/*
         Google Cloud Client Library for Node.js an idiomatic, intuitive, and
         natural way for Node.js developers to integrate with Google Cloud
         Platform services, like Cloud Datastore and Cloud Storage.
 
-      */})
+      */}))
     ];
 
     expectedResults = expectedResults.concat(
