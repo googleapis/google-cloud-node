@@ -71,6 +71,9 @@
       "title": "Region",
       "type": "compute/region"
     }, {
+      "title": "Rule",
+      "type": "compute/rule"
+    }, {
       "title": "Service",
       "type": "compute/service"
     }, {
