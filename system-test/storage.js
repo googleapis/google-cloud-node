@@ -20,6 +20,7 @@ var assert = require('assert');
 var async = require('async');
 var crypto = require('crypto');
 var fs = require('fs');
+var normalizeNewline = require('normalize-newline');
 var prop = require('propprop');
 var request = require('request');
 var through = require('through2');
@@ -569,8 +570,9 @@ describe('storage', function() {
         }
       };
 
-      var expectedContents = fs.readFileSync(FILES.html.path, 'utf-8')
-        .replace(/\r\n/g, '\n'); // Normalize line endings.
+      var expectedContents = normalizeNewline(
+        fs.readFileSync(FILES.html.path, 'utf-8')
+      );
 
       bucket.upload(FILES.gzip.path, options, function(err, file) {
         assert.ifError(err);
