@@ -696,6 +696,46 @@ describe('Request', function() {
           done();
         });
       });
+
+      it('should handle large limitless queries', function(done) {
+        var timesRequestCalled = 0;
+        var limitCalled = false;
+
+        var query = {
+          limitVal: -1
+        };
+
+        request.request_ = function(protoOpts, reqOpts, callback) {
+          var batch;
+
+          if (++timesRequestCalled === 2) {
+            batch = {};
+          } else {
+            batch = {
+              moreResults: 'NOT_FINISHED',
+              endCursor: new Buffer('abc')
+            };
+          }
+
+          callback(null, { batch: batch });
+        };
+
+        entityOverrides.queryToQueryProto = function() {
+          return {};
+        };
+
+        FakeQuery.prototype.limit = function() {
+          limitCalled = true;
+          return this;
+        };
+
+        request.runQuery(query, function(err) {
+          assert.ifError(err);
+          assert.strictEqual(timesRequestCalled, 2);
+          assert.strictEqual(limitCalled, false);
+          done();
+        });
+      });
     });
   });
 
