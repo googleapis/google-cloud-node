@@ -313,7 +313,7 @@ describe('Logging', function() {
 
     var logEntries = [
       log.entry('log entry 1'), // string data
-      log.entry({ delegate: process.env.USER }) // object data
+      log.entry({ delegate: 'my_username' }) // object data
     ];
 
     var options = {
