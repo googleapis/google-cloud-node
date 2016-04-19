@@ -21,6 +21,7 @@ var fs = require('fs');
 var gcloud = require('../');
 var glob = require('glob');
 var mitm = require('mitm');
+var prop = require('propprop');
 var vm = require('vm');
 
 var util = require('../lib/common/util.js');
@@ -34,7 +35,21 @@ function runCodeInSandbox(code, sandbox) {
     });
   } catch(err) {
     // rethrow the error with code for context and resolving issues faster.
-    throw new Error('\n' + code + '\n\n' + err.message);
+    var lineCol = err.stack.match('assert-code\.vm:(.+):(.+)');
+    lineCol.line = lineCol[1];
+    lineCol.col = lineCol[2];
+
+    var lines = code.split('\n')
+      .filter(function(line, index) {
+        if (index < lineCol.line) {
+          return line;
+        }
+      })
+      .join('\n');
+
+    err.message = '\n' + lines + '\n\n' + err.message;
+
+    throw err;
   }
 }
 
@@ -96,20 +111,20 @@ describe('documentation', function() {
       global: global
     };
 
-    var examples = fileDocBlocks.methods.map(function(method) {
-      return method.examples.map(function(example) {
-        return example.code;
-      }).join('\n');
-    });
+    fileDocBlocks.methods.forEach(function(method) {
+      var code = method.examples.map(prop('code')).join('\n')
+        .replace(/require\(\'gcloud\'\)/g, 'require(\'..\/\')')
+        .replace(/require\(\'gcloud/g, 'require(\'..');
 
-    var code = examples
-      .join('\n')
-      .replace(/require\(\'gcloud\'\)/g, 'require(\'..\/\')')
-      .replace(/require\(\'gcloud/g, 'require(\'..');
+      var displayName = filename
+        .replace('docs/json/master/', '')
+        .replace('.json', '.js');
 
-    it('should run tests for ' + filename + ' without errors', function() {
-      this.timeout(5000);
-      assert.doesNotThrow(runCodeInSandbox.bind(null, code, sandbox));
+      displayName += '#' + method.id;
+
+      it('should run ' + displayName + ' example without errors', function() {
+        assert.doesNotThrow(runCodeInSandbox.bind(null, code, sandbox));
+      });
     });
   });
 });
