@@ -21,8 +21,26 @@ openssl aes-256-cbc -K $encrypted_b8aa0887832a_key -iv $encrypted_b8aa0887832a_i
 npm run docs
 npm run system-test
 
+git config user.name "travis-ci"
+git config user.email "travis@travis-ci.org"
+
+## Attempt to update docs/manifest.json with the new version.
+node -e "
+file = require('./docs/manifest.json')
+if (file.versions.indexOf('${TRAVIS_TAG}') === -1) file.versions.unshift('${TRAVIS_TAG}')
+require('fs').writeFileSync('docs/manifest.json', JSON.stringify(file, null, 2) + '\n')
+"
+git add docs/manifest.json
+git commit -m "Update docs/manifest.json for ${TRAVIS_TAG}"
+git status
+if [[ -n "$(git status --porcelain)" ]]; then
+  git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:master
+else
+  echo "docs/manifest.json already includes the new version. Skipping commit."
+fi
+
+## Upload the docs to gh-pages.
 git submodule add -f -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} ghpages
-# copy set of json to tag folder
 test -d "ghpages/json/${TRAVIS_TAG}" && exit 0 || mkdir ghpages/json/${TRAVIS_TAG}
 cp -R docs/json/master/* ghpages/json/${TRAVIS_TAG}
 cp docs/*{.md,.html} ghpages/json/${TRAVIS_TAG}
@@ -32,9 +50,6 @@ cp docs/manifest.json ghpages
 cd ghpages
 git add json
 git add manifest.json
-# commit to gh-pages branch
-git config user.name "travis-ci"
-git config user.email "travis@travis-ci.org"
 git commit -m "Update docs for ${TRAVIS_TAG}"
 git status
 git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages
