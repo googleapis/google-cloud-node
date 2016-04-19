@@ -146,7 +146,7 @@
     "docs": "node ./scripts/docs.js",
     "lint": "jshint lib/ system-test/ test/ && jscs lib/ system-test/ test/",
     "test": "npm run docs && mocha test/*/*.js test/index.js test/docs.js",
-    "system-test": "mocha system-test/* --no-timeouts --bail",
+    "system-test": "mocha system-test/*.js --no-timeouts --bail",
     "coveralls": "istanbul cover _mocha --report lcovonly -- --no-timeouts --bail test/**/*.js -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "license": "Apache-2.0",
