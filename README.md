@@ -243,7 +243,7 @@ topic.publish({
 }, function(err) {});
 
 // Subscribe to the topic.
-topic.subscribe('new-subscription', function(err, subscription) {
+topic.subscribe('new-subscription', { reuseExisting: true }, function(err, subscription) {
   // Register listeners to start pulling for messages.
   function onError(err) {}
   function onMessage(message) {}
