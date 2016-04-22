@@ -42,7 +42,7 @@ if [ "${TRAVIS_BRANCH}" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]
     # commit to gh-pages branch to apply changes
     git config user.name "travis-ci"
     git config user.email "travis@travis-ci.org"
-    git commit -m "Update docs after merge to master"
+    git commit -m "Update docs after merge to master [ci skip]"
     git status
     git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages
   else
