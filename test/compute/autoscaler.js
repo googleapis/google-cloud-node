@@ -155,7 +155,7 @@ describe('Autoscaler', function() {
       it('should execute callback with Operation & Response', function(done) {
         var operation = {};
 
-        autoscaler.zone.compute.operation = function(name) {
+        autoscaler.zone.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };
@@ -231,7 +231,7 @@ describe('Autoscaler', function() {
         var operation = {};
         var metadata = { a: 'b' };
 
-        autoscaler.zone.compute.operation = function(name) {
+        autoscaler.zone.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };

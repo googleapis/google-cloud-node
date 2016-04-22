@@ -21,17 +21,21 @@ openssl aes-256-cbc -K $encrypted_b8aa0887832a_key -iv $encrypted_b8aa0887832a_i
 npm run docs
 npm run system-test
 
-git config user.name "travis-ci"
-git config user.email "travis@travis-ci.org"
+git config --global user.name "travis-ci"
+git config --global user.email "travis@travis-ci.org"
 
 ## Attempt to update docs/manifest.json with the new version.
+git checkout master
 node -e "
 file = require('./docs/manifest.json')
 if (file.versions.indexOf('${TRAVIS_TAG}') === -1) file.versions.unshift('${TRAVIS_TAG}')
 require('fs').writeFileSync('docs/manifest.json', JSON.stringify(file, null, 2) + '\n')
 "
+# allow "git add" to fail if there aren't new files.
+set +e
 git add docs/manifest.json
-git commit -m "Update docs/manifest.json for ${TRAVIS_TAG}"
+set -e
+git commit -m "Update docs/manifest.json for ${TRAVIS_TAG} [ci skip]"
 git status
 if [[ -n "$(git status --porcelain)" ]]; then
   git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:master

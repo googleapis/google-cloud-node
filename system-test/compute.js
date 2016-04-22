@@ -18,8 +18,8 @@
 
 var assert = require('assert');
 var async = require('async');
-var exec = require('methmeth');
 var is = require('is');
+var prop = require('propprop');
 
 var env = require('./env.js');
 var Compute = require('../lib/compute/index.js');
@@ -36,11 +36,8 @@ describe('Compute', function() {
   // tests in that `describe` block.
   //
   // After all describe blocks have run, all of the created objects are
-  // deleted.* This will also pick up any previously-created objects that were
+  // deleted. This will also pick up any previously-created objects that were
   // unable to be removed if a prior test run had unexpectedly quit.
-  //
-  // * What we really send are delete requests. If we were to wait on all of the
-  // delete operations to complete, it could be several minutes.
 
   var TESTS_PREFIX = 'gcloud-tests-';
   var REGION_NAME = 'us-central1';
@@ -49,6 +46,10 @@ describe('Compute', function() {
   var compute = new Compute(env);
   var region = compute.region(REGION_NAME);
   var zone = compute.zone(ZONE_NAME);
+
+  before(function(done) {
+    deleteAllTestObjects(done);
+  });
 
   after(function(done) {
     deleteAllTestObjects(done);
@@ -110,7 +111,7 @@ describe('Compute', function() {
     var autoscaler = zone.autoscaler(AUTOSCALER_NAME);
 
     // Some of the services we support require an instance group to be created.
-    // Util `instanceGroups` are officially supported by gcloud-node, we make
+    // Until `instanceGroups` are officially supported by gcloud-node, we make
     // manual requests to create and delete them.
     var INSTANCE_GROUP_NAME = generateName('instance-group');
 
@@ -131,10 +132,6 @@ describe('Compute', function() {
           }, execAfterOperationComplete(callback));
         }
       ], done);
-    });
-
-    after(function(done) {
-      deleteInstanceGroup(INSTANCE_GROUP_NAME, done);
     });
 
     it('should have created the autoscaler', function(done) {
@@ -186,7 +183,7 @@ describe('Compute', function() {
 
       autoscaler.setMetadata({
         description: description
-      }, function(err) {
+      }, execAfterOperationComplete(function(err) {
         assert.ifError(err);
 
         autoscaler.getMetadata(function(err, metadata) {
@@ -194,7 +191,7 @@ describe('Compute', function() {
           assert.strictEqual(metadata.description, description);
           done();
         });
-      });
+      }));
     });
   });
 
@@ -530,31 +527,6 @@ describe('Compute', function() {
       ], done);
     });
 
-    after(function(done) {
-      async.series([
-        function(callback) {
-          rule.delete(execAfterOperationComplete(callback));
-        },
-
-        function(callback) {
-          deleteTargetProxy(TARGET_PROXY_NAME, callback);
-        },
-
-        function(callback) {
-          deleteUrlMap(URL_MAP_NAME, callback);
-        },
-
-        function(callback) {
-          deleteService(
-            service.name,
-            INSTANCE_GROUP_NAME,
-            HEALTH_CHECK_NAME,
-            callback
-          );
-        }
-      ], done);
-    });
-
     it('should get a list of rules', function(done) {
       compute.getRules(function(err, rules) {
         assert.ifError(err);
@@ -630,18 +602,6 @@ describe('Compute', function() {
       ], done);
     });
 
-    after(function(done) {
-      async.series([
-        function(callback) {
-          rule.delete(execAfterOperationComplete(callback));
-        },
-
-        function(callback) {
-          vm.delete(execAfterOperationComplete(callback));
-        }
-      ], done);
-    });
-
     it('should get a list of rules', function(done) {
       region.getRules(function(err, rules) {
         assert.ifError(err);
@@ -675,10 +635,6 @@ describe('Compute', function() {
 
     before(function(done) {
       createService(service.name, INSTANCE_GROUP_NAME, HEALTH_CHECK_NAME, done);
-    });
-
-    after(function(done) {
-      deleteService(service.name, INSTANCE_GROUP_NAME, HEALTH_CHECK_NAME, done);
     });
 
     it('should get a list of services', function(done) {
@@ -784,21 +740,6 @@ describe('Compute', function() {
       });
     });
 
-    after(function(done) {
-      vm.delete(function(err, operation) {
-        if (err) {
-          done(err);
-          return;
-        }
-
-        operation
-          .on('error', done)
-          .on('complete', function() {
-            done();
-          });
-      });
-    });
-
     it('should have enabled HTTP connections', function(done) {
       vm.getTags(function(err, tags) {
         assert.ifError(err);
@@ -834,21 +775,13 @@ describe('Compute', function() {
     });
 
     it('should attach and detach a disk', function(done) {
-      var name = generateName('disk');
-      var disk = zone.disk(name);
+      var disk = zone.disk(generateName('disk'));
 
       async.series([
         createDisk,
         attachDisk,
         detachDisk
-      ], function(err) {
-        if (err) {
-          done(err);
-          return;
-        }
-
-        disk.delete(execAfterOperationComplete(done));
-      });
+      ], done);
 
       function createDisk(callback) {
         var config = {
@@ -1002,20 +935,33 @@ describe('Compute', function() {
   }
 
   function deleteAllTestObjects(callback) {
-    async.each([
+    async.series([
+      deleteGlobalRules,
+      deleteRegionalRules,
+      deleteTargetProxies,
+      deleteUrlMaps,
+      deleteServices,
+      deleteHttpHealthChecks,
+      deleteInstanceGroups,
+      deleteTargetInstances,
+      deleteAllGcloudTestObjects
+    ], callback);
+  }
+
+  function deleteAllGcloudTestObjects(callback) {
+    async.eachSeries([
+      'getVMs',
       'getAddresses',
       'getAutoscalers',
       'getDisks',
       'getFirewalls',
       'getNetworks',
       'getRules',
-      'getServices',
       'getSnapshots',
-      'getVMs'
-    ], callAndDelete, callback);
+    ], callAndDeleteGcloudTestObject, callback);
   }
 
-  function callAndDelete(methodName, callback) {
+  function callAndDeleteGcloudTestObject(methodName, callback) {
     compute[methodName]({
       filter: 'name eq ' + TESTS_PREFIX + '.*'
     }, function(err, objects) {
@@ -1024,7 +970,9 @@ describe('Compute', function() {
         return;
       }
 
-      async.each(objects, exec('delete'), callback);
+      async.each(objects, function(object, callback) {
+        object.delete(execAfterOperationComplete(callback));
+      }, callback);
     });
   }
 
@@ -1043,6 +991,51 @@ describe('Compute', function() {
           callback();
         });
     };
+  }
+
+  function deleteGlobalRules(callback) {
+    compute.getRules({
+      filter: 'name eq ' + TESTS_PREFIX + '.*'
+    }, function(err, rules) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      async.each(rules, function(rule, callback) {
+        rule.delete(execAfterOperationComplete(callback));
+      }, callback);
+    });
+  }
+
+  function deleteRegionalRules(callback) {
+    region.getRules({
+      filter: 'name eq ' + TESTS_PREFIX + '.*'
+    }, function(err, rules) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      async.each(rules, function(rule, callback) {
+        rule.delete(execAfterOperationComplete(callback));
+      }, callback);
+    });
+  }
+
+  function deleteServices(callback) {
+    compute.getServices({
+      filter: 'name eq ' + TESTS_PREFIX + '.*'
+    }, function(err, services) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      async.each(services, function(service, callback) {
+        service.delete(execAfterOperationComplete(callback));
+      }, callback);
+    });
   }
 
   function createService(name, instanceGroupName, healthCheckName, callback) {
@@ -1092,22 +1085,29 @@ describe('Compute', function() {
     ], callback);
   }
 
-  function deleteService(name, instanceGroupName, healthCheckName, callback) {
-    var service = compute.service(name);
-
-    async.series([
-      function(callback) {
-        service.delete(execAfterOperationComplete(callback));
-      },
-
-      function(callback) {
-        deleteHttpHealthCheck(healthCheckName, callback);
-      },
-
-      function(callback) {
-        deleteInstanceGroup(instanceGroupName, callback);
+  function getInstanceGroups(callback) {
+    zone.request({
+      uri: '/instanceGroups',
+      qs: {
+        filter: 'name eq ' + TESTS_PREFIX + '.*'
       }
-    ], callback);
+    }, callback);
+  }
+
+  function deleteInstanceGroups(callback) {
+    getInstanceGroups(function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      if (!resp.items) {
+        callback();
+        return;
+      }
+
+      async.each(resp.items.map(prop('name')), deleteInstanceGroup, callback);
+    });
   }
 
   function createInstanceGroup(name, callback) {
@@ -1152,6 +1152,31 @@ describe('Compute', function() {
         .on('complete', function() {
           callback();
         });
+    });
+  }
+
+  function getHttpHealthChecks(callback) {
+    compute.request({
+      uri: '/global/httpHealthChecks',
+      qs: {
+        filter: 'name eq ' + TESTS_PREFIX + '.*'
+      }
+    }, callback);
+  }
+
+  function deleteHttpHealthChecks(callback) {
+    getHttpHealthChecks(function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      if (!resp.items) {
+        callback();
+        return;
+      }
+
+      async.each(resp.items.map(prop('name')), deleteHttpHealthCheck, callback);
     });
   }
 
@@ -1200,6 +1225,31 @@ describe('Compute', function() {
     });
   }
 
+  function getUrlMaps(callback) {
+    compute.request({
+      uri: '/global/urlMaps',
+      qs: {
+        filter: 'name eq ' + TESTS_PREFIX + '.*'
+      }
+    }, callback);
+  }
+
+  function deleteUrlMaps(callback) {
+    getUrlMaps(function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      if (!resp.items) {
+        callback();
+        return;
+      }
+
+      async.each(resp.items.map(prop('name')), deleteUrlMap, callback);
+    });
+  }
+
   function createUrlMap(config, callback) {
     compute.request({
       method: 'POST',
@@ -1236,6 +1286,31 @@ describe('Compute', function() {
         .on('complete', function() {
           callback();
         });
+    });
+  }
+
+  function getTargetProxies(callback) {
+    compute.request({
+      uri: '/global/targetHttpProxies',
+      qs: {
+        filter: 'name eq ' + TESTS_PREFIX + '.*'
+      }
+    }, callback);
+  }
+
+  function deleteTargetProxies(callback) {
+    getTargetProxies(function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      if (!resp.items) {
+        callback();
+        return;
+      }
+
+      async.each(resp.items.map(prop('name')), deleteTargetProxy, callback);
     });
   }
 
@@ -1278,6 +1353,31 @@ describe('Compute', function() {
     });
   }
 
+  function getTargetInstances(callback) {
+    zone.request({
+      uri: '/targetInstances',
+      qs: {
+        filter: 'name eq ' + TESTS_PREFIX + '.*'
+      }
+    }, callback);
+  }
+
+  function deleteTargetInstances(callback) {
+    getTargetInstances(function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      if (!resp.items) {
+        callback();
+        return;
+      }
+
+      async.each(resp.items.map(prop('name')), deleteTargetInstance, callback);
+    });
+  }
+
   function createTargetInstance(name, instanceName, callback) {
     zone.request({
       method: 'POST',
@@ -1286,6 +1386,25 @@ describe('Compute', function() {
         name: name,
         instance: 'zones/' + zone.name + '/instances/' + instanceName
       }
+    }, function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      var operation = zone.operation(resp.name);
+      operation
+        .on('error', callback)
+        .on('complete', function() {
+          callback();
+        });
+    });
+  }
+
+  function deleteTargetInstance(name, callback) {
+    zone.request({
+      method: 'DELETE',
+      uri: '/targetInstances/' + name
     }, function(err, resp) {
       if (err) {
         callback(err);
