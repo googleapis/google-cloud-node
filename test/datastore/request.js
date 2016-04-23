@@ -254,6 +254,24 @@ describe('Request', function() {
       request.get(key, assert.ifError);
     });
 
+    it('should allow setting strong read consistency', function(done) {
+      request.request_ = function(protoOpts, reqOpts) {
+        assert.strictEqual(reqOpts.readOptions.readConsistency, 1);
+        done();
+      };
+
+      request.get(key, { consistency: 'strong' }, assert.ifError);
+    });
+
+    it('should allow setting strong eventual consistency', function(done) {
+      request.request_ = function(protoOpts, reqOpts) {
+        assert.strictEqual(reqOpts.readOptions.readConsistency, 2);
+        done();
+      };
+
+      request.get(key, { consistency: 'eventual' }, assert.ifError);
+    });
+
     describe('error', function() {
       var error = new Error('Error.');
       var apiResponse = { a: 'b', c: 'd' };
@@ -516,6 +534,24 @@ describe('Request', function() {
       };
 
       request.runQuery(query, assert.ifError);
+    });
+
+    it('should allow setting strong read consistency', function(done) {
+      request.request_ = function(protoOpts, reqOpts) {
+        assert.strictEqual(reqOpts.readOptions.readConsistency, 1);
+        done();
+      };
+
+      request.runQuery({}, { consistency: 'strong' }, assert.ifError);
+    });
+
+    it('should allow setting strong eventual consistency', function(done) {
+      request.request_ = function(protoOpts, reqOpts) {
+        assert.strictEqual(reqOpts.readOptions.readConsistency, 2);
+        done();
+      };
+
+      request.runQuery({}, { consistency: 'eventual' }, assert.ifError);
     });
 
     describe('error', function() {
@@ -1138,6 +1174,20 @@ describe('Request', function() {
 
         request.id = 'transaction-id';
         request.request_({ method: 'runQuery' }, reqOpts, assert.ifError);
+      });
+
+      it('should throw if read consistency is specified', function() {
+        var reqOpts = {
+          readOptions: {
+            readConsistency: 1
+          }
+        };
+
+        request.id = 'transaction-id';
+
+        assert.throws(function() {
+          request.request_({ method: 'runQuery' }, reqOpts, assert.ifError);
+        }, 'Read consistency cannot be specified in a transaction.');
       });
     });
   });
