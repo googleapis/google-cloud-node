@@ -86,10 +86,7 @@
     "resource manager",
     "google cloud vision",
     "cloud vision",
-    "vision",
-    "google cloud search",
-    "cloud search",
-    "search"
+    "vision"
   ],
   "dependencies": {
     "JSONStream": "^1.0.7",

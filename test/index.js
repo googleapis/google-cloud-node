@@ -39,7 +39,6 @@ var FakeDNS = createFakeApi();
 var FakePrediction = createFakeApi();
 var FakePubSub = createFakeApi();
 var FakeResource = createFakeApi();
-var FakeSearch = createFakeApi();
 var FakeStorage = createFakeApi();
 var FakeVision = createFakeApi();
 
@@ -54,7 +53,6 @@ describe('gcloud', function() {
     mockery.registerMock('../lib/prediction', FakePrediction);
     mockery.registerMock('../lib/pubsub', FakePubSub);
     mockery.registerMock('../lib/resource', FakeResource);
-    mockery.registerMock('../lib/search', FakeSearch);
     mockery.registerMock('../lib/storage', FakeStorage);
     mockery.registerMock('../lib/vision', FakeVision);
     mockery.enable({
@@ -99,10 +97,6 @@ describe('gcloud', function() {
 
   it('should export static resource', function() {
     assert.strictEqual(gcloud.resource, FakeResource);
-  });
-
-  it('should export static search', function() {
-    assert.strictEqual(gcloud.search, FakeSearch);
   });
 
   it('should export static storage', function() {
@@ -204,15 +198,6 @@ describe('gcloud', function() {
 
         assert(resource instanceof FakeResource);
         assert.strictEqual(resource.calledWith_[0], options);
-      });
-    });
-
-    describe('search', function() {
-      it('should create a new Search', function() {
-        var search = localGcloud.search(options);
-
-        assert(search instanceof FakeSearch);
-        assert.strictEqual(search.calledWith_[0], options);
       });
     });
 

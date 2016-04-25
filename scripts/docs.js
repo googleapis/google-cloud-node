@@ -96,8 +96,7 @@ function createUniqueMethodList(list, method) {
 
 function getId(fileName) {
   var hooks = {
-    'index': 'gcloud',
-    'search/index-class': 'search/index'
+    'index': 'gcloud'
   };
 
   var id = fileName

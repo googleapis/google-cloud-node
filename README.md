@@ -21,7 +21,6 @@ This client supports the following Google Cloud Platform services:
 * [Google Cloud Logging](#google-cloud-logging-beta) (Beta)
 * [Google Cloud Resource Manager](#google-cloud-resource-manager-beta) (Beta)
 * [Google Cloud Vision](#google-cloud-vision-beta) (Beta)
-* [Google Cloud Search](#google-cloud-search-alpha) (Alpha)
 
 If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
 
@@ -646,50 +645,6 @@ vision.detectFaces('./image.jpg', function(err, faces) {
 ```
 
 
-## Google Cloud Search (Alpha)
-
-> **This is an Alpha release of Google Cloud Search.** This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
-
-- [API Documentation][gcloud-search-docs]
-- [Official Documentation][cloud-search-docs] - *If you are not a tester, this documentation is unavailable.*
-
-#### Preview
-
-```js
-var gcloud = require('gcloud');
-
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
-
-var search = gcloud.search({
-  projectId: 'my-project',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-// Create a document in a new index.
-var index = search.index('memberData');
-
-var document = index.document('member-id-34211');
-document.addField('preferredContactForm').addTextValue('phone');
-
-index.createDocument(document, function(err, document) {
-  console.log(err || document);
-});
-
-// Search an index and get the results as a readable object stream.
-var index = search.index('memberData');
-
-index.search('preferredContactForm:phone')
-  .on('error', console.error)
-  .on('data', function(document) {
-    // document.id = 'member-id-34211';
-  })
-  .on('end', function() {
-    // All results consumed.
-  });
-```
-
-
 ## Contributing
 
 Contributions to this library are always welcome and highly encouraged.
@@ -710,7 +665,6 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [gcloud-prediction-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/prediction
 [gcloud-pubsub-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/pubsub
 [gcloud-resource-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/resource
-[gcloud-search-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/search
 [gcloud-storage-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/storage
 [gcloud-translate-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/translate
 [gcloud-vision-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/vision
@@ -745,8 +699,6 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [cloud-pubsub-docs]: https://cloud.google.com/pubsub/docs
 
 [cloud-resource-docs]: https://cloud.google.com/resource-manager
-
-[cloud-search-docs]: https://cloud.google.com/search
 
 [cloud-storage-docs]: https://cloud.google.com/storage/docs/overview
 
