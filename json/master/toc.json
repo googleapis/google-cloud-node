@@ -147,19 +147,6 @@
       "type": "resource/project"
     }]
   }, {
-    "title": "Search",
-    "type": "search",
-    "nav": [{
-      "title": "Index",
-      "type": "search/index"
-    }, {
-      "title": "Document",
-      "type": "search/document"
-    }, {
-      "title": "Field",
-      "type": "search/field"
-    }]
-  }, {
     "title": "Storage",
     "type": "storage",
     "nav": [{
