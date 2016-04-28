@@ -550,6 +550,70 @@ describe('GrpcService', function() {
         });
       });
     });
+
+    describe('retrying requests', function() {
+      var UNAVAILABLE = 14;
+      var _setTimeout;
+
+      before(function() {
+        _setTimeout = global.setTimeout;
+        global.setTimeout = function(func) {
+          func();
+        };
+      });
+
+      after(function() {
+        global.setTimeout = _setTimeout;
+      });
+
+      it('should retry if the service is unavailable', function(done) {
+        var callCount = 0;
+
+        grpcService.protos.Service = {
+          service: function() {
+            return {
+              method: function(reqOpts, callback) {
+                var err = null;
+
+                if (++callCount < 2) {
+                  err = { code: UNAVAILABLE };
+                }
+
+                callback(err);
+              }
+            };
+          }
+        };
+
+        grpcService.request(PROTO_OPTS, REQ_OPTS, function(err) {
+          assert.ifError(err);
+          assert.strictEqual(callCount, 2);
+          done();
+        });
+      });
+
+      it('should retry a maximum of 2 times before failing', function(done) {
+        var callCount = 0;
+
+        grpcService.protos.Service = {
+          service: function() {
+            return {
+              method: function(reqOpts, callback) {
+                callCount += 1;
+                callback({ code: UNAVAILABLE });
+              }
+            };
+          }
+        };
+
+        grpcService.request(PROTO_OPTS, REQ_OPTS, function(err) {
+          assert.strictEqual(err.code, 503);
+          // 1 for the original request + 2 retries
+          assert.strictEqual(callCount, 3);
+          done();
+        });
+      });
+    });
   });
 
   describe('convertValue_', function() {
