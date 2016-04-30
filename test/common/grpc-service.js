@@ -554,19 +554,28 @@ describe('GrpcService', function() {
 
   describe('convertValue_', function() {
     it('should convert primitive values correctly', function() {
-      var convertedValues = extend(
-        GrpcService.convertValue_(null),
-        GrpcService.convertValue_(1),
-        GrpcService.convertValue_('Hi'),
-        GrpcService.convertValue_(true)
-      );
+      var buffer = new Buffer('Value');
 
-      assert.deepEqual(convertedValues, {
-        nullValue: null,
-        numberValue: 1,
-        stringValue: 'Hi',
+      assert.deepEqual(GrpcService.convertValue_(null), {
+        nullValue: null
+      });
+
+      assert.deepEqual(GrpcService.convertValue_(1), {
+        numberValue: 1
+      });
+
+      assert.deepEqual(GrpcService.convertValue_('Hi'), {
+        stringValue: 'Hi'
+      });
+
+      assert.deepEqual(GrpcService.convertValue_(true), {
         booleanValue: true
       });
+
+      assert.strictEqual(
+        GrpcService.convertValue_(buffer).blobValue.toString(),
+        'Value'
+      );
     });
 
     it('should convert objects', function() {
@@ -576,9 +585,24 @@ describe('GrpcService', function() {
         return value;
       };
 
-      var convertedValue = GrpcService.convertValue_({});
+      var convertedValue = GrpcService.convertValue_(value);
 
       assert.strictEqual(convertedValue, value);
+    });
+
+    it('should convert dates', function() {
+      var value = new Date();
+      var seconds = value.getTime() / 1000;
+      var secondsRounded = Math.floor(seconds);
+
+      var convertedValue = GrpcService.convertValue_(value);
+
+      assert.deepEqual(convertedValue, {
+        timestampValue: {
+          seconds: secondsRounded,
+          nanos: Math.floor((seconds - secondsRounded) * 1e9)
+        }
+      });
     });
 
     it('should convert arrays', function() {
@@ -593,8 +617,8 @@ describe('GrpcService', function() {
 
     it('should throw if a type is not recognized', function() {
       assert.throws(function() {
-        GrpcService.convertValue_(new Date());
-      }, 'Value of type Date not recognized.');
+        GrpcService.convertValue_();
+      }, 'Value of type undefined not recognized.');
     });
   });
 
