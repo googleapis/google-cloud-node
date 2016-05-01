@@ -334,6 +334,154 @@ describe('Compute', function() {
     });
   });
 
+  describe('health checks', function() {
+    var HEALTH_CHECK_NAME = generateName('health-check');
+    var healthCheck = compute.healthCheck(HEALTH_CHECK_NAME);
+
+    var OPTIONS = {
+      description: 'A health check.',
+      interval: 50,
+      timeout: 25
+    };
+
+    before(function(done) {
+      healthCheck.create(OPTIONS, execAfterOperationComplete(done));
+    });
+
+    it('should have created the correct health check', function(done) {
+      healthCheck.getMetadata(function(err, metadata) {
+        assert.ifError(err);
+
+        assert.strictEqual(metadata.description, OPTIONS.description);
+        assert.strictEqual(metadata.checkIntervalSec, OPTIONS.interval);
+        assert.strictEqual(metadata.timeoutSec, OPTIONS.timeout);
+
+        done();
+      });
+    });
+
+    it('should set metadata', function(done) {
+      var description = 'The best description. Possibly ever.';
+
+      healthCheck.setMetadata({
+        description: description
+      }, execAfterOperationComplete(function(err) {
+        if (err) {
+          done(err);
+          return;
+        }
+
+        healthCheck.getMetadata(function(err, metadata) {
+          if (err) {
+            done(err);
+            return;
+          }
+
+          assert.strictEqual(metadata.description, description);
+
+          done();
+        });
+      }));
+    });
+
+    it('should get a list of health checks', function(done) {
+      compute.getHealthChecks(function(err, healthChecks) {
+        assert.ifError(err);
+        assert(healthChecks.length > 0);
+        done();
+      });
+    });
+
+    it('should get a list of health checks in stream mode', function(done) {
+      var resultsMatched = 0;
+
+      compute.getHealthChecks()
+        .on('error', done)
+        .on('data', function() {
+          resultsMatched++;
+        })
+        .on('end', function() {
+          assert(resultsMatched > 0);
+          done();
+        });
+    });
+  });
+
+  describe('health checks (https)', function() {
+    var HEALTH_CHECK_NAME = generateName('health-check');
+    var healthCheck = compute.healthCheck(HEALTH_CHECK_NAME, {
+      https: true
+    });
+
+    var OPTIONS = {
+      description: 'A health check.',
+      interval: 50,
+      timeout: 25
+    };
+
+    before(function(done) {
+      healthCheck.create(OPTIONS, execAfterOperationComplete(done));
+    });
+
+    it('should have created the correct health check', function(done) {
+      healthCheck.getMetadata(function(err, metadata) {
+        assert.ifError(err);
+
+        assert.strictEqual(metadata.description, OPTIONS.description);
+        assert.strictEqual(metadata.checkIntervalSec, OPTIONS.interval);
+        assert.strictEqual(metadata.timeoutSec, OPTIONS.timeout);
+
+        done();
+      });
+    });
+
+    it('should set metadata', function(done) {
+      var description = 'The best description. Possibly ever.';
+
+      healthCheck.setMetadata({
+        description: description
+      }, execAfterOperationComplete(function(err) {
+        if (err) {
+          done(err);
+          return;
+        }
+
+        healthCheck.getMetadata(function(err, metadata) {
+          if (err) {
+            done(err);
+            return;
+          }
+
+          assert.strictEqual(metadata.description, description);
+
+          done();
+        });
+      }));
+    });
+
+    it('should get a list of health checks', function(done) {
+      compute.getHealthChecks({ https: true }, function(err, healthChecks) {
+        assert.ifError(err);
+        assert(healthChecks.length > 0);
+        done();
+      });
+    });
+
+    it('should get a list of health checks in stream mode', function(done) {
+      var resultsMatched = 0;
+
+      compute.getHealthChecks({ https: true })
+        .on('error', done)
+        .on('data', function() {
+          resultsMatched++;
+        })
+        .on('end', function() {
+          assert(resultsMatched > 0);
+          done();
+        });
+    });
+  });
+
   describe('networks', function() {
     var NETWORK_NAME = generateName('network');
     var network = compute.network(NETWORK_NAME);
@@ -343,15 +491,7 @@ describe('Compute', function() {
     };
 
     before(function(done) {
-      network.create(CONFIG, function(err, network, operation) {
-        assert.ifError(err);
-
-        operation
-          .on('error', done)
-          .on('complete', function() {
-            done();
-          });
-      });
+      network.create(CONFIG, execAfterOperationComplete(done));
     });
 
     it('should have opened the correct range', function(done) {
@@ -941,7 +1081,7 @@ describe('Compute', function() {
       deleteTargetProxies,
       deleteUrlMaps,
       deleteServices,
-      deleteHttpHealthChecks,
+      deleteHttpsHealthChecks,
       deleteInstanceGroups,
       deleteTargetInstances,
       deleteAllGcloudTestObjects
@@ -955,6 +1095,7 @@ describe('Compute', function() {
       'getAutoscalers',
       'getDisks',
       'getFirewalls',
+      'getHealthChecks',
       'getNetworks',
       'getRules',
       'getSnapshots',
@@ -1040,6 +1181,7 @@ describe('Compute', function() {
 
   function createService(name, instanceGroupName, healthCheckName, callback) {
     var service = compute.service(name);
+    var healthCheck = compute.healthCheck(healthCheckName);
     var groupUrl;
     var healthCheckUrl;
 
@@ -1058,16 +1200,23 @@ describe('Compute', function() {
       },
 
       function(callback) {
-        createHttpHealthCheck(healthCheckName, function(err, metadata) {
+        healthCheck.create(execAfterOperationComplete(function(err) {
           if (err) {
             callback(err);
             return;
           }
 
-          healthCheckUrl = metadata.selfLink;
+          healthCheck.getMetadata(function(err, metadata) {
+            if (err) {
+              callback(err);
+              return;
+            }
 
-          callback();
-        });
+            healthCheckUrl = metadata.selfLink;
+
+            callback();
+          });
+        }));
       },
 
       function(callback) {
@@ -1155,73 +1304,19 @@ describe('Compute', function() {
     });
   }
 
-  function getHttpHealthChecks(callback) {
-    compute.request({
-      uri: '/global/httpHealthChecks',
-      qs: {
-        filter: 'name eq ' + TESTS_PREFIX + '.*'
-      }
-    }, callback);
-  }
-
-  function deleteHttpHealthChecks(callback) {
-    getHttpHealthChecks(function(err, resp) {
+  function deleteHttpsHealthChecks(callback) {
+    compute.getHealthChecks({
+      filter: 'name eq ' + TESTS_PREFIX + '.*',
+      https: true
+    }, function(err, healthChecks) {
       if (err) {
         callback(err);
         return;
       }
 
-      if (!resp.items) {
-        callback();
-        return;
-      }
-
-      async.each(resp.items.map(prop('name')), deleteHttpHealthCheck, callback);
-    });
-  }
-
-  function createHttpHealthCheck(name, callback) {
-    compute.request({
-      method: 'POST',
-      uri: '/global/httpHealthChecks',
-      json: {
-        name: name
-      }
-    }, function(err, resp) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      var operation = compute.operation(resp.name);
-      operation
-        .on('error', callback)
-        .on('complete', function() {
-          compute.request({
-            uri: '/global/httpHealthChecks/' + name
-          }, function(err, resp) {
-            callback(null, resp);
-          });
-        });
-    });
-  }
-
-  function deleteHttpHealthCheck(name, callback) {
-    compute.request({
-      method: 'DELETE',
-      uri: '/global/httpHealthChecks/' + name
-    }, function(err, resp) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      var operation = compute.operation(resp.name);
-      operation
-        .on('error', callback)
-        .on('complete', function() {
-          callback();
-        });
+      async.each(healthChecks, function(healthCheck, callback) {
+        healthCheck.delete(execAfterOperationComplete(callback));
+      }, callback);
     });
   }
 
