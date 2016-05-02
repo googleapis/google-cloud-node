@@ -17,38 +17,50 @@
 'use strict';
 
 var assert = require('assert');
+var extend = require('extend');
 var mockery = require('mockery-next');
-var nodeutil = require('util');
 
-var GrpcService = require('../../lib/common/grpc-service.js');
 var util = require('../../lib/common/util.js');
 
 function FakeGrpcService() {
   this.calledWith_ = arguments;
-  GrpcService.apply(this, arguments);
 }
 
-nodeutil.inherits(FakeGrpcService, GrpcService);
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+}
+
+var fakeUtil = extend({}, util);
 
 describe('IAM', function() {
   var IAM;
   var iam;
 
-  var PUBSUB = {
-    defaultBaseUrl_: 'base-url',
-    options: {}
-  };
-  var ID = 'id';
+  var RESOURCE_SCOPE = new FakeServiceObject();
+  extend(RESOURCE_SCOPE, {
+    parent: {
+      baseUrl: 'base-url',
+      options: {}
+    },
+    id: 'scope-id'
+  });
+  // var RESOURCE_ID;
+  // var OPTIONS = {};
 
   before(function() {
     mockery.registerMock('../../lib/common/grpc-service.js', FakeGrpcService);
+    mockery.registerMock(
+      '../../lib/common/service-object.js',
+      FakeServiceObject
+    );
+    mockery.registerMock('../../lib/common/util.js', fakeUtil);
 
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
     });
 
-    IAM = require('../../lib/pubsub/iam.js');
+    IAM = require('../../lib/iam/index.js');
   });
 
   after(function() {
@@ -57,29 +69,47 @@ describe('IAM', function() {
   });
 
   beforeEach(function() {
-    iam = new IAM(PUBSUB, ID);
+    iam = new IAM(RESOURCE_SCOPE);
   });
 
   describe('initialization', function() {
+    it('should normalize the arguments', function() {
+      var normalizeArguments = fakeUtil.normalizeArguments;
+      var normalizeArgumentsCalled = false;
+      var fakeOptions = { projectId: 'project-id' };
+      var fakeContext = {};
+
+      fakeUtil.normalizeArguments = function(context, options) {
+        normalizeArgumentsCalled = true;
+        assert.strictEqual(context, fakeContext);
+        assert.strictEqual(options, fakeOptions);
+        return options;
+      };
+
+      IAM.call(fakeContext, RESOURCE_SCOPE, fakeOptions);
+      assert(normalizeArgumentsCalled);
+
+      fakeUtil.normalizeArguments = normalizeArguments;
+    });
+
     it('should inherit from GrpcService', function() {
-      assert(iam instanceof GrpcService);
+      assert(iam instanceof FakeGrpcService);
 
       var config = iam.calledWith_[0];
       var options = iam.calledWith_[1];
 
-      assert.strictEqual(config.baseUrl, PUBSUB.defaultBaseUrl_);
+      assert.strictEqual(config.baseUrl, RESOURCE_SCOPE.parent.baseUrl);
       assert.strictEqual(config.service, 'iam');
       assert.strictEqual(config.apiVersion, 'v1');
       assert.deepEqual(config.scopes, [
-        'https://www.googleapis.com/auth/pubsub',
         'https://www.googleapis.com/auth/cloud-platform'
       ]);
 
-      assert.strictEqual(options, PUBSUB.options);
+      assert.strictEqual(options, RESOURCE_SCOPE.parent.options);
     });
 
     it('should localize the ID', function() {
-      assert.strictEqual(iam.id, ID);
+      assert.strictEqual(iam.id, RESOURCE_SCOPE.id);
     });
   });
 

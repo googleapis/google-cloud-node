@@ -75,7 +75,7 @@ describe('Subscription', function() {
       '../../lib/common/grpc-service-object.js',
       FakeGrpcServiceObject
     );
-    mockery.registerMock('../../lib/pubsub/iam.js', FakeIAM);
+    mockery.registerMock('../../lib/iam/index.js', FakeIAM);
 
     mockery.enable({
       useCleanCache: true,
@@ -166,11 +166,8 @@ describe('Subscription', function() {
       assert.strictEqual(subscription.timeout, 92000);
     });
 
-    it('should create an iam object', function() {
-      assert.deepEqual(subscription.iam.calledWith_, [
-        PUBSUB,
-        SUB_FULL_NAME
-      ]);
+    it('should return an iam object', function() {
+      assert.deepEqual(subscription.iam.calledWith_[0], subscription);
     });
 
     it('should inherit from GrpcServiceObject', function() {
