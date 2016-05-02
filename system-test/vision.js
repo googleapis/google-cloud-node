@@ -17,6 +17,8 @@
 'use strict';
 
 var assert = require('assert');
+var fs = require('fs');
+var http = require('http');
 var is = require('is');
 var multiline = require('multiline');
 var normalizeNewline = require('normalize-newline');
@@ -35,6 +37,29 @@ describe('Vision', function() {
 
   beforeEach(function() {
     vision = new Vision(env);
+  });
+
+  it('should detect from a URL', function(done) {
+    var server = http.createServer(function(req, res) {
+      fs.readFile(IMAGES.logo, function(err, resp) {
+        assert.ifError(err);
+        res.end(resp);
+      });
+    });
+
+    server.listen(8800, function(err) {
+      assert.ifError(err);
+
+      var url = 'http://localhost:8800/logo.png';
+
+      vision.detect(url, ['logos'], function(err, logos) {
+        assert.ifError(err);
+
+        assert.deepEqual(logos, ['Google']);
+
+        done();
+      });
+    });
   });
 
   it('should perform multiple detections', function(done) {
