@@ -1006,6 +1006,21 @@ describe('Bucket', function() {
       bucket.upload(textFilepath, options, assert.ifError);
     });
 
+    it('should force a resumable upload', function(done) {
+      var fakeFile = new FakeFile(bucket, 'file-name');
+      var options = { destination: fakeFile, resumable: true };
+      fakeFile.createWriteStream = function(options_) {
+        var ws = new stream.Writable();
+        ws.write = util.noop;
+        setImmediate(function() {
+          assert.strictEqual(options_.resumable, options.resumable);
+          done();
+        });
+        return ws;
+      };
+      bucket.upload(filepath, options, assert.ifError);
+    });
+
     it('should allow overriding content type', function(done) {
       var fakeFile = new FakeFile(bucket, 'file-name');
       var metadata = { contentType: 'made-up-content-type' };
@@ -1022,29 +1037,19 @@ describe('Bucket', function() {
       bucket.upload(filepath, options, assert.ifError);
     });
 
-    it('should allow specifying options.gzip', function(done) {
+    it('should pass provided options to createWriteStream', function(done) {
       var fakeFile = new FakeFile(bucket, 'file-name');
-      var options = { destination: fakeFile, gzip: true };
-      fakeFile.createWriteStream = function(options) {
-        var ws = new stream.Writable();
-        ws.write = util.noop;
-        setImmediate(function() {
-          assert.strictEqual(options.gzip, true);
-          done();
-        });
-        return ws;
+      var options = {
+        destination: fakeFile,
+        a: 'b',
+        c: 'd'
       };
-      bucket.upload(filepath, options, assert.ifError);
-    });
-
-    it('should allow specifying options.resumable', function(done) {
-      var fakeFile = new FakeFile(bucket, 'file-name');
-      var options = { destination: fakeFile, resumable: false };
-      fakeFile.createWriteStream = function(options) {
+      fakeFile.createWriteStream = function(options_) {
         var ws = new stream.Writable();
         ws.write = util.noop;
         setImmediate(function() {
-          assert.strictEqual(options.resumable, false);
+          assert.strictEqual(options_.a, options.a);
+          assert.strictEqual(options_.c, options.c);
           done();
         });
         return ws;

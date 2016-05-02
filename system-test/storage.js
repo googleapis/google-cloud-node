@@ -378,6 +378,58 @@ describe('storage', function() {
           });
         });
       });
+
+      it('should make a file public during the upload', function(done) {
+        bucket.upload(FILES.big.path, {
+          resumable: false,
+          public: true
+        }, function(err, file) {
+          assert.ifError(err);
+
+          file.acl.get({ entity: 'allUsers' }, function(err, aclObject) {
+            assert.ifError(err);
+            assert.deepEqual(aclObject, {
+              entity: 'allUsers',
+              role: 'READER'
+            });
+            done();
+          });
+        });
+      });
+
+      it('should make a file public from a resumable upload', function(done) {
+        bucket.upload(FILES.big.path, {
+          resumable: true,
+          public: true
+        }, function(err, file) {
+          assert.ifError(err);
+
+          file.acl.get({ entity: 'allUsers' }, function(err, aclObject) {
+            assert.ifError(err);
+            assert.deepEqual(aclObject, {
+              entity: 'allUsers',
+              role: 'READER'
+            });
+            done();
+          });
+        });
+      });
+
+      it('should make a file private from a resumable upload', function(done) {
+        bucket.upload(FILES.big.path, {
+          resumable: true,
+          private: true
+        }, function(err, file) {
+          assert.ifError(err);
+
+          file.acl.get({ entity: 'allUsers' }, function(err, aclObject) {
+            assert.equal(err.code, 404);
+            assert.equal(err.message, 'Not Found');
+            assert.equal(aclObject, null);
+            done();
+          });
+        });
+      });
     });
   });
 

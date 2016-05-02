@@ -991,13 +991,14 @@ describe('File', function() {
     });
 
     it('should start a simple upload if specified', function(done) {
-      var writable = file.createWriteStream({
+      var options = {
         metadata: METADATA,
         resumable: false
-      });
+      };
+      var writable = file.createWriteStream(options);
 
-      file.startSimpleUpload_ = function(stream, metadata) {
-        assert.deepEqual(metadata, METADATA);
+      file.startSimpleUpload_ = function(stream, options_) {
+        assert.deepEqual(options_, options);
         done();
       };
 
@@ -1005,13 +1006,14 @@ describe('File', function() {
     });
 
     it('should start a resumable upload if specified', function(done) {
-      var writable = file.createWriteStream({
+      var options = {
         metadata: METADATA,
         resumable: true
-      });
+      };
+      var writable = file.createWriteStream(options);
 
-      file.startResumableUpload_ = function(stream, metadata) {
-        assert.deepEqual(metadata, METADATA);
+      file.startResumableUpload_ = function(stream, options_) {
+        assert.deepEqual(options_, options);
         done();
       };
 
@@ -1023,8 +1025,8 @@ describe('File', function() {
         metadata: METADATA
       });
 
-      file.startResumableUpload_ = function(stream, metadata) {
-        assert.deepEqual(metadata, METADATA);
+      file.startResumableUpload_ = function(stream, options) {
+        assert.deepEqual(options.metadata, METADATA);
         done();
       };
 
@@ -1034,8 +1036,8 @@ describe('File', function() {
     it('should set metadata.contentEncoding with gzip', function(done) {
       var writable = file.createWriteStream({ gzip: true });
 
-      file.startResumableUpload_ = function(stream, metadata) {
-        assert.strictEqual(metadata.contentEncoding, 'gzip');
+      file.startResumableUpload_ = function(stream, options) {
+        assert.strictEqual(options.metadata.contentEncoding, 'gzip');
         done();
       };
 
@@ -2137,8 +2139,11 @@ describe('File', function() {
   describe('startResumableUpload_', function() {
     describe('starting', function() {
       it('should start a resumable upload', function(done) {
-        var metadata = {
-          contentType: 'application/json'
+        var options = {
+          metadata: {},
+          public: true,
+          private: false,
+          predefinedAcl: 'allUsers'
         };
 
         file.generation = 3;
@@ -2152,13 +2157,16 @@ describe('File', function() {
           assert.strictEqual(opts.bucket, bucket.name);
           assert.strictEqual(opts.file, file.name);
           assert.strictEqual(opts.generation, file.generation);
-          assert.strictEqual(opts.metadata, metadata);
+          assert.strictEqual(opts.metadata, options.metadata);
+          assert.strictEqual(opts.predefinedAcl, options.predefinedAcl);
+          assert.strictEqual(opts.private, options.private);
+          assert.strictEqual(opts.public, options.public);
 
           setImmediate(done);
           return through();
         };
 
-        file.startResumableUpload_(duplexify(), metadata);
+        file.startResumableUpload_(duplexify(), options);
       });
 
       it('should emit the response', function(done) {
@@ -2243,13 +2251,19 @@ describe('File', function() {
     });
 
     it('should pass the required arguments', function(done) {
-      var metadata = { a: 'b', c: 'd' };
+      var options = {
+        metadata: {},
+        predefinedAcl: 'allUsers',
+        private: true,
+        public: true
+      };
 
-      makeWritableStreamOverride = function(stream, options) {
-        assert.deepEqual(options.metadata, metadata);
-        assert.deepEqual(options.request, {
+      makeWritableStreamOverride = function(stream, options_) {
+        assert.strictEqual(options_.metadata, options.metadata);
+        assert.deepEqual(options_.request, {
           qs: {
-            name: file.name
+            name: file.name,
+            predefinedAcl: options.predefinedAcl
           },
           uri: 'https://www.googleapis.com/upload/storage/v1/b/' +
             file.bucket.name + '/o'
@@ -2257,7 +2271,25 @@ describe('File', function() {
         done();
       };
 
-      file.startSimpleUpload_(duplexify(), metadata);
+      file.startSimpleUpload_(duplexify(), options);
+    });
+
+    it('should set predefinedAcl when public: true', function(done) {
+      makeWritableStreamOverride = function(stream, options_) {
+        assert.strictEqual(options_.request.qs.predefinedAcl, 'publicRead');
+        done();
+      };
+
+      file.startSimpleUpload_(duplexify(), { public: true });
+    });
+
+    it('should set predefinedAcl when private: true', function(done) {
+      makeWritableStreamOverride = function(stream, options_) {
+        assert.strictEqual(options_.request.qs.predefinedAcl, 'private');
+        done();
+      };
+
+      file.startSimpleUpload_(duplexify(), { private: true });
     });
 
     it('should send query.ifGenerationMatch if File has one', function(done) {
@@ -2272,10 +2304,12 @@ describe('File', function() {
     });
 
     it('should finish stream and set metadata', function(done) {
-      var metadata = { a: 'b', c: 'd' };
+      var options = {
+        metadata: { a: 'b', c: 'd' }
+      };
 
-      makeWritableStreamOverride = function(stream, options, callback) {
-        callback(metadata);
+      makeWritableStreamOverride = function(stream, options_, callback) {
+        callback(options.metadata);
       };
 
       var ws = new stream.Writable();
@@ -2283,11 +2317,11 @@ describe('File', function() {
       ws
         .on('error', done)
         .on('complete', function() {
-          assert.strictEqual(file.metadata, metadata);
+          assert.strictEqual(file.metadata, options.metadata);
           done();
         });
 
-      file.startSimpleUpload_(ws, metadata);
+      file.startSimpleUpload_(ws, options);
     });
   });
 });
