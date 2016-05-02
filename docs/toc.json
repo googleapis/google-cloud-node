@@ -62,8 +62,8 @@
       "title": "Firewall",
       "type": "compute/firewall"
     }, {
-      "title": "Health Check",
-      "type": "compute/healthCheck"
+      "title": "HealthCheck",
+      "type": "compute/health-check"
     }, {
       "title": "Network",
       "type": "compute/network"
