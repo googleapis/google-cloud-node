@@ -67,12 +67,21 @@ describe('Entry', function() {
 
   describe('fromApiResponse_', function() {
     var entry;
+    var date = new Date();
 
     beforeEach(function() {
+      var seconds = date.getTime() / 1000;
+      var secondsRounded = Math.floor(seconds);
+
       entry = Entry.fromApiResponse_({
         resource: RESOURCE,
+        payload: 'jsonPayload',
         jsonPayload: DATA,
-        extraProperty: true
+        extraProperty: true,
+        timestamp: {
+          seconds: secondsRounded,
+          nanos: Math.floor((seconds - secondsRounded) * 1e9)
+        }
       });
     });
 
@@ -81,11 +90,13 @@ describe('Entry', function() {
       assert.strictEqual(entry.resource, RESOURCE);
       assert.strictEqual(entry.data, DATA);
       assert.strictEqual(entry.extraProperty, true);
+      assert.deepEqual(entry.timestamp, date);
     });
 
     it('should extend the entry with proto data', function() {
       var entry = Entry.fromApiResponse_({
         resource: RESOURCE,
+        payload: 'protoPayload',
         protoPayload: DATA,
         extraProperty: true
       });
@@ -100,6 +111,7 @@ describe('Entry', function() {
     it('should extend the entry with text data', function() {
       var entry = Entry.fromApiResponse_({
         resource: RESOURCE,
+        payload: 'textPayload',
         textPayload: DATA,
         extraProperty: true
       });
@@ -180,6 +192,21 @@ describe('Entry', function() {
       entry.data = 'string';
       var json = entry.toJSON();
       assert.strictEqual(json.textPayload, entry.data);
+    });
+
+    it('should convert a date', function() {
+      var date = new Date();
+      entry.timestamp = date;
+
+      var json = entry.toJSON();
+
+      var seconds = date.getTime() / 1000;
+      var secondsRounded = Math.floor(seconds);
+
+      assert.deepEqual(json.timestamp, {
+        seconds: secondsRounded,
+        nanos: Math.floor((seconds - secondsRounded) * 1e9)
+      });
     });
   });
 });
