@@ -25,7 +25,8 @@ git config --global user.name "travis-ci"
 git config --global user.email "travis@travis-ci.org"
 
 ## Attempt to update docs/manifest.json with the new version.
-git checkout master
+git submodule add https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME}
+cd gcloud-node
 node -e "
 file = require('./docs/manifest.json')
 if (file.versions.indexOf('${TRAVIS_TAG}') === -1) file.versions.unshift('${TRAVIS_TAG}')
@@ -38,7 +39,7 @@ set -e
 git commit -m "Update docs/manifest.json for ${TRAVIS_TAG} [ci skip]"
 git status
 if [[ -n "$(git status --porcelain)" ]]; then
-  git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:master
+  git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} master
 else
   echo "docs/manifest.json already includes the new version. Skipping commit."
 fi
