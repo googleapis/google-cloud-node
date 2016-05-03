@@ -3,6 +3,7 @@
   "friendlyLang": "Node.js",
   "markdown": "javascript",
   "versions": [
+    "v0.32.0",
     "v0.31.0",
     "v0.30.3",
     "v0.30.2",
