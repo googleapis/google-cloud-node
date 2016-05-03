@@ -641,6 +641,12 @@ describe('Datastore', function() {
         done();
       });
     });
+
+    it('should query from the Query object', function(done) {
+      var q = datastore.createQuery('Character');
+
+      q.run(done);
+    });
   });
 
   describe('transactions', function() {
