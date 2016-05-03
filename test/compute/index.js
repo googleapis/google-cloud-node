@@ -45,6 +45,7 @@ var fakeStreamRouter = {
       'getAutoscalers',
       'getDisks',
       'getFirewalls',
+      'getHealthChecks',
       'getNetworks',
       'getOperations',
       'getRegions',
@@ -58,6 +59,10 @@ var fakeStreamRouter = {
 };
 
 function FakeFirewall() {
+  this.calledWith_ = slice.call(arguments);
+}
+
+function FakeHealthCheck() {
   this.calledWith_ = slice.call(arguments);
 }
 
@@ -110,6 +115,7 @@ describe('Compute', function() {
     mockery.registerMock('../../lib/common/stream-router.js', fakeStreamRouter);
     mockery.registerMock('../../lib/common/util.js', fakeUtil);
     mockery.registerMock('../../lib/compute/firewall.js', FakeFirewall);
+    mockery.registerMock('../../lib/compute/health-check.js', FakeHealthCheck);
     mockery.registerMock('../../lib/compute/network.js', FakeNetwork);
     mockery.registerMock('../../lib/compute/operation.js', FakeOperation);
     mockery.registerMock('../../lib/compute/region.js', FakeRegion);
@@ -323,6 +329,144 @@ describe('Compute', function() {
           assert.strictEqual(resp, apiResponse);
           done();
         });
+      });
+    });
+  });
+
+  describe('createHealthCheck', function() {
+    it('should throw if a name is not provided', function() {
+      assert.throws(function() {
+        compute.createHealthCheck({}, assert.ifError);
+      }, /A health check name must be provided./);
+    });
+
+    describe('options.interval', function() {
+      it('should set checkIntervalSec', function(done) {
+        var options = { interval: 50 };
+
+        compute.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.json.checkIntervalSec, options.interval);
+          assert.strictEqual(reqOpts.json.interval, undefined);
+          done();
+        };
+
+        compute.createHealthCheck('name', options, assert.ifError);
+      });
+    });
+
+    describe('config.timeout', function() {
+      it('should set timeoutSec', function(done) {
+        var options = { timeout: 50 };
+
+        compute.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.json.timeoutSec, options.timeout);
+          assert.strictEqual(reqOpts.json.timeout, undefined);
+          done();
+        };
+
+        compute.createHealthCheck('name', options, assert.ifError);
+      });
+    });
+
+    describe('options.https', function() {
+      it('should make the correct API request', function(done) {
+        var name = 'https-health-check-name';
+
+        compute.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.json.https, undefined);
+          assert.strictEqual(reqOpts.json.name, name);
+          assert.strictEqual(reqOpts.uri, '/global/httpsHealthChecks');
+          done();
+        };
+
+        compute.createHealthCheck(name, { https: true }, assert.ifError);
+      });
+    });
+
+    it('should make the correct default API request', function(done) {
+      var name = 'new-health-check-name';
+      var options = { a: 'b' };
+      var originalOptions = extend({}, options);
+
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/global/httpHealthChecks');
+        assert.deepEqual(reqOpts.json, { a: 'b', name: name });
+        assert.deepEqual(options, originalOptions);
+        done();
+      };
+
+      compute.createHealthCheck(name, options, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = { a: 'b', c: 'd' };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should exec the callback with error & API response', function(done) {
+        compute.createHealthCheck('name', {}, function(err, hc, op, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(hc, null);
+          assert.strictEqual(op, null);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = {
+        name: 'op-name'
+      };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should exec cb with HealthCheck, Op, & apiResp', function(done) {
+        var name = 'name';
+        var healthCheck = {};
+        var operation = {};
+
+        compute.healthCheck = function(name_, options) {
+          assert.strictEqual(name_, name);
+          assert.deepEqual(options.https, undefined);
+          return healthCheck;
+        };
+
+        compute.operation = function(name_) {
+          assert.strictEqual(name_, apiResponse.name);
+          return operation;
+        };
+
+        compute.createHealthCheck('name', {}, function(err, hc, op, resp) {
+          assert.strictEqual(err, null);
+          assert.strictEqual(hc, healthCheck);
+          assert.strictEqual(op, operation);
+          assert.strictEqual(op.metadata, apiResponse);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
+
+      it('should create an HTTPS HealthCheck object', function(done) {
+        var name = 'name';
+
+        compute.healthCheck = function(name_, options) {
+          assert.strictEqual(name_, name);
+          assert.strictEqual(options.https, true);
+          done();
+        };
+
+        compute.createHealthCheck('name', { https: true }, assert.ifError);
       });
     });
   });
@@ -1071,6 +1215,125 @@ describe('Compute', function() {
         };
 
         compute.getFirewalls(query, function(err, firewalls, nextQuery) {
+          assert.ifError(err);
+
+          assert.deepEqual(query, originalQuery);
+
+          assert.deepEqual(nextQuery, extend({}, query, {
+            pageToken: apiResponseWithNextPageToken.nextPageToken
+          }));
+
+          done();
+        });
+      });
+    });
+  });
+
+  describe('getHealthChecks', function() {
+    it('should accept only a callback', function(done) {
+      compute.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
+
+      compute.getHealthChecks(assert.ifError);
+    });
+
+    it('should make the correct default API request', function(done) {
+      var options = {};
+
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/global/httpHealthChecks');
+        assert.deepEqual(reqOpts.qs, options);
+        done();
+      };
+
+      compute.getHealthChecks(options, assert.ifError);
+    });
+
+    describe('options.https', function() {
+      it('should make the correct API request', function(done) {
+        var options = { https: true };
+        var originalOptions = extend({}, options);
+
+        compute.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.uri, '/global/httpsHealthChecks');
+          assert.deepEqual(reqOpts.qs, {});
+          assert.deepEqual(options, originalOptions);
+          done();
+        };
+
+        compute.getHealthChecks(options, assert.ifError);
+      });
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = { a: 'b', c: 'd' };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        compute.getHealthChecks({}, function(err, hcs, nextQuery, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(hcs, null);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(resp, apiResponse);
+
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var healthCheck = { name: 'health-check-1' };
+      var apiResponse = { items: [healthCheck] };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should create HealthCheck objects from the response', function(done) {
+        compute.healthCheck = function(name, options) {
+          assert.strictEqual(name, healthCheck.name);
+          assert.strictEqual(options.https, undefined);
+          setImmediate(done);
+          return healthCheck;
+        };
+
+        compute.getHealthChecks({}, assert.ifError);
+      });
+
+      it('should create HTTPS Health Check objects', function(done) {
+        compute.healthCheck = function(name, options) {
+          assert.strictEqual(name, healthCheck.name);
+          assert.strictEqual(options.https, true);
+          setImmediate(done);
+          return healthCheck;
+        };
+
+        compute.getHealthChecks({ https: true }, assert.ifError);
+      });
+
+      it('should build a nextQuery if necessary', function(done) {
+        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+          nextPageToken: 'next-page-token'
+        });
+
+        var query = { a: 'b', c: 'd' };
+        var originalQuery = extend({}, query);
+
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponseWithNextPageToken);
+        };
+
+        compute.getHealthChecks(query, function(err, firewalls, nextQuery) {
           assert.ifError(err);
 
           assert.deepEqual(query, originalQuery);
@@ -1853,6 +2116,19 @@ describe('Compute', function() {
           done();
         });
       });
+    });
+  });
+
+  describe('healthCheck', function() {
+    var NAME = 'health-check-name';
+    var OPTIONS = {};
+
+    it('should return a HealthCheck object', function() {
+      var healthCheck = compute.healthCheck(NAME, OPTIONS);
+      assert(healthCheck instanceof FakeHealthCheck);
+      assert.strictEqual(healthCheck.calledWith_[0], compute);
+      assert.strictEqual(healthCheck.calledWith_[1], NAME);
+      assert.strictEqual(healthCheck.calledWith_[2], OPTIONS);
     });
   });
 
