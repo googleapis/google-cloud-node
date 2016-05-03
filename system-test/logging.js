@@ -18,8 +18,8 @@
 
 var assert = require('assert');
 var async = require('async');
+var exec = require('methmeth');
 var format = require('string-format-obj');
-var googleAuth = require('google-auto-auth');
 var is = require('is');
 var uuid = require('node-uuid');
 
@@ -32,12 +32,7 @@ var Storage = require('../lib/storage/index.js');
 describe('Logging', function() {
   var TESTS_PREFIX = 'gcloud-logging-test';
 
-  var authClient = googleAuth({
-    scopes: ['https://www.googleapis.com/auth/cloud-platform']
-  });
-
   var logging = new Logging(env);
-  var loggingWithUserAuth;
 
   var bigQuery = new BigQuery(env);
   var pubsub = new PubSub(env);
@@ -50,42 +45,18 @@ describe('Logging', function() {
 
   before(function(done) {
     async.parallel([
-      checkIfUserAuthIsAvailable,
-      createBucket,
-      createDataset,
-      createTopic
+      bucket.create.bind(bucket),
+      dataset.create.bind(dataset),
+      topic.create.bind(topic)
     ], done);
-
-    function checkIfUserAuthIsAvailable(callback) {
-      authClient.getToken(function(err) {
-        if (!err) {
-          loggingWithUserAuth = new Logging({
-            projectId: env.projectId
-          });
-        }
-
-        callback();
-      });
-    }
-
-    function createBucket(callback) {
-      bucket.create(callback);
-    }
-
-    function createDataset(callback) {
-      dataset.create(callback);
-    }
-
-    function createTopic(callback) {
-      topic.create(callback);
-    }
   });
 
   after(function(done) {
     async.parallel([
       deleteBuckets,
       deleteDatasets,
-      deleteTopics
+      deleteTopics,
+      deleteSinks
     ], done);
 
     function deleteBuckets(callback) {
@@ -113,47 +84,36 @@ describe('Logging', function() {
     }
 
     function deleteDatasets(callback) {
-      bigQuery.getDatasets(function(err, datasets) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        async.each(filterByPrefix(datasets), deleteObject, callback);
-      });
+      getAndDelete(bigQuery.getDatasets.bind(bigQuery), callback);
     }
 
     function deleteTopics(callback) {
-      pubsub.getTopics(function(err, topics) {
+      getAndDelete(pubsub.getTopics.bind(pubsub), callback);
+    }
+
+    function deleteSinks(callback) {
+      getAndDelete(logging.getSinks.bind(logging), callback);
+    }
+
+    function getAndDelete(method, callback) {
+      method(function(err, objects) {
         if (err) {
           callback(err);
           return;
         }
 
-        async.each(filterByPrefix(topics), deleteObject, callback);
-      });
-    }
+        objects = objects.filter(function(object) {
+          return object.id.indexOf(TESTS_PREFIX) === 0;
+        });
 
-    function filterByPrefix(objects) {
-      return objects.filter(function(object) {
-        return object.id.indexOf(TESTS_PREFIX) === 0;
+        async.each(objects, exec('delete'), callback);
       });
-    }
-
-    function deleteObject(object, callback) {
-      object.delete(callback);
     }
   });
 
-  describe('sinks (user auth operations)', function() {
-    beforeEach(function() {
-      if (!loggingWithUserAuth) {
-        this.skip();
-      }
-    });
-
+  describe('sinks', function() {
     it('should create a sink with a Bucket destination', function(done) {
-      var sink = loggingWithUserAuth.sink(generateName());
+      var sink = logging.sink(generateName());
 
       sink.create({
         destination: bucket
@@ -163,12 +123,12 @@ describe('Logging', function() {
         var destination = 'storage.googleapis.com/' + bucket.name;
         assert.strictEqual(apiResponse.destination, destination);
 
-        sink.delete(done);
+        done();
       });
     });
 
     it('should create a sink with a Dataset destination', function(done) {
-      var sink = loggingWithUserAuth.sink(generateName());
+      var sink = logging.sink(generateName());
 
       sink.create({
         destination: dataset
@@ -183,12 +143,12 @@ describe('Logging', function() {
 
         assert.strictEqual(apiResponse.destination, destination);
 
-        sink.delete(done);
+        done();
       });
     });
 
     it('should create a sink with a Topic destination', function(done) {
-      var sink = loggingWithUserAuth.sink(generateName());
+      var sink = logging.sink(generateName());
 
       sink.create({
         destination: topic
@@ -198,40 +158,18 @@ describe('Logging', function() {
         var destination = 'pubsub.googleapis.com/' + topic.name;
         assert.strictEqual(apiResponse.destination, destination);
 
-        sink.delete(done);
+        done();
       });
     });
 
     describe('metadata', function() {
-      var sink;
+      var sink = logging.sink(generateName());
       var FILTER = 'severity = ALERT';
 
       before(function(done) {
-        if (!loggingWithUserAuth) {
-          this.skip();
-          return;
-        }
-
-        sink = loggingWithUserAuth.sink(generateName());
-
         sink.create({
           destination: topic
         }, done);
-      });
-
-      beforeEach(function() {
-        if (!loggingWithUserAuth) {
-          this.skip();
-        }
-      });
-
-      after(function(done) {
-        if (!loggingWithUserAuth) {
-          this.skip();
-          return;
-        }
-
-        sink.delete(done);
       });
 
       it('should set metadata', function(done) {
@@ -256,25 +194,12 @@ describe('Logging', function() {
     });
 
     describe('listing sinks', function() {
-      var sink;
+      var sink = logging.sink(generateName());
 
       before(function(done) {
-        if (!loggingWithUserAuth) {
-          this.skip();
-          return;
-        }
-
-        sink = loggingWithUserAuth.sink(generateName());
-
         sink.create({
           destination: topic
         }, done);
-      });
-
-      beforeEach(function() {
-        if (!loggingWithUserAuth) {
-          this.skip();
-        }
       });
 
       it('should list sinks', function(done) {
