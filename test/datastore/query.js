@@ -19,7 +19,6 @@
 var assert = require('assert');
 
 var Query = require('../../lib/datastore/query.js');
-var util = require('../../lib/common/util.js');
 
 describe('Query', function() {
   var SCOPE = {};
@@ -321,16 +320,20 @@ describe('Query', function() {
 
   describe('run', function() {
     it('should call the parent instance runQuery correctly', function() {
+      var args = [0, 1, 2];
       var runQueryReturnValue = {};
-      var callback = util.noop;
 
-      query.scope.runQuery = function(query_, callback_) {
-        assert.strictEqual(query_, query);
-        assert.strictEqual(callback_, callback);
+      query.scope.runQuery = function() {
+        assert.strictEqual(this, query.scope);
+        assert.strictEqual(arguments[0], query);
+        assert.strictEqual(arguments[1], args[0]);
+        assert.strictEqual(arguments[2], args[1]);
+        assert.strictEqual(arguments[3], args[2]);
         return runQueryReturnValue;
       };
 
-      assert.strictEqual(query.run(callback), runQueryReturnValue);
+      var results = query.run.apply(query, args);
+      assert.strictEqual(results, runQueryReturnValue);
     });
   });
 });
