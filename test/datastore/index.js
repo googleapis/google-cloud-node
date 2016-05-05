@@ -191,15 +191,6 @@ describe('Datastore', function() {
   });
 
   describe('createQuery', function() {
-    var dsWithoutNamespace;
-
-    beforeEach(function() {
-      dsWithoutNamespace = new Datastore({
-        projectId: 'test',
-        namespace: 'my-ns'
-      });
-    });
-
     it('should return a Query object', function() {
       var namespace = 'namespace';
       var kind = ['Kind'];
@@ -207,16 +198,18 @@ describe('Datastore', function() {
       var query = datastore.createQuery(namespace, kind);
       assert(query instanceof FakeQuery);
 
-      assert.strictEqual(query.calledWith_[0], namespace);
-      assert.deepEqual(query.calledWith_[1], kind);
+      assert.strictEqual(query.calledWith_[0], datastore);
+      assert.strictEqual(query.calledWith_[1], namespace);
+      assert.deepEqual(query.calledWith_[2], kind);
     });
 
     it('should include the default namespace', function() {
       var kind = ['Kind'];
       var query = datastore.createQuery(kind);
 
-      assert.strictEqual(query.calledWith_[0], datastore.namespace);
-      assert.deepEqual(query.calledWith_[1], kind);
+      assert.strictEqual(query.calledWith_[0], datastore);
+      assert.strictEqual(query.calledWith_[1], datastore.namespace);
+      assert.deepEqual(query.calledWith_[2], kind);
     });
   });
 

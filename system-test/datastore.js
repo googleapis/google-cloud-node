@@ -641,6 +641,12 @@ describe('Datastore', function() {
         done();
       });
     });
+
+    it('should query from the Query object', function(done) {
+      var q = datastore.createQuery('Character');
+
+      q.run(done);
+    });
   });
 
   describe('transactions', function() {
@@ -757,6 +763,22 @@ describe('Datastore', function() {
           done();
         });
       });
+    });
+
+    it('should query within a transaction', function(done) {
+      datastore.runInTransaction(function(t, tDone) {
+        var query = t.createQuery('Company');
+
+        query.run(function(err, entities) {
+          if (err) {
+            tDone(err);
+            return;
+          }
+
+          assert(entities.length > 0);
+          tDone();
+        });
+      }, done);
     });
   });
 });

@@ -17,30 +17,46 @@
 'use strict';
 
 var assert = require('assert');
+
 var Query = require('../../lib/datastore/query.js');
 
 describe('Query', function() {
+  var SCOPE = {};
+  var NAMESPACE = 'Namespace';
+  var KINDS = 'Kind';
+
+  var query;
+
+  beforeEach(function() {
+    query = new Query(SCOPE, NAMESPACE, KINDS);
+  });
+
   describe('instantiation', function() {
+    it('should localize the scope', function() {
+      assert.strictEqual(query.scope, SCOPE);
+    });
+
+    it('should localize the namespace', function() {
+      assert.strictEqual(query.namespace, NAMESPACE);
+    });
+
+    it('should localize the kind', function() {
+      assert.strictEqual(query.kinds, KINDS);
+    });
+
     it('should use null for all falsy namespace values', function() {
       [
-        new Query('', 'Kind'),
-        new Query(null, 'Kind'),
-        new Query(undefined, 'Kind'),
-        new Query(0, 'Kind'),
-        new Query('Kind')
+        new Query(SCOPE, '', KINDS),
+        new Query(SCOPE, null, KINDS),
+        new Query(SCOPE, undefined, KINDS),
+        new Query(SCOPE, 0, KINDS),
+        new Query(SCOPE, KINDS)
       ].forEach(function(query) {
         assert.strictEqual(query.namespace, null);
-        assert.equal(query.kinds, 'Kind');
       });
     });
 
-    it('should support custom namespaces', function() {
-      var query = new Query('ns', ['kind1']);
-      assert.equal(query.namespace, 'ns');
-    });
-
     it('should enable auto pagination by default', function() {
-      var query = new Query(['kind1']);
       assert.strictEqual(query.autoPaginateVal, true);
     });
   });
@@ -299,6 +315,25 @@ describe('Query', function() {
       var nextQuery = query.offset(100);
 
       assert.strictEqual(query, nextQuery);
+    });
+  });
+
+  describe('run', function() {
+    it('should call the parent instance runQuery correctly', function() {
+      var args = [0, 1, 2];
+      var runQueryReturnValue = {};
+
+      query.scope.runQuery = function() {
+        assert.strictEqual(this, query.scope);
+        assert.strictEqual(arguments[0], query);
+        assert.strictEqual(arguments[1], args[0]);
+        assert.strictEqual(arguments[2], args[1]);
+        assert.strictEqual(arguments[3], args[2]);
+        return runQueryReturnValue;
+      };
+
+      var results = query.run.apply(query, args);
+      assert.strictEqual(results, runQueryReturnValue);
     });
   });
 });

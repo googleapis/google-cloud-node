@@ -52,6 +52,11 @@ describe('Transaction', function() {
   var TRANSACTION_ID = 'transaction-id';
   var PROJECT_ID = 'project-id';
 
+  var DATASTORE = {
+    request: function() {},
+    projectId: PROJECT_ID
+  };
+
   function key(path) {
     return new entity.Key({ path: arrify(path) });
   }
@@ -75,13 +80,14 @@ describe('Transaction', function() {
   });
 
   beforeEach(function() {
-    transaction = new Transaction({
-      request: function() {},
-      projectId: PROJECT_ID
-    });
+    transaction = new Transaction(DATASTORE);
   });
 
   describe('instantiation', function() {
+    it('should localize the datastore instance', function() {
+      assert.strictEqual(transaction.datastore, DATASTORE);
+    });
+
     it('should localize the project ID', function() {
       assert.strictEqual(transaction.projectId, PROJECT_ID);
     });
@@ -111,6 +117,25 @@ describe('Transaction', function() {
       assert.deepEqual(transaction.modifiedEntities_, []);
       assert.deepEqual(transaction.requestCallbacks_, []);
       assert.deepEqual(transaction.requests_, []);
+    });
+  });
+
+  describe('createQuery', function() {
+    it('should return query from datastore.createQuery', function() {
+      var args = [0, 1, 2, 3];
+      var createQueryReturnValue = {};
+
+      transaction.datastore.createQuery = function() {
+        assert.strictEqual(this, transaction);
+        assert.strictEqual(arguments[0], args[0]);
+        assert.strictEqual(arguments[1], args[1]);
+        assert.strictEqual(arguments[2], args[2]);
+        assert.strictEqual(arguments[3], args[3]);
+        return createQueryReturnValue;
+      };
+
+      var query = transaction.createQuery.apply(transaction, args);
+      assert.strictEqual(query, createQueryReturnValue);
     });
   });
 
