@@ -291,8 +291,16 @@ describe('Logging', function() {
       });
     });
 
-    it('should write to a log', function(done) {
+    it('should write a single entry to a log', function(done) {
+      log.write(logEntries[0], options, done);
+    });
+
+    it('should write multiple entries to a log', function(done) {
       log.write(logEntries, options, done);
+    });
+
+    it('should write a single entry with alert helper', function(done) {
+      log.alert(logEntries[0], options, done);
     });
 
     it('should write to a log with alert helper', function(done) {
