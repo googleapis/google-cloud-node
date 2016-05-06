@@ -124,20 +124,29 @@ describe('Log', function() {
 
   describe('assignSeverityToEntries_', function() {
     var ENTRIES = [
-      {},
-      {}
+      { data: { a: 'b' } },
+      { data: { c: 'd' } }
     ];
 
     var SEVERITY = 'severity';
 
-    it('should assign severity property to every entry', function() {
-      var entries = Log.assignSeverityToEntries_(ENTRIES, SEVERITY);
+    it('should assign severity to a single entry', function() {
+      assert.deepEqual(
+        Log.assignSeverityToEntries_(ENTRIES[0], SEVERITY),
+        [
+          extend(true, {}, ENTRIES[0], { severity: SEVERITY })
+        ]
+      );
+    });
 
-      var allEntriesAssignedWithSeverity = entries.every(function(entry) {
-        return entry.severity === SEVERITY;
-      });
-
-      assert.strictEqual(allEntriesAssignedWithSeverity, true);
+    it('should assign severity property to multiple entries', function() {
+      assert.deepEqual(
+        Log.assignSeverityToEntries_(ENTRIES, SEVERITY),
+        [
+          extend(true, {}, ENTRIES[0], { severity: SEVERITY }),
+          extend(true, {}, ENTRIES[1], { severity: SEVERITY })
+        ]
+      );
     });
 
     it('should not affect original array', function() {
