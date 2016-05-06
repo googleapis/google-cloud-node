@@ -40,6 +40,8 @@ function profileInterval() {
     // console.log('V8 heap statistics', stats.getHeapSpaceStatistics());
     var result = profiler.getAllocationProfile();
     // console.log('sample count * sample rate', result.length * 1024);
+    var devtoolsFormat = translateToDevtools(result);
+    fs.writeFile(runName + '.heapprofile', JSON.stringify({ head: devtoolsFormat }));
     var processed = builder.serialize(result, startTime * 1e6, endTime * 1e6)
                         .encode()
                         .toBuffer();
@@ -48,6 +50,20 @@ function profileInterval() {
     inp.end(processed);
     inp.pipe(zlib.createGzip()).pipe(outp).on('close', profileInterval);
   }, intervalMillis).unref();
+}
+
+function translateToDevtools(node) {
+  var result = {};
+  result.functionName = node.name;
+  result.scriptId = node.scriptId;
+  result.lineNumber = node.lineNumber;
+  result.columnNumber = node.columnNumber;
+  result.url = node.scriptName;
+  result.selfSize = node.allocations.reduce(function(sum, alloc) {
+    return sum + alloc.size * alloc.count;
+  }, 0);
+  result.children = node.children.map(translateToDevtools);
+  return result;
 }
 
 process.on('exit', function() { profiler.stopSamplingHeapProfiler(); });

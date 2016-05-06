@@ -25,8 +25,12 @@ Local<Value> TranslateAllocationProfile(AllocationProfile::Node* node) {
     node->name);
   js_node->Set(Nan::New<String>("scriptName").ToLocalChecked(),
     node->script_name);
+  js_node->Set(Nan::New<String>("scriptId").ToLocalChecked(),
+    Nan::New<Integer>(node->script_id));
   js_node->Set(Nan::New<String>("lineNumber").ToLocalChecked(),
     Nan::New<Integer>(node->line_number));
+  js_node->Set(Nan::New<String>("columnNumber").ToLocalChecked(),
+    Nan::New<Integer>(node->column_number));
   Local<Array> children = Nan::New<Array>(node->children.size());
   for (size_t i = 0; i < node->children.size(); i++) {
     children->Set(i, TranslateAllocationProfile(node->children[i]));
