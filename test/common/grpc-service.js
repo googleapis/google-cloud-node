@@ -710,7 +710,9 @@ describe('GrpcService', function() {
 
       var convertedValue = GrpcService.convertValue_(value);
 
-      assert.strictEqual(convertedValue, value);
+      assert.deepEqual(convertedValue, {
+        structValue: value
+      });
     });
 
     it('should convert dates', function() {
@@ -742,53 +744,6 @@ describe('GrpcService', function() {
       assert.throws(function() {
         GrpcService.convertValue_();
       }, 'Value of type undefined not recognized.');
-    });
-  });
-
-  describe('isBufferLike_', function() {
-    it('should return false if not an object', function() {
-      assert.strictEqual(GrpcService.isBufferLike_(0), false);
-      assert.strictEqual(GrpcService.isBufferLike_(true), false);
-      assert.strictEqual(GrpcService.isBufferLike_('not-buffer'), false);
-    });
-
-    it('should return false if empty', function() {
-      assert.strictEqual(GrpcService.isBufferLike_({}), false);
-    });
-
-    it('should filter out `length` and `parent` properties', function() {
-      var obj = {
-        1: 1,
-        2: 2,
-        3: 3,
-        length: 3,
-        parent: 'parent'
-      };
-
-      assert.strictEqual(GrpcService.isBufferLike_(obj), true);
-    });
-
-    it('require every property name to be a number', function() {
-      var isBufferLike = { 1: 1, 2: 2, 3: 3 };
-      var isNotBufferLike = { 1: 1, 2: 2, 3: 3, a: 'a' };
-      var isNotBufferLike2 = { 1: 1, 2: 2, 3: 3, '4a': '4a' };
-      var isNotBufferLike3 = { 1: 1, 2: 2, 3: 3, a4: 'a4' };
-      var isNotBufferLike4 = { 1: 1, 3: 3, 5: 5 };
-
-      assert.strictEqual(GrpcService.isBufferLike_(isBufferLike), true);
-      assert.strictEqual(GrpcService.isBufferLike_(isNotBufferLike), false);
-      assert.strictEqual(GrpcService.isBufferLike_(isNotBufferLike2), false);
-      assert.strictEqual(GrpcService.isBufferLike_(isNotBufferLike3), false);
-      assert.strictEqual(GrpcService.isBufferLike_(isNotBufferLike4), false);
-    });
-  });
-
-  describe('objToArr_', function() {
-    it('should convert an object into an array', function() {
-      assert.deepEqual(
-        GrpcService.objToArr_({ a: 'a', b: 'b', c: 'c' }),
-        ['a', 'b', 'c']
-      );
     });
   });
 

@@ -237,8 +237,18 @@ describe('Logging', function() {
     var log = logging.log('syslog');
 
     var logEntries = [
-      log.entry('log entry 1'), // string data
-      log.entry({ delegate: 'my_username' }) // object data
+      // string data
+      log.entry('log entry 1'),
+
+      // object data
+      log.entry({ delegate: 'my_username' }),
+
+      // nested object data
+      log.entry({
+        nested: {
+          delegate: 'my_username'
+        }
+      })
     ];
 
     var options = {
