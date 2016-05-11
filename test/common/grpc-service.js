@@ -522,7 +522,7 @@ describe('GrpcService', function() {
         grpcService.protos.Service = {
           service: function() {
             return {
-              method: function(reqOpts, callback) {
+              method: function(reqOpts, grpcOpts, callback) {
                 callback(grpcError500);
               }
             };
@@ -547,7 +547,7 @@ describe('GrpcService', function() {
         grpcService.protos.Service = {
           service: function() {
             return {
-              method: function(reqOpts, callback) {
+              method: function(reqOpts, grpcOpts, callback) {
                 callback(grpcError500);
               }
             };
@@ -590,7 +590,7 @@ describe('GrpcService', function() {
       grpcService.protos.Service = {
         service: function() {
           return {
-            method: function(reqOpts, callback, _, grpcOpts) {
+            method: function(reqOpts, grpcOpts) {
               assert(is.date(grpcOpts.deadline));
 
               assert(grpcOpts.deadline.getTime() > expectedDeadlineRange[0]);
@@ -634,7 +634,7 @@ describe('GrpcService', function() {
           grpcService.protos.Service = {
             service: function() {
               return {
-                method: function(reqOpts, callback) {
+                method: function(reqOpts, grpcOpts, callback) {
                   callback(grpcError);
                 }
               };
@@ -657,7 +657,7 @@ describe('GrpcService', function() {
         grpcService.protos.Service = {
           service: function() {
             return {
-              method: function(reqOpts, callback) {
+              method: function(reqOpts, grpcOpts, callback) {
                 callback(null, RESPONSE);
               }
             };
