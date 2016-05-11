@@ -31,6 +31,15 @@ function FakeServiceObject() {
 
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
+var utilOverrides = {};
+var fakeUtil = Object.keys(util).reduce(function(fakeUtil, methodName) {
+  fakeUtil[methodName] = function() {
+    var method = utilOverrides[methodName] || util[methodName];
+    return method.apply(this, arguments);
+  };
+  return fakeUtil;
+}, {});
+
 describe('BigQuery/Job', function() {
   var BIGQUERY = {
     projectId: 'my-project'
@@ -44,6 +53,8 @@ describe('BigQuery/Job', function() {
       '../../lib/common/service-object.js',
       FakeServiceObject
     );
+    mockery.registerMock('../../lib/common/util.js', fakeUtil);
+
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
@@ -58,6 +69,7 @@ describe('BigQuery/Job', function() {
   });
 
   beforeEach(function() {
+    utilOverrides = {};
     job = new Job(BIGQUERY, JOB_ID);
   });
 
@@ -79,6 +91,11 @@ describe('BigQuery/Job', function() {
         get: true,
         getMetadata: true
       });
+    });
+
+    it('should correctly initialize variables', function() {
+      assert.strictEqual(job.completeListeners, 0);
+      assert.strictEqual(job.hasActiveListeners, false);
     });
 
     describe('request interceptor', function() {
@@ -217,6 +234,214 @@ describe('BigQuery/Job', function() {
       };
 
       job.getQueryResults().done();
+    });
+  });
+
+  describe('listenForEvents_', function() {
+    beforeEach(function() {
+      job.startPolling_ = util.noop;
+    });
+
+    it('should start polling when complete listener is bound', function(done) {
+      job.startPolling_ = function() {
+        done();
+      };
+
+      job.on('complete', util.noop);
+    });
+
+    it('should track the number of listeners', function() {
+      assert.strictEqual(job.completeListeners, 0);
+
+      job.on('complete', util.noop);
+      assert.strictEqual(job.completeListeners, 1);
+
+      job.removeListener('complete', util.noop);
+      assert.strictEqual(job.completeListeners, 0);
+    });
+
+    it('should only run a single pulling loop', function() {
+      var startPollingCallCount = 0;
+
+      job.startPolling_ = function() {
+        startPollingCallCount++;
+      };
+
+      job.on('complete', util.noop);
+      job.on('complete', util.noop);
+
+      assert.strictEqual(startPollingCallCount, 1);
+    });
+
+    it('should close when no more message listeners are bound', function() {
+      job.on('complete', util.noop);
+      job.on('complete', util.noop);
+      assert.strictEqual(job.hasActiveListeners, true);
+
+      job.removeListener('complete', util.noop);
+      assert.strictEqual(job.hasActiveListeners, true);
+
+      job.removeListener('complete', util.noop);
+      assert.strictEqual(job.hasActiveListeners, false);
+    });
+  });
+
+  describe('startPolling_', function() {
+    var listenForEvents_;
+    var job;
+
+    before(function() {
+      listenForEvents_ = Job.prototype.listenForEvents_;
+    });
+
+    after(function() {
+      Job.prototype.listenForEvents_ = listenForEvents_;
+    });
+
+    beforeEach(function() {
+      Job.prototype.listenForEvents_ = util.noop;
+      job = new Job(BIGQUERY, JOB_ID);
+      job.hasActiveListeners = true;
+    });
+
+    afterEach(function() {
+      job.hasActiveListeners = false;
+    });
+
+    it('should not call getMetadata if no listeners', function(done) {
+      job.hasActiveListeners = false;
+
+      job.getMetadata = done; // if called, test will fail.
+
+      job.startPolling_();
+      done();
+    });
+
+    it('should call getMetadata if listeners are registered', function(done) {
+      job.hasActiveListeners = true;
+
+      job.getMetadata = function() {
+        done();
+      };
+
+      job.startPolling_();
+    });
+
+    describe('API error', function() {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      beforeEach(function() {
+        job.getMetadata = function(callback) {
+          callback(error, null, apiResponse);
+        };
+      });
+
+      it('should emit the error', function(done) {
+        job.on('error', function(err) {
+          assert.strictEqual(err, error);
+          done();
+        });
+
+        job.startPolling_();
+      });
+    });
+
+    describe('job failure', function() {
+      var error = new Error('Error.');
+      var apiResponse = {
+        status: {
+          errors: error
+        }
+      };
+
+      beforeEach(function() {
+        job.getMetadata = function(callback) {
+          callback(null, apiResponse, apiResponse);
+        };
+      });
+
+      it('should detect and emit an error from the response', function(done) {
+        utilOverrides.ApiError = function(body) {
+          assert.strictEqual(body, apiResponse.status);
+
+          return error;
+        };
+
+        job.on('error', function(err) {
+          assert.strictEqual(err, error);
+          done();
+        });
+
+        job.startPolling_();
+      });
+    });
+
+    describe('job pending', function() {
+      var apiResponse = {
+        status: {
+          state: 'PENDING'
+        }
+      };
+      var setTimeoutCached = global.setTimeout;
+
+      beforeEach(function() {
+        job.getMetadata = function(callback) {
+          callback(null, apiResponse, apiResponse);
+        };
+      });
+
+      after(function() {
+        global.setTimeout = setTimeoutCached;
+      });
+
+      it('should call startPolling_ after 500 ms', function(done) {
+        var startPolling_ = job.startPolling_;
+        var startPollingCalled = false;
+
+        global.setTimeout = function(fn, timeoutMs) {
+          fn(); // should call startPolling_
+          assert.strictEqual(timeoutMs, 500);
+        };
+
+        job.startPolling_ = function() {
+          if (!startPollingCalled) {
+            // Call #1.
+            startPollingCalled = true;
+            startPolling_.apply(this, arguments);
+            return;
+          }
+
+          // This is from the setTimeout call.
+          assert.strictEqual(this, job);
+          done();
+        };
+
+        job.startPolling_();
+      });
+    });
+
+    describe('job complete', function() {
+      var apiResponse = {
+        status: {
+          state: 'DONE'
+        }
+      };
+
+      beforeEach(function() {
+        job.getMetadata = function(callback) {
+          callback(null, apiResponse, apiResponse);
+        };
+      });
+
+      it('should emit complete with metadata', function(done) {
+        job.on('complete', function(metadata) {
+          assert.strictEqual(metadata, apiResponse);
+          done();
+        });
+
+        job.startPolling_();
+      });
     });
   });
 });
