@@ -439,9 +439,11 @@ describe.only('Datastore', function() {
         assert.ifError(err);
         assert.strictEqual(firstEntities.length, 5);
 
-        q.start(info.endCursor).limit(q.limitVal - firstEntities.length);
+        var secondQ = datastore.createQuery('Character')
+          .hasAncestor(ancestor)
+          .start(info.endCursor);
 
-        datastore.runQuery(q, function(err, secondEntities) {
+        datastore.runQuery(secondQ, function(err, secondEntities) {
           assert.ifError(err);
           assert.strictEqual(secondEntities.length, 3);
           done();
@@ -462,7 +464,7 @@ describe.only('Datastore', function() {
       });
     });
 
-    it.skip('should run a query as a stream', function(done) {
+    it('should run a query as a stream', function(done) {
       var q = datastore.createQuery('Character').hasAncestor(ancestor);
 
       var resultsReturned = 0;
@@ -476,7 +478,7 @@ describe.only('Datastore', function() {
         });
     });
 
-    it.skip('should not go over a limit with a stream', function(done) {
+    it('should not go over a limit with a stream', function(done) {
       var limit = 3;
       var q = datastore.createQuery('Character')
         .hasAncestor(ancestor)
@@ -593,11 +595,12 @@ describe.only('Datastore', function() {
         assert.strictEqual(entities[0].data.name, 'Robb');
         assert.strictEqual(entities[2].data.name, 'Catelyn');
 
-        q.start(info.endCursor)
-          .limit(q.limitVal - entities.length)
-          .offset(0);
+        var secondQ = datastore.createQuery('Character')
+          .hasAncestor(ancestor)
+          .order('appearances')
+          .start(info.endCursor);
 
-        datastore.runQuery(q, function(err, secondEntities) {
+        datastore.runQuery(secondQ, function(err, secondEntities) {
           assert.ifError(err);
 
           assert.strictEqual(secondEntities.length, 3);
@@ -619,9 +622,12 @@ describe.only('Datastore', function() {
       datastore.runQuery(q, function(err, entities, info) {
         assert.ifError(err);
 
-        q.start(info.endCursor).limit(-1).offset(-1);
+        var secondQ = datastore.createQuery('Character')
+          .hasAncestor(ancestor)
+          .order('appearances')
+          .start(info.endCursor);
 
-        datastore.runQuery(q, function(err, secondEntities, info) {
+        datastore.runQuery(secondQ, function(err, secondEntities) {
           assert.ifError(err);
 
           assert.strictEqual(secondEntities.length, 4);
