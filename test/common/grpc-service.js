@@ -680,7 +680,7 @@ describe('GrpcService', function() {
       var buffer = new Buffer('Value');
 
       assert.deepEqual(GrpcService.convertValue_(null), {
-        nullValue: null
+        nullValue: 0
       });
 
       assert.deepEqual(GrpcService.convertValue_(1), {
