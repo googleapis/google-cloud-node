@@ -190,6 +190,12 @@ describe('Datastore', function() {
     });
   });
 
+  describe('NO_MORE_RESULTS', function() {
+    it('should expose a NO_MORE_RESULTS helper', function() {
+      assert.strictEqual(Datastore.NO_MORE_RESULTS, 'NO_MORE_RESULTS');
+    });
+  });
+
   describe('createQuery', function() {
     it('should return a Query object', function() {
       var namespace = 'namespace';
