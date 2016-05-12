@@ -1,0 +1,20 @@
+{
+  "name": "nodejs-docs-samples-speech",
+  "description": "Node.js samples for Google Cloud Speech API.",
+  "version": "0.0.1",
+  "private": true,
+  "license": "Apache Version 2.0",
+  "author": "Google Inc.",
+  "engines": {
+    "node": ">=0.10.x"
+  },
+  "scripts": {
+    "recognize": "node recognize"
+  },
+  "dependencies": {
+    "googleapis": "^6.1.0"
+  },
+  "devDependencies": {
+    "async": "^1.5.0"
+  }
+}
