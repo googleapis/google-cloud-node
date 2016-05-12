@@ -55,37 +55,6 @@ describe('Query', function() {
         assert.strictEqual(query.namespace, null);
       });
     });
-
-    it('should enable auto pagination by default', function() {
-      assert.strictEqual(query.autoPaginateVal, true);
-    });
-  });
-
-  describe('autoPaginate', function() {
-    it('should enable auto pagination', function() {
-      var query = new Query(['kind1']).autoPaginate();
-
-      assert.strictEqual(query.autoPaginateVal, true);
-    });
-
-    it('should disable auto pagination when false is passed in', function() {
-      var query = new Query(['kind1']).autoPaginate(false);
-
-      assert.strictEqual(query.autoPaginateVal, false);
-    });
-
-    it('should not disable auto pagination with falsy values', function() {
-      var query = new Query(['kind1']).autoPaginate(null);
-
-      assert.strictEqual(query.autoPaginateVal, true);
-    });
-
-    it('should return the query instance', function() {
-      var query = new Query(['kind1']);
-      var nextQuery = query.autoPaginate(false);
-
-      assert.strictEqual(query, nextQuery);
-    });
   });
 
   describe('filter', function() {

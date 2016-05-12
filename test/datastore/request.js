@@ -16,7 +16,6 @@
 
 'use strict';
 
-var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
 var is = require('is');
@@ -51,20 +50,6 @@ function FakeQuery() {
   this.calledWith_ = arguments;
 }
 
-var extended = false;
-var fakeStreamRouter = {
-  extend: function(Class, methods) {
-    if (Class.name !== 'DatastoreRequest') {
-      return;
-    }
-
-    methods = arrify(methods);
-    assert.equal(Class.name, 'DatastoreRequest');
-    assert.deepEqual(methods, ['runQuery']);
-    extended = true;
-  }
-};
-
 describe('Request', function() {
   var Request;
   var request;
@@ -72,7 +57,6 @@ describe('Request', function() {
   var key;
 
   before(function() {
-    mockery.registerMock('../../lib/common/stream-router.js', fakeStreamRouter);
     mockery.registerMock('../../lib/common/util.js', fakeUtil);
     mockery.registerMock('../../lib/datastore/entity.js', fakeEntity);
     mockery.registerMock('../../lib/datastore/query.js', FakeQuery);
@@ -99,12 +83,6 @@ describe('Request', function() {
     entityOverrides = {};
     utilOverrides = {};
     request = new Request();
-  });
-
-  describe('instantiation', function() {
-    it('should extend the correct methods', function() {
-      assert(extended); // See `fakeStreamRouter.extend`
-    });
   });
 
   describe('allocateIds', function() {
@@ -512,6 +490,11 @@ describe('Request', function() {
   describe('runQuery', function() {
     beforeEach(function() {
       entityOverrides.queryToQueryProto = util.noop;
+      request.request_ = util.noop;
+    });
+
+    it('should return a stream if no callback is provided', function() {
+      assert(request.runQuery({}) instanceof stream);
     });
 
     it('should make correct request', function(done) {
@@ -556,34 +539,34 @@ describe('Request', function() {
 
     describe('error', function() {
       var error = new Error('Error.');
-      var apiResponse = {};
 
       beforeEach(function() {
         request.request_ = function(protoOpts, reqOpts, callback) {
-          callback(error, apiResponse);
+          callback(error);
         };
       });
 
-      it('should execute callback with error & API response', function(done) {
-        request.runQuery({}, function(err, results, nextQuery, apiResponse_) {
+      it('should execute callback with error', function(done) {
+        request.runQuery({}, function(err) {
           assert.strictEqual(err, error);
-          assert.strictEqual(results, null);
-          assert.strictEqual(nextQuery, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-
           done();
         });
+      });
+
+      it('should emit error on a stream', function(done) {
+        request.runQuery({})
+          .on('error', function(err) {
+            assert.strictEqual(err, error);
+            done();
+          });
       });
     });
 
     describe('success', function() {
-      var entityResults = ['a', 'b', 'c'];
-      var endCursor = new Buffer('abc');
-
       var apiResponse = {
         batch: {
-          entityResults: entityResults,
-          endCursor: endCursor,
+          entityResults: [{ a: true }, { b: true }, { c: true }],
+          endCursor: new Buffer('abc'),
           moreResults: 'MORE_RESULTS_AFTER_LIMIT',
           skippedResults: 0
         }
@@ -593,27 +576,31 @@ describe('Request', function() {
         request.request_ = function(protoOpts, reqOpts, callback) {
           callback(null, apiResponse);
         };
+
+        entityOverrides.formatArray = function(array) {
+          return array;
+        };
       });
 
       it('should format results', function(done) {
         entityOverrides.formatArray = function(array) {
-          assert.strictEqual(array, entityResults);
-          return entityResults;
+          assert.strictEqual(array, apiResponse.batch.entityResults);
+          return array;
         };
 
         request.runQuery({}, function(err, entities) {
           assert.ifError(err);
-          assert.deepEqual(entities, entityResults);
+          assert.deepEqual(entities, apiResponse.batch.entityResults);
           done();
         });
       });
 
       it('should re-run query if not finished', function(done) {
         var entityResults = {
-          1: ['a'],
-          2: ['b', 'c']
+          1: [{ a: true }],
+          2: [{ b: true }, { c: true }]
         };
-        var nextQuery;
+        var continuationQuery;
         var query = {
           limitVal: 1,
           offsetVal: 8
@@ -657,9 +644,8 @@ describe('Request', function() {
           }
         };
 
-        FakeQuery.prototype.start = function(endCursor_) {
-          nextQuery = this;
-          assert.strictEqual(endCursor_, endCursor.toString('base64'));
+        FakeQuery.prototype.start = function(endCursor) {
+          assert.strictEqual(endCursor, apiResponse.batch.endCursor);
           startCalled = true;
           return this;
         };
@@ -686,49 +672,21 @@ describe('Request', function() {
 
         entityOverrides.queryToQueryProto = function(query_) {
           if (timesRequestCalled > 1) {
-            assert.strictEqual(query_, nextQuery);
+            assert.strictEqual(query_, continuationQuery);
           }
           return queryProto;
         };
 
-        request.runQuery(query, function(err, entities, nextQuery_) {
+        request.runQuery(query, function(err, entities, info) {
           assert.ifError(err);
           assert.deepEqual(
             entities,
             [].slice.call(entityResults[1]).concat(entityResults[2])
           );
-          assert.strictEqual(nextQuery_, nextQuery);
-          done();
-        });
-      });
-
-      it('should return nextQuery', function(done) {
-        entityOverrides.formatArray = util.noop;
-
-        var query = {
-          offsetVal: 8
-        };
-
-        var startCalled = false;
-        var offsetCalled = false;
-
-        FakeQuery.prototype.start = function(endCursor_) {
-          assert.strictEqual(endCursor_, endCursor.toString('base64'));
-          startCalled = true;
-          return this;
-        };
-
-        FakeQuery.prototype.offset = function(offset_) {
-          var offset = query.offsetVal - apiResponse.batch.skippedResults;
-          assert.strictEqual(offset_, offset);
-          offsetCalled = true;
-          return this;
-        };
-
-        request.runQuery(query, function(err) {
-          assert.ifError(err);
-          assert.strictEqual(startCalled, true);
-          assert.strictEqual(offsetCalled, true);
+          assert.deepEqual(info, {
+            endCursor: apiResponse.batch.endCursor,
+            moreResults: apiResponse.batch.moreResults
+          });
           done();
         });
       });
@@ -771,6 +729,18 @@ describe('Request', function() {
           assert.strictEqual(limitCalled, false);
           done();
         });
+      });
+
+      it('should emit the info object on a stream', function(done) {
+        request.runQuery({})
+          .on('error', done)
+          .on('info', function(info) {
+            assert.deepEqual(info, {
+              endCursor: apiResponse.batch.endCursor,
+              moreResults: apiResponse.batch.moreResults
+            });
+            done();
+          });
       });
     });
   });

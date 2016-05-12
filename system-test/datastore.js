@@ -23,7 +23,7 @@ var env = require('./env.js');
 var Datastore = require('../lib/datastore/index.js');
 var entity = require('../lib/datastore/entity.js');
 
-describe.only('Datastore', function() {
+describe('Datastore', function() {
   var testKinds = [];
   var datastore = new Datastore(env);
 

@@ -186,13 +186,6 @@ describe('streamRouter', function() {
       assert.strictEqual(parsedArguments.maxResults, args[0].maxResults);
     });
 
-    it('should set maxResults from query.limitVal', function() {
-      var args = [ { limitVal: 10 } ];
-      var parsedArguments = streamRouter.parseArguments_(args);
-
-      assert.strictEqual(parsedArguments.maxResults, args[0].limitVal);
-    });
-
     it('should set maxResults from query.pageSize', function() {
       var args = [ { pageSize: 10 } ];
       var parsedArguments = streamRouter.parseArguments_(args);
@@ -209,13 +202,6 @@ describe('streamRouter', function() {
 
     it('should set autoPaginate: false query.autoPaginate', function() {
       var args = [ { autoPaginate: false }, util.noop ];
-      var parsedArguments = streamRouter.parseArguments_(args);
-
-      assert.strictEqual(parsedArguments.autoPaginate, false);
-    });
-
-    it('should set autoPaginate: false with query.autoPaginateVal', function() {
-      var args = [ { autoPaginateVal: false }, util.noop ];
       var parsedArguments = streamRouter.parseArguments_(args);
 
       assert.strictEqual(parsedArguments.autoPaginate, false);
