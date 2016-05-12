@@ -563,6 +563,11 @@ describe('Request', function() {
     });
 
     describe('success', function() {
+      var entityResultsPerApiCall = {
+        1: [{ a: true }],
+        2: [{ b: true }, { c: true }]
+      };
+
       var apiResponse = {
         batch: {
           entityResults: [{ a: true }, { b: true }, { c: true }],
@@ -596,10 +601,6 @@ describe('Request', function() {
       });
 
       it('should re-run query if not finished', function(done) {
-        var entityResults = {
-          1: [{ a: true }],
-          2: [{ b: true }, { c: true }]
-        };
         var continuationQuery;
         var query = {
           limitVal: 1,
@@ -616,15 +617,19 @@ describe('Request', function() {
         var offsetCalled = false;
 
         entityOverrides.formatArray = function(array) {
-          assert.strictEqual(array, entityResults[timesRequestCalled]);
-          return entityResults[timesRequestCalled];
+          assert.strictEqual(
+            array,
+            entityResultsPerApiCall[timesRequestCalled]
+          );
+          return entityResultsPerApiCall[timesRequestCalled];
         };
 
         request.request_ = function(protoOpts, reqOpts, callback) {
           timesRequestCalled++;
 
           var resp = extend(true, {}, apiResponse);
-          resp.batch.entityResults = entityResults[timesRequestCalled];
+          resp.batch.entityResults =
+            entityResultsPerApiCall[timesRequestCalled];
 
           if (timesRequestCalled === 1) {
             assert.strictEqual(protoOpts.service, 'Datastore');
@@ -661,7 +666,7 @@ describe('Request', function() {
           if (timesRequestCalled === 1) {
             assert.strictEqual(
               limit_,
-              entityResults[1].length - query.limitVal
+              entityResultsPerApiCall[1].length - query.limitVal
             );
           } else {
             // Should restore the original limit.
@@ -679,14 +684,16 @@ describe('Request', function() {
 
         request.runQuery(query, function(err, entities, info) {
           assert.ifError(err);
-          assert.deepEqual(
-            entities,
-            [].slice.call(entityResults[1]).concat(entityResults[2])
-          );
+
+          var allResults = [].slice.call(entityResultsPerApiCall[1])
+            .concat(entityResultsPerApiCall[2]);
+          assert.deepEqual(entities, allResults);
+
           assert.deepEqual(info, {
             endCursor: apiResponse.batch.endCursor,
             moreResults: apiResponse.batch.moreResults
           });
+
           done();
         });
       });
@@ -739,6 +746,56 @@ describe('Request', function() {
               endCursor: apiResponse.batch.endCursor,
               moreResults: apiResponse.batch.moreResults
             });
+            done();
+          });
+      });
+
+      it('should not push more results if stream was ended', function(done) {
+        var timesRequestCalled = 0;
+        var entitiesEmitted = 0;
+
+        request.request_ = function(protoOpts, reqOpts, callback) {
+          timesRequestCalled++;
+
+          var resp = extend(true, {}, apiResponse);
+          resp.batch.entityResults =
+            entityResultsPerApiCall[timesRequestCalled];
+
+          if (timesRequestCalled === 1) {
+            resp.batch.moreResults = 'NOT_FINISHED';
+            callback(null, resp);
+          } else {
+            resp.batch.moreResults = 'MORE_RESULTS_AFTER_LIMIT';
+            callback(null, resp);
+          }
+        };
+
+        request.runQuery({})
+          .on('data', function() {
+            entitiesEmitted++;
+            this.end();
+          })
+          .on('end', function() {
+            assert.strictEqual(entitiesEmitted, 1);
+            done();
+          });
+      });
+
+      it('should not get more results if stream was ended', function(done) {
+        var timesRequestCalled = 0;
+
+        request.request_ = function(protoOpts, reqOpts, callback) {
+          timesRequestCalled++;
+          callback(null, apiResponse);
+        };
+
+        request.runQuery({})
+          .on('error', done)
+          .on('data', function() {
+            this.end();
+          })
+          .on('end', function() {
+            assert.strictEqual(timesRequestCalled, 1);
             done();
           });
       });
