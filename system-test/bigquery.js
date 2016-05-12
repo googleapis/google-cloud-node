@@ -203,38 +203,20 @@ describe('BigQuery', function() {
   });
 
   it('should cancel a job', function(done) {
-    var query = 'SELECT * FROM [publicdata:samples.github_nested]';
+    var query = 'SELECT url FROM [publicdata:samples.github_nested] LIMIT 10';
 
     bigquery.startQuery(query, function(err, job) {
       assert.ifError(err);
 
       job.cancel(function(err) {
         assert.ifError(err);
-        onJobComplete(done);
-      });
 
-      function onJobComplete(callback) {
-        // Start a loop to check the status of the operation.
-        checkJobStatus();
-
-        function checkJobStatus() {
-          job.getMetadata(function(err, apiResponse) {
-            if (err) {
-              callback(err);
-              return;
-            }
-
-            if (apiResponse.status.state !== 'DONE') {
-              // Job has not completed yet. Check again in 3 seconds.
-              setTimeout(checkJobStatus, 3000);
-              return;
-            }
-
-            // Job completed sucessfully.
-            callback();
+        job
+          .on('error', done)
+          .on('complete', function() {
+            done();
           });
-        }
-      }
+      });
     });
   });
 
@@ -346,8 +328,12 @@ describe('BigQuery', function() {
       it('should import data from a file in your bucket', function(done) {
         table.import(file, function(err, job) {
           assert.ifError(err);
-          assert(job instanceof Job);
-          done();
+
+          job
+            .on('error', done)
+            .on('complete', function() {
+              done();
+            });
         });
       });
 
@@ -395,7 +381,17 @@ describe('BigQuery', function() {
       });
 
       it('should export data to a file in your bucket', function(done) {
-        table.export(bucket.file('kitten-test-data-backup.json'), done);
+        var file = bucket.file('kitten-test-data-backup.json');
+
+        table.export(file, function(err, job) {
+          assert.ifError(err);
+
+          job
+            .on('error', done)
+            .on('complete', function() {
+              done();
+            });
+        });
       });
     });
   });
