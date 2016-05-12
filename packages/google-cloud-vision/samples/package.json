@@ -8,7 +8,8 @@
     "node": ">=0.10.x"
   },
   "scripts": {
-    "faceDetection": "node faceDetection.js"
+    "faceDetection": "node faceDetection.js",
+    "labelDetection": "node labelDetection.js"
   },
   "dependencies": {
     "gcloud": "^0.32.0",

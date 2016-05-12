@@ -28,3 +28,9 @@ details.
 Execute the sample:
 
     node faceDetection "/path/to/image.jpg"
+
+### Label detection sample
+
+Execute the sample:
+
+    node labelDetection "/path/to/image.jpg"
