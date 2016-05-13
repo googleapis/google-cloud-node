@@ -111,10 +111,17 @@ describe('documentation', function() {
       global: global
     };
 
+    function FakeExpress() {
+      return {
+        get: function() {}
+      };
+    }
+
     fileDocBlocks.methods.forEach(function(method) {
       var code = method.examples.map(prop('code')).join('\n')
         .replace(/require\(\'gcloud\'\)/g, 'require(\'..\/\')')
-        .replace(/require\(\'gcloud/g, 'require(\'..');
+        .replace(/require\(\'gcloud/g, 'require(\'..')
+        .replace('require(\'express\')', FakeExpress.toString());
 
       var displayName = filename
         .replace('docs/json/master/', '')
