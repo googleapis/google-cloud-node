@@ -111,10 +111,20 @@ describe('documentation', function() {
       global: global
     };
 
+    // For {module:datastore} docs.
+    function FakeExpress() {
+      return {
+        get: function(route, callback) {
+          callback({ query: {} }, {});
+        }
+      };
+    }
+
     fileDocBlocks.methods.forEach(function(method) {
       var code = method.examples.map(prop('code')).join('\n')
         .replace(/require\(\'gcloud\'\)/g, 'require(\'..\/\')')
-        .replace(/require\(\'gcloud/g, 'require(\'..');
+        .replace(/require\(\'gcloud/g, 'require(\'..')
+        .replace('require(\'express\')', FakeExpress.toString());
 
       var displayName = filename
         .replace('docs/json/master/', '')
