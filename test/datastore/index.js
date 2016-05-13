@@ -190,6 +190,24 @@ describe('Datastore', function() {
     });
   });
 
+  describe('MORE_RESULTS_AFTER_CURSOR', function() {
+    it('should expose a MORE_RESULTS_AFTER_CURSOR helper', function() {
+      assert.strictEqual(
+        Datastore.MORE_RESULTS_AFTER_CURSOR,
+        'MORE_RESULTS_AFTER_CURSOR'
+      );
+    });
+  });
+
+  describe('MORE_RESULTS_AFTER_LIMIT', function() {
+    it('should expose a MORE_RESULTS_AFTER_LIMIT helper', function() {
+      assert.strictEqual(
+        Datastore.MORE_RESULTS_AFTER_LIMIT,
+        'MORE_RESULTS_AFTER_LIMIT'
+      );
+    });
+  });
+
   describe('NO_MORE_RESULTS', function() {
     it('should expose a NO_MORE_RESULTS helper', function() {
       assert.strictEqual(Datastore.NO_MORE_RESULTS, 'NO_MORE_RESULTS');
