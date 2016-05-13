@@ -9,7 +9,8 @@
   },
   "scripts": {
     "faceDetection": "node faceDetection.js",
-    "labelDetection": "node labelDetection.js"
+    "labelDetection": "node labelDetection.js",
+    "landmarkDetection": "node landmarkDetection.js"
   },
   "dependencies": {
     "gcloud": "^0.32.0",

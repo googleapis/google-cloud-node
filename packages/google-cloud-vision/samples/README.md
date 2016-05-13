@@ -34,3 +34,9 @@ Execute the sample:
 Execute the sample:
 
     node labelDetection "/path/to/image.jpg"
+
+### Landmark detection sample
+
+Execute the sample:
+
+    node landmarkDetection "https://cloud-samples-tests.storage.googleapis.com/vision/water.jpg"
