@@ -111,9 +111,12 @@ describe('documentation', function() {
       global: global
     };
 
+    // For {module:datastore} docs.
     function FakeExpress() {
       return {
-        get: function() {}
+        get: function(route, callback) {
+          callback({ query: {} }, {});
+        }
       };
     }
 
