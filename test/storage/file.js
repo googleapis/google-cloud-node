@@ -1917,7 +1917,10 @@ describe('File', function() {
 
     describe('extensionHeaders', function (done) {
       it('should add headers to signature', function(done) {
-        var extensionHeaders = 'x-goog-acl:public-read';
+        var extensionHeaders = {
+          'x-goog-acl': 'public-read',
+          'x-foo': 'bar',
+        };
 
         var sign = crypto.createSign('RSA-SHA256');
         var expires = Date.now() + 5;
@@ -1929,7 +1932,7 @@ describe('File', function() {
           '',
           '',
           expiresInSeconds,
-          extensionHeaders + '\n' + resource
+          'x-goog-acl:public-read\nx-foo:bar\n' + resource
         ].join('\n'));
         var expSignature = sign.sign(credentials.private_key, 'base64');
 
