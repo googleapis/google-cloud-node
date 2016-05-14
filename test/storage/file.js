@@ -28,6 +28,7 @@ var stream = require('stream');
 var through = require('through2');
 var tmp = require('tmp');
 var url = require('url');
+var crypto = require('crypto');
 
 var Bucket = require('../../lib/storage/bucket.js');
 var ServiceObject = require('../../lib/common/service-object.js');
@@ -1911,6 +1912,42 @@ describe('File', function() {
             expires: expires
           }, function() {});
         }, /cannot be in the past/);
+      });
+    });
+
+    describe('extensionHeaders', function() {
+      it('should add headers to signature', function(done) {
+        var extensionHeaders = {
+          'x-goog-acl': 'public-read',
+          'x-foo': 'bar'
+        };
+
+        var expires = Date.now() + 5;
+        var expiresInSeconds = Math.round(expires / 1000);
+        var name = encodeURIComponent(directoryFile.name);
+        var resource = '/' + directoryFile.bucket.name + '/' + name;
+
+        var sign = crypto.createSign('RSA-SHA256');
+
+        sign.update([
+          'GET',
+          '',
+          '',
+          expiresInSeconds,
+          'x-goog-acl:public-read\nx-foo:bar\n' + resource
+        ].join('\n'));
+
+        var expSignature = sign.sign(credentials.private_key, 'base64');
+
+        directoryFile.getSignedUrl({
+          action: 'read',
+          expires: expires,
+          extensionHeaders: extensionHeaders
+        }, function(err, signedUrl) {
+          assert.ifError(err);
+          assert(signedUrl.indexOf(encodeURIComponent(expSignature)) > -1);
+          done();
+        });
       });
     });
   });
