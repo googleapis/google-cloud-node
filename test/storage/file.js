@@ -994,7 +994,8 @@ describe('File', function() {
     it('should start a simple upload if specified', function(done) {
       var options = {
         metadata: METADATA,
-        resumable: false
+        resumable: false,
+        customValue: true
       };
       var writable = file.createWriteStream(options);
 
@@ -1009,7 +1010,8 @@ describe('File', function() {
     it('should start a resumable upload if specified', function(done) {
       var options = {
         metadata: METADATA,
-        resumable: true
+        resumable: true,
+        customValue: true
       };
       var writable = file.createWriteStream(options);
 
@@ -2180,7 +2182,8 @@ describe('File', function() {
           metadata: {},
           public: true,
           private: false,
-          predefinedAcl: 'allUsers'
+          predefinedAcl: 'allUsers',
+          uri: 'http://resumable-uri'
         };
 
         file.generation = 3;
@@ -2198,6 +2201,7 @@ describe('File', function() {
           assert.strictEqual(opts.predefinedAcl, options.predefinedAcl);
           assert.strictEqual(opts.private, options.private);
           assert.strictEqual(opts.public, options.public);
+          assert.strictEqual(opts.uri, options.uri);
 
           setImmediate(done);
           return through();
