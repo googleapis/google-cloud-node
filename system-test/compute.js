@@ -18,6 +18,7 @@
 
 var assert = require('assert');
 var async = require('async');
+var concat = require('concat-stream');
 var is = require('is');
 var prop = require('propprop');
 
@@ -47,29 +48,14 @@ describe('Compute', function() {
   var region = compute.region(REGION_NAME);
   var zone = compute.zone(ZONE_NAME);
 
-  before(function(done) {
-    deleteAllTestObjects(done);
-  });
-
-  after(function(done) {
-    deleteAllTestObjects(done);
-  });
+  before(deleteAllTestObjects);
+  after(deleteAllTestObjects);
 
   describe('addresses', function() {
     var ADDRESS_NAME = generateName('address');
     var address = region.address(ADDRESS_NAME);
 
-    before(function(done) {
-      address.create(function(err, disk, operation) {
-        assert.ifError(err);
-
-        operation
-          .on('error', done)
-          .on('complete', function() {
-            done();
-          });
-      });
-    });
+    before(create(address));
 
     it('should have created the address', function(done) {
       address.getMetadata(function(err, metadata) {
@@ -110,27 +96,20 @@ describe('Compute', function() {
     var AUTOSCALER_NAME = generateName('autoscaler');
     var autoscaler = zone.autoscaler(AUTOSCALER_NAME);
 
-    // Some of the services we support require an instance group to be created.
-    // Until `instanceGroups` are officially supported by gcloud-node, we make
-    // manual requests to create and delete them.
     var INSTANCE_GROUP_NAME = generateName('instance-group');
+    var instanceGroup = zone.instanceGroup(INSTANCE_GROUP_NAME);
 
     before(function(done) {
       async.series([
-        function(callback) {
-          createInstanceGroup(INSTANCE_GROUP_NAME, callback);
-        },
-
-        function(callback) {
-          autoscaler.create({
-            coolDown: 30,
-            cpu: 80,
-            loadBalance: 40,
-            maxReplicas: 5,
-            minReplicas: 0,
-            target: INSTANCE_GROUP_NAME
-          }, execAfterOperationComplete(callback));
-        }
+        create(instanceGroup),
+        create(autoscaler, {
+          coolDown: 30,
+          cpu: 80,
+          loadBalance: 40,
+          maxReplicas: 5,
+          minReplicas: 0,
+          target: INSTANCE_GROUP_NAME
+        })
       ], done);
     });
 
@@ -199,21 +178,7 @@ describe('Compute', function() {
     var DISK_NAME = generateName('disk');
     var disk = zone.disk(DISK_NAME);
 
-    before(function(done) {
-      var config = {
-        os: 'ubuntu'
-      };
-
-      disk.create(config, function(err, disk, operation) {
-        assert.ifError(err);
-
-        operation
-          .on('error', done)
-          .on('complete', function() {
-            done();
-          });
-      });
-    });
+    before(create(disk, { os: 'ubuntu' }));
 
     it('should have created the disk', function(done) {
       disk.getMetadata(function(err, metadata) {
@@ -290,17 +255,7 @@ describe('Compute', function() {
       sourceRanges: CONFIG.ranges
     };
 
-    before(function(done) {
-      firewall.create(CONFIG, function(err, firewall, operation) {
-        assert.ifError(err);
-
-        operation
-          .on('error', done)
-          .on('complete', function() {
-            done();
-          });
-      });
-    });
+    before(create(firewall, CONFIG));
 
     it('should have opened the correct connections', function(done) {
       firewall.getMetadata(function(err, metadata) {
@@ -344,9 +299,7 @@ describe('Compute', function() {
       timeout: 25
     };
 
-    before(function(done) {
-      healthCheck.create(OPTIONS, execAfterOperationComplete(done));
-    });
+    before(create(healthCheck, OPTIONS));
 
     it('should have created the correct health check', function(done) {
       healthCheck.getMetadata(function(err, metadata) {
@@ -419,9 +372,7 @@ describe('Compute', function() {
       timeout: 25
     };
 
-    before(function(done) {
-      healthCheck.create(OPTIONS, execAfterOperationComplete(done));
-    });
+    before(create(healthCheck, OPTIONS));
 
     it('should have created the correct health check', function(done) {
       healthCheck.getMetadata(function(err, metadata) {
@@ -482,6 +433,136 @@ describe('Compute', function() {
     });
   });
 
+  describe.only('instance groups', function() {
+    var INSTANCE_GROUP_NAME = generateName('instance-group');
+    var instanceGroup = zone.instanceGroup(INSTANCE_GROUP_NAME);
+
+    var OPTIONS = {
+      description: 'new instance group',
+      ports: {
+        http: 80
+      }
+    };
+
+    before(create(instanceGroup, OPTIONS));
+
+    it('should have created an instance group', function(done) {
+      instanceGroup.getMetadata(function(err, metadata) {
+        assert.ifError(err);
+
+        assert.strictEqual(metadata.name, INSTANCE_GROUP_NAME);
+        assert.strictEqual(metadata.description, OPTIONS.description);
+        assert.deepEqual(metadata.namedPorts, [
+          {
+            name: 'http',
+            port: 80
+          }
+        ]);
+
+        done();
+      });
+    });
+
+    it('should list project instance groups', function(done) {
+      compute.getInstanceGroups(function(err, instanceGroups) {
+        assert.ifError(err);
+        assert(instanceGroups.length > 0);
+        done();
+      });
+    });
+
+    it('should list project instance groups in stream mode', function(done) {
+      var resultsMatched = 0;
+
+      compute.getInstanceGroups()
+        .on('error', done)
+        .on('data', function() {
+          resultsMatched++;
+        })
+        .on('end', function() {
+          assert(resultsMatched > 0);
+          done();
+        });
+    });
+
+    it('should list zonal instance groups', function(done) {
+      zone.getInstanceGroups(function(err, instanceGroups) {
+        assert.ifError(err);
+        assert(instanceGroups.length > 0);
+        done();
+      });
+    });
+
+    it('should list zonal instance groups in stream mode', function(done) {
+      var resultsMatched = 0;
+
+      zone.getInstanceGroups()
+        .on('error', done)
+        .on('data', function() {
+          resultsMatched++;
+        })
+        .on('end', function() {
+          assert(resultsMatched > 0);
+          done();
+        });
+    });
+
+    it('should set named ports', function(done) {
+      var ports = OPTIONS.ports;
+
+      instanceGroup.setPorts(ports, execAfterOperationComplete(function(err) {
+        assert.ifError(err);
+
+        instanceGroup.getMetadata(function(err, metadata) {
+          assert.ifError(err);
+          assert.deepEqual(metadata.namedPorts, [
+            {
+              name: 'http',
+              port: 80
+            }
+          ]);
+          done();
+        });
+      }));
+    });
+
+    describe('adding and removing VMs', function() {
+      var vm = zone.vm(generateName('vm'));
+
+      before(create(vm, { os: 'ubuntu' }));
+
+      it('should add a VM to the instance group', function(done) {
+        instanceGroup.add(vm, execAfterOperationComplete(done));
+      });
+
+      it('should list the VMs', function(done) {
+        instanceGroup.getVMs(function(err, vms) {
+          assert.ifError(err);
+
+          var vmNamesInGroup = vms.map(prop('name'));
+          assert(vmNamesInGroup.indexOf(vm.name) > -1);
+
+          done();
+        });
+      });
+
+      it('should list the VMs in stream mode', function(done) {
+        instanceGroup.getVMs()
+          .on('error', done)
+          .pipe(concat(function(vms) {
+            var vmNamesInGroup = vms.map(prop('name'));
+            assert(vmNamesInGroup.indexOf(vm.name) > -1);
+
+            done();
+          }));
+      });
+
+      it('should remove a VM from the instance group', function(done) {
+        instanceGroup.remove(vm, execAfterOperationComplete(done));
+      });
+    });
+  });
+
   describe('networks', function() {
     var NETWORK_NAME = generateName('network');
     var network = compute.network(NETWORK_NAME);
@@ -490,9 +571,7 @@ describe('Compute', function() {
       range: '10.240.0.0/16'
     };
 
-    before(function(done) {
-      network.create(CONFIG, execAfterOperationComplete(done));
-    });
+    before(create(network, CONFIG));
 
     it('should have opened the correct range', function(done) {
       network.getMetadata(function(err, metadata) {
@@ -657,13 +736,11 @@ describe('Compute', function() {
           }, callback);
         },
 
-        function(callback) {
-          rule.create({
-            target: 'global/targetHttpProxies/' + TARGET_PROXY_NAME,
-            portRange: '8080',
-            IPProtocol: 'TCP'
-          }, execAfterOperationComplete(callback));
-        }
+        create(rule, {
+          target: 'global/targetHttpProxies/' + TARGET_PROXY_NAME,
+          portRange: '8080',
+          IPProtocol: 'TCP'
+        })
       ], done);
     });
 
@@ -720,25 +797,21 @@ describe('Compute', function() {
 
     before(function(done) {
       async.series([
-        function(callback) {
-          vm.create({
-            os: 'ubuntu',
-            http: true
-          }, execAfterOperationComplete(callback));
-        },
+        create(vm, {
+          os: 'ubuntu',
+          http: true
+        }),
 
         function(callback) {
           createTargetInstance(TARGET_INSTANCE_NAME, VM_NAME, callback);
         },
 
-        function(callback) {
-          rule.create({
-            target: [
-              'zones/' + zone.name + '/targetInstances/' + TARGET_INSTANCE_NAME
-            ].join(''),
-            range: '8000-9000'
-          }, execAfterOperationComplete(callback));
-        }
+        create(rule, {
+          target: [
+            'zones/' + zone.name + '/targetInstances/' + TARGET_INSTANCE_NAME
+          ].join(''),
+          range: '8000-9000'
+        })
       ], done);
     });
 
@@ -863,22 +936,7 @@ describe('Compute', function() {
     var VM_NAME = generateName('vm');
     var vm = zone.vm(VM_NAME);
 
-    before(function(done) {
-      var config = {
-        os: 'ubuntu',
-        http: true
-      };
-
-      vm.create(config, function(err, vm, operation) {
-        assert.ifError(err);
-
-        operation
-          .on('error', done)
-          .on('complete', function() {
-            done();
-          });
-      });
-    });
+    before(create(vm, { os: 'ubuntu', http: true }));
 
     it('should have enabled HTTP connections', function(done) {
       vm.getTags(function(err, tags) {
@@ -1082,7 +1140,6 @@ describe('Compute', function() {
       deleteUrlMaps,
       deleteServices,
       deleteHttpsHealthChecks,
-      deleteInstanceGroups,
       deleteTargetInstances,
       deleteAllGcloudTestObjects
     ], callback);
@@ -1094,6 +1151,7 @@ describe('Compute', function() {
       'getAddresses',
       'getAutoscalers',
       'getDisks',
+      'getInstanceGroups',
       'getFirewalls',
       'getHealthChecks',
       'getNetworks',
@@ -1115,6 +1173,12 @@ describe('Compute', function() {
         object.delete(execAfterOperationComplete(callback));
       }, callback);
     });
+  }
+
+  function create(object, cfg) {
+    return function(callback) {
+      object.create(cfg, execAfterOperationComplete(callback));
+    };
   }
 
   function execAfterOperationComplete(callback) {
@@ -1181,22 +1245,29 @@ describe('Compute', function() {
 
   function createService(name, instanceGroupName, healthCheckName, callback) {
     var service = compute.service(name);
+    var group = zone.instanceGroup(instanceGroupName);
     var healthCheck = compute.healthCheck(healthCheckName);
     var groupUrl;
     var healthCheckUrl;
 
     async.series([
       function(callback) {
-        createInstanceGroup(instanceGroupName, function(err, metadata) {
+        group.create(execAfterOperationComplete(function(err) {
           if (err) {
             callback(err);
             return;
           }
 
-          groupUrl = metadata.selfLink;
+          group.getMetadata(function(err, metadata) {
+            if (err) {
+              callback(err);
+              return;
+            }
 
-          callback();
-        });
+            groupUrl = metadata.selfLink;
+            callback();
+          });
+        }));
       },
 
       function(callback) {
@@ -1232,76 +1303,6 @@ describe('Compute', function() {
         }, execAfterOperationComplete(callback));
       }
     ], callback);
-  }
-
-  function getInstanceGroups(callback) {
-    zone.request({
-      uri: '/instanceGroups',
-      qs: {
-        filter: 'name eq ' + TESTS_PREFIX + '.*'
-      }
-    }, callback);
-  }
-
-  function deleteInstanceGroups(callback) {
-    getInstanceGroups(function(err, resp) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      if (!resp.items) {
-        callback();
-        return;
-      }
-
-      async.each(resp.items.map(prop('name')), deleteInstanceGroup, callback);
-    });
-  }
-
-  function createInstanceGroup(name, callback) {
-    zone.request({
-      method: 'POST',
-      uri: '/instanceGroups',
-      json: {
-        name: name
-      }
-    }, function(err, resp) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      var operation = zone.operation(resp.name);
-      operation
-        .on('error', callback)
-        .on('complete', function() {
-          zone.request({
-            uri: '/instanceGroups/' + name
-          }, function(err, resp) {
-            callback(null, resp);
-          });
-        });
-    });
-  }
-
-  function deleteInstanceGroup(name, callback) {
-    zone.request({
-      method: 'DELETE',
-      uri: '/instanceGroups/' + name
-    }, function(err, resp) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      var operation = zone.operation(resp.name);
-      operation
-        .on('error', callback)
-        .on('complete', function() {
-          callback();
-        });
-    });
   }
 
   function deleteHttpsHealthChecks(callback) {
