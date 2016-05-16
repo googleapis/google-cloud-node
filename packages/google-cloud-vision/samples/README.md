@@ -40,3 +40,10 @@ Execute the sample:
 Execute the sample:
 
     node landmarkDetection "https://cloud-samples-tests.storage.googleapis.com/vision/water.jpg"
+
+### Text detection sample
+
+Execute the sample:
+
+    node textDetection analyze resources
+    node textDetection lookup the sunbeams in

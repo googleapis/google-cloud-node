@@ -7,13 +7,11 @@
   "engines": {
     "node": ">=0.10.x"
   },
-  "scripts": {
-    "faceDetection": "node faceDetection.js",
-    "labelDetection": "node labelDetection.js",
-    "landmarkDetection": "node landmarkDetection.js"
-  },
   "dependencies": {
+    "async": "^1.5.0",
+    "canvas": "^1.3.15",
     "gcloud": "^0.32.0",
-    "canvas": "^1.3.15"
+    "natural": "^0.4.0",
+    "redis": "^2.6.0-2"
   }
 }
