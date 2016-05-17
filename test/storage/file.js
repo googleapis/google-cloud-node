@@ -2180,6 +2180,7 @@ describe('File', function() {
       it('should start a resumable upload', function(done) {
         var options = {
           metadata: {},
+          offset: 1234,
           public: true,
           private: false,
           predefinedAcl: 'allUsers',
@@ -2198,6 +2199,7 @@ describe('File', function() {
           assert.strictEqual(opts.file, file.name);
           assert.strictEqual(opts.generation, file.generation);
           assert.strictEqual(opts.metadata, options.metadata);
+          assert.strictEqual(opts.offset, options.offset);
           assert.strictEqual(opts.predefinedAcl, options.predefinedAcl);
           assert.strictEqual(opts.private, options.private);
           assert.strictEqual(opts.public, options.public);
