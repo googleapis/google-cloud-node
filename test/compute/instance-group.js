@@ -21,6 +21,7 @@ var mockery = require('mockery-next');
 var nodeutil = require('util');
 
 var ServiceObject = require('../../lib/common/service-object.js');
+var util = require('../../lib/common/util.js');
 
 function FakeServiceObject() {
   this.calledWith_ = arguments;
@@ -29,9 +30,14 @@ function FakeServiceObject() {
 
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
-describe('Group', function() {
-  var Group;
-  var group;
+describe('InstanceGroup', function() {
+  var InstanceGroup;
+  var instanceGroup;
+
+  var ZONE = {
+    createInstanceGroup: util.noop
+  };
+  var NAME = 'instance-group-name';
 
   before(function() {
     mockery.registerMock(
@@ -43,7 +49,7 @@ describe('Group', function() {
       warnOnUnregistered: false
     });
 
-    Group = require('../../lib/compute/group.js');
+    InstanceGroup = require('../../lib/compute/instance-group.js');
   });
 
   after(function() {
@@ -52,13 +58,13 @@ describe('Group', function() {
   });
 
   beforeEach(function() {
-    group = new Group();
+    instanceGroup = new InstanceGroup(ZONE, NAME);
   });
 
   describe('instantiation', function() {
     it('should inherit from ServiceObject', function() {
-      var group = new Group();
-      assert(group instanceof Group);
+      var instanceGroup = new InstanceGroup(ZONE, NAME);
+      assert(instanceGroup instanceof FakeServiceObject);
     });
   });
 

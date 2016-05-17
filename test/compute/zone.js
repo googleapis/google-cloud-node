@@ -67,6 +67,7 @@ var fakeStreamRouter = {
     assert.deepEqual(methods, [
       'getAutoscalers',
       'getDisks',
+      'getInstanceGroups',
       'getOperations',
       'getVMs'
     ]);

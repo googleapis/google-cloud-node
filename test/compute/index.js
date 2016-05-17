@@ -46,6 +46,7 @@ var fakeStreamRouter = {
       'getDisks',
       'getFirewalls',
       'getHealthChecks',
+      'getInstanceGroups',
       'getNetworks',
       'getOperations',
       'getRegions',
