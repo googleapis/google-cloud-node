@@ -1074,6 +1074,21 @@ describe('File', function() {
       writable.end('data');
     });
 
+    it('should pass through a provided offset', function(done) {
+          var options = {
+            offset: 1234
+          };
+
+          var writable = file.createWriteStream(options);
+
+          file.startResumableUpload_ = function(stream, options_) {
+            assert.deepEqual(options_.offset, options.offset);
+            done();
+          };
+
+          writable.write('data');
+        });
+
     describe('validation', function() {
       var data = 'test';
 
