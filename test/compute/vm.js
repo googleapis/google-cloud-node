@@ -46,6 +46,10 @@ describe('VM', function() {
     createVM: util.noop
   };
   var VM_NAME = 'vm-name';
+  var FULLY_QUALIFIED_NAME = [
+    'project/project-id/zones/zone-name/instances/',
+    VM_NAME
+  ].join('');
 
   before(function() {
     mockery.registerMock(
@@ -78,6 +82,22 @@ describe('VM', function() {
 
     it('should localize the name', function() {
       assert.strictEqual(vm.name, VM_NAME);
+    });
+
+    it('should strip a qualified name to just the instance name', function() {
+      var vm = new VM(ZONE, FULLY_QUALIFIED_NAME);
+      assert.strictEqual(vm.name, VM_NAME);
+    });
+
+    it('should localize the URL of the VM', function() {
+      assert.strictEqual(vm.url, [
+        'https://www.googleapis.com/compute/v1/projects',
+        COMPUTE.projectId,
+        'zones',
+        ZONE.name,
+        'instances',
+        VM_NAME
+      ].join('/'));
     });
 
     it('should inherit from ServiceObject', function(done) {
