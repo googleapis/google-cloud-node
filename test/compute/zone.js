@@ -664,6 +664,15 @@ describe('Zone', function() {
         zone.createInstanceGroup(NAME, OPTIONS, assert.ifError);
       });
 
+      it('should not require options', function(done) {
+        zone.request = function(reqOpts) {
+          assert.deepEqual(reqOpts.json, { name: NAME });
+          done();
+        };
+
+        zone.createInstanceGroup(NAME, assert.ifError);
+      });
+
       describe('error', function() {
         var error = new Error('Error.');
         var apiResponse = { a: 'b', c: 'd' };
