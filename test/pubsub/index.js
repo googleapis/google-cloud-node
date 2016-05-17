@@ -488,6 +488,14 @@ describe('PubSub', function() {
       pubsub.subscribe(TOPIC_NAME, SUB_NAME, done);
     });
 
+    it('should allow undefined/optional configuration options', function(done) {
+      pubsub.request = function(protoOpts, reqOpts, callback) {
+        callback(null, apiResponse);
+      };
+
+      pubsub.subscribe(TOPIC_NAME, SUB_NAME, undefined, done);
+    });
+
     it('should create a Subscription', function(done) {
       var opts = { a: 'b', c: 'd' };
 
