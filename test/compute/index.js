@@ -1349,6 +1349,115 @@ describe('Compute', function() {
     });
   });
 
+  describe('getInstanceGroups', function() {
+    it('should accept only a callback', function(done) {
+      compute.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
+
+      compute.getInstanceGroups(assert.ifError);
+    });
+
+    it('should make the correct default API request', function(done) {
+      var options = {};
+
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/aggregated/instanceGroups');
+        assert.deepEqual(reqOpts.qs, options);
+        done();
+      };
+
+      compute.getInstanceGroups(options, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = { a: 'b', c: 'd' };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        compute.getInstanceGroups({}, function(err, groups, nextQuery, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(groups, null);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(resp, apiResponse);
+
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var ZONE_NAME = 'zone-1';
+      var FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
+
+      var instanceGroup = { name: 'isntance-group-1' };
+      var apiResponse = {
+        items: {}
+      };
+
+      apiResponse.items[FULL_ZONE_NAME] = {
+        instanceGroups: [instanceGroup]
+      };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should create InstanceGroup objects from the resp', function(done) {
+        var zone = {};
+
+        compute.zone = function(name) {
+          assert.strictEqual(name, ZONE_NAME);
+          return zone;
+        };
+
+        zone.instanceGroup = function(name) {
+          assert.strictEqual(name, instanceGroup.name);
+          setImmediate(done);
+          return instanceGroup;
+        };
+
+        compute.getInstanceGroups({}, assert.ifError);
+      });
+
+      it('should build a nextQuery if necessary', function(done) {
+        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+          nextPageToken: 'next-page-token'
+        });
+
+        delete apiResponseWithNextPageToken.items;
+
+        var query = { a: 'b', c: 'd' };
+        var originalQuery = extend({}, query);
+
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponseWithNextPageToken);
+        };
+
+        compute.getInstanceGroups(query, function(err, groups, nextQuery) {
+          assert.ifError(err);
+
+          assert.deepEqual(query, originalQuery);
+
+          assert.deepEqual(nextQuery, extend({}, query, {
+            pageToken: apiResponseWithNextPageToken.nextPageToken
+          }));
+
+          done();
+        });
+      });
+    });
+  });
+
   describe('getNetworks', function() {
     it('should work with only a callback', function(done) {
       compute.request = function(reqOpts) {
