@@ -433,7 +433,7 @@ describe('Compute', function() {
     });
   });
 
-  describe.only('instance groups', function() {
+  describe('instance groups', function() {
     var INSTANCE_GROUP_NAME = generateName('instance-group');
     var instanceGroup = zone.instanceGroup(INSTANCE_GROUP_NAME);
 
@@ -1251,47 +1251,36 @@ describe('Compute', function() {
     var healthCheckUrl;
 
     async.series([
+      create(group),
+
       function(callback) {
-        group.create(execAfterOperationComplete(function(err) {
+        group.getMetadata(function(err, metadata) {
           if (err) {
             callback(err);
             return;
           }
 
-          group.getMetadata(function(err, metadata) {
-            if (err) {
-              callback(err);
-              return;
-            }
-
-            groupUrl = metadata.selfLink;
-            callback();
-          });
-        }));
+          groupUrl = metadata.selfLink;
+          callback();
+        });
       },
 
+      create(healthCheck),
+
       function(callback) {
-        healthCheck.create(execAfterOperationComplete(function(err) {
+        healthCheck.getMetadata(function(err, metadata) {
           if (err) {
             callback(err);
             return;
           }
 
-          healthCheck.getMetadata(function(err, metadata) {
-            if (err) {
-              callback(err);
-              return;
-            }
-
-            healthCheckUrl = metadata.selfLink;
-
-            callback();
-          });
-        }));
+          healthCheckUrl = metadata.selfLink;
+          callback();
+        });
       },
 
       function(callback) {
-        service.create({
+        create(service, {
           backends: [
             {
               group: groupUrl
@@ -1300,7 +1289,7 @@ describe('Compute', function() {
           healthChecks: [
             healthCheckUrl
           ]
-        }, execAfterOperationComplete(callback));
+        })(callback);
       }
     ], callback);
   }
