@@ -692,7 +692,7 @@ describe('GrpcService', function() {
       });
 
       assert.deepEqual(GrpcService.convertValue_(true), {
-        booleanValue: true
+        boolValue: true
       });
 
       assert.strictEqual(
@@ -733,11 +733,13 @@ describe('GrpcService', function() {
     it('should convert arrays', function() {
       var convertedValue = GrpcService.convertValue_([1, 2, 3]);
 
-      assert.deepEqual(convertedValue.listValue, [
-        GrpcService.convertValue_(1),
-        GrpcService.convertValue_(2),
-        GrpcService.convertValue_(3)
-      ]);
+      assert.deepEqual(convertedValue.listValue, {
+        values: [
+          GrpcService.convertValue_(1),
+          GrpcService.convertValue_(2),
+          GrpcService.convertValue_(3)
+        ]
+      });
     });
 
     it('should throw if a type is not recognized', function() {
