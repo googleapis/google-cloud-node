@@ -65,6 +65,9 @@
       "title": "HealthCheck",
       "type": "compute/health-check"
     }, {
+      "title": "InstanceGroup",
+      "type": "compute/instance-group"
+    }, {
       "title": "Network",
       "type": "compute/network"
     }, {

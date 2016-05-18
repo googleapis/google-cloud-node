@@ -39,6 +39,14 @@ function FakeDisk() {
   this.calledWith_ = [].slice.call(arguments);
 }
 
+var formatPortsOverride;
+function FakeInstanceGroup() {
+  this.calledWith_ = [].slice.call(arguments);
+}
+FakeInstanceGroup.formatPorts_ = function() {
+  return (formatPortsOverride || util.noop).apply(null, arguments);
+};
+
 function FakeOperation() {
   this.calledWith_ = [].slice.call(arguments);
 }
@@ -67,6 +75,7 @@ var fakeStreamRouter = {
     assert.deepEqual(methods, [
       'getAutoscalers',
       'getDisks',
+      'getInstanceGroups',
       'getOperations',
       'getVMs'
     ]);
@@ -92,6 +101,10 @@ describe('Zone', function() {
     mockery.registerMock('../../lib/common/stream-router.js', fakeStreamRouter);
     mockery.registerMock('../../lib/compute/autoscaler.js', FakeAutoscaler);
     mockery.registerMock('../../lib/compute/disk.js', FakeDisk);
+    mockery.registerMock(
+      '../../lib/compute/instance-group.js',
+      FakeInstanceGroup
+    );
     mockery.registerMock('../../lib/compute/operation.js', FakeOperation);
     mockery.registerMock('../../lib/compute/vm.js', FakeVM);
 
@@ -109,6 +122,7 @@ describe('Zone', function() {
   });
 
   beforeEach(function() {
+    formatPortsOverride = null;
     gceImagesOverride = null;
     zone = new Zone(COMPUTE, ZONE_NAME);
   });
@@ -595,6 +609,130 @@ describe('Zone', function() {
             assert.strictEqual(op.metadata, apiResp);
 
             assert.strictEqual(apiResp, apiResponse);
+            done();
+          });
+        });
+      });
+    });
+  });
+
+  describe('createInstanceGroup', function() {
+    var NAME = 'instance-group';
+
+    beforeEach(function() {
+      zone.request = util.noop;
+    });
+
+    describe('options.ports', function() {
+      var PORTS = {
+        http: 80,
+        https: 443
+      };
+
+      it('should format named ports', function(done) {
+        var expectedNamedPorts = [];
+
+        formatPortsOverride = function(ports) {
+          assert.strictEqual(ports, PORTS);
+          return expectedNamedPorts;
+        };
+
+        zone.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.json.namedPorts, expectedNamedPorts);
+          assert.strictEqual(reqOpts.json.ports, undefined);
+          done();
+        };
+
+        zone.createInstanceGroup(NAME, { ports: PORTS }, assert.ifError);
+      });
+    });
+
+    describe('API request', function() {
+      var OPTIONS = {
+        a: 'b',
+        c: 'd'
+      };
+
+      var expectedBody = {
+        name: NAME,
+        a: 'b',
+        c: 'd'
+      };
+
+      it('should make the correct API request', function(done) {
+        zone.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.method, 'POST');
+          assert.strictEqual(reqOpts.uri, '/instanceGroups');
+          assert.deepEqual(reqOpts.json, expectedBody);
+
+          done();
+        };
+
+        zone.createInstanceGroup(NAME, OPTIONS, assert.ifError);
+      });
+
+      it('should not require options', function(done) {
+        zone.request = function(reqOpts) {
+          assert.deepEqual(reqOpts.json, { name: NAME });
+          done();
+        };
+
+        zone.createInstanceGroup(NAME, assert.ifError);
+      });
+
+      describe('error', function() {
+        var error = new Error('Error.');
+        var apiResponse = { a: 'b', c: 'd' };
+
+        beforeEach(function() {
+          zone.request = function(reqOpts, callback) {
+            callback(error, apiResponse);
+          };
+        });
+
+        it('should execute callback with error & API response', function(done) {
+          zone.createInstanceGroup(NAME, OPTIONS, function(err, ig, op, resp) {
+            assert.strictEqual(err, error);
+            assert.strictEqual(ig, null);
+            assert.strictEqual(op, null);
+            assert.strictEqual(resp, apiResponse);
+            done();
+          });
+        });
+      });
+
+      describe('success', function() {
+        var apiResponse = { name: 'operation-name' };
+
+        beforeEach(function() {
+          zone.request = function(reqOpts, callback) {
+            callback(null, apiResponse);
+          };
+        });
+
+        it('should exec callback with Group, Op & apiResponse', function(done) {
+          var instanceGroup = {};
+          var operation = {};
+
+          zone.instanceGroup = function(name) {
+            assert.strictEqual(name, NAME);
+            return instanceGroup;
+          };
+
+          zone.operation = function(name) {
+            assert.strictEqual(name, apiResponse.name);
+            return operation;
+          };
+
+          zone.createInstanceGroup(NAME, OPTIONS, function(err, ig, op, resp) {
+            assert.ifError(err);
+
+            assert.strictEqual(ig, instanceGroup);
+
+            assert.strictEqual(op, operation);
+            assert.strictEqual(op.metadata, resp);
+
+            assert.strictEqual(resp, apiResponse);
             done();
           });
         });
@@ -1160,6 +1298,107 @@ describe('Zone', function() {
     });
   });
 
+  describe('getInstanceGroups', function() {
+    it('should accept only a callback', function(done) {
+      zone.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
+
+      zone.getInstanceGroups(assert.ifError);
+    });
+
+    it('should make the correct API request', function(done) {
+      var query = { a: 'b', c: 'd' };
+
+      zone.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/instanceGroups');
+        assert.strictEqual(reqOpts.qs, query);
+
+        done();
+      };
+
+      zone.getInstanceGroups(query, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = { a: 'b', c: 'd' };
+
+      beforeEach(function() {
+        zone.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        zone.getInstanceGroups({}, function(err, groups, nextQuery, apiResp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(groups, null);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(apiResp, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = {
+        items: [
+          { name: 'operation-name' }
+        ]
+      };
+
+      beforeEach(function() {
+        zone.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should build a nextQuery if necessary', function(done) {
+        var nextPageToken = 'next-page-token';
+        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+          nextPageToken: nextPageToken
+        });
+        var expectedNextQuery = {
+          pageToken: nextPageToken
+        };
+
+        zone.request = function(reqOpts, callback) {
+          callback(null, apiResponseWithNextPageToken);
+        };
+
+        zone.getInstanceGroups({}, function(err, groups, nextQuery) {
+          assert.ifError(err);
+
+          assert.deepEqual(nextQuery, expectedNextQuery);
+
+          done();
+        });
+      });
+
+      it('should execute callback with Groups & API resp', function(done) {
+        var group = {};
+
+        zone.instanceGroup = function(name) {
+          assert.strictEqual(name, apiResponse.items[0].name);
+          return group;
+        };
+
+        zone.getInstanceGroups({}, function(err, groups, nextQuery, apiResp) {
+          assert.ifError(err);
+
+          assert.strictEqual(groups[0], group);
+          assert.strictEqual(groups[0].metadata, apiResponse.items[0]);
+
+          assert.strictEqual(apiResp, apiResponse);
+
+          done();
+        });
+      });
+    });
+  });
+
   describe('getOperations', function() {
     it('should accept only a callback', function(done) {
       zone.request = function(reqOpts) {
@@ -1357,6 +1596,17 @@ describe('Zone', function() {
           done();
         });
       });
+    });
+  });
+
+  describe('instanceGroup', function() {
+    var NAME = 'instance-group';
+
+    it('should return an InstanceGroup object', function() {
+      var instanceGroup = zone.instanceGroup(NAME);
+      assert(instanceGroup instanceof FakeInstanceGroup);
+      assert.strictEqual(instanceGroup.calledWith_[0], zone);
+      assert.strictEqual(instanceGroup.calledWith_[1], NAME);
     });
   });
 
