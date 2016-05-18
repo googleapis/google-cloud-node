@@ -50,6 +50,8 @@ describe('InstanceGroup', function() {
   var InstanceGroup;
   var instanceGroup;
 
+  var staticMethods = {};
+
   var ZONE = {
     createInstanceGroup: util.noop,
     vm: util.noop
@@ -69,6 +71,7 @@ describe('InstanceGroup', function() {
     });
 
     InstanceGroup = require('../../lib/compute/instance-group.js');
+    staticMethods.formatPorts_ = InstanceGroup.formatPorts_;
   });
 
   after(function() {
@@ -77,6 +80,7 @@ describe('InstanceGroup', function() {
   });
 
   beforeEach(function() {
+    extend(InstanceGroup, staticMethods);
     instanceGroup = new InstanceGroup(ZONE, NAME);
   });
 
@@ -123,6 +127,20 @@ describe('InstanceGroup', function() {
       });
 
       instanceGroup = new InstanceGroup(zoneInstance, NAME);
+    });
+  });
+
+  describe('formatPorts_', function() {
+    var PORTS = {
+      http: 80,
+      https: 443
+    };
+
+    it('should format an object of named ports', function() {
+      assert.deepEqual(InstanceGroup.formatPorts_(PORTS), [
+        { name: 'http', port: 80 },
+        { name: 'https', port: 443 }
+      ]);
     });
   });
 
@@ -475,15 +493,17 @@ describe('InstanceGroup', function() {
     };
 
     it('should format the named ports', function(done) {
-      var expectedNamedPorts = [
-        { name: 'http', port: 80 },
-        { name: 'https', port: 443 }
-      ];
+      var expectedNamedPorts = [];
+
+      InstanceGroup.formatPorts_ = function(ports) {
+        assert.strictEqual(ports, PORTS);
+        return expectedNamedPorts;
+      };
 
       instanceGroup.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/setNamedPorts');
-        assert.deepEqual(reqOpts.json.namedPorts, expectedNamedPorts);
+        assert.strictEqual(reqOpts.json.namedPorts, expectedNamedPorts);
         done();
       };
 

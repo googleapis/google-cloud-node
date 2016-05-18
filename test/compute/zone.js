@@ -39,9 +39,13 @@ function FakeDisk() {
   this.calledWith_ = [].slice.call(arguments);
 }
 
+var formatPortsOverride;
 function FakeInstanceGroup() {
   this.calledWith_ = [].slice.call(arguments);
 }
+FakeInstanceGroup.formatPorts_ = function() {
+  return (formatPortsOverride || util.noop).apply(null, arguments);
+};
 
 function FakeOperation() {
   this.calledWith_ = [].slice.call(arguments);
@@ -118,6 +122,7 @@ describe('Zone', function() {
   });
 
   beforeEach(function() {
+    formatPortsOverride = null;
     gceImagesOverride = null;
     zone = new Zone(COMPUTE, ZONE_NAME);
   });
@@ -625,13 +630,15 @@ describe('Zone', function() {
       };
 
       it('should format named ports', function(done) {
-        var expectedNamedPorts = [
-          { name: 'http', port: 80 },
-          { name: 'https', port: 443 }
-        ];
+        var expectedNamedPorts = [];
+
+        formatPortsOverride = function(ports) {
+          assert.strictEqual(ports, PORTS);
+          return expectedNamedPorts;
+        };
 
         zone.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json.namedPorts, expectedNamedPorts);
+          assert.strictEqual(reqOpts.json.namedPorts, expectedNamedPorts);
           assert.strictEqual(reqOpts.json.ports, undefined);
           done();
         };
