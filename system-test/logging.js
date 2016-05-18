@@ -243,8 +243,12 @@ describe('Logging', function() {
       // object data
       log.entry({ delegate: 'my_username' }),
 
-      // null data
-      log.entry({ nonValue: null }),
+      // various data types
+      log.entry({
+        nonValue: null,
+        boolValue: true,
+        arrayValue: [ 1, 2, 3 ]
+      }),
 
       // nested object data
       log.entry({
