@@ -38,7 +38,8 @@ describe('Datastore', function() {
 
   after(function(done) {
     function deleteEntities(kind, callback) {
-      var query = datastore.createQuery(kind);
+      var query = datastore.createQuery(kind)
+        .select('__key__');
 
       datastore.runQuery(query, function(err, entities) {
         if (err) {
