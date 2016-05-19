@@ -1076,6 +1076,21 @@ describe('File', function() {
       writable.end('data');
     });
 
+    it('should pass through a provided uri', function(done) {
+      var options = {
+        uri: 'https://www.googleapis.com/afakeuri'
+      };
+
+      var writable = file.createWriteStream(options);
+
+      file.startResumableUpload_ = function(stream, options_) {
+        assert.deepEqual(options_.uri, options.uri);
+        done();
+      };
+
+      writable.write('data');
+    });
+
     describe('validation', function() {
       var data = 'test';
 
