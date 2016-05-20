@@ -32,7 +32,8 @@ describe('Vision', function() {
   var IMAGES = {
     logo: path.join(__dirname, 'data/logo.jpg'),
     rushmore: path.join(__dirname, 'data/rushmore.jpg'),
-    text: path.join(__dirname, 'data/text.png')
+    text: path.join(__dirname, 'data/text.png'),
+    malformed: path.join(__dirname, 'data/index.yaml')
   };
 
   beforeEach(function() {
@@ -62,17 +63,74 @@ describe('Vision', function() {
     });
   });
 
-  it('should perform multiple detections', function(done) {
-    var detectionTypes = ['faces', 'labels', 'safeSearch'];
+  describe('single image', function() {
+    var TYPES = ['faces', 'labels', 'safeSearch'];
 
-    vision.detect(IMAGES.rushmore, detectionTypes, function(err, detections) {
-      assert.ifError(err);
+    it('should perform multiple detections', function(done) {
+      vision.detect(IMAGES.rushmore, TYPES, function(err, detections) {
+        assert.ifError(err);
 
-      assert(is.array(detections.faces));
-      assert(is.array(detections.labels));
-      assert(is.object(detections.safeSearch));
+        assert(is.array(detections.faces));
+        assert(is.array(detections.labels));
+        assert(is.object(detections.safeSearch));
 
-      done();
+        done();
+      });
+    });
+
+    it('should return errors', function(done) {
+      vision.detect(IMAGES.malformed, TYPES, function(err, detections) {
+        assert.ifError(err);
+
+        assert(is.array(detections.errors));
+        assert.strictEqual(detections.errors.length, TYPES.length);
+
+        done();
+      });
+    });
+  });
+
+  describe('multiple images', function() {
+    var TYPES = ['faces', 'labels', 'safeSearch'];
+
+    it('should perform multiple detections', function(done) {
+      var images = [IMAGES.logo, IMAGES.rushmore];
+
+      vision.detect(images, TYPES, function(err, detections) {
+        assert.ifError(err);
+
+        var image1detections = detections[0];
+        var image2detections = detections[1];
+
+        assert(is.array(image1detections.faces));
+        assert(is.array(image1detections.labels));
+        assert(is.object(image1detections.safeSearch));
+
+        assert(is.array(image2detections.faces));
+        assert(is.array(image2detections.labels));
+        assert(is.object(image2detections.safeSearch));
+
+        done();
+      });
+    });
+
+    it('should return errors', function(done) {
+      var images = [IMAGES.logo, IMAGES.malformed];
+
+      vision.detect(images, TYPES, function(err, detections) {
+        assert.ifError(err);
+
+        var image1detections = detections[0];
+        var image2detections = detections[1];
+
+        assert(is.array(image1detections.errors));
+        assert.strictEqual(image1detections.errors.length, 0);
+
+        assert(is.array(image2detections.errors));
+        assert.strictEqual(image2detections.errors.length, TYPES.length);
+
+        done();
+      });
     });
   });
 
