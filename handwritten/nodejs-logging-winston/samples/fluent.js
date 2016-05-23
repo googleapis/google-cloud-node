@@ -22,15 +22,15 @@ app.get('*', function (req, res, next) {
 
 // [START fluent]
 var structuredLogger = require('fluent-logger').createFluentSender('myapp', {
-   host: 'localhost',
-   port: 24224,
-   timeout: 3.0
+  host: 'localhost',
+  port: 24224,
+  timeout: 3.0
 });
 
 var report = function (err, req) {
   var payload = {
     serviceContext: {
-      service: 'myapp',
+      service: 'myapp'
     },
     message: err.stack,
     context: {
@@ -40,7 +40,7 @@ var report = function (err, req) {
         referrer: req.header('Referer'),
         userAgent: req.header('User-Agent'),
         remoteIp: req.ip,
-        responseStatusCode: 500,
+        responseStatusCode: 500
       }
     }
   };

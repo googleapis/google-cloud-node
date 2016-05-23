@@ -14,14 +14,11 @@
 'use strict';
 
 // [START setup]
-// You must set the GOOGLE_APPLICATION_CREDENTIALS and GCLOUD_PROJECT
-// environment variables to run this sample
-var projectId = process.env.GCLOUD_PROJECT;
-
-// Initialize gcloud
-var gcloud = require('gcloud')({
-  projectId: projectId
-});
+// By default, gcloud will authenticate using the service account file specified
+// by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use the
+// project specified by the GCLOUD_PROJECT environment variable. See
+// https://googlecloudplatform.github.io/gcloud-node/#/docs/guides/authentication
+var gcloud = require('gcloud');
 
 // Get a reference to the logging component
 var logging = gcloud.logging();
@@ -31,7 +28,7 @@ var logging = gcloud.logging();
 /**
  * @param {Function} callback Callback function.
  */
-function listSinksExample(callback) {
+function listSinksExample (callback) {
   // list all sinks in the authenticated project
   logging.getSinks(function (err, sinks) {
     if (err) {
@@ -51,7 +48,7 @@ function listSinksExample(callback) {
  * @param {Object} config Configuration options for the new sink.
  * @param {Function} callback Callback function.
  */
-function createSinkExample(sinkName, config, callback) {
+function createSinkExample (sinkName, config, callback) {
   // create a new sink in the authenticated project
   //
   // This method only works if you are authenticated as yourself, e.g. using the
@@ -74,7 +71,7 @@ function createSinkExample(sinkName, config, callback) {
  * @param {Object} config New configuration options for the sink.
  * @param {Function} callback Callback function.
  */
-function updateSinkExample(sinkName, config, callback) {
+function updateSinkExample (sinkName, config, callback) {
   // Get a reference to an existing sink
   var sink = logging.sink(sinkName);
 
@@ -98,7 +95,7 @@ function updateSinkExample(sinkName, config, callback) {
  * @param {string} sinkName Name of the sink to delete.
  * @param {Function} callback Callback function.
  */
-function deleteSinkExample(sinkName, callback) {
+function deleteSinkExample (sinkName, callback) {
   // Get a reference to an existing sink
   var sink = logging.sink(sinkName);
 

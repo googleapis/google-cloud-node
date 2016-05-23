@@ -18,14 +18,11 @@ var async = require('async');
 
 // [START write]
 // [START setup]
-// You must set the GOOGLE_APPLICATION_CREDENTIALS and GCLOUD_PROJECT
-// environment variables to run this sample
-var projectId = process.env.GCLOUD_PROJECT;
-
-// Initialize gcloud
-var gcloud = require('gcloud')({
-  projectId: projectId
-});
+// By default, gcloud will authenticate using the service account file specified
+// by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use the
+// project specified by the GCLOUD_PROJECT environment variable. See
+// https://googlecloudplatform.github.io/gcloud-node/#/docs/guides/authentication
+var gcloud = require('gcloud');
 
 // Get a reference to the logging component
 var logging = gcloud.logging();
@@ -35,7 +32,7 @@ var logging = gcloud.logging();
  * @param {string} logName Name of the log to write to.
  * @param {Function} callback Callback function.
  */
-function writeExample(logName, callback) {
+function writeExample (logName, callback) {
   // Get a reference to an existing log
   var log = logging.log(logName);
 
@@ -83,7 +80,7 @@ function writeExample(logName, callback) {
  * @param {string} logName Name of the log to delete.
  * @param {Function} callback Callback function.
  */
-function deleteLogExample(logName, callback) {
+function deleteLogExample (logName, callback) {
   // Get a reference to an existing log
   var log = logging.log(logName);
 

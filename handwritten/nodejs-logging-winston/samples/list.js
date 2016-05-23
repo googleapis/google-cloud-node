@@ -15,26 +15,21 @@
 
 // [START list]
 // [START auth]
-// You must set the GOOGLE_APPLICATION_CREDENTIALS and GCLOUD_PROJECT
-// environment variables to run this sample
-var projectId = process.env.GCLOUD_PROJECT;
-
-// [START require]
-// Initialize gcloud
-var gcloud = require('gcloud')({
-  projectId: projectId
-});
-// [END require]
-// [END auth]
+// By default, gcloud will authenticate using the service account file specified
+// by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use the
+// project specified by the GCLOUD_PROJECT environment variable. See
+// https://googlecloudplatform.github.io/gcloud-node/#/docs/guides/authentication
+var gcloud = require('gcloud');
 
 // Get a reference to the logging component
 var logging = gcloud.logging();
+// [END auth]
 
 /**
  * @param {Object} [options] Configuration options for the request.
  * @param {Function} callback Callback function.
  */
-function listExample(options, callback) {
+function listExample (options, callback) {
   if (typeof options === 'function') {
     callback = options;
   }

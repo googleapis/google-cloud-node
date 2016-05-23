@@ -16,7 +16,7 @@
   "dependencies": {
     "async": "^1.5.2",
     "express": "^4.13.4",
-    "fluent-logger": "^1.1.0",
-    "gcloud": "^0.30.3"
+    "fluent-logger": "^1.1.1",
+    "gcloud": "^0.34.0"
   }
 }
