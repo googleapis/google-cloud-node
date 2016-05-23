@@ -16,24 +16,17 @@
 var input = process.argv.splice(2);
 var command = input.shift();
 
-var projectId = process.env.DATASTORE_PROJECT_ID || process.env.GCLOUD_PROJECT;
-if (!projectId) {
+if (!process.env.GCLOUD_PROJECT) {
   throw new Error('GCLOUD_PROJECT environment variable required.');
 }
-var keyFile = process.env.DATASTORE_KEYFILE ||
-              process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
 // [START build_service]
+// By default, gcloud will authenticate using the service account file specified
+// by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use the
+// project specified by the GCLOUD_PROJECT environment variable. See
+// https://googlecloudplatform.github.io/gcloud-node/#/docs/guides/authentication
 var gcloud = require('gcloud');
-var options = {
-  projectId: projectId
-};
-
-if (keyFile) {
-  options.keyFilename = keyFile;
-}
-
-var datastore = gcloud.datastore(options);
+var datastore = gcloud.datastore();
 // [END build_service]
 
 /*
@@ -64,7 +57,7 @@ gcloud auth login
 6. At a command prompt, run the following, where `<project-id>` is the ID of
 your Google Cloud Platform project.
 ```sh
-export DATASTORE_PROJECT_ID=<project-id>
+export GCLOUD_PROJECT=<project-id>
 ```
 
 7. Run the application!
@@ -74,7 +67,7 @@ npm run tasks
 */
 
 // [START add_entity]
-function addTask(description, callback) {
+function addTask (description, callback) {
   var taskKey = datastore.key('Task');
 
   datastore.save({
@@ -84,7 +77,7 @@ function addTask(description, callback) {
       description: description,
       done: false
     }
-  }, function(err) {
+  }, function (err) {
     if (err) {
       callback(err);
       return;
@@ -96,16 +89,16 @@ function addTask(description, callback) {
 // [END add_entity]
 
 // [START update_entity]
-function markDone(taskId, callback) {
+function markDone (taskId, callback) {
   var error;
 
-  datastore.runInTransaction(function(transaction, done) {
+  datastore.runInTransaction(function (transaction, done) {
     var taskKey = datastore.key([
       'Task',
       taskId
     ]);
 
-    transaction.get(taskKey, function(err, task) {
+    transaction.get(taskKey, function (err, task) {
       if (err) {
         // An error occurred while getting the values.
         error = err;
@@ -120,19 +113,18 @@ function markDone(taskId, callback) {
       // Commit the transaction.
       done();
     });
-  }, function(transactionError) {
+  }, function (transactionError) {
     if (transactionError || error) {
-      callback(transactionError || error);
-    } else {
-      // The transaction completed successfully.
-      callback();
+      return callback(transactionError || error);
     }
+    // The transaction completed successfully.
+    callback();
   });
 }
 // [END update_entity]
 
 // [START retrieve_entities]
-function listTasks(callback) {
+function listTasks (callback) {
   var query = datastore.createQuery('Task')
     .order('created');
 
@@ -141,7 +133,7 @@ function listTasks(callback) {
 // [END retrieve_entities]
 
 // [START delete_entity]
-function deleteTask(taskId, callback) {
+function deleteTask (taskId, callback) {
   var taskKey = datastore.key([
     'Task',
     taskId
@@ -152,9 +144,9 @@ function deleteTask(taskId, callback) {
 // [END delete_entity]
 
 // [START format_results]
-function formatTasks(tasks) {
+function formatTasks (tasks) {
   return tasks
-    .map(function(task) {
+    .map(function (task) {
       var taskKey = task.key.path.pop();
       var status;
 
@@ -171,25 +163,26 @@ function formatTasks(tasks) {
 // [END format_results]
 
 if (module === require.main) {
+  var taskId;
+
   switch (command) {
     case 'new': {
-      addTask(input, function(err, taskKey) {
+      addTask(input, function (err, taskKey) {
         if (err) {
           throw err;
         }
 
-        var taskId = taskKey.path.pop();
+        taskId = taskKey.path.pop();
 
         console.log('Task %d created successfully.', taskId);
       });
 
       break;
     }
-
     case 'done': {
-      var taskId = parseInt(input, 10);
+      taskId = parseInt(input, 10);
 
-      markDone(taskId, function(err) {
+      markDone(taskId, function (err) {
         if (err) {
           throw err;
         }
@@ -199,9 +192,8 @@ if (module === require.main) {
 
       break;
     }
-
     case 'list': {
-      listTasks(function(err, tasks) {
+      listTasks(function (err, tasks) {
         if (err) {
           throw err;
         }
@@ -211,11 +203,10 @@ if (module === require.main) {
 
       break;
     }
-
     case 'delete': {
-      var taskId = parseInt(input, 10);
+      taskId = parseInt(input, 10);
 
-      deleteTask(taskId, function(err) {
+      deleteTask(taskId, function (err) {
         if (err) {
           throw err;
         }
@@ -225,7 +216,6 @@ if (module === require.main) {
 
       break;
     }
-
     default: {
       // Only print usage if this file is being executed directly
       if (module === require.main) {

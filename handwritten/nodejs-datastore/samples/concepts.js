@@ -14,6 +14,10 @@
 'use strict';
 
 var asyncUtil = require('async');
+// By default, gcloud will authenticate using the service account file specified
+// by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use the
+// project specified by the GCLOUD_PROJECT environment variable. See
+// https://googlecloudplatform.github.io/gcloud-node/#/docs/guides/authentication
 var gcloud = require('gcloud');
 
 module.exports = {
@@ -26,27 +30,21 @@ module.exports = {
 
 // This mock is used in the documentation snippets.
 var datastore = {
-  delete: function() {},
-  get: function() {},
-  insert: function() {},
-  key: function() {},
-  update: function() {},
-  upsert: function() {},
-  runQuery: function() {},
-  save: function() {}
+  delete: function () {},
+  get: function () {},
+  insert: function () {},
+  key: function () {},
+  update: function () {},
+  upsert: function () {},
+  runQuery: function () {},
+  save: function () {}
 };
 
-var keyFile = process.env.DATASTORE_KEYFILE ||
-              process.env.GOOGLE_APPLICATION_CREDENTIALS;
-
-function Entity(projectId) {
+function Entity (projectId) {
   var options = {
     projectId: projectId
   };
 
-  if (keyFile) {
-    options.keyFilename = keyFile;
-  }
   this.datastore = gcloud.datastore(options);
 
   // To create the keys, we have to use this instance of Datastore.
@@ -58,7 +56,7 @@ function Entity(projectId) {
   this.keyWithMultiLevelParent = this.getKeyWithMultiLevelParent();
 }
 
-Entity.prototype.getIncompleteKey = function() {
+Entity.prototype.getIncompleteKey = function () {
   // [START incomplete_key]
   var taskKey = datastore.key('Task');
   // [END incomplete_key]
@@ -66,7 +64,7 @@ Entity.prototype.getIncompleteKey = function() {
   return taskKey;
 };
 
-Entity.prototype.getNamedKey = function() {
+Entity.prototype.getNamedKey = function () {
   // [START named_key]
   var taskKey = datastore.key([
     'Task',
@@ -77,7 +75,7 @@ Entity.prototype.getNamedKey = function() {
   return taskKey;
 };
 
-Entity.prototype.getKeyWithParent = function() {
+Entity.prototype.getKeyWithParent = function () {
   // [START key_with_parent]
   var taskKey = datastore.key([
     'TaskList',
@@ -90,7 +88,7 @@ Entity.prototype.getKeyWithParent = function() {
   return taskKey;
 };
 
-Entity.prototype.getKeyWithMultiLevelParent = function() {
+Entity.prototype.getKeyWithMultiLevelParent = function () {
   // [START key_with_multilevel_parent]
   var taskKey = datastore.key([
     'User',
@@ -105,7 +103,7 @@ Entity.prototype.getKeyWithMultiLevelParent = function() {
   return taskKey;
 };
 
-Entity.prototype.getTask = function() {
+Entity.prototype.getTask = function () {
   // [START basic_entity]
   var task = {
     type: 'Personal',
@@ -118,35 +116,35 @@ Entity.prototype.getTask = function() {
   return task;
 };
 
-Entity.prototype.testIncompleteKey = function(callback) {
+Entity.prototype.testIncompleteKey = function (callback) {
   this.datastore.save({
     key: this.incompleteKey,
     data: {}
   }, callback);
 };
 
-Entity.prototype.testNamedKey = function(callback) {
+Entity.prototype.testNamedKey = function (callback) {
   this.datastore.save({
     key: this.namedKey,
     data: {}
   }, callback);
 };
 
-Entity.prototype.testKeyWithParent = function(callback) {
+Entity.prototype.testKeyWithParent = function (callback) {
   this.datastore.save({
     key: this.keyWithParent,
     data: {}
   }, callback);
 };
 
-Entity.prototype.testKeyWithMultiLevelParent = function(callback) {
+Entity.prototype.testKeyWithMultiLevelParent = function (callback) {
   this.datastore.save({
     key: this.keyWithMultiLevelParent,
     data: {}
   }, callback);
 };
 
-Entity.prototype.testEntityWithParent = function(callback) {
+Entity.prototype.testEntityWithParent = function (callback) {
   var taskKey = this.keyWithParent;
 
   // [START entity_with_parent]
@@ -164,7 +162,7 @@ Entity.prototype.testEntityWithParent = function(callback) {
   this.datastore.save(task, callback);
 };
 
-Entity.prototype.testProperties = function(callback) {
+Entity.prototype.testProperties = function (callback) {
   // jshint camelcase:false
   // [START properties]
   var task = {
@@ -183,7 +181,7 @@ Entity.prototype.testProperties = function(callback) {
   }, callback);
 };
 
-Entity.prototype.testArrayValue = function(callback) {
+Entity.prototype.testArrayValue = function (callback) {
   // [START array_value]
   var task = {
     tags: [
@@ -203,14 +201,14 @@ Entity.prototype.testArrayValue = function(callback) {
   }, callback);
 };
 
-Entity.prototype.testBasicEntity = function(callback) {
+Entity.prototype.testBasicEntity = function (callback) {
   this.datastore.save({
     key: this.getIncompleteKey(),
     data: this.getTask()
   }, callback);
 };
 
-Entity.prototype.testUpsert = function(callback) {
+Entity.prototype.testUpsert = function (callback) {
   var taskKey = this.getIncompleteKey();
   var task = this.getTask();
 
@@ -218,7 +216,7 @@ Entity.prototype.testUpsert = function(callback) {
   datastore.upsert({
     key: taskKey,
     data: task
-  }, function(err) {
+  }, function (err) {
     if (!err) {
       // Task inserted successfully.
     }
@@ -231,7 +229,7 @@ Entity.prototype.testUpsert = function(callback) {
   }, callback);
 };
 
-Entity.prototype.testInsert = function(callback) {
+Entity.prototype.testInsert = function (callback) {
   var taskKey = this.getIncompleteKey();
   var task = this.getTask();
 
@@ -239,7 +237,7 @@ Entity.prototype.testInsert = function(callback) {
   datastore.insert({
     key: taskKey,
     data: task
-  }, function(err) {
+  }, function (err) {
     if (!err) {
       // Task inserted successfully.
     }
@@ -253,13 +251,13 @@ Entity.prototype.testInsert = function(callback) {
   }, callback);
 };
 
-Entity.prototype.testLookup = function(callback) {
+Entity.prototype.testLookup = function (callback) {
   var self = this;
   var taskKey = this.getIncompleteKey();
 
   // jshint unused:false
   // [START lookup]
-  datastore.get(taskKey, function(err, entity) {
+  datastore.get(taskKey, function (err, entity) {
     if (!err) {
       // Task found.
 
@@ -277,7 +275,7 @@ Entity.prototype.testLookup = function(callback) {
     method: 'insert',
     key: taskKey,
     data: {}
-  }, function(err) {
+  }, function (err) {
     if (err) {
       callback(err);
       return;
@@ -287,7 +285,7 @@ Entity.prototype.testLookup = function(callback) {
   });
 };
 
-Entity.prototype.testUpdate = function(callback) {
+Entity.prototype.testUpdate = function (callback) {
   var self = this;
   var taskKey = this.getIncompleteKey();
   var task = this.getTask();
@@ -296,7 +294,7 @@ Entity.prototype.testUpdate = function(callback) {
   datastore.update({
     key: taskKey,
     data: task
-  }, function(err) {
+  }, function (err) {
     if (!err) {
       // Task updated successfully.
     }
@@ -307,7 +305,7 @@ Entity.prototype.testUpdate = function(callback) {
     method: 'insert',
     key: taskKey,
     data: {}
-  }, function(err) {
+  }, function (err) {
     if (err) {
       callback(err);
       return;
@@ -320,12 +318,12 @@ Entity.prototype.testUpdate = function(callback) {
   });
 };
 
-Entity.prototype.testDelete = function(callback) {
+Entity.prototype.testDelete = function (callback) {
   var self = this;
   var taskKey = this.getIncompleteKey();
 
   // [START delete]
-  datastore.delete(taskKey, function(err) {
+  datastore.delete(taskKey, function (err) {
     if (!err) {
       // Task deleted successfully.
     }
@@ -336,7 +334,7 @@ Entity.prototype.testDelete = function(callback) {
     method: 'insert',
     key: taskKey,
     data: {}
-  }, function(err) {
+  }, function (err) {
     if (err) {
       callback(err);
       return;
@@ -346,7 +344,7 @@ Entity.prototype.testDelete = function(callback) {
   });
 };
 
-Entity.prototype.testBatchUpsert = function(callback) {
+Entity.prototype.testBatchUpsert = function (callback) {
   var taskKey1 = this.datastore.key(['Task', 1]);
   var taskKey2 = this.datastore.key(['Task', 2]);
 
@@ -374,7 +372,7 @@ Entity.prototype.testBatchUpsert = function(callback) {
       key: taskKey2,
       data: task2
     }
-  ], function(err) {
+  ], function (err) {
     if (!err) {
       // Tasks inserted successfully.
     }
@@ -393,7 +391,7 @@ Entity.prototype.testBatchUpsert = function(callback) {
   ], callback);
 };
 
-Entity.prototype.testBatchLookup = function(callback) {
+Entity.prototype.testBatchLookup = function (callback) {
   var taskKey1 = this.datastore.key(['Task', 1]);
   var taskKey2 = this.datastore.key(['Task', 2]);
 
@@ -402,7 +400,7 @@ Entity.prototype.testBatchLookup = function(callback) {
   datastore.get([
     taskKey1,
     taskKey2
-  ], function(err, tasks) {
+  ], function (err, tasks) {
     if (!err) {
       // Tasks retrieved successfully.
     }
@@ -415,7 +413,7 @@ Entity.prototype.testBatchLookup = function(callback) {
   ], callback);
 };
 
-Entity.prototype.testBatchDelete = function(callback) {
+Entity.prototype.testBatchDelete = function (callback) {
   var taskKey1 = this.datastore.key(['Task', 1]);
   var taskKey2 = this.datastore.key(['Task', 2]);
 
@@ -423,7 +421,7 @@ Entity.prototype.testBatchDelete = function(callback) {
   datastore.delete([
     taskKey1,
     taskKey2
-  ], function(err) {
+  ], function (err) {
     if (!err) {
       // Tasks deleted successfully.
     }
@@ -436,18 +434,15 @@ Entity.prototype.testBatchDelete = function(callback) {
   ], callback);
 };
 
-function Index(projectId) {
+function Index (projectId) {
   var options = {
     projectId: projectId
   };
 
-  if (keyFile) {
-    options.keyFilename = keyFile;
-  }
   this.datastore = gcloud.datastore(options);
 }
 
-Index.prototype.testUnindexedPropertyQuery = function(callback) {
+Index.prototype.testUnindexedPropertyQuery = function (callback) {
   var datastore = this.datastore;
 
   // [START unindexed_property_query]
@@ -458,7 +453,7 @@ Index.prototype.testUnindexedPropertyQuery = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Index.prototype.testExplodingProperties = function(callback) {
+Index.prototype.testExplodingProperties = function (callback) {
   var original = datastore.key;
   datastore.key = this.datastore.key;
 
@@ -487,18 +482,15 @@ Index.prototype.testExplodingProperties = function(callback) {
   this.datastore.save(task, callback);
 };
 
-function Metadata(projectId) {
+function Metadata (projectId) {
   var options = {
     projectId: projectId
   };
 
-  if (keyFile) {
-    options.keyFilename = keyFile;
-  }
   this.datastore = gcloud.datastore(options);
 }
 
-Metadata.prototype.testNamespaceRunQuery = function(callback) {
+Metadata.prototype.testNamespaceRunQuery = function (callback) {
   var self = this;
 
   datastore.createQuery = this.datastore.createQuery;
@@ -515,7 +507,7 @@ Metadata.prototype.testNamespaceRunQuery = function(callback) {
       }),
       data: {}
     }
-  ], function(err) {
+  ], function (err) {
     if (err) {
       callback(err);
       return;
@@ -528,15 +520,16 @@ Metadata.prototype.testNamespaceRunQuery = function(callback) {
       .filter('__key__', '>=', datastore.key(['__namespace__', startNamespace]))
       .filter('__key__', '<', datastore.key(['__namespace__', endNamespace]));
 
-    datastore.runQuery(query, function(err, entities) {
+    datastore.runQuery(query, function (err, entities) {
       if (err) {
         // An error occurred while running the query.
         return;
       }
 
-      var namespaces = entities.map(function(entity) {
+      var namespaces = entities.map(function (entity) {
         return entity.key.path.pop();
       });
+      console.log('namespaces', namespaces);
     });
     // [END namespace_run_query]
 
@@ -544,7 +537,7 @@ Metadata.prototype.testNamespaceRunQuery = function(callback) {
   });
 };
 
-Metadata.prototype.testKindRunQuery = function(callback) {
+Metadata.prototype.testKindRunQuery = function (callback) {
   datastore.createQuery = this.datastore.createQuery;
 
   // jshint unused:false
@@ -552,29 +545,30 @@ Metadata.prototype.testKindRunQuery = function(callback) {
   var query = datastore.createQuery('__kind__')
     .select('__key__');
 
-  datastore.runQuery(query, function(err, entities) {
+  datastore.runQuery(query, function (err, entities) {
     if (err) {
       // An error occurred while running the query.
       return;
     }
 
-    var kinds = entities.map(function(entity) {
+    var kinds = entities.map(function (entity) {
       return entity.key.path.pop();
     });
+    console.log('kinds', kinds);
   });
   // [END kind_run_query]
 
   this.datastore.runQuery(query, callback);
 };
 
-Metadata.prototype.testPropertyRunQuery = function(callback) {
+Metadata.prototype.testPropertyRunQuery = function (callback) {
   datastore.createQuery = this.datastore.createQuery;
 
   // [START property_run_query]
   var query = datastore.createQuery('__property__')
     .select('__key__');
 
-  datastore.runQuery(query, function(err, entities) {
+  datastore.runQuery(query, function (err, entities) {
     if (err) {
       // An error occurred while running the query.
       return;
@@ -582,7 +576,7 @@ Metadata.prototype.testPropertyRunQuery = function(callback) {
 
     var propertiesByKind = {};
 
-    entities.forEach(function(entity) {
+    entities.forEach(function (entity) {
       var kind = entity.key.path[1];
       var propertyName = entity.key.path[3];
 
@@ -595,7 +589,7 @@ Metadata.prototype.testPropertyRunQuery = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Metadata.prototype.testPropertyByKindRunQuery = function(callback) {
+Metadata.prototype.testPropertyByKindRunQuery = function (callback) {
   var datastore = this.datastore;
 
   // jshint camelcase:false
@@ -605,7 +599,7 @@ Metadata.prototype.testPropertyByKindRunQuery = function(callback) {
   var query = datastore.createQuery('__property__')
     .hasAncestor(ancestorKey);
 
-  datastore.runQuery(query, function(err, entities) {
+  datastore.runQuery(query, function (err, entities) {
     if (err) {
       // An error occurred while running the query.
       return;
@@ -613,7 +607,7 @@ Metadata.prototype.testPropertyByKindRunQuery = function(callback) {
 
     var representationsByProperty = {};
 
-    entities.forEach(function(entity) {
+    entities.forEach(function (entity) {
       var propertyName = entity.key.path.pop();
       var propertyType = entity.data.property_representation;
 
@@ -625,14 +619,11 @@ Metadata.prototype.testPropertyByKindRunQuery = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-function Query(projectId) {
+function Query (projectId) {
   var options = {
     projectId: projectId
   };
 
-  if (keyFile) {
-    options.keyFilename = keyFile;
-  }
   this.datastore = gcloud.datastore(options);
 
   this.basicQuery = this.getBasicQuery();
@@ -640,7 +631,7 @@ function Query(projectId) {
   this.ancestorQuery = this.getAncestorQuery();
 }
 
-Query.prototype.getBasicQuery = function() {
+Query.prototype.getBasicQuery = function () {
   var datastore = this.datastore;
 
   // [START basic_query]
@@ -655,7 +646,7 @@ Query.prototype.getBasicQuery = function() {
   return query;
 };
 
-Query.prototype.getProjectionQuery = function() {
+Query.prototype.getProjectionQuery = function () {
   var datastore = this.datastore;
 
   // [START projection_query]
@@ -666,7 +657,7 @@ Query.prototype.getProjectionQuery = function() {
   return query;
 };
 
-Query.prototype.getAncestorQuery = function() {
+Query.prototype.getAncestorQuery = function () {
   var datastore = this.datastore;
 
   // [START ancestor_query]
@@ -679,12 +670,12 @@ Query.prototype.getAncestorQuery = function() {
   return query;
 };
 
-Query.prototype.testRunQuery = function(callback) {
+Query.prototype.testRunQuery = function (callback) {
   var query = this.basicQuery;
 
   // jshint unused:false
   // [START run_query]
-  datastore.runQuery(query, function(err, tasks) {
+  datastore.runQuery(query, function (err, tasks) {
     if (!err) {
       // Task entities found.
     }
@@ -694,7 +685,7 @@ Query.prototype.testRunQuery = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Query.prototype.testPropertyFilter = function(callback) {
+Query.prototype.testPropertyFilter = function (callback) {
   var datastore = this.datastore;
 
   // [START property_filter]
@@ -705,7 +696,7 @@ Query.prototype.testPropertyFilter = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Query.prototype.testCompositeFilter = function(callback) {
+Query.prototype.testCompositeFilter = function (callback) {
   var datastore = this.datastore;
 
   // [START composite_filter]
@@ -717,7 +708,7 @@ Query.prototype.testCompositeFilter = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Query.prototype.testKeyFilter = function(callback) {
+Query.prototype.testKeyFilter = function (callback) {
   var datastore = this.datastore;
 
   // [START key_filter]
@@ -728,7 +719,7 @@ Query.prototype.testKeyFilter = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Query.prototype.testAscendingSort = function(callback) {
+Query.prototype.testAscendingSort = function (callback) {
   var datastore = this.datastore;
 
   // [START ascending_sort]
@@ -739,7 +730,7 @@ Query.prototype.testAscendingSort = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Query.prototype.testDescendingSort = function(callback) {
+Query.prototype.testDescendingSort = function (callback) {
   var datastore = this.datastore;
 
   // [START descending_sort]
@@ -752,7 +743,7 @@ Query.prototype.testDescendingSort = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Query.prototype.testMultiSort = function(callback) {
+Query.prototype.testMultiSort = function (callback) {
   var datastore = this.datastore;
 
   // [START multi_sort]
@@ -766,7 +757,7 @@ Query.prototype.testMultiSort = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Query.prototype.testKindlessQuery = function(callback) {
+Query.prototype.testKindlessQuery = function (callback) {
   var datastore = this.datastore;
   var lastSeenKey = this.datastore.key(['Task', Date.now()]);
 
@@ -779,16 +770,16 @@ Query.prototype.testKindlessQuery = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Query.prototype.testRunQueryProjection = function(callback) {
+Query.prototype.testRunQueryProjection = function (callback) {
   var self = this;
   var query = this.projectionQuery;
 
   // Overwrite the mock to actually run the query.
-  datastore.runQuery = function(query, queryCallback) {
+  datastore.runQuery = function (query, queryCallback) {
     // Restore the mock.
-    datastore.runQuery = function() {};
+    datastore.runQuery = function () {};
 
-    self.datastore.runQuery(query, function(err) {
+    self.datastore.runQuery(query, function (err) {
       if (err) {
         return callback(err);
       }
@@ -808,13 +799,13 @@ Query.prototype.testRunQueryProjection = function(callback) {
   var priorities = [];
   var percentCompletes = [];
 
-  datastore.runQuery(query, function(err, tasks) {
+  datastore.runQuery(query, function (err, tasks) {
     if (err) {
       // An error occurred while running the query.
       return;
     }
 
-    tasks.forEach(function(task) {
+    tasks.forEach(function (task) {
       priorities.push(task.data.priority);
       percentCompletes.push(task.data.percent_complete);
     });
@@ -822,7 +813,7 @@ Query.prototype.testRunQueryProjection = function(callback) {
   // [END run_query_projection]
 };
 
-Query.prototype.testKeysOnlyQuery = function(callback) {
+Query.prototype.testKeysOnlyQuery = function (callback) {
   var datastore = this.datastore;
 
   // [START keys_only_query]
@@ -834,7 +825,7 @@ Query.prototype.testKeysOnlyQuery = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Query.prototype.testDistinctQuery = function(callback) {
+Query.prototype.testDistinctQuery = function (callback) {
   var datastore = this.datastore;
 
   // [START distinct_query]
@@ -847,7 +838,7 @@ Query.prototype.testDistinctQuery = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Query.prototype.testDistinctOnQuery = function(callback) {
+Query.prototype.testDistinctOnQuery = function (callback) {
   var datastore = this.datastore;
 
   // [START distinct_on_query]
@@ -860,7 +851,7 @@ Query.prototype.testDistinctOnQuery = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Query.prototype.testArrayValueInequalityRange = function(callback) {
+Query.prototype.testArrayValueInequalityRange = function (callback) {
   var datastore = this.datastore;
 
   // [START array_value_inequality_range]
@@ -872,7 +863,7 @@ Query.prototype.testArrayValueInequalityRange = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Query.prototype.testArrayValueEquality = function(callback) {
+Query.prototype.testArrayValueEquality = function (callback) {
   var datastore = this.datastore;
 
   // [START array_value_equality]
@@ -884,7 +875,7 @@ Query.prototype.testArrayValueEquality = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Query.prototype.testInequalityRange = function(callback) {
+Query.prototype.testInequalityRange = function (callback) {
   var datastore = this.datastore;
 
   // [START inequality_range]
@@ -896,7 +887,7 @@ Query.prototype.testInequalityRange = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Query.prototype.testInequalityInvalid = function(callback) {
+Query.prototype.testInequalityInvalid = function (callback) {
   var datastore = this.datastore;
 
   // [START inequality_invalid]
@@ -908,7 +899,7 @@ Query.prototype.testInequalityInvalid = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Query.prototype.testEqualAndInequalityRange = function(callback) {
+Query.prototype.testEqualAndInequalityRange = function (callback) {
   var datastore = this.datastore;
 
   // [START equal_and_inequality_range]
@@ -922,7 +913,7 @@ Query.prototype.testEqualAndInequalityRange = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Query.prototype.testInequalitySort = function(callback) {
+Query.prototype.testInequalitySort = function (callback) {
   var datastore = this.datastore;
 
   // [START inequality_sort]
@@ -935,7 +926,7 @@ Query.prototype.testInequalitySort = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Query.prototype.testInequalitySortInvalidNotSame = function(callback) {
+Query.prototype.testInequalitySortInvalidNotSame = function (callback) {
   var datastore = this.datastore;
 
   // [START inequality_sort_invalid_not_same]
@@ -947,7 +938,7 @@ Query.prototype.testInequalitySortInvalidNotSame = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Query.prototype.testInequalitySortInvalidNotFirst = function(callback) {
+Query.prototype.testInequalitySortInvalidNotFirst = function (callback) {
   var datastore = this.datastore;
 
   // [START inequality_sort_invalid_not_first]
@@ -960,7 +951,7 @@ Query.prototype.testInequalitySortInvalidNotFirst = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Query.prototype.testLimit = function(callback) {
+Query.prototype.testLimit = function (callback) {
   var datastore = this.datastore;
 
   // [START limit]
@@ -971,7 +962,7 @@ Query.prototype.testLimit = function(callback) {
   this.datastore.runQuery(query, callback);
 };
 
-Query.prototype.testCursorPaging = function(callback) {
+Query.prototype.testCursorPaging = function (callback) {
   var pageSize = 1;
   var pageCursor = '';
 
@@ -987,7 +978,7 @@ Query.prototype.testCursorPaging = function(callback) {
     .limit(pageSize)
     .start(pageCursor);
 
-  datastore.runQuery(query, function(err, results, nextQuery) {
+  datastore.runQuery(query, function (err, results, nextQuery) {
     if (err) {
       // An error occurred while running the query.
       return;
@@ -1003,11 +994,12 @@ Query.prototype.testCursorPaging = function(callback) {
     } else {
       // No more results exist.
     }
+    console.log('nextPageCursor', nextPageCursor);
   });
   // [END cursor_paging]
 
   delete datastore.createQuery;
-  this.datastore.runQuery(query, function(err, results, nextQuery) {
+  this.datastore.runQuery(query, function (err, results, nextQuery) {
     if (err) {
       callback(err);
       return;
@@ -1021,21 +1013,21 @@ Query.prototype.testCursorPaging = function(callback) {
   });
 };
 
-Query.prototype.testEventualConsistentQuery = function() {
+Query.prototype.testEventualConsistentQuery = function () {
   // [START eventual_consistent_query]
   // Read consistency cannot be specified in gcloud-node.
   // [END eventual_consistent_query]
 };
 
 // [START transactional_update]
-function transferFunds(fromKey, toKey, amount, callback) {
+function transferFunds (fromKey, toKey, amount, callback) {
   var error;
 
-  datastore.runInTransaction(function(transaction, done) {
+  datastore.runInTransaction(function (transaction, done) {
     transaction.get([
       fromKey,
       toKey
-    ], function(err, accounts) {
+    ], function (err, accounts) {
       if (err) {
         // An error occurred while getting the values.
         error = err;
@@ -1050,25 +1042,21 @@ function transferFunds(fromKey, toKey, amount, callback) {
 
       done();
     });
-  }, function(transactionError) {
+  }, function (transactionError) {
     if (transactionError || error) {
-      callback(transactionError || error);
-    } else {
-      // The transaction completed successfully.
-      callback();
+      return callback(transactionError || error);
     }
+    // The transaction completed successfully.
+    callback();
   });
 }
 // [END transactional_update]
 
-function Transaction(projectId) {
+function Transaction (projectId) {
   var options = {
     projectId: projectId
   };
 
-  if (keyFile) {
-    options.keyFilename = keyFile;
-  }
   this.datastore = gcloud.datastore(options);
 
   this.fromKey = this.datastore.key(['Bank', 1, 'Account', 1]);
@@ -1078,8 +1066,8 @@ function Transaction(projectId) {
   this.amountToTransfer = 10;
 }
 
-Transaction.prototype.restoreBankAccountBalances = function(config, callback) {
-  var saveArray = config.keys.map(function(key) {
+Transaction.prototype.restoreBankAccountBalances = function (config, callback) {
+  var saveArray = config.keys.map(function (key) {
     return {
       key: key,
       data: {
@@ -1091,7 +1079,7 @@ Transaction.prototype.restoreBankAccountBalances = function(config, callback) {
   this.datastore.save(saveArray, callback);
 };
 
-Transaction.prototype.testTransactionalUpdate = function(callback) {
+Transaction.prototype.testTransactionalUpdate = function (callback) {
   var self = this;
 
   var fromKey = this.fromKey;
@@ -1102,7 +1090,7 @@ Transaction.prototype.testTransactionalUpdate = function(callback) {
   this.restoreBankAccountBalances({
     keys: [fromKey, toKey],
     balance: originalBalance
-  }, function(err) {
+  }, function (err) {
     if (err) {
       callback(err);
       return;
@@ -1112,7 +1100,7 @@ Transaction.prototype.testTransactionalUpdate = function(callback) {
     var datastoreMock = datastore;
     datastore = self.datastore;
 
-    transferFunds(fromKey, toKey, amountToTransfer, function(err) {
+    transferFunds(fromKey, toKey, amountToTransfer, function (err) {
       // Restore `datastore` to the mock API.
       datastore = datastoreMock;
 
@@ -1124,7 +1112,7 @@ Transaction.prototype.testTransactionalUpdate = function(callback) {
       self.datastore.get([
         fromKey,
         toKey
-      ], function(err, accounts) {
+      ], function (err, accounts) {
         if (err) {
           callback(err);
           return;
@@ -1144,13 +1132,13 @@ Transaction.prototype.testTransactionalUpdate = function(callback) {
   });
 };
 
-Transaction.prototype.testTransactionalRetry = function(callback) {
+Transaction.prototype.testTransactionalRetry = function (callback) {
   // Overwrite so the real Datastore instance is used in `transferFunds`.
   var datastoreMock = datastore;
   datastore = this.datastore;
 
   var originalCallback = callback;
-  callback = function() {
+  callback = function () {
     // Restore `datastore` to the mock API.
     datastore = datastoreMock;
     originalCallback.apply(null, arguments);
@@ -1162,7 +1150,7 @@ Transaction.prototype.testTransactionalRetry = function(callback) {
   this.restoreBankAccountBalances({
     keys: [fromKey, toKey],
     balance: this.originalBalance
-  }, function(err) {
+  }, function (err) {
     if (err) {
       callback(err);
       return;
@@ -1171,7 +1159,7 @@ Transaction.prototype.testTransactionalRetry = function(callback) {
     // [START transactional_retry]
     var async = require('async');
 
-    function attemptTransfer(callback) {
+    function attemptTransfer (callback) {
       transferFunds(fromKey, toKey, 10, callback);
     }
 
@@ -1180,7 +1168,7 @@ Transaction.prototype.testTransactionalRetry = function(callback) {
   });
 };
 
-Transaction.prototype.testTransactionalGetOrCreate = function(callback) {
+Transaction.prototype.testTransactionalGetOrCreate = function (callback) {
   var taskKey = this.datastore.key(['Task', Date.now()]);
 
   // Overwrite so the real Datastore instance is used in `transferFunds`.
@@ -1188,14 +1176,14 @@ Transaction.prototype.testTransactionalGetOrCreate = function(callback) {
   datastore = this.datastore;
 
   var originalCallback = callback;
-  callback = function() {
+  callback = function () {
     // Restore `datastore` to the mock API.
     datastore = datastoreMock;
     originalCallback.apply(null, arguments);
   };
 
   // [START transactional_get_or_create]
-  function getOrCreate(taskKey, taskData, callback) {
+  function getOrCreate (taskKey, taskData, callback) {
     var error;
 
     var taskEntity = {
@@ -1203,8 +1191,8 @@ Transaction.prototype.testTransactionalGetOrCreate = function(callback) {
       data: taskData
     };
 
-    datastore.runInTransaction(function(transaction, done) {
-      transaction.get(taskKey, function(err, task) {
+    datastore.runInTransaction(function (transaction, done) {
+      transaction.get(taskKey, function (err, task) {
         if (err) {
           // An error occurred while getting the values.
           error = err;
@@ -1221,13 +1209,12 @@ Transaction.prototype.testTransactionalGetOrCreate = function(callback) {
           done();
         }
       });
-    }, function(transactionError) {
+    }, function (transactionError) {
       if (transactionError || error) {
-        callback(transactionError || error);
-      } else {
-        // The transaction completed successfully.
-        callback(null, taskEntity);
+        return callback(transactionError || error);
       }
+      // The transaction completed successfully.
+      callback(null, taskEntity);
     });
   }
   // [END transactional_get_or_create]
@@ -1239,58 +1226,56 @@ Transaction.prototype.testTransactionalGetOrCreate = function(callback) {
     testWithGetBehavior
   ], callback);
 
-  function testWithCreateBehavior(callback) {
-    getOrCreate(taskKey, {}, function(err, task) {
+  function testWithCreateBehavior (callback) {
+    getOrCreate(taskKey, {}, function (err, task) {
       if (err) {
         callback(err);
         return;
       }
 
       if (!task) {
-        callback(new Error('Entity was not created successfully.'));
-      } else {
-        callback();
+        return callback(new Error('Entity was not created successfully.'));
       }
+      callback();
     });
   }
 
-  function testWithGetBehavior(callback) {
-    getOrCreate(taskKey, {}, function(err, task) {
+  function testWithGetBehavior (callback) {
+    getOrCreate(taskKey, {}, function (err, task) {
       if (err) {
         callback(err);
         return;
       }
 
       if (!task) {
-        callback(new Error('Entity was not retrieved successfully.'));
-      } else {
-        callback();
+        return callback(new Error('Entity was not retrieved successfully.'));
       }
+      callback();
     });
   }
 };
 
-Transaction.prototype.testSingleEntityGroupReadOnly = function(callback) {
+Transaction.prototype.testSingleEntityGroupReadOnly = function (callback) {
   // Overwrite so the real Datastore instance is used in `transferFunds`.
   var datastoreMock = datastore;
   datastore = this.datastore;
 
   var originalCallback = callback;
-  callback = function() {
+  callback = function () {
     // Restore `datastore` to the mock API.
     datastore = datastoreMock;
     originalCallback.apply(null, arguments);
   };
 
   // [START transactional_single_entity_group_read_only]
-  function getTaskListEntities(callback) {
+  function getTaskListEntities (callback) {
     var error;
     var taskListEntities;
 
-    datastore.runInTransaction(function(transaction, done) {
+    datastore.runInTransaction(function (transaction, done) {
       var taskListKey = datastore.key(['TaskList', 'default']);
 
-      datastore.get(taskListKey, function(err) {
+      datastore.get(taskListKey, function (err) {
         if (err) {
           error = err;
           transaction.rollback(done);
@@ -1300,7 +1285,7 @@ Transaction.prototype.testSingleEntityGroupReadOnly = function(callback) {
         var query = datastore.createQuery('Task')
           .hasAncestor(taskListKey);
 
-        datastore.runQuery(query, function(err, entities) {
+        datastore.runQuery(query, function (err, entities) {
           if (err) {
             // An error occurred while running the query.
             error = err;
@@ -1312,28 +1297,25 @@ Transaction.prototype.testSingleEntityGroupReadOnly = function(callback) {
           done();
         });
       });
-
-    }, function(transactionError) {
+    }, function (transactionError) {
       if (transactionError || error) {
-        callback(transactionError || error);
-      } else {
-        // The transaction completed successfully.
-        callback(null, taskListEntities);
+        return callback(transactionError || error);
       }
+      // The transaction completed successfully.
+      callback(null, taskListEntities);
     });
   }
   // [END transactional_single_entity_group_read_only]
 
-  getTaskListEntities(function(err, entities) {
+  getTaskListEntities(function (err, entities) {
     if (err) {
       callback(err);
       return;
     }
 
     if (!entities) {
-      callback(new Error('Entities were not retrieved successfully.'));
-    } else {
-      callback();
+      return callback(new Error('Entities were not retrieved successfully.'));
     }
+    callback();
   });
 };
