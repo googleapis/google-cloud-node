@@ -8,12 +8,8 @@
   "engines": {
     "node": ">=0.10.x"
   },
-  "scripts": {
-    "error": "node error.js",
-    "tasks": "node tasks.js"
-  },
   "dependencies": {
     "async": "^1.5.2",
-    "gcloud": "^0.30.3"
+    "gcloud": "^0.34.0"
   }
 }
