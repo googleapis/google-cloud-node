@@ -12,6 +12,6 @@
     "subscription": "node subscription.js"
   },
   "dependencies": {
-    "gcloud": "^0.30.3"
+    "gcloud": "^0.34.0"
   }
 }

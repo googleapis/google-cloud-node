@@ -16,14 +16,11 @@
 var async = require('async');
 
 // [START auth]
-// You must set the GOOGLE_APPLICATION_CREDENTIALS and GCLOUD_PROJECT
-// environment variables to run this sample
-var projectId = process.env.GCLOUD_PROJECT;
-
-// Initialize gcloud
-var gcloud = require('gcloud')({
-  projectId: projectId
-});
+// By default, gcloud will authenticate using the service account file specified
+// by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use the
+// project specified by the GCLOUD_PROJECT environment variable. See
+// https://googlecloudplatform.github.io/gcloud-node/#/docs/guides/authentication
+var gcloud = require('gcloud');
 
 // Get a reference to the pubsub component
 var pubsub = gcloud.pubsub();
@@ -34,7 +31,7 @@ var pubsub = gcloud.pubsub();
  * @param {string} topicName Name for the new topic.
  * @param {Function} callback Callback function.
  */
-function createTopicExample(topicName, callback) {
+function createTopicExample (topicName, callback) {
   var topic = pubsub.topic(topicName);
 
   // Get the topic if it exists. Create it if it does not exist.
@@ -57,7 +54,7 @@ function createTopicExample(topicName, callback) {
  * @param {string} topicName Name of the topic to delete.
  * @param {Function} callback Callback function.
  */
-function deleteTopicExample(topicName, callback) {
+function deleteTopicExample (topicName, callback) {
   var topic = pubsub.topic(topicName);
 
   // Delete the topic
@@ -78,7 +75,7 @@ function deleteTopicExample(topicName, callback) {
  * @param {string} subscriptionName Name of the subscription to delete.
  * @param {Function} callback Callback function.
  */
-function deleteSubscriptionExample(subscriptionName, callback) {
+function deleteSubscriptionExample (subscriptionName, callback) {
   var subscription = pubsub.subscription(subscriptionName);
 
   // Delete the subscription
@@ -99,7 +96,7 @@ function deleteSubscriptionExample(subscriptionName, callback) {
  * @param {string} topicName Name of the topic to which to publish.
  * @param {Function} callback Callback function.
  */
-function publishExample(topicName, callback) {
+function publishExample (topicName, callback) {
   // Grab a reference to an existing topic
   var topic = pubsub.topic(topicName);
 
@@ -122,7 +119,7 @@ function publishExample(topicName, callback) {
  * @param {string} [pageToken] Page to retrieve.
  * @param {Function} callback Callback function.
  */
-function getAllTopicsExample(pageToken, callback) {
+function getAllTopicsExample (pageToken, callback) {
   if (typeof pageToken === 'function') {
     callback = pageToken;
     pageToken = undefined;
@@ -143,6 +140,9 @@ function getAllTopicsExample(pageToken, callback) {
     if (nextQuery) {
       // Grab the remaining pages of topics recursively
       return getAllTopicsExample(nextQuery.token, function (err, _topics) {
+        if (err) {
+          return callback(err);
+        }
         if (_topics) {
           topics = topics.concat(_topics);
         }
@@ -160,7 +160,7 @@ function getAllTopicsExample(pageToken, callback) {
  * @param {string} [pageToken] Page to retrieve.
  * @param {Function} callback Callback function.
  */
-function getAllSubscriptionsExample(pageToken, callback) {
+function getAllSubscriptionsExample (pageToken, callback) {
   if (typeof pageToken === 'function') {
     callback = pageToken;
     pageToken = undefined;
@@ -184,6 +184,9 @@ function getAllSubscriptionsExample(pageToken, callback) {
         return getAllSubscriptionsExample(
           nextQuery.token,
           function (err, _subscriptions) {
+            if (err) {
+              return callback(err);
+            }
             if (_subscriptions) {
               subscriptions = subscriptions.concat(_subscriptions);
             }
@@ -204,7 +207,7 @@ function getAllSubscriptionsExample(pageToken, callback) {
  * @param {string} subscriptionName Name for the new subscription.
  * @param {Function} callback Callback function.
  */
-function subscribeExample(topicName, subscriptionName, callback) {
+function subscribeExample (topicName, subscriptionName, callback) {
   var options = {
     reuseExisting: true
   };
@@ -214,8 +217,8 @@ function subscribeExample(topicName, subscriptionName, callback) {
     options,
     function (err, subscription, apiResponse) {
       if (err) {
-      return callback(err);
-    }
+        return callback(err);
+      }
 
       // Got the subscription
       console.log('Subscribed to ' + topicName);
@@ -226,7 +229,7 @@ function subscribeExample(topicName, subscriptionName, callback) {
 // [END create_subscription]
 
 // [START handle_message]
-function handleMessageExample(message) {
+function handleMessageExample (message) {
   console.log('received message: ' + message.data);
 }
 // [END handle_message]
@@ -235,7 +238,7 @@ function handleMessageExample(message) {
 /**
  *
  */
-function pullMessagesExample(topicName, subscriptionName, callback) {
+function pullMessagesExample (topicName, subscriptionName, callback) {
   // Use the "async" library to handle a chain of asynchronous functions
   async.waterfall([
     function (cb) {

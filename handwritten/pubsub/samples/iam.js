@@ -26,7 +26,7 @@ var pubsub = subscriptionSample.pubsub;
  * @param {string} topicName Name of the topic whose policy is to be retrieved.
  * @param {Function} callback Callback function.
  */
-function getTopicPolicyExample(topicName, callback) {
+function getTopicPolicyExample (topicName, callback) {
   // Grab a reference to an existing topic
   var topic = pubsub.topic(topicName);
 
@@ -49,7 +49,7 @@ function getTopicPolicyExample(topicName, callback) {
  * be retrieved.
  * @param {Function} callback Callback function.
  */
-function getSubscriptionPolicyExample(subscriptionName, callback) {
+function getSubscriptionPolicyExample (subscriptionName, callback) {
   // Grab a reference to an existing subscription
   var subscription = pubsub.subscription(subscriptionName);
 
@@ -70,7 +70,7 @@ function getSubscriptionPolicyExample(subscriptionName, callback) {
  * @param {string} topicName Name of the topic whose policy is to be updated.
  * @param {Function} callback Callback function.
  */
-function setTopicPolicyExample(topicName, callback) {
+function setTopicPolicyExample (topicName, callback) {
   // Grab a reference to an existing topic
   var topic = pubsub.topic(topicName);
 
@@ -102,7 +102,7 @@ function setTopicPolicyExample(topicName, callback) {
  * be updated.
  * @param {Function} callback Callback function.
  */
-function setSubscriptionPolicyExample(subscriptionName, callback) {
+function setSubscriptionPolicyExample (subscriptionName, callback) {
   // Grab a reference to an existing subscription
   var subscription = pubsub.subscription(subscriptionName);
 
@@ -133,7 +133,7 @@ function setSubscriptionPolicyExample(subscriptionName, callback) {
  * @param {string} topicName Name of the topic whose policy is to be tested.
  * @param {Function} callback Callback function.
  */
-function testTopicPermissionsExample(topicName, callback) {
+function testTopicPermissionsExample (topicName, callback) {
   // Grab a reference to an existing topic
   var topic = pubsub.topic(topicName);
 
@@ -161,7 +161,7 @@ function testTopicPermissionsExample(topicName, callback) {
  * be tested.
  * @param {Function} callback Callback function.
  */
-function testSubscriptionPermissionsExample(subscriptionName, callback) {
+function testSubscriptionPermissionsExample (subscriptionName, callback) {
   // Grab a reference to an existing subscription
   var subscription = pubsub.subscription(subscriptionName);
 
