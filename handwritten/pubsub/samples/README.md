@@ -23,3 +23,11 @@ Execute a sample:
 Example:
 
     npm run subscription
+
+- Subscriber/Publisher sample - [Source code][pubsub_subscriber_1] | [Documentation][pubsub_subscriber_2]
+- IAM sample - [Source code][pubsub_iam_1] | [Documentation][pubsub_iam_2]
+
+[pubsub_subscriber_1]: https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/master/pubsub/subscription.js
+[pubsub_subscriber_2]: https://cloud.google.com/pubsub/subscriber
+[pubsub_iam_1]: https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/master/pubsub/iam.js
+[pubsub_iam_2]: https://cloud.google.com/pubsub/access_control
