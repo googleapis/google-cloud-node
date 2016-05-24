@@ -33,3 +33,11 @@ set.
 
     npm run vms_api
 
+- Sendgrid sample - [Source code][compute_sendgrid_1] | [Documentation][compute_sendgrid_2]
+- VMs sample - [Source code][compute_vms_1] | [Documentation][compute_vms_2]
+
+[compute_sendgrid_1]: https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/master/computeengine/sendgrid.js
+[compute_sendgrid_2]: https://cloud.google.com/compute/docs/tutorials/sending-mail/using-sendgrid
+
+[compute_vms_1]: https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/master/computeengine/vms.js
+[compute_vms_2]: https://cloud.google.com/compute/docs/tutorials/nodejs-guide
