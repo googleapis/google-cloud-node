@@ -21,3 +21,8 @@ Install dependencies first:
 Execute the sample:
 
     node recognize "/path/to/audio.file"
+
+- Recognition sample - [Source code][speech_1] | [Documentation][speech_2]
+
+[speech_1]: https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/master/speech/recognize.js
+[speech_2]: https://cloud.google.com/speech
