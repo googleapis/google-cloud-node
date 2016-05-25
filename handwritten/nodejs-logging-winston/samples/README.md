@@ -32,40 +32,40 @@ Web Services.
 
 ### Reading logs
 
-View the [documentation][read_1] or the [source code][read_2].
+View the [documentation][read_docs] or the [source code][read_code].
 
 __Run the sample:__
 
     node list
 
-[read_1]: list.js
-[read_2]: https://cloud.google.com/logging/docs/api/tasks/authorization
+[read_docs]: https://cloud.google.com/logging/docs/api/tasks/authorization
+[read_code]: list.js
 
 ### Writing logs
 
-View the [documentation][write_1] or the [source code][write_2].
+View the [documentation][write_docs] or the [source code][write_code].
 
 __Run the sample:__
 
     node write
 
-[write_1]: write.js
-[write_2]: https://cloud.google.com/logging/docs/api/tasks/creating-logs
+[write_docs]: https://cloud.google.com/logging/docs/api/tasks/creating-logs
+[write_code]: write.js
 
 ### Exporting logs
 
-View the [documentation][export_1] or the [source code][export_2].
+View the [documentation][export_docs] or the [source code][export_code].
 
 __Run the sample:__
 
     node export
 
-[export_1]: export.js
-[export_2]: https://cloud.google.com/logging/docs/api/tasks/exporting-logs
+[export_docs]: https://cloud.google.com/logging/docs/api/tasks/exporting-logs
+[export_code]: export.js
 
 ### Error Reporting on Compute Engine
 
-View the [documentation][error_1] or the [source code][error_2].
+View the [documentation][error_docs] or the [source code][error_code].
 
-[error_1]: fluent.js
-[error_2]: https://cloud.google.com/error-reporting/docs/setup/compute-engine
+[error_docs]: https://cloud.google.com/error-reporting/docs/setup/compute-engine
+[error_code]: fluent.js
