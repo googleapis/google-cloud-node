@@ -29,7 +29,7 @@ automatic scaling, high performance, and ease of application development.
 
 ### Getting started with Google Cloud Datastore API
 
-View the [documentation][tasks_1] or the [source code][tasks_2].
+View the [documentation][tasks_docs] or the [source code][tasks_code].
 
 __Run the sample:__
 
@@ -43,23 +43,23 @@ Example:
 
     node tasks list
 
-[tasks_1]: tasks.js
-[tasks_2]: https://cloud.google.com/datastore/docs/datastore-api-tutorial
+[tasks_docs]: https://cloud.google.com/datastore/docs/datastore-api-tutorial
+[tasks_code]: tasks.js
 
 ### Concepts
 
-View the [documentation][concepts_1] or the [source code][concepts_2].
+View the [documentation][concepts_docs] or the [source code][concepts_code].
 
-[concepts_1]: concepts.js
-[concepts_2]: https://cloud.google.com/datastore/docs/concepts/entities
+[concepts_docs]: https://cloud.google.com/datastore/docs/concepts/entities
+[concepts_code]: concepts.js
 
 ### Errors and Error Handling
 
-View the [documentation][error_1] or the [source code][error_2].
+View the [documentation][error_docs] or the [source code][error_code].
 
 __Run the sample:__
 
     node error
 
-[error_1]: error.js
-[error_2]: https://cloud.google.com/datastore/docs/concepts/errors
+[error_docs]: https://cloud.google.com/datastore/docs/concepts/errors
+[error_code]: error.js
