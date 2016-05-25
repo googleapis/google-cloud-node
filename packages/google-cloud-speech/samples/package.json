@@ -8,9 +8,6 @@
   "engines": {
     "node": ">=0.10.x"
   },
-  "scripts": {
-    "recognize": "node recognize"
-  },
   "dependencies": {
     "googleapis": "^7.1.0"
   },

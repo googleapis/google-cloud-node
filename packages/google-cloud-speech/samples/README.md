@@ -1,28 +1,44 @@
-## Cloud Speech API samples
+<img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-These samples require two environment variables to be set:
+# Google Cloud Speech API Node.js Samples
 
-- `GOOGLE_APPLICATION_CREDENTIALS` - Path to a service account file. You can
-download one from your Google project's "credentials" page.
-- `GCLOUD_PROJECT` - ID of your Google project.
+[Sign up for the Alpha][speech_signup].
 
-See [gcloud-node authentication][auth] for more details.
+The [Cloud Speech API][speech_docs] enables easy integration of Google speech
+recognition technologies into developer applications.
 
-[auth]: https://googlecloudplatform.github.io/gcloud-node/#/docs/guides/authentication
+[speech_signup]: https://services.google.com/fb/forms/speech-api-alpha/
+[speech_docs]: https://cloud.google.com/speech/
 
-## Run a sample
+## Table of Contents
 
-Install dependencies first:
+* [Setup](#setup)
+* [Samples](#samples)
+  * [Recognition](#recognition)
 
-    npm install
+## Setup
 
-### Recognition sample
+1. Read [Prerequisites][prereq] and [How to run a sample][run] first.
+1. Install dependencies:
 
-Execute the sample:
+        npm install
+
+[prereq]: ../README.md#prerequisities
+[run]: ../README.md#how-to-run-a-sample
+
+## Samples
+
+### Recognition
+
+View the [documentation][recognition_1] or the [source code][recognition_2].
+
+__Run the sample:__
+
+Usage: `node recognize <path-to-audio-file>`
+
+Example:
 
     node recognize "/path/to/audio.file"
 
-- Recognition sample - [Source code][speech_1] | [Documentation][speech_2]
-
-[speech_1]: https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/master/speech/recognize.js
-[speech_2]: https://cloud.google.com/speech
+[recognition_1]: recognize.js
+[recognition_2]: https://cloud.google.com/speech/
