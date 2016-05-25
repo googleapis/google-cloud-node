@@ -8,12 +8,6 @@
   "engines": {
     "node": ">=0.10.x"
   },
-  "scripts": {
-    "sendgrid": "node sendgrid.js",
-    "mailjet": "node mailjet.js",
-    "vms": "node vms.js",
-    "vms_api": "node vms_api.js"
-  },
   "dependencies": {
     "gcloud": "^0.34.0",
     "googleapis": "^7.1.0",
