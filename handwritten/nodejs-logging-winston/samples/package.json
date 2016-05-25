@@ -8,11 +8,6 @@
   "engines": {
     "node": ">=0.10.x"
   },
-  "scripts": {
-    "list": "node list.js",
-    "write": "node write.js",
-    "export": "node export.js"
-  },
   "dependencies": {
     "async": "^1.5.2",
     "express": "^4.13.4",
