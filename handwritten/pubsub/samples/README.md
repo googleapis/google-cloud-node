@@ -28,22 +28,22 @@ allows you to send and receive messages between independent applications.
 
 ### Subscription
 
-View the [documentation][subscription_1] or the [source code][subscription_2].
+View the [documentation][subscription_docs] or the [source code][subscription_code].
 
 __Run the sample:__
 
     node subscription
 
-[subscription_1]: subscription.js
-[subscription_2]: https://cloud.google.com/pubsub/subscriber
+[subscription_docs]: https://cloud.google.com/pubsub/subscriber
+[subscription_code]: subscription.js
 
 ### IAM
 
-View the [documentation][iam_1] or the [source code][iam_2].
+View the [documentation][iam_docs] or the [source code][iam_code].
 
 __Run the sample:__
 
     node iam
 
-[iam_1]: subscription.js
-[iam_2]: https://cloud.google.com/pubsub/access_control
+[iam_docs]: https://cloud.google.com/pubsub/access_control
+[iam_code]: subscription.js
