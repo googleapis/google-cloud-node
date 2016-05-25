@@ -30,7 +30,7 @@ recognition technologies into developer applications.
 
 ### Recognition
 
-View the [documentation][recognition_1] or the [source code][recognition_2].
+View the [documentation][recognition_docs] or the [source code][recognition_code].
 
 __Run the sample:__
 
@@ -40,5 +40,5 @@ Example:
 
     node recognize "/path/to/audio.file"
 
-[recognition_1]: recognize.js
-[recognition_2]: https://cloud.google.com/speech/
+[recognition_docs]: https://cloud.google.com/speech/
+[recognition_code]: recognize.js
