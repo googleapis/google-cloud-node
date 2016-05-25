@@ -33,25 +33,25 @@ including Cassandra, Nginx, Apache Web Server, Elasticsearch and many others.
 `list_resources.js` is a command-line program to demonstrate connecting to the Google
 Monitoring API to retrieve API data.
 
-View the [documentation][list_1] or the [source code][list_2].
+View the [documentation][list_docs] or the [source code][list_code].
 
 __Run the sample:__
 
     node list_resources <your-project-id>
 
-[list_1]: list_resources.js
-[list_2]: https://cloud.google.com/monitoring/demos/#hello-world
+[list_docs]: https://cloud.google.com/monitoring/demos/#hello-world
+[list_code]: list_resources.js
 
 ### Custom metric
 
 `create_custom_metric.js` demonstrates how to create a custom metric, write a timeseries value to it,
 and read it back.
 
-View the [documentation][custom_1] or the [source code][custom_2].
+View the [documentation][custom_docs] or the [source code][custom_code].
 
 __Run the sample:__
 
     node create_custom_metric <your-project-id>
 
-[custom_1]: create_custom_metric.js
-[custom_2]: https://cloud.google.com/monitoring/demos/#custom_metrics
+[custom_docs]: https://cloud.google.com/monitoring/demos/#custom_metrics
+[custom_code]: create_custom_metric.js
