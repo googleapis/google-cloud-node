@@ -7,10 +7,6 @@
   "engines": {
     "node": ">=0.10.x"
   },
-  "scripts": {
-    "iam": "node iam.js",
-    "subscription": "node subscription.js"
-  },
   "dependencies": {
     "gcloud": "^0.34.0"
   }

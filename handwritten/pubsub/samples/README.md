@@ -1,33 +1,49 @@
-## Pub/Sub Samples
+<img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-These samples require two environment variables to be set:
+# Google Cloud Pub/Sub Node.js Samples
 
-- `GOOGLE_APPLICATION_CREDENTIALS` - Path to a service account file. You can
-download one from your Google project's "permissions" page.
-- `GCLOUD_PROJECT` - Id of your Google project.
+[Cloud Pub/Sub][pubsub_docs] is a fully-managed real-time messaging service that
+allows you to send and receive messages between independent applications.
 
-## Run a sample
+[pubsub_docs]: https://cloud.google.com/pubsub/docs/
 
-Install dependencies:
+## Table of Contents
 
-    npm install
+* [Setup](#setup)
+* [Samples](#samples)
+  * [Subscription](#subscription)
+  * [IAM](#iam)
 
-To print available commands:
+## Setup
 
-    npm run
+1. Read [Prerequisites][prereq] and [How to run a sample][run] first.
+1. Install dependencies:
 
-Execute a sample:
+        npm install
 
-    npm run <sample>
+[prereq]: ../README.md#prerequisities
+[run]: ../README.md#how-to-run-a-sample
 
-Example:
+## Samples
 
-    npm run subscription
+### Subscription
 
-- Subscriber/Publisher sample - [Source code][pubsub_subscriber_1] | [Documentation][pubsub_subscriber_2]
-- IAM sample - [Source code][pubsub_iam_1] | [Documentation][pubsub_iam_2]
+View the [documentation][subscription_1] or the [source code][subscription_2].
 
-[pubsub_subscriber_1]: https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/master/pubsub/subscription.js
-[pubsub_subscriber_2]: https://cloud.google.com/pubsub/subscriber
-[pubsub_iam_1]: https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/master/pubsub/iam.js
-[pubsub_iam_2]: https://cloud.google.com/pubsub/access_control
+__Run the sample:__
+
+    node subscription
+
+[subscription_1]: subscription.js
+[subscription_2]: https://cloud.google.com/pubsub/subscriber
+
+### IAM
+
+View the [documentation][iam_1] or the [source code][iam_2].
+
+__Run the sample:__
+
+    node iam
+
+[iam_1]: subscription.js
+[iam_2]: https://cloud.google.com/pubsub/access_control
