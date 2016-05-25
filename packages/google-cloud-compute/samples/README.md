@@ -30,7 +30,7 @@ Google infrastructure.
 
 ### Sending mail with Sendgrid
 
-View the [documentation][sendgrid_1] or the [source code][sendgrid_2].
+View the [documentation][sendgrid_docs] or the [source code][sendgrid_code].
 
 __Run the sample:__
 
@@ -44,12 +44,12 @@ __Run the sample:__
 
 1. Open http://localhost:8080 in your browser
 
-[sendgrid_1]: sendgrid.js
-[sendgrid_2]: https://cloud.google.com/compute/docs/tutorials/sending-mail/using-sendgrid
+[sendgrid_docs]: https://cloud.google.com/compute/docs/tutorials/sending-mail/using-sendgrid
+[sendgrid_code]: sendgrid.js
 
 ### Sending mail with Mailjet
 
-View the [documentation][mailjet_1] or the [source code][mailjet_2].
+View the [documentation][mailjet_docs] or the [source code][mailjet_code].
 
 __Run the sample:__
 
@@ -67,27 +67,27 @@ __Run the sample:__
 
 1. Open http://localhost:8080 in your browser
 
-[mailjet_1]: mailjet.js
-[mailjet_2]: https://cloud.google.com/compute/docs/tutorials/sending-mail/using-mailjet
+[mailjet_docs]: https://cloud.google.com/compute/docs/tutorials/sending-mail/using-mailjet
+[mailjet_code]: mailjet.js
 
 ### Listing instances (recommended)
 
-View the [documentation][vms_1] or the [source code][vms_2].
+View the [documentation][vms_docs] or the [source code][vms_code].
 
 __Run the sample:__
 
     node vms
 
-[vms_1]: vms.js
-[vms_2]: https://cloud.google.com/compute/docs/tutorials/nodejs-guide
+[vms_docs]: https://cloud.google.com/compute/docs/tutorials/nodejs-guide
+[vms_code]: vms.js
 
 ### Listing instances
 
-View the [documentation][vms_api_1] or the [source code][vms_api_2].
+View the [documentation][vms_api_docs] or the [source code][vms_api_code].
 
 __Run the sample:__
 
     node vms_api
 
-[vms_api_1]: vms_api.js
-[vms_api_2]: https://cloud.google.com/compute/docs/tutorials/nodejs-guide
+[vms_api_docs]: https://cloud.google.com/compute/docs/tutorials/nodejs-guide
+[vms_api_code]: vms_api.js
