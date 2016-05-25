@@ -1,22 +1,38 @@
-## Cloud Vision API samples
+<img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-These samples require two environment variables to be set:
+# Google Cloud Vision API Node.js Samples
 
-- `GOOGLE_APPLICATION_CREDENTIALS` - Path to a service account file. You can
-download one from your Google project's "credentials" page.
-- `GCLOUD_PROJECT` - ID of your Google project.
+The [Cloud Vision API][vision_docs] allows developers to easily integrate vision
+detection features within applications, including image labeling, face and
+landmark detection, optical character recognition (OCR), and tagging of explicit
+content.
 
-See [gcloud-node authentication][auth] for more details.
+[vision_docs]: https://cloud.google.com/vision/docs/
 
-[auth]: https://googlecloudplatform.github.io/gcloud-node/#/docs/guides/authentication
+## Table of Contents
 
-## Run a sample
+* [Setup](#setup)
+* [Samples](#samples)
+  * [Face detection](#face-detection)
+  * [Label detection](#label-detection)
+  * [Landmark detection](#landmark-detection)
+  * [Text detection](#text-detection)
 
-Install dependencies first:
+## Setup
 
-    npm install
+1. Read [Prerequisites][prereq] and [How to run a sample][run] first.
+1. Install dependencies:
 
-### Face detection sample
+        npm install
+
+[prereq]: ../README.md#prerequisities
+[run]: ../README.md#how-to-run-a-sample
+
+## Samples
+
+### Face detection
+
+View the [documentation][face_1] or the [source code][face_2].
 
 This sample uses [node-canvas](https://github.com/Automattic/node-canvas) to
 draw an output image. node-canvas depends on Cairo, which may require separate
@@ -25,39 +41,61 @@ details.
 
 [canvas-install]: https://github.com/Automattic/node-canvas#installation
 
-Execute the sample:
+__Run the sample:__
 
-    node faceDetection "/path/to/image.jpg"
+Usage: `node faceDetection <path-to-image-file>`
 
-### Label detection sample
+Example:
 
-Execute the sample:
+    node faceDetection "./resources/face.png"
 
-    node labelDetection "/path/to/image.jpg"
+[face_1]: faceDetection.js
+[face_2]: https://cloud.google.com/vision/docs/face-tutorial
 
-### Landmark detection sample
+### Label detection
 
-Execute the sample:
+View the [documentation][label_1] or the [source code][label_2].
+
+__Run the sample:__
+
+Usage: `node labelDetection <path-to-image-file>`
+
+Example:
+
+    node labelDetection "./resources/wakeupcat.jpg"
+
+[label_1]: labelDetection.js
+[label_2]: https://cloud.google.com/vision/docs/label-tutorial
+
+### Landmark detection
+
+View the [documentation][landmark_1] or the [source code][landmark_2].
+
+__Run the sample:__
+
+Usage: `node landmarkDetection <image-uri>`
+
+Example:
 
     node landmarkDetection "https://cloud-samples-tests.storage.googleapis.com/vision/water.jpg"
 
+[landmark_1]: landmarkDetection.js
+[landmark_2]: https://cloud.google.com/vision/docs/landmark-tutorial
+
 ### Text detection sample
 
-Execute the sample:
+View the [source code][text_2].
 
-    node textDetection analyze resources
+__Run the sample:__
+
+Usage: `node textDetection <command> [args]...`
+
+Analyze images:
+
+    node textDetection analyze "./resources/"
+
+Look up words:
+
     node textDetection lookup the sunbeams in
 
-- Face detection - [Source code][vision_1] | [Documentation][vision_2]
-- Label detection - [Source code][vision_3] | [Documentation][vision_4]
-- Landmark detection - [Source code][vision_5] | [Documentation][vision_6]
-- Text detection - [Source code][vision_7] | [Documentation][vision_8]
-
-[vision_1]: https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/master/vision/faceDetection.js
-[vision_2]: https://cloud.google.com/vision/docs/face-tutorial
-[vision_3]: https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/master/vision/labelDetection.js
-[vision_4]: https://cloud.google.com/vision/docs/label-tutorial
-[vision_5]: https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/master/vision/landmarkDetection.js
-[vision_6]: https://cloud.google.com/vision/docs/landmark-tutorial
-[vision_7]: https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/master/vision/textDetection.js
-[vision_8]: https://cloud.google.com/vision/docs/text-tutorial
+[text_1]: textDetection.js
