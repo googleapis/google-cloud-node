@@ -32,7 +32,7 @@ content.
 
 ### Face detection
 
-View the [documentation][face_1] or the [source code][face_2].
+View the [documentation][face_docs] or the [source code][face_code].
 
 This sample uses [node-canvas](https://github.com/Automattic/node-canvas) to
 draw an output image. node-canvas depends on Cairo, which may require separate
@@ -49,12 +49,12 @@ Example:
 
     node faceDetection "./resources/face.png"
 
-[face_1]: faceDetection.js
-[face_2]: https://cloud.google.com/vision/docs/face-tutorial
+[face_docs]: https://cloud.google.com/vision/docs/face-tutorial
+[face_code]: faceDetection.js
 
 ### Label detection
 
-View the [documentation][label_1] or the [source code][label_2].
+View the [documentation][label_docs] or the [source code][label_code].
 
 __Run the sample:__
 
@@ -64,12 +64,12 @@ Example:
 
     node labelDetection "./resources/wakeupcat.jpg"
 
-[label_1]: labelDetection.js
-[label_2]: https://cloud.google.com/vision/docs/label-tutorial
+[label_docs]: https://cloud.google.com/vision/docs/label-tutorial
+[label_code]: labelDetection.js
 
 ### Landmark detection
 
-View the [documentation][landmark_1] or the [source code][landmark_2].
+View the [documentation][landmark_docs] or the [source code][landmark_code].
 
 __Run the sample:__
 
@@ -79,12 +79,12 @@ Example:
 
     node landmarkDetection "https://cloud-samples-tests.storage.googleapis.com/vision/water.jpg"
 
-[landmark_1]: landmarkDetection.js
-[landmark_2]: https://cloud.google.com/vision/docs/landmark-tutorial
+[landmark_docs]: https://cloud.google.com/vision/docs/landmark-tutorial
+[landmark_code]: landmarkDetection.js
 
 ### Text detection sample
 
-View the [source code][text_2].
+View the [source code][text_code].
 
 __Run the sample:__
 
@@ -98,4 +98,4 @@ Look up words:
 
     node textDetection lookup the sunbeams in
 
-[text_1]: textDetection.js
+[text_code]: textDetection.js
