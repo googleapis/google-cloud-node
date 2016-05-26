@@ -690,48 +690,52 @@ describe('Datastore', function() {
       var key = datastore.key(['Company', 'Google']);
       var incompleteKey = datastore.key('Company');
 
-      datastore.runInTransaction(function(t, tDone) {
-        t.delete(deleteKey);
-
-        t.save([
-          {
-            key: key,
-            data: { rating: 10 }
-          },
-          {
-            key: incompleteKey,
-            data: { rating: 100 }
-          }
-        ]);
-
-        tDone();
+      datastore.save({
+        key: deleteKey,
+        data: {}
       }, function(err) {
         assert.ifError(err);
 
-        // Incomplete key should have been given an ID.
-        assert.strictEqual(incompleteKey.path.length, 2);
+        datastore.runInTransaction(function(t, tDone) {
+          t.delete(deleteKey);
 
-        async.parallel([
-          // The key queued for deletion should have been deleted.
-          function(done) {
-            datastore.get(deleteKey, function(err, entity) {
-              assert.ifError(err);
-              assert.strictEqual(typeof entity, 'undefined');
-              done();
-            });
-          },
+          t.save([
+            {
+              key: key,
+              data: { rating: 10 }
+            },
+            {
+              key: incompleteKey,
+              data: { rating: 100 }
+            }
+          ]);
 
-          // Data should have been updated on the key.
-          function(done) {
-            datastore.get(key, function(err, entity) {
-              assert.ifError(err);
-              assert.strictEqual(entity.data.rating, 10);
-              done();
-            });
-          }
-        ], function(err) {
+          tDone();
+        }, function(err) {
           assert.ifError(err);
-          datastore.delete([key, incompleteKey], done);
+
+          // Incomplete key should have been given an ID.
+          assert.strictEqual(incompleteKey.path.length, 2);
+
+          async.parallel([
+            // The key queued for deletion should have been deleted.
+            function(callback) {
+              datastore.get(deleteKey, function(err, entity) {
+                assert.ifError(err);
+                assert.strictEqual(typeof entity, 'undefined');
+                callback();
+              });
+            },
+
+            // Data should have been updated on the key.
+            function(callback) {
+              datastore.get(key, function(err, entity) {
+                assert.ifError(err);
+                assert.strictEqual(entity.data.rating, 10);
+                callback();
+              });
+            }
+          ], done);
         });
       });
     });

@@ -19,7 +19,6 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var entity = require('../../lib/datastore/entity.js');
-var extend = require('extend');
 var mockery = require('mockery-next');
 var util = require('../../lib/common/util.js');
 
@@ -334,9 +333,11 @@ describe('Transaction', function() {
       assert.equal(saveCalled, 1);
 
       assert.equal(args.length, 2);
+
+      // Save arguments must come first.
       assert.deepEqual(args, [
-        [deleteArg1, deleteArg2],
-        [saveArg1, saveArg2]
+        [saveArg1, saveArg2],
+        [deleteArg1, deleteArg2]
       ]);
     });
 
@@ -364,14 +365,29 @@ describe('Transaction', function() {
 
     it('should send the built request object', function(done) {
       transaction.requests_ = [
-        { a: 'b', c: 'd' },
-        { e: 'f', g: 'h' }
+        {
+          mutations: [
+            { a: 'b' },
+            { c: 'd' }
+          ]
+        },
+        {
+          mutations: [
+            { e: 'f' },
+            { g: 'h' }
+          ]
+        }
       ];
 
       transaction.request_ = function(protoOpts, reqOpts) {
-        var req1 = transaction.requests_[0];
-        var req2 = transaction.requests_[1];
-        assert.deepEqual(reqOpts, extend(req1, req2));
+        assert.deepEqual(reqOpts, {
+          mutations: [
+            { a: 'b' },
+            { c: 'd' },
+            { e: 'f' },
+            { g: 'h' }
+          ]
+        });
         done();
       };
 
