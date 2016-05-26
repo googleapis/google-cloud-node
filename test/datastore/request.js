@@ -21,30 +21,44 @@ var extend = require('extend');
 var is = require('is');
 var mockery = require('mockery-next');
 var stream = require('stream');
+var through = require('through2');
 
-var util = require('../../lib/common/util.js');
 var entity = require('../../lib/datastore/entity.js');
+var util = require('../../lib/common/util.js');
 var Query = require('../../lib/datastore/query.js');
 
-var entityOverrides = {};
-var fakeEntity;
-fakeEntity = Object.keys(entity).reduce(function(fakeEntity, methodName) {
-  fakeEntity[methodName] = function() {
-    var method = entityOverrides[methodName] || entity[methodName];
-    return method.apply(this, arguments);
-  };
-  return fakeEntity;
-}, {});
+var overrides = {};
 
-var utilOverrides = {};
-var fakeUtil;
-fakeUtil = Object.keys(util).reduce(function(fakeUtil, methodName) {
-  fakeUtil[methodName] = function() {
-    var method = utilOverrides[methodName] || util[methodName];
-    return method.apply(this, arguments);
-  };
-  return fakeUtil;
-}, {});
+function override(name, object) {
+  var cachedObject = extend({}, object);
+  overrides[name] = {};
+
+  Object.keys(object).forEach(function(methodName) {
+    if (typeof object[methodName] !== 'function') {
+      return;
+    }
+
+    object[methodName] = function() {
+      var args = arguments;
+
+      if (overrides[name][methodName]) {
+        return overrides[name][methodName].apply(this, args);
+      }
+
+      return cachedObject[methodName].apply(this, args);
+    };
+  });
+}
+
+function resetOverrides() {
+  overrides = Object.keys(overrides).reduce(function(acc, name) {
+    acc[name] = {};
+    return acc;
+  }, {});
+}
+
+override('entity', entity);
+override('util', util);
 
 function FakeQuery() {
   this.calledWith_ = arguments;
@@ -57,8 +71,8 @@ describe('Request', function() {
   var key;
 
   before(function() {
-    mockery.registerMock('../../lib/common/util.js', fakeUtil);
-    mockery.registerMock('../../lib/datastore/entity.js', fakeEntity);
+    mockery.registerMock('../../lib/common/util.js', util);
+    mockery.registerMock('../../lib/datastore/entity.js', entity);
     mockery.registerMock('../../lib/datastore/query.js', FakeQuery);
 
     mockery.enable({
@@ -70,6 +84,7 @@ describe('Request', function() {
   });
 
   after(function() {
+    resetOverrides();
     mockery.deregisterAll();
     mockery.disable();
   });
@@ -80,8 +95,7 @@ describe('Request', function() {
       path: ['Company', 123]
     });
     FakeQuery.prototype = new Query();
-    entityOverrides = {};
-    utilOverrides = {};
+    resetOverrides();
     request = new Request();
   });
 
@@ -198,6 +212,20 @@ describe('Request', function() {
   describe('get', function() {
     beforeEach(function() {
       request.request_ = function() {};
+
+      overrides.util.createLimiter = function(makeRequest) {
+        var transformStream = new stream.Transform({ objectMode: true });
+        transformStream.destroy = through.obj().destroy.bind(transformStream);
+
+        setImmediate(function() {
+          transformStream.emit('reading');
+        });
+
+        return {
+          makeRequest: makeRequest,
+          stream: transformStream
+        };
+      };
     });
 
     it('should throw if no keys are provided', function() {
@@ -211,12 +239,29 @@ describe('Request', function() {
     });
 
     it('should convert key to key proto', function(done) {
-      entityOverrides.keyToKeyProto = function(key_) {
+      overrides.entity.keyToKeyProto = function(key_) {
         assert.strictEqual(key_, key);
         done();
       };
 
       request.get(key, assert.ifError);
+    });
+
+    it('should create a limiter', function(done) {
+      var options = {};
+
+      overrides.util.createLimiter = function(makeRequest, options_) {
+        assert.strictEqual(options_, options);
+
+        setImmediate(done);
+
+        return {
+          makeRequest: makeRequest,
+          stream: through()
+        };
+      };
+
+      request.get(key, options, assert.ifError);
     });
 
     it('should make correct request', function(done) {
@@ -274,6 +319,7 @@ describe('Request', function() {
       describe('stream mode', function() {
         it('should emit error', function(done) {
           request.get(key)
+            .on('data', util.noop)
             .on('error', function(err) {
               assert.strictEqual(err, error);
               done();
@@ -283,12 +329,14 @@ describe('Request', function() {
         it('should end stream', function(done) {
           var stream = request.get(key);
 
-          stream.on('error', function() {
-            setImmediate(function() {
-              assert.strictEqual(stream._destroyed, true);
-              done();
+          stream
+            .on('data', util.noop)
+            .on('error', function() {
+              setImmediate(function() {
+                assert.strictEqual(stream._destroyed, true);
+                done();
+              });
             });
-          });
         });
       });
     });
@@ -362,7 +410,7 @@ describe('Request', function() {
       });
 
       it('should format the results', function(done) {
-        entityOverrides.formatArray = function(arr) {
+        overrides.entity.formatArray = function(arr) {
           assert.strictEqual(arr, apiResponse.found);
           setImmediate(done);
           return arr;
@@ -372,19 +420,24 @@ describe('Request', function() {
       });
 
       it('should continue looking for deferred results', function(done) {
+        var numTimesCalled = 0;
+
         request.request_ = function(protoOpts, reqOpts, callback) {
-          callback(null, apiResponseWithDeferred);
-        };
+          numTimesCalled++;
 
-        request.get(key, assert.ifError);
+          if (numTimesCalled === 1) {
+            callback(null, apiResponseWithDeferred);
+            return;
+          }
 
-        request.get = function(keys) {
           var expectedKeys = apiResponseWithDeferred.deferred
             .map(entity.keyFromKeyProto);
 
-          assert.deepEqual(keys, expectedKeys);
+          assert.deepEqual(reqOpts.keys, expectedKeys);
           done();
         };
+
+        request.get(key, assert.ifError);
       });
 
       describe('callback mode', function() {
@@ -413,13 +466,23 @@ describe('Request', function() {
       });
 
       describe('stream mode', function() {
+        beforeEach(function() {
+          overrides.util.createLimiter = function(makeRequest) {
+            return {
+              makeRequest: makeRequest,
+              stream: new stream.Transform({ objectMode: true })
+            };
+          };
+        });
+
         it('should push results to the stream', function(done) {
           request.get(key)
             .on('error', done)
             .on('data', function(entity) {
               assert.deepEqual(entity, expectedResult);
             })
-            .on('end', done);
+            .on('end', done)
+            .emit('reading');
         });
 
         it('should not push more results if stream was ended', function(done) {
@@ -439,7 +502,8 @@ describe('Request', function() {
             .on('end', function() {
               assert.strictEqual(entitiesEmitted, 1);
               done();
-            });
+            })
+            .emit('reading');
         });
 
         it('should not get more results if stream was ended', function(done) {
@@ -460,7 +524,8 @@ describe('Request', function() {
             .on('end', function() {
               assert.strictEqual(lookupCount, 1);
               done();
-            });
+            })
+            .emit('reading');
         });
       });
     });
@@ -489,19 +554,50 @@ describe('Request', function() {
 
   describe('runQuery', function() {
     beforeEach(function() {
-      entityOverrides.queryToQueryProto = util.noop;
+      overrides.entity.queryToQueryProto = util.noop;
       request.request_ = util.noop;
+
+      overrides.util.createLimiter = function(makeRequest) {
+        var transformStream = new stream.Transform({ objectMode: true });
+        transformStream.destroy = through.obj().destroy.bind(transformStream);
+
+        setImmediate(function() {
+          transformStream.emit('reading');
+        });
+
+        return {
+          makeRequest: makeRequest,
+          stream: transformStream
+        };
+      };
     });
 
     it('should return a stream if no callback is provided', function() {
       assert(request.runQuery({}) instanceof stream);
     });
 
+    it('should create a limiter', function(done) {
+      var options = {};
+
+      overrides.util.createLimiter = function(makeRequest, options_) {
+        assert.strictEqual(options_, options);
+
+        setImmediate(done);
+
+        return {
+          makeRequest: makeRequest,
+          stream: through()
+        };
+      };
+
+      request.runQuery({}, options, assert.ifError);
+    });
+
     it('should make correct request', function(done) {
       var query = { namespace: 'namespace' };
       var queryProto = {};
 
-      entityOverrides.queryToQueryProto = function(query_) {
+      overrides.entity.queryToQueryProto = function(query_) {
         assert.strictEqual(query_, query);
         return queryProto;
       };
@@ -582,13 +678,13 @@ describe('Request', function() {
           callback(null, apiResponse);
         };
 
-        entityOverrides.formatArray = function(array) {
+        overrides.entity.formatArray = function(array) {
           return array;
         };
       });
 
       it('should format results', function(done) {
-        entityOverrides.formatArray = function(array) {
+        overrides.entity.formatArray = function(array) {
           assert.strictEqual(array, apiResponse.batch.entityResults);
           return array;
         };
@@ -616,7 +712,7 @@ describe('Request', function() {
         var startCalled = false;
         var offsetCalled = false;
 
-        entityOverrides.formatArray = function(array) {
+        overrides.entity.formatArray = function(array) {
           assert.strictEqual(
             array,
             entityResultsPerApiCall[timesRequestCalled]
@@ -675,7 +771,7 @@ describe('Request', function() {
           return this;
         };
 
-        entityOverrides.queryToQueryProto = function(query_) {
+        overrides.entity.queryToQueryProto = function(query_) {
           if (timesRequestCalled > 1) {
             assert.strictEqual(query_, continuationQuery);
           }
@@ -721,7 +817,7 @@ describe('Request', function() {
           callback(null, { batch: batch });
         };
 
-        entityOverrides.queryToQueryProto = function() {
+        overrides.entity.queryToQueryProto = function() {
           return {};
         };
 
@@ -1007,7 +1103,7 @@ describe('Request', function() {
         callback(null, response);
       };
 
-      entityOverrides.keyFromKeyProto = function(keyProto) {
+      overrides.entity.keyFromKeyProto = function(keyProto) {
         keyProtos.push(keyProto);
         return {
           id: ids[keyProtos.length - 1]

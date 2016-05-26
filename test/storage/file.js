@@ -2256,7 +2256,7 @@ describe('File', function() {
         dup.on('complete', done);
 
         resumableUploadOverride = function() {
-          var uploadStream = through();
+          var uploadStream = new stream.Transform();
           setImmediate(function() {
             uploadStream.end();
           });
