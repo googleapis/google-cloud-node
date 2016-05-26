@@ -311,6 +311,40 @@ describe('Vision', function() {
       async.each(shortNames, checkConfig, done);
     });
 
+    it('should allow setting imageContext', function(done) {
+      var imageContext = {
+        latLongRect: {
+          minLatLng: {
+            latitude: 37.420901,
+            longitude: -122.081293
+          },
+          maxLatLng: {
+            latitude: 37.423228,
+            longitude: -122.086347
+          }
+        }
+      };
+
+      vision.annotate = function(config) {
+        assert.deepEqual(config, [
+          {
+            image: IMAGES[0],
+            features: {
+              type: 'LABEL_DETECTION'
+            },
+            imageContext: imageContext
+          }
+        ]);
+
+        done();
+      };
+
+      vision.detect(IMAGE, {
+        types: ['label'],
+        imageContext: imageContext
+      }, assert.ifError);
+    });
+
     it('should allow setting maxResults', function(done) {
       var maxResults = 10;
 
