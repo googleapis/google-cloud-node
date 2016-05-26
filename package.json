@@ -106,6 +106,7 @@
     "grpc": "^0.14.1",
     "hash-stream-validation": "^0.1.0",
     "is": "^3.0.1",
+    "lodash.flatten": "^4.2.0",
     "methmeth": "^1.0.0",
     "mime-types": "^2.0.8",
     "modelo": "^4.2.0",
