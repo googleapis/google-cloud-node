@@ -333,9 +333,11 @@ describe('Transaction', function() {
       assert.equal(saveCalled, 1);
 
       assert.equal(args.length, 2);
+
+      // Save arguments must come first.
       assert.deepEqual(args, [
-        [deleteArg1, deleteArg2],
-        [saveArg1, saveArg2]
+        [saveArg1, saveArg2],
+        [deleteArg1, deleteArg2]
       ]);
     });
 
