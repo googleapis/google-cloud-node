@@ -144,7 +144,7 @@
   "scripts": {
     "docs": "node ./scripts/docs.js",
     "lint": "jshint lib/ system-test/ test/ && jscs lib/ system-test/ test/",
-    "test": "npm run docs && mocha test/*/*.js test/index.js test/docs.js",
+    "test": "npm run docs && mocha test/docs.js test/index.js test/*/*.js",
     "system-test": "mocha system-test/*.js --no-timeouts --bail",
     "coveralls": "istanbul cover _mocha --report lcovonly -- --no-timeouts --bail test/**/*.js -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
