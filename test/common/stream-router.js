@@ -215,6 +215,7 @@ describe('streamRouter', function() {
       var parsedArguments = streamRouter.parseArguments_(args);
 
       assert.strictEqual(parsedArguments.maxApiCalls, args[0].maxApiCalls);
+      assert.strictEqual(parsedArguments.query.maxApiCalls, undefined);
     });
 
     it('should set maxResults from query.maxResults', function() {
