@@ -98,6 +98,31 @@ describe('BigQuery', function() {
     });
   });
 
+  it('should allow limiting API calls', function(done) {
+    var maxApiCalls = 1;
+    var numRequestsMade = 0;
+
+    var bigquery = gcloud.bigquery();
+
+    bigquery.interceptors.push({
+      request: function(reqOpts) {
+        numRequestsMade++;
+        return reqOpts;
+      }
+    });
+
+    bigquery.getDatasets({ maxApiCalls: maxApiCalls }, function(err) {
+      assert.ifError(err);
+
+      // Even though the request interceptor is called, the request can still be
+      // prevented if the `maxApiCalls` limit was reached.
+      numRequestsMade -= 1;
+
+      assert.strictEqual(numRequestsMade, 1);
+      done();
+    });
+  });
+
   it('should list datasets as a stream', function(done) {
     var datasetEmitted = false;
 
