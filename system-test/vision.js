@@ -82,6 +82,10 @@ describe('Vision', function() {
       vision.detect(IMAGES.malformed, TYPES, function(err, detections) {
         assert.ifError(err);
 
+        assert.deepEqual(detections.faces, []);
+        assert.deepEqual(detections.labels, []);
+        assert.deepEqual(detections.safeSearch, {});
+
         assert(is.array(detections.errors));
         assert.strictEqual(detections.errors.length, TYPES.length);
 
