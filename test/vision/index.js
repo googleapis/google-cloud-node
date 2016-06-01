@@ -537,51 +537,53 @@ describe('Vision', function() {
     });
 
     it('should return the correct detections for multiple img', function(done) {
+      var anno = {};
+
       var annotations = [
         // Image 1 annotations:
         {
-          faceAnnotations: {}
+          faceAnnotations: anno
         },
         {
-          imagePropertiesAnnotation: {}
+          imagePropertiesAnnotation: anno
         },
         {
-          labelAnnotations: {}
+          labelAnnotations: anno
         },
         {
-          landmarkAnnotations: {}
+          landmarkAnnotations: anno
         },
         {
-          logoAnnotations: {}
+          logoAnnotations: anno
         },
         {
-          safeSearchAnnotation: {}
+          safeSearchAnnotation: anno
         },
         {
-          textAnnotations: {}
+          textAnnotations: anno
         },
 
         // Image 2 annotations:
         {
-          faceAnnotations: {}
+          faceAnnotations: anno
         },
         {
-          imagePropertiesAnnotation: {}
+          imagePropertiesAnnotation: anno
         },
         {
-          labelAnnotations: {}
+          labelAnnotations: anno
         },
         {
-          landmarkAnnotations: {}
+          landmarkAnnotations: anno
         },
         {
-          logoAnnotations: {}
+          logoAnnotations: anno
         },
         {
-          safeSearchAnnotation: {}
+          safeSearchAnnotation: anno
         },
         {
-          textAnnotations: {}
+          textAnnotations: anno
         }
       ];
 
@@ -590,19 +592,23 @@ describe('Vision', function() {
       var entityAnnotation = {};
       var safeSearchAnnotation = {};
 
-      Vision.formatFaceAnnotation_ = function() {
+      Vision.formatFaceAnnotation_ = function(anno_) {
+        assert.strictEqual(anno_, anno);
         return faceAnnotation;
       };
 
-      Vision.formatImagePropertiesAnnotation_ = function() {
+      Vision.formatImagePropertiesAnnotation_ = function(anno_) {
+        assert.strictEqual(anno_, anno);
         return imagePropertiesAnnotation;
       };
 
-      Vision.formatEntityAnnotation_ = function() {
+      Vision.formatEntityAnnotation_ = function(anno_) {
+        assert.strictEqual(anno_, anno);
         return entityAnnotation;
       };
 
-      Vision.formatSafeSearchAnnotation_ = function() {
+      Vision.formatSafeSearchAnnotation_ = function(anno_) {
+        assert.strictEqual(anno_, anno);
         return safeSearchAnnotation;
       };
 
