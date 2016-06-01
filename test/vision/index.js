@@ -537,7 +537,7 @@ describe('Vision', function() {
     });
 
     it('should return the correct detections for multiple img', function(done) {
-      var anno = {};
+      var anno = { a: 'b', c: 'd' };
 
       var annotations = [
         // Image 1 annotations:
