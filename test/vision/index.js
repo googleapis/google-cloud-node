@@ -531,7 +531,12 @@ describe('Vision', function() {
 
       vision.detect(IMAGE, ['face'], function(err, detection) {
         assert.ifError(err);
-        assert.deepEqual(detection, []);
+
+        var expected = [];
+        expected.errors = [];
+
+        assert.deepEqual(detection, expected);
+
         done();
       });
     });
