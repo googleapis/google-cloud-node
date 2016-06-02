@@ -18,42 +18,72 @@
 
 var assert = require('assert');
 var extend = require('extend');
+var mockery = require('mockery-next');
+var stream = require('stream');
 var through = require('through2');
-var util = require('../../lib/common/util.js');
 var uuid = require('node-uuid');
 
-describe('streamRouter', function() {
-  var streamRouter;
-  var streamRouterOverrides = {};
+var streamRouter = require('../../lib/common/stream-router.js');
+var util = require('../../lib/common/util.js');
 
+var overrides = {};
+
+function override(name, object) {
+  var cachedObject = extend({}, object);
+  overrides[name] = {};
+
+  Object.keys(object).forEach(function(methodName) {
+    if (typeof object[methodName] !== 'function') {
+      return;
+    }
+
+    object[methodName] = function() {
+      var args = arguments;
+
+      if (overrides[name][methodName]) {
+        return overrides[name][methodName].apply(this, args);
+      }
+
+      return cachedObject[methodName].apply(this, args);
+    };
+  });
+}
+
+function resetOverrides() {
+  overrides = Object.keys(overrides).reduce(function(acc, name) {
+    acc[name] = {};
+    return acc;
+  }, {});
+}
+
+override('util', util);
+
+describe('streamRouter', function() {
   var UUID = uuid.v1();
 
   function FakeClass() {}
 
   before(function() {
-    streamRouter = require('../../lib/common/stream-router.js');
-    var streamRouterCached = extend(true, {}, streamRouter);
+    mockery.registerMock('../../lib/common/util.js', util);
 
-    Object.keys(streamRouter).forEach(function(streamRouterMethod) {
-      if (typeof streamRouter[streamRouterMethod] !== 'function') {
-        return;
-      }
-
-      streamRouter[streamRouterMethod] = function() {
-        var args = arguments;
-
-        if (streamRouterOverrides[streamRouterMethod]) {
-          return streamRouterOverrides[streamRouterMethod].apply(this, args);
-        }
-
-        return streamRouterCached[streamRouterMethod].apply(this, args);
-      };
+    mockery.enable({
+      useCleanCache: true,
+      warnOnUnregistered: false
     });
+
+    streamRouter = require('../../lib/common/stream-router.js');
+    override('streamRouter', streamRouter);
   });
 
   beforeEach(function() {
     FakeClass.prototype = { methodToExtend: function() { return UUID; } };
-    streamRouterOverrides = {};
+    resetOverrides();
+  });
+
+  after(function() {
+    resetOverrides();
+    mockery.deregisterAll();
+    mockery.disable();
   });
 
   describe('extend', function() {
@@ -79,12 +109,12 @@ describe('streamRouter', function() {
     });
 
     it('should parse the arguments', function(done) {
-      streamRouterOverrides.parseArguments_ = function(args) {
+      overrides.streamRouter.parseArguments_ = function(args) {
         assert.deepEqual([].slice.call(args), [1, 2, 3]);
         done();
       };
 
-      streamRouterOverrides.router_ = util.noop;
+      overrides.streamRouter.router_ = util.noop;
 
       streamRouter.extend(FakeClass, 'methodToExtend');
       FakeClass.prototype.methodToExtend(1, 2, 3);
@@ -94,11 +124,11 @@ describe('streamRouter', function() {
       var expectedReturnValue = FakeClass.prototype.methodToExtend();
       var parsedArguments = { a: 'b', c: 'd' };
 
-      streamRouterOverrides.parseArguments_ = function() {
+      overrides.streamRouter.parseArguments_ = function() {
         return parsedArguments;
       };
 
-      streamRouterOverrides.router_ = function(args, originalMethod) {
+      overrides.streamRouter.router_ = function(args, originalMethod) {
         assert.strictEqual(args, parsedArguments);
         assert.equal(originalMethod(), expectedReturnValue);
         done();
@@ -114,7 +144,7 @@ describe('streamRouter', function() {
       var cls = new FakeClass();
       cls.uuid = uuid.v1();
 
-      streamRouterOverrides.router_ = function(args, originalMethod) {
+      overrides.streamRouter.router_ = function(args, originalMethod) {
         assert.equal(originalMethod(), cls.uuid);
         done();
       };
@@ -125,7 +155,7 @@ describe('streamRouter', function() {
 
     it('should return what the router returns', function() {
       var uniqueValue = 234;
-      streamRouterOverrides.router_ = function() {
+      overrides.streamRouter.router_ = function() {
         return uniqueValue;
       };
 
@@ -139,9 +169,10 @@ describe('streamRouter', function() {
       var parsedArguments = streamRouter.parseArguments_([]);
 
       assert.strictEqual(Object.keys(parsedArguments.query).length, 0);
-      assert.strictEqual(parsedArguments.callback, undefined);
-      assert.strictEqual(parsedArguments.maxResults, -1);
       assert.strictEqual(parsedArguments.autoPaginate, true);
+      assert.strictEqual(parsedArguments.maxApiCalls, -1);
+      assert.strictEqual(parsedArguments.maxResults, -1);
+      assert.strictEqual(parsedArguments.callback, undefined);
     });
 
     it('should detect a callback if first argument is a function', function() {
@@ -179,6 +210,14 @@ describe('streamRouter', function() {
       assert.strictEqual(parsedArguments.callback, undefined);
     });
 
+    it('should set maxApiCalls from query.maxApiCalls', function() {
+      var args = [ { maxApiCalls: 10 } ];
+      var parsedArguments = streamRouter.parseArguments_(args);
+
+      assert.strictEqual(parsedArguments.maxApiCalls, args[0].maxApiCalls);
+      assert.strictEqual(parsedArguments.query.maxApiCalls, undefined);
+    });
+
     it('should set maxResults from query.maxResults', function() {
       var args = [ { maxResults: 10 } ];
       var parsedArguments = streamRouter.parseArguments_(args);
@@ -210,7 +249,7 @@ describe('streamRouter', function() {
 
   describe('router_', function() {
     beforeEach(function() {
-      streamRouterOverrides.runAsStream_ = util.noop;
+      overrides.streamRouter.runAsStream_ = util.noop;
     });
 
     describe('callback mode', function() {
@@ -221,7 +260,7 @@ describe('streamRouter', function() {
             callback: util.noop
           };
 
-          streamRouterOverrides.runAsStream_ = function(args, originalMethod) {
+          overrides.streamRouter.runAsStream_ = function(args, originalMethod) {
             assert.strictEqual(args, parsedArguments);
             originalMethod();
             return through();
@@ -241,7 +280,7 @@ describe('streamRouter', function() {
             }
           };
 
-          streamRouterOverrides.runAsStream_ = function() {
+          overrides.streamRouter.runAsStream_ = function() {
             var stream = through();
             setImmediate(function() {
               stream.emit('error', error);
@@ -263,7 +302,7 @@ describe('streamRouter', function() {
             }
           };
 
-          streamRouterOverrides.runAsStream_ = function() {
+          overrides.streamRouter.runAsStream_ = function() {
             var stream = through();
 
             setImmediate(function() {
@@ -307,7 +346,7 @@ describe('streamRouter', function() {
           query: { a: 'b', c: 'd' }
         };
 
-        streamRouterOverrides.runAsStream_ = function(args, originalMethod) {
+        overrides.streamRouter.runAsStream_ = function(args, originalMethod) {
           assert.deepEqual(args, parsedArguments);
           originalMethod();
         };
@@ -322,7 +361,7 @@ describe('streamRouter', function() {
 
         var stream = through();
 
-        streamRouterOverrides.runAsStream_ = function() {
+        overrides.streamRouter.runAsStream_ = function() {
           return stream;
         };
 
@@ -333,149 +372,178 @@ describe('streamRouter', function() {
   });
 
   describe('runAsStream_', function() {
-    describe('stream mode', function() {
-      var PARSED_ARGUMENTS = {
-        query: {
-          a: 'b', c: 'd'
-        }
+    var PARSED_ARGUMENTS = {
+      query: {
+        a: 'b', c: 'd'
+      }
+    };
+
+    beforeEach(function() {
+      overrides.util.createLimiter = function(makeRequest) {
+        var transformStream = new stream.Transform({ objectMode: true });
+        transformStream.destroy = through.obj().destroy.bind(transformStream);
+
+        setImmediate(function() {
+          transformStream.emit('reading');
+        });
+
+        return {
+          makeRequest: makeRequest,
+          stream: transformStream
+        };
       };
+    });
 
-      it('should call original method when stream opens', function(done) {
-        function originalMethod(query) {
-          assert.strictEqual(query, PARSED_ARGUMENTS.query);
-          done();
-        }
+    it('should call original method when stream opens', function(done) {
+      function originalMethod(query) {
+        assert.strictEqual(query, PARSED_ARGUMENTS.query);
+        done();
+      }
 
-        var rs = streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
-        rs.on('data', util.noop); // Trigger the underlying `_read` event.
-      });
+      streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
+    });
 
-      it('should emit an error if one occurs', function(done) {
-        var error = new Error('Error.');
+    it('should emit an error if one occurs', function(done) {
+      var error = new Error('Error.');
 
-        function originalMethod(query, callback) {
-          setImmediate(function() {
-            callback(error);
-          });
-        }
-
-        var rs = streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
-        rs.on('data', util.noop); // Trigger the underlying `_read` event.
-        rs.on('error', function(err) {
-          assert.deepEqual(err, error);
-          done();
+      function originalMethod(query, callback) {
+        setImmediate(function() {
+          callback(error);
         });
+      }
+
+      var rs = streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
+      rs.on('error', function(err) {
+        assert.deepEqual(err, error);
+        done();
       });
+    });
 
-      it('should push results onto the stream', function(done) {
-        var results = ['a', 'b', 'c'];
-        var resultsReceived = [];
+    it('should push results onto the stream', function(done) {
+      var results = ['a', 'b', 'c'];
+      var resultsReceived = [];
 
-        function originalMethod(query, callback) {
-          setImmediate(function() {
-            callback(null, results);
-          });
-        }
-
-        var rs = streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
-        rs.on('data', function(result) {
-          resultsReceived.push(result);
+      function originalMethod(query, callback) {
+        setImmediate(function() {
+          callback(null, results);
         });
-        rs.on('end', function() {
-          assert.deepEqual(resultsReceived, ['a', 'b', 'c']);
-          done();
-        });
+      }
+
+      var rs = streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
+      rs.on('data', function(result) {
+        resultsReceived.push(result);
       });
-
-      describe('limits', function() {
-        var limit = 1;
-
-        function originalMethod(query, callback) {
-          setImmediate(function() {
-            callback(null, [1, 2, 3]);
-          });
-        }
-
-        it('should respect maxResults', function(done) {
-          var numResultsReceived = 0;
-
-          streamRouter.runAsStream_({ maxResults: limit }, originalMethod)
-            .on('data', function() { numResultsReceived++; })
-            .on('end', function() {
-              assert.strictEqual(numResultsReceived, limit);
-              done();
-            });
-        });
+      rs.on('end', function() {
+        assert.deepEqual(resultsReceived, ['a', 'b', 'c']);
+        done();
       });
+    });
 
-      it('should get more results if nextQuery exists', function(done) {
-        var nextQuery = { a: 'b', c: 'd' };
-        var nextQuerySent = false;
+    describe('maxApiCalls', function() {
+      var maxApiCalls = 10;
 
-        function originalMethod(query, callback) {
-          if (nextQuerySent) {
-            assert.deepEqual(query, nextQuery);
+      it('should create a limiter', function(done) {
+        overrides.util.createLimiter = function(makeRequest, options) {
+          assert.strictEqual(options.maxApiCalls, maxApiCalls);
+
+          setImmediate(done);
+
+          return {
+            stream: through.obj()
+          };
+        };
+
+        streamRouter.runAsStream_({ maxApiCalls: maxApiCalls }, util.noop);
+      });
+    });
+
+    describe('limits', function() {
+      var limit = 1;
+
+      function originalMethod(query, callback) {
+        setImmediate(function() {
+          callback(null, [1, 2, 3]);
+        });
+      }
+
+      it('should respect maxResults', function(done) {
+        var numResultsReceived = 0;
+
+        streamRouter.runAsStream_({ maxResults: limit }, originalMethod)
+          .on('data', function() { numResultsReceived++; })
+          .on('end', function() {
+            assert.strictEqual(numResultsReceived, limit);
             done();
-            return;
-          }
-
-          setImmediate(function() {
-            nextQuerySent = true;
-            callback(null, [], nextQuery);
           });
-        }
-
-        var rs = streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
-        rs.on('data', util.noop); // Trigger the underlying `_read` event.
       });
+    });
 
-      it('should not push more results if stream ends early', function(done) {
-        var results = ['a', 'b', 'c'];
+    it('should get more results if nextQuery exists', function(done) {
+      var nextQuery = { a: 'b', c: 'd' };
+      var nextQuerySent = false;
 
-        function originalMethod(query, callback) {
-          setImmediate(function() {
-            callback(null, results);
-          });
+      function originalMethod(query, callback) {
+        if (nextQuerySent) {
+          assert.deepEqual(query, nextQuery);
+          done();
+          return;
         }
 
-        var rs = streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
-        rs.on('data', function(result) {
-          if (result === 'b') {
-            // Pre-maturely end the stream.
-            this.end();
-          }
+        setImmediate(function() {
+          nextQuerySent = true;
+          callback(null, [], nextQuery);
+        });
+      }
 
-          assert.notEqual(result, 'c');
+      streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
+    });
+
+    it('should not push more results if stream ends early', function(done) {
+      var results = ['a', 'b', 'c'];
+
+      function originalMethod(query, callback) {
+        setImmediate(function() {
+          callback(null, results);
         });
-        rs.on('end', function() {
-          done();
-        });
+      }
+
+      var rs = streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
+      rs.on('data', function(result) {
+        if (result === 'b') {
+          // Pre-maturely end the stream.
+          this.end();
+        }
+
+        assert.notEqual(result, 'c');
       });
+      rs.on('end', function() {
+        done();
+      });
+    });
 
-      it('should not get more results if stream ends early', function(done) {
-        var results = ['a', 'b', 'c'];
+    it('should not get more results if stream ends early', function(done) {
+      var results = ['a', 'b', 'c'];
 
-        var originalMethodCalledCount = 0;
+      var originalMethodCalledCount = 0;
 
-        function originalMethod(query, callback) {
-          originalMethodCalledCount++;
+      function originalMethod(query, callback) {
+        originalMethodCalledCount++;
 
-          setImmediate(function() {
-            callback(null, results, {});
-          });
+        setImmediate(function() {
+          callback(null, results, {});
+        });
+      }
+
+      var rs = streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
+      rs.on('data', function(result) {
+        if (result === 'b') {
+          // Pre-maturely end the stream.
+          this.end();
         }
-
-        var rs = streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
-        rs.on('data', function(result) {
-          if (result === 'b') {
-            // Pre-maturely end the stream.
-            this.end();
-          }
-        });
-        rs.on('end', function() {
-          assert.equal(originalMethodCalledCount, 1);
-          done();
-        });
+      });
+      rs.on('end', function() {
+        assert.equal(originalMethodCalledCount, 1);
+        done();
       });
     });
   });

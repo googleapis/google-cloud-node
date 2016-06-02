@@ -20,10 +20,12 @@ var assert = require('assert');
 var duplexify;
 var extend = require('extend');
 var googleAuth = require('google-auto-auth');
+var is = require('is');
 var mockery = require('mockery-next');
 var request = require('request');
 var retryRequest = require('retry-request');
 var stream = require('stream');
+var streamEvents = require('stream-events');
 
 var googleAutoAuthOverride;
 function fakeGoogleAutoAuth() {
@@ -47,6 +49,11 @@ function fakeRetryRequest() {
   return (retryRequestOverride || retryRequest).apply(null, arguments);
 }
 
+var streamEventsOverride;
+function fakeStreamEvents() {
+  return (streamEventsOverride || streamEvents).apply(null, arguments);
+}
+
 describe('common/util', function() {
   var util;
   var utilOverrides = {};
@@ -55,6 +62,7 @@ describe('common/util', function() {
     mockery.registerMock('google-auto-auth', fakeGoogleAutoAuth);
     mockery.registerMock('request', fakeRequest);
     mockery.registerMock('retry-request', fakeRetryRequest);
+    mockery.registerMock('stream-events', fakeStreamEvents);
     mockery.enable({
       useCleanCache: true,
       warnOnUnregistered: false
@@ -87,6 +95,7 @@ describe('common/util', function() {
     googleAutoAuthOverride = null;
     requestOverride = null;
     retryRequestOverride = null;
+    streamEventsOverride = null;
     utilOverrides = {};
   });
 
@@ -1258,6 +1267,72 @@ describe('common/util', function() {
             { projectIdRequired: false }
           );
         });
+      });
+    });
+  });
+
+  describe('createLimiter', function() {
+    function REQUEST_FN() {}
+    var OPTIONS = {};
+
+    it('should create an object stream with stream-events', function(done) {
+      streamEventsOverride = function(stream) {
+        assert.strictEqual(stream._readableState.objectMode, true);
+        setImmediate(done);
+        return stream;
+      };
+
+      util.createLimiter(REQUEST_FN, OPTIONS);
+    });
+
+    it('should return a makeRequest function', function() {
+      var limiter = util.createLimiter(REQUEST_FN, OPTIONS);
+      assert(is.fn(limiter.makeRequest));
+    });
+
+    it('should return the created stream', function() {
+      var streamEventsStream = {};
+
+      streamEventsOverride = function() {
+        return streamEventsStream;
+      };
+
+      var limiter = util.createLimiter(REQUEST_FN, OPTIONS);
+      assert.strictEqual(limiter.stream, streamEventsStream);
+    });
+
+    describe('makeRequest', function() {
+      it('should pass arguments to request method', function(done) {
+        var args = [{}, {}];
+
+        var limiter = util.createLimiter(function(obj1, obj2) {
+          assert.strictEqual(obj1, args[0]);
+          assert.strictEqual(obj2, args[1]);
+          done();
+        });
+
+        limiter.makeRequest.apply(null, args);
+      });
+
+      it('should not make more requests than the limit', function(done) {
+        var callsMade = 0;
+        var maxApiCalls = 10;
+
+        var limiter = util.createLimiter(function() {
+          callsMade++;
+          limiter.makeRequest();
+        }, {
+          maxApiCalls: maxApiCalls
+        });
+
+        limiter.makeRequest();
+
+        limiter.stream
+          .on('data', util.noop)
+          .on('end', function() {
+            assert.strictEqual(callsMade, maxApiCalls);
+            done();
+          });
       });
     });
   });
