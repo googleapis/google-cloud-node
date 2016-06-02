@@ -138,6 +138,97 @@ describe('GrpcService', function() {
     grpcLoadOverride = null;
   });
 
+  describe('grpc error to http error map', function() {
+    it('should export grpc error map', function() {
+      assert.deepEqual(GrpcService.GRPC_ERROR_CODE_TO_HTTP, {
+        0: {
+          code: 200,
+          message: 'OK'
+        },
+
+        1: {
+          code: 499,
+          message: 'Client Closed Request'
+        },
+
+        2: {
+          code: 500,
+          message: 'Internal Server Error'
+        },
+
+        3: {
+          code: 400,
+          message: 'Bad Request'
+        },
+
+        4: {
+          code: 504,
+          message: 'Gateway Timeout'
+        },
+
+        5: {
+          code: 404,
+          message: 'Not Found'
+        },
+
+        6: {
+          code: 409,
+          message: 'Conflict'
+        },
+
+        7: {
+          code: 403,
+          message: 'Forbidden'
+        },
+
+        8: {
+          code: 429,
+          message: 'Too Many Requests'
+        },
+
+        9: {
+          code: 412,
+          message: 'Precondition Failed'
+        },
+
+        10: {
+          code: 409,
+          message: 'Conflict'
+        },
+
+        11: {
+          code: 400,
+          message: 'Bad Request'
+        },
+
+        12: {
+          code: 501,
+          message: 'Not Implemented'
+        },
+
+        13: {
+          code: 500,
+          message: 'Internal Server Error'
+        },
+
+        14: {
+          code: 503,
+          message: 'Service Unavailable'
+        },
+
+        15: {
+          code: 500,
+          message: 'Internal Server Error'
+        },
+
+        16: {
+          code: 401,
+          message: 'Unauthorized'
+        }
+      });
+    });
+  });
+
   describe('instantiation', function() {
     it('should inherit from Service', function() {
       assert(grpcService instanceof FakeService);
@@ -234,93 +325,6 @@ describe('GrpcService', function() {
     var PROTO_OPTS = { service: 'service', method: 'method', timeout: 3000 };
     var REQ_OPTS = {};
     var GRPC_CREDENTIALS = {};
-
-    var HTTP_ERROR_CODE_MAP = {
-      0: {
-        code: 200,
-        message: 'OK'
-      },
-
-      1: {
-        code: 499,
-        message: 'Client Closed Request'
-      },
-
-      2: {
-        code: 500,
-        message: 'Internal Server Error'
-      },
-
-      3: {
-        code: 400,
-        message: 'Bad Request'
-      },
-
-      4: {
-        code: 504,
-        message: 'Gateway Timeout'
-      },
-
-      5: {
-        code: 404,
-        message: 'Not Found'
-      },
-
-      6: {
-        code: 409,
-        message: 'Conflict'
-      },
-
-      7: {
-        code: 403,
-        message: 'Forbidden'
-      },
-
-      8: {
-        code: 429,
-        message: 'Too Many Requests'
-      },
-
-      9: {
-        code: 412,
-        message: 'Precondition Failed'
-      },
-
-      10: {
-        code: 409,
-        message: 'Conflict'
-      },
-
-      11: {
-        code: 400,
-        message: 'Bad Request'
-      },
-
-      12: {
-        code: 501,
-        message: 'Not Implemented'
-      },
-
-      13: {
-        code: 500,
-        message: 'Internal Server Error'
-      },
-
-      14: {
-        code: 503,
-        message: 'Service Unavailable'
-      },
-
-      15: {
-        code: 500,
-        message: 'Internal Server Error'
-      },
-
-      16: {
-        code: 401,
-        message: 'Unauthorized'
-      }
-    };
 
     function ProtoService() {}
     ProtoService.prototype.method = function() {};
@@ -533,7 +537,7 @@ describe('GrpcService', function() {
 
         function onResponse(err, resp) {
           assert.strictEqual(err, null);
-          assert.deepEqual(resp, HTTP_ERROR_CODE_MAP[2]);
+          assert.deepEqual(resp, GrpcService.GRPC_ERROR_CODE_TO_HTTP[2]);
 
           done();
         }
@@ -555,7 +559,7 @@ describe('GrpcService', function() {
         };
 
         grpcService.request(PROTO_OPTS, REQ_OPTS, function(err, resp) {
-          assert.deepEqual(err, HTTP_ERROR_CODE_MAP[2]);
+          assert.deepEqual(err, GrpcService.GRPC_ERROR_CODE_TO_HTTP[2]);
           assert.strictEqual(resp, null);
           done();
         });
@@ -627,9 +631,9 @@ describe('GrpcService', function() {
     describe('error', function() {
       it('should look up the http status from the code', function() {
         /*jshint loopfunc:true */
-        for (var grpcErrorCode in HTTP_ERROR_CODE_MAP) {
+        for (var grpcErrorCode in GrpcService.GRPC_ERROR_CODE_TO_HTTP) {
           var grpcError = { code: grpcErrorCode };
-          var httpError = HTTP_ERROR_CODE_MAP[grpcErrorCode];
+          var httpError = GrpcService.GRPC_ERROR_CODE_TO_HTTP[grpcErrorCode];
 
           grpcService.protos.Service = {
             service: function() {

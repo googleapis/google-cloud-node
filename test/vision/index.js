@@ -26,6 +26,7 @@ var nodeutil = require('util');
 var prop = require('propprop');
 var tmp = require('tmp');
 
+var GrpcService = require('../../lib/common/grpc-service.js');
 var Service = require('../../lib/common/service.js');
 var util = require('../../lib/common/util.js');
 
@@ -368,14 +369,21 @@ describe('Vision', function() {
       }, assert.ifError);
     });
 
-    it('should not return detections when none were found', function(done) {
+    it('should return empty detections when none were found', function(done) {
       vision.annotate = function(config, callback) {
-        callback(null, []);
+        callback(null, [
+          {},
+          {}
+        ]);
       };
 
       vision.detect(IMAGE, TYPES, function(err, detections) {
         assert.ifError(err);
-        assert.deepEqual(detections, []);
+        assert.deepEqual(detections, {
+          faces: [],
+          labels: [],
+          errors: []
+        });
         done();
       });
     });
@@ -444,81 +452,143 @@ describe('Vision', function() {
 
       vision.detect(IMAGE, types, function(err, detections) {
         assert.ifError(err);
+
+        expected.errors = [];
         assert(deepStrictEqual(detections, expected));
+
         done();
       });
     });
 
-    it('should return only the detection wanted', function(done) {
+    it('should return an empty array for empty responses', function(done) {
       var annotations = [
+        {}, // empty `faceAnnotations`
         {
-          faceAnnotations: {}
+          imagePropertiesAnnotation: {}
         }
       ];
 
-      var faceAnnotation = {};
+      vision.annotate = function(config, callback) {
+        callback(null, annotations);
+      };
 
-      Vision.formatFaceAnnotation_ = function() {
-        return faceAnnotation;
+      var expected = {
+        faces: [],
+        properties: {}
+      };
+
+      var types = Object.keys(expected);
+
+      vision.detect(IMAGE, types, function(err, detections) {
+        assert.ifError(err);
+
+        expected.errors = [];
+        assert(deepStrictEqual(detections, expected));
+
+        done();
+      });
+    });
+
+    it('should return annotation errors', function(done) {
+      var error1 = {};
+      var error2 = {};
+
+      var annotations = [
+        { error: error1 },
+        { error: error2 }
+      ];
+
+      var formattedError = {};
+
+      vision.formatError_ = function() {
+        return formattedError;
       };
 
       vision.annotate = function(config, callback) {
         callback(null, annotations);
       };
 
+      vision.detect(IMAGE, ['faces', 'properties'], function(err, detections) {
+        assert.ifError(err);
+
+        assert(deepStrictEqual(detections, {
+          faces: [],
+          properties: {},
+          errors: [
+            formattedError,
+            formattedError
+          ]
+        }));
+
+        done();
+      });
+    });
+
+    it('should return only the detection wanted', function(done) {
+      vision.annotate = function(config, callback) {
+        callback(null, [{}]);
+      };
+
       vision.detect(IMAGE, ['face'], function(err, detection) {
         assert.ifError(err);
-        assert.strictEqual(detection, faceAnnotation);
+
+        var expected = [];
+        expected.errors = [];
+
+        assert.deepEqual(detection, expected);
+
         done();
       });
     });
 
     it('should return the correct detections for multiple img', function(done) {
+      var anno = { a: 'b', c: 'd' };
+
       var annotations = [
         // Image 1 annotations:
         {
-          faceAnnotations: {}
+          faceAnnotations: anno
         },
         {
-          imagePropertiesAnnotation: {}
+          imagePropertiesAnnotation: anno
         },
         {
-          labelAnnotations: {}
+          labelAnnotations: anno
         },
         {
-          landmarkAnnotations: {}
+          landmarkAnnotations: anno
         },
         {
-          logoAnnotations: {}
+          logoAnnotations: anno
         },
         {
-          safeSearchAnnotation: {}
+          safeSearchAnnotation: anno
         },
         {
-          textAnnotations: {}
+          textAnnotations: anno
         },
 
         // Image 2 annotations:
         {
-          faceAnnotations: {}
+          faceAnnotations: anno
         },
         {
-          imagePropertiesAnnotation: {}
+          imagePropertiesAnnotation: anno
         },
         {
-          labelAnnotations: {}
+          labelAnnotations: anno
         },
         {
-          landmarkAnnotations: {}
+          landmarkAnnotations: anno
         },
         {
-          logoAnnotations: {}
+          logoAnnotations: anno
         },
         {
-          safeSearchAnnotation: {}
+          safeSearchAnnotation: anno
         },
         {
-          textAnnotations: {}
+          textAnnotations: anno
         }
       ];
 
@@ -527,19 +597,23 @@ describe('Vision', function() {
       var entityAnnotation = {};
       var safeSearchAnnotation = {};
 
-      Vision.formatFaceAnnotation_ = function() {
+      Vision.formatFaceAnnotation_ = function(anno_) {
+        assert.strictEqual(anno_, anno);
         return faceAnnotation;
       };
 
-      Vision.formatImagePropertiesAnnotation_ = function() {
+      Vision.formatImagePropertiesAnnotation_ = function(anno_) {
+        assert.strictEqual(anno_, anno);
         return imagePropertiesAnnotation;
       };
 
-      Vision.formatEntityAnnotation_ = function() {
+      Vision.formatEntityAnnotation_ = function(anno_) {
+        assert.strictEqual(anno_, anno);
         return entityAnnotation;
       };
 
-      Vision.formatSafeSearchAnnotation_ = function() {
+      Vision.formatSafeSearchAnnotation_ = function(anno_) {
+        assert.strictEqual(anno_, anno);
         return safeSearchAnnotation;
       };
 
@@ -559,7 +633,8 @@ describe('Vision', function() {
           landmarks: entityAnnotation,
           logos: entityAnnotation,
           safeSearch: safeSearchAnnotation,
-          text: entityAnnotation
+          text: entityAnnotation,
+          errors: []
         },
         {
           faces: faceAnnotation,
@@ -568,11 +643,13 @@ describe('Vision', function() {
           landmarks: entityAnnotation,
           logos: entityAnnotation,
           safeSearch: safeSearchAnnotation,
-          text: entityAnnotation
+          text: entityAnnotation,
+          errors: []
         }
       ];
 
       var types = Object.keys(expected[0]);
+      types.pop(); // remove `errors`
 
       vision.detect([IMAGE, IMAGE], types, function(err, detections) {
         assert.ifError(err);
@@ -926,6 +1003,22 @@ describe('Vision', function() {
           locations: entityAnnotation.locations.map(prop('latLng')),
           properties: entityAnnotation.properties
         });
+      });
+    });
+  });
+
+  describe('formatError_', function() {
+    var error = {
+      code: 1,
+      message: 'Oh no!'
+    };
+
+    it('should format an error', function() {
+      var err = Vision.formatError_(error);
+
+      assert.deepEqual(err, {
+        code: GrpcService.GRPC_ERROR_CODE_TO_HTTP[1].code,
+        message: error.message
       });
     });
   });
