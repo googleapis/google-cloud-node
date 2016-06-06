@@ -235,7 +235,8 @@ describe('Compute', function() {
     var CONFIG = {
       protocols: {
         tcp: [3000],
-        udp: []
+        icmp: true, // This should open all ports on this protocol
+        udp: [] // This should not open ports on this protocol at all
       },
 
       ranges: ['0.0.0.0/0']
@@ -248,7 +249,7 @@ describe('Compute', function() {
           ports: ['3000']
         },
         {
-          IPProtocol: 'udp'
+          IPProtocol: 'icmp'
         }
       ],
 

@@ -211,7 +211,9 @@ describe('Compute', function() {
           protocols: {
             https: [8080, 9000],
             ssh: 22,
-            ftp: []
+            ftp: [],
+            ah: false,
+            icmp: true
           }
         };
 
@@ -220,7 +222,7 @@ describe('Compute', function() {
             { IPProtocol: 'http', ports: [8000] },
             { IPProtocol: 'https', ports: [8080, 9000] },
             { IPProtocol: 'ssh', ports: [22] },
-            { IPProtocol: 'ftp' }
+            { IPProtocol: 'icmp', ports: [] }
           ]);
           assert.strictEqual(reqOpts.json.protocols, undefined);
           done();
