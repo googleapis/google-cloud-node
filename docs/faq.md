@@ -10,7 +10,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
 
 ## How do I use `gcloud` with AWS Lambda?
 
-Our library uses some native libraries, which must be recompiled against the platform running your application. For AWS Lambda, we recommend using [lambda-pacakger](https://github.com/tomdale/lambda-packager) prior to deploying your code.
+Our library uses some native libraries, which must be recompiled against the platform running your application. For AWS Lambda, we recommend using [lambda-packager](https://github.com/tomdale/lambda-packager) prior to deploying your code.
 
 Reference Issues: [#1287](https://github.com/GoogleCloudPlatform/gcloud-node/issues/1287), [#1297](https://github.com/GoogleCloudPlatform/gcloud-node/issues/1297)
 
