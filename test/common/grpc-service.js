@@ -82,11 +82,12 @@ describe('GrpcService', function() {
   var CONFIG = {
     proto: {},
     service: 'Service',
-    apiVersion: 'v1',
-    maxRetries: 3
+    apiVersion: 'v1'
   };
 
-  var OPTIONS = {};
+  var OPTIONS = {
+    maxRetries: 3
+  };
   var ROOT_DIR = '/root/dir';
   var PROTO_FILE_PATH = 'filepath.proto';
 
@@ -239,7 +240,7 @@ describe('GrpcService', function() {
     });
 
     it('should localize maxRetries', function() {
-      assert.strictEqual(grpcService.maxRetries, CONFIG.maxRetries);
+      assert.strictEqual(grpcService.maxRetries, OPTIONS.maxRetries);
     });
 
     it('should get the root directory for the proto files', function(done) {
@@ -489,7 +490,7 @@ describe('GrpcService', function() {
 
         assert.strictEqual(retryRequestReqOpts, null);
         assert.strictEqual(
-          retryRequestOptions.maxRetries,
+          retryRequestOptions.retries,
           grpcService.maxRetries
         );
 
