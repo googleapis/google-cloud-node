@@ -277,7 +277,7 @@ function getMixinMethods(comments) {
     if (block.ctx.type === 'property') {
       name = block.ctx.string.replace(/^\w+\./, '');
       methods.forEach(function(method) {
-        method.name = [name, method.name].join('.');
+        method.id = method.name = [name, method.name].join('.');
       });
     }
 
