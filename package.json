@@ -127,7 +127,7 @@
     "bytebuffer": "^4.0.0",
     "coveralls": "^2.11.2",
     "deep-strict-equal": "^0.1.0",
-    "dox": "^0.8.0",
+    "dox": "0.8.1",
     "glob": "^5.0.9",
     "globby": "^3.0.1",
     "istanbul": "^0.3.5",
