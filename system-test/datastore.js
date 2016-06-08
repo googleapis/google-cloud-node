@@ -666,22 +666,25 @@ describe('Datastore', function() {
         url: 'www.google.com'
       };
 
-      datastore.runInTransaction(function(t, tDone) {
-        t.get(key, function(err) {
-          assert.ifError(err);
+      var transaction = datastore.transaction();
 
-          t.save({ key: key, data: obj });
-          tDone();
-        });
-      }, function(err) {
+      transaction.run(function(err) {
         assert.ifError(err);
 
-        datastore.get(key, function(err, entity) {
+        transaction.get(key, function(err) {
           assert.ifError(err);
 
-          assert.deepEqual(entity.data, obj);
+          transaction.save({ key: key, data: obj });
 
-          datastore.delete(key, done);
+          transaction.commit(function(err) {
+            assert.ifError(err);
+
+            datastore.get(key, function(err, entity) {
+              assert.ifError(err);
+              assert.deepEqual(entity.data, obj);
+              done();
+            });
+          });
         });
       });
     });
@@ -697,10 +700,14 @@ describe('Datastore', function() {
       }, function(err) {
         assert.ifError(err);
 
-        datastore.runInTransaction(function(t, tDone) {
-          t.delete(deleteKey);
+        var transaction = datastore.transaction();
 
-          t.save([
+        transaction.run(function(err) {
+          assert.ifError(err);
+
+          transaction.delete(deleteKey);
+
+          transaction.save([
             {
               key: key,
               data: { rating: 10 }
@@ -711,32 +718,32 @@ describe('Datastore', function() {
             }
           ]);
 
-          tDone();
-        }, function(err) {
-          assert.ifError(err);
+          transaction.commit(function(err) {
+            assert.ifError(err);
 
-          // Incomplete key should have been given an ID.
-          assert.strictEqual(incompleteKey.path.length, 2);
+            // Incomplete key should have been given an ID.
+            assert.strictEqual(incompleteKey.path.length, 2);
 
-          async.parallel([
-            // The key queued for deletion should have been deleted.
-            function(callback) {
-              datastore.get(deleteKey, function(err, entity) {
-                assert.ifError(err);
-                assert.strictEqual(typeof entity, 'undefined');
-                callback();
-              });
-            },
+            async.parallel([
+              // The key queued for deletion should have been deleted.
+              function(callback) {
+                datastore.get(deleteKey, function(err, entity) {
+                  assert.ifError(err);
+                  assert.strictEqual(typeof entity, 'undefined');
+                  callback();
+                });
+              },
 
-            // Data should have been updated on the key.
-            function(callback) {
-              datastore.get(key, function(err, entity) {
-                assert.ifError(err);
-                assert.strictEqual(entity.data.rating, 10);
-                callback();
-              });
-            }
-          ], done);
+              // Data should have been updated on the key.
+              function(callback) {
+                datastore.get(key, function(err, entity) {
+                  assert.ifError(err);
+                  assert.strictEqual(entity.data.rating, 10);
+                  callback();
+                });
+              }
+            ], done);
+          });
         });
       });
     });
@@ -745,8 +752,12 @@ describe('Datastore', function() {
       var incompleteKey = datastore.key('Company');
       var key = datastore.key(['Company', 'Google']);
 
-      datastore.runInTransaction(function(t, tDone) {
-        t.save([
+      var transaction = datastore.transaction();
+
+      transaction.run(function(err) {
+        assert.ifError(err);
+
+        transaction.save([
           {
             key: key,
             data: {
@@ -761,38 +772,43 @@ describe('Datastore', function() {
           }
         ]);
 
-        t.delete(key);
+        transaction.delete(key);
 
-        tDone();
-      }, function(err) {
-        assert.ifError(err);
-
-        // Should not return a result.
-        datastore.get(key, function(err, entity) {
+        transaction.commit(function(err) {
           assert.ifError(err);
-          assert.strictEqual(entity, undefined);
 
-          // Incomplete key should have been given an id.
-          assert.strictEqual(incompleteKey.path.length, 2);
-          done();
+          // Should not return a result.
+          datastore.get(key, function(err, entity) {
+            assert.ifError(err);
+            assert.strictEqual(entity, undefined);
+
+            // Incomplete key should have been given an id.
+            assert.strictEqual(incompleteKey.path.length, 2);
+            done();
+          });
         });
       });
     });
 
     it('should query within a transaction', function(done) {
-      datastore.runInTransaction(function(t, tDone) {
-        var query = t.createQuery('Company');
+      var transaction = datastore.transaction();
+
+      transaction.run(function(err) {
+        assert.ifError(err);
+
+        var query = transaction.createQuery('Company');
 
         query.run(function(err, entities) {
           if (err) {
-            tDone(err);
+            transaction.rollback(done);
             return;
           }
 
           assert(entities.length > 0);
-          tDone();
+
+          transaction.commit(done);
         });
-      }, done);
+      });
     });
   });
 });

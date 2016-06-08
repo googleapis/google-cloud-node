@@ -138,28 +138,27 @@ describe('Transaction', function() {
     });
   });
 
-  describe('begin_', function() {
-    it('should begin', function(done) {
-      transaction.request_ = function(protoOpts, reqOpts, callback) {
-        callback = callback || reqOpts;
-        assert.strictEqual(protoOpts.service, 'Datastore');
-        assert.equal(protoOpts.method, 'beginTransaction');
-        done();
-      };
-
-      transaction.begin_();
+  describe('commit', function() {
+    beforeEach(function() {
+      transaction.id = TRANSACTION_ID;
     });
 
-    it('should set transaction id', function(done) {
-      transaction.request_ = function(protoOpts, reqOpts, callback) {
-        callback = callback || reqOpts;
-        callback(null, { transaction: TRANSACTION_ID });
-      };
-      transaction.begin_(function(err) {
-        assert.ifError(err);
-        assert.equal(transaction.id, TRANSACTION_ID);
+    it('should commit', function(done) {
+      transaction.request_ = function(protoOpts) {
+        assert.equal(protoOpts.service, 'Datastore');
+        assert.equal(protoOpts.method, 'commit');
         done();
-      });
+      };
+      transaction.commit();
+    });
+
+    it('should skip the commit', function(done) {
+      transaction.skipCommit = true;
+
+      // If called, the test will blow up.
+      transaction.request_ = done;
+
+      transaction.commit(done);
     });
 
     it('should pass error to callback', function(done) {
@@ -168,7 +167,7 @@ describe('Transaction', function() {
         callback = callback || reqOpts;
         callback(error);
       };
-      transaction.begin_(function(err) {
+      transaction.commit(function(err) {
         assert.deepEqual(err, error);
         done();
       });
@@ -180,10 +179,145 @@ describe('Transaction', function() {
         callback = callback || reqOpts;
         callback(null, resp);
       };
-      transaction.begin_(function(err, apiResponse) {
+      transaction.commit(function(err, apiResponse) {
         assert.ifError(err);
         assert.deepEqual(resp, apiResponse);
         done();
+      });
+    });
+
+    it('should group mutations & execute original methods', function() {
+      var deleteArg1 = key(['Product', 123]);
+      var deleteArg2 = key(['Product', 234]);
+
+      var saveArg1 = { key: key(['Product', 345]), data: '' };
+      var saveArg2 = { key: key(['Product', 456]), data: '' };
+
+      // Queue saves & deletes in varying order.
+      transaction.delete(deleteArg1);
+      transaction.save(saveArg1);
+      transaction.delete(deleteArg2);
+      transaction.save(saveArg2);
+
+      var args = [];
+
+      var deleteCalled = 0;
+      DatastoreRequestOverride.delete = function() {
+        args.push(arguments[0]);
+        deleteCalled++;
+      };
+
+      var saveCalled = 0;
+      DatastoreRequestOverride.save = function() {
+        args.push(arguments[0]);
+        saveCalled++;
+      };
+
+      transaction.request_ = util.noop;
+
+      transaction.commit();
+
+      assert.equal(deleteCalled, 1);
+      assert.equal(saveCalled, 1);
+
+      assert.equal(args.length, 2);
+
+      // Save arguments must come first.
+      assert.deepEqual(args, [
+        [saveArg1, saveArg2],
+        [deleteArg1, deleteArg2]
+      ]);
+    });
+
+    it('should honor ordering of mutations (last wins)', function() {
+      // The delete should be ignored.
+      transaction.delete(key(['Product', 123]));
+      transaction.save({ key: key(['Product', 123]), data: '' });
+
+      var deleteCalled = 0;
+      DatastoreRequestOverride.delete = function() {
+        deleteCalled++;
+      };
+
+      var saveCalled = 0;
+      DatastoreRequestOverride.save = function() {
+        saveCalled++;
+      };
+
+      transaction.request_ = util.noop;
+
+      transaction.commit();
+      assert.equal(deleteCalled, 0);
+      assert.equal(saveCalled, 1);
+    });
+
+    it('should send the built request object', function(done) {
+      transaction.requests_ = [
+        {
+          mutations: [
+            { a: 'b' },
+            { c: 'd' }
+          ]
+        },
+        {
+          mutations: [
+            { e: 'f' },
+            { g: 'h' }
+          ]
+        }
+      ];
+
+      transaction.request_ = function(protoOpts, reqOpts) {
+        assert.deepEqual(reqOpts, {
+          mutations: [
+            { a: 'b' },
+            { c: 'd' },
+            { e: 'f' },
+            { g: 'h' }
+          ]
+        });
+        done();
+      };
+
+      transaction.commit();
+    });
+
+    it('should execute the queued callbacks', function() {
+      var cb1Called = false;
+      var cb2Called = false;
+
+      transaction.requestCallbacks_ = [
+        function() { cb1Called = true; },
+        function() { cb2Called = true; }
+      ];
+
+      transaction.request_ = function(protoOpts, reqOpts, cb) {
+        cb();
+      };
+
+      transaction.commit();
+
+      assert(cb1Called);
+      assert(cb2Called);
+    });
+  });
+
+  describe('delete', function() {
+    it('should push entities into a queue', function() {
+      var keys = [
+        key('Product', 123),
+        key('Product', 234),
+        key('Product', 345)
+      ];
+
+      transaction.delete(keys);
+
+      assert.equal(transaction.modifiedEntities_.length, keys.length);
+
+      transaction.modifiedEntities_.forEach(function(queuedEntity) {
+        assert.equal(queuedEntity.method, 'delete');
+        assert(keys.indexOf(queuedEntity.entity.key) > -1);
+        assert.deepEqual(queuedEntity.args, [queuedEntity.entity.key]);
       });
     });
   });
@@ -250,27 +384,28 @@ describe('Transaction', function() {
     });
   });
 
-  describe('commit_', function() {
-    beforeEach(function() {
-      transaction.id = TRANSACTION_ID;
-    });
-
-    it('should commit', function(done) {
-      transaction.request_ = function(protoOpts) {
-        assert.equal(protoOpts.service, 'Datastore');
-        assert.equal(protoOpts.method, 'commit');
+  describe('run', function() {
+    it('should begin', function(done) {
+      transaction.request_ = function(protoOpts, reqOpts, callback) {
+        callback = callback || reqOpts;
+        assert.strictEqual(protoOpts.service, 'Datastore');
+        assert.equal(protoOpts.method, 'beginTransaction');
         done();
       };
-      transaction.commit_();
+
+      transaction.run();
     });
 
-    it('should skip the commit', function(done) {
-      transaction.skipCommit = true;
-
-      // If called, the test will blow up.
-      transaction.request_ = done;
-
-      transaction.commit_(done);
+    it('should set transaction id', function(done) {
+      transaction.request_ = function(protoOpts, reqOpts, callback) {
+        callback = callback || reqOpts;
+        callback(null, { transaction: TRANSACTION_ID });
+      };
+      transaction.run(function(err) {
+        assert.ifError(err);
+        assert.equal(transaction.id, TRANSACTION_ID);
+        done();
+      });
     });
 
     it('should pass error to callback', function(done) {
@@ -279,7 +414,7 @@ describe('Transaction', function() {
         callback = callback || reqOpts;
         callback(error);
       };
-      transaction.commit_(function(err) {
+      transaction.run(function(err) {
         assert.deepEqual(err, error);
         done();
       });
@@ -291,145 +426,10 @@ describe('Transaction', function() {
         callback = callback || reqOpts;
         callback(null, resp);
       };
-      transaction.commit_(function(err, apiResponse) {
+      transaction.run(function(err, apiResponse) {
         assert.ifError(err);
         assert.deepEqual(resp, apiResponse);
         done();
-      });
-    });
-
-    it('should group mutations & execute original methods', function() {
-      var deleteArg1 = key(['Product', 123]);
-      var deleteArg2 = key(['Product', 234]);
-
-      var saveArg1 = { key: key(['Product', 345]), data: '' };
-      var saveArg2 = { key: key(['Product', 456]), data: '' };
-
-      // Queue saves & deletes in varying order.
-      transaction.delete(deleteArg1);
-      transaction.save(saveArg1);
-      transaction.delete(deleteArg2);
-      transaction.save(saveArg2);
-
-      var args = [];
-
-      var deleteCalled = 0;
-      DatastoreRequestOverride.delete = function() {
-        args.push(arguments[0]);
-        deleteCalled++;
-      };
-
-      var saveCalled = 0;
-      DatastoreRequestOverride.save = function() {
-        args.push(arguments[0]);
-        saveCalled++;
-      };
-
-      transaction.request_ = util.noop;
-
-      transaction.commit_();
-
-      assert.equal(deleteCalled, 1);
-      assert.equal(saveCalled, 1);
-
-      assert.equal(args.length, 2);
-
-      // Save arguments must come first.
-      assert.deepEqual(args, [
-        [saveArg1, saveArg2],
-        [deleteArg1, deleteArg2]
-      ]);
-    });
-
-    it('should honor ordering of mutations (last wins)', function() {
-      // The delete should be ignored.
-      transaction.delete(key(['Product', 123]));
-      transaction.save({ key: key(['Product', 123]), data: '' });
-
-      var deleteCalled = 0;
-      DatastoreRequestOverride.delete = function() {
-        deleteCalled++;
-      };
-
-      var saveCalled = 0;
-      DatastoreRequestOverride.save = function() {
-        saveCalled++;
-      };
-
-      transaction.request_ = util.noop;
-
-      transaction.commit_();
-      assert.equal(deleteCalled, 0);
-      assert.equal(saveCalled, 1);
-    });
-
-    it('should send the built request object', function(done) {
-      transaction.requests_ = [
-        {
-          mutations: [
-            { a: 'b' },
-            { c: 'd' }
-          ]
-        },
-        {
-          mutations: [
-            { e: 'f' },
-            { g: 'h' }
-          ]
-        }
-      ];
-
-      transaction.request_ = function(protoOpts, reqOpts) {
-        assert.deepEqual(reqOpts, {
-          mutations: [
-            { a: 'b' },
-            { c: 'd' },
-            { e: 'f' },
-            { g: 'h' }
-          ]
-        });
-        done();
-      };
-
-      transaction.commit_();
-    });
-
-    it('should execute the queued callbacks', function() {
-      var cb1Called = false;
-      var cb2Called = false;
-
-      transaction.requestCallbacks_ = [
-        function() { cb1Called = true; },
-        function() { cb2Called = true; }
-      ];
-
-      transaction.request_ = function(protoOpts, reqOpts, cb) {
-        cb();
-      };
-
-      transaction.commit_();
-
-      assert(cb1Called);
-      assert(cb2Called);
-    });
-  });
-
-  describe('delete', function() {
-    it('should push entities into a queue', function() {
-      var keys = [
-        key('Product', 123),
-        key('Product', 234),
-        key('Product', 345)
-      ];
-
-      transaction.delete(keys);
-
-      assert.equal(transaction.modifiedEntities_.length, keys.length);
-
-      transaction.modifiedEntities_.forEach(function(queuedEntity) {
-        assert.equal(queuedEntity.method, 'delete');
-        assert(keys.indexOf(queuedEntity.entity.key) > -1);
-        assert.deepEqual(queuedEntity.args, [queuedEntity.entity.key]);
       });
     });
   });
