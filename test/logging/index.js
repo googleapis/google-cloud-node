@@ -247,8 +247,8 @@ describe('Logging', function() {
           assert.strictEqual(protoOpts.service, 'ConfigServiceV2');
           assert.strictEqual(protoOpts.method, 'createSink');
 
-          var expectedProjectName = 'projects/' + logging.projectId;
-          assert.strictEqual(reqOpts.projectName, expectedProjectName);
+          var expectedParent = 'projects/' + logging.projectId;
+          assert.strictEqual(reqOpts.parent, expectedParent);
           assert.deepEqual(reqOpts.sink, expectedConfig);
 
           done();
@@ -460,8 +460,8 @@ describe('Logging', function() {
         assert.strictEqual(protoOpts.service, 'ConfigServiceV2');
         assert.strictEqual(protoOpts.method, 'listSinks');
 
-        var expectedProjectName = 'projects/' + logging.projectId;
-        assert.strictEqual(reqOpts.projectName, expectedProjectName);
+        var expectedParent = 'projects/' + logging.projectId;
+        assert.strictEqual(reqOpts.parent, expectedParent);
 
         done();
       };
