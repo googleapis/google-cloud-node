@@ -21,6 +21,7 @@ var async = require('async');
 var exec = require('methmeth');
 var format = require('string-format-obj');
 var is = require('is');
+var prop = require('propprop');
 var uuid = require('node-uuid');
 
 var env = require('./env.js');
@@ -31,6 +32,7 @@ var Storage = require('../lib/storage/index.js');
 
 describe('Logging', function() {
   var TESTS_PREFIX = 'gcloud-logging-test';
+  var WRITE_CONSISTENCY_DELAY_MS = 15000;
 
   var logging = new Logging(env);
 
@@ -313,11 +315,65 @@ describe('Logging', function() {
     });
 
     it('should write multiple entries to a log', function(done) {
-      log.write(logEntries, options, done);
+      log.write(logEntries, options, function(err) {
+        assert.ifError(err);
+
+        setTimeout(function() {
+          log.getEntries({
+            pageSize: logEntries.length
+          }, function(err, entries) {
+            assert.ifError(err);
+
+            assert.deepEqual(entries.map(prop('data')).reverse(), [
+              'log entry 1',
+              {
+                delegate: 'my_username'
+              },
+              {
+                nonValue: null,
+                boolValue: true,
+                arrayValue: [ 1, 2, 3 ]
+              },
+              {
+                nested: {
+                  delegate: 'my_username'
+                }
+              }
+            ]);
+
+            done();
+          });
+        }, WRITE_CONSISTENCY_DELAY_MS);
+      });
     });
 
-    it('should write a single entry with alert helper', function(done) {
-      log.alert(logEntries[0], options, done);
+    it('should write an entry with primitive values', function(done) {
+      var logEntry = log.entry({
+        when: new Date(),
+        matchUser: /username: (.+)/,
+        matchUserError: new Error('No user found.'),
+        shouldNotBeSaved: undefined
+      });
+
+      log.write(logEntry, options, function(err) {
+        assert.ifError(err);
+
+        setTimeout(function() {
+          log.getEntries({ pageSize: 1 }, function(err, entries) {
+            assert.ifError(err);
+
+            var entry = entries[0];
+
+            assert.deepEqual(entry.data, {
+              when: logEntry.data.when.toString(),
+              matchUser: logEntry.data.matchUser.toString(),
+              matchUserError: logEntry.data.matchUserError.toString()
+            });
+
+            done();
+          });
+        }, WRITE_CONSISTENCY_DELAY_MS);
+      });
     });
 
     it('should write to a log with alert helper', function(done) {
