@@ -589,28 +589,32 @@ describe('ServiceObject', function() {
       };
     });
 
-    it('should send the right request to the parent', function(done) {
-      serviceObject.parent.request = function(reqOpts_, callback) {
-        assert.strictEqual(reqOpts_, reqOpts);
-        callback(); // done()
-      };
-
-      serviceObject.request(reqOpts, done);
-    });
-
-    it('should compose the correct uri', function(done) {
+    it('should compose the correct request', function(done) {
       var expectedUri = [
         serviceObject.baseUrl,
         serviceObject.id,
         reqOpts.uri
       ].join('/');
 
-      serviceObject.parent.request = function(reqOpts_) {
+      serviceObject.parent.request = function(reqOpts_, callback) {
+        assert.notStrictEqual(reqOpts_, reqOpts);
         assert.strictEqual(reqOpts_.uri, expectedUri);
+        assert.deepEqual(reqOpts_.interceptors_, []);
+        callback(); // done()
+      };
+
+      serviceObject.request(reqOpts, done);
+    });
+
+    it('should support absolute uris', function(done) {
+      var expectedUri = 'http://www.google.com';
+
+      serviceObject.parent.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, expectedUri);
         done();
       };
 
-      serviceObject.request(reqOpts, assert.ifError);
+      serviceObject.request({ uri: expectedUri }, assert.ifError);
     });
 
     it('should remove empty components', function(done) {
@@ -649,6 +653,38 @@ describe('ServiceObject', function() {
       };
 
       serviceObject.request(reqOpts, assert.ifError);
+    });
+
+    it('should extend interceptors from child ServiceObjects', function(done) {
+      var parent = new ServiceObject(CONFIG);
+      parent.interceptors.push({
+        request: function(reqOpts) {
+          reqOpts.parent = true;
+          return reqOpts;
+        }
+      });
+
+      var child = new ServiceObject(extend({}, CONFIG, { parent: parent }));
+      child.interceptors.push({
+        request: function(reqOpts) {
+          reqOpts.child = true;
+          return reqOpts;
+        }
+      });
+
+      parent.parent.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.interceptors_[0].request({}), {
+          child: true
+        });
+
+        assert.deepEqual(reqOpts.interceptors_[1].request({}), {
+          parent: true
+        });
+
+        done();
+      };
+
+      child.request({ uri: '' }, assert.ifError);
     });
 
     it('should pass a clone of the interceptors', function(done) {

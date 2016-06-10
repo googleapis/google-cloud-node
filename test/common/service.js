@@ -162,27 +162,31 @@ describe('Service', function() {
       };
     });
 
-    it('should send the right request to the parent', function(done) {
+    it('should compose the correct request', function(done) {
+      var expectedUri = [
+        service.baseUrl,
+        reqOpts.uri
+      ].join('/');
+
       service.makeAuthenticatedRequest = function(reqOpts_, callback) {
-        assert.strictEqual(reqOpts_, reqOpts);
+        assert.notStrictEqual(reqOpts_, reqOpts);
+        assert.strictEqual(reqOpts_.uri, expectedUri);
+        assert.strictEqual(reqOpts.interceptors_, undefined);
         callback(); // done()
       };
 
       service.request(reqOpts, done);
     });
 
-    it('should compose the correct uri', function(done) {
-      var expectedUri = [
-        service.baseUrl,
-        reqOpts.uri
-      ].join('/');
+    it('should support absolute uris', function(done) {
+      var expectedUri = 'http://www.google.com';
 
-      service.makeAuthenticatedRequest = function(reqOpts_) {
-        assert.strictEqual(reqOpts_.uri, expectedUri);
+      service.makeAuthenticatedRequest = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, expectedUri);
         done();
       };
 
-      service.request(reqOpts, assert.ifError);
+      service.request({ uri: expectedUri }, assert.ifError);
     });
 
     it('should trim slashes', function(done) {

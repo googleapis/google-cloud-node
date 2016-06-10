@@ -100,7 +100,7 @@
     "ent": "^2.2.0",
     "extend": "^3.0.0",
     "gce-images": "^0.2.0",
-    "gcs-resumable-upload": "^0.6.0",
+    "gcs-resumable-upload": "^0.7.0",
     "google-auto-auth": "^0.2.4",
     "google-proto-files": "^0.2.1",
     "grpc": "^0.14.1",

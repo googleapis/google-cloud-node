@@ -30,13 +30,14 @@ var stream = require('stream');
 var ServiceObject = require('../../lib/common/service-object.js');
 var util = require('../../lib/common/util.js');
 
-function FakeFile(bucket, name) {
+function FakeFile(bucket, name, options) {
   var self = this;
 
   this.calledWith_ = arguments;
 
   this.bucket = bucket;
   this.name = name;
+  this.options = options;
   this.metadata = {};
 
   this.createWriteStream = function(options) {
@@ -908,34 +909,47 @@ describe('Bucket', function() {
     });
 
     it('should accept a path, metadata, & cb', function(done) {
-      var options = { metadata: metadata };
+      var options = {
+        metadata: metadata,
+        key: 'key'
+      };
       bucket.upload(filepath, options, function(err, file) {
         assert.ifError(err);
         assert.equal(file.bucket.name, bucket.name);
         assert.deepEqual(file.metadata, metadata);
+        assert.strictEqual(file.options.key, options.key);
         done();
       });
     });
 
     it('should accept a path, a string dest, & cb', function(done) {
       var newFileName = 'new-file-name.png';
-      var options = { destination: newFileName };
+      var options = {
+        destination: newFileName,
+        key: 'key'
+      };
       bucket.upload(filepath, options, function(err, file) {
         assert.ifError(err);
         assert.equal(file.bucket.name, bucket.name);
         assert.equal(file.name, newFileName);
+        assert.strictEqual(file.options.key, options.key);
         done();
       });
     });
 
     it('should accept a path, a string dest, metadata, & cb', function(done) {
       var newFileName = 'new-file-name.png';
-      var options = { destination: newFileName, metadata: metadata };
+      var options = {
+        destination: newFileName,
+        metadata: metadata,
+        key: 'key'
+      };
       bucket.upload(filepath, options, function(err, file) {
         assert.ifError(err);
         assert.equal(file.bucket.name, bucket.name);
         assert.equal(file.name, newFileName);
         assert.deepEqual(file.metadata, metadata);
+        assert.strictEqual(file.options.key, options.key);
         done();
       });
     });
