@@ -379,6 +379,46 @@ describe('storage', function() {
         });
       });
 
+      it('should set custom encryption during the upload', function(done) {
+        var key = crypto.randomBytes(32);
+
+        bucket.upload(FILES.big.path, {
+          key: key,
+          resumable: false
+        }, function(err, file) {
+          assert.ifError(err);
+
+          file.getMetadata(function(err, metadata) {
+            assert.ifError(err);
+            assert.strictEqual(
+              metadata.customerEncryption.encryptionAlgorithm,
+              'AES256'
+            );
+            done();
+          });
+        });
+      });
+
+      it('should set custom encryption in a resumable upload', function(done) {
+        var key = crypto.randomBytes(32);
+
+        bucket.upload(FILES.big.path, {
+          key: key,
+          resumable: true
+        }, function(err, file) {
+          assert.ifError(err);
+
+          file.getMetadata(function(err, metadata) {
+            assert.ifError(err);
+            assert.strictEqual(
+              metadata.customerEncryption.encryptionAlgorithm,
+              'AES256'
+            );
+            done();
+          });
+        });
+      });
+
       it('should make a file public during the upload', function(done) {
         bucket.upload(FILES.big.path, {
           resumable: false,
@@ -755,6 +795,48 @@ describe('storage', function() {
                 });
               });
           });
+        });
+      });
+    });
+
+    describe('customer-supplied encryption keys', function() {
+      var encryptionKey = crypto.randomBytes(32);
+
+      var file = bucket.file('encrypted-file', { key: encryptionKey });
+      var unencryptedFile = bucket.file(file.name);
+
+      before(function(done) {
+        file.save('secret data', { resumable: false }, done);
+      });
+
+      it('should not get the hashes from the unencrypted file', function(done) {
+        unencryptedFile.getMetadata(function(err, metadata) {
+          assert.ifError(err);
+          assert.strictEqual(metadata.crc32c, undefined);
+          done();
+        });
+      });
+
+      it('should get the hashes from the encrypted file', function(done) {
+        file.getMetadata(function(err, metadata) {
+          assert.ifError(err);
+          assert.notStrictEqual(metadata.crc32c, undefined);
+          done();
+        });
+      });
+
+      it('should not download from the unencrypted file', function(done) {
+        unencryptedFile.download(function(err) {
+          assert.strictEqual(err.message, 'Bad Request');
+          done();
+        });
+      });
+
+      it('should download from the encrytped file', function(done) {
+        file.download(function(err, contents) {
+          assert.ifError(err);
+          assert.strictEqual(contents.toString(), 'secret data');
+          done();
         });
       });
     });
