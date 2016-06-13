@@ -340,16 +340,36 @@ describe('BigQuery/Table', function() {
   });
 
   describe('createWriteStream', function() {
-    it('should use a string as the file type', function(done) {
-      var fileType = 'csv';
+    describe('formats', function() {
+      it('should accept csv', function(done) {
+        makeWritableStreamOverride = function(stream, options) {
+          var load = options.metadata.configuration.load;
+          assert.equal(load.sourceFormat, 'CSV');
+          done();
+        };
 
-      makeWritableStreamOverride = function(stream, options) {
-        var load = options.metadata.configuration.load;
-        assert.equal(load.sourceFormat, 'CSV');
-        done();
-      };
+        table.createWriteStream('csv').emit('writing');
+      });
 
-      table.createWriteStream(fileType).emit('writing');
+      it('should accept json', function(done) {
+        makeWritableStreamOverride = function(stream, options) {
+          var load = options.metadata.configuration.load;
+          assert.equal(load.sourceFormat, 'NEWLINE_DELIMITED_JSON');
+          done();
+        };
+
+        table.createWriteStream('json').emit('writing');
+      });
+
+      it('should accept avro', function(done) {
+        makeWritableStreamOverride = function(stream, options) {
+          var load = options.metadata.configuration.load;
+          assert.equal(load.sourceFormat, 'AVRO');
+          done();
+        };
+
+        table.createWriteStream('avro').emit('writing');
+      });
     });
 
     it('should format a schema', function(done) {
@@ -501,6 +521,38 @@ describe('BigQuery/Table', function() {
       };
 
       table.export(FILE, done);
+    });
+
+    describe('formats', function() {
+      it('should accept csv', function(done) {
+        table.bigQuery.request = function(reqOpts) {
+          var extract = reqOpts.json.configuration.extract;
+          assert.equal(extract.destinationFormat, 'CSV');
+          done();
+        };
+
+        table.export(FILE, { format: 'csv' }, assert.ifError);
+      });
+
+      it('should accept json', function(done) {
+        table.bigQuery.request = function(reqOpts) {
+          var extract = reqOpts.json.configuration.extract;
+          assert.equal(extract.destinationFormat, 'NEWLINE_DELIMITED_JSON');
+          done();
+        };
+
+        table.export(FILE, { format: 'json' }, assert.ifError);
+      });
+
+      it('should accept avro', function(done) {
+        table.bigQuery.request = function(reqOpts) {
+          var extract = reqOpts.json.configuration.extract;
+          assert.equal(extract.destinationFormat, 'AVRO');
+          done();
+        };
+
+        table.export(FILE, { format: 'avro' }, assert.ifError);
+      });
     });
 
     it('should parse out full gs:// urls from files', function(done) {
@@ -903,6 +955,38 @@ describe('BigQuery/Table', function() {
         assert.ifError(err);
         assert.deepEqual(apiResponse, jobMetadata);
         done();
+      });
+    });
+
+    describe('formats', function() {
+      it('should accept csv', function(done) {
+        table.bigQuery.request = function(reqOpts) {
+          var load = reqOpts.json.configuration.load;
+          assert.equal(load.sourceFormat, 'CSV');
+          done();
+        };
+
+        table.import(FILE, { format: 'csv' }, assert.ifError);
+      });
+
+      it('should accept json', function(done) {
+        table.bigQuery.request = function(reqOpts) {
+          var load = reqOpts.json.configuration.load;
+          assert.equal(load.sourceFormat, 'NEWLINE_DELIMITED_JSON');
+          done();
+        };
+
+        table.import(FILE, { format: 'json' }, assert.ifError);
+      });
+
+      it('should accept avro', function(done) {
+        table.bigQuery.request = function(reqOpts) {
+          var load = reqOpts.json.configuration.load;
+          assert.equal(load.sourceFormat, 'AVRO');
+          done();
+        };
+
+        table.import(FILE, { format: 'avro' }, assert.ifError);
       });
     });
   });
