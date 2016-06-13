@@ -161,15 +161,27 @@ describe('Transaction', function() {
       transaction.commit(done);
     });
 
-    it('should pass error to callback', function(done) {
+    describe('errors', function() {
       var error = new Error('Error.');
-      transaction.request_ = function(protoOpts, reqOpts, callback) {
-        callback = callback || reqOpts;
-        callback(error);
-      };
-      transaction.commit(function(err) {
-        assert.deepEqual(err, error);
-        done();
+      var apiResponse = {};
+
+      beforeEach(function() {
+        transaction.rollback = function(callback) {
+          callback();
+        };
+
+        transaction.request_ = function(protoOpts, reqOpts, callback) {
+          callback = callback || reqOpts;
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should pass the error to the callback', function(done) {
+        transaction.commit(function(err, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
       });
     });
 
