@@ -228,14 +228,14 @@ describe('File', function() {
     it('should set a custom encryption key', function(done) {
       var key = 'key';
 
-      var setKey = File.prototype.setKey;
-      File.prototype.setKey = function(key_) {
-        File.prototype.setKey = setKey;
+      var setEncryptionKey = File.prototype.setEncryptionKey;
+      File.prototype.setEncryptionKey = function(key_) {
+        File.prototype.setEncryptionKey = setEncryptionKey;
         assert.strictEqual(key_, key);
         done();
       };
 
-      new File(BUCKET, FILE_NAME, { key: key });
+      new File(BUCKET, FILE_NAME, { encryptionKey: key });
     });
   });
 
@@ -2191,15 +2191,15 @@ describe('File', function() {
     });
   });
 
-  describe('setKey', function() {
+  describe('setEncryptionKey', function() {
     var KEY = crypto.randomBytes(32);
 
     beforeEach(function() {
-      file.setKey(KEY);
+      file.setEncryptionKey(KEY);
     });
 
     it('should localize the key', function() {
-      assert.strictEqual(file.key, KEY);
+      assert.strictEqual(file.encryptionKey, KEY);
     });
 
     it('should push the correct request interceptor', function(done) {
@@ -2232,7 +2232,7 @@ describe('File', function() {
         };
 
         file.generation = 3;
-        file.key = 'key';
+        file.encryptionKey = 'key';
 
         resumableUploadOverride = function(opts) {
           var bucket = file.bucket;
@@ -2243,7 +2243,7 @@ describe('File', function() {
           assert.strictEqual(opts.bucket, bucket.name);
           assert.strictEqual(opts.file, file.name);
           assert.strictEqual(opts.generation, file.generation);
-          assert.strictEqual(opts.key, file.key);
+          assert.strictEqual(opts.key, file.encryptionKey);
           assert.strictEqual(opts.metadata, options.metadata);
           assert.strictEqual(opts.offset, options.offset);
           assert.strictEqual(opts.predefinedAcl, options.predefinedAcl);
