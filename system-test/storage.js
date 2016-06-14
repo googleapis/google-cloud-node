@@ -383,7 +383,7 @@ describe('storage', function() {
         var key = crypto.randomBytes(32);
 
         bucket.upload(FILES.big.path, {
-          key: key,
+          encryptionKey: key,
           resumable: false
         }, function(err, file) {
           assert.ifError(err);
@@ -403,7 +403,7 @@ describe('storage', function() {
         var key = crypto.randomBytes(32);
 
         bucket.upload(FILES.big.path, {
-          key: key,
+          encryptionKey: key,
           resumable: true
         }, function(err, file) {
           assert.ifError(err);
@@ -802,7 +802,9 @@ describe('storage', function() {
     describe('customer-supplied encryption keys', function() {
       var encryptionKey = crypto.randomBytes(32);
 
-      var file = bucket.file('encrypted-file', { key: encryptionKey });
+      var file = bucket.file('encrypted-file', {
+        encryptionKey: encryptionKey
+      });
       var unencryptedFile = bucket.file(file.name);
 
       before(function(done) {
