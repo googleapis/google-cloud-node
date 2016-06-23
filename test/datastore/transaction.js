@@ -119,25 +119,6 @@ describe('Transaction', function() {
     });
   });
 
-  describe('createQuery', function() {
-    it('should return query from datastore.createQuery', function() {
-      var args = [0, 1, 2, 3];
-      var createQueryReturnValue = {};
-
-      transaction.datastore.createQuery = function() {
-        assert.strictEqual(this, transaction);
-        assert.strictEqual(arguments[0], args[0]);
-        assert.strictEqual(arguments[1], args[1]);
-        assert.strictEqual(arguments[2], args[2]);
-        assert.strictEqual(arguments[3], args[3]);
-        return createQueryReturnValue;
-      };
-
-      var query = transaction.createQuery.apply(transaction, args);
-      assert.strictEqual(query, createQueryReturnValue);
-    });
-  });
-
   describe('commit', function() {
     beforeEach(function() {
       transaction.id = TRANSACTION_ID;
@@ -165,9 +146,12 @@ describe('Transaction', function() {
       var error = new Error('Error.');
       var apiResponse = {};
 
+      var rollbackError = new Error('Error.');
+      var rollbackApiResponse = {};
+
       beforeEach(function() {
         transaction.rollback = function(callback) {
-          callback();
+          callback(rollbackError, rollbackApiResponse);
         };
 
         transaction.request_ = function(protoOpts, reqOpts, callback) {
@@ -176,7 +160,7 @@ describe('Transaction', function() {
         };
       });
 
-      it('should pass the error to the callback', function(done) {
+      it('should pass the commit error to the callback', function(done) {
         transaction.commit(function(err, resp) {
           assert.strictEqual(err, error);
           assert.strictEqual(resp, apiResponse);
@@ -314,6 +298,25 @@ describe('Transaction', function() {
     });
   });
 
+  describe('createQuery', function() {
+    it('should return query from datastore.createQuery', function() {
+      var args = [0, 1, 2, 3];
+      var createQueryReturnValue = {};
+
+      transaction.datastore.createQuery = function() {
+        assert.strictEqual(this, transaction);
+        assert.strictEqual(arguments[0], args[0]);
+        assert.strictEqual(arguments[1], args[1]);
+        assert.strictEqual(arguments[2], args[2]);
+        assert.strictEqual(arguments[3], args[3]);
+        return createQueryReturnValue;
+      };
+
+      var query = transaction.createQuery.apply(transaction, args);
+      assert.strictEqual(query, createQueryReturnValue);
+    });
+  });
+
   describe('delete', function() {
     it('should push entities into a queue', function() {
       var keys = [
@@ -397,51 +400,67 @@ describe('Transaction', function() {
   });
 
   describe('run', function() {
-    it('should begin', function(done) {
-      transaction.request_ = function(protoOpts, reqOpts, callback) {
-        callback = callback || reqOpts;
-        assert.strictEqual(protoOpts.service, 'Datastore');
-        assert.equal(protoOpts.method, 'beginTransaction');
+    it('should make the correct API request', function(done) {
+      transaction.request_ = function(protoOpts) {
+        assert.deepEqual(protoOpts, {
+          service: 'Datastore',
+          method: 'beginTransaction'
+        });
+
         done();
       };
 
-      transaction.run();
+      transaction.run(assert.ifError);
     });
 
-    it('should set transaction id', function(done) {
-      transaction.request_ = function(protoOpts, reqOpts, callback) {
-        callback = callback || reqOpts;
-        callback(null, { transaction: TRANSACTION_ID });
-      };
-      transaction.run(function(err) {
-        assert.ifError(err);
-        assert.equal(transaction.id, TRANSACTION_ID);
-        done();
-      });
-    });
-
-    it('should pass error to callback', function(done) {
+    describe('error', function() {
       var error = new Error('Error.');
-      transaction.request_ = function(protoOpts, reqOpts, callback) {
-        callback = callback || reqOpts;
-        callback(error);
-      };
-      transaction.run(function(err) {
-        assert.deepEqual(err, error);
-        done();
+      var apiResponse = {};
+
+      beforeEach(function() {
+        transaction.request_ = function(protoOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should pass error & API response to callback', function(done) {
+        transaction.run(function(err, transaction, apiResponse_) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(transaction, null);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
       });
     });
 
-    it('should pass apiResponse to callback', function(done) {
-      var resp = { success: true };
-      transaction.request_ = function(protoOpts, reqOpts, callback) {
-        callback = callback || reqOpts;
-        callback(null, resp);
+    describe('success', function() {
+      var apiResponse = {
+        transaction: TRANSACTION_ID
       };
-      transaction.run(function(err, apiResponse) {
-        assert.ifError(err);
-        assert.deepEqual(resp, apiResponse);
-        done();
+
+      beforeEach(function() {
+        transaction.request_ = function(protoOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should set transaction id', function(done) {
+        delete transaction.id;
+
+        transaction.run(function(err) {
+          assert.ifError(err);
+          assert.equal(transaction.id, TRANSACTION_ID);
+          done();
+        });
+      });
+
+      it('should exec callback with Transaction & apiResponse', function(done) {
+        transaction.run(function(err, transaction_, apiResponse_) {
+          assert.ifError(err);
+          assert.strictEqual(transaction_, transaction);
+          assert.deepEqual(apiResponse_, apiResponse);
+          done();
+        });
       });
     });
   });
