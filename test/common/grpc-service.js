@@ -322,6 +322,200 @@ describe('GrpcService', function() {
     });
   });
 
+  describe('decodeValue_', function() {
+    it('should decode a struct value', function() {
+      var structValue = {
+        kind: 'structValue',
+        structValue: {}
+      };
+
+      var decodedValue = {};
+
+      GrpcService.structToObj_ = function() {
+        return decodedValue;
+      };
+
+      assert.strictEqual(GrpcService.decodeValue_(structValue), decodedValue);
+    });
+
+    it('should decode a null value', function() {
+      var nullValue = {
+        kind: 'nullValue'
+      };
+
+      var decodedValue = null;
+
+      assert.strictEqual(GrpcService.decodeValue_(nullValue), decodedValue);
+    });
+
+    it('should decode a list value', function() {
+      var listValue = {
+        kind: 'listValue',
+        listValue: {
+          values: [
+            {
+              kind: 'nullValue'
+            }
+          ]
+        }
+      };
+
+      assert.deepEqual(GrpcService.decodeValue_(listValue), [null]);
+    });
+
+    it('should return the raw value', function() {
+      var numberValue = {
+        kind: 'numberValue',
+        numberValue: 8
+      };
+
+      assert.strictEqual(GrpcService.decodeValue_(numberValue), 8);
+    });
+  });
+
+  describe('encodeValue_', function() {
+    it('should convert primitive values correctly', function() {
+      var buffer = new Buffer('Value');
+
+      assert.deepEqual(GrpcService.encodeValue_(null), {
+        nullValue: 0
+      });
+
+      assert.deepEqual(GrpcService.encodeValue_(1), {
+        numberValue: 1
+      });
+
+      assert.deepEqual(GrpcService.encodeValue_('Hi'), {
+        stringValue: 'Hi'
+      });
+
+      assert.deepEqual(GrpcService.encodeValue_(true), {
+        boolValue: true
+      });
+
+      assert.strictEqual(
+        GrpcService.encodeValue_(buffer).blobValue.toString(),
+        'Value'
+      );
+    });
+
+    it('should convert objects', function() {
+      var value = {};
+
+      GrpcService.objToStruct_ = function() {
+        return value;
+      };
+
+      var convertedValue = GrpcService.encodeValue_(value);
+
+      assert.deepEqual(convertedValue, {
+        structValue: value
+      });
+    });
+
+    it('should convert arrays', function() {
+      var convertedValue = GrpcService.encodeValue_([1, 2, 3]);
+
+      assert.deepEqual(convertedValue.listValue, {
+        values: [
+          GrpcService.encodeValue_(1),
+          GrpcService.encodeValue_(2),
+          GrpcService.encodeValue_(3)
+        ]
+      });
+    });
+
+    it('should throw if a type is not recognized', function() {
+      assert.throws(function() {
+        GrpcService.encodeValue_();
+      }, 'Value of type undefined not recognized.');
+    });
+
+    describe('options.stringify', function() {
+      var OPTIONS = {
+        stringify: true
+      };
+
+      it('should return a string if the value is not recognized', function() {
+        var date = new Date();
+
+        assert.deepEqual(
+          GrpcService.encodeValue_(date, OPTIONS),
+          { stringValue: String(date) }
+        );
+      });
+    });
+  });
+
+  describe('objToStruct_', function() {
+    it('should convert values in an Object', function() {
+      var inputValue = {};
+      var convertedValue = {};
+
+      GrpcService.encodeValue_ = function(value) {
+        assert.strictEqual(value, inputValue);
+        return convertedValue;
+      };
+
+      var struct = GrpcService.objToStruct_({
+        a: inputValue
+      });
+
+      assert.strictEqual(struct.fields.a, convertedValue);
+    });
+
+    it('should not include undefined values', function() {
+      var inputValue = {};
+      var convertedValue = {};
+
+      GrpcService.encodeValue_ = function(value) {
+        assert.strictEqual(value, inputValue);
+        return convertedValue;
+      };
+
+      var struct = GrpcService.objToStruct_({
+        a: undefined,
+        b: inputValue
+      });
+
+      assert.strictEqual(struct.fields.a, undefined);
+      assert.strictEqual(struct.fields.b, convertedValue);
+    });
+
+    it('should pass options to encodeValue', function(done) {
+      var options = {};
+
+      GrpcService.encodeValue_ = function(value, options_) {
+        assert.strictEqual(options_, options);
+        done();
+      };
+
+      GrpcService.objToStruct_({ a: {} }, options);
+    });
+  });
+
+  describe('structToObj_', function() {
+    it('should convert a struct to an object', function() {
+      var inputValue = {};
+      var decodedValue = {};
+
+      var struct = {
+        fields: {
+          a: inputValue
+        }
+      };
+
+      GrpcService.decodeValue_ = function(value) {
+        assert.strictEqual(value, inputValue);
+        return decodedValue;
+      };
+
+      assert.deepEqual(GrpcService.structToObj_(struct), {
+        a: decodedValue
+      });
+    });
+  });
+
   describe('request', function() {
     var PROTO_OPTS = { service: 'service', method: 'method', timeout: 3000 };
     var REQ_OPTS = {};
@@ -677,100 +871,6 @@ describe('GrpcService', function() {
           done();
         });
       });
-    });
-  });
-
-  describe('convertValue_', function() {
-    it('should convert primitive values correctly', function() {
-      var buffer = new Buffer('Value');
-
-      assert.deepEqual(GrpcService.convertValue_(null), {
-        nullValue: 0
-      });
-
-      assert.deepEqual(GrpcService.convertValue_(1), {
-        numberValue: 1
-      });
-
-      assert.deepEqual(GrpcService.convertValue_('Hi'), {
-        stringValue: 'Hi'
-      });
-
-      assert.deepEqual(GrpcService.convertValue_(true), {
-        boolValue: true
-      });
-
-      assert.strictEqual(
-        GrpcService.convertValue_(buffer).blobValue.toString(),
-        'Value'
-      );
-    });
-
-    it('should convert objects', function() {
-      var value = {};
-
-      GrpcService.objToStruct_ = function() {
-        return value;
-      };
-
-      var convertedValue = GrpcService.convertValue_(value);
-
-      assert.deepEqual(convertedValue, {
-        structValue: value
-      });
-    });
-
-    it('should convert dates', function() {
-      var value = new Date();
-      var seconds = value.getTime() / 1000;
-      var secondsRounded = Math.floor(seconds);
-
-      var convertedValue = GrpcService.convertValue_(value);
-
-      assert.deepEqual(convertedValue, {
-        timestampValue: {
-          seconds: secondsRounded,
-          nanos: Math.floor((seconds - secondsRounded) * 1e9)
-        }
-      });
-    });
-
-    it('should convert arrays', function() {
-      var convertedValue = GrpcService.convertValue_([1, 2, 3]);
-
-      assert.deepEqual(convertedValue.listValue, {
-        values: [
-          GrpcService.convertValue_(1),
-          GrpcService.convertValue_(2),
-          GrpcService.convertValue_(3)
-        ]
-      });
-    });
-
-    it('should throw if a type is not recognized', function() {
-      assert.throws(function() {
-        GrpcService.convertValue_();
-      }, 'Value of type undefined not recognized.');
-    });
-  });
-
-  describe('objToStruct_', function() {
-    it('should convert values in an Object', function() {
-      var inputValue = {};
-      var convertedValue = {};
-
-      GrpcService.convertValue_ = function(value) {
-        assert.strictEqual(value, inputValue);
-        return convertedValue;
-      };
-
-      var obj = {
-        a: inputValue
-      };
-
-      var struct = GrpcService.objToStruct_(obj);
-
-      assert.strictEqual(struct.fields.a, convertedValue);
     });
   });
 
