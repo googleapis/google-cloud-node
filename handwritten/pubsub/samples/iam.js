@@ -185,8 +185,12 @@ function testSubscriptionPermissionsExample (subscriptionName, callback) {
 }
 // [END test_subscription_permissions]
 
+exports.getTopicPolicyExample = getTopicPolicyExample;
+exports.getSubscriptionPolicyExample = getSubscriptionPolicyExample;
 exports.setTopicPolicyExample = setTopicPolicyExample;
 exports.setSubscriptionPolicyExample = setSubscriptionPolicyExample;
+exports.testTopicPermissionsExample = testTopicPermissionsExample;
+exports.testSubscriptionPermissionsExample = testSubscriptionPermissionsExample;
 
 // Run the examples
 exports.main = function (cb) {
