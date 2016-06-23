@@ -254,77 +254,9 @@ describe('Datastore', function() {
     });
   });
 
-  describe('runInTransaction', function() {
-    it('should begin transaction', function(done) {
-      datastore.createTransaction_ = function() {
-        return {
-          begin_: function() {
-            done();
-          }
-        };
-      };
-
-      datastore.runInTransaction();
-    });
-
-    it('should execute callback with error if one occurred', function(done) {
-      var error = new Error('Error.');
-      var apiResponse = {};
-
-      datastore.createTransaction_ = function() {
-        return {
-          begin_: function(callback) {
-            callback(error, apiResponse);
-          }
-        };
-      };
-
-      datastore.runInTransaction(util.noop, function(err, apiResponse_) {
-        assert.strictEqual(err, error);
-        assert.strictEqual(apiResponse_, apiResponse);
-        done();
-      });
-    });
-
-    it('should return transaction object to the callback', function(done) {
-      var transaction = {
-        begin_: function(callback) {
-          callback();
-        },
-        commit_: util.noop
-      };
-
-      datastore.createTransaction_ = function() {
-        return transaction;
-      };
-
-      datastore.runInTransaction(function(t) {
-        assert.deepEqual(t, transaction);
-        done();
-      }, assert.ifError);
-    });
-
-    it('should return correct done function to the callback', function(done) {
-      datastore.createTransaction_ = function() {
-        return {
-          begin_: function(callback) {
-            callback();
-          },
-          commit_: function() {
-            done();
-          }
-        };
-      };
-
-      datastore.runInTransaction(function(t, tDone) {
-        tDone();
-      }, assert.ifError);
-    });
-  });
-
-  describe('createTransaction_', function() {
+  describe('transaction', function() {
     it('should return a Transaction object', function() {
-      var transaction = datastore.createTransaction_();
+      var transaction = datastore.transaction();
       assert.strictEqual(transaction.calledWith_[0], datastore);
     });
   });
