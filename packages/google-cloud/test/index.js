@@ -42,6 +42,7 @@ var FakeLogging = createFakeApi();
 var FakePrediction = createFakeApi();
 var FakePubSub = createFakeApi();
 var FakeResource = createFakeApi();
+var FakeSpeech = createFakeApi();
 var FakeStorage = createFakeApi();
 var FakeTranslate = createFakeApi();
 var FakeVision = createFakeApi();
@@ -61,6 +62,7 @@ describe('gcloud', function() {
       '@google-cloud/prediction': FakePrediction,
       '@google-cloud/pubsub': FakePubSub,
       '@google-cloud/resource': FakeResource,
+      '@google-cloud/speech': FakeSpeech,
       '@google-cloud/storage': FakeStorage,
       '@google-cloud/translate': FakeTranslate,
       '@google-cloud/vision': FakeVision
@@ -109,6 +111,10 @@ describe('gcloud', function() {
 
   it('should export static resource', function() {
     assert.strictEqual(gcloud.resource, FakeResource);
+  });
+
+  it('should export static speech', function() {
+    assert.strictEqual(gcloud.speech, FakeSpeech);
   });
 
   it('should export static storage', function() {
@@ -241,6 +247,15 @@ describe('gcloud', function() {
 
         assert(resource instanceof FakeResource);
         assert.strictEqual(resource.calledWith_[0], options);
+      });
+    });
+
+    describe('speech', function() {
+      it('should create a new Speech', function() {
+        var speech = localGcloud.speech(options);
+
+        assert(speech instanceof FakeSpeech);
+        assert.strictEqual(speech.calledWith_[0], options);
       });
     });
 

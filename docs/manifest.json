@@ -165,6 +165,15 @@
       ]
     },
     {
+      "id": "speech",
+      "name": "@google-cloud/speech",
+      "defaultService": "speech",
+      "versions": [
+        "0.1.0",
+        "master"
+      ]
+    },
+    {
       "id": "storage",
       "name": "@google-cloud/storage",
       "defaultService": "storage",

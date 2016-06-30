@@ -22,6 +22,7 @@ This client supports the following Google Cloud Platform services:
 * [Google Translate API](#google-translate-api)
 * [Google Cloud Natural Language](#google-cloud-natural-language-beta) (Beta)
 * [Google Cloud Resource Manager](#google-cloud-resource-manager-beta) (Beta)
+* [Google Cloud Speech](#google-cloud-speech-limited-preview) (Limited Preview)
 * [Google Cloud Vision](#google-cloud-vision-beta) (Beta)
 * [Stackdriver Logging](#stackdriver-logging-beta) (Beta)
 
@@ -848,6 +849,63 @@ project.getMetadata(function(err, metadata) {
 ```
 
 
+## Google Cloud Speech (Limited Preview)
+
+> **This is a Limited Preview release of Google Cloud Speech.** This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
+
+- [API Documentation][gcloud-speech-docs]
+- [Official Documentation][cloud-speech-docs]
+
+```js
+var gcloud = require('gcloud');
+
+// Authorizing on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authorization section above).
+
+var speech = gcloud.speech({
+  projectId: 'my-project',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+// Detect the speech in an audio file.
+speech.detect('./audio.raw', {
+  encoding: 'LINEAR16',
+  sampleRate: 16000
+}, function(err, result) {
+  // result = {
+  //   transcript: 'how old is the Brooklyn Bridge',
+  //   confidence: 0.97234234234
+  // ]
+});
+```
+
+```js
+// Detect the speech in an audio file stream.
+var initialRequest = {
+  encoding: 'LINEAR16',
+  sampleRate: 16000,
+  continuous: true
+};
+
+var stream = speech.recognize(initialRequest);
+  .on('data', function (recognizeResponse) {
+    console.log(recognizeResponse);
+  });
+
+stream.write({
+  audioRequest: {
+    content: audioChunkOne
+  }
+});
+stream.write({
+  audioRequest: {
+    content: audioChunkTwo
+  }
+});
+stream.end();
+```
+
+
 ## Google Cloud Vision (Beta)
 
 > **This is a Beta release of Google Cloud Vision.** This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
@@ -1073,6 +1131,7 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [gcloud-prediction-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/prediction
 [gcloud-pubsub-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub
 [gcloud-resource-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/resource
+[gcloud-speech-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/speech
 [gcloud-storage-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/storage
 [gcloud-translate-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/translate
 [gcloud-vision-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/vision
@@ -1118,5 +1177,7 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [cloud-storage-docs]: https://cloud.google.com/storage/docs/overview
 
 [cloud-translate-docs]: https://cloud.google.com/translate/docs
+
+[cloud-speech-docs]: https://cloud.google.com/speech/docs
 
 [cloud-vision-docs]: https://cloud.google.com/vision/docs
