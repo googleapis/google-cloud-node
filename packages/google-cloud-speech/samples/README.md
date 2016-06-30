@@ -42,3 +42,18 @@ Example:
 
 [recognition_docs]: https://cloud.google.com/speech/
 [recognition_code]: recognize.js
+
+### Recognition (Streaming)
+
+View the [documentation][recognition_streaming_docs] or the [source code][recognition_streaming_code].
+
+__Run the sample:__
+
+Usage: `node recognize_streaming <path-to-audio-file>`
+
+Example:
+
+    node recognize_streaming "/path/to/audio.file"
+
+[recognition_streaming_docs]: https://cloud.google.com/speech/
+[recognition_streaming_code]: recognize_streaming.js
