@@ -19,6 +19,7 @@
 var assert = require('assert');
 var duplexify;
 var extend = require('extend');
+var format = require('string-format-obj');
 var googleAuth = require('google-auto-auth');
 var is = require('is');
 var mockery = require('mockery-next');
@@ -109,14 +110,17 @@ describe('common/util', function() {
   });
 
   it('should export an error for module instantiation errors', function() {
-    var missingProjectIdError = new Error([
+    var errorMessage = format([
       'Sorry, we cannot connect to Google Cloud Services without a project ID.',
       'You may specify one with an environment variable named',
-      '"GCLOUD_PROJECT".',
-      'See https://googlecloudplatform.github.io/gcloud-node/#/authentication',
-      'for a detailed guide on creating an authenticated connection.'
-    ].join(' '));
+      '"GCLOUD_PROJECT". See {baseUrl}/{path} for a detailed guide on creating',
+      'an authenticated connection.'
+    ].join(' '), {
+      baseUrl: 'https://googlecloudplatform.github.io/gcloud-node/#',
+      path: '/docs/guides/authentication'
+    });
 
+    var missingProjectIdError = new Error(errorMessage);
     assert.deepEqual(util.missingProjectIdError, missingProjectIdError);
   });
 
