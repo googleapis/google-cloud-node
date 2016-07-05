@@ -56,7 +56,7 @@ var gcloud = require('gcloud')({
 // ...you're good to go! See the next section to get started using the APIs.
 ```
 
-### Elsewhere
+### With Service Account
 
 If you are not running this client on Google Compute Engine, you need a Google Developers service account. To create a service account:
 
@@ -84,6 +84,24 @@ var gcloud = require('gcloud')({
 
 You can also set auth on a per-API-instance basis. The examples below show you how.
 
+### With access_token
+
+If you want to access user data, you can provide a previously obtained access_token which will be used for requests.
+For now the token will not be refreshed.
+
+``` js
+// Authenticating on a global basis.
+var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
+
+var gcloud = require('gcloud')({
+  projectId: projectId,
+  accessToken: 'thePreviouslyObtainedToken'
+});
+
+// ...you're good to go! See the next section to get started using the APIs.
+```
+
+You can also set auth on a per-API-instance basis.
 
 ## Google BigQuery
 
