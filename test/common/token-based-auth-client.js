@@ -30,7 +30,7 @@ describe('common/token-based-auth-client', function() {
   describe('authorizeRequest', function() {
     it('should add Authorization header to request', function(done) {
       var req = {};
-      var expected = { headers: {Authorization: 'Bearer ' + token}}
+      var expected = { headers: {Authorization: 'Bearer ' + token}};
 
       authClient.authorizeRequest(req, function(err) {
         assert.deepEqual(req, expected);

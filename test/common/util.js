@@ -738,11 +738,17 @@ describe('common/util', function() {
       });
 
       it('should return a getCredentials method', function() {
-        assert.equal(typeof makeAuthenticatedRequest.getCredentials, 'function');
+        assert.equal(
+          typeof makeAuthenticatedRequest.getCredentials,
+          'function'
+        );
       });
 
       it('getCredentials should return the accessToken', function() {
-        assert.equal(makeAuthenticatedRequest.getCredentials().accessToken, token);
+        assert.equal(
+          makeAuthenticatedRequest.getCredentials().accessToken,
+          token
+        );
       });
     });
 
