@@ -1832,6 +1832,37 @@ describe('File', function() {
       });
     });
 
+    describe('cname', function() {
+      it('should use a provided cname', function(done) {
+        var host = 'http://www.example.com';
+
+        file.getSignedUrl({
+          action: 'read',
+          cname: host,
+          expires: Date.now() + 5
+        }, function(err, signedUrl) {
+          assert.ifError(err);
+          assert.strictEqual(signedUrl.indexOf(host), 0);
+          done();
+        });
+      });
+
+      it('should remove trailing slashes from cname', function(done) {
+        var host = 'http://www.example.com//';
+
+        file.getSignedUrl({
+          action: 'read',
+          cname: host,
+          expires: Date.now() + 5
+        }, function(err, signedUrl) {
+          assert.ifError(err);
+          assert.strictEqual(signedUrl.indexOf(host), -1);
+          assert.strictEqual(signedUrl.indexOf(host.substr(0, -1)), 0);
+          done();
+        });
+      });
+    });
+
     describe('promptSaveAs', function() {
       it('should add response-content-disposition', function(done) {
         var disposition = 'attachment; filename="fname.ext"';
