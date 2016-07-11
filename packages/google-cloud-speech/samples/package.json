@@ -11,7 +11,7 @@
   "dependencies": {
     "async": "^1.5.2",
     "google-auto-auth": "^0.2.4",
-    "google-proto-files": "^0.2.4",
+    "google-proto-files": "^0.3.0",
     "googleapis": "^7.1.0",
     "grpc": "^0.15.0"
   }
