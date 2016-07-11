@@ -11,7 +11,7 @@
 This client supports the following Google Cloud Platform services:
 
 * [Google BigQuery](#google-bigquery)
-* [Google Cloud Bigtable](#google-bigtable)
+* [Google Cloud Bigtable](#google-cloud-bigtable)
 * [Google Cloud Datastore](#google-cloud-datastore)
 * [Google Cloud DNS](#google-cloud-dns)
 * [Google Cloud Pub/Sub](#google-cloud-pubsub)
@@ -149,7 +149,27 @@ table.getRows(function(err, rows) {});
 // Update a row in your table.
 var row = table.row('alincoln');
 
-row.save('follows:gwashington', 1, function(err) {});
+row.save('follows:gwashington', 1, function(err) {
+  if (err) {
+    // Error handling omitted.
+  }
+
+  row.get('follows:gwashington', function(err, data) {
+    if (err) {
+      // Error handling omitted.
+    }
+
+    // data = {
+    //   follows: {
+    //     gwashington: [
+    //       {
+    //         value: 1
+    //       }
+    //     ]
+    //   }
+    // }
+  });
+});
 ```
 
 
