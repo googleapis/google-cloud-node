@@ -73,6 +73,10 @@ describe('Entry', function() {
       var seconds = date.getTime() / 1000;
       var secondsRounded = Math.floor(seconds);
 
+      FakeGrpcService.structToObj_ = function(data) {
+        return data;
+      };
+
       entry = Entry.fromApiResponse_({
         resource: RESOURCE,
         payload: 'jsonPayload',
@@ -178,8 +182,11 @@ describe('Entry', function() {
       var input = {};
       var converted = {};
 
-      FakeGrpcService.objToStruct_ = function(obj) {
+      FakeGrpcService.objToStruct_ = function(obj, options) {
         assert.strictEqual(obj, input);
+        assert.deepEqual(options, {
+          serialize: true
+        });
         return converted;
       };
 
