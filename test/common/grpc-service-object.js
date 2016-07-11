@@ -156,4 +156,18 @@ describe('GrpcServiceObject', function() {
       grpcServiceObject.request(PROTO_OPTS, REQ_OPTS, done);
     });
   });
+
+  describe('requestStream', function() {
+    it('should call the parent instance requestStream method', function(done) {
+      grpcServiceObject.parent = {
+        requestStream: function(protoOpts, reqOpts) {
+          assert.strictEqual(protoOpts, PROTO_OPTS);
+          assert.strictEqual(reqOpts, REQ_OPTS);
+          done();
+        }
+      };
+
+      grpcServiceObject.requestStream(PROTO_OPTS, REQ_OPTS);
+    });
+  });
 });

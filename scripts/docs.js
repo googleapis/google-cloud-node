@@ -31,7 +31,8 @@ var IGNORE = [
   './lib/datastore/entity.js',
   './lib/datastore/request.js',
   './lib/pubsub/iam.js',
-  './lib/storage/acl.js'
+  './lib/storage/acl.js',
+  './lib/bigtable/mutation.js'
 ];
 
 function isPublic(block) {

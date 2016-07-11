@@ -33,6 +33,7 @@ function createFakeApi() {
 }
 
 var FakeBigQuery = createFakeApi();
+var FakeBigtable = createFakeApi();
 var FakeCompute = createFakeApi();
 var FakeDatastore = createFakeApi();
 var FakeDNS = createFakeApi();
@@ -47,6 +48,7 @@ describe('gcloud', function() {
 
   before(function() {
     mockery.registerMock('../lib/bigquery', FakeBigQuery);
+    mockery.registerMock('../lib/bigtable', FakeBigtable);
     mockery.registerMock('../lib/compute', FakeCompute);
     mockery.registerMock('../lib/datastore', FakeDatastore);
     mockery.registerMock('../lib/dns', FakeDNS);
@@ -73,6 +75,10 @@ describe('gcloud', function() {
 
   it('should export static bigquery', function() {
     assert.strictEqual(gcloud.bigquery, FakeBigQuery);
+  });
+
+  it('should export static bigtable', function() {
+    assert.strictEqual(gcloud.bigtable, FakeBigtable);
   });
 
   it('should export static compute', function() {
@@ -144,6 +150,15 @@ describe('gcloud', function() {
 
         assert(bigquery instanceof FakeBigQuery);
         assert.strictEqual(bigquery.calledWith_[0], options);
+      });
+    });
+
+    describe('bigtable', function() {
+      it('should create a new Bigtable', function() {
+        var bigtable = localGcloud.bigtable(options);
+
+        assert(bigtable instanceof FakeBigtable);
+        assert.strictEqual(bigtable.calledWith_[0], options);
       });
     });
 
