@@ -125,6 +125,9 @@ describe('File', function() {
         } else {
           return (requestOverride || requestCached)(req);
         }
+      },
+      bucket: function(name) {
+        return new Bucket(this, name);
       }
     };
 
@@ -306,6 +309,16 @@ describe('File', function() {
         var expectedPath = format('/copyTo/b/{destBucket}/o/{destName}', {
           destBucket: file.bucket.name,
           destName: newFileName
+        });
+        assertPathEquals(file, expectedPath, done);
+        file.copy(newFileName);
+      });
+
+      it('should allow a "gs://..." string', function(done) {
+        var newFileName = 'gs://other-bucket/new-file-name.png';
+        var expectedPath = format('/copyTo/b/{destBucket}/o/{destName}', {
+          destBucket: 'other-bucket',
+          destName: 'new-file-name.png'
         });
         assertPathEquals(file, expectedPath, done);
         file.copy(newFileName);

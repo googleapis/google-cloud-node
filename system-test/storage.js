@@ -849,10 +849,39 @@ describe('storage', function() {
         assert.ifError(err);
 
         file.copy('CloudLogoCopy', function(err, copiedFile) {
+          assert.ifError(err);
           async.parallel([
             file.delete.bind(file),
             copiedFile.delete.bind(copiedFile)
           ], done);
+        });
+      });
+    });
+
+    it('should copy to another bucket given a gs:// URL', function(done) {
+      var opts = { destination: 'CloudLogo' };
+      bucket.upload(FILES.logo.path, opts, function(err, file) {
+        assert.ifError(err);
+
+        var otherBucket = storage.bucket(generateName());
+        otherBucket.create(function(err) {
+          assert.ifError(err);
+
+          var destPath = 'gs://' + otherBucket.name + '/CloudLogoCopy';
+          file.copy(destPath, function(err) {
+            assert.ifError(err);
+
+            otherBucket.getFiles(function(err, files) {
+              assert.ifError(err);
+
+              assert.strictEqual(files.length, 1);
+              var newFile = files[0];
+
+              assert.strictEqual(newFile.name, 'CloudLogoCopy');
+
+              done();
+            });
+          });
         });
       });
     });
