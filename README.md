@@ -3,6 +3,7 @@
 
 [![NPM Version](https://img.shields.io/npm/v/gcloud.svg)](https://www.npmjs.org/package/gcloud)
 [![Travis Build Status](https://travis-ci.org/GoogleCloudPlatform/gcloud-node.svg)](https://travis-ci.org/GoogleCloudPlatform/gcloud-node/)
+[![Dependency Status](https://dependencyci.com/github/GoogleCloudPlatform/gcloud-node/badge)](https://dependencyci.com/github/GoogleCloudPlatform/gcloud-node)
 [![Coverage Status](https://img.shields.io/coveralls/GoogleCloudPlatform/gcloud-node.svg)](https://coveralls.io/r/GoogleCloudPlatform/gcloud-node?branch=master)
 
 * [Homepage][gcloud-homepage]
