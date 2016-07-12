@@ -110,6 +110,24 @@ describe('Bigtable', function() {
       fakeUtil.normalizeArguments = normalizeArguments;
     });
 
+    it('should leave the original options unaltered', function() {
+      var fakeOptions = {
+        a: 'a',
+        b: 'b',
+        c: 'c',
+        zone: 'zone'
+      };
+
+      var bigtable = new Bigtable(fakeOptions);
+      var options = bigtable.calledWith_[1];
+
+      for (var option in fakeOptions) {
+        assert.strictEqual(fakeOptions[option], options[option]);
+      }
+
+      assert.notStrictEqual(fakeOptions, options);
+    });
+
     it('should localize the cluster name', function() {
       assert.strictEqual(bigtable.clusterName, CLUSTER_NAME);
     });
