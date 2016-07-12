@@ -72,11 +72,21 @@ function addTask (description, callback) {
 
   datastore.save({
     key: taskKey,
-    data: {
-      created: new Date().toJSON(),
-      description: description,
-      done: false
-    }
+    data:  [
+      {
+        name: 'created',
+        value: new Date().toJSON()
+      },
+      {
+        name: 'description',
+        value: description,
+        excludeFromIndexes: true
+      },
+      {
+        name: 'done',
+        value: false
+      }
+    ]
   }, function (err) {
     if (err) {
       callback(err);
