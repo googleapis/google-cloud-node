@@ -347,13 +347,17 @@ describe('Logging', function() {
       });
     });
 
-    it('should write an entry with primitive values', function(done) {
+    it('should stringify unknown value types', function(done) {
       var logEntry = log.entry({
         when: new Date(),
         matchUser: /username: (.+)/,
         matchUserError: new Error('No user found.'),
         shouldNotBeSaved: undefined
       });
+
+      options.encoding = {
+        stringify: true
+      };
 
       log.write(logEntry, options, function(err) {
         assert.ifError(err);
