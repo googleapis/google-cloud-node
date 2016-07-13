@@ -391,7 +391,7 @@ var name = 'ubuntu-http';
 zone.createVM(name, { os: 'ubuntu' }, function(err, vm, operation) {
   // `operation` lets you check the status of long-running tasks.
 
-  operation.onComplete(function(err, metadata) {
+  operation.on("complete", function(err, metadata) {
     if (!err) {
       // Virtual machine created!
     }
