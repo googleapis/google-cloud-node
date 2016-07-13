@@ -1,2 +1,3 @@
-system-test/data/*
-test/testdata/*
+**/system-test/data/*
+**/test/testdata/*
+**/node_modules/

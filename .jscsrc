@@ -21,6 +21,7 @@
   },
   "excludeFiles": [
     "system-test/data/*",
-    "test/testdata/*"
+    "test/testdata/*",
+    "**/node_modules/"
   ]
 }

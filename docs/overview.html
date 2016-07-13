@@ -1,8 +1,8 @@
 <p>
-  First, install <code>gcloud-node</code> with npm and require it into your project:
+  First, install <code>google-cloud</code> with npm and require it into your project:
 </p>
-<div hljs>$ npm install --save gcloud</div>
-<div hljs>var gcloud = require('gcloud');</div>
+<div hljs>$ npm install --save google-cloud</div>
+<div hljs>var gcloud = require('google-cloud');</div>
 <p>
   If you are running your app on Google Compute Engine, you won't need to worry about supplying connection configuration options to <code>gcloud-node</code>— we figure that out for you.
 </p>
@@ -11,10 +11,10 @@
 </p>
 <div hljs>
 // Compute Engine
-var gcloud = require('gcloud');
+var gcloud = require('google-cloud');
 
 // Elsewhere
-var gcloud = require('gcloud')({
+var gcloud = require('google-cloud')({
   projectId: 'project-id',
   keyFilename: '/path/to/keyfile.json'
 });</div>

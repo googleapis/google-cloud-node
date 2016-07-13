@@ -27,12 +27,12 @@ var format = require('string-format-obj');
 
 var OUTPUT_FOLDER = './docs/json/master';
 var IGNORE = [
-  './lib/common/*',
-  './lib/datastore/entity.js',
-  './lib/datastore/request.js',
-  './lib/pubsub/iam.js',
-  './lib/storage/acl.js',
-  './lib/bigtable/mutation.js'
+  './packages/common/src/*',
+  './packages/datastore/src/entity.js',
+  './packages/datastore/src/request.js',
+  './packages/pubsub/src/iam.js',
+  './packages/storage/src/acl.js',
+  './packages/bigtable/src/mutation.js'
 ];
 
 function isPublic(block) {
@@ -97,11 +97,11 @@ function createUniqueMethodList(list, method) {
 
 function getId(fileName) {
   var hooks = {
-    'index': 'gcloud'
+    'index': 'google-cloud'
   };
 
   var id = fileName
-    .replace(/^(\.\/)?lib\//, '')
+    .replace(/^(\.\/)?packages\//, '')
     .replace('/index.js', '')
     .replace('.js', '');
 
@@ -139,7 +139,7 @@ function getParent(id) {
 }
 
 function getChildren(id) {
-  var childrenGlob = './lib/' + id + '/*';
+  var childrenGlob = './packages/' + id + '/*';
 
   return globby
     .sync(childrenGlob, { ignore: IGNORE })
@@ -266,7 +266,7 @@ function getMixinMethods(comments) {
     return getTagsByType(block, 'mixes').length;
   }).map(function(block) {
     var mixin = getTagsByType(block, 'mixes')[0];
-    var mixinFile = path.join('./lib', mixin.string.replace('module:', '') + '.js');
+    var mixinFile = path.join('./packages', mixin.string.replace('module:', '').replace('/', '/src/') + '.js');
     var mixinContents = fs.readFileSync(mixinFile, 'utf8', true);
     var docs = parseFile(mixinFile, mixinContents);
     var methods = docs.methods.filter(function(method) {
@@ -311,7 +311,7 @@ function parseFile(fileName, contents) {
 function createTypesDictionary(docs) {
   return docs.map(function(service) {
     var id = service.id;
-    var title = [id === 'gcloud' ? 'Node.js' : service.name];
+    var title = [id === 'google-cloud' ? 'Node.js' : service.name];
     var contents = service.path.replace('docs/json/master/', '');
 
     if (service.parent) {
@@ -330,7 +330,7 @@ function createTypesDictionary(docs) {
   });
 }
 
-globby('./lib/*{,/*}.js', { ignore: IGNORE }).then(function(files) {
+globby('./packages/*/src/*.js', { ignore: IGNORE }).then(function(files) {
   async.map(files, function(file, callback) {
     fs.readFile(file, 'utf8', function(err, contents) {
       if (err) {
@@ -341,8 +341,11 @@ globby('./lib/*{,/*}.js', { ignore: IGNORE }).then(function(files) {
       var docs = parseFile(file, contents);
       var outputFile = path.join(
         OUTPUT_FOLDER,
-        file.replace('/lib', '').replace('.js', '.json')
+        file.replace('/packages', '').replace('/src/', '/').replace('.js', '.json')
       );
+      if (outputFile.indexOf('google-cloud') !== -1) {
+        outputFile = outputFile.replace('/google-cloud/', '/');
+      }
 
       fs.writeFile(outputFile, JSON.stringify(docs), function(err) {
         docs.path = outputFile;
