@@ -185,7 +185,7 @@ describe('Entry', function() {
       FakeGrpcService.objToStruct_ = function(obj, options) {
         assert.strictEqual(obj, input);
         assert.deepEqual(options, {
-          serialize: true
+          stringify: true
         });
         return converted;
       };
