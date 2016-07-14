@@ -38,7 +38,7 @@ Usage: `node recognize <path-to-audio-file>`
 
 Example:
 
-    node recognize "/path/to/audio.file"
+    node recognize resources/audio.raw
 
 [recognition_docs]: https://cloud.google.com/speech/
 [recognition_code]: recognize.js
@@ -53,7 +53,7 @@ Usage: `node recognize_streaming <path-to-audio-file>`
 
 Example:
 
-    node recognize_streaming "/path/to/audio.file"
+    node recognize_streaming resources/audio.raw
 
 [recognition_streaming_docs]: https://cloud.google.com/speech/
 [recognition_streaming_code]: recognize_streaming.js
