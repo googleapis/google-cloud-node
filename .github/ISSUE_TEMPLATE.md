@@ -9,7 +9,7 @@ Please run down the following list and make sure you've tried the usual "quick f
   
 If you are still having issues, please be sure to include as much information as possible:
 
-#### Environment Info
+#### Environment details
 
   - OS: 
   - Node.js version: 
