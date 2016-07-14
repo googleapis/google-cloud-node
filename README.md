@@ -39,6 +39,8 @@ $ npm install --save gcloud
 - [gitnpm][gitnpm] - Easily lookup an npm package's GitHub repo using gcloud-node and Google App Engine.
 - [gcloud-kvstore][gcloud-kvstore] - Use Datastore as a simple key-value store.
 - [hya-wave][hya-wave] - Cloud-based web sample editor. Part of the [hya-io][hya-io] family of products.
+- [gstore-node][gstore-node] - Google Datastore Entities Modeling library.
+- [gstore-api][gstore-api] - REST API builder for Google Datastore Entities.
 
 ## Authentication
 
@@ -731,6 +733,8 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [gcloud-kvstore]: https://github.com/stephenplusplus/gcloud-kvstore
 [hya-wave]: https://wav.hya.io
 [hya-io]: https://hya.io
+[gstore-node]: https://github.com/sebelga/gstore-node
+[gstore-api]: https://github.com/sebelga/gstore-api
 
 [dev-console]: https://console.developers.google.com/project
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
