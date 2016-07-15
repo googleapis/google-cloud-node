@@ -1120,13 +1120,13 @@ describe('GrpcService', function() {
     });
   });
 
-  describe('getError_', function() {
-    it('should retrieve the HTTP error from the gRPC error map', function() {
+  describe('getStatus_', function() {
+    it('should retrieve the HTTP code from the gRPC error map', function() {
       var errorMap = GrpcService.GRPC_ERROR_CODE_TO_HTTP;
       var codes = Object.keys(errorMap);
 
       codes.forEach(function(code) {
-        var error = GrpcService.getError_({ code: code });
+        var error = GrpcService.getStatus_({ code: code });
 
         assert.notStrictEqual(error, errorMap[code]);
         assert.deepEqual(error, errorMap[code]);
@@ -1141,12 +1141,12 @@ describe('GrpcService', function() {
         message: errorMessage
       };
 
-      var error = GrpcService.getError_(err);
+      var error = GrpcService.getStatus_(err);
       assert.strictEqual(error.message, errorMessage);
     });
 
-    it('should return the original object for unknown errors', function() {
-      var error = GrpcService.getError_({ code: 9999 });
+    it('should return null for unknown errors', function() {
+      var error = GrpcService.getStatus_({ code: 9999 });
 
       assert.strictEqual(error, null);
     });
