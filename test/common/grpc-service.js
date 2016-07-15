@@ -25,6 +25,7 @@ var mockery = require('mockery-next');
 var path = require('path');
 var retryRequest = require('retry-request');
 var through = require('through2');
+var sinon = require('sinon').sandbox.create();
 
 var util = require('../../lib/common/util.js');
 
@@ -138,6 +139,7 @@ describe('GrpcService', function() {
   afterEach(function() {
     googleProtoFilesOverride = null;
     grpcLoadOverride = null;
+    sinon.restore();
   });
 
   describe('grpc error to http error map', function() {
@@ -1120,16 +1122,18 @@ describe('GrpcService', function() {
     });
   });
 
-  describe('getStatus_', function() {
+  describe('extendGrpcResponse_', function() {
     it('should retrieve the HTTP code from the gRPC error map', function() {
       var errorMap = GrpcService.GRPC_ERROR_CODE_TO_HTTP;
       var codes = Object.keys(errorMap);
 
       codes.forEach(function(code) {
-        var error = GrpcService.getStatus_({ code: code });
+        var error = new Error();
+        var extended = GrpcService.extendGrpcResponse_(error, { code: code });
 
-        assert.notStrictEqual(error, errorMap[code]);
-        assert.deepEqual(error, errorMap[code]);
+        assert.notStrictEqual(extended, errorMap[code]);
+        assert.deepEqual(extended, errorMap[code]);
+        assert.strictEqual(error, extended);
       });
     });
 
@@ -1141,14 +1145,52 @@ describe('GrpcService', function() {
         message: errorMessage
       };
 
-      var error = GrpcService.getStatus_(err);
-      assert.strictEqual(error.message, errorMessage);
+      var error = new Error();
+      var extended = GrpcService.extendGrpcResponse_(error, err);
+
+      assert.strictEqual(extended.message, errorMessage);
     });
 
     it('should return null for unknown errors', function() {
-      var error = GrpcService.getStatus_({ code: 9999 });
+      var error = new Error();
+      var extended = GrpcService.extendGrpcResponse_(error, { code: 9999 });
 
-      assert.strictEqual(error, null);
+      assert.strictEqual(extended, null);
+    });
+  });
+
+  describe('getError_', function() {
+    var fakeError = new Error('err.');
+
+    beforeEach(function() {
+      sinon.stub(GrpcService, 'extendGrpcResponse_', function() {
+        return fakeError;
+      });
+    });
+
+    it('should call extendGrpcResponse with an error object', function() {
+      var grpcError = new Error('err.');
+
+      grpcError.code = 2;
+
+      var error = GrpcService.getError_(grpcError);
+      var args = GrpcService.extendGrpcResponse_.getCall(0).args;
+
+      assert.strictEqual(fakeError, error);
+      assert(args[0] instanceof Error);
+      assert.strictEqual(args[1], grpcError);
+    });
+
+    it('should call extendGrpcResponse with a plain object', function() {
+      var grpcMessage = { code: 2 };
+
+      var error = GrpcService.getError_(grpcMessage);
+      var args = GrpcService.extendGrpcResponse_.getCall(0).args;
+
+      assert.strictEqual(fakeError, error);
+      assert.deepEqual(args[0], {});
+      assert(!(args[0] instanceof Error));
+      assert.strictEqual(args[1], grpcMessage);
     });
   });
 
