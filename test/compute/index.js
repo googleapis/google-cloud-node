@@ -53,6 +53,7 @@ var fakeStreamRouter = {
       'getRules',
       'getServices',
       'getSnapshots',
+      'getSubnetworks',
       'getVMs',
       'getZones'
     ]);
