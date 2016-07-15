@@ -1133,7 +1133,19 @@ describe('GrpcService', function() {
       });
     });
 
-    it('should return null for unknown errors', function() {
+    it('should use the message from the error', function() {
+      var errorMessage = 'This is an error message.';
+
+      var err = {
+        code: 1,
+        message: errorMessage
+      };
+
+      var error = GrpcService.getError_(err);
+      assert.strictEqual(error.message, errorMessage);
+    });
+
+    it('should return the original object for unknown errors', function() {
       var error = GrpcService.getError_({ code: 9999 });
 
       assert.strictEqual(error, null);
