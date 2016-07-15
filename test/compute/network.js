@@ -146,6 +146,26 @@ describe('Network', function() {
     });
   });
 
+  describe('createSubnetwork', function() {
+    it('should make the correct call to Region', function(done) {
+      var name = 'subnetwork-name';
+      var config = { a: 'b', c: 'd', region: 'region1'};
+      var expectedConfig = extend({}, config, {
+        network: network.formattedName,
+        name: name
+      });
+      delete expectedConfig.region;
+
+      network.compute.request = function(config_) {
+        assert.strictEqual(config_.json.name, name);
+        assert.deepEqual(config_.json, expectedConfig);
+        done();
+      };
+
+      network.createSubnetwork(name, config, done);
+    });
+  });
+
   describe('delete', function() {
     it('should call ServiceObject.delete', function(done) {
       FakeServiceObject.prototype.delete = function() {
@@ -232,6 +252,52 @@ describe('Network', function() {
       assert.deepEqual(firewallInstance.metadata, {
         network: network.formattedName
       });
+    });
+  });
+
+  describe('getSubnetworks', function() {
+    it('should make the correct call to Compute', function(done) {
+      var options = { a: 'b', c: 'd' };
+      var expectedOptions = extend({}, options, {
+        filter: 'network eq .*' + network.formattedName
+      });
+
+      network.compute.getSubnetworks = function(options, callback) {
+        assert.deepEqual(options, expectedOptions);
+        callback();
+      };
+
+      network.getSubnetworks(options, done);
+    });
+
+    it('should not require options', function(done) {
+      network.compute.getSubnetworks = function(options, callback) {
+        callback();
+      };
+
+      network.getSubnetworks(done);
+    });
+
+    it('should not require any arguments', function(done) {
+      network.compute.getSubnetworks = function(options, callback) {
+        assert.deepEqual(options, {
+          filter: 'network eq .*' + network.formattedName
+        });
+        assert.strictEqual(typeof callback, 'undefined');
+        done();
+      };
+
+      network.getSubnetworks();
+    });
+
+    it('should return the result of calling Compute', function() {
+      var resultOfgetSubnetworks = {};
+
+      network.compute.getSubnetworks = function() {
+        return resultOfgetSubnetworks;
+      };
+
+      assert.strictEqual(network.getSubnetworks(), resultOfgetSubnetworks);
     });
   });
 

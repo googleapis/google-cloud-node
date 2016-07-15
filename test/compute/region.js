@@ -37,6 +37,10 @@ function FakeRule() {
   this.calledWith_ = [].slice.call(arguments);
 }
 
+function FakeSubnetwork() {
+  this.calledWith_ = [].slice.call(arguments);
+}
+
 function FakeServiceObject() {
   this.calledWith_ = arguments;
   ServiceObject.apply(this, arguments);
@@ -54,7 +58,8 @@ var fakeStreamRouter = {
     extended = true;
     methods = arrify(methods);
     assert.equal(Class.name, 'Region');
-    assert.deepEqual(methods, ['getAddresses', 'getOperations', 'getRules']);
+    assert.deepEqual(methods,
+      ['getAddresses', 'getOperations', 'getRules', 'getSubnetworks']);
   }
 };
 
@@ -76,6 +81,7 @@ describe('Region', function() {
     mockery.registerMock('../../lib/compute/address.js', FakeAddress);
     mockery.registerMock('../../lib/compute/operation.js', FakeOperation);
     mockery.registerMock('../../lib/compute/rule.js', FakeRule);
+    mockery.registerMock('../../lib/compute/subnetwork.js', FakeSubnetwork);
 
     mockery.enable({
       useCleanCache: true,
@@ -264,6 +270,97 @@ describe('Region', function() {
     });
   });
 
+  describe('createSubnetwork', function() {
+    var NAME = 'subnetwork-name';
+    var OPTIONS = { a: 'b', c: 'd' };
+    var EXPECTED_BODY = extend({}, OPTIONS, { name: NAME });
+
+    it('should not require any options', function(done) {
+      var expectedBody = { name: NAME };
+
+      region.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.json, expectedBody);
+        done();
+      };
+
+      region.createSubnetwork(NAME, assert.ifError);
+    });
+
+    it('should make the correct API request', function(done) {
+      region.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/subnetworks');
+        assert.deepEqual(reqOpts.json, EXPECTED_BODY);
+
+        done();
+      };
+
+      region.createSubnetwork(NAME, OPTIONS, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = { a: 'b', c: 'd' };
+
+      beforeEach(function() {
+        region.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        region.createSubnetwork(NAME, OPTIONS,
+          function(err, subnetwork_, op, resp) {
+            assert.strictEqual(err, error);
+            assert.strictEqual(subnetwork_, null);
+            assert.strictEqual(op, null);
+            assert.strictEqual(resp, apiResponse);
+            done();
+          });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = { name: 'operation-name' };
+
+      beforeEach(function() {
+        region.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should exec callback with Subnetwork, Op & apiResponse',
+        function(done) {
+        var subnetwork = {};
+        var operation = {};
+
+        region.subnetwork = function(name) {
+          assert.strictEqual(name, NAME);
+          return subnetwork;
+        };
+
+        region.operation = function(name) {
+          assert.strictEqual(name, apiResponse.name);
+          return operation;
+        };
+
+        region.createSubnetwork(NAME, OPTIONS,
+          function(err, subnetwork_, op, resp) {
+          assert.ifError(err);
+
+          assert.strictEqual(subnetwork_, subnetwork);
+
+          assert.strictEqual(op, operation);
+          assert.strictEqual(op.metadata, resp);
+
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
+    });
+  });
+
+
   describe('getAddresses', function() {
     it('should accept only a callback', function(done) {
       region.request = function(reqOpts) {
@@ -361,6 +458,109 @@ describe('Region', function() {
 
           done();
         });
+      });
+    });
+  });
+
+  describe('getSubnetworks', function() {
+    it('should accept only a callback', function(done) {
+      region.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
+
+      region.getSubnetworks(assert.ifError);
+    });
+
+    it('should make the correct API request', function(done) {
+      var query = { a: 'b', c: 'd' };
+
+      region.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/subnetworks');
+        assert.strictEqual(reqOpts.qs, query);
+
+        done();
+      };
+
+      region.getSubnetworks(query, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = { a: 'b', c: 'd' };
+
+      beforeEach(function() {
+        region.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        region.getSubnetworks({},
+          function(err, subnetworks, nextQuery, apiResp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(subnetworks, null);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(apiResp, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = {
+        items: [
+          { name: 'operation-name' }
+        ]
+      };
+
+      beforeEach(function() {
+        region.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should build a nextQuery if necessary', function(done) {
+        var nextPageToken = 'next-page-token';
+        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+          nextPageToken: nextPageToken
+        });
+        var expectedNextQuery = {
+          pageToken: nextPageToken
+        };
+
+        region.request = function(reqOpts, callback) {
+          callback(null, apiResponseWithNextPageToken);
+        };
+
+        region.getSubnetworks({}, function(err, subnetworks, nextQuery) {
+          assert.ifError(err);
+
+          assert.deepEqual(nextQuery, expectedNextQuery);
+
+          done();
+        });
+      });
+
+      it('should execute callback with Operations & API resp', function(done) {
+        var subnetwork = {};
+
+        region.subnetwork = function(name) {
+          assert.strictEqual(name, apiResponse.items[0].name);
+          return subnetwork;
+        };
+
+        region.getSubnetworks({},
+          function(err, subnetworks, nextQuery, apiResp) {
+            assert.ifError(err);
+
+            assert.strictEqual(subnetworks[0], subnetwork);
+            assert.strictEqual(subnetworks[0].metadata, apiResponse.items[0]);
+
+            assert.strictEqual(apiResp, apiResponse);
+
+            done();
+          });
       });
     });
   });
@@ -564,6 +764,17 @@ describe('Region', function() {
           done();
         });
       });
+    });
+  });
+
+  describe('subnetwork', function() {
+    var NAME = 'subnetwork-name';
+
+    it('should return a Subnetwork object', function() {
+      var subnetwork = region.subnetwork(NAME);
+      assert(subnetwork instanceof FakeSubnetwork);
+      assert.strictEqual(subnetwork.calledWith_[0], region);
+      assert.strictEqual(subnetwork.calledWith_[1], NAME);
     });
   });
 
