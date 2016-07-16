@@ -165,33 +165,33 @@ Entity.prototype.testEntityWithParent = function (callback) {
 Entity.prototype.testProperties = function (callback) {
   // jshint camelcase:false
   // [START properties]
-  var task  =  [
-      {
-        name: 'type',
-        value: 'Personal'
-      },
-      {
-        name: 'created',
-        value: new Date()
-      },
-      {
-        name: 'done',
-        value: false
-      },
-      {
-        name: 'priority',
-        value: 4
-      },
-      {
-        name: 'percent_complete',
-        value: 10.0
-      },
-      {
-        name: 'description',
-        value: 'Learn Cloud Datastore',
-        excludeFromIndexes: true
-      }
-    ];
+  var task = [
+    {
+      name: 'type',
+      value: 'Personal'
+    },
+    {
+      name: 'created',
+      value: new Date()
+    },
+    {
+      name: 'done',
+      value: false
+    },
+    {
+      name: 'priority',
+      value: 4
+    },
+    {
+      name: 'percent_complete',
+      value: 10.0
+    },
+    {
+      name: 'description',
+      value: 'Learn Cloud Datastore',
+      excludeFromIndexes: true
+    }
+  ];
   // [END properties]
 
   this.datastore.save({

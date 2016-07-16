@@ -72,7 +72,7 @@ function addTask (description, callback) {
 
   datastore.save({
     key: taskKey,
-    data:  [
+    data: [
       {
         name: 'created',
         value: new Date().toJSON()
