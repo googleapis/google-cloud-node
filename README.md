@@ -394,11 +394,11 @@ zone.createVM(name, { os: 'ubuntu' }, function(err, vm, operation) {
   // `operation` lets you check the status of long-running tasks.
 
   operation
-  .on('error', function(err) {})
-  .on('running', function(metadata) {})
-  .on('complete', function(metadata) {
-    // Virtual machine created!
-  });
+    .on('error', function(err) {})
+    .on('running', function(metadata) {})
+    .on('complete', function(metadata) {
+      // Virtual machine created!
+    });
 });
 ```
 
