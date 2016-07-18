@@ -138,6 +138,14 @@
       "type": "datastore/transaction"
     }]
   }, {
+  }, {
+    "title": "Language",
+    "type": "language",
+    "nav": [{
+      "title": "Document",
+      "type": "language/document"
+    }]
+  }, {
     "title": "Logging",
     "type": "logging",
     "nav": [{

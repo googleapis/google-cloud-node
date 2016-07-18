@@ -41,6 +41,7 @@ link('common');
 // Depends on @google-cloud/common, @google-cloud/storage
 [
   'bigquery',
+  'language',
   'prediction',
   'vision'
 ].forEach(function(packageName) {
@@ -67,6 +68,7 @@ link('logging');
   'compute',
   'datastore',
   'dns',
+  'language',
   'logging',
   'prediction',
   'pubsub',

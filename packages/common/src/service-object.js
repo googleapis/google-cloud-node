@@ -308,7 +308,7 @@ ServiceObject.prototype.request = function(reqOpts, callback) {
 
   var uriComponents = [
     this.baseUrl,
-    this.id,
+    this.id || '',
     reqOpts.uri
   ];
 
