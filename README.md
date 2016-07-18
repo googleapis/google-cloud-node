@@ -393,13 +393,14 @@ var name = 'ubuntu-http';
 zone.createVM(name, { os: 'ubuntu' }, function(err, vm, operation) {
   // `operation` lets you check the status of long-running tasks.
 
-  operation.on('complete', function(metadata) {
+  operation
+  .on('error', function(err) {})
+  .on('running', function(metadata) {})
+  .on('complete', function(metadata) {
     // Virtual machine created!
   });
 });
 ```
-
-You can read more about opeation events [here](https://github.com/GoogleCloudPlatform/gcloud-node/blob/276c847669470c3639eb78d7d87a09db7a9b5c18/lib/compute/operation.js#L83).
 
 ## Google Prediction API
 
