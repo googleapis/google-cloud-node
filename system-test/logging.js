@@ -32,7 +32,7 @@ var Storage = require('../lib/storage/index.js');
 
 describe('Logging', function() {
   var TESTS_PREFIX = 'gcloud-logging-test';
-  var WRITE_CONSISTENCY_DELAY_MS = 15000;
+  var WRITE_CONSISTENCY_DELAY_MS = 60000;
 
   var logging = new Logging(env);
 
