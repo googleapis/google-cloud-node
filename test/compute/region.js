@@ -275,17 +275,6 @@ describe('Region', function() {
     var OPTIONS = { a: 'b', c: 'd' };
     var EXPECTED_BODY = extend({}, OPTIONS, { name: NAME });
 
-    it('should not require any options', function(done) {
-      var expectedBody = { name: NAME };
-
-      region.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.json, expectedBody);
-        done();
-      };
-
-      region.createSubnetwork(NAME, assert.ifError);
-    });
-
     it('should make the correct API request', function(done) {
       region.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');

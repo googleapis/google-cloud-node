@@ -36,6 +36,9 @@ describe('Network', function() {
   var Network;
   var network;
 
+  var REGION;
+  var Region;
+
   var COMPUTE = {
     projectId: 'project-id',
     createNetwork: util.noop
@@ -45,6 +48,7 @@ describe('Network', function() {
     pId: COMPUTE.projectId,
     name: NETWORK_NAME
   });
+  var REGION_NAME = 'region-name';
 
   before(function() {
     mockery.registerMock(
@@ -57,6 +61,7 @@ describe('Network', function() {
     });
 
     Network = require('../../lib/compute/network.js');
+    Region = require('../../lib/compute/region.js');
   });
 
   after(function() {
@@ -66,6 +71,7 @@ describe('Network', function() {
 
   beforeEach(function() {
     network = new Network(COMPUTE, NETWORK_NAME);
+    REGION = new Region(COMPUTE, REGION_NAME);
   });
 
   describe('instantiation', function() {
@@ -147,14 +153,24 @@ describe('Network', function() {
   });
 
   describe('createSubnetwork', function() {
-    it('should make the correct call to Region', function(done) {
+    it('should makes the correct call to Region', function(done) {
       var name = 'subnetwork-name';
-      var config = { a: 'b', c: 'd', region: 'region1'};
+      var region = {};
+      var config = { a: 'b', c: 'd', region: REGION_NAME};
       var expectedConfig = extend({}, config, {
         network: network.formattedName,
         name: name
       });
       delete expectedConfig.region;
+
+      network.compute.region = function(name_) {
+        assert.strictEqual(name_, REGION_NAME);
+        return region;
+      };
+
+      region.createSubnetwork = function(name_, config_, callback){
+        callback();
+      };
 
       network.compute.request = function(config_) {
         assert.strictEqual(config_.json.name, name);
