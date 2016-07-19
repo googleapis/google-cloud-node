@@ -48,6 +48,7 @@ var fakeStreamRouter = {
       'getFirewalls',
       'getHealthChecks',
       'getInstanceGroups',
+      'getMachineTypes',
       'getNetworks',
       'getOperations',
       'getRegions',
@@ -99,6 +100,7 @@ function FakeZone() {
   this.calledWith_ = slice.call(arguments);
   this.disk = function() { return {}; };
   this.vm = function() { return {}; };
+  this.machineType = function() { return {}; };
 }
 
 function FakeService() {
@@ -1442,6 +1444,119 @@ describe('Compute', function() {
         };
 
         compute.getInstanceGroups(query, function(err, groups, nextQuery) {
+          assert.ifError(err);
+
+          assert.deepEqual(query, originalQuery);
+
+          assert.deepEqual(nextQuery, extend({}, query, {
+            pageToken: apiResponseWithNextPageToken.nextPageToken
+          }));
+
+          done();
+        });
+      });
+    });
+  });
+
+  describe('getMachineTypes', function() {
+    it('should accept only a callback', function(done) {
+      compute.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
+
+      compute.getMachineTypes(assert.ifError);
+    });
+
+    it('should make the correct API request', function(done) {
+      var options = {};
+
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/aggregated/machineTypes');
+        assert.strictEqual(reqOpts.qs, options);
+        done();
+      };
+
+      compute.getMachineTypes(options, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        compute.getMachineTypes({}, function(err, machTypes, nextQuery, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(machTypes, null);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var ZONE_NAME = 'zone-1';
+      var FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
+
+      var machineType = { name: 'machineType-1' };
+      var apiResponse = {
+        items: {}
+      };
+
+      apiResponse.items[FULL_ZONE_NAME] = {
+        machineTypes: [machineType]
+      };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should create MachineType objects from the response', function(done) {
+        var zone = {};
+        var machineTypeInstance = {};
+
+        compute.zone = function(name) {
+          assert.strictEqual(name, ZONE_NAME);
+          return zone;
+        };
+
+        zone.machineType = function(name) {
+          assert.strictEqual(name, machineType.name);
+          return machineTypeInstance;
+        };
+
+        compute.getMachineTypes({}, function(err, machTypes, nextQuery, resp) {
+          assert.ifError(err);
+          assert.strictEqual(machTypes[0], machineTypeInstance);
+          assert.strictEqual(machTypes[0].metadata, machineType);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
+
+      it('should build a nextQuery if necessary', function(done) {
+        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+          nextPageToken: 'next-page-token'
+        });
+
+        var query = { a: 'b', c: 'd' };
+        var originalQuery = extend({}, query);
+
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponseWithNextPageToken);
+        };
+
+        compute.getMachineTypes(query, function(err, machineTypes, nextQuery) {
           assert.ifError(err);
 
           assert.deepEqual(query, originalQuery);

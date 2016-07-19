@@ -48,6 +48,12 @@ var Disk = require('./disk.js');
 var InstanceGroup = require('./instance-group.js');
 
 /**
+ * @type {module:compute/machine-type}
+ * @private
+ */
+var MachineType = require('./machine-type.js');
+
+/**
  * @type {module:compute/operation}
  * @private
  */
@@ -999,6 +1005,83 @@ Zone.prototype.getInstanceGroups = function(options, callback) {
 };
 
 /**
+ * Get a list of machine types for this zone.
+ *
+ * @resource [MachineTypes: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes/list}
+ * @resource [Machine Types Overview]{@link https://cloud.google.com/compute/docs/machine-types}
+ * @resource [MachineType Resource]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes}
+ *
+ * @param {object=} options - Machine type search options.
+ * @param {boolean} options.autoPaginate - Have pagination handled
+ *     automatically. Default: true.
+ * @param {number} options.maxApiCalls - Maximum number of API calls to make.
+ * @param {number} options.maxResults - Maximum number of machineTypes
+ *     to return.
+ * @param {string} options.pageToken - A previously-returned page token
+ *     representing part of the larger set of results to view.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {module:compute/machine-type[]} callback.machineTypes - MachineType
+ *     objects from this zone.
+ * @param {?object} callback.nextQuery - If present, query with this object to
+ *     check for more results.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * zone.getMachineTypes(function(err, machineTypes) {
+ *   // `machineTypes` is an array of `MachineType` objects.
+ * });
+ *
+ * //-
+ * // To control how many API requests are made and page through the results
+ * // manually, set `autoPaginate` to `false`.
+ * //-
+ * function callback(err, machineTypes, nextQuery, apiResponse) {
+ *   if (nextQuery) {
+ *     // More results exist.
+ *     zone.getMachineTypes(nextQuery, callback);
+ *   }
+ * }
+ *
+ * zone.getMachineTypes({
+ *   autoPaginate: false
+ * }, callback);
+ *
+ * //-
+ * // Get the machine types from this zone as a readable object stream.
+ * //-
+ * zone.getMachineTypes()
+ *   .on('error', console.error)
+ *   .on('data', function(machineType) {
+ *     // `machineType` is a `MachineType` object.
+ *   })
+ *   .on('end', function() {
+ *     // All machine types retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * zone.getMachineTypes()
+ *   .on('data', function(machineType) {
+ *     this.end();
+ *   });
+ */
+Zone.prototype.getMachineTypes = function(options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = extend({}, options, {
+    filter: 'zone eq .*' + this.name
+  });
+
+  return this.compute.getMachineTypes(options, callback);
+};
+
+/**
  * Get a list of operations for this zone.
  *
  * @resource [Zone Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations}
@@ -1223,6 +1306,22 @@ Zone.prototype.instanceGroup = function(name) {
 };
 
 /**
+ * Get a reference to a Google Compute Engine machine type.
+ *
+ * @resource [Machine Types Overview]{@link https://cloud.google.com/compute/docs/machine-types}
+ * @resource [MachineType Resource]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes}
+ *
+ * @param {string} name - Name of the existing machine type.
+ * @return {module:compute/machine-type}
+ *
+ * @example
+ * var machienType = zone.machineType('g1-small');
+ */
+Zone.prototype.machineType = function(name) {
+  return new MachineType(this, name);
+};
+
+/**
  * Get a reference to a Google Compute Engine zone operation.
  *
  * @resource [Zone Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations}
@@ -1305,6 +1404,7 @@ streamRouter.extend(Zone, [
   'getAutoscalers',
   'getDisks',
   'getInstanceGroups',
+  'getMachineTypes',
   'getOperations',
   'getVMs'
 ]);

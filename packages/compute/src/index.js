@@ -1280,6 +1280,123 @@ Compute.prototype.getHealthChecks = function(options, callback) {
 };
 
 /**
+ * Get a list of machine types in this project.
+ *
+ * @resource [MachineTypes: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes/aggregatedList}
+ * @resource [Machine Types Overview]{@link https://cloud.google.com/compute/docs/machine-types}
+ * @resource [MachineType Resource]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes}
+ *
+ * @param {object=} options - Machine type search options.
+ * @param {boolean} options.autoPaginate - Have pagination handled
+ *     automatically. Default: true.
+ * @param {string} options.filter - Search filter in the format of
+ *     `{name} {comparison} {filterString}`.
+ *     - **`name`**: the name of the field to compare
+ *     - **`comparison`**: the comparison operator, `eq` (equal) or `ne`
+ *       (not equal)
+ *     - **`filterString`**: the string to filter to. For string fields, this
+ *       can be a regular expression.
+ * @param {number} options.maxApiCalls - Maximum number of API calls to make.
+ * @param {number} options.maxResults - Maximum number of machineTypes to
+ *     return.
+ * @param {string} options.pageToken - A previously-returned page token
+ *     representing part of the larger set of results to view.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {module:compute/machine-type[]} callback.machineTypes - MachineType
+ *     objects from your project.
+ * @param {?object} callback.nextQuery - If present, query with this object to
+ *     check for more results.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * gce.getMachineTypes(function(err, machineTypes) {
+ *   // `machineTypes` is an array of `MachineType` objects.
+ * });
+ *
+ * //-
+ * // To control how many API requests are made and page through the results
+ * // manually, set `autoPaginate` to `false`.
+ * //-
+ * function callback(err, machineTypes, nextQuery, apiResponse) {
+ *   if (nextQuery) {
+ *     // More results exist.
+ *     gce.getMachineTypes(nextQuery, callback);
+ *   }
+ * }
+ *
+ * gce.getMachineTypes({
+ *   autoPaginate: false
+ * }, callback);
+ *
+ * //-
+ * // Get the machine types from your project as a readable object stream.
+ * //-
+ * gce.getMachineTypes()
+ *   .on('error', console.error)
+ *   .on('data', function(machineType) {
+ *     // `machineType` is a `MachineType` object.
+ *   })
+ *   .on('end', function() {
+ *     // All machine types retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * gce.getMachineTypes()
+ *   .on('data', function(machineType) {
+ *     this.end();
+ *   });
+ */
+Compute.prototype.getMachineTypes = function(options, callback) {
+  var self = this;
+
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = options || {};
+
+  this.request({
+    uri: '/aggregated/machineTypes',
+    qs: options
+  }, function(err, resp) {
+    if (err) {
+      callback(err, null, null, resp);
+      return;
+    }
+
+    var nextQuery = null;
+
+    if (resp.nextPageToken) {
+      nextQuery = extend({}, options, {
+        pageToken: resp.nextPageToken
+      });
+    }
+
+    var zones = resp.items || {};
+
+    var machineTypes = Object.keys(zones).reduce(function(acc, zoneName) {
+      var zone = self.zone(zoneName.replace('zones/', ''));
+      var machineTypesByZone = zones[zoneName].machineTypes || [];
+
+      machineTypesByZone.forEach(function(machineType) {
+        var machineTypeInstance = zone.machineType(machineType.name);
+        machineTypeInstance.metadata = machineType;
+        acc.push(machineTypeInstance);
+      });
+
+      return acc;
+    }, []);
+
+    callback(null, machineTypes, nextQuery, resp);
+  });
+};
+
+/**
  * Get a list of networks.
  *
  * @resource [Networks Overview]{@link https://cloud.google.com/compute/docs/networking#networks}
@@ -2384,6 +2501,7 @@ streamRouter.extend(Compute, [
   'getFirewalls',
   'getHealthChecks',
   'getInstanceGroups',
+  'getMachineTypes',
   'getNetworks',
   'getOperations',
   'getRegions',
