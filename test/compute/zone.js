@@ -47,6 +47,10 @@ FakeInstanceGroup.formatPorts_ = function() {
   return (formatPortsOverride || util.noop).apply(null, arguments);
 };
 
+function FakeMachineType() {
+  this.calledWith_ = [].slice.call(arguments);
+}
+
 function FakeOperation() {
   this.calledWith_ = [].slice.call(arguments);
 }
@@ -76,6 +80,7 @@ var fakeStreamRouter = {
       'getAutoscalers',
       'getDisks',
       'getInstanceGroups',
+      'getMachineTypes',
       'getOperations',
       'getVMs'
     ]);
@@ -105,6 +110,7 @@ describe('Zone', function() {
       '../../lib/compute/instance-group.js',
       FakeInstanceGroup
     );
+    mockery.registerMock('../../lib/compute/machine-type.js', FakeMachineType);
     mockery.registerMock('../../lib/compute/operation.js', FakeOperation);
     mockery.registerMock('../../lib/compute/vm.js', FakeVM);
 
@@ -1096,6 +1102,18 @@ describe('Zone', function() {
     });
   });
 
+  describe('machineType', function() {
+    var NAME = 'machine-name';
+
+    it('should return a MachineType object', function() {
+      var machineType = zone.machineType(NAME);
+
+      assert(machineType instanceof FakeMachineType);
+      assert.strictEqual(machineType.calledWith_[0], zone);
+      assert.strictEqual(machineType.calledWith_[1], NAME);
+    });
+  });
+
   describe('getAutoscalers', function() {
     it('should accept only a callback', function(done) {
       zone.request = function(reqOpts) {
@@ -1596,6 +1614,52 @@ describe('Zone', function() {
           done();
         });
       });
+    });
+  });
+
+  describe('getMachineTypes', function() {
+    it('should make the correct call to Compute', function(done) {
+      var options = { a: 'b', c: 'd' };
+      var expectedOptions = extend({}, options, {
+        filter: 'zone eq .*' + zone.name
+      });
+
+      zone.compute.getMachineTypes = function(options, callback) {
+        assert.deepEqual(options, expectedOptions);
+        callback();
+      };
+
+      zone.getMachineTypes(options, done);
+    });
+
+    it('should not require options', function(done) {
+      zone.compute.getMachineTypes = function(options, callback) {
+        callback();
+      };
+
+      zone.getMachineTypes(done);
+    });
+
+    it('should not require any arguments', function(done) {
+      zone.compute.getMachineTypes = function(options, callback) {
+        assert.deepEqual(options, {
+          filter: 'zone eq .*' + zone.name
+        });
+        assert.strictEqual(typeof callback, 'undefined');
+        done();
+      };
+
+      zone.getMachineTypes();
+    });
+
+    it('should return the result of calling Compute', function() {
+      var resultOfGetMachineTypes = {};
+
+      zone.compute.getMachineTypes = function() {
+        return resultOfGetMachineTypes;
+      };
+
+      assert.strictEqual(zone.getMachineTypes(), resultOfGetMachineTypes);
     });
   });
 

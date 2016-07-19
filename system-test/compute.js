@@ -1061,6 +1061,30 @@ describe('Compute', function() {
     });
   });
 
+  describe('machineTypes', function() {
+    it('should get a list of machineTypes', function(done) {
+      compute.getMachineTypes(function(err, machineTypes) {
+        assert.ifError(err);
+        assert(machineTypes.length > 0);
+        done();
+      });
+    });
+
+    it('should get a list of machineTypes in stream mode', function(done) {
+      var resultsMatched = 0;
+
+      compute.getMachineTypes()
+        .on('error', done)
+        .on('data', function() {
+          resultsMatched++;
+        })
+        .on('end', function() {
+          assert(resultsMatched > 0);
+          done();
+        });
+    });
+  });
+
   describe('zones', function() {
     it('should get a list of zones', function(done) {
       compute.getZones(function(err, zones) {
