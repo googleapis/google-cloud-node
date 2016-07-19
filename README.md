@@ -391,7 +391,7 @@ var zone = gce.zone('us-central1-a');
 var name = 'ubuntu-http';
 
 // Optionaly you can specify `{ os: 'your-project-id-or-name/ubuntu'}`
-// to use image from your project images.
+// to use an image from your project images.
 zone.createVM(name, { os: 'ubuntu' }, function(err, vm, operation) {
   // `operation` lets you check the status of long-running tasks.
 
