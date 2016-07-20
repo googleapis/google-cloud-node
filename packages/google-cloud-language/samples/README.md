@@ -1,79 +1,85 @@
-# Cloud Natural Language API Sample
+<img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-These samples demonstrate the use of the
-[Google Cloud Natural Language API](https://cloud.google.com/natural-language/docs/).
+# Google Cloud Natural Language API Node.js Samples
 
-`analyze.js` is a command-line program that demonstrates how different methods
-of the API can be called.
+[Cloud Natural Language API][language_docs] provides natural language
+understanding technologies to developers, including sentiment analysis, entity
+recognition, and syntax analysis. This API is part of the larger Cloud Machine
+Learning API.
+
+[language_docs]: https://cloud.google.com/natural-language/docs/
+
+## Table of Contents
+
+* [Setup](#setup)
+* [Samples](#samples)
+  * [analyze.js](#analyze)
 
 ## Setup
 
-Please follow the [Set Up Your Project](https://cloud-dot-devsite.googleplex.com/natural-language/docs/getting-started#set_up_your_project)
-steps in the Quickstart doc to create a project and enable the
-Cloud Natural Language API. Following those steps, make sure that you
-[Set Up a Service Account](https://cloud.google.com/natural-language/docs/common/auth#set_up_a_service_account),
-and export the following environment variable:
+1. Please follow the [Set Up Your Project][quickstart] steps in the Quickstart
+doc to create a project and enable the Cloud Natural Language API.
+1. Read [Prerequisites][prereq] and [How to run a sample][run] first.
+1. Install dependencies:
 
-```
-export GOOGLE_APPLICATION_CREDENTIALS=/path/to/your-project-credentials.json
-```
+        npm install
 
-## Run locally
+[quickstart]: https://cloud.google.com/natural-language/docs/getting-started#set_up_your_project
+[prereq]: ../README.md#prerequisities
+[run]: ../README.md#how-to-run-a-sample
 
-First install the needed dependencies.
+## Samples
 
-```
-npm install
-```
+### Analyze
 
-To run:
+View the [source code][analyze_code].
 
-```
-node analyze.js <sentiment|entities|syntax> <text>
-```
+__Run the sample:__
+
+Usage: `node analyze <sentiment|entities|syntax> <text>`
 
 For example, the following command returns all entities found in the text:
 
-```
-node analyze.js entities "President Obama is speaking at the White House."
-```
+Example:
 
-```
-{
-  "entities": [
+    node analyze entities "President Obama is speaking at the White House."
+
     {
-      "name": "Obama",
-      "type": "PERSON",
-      "metadata": {
-        "wikipedia_url": "http://en.wikipedia.org/wiki/Barack_Obama"
-      },
-      "salience": 0.84503114,
-      "mentions": [
+      "entities": [
         {
-          "text": {
-            "content": "Obama",
-            "beginOffset": 10
-          }
-        }
-      ]
-    },
-    {
-      "name": "White House",
-      "type": "LOCATION",
-      "metadata": {
-        "wikipedia_url": "http://en.wikipedia.org/wiki/White_House"
-      },
-      "salience": 0.15496887,
-      "mentions": [
+          "name": "Obama",
+          "type": "PERSON",
+          "metadata": {
+            "wikipedia_url": "http://en.wikipedia.org/wiki/Barack_Obama"
+          },
+          "salience": 0.84503114,
+          "mentions": [
+            {
+              "text": {
+                "content": "Obama",
+                "beginOffset": 10
+              }
+            }
+          ]
+        },
         {
-          "text": {
-            "content": "White House",
-            "beginOffset": 35
-          }
+          "name": "White House",
+          "type": "LOCATION",
+          "metadata": {
+            "wikipedia_url": "http://en.wikipedia.org/wiki/White_House"
+          },
+          "salience": 0.15496887,
+          "mentions": [
+            {
+              "text": {
+                "content": "White House",
+                "beginOffset": 35
+              }
+            }
+          ]
         }
-      ]
+      ],
+      "language": "en"
     }
-  ],
-  "language": "en"
-}
-```
+
+[analyze_code]: analyze.js
