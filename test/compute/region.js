@@ -58,8 +58,11 @@ var fakeStreamRouter = {
     extended = true;
     methods = arrify(methods);
     assert.equal(Class.name, 'Region');
-    assert.deepEqual(methods,
-      ['getAddresses', 'getOperations', 'getRules', 'getSubnetworks']);
+    assert.deepEqual(methods, [
+      'getAddresses',
+      'getOperations',
+      'getRules', 'getSubnetworks'
+    ]);
   }
 };
 
@@ -320,35 +323,34 @@ describe('Region', function() {
 
       it('should exec callback with Subnetwork, Op & apiResponse',
         function(done) {
-        var subnetwork = {};
-        var operation = {};
+          var subnetwork = {};
+          var operation = {};
 
-        region.subnetwork = function(name) {
-          assert.strictEqual(name, NAME);
-          return subnetwork;
-        };
+          region.subnetwork = function(name) {
+            assert.strictEqual(name, NAME);
+            return subnetwork;
+          };
 
-        region.operation = function(name) {
-          assert.strictEqual(name, apiResponse.name);
-          return operation;
-        };
+          region.operation = function(name) {
+            assert.strictEqual(name, apiResponse.name);
+            return operation;
+          };
 
-        region.createSubnetwork(NAME, OPTIONS,
-          function(err, subnetwork_, op, resp) {
-          assert.ifError(err);
+          region.createSubnetwork(NAME, OPTIONS,
+            function(err, subnetwork_, op, resp) {
+              assert.ifError(err);
 
-          assert.strictEqual(subnetwork_, subnetwork);
+              assert.strictEqual(subnetwork_, subnetwork);
 
-          assert.strictEqual(op, operation);
-          assert.strictEqual(op.metadata, resp);
+              assert.strictEqual(op, operation);
+              assert.strictEqual(op.metadata, resp);
 
-          assert.strictEqual(resp, apiResponse);
-          done();
+              assert.strictEqual(resp, apiResponse);
+              done();
+            });
         });
-      });
     });
   });
-
 
   describe('getAddresses', function() {
     it('should accept only a callback', function(done) {
@@ -447,109 +449,6 @@ describe('Region', function() {
 
           done();
         });
-      });
-    });
-  });
-
-  describe('getSubnetworks', function() {
-    it('should accept only a callback', function(done) {
-      region.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
-        done();
-      };
-
-      region.getSubnetworks(assert.ifError);
-    });
-
-    it('should make the correct API request', function(done) {
-      var query = { a: 'b', c: 'd' };
-
-      region.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.uri, '/subnetworks');
-        assert.strictEqual(reqOpts.qs, query);
-
-        done();
-      };
-
-      region.getSubnetworks(query, assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = { a: 'b', c: 'd' };
-
-      beforeEach(function() {
-        region.request = function(reqOpts, callback) {
-          callback(error, apiResponse);
-        };
-      });
-
-      it('should execute callback with error & API response', function(done) {
-        region.getSubnetworks({},
-          function(err, subnetworks, nextQuery, apiResp) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(subnetworks, null);
-          assert.strictEqual(nextQuery, null);
-          assert.strictEqual(apiResp, apiResponse);
-          done();
-        });
-      });
-    });
-
-    describe('success', function() {
-      var apiResponse = {
-        items: [
-          { name: 'operation-name' }
-        ]
-      };
-
-      beforeEach(function() {
-        region.request = function(reqOpts, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should build a nextQuery if necessary', function(done) {
-        var nextPageToken = 'next-page-token';
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
-          nextPageToken: nextPageToken
-        });
-        var expectedNextQuery = {
-          pageToken: nextPageToken
-        };
-
-        region.request = function(reqOpts, callback) {
-          callback(null, apiResponseWithNextPageToken);
-        };
-
-        region.getSubnetworks({}, function(err, subnetworks, nextQuery) {
-          assert.ifError(err);
-
-          assert.deepEqual(nextQuery, expectedNextQuery);
-
-          done();
-        });
-      });
-
-      it('should execute callback with Operations & API resp', function(done) {
-        var subnetwork = {};
-
-        region.subnetwork = function(name) {
-          assert.strictEqual(name, apiResponse.items[0].name);
-          return subnetwork;
-        };
-
-        region.getSubnetworks({},
-          function(err, subnetworks, nextQuery, apiResp) {
-            assert.ifError(err);
-
-            assert.strictEqual(subnetworks[0], subnetwork);
-            assert.strictEqual(subnetworks[0].metadata, apiResponse.items[0]);
-
-            assert.strictEqual(apiResp, apiResponse);
-
-            done();
-          });
       });
     });
   });
@@ -756,14 +655,104 @@ describe('Region', function() {
     });
   });
 
-  describe('subnetwork', function() {
-    var NAME = 'subnetwork-name';
+  describe('getSubnetworks', function() {
+    it('should accept only a callback', function(done) {
+      region.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
 
-    it('should return a Subnetwork object', function() {
-      var subnetwork = region.subnetwork(NAME);
-      assert(subnetwork instanceof FakeSubnetwork);
-      assert.strictEqual(subnetwork.calledWith_[0], region);
-      assert.strictEqual(subnetwork.calledWith_[1], NAME);
+      region.getSubnetworks(assert.ifError);
+    });
+
+    it('should make the correct API request', function(done) {
+      var query = { a: 'b', c: 'd' };
+
+      region.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/subnetworks');
+        assert.strictEqual(reqOpts.qs, query);
+
+        done();
+      };
+
+      region.getSubnetworks(query, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = { a: 'b', c: 'd' };
+
+      beforeEach(function() {
+        region.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        region.getSubnetworks({}, function(err, subnetworks, nextQuery, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(subnetworks, null);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = {
+        items: [
+          { name: 'subnetwork-name' }
+        ]
+      };
+
+      beforeEach(function() {
+        region.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should build a nextQuery if necessary', function(done) {
+        var nextPageToken = 'next-page-token';
+        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+          nextPageToken: nextPageToken
+        });
+        var expectedNextQuery = {
+          pageToken: nextPageToken
+        };
+
+        region.request = function(reqOpts, callback) {
+          callback(null, apiResponseWithNextPageToken);
+        };
+
+        region.getSubnetworks({}, function(err, subnetworks, nextQuery) {
+          assert.ifError(err);
+
+          assert.deepEqual(nextQuery, expectedNextQuery);
+
+          done();
+        });
+      });
+
+      it('should execute callback with Operations & API resp', function(done) {
+        var subnetwork = {};
+
+        region.subnetwork = function(name) {
+          assert.strictEqual(name, apiResponse.items[0].name);
+          return subnetwork;
+        };
+
+        region.getSubnetworks({}, function(err, subnetworks, nextQuery, resp) {
+          assert.ifError(err);
+
+          assert.strictEqual(subnetworks[0], subnetwork);
+          assert.strictEqual(subnetworks[0].metadata, apiResponse.items[0]);
+
+          assert.strictEqual(resp, apiResponse);
+
+          done();
+        });
+      });
     });
   });
 
@@ -788,4 +777,16 @@ describe('Region', function() {
       assert.strictEqual(rule.calledWith_[1], NAME);
     });
   });
+
+  describe('subnetwork', function() {
+    var NAME = 'subnetwork-name';
+
+    it('should return a Subnetwork object', function() {
+      var subnetwork = region.subnetwork(NAME);
+      assert(subnetwork instanceof FakeSubnetwork);
+      assert.strictEqual(subnetwork.calledWith_[0], region);
+      assert.strictEqual(subnetwork.calledWith_[1], NAME);
+    });
+  });
 });
+
