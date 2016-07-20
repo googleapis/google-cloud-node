@@ -36,6 +36,9 @@ describe('Network', function() {
   var Network;
   var network;
 
+  var REGION;
+  var Region;
+
   var COMPUTE = {
     projectId: 'project-id',
     createNetwork: util.noop
@@ -45,6 +48,7 @@ describe('Network', function() {
     pId: COMPUTE.projectId,
     name: NETWORK_NAME
   });
+  var REGION_NAME = 'region-name';
 
   before(function() {
     mockery.registerMock(
@@ -57,6 +61,7 @@ describe('Network', function() {
     });
 
     Network = require('../../lib/compute/network.js');
+    Region = require('../../lib/compute/region.js');
   });
 
   after(function() {
@@ -66,6 +71,7 @@ describe('Network', function() {
 
   beforeEach(function() {
     network = new Network(COMPUTE, NETWORK_NAME);
+    REGION = new Region(COMPUTE, REGION_NAME);
   });
 
   describe('instantiation', function() {
@@ -143,6 +149,37 @@ describe('Network', function() {
       };
 
       network.createFirewall(name, config, done);
+    });
+  });
+
+  describe('createSubnetwork', function() {
+    it('should call region.createSubnetwork correctly', function(done) {
+      var name = 'subnetwork-name';
+      var region = {};
+      var config = {
+        a: 'b',
+        c: 'd',
+        region: REGION_NAME
+      };
+
+      var expectedConfig = extend({}, config, {
+        network: network.formattedName
+      });
+      delete expectedConfig.region;
+
+      network.compute.region = function(name) {
+        assert.strictEqual(name, REGION_NAME);
+        return region;
+      };
+
+      region.createSubnetwork = function(name_, config, callback) {
+        assert.strictEqual(name_, name);
+        assert.deepEqual(config, expectedConfig);
+
+        callback(); // done();
+      };
+
+      network.createSubnetwork(name, config, done);
     });
   });
 
@@ -278,6 +315,52 @@ describe('Network', function() {
       };
 
       assert.strictEqual(network.getFirewalls(), resultOfGetFirewalls);
+    });
+  });
+
+  describe('getSubnetworks', function() {
+    it('should call to compute.getSubnetworks correctly', function(done) {
+      var options = { a: 'b', c: 'd' };
+      var expectedOptions = extend({}, options, {
+        filter: 'network eq .*' + network.formattedName
+      });
+
+      network.compute.getSubnetworks = function(options, callback) {
+        assert.deepEqual(options, expectedOptions);
+        callback();
+      };
+
+      network.getSubnetworks(options, done);
+    });
+
+    it('should not require options', function(done) {
+      network.compute.getSubnetworks = function(options, callback) {
+        callback();
+      };
+
+      network.getSubnetworks(done);
+    });
+
+    it('should not require any arguments', function(done) {
+      network.compute.getSubnetworks = function(options, callback) {
+        assert.deepEqual(options, {
+          filter: 'network eq .*' + network.formattedName
+        });
+        assert.strictEqual(typeof callback, 'undefined');
+        done();
+      };
+
+      network.getSubnetworks();
+    });
+
+    it('should return the result of calling Compute', function() {
+      var resultOfGetSubnetworks = {};
+
+      network.compute.getSubnetworks = function() {
+        return resultOfGetSubnetworks;
+      };
+
+      assert.strictEqual(network.getSubnetworks(), resultOfGetSubnetworks);
     });
   });
 });
