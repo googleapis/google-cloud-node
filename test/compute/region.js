@@ -37,6 +37,10 @@ function FakeRule() {
   this.calledWith_ = [].slice.call(arguments);
 }
 
+function FakeNetwork() {
+  this.calledWith_ = [].slice.call(arguments);
+}
+
 function FakeSubnetwork() {
   this.calledWith_ = [].slice.call(arguments);
 }
@@ -82,6 +86,7 @@ describe('Region', function() {
     );
     mockery.registerMock('../../lib/common/stream-router.js', fakeStreamRouter);
     mockery.registerMock('../../lib/compute/address.js', FakeAddress);
+    mockery.registerMock('../../lib/compute/network.js', FakeNetwork);
     mockery.registerMock('../../lib/compute/operation.js', FakeOperation);
     mockery.registerMock('../../lib/compute/rule.js', FakeRule);
     mockery.registerMock('../../lib/compute/subnetwork.js', FakeSubnetwork);
@@ -275,8 +280,12 @@ describe('Region', function() {
 
   describe('createSubnetwork', function() {
     var NAME = 'subnetwork-name';
-    var OPTIONS = { a: 'b', c: 'd' };
-    var EXPECTED_BODY = extend({}, OPTIONS, { name: NAME });
+    var CONFIG = {
+      a: 'b',
+      c: 'd',
+      network: 'network-name'
+    };
+    var EXPECTED_BODY = extend({}, CONFIG, { name: NAME });
 
     it('should make the correct API request', function(done) {
       region.request = function(reqOpts) {
@@ -287,7 +296,41 @@ describe('Region', function() {
         done();
       };
 
-      region.createSubnetwork(NAME, OPTIONS, assert.ifError);
+      region.createSubnetwork(NAME, CONFIG, assert.ifError);
+    });
+
+    describe('config.network', function() {
+      it('should accept a Network object', function(done) {
+        var network = new FakeNetwork();
+        network.formattedName = 'formatted-name';
+
+        var config = extend({}, CONFIG, {
+          network: network
+        });
+
+        region.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.json.network, network.formattedName);
+          done();
+        };
+
+        region.createSubnetwork(NAME, config, assert.ifError);
+      });
+    });
+
+    describe('config.range', function() {
+      it('should accept and delete a range property', function(done) {
+        var config = extend({}, CONFIG, {
+          range: '...'
+        });
+
+        region.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.json.ipCidrRange, config.range);
+          assert.strictEqual(reqOpts.json.range, undefined);
+          done();
+        };
+
+        region.createSubnetwork(NAME, config, assert.ifError);
+      });
     });
 
     describe('error', function() {
@@ -301,10 +344,9 @@ describe('Region', function() {
       });
 
       it('should execute callback with error & API response', function(done) {
-        region.createSubnetwork(NAME, OPTIONS,
-          function(err, subnetwork_, op, resp) {
+        region.createSubnetwork(NAME, CONFIG, function(err, sub, op, resp) {
             assert.strictEqual(err, error);
-            assert.strictEqual(subnetwork_, null);
+            assert.strictEqual(sub, null);
             assert.strictEqual(op, null);
             assert.strictEqual(resp, apiResponse);
             done();
@@ -321,34 +363,32 @@ describe('Region', function() {
         };
       });
 
-      it('should exec callback with Subnetwork, Op & apiResponse',
-        function(done) {
-          var subnetwork = {};
-          var operation = {};
+      it('should exec cb with Subnetwork, Op & apiResponse', function(done) {
+        var subnetwork = {};
+        var operation = {};
 
-          region.subnetwork = function(name) {
-            assert.strictEqual(name, NAME);
-            return subnetwork;
-          };
+        region.subnetwork = function(name) {
+          assert.strictEqual(name, NAME);
+          return subnetwork;
+        };
 
-          region.operation = function(name) {
-            assert.strictEqual(name, apiResponse.name);
-            return operation;
-          };
+        region.operation = function(name) {
+          assert.strictEqual(name, apiResponse.name);
+          return operation;
+        };
 
-          region.createSubnetwork(NAME, OPTIONS,
-            function(err, subnetwork_, op, resp) {
-              assert.ifError(err);
+        region.createSubnetwork(NAME, CONFIG, function(err, sub, op, resp) {
+          assert.ifError(err);
 
-              assert.strictEqual(subnetwork_, subnetwork);
+          assert.strictEqual(sub, subnetwork);
 
-              assert.strictEqual(op, operation);
-              assert.strictEqual(op.metadata, resp);
+          assert.strictEqual(op, operation);
+          assert.strictEqual(op.metadata, resp);
 
-              assert.strictEqual(resp, apiResponse);
-              done();
-            });
+          assert.strictEqual(resp, apiResponse);
+          done();
         });
+      });
     });
   });
 
