@@ -16,7 +16,6 @@
 
 'use strict';
 
-var assert = require('assert');
 var fs = require('fs');
 var gcloud = require('../');
 var glob = require('glob');
@@ -35,9 +34,8 @@ function runCodeInSandbox(code, sandbox) {
     });
   } catch(err) {
     // rethrow the error with code for context and resolving issues faster.
-    var lineCol = err.stack.match('assert-code\.vm:(.+):(.+)');
+    var lineCol = err.stack.match('assert-code\.vm:(.+)');
     lineCol.line = lineCol[1];
-    lineCol.col = lineCol[2];
 
     var lines = code.split('\n')
       .filter(function(line, index) {
@@ -133,7 +131,7 @@ describe('documentation', function() {
       displayName += '#' + method.id;
 
       it('should run ' + displayName + ' example without errors', function() {
-        assert.doesNotThrow(runCodeInSandbox.bind(null, code, sandbox));
+        runCodeInSandbox(code, sandbox);
       });
     });
   });

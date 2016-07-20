@@ -102,6 +102,9 @@
       "title": "Snapshot",
       "type": "compute/snapshot"
     }, {
+      "title": "Subnetwork",
+      "type": "compute/subnetwork"
+    }, {
       "title": "VM",
       "type": "compute/vm"
     }, {

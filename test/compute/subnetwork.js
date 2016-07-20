@@ -1,5 +1,5 @@
 /**
- * Copyright 2015 Google Inc. All Rights Reserved.
+ * Copyright 2016 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var format = require('string-format-obj');
 var mockery = require('mockery-next');
 var nodeutil = require('util');
 
@@ -42,10 +41,6 @@ describe('Subnetwork', function() {
     createSubnetwork: util.noop,
     name: REGION_NAME
   };
-  var SUBNETWORK_FULL_NAME = format('regions/{region}/subnetworks/{name}', {
-    region: REGION_NAME,
-    name: SUBNETWORK_NAME
-  });
 
   before(function() {
     mockery.registerMock(
@@ -70,20 +65,22 @@ describe('Subnetwork', function() {
   });
 
   describe('instantiation', function() {
-    it('should localize the region', function() {
-      assert.strictEqual(subnetwork.region, REGION);
-    });
-
     it('should localize the name', function() {
       assert.strictEqual(subnetwork.name, SUBNETWORK_NAME);
     });
 
-    it('should inherit from ServiceObject', function(done) {
+    it('should localize the region', function() {
+      assert.strictEqual(subnetwork.region, REGION);
+    });
+
+    it('should inherit from ServiceObject', function() {
+      var createSubnetworkBound = {};
+
       var regionInstance = extend({}, REGION, {
         createSubnetwork: {
           bind: function(context) {
             assert.strictEqual(context, regionInstance);
-            done();
+            return createSubnetworkBound;
           }
         }
       });
@@ -96,19 +93,13 @@ describe('Subnetwork', function() {
       assert.strictEqual(calledWith.parent, regionInstance);
       assert.strictEqual(calledWith.baseUrl, '/subnetworks');
       assert.strictEqual(calledWith.id, SUBNETWORK_NAME);
+      assert.strictEqual(calledWith.createMethod, createSubnetworkBound);
       assert.deepEqual(calledWith.methods, {
         create: true,
         exists: true,
         get: true,
         getMetadata: true
       });
-    });
-  });
-
-  describe('formatName_', function() {
-    it('should format the name', function() {
-      var formattedName_ = Subnetwork.formatName_(REGION, SUBNETWORK_NAME);
-      assert.strictEqual(formattedName_, SUBNETWORK_FULL_NAME);
     });
   });
 
@@ -171,6 +162,7 @@ describe('Subnetwork', function() {
         subnetwork.delete(function(err, operation_, apiResponse_) {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
+          assert.strictEqual(operation_.metadata, apiResponse);
           assert.strictEqual(apiResponse_, apiResponse);
           done();
         });
