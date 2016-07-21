@@ -1077,6 +1077,7 @@ describe('GrpcService', function() {
         fakeStream.received_status = grpcError500;
 
         fakeStream
+          .on('error', done)
           .on('response', function(resp) {
             assert.deepEqual(resp, GrpcService.GRPC_ERROR_CODE_TO_HTTP[2]);
             done();
@@ -1098,6 +1099,7 @@ describe('GrpcService', function() {
         };
 
         fakeStream
+          .on('error', done)
           .on('response', function(resp) {
             assert.deepEqual(resp, GrpcService.GRPC_ERROR_CODE_TO_HTTP[0]);
             done();
