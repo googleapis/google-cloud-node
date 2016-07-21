@@ -27,6 +27,7 @@ var ServiceObject = require('../../lib/common/service-object.js');
 var util = require('../../lib/common/util.js');
 
 var gceImagesOverride = null;
+
 function fakeGceImages() {
   return (gceImagesOverride || gceImages).apply(null, arguments);
 }
@@ -40,12 +41,13 @@ function FakeDisk() {
 }
 
 var formatPortsOverride;
-function FakeInstanceGroup() {
-  this.calledWith_ = [].slice.call(arguments);
-}
 FakeInstanceGroup.formatPorts_ = function() {
   return (formatPortsOverride || util.noop).apply(null, arguments);
 };
+
+function FakeInstanceGroup() {
+  this.calledWith_ = [].slice.call(arguments);
+}
 
 function FakeMachineType() {
   this.calledWith_ = [].slice.call(arguments);
@@ -754,11 +756,9 @@ describe('Zone', function() {
     var EXPECTED_CONFIG = {
       name: NAME,
       machineType: 'zones/' + ZONE_NAME + '/machineTypes/n1-standard-1',
-      networkInterfaces: [
-        {
-          network: 'global/networks/default'
-        }
-      ]
+      networkInterfaces: [{
+        network: 'global/networks/default'
+      }]
     };
 
     describe('config.machineType', function() {
@@ -991,15 +991,13 @@ describe('Zone', function() {
         };
 
         var expectedConfig = extend({}, EXPECTED_CONFIG, {
-          disks: [
-            {
-              autoDelete: true,
-              boot: true,
-              initializeParams: {
-                sourceImage: gceImagesResp.selfLink
-              }
+          disks: [{
+            autoDelete: true,
+            boot: true,
+            initializeParams: {
+              sourceImage: gceImagesResp.selfLink
             }
-          ]
+          }]
         });
 
         it('should call createVM with the correct config', function(done) {
@@ -1099,18 +1097,6 @@ describe('Zone', function() {
       assert(disk instanceof FakeDisk);
       assert.strictEqual(disk.calledWith_[0], zone);
       assert.strictEqual(disk.calledWith_[1], NAME);
-    });
-  });
-
-  describe('machineType', function() {
-    var NAME = 'machine-name';
-
-    it('should return a MachineType object', function() {
-      var machineType = zone.machineType(NAME);
-
-      assert(machineType instanceof FakeMachineType);
-      assert.strictEqual(machineType.calledWith_[0], zone);
-      assert.strictEqual(machineType.calledWith_[1], NAME);
     });
   });
 
@@ -1417,6 +1403,52 @@ describe('Zone', function() {
     });
   });
 
+  describe('getMachineTypes', function() {
+    it('should make the correct call to Compute', function(done) {
+      var options = { a: 'b', c: 'd' };
+      var expectedOptions = extend({}, options, {
+        filter: 'zone eq .*' + zone.name
+      });
+
+      zone.compute.getMachineTypes = function(options, callback) {
+        assert.deepEqual(options, expectedOptions);
+        callback();
+      };
+
+      zone.getMachineTypes(options, done);
+    });
+
+    it('should not require options', function(done) {
+      zone.compute.getMachineTypes = function(options, callback) {
+        callback();
+      };
+
+      zone.getMachineTypes(done);
+    });
+
+    it('should not require any arguments', function(done) {
+      zone.compute.getMachineTypes = function(options, callback) {
+        assert.deepEqual(options, {
+          filter: 'zone eq .*' + zone.name
+        });
+        assert.strictEqual(typeof callback, 'undefined');
+        done();
+      };
+
+      zone.getMachineTypes();
+    });
+
+    it('should return the result of compute.getMachineTypes', function() {
+      var resultOfGetMachineTypes = {};
+
+      zone.compute.getMachineTypes = function() {
+        return resultOfGetMachineTypes;
+      };
+
+      assert.strictEqual(zone.getMachineTypes(), resultOfGetMachineTypes);
+    });
+  });
+
   describe('getOperations', function() {
     it('should accept only a callback', function(done) {
       zone.request = function(reqOpts) {
@@ -1617,52 +1649,6 @@ describe('Zone', function() {
     });
   });
 
-  describe('getMachineTypes', function() {
-    it('should make the correct call to Compute', function(done) {
-      var options = { a: 'b', c: 'd' };
-      var expectedOptions = extend({}, options, {
-        filter: 'zone eq .*' + zone.name
-      });
-
-      zone.compute.getMachineTypes = function(options, callback) {
-        assert.deepEqual(options, expectedOptions);
-        callback();
-      };
-
-      zone.getMachineTypes(options, done);
-    });
-
-    it('should not require options', function(done) {
-      zone.compute.getMachineTypes = function(options, callback) {
-        callback();
-      };
-
-      zone.getMachineTypes(done);
-    });
-
-    it('should not require any arguments', function(done) {
-      zone.compute.getMachineTypes = function(options, callback) {
-        assert.deepEqual(options, {
-          filter: 'zone eq .*' + zone.name
-        });
-        assert.strictEqual(typeof callback, 'undefined');
-        done();
-      };
-
-      zone.getMachineTypes();
-    });
-
-    it('should return the result of calling Compute', function() {
-      var resultOfGetMachineTypes = {};
-
-      zone.compute.getMachineTypes = function() {
-        return resultOfGetMachineTypes;
-      };
-
-      assert.strictEqual(zone.getMachineTypes(), resultOfGetMachineTypes);
-    });
-  });
-
   describe('instanceGroup', function() {
     var NAME = 'instance-group';
 
@@ -1671,6 +1657,18 @@ describe('Zone', function() {
       assert(instanceGroup instanceof FakeInstanceGroup);
       assert.strictEqual(instanceGroup.calledWith_[0], zone);
       assert.strictEqual(instanceGroup.calledWith_[1], NAME);
+    });
+  });
+
+  describe('machineType', function() {
+    var NAME = 'machine-name';
+
+    it('should return a MachineType object', function() {
+      var machineType = zone.machineType(NAME);
+
+      assert(machineType instanceof FakeMachineType);
+      assert.strictEqual(machineType.calledWith_[0], zone);
+      assert.strictEqual(machineType.calledWith_[1], NAME);
     });
   });
 
