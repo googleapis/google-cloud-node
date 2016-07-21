@@ -78,8 +78,7 @@ function FakeOperation() {
 
 function FakeRegion() {
   this.calledWith_ = slice.call(arguments);
-  this.address = function() {
-    return {}; };
+  this.address = function() { return {}; };
 }
 
 function FakeRule() {
@@ -96,12 +95,9 @@ function FakeSnapshot() {
 
 function FakeZone() {
   this.calledWith_ = slice.call(arguments);
-  this.disk = function() {
-    return {}; };
-  this.vm = function() {
-    return {}; };
-  this.machineType = function() {
-    return {}; };
+  this.disk = function() { return {}; };
+  this.vm = function() { return {}; };
+  this.machineType = function() { return {}; };
 }
 
 function FakeService() {

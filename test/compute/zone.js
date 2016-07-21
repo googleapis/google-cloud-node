@@ -26,8 +26,7 @@ var nodeutil = require('util');
 var ServiceObject = require('../../lib/common/service-object.js');
 var util = require('../../lib/common/util.js');
 
-var gceImagesOverride = null;
-
+var gceImagesOverride;
 function fakeGceImages() {
   return (gceImagesOverride || gceImages).apply(null, arguments);
 }
@@ -756,9 +755,11 @@ describe('Zone', function() {
     var EXPECTED_CONFIG = {
       name: NAME,
       machineType: 'zones/' + ZONE_NAME + '/machineTypes/n1-standard-1',
-      networkInterfaces: [{
-        network: 'global/networks/default'
-      }]
+      networkInterfaces: [
+        {
+          network: 'global/networks/default'
+        }
+      ]
     };
 
     describe('config.machineType', function() {
@@ -991,13 +992,15 @@ describe('Zone', function() {
         };
 
         var expectedConfig = extend({}, EXPECTED_CONFIG, {
-          disks: [{
-            autoDelete: true,
-            boot: true,
-            initializeParams: {
-              sourceImage: gceImagesResp.selfLink
+          disks: [
+            {
+              autoDelete: true,
+              boot: true,
+              initializeParams: {
+                sourceImage: gceImagesResp.selfLink
+              }
             }
-          }]
+          ]
         });
 
         it('should call createVM with the correct config', function(done) {
