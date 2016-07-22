@@ -78,19 +78,16 @@ If you are not running this client on Google Compute Engine, you need a Google D
 // Authenticating on a global basis.
 var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
 
-// Using a string of your keyfile.json path
 var gcloud = require('gcloud')({
   projectId: projectId,
+
+  // The path to your key file:
   keyFilename: '/path/to/keyfile.json'
+
+  // Or the contents of the key file:
+  credentials: require('./path/to/keyfile.json')
 });
 
-// Or you can use your keyfile.json directly
-// var gcloud = require('gcloud')({
-//   projectId: projectId,
-//   credentials: keyfile.json
-// });
-
-// REMINDER : keyFilename requires string of your json path meanwhile credentials requires an object.
 // ...you're good to go! See the next section to get started using the APIs.
 ```
 
