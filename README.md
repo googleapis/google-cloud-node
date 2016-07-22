@@ -80,7 +80,12 @@ var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
 
 var gcloud = require('gcloud')({
   projectId: projectId,
+
+  // The path to your key file:
   keyFilename: '/path/to/keyfile.json'
+
+  // Or the contents of the key file:
+  credentials: require('./path/to/keyfile.json')
 });
 
 // ...you're good to go! See the next section to get started using the APIs.
