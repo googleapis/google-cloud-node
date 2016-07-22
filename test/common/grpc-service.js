@@ -1063,31 +1063,6 @@ describe('GrpcService', function() {
       });
 
       it('should emit the metadata event as a response event', function(done) {
-        var grpcError500 = { code: 2 };
-        var fakeStream = through.obj();
-
-        ProtoService.prototype.method = function() {
-          return fakeStream;
-        };
-
-        retryRequestOverride = function(reqOpts, options) {
-          return options.request();
-        };
-
-        fakeStream.received_status = grpcError500;
-
-        fakeStream
-          .on('error', done)
-          .on('response', function(resp) {
-            assert.deepEqual(resp, GrpcService.GRPC_ERROR_CODE_TO_HTTP[2]);
-            done();
-          });
-
-        grpcService.requestStream(PROTO_OPTS, REQ_OPTS);
-        fakeStream.emit('metadata');
-      });
-
-      it('should default to OK status when metadata fires', function(done) {
         var fakeStream = through.obj();
 
         ProtoService.prototype.method = function() {
