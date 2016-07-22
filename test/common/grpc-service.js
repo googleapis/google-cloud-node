@@ -1062,8 +1062,7 @@ describe('GrpcService', function() {
         );
       });
 
-      it('should emit the status as a response event', function(done) {
-        var grpcError500 = { code: 2 };
+      it('should emit the metadata event as a response event', function(done) {
         var fakeStream = through.obj();
 
         ProtoService.prototype.method = function() {
@@ -1075,13 +1074,14 @@ describe('GrpcService', function() {
         };
 
         fakeStream
+          .on('error', done)
           .on('response', function(resp) {
-            assert.deepEqual(resp, GrpcService.GRPC_ERROR_CODE_TO_HTTP[2]);
+            assert.deepEqual(resp, GrpcService.GRPC_ERROR_CODE_TO_HTTP[0]);
             done();
           });
 
         grpcService.requestStream(PROTO_OPTS, REQ_OPTS);
-        fakeStream.emit('status', grpcError500);
+        fakeStream.emit('metadata');
       });
 
       it('should emit the response error', function(done) {
