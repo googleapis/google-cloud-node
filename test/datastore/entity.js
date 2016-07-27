@@ -430,9 +430,21 @@ describe('entity', function() {
       assert.deepEqual(entity.encodeValue(value), expectedValueProto);
     });
 
+    it('should encode an empty object', function() {
+      var value = {};
+
+      var expectedValueProto = {
+        entityValue: {
+          properties: {}
+        }
+      };
+
+      assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+    });
+
     it('should throw if an invalid value was provided', function() {
       assert.throws(function() {
-        entity.encodeValue({});
+        entity.encodeValue();
       }, /Unsupported field value/);
     });
   });
