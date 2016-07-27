@@ -42,6 +42,8 @@ function FakeTable() {
   Table.apply(this, arguments);
 }
 
+function FakeFamily() {}
+
 describe('Bigtable', function() {
   var PROJECT_ID = 'test-project';
   var ZONE = 'test-zone';
@@ -60,6 +62,7 @@ describe('Bigtable', function() {
     mockery.registerMock('../../lib/common/grpc-service.js', FakeGrpcService);
     mockery.registerMock('../../lib/common/util.js', fakeUtil);
     mockery.registerMock('../../lib/bigtable/table.js', FakeTable);
+    mockery.registerMock('../../lib/bigtable/family.js', FakeFamily);
 
     mockery.enable({
       useCleanCache: true,
@@ -213,6 +216,44 @@ describe('Bigtable', function() {
 
       bigtable.request = function(protoOpts, reqOpts) {
         assert.strictEqual(reqOpts.initialSplitKeys, options.splits);
+        done();
+      };
+
+      bigtable.createTable(TABLE_ID, options, assert.ifError);
+    });
+
+    it('should set the column families', function(done) {
+      var options = {
+        families: [
+          'a',
+          {
+            name: 'b',
+            rule: 'd'
+          },
+          {
+            name: 'c',
+            rule: {}
+          }
+        ]
+      };
+
+      var fakeRule = {};
+
+      FakeFamily.formatRule_ = function(rule) {
+        assert.strictEqual(rule, options.families[2].rule);
+        return fakeRule;
+      };
+
+      bigtable.request = function(protoOpts, reqOpts) {
+        assert.deepEqual(reqOpts.table.columnFamilies, {
+          a: {},
+          b: {
+            gcExpression: 'd'
+          },
+          c: {
+            gcRule: fakeRule
+          }
+        });
         done();
       };
 
