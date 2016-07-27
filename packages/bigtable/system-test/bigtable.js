@@ -127,6 +127,19 @@ function generateTableName() {
       });
     });
 
+    it('should create a table with column family data', function(done) {
+      var name = generateTableName();
+      var options = {
+        families: ['test']
+      };
+
+      bigtable.createTable(name, options, function(err, table) {
+        assert.ifError(err);
+        assert(table.metadata.columnFamilies.test);
+        done();
+      });
+    });
+
   });
 
   describe('column families', function() {

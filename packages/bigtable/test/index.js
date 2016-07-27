@@ -43,6 +43,8 @@ function FakeTable() {
   Table.apply(this, arguments);
 }
 
+function FakeFamily() {}
+
 describe('Bigtable', function() {
   var PROJECT_ID = 'test-project';
   var ZONE = 'test-zone';
@@ -63,6 +65,7 @@ describe('Bigtable', function() {
         GrpcService: FakeGrpcService,
         util: fakeUtil
       },
+      './family.js': FakeFamily,
       './table.js': FakeTable
     });
   });
@@ -211,6 +214,76 @@ describe('Bigtable', function() {
       };
 
       bigtable.createTable(TABLE_ID, options, assert.ifError);
+    });
+
+    describe('creating column families', function() {
+      it('should accept a family name', function(done) {
+        var options = {
+          families: ['a', 'b']
+        };
+
+        bigtable.request = function(protoOpts, reqOpts) {
+          assert.deepEqual(reqOpts.table.columnFamilies, {
+            a: {},
+            b: {}
+          });
+
+          done();
+        };
+
+        bigtable.createTable(TABLE_ID, options, assert.ifError);
+      });
+
+      it('should accept a garbage collection expression', function(done) {
+        var options = {
+          families: [
+            {
+              name: 'c',
+              rule: 'd'
+            }
+          ]
+        };
+
+        bigtable.request = function(protoOpts, reqOpts) {
+          assert.deepEqual(reqOpts.table.columnFamilies, {
+            c: {
+              gcExpression: 'd'
+            }
+          });
+          done();
+        };
+
+        bigtable.createTable(TABLE_ID, options, assert.ifError);
+      });
+
+      it('should accept a garbage collection object', function(done) {
+        var options = {
+          families: [
+            {
+              name: 'e',
+              rule: {}
+            }
+          ]
+        };
+
+        var fakeRule = { a: 'b' };
+
+        FakeFamily.formatRule_ = function(rule) {
+          assert.strictEqual(rule, options.families[0].rule);
+          return fakeRule;
+        };
+
+        bigtable.request = function(protoOpts, reqOpts) {
+          assert.deepEqual(reqOpts.table.columnFamilies, {
+            e: {
+              gcRule: fakeRule
+            }
+          });
+          done();
+        };
+
+        bigtable.createTable(TABLE_ID, options, assert.ifError);
+      });
     });
 
     it('should return an error to the callback', function(done) {

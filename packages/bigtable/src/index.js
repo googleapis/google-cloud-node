@@ -29,16 +29,22 @@ var extend = require('extend');
 var PKG = require('../package.json');
 
 /**
- * @type {module:bigtable/table}
+ * @type {module:bigtable/family}
  * @private
  */
-var Table = require('./table.js');
+var Family = require('./family.js');
 
 /**
  * @type {module:common/grpcService}
  * @private
  */
 var GrpcService = common.GrpcService;
+
+/**
+ * @type {module:bigtable/table}
+ * @private
+ */
+var Table = require('./table.js');
 
 /**
  * @type {module:common/util}
@@ -344,6 +350,8 @@ Bigtable.formatTableName_ = function(name) {
  *
  * @param {string} name - The name of the table.
  * @param {object=} options - Table creation options.
+ * @param {object|string[]} options.families - Column families to be created
+ *     within the table.
  * @param {string} options.operation - Operation used for table that has already
  *    been queued to be created.
  * @param {string[]} options.splits - Initial
@@ -359,6 +367,38 @@ Bigtable.formatTableName_ = function(name) {
  * };
  *
  * bigtable.createTable('prezzy', callback);
+ *
+ * //-
+ * // Optionally specify column families to be created within the table.
+ * //-
+ * var options = {
+ *   families: ['follows']
+ * };
+ *
+ * bigtable.createTable('prezzy', options, callback);
+ *
+ * //-
+ * // You can also specify garbage collection rules for your column families.
+ * // See {module:bigtable/table#createFamily} for more information about
+ * // column families and garbage collection rules.
+ * //-
+ * var options = {
+ *   families: [
+ *     {
+ *       name: 'follows',
+ *       rule:  {
+ *         age: {
+ *           seconds: 0,
+ *           nanos: 5000
+ *         },
+ *         versions: 3,
+ *         union: true
+ *       }
+ *     }
+ *   ]
+ * };
+ *
+ * bigtable.createTable('prezzy', options, callback);
  *
  * //-
  * // Pre-split the table based on the row key to spread the load across
@@ -401,6 +441,28 @@ Bigtable.prototype.createTable = function(name, options, callback) {
 
   if (options.splits) {
     reqOpts.initialSplitKeys = options.splits;
+  }
+
+  if (options.families) {
+    var columnFamilies = options.families.reduce(function(families, family) {
+      if (is.string(family)) {
+        family = {
+          name: family
+        };
+      }
+
+      var columnFamily = families[family.name] = {};
+
+      if (is.string(family.rule)) {
+        columnFamily.gcExpression = family.rule;
+      } else if (is.object(family.rule)) {
+        columnFamily.gcRule = Family.formatRule_(family.rule);
+      }
+
+      return families;
+    }, {});
+
+    reqOpts.table.columnFamilies = columnFamilies;
   }
 
   this.request(protoOpts, reqOpts, function(err, resp) {
