@@ -564,6 +564,78 @@ describe('Compute', function() {
     });
   });
 
+  describe('machine types', function() {
+    it('should get a list of machine types', function(done) {
+      compute.getMachineTypes(function(err, machineTypes) {
+        assert.ifError(err);
+        assert(machineTypes.length > 0);
+        done();
+      });
+    });
+
+    it('should get a list of machine types in stream mode', function(done) {
+      var resultsMatched = 0;
+
+      compute.getMachineTypes()
+        .on('error', done)
+        .on('data', function() {
+          resultsMatched++;
+        })
+        .on('end', function() {
+          assert(resultsMatched > 0);
+          done();
+        });
+    });
+
+    it('should get the metadata', function(done) {
+      compute.getMachineTypes()
+        .on('error', done)
+        .once('data', function(machineType) {
+          machineType.getMetadata(function(err, metadata) {
+            assert.ifError(err);
+            assert.strictEqual(metadata.kind, 'compute#machineType');
+            done();
+          });
+        });
+    });
+  });
+
+  describe('machine types (zonal)', function() {
+    it('should get a list of machine types', function(done) {
+      zone.getMachineTypes(function(err, machineTypes) {
+        assert.ifError(err);
+        assert(machineTypes.length > 0);
+        done();
+      });
+    });
+
+    it('should get a list of machine types in stream mode', function(done) {
+      var resultsMatched = 0;
+
+      zone.getMachineTypes()
+        .on('error', done)
+        .on('data', function() {
+          resultsMatched++;
+        })
+        .on('end', function() {
+          assert(resultsMatched > 0);
+          done();
+        });
+    });
+
+    it('should get the metadata', function(done) {
+      zone.getMachineTypes()
+        .on('error', done)
+        .once('data', function(machineType) {
+          machineType.getMetadata(function(err, metadata) {
+            assert.ifError(err);
+            assert.strictEqual(metadata.kind, 'compute#machineType');
+            done();
+          });
+        });
+    });
+  });
+
   describe('networks', function() {
     var NETWORK_NAME = generateName('network');
     var network = compute.network(NETWORK_NAME);
