@@ -718,6 +718,40 @@ describe('common/util', function() {
       });
     });
 
+    describe('accessToken provided', function() {
+      var token;
+      var makeAuthenticatedRequest;
+
+      beforeEach(function() {
+        token = 'aToken';
+        makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory({
+          accessToken: token
+        });
+      });
+
+      it('should create an accessToken based authClient', function() {
+        assert.notEqual(makeAuthenticatedRequest.authClient, null);
+      });
+
+      it('should return a function', function() {
+        assert.equal(typeof makeAuthenticatedRequest, 'function');
+      });
+
+      it('should return a getCredentials method', function() {
+        assert.equal(
+          typeof makeAuthenticatedRequest.getCredentials,
+          'function'
+        );
+      });
+
+      it('getCredentials should return the accessToken', function() {
+        assert.equal(
+          makeAuthenticatedRequest.getCredentials().accessToken,
+          token
+        );
+      });
+    });
+
     describe('needs authentication', function() {
       it('should pass correct args to authorizeRequest', function(done) {
         var reqOpts = { e: 'f', g: 'h' };
