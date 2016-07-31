@@ -538,6 +538,25 @@ function generateTableName() {
           });
         });
 
+        it('should run a conditional filter with pass only', function(done) {
+          var filter = {
+            condition: {
+              test: [{
+                row: 'gwashington'
+              }],
+              pass: [{
+                all: true
+              }]
+            }
+          };
+
+          TABLE.getRows({ filter: filter }, function(err, rows) {
+            assert.ifError(err);
+            assert(rows.length > 0);
+            done();
+          });
+        });
+
         it('should only get cells for a specific family', function(done) {
           var entries = [{
             key: 'gwashington',

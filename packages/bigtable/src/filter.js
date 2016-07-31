@@ -765,6 +765,10 @@ Filter.prototype.time = function(time) {
  * execution of the filters will be the order in which they were specified.
  */
 Filter.prototype.toProto = function() {
+  if (!this.filters_.length) {
+    return null;
+  }
+
   if (this.filters_.length === 1) {
     return this.filters_[0];
   }

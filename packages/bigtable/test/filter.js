@@ -495,6 +495,13 @@ describe('Bigtable/Filter', function() {
   });
 
   describe('toProto', function() {
+    it('should return null when no filters are present', function() {
+      var filter = new Filter();
+      var filterProto = filter.toProto();
+
+      assert.strictEqual(filterProto, null);
+    });
+
     it('should return a plain filter if there is only 1', function() {
       filter.filters_ = [{}];
 
