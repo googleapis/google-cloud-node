@@ -38,15 +38,19 @@ function generateTableName() {
 }
 
 (isTestable ? describe : describe.skip)('Bigtable', function() {
-  var bigtable = gcloud.bigtable({
-    cluster: clusterName,
-    zone: zoneName
-  });
-
+  var bigtable;
+  
   var TABLE_NAME = generateTableName();
-  var TABLE = bigtable.table(TABLE_NAME);
+  var TABLE;
 
   before(function(done) {
+    bigtable = gcloud.bigtable({
+      cluster: clusterName,
+      zone: zoneName
+    });
+
+    TABLE = bigtable.table(TABLE_NAME);
+
     bigtable.getTables(function(err, tables) {
       if (err) {
         done(err);
@@ -126,9 +130,10 @@ function generateTableName() {
 
   describe('column families', function() {
     var FAMILY_NAME = 'presidents';
-    var FAMILY = TABLE.family(FAMILY_NAME);
+    var FAMILY;
 
     before(function(done) {
+      FAMILY = TABLE.family(FAMILY_NAME);
       FAMILY.create(done);
     });
 
