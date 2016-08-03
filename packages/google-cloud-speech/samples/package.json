@@ -1,12 +1,12 @@
 {
   "name": "nodejs-docs-samples-speech",
-  "description": "Node.js samples for Google Cloud Speech API.",
   "version": "0.0.1",
   "private": true,
   "license": "Apache Version 2.0",
   "author": "Google Inc.",
-  "engines": {
-    "node": ">=0.10.x"
+  "scripts": {
+    "test": "mocha -R spec -t 120000 --require intelli-espower-loader ../test/_setup.js test/*.test.js",
+    "system-test": "mocha -R spec -t 120000 --require intelli-espower-loader ../system-test/_setup.js system-test/*.test.js"
   },
   "dependencies": {
     "async": "^1.5.2",
@@ -14,5 +14,8 @@
     "google-proto-files": "^0.3.0",
     "googleapis": "^12.0.0",
     "grpc": "^0.15.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.5.3"
   }
 }
