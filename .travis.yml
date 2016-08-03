@@ -13,6 +13,8 @@ addons:
     packages:
     - g++-4.8
 before_install:
+- npm install shelljs
+- "./scripts/link"
 - export CXX=g++-4.8
 - "$CXX --version"
 script: "./scripts/build.sh"

@@ -7,11 +7,14 @@
 
 ## Testing
 
+### Setup
+
 ### Unit Tests
 
-To run the unit tests, simply run:
+First, run `npm install` at the root of the repository. To run the unit tests
+(at the root or in one of the sub-packages), simply run:
 
-``` sh
+```sh
 $ npm test
 ```
 
