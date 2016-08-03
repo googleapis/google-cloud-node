@@ -25,10 +25,10 @@ var prop = require('propprop');
 var uuid = require('node-uuid');
 
 var env = require('../../../system-test/env.js');
-var BigQuery = require('@google-cloud/bigquery/index.js');
+var BigQuery = require('@google-cloud/bigquery');
 var Logging = require('../');
-var PubSub = require('@google-cloud/pubsub/index.js');
-var Storage = require('@google-cloud/storage/index.js');
+var PubSub = require('@google-cloud/pubsub');
+var Storage = require('@google-cloud/storage');
 
 describe('Logging', function() {
   var TESTS_PREFIX = 'gcloud-logging-test';

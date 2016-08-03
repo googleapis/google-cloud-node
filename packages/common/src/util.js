@@ -547,7 +547,9 @@ util.extendGlobalConfig = extendGlobalConfig;
 function normalizeArguments(globalContext, localConfig, options) {
   options = options || {};
 
-  var config = util.extendGlobalConfig(globalContext.config_, localConfig);
+  var globalConfig = globalContext && globalContext.config_;
+
+  var config = util.extendGlobalConfig(globalConfig, localConfig);
 
   if (options.projectIdRequired !== false && !config.projectId) {
     throw util.missingProjectIdError;

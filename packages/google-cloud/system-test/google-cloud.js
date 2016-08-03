@@ -18,7 +18,7 @@
 
 var assert = require('assert');
 var env = require('../../../system-test/env.js');
-var gcloud = require('../lib');
+var gcloud = require('../');
 var path = require('path');
 
 // Test used to confirm we can perform a successful API operation.

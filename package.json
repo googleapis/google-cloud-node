@@ -20,11 +20,13 @@
     "through2": "^2.0.0"
   },
   "scripts": {
+    "link-modules": "node ./scripts/link",
+    "install-module-dependencies": "node ./scripts/install",
+    "postinstall": "npm run link-modules && npm run install-module-dependencies",
     "docs": "node ./scripts/docs.js",
     "lint": "jshint packages/ system-test/ test/ && jscs packages/ system-test/ test/",
     "test": "npm run docs && mocha test/docs.js packages/*/test/*.js",
     "system-test": "mocha packages/*/system-test/*.js --no-timeouts --bail",
-    "postinstall": "node ./scripts/install",
     "coveralls": "istanbul cover _mocha --report lcovonly -- --no-timeouts --bail packages/*/test/*.js -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "license": "Apache-2.0",
