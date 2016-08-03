@@ -1,17 +1,20 @@
 {
   "name": "nodejs-docs-samples-logging",
-  "description": "Node.js samples for Google Cloud Logging.",
   "version": "0.0.1",
   "private": true,
   "license": "Apache Version 2.0",
   "author": "Google Inc.",
-  "engines": {
-    "node": ">=0.10.x"
+  "scripts": {
+    "test": "mocha -R spec -t 120000 --require intelli-espower-loader ../test/_setup.js test/*.test.js",
+    "system-test": "mocha -R spec -t 120000 --require intelli-espower-loader ../system-test/_setup.js system-test/*.test.js"
   },
   "dependencies": {
     "async": "^1.5.2",
     "express": "^4.13.4",
     "fluent-logger": "^1.1.1",
-    "gcloud": "^0.34.0"
+    "gcloud": "^0.37.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.5.3"
   }
 }
