@@ -21,7 +21,7 @@ var extend = require('extend');
 var prop = require('propprop');
 
 var env = require('../../../system-test/env.js');
-var Translate = require('../').Translate;
+var Translate = require('../');
 
 var API_KEY = process.env.GCLOUD_TESTS_API_KEY;
 
