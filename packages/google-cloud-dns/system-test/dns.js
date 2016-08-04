@@ -24,8 +24,8 @@ var fs = require('fs');
 var tmp = require('tmp');
 var uuid = require('node-uuid');
 
-var env = require('../../../system-test/env.js');
 var DNS = require('../');
+var env = require('../../../system-test/env.js');
 
 var dns = new DNS(env);
 var DNS_DOMAIN = process.env.GCLOUD_TESTS_DNS_DOMAIN;

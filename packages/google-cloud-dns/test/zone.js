@@ -19,18 +19,10 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
-var proxyquire = require('proxyquire');
 var nodeutil = require('util');
-
+var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
-
-function FakeServiceObject() {
-  this.calledWith_ = arguments;
-  ServiceObject.apply(this, arguments);
-}
-
-nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 var parseOverride;
 var fakeDnsZonefile = {
@@ -50,6 +42,26 @@ var fakeFs = {
   }
 };
 
+function FakeChange() {
+  this.calledWith_ = arguments;
+}
+
+function FakeRecord() {
+  this.calledWith_ = arguments;
+}
+FakeRecord.fromZoneRecord_ = function() {
+  var record = new FakeRecord();
+  record.calledWith_ = arguments;
+  return record;
+};
+
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeServiceObject, ServiceObject);
+
 var extended = false;
 var fakeStreamRouter = {
   extend: function(Class, methods) {
@@ -62,19 +74,6 @@ var fakeStreamRouter = {
     assert.equal(Class.name, 'Zone');
     assert.deepEqual(methods, ['getChanges', 'getRecords']);
   }
-};
-
-function FakeChange() {
-  this.calledWith_ = arguments;
-}
-
-function FakeRecord() {
-  this.calledWith_ = arguments;
-}
-FakeRecord.fromZoneRecord_ = function() {
-  var record = new FakeRecord();
-  record.calledWith_ = arguments;
-  return record;
 };
 
 describe('Zone', function() {

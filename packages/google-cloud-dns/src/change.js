@@ -21,13 +21,7 @@
 'use strict';
 
 var common = require('@google-cloud/common');
-var nodeutil = require('util');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
+var util = require('util');
 
 /**
  * @constructor
@@ -108,7 +102,7 @@ function Change(zone, id) {
     getMetadata: true
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: zone,
     baseUrl: '/changes',
     id: id,
@@ -116,7 +110,7 @@ function Change(zone, id) {
   });
 }
 
-nodeutil.inherits(Change, ServiceObject);
+util.inherits(Change, common.ServiceObject);
 
 /**
  * Create a change.

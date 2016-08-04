@@ -24,32 +24,15 @@ var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
-var nodeutil = require('util');
-var PKG = require('../package.json');
-
-/**
- * @type {module:common/service}
- * @private
- */
-var Service = common.Service;
-
-/**
- * @type {module:common/stream-router}
- * @private
- */
-var streamRouter = common.streamRouter;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var util = require('util');
 
 /**
  * @type {module:dns/zone}
  * @private
  */
 var Zone = require('./zone.js');
+
+var PKG = require('../package.json');
 
 /**
  * [Google Cloud DNS](https://cloud.google.com/dns/what-is-cloud-dns) is a high-
@@ -80,7 +63,7 @@ var Zone = require('./zone.js');
  */
 function DNS(options) {
   if (!(this instanceof DNS)) {
-    options = util.normalizeArguments(this, options);
+    options = common.util.normalizeArguments(this, options);
     return new DNS(options);
   }
 
@@ -93,10 +76,10 @@ function DNS(options) {
     userAgent: PKG.name + '/' + PKG.version
   };
 
-  Service.call(this, config, options);
+  common.Service.call(this, config, options);
 }
 
-nodeutil.inherits(DNS, Service);
+util.inherits(DNS, common.Service);
 
 /**
  * Create a managed zone.
@@ -256,7 +239,7 @@ DNS.prototype.zone = function(name) {
  * These methods can be used with either a callback or as a readable object
  * stream. `streamRouter` is used to add this dual behavior.
  */
-streamRouter.extend(DNS, 'getZones');
+common.streamRouter.extend(DNS, 'getZones');
 
 DNS.Zone = Zone;
 
