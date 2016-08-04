@@ -17,13 +17,13 @@
 'use strict';
 
 var fs = require('fs');
-var gcloud = require('../');
+var gcloud = require('../packages/google-cloud');
 var glob = require('glob');
 var mitm = require('mitm');
 var prop = require('propprop');
 var vm = require('vm');
 
-var util = require('../lib/common/util.js');
+var util = require('../packages/common').util;
 
 function runCodeInSandbox(code, sandbox) {
   vm.createContext(sandbox);
@@ -99,7 +99,7 @@ describe('documentation', function() {
     }, {});
 
     var sandbox = {
-      gcloud: gcloud,
+      'google-cloud': gcloud,
       require: require,
       process: process,
       console: mockConsole,
@@ -120,8 +120,10 @@ describe('documentation', function() {
 
     fileDocBlocks.methods.forEach(function(method) {
       var code = method.examples.map(prop('code')).join('\n')
-        .replace(/require\(\'gcloud\'\)/g, 'require(\'..\/\')')
-        .replace(/require\(\'gcloud/g, 'require(\'..')
+        .replace(
+          /require\(\'google-cloud\'\)/g,
+          'require(\'../packages/google-cloud\')'
+        )
         .replace('require(\'express\')', FakeExpress.toString());
 
       var displayName = filename

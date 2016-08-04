@@ -1,6 +1,6 @@
-## With `gcloud-node`
+## With `google-cloud`
 
-With `gcloud-node` it's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Google Cloud services.
+With `google-cloud` it's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Google Cloud services.
 
 ```js
 var config = {
@@ -8,7 +8,7 @@ var config = {
   keyFilename: '/path/to/keyfile.json'
 };
 
-var gcloud = require('gcloud')(config);
+var gcloud = require('google-cloud')(config);
 ```
 
 ### The `config` object

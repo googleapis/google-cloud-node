@@ -1,0 +1,625 @@
+/*!
+ * Copyright 2015 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*!
+ * @module logging
+ */
+
+'use strict';
+
+var arrify = require('arrify');
+var common = require('@google-cloud/common');
+var extend = require('extend');
+var format = require('string-format-obj');
+var googleProtoFiles = require('google-proto-files');
+var is = require('is');
+var nodeutil = require('util');
+var PKG = require('../package.json');
+
+/**
+ * @type {module:storage/bucket}
+ * @private
+ */
+var Bucket = require('@google-cloud/storage').Bucket;
+
+/**
+ * @type {module:bigquery/dataset}
+ * @private
+ */
+var Dataset = require('@google-cloud/bigquery').Dataset;
+
+/**
+ * @type {module:logging/entry}
+ * @private
+ */
+var Entry = require('./entry.js');
+
+/**
+ * @type {module:common/grpc-service}
+ * @private
+ */
+var GrpcService = common.GrpcService;
+
+/**
+ * @type {module:logging/log}
+ * @private
+ */
+var Log = require('./log.js');
+
+/**
+ * @type {module:logging/sink}
+ * @private
+ */
+var Sink = require('./sink.js');
+
+/**
+ * @type {module:common/stream-router}
+ * @private
+ */
+var streamRouter = common.streamRouter;
+
+/**
+ * @type {module:pubsub/topic}
+ * @private
+ */
+var Topic = require('@google-cloud/pubsub').Topic;
+
+/**
+ * @type {module:common/util}
+ * @private
+ */
+var util = common.util;
+
+/**
+ * [Google Cloud Logging](https://cloud.google.com/logging/docs) collects and
+ * stores logs from applications and services on the Google Cloud Platform:
+ *
+ *   - Export your logs to Google Cloud Storage, Google BigQuery, or Google
+ *     Cloud Pub/Sub.
+ *   - Integrate third-party logs from your virtual machine instances by
+ *     installing the logging agent, `google-fluentd`.
+ *
+ * @alias module:logging
+ * @constructor
+ *
+ * @classdesc
+ * <p class="notice">
+ *   **This is a Beta release of Google Cloud Logging.** This API is not covered
+ *   by any SLA or deprecation policy and may be subject to
+ *   backward-incompatible changes.
+ * </p>
+ *
+ * The `gcloud.logging` method will return a `logging` object, allowing you to
+ * create sinks, write log entries, and more.
+ *
+ * To learn more about Logging, see the
+ * [What is Google Cloud Logging?](https://cloud.google.com/logging/docs)
+ *
+ * @resource [What is Google Cloud Logging?]{@link https://cloud.google.com/logging/docs}
+ * @resource [Introduction to the Cloud Logging API]{@link https://cloud.google.com/logging/docs/api}
+ *
+ * @param {object} options - [Configuration object](#/docs).
+ *
+ * @example
+ * var gcloud = require('google-cloud')({
+ *   keyFilename: '/path/to/keyfile.json',
+ *   projectId: 'grape-spaceship-123'
+ * });
+ *
+ * var logging = gcloud.logging();
+ */
+function Logging(options) {
+  if (!(this instanceof Logging)) {
+    options = util.normalizeArguments(this, options);
+    return new Logging(options);
+  }
+
+  var config = {
+    baseUrl: 'logging.googleapis.com',
+    service: 'logging',
+    apiVersion: 'v2',
+    protoServices: {
+      ConfigServiceV2:
+        googleProtoFiles('logging', 'v2', 'logging_config.proto'),
+      LoggingServiceV2: googleProtoFiles.logging.v2
+    },
+    scopes: [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ],
+    userAgent: PKG.name + '/' + PKG.version
+  };
+
+  GrpcService.call(this, config, options);
+}
+
+nodeutil.inherits(Logging, GrpcService);
+
+// jscs:disable maximumLineLength
+/**
+ * Create a sink.
+ *
+ * @resource [Sink Overview]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.sinks}
+ * @resource [Advanced Logs Filters]{@link https://cloud.google.com/logging/docs/view/advanced_filters}
+ * @resource [projects.sinks.create API Documentation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.sinks/create}
+ *
+ * @throws {Error} if a name is not provided.
+ * @throws {Error} if a config object is not provided.
+ *
+ * @param {string} name - Name of the sink.
+ * @param {object} config - See a
+ *     [Sink resource](https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.sinks#LogSink).
+ * @param {module:storage/bucket|module:bigquery/dataset|module:pubsub/topic} config.destination -
+ *     The destination. The proper ACL scopes will be granted to the provided
+ *     destination.
+ * @param {string=} config.filter - An advanced logs filter. Only log entries
+ *     matching the filter are written.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {module:logging/sink} callback.sink - The created Sink object.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * var gcs = gcloud.storage();
+ *
+ * var config = {
+ *   destination: gcs.bucket('logging-bucket'),
+ *   filter: 'severity = ALERT'
+ * };
+ *
+ * function callback(err, sink, apiResponse) {
+ *   // `sink` is a Sink object.
+ * }
+ *
+ * logging.createSink('new-sink-name', config, callback);
+ */
+Logging.prototype.createSink = function(name, config, callback) {
+  // jscs:enable maximumLineLength
+  var self = this;
+
+  if (!is.string(name)) {
+    throw new Error('A sink name must be provided.');
+  }
+
+  if (!is.object(config)) {
+    throw new Error('A sink configuration object must be provided.');
+  }
+
+  if (config.destination instanceof Bucket) {
+    this.setAclForBucket_(name, config, callback);
+    return;
+  }
+
+  if (config.destination instanceof Dataset) {
+    this.setAclForDataset_(name, config, callback);
+    return;
+  }
+
+  if (config.destination instanceof Topic) {
+    this.setAclForTopic_(name, config, callback);
+    return;
+  }
+
+  var protoOpts = {
+    service: 'ConfigServiceV2',
+    method: 'createSink'
+  };
+
+  var reqOpts = {
+    parent: 'projects/' + this.projectId,
+    sink: extend({}, config, { name: name })
+  };
+
+  this.request(protoOpts, reqOpts, function(err, resp) {
+    if (err) {
+      callback(err, null, resp);
+      return;
+    }
+
+    var sink = self.sink(resp.name);
+    sink.metadata = resp;
+
+    callback(null, sink, resp);
+  });
+};
+
+/**
+ * Create an entry object.
+ *
+ * Note that using this method will not itself make any API requests. You will
+ * use the object returned in other API calls, such as
+ * {module:logging/log#write}.
+ *
+ * @resource [LogEntry JSON representation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry}
+ *
+ * @param {object=|string=} resource - See a
+ *     [Monitored Resource](https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource).
+ * @param {object|string} data - The data to use as the value for this log
+ *     entry.
+ * @return {module:logging/entry}
+ *
+ * @example
+ * var resource = {
+ *   type: 'gce_instance',
+ *   labels: {
+ *     zone: 'global',
+ *     instance_id: '3'
+ *   }
+ * };
+ *
+ * var entry = logging.entry(resource, {
+ *   delegate: 'my_username'
+ * });
+ *
+ * entry.toJSON();
+ * // {
+ * //   resource: {
+ * //     type: 'gce_instance',
+ * //     labels: {
+ * //       zone: 'global',
+ * //       instance_id: '3'
+ * //     }
+ * //   },
+ * //   jsonPayload: {
+ * //     delegate: 'my_username'
+ * //   }
+ * // }
+ */
+Logging.prototype.entry = function(resource, data) {
+  return new Entry(resource, data);
+};
+
+/**
+ * List the entries in your logs.
+ *
+ * @resource [entries.list API Documentation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/entries/list}
+ *
+ * @param {object=} options - Filtering options.
+ * @param {boolean} options.autoPaginate - Have pagination handled
+ *     automatically. Default: true.
+ * @param {string} options.filter - An
+ *     [advanced logs filter](https://cloud.google.com/logging/docs/view/advanced_filters).
+ *     An empty filter matches all log entries.
+ * @param {number} options.maxApiCalls - Maximum number of API calls to make.
+ * @param {number} options.maxResults - Maximum number of results to return.
+ * @param {string} options.orderBy - How the results should be sorted,
+ *     `timestamp` (oldest first) and `timestamp desc` (newest first,
+ *     **default**).
+ * @param {number} options.pageSize - Maximum number of logs to return.
+ * @param {string} options.pageToken - A previously-returned page token
+ *     representing part of the larger set of results to view.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {module:logging/entry[]} callback.entries - Entries from your logs.
+ * @param {?object} callback.nextQuery - If present, query with this object to
+ *     check for more results.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * logging.getEntries(function(err, entries) {
+ *   // `entries` is an array of Cloud Logging entry objects.
+ *   // See the `data` property to read the data from the entry.
+ * });
+ *
+ * //-
+ * // To control how many API requests are made and page through the results
+ * // manually, set `autoPaginate` to `false`.
+ * //-
+ * function callback(err, entries, nextQuery, apiResponse) {
+ *   if (nextQuery) {
+ *     // More results exist.
+ *     logging.getEntries(nextQuery, callback);
+ *   }
+ * }
+ *
+ * logging.getEntries({
+ *   autoPaginate: false
+ * }, callback);
+ *
+ * //-
+ * // Get the entries from your project as a readable object stream.
+ * //-
+ * logging.getEntries()
+ *   .on('error', console.error)
+ *   .on('data', function(entry) {
+ *     // `entry` is a Cloud Logging entry object.
+ *     // See the `data` property to read the data from the entry.
+ *   })
+ *   .on('end', function() {
+ *     // All entries retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * logging.getEntries()
+ *   .on('data', function(entry) {
+ *     this.end();
+ *   });
+ */
+Logging.prototype.getEntries = function(options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  var protoOpts = {
+    service: 'LoggingServiceV2',
+    method: 'listLogEntries'
+  };
+
+  var reqOpts = extend({
+    orderBy: 'timestamp desc'
+  }, options);
+  reqOpts.projectIds = arrify(reqOpts.projectIds);
+  reqOpts.projectIds.push(this.projectId);
+
+  this.request(protoOpts, reqOpts, function(err, resp) {
+    if (err) {
+      callback(err, null, null, resp);
+      return;
+    }
+
+    var nextQuery = null;
+
+    if (resp.nextPageToken) {
+      nextQuery = extend({}, reqOpts, {
+        pageToken: resp.nextPageToken
+      });
+    }
+
+    var entries = arrify(resp.entries).map(Entry.fromApiResponse_);
+
+    callback(null, entries, nextQuery, resp);
+  });
+};
+
+/**
+ * Get the sinks associated with this project.
+ *
+ * @resource [projects.sinks.list API Documentation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.sinks/list}
+ *
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.autoPaginate - Have pagination handled
+ *     automatically. Default: true.
+ * @param {number} options.maxApiCalls - Maximum number of API calls to make.
+ * @param {number} options.maxResults - Maximum number of results to return.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {module:logging/sink[]} callback.sinks - Sink objects.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * logging.getSinks(function(err, sinks) {
+ *   // sinks is an array of Sink objects.
+ * });
+ *
+ * //-
+ * // Get the sinks from your project as a readable object stream.
+ * //-
+ * logging.getSinks()
+ *   .on('error', console.error)
+ *   .on('data', function(sink) {
+ *     // `sink` is a Sink object.
+ *   })
+ *   .on('end', function() {
+ *     // All sinks retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * logging.getSinks()
+ *   .on('data', function(sink) {
+ *     this.end();
+ *   });
+ */
+Logging.prototype.getSinks = function(options, callback) {
+  var self = this;
+
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  var protoOpts = {
+    service: 'ConfigServiceV2',
+    method: 'listSinks'
+  };
+
+  var reqOpts = extend({}, options, {
+    parent: 'projects/' + this.projectId
+  });
+
+  this.request(protoOpts, reqOpts, function(err, resp) {
+    if (err) {
+      callback(err, null, null, resp);
+      return;
+    }
+
+    var nextQuery = null;
+
+    if (resp.nextPageToken) {
+      nextQuery = extend({}, options, {
+        pageToken: resp.nextPageToken
+      });
+    }
+
+    var sinks = arrify(resp.sinks).map(function(sink) {
+      var sinkInstance = self.sink(sink.name);
+      sinkInstance.metadata = sink;
+      return sinkInstance;
+    });
+
+    callback(null, sinks, nextQuery, resp);
+  });
+};
+
+/**
+ * Get a reference to a Cloud Logging log.
+ *
+ * @resource [Log Overview]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.logs}
+ *
+ * @param {string} name - Name of the existing log.
+ * @return {module:logging/log}
+ *
+ * @example
+ * var log = logging.log('my-log');
+ */
+Logging.prototype.log = function(name) {
+  return new Log(this, name);
+};
+
+/**
+ * Get a reference to a Cloud Logging sink.
+ *
+ * @resource [Sink Overview]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.sinks}
+ *
+ * @param {string} name - Name of the existing sink.
+ * @return {module:logging/sink}
+ *
+ * @example
+ * var sink = logging.sink('my-sink');
+ */
+Logging.prototype.sink = function(name) {
+  return new Sink(this, name);
+};
+
+/**
+ * This method is called when creating a sink with a Bucket destination. The
+ * bucket must first grant proper ACL access to the Cloud Logging account.
+ *
+ * The parameters are the same as what {module:logging#createSink} accepts.
+ *
+ * @private
+ */
+Logging.prototype.setAclForBucket_ = function(name, config, callback) {
+  var self = this;
+  var bucket = config.destination;
+
+  bucket.acl.owners.addGroup('cloud-logs@google.com', function(err, apiResp) {
+    if (err) {
+      callback(err, null, apiResp);
+      return;
+    }
+
+    config.destination = 'storage.googleapis.com/' + bucket.name;
+
+    self.createSink(name, config, callback);
+  });
+};
+
+/**
+ * This method is called when creating a sink with a Dataset destination. The
+ * dataset must first grant proper ACL access to the Cloud Logging account.
+ *
+ * The parameters are the same as what {module:logging#createSink} accepts.
+ *
+ * @private
+ */
+Logging.prototype.setAclForDataset_ = function(name, config, callback) {
+  var self = this;
+  var dataset = config.destination;
+
+  dataset.getMetadata(function(err, metadata, apiResp) {
+    if (err) {
+      callback(err, null, apiResp);
+      return;
+    }
+
+    var access = [].slice.call(arrify(metadata.access));
+
+    access.push({
+      role: 'WRITER',
+      groupByEmail: 'cloud-logs@google.com'
+    });
+
+    dataset.setMetadata({
+      access: access
+    }, function(err, apiResp) {
+      if (err) {
+        callback(err, null, apiResp);
+        return;
+      }
+
+      config.destination = format('{baseUrl}/projects/{pId}/datasets/{dId}', {
+        baseUrl: 'bigquery.googleapis.com',
+        pId: dataset.parent.projectId,
+        dId: dataset.id
+      });
+
+      self.createSink(name, config, callback);
+    });
+  });
+};
+
+/**
+ * This method is called when creating a sink with a Topic destination. The
+ * topic must first grant proper ACL access to the Cloud Logging account.
+ *
+ * The parameters are the same as what {module:logging#createSink} accepts.
+ *
+ * @private
+ */
+Logging.prototype.setAclForTopic_ = function(name, config, callback) {
+  var self = this;
+  var topic = config.destination;
+
+  topic.iam.getPolicy(function(err, policy, apiResp) {
+    if (err) {
+      callback(err, null, apiResp);
+      return;
+    }
+
+    policy.bindings = arrify(policy.bindings);
+
+    policy.bindings.push({
+      role: 'roles/pubsub.publisher',
+      members: [
+        'serviceAccount:cloud-logs@system.gserviceaccount.com'
+      ]
+    });
+
+    topic.iam.setPolicy(policy, function(err, policy, apiResp) {
+      if (err) {
+        callback(err, null, apiResp);
+        return;
+      }
+
+      config.destination = format('{baseUrl}/{topicName}', {
+        baseUrl: 'pubsub.googleapis.com',
+        topicName: topic.name
+      });
+
+      self.createSink(name, config, callback);
+    });
+  });
+};
+
+/*! Developer Documentation
+ *
+ * These methods can be used with either a callback or as a readable object
+ * stream. `streamRouter` is used to add this dual behavior.
+ */
+streamRouter.extend(Logging, ['getEntries', 'getSinks']);
+
+Logging.Entry = Entry;
+Logging.Log = Log;
+Logging.Logging = Logging;
+Logging.Sink = Sink;
+
+module.exports = Logging;

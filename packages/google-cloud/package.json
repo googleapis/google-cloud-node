@@ -1,0 +1,122 @@
+{
+  "name": "google-cloud",
+  "version": "0.37.0",
+  "author": "Google Inc.",
+  "description": "Google Cloud APIs Client Library for Node.js",
+  "contributors": [
+    {
+      "name": "Burcu Dogan",
+      "email": "jbd@google.com"
+    },
+    {
+      "name": "Jason Dobry",
+      "email": "jason.dobry@gmail.com"
+    },
+    {
+      "name": "Johan Euphrosine",
+      "email": "proppy@google.com"
+    },
+    {
+      "name": "Patrick Costello",
+      "email": "pcostell@google.com"
+    },
+    {
+      "name": "Ryan Seys",
+      "email": "ryan@ryanseys.com"
+    },
+    {
+      "name": "Silvano Luciani",
+      "email": "silvano@google.com"
+    },
+    {
+      "name": "Stephen Sawchuk",
+      "email": "sawchuk@gmail.com"
+    }
+  ],
+  "main": "./src/index.js",
+  "files": [
+    "./src/*",
+    "AUTHORS",
+    "CONTRIBUTORS",
+    "COPYING"
+  ],
+  "repository": "googlecloudplatform/gcloud-node",
+  "keywords": [
+    "google apis client",
+    "google api client",
+    "google apis",
+    "google api",
+    "google",
+    "google cloud platform",
+    "google cloud",
+    "cloud",
+    "google bigquery",
+    "google big query",
+    "bigquery",
+    "big query",
+    "google cloud datastore",
+    "cloud datastore",
+    "datastore",
+    "google cloud dns",
+    "cloud dns",
+    "dns",
+    "google cloud pub/sub",
+    "google cloud pubsub",
+    "cloud pub/sub",
+    "cloud pubsub",
+    "pub/sub",
+    "pubsub",
+    "google cloud storage",
+    "cloud storage",
+    "gcs",
+    "google compute engine",
+    "compute engine",
+    "computeengine",
+    "gce",
+    "google app engine",
+    "app engine",
+    "google appengine",
+    "appengine",
+    "gae",
+    "google prediction",
+    "prediction",
+    "google translate",
+    "translate",
+    "google cloud logging",
+    "cloud logging",
+    "logging",
+    "google cloud resource manager",
+    "cloud resource manager",
+    "resource manager",
+    "google cloud vision",
+    "cloud vision",
+    "vision"
+  ],
+  "dependencies": {
+    "@google-cloud/bigquery": "0.1.0",
+    "@google-cloud/bigtable": "0.1.0",
+    "@google-cloud/compute": "0.1.0",
+    "@google-cloud/datastore": "0.1.0",
+    "@google-cloud/dns": "0.1.0",
+    "@google-cloud/prediction": "0.1.0",
+    "@google-cloud/logging": "0.1.0",
+    "@google-cloud/pubsub": "0.1.0",
+    "@google-cloud/resource": "0.1.0",
+    "@google-cloud/storage": "0.1.0",
+    "@google-cloud/translate": "0.1.0",
+    "@google-cloud/vision": "0.1.0",
+    "extend": "^3.0.0"
+  },
+  "devDependencies": {
+    "proxyquire": "^1.7.10"
+  },
+  "scripts": {
+    "publish": "../../scripts/publish",
+    "test": "mocha test/*.js",
+    "system-test": "mocha system-test/*.js --no-timeouts --bail"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=0.12.0"
+  }
+}
