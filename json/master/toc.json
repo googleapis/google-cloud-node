@@ -84,6 +84,9 @@
       "title": "InstanceGroup",
       "type": "compute/instance-group"
     }, {
+      "title": "MachineType",
+      "type": "compute/machine-type"
+    }, {
       "title": "Network",
       "type": "compute/network"
     }, {
