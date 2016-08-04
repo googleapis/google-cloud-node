@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/logging",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "Google Inc.",
   "description": "Google Cloud Logging Client Library for Node.js",
   "contributors": [
