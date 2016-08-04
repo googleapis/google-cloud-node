@@ -21,19 +21,7 @@
 'use strict';
 
 var common = require('@google-cloud/common');
-var nodeutil = require('util');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var util = require('util');
 
 /*! Developer Documentation
  *
@@ -188,7 +176,7 @@ function Project(resource, id) {
     }
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: resource,
     baseUrl: '/projects',
     id: id,
@@ -197,7 +185,7 @@ function Project(resource, id) {
   });
 }
 
-nodeutil.inherits(Project, ServiceObject);
+util.inherits(Project, common.ServiceObject);
 
 /**
  * Restore a project.
@@ -219,7 +207,7 @@ nodeutil.inherits(Project, ServiceObject);
  * });
  */
 Project.prototype.restore = function(callback) {
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   this.request({
     method: 'POST',
