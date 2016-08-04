@@ -17,8 +17,8 @@
 'use strict';
 
 var assert = require('assert');
-var Mutation = require('../src/mutation.js');
 var Int64 = require('node-int64');
+var Mutation = require('../src/mutation.js');
 var sinon = require('sinon').sandbox.create();
 
 describe('Bigtable/Mutation', function() {

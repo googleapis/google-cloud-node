@@ -24,25 +24,7 @@ var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
-var nodeutil = require('util');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
- * @type {module:common/stream-router}
- * @private
- */
-var streamRouter = common.streamRouter;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var util = require('util');
 
 /*! Developer Documentation
  *
@@ -142,7 +124,7 @@ function InstanceGroup(zone, name) {
     getMetadata: true
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: zone,
     baseUrl: '/instanceGroups',
     id: name,
@@ -154,7 +136,7 @@ function InstanceGroup(zone, name) {
   this.name = name;
 }
 
-nodeutil.inherits(InstanceGroup, ServiceObject);
+util.inherits(InstanceGroup, common.ServiceObject);
 
 /**
  * Format a map of named ports in the way the API expects.
@@ -244,9 +226,9 @@ InstanceGroup.prototype.add = function(vms, callback) {
 InstanceGroup.prototype.delete = function(callback) {
   var self = this;
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
-  ServiceObject.prototype.delete.call(this, function(err, resp) {
+  common.ServiceObject.prototype.delete.call(this, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -452,7 +434,7 @@ InstanceGroup.prototype.remove = function(vms, callback) {
 InstanceGroup.prototype.setPorts = function(ports, callback) {
   var self = this;
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   this.request({
     method: 'POST',
@@ -478,6 +460,6 @@ InstanceGroup.prototype.setPorts = function(ports, callback) {
  * These methods can be used with either a callback or as a readable object
  * stream. `streamRouter` is used to add this dual behavior.
  */
-streamRouter.extend(InstanceGroup, ['getVMs']);
+common.streamRouter.extend(InstanceGroup, ['getVMs']);
 
 module.exports = InstanceGroup;

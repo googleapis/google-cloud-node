@@ -21,9 +21,9 @@
 'use strict';
 
 var arrify = require('arrify');
-var is = require('is');
 var createErrorClass = require('create-error-class');
 var extend = require('extend');
+var is = require('is');
 
 /**
  * @private

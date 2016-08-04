@@ -27,8 +27,8 @@ var extend = require('extend');
 var fs = require('fs');
 var is = require('is');
 var mime = require('mime-types');
-var nodeutil = require('util');
 var path = require('path');
+var util = require('util');
 
 /**
  * @type {module:storage/acl}
@@ -41,24 +41,6 @@ var Acl = require('./acl.js');
  * @private
  */
 var File = require('./file.js');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
- * @type {module:common/stream-router}
- * @private
- */
-var streamRouter = common.streamRouter;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
 
 /**
  * The size of a file (in bytes) must be greater than this number to
@@ -208,7 +190,7 @@ function Bucket(storage, name) {
     setMetadata: true
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: storage,
     baseUrl: '/b',
     id: name,
@@ -275,7 +257,7 @@ function Bucket(storage, name) {
   });
 }
 
-nodeutil.inherits(Bucket, ServiceObject);
+util.inherits(Bucket, common.ServiceObject);
 
 /**
  * Combine multiple files into one new file.
@@ -324,7 +306,7 @@ Bucket.prototype.combine = function(sources, destination, callback) {
 
   sources = sources.map(convertToFile);
   destination = convertToFile(destination);
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   if (!destination.metadata.contentType) {
     var destinationContentType = mime.contentType(destination.name);
@@ -1205,6 +1187,6 @@ Bucket.prototype.makeAllFilesPublicPrivate_ = function(options, callback) {
  * This method can be used with either a callback or as a readable object
  * stream. `streamRouter` is used to add this dual behavior.
  */
-streamRouter.extend(Bucket, 'getFiles');
+common.streamRouter.extend(Bucket, 'getFiles');
 
 module.exports = Bucket;

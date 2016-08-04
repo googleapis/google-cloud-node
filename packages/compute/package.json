@@ -61,8 +61,8 @@
     "string-format-obj": "^1.0.0"
   },
   "devDependencies": {
-    "mocha": "^2.1.0",
     "concat-stream": "^1.5.0",
+    "mocha": "^3.0.1",
     "propprop": "^0.3.0",
     "proxyquire": "^1.7.10"
   },

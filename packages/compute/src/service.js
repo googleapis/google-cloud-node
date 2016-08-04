@@ -24,19 +24,7 @@ var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var format = require('string-format-obj');
 var is = require('is');
-var nodeutil = require('util');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var util = require('util');
 
 /*! Developer Documentation
  *
@@ -145,7 +133,7 @@ function Service(compute, name) {
     getMetadata: true
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: compute,
     baseUrl: '/global/backendServices',
     id: name,
@@ -157,7 +145,7 @@ function Service(compute, name) {
   this.name = name;
 }
 
-nodeutil.inherits(Service, ServiceObject);
+util.inherits(Service, common.ServiceObject);
 
 /**
  * Delete the backend service.
@@ -179,9 +167,9 @@ nodeutil.inherits(Service, ServiceObject);
 Service.prototype.delete = function(callback) {
   var compute = this.compute;
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
-  ServiceObject.prototype.delete.call(this, function(err, resp) {
+  common.ServiceObject.prototype.delete.call(this, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -279,7 +267,7 @@ Service.prototype.getHealth = function(group, callback) {
 Service.prototype.setMetadata = function(metadata, callback) {
   var compute = this.compute;
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   this.request({
     method: 'PATCH',

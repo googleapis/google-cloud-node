@@ -25,18 +25,6 @@ var events = require('events');
 var is = require('is');
 var modelo = require('modelo');
 
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
-
 /*! Developer Documentation
  *
  * @param {module:bigquery} bigQuery - BigQuery instance.
@@ -145,7 +133,7 @@ function Job(bigQuery, id) {
     getMetadata: true
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: bigQuery,
     baseUrl: '/jobs',
     id: id,
@@ -174,7 +162,7 @@ function Job(bigQuery, id) {
   this.listenForEvents_();
 }
 
-modelo.inherits(Job, ServiceObject, events.EventEmitter);
+modelo.inherits(Job, common.ServiceObject, events.EventEmitter);
 
 /**
  * Cancel a job. Use {module:bigquery/job#getMetadata} to see if the cancel
@@ -194,7 +182,7 @@ modelo.inherits(Job, ServiceObject, events.EventEmitter);
  * });
  */
 Job.prototype.cancel = function(callback) {
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   this.request({
     method: 'POST',
@@ -336,7 +324,7 @@ Job.prototype.startPolling_ = function() {
 
   this.getMetadata(function(err, metadata, apiResponse) {
     if (apiResponse.status && apiResponse.status.errors) {
-      err = util.ApiError(apiResponse.status);
+      err = common.util.ApiError(apiResponse.status);
     }
 
     if (err) {

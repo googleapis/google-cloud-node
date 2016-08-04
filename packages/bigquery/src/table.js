@@ -21,38 +21,16 @@
 'use strict';
 
 var arrify = require('arrify');
+var common = require('@google-cloud/common');
 var duplexify = require('duplexify');
 var extend = require('extend');
 var format = require('string-format-obj');
 var fs = require('fs');
 var is = require('is');
-var nodeutil = require('util');
 var path = require('path');
+var Storage = require('@google-cloud/storage');
 var streamEvents = require('stream-events');
-
-/**
- * @type {module:storage/file}
- * @private
- */
-var File = require('@google-cloud/storage').File;
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = require('@google-cloud/common').ServiceObject;
-
-/**
- * @type {module:common/stream-router}
- * @private
- */
-var streamRouter = require('@google-cloud/common').streamRouter;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = require('@google-cloud/common').util;
+var util = require('util');
 
 /**
  * The file formats accepted by BigQuery.
@@ -178,7 +156,7 @@ function Table(dataset, id) {
     getMetadata: true
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: dataset,
     baseUrl: '/tables',
     id: id,
@@ -190,7 +168,7 @@ function Table(dataset, id) {
   this.dataset = dataset;
 }
 
-nodeutil.inherits(Table, ServiceObject);
+util.inherits(Table, common.ServiceObject);
 
 /**
  * Convert a comma-separated name:type string to a table schema object.
@@ -450,7 +428,7 @@ Table.prototype.createWriteStream = function(metadata) {
   var dup = streamEvents(duplexify());
 
   dup.once('writing', function() {
-    util.makeWritableStream(dup, {
+    common.util.makeWritableStream(dup, {
       makeAuthenticatedRequest: self.bigQuery.makeAuthenticatedRequest,
       metadata: {
         configuration: {
@@ -540,7 +518,7 @@ Table.prototype.export = function(destination, options, callback) {
 
   extend(true, options, {
     destinationUris: arrify(destination).map(function(dest) {
-      if (!(dest instanceof File)) {
+      if (!(dest instanceof Storage.File)) {
         throw new Error('Destination must be a File object.');
       }
 
@@ -667,7 +645,7 @@ Table.prototype.getRows = function(options, callback) {
     options = {};
   }
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   this.request({
     uri: '/data',
@@ -782,7 +760,7 @@ Table.prototype.import = function(source, metadata, callback) {
     metadata = {};
   }
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
   metadata = metadata || {};
 
   var format = metadata.sourceFormat || metadata.format;
@@ -823,7 +801,7 @@ Table.prototype.import = function(source, metadata, callback) {
 
   extend(true, body.configuration.load, metadata, {
     sourceUris: arrify(source).map(function(src) {
-      if (!(src instanceof File)) {
+      if (!(src instanceof Storage.File)) {
         throw new Error('Source must be a File object.');
       }
 
@@ -1064,6 +1042,6 @@ Table.prototype.setMetadata = function(metadata, callback) {
  * These methods can be used with either a callback or as a readable object
  * stream. `streamRouter` is used to add this dual behavior.
  */
-streamRouter.extend(Table, ['getRows']);
+common.streamRouter.extend(Table, ['getRows']);
 
 module.exports = Table;

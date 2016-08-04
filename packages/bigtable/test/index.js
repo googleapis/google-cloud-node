@@ -17,17 +17,17 @@
 'use strict';
 
 var assert = require('assert');
-var nodeutil = require('util');
 var extend = require('extend');
-var googleProtoFiles = require('google-proto-files');
 var format = require('string-format-obj');
+var googleProtoFiles = require('google-proto-files');
+var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var sinon = require('sinon').sandbox.create();
 
 var GrpcService = require('@google-cloud/common').GrpcService;
-var util = require('@google-cloud/common').util;
-var Table = require('../src/table.js');
 var PKG = require('../package.json');
+var Table = require('../src/table.js');
+var util = require('@google-cloud/common').util;
 
 var fakeUtil = extend({}, util);
 

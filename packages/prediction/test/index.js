@@ -19,16 +19,23 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
-var proxyquire = require('proxyquire');
 var nodeutil = require('util');
-
+var proxyquire = require('proxyquire');
 var Service = require('@google-cloud/common').Service;
 var util = require('@google-cloud/common').util;
+
 var PKG = require('../package.json');
 
-var fakeUtil = extend({}, util, {
-  makeAuthenticatedRequestFactory: util.noop
-});
+function FakeModel() {
+  this.calledWith_ = arguments;
+}
+
+function FakeService() {
+  this.calledWith_ = arguments;
+  Service.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeService, Service);
 
 var extended = false;
 var fakeStreamRouter = {
@@ -44,16 +51,10 @@ var fakeStreamRouter = {
   }
 };
 
-function FakeModel() {
-  this.calledWith_ = arguments;
-}
 
-function FakeService() {
-  this.calledWith_ = arguments;
-  Service.apply(this, arguments);
-}
-
-nodeutil.inherits(FakeService, Service);
+var fakeUtil = extend({}, util, {
+  makeAuthenticatedRequestFactory: util.noop
+});
 
 describe('Prediction', function() {
   var Prediction;

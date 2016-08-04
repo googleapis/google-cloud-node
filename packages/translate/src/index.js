@@ -25,14 +25,8 @@ var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
 var prop = require('propprop');
-var PKG = require('../package.json');
-var USER_AGENT = PKG.name + '/' + PKG.version;
 
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var PKG = require('../package.json');
 
 /**
  * With [Google Translate](https://cloud.google.com/translate), you can
@@ -78,7 +72,7 @@ var util = common.util;
  */
 function Translate(options) {
   if (!(this instanceof Translate)) {
-    options = util.normalizeArguments(this, options, {
+    options = common.util.normalizeArguments(this, options, {
       projectIdRequired: false
     });
     return new Translate(options);
@@ -350,11 +344,11 @@ Translate.prototype.request = function(reqOpts, callback) {
       key: this.key
     },
     headers: {
-      'User-Agent': USER_AGENT
+      'User-Agent': PKG.name + '/' + PKG.version
     }
   });
 
-  util.makeRequest(reqOpts, this.options, callback);
+  common.util.makeRequest(reqOpts, this.options, callback);
 };
 
 module.exports = Translate;

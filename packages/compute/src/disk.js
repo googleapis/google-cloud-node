@@ -24,25 +24,13 @@ var common = require('@google-cloud/common');
 var extend = require('extend');
 var format = require('string-format-obj');
 var is = require('is');
-var nodeutil = require('util');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
+var util = require('util');
 
 /**
  * @type {module:compute/snapshot}
  * @private
  */
 var Snapshot = require('./snapshot.js');
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
 
 /*! Developer Documentation
  *
@@ -141,7 +129,7 @@ function Disk(zone, name) {
     getMetadata: true
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: zone,
     baseUrl: '/disks',
     id: name,
@@ -155,7 +143,7 @@ function Disk(zone, name) {
   this.formattedName = Disk.formatName_(zone, name);
 }
 
-nodeutil.inherits(Disk, ServiceObject);
+util.inherits(Disk, common.ServiceObject);
 
 /**
  * Format a disk's name how the API expects.
@@ -252,9 +240,9 @@ Disk.prototype.createSnapshot = function(name, options, callback) {
 Disk.prototype.delete = function(callback) {
   var zone = this.zone;
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
-  ServiceObject.prototype.delete.call(this, function(err, resp) {
+  common.ServiceObject.prototype.delete.call(this, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;

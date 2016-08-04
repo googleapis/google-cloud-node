@@ -21,37 +21,21 @@
 'use strict';
 
 var arrify = require('arrify');
+var BigQuery = require('@google-cloud/bigquery');
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var format = require('string-format-obj');
 var googleProtoFiles = require('google-proto-files');
 var is = require('is');
-var nodeutil = require('util');
-var PKG = require('../package.json');
-
-/**
- * @type {module:storage/bucket}
- * @private
- */
-var Bucket = require('@google-cloud/storage').Bucket;
-
-/**
- * @type {module:bigquery/dataset}
- * @private
- */
-var Dataset = require('@google-cloud/bigquery').Dataset;
+var PubSub = require('@google-cloud/pubsub');
+var Storage = require('@google-cloud/storage');
+var util = require('util');
 
 /**
  * @type {module:logging/entry}
  * @private
  */
 var Entry = require('./entry.js');
-
-/**
- * @type {module:common/grpc-service}
- * @private
- */
-var GrpcService = common.GrpcService;
 
 /**
  * @type {module:logging/log}
@@ -65,23 +49,7 @@ var Log = require('./log.js');
  */
 var Sink = require('./sink.js');
 
-/**
- * @type {module:common/stream-router}
- * @private
- */
-var streamRouter = common.streamRouter;
-
-/**
- * @type {module:pubsub/topic}
- * @private
- */
-var Topic = require('@google-cloud/pubsub').Topic;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var PKG = require('../package.json');
 
 /**
  * [Google Cloud Logging](https://cloud.google.com/logging/docs) collects and
@@ -123,7 +91,7 @@ var util = common.util;
  */
 function Logging(options) {
   if (!(this instanceof Logging)) {
-    options = util.normalizeArguments(this, options);
+    options = common.util.normalizeArguments(this, options);
     return new Logging(options);
   }
 
@@ -142,10 +110,10 @@ function Logging(options) {
     userAgent: PKG.name + '/' + PKG.version
   };
 
-  GrpcService.call(this, config, options);
+  common.GrpcService.call(this, config, options);
 }
 
-nodeutil.inherits(Logging, GrpcService);
+util.inherits(Logging, common.GrpcService);
 
 // jscs:disable maximumLineLength
 /**
@@ -197,17 +165,17 @@ Logging.prototype.createSink = function(name, config, callback) {
     throw new Error('A sink configuration object must be provided.');
   }
 
-  if (config.destination instanceof Bucket) {
+  if (config.destination instanceof Storage.Bucket) {
     this.setAclForBucket_(name, config, callback);
     return;
   }
 
-  if (config.destination instanceof Dataset) {
+  if (config.destination instanceof BigQuery.Dataset) {
     this.setAclForDataset_(name, config, callback);
     return;
   }
 
-  if (config.destination instanceof Topic) {
+  if (config.destination instanceof PubSub.Topic) {
     this.setAclForTopic_(name, config, callback);
     return;
   }
@@ -615,7 +583,7 @@ Logging.prototype.setAclForTopic_ = function(name, config, callback) {
  * These methods can be used with either a callback or as a readable object
  * stream. `streamRouter` is used to add this dual behavior.
  */
-streamRouter.extend(Logging, ['getEntries', 'getSinks']);
+common.streamRouter.extend(Logging, ['getEntries', 'getSinks']);
 
 Logging.Entry = Entry;
 Logging.Log = Log;

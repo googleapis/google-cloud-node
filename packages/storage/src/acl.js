@@ -22,7 +22,7 @@
 
 var arrify = require('arrify');
 var is = require('is');
-var nodeutil = require('util');
+var util = require('util');
 
 /**
  * Google Cloud Storage uses access control lists (ACLs) to manage object and
@@ -188,7 +188,7 @@ Acl.prototype.readers = {};
  */
 Acl.prototype.writers = {};
 
-nodeutil.inherits(Acl, AclRoleAccessorMethods);
+util.inherits(Acl, AclRoleAccessorMethods);
 
 /**
  * Add access controls on a {module:storage/bucket} or {module:storage/file}.

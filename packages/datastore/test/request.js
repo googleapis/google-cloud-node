@@ -22,9 +22,9 @@ var is = require('is');
 var proxyquire = require('proxyquire');
 var stream = require('stream');
 var through = require('through2');
+var util = require('@google-cloud/common').util;
 
 var entity = require('../src/entity.js');
-var util = require('@google-cloud/common').util;
 var Query = require('../src/query.js');
 
 var overrides = {};

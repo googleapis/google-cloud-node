@@ -21,12 +21,21 @@ var assert = require('assert');
 var extend = require('extend');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
-
 var Service = require('@google-cloud/common').Service;
 var util = require('@google-cloud/common').util;
+
 var PKG = require('../package.json');
 
-var fakeUtil = extend({}, util);
+function FakeChannel() {
+  this.calledWith_ = arguments;
+}
+
+function FakeService() {
+  this.calledWith_ = arguments;
+  Service.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeService, Service);
 
 var extended = false;
 var fakeStreamRouter = {
@@ -42,16 +51,7 @@ var fakeStreamRouter = {
   }
 };
 
-function FakeService() {
-  this.calledWith_ = arguments;
-  Service.apply(this, arguments);
-}
-
-nodeutil.inherits(FakeService, Service);
-
-function FakeChannel() {
-  this.calledWith_ = arguments;
-}
+var fakeUtil = extend({}, util);
 
 describe('Storage', function() {
   var PROJECT_ID = 'project-id';
@@ -63,8 +63,8 @@ describe('Storage', function() {
     Storage = proxyquire('../', {
       '@google-cloud/common': {
         Service: FakeService,
-        util: fakeUtil,
-        streamRouter: fakeStreamRouter
+        streamRouter: fakeStreamRouter,
+        util: fakeUtil
       },
       './channel.js': FakeChannel,
     });

@@ -23,26 +23,14 @@
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var is = require('is');
-var nodeutil = require('util');
 var prop = require('propprop');
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var util = require('util');
 
 /**
  * @type {module:pubsub/iam}
  * @private
  */
 var IAM = require('./iam.js');
-
-/**
- * @type {module:common/grpc-service-object}
- * @private
- */
-var GrpcServiceObject = common.GrpcServiceObject;
 
 /*! Developer Documentation
  *
@@ -156,7 +144,7 @@ function Topic(pubsub, name) {
     }
   };
 
-  GrpcServiceObject.call(this, {
+  common.GrpcServiceObject.call(this, {
     parent: pubsub,
     id: this.name,
     createMethod: pubsub.createTopic.bind(pubsub),
@@ -192,7 +180,7 @@ function Topic(pubsub, name) {
   this.iam = new IAM(pubsub, this.name);
 }
 
-nodeutil.inherits(Topic, GrpcServiceObject);
+util.inherits(Topic, common.GrpcServiceObject);
 
 /**
  * Format a message object as the upstream API expects it.
@@ -356,7 +344,7 @@ Topic.prototype.publish = function(messages, callback) {
     throw new Error('Cannot publish message without a `data` property.');
   }
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   var protoOpts = {
     service: 'Publisher',

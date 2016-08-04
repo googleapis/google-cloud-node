@@ -21,8 +21,8 @@ var assert = require('assert');
 var extend = require('extend');
 var googleProtoFiles = require('google-proto-files');
 var proxyquire = require('proxyquire');
-
 var util = require('@google-cloud/common').util;
+
 var PKG = require('../package.json');
 
 var extended = false;

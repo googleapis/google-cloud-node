@@ -20,20 +20,14 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var nodeutil = require('util');
-var is = require('is');
-var extend = require('extend');
 var arrify = require('arrify');
-var flatten = require('lodash.flatten');
+var common = require('@google-cloud/common');
 var createErrorClass = require('create-error-class');
 var dotProp = require('dot-prop');
-
-/**
- * @type {module:bigtable/mutation}
- * @private
- */
-var Mutation = require('./mutation.js');
+var extend = require('extend');
+var flatten = require('lodash.flatten');
+var is = require('is');
+var util = require('util');
 
 /**
  * @type {module:bigtable/filter}
@@ -42,10 +36,10 @@ var Mutation = require('./mutation.js');
 var Filter = require('./filter.js');
 
 /**
- * @type {module:common/grpcServiceObject}
+ * @type {module:bigtable/mutation}
  * @private
  */
-var GrpcServiceObject = common.GrpcServiceObject;
+var Mutation = require('./mutation.js');
 
 /**
  * @private
@@ -96,12 +90,12 @@ function Row(table, name) {
     id: name
   };
 
-  GrpcServiceObject.call(this, config);
+  common.GrpcServiceObject.call(this, config);
 
   this.data = {};
 }
 
-nodeutil.inherits(Row, GrpcServiceObject);
+util.inherits(Row, common.GrpcServiceObject);
 
 /**
  * Formats the row chunks into friendly format. Chunks contain 3 properties:

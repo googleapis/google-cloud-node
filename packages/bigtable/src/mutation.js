@@ -20,9 +20,9 @@
 
 'use strict';
 
-var is = require('is');
 var arrify = require('arrify');
 var Int64 = require('node-int64');
+var is = require('is');
 
 /**
  * Formats table mutations to be in the expected proto format.

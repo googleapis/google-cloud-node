@@ -17,9 +17,10 @@
 'use strict';
 
 var assert = require('assert');
+var path = require('path');
+
 var env = require('../../../system-test/env.js');
 var gcloud = require('../');
-var path = require('path');
 
 // Test used to confirm we can perform a successful API operation.
 function canConnect(config, callback) {

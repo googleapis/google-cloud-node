@@ -21,19 +21,7 @@
 'use strict';
 
 var common = require('@google-cloud/common');
-var nodeutil = require('util');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var util = require('util');
 
 /*! Developer Documentation
  *
@@ -150,13 +138,13 @@ function Snapshot(scope, name) {
     config.methods.create = true;
   }
 
-  ServiceObject.call(this, config);
+  common.ServiceObject.call(this, config);
 
   this.compute = isDisk ? scope.compute : scope;
   this.name = name;
 }
 
-nodeutil.inherits(Snapshot, ServiceObject);
+util.inherits(Snapshot, common.ServiceObject);
 
 /**
  * Delete the snapshot.
@@ -176,11 +164,11 @@ nodeutil.inherits(Snapshot, ServiceObject);
  * });
  */
 Snapshot.prototype.delete = function(callback) {
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   var compute = this.compute;
 
-  ServiceObject.prototype.delete.call(this, function(err, resp) {
+  common.ServiceObject.prototype.delete.call(this, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;

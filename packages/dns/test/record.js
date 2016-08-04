@@ -18,8 +18,9 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var Record = require('../src/record.js');
 var util = require('@google-cloud/common').util;
+
+var Record = require('../src/record.js');
 
 describe('Record', function() {
   var record;

@@ -16,11 +16,12 @@
 
 'use strict';
 
-var Acl = require('../src/acl.js');
 var assert = require('assert');
 var async = require('async');
-var Storage = require('../');
 var util = require('@google-cloud/common').util;
+
+var Acl = require('../src/acl.js');
+var Storage = require('../');
 
 describe('storage/acl', function() {
   var acl;

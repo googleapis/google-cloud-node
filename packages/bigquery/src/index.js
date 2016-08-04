@@ -23,8 +23,7 @@
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
-var nodeutil = require('util');
-var PKG = require('../package.json');
+var util = require('util');
 
 /**
  * @type {module:bigquery/dataset}
@@ -39,28 +38,12 @@ var Dataset = require('./dataset.js');
 var Job = require('./job.js');
 
 /**
- * @type {module:common/service}
- * @private
- */
-var Service = common.Service;
-
-/**
- * @type {module:common/stream-router}
- * @private
- */
-var streamRouter = common.streamRouter;
-
-/**
  * @type {module:bigquery/table}
  * @private
  */
 var Table = require('./table.js');
 
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var PKG = require('../package.json');
 
 /**
  * The examples below will demonstrate the different usage patterns your app may
@@ -99,7 +82,7 @@ var util = common.util;
  */
 function BigQuery(options) {
   if (!(this instanceof BigQuery)) {
-    options = util.normalizeArguments(this, options);
+    options = common.util.normalizeArguments(this, options);
     return new BigQuery(options);
   }
 
@@ -109,10 +92,10 @@ function BigQuery(options) {
     userAgent: PKG.name + '/' + PKG.version
   };
 
-  Service.call(this, config, options);
+  common.Service.call(this, config, options);
 }
 
-nodeutil.inherits(BigQuery, Service);
+util.inherits(BigQuery, common.Service);
 
 /**
  * Create a dataset.
@@ -645,7 +628,7 @@ BigQuery.prototype.startQuery = function(options, callback) {
  * These methods can be used with either a callback or as a readable object
  * stream. `streamRouter` is used to add this dual behavior.
  */
-streamRouter.extend(BigQuery, ['getDatasets', 'getJobs', 'query']);
+common.streamRouter.extend(BigQuery, ['getDatasets', 'getJobs', 'query']);
 
 BigQuery.Dataset = Dataset;
 BigQuery.Job = Job;

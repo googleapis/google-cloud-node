@@ -20,12 +20,12 @@ var assert = require('assert');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var pumpify = require('pumpify');
-var through = require('through2');
-var Stream = require('stream').PassThrough;
 var sinon = require('sinon').sandbox.create();
+var Stream = require('stream').PassThrough;
+var through = require('through2');
 
-var GrpcServiceObject = require('@google-cloud/common').GrpcServiceObject;
 var Family = require('../src/family.js');
+var GrpcServiceObject = require('@google-cloud/common').GrpcServiceObject;
 var Mutation = require('../src/mutation.js');
 var Row = require('../src/row.js');
 

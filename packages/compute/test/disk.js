@@ -19,9 +19,8 @@
 var assert = require('assert');
 var extend = require('extend');
 var format = require('string-format-obj');
-var proxyquire = require('proxyquire');
 var nodeutil = require('util');
-
+var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 

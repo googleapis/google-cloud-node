@@ -21,19 +21,7 @@
 'use strict';
 
 var common = require('@google-cloud/common');
-var nodeutil = require('util');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var util = require('util');
 
 /*! Developer Documenation
  *
@@ -74,13 +62,13 @@ function Channel(storage, id, resourceId) {
     }
   };
 
-  ServiceObject.call(this, config);
+  common.ServiceObject.call(this, config);
 
   this.metadata.id = id;
   this.metadata.resourceId = resourceId;
 }
 
-nodeutil.inherits(Channel, ServiceObject);
+util.inherits(Channel, common.ServiceObject);
 
 /**
  * Stop this channel.
@@ -97,7 +85,7 @@ nodeutil.inherits(Channel, ServiceObject);
  * });
  */
 Channel.prototype.stop = function(callback) {
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   this.request({
     method: 'POST',

@@ -17,10 +17,9 @@
 'use strict';
 
 var assert = require('assert');
-var proxyquire = require('proxyquire');
-var nodeutil = require('util');
-
 var GrpcService = require('@google-cloud/common').GrpcService;
+var nodeutil = require('util');
+var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
 function FakeGrpcService() {

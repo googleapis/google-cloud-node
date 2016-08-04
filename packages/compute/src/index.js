@@ -24,8 +24,7 @@ var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
-var nodeutil = require('util');
-var PKG = require('../package.json');
+var util = require('util');
 
 /**
  * @type {module:compute/firewall}
@@ -64,16 +63,10 @@ var Region = require('./region.js');
 var Rule = require('./rule.js');
 
 /**
- * @type {module:common/service}
- * @private
- */
-var Service = common.Service;
-
-/**
  * @type {module:compute/service}
  * @private
  */
-var ServiceClass = require('./service.js');
+var Service = require('./service.js');
 
 /**
  * @type {module:compute/snapshot}
@@ -82,22 +75,12 @@ var ServiceClass = require('./service.js');
 var Snapshot = require('./snapshot.js');
 
 /**
- * @type {module:common/stream-router}
- * @private
- */
-var streamRouter = common.streamRouter;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
-
-/**
  * @type {module:compute/zone}
  * @private
  */
 var Zone = require('./zone.js');
+
+var PKG = require('../package.json');
 
 /**
  * A Compute object allows you to interact with the Google Compute Engine API.
@@ -128,7 +111,7 @@ var Zone = require('./zone.js');
  */
 function Compute(options) {
   if (!(this instanceof Compute)) {
-    options = util.normalizeArguments(this, options);
+    options = common.util.normalizeArguments(this, options);
     return new Compute(options);
   }
 
@@ -138,10 +121,10 @@ function Compute(options) {
     userAgent: PKG.name + '/' + PKG.version
   };
 
-  Service.call(this, config, options);
+  common.Service.call(this, config, options);
 }
 
-nodeutil.inherits(Compute, Service);
+util.inherits(Compute, common.Service);
 
 /**
  * Create a firewall.
@@ -2456,7 +2439,7 @@ Compute.prototype.rule = function(name) {
  * var service = gce.service('service-name');
  */
 Compute.prototype.service = function(name) {
-  return new ServiceClass(this, name);
+  return new Service(this, name);
 };
 
 /**
@@ -2494,7 +2477,7 @@ Compute.prototype.zone = function(name) {
  * These methods can be used with either a callback or as a readable object
  * stream. `streamRouter` is used to add this dual behavior.
  */
-streamRouter.extend(Compute, [
+common.streamRouter.extend(Compute, [
   'getAddresses',
   'getAutoscalers',
   'getDisks',
@@ -2519,7 +2502,7 @@ Compute.Network = Network;
 Compute.Operation = Operation;
 Compute.Region = Region;
 Compute.Rule = Rule;
-Compute.ServiceClass = ServiceClass;
+Compute.Service = Service;
 Compute.Snapshot = Snapshot;
 Compute.Zone = Zone;
 

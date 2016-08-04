@@ -18,11 +18,11 @@
 
 var assert = require('assert');
 var extend = require('extend');
+var GrpcServiceObject = require('@google-cloud/common').GrpcServiceObject;
 var proxyquire = require('proxyquire');
+var util = require('@google-cloud/common').util;
 
 var Entry = require('../src/entry.js');
-var GrpcServiceObject = require('@google-cloud/common').GrpcServiceObject;
-var util = require('@google-cloud/common').util;
 
 function FakeGrpcServiceObject() {
   this.calledWith_ = arguments;

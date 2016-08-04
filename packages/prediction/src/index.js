@@ -25,8 +25,7 @@ var common = require('@google-cloud/common');
 var extend = require('extend');
 var format = require('string-format-obj');
 var is = require('is');
-var nodeutil = require('util');
-var PKG = require('../package.json');
+var util = require('util');
 
 /**
  * @type {module:prediction/model}
@@ -34,23 +33,7 @@ var PKG = require('../package.json');
  */
 var Model = require('./model.js');
 
-/**
- * @type {module:common/service}
- * @private
- */
-var Service = common.Service;
-
-/**
- * @type {module:common/stream-router}
- * @private
- */
-var streamRouter = common.streamRouter;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var PKG = require('../package.json');
 
 /**
  * The [Google Prediction API](https://cloud.google.com/prediction/docs/getting-started)
@@ -92,7 +75,7 @@ var util = common.util;
  */
 function Prediction(options) {
   if (!(this instanceof Prediction)) {
-    options = util.normalizeArguments(this, options);
+    options = common.util.normalizeArguments(this, options);
     return new Prediction(options);
   }
 
@@ -105,10 +88,10 @@ function Prediction(options) {
     userAgent: PKG.name + '/' + PKG.version
   };
 
-  Service.call(this, config, options);
+  common.Service.call(this, config, options);
 }
 
-nodeutil.inherits(Prediction, Service);
+util.inherits(Prediction, common.Service);
 
 /**
  * Create a trained model.
@@ -332,7 +315,7 @@ Prediction.prototype.model = function(id) {
  * These methods can be used with either a callback or as a readable object
  * stream. `streamRouter` is used to add this dual behavior.
  */
-streamRouter.extend(Prediction, 'getModels');
+common.streamRouter.extend(Prediction, 'getModels');
 
 Prediction.Model = Model;
 

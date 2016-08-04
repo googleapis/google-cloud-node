@@ -23,8 +23,9 @@ var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 
 var Service = require('@google-cloud/common').Service;
-var util = require('@google-cloud/common').util;
 var Table = require('../src/table.js');
+var util = require('@google-cloud/common').util;
+
 var PKG = require('../package.json');
 
 var fakeUtil = extend({}, util);

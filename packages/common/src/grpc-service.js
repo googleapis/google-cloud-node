@@ -20,6 +20,8 @@
 
 'use strict';
 
+var dotProp = require('dot-prop');
+var extend = require('extend');
 var googleProtoFiles = require('google-proto-files');
 var grpc = require('grpc');
 var is = require('is');
@@ -27,8 +29,6 @@ var nodeutil = require('util');
 var path = require('path');
 var retryRequest = require('retry-request');
 var through = require('through2');
-var dotProp = require('dot-prop');
-var extend = require('extend');
 
 /**
  * @type {module:common/service}

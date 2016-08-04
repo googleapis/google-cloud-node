@@ -21,14 +21,14 @@ var async = require('async');
 var deepStrictEqual = require('deep-strict-equal');
 var extend = require('extend');
 var fs = require('fs');
+var GrpcService = require('@google-cloud/common').GrpcService;
 var nodeutil = require('util');
 var prop = require('propprop');
 var proxyquire = require('proxyquire');
-var tmp = require('tmp');
-
-var GrpcService = require('@google-cloud/common').GrpcService;
 var Service = require('@google-cloud/common').Service;
+var tmp = require('tmp');
 var util = require('@google-cloud/common').util;
+
 var PKG = require('../package.json');
 
 var fakeUtil = extend({}, util);

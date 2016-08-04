@@ -22,19 +22,7 @@
 
 var common = require('@google-cloud/common');
 var extend = require('extend');
-var nodeutil = require('util');
-
-/**
- * @type {module:common/grpc-service-object}
- * @private
- */
-var GrpcServiceObject = common.GrpcServiceObject;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var util = require('util');
 
 /*! Developer Documentation
  *
@@ -139,7 +127,7 @@ function Sink(logging, name) {
     }
   };
 
-  GrpcServiceObject.call(this, {
+  common.GrpcServiceObject.call(this, {
     parent: logging,
     baseUrl: '/sinks',
     id: name,
@@ -148,7 +136,7 @@ function Sink(logging, name) {
   });
 }
 
-nodeutil.inherits(Sink, GrpcServiceObject);
+util.inherits(Sink, common.GrpcServiceObject);
 
 /**
  * Set the sink's filter.
@@ -195,7 +183,7 @@ Sink.prototype.setFilter = function(filter, callback) {
 Sink.prototype.setMetadata = function(metadata, callback) {
   var self = this;
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   this.getMetadata(function(err, currentMetadata, apiResponse) {
     if (err) {

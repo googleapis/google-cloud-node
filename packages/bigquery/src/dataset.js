@@ -23,19 +23,7 @@
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
-var nodeutil = require('util');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
- * @type {module:common/stream-router}
- * @private
- */
-var streamRouter = common.streamRouter;
+var util = require('util');
 
 /**
  * @type {module:bigquery/table}
@@ -149,7 +137,7 @@ function Dataset(bigQuery, id) {
     setMetadata: true
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: bigQuery,
     baseUrl: '/datasets',
     id: id,
@@ -160,7 +148,7 @@ function Dataset(bigQuery, id) {
   this.bigQuery = bigQuery;
 }
 
-nodeutil.inherits(Dataset, ServiceObject);
+util.inherits(Dataset, common.ServiceObject);
 
 /**
  * Create a table given a tableId or configuration object.
@@ -393,6 +381,6 @@ Dataset.prototype.table = function(id) {
  * These methods can be used with either a callback or as a readable object
  * stream. `streamRouter` is used to add this dual behavior.
  */
-streamRouter.extend(Dataset, ['getTables']);
+common.streamRouter.extend(Dataset, ['getTables']);
 
 module.exports = Dataset;

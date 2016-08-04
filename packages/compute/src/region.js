@@ -23,7 +23,7 @@
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
-var nodeutil = require('util');
+var util = require('util');
 
 /**
  * @type {module:compute/address}
@@ -50,22 +50,10 @@ var Operation = require('./operation.js');
 var Rule = require('./rule.js');
 
 /**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
  * @type {module:compute/subnetwork}
  * @private
  */
 var Subnetwork = require('./subnetwork.js');
-
-/**
- * @type {module:common/stream-router}
- * @private
- */
-var streamRouter = common.streamRouter;
 
 /*! Developer Documentation
  *
@@ -134,7 +122,7 @@ function Region(compute, name) {
     getMetadata: true
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: compute,
     baseUrl: '/regions',
     id: name,
@@ -153,7 +141,7 @@ function Region(compute, name) {
   });
 }
 
-nodeutil.inherits(Region, ServiceObject);
+util.inherits(Region, common.ServiceObject);
 
 /**
  * Get a reference to a Google Compute Engine address in this region.
@@ -823,7 +811,7 @@ Region.prototype.subnetwork = function(name) {
  * These methods can be used with either a callback or as a readable object
  * stream. `streamRouter` is used to add this dual behavior.
  */
-streamRouter.extend(Region, [
+common.streamRouter.extend(Region, [
   'getAddresses',
   'getOperations',
   'getRules',

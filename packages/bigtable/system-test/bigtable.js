@@ -22,12 +22,11 @@ var exec = require('methmeth');
 var extend = require('extend');
 var uuid = require('node-uuid');
 
-var Table = require('../src/table.js');
+var Bigtable = require('../');
+var env = require('../../../system-test/env.js');
 var Family = require('../src/family.js');
 var Row = require('../src/row.js');
-
-var env = require('../../../system-test/env.js');
-var Bigtable = require('../');
+var Table = require('../src/table.js');
 
 var clusterName = process.env.GCLOUD_TESTS_BIGTABLE_CLUSTER;
 var zoneName = process.env.GCLOUD_TESTS_BIGTABLE_ZONE;

@@ -37,6 +37,7 @@ var FakeBigtable = createFakeApi();
 var FakeCompute = createFakeApi();
 var FakeDatastore = createFakeApi();
 var FakeDNS = createFakeApi();
+var FakeLogging = createFakeApi();
 var FakePrediction = createFakeApi();
 var FakePubSub = createFakeApi();
 var FakeResource = createFakeApi();
@@ -53,6 +54,7 @@ describe('gcloud', function() {
       '@google-cloud/compute': FakeCompute,
       '@google-cloud/datastore': FakeDatastore,
       '@google-cloud/dns': FakeDNS,
+      '@google-cloud/logging': FakeLogging,
       '@google-cloud/prediction': FakePrediction,
       '@google-cloud/pubsub': FakePubSub,
       '@google-cloud/resource': FakeResource,
@@ -83,6 +85,10 @@ describe('gcloud', function() {
 
   it('should export static dns', function() {
     assert.strictEqual(gcloud.dns, FakeDNS);
+  });
+
+  it('should export static logging', function() {
+    assert.strictEqual(gcloud.logging, FakeLogging);
   });
 
   it('should export static prediction', function() {
@@ -178,6 +184,15 @@ describe('gcloud', function() {
 
         assert(dns instanceof FakeDNS);
         assert.strictEqual(dns.calledWith_[0], options);
+      });
+    });
+
+    describe('logging', function() {
+      it('should create a new Logging', function() {
+        var logging = localGcloud.logging(options);
+
+        assert(logging instanceof FakeLogging);
+        assert.strictEqual(logging.calledWith_[0], options);
       });
     });
 

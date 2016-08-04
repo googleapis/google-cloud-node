@@ -23,22 +23,10 @@
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var JSONStream = require('JSONStream');
-var nodeutil = require('util');
 var pumpify = require('pumpify');
 var streamEvents = require('stream-events');
 var through = require('through2');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var util = require('util');
 
 /*! Developer Documentation
  *
@@ -175,7 +163,7 @@ function Model(prediction, id) {
     }
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: prediction,
     baseUrl: '/trainedmodels',
     id: id,
@@ -184,7 +172,7 @@ function Model(prediction, id) {
   });
 }
 
-nodeutil.inherits(Model, ServiceObject);
+util.inherits(Model, common.ServiceObject);
 
 /**
  * Get an analysis of the model and the data it was trained on.
@@ -277,7 +265,7 @@ Model.prototype.createWriteStream = function(label) {
         writeStream.cork();
       })
       .on('complete', function(resp) {
-        util.handleResp(null, resp, resp.body, function(err) {
+        common.util.handleResp(null, resp, resp.body, function(err) {
           if (err) {
             writeStream.destroy(err);
             return;

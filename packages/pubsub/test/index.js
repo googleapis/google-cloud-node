@@ -20,13 +20,14 @@ var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
 var proxyquire = require('proxyquire');
-
-var Topic = require('../src/topic.js');
 var util = require('@google-cloud/common').util;
+
 var PKG = require('../package.json');
 
 var SubscriptionCached = require('../src/subscription.js');
 var SubscriptionOverride;
+
+var Topic = require('../src/topic.js');
 
 function Subscription(a, b) {
   var OverrideFn = SubscriptionOverride || SubscriptionCached;

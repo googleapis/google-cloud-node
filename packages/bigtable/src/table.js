@@ -20,27 +20,21 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var nodeutil = require('util');
 var arrify = require('arrify');
+var common = require('@google-cloud/common');
+var concat = require('concat-stream');
+var flatten = require('lodash.flatten');
 var is = require('is');
 var propAssign = require('prop-assign');
-var through = require('through2');
-var concat = require('concat-stream');
 var pumpify = require('pumpify');
-var flatten = require('lodash.flatten');
+var through = require('through2');
+var util = require('util');
 
 /**
  * @type {module:bigtable/family}
  * @private
  */
 var Family = require('./family.js');
-
-/**
- * @type {module:bigtable/row}
- * @private
- */
-var Row = require('./row.js');
 
 /**
  * @type {module:bigtable/filter}
@@ -55,10 +49,10 @@ var Filter = require('./filter.js');
 var Mutation = require('./mutation.js');
 
 /**
- * @type {module:common/grpcServiceObject}
+ * @type {module:bigtable/row}
  * @private
  */
-var GrpcServiceObject = common.GrpcServiceObject;
+var Row = require('./row.js');
 
 /**
  * Create a Table object to interact with a Google Cloud Bigtable table.
@@ -184,10 +178,10 @@ function Table(bigtable, name) {
     }
   };
 
-  GrpcServiceObject.call(this, config);
+  common.GrpcServiceObject.call(this, config);
 }
 
-nodeutil.inherits(Table, GrpcServiceObject);
+util.inherits(Table, common.GrpcServiceObject);
 
 /**
  * Formats the table name to include the Bigtable cluster.

@@ -21,19 +21,7 @@
 'use strict';
 
 var common = require('@google-cloud/common');
-var nodeutil = require('util');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var util = require('util');
 
 /*! Developer Documentation
  *
@@ -152,7 +140,7 @@ function Rule(scope, name) {
     getMetadata: true
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: scope,
     baseUrl: (isGlobalRule ? '/global' : '') + '/forwardingRules',
     id: name,
@@ -163,7 +151,7 @@ function Rule(scope, name) {
   this.scope = scope;
 }
 
-nodeutil.inherits(Rule, ServiceObject);
+util.inherits(Rule, common.ServiceObject);
 
 /**
  * Delete the rule.
@@ -184,11 +172,11 @@ nodeutil.inherits(Rule, ServiceObject);
  * });
  */
 Rule.prototype.delete = function(callback) {
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   var scope = this.scope;
 
-  ServiceObject.prototype.delete.call(this, function(err, resp) {
+  common.ServiceObject.prototype.delete.call(this, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -223,7 +211,7 @@ Rule.prototype.delete = function(callback) {
  * });
  */
 Rule.prototype.setTarget = function(target, callback) {
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   var scope = this.scope;
 

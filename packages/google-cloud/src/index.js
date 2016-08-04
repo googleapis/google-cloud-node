@@ -128,33 +128,6 @@ var apis = {
   dns: require('@google-cloud/dns'),
 
   /**
-   * The [Google Prediction API](https://cloud.google.com/prediction/docs/getting-started)
-   * provides pattern-matching and machine learning capabilities. Given a set of
-   * data examples to train against, you can create applications that can
-   * perform the following tasks:
-   *
-   *   - Given a user's past viewing habits, predict what other movies or
-   *   products a user might like.
-   *   - Categorize emails as spam or non-spam.
-   *   - Analyze posted comments about your product to determine whether they
-   *   have a positive or negative tone.
-   *   - Guess how much a user might spend on a given day, given his spending
-   *   history.
-   *
-   * @type {module:prediction}
-   *
-   * @return {module:prediction}
-   *
-   * @example
-   * var gcloud = require('google-cloud');
-   * var dns = gcloud.prediction({
-   *   projectId: 'grape-spaceship-123',
-   *   keyFilename: '/path/to/keyfile.json'
-   * });
-   */
-  prediction: require('@google-cloud/prediction'),
-
-  /**
    * [Google Cloud Logging](https://cloud.google.com/logging/docs) collects and
    * stores logs from applications and services on the Google Cloud Platform:
    *
@@ -181,6 +154,33 @@ var apis = {
    * });
    */
   logging: require('@google-cloud/logging'),
+
+  /**
+   * The [Google Prediction API](https://cloud.google.com/prediction/docs/getting-started)
+   * provides pattern-matching and machine learning capabilities. Given a set of
+   * data examples to train against, you can create applications that can
+   * perform the following tasks:
+   *
+   *   - Given a user's past viewing habits, predict what other movies or
+   *   products a user might like.
+   *   - Categorize emails as spam or non-spam.
+   *   - Analyze posted comments about your product to determine whether they
+   *   have a positive or negative tone.
+   *   - Guess how much a user might spend on a given day, given his spending
+   *   history.
+   *
+   * @type {module:prediction}
+   *
+   * @return {module:prediction}
+   *
+   * @example
+   * var gcloud = require('google-cloud');
+   * var dns = gcloud.prediction({
+   *   projectId: 'grape-spaceship-123',
+   *   keyFilename: '/path/to/keyfile.json'
+   * });
+   */
+  prediction: require('@google-cloud/prediction'),
 
   /**
    * [Google Cloud Pub/Sub](https://developers.google.com/pubsub/overview) is a

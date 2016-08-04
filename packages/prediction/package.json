@@ -64,7 +64,7 @@
     "async": "^1.4.2",
     "concat-stream": "^1.5.0",
     "@google-cloud/storage": "^0.1.0",
-    "mocha": "^2.1.0",
+    "mocha": "^3.0.1",
     "node-uuid": "^1.4.3",
     "proxyquire": "^1.7.10"
   },

@@ -18,12 +18,13 @@
 
 var assert = require('assert');
 var async = require('async');
-var Dataset = require('../src/dataset.js');
-var Table = require('../src/table.js');
-var env = require('../../../system-test/env.js');
 var fs = require('fs');
-var Job = require('../src/job.js');
 var uuid = require('node-uuid');
+
+var Dataset = require('../src/dataset.js');
+var env = require('../../../system-test/env.js');
+var Job = require('../src/job.js');
+var Table = require('../src/table.js');
 
 var bigquery = require('../')(env);
 var storage = require('@google-cloud/storage')(env);

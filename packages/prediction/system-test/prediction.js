@@ -18,11 +18,11 @@
 
 var assert = require('assert');
 var async = require('async');
+var Storage = require('@google-cloud/storage');
 var uuid = require('node-uuid');
 
 var env = require('../../../system-test/env.js');
 var Prediction = require('../');
-var Storage = require('@google-cloud/storage');
 
 describe('Prediction', function() {
   var TESTS_PREFIX = 'gcloud-test-prediction-';
@@ -215,7 +215,7 @@ describe('Prediction', function() {
             });
           }
 
-          async.retry({ times: 5, interval: 10000 }, isModelTrained, done);
+          async.retry({ times: 12, interval: 10000 }, isModelTrained, done);
         });
       });
 

@@ -20,12 +20,15 @@ var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
 var is = require('is');
-var proxyquire = require('proxyquire');
 var nodeutil = require('util');
-
+var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 
 function FakeAddress() {
+  this.calledWith_ = [].slice.call(arguments);
+}
+
+function FakeNetwork() {
   this.calledWith_ = [].slice.call(arguments);
 }
 
@@ -37,17 +40,13 @@ function FakeRule() {
   this.calledWith_ = [].slice.call(arguments);
 }
 
-function FakeNetwork() {
-  this.calledWith_ = [].slice.call(arguments);
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
 }
 
 function FakeSubnetwork() {
   this.calledWith_ = [].slice.call(arguments);
-}
-
-function FakeServiceObject() {
-  this.calledWith_ = arguments;
-  ServiceObject.apply(this, arguments);
 }
 
 nodeutil.inherits(FakeServiceObject, ServiceObject);
@@ -65,7 +64,8 @@ var fakeStreamRouter = {
     assert.deepEqual(methods, [
       'getAddresses',
       'getOperations',
-      'getRules', 'getSubnetworks'
+      'getRules',
+      'getSubnetworks'
     ]);
   }
 };

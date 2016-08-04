@@ -18,17 +18,17 @@
 
 var assert = require('assert');
 var async = require('async');
+var BigQuery = require('@google-cloud/bigquery');
 var exec = require('methmeth');
 var format = require('string-format-obj');
 var is = require('is');
 var prop = require('propprop');
+var PubSub = require('@google-cloud/pubsub');
+var Storage = require('@google-cloud/storage');
 var uuid = require('node-uuid');
 
 var env = require('../../../system-test/env.js');
-var BigQuery = require('@google-cloud/bigquery');
 var Logging = require('../');
-var PubSub = require('@google-cloud/pubsub');
-var Storage = require('@google-cloud/storage');
 
 describe('Logging', function() {
   var TESTS_PREFIX = 'gcloud-logging-test';

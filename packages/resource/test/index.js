@@ -21,14 +21,21 @@ var assert = require('assert');
 var extend = require('extend');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
-
 var Service = require('@google-cloud/common').Service;
 var util = require('@google-cloud/common').util;
+
 var PKG = require('../package.json');
 
 function FakeProject() {
   this.calledWith_ = [].slice.call(arguments);
 }
+
+function FakeService() {
+  this.calledWith_ = arguments;
+  Service.apply(this, arguments);
+}
+
+nodeutil.inherits(FakeService, Service);
 
 var extended = false;
 var fakeStreamRouter = {
@@ -54,13 +61,6 @@ var fakeUtil = extend({}, util, {
     return util.makeAuthenticatedRequestFactory.apply(null, arguments);
   }
 });
-
-function FakeService() {
-  this.calledWith_ = arguments;
-  Service.apply(this, arguments);
-}
-
-nodeutil.inherits(FakeService, Service);
 
 describe('Resource', function() {
   var PROJECT_ID = 'test-project-id';

@@ -24,19 +24,13 @@ var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
-var nodeutil = require('util');
+var util = require('util');
 
 /**
  * @type {module:logging/entry}
  * @private
  */
 var Entry = require('./entry.js');
-
-/**
- * @type {module:common/grpc-service-object}
- * @private
- */
-var GrpcServiceObject = common.GrpcServiceObject;
 
 /**
  * A log is a named collection of entries, each entry representing a timestamped
@@ -94,14 +88,14 @@ function Log(logging, name) {
     }
   };
 
-  GrpcServiceObject.call(this, {
+  common.GrpcServiceObject.call(this, {
     parent: logging,
     id: this.name,
     methods: methods
   });
 }
 
-nodeutil.inherits(Log, GrpcServiceObject);
+util.inherits(Log, common.GrpcServiceObject);
 
 /**
  * Return an array of log entries with the desired severity assigned.

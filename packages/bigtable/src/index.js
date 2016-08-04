@@ -21,12 +21,11 @@
 'use strict';
 
 var common = require('@google-cloud/common');
+var extend = require('extend');
+var format = require('string-format-obj');
 var googleProtoFiles = require('google-proto-files');
 var is = require('is');
-var nodeutil = require('util');
-var format = require('string-format-obj');
-var extend = require('extend');
-var PKG = require('../package.json');
+var util = require('util');
 
 /**
  * @type {module:bigtable/family}
@@ -35,22 +34,12 @@ var PKG = require('../package.json');
 var Family = require('./family.js');
 
 /**
- * @type {module:common/grpcService}
- * @private
- */
-var GrpcService = common.GrpcService;
-
-/**
  * @type {module:bigtable/table}
  * @private
  */
 var Table = require('./table.js');
 
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var PKG = require('../package.json');
 
 /**
  * Interact with
@@ -285,7 +274,7 @@ var util = common.util;
  */
 function Bigtable(options) {
   if (!(this instanceof Bigtable)) {
-    options = util.normalizeArguments(this, options);
+    options = common.util.normalizeArguments(this, options);
     return new Bigtable(options);
   }
 
@@ -316,10 +305,10 @@ function Bigtable(options) {
     userAgent: PKG.name + '/' + PKG.version
   };
 
-  GrpcService.call(this, config, options);
+  common.GrpcService.call(this, config, options);
 }
 
-nodeutil.inherits(Bigtable, GrpcService);
+util.inherits(Bigtable, common.GrpcService);
 
 /**
  * Formats the full table name into a user friendly version.

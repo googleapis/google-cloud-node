@@ -23,19 +23,7 @@
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
-var nodeutil = require('util');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var util = require('util');
 
 /*! Developer Documentation
  *
@@ -143,7 +131,7 @@ function HealthCheck(compute, name, options) {
   var https = options.https;
   this.compute = compute;
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: compute,
     baseUrl: '/global/' + (https ? 'httpsHealthChecks' : 'httpHealthChecks'),
     id: name,
@@ -161,7 +149,7 @@ function HealthCheck(compute, name, options) {
   });
 }
 
-nodeutil.inherits(HealthCheck, ServiceObject);
+util.inherits(HealthCheck, common.ServiceObject);
 
 /**
  * Delete the health check.
@@ -184,9 +172,9 @@ nodeutil.inherits(HealthCheck, ServiceObject);
 HealthCheck.prototype.delete = function(callback) {
   var compute = this.compute;
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
-  ServiceObject.prototype.delete.call(this, function(err, resp) {
+  common.ServiceObject.prototype.delete.call(this, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -227,9 +215,11 @@ HealthCheck.prototype.delete = function(callback) {
 HealthCheck.prototype.setMetadata = function(metadata, callback) {
   var compute = this.compute;
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
-  ServiceObject.prototype.setMetadata.call(this, metadata, function(err, resp) {
+  var setMetadata = common.ServiceObject.prototype.setMetadata;
+
+  setMetadata.call(this, metadata, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;

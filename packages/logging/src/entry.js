@@ -25,12 +25,6 @@ var extend = require('extend');
 var is = require('is');
 
 /**
- * @type {module:common/grpc-service}
- * @private
- */
-var GrpcService = common.GrpcService;
-
-/**
  * Create an entry object to define new data to insert into a log.
  *
  * @resource [LogEntry JSON representation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry}
@@ -115,7 +109,7 @@ Entry.fromApiResponse_ = function(entry) {
   var data = entry[entry.payload];
 
   if (entry.payload === 'jsonPayload') {
-    data = GrpcService.structToObj_(data);
+    data = common.GrpcService.structToObj_(data);
   }
 
   var serializedEntry = extend(new Entry(entry.resource, data), entry);
@@ -161,7 +155,7 @@ Entry.prototype.toJSON = function() {
   }
 
   if (is.object(this.data)) {
-    entry.jsonPayload = GrpcService.objToStruct_(this.data, {
+    entry.jsonPayload = common.GrpcService.objToStruct_(this.data, {
       stringify: true
     });
   } else if (is.string(this.data)) {

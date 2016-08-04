@@ -28,22 +28,10 @@ var modelo = require('modelo');
 var prop = require('propprop');
 
 /**
- * @type {module:common/grpc-service-object}
- * @private
- */
-var GrpcServiceObject = common.GrpcServiceObject;
-
-/**
  * @type {module:pubsub/iam}
  * @private
  */
 var IAM = require('./iam.js');
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
 
 /**
  * @const {number} - The amount of time a subscription pull HTTP connection to
@@ -251,7 +239,7 @@ function Subscription(pubsub, options) {
     config.methods.create = true;
   }
 
-  GrpcServiceObject.call(this, config);
+  common.GrpcServiceObject.call(this, config);
   events.EventEmitter.call(this);
 
   this.autoAck = is.boolean(options.autoAck) ? options.autoAck : false;
@@ -304,7 +292,7 @@ function Subscription(pubsub, options) {
   this.listenForEvents_();
 }
 
-modelo.inherits(Subscription, GrpcServiceObject, events.EventEmitter);
+modelo.inherits(Subscription, common.GrpcServiceObject, events.EventEmitter);
 
 /**
  * Simplify a message from an API response to have three properties, `id`,
@@ -377,7 +365,7 @@ Subscription.prototype.ack = function(ackIds, callback) {
     ].join(''));
   }
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   var protoOpts = {
     service: 'Subscriber',
@@ -449,7 +437,7 @@ Subscription.prototype.decorateMessage_ = function(message) {
 Subscription.prototype.delete = function(callback) {
   var self = this;
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   var protoOpts = {
     service: 'Subscriber',
@@ -605,7 +593,7 @@ Subscription.prototype.pull = function(options, callback) {
  * subscription.setAckDeadline(options, function(err, apiResponse) {});
  */
 Subscription.prototype.setAckDeadline = function(options, callback) {
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   var protoOpts = {
     service: 'Subscriber',

@@ -18,15 +18,10 @@
 
 var assert = require('assert');
 var extend = require('extend');
+var GrpcServiceObject = require('@google-cloud/common').GrpcServiceObject;
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
-
 var util = require('@google-cloud/common').util;
-var GrpcServiceObject = require('@google-cloud/common').GrpcServiceObject;
-
-function FakeIAM() {
-  this.calledWith_ = [].slice.call(arguments);
-}
 
 function FakeGrpcServiceObject() {
   this.calledWith_ = arguments;
@@ -34,6 +29,10 @@ function FakeGrpcServiceObject() {
 }
 
 nodeutil.inherits(FakeGrpcServiceObject, GrpcServiceObject);
+
+function FakeIAM() {
+  this.calledWith_ = [].slice.call(arguments);
+}
 
 describe('Topic', function() {
   var Topic;

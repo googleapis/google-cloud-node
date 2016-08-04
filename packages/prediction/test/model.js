@@ -19,11 +19,10 @@
 var assert = require('assert');
 var concat = require('concat-stream');
 var extend = require('extend');
-var proxyquire = require('proxyquire');
 var nodeutil = require('util');
-var through = require('through2');
-
+var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
+var through = require('through2');
 var util = require('@google-cloud/common').util;
 
 function FakeServiceObject() {

@@ -57,7 +57,7 @@
   "devDependencies": {
     "arrify": "^1.0.0",
     "google-auto-auth": "^0.2.4",
-    "mocha": "^2.1.0",
+    "mocha": "^3.0.1",
     "proxyquire": "^1.7.10"
   },
   "scripts": {

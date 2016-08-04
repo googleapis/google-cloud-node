@@ -24,8 +24,8 @@ var is = require('is');
 var path = require('path');
 var proxyquire = require('proxyquire');
 var retryRequest = require('retry-request');
-var through = require('through2');
 var sinon = require('sinon').sandbox.create();
+var through = require('through2');
 
 var util = require('../src/index.js').util;
 

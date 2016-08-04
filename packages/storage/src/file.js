@@ -30,12 +30,12 @@ var format = require('string-format-obj');
 var fs = require('fs');
 var hashStreamValidation = require('hash-stream-validation');
 var is = require('is');
-var nodeutil = require('util');
 var once = require('once');
 var pumpify = require('pumpify');
 var resumableUpload = require('gcs-resumable-upload');
 var streamEvents = require('stream-events');
 var through = require('through2');
+var util = require('util');
 var zlib = require('zlib');
 
 /**
@@ -43,18 +43,6 @@ var zlib = require('zlib');
  * @private
  */
 var Acl = require('./acl.js');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
 
 /**
  * Custom error type for errors related to getting signed errors and policies.
@@ -242,7 +230,7 @@ function File(bucket, name, options) {
     }
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: bucket,
     baseUrl: '/o',
     id: encodeURIComponent(name),
@@ -286,7 +274,7 @@ function File(bucket, name, options) {
   });
 }
 
-nodeutil.inherits(File, ServiceObject);
+util.inherits(File, common.ServiceObject);
 
 /**
  * Copy this file to another file. By default, this will copy the file to the
@@ -382,7 +370,7 @@ File.prototype.copy = function(destination, callback) {
     throw noDestinationError;
   }
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   var destBucket;
   var destName;
@@ -588,7 +576,7 @@ File.prototype.createReadStream = function(options) {
           md5: md5
         });
 
-        res.pipe(validateStream).on('data', util.noop);
+        res.pipe(validateStream).on('data', common.util.noop);
       }
     }
 
@@ -645,10 +633,10 @@ File.prototype.createReadStream = function(options) {
       })
       .on('response', function(res) {
         throughStream.emit('response', res);
-        util.handleResp(null, res, null, onResponse);
+        common.util.handleResp(null, res, null, onResponse);
       })
       .on('complete', function(res) {
-        util.handleResp(null, res, null, onComplete);
+        common.util.handleResp(null, res, null, onComplete);
       })
       .pipe(throughStream)
       .on('error', function() {
@@ -1451,7 +1439,7 @@ File.prototype.makePrivate = function(options, callback) {
     acl: null
   };
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   this.request({
     method: 'PATCH',
@@ -1483,7 +1471,7 @@ File.prototype.makePrivate = function(options, callback) {
  * file.makePublic(function(err, apiResponse) {});
  */
 File.prototype.makePublic = function(callback) {
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   this.acl.add({
     entity: 'allUsers',
@@ -1594,7 +1582,7 @@ File.prototype.makePublic = function(callback) {
 File.prototype.move = function(destination, callback) {
   var self = this;
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   this.copy(destination, function(err, destinationFile, apiResponse) {
     if (err) {
@@ -1723,7 +1711,7 @@ File.prototype.startSimpleUpload_ = function(dup, options) {
     reqOpts.qs.predefinedAcl = 'publicRead';
   }
 
-  util.makeWritableStream(dup, {
+  common.util.makeWritableStream(dup, {
     makeAuthenticatedRequest: function(reqOpts) {
       self.request(reqOpts, function(err, body, resp) {
         if (err) {

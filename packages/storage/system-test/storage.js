@@ -28,10 +28,10 @@ var through = require('through2');
 var tmp = require('tmp');
 var uuid = require('node-uuid');
 
-var Storage = require('../');
-
-var Bucket = Storage.Bucket;
 var env = require('../../../system-test/env.js');
+
+var Storage = require('../');
+var Bucket = Storage.Bucket;
 var File = Storage.File;
 
 describe('storage', function() {

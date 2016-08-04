@@ -65,7 +65,7 @@
   "devDependencies": {
     "async": "^1.4.2",
     "deep-strict-equal": "^0.1.0",
-    "mocha": "^2.1.0",
+    "mocha": "^3.0.1",
     "proxyquire": "^1.7.10",
     "through2": "^2.0.0"
   },

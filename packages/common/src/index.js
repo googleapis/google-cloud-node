@@ -15,28 +15,28 @@
  */
 
 /**
- * @type {module:common/grpcServiceObject}
- * @private
- */
-exports.GrpcServiceObject = require('./grpc-service-object.js');
-
-/**
  * @type {module:common/grpcService}
  * @private
  */
 exports.GrpcService = require('./grpc-service.js');
 
 /**
- * @type {module:common/serviceObject}
+ * @type {module:common/grpcServiceObject}
  * @private
  */
-exports.ServiceObject = require('./service-object.js');
+exports.GrpcServiceObject = require('./grpc-service-object.js');
 
 /**
  * @type {module:common/service}
  * @private
  */
 exports.Service = require('./service.js');
+
+/**
+ * @type {module:common/serviceObject}
+ * @private
+ */
+exports.ServiceObject = require('./service-object.js');
 
 /**
  * @type {module:common/streamRouter}

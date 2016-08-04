@@ -21,21 +21,16 @@
 'use strict';
 
 var arrify = require('arrify');
+var common = require('@google-cloud/common');
 var flatten = require('lodash.flatten');
-var nodeutil = require('util');
 var prop = require('propprop');
+var util = require('util');
 
 /**
  * @type {module:datastore/request}
  * @private
  */
-var DatastoreRequest = require('./request.js');
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = require('@google-cloud/common').util;
+var Request = require('./request.js');
 
 /*! Developer Documentation
  *
@@ -88,7 +83,7 @@ function Transaction(datastore) {
   this.requests_ = [];
 }
 
-nodeutil.inherits(Transaction, DatastoreRequest);
+util.inherits(Transaction, Request);
 
 /*! Developer Documentation
  *
@@ -121,7 +116,7 @@ nodeutil.inherits(Transaction, DatastoreRequest);
 Transaction.prototype.commit = function(callback) {
   var self = this;
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   if (this.skipCommit) {
     setImmediate(callback);
@@ -184,7 +179,7 @@ Transaction.prototype.commit = function(callback) {
       var method = modifiedEntity.method;
       var args = modifiedEntity.args.reverse();
 
-      DatastoreRequest.prototype[method].call(self, args, util.noop);
+      Request.prototype[method].call(self, args, common.util.noop);
     });
 
   var protoOpts = {
@@ -324,7 +319,7 @@ Transaction.prototype.delete = function(entities) {
 Transaction.prototype.rollback = function(callback) {
   var self = this;
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   var protoOpts = {
     service: 'Datastore',
@@ -373,7 +368,7 @@ Transaction.prototype.rollback = function(callback) {
 Transaction.prototype.run = function(callback) {
   var self = this;
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   var protoOpts = {
     service: 'Datastore',

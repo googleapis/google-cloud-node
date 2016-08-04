@@ -23,13 +23,7 @@
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var is = require('is');
-var nodeutil = require('util');
-
-/**
- * @type {module:common/grpc-service}
- * @private
- */
-var GrpcService = common.GrpcService;
+var util = require('util');
 
 /*! Developer Documentation
  *
@@ -89,10 +83,10 @@ function IAM(pubsub, id) {
 
   this.id = id;
 
-  GrpcService.call(this, config, pubsub.options);
+  common.GrpcService.call(this, config, pubsub.options);
 }
 
-nodeutil.inherits(IAM, GrpcService);
+util.inherits(IAM, common.GrpcService);
 
 /**
  * Get the IAM policy

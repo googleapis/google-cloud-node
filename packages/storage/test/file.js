@@ -17,6 +17,7 @@
 'use strict';
 
 var assert = require('assert');
+var crypto = require('crypto');
 var duplexify;
 var extend = require('extend');
 var format = require('string-format-obj');
@@ -24,15 +25,14 @@ var fs = require('fs');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var request = require('request');
+var ServiceObject = require('@google-cloud/common').ServiceObject;
 var stream = require('stream');
 var through = require('through2');
 var tmp = require('tmp');
 var url = require('url');
-var crypto = require('crypto');
+var util = require('@google-cloud/common').util;
 
 var Bucket = require('../src/bucket.js');
-var ServiceObject = require('@google-cloud/common').ServiceObject;
-var util = require('@google-cloud/common').util;
 
 var makeWritableStreamOverride;
 var handleRespOverride;

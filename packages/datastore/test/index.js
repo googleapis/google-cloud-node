@@ -16,7 +16,14 @@
 
 'use strict';
 
-var entity = {
+var assert = require('assert');
+var extend = require('extend');
+var proxyquire = require('proxyquire');
+var util = require('@google-cloud/common').util;
+
+var PKG = require('../package.json');
+
+var fakeEntity = {
   Int: function(value) {
     this.value = value;
   },
@@ -31,24 +38,17 @@ var entity = {
   }
 };
 
-var assert = require('assert');
-var extend = require('extend');
-var proxyquire = require('proxyquire');
-
-var util = require('@google-cloud/common').util;
-var PKG = require('../package.json');
-
 var fakeUtil = extend({}, util);
+
+function FakeGrpcService() {
+  this.calledWith_ = arguments;
+}
 
 function FakeQuery() {
   this.calledWith_ = arguments;
 }
 
 function FakeTransaction() {
-  this.calledWith_ = arguments;
-}
-
-function FakeGrpcService() {
   this.calledWith_ = arguments;
 }
 
@@ -74,7 +74,7 @@ describe('Datastore', function() {
         GrpcService: FakeGrpcService,
         util: fakeUtil
       },
-      './entity.js': entity,
+      './entity.js': fakeEntity,
       './query.js': FakeQuery,
       './transaction.js': FakeTransaction
     });

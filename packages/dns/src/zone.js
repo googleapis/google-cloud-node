@@ -26,7 +26,7 @@ var exec = require('methmeth');
 var extend = require('extend');
 var fs = require('fs');
 var is = require('is');
-var nodeutil = require('util');
+var util = require('util');
 var zonefile = require('dns-zonefile');
 
 /**
@@ -40,18 +40,6 @@ var Change = require('./change.js');
  * @private
  */
 var Record = require('./record.js');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
- * @type {module:common/stream-router}
- * @private
- */
-var streamRouter = common.streamRouter;
 
 /**
  * A Zone object is used to interact with your project's managed zone. It will
@@ -140,7 +128,7 @@ function Zone(dns, name) {
     getMetadata: true
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: dns,
     baseUrl: '/managedZones',
     id: name,
@@ -151,7 +139,7 @@ function Zone(dns, name) {
   this.name = name;
 }
 
-nodeutil.inherits(Zone, ServiceObject);
+util.inherits(Zone, common.ServiceObject);
 
 /**
  * Add records to this zone. This is a convenience wrapper around
@@ -299,7 +287,7 @@ Zone.prototype.delete = function(options, callback) {
     return;
   }
 
-  ServiceObject.prototype.delete.call(this, callback);
+  common.ServiceObject.prototype.delete.call(this, callback);
 };
 
 /**
@@ -881,6 +869,6 @@ Zone.prototype.deleteRecordsByType_ = function(recordTypes, callback) {
  * These methods can be used with either a callback or as a readable object
  * stream. `streamRouter` is used to add this dual behavior.
  */
-streamRouter.extend(Zone, ['getChanges', 'getRecords']);
+common.streamRouter.extend(Zone, ['getChanges', 'getRecords']);
 
 module.exports = Zone;

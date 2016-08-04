@@ -23,12 +23,11 @@ var extend = require('extend');
 var mime = require('mime-types');
 var nodeutil = require('util');
 var path = require('path');
-var proxyquire = require('proxyquire');
 var propAssign = require('prop-assign');
+var proxyquire = require('proxyquire');
 var request = require('request');
-var stream = require('stream');
-
 var ServiceObject = require('@google-cloud/common').ServiceObject;
+var stream = require('stream');
 var util = require('@google-cloud/common').util;
 
 function FakeFile(bucket, name, options) {

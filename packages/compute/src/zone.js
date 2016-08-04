@@ -27,7 +27,7 @@ var extend = require('extend');
 var format = require('string-format-obj');
 var gceImages = require('gce-images');
 var is = require('is');
-var nodeutil = require('util');
+var util = require('util');
 
 /**
  * @type {module:compute/autoscaler}
@@ -58,18 +58,6 @@ var MachineType = require('./machine-type.js');
  * @private
  */
 var Operation = require('./operation.js');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
- * @type {module:common/stream-router}
- * @private
- */
-var streamRouter = common.streamRouter;
 
 /**
  * @type {module:compute/vm}
@@ -144,7 +132,7 @@ function Zone(compute, name) {
     getMetadata: true
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: compute,
     baseUrl: '/zones',
     id: name,
@@ -159,7 +147,7 @@ function Zone(compute, name) {
   });
 }
 
-nodeutil.inherits(Zone, ServiceObject);
+util.inherits(Zone, common.ServiceObject);
 
 /**
  * Get a reference to a Google Compute Engine autoscaler in this zone.
@@ -1400,7 +1388,7 @@ Zone.prototype.createHttpsServerFirewall_ = function(callback) {
  * These methods can be used with either a callback or as a readable object
  * stream. `streamRouter` is used to add this dual behavior.
  */
-streamRouter.extend(Zone, [
+common.streamRouter.extend(Zone, [
   'getAutoscalers',
   'getDisks',
   'getInstanceGroups',

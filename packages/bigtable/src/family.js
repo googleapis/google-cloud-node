@@ -22,8 +22,8 @@
 
 var common = require('@google-cloud/common');
 var createErrorClass = require('create-error-class');
-var nodeutil = require('util');
 var is = require('is');
+var util = require('util');
 
 /**
  * @private
@@ -32,12 +32,6 @@ var FamilyError = createErrorClass('FamilyError', function(name) {
   this.message = 'Column family not found: ' + name + '.';
   this.code = 404;
 });
-
-/**
- * @type {module:common/grpcServiceObject}
- * @private
- */
-var GrpcServiceObject = common.GrpcServiceObject;
 
 /**
  * Create a Family object to interact with your table column families.
@@ -138,10 +132,10 @@ function Family(table, name) {
     }
   };
 
-  GrpcServiceObject.call(this, config);
+  common.GrpcServiceObject.call(this, config);
 }
 
-nodeutil.inherits(Family, GrpcServiceObject);
+util.inherits(Family, common.GrpcServiceObject);
 
 /**
  * Format the Column Family name into the expected proto format.

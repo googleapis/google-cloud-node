@@ -23,7 +23,6 @@
 var assert = require('assert');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
-
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 
 function FakeServiceObject() {

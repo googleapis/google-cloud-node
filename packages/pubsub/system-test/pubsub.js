@@ -18,18 +18,18 @@
 
 var assert = require('assert');
 var async = require('async');
+var Subscription = require('../src/subscription.js');
 var uuid = require('node-uuid');
 
 var env = require('../../../system-test/env.js');
-var Subscription = require('../src/subscription.js');
 var pubsub = require('../')(env);
-
-function generateTopicName() {
-  return 'test-topic-' + uuid.v4();
-}
 
 function generateSubName() {
   return 'test-subscription-' + uuid.v4();
+}
+
+function generateTopicName() {
+  return 'test-topic-' + uuid.v4();
 }
 
 describe('pubsub', function() {
@@ -167,7 +167,16 @@ describe('pubsub', function() {
 
           async.times(10, function(_, next) {
             topic.publish({ data: 'hello' }, next);
-          }, done);
+          }, function(err) {
+            if (err) {
+              done(err);
+              return;
+            }
+
+            // Consistency delay for subscriptions to be returned via
+            // `topic.getSubscriptions`.
+            setTimeout(done, 2500);
+          });
         });
       });
     });

@@ -24,14 +24,7 @@ var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
-var nodeutil = require('util');
-var PKG = require('../package.json');
-
-/**
- * @type {module:common/grpc-service}
- * @private
- */
-var GrpcService = common.GrpcService;
+var util = require('util');
 
 /**
  * @type {module:pubsub/subscription}
@@ -40,22 +33,12 @@ var GrpcService = common.GrpcService;
 var Subscription = require('./subscription.js');
 
 /**
- * @type {module:common/stream-router}
- * @private
- */
-var streamRouter = common.streamRouter;
-
-/**
  * @type {module:pubsub/topic}
  * @private
  */
 var Topic = require('./topic.js');
 
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var PKG = require('../package.json');
 
 /**
  * [Google Cloud Pub/Sub](https://developers.google.com/pubsub/overview) is a
@@ -86,7 +69,7 @@ var util = common.util;
  */
 function PubSub(options) {
   if (!(this instanceof PubSub)) {
-    options = util.normalizeArguments(this, options);
+    options = common.util.normalizeArguments(this, options);
     return new PubSub(options);
   }
 
@@ -107,10 +90,10 @@ function PubSub(options) {
 
   this.options = options;
 
-  GrpcService.call(this, config, options);
+  common.GrpcService.call(this, config, options);
 }
 
-nodeutil.inherits(PubSub, GrpcService);
+util.inherits(PubSub, common.GrpcService);
 
 /**
  * Create a topic with the given name.
@@ -134,7 +117,7 @@ nodeutil.inherits(PubSub, GrpcService);
 PubSub.prototype.createTopic = function(name, callback) {
   var self = this;
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   var protoOpts = {
     service: 'Publisher',
@@ -613,7 +596,7 @@ PubSub.prototype.determineBaseUrl_ = function() {
  * These methods can be used with either a callback or as a readable object
  * stream. `streamRouter` is used to add this dual behavior.
  */
-streamRouter.extend(PubSub, ['getSubscriptions', 'getTopics']);
+common.streamRouter.extend(PubSub, ['getSubscriptions', 'getTopics']);
 
 PubSub.Subscription = Subscription;
 PubSub.Topic = Topic;

@@ -23,8 +23,7 @@
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
-var nodeutil = require('util');
-var PKG = require('../package.json');
+var util = require('util');
 
 /**
  * @type {module:storage/bucket}
@@ -44,23 +43,7 @@ var Channel = require('./channel.js');
  */
 var File = require('./file.js');
 
-/**
- * @type {module:common/service}
- * @private
- */
-var Service = common.Service;
-
-/**
- * @type {module:common/stream-router}
- * @private
- */
-var streamRouter = common.streamRouter;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var PKG = require('../package.json');
 
 /*! Developer Documentation
  *
@@ -108,7 +91,7 @@ var util = common.util;
  */
 function Storage(options) {
   if (!(this instanceof Storage)) {
-    options = util.normalizeArguments(this, options);
+    options = common.util.normalizeArguments(this, options);
     return new Storage(options);
   }
 
@@ -121,10 +104,10 @@ function Storage(options) {
     userAgent: PKG.name + '/' + PKG.version
   };
 
-  Service.call(this, config, options);
+  common.Service.call(this, config, options);
 }
 
-nodeutil.inherits(Storage, Service);
+util.inherits(Storage, common.Service);
 
 /**
  * Google Cloud Storage uses access control lists (ACLs) to manage object and
@@ -434,7 +417,7 @@ Storage.prototype.getBuckets = function(query, callback) {
  * This method can be used with either a callback or as a readable object
  * stream. `streamRouter` is used to add this dual behavior.
  */
-streamRouter.extend(Storage, 'getBuckets');
+common.streamRouter.extend(Storage, 'getBuckets');
 
 Storage.Bucket = Bucket;
 Storage.Channel = Channel;

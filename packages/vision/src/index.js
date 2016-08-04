@@ -23,39 +23,17 @@
 var arrify = require('arrify');
 var async = require('async');
 var common = require('@google-cloud/common');
-var rgbHex = require('rgb-hex');
 var extend = require('extend');
 var format = require('string-format-obj');
 var fs = require('fs');
 var is = require('is');
-var nodeutil = require('util');
 var prop = require('propprop');
 var request = require('request');
+var rgbHex = require('rgb-hex');
+var Storage = require('@google-cloud/storage');
+var util = require('util');
+
 var PKG = require('../package.json');
-
-/**
- * @type {module:storage/file}
- * @private
- */
-var File = require('@google-cloud/storage').File;
-
-/**
- * @type {module:common/grpc-service}
- * @private
- */
-var GrpcService = common.GrpcService;
-
-/**
- * @type {module:common/service}
- * @private
- */
-var Service = common.Service;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
 
 var VERY_UNLIKELY = 0;
 var UNLIKELY = 1;
@@ -97,7 +75,7 @@ var VERY_LIKELY = 4;
  */
 function Vision(options) {
   if (!(this instanceof Vision)) {
-    options = util.normalizeArguments(this, options);
+    options = common.util.normalizeArguments(this, options);
     return new Vision(options);
   }
 
@@ -110,10 +88,10 @@ function Vision(options) {
     userAgent: PKG.name + '/' + PKG.version
   };
 
-  Service.call(this, config, options);
+  common.Service.call(this, config, options);
 }
 
-nodeutil.inherits(Vision, Service);
+util.inherits(Vision, common.Service);
 
 Vision.likelihood = {
   VERY_UNLIKELY: VERY_UNLIKELY,
@@ -1303,7 +1281,7 @@ Vision.findImages_ = function(images, callback) {
   images = arrify(images);
 
   function findImage(image, callback) {
-    if (image instanceof File) {
+    if (image instanceof Storage.File) {
       callback(null, {
         source: {
           gcsImageUri: format('gs://{bucketName}/{fileName}', {
@@ -1396,7 +1374,7 @@ Vision.formatEntityAnnotation_ = function(entityAnnotation, options) {
  * @private
  */
 Vision.formatError_ = function(err) {
-  var httpError = GrpcService.GRPC_ERROR_CODE_TO_HTTP[err.code];
+  var httpError = common.GrpcService.GRPC_ERROR_CODE_TO_HTTP[err.code];
 
   if (httpError) {
     err.code = httpError.code;
