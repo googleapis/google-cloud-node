@@ -18,9 +18,9 @@
 
 var assert = require('assert');
 var async = require('async');
-var uuid = require('node-uuid');
 var exec = require('methmeth');
 var extend = require('extend');
+var uuid = require('node-uuid');
 
 var Table = require('../src/table.js');
 var Family = require('../src/family.js');
@@ -39,15 +39,19 @@ function generateTableName() {
 }
 
 (isTestable ? describe : describe.skip)('Bigtable', function() {
-  var bigtable = new Bigtable(extend({}, env, {
-    cluster: clusterName,
-    zone: zoneName
-  }));
+  var bigtable;
 
   var TABLE_NAME = generateTableName();
-  var TABLE = bigtable.table(TABLE_NAME);
+  var TABLE;
 
   before(function(done) {
+    bigtable = new Bigtable(extend({
+      cluster: clusterName,
+      zone: zoneName
+    }, env));
+
+    TABLE = bigtable.table(TABLE_NAME);
+
     bigtable.getTables(function(err, tables) {
       if (err) {
         done(err);
@@ -127,9 +131,10 @@ function generateTableName() {
 
   describe('column families', function() {
     var FAMILY_NAME = 'presidents';
-    var FAMILY = TABLE.family(FAMILY_NAME);
+    var FAMILY;
 
     before(function(done) {
+      FAMILY = TABLE.family(FAMILY_NAME);
       FAMILY.create(done);
     });
 
