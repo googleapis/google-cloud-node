@@ -175,7 +175,7 @@ var apis = {
    *
    * @example
    * var gcloud = require('google-cloud');
-   * var dns = gcloud.prediction({
+   * var prediction = gcloud.prediction({
    *   projectId: 'grape-spaceship-123',
    *   keyFilename: '/path/to/keyfile.json'
    * });

@@ -21,6 +21,10 @@
     "before": true,
     "after": true,
     "beforeEach": true,
-    "afterEach": true
+    "afterEach": true,
+    "cp": true,
+    "exec": true,
+    "pwd": true,
+    "rm": true
   }
 }

@@ -74,7 +74,7 @@
     "sinon": "^1.17.4"
   },
   "scripts": {
-    "publish": "../../scripts/publish",
+    "publish": "node ../../scripts/publish.js",
     "test": "mocha test/*.js",
     "system-test": "mocha system-test/*.js --no-timeouts --bail"
   },

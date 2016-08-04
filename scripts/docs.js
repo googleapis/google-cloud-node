@@ -16,14 +16,13 @@
 
 'use strict';
 
-var globby = require('globby');
 var async = require('async');
-var fs = require('fs');
 var dox = require('dox');
+var format = require('string-format-obj');
+var fs = require('fs');
+var globby = require('globby');
 var path = require('path');
 var prop = require('propprop');
-var format = require('string-format-obj');
-
 
 var OUTPUT_FOLDER = './docs/json/master';
 var IGNORE = [
@@ -60,7 +59,7 @@ function detectCustomType(str) {
   var tmpl = '<a data-custom-type="{module}" data-method="{method}">{text}</a>';
   var templateFn = format.bind(null, tmpl);
   var rCustomType = /\{*module\:([^\}|\>]*)\}*/g;
-  var rArray = /Array\.\<(.+)\>/g;
+  var rArray = /Array\.<(.+)>/g;
 
   return str
     .replace(rArray, function(match, module) {
@@ -113,7 +112,7 @@ function getName(block) {
     return;
   }
 
-  var alias = getTagsByType(block, 'alias')[0]
+  var alias = getTagsByType(block, 'alias')[0];
 
   if (alias && !/^module/.test(alias.string)) {
     return alias.string;
@@ -272,7 +271,6 @@ function getMixinMethods(comments) {
     var methods = docs.methods.filter(function(method) {
       return method.type === 'instance';
     });
-    var type = block.ctx.type;
     var name;
 
     if (block.ctx.type === 'property') {

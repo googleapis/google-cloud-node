@@ -42,6 +42,7 @@ var FakePrediction = createFakeApi();
 var FakePubSub = createFakeApi();
 var FakeResource = createFakeApi();
 var FakeStorage = createFakeApi();
+var FakeTranslate = createFakeApi();
 var FakeVision = createFakeApi();
 
 describe('gcloud', function() {
@@ -59,6 +60,7 @@ describe('gcloud', function() {
       '@google-cloud/pubsub': FakePubSub,
       '@google-cloud/resource': FakeResource,
       '@google-cloud/storage': FakeStorage,
+      '@google-cloud/translate': FakeTranslate,
       '@google-cloud/vision': FakeVision
     });
   });
@@ -105,6 +107,10 @@ describe('gcloud', function() {
 
   it('should export static storage', function() {
     assert.strictEqual(gcloud.storage, FakeStorage);
+  });
+
+  it('should export static translate', function() {
+    assert.strictEqual(gcloud.translate, FakeTranslate);
   });
 
   it('should export static vision', function() {
@@ -229,6 +235,15 @@ describe('gcloud', function() {
 
         assert(storage instanceof FakeStorage);
         assert.strictEqual(storage.calledWith_[0], options);
+      });
+    });
+
+    describe('translate', function() {
+      it('should create a new Translate', function() {
+        var translate = localGcloud.translate(options);
+
+        assert(translate instanceof FakeTranslate);
+        assert.strictEqual(translate.calledWith_[0], options);
       });
     });
 

@@ -142,7 +142,7 @@ var bigquery = require('@google-cloud/bigquery');
 // global basis (see Authentication section above).
 
 var bigqueryClient = bigquery({
-  projectId: 'my-project',
+  projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
@@ -199,7 +199,7 @@ var bigtable = require('@google-cloud/bigtable');
 // global basis (see Authentication section above).
 
 var bigtableClient = bigtable({
-  projectId: 'my-project',
+  projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json',
   zone: 'my-zone',
   cluster: 'my-cluster'
@@ -271,7 +271,7 @@ var datastore = require('@google-cloud/datastore');
 // global basis (see Authentication section above).
 
 var datastoreClient = datastore({
-  projectId: 'my-project',
+  projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
@@ -343,7 +343,7 @@ var dns = require('@google-cloud/dns');
 // global basis (see Authentication section above).
 
 var dnsClient = dns({
-  projectId: 'my-project',
+  projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
@@ -402,7 +402,7 @@ var pubsub = require('@google-cloud/pubsub');
 // auth on a global basis (see Authentication section above).
 
 var pubsubClient = pubsub({
-  projectId: 'my-project',
+  projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
@@ -467,7 +467,7 @@ var fs = require('fs');
 // global basis (see Authentication section above).
 
 var gcs = storage({
-  projectId: 'my-project',
+  projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
@@ -537,7 +537,7 @@ var compute = require('@google-cloud/compute');
 // global basis (see Authentication section above).
 
 var gce = compute({
-  projectId: 'my-project',
+  projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
@@ -590,7 +590,7 @@ var prediction = require('@google-cloud/prediction');
 // global basis (see Authentication section above).
 
 var predictionClient = prediction({
-  projectId: 'my-project',
+  projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
@@ -731,7 +731,7 @@ var logging = require('@google-cloud/logging');
 // basis (see Authentication section above).
 
 var loggingClient = logging({
-  projectId: 'my-project',
+  projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
@@ -803,7 +803,7 @@ var resource = require('@google-cloud/resource');
 // global basis (see Authorization section above).
 
 var resourceClient = resource({
-  projectId: 'my-project',
+  projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
@@ -814,7 +814,7 @@ resourceClient.getProjects(function(err, projects) {
   }
 });
 
-// Get the metadata from your project. (defaults to `my-project`)
+// Get the metadata from your project. (defaults to `grape-spaceship-123`)
 var project = resourceClient.project();
 
 project.getMetadata(function(err, metadata) {
@@ -858,7 +858,7 @@ var vision = require('@google-cloud/vision');
 // global basis (see Authorization section above).
 
 var visionClient = vision({
-  projectId: 'my-project',
+  projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
