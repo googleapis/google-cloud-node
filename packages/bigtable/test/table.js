@@ -217,6 +217,12 @@ describe('Bigtable/Table', function() {
   describe('createFamily', function() {
     var COLUMN_ID = 'my-column';
 
+    it('should throw if a name is not provided', function() {
+      assert.throws(function() {
+        table.createFamily();
+      }, /A name is required to create a family\./);
+    });
+
     it('should provide the proper request options', function(done) {
       table.request = function(grpcOpts, reqOpts) {
         assert.deepEqual(grpcOpts, {
@@ -356,6 +362,12 @@ describe('Bigtable/Table', function() {
 
   describe('family', function() {
     var FAMILY_ID = 'test-family';
+
+    it('should throw if a name is not provided', function() {
+      assert.throws(function() {
+        table.family();
+      }, /A family name must be provided\./);
+    });
 
     it('should create a family with the proper arguments', function() {
       var family = table.family(FAMILY_ID);
@@ -806,14 +818,20 @@ describe('Bigtable/Table', function() {
   });
 
   describe('row', function() {
-    var ROW_ID = 'test-row';
+    var KEY = 'test-row';
+
+    it('should throw if a key is not provided', function() {
+      assert.throws(function() {
+        table.row();
+      }, /A row key must be provided\./);
+    });
 
     it('should return a Row object', function() {
-      var row = table.row(ROW_ID);
+      var row = table.row(KEY);
 
       assert(row instanceof FakeRow);
       assert.strictEqual(row.calledWith_[0], table);
-      assert.strictEqual(row.calledWith_[1], ROW_ID);
+      assert.strictEqual(row.calledWith_[1], KEY);
     });
   });
 

@@ -80,11 +80,9 @@ describe('Bigtable/Filter', function() {
     });
 
     it('should throw an error for unknown types', function() {
-      var errorMessage = /Can\'t convert to RegExp String from unknown type\./;
-
       assert.throws(function() {
         Filter.convertToRegExpString(true);
-      }, errorMessage);
+      }, /Can\'t convert to RegExp String from unknown type\./);
     });
   });
 
