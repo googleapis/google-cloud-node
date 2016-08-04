@@ -20,9 +20,8 @@ var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
 var gceImages = require('gce-images');
-var proxyquire = require('proxyquire');
 var nodeutil = require('util');
-
+var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 

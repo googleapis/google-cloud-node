@@ -21,19 +21,7 @@
 'use strict';
 
 var common = require('@google-cloud/common');
-var nodeutil = require('util');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var util = require('util');
 
 /*! Developer Documentation
  *
@@ -129,7 +117,7 @@ function Address(region, name) {
     getMetadata: true
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: region,
     baseUrl: '/addresses',
     id: name,
@@ -141,7 +129,7 @@ function Address(region, name) {
   this.region = region;
 }
 
-nodeutil.inherits(Address, ServiceObject);
+util.inherits(Address, common.ServiceObject);
 
 /**
  * Delete the address.
@@ -161,7 +149,7 @@ nodeutil.inherits(Address, ServiceObject);
  * });
  */
 Address.prototype.delete = function(callback) {
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   var region = this.region;
 

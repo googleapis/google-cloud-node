@@ -21,19 +21,7 @@
 'use strict';
 
 var common = require('@google-cloud/common');
-var nodeutil = require('util');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var util = require('util');
 
 /*! Developer Documentation
  *
@@ -135,7 +123,7 @@ function Autoscaler(zone, name) {
     getMetadata: true
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: zone,
     baseUrl: '/autoscalers',
     id: name,
@@ -147,7 +135,7 @@ function Autoscaler(zone, name) {
   this.zone = zone;
 }
 
-nodeutil.inherits(Autoscaler, ServiceObject);
+util.inherits(Autoscaler, common.ServiceObject);
 
 /**
  * Delete the autoscaler.
@@ -167,11 +155,11 @@ nodeutil.inherits(Autoscaler, ServiceObject);
  * });
  */
 Autoscaler.prototype.delete = function(callback) {
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   var zone = this.zone;
 
-  ServiceObject.prototype.delete.call(this, function(err, resp) {
+  common.ServiceObject.prototype.delete.call(this, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -210,7 +198,7 @@ Autoscaler.prototype.delete = function(callback) {
 Autoscaler.prototype.setMetadata = function(metadata, callback) {
   var zone = this.zone;
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   metadata = metadata || {};
   metadata.name = this.name;

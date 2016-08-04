@@ -25,25 +25,13 @@ var createErrorClass = require('create-error-class');
 var extend = require('extend');
 var format = require('string-format-obj');
 var is = require('is');
-var nodeutil = require('util');
+var util = require('util');
 
 /**
  * @type {module:compute/disk}
  * @private
  */
 var Disk = require('./disk.js');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
 
 /**
  * Custom error type for errors related to detaching a disk.
@@ -165,7 +153,7 @@ function VM(zone, name) {
     getMetadata: true
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: zone,
     baseUrl: '/instances',
     id: this.name,
@@ -174,7 +162,7 @@ function VM(zone, name) {
   });
 }
 
-nodeutil.inherits(VM, ServiceObject);
+util.inherits(VM, common.ServiceObject);
 
 /**
  * Attach a disk to the instance.
@@ -267,7 +255,7 @@ VM.prototype.delete = function(callback) {
   this.request({
     method: 'DELETE',
     uri: ''
-  }, callback || util.noop);
+  }, callback || common.util.noop);
 };
 
 /**
@@ -331,7 +319,7 @@ VM.prototype.detachDisk = function(disk, callback) {
       qs: {
         deviceName: deviceName
       }
-    }, callback || util.noop);
+    }, callback || common.util.noop);
   });
 };
 
@@ -363,7 +351,9 @@ VM.prototype.getSerialPortOutput = function(port, callback) {
     }
   };
 
-  ServiceObject.prototype.request.call(this, reqOpts, function(err, resp) {
+  var request = common.ServiceObject.prototype.request;
+
+  request.call(this, reqOpts, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -420,7 +410,7 @@ VM.prototype.reset = function(callback) {
   this.request({
     method: 'POST',
     uri: '/reset'
-  }, callback || util.noop);
+  }, callback || common.util.noop);
 };
 
 /**
@@ -446,7 +436,7 @@ VM.prototype.reset = function(callback) {
 VM.prototype.setMetadata = function(metadata, callback) {
   var self = this;
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   this.getMetadata(function(err, currentMetadata, apiResponse) {
     if (err) {
@@ -510,7 +500,7 @@ VM.prototype.setTags = function(tags, fingerprint, callback) {
     method: 'POST',
     uri: '/setTags',
     json: body
-  }, callback || util.noop);
+  }, callback || common.util.noop);
 };
 
 /**
@@ -534,7 +524,7 @@ VM.prototype.start = function(callback) {
   this.request({
     method: 'POST',
     uri: '/start'
-  }, callback || util.noop);
+  }, callback || common.util.noop);
 };
 
 /**
@@ -558,7 +548,7 @@ VM.prototype.stop = function(callback) {
   this.request({
     method: 'POST',
     uri: '/stop'
-  }, callback || util.noop);
+  }, callback || common.util.noop);
 };
 
 /**
@@ -581,7 +571,9 @@ VM.prototype.stop = function(callback) {
 VM.prototype.request = function(reqOpts, callback) {
   var zone = this.zone;
 
-  ServiceObject.prototype.request.call(this, reqOpts, function(err, resp) {
+  var request = common.ServiceObject.prototype.request;
+
+  request.call(this, reqOpts, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;

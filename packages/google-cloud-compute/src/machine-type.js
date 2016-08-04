@@ -21,13 +21,7 @@
 'use strict';
 
 var common = require('@google-cloud/common');
-var nodeutil = require('util');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
+var util = require('util');
 
 /*! Developer Documentation
  *
@@ -100,7 +94,7 @@ function MachineType(zone, name) {
     getMetadata: true
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: zone,
     baseUrl: '/machineTypes',
     id: name,
@@ -111,6 +105,6 @@ function MachineType(zone, name) {
   this.name = name;
 }
 
-nodeutil.inherits(MachineType, ServiceObject);
+util.inherits(MachineType, common.ServiceObject);
 
 module.exports = MachineType;

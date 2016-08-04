@@ -21,19 +21,7 @@
 'use strict';
 
 var common = require('@google-cloud/common');
-var nodeutil = require('util');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var util = require('util');
 
 /*! Developer Documentation
  *
@@ -131,7 +119,7 @@ function Firewall(compute, name) {
     getMetadata: true
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: compute,
     baseUrl: '/global/firewalls',
     id: name,
@@ -144,7 +132,7 @@ function Firewall(compute, name) {
   this.metadata.network = 'global/networks/default';
 }
 
-nodeutil.inherits(Firewall, ServiceObject);
+util.inherits(Firewall, common.ServiceObject);
 
 /**
  * Delete the firewall.
@@ -166,9 +154,9 @@ nodeutil.inherits(Firewall, ServiceObject);
 Firewall.prototype.delete = function(callback) {
   var compute = this.compute;
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
-  ServiceObject.prototype.delete.call(this, function(err, resp) {
+  common.ServiceObject.prototype.delete.call(this, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -207,7 +195,7 @@ Firewall.prototype.delete = function(callback) {
 Firewall.prototype.setMetadata = function(metadata, callback) {
   var compute = this.compute;
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   metadata = metadata || {};
   metadata.name = this.name;

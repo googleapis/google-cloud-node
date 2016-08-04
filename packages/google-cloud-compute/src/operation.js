@@ -24,18 +24,6 @@ var common = require('@google-cloud/common');
 var events = require('events');
 var modelo = require('modelo');
 
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
-
 /*! Developer Documentation
  *
  * @param {module:compute} scope - The scope of the operation: a `Compute`,
@@ -156,7 +144,7 @@ function Operation(scope, name) {
     get: true
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: scope,
     baseUrl: isCompute ? '/global/operations' : '/operations',
     id: name,
@@ -172,7 +160,7 @@ function Operation(scope, name) {
   this.listenForEvents_();
 }
 
-modelo.inherits(Operation, ServiceObject, events.EventEmitter);
+modelo.inherits(Operation, common.ServiceObject, events.EventEmitter);
 
 /**
  * Get the operation's metadata. For a detailed description of metadata see
@@ -196,9 +184,11 @@ modelo.inherits(Operation, ServiceObject, events.EventEmitter);
 Operation.prototype.getMetadata = function(callback) {
   var self = this;
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
-  ServiceObject.prototype.getMetadata.call(this, function(err, apiResponse) {
+  var getMetadata = common.ServiceObject.prototype.getMetadata;
+
+  getMetadata.call(this, function(err, apiResponse) {
     // An Operation entity contains a property named `error`. This makes
     // `request` think the operation failed, and will return an ApiError to
     // this callback. We have to make sure this isn't a false error by seeing if
@@ -267,7 +257,7 @@ Operation.prototype.startPolling_ = function() {
   this.getMetadata(function(err, metadata, apiResponse) {
     // Parsing the response body will automatically create an ApiError object if
     // the operation failed.
-    var parsedHttpRespBody = util.parseHttpRespBody(apiResponse);
+    var parsedHttpRespBody = common.util.parseHttpRespBody(apiResponse);
     err = err || parsedHttpRespBody.err;
 
     if (err) {

@@ -18,11 +18,10 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var proxyquire = require('proxyquire');
 var nodeutil = require('util');
-
-var util = require('@google-cloud/common').util;
+var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
+var util = require('@google-cloud/common').util;
 
 function FakeServiceObject() {
   this.calledWith_ = arguments;

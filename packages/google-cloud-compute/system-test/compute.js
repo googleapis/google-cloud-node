@@ -1005,6 +1005,86 @@ describe('Compute', function() {
     });
   });
 
+  describe('subnetworks', function() {
+    var NETWORK_NAME = generateName('network');
+    var network = compute.network(NETWORK_NAME);
+
+    var SUBNETWORK_NAME = generateName('subnetwork');
+    var subnetwork = region.subnetwork(SUBNETWORK_NAME);
+
+    var NETWORK_CONFIG = {
+      autoCreateSubnetworks: false
+    };
+
+    var SUBNETWORK_CONFIG = {
+      network: 'global/networks/' + NETWORK_NAME,
+      range: '10.0.1.0/24'
+    };
+
+    before(function(done) {
+      async.series([
+        create(network, NETWORK_CONFIG),
+        create(subnetwork, SUBNETWORK_CONFIG)
+      ], done);
+    });
+
+    it('should have created the subnetwork', function(done) {
+      subnetwork.getMetadata(function(err, metadata) {
+        assert.ifError(err);
+        assert.strictEqual(metadata.name, SUBNETWORK_NAME);
+        done();
+      });
+    });
+
+    it('should get a list of subnetworks', function(done) {
+      compute.getSubnetworks(function(err, subnetworks) {
+        assert.ifError(err);
+        assert(subnetworks.length > 0);
+        done();
+      });
+    });
+
+    it('should get a list of subnetworks in stream mode', function(done) {
+      var resultsMatched = 0;
+
+      compute.getSubnetworks()
+        .on('error', done)
+        .on('data', function() {
+          resultsMatched++;
+        })
+        .on('end', function() {
+          assert(resultsMatched > 0);
+          done();
+        });
+    });
+
+    it('should get a list of regional subnetworks', function(done) {
+      region.getSubnetworks(function(err, subnetworks) {
+        assert.ifError(err);
+        assert(subnetworks.length > 0);
+        done();
+      });
+    });
+
+    it('should get a list of regional subnetworks in stream', function(done) {
+      var resultsMatched = 0;
+
+      region.getSubnetworks()
+        .on('error', done)
+        .on('data', function() {
+          resultsMatched++;
+        })
+        .on('end', function() {
+          assert(resultsMatched > 0);
+          done();
+        });
+    });
+
+    it('should access a subnetwork through a Region', function(done) {
+      region.subnetwork(SUBNETWORK_NAME).getMetadata(done);
+    });
+  });
+
   describe('vms', function() {
     var VM_NAME = generateName('vm');
     var vm = zone.vm(VM_NAME);
@@ -1198,86 +1278,6 @@ describe('Compute', function() {
           assert(resultsMatched > 0);
           done();
         });
-    });
-  });
-
-  describe('subnetworks', function() {
-    var NETWORK_NAME = generateName('network');
-    var network = compute.network(NETWORK_NAME);
-
-    var SUBNETWORK_NAME = generateName('subnetwork');
-    var subnetwork = region.subnetwork(SUBNETWORK_NAME);
-
-    var NETWORK_CONFIG = {
-      autoCreateSubnetworks: false
-    };
-
-    var SUBNETWORK_CONFIG = {
-      network: 'global/networks/' + NETWORK_NAME,
-      range: '10.0.1.0/24'
-    };
-
-    before(function(done) {
-      async.series([
-        create(network, NETWORK_CONFIG),
-        create(subnetwork, SUBNETWORK_CONFIG)
-      ], done);
-    });
-
-    it('should have created the subnetwork', function(done) {
-      subnetwork.getMetadata(function(err, metadata) {
-        assert.ifError(err);
-        assert.strictEqual(metadata.name, SUBNETWORK_NAME);
-        done();
-      });
-    });
-
-    it('should get a list of subnetworks', function(done) {
-      compute.getSubnetworks(function(err, subnetworks) {
-        assert.ifError(err);
-        assert(subnetworks.length > 0);
-        done();
-      });
-    });
-
-    it('should get a list of subnetworks in stream mode', function(done) {
-      var resultsMatched = 0;
-
-      compute.getSubnetworks()
-        .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
-          assert(resultsMatched > 0);
-          done();
-        });
-    });
-
-    it('should get a list of regional subnetworks', function(done) {
-      region.getSubnetworks(function(err, subnetworks) {
-        assert.ifError(err);
-        assert(subnetworks.length > 0);
-        done();
-      });
-    });
-
-    it('should get a list of regional subnetworks in stream', function(done) {
-      var resultsMatched = 0;
-
-      region.getSubnetworks()
-        .on('error', done)
-        .on('data', function() {
-          resultsMatched++;
-        })
-        .on('end', function() {
-          assert(resultsMatched > 0);
-          done();
-        });
-    });
-
-    it('should access a subnetwork through a Region', function(done) {
-      region.subnetwork(SUBNETWORK_NAME).getMetadata(done);
     });
   });
 

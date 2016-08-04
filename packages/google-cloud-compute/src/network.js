@@ -24,19 +24,7 @@ var common = require('@google-cloud/common');
 var extend = require('extend');
 var format = require('string-format-obj');
 var is = require('is');
-var nodeutil = require('util');
-
-/**
- * @type {module:common/service-object}
- * @private
- */
-var ServiceObject = common.ServiceObject;
-
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var util = require('util');
 
 /*! Developer Documentation
  *
@@ -133,7 +121,7 @@ function Network(compute, name) {
     getMetadata: true
   };
 
-  ServiceObject.call(this, {
+  common.ServiceObject.call(this, {
     parent: compute,
     baseUrl: '/global/networks',
     id: name,
@@ -146,7 +134,7 @@ function Network(compute, name) {
   this.name = name;
 }
 
-nodeutil.inherits(Network, ServiceObject);
+util.inherits(Network, common.ServiceObject);
 
 /**
  * Format a network's name how the API expects.
@@ -374,9 +362,9 @@ Network.prototype.getSubnetworks = function(options, callback) {
 Network.prototype.delete = function(callback) {
   var compute = this.compute;
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
-  ServiceObject.prototype.delete.call(this, function(err, resp) {
+  common.ServiceObject.prototype.delete.call(this, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
