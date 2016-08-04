@@ -41,12 +41,6 @@ var entity = require('./entity.js');
 var Query = require('./query.js');
 
 /**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
-
-/**
  * A map of read consistency values to proto codes.
  *
  * @type {object}
@@ -210,7 +204,7 @@ DatastoreRequest.prototype.allocateIds = function(incompleteKey, n, callback) {
  * ], function(err, apiResponse) {});
  */
 DatastoreRequest.prototype.delete = function(keys, callback) {
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   var protoOpts = {
     service: 'Datastore',
@@ -345,7 +339,7 @@ DatastoreRequest.prototype.get = function(keys, options, callback) {
     throw new Error('At least one Key object is required.');
   }
 
-  var limiter = util.createLimiter(makeRequest, options);
+  var limiter = common.util.createLimiter(makeRequest, options);
   var stream = limiter.stream;
 
   stream.once('reading', function() {
@@ -531,7 +525,7 @@ DatastoreRequest.prototype.runQuery = function(query, options, callback) {
     return;
   }
 
-  var limiter = util.createLimiter(makeRequest, options);
+  var limiter = common.util.createLimiter(makeRequest, options);
   var stream = limiter.stream;
 
   stream.once('reading', function() {
@@ -921,7 +915,7 @@ DatastoreRequest.prototype.request_ = function(protoOpts, reqOpts, callback) {
     reqOpts = {};
   }
 
-  callback = callback || util.noop;
+  callback = callback || common.util.noop;
 
   var isTransaction = is.defined(this.id);
   var method = protoOpts.method;

@@ -24,7 +24,6 @@ var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var is = require('is');
 var modelo = require('modelo');
-var PKG = require('../package.json');
 
 /**
  * @type {module:datastore/request}
@@ -45,22 +44,12 @@ var entity = require('./entity.js');
 var Query = require('./query.js');
 
 /**
- * @type {module:common/grpc-service}
- * @private
- */
-var GrpcService = common.GrpcService;
-
-/**
  * @type {module:datastore/transaction}
  * @private
  */
 var Transaction = require('./transaction.js');
 
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var PKG = require('../package.json');
 
 /**
  * Interact with the
@@ -337,7 +326,7 @@ var util = common.util;
  */
 function Datastore(options) {
   if (!(this instanceof Datastore)) {
-    options = util.normalizeArguments(this, options, {
+    options = common.util.normalizeArguments(this, options, {
       projectIdRequired: false
     });
     return new Datastore(options);
@@ -359,10 +348,10 @@ function Datastore(options) {
     userAgent: PKG.name + '/' + PKG.version
   };
 
-  GrpcService.call(this, config, options);
+  common.GrpcService.call(this, config, options);
 }
 
-modelo.inherits(Datastore, DatastoreRequest, GrpcService);
+modelo.inherits(Datastore, DatastoreRequest, common.GrpcService);
 
 /**
  * Helper function to get a Datastore Double object.

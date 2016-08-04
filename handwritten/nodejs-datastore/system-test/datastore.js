@@ -19,9 +19,9 @@
 var assert = require('assert');
 var async = require('async');
 
-var env = require('../../../system-test/env.js');
 var Datastore = require('../');
 var entity = require('../src/entity.js');
+var env = require('../../../system-test/env.js');
 
 describe('Datastore', function() {
   var testKinds = [];
