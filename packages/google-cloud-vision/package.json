@@ -64,7 +64,7 @@
   "devDependencies": {
     "async": "^1.4.2",
     "deep-strict-equal": "^0.1.0",
-    "mocha": "^2.1.0",
+    "mocha": "^3.0.1",
     "multiline": "^1.0.2",
     "normalize-newline": "^2.0.0",
     "proxyquire": "^1.7.10",
