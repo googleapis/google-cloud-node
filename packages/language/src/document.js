@@ -30,7 +30,7 @@ var prop = require('propprop');
 /*! Developer Documentation
  *
  * @param {module:language} language - The parent Language object.
- * @param {object=}
+ * @param {object=} config - Configuration object.
  */
 /*
  * Create a Natural Language Document object. From this object, you will be able
