@@ -157,7 +157,7 @@ Document.PART_OF_SPEECH = {
  * @param {string} callback.annotation.language - The language detected from the
  *     text.
  * @param {number} callback.annotation.sentiment - A value in the range of
- *     `-100` to `100`. Large numbers represent more postiive sentiments.
+ *     `-100` to `100`. Large numbers represent more positive sentiments.
  * @param {object} callback.annotation.entities - The recognized entities from
  *     the text, grouped by the type of entity.
  * @param {string[]} callback.annotation.entities.art - Art entities detected
@@ -299,7 +299,24 @@ Document.PART_OF_SPEECH = {
  *   //       }
  *   //     ],
  *   //     places: [
- *   //       {...}
+ *   //       {
+ *   //         name: 'American',
+ *   //         type: 'LOCATION',
+ *   //         metadata: {
+ *   //           wikipedia_url: 'http://en.wikipedia.org/wiki/United_States'
+ *   //         },
+ *   //         salience: 13.947370648384094,
+ *   //         mentions: [
+ *   //           {
+ *   //             text: [
+ *   //               {
+ *   //                 content: 'American',
+ *   //                 beginOffset: -1
+ *   //               }
+ *   //             ]
+ *   //           }
+ *   //         ]
+ *   //       }
  *   //     ]
  *   //   },
  *   //   sentences: [
@@ -540,7 +557,7 @@ Document.prototype.detectEntities = function(options, callback) {
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error occurred while making this request.
  * @param {object} callback.sentiment - A value in the range of `-100` to `100`.
- *     Large numbers represent more postiive sentiments.
+ *     Large numbers represent more positive sentiments.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example

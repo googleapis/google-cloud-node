@@ -824,15 +824,15 @@ languageClient.detectEntities('Stephen of Michigan!', function(err, entities) {
 var document = languageClient.document('Contributions welcome!');
 
 // Analyze the sentiment of the document.
-document.detectSentiment(function(err, positiveSentiment) {
-  // positiveSentiment = true
+document.detectSentiment(function(err, sentiment) {
+  // sentiment = 100 // Large numbers represent more positive sentiments.
 });
 
 // Parse the syntax of the document.
 document.annotate(function(err, annotations) {
   // annotations = {
   //   language: 'en',
-  //   sentiment: true,
+  //   sentiment: 100,
   //   entities: {},
   //   sentences: ['Contributions welcome!'],
   //   tokens: [
