@@ -141,7 +141,7 @@ Document.PART_OF_SPEECH = {
  *     By default, all features (`entities`, `sentiment`, and `syntax`) are
  *     enabled. By overriding any of these values, all defaults are switched to
  *     `false`.
- * @param {boolean} options.sentiment - Detect the sentiment from this document.
+ * @param {number} options.sentiment - Detect the sentiment from this document.
  *     By default, all features (`entities`, `sentiment`, and `syntax`) are
  *     enabled. By overriding any of these values, all defaults are switched to
  *     `false`.
@@ -556,7 +556,7 @@ Document.prototype.detectEntities = function(options, callback) {
  *     results. Default: `false`
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error occurred while making this request.
- * @param {object} callback.sentiment - A value in the range of `-100` to `100`.
+ * @param {number} callback.sentiment - A value in the range of `-100` to `100`.
  *     Large numbers represent more positive sentiments.
  * @param {object} callback.apiResponse - The full API response.
  *
