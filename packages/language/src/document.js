@@ -643,7 +643,7 @@ Document.formatEntities_ = function(entities, verbose) {
 
     acc[groupName] = arrify(acc[groupName]);
     acc[groupName].push(entity);
-    acc[groupName] = acc[groupName].sort(Document.sortByProperty_('salience'));
+    acc[groupName].sort(Document.sortByProperty_('salience'));
 
     return acc;
   }, {});
