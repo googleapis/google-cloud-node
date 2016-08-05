@@ -170,13 +170,13 @@ describe('Logging', function() {
     it('should throw if a name is not provided', function() {
       assert.throws(function() {
         logging.createSink();
-      }, 'A sink name must be provided.');
+      }, /A sink name must be provided\./);
     });
 
     it('should throw if a config object is not provided', function() {
       assert.throws(function() {
         logging.createSink(SINK_NAME);
-      }, 'A sink configuration object must be provided.');
+      }, /A sink configuration object must be provided\./);
     });
 
     it('should set acls for a Bucket destination', function(done) {

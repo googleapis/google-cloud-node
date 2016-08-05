@@ -128,7 +128,7 @@ describe('Prediction', function() {
     it('should throw if a model ID is not provided', function() {
       assert.throws(function() {
         prediction.createModel();
-      }, /A model ID is required/);
+      }, /A model ID is required\./);
     });
 
     it('should make the correct API request', function(done) {
@@ -379,7 +379,7 @@ describe('Prediction', function() {
     it('should throw if a name is not provided', function() {
       assert.throws(function() {
         prediction.model();
-      }, /A model ID is required/);
+      }, /A model ID is required\./);
     });
 
     it('should return a Model', function() {

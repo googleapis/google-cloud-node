@@ -185,17 +185,17 @@ describe('Topic', function() {
     it('should throw if no message is provided', function() {
       assert.throws(function() {
         topic.publish();
-      }, /Cannot publish without a message/);
+      }, /Cannot publish without a message\./);
 
       assert.throws(function() {
         topic.publish([]);
-      }, /Cannot publish without a message/);
+      }, /Cannot publish without a message\./);
     });
 
     it('should throw if a message has no data', function() {
       assert.throws(function() {
         topic.publish({});
-      }, /Cannot publish message without a `data` property/);
+      }, /Cannot publish message without a `data` property\./);
     });
 
     it('should send correct api request', function(done) {

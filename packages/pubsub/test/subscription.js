@@ -258,10 +258,10 @@ describe('Subscription', function() {
     it('should throw if no IDs are provided', function() {
       assert.throws(function() {
         subscription.ack();
-      }, /At least one ID/);
+      }, /At least one ID must be specified before it can be acknowledged\./);
       assert.throws(function() {
         subscription.ack([]);
-      }, /At least one ID/);
+      }, /At least one ID must be specified before it can be acknowledged\./);
     });
 
     it('should accept a single id', function() {

@@ -194,23 +194,19 @@ describe('Bucket', function() {
 
   describe('combine', function() {
     it('should throw if invalid sources are not provided', function() {
-      var error = 'You must provide at least two source files.';
-
       assert.throws(function() {
         bucket.combine();
-      }, new RegExp(error));
+      }, /You must provide at least two source files\./);
 
       assert.throws(function() {
         bucket.combine(['1']);
-      }, new RegExp(error));
+      }, /You must provide at least two source files\./);
     });
 
     it('should throw if a destination is not provided', function() {
-      var error = 'A destination file must be specified.';
-
       assert.throws(function() {
         bucket.combine(['1', '2']);
-      }, new RegExp(error));
+      }, /A destination file must be specified\./);
     });
 
     it('should accept string or file input for sources', function(done) {
@@ -292,7 +288,7 @@ describe('Bucket', function() {
     it('should throw if content type cannot be determined', function() {
       assert.throws(function() {
         bucket.combine(['1', '2'], 'destination');
-      }, /A content type could not be detected/);
+      }, /A content type could not be detected for the destination file\./);
     });
 
     it('should make correct API request', function(done) {
@@ -395,13 +391,13 @@ describe('Bucket', function() {
     it('should throw if an ID is not provided', function() {
       assert.throws(function() {
         bucket.createChannel();
-      }, 'An ID is required to create a channel.');
+      }, /An ID is required to create a channel\./);
     });
 
     it('should throw if an address is not provided', function() {
       assert.throws(function() {
         bucket.createChannel(ID, {});
-      }, 'An address is required to create a channel.');
+      }, /An address is required to create a channel\./);
     });
 
     it('should make the correct request', function(done) {
@@ -607,7 +603,7 @@ describe('Bucket', function() {
     it('should throw if no name is provided', function() {
       assert.throws(function() {
         bucket.file();
-      }, /A file name must be specified/);
+      }, /A file name must be specified\./);
     });
 
     it('should return a File object', function() {
