@@ -804,9 +804,7 @@ var language = require('@google-cloud/language');
 #### Preview
 
 ```js
-var gcloud = require('google-cloud');
-
-// Authorizing on a per-API-basis. You don't need to do this if you auth on a
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
 // global basis (see Authorization section above).
 
 var languageClient = language({
@@ -890,8 +888,8 @@ var resource = require('@google-cloud/resource');
 #### Preview
 
 ```js
-// Authorizing on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authorization section above).
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
 
 var resourceClient = resource({
   projectId: 'grape-spaceship-123',
@@ -945,8 +943,8 @@ var vision = require('@google-cloud/vision');
 #### Preview
 
 ```js
-// Authorizing on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authorization section above).
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
 
 var visionClient = vision({
   projectId: 'grape-spaceship-123',
