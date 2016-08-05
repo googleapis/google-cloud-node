@@ -407,6 +407,61 @@ VM.prototype.reset = function(callback) {
 };
 
 /**
+ * Set the machine type for this instance.
+ *
+ * @resource [Instances: setMachineType API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/setMachineType}
+ * @resource [Predefined machine types]{@link https://cloud.google.com/compute/docs/machine-types#predefined_machine_types}
+ *
+ * @param {string} machineType - Full or partial machine type. See a list of
+ *     predefined machine types
+ *     [here](https://cloud.google.com/compute/docs/machine-types#predefined_machine_types).
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {module:compute/operation} callback.operation - An operation object
+ *     that can be used to check the status of the request.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * vm.setMachineType('n1-standard-1', function(err, operation, apiResponse) {
+ *   // `operation` is an Operation object that can be used to check the status
+ *   // of the request.
+ * });
+ */
+VM.prototype.setMachineType = function(machineType, callback) {
+  var self = this;
+
+  var isPartialMachineType = machineType.indexOf('/') === -1;
+
+  if (isPartialMachineType) {
+    machineType = format('zones/{zoneName}/machineTypes/{machineType}', {
+      zoneName: this.zone.name,
+      machineType: machineType
+    });
+  }
+
+  callback = callback || common.util.noop;
+
+  this.stop(function(err, operation, apiResponse) {
+    if (err) {
+      callback(err, null, apiResponse);
+      return;
+    }
+
+    operation
+      .on('error', callback)
+      .on('complete', function() {
+        self.request({
+          method: 'POST',
+          uri: '/setMachineType',
+          json: {
+            machineType: machineType
+          }
+        }, callback);
+      });
+  });
+};
+
+/**
  * Set the metadata for this instance.
  *
  * @resource [Instances: setMetadata API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/setMetadata}

@@ -17,6 +17,7 @@
 'use strict';
 
 var assert = require('assert');
+var EventEmitter = require('events').EventEmitter;
 var extend = require('extend');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
@@ -466,6 +467,100 @@ describe('VM', function() {
       };
 
       vm.reset();
+    });
+  });
+
+  describe('setMachineType', function() {
+    var MACHINE_TYPE = 'zones/zone/machineTypes/machineType';
+
+    it('should stop the VM', function(done) {
+      vm.stop = function() {
+        done();
+      };
+
+      vm.setMachineType(MACHINE_TYPE, assert.ifError);
+    });
+
+    it('should return an error & API resp from stopping', function(done) {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      vm.stop = function(callback) {
+        callback(error, null, apiResponse);
+      };
+
+      vm.setMachineType(MACHINE_TYPE, function(err, operation, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(operation, null);
+        assert.strictEqual(apiResponse_, apiResponse);
+        done();
+      });
+    });
+
+    it('should return an error from a failed operation', function(done) {
+      var error = new Error('Error.');
+
+      vm.stop = function(callback) {
+        var operation = new EventEmitter();
+        callback(null, operation);
+        operation.emit('error', error);
+      };
+
+      vm.setMachineType(MACHINE_TYPE, function(err, operation, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(operation, undefined);
+        assert.strictEqual(apiResponse_, undefined);
+        done();
+      });
+    });
+
+    describe('success', function() {
+      beforeEach(function() {
+        vm.request = util.noop;
+
+        vm.stop = function(callback) {
+          var operation = new EventEmitter();
+          callback(null, operation);
+          operation.emit('complete');
+        };
+      });
+
+      it('should make the correct API request on complete', function(done) {
+        vm.request = function(reqOpts, callback) {
+          assert.deepEqual(reqOpts, {
+            method: 'POST',
+            uri: '/setMachineType',
+            json: {
+              machineType: MACHINE_TYPE
+            }
+          });
+
+          callback(); // done()
+        };
+
+        vm.setMachineType(MACHINE_TYPE, done);
+      });
+
+      it('should accept a partial URL', function(done) {
+        var type = 'partial-machine-type';
+
+        vm.request = function(reqOpts, callback) {
+          assert.strictEqual(
+            reqOpts.json.machineType,
+            'zones/' + vm.zone.name + '/machineTypes/' + type
+          );
+
+          callback(); // done()
+        };
+
+        vm.setMachineType(type, done);
+      });
+
+      it('should not require a callback', function() {
+        assert.doesNotThrow(function() {
+          vm.setMachineType(MACHINE_TYPE);
+        });
+      });
     });
   });
 

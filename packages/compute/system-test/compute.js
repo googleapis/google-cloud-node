@@ -1179,6 +1179,31 @@ describe('Compute', function() {
       vm.reset(execAfterOperationComplete(done));
     });
 
+    it('should set the machine type', function(done) {
+      var machineType = 'n1-standard-2';
+
+      vm.setMachineType(machineType, execAfterOperationComplete(function(err) {
+        assert.ifError(err);
+
+        vm.getMetadata(function(err, metadata) {
+          assert.ifError(err);
+
+          var expectedMachineType = [
+            'https://www.googleapis.com/compute/v1/projects',
+            env.projectId,
+            'zones',
+            zone.id,
+            'machineTypes',
+            machineType
+          ].join('/');
+
+          assert.strictEqual(metadata.machineType, expectedMachineType);
+
+          done();
+        });
+      }));
+    });
+
     it('should set metadata', function(done) {
       var key = 'newKey';
       var value = 'newValue';
