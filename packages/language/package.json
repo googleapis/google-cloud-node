@@ -54,6 +54,7 @@
   "dependencies": {
     "@google-cloud/common": "^0.1.0",
     "@google-cloud/storage": "^0.1.0",
+    "arrify": "^1.0.1",
     "extend": "^3.0.0",
     "google-proto-files": "^0.4.0",
     "is": "^3.0.1",
