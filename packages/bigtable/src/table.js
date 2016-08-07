@@ -250,6 +250,8 @@ Table.formatRowRange_ = function(range) {
  *
  * @resource [Garbage Collection Proto Docs]{@link https://github.com/googleapis/googleapis/blob/master/google/bigtable/admin/table/v1/bigtable_table_data.proto#L59}
  *
+ * @throws {error} If a name is not provided.
+ *
  * @param {string} name - The name of column family.
  * @param {string|object=} rule - Garbage collection rule.
  * @param {object=} rule.age - Delete cells in a column older than the given
@@ -292,6 +294,10 @@ Table.prototype.createFamily = function(name, rule, callback) {
   if (is.function(rule)) {
     callback = rule;
     rule = null;
+  }
+
+  if (!name) {
+    throw new Error('A name is required to create a family.');
   }
 
   var grpcOpts = {
@@ -383,6 +389,8 @@ Table.prototype.deleteRows = function(options, callback) {
 /**
  * Get a reference to a Table Family.
  *
+ * @throws {error} If a name is not provided.
+ *
  * @param {string} name - The family name.
  * @return {module:bigtable/family}
  *
@@ -390,6 +398,10 @@ Table.prototype.deleteRows = function(options, callback) {
  * var family = table.family('my-family');
  */
 Table.prototype.family = function(name) {
+  if (!name) {
+    throw new Error('A family name must be provided.');
+  }
+
   return new Family(this, name);
 };
 
@@ -769,6 +781,8 @@ Table.prototype.mutate = function(entries, callback) {
 /**
  * Get a reference to a table row.
  *
+ * @throws {error} If a key is not provided.
+ *
  * @param {string} key - The row key.
  * @return {module:bigtable/row}
  *
@@ -776,6 +790,10 @@ Table.prototype.mutate = function(entries, callback) {
  * var row = table.row('lincoln');
  */
 Table.prototype.row = function(key) {
+  if (!key) {
+    throw new Error('A row key must be provided.');
+  }
+
   return new Row(this, key);
 };
 

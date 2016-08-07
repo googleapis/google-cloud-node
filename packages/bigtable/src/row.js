@@ -48,6 +48,11 @@ var RowError = createErrorClass('RowError', function(row) {
   this.message = 'Unknown row: ' + row + '.';
 });
 
+/*! Developer Documentation
+ *
+ * @param {module:bigtable/table} table - The row's parent Table instance.
+ * @param {string} key - The key for this row.
+ */
 /**
  * Create a Row object to interact with your table rows.
  *
@@ -67,7 +72,7 @@ var RowError = createErrorClass('RowError', function(row) {
  * var table = bigtable.table('prezzy');
  * var row = table.row('gwashington');
  */
-function Row(table, name) {
+function Row(table, key) {
   var methods = {
 
     /**
@@ -87,7 +92,7 @@ function Row(table, name) {
   var config = {
     parent: table,
     methods: methods,
-    id: name
+    id: key
   };
 
   common.GrpcServiceObject.call(this, config);
@@ -297,6 +302,8 @@ Row.prototype.create = function(entry, callback) {
  * transformed into writes. Rules are applied in order, meaning that earlier
  * rules will affect the results of later ones.
  *
+ * @throws {error} If no rules are provided.
+ *
  * @param {object|object[]} rules - The rules to apply to this row.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
@@ -334,6 +341,10 @@ Row.prototype.create = function(entry, callback) {
  * ], callback);
  */
 Row.prototype.createRules = function(rules, callback) {
+  if (!rules || rules.length === 0) {
+    throw new Error('At least one rule must be provided.');
+  }
+
   rules = arrify(rules).map(function(rule) {
     var column = Mutation.parseColumnName(rule.column);
     var ruleData = {

@@ -258,6 +258,12 @@ describe('Bigtable/Row', function() {
       increment: 1
     }];
 
+    it('should throw if a rule is not provided', function() {
+      assert.throws(function() {
+        row.createRules();
+      }, /At least one rule must be provided\./);
+    });
+
     it('should read/modify/write rules', function(done) {
       row.request = function(grpcOpts, reqOpts, callback) {
         assert.deepEqual(grpcOpts, {

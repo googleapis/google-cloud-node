@@ -56,6 +56,9 @@ var PKG = require('../package.json');
  *
  * @resource [Creating a Cloud Bigtable Cluster]{@link https://cloud.google.com/bigtable/docs/creating-compute-instance}
  *
+ * @throws {error} If a cluster is not provided.
+ * @throws {error} If a zone is not provided.
+ *
  * @param {object=} options - [Configuration object](#/docs).
  * @param {string} options.cluster - The cluster name that hosts your tables.
  * @param {string|module:compute/zone} options.zone - The zone in which your
@@ -278,6 +281,14 @@ function Bigtable(options) {
     return new Bigtable(options);
   }
 
+  if (!options.cluster) {
+    throw new Error('A cluster must be provided to interact with Bigtable.');
+  }
+
+  if (!options.zone) {
+    throw new Error('A zone must be provided to interact with Bigtable.');
+  }
+
   options = extend({}, options, {
     zone: options.zone.name || options.zone
   });
@@ -336,6 +347,8 @@ Bigtable.formatTableName_ = function(name) {
  *
  * @resource [Designing Your Schema]{@link https://cloud.google.com/bigtable/docs/schema-design}
  * @resource [Splitting Keys]{@link https://cloud.google.com/bigtable/docs/managing-tables#splits}
+ *
+ * @throws {error} If a name is not provided.
  *
  * @param {string} name - The name of the table.
  * @param {object=} options - Table creation options.
@@ -407,6 +420,10 @@ Bigtable.prototype.createTable = function(name, options, callback) {
   if (is.function(options)) {
     callback = options;
     options = {};
+  }
+
+  if (!name) {
+    throw new Error('A name is required to create a table.');
   }
 
   var protoOpts = {

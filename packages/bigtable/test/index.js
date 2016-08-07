@@ -106,12 +106,27 @@ describe('Bigtable', function() {
       fakeUtil.normalizeArguments = normalizeArguments;
     });
 
+    it('should throw if a cluster is not provided', function() {
+      assert.throws(function() {
+        new Bigtable({});
+      }, /A cluster must be provided to interact with Bigtable\./);
+    });
+
+    it('should throw if a zone is not provided', function() {
+      assert.throws(function() {
+        new Bigtable({
+          cluster: CLUSTER
+        });
+      }, /A zone must be provided to interact with Bigtable\./);
+    });
+
     it('should leave the original options unaltered', function() {
       var fakeOptions = {
         a: 'a',
         b: 'b',
         c: 'c',
-        zone: 'zone'
+        cluster: CLUSTER,
+        zone: ZONE
       };
 
       var bigtable = new Bigtable(fakeOptions);
@@ -171,6 +186,12 @@ describe('Bigtable', function() {
 
   describe('createTable', function() {
     var TABLE_ID = 'my-table';
+
+    it('should throw if a name is not provided', function() {
+      assert.throws(function() {
+        bigtable.createTable();
+      }, /A name is required to create a table\./);
+    });
 
     it('should provide the proper request options', function(done) {
       bigtable.request = function(protoOpts, reqOpts) {
