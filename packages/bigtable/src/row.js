@@ -158,25 +158,62 @@ util.inherits(Row, common.GrpcServiceObject);
  * // }
  */
 Row.formatChunks_ = function(chunks) {
-  var families = [];
-  var chunkList = [];
+  // var cells = [];
+  // var goodChunks = [];
 
-  chunks.forEach(function(chunk) {
-    if (chunk.resetRow) {
-      chunkList = [];
-    }
+  // chunks.forEach(function(chunk) {
+  //   if (is.nil(chunk.row_status)) {
+  //     goodChunks.push(chunk);
+  //   }
 
-    if (chunk.rowContents) {
-      chunkList.push(chunk.rowContents);
-    }
+  //   if (chunk.commitRow) {
+  //     cells = cells.concat(goodChunks);
+  //   }
 
-    if (chunk.commitRow) {
-      families = families.concat(chunkList);
-      chunkList = [];
-    }
-  });
+  //   if (chunk.commitRow || chunk.resetRow) {
+  //     goodChunks = [];
+  //   }
+  // });
 
-  return Row.formatFamilies_(families);
+  // var rows = [];
+  // var rowKey;
+  // var familyName;
+  // var qualifierName;
+
+  // var data = cells.reduce(function(data, cell) {
+  //   if (cell.rowKey) {
+  //     rowKey = Mutation.convertFromBytes(cell.rowKey);
+  //     console.log(rowKey);
+  //   }
+
+  //   if (cell.familyName) {
+  //     familyName = cell.familyName.value;
+  //   }
+
+  //   var family = data[familyName] = data[familyName] || {};
+
+  //   if (cell.qualifier) {
+  //     qualifierName = Mutation.convertFromBytes(cell.qualifier.value);
+  //   }
+
+  //   var qualifier = family[qualifierName] = family[qualifierName] || [];
+
+  //   if (cell.value) {
+  //     qualifier.push({
+  //       value: Mutation.convertFromBytes(cell.value),
+  //       labels: cell.labels,
+  //       timestamp: cell.timestampMicros,
+  //       size: cell.valueSize
+  //     });
+  //   }
+
+  //   return data;
+  // }, {});
+
+  // return {
+  //   key: rowKey,
+  //   cells: data
+  // };
 };
 
 /**
@@ -355,7 +392,7 @@ Row.prototype.createRules = function(rules, callback) {
   });
 
   var grpcOpts = {
-    service: 'BigtableService',
+    service: 'Bigtable',
     method: 'readModifyWriteRow'
   };
 
@@ -421,7 +458,7 @@ Row.prototype.createRules = function(rules, callback) {
  */
 Row.prototype.filter = function(filter, onMatch, onNoMatch, callback) {
   var grpcOpts = {
-    service: 'BigtableService',
+    service: 'Bigtable',
     method: 'checkAndMutateRow'
   };
 
@@ -582,7 +619,7 @@ Row.prototype.get = function(columns, callback) {
   }
 
   var reqOpts = {
-    key: this.id,
+    keys: [this.id],
     filter: filter
   };
 
@@ -674,16 +711,16 @@ Row.prototype.increment = function(column, value, callback) {
     increment: value
   };
 
-  this.createRules(reqOpts, function(err, apiResponse) {
+  this.createRules(reqOpts, function(err, resp) {
     if (err) {
-      callback(err, null, apiResponse);
+      callback(err, null, resp);
       return;
     }
 
-    var data = Row.formatFamilies_(apiResponse.families);
+    var data = Row.formatFamilies_(resp.row.families);
     var value = dotProp.get(data, column.replace(':', '.'))[0].value;
 
-    callback(null, value, apiResponse);
+    callback(null, value, resp);
   });
 };
 

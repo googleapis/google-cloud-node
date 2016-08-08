@@ -153,8 +153,8 @@ describe('Bigtable', function() {
       assert.strictEqual(calledWith.apiVersion, 'v1');
 
       assert.deepEqual(calledWith.protoServices, {
-        BigtableService: googleProtoFiles.bigtable.v1,
-        BigtableTableService: {
+        Bigtable: googleProtoFiles.bigtable.v1,
+        BigtableTableAdmin: {
           path: googleProtoFiles.bigtable.admin,
           service: 'bigtable.admin.table'
         }
@@ -196,7 +196,7 @@ describe('Bigtable', function() {
     it('should provide the proper request options', function(done) {
       bigtable.request = function(protoOpts, reqOpts) {
         assert.deepEqual(protoOpts, {
-          service: 'BigtableTableService',
+          service: 'BigtableTableAdmin',
           method: 'createTable'
         });
 
@@ -353,7 +353,7 @@ describe('Bigtable', function() {
     it('should provide the proper request options', function(done) {
       bigtable.request = function(protoOpts, reqOpts) {
         assert.deepEqual(protoOpts, {
-          service: 'BigtableTableService',
+          service: 'BigtableTableAdmin',
           method: 'listTables'
         });
         assert.strictEqual(reqOpts.name, CLUSTER_NAME);

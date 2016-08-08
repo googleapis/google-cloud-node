@@ -26,17 +26,10 @@ var format = require('string-format-obj');
 var googleProtoFiles = require('google-proto-files');
 var is = require('is');
 var util = require('util');
+var arrify = require('arrify');
 
-/**
- * @type {module:bigtable/family}
- * @private
- */
+var Instance = require('./instance.js');
 var Family = require('./family.js');
-
-/**
- * @type {module:bigtable/table}
- * @private
- */
 var Table = require('./table.js');
 
 var PKG = require('../package.json');
@@ -262,267 +255,206 @@ function Bigtable(options) {
     return new Bigtable(options);
   }
 
-  if (!options.cluster) {
-    throw new Error('A cluster must be provided to interact with Bigtable.');
-  }
-
-  if (!options.zone) {
-    throw new Error('A zone must be provided to interact with Bigtable.');
-  }
-
-  options = extend({}, options, {
-    zone: options.zone.name || options.zone
-  });
-
-  this.clusterName = format(
-    'projects/{projectId}/zones/{zone}/clusters/{cluster}',
-    options
-  );
-
   var config = {
     baseUrl: 'bigtable.googleapis.com',
     service: 'bigtable',
-    apiVersion: 'v1',
+    apiVersion: 'v2',
     protoServices: {
-      BigtableService: googleProtoFiles.bigtable.v1,
-      BigtableTableService: {
-        path: googleProtoFiles.bigtable.admin,
-        service: 'bigtable.admin.table'
+      Bigtable: googleProtoFiles('bigtable/v2/bigtable.proto'),
+      BigtableTableAdmin: {
+        baseUrl: 'bigtableadmin.googleapis.com',
+        path: googleProtoFiles('bigtable/admin/v2/bigtable_table_admin.proto'),
+        service: 'bigtable.admin'
+      },
+      BigtableInstanceAdmin: {
+        baseUrl: 'bigtableadmin.googleapis.com',
+        path: googleProtoFiles(
+          'bigtable/admin/v2/bigtable_instance_admin.proto'
+        ),
+        service: 'bigtable.admin'
+      },
+      Operations: {
+        path: googleProtoFiles('longrunning/operations.proto'),
+        service: 'longrunning',
+        apiVersion: undefined
       }
     },
     scopes: [
       'https://www.googleapis.com/auth/bigtable.admin',
-      'https://www.googleapis.com/auth/bigtable.data'
+      'https://www.googleapis.com/auth/bigtable.data',
+      'https://www.googleapis.com/auth/cloud-platform'
     ],
     userAgent: PKG.name + '/' + PKG.version
   };
 
   common.GrpcService.call(this, config, options);
+
+  this.projectName = 'projects/' + this.projectId;
 }
 
 util.inherits(Bigtable, common.GrpcService);
 
 /**
- * Formats the full table name into a user friendly version.
- *
  * @private
- *
- * @param {string} name - The formatted Table name.
- * @return {string}
- *
- * @example
- * Bigtable.formatTableName_('projects/p/zones/z/clusters/c/tables/my-table');
- * // => 'my-table'
  */
-Bigtable.formatTableName_ = function(name) {
-  if (name.indexOf('/') === -1) {
-    return name;
+Bigtable.getStorageType_ = function(type) {
+  var storageTypes = {
+    unspecified: 0,
+    ssd: 1,
+    hdd: 2
+  };
+
+  if (is.string(type)) {
+    type = type.toLowerCase();
   }
 
-  var parts = name.split('/');
-  return parts[parts.length - 1];
+  return storageTypes[type] || storageTypes.unspecified;
 };
 
 /**
- * Create a table on your Bigtable cluster.
- *
- * @resource [Designing Your Schema]{@link https://cloud.google.com/bigtable/docs/schema-design}
- * @resource [Splitting Keys]{@link https://cloud.google.com/bigtable/docs/managing-tables#splits}
- *
- * @throws {error} If a name is not provided.
- *
- * @param {string} name - The name of the table.
- * @param {object=} options - Table creation options.
- * @param {object|string[]} options.families - Column families to be created
- *     within the table.
- * @param {string} options.operation - Operation used for table that has already
- *    been queued to be created.
- * @param {string[]} options.splits - Initial
- *    [split keys](https://cloud.google.com/bigtable/docs/managing-tables#splits).
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request.
- * @param {module:bigtable/table} callback.table - The newly created table.
- * @param {object} callback.apiResponse - The full API response.
+ * @param {string} name
+ * @param {object} options
+ * @param {string} options.displayName
+ * @param {object[]} options.clusters
+ * @param {function} callback
+ * @param {?error} callback.err
+ * @param {module:bigtable/instance} callback.instance
+ * @param {module:common/operation} callback.operation
+ * @param {object} callback.apiResponse
  *
  * @example
- * var callback = function(err, table, apiResponse) {
- *   // `table` is a Table object.
+ * var callback = function(err, instance, operation, apiResponse) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ *
+ *   operation.on('complete', function() {
+ *     // The instance has successfully been created.
+ *   });
  * };
  *
- * bigtable.createTable('prezzy', callback);
- *
- * //-
- * // Optionally specify column families to be created within the table.
- * //-
  * var options = {
- *   families: ['follows']
- * };
- *
- * bigtable.createTable('prezzy', options, callback);
- *
- * //-
- * // You can also specify garbage collection rules for your column families.
- * // See {module:bigtable/table#createFamily} for more information about
- * // column families and garbage collection rules.
- * //-
- * var options = {
- *   families: [
+ *   displayName: 'my-sweet-instance',
+ *   clusters: [
  *     {
- *       name: 'follows',
- *       rule:  {
- *         age: {
- *           seconds: 0,
- *           nanos: 5000
- *         },
- *         versions: 3,
- *         union: true
- *       }
+ *       name: 'my-sweet-cluster',
+ *       nodes: 10,
+ *       location: 'us-central1-b',
+ *       storage: 'ssd'
  *     }
  *   ]
  * };
  *
- * bigtable.createTable('prezzy', options, callback);
- *
- * //-
- * // Pre-split the table based on the row key to spread the load across
- * // multiple Cloud Bigtable nodes.
- * //-
- * var options = {
- *   splits: ['10', '20']
- * };
- *
- * bigtable.createTable('prezzy', options, callback);
+ * bigtable.createInstance('my-instance', options, callback);
  */
-Bigtable.prototype.createTable = function(name, options, callback) {
+Bigtable.prototype.createInstance = function(name, options, callback) {
   var self = this;
-
-  options = options || {};
 
   if (is.function(options)) {
     callback = options;
     options = {};
   }
 
-  if (!name) {
-    throw new Error('A name is required to create a table.');
-  }
-
   var protoOpts = {
-    service: 'BigtableTableService',
-    method: 'createTable'
+    baseUrl: this.adminBaseUrl_,
+    service: 'BigtableInstanceAdmin',
+    method: 'createInstance'
   };
 
   var reqOpts = {
-    name: this.clusterName,
-    tableId: name,
-    table: {
-      // The granularity at which timestamps are stored in the table.
-      // Currently only milliseconds is supported, so it's not configurable.
-      granularity: 0
+    parent: this.projectName,
+    instanceId: name,
+    instance: {
+      displayName: options.displayName || name
     }
   };
 
-  if (options.operation) {
-    reqOpts.table.currentOperation = options.operation;
-  }
+  reqOpts.clusters = arrify(options.clusters)
+    .reduce(function(clusters, cluster) {
+      clusters[cluster.name] = {
+        location: reqOpts.parent + '/locations/' + cluster.location,
+        serveNodes: cluster.nodes,
+        defaultStorageType: Bigtable.getStorageType_(cluster.storage)
+      };
 
-  if (options.splits) {
-    reqOpts.initialSplitKeys = options.splits;
-  }
-
-  if (options.families) {
-    var columnFamilies = options.families.reduce(function(families, family) {
-      if (is.string(family)) {
-        family = {
-          name: family
-        };
-      }
-
-      var columnFamily = families[family.name] = {};
-
-      if (is.string(family.rule)) {
-        columnFamily.gcExpression = family.rule;
-      } else if (is.object(family.rule)) {
-        columnFamily.gcRule = Family.formatRule_(family.rule);
-      }
-
-      return families;
+      return clusters;
     }, {});
 
-    reqOpts.table.columnFamilies = columnFamilies;
+  this.request(protoOpts, reqOpts, function(err, resp) {
+    if (err) {
+      callback(err, null, null, resp);
+      return;
+    }
+
+    var instance = self.instance(name);
+    // operation responses have a field called `metadata`, so if we assign the
+    // the response as `metadata` the user has to do this to retrieve metadata:
+    // operation.metadata.metadata.somerandomkey
+    var operation = {};
+    // var operation = self.operation(resp.name, resp);
+    callback(null, instance, operation, resp);
+  });
+};
+
+/**
+ * @TODO streamify
+ *
+ * @param {object} query
+ * @param {?} query.pageToken
+ * @param {function} callback
+ * @param {?error} callback.error
+ * @param {module:bigtable/instance[]} callback.instances
+ * @param {object} callback.nextQuery
+ * @param {object} callback.apiResponse
+ */
+Bigtable.prototype.getInstances = function(query, callback) {
+  var self = this;
+
+  if (is.function(query)) {
+    callback = query;
+    query = {};
+  }
+
+  var protoOpts = {
+    service: 'BigtableInstanceAdmin',
+    method: 'listInstances'
+  };
+
+  var reqOpts = {
+    parent: this.projectName
+  };
+
+  if (query.pageToken) {
+    reqOpts.pageToken = query.pageToken;
   }
 
   this.request(protoOpts, reqOpts, function(err, resp) {
     if (err) {
-      callback(err, null, resp);
+      callback(err, null, null, resp);
       return;
     }
 
-    var table = self.table(resp.name);
-    table.metadata = resp;
-
-    callback(null, table, resp);
-  });
-};
-
-/**
- * Get Table objects for all the tables in your Bigtable cluster.
- *
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request.
- * @param {module:bigtable/table[]} callback.tables - List of all Tables.
- * @param {object} callback.apiResponse - The full API response.
- *
- * @example
- * bigtable.getTables(function(err, tables) {
- *   if (!err) {
- *     // `tables` is an array of Table objects.
- *   }
- * });
- */
-Bigtable.prototype.getTables = function(callback) {
-  var self = this;
-
-  var protoOpts = {
-    service: 'BigtableTableService',
-    method: 'listTables'
-  };
-
-  var reqOpts = {
-    name: this.clusterName
-  };
-
-  this.request(protoOpts, reqOpts, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
-
-    var tables = resp.tables.map(function(metadata) {
-      var name = Bigtable.formatTableName_(metadata.name);
-      var table = self.table(name);
-
-      table.metadata = metadata;
-      return table;
+    var instances = resp.instances.map(function(instanceData) {
+      var instance = self.instance(instanceData.name);
+      instance.metadata = instanceData;
+      return instance;
     });
 
-    callback(null, tables, resp);
+    var nextQuery = null;
+    if (resp.nextPageToken) {
+      nextQuery = extend({}, query, { pageToken: resp.nextPageToken });
+    }
+
+    callback(null, instances, nextQuery, resp);
   });
 };
 
 /**
- * Get a reference to a Bigtable table.
- *
- * @param {string} name - The name of the table.
- * @return {module:bigtable/table}
- *
- * @example
- * var table = bigtable.table('presidents');
+ * @param {string} name
+ * @return {module:bigtable/instance}
  */
-Bigtable.prototype.table = function(name) {
-  return new Table(this, name);
+Bigtable.prototype.instance = function(name) {
+  return new Instance(this, name);
 };
-
-Bigtable.Table = Table;
 
 module.exports = Bigtable;

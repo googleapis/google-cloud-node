@@ -29,6 +29,7 @@ var nodeutil = require('util');
 var path = require('path');
 var retryRequest = require('retry-request');
 var through = require('through2');
+var duplexify = require('duplexify');
 
 /**
  * @type {module:common/service}
@@ -352,6 +353,64 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
       stream.destroy(grpcError || err);
     })
     .pipe(stream);
+};
+
+ /**
+  * Make an authenticated writable streaming request with gRPC.
+  *
+  * @param {object} protoOpts - The proto options.
+  * @param {string} protoOpts.service - The service.
+  * @param {string} protoOpts.method - The method name.
+  * @param {number=} protoOpts.timeout - After how many milliseconds should the
+  *     request cancel.
+  * @param {object} reqOpts - The request options.
+  */
+GrpcService.prototype.requestWritableStream = function(protoOpts, reqOpts) {
+  var stream = protoOpts.stream = protoOpts.stream || duplexify.obj();
+
+  if (global.GCLOUD_SANDBOX_ENV) {
+    return stream;
+  }
+
+  var self = this;
+
+  if (!this.grpcCredentials) {
+    // We must establish an authClient to give to grpc.
+    this.getGrpcCredentials_(function(err, credentials) {
+      if (err) {
+        stream.destroy(err);
+        return;
+      }
+
+      self.grpcCredentials = credentials;
+      self.requestWritableStream(protoOpts, reqOpts);
+    });
+
+    return stream;
+  }
+
+  var service = this.getService_(protoOpts);
+  var grpcOpts = {};
+
+  if (is.number(protoOpts.timeout)) {
+    grpcOpts.deadline = GrpcService.createDeadline_(protoOpts.timeout);
+  }
+
+  var grpcStream = service[protoOpts.method](reqOpts, grpcOpts);
+  stream.setReadable(grpcStream);
+  stream.setWritable(grpcStream);
+
+  grpcStream
+    .on('status', function(status) {
+      var grcpStatus = GrpcService.decorateStatus_(status);
+      stream.emit('response', grcpStatus || status);
+    })
+    .on('error', function(err) {
+      var grpcError = GrpcService.decorateError_(err);
+      stream.destroy(grpcError || err);
+    });
+
+  return stream;
 };
 
 /**

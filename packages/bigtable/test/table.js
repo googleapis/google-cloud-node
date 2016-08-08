@@ -135,7 +135,7 @@ describe('Bigtable/Table', function() {
         create: true,
         delete: {
           protoOpts: {
-            service: 'BigtableTableService',
+            service: 'BigtableTableAdmin',
             method: 'deleteTable'
           },
           reqOpts: {
@@ -146,7 +146,7 @@ describe('Bigtable/Table', function() {
         get: true,
         getMetadata: {
           protoOpts: {
-            service: 'BigtableTableService',
+            service: 'BigtableTableAdmin',
             method: 'getTable'
           },
           reqOpts: {
@@ -226,7 +226,7 @@ describe('Bigtable/Table', function() {
     it('should provide the proper request options', function(done) {
       table.request = function(grpcOpts, reqOpts) {
         assert.deepEqual(grpcOpts, {
-          service: 'BigtableTableService',
+          service: 'BigtableTableAdmin',
           method: 'createColumnFamily'
         });
 
@@ -318,7 +318,7 @@ describe('Bigtable/Table', function() {
     it('should provide the proper request options', function(done) {
       table.request = function(grpcOpts, reqOpts, callback) {
         assert.deepEqual(grpcOpts, {
-          service: 'BigtableTableService',
+          service: 'BigtableTableAdmin',
           method: 'bulkDeleteRows'
         });
 
@@ -447,7 +447,7 @@ describe('Bigtable/Table', function() {
       it('should provide the proper request options', function(done) {
         table.requestStream = function(grpcOpts, reqOpts) {
           assert.deepEqual(grpcOpts, {
-            service: 'BigtableService',
+            service: 'Bigtable',
             method: 'readRows'
           });
 
@@ -800,7 +800,7 @@ describe('Bigtable/Table', function() {
 
       table.request = function(grpcOpts, reqOpts, callback) {
         assert.deepEqual(grpcOpts, {
-          service: 'BigtableService',
+          service: 'Bigtable',
           method: 'mutateRows'
         });
 
@@ -839,7 +839,7 @@ describe('Bigtable/Table', function() {
     it('should provide the proper request options', function(done) {
       table.requestStream = function(grpcOpts, reqOpts) {
         assert.deepEqual(grpcOpts, {
-          service: 'BigtableService',
+          service: 'Bigtable',
           method: 'sampleRowKeys'
         });
 

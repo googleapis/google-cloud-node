@@ -65,8 +65,8 @@ var Row = require('./row.js');
  * @example
  * var table = bigtable.table('prezzy');
  */
-function Table(bigtable, name) {
-  var id = Table.formatName_(bigtable.clusterName, name);
+function Table(instance, name) {
+  var id = Table.formatName_(instance.instanceName, name);
 
   var methods = {
 
@@ -97,7 +97,7 @@ function Table(bigtable, name) {
      */
     delete: {
       protoOpts: {
-        service: 'BigtableTableService',
+        service: 'BigtableTableAdmin',
         method: 'deleteTable'
       },
       reqOpts: {
@@ -135,37 +135,15 @@ function Table(bigtable, name) {
      *   // The `table` data has been populated.
      * });
      */
-    get: true,
-
-    /**
-     * Get the table's metadata.
-     *
-     * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {object} callback.metadata - The table's metadata.
-     * @param {object} callback.apiResponse - The full API response.
-     *
-     * @example
-     * table.getMetadata(function(err, metadata, apiResponse) {});
-     */
-    getMetadata: {
-      protoOpts: {
-        service: 'BigtableTableService',
-        method: 'getTable'
-      },
-      reqOpts: {
-        name: id
-      }
-    }
+    get: true
   };
 
   var config = {
-    parent: bigtable,
+    parent: instance,
     id: id,
     methods: methods,
     createMethod: function(_, options, callback) {
-      bigtable.createTable(name, options, callback);
+      instance.createTable(name, options, callback);
     }
   };
 
@@ -175,26 +153,36 @@ function Table(bigtable, name) {
 util.inherits(Table, common.GrpcServiceObject);
 
 /**
+ * @private
+ */
+Table.VIEWS = {
+  unspecified: 0,
+  name: 1,
+  schema: 2,
+  full: 4
+};
+
+/**
  * Formats the table name to include the Bigtable cluster.
  *
  * @private
  *
- * @param {string} clusterName - The formatted cluster name.
+ * @param {string} instanceName - The formatted instance name.
  * @param {string} name - The table name.
  *
  * @example
  * Table.formatName_(
- *   'projects/my-project/zones/my-zone/clusters/my-cluster',
+ *   'projects/my-project/zones/my-zone/instances/my-instance',
  *   'my-table'
  * );
- * // 'projects/my-project/zones/my-zone/clusters/my-cluster/tables/my-table'
+ * // 'projects/my-project/zones/my-zone/instances/my-instance/tables/my-table'
  */
-Table.formatName_ = function(clusterName, name) {
+Table.formatName_ = function(instanceName, name) {
   if (name.indexOf('/') > -1) {
     return name;
   }
 
-  return clusterName + '/tables/' + name;
+  return instanceName + '/tables/' + name;
 };
 
 /**
@@ -244,7 +232,7 @@ Table.formatRowRange_ = function(range) {
  * @throws {error} If a name is not provided.
  *
  * @param {string} name - The name of column family.
- * @param {string|object=} rule - Garbage collection rule.
+ * @param {object=} rule - Garbage collection rule.
  * @param {object=} rule.age - Delete cells in a column older than the given
  *     age. Values must be at least 1 millisecond.
  * @param {number} rule.versions - Maximum number of versions to delete cells
@@ -271,13 +259,6 @@ Table.formatRowRange_ = function(range) {
  * };
  *
  * table.createFamily('follows', rule, callback);
- *
- * //-
- * // Alternatively you can send a garbage collection expression.
- * //-
- * var expression = 'version() > 3 || (age() > 3d && version() > 1)';
- *
- * table.createFamily('follows', expression, callback);
  */
 Table.prototype.createFamily = function(name, rule, callback) {
   var self = this;
@@ -292,24 +273,23 @@ Table.prototype.createFamily = function(name, rule, callback) {
   }
 
   var grpcOpts = {
-    service: 'BigtableTableService',
-    method: 'createColumnFamily'
+    service: 'BigtableTableAdmin',
+    method: 'modifyColumnFamilies'
   };
+
+  var mod = {
+    id: name,
+    create: {}
+  };
+
+  if (rule) {
+    mod.create.gcRule = Family.formatRule_(rule);
+  }
 
   var reqOpts = {
     name: this.id,
-    columnFamilyId: name
+    modifications: [mod]
   };
-
-  if (is.string(rule)) {
-    reqOpts.columnFamily = {
-      gcExpression: rule
-    };
-  } else if (is.object(rule)) {
-    reqOpts.columnFamily = {
-      gcRule: Family.formatRule_(rule)
-    };
-  }
 
   this.request(grpcOpts, reqOpts, function(err, resp) {
     if (err) {
@@ -360,7 +340,7 @@ Table.prototype.deleteRows = function(options, callback) {
   }
 
   var grpcOpts = {
-    service: 'BigtableTableService',
+    service: 'BigtableTableAdmin',
     method: 'bulkDeleteRows'
   };
 
@@ -429,10 +409,52 @@ Table.prototype.getFamilies = function(callback) {
 };
 
 /**
+ * Get the table's metadata.
+ *
+ * @param {object=} options - Table request options.
+ * @param {string} options.view - The view to be applied to the table fields.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {object} callback.metadata - The table's metadata.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * table.getMetadata(function(err, metadata, apiResponse) {});
+ */
+Table.prototype.getMetadata = function(options, callback) {
+  var self = this;
+
+  if (is.function(options)) {
+    callback = options;
+    options = {};
+  }
+
+  var protoOpts = {
+    service: 'BigtableTableAdmin',
+    method: 'getTable'
+  };
+
+  var reqOpts = {
+    name: this.id,
+    view: Table.VIEWS[options.view || 'unspecified']
+  };
+
+  this.request(protoOpts, reqOpts, function(err, resp) {
+    if (err) {
+      callback(err, null, resp);
+      return;
+    }
+
+    self.metadata = resp;
+    callback(null, self.metadata, resp);
+  });
+};
+
+/**
  * Get Row objects for the rows currently in your table.
  *
  * @param {options=} options - Configuration object.
- * @param {string} options.key - An individual row key.
  * @param {string[]} options.keys - A list of row keys.
  * @param {string} options.start - Start value for key range.
  * @param {string} options.end - End value for key range.
@@ -459,13 +481,6 @@ Table.prototype.getFamilies = function(callback) {
  * };
  *
  * table.getRows(callback);
- *
- * //-
- * // Specify a single row to be returned.
- * //-
- * table.getRows({
- *   key: 'alincoln'
- * }, callback);
  *
  * //-
  * // Specify arbitrary keys for a non-contiguous set of rows.
@@ -557,9 +572,10 @@ Table.prototype.getRows = function(options, callback) {
   }
 
   options = options || {};
+  options.ranges = options.ranges || [];
 
   var grpcOpts = {
-    service: 'BigtableService',
+    service: 'Bigtable',
     method: 'readRows'
   };
 
@@ -568,28 +584,27 @@ Table.prototype.getRows = function(options, callback) {
     objectMode: true
   };
 
-  if (options.key) {
-    reqOpts.rowKey = Mutation.convertToBytes(options.key);
-  } else if (options.start || options.end) {
-    reqOpts.rowRange = Table.formatRowRange_(options);
-  } else if (options.keys || options.ranges) {
-    reqOpts.rowSet = {};
+  if (options.start || options.end) {
+    options.ranges.push({
+      start: options.start,
+      end: options.end
+    });
+  }
+
+  if (options.keys || options.ranges.length) {
+    reqOpts.rows = {};
 
     if (options.keys) {
-      reqOpts.rowSet.rowKeys = options.keys.map(Mutation.convertToBytes);
+      reqOpts.rows.rowKeys = options.keys.map(Mutation.convertToBytes);
     }
 
-    if (options.ranges) {
-      reqOpts.rowSet.rowRanges = options.ranges.map(Table.formatRowRange_);
+    if (options.ranges.length) {
+      reqOpts.rows.rowRanges = options.ranges.map(Table.formatRowRange_);
     }
   }
 
   if (options.filter) {
     reqOpts.filter = Filter.parse(options.filter);
-  }
-
-  if (options.interleave) {
-    reqOpts.allowRowInterleaving = options.interleave;
   }
 
   if (options.limit) {
@@ -599,9 +614,10 @@ Table.prototype.getRows = function(options, callback) {
   var stream = pumpify.obj([
     this.requestStream(grpcOpts, reqOpts),
     through.obj(function(rowData, enc, next) {
-      var row = self.row(Mutation.convertFromBytes(rowData.rowKey));
+      var data = Row.formatChunks_(rowData.chunks);
+      var row = self.row(data.key);
 
-      row.data = Row.formatChunks_(rowData.chunks);
+      row.data = data.cells;
       next(null, row);
     })
   ]);
@@ -757,16 +773,39 @@ Table.prototype.mutate = function(entries, callback) {
   entries = flatten(arrify(entries)).map(Mutation.parse);
 
   var grpcOpts = {
-    service: 'BigtableService',
+    service: 'Bigtable',
     method: 'mutateRows'
   };
 
   var reqOpts = {
+    objectMode: true,
     tableName: this.id,
     entries: entries
   };
 
-  this.request(grpcOpts, reqOpts, callback);
+  var stream = pumpify.obj([
+    this.requestStream(grpcOpts, reqOpts),
+    through.obj(function(data, enc, next) {
+      var entries = data.entries.map(function(entry) {
+        return {
+          index: entry.index,
+          status: common.GrpcService.decorateStatus_(entry.status)
+        };
+      });
+
+      next(null, entries);
+    })
+  ]);
+
+  if (!is.function(callback)) {
+    return stream;
+  }
+
+  stream
+    .on('error', callback)
+    .pipe(concat(function(entries) {
+      callback(null, flatten(entries));
+    }));
 };
 
 /**
@@ -828,7 +867,7 @@ Table.prototype.row = function(key) {
  */
 Table.prototype.sampleRowKeys = function(callback) {
   var grpcOpts = {
-    service: 'BigtableService',
+    service: 'Bigtable',
     method: 'sampleRowKeys'
   };
 

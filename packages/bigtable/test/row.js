@@ -267,7 +267,7 @@ describe('Bigtable/Row', function() {
     it('should read/modify/write rules', function(done) {
       row.request = function(grpcOpts, reqOpts, callback) {
         assert.deepEqual(grpcOpts, {
-          service: 'BigtableService',
+          service: 'Bigtable',
           method: 'readModifyWriteRow'
         });
 
@@ -345,7 +345,7 @@ describe('Bigtable/Row', function() {
 
       row.request = function(grpcOpts, reqOpts) {
         assert.deepEqual(grpcOpts, {
-          service: 'BigtableService',
+          service: 'Bigtable',
           method: 'checkAndMutateRow'
         });
 

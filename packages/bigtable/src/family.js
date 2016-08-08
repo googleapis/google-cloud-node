@@ -45,6 +45,7 @@ var FamilyError = createErrorClass('FamilyError', function(name) {
  */
 function Family(table, name) {
   var id = Family.formatName_(table.id, name);
+  this.familyName = name;
 
   var methods = {
 
@@ -59,27 +60,6 @@ function Family(table, name) {
      * });
      */
     create: true,
-
-    /**
-     * Delete the column family.
-     *
-     * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {object} callback.apiResponse - The full API response.
-     *
-     * @example
-     * family.delete(function(err, apiResponse) {});
-     */
-    delete: {
-      protoOpts: {
-        service: 'BigtableTableService',
-        method: 'deleteColumnFamily'
-      },
-      reqOpts: {
-        name: id
-      }
-    },
 
     /**
      * Check if the column family exists.
@@ -214,6 +194,34 @@ Family.formatRule_ = function(ruleObj) {
 };
 
 /**
+ * Delete the column family.
+ *
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * family.delete(function(err, apiResponse) {});
+ */
+Family.prototype.delete = function(callback) {
+  var protoOpts = {
+    service: 'BigtableTableAdmin',
+    method: 'modifyColumnFamilies'
+  };
+
+  var reqOpts = {
+    name: this.parent.id,
+    modifications: [{
+      id: this.familyName,
+      drop: true
+    }]
+  };
+
+  this.request(protoOpts, reqOpts, callback);
+};
+
+/**
  * Get the column family's metadata.
  *
  * @param {function} callback - The callback function.
@@ -256,7 +264,7 @@ Family.prototype.getMetadata = function(callback) {
  * @resource [Garbage Collection Proto Docs]{@link https://github.com/googleapis/googleapis/blob/3592a7339da5a31a3565870989beb86e9235476e/google/bigtable/admin/table/v1/bigtable_table_data.proto#L59}
  *
  * @param {object} metadata - Metadata object.
- * @param {object|string=} metadata.rule - Garbage collection rule.
+ * @param {object=} metadata.rule - Garbage collection rule.
  * @param {string=} metadata.name - The updated column family name.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
@@ -265,33 +273,40 @@ Family.prototype.getMetadata = function(callback) {
  *
  * @example
  * family.setMetadata({
- *   name: 'updated-name',
- *   rule: 'version() > 3 || (age() > 3d && version() > 1)'
+ *   name: 'updated-name'
  * }, function(err, apiResponse) {});
  */
 Family.prototype.setMetadata = function(metadata, callback) {
+  var self = this;
+
   var grpcOpts = {
-    service: 'BigtableTableService',
-    method: 'updateColumnFamily'
+    service: 'BigtableTableAdmin',
+    method: 'modifyColumnFamilies'
   };
 
-  var reqOpts = {
-    name: this.id
+  var mod = {
+    id: this.familyName,
+    update: {}
   };
 
   if (metadata.rule) {
-    if (is.string(metadata.rule)) {
-      reqOpts.gcExpression = metadata.rule;
-    } else if (is.object(metadata.rule)) {
-      reqOpts.gcRule = Family.formatRule_(metadata.rule);
+    mod.update.gcRule = Family.formatRule_(metadata.rule);
+  }
+
+  var reqOpts = {
+    name: this.parent.id,
+    modifications: [mod]
+  };
+
+  this.request(grpcOpts, reqOpts, function(err, resp) {
+    if (err) {
+      callback(err, null, resp);
+      return;
     }
-  }
 
-  if (metadata.name) {
-    reqOpts.name = Family.formatName_(this.parent.id, metadata.name);
-  }
-
-  this.request(grpcOpts, reqOpts, callback);
+    self.metadata = resp.columnFamilies[self.familyName];
+    callback(null, self.metadata, resp);
+  });
 };
 
 module.exports = Family;

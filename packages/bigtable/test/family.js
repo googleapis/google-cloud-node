@@ -74,7 +74,7 @@ describe('Bigtable/Family', function() {
         get: true,
         delete: {
           protoOpts: {
-            service: 'BigtableTableService',
+            service: 'BigtableTableAdmin',
             method: 'deleteColumnFamily'
           },
           reqOpts: {
@@ -231,7 +231,7 @@ describe('Bigtable/Family', function() {
     it('should provide the proper request options', function(done) {
       family.request = function(protoOpts, reqOpts, callback) {
         assert.deepEqual(protoOpts, {
-          service: 'BigtableTableService',
+          service: 'BigtableTableAdmin',
           method: 'updateColumnFamily'
         });
 
