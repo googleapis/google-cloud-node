@@ -1,0 +1,303 @@
+/**
+ * Copyright 2016 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+'use strict';
+
+var assert = require('assert');
+var extend = require('extend');
+var googleProtoFiles = require('google-proto-files');
+var proxyquire = require('proxyquire');
+var util = require('@google-cloud/common').util;
+
+var PKG = require('../package.json');
+
+var fakeUtil = extend(true, {}, util);
+
+function FakeDocument() {
+  this.calledWith_ = arguments;
+}
+
+function FakeGrpcService() {
+  this.calledWith_ = arguments;
+}
+
+describe('Language', function() {
+  var Language;
+  var language;
+
+  var OPTIONS = {};
+
+  before(function() {
+    Language = proxyquire('../src/index.js', {
+      '@google-cloud/common': {
+        util: fakeUtil,
+        GrpcService: FakeGrpcService
+      },
+      './document.js': FakeDocument
+    });
+  });
+
+  beforeEach(function() {
+    language = new Language(OPTIONS);
+  });
+
+  describe('instantiation', function() {
+    it('should normalize the arguments', function() {
+      var options = {
+        projectId: 'project-id',
+        credentials: 'credentials',
+        email: 'email',
+        keyFilename: 'keyFile'
+      };
+
+      var normalizeArguments = fakeUtil.normalizeArguments;
+      var normalizeArgumentsCalled = false;
+      var fakeContext = {};
+
+      fakeUtil.normalizeArguments = function(context, options_) {
+        normalizeArgumentsCalled = true;
+        assert.strictEqual(context, fakeContext);
+        assert.strictEqual(options, options_);
+        return options_;
+      };
+
+      Language.call(fakeContext, options);
+      assert(normalizeArgumentsCalled);
+
+      fakeUtil.normalizeArguments = normalizeArguments;
+    });
+
+    it('should inherit from GrpcService', function() {
+      assert(language instanceof FakeGrpcService);
+
+      var calledWith = language.calledWith_[0];
+
+      assert.deepEqual(calledWith, {
+        baseUrl: 'language.googleapis.com',
+        service: 'language',
+        apiVersion: 'v1beta1',
+        protoServices: {
+          LanguageService: {
+            path: googleProtoFiles.language.v1beta1,
+            service: 'cloud.language'
+          }
+        },
+        scopes: [
+          'https://www.googleapis.com/auth/cloud-platform'
+        ],
+        userAgent: PKG.name + '/' + PKG.version
+      });
+    });
+  });
+
+  describe('annotate', function() {
+    var CONTENT = '...';
+    var OPTIONS = {
+      property: 'value'
+    };
+
+    var EXPECTED_OPTIONS = {
+      withCustomOptions: extend({}, OPTIONS, {
+        content: CONTENT
+      }),
+
+      withoutCustomOptions: extend({}, {
+        content: CONTENT
+      })
+    };
+
+    it('should call annotate on a Document', function(done) {
+      language.document = function(options) {
+        assert.deepEqual(options, EXPECTED_OPTIONS.withCustomOptions);
+
+        return {
+          annotate: function(options, callback) {
+            assert.deepEqual(options, EXPECTED_OPTIONS.withCustomOptions);
+            callback(); // done()
+          }
+        };
+      };
+
+      language.annotate(CONTENT, OPTIONS, done);
+    });
+
+    it('should not require options', function(done) {
+      language.document = function(options) {
+        assert.deepEqual(options, EXPECTED_OPTIONS.withoutCustomOptions);
+
+        return {
+          annotate: function(options, callback) {
+            assert.deepEqual(options, EXPECTED_OPTIONS.withoutCustomOptions);
+            callback(); // done()
+          }
+        };
+      };
+
+      language.annotate(CONTENT, done);
+    });
+  });
+
+  describe('detectEntities', function() {
+    var CONTENT = '...';
+    var OPTIONS = {
+      property: 'value'
+    };
+
+    var EXPECTED_OPTIONS = {
+      withCustomOptions: extend({}, OPTIONS, {
+        content: CONTENT
+      }),
+
+      withoutCustomOptions: extend({}, {
+        content: CONTENT
+      })
+    };
+
+    it('should call detectEntities on a Document', function(done) {
+      language.document = function(options) {
+        assert.deepEqual(options, EXPECTED_OPTIONS.withCustomOptions);
+
+        return {
+          detectEntities: function(options, callback) {
+            assert.deepEqual(options, EXPECTED_OPTIONS.withCustomOptions);
+            callback(); // done()
+          }
+        };
+      };
+
+      language.detectEntities(CONTENT, OPTIONS, done);
+    });
+
+    it('should not require options', function(done) {
+      language.document = function(options) {
+        assert.deepEqual(options, EXPECTED_OPTIONS.withoutCustomOptions);
+
+        return {
+          detectEntities: function(options, callback) {
+            assert.deepEqual(options, EXPECTED_OPTIONS.withoutCustomOptions);
+            callback(); // done()
+          }
+        };
+      };
+
+      language.detectEntities(CONTENT, done);
+    });
+  });
+
+  describe('detectSentiment', function() {
+    var CONTENT = '...';
+    var OPTIONS = {
+      property: 'value'
+    };
+
+    var EXPECTED_OPTIONS = {
+      withCustomOptions: extend({}, OPTIONS, {
+        content: CONTENT
+      }),
+
+      withoutCustomOptions: extend({}, {
+        content: CONTENT
+      })
+    };
+
+    it('should call detectSentiment on a Document', function(done) {
+      language.document = function(options) {
+        assert.deepEqual(options, EXPECTED_OPTIONS.withCustomOptions);
+
+        return {
+          detectSentiment: function(options, callback) {
+            assert.deepEqual(options, EXPECTED_OPTIONS.withCustomOptions);
+            callback(); // done()
+          }
+        };
+      };
+
+      language.detectSentiment(CONTENT, OPTIONS, done);
+    });
+
+    it('should not require options', function(done) {
+      language.document = function(options) {
+        assert.deepEqual(options, EXPECTED_OPTIONS.withoutCustomOptions);
+
+        return {
+          detectSentiment: function(options, callback) {
+            assert.deepEqual(options, EXPECTED_OPTIONS.withoutCustomOptions);
+            callback(); // done()
+          }
+        };
+      };
+
+      language.detectSentiment(CONTENT, done);
+    });
+  });
+
+  describe('document', function() {
+    var CONFIG = {};
+
+    it('should create a Document', function() {
+      var document = language.document(CONFIG);
+
+      assert.strictEqual(document.calledWith_[0], language);
+      assert.strictEqual(document.calledWith_[1], CONFIG);
+    });
+  });
+
+  describe('html', function() {
+    var CONTENT = '...';
+    var OPTIONS = {
+      property: 'value'
+    };
+
+    var EXPECTED_OPTIONS = extend({}, OPTIONS, {
+      type: 'HTML',
+      content: CONTENT
+    });
+
+    it('should create a Document', function() {
+      var document = {};
+
+      language.document = function(options) {
+        assert.deepEqual(options, EXPECTED_OPTIONS);
+        return document;
+      };
+
+      assert.strictEqual(language.html(CONTENT, OPTIONS), document);
+    });
+  });
+
+  describe('text', function() {
+    var CONTENT = '...';
+    var OPTIONS = {
+      property: 'value'
+    };
+
+    var EXPECTED_OPTIONS = extend({}, OPTIONS, {
+      type: 'PLAIN_TEXT',
+      content: CONTENT
+    });
+
+    it('should create a Document', function() {
+      var document = {};
+
+      language.document = function(options) {
+        assert.deepEqual(options, EXPECTED_OPTIONS);
+        return document;
+      };
+
+      assert.strictEqual(language.text(CONTENT, OPTIONS), document);
+    });
+  });
+});
