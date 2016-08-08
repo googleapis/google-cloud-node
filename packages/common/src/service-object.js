@@ -50,7 +50,7 @@ var util = require('./util.js');
  * @param {object} config - Configuration object.
  * @param {string} config.baseUrl - The base URL to make API requests to.
  * @param {string} config.createMethod - The method which creates this object.
- * @param {string} config.id - The identifier of the object. For example, the
+ * @param {string=} config.id - The identifier of the object. For example, the
  *     name of a Storage bucket or Pub/Sub topic.
  * @param {object=} config.methods - A map of each method name that should be
  *     inherited.
@@ -308,7 +308,7 @@ ServiceObject.prototype.request = function(reqOpts, callback) {
 
   var uriComponents = [
     this.baseUrl,
-    this.id,
+    this.id || '',
     reqOpts.uri
   ];
 

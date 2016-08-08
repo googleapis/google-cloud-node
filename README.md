@@ -21,6 +21,7 @@ This client supports the following Google Cloud Platform services:
 * [Google Prediction API](#google-prediction-api)
 * [Google Translate API](#google-translate-api)
 * [Google Cloud Logging](#google-cloud-logging-beta) (Beta)
+* [Google Cloud Natural Language](#google-cloud-natural-language-beta) (Beta)
 * [Google Cloud Resource Manager](#google-cloud-resource-manager-beta) (Beta)
 * [Google Cloud Vision](#google-cloud-vision-beta) (Beta)
 
@@ -772,6 +773,90 @@ loggingClient.getEntries(function(err, entries) {
 ```
 
 
+## Google Cloud Natural Language (Beta)
+
+> **This is a Beta release of Google Cloud Natural Language.** This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
+
+- [API Documentation][gcloud-language-docs]
+- [Official Documentation][cloud-language-docs]
+
+#### Using the all-in-one module
+
+```
+$ npm install --save google-cloud
+```
+
+```js
+var gcloud = require('google-cloud');
+var language = gcloud.language;
+```
+
+#### Using the Natural Language API module
+
+```
+$ npm install --save @google-cloud/language
+```
+
+```js
+var language = require('@google-cloud/language');
+```
+
+#### Preview
+
+```js
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authorization section above).
+
+var languageClient = language({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+// Get the entities from a sentence.
+languageClient.detectEntities('Stephen of Michigan!', function(err, entities) {
+  // entities = {
+  //   people: ['Stephen'],
+  //   places: ['Michigan']
+  // }
+});
+
+// Create a document if you plan to run multiple detections.
+var document = languageClient.document('Contributions welcome!');
+
+// Analyze the sentiment of the document.
+document.detectSentiment(function(err, sentiment) {
+  // sentiment = 100 // Large numbers represent more positive sentiments.
+});
+
+// Parse the syntax of the document.
+document.annotate(function(err, annotations) {
+  // annotations = {
+  //   language: 'en',
+  //   sentiment: 100,
+  //   entities: {},
+  //   sentences: ['Contributions welcome!'],
+  //   tokens: [
+  //     {
+  //       text: 'Contributions',
+  //       partOfSpeech: 'Noun (common and proper)',
+  //       partOfSpeechTag: 'NOUN'
+  //     },
+  //     {
+  //       text: 'welcome',
+  //       partOfSpeech: 'Verb (all tenses and modes)',
+  //       partOfSpeechTag: 'VERB'
+  //     },
+  //     {
+  //       text: '!',
+  //       partOfSpeech: 'Punctuation',
+  //       partOfSpeechTag: 'PUNCT'
+  //     }
+  //   ]
+  // }
+});
+```
+
+
 ## Google Cloud Resource Manager (Beta)
 
 > **This is a Beta release of Google Cloud Resource Manager.** This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
@@ -803,8 +888,8 @@ var resource = require('@google-cloud/resource');
 #### Preview
 
 ```js
-// Authorizing on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authorization section above).
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
 
 var resourceClient = resource({
   projectId: 'grape-spaceship-123',
@@ -858,8 +943,8 @@ var vision = require('@google-cloud/vision');
 #### Preview
 
 ```js
-// Authorizing on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authorization section above).
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
 
 var visionClient = vision({
   projectId: 'grape-spaceship-123',
@@ -975,6 +1060,7 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [gcloud-compute-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/compute
 [gcloud-datastore-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/datastore
 [gcloud-dns-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/dns
+[gcloud-language-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/language
 [gcloud-logging-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/logging
 [gcloud-prediction-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/prediction
 [gcloud-pubsub-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/pubsub
@@ -1010,6 +1096,8 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [cloud-datastore-activation]: https://cloud.google.com/datastore/docs/activate
 
 [cloud-dns-docs]: https://cloud.google.com/dns/docs
+
+[cloud-language-docs]: https://cloud.google.com/natural-language/docs
 
 [cloud-logging-docs]: https://cloud.google.com/logging/docs
 

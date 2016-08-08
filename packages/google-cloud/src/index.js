@@ -128,6 +128,30 @@ var apis = {
   dns: require('@google-cloud/dns'),
 
   /**
+   * The [Google Cloud Natural Language](https://cloud.google.com/natural-language/docs)
+   * API provides natural language understanding technologies to developers,
+   * including sentiment analysis, entity recognition, and syntax analysis.
+   *
+   * <p class="notice">
+   *   **This is a Beta release of Google Cloud Natural Language.** This API is
+   *   not covered by any SLA or deprecation policy and may be subject to
+   *   backward-incompatible changes.
+   * </p>
+   *
+   * @type {module:language}
+   *
+   * @return {module:language}
+   *
+   * @example
+   * var gcloud = require('google-cloud');
+   * var language = gcloud.language({
+   *   projectId: 'grape-spaceship-123',
+   *   keyFilename: '/path/to/keyfile.json'
+   * });
+   */
+  language: require('@google-cloud/language'),
+
+  /**
    * [Google Cloud Logging](https://cloud.google.com/logging/docs) collects and
    * stores logs from applications and services on the Google Cloud Platform:
    *

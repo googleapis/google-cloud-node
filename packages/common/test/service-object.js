@@ -606,6 +606,22 @@ describe('ServiceObject', function() {
       serviceObject.request(reqOpts, done);
     });
 
+    it('should not require a service object ID', function(done) {
+      var expectedUri = [
+        serviceObject.baseUrl,
+        reqOpts.uri
+      ].join('/');
+
+      serviceObject.parent.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, expectedUri);
+        done();
+      };
+
+      delete serviceObject.id;
+
+      serviceObject.request(reqOpts, assert.ifError);
+    });
+
     it('should support absolute uris', function(done) {
       var expectedUri = 'http://www.google.com';
 
