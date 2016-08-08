@@ -287,7 +287,7 @@ describe('Document', function() {
         Document.formatTokens_ = util.noop;
       });
 
-      it('should return the language by default', function(done) {
+      it('should return language if no features are requested', function(done) {
         var apiResponse = apiResponses.default;
         document.request = createRequestWithResponse(apiResponse);
 
@@ -299,7 +299,7 @@ describe('Document', function() {
         });
       });
 
-      it('should return the syntax by default', function(done) {
+      it('should return syntax when no features are requested', function(done) {
         var apiResponse = apiResponses.default;
         document.request = createRequestWithResponse(apiResponse);
 
