@@ -26,6 +26,10 @@ This client supports the following Google Cloud Platform services:
 
 If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
 
+## :warning: These docs are for master. If you are using `gcloud` from npm...
+
+See the documentation for `0.37.0` at https://googlecloudplatform.github.io/gcloud-node/#/docs/v0.37.0/gcloud.
+
 ## Where did `gcloud-node` go?
 
 `gcloud-node` lives on under a new name, `google-cloud`. Your code will behave
