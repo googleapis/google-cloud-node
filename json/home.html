@@ -92,7 +92,7 @@
       <div hljs hlsj-language="js" ng-show="selected == 'compute engine'">
 // Authentication is automatic
 // inside Google Compute Engine.
-var gcloud = require('google-cloud')({
+var gcloud = require('gcloud')({
   projectId: 'grape-spaceship-123'
 });
 
@@ -106,7 +106,7 @@ backups.upload('db.zip', function(err, file) {
 });</div>
 
       <div hljs hljs-language="js" ng-show="selected == 'elsewhere'">
-var gcloud = require('google-cloud')({
+var gcloud = require('gcloud')({
   projectId: 'grape-spaceship-123',
   // Specify a path to a keyfile.
   keyFilename: '/path/to/keyfile.json'
