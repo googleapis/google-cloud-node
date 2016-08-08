@@ -287,7 +287,7 @@ describe('Document', function() {
         Document.formatTokens_ = util.noop;
       });
 
-      it('should return language if no features are requested', function(done) {
+      it('should always return the language', function(done) {
         var apiResponse = apiResponses.default;
         document.request = createRequestWithResponse(apiResponse);
 
