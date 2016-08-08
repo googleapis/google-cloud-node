@@ -287,7 +287,19 @@ describe('Document', function() {
         Document.formatTokens_ = util.noop;
       });
 
-      it('should return the language and syntax by default', function(done) {
+      it('should return the language by default', function(done) {
+        var apiResponse = apiResponses.default;
+        document.request = createRequestWithResponse(apiResponse);
+
+        document.annotate(function(err, annotation, apiResponse_) {
+          assert.ifError(err);
+          assert.strictEqual(annotation.language, apiResponse.language);
+          assert.deepEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
+
+      it('should return the syntax by default', function(done) {
         var apiResponse = apiResponses.default;
         document.request = createRequestWithResponse(apiResponse);
 
@@ -307,13 +319,9 @@ describe('Document', function() {
 
         document.annotate(function(err, annotation, apiResponse_) {
           assert.ifError(err);
-
-          assert.strictEqual(annotation.language, apiResponse.language);
           assert.strictEqual(annotation.sentences, formattedSentences);
           assert.strictEqual(annotation.tokens, formattedTokens);
-
           assert.deepEqual(apiResponse_, apiResponse);
-
           done();
         });
       });
