@@ -27,29 +27,10 @@ This client supports the following Google Cloud Platform services:
 
 If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
 
-## :warning: These docs are for master. If you are using `gcloud` from npm...
-
-See the documentation for `0.37.0` at https://googlecloudplatform.github.io/gcloud-node/#/docs/v0.37.0/gcloud.
-
-## Where did `gcloud-node` go?
-
-`gcloud-node` lives on under a new name, `google-cloud`. Your code will behave
-the same, simply change your dependency:
-
-```sh
-$ npm uninstall --save gcloud
-$ npm install --save google-cloud
-```
-
-```diff
-- var gcloud = require('gcloud');
-+ var gcloud = require('google-cloud');
-```
-
 ## Quick Start
 
 ```sh
-$ npm install --save google-cloud
+$ npm install --save gcloud
 ```
 
 ## Example Applications
@@ -64,7 +45,7 @@ $ npm install --save google-cloud
 
 ## Authentication
 
-With `google-cloud` it's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Google Cloud services.
+With `gcloud-node` it's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Google Cloud services.
 
 ### On Google Compute Engine
 
@@ -73,7 +54,7 @@ If you are running this client on Google Compute Engine, we handle authenticatio
 ``` js
 // Authenticating on a global basis.
 var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
-var gcloud = require('google-cloud')({
+var gcloud = require('gcloud')({
   projectId: projectId
 });
 
@@ -98,7 +79,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
 // Authenticating on a global basis.
 var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
 
-var gcloud = require('google-cloud')({
+var gcloud = require('gcloud')({
   projectId: projectId,
 
   // The path to your key file:
@@ -119,47 +100,27 @@ You can also set auth on a per-API-instance basis. The examples below show you h
 - [API Documentation][gcloud-bigquery-docs]
 - [Official Documentation][cloud-bigquery-docs]
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var bigquery = gcloud.bigquery;
-```
-
-#### Using the BigQuery API module
-
-```
-$ npm install --save @google-cloud/bigquery
-```
-
-```js
-var bigquery = require('@google-cloud/bigquery');
-```
-
 #### Preview
 
 ```js
+var gcloud = require('gcloud');
+
 // Authenticating on a per-API-basis. You don't need to do this if you auth on a
 // global basis (see Authentication section above).
-
-var bigqueryClient = bigquery({
+var bigquery = gcloud.bigquery({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
 // Access an existing dataset and table.
-var schoolsDataset = bigqueryClient.dataset('schools');
+var schoolsDataset = bigquery.dataset('schools');
 var schoolsTable = schoolsDataset.table('schoolsData');
 
 // Import data into a table.
 schoolsTable.import('/local/file.json', function(err, job) {});
 
 // Get results from a query job.
-var job = bigqueryClient.job('job-id');
+var job = bigquery.job('job-id');
 
 // Use a callback.
 job.getQueryResults(function(err, rows) {});
@@ -176,41 +137,21 @@ job.getQueryResults().on('data', function(row) {});
 
 *You may need to [create a cluster][cloud-bigtable-cluster] to use the Google Cloud Bigtable API with your project.*
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var bigtable = gcloud.bigtable;
-```
-
-#### Using the Cloud Bigtable API module
-
-```
-$ npm install --save @google-cloud/bigtable
-```
-
-```js
-var bigtable = require('@google-cloud/bigtable');
-```
-
 #### Preview
 
 ```js
+var gcloud = require('gcloud');
+
 // Authenticating on a per-API-basis. You don't need to do this if you auth on a
 // global basis (see Authentication section above).
-
-var bigtableClient = bigtable({
+var bigtable = gcloud.bigtable({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json',
   zone: 'my-zone',
   cluster: 'my-cluster'
 });
 
-var table = bigtableClient.table('prezzy');
+var table = bigtable.table('prezzy');
 
 table.getRows(function(err, rows) {});
 
@@ -248,41 +189,22 @@ row.save('follows:gwashington', 1, function(err) {
 
 *Follow the [activation instructions][cloud-datastore-activation] to use the Google Cloud Datastore API with your project.*
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var datastore = gcloud.datastore;
-```
-
-#### Using the Cloud Datastore API module
-
-```
-$ npm install --save @google-cloud/datastore
-```
-
-```js
-var datastore = require('@google-cloud/datastore');
-```
-
 #### Preview
 
 ```js
+var gcloud = require('gcloud');
+
 // Authenticating on a per-API-basis. You don't need to do this if you auth on a
 // global basis (see Authentication section above).
 
-var datastoreClient = datastore({
+var datastore = gcloud.datastore({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
-var key = datastoreClient.key(['Product', 'Computer']);
+var key = datastore.key(['Product', 'Computer']);
 
-datastoreClient.get(key, function(err, entity) {
+datastore.get(key, function(err, entity) {
   console.log(err || entity);
 });
 
@@ -293,9 +215,9 @@ var blogPostData = {
   isDraft: true
 };
 
-var blogPostKey = datastoreClient.key('BlogPost');
+var blogPostKey = datastore.key('BlogPost');
 
-datastoreClient.save({
+datastore.save({
   key: blogPostKey,
   data: blogPostData
 }, function(err) {
@@ -303,7 +225,7 @@ datastoreClient.save({
   // with it, such as an update.
   blogPostData.isDraft = false;
 
-  datastoreClient.save({
+  datastore.save({
     key: blogPostKey,
     data: blogPostData
   }, function(err) {
@@ -320,45 +242,26 @@ datastoreClient.save({
 - [API Documentation][gcloud-dns-docs]
 - [Official Documentation][cloud-dns-docs]
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var dns = gcloud.dns;
-```
-
-#### Using the Cloud DNS API module
-
-```
-$ npm install --save @google-cloud/dns
-```
-
-```js
-var dns = require('@google-cloud/dns');
-```
-
 #### Preview
 
 ```js
+var gcloud = require('gcloud');
+
 // Authenticating on a per-API-basis. You don't need to do this if you auth on a
 // global basis (see Authentication section above).
 
-var dnsClient = dns({
+var dns = gcloud.dns({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
 // Create a managed zone.
-dnsClient.createZone('my-new-zone', {
+dns.createZone('my-new-zone', {
   dnsName: 'my-domain.com.'
 }, function(err, zone) {});
 
 // Reference an existing zone.
-var zone = dnsClient.zone('my-existing-zone');
+var zone = dns.zone('my-existing-zone');
 
 // Create an NS record.
 var nsRecord = zone.record('ns', {
@@ -379,40 +282,21 @@ zone.export('/zonefile.zone', function(err) {});
 - [API Documentation][gcloud-pubsub-docs]
 - [Official Documentation][cloud-pubsub-docs]
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var pubsub = gcloud.pubsub;
-```
-
-#### Using the Cloud Pub/Sub API module
-
-```
-$ npm install --save @google-cloud/pubsub
-```
-
-```js
-var pubsub = require('@google-cloud/pubsub');
-```
-
 #### Preview
 
 ```js
+var gcloud = require('gcloud');
+
 // Authenticating on a per-API-basis. You don't need to do this if you
 // auth on a global basis (see Authentication section above).
 
-var pubsubClient = pubsub({
+var pubsub = gcloud.pubsub({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
 // Reference a topic that has been previously created.
-var topic = pubsubClient.topic('my-topic');
+var topic = pubsub.topic('my-topic');
 
 // Publish a message to the topic.
 topic.publish({
@@ -443,35 +327,16 @@ topic.subscribe('subscription-name', options, function(err, subscription) {
 - [API Documentation][gcloud-storage-docs]
 - [Official Documentation][cloud-storage-docs]
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var storage = gcloud.storage;
-```
-
-#### Using the Cloud Storage API module
-
-```
-$ npm install --save @google-cloud/storage
-```
-
-```js
-var storage = require('@google-cloud/storage');
-```
-
 #### Preview
 
 ```js
 var fs = require('fs');
+var gcloud = require('gcloud');
+
 // Authenticating on a per-API-basis. You don't need to do this if you auth on a
 // global basis (see Authentication section above).
 
-var gcs = storage({
+var gcs = gcloud.storage({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
@@ -514,34 +379,15 @@ localReadStream.pipe(remoteWriteStream);
 - [API Documentation][gcloud-compute-docs]
 - [Official Documentation][cloud-compute-docs]
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var compute = gcloud.compute;
-```
-
-#### Using the Compute Engine API module
-
-```
-$ npm install --save @google-cloud/compute
-```
-
-```js
-var compute = require('@google-cloud/compute');
-```
-
 #### Preview
 
 ```js
+var gcloud = require('gcloud');
+
 // Authenticating on a per-API-basis. You don't need to do this if you auth on a
 // global basis (see Authentication section above).
 
-var gce = compute({
+var gce = gcloud.compute({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
@@ -567,47 +413,28 @@ zone.createVM(name, { os: 'ubuntu' }, function(err, vm, operation) {
 - [API Documentation][gcloud-prediction-docs]
 - [Official Documentation][cloud-prediction-docs]
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var prediction = gcloud.prediction;
-```
-
-#### Using the Prediction API module
-
-```
-$ npm install --save @google-cloud/prediction
-```
-
-```js
-var prediction = require('@google-cloud/prediction');
-```
-
 #### Preview
 
 ```js
+var gcloud = require('gcloud');
+
 // Authenticating on a per-API-basis. You don't need to do this if you auth on a
 // global basis (see Authentication section above).
 
-var predictionClient = prediction({
+var prediction = gcloud.prediction({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
 // Get all of the trained models in your project.
-predictionClient.getModels(function(err, models) {
+prediction.getModels(function(err, models) {
   if (!err) {
     // `models` is an array of Model objects.
   }
 });
 
 // Reference an existing trained model.
-var model = predictionClient.model('my-existing-model');
+var model = prediction.model('my-existing-model');
 
 // Train a model.
 model.train('english', 'Hello from your friends at Google!', function(err) {});
@@ -636,48 +463,28 @@ model.query('Hello', function(err, results) {
 - [API Documentation][gcloud-translate-docs]
 - [Official Documentation][cloud-translate-docs]
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var translate = gcloud.translate;
-```
-
-#### Using the Translate API module
-
-```
-$ npm install --save @google-cloud/translate
-```
-
-```js
-var translate = require('@google-cloud/translate');
-```
-
 **An API key is required for Translate.** See [Identifying your application to Google][api-key-howto].
 
 #### Preview
 
 ```js
+var gcloud = require('gcloud');
+
 // Authenticating on a per-API-basis. You don't need to do this if you auth on a
 // global basis (see Authentication section above).
-
-var translateClient = translate({
+var translate = gcloud.translate({
   key: 'API Key'
 });
 
 // Translate a string of text.
-translateClient.translate('Hello', 'es', function(err, translation) {
+translate.translate('Hello', 'es', function(err, translation) {
   if (!err) {
     // translation = 'Hola'
   }
 });
 
 // Detect a language from a string of text.
-translateClient.detect('Hello', function(err, results) {
+translate.detect('Hello', function(err, results) {
   if (!err) {
     // results = {
     //   language: 'en',
@@ -688,7 +495,7 @@ translateClient.detect('Hello', function(err, results) {
 });
 
 // Get a list of supported languages.
-translateClient.getLanguages(function(err, languages) {
+translate.getLanguages(function(err, languages) {
   if (!err) {
     // languages = [
     //   'af',
@@ -708,47 +515,26 @@ translateClient.getLanguages(function(err, languages) {
 - [API Documentation][gcloud-logging-docs]
 - [Official Documentation][cloud-logging-docs]
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var logging = gcloud.logging;
-```
-
-#### Using the Cloud Logging API module
-
-```
-$ npm install --save @google-cloud/logging
-```
-
-```js
-var logging = require('@google-cloud/logging');
-```
-
-#### Preview
-
 ```js
 // Authenticating on a global-basis. You can also authenticate on a per-API-
 // basis (see Authentication section above).
 
-var loggingClient = logging({
+var gcloud = require('gcloud')({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
-// Create a sink using a Bucket as a destination.
-var gcs = storage();
+var logging = gcloud.logging();
 
-loggingClient.createSink('my-new-sink', {
+// Create a sink using a Bucket as a destination.
+var gcs = gcloud.storage();
+
+logging.createSink('my-new-sink', {
   destination: gcs.bucket('my-sink')
 }, function(err, sink) {});
 
 // Write a critical entry to a log.
-var syslog = loggingClient.log('syslog');
+var syslog = logging.log('syslog');
 
 var resource = {
   type: 'gce_instance',
@@ -765,7 +551,7 @@ var entry = syslog.entry(resource, {
 syslog.critical(entry, function(err) {});
 
 // Get all entries in your project.
-loggingClient.getEntries(function(err, entries) {
+logging.getEntries(function(err, entries) {
   if (!err) {
     // `entries` contains all of the entries from the logs in your project.
   }
@@ -780,40 +566,22 @@ loggingClient.getEntries(function(err, entries) {
 - [API Documentation][gcloud-language-docs]
 - [Official Documentation][cloud-language-docs]
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var language = gcloud.language;
-```
-
-#### Using the Natural Language API module
-
-```
-$ npm install --save @google-cloud/language
-```
-
-```js
-var language = require('@google-cloud/language');
-```
 
 #### Preview
 
 ```js
+var gcloud = require('gcloud');
+
 // Authenticating on a per-API-basis. You don't need to do this if you auth on a
 // global basis (see Authorization section above).
 
-var languageClient = language({
+var language = gcloud.language({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
 // Get the entities from a sentence.
-languageClient.detectEntities('Stephen of Michigan!', function(err, entities) {
+language.detectEntities('Stephen of Michigan!', function(err, entities) {
   // entities = {
   //   people: ['Stephen'],
   //   places: ['Michigan']
@@ -821,7 +589,7 @@ languageClient.detectEntities('Stephen of Michigan!', function(err, entities) {
 });
 
 // Create a document if you plan to run multiple detections.
-var document = languageClient.document('Contributions welcome!');
+var document = language.document('Contributions welcome!');
 
 // Analyze the sentiment of the document.
 document.detectSentiment(function(err, sentiment) {
@@ -864,47 +632,28 @@ document.annotate(function(err, annotations) {
 - [API Documentation][gcloud-resource-docs]
 - [Official Documentation][cloud-resource-docs]
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var resource = gcloud.resource;
-```
-
-#### Using the Cloud Resource Manager API module
-
-```
-$ npm install --save @google-cloud/resource
-```
-
-```js
-var resource = require('@google-cloud/resource');
-```
-
 #### Preview
 
 ```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
+var gcloud = require('gcloud');
 
-var resourceClient = resource({
+// Authorizing on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authorization section above).
+
+var resource = gcloud.resource({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
 // Get all of the projects you maintain.
-resourceClient.getProjects(function(err, projects) {
+resource.getProjects(function(err, projects) {
   if (!err) {
     // `projects` contains all of your projects.
   }
 });
 
 // Get the metadata from your project. (defaults to `grape-spaceship-123`)
-var project = resourceClient.project();
+var project = resource.project();
 
 project.getMetadata(function(err, metadata) {
   // `metadata` describes your project.
@@ -919,40 +668,21 @@ project.getMetadata(function(err, metadata) {
 - [API Documentation][gcloud-vision-docs]
 - [Official Documentation][cloud-vision-docs]
 
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var vision = gcloud.vision;
-```
-
-#### Using the Cloud Vision API module
-
-```
-$ npm install --save @google-cloud/vision
-```
-
-```js
-var vision = require('@google-cloud/vision');
-```
-
 #### Preview
 
 ```js
-// Authenticating on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authentication section above).
+var gcloud = require('gcloud');
 
-var visionClient = vision({
+// Authorizing on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authorization section above).
+
+var vision = gcloud.vision({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
 // Read the text from an image.
-visionClient.detectText('./image.jpg', function(err, text) {
+vision.detectText('./image.jpg', function(err, text) {
   // text = [
   //   'This was text found in the image',
   //   'This was more text found in the image'
@@ -960,7 +690,7 @@ visionClient.detectText('./image.jpg', function(err, text) {
 });
 
 // Detect faces and the locations of their features in an image.
-visionClient.detectFaces('./image.jpg', function(err, faces) {
+vision.detectFaces('./image.jpg', function(err, faces) {
   // faces = [
   //   {
   //     angles: {pan,tilt,roll},
