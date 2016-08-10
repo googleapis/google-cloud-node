@@ -12,6 +12,7 @@
     "gcloud": "^0.37.0"
   },
   "devDependencies": {
-    "mocha": "^2.5.3"
+    "mocha": "^3.0.2",
+    "node-uuid": "^1.4.7"
   }
 }

@@ -13,69 +13,88 @@
 
 'use strict';
 
-var async = require('async');
-var subscriptionSample = require('./subscription');
-var createTopicExample = subscriptionSample.createTopicExample;
-var deleteTopicExample = subscriptionSample.deleteTopicExample;
-var subscribeExample = subscriptionSample.subscribeExample;
-var deleteSubscriptionExample = subscriptionSample.deleteSubscriptionExample;
-var pubsub = subscriptionSample.pubsub;
+// [START auth]
+// By default, gcloud will authenticate using the service account file specified
+// by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use the
+// project specified by the GCLOUD_PROJECT environment variable. See
+// https://googlecloudplatform.github.io/gcloud-node/#/docs/guides/authentication
+var gcloud = require('gcloud');
+
+// Instantiate a pubsub client
+var pubsub = gcloud.pubsub();
+// [END auth]
 
 // [START get_topic_policy]
 /**
- * @param {string} topicName Name of the topic whose policy is to be retrieved.
- * @param {Function} callback Callback function.
+ * Retrieve a topic's IAM policy.
+ *
+ * @param {string} topicName The name of the topic.
+ * @param {function} callback The callback function.
  */
-function getTopicPolicyExample (topicName, callback) {
+function getTopicPolicy (topicName, callback) {
+  if (!topicName) {
+    return callback(new Error('"topicName" is required!'));
+  }
+
   // Grab a reference to an existing topic
   var topic = pubsub.topic(topicName);
 
   // Retrieve the IAM policy for the topic
-  topic.iam.getPolicy(function (err, policy, apiResponse) {
+  topic.iam.getPolicy(function (err, policy) {
     if (err) {
       return callback(err);
     }
 
-    // Received the policy
-    console.log(policy); // { etag: 'ACAB' }
-    callback(null, policy, apiResponse);
+    console.log('Got topic policy:', policy);
+    return callback(null, policy);
   });
 }
 // [END get_topic_policy]
 
 // [START get_subscription_policy]
 /**
- * @param {string} subscriptionName Name of the subscription whose policy is to
- * be retrieved.
- * @param {Function} callback Callback function.
+ * Retrieve a subcription's IAM policy.
+ *
+ * @param {string} subscriptionName The name of the subscription.
+ * @param {function} callback The callback function.
  */
-function getSubscriptionPolicyExample (subscriptionName, callback) {
+function getSubscriptionPolicy (subscriptionName, callback) {
+  if (!subscriptionName) {
+    return callback(new Error('"subscriptionName" is required!'));
+  }
+
   // Grab a reference to an existing subscription
   var subscription = pubsub.subscription(subscriptionName);
 
   // Retrieve the IAM policy for the subscription
-  subscription.iam.getPolicy(function (err, policy, apiResponse) {
+  subscription.iam.getPolicy(function (err, policy) {
     if (err) {
       return callback(err);
     }
 
-    console.log(policy); // { etag: 'ACAB' }
-    callback(null, policy, apiResponse);
+    console.log('Got subscription policy:', policy);
+    return callback(null, policy);
   });
 }
 // [END get_subscription_policy]
 
 // [START set_topic_policy]
 /**
- * @param {string} topicName Name of the topic whose policy is to be updated.
- * @param {Function} callback Callback function.
+ * Set a topic's IAM policy.
+ *
+ * @param {string} topicName The name of the topic.
+ * @param {function} callback The callback function.
  */
-function setTopicPolicyExample (topicName, callback) {
+function setTopicPolicy (topicName, callback) {
+  if (!topicName) {
+    return callback(new Error('"topicName" is required!'));
+  }
+
   // Grab a reference to an existing topic
   var topic = pubsub.topic(topicName);
 
   // Policy update
-  var myPolicy = {
+  var newPolicy = {
     bindings: [
       {
         role: 'roles/pubsub.publisher',
@@ -84,14 +103,14 @@ function setTopicPolicyExample (topicName, callback) {
     ]
   };
 
-  // Retrieve the IAM policy for the provided topic
-  topic.iam.setPolicy(myPolicy, function (err, policy, apiResponse) {
+  // Set the IAM policy for the specified topic
+  topic.iam.setPolicy(newPolicy, function (err, policy) {
     if (err) {
       return callback(err);
     }
 
-    console.log('Updated policy for ' + topicName);
-    callback(null, policy, apiResponse);
+    console.log('Updated policy for topic: %s', topicName);
+    return callback(null, policy);
   });
 }
 // [END set_topic_policy]
@@ -100,14 +119,18 @@ function setTopicPolicyExample (topicName, callback) {
 /**
  * @param {string} subscriptionName Name of the subscription whose policy is to
  * be updated.
- * @param {Function} callback Callback function.
+ * @param {function} callback The callback function.
  */
-function setSubscriptionPolicyExample (subscriptionName, callback) {
+function setSubscriptionPolicy (subscriptionName, callback) {
+  if (!subscriptionName) {
+    return callback(new Error('"subscriptionName" is required!'));
+  }
+
   // Grab a reference to an existing subscription
   var subscription = pubsub.subscription(subscriptionName);
 
   // Policy update
-  var myPolicy = {
+  var newPolicy = {
     bindings: [
       {
         role: 'roles/pubsub.subscriber',
@@ -116,114 +139,145 @@ function setSubscriptionPolicyExample (subscriptionName, callback) {
     ]
   };
 
-  // Retrieve the IAM policy for the provided subscription
-  subscription.iam.setPolicy(myPolicy, function (err, policy, apiResponse) {
+  // Set the IAM policy for the specified subscription
+  subscription.iam.setPolicy(newPolicy, function (err, policy) {
     if (err) {
       return callback(err);
     }
 
-    console.log('Updated policy for ' + subscriptionName);
-    callback(null, policy, apiResponse);
+    console.log('Updated policy for subscription: %s', subscriptionName);
+    return callback(null, policy);
   });
 }
 // [END set_subscription_policy]
 
 // [START test_topic_permissions]
 /**
- * @param {string} topicName Name of the topic whose policy is to be tested.
- * @param {Function} callback Callback function.
+ * Test a topic's IAM permissions.
+ *
+ * @param {string} topicName The name of the topic.
+ * @param {function} callback The callback function.
  */
-function testTopicPermissionsExample (topicName, callback) {
+function testTopicPermissions (topicName, callback) {
+  if (!topicName) {
+    return callback(new Error('"topicName" is required!'));
+  }
+
   // Grab a reference to an existing topic
   var topic = pubsub.topic(topicName);
 
-  var tests = [
+  var permissionsToTest = [
     'pubsub.topics.attachSubscription',
     'pubsub.topics.publish',
     'pubsub.topics.update'
   ];
 
-  // Retrieve the IAM policy for the provided topic
-  topic.iam.testPermissions(tests, function (err, permissions, apiResponse) {
+  // Test the IAM policy for the specified topic
+  topic.iam.testPermissions(permissionsToTest, function (err, permissions) {
     if (err) {
       return callback(err);
     }
 
-    console.log('Got permissions for ' + topicName);
-    callback(null, permissions, apiResponse);
+    console.log('Tested permissions for topic: %s', topicName);
+    return callback(null, permissions);
   });
 }
 // [END test_topic_permissions]
 
 // [START test_subscription_permissions]
 /**
- * @param {string} subscriptionName Name of the subscription whose policy is to
- * be tested.
- * @param {Function} callback Callback function.
+ * Test a subcription's IAM permissions.
+ *
+ * @param {string} subscriptionName The name of the subscription.
+ * @param {function} callback The callback function.
  */
-function testSubscriptionPermissionsExample (subscriptionName, callback) {
+function testSubscriptionPermissions (subscriptionName, callback) {
+  if (!subscriptionName) {
+    return callback(new Error('"subscriptionName" is required!'));
+  }
+
   // Grab a reference to an existing subscription
   var subscription = pubsub.subscription(subscriptionName);
 
-  var tests = [
+  var permissionsToTest = [
     'pubsub.subscriptions.consume',
     'pubsub.subscriptions.update'
   ];
 
-  // Retrieve the IAM policy for the provided subscription
-  subscription.iam.testPermissions(
-    tests,
-    function (err, permissions, apiResponse) {
-      if (err) {
-        return callback(err);
-      }
-
-      console.log('Got permissions for ' + subscriptionName);
-      callback(null, permissions, apiResponse);
+  // Test the IAM policy for the specified subscription
+  subscription.iam.testPermissions(permissionsToTest, function (err, permissions) {
+    if (err) {
+      return callback(err);
     }
-  );
+
+    console.log('Tested permissions for subscription: %s', subscriptionName);
+    return callback(null, permissions);
+  });
 }
 // [END test_subscription_permissions]
 
-exports.getTopicPolicyExample = getTopicPolicyExample;
-exports.getSubscriptionPolicyExample = getSubscriptionPolicyExample;
-exports.setTopicPolicyExample = setTopicPolicyExample;
-exports.setSubscriptionPolicyExample = setSubscriptionPolicyExample;
-exports.testTopicPermissionsExample = testTopicPermissionsExample;
-exports.testSubscriptionPermissionsExample = testSubscriptionPermissionsExample;
+// [START usage]
+function printUsage () {
+  console.log('Usage: node iam RESOURCE COMMAND [ARGS...]');
+  console.log('\nResources:\n');
+  console.log('\ttopics');
+  console.log('\tsubscriptions');
+  console.log('\nCommands:\n');
+  console.log('\tget NAME');
+  console.log('\tset NAME');
+  console.log('\ttest NAME');
+  console.log('\nExamples:\n');
+  console.log('\tnode iam topics get my-topic');
+  console.log('\tnode iam topics set my-topic');
+  console.log('\tnode iam topics test my-topic');
+  console.log('\tnode iam subscriptions get my-subscription');
+  console.log('\tnode iam subscriptions set my-subscription');
+  console.log('\tnode iam subscriptions test my-subscription');
+}
+// [END usage]
 
-// Run the examples
-exports.main = function (cb) {
-  var topicName = 'messageCenter2';
-  var subscriptionName = 'newMessages2';
-  async.series([
-    function (cb) {
-      createTopicExample(topicName, cb);
-    },
-    function (cb) {
-      getTopicPolicyExample(topicName, cb);
-    },
-    function (cb) {
-      testTopicPermissionsExample(topicName, cb);
-    },
-    function (cb) {
-      subscribeExample(topicName, subscriptionName, cb);
-    },
-    function (cb) {
-      getSubscriptionPolicyExample(subscriptionName, cb);
-    },
-    function (cb) {
-      testSubscriptionPermissionsExample(subscriptionName, cb);
-    },
-    function (cb) {
-      deleteSubscriptionExample(subscriptionName, cb);
-    },
-    function (cb) {
-      deleteTopicExample(topicName, cb);
+// The command-line program
+var program = {
+  getTopicPolicy: getTopicPolicy,
+  getSubscriptionPolicy: getSubscriptionPolicy,
+  setTopicPolicy: setTopicPolicy,
+  setSubscriptionPolicy: setSubscriptionPolicy,
+  testTopicPermissions: testTopicPermissions,
+  testSubscriptionPermissions: testSubscriptionPermissions,
+  printUsage: printUsage,
+
+  // Executed when this program is run from the command-line
+  main: function (args, cb) {
+    var resource = args.shift();
+    var command = args.shift();
+    if (resource === 'topics') {
+      if (command === 'get') {
+        this.getTopicPolicy(args[0], cb);
+      } else if (command === 'set') {
+        this.setTopicPolicy(args[0], cb);
+      } else if (command === 'test') {
+        this.testTopicPermissions(args[0], cb);
+      } else {
+        this.printUsage();
+      }
+    } else if (resource === 'subscriptions') {
+      if (command === 'get') {
+        this.getSubscriptionPolicy(args[0], cb);
+      } else if (command === 'set') {
+        this.setSubscriptionPolicy(args[0], cb);
+      } else if (command === 'test') {
+        this.testSubscriptionPermissions(args[0], cb);
+      } else {
+        this.printUsage();
+      }
+    } else {
+      this.printUsage();
     }
-  ], cb || console.log);
+  }
 };
 
 if (module === require.main) {
-  exports.main();
+  program.main(process.argv.slice(2), console.log);
 }
+
+module.exports = program;

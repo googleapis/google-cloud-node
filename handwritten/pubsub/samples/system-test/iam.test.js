@@ -1,4 +1,4 @@
-// Copyright 2016, Google, Inc.
+// Copyright 2015-2016, Google, Inc.
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,36 +13,75 @@
 
 'use strict';
 
-var proxyquire = require('proxyquire');
+var uuid = require('node-uuid');
+var gcloud = require('gcloud');
+var pubsub = gcloud.pubsub();
+var program = require('../iam');
+var topicName = 'nodejs-docs-samples-test-' + uuid.v4();
+var subscriptionName = 'nodejs-docs-samples-test-sub-' + uuid.v4();
 
 describe('pubsub:iam', function () {
-  it('should run the sample', function (done) {
-    proxyquire('../iam', {}).main(function (err, results) {
-      assert.ifError(err);
-      assert(results.length === 8);
-      // Got topic and apiResponse
-      assert(results[0].length === 2);
-      // Got policy and apiResponse
-      assert(results[1].length === 2);
-      // Got permissions and apiResponse
-      assert(results[2].length === 2);
-      // Got subscription and apiResponse
-      assert(results[3].length === 2);
-      // Got policy and apiResponse
-      assert(results[4].length === 2);
-      // Got permissions and apiResponse
-      assert(results[5].length === 2);
-      // Got empty apiResponse
-      assert.deepEqual(results[6], {});
-      // Got empty apiResponse
-      assert.deepEqual(results[7], {});
-      assert(console.log.calledWith('Created topic messageCenter2'));
-      assert(console.log.calledWith('Got permissions for messageCenter2'));
-      assert(console.log.calledWith('Subscribed to messageCenter2'));
-      assert(console.log.calledWith('Got permissions for newMessages2'));
-      assert(console.log.calledWith('Deleted subscription newMessages2'));
-      assert(console.log.calledWith('Deleted topic messageCenter2'));
-      done();
+  before(function (done) {
+    pubsub.topic(topicName).get({
+      autoCreate: true
+    }, function (err) {
+      if (err) {
+        return done(err);
+      }
+      var options = {
+        reuseExisting: true
+      };
+      pubsub.subscribe(topicName, subscriptionName, options, done);
+    });
+  });
+
+  after(function (done) {
+    pubsub.subscription(subscriptionName).delete(function () {
+      pubsub.topic(topicName).delete(done);
+    });
+  });
+
+  describe('getTopicPolicy', function () {
+    it('should get a topic\'s policy', function (done) {
+      program.getTopicPolicy(topicName, function (err, policy) {
+        assert.ifError(err);
+        assert(policy);
+        assert(console.log.calledWith('Got topic policy:', policy));
+        done();
+      });
+    });
+  });
+
+  describe('getSubscriptionPolicy', function () {
+    it('should get a subscriptions\'s policy', function (done) {
+      program.getSubscriptionPolicy(subscriptionName, function (err, policy) {
+        assert.ifError(err);
+        assert(policy);
+        assert(console.log.calledWith('Got subscription policy:', policy));
+        done();
+      });
+    });
+  });
+
+  describe('testTopicPermissions', function () {
+    it('should test a topic\'s permissions', function (done) {
+      program.testTopicPermissions(topicName, function (err, permissions) {
+        assert.ifError(err);
+        assert(permissions);
+        assert(console.log.calledWith('Tested permissions for topic: %s', topicName));
+        done();
+      });
+    });
+  });
+
+  describe('testSubscriptionPermissions', function () {
+    it('should test a subscriptions\'s permissions', function (done) {
+      program.testSubscriptionPermissions(subscriptionName, function (err, permissions) {
+        assert.ifError(err);
+        assert(permissions);
+        assert(console.log.calledWith('Tested permissions for subscription: %s', subscriptionName));
+        done();
+      });
     });
   });
 });

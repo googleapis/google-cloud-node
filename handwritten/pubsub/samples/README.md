@@ -11,7 +11,8 @@ allows you to send and receive messages between independent applications.
 
 * [Setup](#setup)
 * [Samples](#samples)
-  * [Subscription](#subscription)
+  * [Topics](#topics)
+  * [Subscriptions](#subscriptions)
   * [IAM](#iam)
 
 ## Setup
@@ -26,24 +27,90 @@ allows you to send and receive messages between independent applications.
 
 ## Samples
 
-### Subscription
+### Topics
 
-View the [documentation][subscription_docs] or the [source code][subscription_code].
+View the [documentation][topics_docs] or the [source code][topics_code].
 
-__Run the sample:__
+__Usage:__ `node topics --help`
 
-    node subscription
+```
+Usage: node topics COMMAND [ARGS...]
 
-[subscription_docs]: https://cloud.google.com/pubsub/subscriber
-[subscription_code]: subscription.js
+Commands:
+
+  create TOPIC_NAME
+  delete TOPIC_NAME
+  publish TOPIC_NAME MESSAGE
+  list
+
+Examples:
+
+  node topics create my-topic
+  node topics list
+  node topics publish my-topic '{"data":"Hello world!"}'
+  node topics delete my-topic
+```
+
+[topics_docs]: https://cloud.google.com/pubsub/publisher
+[topics_code]: topics.js
+
+### Subscriptions
+
+View the [documentation][subscriptions_docs] or the [source code][subscriptions_code].
+
+__Usage:__ `node subscriptions --help`
+
+```
+Usage: node subscriptions COMMAND [ARGS...]
+
+Commands:
+
+  create TOPIC_NAME SUBSCRIPTION_NAME
+  delete SUBSCRIPTION_NAME
+  pull SUBSCRIPTION_NAME
+  list [TOPIC_NAME]
+
+Examples:
+
+  node subscriptions create my-topic my-subscription
+  node subscriptions delete my-subscription
+  node subscriptions pull my-subscription
+  node subscriptions list
+  node subscriptions list my-topic
+```
+
+[subscriptions_docs]: https://cloud.google.com/pubsub/subscriber
+[subscriptions_code]: subscriptions.js
 
 ### IAM
 
 View the [documentation][iam_docs] or the [source code][iam_code].
 
-__Run the sample:__
+__Usage:__ `node iam --help`
 
-    node iam
+```
+Usage: node iam RESOURCE COMMAND [ARGS...]
+
+Resources:
+
+  topics
+  subscriptions
+
+Commands:
+
+  get NAME
+  set NAME
+  test NAME
+
+Examples:
+
+  node iam topics get my-topic
+  node iam topics set my-topic
+  node iam topics test my-topic
+  node iam subscriptions get my-subscription
+  node iam subscriptions set my-subscription
+  node iam subscriptions test my-subscription
+```
 
 [iam_docs]: https://cloud.google.com/pubsub/access_control
-[iam_code]: subscription.js
+[iam_code]: iam.js
