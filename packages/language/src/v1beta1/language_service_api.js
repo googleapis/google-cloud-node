@@ -48,7 +48,7 @@ var ALL_SCOPES = [
 ];
 
 function loadGrpc(optGrpc) {
-  return gax.loadGrpc([{
+  return gax.loadGrpc(optGrpc, [{
     root: require('google-proto-files')('..'),
     file: 'google/cloud/language/v1beta1/language_service.proto'
   }]);
@@ -65,8 +65,6 @@ exports.grpc = loadGrpc;
  *   The domain name of the API remote host.
  * @param {number} opts.port
  *   The port on which to connect to the remote host.
- * @param {Function} opts.getCredentials
- *   Custom function to obtain the credentials.
  * @param {grpc.ClientCredentials} opts.sslCreds
  *   A ClientCredentials for use with an SSL-enabled channel.
  * @param {Object} opts.grpc
@@ -74,6 +72,12 @@ exports.grpc = loadGrpc;
  *   the grpc package will be loaded from the dependency (typically
  *   the one within 'google-gax' will be loaded). This will be useful
  *   to share channels among multiple APIs.
+ * @param {String[]} opts.scopes
+ *   The list of scopes to be used for the authentication.
+ * @param {String} opts.keyFile
+ *   The name of auth key file.
+ * @param {Object} opts.credentials
+ *   The credential data (normally the loaded data from the JSON file).
  * @param {Object} opts.clientConfig
  *   The customized config to build the call settings. See
  *   {@link gax.constructSettings} for the format.
@@ -84,14 +88,13 @@ exports.grpc = loadGrpc;
  * @param {String} opts.appVersion
  *   The version of the calling service.
  */
-function LanguageServiceApi(opts) {
-  if (!(this instanceof LanguageServiceApi) || this.stub) {
-    return new LanguageServiceApi(opts);
+function languageServiceApi(opts) {
+  if (!(this instanceof languageServiceApi) || this.stub) {
+    return new languageServiceApi(opts);
   }
   opts = opts || {};
   var servicePath = opts.servicePath || SERVICE_ADDRESS;
   var port = opts.port || DEFAULT_SERVICE_PORT;
-  var getCredentials = opts.getCredentials || null;
   var sslCreds = opts.sslCreds || null;
   var scopes = opts.scopes || ALL_SCOPES;
   var clientConfig = opts.clientConfig || {};
@@ -120,10 +123,11 @@ function LanguageServiceApi(opts) {
       servicePath,
       port,
       grpcClient.google.cloud.language.v1beta1.LanguageService,
-      {'getCredentials': getCredentials,
-       'grpc': opts.grpc,
+      {'grpc': opts.grpc,
        'sslCreds': sslCreds,
-       'scopes': scopes});
+       'scopes': scopes,
+       'keyFile': opts.keyFile || opts.keyFilename,
+       'credentials': opts.credentials});
   var methods = [
     'analyzeSentiment',
     'analyzeEntities',
@@ -134,8 +138,8 @@ function LanguageServiceApi(opts) {
         this.stub.then(function(stub) { return stub[methodName].bind(stub); }),
         defaults[methodName]);
   }.bind(this));
-};
-exports.LanguageServiceApi = LanguageServiceApi;
+}
+exports.languageServiceApi = languageServiceApi;
 
 // Callback types
 
@@ -171,7 +175,7 @@ exports.LanguageServiceApi = LanguageServiceApi;
  *   status.
  * @throws an error if the RPC is aborted.
  */
-LanguageServiceApi.prototype.analyzeSentiment = function analyzeSentiment() {
+languageServiceApi.prototype.analyzeSentiment = function analyzeSentiment() {
   var args = arguejs({
     'document': Object,
     'options': [gax.CallOptions],
@@ -200,7 +204,7 @@ LanguageServiceApi.prototype.analyzeSentiment = function analyzeSentiment() {
  *   status.
  * @throws an error if the RPC is aborted.
  */
-LanguageServiceApi.prototype.analyzeEntities = function analyzeEntities() {
+languageServiceApi.prototype.analyzeEntities = function analyzeEntities() {
   var args = arguejs({
     'document': Object,
     'encodingType': Number,
@@ -235,7 +239,7 @@ LanguageServiceApi.prototype.analyzeEntities = function analyzeEntities() {
  *   status.
  * @throws an error if the RPC is aborted.
  */
-LanguageServiceApi.prototype.annotateText = function annotateText() {
+languageServiceApi.prototype.annotateText = function annotateText() {
   var args = arguejs({
     'document': Object,
     'features': Object,

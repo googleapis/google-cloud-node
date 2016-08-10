@@ -1,3 +1,5 @@
+'use strict';
+
 var languageServiceApi = require('./language_service_api');
 
 exports.grpc = function(optGrpc) {
