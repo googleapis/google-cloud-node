@@ -18,7 +18,7 @@ var listExample = require('../list');
 describe('logging:list', function () {
   it('should list entries', function (done) {
     listExample.main(undefined, function (err, entries, nextQuery, apiResponse) {
-      assert(!err);
+      assert.ifError(err);
       assert(entries, 'should have received entries');
       assert(Array.isArray(entries), 'entries should be an array');
       assert(nextQuery, 'should have received nextQuery');

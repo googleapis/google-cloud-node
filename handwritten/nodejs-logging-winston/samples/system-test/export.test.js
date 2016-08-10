@@ -18,7 +18,7 @@ var exportExample = require('../export');
 describe('logging:export', function () {
   it('should list sinks', function (done) {
     exportExample.main(function (err, sinks) {
-      assert(!err);
+      assert.ifError(err);
       assert(sinks, 'should have received sinks');
       assert(Array.isArray(sinks), 'sinks should be an array');
       done();

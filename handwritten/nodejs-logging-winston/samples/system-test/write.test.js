@@ -21,7 +21,7 @@ describe('logging:write', function () {
       if (err && err.code === 404) {
         return done();
       }
-      assert(!err);
+      assert.ifError(err);
       assert(results.length === 2, 'should have two results');
       done();
     });
