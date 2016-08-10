@@ -131,7 +131,7 @@ describe('datastore:concepts', function () {
   it('performs a projection query', function (done) {
     entity.testProperties(function (err, tasks) {
       console.log(err, tasks);
-      assert(!err);
+      assert.ifError(err);
       setTimeout(function () {
         query.testRunQueryProjection(done);
       }, 1000);
@@ -203,7 +203,7 @@ describe('datastore:concepts', function () {
 
   it.skip('allows manual pagination through results', function (done) {
     entity.testBatchUpsert(function (err) {
-      assert(!err);
+      assert.ifError(err);
       setTimeout(function () {
         query.testCursorPaging(done);
       }, 1000);

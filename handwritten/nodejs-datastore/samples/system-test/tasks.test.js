@@ -32,7 +32,7 @@ describe('datastore:tasks', function () {
 
   it('should mark a task as done', function (done) {
     getTaskId(function (err, taskId) {
-      assert(!err);
+      assert.ifError(err);
       tasks.updateEntity(taskId, done);
     });
   });
@@ -43,14 +43,14 @@ describe('datastore:tasks', function () {
 
   it('should delete a task', function (done) {
     getTaskId(function (err, taskId) {
-      assert(!err);
+      assert.ifError(err);
       tasks.deleteEntity(taskId, done);
     });
   });
 
   it('should format tasks', function (done) {
     tasks.retrieveEntities(function (err, _tasks) {
-      assert(!err);
+      assert.ifError(err);
       assert.doesNotThrow(function () {
         tasks.formatTasks(_tasks);
       });
