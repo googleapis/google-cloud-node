@@ -18,7 +18,7 @@ var proxyquire = require('proxyquire');
 describe('pubsub:iam', function () {
   it('should run the sample', function (done) {
     proxyquire('../iam', {}).main(function (err, results) {
-      assert(!err);
+      assert.ifError(err);
       assert(results.length === 8);
       // Got topic and apiResponse
       assert(results[0].length === 2);
