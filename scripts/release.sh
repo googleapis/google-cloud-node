@@ -48,9 +48,9 @@ cd ../
 ## Upload the docs to gh-pages.
 git submodule add -f -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} ghpages
 test -d "ghpages/json/google-cloud/${TRAVIS_TAG}" && exit 0 || mkdir ghpages/json/google-cloud/${TRAVIS_TAG}
+cp docs/*.md ghpages/json/google-cloud/${TRAVIS_TAG}
 npm run bundle
-# figure out how to version this stuff..
-# cp docs/*{.md,.html} ghpages/json/${TRAVIS_TAG}
+cp -R ghpages/json/google-cloud/master ghpages/json/google-cloud/${TRAVIS_TAG}
 cp docs/home.html ghpages/json
 cp docs/manifest.json ghpages
 cd ghpages
