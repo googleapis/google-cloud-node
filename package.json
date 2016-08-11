@@ -15,7 +15,7 @@
     "lodash.template": "^4.3.0",
     "mitm": "^1.1.0",
     "mkdirp": "^0.5.1",
-    "mocha": "^3.0.1",
+    "mocha": "^2.5.3",
     "propprop": "^0.3.0",
     "proxyquire": "^1.7.10",
     "request": "^2.70.0",
@@ -25,9 +25,7 @@
     "through2": "^2.0.0"
   },
   "scripts": {
-    "link-modules": "node ./scripts/link.js",
-    "install-module-dependencies": "node ./scripts/install.js",
-    "postinstall": "npm run link-modules && npm run install-module-dependencies",
+    "postinstall": "node ./scripts/install.js",
     "docs": "node ./scripts/docs/packages.js",
     "bundle": "node ./scripts/docs/bundle.js",
     "lint": "jshint scripts/ packages/ system-test/ test/ && jscs packages/ system-test/ test/",

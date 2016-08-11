@@ -22,29 +22,22 @@ var path = require('path');
 
 require('shelljs/global');
 
-// Install NPM dependencies, in up to 5 directories at a time
-var queue = async.queue(installForDirectory, 5);
+var directories = fs.readdirSync(path.join(__dirname, '../packages'));
 
-var files = fs.readdirSync(path.join(__dirname, '../packages'));
-files.forEach(function(file) {
-  queue.push(file);
-});
-
-/**
- * Install NPM dependencies within a single directory.
- *
- * @param {string} directory The name of the directory in which to install
- * dependencies.
- * @param {function} callback The callback function.
- */
-function installForDirectory(directory, callback) {
-  console.log(directory + '...installing dependencies');
+// This is a helper method which will auto-install all of the dependencies of
+// each module.
+async.eachLimit(directories, 5, function(directory, callback) {
+  console.log('Installing dependencies for ' + directory);
 
   exec('npm install', {
     async: true,
     cwd: path.join(__dirname, '../packages', directory)
-  }, function(err) {
-    console.log(directory + '...done');
-    callback(err);
-  });
-}
+  }, callback);
+}, function(err) {
+  if (err) {
+    console.error('All dependencies could not be installed');
+    return;
+  }
+
+  console.log('All dependencies installed');
+});
