@@ -7,8 +7,6 @@ var config = {
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 };
-
-var gcloud = require('google-cloud')(config);
 ```
 
 ### The `config` object
