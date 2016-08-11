@@ -1,6 +1,6 @@
 {
   "name": "google-cloud",
-  "version": "0.37.0",
+  "version": "0.38.1",
   "author": "Google Inc.",
   "description": "Google Cloud APIs Client Library for Node.js",
   "contributors": [
@@ -35,7 +35,7 @@
   ],
   "main": "./src/index.js",
   "files": [
-    "./src/*",
+    "src",
     "AUTHORS",
     "CONTRIBUTORS",
     "COPYING"
@@ -112,7 +112,7 @@
     "proxyquire": "^1.7.10"
   },
   "scripts": {
-    "publish": "node ../../scripts/publish.js google-cloud",
+    "publish-module": "node ../../scripts/publish.js google-cloud",
     "test": "mocha test/*.js",
     "system-test": "mocha system-test/*.js --no-timeouts --bail"
   },

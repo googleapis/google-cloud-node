@@ -31,7 +31,7 @@
   ],
   "main": "./src/index.js",
   "files": [
-    "./src/*",
+    "src",
     "AUTHORS",
     "CONTRIBUTORS",
     "COPYING"
@@ -71,7 +71,7 @@
     "tmp": "0.0.27"
   },
   "scripts": {
-    "publish": "node ../../scripts/publish.js vision",
+    "publish-module": "node ../../scripts/publish.js vision",
     "test": "mocha test/*.js",
     "system-test": "mocha system-test/*.js --no-timeouts --bail"
   },

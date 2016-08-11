@@ -34,7 +34,7 @@ var newVersion = args[2];
 var tagName = [moduleName, newVersion].join('-');
 
 if (moduleName === 'google-cloud') {
-  tagName = newVersion;
+  tagName = ('v' + newVersion).replace(/^v+/, 'v');
 }
 
 // Create a git tag
@@ -51,6 +51,10 @@ console.log('Publishing package in 10 seconds. Exit process to abort');
 
 setTimeout(function() {
   console.log('Publishing now');
+
+  exec('rm -rf node_modules', {
+    cwd: cwd
+  });
 
   // Publish the module
   exec('npm publish', {
