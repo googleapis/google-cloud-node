@@ -57,9 +57,7 @@ setTimeout(function() {
     cwd: cwd
   });
 
-  exec('echo "Now push to master: git push origin master --follow-tags"', {
-    cwd: cwd
-  });
+  console.log('echo "Now push to master: git push origin master --follow-tags"');
 
   // Remove the duplicated files
   rm([
