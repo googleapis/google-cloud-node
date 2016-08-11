@@ -70,7 +70,7 @@
     "through2": "^2.0.0"
   },
   "scripts": {
-    "publish": "node ../../scripts/publish.js",
+    "publish": "node ../../scripts/publish.js datastore",
     "test": "mocha test/*.js",
     "system-test": "mocha system-test/*.js --no-timeouts --bail"
   },

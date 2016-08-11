@@ -24,12 +24,20 @@ npm run system-test
 git config --global user.name "travis-ci"
 git config --global user.email "travis@travis-ci.org"
 
+if [[ ${TRAVIS_TAG} == *"-"* ]]; then
+  MODULE_NAME=${TRAVIS_TAG%-*}
+  MODULE_VERSION=${TRAVIS_TAG##*-}
+else
+  MODULE_NAME="google-cloud"
+  MODULE_VERSION=${TRAVIS_TAG}
+fi
+
 ## Attempt to update docs/manifest.json with the new version.
 git submodule add -f -b master https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} master
 cd master
 node -e "
-file = require('./docs/manifest.json')
-if (file.versions.indexOf('${TRAVIS_TAG}') === -1) file.versions.unshift('${TRAVIS_TAG}')
+module = require('./docs/manifest.json').modules.filter(function(mod) { return mod.id === '${MODULE_NAME}'; })[0];
+if (module.versions.indexOf('${MODULE_VERSION}') === -1) module.versions.unshift('${MODULE_VERSION}')
 require('fs').writeFileSync('docs/manifest.json', JSON.stringify(file, null, 2) + '\n')
 "
 # allow "git add" to fail if there aren't new files.
@@ -47,15 +55,15 @@ cd ../
 
 ## Upload the docs to gh-pages.
 git submodule add -f -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} ghpages
-test -d "ghpages/json/${TRAVIS_TAG}" && exit 0 || mkdir ghpages/json/${TRAVIS_TAG}
-cp -R docs/json/master/* ghpages/json/${TRAVIS_TAG}
-cp docs/*{.md,.html} ghpages/json/${TRAVIS_TAG}
-cp docs/toc.json ghpages/json/${TRAVIS_TAG}
+test -d "ghpages/json/${MODULE_NAME}/${MODULE_VERSION}" && exit 0 || mkdir ghpages/json/${MODULE_NAME}/${MODULE_VERSION}
+cp docs/*.md ghpages/json/${MODULE_NAME}/${MODULE_VERSION}
+cp -R docs/json/${MODULE_NAME}/master/* ghpages/json/${MODULE_NAME}/${MODULE_VERSION}
+npm run bundle
 cp docs/home.html ghpages/json
 cp docs/manifest.json ghpages
 cd ghpages
 git add json
 git add manifest.json
-git commit -m "Update docs for ${TRAVIS_TAG}"
+git commit -m "Update docs for ${MODULE_NAME} ${MODULE_VERSION}"
 git status
 git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages

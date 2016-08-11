@@ -70,9 +70,10 @@ describe('documentation', function() {
     MITM.disable();
   });
 
-  var jsonGlob = 'docs/json/master/**/*.json';
+  var jsonGlob = 'docs/json/*/master/*.json';
   var ignore = [
-    'docs/json/master/types.json'
+    'docs/json/*/master/types.json',
+    'docs/json/*/master/toc.json'
   ];
 
   var FILES = glob.sync(jsonGlob, { ignore: ignore });

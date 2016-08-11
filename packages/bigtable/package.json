@@ -74,7 +74,7 @@
     "sinon": "^1.17.4"
   },
   "scripts": {
-    "publish": "node ../../scripts/publish.js",
+    "publish": "node ../../scripts/publish.js bigtable",
     "test": "mocha test/*.js",
     "system-test": "mocha system-test/*.js --no-timeouts --bail"
   },

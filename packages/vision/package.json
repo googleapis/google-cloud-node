@@ -71,7 +71,7 @@
     "tmp": "0.0.27"
   },
   "scripts": {
-    "publish": "node ../../scripts/publish.js",
+    "publish": "node ../../scripts/publish.js vision",
     "test": "mocha test/*.js",
     "system-test": "mocha system-test/*.js --no-timeouts --bail"
   },

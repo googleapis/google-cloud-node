@@ -112,7 +112,7 @@
     "proxyquire": "^1.7.10"
   },
   "scripts": {
-    "publish": "node ../../scripts/publish.js",
+    "publish": "node ../../scripts/publish.js google-cloud",
     "test": "mocha test/*.js",
     "system-test": "mocha system-test/*.js --no-timeouts --bail"
   },
