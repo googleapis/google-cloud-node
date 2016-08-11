@@ -66,7 +66,7 @@ var API_KEY = process.env.GCLOUD_TESTS_API_KEY;
       },
       {
         input: 'How are you today?',
-        expectedTranslation: 'Como estas hoy?'
+        expectedTranslation: '¿Cómo estás hoy?'
       }
     ];
 
