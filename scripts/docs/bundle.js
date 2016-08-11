@@ -26,6 +26,9 @@ var flatten = require('lodash.flatten');
 var parser = require('./parser');
 var config = require('./config');
 
+// since we version the JSON in ghpages and we don't create tags for
+// individual modules, we'll look for the appropriate semver version in
+// the ghpages submodule
 var JSON_DIR = './ghpages/json';
 
 var pkgJson = require('../../packages/google-cloud/package.json');
