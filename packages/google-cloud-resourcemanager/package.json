@@ -61,7 +61,7 @@
     "proxyquire": "^1.7.10"
   },
   "scripts": {
-    "publish": "node ../../scripts/publish.js",
+    "publish": "node ../../scripts/publish.js resource",
     "test": "mocha test/*.js",
     "system-test": "mocha system-test/*.js --no-timeouts --bail"
   },
