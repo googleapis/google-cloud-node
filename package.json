@@ -12,6 +12,7 @@
     "jshint": "^2.9.1",
     "lodash.template": "^4.3.0",
     "mitm": "^1.1.0",
+    "mkdirp": "^0.5.1",
     "mocha": "^3.0.1",
     "propprop": "^0.3.0",
     "proxyquire": "^1.7.10",
