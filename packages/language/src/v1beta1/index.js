@@ -2,7 +2,10 @@
 
 var languageServiceApi = require('./language_service_api');
 
-exports.grpc = function(optGrpc) {
-  return languageServiceApi.grpc(optGrpc).google.cloud.language.v1beta1;
+function v1beta1(options) {
+  return languageServiceApi(options);
 };
-exports.languageServiceApi = languageServiceApi.LanguageServiceApi;
+
+v1beta1.SERVICE_ADDRESS = languageServiceApi.SERVICE_ADDRESS;
+v1beta1.ALL_SCOPES = languageServiceApi.ALL_SCOPES;
+module.exports = v1beta1;

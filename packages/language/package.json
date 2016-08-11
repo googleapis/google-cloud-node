@@ -57,7 +57,7 @@
     "arguejs": "^0.2.3",
     "arrify": "^1.0.1",
     "extend": "^3.0.0",
-    "google-gax": "^0.5.2",
+    "google-gax": "^0.6.0",
     "google-proto-files": "^0.4.0",
     "is": "^3.0.1",
     "propprop": "^0.3.1",
