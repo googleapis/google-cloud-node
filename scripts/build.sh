@@ -28,9 +28,8 @@ if [ "${TRAVIS_BRANCH}" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]
   # add new docs to the gh-pages branch
   git submodule add -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} ghpages
   # copy all the docs file that might have changed, excluding versions.txt (to avoid overriding it)
-  cp -R docs/json/master/* ghpages/json/master
-  cp docs/*{.md,.html} ghpages/json/master
-  cp docs/toc.json ghpages/json/master
+  cp -R docs/json/* ghpages/json
+  npm run bundle
   cp docs/home.html ghpages/json
   cp docs/manifest.json ghpages
   cd ghpages

@@ -28,8 +28,8 @@ git config --global user.email "travis@travis-ci.org"
 git submodule add -f -b master https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} master
 cd master
 node -e "
-file = require('./docs/manifest.json')
-if (file.versions.indexOf('${TRAVIS_TAG}') === -1) file.versions.unshift('${TRAVIS_TAG}')
+module = require('./docs/manifest.json').modules[0]
+if (module.versions.indexOf('${TRAVIS_TAG}') === -1) module.versions.unshift('${TRAVIS_TAG}')
 require('fs').writeFileSync('docs/manifest.json', JSON.stringify(file, null, 2) + '\n')
 "
 # allow "git add" to fail if there aren't new files.
@@ -47,10 +47,10 @@ cd ../
 
 ## Upload the docs to gh-pages.
 git submodule add -f -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} ghpages
-test -d "ghpages/json/${TRAVIS_TAG}" && exit 0 || mkdir ghpages/json/${TRAVIS_TAG}
-cp -R docs/json/master/* ghpages/json/${TRAVIS_TAG}
-cp docs/*{.md,.html} ghpages/json/${TRAVIS_TAG}
-cp docs/toc.json ghpages/json/${TRAVIS_TAG}
+test -d "ghpages/json/google-cloud/${TRAVIS_TAG}" && exit 0 || mkdir ghpages/json/google-cloud/${TRAVIS_TAG}
+npm run bundle
+# figure out how to version this stuff..
+# cp docs/*{.md,.html} ghpages/json/${TRAVIS_TAG}
 cp docs/home.html ghpages/json
 cp docs/manifest.json ghpages
 cd ghpages

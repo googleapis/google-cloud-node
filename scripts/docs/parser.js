@@ -16,23 +16,21 @@
 
 'use strict';
 
-var async = require('async');
 var dox = require('dox');
-var format = require('string-format-obj');
-var fs = require('fs');
 var globby = require('globby');
+var fs = require('fs');
 var path = require('path');
+var format = require('string-format-obj');
 var prop = require('propprop');
+var extend = require('extend');
+var template = require('lodash.template');
+var config = require('./config');
+var baseToc = require('./base-toc.json');
 
-var OUTPUT_FOLDER = './docs/json/master';
-var IGNORE = [
-  './packages/common/src/*',
-  './packages/datastore/src/entity.js',
-  './packages/datastore/src/request.js',
-  './packages/pubsub/src/iam.js',
-  './packages/storage/src/acl.js',
-  './packages/bigtable/src/mutation.js'
-];
+var templateFile = fs.readFileSync(
+  path.join(__dirname, config.OVERVIEW_TEMPLATE));
+
+var parser = module.exports = {};
 
 function isPublic(block) {
   return !block.isPrivate && !block.ignore;
@@ -101,6 +99,7 @@ function getId(fileName) {
 
   var id = fileName
     .replace(/^(\.\/)?packages\//, '')
+    .replace('src/', '')
     .replace('/index.js', '')
     .replace('.js', '');
 
@@ -141,7 +140,7 @@ function getChildren(id) {
   var childrenGlob = './packages/' + id + '/*';
 
   return globby
-    .sync(childrenGlob, { ignore: IGNORE })
+    .sync(childrenGlob, { ignore: config.IGNORE })
     .map(getId)
     .filter(function(child) {
       return child !== id;
@@ -286,18 +285,20 @@ function getMixinMethods(comments) {
   }, []);
 }
 
-function parseFile(fileName, contents) {
+function parseFile(fileName, contents, umbrellaMode) {
   var comments = dox.parseComments(contents).filter(isPublic);
   var constructor = comments.filter(prop('isConstructor'))[0];
   var id = getId(fileName);
+  var parent = getParent(id);
 
   return {
     id: id,
     type: 'class',
     name: getName(constructor),
+    overview: createOverview(parent || id, umbrellaMode),
     description: getClassDesc(constructor),
     source: path.normalize(fileName),
-    parent: getParent(id),
+    parent: parent,
     children: getChildren(id),
     methods: comments
       .map(createMethod.bind(null, fileName, id))
@@ -309,8 +310,8 @@ function parseFile(fileName, contents) {
 function createTypesDictionary(docs) {
   return docs.map(function(service) {
     var id = service.id;
-    var title = [id === 'google-cloud' ? 'Node.js' : service.name];
-    var contents = service.path.replace('docs/json/master/', '');
+    var title = [id === config.UMBRELLA_PACKAGE ? 'Google Cloud' : service.name];
+    var contents = service.path;
 
     if (service.parent) {
       for (var i = 0, l = docs.length; i < l; i++) {
@@ -322,46 +323,76 @@ function createTypesDictionary(docs) {
 
     return {
       id: id,
-      title: title.join(' » '),
+      title: title,
       contents: contents
     };
   });
 }
 
-globby('./packages/*/src/*.js', { ignore: IGNORE }).then(function(files) {
-  async.map(files, function(file, callback) {
-    fs.readFile(file, 'utf8', function(err, contents) {
-      if (err) {
-        callback(err);
-        return;
+function createToc(types, collapse) {
+  var toc = extend(true, {}, baseToc);
+  var services = types
+    .map(function(type) {
+      return {
+        type: type.id,
+        title: type.title[type.title.length > 1 ? 1 : 0]
+      };
+    })
+    .sort(function(a, b) {
+      if (a.type === config.UMBRELLA_PACKAGE) {
+        return -1;
       }
 
-      var docs = parseFile(file, contents);
-      var outputFile = path.join(
-        OUTPUT_FOLDER,
-        file.replace('/packages', '').replace('/src/', '/').replace('.js', '.json')
-      );
-      if (outputFile.indexOf('google-cloud') !== -1) {
-        outputFile = outputFile.replace('/google-cloud/', '/');
+      if (b.type === config.UMBRELLA_PACKAGE) {
+        return 1;
       }
 
-      fs.writeFile(outputFile, JSON.stringify(docs), function(err) {
-        docs.path = outputFile;
-        callback(err, docs);
-      });
+      return a.type < b.type ? -1 : a.type > b.type ? 1 : 0;
     });
-  }, function(err, docs) {
-    if (err) {
-      throw err;
+
+  if (!collapse) {
+    toc.services = services;
+    return toc;
+  }
+
+  var collapsed = services.reduce(function(collapsed, service) {
+    var last = collapsed[collapsed.length - 1];
+    var parent = service.type.split('/')[0];
+
+    if (last && last.type === parent) {
+      last.nav = last.nav || [];
+      last.nav.push(service);
+    } else {
+      collapsed.push(service);
     }
 
-    var types = createTypesDictionary(docs);
-    var outputFile = path.join(OUTPUT_FOLDER, 'types.json');
+    return collapsed;
+  }, []);
 
-    fs.writeFile(outputFile, JSON.stringify(types), function(err) {
-      if (err) {
-        throw err;
-      }
-    });
+  toc.services = collapsed;
+  return toc;
+}
+
+function createOverview(moduleName, umbrellaMode) {
+  var modConfig = config.OVERVIEW[moduleName];
+  var pkgJson = path.join(
+    __dirname,
+    '../../packages',
+    umbrellaMode ? 'google-cloud' : moduleName,
+    'package.json'
+  );
+
+  return template(templateFile)({
+    pkgJson: require(pkgJson),
+    title: modConfig.title,
+    instanceName: modConfig.instanceName,
+    className: moduleName,
+    umbrellaView: umbrellaMode && moduleName !== config.UMBRELLA_PACKAGE,
+    umbrellaPkg: config.UMBRELLA_PACKAGE
   });
-});
+}
+
+parser.parseFile = parseFile;
+parser.createTypesDictionary = createTypesDictionary;
+parser.createToc = createToc;
+parser.createOverview = createOverview;
