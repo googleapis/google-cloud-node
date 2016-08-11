@@ -39,7 +39,8 @@ describe('pubsub:subscriptions', function () {
         assert.ifError(err);
         assert.equal(subscription.name, name);
         assert(console.log.calledWith('Created subscription %s to topic %s', subscriptionName, topicName));
-        done();
+        // The next test sometimes fails, so, slow this test down
+        setTimeout(done, 2000);
       });
     });
   });
