@@ -72,6 +72,10 @@ exports.grpc = loadGrpc;
  *   the grpc package will be loaded from the dependency (typically
  *   the one within 'google-gax' will be loaded). This will be useful
  *   to share channels among multiple APIs.
+ * @param {Auth} opts.auth
+ *   When specified, this auth object (an instance of 'google-auto-auth')
+ *   will be used for the further authentication. scopes, keyFile, and
+ *   credentials will be ignored.
  * @param {String[]} opts.scopes
  *   The list of scopes to be used for the authentication.
  * @param {String} opts.keyFile
@@ -88,9 +92,9 @@ exports.grpc = loadGrpc;
  * @param {String} opts.appVersion
  *   The version of the calling service.
  */
-function languageServiceApi(opts) {
-  if (!(this instanceof languageServiceApi) || this.stub) {
-    return new languageServiceApi(opts);
+function LanguageServiceApi(opts) {
+  if (!(this instanceof LanguageServiceApi)) {
+    return new LanguageServiceApi(opts);
   }
   opts = opts || {};
   var servicePath = opts.servicePath || SERVICE_ADDRESS;
@@ -139,7 +143,7 @@ function languageServiceApi(opts) {
         defaults[methodName]);
   }.bind(this));
 }
-exports.languageServiceApi = languageServiceApi;
+exports.LanguageServiceApi = LanguageServiceApi;
 
 // Callback types
 
@@ -175,7 +179,7 @@ exports.languageServiceApi = languageServiceApi;
  *   status.
  * @throws an error if the RPC is aborted.
  */
-languageServiceApi.prototype.analyzeSentiment = function analyzeSentiment() {
+LanguageServiceApi.prototype.analyzeSentiment = function analyzeSentiment() {
   var args = arguejs({
     'document': Object,
     'options': [gax.CallOptions],
@@ -204,7 +208,7 @@ languageServiceApi.prototype.analyzeSentiment = function analyzeSentiment() {
  *   status.
  * @throws an error if the RPC is aborted.
  */
-languageServiceApi.prototype.analyzeEntities = function analyzeEntities() {
+LanguageServiceApi.prototype.analyzeEntities = function analyzeEntities() {
   var args = arguejs({
     'document': Object,
     'encodingType': Number,
@@ -239,7 +243,7 @@ languageServiceApi.prototype.analyzeEntities = function analyzeEntities() {
  *   status.
  * @throws an error if the RPC is aborted.
  */
-languageServiceApi.prototype.annotateText = function annotateText() {
+LanguageServiceApi.prototype.annotateText = function annotateText() {
   var args = arguejs({
     'document': Object,
     'features': Object,
