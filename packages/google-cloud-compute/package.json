@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/compute",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Google Inc.",
   "description": "Google Compute Engine Client Library for Node.js",
   "contributors": [
@@ -31,7 +31,7 @@
   ],
   "main": "./src/index.js",
   "files": [
-    "./src/*",
+    "src",
     "AUTHORS",
     "CONTRIBUTORS",
     "COPYING"
@@ -67,7 +67,7 @@
     "proxyquire": "^1.7.10"
   },
   "scripts": {
-    "publish": "node ../../scripts/publish.js compute",
+    "publish-module": "node ../../scripts/publish.js compute",
     "test": "mocha test/*.js",
     "system-test": "mocha system-test/*.js --no-timeouts --bail"
   },
