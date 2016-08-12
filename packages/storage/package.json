@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/storage",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Google Inc.",
   "description": "Google Cloud Storage Client Library for Node.js",
   "contributors": [
@@ -31,7 +31,7 @@
   ],
   "main": "./src/index.js",
   "files": [
-    "./src/*",
+    "src",
     "AUTHORS",
     "CONTRIBUTORS",
     "COPYING"
@@ -78,7 +78,7 @@
     "tmp": "0.0.27"
   },
   "scripts": {
-    "publish": "node ../../scripts/publish.js storage",
+    "publish-module": "node ../../scripts/publish.js storage",
     "test": "mocha test/*.js",
     "system-test": "mocha system-test/*.js --no-timeouts --bail"
   },

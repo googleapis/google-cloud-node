@@ -1,6 +1,6 @@
 {
   "name": "google-cloud",
-  "version": "0.37.0",
+  "version": "0.38.3",
   "author": "Google Inc.",
   "description": "Google Cloud APIs Client Library for Node.js",
   "contributors": [
@@ -35,7 +35,7 @@
   ],
   "main": "./src/index.js",
   "files": [
-    "./src/*",
+    "src",
     "AUTHORS",
     "CONTRIBUTORS",
     "COPYING"
@@ -94,25 +94,25 @@
   ],
   "dependencies": {
     "extend": "^3.0.0",
-    "@google-cloud/bigquery": "0.1.0",
-    "@google-cloud/bigtable": "0.1.0",
-    "@google-cloud/compute": "0.1.0",
-    "@google-cloud/datastore": "0.1.0",
-    "@google-cloud/dns": "0.1.0",
-    "@google-cloud/language": "0.1.0",
-    "@google-cloud/logging": "0.1.0",
-    "@google-cloud/prediction": "0.1.0",
-    "@google-cloud/pubsub": "0.1.0",
-    "@google-cloud/resource": "0.1.0",
-    "@google-cloud/storage": "0.1.0",
-    "@google-cloud/translate": "0.1.0",
-    "@google-cloud/vision": "0.1.0"
+    "@google-cloud/bigquery": "^0.1.1",
+    "@google-cloud/bigtable": "^0.1.1",
+    "@google-cloud/compute": "^0.1.1",
+    "@google-cloud/datastore": "^0.1.1",
+    "@google-cloud/dns": "^0.1.1",
+    "@google-cloud/language": "^0.1.1",
+    "@google-cloud/logging": "^0.1.1",
+    "@google-cloud/prediction": "^0.1.1",
+    "@google-cloud/pubsub": "^0.1.1",
+    "@google-cloud/resource": "^0.1.1",
+    "@google-cloud/storage": "^0.1.1",
+    "@google-cloud/translate": "^0.1.1",
+    "@google-cloud/vision": "^0.1.1"
   },
   "devDependencies": {
     "proxyquire": "^1.7.10"
   },
   "scripts": {
-    "publish": "node ../../scripts/publish.js google-cloud",
+    "publish-module": "node ../../scripts/publish.js google-cloud",
     "test": "mocha test/*.js",
     "system-test": "mocha system-test/*.js --no-timeouts --bail"
   },

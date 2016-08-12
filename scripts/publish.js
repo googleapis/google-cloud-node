@@ -30,17 +30,12 @@ cp(path.join(__dirname, '../COPYING'), cwd);
 
 var args = process.argv.splice(1);
 var moduleName = args[1];
-var newVersion = args[2];
+var newVersion = args[2].replace(/^v*/, '');
 var tagName = [moduleName, newVersion].join('-');
 
 if (moduleName === 'google-cloud') {
-  tagName = newVersion;
+  tagName = ('v' + newVersion);
 }
-
-// Create a git tag
-exec('git tag -a ' + tagName + ' -m "' + moduleName + ' release for ' + newVersion + '"', {
-  cwd: cwd
-});
 
 // Increment the version
 exec('npm --no-git-tag-version version ' + newVersion, {
@@ -52,12 +47,14 @@ console.log('Publishing package in 10 seconds. Exit process to abort');
 setTimeout(function() {
   console.log('Publishing now');
 
+  exec('rm -rf node_modules', {
+    cwd: cwd
+  });
+
   // Publish the module
   exec('npm publish', {
     cwd: cwd
   });
-
-  console.log('echo "Now push to master: git push origin master --follow-tags"');
 
   // Remove the duplicated files
   rm([
@@ -65,4 +62,13 @@ setTimeout(function() {
     path.join(cwd, 'CONTRIBUTORS'),
     path.join(cwd, 'COPYING')
   ]);
+
+  exec('git commit -m "' + moduleName + ' @ ' + newVersion + ' tagged.');
+
+  // Create a git tag
+  exec('git tag -a ' + tagName + ' -m "' + moduleName + ' release for ' + newVersion + '"', {
+    cwd: cwd
+  });
+
+  console.log('Now push to master: git push origin master --follow-tags"');
 }, 10000);
