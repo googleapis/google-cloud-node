@@ -20,12 +20,11 @@
 
 'use strict';
 
+var common = require('@google-cloud/common');
 var extend = require('extend');
-var is = require('is');
-var GrpcService = require('@google-cloud/common').GrpcService;
 var googleProtoFiles = require('google-proto-files');
-var nodeutil = require('util');
-var util = require('@google-cloud/common').util;
+var is = require('is');
+var util = require('util');
 
 /**
  * @type {module:language/document}
@@ -70,7 +69,7 @@ var PKG = require('../package.json');
  */
 function Language(options) {
   if (!(this instanceof Language)) {
-    options = util.normalizeArguments(this, options);
+    options = common.util.normalizeArguments(this, options);
     return new Language(options);
   }
 
@@ -90,10 +89,10 @@ function Language(options) {
     userAgent: PKG.name + '/' + PKG.version
   };
 
-  GrpcService.call(this, config, options);
+  common.GrpcService.call(this, config, options);
 }
 
-nodeutil.inherits(Language, GrpcService);
+util.inherits(Language, common.GrpcService);
 
 /**
  * Run an annotation of a block of text.
