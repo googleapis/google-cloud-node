@@ -242,7 +242,7 @@ module.exports = function build(options) {
     return this._annotateText(req, args.options, args.callback);
   };
   return built;
-}
+};
 
-module.exports.SERVICE_ADDRESS;
-module.exports.ALL_SCOPES;
+module.exports.SERVICE_ADDRESS = SERVICE_ADDRESS;
+module.exports.ALL_SCOPES = ALL_SCOPES;
