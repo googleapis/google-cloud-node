@@ -31,13 +31,6 @@ var util = require('util');
  * @param {string} id - ID of the change.
  *
  * @example
- * var gcloud = require('google-cloud');
- *
- * var dns = gcloud.dns({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
  * var zone = dns.zone('zone-id');
  * var change = zone.change('change-id');
  */

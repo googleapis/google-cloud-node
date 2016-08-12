@@ -45,13 +45,6 @@ var PKG = require('../package.json');
  * @constructor
  * @alias module:translate
  *
- * @classdesc
- * The object returned from `gcloud.translate` lets you translate arbitrary
- * string input into thousands of other languages.
- *
- * To learn more about the Translate API, see
- * [Getting Started](https://cloud.google.com/translate/v2/getting_started).
- *
  * @resource [Getting Started]{@link https://cloud.google.com/translate/v2/getting_started}
  * @resource [Identifying your application to Google]{@link https://cloud.google.com/translate/v2/using_rest#auth}
  *
@@ -59,16 +52,6 @@ var PKG = require('../package.json');
  *
  * @param {object} options - [Configuration object](#/docs).
  * @param {string} options.key - An API key.
- *
- * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var translate = gcloud.translate({
- *   key: 'API Key'
- * });
  */
 function Translate(options) {
   if (!(this instanceof Translate)) {

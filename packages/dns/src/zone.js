@@ -50,13 +50,6 @@ var Record = require('./record.js');
  * @alias module:dns/zone
  *
  * @example
- * var gcloud = require('google-cloud');
- *
- * var dns = gcloud.dns({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
  * var zone = dns.zone('zone-id');
  */
 function Zone(dns, name) {

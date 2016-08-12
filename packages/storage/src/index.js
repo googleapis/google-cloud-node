@@ -55,22 +55,6 @@ var PKG = require('../package.json');
  * @param {object} options - Configuration object.
  */
 /**
- * To access your Cloud Storage buckets, you will use the `bucket` function
- * returned from this `storage` object.
- *
- * The examples below will demonstrate the different usage patterns your app may
- * need to connect to `gcloud` and access your bucket.
- *
- * @alias module:storage
- * @constructor
- *
- * @classdesc
- * The `gcloud.storage` object contains a `bucket` function, which is how you
- * will interact with your Google Cloud Storage bucket.
- *
- * To learn more about Cloud Storage, see the
- * [Google Cloud Storage overview](https://cloud.google.com/storage/docs/overview).
- *
  * <h4>ACLs</h4>
  * Google Cloud Storage uses access control lists (ACLs) to manage object and
  * bucket access. ACLs are the mechanism you use to share files with other users
@@ -79,15 +63,13 @@ var PKG = require('../package.json');
  * To learn more about ACLs, read this overview on
  * [Access Control](https://cloud.google.com/storage/docs/access-control).
  *
+ * @alias module:storage
+ * @constructor
+ *
+ * @resource [Google Cloud Storage overview]{@link https://cloud.google.com/storage/docs/overview}
+ * @resource [Access Control]{@link https://cloud.google.com/storage/docs/access-control}
+ *
  * @param {object} options - [Configuration object](#/docs).
- *
- * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'my-project'
- * });
- *
- * var gcs = gcloud.storage();
  */
 function Storage(options) {
   if (!(this instanceof Storage)) {
@@ -126,10 +108,6 @@ util.inherits(Storage, common.Service);
  * @type {object}
  *
  * @example
- * var gcs = gcloud.storage({
- *   projectId: 'grape-spaceship-123'
- * });
- *
  * var albums = gcs.bucket('albums');
  *
  * //-
@@ -171,13 +149,6 @@ Storage.prototype.acl = Storage.acl;
  * @return {module:storage/bucket}
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   projectId: 'grape-spaceship-123',
- *   keyFilename: '/path/to/keyfile.json'
- * });
- *
- * var gcs = gcloud.storage();
- *
  * var albums = gcs.bucket('albums');
  * var photos = gcs.bucket('photos');
  */

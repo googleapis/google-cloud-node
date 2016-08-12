@@ -42,13 +42,6 @@ var util = require('util');
  * @alias module:compute/rule
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var gce = gcloud.compute();
- *
  * //-
  * // Reference a global rule.
  * //-

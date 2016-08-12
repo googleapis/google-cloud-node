@@ -43,13 +43,6 @@ var util = require('util');
  * @alias module:compute/instance-group
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var gce = gcloud.compute();
- *
  * var zone = gce.zone('us-central1-a');
  *
  * var instanceGroup = zone.instanceGroup('web-servers');

@@ -80,11 +80,6 @@ var PUBSUB_API_TIMEOUT = 90000;
  * @constructor
  *
  * @example
- * var gcloud = require('google-cloud');
- * var pubsub = gcloud.pubsub({
- *   projectId: 'grape-spaceship-123'
- * });
- *
  * //-
  * // From {module:pubsub#getSubscriptions}:
  * //-

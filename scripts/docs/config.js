@@ -42,7 +42,8 @@ module.exports = {
       title: 'Google Cloud Bigtable'
     },
     compute: {
-      title: 'Google Compute Engine'
+      title: 'Google Compute Engine',
+      instanceName: 'gce'
     },
     datastore: {
       title: 'Google Cloud Datastore'

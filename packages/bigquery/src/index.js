@@ -46,39 +46,19 @@ var Table = require('./table.js');
 var PKG = require('../package.json');
 
 /**
- * The examples below will demonstrate the different usage patterns your app may
- * need to support to retrieve a BigQuery object.
+ * In the following examples from this page and the other modules (`Dataset`,
+ * `Table`, etc.), we are going to be using a dataset from
+ * [data.gov](http://goo.gl/f2SXcb) of higher education institutions.
+ *
+ * We will create a table with the correct schema, import the public CSV file
+ * into that table, and query it for data.
  *
  * @alias module:bigquery
  * @constructor
  *
- * @classdesc
- * The object returned from `gcloud.bigquery` gives you complete access to and
- * control of your BigQuery datasets. You can work with existing ones, by using
- * the `dataset` method, or create new ones with `createDataset`.
- *
- * To learn more about BigQuery, see
- * [What is BigQuery?](https://cloud.google.com/bigquery/what-is-bigquery)
+ * @resource [What is BigQuery?]{@link https://cloud.google.com/bigquery/what-is-bigquery}
  *
  * @param {object} options - [Configuration object](#/docs).
- *
- * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'my-project'
- * });
- *
- * var bigquery = gcloud.bigquery();
- *
- * //-
- * // In the following examples from this page and the other modules (Dataset,
- * // Table, etc.), we are going to be using a dataset from
- * // <a href="http://goo.gl/f2SXcb">data.gov</a> of higher education
- * // institutions.
- * //
- * // We will create a table with the correct schema, import the public CSV
- * // file into that table, and query it for data.
- * //-
  */
 function BigQuery(options) {
   if (!(this instanceof BigQuery)) {

@@ -44,22 +44,9 @@ var PKG = require('../package.json');
  * @constructor
  * @alias module:dns
  *
- * @classdesc
- * The object returned from `gcloud.dns` gives you complete control over your
- * managed zones.
- *
- * To learn more about Google Cloud DNS, see
- * [What is Google Cloud DNS?](https://cloud.google.com/dns/what-is-cloud-dns)
+ * @resource [What is Google Cloud DNS?]{@link https://cloud.google.com/dns/what-is-cloud-dns}
  *
  * @param {object} options - [Configuration object](#/docs).
- *
- * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var dns = gcloud.dns();
  */
 function DNS(options) {
   if (!(this instanceof DNS)) {

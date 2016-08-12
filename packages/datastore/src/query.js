@@ -42,12 +42,6 @@ var arrify = require('arrify');
  * @param {string} kind - Kind to query.
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var datastore = gcloud.datastore();
  * var query = datastore.createQuery('AnimalNamespace', 'Lion');
  */
 function Query(scope, namespace, kinds) {

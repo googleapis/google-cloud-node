@@ -93,10 +93,6 @@ function Acl(options) {
  * @return {object}
  *
  * @example
- * var gcs = gcloud.storage({
- *   projectId: 'grape-spaceship-123'
- * });
- *
  * //-
  * // Add a user as an owner of a file.
  * //-
@@ -393,10 +389,6 @@ Acl.prototype.get = function(options, callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var gcs = gcloud.storage({
- *   projectId: 'grape-spaceship-123'
- * });
- *
  * myBucket.acl.update({
  *   entity: 'user-useremail@example.com',
  *   role: gcs.acl.WRITER_ROLE

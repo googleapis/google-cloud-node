@@ -43,12 +43,6 @@ var util = require('util');
  * @param {object} options - [Configuration object](#/docs).
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var logging = gcloud.logging();
  * var sink = logging.sink('my-sink');
  */
 function Sink(logging, name) {

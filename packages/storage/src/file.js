@@ -91,13 +91,6 @@ var GS_URL_REGEXP = /^gs\:\/\/([a-z0-9_\.\-]+)\/(.+)$/;
  * @constructor
  *
  * @example
- * var gcloud = require('google-cloud');
- *
- * var gcs = gcloud.storage({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
  * var myBucket = gcs.bucket('my-bucket');
  *
  * var file = myBucket.file('my-file');

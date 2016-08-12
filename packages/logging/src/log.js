@@ -47,12 +47,6 @@ var Entry = require('./entry.js');
  * @param {object} options - [Configuration object](#/docs).
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var logging = gcloud.logging();
  * var log = logging.log('syslog');
  */
 function Log(logging, name) {

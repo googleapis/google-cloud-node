@@ -34,6 +34,12 @@ var Project = require('./project.js');
 var PKG = require('../package.json');
 
 /**
+ * <p class="notice">
+ *   **This is a Beta release of Cloud Resource Manager.** This feature is not
+ *   covered by any SLA or deprecation policy and may be subject to
+ *   backward-incompatible changes.
+ * </p>
+ *
  * [The Cloud Resource Manager](https://cloud.google.com/resource-manager/)
  * provides methods that you can use to programmatically manage your projects
  * in the Google Cloud Platform. With this API, you can do the following:
@@ -47,28 +53,9 @@ var PKG = require('../package.json');
  * @alias module:resource
  * @constructor
  *
- * @classdesc
- * <p class="notice">
- *   **This is a Beta release of Cloud Resource Manager.** This feature is not
- *   covered by any SLA or deprecation policy and may be subject to
- *   backward-incompatible changes.
- * </p>
- *
- * The object returned from <code>gcloud.resource</code> gives you complete
- * access to your projects.
- *
- * To learn more about Resource Manager, see
- * [What is the Google Cloud Resource Manager?](https://cloud.google.com/resource-manager)
+ * @resource [What is the Google Cloud Resource Manager?]{@link https://cloud.google.com/resource-manager}
  *
  * @param {object} options - [Configuration object](#/docs).
- *
- * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var resource = gcloud.resource();
  */
 function Resource(options) {
   if (!(this instanceof Resource)) {

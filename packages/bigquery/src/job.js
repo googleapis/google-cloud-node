@@ -29,11 +29,6 @@ var modelo = require('modelo');
  *
  * @param {module:bigquery} bigQuery - BigQuery instance.
  * @param {string} id - The ID of the job.
- *
- * @example
- * var bigquery = gcloud.bigquery({ projectId: 'grape-spaceship-123' });
- * var Job = require('gcloud/lib/bigquery/job');
- * var job = new Job(bigquery, 'job-id');
  */
 /**
  * Job objects are returned from various places in the BigQuery API:
@@ -54,13 +49,6 @@ var modelo = require('modelo');
  * @constructor
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var bigquery = gcloud.bigquery();
- *
  * var job = bigquery.job('job-id');
  *
  * //-

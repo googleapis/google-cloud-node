@@ -63,15 +63,6 @@ var Row = require('./row.js');
  * @param {string} name - Name of the table.
  *
  * @example
- * var gcloud = require('google-cloud');
- *
- * var bigtable = gcloud.bigtable({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123',
- *   cluster: 'gcloud-node',
- *   zone: 'us-central1-b'
- * });
- *
  * var table = bigtable.table('prezzy');
  */
 function Table(bigtable, name) {

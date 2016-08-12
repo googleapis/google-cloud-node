@@ -48,13 +48,6 @@ var FORMATS = {
  *
  * @param {module:bigquery/dataset} dataset - Dataset instance.
  * @param {string} id - The ID of the table.
- *
- * @example
- * var bigquery = gcloud.bigquery({ projectId: 'grape-spaceship-123' });
- * var Dataset = require('gcloud/lib/bigquery/dataset');
- * var dataset = new Dataset(bigquery, 'dataset-id');
- * var Table = require('gcloud/lib/bigquery/table');
- * var table = new Table(dataset, 'table-id');
  */
 /**
  * Table objects are returned by methods such as
@@ -65,13 +58,6 @@ var FORMATS = {
  * @constructor
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var bigquery = gcloud.bigquery();
- *
  * var dataset = bigquery.dataset('my-dataset');
  *
  * var table = dataset.table('my-table');
@@ -473,7 +459,7 @@ Table.prototype.createWriteStream = function(metadata) {
  * @throws {Error} If destination format isn't recongized.
  *
  * @example
- * var gcs = gcloud.storage({
+ * var gcs = require('@google-cloud/storage')({
  *   projectId: 'grape-spaceship-123'
  * });
  * var exportedFile = gcs.bucket('institutions').file('2014.csv');

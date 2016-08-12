@@ -38,22 +38,7 @@ var util = require('util');
  * @alias module:resource/project
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var resource = gcloud.resource();
  * var project = resource.project('grape-spaceship-123');
- *
- * //-
- * // If no ID is passed to `resource.project()`, the returned object will refer
- * // to the project originally specified during instantiation of `gcloud`.
- * //
- * // Thus, in this case, these are equivalent:
- * //-
- * var project = resource.project('grape-spaceship-123');
- * var project = resource.project();
  */
 function Project(resource, id) {
   var methods = {

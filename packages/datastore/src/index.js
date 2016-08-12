@@ -52,19 +52,11 @@ var Transaction = require('./transaction.js');
 var PKG = require('../package.json');
 
 /**
- * Interact with the
- * [Google Cloud Datastore](https://developers.google.com/datastore/).
- *
  * @constructor
  * @alias module:datastore
  * @mixes module:datastore/request
  *
- * @classdesc
- * The `gcloud.datastore` object allows you to interact with Google Cloud
- * Datastore.
- *
- * To learn more about Datastore, read the
- * [Google Cloud Datastore Concepts Overview](https://cloud.google.com/datastore/docs/concepts/overview)
+ * @resource [Google Cloud Datastore Concepts Overview]{@link https://cloud.google.com/datastore/docs/concepts/overview}
  *
  * @param {object=} options - [Configuration object](#/docs).
  * @param {string=} options.apiEndpoint - Override the default API endpoint used
@@ -73,13 +65,6 @@ var PKG = require('../package.json');
  * @param {string} options.namespace - Namespace to isolate transactions to.
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   projectId: 'grape-spaceship-123',
- *   keyFilename: '/path/to/keyfile.json'
- * });
- *
- * var datastore = gcloud.datastore();
- *
  * //-
  * // <h3>The Datastore Emulator</h3>
  * //
@@ -107,12 +92,7 @@ var PKG = require('../package.json');
  * // Set that environment variable and your localhost Datastore will
  * // automatically be used. You can also pass this address in manually with
  * // `apiEndpoint`.
- * //-
- * var datastore = gcloud.datastore({
- *   apiEndpoint: 'http://localhost:8080'
- * });
- *
- * //-
+ * //
  * // Additionally, `DATASTORE_PROJECT_ID` is recognized. If you have this set,
  * // you don't need to provide a `projectId`.
  * //-
@@ -213,7 +193,7 @@ var PKG = require('../package.json');
  *     };
  *
  *     // Check if  more results may exist.
- *     if (info.moreResults !== gcloud.datastore.NO_MORE_RESULTS) {
+ *     if (info.moreResults !== datastore.NO_MORE_RESULTS) {
  *       frontEndResponse.nextPageCursor = info.endCursor;
  *     }
  *
@@ -360,9 +340,9 @@ modelo.inherits(Datastore, DatastoreRequest, common.GrpcService);
  * @return {object}
  *
  * @example
- * var threeDouble = gcloud.datastore.double(3.0);
+ * var threeDouble = datastore.double(3.0);
  */
-Datastore.double = function(value) {
+Datastore.prototype.double = Datastore.double = function(value) {
   return new entity.Double(value);
 };
 
@@ -380,9 +360,9 @@ Datastore.double = function(value) {
  *   longitude: -74.0447
  * };
  *
- * var geoPoint = gcloud.datastore.geoPoint(coordinates);
+ * var geoPoint = datastore.geoPoint(coordinates);
  */
-Datastore.geoPoint = function(coordindates) {
+Datastore.prototype.geoPoint = Datastore.geoPoint = function(coordindates) {
   return new entity.GeoPoint(coordindates);
 };
 
@@ -393,9 +373,9 @@ Datastore.geoPoint = function(coordindates) {
  * @return {object}
  *
  * @example
- * var sevenInteger = gcloud.datastore.int(7);
+ * var sevenInteger = datastore.int(7);
  */
-Datastore.int = function(value) {
+Datastore.prototype.int = Datastore.int = function(value) {
   return new entity.Int(value);
 };
 
@@ -408,6 +388,7 @@ Datastore.int = function(value) {
  *
  * @type {string}
  */
+Datastore.prototype.MORE_RESULTS_AFTER_CURSOR =
 Datastore.MORE_RESULTS_AFTER_CURSOR = 'MORE_RESULTS_AFTER_CURSOR';
 
 /**
@@ -419,6 +400,7 @@ Datastore.MORE_RESULTS_AFTER_CURSOR = 'MORE_RESULTS_AFTER_CURSOR';
  *
  * @type {string}
  */
+Datastore.prototype.MORE_RESULTS_AFTER_LIMIT =
 Datastore.MORE_RESULTS_AFTER_LIMIT = 'MORE_RESULTS_AFTER_LIMIT';
 
 /**
@@ -430,6 +412,7 @@ Datastore.MORE_RESULTS_AFTER_LIMIT = 'MORE_RESULTS_AFTER_LIMIT';
  *
  * @type {string}
  */
+Datastore.prototype.NO_MORE_RESULTS =
 Datastore.NO_MORE_RESULTS = 'NO_MORE_RESULTS';
 
 /**

@@ -41,13 +41,6 @@ var util = require('util');
  * @alias module:compute/network
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var gce = gcloud.compute();
- *
  * var network = gce.network('network-name');
  */
 function Network(compute, name) {
