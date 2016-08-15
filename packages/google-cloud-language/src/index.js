@@ -35,6 +35,12 @@ var Document = require('./document.js');
 var PKG = require('../package.json');
 
 /**
+ * <p class="notice">
+ *   **This is a Beta release of Google Cloud Natural Language.** This API is
+ *   not covered by any SLA or deprecation policy and may be subject to
+ *   backward-incompatible changes.
+ * </p>
+ *
  * The [Google Cloud Natural Language](https://cloud.google.com/natural-language/docs)
  * API provides natural language understanding technologies to developers,
  * including sentiment analysis, entity recognition, and syntax analysis. This
@@ -50,22 +56,9 @@ var PKG = require('../package.json');
  * @constructor
  * @alias module:language
  *
- * @classdesc
- * The object returned from `gcloud.language` gives you access to the methods
- * that will run detections and annotations from your text.
- *
- * To learn more about Google Cloud Natural Language, see the official
- * [Google Cloud Natural Language API Documentation](https://cloud.google.com/natural-language/docs).
+ * @resource [Google Cloud Natural Language API Documentation]{@link https://cloud.google.com/natural-language/docs}
  *
  * @param {object} options - [Configuration object](#/docs).
- *
- * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var language = gcloud.language();
  */
 function Language(options) {
   if (!(this instanceof Language)) {
@@ -127,7 +120,9 @@ util.inherits(Language, common.GrpcService);
  * //-
  * // Or, provide a reference to a file hosted on Google Cloud Storage.
  * //-
- * var gcs = gcloud.storage();
+ * var gcs = require('@google-cloud/storage')({
+ *   projectId: 'grape-spaceship-123'
+ * });
  * var bucket = gcs.bucket('my-bucket');
  * var file = bucket.file('my-file');
  *
@@ -198,7 +193,9 @@ Language.prototype.annotate = function(content, options, callback) {
  * //-
  * // Or, provide a reference to a file hosted on Google Cloud Storage.
  * //-
- * var gcs = gcloud.storage();
+ * var gcs = require('@google-cloud/storage')({
+ *   projectId: 'grape-spaceship-123'
+ * });
  * var bucket = gcs.bucket('my-bucket');
  * var file = bucket.file('my-file');
  *
@@ -269,7 +266,9 @@ Language.prototype.detectEntities = function(content, options, callback) {
  * //-
  * // Or, provide a reference to a file hosted on Google Cloud Storage.
  * //-
- * var gcs = gcloud.storage();
+ * var gcs = require('@google-cloud/storage')({
+ *   projectId: 'grape-spaceship-123'
+ * });
  * var bucket = gcs.bucket('my-bucket');
  * var file = bucket.file('my-file');
  *
@@ -331,7 +330,9 @@ Language.prototype.detectSentiment = function(content, options, callback) {
  * //-
  * // Or, provide a reference to a file hosted on Google Cloud Storage.
  * //-
- * var gcs = gcloud.storage();
+ * var gcs = require('@google-cloud/storage')({
+ *   projectId: 'grape-spaceship-123'
+ * });
  * var bucket = gcs.bucket('my-bucket');
  * var file = bucket.file('my-file');
  *
@@ -366,7 +367,9 @@ Language.prototype.document = function(config) {
  * //-
  * // Or, provide a reference to a file hosted on Google Cloud Storage.
  * //-
- * var gcs = gcloud.storage();
+ * var gcs = require('@google-cloud/storage')({
+ *   projectId: 'grape-spaceship-123'
+ * });
  * var bucket = gcs.bucket('my-bucket');
  * var file = bucket.file('my-file.html');
  *
@@ -406,7 +409,9 @@ Language.prototype.html = function(content, options) {
  * //-
  * // Or, provide a reference to a file hosted on Google Cloud Storage.
  * //-
- * var gcs = gcloud.storage();
+ * var gcs = require('@google-cloud/storage')({
+ *   projectId: 'grape-spaceship-123'
+ * });
  * var bucket = gcs.bucket('my-bucket');
  * var file = bucket.file('my-file.txt');
  *
