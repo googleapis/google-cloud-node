@@ -35,15 +35,6 @@ var Request = require('./request.js');
 /*! Developer Documentation
  *
  * @param {module:datastore} datastore - A Datastore instance.
- *
- * @example
- * // This is how to create a transaction object directly using this Transaction
- * // class. The following transaction object is created for use in the examples
- * // in this file below.
- * var Transaction = gcloud.datastore.Transaction;
- * var datastore = gcloud.datastore({ projectId: 'project-id' });
- * var transaction = new Transaction(datastore, 'my-project-id');
- * transaction.id = '1234'; // Give the transaction an ID.
  */
 /**
  * A transaction is a set of Datastore operations on one or more entities. Each
@@ -58,12 +49,6 @@ var Request = require('./request.js');
  * @mixes module:datastore/request
  *
  * @example
- * var gcloud = require('google-cloud');
- * var datastore = gcloud.datastore({
- *   projectId: 'my-project',
- *   keyFilename: '/path/to/keyfile.json'
- * });
- *
  * var transaction = datastore.transaction();
  */
 function Transaction(datastore) {
