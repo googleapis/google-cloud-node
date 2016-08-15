@@ -44,11 +44,6 @@ var IAM = require('./iam.js');
  * @alias module:pubsub/topic
  *
  * @example
- * var gcloud = require('google-cloud');
- * var pubsub = gcloud.pubsub({
- *   projectId: 'grape-spaceship-123'
- * });
- *
  * var topic = pubsub.topic('my-topic');
  */
 function Topic(pubsub, name) {

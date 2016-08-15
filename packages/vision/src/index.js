@@ -42,6 +42,12 @@ var LIKELY = 3;
 var VERY_LIKELY = 4;
 
 /**
+ * <p class="notice">
+ *   **This is a Beta release of Google Cloud Vision.** This API is not covered
+ *   by any SLA or deprecation policy and may be subject to backward-
+ *   incompatible changes.
+ * </p>
+ *
  * The [Cloud Vision API](https://cloud.google.com/vision/docs) allows easy
  * integration of vision detection features, including image labeling, face and
  * landmark detection, optical character recognition (OCR), and tagging of
@@ -50,28 +56,10 @@ var VERY_LIKELY = 4;
  * @constructor
  * @alias module:vision
  *
- * @classdesc
- * <p class="notice">
- *   **This is a Beta release of Google Cloud Vision.** This API is not covered
- *   by any SLA or deprecation policy and may be subject to backward-
- *   incompatible changes.
- * </p>
- *
- * To learn more about the Vision API, see
- * [Getting Started](https://cloud.google.com/vision/docs/getting-started).
- *
  * @resource [Getting Started]{@link https://cloud.google.com/vision/docs/getting-started}
  * @resource [Image Best Practices]{@link https://cloud.google.com/vision/docs/image-best-practices}
  *
  * @param {object} options - [Configuration object](#/docs).
- *
- * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var vision = gcloud.vision();
  */
 function Vision(options) {
   if (!(this instanceof Vision)) {
@@ -171,7 +159,7 @@ Vision.prototype.annotate = function(requests, callback) {
  *
  * @param {string|string[]|module:storage/file|module:storage/file[]} images -
  *     The source image(s) to run the detection on. It can be either a local
- *     image path, a remote image URL, or a gcloud File object.
+ *     image path, a remote image URL, or a @google-cloud/storage File object.
  * @param {string[]|object=} options - An array of types or a configuration
  *     object.
  * @param {object=} options.imageContext - See an

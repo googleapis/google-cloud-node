@@ -83,31 +83,12 @@ var Zone = require('./zone.js');
 var PKG = require('../package.json');
 
 /**
- * A Compute object allows you to interact with the Google Compute Engine API.
- * Using this object, you can access your instances with {module:compute/vm},
- * disks with {module:compute/disk}, and firewalls with
- * {module:compute/firewall}.
- *
  * @alias module:compute
  * @constructor
  *
- * @classdesc
- * The object returned from `gcloud.compute` gives you complete control of your
- * Compute Engine virtual machines, disks, networks, snapshots, addresses,
- * firewalls, and more.
- *
- * To learn more about Compute Engine, see
- * [What is Google Compute Engine?](https://cloud.google.com/compute/docs)
+ * @resource [What is Google Compute Engine?]{@link https://cloud.google.com/compute/docs}
  *
  * @param {object} options - [Configuration object](#/docs).
- *
- * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var gce = gcloud.compute();
  */
 function Compute(options) {
   if (!(this instanceof Compute)) {

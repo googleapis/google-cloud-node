@@ -45,13 +45,6 @@ var util = require('util');
  * @alias module:compute/address
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var prediction = gcloud.prediction();
- *
  * var model = prediction.model('my-model');
  */
 function Model(prediction, id) {

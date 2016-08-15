@@ -52,6 +52,12 @@ var Sink = require('./sink.js');
 var PKG = require('../package.json');
 
 /**
+ * <p class="notice">
+ *   **This is a Beta release of Google Cloud Logging.** This API is not covered
+ *   by any SLA or deprecation policy and may be subject to
+ *   backward-incompatible changes.
+ * </p>
+ *
  * [Google Cloud Logging](https://cloud.google.com/logging/docs) collects and
  * stores logs from applications and services on the Google Cloud Platform:
  *
@@ -60,34 +66,13 @@ var PKG = require('../package.json');
  *   - Integrate third-party logs from your virtual machine instances by
  *     installing the logging agent, `google-fluentd`.
  *
- * @alias module:logging
  * @constructor
- *
- * @classdesc
- * <p class="notice">
- *   **This is a Beta release of Google Cloud Logging.** This API is not covered
- *   by any SLA or deprecation policy and may be subject to
- *   backward-incompatible changes.
- * </p>
- *
- * The `gcloud.logging` method will return a `logging` object, allowing you to
- * create sinks, write log entries, and more.
- *
- * To learn more about Logging, see the
- * [What is Google Cloud Logging?](https://cloud.google.com/logging/docs)
- *
+ * @alias module:logging
+
  * @resource [What is Google Cloud Logging?]{@link https://cloud.google.com/logging/docs}
  * @resource [Introduction to the Cloud Logging API]{@link https://cloud.google.com/logging/docs/api}
  *
  * @param {object} options - [Configuration object](#/docs).
- *
- * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var logging = gcloud.logging();
  */
 function Logging(options) {
   if (!(this instanceof Logging)) {
@@ -140,7 +125,9 @@ util.inherits(Logging, common.GrpcService);
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var gcs = gcloud.storage();
+ * var gcs = require('@google-cloud/storage')({
+ *   projectId: 'grape-spaceship-123'
+ * });
  *
  * var config = {
  *   destination: gcs.bucket('logging-bucket'),

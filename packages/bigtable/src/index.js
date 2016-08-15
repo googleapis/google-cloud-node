@@ -42,19 +42,11 @@ var Table = require('./table.js');
 var PKG = require('../package.json');
 
 /**
- * Interact with
- * [Google Cloud Bigtable](https://cloud.google.com/bigtable/).
- *
- * @constructor
  * @alias module:bigtable
- *
- * @classdesc
- * The `gcloud.bigtable` object allows you interact with Google Cloud Bigtable.
- *
- * To learn more about Bigtable, read the
- * [Google Cloud Bigtable Concepts Overview](https://cloud.google.com/bigtable/docs/concepts)
+ * @constructor
  *
  * @resource [Creating a Cloud Bigtable Cluster]{@link https://cloud.google.com/bigtable/docs/creating-compute-instance}
+ * @resource [Google Cloud Bigtable Concepts Overview]{@link https://cloud.google.com/bigtable/docs/concepts}
  *
  * @throws {error} If a cluster is not provided.
  * @throws {error} If a zone is not provided.
@@ -63,17 +55,6 @@ var PKG = require('../package.json');
  * @param {string} options.cluster - The cluster name that hosts your tables.
  * @param {string|module:compute/zone} options.zone - The zone in which your
  *     cluster resides.
- *
- * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'my-project'
- * });
- *
- * var bigtable = gcloud.bigtable({
- *   zone: 'us-central1-b',
- *   cluster: 'gcloud-node'
- * });
  *
  * //-
  * // <h3>Creating a Cluster</h3>

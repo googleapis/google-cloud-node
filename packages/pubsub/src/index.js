@@ -51,21 +51,9 @@ var PKG = require('../package.json');
  * @constructor
  * @alias module:pubsub
  *
- * The `gcloud.pubsub` method will return a `pubsub` object, allowing you to
- * create topics, publish messages, subscribe to topics, and more.
- *
- * To learn more about Pub/Sub, see the
- * [Google Cloud Pub/Sub overview](https://developers.google.com/pubsub/overview).
+ * @resource [Google Cloud Pub/Sub overview]{@link https://developers.google.com/pubsub/overview}
  *
  * @param {object} options - [Configuration object](#/docs).
- *
- * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'my-project'
- * });
- *
- * var pubsub = gcloud.pubsub();
  */
 function PubSub(options) {
   if (!(this instanceof PubSub)) {
@@ -441,17 +429,6 @@ PubSub.prototype.getTopics = function(query, callback) {
  *   autoAck: true,
  *   interval: 30
  * }, function(err, subscription, apiResponse) {});
- *
- * //-
- * // Create a subscription to a topic from another project.
- * //-
- * var anotherProject = gcloud.pubsub({
- *   projectId: 'another-project'
- * });
- *
- * var topic = anotherProject.topic('messageCenter');
- *
- * pubsub.subscribe(topic, name, function(err, subscription, apiResponse) {});
  */
 PubSub.prototype.subscribe = function(topic, subName, options, callback) {
   if (!is.string(topic) && !(topic instanceof Topic)) {

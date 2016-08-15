@@ -40,12 +40,6 @@ var prop = require('propprop');
  * @alias module:language/document
  *
  * @example
- * var gcloud = require('google-cloud');
- *
- * var language = gcloud.language({
- *   projectId: 'grape-spaceship-123'
- * });
- *
  * var textToAnalyze = [
  *   'Google is an American multinational technology company specializing in',
  *   'Internet-related services and products.'

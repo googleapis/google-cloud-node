@@ -70,13 +70,6 @@ var Subnetwork = require('./subnetwork.js');
  * @alias module:compute/region
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var gce = gcloud.compute();
- *
  * var region = gce.region('us-central1');
  */
 function Region(compute, name) {

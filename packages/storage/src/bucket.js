@@ -66,13 +66,6 @@ var RESUMABLE_THRESHOLD = 5000000;
  *     a `keyFilename`.
  *
  * @example
- * var gcloud = require('google-cloud');
- *
- * var gcs = gcloud.storage({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
  * var bucket = gcs.bucket('albums');
  */
 function Bucket(storage, name) {

@@ -44,12 +44,6 @@ var Table = require('./table.js');
  * @constructor
  *
  * @example
- * var gcloud = require('google-cloud');
- *
- * var bigquery = gcloud.bigquery({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
  * var dataset = bigquery.dataset('institutions');
  */
 function Dataset(bigQuery, id) {

@@ -39,13 +39,6 @@ var util = require('util');
  * @param {string} resourceId - The resource ID of the channel.
  *
  * @example
- * var gcloud = require('google-cloud');
- *
- * var gcs = gcloud.storage({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
  * var channel = gcs.channel('id', 'resource-id');
  */
 function Channel(storage, id, resourceId) {

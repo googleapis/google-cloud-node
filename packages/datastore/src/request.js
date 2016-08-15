@@ -57,15 +57,6 @@ var CONSISTENCY_PROTO_CODE = {
  *
  * Creates requests to the Datastore endpoint. Designed to be inherited by
  * {module:datastore} and {module:datastore/transaction} objects.
- *
- * @example
- * // This is how to create a transaction object directly using this Transaction
- * // class. The following transaction object is created for use in the examples
- * // in this file below.
- * var datastore = gcloud.datastore({ projectId: 'project-id' });
- * var Transaction = require('gcloud/lib/datastore/transaction');
- * var transaction = new Transaction(datastore, 'my-project-id');
- * transaction.id = '1234'; // Give the transaction an ID.
  */
 /**
  * Handle logic for Datastore API operations.
@@ -717,9 +708,9 @@ DatastoreRequest.prototype.runQuery = function(query, options, callback) {
  *   key: key,
  *   data: {
  *     name: 'DonutShack',
- *     rating: gcloud.datastore.int(10),
- *     worth: gcloud.datastore.double(123456.78),
- *     location: gcloud.datastore.geoPoint({
+ *     rating: datastore.int(10),
+ *     worth: datastore.double(123456.78),
+ *     location: datastore.geoPoint({
  *       latitude: 40.6894,
  *       longitude: -74.0447
  *     }),

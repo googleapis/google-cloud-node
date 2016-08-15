@@ -47,13 +47,6 @@ var Snapshot = require('./snapshot.js');
  * @alias module:compute/disk
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var gce = gcloud.compute();
- *
  * var zone = gce.zone('zone-name');
  *
  * var disk = zone.disk('disk1');

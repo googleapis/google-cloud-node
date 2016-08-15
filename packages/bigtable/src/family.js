@@ -40,15 +40,6 @@ var FamilyError = createErrorClass('FamilyError', function(name) {
  * @alias module:bigtable/family
  *
  * @example
- * var gcloud = require('google-cloud');
- *
- * var bigtable = gcloud.bigtable({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123',
- *   cluster: 'gcloud-node',
- *   zone: 'us-central1-b'
- * });
- *
  * var table = bigtable.table('prezzy');
  * var family = table.family('follows');
  */

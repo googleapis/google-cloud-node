@@ -167,6 +167,10 @@ describe('Datastore', function() {
       var double = Datastore.double(aDouble);
       assert.strictEqual(double.value, aDouble);
     });
+
+    it('should also be on the prototype', function() {
+      assert.strictEqual(datastore.double, Datastore.double);
+    });
   });
 
   describe('geoPoint', function() {
@@ -174,6 +178,10 @@ describe('Datastore', function() {
       var aGeoPoint = { latitude: 24, longitude: 88 };
       var geoPoint = Datastore.geoPoint(aGeoPoint);
       assert.strictEqual(geoPoint.value, aGeoPoint);
+    });
+
+    it('should also be on the prototype', function() {
+      assert.strictEqual(datastore.geoPoint, Datastore.geoPoint);
     });
   });
 
@@ -183,6 +191,10 @@ describe('Datastore', function() {
       var int = Datastore.int(anInt);
       assert.strictEqual(int.value, anInt);
     });
+
+    it('should also be on the prototype', function() {
+      assert.strictEqual(datastore.int, Datastore.int);
+    });
   });
 
   describe('MORE_RESULTS_AFTER_CURSOR', function() {
@@ -190,6 +202,13 @@ describe('Datastore', function() {
       assert.strictEqual(
         Datastore.MORE_RESULTS_AFTER_CURSOR,
         'MORE_RESULTS_AFTER_CURSOR'
+      );
+    });
+
+    it('should also be on the prototype', function() {
+      assert.strictEqual(
+        datastore.MORE_RESULTS_AFTER_CURSOR,
+        Datastore.MORE_RESULTS_AFTER_CURSOR
       );
     });
   });
@@ -201,11 +220,22 @@ describe('Datastore', function() {
         'MORE_RESULTS_AFTER_LIMIT'
       );
     });
+
+    it('should also be on the prototype', function() {
+      assert.strictEqual(
+        datastore.MORE_RESULTS_AFTER_LIMIT,
+        Datastore.MORE_RESULTS_AFTER_LIMIT
+      );
+    });
   });
 
   describe('NO_MORE_RESULTS', function() {
     it('should expose a NO_MORE_RESULTS helper', function() {
       assert.strictEqual(Datastore.NO_MORE_RESULTS, 'NO_MORE_RESULTS');
+    });
+
+    it('should also be on the prototype', function() {
+      assert.strictEqual(datastore.NO_MORE_RESULTS, Datastore.NO_MORE_RESULTS);
     });
   });
 

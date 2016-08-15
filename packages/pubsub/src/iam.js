@@ -59,11 +59,6 @@ var util = require('util');
  * @resource [What is Cloud IAM?]{@link https://cloud.google.com/iam/}
  *
  * @example
- * var pubsub = gcloud.pubsub({
- *   projectId: 'grape-spaceship-123',
- *   keyFilename: '/path/to/keyfile.json'
- * });
- *
  * var topic = pubsub.topic('my-topic');
  * // topic.iam
  *

@@ -49,13 +49,6 @@ var is = require('is');
  * @return {module:logging/entry}
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var logging = gcloud.logging();
- *
  * var syslog = logging.log('syslog');
  *
  * var resource = {

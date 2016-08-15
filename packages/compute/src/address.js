@@ -39,13 +39,6 @@ var util = require('util');
  * @alias module:compute/address
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var gce = gcloud.compute();
- *
  * var region = gce.region('region-name');
  *
  * var address = region.address('address1');

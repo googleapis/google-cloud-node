@@ -49,29 +49,14 @@ var PKG = require('../package.json');
  *   - Guess how much a user might spend on a given day, given his spending
  *   history.
  *
+ * @constructor
+ * @alias module:prediction
+ *
  * @resource [Hello Prediction! Example]{@link https://cloud.google.com/prediction/docs/hello_world}
  * @resource [What is the Google Prediction API?]{@link https://cloud.google.com/prediction/docs/getting-started}
  * @resource [Developers Guide]{@link https://cloud.google.com/prediction/docs/developer-guide}
  *
- * @constructor
- * @alias module:prediction
- *
- * @classdesc
- * The `gcloud.prediction` method will return a `prediction` object, allowing
- * you to create models, train them, and query them.
- *
- * To learn more about the Prediction API, see
- * [What is the Google Prediction API?](https://cloud.google.com/prediction/docs/getting-started)
- *
  * @param {object} options - [Configuration object](#/docs).
- *
- * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var prediction = gcloud.prediction();
  */
 function Prediction(options) {
   if (!(this instanceof Prediction)) {
@@ -129,7 +114,9 @@ util.inherits(Prediction, common.Service);
  * // Create a model, using an existing CSV file in a Google Cloud Storage
  * // bucket as training data.
  * //-
- * var gcs = gcloud.storage();
+ * var gcs = require('@google-cloud/storage')({
+ *   projectId: 'grape-spaceship-123'
+ * });
  * var bucket = gcs.bucket('my-bucket');
  * var modelDataCsv = bucket.file('my-model.csv');
  *
