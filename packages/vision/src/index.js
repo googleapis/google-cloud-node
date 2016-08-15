@@ -1284,7 +1284,7 @@ Vision.findImages_ = function(images, callback) {
     if (Buffer.isBuffer(image)) {
       process.nextTick(function() {
         callback(null, {
-          content: image.toString("base64")
+          content: image.toString('base64')
         });
       });
       return;
