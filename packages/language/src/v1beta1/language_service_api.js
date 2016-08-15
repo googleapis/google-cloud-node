@@ -50,7 +50,6 @@ var ALL_SCOPES = [
 ];
 
 module.exports = function build(options) {
-  var built = {};
   options = options || {};
   if (!('scopes' in options)) {
     options.scopes = ALL_SCOPES;
@@ -61,7 +60,7 @@ module.exports = function build(options) {
     root: require('google-proto-files')('..'),
     file: 'google/cloud/language/v1beta1/language_service.proto'
   }]);
-  built.grpc = grpcClient.google.cloud.language.v1beta1;
+  var built = grpcClient.google.cloud.language.v1beta1;
   /**
    * Provides text analysis operations such as sentiment analysis and entity
    * recognition.
