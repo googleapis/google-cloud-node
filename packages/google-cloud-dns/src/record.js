@@ -41,12 +41,6 @@ var format = require('string-format-obj');
  *     resolvers.
  *
  * @example
- * var gcloud = require('google-cloud');
- *
- * var dns = gcloud.dns({
- *   projectId: 'grape-spaceship-123'
- * });
- *
  * var zone = dns.zone('my-awesome-zone');
  *
  * var record = zone.record('a', {
