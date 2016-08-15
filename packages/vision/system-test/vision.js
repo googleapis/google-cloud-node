@@ -66,6 +66,20 @@ describe('Vision', function() {
     });
   });
 
+  it('should detect from a Buffer', function(done) {
+    var buffer = fs.readFileSync(IMAGES.logo);
+    vision.detect(buffer, ['logos'], function(err, logos) {
+      assert.ifError(err);
+
+      var expected = ['Google'];
+      expected.errors = [];
+
+      assert.deepEqual(logos, expected);
+
+      done();
+    });
+  });
+
   describe('single image', function() {
     var TYPES = ['faces', 'labels', 'safeSearch'];
 

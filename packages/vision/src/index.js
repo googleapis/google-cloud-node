@@ -1281,6 +1281,14 @@ Vision.findImages_ = function(images, callback) {
   images = arrify(images);
 
   function findImage(image, callback) {
+    if (Buffer.isBuffer(image)) {
+      process.nextTick(function() {
+        callback(null, {
+          content: image.toString("base64")
+        });
+      });
+      return;
+    }
     if (image instanceof Storage.File) {
       callback(null, {
         source: {
