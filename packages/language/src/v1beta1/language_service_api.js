@@ -23,6 +23,8 @@
  * The only allowed edits are to method and file documentation. A 3-way
  * merge preserves those additions if the generated source changes.
  */
+/* TODO: introduce line-wrapping so that it never exceeds the limit. */
+/* jscs: disable maximumLineLength */
 'use strict';
 
 var arguejs = require('arguejs');
@@ -114,7 +116,7 @@ module.exports = function build(options) {
         servicePath,
         port,
         grpcClient.google.cloud.language.v1beta1.LanguageService,
-        {'sslCreds': sslCreds});
+        {sslCreds: sslCreds});
     var methods = [
       'analyzeSentiment',
       'analyzeEntities',
@@ -164,12 +166,12 @@ module.exports = function build(options) {
    */
   LanguageServiceApi.prototype.analyzeSentiment = function analyzeSentiment() {
     var args = arguejs({
-      'document': Object,
-      'options': [gax.CallOptions],
-      'callback': [Function]
+      document: Object,
+      options: [gax.CallOptions],
+      callback: [Function]
     }, arguments);
     var req = {
-      'document': args.document
+      document: args.document
     };
     return this._analyzeSentiment(req, args.options, args.callback);
   };
@@ -193,14 +195,14 @@ module.exports = function build(options) {
    */
   LanguageServiceApi.prototype.analyzeEntities = function analyzeEntities() {
     var args = arguejs({
-      'document': Object,
-      'encodingType': Number,
-      'options': [gax.CallOptions],
-      'callback': [Function]
+      document: Object,
+      encodingType: Number,
+      options: [gax.CallOptions],
+      callback: [Function]
     }, arguments);
     var req = {
-      'document': args.document,
-      'encoding_type': args.encodingType
+      document: args.document,
+      encoding_type: args.encodingType
     };
     return this._analyzeEntities(req, args.options, args.callback);
   };
@@ -228,16 +230,16 @@ module.exports = function build(options) {
    */
   LanguageServiceApi.prototype.annotateText = function annotateText() {
     var args = arguejs({
-      'document': Object,
-      'features': Object,
-      'encodingType': Number,
-      'options': [gax.CallOptions],
-      'callback': [Function]
+      document: Object,
+      features: Object,
+      encodingType: Number,
+      options: [gax.CallOptions],
+      callback: [Function]
     }, arguments);
     var req = {
-      'document': args.document,
-      'features': args.features,
-      'encoding_type': args.encodingType
+      document: args.document,
+      features: args.features,
+      encoding_type: args.encodingType
     };
     return this._annotateText(req, args.options, args.callback);
   };
