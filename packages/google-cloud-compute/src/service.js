@@ -47,13 +47,6 @@ var util = require('util');
  * @alias module:compute/service
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var gce = gcloud.compute();
- *
  * var service = gce.service('service-name');
  */
 function Service(compute, name) {

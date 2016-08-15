@@ -44,13 +44,6 @@ var modelo = require('modelo');
  * @alias module:compute/operation
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var gce = gcloud.compute();
- *
  * //-
  * // Reference a global operation.
  * //-

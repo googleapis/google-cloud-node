@@ -61,13 +61,6 @@ var DetachDiskError = createErrorClass('DetachDiskError', function(message) {
  * @alias module:compute/vm
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var gce = gcloud.compute();
- *
  * var zone = gce.zone('zone-name');
  *
  * var vm = zone.vm('vm-name');

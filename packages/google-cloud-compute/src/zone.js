@@ -80,13 +80,6 @@ var VM = require('./vm.js');
  * @alias module:compute/zone
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- *
- * var gce = gcloud.compute();
- *
  * var zone = gce.zone('us-central1-a');
  */
 function Zone(compute, name) {
