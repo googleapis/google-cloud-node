@@ -26,7 +26,7 @@ describe('pubsub:topics', function () {
         assert.ifError(err);
         assert.equal(topic.name, name);
         assert(console.log.calledWith('Created topic: %s', topicName));
-        done();
+        setTimeout(done, 5000);
       });
     });
   });

@@ -40,7 +40,7 @@ describe('pubsub:subscriptions', function () {
         assert.equal(subscription.name, name);
         assert(console.log.calledWith('Created subscription %s to topic %s', subscriptionName, topicName));
         // The next test sometimes fails, so, slow this test down
-        setTimeout(done, 2000);
+        setTimeout(done, 5000);
       });
     });
   });
