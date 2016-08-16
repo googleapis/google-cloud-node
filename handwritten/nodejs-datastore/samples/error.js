@@ -13,18 +13,20 @@
 
 'use strict';
 
-// By default, gcloud will authenticate using the service account file specified
-// by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use the
-// project specified by the GCLOUD_PROJECT environment variable. See
-// https://googlecloudplatform.github.io/gcloud-node/#/docs/guides/authentication
-var gcloud = require('gcloud');
-var dataset = gcloud.datastore();
+// By default, the client will authenticate using the service account file
+// specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use
+// the project specified by the GCLOUD_PROJECT environment variable. See
+// https://googlecloudplatform.github.io/gcloud-node/#/docs/google-cloud/latest/guides/authentication
+var Datastore = require('@google-cloud/datastore');
+
+// Instantiate a datastore client
+var datastore = Datastore();
 
 // [START error]
 function runQuery (cb) {
-  var query = dataset.createQuery(['Company']).start('badrequest');
+  var query = datastore.createQuery(['Company']).start('badrequest');
 
-  dataset.runQuery(query, function (err, entities) {
+  datastore.runQuery(query, function (err, entities) {
     // Check for an error
     if (err) {
       console.log(err.errors); // [...]
