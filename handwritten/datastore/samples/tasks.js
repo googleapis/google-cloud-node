@@ -16,17 +16,15 @@
 var input = process.argv.splice(2);
 var command = input.shift();
 
-if (!process.env.GCLOUD_PROJECT) {
-  throw new Error('GCLOUD_PROJECT environment variable required.');
-}
-
 // [START build_service]
-// By default, gcloud will authenticate using the service account file specified
-// by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use the
-// project specified by the GCLOUD_PROJECT environment variable. See
-// https://googlecloudplatform.github.io/gcloud-node/#/docs/guides/authentication
-var gcloud = require('gcloud');
-var datastore = gcloud.datastore();
+// By default, the client will authenticate using the service account file
+// specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use
+// the project specified by the GCLOUD_PROJECT environment variable. See
+// https://googlecloudplatform.github.io/gcloud-node/#/docs/google-cloud/latest/guides/authentication
+var Datastore = require('@google-cloud/datastore');
+
+// Instantiate a datastore client
+var datastore = Datastore();
 // [END build_service]
 
 /*
@@ -100,9 +98,13 @@ function addTask (description, callback) {
 
 // [START update_entity]
 function markDone (taskId, callback) {
-  var error;
+  var transaction = datastore.transaction();
 
-  datastore.runInTransaction(function (transaction, done) {
+  transaction.run(function (err) {
+    if (err) {
+      return callback(err);
+    }
+
     var taskKey = datastore.key([
       'Task',
       taskId
@@ -110,25 +112,26 @@ function markDone (taskId, callback) {
 
     transaction.get(taskKey, function (err, task) {
       if (err) {
-        // An error occurred while getting the values.
-        error = err;
-        transaction.rollback(done);
-        return;
+        // An error occurred while getting the task
+        return transaction.rollback(function (_err) {
+          return callback(err || _err);
+        });
       }
 
       task.data.done = true;
 
       transaction.save(task);
 
-      // Commit the transaction.
-      done();
+      // Commit the transaction
+      transaction.commit(function (err) {
+        if (err) {
+          return callback(err);
+        }
+
+        // The transaction completed successfully.
+        callback();
+      });
     });
-  }, function (transactionError) {
-    if (transactionError || error) {
-      return callback(transactionError || error);
-    }
-    // The transaction completed successfully.
-    callback();
   });
 }
 // [END update_entity]

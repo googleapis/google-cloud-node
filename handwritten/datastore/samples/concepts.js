@@ -14,11 +14,11 @@
 'use strict';
 
 var asyncUtil = require('async');
-// By default, gcloud will authenticate using the service account file specified
-// by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use the
-// project specified by the GCLOUD_PROJECT environment variable. See
-// https://googlecloudplatform.github.io/gcloud-node/#/docs/guides/authentication
-var gcloud = require('gcloud');
+// By default, the client will authenticate using the service account file
+// specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use
+// the project specified by the GCLOUD_PROJECT environment variable. See
+// https://googlecloudplatform.github.io/gcloud-node/#/docs/google-cloud/latest/guides/authentication
+var Datastore = require('@google-cloud/datastore');
 
 module.exports = {
   Entity: Entity,
@@ -45,7 +45,7 @@ function Entity (projectId) {
     projectId: projectId
   };
 
-  this.datastore = gcloud.datastore(options);
+  this.datastore = Datastore(options);
 
   // To create the keys, we have to use this instance of Datastore.
   datastore.key = this.datastore.key;
@@ -458,7 +458,7 @@ function Index (projectId) {
     projectId: projectId
   };
 
-  this.datastore = gcloud.datastore(options);
+  this.datastore = Datastore(options);
 }
 
 Index.prototype.testUnindexedPropertyQuery = function (callback) {
@@ -506,7 +506,7 @@ function Metadata (projectId) {
     projectId: projectId
   };
 
-  this.datastore = gcloud.datastore(options);
+  this.datastore = Datastore(options);
 }
 
 Metadata.prototype.testNamespaceRunQuery = function (callback) {
@@ -643,7 +643,7 @@ function Query (projectId) {
     projectId: projectId
   };
 
-  this.datastore = gcloud.datastore(options);
+  this.datastore = Datastore(options);
 
   this.basicQuery = this.getBasicQuery();
   this.projectionQuery = this.getProjectionQuery();
@@ -1040,18 +1040,21 @@ Query.prototype.testEventualConsistentQuery = function () {
 
 // [START transactional_update]
 function transferFunds (fromKey, toKey, amount, callback) {
-  var error;
+  var transaction = datastore.transaction();
 
-  datastore.runInTransaction(function (transaction, done) {
+  transaction.run(function (err) {
+    if (err) {
+      return callback(err);
+    }
+
     transaction.get([
       fromKey,
       toKey
     ], function (err, accounts) {
       if (err) {
-        // An error occurred while getting the values.
-        error = err;
-        transaction.rollback(done);
-        return;
+        return transaction.rollback(function (_err) {
+          return callback(_err || err);
+        });
       }
 
       accounts[0].data.balance -= amount;
@@ -1059,14 +1062,15 @@ function transferFunds (fromKey, toKey, amount, callback) {
 
       transaction.save(accounts);
 
-      done();
+      transaction.commit(function (err) {
+        if (err) {
+          return callback(err);
+        }
+
+        // The transaction completed successfully.
+        callback();
+      });
     });
-  }, function (transactionError) {
-    if (transactionError || error) {
-      return callback(transactionError || error);
-    }
-    // The transaction completed successfully.
-    callback();
   });
 }
 // [END transactional_update]
@@ -1076,7 +1080,7 @@ function Transaction (projectId) {
     projectId: projectId
   };
 
-  this.datastore = gcloud.datastore(options);
+  this.datastore = Datastore(options);
 
   this.fromKey = this.datastore.key(['Bank', 1, 'Account', 1]);
   this.toKey = this.datastore.key(['Bank', 1, 'Account', 2]);
@@ -1203,37 +1207,41 @@ Transaction.prototype.testTransactionalGetOrCreate = function (callback) {
 
   // [START transactional_get_or_create]
   function getOrCreate (taskKey, taskData, callback) {
-    var error;
-
     var taskEntity = {
       key: taskKey,
       data: taskData
     };
 
-    datastore.runInTransaction(function (transaction, done) {
+    var transaction = datastore.transaction();
+
+    transaction.run(function (err) {
+      if (err) {
+        return callback(err);
+      }
+
       transaction.get(taskKey, function (err, task) {
         if (err) {
           // An error occurred while getting the values.
-          error = err;
-          transaction.rollback(done);
-          return;
+          return transaction.rollback(function (_err) {
+            return callback(_err || err);
+          });
         }
 
         if (task) {
           // The task entity already exists.
-          transaction.rollback(done);
+          transaction.rollback(callback);
         } else {
           // Create the task entity.
           transaction.save(taskEntity);
-          done();
+          transaction.commit(function (err) {
+            if (err) {
+              return callback(err);
+            }
+            // The transaction completed successfully.
+            callback(null, taskEntity);
+          });
         }
       });
-    }, function (transactionError) {
-      if (transactionError || error) {
-        return callback(transactionError || error);
-      }
-      // The transaction completed successfully.
-      callback(null, taskEntity);
     });
   }
   // [END transactional_get_or_create]
@@ -1288,17 +1296,22 @@ Transaction.prototype.testSingleEntityGroupReadOnly = function (callback) {
 
   // [START transactional_single_entity_group_read_only]
   function getTaskListEntities (callback) {
-    var error;
     var taskListEntities;
 
-    datastore.runInTransaction(function (transaction, done) {
+    var transaction = datastore.transaction();
+
+    transaction.run(function (err) {
+      if (err) {
+        return callback(err);
+      }
+
       var taskListKey = datastore.key(['TaskList', 'default']);
 
       datastore.get(taskListKey, function (err) {
         if (err) {
-          error = err;
-          transaction.rollback(done);
-          return;
+          return transaction.rollback(function (_err) {
+            return callback(_err || err);
+          });
         }
 
         var query = datastore.createQuery('Task')
@@ -1307,21 +1320,22 @@ Transaction.prototype.testSingleEntityGroupReadOnly = function (callback) {
         datastore.runQuery(query, function (err, entities) {
           if (err) {
             // An error occurred while running the query.
-            error = err;
-            transaction.rollback(done);
-            return;
+            return transaction.rollback(function (_err) {
+              return callback(_err || err);
+            });
           }
 
           taskListEntities = entities;
-          done();
+          transaction.commit(function (err) {
+            if (err) {
+              return callback(err);
+            }
+
+            // The transaction completed successfully.
+            callback(null, taskListEntities);
+          });
         });
       });
-    }, function (transactionError) {
-      if (transactionError || error) {
-        return callback(transactionError || error);
-      }
-      // The transaction completed successfully.
-      callback(null, taskListEntities);
     });
   }
   // [END transactional_single_entity_group_read_only]
