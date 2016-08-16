@@ -426,7 +426,8 @@ describe('Request', function() {
           }
 
           var expectedKeys = apiResponseWithDeferred.deferred
-            .map(entity.keyFromKeyProto);
+            .map(entity.keyFromKeyProto)
+            .map(entity.keyToKeyProto);
 
           assert.deepEqual(reqOpts.keys, expectedKeys);
           done();
