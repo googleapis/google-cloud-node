@@ -1305,7 +1305,7 @@ describe('Request', function() {
 
         assert.throws(function() {
           request.request_({ method: 'runQuery' }, reqOpts, assert.ifError);
-        }, 'Read consistency cannot be specified in a transaction.');
+        }, /Read consistency cannot be specified in a transaction\./);
       });
     });
   });
