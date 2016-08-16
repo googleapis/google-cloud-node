@@ -18,14 +18,14 @@ var async = require('async');
 
 // [START write]
 // [START setup]
-// By default, gcloud will authenticate using the service account file specified
-// by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use the
-// project specified by the GCLOUD_PROJECT environment variable. See
-// https://googlecloudplatform.github.io/gcloud-node/#/docs/guides/authentication
-var gcloud = require('gcloud');
+// By default, the client will authenticate using the service account file
+// specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use
+// the project specified by the GCLOUD_PROJECT environment variable. See
+// https://googlecloudplatform.github.io/gcloud-node/#/docs/google-cloud/latest/guides/authentication
+var Logging = require('@google-cloud/logging');
 
-// Get a reference to the logging component
-var logging = gcloud.logging();
+// Instantiate a logging client
+var logging = Logging();
 // [END setup]
 
 /**
