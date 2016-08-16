@@ -47,15 +47,13 @@ function getSample () {
     subscribe: sinon.stub().callsArgWith(3, null, subscriptionMock),
     getSubscriptions: sinon.stub().callsArgWith(1, null, subscriptionsMock)
   };
-  var gcloudMock = {
-    pubsub: sinon.stub().returns(pubsubMock)
-  };
+  var PubSubMock = sinon.stub().returns(pubsubMock);
   return {
     program: proxyquire('../subscriptions', {
-      gcloud: gcloudMock
+      '@google-cloud/pubsub': PubSubMock
     }),
     mocks: {
-      gcloud: gcloudMock,
+      PubSub: PubSubMock,
       pubsub: pubsubMock,
       topic: topicMock,
       subscription: subscriptionMock,

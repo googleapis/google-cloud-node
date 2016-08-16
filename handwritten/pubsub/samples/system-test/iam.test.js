@@ -14,8 +14,8 @@
 'use strict';
 
 var uuid = require('node-uuid');
-var gcloud = require('gcloud');
-var pubsub = gcloud.pubsub();
+var PubSub = require('@google-cloud/pubsub');
+var pubsub = PubSub();
 var program = require('../iam');
 var topicName = 'nodejs-docs-samples-test-' + uuid.v4();
 var subscriptionName = 'nodejs-docs-samples-test-sub-' + uuid.v4();

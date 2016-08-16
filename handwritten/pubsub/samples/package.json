@@ -9,7 +9,7 @@
     "system-test": "mocha -R spec -t 120000 --require intelli-espower-loader ../system-test/_setup.js system-test/*.test.js"
   },
   "dependencies": {
-    "gcloud": "^0.37.0"
+    "@google-cloud/pubsub": "^0.1.1"
   },
   "devDependencies": {
     "mocha": "^3.0.2",
