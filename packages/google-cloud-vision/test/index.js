@@ -262,7 +262,7 @@ describe('Vision', function() {
 
       assert.throws(function() {
         vision.detect(IMAGE, type, assert.ifError);
-      }, 'Requested detection feature not found: ' + type);
+      }, /Requested detection feature not found: not-real-type/);
     });
 
     it('should format the correct config', function(done) {
