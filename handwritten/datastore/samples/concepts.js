@@ -106,7 +106,7 @@ Entity.prototype.getKeyWithMultiLevelParent = function () {
 Entity.prototype.getTask = function () {
   // [START basic_entity]
   var task = {
-    type: 'Personal',
+    category: 'Personal',
     done: false,
     priority: 4,
     description: 'Learn Cloud Datastore'
@@ -151,7 +151,7 @@ Entity.prototype.testEntityWithParent = function (callback) {
   var task = {
     key: taskKey,
     data: {
-      type: 'Personal',
+      category: 'Personal',
       done: false,
       priority: 4,
       description: 'Learn Cloud Datastore'
@@ -167,7 +167,7 @@ Entity.prototype.testProperties = function (callback) {
   // [START properties]
   var task = [
     {
-      name: 'type',
+      name: 'category',
       value: 'Personal'
     },
     {
@@ -281,7 +281,7 @@ Entity.prototype.testLookup = function (callback) {
       // Task found.
 
       // entity.data = {
-      //   type: 'Personal',
+      //   category: 'Personal',
       //   done: false,
       //   priority: 4,
       //   description: 'Learn Cloud Datastore'
@@ -368,14 +368,14 @@ Entity.prototype.testBatchUpsert = function (callback) {
   var taskKey2 = this.datastore.key(['Task', 2]);
 
   var task1 = {
-    type: 'Personal',
+    category: 'Personal',
     done: false,
     priority: 4,
     description: 'Learn Cloud Datastore'
   };
 
   var task2 = {
-    type: 'Work',
+    category: 'Work',
     done: false,
     priority: 8,
     description: 'Integrate Cloud Datastore'
@@ -849,8 +849,8 @@ Query.prototype.testDistinctQuery = function (callback) {
 
   // [START distinct_query]
   var query = datastore.createQuery('Task')
-    .groupBy(['type', 'priority'])
-    .order('type')
+    .groupBy(['category', 'priority'])
+    .order('category')
     .order('priority');
   // [END distinct_query]
 
@@ -862,8 +862,8 @@ Query.prototype.testDistinctOnQuery = function (callback) {
 
   // [START distinct_on_query]
   var query = datastore.createQuery('Task')
-    .groupBy('type')
-    .order('type')
+    .groupBy('category')
+    .order('category')
     .order('priority');
   // [END distinct_on_query]
 
