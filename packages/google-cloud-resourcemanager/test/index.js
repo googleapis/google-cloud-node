@@ -327,7 +327,7 @@ describe('Resource', function() {
 
       assert.throws(function() {
         resourceWithoutProjectId.project();
-      }, /A project ID is required/);
+      }, /A project ID is required\./);
     });
   });
 });
