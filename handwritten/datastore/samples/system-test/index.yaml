@@ -10,7 +10,7 @@ indexes:
   - name: percent_complete
 - kind: Task
   properties:
-  - name: type
+  - name: category
   - name: priority
 - kind: Task
   properties:
@@ -22,16 +22,15 @@ indexes:
   - name: created
 - kind: Task
   properties:
-  - name: type
+  - name: category
   - name: priority
     direction: desc
 - kind: Task
   properties:
-  - name: type
+  - name: category
   - name: created
 - kind: Task
   properties:
   - name: priority
     direction: desc
   - name: created
-  
