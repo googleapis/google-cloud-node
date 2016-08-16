@@ -949,6 +949,22 @@ describe('Vision', function() {
       });
     });
 
+
+    it('should get content from a buffer', function(done) {
+      var base64String = 'aGVsbG8gd29ybGQ=';
+      var buffer = new Buffer(base64String, 'base64');
+
+      Vision.findImages_(buffer, function(err, images) {
+        assert.ifError(err);
+        assert.deepEqual(images, [
+          {
+            content: base64String
+          }
+        ]);
+        done();
+      });
+    });
+
     it('should return an error when file cannot be found', function(done) {
       Vision.findImages_('./not-real-file.png', function(err) {
         assert.strictEqual(err.code, 'ENOENT');
