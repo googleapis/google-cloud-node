@@ -16,7 +16,6 @@
 'use strict';
 
 var languageServiceApi = require('./language_service_api');
-var extend = require('extend');
 var gax = require('google-gax');
 
 function v1beta1(options) {
@@ -25,9 +24,7 @@ function v1beta1(options) {
     options.scopes = v1beta1.ALL_SCOPES;
   }
   var gaxGrpc = gax.grpc(options);
-  var result = {};
-  extend(result, languageServiceApi(gaxGrpc));
-  return result;
+  return languageServiceApi(gaxGrpc);
 }
 
 v1beta1.SERVICE_ADDRESS = languageServiceApi.SERVICE_ADDRESS;
