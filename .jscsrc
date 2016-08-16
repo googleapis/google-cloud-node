@@ -17,7 +17,7 @@
   "requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties",
   "maximumLineLength": {
     "value": 80,
-    "allowUrlComments": true
+    "allowComments": true
   },
   "excludeFiles": [
     "system-test/data/*",
