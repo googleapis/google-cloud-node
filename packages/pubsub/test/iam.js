@@ -93,7 +93,7 @@ describe('IAM', function() {
     it('should throw an error if a policy is not supplied', function() {
       assert.throws(function() {
         iam.setPolicy(util.noop);
-      }, /A policy object is required/);
+      }, /A policy object is required\./);
     });
 
     it('should make the correct API request', function(done) {
@@ -117,7 +117,7 @@ describe('IAM', function() {
     it('should throw an error if permissions are missing', function() {
       assert.throws(function() {
         iam.testPermissions(util.noop);
-      }, /Permissions are required/);
+      }, /Permissions are required\./);
     });
 
     it('should make the correct API request', function(done) {

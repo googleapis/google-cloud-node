@@ -81,7 +81,7 @@ describe('Translate', function() {
     it('should throw if an API key is not provided', function() {
       assert.throws(function() {
         new Translate({});
-      }, 'An API key is required to use the Translate API.');
+      }, /An API key is required to use the Translate API\./);
     });
 
     it('should localize the options', function() {
@@ -266,7 +266,7 @@ describe('Translate', function() {
       it('should throw if `to` is not provided', function() {
         assert.throws(function() {
           translate.translate(INPUT, { from: SOURCE_LANG_CODE }, util.noop);
-        }, 'A target language is required to perform a translation.');
+        }, /A target language is required to perform a translation\./);
       });
 
       it('should make the correct API request', function(done) {

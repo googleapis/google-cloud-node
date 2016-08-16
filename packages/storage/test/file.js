@@ -235,7 +235,7 @@ describe('File', function() {
     it('should throw if no destination is provided', function() {
       assert.throws(function() {
         file.copy();
-      }, /should have a name/);
+      }, /Destination file should have a name\./);
     });
 
     it('should URI encode file names', function(done) {
@@ -335,7 +335,7 @@ describe('File', function() {
       it('should throw if a destination cannot be parsed', function() {
         assert.throws(function() {
           file.copy(function() {});
-        }, /should have a name/);
+        }, /Destination file should have a name\./);
       });
     });
 
@@ -479,21 +479,21 @@ describe('File', function() {
           start: 3,
           end: 8
         });
-      }, /Cannot use validation with file ranges/);
+      }, /Cannot use validation with file ranges \(start\/end\)\./);
 
       assert.throws(function() {
         file.createReadStream({
           validation: true,
           start: 3
         });
-      }, /Cannot use validation with file ranges/);
+      }, /Cannot use validation with file ranges \(start\/end\)\./);
 
       assert.throws(function() {
         file.createReadStream({
           validation: true,
           end: 8
         });
-      }, /Cannot use validation with file ranges/);
+      }, /Cannot use validation with file ranges \(start\/end\)\./);
 
       assert.doesNotThrow(function() {
         file.createReadStream({
@@ -1600,7 +1600,7 @@ describe('File', function() {
           file.getSignedPolicy({
             expires: expires
           }, function() {});
-        }, /cannot be in the past/);
+        }, /An expiration date cannot be in the past\./);
       });
     });
 
@@ -1635,7 +1635,7 @@ describe('File', function() {
             expires: Date.now() + 5,
             equals: [{}]
           }, function() {});
-        }, /Equals condition must be an array/);
+        }, /Equals condition must be an array of 2 elements\./);
       });
 
       it('should throw if equal condition length is not 2', function() {
@@ -1644,7 +1644,7 @@ describe('File', function() {
             expires: Date.now() + 5,
             equals: [['1', '2', '3']]
           }, function() {});
-        }, /Equals condition must be an array of 2 elements/);
+        }, /Equals condition must be an array of 2 elements\./);
       });
     });
 
@@ -1679,7 +1679,7 @@ describe('File', function() {
             expires: Date.now() + 5,
             startsWith: [{}]
           }, function() {});
-        }, /StartsWith condition must be an array/);
+        }, /StartsWith condition must be an array of 2 elements\./);
       });
 
       it('should throw if prefix condition length is not 2', function() {
@@ -1688,7 +1688,7 @@ describe('File', function() {
             expires: Date.now() + 5,
             startsWith: [['1', '2', '3']]
           }, function() {});
-        }, /StartsWith condition must be an array of 2 elements/);
+        }, /StartsWith condition must be an array of 2 elements\./);
       });
     });
 
@@ -1711,7 +1711,7 @@ describe('File', function() {
             expires: Date.now() + 5,
             contentLengthRange: [{max: 1}]
           }, function() {});
-        }, /ContentLengthRange must have numeric min & max fields/);
+        }, /ContentLengthRange must have numeric min & max fields\./);
       });
 
       it('should throw if content length has no max', function() {
@@ -1720,7 +1720,7 @@ describe('File', function() {
             expires: Date.now() + 5,
             contentLengthRange: [{min: 0}]
           }, function() {});
-        }, /ContentLengthRange must have numeric min & max fields/);
+        }, /ContentLengthRange must have numeric min & max fields\./);
       });
     });
   });
@@ -1962,7 +1962,7 @@ describe('File', function() {
             action: 'read',
             expires: expires
           }, function() {});
-        }, /cannot be in the past/);
+        }, /An expiration date cannot be in the past\./);
       });
     });
 
@@ -2077,12 +2077,6 @@ describe('File', function() {
   });
 
   describe('move', function() {
-    it('should throw if no destination is provided', function() {
-      assert.throws(function() {
-        file.move();
-      }, /should have a name/);
-    });
-
     describe('copy to destination', function() {
       function assertCopyFile(file, expectedDestination, callback) {
         file.copy = function(destination) {

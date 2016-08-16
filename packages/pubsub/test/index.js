@@ -468,13 +468,13 @@ describe('PubSub', function() {
     it('should throw if no Topic is provided', function() {
       assert.throws(function() {
         pubsub.subscribe();
-      }, /A Topic is required.*/);
+      }, /A Topic is required for a new subscription\./);
     });
 
     it('should throw if no sub name is provided', function() {
       assert.throws(function() {
         pubsub.subscribe('topic');
-      }, /A subscription name is required.*/);
+      }, /A subscription name is required for a new subscription\./);
     });
 
     it('should not require configuration options', function(done) {
@@ -680,7 +680,7 @@ describe('PubSub', function() {
     it('should throw if no name is provided', function() {
       assert.throws(function() {
         pubsub.subscription();
-      }, /The name of a subscription is required/);
+      }, /The name of a subscription is required\./);
     });
 
     it('should return a Subscription object', function() {
@@ -716,7 +716,7 @@ describe('PubSub', function() {
     it('should throw if a name is not provided', function() {
       assert.throws(function() {
         pubsub.topic();
-      }, /name must be specified/);
+      }, /A name must be specified for a new topic\./);
     });
 
     it('should return a Topic object', function() {

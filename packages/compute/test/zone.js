@@ -182,7 +182,7 @@ describe('Zone', function() {
     it('should throw if a target is not provided', function() {
       assert.throws(function() {
         zone.createAutoscaler(NAME, {}, assert.ifError);
-      }, 'Cannot create an autoscaler without a target.');
+      }, /Cannot create an autoscaler without a target\./);
     });
 
     it('should make the correct request', function(done) {
