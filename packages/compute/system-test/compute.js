@@ -1182,7 +1182,7 @@ describe('Compute', function() {
     it('should set the machine type', function(done) {
       var machineType = 'n1-standard-2';
 
-      vm.setMachineType(machineType, execAfterOperationComplete(function(err) {
+      vm.setMachineType(machineType, function(err) {
         assert.ifError(err);
 
         vm.getMetadata(function(err, metadata) {
@@ -1201,7 +1201,7 @@ describe('Compute', function() {
 
           done();
         });
-      }));
+      });
     });
 
     it('should set metadata', function(done) {

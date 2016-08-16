@@ -415,17 +415,12 @@ VM.prototype.reset = function(callback) {
  * @param {string} machineType - Full or partial machine type. See a list of
  *     predefined machine types
  *     [here](https://cloud.google.com/compute/docs/machine-types#predefined_machine_types).
- * @param {function=} callback - The callback function.
+ * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operation - An operation object
- *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * vm.setMachineType('n1-standard-1', function(err, operation, apiResponse) {
- *   // `operation` is an Operation object that can be used to check the status
- *   // of the request.
- * });
+ * vm.setMachineType('n1-standard-1', function(err, apiResponse) {});
  */
 VM.prototype.setMachineType = function(machineType, callback) {
   var self = this;
@@ -439,26 +434,34 @@ VM.prototype.setMachineType = function(machineType, callback) {
     });
   }
 
-  callback = callback || common.util.noop;
-
-  this.stop(function(err, operation, apiResponse) {
+  this.request({
+    method: 'POST',
+    uri: '/setMachineType',
+    json: {
+      machineType: machineType
+    }
+  }, self.execAfterOperation_(function(err) {
     if (err) {
-      callback(err, null, apiResponse);
+      if (err.message === 'Instance is starting or running.') {
+        // The instance must be stopped before its machine type can be set.
+        self.stop(self.execAfterOperation_(function(err) {
+          if (err) {
+            callback.apply(null, arguments);
+            return;
+          }
+
+          self.setMachineType(machineType, callback);
+        }));
+      } else {
+        callback.apply(null, arguments);
+      }
+
       return;
     }
 
-    operation
-      .on('error', callback)
-      .on('complete', function() {
-        self.request({
-          method: 'POST',
-          uri: '/setMachineType',
-          json: {
-            machineType: machineType
-          }
-        }, callback);
-      });
-  });
+    // The machine type was changed successfully. Start the VM.
+    self.start(self.execAfterOperation_(callback));
+  }));
 };
 
 /**
@@ -632,6 +635,26 @@ VM.prototype.request = function(reqOpts, callback) {
 
     callback(null, operation, resp);
   });
+};
+
+VM.prototype.execAfterOperation_ = function(callback) {
+  return function(err) {
+    // arguments = [..., op, apiResponse]
+    var operation = arguments[arguments.length - 2];
+    var apiResponse = arguments[arguments.length - 1];
+
+    if (err) {
+      callback(err, apiResponse);
+      return;
+    }
+
+
+    operation
+      .on('error', callback)
+      .on('complete', function() {
+        callback();
+      });
+  };
 };
 
 module.exports = VM;
