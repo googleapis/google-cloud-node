@@ -16,13 +16,13 @@
 'use strict';
 
 var languageServiceApi = require('./language_service_api');
+var extend = require('extend');
 var gax = require('google-gax');
 
 function v1beta1(options) {
-  options = options || {};
-  if (!('scopes' in options)) {
-    options.scopes = v1beta1.ALL_SCOPES;
-  }
+  options = extend({
+    scopes: v1beta1.ALL_SCOPES
+  }, options);
   var gaxGrpc = gax.grpc(options);
   return languageServiceApi(gaxGrpc);
 }

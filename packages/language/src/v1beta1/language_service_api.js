@@ -79,7 +79,6 @@ function LanguageServiceApi(gaxGrpc, grpcClient, opts) {
   var appName = opts.appName || 'gax';
   var appVersion = opts.appVersion || gax.Version;
 
-
   var googleApiClient = [
     appName + '/' + appVersion,
     CODE_GEN_NAME_VERSION,
@@ -236,6 +235,6 @@ module.exports = function build(gaxGrpc) {
     return new LanguageServiceApi(gaxGrpc, grpcClient, opts);
   };
   return built;
-}
+};
 module.exports.SERVICE_ADDRESS = SERVICE_ADDRESS;
 module.exports.ALL_SCOPES = ALL_SCOPES;
