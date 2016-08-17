@@ -612,8 +612,6 @@ Table.prototype.getRows = function(options, callback) {
     reqOpts.numRowsLimit = options.limit;
   }
 
-  var stream = through.obj();
-
   var stream = pumpify.obj([
     this.requestStream(grpcOpts, reqOpts),
     through.obj(function(data, enc, next) {

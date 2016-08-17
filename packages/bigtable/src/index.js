@@ -22,7 +22,6 @@
 
 var common = require('@google-cloud/common');
 var extend = require('extend');
-var format = require('string-format-obj');
 var googleProtoFiles = require('google-proto-files');
 var is = require('is');
 var util = require('util');
@@ -30,8 +29,6 @@ var arrify = require('arrify');
 
 var Instance = require('./instance.js');
 var Cluster = require('./cluster.js');
-var Family = require('./family.js');
-var Table = require('./table.js');
 
 var PKG = require('../package.json');
 
@@ -486,13 +483,9 @@ Bigtable.prototype.getInstances = function(query, callback) {
     method: 'listInstances'
   };
 
-  var reqOpts = {
+  var reqOpts = extend({}, query, {
     parent: this.projectName
-  };
-
-  if (query.pageToken) {
-    reqOpts.pageToken = query.pageToken;
-  }
+  });
 
   this.request(protoOpts, reqOpts, function(err, resp) {
     if (err) {
@@ -531,7 +524,7 @@ Bigtable.prototype.instance = function(name) {
  * @param {string} name - The name of the instance.
  * @return {Operation}
  */
-Bigtable.prototype.operation = function(name, metadata) {
+Bigtable.prototype.operation = function(name) {
   return new common.GrpcOperation(this, name);
 };
 

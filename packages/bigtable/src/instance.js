@@ -25,7 +25,6 @@ var is = require('is');
 var extend = require('extend');
 var nodeutil = require('util');
 
-var Bigtable = require('./index.js');
 var Cluster = require('./cluster.js');
 var Table = require('./table.js');
 var Family = require('./family.js');
@@ -509,9 +508,9 @@ Instance.prototype.getClusters = function(query, callback) {
     method: 'listClusters'
   };
 
-  var reqOpts = extend({
+  var reqOpts = extend({}, query, {
     parent: this.id
-  }, query);
+  });
 
   this.request(protoOpts, reqOpts, function(err, resp) {
     if (err) {
@@ -613,14 +612,10 @@ Instance.prototype.getTables = function(query, callback) {
     method: 'listTables'
   };
 
-  var reqOpts = {
+  var reqOpts = extend({}, query, {
     parent: this.id,
     view: Table.VIEWS[query.view || 'unspecified']
-  };
-
-  if (query.pageToken) {
-    reqOpts.pageToken = query.pageToken;
-  }
+  });
 
   this.request(protoOpts, reqOpts, function(err, resp) {
     if (err) {
@@ -638,7 +633,9 @@ Instance.prototype.getTables = function(query, callback) {
 
     var nextQuery = null;
     if (resp.nextPageToken) {
-      nextQuery = extend(true, query, { pageToken: resp.nextPageToken });
+      nextQuery = extend({}, query, {
+        pageToken: resp.nextPageToken
+      });
     }
 
     callback(null, tables, nextQuery, resp);

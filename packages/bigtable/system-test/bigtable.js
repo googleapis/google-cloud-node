@@ -18,16 +18,16 @@
 
 var assert = require('assert');
 var async = require('async');
-var exec = require('methmeth');
 var extend = require('extend');
 var uuid = require('node-uuid');
 
-var Bigtable = require('../');
 var env = require('../../../system-test/env.js');
+var Bigtable = require('../');
+var Instance = require('../src/instance.js');
+var Cluster = require('../src/cluster.js');
+var Table = require('../src/table.js');
 var Family = require('../src/family.js');
 var Row = require('../src/row.js');
-var Table = require('../src/table.js');
-var Cluster = require('../src/cluster.js');
 
 var clusterName = process.env.GCLOUD_TESTS_BIGTABLE_CLUSTER;
 var zoneName = process.env.GCLOUD_TESTS_BIGTABLE_ZONE;
@@ -96,6 +96,21 @@ function generateName(obj) {
       });
     });
 
+    it('should get a list of instances in stream mode', function(done) {
+      var instances = [];
+
+      bigtable.getInstances()
+        .on('error', done)
+        .on('data', function(instance) {
+          assert(instance instanceof Instance);
+          instances.push(instance);
+        })
+        .on('end', function() {
+          assert(instances.length > 0);
+          done();
+        });
+    });
+
     it('should check if an instance exists', function(done) {
       INSTANCE.exists(function(err, exists) {
         assert.ifError(err);
@@ -154,6 +169,21 @@ function generateName(obj) {
       });
     });
 
+    it('should retrieve a list of clusters in stream mode', function(done) {
+      var clusters = [];
+
+      INSTANCE.getClusters()
+        .on('error', done)
+        .on('data', function(cluster) {
+          assert(cluster instanceof Cluster);
+          clusters.push(cluster);
+        })
+        .on('end', function() {
+          assert(clusters.length > 0);
+          done();
+        });
+    });
+
     it('should check if a cluster exists', function(done) {
       CLUSTER.exists(function(err, exists) {
         assert.ifError(err);
@@ -205,6 +235,21 @@ function generateName(obj) {
         assert(tables[0] instanceof Table);
         done();
       });
+    });
+
+    it('should retrieve a list of tables in stream mode', function(done) {
+      var tables = [];
+
+      INSTANCE.getTables()
+        .on('error', done)
+        .on('data', function(table) {
+          assert(table instanceof Table);
+          tables.push(table);
+        })
+        .on('end', function() {
+          assert(tables.length > 0);
+          done();
+        });
     });
 
     it('should check if a table exists', function(done) {

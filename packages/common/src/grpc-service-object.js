@@ -111,11 +111,4 @@ GrpcServiceObject.prototype.requestStream = function(protoOpts, reqOpts) {
   return this.parent.requestStream(protoOpts, reqOpts);
 };
 
-/**
- * @private
- */
-GrpcServiceObject.prototype.requestWritableStream = function(protoOpts, reqOpts) {
-  return this.parent.requestWritableStream(protoOpts, reqOpts);
-};
-
 module.exports = GrpcServiceObject;
