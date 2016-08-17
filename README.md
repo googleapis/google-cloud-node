@@ -421,13 +421,13 @@ var options = {
 };
 
 topic.subscribe('subscription-name', options, function(err, subscription) {
-  // Register listeners to start pulling for messages.
+  // Register listeners to start polling for messages.
   function onError(err) {}
   function onMessage(message) {}
   subscription.on('error', onError);
   subscription.on('message', onMessage);
 
-  // Remove listeners to stop pulling for messages.
+  // Remove listeners to stop polling for messages.
   subscription.removeListener('message', onMessage);
   subscription.removeListener('error', onError);
 });
