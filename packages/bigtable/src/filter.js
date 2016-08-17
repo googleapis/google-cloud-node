@@ -170,7 +170,7 @@ Filter.createRange = function(start, end, key) {
 
   function createBound(boundName, boundData, key) {
     var isInclusive = boundData.inclusive !== false;
-    var boundKey = boundName + key + (isInclusive ? 'Inclusive' : 'Exclusive');
+    var boundKey = boundName + key + (isInclusive ? 'Closed' : 'Open');
     var bound = {};
 
     bound[boundKey] = Mutation.convertToBytes(boundData.value || boundData);

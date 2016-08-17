@@ -40,7 +40,8 @@ var FamilyError = createErrorClass('FamilyError', function(name) {
  * @alias module:bigtable/family
  *
  * @example
- * var table = bigtable.table('prezzy');
+ * var instance = bigtable.instance('my-instance');
+ * var table = instance.table('prezzy');
  * var family = table.family('follows');
  */
 function Family(table, name) {

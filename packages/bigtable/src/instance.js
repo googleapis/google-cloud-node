@@ -28,22 +28,54 @@ var nodeutil = require('util');
 var Bigtable = require('./index.js');
 var Cluster = require('./cluster.js');
 var Table = require('./table.js');
+var Family = require('./family.js');
 
 /**
+ * Create an Instance object to interact with a Compute Instance.
  *
+ * @constructor
+ * @alias module:bigtable/instance
+ *
+ * @param {string} name - Name of the instance.
+ *
+ * @example
+ * var instance = bigtable.instance('my-instance');
  */
 function Instance(bigtable, name) {
-  this.instanceName = bigtable.projectName + '/instances/' + name;
+  var id = bigtable.projectName + '/instances/' + name;
 
   var methods = {
 
     /**
+     * Create an instance.
      *
+     * @param {object} options - See {module:bigtable#createInstance}
+     *
+     * @example
+     * instance.create(function(err, instance, operation, apiResponse) {
+     *   if (err) {
+     *     // Error handling omitted.
+     *   }
+     *
+     *   operation
+     *     .on('error', console.error)
+     *     .on('complete', function() {
+     *       // The instance was created successfully.
+     *     });
+     * });
      */
     create: true,
 
     /**
+     * Delete the instance.
      *
+     * @param {function=} callback - The callback function.
+     * @param {?error} callback.err - An error returned while making this
+     *     request.
+     * @param {object} callback.apiResponse - The full API response.
+     *
+     * @example
+     * instance.delete(function(err, apiResponse) {});
      */
     delete: {
       protoOpts: {
@@ -51,17 +83,44 @@ function Instance(bigtable, name) {
         method: 'deleteInstance'
       },
       reqOpts: {
-        name: this.instanceName
+        name: id
       }
     },
 
     /**
+     * Check if an instance exists.
      *
+     * @param {function} callback - The callback function.
+     * @param {?error} callback.err - An error returned while making this
+     *     request.
+     * @param {boolean} callback.exists - Whether the instance exists or not.
+     *
+     * @example
+     * instance.exists(function(err, exists) {});
+     */
+    exists: true,
+
+    /**
+     * Get an instance if it exists.
+     *
+     * @example
+     * instance.get(function(err, instance, apiResponse) {
+     *   // The `instance` data has been populated.
+     * });
      */
     get: true,
 
     /**
+     * Get the instance metadata.
      *
+     * @param {function} callback - The callback function.
+     * @param {?error} callback.err - An error returned while making this
+     *     request.
+     * @param {object} callback.metadata - The metadata.
+     * @param {object} callback.apiResponse - The full API response.
+     *
+     * @example
+     * instance.getMetadata(function(err, metadata, apiResponse) {});
      */
     getMetadata: {
       protoOpts: {
@@ -69,12 +128,26 @@ function Instance(bigtable, name) {
         method: 'getInstance'
       },
       reqOpts: {
-        name: this.instanceName
+        name: id
       }
     },
 
     /**
+     * Set the instance metadata.
      *
+     * @param {object} metadata - Metadata object.
+     * @param {string} metadata.displayName - The descriptive name for this
+     *     instance as it appears in UIs. Can be changed at any time, but should
+     *     be kept globally unique to avoid confusion.
+     * @param {function} callback - The callback function.
+     * @param {?error} callback.err - An error returned while making this
+     *     request.
+     * @param {object} callback.apiResponse - The full API response.
+     *
+     * @example
+     * instance.setMetadata({
+     *   displayName: 'updated-name'
+     * }, function(err, apiResponse) {});
      */
     setMetadata: {
       protoOpts: {
@@ -82,14 +155,14 @@ function Instance(bigtable, name) {
         method: 'updateInstance'
       },
       reqOpts: {
-        name: this.instanceName
+        name: id
       }
     }
   };
 
   var config = {
     parent: bigtable,
-    // id: id,
+    id: id,
     methods: methods,
     createMethod: function(_, options, callback) {
       bigtable.createInstance(name, options, callback);
@@ -123,7 +196,48 @@ Instance.formatTableName_ = function(name) {
 };
 
 /**
+ * Creates a cluster.
  *
+ * @param {string} name - The name to be used when referring to the new
+ *     cluster within its instance.
+ * @param {object=} options - Cluster creation options.
+ * @param {string} options.location - The location where this cluster's nodes
+ *     and storage reside. For best performance clients should be located as
+ *     as close as possible to this cluster. Currently only zones are
+ *     supported.
+ * @param {number} options.nodes - The number of nodes allocated to this
+ *     cluster. More nodes enable higher throughput and more consistent
+ *     performance.
+ * @param {string} options.storage - The type of storage used by this cluster
+ *     to serve its parent instance's tables. Options are 'hdd' or 'ssd'.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {module:bigtable/cluster} callback.cluster - The newly created
+ *     cluster.
+ * @param {Operation} callback.operation - An operation object that can be used
+ *     to check the status of the request.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * var callback = function(err, cluster, operation, apiResponse) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ *
+ *   operation
+ *     .on('error', console.log)
+ *     .on('complete', function() {
+ *       // The cluster has successfully been created.
+ *     });
+ * };
+ *
+ * var options = {
+ *   location: 'us-central1-b',
+ *   nodes: 3,
+ *   storage: 'ssd'
+ * };
+ *
+ * instance.createCluster('my-cluster', options, callback);
  */
 Instance.prototype.createCluster = function(name, options, callback) {
   var self = this;
@@ -139,7 +253,7 @@ Instance.prototype.createCluster = function(name, options, callback) {
   };
 
   var reqOpts = {
-    parent: this.instanceName,
+    parent: this.id,
     clusterId: name
   };
 
@@ -148,7 +262,8 @@ Instance.prototype.createCluster = function(name, options, callback) {
   }
 
   if (options.location) {
-    reqOpts.cluster.location = options.location;
+    reqOpts.cluster.location = this.parent.projectName + '/locations/' +
+      options.location;
   }
 
   if (options.nodes) {
@@ -156,7 +271,7 @@ Instance.prototype.createCluster = function(name, options, callback) {
   }
 
   if (options.storage) {
-    var storageType = Bigtable.getStorageType_(options.storage);
+    var storageType = Cluster.getStorageType_(options.storage);
     reqOpts.cluster.defaultStorageType = storageType;
   }
 
@@ -167,8 +282,8 @@ Instance.prototype.createCluster = function(name, options, callback) {
     }
 
     var cluster = self.cluster(name);
-    var operation = {};
-    // var operation = self.parent.operation(resp.name, resp);
+    var operation = self.parent.operation(resp.name);
+    operation.metadata = resp;
 
     callback(null, cluster, operation, resp);
   });
@@ -200,7 +315,7 @@ Instance.prototype.createCluster = function(name, options, callback) {
  *   // `table` is a Table object.
  * };
  *
- * bigtable.createTable('prezzy', callback);
+ * instance.createTable('prezzy', callback);
  *
  * //-
  * // Optionally specify column families to be created within the table.
@@ -209,7 +324,7 @@ Instance.prototype.createCluster = function(name, options, callback) {
  *   families: ['follows']
  * };
  *
- * bigtable.createTable('prezzy', options, callback);
+ * instance.createTable('prezzy', options, callback);
  *
  * //-
  * // You can also specify garbage collection rules for your column families.
@@ -232,7 +347,7 @@ Instance.prototype.createCluster = function(name, options, callback) {
  *   ]
  * };
  *
- * bigtable.createTable('prezzy', options, callback);
+ * instance.createTable('prezzy', options, callback);
  *
  * //-
  * // Pre-split the table based on the row key to spread the load across
@@ -242,7 +357,7 @@ Instance.prototype.createCluster = function(name, options, callback) {
  *   splits: ['10', '20']
  * };
  *
- * bigtable.createTable('prezzy', options, callback);
+ * instance.createTable('prezzy', options, callback);
  */
 Instance.prototype.createTable = function(name, options, callback) {
   var self = this;
@@ -260,7 +375,7 @@ Instance.prototype.createTable = function(name, options, callback) {
   };
 
   var reqOpts = {
-    parent: this.instanceName,
+    parent: this.id,
     tableId: name,
     table: {
       // The granularity at which timestamps are stored in the table.
@@ -311,14 +426,75 @@ Instance.prototype.createTable = function(name, options, callback) {
 };
 
 /**
+ * Get a reference to a Cluster.
  *
+ * @param {string} name - The name of the cluster.
+ * @return {module:bigtable/cluster}
  */
 Instance.prototype.cluster = function(name) {
   return new Cluster(this, name);
 };
 
 /**
+ * Get Cluster objects for all of your clusters.
  *
+ * @param {object} query - Query object.
+ * @param {boolean} query.autoPaginate - Have pagination handled
+ *     automatically. Default:true.
+ * @param {number} query.maxApiCalls - Maximum number of API calls to make.
+ * @param {number} query.maxResults - Maximum number of results to return.
+ * @param {string} query.pageToken - Token returned from a previous call, to
+ *     request the next page of results.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.error - An error returned while making this request.
+ * @param {module:bigtable/cluster[]} callback.clusters - List of all
+ *     Clusters.
+ * @param {object} callback.nextQuery - If present, query with this object to
+ *     check for more results.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * instance.getClusters(function(err, clusters) {
+ *   if (!err) {
+ *     // `clusters` is an array of Cluster objects.
+ *   }
+ * });
+ *
+ * //-
+ * // To control how many API requests are made and page through the results
+ * // manually, set `autoPaginate` to false.
+ * //-
+ * var callback = function(err, clusters, nextQuery, apiResponse) {
+ *   if (nextQuery) {
+ *     // More results exist.
+ *     instance.getClusters(nextQuery, calback);
+ *   }
+ * };
+ *
+ * instance.getClusters({
+ *   autoPaginate: false
+ * }, callback);
+ *
+ * //-
+ * // Get the Clusters from your project as a readable object stream.
+ * //-
+ * instance.getClusters()
+ *   .on('error', console.error)
+ *   .on('data', function(cluster) {
+ *     // cluster is a Cluster object.
+ *   })
+ *   .on('end', function() {
+ *     // All clusters retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * instance.getClusters()
+ *   .on('data', function(cluster) {
+ *     this.end();
+ *   });
  */
 Instance.prototype.getClusters = function(query, callback) {
   var self = this;
@@ -333,13 +509,9 @@ Instance.prototype.getClusters = function(query, callback) {
     method: 'listClusters'
   };
 
-  var reqOpts = {
-    parent: this.instanceName
-  };
-
-  if (query.pageToken) {
-    reqOpts.pageToken = query.pageToken;
-  }
+  var reqOpts = extend({
+    parent: this.id
+  }, query);
 
   this.request(protoOpts, reqOpts, function(err, resp) {
     if (err) {
@@ -353,14 +525,20 @@ Instance.prototype.getClusters = function(query, callback) {
       return cluster;
     });
 
-    var nextQuery = extend({}, query, { pageToken: resp.nextPageToken });
+    var nextQuery;
+
+    if (resp.nextPageToken) {
+      nextQuery = extend({}, query, {
+        pageToken: resp.nextPageToken
+      });
+    }
 
     callback(null, clusters, nextQuery, resp);
   });
 };
 
 /**
- * Get Table objects for all the tables in your Bigtable cluster.
+ * Get Table objects for all the tables in your Compute Instance.
  *
  * @param {function} callback - The callback function.
  * @param {object=} query - Query object.
@@ -380,11 +558,47 @@ Instance.prototype.getClusters = function(query, callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * bigtable.getTables(function(err, tables) {
+ * instance.getTables(function(err, tables) {
  *   if (!err) {
  *     // `tables` is an array of Table objects.
  *   }
  * });
+ *
+ * //-
+ * // To control how many API requests are made and page through the results
+ * // manually, set `autoPaginate` to false.
+ * //-
+ * var callback = function(err, tables, nextQuery, apiResponse) {
+ *   if (nextQuery) {
+ *     // More results exist.
+ *     instance.getTables(nextQuery, calback);
+ *   }
+ * };
+ *
+ * instance.getTables({
+ *   autoPaginate: false
+ * }, callback);
+ *
+ * //-
+ * // Get the Tables from your project as a readable object stream.
+ * //-
+ * instance.getTables()
+ *   .on('error', console.error)
+ *   .on('data', function(table) {
+ *     // table is a Table object.
+ *   })
+ *   .on('end', function() {
+ *     // All tables retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * instance.getTables()
+ *   .on('data', function(table) {
+ *     this.end();
+ *   });
  */
 Instance.prototype.getTables = function(query, callback) {
   var self = this;
@@ -400,7 +614,7 @@ Instance.prototype.getTables = function(query, callback) {
   };
 
   var reqOpts = {
-    parent: this.instanceName,
+    parent: this.id,
     view: Table.VIEWS[query.view || 'unspecified']
   };
 
@@ -438,10 +652,17 @@ Instance.prototype.getTables = function(query, callback) {
  * @return {module:bigtable/table}
  *
  * @example
- * var table = bigtable.table('presidents');
+ * var table = instance.table('presidents');
  */
 Instance.prototype.table = function(name) {
   return new Table(this, name);
 };
+
+/*! Developer Documentation
+ *
+ * These methods can be used with either a callback or as a readable object
+ * stream. `streamRouter` is used to add this dual behavior.
+ */
+common.streamRouter.extend(Instance, ['getClusters', 'getTables']);
 
 module.exports = Instance;

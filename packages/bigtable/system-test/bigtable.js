@@ -379,7 +379,7 @@ function generateName(obj) {
 
         TABLE.insert(rows, function(err, entries) {
           assert.ifError(err);
-          assert(entries.length, rows.length);
+          assert.strictEqual(entries.length, rows.length);
           done();
         });
       });
@@ -827,39 +827,39 @@ function generateName(obj) {
 
     });
 
-  //   describe('deleting rows', function() {
+    describe('deleting rows', function() {
 
-  //     it('should delete specific cells', function(done) {
-  //       var row = TABLE.row('alincoln');
+      it('should delete specific cells', function(done) {
+        var row = TABLE.row('alincoln');
 
-  //       row.deleteCells(['follows:gwashington'], done);
-  //     });
+        row.deleteCells(['follows:gwashington'], done);
+      });
 
-  //     it('should delete a family', function(done) {
-  //       var row = TABLE.row('gwashington');
+      it('should delete a family', function(done) {
+        var row = TABLE.row('gwashington');
 
-  //       row.deleteCells(['traits'], done);
-  //     });
+        row.deleteCells(['traits'], done);
+      });
 
-  //     it('should delete all the cells', function(done) {
-  //       var row = TABLE.row('alincoln');
+      it('should delete all the cells', function(done) {
+        var row = TABLE.row('alincoln');
 
-  //       row.delete(done);
-  //     });
+        row.delete(done);
+      });
 
-  //     it('should delete all the rows', function(done) {
-  //       TABLE.deleteRows(function(err) {
-  //         assert.ifError(err);
+      it('should delete all the rows', function(done) {
+        TABLE.deleteRows(function(err) {
+          assert.ifError(err);
 
-  //         TABLE.getRows(function(err, rows) {
-  //           assert.ifError(err);
-  //           assert.strictEqual(rows.length, 0);
-  //           done();
-  //         });
-  //       });
-  //     });
+          TABLE.getRows(function(err, rows) {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 0);
+            done();
+          });
+        });
+      });
 
-  //   });
+    });
 
   });
 

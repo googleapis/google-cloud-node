@@ -63,17 +63,18 @@ var Row = require('./row.js');
  * @param {string} name - Name of the table.
  *
  * @example
- * var table = bigtable.table('prezzy');
+ * var instance = bigtable.instance('my-instance');
+ * var table = instance.table('prezzy');
  */
 function Table(instance, name) {
-  var id = Table.formatName_(instance.instanceName, name);
+  var id = Table.formatName_(instance.id, name);
 
   var methods = {
 
     /**
      * Create a table.
      *
-     * @param {object=} options - See {module:bigtable#createTable}.
+     * @param {object=} options - See {module:bigtable/instance#createTable}.
      *
      * @example
      * table.create(function(err, table, apiResponse) {
@@ -341,11 +342,11 @@ Table.prototype.deleteRows = function(options, callback) {
 
   var grpcOpts = {
     service: 'BigtableTableAdmin',
-    method: 'bulkDeleteRows'
+    method: 'dropRowRange'
   };
 
   var reqOpts = {
-    tableName: this.id
+    name: this.id
   };
 
   if (options.prefix) {
@@ -611,14 +612,21 @@ Table.prototype.getRows = function(options, callback) {
     reqOpts.numRowsLimit = options.limit;
   }
 
+  var stream = through.obj();
+
   var stream = pumpify.obj([
     this.requestStream(grpcOpts, reqOpts),
-    through.obj(function(rowData, enc, next) {
-      var data = Row.formatChunks_(rowData.chunks);
-      var row = self.row(data.key);
+    through.obj(function(data, enc, next) {
+      var throughStream = this;
 
-      row.data = data.cells;
-      next(null, row);
+      Row.formatChunks_(data.chunks).forEach(function(rowData) {
+        var row = self.row(rowData.key);
+
+        row.data = rowData.data;
+        throughStream.push(row);
+      });
+
+      next();
     })
   ]);
 

@@ -60,7 +60,8 @@ var RowError = createErrorClass('RowError', function(row) {
  * @alias module:bigtable/row
  *
  * @example
- * var table = bigtable.table('prezzy');
+ * var instance = bigtable.instance('my-instance');
+ * var table = instance.table('prezzy');
  * var row = table.row('gwashington');
  */
 function Row(table, key) {
@@ -158,62 +159,58 @@ util.inherits(Row, common.GrpcServiceObject);
  * // }
  */
 Row.formatChunks_ = function(chunks) {
-  // var cells = [];
-  // var goodChunks = [];
+  var rows = [];
+  var familyName;
+  var qualifierName;
 
-  // chunks.forEach(function(chunk) {
-  //   if (is.nil(chunk.row_status)) {
-  //     goodChunks.push(chunk);
-  //   }
+  chunks.reduce(function(row, chunk) {
+    var family;
+    var qualifier;
 
-  //   if (chunk.commitRow) {
-  //     cells = cells.concat(goodChunks);
-  //   }
+    row.data = row.data || {};
 
-  //   if (chunk.commitRow || chunk.resetRow) {
-  //     goodChunks = [];
-  //   }
-  // });
+    if (chunk.rowKey) {
+      row.key = Mutation.convertFromBytes(chunk.rowKey);
+    }
 
-  // var rows = [];
-  // var rowKey;
-  // var familyName;
-  // var qualifierName;
+    if (chunk.familyName) {
+      familyName = chunk.familyName.value;
+    }
 
-  // var data = cells.reduce(function(data, cell) {
-  //   if (cell.rowKey) {
-  //     rowKey = Mutation.convertFromBytes(cell.rowKey);
-  //     console.log(rowKey);
-  //   }
+    if (familyName) {
+      family = row.data[familyName] = row.data[familyName] || {};
+    }
 
-  //   if (cell.familyName) {
-  //     familyName = cell.familyName.value;
-  //   }
+    if (chunk.qualifier) {
+      qualifierName = Mutation.convertFromBytes(chunk.qualifier.value);
+    }
 
-  //   var family = data[familyName] = data[familyName] || {};
+    if (qualifierName) {
+      qualifier = family[qualifierName] = family[qualifierName] || [];
+    }
 
-  //   if (cell.qualifier) {
-  //     qualifierName = Mutation.convertFromBytes(cell.qualifier.value);
-  //   }
+    if (chunk.value) {
+      qualifier.push({
+        value: Mutation.convertFromBytes(chunk.value),
+        labels: chunk.labels,
+        timestamp: chunk.timestampMicros,
+        size: chunk.valueSize
+      });
+    }
 
-  //   var qualifier = family[qualifierName] = family[qualifierName] || [];
+    if (chunk.commitRow) {
+      rows.push(row);
+    }
 
-  //   if (cell.value) {
-  //     qualifier.push({
-  //       value: Mutation.convertFromBytes(cell.value),
-  //       labels: cell.labels,
-  //       timestamp: cell.timestampMicros,
-  //       size: cell.valueSize
-  //     });
-  //   }
+    if (chunk.commitRow || chunk.resetRow) {
+      familyName = qualifierName = null;
+      return {};
+    }
 
-  //   return data;
-  // }, {});
+    return row;
+  }, {});
 
-  // return {
-  //   key: rowKey,
-  //   cells: data
-  // };
+  return rows;
 };
 
 /**
