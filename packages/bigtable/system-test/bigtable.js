@@ -27,6 +27,7 @@ var env = require('../../../system-test/env.js');
 var Family = require('../src/family.js');
 var Row = require('../src/row.js');
 var Table = require('../src/table.js');
+var Cluster = require('../src/cluster.js');
 
 var clusterName = process.env.GCLOUD_TESTS_BIGTABLE_CLUSTER;
 var zoneName = process.env.GCLOUD_TESTS_BIGTABLE_ZONE;
@@ -46,6 +47,8 @@ function generateName(obj) {
   var TABLE_NAME = generateName('table');
   var TABLE;
 
+  var CLUSTER_NAME = 'test-bigtable-cluster';
+
   before(function(done) {
     bigtable = new Bigtable(extend({
       cluster: clusterName,
@@ -55,25 +58,28 @@ function generateName(obj) {
     INSTANCE = bigtable.instance(INSTANCE_NAME);
 
     var options = {
-      autoCreate: true,
       clusters: [{
-        name: 'test-bigtable-cluster',
+        name: CLUSTER_NAME,
         location: 'us-central1-b',
         nodes: 3
       }]
     };
 
-    INSTANCE.get(options, function(err) {
+    INSTANCE.create(options, function(err, instance, operation) {
       if (err) {
         done(err);
         return;
       }
 
-      TABLE = INSTANCE.table(TABLE_NAME);
+      operation
+        .on('error', done)
+        .on('complete', function() {
+          TABLE = INSTANCE.table(TABLE_NAME);
 
-      TABLE.create({
-        families: ['follows', 'traits']
-      }, done);
+          TABLE.create({
+            families: ['follows', 'traits']
+          }, done);
+        });
     });
   });
 
@@ -86,6 +92,24 @@ function generateName(obj) {
       bigtable.getInstances(function(err, instances) {
         assert.ifError(err);
         assert(instances.length > 0);
+        done();
+      });
+    });
+
+    it('should check if an instance exists', function(done) {
+      INSTANCE.exists(function(err, exists) {
+        assert.ifError(err);
+        assert.strictEqual(exists, true);
+        done();
+      });
+    });
+
+    it('should check if an instance does not exist', function(done) {
+      var instance = bigtable.instance('fake-instance');
+
+      instance.exists(function(err, exists) {
+        assert.ifError(err);
+        assert.strictEqual(exists, false);
         done();
       });
     });
@@ -115,17 +139,63 @@ function generateName(obj) {
     });
   });
 
-  // describe('clusters', function() {
-  //   it('should create a cluster', function(done) {
-  //     var cluster = INSTANCE.cluster('test-bigtable-cluster2');
-  //     var options = {
-  //       location: 'us-central1-b',
-  //       nodes: 3
-  //     };
+  describe('clusters', function() {
+    var CLUSTER;
 
-  //     cluster.create(options, done);
-  //   });
-  // });
+    beforeEach(function() {
+      CLUSTER = INSTANCE.cluster(CLUSTER_NAME);
+    });
+
+    it('should retrieve a list of clusters', function(done) {
+      INSTANCE.getClusters(function(err, clusters) {
+        assert.ifError(err);
+        assert(clusters[0] instanceof Cluster);
+        done();
+      });
+    });
+
+    it('should check if a cluster exists', function(done) {
+      CLUSTER.exists(function(err, exists) {
+        assert.ifError(err);
+        assert.strictEqual(exists, true);
+        done();
+      });
+    });
+
+    it('should check if a cluster does not exist', function(done) {
+      var cluster = INSTANCE.cluster('fake-cluster');
+
+      cluster.exists(function(err, exists) {
+        assert.ifError(err);
+        assert.strictEqual(exists, false);
+        done();
+      });
+    });
+
+    it('should get a cluster', function(done) {
+      CLUSTER.get(done);
+    });
+
+    it('should update a cluster', function(done) {
+      CLUSTER.setMetadata({ nodes: 4 }, done);
+    });
+
+    it.skip('should delete a cluster', function(done) {
+      var cluster = INSTANCE.cluster('test-bigtable-cluster2');
+      var options = {
+        location: 'us-central1-b',
+        nodes: 3
+      };
+
+      cluster.create(options, function(err) {
+        if (err) {
+          return done(err);
+        }
+
+        cluster.delete(done);
+      });
+    });
+  });
 
   describe('tables', function() {
 
@@ -476,88 +546,88 @@ function generateName(obj) {
           });
       });
 
-  //     describe('filters', function() {
+      describe('filters', function() {
 
-  //       it('should get rows via column data', function(done) {
-  //         var filter = {
-  //           column: 'gwashington'
-  //         };
+        it('should get rows via column data', function(done) {
+          var filter = {
+            column: 'gwashington'
+          };
 
-  //         TABLE.getRows({ filter: filter }, function(err, rows) {
-  //           assert.ifError(err);
-  //           assert.strictEqual(rows.length, 3);
+          TABLE.getRows({ filter: filter }, function(err, rows) {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 3);
 
-  //           var keys = rows.map(function(row) {
-  //             return row.id;
-  //           }).sort();
+            var keys = rows.map(function(row) {
+              return row.id;
+            }).sort();
 
-  //           assert.deepEqual(keys, [
-  //             'alincoln',
-  //             'jadams',
-  //             'tjefferson'
-  //           ]);
+            assert.deepEqual(keys, [
+              'alincoln',
+              'jadams',
+              'tjefferson'
+            ]);
 
-  //           done();
-  //         });
-  //       });
+            done();
+          });
+        });
 
-  //       it('should get rows that satisfy the cell limit', function(done) {
-  //         var entry = {
-  //           key: 'alincoln',
-  //           data: {
-  //             follows: {
-  //               tjefferson: 1
-  //             }
-  //           }
-  //         };
+        it('should get rows that satisfy the cell limit', function(done) {
+          var entry = {
+            key: 'alincoln',
+            data: {
+              follows: {
+                tjefferson: 1
+              }
+            }
+          };
 
-  //         var filter = [{
-  //           row: 'alincoln'
-  //         }, {
-  //           column: {
-  //             name: 'tjefferson',
-  //             cellLimit: 1
-  //           }
-  //         }];
+          var filter = [{
+            row: 'alincoln'
+          }, {
+            column: {
+              name: 'tjefferson',
+              cellLimit: 1
+            }
+          }];
 
-  //         TABLE.insert(entry, function(err) {
-  //           assert.ifError(err);
+          TABLE.insert(entry, function(err) {
+            assert.ifError(err);
 
-  //           TABLE.getRows({ filter: filter }, function(err, rows) {
-  //             assert.ifError(err);
-  //             var rowData = rows[0].data;
-  //             assert(rowData.follows.tjefferson.length, 1);
-  //             done();
-  //           });
-  //         });
-  //       });
+            TABLE.getRows({ filter: filter }, function(err, rows) {
+              assert.ifError(err);
+              var rowData = rows[0].data;
+              assert(rowData.follows.tjefferson.length, 1);
+              done();
+            });
+          });
+        });
 
-  //       it('should get a range of columns', function(done) {
-  //         var filter = [{
-  //           row: 'tjefferson'
-  //         }, {
-  //           column: {
-  //             family: 'follows',
-  //             start: 'gwashington',
-  //             end: 'jadams'
-  //           }
-  //         }];
+        it('should get a range of columns', function(done) {
+          var filter = [{
+            row: 'tjefferson'
+          }, {
+            column: {
+              family: 'follows',
+              start: 'gwashington',
+              end: 'jadams'
+            }
+          }];
 
-  //         TABLE.getRows({ filter: filter }, function(err, rows) {
-  //           assert.ifError(err);
+          TABLE.getRows({ filter: filter }, function(err, rows) {
+            assert.ifError(err);
 
-  //           rows.forEach(function(row) {
-  //             var keys = Object.keys(row.data.follows).sort();
+            rows.forEach(function(row) {
+              var keys = Object.keys(row.data.follows).sort();
 
-  //             assert.deepEqual(keys, [
-  //               'gwashington',
-  //               'jadams'
-  //             ]);
-  //           });
+              assert.deepEqual(keys, [
+                'gwashington',
+                'jadams'
+              ]);
+            });
 
-  //           done();
-  //         });
-  //       });
+            done();
+          });
+        });
 
         it('should run a conditional filter', function(done) {
           var filter = {
@@ -755,7 +825,7 @@ function generateName(obj) {
 
       });
 
-    // });
+    });
 
   //   describe('deleting rows', function() {
 
