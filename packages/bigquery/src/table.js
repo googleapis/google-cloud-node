@@ -258,7 +258,7 @@ Table.mergeSchemaWithRows_ = function(schema, rows) {
  * });
  *
  * //-
- * // See the [`configuration.copy`](http://goo.gl/dKWIyS) object for all
+ * // See the <a href="http://goo.gl/dKWIyS">`configuration.copy`</a> object for all
  * // available options.
  * //-
  * var metadata = {
