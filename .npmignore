@@ -1,3 +1,4 @@
 /.github
 /docs
 /test
+/packages/**/test
