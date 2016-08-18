@@ -54,7 +54,7 @@
     "concat-stream": "^1.5.0",
     "create-error-class": "^2.0.1",
     "extend": "^3.0.0",
-    "@google-cloud/common": "^0.1.0",
+    "@google-cloud/common": "^0.2.0",
     "is": "^3.0.1",
     "lodash.flatten": "^4.2.0",
     "modelo": "^4.2.0",
