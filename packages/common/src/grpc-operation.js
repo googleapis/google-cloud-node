@@ -36,7 +36,6 @@ var GrpcService = require('./grpc-service.js');
 var GrpcServiceObject = require('./grpc-service-object.js');
 
 /**
-<<<<<<< a6082e72c1cdbc038a980a34209ccc3d2323ad50
  * @type {module:common/util}
  * @private
  */
