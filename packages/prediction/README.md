@@ -1,36 +1,50 @@
-# @google-cloud/bigquery
-> Google BigQuery Client Library for Node.js
+# @google-cloud/prediction
+> Google Prediction API Client Library for Node.js
 
-*Looking for more Google APIs than just BigQuery? You might want to check out [`google-cloud`][google-cloud].*
+*Looking for more Google APIs than just Prediction? You might want to check out [`google-cloud`][google-cloud].*
 
-- [API Documentation][gcloud-bigquery-docs]
-- [Official Documentation][cloud-bigquery-docs]
+- [API Documentation][gcloud-prediction-docs]
+- [Official Documentation][cloud-prediction-docs]
 
 
 ```sh
-$ npm install --save @google-cloud/bigquery
+$ npm install --save @google-cloud/prediction
 ```
 ```js
-var bigquery = require('@google-cloud/bigquery')({
+var prediction = require('@google-cloud/prediction')({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
-// Access an existing dataset and table.
-var schoolsDataset = bigquery.dataset('schools');
-var schoolsTable = schoolsDataset.table('schoolsData');
+// Get all of the trained models in your project.
+prediction.getModels(function(err, models) {
+  if (!err) {
+    // `models` is an array of Model objects.
+  }
+});
 
-// Import data into a table.
-schoolsTable.import('/local/file.json', function(err, job) {});
+// Reference an existing trained model.
+var model = prediction.model('my-existing-model');
 
-// Get results from a query job.
-var job = bigquery.job('job-id');
+// Train a model.
+model.train('english', 'Hello from your friends at Google!', function(err) {});
 
-// Use a callback.
-job.getQueryResults(function(err, rows) {});
-
-// Or get the same results as a readable stream.
-job.getQueryResults().on('data', function(row) {});
+// Query a model.
+model.query('Hello', function(err, results) {
+  if (!err) {
+    // results.winner == 'english'
+    // results.scores == [
+    //   {
+    //     label: 'english',
+    //     score: 1
+    //   },
+    //   {
+    //     label: 'spanish',
+    //     score: 0
+    //   }
+    // ]
+  }
+});
 ```
 
 
@@ -46,7 +60,7 @@ If you are running this client on Google Compute Engine, we handle authenticatio
 // Authenticating on a global basis.
 var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
 
-var bigQuery = require('@google-cloud/bigquery')({
+var prediction = require('@google-cloud/prediction')({
   projectId: projectId
 });
 
@@ -60,7 +74,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
 1. Visit the [Google Developers Console][dev-console].
 2. Create a new project or click on an existing project.
 3. Navigate to  **APIs & auth** > **APIs section** and turn on the following APIs (you may need to enable billing in order to use these services):
-  * BigQuery API
+  * Prediction API
 4. Navigate to **APIs & auth** >  **Credentials** and then:
   * If you want to use a new service account, click on **Create new Client ID** and select **Service account**. After the account is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
   * If you want to generate a new key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
@@ -68,7 +82,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
 ``` js
 var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
 
-var bigQuery = require('@google-cloud/bigquery')({
+var prediction = require('@google-cloud/prediction')({
   projectId: projectId,
 
   // The path to your key file:
@@ -85,5 +99,5 @@ var bigQuery = require('@google-cloud/bigquery')({
 [google-cloud]: https://github.com/GoogleCloudPlatform/gcloud-node
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 [dev-console]: https://console.developers.google.com/project
-[gcloud-bigquery-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/bigquery
-[cloud-bigquery-docs]: https://cloud.google.com/bigquery/what-is-bigquery
+[gcloud-prediction-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/prediction
+[cloud-prediction-docs]: https://cloud.google.com/prediction/docs

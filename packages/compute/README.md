@@ -1,36 +1,35 @@
-# @google-cloud/bigquery
-> Google BigQuery Client Library for Node.js
+# @google-cloud/compute
+> Google Compute Engine Client Library for Node.js
 
-*Looking for more Google APIs than just BigQuery? You might want to check out [`google-cloud`][google-cloud].*
+*Looking for more Google APIs than just Compute Engine? You might want to check out [`google-cloud`][google-cloud].*
 
-- [API Documentation][gcloud-bigquery-docs]
-- [Official Documentation][cloud-bigquery-docs]
+- [API Documentation][gcloud-compute-docs]
+- [Official Documentation][cloud-compute-docs]
 
 
 ```sh
-$ npm install --save @google-cloud/bigquery
+$ npm install --save @google-cloud/compute
 ```
 ```js
-var bigquery = require('@google-cloud/bigquery')({
+var gce = require('@google-cloud/compute')({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
-// Access an existing dataset and table.
-var schoolsDataset = bigquery.dataset('schools');
-var schoolsTable = schoolsDataset.table('schoolsData');
+// Create a new VM using the latest OS image of your choice.
+var zone = gce.zone('us-central1-a');
+var name = 'ubuntu-http';
 
-// Import data into a table.
-schoolsTable.import('/local/file.json', function(err, job) {});
+zone.createVM(name, { os: 'ubuntu' }, function(err, vm, operation) {
+  // `operation` lets you check the status of long-running tasks.
 
-// Get results from a query job.
-var job = bigquery.job('job-id');
-
-// Use a callback.
-job.getQueryResults(function(err, rows) {});
-
-// Or get the same results as a readable stream.
-job.getQueryResults().on('data', function(row) {});
+  operation
+    .on('error', function(err) {})
+    .on('running', function(metadata) {})
+    .on('complete', function() {
+      // Virtual machine created!
+    });
+});
 ```
 
 
@@ -46,7 +45,7 @@ If you are running this client on Google Compute Engine, we handle authenticatio
 // Authenticating on a global basis.
 var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
 
-var bigQuery = require('@google-cloud/bigquery')({
+var gce = require('@google-cloud/compute')({
   projectId: projectId
 });
 
@@ -60,7 +59,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
 1. Visit the [Google Developers Console][dev-console].
 2. Create a new project or click on an existing project.
 3. Navigate to  **APIs & auth** > **APIs section** and turn on the following APIs (you may need to enable billing in order to use these services):
-  * BigQuery API
+  * Google Compute Engine API
 4. Navigate to **APIs & auth** >  **Credentials** and then:
   * If you want to use a new service account, click on **Create new Client ID** and select **Service account**. After the account is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
   * If you want to generate a new key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
@@ -68,7 +67,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
 ``` js
 var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
 
-var bigQuery = require('@google-cloud/bigquery')({
+var gce = require('@google-cloud/compute')({
   projectId: projectId,
 
   // The path to your key file:
@@ -85,5 +84,5 @@ var bigQuery = require('@google-cloud/bigquery')({
 [google-cloud]: https://github.com/GoogleCloudPlatform/gcloud-node
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 [dev-console]: https://console.developers.google.com/project
-[gcloud-bigquery-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/bigquery
-[cloud-bigquery-docs]: https://cloud.google.com/bigquery/what-is-bigquery
+[gcloud-compute-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/compute
+[cloud-compute-docs]: https://cloud.google.com/compute/docs

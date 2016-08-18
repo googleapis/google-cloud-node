@@ -1,36 +1,70 @@
-# @google-cloud/bigquery
-> Google BigQuery Client Library for Node.js
+# @google-cloud/language
+> Google Cloud Natural Language Client Library for Node.js
 
-*Looking for more Google APIs than just BigQuery? You might want to check out [`google-cloud`][google-cloud].*
+> **This is a Beta release of Google Cloud Natural Language.** This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
 
-- [API Documentation][gcloud-bigquery-docs]
-- [Official Documentation][cloud-bigquery-docs]
+*Looking for more Google APIs than just Natural Language? You might want to check out [`google-cloud`][google-cloud].*
+
+- [API Documentation][gcloud-language-docs]
+- [Official Documentation][cloud-language-docs]
 
 
 ```sh
-$ npm install --save @google-cloud/bigquery
+$ npm install --save @google-cloud/language
 ```
 ```js
-var bigquery = require('@google-cloud/bigquery')({
+var language = require('@google-cloud/language')({
   projectId: 'grape-spaceship-123',
   keyFilename: '/path/to/keyfile.json'
 });
 
-// Access an existing dataset and table.
-var schoolsDataset = bigquery.dataset('schools');
-var schoolsTable = schoolsDataset.table('schoolsData');
+var language = language({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
 
-// Import data into a table.
-schoolsTable.import('/local/file.json', function(err, job) {});
+// Get the entities from a sentence.
+language.detectEntities('Stephen of Michigan!', function(err, entities) {
+  // entities = {
+  //   people: ['Stephen'],
+  //   places: ['Michigan']
+  // }
+});
 
-// Get results from a query job.
-var job = bigquery.job('job-id');
+// Create a document if you plan to run multiple detections.
+var document = language.document('Contributions welcome!');
 
-// Use a callback.
-job.getQueryResults(function(err, rows) {});
+// Analyze the sentiment of the document.
+document.detectSentiment(function(err, sentiment) {
+  // sentiment = 100 // Large numbers represent more positive sentiments.
+});
 
-// Or get the same results as a readable stream.
-job.getQueryResults().on('data', function(row) {});
+// Parse the syntax of the document.
+document.annotate(function(err, annotations) {
+  // annotations = {
+  //   language: 'en',
+  //   sentiment: 100,
+  //   entities: {},
+  //   sentences: ['Contributions welcome!'],
+  //   tokens: [
+  //     {
+  //       text: 'Contributions',
+  //       partOfSpeech: 'Noun (common and proper)',
+  //       partOfSpeechTag: 'NOUN'
+  //     },
+  //     {
+  //       text: 'welcome',
+  //       partOfSpeech: 'Verb (all tenses and modes)',
+  //       partOfSpeechTag: 'VERB'
+  //     },
+  //     {
+  //       text: '!',
+  //       partOfSpeech: 'Punctuation',
+  //       partOfSpeechTag: 'PUNCT'
+  //     }
+  //   ]
+  // }
+});
 ```
 
 
@@ -46,7 +80,7 @@ If you are running this client on Google Compute Engine, we handle authenticatio
 // Authenticating on a global basis.
 var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
 
-var bigQuery = require('@google-cloud/bigquery')({
+var language = require('@google-cloud/language')({
   projectId: projectId
 });
 
@@ -60,7 +94,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
 1. Visit the [Google Developers Console][dev-console].
 2. Create a new project or click on an existing project.
 3. Navigate to  **APIs & auth** > **APIs section** and turn on the following APIs (you may need to enable billing in order to use these services):
-  * BigQuery API
+  * Google Cloud Natural Language API
 4. Navigate to **APIs & auth** >  **Credentials** and then:
   * If you want to use a new service account, click on **Create new Client ID** and select **Service account**. After the account is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
   * If you want to generate a new key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
@@ -68,7 +102,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
 ``` js
 var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
 
-var bigQuery = require('@google-cloud/bigquery')({
+var language = require('@google-cloud/language')({
   projectId: projectId,
 
   // The path to your key file:
@@ -85,5 +119,5 @@ var bigQuery = require('@google-cloud/bigquery')({
 [google-cloud]: https://github.com/GoogleCloudPlatform/gcloud-node
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 [dev-console]: https://console.developers.google.com/project
-[gcloud-bigquery-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/bigquery
-[cloud-bigquery-docs]: https://cloud.google.com/bigquery/what-is-bigquery
+[gcloud-language-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/language
+[cloud-language-docs]: https://cloud.google.com/natural-language/docs
