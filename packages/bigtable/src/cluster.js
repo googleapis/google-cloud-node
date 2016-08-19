@@ -205,8 +205,6 @@ Cluster.getStorageType_ = function(type) {
  * }, callback);
  */
 Cluster.prototype.setMetadata = function(options, callback) {
-  var self = this;
-
   var protoOpts = {
     service: 'BigtableInstanceAdmin',
     method: 'updateCluster'

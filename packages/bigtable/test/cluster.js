@@ -28,11 +28,11 @@ function FakeGrpcServiceObject() {
   GrpcServiceObject.apply(this, arguments);
 }
 
-util.inherits(FakeGrpcServiceObject, GrpcServiceObject)
+util.inherits(FakeGrpcServiceObject, GrpcServiceObject);
 
 describe('Bigtable/Cluster', function() {
   var CLUSTER_NAME = 'my-cluster';
-  var PROJECT_ID = 'grape-spaceship-123'
+  var PROJECT_ID = 'grape-spaceship-123';
 
   var INSTANCE = {
     id: 'projects/p/instances/i',

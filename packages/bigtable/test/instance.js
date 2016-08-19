@@ -523,7 +523,7 @@ describe('Bigtable/Instance', function() {
         callback(null, response);
       };
 
-      var callback = function(err, clusters, nextQuery, apiResponse) {
+      var callback = function(err, clusters, nextQuery) {
         var expectedQuery = extend({}, options, {
           pageToken: response.nextPageToken
         });
@@ -645,7 +645,7 @@ describe('Bigtable/Instance', function() {
         callback(null, response);
       };
 
-      var callback = function(err, tables, nextQuery, apiResponse) {
+      var callback = function(err, tables, nextQuery) {
         assert.ifError(err);
 
         var expectedQuery = extend({}, options, {

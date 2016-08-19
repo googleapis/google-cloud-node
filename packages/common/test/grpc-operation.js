@@ -47,7 +47,7 @@ var FakeGrpcServiceObject = createFake(GrpcServiceObject);
 var FakeGrpcService = createFake(GrpcService);
 
 describe('GrpcOperation', function() {
-  var FAKE_SERVICE = {}
+  var FAKE_SERVICE = {};
   var OPERATION_ID = '/a/b/c/d';
 
   var GrpcOperation;
