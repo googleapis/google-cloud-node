@@ -62,6 +62,31 @@ function Family(table, name) {
     create: true,
 
     /**
+     * Delete the column family.
+     *
+     * @param {function=} callback - The callback function.
+     * @param {?error} callback.err - An error returned while making this
+     *     request.
+     * @param {object} callback.apiResponse - The full API response.
+     *
+     * @example
+     * family.delete(function(err, apiResponse) {});
+     */
+    delete: {
+      protoOpts: {
+        service: 'BigtableTableAdmin',
+        method: 'modifyColumnFamilies'
+      },
+      reqOpts: {
+        name: table.id,
+        modifications: [{
+          id: this.familyName,
+          drop: true
+        }]
+      }
+    },
+
+    /**
      * Check if the column family exists.
      *
      * @param {function} callback - The callback function.
@@ -194,34 +219,6 @@ Family.formatRule_ = function(ruleObj) {
 };
 
 /**
- * Delete the column family.
- *
- * @param {function=} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this
- *     request.
- * @param {object} callback.apiResponse - The full API response.
- *
- * @example
- * family.delete(function(err, apiResponse) {});
- */
-Family.prototype.delete = function(callback) {
-  var protoOpts = {
-    service: 'BigtableTableAdmin',
-    method: 'modifyColumnFamilies'
-  };
-
-  var reqOpts = {
-    name: this.parent.id,
-    modifications: [{
-      id: this.familyName,
-      drop: true
-    }]
-  };
-
-  this.request(protoOpts, reqOpts, callback);
-};
-
-/**
  * Get the column family's metadata.
  *
  * @param {function} callback - The callback function.
@@ -265,7 +262,6 @@ Family.prototype.getMetadata = function(callback) {
  *
  * @param {object} metadata - Metadata object.
  * @param {object=} metadata.rule - Garbage collection rule.
- * @param {string=} metadata.name - The updated column family name.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.
@@ -273,7 +269,10 @@ Family.prototype.getMetadata = function(callback) {
  *
  * @example
  * family.setMetadata({
- *   name: 'updated-name'
+ *   rule: {
+ *     versions: 2,
+ *     union: true
+ *   }
  * }, function(err, apiResponse) {});
  */
 Family.prototype.setMetadata = function(metadata, callback) {

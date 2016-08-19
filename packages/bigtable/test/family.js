@@ -75,10 +75,14 @@ describe('Bigtable/Family', function() {
         delete: {
           protoOpts: {
             service: 'BigtableTableAdmin',
-            method: 'deleteColumnFamily'
+            method: 'modifyColumnFamilies'
           },
           reqOpts: {
-            name: FAMILY_ID
+            name: TABLE.id,
+            modifications: [{
+              drop: true,
+              id: FAMILY_NAME
+            }]
           }
         }
       });
@@ -229,30 +233,21 @@ describe('Bigtable/Family', function() {
 
   describe('setMetadata', function() {
     it('should provide the proper request options', function(done) {
-      family.request = function(protoOpts, reqOpts, callback) {
+      family.request = function(protoOpts, reqOpts) {
         assert.deepEqual(protoOpts, {
           service: 'BigtableTableAdmin',
-          method: 'updateColumnFamily'
+          method: 'modifyColumnFamilies'
         });
 
-        assert.strictEqual(reqOpts.name, FAMILY_ID);
-        callback();
-      };
-
-      family.setMetadata({}, done);
-    });
-
-    it('should respect the gc expression option', function(done) {
-      var metadata = {
-        rule: 'a b c'
-      };
-
-      family.request = function(p, reqOpts) {
-        assert.strictEqual(reqOpts.gcExpression, metadata.rule);
+        assert.strictEqual(reqOpts.name, TABLE.id);
+        assert.deepEqual(reqOpts.modifications, [{
+          id: FAMILY_NAME,
+          update: {}
+        }]);
         done();
       };
 
-      family.setMetadata(metadata, assert.ifError);
+      family.setMetadata({}, assert.ifError);
     });
 
     it('should respect the gc rule option', function(done) {
@@ -276,31 +271,16 @@ describe('Bigtable/Family', function() {
       };
 
       family.request = function(p, reqOpts) {
-        assert.strictEqual(reqOpts.gcRule, formattedRule);
+        assert.deepEqual(reqOpts, {
+          name: TABLE.id,
+          modifications: [{
+            id: family.familyName,
+            update: {
+              gcRule: formattedRule
+            }
+          }]
+        });
         Family.formatRule_ = formatRule;
-        done();
-      };
-
-      family.setMetadata(metadata, assert.ifError);
-    });
-
-    it('should respect the updated name option', function(done) {
-      var formatName = Family.formatName_;
-      var fakeName = 'a/b/c';
-
-      var metadata = {
-        name: 'new-name'
-      };
-
-      Family.formatName_ = function(parent, newName) {
-        assert.strictEqual(parent, TABLE.id);
-        assert.strictEqual(newName, metadata.name);
-        return fakeName;
-      };
-
-      family.request = function(p, reqOpts) {
-        assert.strictEqual(reqOpts.name, fakeName);
-        Family.formatName_ = formatName;
         done();
       };
 

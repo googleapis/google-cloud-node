@@ -80,9 +80,11 @@ describe('Bigtable/Filter', function() {
     });
 
     it('should throw an error for unknown types', function() {
+      var errorReg = /Can\'t convert to RegExp String from unknown type\./;
+
       assert.throws(function() {
         Filter.convertToRegExpString(true);
-      }, /Can\'t convert to RegExp String from unknown type\./);
+      }, errorReg);
     });
   });
 
@@ -95,8 +97,8 @@ describe('Bigtable/Filter', function() {
       var range = Filter.createRange(start, end, key);
 
       assert.deepEqual(range, {
-        startKeyInclusive: start,
-        endKeyInclusive: end
+        startKeyClosed: start,
+        endKeyClosed: end
       });
     });
 
@@ -108,7 +110,7 @@ describe('Bigtable/Filter', function() {
 
       assert(FakeMutation.convertToBytes.calledWithExactly(start));
       assert.deepEqual(range, {
-        startKeyInclusive: start
+        startKeyClosed: start
       });
     });
 
@@ -120,7 +122,7 @@ describe('Bigtable/Filter', function() {
 
       assert(FakeMutation.convertToBytes.calledWithExactly(end));
       assert.deepEqual(range, {
-        endKeyInclusive: end
+        endKeyClosed: end
       });
     });
 
@@ -140,8 +142,8 @@ describe('Bigtable/Filter', function() {
       var range = Filter.createRange(start, end, key);
 
       assert.deepEqual(range, {
-        startKeyExclusive: start.value,
-        endKeyExclusive: end.value
+        startKeyOpen: start.value,
+        endKeyOpen: end.value
       });
     });
   });

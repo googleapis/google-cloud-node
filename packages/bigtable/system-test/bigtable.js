@@ -210,21 +210,6 @@ function generateName(obj) {
       CLUSTER.setMetadata({ nodes: 4 }, done);
     });
 
-    it.skip('should delete a cluster', function(done) {
-      var cluster = INSTANCE.cluster('test-bigtable-cluster2');
-      var options = {
-        location: 'us-central1-b',
-        nodes: 3
-      };
-
-      cluster.create(options, function(err) {
-        if (err) {
-          return done(err);
-        }
-
-        cluster.delete(done);
-      });
-    });
   });
 
   describe('tables', function() {

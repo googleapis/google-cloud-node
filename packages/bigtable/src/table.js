@@ -187,40 +187,6 @@ Table.formatName_ = function(instanceName, name) {
 };
 
 /**
- * Formats a row range into the desired proto format.
- *
- * @private
- *
- * @param {object} range - The range object.
- * @param {string} range.start - The lower bound for the range.
- * @param {string} range.end - The upper bound for the range.
- * @return {object}
- *
- * @example
- * Table.formatRowRange_({
- *   start: 'gwashington',
- *   end: 'alincoln'
- * });
- * // {
- * //   startKey: new Buffer('gwashington'),
- * //   endKey: new Buffer('alincoln')
- * // }
- */
-Table.formatRowRange_ = function(range) {
-  var rowRange = {};
-
-  if (range.start) {
-    rowRange.startKey = Mutation.convertToBytes(range.start);
-  }
-
-  if (range.end) {
-    rowRange.endKey = Mutation.convertToBytes(range.end);
-  }
-
-  return rowRange;
-};
-
-/**
  * Create a column family.
  *
  * Optionally you can send garbage collection rules and expressions when
@@ -600,7 +566,9 @@ Table.prototype.getRows = function(options, callback) {
     }
 
     if (options.ranges.length) {
-      reqOpts.rows.rowRanges = options.ranges.map(Table.formatRowRange_);
+      reqOpts.rows.rowRanges = options.ranges.map(function(range) {
+        return Filter.createRange(range.start, range.end, 'key');
+      });
     }
   }
 

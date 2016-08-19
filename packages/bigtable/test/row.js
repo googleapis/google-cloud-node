@@ -110,50 +110,215 @@ describe('Bigtable/Row', function() {
   });
 
   describe('formatChunks_', function() {
-    var formatFamiliesSpy;
+    var convert;
 
     beforeEach(function() {
-      formatFamiliesSpy = sinon.stub(Row, 'formatFamilies_');
+      convert = FakeMutation.convertFromBytes;
+      FakeMutation.convertFromBytes = sinon.spy(function(val) {
+        return val.replace('unconverted', 'converted');
+      });
     });
 
-    it('should not include chunks without commitRow', function() {
-      var chunks = [{
-        rowConents: {}
-      }];
-      var fakeFamilies = [];
-
-      formatFamiliesSpy.returns(fakeFamilies);
-
-      var formatted = Row.formatChunks_(chunks);
-
-      assert.strictEqual(formatted, fakeFamilies);
-      assert.strictEqual(formatFamiliesSpy.callCount, 1);
-      assert.deepEqual(formatFamiliesSpy.getCall(0).args[0], []);
+    afterEach(function() {
+      FakeMutation.convertFromBytes = convert;
     });
 
-    it('should ignore any chunks previous to a resetRow', function() {
-      var badData = {};
-      var goodData = {};
-      var fakeFamilies = [goodData, {}];
-
+    it('should format the chunks', function() {
+      var timestamp = Date.now();
       var chunks = [{
-        rowContents: badData,
-      }, {
-        resetRow: true
-      }, {
-        rowContents: goodData
+        rowKey: 'unconvertedKey',
+        familyName: {
+          value: 'familyName'
+        },
+        qualifier: {
+          value: 'unconvertedQualifier'
+        },
+        value: 'unconvertedValue',
+        labels: ['label'],
+        timestampMicros: timestamp,
+        valueSize: 0,
+        commitRow: false,
+        resetRow: false
       }, {
         commitRow: true
       }];
 
-      formatFamiliesSpy.returns(fakeFamilies);
+      var rows = Row.formatChunks_(chunks);
 
-      var formatted = Row.formatChunks_(chunks);
+      assert.deepEqual(rows, [{
+        key: 'convertedKey',
+        data: {
+          familyName: {
+            convertedQualifier: [{
+              value: 'convertedValue',
+              labels: ['label'],
+              timestamp: timestamp,
+              size: 0
+            }]
+          }
+        }
+      }]);
+    });
 
-      assert.strictEqual(formatted, fakeFamilies);
-      assert.strictEqual(formatted.indexOf(badData), -1);
-      assert.strictEqual(formatFamiliesSpy.callCount, 1);
-      assert.deepEqual(formatFamiliesSpy.getCall(0).args[0], [goodData]);
+    it('should inherit the row key', function() {
+      var chunks = [{
+        rowKey: 'unconvertedKey'
+      }, {
+        rowKey: null,
+        familyName: {
+          value: 'familyName'
+        },
+        commitRow: true
+      }, {
+        rowKey: 'unconvertedKey2'
+      }, {
+        rowKey: null,
+        familyName: {
+          value: 'familyName2'
+        },
+        commitRow: true
+      }];
+
+      var rows = Row.formatChunks_(chunks);
+
+      assert.deepEqual(rows, [{
+        key: 'convertedKey',
+        data: {
+          familyName: {}
+        }
+      }, {
+        key: 'convertedKey2',
+        data: {
+          familyName2: {}
+        }
+      }]);
+    });
+
+    it('should inherit the family name', function() {
+      var chunks = [{
+        rowKey: 'unconvertedKey',
+        familyName: {
+          value: 'familyName'
+        }
+      }, {
+        qualifier: {
+          value: 'unconvertedQualifier'
+        }
+      }, {
+        qualifier: {
+          value: 'unconvertedQualifier2'
+        }
+      }, {
+        commitRow: true
+      }];
+
+      var rows = Row.formatChunks_(chunks);
+
+      assert.deepEqual(rows, [{
+        key: 'convertedKey',
+        data: {
+          familyName: {
+            convertedQualifier: [],
+            convertedQualifier2: []
+          }
+        }
+      }]);
+    });
+
+    it('should inherit the qualifier', function() {
+      var timestamp1 = 123;
+      var timestamp2 = 345;
+
+      var chunks = [{
+        rowKey: 'unconvertedKey',
+        familyName: {
+          value: 'familyName'
+        },
+        qualifier: {
+          value: 'unconvertedQualifier'
+        }
+      }, {
+        value: 'unconvertedValue',
+        labels: ['label'],
+        timestampMicros: timestamp1,
+        valueSize: 0
+      }, {
+        value: 'unconvertedValue2',
+        labels: ['label2'],
+        timestampMicros: timestamp2,
+        valueSize: 2
+      }, {
+        commitRow: true
+      }];
+
+      var rows = Row.formatChunks_(chunks);
+
+      assert.deepEqual(rows, [{
+        key: 'convertedKey',
+        data: {
+          familyName: {
+            convertedQualifier: [{
+              value: 'convertedValue',
+              labels: ['label'],
+              timestamp: timestamp1,
+              size: 0
+            }, {
+              value: 'convertedValue2',
+              labels: ['label2'],
+              timestamp: timestamp2,
+              size: 2
+            }]
+          }
+        }
+      }]);
+    });
+
+    it('should discard old data when reset row is found', function() {
+      var chunks = [{
+        rowKey: 'unconvertedKey',
+        familyName: {
+          value: 'familyName'
+        },
+        qualifier: {
+          value: 'unconvertedQualifier'
+        },
+        value: 'unconvertedValue',
+        labels: ['label'],
+        valueSize: 0,
+        timestampMicros: 123
+      }, {
+        resetRow: true
+      }, {
+        rowKey: 'unconvertedKey2',
+        familyName: {
+          value: 'familyName2'
+        },
+        qualifier: {
+          value: 'unconvertedQualifier2'
+        },
+        value: 'unconvertedValue2',
+        labels: ['label2'],
+        valueSize: 2,
+        timestampMicros: 345
+      }, {
+        commitRow: true
+      }];
+
+      var rows = Row.formatChunks_(chunks);
+
+      assert.deepEqual(rows, [{
+        key: 'convertedKey2',
+        data: {
+          familyName2: {
+            convertedQualifier2: [{
+              value: 'convertedValue2',
+              labels: ['label2'],
+              size: 2,
+              timestamp: 345
+            }]
+          }
+        }
+      }]);
     });
   });
 
@@ -456,7 +621,7 @@ describe('Bigtable/Row', function() {
   describe('get', function() {
     it('should provide the proper request options', function(done) {
       row.parent.getRows = function(reqOpts) {
-        assert.strictEqual(reqOpts.key, ROW_ID);
+        assert.strictEqual(reqOpts.keys[0], ROW_ID);
         assert.strictEqual(reqOpts.filter, undefined);
         assert.strictEqual(FakeMutation.parseColumnName.callCount, 0);
         done();
@@ -714,18 +879,19 @@ describe('Bigtable/Row', function() {
     it('should pass back the updated value to the callback', function(done) {
       var fakeValue = 10;
       var response = {
-        key: 'fakeKey',
-        families: [{
-          name: 'a',
-          columns: [{
-            qualifier: 'b',
-            cells: [{
-              timestampMicros: Date.now(),
-              value: fakeValue,
-              labels: []
+        row: {
+          families: [{
+            name: 'a',
+            columns: [{
+              qualifier: 'b',
+              cells: [{
+                timestampMicros: Date.now(),
+                value: fakeValue,
+                labels: []
+              }]
             }]
           }]
-        }]
+        }
       };
 
       row.createRules = function(r, callback) {
@@ -737,7 +903,7 @@ describe('Bigtable/Row', function() {
         assert.strictEqual(value, fakeValue);
         assert.strictEqual(apiResponse, response);
         assert.strictEqual(formatFamiliesSpy.callCount, 1);
-        assert(formatFamiliesSpy.calledWithExactly(response.families));
+        assert(formatFamiliesSpy.calledWithExactly(response.row.families));
         done();
       });
     });

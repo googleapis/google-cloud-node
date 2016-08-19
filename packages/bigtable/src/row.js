@@ -111,42 +111,6 @@ util.inherits(Row, common.GrpcServiceObject);
  * @param {chunk[]} chunks - The list of chunks.
  *
  * @example
- * var chunks = [
- *   {
- *     rowContents: {
- *       name: 'follows',
- *       columns: [
- *         {
- *           qualifier: 'gwashington',
- *           cells: [
- *             {
- *               value: 1
- *             }
- *           ]
- *         }
- *       ]
- *     }
- *   }, {
- *     resetRow: true
- *   }, {
- *     rowContents: {
- *       name: 'follows',
- *       columns: [
- *         {
- *           qualifier: 'gwashington',
- *           cells: [
- *             {
- *               value: 2
- *             }
- *           ]
- *         }
- *       ]
- *     }
- *   }, {
- *     commitRow: true
- *   }
- * ];
- *
  * Row.formatChunks_(chunks);
  * // {
  * //   follows: {

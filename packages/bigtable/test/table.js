@@ -79,10 +79,11 @@ var FakeFilter = {
 
 describe('Bigtable/Table', function() {
   var TABLE_ID = 'my-table';
-  var BIGTABLE = {
-    clusterName: 'a/b/c/d'
+  var INSTANCE = {
+    id: 'a/b/c/d'
   };
-  var TABLE_NAME = BIGTABLE.clusterName + '/tables/' + TABLE_ID;
+
+  var TABLE_NAME = INSTANCE.id + '/tables/' + TABLE_ID;
 
   var Table;
   var table;
@@ -101,7 +102,7 @@ describe('Bigtable/Table', function() {
   });
 
   beforeEach(function() {
-    table = new Table(BIGTABLE, TABLE_ID);
+    table = new Table(INSTANCE, TABLE_ID);
   });
 
   afterEach(function() {
@@ -124,11 +125,11 @@ describe('Bigtable/Table', function() {
         return FAKE_TABLE_NAME;
       });
 
-      var table = new Table(BIGTABLE, TABLE_ID);
+      var table = new Table(INSTANCE, TABLE_ID);
       var config = table.calledWith_[0];
 
       assert(table instanceof FakeGrpcServiceObject);
-      assert.strictEqual(config.parent, BIGTABLE);
+      assert.strictEqual(config.parent, INSTANCE);
       assert.strictEqual(config.id, FAKE_TABLE_NAME);
 
       assert.deepEqual(config.methods, {
@@ -143,25 +144,16 @@ describe('Bigtable/Table', function() {
           }
         },
         exists: true,
-        get: true,
-        getMetadata: {
-          protoOpts: {
-            service: 'BigtableTableAdmin',
-            method: 'getTable'
-          },
-          reqOpts: {
-            name: FAKE_TABLE_NAME
-          }
-        }
+        get: true
       });
 
-      assert(Table.formatName_.calledWith(BIGTABLE.clusterName, TABLE_ID));
+      assert(Table.formatName_.calledWith(INSTANCE.id, TABLE_ID));
     });
 
     it('should use Bigtable#createTable to create the table', function(done) {
       var fakeOptions = {};
 
-      BIGTABLE.createTable = function(name, options, callback) {
+      INSTANCE.createTable = function(name, options, callback) {
         assert.strictEqual(name, TABLE_ID);
         assert.strictEqual(options, fakeOptions);
         callback();
@@ -173,44 +165,13 @@ describe('Bigtable/Table', function() {
 
   describe('formatName_', function() {
     it('should format the table name to include the cluster name', function() {
-      var tableName = Table.formatName_(BIGTABLE.clusterName, TABLE_ID);
+      var tableName = Table.formatName_(INSTANCE.id, TABLE_ID);
       assert.strictEqual(tableName, TABLE_NAME);
     });
 
     it('should not re-format the table name', function() {
-      var tableName = Table.formatName_(BIGTABLE.clusterName, TABLE_NAME);
+      var tableName = Table.formatName_(INSTANCE.id, TABLE_NAME);
       assert.strictEqual(tableName, TABLE_NAME);
-    });
-  });
-
-  describe('formatRowRange_', function() {
-    it('should create a row range object', function() {
-      var fakeRange = {
-        start: 'a',
-        end: 'b'
-      };
-      var convertedFakeRange = {
-        start: 'c',
-        end: 'd'
-      };
-
-      var spy = FakeMutation.convertToBytes = sinon.spy(function(value) {
-        if (value === fakeRange.start) {
-          return convertedFakeRange.start;
-        }
-        return convertedFakeRange.end;
-      });
-
-      var range = Table.formatRowRange_(fakeRange);
-
-      assert.deepEqual(range, {
-        startKey: convertedFakeRange.start,
-        endKey: convertedFakeRange.end
-      });
-
-      assert.strictEqual(spy.callCount, 2);
-      assert.strictEqual(spy.getCall(0).args[0], 'a');
-      assert.strictEqual(spy.getCall(1).args[0], 'b');
     });
   });
 
@@ -227,26 +188,19 @@ describe('Bigtable/Table', function() {
       table.request = function(grpcOpts, reqOpts) {
         assert.deepEqual(grpcOpts, {
           service: 'BigtableTableAdmin',
-          method: 'createColumnFamily'
+          method: 'modifyColumnFamilies'
         });
 
         assert.strictEqual(reqOpts.name, TABLE_NAME);
-        assert.strictEqual(reqOpts.columnFamilyId, COLUMN_ID);
+        assert.deepEqual(reqOpts.modifications, [{
+          id: COLUMN_ID,
+          create: {}
+        }]);
+
         done();
       };
 
       table.createFamily(COLUMN_ID, assert.ifError);
-    });
-
-    it('should respect the gc expression option', function(done) {
-      var expression = 'a && b';
-
-      table.request = function(g, reqOpts) {
-        assert.strictEqual(reqOpts.columnFamily.gcExpression, expression);
-        done();
-      };
-
-      table.createFamily(COLUMN_ID, expression, assert.ifError);
     });
 
     it('should respect the gc rule option', function(done) {
@@ -264,7 +218,9 @@ describe('Bigtable/Table', function() {
       });
 
       table.request = function(g, reqOpts) {
-        assert.strictEqual(reqOpts.columnFamily.gcRule, convertedRule);
+        var modification = reqOpts.modifications[0];
+
+        assert.strictEqual(modification.create.gcRule, convertedRule);
         assert.strictEqual(spy.callCount, 1);
         assert.strictEqual(spy.getCall(0).args[0], rule);
         done();
@@ -319,10 +275,10 @@ describe('Bigtable/Table', function() {
       table.request = function(grpcOpts, reqOpts, callback) {
         assert.deepEqual(grpcOpts, {
           service: 'BigtableTableAdmin',
-          method: 'bulkDeleteRows'
+          method: 'dropRowRange'
         });
 
-        assert.strictEqual(reqOpts.tableName, TABLE_NAME);
+        assert.strictEqual(reqOpts.name, TABLE_NAME);
         callback();
       };
 
@@ -429,18 +385,84 @@ describe('Bigtable/Table', function() {
     });
   });
 
+  describe('getMetadata', function() {
+    var views = {
+      unspecified: 0,
+      name: 1,
+      schema: 2,
+      full: 4
+    };
+
+    it('should provide the proper request options', function(done) {
+      table.request = function(grpcOpts, reqOpts) {
+        assert.deepEqual(grpcOpts, {
+          service: 'BigtableTableAdmin',
+          method: 'getTable'
+        });
+
+        assert.strictEqual(reqOpts.name, table.id);
+        assert.strictEqual(reqOpts.view, views.unspecified);
+        done();
+      };
+
+      table.getMetadata(assert.ifError);
+    });
+
+    Object.keys(views).forEach(function(view) {
+      it('should set the "' + view + '" view', function(done) {
+        var options = {
+          view: view
+        };
+
+        table.request = function(grpcOpts, reqOpts) {
+          assert.strictEqual(reqOpts.view, views[view]);
+          done();
+        };
+
+        table.getMetadata(options, assert.ifError);
+      });
+    });
+
+    it('should return an error to the callback', function(done) {
+      var error = new Error('err');
+      var response = {};
+
+      table.request = function(grpcOpts, reqOpts, callback) {
+        callback(error, response);
+      };
+
+      table.getMetadata(function(err, metadata, apiResponse) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(metadata, null);
+        assert.strictEqual(apiResponse, response);
+        done();
+      });
+    });
+
+    it('should update the metadata', function(done) {
+      var response = {};
+
+      table.request = function(grpcOpts, reqOpts, callback) {
+        callback(null, response);
+      };
+
+      table.getMetadata(function(err, metadata, apiResponse) {
+        assert.ifError(err);
+        assert.strictEqual(metadata, response);
+        assert.strictEqual(apiResponse, response);
+        assert.strictEqual(table.metadata, response);
+        done();
+      });
+    });
+  });
+
   describe('getRows', function() {
     describe('options', function() {
       var pumpSpy;
-      var formatSpy;
 
       beforeEach(function() {
         pumpSpy = sinon.stub(pumpify, 'obj', function() {
           return through.obj();
-        });
-
-        formatSpy = sinon.stub(Table, 'formatRowRange_', function(value) {
-          return value;
         });
       });
 
@@ -459,26 +481,6 @@ describe('Bigtable/Table', function() {
         table.getRows();
       });
 
-      it('should retrieve an individual row', function(done) {
-        var options = {
-          key: 'gwashington'
-        };
-        var fakeKey = 'a';
-
-        var convertSpy = FakeMutation.convertToBytes = sinon.spy(function() {
-          return fakeKey;
-        });
-
-        table.requestStream = function(g, reqOpts) {
-          assert.strictEqual(reqOpts.rowKey, fakeKey);
-          assert.strictEqual(convertSpy.callCount, 1);
-          assert.strictEqual(convertSpy.getCall(0).args[0], options.key);
-          done();
-        };
-
-        table.getRows(options);
-      });
-
       it('should retrieve a range of rows', function(done) {
         var options = {
           start: 'gwashington',
@@ -490,14 +492,18 @@ describe('Bigtable/Table', function() {
           end: 'b'
         };
 
-        var formatSpy = Table.formatRowRange_ = sinon.spy(function() {
+        var formatSpy = FakeFilter.createRange = sinon.spy(function() {
           return fakeRange;
         });
 
         table.requestStream = function(g, reqOpts) {
-          assert.strictEqual(reqOpts.rowRange, fakeRange);
+          assert.deepEqual(reqOpts.rows.rowRanges[0], fakeRange);
           assert.strictEqual(formatSpy.callCount, 1);
-          assert.strictEqual(formatSpy.getCall(0).args[0], options);
+          assert.deepEqual(formatSpy.getCall(0).args, [
+            options.start,
+            options.end,
+            'key'
+          ]);
           done();
         };
 
@@ -522,7 +528,7 @@ describe('Bigtable/Table', function() {
         });
 
         table.requestStream = function(g, reqOpts) {
-          assert.deepEqual(reqOpts.rowSet.rowKeys, convertedKeys);
+          assert.deepEqual(reqOpts.rows.rowKeys, convertedKeys);
           assert.strictEqual(convertSpy.callCount, 2);
           assert.strictEqual(convertSpy.getCall(0).args[0], options.keys[0]);
           assert.strictEqual(convertSpy.getCall(1).args[0], options.keys[1]);
@@ -551,16 +557,23 @@ describe('Bigtable/Table', function() {
           end: 'h'
         }];
 
-        var formatSpy = Table.formatRowRange_ = sinon.spy(function(range) {
-          var rangeIndex = options.ranges.indexOf(range);
-          return fakeRanges[rangeIndex];
+        var formatSpy = FakeFilter.createRange = sinon.spy(function() {
+          return fakeRanges[formatSpy.callCount - 1];
         });
 
         table.requestStream = function(g, reqOpts) {
-          assert.deepEqual(reqOpts.rowSet.rowRanges, fakeRanges);
+          assert.deepEqual(reqOpts.rows.rowRanges, fakeRanges);
           assert.strictEqual(formatSpy.callCount, 2);
-          assert.strictEqual(formatSpy.getCall(0).args[0], options.ranges[0]);
-          assert.strictEqual(formatSpy.getCall(1).args[0], options.ranges[1]);
+          assert.deepEqual(formatSpy.getCall(0).args, [
+            options.ranges[0].start,
+            options.ranges[0].end,
+            'key'
+          ]);
+          assert.deepEqual(formatSpy.getCall(1).args, [
+            options.ranges[1].start,
+            options.ranges[1].end,
+            'key'
+          ]);
           done();
         };
 
@@ -588,19 +601,6 @@ describe('Bigtable/Table', function() {
         table.getRows(options);
       });
 
-      it('should allow row interleaving', function(done) {
-        var options = {
-          interleave: true
-        };
-
-        table.requestStream = function(g, reqOpts) {
-          assert.strictEqual(reqOpts.allowRowInterleaving, options.interleave);
-          done();
-        };
-
-        table.getRows(options);
-      });
-
       it('should allow setting a row limit', function(done) {
         var options = {
           limit: 10
@@ -616,20 +616,21 @@ describe('Bigtable/Table', function() {
     });
 
     describe('success', function() {
-      var fakeRows = [{
-        rowKey: 'a',
-        chunks: []
-      }, {
-        rowKey: 'b',
-        chunks: []
-      }];
-      var convertedKeys = [
-        'c',
-        'd'
-      ];
-      var formattedChunks = [
-        [{ a: 'a' }],
-        [{ b: 'b' }]
+      var fakeChunks = {
+        chunks: [{
+          rowKey: 'a',
+        }, {
+          commitRow: true
+        }, {
+          rowKey: 'b',
+        }, {
+          commitRow: true
+        }]
+      };
+
+      var formattedRows = [
+        { key: 'c', data: {} },
+        { key: 'd', data: {} }
       ];
 
       beforeEach(function() {
@@ -637,18 +638,8 @@ describe('Bigtable/Table', function() {
           return {};
         });
 
-        FakeMutation.convertFromBytes = sinon.spy(function(value) {
-          if (value === fakeRows[0].rowKey) {
-            return convertedKeys[0];
-          }
-          return convertedKeys[1];
-        });
-
-        FakeRow.formatChunks_ = sinon.spy(function(value) {
-          if (value === fakeRows[0].chunks) {
-            return formattedChunks[0];
-          }
-          return formattedChunks[1];
+        FakeRow.formatChunks_ = sinon.spy(function() {
+          return formattedRows;
         });
 
         table.requestStream = function() {
@@ -657,10 +648,7 @@ describe('Bigtable/Table', function() {
           });
 
           setImmediate(function() {
-            fakeRows.forEach(function(data) {
-              stream.push(data);
-            });
-
+            stream.push(fakeChunks);
             stream.push(null);
           });
 
@@ -680,18 +668,16 @@ describe('Bigtable/Table', function() {
             var rowSpy = table.row;
             var formatSpy = FakeRow.formatChunks_;
 
-            assert.strictEqual(rows.length, fakeRows.length);
-            assert.strictEqual(rowSpy.callCount, fakeRows.length);
+            assert.strictEqual(rows.length, formattedRows.length);
+            assert.strictEqual(rowSpy.callCount, formattedRows.length);
 
-            assert.strictEqual(rowSpy.getCall(0).args[0], convertedKeys[0]);
-            assert.strictEqual(rows[0].data, formattedChunks[0]);
-            assert.strictEqual(
-              formatSpy.getCall(0).args[0], fakeRows[0].chunks);
+            assert.strictEqual(formatSpy.getCall(0).args[0], fakeChunks.chunks);
 
-            assert.strictEqual(rowSpy.getCall(1).args[0], convertedKeys[1]);
-            assert.strictEqual(rows[1].data, formattedChunks[1]);
-            assert.strictEqual(
-              formatSpy.getCall(1).args[0], fakeRows[1].chunks);
+            assert.strictEqual(rowSpy.getCall(0).args[0], formattedRows[0].key);
+            assert.strictEqual(rows[0].data, formattedRows[0].data);
+
+            assert.strictEqual(rowSpy.getCall(1).args[0], formattedRows[1].key);
+            assert.strictEqual(rows[1].data, formattedRows[1].data);
 
             done();
           });
@@ -704,18 +690,16 @@ describe('Bigtable/Table', function() {
           var rowSpy = table.row;
           var formatSpy = FakeRow.formatChunks_;
 
-          assert.strictEqual(rows.length, fakeRows.length);
-          assert.strictEqual(rowSpy.callCount, fakeRows.length);
+          assert.strictEqual(rows.length, formattedRows.length);
+          assert.strictEqual(rowSpy.callCount, formattedRows.length);
 
-          assert.strictEqual(rowSpy.getCall(0).args[0], convertedKeys[0]);
-          assert.strictEqual(rows[0].data, formattedChunks[0]);
-          assert.strictEqual(
-            formatSpy.getCall(0).args[0], fakeRows[0].chunks);
+          assert.strictEqual(formatSpy.getCall(0).args[0], fakeChunks.chunks);
 
-          assert.strictEqual(rowSpy.getCall(1).args[0], convertedKeys[1]);
-          assert.strictEqual(rows[1].data, formattedChunks[1]);
-          assert.strictEqual(
-            formatSpy.getCall(1).args[0], fakeRows[1].chunks);
+          assert.strictEqual(rowSpy.getCall(0).args[0], formattedRows[0].key);
+          assert.strictEqual(rows[0].data, formattedRows[0].data);
+
+          assert.strictEqual(rowSpy.getCall(1).args[0], formattedRows[1].key);
+          assert.strictEqual(rows[1].data, formattedRows[1].data);
 
           done();
         });
@@ -798,7 +782,11 @@ describe('Bigtable/Table', function() {
         return fakeEntries[entryIndex];
       });
 
-      table.request = function(grpcOpts, reqOpts, callback) {
+      table.requestStream = function(grpcOpts, reqOpts) {
+        var stream = new Stream({
+          objectMode: true
+        });
+
         assert.deepEqual(grpcOpts, {
           service: 'Bigtable',
           method: 'mutateRows'
@@ -810,10 +798,13 @@ describe('Bigtable/Table', function() {
         assert.strictEqual(parseSpy.callCount, 2);
         assert.strictEqual(parseSpy.getCall(0).args[0], entries[0]);
         assert.strictEqual(parseSpy.getCall(1).args[0], entries[1]);
-        callback();
+
+        setImmediate(done);
+
+        return stream;
       };
 
-      table.mutate(entries, done);
+      table.mutate(entries, assert.ifError);
     });
   });
 

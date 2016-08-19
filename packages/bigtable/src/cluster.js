@@ -23,7 +23,7 @@
 var common = require('@google-cloud/common');
 var format = require('string-format-obj');
 var is = require('is');
-var nodeutil = require('util');
+var util = require('util');
 
 /**
  * Create a cluster object to interact with your cluster.
@@ -141,7 +141,7 @@ function Cluster(instance, name) {
   common.GrpcServiceObject.call(this, config);
 }
 
-nodeutil.inherits(Cluster, common.GrpcServiceObject);
+util.inherits(Cluster, common.GrpcServiceObject);
 
 /**
  * Maps the storage type to the proper integer.
