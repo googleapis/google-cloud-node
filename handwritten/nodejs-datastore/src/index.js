@@ -323,7 +323,7 @@ function Datastore(options) {
     baseUrl: this.baseUrl_,
     customEndpoint: this.customEndpoint_,
     service: 'datastore',
-    apiVersion: 'v1beta3',
+    apiVersion: 'v1',
     scopes: ['https://www.googleapis.com/auth/datastore'],
     userAgent: PKG.name + '/' + PKG.version
   };
