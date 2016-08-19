@@ -216,9 +216,11 @@ Cluster.prototype.setMetadata = function(options, callback) {
     name: this.id
   };
 
+  var bigtable = this.parent.parent;
+
   if (options.location) {
     reqOpts.location = format('projects/{project}/locations/{location}', {
-      project: this.projectId,
+      project: bigtable.projectId,
       location: options.location
     });
   }
@@ -237,7 +239,7 @@ Cluster.prototype.setMetadata = function(options, callback) {
       return;
     }
 
-    var operation = self.parent.parent.operation(resp.name);
+    var operation = bigtable.operation(resp.name);
     operation.metadata = resp;
 
     callback(null, operation, resp);

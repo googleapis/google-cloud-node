@@ -48,7 +48,7 @@ var FakeCluster = createFake(Cluster);
 var FakeFamily = createFake(Family);
 var FakeTable = createFake(Table);
 
-describe.only('Bigtable/Instance', function() {
+describe('Bigtable/Instance', function() {
   var INSTANCE_NAME = 'my-instance';
   var BIGTABLE = { projectName: 'projects/my-project' };
 
