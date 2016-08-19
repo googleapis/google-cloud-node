@@ -276,26 +276,26 @@ function Bigtable(options) {
     return new Bigtable(options);
   }
 
+  var adminBaseUrl = 'bigtableadmin.googleapis.com';
+
   var config = {
     baseUrl: 'bigtable.googleapis.com',
     service: 'bigtable',
     apiVersion: 'v2',
     protoServices: {
-      Bigtable: googleProtoFiles('bigtable/v2/bigtable.proto'),
+      Bigtable: googleProtoFiles.bigtable.v2,
       BigtableTableAdmin: {
-        baseUrl: 'bigtableadmin.googleapis.com',
-        path: googleProtoFiles('bigtable/admin/v2/bigtable_table_admin.proto'),
+        baseUrl: adminBaseUrl,
+        path: googleProtoFiles.bigtable.admin.v2.table,
         service: 'bigtable.admin'
       },
       BigtableInstanceAdmin: {
-        baseUrl: 'bigtableadmin.googleapis.com',
-        path: googleProtoFiles(
-          'bigtable/admin/v2/bigtable_instance_admin.proto'
-        ),
+        baseUrl: adminBaseUrl,
+        path: googleProtoFiles.bigtable.admin.v2.instance,
         service: 'bigtable.admin'
       },
       Operations: {
-        baseUrl: 'bigtableadmin.googleapis.com',
+        baseUrl: adminBaseUrl,
         path: googleProtoFiles('longrunning/operations.proto'),
         service: 'longrunning',
         apiVersion: 'v1'
