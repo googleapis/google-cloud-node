@@ -150,7 +150,7 @@ describe('Bigtable/Table', function() {
       assert(Table.formatName_.calledWith(INSTANCE.id, TABLE_ID));
     });
 
-    it('should use Bigtable#createTable to create the table', function(done) {
+    it('should use Instance#createTable to create the table', function(done) {
       var fakeOptions = {};
 
       INSTANCE.createTable = function(name, options, callback) {

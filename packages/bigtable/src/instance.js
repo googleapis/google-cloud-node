@@ -280,8 +280,10 @@ Instance.prototype.createCluster = function(name, options, callback) {
       return;
     }
 
+    var bigtable = self.parent;
+
     var cluster = self.cluster(name);
-    var operation = self.parent.operation(resp.name);
+    var operation = bigtable.operation(resp.name);
     operation.metadata = resp;
 
     callback(null, cluster, operation, resp);
@@ -360,6 +362,10 @@ Instance.prototype.createCluster = function(name, options, callback) {
  */
 Instance.prototype.createTable = function(name, options, callback) {
   var self = this;
+
+  if (!name) {
+    throw new Error('A name is required to create a table.');
+  }
 
   options = options || {};
 
@@ -524,7 +530,7 @@ Instance.prototype.getClusters = function(query, callback) {
       return cluster;
     });
 
-    var nextQuery;
+    var nextQuery = null;
 
     if (resp.nextPageToken) {
       nextQuery = extend({}, query, {
