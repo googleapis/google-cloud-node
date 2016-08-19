@@ -153,7 +153,7 @@ describe('Datastore', function() {
       assert.strictEqual(calledWith.baseUrl, datastore.baseUrl_);
       assert.strictEqual(calledWith.customEndpoint, datastore.customEndpoint_);
       assert.strictEqual(calledWith.service, 'datastore');
-      assert.strictEqual(calledWith.apiVersion, 'v1beta3');
+      assert.strictEqual(calledWith.apiVersion, 'v1');
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/datastore'
       ]);
