@@ -29,6 +29,7 @@
 
 var arguejs = require('arguejs');
 var configData = require('./language_service_client_config');
+var extend = require('extend');
 var gax = require('google-gax');
 
 var SERVICE_ADDRESS = 'language.googleapis.com';
@@ -50,6 +51,15 @@ var ALL_SCOPES = [
 /**
  * Provides text analysis operations such as sentiment analysis and entity
  * recognition.
+ *
+ * This will be created through a builder function which can be obtained by the module.
+ * See the following example of how to initialize the module and how to access to the builder.
+ *
+ * @example
+ *   var languageV1beta1 = require('@google-cloud/language').v1beta1({
+ *     // optional auth parameters.
+ *   });
+ *   var api = languageV1beta1.languageServiceApi();
  *
  * @class
  * @param {Object=} opts - The optional parameters.
@@ -234,6 +244,7 @@ module.exports = function build(gaxGrpc) {
   built.languageServiceApi = function(opts) {
     return new LanguageServiceApi(gaxGrpc, grpcClient, opts);
   };
+  extend(built.languageServiceApi, LanguageServiceApi);
   return built;
 };
 module.exports.SERVICE_ADDRESS = SERVICE_ADDRESS;
