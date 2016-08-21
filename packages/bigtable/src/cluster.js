@@ -144,6 +144,30 @@ function Cluster(instance, name) {
 util.inherits(Cluster, common.GrpcServiceObject);
 
 /**
+ * Formats zone location.
+ *
+ * @private
+ *
+ * @param {string} project - The project.
+ * @param {string} location - The zone location.
+ * @return {string}
+ *
+ * @example
+ * Cluster.getLocation_('my-project', 'us-central1-b');
+ * // 'projects/my-project/locations/us-central1-b'
+ */
+Cluster.getLocation_ = function(project, location) {
+  if (location.indexOf('/') > -1) {
+    return location;
+  }
+
+  return format('projects/{project}/locations/{location}', {
+    project: project,
+    location: location
+  });
+};
+
+/**
  * Maps the storage type to the proper integer.
  *
  * @private
@@ -217,10 +241,10 @@ Cluster.prototype.setMetadata = function(options, callback) {
   var bigtable = this.parent.parent;
 
   if (options.location) {
-    reqOpts.location = format('projects/{project}/locations/{location}', {
-      project: bigtable.projectId,
-      location: options.location
-    });
+    reqOpts.location = Cluster.getLocation_(
+      bigtable.projectId,
+      options.location
+    );
   }
 
   if (options.nodes) {

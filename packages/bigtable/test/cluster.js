@@ -17,9 +17,9 @@
 'use strict';
 
 var assert = require('assert');
+var format = require('string-format-obj');
 var proxyquire = require('proxyquire');
 var util = require('util');
-var format = require('string-format-obj');
 
 var GrpcServiceObject = require('@google-cloud/common').GrpcServiceObject;
 
@@ -106,6 +106,29 @@ describe('Bigtable/Cluster', function() {
     });
   });
 
+  describe('getLocation_', function() {
+    var LOCATION = 'us-centralb-1';
+
+    it('should format the location name', function() {
+      var expected = format('projects/{project}/locations/{location}', {
+        project: PROJECT_ID,
+        location: LOCATION
+      });
+
+      var formatted = Cluster.getLocation_(PROJECT_ID, LOCATION);
+      assert.strictEqual(formatted, expected);
+    });
+
+    it('should not re-format a complete location', function() {
+      var complete = format('projects/p/locations/{location}', {
+        location: LOCATION
+      });
+
+      var formatted = Cluster.getLocation_(PROJECT_ID, complete);
+      assert.strictEqual(formatted, complete);
+    });
+  });
+
   describe('getStorageType_', function() {
     var types = {
       unspecified: 0,
@@ -140,13 +163,18 @@ describe('Bigtable/Cluster', function() {
         location: 'us-centralb-1'
       };
 
-      var expectedLocation = format('projects/{project}/locations/{location}', {
-        project: PROJECT_ID,
-        location: options.location
-      });
+      var getLocation = Cluster.getLocation_;
+      var fakeLocation = 'a/b/c/d';
+
+      Cluster.getLocation_ = function(project, location) {
+        assert.strictEqual(project, PROJECT_ID);
+        assert.strictEqual(location, options.location);
+        return fakeLocation;
+      };
 
       cluster.request = function(grpcOpts, reqOpts) {
-        assert.strictEqual(reqOpts.location, expectedLocation);
+        assert.strictEqual(reqOpts.location, fakeLocation);
+        Cluster.getLocation_ = getLocation;
         done();
       };
 

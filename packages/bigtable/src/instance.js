@@ -270,8 +270,10 @@ Instance.prototype.createCluster = function(name, options, callback) {
   }
 
   if (options.location) {
-    reqOpts.cluster.location = this.parent.projectName + '/locations/' +
-      options.location;
+    reqOpts.cluster.location = Cluster.getLocation_(
+      this.parent.projectName,
+      options.location
+    );
   }
 
   if (options.nodes) {

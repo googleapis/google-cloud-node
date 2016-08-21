@@ -177,13 +177,16 @@ describe('Bigtable/Instance', function() {
         location: 'us-central1-b'
       };
 
-      var expectedLocation = format('{project}/locations/{location}', {
-        project: BIGTABLE.projectName,
-        location: options.location
-      });
+      var fakeLocation = 'a/b/c/d';
+
+      FakeCluster.getLocation_ = function(project, location) {
+        assert.strictEqual(project, BIGTABLE.projectName);
+        assert.strictEqual(location, options.location);
+        return fakeLocation;
+      };
 
       instance.request = function(grpcOpts, reqOpts) {
-        assert.strictEqual(reqOpts.cluster.location, expectedLocation);
+        assert.strictEqual(reqOpts.cluster.location, fakeLocation);
         done();
       };
 
