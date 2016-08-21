@@ -320,7 +320,7 @@ function Bigtable(options) {
 util.inherits(Bigtable, common.GrpcService);
 
 /**
- * Creates a Compute Instance.
+ * Create a Compute instance.
  *
  * @resource [Creating a Compute Instance]{@link https://cloud.google.com/bigtable/docs/creating-compute-instance}
  *

@@ -141,10 +141,7 @@ function generateName(obj) {
       };
 
       INSTANCE.setMetadata(metadata, function(err) {
-        if (err) {
-          done(err);
-          return;
-        }
+        assert.ifError(err);
 
         INSTANCE.getMetadata(function(err, metadata_) {
           assert.ifError(err);

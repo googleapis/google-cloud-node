@@ -111,7 +111,7 @@ describe('Bigtable/Cluster', function() {
 
       assert.strictEqual(cluster.id, fakeName);
     });
-  })
+  });
 
   describe('getLocation_', function() {
     var LOCATION = 'us-centralb-1';

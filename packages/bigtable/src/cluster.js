@@ -222,7 +222,7 @@ Cluster.getStorageType_ = function(type) {
  *   operation
  *     .on('error', console.error)
  *     .on('complete', function() {
- *       // The cluster has been successfully updated.
+ *       // The cluster was updated successfully.
  *     });
  * };
  *

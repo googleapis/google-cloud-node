@@ -204,7 +204,7 @@ describe('Bigtable', function() {
         return fakeStorage;
       };
 
-      bigtable.request = function(protoOpts, reqOpts, callback) {
+      bigtable.request = function(protoOpts, reqOpts) {
         assert.deepEqual(reqOpts.clusters, {
           'my-cluster': {
             location: fakeLocation,
@@ -255,7 +255,7 @@ describe('Bigtable', function() {
         return fakeOperation;
       };
 
-      bigtable.request = function (protoOpts, reqOpts, callback) {
+      bigtable.request = function(protoOpts, reqOpts, callback) {
         callback(null, response);
       };
 
