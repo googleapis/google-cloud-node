@@ -147,8 +147,9 @@ function generateName(obj) {
         }
 
         INSTANCE.getMetadata(function(err, metadata_) {
+          assert.ifError(err);
           assert.strictEqual(metadata.displayName, metadata_.displayName);
-          done(err);
+          done();
         });
       });
     });
@@ -365,7 +366,7 @@ function generateName(obj) {
         assert.ifError(err);
         var maxAge = metadata.gcRule.maxAge;
 
-        assert.equal(maxAge.seconds, rule.age.seconds);
+        assert.strictEqual(maxAge.seconds, rule.age.seconds);
         assert.strictEqual(maxAge.nanas, rule.age.nanas);
         done();
       });
