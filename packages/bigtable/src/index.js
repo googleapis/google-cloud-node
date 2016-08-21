@@ -20,14 +20,23 @@
 
 'use strict';
 
+var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var googleProtoFiles = require('google-proto-files');
 var is = require('is');
 var util = require('util');
-var arrify = require('arrify');
 
+/**
+ * @private
+ * @type {module:bigtable/instance}
+ */
 var Instance = require('./instance.js');
+
+/**
+ * @private
+ * @type {module:bigtable/cluster}
+ */
 var Cluster = require('./cluster.js');
 
 var PKG = require('../package.json');
@@ -39,13 +48,7 @@ var PKG = require('../package.json');
  * @resource [Creating a Cloud Bigtable Cluster]{@link https://cloud.google.com/bigtable/docs/creating-compute-instance}
  * @resource [Google Cloud Bigtable Concepts Overview]{@link https://cloud.google.com/bigtable/docs/concepts}
  *
- * @throws {error} If a cluster is not provided.
- * @throws {error} If a zone is not provided.
- *
  * @param {object=} options - [Configuration object](#/docs).
- * @param {string} options.cluster - The cluster name that hosts your tables.
- * @param {string|module:compute/zone} options.zone - The zone in which your
- *     cluster resides.
  *
  * @example
  * //-
@@ -323,10 +326,10 @@ util.inherits(Bigtable, common.GrpcService);
  *
  * @param {string} name - The unique name of the instance.
  * @param {object} options - Instance creation options.
- * @param {string} options.displayName - The descriptive name for this instance
- *     as it appears in UIs.
  * @param {object[]} options.clusters - The clusters to be created within the
  *     instance.
+ * @param {string} options.displayName - The descriptive name for this instance
+ *     as it appears in UIs.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:bigtable/instance} callback.instance - The newly created
@@ -344,7 +347,7 @@ util.inherits(Bigtable, common.GrpcService);
  *   operation
  *     .on('error', console.log)
  *     .on('complete', function() {
- *       // The instance has successfully been created.
+ *       // The instance was created successfully.
  *     });
  * };
  *
@@ -410,11 +413,11 @@ Bigtable.prototype.createInstance = function(name, options, callback) {
 };
 
 /**
- * Get Instance objects for all of your Compute Instances.
+ * Get Instance objects for all of your Compute instances.
  *
  * @param {object} query - Query object.
  * @param {boolean} query.autoPaginate - Have pagination handled
- *     automatically. Default:true.
+ *     automatically. Default: true.
  * @param {number} query.maxApiCalls - Maximum number of API calls to make.
  * @param {number} query.maxResults - Maximum number of results to return.
  * @param {string} query.pageToken - Token returned from a previous call, to
@@ -422,7 +425,7 @@ Bigtable.prototype.createInstance = function(name, options, callback) {
  * @param {function} callback - The callback function.
  * @param {?error} callback.error - An error returned while making this request.
  * @param {module:bigtable/instance[]} callback.instances - List of all
- *     Instances.
+ *     instances.
  * @param {object} callback.nextQuery - If present, query with this object to
  *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
@@ -450,12 +453,12 @@ Bigtable.prototype.createInstance = function(name, options, callback) {
  * }, callback);
  *
  * //-
- * // Get the Instances from your project as a readable object stream.
+ * // Get the instances from your project as a readable object stream.
  * //-
  * bigtable.getInstances()
  *   .on('error', console.error)
  *   .on('data', function(instance) {
- *     // instance is a Instance object.
+ *     // `instance` is a Instance object.
  *   })
  *   .on('end', function() {
  *     // All instances retrieved.
@@ -509,7 +512,7 @@ Bigtable.prototype.getInstances = function(query, callback) {
 };
 
 /**
- * Get a reference to a Compute Instance.
+ * Get a reference to a Compute instance.
  *
  * @param {string} name - The name of the instance.
  * @return {module:bigtable/instance}

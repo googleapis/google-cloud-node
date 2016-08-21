@@ -154,6 +154,9 @@ function Table(instance, name) {
 util.inherits(Table, common.GrpcServiceObject);
 
 /**
+ * The view to be applied to the returned table's fields.
+ * Defaults to schema if unspecified.
+ *
  * @private
  */
 Table.VIEWS = {

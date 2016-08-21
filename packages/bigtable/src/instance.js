@@ -21,16 +21,30 @@
 'use strict';
 
 var common = require('@google-cloud/common');
-var is = require('is');
 var extend = require('extend');
-var nodeutil = require('util');
+var is = require('is');
+var util = require('util');
 
+/**
+ * @private
+ * @type {module:bigtable/cluster}
+ */
 var Cluster = require('./cluster.js');
-var Table = require('./table.js');
+
+/**
+ * @private
+ * @type {module:bigtable/family}
+ */
 var Family = require('./family.js');
 
 /**
- * Create an Instance object to interact with a Compute Instance.
+ * @private
+ * @type {module:bigtable/table}
+ */
+var Table = require('./table.js');
+
+/**
+ * Create an Instance object to interact with a Compute instance.
  *
  * @constructor
  * @alias module:bigtable/instance
@@ -48,7 +62,7 @@ function Instance(bigtable, name) {
     /**
      * Create an instance.
      *
-     * @param {object} options - See {module:bigtable#createInstance}
+     * @param {object} options - See {module:bigtable#createInstance}.
      *
      * @example
      * instance.create(function(err, instance, operation, apiResponse) {
@@ -136,8 +150,8 @@ function Instance(bigtable, name) {
      *
      * @param {object} metadata - Metadata object.
      * @param {string} metadata.displayName - The descriptive name for this
-     *     instance as it appears in UIs. Can be changed at any time, but should
-     *     be kept globally unique to avoid confusion.
+     *     instance as it appears in UIs. It can be changed at any time, but
+     *     should be kept globally unique to avoid confusion.
      * @param {function} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
@@ -171,10 +185,10 @@ function Instance(bigtable, name) {
   common.GrpcServiceObject.call(this, config);
 }
 
-nodeutil.inherits(Instance, common.GrpcServiceObject);
+util.inherits(Instance, common.GrpcServiceObject);
 
 /**
- * Formats the full table name into a user friendly version.
+ * Format the full table name into a user friendly version.
  *
  * @private
  *
@@ -186,16 +200,11 @@ nodeutil.inherits(Instance, common.GrpcServiceObject);
  * // => 'my-table'
  */
 Instance.formatTableName_ = function(name) {
-  if (name.indexOf('/') === -1) {
-    return name;
-  }
-
-  var parts = name.split('/');
-  return parts[parts.length - 1];
+  return name.split('/').pop();
 };
 
 /**
- * Creates a cluster.
+ * Create a cluster.
  *
  * @param {string} name - The name to be used when referring to the new
  *     cluster within its instance.
@@ -226,7 +235,7 @@ Instance.formatTableName_ = function(name) {
  *   operation
  *     .on('error', console.log)
  *     .on('complete', function() {
- *       // The cluster has successfully been created.
+ *       // The cluster was created successfully.
  *     });
  * };
  *
@@ -302,8 +311,6 @@ Instance.prototype.createCluster = function(name, options, callback) {
  * @param {object=} options - Table creation options.
  * @param {object|string[]} options.families - Column families to be created
  *     within the table.
- * @param {string} options.operation - Operation used for table that has already
- *    been queued to be created.
  * @param {string[]} options.splits - Initial
  *    [split keys](https://cloud.google.com/bigtable/docs/managing-tables#splits).
  * @param {function} callback - The callback function.
@@ -431,7 +438,7 @@ Instance.prototype.createTable = function(name, options, callback) {
 };
 
 /**
- * Get a reference to a Cluster.
+ * Get a reference to a Bigtable Cluster.
  *
  * @param {string} name - The name of the cluster.
  * @return {module:bigtable/cluster}
@@ -445,7 +452,7 @@ Instance.prototype.cluster = function(name) {
  *
  * @param {object} query - Query object.
  * @param {boolean} query.autoPaginate - Have pagination handled
- *     automatically. Default:true.
+ *     automatically. Default: true.
  * @param {number} query.maxApiCalls - Maximum number of API calls to make.
  * @param {number} query.maxResults - Maximum number of results to return.
  * @param {string} query.pageToken - Token returned from a previous call, to
@@ -481,12 +488,12 @@ Instance.prototype.cluster = function(name) {
  * }, callback);
  *
  * //-
- * // Get the Clusters from your project as a readable object stream.
+ * // Get the clusters from your project as a readable object stream.
  * //-
  * instance.getClusters()
  *   .on('error', console.error)
  *   .on('data', function(cluster) {
- *     // cluster is a Cluster object.
+ *     // `cluster` is a Cluster object.
  *   })
  *   .on('end', function() {
  *     // All clusters retrieved.
@@ -554,7 +561,7 @@ Instance.prototype.getClusters = function(query, callback) {
  * @param {string} query.pageToken - A previously-returned page token
  *     representing part of a larger set of results to view.
  * @param {string} query.view - View over the table's fields. Possible options
- *     are 'name', 'schema' or 'full'. Defaults to 'name'.
+ *     are 'name', 'schema' or 'full'. Default: 'name'.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:bigtable/table[]} callback.tables - List of all Tables.
@@ -585,7 +592,7 @@ Instance.prototype.getClusters = function(query, callback) {
  * }, callback);
  *
  * //-
- * // Get the Tables from your project as a readable object stream.
+ * // Get the tables from your project as a readable object stream.
  * //-
  * instance.getTables()
  *   .on('error', console.error)
