@@ -12,9 +12,8 @@ Web Services.
 
 * [Setup](#setup)
 * [Samples](#samples)
-  * [Reading logs](#reading-logs)
-  * [Writing logs](#writing-logs)
-  * [Exporting logs](#exporting-logs)
+  * [Logs](#logs)
+  * [Sinks](#sinks)
   * [Error Reporting on Compute Engine](#error-reporting-on-compute-engine)
   * [Logging to Google Cloud with Winston](https://github.com/GoogleCloudPlatform/winston-gae)
 
@@ -30,38 +29,71 @@ Web Services.
 
 ## Samples
 
-### Reading logs
+### Logs
 
-View the [documentation][read_docs] or the [source code][read_code].
+View the [documentation][logs_docs] or the [source code][logs_code].
 
-__Run the sample:__
+__Usage:__ `node logs --help`
 
-    node list
+```
+Commands:
+  list                             List log entries in the authenticated project.
+  write <name> <resource> <entry>  Write a log entry.
+  delete <name>                    Delete a Log.
 
-[read_docs]: https://cloud.google.com/logging/docs/api/tasks/authorization
-[read_code]: list.js
+Options:
+  --help  Show help                                                                        [boolean]
 
-### Writing logs
+Examples:
+  node logs list                                      List all log entires.
+  node logs list -f "severity = ERROR" -s             List up to 2 error entries, sorted by
+  "timestamp" -l 2                                    timestamp ascending.
+  node logs write my-log                              Write a log entry.
+  '{"type":"gae_app","labels":{"module_id":"default"
+  }}' '{"message":"Hello World!"}'
+  node logs delete my-log                             Delete "my-log".
 
-View the [documentation][write_docs] or the [source code][write_code].
+For more information, see https://cloud.google.com/logging/docs
+```
 
-__Run the sample:__
+[logs_docs]: https://cloud.google.com/logging/docs
+[logs_code]: logs.js
 
-    node write
+### Sinks
 
-[write_docs]: https://cloud.google.com/logging/docs/api/tasks/creating-logs
-[write_code]: write.js
+View the [documentation][sinks_docs] or the [source code][sinks_code].
 
-### Exporting logs
+__Usage:__ `node sinks --help`
 
-View the [documentation][export_docs] or the [source code][export_code].
+```
+Commands:
+  create <name> <destination>  Create a new sink with the given name and destination.
+  get <name>                   Get the metadata for the specified sink.
+  list                         List all sinks in the authenticated project.
+  update <name> <metadata>     Update the metadata for the specified sink.
+  delete <name>                Delete the specified sink.
 
-__Run the sample:__
+Options:
+  --help  Show help                                                                        [boolean]
 
-    node export
+Examples:
+  node sinks create my-sink my-bucket --type bucket   Create a new sink named "my-sink" that exports
+                                                      logs to a Cloud Storage bucket.
+  node sinks create my-sink my-dataset --type         Create a new sink named "my-sink" that exports
+  dataset                                             logs to a BigQuery dataset.
+  node sinks create my-sink my-topic --type topic     Create a new sink named "my-sink" that exports
+                                                      logs to a Cloud Pub/Sub topic.
+  node sinks get my-sink                              Get the metadata for "my-sink".
+  node sinks list                                     List all sinks in the authenticated project.
+  node sinks update my-sink '{"filter":"severity >    Update the specified sink.
+  ALERT"}'
+  node sinks delete my-sink                           Delete "my-sink".
 
-[export_docs]: https://cloud.google.com/logging/docs/api/tasks/exporting-logs
-[export_code]: export.js
+For more information, see https://cloud.google.com/logging/docs
+```
+
+[sinks_docs]: https://cloud.google.com/logging/docs
+[sinks_code]: sinks.js
 
 ### Error Reporting on Compute Engine
 
