@@ -286,6 +286,42 @@ describe('Bigtable/Family', function() {
 
       family.setMetadata(metadata, assert.ifError);
     });
+
+    it('should return an error to the callback', function(done) {
+      var error = new Error('err');
+      var response = {};
+
+      family.request = function(protoOpts, reqOpts, callback) {
+        callback(error, response);
+      };
+
+      family.setMetadata({}, function(err, metadata, apiResponse) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(metadata, null);
+        assert.strictEqual(apiResponse, response);
+        done();
+      });
+    });
+
+    it('should update the metadata property', function(done) {
+      var fakeMetadata = {};
+      var response = {
+        columnFamilies: {
+          'family-test': fakeMetadata
+        }
+      };
+
+      family.request = function(protoOpts, reqOpts, callback) {
+        callback(null, response);
+      };
+
+      family.setMetadata({}, function(err, metadata, apiResponse) {
+        assert.ifError(err);
+        assert.strictEqual(metadata, fakeMetadata);
+        assert.strictEqual(apiResponse, response);
+        done();
+      });
+    });
   });
 
   describe('FamilyError', function() {

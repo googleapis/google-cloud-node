@@ -38,7 +38,11 @@ var util = require('util');
  * var cluster = instance.cluster('my-cluster');
  */
 function Cluster(instance, name) {
-  var id = instance.id + '/clusters/' + name;
+  var id = name;
+
+  if (id.indexOf('/') === -1) {
+    id = instance.id + '/clusters/' + name;
+  }
 
   var methods = {
 

@@ -374,7 +374,6 @@ Bigtable.prototype.createInstance = function(name, options, callback) {
   }
 
   var protoOpts = {
-    baseUrl: this.adminBaseUrl_,
     service: 'BigtableInstanceAdmin',
     method: 'createInstance'
   };
@@ -390,7 +389,7 @@ Bigtable.prototype.createInstance = function(name, options, callback) {
   reqOpts.clusters = arrify(options.clusters)
     .reduce(function(clusters, cluster) {
       clusters[cluster.name] = {
-        location: reqOpts.parent + '/locations/' + cluster.location,
+        location: Cluster.getLocation_(self.projectId, cluster.location),
         serveNodes: cluster.nodes,
         defaultStorageType: Cluster.getStorageType_(cluster.storage)
       };

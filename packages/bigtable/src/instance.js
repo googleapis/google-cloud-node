@@ -55,7 +55,11 @@ var Table = require('./table.js');
  * var instance = bigtable.instance('my-instance');
  */
 function Instance(bigtable, name) {
-  var id = bigtable.projectName + '/instances/' + name;
+  var id = name;
+
+  if (id.indexOf('/') === -1) {
+    id = bigtable.projectName + '/instances/' + name;
+  }
 
   var methods = {
 

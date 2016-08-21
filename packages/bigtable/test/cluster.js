@@ -104,7 +104,14 @@ describe('Bigtable/Cluster', function() {
 
       cluster.createMethod(null, fakeOptions, done);
     });
-  });
+
+    it('should leave full cluster names unaltered', function() {
+      var fakeName = 'a/b/c/d';
+      var cluster = new Cluster(INSTANCE, fakeName);
+
+      assert.strictEqual(cluster.id, fakeName);
+    });
+  })
 
   describe('getLocation_', function() {
     var LOCATION = 'us-centralb-1';

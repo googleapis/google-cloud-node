@@ -763,14 +763,16 @@ Table.prototype.mutate = function(entries, callback) {
   var stream = pumpify.obj([
     this.requestStream(grpcOpts, reqOpts),
     through.obj(function(data, enc, next) {
-      var entries = data.entries.map(function(entry) {
-        return {
+      var throughStream = this;
+
+      data.entries.forEach(function(entry) {
+        throughStream.push({
           index: entry.index,
-          status: common.GrpcService.decorateStatus_(entry.status)
-        };
+          status:  common.GrpcService.decorateStatus_(entry.status)
+        });
       });
 
-      next(null, entries);
+      next(null);
     })
   ]);
 

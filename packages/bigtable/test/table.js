@@ -24,39 +24,33 @@ var sinon = require('sinon').sandbox.create();
 var Stream = require('stream').PassThrough;
 var through = require('through2');
 
+var common = require('@google-cloud/common');
 var Family = require('../src/family.js');
-var GrpcServiceObject = require('@google-cloud/common').GrpcServiceObject;
 var Mutation = require('../src/mutation.js');
 var Row = require('../src/row.js');
 
-function FakeGrpcServiceObject() {
-  this.calledWith_ = arguments;
-  GrpcServiceObject.apply(this, arguments);
+function createFake(Class) {
+  function Fake() {
+    this.calledWith_ = arguments;
+    Class.apply(this, arguments);
+  }
+  nodeutil.inherits(Fake, Class);
+  return Fake;
 }
 
-nodeutil.inherits(FakeGrpcServiceObject, GrpcServiceObject);
-
-function FakeFamily() {
-  this.calledWith_ = arguments;
-  Family.apply(this, arguments);
-}
+var FakeGrpcService = createFake(common.GrpcService);
+var FakeGrpcServiceObject = createFake(common.GrpcServiceObject);
+var FakeFamily = createFake(Family);
 
 FakeFamily.formatRule_ = sinon.spy(function(rule) {
   return rule;
 });
 
-nodeutil.inherits(FakeFamily, Family);
-
-function FakeRow() {
-  this.calledWith_ = arguments;
-  Row.apply(this, arguments);
-}
+var FakeRow = createFake(Row);
 
 FakeRow.formatChunks_ = sinon.spy(function(chunks) {
   return chunks;
 });
-
-nodeutil.inherits(FakeRow, Row);
 
 var FakeMutation = {
   methods: Mutation.methods,
@@ -91,6 +85,7 @@ describe('Bigtable/Table', function() {
   before(function() {
     Table = proxyquire('../src/table.js', {
       '@google-cloud/common': {
+        GrpcService: FakeGrpcService,
         GrpcServiceObject: FakeGrpcServiceObject
       },
       './family.js': FakeFamily,
@@ -773,20 +768,23 @@ describe('Bigtable/Table', function() {
   });
 
   describe('mutate', function() {
-    it('should provide the proper request options', function(done) {
-      var entries = [{}, {}];
-      var fakeEntries = [{}, {}];
+    var entries = [{}, {}];
+    var fakeEntries = [{}, {}];
+    var parseSpy;
 
-      var parseSpy = FakeMutation.parse = sinon.spy(function(value) {
+    beforeEach(function() {
+      parseSpy = FakeMutation.parse = sinon.spy(function(value) {
         var entryIndex = entries.indexOf(value);
         return fakeEntries[entryIndex];
       });
+    });
+
+    it('should provide the proper request options', function(done) {
+      var stream = new Stream({
+        objectMode: true
+      });
 
       table.requestStream = function(grpcOpts, reqOpts) {
-        var stream = new Stream({
-          objectMode: true
-        });
-
         assert.deepEqual(grpcOpts, {
           service: 'Bigtable',
           method: 'mutateRows'
@@ -805,6 +803,102 @@ describe('Bigtable/Table', function() {
       };
 
       table.mutate(entries, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('err');
+
+      beforeEach(function() {
+        table.requestStream = function() {
+          var stream = new Stream({
+            objectMode: true
+          });
+
+          setImmediate(function() {
+            stream.emit('error', error);
+          });
+
+          return stream;
+        };
+      });
+
+      it('should emit an error event', function(done) {
+        table.mutate(entries).on('error', function(err) {
+          assert.strictEqual(err, error);
+          done();
+        });
+      });
+
+      it('should pass an error to the callback', function(done) {
+        table.mutate(entries, function(err) {
+          assert.strictEqual(err, error);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var fakeStatuses = [{
+        index: 0,
+        status: {}
+      }, {
+        index: 1,
+        status: {}
+      }];
+
+      var parsedStatuses = [{}, {}];
+
+      var expectedStatuses = [{
+        index: fakeStatuses[0].index,
+        status: parsedStatuses[0]
+      }, {
+        index: fakeStatuses[1].index,
+        status: parsedStatuses[1]
+      }];
+
+      beforeEach(function() {
+        table.requestStream = function() {
+          var stream = new Stream({
+            objectMode: true
+          });
+
+          stream.push({ entries: fakeStatuses });
+
+          setImmediate(function() {
+            stream.push(null);
+          });
+
+          return stream;
+        };
+
+        var statusCount = 0;
+        FakeGrpcService.decorateStatus_ = function(status) {
+          assert.strictEqual(status, fakeStatuses[statusCount].status);
+          return parsedStatuses[statusCount++];
+        };
+      });
+
+      it('should emit each status as a data event', function(done) {
+        var statuses = [];
+
+        table.mutate(entries)
+          .on('data', function(status) {
+            statuses.push(status);
+          })
+          .on('end', function() {
+            assert.strictEqual(statuses.length, 2);
+            assert.deepEqual(statuses, expectedStatuses);
+            done();
+          });
+      });
+
+      it('should pass the statuses to the callback', function(done) {
+        table.mutate(entries, function(err, statuses) {
+          assert.ifError(err);
+          assert.deepEqual(statuses, expectedStatuses);
+          done();
+        });
+      });
     });
   });
 

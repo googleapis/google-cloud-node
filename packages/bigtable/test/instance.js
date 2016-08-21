@@ -138,6 +138,13 @@ describe('Bigtable/Instance', function() {
 
       instance.createMethod(null, fakeOptions, done);
     });
+
+    it('should not alter full instance ids', function() {
+      var fakeId = 'a/b/c/d';
+      var instance = new Instance(BIGTABLE, fakeId);
+
+      assert.strictEqual(instance.id, fakeId);
+    });
   });
 
   describe('formatTableName_', function() {
