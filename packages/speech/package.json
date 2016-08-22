@@ -50,27 +50,26 @@
     "speech"
   ],
   "dependencies": {
-    "arrify": "^1.0.0",
-    "async": "^1.4.2",
-    "concat-stream": "^1.5.0",
-    "duplexify": "^3.2.0",
+    "arrify": "^1.0.1",
+    "concat-stream": "^1.5.1",
+    "duplexify": "^3.4.5",
     "extend": "^3.0.0",
-    "@google-cloud/common": "^0.1.0",
-    "@google-cloud/storage": "^0.1.0",
-    "google-proto-files": "^0.4.0",
-    "is": "^3.0.1",
+    "@google-cloud/common": "^0.2.0",
+    "@google-cloud/storage": "^0.1.1",
+    "google-proto-files": "^0.7.0",
+    "is": "^3.1.0",
     "modelo": "^4.2.0",
-    "request": "^2.70.0",
-    "string-format-obj": "^1.0.0",
-    "through2": "^2.0.0"
+    "request": "^2.74.0",
+    "string-format-obj": "^1.1.0",
+    "through2": "^2.0.1"
   },
   "devDependencies": {
-    "async": "^1.4.2",
-    "mocha": "^2.1.0",
-    "node-uuid": "^1.4.3",
+    "async": "^2.0.1",
+    "mocha": "^3.0.2",
+    "node-uuid": "^1.4.7",
     "proxyquire": "^1.7.10",
-    "sinon": "^1.17.4",
-    "tmp": "0.0.27"
+    "sinon": "^1.17.5",
+    "tmp": "0.0.28"
   },
   "scripts": {
     "publish": "../../scripts/publish",

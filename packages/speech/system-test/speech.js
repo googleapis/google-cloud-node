@@ -103,13 +103,10 @@ describe('Speech', function() {
       fs.readFile(AUDIO_FILES.bridge.path, function(err, audioFile) {
         assert.ifError(err);
         speech.recognize({
-          config: {
-            encoding: 'LINEAR16',
-            sampleRate: 16000
-          },
-          audio: {
-            content: audioFile
-          }
+          content: audioFile
+        }, {
+          encoding: 'LINEAR16',
+          sampleRate: 16000
         }, function(err, response, apiResponse) {
           assert.ifError(err);
           assert(Array.isArray(response.results));
@@ -120,29 +117,8 @@ describe('Speech', function() {
         });
       });
     });
-    it('recognizes speech from remote GCS audio file', function(done) {
-      speech.recognize({
-        config: {
-          encoding: 'LINEAR16',
-          sampleRate: 16000
-        },
-        audio: {
-          uri: AUDIO_FILES.bridge.gcsUri
-        }
-      }, function(err, response, apiResponse) {
-        assert.ifError(err);
-        assert(Array.isArray(response.results));
-        assert(response.results.length > 0);
-        assert(apiResponse);
-        assert(apiResponse.results);
-        done();
-      });
-    });
-  });
-
-  describe('detect', function() {
-    it('recognizes speech from raw audio', function(done) {
-      speech.detect(AUDIO_FILES.bridge.path, {
+    it('recognizes speech from local file', function(done) {
+      speech.recognize(AUDIO_FILES.bridge.path, {
         // encoding should be automatically detected
         sampleRate: 16000
       }, function(err, response, apiResponse) {
@@ -155,7 +131,7 @@ describe('Speech', function() {
       });
     });
     it('recognizes speech from remote GCS audio file', function(done) {
-      speech.detect(AUDIO_FILES.bridge.gcsUri, {
+      speech.recognize(AUDIO_FILES.bridge.gcsUri, {
         encoding: 'LINEAR16',
         sampleRate: 16000
       }, function(err, response, apiResponse) {
@@ -168,7 +144,7 @@ describe('Speech', function() {
       });
     });
     it('recognizes speech from remote audio file', function(done) {
-      speech.detect(AUDIO_FILES.bridge.httpUri, {
+      speech.recognize(AUDIO_FILES.bridge.httpUri, {
         encoding: 'LINEAR16',
         sampleRate: 16000
       }, function(err, response, apiResponse) {
@@ -182,18 +158,15 @@ describe('Speech', function() {
     });
   });
 
-  describe('createRecognizeJob', function() {
+  describe('startRecognition', function() {
     it('recognizes speech from raw audio', function(done) {
       fs.readFile(AUDIO_FILES.bridge.path, function(err, audioFile) {
         assert.ifError(err);
-        speech.createRecognizeJob({
-          config: {
-            encoding: 'LINEAR16',
-            sampleRate: 16000
-          },
-          audio: {
-            content: audioFile
-          }
+        speech.startRecognition({
+          content: audioFile
+        }, {
+          encoding: 'LINEAR16',
+          sampleRate: 16000
         }, function(err, operation, apiResponse) {
           assert.ifError(err);
           assert(operation.name);
@@ -214,39 +187,8 @@ describe('Speech', function() {
         });
       });
     });
-    it('recognizes speech from remote GCS audio file', function(done) {
-      speech.createRecognizeJob({
-        config: {
-          encoding: 'LINEAR16',
-          sampleRate: 16000
-        },
-        audio: {
-          uri: AUDIO_FILES.bridge.gcsUri
-        }
-      }, function(err, operation, apiResponse) {
-        assert.ifError(err);
-        assert(operation.name);
-        assert(apiResponse.name);
-        operation
-          .on('error', done)
-          .on('complete', function(_operation, apiResponse) {
-            assert.strictEqual(_operation, operation);
-            assert(Array.isArray(_operation.response.results));
-            assert(_operation.response.results.length > 0);
-            assert(_operation.response.results[0].alternatives[0].transcript);
-            assert(_operation.response.results[0].alternatives[0].confidence);
-            assert(apiResponse.response);
-            assert(apiResponse.response.typeUrl);
-            assert(apiResponse.response.value);
-            done();
-          });
-      });
-    });
-  });
-
-  describe('createDetectJob', function() {
-    it('recognizes speech from raw audio', function(done) {
-      speech.createDetectJob(AUDIO_FILES.bridge.path, {
+    it('recognizes speech from local file', function(done) {
+      speech.startRecognition(AUDIO_FILES.bridge.path, {
         // encoding should be automatically detected
         sampleRate: 16000
       }, function(err, operation, apiResponse) {
@@ -269,7 +211,7 @@ describe('Speech', function() {
       });
     });
     it('recognizes speech from remote GCS audio file', function(done) {
-      speech.createDetectJob(AUDIO_FILES.bridge.gcsUri, {
+      speech.startRecognition(AUDIO_FILES.bridge.gcsUri, {
         encoding: 'LINEAR16',
         sampleRate: 16000
       }, function(err, operation, apiResponse) {
@@ -292,7 +234,7 @@ describe('Speech', function() {
       });
     });
     it('recognizes speech from remote audio file', function(done) {
-      speech.createDetectJob(AUDIO_FILES.bridge.httpUri, {
+      speech.startRecognition(AUDIO_FILES.bridge.httpUri, {
         encoding: 'LINEAR16',
         sampleRate: 16000
       }, function(err, operation, apiResponse) {
@@ -318,67 +260,7 @@ describe('Speech', function() {
 
   describe('createRecognizeStream', function() {
     it('recognizes speech from raw audio', function(done) {
-      var through = require('through2');
-      var toRecognizeRequest = through.obj(function(chunk, encoding, done) {
-        done(null, {
-          audioContent: chunk
-        });
-      });
-
       var recognizeStream = speech.createRecognizeStream({
-        streamingConfig: {
-          config: {
-            encoding: 'LINEAR16',
-            sampleRate: 16000
-          },
-          interimResults: false,
-          singleUtterance: false
-        }
-      });
-
-      recognizeStream.on('response', function(chunk) {
-        assert(chunk);
-        assert(chunk.code === 200);
-      });
-
-      var count = 0;
-
-      function checkIsDone() {
-        count++;
-        if (count === 3) {
-          done();
-        }
-      }
-
-      recognizeStream.on('data', function(chunk) {
-        var expected = 'how old is the Brooklyn Bridge';
-        assert(chunk);
-        var endpointerType = chunk.endpointerType;
-        if (endpointerType === Speech.START_OF_SPEECH) {
-          assert.strictEqual(chunk.results.length, 0);
-        } else if (endpointerType === Speech.END_OF_AUDIO) {
-          assert.strictEqual(chunk.results.length, 0);
-        } else if (endpointerType === Speech.ENDPOINTER_EVENT_UNSPECIFIED) {
-          assert(chunk.results);
-          assert.strictEqual(chunk.results.length, 1);
-          assert(chunk.results[0].alternatives);
-          assert.strictEqual(chunk.results[0].alternatives.length, 1);
-          assert.strictEqual(
-            chunk.results[0].alternatives[0].transcript, expected
-          );
-        }
-        checkIsDone();
-      });
-
-      fs.createReadStream(AUDIO_FILES.bridge.path)
-        .pipe(toRecognizeRequest)
-        .pipe(recognizeStream);
-    });
-  });
-
-  describe('createDetectStream', function() {
-    it('recognizes speech from raw audio', function(done) {
-      var recognizeStream = speech.createDetectStream({
         config: {
           encoding: 'LINEAR16',
           sampleRate: 16000

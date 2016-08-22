@@ -138,74 +138,10 @@ describe('Speech', function() {
   });
 
   describe('recognize', function() {
-    var REQ = {};
-
-    it('should make the correct API request', function(done) {
-      var request = REQ;
-
-      speech.request = function(protoOpts, reqOpts) {
-        assert.strictEqual(protoOpts.service, 'Speech');
-        assert.strictEqual(protoOpts.method, 'syncRecognize');
-        assert.strictEqual(reqOpts, REQ);
-
-        done();
-      };
-
-      speech.recognize(request, assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var RES = {};
-
-      beforeEach(function() {
-        speech.request = function(protoOpts, reqOpts, callback) {
-          callback(error, RES);
-        };
-      });
-
-      it('should execute callback with error & API response', function(done) {
-        speech.recognize(REQ, function(err, response, apiResponse) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(response, null);
-          assert.strictEqual(apiResponse, RES);
-          done();
-        });
-      });
-    });
-
-    describe('success', function() {
-      var RES = {
-        results: []
-      };
-
-      beforeEach(function() {
-        speech.request = function(protoOpts, reqOpts, callback) {
-          callback(null, RES);
-        };
-      });
-
-      it('should execute callback with results & API resp', function(done) {
-        speech.recognize(REQ, function(err, response, apiResponse) {
-          assert.ifError(err);
-
-          assert(response.results);
-          assert(
-            response instanceof speech.protos.Speech.SyncRecognizeResponse
-          );
-          assert.deepEqual(response.get('results'), RES.results);
-          assert.strictEqual(apiResponse, RES);
-
-          done();
-        });
-      });
-    });
-  });
-
-  describe('detect', function() {
-    var findFiles_;
-    var REQ = {};
-
+    var findFile_;
+    var REQ = {
+      encoding: 'LINEAR16'
+    };
     var FILES = [
       {
         content: 'aGk='
@@ -213,21 +149,23 @@ describe('Speech', function() {
     ];
 
     before(function() {
-      findFiles_ = Speech.findFiles_;
+      findFile_ = Speech.findFile_;
     });
 
     beforeEach(function() {
-      Speech.findFiles_ = function(files, callback) {
+      Speech.findFile_ = function(files, callback) {
         callback(null, FILES);
       };
     });
 
     after(function() {
-      Speech.findFiles_ = findFiles_;
+      Speech.findFile_ = findFile_;
     });
 
     it('should find the files', function(done) {
-      speech.recognize = function(reqOpts) {
+      speech.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(protoOpts.service, 'Speech');
+        assert.strictEqual(protoOpts.method, 'syncRecognize');
         assert.deepEqual(reqOpts, {
           config: {
             encoding: 'LINEAR16'
@@ -237,18 +175,18 @@ describe('Speech', function() {
         done();
       };
 
-      speech.detect(FILE, REQ, assert.ifError);
+      speech.recognize(FILES[0], REQ, assert.ifError);
     });
 
-    it('should return an error from findFiles_', function(done) {
+    it('should return an error from findFile_', function(done) {
       var error = new Error('Error.');
 
-      Speech.findFiles_ = function(files, callback) {
-        assert.strictEqual(files, FILE);
+      Speech.findFile_ = function(files, callback) {
+        assert.strictEqual(files, FILES[0]);
         callback(error);
       };
 
-      speech.detect(FILE, REQ, function(err) {
+      speech.recognize(FILES[0], REQ, function(err) {
         assert.strictEqual(err, error);
         done();
       });
@@ -258,16 +196,12 @@ describe('Speech', function() {
       var RES = {
         results: []
       };
-      speech.recognize = function(REQ, callback) {
-        callback(
-          null,
-          new speech.protos.Speech.SyncRecognizeResponse(RES),
-          RES
-        );
+      speech.request = function(protoOpts, reqOpts, callback) {
+        callback(null, RES);
       };
 
-      speech.detect(
-        FILE,
+      speech.recognize(
+        FILES[0],
         REQ,
         function(err, response, apiResponse) {
           assert.ifError(err);
@@ -292,13 +226,12 @@ describe('Speech', function() {
           }
         ]
       });
-
-      speech.recognize = function(config, callback) {
+      speech.request = function(protoOpts, reqOpts, callback) {
         callback(null, RES);
       };
 
-      speech.detect(
-        FILE,
+      speech.recognize(
+        FILES[0],
         REQ,
         function(err, response) {
           assert.ifError(err);
@@ -311,12 +244,11 @@ describe('Speech', function() {
     it('should return an error from recognize()', function(done) {
       var error = new Error('Error.');
       var RES = {};
-
-      speech.recognize = function(config, callback) {
-        callback(error, null, RES);
+      speech.request = function(protoOpts, reqOpts, callback) {
+        callback(error, RES);
       };
 
-      speech.detect(FILE, REQ, function(err, response, apiResponse) {
+      speech.recognize(FILE, REQ, function(err, response, apiResponse) {
         assert.strictEqual(err, error);
         assert.strictEqual(response, null);
         assert.strictEqual(apiResponse, RES);
@@ -325,77 +257,11 @@ describe('Speech', function() {
     });
   });
 
-  describe('createRecognizeJob', function() {
-    var REQ = {};
-
-    it('should make the correct API request', function(done) {
-      var request = REQ;
-
-      speech.request = function(protoOpts, reqOpts) {
-        assert.strictEqual(protoOpts.service, 'Speech');
-        assert.strictEqual(protoOpts.method, 'asyncRecognize');
-        assert.strictEqual(reqOpts, REQ);
-
-        done();
-      };
-
-      speech.createRecognizeJob(request, assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var RES = {};
-
-      beforeEach(function() {
-        speech.request = function(protoOpts, reqOpts, callback) {
-          callback(error, RES);
-        };
-      });
-
-      it('should execute callback with error & API response', function(done) {
-        speech.createRecognizeJob(REQ, function(err, operation, apiResponse) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(operation, null);
-          assert.strictEqual(apiResponse, RES);
-          done();
-        });
-      });
-    });
-
-    describe('success', function() {
-      var RES = {
-        name: '1234'
-      };
-
-      beforeEach(function() {
-        speech.request = function(protoOpts, reqOpts, callback) {
-          callback(null, RES);
-        };
-      });
-
-      it('should execute callback with results & API resp', function(done) {
-        var fakeOperation = {
-          name: RES.name
-        };
-        speech.operation = sinon.stub().returns(fakeOperation);
-        speech.createRecognizeJob(REQ, function(err, operation, apiResponse) {
-          assert.ifError(err);
-
-          assert.strictEqual(operation, fakeOperation);
-          assert.equal(operation.name, RES.name);
-          assert.equal(operation.results, undefined);
-          assert.strictEqual(apiResponse, RES);
-
-          done();
-        });
-      });
-    });
-  });
-
-  describe('createDetectJob', function() {
-    var findFiles_;
-    var REQ = {};
-
+  describe('startRecognition', function() {
+    var findFile_;
+    var REQ = {
+      encoding: 'LINEAR16'
+    };
     var FILES = [
       {
         content: 'aGk='
@@ -403,43 +269,59 @@ describe('Speech', function() {
     ];
 
     before(function() {
-      findFiles_ = Speech.findFiles_;
+      findFile_ = Speech.findFile_;
     });
 
     beforeEach(function() {
-      Speech.findFiles_ = function(files, callback) {
-        assert.strictEqual(files, FILE);
+      Speech.findFile_ = function(files, callback) {
+        assert.strictEqual(files, FILES[0]);
         callback(null, FILES);
       };
     });
 
     after(function() {
-      Speech.findFiles_ = findFiles_;
+      Speech.findFile_ = findFile_;
     });
 
     it('should find the files', function(done) {
-      speech.createRecognizeJob = function(reqOpts) {
+      speech.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(protoOpts.service, 'Speech');
+        assert.strictEqual(protoOpts.method, 'asyncRecognize');
         assert.deepEqual(reqOpts, {
           config: {
             encoding: 'LINEAR16'
           },
           audio: FILES[0]
         });
+
         done();
       };
 
-      speech.createDetectJob(FILE, REQ, assert.ifError);
+      speech.startRecognition(FILES[0], REQ, assert.ifError);
     });
 
-    it('should return an error from findFiles_', function(done) {
+    it('should return an error from findFile_', function(done) {
       var error = new Error('Error.');
 
-      Speech.findFiles_ = function(files, callback) {
+      Speech.findFile_ = function(files, callback) {
         assert.strictEqual(files, FILE);
         callback(error);
       };
 
-      speech.createDetectJob(FILE, REQ, function(err) {
+      speech.startRecognition(FILE, REQ, function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    it('should return an error from speech.request', function(done) {
+      var error = new Error('Error.');
+
+      speech.request = function(protoOpts, reqOpts, callback) {
+        callback(error);
+      };
+
+      speech.startRecognition(FILES[0], REQ, function(err) {
         assert.strictEqual(err, error);
         done();
       });
@@ -450,8 +332,9 @@ describe('Speech', function() {
         name: '1234'
       };
       var fakeOperation = speech.operation(fakeApiResponse);
-      speech.createRecognizeJob = function(req, callback) {
-        assert.deepEqual(req, {
+      speech.operation = sinon.stub().returns(fakeOperation);
+      speech.request = function(protoOpts, reqOpts, callback) {
+        assert.deepEqual(reqOpts, {
           audio: {
             content: 'aGk='
           },
@@ -459,11 +342,11 @@ describe('Speech', function() {
             encoding: 'LINEAR16'
           }
         });
-        callback(null, fakeOperation, fakeApiResponse);
+        callback(null, fakeApiResponse);
       };
 
-      speech.createDetectJob(
-        FILE,
+      speech.startRecognition(
+        FILES[0],
         REQ,
         function(err, operation, apiResponse) {
           assert.ifError(err);
@@ -476,31 +359,6 @@ describe('Speech', function() {
   });
 
   describe('createRecognizeStream', function() {
-    var REQ = {};
-
-    it('should make the correct API request', function(done) {
-      var request = REQ;
-      var mockStream = {
-        write: function(data) {
-          assert.strictEqual(data, REQ);
-          setImmediate(function() {
-            done();
-          });
-        }
-      };
-
-      speech.requestWritableStream = function(protoOpts) {
-        assert.strictEqual(protoOpts.service, 'Speech');
-        assert.strictEqual(protoOpts.method, 'streamingRecognize');
-
-        return mockStream;
-      };
-
-      assert.strictEqual(speech.createRecognizeStream(request), mockStream);
-    });
-  });
-
-  describe('createDetectStream', function() {
     var REQ = {};
 
     it('should make the correct API request', function(done) {
@@ -540,13 +398,13 @@ describe('Speech', function() {
         }
       };
 
-      speech.createRecognizeStream = function(reqOpts) {
-        assert.deepEqual(reqOpts, { streamingConfig: {} });
-        mockStream.write(reqOpts);
+      speech.requestWritableStream = function(protoOpts) {
+        assert.strictEqual(protoOpts.service, 'Speech');
+        assert.strictEqual(protoOpts.method, 'streamingRecognize');
         return mockStream;
       };
 
-      var stream = speech.createDetectStream(request);
+      var stream = speech.createRecognizeStream(request);
       assert(stream !== mockStream);
 
       stream.on('data', function(data) {
@@ -605,7 +463,7 @@ describe('Speech', function() {
     });
   });
 
-  describe('findFiles_', function() {
+  describe('findFile_', function() {
     it('should convert a File object', function(done) {
       var file = new FakeFile();
       file.bucket = {
@@ -613,14 +471,12 @@ describe('Speech', function() {
       };
       file.name = 'file-name';
 
-      Speech.findFiles_(file, function(err, files) {
+      Speech.findFile_(file, function(err, foundFile) {
         assert.ifError(err);
 
-        assert.deepEqual(files, [
-          {
-            uri: 'gs://' + file.bucket.name + '/' + file.name
-          }
-        ]);
+        assert.deepEqual(foundFile, {
+          uri: 'gs://' + file.bucket.name + '/' + file.name
+        });
 
         done();
       });
@@ -629,14 +485,12 @@ describe('Speech', function() {
     it('should detect a gs:// path', function(done) {
       var file = 'gs://your-bucket-name/audio.raw';
 
-      Speech.findFiles_(file, function(err, files) {
+      Speech.findFile_(file, function(err, foundFile) {
         assert.ifError(err);
 
-        assert.deepEqual(files, [
-          {
-            uri: file
-          }
-        ]);
+        assert.deepEqual(foundFile, {
+          uri: file
+        });
 
         done();
       });
@@ -663,20 +517,17 @@ describe('Speech', function() {
         return resp;
       };
 
-      Speech.findFiles_(fileUri, function(err, files) {
+      Speech.findFile_(fileUri, function(err, foundFile) {
         assert.ifError(err);
-        assert.deepEqual(files, [
-          {
-            content: new Buffer(body)
-          }
-        ]);
+        assert.deepEqual(foundFile, {
+          content: new Buffer(body)
+        });
         done();
       });
     });
 
     it('should return an error from reading a URL', function(done) {
       var fileUri = 'http://www.google.com/audio.raw';
-
       var error = new Error('Error.');
 
       requestOverride = function() {
@@ -691,8 +542,32 @@ describe('Speech', function() {
         return resp;
       };
 
-      Speech.findFiles_(fileUri, function(err) {
+      Speech.findFile_(fileUri, function(err) {
         assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    it('should validate RecognitionAudio object', function(done) {
+      var file = {};
+
+      Speech.findFile_(file, function(err) {
+        assert(err);
+        assert.equal(err.message, 'RecognitionAudio object requires a ' +
+          '"content" or "uri" property!');
+        done();
+      });
+    });
+
+    it('should accept RecognitionAudio object', function(done) {
+      var file = {
+        content: 'aGk='
+      };
+
+      Speech.findFile_(file, function(err, foundFile) {
+        assert.ifError(err);
+        assert.strictEqual(foundFile, file);
+
         done();
       });
     });
@@ -710,17 +585,15 @@ describe('Speech', function() {
         }
 
         function convertFile(callback) {
-          Speech.findFiles_(tmpFilePath, callback);
+          Speech.findFile_(tmpFilePath, callback);
         }
 
-        async.waterfall([writeFile, convertFile], function(err, files) {
+        async.waterfall([writeFile, convertFile], function(err, foundFile) {
           assert.ifError(err);
 
-          assert.deepEqual(files, [
-            {
-              content: new Buffer(contents)
-            }
-          ]);
+          assert.deepEqual(foundFile, {
+            content: new Buffer(contents)
+          });
 
           done();
         });
@@ -728,7 +601,7 @@ describe('Speech', function() {
     });
 
     it('should return an error when file cannot be found', function(done) {
-      Speech.findFiles_('./not-real-file.raw', function(err) {
+      Speech.findFile_('./not-real-file.raw', function(err) {
         assert.strictEqual(err.code, 'ENOENT');
         done();
       });
