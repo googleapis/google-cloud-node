@@ -45,7 +45,7 @@ var FamilyError = createErrorClass('FamilyError', function(name) {
  */
 function Family(table, name) {
   var id = Family.formatName_(table.id, name);
-  this.familyName = name;
+  this.familyName = name.split('/').pop();
 
   var methods = {
 

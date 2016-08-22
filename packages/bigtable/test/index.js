@@ -263,6 +263,7 @@ describe('Bigtable', function() {
         assert.ifError(err);
         assert.strictEqual(instance, fakeInstance);
         assert.strictEqual(operation, fakeOperation);
+        assert.strictEqual(operation.metadata, response);
         assert.strictEqual(apiResponse, response);
         done();
       };
@@ -349,7 +350,9 @@ describe('Bigtable', function() {
       bigtable.getInstances(function(err, instances, nextQuery, apiResponse) {
         assert.ifError(err);
         assert.strictEqual(instances[0], fakeInstances[0]);
+        assert.strictEqual(instances[0].metadata, response.instances[0]);
         assert.strictEqual(instances[1], fakeInstances[1]);
+        assert.strictEqual(instances[1].metadata, response.instances[1]);
         assert.strictEqual(nextQuery, null);
         assert.strictEqual(apiResponse, response);
         done();

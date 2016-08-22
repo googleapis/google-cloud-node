@@ -143,6 +143,14 @@ describe('Bigtable/Cluster', function() {
       hdd: 2
     };
 
+    it('should default to unspecified', function() {
+      assert.strictEqual(Cluster.getStorageType_(), types.unspecified);
+    });
+
+    it('should lowercase a type', function() {
+      assert.strictEqual(Cluster.getStorageType_('SSD'), types.ssd);
+    });
+
     Object.keys(types).forEach(function(type) {
       it('should get the storage type for "' + type + '"', function() {
         assert.strictEqual(Cluster.getStorageType_(type), types[type]);
@@ -257,6 +265,7 @@ describe('Bigtable/Cluster', function() {
       cluster.setMetadata({}, function(err, operation, apiResponse) {
         assert.ifError(err);
         assert.strictEqual(operation, fakeOperation);
+        assert.strictEqual(operation.metadata, response);
         assert.strictEqual(apiResponse, response);
         done();
       });

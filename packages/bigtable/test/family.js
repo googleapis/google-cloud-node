@@ -87,6 +87,7 @@ describe('Bigtable/Family', function() {
         }
       });
       assert.strictEqual(typeof config.createMethod, 'function');
+      assert.strictEqual(family.familyName, FAMILY_NAME);
     });
 
     it('should call Table#createFamily for the create method', function(done) {
@@ -99,6 +100,11 @@ describe('Bigtable/Family', function() {
       };
 
       family.create(fakeOptions, done);
+    });
+
+    it('should extract the family name', function() {
+      var family = new Family(TABLE, FAMILY_ID);
+      assert.strictEqual(family.familyName, FAMILY_NAME);
     });
   });
 
