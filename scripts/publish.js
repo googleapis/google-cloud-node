@@ -63,7 +63,7 @@ setTimeout(function() {
     path.join(cwd, 'COPYING')
   ]);
 
-  exec('git commit -m "' + moduleName + ' @ ' + newVersion + ' tagged.');
+  exec('git commit -am "' + moduleName + ' @ ' + newVersion + ' tagged."');
 
   // Create a git tag
   exec('git tag -a ' + tagName + ' -m "' + moduleName + ' release for ' + newVersion + '"', {
