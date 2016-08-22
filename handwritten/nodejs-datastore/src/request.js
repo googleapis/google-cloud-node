@@ -362,7 +362,9 @@ DatastoreRequest.prototype.get = function(keys, options, callback) {
       }
 
       var entities = entity.formatArray(resp.found);
-      var nextKeys = (resp.deferred || []).map(entity.keyFromKeyProto);
+      var nextKeys = (resp.deferred || [])
+        .map(entity.keyFromKeyProto)
+        .map(entity.keyToKeyProto);
 
       split(entities, stream, function(streamEnded) {
         if (streamEnded) {
