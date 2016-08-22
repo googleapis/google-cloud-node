@@ -110,6 +110,16 @@ var PKG = require('../package.json');
  * });
  *
  * //-
+ * // It is also possible to create your column families when creating a new
+ * // table.
+ * //-
+ * var options = {
+ *   families: ['follows']
+ * };
+ *
+ * instance.createTable('prezzy', options, function(err, table) {});
+ *
+ * //-
  * // <h3>Creating Rows</h3>
  * //
  * // New rows can be created within your table using

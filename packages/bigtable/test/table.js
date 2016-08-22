@@ -765,6 +765,17 @@ describe('Bigtable/Table', function() {
 
       table.insert(fakeEntries, done);
     });
+
+    it('should return the mutate stream', function() {
+      var fakeStream = {};
+
+      table.mutate = function() {
+        return fakeStream;
+      };
+
+      var stream = table.insert([]);
+      assert.strictEqual(stream, fakeStream);
+    });
   });
 
   describe('mutate', function() {

@@ -130,6 +130,8 @@ function Table(instance, name) {
      * @param {options=} options - Configuration object.
      * @param {boolean} options.autoCreate - Automatically create the object if
      *     it does not exist. Default: `false`
+     * @param {string} options.view - The view to be applied to the table
+     *   fields. See {module:bigtable/table#getMetadata}.
      *
      * @example
      * table.get(function(err, table, apiResponse) {
@@ -192,10 +194,10 @@ Table.formatName_ = function(instanceName, name) {
 /**
  * Create a column family.
  *
- * Optionally you can send garbage collection rules and expressions when
- * creating a family. Garbage collection executes opportunistically in the
- * background, so it's possible for reads to return a cell even if it
- * matches the active expression for its family.
+ * Optionally you can send garbage collection rules and when creating a family.
+ * Garbage collection executes opportunistically in the background, so it's
+ * possible for reads to return a cell even if it matches the active expression
+ * for its family.
  *
  * @resource [Garbage Collection Proto Docs]{@link https://github.com/googleapis/googleapis/blob/master/google/bigtable/admin/table/v1/bigtable_table_data.proto#L59}
  *
@@ -653,6 +655,22 @@ Table.prototype.getRows = function(options, callback) {
  * ];
  *
  * table.insert(entries, function(err, apiResponse) {});
+ *
+ * //-
+ * // A stream mode is also provided, this is useful when making a large number
+ * // of inserts.
+ * //-
+ * table.insert(entries)
+ *   .on('error', console.error)
+ *   .on('data', function(response) {
+ *     // response = {
+ *     //   index: 0,
+ *     //   status: {
+ *     //     code: 200,
+ *     //     message: 'OK'
+ *     //   }
+ *     // }
+ *   });
  */
 Table.prototype.insert = function(entries, callback) {
   entries = arrify(entries).map(propAssign('method', Mutation.methods.INSERT));
@@ -669,16 +687,27 @@ Table.prototype.insert = function(entries, callback) {
  *     deleted.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {object} callback.apiResponse - The full API response.
+ * @param {object[]} callback.statuses - A status for each entity transaction.
  *
  * @example
  * //-
  * // Insert entities. See {module:bigtable/table#insert}
  * //-
- * var callback = function(err, apiResponse) {
- *   if (!err) {
- *     // Mutations were successful.
+ * var callback = function(err, statuses) {
+ *   if (err) {
+ *     // Error handling omitted.
  *   }
+ *
+ *   // statuses = [
+ *   //   {
+ *   //     index: 0,
+ *   //     status: {
+ *   //       code: 200,
+ *   //       message: 'OK'
+ *   //     }
+ *   //   },
+ *   //   ...
+ *   // ]
  * };
  *
  * var entries = [
@@ -745,6 +774,22 @@ Table.prototype.insert = function(entries, callback) {
  * ];
  *
  * table.mutate(entries, callback);
+ *
+ * //-
+ * // A stream mode is also provided, this is useful when making a large number
+ * // of mutations.
+ * //-
+ * table.mutate(entries)
+ *   .on('error', console.error)
+ *   .on('data', function(response) {
+ *     // response = {
+ *     //   index: 0,
+ *     //   status: {
+ *     //     code: 200,
+ *     //     message: 'OK'
+ *     //   }
+ *     // }
+ *   });
  */
 Table.prototype.mutate = function(entries, callback) {
   entries = flatten(arrify(entries)).map(Mutation.parse);
