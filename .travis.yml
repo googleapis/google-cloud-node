@@ -24,6 +24,6 @@ deploy:
     secure: H8H4ATiE64gTgiectfIYatsSnm7uDQrgQPvnLp7Ra1piElS+f1lLzdiN8+pDGP3h+OHU/PE8KsXhtVLfYTX5zroo3Y70n5TE4uTO62PL6WZl5R1+L5bUKcrffcHMsjH0mmiK5d0TW032tMcybAHsPcj9wiOZpf6aBIEEFY/1V5o=
   on:
     tags: true
-    repo: GoogleCloudPlatform/gcloud-node
+    repo: GoogleCloudPlatform/google-cloud-node
     all_branches: true
 sudo: false
