@@ -1,6 +1,7 @@
 {
   "lang": "node",
   "friendlyLang": "Node.js",
+  "moduleName": "google-cloud-node",
   "markdown": "javascript",
   "content": "json",
   "home": "home.html",
