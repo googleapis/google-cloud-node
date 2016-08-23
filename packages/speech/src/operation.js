@@ -22,7 +22,10 @@
 
 var common = require('@google-cloud/common');
 var events = require('events');
+var extend = require('extend');
 var modelo = require('modelo');
+var is = require('is');
+var pick = require('lodash.pick');
 
 var OPERATION_FIELDS = [
   'name',
@@ -51,21 +54,12 @@ var GrpcServiceObject = common.GrpcServiceObject;
  * @alias module:speech/operation
  *
  * @example
- * var gcloud = require('google-cloud')({
- *   keyFilename: '/path/to/keyfile.json',
- *   projectId: 'grape-spaceship-123'
- * });
- * var speech = gcloud.speech();
- *
  * var operation = speech.operation('6885083136681374325');
  */
-function Operation(service, values) {
-  this.service = service;
-  this.pick_(values);
-
+function Operation(service, name) {
   GrpcServiceObject.call(this, {
     parent: service,
-    id: this.name,
+    id: name,
     methods: {}
   });
 
@@ -94,10 +88,7 @@ modelo.inherits(Operation, GrpcServiceObject, events.EventEmitter);
  * @param {object} callback.apiResponse - Raw API response.
  *
  * @example
- * var operation = speech.operation('6885083136681374325');
- * operation.get(function(err, operation, apiResponse) {
- *   console.log(operation);
- * });
+ * operation.get(function(err, operation, apiResponse) {});
  */
 Operation.prototype.get = function(callback) {
   var self = this;
@@ -108,20 +99,38 @@ Operation.prototype.get = function(callback) {
   };
 
   var reqOpts = {
-    name: this.name
+    name: this.id
   };
 
-  this.service.request(protoOpts, reqOpts, function(err, apiResponse) {
+  this.parent.request(protoOpts, reqOpts, function(err, apiResponse) {
     if (err) {
       callback(err, null, apiResponse);
       return;
     }
 
-    var operation = self.service.operation(apiResponse);
-    self.pick_(operation);
+    self.extendWithMetadata_(apiResponse);
 
     callback(null, self, apiResponse);
   });
+};
+
+/**
+ * Make properties from the API response (metadata) easier to access by placing
+ * them right on the instance.
+ *
+ * @param {object} metadata - The metadata object returned from the API.
+ * @private
+ */
+Operation.prototype.extendWithMetadata_ = function(metadata) {
+  extend(this, pick(metadata, OPERATION_FIELDS));
+
+  this.metadata = metadata;
+
+  var response = metadata.response;
+  if (response && is.string(response.value)) {
+    var decode = this.parent.protos.Speech.AsyncRecognizeResponse.decode;
+    this.response = decode(response.value);
+  }
 };
 
 /**
@@ -183,21 +192,6 @@ Operation.prototype.startPolling_ = function() {
     }
 
     self.emit('complete', operation, apiResponse);
-  });
-};
-
-/**
- * Shallow copy the "name", "metadata", "done", "error", and "response" fields
- * from the provided object onto this operation instance.
- *
- * @param {object} values - The callback function.
- * @private
- */
-Operation.prototype.pick_ = function(values) {
-  var self = this;
-
-  OPERATION_FIELDS.forEach(function(field) {
-    self[field] = values[field];
   });
 };
 

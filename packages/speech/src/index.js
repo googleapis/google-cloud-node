@@ -131,7 +131,7 @@ Speech.endpointerTypes = {
  *     Cloud Storage URI, a Cloud Storage File object, or a
  *     [`RecognitionAudio`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionAudio)
  *     object.
- * @param {object} options - A `RecognitionConfig` object. See
+ * @param {object} config - A `RecognitionConfig` object. See
  *     [`RecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig).
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
@@ -142,7 +142,7 @@ Speech.endpointerTypes = {
  *     [`SyncRecognizeResponse`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#syncrecognizeresponse).
  *
  * @example
- * var options = {
+ * var config = {
  *   encoding: 'LINEAR16',
  *   sampleRate: 16000
  * };
@@ -165,19 +165,19 @@ Speech.endpointerTypes = {
  * //-
  * // <h3>Run speech detection over a local file</h3>
  * //-
- * speech.recognize('./bridge.raw', options, callback);
+ * speech.recognize('./bridge.raw', config, callback);
  *
  * //-
  * // <h3>Run speech recognition over a file in Cloud Storage</h3>
  * //-
- * speech.recognize('gs://your-bucket-name/bridge.raw', options, callback);
+ * speech.recognize('gs://your-bucket-name/bridge.raw', config, callback);
  *
  * //-
  * // <h3>Run speech recognition over raw file contents</h3>
  * //-
  * speech.recognize({
  *   content: fs.readFileSync('./bridge.raw')
- * }, options, callback);
+ * }, config, callback);
  *
  * //-
  * // <h3>Run speech recognition over a remote file</h3>
@@ -186,9 +186,9 @@ Speech.endpointerTypes = {
  * // google-cloud will make a request to the URL given and send the file
  * // contents to the upstream API.*
  * //-
- * speech.recognize('https://example.com/files/bridge.raw', options, callback);
+ * speech.recognize('https://example.com/files/bridge.raw', config, callback);
  */
-Speech.prototype.recognize = function(file, options, callback) {
+Speech.prototype.recognize = function(file, config, callback) {
   var self = this;
 
   var protoOpts = {
@@ -206,7 +206,7 @@ Speech.prototype.recognize = function(file, options, callback) {
       audio: foundFile,
       config: extend({
         encoding: Speech.detectEncoding_(file)
-      }, options)
+      }, config)
     };
 
     self.request(protoOpts, reqOpts, function(err, apiResponse) {
@@ -335,7 +335,10 @@ Speech.prototype.startRecognition = function(file, options, callback) {
         return;
       }
 
-      callback(null, self.operation(apiResponse), apiResponse);
+      var operation = self.operation(apiResponse.name);
+      operation.extendWithMetadata_(apiResponse);
+
+      callback(null, operation, apiResponse);
     });
   });
 };
@@ -418,9 +421,7 @@ Speech.prototype.createRecognizeStream = function(config) {
  *
  * @throws {Error} If a name is not provided.
  *
- * @param {string|options=} options - Configuration object or the name of the
- *     operation.
- * @param {string} options.name - The name of the operation.
+ * @param {string} name - The name of the operation.
  * @returns {module:speech/operation}
  *
  * @example
@@ -428,25 +429,12 @@ Speech.prototype.createRecognizeStream = function(config) {
  *
  * operation.get(function(err) {});
  */
-Speech.prototype.operation = function(options) {
-  if (is.string(options)) {
-    options = {
-      name: options
-    };
-  }
-
-  if (!options || !options.name) {
+Speech.prototype.operation = function(name) {
+  if (!name) {
     throw new Error('A name must be specified for an operation.');
   }
 
-  var operation = new Operation(this, options);
-
-  if (operation.response && is.string(operation.response.value)) {
-    var decode = this.protos.Speech.AsyncRecognizeResponse.decode;
-    operation.response = decode(operation.response.value);
-  }
-
-  return operation;
+  return new Operation(this, name);
 };
 
 /**
@@ -502,7 +490,6 @@ Speech.findFile_ = function(file, callback) {
     } else {
       callback(null, file);
     }
-
     return;
   }
 

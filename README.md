@@ -856,19 +856,40 @@ project.getMetadata(function(err, metadata) {
 - [API Documentation][gcloud-speech-docs]
 - [Official Documentation][cloud-speech-docs]
 
+#### Using the all-in-one module
+
+```
+$ npm install --save google-cloud
+```
+
 ```js
-var gcloud = require('gcloud');
+var gcloud = require('google-cloud');
+var speech = gcloud.speech;
+```
 
-// Authorizing on a per-API-basis. You don't need to do this if you auth on a
-// global basis (see Authorization section above).
+#### Using the Cloud Speech API module
 
-var speech = gcloud.speech({
+```
+$ npm install --save @google-cloud/speech
+```
+
+```js
+var speech = require('@google-cloud/speech');
+```
+
+#### Preview
+
+```js
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
+
+var speechClient = gcloud.speech({
   projectId: 'my-project',
   keyFilename: '/path/to/keyfile.json'
 });
 
 // Detect the speech in an audio file.
-speech.detect('./audio.raw', {
+speechClient.recognize('./audio.raw', {
   encoding: 'LINEAR16',
   sampleRate: 16000
 }, function(err, result) {
@@ -887,21 +908,24 @@ var initialRequest = {
   continuous: true
 };
 
-var stream = speech.recognize(initialRequest);
-  .on('data', function (recognizeResponse) {
-    console.log(recognizeResponse);
-  });
+var stream = speechClient.createRecognizeStream(initialRequest);
+
+stream.on('data', function(recognizeResponse) {
+  console.log(recognizeResponse);
+});
 
 stream.write({
   audioRequest: {
     content: audioChunkOne
   }
 });
+
 stream.write({
   audioRequest: {
     content: audioChunkTwo
   }
 });
+
 stream.end();
 ```
 
