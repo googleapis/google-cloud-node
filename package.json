@@ -1,5 +1,5 @@
 {
-  "name": "gcloud-node",
+  "name": "google-cloud-node",
   "private": "true",
   "devDependencies": {
     "async": "^1.4.2",

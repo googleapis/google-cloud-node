@@ -68,7 +68,7 @@ describe('Prediction', function() {
           setTimeout(function() {
             bucket.delete(function() {
               // Ignoring this error:
-              // https://github.com/GoogleCloudPlatform/gcloud-node/issues/968
+              // https://github.com/GoogleCloudPlatform/google-cloud-node/issues/968
               // if (err) {
               //   callback(err);
               //   return;

@@ -63,7 +63,7 @@ var apis = {
    *   projectId: 'grape-spaceship-123',
    *   keyFilename: '/path/to/keyfile.json',
    *   zone: 'us-central1-b',
-   *   cluster: 'gcloud-node'
+   *   cluster: 'google-cloud-node'
    * });
    */
   bigtable: require('@google-cloud/bigtable'),

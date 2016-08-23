@@ -36,7 +36,7 @@
     "CONTRIBUTORS",
     "COPYING"
   ],
-  "repository": "googlecloudplatform/gcloud-node",
+  "repository": "googlecloudplatform/google-cloud-node",
   "dependencies": {
     "array-uniq": "^1.0.2",
     "arrify": "^1.0.0",

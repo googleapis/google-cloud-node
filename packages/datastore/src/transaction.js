@@ -184,7 +184,7 @@ Transaction.prototype.commit = function(callback) {
       self.rollback(function() {
         // Provide the error & API response from the failed commit to the user.
         // Even a failed rollback should be transparent.
-        // RE: https://github.com/GoogleCloudPlatform/gcloud-node/pull/1369#discussion_r66833976
+        // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/pull/1369#discussion_r66833976
         callback(err, resp);
       });
       return;

@@ -250,9 +250,9 @@ function Subscription(pubsub, options) {
   if (is.number(options.timeout)) {
     this.timeout = options.timeout;
   } else {
-    // The default timeout used in gcloud-node is 60s, but a pull request times
-    // out around 90 seconds. Allow an extra couple of seconds to give the API a
-    // chance to respond on its own before terminating the connection.
+    // The default timeout used in google-cloud-node is 60s, but a pull request
+    // times out around 90 seconds. Allow an extra couple of seconds to give the
+    // API a chance to respond on its own before terminating the connection.
     this.timeout = PUBSUB_API_TIMEOUT + 2000;
   }
 
