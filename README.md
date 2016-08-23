@@ -29,8 +29,7 @@ If you need support for other Google APIs, check out the [Google Node.js API Cli
 
 ## Where did `gcloud-node` go?
 
-`gcloud-node` lives on under a new name, `google-cloud`. Your code will behave
-the same, simply change your dependency:
+`gcloud-node` lives on under a new name, `google-cloud`. Your code will behave the same, simply change your dependency:
 
 ```sh
 $ npm uninstall --save gcloud
@@ -51,8 +50,8 @@ $ npm install --save google-cloud
 ## Example Applications
 
 - [nodejs-getting-started][nodejs-getting-started] - A sample and [tutorial][nodejs-getting-started-tutorial] that demonstrates how to build a complete web application using Cloud Datastore, Cloud Storage, and Cloud Pub/Sub and deploy it to Google App Engine or Google Compute Engine.
-- [gcloud-node-todos][gcloud-todos] - A TodoMVC backend using gcloud-node and Datastore.
-- [gitnpm][gitnpm] - Easily lookup an npm package's GitHub repo using gcloud-node and Google App Engine.
+- [gcloud-node-todos][gcloud-todos] - A TodoMVC backend using google-cloud-node and Datastore.
+- [gitnpm][gitnpm] - Easily lookup an npm package's GitHub repo using google-cloud-node and Google App Engine.
 - [gcloud-kvstore][gcloud-kvstore] - Use Datastore as a simple key-value store.
 - [hya-wave][hya-wave] - Cloud-based web sample editor. Part of the [hya-io][hya-io] family of products.
 - [gstore-node][gstore-node] - Google Datastore Entities Modeling library.

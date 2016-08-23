@@ -134,7 +134,7 @@ function Job(bigQuery, id) {
 
   // The API endpoint for cancel is:    .../bigquery/v2/project/projectId/...
   // The rest of the API endpoints are: .../bigquery/v2/projects/projectId/...
-  // Reference: https://github.com/GoogleCloudPlatform/gcloud-node/issues/1027
+  // Reference: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/1027
   this.interceptors.push({
     request: function(reqOpts) {
       if (reqOpts.uri.indexOf('/cancel') > -1) {

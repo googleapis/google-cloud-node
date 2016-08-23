@@ -47,7 +47,7 @@ function Channel(storage, id, resourceId) {
     baseUrl: '/channels',
 
     // An ID shouldn't be included in the API requests.
-    // RE: https://github.com/GoogleCloudPlatform/gcloud-node/issues/1145
+    // RE: https://github.com/GoogleCloudPlatform/google-cloud-node/issues/1145
     id: '',
 
     methods: {

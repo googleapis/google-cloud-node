@@ -52,7 +52,7 @@ var errorMessage = format([
   'See {baseUrl}/{path} for a detailed guide on creating an authenticated',
   'connection.'
 ].join(' '), {
-  baseUrl: 'https://googlecloudplatform.github.io/gcloud-node/#',
+  baseUrl: 'https://googlecloudplatform.github.io/google-cloud-node/#',
   path: '/docs/guides/authentication'
 });
 

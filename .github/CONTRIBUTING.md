@@ -20,7 +20,7 @@ $ npm test
 
 ### System Tests
 
-To run the system tests, first create and configure a project in the Google Developers Console following the [instructions on how to run gcloud-node][elsewhere]. After that, set the following environment variables:
+To run the system tests, first create and configure a project in the Google Developers Console following the [instructions on how to run google-cloud-node][elsewhere]. After that, set the following environment variables:
 
 - **GCLOUD_TESTS_PROJECT_ID**: Developers Console project's ID (e.g. bamboo-shift-455)
 - **GCLOUD_TESTS_KEY**: The path to the JSON key file.

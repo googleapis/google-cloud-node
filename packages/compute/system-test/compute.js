@@ -779,7 +779,7 @@ describe('Compute', function() {
     var HEALTH_CHECK_NAME = generateName('health-check');
 
     // To create a rule, we need to also create a TargetHttpProxy and UrlMap.
-    // Until they are officially supported by gcloud-node, we make manual
+    // Until they are officially supported by google-cloud-node, we make manual
     // requests to create and delete them.
     var TARGET_PROXY_NAME = generateName('target-proxy');
     var URL_MAP_NAME = generateName('url-map');

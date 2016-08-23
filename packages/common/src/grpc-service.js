@@ -148,7 +148,7 @@ function GrpcService(config, options) {
   if (global.GCLOUD_SANDBOX_ENV) {
     // gRPC has a tendency to cause our doc unit tests to fail, so we prevent
     // any calls to that library from going through.
-    // Reference: https://github.com/GoogleCloudPlatform/gcloud-node/pull/1137#issuecomment-193315047
+    // Reference: https://github.com/GoogleCloudPlatform/google-cloud-node/pull/1137#issuecomment-193315047
     return global.GCLOUD_SANDBOX_ENV;
   }
 
@@ -331,7 +331,7 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
           // this does not provide any kind of response status. So we're faking
           // it here with code `0` which translates to HTTP 200.
           //
-          // https://github.com/GoogleCloudPlatform/gcloud-node/pull/1444#discussion_r71812636
+          // https://github.com/GoogleCloudPlatform/google-cloud-node/pull/1444#discussion_r71812636
           var grcpStatus = GrpcService.decorateStatus_({ code: 0 });
 
           this.emit('response', grcpStatus);
