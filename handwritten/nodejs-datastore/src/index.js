@@ -71,7 +71,7 @@ var PKG = require('../package.json');
  * // <h4>gcloud SDK not supported</h4>
  * //
  * // As of this release, the Datastore emulator that is part of the gcloud SDK
- * // is not compatible with gcloud-node. We use
+ * // is not compatible with google-cloud-node. We use
  * // <a href="http://grpc.io">gRPC</a> as our transport layer, while the gcloud
  * // SDK's Datastore emulator does not support gRPC.
  * //
