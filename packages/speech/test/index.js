@@ -154,7 +154,7 @@ describe('Speech', function() {
 
     beforeEach(function() {
       Speech.findFile_ = function(files, callback) {
-        callback(null, FILES);
+        callback(null, FILES[0]);
       };
     });
 
@@ -275,7 +275,7 @@ describe('Speech', function() {
     beforeEach(function() {
       Speech.findFile_ = function(files, callback) {
         assert.strictEqual(files, FILES[0]);
-        callback(null, FILES);
+        callback(null, FILES[0]);
       };
     });
 
@@ -500,21 +500,14 @@ describe('Speech', function() {
       var fileUri = 'http://www.google.com/audio.raw';
       var body = 'body';
 
-      requestOverride = function(reqOpts) {
-        assert.strictEqual(reqOpts.method, 'GET');
+      requestOverride = function(reqOpts, callback) {
         assert.strictEqual(reqOpts.uri, fileUri);
+        assert.strictEqual(reqOpts.encoding, null);
 
-        var resp = new EventEmitter();
-        setTimeout(function() {
-          resp.emit('data', new Buffer(body));
-          resp.stream.write(new Buffer(body));
-          resp.emit('end');
-          resp.stream.end();
-        }, 250);
-        resp.pipe = function(stream) {
-          resp.stream = stream;
+        var resp = {
+          body: new Buffer(body)
         };
-        return resp;
+        callback(null, resp, resp.body);
       };
 
       Speech.findFile_(fileUri, function(err, foundFile) {
@@ -530,16 +523,8 @@ describe('Speech', function() {
       var fileUri = 'http://www.google.com/audio.raw';
       var error = new Error('Error.');
 
-      requestOverride = function() {
-        var resp = new EventEmitter();
-        setTimeout(function() {
-          resp.emit('error', error);
-          resp.stream.emit('error');
-        }, 250);
-        resp.pipe = function(stream) {
-          resp.stream = stream;
-        };
-        return resp;
+      requestOverride = function(options, cb) {
+        cb(error);
       };
 
       Speech.findFile_(fileUri, function(err) {
@@ -553,8 +538,8 @@ describe('Speech', function() {
 
       Speech.findFile_(file, function(err) {
         assert(err);
-        assert.equal(err.message, 'RecognitionAudio object requires a ' +
-          '"content" or "uri" property!');
+        assert.equal(err.message, 'RecognitionAudio requires a ' +
+          '"content" or "uri" property.');
         done();
       });
     });
