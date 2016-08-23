@@ -18,7 +18,6 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var prop = require('propprop');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
@@ -182,10 +181,25 @@ describe('Translate', function() {
     it('should make the correct API request', function(done) {
       translate.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/languages');
+        assert.deepEqual(reqOpts.qs, {
+          target: 'en'
+        });
         done();
       };
 
       translate.getLanguages(assert.ifError);
+    });
+
+    it('should make the correct API request with target', function(done) {
+      translate.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/languages');
+        assert.deepEqual(reqOpts.qs, {
+          target: 'es'
+        });
+        done();
+      };
+
+      translate.getLanguages('es', assert.ifError);
     });
 
     describe('error', function() {
@@ -213,16 +227,27 @@ describe('Translate', function() {
         data: {
           languages: [
             {
-              language: 'en'
+              language: 'en',
+              name: 'English'
             },
             {
-              language: 'es'
+              language: 'es',
+              name: 'Spanish'
             }
           ]
         }
       };
 
-      var expectedResults = apiResponse.data.languages.map(prop('language'));
+      var expectedResults = [
+        {
+          code: 'en',
+          name: 'English'
+        },
+        {
+          code: 'es',
+          name: 'Spanish'
+        }
+      ];
 
       beforeEach(function() {
         translate.request = function(reqOpts, callback) {

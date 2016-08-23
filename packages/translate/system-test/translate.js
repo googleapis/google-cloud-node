@@ -102,7 +102,33 @@ var API_KEY = process.env.GCLOUD_TESTS_API_KEY;
     it('should get a list of supported languages', function(done) {
       translate.getLanguages(function(err, languages) {
         assert.ifError(err);
-        assert(languages.length > 0);
+
+        var englishResult = languages.filter(function(language) {
+          return language.code === 'en';
+        })[0];
+
+        assert.deepEqual(englishResult, {
+          code: 'en',
+          name: 'English'
+        });
+
+        done();
+      });
+    });
+
+    it('should accept a target language', function(done) {
+      translate.getLanguages('es', function(err, languages) {
+        assert.ifError(err);
+
+        var englishResult = languages.filter(function(language) {
+          return language.code === 'en';
+        })[0];
+
+        assert.deepEqual(englishResult, {
+          code: 'en',
+          name: 'inglés'
+        });
+
         done();
       });
     });
