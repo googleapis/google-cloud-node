@@ -164,36 +164,93 @@ Translate.prototype.detect = function(input, callback) {
 /**
  * Get an array of all supported languages.
  *
- * @resource [Discover Supported Languages]{@link https://cloud.google.com/translate/v2/using_rest#supported-languages}
+ * @resource [Discovering Supported Languages]{@link https://cloud.google.com/translate/v2/discovering-supported-languages-with-rest}
  *
+ * @param {string=} target - Get the language names in a language other than
+ *     English.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {string[]} callback.languages - The supported ISO 639-1 language
- *     codes.
+ * @param {object[]} callback.languages - The languages supported by the API.
+ * @param {string} callback.languages[].code - The [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)
+ *     language code.
+ * @param {string} callback.languages[].name - The language name. This can be
+ *     translated into your preferred language with the `target` option
+ *     described above.
  * @param {object} callback.apiResponse - Raw API response.
  *
  * @example
  * translate.getLanguages(function(err, languages) {
  *   if (!err) {
  *     // languages = [
- *     //   'af',
- *     //   'ar',
- *     //   'az',
+ *     //   {
+ *     //     code: 'af',
+ *     //     name: 'Afrikaans'
+ *     //   },
+ *     //   {
+ *     //     code: 'ar',
+ *     //     name: 'Arabic'
+ *     //   },
+ *     //   {
+ *     //     code: 'az',
+ *     //     name: 'Azerbaijani'
+ *     //   },
+ *     //   ...
+ *     // ]
+ *   }
+ * });
+ *
+ * //-
+ * // Get the language names in a language other than English.
+ * //-
+ * translate.getLanguages('es', function(err, languages) {
+ *   if (!err) {
+ *     // languages = [
+ *     //   {
+ *     //     code: 'af',
+ *     //     name: 'afrikáans'
+ *     //   },
+ *     //   {
+ *     //     code: 'ar',
+ *     //     name: 'árabe'
+ *     //   },
+ *     //   {
+ *     //     code: 'az',
+ *     //     name: 'azerí'
+ *     //   },
  *     //   ...
  *     // ]
  *   }
  * });
  */
-Translate.prototype.getLanguages = function(callback) {
-  this.request({
-    uri: '/languages'
-  }, function(err, resp) {
+Translate.prototype.getLanguages = function(target, callback) {
+  if (is.fn(target)) {
+    callback = target;
+    target = 'en';
+  }
+
+  var reqOpts = {
+    uri: '/languages',
+    useQuerystring: true,
+    qs: {}
+  };
+
+  if (target && is.string(target)) {
+    reqOpts.qs.target = target;
+  }
+
+  this.request(reqOpts, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
     }
 
-    var languages = resp.data.languages.map(prop('language'));
+    var languages = resp.data.languages.map(function(language) {
+      return {
+        code: language.language,
+        name: language.name
+      };
+    });
+
     callback(null, languages, resp);
   });
 };
