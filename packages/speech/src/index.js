@@ -20,31 +20,18 @@
 
 'use strict';
 
-var arrify = require('arrify');
 var common = require('@google-cloud/common');
-var concat = require('concat-stream');
 var extend = require('extend');
 var format = require('string-format-obj');
-var googleProtoFiles = require('google-proto-files');
 var fs = require('fs');
+var googleProtoFiles = require('google-proto-files');
 var is = require('is');
-var nodeutil = require('util');
+var pumpify = require('pumpify');
 var request = require('request');
+var Storage = require('@google-cloud/storage');
+var streamEvents = require('stream-events');
 var through = require('through2');
-var duplexify = require('duplexify');
-var PKG = require('../package.json');
-
-/**
- * @type {module:storage/file}
- * @private
- */
-var File = require('@google-cloud/storage').File;
-
-/**
- * @type {module:common/grpc-service}
- * @private
- */
-var GrpcService = common.GrpcService;
+var util = require('util');
 
 /**
  * @type {module:speech/operation}
@@ -52,11 +39,7 @@ var GrpcService = common.GrpcService;
  */
 var Operation = require('./operation.js');
 
-/**
- * @type {module:common/util}
- * @private
- */
-var util = common.util;
+var PKG = require('../package.json');
 
 var ENDPOINTER_EVENT_UNSPECIFIED = 'ENDPOINTER_EVENT_UNSPECIFIED';
 var START_OF_SPEECH = 'START_OF_SPEECH';
@@ -98,7 +81,7 @@ var END_OF_UTTERANCE = 'END_OF_UTTERANCE';
  */
 function Speech(options) {
   if (!(this instanceof Speech)) {
-    options = util.normalizeArguments(this, options);
+    options = common.util.normalizeArguments(this, options);
     return new Speech(options);
   }
 
@@ -114,8 +97,7 @@ function Speech(options) {
       },
       Operations: {
         path: googleProtoFiles('longrunning', 'operations.proto'),
-        service: 'longrunning',
-        apiVersion: undefined
+        service: 'longrunning'
       }
     },
     scopes: [
@@ -124,10 +106,10 @@ function Speech(options) {
     userAgent: PKG.name + '/' + PKG.version
   };
 
-  GrpcService.call(this, config, options);
+  common.GrpcService.call(this, config, options);
 }
 
-nodeutil.inherits(Speech, GrpcService);
+util.inherits(Speech, common.GrpcService);
 
 Speech.endpointerTypes = {
   ENDPOINTER_EVENT_UNSPECIFIED: ENDPOINTER_EVENT_UNSPECIFIED,
@@ -146,88 +128,69 @@ Speech.endpointerTypes = {
  *
  * @param {string|object|module:storage/file} file - The source file to run the
  *     detection on. It can be either a local file path, a remote file URL, a
- *     Cloud Storage URI, a Cloud Storage File object, or a [`RecognitionAudio`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionAudio)
+ *     Cloud Storage URI, a Cloud Storage File object, or a
+ *     [`RecognitionAudio`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionAudio)
  *     object.
  * @param {object} options - A `RecognitionConfig` object. See
  *     [`RecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig).
- * @param {string} options.encoding - Encoding of audio data sent in all `RecognitionAudio` messages. See
- *     [`RecognitionConfig.encoding`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig.FIELDS).
- * @param {number} options.sampleRate - Sample rate in Hertz of the audio data sent in all RecognitionAudio messages. See
- *     [`RecognitionConfig.sampleRate`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig.FIELDS).
- * @param {string=} options.languageCode - The language of the supplied
- *     audio as a BCP-47 language tag. Example: "en-GB" https://www.rfc-editor.org/rfc/bcp/bcp47.txt
- *     If omitted, defaults to "en-US". See
- *     [`RecognitionConfig.languageCode`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig.FIELDS).
- * @param {number=} options.maxAlternatives - Default: `1`. See
- *     [`RecognitionConfig.maxAlternatives`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig.FIELDS).
- * @param {boolean=} options.profanityFilter - Default: `false`. See
- *     [`RecognitionConfig.profanityFilter`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig.FIELDS).
- * @param {string[]=} options.speechContext - Default: `[]`. See
- *     [`RecognitionConfig.speechContext`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig.FIELDS).
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {object[]} callback.syncRecognizeResponse -
- *     `SyncRecognizeResponse` objects. See
+ * @param {object[]} callback.syncRecognizeResponse - `SyncRecognizeResponse`
+ *     objects. See
  *     [`SyncRecognizeResponse`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#syncrecognizeresponse).
  * @param {object} callback.apiResponse - Raw API response. See
  *     [`SyncRecognizeResponse`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#syncrecognizeresponse).
  *
  * @example
+ * var options = {
+ *   encoding: 'LINEAR16',
+ *   sampleRate: 16000
+ * };
+ *
+ * function callback(err, result, apiResponse) {
+ *   // result = {
+ *   //   results: [
+ *   //     {
+ *   //       alternatives: [
+ *   //         {
+ *   //           transcript: "...",
+ *   //           confidence: 0.88
+ *   //         }
+ *   //       ]
+ *   //     }
+ *   //   ]
+ *   // }
+ * }
+ *
  * //-
  * // <h3>Run speech detection over a local file</h3>
  * //-
- * speech.detect('./bridge.raw', {
- *   encoding: 'LINEAR16',
- *   sampleRate: 16000
- * }, function(err, result, apiResponse) {
- *   //   result = {
- *   //     results: [
- *   //       {
- *   //         alternatives: [
- *   //           {
- *   //             transcript: "...",
- *   //             confidence: 0.88
- *   //           }
- *   //         ]
- *   //       }
- *   //     ]
- *   //   }
- * });
+ * speech.recognize('./bridge.raw', options, callback);
  *
  * //-
- * // <h3>Run speech detection over a file in Cloud Storage</h3>
+ * // <h3>Run speech recognition over a file in Cloud Storage</h3>
  * //-
- * var file = 'gs://your-bucket-name/bridge.raw';
- * speech.detect(file, {
- *   encoding: 'LINEAR16',
- *   sampleRate: 16000
- * }, function(err, result, apiResponse) {});
+ * speech.recognize('gs://your-bucket-name/bridge.raw', options, callback);
  *
  * //-
- * // <h3>Run speech detection over raw file contents</h3>
+ * // <h3>Run speech recognition over raw file contents</h3>
  * //-
- * speech.detect({
+ * speech.recognize({
  *   content: fs.readFileSync('./bridge.raw')
- * }, {
- *   encoding: 'LINEAR16',
- *   sampleRate: 16000
- * }, function(err, result, apiResponse) {});
+ * }, options, callback);
  *
  * //-
- * // <h3>Run speech detection over a remote file</h3>
+ * // <h3>Run speech recognition over a remote file</h3>
  * //
  * // *Note: This is not an officially supported feature of the Speech API.
  * // google-cloud will make a request to the URL given and send the file
  * // contents to the upstream API.*
  * //-
- * var file = 'https://your-domain.com/files/bridge.raw';
- * speech.recognize(file, {
- *   encoding: 'LINEAR16',
- *   sampleRate: 16000
- * }, function(err, result, apiResponse) {});
+ * speech.recognize('https://example.com/files/bridge.raw', options, callback);
  */
 Speech.prototype.recognize = function(file, options, callback) {
   var self = this;
+
   var protoOpts = {
     service: 'Speech',
     method: 'syncRecognize'
@@ -240,10 +203,10 @@ Speech.prototype.recognize = function(file, options, callback) {
     }
 
     var reqOpts = {
+      audio: foundFile,
       config: extend({
         encoding: Speech.detectEncoding_(file)
-      }, options),
-      audio: foundFile
+      }, options)
     };
 
     self.request(protoOpts, reqOpts, function(err, apiResponse) {
@@ -251,7 +214,9 @@ Speech.prototype.recognize = function(file, options, callback) {
         callback(err, null, apiResponse);
         return;
       }
+
       var response = new self.protos.Speech.SyncRecognizeResponse(apiResponse);
+
       callback(null, response, apiResponse);
     });
   });
@@ -273,24 +238,11 @@ Speech.prototype.recognize = function(file, options, callback) {
  *
  * @param {string|object|module:storage/file} file - The source file to run the
  *     detection on. It can be either a local file path, a remote file URL, a
- *     Cloud Storage URI, a Cloud Storage File object, or a [`RecognitionAudio`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionAudio)
+ *     Cloud Storage URI, a Cloud Storage File object, or a
+ *     [`RecognitionAudio`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionAudio)
  *     object.
  * @param {object} options - A
  *     `RecognitionConfig` object. See [`RecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig).
- * @param {string} options.encoding - Encoding of audio data sent in all `RecognitionAudio` messages. See
- *     [`RecognitionConfig.encoding`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig.FIELDS).
- * @param {number} options.sampleRate - Sample rate in Hertz of the audio data sent in all RecognitionAudio messages. See
- *     [`RecognitionConfig.sampleRate`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig.FIELDS).
- * @param {string=} options.languageCode - The language of the supplied
- *     audio as a BCP-47 language tag. Example: "en-GB" https://www.rfc-editor.org/rfc/bcp/bcp47.txt
- *     If omitted, defaults to "en-US". See
- *     [`RecognitionConfig.languageCode`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig.FIELDS).
- * @param {number=} options.maxAlternatives - Default: `1`. See
- *     [`RecognitionConfig.maxAlternatives`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig.FIELDS).
- * @param {boolean=} options.profanityFilter - Default: `false`. See
- *     [`RecognitionConfig.profanityFilter`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig.FIELDS).
- * @param {string[]=} options.speechContext - Default: `[]`. See
- *     [`RecognitionConfig.speechContext`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig.FIELDS).
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:speech/operation} callback.operation - `Operation` object. See
@@ -298,49 +250,53 @@ Speech.prototype.recognize = function(file, options, callback) {
  * @param {object} callback.apiResponse - Raw API response.
  *
  * @example
+ * var options = {
+ *   encoding: 'LINEAR16',
+ *   sampleRate: 16000
+ * };
+ *
+ * function callback(err, operation, apiResponse) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ *
+ *   operation
+ *     .on('error', function(err) {})
+ *     .on('complete', function(operation, apiResponse) {
+ *       // operation = {
+ *       //   response: {
+ *       //     results: [
+ *       //       {
+ *       //         alternatives: [
+ *       //           {
+ *       //             transcript: "...",
+ *       //             confidence: 0.88
+ *       //           }
+ *       //         ]
+ *       //       }
+ *       //     ]
+ *       //   }
+ *       // }
+ *     });
+ * }
+ *
  * //-
  * // <h3>Run speech detection over a local file</h3>
  * //-
- * speech.startRecognition('./bridge.raw', {
- *   encoding: 'LINEAR16',
- *   sampleRate: 16000
- * }, function(err, operation, apiResponse) {
- *   operation.on('complete', function(err, operation, apiResponse) {
- *     // operation = {
- *     //   response: {
- *     //     results: [
- *     //       {
- *     //         alternatives: [
- *     //           {
- *     //             transcript: "...",
- *     //             confidence: 0.88
- *     //           }
- *     //         ]
- *     //       }
- *     //     ]
- *     //   }
- *     // }
- *   });
- * });
+ * speech.startRecognition('./bridge.raw', options, callback);
  *
  * //-
  * // <h3>Run speech detection over a file in Cloud Storage</h3>
  * //-
  * var file = 'gs://your-bucket-name/bridge.raw';
- * speech.startRecognition(file, {
- *   encoding: 'LINEAR16',
- *   sampleRate: 16000
- * }, function(err, operation, apiResponse) {});
+ * speech.startRecognition(file, options, callback);
  *
  * //-
  * // <h3>Run speech detection over raw file contents</h3>
  * //-
  * speech.startRecognition({
  *   content: fs.readFileSync('./bridge.raw')
- * }, {
- *   encoding: 'LINEAR16',
- *   sampleRate: 16000
- * }, function(err, operation, apiResponse) {});
+ * }, options, callback);
  *
  * //-
  * // <h3>Run speech detection over a remote file</h3>
@@ -348,14 +304,13 @@ Speech.prototype.recognize = function(file, options, callback) {
  * // *Note: This is not an officially supported feature of the Speech API. Our
  * // library will make a request to the URL given, and send that upstream.*
  * //-
- * var file = 'https://your-domain.com/files/bridge.raw';
- * speech.startRecognition(file, {
- *   encoding: 'LINEAR16',
- *   sampleRate: 16000
- * }, function(err, operation, apiResponse) {});
+ * var file = 'https://example.com/files/bridge.raw';
+ *
+ * speech.startRecognition(file, options, callback);
  */
 Speech.prototype.startRecognition = function(file, options, callback) {
   var self = this;
+
   var protoOpts = {
     service: 'Speech',
     method: 'asyncRecognize'
@@ -368,10 +323,10 @@ Speech.prototype.startRecognition = function(file, options, callback) {
     }
 
     var reqOpts = {
+      audio: foundFile,
       config: extend({
         encoding: Speech.detectEncoding_(file)
-      }, options),
-      audio: foundFile
+      }, options)
     };
 
     self.request(protoOpts, reqOpts, function(err, apiResponse) {
@@ -379,6 +334,7 @@ Speech.prototype.startRecognition = function(file, options, callback) {
         callback(err, null, apiResponse);
         return;
       }
+
       callback(null, self.operation(apiResponse), apiResponse);
     });
   });
@@ -391,35 +347,17 @@ Speech.prototype.startRecognition = function(file, options, callback) {
  * @resource [`StreamingRecognize` API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.Speech.StreamingRecognize}
  * @resource [`StreamingRecognizeRequest` API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognizeRequest}
  *
- * @param {object} options - A `StreamingRecognitionConfig` object. See
+ * @param {object} config - A `StreamingRecognitionConfig` object. See
  *     [`StreamingRecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognitionConfig).
- * @param {object} options.config - A `RecognitionConfig` object. See
- *     [`RecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig).
- * @param {string} options.config.encoding - Encoding of audio data sent in all `RecognitionAudio` messages. See
- *     [`RecognitionConfig.encoding`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig.FIELDS).
- * @param {number} options.config.sampleRate - Sample rate in Hertz of the audio data sent in all `RecognitionAudio` messages. See
- *     [`RecognitionConfig.sampleRate`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig.FIELDS).
- * @param {string=} options.config.languageCode - The language of the supplied
- *     audio as a BCP-47 language tag. Example: "en-GB" https://www.rfc-editor.org/rfc/bcp/bcp47.txt
- *     If omitted, defaults to "en-US". See
- *     [`RecognitionConfig.languageCode`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig.FIELDS).
- * @param {number=} options.config.maxAlternatives - Default: `1`. See
- *     [`RecognitionConfig.maxAlternatives`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig.FIELDS).
- * @param {boolean=} options.config.profanityFilter - Default: `false`. See
- *     [`RecognitionConfig.profanityFilter`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig.FIELDS).
- * @param {string[]=} options.config.speechContext - Default: `[]`. See
- *     [`RecognitionConfig.speechContext`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.RecognitionConfig.FIELDS).
- * @param {boolean=} options.singleUtterance - Default: `false`. See
- *     [`StreamingRecognitionConfig.singleUtterance`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognitionConfig.FIELDS).
- * @param {boolean=} options.interimResults - Default: `false`. See
- *     [`StreamingRecognitionConfig.interimResults`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognitionConfig.FIELDS).
- * @returns {object} Readable and writable stream.
  *
  * @example
  * var fs = require('fs');
  *
- * // See the link in the parameters for `RecognizeRequest`.
- * var streamingConfig = {
+ * //-
+ * // See <a href="https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognitionConfig">
+ * // `RecognizeRequest`</a>.
+ * //-
+ * var request = {
  *   config: {
  *     encoding: 'LINEAR16',
  *     sampleRate: 16000
@@ -428,57 +366,48 @@ Speech.prototype.startRecognition = function(file, options, callback) {
  *   interimResults: false
  * };
  *
- * var recognizeStream = speech.createRecognizeStream(streamingConfig)
- *   .on('data', function (speechRecognitionAlternatives) {
+ * var recognizeStream = speech.createRecognizeStream(request)
+ *   .on('data', function(speechRecognitionAlternatives) {
  *     console.log(speechRecognitionAlternatives);
  *   });
  *
  * fs.createReadStream('./system-test/data/bridge.raw', { end: false })
  *   .pipe(recognizeStream);
+ *
  * fs.createReadStream('./system-test/data/spain.raw', { end: false })
  *   .pipe(recognizeStream);
  */
-Speech.prototype.createRecognizeStream = function(options) {
+Speech.prototype.createRecognizeStream = function(config) {
+  var self = this;
+
   var protoOpts = {
     service: 'Speech',
     method: 'streamingRecognize'
   };
 
-  // Transform stream to turn user data into RecognizeRequest objects
-  var toRecognizeRequestStream = through.obj(function(chunk, encoding, done) {
-    done(null, {
-      audioContent: chunk
+  var recognizeStream = streamEvents(pumpify.obj());
+
+  recognizeStream.once('writing', function() {
+    var requestStream = self.requestWritableStream(protoOpts);
+
+    requestStream.on('response', function(response) {
+      recognizeStream.emit('response', response);
     });
+
+    requestStream.write({
+      streamingConfig: config
+    });
+
+    this.setPipeline([
+      // Format the user's input.
+      through.obj(function(obj, _, next) {
+        next(null, {
+          audioContent: obj
+        });
+      }),
+      requestStream
+    ]);
   });
-  // Transform stream to simplify the results
-  var toResponseStream = through.obj(
-    function(chunk, encoding, done) {
-      done(null, chunk);
-    }
-  );
-
-  // The GRPC stream
-  var grpcStream = this.requestWritableStream(protoOpts);
-  grpcStream.write({
-    streamingConfig: options
-  });
-
-  // The simplified user stream
-  var recognizeStream = duplexify.obj(
-    toRecognizeRequestStream,
-    toResponseStream
-  );
-
-  // Forward metadata to the user stream
-  grpcStream.on('response', function(chunk) {
-    recognizeStream.emit('response', chunk);
-  });
-
-  // Transform user data into RecognizeRequest objects
-  toRecognizeRequestStream.pipe(grpcStream);
-
-  // Transform recognition results to a simpler form
-  grpcStream.pipe(toResponseStream);
 
   return recognizeStream;
 };
@@ -489,7 +418,9 @@ Speech.prototype.createRecognizeStream = function(options) {
  *
  * @throws {Error} If a name is not provided.
  *
- * @param {string} name - The name of the operation.
+ * @param {string|options=} options - Configuration object or the name of the
+ *     operation.
+ * @param {string} options.name - The name of the operation.
  * @returns {module:speech/operation}
  *
  * @example
@@ -503,14 +434,18 @@ Speech.prototype.operation = function(options) {
       name: options
     };
   }
+
   if (!options || !options.name) {
     throw new Error('A name must be specified for an operation.');
   }
+
   var operation = new Operation(this, options);
+
   if (operation.response && is.string(operation.response.value)) {
     var decode = this.protos.Speech.AsyncRecognizeResponse.decode;
     operation.response = decode(operation.response.value);
   }
+
   return operation;
 };
 
@@ -522,51 +457,66 @@ Speech.prototype.operation = function(options) {
  * @private
  */
 Speech.findFile_ = function(file, callback) {
-  if (file instanceof File) {
-    // File is an instance of module:storage/file
+  if (file instanceof Storage.File) {
+    // File is an instance of module:storage/file.
     callback(null, {
       uri: format('gs://{bucketName}/{fileName}', {
         bucketName: file.bucket.name,
         fileName: file.name
       })
     });
-  } else if (is.string(file) && file.indexOf('gs://') === 0) {
+    return;
+  }
+
+  if (is.string(file) && file.indexOf('gs://') === 0) {
     // File is a Google Cloud Storage URI.
     callback(null, {
       uri: file
     });
-  } else if (/^http/.test(file)) {
+    return;
+  }
+
+  if (/^http/.test(file)) {
     // File is a URL.
     request({
-      method: 'GET',
-      uri: file
-    })
-      .on('error', function(err) {
-        callback(err);
-      })
-      .pipe(concat(function(data) {
-        callback(null, { content: data });
-      }));
-  } else if (is.object(file)) {
-    if (is.undefined(file.content) && is.undefined(file.uri)) {
-      // File is an invalid RecognitionAudio object
-      callback(new Error('RecognitionAudio object requires a "content" or ' +
-        '"uri" property!'));
-    } else {
-      // File is a RecognitionAudio object
-      callback(null, file);
-    }
-  } else {
-    // File exists on disk.
-    fs.readFile(file, function(err, contents) {
+      uri: file,
+      encoding: null
+    }, function(err, resp, body) {
       if (err) {
         callback(err);
         return;
       }
 
-      callback(null, { content: contents });
+      callback(null, {
+        content: body
+      });
     });
+    return;
   }
+
+  if (is.object(file)) {
+    // This might be a RecognitionAudio object.
+    if (!file.content && !file.uri) {
+      var errorMsg = 'RecognitionAudio requires a "content" or "uri" property.';
+      callback(new Error(errorMsg));
+    } else {
+      callback(null, file);
+    }
+
+    return;
+  }
+
+  // File exists on disk.
+  fs.readFile(file, function(err, contents) {
+    if (err) {
+      callback(err);
+      return;
+    }
+
+    callback(null, {
+      content: contents
+    });
+  });
 };
 
 /**
@@ -575,14 +525,16 @@ Speech.findFile_ = function(file, callback) {
  * @param {string} filename - The name of the file.
  * @returns {string} The audio encoding.
  * @private
- * @see https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#audioencoding
+ * @resource https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#audioencoding
  */
 Speech.detectEncoding_ = function(filename) {
   if (!is.string(filename)) {
     return;
   }
+
   var parts = filename.split('.');
   var ext = parts[parts.length - 1].toLowerCase();
+
   switch (ext) {
     case 'raw': {
       return 'LINEAR16';

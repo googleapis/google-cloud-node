@@ -32,6 +32,7 @@ var BUCKET_NAME = 'gcloud-test-bucket-temp-' + uuid.v1();
 
 FILENAMES.forEach(function(filename) {
   var name = filename + '.raw';
+
   AUDIO_FILES[filename] = {
     name: name,
     path: path.join(__dirname, 'data/' + name),
@@ -45,27 +46,37 @@ describe('Speech', function() {
   var speech;
   var bucket = storage.bucket(BUCKET_NAME);
 
+  var OPTIONS = {
+    encoding: 'LINEAR16',
+    sampleRate: 16000
+  };
+
   before(function(done) {
     async.waterfall([
       function(next) {
         bucket.create(next);
       },
+
       function(zone, apiResponse, next) {
         async.map(FILENAMES, function(filename, onComplete) {
           fs.readFile(AUDIO_FILES[filename].path, onComplete);
         }, next);
       },
+
       function(files, next) {
         FILENAMES.forEach(function(filename, i) {
           AUDIO_FILES[filename].content = files[i];
         });
+
         async.map(FILENAMES, function(filename, onComplete) {
           var file = bucket.file(AUDIO_FILES[filename].name);
+
           file.save(AUDIO_FILES[filename].content, function(err) {
             onComplete(err, file);
           });
         }, next);
       },
+
       function(files, next) {
         async.map(files, function(file, onComplete) {
           file.makePublic(onComplete);
@@ -102,21 +113,22 @@ describe('Speech', function() {
     it('recognizes speech from raw audio', function(done) {
       fs.readFile(AUDIO_FILES.bridge.path, function(err, audioFile) {
         assert.ifError(err);
+
         speech.recognize({
           content: audioFile
-        }, {
-          encoding: 'LINEAR16',
-          sampleRate: 16000
-        }, function(err, response, apiResponse) {
+        }, OPTIONS, function(err, response, apiResponse) {
           assert.ifError(err);
+
           assert(Array.isArray(response.results));
           assert(response.results.length > 0);
+
           assert(apiResponse);
           assert(apiResponse.results);
           done();
         });
       });
     });
+
     it('recognizes speech from local file', function(done) {
       speech.recognize(AUDIO_FILES.bridge.path, {
         // encoding should be automatically detected
@@ -130,11 +142,11 @@ describe('Speech', function() {
         done();
       });
     });
+
     it('recognizes speech from remote GCS audio file', function(done) {
-      speech.recognize(AUDIO_FILES.bridge.gcsUri, {
-        encoding: 'LINEAR16',
-        sampleRate: 16000
-      }, function(err, response, apiResponse) {
+      var uri = AUDIO_FILES.bridge.gcsUri;
+
+      speech.recognize(uri, OPTIONS, function(err, response, apiResponse) {
         assert.ifError(err);
         assert(Array.isArray(response.results));
         assert(response.results.length > 0);
@@ -143,16 +155,19 @@ describe('Speech', function() {
         done();
       });
     });
+
     it('recognizes speech from remote audio file', function(done) {
-      speech.recognize(AUDIO_FILES.bridge.httpUri, {
-        encoding: 'LINEAR16',
-        sampleRate: 16000
-      }, function(err, response, apiResponse) {
+      var uri = AUDIO_FILES.bridge.httpUri;
+
+      speech.recognize(uri, OPTIONS, function(err, response, apiResponse) {
         assert.ifError(err);
+
         assert(Array.isArray(response.results));
         assert(response.results.length > 0);
+
         assert(Array.isArray(apiResponse.results));
         assert(apiResponse.results.length > 0);
+
         done();
       });
     });
@@ -162,96 +177,87 @@ describe('Speech', function() {
     it('recognizes speech from raw audio', function(done) {
       fs.readFile(AUDIO_FILES.bridge.path, function(err, audioFile) {
         assert.ifError(err);
+
         speech.startRecognition({
           content: audioFile
-        }, {
-          encoding: 'LINEAR16',
-          sampleRate: 16000
-        }, function(err, operation, apiResponse) {
+        }, OPTIONS, function(err, operation) {
           assert.ifError(err);
-          assert(operation.name);
-          assert(apiResponse.name);
+
           operation
             .on('error', done)
-            .on('complete', function(_operation, apiResponse) {
-              assert.strictEqual(_operation, operation);
-              assert(Array.isArray(_operation.response.results));
-              assert(_operation.response.results.length > 0);
-              assert(_operation.response.results[0].alternatives[0].transcript);
-              assert(_operation.response.results[0].alternatives[0].confidence);
-              assert(apiResponse.response);
-              assert(apiResponse.response.typeUrl);
-              assert(apiResponse.response.value);
+            .on('complete', function() {
+              assert(Array.isArray(this.response.results));
+
+              assert(this.response.results.length > 0);
+              assert(this.response.results[0].alternatives[0].transcript);
+              assert(this.response.results[0].alternatives[0].confidence);
+
               done();
             });
         });
       });
     });
+
     it('recognizes speech from local file', function(done) {
-      speech.startRecognition(AUDIO_FILES.bridge.path, {
+      var options = {
         // encoding should be automatically detected
         sampleRate: 16000
-      }, function(err, operation, apiResponse) {
+      };
+
+      var path = AUDIO_FILES.bridge.path;
+
+      speech.startRecognition(path, options, function(err, operation) {
         assert.ifError(err);
-        assert(operation.name);
-        assert(apiResponse.name);
+
         operation
           .on('error', done)
-          .on('complete', function(_operation, apiResponse) {
-            assert.strictEqual(_operation, operation);
-            assert(Array.isArray(_operation.response.results));
-            assert(_operation.response.results.length > 0);
-            assert(_operation.response.results[0].alternatives[0].transcript);
-            assert(_operation.response.results[0].alternatives[0].confidence);
-            assert(apiResponse.response);
-            assert(apiResponse.response.typeUrl);
-            assert(apiResponse.response.value);
+          .on('complete', function() {
+            assert(Array.isArray(this.response.results));
+
+            assert(this.response.results.length > 0);
+            assert(this.response.results[0].alternatives[0].transcript);
+            assert(this.response.results[0].alternatives[0].confidence);
+
             done();
           });
       });
     });
+
     it('recognizes speech from remote GCS audio file', function(done) {
-      speech.startRecognition(AUDIO_FILES.bridge.gcsUri, {
-        encoding: 'LINEAR16',
-        sampleRate: 16000
-      }, function(err, operation, apiResponse) {
+      var uri = AUDIO_FILES.bridge.gcsUri;
+
+      speech.startRecognition(uri, OPTIONS, function(err, operation) {
         assert.ifError(err);
-        assert(operation.name);
-        assert(apiResponse.name);
+
         operation
           .on('error', done)
-          .on('complete', function(_operation, apiResponse) {
-            assert.strictEqual(_operation, operation);
-            assert(Array.isArray(_operation.response.results));
-            assert(_operation.response.results.length > 0);
-            assert(_operation.response.results[0].alternatives[0].transcript);
-            assert(_operation.response.results[0].alternatives[0].confidence);
-            assert(apiResponse.response);
-            assert(apiResponse.response.typeUrl);
-            assert(apiResponse.response.value);
+          .on('complete', function() {
+            assert(Array.isArray(this.response.results));
+
+            assert(this.response.results.length > 0);
+            assert(this.response.results[0].alternatives[0].transcript);
+            assert(this.response.results[0].alternatives[0].confidence);
+
             done();
           });
       });
     });
+
     it('recognizes speech from remote audio file', function(done) {
-      speech.startRecognition(AUDIO_FILES.bridge.httpUri, {
-        encoding: 'LINEAR16',
-        sampleRate: 16000
-      }, function(err, operation, apiResponse) {
+      var uri = AUDIO_FILES.bridge.httpUri;
+
+      speech.startRecognition(uri, OPTIONS, function(err, operation) {
         assert.ifError(err);
-        assert(operation.name);
-        assert(apiResponse.name);
+
         operation
           .on('error', done)
-          .on('complete', function(_operation, apiResponse) {
-            assert.strictEqual(_operation, operation);
-            assert(Array.isArray(_operation.response.results));
-            assert(_operation.response.results.length > 0);
-            assert(_operation.response.results[0].alternatives[0].transcript);
-            assert(_operation.response.results[0].alternatives[0].confidence);
-            assert(apiResponse.response);
-            assert(apiResponse.response.typeUrl);
-            assert(apiResponse.response.value);
+          .on('complete', function() {
+            assert(Array.isArray(this.response.results));
+
+            assert(this.response.results.length > 0);
+            assert(this.response.results[0].alternatives[0].transcript);
+            assert(this.response.results[0].alternatives[0].confidence);
+
             done();
           });
       });
@@ -260,51 +266,59 @@ describe('Speech', function() {
 
   describe('createRecognizeStream', function() {
     it('recognizes speech from raw audio', function(done) {
-      var recognizeStream = speech.createRecognizeStream({
-        config: {
-          encoding: 'LINEAR16',
-          sampleRate: 16000
-        },
-        interimResults: false,
-        singleUtterance: false
-      });
-
-      recognizeStream.on('response', function(chunk) {
-        assert(chunk);
-        assert.strictEqual(chunk.code, 200);
-      });
-
-      var count = 0;
-
-      function checkIsDone() {
-        count++;
-        if (count === 3) {
-          done();
-        }
-      }
-
-      recognizeStream.on('data', function(chunk) {
-        var expected = 'how old is the Brooklyn Bridge';
-        assert(chunk);
-        var endpointerType = chunk.endpointerType;
-        if (endpointerType === Speech.START_OF_SPEECH) {
-          assert.strictEqual(chunk.results.length, 0);
-        } else if (endpointerType === Speech.END_OF_AUDIO) {
-          assert.strictEqual(chunk.results.length, 0);
-        } else if (endpointerType === Speech.ENDPOINTER_EVENT_UNSPECIFIED) {
-          assert(chunk.results);
-          assert.strictEqual(chunk.results.length, 1);
-          assert(chunk.results[0].alternatives);
-          assert.strictEqual(chunk.results[0].alternatives.length, 1);
-          assert.strictEqual(
-            chunk.results[0].alternatives[0].transcript, expected
-          );
-        }
-        checkIsDone();
-      });
+      var correctDetectionsEmitted = 0;
+      var responseEmitted = false;
 
       fs.createReadStream(AUDIO_FILES.bridge.path)
-        .pipe(recognizeStream);
+        .on('error', done)
+        .pipe(speech.createRecognizeStream({
+          config: OPTIONS,
+          interimResults: false,
+          singleUtterance: false
+        }))
+        .on('error', done)
+        .on('response', function() {
+          responseEmitted = true;
+        })
+        .on('data', function(data) {
+          switch (data.endpointerType) {
+            case Speech.endpointerTypes.START_OF_SPEECH: {
+              if (data.results.length === 0) {
+                correctDetectionsEmitted++;
+              }
+              return;
+            }
+
+            case Speech.endpointerTypes.END_OF_AUDIO: {
+              if (data.results.length === 0) {
+                correctDetectionsEmitted++;
+              }
+              return;
+            }
+
+            case Speech.endpointerTypes.ENDPOINTER_EVENT_UNSPECIFIED: {
+              var expected = 'how old is the Brooklyn Bridge';
+
+              try {
+                var results = data.results[0].alternatives[0].transcript;
+
+                if (results === expected) {
+                  correctDetectionsEmitted++;
+                }
+              } catch (e) {
+                done(e);
+                return;
+              }
+            }
+          }
+        })
+        .on('end', function() {
+          setTimeout(function() {
+            assert.strictEqual(responseEmitted, true);
+            assert.strictEqual(correctDetectionsEmitted, 3);
+            done();
+          }, 0);
+        });
     });
   });
 });

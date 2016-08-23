@@ -101,10 +101,12 @@ modelo.inherits(Operation, GrpcServiceObject, events.EventEmitter);
  */
 Operation.prototype.get = function(callback) {
   var self = this;
+
   var protoOpts = {
     service: 'Operations',
     method: 'getOperation'
   };
+
   var reqOpts = {
     name: this.name
   };
@@ -114,8 +116,10 @@ Operation.prototype.get = function(callback) {
       callback(err, null, apiResponse);
       return;
     }
+
     var operation = self.service.operation(apiResponse);
     self.pick_(operation);
+
     callback(null, self, apiResponse);
   });
 };
@@ -191,6 +195,7 @@ Operation.prototype.startPolling_ = function() {
  */
 Operation.prototype.pick_ = function(values) {
   var self = this;
+
   OPERATION_FIELDS.forEach(function(field) {
     self[field] = values[field];
   });
