@@ -182,6 +182,7 @@ describe('Translate', function() {
     it('should make the correct API request', function(done) {
       translate.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/languages');
+        assert.deepEqual(reqOpts.qs, {});
         done();
       };
 
@@ -213,16 +214,28 @@ describe('Translate', function() {
         data: {
           languages: [
             {
-              language: 'en'
+              language: 'en',
+              name: 'English'
             },
             {
-              language: 'es'
+              language: 'es',
+              name: 'Spanish'
             }
           ]
         }
       };
 
       var expectedResults = apiResponse.data.languages.map(prop('language'));
+      var expectedResultsWithTarget = [
+        {
+          code: 'en',
+          name: 'English'
+        },
+        {
+          code: 'es',
+          name: 'Spanish'
+        }
+      ];
 
       beforeEach(function() {
         translate.request = function(reqOpts, callback) {
@@ -234,6 +247,15 @@ describe('Translate', function() {
         translate.getLanguages(function(err, languages, apiResponse_) {
           assert.ifError(err);
           assert.deepEqual(languages, expectedResults);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
+
+      it('should support target option', function(done) {
+        translate.getLanguages('en', function(err, languages, apiResponse_) {
+          assert.ifError(err);
+          assert.deepEqual(languages, expectedResultsWithTarget);
           assert.strictEqual(apiResponse_, apiResponse);
           done();
         });

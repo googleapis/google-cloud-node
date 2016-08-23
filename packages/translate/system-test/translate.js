@@ -103,6 +103,21 @@ var API_KEY = process.env.GCLOUD_TESTS_API_KEY;
       translate.getLanguages(function(err, languages) {
         assert.ifError(err);
         assert(languages.length > 0);
+        assert.equal(
+          typeof languages[0],
+          'string',
+          'languages were mapped to a list of strings'
+        );
+        done();
+      });
+    });
+
+    it('should get a list of supported languages and names', function(done) {
+      translate.getLanguages('en', function(err, languages) {
+        assert.ifError(err);
+        assert(languages.length > 0);
+        assert(languages[0].code, 'result has code');
+        assert(languages[0].name, 'result also has a name in target language');
         done();
       });
     });
