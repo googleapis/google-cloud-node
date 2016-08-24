@@ -30,15 +30,15 @@ var PKG = require('../package.json');
 
 var fakeUtil = extend({}, util);
 
+function FakeGrpcOperation() {
+  this.calledWith_ = arguments;
+}
+
 function FakeGrpcService() {
   this.calledWith_ = arguments;
 }
 
 function FakeFile() {
-  this.calledWith_ = arguments;
-}
-
-function FakeOperation() {
   this.calledWith_ = arguments;
 }
 
@@ -53,18 +53,25 @@ describe('Speech', function() {
   var Speech;
   var speech;
 
+  var originalStaticMembers;
+
   before(function() {
     Speech = proxyquire('../', {
       '@google-cloud/storage': {
         File: FakeFile
       },
       '@google-cloud/common': {
+        GrpcOperation: FakeGrpcOperation,
         GrpcService: FakeGrpcService,
         util: fakeUtil
       },
-      request: fakeRequest,
-      './operation.js': FakeOperation
+      request: fakeRequest
     });
+
+    originalStaticMembers = Object.keys(Speech).reduce(function(statics, key) {
+      statics[key] = Speech[key];
+      return statics;
+    }, {});
   });
 
   beforeEach(function() {
@@ -73,6 +80,8 @@ describe('Speech', function() {
     speech = new Speech({
       projectId: PROJECT_ID
     });
+
+    extend(Speech, originalStaticMembers);
   });
 
   describe('instantiation', function() {
@@ -123,399 +132,39 @@ describe('Speech', function() {
     });
   });
 
-  describe('recognize', function() {
-    var detectEncoding_;
-    var findFile_;
+  describe('endpointerTypes', function() {
+    var ENDPOINTER_TYPES = {
+      END_OF_AUDIO: 'END_OF_AUDIO',
+      END_OF_SPEECH: 'END_OF_SPEECH',
+      END_OF_UTTERANCE: 'END_OF_UTTERANCE',
+      ENDPOINTER_EVENT_UNSPECIFIED: 'ENDPOINTER_EVENT_UNSPECIFIED',
+      START_OF_SPEECH: 'START_OF_SPEECH'
+    };
 
-    var FILE = {};
-    var FOUND_FILE = {};
-    var CONFIG = { a: 'b' };
-    var DETECTED_ENCODING = 'LINEAR16';
-
-    before(function() {
-      detectEncoding_ = Speech.detectEncoding_;
-      findFile_ = Speech.findFile_;
+    it('should export static endpointerTypes', function() {
+      assert.deepEqual(Speech.endpointerTypes, ENDPOINTER_TYPES);
     });
 
-    beforeEach(function() {
-      Speech.detectEncoding_ = function() {
-        return DETECTED_ENCODING;
-      };
-
-      Speech.findFile_ = function(files, callback) {
-        callback(null, FOUND_FILE);
-      };
-    });
-
-    after(function() {
-      Speech.detectEncoding_ = detectEncoding_;
-      Speech.findFile_ = findFile_;
-    });
-
-    it('should find the files', function(done) {
-      Speech.findFile_ = function(file) {
-        assert.strictEqual(file, FILE);
-        done();
-      };
-
-      speech.recognize(FILE, CONFIG, assert.ifError);
-    });
-
-    it('should make the correct request', function(done) {
-      speech.request = function(protoOpts, reqOpts) {
-        assert.deepEqual(protoOpts, {
-          service: 'Speech',
-          method: 'syncRecognize'
-        });
-
-        assert.deepEqual(reqOpts, {
-          config: extend({}, CONFIG, { encoding: DETECTED_ENCODING }),
-          audio: FOUND_FILE
-        });
-
-        done();
-      };
-
-      speech.recognize(FILE, CONFIG, assert.ifError);
-    });
-
-    it('should respect the provided encoding', function(done) {
-      var config = {
-        encoding: 'LINEAR32'
-      };
-
-      Speech.detectEncoding_ = function(file) {
-        assert.strictEqual(file, FILE);
-        return DETECTED_ENCODING;
-      };
-
-      speech.request = function(protoOpts, reqOpts) {
-        assert.strictEqual(reqOpts.config.encoding, config.encoding);
-        done();
-      };
-
-      speech.recognize(FILE, config, assert.ifError);
-    });
-
-    it('should return an error from findFile_', function(done) {
-      var error = new Error('Error.');
-
-      Speech.findFile_ = function(files, callback) {
-        callback(error);
-      };
-
-      speech.recognize(FILE, CONFIG, function(err) {
-        assert.strictEqual(err, error);
-        done();
-      });
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {};
-
-      beforeEach(function() {
-        speech.request = function(protoOpts, reqOpts, callback) {
-          callback(error, apiResponse);
-        };
-      });
-
-      it('should return the error & API response', function(done) {
-        speech.recognize(FILE, CONFIG, function(err, response, apiResponse_) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(response, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-    });
-
-    describe('success', function() {
-      var apiResponse = {};
-      var expectedResponse = {};
-
-      beforeEach(function() {
-        speech.protos = {
-          Speech: {
-            SyncRecognizeResponse: function(response) {
-              assert.strictEqual(response, apiResponse);
-              return expectedResponse;
-            }
-          }
-        };
-
-        speech.request = function(protoOpts, reqOpts, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should return the detections & API response', function(done) {
-        speech.recognize(FILE, CONFIG, function(err, response, apiResponse_) {
-          assert.ifError(err);
-          assert.strictEqual(response, expectedResponse);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
+    it('should export instance endpointerTypes', function() {
+      assert.deepEqual(speech.endpointerTypes, ENDPOINTER_TYPES);
     });
   });
 
-  describe('startRecognition', function() {
-    var detectEncoding_;
-    var findFile_;
-
-    var FILE = {};
-    var FOUND_FILE = {};
-    var CONFIG = { a: 'b' };
-    var DETECTED_ENCODING = 'LINEAR16';
-
-    before(function() {
-      detectEncoding_ = Speech.detectEncoding_;
-      findFile_ = Speech.findFile_;
-    });
-
-    beforeEach(function() {
-      Speech.detectEncoding_ = function() {
-        return DETECTED_ENCODING;
-      };
-
-      Speech.findFile_ = function(files, callback) {
-        callback(null, FOUND_FILE);
-      };
-    });
-
-    after(function() {
-      Speech.detectEncoding_ = detectEncoding_;
-      Speech.findFile_ = findFile_;
-    });
-
-    it('should find the files', function(done) {
-      Speech.findFile_ = function(file) {
-        assert.strictEqual(file, FILE);
-        done();
-      };
-
-      speech.startRecognition(FILE, CONFIG, assert.ifError);
-    });
-
-    it('should make the correct request', function(done) {
-      speech.request = function(protoOpts, reqOpts) {
-        assert.deepEqual(protoOpts, {
-          service: 'Speech',
-          method: 'asyncRecognize'
-        });
-
-        assert.deepEqual(reqOpts, {
-          config: extend({}, CONFIG, { encoding: DETECTED_ENCODING }),
-          audio: FOUND_FILE
-        });
-
-        done();
-      };
-
-      speech.startRecognition(FILE, CONFIG, assert.ifError);
-    });
-
-    it('should respect the provided encoding', function(done) {
-      var config = {
-        encoding: 'LINEAR32'
-      };
-
-      Speech.detectEncoding_ = function(file) {
-        assert.strictEqual(file, FILE);
-        return DETECTED_ENCODING;
-      };
-
-      speech.request = function(protoOpts, reqOpts) {
-        assert.strictEqual(reqOpts.config.encoding, config.encoding);
-        done();
-      };
-
-      speech.startRecognition(FILE, config, assert.ifError);
-    });
-
-    it('should return an error from findFile_', function(done) {
-      var error = new Error('Error.');
-
-      Speech.findFile_ = function(files, callback) {
-        callback(error);
-      };
-
-      speech.startRecognition(FILE, CONFIG, function(err) {
-        assert.strictEqual(err, error);
-        done();
-      });
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {};
-
-      beforeEach(function() {
-        speech.request = function(protoOpts, reqOpts, callback) {
-          callback(error, apiResponse);
-        };
-      });
-
-      it('should return the error & API response', function(done) {
-        speech.startRecognition(FILE, CONFIG, function(err, op, apiResponse_) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(op, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-    });
-
-    describe('success', function() {
-      var apiResponse = {
-        name: 'operation-name'
-      };
-
-      beforeEach(function() {
-        speech.request = function(protoOpts, reqOpts, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should extend the operation with metadata', function(done) {
-        var fakeOperation = {
-          extendWithMetadata_: function(metadata) {
-            assert.strictEqual(metadata, apiResponse);
-            done();
-          }
-        };
-
-        speech.operation = function() {
-          return fakeOperation;
-        };
-
-        speech.startRecognition(FILE, CONFIG, assert.ifError);
-      });
-
-      it('should return an operation & API response', function(done) {
-        var fakeOperation = {
-          extendWithMetadata_: util.noop
-        };
-
-        speech.operation = function(name) {
-          assert.strictEqual(name, apiResponse.name);
-          return fakeOperation;
-        };
-
-        speech.startRecognition(FILE, CONFIG, function(err, op, apiResponse_) {
-          assert.ifError(err);
-          assert.strictEqual(op, fakeOperation);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-    });
-  });
-
-  describe('createRecognizeStream', function() {
-    var CONFIG = {};
-    var stream;
-    var requestStream;
-
-    beforeEach(function() {
-      stream = speech.createRecognizeStream(CONFIG);
-
-      stream.setPipeline = util.noop;
-
-      speech.requestWritableStream = function() {
-        requestStream = through.obj();
-        return requestStream;
-      };
-    });
-
-    it('should make the correct request once writing started', function(done) {
-      speech.requestWritableStream = function(protoOpts) {
-        assert.deepEqual(protoOpts, {
-          service: 'Speech',
-          method: 'streamingRecognize'
-        });
-
-        setImmediate(done);
-
-        return through.obj();
-      };
-
-      stream.emit('writing');
-    });
-
-    it('should emit the response event on the user stream', function(done) {
-      var response = {};
-
-      stream.on('response', function(response_) {
-        assert.strictEqual(response_, response);
-        done();
-      });
-
-      speech.requestWritableStream = function() {
-        var requestStream = through.obj();
-
-        setImmediate(function() {
-          requestStream.emit('response', response);
-        });
-
-        return requestStream;
-      };
-
-      stream.emit('writing');
-    });
-
-    it('should send the initial write to the request stream', function(done) {
-      speech.requestWritableStream = function() {
-        var requestStream = through.obj();
-
-        requestStream.once('data', function(data) {
-          assert.deepEqual(data, {
-            streamingConfig: CONFIG
-          });
-          done();
-        });
-
-        return requestStream;
-      };
-
-      stream.emit('writing');
-    });
-
-    it('should format the incoming data into a duplex stream', function(done) {
-      stream.setPipeline = function(streams) {
-        var formatStream = streams[0];
-        assert.strictEqual(streams[1], requestStream);
-
-        var chunk = {};
-        formatStream.once('data', function(data) {
-          assert.deepEqual(data, {
-            audioContent: chunk
-          });
-          done();
-        });
-
-        formatStream.end(chunk);
-      };
-
-      stream.emit('writing');
-    });
-  });
-
-  describe('operation', function() {
-    var NAME = 'op-name';
-
-    it('should throw if a name is not provided', function() {
-      assert.throws(function() {
-        speech.operation();
-      }, /A name must be specified for an operation\./);
-    });
-
-    it('should return an Operation object', function() {
-      var operation = speech.operation(NAME);
-      assert(operation instanceof FakeOperation);
-      assert.strictEqual(operation.calledWith_[0], speech);
-      assert.strictEqual(operation.calledWith_[1], NAME);
+  describe('detectEncoding_', function() {
+    it('should detect encoding', function() {
+      assert.equal(Speech.detectEncoding_(), undefined);
+      assert.equal(Speech.detectEncoding_(''), undefined);
+      assert.equal(Speech.detectEncoding_('foo'), undefined);
+      assert.equal(Speech.detectEncoding_('foo.'), undefined);
+      assert.equal(Speech.detectEncoding_('foo.bar'), undefined);
+      assert.equal(Speech.detectEncoding_('foo.bar.bar'), undefined);
+      assert.equal(Speech.detectEncoding_('foo.raw'), 'LINEAR16');
+      assert.equal(Speech.detectEncoding_('foo.amr'), 'AMR');
+      assert.equal(Speech.detectEncoding_('foo.awb'), 'AMR_WB');
+      assert.equal(Speech.detectEncoding_('foo.flac'), 'FLAC');
+      assert.equal(Speech.detectEncoding_('foo.fLAc'), 'FLAC');
+      assert.equal(Speech.detectEncoding_('foo.wav'), 'MULAW');
+      assert.equal(Speech.detectEncoding_('foo.au'), 'MULAW');
     });
   });
 
@@ -651,21 +300,678 @@ describe('Speech', function() {
     });
   });
 
-  describe('detectEncoding_', function() {
-    it('should detect encoding', function() {
-      assert.equal(Speech.detectEncoding_(), undefined);
-      assert.equal(Speech.detectEncoding_(''), undefined);
-      assert.equal(Speech.detectEncoding_('foo'), undefined);
-      assert.equal(Speech.detectEncoding_('foo.'), undefined);
-      assert.equal(Speech.detectEncoding_('foo.bar'), undefined);
-      assert.equal(Speech.detectEncoding_('foo.bar.bar'), undefined);
-      assert.equal(Speech.detectEncoding_('foo.raw'), 'LINEAR16');
-      assert.equal(Speech.detectEncoding_('foo.amr'), 'AMR');
-      assert.equal(Speech.detectEncoding_('foo.awb'), 'AMR_WB');
-      assert.equal(Speech.detectEncoding_('foo.flac'), 'FLAC');
-      assert.equal(Speech.detectEncoding_('foo.fLAc'), 'FLAC');
-      assert.equal(Speech.detectEncoding_('foo.wav'), 'MULAW');
-      assert.equal(Speech.detectEncoding_('foo.au'), 'MULAW');
+  describe('formatResults_', function() {
+    describe('SpeechRecognitionResult', function() {
+      var SPEECH_RECOGNITION = {
+        original: {
+          alternatives: [
+            {
+              transcript: 'text',
+              confidence: 0.2
+            },
+            {
+              transcript: 'text 2',
+              confidence: 0.4
+            }
+          ],
+        },
+
+        expectedDefault: [
+          'text',
+          'text 2'
+        ],
+
+        expectedVerbose: [
+          {
+            transcript: 'text',
+            confidence: 20
+          },
+          {
+            transcript: 'text 2',
+            confidence: 40
+          }
+        ]
+      };
+
+      it('should simplify the results', function() {
+        assert.deepEqual(
+          Speech.formatResults_(SPEECH_RECOGNITION.original),
+          SPEECH_RECOGNITION.expectedDefault
+        );
+      });
+
+      it('should simplify the results in verbose mode', function() {
+        assert.deepEqual(
+          Speech.formatResults_(SPEECH_RECOGNITION.original, true),
+          SPEECH_RECOGNITION.expectedVerbose
+        );
+      });
+    });
+
+    describe('StreamingRecognitionResult', function() {
+      var STREAMING_RECOGITION = {
+        original: {
+          alternatives: [
+            {
+              transcript: 'text',
+              confidence: 0.2
+            },
+            {
+              transcript: 'text 2',
+              confidence: 0.4
+            }
+          ],
+        },
+
+        expectedDefault: [
+          'text',
+          'text 2'
+        ],
+
+        expectedVerbose: [
+          {
+            transcript: 'text',
+            confidence: 20
+          },
+          {
+            transcript: 'text 2',
+            confidence: 40
+          }
+        ]
+      };
+
+      it('should simplify the results', function() {
+        assert.deepEqual(
+          Speech.formatResults_(STREAMING_RECOGITION.original),
+          STREAMING_RECOGITION.expectedDefault
+        );
+      });
+
+      it('should simplify the results in verbose mode', function() {
+        assert.deepEqual(
+          Speech.formatResults_(STREAMING_RECOGITION.original, true),
+          STREAMING_RECOGITION.expectedVerbose
+        );
+      });
+    });
+  });
+
+  describe('createRecognizeStream', function() {
+    var CONFIG = {};
+    var stream;
+    var requestStream;
+
+    beforeEach(function() {
+      stream = speech.createRecognizeStream(CONFIG);
+
+      stream.setPipeline = util.noop;
+
+      speech.requestWritableStream = function() {
+        requestStream = through.obj();
+        return requestStream;
+      };
+    });
+
+    it('should make the correct request once writing started', function(done) {
+      speech.requestWritableStream = function(protoOpts) {
+        assert.deepEqual(protoOpts, {
+          service: 'Speech',
+          method: 'streamingRecognize'
+        });
+
+        setImmediate(done);
+
+        return through.obj();
+      };
+
+      stream.emit('writing');
+    });
+
+    it('should emit the response event on the user stream', function(done) {
+      var response = {};
+
+      stream.on('response', function(response_) {
+        assert.strictEqual(response_, response);
+        done();
+      });
+
+      speech.requestWritableStream = function() {
+        var requestStream = through.obj();
+
+        setImmediate(function() {
+          requestStream.emit('response', response);
+        });
+
+        return requestStream;
+      };
+
+      stream.emit('writing');
+    });
+
+    it('should send the initial write to the request stream', function(done) {
+      speech.requestWritableStream = function() {
+        var requestStream = through.obj();
+
+        requestStream.once('data', function(data) {
+          assert.deepEqual(data, {
+            streamingConfig: CONFIG
+          });
+          done();
+        });
+
+        return requestStream;
+      };
+
+      stream.emit('writing');
+    });
+
+    it('should format the incoming data into a duplex stream', function(done) {
+      stream.setPipeline = function(streams) {
+        var formatStream = streams[0];
+        assert.strictEqual(streams[1], requestStream);
+
+        var chunk = {};
+        formatStream.once('data', function(data) {
+          assert.deepEqual(data, {
+            audioContent: chunk
+          });
+          done();
+        });
+
+        formatStream.end(chunk);
+      };
+
+      stream.emit('writing');
+    });
+
+    it('should format the results from the API', function(done) {
+      stream.setPipeline = function(streams) {
+        var formatStream = streams[2];
+
+        var streamingRecognizeResponse = {
+          results: []
+        };
+
+        var formattedResults = [];
+
+        Speech.formatResults_ = function(results, verboseMode) {
+          assert.strictEqual(results, streamingRecognizeResponse.results);
+          assert.strictEqual(verboseMode, false);
+          return formattedResults;
+        };
+
+        formatStream.once('data', function(data) {
+          assert.strictEqual(data, streamingRecognizeResponse);
+          assert.deepEqual(data.results, formattedResults);
+          done();
+        });
+
+        formatStream.end(streamingRecognizeResponse);
+      };
+
+      stream.emit('writing');
+    });
+
+    it('should format results from the API in verbose mode', function(done) {
+      var stream = speech.createRecognizeStream({
+        verbose: true
+      });
+
+      speech.requestWritableStream = function() {
+        return through.obj();
+      };
+
+      stream.setPipeline = function(streams) {
+        var formatStream = streams[2];
+
+        Speech.formatResults_ = function(results, verboseMode) {
+          assert.strictEqual(verboseMode, true);
+          done();
+        };
+
+        formatStream.end({});
+      };
+
+      stream.emit('writing');
+    });
+
+    it('should delete verbose option from request object', function(done) {
+      var stream = speech.createRecognizeStream({
+        verbose: true
+      });
+
+      speech.requestWritableStream = function() {
+        var stream = through.obj();
+
+        stream.on('data', function(data) {
+          assert.deepEqual(data, {
+            streamingConfig: {} // No `verbose` property.
+          });
+          done();
+        });
+
+        return stream;
+      };
+
+      stream.emit('writing');
+    });
+  });
+
+  describe('operation', function() {
+    var NAME = 'op-name';
+
+    it('should throw if a name is not provided', function() {
+      assert.throws(function() {
+        speech.operation();
+      }, /A name must be specified for an operation\./);
+    });
+
+    it('should return an Operation object', function() {
+      var operation = speech.operation(NAME);
+      assert(operation instanceof FakeGrpcOperation);
+      assert.strictEqual(operation.calledWith_[0], speech);
+      assert.strictEqual(operation.calledWith_[1], NAME);
+    });
+  });
+
+  describe('recognize', function() {
+    var FILE = {};
+    var FOUND_FILE = {};
+    var CONFIG = { a: 'b' };
+    var DETECTED_ENCODING = 'LINEAR16';
+
+    beforeEach(function() {
+      Speech.detectEncoding_ = function() {
+        return DETECTED_ENCODING;
+      };
+
+      Speech.findFile_ = function(files, callback) {
+        callback(null, FOUND_FILE);
+      };
+    });
+
+    it('should find the files', function(done) {
+      Speech.findFile_ = function(file) {
+        assert.strictEqual(file, FILE);
+        done();
+      };
+
+      speech.recognize(FILE, CONFIG, assert.ifError);
+    });
+
+    it('should make the correct request', function(done) {
+      speech.request = function(protoOpts, reqOpts) {
+        assert.deepEqual(protoOpts, {
+          service: 'Speech',
+          method: 'syncRecognize'
+        });
+
+        assert.deepEqual(reqOpts, {
+          config: extend({}, CONFIG, { encoding: DETECTED_ENCODING }),
+          audio: FOUND_FILE
+        });
+
+        done();
+      };
+
+      speech.recognize(FILE, CONFIG, assert.ifError);
+    });
+
+    it('should respect the provided encoding', function(done) {
+      var config = {
+        encoding: 'LINEAR32'
+      };
+
+      Speech.detectEncoding_ = function(file) {
+        assert.strictEqual(file, FILE);
+        return DETECTED_ENCODING;
+      };
+
+      speech.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(reqOpts.config.encoding, config.encoding);
+        done();
+      };
+
+      speech.recognize(FILE, config, assert.ifError);
+    });
+
+    it('should return an error from findFile_', function(done) {
+      var error = new Error('Error.');
+
+      Speech.findFile_ = function(files, callback) {
+        callback(error);
+      };
+
+      speech.recognize(FILE, CONFIG, function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      beforeEach(function() {
+        speech.request = function(protoOpts, reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should return the error & API response', function(done) {
+        speech.recognize(FILE, CONFIG, function(err, results, apiResponse_) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(results, null);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = {
+        results: []
+      };
+      var decodedResponse = {
+        results: []
+      };
+      var formattedResults = [];
+
+      beforeEach(function() {
+        speech.protos = {
+          Speech: {
+            SyncRecognizeResponse: function() {
+              return decodedResponse;
+            }
+          }
+        };
+
+        Speech.formatResults_ = function() {
+          return formattedResults;
+        };
+
+        speech.request = function(protoOpts, reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should return the detections & API response', function(done) {
+        speech.protos = {
+          Speech: {
+            SyncRecognizeResponse: function(response) {
+              assert.strictEqual(response, apiResponse);
+              return decodedResponse;
+            }
+          }
+        };
+
+        Speech.formatResults_ = function(results, verboseMode) {
+          assert.strictEqual(results, decodedResponse.results);
+          assert.strictEqual(verboseMode, false);
+          return formattedResults;
+        };
+
+        speech.recognize(FILE, CONFIG, function(err, results, apiResponse_) {
+          assert.ifError(err);
+          assert.strictEqual(results, formattedResults);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
+
+      it('should return the detections in verbose mode', function(done) {
+        Speech.formatResults_ = function(results, verboseMode) {
+          assert.strictEqual(verboseMode, true);
+          done();
+        };
+
+        var config = extend({}, CONFIG, {
+          verbose: true
+        });
+
+        speech.recognize(FILE, config, assert.ifError);
+      });
+
+      it('should return the detections in verbose mode', function(done) {
+        Speech.formatResults_ = function(results, verboseMode) {
+          assert.strictEqual(verboseMode, true);
+          done();
+        };
+
+        var config = extend({}, CONFIG, {
+          verbose: true
+        });
+
+        speech.recognize(FILE, config, assert.ifError);
+      });
+
+      it('should delete verbose option from request object', function(done) {
+        speech.request = function(protoOpts, reqOpts) {
+          assert.strictEqual(reqOpts.config.verbose, undefined);
+          done();
+        };
+
+        var config = extend({}, CONFIG, {
+          verbose: true
+        });
+
+        speech.recognize(FILE, config, assert.ifError);
+      });
+    });
+  });
+
+  describe('startRecognition', function() {
+    var FILE = {};
+    var FOUND_FILE = {};
+    var CONFIG = { a: 'b' };
+    var DETECTED_ENCODING = 'LINEAR16';
+
+    beforeEach(function() {
+      Speech.detectEncoding_ = function() {
+        return DETECTED_ENCODING;
+      };
+
+      Speech.findFile_ = function(files, callback) {
+        callback(null, FOUND_FILE);
+      };
+    });
+
+    it('should find the files', function(done) {
+      Speech.findFile_ = function(file) {
+        assert.strictEqual(file, FILE);
+        done();
+      };
+
+      speech.startRecognition(FILE, CONFIG, assert.ifError);
+    });
+
+    it('should make the correct request', function(done) {
+      speech.request = function(protoOpts, reqOpts) {
+        assert.deepEqual(protoOpts, {
+          service: 'Speech',
+          method: 'asyncRecognize'
+        });
+
+        assert.deepEqual(reqOpts, {
+          config: extend({}, CONFIG, { encoding: DETECTED_ENCODING }),
+          audio: FOUND_FILE
+        });
+
+        done();
+      };
+
+      speech.startRecognition(FILE, CONFIG, assert.ifError);
+    });
+
+    it('should respect the provided encoding', function(done) {
+      var config = {
+        encoding: 'LINEAR32'
+      };
+
+      Speech.detectEncoding_ = function(file) {
+        assert.strictEqual(file, FILE);
+        return DETECTED_ENCODING;
+      };
+
+      speech.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(reqOpts.config.encoding, config.encoding);
+        done();
+      };
+
+      speech.startRecognition(FILE, config, assert.ifError);
+    });
+
+    it('should return an error from findFile_', function(done) {
+      var error = new Error('Error.');
+
+      Speech.findFile_ = function(files, callback) {
+        callback(error);
+      };
+
+      speech.startRecognition(FILE, CONFIG, function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      beforeEach(function() {
+        speech.request = function(protoOpts, reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should return the error & API response', function(done) {
+        speech.startRecognition(FILE, CONFIG, function(err, op, apiResponse_) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(op, null);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = {
+        name: 'operation-name',
+        response: {
+          value: 'value string to be decoded'
+        }
+      };
+
+      var decodedResponse = {
+        results: []
+      };
+
+      beforeEach(function() {
+        speech.protos = {
+          Speech: {
+            AsyncRecognizeResponse: {
+              decode: function() {
+                return decodedResponse;
+              }
+            }
+          }
+        };
+
+        Speech.formatResults_ = util.noop;
+
+        speech.operation = function() {
+          return through.obj();
+        };
+
+        speech.request = function(protoOpts, reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should return an operation & API response', function(done) {
+        var fakeOperation = through.obj();
+
+        speech.operation = function(name) {
+          assert.strictEqual(name, apiResponse.name);
+          return fakeOperation;
+        };
+
+        speech.startRecognition(FILE, CONFIG, function(err, op, apiResponse_) {
+          assert.ifError(err);
+
+          assert.strictEqual(op, fakeOperation);
+          assert.strictEqual(op.metadata, apiResponse);
+
+          assert.strictEqual(apiResponse_, apiResponse);
+
+          done();
+        });
+      });
+
+      it('should format the results', function(done) {
+        var fakeOperation = through.obj();
+        speech.operation = function() {
+          return fakeOperation;
+        };
+
+        speech.protos = {
+          Speech: {
+            AsyncRecognizeResponse: {
+              decode: function(value) {
+                assert.strictEqual(value, apiResponse.response.value);
+                return decodedResponse;
+              }
+            }
+          }
+        };
+
+        var formattedResults = [];
+        Speech.formatResults_ = function(results, verboseMode) {
+          assert.strictEqual(results, decodedResponse.results);
+          assert.strictEqual(verboseMode, false);
+          return formattedResults;
+        };
+
+        speech.startRecognition(FILE, CONFIG, function(err, op) {
+          assert.ifError(err);
+
+          op.on('complete', function(results) {
+            assert.strictEqual(results, formattedResults);
+            done();
+          });
+
+          op.emit('complete', apiResponse);
+        });
+      });
+
+      it('should format results in verbose mode', function(done) {
+        Speech.formatResults_ = function(results, verboseMode) {
+          assert.strictEqual(verboseMode, true);
+          done();
+        };
+
+        var config = extend({}, CONFIG, {
+          verbose: true
+        });
+
+        speech.startRecognition(FILE, config, function(err, op) {
+          assert.ifError(err);
+          op.emit('complete', apiResponse);
+        });
+      });
+
+      it('should delete verbose option from request object', function(done) {
+        speech.request = function(protoOpts, reqOpts) {
+          assert.strictEqual(reqOpts.config.verbose, undefined);
+          done();
+        };
+
+        var config = extend({}, CONFIG, {
+          verbose: true
+        });
+
+        speech.startRecognition(FILE, config, assert.ifError);
+      });
     });
   });
 });

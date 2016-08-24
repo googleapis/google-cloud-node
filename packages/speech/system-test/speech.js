@@ -18,6 +18,7 @@
 
 var assert = require('assert');
 var async = require('async');
+var extend = require('extend');
 var fs = require('fs');
 var path = require('path');
 var uuid = require('node-uuid');
@@ -37,8 +38,7 @@ FILENAMES.forEach(function(filename) {
     name: name,
     path: path.join(__dirname, 'data/' + name),
     gcsUri: 'gs://' + BUCKET_NAME + '/' + name,
-    httpUri: 'https://storage.googleapis.com/' +
-      BUCKET_NAME + '/' + name
+    httpUri: 'https://storage.googleapis.com/' + BUCKET_NAME + '/' + name
   };
 });
 
@@ -50,6 +50,10 @@ describe('Speech', function() {
     encoding: 'LINEAR16',
     sampleRate: 16000
   };
+
+  var OPTIONS_VERBOSE = extend({}, OPTIONS, {
+    verbose: true
+  });
 
   before(function(done) {
     async.waterfall([
@@ -116,16 +120,17 @@ describe('Speech', function() {
 
         speech.recognize({
           content: audioFile
-        }, OPTIONS, function(err, response, apiResponse) {
-          assert.ifError(err);
+        }, OPTIONS, assertSimplifiedResponse(done));
+      });
+    });
 
-          assert(Array.isArray(response.results));
-          assert(response.results.length > 0);
+    it('recognizes speech in verbose mode', function(done) {
+      fs.readFile(AUDIO_FILES.bridge.path, function(err, audioFile) {
+        assert.ifError(err);
 
-          assert(apiResponse);
-          assert(apiResponse.results);
-          done();
-        });
+        speech.recognize({
+          content: audioFile
+        }, OPTIONS_VERBOSE, assertVerboseResponse(done));
       });
     });
 
@@ -133,43 +138,19 @@ describe('Speech', function() {
       speech.recognize(AUDIO_FILES.bridge.path, {
         // encoding should be automatically detected
         sampleRate: 16000
-      }, function(err, response, apiResponse) {
-        assert.ifError(err);
-        assert(Array.isArray(response.results));
-        assert(response.results.length > 0);
-        assert(Array.isArray(apiResponse.results));
-        assert(apiResponse.results.length > 0);
-        done();
-      });
+      }, assertSimplifiedResponse(done));
     });
 
     it('recognizes speech from remote GCS audio file', function(done) {
       var uri = AUDIO_FILES.bridge.gcsUri;
 
-      speech.recognize(uri, OPTIONS, function(err, response, apiResponse) {
-        assert.ifError(err);
-        assert(Array.isArray(response.results));
-        assert(response.results.length > 0);
-        assert(Array.isArray(apiResponse.results));
-        assert(apiResponse.results.length > 0);
-        done();
-      });
+      speech.recognize(uri, OPTIONS, assertSimplifiedResponse(done));
     });
 
     it('recognizes speech from remote audio file', function(done) {
       var uri = AUDIO_FILES.bridge.httpUri;
 
-      speech.recognize(uri, OPTIONS, function(err, response, apiResponse) {
-        assert.ifError(err);
-
-        assert(Array.isArray(response.results));
-        assert(response.results.length > 0);
-
-        assert(Array.isArray(apiResponse.results));
-        assert(apiResponse.results.length > 0);
-
-        done();
-      });
+      speech.recognize(uri, OPTIONS, assertSimplifiedResponse(done));
     });
   });
 
@@ -185,15 +166,23 @@ describe('Speech', function() {
 
           operation
             .on('error', done)
-            .on('complete', function() {
-              assert(Array.isArray(this.response.results));
+            .on('complete', assertSimplifiedResponseOperation(done));
+        });
+      });
+    });
 
-              assert(this.response.results.length > 0);
-              assert(this.response.results[0].alternatives[0].transcript);
-              assert(this.response.results[0].alternatives[0].confidence);
+    it('recognizes speech from raw audio in verbose mode', function(done) {
+      fs.readFile(AUDIO_FILES.bridge.path, function(err, audioFile) {
+        assert.ifError(err);
 
-              done();
-            });
+        speech.startRecognition({
+          content: audioFile
+        }, OPTIONS_VERBOSE, function(err, operation) {
+          assert.ifError(err);
+
+          operation
+            .on('error', done)
+            .on('complete', assertVerboseResponseOperation(done));
         });
       });
     });
@@ -211,15 +200,7 @@ describe('Speech', function() {
 
         operation
           .on('error', done)
-          .on('complete', function() {
-            assert(Array.isArray(this.response.results));
-
-            assert(this.response.results.length > 0);
-            assert(this.response.results[0].alternatives[0].transcript);
-            assert(this.response.results[0].alternatives[0].confidence);
-
-            done();
-          });
+          .on('complete', assertSimplifiedResponseOperation(done));
       });
     });
 
@@ -231,15 +212,7 @@ describe('Speech', function() {
 
         operation
           .on('error', done)
-          .on('complete', function() {
-            assert(Array.isArray(this.response.results));
-
-            assert(this.response.results.length > 0);
-            assert(this.response.results[0].alternatives[0].transcript);
-            assert(this.response.results[0].alternatives[0].confidence);
-
-            done();
-          });
+          .on('complete', assertSimplifiedResponseOperation(done));
       });
     });
 
@@ -251,15 +224,7 @@ describe('Speech', function() {
 
         operation
           .on('error', done)
-          .on('complete', function() {
-            assert(Array.isArray(this.response.results));
-
-            assert(this.response.results.length > 0);
-            assert(this.response.results[0].alternatives[0].transcript);
-            assert(this.response.results[0].alternatives[0].confidence);
-
-            done();
-          });
+          .on('complete', assertSimplifiedResponseOperation(done));
       });
     });
   });
@@ -297,18 +262,61 @@ describe('Speech', function() {
             }
 
             case Speech.endpointerTypes.ENDPOINTER_EVENT_UNSPECIFIED: {
-              var expected = 'how old is the Brooklyn Bridge';
-
-              try {
-                var results = data.results[0].alternatives[0].transcript;
-
-                if (results === expected) {
-                  correctDetectionsEmitted++;
-                }
-              } catch (e) {
-                done(e);
-                return;
+              var transcript = data.results[0];
+              if (transcript === 'how old is the Brooklyn Bridge') {
+                correctDetectionsEmitted++;
               }
+              return;
+            }
+          }
+        })
+        .on('end', function() {
+          setTimeout(function() {
+            assert.strictEqual(responseEmitted, true);
+            assert.strictEqual(correctDetectionsEmitted, 3);
+            done();
+          }, 0);
+        });
+    });
+
+    it('recognizes speech from raw audio in verbose mode', function(done) {
+      var correctDetectionsEmitted = 0;
+      var responseEmitted = false;
+
+      fs.createReadStream(AUDIO_FILES.bridge.path)
+        .on('error', done)
+        .pipe(speech.createRecognizeStream({
+          config: OPTIONS,
+          interimResults: false,
+          singleUtterance: false,
+          verbose: true
+        }))
+        .on('error', done)
+        .on('response', function() {
+          responseEmitted = true;
+        })
+        .on('data', function(data) {
+          switch (data.endpointerType) {
+            case Speech.endpointerTypes.START_OF_SPEECH: {
+              if (data.results.length === 0) {
+                correctDetectionsEmitted++;
+              }
+              return;
+            }
+
+            case Speech.endpointerTypes.END_OF_AUDIO: {
+              if (data.results.length === 0) {
+                correctDetectionsEmitted++;
+              }
+              return;
+            }
+
+            case Speech.endpointerTypes.ENDPOINTER_EVENT_UNSPECIFIED: {
+              var transcript = data.results[0].transcript;
+              if (transcript === 'how old is the Brooklyn Bridge') {
+                correctDetectionsEmitted++;
+              }
+              return;
             }
           }
         })
@@ -321,4 +329,38 @@ describe('Speech', function() {
         });
     });
   });
+
+  function assertSimplifiedResponse(done) {
+    return function(err, results) {
+      assert.ifError(err);
+
+      assert(results.length > 0);
+
+      var transcription = results[0];
+      assert.strictEqual(transcription, 'how old is the Brooklyn Bridge');
+
+      done();
+    };
+  }
+
+  function assertVerboseResponse(done) {
+    return function(err, results) {
+      assert.ifError(err);
+
+      assert(results.length > 0);
+
+      var transcription = results[0].transcript;
+      assert.strictEqual(transcription, 'how old is the Brooklyn Bridge');
+
+      done();
+    };
+  }
+
+  function assertSimplifiedResponseOperation(done) {
+    return assertSimplifiedResponse(done).bind(null, null);
+  }
+
+  function assertVerboseResponseOperation(done) {
+    return assertVerboseResponse(done).bind(null, null);
+  }
 });
