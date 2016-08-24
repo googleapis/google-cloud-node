@@ -17,15 +17,14 @@
 'use strict';
 
 var assert = require('assert');
-var EventEmitter = require('events').EventEmitter;
-var extend = require('extend');
-var modelo = require('modelo');
-var nodeutil = require('util');
 var proxyquire = require('proxyquire');
+var modelo = require('modelo');
+var EventEmitter = require('events').EventEmitter;
+var util = require('../src/util.js');
+var nodeutil = require('util');
 
 var GrpcServiceObject = require('../src/grpc-service-object.js');
 var GrpcService = require('../src/grpc-service.js');
-var util = require('../src/util.js');
 
 function createFake(Class) {
   function Fake() {
@@ -44,7 +43,6 @@ var fakeModelo = {
   }
 };
 
-var fakeUtil = extend({}, util);
 var FakeGrpcServiceObject = createFake(GrpcServiceObject);
 var FakeGrpcService = createFake(GrpcService);
 
@@ -59,8 +57,7 @@ describe('GrpcOperation', function() {
     GrpcOperation = proxyquire('../src/grpc-operation.js', {
       modelo: fakeModelo,
       './grpc-service-object.js': FakeGrpcServiceObject,
-      './grpc-service.js': FakeGrpcService,
-      './util.js': fakeUtil
+      './grpc-service.js': FakeGrpcService
     });
   });
 
@@ -112,26 +109,17 @@ describe('GrpcOperation', function() {
       assert.strictEqual(grpcOperation.hasActiveListeners, false);
     });
 
-    it('should call listenForEvents_', function(done) {
+    it('should call listenForEvents_', function() {
       var listenForEvents = GrpcOperation.prototype.listenForEvents_;
+      var called = false;
 
       GrpcOperation.prototype.listenForEvents_ = function() {
-        setImmediate(done);
+        called = true;
       };
 
       new GrpcOperation(FAKE_SERVICE, OPERATION_ID);
+      assert.strictEqual(called, true);
       GrpcOperation.prototype.listenForEvents_ = listenForEvents;
-    });
-  });
-
-  describe('STATUS', function() {
-    var statuses = {
-      running: 'RUNNING',
-      done: 'DONE'
-    };
-
-    it('should export the STATUS object', function() {
-      assert.deepEqual(GrpcOperation.STATUS, statuses);
     });
   });
 
@@ -148,15 +136,6 @@ describe('GrpcOperation', function() {
       };
 
       grpcOperation.cancel(done);
-    });
-
-    it('should use util.noop if the callback is omitted', function(done) {
-      grpcOperation.request = function(protoOpts, reqOpts, callback) {
-        assert.strictEqual(callback, fakeUtil.noop);
-        done();
-      };
-
-      grpcOperation.cancel();
     });
   });
 
@@ -348,51 +327,6 @@ describe('GrpcOperation', function() {
       it('should emit complete with metadata', function(done) {
         grpcOperation.on('complete', function(metadata) {
           assert.strictEqual(metadata, apiResponse);
-          done();
-        });
-
-        grpcOperation.startPolling_();
-      });
-    });
-
-    describe('operation status', function() {
-      var apiResponse;
-
-      beforeEach(function() {
-        apiResponse = { done: false };
-
-        grpcOperation.getMetadata = function(callback) {
-          callback(null, apiResponse, apiResponse);
-        };
-      });
-
-      it('should emit the running event when running', function(done) {
-        grpcOperation.on('running', function(metadata) {
-          assert.strictEqual(metadata, apiResponse);
-          done();
-        });
-
-        grpcOperation.startPolling_();
-      });
-
-      it('should only emit the running event once', function(done) {
-        var statusSteps = [false, false, true];
-        var metadataCallCount = 0;
-        var runningCallCount = 0;
-
-        this.timeout(2000);
-
-        grpcOperation.getMetadata = function(callback) {
-          apiResponse.done = statusSteps[metadataCallCount++];
-          callback(null, apiResponse, apiResponse);
-        };
-
-        grpcOperation.on('running', function() {
-          runningCallCount++;
-        });
-
-        grpcOperation.on('complete', function() {
-          assert.strictEqual(runningCallCount, 1);
           done();
         });
 

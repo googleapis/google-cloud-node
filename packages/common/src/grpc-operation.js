@@ -36,12 +36,6 @@ var GrpcService = require('./grpc-service.js');
 var GrpcServiceObject = require('./grpc-service-object.js');
 
 /**
- * @type {module:common/util}
- * @private
- */
-var util = require('./util.js');
-
-/**
  * An Operation object allows you to interact with APIs that take longer to
  * process things.
  *
@@ -111,16 +105,6 @@ function GrpcOperation(parent, name) {
 modelo.inherits(GrpcOperation, GrpcServiceObject, events.EventEmitter);
 
 /**
- * Status text used to describe the current state of the operation.
- *
- * @private
- */
-GrpcOperation.STATUS = {
-  running: 'RUNNING',
-  done: 'DONE'
-};
-
-/**
  * Cancel the operation.
  *
  * @param {function=} callback - The callback function.
@@ -138,7 +122,7 @@ GrpcOperation.prototype.cancel = function(callback) {
     name: this.id
   };
 
-  this.request(protoOpts, reqOpts, callback || util.noop);
+  this.request(protoOpts, reqOpts, callback);
 };
 
 /**
@@ -194,17 +178,11 @@ GrpcOperation.prototype.startPolling_ = function() {
       return;
     }
 
-    if (!resp.done && self.status !== GrpcOperation.STATUS.running) {
-      self.status = GrpcOperation.STATUS.running;
-      self.emit('running', resp);
-    }
-
     if (!resp.done) {
       setTimeout(self.startPolling_.bind(self), 500);
       return;
     }
 
-    self.status = GrpcOperation.STATUS.done;
     self.emit('complete', resp);
   });
 };
