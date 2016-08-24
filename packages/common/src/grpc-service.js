@@ -173,12 +173,18 @@ function GrpcService(config, options) {
     protoServices[service] = googleProtoFiles[service][apiVersion];
   }
 
-  for (var protoServiceName in protoServices) {
-    var protoService = this.loadProtoFile_(
-      protoServices[protoServiceName], config);
+  var self = this;
 
-    this.protos[protoServiceName] = protoService;
-  }
+  Object.keys(protoServices).forEach(function(name) {
+    var protoConfig = protoServices[name];
+    var service = self.loadProtoFile_(protoConfig, config);
+
+    self.protos[name] = service;
+
+    if (protoConfig.baseUrl) {
+      service.baseUrl = protoConfig.baseUrl;
+    }
+  });
 }
 
 nodeutil.inherits(GrpcService, Service);
@@ -677,7 +683,7 @@ GrpcService.prototype.loadProtoFile_ = function(protoConfig, config) {
   var apiVersion = protoConfig.apiVersion || config.apiVersion;
   var service = dotProp.get(services.google, serviceName);
 
-  return service[apiVersion];
+  return service[apiVersion] || service;
 };
 
 /**
@@ -701,7 +707,7 @@ GrpcService.prototype.getService_ = function(protoOpts) {
 
   if (!service) {
     service = new proto[protoOpts.service](
-      this.baseUrl,
+      proto.baseUrl || this.baseUrl,
       this.grpcCredentials
     );
 

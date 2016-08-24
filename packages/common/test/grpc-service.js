@@ -307,6 +307,30 @@ describe('GrpcService', function() {
       );
     });
 
+    it('should store the baseUrl properly', function() {
+      var fakeBaseUrl = 'a.googleapis.com';
+
+      grpcLoadOverride = function() {
+        return MOCK_GRPC_API;
+      };
+
+      var config = extend(true, {}, CONFIG, {
+        protoServices: {
+          CustomServiceName: {
+            path: '../file/path.proto',
+            baseUrl: fakeBaseUrl
+          }
+        }
+      });
+
+      var grpcService = new GrpcService(config, OPTIONS);
+
+      assert.strictEqual(
+        grpcService.protos.CustomServiceName.baseUrl,
+        fakeBaseUrl
+      );
+    });
+
     it('should not run in the gcloud sandbox environment', function() {
       global.GCLOUD_SANDBOX_ENV = {};
       var grpcService = new GrpcService();
@@ -1361,6 +1385,26 @@ describe('GrpcService', function() {
       var service = grpcService.loadProtoFile_(fakeProtoConfig, fakeMainConfig);
       assert.strictEqual(service, fakeServices.google.FakeService.v1);
     });
+
+    it('should return the services object if invalid version', function() {
+      var fakeProtoConfig = {
+        path: '/root/dir/path',
+        service: 'FakeService',
+        apiVersion: null
+      };
+
+      var fakeMainConfig = {
+        service: 'OtherFakeService',
+        apiVersion: 'v2'
+      };
+
+      grpcLoadOverride = function(pathOpts, type, grpOpts) {
+        return fakeServices;
+      };
+
+      var service = grpcService.loadProtoFile_(fakeProtoConfig, fakeMainConfig);
+      assert.strictEqual(service, fakeServices.google.FakeService);
+    });
   });
 
   describe('getService_', function() {
@@ -1422,6 +1466,24 @@ describe('GrpcService', function() {
 
       var cachedService = grpcService.activeServiceMap_.get('Service');
       assert.strictEqual(cachedService, fakeService);
+    });
+
+    it('should use the baseUrl override if applicable', function() {
+      var fakeBaseUrl = 'a.googleapis.com';
+      var fakeService = {};
+
+      grpcService.protos = {
+        Service: {
+          baseUrl: fakeBaseUrl,
+          Service: function(baseUrl, grpcCredentials) {
+            assert.strictEqual(baseUrl, fakeBaseUrl);
+            return fakeService;
+          }
+        }
+      };
+
+      var service = grpcService.getService_({ service: 'Service' });
+      assert.strictEqual(service, fakeService);
     });
   });
 });
