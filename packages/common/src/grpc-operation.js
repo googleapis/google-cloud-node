@@ -35,6 +35,7 @@ var GrpcService = require('./grpc-service.js');
  */
 var GrpcServiceObject = require('./grpc-service-object.js');
 
+// jscs:disable maximumLineLength
 /**
  * An Operation object allows you to interact with APIs that take longer to
  * process things.
@@ -47,6 +48,7 @@ var GrpcServiceObject = require('./grpc-service-object.js');
  *     service.
  * @param {string} name - The operation name.
  */
+// jscs:enable maximumLineLength
 function GrpcOperation(parent, name) {
   var methods = {
 
