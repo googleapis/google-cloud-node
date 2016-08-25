@@ -205,7 +205,7 @@ Table.formatName_ = function(instanceName, name) {
  *
  * @param {string} name - The name of column family.
  * @param {object=} rule - Garbage collection rule.
- * @param {object=} rule.age - Delete cells in a column older than the given
+ * @param {object} rule.age - Delete cells in a column older than the given
  *     age. Values must be at least 1 millisecond.
  * @param {number} rule.versions - Maximum number of versions to delete cells
  *     in a column, except for the most recent.
@@ -813,11 +813,11 @@ Table.prototype.mutate = function(entries, callback) {
       data.entries.forEach(function(entry) {
         throughStream.push({
           index: entry.index,
-          status:  common.GrpcService.decorateStatus_(entry.status)
+          status: common.GrpcService.decorateStatus_(entry.status)
         });
       });
 
-      next(null);
+      next();
     })
   ]);
 

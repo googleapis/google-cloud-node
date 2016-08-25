@@ -66,7 +66,7 @@ function Instance(bigtable, name) {
     /**
      * Create an instance.
      *
-     * @param {object} options - See {module:bigtable#createInstance}.
+     * @param {object=} options - See {module:bigtable#createInstance}.
      *
      * @example
      * instance.create(function(err, instance, operation, apiResponse) {
@@ -190,22 +190,6 @@ function Instance(bigtable, name) {
 }
 
 util.inherits(Instance, common.GrpcServiceObject);
-
-/**
- * Format the full table name into a user friendly version.
- *
- * @private
- *
- * @param {string} name - The formatted Table name.
- * @return {string}
- *
- * @example
- * Instance.formatTableName_('projects/p/zones/z/clusters/c/tables/my-table');
- * // => 'my-table'
- */
-Instance.formatTableName_ = function(name) {
-  return name.split('/').pop();
-};
 
 /**
  * Create a cluster.
@@ -456,7 +440,7 @@ Instance.prototype.cluster = function(name) {
 /**
  * Get Cluster objects for all of your clusters.
  *
- * @param {object} query - Query object.
+ * @param {object=} query - Query object.
  * @param {boolean} query.autoPaginate - Have pagination handled
  *     automatically. Default: true.
  * @param {number} query.maxApiCalls - Maximum number of API calls to make.
@@ -556,9 +540,8 @@ Instance.prototype.getClusters = function(query, callback) {
 };
 
 /**
- * Get Table objects for all the tables in your Compute Instance.
+ * Get Table objects for all the tables in your Compute instance.
  *
- * @param {function} callback - The callback function.
  * @param {object=} query - Query object.
  * @param {boolean} query.autoPaginate - Have pagination handled automatically.
  *     Default: true.
@@ -643,7 +626,7 @@ Instance.prototype.getTables = function(query, callback) {
     }
 
     var tables = resp.tables.map(function(metadata) {
-      var name = Instance.formatTableName_(metadata.name);
+      var name = metadata.name.split('/').pop();
       var table = self.table(name);
 
       table.metadata = metadata;

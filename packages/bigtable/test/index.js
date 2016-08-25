@@ -145,6 +145,10 @@ describe('Bigtable', function() {
 
       assert.strictEqual(calledWith.userAgent, PKG.name + '/' + PKG.version);
     });
+
+    it('should set the projectName', function() {
+      assert.strictEqual(bigtable.projectName, 'projects/' + PROJECT_ID);
+    });
   });
 
   describe('createInstance', function() {

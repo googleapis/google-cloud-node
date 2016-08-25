@@ -94,6 +94,7 @@ describe('Bigtable/Cluster', function() {
     });
 
     it('should Instance#createCluster to create the cluster', function(done) {
+      var config = cluster.calledWith_[0];
       var fakeOptions = {};
 
       INSTANCE.createCluster = function(name, options, callback) {
@@ -102,14 +103,39 @@ describe('Bigtable/Cluster', function() {
         callback();
       };
 
-      cluster.createMethod(null, fakeOptions, done);
+      config.createMethod(null, fakeOptions, done);
     });
 
     it('should leave full cluster names unaltered', function() {
       var fakeName = 'a/b/c/d';
       var cluster = new Cluster(INSTANCE, fakeName);
+      var config = cluster.calledWith_[0];
 
-      assert.strictEqual(cluster.id, fakeName);
+      assert.strictEqual(config.id, fakeName);
+
+      assert.deepEqual(config.methods, {
+        create: true,
+        delete: {
+          protoOpts: {
+            service: 'BigtableInstanceAdmin',
+            method: 'deleteCluster'
+          },
+          reqOpts: {
+            name: fakeName
+          }
+        },
+        exists: true,
+        get: true,
+        getMetadata: {
+          protoOpts: {
+            service: 'BigtableInstanceAdmin',
+            method: 'getCluster'
+          },
+          reqOpts: {
+            name: fakeName
+          }
+        }
+      });
     });
   });
 

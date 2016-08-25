@@ -335,7 +335,7 @@ util.inherits(Bigtable, common.GrpcService);
  * @resource [Creating a Compute Instance]{@link https://cloud.google.com/bigtable/docs/creating-compute-instance}
  *
  * @param {string} name - The unique name of the instance.
- * @param {object} options - Instance creation options.
+ * @param {object=} options - Instance creation options.
  * @param {object[]} options.clusters - The clusters to be created within the
  *     instance.
  * @param {string} options.displayName - The descriptive name for this instance
@@ -467,7 +467,7 @@ Bigtable.prototype.createInstance = function(name, options, callback) {
  * bigtable.getInstances()
  *   .on('error', console.error)
  *   .on('data', function(instance) {
- *     // `instance` is a Instance object.
+ *     // `instance` is an Instance object.
  *   })
  *   .on('end', function() {
  *     // All instances retrieved.

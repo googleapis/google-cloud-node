@@ -149,11 +149,11 @@ Row.formatChunks_ = function(chunks) {
       qualifierName = Mutation.convertFromBytes(chunk.qualifier.value);
     }
 
-    if (qualifierName) {
+    if (family && qualifierName) {
       qualifier = family[qualifierName] = family[qualifierName] || [];
     }
 
-    if (chunk.value) {
+    if (qualifier && chunk.value) {
       qualifier.push({
         value: Mutation.convertFromBytes(chunk.value),
         labels: chunk.labels,

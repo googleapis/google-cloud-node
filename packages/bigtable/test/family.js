@@ -324,6 +324,7 @@ describe('Bigtable/Family', function() {
       family.setMetadata({}, function(err, metadata, apiResponse) {
         assert.ifError(err);
         assert.strictEqual(metadata, fakeMetadata);
+        assert.strictEqual(family.metadata, fakeMetadata);
         assert.strictEqual(apiResponse, response);
         done();
       });

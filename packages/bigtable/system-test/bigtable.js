@@ -29,16 +29,11 @@ var Table = require('../src/table.js');
 var Family = require('../src/family.js');
 var Row = require('../src/row.js');
 
-var clusterName = process.env.GCLOUD_TESTS_BIGTABLE_CLUSTER;
-var zoneName = process.env.GCLOUD_TESTS_BIGTABLE_ZONE;
-
-var isTestable = clusterName && zoneName;
-
 function generateName(obj) {
   return ['test', obj, uuid.v4()].join('-');
 }
 
-(isTestable ? describe : describe.skip)('Bigtable', function() {
+describe('Bigtable', function() {
   var bigtable;
 
   var INSTANCE_NAME = 'test-bigtable-instance';
@@ -50,10 +45,7 @@ function generateName(obj) {
   var CLUSTER_NAME = 'test-bigtable-cluster';
 
   before(function(done) {
-    bigtable = new Bigtable(extend({
-      cluster: clusterName,
-      zone: zoneName
-    }, env));
+    bigtable = new Bigtable(env);
 
     INSTANCE = bigtable.instance(INSTANCE_NAME);
 
@@ -205,7 +197,23 @@ function generateName(obj) {
     });
 
     it('should update a cluster', function(done) {
-      CLUSTER.setMetadata({ nodes: 4 }, done);
+      var metadata = {
+        nodes: 4
+      };
+
+      CLUSTER.setMetadata(metadata, function(err, operation) {
+        assert.ifError(err);
+
+        operation
+          .on('error', done)
+          .on('complete', function() {
+            CLUSTER.getMetadata(function(err, _metadata) {
+              assert.ifError(err);
+              assert.strictEqual(metadata.nodes, _metadata.nodes);
+              done();
+            });
+          });
+      });
     });
 
   });
@@ -363,7 +371,7 @@ function generateName(obj) {
         assert.ifError(err);
         var maxAge = metadata.gcRule.maxAge;
 
-        assert.strictEqual(maxAge.seconds, rule.age.seconds);
+        assert.equal(maxAge.seconds, rule.age.seconds);
         assert.strictEqual(maxAge.nanas, rule.age.nanas);
         done();
       });

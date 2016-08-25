@@ -129,6 +129,7 @@ describe('Bigtable/Instance', function() {
 
     it('should Bigtable#createInstance to create the table', function(done) {
       var fakeOptions = {};
+      var config = instance.calledWith_[0];
 
       BIGTABLE.createInstance = function(name, options, callback) {
         assert.strictEqual(name, INSTANCE_NAME);
@@ -136,30 +137,48 @@ describe('Bigtable/Instance', function() {
         callback();
       };
 
-      instance.createMethod(null, fakeOptions, done);
+      config.createMethod(null, fakeOptions, done);
     });
 
     it('should not alter full instance ids', function() {
       var fakeId = 'a/b/c/d';
       var instance = new Instance(BIGTABLE, fakeId);
+      var config = instance.calledWith_[0];
 
-      assert.strictEqual(instance.id, fakeId);
-    });
-  });
+      assert.strictEqual(config.id, fakeId);
 
-  describe('formatTableName_', function() {
-    it('should return the last section of a formatted table name', function() {
-      var fakeTableName = 'projects/p/instances/i/tables/my-table';
-      var formatted = Instance.formatTableName_(fakeTableName);
-
-      assert.strictEqual(formatted, 'my-table');
-    });
-
-    it('should do nothing if the table is name is not formatted', function() {
-      var fakeTableName = 'my-table';
-      var formatted = Instance.formatTableName_(fakeTableName);
-
-      assert.strictEqual(formatted, fakeTableName);
+      assert.deepEqual(config.methods, {
+        create: true,
+        delete: {
+          protoOpts: {
+            service: 'BigtableInstanceAdmin',
+            method: 'deleteInstance'
+          },
+          reqOpts: {
+            name: fakeId
+          }
+        },
+        exists: true,
+        get: true,
+        getMetadata: {
+          protoOpts: {
+            service: 'BigtableInstanceAdmin',
+            method: 'getInstance'
+          },
+          reqOpts: {
+            name: fakeId
+          }
+        },
+        setMetadata: {
+          protoOpts: {
+            service: 'BigtableInstanceAdmin',
+            method: 'updateInstance'
+          },
+          reqOpts: {
+            name: fakeId
+          }
+        }
+      });
     });
   });
 
@@ -278,6 +297,7 @@ describe('Bigtable/Instance', function() {
         assert.strictEqual(err, null);
         assert.strictEqual(cluster, fakeCluster);
         assert.strictEqual(operation, fakeOperation);
+        assert.strictEqual(operation.metadata, response);
         assert.strictEqual(apiResponse, response);
         done();
       };
@@ -512,7 +532,9 @@ describe('Bigtable/Instance', function() {
       instance.getClusters(function(err, clusters, nextQuery, apiResponse) {
         assert.ifError(err);
         assert.strictEqual(clusters[0], fakeClusters[0]);
+        assert.strictEqual(clusters[0].metadata, response.clusters[0]);
         assert.strictEqual(clusters[1], fakeClusters[1]);
+        assert.strictEqual(clusters[1].metadata, response.clusters[1]);
         assert.strictEqual(nextQuery, null);
         assert.strictEqual(apiResponse, response);
         done();
@@ -533,22 +555,20 @@ describe('Bigtable/Instance', function() {
         callback(null, response);
       };
 
-      var callback = function(err, clusters, nextQuery) {
-        var expectedQuery = extend({}, options, {
+      instance.getClusters(options, function(err, clusters, nextQuery) {
+       var expectedQuery = extend({}, options, {
           pageToken: response.nextPageToken
         });
 
         assert.ifError(err);
         assert.deepEqual(nextQuery, expectedQuery);
         done();
-      };
-
-      instance.getClusters(options, callback);
+      });
     });
   });
 
   describe('getTables', function() {
-    var views = {
+    var views = FakeTable.VIEWS = {
       unspecified: 0,
       name: 1,
       schema: 2,
@@ -602,7 +622,7 @@ describe('Bigtable/Instance', function() {
 
     it('should return a list of Table objects', function(done) {
       var tableName = 'projects/p/zones/z/clusters/c/tables/my-table';
-      var fakeFormattedName = 'abcd';
+      var fakeFormattedName = 'my-table';
       var fakeTable = {};
 
       var response = {
@@ -613,12 +633,6 @@ describe('Bigtable/Instance', function() {
 
       instance.request = function(p, r, callback) {
         callback(null, response);
-      };
-
-      var formatTableName_ = Instance.formatTableName_;
-      Instance.formatTableName_ = function(name) {
-        assert.strictEqual(name, tableName);
-        return fakeFormattedName;
       };
 
       instance.table = function(name) {
@@ -635,8 +649,6 @@ describe('Bigtable/Instance', function() {
         assert.strictEqual(table.metadata, response.tables[0]);
         assert.strictEqual(nextQuery, null);
         assert.strictEqual(response, apiResponse);
-
-        Instance.formatTableName_ = formatTableName_;
         done();
       });
     });
@@ -655,7 +667,7 @@ describe('Bigtable/Instance', function() {
         callback(null, response);
       };
 
-      var callback = function(err, tables, nextQuery) {
+      instance.getTables(options, function(err, tables, nextQuery) {
         assert.ifError(err);
 
         var expectedQuery = extend({}, options, {
@@ -664,9 +676,7 @@ describe('Bigtable/Instance', function() {
 
         assert.deepEqual(nextQuery, expectedQuery);
         done();
-      };
-
-      instance.getTables(options, callback);
+      });
     });
   });
 
@@ -682,6 +692,5 @@ describe('Bigtable/Instance', function() {
       assert.strictEqual(args[1], TABLE_ID);
     });
   });
-
 
 });

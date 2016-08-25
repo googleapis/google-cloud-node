@@ -158,6 +158,19 @@ describe('Bigtable/Table', function() {
     });
   });
 
+  describe('VIEWS', function() {
+    var views = {
+      unspecified: 0,
+      name: 1,
+      schema: 2,
+      full: 4
+    };
+
+    it('should export the table views', function() {
+      assert.deepEqual(views, Table.VIEWS);
+    });
+  });
+
   describe('formatName_', function() {
     it('should format the table name to include the cluster name', function() {
       var tableName = Table.formatName_(INSTANCE.id, TABLE_ID);
@@ -387,6 +400,9 @@ describe('Bigtable/Table', function() {
       schema: 2,
       full: 4
     };
+    beforeEach(function() {
+      Table.VIEWS = views;
+    });
 
     it('should provide the proper request options', function(done) {
       table.request = function(grpcOpts, reqOpts) {
