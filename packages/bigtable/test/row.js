@@ -273,6 +273,56 @@ describe('Bigtable/Row', function() {
       }]);
     });
 
+    it('should not decode values when applicable', function() {
+      var timestamp1 = 123;
+      var timestamp2 = 345;
+
+      var chunks = [{
+        rowKey: 'unconvertedKey',
+        familyName: {
+          value: 'familyName'
+        },
+        qualifier: {
+          value: 'unconvertedQualifier'
+        }
+      }, {
+        value: 'unconvertedValue',
+        labels: ['label'],
+        timestampMicros: timestamp1,
+        valueSize: 0
+      }, {
+        value: 'unconvertedValue2',
+        labels: ['label2'],
+        timestampMicros: timestamp2,
+        valueSize: 2
+      }, {
+        commitRow: true
+      }];
+
+      var rows = Row.formatChunks_(chunks, {
+        decode: false
+      });
+
+      assert.deepEqual(rows, [{
+        key: 'convertedKey',
+        data: {
+          familyName: {
+            convertedQualifier: [{
+              value: 'unconvertedValue',
+              labels: ['label'],
+              timestamp: timestamp1,
+              size: 0
+            }, {
+              value: 'unconvertedValue2',
+              labels: ['label2'],
+              timestamp: timestamp2,
+              size: 2
+            }]
+          }
+        }
+      }]);
+    });
+
     it('should discard old data when reset row is found', function() {
       var chunks = [{
         rowKey: 'unconvertedKey',
@@ -356,13 +406,26 @@ describe('Bigtable/Row', function() {
       assert.strictEqual(convertStpy.getCall(0).args[0], 'test-column');
       assert.strictEqual(convertStpy.getCall(1).args[0], 'test-value');
     });
+
+    it('should optionally not decode the value', function() {
+      var formatted = Row.formatFamilies_(families, {
+        decode: false
+      });
+
+      assert.deepEqual(formatted, formattedRowData);
+
+      var convertStpy = FakeMutation.convertFromBytes;
+      assert.strictEqual(convertStpy.callCount, 1);
+      assert.strictEqual(convertStpy.getCall(0).args[0], 'test-column');
+    });
   });
 
   describe('create', function() {
     it('should provide the proper request options', function(done) {
-      row.parent.mutate = function(entry) {
+      row.parent.mutate = function(entry, options) {
         assert.strictEqual(entry.key, row.id);
         assert.deepEqual(entry.data, {});
+        assert.strictEqual(options, null);
         assert.strictEqual(entry.method, Mutation.methods.INSERT);
         done();
       };
@@ -376,19 +439,39 @@ describe('Bigtable/Row', function() {
         b: 'b'
       };
 
-      row.parent.mutate = function(entry) {
+      row.parent.mutate = function(entry, options) {
         assert.strictEqual(entry.data, data);
+        assert.strictEqual(options, null);
         done();
       };
 
       row.create(data, assert.ifError);
     });
 
+    it('should accept options when inserting data', function(done) {
+      var data = {
+        a: 'a',
+        b: 'b'
+      };
+
+      var fakeOptions = {
+        encode: false
+      };
+
+      row.parent.mutate = function(entry, options) {
+        assert.strictEqual(entry.data, data);
+        assert.strictEqual(options, fakeOptions);
+        done();
+      };
+
+      row.create(data, fakeOptions, assert.ifError)
+    });
+
     it('should return an error to the callback', function(done) {
       var err = new Error('err');
       var response = {};
 
-      row.parent.mutate = function(entry, callback) {
+      row.parent.mutate = function(entry, options, callback) {
         callback(err, response);
       };
 
@@ -403,7 +486,7 @@ describe('Bigtable/Row', function() {
     it('should return the Row instance', function(done) {
       var response = {};
 
-      row.parent.mutate = function(entry, callback) {
+      row.parent.mutate = function(entry, options, callback) {
         callback(null, response);
       };
 
@@ -508,6 +591,11 @@ describe('Bigtable/Row', function() {
         return fakeMutations;
       });
 
+      var options = {
+        onMatch: mutations,
+        onNoMatch: mutations
+      };
+
       row.request = function(grpcOpts, reqOpts) {
         assert.deepEqual(grpcOpts, {
           service: 'Bigtable',
@@ -522,36 +610,46 @@ describe('Bigtable/Row', function() {
 
         assert.strictEqual(FakeMutation.parse.callCount, 2);
         assert.strictEqual(FakeMutation.parse.getCall(0).args[0], mutations[0]);
+        assert.strictEqual(FakeMutation.parse.getCall(0).args[1], options);
         assert.strictEqual(FakeMutation.parse.getCall(1).args[0], mutations[0]);
+        assert.strictEqual(FakeMutation.parse.getCall(1).args[1], options);
 
         assert.strictEqual(FakeFilter.parse.callCount, 1);
         assert(FakeFilter.parse.calledWithExactly(filter));
         done();
       };
 
-      row.filter(filter, mutations, mutations, assert.ifError);
+      row.filter(filter, options, assert.ifError);
     });
 
     it('should optionally accept onNoMatch mutations', function(done) {
+      var options = {
+        onMatch: mutations
+      };
+
       row.request = function(g, reqOpts) {
         assert.deepEqual(reqOpts.falseMutations, []);
         assert.strictEqual(FakeMutation.parse.callCount, 1);
-        assert(FakeMutation.parse.calledWithExactly(mutations[0]));
+        assert(FakeMutation.parse.calledWithExactly(mutations[0], options));
         done();
       };
 
-      row.filter({}, mutations, assert.ifError);
+      row.filter({}, options, assert.ifError);
     });
 
     it('should optionally accept onMatch mutations', function(done) {
+      var options = {
+        onNoMatch: mutations
+      };
+
       row.request = function(g, reqOpts) {
         assert.deepEqual(reqOpts.trueMutations, []);
         assert.strictEqual(FakeMutation.parse.callCount, 1);
-        assert(FakeMutation.parse.calledWithExactly(mutations[0]));
+        assert(FakeMutation.parse.calledWithExactly(mutations[0], options));
         done();
       };
 
-      row.filter({}, null, mutations, assert.ifError);
+      row.filter({}, options, assert.ifError);
     });
 
     it('should return an error to the callback', function(done) {
@@ -562,7 +660,11 @@ describe('Bigtable/Row', function() {
         callback(err, response);
       };
 
-      row.filter({}, mutations, function(err_, matched, apiResponse) {
+      var options = {
+        onMatch: mutations
+      };
+
+      row.filter({}, options, function(err_, matched, apiResponse) {
         assert.strictEqual(err, err_);
         assert.strictEqual(matched, null);
         assert.strictEqual(response, apiResponse);
@@ -579,7 +681,11 @@ describe('Bigtable/Row', function() {
         callback(null, response);
       };
 
-      row.filter({}, mutations, function(err, matched, apiResponse) {
+      var options = {
+        onMatch: mutations
+      };
+
+      row.filter({}, options, function(err, matched, apiResponse) {
         assert.ifError(err);
         assert(matched);
         assert.strictEqual(response, apiResponse);
@@ -620,7 +726,7 @@ describe('Bigtable/Row', function() {
 
   describe('get', function() {
     it('should provide the proper request options', function(done) {
-      row.parent.getRows = function(reqOpts) {
+      row.parent.getRows = function(reqOpts, options) {
         assert.strictEqual(reqOpts.keys[0], ROW_ID);
         assert.strictEqual(reqOpts.filter, undefined);
         assert.strictEqual(FakeMutation.parseColumnName.callCount, 0);
@@ -702,6 +808,44 @@ describe('Bigtable/Row', function() {
       };
 
       row.get(keys, assert.ifError);
+    });
+
+    it('should respect the options object', function(done) {
+      var keys = [
+        'a'
+      ];
+
+      var options = {
+        decode: false
+      };
+
+      var expectedFilter = [{
+        family: 'a'
+      }];
+
+      row.parent.getRows = function(reqOpts) {
+        assert.deepEqual(reqOpts.filter, expectedFilter);
+        assert.strictEqual(FakeMutation.parseColumnName.callCount, 1);
+        assert(FakeMutation.parseColumnName.calledWith(keys[0]));
+        assert.strictEqual(reqOpts.decode, options.decode);
+        done();
+      };
+
+      row.get(keys, options, assert.ifError);
+    });
+
+    it('should accept options without keys', function(done) {
+      var options = {
+        decode: false
+      };
+
+      row.parent.getRows = function(reqOpts) {
+        assert.strictEqual(reqOpts.decode, options.decode);
+        assert(!reqOpts.filter);
+        done();
+      };
+
+      row.get(options, assert.ifError);
     });
 
     it('should return an error to the callback', function(done) {
@@ -791,7 +935,7 @@ describe('Bigtable/Row', function() {
       var error = new Error('err');
       var response = {};
 
-      row.get = function(callback) {
+      row.get = function(options, callback) {
         callback(error, null, response);
       };
 
@@ -805,22 +949,45 @@ describe('Bigtable/Row', function() {
 
     it('should return metadata to the callback', function(done) {
       var response = {};
-      var metadata = {
+      var fakeMetadata = {
         a: 'a',
         b: 'b'
       };
 
-      row.get = function(callback) {
-        row.metadata = metadata;
+      row.get = function(options, callback) {
         callback(null, row, response);
       };
 
+      row.metadata = fakeMetadata;
+
       row.getMetadata(function(err, metadata, apiResponse) {
         assert.ifError(err);
-        assert.strictEqual(metadata, metadata);
+        assert.strictEqual(metadata, fakeMetadata);
         assert.strictEqual(response, apiResponse);
         done();
       });
+    });
+
+    it('should accept an options object', function(done) {
+      var response = {};
+      var fakeMetadata = {};
+      var fakeOptions = {
+        decode: false
+      };
+
+      row.get = function(options, callback) {
+        assert.strictEqual(options, fakeOptions);
+        callback(null, row, response);
+      };
+
+      row.metadata = fakeMetadata;
+
+      row.getMetadata(fakeOptions, function(err, metadata, apiResponse) {
+        assert.ifError(err);
+        assert.strictEqual(metadata, fakeMetadata);
+        assert.strictEqual(response, apiResponse);
+        done();
+      })
     });
   });
 
@@ -910,7 +1077,7 @@ describe('Bigtable/Row', function() {
   });
 
   describe('save', function() {
-    it('should insert a key value pair', function(done) {
+    describe('key value pair', function() {
       var key = 'a:b';
       var value = 'c';
 
@@ -920,37 +1087,77 @@ describe('Bigtable/Row', function() {
         }
       };
 
-      var parseSpy = Mutation.parseColumnName = sinon.spy(function() {
-        return {
-          family: 'd',
-          qualifier: 'e'
-        };
+      var parseSpy;
+
+      beforeEach(function() {
+        parseSpy = Mutation.parseColumnName = sinon.spy(function() {
+          return {
+            family: 'd',
+            qualifier: 'e'
+          };
+        });
       });
 
-      row.parent.mutate = function(entry, callback) {
-        assert.strictEqual(entry.key, ROW_ID);
-        assert.deepEqual(entry.data, expectedData);
-        assert.strictEqual(entry.method, FakeMutation.methods.INSERT);
-        assert(parseSpy.calledWithExactly(key));
-        callback();
-      };
+      it('should insert a key value pair', function(done) {
+        row.parent.mutate = function(entry, options, callback) {
+          assert.strictEqual(entry.key, ROW_ID);
+          assert.deepEqual(entry.data, expectedData);
+          assert.strictEqual(entry.method, FakeMutation.methods.INSERT);
+          assert.deepEqual(options, {});
+          assert(parseSpy.calledWithExactly(key));
+          callback();
+        };
 
-      row.save(key, value, done);
+        row.save(key, value, done);
+      });
+
+      it('should accept an options object', function(done) {
+        var fakeOptions = {
+          encode: false
+        };
+
+        row.parent.mutate = function(entry, options, callback) {
+          assert.strictEqual(entry.key, ROW_ID);
+          assert.deepEqual(entry.data, expectedData);
+          assert.strictEqual(entry.method, FakeMutation.methods.INSERT);
+          assert.strictEqual(options, fakeOptions);
+          assert(parseSpy.calledWithExactly(key));
+          callback();
+        };
+
+        row.save(key, value, fakeOptions, done);
+      });
     });
 
-    it('should insert an object', function(done) {
+    describe('object mode', function() {
       var data = {
         a: {
           b: 'c'
         }
       };
 
-      row.parent.mutate = function(entry) {
-        assert.strictEqual(entry.data, data);
-        done();
-      };
+      it('should insert an object', function(done) {
+        row.parent.mutate = function(entry) {
+          assert.strictEqual(entry.data, data);
+          done();
+        };
 
-      row.save(data, assert.ifError);
+        row.save(data, assert.ifError);
+      });
+
+      it('should accept an options object', function(done) {
+        var fakeOptions = {
+          encode: false
+        };
+
+        row.parent.mutate = function(entry, options) {
+          assert.strictEqual(entry.data, data);
+          assert.strictEqual(options, fakeOptions);
+          done();
+        };
+
+        row.save(data, fakeOptions, assert.ifError);
+      });
     });
   });
 

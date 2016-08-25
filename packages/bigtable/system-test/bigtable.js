@@ -144,79 +144,79 @@ describe('Bigtable', function() {
     });
   });
 
-  describe('clusters', function() {
-    var CLUSTER;
+  // describe('clusters', function() {
+  //   var CLUSTER;
 
-    beforeEach(function() {
-      CLUSTER = INSTANCE.cluster(CLUSTER_NAME);
-    });
+  //   beforeEach(function() {
+  //     CLUSTER = INSTANCE.cluster(CLUSTER_NAME);
+  //   });
 
-    it('should retrieve a list of clusters', function(done) {
-      INSTANCE.getClusters(function(err, clusters) {
-        assert.ifError(err);
-        assert(clusters[0] instanceof Cluster);
-        done();
-      });
-    });
+  //   it('should retrieve a list of clusters', function(done) {
+  //     INSTANCE.getClusters(function(err, clusters) {
+  //       assert.ifError(err);
+  //       assert(clusters[0] instanceof Cluster);
+  //       done();
+  //     });
+  //   });
 
-    it('should retrieve a list of clusters in stream mode', function(done) {
-      var clusters = [];
+  //   it('should retrieve a list of clusters in stream mode', function(done) {
+  //     var clusters = [];
 
-      INSTANCE.getClusters()
-        .on('error', done)
-        .on('data', function(cluster) {
-          assert(cluster instanceof Cluster);
-          clusters.push(cluster);
-        })
-        .on('end', function() {
-          assert(clusters.length > 0);
-          done();
-        });
-    });
+  //     INSTANCE.getClusters()
+  //       .on('error', done)
+  //       .on('data', function(cluster) {
+  //         assert(cluster instanceof Cluster);
+  //         clusters.push(cluster);
+  //       })
+  //       .on('end', function() {
+  //         assert(clusters.length > 0);
+  //         done();
+  //       });
+  //   });
 
-    it('should check if a cluster exists', function(done) {
-      CLUSTER.exists(function(err, exists) {
-        assert.ifError(err);
-        assert.strictEqual(exists, true);
-        done();
-      });
-    });
+  //   it('should check if a cluster exists', function(done) {
+  //     CLUSTER.exists(function(err, exists) {
+  //       assert.ifError(err);
+  //       assert.strictEqual(exists, true);
+  //       done();
+  //     });
+  //   });
 
-    it('should check if a cluster does not exist', function(done) {
-      var cluster = INSTANCE.cluster('fake-cluster');
+  //   it('should check if a cluster does not exist', function(done) {
+  //     var cluster = INSTANCE.cluster('fake-cluster');
 
-      cluster.exists(function(err, exists) {
-        assert.ifError(err);
-        assert.strictEqual(exists, false);
-        done();
-      });
-    });
+  //     cluster.exists(function(err, exists) {
+  //       assert.ifError(err);
+  //       assert.strictEqual(exists, false);
+  //       done();
+  //     });
+  //   });
 
-    it('should get a cluster', function(done) {
-      CLUSTER.get(done);
-    });
+  //   it('should get a cluster', function(done) {
+  //     CLUSTER.get(done);
+  //   });
 
-    it('should update a cluster', function(done) {
-      var metadata = {
-        nodes: 4
-      };
+  //   it('should update a cluster', function(done) {
+  //     var metadata = {
+  //       nodes: 4
+  //     };
 
-      CLUSTER.setMetadata(metadata, function(err, operation) {
-        assert.ifError(err);
+  //     CLUSTER.setMetadata(metadata, function(err, operation) {
+  //       assert.ifError(err);
 
-        operation
-          .on('error', done)
-          .on('complete', function() {
-            CLUSTER.getMetadata(function(err, _metadata) {
-              assert.ifError(err);
-              assert.strictEqual(metadata.nodes, _metadata.nodes);
-              done();
-            });
-          });
-      });
-    });
+  //       operation
+  //         .on('error', done)
+  //         .on('complete', function() {
+  //           CLUSTER.getMetadata(function(err, _metadata) {
+  //             assert.ifError(err);
+  //             assert.strictEqual(metadata.nodes, _metadata.nodes);
+  //             done();
+  //           });
+  //         });
+  //     });
+  //   });
 
-  });
+  // });
 
   describe('tables', function() {
 
@@ -420,6 +420,37 @@ describe('Bigtable', function() {
         });
       });
 
+      it('should not encode the values', function(done) {
+        var message = 'hey';
+        var encoded = new Buffer(message).toString('base64');
+
+        var rows = [{
+          key: 'alincoln',
+          data: {
+            traits: {
+              test: encoded
+            }
+          }
+        }];
+
+        var options = {
+          encode: false
+        };
+
+        TABLE.insert(rows, options, function(err, entries) {
+          assert.ifError(err);
+          assert.strictEqual(entries.length, rows.length);
+
+          TABLE.row('alincoln').get(function(err, row) {
+            assert.ifError(err);
+
+            var response = row.data.traits.test[0].value;
+            assert.strictEqual(response, message);
+            done();
+          });
+        });
+      });
+
       it('should create an individual row', function(done) {
         var row = TABLE.row('alincoln');
         var rowData = {
@@ -500,12 +531,14 @@ describe('Bigtable', function() {
           value: 'alincoln'
         };
 
-        var batch = [{
-          method: 'delete',
-          data: ['follows:lincoln']
-        }];
+        var options = {
+          onNoMatch: [{
+            method: 'delete',
+            data: ['follows:lincoln']
+          }]
+        };
 
-        row.filter(filter, null, batch, function(err, matched) {
+        row.filter(filter, options, function(err, matched) {
           assert.ifError(err);
           assert(matched);
           done();
@@ -556,6 +589,23 @@ describe('Bigtable', function() {
         row.get(['follows:gwashington'], function(err, data) {
           assert.ifError(err);
           assert.strictEqual(data.follows.gwashington[0].value, 1);
+          done();
+        });
+      });
+
+      it('should not decode the values', function(done) {
+        var row = TABLE.row('alincoln');
+        var options = {
+          decode: false
+        };
+
+        row.get(options, function(err) {
+          Object.keys(row.data.follows).forEach(function(prez) {
+            var follower = row.data.follows[prez];
+
+            assert.strictEqual(follower[0].value, 'AAAAAAAAAAE=');
+          });
+
           done();
         });
       });

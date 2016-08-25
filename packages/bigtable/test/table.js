@@ -667,6 +667,19 @@ describe('Bigtable/Table', function() {
         };
       });
 
+      it('should pass the decode option', function(done) {
+        var options = {
+          decode: false
+        };
+
+        table.getRows(options, function(err) {
+          assert.ifError(err);
+          var formatArgs = FakeRow.formatChunks_.getCall(0).args[1];
+          assert.strictEqual(formatArgs.decode, options.decode);
+          done();
+        });
+      });
+
       it('should stream Row objects', function(done) {
         var rows = [];
 
@@ -792,6 +805,19 @@ describe('Bigtable/Table', function() {
       var stream = table.insert([]);
       assert.strictEqual(stream, fakeStream);
     });
+
+    it('should pass the configuration object to mutate', function(done) {
+      var fakeOptions = {
+        encode: false
+      };
+
+      table.mutate = function(entries, options, callback) {
+        assert.strictEqual(options, fakeOptions);
+        callback();
+      };
+
+      table.insert([], fakeOptions, done);
+    });
   });
 
   describe('mutate', function() {
@@ -830,6 +856,26 @@ describe('Bigtable/Table', function() {
       };
 
       table.mutate(entries, assert.ifError);
+    });
+
+    it('should pass the mutate options to Mutation.parse', function(done) {
+      var pumpifyObj = pumpify.obj;
+
+      var options = {
+        encode: false
+      };
+
+      table.requestStream = function() {};
+
+      pumpify.obj = function() {
+        var parseOptions = parseSpy.getCall(0).args[1];
+        assert.strictEqual(parseOptions, options);
+
+        pumpify.obj = pumpifyObj;
+        done();
+      };
+
+      table.mutate([{}], options);
     });
 
     describe('error', function() {

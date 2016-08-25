@@ -109,6 +109,7 @@ util.inherits(Row, common.GrpcServiceObject);
  * @private
  *
  * @param {chunk[]} chunks - The list of chunks.
+ * @param {object=} options - Formatting options.
  *
  * @example
  * Row.formatChunks_(chunks);
@@ -122,10 +123,12 @@ util.inherits(Row, common.GrpcServiceObject);
  * //   }
  * // }
  */
-Row.formatChunks_ = function(chunks) {
+Row.formatChunks_ = function(chunks, options) {
   var rows = [];
   var familyName;
   var qualifierName;
+
+  options = options || {};
 
   chunks.reduce(function(row, chunk) {
     var family;
@@ -154,8 +157,14 @@ Row.formatChunks_ = function(chunks) {
     }
 
     if (qualifier && chunk.value) {
+      var value = chunk.value;
+
+      if (options.decode !== false) {
+        value = Mutation.convertFromBytes(value);
+      }
+
       qualifier.push({
-        value: Mutation.convertFromBytes(chunk.value),
+        value: value,
         labels: chunk.labels,
         timestamp: chunk.timestampMicros,
         size: chunk.valueSize
@@ -183,6 +192,7 @@ Row.formatChunks_ = function(chunks) {
  * @private
  *
  * @param {object[]} families - The row families.
+ * @param {object=} options - Formatting options.
  *
  * @example
  * var families = [
@@ -212,8 +222,10 @@ Row.formatChunks_ = function(chunks) {
  * //   }
  * // }
  */
-Row.formatFamilies_ = function(families) {
+Row.formatFamilies_ = function(families, options) {
   var data = {};
+
+  options = options || {};
 
   families.forEach(function(family) {
     var familyData = data[family.name] = {};
@@ -222,8 +234,14 @@ Row.formatFamilies_ = function(families) {
       var qualifier = Mutation.convertFromBytes(column.qualifier);
 
       familyData[qualifier] = column.cells.map(function(cell) {
+        var value = cell.value;
+
+        if (options.decode !== false) {
+          value = Mutation.convertFromBytes(value);
+        }
+
         return {
-          value: Mutation.convertFromBytes(cell.value),
+          value: value,
           timestamp: cell.timestampMicros,
           labels: cell.labels
         };
@@ -238,6 +256,8 @@ Row.formatFamilies_ = function(families) {
  * Create a new row in your table.
  *
  * @param {object=} entry - An entry. See {module:bigtable/table#insert}.
+ * @param {object=} options - Configuration options when creating a row
+ *     with entry data. See {module:bigtable/table#insert}.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.
@@ -262,12 +282,18 @@ Row.formatFamilies_ = function(families) {
  *   }
  * }, callback);
  */
-Row.prototype.create = function(entry, callback) {
+Row.prototype.create = function(entry, options, callback) {
   var self = this;
 
   if (is.function(entry)) {
     callback = entry;
+    options = null;
     entry = {};
+  }
+
+  if (is.function(options)) {
+    callback = options;
+    options = null;
   }
 
   entry = {
@@ -276,7 +302,7 @@ Row.prototype.create = function(entry, callback) {
     method: Mutation.methods.INSERT
   };
 
-  this.parent.mutate(entry, function(err, apiResponse) {
+  this.parent.mutate(entry, options, function(err, apiResponse) {
     if (err) {
       callback(err, null, apiResponse);
       return;
@@ -373,9 +399,12 @@ Row.prototype.createRules = function(rules, callback) {
  *
  * @param {module:bigtable/filter} filter - Filter ot be applied to the contents
  *     of the row.
- * @param {?object[]} onMatch - A list of entries to be ran if a match is found.
- * @param {object[]=} onNoMatch - A list of entries to be ran if no matches are
+ * @oaram {options} options - Configuration options. See
+ *     {module:bigtable/table#mutate}.
+ * @param {object[]} options.onMatch - A list of entries to be ran if a match is
  *     found.
+ * @param {object[]} options.onNoMatch - A list of entries to be ran if no
+ *     matches are found.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.
@@ -398,35 +427,29 @@ Row.prototype.createRules = function(rules, callback) {
  *   }
  * ];
  *
- * var entries = [
- *   {
- *     method: 'insert',
- *     data: {
- *       follows: {
- *         jadams: 1
+ * var options = {
+ *   onMatch: [
+ *     {
+ *       method: 'insert',
+ *       data: {
+ *         follows: {
+ *           jadams: 1
+ *         }
  *       }
  *     }
- *   }
- * ];
+ *   ]
+ * };
  *
- * row.filter(filter, entries, callback);
- *
- * //-
- * // Optionally, you can pass in an array of entries to be ran in the event
- * // that a match is not made.
- * //-
- * row.filter(filter, null, entries, callback);
+ * row.filter(filter, options, callback);
  */
-Row.prototype.filter = function(filter, onMatch, onNoMatch, callback) {
+Row.prototype.filter = function(filter, options, callback) {
   var grpcOpts = {
     service: 'Bigtable',
     method: 'checkAndMutateRow'
   };
 
-  if (is.function(onNoMatch)) {
-    callback = onNoMatch;
-    onNoMatch = [];
-  }
+  var onMatch = options.onMatch || [];
+  var onNoMatch = options.onNoMatch || [];
 
   var reqOpts = {
     tableName: this.parent.id,
@@ -447,7 +470,7 @@ Row.prototype.filter = function(filter, onMatch, onNoMatch, callback) {
 
   function createFlatMutationsList(entries) {
     entries = arrify(entries).map(function(entry) {
-      return Mutation.parse(entry).mutations;
+      return Mutation.parse(entry, options).mutations;
     });
 
     return flatten(entries);
@@ -518,6 +541,9 @@ Row.prototype.deleteCells = function(columns, callback) {
  * Get the row data. See {module:bigtable/table#getRows}.
  *
  * @param {string[]=} columns - List of specific columns to retrieve.
+ * @param {object} options - Configuration object.
+ * @param {boolean} options.decode - If set to `false` it will not decode Buffer
+ *     values returned from Bigtable. Default: true.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.
@@ -545,12 +571,18 @@ Row.prototype.deleteCells = function(columns, callback) {
  *   'follows:alincoln'
  * ], callback);
  */
-Row.prototype.get = function(columns, callback) {
+Row.prototype.get = function(columns, options, callback) {
   var self = this;
 
-  if (is.function(columns)) {
-    callback = columns;
+  if (!is.array(columns)) {
+    callback = options;
+    options = columns;
     columns = [];
+  }
+
+  if (is.function(options)) {
+    callback = options;
+    options = {};
   }
 
   var filter;
@@ -579,10 +611,10 @@ Row.prototype.get = function(columns, callback) {
     }
   }
 
-  var reqOpts = {
+  var reqOpts = extend({}, options, {
     keys: [this.id],
     filter: filter
-  };
+  });
 
   this.parent.getRows(reqOpts, function(err, rows, apiResponse) {
     if (err) {
@@ -610,6 +642,9 @@ Row.prototype.get = function(columns, callback) {
 /**
  * Get the row's metadata.
  *
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.decode - If set to `false` it will not decode Buffer
+ *     values returned from Bigtable. Default: true.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.
@@ -619,8 +654,13 @@ Row.prototype.get = function(columns, callback) {
  * @example
  * row.getMetadata(function(err, metadata, apiResponse) {});
  */
-Row.prototype.getMetadata = function(callback) {
-  this.get(function(err, row, resp) {
+Row.prototype.getMetadata = function(options, callback) {
+  if (is.function(options)) {
+    callback = options;
+    options = {};
+  }
+
+  this.get(options, function(err, row, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -691,6 +731,8 @@ Row.prototype.increment = function(column, value, callback) {
  * @param {string|object} key - Either a column name or an entry
  *     object to be inserted into the row. See {module:bigtable/table#insert}.
  * @param {*=} value - This can be omitted if using entry object.
+ * @param {object=} options - Configuration options. See
+ *     {module:bigtable/table#mutate}.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.
@@ -718,7 +760,7 @@ Row.prototype.increment = function(column, value, callback) {
  *   }
  * }, callback);
  */
-Row.prototype.save = function(key, value, callback) {
+Row.prototype.save = function(key, value, options, callback) {
   var rowData;
 
   if (is.string(key)) {
@@ -729,7 +771,13 @@ Row.prototype.save = function(key, value, callback) {
     rowData[column.family][column.qualifier] = value;
   } else {
     rowData = key;
-    callback = value;
+    callback = options;
+    options = value;
+  }
+
+  if (is.function(options)) {
+    callback = options;
+    options = {};
   }
 
   var mutation = {
@@ -738,7 +786,7 @@ Row.prototype.save = function(key, value, callback) {
     method: Mutation.methods.INSERT
   };
 
-  this.parent.mutate(mutation, callback);
+  this.parent.mutate(mutation, options, callback);
 };
 
 module.exports = Row;

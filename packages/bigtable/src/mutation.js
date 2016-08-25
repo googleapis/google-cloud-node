@@ -21,6 +21,7 @@
 'use strict';
 
 var arrify = require('arrify');
+var extend = require('extend');
 var Int64 = require('node-int64');
 var is = require('is');
 
@@ -39,10 +40,14 @@ var is = require('is');
  *   }
  * });
  */
-function Mutation(mutation) {
+function Mutation(mutation, options) {
   this.key = mutation.key;
   this.method = mutation.method;
   this.data = mutation.data;
+
+  this.options = extend({
+    encode: true
+  }, options);
 }
 
 /**
@@ -120,6 +125,7 @@ Mutation.createTimeRange = function(start, end) {
  * Formats an `insert` mutation to what the proto service expects.
  *
  * @param {object} data - The entity data.
+ * @param {object=} options - The mutation options.
  * @return {object[]}
  *
  * @example
@@ -147,8 +153,10 @@ Mutation.createTimeRange = function(start, end) {
  * //   }
  * // ]
  */
-Mutation.encodeSetCell = function(data) {
+Mutation.encodeSetCell = function(data, options) {
   var mutations = [];
+
+  options = options || {};
 
   Object.keys(data).forEach(function(familyName) {
     var family = data[familyName];
@@ -168,11 +176,17 @@ Mutation.encodeSetCell = function(data) {
         timestamp = timestamp.getTime();
       }
 
+      var value = cell.value;
+
+      if (options.encode !== false) {
+        value = Mutation.convertToBytes(value);
+      }
+
       var setCell = {
         familyName: familyName,
         columnQualifier: Mutation.convertToBytes(cellName),
         timestampMicros: timestamp || -1,
-        value: Mutation.convertToBytes(cell.value)
+        value: value
       };
 
       mutations.push({ setCell: setCell });
@@ -282,9 +296,9 @@ Mutation.encodeDelete = function(data) {
  * @param {object} entry - The entity data.
  * @return {object}
  */
-Mutation.parse = function(mutation) {
+Mutation.parse = function(mutation, options) {
   if (!(mutation instanceof Mutation)) {
-    mutation = new Mutation(mutation);
+    mutation = new Mutation(mutation, options);
   }
 
   return mutation.toProto();
@@ -325,7 +339,7 @@ Mutation.prototype.toProto = function() {
   }
 
   if (this.method === methods.INSERT) {
-    mutation.mutations = Mutation.encodeSetCell(this.data);
+    mutation.mutations = Mutation.encodeSetCell(this.data, this.options);
   } else if (this.method === methods.DELETE) {
     mutation.mutations = Mutation.encodeDelete(this.data);
   }

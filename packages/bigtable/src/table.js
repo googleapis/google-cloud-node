@@ -427,6 +427,8 @@ Table.prototype.getMetadata = function(options, callback) {
  * Get Row objects for the rows currently in your table.
  *
  * @param {options=} options - Configuration object.
+ * @param {boolean} options.decode - If set to `false` it will not decode Buffer
+ *     values returned from Bigtable. Default: true.
  * @param {string[]} options.keys - A list of row keys.
  * @param {string} options.start - Start value for key range.
  * @param {string} options.end - End value for key range.
@@ -589,8 +591,11 @@ Table.prototype.getRows = function(options, callback) {
     this.requestStream(grpcOpts, reqOpts),
     through.obj(function(data, enc, next) {
       var throughStream = this;
+      var rows = Row.formatChunks_(data.chunks, {
+        decode: options.decode
+      });
 
-      Row.formatChunks_(data.chunks).forEach(function(rowData) {
+      rows.forEach(function(rowData) {
         var row = self.row(rowData.key);
 
         row.data = rowData.data;
@@ -617,6 +622,10 @@ Table.prototype.getRows = function(options, callback) {
  *
  * @param {object|object[]} entries - List of entries to be inserted.
  *     See {module:bigtable/table#mutate}.
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.encode - Before we insert your data we will
+ *     transform it into a Buffer. You can send the raw data instead by setting
+ *     `encode` to `false. Default: true.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {object} callback.apiResponse - The full API response.
@@ -672,10 +681,10 @@ Table.prototype.getRows = function(options, callback) {
  *     // }
  *   });
  */
-Table.prototype.insert = function(entries, callback) {
+Table.prototype.insert = function(entries, options, callback) {
   entries = arrify(entries).map(propAssign('method', Mutation.methods.INSERT));
 
-  return this.mutate(entries, callback);
+  return this.mutate(entries, options, callback);
 };
 
 /**
@@ -685,6 +694,10 @@ Table.prototype.insert = function(entries, callback) {
  *
  * @param {object|object[]} entries - List of entities to be inserted or
  *     deleted.
+ * @param {object} options - Configuration object.
+ * @param {boolean} options.encode - Before we mutate your data we will
+ *     transform it into a Buffer. You can send the raw data instead by setting
+ *     `encode` to `false. Default: true.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {object[]} callback.statuses - A status for each entity transaction.
@@ -791,8 +804,15 @@ Table.prototype.insert = function(entries, callback) {
  *     // }
  *   });
  */
-Table.prototype.mutate = function(entries, callback) {
-  entries = flatten(arrify(entries)).map(Mutation.parse);
+Table.prototype.mutate = function(entries, options, callback) {
+  if (is.function(options)) {
+    callback = options;
+    options = {};
+  }
+
+  entries = flatten(arrify(entries)).map(function(entry) {
+    return Mutation.parse(entry, options);
+  });
 
   var grpcOpts = {
     service: 'Bigtable',
