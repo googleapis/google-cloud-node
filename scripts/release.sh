@@ -33,7 +33,7 @@ else
 fi
 
 ## Attempt to update docs/manifest.json with the new version.
-git submodule add -f -b master https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} master
+git submodule add -q -f -b master https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} master
 cd master
 node -e "
 module = require('./docs/manifest.json').modules.filter(function(mod) { return mod.id === '${MODULE_NAME}'; })[0];
@@ -47,14 +47,14 @@ set -e
 if [[ -n "$(git status --porcelain)" ]]; then
   git commit -m "Update docs/manifest.json for ${TRAVIS_TAG} [ci skip]"
   git status
-  git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} master
+  git push -q https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} master
 else
   echo "docs/manifest.json already includes the new version. Skipping commit."
 fi
 cd ../
 
 ## Upload the docs to gh-pages.
-git submodule add -f -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} ghpages
+git submodule add -q -f -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} ghpages
 test -d "ghpages/json/${MODULE_NAME}/${MODULE_VERSION}" && exit 0 || mkdir ghpages/json/${MODULE_NAME}/${MODULE_VERSION}
 cp docs/*.md ghpages/json/${MODULE_NAME}/${MODULE_VERSION}
 cp -R docs/json/${MODULE_NAME}/master/* ghpages/json/${MODULE_NAME}/${MODULE_VERSION}
@@ -66,4 +66,4 @@ git add json
 git add manifest.json
 git commit -m "Update docs for ${MODULE_NAME} ${MODULE_VERSION}"
 git status
-git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages
+git push -q https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages

@@ -26,7 +26,7 @@ if [ "${TRAVIS_BRANCH}" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]
   npm run system-test
 
   # add new docs to the gh-pages branch
-  git submodule add -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} ghpages
+  git submodule add -q -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} ghpages
   # copy all the docs file that might have changed, excluding versions.txt (to avoid overriding it)
   cp -R docs/json/* ghpages/json
   npm run bundle
@@ -43,7 +43,7 @@ if [ "${TRAVIS_BRANCH}" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]
     git config user.email "travis@travis-ci.org"
     git commit -m "Update docs after merge to master [ci skip]"
     git status
-    git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages
+    git push -q https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages
   else
     echo "Nothing to commit. Exiting without pushing changes."
   fi
