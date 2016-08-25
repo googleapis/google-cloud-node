@@ -15,6 +15,12 @@
  */
 
 /**
+ * @type {module:common/grpcOperation}
+ * @private
+ */
+exports.GrpcOperation = require('./grpc-operation.js');
+
+/**
  * @type {module:common/grpcService}
  * @private
  */
