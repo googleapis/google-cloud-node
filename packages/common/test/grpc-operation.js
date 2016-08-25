@@ -286,7 +286,7 @@ describe('GrpcOperation', function() {
     });
 
     describe('operation pending', function() {
-      var apiResponse = { status: 'PENDING' };
+      var apiResponse = { done: false };
       var setTimeoutCached = global.setTimeout;
 
       beforeEach(function() {
