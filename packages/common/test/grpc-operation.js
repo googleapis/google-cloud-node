@@ -57,7 +57,8 @@ describe('GrpcOperation', function() {
     GrpcOperation = proxyquire('../src/grpc-operation.js', {
       modelo: fakeModelo,
       './grpc-service-object.js': FakeGrpcServiceObject,
-      './grpc-service.js': FakeGrpcService
+      './grpc-service.js': FakeGrpcService,
+      './util.js': util
     });
   });
 
@@ -136,6 +137,15 @@ describe('GrpcOperation', function() {
       };
 
       grpcOperation.cancel(done);
+    });
+
+    it('should use util.noop if callback is omitted', function(done) {
+      grpcOperation.request = function(protoOpts, reqOpts, callback) {
+        assert.strictEqual(callback, util.noop);
+        done();
+      };
+
+      grpcOperation.cancel();
     });
   });
 

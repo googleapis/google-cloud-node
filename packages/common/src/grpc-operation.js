@@ -35,6 +35,12 @@ var GrpcService = require('./grpc-service.js');
  */
 var GrpcServiceObject = require('./grpc-service-object.js');
 
+/**
+ * @type {module:common/util}
+ * @private
+ */
+var util = require('./util.js');
+
 // jscs:disable maximumLineLength
 /**
  * An Operation object allows you to interact with APIs that take longer to
@@ -124,7 +130,7 @@ GrpcOperation.prototype.cancel = function(callback) {
     name: this.id
   };
 
-  this.request(protoOpts, reqOpts, callback);
+  this.request(protoOpts, reqOpts, callback || util.noop);
 };
 
 /**
