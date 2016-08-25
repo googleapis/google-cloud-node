@@ -1370,4 +1370,30 @@ describe('common/util', function() {
       });
     });
   });
+
+  describe('isCustomType', function() {
+    function PubSub() {}
+
+    function MiddleLayer() {
+      this.parent = new PubSub();
+    }
+
+    function Subscription() {
+      this.parent = new MiddleLayer();
+    }
+
+    var subscription = new Subscription();
+
+    it('should match a custom type by constructor names', function() {
+      assert(util.isCustomType(subscription, 'pubsub'));
+      assert(util.isCustomType(subscription, 'pubsub/subscription'));
+
+      assert(util.isCustomType(subscription, 'middlelayer'));
+      assert(util.isCustomType(subscription, 'middlelayer/subscription'));
+    });
+
+    it('should support any casing', function() {
+      assert(util.isCustomType(subscription, 'PubSub/Subscription'));
+    });
+  });
 });
