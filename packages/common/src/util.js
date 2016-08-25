@@ -615,11 +615,11 @@ function isCustomType(unknown, module) {
   }
 
   var walkingModule = unknown;
-  while (walkingModule.parent && (walkingModule = walkingModule.parent)) {
+  do {
     if (getConstructorName(walkingModule) === parentModuleName) {
       return true;
     }
-  }
+  } while (walkingModule.parent && (walkingModule = walkingModule.parent));
 
   return false;
 }

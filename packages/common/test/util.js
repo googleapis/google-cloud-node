@@ -1382,9 +1382,14 @@ describe('common/util', function() {
       this.parent = new MiddleLayer();
     }
 
+    var pubsub = new PubSub();
     var subscription = new Subscription();
 
-    it('should match a custom type by constructor names', function() {
+    it('should match a Service type by constructor names', function() {
+      assert(util.isCustomType(pubsub, 'pubsub'));
+    });
+
+    it('should match a ServiceObject type by constructor names', function() {
       assert(util.isCustomType(subscription, 'pubsub'));
       assert(util.isCustomType(subscription, 'pubsub/subscription'));
 
