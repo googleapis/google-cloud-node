@@ -57,7 +57,9 @@ function Sink(logging, name) {
      *
      * @example
      * var config = {
-     *   // ...
+     *   destination: {
+     *     // ...
+     *   }
      * };
      *
      * sink.create(config, function(err, sink, apiResponse) {

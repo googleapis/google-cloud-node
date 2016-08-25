@@ -40,10 +40,6 @@ function FakeService() {
 
 nodeutil.inherits(FakeService, Service);
 
-function FakeFile() {
-  this.calledWith_ = arguments;
-}
-
 var requestOverride = null;
 var fakeRequest = function() {
   return (requestOverride || util.noop).apply(this, arguments);
@@ -59,9 +55,6 @@ describe('Vision', function() {
   before(function() {
     Vision = proxyquire('../', {
       request: fakeRequest,
-      '@google-cloud/storage': {
-        File: FakeFile
-      },
       '@google-cloud/common': {
         Service: FakeService,
         util: fakeUtil
@@ -860,11 +853,21 @@ describe('Vision', function() {
 
   describe('findImages_', function() {
     it('should convert a File object', function(done) {
-      var file = new FakeFile();
-      file.bucket = {
-        name: 'bucket-name'
+      var file = {
+        name: 'file-name',
+        bucket: {
+          name: 'bucket-name'
+        }
       };
-      file.name = 'file-name';
+
+      var isCustomType = util.isCustomType;
+
+      fakeUtil.isCustomType = function(unknown, type) {
+        fakeUtil.isCustomType = isCustomType;
+        assert.strictEqual(unknown, file);
+        assert.strictEqual(type, 'storage/file');
+        return true;
+      };
 
       Vision.findImages_(file, function(err, images) {
         assert.ifError(err);

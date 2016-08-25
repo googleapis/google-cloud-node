@@ -24,19 +24,17 @@ var prop = require('propprop');
 var proxyquire = require('proxyquire');
 var stream = require('stream');
 
-var File = require('@google-cloud/storage').File;
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 
-function FakeFile(a, b) {
-  this.request = util.noop;
-  File.call(this, a, b);
-}
-
 var makeWritableStreamOverride;
+var isCustomTypeOverride;
 var fakeUtil = extend({}, util, {
+  isCustomType: function() {
+    return (isCustomTypeOverride || util.isCustomType).apply(null, arguments);
+  },
   makeWritableStream: function() {
-    var args = [].slice.call(arguments);
+    var args = arguments;
     (makeWritableStreamOverride || util.makeWritableStream).apply(null, args);
   }
 });
@@ -70,7 +68,8 @@ describe('BigQuery/Table', function() {
       projectId: 'project-id',
       job: function(id) {
         return { id: id };
-      }
+      },
+      request: util.noop
     }
   };
 
@@ -98,9 +97,6 @@ describe('BigQuery/Table', function() {
 
   before(function() {
     Table = proxyquire('../src/table.js', {
-      '@google-cloud/storage': {
-        File: FakeFile
-      },
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
         streamRouter: fakeStreamRouter,
@@ -125,9 +121,11 @@ describe('BigQuery/Table', function() {
   });
 
   beforeEach(function() {
+    isCustomTypeOverride = null;
     makeWritableStreamOverride = null;
     tableOverrides = {};
     table = new Table(DATASET, TABLE_ID);
+    table.bigQuery.request = util.noop;
   });
 
   describe('instantiation', function() {
@@ -480,12 +478,18 @@ describe('BigQuery/Table', function() {
   });
 
   describe('export', function() {
-    var FILE = new FakeFile({
-      name: 'bucket-name',
-      makeReq_: util.noop,
-    }, 'file.json');
+    var FILE = {
+      name: 'file-name.json',
+      bucket: {
+        name: 'bucket-name'
+      }
+    };
 
     beforeEach(function() {
+      isCustomTypeOverride = function() {
+        return true;
+      };
+
       table.bigQuery.job = function(id) {
         return { id: id };
       };
@@ -555,10 +559,25 @@ describe('BigQuery/Table', function() {
         done();
       };
 
-      table.export(FILE, done);
+      table.export(FILE, assert.ifError);
+    });
+
+    it('should check if a destination is a File', function(done) {
+      isCustomTypeOverride = function(dest, type) {
+        assert.strictEqual(dest, FILE);
+        assert.strictEqual(type, 'storage/file');
+        setImmediate(done);
+        return true;
+      };
+
+      table.export(FILE, assert.ifError);
     });
 
     it('should throw if a destination is not a File', function() {
+      isCustomTypeOverride = function() {
+        return false;
+      };
+
       assert.throws(function() {
         table.export({}, util.noop);
       }, /Destination must be a File object/);
@@ -794,10 +813,18 @@ describe('BigQuery/Table', function() {
 
   describe('import', function() {
     var FILEPATH = require.resolve('./testdata/testfile.json');
-    var FILE = new FakeFile({
-      name: 'bucket-name',
-      makeReq_: util.noop
-    }, 'file.json');
+    var FILE = {
+      name: 'file-name.json',
+      bucket: {
+        name: 'bucket-name'
+      }
+    };
+
+    beforeEach(function() {
+      isCustomTypeOverride = function() {
+        return true;
+      };
+    });
 
     it('should accept just a File and a callback', function(done) {
       var mockJob = { id: 'foo' };
@@ -873,7 +900,22 @@ describe('BigQuery/Table', function() {
       table.import(FILEPATH, { sourceFormat: 'CSV' }, done);
     });
 
+    it('should check if a destination is a File', function(done) {
+      isCustomTypeOverride = function(dest, type) {
+        assert.strictEqual(dest, FILE);
+        assert.strictEqual(type, 'storage/file');
+        setImmediate(done);
+        return true;
+      };
+
+      table.export(FILE, assert.ifError);
+    });
+
     it('should throw if a File object is not provided', function() {
+      isCustomTypeOverride = function() {
+        return false;
+      };
+
       assert.throws(function() {
         table.import({});
       }, /Source must be a File object/);

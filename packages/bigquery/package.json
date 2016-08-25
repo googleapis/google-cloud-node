@@ -53,8 +53,7 @@
     "arrify": "^1.0.0",
     "duplexify": "^3.2.0",
     "extend": "^3.0.0",
-    "@google-cloud/common": "^0.1.0",
-    "@google-cloud/storage": "^0.1.0",
+    "@google-cloud/common": "^0.3.0",
     "is": "^3.0.1",
     "modelo": "^4.2.0",
     "stream-events": "^1.0.1",
@@ -62,6 +61,7 @@
   },
   "devDependencies": {
     "async": "^1.4.2",
+    "@google-cloud/storage": "*",
     "mocha": "^3.0.1",
     "node-uuid": "^1.4.3",
     "propprop": "^0.3.0",

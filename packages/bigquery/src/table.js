@@ -28,7 +28,6 @@ var format = require('string-format-obj');
 var fs = require('fs');
 var is = require('is');
 var path = require('path');
-var Storage = require('@google-cloud/storage');
 var streamEvents = require('stream-events');
 var util = require('util');
 
@@ -504,7 +503,7 @@ Table.prototype.export = function(destination, options, callback) {
 
   extend(true, options, {
     destinationUris: arrify(destination).map(function(dest) {
-      if (!(dest instanceof Storage.File)) {
+      if (!common.util.isCustomType(dest, 'storage/file')) {
         throw new Error('Destination must be a File object.');
       }
 
@@ -787,7 +786,7 @@ Table.prototype.import = function(source, metadata, callback) {
 
   extend(true, body.configuration.load, metadata, {
     sourceUris: arrify(source).map(function(src) {
-      if (!(src instanceof Storage.File)) {
+      if (!common.util.isCustomType(src, 'storage/file')) {
         throw new Error('Source must be a File object.');
       }
 
