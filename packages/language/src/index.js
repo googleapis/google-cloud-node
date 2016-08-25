@@ -434,3 +434,4 @@ Language.prototype.text = function(content, options) {
 };
 
 module.exports = Language;
+module.exports.v1beta1 = require('./v1beta1');
