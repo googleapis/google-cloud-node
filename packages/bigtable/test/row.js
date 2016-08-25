@@ -464,7 +464,7 @@ describe('Bigtable/Row', function() {
         done();
       };
 
-      row.create(data, fakeOptions, assert.ifError)
+      row.create(data, fakeOptions, assert.ifError);
     });
 
     it('should return an error to the callback', function(done) {
@@ -726,7 +726,7 @@ describe('Bigtable/Row', function() {
 
   describe('get', function() {
     it('should provide the proper request options', function(done) {
-      row.parent.getRows = function(reqOpts, options) {
+      row.parent.getRows = function(reqOpts) {
         assert.strictEqual(reqOpts.keys[0], ROW_ID);
         assert.strictEqual(reqOpts.filter, undefined);
         assert.strictEqual(FakeMutation.parseColumnName.callCount, 0);
@@ -987,7 +987,7 @@ describe('Bigtable/Row', function() {
         assert.strictEqual(metadata, fakeMetadata);
         assert.strictEqual(response, apiResponse);
         done();
-      })
+      });
     });
   });
 

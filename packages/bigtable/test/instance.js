@@ -556,7 +556,7 @@ describe('Bigtable/Instance', function() {
       };
 
       instance.getClusters(options, function(err, clusters, nextQuery) {
-       var expectedQuery = extend({}, options, {
+        var expectedQuery = extend({}, options, {
           pageToken: response.nextPageToken
         });
 
