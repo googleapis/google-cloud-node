@@ -1398,7 +1398,7 @@ describe('GrpcService', function() {
         apiVersion: 'v2'
       };
 
-      grpcLoadOverride = function(pathOpts, type, grpOpts) {
+      grpcLoadOverride = function() {
         return fakeServices;
       };
 
@@ -1475,7 +1475,7 @@ describe('GrpcService', function() {
       grpcService.protos = {
         Service: {
           baseUrl: fakeBaseUrl,
-          Service: function(baseUrl, grpcCredentials) {
+          Service: function(baseUrl) {
             assert.strictEqual(baseUrl, fakeBaseUrl);
             return fakeService;
           }
