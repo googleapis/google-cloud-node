@@ -62,6 +62,13 @@ describe('Bigtable/Mutation', function() {
   });
 
   describe('convertToBytes', function() {
+    it('should not re-wrap buffers', function() {
+      var buf = new Buffer('hello');
+      var encoded = Mutation.convertToBytes(buf);
+
+      assert.strictEqual(buf, encoded);
+    });
+
     it('should pack numbers into int64 values', function() {
       var num = 10;
       var encoded = Mutation.convertToBytes(num);
@@ -174,6 +181,29 @@ describe('Bigtable/Mutation', function() {
 
       assert.strictEqual(convertCalls.length, 2);
       assert.deepEqual(convertCalls, ['gwashington', 1]);
+    });
+
+    it('should accept buffers', function() {
+      var val = new Buffer('hello');
+      var fakeMutation = {
+        follows: {
+          gwashington: val
+        }
+      };
+
+      var cells = Mutation.encodeSetCell(fakeMutation);
+
+      assert.deepEqual(cells, [{
+        setCell: {
+          familyName: 'follows',
+          columnQualifier: 'gwashington',
+          timestampMicros: -1,
+          value: val
+        }
+      }]);
+
+      assert.strictEqual(convertCalls.length, 2);
+      assert.deepEqual(convertCalls, ['gwashington', val]);
     });
   });
 
