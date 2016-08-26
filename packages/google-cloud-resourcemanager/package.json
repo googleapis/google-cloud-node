@@ -2,7 +2,7 @@
   "name": "@google-cloud/resource",
   "version": "0.1.1",
   "author": "Google Inc.",
-  "description": "Google Cloud Resource Client Library for Node.js",
+  "description": "Google Cloud Resource Manager Client Library for Node.js",
   "contributors": [
     {
       "name": "Burcu Dogan",
