@@ -30,7 +30,6 @@ var is = require('is');
 var prop = require('propprop');
 var request = require('request');
 var rgbHex = require('rgb-hex');
-var Storage = require('@google-cloud/storage');
 var util = require('util');
 
 var PKG = require('../package.json');
@@ -1275,7 +1274,8 @@ Vision.findImages_ = function(images, callback) {
       });
       return;
     }
-    if (image instanceof Storage.File) {
+
+    if (common.util.isCustomType(image, 'storage/file')) {
       callback(null, {
         source: {
           gcsImageUri: format('gs://{bucketName}/{fileName}', {
