@@ -1385,20 +1385,36 @@ describe('common/util', function() {
     var pubsub = new PubSub();
     var subscription = new Subscription();
 
-    it('should match a Service type by constructor names', function() {
-      assert(util.isCustomType(pubsub, 'pubsub'));
+    describe('Service objects', function() {
+      it('should match by constructor name', function() {
+        assert(util.isCustomType(pubsub, 'pubsub'));
+      });
+
+      it('should support any casing', function() {
+        assert(util.isCustomType(pubsub, 'PubSub'));
+      });
+
+      it('should not match if the wrong Service', function() {
+        assert(!util.isCustomType(subscription, 'BigQuery'));
+      });
     });
 
-    it('should match a ServiceObject type by constructor names', function() {
-      assert(util.isCustomType(subscription, 'pubsub'));
-      assert(util.isCustomType(subscription, 'pubsub/subscription'));
+    describe('ServiceObject objects', function() {
+      it('should match by constructor names', function() {
+        assert(util.isCustomType(subscription, 'pubsub'));
+        assert(util.isCustomType(subscription, 'pubsub/subscription'));
 
-      assert(util.isCustomType(subscription, 'middlelayer'));
-      assert(util.isCustomType(subscription, 'middlelayer/subscription'));
-    });
+        assert(util.isCustomType(subscription, 'middlelayer'));
+        assert(util.isCustomType(subscription, 'middlelayer/subscription'));
+      });
 
-    it('should support any casing', function() {
-      assert(util.isCustomType(subscription, 'PubSub/Subscription'));
+      it('should support any casing', function() {
+        assert(util.isCustomType(subscription, 'PubSub/Subscription'));
+      });
+
+      it('should not match if the wrong ServiceObject', function() {
+        assert(!util.isCustomType(subscription, 'pubsub/topic'));
+      });
     });
   });
 });
