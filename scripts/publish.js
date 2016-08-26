@@ -35,6 +35,7 @@ var tagName = [moduleName, newVersion].join('-');
 
 if (moduleName === 'google-cloud') {
   tagName = ('v' + newVersion);
+  cp(path.join(__dirname, '../README.md'), cwd);
 }
 
 // Increment the version

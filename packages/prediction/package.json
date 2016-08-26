@@ -2,7 +2,7 @@
   "name": "@google-cloud/prediction",
   "version": "0.1.1",
   "author": "Google Inc.",
-  "description": "Google Cloud Prediction Client Library for Node.js",
+  "description": "Google Prediction API Client Library for Node.js",
   "contributors": [
     {
       "name": "Burcu Dogan",
