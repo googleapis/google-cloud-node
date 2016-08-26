@@ -21,8 +21,8 @@
 'use strict';
 
 var arrify = require('arrify');
+var common = require('@google-cloud/common');
 var extend = require('extend');
-var File = require('@google-cloud/storage').File;
 var format = require('string-format-obj');
 var is = require('is');
 var prop = require('propprop');
@@ -76,7 +76,7 @@ function Document(language, config) {
     this.reqOpts.document.type = 'PLAIN_TEXT';
   }
 
-  if (content instanceof File) {
+  if (common.util.isCustomType(content, 'storage/file')) {
     this.reqOpts.document.gcsContentUri = format('gs://{bucket}/{file}', {
       bucket: encodeURIComponent(content.bucket.id),
       file: encodeURIComponent(content.id)
