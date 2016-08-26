@@ -27,7 +27,7 @@ var retryRequest = require('retry-request');
 var sinon = require('sinon').sandbox.create();
 var through = require('through2');
 
-var util = require('../src/index.js').util;
+var util = require('../src/util.js');
 
 function FakeService() {
   this.calledWith_ = arguments;

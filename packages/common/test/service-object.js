@@ -19,8 +19,8 @@
 var assert = require('assert');
 var extend = require('extend');
 
-var ServiceObject = require('../src/index.js').ServiceObject;
-var util = require('../src/index.js').util;
+var ServiceObject = require('../src/service-object.js');
+var util = require('../src/util.js');
 
 describe('ServiceObject', function() {
   var serviceObject;

@@ -20,7 +20,7 @@ var assert = require('assert');
 var extend = require('extend');
 var proxyquire = require('proxyquire').noPreserveCache();
 
-var util = require('../src/index.js').util;
+var util = require('../src/util.js');
 
 var makeAuthenticatedRequestFactoryCache = util.makeAuthenticatedRequestFactory;
 var makeAuthenticatedRequestFactoryOverride;

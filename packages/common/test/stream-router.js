@@ -23,8 +23,8 @@ var stream = require('stream');
 var through = require('through2');
 var uuid = require('node-uuid');
 
-var streamRouter = require('../src/index.js').streamRouter;
-var util = require('../src/index.js').util;
+var streamRouter = require('../src/stream-router.js');
+var util = require('../src/util.js');
 
 var overrides = {};
 
