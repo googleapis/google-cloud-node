@@ -13,18 +13,15 @@ Learning API.
 
 * [Setup](#setup)
 * [Samples](#samples)
-  * [analyze.js](#analyze)
+  * [Analyze](#analyze)
 
 ## Setup
 
-1. Please follow the [Set Up Your Project][quickstart] steps in the Quickstart
-doc to create a project and enable the Cloud Natural Language API.
 1. Read [Prerequisites][prereq] and [How to run a sample][run] first.
 1. Install dependencies:
 
         npm install
 
-[quickstart]: https://cloud.google.com/natural-language/docs/getting-started#set_up_your_project
 [prereq]: ../README.md#prerequisities
 [run]: ../README.md#how-to-run-a-sample
 
@@ -32,54 +29,34 @@ doc to create a project and enable the Cloud Natural Language API.
 
 ### Analyze
 
-View the [source code][analyze_code].
+View the [documentation][analyze_docs] or the [source code][analyze_code].
 
-__Run the sample:__
+__Usage:__ `node analyze --help`
 
-Usage: `node analyze <sentiment|entities|syntax> <text>`
+```
+Commands:
+  sentiment <text>                       Detect the sentiment of a block of text.
+  sentimentFromFile <bucket> <filename>  Detect the sentiment of text in a GCS file.
+  entities <text>                        Detect the entities of a block of text.
+  entitiesFromFile <bucket> <filename>   Detect the entities of text in a GCS file.
+  syntax <text>                          Detect the syntax of a block of text.
+  syntaxFromFile <bucket> <filename>     Detect the syntax of a block of text.
 
-For example, the following command returns all entities found in the text:
+Options:
+  --language, -l  The language of the text.                                             [string]
+  --type, -t      Type of text.             [string] [choices: "text", "html"] [default: "text"]
+  --help          Show help                                                            [boolean]
 
-Example:
+Examples:
+  node analyze sentiment "President Obama is speaking at the White House."
+  node analyze sentimentFromFile my-bucket file.txt
+  node analyze entities "<p>President Obama is speaking at the White House.</p> -t html"
+  node analyze entitiesFromFile my-bucket file.txt
+  node analyze syntax "President Obama is speaking at the White House."
+  node analyze syntaxFromFile my-bucket es_file.txt -l es
 
-    node analyze entities "President Obama is speaking at the White House."
+For more information, see https://cloud.google.com/natural-language/docs
+```
 
-    {
-      "entities": [
-        {
-          "name": "Obama",
-          "type": "PERSON",
-          "metadata": {
-            "wikipedia_url": "http://en.wikipedia.org/wiki/Barack_Obama"
-          },
-          "salience": 0.84503114,
-          "mentions": [
-            {
-              "text": {
-                "content": "Obama",
-                "beginOffset": 10
-              }
-            }
-          ]
-        },
-        {
-          "name": "White House",
-          "type": "LOCATION",
-          "metadata": {
-            "wikipedia_url": "http://en.wikipedia.org/wiki/White_House"
-          },
-          "salience": 0.15496887,
-          "mentions": [
-            {
-              "text": {
-                "content": "White House",
-                "beginOffset": 35
-              }
-            }
-          ]
-        }
-      ],
-      "language": "en"
-    }
-
+[analyze_docs]: https://cloud.google.com/natural-language/docs
 [analyze_code]: analyze.js
