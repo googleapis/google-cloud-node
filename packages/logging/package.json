@@ -50,17 +50,17 @@
     "logging"
   ],
   "dependencies": {
+    "@google-cloud/common": "^0.3.0",
     "arrify": "^1.0.0",
     "extend": "^3.0.0",
-    "@google-cloud/bigquery": "^0.1.0",
-    "@google-cloud/common": "^0.1.0",
-    "@google-cloud/pubsub": "^0.1.0",
-    "@google-cloud/storage": "^0.1.0",
     "google-proto-files": "^0.2.1",
     "is": "^3.0.1",
     "string-format-obj": "^1.0.0"
   },
   "devDependencies": {
+    "@google-cloud/bigquery": "*",
+    "@google-cloud/pubsub": "*",
+    "@google-cloud/storage": "*",
     "async": "^1.4.2",
     "methmeth": "^1.0.0",
     "mocha": "^3.0.1",

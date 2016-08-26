@@ -52,8 +52,7 @@
     "language"
   ],
   "dependencies": {
-    "@google-cloud/common": "^0.1.0",
-    "@google-cloud/storage": "^0.1.0",
+    "@google-cloud/common": "^0.3.0",
     "arguejs": "^0.2.3",
     "arrify": "^1.0.1",
     "extend": "^3.0.0",
@@ -64,6 +63,7 @@
     "string-format-obj": "^1.0.0"
   },
   "devDependencies": {
+    "@google-cloud/storage": "*",
     "mocha": "^2.1.0",
     "node-uuid": "^1.4.7",
     "proxyquire": "^1.7.10",

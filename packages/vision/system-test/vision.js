@@ -17,18 +17,20 @@
 'use strict';
 
 var assert = require('assert');
+var async = require('async');
 var fs = require('fs');
 var http = require('http');
 var is = require('is');
 var multiline = require('multiline');
 var normalizeNewline = require('normalize-newline');
 var path = require('path');
+var Storage = require('@google-cloud/storage');
+var uuid = require('node-uuid');
 
 var env = require('../../../system-test/env.js');
 var Vision = require('../');
 
 describe('Vision', function() {
-  var vision;
   var IMAGES = {
     logo: path.join(__dirname, 'data/logo.jpg'),
     rushmore: path.join(__dirname, 'data/rushmore.jpg'),
@@ -36,8 +38,47 @@ describe('Vision', function() {
     malformed: path.join(__dirname, 'data/index.yaml')
   };
 
-  beforeEach(function() {
-    vision = new Vision(env);
+  var TESTS_PREFIX = 'gcloud-vision-test';
+
+  var storage = new Storage(env);
+  var vision = new Vision(env);
+
+  var bucket = storage.bucket(generateName());
+  var file = bucket.file('logo.jpg');
+
+  before(function(done) {
+    bucket.create(function(err) {
+      if (err) {
+        done(err);
+        return;
+      }
+
+      bucket.upload(IMAGES.logo, done);
+    });
+  });
+
+  after(function(done) {
+    storage.getBuckets({
+      prefix: TESTS_PREFIX
+    }, function(err, buckets) {
+      if (err) {
+        done(err);
+        return;
+      }
+
+      function deleteBucket(bucket, callback) {
+        bucket.deleteFiles(function(err) {
+          if (err) {
+            callback(err);
+            return;
+          }
+
+          bucket.delete(callback);
+        });
+      }
+
+      async.each(buckets, deleteBucket, done);
+    });
   });
 
   it('should detect from a URL', function(done) {
@@ -63,6 +104,19 @@ describe('Vision', function() {
 
         done();
       });
+    });
+  });
+
+  it('should detect from a File', function(done) {
+    vision.detect(file, ['logos'], function(err, logos) {
+      assert.ifError(err);
+
+      var expected = ['Google'];
+      expected.errors = [];
+
+      assert.deepEqual(logos, expected);
+
+      done();
     });
   });
 
@@ -525,4 +579,8 @@ describe('Vision', function() {
       });
     });
   });
+
+  function generateName() {
+    return TESTS_PREFIX + uuid.v1();
+  }
 });

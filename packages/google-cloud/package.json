@@ -93,7 +93,6 @@
     "vision"
   ],
   "dependencies": {
-    "extend": "^3.0.0",
     "@google-cloud/bigquery": "^0.1.1",
     "@google-cloud/bigtable": "^0.1.1",
     "@google-cloud/compute": "^0.1.1",
@@ -106,7 +105,8 @@
     "@google-cloud/resource": "^0.1.1",
     "@google-cloud/storage": "^0.1.1",
     "@google-cloud/translate": "^0.1.1",
-    "@google-cloud/vision": "^0.1.1"
+    "@google-cloud/vision": "^0.1.1",
+    "extend": "^3.0.0"
   },
   "devDependencies": {
     "proxyquire": "^1.7.10"

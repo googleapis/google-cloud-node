@@ -50,11 +50,10 @@
     "vision"
   ],
   "dependencies": {
+    "@google-cloud/common": "^0.3.0",
     "arrify": "^1.0.0",
     "async": "^1.4.2",
     "extend": "^3.0.0",
-    "@google-cloud/common": "^0.1.0",
-    "@google-cloud/storage": "^0.1.0",
     "is": "^3.0.1",
     "propprop": "^0.3.0",
     "request": "^2.70.0",
@@ -62,10 +61,11 @@
     "string-format-obj": "^1.0.0"
   },
   "devDependencies": {
-    "async": "^1.4.2",
+    "@google-cloud/storage": "*",
     "deep-strict-equal": "^0.1.0",
     "mocha": "^3.0.1",
     "multiline": "^1.0.2",
+    "node-uuid": "^1.4.7",
     "normalize-newline": "^2.0.0",
     "proxyquire": "^1.7.10",
     "tmp": "0.0.27"

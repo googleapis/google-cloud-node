@@ -21,14 +21,11 @@
 'use strict';
 
 var arrify = require('arrify');
-var BigQuery = require('@google-cloud/bigquery');
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var format = require('string-format-obj');
 var googleProtoFiles = require('google-proto-files');
 var is = require('is');
-var PubSub = require('@google-cloud/pubsub');
-var Storage = require('@google-cloud/storage');
 var util = require('util');
 
 /**
@@ -152,18 +149,18 @@ Logging.prototype.createSink = function(name, config, callback) {
     throw new Error('A sink configuration object must be provided.');
   }
 
-  if (config.destination instanceof Storage.Bucket) {
-    this.setAclForBucket_(name, config, callback);
-    return;
-  }
-
-  if (config.destination instanceof BigQuery.Dataset) {
+  if (common.util.isCustomType(config.destination, 'bigquery/dataset')) {
     this.setAclForDataset_(name, config, callback);
     return;
   }
 
-  if (config.destination instanceof PubSub.Topic) {
+  if (common.util.isCustomType(config.destination, 'pubsub/topic')) {
     this.setAclForTopic_(name, config, callback);
+    return;
+  }
+
+  if (common.util.isCustomType(config.destination, 'storage/bucket')) {
+    this.setAclForBucket_(name, config, callback);
     return;
   }
 

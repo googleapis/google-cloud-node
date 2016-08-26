@@ -41,21 +41,16 @@ var fakeStreamRouter = {
   }
 };
 
+var isCustomTypeOverride;
 var fakeUtil = extend({}, util, {
-  makeAuthenticatedRequestFactory: util.noop
+  isCustomType: function() {
+    if (isCustomTypeOverride) {
+      return isCustomTypeOverride.apply(null, arguments);
+    }
+
+    return false;
+  }
 });
-
-function FakeBucket() {
-  this.calledWith_ = arguments;
-}
-
-function FakeDataset() {
-  this.calledWith_ = arguments;
-}
-
-function FakeTopic() {
-  this.calledWith_ = arguments;
-}
 
 function FakeEntry() {
   this.calledWith_ = arguments;
@@ -90,15 +85,6 @@ describe('Logging', function() {
         streamRouter: fakeStreamRouter,
         util: fakeUtil
       },
-      '@google-cloud/bigquery': {
-        Dataset: FakeDataset
-      },
-      '@google-cloud/pubsub': {
-        Topic: FakeTopic
-      },
-      '@google-cloud/storage': {
-        Bucket: FakeBucket
-      },
       './log.js': FakeLog,
       './entry.js': FakeEntry,
       './sink.js': FakeSink
@@ -106,11 +92,12 @@ describe('Logging', function() {
   });
 
   beforeEach(function() {
+    isCustomTypeOverride = null;
+
     logging = new Logging({
       projectId: PROJECT_ID
     });
     logging.projectId = PROJECT_ID;
-
     logging.request = util.noop;
   });
 
@@ -179,27 +166,16 @@ describe('Logging', function() {
       }, /A sink configuration object must be provided\./);
     });
 
-    it('should set acls for a Bucket destination', function(done) {
-      var bucket = new FakeBucket();
-
-      var CONFIG = {
-        destination: bucket
-      };
-
-      logging.setAclForBucket_ = function(name, config, callback) {
-        assert.strictEqual(name, SINK_NAME);
-        assert.strictEqual(config, CONFIG);
-        callback(); // done()
-      };
-
-      logging.createSink(SINK_NAME, CONFIG, done);
-    });
-
     it('should set acls for a Dataset destination', function(done) {
-      var dataset = new FakeDataset();
+      var dataset = {};
 
       var CONFIG = {
         destination: dataset
+      };
+
+      isCustomTypeOverride = function(destination, type) {
+        assert.strictEqual(destination, dataset);
+        return type === 'bigquery/dataset';
       };
 
       logging.setAclForDataset_ = function(name, config, callback) {
@@ -212,10 +188,15 @@ describe('Logging', function() {
     });
 
     it('should set acls for a Topic destination', function(done) {
-      var topic = new FakeTopic();
+      var topic = {};
 
       var CONFIG = {
         destination: topic
+      };
+
+      isCustomTypeOverride = function(destination, type) {
+        assert.strictEqual(destination, topic);
+        return type === 'pubsub/topic';
       };
 
       logging.setAclForTopic_ = function(name, config, callback) {
@@ -226,6 +207,28 @@ describe('Logging', function() {
 
       logging.createSink(SINK_NAME, CONFIG, done);
     });
+
+    it('should set acls for a Bucket destination', function(done) {
+      var bucket = {};
+
+      var CONFIG = {
+        destination: bucket
+      };
+
+      isCustomTypeOverride = function(destination, type) {
+        assert.strictEqual(destination, bucket);
+        return type === 'storage/bucket';
+      };
+
+      logging.setAclForBucket_ = function(name, config, callback) {
+        assert.strictEqual(name, SINK_NAME);
+        assert.strictEqual(config, CONFIG);
+        callback(); // done()
+      };
+
+      logging.createSink(SINK_NAME, CONFIG, done);
+    });
+
 
     describe('API request', function() {
       it('should make the correct API request', function(done) {
@@ -574,11 +577,12 @@ describe('Logging', function() {
     var bucket;
 
     beforeEach(function() {
-      bucket = new FakeBucket();
-      bucket.name = 'bucket-name';
-      bucket.acl = {
-        owners: {
-          addGroup: util.noop
+      bucket = {
+        name: 'bucket-name',
+        acl: {
+          owners: {
+            addGroup: util.noop
+          }
         }
       };
 
@@ -653,10 +657,11 @@ describe('Logging', function() {
     var dataset;
 
     beforeEach(function() {
-      dataset = new FakeDataset();
-      dataset.id = 'dataset-id';
-      dataset.parent = {
-        projectId: PROJECT_ID
+      dataset = {
+        id: 'dataset-id',
+        parent: {
+          projectId: PROJECT_ID
+        }
       };
 
       CONFIG = {
@@ -773,11 +778,12 @@ describe('Logging', function() {
     var topic;
 
     beforeEach(function() {
-      topic = new FakeTopic();
-      topic.name = 'topic-name';
-      topic.iam = {
-        getPolicy: util.noop,
-        setPolicy: util.noop
+      topic = {
+        name: 'topic-name',
+        iam: {
+          getPolicy: util.noop,
+          setPolicy: util.noop
+        }
       };
 
       CONFIG = {
