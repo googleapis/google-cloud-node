@@ -100,8 +100,8 @@ var gcs = require('@google-cloud/storage')({
 ```
 
 
-[google-cloud]: https://github.com/GoogleCloudPlatform/gcloud-node
+[google-cloud]: https://github.com/GoogleCloudPlatform/google-cloud-node/
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 [dev-console]: https://console.developers.google.com/project
-[gcloud-storage-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/storage
+[gcloud-storage-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/storage
 [cloud-storage-docs]: https://cloud.google.com/storage/docs/overview

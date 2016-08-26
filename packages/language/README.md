@@ -116,8 +116,8 @@ var language = require('@google-cloud/language')({
 ```
 
 
-[google-cloud]: https://github.com/GoogleCloudPlatform/gcloud-node
+[google-cloud]: https://github.com/GoogleCloudPlatform/google-cloud-node/
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 [dev-console]: https://console.developers.google.com/project
-[gcloud-language-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/language
+[gcloud-language-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/language
 [cloud-language-docs]: https://cloud.google.com/natural-language/docs

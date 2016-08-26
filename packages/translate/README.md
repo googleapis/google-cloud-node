@@ -49,7 +49,7 @@ translate.getLanguages(function(err, languages) {
 ```
 
 
-[google-cloud]: https://github.com/GoogleCloudPlatform/gcloud-node
+[google-cloud]: https://github.com/GoogleCloudPlatform/google-cloud-node/
 [api-key-howto]: https://cloud.google.com/translate/v2/using_rest#auth
-[gcloud-translate-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/translate
+[gcloud-translate-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/translate
 [cloud-translate-docs]: https://cloud.google.com/translate/docs

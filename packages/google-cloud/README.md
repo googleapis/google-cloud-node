@@ -1,10 +1,10 @@
 # Google Cloud Node.js Client
 > Node.js idiomatic client for [Google Cloud Platform](https://cloud.google.com/) services.
 
-[![NPM Version](https://img.shields.io/npm/v/gcloud.svg)](https://www.npmjs.org/package/gcloud)
-[![Travis Build Status](https://travis-ci.org/GoogleCloudPlatform/gcloud-node.svg)](https://travis-ci.org/GoogleCloudPlatform/gcloud-node/)
-[![Dependency Status](https://dependencyci.com/github/GoogleCloudPlatform/gcloud-node/badge)](https://dependencyci.com/github/GoogleCloudPlatform/gcloud-node)
-[![Coverage Status](https://img.shields.io/coveralls/GoogleCloudPlatform/gcloud-node.svg)](https://coveralls.io/r/GoogleCloudPlatform/gcloud-node?branch=master)
+[![NPM Version](https://img.shields.io/npm/v/google-cloud-node.svg)](https://www.npmjs.org/package/google-cloud)
+[![Travis Build Status](https://travis-ci.org/GoogleCloudPlatform/google-cloud-node.svg)](https://travis-ci.org/GoogleCloudPlatform/google-cloud-node/)
+[![Dependency Status](https://dependencyci.com/github/GoogleCloudPlatform/google-cloud-node/badge)](https://dependencyci.com/github/GoogleCloudPlatform/google-cloud-node)
+[![Coverage Status](https://img.shields.io/coveralls/GoogleCloudPlatform/google-cloud-node.svg)](https://coveralls.io/r/GoogleCloudPlatform/google-cloud-node?branch=master)
 
 * [Homepage][gcloud-homepage]
 * [API Documentation][gcloud-docs]
@@ -29,8 +29,7 @@ If you need support for other Google APIs, check out the [Google Node.js API Cli
 
 ## Where did `gcloud-node` go?
 
-`gcloud-node` lives on under a new name, `google-cloud`. Your code will behave
-the same, simply change your dependency:
+`gcloud-node` lives on under a new name, `google-cloud`. Your code will behave the same, simply change your dependency:
 
 ```sh
 $ npm uninstall --save gcloud
@@ -51,8 +50,8 @@ $ npm install --save google-cloud
 ## Example Applications
 
 - [nodejs-getting-started][nodejs-getting-started] - A sample and [tutorial][nodejs-getting-started-tutorial] that demonstrates how to build a complete web application using Cloud Datastore, Cloud Storage, and Cloud Pub/Sub and deploy it to Google App Engine or Google Compute Engine.
-- [gcloud-node-todos][gcloud-todos] - A TodoMVC backend using gcloud-node and Datastore.
-- [gitnpm][gitnpm] - Easily lookup an npm package's GitHub repo using gcloud-node and Google App Engine.
+- [gcloud-node-todos][gcloud-todos] - A TodoMVC backend using google-cloud-node and Datastore.
+- [gitnpm][gitnpm] - Easily lookup an npm package's GitHub repo using google-cloud-node and Google App Engine.
 - [gcloud-kvstore][gcloud-kvstore] - Use Datastore as a simple key-value store.
 - [hya-wave][hya-wave] - Cloud-based web sample editor. Part of the [hya-io][hya-io] family of products.
 - [gstore-node][gstore-node] - Google Datastore Entities Modeling library.
@@ -1062,21 +1061,21 @@ See [CONTRIBUTING](CONTRIBUTING.md) for more information on how to get started.
 
 Apache 2.0 - See [COPYING](COPYING) for more information.
 
-[gcloud-homepage]: https://googlecloudplatform.github.io/gcloud-node/
-[gcloud-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs
-[gcloud-bigquery-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/bigquery
-[gcloud-bigtable-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/bigtable
-[gcloud-compute-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/compute
-[gcloud-datastore-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/datastore
-[gcloud-dns-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/dns
-[gcloud-language-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/language
-[gcloud-logging-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/logging
-[gcloud-prediction-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/prediction
-[gcloud-pubsub-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/pubsub
-[gcloud-resource-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/resource
-[gcloud-storage-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/storage
-[gcloud-translate-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/translate
-[gcloud-vision-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/vision
+[gcloud-homepage]: https://googlecloudplatform.github.io/google-cloud-node/
+[gcloud-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs
+[gcloud-bigquery-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/bigquery
+[gcloud-bigtable-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/bigtable
+[gcloud-compute-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/compute
+[gcloud-datastore-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/datastore
+[gcloud-dns-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/dns
+[gcloud-language-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/language
+[gcloud-logging-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/logging
+[gcloud-prediction-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/prediction
+[gcloud-pubsub-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub
+[gcloud-resource-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/resource
+[gcloud-storage-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/storage
+[gcloud-translate-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/translate
+[gcloud-vision-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/vision
 
 [nodejs-getting-started]: https://github.com/GoogleCloudPlatform/nodejs-getting-started
 [nodejs-getting-started-tutorial]: https://cloud.google.com/nodejs/getting-started/hello-world

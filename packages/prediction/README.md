@@ -96,8 +96,8 @@ var prediction = require('@google-cloud/prediction')({
 ```
 
 
-[google-cloud]: https://github.com/GoogleCloudPlatform/gcloud-node
+[google-cloud]: https://github.com/GoogleCloudPlatform/google-cloud-node/
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 [dev-console]: https://console.developers.google.com/project
-[gcloud-prediction-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/prediction
+[gcloud-prediction-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/prediction
 [cloud-prediction-docs]: https://cloud.google.com/prediction/docs

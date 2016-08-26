@@ -100,9 +100,9 @@ var datastore = require('@google-cloud/datastore')({
 ```
 
 
-[google-cloud]: https://github.com/GoogleCloudPlatform/gcloud-node
+[google-cloud]: https://github.com/GoogleCloudPlatform/google-cloud-node
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 [dev-console]: https://console.developers.google.com/project
-[gcloud-datastore-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/datastore
+[gcloud-datastore-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/datastore
 [cloud-datastore-docs]: https://cloud.google.com/datastore/docs
 [cloud-datastore-activation]: https://cloud.google.com/datastore/docs/activate

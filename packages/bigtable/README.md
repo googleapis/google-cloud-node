@@ -101,9 +101,9 @@ var bigtable = require('@google-cloud/bigtable')({
 ```
 
 
-[google-cloud]: https://github.com/GoogleCloudPlatform/gcloud-node
+[google-cloud]: https://github.com/GoogleCloudPlatform/google-cloud-node
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 [dev-console]: https://console.developers.google.com/project
-[gcloud-bigtable-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/bigtable
+[gcloud-bigtable-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/bigtable
 [cloud-bigtable-docs]: https://cloud.google.com/bigtable/docs
 [cloud-bigtable-cluster]: https://cloud.google.com/bigtable/docs/creating-compute-instance

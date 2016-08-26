@@ -98,8 +98,8 @@ var logging = require('@google-cloud/logging')({
 ```
 
 
-[google-cloud]: https://github.com/GoogleCloudPlatform/gcloud-node
+[google-cloud]: https://github.com/GoogleCloudPlatform/google-cloud-node/
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 [dev-console]: https://console.developers.google.com/project
-[gcloud-logging-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/logging
+[gcloud-logging-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/logging
 [cloud-logging-docs]: https://cloud.google.com/logging/docs

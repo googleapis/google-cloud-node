@@ -91,8 +91,8 @@ var pubsub = require('@google-cloud/pubsub')({
 ```
 
 
-[google-cloud]: https://github.com/GoogleCloudPlatform/gcloud-node
+[google-cloud]: https://github.com/GoogleCloudPlatform/google-cloud-node/
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 [dev-console]: https://console.developers.google.com/project
-[gcloud-pubsub-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/pubsub
+[gcloud-pubsub-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub
 [cloud-pubsub-docs]: https://cloud.google.com/pubsub/docs

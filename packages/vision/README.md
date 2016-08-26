@@ -158,8 +158,8 @@ var vision = require('@google-cloud/vision')({
 ```
 
 
-[google-cloud]: https://github.com/GoogleCloudPlatform/gcloud-node
+[google-cloud]: https://github.com/GoogleCloudPlatform/google-cloud-node/
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 [dev-console]: https://console.developers.google.com/project
-[gcloud-vision-docs]: https://googlecloudplatform.github.io/gcloud-node/#/docs/vision
+[gcloud-vision-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/vision
 [cloud-vision-docs]: https://cloud.google.com/vision/docs
