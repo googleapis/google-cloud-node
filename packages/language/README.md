@@ -84,7 +84,7 @@ var language = require('@google-cloud/language')({
   projectId: projectId
 });
 
-// ...you're good to go! See the next section to get started using the API.
+// ...you're good to go!
 ```
 
 ### Elsewhere
@@ -112,7 +112,7 @@ var language = require('@google-cloud/language')({
   credentials: require('./path/to/keyfile.json')
 });
 
-// ...you're good to go! See the next section to get started using the APIs.
+// ...you're good to go!
 ```
 
 

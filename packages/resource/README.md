@@ -50,7 +50,7 @@ var resource = require('@google-cloud/resource')({
   projectId: projectId
 });
 
-// ...you're good to go! See the next section to get started using the API.
+// ...you're good to go!
 ```
 
 ### Elsewhere
@@ -80,7 +80,7 @@ var resource = require('@google-cloud/resource')({
   credentials: require('./path/to/keyfile.json')
 });
 
-// ...you're good to go! See the next section to get started using the APIs.
+// ...you're good to go!
 ```
 
 
