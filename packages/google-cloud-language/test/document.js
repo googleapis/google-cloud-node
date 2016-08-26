@@ -22,7 +22,16 @@ var prop = require('propprop');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
-function FakeFile() {}
+var isCustomTypeOverride;
+var fakeUtil = extend(true, {}, util, {
+  isCustomType: function() {
+    if (isCustomTypeOverride) {
+      return isCustomTypeOverride.apply(null, arguments);
+    }
+
+    return false;
+  }
+});
 
 describe('Document', function() {
   var DocumentCache;
@@ -36,8 +45,8 @@ describe('Document', function() {
 
   before(function() {
     Document = proxyquire('../src/document.js', {
-      '@google-cloud/storage': {
-        File: FakeFile
+      '@google-cloud/common': {
+        util: fakeUtil
       }
     });
 
@@ -45,6 +54,8 @@ describe('Document', function() {
   });
 
   beforeEach(function() {
+    isCustomTypeOverride = null;
+
     for (var property in DocumentCache) {
       if (DocumentCache.hasOwnProperty(property)) {
         Document[property] = DocumentCache[property];
@@ -123,11 +134,19 @@ describe('Document', function() {
     });
 
     it('should set the GCS content URI from a File', function() {
-      var file = new FakeFile();
+      var file = {
+        // Leave spaces in to check that it is URI-encoded:
+        id: 'file name',
+        bucket: {
+          id: 'bucket name'
+        }
+      };
 
-      // Leave spaces in to check that it is URI-encoded:
-      file.bucket = { id: 'bucket id' };
-      file.id = 'file name';
+      isCustomTypeOverride = function(content, type) {
+        assert.strictEqual(content, file);
+        assert.strictEqual(type, 'storage/file');
+        return true;
+      };
 
       var document = new Document(LANGUAGE, {
         content: file
