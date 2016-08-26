@@ -91,6 +91,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
   * Google Cloud Logging API
   * Google Cloud Natural Language API
   * Google Cloud Pub/Sub API
+  * Google Cloud Resource Manager API
   * Google Cloud Storage
   * Google Cloud Storage JSON API
   * Google Cloud Vision API
