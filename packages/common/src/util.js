@@ -599,3 +599,29 @@ function createLimiter(makeRequestFn, options) {
 }
 
 util.createLimiter = createLimiter;
+
+function isCustomType(unknown, module) {
+  function getConstructorName(obj) {
+    return obj.constructor && obj.constructor.name.toLowerCase();
+  }
+
+  var moduleNameParts = module.split('/');
+
+  var parentModuleName = moduleNameParts[0] && moduleNameParts[0].toLowerCase();
+  var subModuleName = moduleNameParts[1] && moduleNameParts[1].toLowerCase();
+
+  if (subModuleName && getConstructorName(unknown) !== subModuleName) {
+    return false;
+  }
+
+  var walkingModule = unknown;
+  do {
+    if (getConstructorName(walkingModule) === parentModuleName) {
+      return true;
+    }
+  } while ((walkingModule = walkingModule.parent));
+
+  return false;
+}
+
+util.isCustomType = isCustomType;
