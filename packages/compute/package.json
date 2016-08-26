@@ -50,12 +50,12 @@
     "compute engine"
   ],
   "dependencies": {
+    "@google-cloud/common": "^0.1.0",
     "arrify": "^1.0.0",
     "async": "^1.4.2",
     "create-error-class": "^2.0.1",
     "extend": "^3.0.0",
     "gce-images": "^0.3.0",
-    "@google-cloud/common": "^0.1.0",
     "is": "^3.0.1",
     "modelo": "^4.2.0",
     "string-format-obj": "^1.0.0"
