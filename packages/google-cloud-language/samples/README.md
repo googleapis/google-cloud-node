@@ -35,24 +35,24 @@ __Usage:__ `node analyze --help`
 
 ```
 Commands:
-  sentiment <text>                       Detect the sentiment of a block of text.
+  sentimentFromString <text>             Detect the sentiment of a block of text.
   sentimentFromFile <bucket> <filename>  Detect the sentiment of text in a GCS file.
-  entities <text>                        Detect the entities of a block of text.
+  entitiesFromString <text>              Detect the entities of a block of text.
   entitiesFromFile <bucket> <filename>   Detect the entities of text in a GCS file.
-  syntax <text>                          Detect the syntax of a block of text.
-  syntaxFromFile <bucket> <filename>     Detect the syntax of a block of text.
+  syntaxFromString <text>                Detect the syntax of a block of text.
+  syntaxFromFile <bucket> <filename>     Detect the syntax of text in a GCS file.
 
 Options:
   --language, -l  The language of the text.                                             [string]
-  --type, -t      Type of text.             [string] [choices: "text", "html"] [default: "text"]
+  --type, -t      Type of text              [string] [choices: "text", "html"] [default: "text"]
   --help          Show help                                                            [boolean]
 
 Examples:
-  node analyze sentiment "President Obama is speaking at the White House."
+  node analyze sentimentFromString "President Obama is speaking at the White House."
   node analyze sentimentFromFile my-bucket file.txt
-  node analyze entities "<p>President Obama is speaking at the White House.</p> -t html"
+  node analyze entitiesFromString "<p>President Obama is speaking at the White House.</p>" -t html
   node analyze entitiesFromFile my-bucket file.txt
-  node analyze syntax "President Obama is speaking at the White House."
+  node analyze syntaxFromString "President Obama is speaking at the White House."
   node analyze syntaxFromFile my-bucket es_file.txt -l es
 
 For more information, see https://cloud.google.com/natural-language/docs
