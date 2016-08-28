@@ -157,7 +157,12 @@ describe('logging:entries', function () {
 
       sinon.stub(program, 'listLogEntries');
       program.main(['list', '-f', '"' + filter + '"', '-l', 1, '-s', 'field']);
-      assert(program.listLogEntries.calledOnce);
+      assert.equal(program.listLogEntries.calledOnce, true);
+      assert.deepEqual(program.listLogEntries.firstCall.args.slice(0, -1), [{
+        filter: '"' + filter + '"',
+        limit: 1,
+        sort: 'field'
+      }]);
     });
 
     it('should call writeLogEntry', function () {
@@ -165,7 +170,12 @@ describe('logging:entries', function () {
 
       sinon.stub(program, 'writeLogEntry');
       program.main(['write', logName, '{}', '{}']);
-      assert.equal(program.writeLogEntry.callCount, 1);
+      assert.equal(program.writeLogEntry.calledOnce, true);
+      assert.deepEqual(program.writeLogEntry.firstCall.args.slice(0, -1), [{
+        name: logName,
+        resource: {},
+        entry: {}
+      }]);
     });
 
     it('should validate args and call writeLogEntry', function () {
@@ -174,8 +184,9 @@ describe('logging:entries', function () {
       sinon.stub(program, 'writeLogEntry');
       program.main(['write', logName, '"{"invalid', '"{"invalid']);
       assert.equal(program.writeLogEntry.called, false, 'writeLogEntry should not have been called');
-      assert(console.error.calledWith('"resource" must be a valid JSON string!'));
-      assert(console.error.calledWith('"entry" must be a valid JSON string!'));
+      assert.equal(console.error.calledTwice, true);
+      assert.deepEqual(console.error.firstCall.args, ['"resource" must be a valid JSON string!']);
+      assert.deepEqual(console.error.secondCall.args, ['"entry" must be a valid JSON string!']);
     });
 
     it('should call deleteLog', function () {
@@ -183,7 +194,8 @@ describe('logging:entries', function () {
 
       sinon.stub(program, 'deleteLog');
       program.main(['delete', logName]);
-      assert(program.deleteLog.calledOnce);
+      assert.equal(program.deleteLog.calledOnce, true);
+      assert.deepEqual(program.deleteLog.firstCall.args.slice(0, -1), [logName]);
     });
   });
 });

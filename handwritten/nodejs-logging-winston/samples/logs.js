@@ -116,6 +116,7 @@ function deleteLog (name, callback) {
 
 // The command-line program
 var cli = require('yargs');
+var utils = require('../utils');
 
 var program = module.exports = {
   listLogEntries: listLogEntries,
@@ -129,7 +130,7 @@ var program = module.exports = {
 
 cli
   .demand(1)
-  .command('list', 'List log entries in the authenticated project.', {
+  .command('list', 'List log entries.', {
     filter: {
       alias: 'f',
       type: 'string',
@@ -149,7 +150,7 @@ cli
       description: 'Sort results.'
     }
   }, function (options) {
-    program.listLogEntries(options, console.log);
+    program.listLogEntries(utils.pick(options, ['filter', 'limit', 'sort']), utils.makeHandler());
   })
   .command('write <name> <resource> <entry>', 'Write a log entry.', {}, function (options) {
     try {
@@ -162,12 +163,12 @@ cli
     } catch (err) {
       return console.error('"entry" must be a valid JSON string!');
     }
-    program.writeLogEntry(options, console.log);
+    program.writeLogEntry(utils.pick(options, ['name', 'resource', 'entry']), utils.makeHandler());
   })
   .command('delete <name>', 'Delete a Log.', {}, function (options) {
-    program.deleteLog(options.name, console.log);
+    program.deleteLog(options.name, utils.makeHandler(false));
   })
-  .example('node $0 list', 'List all log entires.')
+  .example('node $0 list', 'List all log entries.')
   .example('node $0 list -f "severity = ERROR" -s "timestamp" -l 2', 'List up to 2 error entries, sorted by timestamp ascending.')
   .example('node $0 write my-log \'{"type":"gae_app","labels":{"module_id":"default"}}\' \'{"message":"Hello World!"}\'', 'Write a log entry.')
   .example('node $0 delete my-log', 'Delete "my-log".')

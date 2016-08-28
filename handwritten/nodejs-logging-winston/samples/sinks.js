@@ -150,6 +150,7 @@ function deleteSink (name, callback) {
 
 // The command-line program
 var cli = require('yargs');
+var utils = require('../utils');
 
 var program = module.exports = {
   createSink: createSink,
@@ -181,13 +182,13 @@ cli
       description: 'The type of destination.'
     }
   }, function (options) {
-    program.createSink(options, console.log);
+    program.createSink(utils.pick(options, ['name', 'destination', 'filter', 'type']), utils.makeHandler(false));
   })
   .command('get <name>', 'Get the metadata for the specified sink.', {}, function (options) {
-    program.getSinkMetadata(options.name, console.log);
+    program.getSinkMetadata(options.name, utils.makeHandler());
   })
   .command('list', 'List all sinks in the authenticated project.', {}, function () {
-    program.listSinks(console.log);
+    program.listSinks(utils.makeHandler(true, 'id'));
   })
   .command('update <name> <metadata>', 'Update the metadata for the specified sink.', {}, function (options) {
     try {
@@ -195,10 +196,10 @@ cli
     } catch (err) {
       return console.error('"metadata" must be a valid JSON string!');
     }
-    program.updateSink(options, console.log);
+    program.updateSink(utils.pick(options, ['name', 'metadata']), utils.makeHandler(false));
   })
   .command('delete <name>', 'Delete the specified sink.', {}, function (options) {
-    program.deleteSink(options.name, console.log);
+    program.deleteSink(options.name, utils.makeHandler(false));
   })
   .example('node $0 create my-sink my-bucket --type bucket', 'Create a new sink named "my-sink" that exports logs to a Cloud Storage bucket.')
   .example('node $0 create my-sink my-dataset --type dataset', 'Create a new sink named "my-sink" that exports logs to a BigQuery dataset.')

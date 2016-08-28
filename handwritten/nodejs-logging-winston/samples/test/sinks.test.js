@@ -298,7 +298,13 @@ describe('logging:sinks', function () {
 
       sinon.stub(program, 'createSink');
       program.main(['create', sinkName, bucketName, '-t', 'bucket']);
-      assert(program.createSink.calledOnce);
+      assert.equal(program.createSink.calledOnce, true);
+      assert.deepEqual(program.createSink.firstCall.args.slice(0, -1), [{
+        name: sinkName,
+        destination: bucketName,
+        type: 'bucket',
+        filter: undefined
+      }]);
     });
 
     it('should call getSinkMetadata', function () {
@@ -306,7 +312,8 @@ describe('logging:sinks', function () {
 
       sinon.stub(program, 'getSinkMetadata');
       program.main(['get', sinkName]);
-      assert(program.getSinkMetadata.calledOnce);
+      assert.equal(program.getSinkMetadata.calledOnce, true);
+      assert.deepEqual(program.getSinkMetadata.firstCall.args.slice(0, -1), [sinkName]);
     });
 
     it('should call listSinks', function () {
@@ -314,15 +321,20 @@ describe('logging:sinks', function () {
 
       sinon.stub(program, 'listSinks');
       program.main(['list']);
-      assert(program.listSinks.calledOnce);
+      assert.equal(program.listSinks.calledOnce, true);
+      assert.deepEqual(program.listSinks.firstCall.args.slice(0, -1), []);
     });
 
     it('should call updateSink', function () {
       var program = getSample().program;
 
       sinon.stub(program, 'updateSink');
-      program.main(['update', sinkName, '"{}"']);
-      assert(program.updateSink.calledOnce);
+      program.main(['update', sinkName, '{}']);
+      assert.equal(program.updateSink.calledOnce, true);
+      assert.deepEqual(program.updateSink.firstCall.args.slice(0, -1), [{
+        name: sinkName,
+        metadata: {}
+      }]);
     });
 
     it('should validate metadata and call updateSink', function () {
@@ -330,8 +342,9 @@ describe('logging:sinks', function () {
 
       sinon.stub(program, 'updateSink');
       program.main(['update', sinkName, '"{"invalid']);
-      assert.equal(program.updateSink.called, false, 'updateSink should not have been called');
-      assert(console.error.calledWith('"metadata" must be a valid JSON string!'));
+      assert.equal(program.updateSink.called, false);
+      assert.equal(console.error.calledOnce, true);
+      assert.deepEqual(console.error.firstCall.args, ['"metadata" must be a valid JSON string!']);
     });
 
     it('should call deleteSink', function () {
@@ -339,7 +352,8 @@ describe('logging:sinks', function () {
 
       sinon.stub(program, 'deleteSink');
       program.main(['delete', sinkName]);
-      assert(program.deleteSink.calledOnce);
+      assert.equal(program.deleteSink.calledOnce, true);
+      assert.deepEqual(program.deleteSink.firstCall.args.slice(0, -1), [sinkName]);
     });
   });
 });
