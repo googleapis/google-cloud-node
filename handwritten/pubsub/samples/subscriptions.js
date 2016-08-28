@@ -157,50 +157,44 @@ function pullMessages (subscriptionName, callback) {
 }
 // [END pull_messages]
 
-// [START usage]
-function printUsage () {
-  console.log('Usage: node subscriptions COMMAND [ARGS...]');
-  console.log('\nCommands:\n');
-  console.log('\tcreate TOPIC_NAME SUBSCRIPTION_NAME');
-  console.log('\tdelete SUBSCRIPTION_NAME');
-  console.log('\tpull SUBSCRIPTION_NAME');
-  console.log('\tlist [TOPIC_NAME]');
-  console.log('\nExamples:\n');
-  console.log('\tnode subscriptions create my-topic my-subscription');
-  console.log('\tnode subscriptions delete my-subscription');
-  console.log('\tnode subscriptions pull my-subscription');
-  console.log('\tnode subscriptions list');
-  console.log('\tnode subscriptions list my-topic');
-}
-// [END usage]
-
 // The command-line program
-var program = {
-  create: createSubscription,
-  delete: deleteSubscription,
-  pull: pullMessages,
-  list: listSubscriptions,
-  printUsage: printUsage,
+var cli = require('yargs');
+var makeHandler = require('../utils').makeHandler;
 
-  // Executed when this program is run from the command-line
-  main: function (args, cb) {
-    var command = args.shift();
-    if (command === 'create') {
-      this.create(args[0], args[1], cb);
-    } else if (command === 'delete') {
-      this.delete(args[0], cb);
-    } else if (command === 'pull') {
-      this.pull(args[0], cb);
-    } else if (command === 'list') {
-      this.list(args[0], cb);
-    } else {
-      this.printUsage();
-    }
+var program = module.exports = {
+  createSubscription: createSubscription,
+  deleteSubscription: deleteSubscription,
+  pullMessages: pullMessages,
+  listSubscriptions: listSubscriptions,
+  main: function (args) {
+    // Run the command-line program
+    cli.help().strict().parse(args).argv;
   }
 };
 
-if (module === require.main) {
-  program.main(process.argv.slice(2), console.log);
-}
+cli
+  .demand(1)
+  .command('create <topic> <name>', 'Create a new subscription.', {}, function (options) {
+    program.createSubscription(options.topic, options.name, makeHandler(true, 'id'));
+  })
+  .command('list [topic]', 'List subscriptions.', {}, function (options) {
+    program.listSubscriptions(options.topic, makeHandler(true, 'id'));
+  })
+  .command('pull <subscription>', 'Pull messages from the specified subscription.', {}, function (options) {
+    program.pullMessages(options.subscription, makeHandler(false));
+  })
+  .command('delete <subscription>', 'Delete the specified subscription.', {}, function (options) {
+    program.deleteSubscription(options.subscription, makeHandler(false));
+  })
+  .example('node $0 create my-topic my-subscription', 'Create a new subscription.')
+  .example('node $0 delete my-subscription', 'Delete a subscription.')
+  .example('node $0 pull my-subscription', 'Pull messages from "my-subscription".')
+  .example('node $0 list', 'List all subscriptions.')
+  .example('node $0 list my-topic', 'List subscriptions to topic "my-topic".')
+  .wrap(100)
+  .recommendCommands()
+  .epilogue('For more information, see https://cloud.google.com/pubsub/docs');
 
-module.exports = program;
+if (module === require.main) {
+  program.main(process.argv.slice(2));
+}

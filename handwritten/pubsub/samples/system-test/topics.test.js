@@ -20,9 +20,9 @@ var projectId = process.env.GCLOUD_PROJECT;
 var name = 'projects/' + projectId + '/topics/' + topicName;
 
 describe('pubsub:topics', function () {
-  describe('create', function () {
+  describe('createTopic', function () {
     it('should create a topic', function (done) {
-      program.create(topicName, function (err, topic) {
+      program.createTopic(topicName, function (err, topic) {
         assert.ifError(err);
         assert.equal(topic.name, name);
         assert(console.log.calledWith('Created topic: %s', topicName));
@@ -31,9 +31,9 @@ describe('pubsub:topics', function () {
     });
   });
 
-  describe('list', function () {
+  describe('listTopics', function () {
     it('should list topics', function (done) {
-      program.list(function (err, topics) {
+      program.listTopics(function (err, topics) {
         assert.ifError(err);
         assert(Array.isArray(topics));
         assert(topics.length > 0);
@@ -47,10 +47,10 @@ describe('pubsub:topics', function () {
     });
   });
 
-  describe('publish', function () {
+  describe('publishMessage', function () {
     it('should publish a message', function (done) {
       var json = '{"data":"Hello World!"}';
-      program.publish(topicName, json, function (err, messageIds) {
+      program.publishMessage(topicName, json, function (err, messageIds) {
         assert.ifError(err);
         assert(Array.isArray(messageIds));
         assert(messageIds.length > 0);
@@ -60,9 +60,9 @@ describe('pubsub:topics', function () {
     });
   });
 
-  describe('delete', function () {
+  describe('deleteTopic', function () {
     it('should delete a topic', function (done) {
-      program.delete(topicName, function (err) {
+      program.deleteTopic(topicName, function (err) {
         assert.ifError(err);
         assert(console.log.calledWith('Deleted topic: %s', topicName));
         done();

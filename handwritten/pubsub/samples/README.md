@@ -34,21 +34,23 @@ View the [documentation][topics_docs] or the [source code][topics_code].
 __Usage:__ `node topics --help`
 
 ```
-Usage: node topics COMMAND [ARGS...]
-
 Commands:
+  create <name>              Create a new topic.
+  list                       List topics.
+  publish <topic> <message>  Publish a message to the specified topic.
+  delete <name>              Delete the specified topic.
 
-  create TOPIC_NAME
-  delete TOPIC_NAME
-  publish TOPIC_NAME MESSAGE
-  list
+Options:
+  --help  Show help                                                    [boolean]
 
 Examples:
+  node topics create my-topic               Create a new topic named "my-topic".
+  node topics list                          List topics.
+  node topics publish my-topic              Publish a message to "my-topic".
+  '{"data":"Hello world!"}'
+  node topics delete my-topic               Delete a topic named "my-topic".
 
-  node topics create my-topic
-  node topics list
-  node topics publish my-topic '{"data":"Hello world!"}'
-  node topics delete my-topic
+For more information, see https://cloud.google.com/pubsub/docs
 ```
 
 [topics_docs]: https://cloud.google.com/pubsub/publisher
@@ -61,22 +63,23 @@ View the [documentation][subscriptions_docs] or the [source code][subscriptions_
 __Usage:__ `node subscriptions --help`
 
 ```
-Usage: node subscriptions COMMAND [ARGS...]
-
 Commands:
+  create <topic> <name>  Create a new subscription.
+  list [topic]           List subscriptions.
+  pull <subscription>    Pull messages from the specified subscription.
+  delete <subscription>  Delete the specified subscription.
 
-  create TOPIC_NAME SUBSCRIPTION_NAME
-  delete SUBSCRIPTION_NAME
-  pull SUBSCRIPTION_NAME
-  list [TOPIC_NAME]
+Options:
+  --help  Show help                                                                        [boolean]
 
 Examples:
+  node subscriptions create my-topic my-subscription  Create a new subscription.
+  node subscriptions delete my-subscription           Delete a subscription.
+  node subscriptions pull my-subscription             Pull messages from "my-subscription".
+  node subscriptions list                             List all subscriptions.
+  node subscriptions list my-topic                    List subscriptions to topic "my-topic".
 
-  node subscriptions create my-topic my-subscription
-  node subscriptions delete my-subscription
-  node subscriptions pull my-subscription
-  node subscriptions list
-  node subscriptions list my-topic
+For more information, see https://cloud.google.com/pubsub/docs
 ```
 
 [subscriptions_docs]: https://cloud.google.com/pubsub/subscriber

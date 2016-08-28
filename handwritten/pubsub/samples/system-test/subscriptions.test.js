@@ -33,9 +33,9 @@ describe('pubsub:subscriptions', function () {
     pubsub.topic(topicName).delete(done);
   });
 
-  describe('create', function () {
+  describe('createSubscription', function () {
     it('should create a subscription', function (done) {
-      program.create(topicName, subscriptionName, function (err, subscription) {
+      program.createSubscription(topicName, subscriptionName, function (err, subscription) {
         assert.ifError(err);
         assert.equal(subscription.name, name);
         assert(console.log.calledWith('Created subscription %s to topic %s', subscriptionName, topicName));
@@ -45,9 +45,9 @@ describe('pubsub:subscriptions', function () {
     });
   });
 
-  describe('list', function () {
+  describe('listSubscriptions', function () {
     it('should list subscriptions', function (done) {
-      program.list(topicName, function (err, subscriptions) {
+      program.listSubscriptions(topicName, function (err, subscriptions) {
         assert.ifError(err);
         assert(Array.isArray(subscriptions));
         assert(subscriptions.length > 0);
@@ -57,7 +57,7 @@ describe('pubsub:subscriptions', function () {
         assert.equal(recentlyCreatedSubscriptions.length, 1, 'list has newly created subscription');
         assert(console.log.calledWith('Found %d subscriptions!', subscriptions.length));
 
-        program.list(undefined, function (err, allSubscriptions) {
+        program.listSubscriptions(undefined, function (err, allSubscriptions) {
           assert.ifError(err);
           assert(Array.isArray(allSubscriptions));
           assert(allSubscriptions.length > 0);
@@ -72,7 +72,7 @@ describe('pubsub:subscriptions', function () {
     });
   });
 
-  describe('pull', function () {
+  describe('pullMessages', function () {
     var expected = 'Hello World!';
 
     before(function (done) {
@@ -80,7 +80,7 @@ describe('pubsub:subscriptions', function () {
     });
 
     it('should pull messages', function (done) {
-      program.pull(subscriptionName, function (err, messages) {
+      program.pullMessages(subscriptionName, function (err, messages) {
         assert.ifError(err);
         assert(Array.isArray(messages));
         assert(messages.length > 0);
@@ -92,9 +92,9 @@ describe('pubsub:subscriptions', function () {
     });
   });
 
-  describe('delete', function () {
+  describe('deleteSubscription', function () {
     it('should delete a subscription', function (done) {
-      program.delete(subscriptionName, function (err) {
+      program.deleteSubscription(subscriptionName, function (err) {
         assert.ifError(err);
         assert(console.log.calledWith('Deleted subscription: %s', subscriptionName));
         done();

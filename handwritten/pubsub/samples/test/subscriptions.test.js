@@ -67,7 +67,7 @@ describe('pubsub:subscriptions', function () {
   describe('create', function () {
     it('should create a subscription', function () {
       var sample = getSample();
-      sample.program.create(topicName, subscriptionName, function (err, subscription) {
+      sample.program.createSubscription(topicName, subscriptionName, function (err, subscription) {
         assert.ifError(err);
         assert.strictEqual(subscription, sample.mocks.subscription);
         assert(console.log.calledWith('Created subscription %s to topic %s', subscriptionName, topicName));
@@ -75,7 +75,7 @@ describe('pubsub:subscriptions', function () {
     });
     it('should require topicName', function () {
       var sample = getSample();
-      sample.program.create(undefined, undefined, function (err, subscription) {
+      sample.program.createSubscription(undefined, undefined, function (err, subscription) {
         assert(err);
         assert(err.message = '"topicName" is required!');
         assert.equal(subscription, undefined);
@@ -83,7 +83,7 @@ describe('pubsub:subscriptions', function () {
     });
     it('should require subscriptionName', function () {
       var sample = getSample();
-      sample.program.create(topicName, undefined, function (err, subscription) {
+      sample.program.createSubscription(topicName, undefined, function (err, subscription) {
         assert(err);
         assert(err.message = '"subscriptionName" is required!');
         assert.equal(subscription, undefined);
@@ -93,7 +93,7 @@ describe('pubsub:subscriptions', function () {
       var sample = getSample();
       var error = 'error';
       sample.mocks.pubsub.subscribe.callsArgWith(3, new Error(error));
-      sample.program.create(topicName, subscriptionName, function (err) {
+      sample.program.createSubscription(topicName, subscriptionName, function (err) {
         assert(err);
         assert(err.message === 'error');
       });
@@ -103,14 +103,14 @@ describe('pubsub:subscriptions', function () {
   describe('delete', function () {
     it('should delete a subscription', function () {
       var sample = getSample();
-      sample.program.delete(subscriptionName, function (err) {
+      sample.program.deleteSubscription(subscriptionName, function (err) {
         assert.ifError(err);
         assert(console.log.calledWith('Deleted subscription: %s', subscriptionName));
       });
     });
     it('should require subscriptionName', function () {
       var sample = getSample();
-      sample.program.delete(undefined, function (err, subscription) {
+      sample.program.deleteSubscription(undefined, function (err, subscription) {
         assert(err);
         assert(err.message = '"subscriptionName" is required!');
         assert.equal(subscription, undefined);
@@ -120,7 +120,7 @@ describe('pubsub:subscriptions', function () {
       var sample = getSample();
       var error = 'error';
       sample.mocks.subscription.delete.callsArgWith(0, new Error(error));
-      sample.program.delete(subscriptionName, function (err) {
+      sample.program.deleteSubscription(subscriptionName, function (err) {
         assert(err);
         assert(err.message === 'error');
       });
@@ -130,7 +130,7 @@ describe('pubsub:subscriptions', function () {
   describe('list', function () {
     it('should list all subscriptions', function () {
       var sample = getSample();
-      sample.program.list(undefined, function (err, subscriptions) {
+      sample.program.listSubscriptions(undefined, function (err, subscriptions) {
         assert.ifError(err);
         assert.strictEqual(subscriptions, sample.mocks.subscriptions);
         assert(console.log.calledWith('Found %d subscriptions!', subscriptions.length));
@@ -138,7 +138,7 @@ describe('pubsub:subscriptions', function () {
     });
     it('should list all subscriptions of a topic', function () {
       var sample = getSample();
-      sample.program.list(topicName, function (err, subscriptions) {
+      sample.program.listSubscriptions(topicName, function (err, subscriptions) {
         assert.ifError(err);
         assert.strictEqual(subscriptions, sample.mocks.subscriptions);
         assert(console.log.calledWith('Found %d subscriptions!', subscriptions.length));
@@ -148,7 +148,7 @@ describe('pubsub:subscriptions', function () {
       var sample = getSample();
       var error = 'error';
       sample.mocks.pubsub.getSubscriptions.callsArgWith(1, new Error(error));
-      sample.program.list(undefined, function (err, subscriptions) {
+      sample.program.listSubscriptions(undefined, function (err, subscriptions) {
         assert(err);
         assert(err.message === 'error');
         assert.equal(subscriptions, undefined);
@@ -159,7 +159,7 @@ describe('pubsub:subscriptions', function () {
   describe('pull', function () {
     it('should pull messages', function () {
       var sample = getSample();
-      sample.program.pull(subscriptionName, function (err, messages) {
+      sample.program.pullMessages(subscriptionName, function (err, messages) {
         assert.ifError(err);
         assert.strictEqual(messages, sample.mocks.messages);
         assert(console.log.calledWith('Pulled %d messages!', messages.length));
@@ -168,7 +168,7 @@ describe('pubsub:subscriptions', function () {
     });
     it('should require subscriptionName', function () {
       var sample = getSample();
-      sample.program.pull(undefined, function (err, subscription) {
+      sample.program.pullMessages(undefined, function (err, subscription) {
         assert(err);
         assert(err.message = '"subscriptionName" is required!');
         assert.equal(subscription, undefined);
@@ -178,7 +178,7 @@ describe('pubsub:subscriptions', function () {
       var sample = getSample();
       var error = 'error';
       sample.mocks.subscription.pull.callsArgWith(1, new Error(error));
-      sample.program.pull(subscriptionName, function (err, messages) {
+      sample.program.pullMessages(subscriptionName, function (err, messages) {
         assert(err);
         assert(err.message === 'error');
         assert.equal(messages, undefined);
@@ -188,57 +188,57 @@ describe('pubsub:subscriptions', function () {
       var sample = getSample();
       var error = 'error';
       sample.mocks.subscription.ack.callsArgWith(1, new Error(error));
-      sample.program.pull(subscriptionName, function (err) {
+      sample.program.pullMessages(subscriptionName, function (err) {
         assert(err);
         assert(err.message === 'error');
       });
     });
   });
 
-  describe('printUsage', function () {
-    it('should print usage', function () {
-      var program = getSample().program;
-
-      program.printUsage();
-
-      assert(console.log.calledWith('Usage: node subscriptions COMMAND [ARGS...]'));
-      assert(console.log.calledWith('\nCommands:\n'));
-      assert(console.log.calledWith('\tcreate TOPIC_NAME SUBSCRIPTION_NAME'));
-      assert(console.log.calledWith('\tdelete SUBSCRIPTION_NAME'));
-      assert(console.log.calledWith('\tpull SUBSCRIPTION_NAME'));
-      assert(console.log.calledWith('\tlist [TOPIC_NAME]'));
-      assert(console.log.calledWith('\nExamples:\n'));
-      assert(console.log.calledWith('\tnode subscriptions create my-topic my-subscription'));
-      assert(console.log.calledWith('\tnode subscriptions delete my-subscription'));
-      assert(console.log.calledWith('\tnode subscriptions pull my-subscription'));
-      assert(console.log.calledWith('\tnode subscriptions list'));
-      assert(console.log.calledWith('\tnode subscriptions list my-topic'));
-    });
-  });
-
   describe('main', function () {
-    it('should call the right commands', function () {
+    it('should call createSubscription', function () {
       var program = getSample().program;
 
-      sinon.stub(program, 'create');
-      program.main(['create']);
-      assert(program.create.calledOnce);
+      sinon.stub(program, 'createSubscription');
+      program.main(['create', topicName, subscriptionName]);
+      assert.equal(program.createSubscription.calledOnce, true);
+      assert.deepEqual(program.createSubscription.firstCall.args.slice(0, -1), [topicName, subscriptionName]);
+    });
 
-      sinon.stub(program, 'delete');
-      program.main(['delete']);
-      assert(program.delete.calledOnce);
+    it('should call deleteSubscription', function () {
+      var program = getSample().program;
 
-      sinon.stub(program, 'list');
+      sinon.stub(program, 'deleteSubscription');
+      program.main(['delete', subscriptionName]);
+      assert.equal(program.deleteSubscription.calledOnce, true);
+      assert.deepEqual(program.deleteSubscription.firstCall.args.slice(0, -1), [subscriptionName]);
+    });
+
+    it('should call listSubscriptions', function () {
+      var program = getSample().program;
+      sinon.stub(program, 'listSubscriptions');
+
       program.main(['list']);
-      assert(program.list.calledOnce);
+      assert.equal(program.listSubscriptions.calledOnce, true);
+      assert.deepEqual(program.listSubscriptions.firstCall.args.slice(0, -1), [undefined]);
+    });
 
-      sinon.stub(program, 'pull');
-      program.main(['pull']);
-      assert(program.pull.calledOnce);
+    it('should call listSubscriptions and filter by topic', function () {
+      var program = getSample().program;
+      sinon.stub(program, 'listSubscriptions');
 
-      sinon.stub(program, 'printUsage');
-      program.main(['--help']);
-      assert(program.printUsage.calledOnce);
+      program.main(['list', topicName]);
+      assert.equal(program.listSubscriptions.calledOnce, true);
+      assert.deepEqual(program.listSubscriptions.firstCall.args.slice(0, -1), [topicName]);
+    });
+
+    it('should call pullMessages', function () {
+      var program = getSample().program;
+
+      sinon.stub(program, 'pullMessages');
+      program.main(['pull', subscriptionName]);
+      assert.equal(program.pullMessages.calledOnce, true);
+      assert.deepEqual(program.pullMessages.firstCall.args.slice(0, -1), [subscriptionName]);
     });
   });
 });

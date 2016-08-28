@@ -132,50 +132,45 @@ function listTopics (callback) {
   });
 }
 // [END list_topics]
-
-// [START usage]
-function printUsage () {
-  console.log('Usage: node topics COMMAND [ARGS...]');
-  console.log('\nCommands:\n');
-  console.log('\tcreate TOPIC_NAME');
-  console.log('\tdelete TOPIC_NAME');
-  console.log('\tpublish TOPIC_NAME MESSAGE');
-  console.log('\tlist');
-  console.log('\nExamples:\n');
-  console.log('\tnode topics create my-topic');
-  console.log('\tnode topics list');
-  console.log('\tnode topics publish my-topic \'{"data":"Hello world!"}\'');
-  console.log('\tnode topics delete my-topic');
-}
-// [END usage]
+// [END all]
 
 // The command-line program
-var program = {
-  create: createTopic,
-  delete: deleteTopic,
-  publish: publishMessage,
-  list: listTopics,
-  printUsage: printUsage,
+var cli = require('yargs');
+var makeHandler = require('../utils').makeHandler;
 
-  // Executed when this program is run from the command-line
-  main: function (args, cb) {
-    var command = args.shift();
-    if (command === 'create') {
-      this.create(args[0], cb);
-    } else if (command === 'delete') {
-      this.delete(args[0], cb);
-    } else if (command === 'publish') {
-      this.publish(args[0], args[1], cb);
-    } else if (command === 'list') {
-      this.list(cb);
-    } else {
-      this.printUsage();
-    }
+var program = module.exports = {
+  createTopic: createTopic,
+  deleteTopic: deleteTopic,
+  publishMessage: publishMessage,
+  listTopics: listTopics,
+  main: function (args) {
+    // Run the command-line program
+    cli.help().strict().parse(args).argv;
   }
 };
 
-if (module === require.main) {
-  program.main(process.argv.slice(2), console.log);
-}
+cli
+  .demand(1)
+  .command('create <name>', 'Create a new topic.', {}, function (options) {
+    program.createTopic(options.name, makeHandler(true, 'id'));
+  })
+  .command('list', 'List topics.', {}, function (options) {
+    program.listTopics(makeHandler(true, 'id'));
+  })
+  .command('publish <topic> <message>', 'Publish a message to the specified topic.', {}, function (options) {
+    program.publishMessage(options.topic, options.message, makeHandler());
+  })
+  .command('delete <name>', 'Delete the specified topic.', {}, function (options) {
+    program.deleteTopic(options.name, makeHandler(false));
+  })
+  .example('node $0 create my-topic', 'Create a new topic named "my-topic".')
+  .example('node $0 list', 'List topics.')
+  .example('node $0 publish my-topic \'{"data":"Hello world!"}\'', 'Publish a message to "my-topic".')
+  .example('node $0 delete my-topic', 'Delete a topic named "my-topic".')
+  .wrap(80)
+  .recommendCommands()
+  .epilogue('For more information, see https://cloud.google.com/pubsub/docs');
 
-module.exports = program;
+if (module === require.main) {
+  program.main(process.argv.slice(2));
+}
