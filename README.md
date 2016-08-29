@@ -213,12 +213,11 @@ var bigtable = require('@google-cloud/bigtable');
 
 var bigtableClient = bigtable({
   projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json',
-  zone: 'my-zone',
-  cluster: 'my-cluster'
+  keyFilename: '/path/to/keyfile.json'
 });
 
-var table = bigtableClient.table('prezzy');
+var instance = bigtableClient.instance('my-instance');
+var table = instance.table('prezzy');
 
 table.getRows(function(err, rows) {});
 

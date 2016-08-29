@@ -15,12 +15,11 @@ $ npm install --save @google-cloud/bigtable
 ```js
 var bigtable = require('@google-cloud/bigtable')({
   projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json',
-  zone: 'my-zone',
-  cluster: 'my-cluster'
+  keyFilename: '/path/to/keyfile.json'
 });
 
-var table = bigtable.table('prezzy');
+var instance = bigtable.instance('my-instance');
+var table = instance.table('prezzy');
 
 table.getRows(function(err, rows) {});
 
