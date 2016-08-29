@@ -28,13 +28,13 @@ describe('Bigtable/Mutation', function() {
   });
 
   describe('instantiation', function() {
-    it('should localize all the mutation properties', function() {
-      var fakeData = {
-        key: 'a',
-        method: 'b',
-        data: 'c'
-      };
+    var fakeData = {
+      key: 'a',
+      method: 'b',
+      data: 'c'
+    };
 
+    it('should localize all the mutation properties', function() {
       var mutation = new Mutation(fakeData);
 
       assert.strictEqual(mutation.key, fakeData.key);
@@ -62,6 +62,13 @@ describe('Bigtable/Mutation', function() {
   });
 
   describe('convertToBytes', function() {
+    it('should not re-wrap buffers', function() {
+      var buf = new Buffer('hello');
+      var encoded = Mutation.convertToBytes(buf);
+
+      assert.strictEqual(buf, encoded);
+    });
+
     it('should pack numbers into int64 values', function() {
       var num = 10;
       var encoded = Mutation.convertToBytes(num);
@@ -174,6 +181,29 @@ describe('Bigtable/Mutation', function() {
 
       assert.strictEqual(convertCalls.length, 2);
       assert.deepEqual(convertCalls, ['gwashington', 1]);
+    });
+
+    it('should accept buffers', function() {
+      var val = new Buffer('hello');
+      var fakeMutation = {
+        follows: {
+          gwashington: val
+        }
+      };
+
+      var cells = Mutation.encodeSetCell(fakeMutation);
+
+      assert.deepEqual(cells, [{
+        setCell: {
+          familyName: 'follows',
+          columnQualifier: 'gwashington',
+          timestampMicros: -1,
+          value: val
+        }
+      }]);
+
+      assert.strictEqual(convertCalls.length, 2);
+      assert.deepEqual(convertCalls, ['gwashington', val]);
     });
   });
 
@@ -376,15 +406,17 @@ describe('Bigtable/Mutation', function() {
         data: []
       };
 
+      var mutation = new Mutation(data);
+
       Mutation.encodeSetCell = function(_data) {
         assert.strictEqual(_data, data.data);
         return fakeEncoded;
       };
 
-      var mutation = new Mutation(data).toProto();
+      var mutationProto = mutation.toProto();
 
-      assert.strictEqual(mutation.mutations, fakeEncoded);
-      assert.strictEqual(mutation.rowKey, data.key);
+      assert.strictEqual(mutationProto.mutations, fakeEncoded);
+      assert.strictEqual(mutationProto.rowKey, data.key);
       assert.strictEqual(convertCalls[0], data.key);
     });
 

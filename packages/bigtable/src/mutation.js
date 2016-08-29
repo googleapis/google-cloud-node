@@ -80,6 +80,10 @@ Mutation.convertFromBytes = function(bytes) {
  * @return {buffer}
  */
 Mutation.convertToBytes = function(data) {
+  if (data instanceof Buffer) {
+    return data;
+  }
+
   if (is.number(data)) {
     return new Int64(data).toBuffer();
   }
@@ -152,7 +156,7 @@ Mutation.encodeSetCell = function(data) {
     Object.keys(family).forEach(function(cellName) {
       var cell = family[cellName];
 
-      if (!is.object(cell)) {
+      if (!is.object(cell) || cell instanceof Buffer) {
         cell = {
           value: cell
         };

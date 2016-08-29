@@ -17,6 +17,7 @@
 'use strict';
 
 var assert = require('assert');
+var events = require('events');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var pumpify = require('pumpify');
@@ -24,39 +25,33 @@ var sinon = require('sinon').sandbox.create();
 var Stream = require('stream').PassThrough;
 var through = require('through2');
 
+var common = require('@google-cloud/common');
 var Family = require('../src/family.js');
-var GrpcServiceObject = require('@google-cloud/common').GrpcServiceObject;
 var Mutation = require('../src/mutation.js');
 var Row = require('../src/row.js');
 
-function FakeGrpcServiceObject() {
-  this.calledWith_ = arguments;
-  GrpcServiceObject.apply(this, arguments);
+function createFake(Class) {
+  function Fake() {
+    this.calledWith_ = arguments;
+    Class.apply(this, arguments);
+  }
+  nodeutil.inherits(Fake, Class);
+  return Fake;
 }
 
-nodeutil.inherits(FakeGrpcServiceObject, GrpcServiceObject);
-
-function FakeFamily() {
-  this.calledWith_ = arguments;
-  Family.apply(this, arguments);
-}
+var FakeGrpcService = createFake(common.GrpcService);
+var FakeGrpcServiceObject = createFake(common.GrpcServiceObject);
+var FakeFamily = createFake(Family);
 
 FakeFamily.formatRule_ = sinon.spy(function(rule) {
   return rule;
 });
 
-nodeutil.inherits(FakeFamily, Family);
-
-function FakeRow() {
-  this.calledWith_ = arguments;
-  Row.apply(this, arguments);
-}
+var FakeRow = createFake(Row);
 
 FakeRow.formatChunks_ = sinon.spy(function(chunks) {
   return chunks;
 });
-
-nodeutil.inherits(FakeRow, Row);
 
 var FakeMutation = {
   methods: Mutation.methods,
@@ -79,10 +74,11 @@ var FakeFilter = {
 
 describe('Bigtable/Table', function() {
   var TABLE_ID = 'my-table';
-  var BIGTABLE = {
-    clusterName: 'a/b/c/d'
+  var INSTANCE = {
+    id: 'a/b/c/d'
   };
-  var TABLE_NAME = BIGTABLE.clusterName + '/tables/' + TABLE_ID;
+
+  var TABLE_NAME = INSTANCE.id + '/tables/' + TABLE_ID;
 
   var Table;
   var table;
@@ -90,6 +86,7 @@ describe('Bigtable/Table', function() {
   before(function() {
     Table = proxyquire('../src/table.js', {
       '@google-cloud/common': {
+        GrpcService: FakeGrpcService,
         GrpcServiceObject: FakeGrpcServiceObject
       },
       './family.js': FakeFamily,
@@ -101,7 +98,7 @@ describe('Bigtable/Table', function() {
   });
 
   beforeEach(function() {
-    table = new Table(BIGTABLE, TABLE_ID);
+    table = new Table(INSTANCE, TABLE_ID);
   });
 
   afterEach(function() {
@@ -124,18 +121,18 @@ describe('Bigtable/Table', function() {
         return FAKE_TABLE_NAME;
       });
 
-      var table = new Table(BIGTABLE, TABLE_ID);
+      var table = new Table(INSTANCE, TABLE_ID);
       var config = table.calledWith_[0];
 
       assert(table instanceof FakeGrpcServiceObject);
-      assert.strictEqual(config.parent, BIGTABLE);
+      assert.strictEqual(config.parent, INSTANCE);
       assert.strictEqual(config.id, FAKE_TABLE_NAME);
 
       assert.deepEqual(config.methods, {
         create: true,
         delete: {
           protoOpts: {
-            service: 'BigtableTableService',
+            service: 'BigtableTableAdmin',
             method: 'deleteTable'
           },
           reqOpts: {
@@ -143,25 +140,16 @@ describe('Bigtable/Table', function() {
           }
         },
         exists: true,
-        get: true,
-        getMetadata: {
-          protoOpts: {
-            service: 'BigtableTableService',
-            method: 'getTable'
-          },
-          reqOpts: {
-            name: FAKE_TABLE_NAME
-          }
-        }
+        get: true
       });
 
-      assert(Table.formatName_.calledWith(BIGTABLE.clusterName, TABLE_ID));
+      assert(Table.formatName_.calledWith(INSTANCE.id, TABLE_ID));
     });
 
-    it('should use Bigtable#createTable to create the table', function(done) {
+    it('should use Instance#createTable to create the table', function(done) {
       var fakeOptions = {};
 
-      BIGTABLE.createTable = function(name, options, callback) {
+      INSTANCE.createTable = function(name, options, callback) {
         assert.strictEqual(name, TABLE_ID);
         assert.strictEqual(options, fakeOptions);
         callback();
@@ -171,46 +159,28 @@ describe('Bigtable/Table', function() {
     });
   });
 
+  describe('VIEWS', function() {
+    var views = {
+      unspecified: 0,
+      name: 1,
+      schema: 2,
+      full: 4
+    };
+
+    it('should export the table views', function() {
+      assert.deepEqual(views, Table.VIEWS);
+    });
+  });
+
   describe('formatName_', function() {
     it('should format the table name to include the cluster name', function() {
-      var tableName = Table.formatName_(BIGTABLE.clusterName, TABLE_ID);
+      var tableName = Table.formatName_(INSTANCE.id, TABLE_ID);
       assert.strictEqual(tableName, TABLE_NAME);
     });
 
     it('should not re-format the table name', function() {
-      var tableName = Table.formatName_(BIGTABLE.clusterName, TABLE_NAME);
+      var tableName = Table.formatName_(INSTANCE.id, TABLE_NAME);
       assert.strictEqual(tableName, TABLE_NAME);
-    });
-  });
-
-  describe('formatRowRange_', function() {
-    it('should create a row range object', function() {
-      var fakeRange = {
-        start: 'a',
-        end: 'b'
-      };
-      var convertedFakeRange = {
-        start: 'c',
-        end: 'd'
-      };
-
-      var spy = FakeMutation.convertToBytes = sinon.spy(function(value) {
-        if (value === fakeRange.start) {
-          return convertedFakeRange.start;
-        }
-        return convertedFakeRange.end;
-      });
-
-      var range = Table.formatRowRange_(fakeRange);
-
-      assert.deepEqual(range, {
-        startKey: convertedFakeRange.start,
-        endKey: convertedFakeRange.end
-      });
-
-      assert.strictEqual(spy.callCount, 2);
-      assert.strictEqual(spy.getCall(0).args[0], 'a');
-      assert.strictEqual(spy.getCall(1).args[0], 'b');
     });
   });
 
@@ -226,27 +196,20 @@ describe('Bigtable/Table', function() {
     it('should provide the proper request options', function(done) {
       table.request = function(grpcOpts, reqOpts) {
         assert.deepEqual(grpcOpts, {
-          service: 'BigtableTableService',
-          method: 'createColumnFamily'
+          service: 'BigtableTableAdmin',
+          method: 'modifyColumnFamilies'
         });
 
         assert.strictEqual(reqOpts.name, TABLE_NAME);
-        assert.strictEqual(reqOpts.columnFamilyId, COLUMN_ID);
+        assert.deepEqual(reqOpts.modifications, [{
+          id: COLUMN_ID,
+          create: {}
+        }]);
+
         done();
       };
 
       table.createFamily(COLUMN_ID, assert.ifError);
-    });
-
-    it('should respect the gc expression option', function(done) {
-      var expression = 'a && b';
-
-      table.request = function(g, reqOpts) {
-        assert.strictEqual(reqOpts.columnFamily.gcExpression, expression);
-        done();
-      };
-
-      table.createFamily(COLUMN_ID, expression, assert.ifError);
     });
 
     it('should respect the gc rule option', function(done) {
@@ -264,7 +227,9 @@ describe('Bigtable/Table', function() {
       });
 
       table.request = function(g, reqOpts) {
-        assert.strictEqual(reqOpts.columnFamily.gcRule, convertedRule);
+        var modification = reqOpts.modifications[0];
+
+        assert.strictEqual(modification.create.gcRule, convertedRule);
         assert.strictEqual(spy.callCount, 1);
         assert.strictEqual(spy.getCall(0).args[0], rule);
         done();
@@ -318,11 +283,11 @@ describe('Bigtable/Table', function() {
     it('should provide the proper request options', function(done) {
       table.request = function(grpcOpts, reqOpts, callback) {
         assert.deepEqual(grpcOpts, {
-          service: 'BigtableTableService',
-          method: 'bulkDeleteRows'
+          service: 'BigtableTableAdmin',
+          method: 'dropRowRange'
         });
 
-        assert.strictEqual(reqOpts.tableName, TABLE_NAME);
+        assert.strictEqual(reqOpts.name, TABLE_NAME);
         callback();
       };
 
@@ -429,25 +394,94 @@ describe('Bigtable/Table', function() {
     });
   });
 
+  describe('getMetadata', function() {
+    var views = {
+      unspecified: 0,
+      name: 1,
+      schema: 2,
+      full: 4
+    };
+    beforeEach(function() {
+      Table.VIEWS = views;
+    });
+
+    it('should provide the proper request options', function(done) {
+      table.request = function(grpcOpts, reqOpts) {
+        assert.deepEqual(grpcOpts, {
+          service: 'BigtableTableAdmin',
+          method: 'getTable'
+        });
+
+        assert.strictEqual(reqOpts.name, table.id);
+        assert.strictEqual(reqOpts.view, views.unspecified);
+        done();
+      };
+
+      table.getMetadata(assert.ifError);
+    });
+
+    Object.keys(views).forEach(function(view) {
+      it('should set the "' + view + '" view', function(done) {
+        var options = {
+          view: view
+        };
+
+        table.request = function(grpcOpts, reqOpts) {
+          assert.strictEqual(reqOpts.view, views[view]);
+          done();
+        };
+
+        table.getMetadata(options, assert.ifError);
+      });
+    });
+
+    it('should return an error to the callback', function(done) {
+      var error = new Error('err');
+      var response = {};
+
+      table.request = function(grpcOpts, reqOpts, callback) {
+        callback(error, response);
+      };
+
+      table.getMetadata(function(err, metadata, apiResponse) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(metadata, null);
+        assert.strictEqual(apiResponse, response);
+        done();
+      });
+    });
+
+    it('should update the metadata', function(done) {
+      var response = {};
+
+      table.request = function(grpcOpts, reqOpts, callback) {
+        callback(null, response);
+      };
+
+      table.getMetadata(function(err, metadata, apiResponse) {
+        assert.ifError(err);
+        assert.strictEqual(metadata, response);
+        assert.strictEqual(apiResponse, response);
+        assert.strictEqual(table.metadata, response);
+        done();
+      });
+    });
+  });
+
   describe('getRows', function() {
     describe('options', function() {
       var pumpSpy;
-      var formatSpy;
 
       beforeEach(function() {
         pumpSpy = sinon.stub(pumpify, 'obj', function() {
           return through.obj();
-        });
-
-        formatSpy = sinon.stub(Table, 'formatRowRange_', function(value) {
-          return value;
         });
       });
 
       it('should provide the proper request options', function(done) {
         table.requestStream = function(grpcOpts, reqOpts) {
           assert.deepEqual(grpcOpts, {
-            service: 'BigtableService',
+            service: 'Bigtable',
             method: 'readRows'
           });
 
@@ -457,26 +491,6 @@ describe('Bigtable/Table', function() {
         };
 
         table.getRows();
-      });
-
-      it('should retrieve an individual row', function(done) {
-        var options = {
-          key: 'gwashington'
-        };
-        var fakeKey = 'a';
-
-        var convertSpy = FakeMutation.convertToBytes = sinon.spy(function() {
-          return fakeKey;
-        });
-
-        table.requestStream = function(g, reqOpts) {
-          assert.strictEqual(reqOpts.rowKey, fakeKey);
-          assert.strictEqual(convertSpy.callCount, 1);
-          assert.strictEqual(convertSpy.getCall(0).args[0], options.key);
-          done();
-        };
-
-        table.getRows(options);
       });
 
       it('should retrieve a range of rows', function(done) {
@@ -490,14 +504,18 @@ describe('Bigtable/Table', function() {
           end: 'b'
         };
 
-        var formatSpy = Table.formatRowRange_ = sinon.spy(function() {
+        var formatSpy = FakeFilter.createRange = sinon.spy(function() {
           return fakeRange;
         });
 
         table.requestStream = function(g, reqOpts) {
-          assert.strictEqual(reqOpts.rowRange, fakeRange);
+          assert.deepEqual(reqOpts.rows.rowRanges[0], fakeRange);
           assert.strictEqual(formatSpy.callCount, 1);
-          assert.strictEqual(formatSpy.getCall(0).args[0], options);
+          assert.deepEqual(formatSpy.getCall(0).args, [
+            options.start,
+            options.end,
+            'key'
+          ]);
           done();
         };
 
@@ -522,7 +540,7 @@ describe('Bigtable/Table', function() {
         });
 
         table.requestStream = function(g, reqOpts) {
-          assert.deepEqual(reqOpts.rowSet.rowKeys, convertedKeys);
+          assert.deepEqual(reqOpts.rows.rowKeys, convertedKeys);
           assert.strictEqual(convertSpy.callCount, 2);
           assert.strictEqual(convertSpy.getCall(0).args[0], options.keys[0]);
           assert.strictEqual(convertSpy.getCall(1).args[0], options.keys[1]);
@@ -551,16 +569,23 @@ describe('Bigtable/Table', function() {
           end: 'h'
         }];
 
-        var formatSpy = Table.formatRowRange_ = sinon.spy(function(range) {
-          var rangeIndex = options.ranges.indexOf(range);
-          return fakeRanges[rangeIndex];
+        var formatSpy = FakeFilter.createRange = sinon.spy(function() {
+          return fakeRanges[formatSpy.callCount - 1];
         });
 
         table.requestStream = function(g, reqOpts) {
-          assert.deepEqual(reqOpts.rowSet.rowRanges, fakeRanges);
+          assert.deepEqual(reqOpts.rows.rowRanges, fakeRanges);
           assert.strictEqual(formatSpy.callCount, 2);
-          assert.strictEqual(formatSpy.getCall(0).args[0], options.ranges[0]);
-          assert.strictEqual(formatSpy.getCall(1).args[0], options.ranges[1]);
+          assert.deepEqual(formatSpy.getCall(0).args, [
+            options.ranges[0].start,
+            options.ranges[0].end,
+            'key'
+          ]);
+          assert.deepEqual(formatSpy.getCall(1).args, [
+            options.ranges[1].start,
+            options.ranges[1].end,
+            'key'
+          ]);
           done();
         };
 
@@ -588,19 +613,6 @@ describe('Bigtable/Table', function() {
         table.getRows(options);
       });
 
-      it('should allow row interleaving', function(done) {
-        var options = {
-          interleave: true
-        };
-
-        table.requestStream = function(g, reqOpts) {
-          assert.strictEqual(reqOpts.allowRowInterleaving, options.interleave);
-          done();
-        };
-
-        table.getRows(options);
-      });
-
       it('should allow setting a row limit', function(done) {
         var options = {
           limit: 10
@@ -616,20 +628,21 @@ describe('Bigtable/Table', function() {
     });
 
     describe('success', function() {
-      var fakeRows = [{
-        rowKey: 'a',
-        chunks: []
-      }, {
-        rowKey: 'b',
-        chunks: []
-      }];
-      var convertedKeys = [
-        'c',
-        'd'
-      ];
-      var formattedChunks = [
-        [{ a: 'a' }],
-        [{ b: 'b' }]
+      var fakeChunks = {
+        chunks: [{
+          rowKey: 'a',
+        }, {
+          commitRow: true
+        }, {
+          rowKey: 'b',
+        }, {
+          commitRow: true
+        }]
+      };
+
+      var formattedRows = [
+        { key: 'c', data: {} },
+        { key: 'd', data: {} }
       ];
 
       beforeEach(function() {
@@ -637,18 +650,8 @@ describe('Bigtable/Table', function() {
           return {};
         });
 
-        FakeMutation.convertFromBytes = sinon.spy(function(value) {
-          if (value === fakeRows[0].rowKey) {
-            return convertedKeys[0];
-          }
-          return convertedKeys[1];
-        });
-
-        FakeRow.formatChunks_ = sinon.spy(function(value) {
-          if (value === fakeRows[0].chunks) {
-            return formattedChunks[0];
-          }
-          return formattedChunks[1];
+        FakeRow.formatChunks_ = sinon.spy(function() {
+          return formattedRows;
         });
 
         table.requestStream = function() {
@@ -657,15 +660,25 @@ describe('Bigtable/Table', function() {
           });
 
           setImmediate(function() {
-            fakeRows.forEach(function(data) {
-              stream.push(data);
-            });
-
+            stream.push(fakeChunks);
             stream.push(null);
           });
 
           return stream;
         };
+      });
+
+      it('should pass the decode option', function(done) {
+        var options = {
+          decode: false
+        };
+
+        table.getRows(options, function(err) {
+          assert.ifError(err);
+          var formatArgs = FakeRow.formatChunks_.getCall(0).args[1];
+          assert.strictEqual(formatArgs.decode, options.decode);
+          done();
+        });
       });
 
       it('should stream Row objects', function(done) {
@@ -680,18 +693,16 @@ describe('Bigtable/Table', function() {
             var rowSpy = table.row;
             var formatSpy = FakeRow.formatChunks_;
 
-            assert.strictEqual(rows.length, fakeRows.length);
-            assert.strictEqual(rowSpy.callCount, fakeRows.length);
+            assert.strictEqual(rows.length, formattedRows.length);
+            assert.strictEqual(rowSpy.callCount, formattedRows.length);
 
-            assert.strictEqual(rowSpy.getCall(0).args[0], convertedKeys[0]);
-            assert.strictEqual(rows[0].data, formattedChunks[0]);
-            assert.strictEqual(
-              formatSpy.getCall(0).args[0], fakeRows[0].chunks);
+            assert.strictEqual(formatSpy.getCall(0).args[0], fakeChunks.chunks);
 
-            assert.strictEqual(rowSpy.getCall(1).args[0], convertedKeys[1]);
-            assert.strictEqual(rows[1].data, formattedChunks[1]);
-            assert.strictEqual(
-              formatSpy.getCall(1).args[0], fakeRows[1].chunks);
+            assert.strictEqual(rowSpy.getCall(0).args[0], formattedRows[0].key);
+            assert.strictEqual(rows[0].data, formattedRows[0].data);
+
+            assert.strictEqual(rowSpy.getCall(1).args[0], formattedRows[1].key);
+            assert.strictEqual(rows[1].data, formattedRows[1].data);
 
             done();
           });
@@ -704,18 +715,16 @@ describe('Bigtable/Table', function() {
           var rowSpy = table.row;
           var formatSpy = FakeRow.formatChunks_;
 
-          assert.strictEqual(rows.length, fakeRows.length);
-          assert.strictEqual(rowSpy.callCount, fakeRows.length);
+          assert.strictEqual(rows.length, formattedRows.length);
+          assert.strictEqual(rowSpy.callCount, formattedRows.length);
 
-          assert.strictEqual(rowSpy.getCall(0).args[0], convertedKeys[0]);
-          assert.strictEqual(rows[0].data, formattedChunks[0]);
-          assert.strictEqual(
-            formatSpy.getCall(0).args[0], fakeRows[0].chunks);
+          assert.strictEqual(formatSpy.getCall(0).args[0], fakeChunks.chunks);
 
-          assert.strictEqual(rowSpy.getCall(1).args[0], convertedKeys[1]);
-          assert.strictEqual(rows[1].data, formattedChunks[1]);
-          assert.strictEqual(
-            formatSpy.getCall(1).args[0], fakeRows[1].chunks);
+          assert.strictEqual(rowSpy.getCall(0).args[0], formattedRows[0].key);
+          assert.strictEqual(rows[0].data, formattedRows[0].data);
+
+          assert.strictEqual(rowSpy.getCall(1).args[0], formattedRows[1].key);
+          assert.strictEqual(rows[1].data, formattedRows[1].data);
 
           done();
         });
@@ -786,21 +795,37 @@ describe('Bigtable/Table', function() {
 
       table.insert(fakeEntries, done);
     });
+
+    it('should return the mutate stream', function() {
+      var fakeStream = {};
+
+      table.mutate = function() {
+        return fakeStream;
+      };
+
+      var stream = table.insert([]);
+      assert.strictEqual(stream, fakeStream);
+    });
   });
 
   describe('mutate', function() {
-    it('should provide the proper request options', function(done) {
-      var entries = [{}, {}];
-      var fakeEntries = [{}, {}];
+    var entries = [{}, {}];
+    var fakeEntries = [{}, {}];
+    var parseSpy;
 
-      var parseSpy = FakeMutation.parse = sinon.spy(function(value) {
+    beforeEach(function() {
+      parseSpy = FakeMutation.parse = sinon.spy(function(value) {
         var entryIndex = entries.indexOf(value);
         return fakeEntries[entryIndex];
       });
+    });
 
-      table.request = function(grpcOpts, reqOpts, callback) {
+    it('should provide the proper request options', function(done) {
+      var stream = through.obj();
+
+      table.requestStream = function(grpcOpts, reqOpts) {
         assert.deepEqual(grpcOpts, {
-          service: 'BigtableService',
+          service: 'Bigtable',
           method: 'mutateRows'
         });
 
@@ -810,10 +835,165 @@ describe('Bigtable/Table', function() {
         assert.strictEqual(parseSpy.callCount, 2);
         assert.strictEqual(parseSpy.getCall(0).args[0], entries[0]);
         assert.strictEqual(parseSpy.getCall(1).args[0], entries[1]);
-        callback();
+
+        setImmediate(done);
+
+        return stream;
       };
 
-      table.mutate(entries, done);
+      table.mutate(entries, assert.ifError);
+    });
+
+    describe('error', function() {
+      describe('API errors', function() {
+        var error = new Error('err');
+
+        beforeEach(function() {
+          table.requestStream = function() {
+            var stream = new Stream({
+              objectMode: true
+            });
+
+            setImmediate(function() {
+              stream.emit('error', error);
+            });
+
+            return stream;
+          };
+        });
+
+        it('should return the error to the callback', function(done) {
+          table.mutate(entries, function(err) {
+            assert.strictEqual(err, error);
+            done();
+          });
+        });
+
+        it('should emit the error via error event', function(done) {
+          table.mutate(entries).on('error', function(err) {
+            assert.strictEqual(err, error);
+            done();
+          });
+        });
+      });
+
+      describe('mutation errors', function() {
+        var fakeStatuses = [{
+          index: 0,
+          status: {
+            code: 1
+          }
+        }, {
+          index: 1,
+          status: {
+            code: 1
+          }
+        }];
+
+        var parsedStatuses = [{}, {}];
+
+        beforeEach(function() {
+          table.requestStream = function() {
+            var stream = through.obj();
+
+            stream.push({ entries: fakeStatuses });
+
+            setImmediate(function() {
+              stream.end();
+            });
+
+            return stream;
+          };
+
+          var statusCount = 0;
+          FakeGrpcService.decorateStatus_ = function(status) {
+            assert.strictEqual(status, fakeStatuses[statusCount].status);
+            return parsedStatuses[statusCount++];
+          };
+        });
+
+        it('should populate the mutationErrors array', function(done) {
+          table.mutate(entries, function(err, mutationErrors) {
+            assert.ifError(err);
+            assert.strictEqual(mutationErrors[0], parsedStatuses[0]);
+            assert.strictEqual(mutationErrors[0].entry, entries[0]);
+            assert.strictEqual(mutationErrors[1], parsedStatuses[1]);
+            assert.strictEqual(mutationErrors[1].entry, entries[1]);
+            done();
+          });
+        });
+
+        it('should emit a mutation error as an error event', function(done) {
+          var mutationErrors = [];
+          var emitter = table.mutate(entries);
+
+          assert(emitter instanceof events.EventEmitter);
+
+          emitter
+            .on('error', function(err) {
+              mutationErrors.push(err);
+            })
+            .on('complete', function() {
+              assert.strictEqual(mutationErrors[0], parsedStatuses[0]);
+              assert.strictEqual(mutationErrors[0].entry, entries[0]);
+              assert.strictEqual(mutationErrors[1], parsedStatuses[1]);
+              assert.strictEqual(mutationErrors[1].entry, entries[1]);
+              done();
+            });
+        });
+      });
+    });
+
+    describe('success', function() {
+      var fakeStatuses = [{
+        index: 0,
+        status: {
+          code: 0
+        }
+      }, {
+        index: 1,
+        status: {
+          code: 0
+        }
+      }];
+
+      beforeEach(function() {
+        table.requestStream = function() {
+          var stream = through.obj();
+
+          stream.push({ entries: fakeStatuses });
+
+          setImmediate(function() {
+            stream.end();
+          });
+
+          return stream;
+        };
+
+        FakeGrpcServiceObject.decorateStatus_ = function() {
+          throw new Error('Should not be called');
+        };
+      });
+
+      it('should return an empty array to the callback', function(done) {
+        table.mutate(entries, function(err, mutateErrors) {
+          assert.ifError(err);
+          assert.strictEqual(mutateErrors.length, 0);
+          done();
+        });
+      });
+
+      it('should emit the appropriate stream events', function(done) {
+        var emitter = table.mutate(entries);
+
+        assert(emitter instanceof events.EventEmitter);
+
+        emitter
+          .on('error', done) // should not be emitted
+          .on('complete', function() {
+            done();
+          });
+      });
     });
   });
 
@@ -839,7 +1019,7 @@ describe('Bigtable/Table', function() {
     it('should provide the proper request options', function(done) {
       table.requestStream = function(grpcOpts, reqOpts) {
         assert.deepEqual(grpcOpts, {
-          service: 'BigtableService',
+          service: 'Bigtable',
           method: 'sampleRowKeys'
         });
 

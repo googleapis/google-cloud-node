@@ -74,15 +74,20 @@ describe('Bigtable/Family', function() {
         get: true,
         delete: {
           protoOpts: {
-            service: 'BigtableTableService',
-            method: 'deleteColumnFamily'
+            service: 'BigtableTableAdmin',
+            method: 'modifyColumnFamilies'
           },
           reqOpts: {
-            name: FAMILY_ID
+            name: TABLE.id,
+            modifications: [{
+              drop: true,
+              id: FAMILY_NAME
+            }]
           }
         }
       });
       assert.strictEqual(typeof config.createMethod, 'function');
+      assert.strictEqual(family.familyName, FAMILY_NAME);
     });
 
     it('should call Table#createFamily for the create method', function(done) {
@@ -95,6 +100,11 @@ describe('Bigtable/Family', function() {
       };
 
       family.create(fakeOptions, done);
+    });
+
+    it('should extract the family name', function() {
+      var family = new Family(TABLE, FAMILY_ID);
+      assert.strictEqual(family.familyName, FAMILY_NAME);
     });
   });
 
@@ -229,30 +239,21 @@ describe('Bigtable/Family', function() {
 
   describe('setMetadata', function() {
     it('should provide the proper request options', function(done) {
-      family.request = function(protoOpts, reqOpts, callback) {
+      family.request = function(protoOpts, reqOpts) {
         assert.deepEqual(protoOpts, {
-          service: 'BigtableTableService',
-          method: 'updateColumnFamily'
+          service: 'BigtableTableAdmin',
+          method: 'modifyColumnFamilies'
         });
 
-        assert.strictEqual(reqOpts.name, FAMILY_ID);
-        callback();
-      };
-
-      family.setMetadata({}, done);
-    });
-
-    it('should respect the gc expression option', function(done) {
-      var metadata = {
-        rule: 'a b c'
-      };
-
-      family.request = function(p, reqOpts) {
-        assert.strictEqual(reqOpts.gcExpression, metadata.rule);
+        assert.strictEqual(reqOpts.name, TABLE.id);
+        assert.deepEqual(reqOpts.modifications, [{
+          id: FAMILY_NAME,
+          update: {}
+        }]);
         done();
       };
 
-      family.setMetadata(metadata, assert.ifError);
+      family.setMetadata({}, assert.ifError);
     });
 
     it('should respect the gc rule option', function(done) {
@@ -276,7 +277,15 @@ describe('Bigtable/Family', function() {
       };
 
       family.request = function(p, reqOpts) {
-        assert.strictEqual(reqOpts.gcRule, formattedRule);
+        assert.deepEqual(reqOpts, {
+          name: TABLE.id,
+          modifications: [{
+            id: family.familyName,
+            update: {
+              gcRule: formattedRule
+            }
+          }]
+        });
         Family.formatRule_ = formatRule;
         done();
       };
@@ -284,27 +293,41 @@ describe('Bigtable/Family', function() {
       family.setMetadata(metadata, assert.ifError);
     });
 
-    it('should respect the updated name option', function(done) {
-      var formatName = Family.formatName_;
-      var fakeName = 'a/b/c';
+    it('should return an error to the callback', function(done) {
+      var error = new Error('err');
+      var response = {};
 
-      var metadata = {
-        name: 'new-name'
+      family.request = function(protoOpts, reqOpts, callback) {
+        callback(error, response);
       };
 
-      Family.formatName_ = function(parent, newName) {
-        assert.strictEqual(parent, TABLE.id);
-        assert.strictEqual(newName, metadata.name);
-        return fakeName;
-      };
-
-      family.request = function(p, reqOpts) {
-        assert.strictEqual(reqOpts.name, fakeName);
-        Family.formatName_ = formatName;
+      family.setMetadata({}, function(err, metadata, apiResponse) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(metadata, null);
+        assert.strictEqual(apiResponse, response);
         done();
+      });
+    });
+
+    it('should update the metadata property', function(done) {
+      var fakeMetadata = {};
+      var response = {
+        columnFamilies: {
+          'family-test': fakeMetadata
+        }
       };
 
-      family.setMetadata(metadata, assert.ifError);
+      family.request = function(protoOpts, reqOpts, callback) {
+        callback(null, response);
+      };
+
+      family.setMetadata({}, function(err, metadata, apiResponse) {
+        assert.ifError(err);
+        assert.strictEqual(metadata, fakeMetadata);
+        assert.strictEqual(family.metadata, fakeMetadata);
+        assert.strictEqual(apiResponse, response);
+        done();
+      });
     });
   });
 

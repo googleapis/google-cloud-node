@@ -18,68 +18,228 @@
 
 var assert = require('assert');
 var async = require('async');
-var exec = require('methmeth');
-var extend = require('extend');
 var uuid = require('node-uuid');
 
-var Bigtable = require('../');
 var env = require('../../../system-test/env.js');
+var Bigtable = require('../');
+var Instance = require('../src/instance.js');
+var Cluster = require('../src/cluster.js');
+var Table = require('../src/table.js');
 var Family = require('../src/family.js');
 var Row = require('../src/row.js');
-var Table = require('../src/table.js');
 
-var clusterName = process.env.GCLOUD_TESTS_BIGTABLE_CLUSTER;
-var zoneName = process.env.GCLOUD_TESTS_BIGTABLE_ZONE;
-
-var isTestable = clusterName && zoneName;
-
-function generateTableName() {
-  return 'test-table-' + uuid.v4();
+function generateName(obj) {
+  return ['test', obj, uuid.v4()].join('-');
 }
 
-(isTestable ? describe : describe.skip)('Bigtable', function() {
+describe('Bigtable', function() {
   var bigtable;
 
-  var TABLE_NAME = generateTableName();
+  var INSTANCE_NAME = 'test-bigtable-instance';
+  var INSTANCE;
+
+  var TABLE_NAME = generateName('table');
   var TABLE;
 
+  var CLUSTER_NAME = 'test-bigtable-cluster';
+
   before(function(done) {
-    bigtable = new Bigtable(extend({
-      cluster: clusterName,
-      zone: zoneName
-    }, env));
+    bigtable = new Bigtable(env);
 
-    TABLE = bigtable.table(TABLE_NAME);
+    INSTANCE = bigtable.instance(INSTANCE_NAME);
 
-    bigtable.getTables(function(err, tables) {
+    var options = {
+      clusters: [{
+        name: CLUSTER_NAME,
+        location: 'us-central1-b',
+        nodes: 3
+      }]
+    };
+
+    INSTANCE.create(options, function(err, instance, operation) {
       if (err) {
         done(err);
         return;
       }
 
-      async.each(tables, exec('delete'), function(err) {
-        if (err) {
-          done(err);
-          return;
-        }
+      operation
+        .on('error', done)
+        .on('complete', function() {
+          TABLE = INSTANCE.table(TABLE_NAME);
 
-        TABLE.create(done);
+          TABLE.create({
+            families: ['follows', 'traits']
+          }, done);
+        });
+    });
+  });
+
+  after(function(done) {
+    INSTANCE.delete(done);
+  });
+
+  describe('instances', function() {
+    it('should get a list of instances', function(done) {
+      bigtable.getInstances(function(err, instances) {
+        assert.ifError(err);
+        assert(instances.length > 0);
+        done();
+      });
+    });
+
+    it('should get a list of instances in stream mode', function(done) {
+      var instances = [];
+
+      bigtable.getInstances()
+        .on('error', done)
+        .on('data', function(instance) {
+          assert(instance instanceof Instance);
+          instances.push(instance);
+        })
+        .on('end', function() {
+          assert(instances.length > 0);
+          done();
+        });
+    });
+
+    it('should check if an instance exists', function(done) {
+      INSTANCE.exists(function(err, exists) {
+        assert.ifError(err);
+        assert.strictEqual(exists, true);
+        done();
+      });
+    });
+
+    it('should check if an instance does not exist', function(done) {
+      var instance = bigtable.instance('fake-instance');
+
+      instance.exists(function(err, exists) {
+        assert.ifError(err);
+        assert.strictEqual(exists, false);
+        done();
+      });
+    });
+
+    it('should get a single instance', function(done) {
+      var instance = bigtable.instance(INSTANCE_NAME);
+
+      instance.get(done);
+    });
+
+    it('should update an instance', function(done) {
+      var metadata = {
+        displayName: 'metadata-test'
+      };
+
+      INSTANCE.setMetadata(metadata, function(err) {
+        assert.ifError(err);
+
+        INSTANCE.getMetadata(function(err, metadata_) {
+          assert.ifError(err);
+          assert.strictEqual(metadata.displayName, metadata_.displayName);
+          done();
+        });
       });
     });
   });
 
-  after(function() {
-    TABLE.delete();
+  describe('clusters', function() {
+    var CLUSTER;
+
+    beforeEach(function() {
+      CLUSTER = INSTANCE.cluster(CLUSTER_NAME);
+    });
+
+    it('should retrieve a list of clusters', function(done) {
+      INSTANCE.getClusters(function(err, clusters) {
+        assert.ifError(err);
+        assert(clusters[0] instanceof Cluster);
+        done();
+      });
+    });
+
+    it('should retrieve a list of clusters in stream mode', function(done) {
+      var clusters = [];
+
+      INSTANCE.getClusters()
+        .on('error', done)
+        .on('data', function(cluster) {
+          assert(cluster instanceof Cluster);
+          clusters.push(cluster);
+        })
+        .on('end', function() {
+          assert(clusters.length > 0);
+          done();
+        });
+    });
+
+    it('should check if a cluster exists', function(done) {
+      CLUSTER.exists(function(err, exists) {
+        assert.ifError(err);
+        assert.strictEqual(exists, true);
+        done();
+      });
+    });
+
+    it('should check if a cluster does not exist', function(done) {
+      var cluster = INSTANCE.cluster('fake-cluster');
+
+      cluster.exists(function(err, exists) {
+        assert.ifError(err);
+        assert.strictEqual(exists, false);
+        done();
+      });
+    });
+
+    it('should get a cluster', function(done) {
+      CLUSTER.get(done);
+    });
+
+    it('should update a cluster', function(done) {
+      var metadata = {
+        nodes: 4
+      };
+
+      CLUSTER.setMetadata(metadata, function(err, operation) {
+        assert.ifError(err);
+
+        operation
+          .on('error', done)
+          .on('complete', function() {
+            CLUSTER.getMetadata(function(err, _metadata) {
+              assert.ifError(err);
+              assert.strictEqual(metadata.nodes, _metadata.serveNodes);
+              done();
+            });
+          });
+      });
+    });
+
   });
 
   describe('tables', function() {
 
     it('should retrieve a list of tables', function(done) {
-      bigtable.getTables(function(err, tables) {
+      INSTANCE.getTables(function(err, tables) {
         assert.ifError(err);
         assert(tables[0] instanceof Table);
         done();
       });
+    });
+
+    it('should retrieve a list of tables in stream mode', function(done) {
+      var tables = [];
+
+      INSTANCE.getTables()
+        .on('error', done)
+        .on('data', function(table) {
+          assert(table instanceof Table);
+          tables.push(table);
+        })
+        .on('end', function() {
+          assert(tables.length > 0);
+          done();
+        });
     });
 
     it('should check if a table exists', function(done) {
@@ -91,7 +251,7 @@ function generateTableName() {
     });
 
     it('should check if a table does not exist', function(done) {
-      var table = bigtable.table('should-not-exist');
+      var table = INSTANCE.table('should-not-exist');
 
       table.exists(function(err, exists) {
         assert.ifError(err);
@@ -101,7 +261,7 @@ function generateTableName() {
     });
 
     it('should get a table', function(done) {
-      var table = bigtable.table(TABLE_NAME);
+      var table = INSTANCE.table(TABLE_NAME);
 
       table.get(function(err, table_) {
         assert.ifError(err);
@@ -111,7 +271,7 @@ function generateTableName() {
     });
 
     it('should delete a table', function(done) {
-      var table = bigtable.table(generateTableName());
+      var table = INSTANCE.table(generateName('table'));
 
       async.series([
         table.create.bind(table),
@@ -127,12 +287,12 @@ function generateTableName() {
     });
 
     it('should create a table with column family data', function(done) {
-      var name = generateTableName();
+      var name = generateName('table');
       var options = {
         families: ['test']
       };
 
-      bigtable.createTable(name, options, function(err, table) {
+      INSTANCE.createTable(name, options, function(err, table) {
         assert.ifError(err);
         assert(table.metadata.columnFamilies.test);
         done();
@@ -153,7 +313,7 @@ function generateTableName() {
     it('should get a list of families', function(done) {
       TABLE.getFamilies(function(err, families) {
         assert.ifError(err);
-        assert.strictEqual(families.length, 1);
+        assert.strictEqual(families.length, 3);
         assert(families[0] instanceof Family);
         assert.strictEqual(families[0].name, FAMILY.name);
         done();
@@ -206,13 +366,12 @@ function generateTableName() {
         union: true
       };
 
-      FAMILY.setMetadata({ rule: rule }, function(err, metadata_) {
+      FAMILY.setMetadata({ rule: rule }, function(err, metadata) {
         assert.ifError(err);
+        var maxAge = metadata.gcRule.maxAge;
 
-        var maxAge_ = metadata_.gcRule.maxAge;
-
-        assert.equal(maxAge_.seconds, rule.age.seconds);
-        assert.strictEqual(maxAge_.nanas, rule.age.nanas);
+        assert.equal(maxAge.seconds, rule.age.seconds);
+        assert.strictEqual(maxAge.nanas, rule.age.nanas);
         done();
       });
     });
@@ -224,12 +383,6 @@ function generateTableName() {
   });
 
   describe('rows', function() {
-
-    before(function(done) {
-      async.each(['follows', 'traits'], function(family, callback) {
-        TABLE.createFamily(family, callback);
-      }, done);
-    });
 
     describe('inserting data', function() {
 
@@ -259,8 +412,9 @@ function generateTableName() {
           }
         }];
 
-        TABLE.insert(rows, function(err) {
+        TABLE.insert(rows, function(err, insertErrors) {
           assert.ifError(err);
+          assert.strictEqual(insertErrors.length, 0);
           done();
         });
       });
@@ -323,15 +477,15 @@ function generateTableName() {
           append: '-wood'
         };
 
-        row.createRules(rule, function(err) {
+        row.save('traits:teeth', 'shiny', function(err) {
           assert.ifError(err);
 
-          row.save('traits:teeth', 'shiny', function(err) {
+          row.createRules(rule, function(err) {
             assert.ifError(err);
 
             row.get(['traits:teeth'], function(err, data) {
               assert.ifError(err);
-              assert(data.traits.teeth[0].value, 'shiny-wood');
+              assert.strictEqual(data.traits.teeth[0].value, 'shiny-wood');
               done();
             });
           });
@@ -345,12 +499,12 @@ function generateTableName() {
           value: 'alincoln'
         };
 
-        var batch = [{
+        var mutations = [{
           method: 'delete',
-          data: ['follows:lincoln']
+          data: ['follows:alincoln']
         }];
 
-        row.filter(filter, null, batch, function(err, matched) {
+        row.filter(filter, mutations, function(err, matched) {
           assert.ifError(err);
           assert(matched);
           done();
@@ -401,6 +555,29 @@ function generateTableName() {
         row.get(['follows:gwashington'], function(err, data) {
           assert.ifError(err);
           assert.strictEqual(data.follows.gwashington[0].value, 1);
+          done();
+        });
+      });
+
+      it('should not decode the values', function(done) {
+        var row = TABLE.row('alincoln');
+        var options = {
+          decode: false
+        };
+
+        row.get(options, function(err) {
+          assert.ifError(err);
+
+          var presidents = Object.keys(row.data.follows);
+
+          assert(presidents.length > 0);
+
+          presidents.forEach(function(prez) {
+            var follower = row.data.follows[prez];
+
+            assert.strictEqual(follower[0].value, 'AAAAAAAAAAE=');
+          });
+
           done();
         });
       });

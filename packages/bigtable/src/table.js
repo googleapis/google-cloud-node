@@ -23,6 +23,7 @@
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var concat = require('concat-stream');
+var events = require('events');
 var flatten = require('lodash.flatten');
 var is = require('is');
 var propAssign = require('prop-assign');
@@ -63,17 +64,18 @@ var Row = require('./row.js');
  * @param {string} name - Name of the table.
  *
  * @example
- * var table = bigtable.table('prezzy');
+ * var instance = bigtable.instance('my-instance');
+ * var table = instance.table('prezzy');
  */
-function Table(bigtable, name) {
-  var id = Table.formatName_(bigtable.clusterName, name);
+function Table(instance, name) {
+  var id = Table.formatName_(instance.id, name);
 
   var methods = {
 
     /**
      * Create a table.
      *
-     * @param {object=} options - See {module:bigtable#createTable}.
+     * @param {object=} options - See {module:bigtable/instance#createTable}.
      *
      * @example
      * table.create(function(err, table, apiResponse) {
@@ -97,7 +99,7 @@ function Table(bigtable, name) {
      */
     delete: {
       protoOpts: {
-        service: 'BigtableTableService',
+        service: 'BigtableTableAdmin',
         method: 'deleteTable'
       },
       reqOpts: {
@@ -129,43 +131,23 @@ function Table(bigtable, name) {
      * @param {options=} options - Configuration object.
      * @param {boolean} options.autoCreate - Automatically create the object if
      *     it does not exist. Default: `false`
+     * @param {string} options.view - The view to be applied to the table
+     *   fields. See {module:bigtable/table#getMetadata}.
      *
      * @example
      * table.get(function(err, table, apiResponse) {
      *   // The `table` data has been populated.
      * });
      */
-    get: true,
-
-    /**
-     * Get the table's metadata.
-     *
-     * @param {function=} callback - The callback function.
-     * @param {?error} callback.err - An error returned while making this
-     *     request.
-     * @param {object} callback.metadata - The table's metadata.
-     * @param {object} callback.apiResponse - The full API response.
-     *
-     * @example
-     * table.getMetadata(function(err, metadata, apiResponse) {});
-     */
-    getMetadata: {
-      protoOpts: {
-        service: 'BigtableTableService',
-        method: 'getTable'
-      },
-      reqOpts: {
-        name: id
-      }
-    }
+    get: true
   };
 
   var config = {
-    parent: bigtable,
+    parent: instance,
     id: id,
     methods: methods,
     createMethod: function(_, options, callback) {
-      bigtable.createTable(name, options, callback);
+      instance.createTable(name, options, callback);
     }
   };
 
@@ -175,77 +157,56 @@ function Table(bigtable, name) {
 util.inherits(Table, common.GrpcServiceObject);
 
 /**
+ * The view to be applied to the returned table's fields.
+ * Defaults to schema if unspecified.
+ *
+ * @private
+ */
+Table.VIEWS = {
+  unspecified: 0,
+  name: 1,
+  schema: 2,
+  full: 4
+};
+
+/**
  * Formats the table name to include the Bigtable cluster.
  *
  * @private
  *
- * @param {string} clusterName - The formatted cluster name.
+ * @param {string} instanceName - The formatted instance name.
  * @param {string} name - The table name.
  *
  * @example
  * Table.formatName_(
- *   'projects/my-project/zones/my-zone/clusters/my-cluster',
+ *   'projects/my-project/zones/my-zone/instances/my-instance',
  *   'my-table'
  * );
- * // 'projects/my-project/zones/my-zone/clusters/my-cluster/tables/my-table'
+ * // 'projects/my-project/zones/my-zone/instances/my-instance/tables/my-table'
  */
-Table.formatName_ = function(clusterName, name) {
+Table.formatName_ = function(instanceName, name) {
   if (name.indexOf('/') > -1) {
     return name;
   }
 
-  return clusterName + '/tables/' + name;
-};
-
-/**
- * Formats a row range into the desired proto format.
- *
- * @private
- *
- * @param {object} range - The range object.
- * @param {string} range.start - The lower bound for the range.
- * @param {string} range.end - The upper bound for the range.
- * @return {object}
- *
- * @example
- * Table.formatRowRange_({
- *   start: 'gwashington',
- *   end: 'alincoln'
- * });
- * // {
- * //   startKey: new Buffer('gwashington'),
- * //   endKey: new Buffer('alincoln')
- * // }
- */
-Table.formatRowRange_ = function(range) {
-  var rowRange = {};
-
-  if (range.start) {
-    rowRange.startKey = Mutation.convertToBytes(range.start);
-  }
-
-  if (range.end) {
-    rowRange.endKey = Mutation.convertToBytes(range.end);
-  }
-
-  return rowRange;
+  return instanceName + '/tables/' + name;
 };
 
 /**
  * Create a column family.
  *
- * Optionally you can send garbage collection rules and expressions when
- * creating a family. Garbage collection executes opportunistically in the
- * background, so it's possible for reads to return a cell even if it
- * matches the active expression for its family.
+ * Optionally you can send garbage collection rules and when creating a family.
+ * Garbage collection executes opportunistically in the background, so it's
+ * possible for reads to return a cell even if it matches the active expression
+ * for its family.
  *
  * @resource [Garbage Collection Proto Docs]{@link https://github.com/googleapis/googleapis/blob/master/google/bigtable/admin/table/v1/bigtable_table_data.proto#L59}
  *
  * @throws {error} If a name is not provided.
  *
  * @param {string} name - The name of column family.
- * @param {string|object=} rule - Garbage collection rule.
- * @param {object=} rule.age - Delete cells in a column older than the given
+ * @param {object=} rule - Garbage collection rule.
+ * @param {object} rule.age - Delete cells in a column older than the given
  *     age. Values must be at least 1 millisecond.
  * @param {number} rule.versions - Maximum number of versions to delete cells
  *     in a column, except for the most recent.
@@ -271,13 +232,6 @@ Table.formatRowRange_ = function(range) {
  * };
  *
  * table.createFamily('follows', rule, callback);
- *
- * //-
- * // Alternatively you can send a garbage collection expression.
- * //-
- * var expression = 'version() > 3 || (age() > 3d && version() > 1)';
- *
- * table.createFamily('follows', expression, callback);
  */
 Table.prototype.createFamily = function(name, rule, callback) {
   var self = this;
@@ -292,24 +246,23 @@ Table.prototype.createFamily = function(name, rule, callback) {
   }
 
   var grpcOpts = {
-    service: 'BigtableTableService',
-    method: 'createColumnFamily'
+    service: 'BigtableTableAdmin',
+    method: 'modifyColumnFamilies'
   };
+
+  var mod = {
+    id: name,
+    create: {}
+  };
+
+  if (rule) {
+    mod.create.gcRule = Family.formatRule_(rule);
+  }
 
   var reqOpts = {
     name: this.id,
-    columnFamilyId: name
+    modifications: [mod]
   };
-
-  if (is.string(rule)) {
-    reqOpts.columnFamily = {
-      gcExpression: rule
-    };
-  } else if (is.object(rule)) {
-    reqOpts.columnFamily = {
-      gcRule: Family.formatRule_(rule)
-    };
-  }
 
   this.request(grpcOpts, reqOpts, function(err, resp) {
     if (err) {
@@ -360,12 +313,12 @@ Table.prototype.deleteRows = function(options, callback) {
   }
 
   var grpcOpts = {
-    service: 'BigtableTableService',
-    method: 'bulkDeleteRows'
+    service: 'BigtableTableAdmin',
+    method: 'dropRowRange'
   };
 
   var reqOpts = {
-    tableName: this.id
+    name: this.id
   };
 
   if (options.prefix) {
@@ -429,10 +382,54 @@ Table.prototype.getFamilies = function(callback) {
 };
 
 /**
+ * Get the table's metadata.
+ *
+ * @param {object=} options - Table request options.
+ * @param {string} options.view - The view to be applied to the table fields.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this
+ *     request.
+ * @param {object} callback.metadata - The table's metadata.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * table.getMetadata(function(err, metadata, apiResponse) {});
+ */
+Table.prototype.getMetadata = function(options, callback) {
+  var self = this;
+
+  if (is.function(options)) {
+    callback = options;
+    options = {};
+  }
+
+  var protoOpts = {
+    service: 'BigtableTableAdmin',
+    method: 'getTable'
+  };
+
+  var reqOpts = {
+    name: this.id,
+    view: Table.VIEWS[options.view || 'unspecified']
+  };
+
+  this.request(protoOpts, reqOpts, function(err, resp) {
+    if (err) {
+      callback(err, null, resp);
+      return;
+    }
+
+    self.metadata = resp;
+    callback(null, self.metadata, resp);
+  });
+};
+
+/**
  * Get Row objects for the rows currently in your table.
  *
  * @param {options=} options - Configuration object.
- * @param {string} options.key - An individual row key.
+ * @param {boolean} options.decode - If set to `false` it will not decode Buffer
+ *     values returned from Bigtable. Default: true.
  * @param {string[]} options.keys - A list of row keys.
  * @param {string} options.start - Start value for key range.
  * @param {string} options.end - End value for key range.
@@ -459,13 +456,6 @@ Table.prototype.getFamilies = function(callback) {
  * };
  *
  * table.getRows(callback);
- *
- * //-
- * // Specify a single row to be returned.
- * //-
- * table.getRows({
- *   key: 'alincoln'
- * }, callback);
  *
  * //-
  * // Specify arbitrary keys for a non-contiguous set of rows.
@@ -557,9 +547,10 @@ Table.prototype.getRows = function(options, callback) {
   }
 
   options = options || {};
+  options.ranges = options.ranges || [];
 
   var grpcOpts = {
-    service: 'BigtableService',
+    service: 'Bigtable',
     method: 'readRows'
   };
 
@@ -568,28 +559,29 @@ Table.prototype.getRows = function(options, callback) {
     objectMode: true
   };
 
-  if (options.key) {
-    reqOpts.rowKey = Mutation.convertToBytes(options.key);
-  } else if (options.start || options.end) {
-    reqOpts.rowRange = Table.formatRowRange_(options);
-  } else if (options.keys || options.ranges) {
-    reqOpts.rowSet = {};
+  if (options.start || options.end) {
+    options.ranges.push({
+      start: options.start,
+      end: options.end
+    });
+  }
+
+  if (options.keys || options.ranges.length) {
+    reqOpts.rows = {};
 
     if (options.keys) {
-      reqOpts.rowSet.rowKeys = options.keys.map(Mutation.convertToBytes);
+      reqOpts.rows.rowKeys = options.keys.map(Mutation.convertToBytes);
     }
 
-    if (options.ranges) {
-      reqOpts.rowSet.rowRanges = options.ranges.map(Table.formatRowRange_);
+    if (options.ranges.length) {
+      reqOpts.rows.rowRanges = options.ranges.map(function(range) {
+        return Filter.createRange(range.start, range.end, 'key');
+      });
     }
   }
 
   if (options.filter) {
     reqOpts.filter = Filter.parse(options.filter);
-  }
-
-  if (options.interleave) {
-    reqOpts.allowRowInterleaving = options.interleave;
   }
 
   if (options.limit) {
@@ -598,11 +590,20 @@ Table.prototype.getRows = function(options, callback) {
 
   var stream = pumpify.obj([
     this.requestStream(grpcOpts, reqOpts),
-    through.obj(function(rowData, enc, next) {
-      var row = self.row(Mutation.convertFromBytes(rowData.rowKey));
+    through.obj(function(data, enc, next) {
+      var throughStream = this;
+      var rows = Row.formatChunks_(data.chunks, {
+        decode: options.decode
+      });
 
-      row.data = Row.formatChunks_(rowData.chunks);
-      next(null, row);
+      rows.forEach(function(rowData) {
+        var row = self.row(rowData.key);
+
+        row.data = rowData.data;
+        throughStream.push(row);
+      });
+
+      next();
     })
   ]);
 
@@ -624,9 +625,32 @@ Table.prototype.getRows = function(options, callback) {
  *     See {module:bigtable/table#mutate}.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {object} callback.apiResponse - The full API response.
+ * @param {object[]} callback.insertErrors - A status object for each failed
+ *     insert.
  *
  * @example
+ * var callback = function(err, insertErrors) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ *
+ *   // insertErrors = [
+ *   //   {
+ *   //     code: 500,
+ *   //     message: 'Internal Server Error',
+ *   //     entry: {
+ *   //       key: 'gwashington',
+ *   //       data: {
+ *   //         follows: {
+ *   //           jadams: 1
+ *   //         }
+ *   //       }
+ *   //     }
+ *   //   },
+ *   //   ...
+ *   // ]
+ * };
+ *
  * var entries = [
  *  {
  *     key: 'alincoln',
@@ -638,7 +662,7 @@ Table.prototype.getRows = function(options, callback) {
  *   }
  * ];
  *
- * table.insert(entries, function(err, apiResponse) {});
+ * table.insert(entries, callback);
  *
  * //-
  * // By default whenever you insert new data, the server will capture a
@@ -659,7 +683,18 @@ Table.prototype.getRows = function(options, callback) {
  *   }
  * ];
  *
- * table.insert(entries, function(err, apiResponse) {});
+ * table.insert(entries, callback);
+ *
+ * //-
+ * // If you don't provide a callback, an EventEmitter is returned. Listen for
+ * // the error event to catch API and insert errors, and complete for when
+ * // the API request has completed.
+ * //-
+ * table.insert(entries)
+ *   .on('error', console.error)
+ *   .on('complete', function() {
+ *     // All requested inserts have been processed.
+ *   });
  */
 Table.prototype.insert = function(entries, callback) {
   entries = arrify(entries).map(propAssign('method', Mutation.methods.INSERT));
@@ -676,16 +711,34 @@ Table.prototype.insert = function(entries, callback) {
  *     deleted.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {object} callback.apiResponse - The full API response.
+ * @param {object[]} callback.mutationErrors - A status object for each failed
+ *     mutation.
  *
  * @example
  * //-
  * // Insert entities. See {module:bigtable/table#insert}
  * //-
- * var callback = function(err, apiResponse) {
- *   if (!err) {
- *     // Mutations were successful.
+ * var callback = function(err, mutationErrors) {
+ *   if (err) {
+ *     // Error handling omitted.
  *   }
+ *
+ *   // mutationErrors = [
+ *   //   {
+ *   //     code: 500,
+ *   //     message: 'Internal Server Error',
+ *   //     entry: {
+ *   //       method: 'insert',
+ *   //       key: 'gwashington',
+ *   //       data: {
+ *   //         follows: {
+ *   //           jadams: 1
+ *   //         }
+ *   //       }
+ *   //     }
+ *   //   },
+ *   //   ...
+ *   // ]
  * };
  *
  * var entries = [
@@ -752,21 +805,77 @@ Table.prototype.insert = function(entries, callback) {
  * ];
  *
  * table.mutate(entries, callback);
+ *
+ * //-
+ * // If you don't provide a callback, an EventEmitter is returned. Listen for
+ * // the error event to catch API and mutation errors, and complete for when
+ * // the API request has completed.
+ * //-
+ * table.mutate(entries)
+ *   .on('error', console.error)
+ *   .on('complete', function() {
+ *     // All requested mutations have been processed.
+ *   });
  */
 Table.prototype.mutate = function(entries, callback) {
-  entries = flatten(arrify(entries)).map(Mutation.parse);
+  entries = flatten(arrify(entries));
 
   var grpcOpts = {
-    service: 'BigtableService',
+    service: 'Bigtable',
     method: 'mutateRows'
   };
 
   var reqOpts = {
+    objectMode: true,
     tableName: this.id,
-    entries: entries
+    entries: entries.map(Mutation.parse)
   };
 
-  this.request(grpcOpts, reqOpts, callback);
+  var isCallbackMode = is.function(callback);
+  var emitter = null;
+
+  if (!isCallbackMode) {
+    emitter = new events.EventEmitter();
+  }
+
+  var stream = pumpify.obj([
+    this.requestStream(grpcOpts, reqOpts),
+    through.obj(function(data, enc, next) {
+      var throughStream = this;
+
+      data.entries.forEach(function(entry) {
+        // mutation was successful, no need to notify the user
+        if (entry.status.code === 0) {
+          return;
+        }
+
+        var status = common.GrpcService.decorateStatus_(entry.status);
+        status.entry = entries[entry.index];
+
+
+        if (!isCallbackMode) {
+          emitter.emit('error', status);
+          return;
+        }
+
+        throughStream.push(status);
+      });
+
+      next();
+    })
+  ]);
+
+  if (!isCallbackMode) {
+    stream.on('error', emitter.emit.bind(emitter, 'error'));
+    stream.on('finish', emitter.emit.bind(emitter, 'complete'));
+    return emitter;
+  }
+
+  stream
+    .on('error', callback)
+    .pipe(concat(function(mutationErrors) {
+      callback(null, mutationErrors);
+    }));
 };
 
 /**
@@ -828,7 +937,7 @@ Table.prototype.row = function(key) {
  */
 Table.prototype.sampleRowKeys = function(callback) {
   var grpcOpts = {
-    service: 'BigtableService',
+    service: 'Bigtable',
     method: 'sampleRowKeys'
   };
 

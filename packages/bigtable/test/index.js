@@ -18,43 +18,39 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var format = require('string-format-obj');
 var googleProtoFiles = require('google-proto-files');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var sinon = require('sinon').sandbox.create();
 
-var GrpcService = require('@google-cloud/common').GrpcService;
+var common = require('@google-cloud/common');
+var Cluster = require('../src/cluster.js');
+var Instance = require('../src/instance.js');
 var PKG = require('../package.json');
-var Table = require('../src/table.js');
-var util = require('@google-cloud/common').util;
 
-var fakeUtil = extend({}, util);
+var fakeUtil = extend({}, common.util);
+var fakeStreamRouter = {
+  extend: function() {
+    this.calledWith_ = arguments;
+  }
+};
 
-function FakeGrpcService() {
-  this.calledWith_ = arguments;
-  GrpcService.apply(this, arguments);
+function createFake(Class) {
+  function Fake() {
+    this.calledWith_ = arguments;
+    Class.apply(this, arguments);
+  }
+  nodeutil.inherits(Fake, Class);
+  return Fake;
 }
 
-nodeutil.inherits(FakeGrpcService, GrpcService);
-
-function FakeTable() {
-  this.calledWith_ = arguments;
-  Table.apply(this, arguments);
-}
-
-function FakeFamily() {}
+var FakeGrpcService = createFake(common.GrpcService);
+var FakeCluster = createFake(Cluster);
+var FakeInstance = createFake(Instance);
+var FakeGrpcOperation = createFake(function() {});
 
 describe('Bigtable', function() {
   var PROJECT_ID = 'test-project';
-  var ZONE = 'test-zone';
-  var CLUSTER = 'test-cluster';
-
-  var CLUSTER_NAME = format('projects/{p}/zones/{z}/clusters/{c}', {
-    p: PROJECT_ID,
-    z: ZONE,
-    c: CLUSTER
-  });
 
   var Bigtable;
   var bigtable;
@@ -63,10 +59,12 @@ describe('Bigtable', function() {
     Bigtable = proxyquire('../', {
       '@google-cloud/common': {
         GrpcService: FakeGrpcService,
+        GrpcOperation: FakeGrpcOperation,
+        streamRouter: fakeStreamRouter,
         util: fakeUtil
       },
-      './family.js': FakeFamily,
-      './table.js': FakeTable
+      './cluster.js': FakeCluster,
+      './instance.js': FakeInstance
     });
   });
 
@@ -75,21 +73,22 @@ describe('Bigtable', function() {
   });
 
   beforeEach(function() {
-    bigtable = new Bigtable({
-      projectId: PROJECT_ID,
-      zone: ZONE,
-      cluster: CLUSTER
-    });
+    bigtable = new Bigtable({ projectId: PROJECT_ID });
   });
 
   describe('instantiation', function() {
+    it('should streamify the correct methods', function() {
+      var args = fakeStreamRouter.calledWith_;
+
+      assert.strictEqual(args[0], Bigtable);
+      assert.deepEqual(args[1], ['getInstances']);
+    });
+
     it('should normalize the arguments', function() {
       var normalizeArguments = fakeUtil.normalizeArguments;
       var normalizeArgumentsCalled = false;
       var fakeOptions = {
-        projectId: PROJECT_ID,
-        zone: ZONE,
-        cluster: CLUSTER
+        projectId: PROJECT_ID
       };
       var fakeContext = {};
 
@@ -106,325 +105,315 @@ describe('Bigtable', function() {
       fakeUtil.normalizeArguments = normalizeArguments;
     });
 
-    it('should throw if a cluster is not provided', function() {
-      assert.throws(function() {
-        new Bigtable({});
-      }, /A cluster must be provided to interact with Bigtable\./);
-    });
-
-    it('should throw if a zone is not provided', function() {
-      assert.throws(function() {
-        new Bigtable({
-          cluster: CLUSTER
-        });
-      }, /A zone must be provided to interact with Bigtable\./);
-    });
-
-    it('should leave the original options unaltered', function() {
-      var fakeOptions = {
-        a: 'a',
-        b: 'b',
-        c: 'c',
-        cluster: CLUSTER,
-        zone: ZONE
-      };
-
-      var bigtable = new Bigtable(fakeOptions);
-      var options = bigtable.calledWith_[1];
-
-      for (var option in fakeOptions) {
-        assert.strictEqual(fakeOptions[option], options[option]);
-      }
-
-      assert.notStrictEqual(fakeOptions, options);
-    });
-
-    it('should localize the cluster name', function() {
-      assert.strictEqual(bigtable.clusterName, CLUSTER_NAME);
-    });
-
     it('should inherit from GrpcService', function() {
-      assert(bigtable instanceof GrpcService);
+      assert(bigtable instanceof FakeGrpcService);
 
       var calledWith = bigtable.calledWith_[0];
 
       assert.strictEqual(calledWith.baseUrl, 'bigtable.googleapis.com');
       assert.strictEqual(calledWith.service, 'bigtable');
-      assert.strictEqual(calledWith.apiVersion, 'v1');
+      assert.strictEqual(calledWith.apiVersion, 'v2');
 
       assert.deepEqual(calledWith.protoServices, {
-        BigtableService: googleProtoFiles.bigtable.v1,
-        BigtableTableService: {
-          path: googleProtoFiles.bigtable.admin,
-          service: 'bigtable.admin.table'
+        Bigtable: googleProtoFiles('bigtable/v2/bigtable.proto'),
+        BigtableTableAdmin: {
+          baseUrl: 'bigtableadmin.googleapis.com',
+          path: googleProtoFiles(
+            'bigtable/admin/v2/bigtable_table_admin.proto'),
+          service: 'bigtable.admin'
+        },
+        BigtableInstanceAdmin: {
+          baseUrl: 'bigtableadmin.googleapis.com',
+          path: googleProtoFiles(
+            'bigtable/admin/v2/bigtable_instance_admin.proto'
+          ),
+          service: 'bigtable.admin'
+        },
+        Operations: {
+          baseUrl: 'bigtableadmin.googleapis.com',
+          path: googleProtoFiles('longrunning/operations.proto'),
+          service: 'longrunning',
+          apiVersion: 'v1'
         }
       });
 
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/bigtable.admin',
-        'https://www.googleapis.com/auth/bigtable.data'
+        'https://www.googleapis.com/auth/bigtable.data',
+        'https://www.googleapis.com/auth/cloud-platform'
       ]);
+
       assert.strictEqual(calledWith.userAgent, PKG.name + '/' + PKG.version);
     });
-  });
 
-  describe('formatTableName_', function() {
-    it('should return the last section of a formatted table name', function() {
-      var fakeTableName = 'projects/p/zones/z/clusters/c/tables/my-table';
-      var formatted = Bigtable.formatTableName_(fakeTableName);
-
-      assert.strictEqual(formatted, 'my-table');
-    });
-
-    it('should do nothing if the table is name is not formatted', function() {
-      var fakeTableName = 'my-table';
-      var formatted = Bigtable.formatTableName_(fakeTableName);
-
-      assert.strictEqual(formatted, fakeTableName);
+    it('should set the projectName', function() {
+      assert.strictEqual(bigtable.projectName, 'projects/' + PROJECT_ID);
     });
   });
 
-  describe('createTable', function() {
-    var TABLE_ID = 'my-table';
-
-    it('should throw if a name is not provided', function() {
-      assert.throws(function() {
-        bigtable.createTable();
-      }, /A name is required to create a table\./);
-    });
+  describe('createInstance', function() {
+    var INSTANCE_NAME = 'my-instance';
 
     it('should provide the proper request options', function(done) {
       bigtable.request = function(protoOpts, reqOpts) {
         assert.deepEqual(protoOpts, {
-          service: 'BigtableTableService',
-          method: 'createTable'
+          service: 'BigtableInstanceAdmin',
+          method: 'createInstance'
         });
 
-        assert.strictEqual(reqOpts.name, CLUSTER_NAME);
-        assert.strictEqual(reqOpts.tableId, TABLE_ID);
-        assert.deepEqual(reqOpts.table, {
-          granularity: 0
-        });
+        assert.strictEqual(reqOpts.parent, bigtable.projectName);
+        assert.strictEqual(reqOpts.instanceId, INSTANCE_NAME);
+        assert.strictEqual(reqOpts.instance.displayName, INSTANCE_NAME);
         done();
       };
 
-      bigtable.createTable(TABLE_ID, assert.ifError);
+      bigtable.createInstance(INSTANCE_NAME, assert.ifError);
     });
 
-    it('should set the current operation', function(done) {
+    it('should respect the displayName option', function(done) {
       var options = {
-        operation: 'abc'
+        displayName: 'robocop'
       };
 
       bigtable.request = function(protoOpts, reqOpts) {
-        assert.strictEqual(reqOpts.table.currentOperation, options.operation);
+        assert.strictEqual(reqOpts.instance.displayName, options.displayName);
         done();
       };
 
-      bigtable.createTable(TABLE_ID, options, assert.ifError);
+      bigtable.createInstance(INSTANCE_NAME, options, assert.ifError);
     });
 
-    it('should set the initial split keys', function(done) {
+    it('should respect the clusters option', function(done) {
+      var cluster = {
+        name: 'my-cluster',
+        location: 'us-central1-b',
+        nodes: 3,
+        storage: 'ssd'
+      };
+
       var options = {
-        splits: ['a', 'b']
+        clusters: [cluster]
+      };
+
+      var fakeLocation = 'a/b/c/d';
+      FakeCluster.getLocation_ = function(project, location) {
+        assert.strictEqual(project, PROJECT_ID);
+        assert.strictEqual(location, cluster.location);
+        return fakeLocation;
+      };
+
+      var fakeStorage = 20;
+      FakeCluster.getStorageType_ = function(storage) {
+        assert.strictEqual(storage, cluster.storage);
+        return fakeStorage;
       };
 
       bigtable.request = function(protoOpts, reqOpts) {
-        assert.strictEqual(reqOpts.initialSplitKeys, options.splits);
+        assert.deepEqual(reqOpts.clusters, {
+          'my-cluster': {
+            location: fakeLocation,
+            serveNodes: cluster.nodes,
+            defaultStorageType: fakeStorage
+          }
+        });
+
         done();
       };
 
-      bigtable.createTable(TABLE_ID, options, assert.ifError);
-    });
-
-    describe('creating column families', function() {
-      it('should accept a family name', function(done) {
-        var options = {
-          families: ['a', 'b']
-        };
-
-        bigtable.request = function(protoOpts, reqOpts) {
-          assert.deepEqual(reqOpts.table.columnFamilies, {
-            a: {},
-            b: {}
-          });
-
-          done();
-        };
-
-        bigtable.createTable(TABLE_ID, options, assert.ifError);
-      });
-
-      it('should accept a garbage collection expression', function(done) {
-        var options = {
-          families: [
-            {
-              name: 'c',
-              rule: 'd'
-            }
-          ]
-        };
-
-        bigtable.request = function(protoOpts, reqOpts) {
-          assert.deepEqual(reqOpts.table.columnFamilies, {
-            c: {
-              gcExpression: 'd'
-            }
-          });
-          done();
-        };
-
-        bigtable.createTable(TABLE_ID, options, assert.ifError);
-      });
-
-      it('should accept a garbage collection object', function(done) {
-        var options = {
-          families: [
-            {
-              name: 'e',
-              rule: {}
-            }
-          ]
-        };
-
-        var fakeRule = { a: 'b' };
-
-        FakeFamily.formatRule_ = function(rule) {
-          assert.strictEqual(rule, options.families[0].rule);
-          return fakeRule;
-        };
-
-        bigtable.request = function(protoOpts, reqOpts) {
-          assert.deepEqual(reqOpts.table.columnFamilies, {
-            e: {
-              gcRule: fakeRule
-            }
-          });
-          done();
-        };
-
-        bigtable.createTable(TABLE_ID, options, assert.ifError);
-      });
+      bigtable.createInstance(INSTANCE_NAME, options, assert.ifError);
     });
 
     it('should return an error to the callback', function(done) {
-      var err = new Error('err');
+      var error = new Error('err');
       var response = {};
 
       bigtable.request = function(protoOpts, reqOpts, callback) {
-        callback(err, response);
+        callback(error, response);
       };
 
-      bigtable.createTable(TABLE_ID, function(err_, table, apiResponse) {
-        assert.strictEqual(err, err_);
-        assert.strictEqual(table, null);
+      var callback = function(err, instance, operation, apiResponse) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(instance, null);
+        assert.strictEqual(operation, null);
         assert.strictEqual(apiResponse, response);
         done();
-      });
-    });
-
-    it('should return a Table object', function(done) {
-      var response = {
-        name: TABLE_ID
       };
 
-      var fakeTable = {};
+      bigtable.createInstance(INSTANCE_NAME, callback);
+    });
 
-      var tableSpy = sinon.stub(bigtable, 'table', function() {
-        return fakeTable;
-      });
+    it('should pass an operation and instance to the callback', function(done) {
+      var response = {
+        name: 'my-operation'
+      };
 
-      bigtable.request = function(p, r, callback) {
+      var fakeInstance = {};
+      bigtable.instance = function(name) {
+        assert.strictEqual(name, INSTANCE_NAME);
+        return fakeInstance;
+      };
+
+      var fakeOperation = {};
+      bigtable.operation = function(name) {
+        assert.strictEqual(name, response.name);
+        return fakeOperation;
+      };
+
+      bigtable.request = function(protoOpts, reqOpts, callback) {
         callback(null, response);
       };
 
-      bigtable.createTable(TABLE_ID, function(err, table, apiResponse) {
+      var callback = function(err, instance, operation, apiResponse) {
         assert.ifError(err);
-        assert.strictEqual(table, fakeTable);
-        assert(tableSpy.calledWithExactly(response.name));
-        assert.strictEqual(table.metadata, response);
-        assert.strictEqual(response, apiResponse);
-        done();
-      });
-    });
-  });
-
-  describe('getTables', function() {
-    it('should provide the proper request options', function(done) {
-      bigtable.request = function(protoOpts, reqOpts) {
-        assert.deepEqual(protoOpts, {
-          service: 'BigtableTableService',
-          method: 'listTables'
-        });
-        assert.strictEqual(reqOpts.name, CLUSTER_NAME);
+        assert.strictEqual(instance, fakeInstance);
+        assert.strictEqual(operation, fakeOperation);
+        assert.strictEqual(operation.metadata, response);
+        assert.strictEqual(apiResponse, response);
         done();
       };
 
-      bigtable.getTables(assert.ifError);
+      bigtable.createInstance(INSTANCE_NAME, callback);
+    });
+  });
+
+  describe('getInstances', function() {
+    it('should provide the proper request options', function(done) {
+      bigtable.request = function(grpcOpts, reqOpts) {
+        assert.deepEqual(grpcOpts, {
+          service: 'BigtableInstanceAdmin',
+          method: 'listInstances'
+        });
+
+        assert.strictEqual(reqOpts.parent, bigtable.projectName);
+        done();
+      };
+
+      bigtable.getInstances(assert.ifError);
+    });
+
+    it('should copy all query options', function(done) {
+      var fakeOptions = {
+        a: 'a',
+        b: 'b'
+      };
+
+      bigtable.request = function(grpcOpts, reqOpts) {
+        Object.keys(fakeOptions).forEach(function(key) {
+          assert.strictEqual(reqOpts[key], fakeOptions[key]);
+        });
+
+        assert.notStrictEqual(reqOpts, fakeOptions);
+        done();
+      };
+
+      bigtable.getInstances(fakeOptions, assert.ifError);
     });
 
     it('should return an error to the callback', function(done) {
-      var err = new Error('err');
+      var error = new Error('err');
       var response = {};
 
-      bigtable.request = function(p, r, callback) {
-        callback(err, response);
+      bigtable.request = function(grpcOpts, reqOpts, callback) {
+        callback(error, response);
       };
 
-      bigtable.getTables(function(err_, tables, apiResponse) {
-        assert.strictEqual(err, err_);
-        assert.strictEqual(tables, null);
+      bigtable.getInstances(function(err, instances, nextQuery, apiResponse) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(instances, null);
+        assert.strictEqual(nextQuery, null);
         assert.strictEqual(apiResponse, response);
         done();
       });
     });
 
-    it('should return a list of Table objects', function(done) {
-      var fakeFormattedName = 'abcd';
+    it('should return an array of instance objects', function(done) {
       var response = {
-        tables: [{
-          name: 'projects/p/zones/z/clusters/c/tables/my-table'
+        instances: [{
+          name: 'a'
+        }, {
+          name: 'b'
         }]
       };
-      var fakeTable = {};
 
-      bigtable.request = function(p, r, callback) {
+      var fakeInstances = [
+        {},
+        {}
+      ];
+
+      bigtable.request = function(grpcOpts, reqOpts, callback) {
         callback(null, response);
       };
 
-      var tableSpy = sinon.stub(bigtable, 'table', function() {
-        return fakeTable;
-      });
+      var instanceCount = 0;
 
-      var formatSpy = sinon.stub(Bigtable, 'formatTableName_', function() {
-        return fakeFormattedName;
-      });
+      bigtable.instance = function(name) {
+        assert.strictEqual(name, response.instances[instanceCount].name);
+        return fakeInstances[instanceCount++];
+      };
 
-      bigtable.getTables(function(err, tables, apiResponse) {
+      bigtable.getInstances(function(err, instances, nextQuery, apiResponse) {
         assert.ifError(err);
-
-        var table = tables[0];
-
-        assert.strictEqual(table, fakeTable);
-        assert(formatSpy.calledWithExactly(response.tables[0].name));
-        assert(tableSpy.calledWithExactly(fakeFormattedName));
-        assert.strictEqual(table.metadata, response.tables[0]);
-        assert.strictEqual(response, apiResponse);
+        assert.strictEqual(instances[0], fakeInstances[0]);
+        assert.strictEqual(instances[0].metadata, response.instances[0]);
+        assert.strictEqual(instances[1], fakeInstances[1]);
+        assert.strictEqual(instances[1].metadata, response.instances[1]);
+        assert.strictEqual(nextQuery, null);
+        assert.strictEqual(apiResponse, response);
         done();
       });
     });
+
+    it('should provide a nextQuery object', function(done) {
+      var response = {
+        instances: [],
+        nextPageToken: 'a'
+      };
+
+      var options = {
+        a: 'b'
+      };
+
+      bigtable.request = function(grpcOpts, reqOpts, callback) {
+        callback(null, response);
+      };
+
+      var callback = function(err, instances, nextQuery) {
+        var expectedQuery = extend({}, options, {
+          pageToken: response.nextPageToken
+        });
+
+        assert.ifError(err);
+        assert.deepEqual(nextQuery, expectedQuery);
+        done();
+      };
+
+      bigtable.getInstances(options, callback);
+    });
   });
 
-  describe('table', function() {
-    var TABLE_ID = 'table-id';
+  describe('instance', function() {
+    var INSTANCE_NAME = 'my-instance';
 
-    it('should return a table instance', function() {
-      var table = bigtable.table(TABLE_ID);
-      var args = table.calledWith_;
+    it('should return an Instance object', function() {
+      var instance = bigtable.instance(INSTANCE_NAME);
+      var args = instance.calledWith_;
 
-      assert(table instanceof FakeTable);
+      assert(instance instanceof FakeInstance);
       assert.strictEqual(args[0], bigtable);
-      assert.strictEqual(args[1], TABLE_ID);
+      assert.strictEqual(args[1], INSTANCE_NAME);
+    });
+  });
+
+  describe('operation', function() {
+    var OPERATION_NAME = 'my-operation';
+
+    it('should return a GrpcOperation object', function() {
+      var operation = bigtable.operation(OPERATION_NAME);
+      var args = operation.calledWith_;
+
+      assert(operation instanceof FakeGrpcOperation);
+      assert.strictEqual(args[0], bigtable);
+      assert.strictEqual(args[1], OPERATION_NAME);
     });
   });
 

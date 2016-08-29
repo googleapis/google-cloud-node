@@ -22,7 +22,6 @@
 
 var common = require('@google-cloud/common');
 var createErrorClass = require('create-error-class');
-var is = require('is');
 var util = require('util');
 
 /**
@@ -40,11 +39,13 @@ var FamilyError = createErrorClass('FamilyError', function(name) {
  * @alias module:bigtable/family
  *
  * @example
- * var table = bigtable.table('prezzy');
+ * var instance = bigtable.instance('my-instance');
+ * var table = instance.table('prezzy');
  * var family = table.family('follows');
  */
 function Family(table, name) {
   var id = Family.formatName_(table.id, name);
+  this.familyName = name.split('/').pop();
 
   var methods = {
 
@@ -73,11 +74,15 @@ function Family(table, name) {
      */
     delete: {
       protoOpts: {
-        service: 'BigtableTableService',
-        method: 'deleteColumnFamily'
+        service: 'BigtableTableAdmin',
+        method: 'modifyColumnFamilies'
       },
       reqOpts: {
-        name: id
+        name: table.id,
+        modifications: [{
+          id: this.familyName,
+          drop: true
+        }]
       }
     },
 
@@ -256,8 +261,7 @@ Family.prototype.getMetadata = function(callback) {
  * @resource [Garbage Collection Proto Docs]{@link https://github.com/googleapis/googleapis/blob/3592a7339da5a31a3565870989beb86e9235476e/google/bigtable/admin/table/v1/bigtable_table_data.proto#L59}
  *
  * @param {object} metadata - Metadata object.
- * @param {object|string=} metadata.rule - Garbage collection rule.
- * @param {string=} metadata.name - The updated column family name.
+ * @param {object=} metadata.rule - Garbage collection rule.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.
@@ -265,33 +269,43 @@ Family.prototype.getMetadata = function(callback) {
  *
  * @example
  * family.setMetadata({
- *   name: 'updated-name',
- *   rule: 'version() > 3 || (age() > 3d && version() > 1)'
+ *   rule: {
+ *     versions: 2,
+ *     union: true
+ *   }
  * }, function(err, apiResponse) {});
  */
 Family.prototype.setMetadata = function(metadata, callback) {
+  var self = this;
+
   var grpcOpts = {
-    service: 'BigtableTableService',
-    method: 'updateColumnFamily'
+    service: 'BigtableTableAdmin',
+    method: 'modifyColumnFamilies'
   };
 
-  var reqOpts = {
-    name: this.id
+  var mod = {
+    id: this.familyName,
+    update: {}
   };
 
   if (metadata.rule) {
-    if (is.string(metadata.rule)) {
-      reqOpts.gcExpression = metadata.rule;
-    } else if (is.object(metadata.rule)) {
-      reqOpts.gcRule = Family.formatRule_(metadata.rule);
+    mod.update.gcRule = Family.formatRule_(metadata.rule);
+  }
+
+  var reqOpts = {
+    name: this.parent.id,
+    modifications: [mod]
+  };
+
+  this.request(grpcOpts, reqOpts, function(err, resp) {
+    if (err) {
+      callback(err, null, resp);
+      return;
     }
-  }
 
-  if (metadata.name) {
-    reqOpts.name = Family.formatName_(this.parent.id, metadata.name);
-  }
-
-  this.request(grpcOpts, reqOpts, callback);
+    self.metadata = resp.columnFamilies[self.familyName];
+    callback(null, self.metadata, resp);
+  });
 };
 
 module.exports = Family;

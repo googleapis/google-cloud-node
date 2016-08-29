@@ -60,7 +60,8 @@ var RowError = createErrorClass('RowError', function(row) {
  * @alias module:bigtable/row
  *
  * @example
- * var table = bigtable.table('prezzy');
+ * var instance = bigtable.instance('my-instance');
+ * var table = instance.table('prezzy');
  * var row = table.row('gwashington');
  */
 function Row(table, key) {
@@ -108,44 +109,9 @@ util.inherits(Row, common.GrpcServiceObject);
  * @private
  *
  * @param {chunk[]} chunks - The list of chunks.
+ * @param {object=} options - Formatting options.
  *
  * @example
- * var chunks = [
- *   {
- *     rowContents: {
- *       name: 'follows',
- *       columns: [
- *         {
- *           qualifier: 'gwashington',
- *           cells: [
- *             {
- *               value: 1
- *             }
- *           ]
- *         }
- *       ]
- *     }
- *   }, {
- *     resetRow: true
- *   }, {
- *     rowContents: {
- *       name: 'follows',
- *       columns: [
- *         {
- *           qualifier: 'gwashington',
- *           cells: [
- *             {
- *               value: 2
- *             }
- *           ]
- *         }
- *       ]
- *     }
- *   }, {
- *     commitRow: true
- *   }
- * ];
- *
  * Row.formatChunks_(chunks);
  * // {
  * //   follows: {
@@ -157,26 +123,67 @@ util.inherits(Row, common.GrpcServiceObject);
  * //   }
  * // }
  */
-Row.formatChunks_ = function(chunks) {
-  var families = [];
-  var chunkList = [];
+Row.formatChunks_ = function(chunks, options) {
+  var rows = [];
+  var familyName;
+  var qualifierName;
 
-  chunks.forEach(function(chunk) {
-    if (chunk.resetRow) {
-      chunkList = [];
+  options = options || {};
+
+  chunks.reduce(function(row, chunk) {
+    var family;
+    var qualifier;
+
+    row.data = row.data || {};
+
+    if (chunk.rowKey) {
+      row.key = Mutation.convertFromBytes(chunk.rowKey);
     }
 
-    if (chunk.rowContents) {
-      chunkList.push(chunk.rowContents);
+    if (chunk.familyName) {
+      familyName = chunk.familyName.value;
+    }
+
+    if (familyName) {
+      family = row.data[familyName] = row.data[familyName] || {};
+    }
+
+    if (chunk.qualifier) {
+      qualifierName = Mutation.convertFromBytes(chunk.qualifier.value);
+    }
+
+    if (family && qualifierName) {
+      qualifier = family[qualifierName] = family[qualifierName] || [];
+    }
+
+    if (qualifier && chunk.value) {
+      var value = chunk.value;
+
+      if (options.decode !== false) {
+        value = Mutation.convertFromBytes(value);
+      }
+
+      qualifier.push({
+        value: value,
+        labels: chunk.labels,
+        timestamp: chunk.timestampMicros,
+        size: chunk.valueSize
+      });
     }
 
     if (chunk.commitRow) {
-      families = families.concat(chunkList);
-      chunkList = [];
+      rows.push(row);
     }
-  });
 
-  return Row.formatFamilies_(families);
+    if (chunk.commitRow || chunk.resetRow) {
+      familyName = qualifierName = null;
+      return {};
+    }
+
+    return row;
+  }, {});
+
+  return rows;
 };
 
 /**
@@ -185,6 +192,7 @@ Row.formatChunks_ = function(chunks) {
  * @private
  *
  * @param {object[]} families - The row families.
+ * @param {object=} options - Formatting options.
  *
  * @example
  * var families = [
@@ -214,8 +222,10 @@ Row.formatChunks_ = function(chunks) {
  * //   }
  * // }
  */
-Row.formatFamilies_ = function(families) {
+Row.formatFamilies_ = function(families, options) {
   var data = {};
+
+  options = options || {};
 
   families.forEach(function(family) {
     var familyData = data[family.name] = {};
@@ -224,8 +234,14 @@ Row.formatFamilies_ = function(families) {
       var qualifier = Mutation.convertFromBytes(column.qualifier);
 
       familyData[qualifier] = column.cells.map(function(cell) {
+        var value = cell.value;
+
+        if (options.decode !== false) {
+          value = Mutation.convertFromBytes(value);
+        }
+
         return {
-          value: Mutation.convertFromBytes(cell.value),
+          value: value,
           timestamp: cell.timestampMicros,
           labels: cell.labels
         };
@@ -355,7 +371,7 @@ Row.prototype.createRules = function(rules, callback) {
   });
 
   var grpcOpts = {
-    service: 'BigtableService',
+    service: 'Bigtable',
     method: 'readModifyWriteRow'
   };
 
@@ -421,7 +437,7 @@ Row.prototype.createRules = function(rules, callback) {
  */
 Row.prototype.filter = function(filter, onMatch, onNoMatch, callback) {
   var grpcOpts = {
-    service: 'BigtableService',
+    service: 'Bigtable',
     method: 'checkAndMutateRow'
   };
 
@@ -520,6 +536,9 @@ Row.prototype.deleteCells = function(columns, callback) {
  * Get the row data. See {module:bigtable/table#getRows}.
  *
  * @param {string[]=} columns - List of specific columns to retrieve.
+ * @param {object} options - Configuration object.
+ * @param {boolean} options.decode - If set to `false` it will not decode Buffer
+ *     values returned from Bigtable. Default: true.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.
@@ -547,12 +566,18 @@ Row.prototype.deleteCells = function(columns, callback) {
  *   'follows:alincoln'
  * ], callback);
  */
-Row.prototype.get = function(columns, callback) {
+Row.prototype.get = function(columns, options, callback) {
   var self = this;
 
-  if (is.function(columns)) {
-    callback = columns;
+  if (!is.array(columns)) {
+    callback = options;
+    options = columns;
     columns = [];
+  }
+
+  if (is.function(options)) {
+    callback = options;
+    options = {};
   }
 
   var filter;
@@ -581,10 +606,10 @@ Row.prototype.get = function(columns, callback) {
     }
   }
 
-  var reqOpts = {
-    key: this.id,
+  var reqOpts = extend({}, options, {
+    keys: [this.id],
     filter: filter
-  };
+  });
 
   this.parent.getRows(reqOpts, function(err, rows, apiResponse) {
     if (err) {
@@ -612,6 +637,9 @@ Row.prototype.get = function(columns, callback) {
 /**
  * Get the row's metadata.
  *
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.decode - If set to `false` it will not decode Buffer
+ *     values returned from Bigtable. Default: true.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.
@@ -621,8 +649,13 @@ Row.prototype.get = function(columns, callback) {
  * @example
  * row.getMetadata(function(err, metadata, apiResponse) {});
  */
-Row.prototype.getMetadata = function(callback) {
-  this.get(function(err, row, resp) {
+Row.prototype.getMetadata = function(options, callback) {
+  if (is.function(options)) {
+    callback = options;
+    options = {};
+  }
+
+  this.get(options, function(err, row, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -674,16 +707,16 @@ Row.prototype.increment = function(column, value, callback) {
     increment: value
   };
 
-  this.createRules(reqOpts, function(err, apiResponse) {
+  this.createRules(reqOpts, function(err, resp) {
     if (err) {
-      callback(err, null, apiResponse);
+      callback(err, null, resp);
       return;
     }
 
-    var data = Row.formatFamilies_(apiResponse.families);
+    var data = Row.formatFamilies_(resp.row.families);
     var value = dotProp.get(data, column.replace(':', '.'))[0].value;
 
-    callback(null, value, apiResponse);
+    callback(null, value, resp);
   });
 };
 
@@ -693,6 +726,8 @@ Row.prototype.increment = function(column, value, callback) {
  * @param {string|object} key - Either a column name or an entry
  *     object to be inserted into the row. See {module:bigtable/table#insert}.
  * @param {*=} value - This can be omitted if using entry object.
+ * @param {object=} options - Configuration options. See
+ *     {module:bigtable/table#mutate}.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.

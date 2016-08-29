@@ -110,50 +110,265 @@ describe('Bigtable/Row', function() {
   });
 
   describe('formatChunks_', function() {
-    var formatFamiliesSpy;
+    var convert;
 
     beforeEach(function() {
-      formatFamiliesSpy = sinon.stub(Row, 'formatFamilies_');
+      convert = FakeMutation.convertFromBytes;
+      FakeMutation.convertFromBytes = sinon.spy(function(val) {
+        return val.replace('unconverted', 'converted');
+      });
     });
 
-    it('should not include chunks without commitRow', function() {
-      var chunks = [{
-        rowConents: {}
-      }];
-      var fakeFamilies = [];
-
-      formatFamiliesSpy.returns(fakeFamilies);
-
-      var formatted = Row.formatChunks_(chunks);
-
-      assert.strictEqual(formatted, fakeFamilies);
-      assert.strictEqual(formatFamiliesSpy.callCount, 1);
-      assert.deepEqual(formatFamiliesSpy.getCall(0).args[0], []);
+    afterEach(function() {
+      FakeMutation.convertFromBytes = convert;
     });
 
-    it('should ignore any chunks previous to a resetRow', function() {
-      var badData = {};
-      var goodData = {};
-      var fakeFamilies = [goodData, {}];
-
+    it('should format the chunks', function() {
+      var timestamp = Date.now();
       var chunks = [{
-        rowContents: badData,
-      }, {
-        resetRow: true
-      }, {
-        rowContents: goodData
+        rowKey: 'unconvertedKey',
+        familyName: {
+          value: 'familyName'
+        },
+        qualifier: {
+          value: 'unconvertedQualifier'
+        },
+        value: 'unconvertedValue',
+        labels: ['label'],
+        timestampMicros: timestamp,
+        valueSize: 0,
+        commitRow: false,
+        resetRow: false
       }, {
         commitRow: true
       }];
 
-      formatFamiliesSpy.returns(fakeFamilies);
+      var rows = Row.formatChunks_(chunks);
 
-      var formatted = Row.formatChunks_(chunks);
+      assert.deepEqual(rows, [{
+        key: 'convertedKey',
+        data: {
+          familyName: {
+            convertedQualifier: [{
+              value: 'convertedValue',
+              labels: ['label'],
+              timestamp: timestamp,
+              size: 0
+            }]
+          }
+        }
+      }]);
+    });
 
-      assert.strictEqual(formatted, fakeFamilies);
-      assert.strictEqual(formatted.indexOf(badData), -1);
-      assert.strictEqual(formatFamiliesSpy.callCount, 1);
-      assert.deepEqual(formatFamiliesSpy.getCall(0).args[0], [goodData]);
+    it('should inherit the row key', function() {
+      var chunks = [{
+        rowKey: 'unconvertedKey'
+      }, {
+        rowKey: null,
+        familyName: {
+          value: 'familyName'
+        },
+        commitRow: true
+      }, {
+        rowKey: 'unconvertedKey2'
+      }, {
+        rowKey: null,
+        familyName: {
+          value: 'familyName2'
+        },
+        commitRow: true
+      }];
+
+      var rows = Row.formatChunks_(chunks);
+
+      assert.deepEqual(rows, [{
+        key: 'convertedKey',
+        data: {
+          familyName: {}
+        }
+      }, {
+        key: 'convertedKey2',
+        data: {
+          familyName2: {}
+        }
+      }]);
+    });
+
+    it('should inherit the family name', function() {
+      var chunks = [{
+        rowKey: 'unconvertedKey',
+        familyName: {
+          value: 'familyName'
+        }
+      }, {
+        qualifier: {
+          value: 'unconvertedQualifier'
+        }
+      }, {
+        qualifier: {
+          value: 'unconvertedQualifier2'
+        }
+      }, {
+        commitRow: true
+      }];
+
+      var rows = Row.formatChunks_(chunks);
+
+      assert.deepEqual(rows, [{
+        key: 'convertedKey',
+        data: {
+          familyName: {
+            convertedQualifier: [],
+            convertedQualifier2: []
+          }
+        }
+      }]);
+    });
+
+    it('should inherit the qualifier', function() {
+      var timestamp1 = 123;
+      var timestamp2 = 345;
+
+      var chunks = [{
+        rowKey: 'unconvertedKey',
+        familyName: {
+          value: 'familyName'
+        },
+        qualifier: {
+          value: 'unconvertedQualifier'
+        }
+      }, {
+        value: 'unconvertedValue',
+        labels: ['label'],
+        timestampMicros: timestamp1,
+        valueSize: 0
+      }, {
+        value: 'unconvertedValue2',
+        labels: ['label2'],
+        timestampMicros: timestamp2,
+        valueSize: 2
+      }, {
+        commitRow: true
+      }];
+
+      var rows = Row.formatChunks_(chunks);
+
+      assert.deepEqual(rows, [{
+        key: 'convertedKey',
+        data: {
+          familyName: {
+            convertedQualifier: [{
+              value: 'convertedValue',
+              labels: ['label'],
+              timestamp: timestamp1,
+              size: 0
+            }, {
+              value: 'convertedValue2',
+              labels: ['label2'],
+              timestamp: timestamp2,
+              size: 2
+            }]
+          }
+        }
+      }]);
+    });
+
+    it('should not decode values when applicable', function() {
+      var timestamp1 = 123;
+      var timestamp2 = 345;
+
+      var chunks = [{
+        rowKey: 'unconvertedKey',
+        familyName: {
+          value: 'familyName'
+        },
+        qualifier: {
+          value: 'unconvertedQualifier'
+        }
+      }, {
+        value: 'unconvertedValue',
+        labels: ['label'],
+        timestampMicros: timestamp1,
+        valueSize: 0
+      }, {
+        value: 'unconvertedValue2',
+        labels: ['label2'],
+        timestampMicros: timestamp2,
+        valueSize: 2
+      }, {
+        commitRow: true
+      }];
+
+      var rows = Row.formatChunks_(chunks, {
+        decode: false
+      });
+
+      assert.deepEqual(rows, [{
+        key: 'convertedKey',
+        data: {
+          familyName: {
+            convertedQualifier: [{
+              value: 'unconvertedValue',
+              labels: ['label'],
+              timestamp: timestamp1,
+              size: 0
+            }, {
+              value: 'unconvertedValue2',
+              labels: ['label2'],
+              timestamp: timestamp2,
+              size: 2
+            }]
+          }
+        }
+      }]);
+    });
+
+    it('should discard old data when reset row is found', function() {
+      var chunks = [{
+        rowKey: 'unconvertedKey',
+        familyName: {
+          value: 'familyName'
+        },
+        qualifier: {
+          value: 'unconvertedQualifier'
+        },
+        value: 'unconvertedValue',
+        labels: ['label'],
+        valueSize: 0,
+        timestampMicros: 123
+      }, {
+        resetRow: true
+      }, {
+        rowKey: 'unconvertedKey2',
+        familyName: {
+          value: 'familyName2'
+        },
+        qualifier: {
+          value: 'unconvertedQualifier2'
+        },
+        value: 'unconvertedValue2',
+        labels: ['label2'],
+        valueSize: 2,
+        timestampMicros: 345
+      }, {
+        commitRow: true
+      }];
+
+      var rows = Row.formatChunks_(chunks);
+
+      assert.deepEqual(rows, [{
+        key: 'convertedKey2',
+        data: {
+          familyName2: {
+            convertedQualifier2: [{
+              value: 'convertedValue2',
+              labels: ['label2'],
+              size: 2,
+              timestamp: 345
+            }]
+          }
+        }
+      }]);
     });
   });
 
@@ -191,6 +406,18 @@ describe('Bigtable/Row', function() {
       assert.strictEqual(convertStpy.getCall(0).args[0], 'test-column');
       assert.strictEqual(convertStpy.getCall(1).args[0], 'test-value');
     });
+
+    it('should optionally not decode the value', function() {
+      var formatted = Row.formatFamilies_(families, {
+        decode: false
+      });
+
+      assert.deepEqual(formatted, formattedRowData);
+
+      var convertStpy = FakeMutation.convertFromBytes;
+      assert.strictEqual(convertStpy.callCount, 1);
+      assert.strictEqual(convertStpy.getCall(0).args[0], 'test-column');
+    });
   });
 
   describe('create', function() {
@@ -206,6 +433,20 @@ describe('Bigtable/Row', function() {
     });
 
     it('should accept data to populate the row', function(done) {
+      var data = {
+        a: 'a',
+        b: 'b'
+      };
+
+      row.parent.mutate = function(entry) {
+        assert.strictEqual(entry.data, data);
+        done();
+      };
+
+      row.create(data, assert.ifError);
+    });
+
+    it('should accept options when inserting data', function(done) {
       var data = {
         a: 'a',
         b: 'b'
@@ -267,7 +508,7 @@ describe('Bigtable/Row', function() {
     it('should read/modify/write rules', function(done) {
       row.request = function(grpcOpts, reqOpts, callback) {
         assert.deepEqual(grpcOpts, {
-          service: 'BigtableService',
+          service: 'Bigtable',
           method: 'readModifyWriteRow'
         });
 
@@ -345,7 +586,7 @@ describe('Bigtable/Row', function() {
 
       row.request = function(grpcOpts, reqOpts) {
         assert.deepEqual(grpcOpts, {
-          service: 'BigtableService',
+          service: 'Bigtable',
           method: 'checkAndMutateRow'
         });
 
@@ -456,7 +697,7 @@ describe('Bigtable/Row', function() {
   describe('get', function() {
     it('should provide the proper request options', function(done) {
       row.parent.getRows = function(reqOpts) {
-        assert.strictEqual(reqOpts.key, ROW_ID);
+        assert.strictEqual(reqOpts.keys[0], ROW_ID);
         assert.strictEqual(reqOpts.filter, undefined);
         assert.strictEqual(FakeMutation.parseColumnName.callCount, 0);
         done();
@@ -537,6 +778,44 @@ describe('Bigtable/Row', function() {
       };
 
       row.get(keys, assert.ifError);
+    });
+
+    it('should respect the options object', function(done) {
+      var keys = [
+        'a'
+      ];
+
+      var options = {
+        decode: false
+      };
+
+      var expectedFilter = [{
+        family: 'a'
+      }];
+
+      row.parent.getRows = function(reqOpts) {
+        assert.deepEqual(reqOpts.filter, expectedFilter);
+        assert.strictEqual(FakeMutation.parseColumnName.callCount, 1);
+        assert(FakeMutation.parseColumnName.calledWith(keys[0]));
+        assert.strictEqual(reqOpts.decode, options.decode);
+        done();
+      };
+
+      row.get(keys, options, assert.ifError);
+    });
+
+    it('should accept options without keys', function(done) {
+      var options = {
+        decode: false
+      };
+
+      row.parent.getRows = function(reqOpts) {
+        assert.strictEqual(reqOpts.decode, options.decode);
+        assert(!reqOpts.filter);
+        done();
+      };
+
+      row.get(options, assert.ifError);
     });
 
     it('should return an error to the callback', function(done) {
@@ -626,7 +905,7 @@ describe('Bigtable/Row', function() {
       var error = new Error('err');
       var response = {};
 
-      row.get = function(callback) {
+      row.get = function(options, callback) {
         callback(error, null, response);
       };
 
@@ -640,19 +919,42 @@ describe('Bigtable/Row', function() {
 
     it('should return metadata to the callback', function(done) {
       var response = {};
-      var metadata = {
+      var fakeMetadata = {
         a: 'a',
         b: 'b'
       };
 
-      row.get = function(callback) {
-        row.metadata = metadata;
+      row.get = function(options, callback) {
         callback(null, row, response);
       };
 
+      row.metadata = fakeMetadata;
+
       row.getMetadata(function(err, metadata, apiResponse) {
         assert.ifError(err);
-        assert.strictEqual(metadata, metadata);
+        assert.strictEqual(metadata, fakeMetadata);
+        assert.strictEqual(response, apiResponse);
+        done();
+      });
+    });
+
+    it('should accept an options object', function(done) {
+      var response = {};
+      var fakeMetadata = {};
+      var fakeOptions = {
+        decode: false
+      };
+
+      row.get = function(options, callback) {
+        assert.strictEqual(options, fakeOptions);
+        callback(null, row, response);
+      };
+
+      row.metadata = fakeMetadata;
+
+      row.getMetadata(fakeOptions, function(err, metadata, apiResponse) {
+        assert.ifError(err);
+        assert.strictEqual(metadata, fakeMetadata);
         assert.strictEqual(response, apiResponse);
         done();
       });
@@ -714,18 +1016,19 @@ describe('Bigtable/Row', function() {
     it('should pass back the updated value to the callback', function(done) {
       var fakeValue = 10;
       var response = {
-        key: 'fakeKey',
-        families: [{
-          name: 'a',
-          columns: [{
-            qualifier: 'b',
-            cells: [{
-              timestampMicros: Date.now(),
-              value: fakeValue,
-              labels: []
+        row: {
+          families: [{
+            name: 'a',
+            columns: [{
+              qualifier: 'b',
+              cells: [{
+                timestampMicros: Date.now(),
+                value: fakeValue,
+                labels: []
+              }]
             }]
           }]
-        }]
+        }
       };
 
       row.createRules = function(r, callback) {
@@ -737,14 +1040,14 @@ describe('Bigtable/Row', function() {
         assert.strictEqual(value, fakeValue);
         assert.strictEqual(apiResponse, response);
         assert.strictEqual(formatFamiliesSpy.callCount, 1);
-        assert(formatFamiliesSpy.calledWithExactly(response.families));
+        assert(formatFamiliesSpy.calledWithExactly(response.row.families));
         done();
       });
     });
   });
 
   describe('save', function() {
-    it('should insert a key value pair', function(done) {
+    describe('key value pair', function() {
       var key = 'a:b';
       var value = 'c';
 
@@ -754,37 +1057,45 @@ describe('Bigtable/Row', function() {
         }
       };
 
-      var parseSpy = Mutation.parseColumnName = sinon.spy(function() {
-        return {
-          family: 'd',
-          qualifier: 'e'
-        };
+      var parseSpy;
+
+      beforeEach(function() {
+        parseSpy = Mutation.parseColumnName = sinon.spy(function() {
+          return {
+            family: 'd',
+            qualifier: 'e'
+          };
+        });
       });
 
-      row.parent.mutate = function(entry, callback) {
-        assert.strictEqual(entry.key, ROW_ID);
-        assert.deepEqual(entry.data, expectedData);
-        assert.strictEqual(entry.method, FakeMutation.methods.INSERT);
-        assert(parseSpy.calledWithExactly(key));
-        callback();
-      };
+      it('should insert a key value pair', function(done) {
+        row.parent.mutate = function(entry, callback) {
+          assert.strictEqual(entry.key, ROW_ID);
+          assert.deepEqual(entry.data, expectedData);
+          assert.strictEqual(entry.method, FakeMutation.methods.INSERT);
+          assert(parseSpy.calledWithExactly(key));
+          callback();
+        };
 
-      row.save(key, value, done);
+        row.save(key, value, done);
+      });
     });
 
-    it('should insert an object', function(done) {
+    describe('object mode', function() {
       var data = {
         a: {
           b: 'c'
         }
       };
 
-      row.parent.mutate = function(entry) {
-        assert.strictEqual(entry.data, data);
-        done();
-      };
+      it('should insert an object', function(done) {
+        row.parent.mutate = function(entry) {
+          assert.strictEqual(entry.data, data);
+          done();
+        };
 
-      row.save(data, assert.ifError);
+        row.save(data, assert.ifError);
+      });
     });
   });
 
