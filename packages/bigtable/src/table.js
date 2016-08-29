@@ -624,9 +624,27 @@ Table.prototype.getRows = function(options, callback) {
  *     See {module:bigtable/table#mutate}.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {object} callback.apiResponse - The full API response.
+ * @param {object} callback.insertErrors - A status object for each failed
+ *     insert.
  *
  * @example
+ * var callback = function(err, insertErrors) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ *
+ *   // insertErrors = [
+ *   //   {
+ *   //     code: 500,
+ *   //     message: 'Internal Server Error',
+ *   //     entry: {
+ *   //       index: 0
+ *   //     }
+ *   //   }
+ *   //   ...
+ *   // ]
+ * };
+ *
  * var entries = [
  *  {
  *     key: 'alincoln',
@@ -638,7 +656,7 @@ Table.prototype.getRows = function(options, callback) {
  *   }
  * ];
  *
- * table.insert(entries, function(err, apiResponse) {});
+ * table.insert(entries, callback);
  *
  * //-
  * // By default whenever you insert new data, the server will capture a
@@ -659,7 +677,7 @@ Table.prototype.getRows = function(options, callback) {
  *   }
  * ];
  *
- * table.insert(entries, function(err, apiResponse) {});
+ * table.insert(entries, callback);
  *
  * //-
  * // A stream mode is also provided, this is useful when making a large number
@@ -667,14 +685,8 @@ Table.prototype.getRows = function(options, callback) {
  * //-
  * table.insert(entries)
  *   .on('error', console.error)
- *   .on('data', function(response) {
- *     // response = {
- *     //   index: 0,
- *     //   status: {
- *     //     code: 200,
- *     //     message: 'OK'
- *     //   }
- *     // }
+ *   .on('finish', function() {
+ *     // Mutations finished running.
  *   });
  */
 Table.prototype.insert = function(entries, callback) {
@@ -692,25 +704,26 @@ Table.prototype.insert = function(entries, callback) {
  *     deleted.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {object[]} callback.statuses - A status for each entity transaction.
+ * @param {object[]} callback.mutationErrors - A status object for each failed
+ *     mutation.
  *
  * @example
  * //-
  * // Insert entities. See {module:bigtable/table#insert}
  * //-
- * var callback = function(err, statuses) {
+ * var callback = function(err, mutationErrors) {
  *   if (err) {
  *     // Error handling omitted.
  *   }
  *
- *   // statuses = [
+ *   // mutationErrors = [
  *   //   {
- *   //     index: 0,
- *   //     status: {
- *   //       code: 200,
- *   //       message: 'OK'
+ *   //     code: 500,
+ *   //     message: 'Internal Server Error',
+ *   //     entry: {
+ *   //       index: 0
  *   //     }
- *   //   },
+ *   //   }
  *   //   ...
  *   // ]
  * };
@@ -786,14 +799,8 @@ Table.prototype.insert = function(entries, callback) {
  * //-
  * table.mutate(entries)
  *   .on('error', console.error)
- *   .on('data', function(response) {
- *     // response = {
- *     //   index: 0,
- *     //   status: {
- *     //     code: 200,
- *     //     message: 'OK'
- *     //   }
- *     // }
+ *   .on('finish', function() {
+ *     // Mutations finished running.
  *   });
  */
 Table.prototype.mutate = function(entries, callback) {
@@ -810,30 +817,43 @@ Table.prototype.mutate = function(entries, callback) {
     entries: entries
   };
 
+  var isStreamMode = !is.function(callback);
+
   var stream = pumpify.obj([
     this.requestStream(grpcOpts, reqOpts),
     through.obj(function(data, enc, next) {
       var throughStream = this;
 
       data.entries.forEach(function(entry) {
-        throughStream.push({
-          index: entry.index,
-          status: common.GrpcService.decorateStatus_(entry.status)
-        });
+        // mutation was successful, no need to notify the user
+        if (entry.status.code === 0) {
+          return;
+        }
+
+        var status = common.GrpcService.decorateStatus_(entry.status);
+        status.entry = entry;
+
+
+        if (isStreamMode) {
+          stream.emit('error', status);
+          return;
+        }
+
+        throughStream.push(status);
       });
 
       next();
     })
   ]);
 
-  if (!is.function(callback)) {
+  if (isStreamMode) {
     return stream;
   }
 
   stream
     .on('error', callback)
     .pipe(concat(function(entries) {
-      callback(null, flatten(entries));
+      callback(null, entries);
     }));
 };
 

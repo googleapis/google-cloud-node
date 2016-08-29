@@ -820,9 +820,7 @@ describe('Bigtable/Table', function() {
     });
 
     it('should provide the proper request options', function(done) {
-      var stream = new Stream({
-        objectMode: true
-      });
+      var stream = through.obj();
 
       table.requestStream = function(grpcOpts, reqOpts) {
         assert.deepEqual(grpcOpts, {
@@ -846,84 +844,148 @@ describe('Bigtable/Table', function() {
     });
 
     describe('error', function() {
-      var error = new Error('err');
+      describe('API errors', function() {
+        var error = new Error('err');
 
-      beforeEach(function() {
-        table.requestStream = function() {
-          var stream = new Stream({
-            objectMode: true
+        beforeEach(function() {
+          table.requestStream = function() {
+            var stream = new Stream({
+              objectMode: true
+            });
+
+            setImmediate(function() {
+              stream.emit('error', error);
+            });
+
+            return stream;
+          };
+        });
+
+        it('should return the error to the callback', function(done) {
+          table.mutate(entries, function(err) {
+            assert.strictEqual(err, error);
+            done();
           });
+        });
 
-          setImmediate(function() {
-            stream.emit('error', error);
+        it('should emit the error via error event', function(done) {
+          table.mutate(entries).on('error', function(err) {
+            assert.strictEqual(err, error);
+            done();
           });
+        });
+      });
 
-          return stream;
-        };
+      describe('mutation errors', function() {
+        var fakeStatuses = [{
+          index: 0,
+          status: {
+            code: 1
+          }
+        }, {
+          index: 1,
+          status: {
+            code: 1
+          }
+        }];
+
+        var parsedStatuses = [{}, {}];
+
+        beforeEach(function() {
+          table.requestStream = function() {
+            var stream = through.obj();
+
+            stream.push({ entries: fakeStatuses });
+
+            setImmediate(function() {
+              stream.end();
+            });
+
+            return stream;
+          };
+
+          var statusCount = 0;
+          FakeGrpcService.decorateStatus_ = function(status) {
+            assert.strictEqual(status, fakeStatuses[statusCount].status);
+            return parsedStatuses[statusCount++];
+          };
+        });
+
+        it('should populate the mutationErrors array', function(done) {
+          table.mutate(entries, function(err, mutationErrors) {
+            assert.ifError(err);
+            assert.strictEqual(mutationErrors[0], parsedStatuses[0]);
+            assert.strictEqual(mutationErrors[0].entry, fakeStatuses[0]);
+            assert.strictEqual(mutationErrors[1], parsedStatuses[1]);
+            assert.strictEqual(mutationErrors[1].entry, fakeStatuses[1]);
+            done();
+          });
+        });
+
+        it('should emit a mutation error as an error event', function(done) {
+          var mutationErrors = [];
+
+          table.mutate(entries)
+            .on('error', function(err) {
+              mutationErrors.push(err);
+            })
+            .on('finish', function() {
+              assert.strictEqual(mutationErrors[0], parsedStatuses[0]);
+              assert.strictEqual(mutationErrors[0].entry, fakeStatuses[0]);
+              assert.strictEqual(mutationErrors[1], parsedStatuses[1]);
+              assert.strictEqual(mutationErrors[1].entry, fakeStatuses[1]);
+              done();
+            });
+        });
       });
     });
 
     describe('success', function() {
       var fakeStatuses = [{
         index: 0,
-        status: {}
+        status: {
+          code: 0
+        }
       }, {
         index: 1,
-        status: {}
-      }];
-
-      var parsedStatuses = [{}, {}];
-
-      var expectedStatuses = [{
-        index: fakeStatuses[0].index,
-        status: parsedStatuses[0]
-      }, {
-        index: fakeStatuses[1].index,
-        status: parsedStatuses[1]
+        status: {
+          code: 0
+        }
       }];
 
       beforeEach(function() {
         table.requestStream = function() {
-          var stream = new Stream({
-            objectMode: true
-          });
+          var stream = through.obj();
 
           stream.push({ entries: fakeStatuses });
 
           setImmediate(function() {
-            stream.push(null);
+            stream.end();
           });
 
           return stream;
         };
 
-        var statusCount = 0;
-        FakeGrpcService.decorateStatus_ = function(status) {
-          assert.strictEqual(status, fakeStatuses[statusCount].status);
-          return parsedStatuses[statusCount++];
+        FakeGrpcServiceObject.decorateStatus_ = function() {
+          throw new Error('Should not be called');
         };
       });
 
-      it('should emit each status as a data event', function(done) {
-        var statuses = [];
-
-        table.mutate(entries)
-          .on('data', function(status) {
-            statuses.push(status);
-          })
-          .on('end', function() {
-            assert.strictEqual(statuses.length, 2);
-            assert.deepEqual(statuses, expectedStatuses);
-            done();
-          });
-      });
-
-      it('should pass the statuses to the callback', function(done) {
-        table.mutate(entries, function(err, statuses) {
+      it('should return an empty array to the callback', function(done) {
+        table.mutate(entries, function(err, mutateErrors) {
           assert.ifError(err);
-          assert.deepEqual(statuses, expectedStatuses);
+          assert.strictEqual(mutateErrors.length, 0);
           done();
         });
+      });
+
+      it('should emit the appropriate stream events', function(done) {
+        table.mutate(entries)
+          .on('error', done) // should not be emitted
+          .on('data', done) // should not be emitted
+          .on('finish', function() {
+            done();
+          });
       });
     });
   });
