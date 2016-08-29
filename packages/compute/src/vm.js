@@ -424,16 +424,45 @@ VM.prototype.reset = function(callback) {
  * @param {string} machineType - Full or partial machine type. See a list of
  *     predefined machine types
  *     [here](https://cloud.google.com/compute/docs/machine-types#predefined_machine_types).
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.start - Start the VM after successfully updating the
+ *     machine type. Default: `false`.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * vm.resize('n1-standard-1', function(err, apiResponse) {});
+ * vm.resize('n1-standard-1', function(err, apiResponse) {
+ *   if (!err) {
+ *     // The VM is running and its machine type was changed successfully.
+ *   }
+ * });
+ *
+ * //-
+ * // By default, calling `resize` will start your server after updating its
+ * // machine type. If you want to leave it stopped, set `options.start` to
+ * // `false`.
+ * //-
+ * var options = {
+ *   start: false
+ * };
+ *
+ * vm.resize('ns-standard-1', options, function(err, apiResponse) {
+ *   if (!err) {
+ *     // The VM is stopped and its machine type was changed successfully.
+ *   }
+ * });
  */
-VM.prototype.resize = function(machineType, callback) {
+VM.prototype.resize = function(machineType, options, callback) {
   var self = this;
   var compute = this.zone.parent;
+
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = options || {};
 
   var isPartialMachineType = machineType.indexOf('/') === -1;
 
@@ -469,8 +498,12 @@ VM.prototype.resize = function(machineType, callback) {
       return;
     }
 
-    // The machine type was changed successfully. Start the VM.
-    self.start(compute.execAfterOperation_(callback));
+    // The machine type was changed successfully.
+    if (options.start === false) {
+      callback(null, apiResponse);
+    } else {
+      self.start(compute.execAfterOperation_(callback));
+    }
   }));
 };
 

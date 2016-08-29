@@ -611,7 +611,7 @@ describe('VM', function() {
     });
 
     describe('success', function() {
-      it('should start the VM', function(done) {
+      it('should start the VM by default', function(done) {
         function userCallback() {}
         function onVmStart() {}
 
@@ -630,6 +630,24 @@ describe('VM', function() {
         };
 
         vm.resize(MACHINE_TYPE, userCallback);
+      });
+    });
+
+    it('should not start the VM by request', function(done) {
+      var apiResponse = {};
+
+      vm.zone.parent.execAfterOperation_ = function(callback) {
+        callback(null, apiResponse);
+      };
+
+      vm.start = function() {
+        done(); // Test will fail if called.
+      };
+
+      vm.resize(MACHINE_TYPE, { start: false }, function(err, apiResponse_) {
+        assert.ifError(err);
+        assert.strictEqual(apiResponse_, apiResponse);
+        done();
       });
     });
   });
