@@ -18,7 +18,6 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var prop = require('propprop');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
@@ -182,11 +181,25 @@ describe('Translate', function() {
     it('should make the correct API request', function(done) {
       translate.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/languages');
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepEqual(reqOpts.qs, {
+          target: 'en'
+        });
         done();
       };
 
       translate.getLanguages(assert.ifError);
+    });
+
+    it('should make the correct API request with target', function(done) {
+      translate.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/languages');
+        assert.deepEqual(reqOpts.qs, {
+          target: 'es'
+        });
+        done();
+      };
+
+      translate.getLanguages('es', assert.ifError);
     });
 
     describe('error', function() {
@@ -225,8 +238,7 @@ describe('Translate', function() {
         }
       };
 
-      var expectedResults = apiResponse.data.languages.map(prop('language'));
-      var expectedResultsWithTarget = [
+      var expectedResults = [
         {
           code: 'en',
           name: 'English'
@@ -255,7 +267,7 @@ describe('Translate', function() {
       it('should support target option', function(done) {
         translate.getLanguages('en', function(err, languages, apiResponse_) {
           assert.ifError(err);
-          assert.deepEqual(languages, expectedResultsWithTarget);
+          assert.deepEqual(languages, expectedResults);
           assert.strictEqual(apiResponse_, apiResponse);
           done();
         });

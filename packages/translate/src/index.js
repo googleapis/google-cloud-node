@@ -166,8 +166,8 @@ Translate.prototype.detect = function(input, callback) {
  *
  * @resource [Discovering Supported Languages]{@link https://cloud.google.com/translate/v2/discovering-supported-languages-with-rest}
  *
- * @param {string=} target - Include the languages names in the response
- *     translated to a target language.
+ * @param {string=} target - Get the language names in a language other than
+ *     English:
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {string[]|object[]} callback.languages - The supported ISO 639-1
@@ -176,23 +176,6 @@ Translate.prototype.detect = function(input, callback) {
  *
  * @example
  * translate.getLanguages(function(err, languages) {
- *   if (!err) {
- *     // languages = [
- *     //   'af',
- *     //   'ar',
- *     //   'az',
- *     //   ...
- *     // ]
- *   }
- * });
- *
- * //-
- * // Include the languages names in the response translated to a target
- * // language:
- * //-
- * translate.getLanguages({
- *   target: 'en'
- * }, function(err, languages, apiResponse) {
  *   if (!err) {
  *     // languages = [
  *     //   {
@@ -211,11 +194,34 @@ Translate.prototype.detect = function(input, callback) {
  *     // ]
  *   }
  * });
+ *
+ * //-
+ * // Get the language names in a language other than English:
+ * //-
+ * translate.getLanguages('es', function(err, languages) {
+ *   if (!err) {
+ *     // languages = [
+ *     //   {
+ *     //     code: 'af',
+ *     //     name: 'afrikáans'
+ *     //   },
+ *     //   {
+ *     //     code: 'ar',
+ *     //     name: 'árabe'
+ *     //   },
+ *     //   {
+ *     //     code: 'az',
+ *     //     name: 'azerí'
+ *     //   }
+ *     //   ...
+ *     // ]
+ *   }
+ * });
  */
 Translate.prototype.getLanguages = function(target, callback) {
   if (is.fn(target)) {
     callback = target;
-    target = undefined;
+    target = 'en';
   }
 
   var reqOpts = {
@@ -234,18 +240,12 @@ Translate.prototype.getLanguages = function(target, callback) {
       return;
     }
 
-    var languages = resp.data.languages;
-
-    if (!reqOpts.qs.target) {
-      languages = languages.map(prop('language'));
-    } else {
-      languages = languages.map(function(language) {
-        return {
-          code: language.language,
-          name: language.name
-        };
-      });
-    }
+    var languages = resp.data.languages.map(function(language) {
+      return {
+        code: language.language,
+        name: language.name
+      };
+    });
 
     callback(null, languages, resp);
   });
