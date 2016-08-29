@@ -72,8 +72,8 @@ describe('pubsub:iam', function () {
     });
     it('should handle error', function () {
       var sample = getSample();
-      var error = 'error';
-      sample.mocks.topic.iam.getPolicy.callsArgWith(0, new Error(error));
+      var error = new Error('error');
+      sample.mocks.topic.iam.getPolicy.callsArgWith(0, error);
       sample.program.getTopicPolicy(topicName, function (err) {
         assert(err);
         assert(err.message === 'error');
@@ -100,8 +100,8 @@ describe('pubsub:iam', function () {
     });
     it('should handle error', function () {
       var sample = getSample();
-      var error = 'error';
-      sample.mocks.subscription.iam.getPolicy.callsArgWith(0, new Error(error));
+      var error = new Error('error');
+      sample.mocks.subscription.iam.getPolicy.callsArgWith(0, error);
       sample.program.getSubscriptionPolicy(subscriptionName, function (err) {
         assert(err);
         assert(err.message === 'error');
@@ -128,8 +128,8 @@ describe('pubsub:iam', function () {
     });
     it('should handle error', function () {
       var sample = getSample();
-      var error = 'error';
-      sample.mocks.topic.iam.setPolicy.callsArgWith(1, new Error(error));
+      var error = new Error('error');
+      sample.mocks.topic.iam.setPolicy.callsArgWith(1, error);
       sample.program.setTopicPolicy(topicName, function (err) {
         assert(err);
         assert(err.message === 'error');
@@ -156,8 +156,8 @@ describe('pubsub:iam', function () {
     });
     it('should handle error', function () {
       var sample = getSample();
-      var error = 'error';
-      sample.mocks.subscription.iam.setPolicy.callsArgWith(1, new Error(error));
+      var error = new Error('error');
+      sample.mocks.subscription.iam.setPolicy.callsArgWith(1, error);
       sample.program.setSubscriptionPolicy(subscriptionName, function (err) {
         assert(err);
         assert(err.message === 'error');
@@ -184,8 +184,8 @@ describe('pubsub:iam', function () {
     });
     it('should handle error', function () {
       var sample = getSample();
-      var error = 'error';
-      sample.mocks.topic.iam.testPermissions.callsArgWith(1, new Error(error));
+      var error = new Error('error');
+      sample.mocks.topic.iam.testPermissions.callsArgWith(1, error);
       sample.program.testTopicPermissions(topicName, function (err, permissions) {
         assert(err);
         assert(err.message === 'error');
@@ -213,8 +213,8 @@ describe('pubsub:iam', function () {
     });
     it('should handle error', function () {
       var sample = getSample();
-      var error = 'error';
-      sample.mocks.subscription.iam.testPermissions.callsArgWith(1, new Error(error));
+      var error = new Error('error');
+      sample.mocks.subscription.iam.testPermissions.callsArgWith(1, error);
       sample.program.testSubscriptionPermissions(subscriptionName, function (err, permissions) {
         assert(err);
         assert(err.message === 'error');

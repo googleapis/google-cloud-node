@@ -91,8 +91,8 @@ describe('pubsub:subscriptions', function () {
     });
     it('should handle error', function () {
       var sample = getSample();
-      var error = 'error';
-      sample.mocks.pubsub.subscribe.callsArgWith(3, new Error(error));
+      var error = new Error('error');
+      sample.mocks.pubsub.subscribe.callsArgWith(3, error);
       sample.program.createSubscription(topicName, subscriptionName, function (err) {
         assert(err);
         assert(err.message === 'error');
@@ -118,8 +118,8 @@ describe('pubsub:subscriptions', function () {
     });
     it('should handle error', function () {
       var sample = getSample();
-      var error = 'error';
-      sample.mocks.subscription.delete.callsArgWith(0, new Error(error));
+      var error = new Error('error');
+      sample.mocks.subscription.delete.callsArgWith(0, error);
       sample.program.deleteSubscription(subscriptionName, function (err) {
         assert(err);
         assert(err.message === 'error');
@@ -146,8 +146,8 @@ describe('pubsub:subscriptions', function () {
     });
     it('should handle error', function () {
       var sample = getSample();
-      var error = 'error';
-      sample.mocks.pubsub.getSubscriptions.callsArgWith(1, new Error(error));
+      var error = new Error('error');
+      sample.mocks.pubsub.getSubscriptions.callsArgWith(1, error);
       sample.program.listSubscriptions(undefined, function (err, subscriptions) {
         assert(err);
         assert(err.message === 'error');
@@ -176,8 +176,8 @@ describe('pubsub:subscriptions', function () {
     });
     it('should handle pull error', function () {
       var sample = getSample();
-      var error = 'error';
-      sample.mocks.subscription.pull.callsArgWith(1, new Error(error));
+      var error = new Error('error');
+      sample.mocks.subscription.pull.callsArgWith(1, error);
       sample.program.pullMessages(subscriptionName, function (err, messages) {
         assert(err);
         assert(err.message === 'error');
@@ -186,8 +186,8 @@ describe('pubsub:subscriptions', function () {
     });
     it('should handle ack error', function () {
       var sample = getSample();
-      var error = 'error';
-      sample.mocks.subscription.ack.callsArgWith(1, new Error(error));
+      var error = new Error('error');
+      sample.mocks.subscription.ack.callsArgWith(1, error);
       sample.program.pullMessages(subscriptionName, function (err) {
         assert(err);
         assert(err.message === 'error');

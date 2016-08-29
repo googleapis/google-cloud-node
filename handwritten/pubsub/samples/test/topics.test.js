@@ -67,8 +67,8 @@ describe('pubsub:topics', function () {
     });
     it('should handle error', function () {
       var sample = getSample();
-      var error = 'error';
-      sample.mocks.topic.get.callsArgWith(1, new Error(error));
+      var error = new Error('error');
+      sample.mocks.topic.get.callsArgWith(1, error);
       sample.program.createTopic(topicName, function (err) {
         assert(err);
         assert(err.message === 'error');
@@ -94,8 +94,8 @@ describe('pubsub:topics', function () {
     });
     it('should handle error', function () {
       var sample = getSample();
-      var error = 'error';
-      sample.mocks.topic.delete.callsArgWith(0, new Error(error));
+      var error = new Error('error');
+      sample.mocks.topic.delete.callsArgWith(0, error);
       sample.program.deleteTopic(topicName, function (err) {
         assert(err);
         assert(err.message === 'error');
@@ -138,8 +138,8 @@ describe('pubsub:topics', function () {
     });
     it('should handle error', function () {
       var sample = getSample();
-      var error = 'error';
-      sample.mocks.topic.publish.callsArgWith(1, new Error(error));
+      var error = new Error('error');
+      sample.mocks.topic.publish.callsArgWith(1, error);
       sample.program.publishMessage(topicName, '{"data":"hello world"}', function (err, messageIds) {
         assert(err);
         assert(err.message === 'error');
@@ -159,8 +159,8 @@ describe('pubsub:topics', function () {
     });
     it('should handle error', function () {
       var sample = getSample();
-      var error = 'error';
-      sample.mocks.pubsub.getTopics.callsArgWith(0, new Error(error));
+      var error = new Error('error');
+      sample.mocks.pubsub.getTopics.callsArgWith(0, error);
       sample.program.listTopics(function (err, topics) {
         assert(err);
         assert(err.message === 'error');
