@@ -17,6 +17,7 @@
 'use strict';
 
 var assert = require('assert');
+var events = require('events');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var pumpify = require('pumpify');
@@ -924,8 +925,11 @@ describe('Bigtable/Table', function() {
 
         it('should emit a mutation error as an error event', function(done) {
           var mutationErrors = [];
+          var emitter = table.mutate(entries)
 
-          table.mutate(entries)
+          assert(emitter instanceof events.EventEmitter);
+
+          emitter
             .on('error', function(err) {
               mutationErrors.push(err);
             })
@@ -980,9 +984,12 @@ describe('Bigtable/Table', function() {
       });
 
       it('should emit the appropriate stream events', function(done) {
-        table.mutate(entries)
+        var emitter = table.mutate(entries);
+
+        assert(emitter instanceof events.EventEmitter);
+
+        emitter
           .on('error', done) // should not be emitted
-          .on('data', done) // should not be emitted
           .on('finish', function() {
             done();
           });

@@ -23,6 +23,7 @@
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var concat = require('concat-stream');
+var events = require('events');
 var flatten = require('lodash.flatten');
 var is = require('is');
 var propAssign = require('prop-assign');
@@ -685,8 +686,8 @@ Table.prototype.getRows = function(options, callback) {
  * table.insert(entries, callback);
  *
  * //-
- * // A stream mode is also provided, this is useful when making a large number
- * // of inserts.
+ * // An event emitter mode is also provided, this is useful when making a large
+ * // number of inserts.
  * //
  * // The error event can be either an API error or an insert error.
  * //-
@@ -807,8 +808,8 @@ Table.prototype.insert = function(entries, callback) {
  * table.mutate(entries, callback);
  *
  * //-
- * // A stream mode is also provided, this is useful when making a large number
- * // of mutations.
+ * // An event emitter mode is also provided, this is useful when making a large
+ * // number of mutations.
  * //
  * // The error event can be either an API error or a mutation error.
  * //-
@@ -832,7 +833,12 @@ Table.prototype.mutate = function(entries, callback) {
     entries: entries.map(Mutation.parse)
   };
 
-  var isStreamMode = !is.function(callback);
+  var isCallbackMode = is.function(callback);
+  var emitter = null;
+
+  if (!isCallbackMode) {
+    emitter = new events.EventEmitter();
+  }
 
   var stream = pumpify.obj([
     this.requestStream(grpcOpts, reqOpts),
@@ -849,8 +855,8 @@ Table.prototype.mutate = function(entries, callback) {
         status.entry = entries[entry.index];
 
 
-        if (isStreamMode) {
-          stream.emit('error', status);
+        if (!isCallbackMode) {
+          emitter.emit('error', status);
           return;
         }
 
@@ -861,8 +867,11 @@ Table.prototype.mutate = function(entries, callback) {
     })
   ]);
 
-  if (isStreamMode) {
-    return stream;
+  if (!isCallbackMode) {
+    ['error', 'finish'].forEach(function(event) {
+      stream.on(event, emitter.emit.bind(emitter, event));
+    });
+    return emitter;
   }
 
   stream
