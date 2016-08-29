@@ -133,6 +133,7 @@ Vision.prototype.annotate = function(requests, callback) {
   });
 };
 
+// jscs:disable maximumLineLength
 /**
  * Detect properties from an image (or images) of one or more types.
  *
@@ -213,14 +214,15 @@ Vision.prototype.annotate = function(requests, callback) {
  * //-
  * // Run feature detection over a Buffer.
  * //-
- * var fs = require('fs');
+ * var level = require('level');
+ * var db = level('./users-database');
  *
- * fs.readFile('image.jpg', function(err, contents) {
+ * db.get('user-image', { encoding: 'binary' }, function(err, image) {
  *   if (err) {
  *     // Error handling omitted.
  *   }
  *
- *   vision.detect(contents, types, function(err, detection, apiResponse) {});
+ *   vision.detect(image, function(err, detection, apiResponse) {});
  * });
  *
  * //-
@@ -533,6 +535,7 @@ Vision.prototype.detect = function(images, options, callback) {
     });
   });
 };
+// jscs:enable maximumLineLength
 
 /**
  * Run face detection against an image.
