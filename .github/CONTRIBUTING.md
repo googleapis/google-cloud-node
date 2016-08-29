@@ -70,6 +70,42 @@ Before we can accept your pull requests you'll need to sign a Contributor Licens
 
 You can sign these electronically (just scroll to the bottom). After that, we'll be able to accept your pull requests.
 
+### Publishing
+
+To publish this module, you must be logged in as the user `google-cloud`.
+
+```sh
+$ npm logout && npm login
+$ npm login
+# Follow the prompts to login as `google-cloud`
+
+# If publishing a service module:
+#   $ cd packages/bigquery
+# Otherwise stay in the root directory
+
+$ npm run publish-module {{version}}
+```
+
+  - **version** In the format of `0.2.0`
+
+This will:
+
+  1. Copy the necessary legal files into the working directory so they are included with the release
+  1. Publish the module
+  1. Create a commit and tag for the new version
+
+The output from the command will remind you to push to master with a command like the following:
+
+```sh
+$ git push origin master --follow-tags
+```
+
+Log back in as your npm user:
+
+```sh
+$ npm logout && npm login
+```
+
 [elsewhere]: README.md#elsewhere
 [gcloudcli]: https://developers.google.com/cloud/sdk/gcloud/
 [indvcla]: https://developers.google.com/open-source/cla/individual
