@@ -162,7 +162,7 @@ describe('Compute', function() {
 
       autoscaler.setMetadata({
         description: description
-      }, execAfterOperationComplete(function(err) {
+      }, compute.execAfterOperation_(function(err) {
         assert.ifError(err);
 
         autoscaler.getMetadata(function(err, metadata) {
@@ -319,7 +319,7 @@ describe('Compute', function() {
 
       healthCheck.setMetadata({
         description: description
-      }, execAfterOperationComplete(function(err) {
+      }, compute.execAfterOperation_(function(err) {
         if (err) {
           done(err);
           return;
@@ -392,7 +392,7 @@ describe('Compute', function() {
 
       healthCheck.setMetadata({
         description: description
-      }, execAfterOperationComplete(function(err) {
+      }, compute.execAfterOperation_(function(err) {
         if (err) {
           done(err);
           return;
@@ -511,7 +511,7 @@ describe('Compute', function() {
     it('should set named ports', function(done) {
       var ports = OPTIONS.ports;
 
-      instanceGroup.setPorts(ports, execAfterOperationComplete(function(err) {
+      instanceGroup.setPorts(ports, compute.execAfterOperation_(function(err) {
         assert.ifError(err);
 
         instanceGroup.getMetadata(function(err, metadata) {
@@ -533,7 +533,7 @@ describe('Compute', function() {
       before(create(vm, { os: 'ubuntu' }));
 
       it('should add a VM to the instance group', function(done) {
-        instanceGroup.add(vm, execAfterOperationComplete(done));
+        instanceGroup.add(vm, compute.execAfterOperation_(done));
       });
 
       it('should list the VMs', function(done) {
@@ -559,7 +559,7 @@ describe('Compute', function() {
       });
 
       it('should remove a VM from the instance group', function(done) {
-        instanceGroup.remove(vm, execAfterOperationComplete(done));
+        instanceGroup.remove(vm, compute.execAfterOperation_(done));
       });
     });
   });
@@ -847,7 +847,7 @@ describe('Compute', function() {
         '/global/targetHttpProxies/' + TARGET_PROXY_NAME
       ].join('');
 
-      rule.setTarget(target, execAfterOperationComplete(function(err) {
+      rule.setTarget(target, compute.execAfterOperation_(function(err) {
         assert.ifError(err);
 
         rule.getMetadata(function(err, metadata) {
@@ -961,7 +961,7 @@ describe('Compute', function() {
 
       service.setMetadata({
         description: description
-      }, execAfterOperationComplete(function(err) {
+      }, compute.execAfterOperation_(function(err) {
         if (err) {
           done(err);
           return;
@@ -1139,15 +1139,15 @@ describe('Compute', function() {
           os: 'ubuntu'
         };
 
-        disk.create(config, execAfterOperationComplete(callback));
+        disk.create(config, compute.execAfterOperation_(callback));
       }
 
       function attachDisk(callback) {
-        vm.attachDisk(disk, execAfterOperationComplete(callback));
+        vm.attachDisk(disk, compute.execAfterOperation_(callback));
       }
 
       function detachDisk(callback) {
-        vm.detachDisk(disk, execAfterOperationComplete(callback));
+        vm.detachDisk(disk, compute.execAfterOperation_(callback));
       }
     });
 
@@ -1163,8 +1163,8 @@ describe('Compute', function() {
 
         tags.push(newTagName);
 
-        vm.setTags(tags, fingerprint, execAfterOperationComplete(function(err) {
-          assert.ifError(err);
+        vm.setTags(tags, fingerprint, compute.execAfterOperation_(function(e) {
+          assert.ifError(e);
 
           vm.getTags(function(err, tags) {
             assert.ifError(err);
@@ -1176,7 +1176,32 @@ describe('Compute', function() {
     });
 
     it('should reset', function(done) {
-      vm.reset(execAfterOperationComplete(done));
+      vm.reset(compute.execAfterOperation_(done));
+    });
+
+    it('should resize the machine', function(done) {
+      var machineType = 'n1-standard-2';
+
+      vm.resize(machineType, function(err) {
+        assert.ifError(err);
+
+        vm.getMetadata(function(err, metadata) {
+          assert.ifError(err);
+
+          var expectedMachineType = [
+            'https://www.googleapis.com/compute/v1/projects',
+            env.projectId,
+            'zones',
+            zone.id,
+            'machineTypes',
+            machineType
+          ].join('/');
+
+          assert.strictEqual(metadata.machineType, expectedMachineType);
+
+          done();
+        });
+      });
     });
 
     it('should set metadata', function(done) {
@@ -1186,7 +1211,7 @@ describe('Compute', function() {
       var newMetadata = {};
       newMetadata[key] = value;
 
-      vm.setMetadata(newMetadata, execAfterOperationComplete(function(err) {
+      vm.setMetadata(newMetadata, compute.execAfterOperation_(function(err) {
         assert.ifError(err);
 
         vm.getMetadata(function(err, metadata) {
@@ -1205,11 +1230,11 @@ describe('Compute', function() {
     });
 
     it('should start', function(done) {
-      vm.start(execAfterOperationComplete(done));
+      vm.start(compute.execAfterOperation_(done));
     });
 
     it('should stop', function(done) {
-      vm.stop(execAfterOperationComplete(done));
+      vm.stop(compute.execAfterOperation_(done));
     });
   });
 
@@ -1324,31 +1349,14 @@ describe('Compute', function() {
       }
 
       async.each(objects, function(object, callback) {
-        object.delete(execAfterOperationComplete(callback));
+        object.delete(compute.execAfterOperation_(callback));
       }, callback);
     });
   }
 
   function create(object, cfg) {
     return function(callback) {
-      object.create(cfg, execAfterOperationComplete(callback));
-    };
-  }
-
-  function execAfterOperationComplete(callback) {
-    return function(err) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      var operation = arguments[arguments.length - 2]; // [..., op, apiResponse]
-
-      operation
-        .on('error', callback)
-        .on('complete', function() {
-          callback();
-        });
+      object.create(cfg, compute.execAfterOperation_(callback));
     };
   }
 
@@ -1362,7 +1370,7 @@ describe('Compute', function() {
       }
 
       async.each(rules, function(rule, callback) {
-        rule.delete(execAfterOperationComplete(callback));
+        rule.delete(compute.execAfterOperation_(callback));
       }, callback);
     });
   }
@@ -1377,7 +1385,7 @@ describe('Compute', function() {
       }
 
       async.each(rules, function(rule, callback) {
-        rule.delete(execAfterOperationComplete(callback));
+        rule.delete(compute.execAfterOperation_(callback));
       }, callback);
     });
   }
@@ -1392,7 +1400,7 @@ describe('Compute', function() {
       }
 
       async.each(services, function(service, callback) {
-        service.delete(execAfterOperationComplete(callback));
+        service.delete(compute.execAfterOperation_(callback));
       }, callback);
     });
   }
@@ -1459,7 +1467,7 @@ describe('Compute', function() {
       }
 
       async.each(healthChecks, function(healthCheck, callback) {
-        healthCheck.delete(execAfterOperationComplete(callback));
+        healthCheck.delete(compute.execAfterOperation_(callback));
       }, callback);
     });
   }

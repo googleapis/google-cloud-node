@@ -469,6 +469,189 @@ describe('VM', function() {
     });
   });
 
+  describe('resize', function() {
+    var MACHINE_TYPE = 'zones/' + ZONE.name + '/machineTypes/machineType';
+
+    beforeEach(function() {
+      vm.request = util.noop;
+
+      vm.zone.parent = {
+        execAfterOperation_: util.noop
+      };
+    });
+
+    it('should try to set the machine type', function(done) {
+      vm.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/setMachineType');
+        assert.deepEqual(reqOpts.json, {
+          machineType: MACHINE_TYPE
+        });
+        done();
+      };
+
+      vm.resize(MACHINE_TYPE, assert.ifError);
+    });
+
+    it('should allow a partial machine type', function(done) {
+      var partialMachineType = MACHINE_TYPE.split('/').pop();
+
+      vm.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/setMachineType');
+        assert.deepEqual(reqOpts.json, {
+          machineType: MACHINE_TYPE
+        });
+        done();
+      };
+
+      vm.resize(partialMachineType, assert.ifError);
+    });
+
+    describe('error', function() {
+      describe('instance is running', function() {
+        var error = new Error('Instance is starting or running.');
+
+        beforeEach(function() {
+          vm.zone.parent.execAfterOperation_ = function(callback) {
+            vm.zone.parent.execAfterOperation_ = util.noop;
+            callback(error);
+          };
+        });
+
+        it('should stop the VM', function(done) {
+          vm.stop = function() {
+            done();
+          };
+
+          vm.resize(MACHINE_TYPE, assert.ifError);
+        });
+
+        describe('stopping failed', function() {
+          var vmStopError = new Error('Error.');
+          var apiResponse = {};
+
+          beforeEach(function() {
+            // First: vm.request()
+            vm.zone.parent.execAfterOperation_ = function(callback) {
+              // Second: vm.stop()
+              vm.zone.parent.execAfterOperation_ = function(callback) {
+                return function onVmStop() {
+                  callback(vmStopError, apiResponse);
+                };
+              };
+
+              callback(error);
+            };
+
+            vm.stop = function(onVmStop) {
+              onVmStop();
+            };
+          });
+
+          it('should return the error and API response', function(done) {
+            vm.resize(MACHINE_TYPE, function(err, apiResponse_) {
+              assert.strictEqual(err, vmStopError);
+              assert.strictEqual(apiResponse_, apiResponse);
+              done();
+            });
+          });
+        });
+
+        describe('stopping succeeded', function() {
+          beforeEach(function() {
+            // First: vm.request()
+            vm.zone.parent.execAfterOperation_ = function(callback) {
+              // Second: vm.stop()
+              vm.zone.parent.execAfterOperation_ = function(callback) {
+                return function onVmStop() {
+                  callback();
+                };
+              };
+
+              callback(error);
+            };
+
+            vm.stop = function(onVmStop) {
+              // `setImmediate` to allow the `resize` reassignment to register.
+              setImmediate(onVmStop);
+            };
+          });
+
+          it('should try to resize the VM again', function(done) {
+            vm.resize(MACHINE_TYPE, assert.ifError);
+
+            vm.resize = function() {
+              done();
+            };
+          });
+        });
+      });
+
+      describe('instance is stopped', function() {
+        var error = new Error('Error');
+        var apiResponse = {};
+
+        beforeEach(function() {
+          vm.zone.parent.execAfterOperation_ = function(callback) {
+            vm.zone.parent.execAfterOperation_ = util.noop;
+
+            callback(error, apiResponse);
+          };
+        });
+
+        it('should return the error & API response', function(done) {
+          vm.resize(MACHINE_TYPE, function(err, apiResponse_) {
+            assert.strictEqual(err, error);
+            assert.strictEqual(apiResponse_, apiResponse);
+            done();
+          });
+        });
+      });
+    });
+
+    describe('success', function() {
+      it('should start the VM by default', function(done) {
+        function userCallback() {}
+        function onVmStart() {}
+
+        vm.zone.parent.execAfterOperation_ = function(callback) {
+          vm.zone.parent.execAfterOperation_ = function(callback) {
+            assert.strictEqual(callback, userCallback);
+            return onVmStart;
+          };
+
+          callback();
+        };
+
+        vm.start = function(callback) {
+          assert.strictEqual(callback, onVmStart);
+          done();
+        };
+
+        vm.resize(MACHINE_TYPE, userCallback);
+      });
+    });
+
+    it('should not start the VM by request', function(done) {
+      var apiResponse = {};
+
+      vm.zone.parent.execAfterOperation_ = function(callback) {
+        callback(null, apiResponse);
+      };
+
+      vm.start = function() {
+        done(); // Test will fail if called.
+      };
+
+      vm.resize(MACHINE_TYPE, { start: false }, function(err, apiResponse_) {
+        assert.ifError(err);
+        assert.strictEqual(apiResponse_, apiResponse);
+        done();
+      });
+    });
+  });
+
   describe('setMetadata', function() {
     var METADATA = {
       newKey: 'newValue'

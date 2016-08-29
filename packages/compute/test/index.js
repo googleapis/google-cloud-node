@@ -18,6 +18,7 @@
 
 var arrify = require('arrify');
 var assert = require('assert');
+var events = require('events');
 var extend = require('extend');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
@@ -2546,6 +2547,70 @@ describe('Compute', function() {
       assert(zone instanceof FakeZone);
       assert.strictEqual(zone.calledWith_[0], compute);
       assert.strictEqual(zone.calledWith_[1], NAME);
+    });
+  });
+
+  describe('execAfterOperation_', function() {
+    var OPERATION = new events.EventEmitter();
+
+    it('should execute callback with error & API response', function(done) {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      function onComplete(err, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(apiResponse_, apiResponse);
+        done();
+      }
+
+      var execWithOperation = compute.execAfterOperation_(onComplete);
+
+      execWithOperation(error, OPERATION, apiResponse);
+    });
+
+    it('should support variable arity', function(done) {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      function onComplete(err, apiResponse_) {
+        assert.strictEqual(err, error);
+        assert.strictEqual(apiResponse_, apiResponse);
+        done();
+      }
+
+      var execWithOperation = compute.execAfterOperation_(onComplete);
+
+      execWithOperation(error, null, null, OPERATION, apiResponse);
+    });
+
+    it('should register callback on operation error', function(done) {
+      var apiResponse = {};
+
+      function onComplete() {}
+
+      OPERATION.once('newListener', function(event, callback) {
+        assert.strictEqual(event, 'error');
+        assert.strictEqual(callback, onComplete);
+        done();
+      });
+
+      var execWithOperation = compute.execAfterOperation_(onComplete);
+      execWithOperation(null, OPERATION, apiResponse);
+    });
+
+    it('should execute callback on operation complete', function(done) {
+      var apiResponse = {};
+
+      function onComplete(err, apiResponse_) {
+        assert.strictEqual(err, null);
+        assert.strictEqual(apiResponse_, apiResponse);
+        done();
+      }
+
+      var execWithOperation = compute.execAfterOperation_(onComplete);
+      execWithOperation(null, OPERATION, {});
+
+      OPERATION.emit('complete', apiResponse);
     });
   });
 });
