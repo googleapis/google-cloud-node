@@ -876,8 +876,8 @@ Table.prototype.mutate = function(entries, callback) {
 
   stream
     .on('error', callback)
-    .pipe(concat(function(entries) {
-      callback(null, entries);
+    .pipe(concat(function(mutationErrors) {
+      callback(null, mutationErrors);
     }));
 };
 
