@@ -55,7 +55,7 @@
     "create-error-class": "^2.0.1",
     "dot-prop": "^2.4.0",
     "extend": "^3.0.0",
-    "@google-cloud/common": "^0.1.0",
+    "@google-cloud/common": "^0.3.0",
     "google-proto-files": "^0.7.0",
     "is": "^3.0.1",
     "lodash.flatten": "^4.2.0",
