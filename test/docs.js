@@ -135,6 +135,15 @@ describe('documentation', function() {
         };
       }
 
+      // For {module:vision} docs.
+      function FakeLevel() {
+        return {
+          get: function(key, options, callback) {
+            callback(null, 'image.jpg');
+          }
+        };
+      }
+
       fileDocBlocks.methods.forEach(function(method) {
         var code = method.examples.map(prop('code')).join('\n');
         var lowercaseId = method.id.toLowerCase();
@@ -171,7 +180,8 @@ describe('documentation', function() {
             /require\('(@google-cloud\/[^']*)/g,
             'require(\'../packages/' + directory + '/node_modules/$1'
           )
-          .replace('require(\'express\')', FakeExpress.toString());
+          .replace('require(\'express\')', FakeExpress.toString())
+          .replace('require(\'level\')', FakeLevel.toString());
 
         var displayName = filename
           .replace('docs/json/master/', '')

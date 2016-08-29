@@ -133,6 +133,7 @@ Vision.prototype.annotate = function(requests, callback) {
   });
 };
 
+// jscs:disable maximumLineLength
 /**
  * Detect properties from an image (or images) of one or more types.
  *
@@ -156,9 +157,10 @@ Vision.prototype.annotate = function(requests, callback) {
  * For the response in the original format, review the `apiResponse` argument
  * your callback receives.
  *
- * @param {string|string[]|module:storage/file|module:storage/file[]} images -
- *     The source image(s) to run the detection on. It can be either a local
- *     image path, a remote image URL, or a @google-cloud/storage File object.
+ * @param {string|string[]|buffer|buffer[]|module:storage/file|module:storage/file[]} images - The
+ *     source image(s) to run the detection on. It can be either a local image
+ *     path, a remote image URL, a Buffer, or a @google-cloud/storage File
+ *     object.
  * @param {string[]|object=} options - An array of types or a configuration
  *     object.
  * @param {object=} options.imageContext - See an
@@ -208,6 +210,20 @@ Vision.prototype.annotate = function(requests, callback) {
  * //-
  * var img = 'https://upload.wikimedia.org/wikipedia/commons/5/51/Google.png';
  * vision.detect(img, types, function(err, detection, apiResponse) {});
+ *
+ * //-
+ * // Run feature detection over a Buffer.
+ * //-
+ * var level = require('level');
+ * var db = level('./users-database');
+ *
+ * db.get('user-image', { encoding: 'binary' }, function(err, image) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ *
+ *   vision.detect(image, function(err, detection, apiResponse) {});
+ * });
  *
  * //-
  * // Supply multiple images for feature detection.
@@ -519,6 +535,7 @@ Vision.prototype.detect = function(images, options, callback) {
     });
   });
 };
+// jscs:enable maximumLineLength
 
 /**
  * Run face detection against an image.
