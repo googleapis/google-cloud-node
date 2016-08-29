@@ -622,10 +622,6 @@ Table.prototype.getRows = function(options, callback) {
  *
  * @param {object|object[]} entries - List of entries to be inserted.
  *     See {module:bigtable/table#mutate}.
- * @param {object=} options - Configuration object.
- * @param {boolean} options.encode - Before we insert your data we will
- *     transform it into a Buffer. You can send the raw data instead by setting
- *     `encode` to `false. Default: true.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {object} callback.apiResponse - The full API response.
@@ -681,10 +677,10 @@ Table.prototype.getRows = function(options, callback) {
  *     // }
  *   });
  */
-Table.prototype.insert = function(entries, options, callback) {
+Table.prototype.insert = function(entries, callback) {
   entries = arrify(entries).map(propAssign('method', Mutation.methods.INSERT));
 
-  return this.mutate(entries, options, callback);
+  return this.mutate(entries, callback);
 };
 
 /**
@@ -694,10 +690,6 @@ Table.prototype.insert = function(entries, options, callback) {
  *
  * @param {object|object[]} entries - List of entities to be inserted or
  *     deleted.
- * @param {object} options - Configuration object.
- * @param {boolean} options.encode - Before we mutate your data we will
- *     transform it into a Buffer. You can send the raw data instead by setting
- *     `encode` to `false. Default: true.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {object[]} callback.statuses - A status for each entity transaction.
@@ -804,15 +796,8 @@ Table.prototype.insert = function(entries, options, callback) {
  *     // }
  *   });
  */
-Table.prototype.mutate = function(entries, options, callback) {
-  if (is.function(options)) {
-    callback = options;
-    options = {};
-  }
-
-  entries = flatten(arrify(entries)).map(function(entry) {
-    return Mutation.parse(entry, options);
-  });
+Table.prototype.mutate = function(entries, callback) {
+  entries = flatten(arrify(entries)).map(Mutation.parse);
 
   var grpcOpts = {
     service: 'Bigtable',

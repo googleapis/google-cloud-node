@@ -256,8 +256,6 @@ Row.formatFamilies_ = function(families, options) {
  * Create a new row in your table.
  *
  * @param {object=} entry - An entry. See {module:bigtable/table#insert}.
- * @param {object=} options - Configuration options when creating a row
- *     with entry data. See {module:bigtable/table#insert}.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.
@@ -282,18 +280,12 @@ Row.formatFamilies_ = function(families, options) {
  *   }
  * }, callback);
  */
-Row.prototype.create = function(entry, options, callback) {
+Row.prototype.create = function(entry, callback) {
   var self = this;
 
   if (is.function(entry)) {
     callback = entry;
-    options = null;
     entry = {};
-  }
-
-  if (is.function(options)) {
-    callback = options;
-    options = null;
   }
 
   entry = {
@@ -302,7 +294,7 @@ Row.prototype.create = function(entry, options, callback) {
     method: Mutation.methods.INSERT
   };
 
-  this.parent.mutate(entry, options, function(err, apiResponse) {
+  this.parent.mutate(entry, function(err, apiResponse) {
     if (err) {
       callback(err, null, apiResponse);
       return;
@@ -399,12 +391,9 @@ Row.prototype.createRules = function(rules, callback) {
  *
  * @param {module:bigtable/filter} filter - Filter ot be applied to the contents
  *     of the row.
- * @oaram {options} options - Configuration options. See
- *     {module:bigtable/table#mutate}.
- * @param {object[]} options.onMatch - A list of entries to be ran if a match is
+ * @param {?object[]} onMatch - A list of entries to be ran if a match is found.
+ * @param {object[]=} onNoMatch - A list of entries to be ran if no matches are
  *     found.
- * @param {object[]} options.onNoMatch - A list of entries to be ran if no
- *     matches are found.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
  *     request.
@@ -427,29 +416,35 @@ Row.prototype.createRules = function(rules, callback) {
  *   }
  * ];
  *
- * var options = {
- *   onMatch: [
- *     {
- *       method: 'insert',
- *       data: {
- *         follows: {
- *           jadams: 1
- *         }
+ * var entries = [
+ *   {
+ *     method: 'insert',
+ *     data: {
+ *       follows: {
+ *         jadams: 1
  *       }
  *     }
- *   ]
- * };
+ *   }
+ * ];
  *
- * row.filter(filter, options, callback);
+ * row.filter(filter, entries, callback);
+ *
+ * //-
+ * // Optionally, you can pass in an array of entries to be ran in the event
+ * // that a match is not made.
+ * //-
+ * row.filter(filter, null, entries, callback);
  */
-Row.prototype.filter = function(filter, options, callback) {
+Row.prototype.filter = function(filter, onMatch, onNoMatch, callback) {
   var grpcOpts = {
     service: 'Bigtable',
     method: 'checkAndMutateRow'
   };
 
-  var onMatch = options.onMatch || [];
-  var onNoMatch = options.onNoMatch || [];
+  if (is.function(onNoMatch)) {
+    callback = onNoMatch;
+    onNoMatch = [];
+  }
 
   var reqOpts = {
     tableName: this.parent.id,
@@ -470,7 +465,7 @@ Row.prototype.filter = function(filter, options, callback) {
 
   function createFlatMutationsList(entries) {
     entries = arrify(entries).map(function(entry) {
-      return Mutation.parse(entry, options).mutations;
+      return Mutation.parse(entry).mutations;
     });
 
     return flatten(entries);
@@ -760,7 +755,7 @@ Row.prototype.increment = function(column, value, callback) {
  *   }
  * }, callback);
  */
-Row.prototype.save = function(key, value, options, callback) {
+Row.prototype.save = function(key, value, callback) {
   var rowData;
 
   if (is.string(key)) {
@@ -771,13 +766,7 @@ Row.prototype.save = function(key, value, options, callback) {
     rowData[column.family][column.qualifier] = value;
   } else {
     rowData = key;
-    callback = options;
-    options = value;
-  }
-
-  if (is.function(options)) {
-    callback = options;
-    options = {};
+    callback = value;
   }
 
   var mutation = {
@@ -786,7 +775,7 @@ Row.prototype.save = function(key, value, options, callback) {
     method: Mutation.methods.INSERT
   };
 
-  this.parent.mutate(mutation, options, callback);
+  this.parent.mutate(mutation, callback);
 };
 
 module.exports = Row;

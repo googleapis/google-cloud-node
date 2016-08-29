@@ -41,24 +41,6 @@ describe('Bigtable/Mutation', function() {
       assert.strictEqual(mutation.method, fakeData.method);
       assert.strictEqual(mutation.data, fakeData.data);
     });
-
-    it('should set default mutation options', function() {
-      var mutation = new Mutation(fakeData);
-
-      assert.deepEqual(mutation.options, {
-        encode: true
-      });
-    });
-
-    it('should localize options', function() {
-      var options = {
-        encode: false
-      };
-
-      var mutation = new Mutation(fakeData, options);
-
-      assert.deepEqual(mutation.options, options);
-    });
   });
 
   describe('convertFromBytes', function() {
@@ -172,7 +154,7 @@ describe('Bigtable/Mutation', function() {
       }]);
 
       assert.strictEqual(convertCalls.length, 4);
-      assert.deepEqual(convertCalls, [1, 'gwashington', 1, 'alincoln']);
+      assert.deepEqual(convertCalls, ['gwashington', 1, 'alincoln', 1]);
     });
 
     it('should optionally accept a timestamp', function() {
@@ -198,7 +180,7 @@ describe('Bigtable/Mutation', function() {
       }]);
 
       assert.strictEqual(convertCalls.length, 2);
-      assert.deepEqual(convertCalls, [1, 'gwashington']);
+      assert.deepEqual(convertCalls, ['gwashington', 1]);
     });
 
     it('should accept buffers', function() {
@@ -221,34 +203,7 @@ describe('Bigtable/Mutation', function() {
       }]);
 
       assert.strictEqual(convertCalls.length, 2);
-      assert.deepEqual(convertCalls, [val, 'gwashington']);
-    });
-
-    it('should optionally not encode the value', function() {
-      var val = 'hello';
-      var fakeMutation = {
-        follows: {
-          gwashington: val
-        }
-      };
-
-      var options = {
-        encode: false
-      };
-
-      var cells = Mutation.encodeSetCell(fakeMutation, options);
-
-      assert.deepEqual(cells, [{
-        setCell: {
-          familyName: 'follows',
-          columnQualifier: 'gwashington',
-          timestampMicros: -1,
-          value: val
-        }
-      }]);
-
-      assert.strictEqual(convertCalls.length, 1);
-      assert.deepEqual(convertCalls, ['gwashington']);
+      assert.deepEqual(convertCalls, ['gwashington', val]);
     });
   });
 
@@ -452,11 +407,9 @@ describe('Bigtable/Mutation', function() {
       };
 
       var mutation = new Mutation(data);
-      var fakeOptions = mutation.options = {};
 
-      Mutation.encodeSetCell = function(_data, options) {
+      Mutation.encodeSetCell = function(_data) {
         assert.strictEqual(_data, data.data);
-        assert.strictEqual(options, fakeOptions);
         return fakeEncoded;
       };
 

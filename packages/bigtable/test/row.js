@@ -422,10 +422,9 @@ describe('Bigtable/Row', function() {
 
   describe('create', function() {
     it('should provide the proper request options', function(done) {
-      row.parent.mutate = function(entry, options) {
+      row.parent.mutate = function(entry) {
         assert.strictEqual(entry.key, row.id);
         assert.deepEqual(entry.data, {});
-        assert.strictEqual(options, null);
         assert.strictEqual(entry.method, Mutation.methods.INSERT);
         done();
       };
@@ -439,9 +438,8 @@ describe('Bigtable/Row', function() {
         b: 'b'
       };
 
-      row.parent.mutate = function(entry, options) {
+      row.parent.mutate = function(entry) {
         assert.strictEqual(entry.data, data);
-        assert.strictEqual(options, null);
         done();
       };
 
@@ -454,24 +452,19 @@ describe('Bigtable/Row', function() {
         b: 'b'
       };
 
-      var fakeOptions = {
-        encode: false
-      };
-
-      row.parent.mutate = function(entry, options) {
+      row.parent.mutate = function(entry) {
         assert.strictEqual(entry.data, data);
-        assert.strictEqual(options, fakeOptions);
         done();
       };
 
-      row.create(data, fakeOptions, assert.ifError);
+      row.create(data, assert.ifError);
     });
 
     it('should return an error to the callback', function(done) {
       var err = new Error('err');
       var response = {};
 
-      row.parent.mutate = function(entry, options, callback) {
+      row.parent.mutate = function(entry, callback) {
         callback(err, response);
       };
 
@@ -486,7 +479,7 @@ describe('Bigtable/Row', function() {
     it('should return the Row instance', function(done) {
       var response = {};
 
-      row.parent.mutate = function(entry, options, callback) {
+      row.parent.mutate = function(entry, callback) {
         callback(null, response);
       };
 
@@ -591,11 +584,6 @@ describe('Bigtable/Row', function() {
         return fakeMutations;
       });
 
-      var options = {
-        onMatch: mutations,
-        onNoMatch: mutations
-      };
-
       row.request = function(grpcOpts, reqOpts) {
         assert.deepEqual(grpcOpts, {
           service: 'Bigtable',
@@ -610,46 +598,36 @@ describe('Bigtable/Row', function() {
 
         assert.strictEqual(FakeMutation.parse.callCount, 2);
         assert.strictEqual(FakeMutation.parse.getCall(0).args[0], mutations[0]);
-        assert.strictEqual(FakeMutation.parse.getCall(0).args[1], options);
         assert.strictEqual(FakeMutation.parse.getCall(1).args[0], mutations[0]);
-        assert.strictEqual(FakeMutation.parse.getCall(1).args[1], options);
 
         assert.strictEqual(FakeFilter.parse.callCount, 1);
         assert(FakeFilter.parse.calledWithExactly(filter));
         done();
       };
 
-      row.filter(filter, options, assert.ifError);
+      row.filter(filter, mutations, mutations, assert.ifError);
     });
 
     it('should optionally accept onNoMatch mutations', function(done) {
-      var options = {
-        onMatch: mutations
-      };
-
       row.request = function(g, reqOpts) {
         assert.deepEqual(reqOpts.falseMutations, []);
         assert.strictEqual(FakeMutation.parse.callCount, 1);
-        assert(FakeMutation.parse.calledWithExactly(mutations[0], options));
+        assert(FakeMutation.parse.calledWithExactly(mutations[0]));
         done();
       };
 
-      row.filter({}, options, assert.ifError);
+      row.filter({}, mutations, assert.ifError);
     });
 
     it('should optionally accept onMatch mutations', function(done) {
-      var options = {
-        onNoMatch: mutations
-      };
-
       row.request = function(g, reqOpts) {
         assert.deepEqual(reqOpts.trueMutations, []);
         assert.strictEqual(FakeMutation.parse.callCount, 1);
-        assert(FakeMutation.parse.calledWithExactly(mutations[0], options));
+        assert(FakeMutation.parse.calledWithExactly(mutations[0]));
         done();
       };
 
-      row.filter({}, options, assert.ifError);
+      row.filter({}, null, mutations, assert.ifError);
     });
 
     it('should return an error to the callback', function(done) {
@@ -660,11 +638,7 @@ describe('Bigtable/Row', function() {
         callback(err, response);
       };
 
-      var options = {
-        onMatch: mutations
-      };
-
-      row.filter({}, options, function(err_, matched, apiResponse) {
+      row.filter({}, mutations, function(err_, matched, apiResponse) {
         assert.strictEqual(err, err_);
         assert.strictEqual(matched, null);
         assert.strictEqual(response, apiResponse);
@@ -681,11 +655,7 @@ describe('Bigtable/Row', function() {
         callback(null, response);
       };
 
-      var options = {
-        onMatch: mutations
-      };
-
-      row.filter({}, options, function(err, matched, apiResponse) {
+      row.filter({}, mutations, function(err, matched, apiResponse) {
         assert.ifError(err);
         assert(matched);
         assert.strictEqual(response, apiResponse);
@@ -1099,33 +1069,15 @@ describe('Bigtable/Row', function() {
       });
 
       it('should insert a key value pair', function(done) {
-        row.parent.mutate = function(entry, options, callback) {
+        row.parent.mutate = function(entry, callback) {
           assert.strictEqual(entry.key, ROW_ID);
           assert.deepEqual(entry.data, expectedData);
           assert.strictEqual(entry.method, FakeMutation.methods.INSERT);
-          assert.deepEqual(options, {});
           assert(parseSpy.calledWithExactly(key));
           callback();
         };
 
         row.save(key, value, done);
-      });
-
-      it('should accept an options object', function(done) {
-        var fakeOptions = {
-          encode: false
-        };
-
-        row.parent.mutate = function(entry, options, callback) {
-          assert.strictEqual(entry.key, ROW_ID);
-          assert.deepEqual(entry.data, expectedData);
-          assert.strictEqual(entry.method, FakeMutation.methods.INSERT);
-          assert.strictEqual(options, fakeOptions);
-          assert(parseSpy.calledWithExactly(key));
-          callback();
-        };
-
-        row.save(key, value, fakeOptions, done);
       });
     });
 
@@ -1143,20 +1095,6 @@ describe('Bigtable/Row', function() {
         };
 
         row.save(data, assert.ifError);
-      });
-
-      it('should accept an options object', function(done) {
-        var fakeOptions = {
-          encode: false
-        };
-
-        row.parent.mutate = function(entry, options) {
-          assert.strictEqual(entry.data, data);
-          assert.strictEqual(options, fakeOptions);
-          done();
-        };
-
-        row.save(data, fakeOptions, assert.ifError);
       });
     });
   });

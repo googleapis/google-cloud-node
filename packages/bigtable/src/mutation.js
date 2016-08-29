@@ -21,7 +21,6 @@
 'use strict';
 
 var arrify = require('arrify');
-var extend = require('extend');
 var Int64 = require('node-int64');
 var is = require('is');
 
@@ -40,14 +39,10 @@ var is = require('is');
  *   }
  * });
  */
-function Mutation(mutation, options) {
+function Mutation(mutation) {
   this.key = mutation.key;
   this.method = mutation.method;
   this.data = mutation.data;
-
-  this.options = extend({
-    encode: true
-  }, options);
 }
 
 /**
@@ -125,7 +120,6 @@ Mutation.createTimeRange = function(start, end) {
  * Formats an `insert` mutation to what the proto service expects.
  *
  * @param {object} data - The entity data.
- * @param {object=} options - The mutation options.
  * @return {object[]}
  *
  * @example
@@ -153,10 +147,8 @@ Mutation.createTimeRange = function(start, end) {
  * //   }
  * // ]
  */
-Mutation.encodeSetCell = function(data, options) {
+Mutation.encodeSetCell = function(data) {
   var mutations = [];
-
-  options = options || {};
 
   Object.keys(data).forEach(function(familyName) {
     var family = data[familyName];
@@ -176,17 +168,11 @@ Mutation.encodeSetCell = function(data, options) {
         timestamp = timestamp.getTime();
       }
 
-      var value = cell.value;
-
-      if (options.encode !== false) {
-        value = Mutation.convertToBytes(value);
-      }
-
       var setCell = {
         familyName: familyName,
         columnQualifier: Mutation.convertToBytes(cellName),
         timestampMicros: timestamp || -1,
-        value: value
+        value: Mutation.convertToBytes(cell.value)
       };
 
       mutations.push({ setCell: setCell });
@@ -296,9 +282,9 @@ Mutation.encodeDelete = function(data) {
  * @param {object} entry - The entity data.
  * @return {object}
  */
-Mutation.parse = function(mutation, options) {
+Mutation.parse = function(mutation) {
   if (!(mutation instanceof Mutation)) {
-    mutation = new Mutation(mutation, options);
+    mutation = new Mutation(mutation);
   }
 
   return mutation.toProto();
@@ -339,7 +325,7 @@ Mutation.prototype.toProto = function() {
   }
 
   if (this.method === methods.INSERT) {
-    mutation.mutations = Mutation.encodeSetCell(this.data, this.options);
+    mutation.mutations = Mutation.encodeSetCell(this.data);
   } else if (this.method === methods.DELETE) {
     mutation.mutations = Mutation.encodeDelete(this.data);
   }

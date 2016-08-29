@@ -805,19 +805,6 @@ describe('Bigtable/Table', function() {
       var stream = table.insert([]);
       assert.strictEqual(stream, fakeStream);
     });
-
-    it('should pass the configuration object to mutate', function(done) {
-      var fakeOptions = {
-        encode: false
-      };
-
-      table.mutate = function(entries, options, callback) {
-        assert.strictEqual(options, fakeOptions);
-        callback();
-      };
-
-      table.insert([], fakeOptions, done);
-    });
   });
 
   describe('mutate', function() {
@@ -858,26 +845,6 @@ describe('Bigtable/Table', function() {
       table.mutate(entries, assert.ifError);
     });
 
-    it('should pass the mutate options to Mutation.parse', function(done) {
-      var pumpifyObj = pumpify.obj;
-
-      var options = {
-        encode: false
-      };
-
-      table.requestStream = function() {};
-
-      pumpify.obj = function() {
-        var parseOptions = parseSpy.getCall(0).args[1];
-        assert.strictEqual(parseOptions, options);
-
-        pumpify.obj = pumpifyObj;
-        done();
-      };
-
-      table.mutate([{}], options);
-    });
-
     describe('error', function() {
       var error = new Error('err');
 
@@ -893,20 +860,6 @@ describe('Bigtable/Table', function() {
 
           return stream;
         };
-      });
-
-      it('should emit an error event', function(done) {
-        table.mutate(entries).on('error', function(err) {
-          assert.strictEqual(err, error);
-          done();
-        });
-      });
-
-      it('should pass an error to the callback', function(done) {
-        table.mutate(entries, function(err) {
-          assert.strictEqual(err, error);
-          done();
-        });
       });
     });
 
