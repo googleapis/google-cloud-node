@@ -925,7 +925,7 @@ describe('Bigtable/Table', function() {
 
         it('should emit a mutation error as an error event', function(done) {
           var mutationErrors = [];
-          var emitter = table.mutate(entries)
+          var emitter = table.mutate(entries);
 
           assert(emitter instanceof events.EventEmitter);
 

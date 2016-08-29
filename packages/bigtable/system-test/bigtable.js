@@ -412,41 +412,10 @@ describe('Bigtable', function() {
           }
         }];
 
-        TABLE.insert(rows, function(err, entries) {
+        TABLE.insert(rows, function(err, insertErrors) {
           assert.ifError(err);
-          assert.strictEqual(entries.length, rows.length);
+          assert.strictEqual(insertErrors.length, 0);
           done();
-        });
-      });
-
-      it('should not encode the values', function(done) {
-        var message = 'hey';
-        var encoded = new Buffer(message).toString('base64');
-
-        var rows = [{
-          key: 'alincoln',
-          data: {
-            traits: {
-              test: encoded
-            }
-          }
-        }];
-
-        var options = {
-          encode: false
-        };
-
-        TABLE.insert(rows, options, function(err, entries) {
-          assert.ifError(err);
-          assert.strictEqual(entries.length, rows.length);
-
-          TABLE.row('alincoln').get(function(err, row) {
-            assert.ifError(err);
-
-            var response = row.data.traits.test[0].value;
-            assert.strictEqual(response, message);
-            done();
-          });
         });
       });
 
@@ -530,14 +499,12 @@ describe('Bigtable', function() {
           value: 'alincoln'
         };
 
-        var options = {
-          onNoMatch: [{
-            method: 'delete',
-            data: ['follows:lincoln']
-          }]
-        };
+        var mutations = [{
+          method: 'delete',
+          data: ['follows:alincoln']
+        }];
 
-        row.filter(filter, options, function(err, matched) {
+        row.filter(filter, mutations, function(err, matched) {
           assert.ifError(err);
           assert(matched);
           done();
@@ -605,7 +572,7 @@ describe('Bigtable', function() {
 
           assert(presidents.length > 0);
 
-          Object.keys(presidents).forEach(function(prez) {
+          presidents.forEach(function(prez) {
             var follower = row.data.follows[prez];
 
             assert.strictEqual(follower[0].value, 'AAAAAAAAAAE=');
