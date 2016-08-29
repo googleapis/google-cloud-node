@@ -74,7 +74,7 @@ describe('logging:entries', function () {
     });
 
     it('should handle error', function () {
-      var error = 'error';
+      var error = new Error('error');
       var sample = getSample();
       var callback = sinon.stub();
       sample.mocks.logging.getEntries = sinon.stub().callsArgWith(1, error);
@@ -107,7 +107,7 @@ describe('logging:entries', function () {
     });
 
     it('should handle error', function () {
-      var error = 'error';
+      var error = new Error('error');
       var sample = getSample();
       var callback = sinon.stub();
       sample.mocks.log.write = sinon.stub().callsArgWith(1, error);
@@ -137,7 +137,7 @@ describe('logging:entries', function () {
     });
 
     it('should handle error', function () {
-      var error = 'error';
+      var error = new Error('error');
       var sample = getSample();
       var callback = sinon.stub();
       sample.mocks.log.delete = sinon.stub().callsArgWith(0, error);

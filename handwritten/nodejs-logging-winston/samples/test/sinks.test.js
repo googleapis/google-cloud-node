@@ -149,7 +149,7 @@ describe('logging:sinks', function () {
     });
 
     it('should handle error', function () {
-      var error = 'error';
+      var error = new Error('error');
       var sample = getSample();
       var callback = sinon.stub();
       sample.mocks.sink.create = sinon.stub().callsArgWith(1, error);
@@ -180,7 +180,7 @@ describe('logging:sinks', function () {
     });
 
     it('should handle error', function () {
-      var error = 'error';
+      var error = new Error('error');
       var sample = getSample();
       var callback = sinon.stub();
       sample.mocks.sink.getMetadata = sinon.stub().callsArgWith(0, error);
@@ -211,7 +211,7 @@ describe('logging:sinks', function () {
     });
 
     it('should handle error', function () {
-      var error = 'error';
+      var error = new Error('error');
       var sample = getSample();
       var callback = sinon.stub();
       sample.mocks.logging.getSinks = sinon.stub().callsArgWith(0, error);
@@ -248,7 +248,7 @@ describe('logging:sinks', function () {
     });
 
     it('should handle error', function () {
-      var error = 'error';
+      var error = new Error('error');
       var sample = getSample();
       var callback = sinon.stub();
       sample.mocks.sink.setMetadata = sinon.stub().callsArgWith(1, error);
@@ -278,7 +278,7 @@ describe('logging:sinks', function () {
     });
 
     it('should handle error', function () {
-      var error = 'error';
+      var error = new Error('error');
       var sample = getSample();
       var callback = sinon.stub();
       sample.mocks.sink.delete = sinon.stub().callsArgWith(0, error);
