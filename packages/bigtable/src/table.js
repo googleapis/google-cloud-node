@@ -686,14 +686,13 @@ Table.prototype.getRows = function(options, callback) {
  * table.insert(entries, callback);
  *
  * //-
- * // An event emitter mode is also provided, this is useful when making a large
- * // number of inserts.
- * //
- * // The error event can be either an API error or an insert error.
+ * // If you don't provide a callback, an EventEmitter is returned. Listen for
+ * // the error event to catch API and insert errors, and complete for when
+ * // the API request has completed.
  * //-
  * table.insert(entries)
  *   .on('error', console.error)
- *   .on('finish', function() {
+ *   .on('complete', function() {
  *     // All requested inserts have been processed.
  *   });
  */
@@ -808,14 +807,13 @@ Table.prototype.insert = function(entries, callback) {
  * table.mutate(entries, callback);
  *
  * //-
- * // An event emitter mode is also provided, this is useful when making a large
- * // number of mutations.
- * //
- * // The error event can be either an API error or a mutation error.
+ * // If you don't provide a callback, an EventEmitter is returned. Listen for
+ * // the error event to catch API and mutation errors, and complete for when
+ * // the API request has completed.
  * //-
  * table.mutate(entries)
  *   .on('error', console.error)
- *   .on('finish', function() {
+ *   .on('complete', function() {
  *     // All requested mutations have been processed.
  *   });
  */
@@ -868,9 +866,8 @@ Table.prototype.mutate = function(entries, callback) {
   ]);
 
   if (!isCallbackMode) {
-    ['error', 'finish'].forEach(function(event) {
-      stream.on(event, emitter.emit.bind(emitter, event));
-    });
+    stream.on('error', emitter.emit.bind(emitter, 'error'));
+    stream.on('finish', emitter.emit.bind(emitter, 'complete'));
     return emitter;
   }
 

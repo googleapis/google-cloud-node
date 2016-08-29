@@ -933,7 +933,7 @@ describe('Bigtable/Table', function() {
             .on('error', function(err) {
               mutationErrors.push(err);
             })
-            .on('finish', function() {
+            .on('complete', function() {
               assert.strictEqual(mutationErrors[0], parsedStatuses[0]);
               assert.strictEqual(mutationErrors[0].entry, entries[0]);
               assert.strictEqual(mutationErrors[1], parsedStatuses[1]);
@@ -990,7 +990,7 @@ describe('Bigtable/Table', function() {
 
         emitter
           .on('error', done) // should not be emitted
-          .on('finish', function() {
+          .on('complete', function() {
             done();
           });
       });
