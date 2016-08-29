@@ -915,9 +915,9 @@ describe('Bigtable/Table', function() {
           table.mutate(entries, function(err, mutationErrors) {
             assert.ifError(err);
             assert.strictEqual(mutationErrors[0], parsedStatuses[0]);
-            assert.strictEqual(mutationErrors[0].entry, fakeStatuses[0]);
+            assert.strictEqual(mutationErrors[0].entry, entries[0]);
             assert.strictEqual(mutationErrors[1], parsedStatuses[1]);
-            assert.strictEqual(mutationErrors[1].entry, fakeStatuses[1]);
+            assert.strictEqual(mutationErrors[1].entry, entries[1]);
             done();
           });
         });
@@ -931,9 +931,9 @@ describe('Bigtable/Table', function() {
             })
             .on('finish', function() {
               assert.strictEqual(mutationErrors[0], parsedStatuses[0]);
-              assert.strictEqual(mutationErrors[0].entry, fakeStatuses[0]);
+              assert.strictEqual(mutationErrors[0].entry, entries[0]);
               assert.strictEqual(mutationErrors[1], parsedStatuses[1]);
-              assert.strictEqual(mutationErrors[1].entry, fakeStatuses[1]);
+              assert.strictEqual(mutationErrors[1].entry, entries[1]);
               done();
             });
         });

@@ -624,7 +624,7 @@ Table.prototype.getRows = function(options, callback) {
  *     See {module:bigtable/table#mutate}.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {object} callback.insertErrors - A status object for each failed
+ * @param {object[]} callback.insertErrors - A status object for each failed
  *     insert.
  *
  * @example
@@ -638,9 +638,14 @@ Table.prototype.getRows = function(options, callback) {
  *   //     code: 500,
  *   //     message: 'Internal Server Error',
  *   //     entry: {
- *   //       index: 0
+ *   //       key: 'gwashington',
+ *   //       data: {
+ *   //         follows: {
+ *   //           jadams: 1
+ *   //         }
+ *   //       }
  *   //     }
- *   //   }
+ *   //   },
  *   //   ...
  *   // ]
  * };
@@ -682,11 +687,13 @@ Table.prototype.getRows = function(options, callback) {
  * //-
  * // A stream mode is also provided, this is useful when making a large number
  * // of inserts.
+ * //
+ * // The error event can be either an API error or an insert error.
  * //-
  * table.insert(entries)
  *   .on('error', console.error)
  *   .on('finish', function() {
- *     // Mutations finished running.
+ *     // All requested inserts have been processed.
  *   });
  */
 Table.prototype.insert = function(entries, callback) {
@@ -721,9 +728,15 @@ Table.prototype.insert = function(entries, callback) {
  *   //     code: 500,
  *   //     message: 'Internal Server Error',
  *   //     entry: {
- *   //       index: 0
+ *   //       method: 'insert',
+ *   //       key: 'gwashington',
+ *   //       data: {
+ *   //         follows: {
+ *   //           jadams: 1
+ *   //         }
+ *   //       }
  *   //     }
- *   //   }
+ *   //   },
  *   //   ...
  *   // ]
  * };
@@ -796,15 +809,17 @@ Table.prototype.insert = function(entries, callback) {
  * //-
  * // A stream mode is also provided, this is useful when making a large number
  * // of mutations.
+ * //
+ * // The error event can be either an API error or a mutation error.
  * //-
  * table.mutate(entries)
  *   .on('error', console.error)
  *   .on('finish', function() {
- *     // Mutations finished running.
+ *     // All requested mutations have been processed.
  *   });
  */
 Table.prototype.mutate = function(entries, callback) {
-  entries = flatten(arrify(entries)).map(Mutation.parse);
+  entries = flatten(arrify(entries));
 
   var grpcOpts = {
     service: 'Bigtable',
@@ -814,7 +829,7 @@ Table.prototype.mutate = function(entries, callback) {
   var reqOpts = {
     objectMode: true,
     tableName: this.id,
-    entries: entries
+    entries: entries.map(Mutation.parse)
   };
 
   var isStreamMode = !is.function(callback);
@@ -831,7 +846,7 @@ Table.prototype.mutate = function(entries, callback) {
         }
 
         var status = common.GrpcService.decorateStatus_(entry.status);
-        status.entry = entry;
+        status.entry = entries[entry.index];
 
 
         if (isStreamMode) {
