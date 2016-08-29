@@ -67,131 +67,159 @@ describe('pubsub:subscriptions', function () {
   describe('create', function () {
     it('should create a subscription', function () {
       var sample = getSample();
-      sample.program.createSubscription(topicName, subscriptionName, function (err, subscription) {
-        assert.ifError(err);
-        assert.strictEqual(subscription, sample.mocks.subscription);
-        assert(console.log.calledWith('Created subscription %s to topic %s', subscriptionName, topicName));
-      });
+      var callback = sinon.stub();
+
+      sample.program.createSubscription(topicName, subscriptionName, callback);
+
+      assert.ifError(callback.firstCall.args[0]);
+      assert.strictEqual(callback.firstCall.args[1], sample.mocks.subscription);
+      assert(console.log.calledWith('Created subscription %s to topic %s', subscriptionName, topicName));
     });
     it('should require topicName', function () {
       var sample = getSample();
-      sample.program.createSubscription(undefined, undefined, function (err, subscription) {
-        assert(err);
-        assert(err.message = '"topicName" is required!');
-        assert.equal(subscription, undefined);
-      });
+      var callback = sinon.stub();
+
+      sample.program.createSubscription(undefined, undefined, callback);
+
+      assert(callback.firstCall.args[0]);
+      assert(callback.firstCall.args[0].message = '"topicName" is required!');
+      assert.equal(callback.firstCall.args[1], undefined);
     });
     it('should require subscriptionName', function () {
       var sample = getSample();
-      sample.program.createSubscription(topicName, undefined, function (err, subscription) {
-        assert(err);
-        assert(err.message = '"subscriptionName" is required!');
-        assert.equal(subscription, undefined);
-      });
+      var callback = sinon.stub();
+
+      sample.program.createSubscription(topicName, undefined, callback);
+
+      assert(callback.firstCall.args[0]);
+      assert(callback.firstCall.args[0].message = '"subscriptionName" is required!');
+      assert.equal(callback.firstCall.args[1], undefined);
     });
     it('should handle error', function () {
       var sample = getSample();
       var error = new Error('error');
+      var callback = sinon.stub();
       sample.mocks.pubsub.subscribe.callsArgWith(3, error);
-      sample.program.createSubscription(topicName, subscriptionName, function (err) {
-        assert(err);
-        assert(err.message === 'error');
-      });
+
+      sample.program.createSubscription(topicName, subscriptionName, callback);
+
+      assert(callback.firstCall.args[0]);
+      assert(callback.firstCall.args[0].message === 'error');
     });
   });
 
   describe('delete', function () {
     it('should delete a subscription', function () {
       var sample = getSample();
-      sample.program.deleteSubscription(subscriptionName, function (err) {
-        assert.ifError(err);
-        assert(console.log.calledWith('Deleted subscription: %s', subscriptionName));
-      });
+      var callback = sinon.stub();
+
+      sample.program.deleteSubscription(subscriptionName, callback);
+
+      assert.ifError(callback.firstCall.args[0]);
+      assert(console.log.calledWith('Deleted subscription: %s', subscriptionName));
     });
     it('should require subscriptionName', function () {
       var sample = getSample();
-      sample.program.deleteSubscription(undefined, function (err, subscription) {
-        assert(err);
-        assert(err.message = '"subscriptionName" is required!');
-        assert.equal(subscription, undefined);
-      });
+      var callback = sinon.stub();
+
+      sample.program.deleteSubscription(undefined, callback);
+
+      assert(callback.firstCall.args[0]);
+      assert(callback.firstCall.args[0].message = '"subscriptionName" is required!');
+      assert.equal(callback.firstCall.args[1], undefined);
     });
     it('should handle error', function () {
       var sample = getSample();
       var error = new Error('error');
+      var callback = sinon.stub();
       sample.mocks.subscription.delete.callsArgWith(0, error);
-      sample.program.deleteSubscription(subscriptionName, function (err) {
-        assert(err);
-        assert(err.message === 'error');
-      });
+
+      sample.program.deleteSubscription(subscriptionName, callback);
+
+      assert(callback.firstCall.args[0]);
+      assert(callback.firstCall.args[0].message === 'error');
     });
   });
 
   describe('list', function () {
     it('should list all subscriptions', function () {
       var sample = getSample();
-      sample.program.listSubscriptions(undefined, function (err, subscriptions) {
-        assert.ifError(err);
-        assert.strictEqual(subscriptions, sample.mocks.subscriptions);
-        assert(console.log.calledWith('Found %d subscriptions!', subscriptions.length));
-      });
+      var callback = sinon.stub();
+
+      sample.program.listSubscriptions(undefined, callback);
+
+      assert.ifError(callback.firstCall.args[0]);
+      assert.strictEqual(callback.firstCall.args[1], sample.mocks.subscriptions);
+      assert(console.log.calledWith('Found %d subscriptions!', callback.firstCall.args[1].length));
     });
     it('should list all subscriptions of a topic', function () {
       var sample = getSample();
-      sample.program.listSubscriptions(topicName, function (err, subscriptions) {
-        assert.ifError(err);
-        assert.strictEqual(subscriptions, sample.mocks.subscriptions);
-        assert(console.log.calledWith('Found %d subscriptions!', subscriptions.length));
-      });
+      var callback = sinon.stub();
+
+      sample.program.listSubscriptions(topicName, callback);
+
+      assert.ifError(callback.firstCall.args[0]);
+      assert.strictEqual(callback.firstCall.args[1], sample.mocks.subscriptions);
+      assert(console.log.calledWith('Found %d subscriptions!', callback.firstCall.args[1].length));
     });
     it('should handle error', function () {
       var sample = getSample();
       var error = new Error('error');
+      var callback = sinon.stub();
       sample.mocks.pubsub.getSubscriptions.callsArgWith(1, error);
-      sample.program.listSubscriptions(undefined, function (err, subscriptions) {
-        assert(err);
-        assert(err.message === 'error');
-        assert.equal(subscriptions, undefined);
-      });
+
+      sample.program.listSubscriptions(undefined, callback);
+
+      assert(callback.firstCall.args[0]);
+      assert(callback.firstCall.args[0].message === 'error');
+      assert.equal(callback.firstCall.args[1], undefined);
     });
   });
 
   describe('pull', function () {
     it('should pull messages', function () {
       var sample = getSample();
-      sample.program.pullMessages(subscriptionName, function (err, messages) {
-        assert.ifError(err);
-        assert.strictEqual(messages, sample.mocks.messages);
-        assert(console.log.calledWith('Pulled %d messages!', messages.length));
-        assert(console.log.calledWith('Acked %d messages!', messages.length));
-      });
+      var callback = sinon.stub();
+
+      sample.program.pullMessages(subscriptionName, callback);
+
+      assert.ifError(callback.firstCall.args[0]);
+      assert.strictEqual(callback.firstCall.args[1], sample.mocks.messages);
+      assert(console.log.calledWith('Pulled %d messages!', callback.firstCall.args[1].length));
+      assert(console.log.calledWith('Acked %d messages!', callback.firstCall.args[1].length));
     });
     it('should require subscriptionName', function () {
       var sample = getSample();
-      sample.program.pullMessages(undefined, function (err, subscription) {
-        assert(err);
-        assert(err.message = '"subscriptionName" is required!');
-        assert.equal(subscription, undefined);
-      });
+      var callback = sinon.stub();
+
+      sample.program.pullMessages(undefined, callback);
+
+      assert(callback.firstCall.args[0]);
+      assert(callback.firstCall.args[0].message = '"subscriptionName" is required!');
+      assert.equal(callback.firstCall.args[1], undefined);
     });
     it('should handle pull error', function () {
       var sample = getSample();
       var error = new Error('error');
+      var callback = sinon.stub();
       sample.mocks.subscription.pull.callsArgWith(1, error);
-      sample.program.pullMessages(subscriptionName, function (err, messages) {
-        assert(err);
-        assert(err.message === 'error');
-        assert.equal(messages, undefined);
-      });
+
+      sample.program.pullMessages(subscriptionName, callback);
+
+      assert(callback.firstCall.args[0]);
+      assert(callback.firstCall.args[0].message === 'error');
+      assert.equal(callback.firstCall.args[1], undefined);
     });
     it('should handle ack error', function () {
       var sample = getSample();
       var error = new Error('error');
+      var callback = sinon.stub();
       sample.mocks.subscription.ack.callsArgWith(1, error);
-      sample.program.pullMessages(subscriptionName, function (err) {
-        assert(err);
-        assert(err.message === 'error');
-      });
+
+      sample.program.pullMessages(subscriptionName, callback);
+
+      assert(callback.firstCall.args[0]);
+      assert(callback.firstCall.args[0].message === 'error');
     });
   });
 
