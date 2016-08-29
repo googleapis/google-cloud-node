@@ -2453,6 +2453,33 @@ Compute.prototype.zone = function(name) {
   return new Zone(this, name);
 };
 
+/**
+ * Register a single callback that will wait for an operation to finish before
+ * being executed.
+ *
+ * @return {function} callback - The callback function.
+ * @return {?error} callback.err - An error returned from the operation.
+ * @return {object} callback.apiResponse - The operation's final API response.
+ */
+Compute.prototype.execAfterOperation_ = function(callback) {
+  return function(err) {
+    // arguments = [..., op, apiResponse]
+    var operation = arguments[arguments.length - 2];
+    var apiResponse = arguments[arguments.length - 1];
+
+    if (err) {
+      callback(err, apiResponse);
+      return;
+    }
+
+    operation
+      .on('error', callback)
+      .on('complete', function(metadata) {
+        callback(null, metadata);
+      });
+  };
+};
+
 /*! Developer Documentation
  *
  * These methods can be used with either a callback or as a readable object
