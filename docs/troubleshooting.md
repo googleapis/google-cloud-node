@@ -29,6 +29,19 @@ For best results,
   1. Upgrade npm to version 3.x
   1. If that's not possible, run `npm dedupe` after installing
 
+As of this writing, Google App Engine's Node.js flexible environment runs Node.js v4.x with npm v2.x installed by default. To override this, specify an [`engines`](https://docs.npmjs.com/files/package.json#engines) field in your package.json:
+
+```json
+{
+  "name": "your-app",
+  "version": "...",
+  "dependencies": {},
+  "engines": {
+    "npm": "^3.0.0"
+  }
+}
+```
+
 Reference Issue: [#1535](https://github.com/GoogleCloudPlatform/google-cloud-node/issues/1535)
 Reference Tweet: [@mluggy's Tweet on 8/29/16](https://twitter.com/mluggy/status/770221258533380096)
 
