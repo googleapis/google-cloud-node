@@ -18,6 +18,21 @@ Windows users may face this issue when using npm modules such as `google-cloud-n
 Reference Issue: [#1162](https://github.com/GoogleCloudPlatform/google-cloud-node/issues/1162)
 
 
+## Is the `google-cloud` module on npm *really* 800 MB?
+
+Old versions of npm won't automatically run [dedupe](https://docs.npmjs.com/cli/dedupe) for you. This is a command which finds compatible ranges of dependencies between your dependencies, and removes them from disk. Since npm version 3, dedupe is run before downloading any dependencies, so no extra disk space or download time is wasted.
+
+For example, on npm 3, `npm install google-cloud` results in a ~45MB download. With npm 2, you get the larger download size, upwards of 700 MB. If you run `npm dedupe` from the command line, you should end up around the npm 3 size.
+
+For best results,
+
+  1. Upgrade npm to version 3.x
+  1. If that's not possible, run `npm dedupe` after installing
+
+Reference Issue: [#1535](https://github.com/GoogleCloudPlatform/google-cloud-node/issues/1535)
+Reference Tweet: [@mluggy's Tweet on 8/29/16](https://twitter.com/mluggy/status/770221258533380096)
+
+
 ## My requests are returning errors instructing me to retry the request.
 
 If you ever see an error like this, you might be pinging the API too rapidly, hitting a rate limit:
