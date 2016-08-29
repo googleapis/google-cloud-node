@@ -407,7 +407,16 @@ VM.prototype.reset = function(callback) {
 };
 
 /**
- * Set the machine type for this instance.
+ * Set the machine type for this instance, **stopping and restarting the VM as
+ * necessary**.
+ *
+ * For a list of the standard, high-memory, and high-CPU machines you may choose
+ * from, see
+ * [Predefined machine types]{@link https://cloud.google.com/compute/docs/machine-types#predefined_machine_types}.
+ *
+ * In order to change the machine type, the VM must not be running. This method
+ * will automatically stop the VM if it is running before changing the machine
+ * type. After it is sucessfully changed, the VM will be started.
  *
  * @resource [Instances: setMachineType API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/setMachineType}
  * @resource [Predefined machine types]{@link https://cloud.google.com/compute/docs/machine-types#predefined_machine_types}
@@ -420,10 +429,11 @@ VM.prototype.reset = function(callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * vm.setMachineType('n1-standard-1', function(err, apiResponse) {});
+ * vm.resize('n1-standard-1', function(err, apiResponse) {});
  */
-VM.prototype.setMachineType = function(machineType, callback) {
+VM.prototype.resize = function(machineType, callback) {
   var self = this;
+  var compute = this.zone.parent;
 
   var isPartialMachineType = machineType.indexOf('/') === -1;
 
@@ -440,27 +450,27 @@ VM.prototype.setMachineType = function(machineType, callback) {
     json: {
       machineType: machineType
     }
-  }, self.execAfterOperation_(function(err) {
+  }, compute.execAfterOperation_(function(err, apiResponse) {
     if (err) {
       if (err.message === 'Instance is starting or running.') {
         // The instance must be stopped before its machine type can be set.
-        self.stop(self.execAfterOperation_(function(err) {
+        self.stop(compute.execAfterOperation_(function(err, apiResponse) {
           if (err) {
-            callback.apply(null, arguments);
+            callback(err, apiResponse);
             return;
           }
 
-          self.setMachineType(machineType, callback);
+          // Try again now that the instance is stopped.
+          self.resize(machineType, callback);
         }));
       } else {
-        callback.apply(null, arguments);
+        callback(err, apiResponse);
       }
-
       return;
     }
 
     // The machine type was changed successfully. Start the VM.
-    self.start(self.execAfterOperation_(callback));
+    self.start(compute.execAfterOperation_(callback));
   }));
 };
 
@@ -635,26 +645,6 @@ VM.prototype.request = function(reqOpts, callback) {
 
     callback(null, operation, resp);
   });
-};
-
-VM.prototype.execAfterOperation_ = function(callback) {
-  return function(err) {
-    // arguments = [..., op, apiResponse]
-    var operation = arguments[arguments.length - 2];
-    var apiResponse = arguments[arguments.length - 1];
-
-    if (err) {
-      callback(err, apiResponse);
-      return;
-    }
-
-
-    operation
-      .on('error', callback)
-      .on('complete', function() {
-        callback();
-      });
-  };
 };
 
 module.exports = VM;
