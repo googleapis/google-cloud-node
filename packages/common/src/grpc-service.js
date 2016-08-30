@@ -138,6 +138,7 @@ var GRPC_ERROR_CODE_TO_HTTP = {
  *
  * @param {object} config - Configuration object.
  * @param {string} config.baseUrl - The base URL to make API requests to.
+ * @param {object} config.grpcMetadata - Metadata to send with every request.
  * @param {string[]} config.scopes - The scopes required for the request.
  * @param {string} config.service - The name of the service.
  * @param {object=} config.protoServices - Directly provide the required proto
@@ -185,6 +186,12 @@ function GrpcService(config, options) {
       service.baseUrl = protoConfig.baseUrl;
     }
   });
+
+  this.callCredentials = [];
+
+  if (config.grpcMetadata) {
+    this.setGrpcMetadata_(config.grpcMetadata);
+  }
 }
 
 nodeutil.inherits(GrpcService, Service);
@@ -646,18 +653,27 @@ GrpcService.structToObj_ = function(struct) {
  * @param {?error} callback.err - An error getting an auth client.
  */
 GrpcService.prototype.getGrpcCredentials_ = function(callback) {
+  var self = this;
+
   this.authClient.getAuthClient(function(err, authClient) {
     if (err) {
       callback(err);
       return;
     }
 
-    var credentials = grpc.credentials.combineChannelCredentials(
+    var callCredentialObjects = [
       grpc.credentials.createSsl(),
       grpc.credentials.createFromGoogleCredential(authClient)
+    ];
+
+    callCredentialObjects = callCredentialObjects.concat(self.callCredentials);
+
+    var grpcCredentials = grpc.credentials.combineChannelCredentials.apply(
+      null,
+      callCredentialObjects
     );
 
-    callback(null, credentials);
+    callback(null, grpcCredentials);
   });
 };
 
@@ -726,6 +742,20 @@ GrpcService.prototype.getService_ = function(protoOpts) {
   }
 
   return service;
+};
+
+GrpcService.prototype.setGrpcMetadata_ = function(metadata) {
+  var cc = grpc.credentials.createFromMetadataGenerator(function(_, cb) {
+    var grpcMetadata = new grpc.Metadata();
+
+    for (var prop in metadata) {
+      grpcMetadata.add(prop, metadata[prop]);
+    }
+
+    cb(null, grpcMetadata);
+  });
+
+  this.callCredentials.push(cc);
 };
 
 module.exports = GrpcService;
