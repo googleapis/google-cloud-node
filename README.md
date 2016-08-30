@@ -18,6 +18,7 @@ This client supports the following Google Cloud Platform services at a [Beta](#v
 
 This client supports the following Google Cloud Platform services at an [Alpha](#versioning) quality level:
 
+* [Cloud Spanner](#cloud-spanner-alpha) (Alpha)
 * [Google Cloud Bigtable](#google-cloud-bigtable-alpha) (Alpha)
 * [Google Cloud DNS](#google-cloud-dns-alpha) (Alpha)
 * [Google Cloud Natural Language](#google-cloud-natural-language-alpha) (Alpha)
@@ -76,6 +77,7 @@ If you are not running this client on Google Cloud Platform, you need a Google D
   * Cloud Bigtable API
   * Cloud Bigtable Admin API
   * Cloud Bigtable Table Admin API
+  * Cloud Spanner API
   * Google Cloud Datastore API
   * Google Cloud DNS API
   * Google Cloud Natural Language API
@@ -386,6 +388,97 @@ loggingClient.getEntries(function(err, entries) {
     // `entries` contains all of the entries from the logs in your project.
   }
 });
+```
+
+
+## Cloud Spanner (Alpha)
+
+- [API Documentation][gcloud-spanner-docs]
+- [Official Documentation][cloud-spanner-docs]
+
+#### Using the all-in-one module
+
+```
+$ npm install --save google-cloud
+```
+
+```js
+var gcloud = require('google-cloud');
+var spanner = gcloud.spanner;
+```
+
+#### Using the Cloud Spanner API module
+
+```
+$ npm install --save @google-cloud/spanner
+```
+
+```js
+var spanner = require('@google-cloud/spanner');
+```
+
+#### Preview
+
+```js
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
+
+var spannerClient = spanner({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+var instance = spannerClient.instance('my-instance');
+var database = instance.database('my-database');
+
+// Create a table.
+var schema =
+  'CREATE TABLE Singers (' +
+  '  SingerId INT64 NOT NULL,' +
+  '  FirstName STRING(1024),' +
+  '  LastName STRING(1024),' +
+  '  SingerInfo BYTES(MAX),' +
+  ') PRIMARY KEY(SingerId)';
+
+database.createTable(schema, function(err, table, operation) {
+  if (err) {
+    // Error handling omitted.
+  }
+
+  operation
+    .on('error', function(err) {})
+    .on('complete', function() {
+      // Table created successfully.
+    });
+});
+
+// Insert data into the table.
+var table = database.table('Singers');
+
+table.insert({
+  SingerId: 10,
+  FirstName: 'Eddie',
+  LastName: 'Wilson'
+}, function(err) {
+  if (!err) {
+    // Row inserted successfully.
+  }
+});
+
+// Run a query as a readable object stream.
+database.runStream('SELECT * FROM Singers')
+  .on('error', function(err) {})
+  .on('data', function(row) {
+    // row.toJSON() = {
+    //   SingerId: 10,
+    //   FirstName: 'Eddie',
+    //   LastName: 'Wilson'
+    // }
+  }
+  })
+  .on('end', function() {
+    // All results retrieved.
+  });
 ```
 
 
@@ -1192,6 +1285,7 @@ Apache 2.0 - See [COPYING][copying] for more information.
 [gcloud-prediction-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/prediction
 [gcloud-pubsub-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub
 [gcloud-resource-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/resource
+[gcloud-spanner-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/spanner
 [gcloud-speech-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/speech
 [gcloud-storage-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/storage
 [gcloud-translate-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/translate
@@ -1237,6 +1331,8 @@ Apache 2.0 - See [COPYING][copying] for more information.
 [cloud-pubsub-docs]: https://cloud.google.com/pubsub/docs
 
 [cloud-resource-docs]: https://cloud.google.com/resource-manager
+
+[cloud-spanner-docs]: https://cloud.google.com/spanner
 
 [cloud-storage-docs]: https://cloud.google.com/storage/docs/overview
 

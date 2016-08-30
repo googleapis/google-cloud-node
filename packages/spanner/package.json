@@ -1,0 +1,72 @@
+{
+  "name": "@google-cloud/spanner",
+  "version": "0.0.0",
+  "author": "Google Inc.",
+  "description": "Cloud Spanner Client Library for Node.js",
+  "contributors": [
+    {
+      "name": "Dave Gramlich",
+      "email": "callmehiphop@gmail.com"
+    },
+    {
+      "name": "Stephen Sawchuk",
+      "email": "sawchuk@gmail.com"
+    }
+  ],
+  "main": "./src/index.js",
+  "files": [
+    "src",
+    "AUTHORS",
+    "CONTRIBUTORS",
+    "COPYING"
+  ],
+  "repository": "googlecloudplatform/google-cloud-node",
+  "keywords": [
+    "google apis client",
+    "google api client",
+    "google apis",
+    "google api",
+    "google",
+    "google cloud platform",
+    "google cloud",
+    "cloud",
+    "spanner"
+  ],
+  "dependencies": {
+    "@google-cloud/common": "^0.12.0",
+    "@google-cloud/common-grpc": "^0.1.4",
+    "arrify": "^1.0.1",
+    "checkpoint-stream": "^0.1.0",
+    "events-intercept": "^2.0.0",
+    "extend": "^3.0.0",
+    "generic-pool": "^3.1.4",
+    "google-gax": "^0.10.0",
+    "google-proto-files": "^0.9.0",
+    "is": "^3.1.0",
+    "lodash.chunk": "^4.2.0",
+    "lodash.snakecase": "^4.1.1",
+    "merge-stream": "^1.0.1",
+    "split-array-stream": "^1.0.0",
+    "stream-events": "^1.0.1",
+    "string-format-obj": "^1.1.0",
+    "through2": "^2.0.3"
+  },
+  "devDependencies": {
+    "async": "^2.0.1",
+    "concat-stream": "^1.6.0",
+    "methmeth": "^1.1.0",
+    "mocha": "^3.0.1",
+    "multiline": "^1.0.2",
+    "proxyquire": "^1.7.11",
+    "uuid": "^3.0.1"
+  },
+  "scripts": {
+    "publish-module": "node ../../scripts/publish.js resource",
+    "test": "mocha test/*.js",
+    "system-test": "mocha system-test/*.js --no-timeouts --bail"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=4.0.0"
+  }
+}

@@ -264,6 +264,26 @@ var apis = {
   resource: require('@google-cloud/resource'),
 
   /**
+   * [Cloud Spanner](https://cloud.google.com/spanner) is a highly scalable,
+   * transactional, managed, NewSQL database service. Cloud Spanner solves the
+   * need for a horizontally-scaling database with consistent global transaction
+   * and SQL semantics. With Cloud Spanner you don't need to choose between
+   * consistency and horizontal scaling — you get both.
+   *
+   * @type {module:spanner}
+   *
+   * @return {module:spanner}
+   *
+   * @example
+   * var gcloud = require('google-cloud');
+   * var spanner = gcloud.spanner({
+   *   projectId: 'grape-spaceship-123',
+   *   keyFilename: '/path/to/keyfile.json'
+   * });
+   */
+  spanner: require('@google-cloud/spanner'),
+
+  /**
    * The [Cloud Speech API](https://cloud.google.com/speech/docs) enables easy
    * integration of Google speech recognition technologies into developer
    * applications. Send audio and receive a text transcription from the Cloud

@@ -24,12 +24,18 @@ module.exports = {
   IGNORE: [
     'common',
     'common-grpc',
+    'bigtable/src/mutation.js',
     'datastore/src/entity.js',
     'datastore/src/request.js',
     'logging/src/metadata.js',
     'pubsub/src/iam.js',
-    'storage/src/acl.js',
-    'bigtable/src/mutation.js'
+    'spanner/src/codec.js',
+    'spanner/src/partial-result-stream.js',
+    'spanner/src/row-builder.js',
+    'spanner/src/session-pool.js',
+    'spanner/src/session.js',
+    'spanner/src/transaction-request.js',
+    'storage/src/acl.js'
   ],
   OVERVIEW_TEMPLATE: 'templates/overview.html',
   OVERVIEW: {
@@ -73,6 +79,9 @@ module.exports = {
     },
     resource: {
       title: 'Google Cloud Resource Manager'
+    },
+    spanner: {
+      title: 'Cloud Spanner'
     },
     speech: {
       title: 'Google Cloud Speech API'
