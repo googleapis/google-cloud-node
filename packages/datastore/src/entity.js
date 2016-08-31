@@ -23,6 +23,7 @@
 
 var arrify = require('arrify');
 var createErrorClass = require('create-error-class');
+var extend = require('extend');
 var is = require('is');
 
 var entity = module.exports;
@@ -285,6 +286,8 @@ function encodeValue(value) {
 
   if (is.object(value)) {
     if (!is.empty(value)) {
+      value = extend(true, {}, value);
+
       for (var prop in value) {
         if (value.hasOwnProperty(prop)) {
           value[prop] = entity.encodeValue(value[prop]);

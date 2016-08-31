@@ -21,6 +21,7 @@ var deepStrictEqual = require('deep-strict-equal');
 assert.deepStrictEqual = assert.deepStrictEqual || function() {
   return assert(deepStrictEqual.apply(this, arguments));
 };
+var extend = require('extend');
 
 var Datastore = require('../');
 
@@ -428,6 +429,22 @@ describe('entity', function() {
       };
 
       assert.deepEqual(entity.encodeValue(value), expectedValueProto);
+    });
+
+    it('should clone an object', function() {
+      var value = {
+        a: {
+          b: {
+            obj: true
+          }
+        }
+      };
+
+      var originalValue = extend(true, {}, value);
+
+      entity.encodeValue(value);
+
+      assert.deepEqual(value, originalValue);
     });
 
     it('should encode an empty object', function() {
