@@ -575,7 +575,7 @@ Table.prototype.getRows = function(options, callback) {
 
     if (options.ranges.length) {
       reqOpts.rows.rowRanges = options.ranges.map(function(range) {
-        return Filter.createRange(range.start, range.end, 'key');
+        return Filter.createRange(range.start, range.end, 'Key');
       });
     }
   }
