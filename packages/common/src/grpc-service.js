@@ -159,6 +159,7 @@ function GrpcService(config, options) {
     this.grpcCredentials = grpc.credentials.createInsecure();
   }
 
+  this.grpcMetadata = config.grpcMetadata;
   this.maxRetries = options.maxRetries;
 
   var apiVersion = config.apiVersion;
@@ -186,12 +187,6 @@ function GrpcService(config, options) {
       service.baseUrl = protoConfig.baseUrl;
     }
   });
-
-  this.callCredentials = [];
-
-  if (config.grpcMetadata) {
-    this.setGrpcMetadata_(config.grpcMetadata);
-  }
 }
 
 nodeutil.inherits(GrpcService, Service);
@@ -234,8 +229,17 @@ GrpcService.prototype.request = function(protoOpts, reqOpts, callback) {
   delete reqOpts.autoPaginateVal;
 
   var service = this.getService_(protoOpts);
-  var grpcOpts = {};
 
+  var metadata = null;
+  if (this.grpcMetadata) {
+    metadata = new grpc.Metadata();
+
+    for (var prop in this.grpcMetadata) {
+      metadata.add(prop, this.grpcMetadata[prop]);
+    }
+  }
+
+  var grpcOpts = {};
   if (is.number(protoOpts.timeout)) {
     grpcOpts.deadline = GrpcService.createDeadline_(protoOpts.timeout);
   }
@@ -255,16 +259,16 @@ GrpcService.prototype.request = function(protoOpts, reqOpts, callback) {
     request: function(_, onResponse) {
       respError = null;
 
-      service[protoOpts.method](reqOpts, grpcOpts, function(err, resp) {
-        if (err) {
-          respError = GrpcService.decorateError_(err);
+      service[protoOpts.method](reqOpts, metadata, grpcOpts, function(e, resp) {
+        if (e) {
+          respError = GrpcService.decorateError_(e);
 
           if (respError) {
             onResponse(null, respError);
             return;
           }
 
-          onResponse(err, resp);
+          onResponse(e, resp);
           return;
         }
 
@@ -653,24 +657,15 @@ GrpcService.structToObj_ = function(struct) {
  * @param {?error} callback.err - An error getting an auth client.
  */
 GrpcService.prototype.getGrpcCredentials_ = function(callback) {
-  var self = this;
-
   this.authClient.getAuthClient(function(err, authClient) {
     if (err) {
       callback(err);
       return;
     }
 
-    var callCredentialObjects = [
+    var grpcCredentials = grpc.credentials.combineChannelCredentials(
       grpc.credentials.createSsl(),
       grpc.credentials.createFromGoogleCredential(authClient)
-    ];
-
-    callCredentialObjects = callCredentialObjects.concat(self.callCredentials);
-
-    var grpcCredentials = grpc.credentials.combineChannelCredentials.apply(
-      null,
-      callCredentialObjects
     );
 
     callback(null, grpcCredentials);
@@ -742,20 +737,6 @@ GrpcService.prototype.getService_ = function(protoOpts) {
   }
 
   return service;
-};
-
-GrpcService.prototype.setGrpcMetadata_ = function(metadata) {
-  var cc = grpc.credentials.createFromMetadataGenerator(function(_, cb) {
-    var grpcMetadata = new grpc.Metadata();
-
-    for (var prop in metadata) {
-      grpcMetadata.add(prop, metadata[prop]);
-    }
-
-    cb(null, grpcMetadata);
-  });
-
-  this.callCredentials.push(cc);
 };
 
 module.exports = GrpcService;
