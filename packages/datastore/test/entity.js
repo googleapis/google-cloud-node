@@ -442,9 +442,10 @@ describe('entity', function() {
 
       var originalValue = extend(true, {}, value);
 
-      entity.encodeValue(value);
+      var encodedValue = entity.encodeValue(value);
 
       assert.deepEqual(value, originalValue);
+      assert.notStrictEqual(value, encodedValue);
     });
 
     it('should encode an empty object', function() {
