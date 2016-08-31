@@ -575,3 +575,4 @@ Logging.Logging = Logging;
 Logging.Sink = Sink;
 
 module.exports = Logging;
+module.exports.v2 = require('./v2');
