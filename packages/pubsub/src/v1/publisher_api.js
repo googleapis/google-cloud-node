@@ -41,11 +41,11 @@ var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
 var DEFAULT_TIMEOUT = 30;
 
 var PAGE_DESCRIPTORS = {
-  'listTopics': new gax.PageDescriptor(
+  listTopics: new gax.PageDescriptor(
       'page_token',
       'next_page_token',
       'topics'),
-  'listTopicSubscriptions': new gax.PageDescriptor(
+  listTopicSubscriptions: new gax.PageDescriptor(
       'page_token',
       'next_page_token',
       'subscriptions')
@@ -93,7 +93,7 @@ function PublisherApi(gaxGrpc, grpcClient, opts) {
 
 
   var bundleDescriptors = {
-    'publish': new gax.BundleDescriptor(
+    publish: new gax.BundleDescriptor(
         'messages',
         [
           'topic'
@@ -145,7 +145,7 @@ var TOPIC_PATH_TEMPLATE = new gax.PathTemplate(
  */
 PublisherApi.prototype.projectPath = function projectPath(project) {
   return PROJECT_PATH_TEMPLATE.render({
-    'project': project
+    project: project
   });
 };
 
@@ -168,8 +168,8 @@ PublisherApi.prototype.matchProjectFromProjectName =
  */
 PublisherApi.prototype.topicPath = function topicPath(project, topic) {
   return TOPIC_PATH_TEMPLATE.render({
-    'project': project,
-    'topic': topic
+    project: project,
+    topic: topic
   });
 };
 
@@ -497,7 +497,7 @@ function PublisherApiBuilder(gaxGrpc) {
     return new PublisherApi(gaxGrpc, grpcClient, opts);
   };
   extend(this.publisherApi, PublisherApi);
-};
+}
 module.exports = PublisherApiBuilder;
 module.exports.SERVICE_ADDRESS = SERVICE_ADDRESS;
 module.exports.ALL_SCOPES = ALL_SCOPES;

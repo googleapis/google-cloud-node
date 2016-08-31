@@ -41,7 +41,7 @@ var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
 var DEFAULT_TIMEOUT = 30;
 
 var PAGE_DESCRIPTORS = {
-  'listSubscriptions': new gax.PageDescriptor(
+  listSubscriptions: new gax.PageDescriptor(
       'page_token',
       'next_page_token',
       'subscriptions')
@@ -136,7 +136,7 @@ var TOPIC_PATH_TEMPLATE = new gax.PathTemplate(
  */
 SubscriberApi.prototype.projectPath = function projectPath(project) {
   return PROJECT_PATH_TEMPLATE.render({
-    'project': project
+    project: project
   });
 };
 
@@ -159,8 +159,8 @@ SubscriberApi.prototype.matchProjectFromProjectName =
  */
 SubscriberApi.prototype.subscriptionPath = function subscriptionPath(project, subscription) {
   return SUBSCRIPTION_PATH_TEMPLATE.render({
-    'project': project,
-    'subscription': subscription
+    project: project,
+    subscription: subscription
   });
 };
 
@@ -194,8 +194,8 @@ SubscriberApi.prototype.matchSubscriptionFromSubscriptionName =
  */
 SubscriberApi.prototype.topicPath = function topicPath(project, topic) {
   return TOPIC_PATH_TEMPLATE.render({
-    'project': project,
-    'topic': topic
+    project: project,
+    topic: topic
   });
 };
 
@@ -680,7 +680,7 @@ function SubscriberApiBuilder(gaxGrpc) {
     return new SubscriberApi(gaxGrpc, grpcClient, opts);
   };
   extend(this.subscriberApi, SubscriberApi);
-};
+}
 module.exports = SubscriberApiBuilder;
 module.exports.SERVICE_ADDRESS = SERVICE_ADDRESS;
 module.exports.ALL_SCOPES = ALL_SCOPES;
