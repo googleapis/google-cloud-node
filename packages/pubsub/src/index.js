@@ -579,3 +579,4 @@ PubSub.Subscription = Subscription;
 PubSub.Topic = Topic;
 
 module.exports = PubSub;
+module.exports.v1 = require('./v1');
