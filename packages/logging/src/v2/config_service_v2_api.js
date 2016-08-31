@@ -41,7 +41,7 @@ var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
 var DEFAULT_TIMEOUT = 30;
 
 var PAGE_DESCRIPTORS = {
-  'listSinks': new gax.PageDescriptor(
+  listSinks: new gax.PageDescriptor(
       'page_token',
       'next_page_token',
       'sinks')
@@ -133,7 +133,7 @@ var SINK_PATH_TEMPLATE = new gax.PathTemplate(
  */
 ConfigServiceV2Api.prototype.parentPath = function parentPath(project) {
   return PARENT_PATH_TEMPLATE.render({
-    'project': project
+    project: project
   });
 };
 
@@ -156,8 +156,8 @@ ConfigServiceV2Api.prototype.matchProjectFromParentName =
  */
 ConfigServiceV2Api.prototype.sinkPath = function sinkPath(project, sink) {
   return SINK_PATH_TEMPLATE.render({
-    'project': project,
-    'sink': sink
+    project: project,
+    sink: sink
   });
 };
 
@@ -445,7 +445,7 @@ function ConfigServiceV2ApiBuilder(gaxGrpc) {
     return new ConfigServiceV2Api(gaxGrpc, grpcClient, opts);
   };
   extend(this.configServiceV2Api, ConfigServiceV2Api);
-};
+}
 module.exports = ConfigServiceV2ApiBuilder;
 module.exports.SERVICE_ADDRESS = SERVICE_ADDRESS;
 module.exports.ALL_SCOPES = ALL_SCOPES;

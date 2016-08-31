@@ -41,7 +41,7 @@ var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
 var DEFAULT_TIMEOUT = 30;
 
 var PAGE_DESCRIPTORS = {
-  'listLogMetrics': new gax.PageDescriptor(
+  listLogMetrics: new gax.PageDescriptor(
       'page_token',
       'next_page_token',
       'metrics')
@@ -132,7 +132,7 @@ var METRIC_PATH_TEMPLATE = new gax.PathTemplate(
  */
 MetricsServiceV2Api.prototype.parentPath = function parentPath(project) {
   return PARENT_PATH_TEMPLATE.render({
-    'project': project
+    project: project
   });
 };
 
@@ -155,8 +155,8 @@ MetricsServiceV2Api.prototype.matchProjectFromParentName =
  */
 MetricsServiceV2Api.prototype.metricPath = function metricPath(project, metric) {
   return METRIC_PATH_TEMPLATE.render({
-    'project': project,
-    'metric': metric
+    project: project,
+    metric: metric
   });
 };
 
@@ -444,7 +444,7 @@ function MetricsServiceV2ApiBuilder(gaxGrpc) {
     return new MetricsServiceV2Api(gaxGrpc, grpcClient, opts);
   };
   extend(this.metricsServiceV2Api, MetricsServiceV2Api);
-};
+}
 module.exports = MetricsServiceV2ApiBuilder;
 module.exports.SERVICE_ADDRESS = SERVICE_ADDRESS;
 module.exports.ALL_SCOPES = ALL_SCOPES;
