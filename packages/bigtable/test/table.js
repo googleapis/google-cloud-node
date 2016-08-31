@@ -514,7 +514,7 @@ describe('Bigtable/Table', function() {
           assert.deepEqual(formatSpy.getCall(0).args, [
             options.start,
             options.end,
-            'key'
+            'Key'
           ]);
           done();
         };
@@ -579,12 +579,12 @@ describe('Bigtable/Table', function() {
           assert.deepEqual(formatSpy.getCall(0).args, [
             options.ranges[0].start,
             options.ranges[0].end,
-            'key'
+            'Key'
           ]);
           assert.deepEqual(formatSpy.getCall(1).args, [
             options.ranges[1].start,
             options.ranges[1].end,
-            'key'
+            'Key'
           ]);
           done();
         };

@@ -549,6 +549,19 @@ describe('Bigtable', function() {
         });
       });
 
+      it('should fetch a range of rows', function(done) {
+        var options = {
+          start: 'alincoln',
+          end: 'jadams'
+        };
+
+        TABLE.getRows(options, function(err, rows) {
+          assert.ifError(err);
+          assert.strictEqual(rows.length, 3);
+          done();
+        });
+      });
+
       it('should fetch individual cells of a row', function(done) {
         var row = TABLE.row('alincoln');
 
