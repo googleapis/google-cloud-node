@@ -159,7 +159,18 @@ function GrpcService(config, options) {
     this.grpcCredentials = grpc.credentials.createInsecure();
   }
 
-  this.grpcMetadata = config.grpcMetadata;
+  this.grpcMetadata = null;
+
+  if (config.grpcMetadata) {
+    this.grpcMetadata = new grpc.Metadata();
+
+    for (var prop in config.grpcMetadata) {
+      if (config.grpcMetadata.hasOwnProperty(prop)) {
+        this.grpcMetadata.add(prop, config.grpcMetadata[prop]);
+      }
+    }
+  }
+
   this.maxRetries = options.maxRetries;
 
   var apiVersion = config.apiVersion;
@@ -230,14 +241,7 @@ GrpcService.prototype.request = function(protoOpts, reqOpts, callback) {
 
   var service = this.getService_(protoOpts);
 
-  var metadata = null;
-  if (this.grpcMetadata) {
-    metadata = new grpc.Metadata();
-
-    for (var prop in this.grpcMetadata) {
-      metadata.add(prop, this.grpcMetadata[prop]);
-    }
-  }
+  var metadata = this.grpcMetadata;
 
   var grpcOpts = {};
   if (is.number(protoOpts.timeout)) {
@@ -341,7 +345,7 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
     shouldRetryFn: GrpcService.shouldRetryRequest_,
 
     request: function() {
-      return service[protoOpts.method](reqOpts, grpcOpts)
+      return service[protoOpts.method](reqOpts, self.grpcMetadata, grpcOpts)
         .on('metadata', function() {
           // retry-request requires a server response before it starts emitting
           // data. The closest mechanism grpc provides is a metadata event, but
@@ -663,12 +667,12 @@ GrpcService.prototype.getGrpcCredentials_ = function(callback) {
       return;
     }
 
-    var grpcCredentials = grpc.credentials.combineChannelCredentials(
+    var credentials = grpc.credentials.combineChannelCredentials(
       grpc.credentials.createSsl(),
       grpc.credentials.createFromGoogleCredential(authClient)
     );
 
-    callback(null, grpcCredentials);
+    callback(null, credentials);
   });
 };
 
