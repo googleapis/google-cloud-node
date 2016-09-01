@@ -1136,6 +1136,40 @@ describe('GrpcService', function() {
     });
   });
 
+  describe('decorateError_', function() {
+    var expectedDecoratedError = new Error('err.');
+
+    beforeEach(function() {
+      sinon.stub(GrpcService, 'decorateGrpcResponse_', function() {
+        return expectedDecoratedError;
+      });
+    });
+
+    it('should decorate an Error object', function() {
+      var grpcError = new Error('Hello');
+      grpcError.code = 2;
+
+      var decoratedError = GrpcService.decorateError_(grpcError);
+      var decorateArgs = GrpcService.decorateGrpcResponse_.getCall(0).args;
+
+      assert.strictEqual(decoratedError, expectedDecoratedError);
+      assert.strictEqual(decorateArgs[0] instanceof Error, true);
+      assert.strictEqual(decorateArgs[1], grpcError);
+    });
+
+    it('should decorate a plain object', function() {
+      var grpcMessage = { code: 2 };
+
+      var decoratedError = GrpcService.decorateError_(grpcMessage);
+      var decorateArgs = GrpcService.decorateGrpcResponse_.getCall(0).args;
+
+      assert.strictEqual(decoratedError, expectedDecoratedError);
+      assert.deepEqual(decorateArgs[0], {});
+      assert.strictEqual(decorateArgs[0] instanceof Error, false);
+      assert.strictEqual(decorateArgs[1], grpcMessage);
+    });
+  });
+
   describe('decorateGrpcResponse_', function() {
     it('should retrieve the HTTP code from the gRPC error map', function() {
       var errorMap = GrpcService.GRPC_ERROR_CODE_TO_HTTP;
@@ -1165,46 +1199,27 @@ describe('GrpcService', function() {
       assert.strictEqual(extended.message, errorMessage);
     });
 
+    it('should use a stringified JSON message from the error', function() {
+      var errorMessage = 'This is an error message.';
+
+      var err = {
+        code: 1,
+        message: JSON.stringify({
+          description: errorMessage
+        })
+      };
+
+      var error = new Error();
+      var extended = GrpcService.decorateGrpcResponse_(error, err);
+
+      assert.strictEqual(extended.message, errorMessage);
+    });
+
     it('should return null for unknown errors', function() {
       var error = new Error();
       var extended = GrpcService.decorateGrpcResponse_(error, { code: 9999 });
 
       assert.strictEqual(extended, null);
-    });
-  });
-
-  describe('decorateError_', function() {
-    var fakeError = new Error('err.');
-
-    beforeEach(function() {
-      sinon.stub(GrpcService, 'decorateGrpcResponse_', function() {
-        return fakeError;
-      });
-    });
-
-    it('should call decorateGrpcResponse_ with an error object', function() {
-      var grpcError = new Error('err.');
-
-      grpcError.code = 2;
-
-      var error = GrpcService.decorateError_(grpcError);
-      var args = GrpcService.decorateGrpcResponse_.getCall(0).args;
-
-      assert.strictEqual(fakeError, error);
-      assert(args[0] instanceof Error);
-      assert.strictEqual(args[1], grpcError);
-    });
-
-    it('should call decorateGrpcResponse_ with a plain object', function() {
-      var grpcMessage = { code: 2 };
-
-      var error = GrpcService.decorateError_(grpcMessage);
-      var args = GrpcService.decorateGrpcResponse_.getCall(0).args;
-
-      assert.strictEqual(fakeError, error);
-      assert.deepEqual(args[0], {});
-      assert(!(args[0] instanceof Error));
-      assert.strictEqual(args[1], grpcMessage);
     });
   });
 

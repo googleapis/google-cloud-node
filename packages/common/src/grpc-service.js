@@ -459,6 +459,21 @@ GrpcService.createDeadline_ = function(timeout) {
 };
 
 /**
+ * Checks for a grpc status code and extends the error object with additional
+ * information.
+ *
+ * @private
+ *
+ * @param {error|object} err - The grpc error.
+ * @return {error|null}
+ */
+GrpcService.decorateError_ = function(err) {
+  var errorObj = is.error(err) ? err : {};
+
+  return GrpcService.decorateGrpcResponse_(errorObj, err);
+};
+
+/**
  * Checks for a grpc status code and extends the supplied object with additional
  * information.
  *
@@ -471,28 +486,24 @@ GrpcService.createDeadline_ = function(timeout) {
 GrpcService.decorateGrpcResponse_ = function(obj, response) {
   if (response && GRPC_ERROR_CODE_TO_HTTP[response.code]) {
     var defaultResponseDetails = GRPC_ERROR_CODE_TO_HTTP[response.code];
+    var message = defaultResponseDetails.message;
+
+    if (response.message) {
+      // gRPC error messages can be either stringified JSON or strings.
+      try {
+        message = JSON.parse(response.message).description;
+      } catch(e) {
+        message = response.message;
+      }
+    }
 
     return extend(true, obj, response, {
       code: defaultResponseDetails.code,
-      message: response.message || defaultResponseDetails.message
+      message: message
     });
   }
 
   return null;
-};
-
-/**
- * Checks for a grpc status code and extends the error object with additional
- * information.
- *
- * @private
- *
- * @param {error|object} err - The grpc error.
- * @return {error|null}
- */
-GrpcService.decorateError_ = function(err) {
-  var errorObj = is.error(err) ? new Error() : {};
-  return GrpcService.decorateGrpcResponse_(errorObj, err);
 };
 
 /**
