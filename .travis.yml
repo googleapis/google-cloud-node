@@ -1,29 +1,13 @@
 language: node_js
 node_js:
-- 6
-- 4
-- 0.12
-
-# To test Node v4, Travis needs to use a newer C++ compiler.
-# Source: https://github.com/nodejs/nan/issues/435#issuecomment-136063745
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - g++-4.8
+  - 6
+  - 4
+  - 0.12
+os:
+  - linux
+  - osx
 before_install:
-- export CXX=g++-4.8
-- "$CXX --version"
+  - npm install -g npm # Force using the latest npm to get dedupe during install
 script: "./scripts/build.sh"
 before_deploy: "./scripts/release.sh"
-deploy:
-  provider: npm
-  email: sawchuk@gmail.com
-  api_key:
-    secure: H8H4ATiE64gTgiectfIYatsSnm7uDQrgQPvnLp7Ra1piElS+f1lLzdiN8+pDGP3h+OHU/PE8KsXhtVLfYTX5zroo3Y70n5TE4uTO62PL6WZl5R1+L5bUKcrffcHMsjH0mmiK5d0TW032tMcybAHsPcj9wiOZpf6aBIEEFY/1V5o=
-  on:
-    tags: true
-    repo: GoogleCloudPlatform/google-cloud-node
-    all_branches: true
 sudo: false
