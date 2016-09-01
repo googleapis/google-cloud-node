@@ -19,7 +19,6 @@ var publisherApi = require('./publisher_api');
 var subscriberApi = require('./subscriber_api');
 var extend = require('extend');
 var gax = require('google-gax');
-var lodash = require('lodash');
 
 function v1(options) {
   options = extend({
@@ -33,7 +32,5 @@ function v1(options) {
 }
 
 v1.SERVICE_ADDRESS = publisherApi.SERVICE_ADDRESS;
-v1.ALL_SCOPES = lodash.union(
-  publisherApi.ALL_SCOPES,
-  subscriberApi.ALL_SCOPES);
+v1.ALL_SCOPES = publisherApi.ALL_SCOPES;
 module.exports = v1;
