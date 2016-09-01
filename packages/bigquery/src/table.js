@@ -726,6 +726,9 @@ Table.prototype.getRows = function(options, callback) {
  * //-
  * // Load data from a file in your Cloud Storage bucket.
  * //-
+ * var gcs = require('@google-cloud/storage')({
+ *   projectId: 'grape-spaceship-123'
+ * });
  * var data = gcs.bucket('institutions').file('data.csv');
  * table.import(data, function(err, job, apiResponse) {});
  *

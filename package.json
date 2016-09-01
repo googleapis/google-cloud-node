@@ -29,13 +29,14 @@
     "docs": "node ./scripts/docs/packages.js",
     "bundle": "node ./scripts/docs/bundle.js",
     "lint": "jshint scripts/ packages/ system-test/ test/ && jscs packages/ system-test/ test/",
-    "test": "npm run docs && npm run bundle && mocha --timeout 5000 test/docs.js packages/*/test/*.js",
+    "test": "npm run docs && npm run bundle && mocha --timeout 5000 --bail test/docs.js packages/*/test/*.js",
     "system-test": "mocha packages/*/system-test/*.js --no-timeouts --bail",
     "cover": "istanbul cover _mocha --report lcovonly -x 'packages/*/src/v*/*.js' -- --no-timeouts --bail packages/*/test/*.js -R spec",
     "coveralls": "npm run cover && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=0.12.0"
+    "node": ">=0.12.0",
+    "npm": ">3.0.0"
   }
 }
