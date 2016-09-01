@@ -16,14 +16,21 @@
 var proxyquire = require('proxyquire').noCallThru();
 var filter = 'severity > ALERT';
 var logName = 'bar';
+var sort = 'field';
+var limit = 1;
+var resource = {
+  type: 'global'
+};
 
 function getSample () {
+  var apiResponseMock = {};
   var entriesMock = [{}];
   var entryMock = {};
   var logMock = {
     entry: sinon.stub().returns(entryMock),
-    write: sinon.stub().callsArgWith(1, null),
-    delete: sinon.stub().callsArgWith(0, null)
+    write: sinon.stub().callsArgWith(1, null, apiResponseMock),
+    delete: sinon.stub().callsArgWith(0, null, apiResponseMock),
+    getEntries: sinon.stub().callsArgWith(0, null, entriesMock)
   };
   var loggingMock = {
     log: sinon.stub().returns(logMock),
@@ -41,7 +48,8 @@ function getSample () {
       logging: loggingMock,
       log: logMock,
       entries: entriesMock,
-      entry: entryMock
+      entry: entryMock,
+      apiResponse: apiResponseMock
     }
   };
 }
@@ -51,20 +59,46 @@ describe('logging:entries', function () {
     it('should list log entries', function () {
       var sample = getSample();
       var callback = sinon.stub();
-      var options = {
-        filter: filter,
-        limit: 1,
-        sort: 'field'
-      };
 
-      sample.program.listLogEntries(options, callback);
+      sample.program.listLogEntries(logName, callback);
+
+      assert(sample.mocks.log.getEntries.calledOnce, 'method called once');
+      assert.equal(sample.mocks.log.getEntries.firstCall.args.length, 1, 'method received 1 argument');
+      assert(callback.calledOnce, 'callback called once');
+      assert.equal(callback.firstCall.args.length, 2, 'callback received 2 arguments');
+      assert.ifError(callback.firstCall.args[0], 'callback did not receive error');
+      assert.strictEqual(callback.firstCall.args[1], sample.mocks.entries, 'callback received result');
+      assert(console.log.calledWith('Found %d entries!', sample.mocks.entries.length));
+    });
+
+    it('should handle error', function () {
+      var error = new Error('error');
+      var sample = getSample();
+      var callback = sinon.stub();
+      sample.mocks.log.getEntries = sinon.stub().callsArgWith(0, error);
+
+      sample.program.listLogEntries(logName, callback);
+
+      assert(callback.calledOnce, 'callback called once');
+      assert.equal(callback.firstCall.args.length, 1, 'callback received 1 argument');
+      assert(callback.firstCall.args[0], 'callback received error');
+      assert.equal(callback.firstCall.args[0].message, error.message, 'error has correct message');
+    });
+  });
+
+  describe('listLogEntriesAdvanced', function () {
+    it('should list log entries', function () {
+      var sample = getSample();
+      var callback = sinon.stub();
+
+      sample.program.listLogEntriesAdvanced(filter, limit, sort, callback);
 
       assert(sample.mocks.logging.getEntries.calledOnce, 'method called once');
       assert.equal(sample.mocks.logging.getEntries.firstCall.args.length, 2, 'method received 2 arguments');
       assert.deepEqual(sample.mocks.logging.getEntries.firstCall.args[0], {
-        pageSize: options.limit,
-        filter: options.filter,
-        orderBy: options.sort
+        pageSize: limit,
+        filter: filter,
+        orderBy: sort
       }, 'method received options');
       assert(callback.calledOnce, 'callback called once');
       assert.equal(callback.firstCall.args.length, 2, 'callback received 2 arguments');
@@ -79,7 +113,7 @@ describe('logging:entries', function () {
       var callback = sinon.stub();
       sample.mocks.logging.getEntries = sinon.stub().callsArgWith(1, error);
 
-      sample.program.listLogEntries({}, callback);
+      sample.program.listLogEntriesAdvanced(null, null, null, callback);
 
       assert(callback.calledOnce, 'callback called once');
       assert.equal(callback.firstCall.args.length, 1, 'callback received 1 argument');
@@ -89,20 +123,53 @@ describe('logging:entries', function () {
   });
 
   describe('writeLogEntry', function () {
+    it('should write log entries', function () {
+      var sample = getSample();
+      var callback = sinon.stub();
+
+      sample.program.writeLogEntry(logName, callback);
+
+      assert(sample.mocks.log.write.calledOnce, 'method called once');
+      assert.equal(sample.mocks.log.write.firstCall.args.length, 2, 'method received 2 arguments');
+      assert(callback.calledOnce, 'callback called once');
+      assert.equal(callback.firstCall.args.length, 2, 'callback received 2 arguments');
+      assert.ifError(callback.firstCall.args[0], 'callback did not receive error');
+      assert.strictEqual(callback.firstCall.args[1], sample.mocks.apiResponse, 'callback received result');
+      assert(console.log.calledWith('Wrote to %s', logName));
+    });
+
+    it('should handle error', function () {
+      var error = new Error('error');
+      var sample = getSample();
+      var callback = sinon.stub();
+      sample.mocks.log.write = sinon.stub().callsArgWith(1, error);
+
+      sample.program.writeLogEntry(logName, callback);
+
+      assert(callback.calledOnce, 'callback called once');
+      assert.equal(callback.firstCall.args.length, 1, 'callback received 1 argument');
+      assert(callback.firstCall.args[0], 'callback received error');
+      assert.equal(callback.firstCall.args[0].message, error.message, 'error has correct message');
+    });
+  });
+
+  describe('writeLogEntryAdvanced', function () {
     it('should write a log entry', function () {
       var sample = getSample();
       var callback = sinon.stub();
 
-      sample.program.writeLogEntry({
-        name: logName
+      sample.program.writeLogEntryAdvanced(logName, {
+        resource: resource,
+        entry: 'Hello, world!'
       }, callback);
 
       assert(sample.mocks.log.write.calledOnce, 'method called once');
       assert.equal(sample.mocks.log.write.firstCall.args.length, 2, 'method received 2 arguments');
       assert.strictEqual(sample.mocks.log.write.firstCall.args[0], sample.mocks.entry, 'method received options');
       assert(callback.calledOnce, 'callback called once');
-      assert.equal(callback.firstCall.args.length, 1, 'callback received 1 argument');
+      assert.equal(callback.firstCall.args.length, 2, 'callback received 2 arguments');
       assert.ifError(callback.firstCall.args[0], 'callback did not receive error');
+      assert.strictEqual(callback.firstCall.args[1], sample.mocks.apiResponse, 'callback received result');
       assert(console.log.calledWith('Wrote entry to log: %s', logName));
     });
 
@@ -112,7 +179,7 @@ describe('logging:entries', function () {
       var callback = sinon.stub();
       sample.mocks.log.write = sinon.stub().callsArgWith(1, error);
 
-      sample.program.writeLogEntry({}, callback);
+      sample.program.writeLogEntryAdvanced(logName, {}, callback);
 
       assert(callback.calledOnce, 'callback called once');
       assert.equal(callback.firstCall.args.length, 1, 'callback received 1 argument');
@@ -131,8 +198,9 @@ describe('logging:entries', function () {
       assert(sample.mocks.log.delete.calledOnce, 'method called once');
       assert.equal(sample.mocks.log.delete.firstCall.args.length, 1, 'method received 1 argument');
       assert(callback.calledOnce, 'callback called once');
-      assert.equal(callback.firstCall.args.length, 1, 'callback received 1 argument');
+      assert.equal(callback.firstCall.args.length, 2, 'callback received 2 arguments');
       assert.ifError(callback.firstCall.args[0], 'callback did not receive error');
+      assert.strictEqual(callback.firstCall.args[1], sample.mocks.apiResponse, 'callback received result');
       assert(console.log.calledWith('Deleted log: %s', logName));
     });
 
@@ -152,41 +220,35 @@ describe('logging:entries', function () {
   });
 
   describe('main', function () {
-    it('should call listLogEntries', function () {
+    it('should call listLogEntriesAdvanced', function () {
       var program = getSample().program;
 
-      sinon.stub(program, 'listLogEntries');
-      program.main(['list', '-f', '"' + filter + '"', '-l', 1, '-s', 'field']);
-      assert.equal(program.listLogEntries.calledOnce, true);
-      assert.deepEqual(program.listLogEntries.firstCall.args.slice(0, -1), [{
-        filter: '"' + filter + '"',
-        limit: 1,
-        sort: 'field'
-      }]);
+      sinon.stub(program, 'listLogEntriesAdvanced');
+      program.main(['list', '-f', filter, '-l', limit, '-s', sort]);
+      assert.equal(program.listLogEntriesAdvanced.calledOnce, true);
+      assert.deepEqual(program.listLogEntriesAdvanced.firstCall.args.slice(0, -1), [filter, limit, sort]);
     });
 
-    it('should call writeLogEntry', function () {
+    it('should call writeLogEntryAdvanced', function () {
       var program = getSample().program;
 
-      sinon.stub(program, 'writeLogEntry');
+      sinon.stub(program, 'writeLogEntryAdvanced');
       program.main(['write', logName, '{}', '{}']);
-      assert.equal(program.writeLogEntry.calledOnce, true);
-      assert.deepEqual(program.writeLogEntry.firstCall.args.slice(0, -1), [{
-        name: logName,
+      assert.equal(program.writeLogEntryAdvanced.calledOnce, true);
+      assert.deepEqual(program.writeLogEntryAdvanced.firstCall.args.slice(0, -1), [logName, {
         resource: {},
         entry: {}
       }]);
     });
 
-    it('should validate args and call writeLogEntry', function () {
+    it('should validate args and call writeLogEntryAdvanced', function () {
       var program = getSample().program;
 
-      sinon.stub(program, 'writeLogEntry');
+      sinon.stub(program, 'writeLogEntryAdvanced');
       program.main(['write', logName, '"{"invalid', '"{"invalid']);
-      assert.equal(program.writeLogEntry.called, false, 'writeLogEntry should not have been called');
-      assert.equal(console.error.calledTwice, true);
+      assert.equal(program.writeLogEntryAdvanced.called, false, 'writeLogEntryAdvanced should not have been called');
+      assert.equal(console.error.calledOnce, true);
       assert.deepEqual(console.error.firstCall.args, ['"resource" must be a valid JSON string!']);
-      assert.deepEqual(console.error.secondCall.args, ['"entry" must be a valid JSON string!']);
     });
 
     it('should call deleteLog', function () {

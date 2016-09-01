@@ -22,48 +22,51 @@ var filter = 'resource.type="global" AND logName="projects/' + projectId + '/log
 var message = 'Hello world!';
 
 describe('logging:logs', function () {
-  it('should write a log entry', function (done) {
-    var options = {
-      name: logName,
-      resource: {
-        type: 'global'
-      },
-      entry: {
-        message: message
-      }
-    };
+  describe('writeLogEntryAdvanced', function () {
+    it('should write a log entry', function (done) {
+      var options = {
+        resource: {
+          type: 'global'
+        },
+        entry: {
+          message: message
+        }
+      };
 
-    program.writeLogEntry(options, function (err) {
-      assert.ifError(err);
-      // Logs are eventually consistent
-      setTimeout(done, 5000);
-    });
-  });
-
-  it('should list log entries', function (done) {
-    var listOptions = {
-      filter: filter,
-      pageSize: 5
-    };
-
-    program.listLogEntries(listOptions, function (err, entries) {
-      assert.ifError(err);
-      assert(Array.isArray(entries), '"entries" should be an array.');
-      var matchingEntries = entries.filter(function (entry) {
-        return entry.data && entry.data.message === message;
-      });
-      assert.equal(matchingEntries.length, 1, 'Newly written entry should be in list.');
-      done();
-    });
-  });
-
-  it('should delete a log', function (done) {
-    program.deleteLog(logName, function (err) {
-      // Ignore "Not Found" error
-      if (err && err.code !== 404) {
+      program.writeLogEntryAdvanced(logName, options, function (err, apiResponse) {
         assert.ifError(err);
-      }
-      done();
+        assert.notEqual(apiResponse, undefined);
+
+        // Logs are eventually consistent
+        setTimeout(done, 5000);
+      });
+    });
+  });
+
+  describe('listLogEntriesAdvanced', function () {
+    it('should list log entries', function (done) {
+      program.listLogEntriesAdvanced(filter, 5, null, function (err, entries) {
+        assert.ifError(err);
+        assert(Array.isArray(entries), '"entries" should be an array.');
+        var matchingEntries = entries.filter(function (entry) {
+          return entry.data && entry.data.message === message;
+        });
+        assert.equal(matchingEntries.length, 1, 'Newly written entry should be in list.');
+        done();
+      });
+    });
+  });
+
+  describe('deleteLog', function () {
+    it('should delete a log', function (done) {
+      program.deleteLog(logName, function (err, apiResponse) {
+        // Ignore "Not Found" error
+        if (err && err.code !== 404) {
+          assert.ifError(err);
+          assert.notEqual(apiResponse, undefined);
+        }
+        done();
+      });
     });
   });
 });

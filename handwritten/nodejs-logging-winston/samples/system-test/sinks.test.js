@@ -13,15 +13,17 @@
 
 'use strict';
 
-var gcloud = require('google-cloud');
+var Logging = require('@google-cloud/logging');
+var Storage = require('@google-cloud/storage');
 var uuid = require('node-uuid');
 var program = require('../sinks');
 
-var logging = gcloud.logging();
-var storage = gcloud.storage();
+var logging = Logging();
+var storage = Storage();
 
 var bucketName = 'nodejs-docs-samples-test-' + uuid.v4();
 var sinkName = 'nodejs-docs-samples-test-' + uuid.v4();
+var filter = 'severity > WARNING';
 
 describe('logging:sinks', function () {
   before(function (done) {
@@ -40,16 +42,11 @@ describe('logging:sinks', function () {
 
   describe('createSink', function () {
     it('should create a new sink', function (done) {
-      var options = {
-        name: sinkName,
-        destination: bucketName,
-        type: 'bucket'
-      };
-
-      program.createSink(options, function (err, sink) {
+      program.createSink(sinkName, bucketName, filter, function (err, sink, apiResponse) {
         assert.ifError(err);
         assert(sink, 'sink should be defined');
         assert.equal(sink.name, sinkName, 'should have received the new sink');
+        assert.notEqual(apiResponse, undefined);
         done();
       });
     });
@@ -60,7 +57,7 @@ describe('logging:sinks', function () {
       var expected = {
         name: sinkName,
         destination: 'storage.googleapis.com/' + bucketName,
-        filter: '',
+        filter: filter,
         outputVersionFormat: 'V2'
       };
 
@@ -88,24 +85,19 @@ describe('logging:sinks', function () {
 
   describe('updateSink', function () {
     it('should update metdata for a sink', function (done) {
-      var filter = 'severity > ALERT';
+      var newFilter = 'severity > ALERT';
       var expected = {
         name: sinkName,
         destination: 'storage.googleapis.com/' + bucketName,
-        filter: filter,
+        filter: newFilter,
         outputVersionFormat: 'V2'
       };
-      var options = {
-        name: sinkName,
-        metadata: {
-          filter: filter
-        }
-      };
 
-      program.updateSink(options, function (err) {
+      program.updateSink(sinkName, newFilter, function (err, apiResponse) {
         assert.ifError(err);
+        assert.notEqual(apiResponse, undefined);
 
-        program.getSinkMetadata(options.name, function (err, metadata) {
+        program.getSinkMetadata(sinkName, function (err, metadata) {
           assert.ifError(err);
           assert.deepEqual(metadata, expected, 'Sink should have new metadata.');
           done();
@@ -116,8 +108,9 @@ describe('logging:sinks', function () {
 
   describe('deleteSink', function () {
     it('should delete a sink', function (done) {
-      program.deleteSink(sinkName, function (err) {
+      program.deleteSink(sinkName, function (err, apiResponse) {
         assert.ifError(err);
+        assert.notEqual(apiResponse, undefined);
 
         program.getSinkMetadata(sinkName, function (err) {
           assert(err, 'Should be an error.');

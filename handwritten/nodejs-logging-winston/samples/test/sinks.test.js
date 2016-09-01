@@ -15,14 +15,12 @@
 
 var proxyquire = require('proxyquire').noCallThru();
 var bucketName = 'foo';
-var datasetName = 'other-foo';
 var filter = 'severity > ALERT';
 var sinkName = 'bar';
-var topicName = 'other-bar';
 
 function getSample () {
+  var apiResponseMock = {};
   var bucketMock = {};
-  var datasetMock = {};
   var metadataMock = {};
   var sinksMock = [
     {
@@ -30,49 +28,37 @@ function getSample () {
     }
   ];
   var sinkMock = {
-    create: sinon.stub().callsArgWith(1, null, sinksMock[0]),
-    delete: sinon.stub().callsArgWith(0, null),
+    create: sinon.stub().callsArgWith(1, null, sinksMock[0], apiResponseMock),
+    delete: sinon.stub().callsArgWith(0, null, apiResponseMock),
     getMetadata: sinon.stub().callsArgWith(0, null, metadataMock),
-    setMetadata: sinon.stub().callsArgWith(1, null)
-  };
-  var topicMock = {};
-  var bigqueryMock = {
-    dataset: sinon.stub().returns(datasetMock)
+    setMetadata: sinon.stub().callsArgWith(1, null, apiResponseMock)
   };
   var loggingMock = {
     sink: sinon.stub().returns(sinkMock),
     getSinks: sinon.stub().callsArgWith(0, null, sinksMock)
   };
-  var pubsubMock = {
-    topic: sinon.stub().returns(topicMock)
-  };
   var storageMock = {
     bucket: sinon.stub().returns(bucketMock)
   };
-  var GcloudMock = {
-    bigquery: sinon.stub().returns(bigqueryMock),
-    logging: sinon.stub().returns(loggingMock),
-    pubsub: sinon.stub().returns(pubsubMock),
-    storage: sinon.stub().returns(storageMock)
-  };
+  var LoggingMock = sinon.stub().returns(loggingMock);
+  var StorageMock = sinon.stub().returns(storageMock);
 
   return {
     program: proxyquire('../sinks', {
-      'google-cloud': GcloudMock,
+      '@google-cloud/logging': LoggingMock,
+      '@google-cloud/storage': StorageMock,
       yargs: proxyquire('yargs', {})
     }),
     mocks: {
-      gcloud: GcloudMock,
-      bigquery: bigqueryMock,
+      Logging: LoggingMock,
+      Storage: StorageMock,
       logging: loggingMock,
       storage: storageMock,
-      pubsub: pubsubMock,
       bucket: bucketMock,
-      dataset: datasetMock,
       metadata: metadataMock,
       sink: sinkMock,
       sinks: sinksMock,
-      topic: topicMock
+      apiResponse: apiResponseMock
     }
   };
 }
@@ -82,70 +68,21 @@ describe('logging:sinks', function () {
     it('should create a new sink to a bucket', function () {
       var sample = getSample();
       var callback = sinon.stub();
-      var options = {
-        name: sinkName,
-        destination: bucketName,
-        type: 'bucket'
-      };
 
-      sample.program.createSink(options, callback);
+      sample.program.createSink(sinkName, bucketName, filter, callback);
 
       assert(sample.mocks.sink.create.calledOnce, 'method called once');
       assert.equal(sample.mocks.sink.create.firstCall.args.length, 2, 'method received 2 arguments');
       assert.deepEqual(sample.mocks.sink.create.firstCall.args[0], {
+        filter: filter,
         destination: sample.mocks.bucket
       }, 'method received options');
       assert(callback.calledOnce, 'callback called once');
-      assert.equal(callback.firstCall.args.length, 2, 'callback received 2 arguments');
+      assert.equal(callback.firstCall.args.length, 3, 'callback received 3 arguments');
       assert.ifError(callback.firstCall.args[0], 'callback did not receive error');
       assert.strictEqual(callback.firstCall.args[1], sample.mocks.sinks[0], 'callback received result');
-      assert(console.log.calledWith('Created sink: %s', sinkName));
-    });
-
-    it('should create a new sink to a dataset', function () {
-      var sample = getSample();
-      var callback = sinon.stub();
-      var options = {
-        name: sinkName,
-        destination: datasetName,
-        type: 'dataset'
-      };
-
-      sample.program.createSink(options, callback);
-
-      assert(sample.mocks.sink.create.calledOnce, 'method called once');
-      assert.equal(sample.mocks.sink.create.firstCall.args.length, 2, 'method received 2 arguments');
-      assert.deepEqual(sample.mocks.sink.create.firstCall.args[0], {
-        destination: sample.mocks.dataset
-      }, 'method received options');
-      assert(callback.calledOnce, 'callback called once');
-      assert.equal(callback.firstCall.args.length, 2, 'callback received 2 arguments');
-      assert.ifError(callback.firstCall.args[0], 'callback did not receive error');
-      assert.strictEqual(callback.firstCall.args[1], sample.mocks.sinks[0], 'callback received result');
-      assert(console.log.calledWith('Created sink: %s', sinkName));
-    });
-
-    it('should create a new sink to a topic', function () {
-      var sample = getSample();
-      var callback = sinon.stub();
-      var options = {
-        name: sinkName,
-        destination: topicName,
-        type: 'topic'
-      };
-
-      sample.program.createSink(options, callback);
-
-      assert(sample.mocks.sink.create.calledOnce, 'method called once');
-      assert.equal(sample.mocks.sink.create.firstCall.args.length, 2, 'method received 2 arguments');
-      assert.deepEqual(sample.mocks.sink.create.firstCall.args[0], {
-        destination: sample.mocks.topic
-      }, 'method received options');
-      assert(callback.calledOnce, 'callback called once');
-      assert.equal(callback.firstCall.args.length, 2, 'callback received 2 arguments');
-      assert.ifError(callback.firstCall.args[0], 'callback did not receive error');
-      assert.strictEqual(callback.firstCall.args[1], sample.mocks.sinks[0], 'callback received result');
-      assert(console.log.calledWith('Created sink: %s', sinkName));
+      assert.strictEqual(callback.firstCall.args[2], sample.mocks.apiResponse, 'callback received result');
+      assert(console.log.calledWith('Created sink %s to %s', sinkName, bucketName));
     });
 
     it('should handle error', function () {
@@ -154,7 +91,7 @@ describe('logging:sinks', function () {
       var callback = sinon.stub();
       sample.mocks.sink.create = sinon.stub().callsArgWith(1, error);
 
-      sample.program.createSink({}, callback);
+      sample.program.createSink(sinkName, bucketName, filter, callback);
 
       assert(callback.calledOnce, 'callback called once');
       assert.equal(callback.firstCall.args.length, 1, 'callback received 1 argument');
@@ -229,21 +166,18 @@ describe('logging:sinks', function () {
     it('should update metadata for a sink', function () {
       var sample = getSample();
       var callback = sinon.stub();
-      var options = {
-        name: sinkName,
-        metadata: {
-          filter: filter
-        }
-      };
 
-      sample.program.updateSink(options, callback);
+      sample.program.updateSink(sinkName, filter, callback);
 
       assert(sample.mocks.sink.setMetadata.calledOnce, 'method called once');
       assert.equal(sample.mocks.sink.setMetadata.firstCall.args.length, 2, 'method received 2 arguments');
-      assert.deepEqual(sample.mocks.sink.setMetadata.firstCall.args[0], options.metadata, 'method received options');
+      assert.deepEqual(sample.mocks.sink.setMetadata.firstCall.args[0], {
+        filter: filter
+      }, 'method received options');
       assert(callback.calledOnce, 'callback called once');
-      assert.equal(callback.firstCall.args.length, 1, 'callback received 1 argument');
+      assert.equal(callback.firstCall.args.length, 2, 'callback received 2 arguments');
       assert.ifError(callback.firstCall.args[0], 'callback did not receive error');
+      assert.strictEqual(callback.firstCall.args[1], sample.mocks.apiResponse, 'callback received result');
       assert(console.log.calledWith('Updated sink: %s', sinkName));
     });
 
@@ -253,7 +187,7 @@ describe('logging:sinks', function () {
       var callback = sinon.stub();
       sample.mocks.sink.setMetadata = sinon.stub().callsArgWith(1, error);
 
-      sample.program.updateSink({}, callback);
+      sample.program.updateSink(sinkName, filter, callback);
 
       assert(callback.calledOnce, 'callback called once');
       assert.equal(callback.firstCall.args.length, 1, 'callback received 1 argument');
@@ -263,7 +197,7 @@ describe('logging:sinks', function () {
   });
 
   describe('deleteSink', function () {
-    it('should get metadata for a sink', function () {
+    it('should delete a sink', function () {
       var sample = getSample();
       var callback = sinon.stub();
 
@@ -272,8 +206,9 @@ describe('logging:sinks', function () {
       assert(sample.mocks.sink.delete.calledOnce, 'method called once');
       assert.equal(sample.mocks.sink.delete.firstCall.args.length, 1, 'method received 1 argument');
       assert(callback.calledOnce, 'callback called once');
-      assert.equal(callback.firstCall.args.length, 1, 'callback received 1 argument');
+      assert.equal(callback.firstCall.args.length, 2, 'callback received 2 arguments');
       assert.ifError(callback.firstCall.args[0], 'callback did not receive error');
+      assert.strictEqual(callback.firstCall.args[1], sample.mocks.apiResponse, 'callback received result');
       assert(console.log.calledWith('Deleted sink: %s', sinkName));
     });
 
@@ -297,14 +232,9 @@ describe('logging:sinks', function () {
       var program = getSample().program;
 
       sinon.stub(program, 'createSink');
-      program.main(['create', sinkName, bucketName, '-t', 'bucket']);
+      program.main(['create', sinkName, bucketName, filter]);
       assert.equal(program.createSink.calledOnce, true);
-      assert.deepEqual(program.createSink.firstCall.args.slice(0, -1), [{
-        name: sinkName,
-        destination: bucketName,
-        type: 'bucket',
-        filter: undefined
-      }]);
+      assert.deepEqual(program.createSink.firstCall.args.slice(0, -1), [sinkName, bucketName, filter]);
     });
 
     it('should call getSinkMetadata', function () {
@@ -329,22 +259,9 @@ describe('logging:sinks', function () {
       var program = getSample().program;
 
       sinon.stub(program, 'updateSink');
-      program.main(['update', sinkName, '{}']);
+      program.main(['update', sinkName, filter]);
       assert.equal(program.updateSink.calledOnce, true);
-      assert.deepEqual(program.updateSink.firstCall.args.slice(0, -1), [{
-        name: sinkName,
-        metadata: {}
-      }]);
-    });
-
-    it('should validate metadata and call updateSink', function () {
-      var program = getSample().program;
-
-      sinon.stub(program, 'updateSink');
-      program.main(['update', sinkName, '"{"invalid']);
-      assert.equal(program.updateSink.called, false);
-      assert.equal(console.error.calledOnce, true);
-      assert.deepEqual(console.error.firstCall.args, ['"metadata" must be a valid JSON string!']);
+      assert.deepEqual(program.updateSink.firstCall.args.slice(0, -1), [sinkName, filter]);
     });
 
     it('should call deleteSink', function () {

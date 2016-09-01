@@ -17,79 +17,67 @@
 // By default, the client will authenticate using the service account file
 // specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use
 // the project specified by the GCLOUD_PROJECT environment variable. See
-// https://googlecloudplatform.github.io/gcloud-node/#/docs/google-cloud/latest/guides/authentication
-var gcloud = require('google-cloud');
-
-// Instantiate the logging client
-var logging = gcloud.logging();
+// https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/latest/guides/authentication
+var Logging = require('@google-cloud/logging');
 // [END setup]
 
 // [START create_sink]
-/**
- * Create a new sink.
- *
- * @param {objects} options Configuration options.
- * @param {string} options.name The name for new sink.
- * @param {string} options.destination Destination for the new sink.
- * @param {string} options.type The type of destination. Choices are:
- *     "bucket", "dataset", or "topic".
- * @param {function} callback The callback function.
- */
-function createSink (options, callback) {
-  var sink = logging.sink(options.name);
-  var config = {};
+var Storage = require('@google-cloud/storage');
 
-  // Based on the type of destination, prepare the appropriate object
-  if (options.type === 'bucket') {
-    config.destination = gcloud.storage().bucket(options.destination);
-  } else if (options.type === 'dataset') {
-    config.destination = gcloud.bigquery().dataset(options.destination);
-  } else if (options.type === 'topic') {
-    config.destination = gcloud.pubsub().topic(options.destination);
-  }
+function createSink (sinkName, bucketName, filter, callback) {
+  var logging = Logging();
+  var storage = Storage();
 
-  // See https://googlecloudplatform.github.io/gcloud-node/#/docs/logging/latest/logging/sink
-  sink.create(config, function (err, sink) {
+  // The destination can be a Cloud Storage bucket, a Cloud Pub/Sub topic,
+  // or a BigQuery dataset. In this case, it is a Cloud Storage Bucket.
+  // See https://cloud.google.com/logging/docs/api/tasks/exporting-logs for
+  // information on the destination format.
+  var destination = storage.bucket(bucketName);
+  var sink = logging.sink(sinkName);
+
+  /**
+   * The filter determines which logs this sink matches and will be exported
+   * to the destination. For example a filter of 'severity>=INFO' will send
+   * all logs that have a severity of INFO or greater to the destination.
+   * See https://cloud.google.com/logging/docs/view/advanced_filters for more
+   * filter information.
+   */
+  var config = {
+    destination: destination,
+    filter: filter
+  };
+
+  // See https://googlecloudplatform.github.io/google-cloud-node/#/docs/logging/latest/logging/sink?method=create
+  sink.create(config, function (err, sink, apiResponse) {
     if (err) {
       return callback(err);
     }
 
-    console.log('Created sink: %s', options.name);
-    return callback(null, sink);
+    console.log('Created sink %s to %s', sinkName, bucketName);
+    return callback(null, sink, apiResponse);
   });
 }
 // [END create_sink]
 
-// [START get_sink_metadata]
-/**
- * Get the metatdata for the specified sink.
- *
- * @param {string} name The name of the sink to get.
- * @param {function} callback The callback function.
- */
-function getSinkMetadata (name, callback) {
-  var sink = logging.sink(name);
+function getSinkMetadata (sinkName, callback) {
+  var logging = Logging();
+  var sink = logging.sink(sinkName);
 
-  // See https://googlecloudplatform.github.io/gcloud-node/#/docs/logging/latest/logging/sink
+  // See https://googlecloudplatform.github.io/google-cloud-node/#/docs/logging/latest/logging/sink?method=getMetadata
   sink.getMetadata(function (err, metadata) {
     if (err) {
       return callback(err);
     }
 
-    console.log('Got metadata for sink: %s', name);
+    console.log('Got metadata for sink: %s', sinkName);
     return callback(null, metadata);
   });
 }
-// [END get_sink_metadata]
 
-// [START list_sinks]
-/**
- * List sinks in the authenticated project.
- *
- * @param {function} callback The callback function.
- */
 function listSinks (callback) {
-  // See https://googlecloudplatform.github.io/gcloud-node/#/docs/logging/latest/logging
+  var logging = Logging();
+
+  // See https://googlecloudplatform.github.io/google-cloud-node/#/docs/logging/latest/logging?method=getSinks
   logging.getSinks(function (err, sinks) {
     if (err) {
       return callback(err);
@@ -99,54 +87,47 @@ function listSinks (callback) {
     return callback(null, sinks);
   });
 }
-// [END list_sinks]
 
-// [START update_sink]
-/**
- * Update the metdata for a sink.
- *
- * @param {object} options Configuration options.
- * @param {string} name The name of the sink to update.
- * @param {object} metadata The new metadata for the sink.
- * @param {function} callback The callback function.
- */
-function updateSink (options, callback) {
-  var sink = logging.sink(options.name);
+function updateSink (sinkName, filter, callback) {
+  var logging = Logging();
+  var sink = logging.sink(sinkName);
 
-  // See https://googlecloudplatform.github.io/gcloud-node/#/docs/logging/latest/logging/sink
-  sink.setMetadata(options.metadata, function (err) {
+  /**
+   * The filter determines which logs this sink matches and will be exported
+   * to the destination. For example a filter of 'severity>=INFO' will send
+   * all logs that have a severity of INFO or greater to the destination.
+   * See https://cloud.google.com/logging/docs/view/advanced_filters for more
+   * filter information.
+   */
+  var metadata = {
+    filter: filter
+  };
+
+  // See https://googlecloudplatform.github.io/google-cloud-node/#/docs/logging/latest/logging/sink?method=setMetadata
+  sink.setMetadata(metadata, function (err, apiResponse) {
     if (err) {
       return callback(err);
     }
 
-    console.log('Updated sink: %s', options.name);
-    return callback(null);
+    console.log('Updated sink: %s', sinkName);
+    return callback(null, apiResponse);
   });
 }
-// [END update_sink]
 
-// [START delete_sink]
-/**
- * Delete a sink.
- *
- * @param {string} name The name of the sink to delete.
- * @param {function} callback The callback function.
- */
-function deleteSink (name, callback) {
-  var sink = logging.sink(name);
+function deleteSink (sinkName, callback) {
+  var logging = Logging();
+  var sink = logging.sink(sinkName);
 
-  // See https://googlecloudplatform.github.io/gcloud-node/#/docs/logging/latest/logging/sink
-  sink.delete(function (err) {
+  // See https://googlecloudplatform.github.io/google-cloud-node/#/docs/logging/latest/logging/sink?method=delete
+  sink.delete(function (err, apiResponse) {
     if (err) {
       return callback(err);
     }
 
-    console.log('Deleted sink: %s', name);
-    callback(null);
+    console.log('Deleted sink: %s', sinkName);
+    return callback(null, apiResponse);
   });
 }
-// [END delete_sink]
-// [END all]
 
 // The command-line program
 var cli = require('yargs');
@@ -166,49 +147,27 @@ var program = module.exports = {
 
 cli
   .demand(1)
-  .command('create <name> <destination>', 'Create a new sink with the given name and destination.', {
-    filter: {
-      alias: 'f',
-      type: 'string',
-      requiresArg: true,
-      description: 'Optional. Only log entries matching the filter are written.'
-    },
-    type: {
-      alias: 't',
-      demand: true,
-      type: 'string',
-      choices: ['bucket', 'dataset', 'topic'],
-      requiresArg: true,
-      description: 'The type of destination.'
-    }
-  }, function (options) {
-    program.createSink(utils.pick(options, ['name', 'destination', 'filter', 'type']), utils.makeHandler(false));
+  .command('create <sinkName> <bucketName> [filter]', 'Creates a new sink with the given name to the specified bucket with an optional filter.', {}, function (options) {
+    program.createSink(options.sinkName, options.bucketName, options.filter, utils.makeHandler(false));
   })
-  .command('get <name>', 'Get the metadata for the specified sink.', {}, function (options) {
-    program.getSinkMetadata(options.name, utils.makeHandler());
+  .command('get <sinkName>', 'Gets the metadata for the specified sink.', {}, function (options) {
+    program.getSinkMetadata(options.sinkName, utils.makeHandler());
   })
-  .command('list', 'List all sinks in the authenticated project.', {}, function () {
+  .command('list', 'Lists all sinks.', {}, function () {
     program.listSinks(utils.makeHandler(true, 'id'));
   })
-  .command('update <name> <metadata>', 'Update the metadata for the specified sink.', {}, function (options) {
-    try {
-      options.metadata = JSON.parse(options.metadata);
-    } catch (err) {
-      return console.error('"metadata" must be a valid JSON string!');
-    }
-    program.updateSink(utils.pick(options, ['name', 'metadata']), utils.makeHandler(false));
+  .command('update <sinkName> <filter>', 'Updates the filter for the specified sink.', {}, function (options) {
+    program.updateSink(options.sinkName, options.filter, utils.makeHandler(false));
   })
-  .command('delete <name>', 'Delete the specified sink.', {}, function (options) {
-    program.deleteSink(options.name, utils.makeHandler(false));
+  .command('delete <sinkName>', 'Deletes the specified sink.', {}, function (options) {
+    program.deleteSink(options.sinkName, utils.makeHandler(false));
   })
-  .example('node $0 create my-sink my-bucket --type bucket', 'Create a new sink named "my-sink" that exports logs to a Cloud Storage bucket.')
-  .example('node $0 create my-sink my-dataset --type dataset', 'Create a new sink named "my-sink" that exports logs to a BigQuery dataset.')
-  .example('node $0 create my-sink my-topic --type topic', 'Create a new sink named "my-sink" that exports logs to a Cloud Pub/Sub topic.')
-  .example('node $0 get my-sink', 'Get the metadata for "my-sink".')
-  .example('node $0 list', 'List all sinks in the authenticated project.')
-  .example('node $0 update my-sink \'{"filter":"severity > ALERT"}\'', 'Update the specified sink.')
-  .example('node $0 delete my-sink', 'Delete "my-sink".')
-  .wrap(100)
+  .example('node $0 create export-errors app-error-logs', 'Create a new sink named "export-errors" that exports logs to a bucket named "app-error-logs".')
+  .example('node $0 get export-errors', 'Get the metadata for a sink name "export-errors".')
+  .example('node $0 list', 'List all sinks.')
+  .example('node $0 update export-errors "severity >= WARNING"', 'Update the filter for a sink named "export-errors".')
+  .example('node $0 delete export-errors', 'Delete a sink named "export-errors".')
+  .wrap(120)
   .recommendCommands()
   .epilogue('For more information, see https://cloud.google.com/logging/docs');
 
