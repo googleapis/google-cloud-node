@@ -1,7 +1,7 @@
 # Google Cloud Node.js Client
 > Node.js idiomatic client for [Google Cloud Platform](https://cloud.google.com/) services.
 
-[![NPM Version](https://img.shields.io/npm/v/google-cloud-node.svg)](https://www.npmjs.org/package/google-cloud)
+[![NPM Version](https://img.shields.io/npm/v/google-cloud.svg)](https://www.npmjs.org/package/google-cloud)
 [![Travis Build Status](https://travis-ci.org/GoogleCloudPlatform/google-cloud-node.svg)](https://travis-ci.org/GoogleCloudPlatform/google-cloud-node/)
 [![Dependency Status](https://dependencyci.com/github/GoogleCloudPlatform/google-cloud-node/badge)](https://dependencyci.com/github/GoogleCloudPlatform/google-cloud-node)
 [![Coverage Status](https://img.shields.io/coveralls/GoogleCloudPlatform/google-cloud-node.svg)](https://coveralls.io/r/GoogleCloudPlatform/google-cloud-node?branch=master)
