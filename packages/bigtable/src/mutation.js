@@ -60,14 +60,18 @@ var methods = Mutation.methods = {
  * Parses "bytes" returned from proto service.
  *
  * @param {string} bytes - Base64 encoded string.
- * @return {string}
+ * @return {string|number|buffer}
  */
-Mutation.convertFromBytes = function(bytes) {
+Mutation.convertFromBytes = function(bytes, options) {
   var buf = new Buffer(bytes, 'base64');
   var num = new Int64(buf).toNumber();
 
   if (!isNaN(num) && isFinite(num)) {
     return num;
+  }
+
+  if (options && options.decode === false) {
+    return buf;
   }
 
   return buf.toString();

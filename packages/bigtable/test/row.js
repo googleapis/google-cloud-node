@@ -299,21 +299,22 @@ describe('Bigtable/Row', function() {
         commitRow: true
       }];
 
-      var rows = Row.formatChunks_(chunks, {
+      var formatOptions = {
         decode: false
-      });
+      };
+      var rows = Row.formatChunks_(chunks, formatOptions);
 
       assert.deepEqual(rows, [{
         key: 'convertedKey',
         data: {
           familyName: {
             convertedQualifier: [{
-              value: 'unconvertedValue',
+              value: 'convertedValue',
               labels: ['label'],
               timestamp: timestamp1,
               size: 0
             }, {
-              value: 'unconvertedValue2',
+              value: 'convertedValue2',
               labels: ['label2'],
               timestamp: timestamp2,
               size: 2
@@ -321,6 +322,12 @@ describe('Bigtable/Row', function() {
           }
         }
       }]);
+
+      // 0 === row key
+      // 1 === qualifier
+      // 2 === value
+      var args = FakeMutation.convertFromBytes.getCall(2).args;
+      assert.strictEqual(args[1], formatOptions);
     });
 
     it('should discard old data when reset row is found', function() {
