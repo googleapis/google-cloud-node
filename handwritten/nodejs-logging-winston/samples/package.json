@@ -10,9 +10,9 @@
   },
   "dependencies": {
     "@google-cloud/logging": "^0.1.1",
+    "@google-cloud/storage": "^0.1.1",
     "express": "^4.13.4",
     "fluent-logger": "^2.0.1",
-    "google-cloud": "^0.38.3",
     "yargs": "^5.0.0"
   },
   "devDependencies": {
