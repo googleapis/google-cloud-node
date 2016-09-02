@@ -73,10 +73,21 @@ GrpcServiceObject.prototype.delete = function(callback) {
  * @param {object} callback.metadata - The metadata for this object.
  */
 GrpcServiceObject.prototype.getMetadata = function(callback) {
+  var self = this;
+
   var protoOpts = this.methods.getMetadata.protoOpts;
   var reqOpts = this.methods.getMetadata.reqOpts;
 
-  this.request(protoOpts, reqOpts, callback);
+  this.request(protoOpts, reqOpts, function(err, resp) {
+    if (err) {
+      callback(err, null, resp);
+      return;
+    }
+
+    self.metadata = resp;
+
+    callback(null, self.metadata, resp);
+  });
 };
 
 /**
