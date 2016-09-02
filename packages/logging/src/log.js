@@ -134,8 +134,8 @@ Log.formatName_ = function(projectId, name) {
  * the same as documented there.
  *
  * @example
- * var entry = log.entry('compute.googleapis.com', {
- *   user: 'my_username'
+ * var entry = log.entry('gce_instance', {
+ *   instance: 'my_instance'
  * });
  *
  * log.alert(entry, function(err, apiResponse) {});
@@ -151,8 +151,8 @@ Log.prototype.alert = function(entry, options, callback) {
  * the same as documented there.
  *
  * @example
- * var entry = log.entry('compute.googleapis.com', {
- *   user: 'my_username'
+ * var entry = log.entry('gce_instance', {
+ *   instance: 'my_instance'
  * });
  *
  * log.critical(entry, function(err, apiResponse) {});
@@ -169,8 +169,8 @@ Log.prototype.critical = function(entry, options, callback) {
  * the same as documented there.
  *
  * @example
- * var entry = log.entry('compute.googleapis.com', {
- *   user: 'my_username'
+ * var entry = log.entry('gce_instance', {
+ *   instance: 'my_instance'
  * });
  *
  * log.debug(entry, function(err, apiResponse) {});
@@ -186,8 +186,8 @@ Log.prototype.debug = function(entry, options, callback) {
  * the same as documented there.
  *
  * @example
- * var entry = log.entry('compute.googleapis.com', {
- *   user: 'my_username'
+ * var entry = log.entry('gce_instance', {
+ *   instance: 'my_instance'
  * });
  *
  * log.emergency(entry, function(err, apiResponse) {});
@@ -253,8 +253,8 @@ Log.prototype.entry = function(resource, data) {
  * the same as documented there.
  *
  * @example
- * var entry = log.entry('compute.googleapis.com', {
- *   user: 'my_username'
+ * var entry = log.entry('gce_instance', {
+ *   instance: 'my_instance'
  * });
  *
  * log.error(entry, function(err, apiResponse) {});
@@ -353,8 +353,8 @@ Log.prototype.getEntries = function(options, callback) {
  * the same as documented there.
  *
  * @example
- * var entry = log.entry('compute.googleapis.com', {
- *   user: 'my_username'
+ * var entry = log.entry('gce_instance', {
+ *   instance: 'my_instance'
  * });
  *
  * log.info(entry, function(err, apiResponse) {});
@@ -370,8 +370,8 @@ Log.prototype.info = function(entry, options, callback) {
  * the same as documented there.
  *
  * @example
- * var entry = log.entry('compute.googleapis.com', {
- *   user: 'my_username'
+ * var entry = log.entry('gce_instance', {
+ *   instance: 'my_instance'
  * });
  *
  * log.notice(entry, function(err, apiResponse) {});
@@ -387,8 +387,8 @@ Log.prototype.notice = function(entry, options, callback) {
  * the same as documented there.
  *
  * @example
- * var entry = log.entry('compute.googleapis.com', {
- *   user: 'my_username'
+ * var entry = log.entry('gce_instance', {
+ *   instance: 'my_instance'
  * });
  *
  * log.warning(entry, function(err, apiResponse) {});
@@ -416,8 +416,8 @@ Log.prototype.warning = function(entry, options, callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var entry = log.entry('compute.googleapis.com', {
- *   user: 'my_username'
+ * var entry = log.entry('gce_instance', {
+ *   instance: 'my_instance'
  * });
  *
  * log.write(entry, function(err, apiResponse) {
