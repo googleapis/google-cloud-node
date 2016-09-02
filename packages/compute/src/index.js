@@ -579,10 +579,8 @@ Compute.prototype.firewall = function(name) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/address} callback.addresses - Address objects from
+ * @param {module:compute/address[]} callback.addresses - Address objects from
  *     your project.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -698,8 +696,6 @@ Compute.prototype.getAddresses = function(options, callback) {
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:compute/autoscaler[]} callback.autoscalers - Autoscaler
  *     objects from your project.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -815,9 +811,8 @@ Compute.prototype.getAutoscalers = function(options, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/disk} callback.disks - Disk objects from your project.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
+ * @param {module:compute/disk[]} callback.disks - Disk objects from your
+ *     project.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -932,8 +927,6 @@ Compute.prototype.getDisks = function(options, callback) {
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:compute/instance-group[]} callback.instanceGroups -
  *     InstanceGroup objects from your project.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -1045,10 +1038,8 @@ Compute.prototype.getInstanceGroups = function(options, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/firewall} callback.firewalls - Firewall objects from
+ * @param {module:compute/firewall[]} callback.firewalls - Firewall objects from
  *     your project.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -1154,10 +1145,8 @@ Compute.prototype.getFirewalls = function(options, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/health-check} callback.healthChecks - HealthCheck
+ * @param {module:compute/health-check[]} callback.healthChecks - HealthCheck
  *     objects from your project.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -1269,8 +1258,6 @@ Compute.prototype.getHealthChecks = function(options, callback) {
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:compute/machine-type[]} callback.machineTypes - MachineType
  *     objects from your project.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -1382,10 +1369,8 @@ Compute.prototype.getMachineTypes = function(options, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/network} callback.networks - Network objects from your
- *     project.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
+ * @param {module:compute/network[]} callback.networks - Network objects from
+ *     your project.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -1488,10 +1473,8 @@ Compute.prototype.getNetworks = function(options, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operations - Operation objects
+ * @param {module:compute/operation[]} callback.operations - Operation objects
  *     from your project.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -1594,10 +1577,8 @@ Compute.prototype.getOperations = function(options, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/region} callback.regions - Region objects that are
+ * @param {module:compute/region[]} callback.regions - Region objects that are
  *     available to your project.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -1697,9 +1678,8 @@ Compute.prototype.getRegions = function(options, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/rule} callback.rules - Rule objects from this region.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
+ * @param {module:compute/rule[]} callback.rules - Rule objects from your
+ *     project.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -1804,8 +1784,6 @@ Compute.prototype.getRules = function(options, callback) {
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:compute/service[]} callback.services - Service objects from
  *     your project.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -1908,10 +1886,8 @@ Compute.prototype.getServices = function(options, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/snapshot} callback.snapshots - Snapshot objects from
+ * @param {module:compute/snapshot[]} callback.snapshots - Snapshot objects from
  *     your project.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -2014,10 +1990,8 @@ Compute.prototype.getSnapshots = function(options, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/subnetwork} callback.subnetworks - Subnetwork objects
- *     from your project.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
+ * @param {module:compute/subnetwork[]} callback.subnetworks - Subnetwork
+ *     objects from your project.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -2129,9 +2103,7 @@ Compute.prototype.getSubnetworks = function(options, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/vm} callback.vms - VM objects from your project.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
+ * @param {module:compute/vm[]} callback.vms - VM objects from your project.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -2243,10 +2215,8 @@ Compute.prototype.getVMs = function(options, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/zone} callback.zones - Zone objects that are available
- *     to your project.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
+ * @param {module:compute/zone[]} callback.zones - Zone objects that are
+ *     available to your project.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example

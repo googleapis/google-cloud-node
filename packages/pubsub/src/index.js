@@ -153,9 +153,7 @@ PubSub.prototype.createTopic = function(name, callback) {
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error from the API call, may be null.
  * @param {module:pubsub/subscription[]} callback.subscriptions - The list of
- *     subscriptions returned.
- * @param {?object} callback.nextQuery - A query object representing the next
- *     page of topics.
+ *     subscriptions in your project.
  * @param {object} callback.apiResponse - The full API response from the
  *     service.
  *
@@ -279,8 +277,6 @@ PubSub.prototype.getSubscriptions = function(options, callback) {
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error from the API call, may be null.
  * @param {module:pubsub/topic[]} callback.topics - The list of topics returned.
- * @param {?object} callback.nextQuery - A query object representing the next
- *     page of topics.
  * @param {object} callback.apiResponse - The full API response from the
  *     service.
  *

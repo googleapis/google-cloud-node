@@ -436,6 +436,8 @@ Zone.prototype.export = function(localPath, callback) {
  * @resource [Changes: get API Documentation]{@link https://cloud.google.com/dns/api/v1/changes/get}
  *
  * @param {object=} query - The query object.
+ * @param {boolean} query.autoPaginate - Have pagination handled automatically.
+ *     Default: true.
  * @param {number} query.maxApiCalls - Maximum number of API calls to make.
  * @param {number} query.maxResults - Maximum number of results to return.
  * @param {string} query.pageToken - The page token.
@@ -445,8 +447,6 @@ Zone.prototype.export = function(localPath, callback) {
  * @param {?error} callback.err - An API error.
  * @param {?module:dns/change[]} callback.changes - An array of
  *     {module:dns/change} objects.
- * @param {?object} callback.nextQuery - A query object representing the next
- *     page of results.
  * @param {object} callback.apiResponse - Raw API response.
  *
  * @example
@@ -533,6 +533,8 @@ Zone.prototype.getChanges = function(query, callback) {
  * @resource [ResourceRecordSets: list API Documentation]{@link https://cloud.google.com/dns/api/v1/resourceRecordSets/list}
  *
  * @param {object=} query - The query object.
+ * @param {boolean} query.autoPaginate - Have pagination handled automatically.
+ *     Default: true.
  * @param {number} query.maxApiCalls - Maximum number of API calls to make.
  * @param {number} query.maxResults - Maximum number of results to be returned.
  * @param {string} query.name - Restricts the list to return only records with
@@ -544,8 +546,6 @@ Zone.prototype.getChanges = function(query, callback) {
  * @param {?error} callback.err - An API error.
  * @param {?module:dns/record[]} callback.records - An array of
  *     {module:dns/record} objects.
- * @param {?object} callback.nextQuery - A query object representing the next
- *     page of results.
  * @param {object} callback.apiResponse - Raw API response.
  *
  * @example

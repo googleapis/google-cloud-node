@@ -293,9 +293,8 @@ Storage.prototype.createBucket = function(name, metadata, callback) {
  *     representing part of the larger set of results to view.
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
- * @param {module:storage/bucket[]} callback.buckets - List of all Buckets.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
+ * @param {module:storage/bucket[]} callback.buckets - List of all buckets from
+ *     your project.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example

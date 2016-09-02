@@ -186,10 +186,8 @@ Prediction.prototype.createModel = function(id, options, callback) {
  * @param {string} query.pageToken - Page token.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
- * @param {?module:prediction/model[]} callback.models - An array of
- *     {module:prediction/model} objects.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
+ * @param {module:prediction/model[]} callback.models - The trained models from
+ *     your project.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
