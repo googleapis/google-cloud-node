@@ -241,11 +241,17 @@ describe('GrpcService', function() {
     });
 
     it('should default grpcMetadata to null', function() {
+      var fakeGrpcMetadata = {};
+
+      grpcMetadataOverride = function() {
+        return fakeGrpcMetadata;
+      };
+
       var config = extend({}, CONFIG);
       delete config.grpcMetadata;
 
       var grpcService = new GrpcService(config, OPTIONS);
-      assert.strictEqual(grpcService.grpcMetadata, null);
+      assert.strictEqual(grpcService.grpcMetadata, fakeGrpcMetadata);
     });
 
     it('should create and localize grpcMetadata', function() {

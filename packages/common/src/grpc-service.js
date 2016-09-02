@@ -159,11 +159,9 @@ function GrpcService(config, options) {
     this.grpcCredentials = grpc.credentials.createInsecure();
   }
 
-  this.grpcMetadata = null;
+  this.grpcMetadata = new grpc.Metadata();
 
   if (config.grpcMetadata) {
-    this.grpcMetadata = new grpc.Metadata();
-
     for (var prop in config.grpcMetadata) {
       if (config.grpcMetadata.hasOwnProperty(prop)) {
         this.grpcMetadata.add(prop, config.grpcMetadata[prop]);
