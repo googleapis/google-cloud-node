@@ -243,7 +243,7 @@ describe('GrpcService', function() {
       assert.strictEqual(calledWith[1], OPTIONS);
     });
 
-    it('should default grpcMetadata to null', function() {
+    it('should default grpcMetadata to empty metadata', function() {
       var fakeGrpcMetadata = {};
 
       GrpcMetadataOverride = function() {
