@@ -138,6 +138,7 @@ var GRPC_ERROR_CODE_TO_HTTP = {
  *
  * @param {object} config - Configuration object.
  * @param {string} config.baseUrl - The base URL to make API requests to.
+ * @param {object} config.grpcMetadata - Metadata to send with every request.
  * @param {string[]} config.scopes - The scopes required for the request.
  * @param {string} config.service - The name of the service.
  * @param {object=} config.protoServices - Directly provide the required proto
@@ -156,6 +157,16 @@ function GrpcService(config, options) {
 
   if (config.customEndpoint) {
     this.grpcCredentials = grpc.credentials.createInsecure();
+  }
+
+  this.grpcMetadata = new grpc.Metadata();
+
+  if (config.grpcMetadata) {
+    for (var prop in config.grpcMetadata) {
+      if (config.grpcMetadata.hasOwnProperty(prop)) {
+        this.grpcMetadata.add(prop, config.grpcMetadata[prop]);
+      }
+    }
   }
 
   this.maxRetries = options.maxRetries;
@@ -227,8 +238,10 @@ GrpcService.prototype.request = function(protoOpts, reqOpts, callback) {
   delete reqOpts.autoPaginateVal;
 
   var service = this.getService_(protoOpts);
-  var grpcOpts = {};
 
+  var metadata = this.grpcMetadata;
+
+  var grpcOpts = {};
   if (is.number(protoOpts.timeout)) {
     grpcOpts.deadline = GrpcService.createDeadline_(protoOpts.timeout);
   }
@@ -248,16 +261,16 @@ GrpcService.prototype.request = function(protoOpts, reqOpts, callback) {
     request: function(_, onResponse) {
       respError = null;
 
-      service[protoOpts.method](reqOpts, grpcOpts, function(err, resp) {
-        if (err) {
-          respError = GrpcService.decorateError_(err);
+      service[protoOpts.method](reqOpts, metadata, grpcOpts, function(e, resp) {
+        if (e) {
+          respError = GrpcService.decorateError_(e);
 
           if (respError) {
             onResponse(null, respError);
             return;
           }
 
-          onResponse(err, resp);
+          onResponse(e, resp);
           return;
         }
 
@@ -330,7 +343,7 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
     shouldRetryFn: GrpcService.shouldRetryRequest_,
 
     request: function() {
-      return service[protoOpts.method](reqOpts, grpcOpts)
+      return service[protoOpts.method](reqOpts, self.grpcMetadata, grpcOpts)
         .on('metadata', function() {
           // retry-request requires a server response before it starts emitting
           // data. The closest mechanism grpc provides is a metadata event, but

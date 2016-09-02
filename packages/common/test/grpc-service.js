@@ -43,8 +43,15 @@ function fakeRetryRequest() {
   return (retryRequestOverride || retryRequest).apply(null, arguments);
 }
 
+var GrpcMetadataOverride;
 var grpcLoadOverride;
 var fakeGrpc = {
+  Metadata: function() {
+    if (GrpcMetadataOverride) {
+      return new GrpcMetadataOverride();
+    }
+    return new grpc.Metadata();
+  },
   load: function() {
     return (grpcLoadOverride || grpc.load).apply(null, arguments);
   },
@@ -84,7 +91,10 @@ describe('GrpcService', function() {
   var CONFIG = {
     proto: {},
     service: 'Service',
-    apiVersion: 'v1'
+    apiVersion: 'v1',
+    grpcMetadata: {
+      property: 'value'
+    }
   };
 
   var OPTIONS = {
@@ -111,6 +121,7 @@ describe('GrpcService', function() {
   });
 
   beforeEach(function() {
+    GrpcMetadataOverride = null;
     retryRequestOverride = null;
 
     googleProtoFilesOverride = function() {
@@ -230,6 +241,36 @@ describe('GrpcService', function() {
       var calledWith = grpcService.calledWith_;
       assert.strictEqual(calledWith[0], CONFIG);
       assert.strictEqual(calledWith[1], OPTIONS);
+    });
+
+    it('should default grpcMetadata to empty metadata', function() {
+      var fakeGrpcMetadata = {};
+
+      GrpcMetadataOverride = function() {
+        return fakeGrpcMetadata;
+      };
+
+      var config = extend({}, CONFIG);
+      delete config.grpcMetadata;
+
+      var grpcService = new GrpcService(config, OPTIONS);
+      assert.strictEqual(grpcService.grpcMetadata, fakeGrpcMetadata);
+    });
+
+    it('should create and localize grpcMetadata', function() {
+      var fakeGrpcMetadata = {
+        add: function(prop, value) {
+          assert.strictEqual(prop, Object.keys(CONFIG.grpcMetadata)[0]);
+          assert.strictEqual(value, CONFIG.grpcMetadata[prop]);
+        }
+      };
+
+      GrpcMetadataOverride = function() {
+        return fakeGrpcMetadata;
+      };
+
+      var grpcService = new GrpcService(CONFIG, OPTIONS);
+      assert.strictEqual(grpcService.grpcMetadata, fakeGrpcMetadata);
     });
 
     it('should localize maxRetries', function() {
@@ -738,7 +779,7 @@ describe('GrpcService', function() {
         grpcService.protos.Service = {
           service: function() {
             return {
-              method: function(reqOpts, grpcOpts, callback) {
+              method: function(reqOpts, metadata, grpcOpts, callback) {
                 callback(grpcError500);
               }
             };
@@ -763,7 +804,7 @@ describe('GrpcService', function() {
         grpcService.protos.Service = {
           service: function() {
             return {
-              method: function(reqOpts, grpcOpts, callback) {
+              method: function(reqOpts, metadata, grpcOpts, callback) {
                 callback(grpcError500);
               }
             };
@@ -787,7 +828,7 @@ describe('GrpcService', function() {
         grpcService.protos.Service = {
           service: function() {
             return {
-              method: function(reqOpts, grpcOpts, callback) {
+              method: function(reqOpts, metadata, grpcOpts, callback) {
                 callback(unknownError, null);
               }
             };
@@ -821,6 +862,21 @@ describe('GrpcService', function() {
       grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
     });
 
+    it('should pass the grpc metadata with the request', function(done) {
+      grpcService.protos.Service = {
+        service: function() {
+          return {
+            method: function(reqOpts, metadata) {
+              assert.strictEqual(metadata, grpcService.grpcMetadata);
+              done();
+            }
+          };
+        }
+      };
+
+      grpcService.request(PROTO_OPTS, REQ_OPTS, assert.ifError);
+    });
+
     it('should set a deadline if a timeout is provided', function(done) {
       var expectedDeadlineRange = [
         Date.now() + PROTO_OPTS.timeout - 250,
@@ -830,7 +886,7 @@ describe('GrpcService', function() {
       grpcService.protos.Service = {
         service: function() {
           return {
-            method: function(reqOpts, grpcOpts) {
+            method: function(reqOpts, metadata, grpcOpts) {
               assert(is.date(grpcOpts.deadline));
 
               assert(grpcOpts.deadline.getTime() > expectedDeadlineRange[0]);
@@ -874,7 +930,7 @@ describe('GrpcService', function() {
           grpcService.protos.Service = {
             service: function() {
               return {
-                method: function(reqOpts, grpcOpts, callback) {
+                method: function(reqOpts, metadata, grpcOpts, callback) {
                   callback(grpcError);
                 }
               };
@@ -896,7 +952,7 @@ describe('GrpcService', function() {
         grpcService.protos.Service = {
           service: function() {
             return {
-              method: function(reqOpts, grpcOpts, callback) {
+              method: function(reqOpts, metadata, grpcOpts, callback) {
                 callback(null, RESPONSE);
               }
             };
@@ -976,12 +1032,26 @@ describe('GrpcService', function() {
         return fakeDeadline;
       };
 
-      ProtoService.prototype.method = function(reqOpts, grpcOpts) {
+      ProtoService.prototype.method = function(reqOpts, metadata, grpcOpts) {
         assert.strictEqual(grpcOpts.deadline, fakeDeadline);
 
         GrpcService.createDeadline_ = createDeadline;
         setImmediate(done);
 
+        return through.obj();
+      };
+
+      retryRequestOverride = function(_, retryOpts) {
+        return retryOpts.request();
+      };
+
+      grpcService.requestStream(PROTO_OPTS, REQ_OPTS);
+    });
+
+    it('should pass the grpc metadata with the request', function(done) {
+      ProtoService.prototype.method = function(reqOpts, metadata) {
+        assert.strictEqual(metadata, grpcService.grpcMetadata);
+        setImmediate(done);
         return through.obj();
       };
 
