@@ -325,7 +325,10 @@ function Datastore(options) {
     service: 'datastore',
     apiVersion: 'v1',
     scopes: ['https://www.googleapis.com/auth/datastore'],
-    userAgent: PKG.name + '/' + PKG.version
+    userAgent: PKG.name + '/' + PKG.version,
+    grpcMetadata: {
+      'google-cloud-resource-prefix': 'projects/' + this.projectId
+    }
   };
 
   common.GrpcService.call(this, config, options);

@@ -158,6 +158,9 @@ describe('Datastore', function() {
         'https://www.googleapis.com/auth/datastore'
       ]);
       assert.strictEqual(calledWith.userAgent, PKG.name + '/' + PKG.version);
+      assert.deepEqual(calledWith.grpcMetadata, {
+        'google-cloud-resource-prefix': 'projects/' + datastore.projectId
+      });
     });
   });
 
