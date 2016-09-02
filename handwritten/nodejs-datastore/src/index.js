@@ -68,25 +68,23 @@ var PKG = require('../package.json');
  * //-
  * // <h3>The Datastore Emulator</h3>
  * //
- * // <h4>gcloud SDK not supported</h4>
- * //
- * // As of this release, the Datastore emulator that is part of the gcloud SDK
- * // is not compatible with google-cloud-node. We use
- * // <a href="http://grpc.io">gRPC</a> as our transport layer, while the gcloud
- * // SDK's Datastore emulator does not support gRPC.
- * //
- * // <h4>Use `gcd.sh` directly</h4>
- * // For now, you must use the
- * // <a href="https://storage.googleapis.com/gcd/tools/gcd-grpc-1.0.0.zip">
- * // gcd.sh</a> script.
- * //
- * // When you run `./gcd start [datastore]`, you will see the following
- * // printed:
+ * // Make sure you have the
+ * // [gcloud SDK installed](https://cloud.google.com/sdk/downloads), then run:
  * //
  * // <pre>
- * //   If you are using a library that supports the DATASTORE_EMULATOR_HOST
- * //   environment variable, run:
- * //     export DATASTORE_EMULATOR_HOST=localhost:8080
+ * //   $ gcloud beta emulators datastore start --no-legacy
+ * // </pre>
+ * //
+ * // You will see the following printed:
+ * //
+ * // <pre>
+ * //   [datastore] API endpoint: http://localhost:8005
+ * //   [datastore] If you are using a library that supports the
+ * //               DATASTORE_EMULATOR_HOST environment variable, run:
+ * //   [datastore]
+ * //   [datastore]   export DATASTORE_EMULATOR_HOST=localhost:8005
+ * //   [datastore]
+ * //   [datastore] Dev App Server is now running.
  * // </pre>
  * //
  * // Set that environment variable and your localhost Datastore will
