@@ -70,12 +70,12 @@ Before we can accept your pull requests you'll need to sign a Contributor Licens
 
 You can sign these electronically (just scroll to the bottom). After that, we'll be able to accept your pull requests.
 
-### Publishing
+## Publishing
 
 To publish this module, you must be logged in as the user `google-cloud`.
 
 ```sh
-$ npm logout && npm login
+$ npm logout
 $ npm login
 # Follow the prompts to login as `google-cloud`
 
@@ -100,11 +100,77 @@ The output from the command will remind you to push to master with a command lik
 $ git push origin master --follow-tags
 ```
 
-Log back in as your npm user:
+Be sure to log back in as your npm user:
 
 ```sh
-$ npm logout && npm login
+$ npm logout
+$ npm login
 ```
+### Release Notes
+
+If you're thinking "this library needs a nifty, CI-driven, changelog-generator supertool", hold the phone. First, "nifty"? Second, it's important to make our library as human as possible. So, please, take a few minutes and pretend that you're the user. What would you want to see?
+
+  1. [Draft a new release](https://github.com/GoogleCloudPlatform/google-cloud-node/releases/new)
+  1. Use the following template as a starting point. Remove sections that aren't relevant. Feel free to make improvements.
+
+  - **Tag version** Match to the release version.
+  - **Release title**
+    - `google-cloud` releases: `v0.39.0`
+    - `@google-cloud/module` releases: `@google-cloud/module @ v0.2.0`
+
+<pre>
+#### Updating
+
+```sh
+$ npm install NPM_MODULE_NAME
+```
+
+- [Documentation](https://googlecloudplatform.github.io/google-cloud-node/#/docs/SERVICE_NAME/NEW_VERSION/SERVICE_NAME)
+- [Report an issue](https://github.com/GoogleCloudPlatform/google-cloud-node/issues)
+
+### :warning: Breaking Changes
+#### We use promises now!
+Issue: #ISSUE_NUMBER
+PR: #PR_NUMBER
+
+Take a few sentences (minimum) to talk to the user. Remember that this change might require a lot of their time, so make sure to explain why it's worth it.
+
+##### Before
+```js
+bucket.getFiles(function(err, files) {
+  if (err) {
+    // An API error occurred.
+  }
+
+  // `files` is an array of `File` objects.
+});
+```
+
+##### After
+```js
+bucket.getFiles()
+  .then(function(files) {
+    // `files` is an array of `File` objects.
+  }, function(err) {
+    // An API error occurred.
+  });
+```
+
+#### Features
+
+- (#ISSUE_NUMBER, #PR_NUMBER): Describe the new state of the code, i.e. "vision.annotate() now accepts Buffers."
+
+#### Fixes
+
+- (#ISSUE_NUMBER, #PR_NUMBER): Describe the new state of the code, i.e. "vision.detect() properly handles multiple images."
+</pre>
+
+Checklist:
+
+  - [ ] I checked that all links work
+  - [ ] I removed any sections that weren't relevant (e.g., if there weren't any "Fixes" in this release, remove the heading entirely)
+  - [ ] I made sure all breaking changes are noted
+  - [x] I'm not going to say "nifty" anymore
 
 [elsewhere]: README.md#elsewhere
 [gcloudcli]: https://developers.google.com/cloud/sdk/gcloud/
