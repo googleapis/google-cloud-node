@@ -43,11 +43,14 @@ function fakeRetryRequest() {
   return (retryRequestOverride || retryRequest).apply(null, arguments);
 }
 
-var grpcMetadataOverride;
+var GrpcMetadataOverride;
 var grpcLoadOverride;
 var fakeGrpc = {
   Metadata: function() {
-    return new (grpcMetadataOverride || grpc.Metadata)();
+    if (GrpcMetadataOverride) {
+      return new GrpcMetadataOverride();
+    }
+    return new grpc.Metadata();
   },
   load: function() {
     return (grpcLoadOverride || grpc.load).apply(null, arguments);
@@ -118,7 +121,7 @@ describe('GrpcService', function() {
   });
 
   beforeEach(function() {
-    grpcMetadataOverride = null;
+    GrpcMetadataOverride = null;
     retryRequestOverride = null;
 
     googleProtoFilesOverride = function() {
@@ -243,7 +246,7 @@ describe('GrpcService', function() {
     it('should default grpcMetadata to null', function() {
       var fakeGrpcMetadata = {};
 
-      grpcMetadataOverride = function() {
+      GrpcMetadataOverride = function() {
         return fakeGrpcMetadata;
       };
 
@@ -262,7 +265,7 @@ describe('GrpcService', function() {
         }
       };
 
-      grpcMetadataOverride = function() {
+      GrpcMetadataOverride = function() {
         return fakeGrpcMetadata;
       };
 
