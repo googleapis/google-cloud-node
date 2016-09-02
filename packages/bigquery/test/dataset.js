@@ -179,12 +179,35 @@ describe('BigQuery/Dataset', function() {
 
     it('should wrap an array schema', function(done) {
       ds.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.json.schema.fields, SCHEMA_OBJECT.fields);
+        assert.deepEqual(reqOpts.json.schema.fields, SCHEMA_OBJECT.fields);
         done();
       };
 
       ds.createTable(TABLE_ID, {
         schema: SCHEMA_OBJECT.fields
+      }, assert.ifError);
+    });
+
+    it('should assign record type to nested schemas', function(done) {
+      var nestedField = {
+        id: 'nested',
+        fields: [
+          { id: 'nested_name', type: 'STRING' }
+        ]
+      };
+
+      ds.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.json.schema.fields[1].type, 'RECORD');
+        done();
+      };
+
+      ds.createTable(TABLE_ID, {
+        schema: {
+          fields: [
+            { id: 'name', type: 'STRING' },
+            nestedField
+          ]
+        }
       }, assert.ifError);
     });
 
