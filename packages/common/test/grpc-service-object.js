@@ -99,6 +99,54 @@ describe('GrpcServiceObject', function() {
 
       grpcServiceObject.getMetadata(done);
     });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      beforeEach(function() {
+        grpcServiceObject.request = function(protoOpts, reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        grpcServiceObject.getMetadata(function(err, metadata, apiResponse_) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(metadata, null);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      beforeEach(function() {
+        grpcServiceObject.request = function(protoOpts, reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should exec callback with metadata & API response', function(done) {
+        grpcServiceObject.getMetadata(function(err, metadata, apiResponse_) {
+          assert.ifError(err);
+          assert.strictEqual(metadata, apiResponse);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
+
+      it('should update the metadata on the instance', function(done) {
+        grpcServiceObject.getMetadata(function(err, metadata, apiResponse_) {
+          assert.ifError(err);
+          assert.strictEqual(grpcServiceObject.metadata, apiResponse);
+          done();
+        });
+      });
+    });
   });
 
   describe('setMetadata', function() {
