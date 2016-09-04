@@ -15,8 +15,9 @@
 
 var uuid = require('node-uuid');
 var PubSub = require('@google-cloud/pubsub');
-var pubsub = PubSub();
 var program = require('../iam');
+
+var pubsub = PubSub();
 var topicName = 'nodejs-docs-samples-test-' + uuid.v4();
 var subscriptionName = 'nodejs-docs-samples-test-sub-' + uuid.v4();
 
@@ -46,7 +47,7 @@ describe('pubsub:iam', function () {
       program.getTopicPolicy(topicName, function (err, policy) {
         assert.ifError(err);
         assert(policy);
-        assert(console.log.calledWith('Got topic policy:', policy));
+        assert(console.log.calledWith('Got policy for topic: %s', topicName));
         done();
       });
     });
@@ -57,7 +58,7 @@ describe('pubsub:iam', function () {
       program.getSubscriptionPolicy(subscriptionName, function (err, policy) {
         assert.ifError(err);
         assert(policy);
-        assert(console.log.calledWith('Got subscription policy:', policy));
+        assert(console.log.calledWith('Got policy for subscription: %s', subscriptionName));
         done();
       });
     });
@@ -65,10 +66,11 @@ describe('pubsub:iam', function () {
 
   describe('testTopicPermissions', function () {
     it('should test a topic\'s permissions', function (done) {
-      program.testTopicPermissions(topicName, function (err, permissions) {
+      program.testTopicPermissions(topicName, function (err, permissions, apiResponse) {
         assert.ifError(err);
         assert(permissions);
         assert(console.log.calledWith('Tested permissions for topic: %s', topicName));
+        assert.notEqual(apiResponse, undefined);
         done();
       });
     });
@@ -76,10 +78,11 @@ describe('pubsub:iam', function () {
 
   describe('testSubscriptionPermissions', function () {
     it('should test a subscriptions\'s permissions', function (done) {
-      program.testSubscriptionPermissions(subscriptionName, function (err, permissions) {
+      program.testSubscriptionPermissions(subscriptionName, function (err, permissions, apiResponse) {
         assert.ifError(err);
         assert(permissions);
         assert(console.log.calledWith('Tested permissions for subscription: %s', subscriptionName));
+        assert.notEqual(apiResponse, undefined);
         done();
       });
     });

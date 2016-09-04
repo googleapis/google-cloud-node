@@ -15,17 +15,21 @@
 
 var uuid = require('node-uuid');
 var program = require('../topics');
+
 var topicName = 'nodejs-docs-samples-test-' + uuid.v4();
 var projectId = process.env.GCLOUD_PROJECT;
-var name = 'projects/' + projectId + '/topics/' + topicName;
+var fullTopicName = 'projects/' + projectId + '/topics/' + topicName;
+var message = { data: 'Hello, world!' };
 
 describe('pubsub:topics', function () {
   describe('createTopic', function () {
     it('should create a topic', function (done) {
-      program.createTopic(topicName, function (err, topic) {
+      program.createTopic(topicName, function (err, topic, apiResponse) {
         assert.ifError(err);
-        assert.equal(topic.name, name);
+        assert.equal(topic.name, fullTopicName);
         assert(console.log.calledWith('Created topic: %s', topicName));
+        assert.notEqual(apiResponse, undefined);
+        // Listing is eventually consistent, so give the index time to update
         setTimeout(done, 5000);
       });
     });
@@ -38,7 +42,7 @@ describe('pubsub:topics', function () {
         assert(Array.isArray(topics));
         assert(topics.length > 0);
         var recentlyCreatedTopics = topics.filter(function (topic) {
-          return topic.name === name;
+          return topic.name === fullTopicName;
         });
         assert.equal(recentlyCreatedTopics.length, 1, 'list has newly created topic');
         assert(console.log.calledWith('Found %d topics!', topics.length));
@@ -49,12 +53,12 @@ describe('pubsub:topics', function () {
 
   describe('publishMessage', function () {
     it('should publish a message', function (done) {
-      var json = '{"data":"Hello World!"}';
-      program.publishMessage(topicName, json, function (err, messageIds) {
+      program.publishMessage(topicName, message, function (err, messageIds, apiResponse) {
         assert.ifError(err);
         assert(Array.isArray(messageIds));
         assert(messageIds.length > 0);
-        assert(console.log.calledWith('Published %d messages!', messageIds.length));
+        assert(console.log.calledWith('Published %d message(s)!', messageIds.length));
+        assert.notEqual(apiResponse, undefined);
         done();
       });
     });
@@ -62,9 +66,10 @@ describe('pubsub:topics', function () {
 
   describe('deleteTopic', function () {
     it('should delete a topic', function (done) {
-      program.deleteTopic(topicName, function (err) {
+      program.deleteTopic(topicName, function (err, apiResponse) {
         assert.ifError(err);
         assert(console.log.calledWith('Deleted topic: %s', topicName));
+        assert.notEqual(apiResponse, undefined);
         done();
       });
     });

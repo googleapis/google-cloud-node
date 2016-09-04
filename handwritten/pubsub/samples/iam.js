@@ -13,84 +13,48 @@
 
 'use strict';
 
-// [START auth]
+// [START setup]
 // By default, the client will authenticate using the service account file
 // specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use
 // the project specified by the GCLOUD_PROJECT environment variable. See
 // https://googlecloudplatform.github.io/gcloud-node/#/docs/google-cloud/latest/guides/authentication
 var PubSub = require('@google-cloud/pubsub');
+// [END setup]
 
-// Instantiate a pubsub client
-var pubsub = PubSub();
-// [END auth]
-
-// [START get_topic_policy]
-/**
- * Retrieve a topic's IAM policy.
- *
- * @param {string} topicName The name of the topic.
- * @param {function} callback The callback function.
- */
 function getTopicPolicy (topicName, callback) {
-  if (!topicName) {
-    return callback(new Error('"topicName" is required!'));
-  }
-
-  // Grab a reference to an existing topic
+  var pubsub = PubSub();
   var topic = pubsub.topic(topicName);
 
   // Retrieve the IAM policy for the topic
-  topic.iam.getPolicy(function (err, policy) {
+  // See https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub/latest/pubsub/topic?method=iam.getPolicy
+  topic.iam.getPolicy(function (err, policy, apiResponse) {
     if (err) {
       return callback(err);
     }
 
-    console.log('Got topic policy:', policy);
-    return callback(null, policy);
+    console.log('Got policy for topic: %s', topicName);
+    return callback(null, policy, apiResponse);
   });
 }
-// [END get_topic_policy]
 
-// [START get_subscription_policy]
-/**
- * Retrieve a subcription's IAM policy.
- *
- * @param {string} subscriptionName The name of the subscription.
- * @param {function} callback The callback function.
- */
 function getSubscriptionPolicy (subscriptionName, callback) {
-  if (!subscriptionName) {
-    return callback(new Error('"subscriptionName" is required!'));
-  }
-
-  // Grab a reference to an existing subscription
+  var pubsub = PubSub();
   var subscription = pubsub.subscription(subscriptionName);
 
   // Retrieve the IAM policy for the subscription
-  subscription.iam.getPolicy(function (err, policy) {
+  // See https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub/latest/pubsub/subscription?method=iam.getPolicy
+  subscription.iam.getPolicy(function (err, policy, apiResponse) {
     if (err) {
       return callback(err);
     }
 
-    console.log('Got subscription policy:', policy);
-    return callback(null, policy);
+    console.log('Got policy for subscription: %s', subscriptionName);
+    return callback(null, policy, apiResponse);
   });
 }
-// [END get_subscription_policy]
 
-// [START set_topic_policy]
-/**
- * Set a topic's IAM policy.
- *
- * @param {string} topicName The name of the topic.
- * @param {function} callback The callback function.
- */
 function setTopicPolicy (topicName, callback) {
-  if (!topicName) {
-    return callback(new Error('"topicName" is required!'));
-  }
-
-  // Grab a reference to an existing topic
+  var pubsub = PubSub();
   var topic = pubsub.topic(topicName);
 
   // Policy update
@@ -104,29 +68,19 @@ function setTopicPolicy (topicName, callback) {
   };
 
   // Set the IAM policy for the specified topic
-  topic.iam.setPolicy(newPolicy, function (err, policy) {
+  // See https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub/latest/pubsub/topic?method=iam.setPolicy
+  topic.iam.setPolicy(newPolicy, function (err, updatedPolicy, apiResponse) {
     if (err) {
       return callback(err);
     }
 
     console.log('Updated policy for topic: %s', topicName);
-    return callback(null, policy);
+    return callback(null, updatedPolicy, apiResponse);
   });
 }
-// [END set_topic_policy]
 
-// [START set_subscription_policy]
-/**
- * @param {string} subscriptionName Name of the subscription whose policy is to
- * be updated.
- * @param {function} callback The callback function.
- */
 function setSubscriptionPolicy (subscriptionName, callback) {
-  if (!subscriptionName) {
-    return callback(new Error('"subscriptionName" is required!'));
-  }
-
-  // Grab a reference to an existing subscription
+  var pubsub = PubSub();
   var subscription = pubsub.subscription(subscriptionName);
 
   // Policy update
@@ -140,30 +94,19 @@ function setSubscriptionPolicy (subscriptionName, callback) {
   };
 
   // Set the IAM policy for the specified subscription
-  subscription.iam.setPolicy(newPolicy, function (err, policy) {
+  // See https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub/latest/pubsub/subscription?method=iam.setPolicy
+  subscription.iam.setPolicy(newPolicy, function (err, updatedPolicy, apiResponse) {
     if (err) {
       return callback(err);
     }
 
     console.log('Updated policy for subscription: %s', subscriptionName);
-    return callback(null, policy);
+    return callback(null, updatedPolicy, apiResponse);
   });
 }
-// [END set_subscription_policy]
 
-// [START test_topic_permissions]
-/**
- * Test a topic's IAM permissions.
- *
- * @param {string} topicName The name of the topic.
- * @param {function} callback The callback function.
- */
 function testTopicPermissions (topicName, callback) {
-  if (!topicName) {
-    return callback(new Error('"topicName" is required!'));
-  }
-
-  // Grab a reference to an existing topic
+  var pubsub = PubSub();
   var topic = pubsub.topic(topicName);
 
   var permissionsToTest = [
@@ -173,30 +116,19 @@ function testTopicPermissions (topicName, callback) {
   ];
 
   // Test the IAM policy for the specified topic
-  topic.iam.testPermissions(permissionsToTest, function (err, permissions) {
+  // See https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub/latest/pubsub/topic?method=iam.testPermissions
+  topic.iam.testPermissions(permissionsToTest, function (err, permissions, apiResponse) {
     if (err) {
       return callback(err);
     }
 
     console.log('Tested permissions for topic: %s', topicName);
-    return callback(null, permissions);
+    return callback(null, permissions, apiResponse);
   });
 }
-// [END test_topic_permissions]
 
-// [START test_subscription_permissions]
-/**
- * Test a subcription's IAM permissions.
- *
- * @param {string} subscriptionName The name of the subscription.
- * @param {function} callback The callback function.
- */
 function testSubscriptionPermissions (subscriptionName, callback) {
-  if (!subscriptionName) {
-    return callback(new Error('"subscriptionName" is required!'));
-  }
-
-  // Grab a reference to an existing subscription
+  var pubsub = PubSub();
   var subscription = pubsub.subscription(subscriptionName);
 
   var permissionsToTest = [
@@ -205,16 +137,16 @@ function testSubscriptionPermissions (subscriptionName, callback) {
   ];
 
   // Test the IAM policy for the specified subscription
-  subscription.iam.testPermissions(permissionsToTest, function (err, permissions) {
+  // See https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub/latest/pubsub/subscription?method=iam.testPermissions
+  subscription.iam.testPermissions(permissionsToTest, function (err, permissions, apiResponse) {
     if (err) {
       return callback(err);
     }
 
     console.log('Tested permissions for subscription: %s', subscriptionName);
-    return callback(null, permissions);
+    return callback(null, permissions, apiResponse);
   });
 }
-// [END test_subscription_permissions]
 
 // [START usage]
 function printUsage () {

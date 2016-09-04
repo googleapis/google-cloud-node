@@ -20,18 +20,19 @@ var policyMock = 'policy';
 var permissionsMock = 'permissions';
 
 function getSample () {
+  var apiResponseMock = {};
   var subscriptionMock = {
     iam: {
       getPolicy: sinon.stub().callsArgWith(0, null, policyMock),
-      setPolicy: sinon.stub().callsArgWith(1, null, policyMock),
-      testPermissions: sinon.stub().callsArgWith(1, null, permissionsMock)
+      setPolicy: sinon.stub().callsArgWith(1, null, policyMock, apiResponseMock),
+      testPermissions: sinon.stub().callsArgWith(1, null, permissionsMock, apiResponseMock)
     }
   };
   var topicMock = {
     iam: {
       getPolicy: sinon.stub().callsArgWith(0, null, policyMock),
-      setPolicy: sinon.stub().callsArgWith(1, null, policyMock),
-      testPermissions: sinon.stub().callsArgWith(1, null, permissionsMock)
+      setPolicy: sinon.stub().callsArgWith(1, null, policyMock, apiResponseMock),
+      testPermissions: sinon.stub().callsArgWith(1, null, permissionsMock, apiResponseMock)
     }
   };
   var pubsubMock = {
@@ -47,7 +48,8 @@ function getSample () {
       PubSub: PubSubMock,
       pubsub: pubsubMock,
       topic: topicMock,
-      subscription: subscriptionMock
+      subscription: subscriptionMock,
+      apiResponse: apiResponseMock
     }
   };
 }
@@ -62,18 +64,9 @@ describe('pubsub:iam', function () {
 
       assert.ifError(callback.firstCall.args[0]);
       assert.equal(callback.firstCall.args[1], policyMock);
-      assert(console.log.calledWith('Got topic policy:', policyMock));
+      assert(console.log.calledWith('Got policy for topic: %s', topicName));
     });
-    it('should require topicName', function () {
-      var sample = getSample();
-      var callback = sinon.stub();
 
-      sample.program.getTopicPolicy(undefined, callback);
-
-      assert(callback.firstCall.args[0]);
-      assert(callback.firstCall.args[0].message = '"topicName" is required!');
-      assert.equal(callback.firstCall.args[1], undefined);
-    });
     it('should handle error', function () {
       var sample = getSample();
       var error = new Error('error');
@@ -96,18 +89,9 @@ describe('pubsub:iam', function () {
 
       assert.ifError(callback.firstCall.args[0]);
       assert.equal(callback.firstCall.args[1], policyMock);
-      assert(console.log.calledWith('Got subscription policy:', policyMock));
+      assert(console.log.calledWith('Got policy for subscription: %s', subscriptionName));
     });
-    it('should require subscriptionName', function () {
-      var sample = getSample();
-      var callback = sinon.stub();
 
-      sample.program.getSubscriptionPolicy(undefined, callback);
-
-      assert(callback.firstCall.args[0]);
-      assert(callback.firstCall.args[0].message = '"subscriptionName" is required!');
-      assert.equal(callback.firstCall.args[1], undefined);
-    });
     it('should handle error', function () {
       var sample = getSample();
       var error = new Error('error');
@@ -130,18 +114,10 @@ describe('pubsub:iam', function () {
 
       assert.ifError(callback.firstCall.args[0]);
       assert.equal(callback.firstCall.args[1], policyMock);
+      assert.strictEqual(callback.firstCall.args[2], sample.mocks.apiResponse);
       assert(console.log.calledWith('Updated policy for topic: %s', topicName));
     });
-    it('should require topicName', function () {
-      var sample = getSample();
-      var callback = sinon.stub();
 
-      sample.program.setTopicPolicy(undefined, callback);
-
-      assert(callback.firstCall.args[0]);
-      assert(callback.firstCall.args[0].message = '"topicName" is required!');
-      assert.equal(callback.firstCall.args[1], undefined);
-    });
     it('should handle error', function () {
       var sample = getSample();
       var error = new Error('error');
@@ -164,18 +140,10 @@ describe('pubsub:iam', function () {
 
       assert.ifError(callback.firstCall.args[0]);
       assert.equal(callback.firstCall.args[1], policyMock);
+      assert.strictEqual(callback.firstCall.args[2], sample.mocks.apiResponse);
       assert(console.log.calledWith('Updated policy for subscription: %s', subscriptionName));
     });
-    it('should require subscriptionName', function () {
-      var sample = getSample();
-      var callback = sinon.stub();
 
-      sample.program.setSubscriptionPolicy(undefined, callback);
-
-      assert(callback.firstCall.args[0]);
-      assert(callback.firstCall.args[0].message = '"subscriptionName" is required!');
-      assert.equal(callback.firstCall.args[1], undefined);
-    });
     it('should handle error', function () {
       var sample = getSample();
       var error = new Error('error');
@@ -198,18 +166,10 @@ describe('pubsub:iam', function () {
 
       assert.ifError(callback.firstCall.args[0]);
       assert.equal(callback.firstCall.args[1], permissionsMock);
+      assert.strictEqual(callback.firstCall.args[2], sample.mocks.apiResponse);
       assert(console.log.calledWith('Tested permissions for topic: %s', topicName));
     });
-    it('should require topicName', function () {
-      var sample = getSample();
-      var callback = sinon.stub();
 
-      sample.program.testTopicPermissions(undefined, callback);
-
-      assert(callback.firstCall.args[0]);
-      assert(callback.firstCall.args[0].message = '"topicName" is required!');
-      assert.equal(callback.firstCall.args[1], undefined);
-    });
     it('should handle error', function () {
       var sample = getSample();
       var error = new Error('error');
@@ -233,18 +193,10 @@ describe('pubsub:iam', function () {
 
       assert.ifError(callback.firstCall.args[0]);
       assert.equal(callback.firstCall.args[1], permissionsMock);
+      assert.strictEqual(callback.firstCall.args[2], sample.mocks.apiResponse);
       assert(console.log.calledWith('Tested permissions for subscription: %s', subscriptionName));
     });
-    it('should require subscriptionName', function () {
-      var sample = getSample();
-      var callback = sinon.stub();
 
-      sample.program.testSubscriptionPermissions(undefined, callback);
-
-      assert(callback.firstCall.args[0]);
-      assert(callback.firstCall.args[0].message = '"subscriptionName" is required!');
-      assert.equal(callback.firstCall.args[1], undefined);
-    });
     it('should handle error', function () {
       var sample = getSample();
       var error = new Error('error');

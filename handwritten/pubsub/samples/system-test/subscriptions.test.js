@@ -15,59 +15,95 @@
 
 var uuid = require('node-uuid');
 var PubSub = require('@google-cloud/pubsub');
-var pubsub = PubSub();
 var program = require('../subscriptions');
-var topicName = 'nodejs-docs-samples-test-' + uuid.v4();
-var subscriptionName = 'nodejs-docs-samples-test-sub-' + uuid.v4();
+
+var pubsub = PubSub();
+var topicNameOne = 'nodejs-docs-samples-test-' + uuid.v4();
+var topicNameTwo = 'nodejs-docs-samples-test-' + uuid.v4();
+var subscriptionNameOne = 'nodejs-docs-samples-test-sub-' + uuid.v4();
+var subscriptionNameTwo = 'nodejs-docs-samples-test-sub-' + uuid.v4();
 var projectId = process.env.GCLOUD_PROJECT;
-var name = 'projects/' + projectId + '/subscriptions/' + subscriptionName;
+var fullSubscriptionNameOne = 'projects/' + projectId + '/subscriptions/' + subscriptionNameOne;
+var fullSubscriptionNameTwo = 'projects/' + projectId + '/subscriptions/' + subscriptionNameTwo;
 
 describe('pubsub:subscriptions', function () {
   before(function (done) {
-    pubsub.topic(topicName).get({
+    pubsub.topic(topicNameOne).get({
       autoCreate: true
-    }, done);
+    }, function (err) {
+      assert.ifError(err, 'topic creation succeeded');
+
+      pubsub.topic(topicNameTwo).get({
+        autoCreate: true
+      }, function (err, topic) {
+        assert.ifError(err, 'topic creation succeeded');
+
+        topic.subscribe(subscriptionNameTwo, function (err) {
+          assert.ifError(err, 'subscription creation succeeded');
+
+          done();
+        });
+      });
+    });
   });
 
   after(function (done) {
-    pubsub.topic(topicName).delete(done);
+    pubsub.topic(topicNameOne).delete(done);
   });
 
   describe('createSubscription', function () {
     it('should create a subscription', function (done) {
-      program.createSubscription(topicName, subscriptionName, function (err, subscription) {
+      program.createSubscription(topicNameOne, subscriptionNameOne, function (err, subscription, apiResponse) {
         assert.ifError(err);
-        assert.equal(subscription.name, name);
-        assert(console.log.calledWith('Created subscription %s to topic %s', subscriptionName, topicName));
-        // The next test sometimes fails, so, slow this test down
+        assert.equal(subscription.name, fullSubscriptionNameOne);
+        assert(console.log.calledWith('Created subscription %s to topic %s', subscriptionNameOne, topicNameOne));
+        assert.notEqual(apiResponse, undefined);
+        // Listing is eventually consistent, so give the index time to update
         setTimeout(done, 5000);
+      });
+    });
+  });
+
+  describe('getSubscriptionMetadata', function () {
+    it('should get metadata for a subscription', function (done) {
+      program.getSubscriptionMetadata(subscriptionNameOne, function (err, metadata) {
+        assert.ifError(err);
+        assert.equal(metadata.name, fullSubscriptionNameOne);
+        assert(console.log.calledWith('Got metadata for subscription: %s', subscriptionNameOne));
+        done();
       });
     });
   });
 
   describe('listSubscriptions', function () {
     it('should list subscriptions', function (done) {
-      program.listSubscriptions(topicName, function (err, subscriptions) {
+      program.listSubscriptions(topicNameOne, function (err, subscriptions) {
         assert.ifError(err);
         assert(Array.isArray(subscriptions));
         assert(subscriptions.length > 0);
         var recentlyCreatedSubscriptions = subscriptions.filter(function (subscription) {
-          return subscription.name === name;
+          return subscription.name === fullSubscriptionNameOne || subscription.name === fullSubscriptionNameTwo;
         });
-        assert.equal(recentlyCreatedSubscriptions.length, 1, 'list has newly created subscription');
-        assert(console.log.calledWith('Found %d subscriptions!', subscriptions.length));
+        assert.equal(recentlyCreatedSubscriptions.length, 1, 'list only has one newly created subscription');
+        assert.equal(recentlyCreatedSubscriptions[0].name, fullSubscriptionNameOne, 'list has correct newly created subscription');
+        assert(console.log.calledWith('Found %d subscription(s)!', subscriptions.length));
+        done();
+      });
+    });
+  });
 
-        program.listSubscriptions(undefined, function (err, allSubscriptions) {
-          assert.ifError(err);
-          assert(Array.isArray(allSubscriptions));
-          assert(allSubscriptions.length > 0);
-          var recentlyCreatedAllSubscriptions = allSubscriptions.filter(function (subscription) {
-            return subscription.name === name;
-          });
-          assert.equal(recentlyCreatedAllSubscriptions.length, 1, 'list has newly created subscription');
-          assert(console.log.calledWith('Found %d subscriptions!', allSubscriptions.length));
-          done();
+  describe('listAllSubscriptions', function () {
+    it('should list all subscriptions', function (done) {
+      program.listAllSubscriptions(function (err, allSubscriptions) {
+        assert.ifError(err);
+        assert(Array.isArray(allSubscriptions));
+        assert(allSubscriptions.length > 0);
+        var recentlyCreatedAllSubscriptions = allSubscriptions.filter(function (subscription) {
+          return subscription.name === fullSubscriptionNameOne || subscription.name === fullSubscriptionNameTwo;
         });
+        assert.equal(recentlyCreatedAllSubscriptions.length, 2, 'list has both newly created subscriptions');
+        assert(console.log.calledWith('Found %d subscription(s)!', allSubscriptions.length));
+        done();
       });
     });
   });
@@ -76,16 +112,16 @@ describe('pubsub:subscriptions', function () {
     var expected = 'Hello World!';
 
     before(function (done) {
-      pubsub.topic(topicName).publish({ data: expected }, done);
+      pubsub.topic(topicNameOne).publish({ data: expected }, done);
     });
 
     it('should pull messages', function (done) {
-      program.pullMessages(subscriptionName, function (err, messages) {
+      program.pullMessages(subscriptionNameOne, function (err, messages) {
         assert.ifError(err);
         assert(Array.isArray(messages));
         assert(messages.length > 0);
-        assert(console.log.calledWith('Pulled %d messages!', messages.length));
-        assert(console.log.calledWith('Acked %d messages!', messages.length));
+        assert(console.log.calledWith('Pulled %d message(s)!', messages.length));
+        assert(console.log.calledWith('Acked %d message(s)!', messages.length));
         assert.equal(messages[0].data, expected);
         done();
       });
@@ -94,9 +130,9 @@ describe('pubsub:subscriptions', function () {
 
   describe('deleteSubscription', function () {
     it('should delete a subscription', function (done) {
-      program.deleteSubscription(subscriptionName, function (err) {
+      program.deleteSubscription(subscriptionNameOne, function (err) {
         assert.ifError(err);
-        assert(console.log.calledWith('Deleted subscription: %s', subscriptionName));
+        assert(console.log.calledWith('Deleted subscription: %s', subscriptionNameOne));
         done();
       });
     });
