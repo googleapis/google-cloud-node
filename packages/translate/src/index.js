@@ -337,6 +337,10 @@ Translate.prototype.translate = function(input, options, callback) {
     if (options.to) {
       query.target = options.to;
     }
+
+    if (options.format) {
+      query.format = options.format;
+    }
   }
 
   if (!query.target) {
