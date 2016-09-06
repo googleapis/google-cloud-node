@@ -275,10 +275,8 @@ Network.prototype.createSubnetwork = function(name, config, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/subnetwork} callback.subnetworks - Subnetwork objects
- *     from this network.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
+ * @param {module:compute/subnetwork[]} callback.subnetworks - Subnetwork
+ *     objects from this network.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -405,10 +403,8 @@ Network.prototype.firewall = function(name) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/firewall} callback.firewalls - Firewall objects from
+ * @param {module:compute/firewall[]} callback.firewalls - Firewall objects from
  *     this network.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example

@@ -134,6 +134,8 @@ DNS.prototype.createZone = function(name, config, callback) {
  * @resource [ManagedZones: list API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/list}
  *
  * @param {object=} query - Query object.
+ * @param {boolean} query.autoPaginate - Have pagination handled automatically.
+ *     Default: true.
  * @param {number} query.maxApiCalls - Maximum number of API calls to make.
  * @param {number} query.maxResults - Maximum number of results to return.
  * @param {string} query.pageToken - Page token.

@@ -451,8 +451,6 @@ Instance.prototype.cluster = function(name) {
  * @param {?error} callback.error - An error returned while making this request.
  * @param {module:bigtable/cluster[]} callback.clusters - List of all
  *     Clusters.
- * @param {object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -554,8 +552,6 @@ Instance.prototype.getClusters = function(query, callback) {
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:bigtable/table[]} callback.tables - List of all Tables.
- * @param {object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example

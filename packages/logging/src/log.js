@@ -286,8 +286,6 @@ Log.prototype.error = function(entry, options, callback) {
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:logging/entry[]} callback.entries - Entries from this log.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example

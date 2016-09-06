@@ -690,8 +690,6 @@ Zone.prototype.disk = function(name) {
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:compute/autoscaler[]} callback.autoscalers - Autoscaler
  *     objects from your project.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -795,9 +793,7 @@ Zone.prototype.getAutoscalers = function(options, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/disk} callback.disks - Disk objects from this zone.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
+ * @param {module:compute/disk[]} callback.disks - Disk objects from this zone.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -903,8 +899,6 @@ Zone.prototype.getDisks = function(options, callback) {
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:compute/instance-group[]} callback.instanceGroups -
  *     InstanceGroup objects from this zone.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -1004,8 +998,6 @@ Zone.prototype.getInstanceGroups = function(options, callback) {
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:compute/machine-type[]} callback.machineTypes - MachineType
  *     objects from this zone.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -1084,10 +1076,8 @@ Zone.prototype.getMachineTypes = function(options, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operations - Operation objects
+ * @param {module:compute/operation[]} callback.operations - Operation objects
  *     from this zone.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -1188,9 +1178,7 @@ Zone.prototype.getOperations = function(options, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/vm} callback.vms - VM objects from this zone.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
+ * @param {module:compute/vm[]} callback.vms - VM objects from this zone.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example

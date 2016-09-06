@@ -258,8 +258,6 @@ InstanceGroup.prototype.delete = function(callback) {
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:compute/vm[]} callback.vms - VM objects from this isntance
  *     group.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example

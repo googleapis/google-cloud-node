@@ -152,8 +152,6 @@ BigQuery.prototype.dataset = function(id) {
  * @param {?error} callback.err - An error returned while making this request
  * @param {module:bigquery/dataset[]} callback.datasets - The list of datasets
  *     in your project.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -259,8 +257,6 @@ BigQuery.prototype.getDatasets = function(query, callback) {
  * @param {?error} callback.err - An error returned while making this request
  * @param {module:bigquery/job[]} callback.jobs - The list of jobs in your
  *     project.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -359,16 +355,7 @@ BigQuery.prototype.job = function(id) {
 /**
  * Run a query scoped to your project.
  *
- * If you provide a callback, this method returns the results from your query to
- * it. When querying large sets of data, it is possible your results won't be
- * returned all at once. In those cases, you will receive a third argument to
- * your callback that can be passed back to this method to return more results.
- *
- * See the examples below for such a workflow.
- *
  * This method also runs as a readable stream if you do not provide a callback.
- * In cases where more results exist, this will automatically run the subsequent
- * queries for you, pushing each row to the stream.
  *
  * @resource [Jobs: query API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/query}
  *
@@ -388,8 +375,6 @@ BigQuery.prototype.job = function(id) {
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {array} callback.rows - The list of results from your query.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example

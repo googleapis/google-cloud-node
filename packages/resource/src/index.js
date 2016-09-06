@@ -148,10 +148,8 @@ Resource.prototype.createProject = function(id, options, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:resource/project} callback.operations - Project objects from
+ * @param {module:resource/project[]} callback.operations - Project objects from
  *     your account.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
