@@ -93,10 +93,8 @@ describe('logging:sinks', function () {
 
       sample.program.createSink(sinkName, bucketName, filter, callback);
 
-      assert(callback.calledOnce, 'callback called once');
-      assert.equal(callback.firstCall.args.length, 1, 'callback received 1 argument');
-      assert(callback.firstCall.args[0], 'callback received error');
-      assert.equal(callback.firstCall.args[0].message, error.message, 'error has correct message');
+      assert.equal(callback.calledOnce, true);
+      assert.deepEqual(callback.firstCall.args, [error]);
     });
   });
 
@@ -124,10 +122,8 @@ describe('logging:sinks', function () {
 
       sample.program.getSinkMetadata(sinkName, callback);
 
-      assert(callback.calledOnce, 'callback called once');
-      assert.equal(callback.firstCall.args.length, 1, 'callback received 1 argument');
-      assert(callback.firstCall.args[0], 'callback received error');
-      assert.equal(callback.firstCall.args[0].message, error.message, 'error has correct message');
+      assert.equal(callback.calledOnce, true);
+      assert.deepEqual(callback.firstCall.args, [error]);
     });
   });
 
@@ -155,10 +151,8 @@ describe('logging:sinks', function () {
 
       sample.program.listSinks(callback);
 
-      assert(callback.calledOnce, 'callback called once');
-      assert.equal(callback.firstCall.args.length, 1, 'callback received 1 argument');
-      assert(callback.firstCall.args[0], 'callback received error');
-      assert.equal(callback.firstCall.args[0].message, error.message, 'error has correct message');
+      assert.equal(callback.calledOnce, true);
+      assert.deepEqual(callback.firstCall.args, [error]);
     });
   });
 
@@ -189,10 +183,8 @@ describe('logging:sinks', function () {
 
       sample.program.updateSink(sinkName, filter, callback);
 
-      assert(callback.calledOnce, 'callback called once');
-      assert.equal(callback.firstCall.args.length, 1, 'callback received 1 argument');
-      assert(callback.firstCall.args[0], 'callback received error');
-      assert.equal(callback.firstCall.args[0].message, error.message, 'error has correct message');
+      assert.equal(callback.calledOnce, true);
+      assert.deepEqual(callback.firstCall.args, [error]);
     });
   });
 
@@ -220,10 +212,8 @@ describe('logging:sinks', function () {
 
       sample.program.deleteSink(sinkName, callback);
 
-      assert(callback.calledOnce, 'callback called once');
-      assert.equal(callback.firstCall.args.length, 1, 'callback received 1 argument');
-      assert(callback.firstCall.args[0], 'callback received error');
-      assert.equal(callback.firstCall.args[0].message, error.message, 'error has correct message');
+      assert.equal(callback.calledOnce, true);
+      assert.deepEqual(callback.firstCall.args, [error]);
     });
   });
 
