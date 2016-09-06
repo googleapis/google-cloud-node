@@ -356,10 +356,8 @@ Region.prototype.createRule = function(name, config, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/address} callback.addresses - Address objects from
+ * @param {module:compute/address[]} callback.addresses - Address objects from
  *     this region.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -462,10 +460,8 @@ Region.prototype.getAddresses = function(options, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation} callback.operations - Operation objects
+ * @param {module:compute/operation[]} callback.operations - Operation objects
  *     from this region.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -567,9 +563,8 @@ Region.prototype.getOperations = function(options, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/rule} callback.rules - Rule objects from this region.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
+ * @param {module:compute/rule[]} callback.rules - Rule objects from this
+ *     region.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -674,8 +669,6 @@ Region.prototype.getRules = function(options, callback) {
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:compute/subnetwork[]} callback.subnetworks - Subnetwork
  *     objects from this region.
- * @param {?object} callback.nextQuery - If present, query with this object to
- *     check for more results.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
