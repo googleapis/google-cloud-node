@@ -47,6 +47,9 @@ var Instance = require('./instance.js');
  * @resource [Google Cloud Bigtable Concepts Overview]{@link https://cloud.google.com/bigtable/docs/concepts}
  *
  * @param {object=} options - [Configuration object](#/docs).
+ * @param {string=} options.apiEndpoint - Override the default API endpoint used
+ *     to reach Bigtable. This is useful for connecting to your local Bigtable
+ *     emulator.
  *
  * @example
  * //-
@@ -289,10 +292,20 @@ function Bigtable(options) {
 
   var adminBaseUrl = 'bigtableadmin.googleapis.com';
 
+  var customEndpoint = is.defined(options.apiEndpoint) ||
+    is.defined(process.env.BIGTABLE_EMULATOR_HOST);
+
+  var baseUrl = 'bigtable.googleapis.com';
+
+  if (customEndpoint) {
+    baseUrl = options.apiEndpoint || process.env.BIGTABLE_EMULATOR_HOST;
+  }
+
   var config = {
-    baseUrl: 'bigtable.googleapis.com',
+    baseUrl: baseUrl,
     service: 'bigtable',
     apiVersion: 'v2',
+    customEndpoint: customEndpoint,
     protoServices: {
       Bigtable: googleProtoFiles.bigtable.v2,
       BigtableTableAdmin: {
