@@ -49,8 +49,6 @@ var Query = require('./query.js');
  */
 var Transaction = require('./transaction.js');
 
-var PKG = require('../package.json');
-
 /**
  * @constructor
  * @alias module:datastore
@@ -323,7 +321,7 @@ function Datastore(options) {
     service: 'datastore',
     apiVersion: 'v1',
     scopes: ['https://www.googleapis.com/auth/datastore'],
-    userAgent: PKG.name + '/' + PKG.version,
+    packageJson: require('../package.json'),
     grpcMetadata: {
       'google-cloud-resource-prefix': 'projects/' + this.projectId
     }

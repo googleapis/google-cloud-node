@@ -26,8 +26,6 @@ var Service = require('@google-cloud/common').Service;
 var Table = require('../src/table.js');
 var util = require('@google-cloud/common').util;
 
-var PKG = require('../package.json');
-
 var fakeUtil = extend({}, util);
 
 function FakeTable(a, b) {
@@ -118,7 +116,7 @@ describe('BigQuery', function() {
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/bigquery'
       ]);
-      assert.strictEqual(calledWith.userAgent, PKG.name + '/' + PKG.version);
+      assert.deepEqual(calledWith.packageJson, require('../package.json'));
     });
   });
 

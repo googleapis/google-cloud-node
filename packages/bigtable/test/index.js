@@ -26,7 +26,6 @@ var sinon = require('sinon').sandbox.create();
 var common = require('@google-cloud/common');
 var Cluster = require('../src/cluster.js');
 var Instance = require('../src/instance.js');
-var PKG = require('../package.json');
 
 var fakeUtil = extend({}, common.util);
 var fakeStreamRouter = {
@@ -143,7 +142,7 @@ describe('Bigtable', function() {
         'https://www.googleapis.com/auth/cloud-platform'
       ]);
 
-      assert.strictEqual(calledWith.userAgent, PKG.name + '/' + PKG.version);
+      assert.deepEqual(calledWith.packageJson, require('../package.json'));
     });
 
     it('should set the projectName', function() {

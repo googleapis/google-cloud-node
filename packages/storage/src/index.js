@@ -43,8 +43,6 @@ var Channel = require('./channel.js');
  */
 var File = require('./file.js');
 
-var PKG = require('../package.json');
-
 /*! Developer Documentation
  *
  * Invoke this method to create a new Storage object bound with pre-determined
@@ -83,7 +81,7 @@ function Storage(options) {
     scopes: [
       'https://www.googleapis.com/auth/devstorage.full_control'
     ],
-    userAgent: PKG.name + '/' + PKG.version
+    packageJson: require('../package.json')
   };
 
   common.Service.call(this, config, options);

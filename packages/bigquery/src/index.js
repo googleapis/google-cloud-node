@@ -43,8 +43,6 @@ var Job = require('./job.js');
  */
 var Table = require('./table.js');
 
-var PKG = require('../package.json');
-
 /**
  * In the following examples from this page and the other modules (`Dataset`,
  * `Table`, etc.), we are going to be using a dataset from
@@ -69,7 +67,7 @@ function BigQuery(options) {
   var config = {
     baseUrl: 'https://www.googleapis.com/bigquery/v2',
     scopes: ['https://www.googleapis.com/auth/bigquery'],
-    userAgent: PKG.name + '/' + PKG.version
+    packageJson: require('../package.json')
   };
 
   common.Service.call(this, config, options);

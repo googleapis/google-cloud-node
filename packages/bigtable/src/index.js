@@ -29,17 +29,15 @@ var util = require('util');
 
 /**
  * @private
- * @type {module:bigtable/instance}
- */
-var Instance = require('./instance.js');
-
-/**
- * @private
  * @type {module:bigtable/cluster}
  */
 var Cluster = require('./cluster.js');
 
-var PKG = require('../package.json');
+/**
+ * @private
+ * @type {module:bigtable/instance}
+ */
+var Instance = require('./instance.js');
 
 /**
  * @alias module:bigtable
@@ -319,7 +317,7 @@ function Bigtable(options) {
       'https://www.googleapis.com/auth/bigtable.data',
       'https://www.googleapis.com/auth/cloud-platform'
     ],
-    userAgent: PKG.name + '/' + PKG.version
+    packageJson: require('../package.json')
   };
 
   common.GrpcService.call(this, config, options);

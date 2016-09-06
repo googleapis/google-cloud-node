@@ -161,6 +161,11 @@ function GrpcService(config, options) {
 
   this.grpcMetadata = new grpc.Metadata();
 
+  this.grpcMetadata.add('User-Agent', [
+    config.packageJson.name.replace('@google-cloud', 'gcloud-node'),
+    config.packageJson.version
+  ].join('/'));
+
   if (config.grpcMetadata) {
     for (var prop in config.grpcMetadata) {
       if (config.grpcMetadata.hasOwnProperty(prop)) {

@@ -21,8 +21,6 @@ var extend = require('extend');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
-var PKG = require('../package.json');
-
 var fakeEntity = {
   Int: function(value) {
     this.value = value;
@@ -157,7 +155,7 @@ describe('Datastore', function() {
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/datastore'
       ]);
-      assert.strictEqual(calledWith.userAgent, PKG.name + '/' + PKG.version);
+      assert.deepEqual(calledWith.packageJson, require('../package.json'));
       assert.deepEqual(calledWith.grpcMetadata, {
         'google-cloud-resource-prefix': 'projects/' + datastore.projectId
       });

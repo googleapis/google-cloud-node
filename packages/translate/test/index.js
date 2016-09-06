@@ -401,7 +401,7 @@ describe('Translate', function() {
           key: translate.key
         },
         headers: {
-          'User-Agent': PKG.name + '/' + PKG.version
+          'User-Agent': 'gcloud-node/translate/' + PKG.version
         }
       });
       var BASE_URL = 'https://www.googleapis.com/language/translate/v2';

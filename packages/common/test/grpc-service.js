@@ -92,6 +92,10 @@ describe('GrpcService', function() {
     proto: {},
     service: 'Service',
     apiVersion: 'v1',
+    packageJson: {
+      name: '@google-cloud/service',
+      version: '0.2.0'
+    },
     grpcMetadata: {
       property: 'value'
     }
@@ -243,8 +247,20 @@ describe('GrpcService', function() {
       assert.strictEqual(calledWith[1], OPTIONS);
     });
 
-    it('should default grpcMetadata to empty metadata', function() {
-      var fakeGrpcMetadata = {};
+    it('should set grpcMetadata with the correct User Agent', function() {
+      var userAgentAdded = false;
+
+      var fakeGrpcMetadata = {
+        add: function(prop, value) {
+          assert.strictEqual(prop, 'User-Agent');
+          assert.strictEqual(value, [
+            CONFIG.packageJson.name.replace('@google-cloud', 'gcloud-node'),
+            CONFIG.packageJson.version
+          ].join('/'));
+
+          userAgentAdded = true;
+        }
+      };
 
       GrpcMetadataOverride = function() {
         return fakeGrpcMetadata;
@@ -255,13 +271,22 @@ describe('GrpcService', function() {
 
       var grpcService = new GrpcService(config, OPTIONS);
       assert.strictEqual(grpcService.grpcMetadata, fakeGrpcMetadata);
+      assert.strictEqual(userAgentAdded, true);
     });
 
     it('should create and localize grpcMetadata', function() {
+      var userAgentAdded = false;
+
       var fakeGrpcMetadata = {
         add: function(prop, value) {
+          if (prop === 'User-Agent') {
+            return; // Already tested.
+          }
+
           assert.strictEqual(prop, Object.keys(CONFIG.grpcMetadata)[0]);
           assert.strictEqual(value, CONFIG.grpcMetadata[prop]);
+
+          userAgentAdded = true;
         }
       };
 
@@ -271,6 +296,7 @@ describe('GrpcService', function() {
 
       var grpcService = new GrpcService(CONFIG, OPTIONS);
       assert.strictEqual(grpcService.grpcMetadata, fakeGrpcMetadata);
+      assert.strictEqual(userAgentAdded, true);
     });
 
     it('should localize maxRetries', function() {

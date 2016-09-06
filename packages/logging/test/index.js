@@ -23,8 +23,6 @@ var googleProtoFiles = require('google-proto-files');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
-var PKG = require('../package.json');
-
 var extended = false;
 var fakeStreamRouter = {
   extend: function(Class, methods) {
@@ -147,7 +145,7 @@ describe('Logging', function() {
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/cloud-platform'
       ]);
-      assert.strictEqual(calledWith.userAgent, PKG.name + '/' + PKG.version);
+      assert.deepEqual(calledWith.packageJson, require('../package.json'));
     });
   });
 

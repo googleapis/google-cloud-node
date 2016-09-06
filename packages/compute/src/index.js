@@ -80,8 +80,6 @@ var Snapshot = require('./snapshot.js');
  */
 var Zone = require('./zone.js');
 
-var PKG = require('../package.json');
-
 /**
  * @alias module:compute
  * @constructor
@@ -99,7 +97,7 @@ function Compute(options) {
   var config = {
     baseUrl: 'https://www.googleapis.com/compute/v1',
     scopes: ['https://www.googleapis.com/auth/compute'],
-    userAgent: PKG.name + '/' + PKG.version
+    packageJson: require('../package.json')
   };
 
   common.Service.call(this, config, options);
