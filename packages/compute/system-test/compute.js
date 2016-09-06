@@ -107,7 +107,7 @@ describe('Compute', function() {
           cpu: 80,
           loadBalance: 40,
           maxReplicas: 5,
-          minReplicas: 0,
+          minReplicas: 1,
           target: INSTANCE_GROUP_NAME
         })
       ], done);
@@ -128,7 +128,7 @@ describe('Compute', function() {
             utilizationTarget: 0.4
           },
           maxNumReplicas: 5,
-          minNumReplicas: 0
+          minNumReplicas: 1
         });
 
         done();
