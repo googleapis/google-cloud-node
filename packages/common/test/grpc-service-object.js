@@ -121,7 +121,6 @@ describe('GrpcServiceObject', function() {
     });
 
     describe('success', function() {
-      var error = new Error('Error.');
       var apiResponse = {};
 
       beforeEach(function() {
@@ -140,7 +139,7 @@ describe('GrpcServiceObject', function() {
       });
 
       it('should update the metadata on the instance', function(done) {
-        grpcServiceObject.getMetadata(function(err, metadata, apiResponse_) {
+        grpcServiceObject.getMetadata(function(err) {
           assert.ifError(err);
           assert.strictEqual(grpcServiceObject.metadata, apiResponse);
           done();
