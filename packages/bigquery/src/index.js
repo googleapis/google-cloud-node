@@ -373,6 +373,8 @@ BigQuery.prototype.job = function(id) {
  * @resource [Jobs: query API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/query}
  *
  * @param {string|object} options - A string SQL query or configuration object.
+ *     For all available options, see
+ *     [Jobs: query request body](https://cloud.google.com/bigquery/docs/reference/v2/jobs/query#request-body).
  * @param {boolean} options.autoPaginate - Have pagination handled
  *     automatically. Default: true.
  * @param {number} options.maxApiCalls - Maximum number of API calls to make.
