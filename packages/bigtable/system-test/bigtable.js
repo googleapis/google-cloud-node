@@ -573,7 +573,7 @@ describe('Bigtable', function() {
       });
 
       it('should not decode the values', function(done) {
-        var row = TABLE.row('alincoln');
+        var row = TABLE.row('gwashington');
         var options = {
           decode: false
         };
@@ -581,15 +581,11 @@ describe('Bigtable', function() {
         row.get(options, function(err) {
           assert.ifError(err);
 
-          var presidents = Object.keys(row.data.follows);
+          var teeth = row.data.traits.teeth;
+          var value = teeth[0].value;
 
-          assert(presidents.length > 0);
-
-          presidents.forEach(function(prez) {
-            var follower = row.data.follows[prez];
-
-            assert.strictEqual(follower[0].value, 'AAAAAAAAAAE=');
-          });
+          assert(value instanceof Buffer);
+          assert.strictEqual(value.toString(), 'shiny-wood');
 
           done();
         });

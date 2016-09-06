@@ -157,14 +157,8 @@ Row.formatChunks_ = function(chunks, options) {
     }
 
     if (qualifier && chunk.value) {
-      var value = chunk.value;
-
-      if (options.decode !== false) {
-        value = Mutation.convertFromBytes(value);
-      }
-
       qualifier.push({
-        value: value,
+        value: Mutation.convertFromBytes(chunk.value, options),
         labels: chunk.labels,
         timestamp: chunk.timestampMicros,
         size: chunk.valueSize
