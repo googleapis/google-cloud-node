@@ -50,7 +50,7 @@
     "bigquery"
   ],
   "dependencies": {
-    "@google-cloud/common": "^0.3.0",
+    "@google-cloud/common": "^0.4.0",
     "arrify": "^1.0.0",
     "duplexify": "^3.2.0",
     "extend": "^3.0.0",
@@ -61,7 +61,7 @@
   },
   "devDependencies": {
     "@google-cloud/storage": "*",
-    "async": "^1.4.2",
+    "async": "^2.0.1",
     "mocha": "^3.0.1",
     "node-uuid": "^1.4.3",
     "propprop": "^0.3.0",
