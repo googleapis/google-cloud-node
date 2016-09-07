@@ -50,7 +50,7 @@
     "pubsub"
   ],
   "dependencies": {
-    "@google-cloud/common": "^0.1.0",
+    "@google-cloud/common": "^0.4.0",
     "arguejs": "^0.2.3",
     "arrify": "^1.0.0",
     "extend": "^3.0.0",
@@ -60,7 +60,7 @@
     "propprop": "^0.3.0"
   },
   "devDependencies": {
-    "async": "^1.4.2",
+    "async": "^1.5.2",
     "mocha": "^3.0.1",
     "node-uuid": "^1.4.3",
     "proxyquire": "^1.7.10"
