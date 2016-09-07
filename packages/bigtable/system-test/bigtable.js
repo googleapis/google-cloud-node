@@ -28,35 +28,25 @@ var Table = require('../src/table.js');
 var Family = require('../src/family.js');
 var Row = require('../src/row.js');
 
-function generateName(obj) {
-  return ['test', obj, uuid.v4()].join('-');
-}
+var PREFIX = 'gcloud-tests-';
 
 describe('Bigtable', function() {
-  var bigtable;
+  var bigtable = new Bigtable(env);
 
-  var INSTANCE_NAME = 'test-bigtable-instance';
-  var INSTANCE;
-
-  var TABLE_NAME = generateName('table');
-  var TABLE;
-
-  var CLUSTER_NAME = 'test-bigtable-cluster';
+  var INSTANCE = bigtable.instance(generateName('instance'));
+  var TABLE = INSTANCE.table(generateName('table'));
+  var CLUSTER_NAME = generateName('cluster');
 
   before(function(done) {
-    bigtable = new Bigtable(env);
-
-    INSTANCE = bigtable.instance(INSTANCE_NAME);
-
-    var options = {
-      clusters: [{
-        name: CLUSTER_NAME,
-        location: 'us-central1-b',
-        nodes: 3
-      }]
-    };
-
-    INSTANCE.create(options, function(err, instance, operation) {
+    INSTANCE.create({
+      clusters: [
+        {
+          name: CLUSTER_NAME,
+          location: 'us-central1-b',
+          nodes: 3
+        }
+      ]
+    }, function(err, instance, operation) {
       if (err) {
         done(err);
         return;
@@ -65,8 +55,6 @@ describe('Bigtable', function() {
       operation
         .on('error', done)
         .on('complete', function() {
-          TABLE = INSTANCE.table(TABLE_NAME);
-
           TABLE.create({
             families: ['follows', 'traits']
           }, done);
@@ -75,7 +63,20 @@ describe('Bigtable', function() {
   });
 
   after(function(done) {
-    INSTANCE.delete(done);
+    bigtable.getInstances(function(err, instances) {
+      if (err) {
+        done(err);
+        return;
+      }
+
+      var testInstances = instances.filter(function(instance) {
+        return instance.id.indexOf(PREFIX) === 0;
+      });
+
+      async.eachLimit(testInstances, 5, function(instance, next) {
+        instance.delete(next);
+      }, done);
+    });
   });
 
   describe('instances', function() {
@@ -121,9 +122,7 @@ describe('Bigtable', function() {
     });
 
     it('should get a single instance', function(done) {
-      var instance = bigtable.instance(INSTANCE_NAME);
-
-      instance.get(done);
+      INSTANCE.get(done);
     });
 
     it('should update an instance', function(done) {
@@ -261,13 +260,7 @@ describe('Bigtable', function() {
     });
 
     it('should get a table', function(done) {
-      var table = INSTANCE.table(TABLE_NAME);
-
-      table.get(function(err, table_) {
-        assert.ifError(err);
-        assert.strictEqual(table, table_);
-        done();
-      });
+      TABLE.get(done);
     });
 
     it('should delete a table', function(done) {
@@ -931,3 +924,7 @@ describe('Bigtable', function() {
   });
 
 });
+
+function generateName(resourceType) {
+  return PREFIX + resourceType + '-' + uuid.v1().substr(0, 8);
+}
