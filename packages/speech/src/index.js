@@ -20,11 +20,9 @@
 
 'use strict';
 
-var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var eventsIntercept = require('events-intercept');
 var extend = require('extend');
-var flatten = require('lodash.flatten');
 var format = require('string-format-obj');
 var fs = require('fs');
 var googleProtoFiles = require('google-proto-files');
@@ -33,7 +31,6 @@ var path = require('path');
 var prop = require('propprop');
 var pumpify = require('pumpify');
 var request = require('request');
-var Storage = require('@google-cloud/storage');
 var streamEvents = require('stream-events');
 var through = require('through2');
 var util = require('util');
@@ -170,7 +167,7 @@ Speech.detectEncoding_ = function(filename) {
  * @private
  */
 Speech.findFile_ = function(file, callback) {
-  if (file instanceof Storage.File) {
+  if (common.util.isCustomType(file, 'storage/file')) {
     // File is an instance of module:storage/file.
     callback(null, {
       uri: format('gs://{bucketName}/{fileName}', {
@@ -239,38 +236,122 @@ Speech.findFile_ = function(file, callback) {
  *
  * @private
  *
- * @param {object} results - A `SpeechRecognitionResult` or
+ * @param {object} resultSets - A `SpeechRecognitionResult` or
  *     `StreamingRecognitionResult` object.
  * @param {boolean} verbose - Whether to use verbose mode.
  * @return {object} - The simplified results.
+ *
+ * @example
+ * var resultSets = [
+ *   {
+ *     alternatives: [
+ *       {
+ *         transcript: 'Result 1a',
+ *         confidence: 0.70
+ *       },
+ *       {
+ *         transcript: 'Result 1b',
+ *         confidence: 0.60
+ *       },
+ *       ...
+ *     ]
+ *   },
+ *   {
+ *     alternatives: [
+ *       {
+ *         transcript: 'Result 2a',
+ *         confidence: 0.90
+ *       },
+ *       {
+ *         transcript: 'Result 2b',
+ *         confidence: 0.80
+ *       },
+ *       ...
+ *     ]
+ *   }
+ * ];
+ *
+ * //-
+ * // Default output.
+ * //-
+ * Speech.formatResults_(resultSets);
+ * // 'Result 1a Result 2a'
+ *
+ * //-
+ * // Verbose output.
+ * //-
+ * Speech.formatResults_(resultSets, true);
+ * // [
+ * //   {
+ * //     transcript: 'Result 1a',
+ * //     confidence: 70,
+ * //     alternatives: [
+ * //       {
+ * //         transcript: 'Result 1b',
+ * //         confidence: 60
+ * //       },
+ * //       ...
+ * //     ]
+ * //   },
+ * //   {
+ * //     transcript: 'Result 2a',
+ * //     confidence: 90,
+ * //     alternatives: [
+ * //       {
+ * //         transcript: 'Result 2b',
+ * //         confidence: 80
+ * //       },
+ * //       ...
+ * //     ]
+ * //   }
+ * // ]
  */
-Speech.formatResults_ = function(results, verboseMode) {
-  results = flatten(arrify(results).map(prop('alternatives')));
+Speech.formatResults_ = function(resultSets, verboseMode) {
+  function multiplyScores(result) {
+    if (is.defined(result.confidence)) {
+      result.confidence *= 100;
+    }
 
-  if (verboseMode) {
-    results = results.map(function(result) {
-      if (is.defined(result.confidence)) {
-        result.confidence *= 100;
-      }
+    if (is.defined(result.stability)) {
+      result.stability *= 100;
+    }
 
-      if (is.defined(result.stability)) {
-        result.stability *= 100;
-      }
-
-      return result;
-    });
-  } else {
-    results = results.map(prop('transcript'));
+    return result;
   }
 
-  return results;
+  var verboseResultSets = resultSets
+    .map(function(resultSet) {
+      resultSet = extend(true, {}, resultSet);
+
+      var mostProbableResult = multiplyScores(resultSet.alternatives.shift());
+
+      resultSet.transcript = mostProbableResult.transcript;
+
+      if (is.defined(mostProbableResult.confidence)) {
+        resultSet.confidence = mostProbableResult.confidence;
+      }
+
+      if (is.defined(mostProbableResult.stability)) {
+        resultSet.stability = mostProbableResult.stability;
+      }
+
+      resultSet.alternatives = resultSet.alternatives.map(multiplyScores);
+
+      return resultSet;
+    });
+
+  if (!verboseMode) {
+    return verboseResultSets.map(prop('transcript')).join(' ');
+  }
+
+  return verboseResultSets;
 };
 
 /**
  * Perform bidirectional streaming speech-recognition: receive results while
  * sending audio.
  *
- * @resource [`StreamingRecognize` API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.Speech.StreamingRecognize}
+ * @resource [`StreamingRecognize` API Reference]{@link https://  cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.Speech.StreamingRecognize}
  * @resource [`StreamingRecognizeRequest` API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognizeRequest}
  *
  * @param {object} config - A `StreamingRecognitionConfig` object. See

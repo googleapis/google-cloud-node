@@ -262,7 +262,7 @@ describe('Speech', function() {
             }
 
             case Speech.endpointerTypes.ENDPOINTER_EVENT_UNSPECIFIED: {
-              var transcript = data.results[0];
+              var transcript = data.results;
               if (transcript === 'how old is the Brooklyn Bridge') {
                 correctDetectionsEmitted++;
               }
@@ -271,11 +271,11 @@ describe('Speech', function() {
           }
         })
         .on('end', function() {
-          setTimeout(function() {
+          process.nextTick(function() {
             assert.strictEqual(responseEmitted, true);
             assert.strictEqual(correctDetectionsEmitted, 3);
             done();
-          }, 0);
+          });
         });
     });
 
@@ -321,24 +321,19 @@ describe('Speech', function() {
           }
         })
         .on('end', function() {
-          setTimeout(function() {
+          process.nextTick(function() {
             assert.strictEqual(responseEmitted, true);
             assert.strictEqual(correctDetectionsEmitted, 3);
             done();
-          }, 0);
+          });
         });
     });
   });
 
   function assertSimplifiedResponse(done) {
-    return function(err, results) {
+    return function(err, transcript) {
       assert.ifError(err);
-
-      assert(results.length > 0);
-
-      var transcription = results[0];
-      assert.strictEqual(transcription, 'how old is the Brooklyn Bridge');
-
+      assert.strictEqual(transcript, 'how old is the Brooklyn Bridge');
       done();
     };
   }
@@ -349,8 +344,8 @@ describe('Speech', function() {
 
       assert(results.length > 0);
 
-      var transcription = results[0].transcript;
-      assert.strictEqual(transcription, 'how old is the Brooklyn Bridge');
+      var transcript = results[0].transcript;
+      assert.strictEqual(transcript, 'how old is the Brooklyn Bridge');
 
       done();
     };

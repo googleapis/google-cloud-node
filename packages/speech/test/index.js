@@ -38,10 +38,6 @@ function FakeGrpcService() {
   this.calledWith_ = arguments;
 }
 
-function FakeFile() {
-  this.calledWith_ = arguments;
-}
-
 var requestOverride = null;
 var fakeRequest = function() {
   return (requestOverride || util.noop).apply(this, arguments);
@@ -57,9 +53,6 @@ describe('Speech', function() {
 
   before(function() {
     Speech = proxyquire('../', {
-      '@google-cloud/storage': {
-        File: FakeFile
-      },
       '@google-cloud/common': {
         GrpcOperation: FakeGrpcOperation,
         GrpcService: FakeGrpcService,
@@ -170,11 +163,23 @@ describe('Speech', function() {
 
   describe('findFile_', function() {
     it('should convert a File object', function(done) {
-      var file = new FakeFile();
-      file.bucket = {
-        name: 'bucket-name'
+      var file = {
+        bucket: {
+          name: 'bucket-name'
+        },
+        name: 'file-name'
       };
-      file.name = 'file-name';
+
+      var isCustomTypeCalled = false;
+      var isCustomType = fakeUtil.isCustomType;
+
+      fakeUtil.isCustomType = function(obj, module) {
+        isCustomTypeCalled = true;
+        fakeUtil.isCustomType = isCustomType;
+        assert.strictEqual(obj, file);
+        assert.strictEqual(module, 'storage/file');
+        return true;
+      };
 
       Speech.findFile_(file, function(err, foundFile) {
         assert.ifError(err);
@@ -182,6 +187,8 @@ describe('Speech', function() {
         assert.deepEqual(foundFile, {
           uri: 'gs://' + file.bucket.name + '/' + file.name
         });
+
+        assert.strictEqual(isCustomTypeCalled, true);
 
         done();
       });
@@ -303,32 +310,63 @@ describe('Speech', function() {
   describe('formatResults_', function() {
     describe('SpeechRecognitionResult', function() {
       var SPEECH_RECOGNITION = {
-        original: {
-          alternatives: [
-            {
-              transcript: 'text',
-              confidence: 0.2
-            },
-            {
-              transcript: 'text 2',
-              confidence: 0.4
-            }
-          ],
-        },
-
-        expectedDefault: [
-          'text',
-          'text 2'
+        original: [
+          {
+            alternatives: [
+              {
+                transcript: 'Result 1a',
+                confidence: 0.70,
+                stability: 0.1
+              },
+              {
+                transcript: 'Result 1b',
+                confidence: 0.60,
+                stability: 0.1
+              }
+            ]
+          },
+          {
+            alternatives: [
+              {
+                transcript: 'Result 2a',
+                confidence: 0.90,
+                stability: 0.1
+              },
+              {
+                transcript: 'Result 2b',
+                confidence: 0.80,
+                stability: 0.1
+              }
+            ]
+          }
         ],
+
+        expectedDefault: 'Result 1a Result 2a',
 
         expectedVerbose: [
           {
-            transcript: 'text',
-            confidence: 20
+            transcript: 'Result 1a',
+            confidence: 70,
+            stability: 10,
+            alternatives: [
+              {
+                transcript: 'Result 1b',
+                confidence: 60,
+                stability: 10,
+              }
+            ]
           },
           {
-            transcript: 'text 2',
-            confidence: 40
+            transcript: 'Result 2a',
+            confidence: 90,
+            stability: 10,
+            alternatives: [
+              {
+                transcript: 'Result 2b',
+                confidence: 80,
+                stability: 10
+              }
+            ]
           }
         ]
       };
@@ -344,53 +382,6 @@ describe('Speech', function() {
         assert.deepEqual(
           Speech.formatResults_(SPEECH_RECOGNITION.original, true),
           SPEECH_RECOGNITION.expectedVerbose
-        );
-      });
-    });
-
-    describe('StreamingRecognitionResult', function() {
-      var STREAMING_RECOGITION = {
-        original: {
-          alternatives: [
-            {
-              transcript: 'text',
-              confidence: 0.2
-            },
-            {
-              transcript: 'text 2',
-              confidence: 0.4
-            }
-          ],
-        },
-
-        expectedDefault: [
-          'text',
-          'text 2'
-        ],
-
-        expectedVerbose: [
-          {
-            transcript: 'text',
-            confidence: 20
-          },
-          {
-            transcript: 'text 2',
-            confidence: 40
-          }
-        ]
-      };
-
-      it('should simplify the results', function() {
-        assert.deepEqual(
-          Speech.formatResults_(STREAMING_RECOGITION.original),
-          STREAMING_RECOGITION.expectedDefault
-        );
-      });
-
-      it('should simplify the results in verbose mode', function() {
-        assert.deepEqual(
-          Speech.formatResults_(STREAMING_RECOGITION.original, true),
-          STREAMING_RECOGITION.expectedVerbose
         );
       });
     });
