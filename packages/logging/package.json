@@ -50,12 +50,12 @@
     "logging"
   ],
   "dependencies": {
-    "@google-cloud/common": "^0.3.0",
+    "@google-cloud/common": "^0.4.0",
     "arguejs": "^0.2.3",
     "arrify": "^1.0.0",
     "extend": "^3.0.0",
     "google-gax": "^0.6.0",
-    "google-proto-files": "^0.2.1",
+    "google-proto-files": "^0.7.0",
     "is": "^3.0.1",
     "string-format-obj": "^1.0.0"
   },
@@ -63,7 +63,7 @@
     "@google-cloud/bigquery": "*",
     "@google-cloud/pubsub": "*",
     "@google-cloud/storage": "*",
-    "async": "^1.4.2",
+    "async": "^2.0.1",
     "methmeth": "^1.0.0",
     "mocha": "^3.0.1",
     "node-uuid": "^1.4.3",
