@@ -9,11 +9,12 @@
     "system-test": "mocha -R spec -t 120000 --require intelli-espower-loader ../system-test/_setup.js system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/language": "^0.1.1",
+    "@google-cloud/language": "^0.1.2",
     "@google-cloud/storage": "^0.1.1",
     "yargs": "^5.0.0"
   },
   "devDependencies": {
-    "mocha": "^2.5.3"
+    "mocha": "^3.0.2",
+    "node-uuid": "^1.4.7"
   }
 }
