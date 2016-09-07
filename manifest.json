@@ -13,6 +13,7 @@
       "name": "google-cloud",
       "defaultService": "google-cloud",
       "versions": [
+        "0.40.0",
         "0.39.0",
         "0.38.3",
         "0.37.0",
@@ -65,6 +66,7 @@
       "name": "@google-cloud/bigquery",
       "defaultService": "bigquery",
       "versions": [
+        "0.2.0",
         "0.1.2",
         "0.1.1",
         "master"
@@ -75,6 +77,8 @@
       "name": "@google-cloud/bigtable",
       "defaultService": "bigtable",
       "versions": [
+        "0.3.0",
+        "0.2.1",
         "0.2.0",
         "0.1.1",
         "master"
@@ -94,6 +98,8 @@
       "name": "@google-cloud/datastore",
       "defaultService": "datastore",
       "versions": [
+        "0.3.1",
+        "0.3.0",
         "0.2.0",
         "0.1.1",
         "master"
@@ -113,6 +119,7 @@
       "name": "@google-cloud/language",
       "defaultService": "language",
       "versions": [
+        "0.2.0",
         "0.1.2",
         "0.1.1",
         "master"
@@ -123,6 +130,7 @@
       "name": "@google-cloud/logging",
       "defaultService": "logging",
       "versions": [
+        "0.2.0",
         "0.1.1",
         "master"
       ]
@@ -142,6 +150,7 @@
       "name": "@google-cloud/pubsub",
       "defaultService": "pubsub",
       "versions": [
+        "0.2.0",
         "0.1.1",
         "master"
       ]
