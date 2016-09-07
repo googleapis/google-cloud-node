@@ -30,63 +30,42 @@ var bigquery = require('../')(env);
 var storage = require('@google-cloud/storage')(env);
 
 describe('BigQuery', function() {
-  var DATASET_ID = ('gcloud_test_dataset_temp' + uuid.v1()).replace(/-/g, '_');
-  var dataset = bigquery.dataset(DATASET_ID);
-  var TABLE_ID = 'myKittens';
-  var table = dataset.table(TABLE_ID);
-  var BUCKET_NAME = 'gcloud-test-bucket-temp-' + uuid.v1();
-  var bucket = storage.bucket(BUCKET_NAME);
+  var GCLOUD_TESTS_PREFIX = 'gcloud_test_';
+
+  var dataset = bigquery.dataset(generateName('dataset'));
+  var table = dataset.table(generateName('table'));
+  var bucket = storage.bucket(generateName('bucket'));
 
   var query = 'SELECT url FROM [publicdata:samples.github_nested] LIMIT 100';
 
   before(function(done) {
     async.series([
+      // Remove buckets created for the tests.
+      deleteBuckets,
+
+      // Remove datasets created for the tests.
+      deleteDatasets,
+
       // Create the test dataset.
-      function(next) {
-        dataset.create(next);
-      },
+      dataset.create.bind(dataset),
 
       // Create the test table.
-      function(next) {
-        table.create({
-          schema: 'id:integer,breed,name,dob:timestamp,around:boolean'
-        }, next);
-      },
+      table.create.bind(table, {
+        schema: 'id:integer,breed,name,dob:timestamp,around:boolean'
+      }),
 
       // Create a Bucket.
-      function(next) {
-        bucket.create(next);
-      }
+      bucket.create.bind(bucket)
     ], done);
   });
 
   after(function(done) {
     async.parallel([
-      // Delete the bucket we used.
-      function(next) {
-        bucket.getFiles(function(err, files) {
-          if (err) {
-            next(err);
-            return;
-          }
+      // Remove buckets created for the tests.
+      deleteBuckets,
 
-          async.map(files, function(file, onComplete) {
-            file.delete(onComplete);
-          }, function(err) {
-            if (err) {
-              next(err);
-              return;
-            }
-
-            bucket.delete(next);
-          });
-        });
-      },
-
-      // Delete the test dataset.
-      function(next) {
-        dataset.delete({ force: true }, next);
-      }
+      // Remove datasets created for the tests.
+      deleteDatasets
     ], done);
   });
 
@@ -113,11 +92,6 @@ describe('BigQuery', function() {
 
     bigquery.getDatasets({ maxApiCalls: maxApiCalls }, function(err) {
       assert.ifError(err);
-
-      // Even though the request interceptor is called, the request can still be
-      // prevented if the `maxApiCalls` limit was reached.
-      numRequestsMade -= 1;
-
       assert.strictEqual(numRequestsMade, 1);
       done();
     });
@@ -281,6 +255,57 @@ describe('BigQuery', function() {
           done();
         });
     });
+
+    it('should create a Table with a nested schema', function(done) {
+      var table = dataset.table(generateName('table'));
+
+      table.create({
+        schema: {
+          fields: [
+            {
+              name: 'id',
+              type: 'INTEGER'
+            },
+            {
+              name: 'details',
+              fields: [
+                {
+                  name: 'nested_id',
+                  type: 'INTEGER'
+                }
+              ]
+            }
+          ]
+        }
+      }, function(err) {
+        assert.ifError(err);
+
+        table.getMetadata(function(err, metadata) {
+          assert.ifError(err);
+
+          assert.deepEqual(metadata.schema, {
+            fields: [
+              {
+                name: 'id',
+                type: 'INTEGER'
+              },
+              {
+                name: 'details',
+                type: 'RECORD',
+                fields: [
+                  {
+                    name: 'nested_id',
+                    type: 'INTEGER'
+                  }
+                ]
+              }
+            ]
+          });
+
+          done();
+        });
+      });
+    });
   });
 
   describe('BigQuery/Table', function() {
@@ -384,7 +409,7 @@ describe('BigQuery', function() {
           function query(callback) {
             var row;
 
-            table.query('SELECT * FROM ' + TABLE_ID + ' WHERE id = ' + data.id)
+            table.query('SELECT * FROM ' + table.id + ' WHERE id = ' + data.id)
               .on('error', callback)
               .once('data', function(row_) { row = row_; })
               .on('end', function() {
@@ -420,4 +445,57 @@ describe('BigQuery', function() {
       });
     });
   });
+
+  function generateName(resourceType) {
+    return (GCLOUD_TESTS_PREFIX + resourceType + '_' + uuid.v1())
+      .replace(/-/g, '_');
+  }
+
+  function deleteBuckets(callback) {
+    function deleteBucket(bucket, callback) {
+      bucket.getFiles(function(err, files) {
+        if (err) {
+          callback(err);
+          return;
+        }
+
+        async.each(files, function(file, next) {
+          file.delete(next);
+        }, function(err) {
+          if (err) {
+            callback(err);
+            return;
+          }
+
+          bucket.delete(callback);
+        });
+      });
+    }
+
+    storage.getBuckets({
+      prefix: GCLOUD_TESTS_PREFIX
+    }, function(err, buckets) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      async.each(buckets, deleteBucket, callback);
+    });
+  }
+
+  function deleteDatasets(callback) {
+    bigquery.getDatasets({
+      prefix: GCLOUD_TESTS_PREFIX
+    }, function(err, datasets) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      async.each(datasets, function(dataset, next) {
+        dataset.delete({ force: true }, next);
+      }, callback);
+    });
+  }
 });

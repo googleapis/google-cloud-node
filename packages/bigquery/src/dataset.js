@@ -199,6 +199,16 @@ Dataset.prototype.createTable = function(id, options, callback) {
     };
   }
 
+  if (body.schema && body.schema.fields) {
+    body.schema.fields = body.schema.fields.map(function(field) {
+      if (field.fields) {
+        field.type = 'RECORD';
+      }
+
+      return field;
+    });
+  }
+
   this.request({
     method: 'POST',
     uri: '/tables',
