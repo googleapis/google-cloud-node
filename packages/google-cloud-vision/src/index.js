@@ -1550,3 +1550,4 @@ Vision.formatSafeSearchAnnotation_ = function(ssAnnotation, options) {
 };
 
 module.exports = Vision;
+module.exports.v1 = require('./v1');
