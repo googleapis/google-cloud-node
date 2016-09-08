@@ -67,7 +67,7 @@ var PKG = require('../package.json');
  * @alias module:logging
 
  * @resource [What is Google Cloud Logging?]{@link https://cloud.google.com/logging/docs}
- * @resource [Introduction to the Cloud Logging API]{@link https://cloud.google.com/logging/docs/api}
+ * @resource [Introduction to the Stackdriver Logging API]{@link https://cloud.google.com/logging/docs/api}
  *
  * @param {object} options - [Configuration object](#/docs).
  */

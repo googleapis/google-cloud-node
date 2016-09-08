@@ -88,7 +88,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
   * Cloud Bigtable Table Admin API
   * Google Cloud Datastore API
   * Google Cloud DNS API
-  * Google Cloud Logging API
+  * Stackdriver Logging API
   * Google Cloud Natural Language API
   * Google Cloud Pub/Sub API
   * Google Cloud Resource Manager API
@@ -727,7 +727,7 @@ var gcloud = require('google-cloud');
 var logging = gcloud.logging;
 ```
 
-#### Using the Cloud Logging API module
+#### Using the Stackdriver Logging API module
 
 ```
 $ npm install --save @google-cloud/logging
