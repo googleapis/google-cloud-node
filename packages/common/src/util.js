@@ -38,6 +38,12 @@ var streamEvents = require('stream-events');
 var through = require('through2');
 var uniq = require('array-uniq');
 
+/** @const {object} @google-cloud/common's package.json file. */
+var PKG = require('../package.json');
+
+/** @const {string} User agent. */
+var USER_AGENT = PKG.name + '/' + PKG.version;
+
 var util = module.exports;
 
 var errorMessage = format([
@@ -460,6 +466,11 @@ util.makeRequest = makeRequest;
  */
 function decorateRequest(reqOpts, config) {
   config = config || {};
+  reqOpts.headers = reqOpts.headers || {};
+
+  var headers = reqOpts.headers;
+  var userAgent = headers['User-Agent'] || headers['user-agent'];
+  headers['User-Agent'] = userAgent || config.userAgent || USER_AGENT;
 
   if (is.object(reqOpts.qs)) {
     delete reqOpts.qs.autoPaginate;
@@ -614,19 +625,3 @@ function isCustomType(unknown, module) {
 }
 
 util.isCustomType = isCustomType;
-
-/**
- * Create a properly-formatted User-Agent string from a package.json file.
- *
- * @param {object} packageJson - A module's package.json file.
- * @return {string} userAgent - The formatted User-Agent string.
- */
-function getUserAgentFromPackageJson(packageJson) {
-  var hyphenatedPackageName = packageJson.name
-    .replace('@google-cloud', 'gcloud-node') // For legacy purposes.
-    .replace('/', '-'); // For UA spec-compliance purposes.
-
-  return hyphenatedPackageName + '/' + packageJson.version;
-}
-
-util.getUserAgentFromPackageJson = getUserAgentFromPackageJson;

@@ -28,7 +28,6 @@ var sinon = require('sinon').sandbox.create();
 var through = require('through2');
 
 var util = require('../src/util.js');
-var fakeUtil = extend({}, util);
 
 function FakeService() {
   this.calledWith_ = arguments;
@@ -93,10 +92,6 @@ describe('GrpcService', function() {
     proto: {},
     service: 'Service',
     apiVersion: 'v1',
-    packageJson: {
-      name: '@google-cloud/service',
-      version: '0.2.0'
-    },
     grpcMetadata: {
       property: 'value'
     }
@@ -120,8 +115,7 @@ describe('GrpcService', function() {
       'google-proto-files': fakeGoogleProtoFiles,
       'retry-request': fakeRetryRequest,
       grpc: fakeGrpc,
-      './service.js': FakeService,
-      './util.js': fakeUtil
+      './service.js': FakeService
     });
     GrpcServiceCached = extend(true, {}, GrpcService);
   });
@@ -249,12 +243,6 @@ describe('GrpcService', function() {
       assert.strictEqual(calledWith[1], OPTIONS);
     });
 
-    it('should set insecure credentials if using customEndpoint', function() {
-      var config = extend({}, CONFIG, { customEndpoint: true });
-      var grpcService = new GrpcService(config, OPTIONS);
-      assert.strictEqual(grpcService.grpcCredentials.name, 'createInsecure');
-    });
-
     it('should default grpcMetadata to empty metadata', function() {
       var fakeGrpcMetadata = {};
 
@@ -289,20 +277,6 @@ describe('GrpcService', function() {
       assert.strictEqual(grpcService.maxRetries, OPTIONS.maxRetries);
     });
 
-    it('should set the correct user-agent', function() {
-      var userAgent = 'user-agent/0.0.0';
-
-      var getUserAgentFn = fakeUtil.getUserAgentFromPackageJson;
-      fakeUtil.getUserAgentFromPackageJson = function(packageJson) {
-        fakeUtil.getUserAgentFromPackageJson = getUserAgentFn;
-        assert.strictEqual(packageJson, CONFIG.packageJson);
-        return userAgent;
-      };
-
-      var grpcService = new GrpcService(CONFIG, OPTIONS);
-      assert.strictEqual(grpcService.userAgent, userAgent);
-    });
-
     it('should get the root directory for the proto files', function(done) {
       googleProtoFilesOverride = function(path) {
         assert.strictEqual(path, '..');
@@ -311,6 +285,12 @@ describe('GrpcService', function() {
       };
 
       new GrpcService(CONFIG, OPTIONS);
+    });
+
+    it('should set insecure credentials if using customEndpoint', function() {
+      var config = extend({}, CONFIG, { customEndpoint: true });
+      var grpcService = new GrpcService(config, OPTIONS);
+      assert.strictEqual(grpcService.grpcCredentials.name, 'createInsecure');
     });
 
     it('should localize the service', function() {
@@ -1518,13 +1498,9 @@ describe('GrpcService', function() {
 
       grpcService.protos = {
         Service: {
-          Service: function(baseUrl, grpcCredentials, userAgent) {
+          Service: function(baseUrl, grpcCredentials) {
             assert.strictEqual(baseUrl, grpcService.baseUrl);
             assert.strictEqual(grpcCredentials, grpcService.grpcCredentials);
-            assert.deepEqual(userAgent, {
-              'grpc.primary_user_agent': grpcService.userAgent
-            });
-
             return fakeService;
           }
         }
