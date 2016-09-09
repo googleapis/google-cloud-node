@@ -131,16 +131,4 @@ GrpcServiceObject.prototype.requestWritableStream = function() {
   return this.parent.requestWritableStream.apply(this.parent, arguments);
 };
 
-/**
- * Patch a writable streaming request to the GrpcService object.
- *
- * @private
- */
-GrpcServiceObject.prototype.requestWritableStream = function(
-  protoOpts,
-  reqOpts
-) {
-  return this.parent.requestWritableStream(protoOpts, reqOpts);
-};
-
 module.exports = GrpcServiceObject;
