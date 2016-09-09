@@ -44,7 +44,6 @@ function fakeRetryRequest() {
   return (retryRequestOverride || retryRequest).apply(null, arguments);
 }
 
-
 var GrpcMetadataOverride;
 var grpcLoadOverride;
 var fakeGrpc = {
