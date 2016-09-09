@@ -50,24 +50,20 @@ var PKG = require('../package.json');
 
 /**
  * <p class="notice">
- *   **This is a Beta release of Google Cloud Logging.** This API is not covered
+ *   **This is a Beta release of Stackdriver Logging.** This API is not covered
  *   by any SLA or deprecation policy and may be subject to
  *   backward-incompatible changes.
  * </p>
  *
- * [Google Cloud Logging](https://cloud.google.com/logging/docs) collects and
- * stores logs from applications and services on the Google Cloud Platform:
- *
- *   - Export your logs to Google Cloud Storage, Google BigQuery, or Google
- *     Cloud Pub/Sub.
- *   - Integrate third-party logs from your virtual machine instances by
- *     installing the logging agent, `google-fluentd`.
+ * [Stackdriver Logging](https://cloud.google.com/logging/docs) allows you to
+ * store, search, analyze, monitor, and alert on log data and events from Google
+ * Cloud Platform and Amazon Web Services (AWS).
  *
  * @constructor
  * @alias module:logging
 
- * @resource [What is Google Cloud Logging?]{@link https://cloud.google.com/logging/docs}
- * @resource [Introduction to the Cloud Logging API]{@link https://cloud.google.com/logging/docs/api}
+ * @resource [What is Stackdriver Logging?]{@link https://cloud.google.com/logging/docs}
+ * @resource [Introduction to the Stackdriver Logging API]{@link https://cloud.google.com/logging/docs/api}
  *
  * @param {object} options - [Configuration object](#/docs).
  */
@@ -259,7 +255,7 @@ Logging.prototype.entry = function(resource, data) {
  *
  * @example
  * logging.getEntries(function(err, entries) {
- *   // `entries` is an array of Cloud Logging entry objects.
+ *   // `entries` is an array of Stackdriver Logging entry objects.
  *   // See the `data` property to read the data from the entry.
  * });
  *
@@ -284,7 +280,7 @@ Logging.prototype.entry = function(resource, data) {
  * logging.getEntries()
  *   .on('error', console.error)
  *   .on('data', function(entry) {
- *     // `entry` is a Cloud Logging entry object.
+ *     // `entry` is a Stackdriver Logging entry object.
  *     // See the `data` property to read the data from the entry.
  *   })
  *   .on('end', function() {
@@ -420,7 +416,7 @@ Logging.prototype.getSinks = function(options, callback) {
 };
 
 /**
- * Get a reference to a Cloud Logging log.
+ * Get a reference to a Stackdriver Logging log.
  *
  * @resource [Log Overview]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.logs}
  *
@@ -435,7 +431,7 @@ Logging.prototype.log = function(name) {
 };
 
 /**
- * Get a reference to a Cloud Logging sink.
+ * Get a reference to a Stackdriver Logging sink.
  *
  * @resource [Sink Overview]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.sinks}
  *
@@ -451,7 +447,7 @@ Logging.prototype.sink = function(name) {
 
 /**
  * This method is called when creating a sink with a Bucket destination. The
- * bucket must first grant proper ACL access to the Cloud Logging account.
+ * bucket must first grant proper ACL access to the Stackdriver Logging account.
  *
  * The parameters are the same as what {module:logging#createSink} accepts.
  *
@@ -475,7 +471,8 @@ Logging.prototype.setAclForBucket_ = function(name, config, callback) {
 
 /**
  * This method is called when creating a sink with a Dataset destination. The
- * dataset must first grant proper ACL access to the Cloud Logging account.
+ * dataset must first grant proper ACL access to the Stackdriver Logging
+ * account.
  *
  * The parameters are the same as what {module:logging#createSink} accepts.
  *
@@ -519,7 +516,7 @@ Logging.prototype.setAclForDataset_ = function(name, config, callback) {
 
 /**
  * This method is called when creating a sink with a Topic destination. The
- * topic must first grant proper ACL access to the Cloud Logging account.
+ * topic must first grant proper ACL access to the Stackdriver Logging account.
  *
  * The parameters are the same as what {module:logging#createSink} accepts.
  *

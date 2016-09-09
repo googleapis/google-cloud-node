@@ -290,7 +290,7 @@ Log.prototype.error = function(entry, options, callback) {
  *
  * @example
  * log.getEntries(function(err, entries) {
- *   // `entries` is an array of Cloud Logging entry objects.
+ *   // `entries` is an array of Stackdriver Logging entry objects.
  *   // See the `data` property to read the data from the entry.
  * });
  *
@@ -315,7 +315,7 @@ Log.prototype.error = function(entry, options, callback) {
  * log.getEntries()
  *   .on('error', console.error)
  *   .on('data', function(entry) {
- *     // `entry` is a Cloud Logging entry object.
+ *     // `entry` is a Stackdriver Logging entry object.
  *     // See the `data` property to read the data from the entry.
  *   })
  *   .on('end', function() {
@@ -396,7 +396,7 @@ Log.prototype.warning = function(entry, options, callback) {
 };
 
 /**
- * Write log entries to Cloud Logging.
+ * Write log entries to Stackdriver Logging.
  *
  * While you may write a single entry at a time, batching multiple entries
  * together is preferred to avoid reaching the queries per second limit.

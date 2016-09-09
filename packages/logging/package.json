@@ -2,7 +2,7 @@
   "name": "@google-cloud/logging",
   "version": "0.2.0",
   "author": "Google Inc.",
-  "description": "Google Cloud Logging Client Library for Node.js",
+  "description": "Stackdriver Logging Client Library for Node.js",
   "contributors": [
     {
       "name": "Burcu Dogan",
@@ -47,7 +47,9 @@
     "google cloud",
     "cloud",
     "google logging",
-    "logging"
+    "logging",
+    "stackdriver logging",
+    "stackdriver"
   ],
   "dependencies": {
     "@google-cloud/common": "^0.4.0",
