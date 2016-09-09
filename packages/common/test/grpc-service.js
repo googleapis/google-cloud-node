@@ -247,20 +247,14 @@ describe('GrpcService', function() {
       assert.strictEqual(calledWith[1], OPTIONS);
     });
 
-    it('should set grpcMetadata with the correct User Agent', function() {
-      var userAgentAdded = false;
+    it('should set insecure credentials if using customEndpoint', function() {
+      var config = extend({}, CONFIG, { customEndpoint: true });
+      var grpcService = new GrpcService(config, OPTIONS);
+      assert.strictEqual(grpcService.grpcCredentials.name, 'createInsecure');
+    });
 
-      var fakeGrpcMetadata = {
-        add: function(prop, value) {
-          assert.strictEqual(prop, 'User-Agent');
-          assert.strictEqual(value, [
-            CONFIG.packageJson.name.replace('@google-cloud', 'gcloud-node'),
-            CONFIG.packageJson.version
-          ].join('/'));
-
-          userAgentAdded = true;
-        }
-      };
+    it('should default grpcMetadata to empty metadata', function() {
+      var fakeGrpcMetadata = {};
 
       GrpcMetadataOverride = function() {
         return fakeGrpcMetadata;
@@ -271,22 +265,13 @@ describe('GrpcService', function() {
 
       var grpcService = new GrpcService(config, OPTIONS);
       assert.strictEqual(grpcService.grpcMetadata, fakeGrpcMetadata);
-      assert.strictEqual(userAgentAdded, true);
     });
 
     it('should create and localize grpcMetadata', function() {
-      var userAgentAdded = false;
-
       var fakeGrpcMetadata = {
         add: function(prop, value) {
-          if (prop === 'User-Agent') {
-            return; // Already tested.
-          }
-
           assert.strictEqual(prop, Object.keys(CONFIG.grpcMetadata)[0]);
           assert.strictEqual(value, CONFIG.grpcMetadata[prop]);
-
-          userAgentAdded = true;
         }
       };
 
@@ -296,11 +281,14 @@ describe('GrpcService', function() {
 
       var grpcService = new GrpcService(CONFIG, OPTIONS);
       assert.strictEqual(grpcService.grpcMetadata, fakeGrpcMetadata);
-      assert.strictEqual(userAgentAdded, true);
     });
 
     it('should localize maxRetries', function() {
       assert.strictEqual(grpcService.maxRetries, OPTIONS.maxRetries);
+    });
+
+    it('should set the correct user-agent', function() {
+      assert.strictEqual(grpcService.userAgent, 'gcloud-node-service/0.2.0');
     });
 
     it('should get the root directory for the proto files', function(done) {
@@ -311,12 +299,6 @@ describe('GrpcService', function() {
       };
 
       new GrpcService(CONFIG, OPTIONS);
-    });
-
-    it('should set insecure credentials if using customEndpoint', function() {
-      var config = extend({}, CONFIG, { customEndpoint: true });
-      var grpcService = new GrpcService(config, OPTIONS);
-      assert.strictEqual(grpcService.grpcCredentials.name, 'createInsecure');
     });
 
     it('should localize the service', function() {
@@ -1524,9 +1506,13 @@ describe('GrpcService', function() {
 
       grpcService.protos = {
         Service: {
-          Service: function(baseUrl, grpcCredentials) {
+          Service: function(baseUrl, grpcCredentials, userAgent) {
             assert.strictEqual(baseUrl, grpcService.baseUrl);
             assert.strictEqual(grpcCredentials, grpcService.grpcCredentials);
+            assert.deepEqual(userAgent, {
+              'grpc.primary_user_agent': grpcService.userAgent
+            });
+
             return fakeService;
           }
         }

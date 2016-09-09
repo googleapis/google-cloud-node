@@ -161,11 +161,6 @@ function GrpcService(config, options) {
 
   this.grpcMetadata = new grpc.Metadata();
 
-  this.grpcMetadata.add('User-Agent', [
-    config.packageJson.name.replace('@google-cloud', 'gcloud-node'),
-    config.packageJson.version
-  ].join('/'));
-
   if (config.grpcMetadata) {
     for (var prop in config.grpcMetadata) {
       if (config.grpcMetadata.hasOwnProperty(prop)) {
@@ -175,6 +170,11 @@ function GrpcService(config, options) {
   }
 
   this.maxRetries = options.maxRetries;
+
+  var hyphenatedPackageName = config.packageJson.name
+    .replace('@google-cloud', 'gcloud-node') // For legacy purposes.
+    .replace('/', '-'); // For UA spec-compliance purposes.
+  this.userAgent = hyphenatedPackageName + '/' + config.packageJson.version;
 
   var apiVersion = config.apiVersion;
   var service = this.service = config.service;
@@ -737,7 +737,8 @@ GrpcService.prototype.getService_ = function(protoOpts) {
   if (!service) {
     service = new proto[protoOpts.service](
       proto.baseUrl || this.baseUrl,
-      this.grpcCredentials
+      this.grpcCredentials,
+      { 'grpc.primary_user_agent': this.userAgent }
     );
 
     this.activeServiceMap_.set(protoOpts.service, service);
