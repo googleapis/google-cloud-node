@@ -41,7 +41,7 @@
     "array-uniq": "^1.0.2",
     "arrify": "^1.0.0",
     "concat-stream": "^1.5.0",
-    "create-error-class": "^2.0.1",
+    "create-error-class": "^3.0.2",
     "dot-prop": "^2.4.0",
     "duplexify": "^3.2.0",
     "ent": "^2.2.0",
@@ -60,7 +60,6 @@
     "through2": "^2.0.0"
   },
   "devDependencies": {
-    "methmeth": "^1.0.0",
     "mocha": "^3.0.1",
     "node-uuid": "^1.4.3",
     "proxyquire": "^1.7.10",
