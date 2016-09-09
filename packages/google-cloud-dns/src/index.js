@@ -32,8 +32,6 @@ var util = require('util');
  */
 var Zone = require('./zone.js');
 
-var PKG = require('../package.json');
-
 /**
  * [Google Cloud DNS](https://cloud.google.com/dns/what-is-cloud-dns) is a high-
  * performance, resilient, global DNS service that provides a cost-effective way
@@ -60,7 +58,7 @@ function DNS(options) {
       'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
       'https://www.googleapis.com/auth/cloud-platform'
     ],
-    userAgent: PKG.name + '/' + PKG.version
+    packageJson: require('../package.json')
   };
 
   common.Service.call(this, config, options);
