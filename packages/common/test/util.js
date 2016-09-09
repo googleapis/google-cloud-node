@@ -1153,60 +1153,6 @@ describe('common/util', function() {
   });
 
   describe('decorateRequest', function() {
-    it('should keep user agent', function() {
-      var USER_AGENT = 'test/v1';
-
-      var reqOpts = {
-        a: 'b',
-        c: 'd',
-        headers: {
-          'User-Agent': USER_AGENT
-        }
-      };
-
-      var expectedReqOpts = extend({}, reqOpts, {
-        headers: {
-          'User-Agent': USER_AGENT
-        }
-      });
-
-      var decoratedReqOpts = util.decorateRequest(reqOpts);
-      assert.deepEqual(decoratedReqOpts, expectedReqOpts);
-    });
-
-    it('should add the user agent', function() {
-      var USER_AGENT = 'test/v2';
-
-      var reqOpts = { a: 'b', c: 'd' };
-
-      var expectedReqOpts = extend({}, reqOpts, {
-        headers: {
-          'User-Agent': USER_AGENT
-        }
-      });
-
-      var decoratedReqOpts = util.decorateRequest(reqOpts, {
-        userAgent: USER_AGENT
-      });
-      assert.deepEqual(decoratedReqOpts, expectedReqOpts);
-    });
-
-    it('should add the default user agent', function() {
-      var PKG = require('../package.json');
-      var USER_AGENT = PKG.name + '/' + PKG.version;
-
-      var reqOpts = { a: 'b', c: 'd' };
-
-      var expectedReqOpts = extend({}, reqOpts, {
-        headers: {
-          'User-Agent': USER_AGENT
-        }
-      });
-
-      var decoratedReqOpts = util.decorateRequest(reqOpts);
-      assert.deepEqual(decoratedReqOpts, expectedReqOpts);
-    });
-
     it('should delete qs.autoPaginate', function() {
       var decoratedReqOpts = util.decorateRequest({
         qs: {
@@ -1415,6 +1361,17 @@ describe('common/util', function() {
       it('should not match if the wrong ServiceObject', function() {
         assert(!util.isCustomType(subscription, 'pubsub/topic'));
       });
+    });
+  });
+
+  describe('getUserAgentFromPackageJson', function() {
+    it('should format a User Agent string from a package.json', function() {
+      var userAgent = util.getUserAgentFromPackageJson({
+        name: '@google-cloud/storage',
+        version: '0.1.0'
+      });
+
+      assert.strictEqual(userAgent, 'gcloud-node-storage/0.1.0');
     });
   });
 });

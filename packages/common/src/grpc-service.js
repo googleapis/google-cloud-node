@@ -37,6 +37,12 @@ var through = require('through2');
 var Service = require('./service.js');
 
 /**
+ * @type {module:common/util}
+ * @private
+ */
+var util = require('./util.js');
+
+/**
  * @const {object} - A map of protobuf codes to HTTP status codes.
  * @private
  */
@@ -170,6 +176,7 @@ function GrpcService(config, options) {
   }
 
   this.maxRetries = options.maxRetries;
+  this.userAgent = util.getUserAgentFromPackageJson(config.packageJson);
 
   var apiVersion = config.apiVersion;
   var service = this.service = config.service;
@@ -732,7 +739,8 @@ GrpcService.prototype.getService_ = function(protoOpts) {
   if (!service) {
     service = new proto[protoOpts.service](
       proto.baseUrl || this.baseUrl,
-      this.grpcCredentials
+      this.grpcCredentials,
+      { 'grpc.primary_user_agent': this.userAgent }
     );
 
     this.activeServiceMap_.set(protoOpts.service, service);
