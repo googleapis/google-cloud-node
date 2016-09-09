@@ -28,6 +28,7 @@ var sinon = require('sinon').sandbox.create();
 var through = require('through2');
 
 var util = require('../src/util.js');
+var fakeUtil = extend({}, util);
 
 function FakeService() {
   this.calledWith_ = arguments;
@@ -42,6 +43,7 @@ var retryRequestOverride;
 function fakeRetryRequest() {
   return (retryRequestOverride || retryRequest).apply(null, arguments);
 }
+
 
 var GrpcMetadataOverride;
 var grpcLoadOverride;
@@ -119,7 +121,8 @@ describe('GrpcService', function() {
       'google-proto-files': fakeGoogleProtoFiles,
       'retry-request': fakeRetryRequest,
       grpc: fakeGrpc,
-      './service.js': FakeService
+      './service.js': FakeService,
+      './util.js': fakeUtil
     });
     GrpcServiceCached = extend(true, {}, GrpcService);
   });
@@ -288,7 +291,17 @@ describe('GrpcService', function() {
     });
 
     it('should set the correct user-agent', function() {
-      assert.strictEqual(grpcService.userAgent, 'gcloud-node-service/0.2.0');
+      var userAgent = 'user-agent/0.0.0';
+
+      var getUserAgentFn = fakeUtil.getUserAgentFromPackageJson;
+      fakeUtil.getUserAgentFromPackageJson = function(packageJson) {
+        fakeUtil.getUserAgentFromPackageJson = getUserAgentFn;
+        assert.strictEqual(packageJson, CONFIG.packageJson);
+        return userAgent;
+      };
+
+      var grpcService = new GrpcService(CONFIG, OPTIONS);
+      assert.strictEqual(grpcService.userAgent, userAgent);
     });
 
     it('should get the root directory for the proto files', function(done) {

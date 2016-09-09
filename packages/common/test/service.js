@@ -221,11 +221,17 @@ describe('Service', function() {
     });
 
     it('should add the User Agent', function(done) {
+      var userAgent = 'user-agent/0.0.0';
+
+      var getUserAgentFn = util.getUserAgentFromPackageJson;
+      util.getUserAgentFromPackageJson = function(packageJson) {
+        util.getUserAgentFromPackageJson = getUserAgentFn;
+        assert.strictEqual(packageJson, service.packageJson);
+        return userAgent;
+      };
+
       service.makeAuthenticatedRequest = function(reqOpts) {
-        assert.strictEqual(reqOpts.headers['User-Agent'], [
-          CONFIG.packageJson.name.replace('@google-cloud', 'gcloud-node'),
-          CONFIG.packageJson.version
-        ].join('/'));
+        assert.strictEqual(reqOpts.headers['User-Agent'], userAgent);
         done();
       };
 

@@ -37,6 +37,12 @@ var through = require('through2');
 var Service = require('./service.js');
 
 /**
+ * @type {module:common/util}
+ * @private
+ */
+var util = require('./util.js');
+
+/**
  * @const {object} - A map of protobuf codes to HTTP status codes.
  * @private
  */
@@ -170,11 +176,7 @@ function GrpcService(config, options) {
   }
 
   this.maxRetries = options.maxRetries;
-
-  var hyphenatedPackageName = config.packageJson.name
-    .replace('@google-cloud', 'gcloud-node') // For legacy purposes.
-    .replace('/', '-'); // For UA spec-compliance purposes.
-  this.userAgent = hyphenatedPackageName + '/' + config.packageJson.version;
+  this.userAgent = util.getUserAgentFromPackageJson(config.packageJson);
 
   var apiVersion = config.apiVersion;
   var service = this.service = config.service;

@@ -116,10 +116,7 @@ Service.prototype.request = function(reqOpts, callback) {
   delete reqOpts.interceptors_;
 
   reqOpts.headers = extend({}, reqOpts.headers, {
-    'User-Agent': [
-      this.packageJson.name.replace('@google-cloud', 'gcloud-node'),
-      this.packageJson.version
-    ].join('/')
+    'User-Agent': util.getUserAgentFromPackageJson(this.packageJson)
   });
 
   return this.makeAuthenticatedRequest(reqOpts, callback);

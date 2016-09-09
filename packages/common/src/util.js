@@ -614,3 +614,19 @@ function isCustomType(unknown, module) {
 }
 
 util.isCustomType = isCustomType;
+
+/**
+ * Create a properly-formatted User-Agent string from a package.json file.
+ *
+ * @param {object} packageJson - A module's package.json file.
+ * @return {string} userAgent - The formatted User-Agent string.
+ */
+function getUserAgentFromPackageJson(packageJson) {
+  var hyphenatedPackageName = packageJson.name
+    .replace('@google-cloud', 'gcloud-node') // For legacy purposes.
+    .replace('/', '-'); // For UA spec-compliance purposes.
+
+  return hyphenatedPackageName + '/' + packageJson.version;
+}
+
+util.getUserAgentFromPackageJson = getUserAgentFromPackageJson;

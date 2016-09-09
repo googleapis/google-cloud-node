@@ -384,10 +384,7 @@ Translate.prototype.request = function(reqOpts, callback) {
       key: this.key
     },
     headers: {
-      'User-Agent': [
-        PKG.name.replace('@google-cloud', 'gcloud-node'),
-        PKG.version
-      ].join('/')
+      'User-Agent': common.util.getUserAgentFromPackageJson(PKG)
     }
   });
 

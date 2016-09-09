@@ -1363,4 +1363,15 @@ describe('common/util', function() {
       });
     });
   });
+
+  describe('getUserAgentFromPackageJson', function() {
+    it('should format a User Agent string from a package.json', function() {
+      var userAgent = util.getUserAgentFromPackageJson({
+        name: '@google-cloud/storage',
+        version: '0.1.0'
+      });
+
+      assert.strictEqual(userAgent, 'gcloud-node-storage/0.1.0');
+    });
+  });
 });
