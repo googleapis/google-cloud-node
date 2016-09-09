@@ -25,8 +25,6 @@ var proxyquire = require('proxyquire');
 var Service = require('@google-cloud/common').Service;
 var util = require('@google-cloud/common').util;
 
-var PKG = require('../package.json');
-
 var slice = Array.prototype.slice;
 
 var fakeUtil = extend({}, util, {
@@ -183,7 +181,7 @@ describe('Compute', function() {
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/compute'
       ]);
-      assert.strictEqual(calledWith.userAgent, PKG.name + '/' + PKG.version);
+      assert.deepEqual(calledWith.packageJson, require('../package.json'));
     });
   });
 

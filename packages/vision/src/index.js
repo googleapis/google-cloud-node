@@ -32,8 +32,6 @@ var request = require('request');
 var rgbHex = require('rgb-hex');
 var util = require('util');
 
-var PKG = require('../package.json');
-
 var VERY_UNLIKELY = 0;
 var UNLIKELY = 1;
 var POSSIBLE = 2;
@@ -72,7 +70,7 @@ function Vision(options) {
     scopes: [
       'https://www.googleapis.com/auth/cloud-platform'
     ],
-    userAgent: PKG.name + '/' + PKG.version
+    packageJson: require('../package.json')
   };
 
   common.Service.call(this, config, options);

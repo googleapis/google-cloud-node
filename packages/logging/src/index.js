@@ -46,8 +46,6 @@ var Log = require('./log.js');
  */
 var Sink = require('./sink.js');
 
-var PKG = require('../package.json');
-
 /**
  * <p class="notice">
  *   **This is a Beta release of Stackdriver Logging.** This API is not covered
@@ -85,7 +83,7 @@ function Logging(options) {
     scopes: [
       'https://www.googleapis.com/auth/cloud-platform'
     ],
-    userAgent: PKG.name + '/' + PKG.version
+    packageJson: require('../package.json')
   };
 
   common.GrpcService.call(this, config, options);

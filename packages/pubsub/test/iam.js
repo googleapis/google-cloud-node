@@ -65,6 +65,7 @@ describe('IAM', function() {
         'https://www.googleapis.com/auth/pubsub',
         'https://www.googleapis.com/auth/cloud-platform'
       ]);
+      assert.deepEqual(config.packageJson, require('../package.json'));
 
       assert.strictEqual(options, PUBSUB.options);
     });

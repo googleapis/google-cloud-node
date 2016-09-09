@@ -24,8 +24,6 @@ var proxyquire = require('proxyquire');
 var Service = require('@google-cloud/common').Service;
 var util = require('@google-cloud/common').util;
 
-var PKG = require('../package.json');
-
 var extended = false;
 var fakeStreamRouter = {
   extend: function(Class, methods) {
@@ -113,7 +111,7 @@ describe('DNS', function() {
         'https://www.googleapis.com/auth/ndev.clouddns.readwrite',
         'https://www.googleapis.com/auth/cloud-platform'
       ]);
-      assert.strictEqual(calledWith.userAgent, PKG.name + '/' + PKG.version);
+      assert.deepEqual(calledWith.packageJson, require('../package.json'));
     });
   });
 

@@ -24,8 +24,6 @@ var proxyquire = require('proxyquire');
 var Service = require('@google-cloud/common').Service;
 var util = require('@google-cloud/common').util;
 
-var PKG = require('../package.json');
-
 function FakeChannel() {
   this.calledWith_ = arguments;
 }
@@ -110,7 +108,7 @@ describe('Storage', function() {
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/devstorage.full_control'
       ]);
-      assert.strictEqual(calledWith.userAgent, PKG.name + '/' + PKG.version);
+      assert.deepEqual(calledWith.packageJson, require('../package.json'));
     });
   });
 

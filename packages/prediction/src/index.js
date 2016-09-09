@@ -33,8 +33,6 @@ var util = require('util');
  */
 var Model = require('./model.js');
 
-var PKG = require('../package.json');
-
 /**
  * The [Google Prediction API](https://cloud.google.com/prediction/docs/getting-started)
  * provides pattern-matching and machine learning capabilities. Given a set of
@@ -70,7 +68,7 @@ function Prediction(options) {
       'https://www.googleapis.com/auth/prediction',
       'https://www.googleapis.com/auth/devstorage.read_only'
     ],
-    userAgent: PKG.name + '/' + PKG.version
+    packageJson: require('../package.json')
   };
 
   common.Service.call(this, config, options);

@@ -384,7 +384,7 @@ Translate.prototype.request = function(reqOpts, callback) {
       key: this.key
     },
     headers: {
-      'User-Agent': PKG.name + '/' + PKG.version
+      'User-Agent': common.util.getUserAgentFromPackageJson(PKG)
     }
   });
 

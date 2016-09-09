@@ -22,8 +22,6 @@ var extend = require('extend');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
-var PKG = require('../package.json');
-
 var SubscriptionCached = require('../src/subscription.js');
 var SubscriptionOverride;
 
@@ -124,7 +122,7 @@ describe('PubSub', function() {
         'https://www.googleapis.com/auth/pubsub',
         'https://www.googleapis.com/auth/cloud-platform'
       ]);
-      assert.strictEqual(calledWith.userAgent, PKG.name + '/' + PKG.version);
+      assert.deepEqual(calledWith.packageJson, require('../package.json'));
     });
 
     it('should set the defaultBaseUrl_', function() {

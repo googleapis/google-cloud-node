@@ -21,8 +21,6 @@ var extend = require('extend');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
-var PKG = require('../package.json');
-
 var makeRequestOverride;
 var fakeUtil = extend({}, util, {
   makeRequest: function() {
@@ -386,6 +384,15 @@ describe('Translate', function() {
 
   describe('request', function() {
     it('should make the correct request', function(done) {
+      var userAgent = 'user-agent/0.0.0';
+
+      var getUserAgentFn = fakeUtil.getUserAgentFromPackageJson;
+      fakeUtil.getUserAgentFromPackageJson = function(packageJson) {
+        fakeUtil.getUserAgentFromPackageJson = getUserAgentFn;
+        assert.deepEqual(packageJson, require('../package.json'));
+        return userAgent;
+      };
+
       var reqOpts = {
         uri: '/test',
         a: 'b',
@@ -401,7 +408,7 @@ describe('Translate', function() {
           key: translate.key
         },
         headers: {
-          'User-Agent': PKG.name + '/' + PKG.version
+          'User-Agent': userAgent
         }
       });
       var BASE_URL = 'https://www.googleapis.com/language/translate/v2';

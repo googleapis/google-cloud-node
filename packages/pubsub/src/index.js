@@ -38,8 +38,6 @@ var Subscription = require('./subscription.js');
  */
 var Topic = require('./topic.js');
 
-var PKG = require('../package.json');
-
 /**
  * [Google Cloud Pub/Sub](https://developers.google.com/pubsub/overview) is a
  * reliable, many-to-many, asynchronous messaging service from Google Cloud
@@ -73,7 +71,7 @@ function PubSub(options) {
       'https://www.googleapis.com/auth/pubsub',
       'https://www.googleapis.com/auth/cloud-platform'
     ],
-    userAgent: PKG.name + '/' + PKG.version
+    packageJson: require('../package.json')
   };
 
   this.options = options;
