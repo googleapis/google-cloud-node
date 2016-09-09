@@ -70,7 +70,7 @@ describe('Bigtable', function() {
       }
 
       var testInstances = instances.filter(function(instance) {
-        return instance.id.indexOf(PREFIX) === 0;
+        return instance.id.match(PREFIX);
       });
 
       async.eachLimit(testInstances, 5, function(instance, next) {
