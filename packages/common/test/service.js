@@ -39,7 +39,11 @@ describe('Service', function() {
   var CONFIG = {
     scopes: [],
     baseUrl: 'base-url',
-    projectIdRequired: false
+    projectIdRequired: false,
+    packageJson: {
+      name: '@google-cloud/service',
+      version: '0.2.0'
+    }
   };
 
   var OPTIONS = {
@@ -129,6 +133,10 @@ describe('Service', function() {
       assert.deepEqual(service.interceptors, []);
     });
 
+    it('should localize package.json', function() {
+      assert.strictEqual(service.packageJson, CONFIG.packageJson);
+    });
+
     it('should localize the projectId', function() {
       assert.strictEqual(service.projectId, OPTIONS.projectId);
     });
@@ -206,6 +214,24 @@ describe('Service', function() {
 
       service.makeAuthenticatedRequest = function(reqOpts_) {
         assert.strictEqual(reqOpts_.uri, expectedUri);
+        done();
+      };
+
+      service.request(reqOpts, assert.ifError);
+    });
+
+    it('should add the User Agent', function(done) {
+      var userAgent = 'user-agent/0.0.0';
+
+      var getUserAgentFn = util.getUserAgentFromPackageJson;
+      util.getUserAgentFromPackageJson = function(packageJson) {
+        util.getUserAgentFromPackageJson = getUserAgentFn;
+        assert.strictEqual(packageJson, service.packageJson);
+        return userAgent;
+      };
+
+      service.makeAuthenticatedRequest = function(reqOpts) {
+        assert.strictEqual(reqOpts.headers['User-Agent'], userAgent);
         done();
       };
 

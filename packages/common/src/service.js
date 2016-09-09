@@ -57,6 +57,7 @@ function Service(config, options) {
   this.getCredentials = this.makeAuthenticatedRequest.getCredentials;
   this.globalInterceptors = arrify(options.interceptors_);
   this.interceptors = [];
+  this.packageJson = config.packageJson;
   this.projectId = options.projectId;
   this.projectIdRequired = config.projectIdRequired !== false;
 }
@@ -113,6 +114,10 @@ Service.prototype.request = function(reqOpts, callback) {
   }
 
   delete reqOpts.interceptors_;
+
+  reqOpts.headers = extend({}, reqOpts.headers, {
+    'User-Agent': util.getUserAgentFromPackageJson(this.packageJson)
+  });
 
   return this.makeAuthenticatedRequest(reqOpts, callback);
 };
