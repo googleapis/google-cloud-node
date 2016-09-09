@@ -20,10 +20,10 @@ This client supports the following Google Cloud Platform services:
 * [Google Compute Engine](#google-compute-engine)
 * [Google Prediction API](#google-prediction-api)
 * [Google Translate API](#google-translate-api)
-* [Google Cloud Logging](#google-cloud-logging-beta) (Beta)
 * [Google Cloud Natural Language](#google-cloud-natural-language-beta) (Beta)
 * [Google Cloud Resource Manager](#google-cloud-resource-manager-beta) (Beta)
 * [Google Cloud Vision](#google-cloud-vision-beta) (Beta)
+* [Stackdriver Logging](#stackdriver-logging-beta) (Beta)
 
 If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
 
@@ -88,7 +88,6 @@ If you are not running this client on Google Compute Engine, you need a Google D
   * Cloud Bigtable Table Admin API
   * Google Cloud Datastore API
   * Google Cloud DNS API
-  * Stackdriver Logging API
   * Google Cloud Natural Language API
   * Google Cloud Pub/Sub API
   * Google Cloud Resource Manager API
@@ -98,6 +97,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
   * Google Compute Engine API
   * Google Translate API
   * Prediction API
+  * Stackdriver Logging API
 4. Navigate to **APIs & auth** >  **Credentials** and then:
   * If you want to use a new service account, click on **Create new Client ID** and select **Service account**. After the account is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
   * If you want to generate a new key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
@@ -709,78 +709,6 @@ translateClient.getLanguages(function(err, languages) {
 ```
 
 
-## Google Cloud Logging (Beta)
-
-> **This is a Beta release of Google Cloud Logging.** This API is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
-
-- [API Documentation][gcloud-logging-docs]
-- [Official Documentation][cloud-logging-docs]
-
-#### Using the all-in-one module
-
-```
-$ npm install --save google-cloud
-```
-
-```js
-var gcloud = require('google-cloud');
-var logging = gcloud.logging;
-```
-
-#### Using the Stackdriver Logging API module
-
-```
-$ npm install --save @google-cloud/logging
-```
-
-```js
-var logging = require('@google-cloud/logging');
-```
-
-#### Preview
-
-```js
-// Authenticating on a global-basis. You can also authenticate on a per-API-
-// basis (see Authentication section above).
-
-var loggingClient = logging({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-
-// Create a sink using a Bucket as a destination.
-var gcs = storage();
-
-loggingClient.createSink('my-new-sink', {
-  destination: gcs.bucket('my-sink')
-}, function(err, sink) {});
-
-// Write a critical entry to a log.
-var syslog = loggingClient.log('syslog');
-
-var resource = {
-  type: 'gce_instance',
-  labels: {
-    zone: 'global',
-    instance_id: '3'
-  }
-};
-
-var entry = syslog.entry(resource, {
-  delegate: process.env.user
-});
-
-syslog.critical(entry, function(err) {});
-
-// Get all entries in your project.
-loggingClient.getEntries(function(err, entries) {
-  if (!err) {
-    // `entries` contains all of the entries from the logs in your project.
-  }
-});
-```
-
-
 ## Google Cloud Natural Language (Beta)
 
 > **This is a Beta release of Google Cloud Natural Language.** This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
@@ -1047,6 +975,78 @@ visionClient.detectFaces('./image.jpg', function(err, faces) {
   //     surprised: false
   //   }
   // ]
+});
+```
+
+
+## Stackdriver Logging (Beta)
+
+> **This is a Beta release of Stackdriver Logging.** This API is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
+
+- [API Documentation][gcloud-logging-docs]
+- [Official Documentation][cloud-logging-docs]
+
+#### Using the all-in-one module
+
+```
+$ npm install --save google-cloud
+```
+
+```js
+var gcloud = require('google-cloud');
+var logging = gcloud.logging;
+```
+
+#### Using the Stackdriver Logging API module
+
+```
+$ npm install --save @google-cloud/logging
+```
+
+```js
+var logging = require('@google-cloud/logging');
+```
+
+#### Preview
+
+```js
+// Authenticating on a global-basis. You can also authenticate on a per-API-
+// basis (see Authentication section above).
+
+var loggingClient = logging({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+// Create a sink using a Bucket as a destination.
+var gcs = storage();
+
+loggingClient.createSink('my-new-sink', {
+  destination: gcs.bucket('my-sink')
+}, function(err, sink) {});
+
+// Write a critical entry to a log.
+var syslog = loggingClient.log('syslog');
+
+var resource = {
+  type: 'gce_instance',
+  labels: {
+    zone: 'global',
+    instance_id: '3'
+  }
+};
+
+var entry = syslog.entry(resource, {
+  delegate: process.env.user
+});
+
+syslog.critical(entry, function(err) {});
+
+// Get all entries in your project.
+loggingClient.getEntries(function(err, entries) {
+  if (!err) {
+    // `entries` contains all of the entries from the logs in your project.
+  }
 });
 ```
 

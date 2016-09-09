@@ -152,16 +152,12 @@ var apis = {
   language: require('@google-cloud/language'),
 
   /**
-   * [Google Cloud Logging](https://cloud.google.com/logging/docs) collects and
-   * stores logs from applications and services on the Google Cloud Platform:
-   *
-   *   - Export your logs to Google Cloud Storage, Google BigQuery, or Google
-   *     Cloud Pub/Sub.
-   *   - Integrate third-party logs from your virtual machine instances by
-   *     installing the logging agent, `google-fluentd`.
+   * [Stackdriver Logging](https://cloud.google.com/logging/docs) allows you to
+   * store, search, analyze, monitor, and alert on log data and events from
+   * Google Cloud Platform and Amazon Web Services (AWS).
    *
    * <p class="notice">
-   *   **This is a Beta release of Google Cloud Logging.** This API is not
+   *   **This is a Beta release of Stackdriver Logging.** This API is not
    *   covered by any SLA or deprecation policy and may be subject to backward-
    *   incompatible changes.
    * </p>
