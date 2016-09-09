@@ -24,8 +24,6 @@ var proxyquire = require('proxyquire');
 var Service = require('@google-cloud/common').Service;
 var util = require('@google-cloud/common').util;
 
-var PKG = require('../package.json');
-
 function FakeProject() {
   this.calledWith_ = [].slice.call(arguments);
 }
@@ -126,7 +124,7 @@ describe('Resource', function() {
         'https://www.googleapis.com/auth/cloud-platform'
       ]);
       assert.strictEqual(resource.projectIdRequired, false);
-      assert.strictEqual(calledWith.userAgent, PKG.name + '/' + PKG.version);
+      assert.deepEqual(calledWith.packageJson, require('../package.json'));
     });
   });
 

@@ -31,8 +31,6 @@ var util = require('util');
  */
 var Project = require('./project.js');
 
-var PKG = require('../package.json');
-
 /**
  * <p class="notice">
  *   **This is a Beta release of Cloud Resource Manager.** This feature is not
@@ -69,7 +67,7 @@ function Resource(options) {
     baseUrl: 'https://cloudresourcemanager.googleapis.com/v1beta1',
     scopes: ['https://www.googleapis.com/auth/cloud-platform'],
     projectIdRequired: false,
-    userAgent: PKG.name + '/' + PKG.version
+    packageJson: require('../package.json')
   };
 
   common.Service.call(this, config, options);
