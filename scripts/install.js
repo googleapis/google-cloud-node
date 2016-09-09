@@ -26,10 +26,10 @@ var directories = fs.readdirSync(path.join(__dirname, '../packages'));
 
 // This is a helper method which will auto-install all of the dependencies of
 // each module.
-async.eachSeries(directories, function(directory, callback) {
+async.eachLimit(directories, 5, function(directory, callback) {
   console.log('Installing dependencies for ' + directory);
 
-  exec('npm install', {
+  exec('npm install --force', {
     async: true,
     cwd: path.join(__dirname, '../packages', directory)
   }, callback);
