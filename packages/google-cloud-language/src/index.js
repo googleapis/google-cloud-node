@@ -32,8 +32,6 @@ var util = require('util');
  */
 var Document = require('./document.js');
 
-var PKG = require('../package.json');
-
 /**
  * <p class="notice">
  *   **This is a Beta release of Google Cloud Natural Language.** This API is
@@ -79,7 +77,7 @@ function Language(options) {
     scopes: [
       'https://www.googleapis.com/auth/cloud-platform'
     ],
-    userAgent: PKG.name + '/' + PKG.version
+    packageJson: require('../package.json')
   };
 
   common.GrpcService.call(this, config, options);

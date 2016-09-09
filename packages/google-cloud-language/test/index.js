@@ -22,8 +22,6 @@ var googleProtoFiles = require('google-proto-files');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
-var PKG = require('../package.json');
-
 var fakeUtil = extend(true, {}, util);
 
 function FakeDocument() {
@@ -98,7 +96,7 @@ describe('Language', function() {
         scopes: [
           'https://www.googleapis.com/auth/cloud-platform'
         ],
-        userAgent: PKG.name + '/' + PKG.version
+        packageJson: require('../package.json')
       });
     });
   });
