@@ -73,7 +73,8 @@ function IAM(pubsub, id) {
     scopes: [
       'https://www.googleapis.com/auth/pubsub',
       'https://www.googleapis.com/auth/cloud-platform'
-    ]
+    ],
+    packageJson: require('../package.json')
   };
 
   this.id = id;
