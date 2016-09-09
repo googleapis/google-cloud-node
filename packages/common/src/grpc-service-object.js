@@ -110,7 +110,7 @@ GrpcServiceObject.prototype.setMetadata = function(metadata, callback) {
  * @private
  */
 GrpcServiceObject.prototype.request = function() {
-  return this.parent.request.apply(this, arguments);
+  return this.parent.request.apply(this.parent, arguments);
 };
 
 /**
@@ -119,7 +119,7 @@ GrpcServiceObject.prototype.request = function() {
  * @private
  */
 GrpcServiceObject.prototype.requestStream = function() {
-  return this.parent.requestStream.apply(this, arguments);
+  return this.parent.requestStream.apply(this.parent, arguments);
 };
 
 /**
@@ -128,7 +128,7 @@ GrpcServiceObject.prototype.requestStream = function() {
  * @private
  */
 GrpcServiceObject.prototype.requestWritableStream = function() {
-  return this.parent.requestWritableStream.apply(this, arguments);
+  return this.parent.requestWritableStream.apply(this.parent, arguments);
 };
 
 module.exports = GrpcServiceObject;

@@ -184,7 +184,7 @@ describe('GrpcServiceObject', function() {
 
       grpcServiceObject.parent = {
         request: function() {
-          assert.strictEqual(this, grpcServiceObject);
+          assert.strictEqual(this, grpcServiceObject.parent);
           assert.deepEqual([].slice.call(arguments), args);
           return expectedReturnValue;
         }
@@ -202,7 +202,7 @@ describe('GrpcServiceObject', function() {
 
       grpcServiceObject.parent = {
         requestStream: function() {
-          assert.strictEqual(this, grpcServiceObject);
+          assert.strictEqual(this, grpcServiceObject.parent);
           assert.deepEqual([].slice.call(arguments), args);
           return expectedReturnValue;
         }
@@ -220,7 +220,7 @@ describe('GrpcServiceObject', function() {
 
       grpcServiceObject.parent = {
         requestWritableStream: function() {
-          assert.strictEqual(this, grpcServiceObject);
+          assert.strictEqual(this, grpcServiceObject.parent);
           assert.deepEqual([].slice.call(arguments), args);
           return expectedReturnValue;
         }
