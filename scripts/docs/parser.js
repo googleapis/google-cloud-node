@@ -98,6 +98,7 @@ function getId(fileName) {
   };
 
   var id = fileName
+    .replace(/\\/g, '/')
     .replace(/^(\.\/)?packages\//, '')
     .replace('src/', '')
     .replace('/index.js', '')
@@ -131,7 +132,7 @@ function getClassDesc(block) {
 }
 
 function getParent(id) {
-  var parent = id.replace(/\/.+/, '');
+  var parent = id.replace(/\\/g, '/').replace(/\/.+/, '');
 
   return parent === id ? null : parent;
 }
