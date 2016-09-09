@@ -978,7 +978,7 @@ File.prototype.createWriteStream = function(options) {
  * // Download a file to a local destination.
  * //-
  * file.download({
- *   destination: '/Users/stephen/Desktop/file-backup.txt'
+ *   destination: '/Users/me/Desktop/file-backup.txt'
  * }, function(err) {});
  */
 File.prototype.download = function(options, callback) {

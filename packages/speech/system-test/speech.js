@@ -271,11 +271,11 @@ describe('Speech', function() {
           }
         })
         .on('end', function() {
-          process.nextTick(function() {
+          setTimeout(function() {
             assert.strictEqual(responseEmitted, true);
             assert.strictEqual(correctDetectionsEmitted, 3);
             done();
-          });
+          }, 1500);
         });
     });
 
@@ -321,11 +321,11 @@ describe('Speech', function() {
           }
         })
         .on('end', function() {
-          process.nextTick(function() {
+          setTimeout(function() {
             assert.strictEqual(responseEmitted, true);
             assert.strictEqual(correctDetectionsEmitted, 3);
             done();
-          });
+          }, 1500);
         });
     });
   });

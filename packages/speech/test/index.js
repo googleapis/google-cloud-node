@@ -26,7 +26,6 @@ var through = require('through2');
 var tmp = require('tmp');
 
 var util = require('@google-cloud/common').util;
-var PKG = require('../package.json');
 
 var fakeUtil = extend({}, util);
 
@@ -120,7 +119,7 @@ describe('Speech', function() {
         scopes: [
           'https://www.googleapis.com/auth/cloud-platform'
         ],
-        userAgent: PKG.name + '/' + PKG.version
+        packageJson: require('../package.json')
       });
     });
   });

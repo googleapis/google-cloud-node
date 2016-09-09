@@ -35,8 +35,6 @@ var streamEvents = require('stream-events');
 var through = require('through2');
 var util = require('util');
 
-var PKG = require('../package.json');
-
 /**
  * The [Cloud Speech API](https://cloud.google.com/speech/docs) enables easy
  * integration of Google speech recognition technologies into developer
@@ -48,9 +46,9 @@ var PKG = require('../package.json');
  *
  * @classdesc
  * <p class="notice">
- *   **This is a Beta release of the Cloud Speech API.** This feature is not
- *   covered by any SLA or deprecation policy and may be subject to backward-
- *   incompatible changes.
+ *   **This is a Beta release of Google Cloud Speech.** This feature is not
+ *   covered by any SLA or deprecation policy and may be subject to
+ *   backward-incompatible changes.
  * </p>
  *
  * To learn more about the Speech API, see the
@@ -85,7 +83,7 @@ function Speech(options) {
     scopes: [
       'https://www.googleapis.com/auth/cloud-platform'
     ],
-    userAgent: PKG.name + '/' + PKG.version
+    packageJson: require('../package.json')
   };
 
   common.GrpcService.call(this, config, options);
@@ -351,7 +349,7 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  * Perform bidirectional streaming speech-recognition: receive results while
  * sending audio.
  *
- * @resource [`StreamingRecognize` API Reference]{@link https://  cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.Speech.StreamingRecognize}
+ * @resource [`StreamingRecognize` API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.Speech.StreamingRecognize}
  * @resource [`StreamingRecognizeRequest` API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognizeRequest}
  *
  * @param {object} config - A `StreamingRecognitionConfig` object. See
@@ -375,7 +373,7 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  *   interimResults: false
  * };
  *
- * fs.createReadStream('./system-test/data/bridge.raw')
+ * fs.createReadStream('./bridge.raw')
  *   .on('error', console.error)
  *   .pipe(speech.createRecognizeStream(request))
  *   .on('error', console.error)
@@ -383,23 +381,21 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  *     // The first "data" event emitted might look like:
  *     //   data = {
  *     //     endpointerType: Speech.endpointerTypes.START_OF_SPEECH,
- *     //     results: [],
+ *     //     results: "",
  *     //     ...
  *     //   }
  *
  *     // A later "data" event emitted might look like:
  *     //   data = {
  *     //     endpointerType: Speech.endpointerTypes.END_OF_AUDIO,
- *     //     results: [],
+ *     //     results: "",
  *     //     ...
  *     //   }
  *
  *     // A final "data" event emitted might look like:
  *     //   data = {
  *     //     endpointerType: Speech.endpointerTypes.END_OF_AUDIO,
- *     //     results: [
- *     //       "how old is the Brooklyn Bridge"
- *     //     ],
+ *     //     results: "how old is the Brooklyn Bridge",
  *     //     ...
  *     //   }
  *   });
@@ -536,9 +532,12 @@ Speech.prototype.operation = function(name) {
  *     response. See the examples below. Default: `false`.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {object[]} callback.results - `SyncRecognizeResponse`
- *     objects. See
- *     [`SyncRecognizeResponse`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#syncrecognizeresponse).
+ * @param {string|object[]} callback.results - By default, this will be a string
+ *     comprised of all of the transcriptions recognized from the audio. If
+ *     `config.verbose` is enabled, this is an object including a `transcript`
+ *     property, a `confidence` score from `0` - `100`, and an `alternatives`
+ *     array consisting of other transcription possibilities. See the examples
+ *     below for more.
  * @param {object} callback.apiResponse - Raw API response. See
  *     [`SyncRecognizeResponse`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#syncrecognizeresponse).
  *
@@ -548,14 +547,12 @@ Speech.prototype.operation = function(name) {
  *   sampleRate: 16000
  * };
  *
- * function callback(err, results, apiResponse) {
+ * function callback(err, transcript, apiResponse) {
  *   if (err) {
  *     // Error handling omitted.
  *   }
  *
- *   // results = [
- *   //   "how old is the Brooklyn Bridge"
- *   // ]
+ *   // transcript = "how old is the Brooklyn Bridge"
  * }
  *
  * //-
@@ -601,7 +598,13 @@ Speech.prototype.operation = function(name) {
  *   // results = [
  *   //   {
  *   //     transcript: "how old is the Brooklyn Bridge",
- *   //     confidence: 88.15
+ *   //     confidence: 88.15,
+ *   //     alternatives: [
+ *   //       {
+ *   //         transcript: "how old is the Brooklyn brim",
+ *   //         confidence: 22.39
+ *   //       }
+ *   //     ]
  *   //   }
  *   // ]
  * });
@@ -668,8 +671,8 @@ Speech.prototype.recognize = function(file, config, callback) {
  *     response. See the examples below. Default: `false`.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:speech/operation} callback.operation - `Operation` object. See
- *     [`Operation`](https://cloud.google.com/speech/reference/rpc/google.longrunning#google.longrunning.Operation).
+ * @param {module:speech/operation} callback.operation - An operation object
+ *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - Raw API response.
  *
  * @example
@@ -685,10 +688,8 @@ Speech.prototype.recognize = function(file, config, callback) {
  *
  *   operation
  *     .on('error', function(err) {})
- *     .on('complete', function(results) {
- *       // results = [
- *       //   "how old is the Brooklyn Bridge"
- *       // ]
+ *     .on('complete', function(transcript) {
+ *       // transcript = "how old is the Brooklyn Bridge"
  *     });
  * }
  *
