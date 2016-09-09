@@ -109,8 +109,8 @@ GrpcServiceObject.prototype.setMetadata = function(metadata, callback) {
  *
  * @private
  */
-GrpcServiceObject.prototype.request = function(protoOpts, reqOpts, callback) {
-  return this.parent.request(protoOpts, reqOpts, callback);
+GrpcServiceObject.prototype.request = function() {
+  return this.parent.request.apply(this.parent, arguments);
 };
 
 /**
@@ -118,8 +118,17 @@ GrpcServiceObject.prototype.request = function(protoOpts, reqOpts, callback) {
  *
  * @private
  */
-GrpcServiceObject.prototype.requestStream = function(protoOpts, reqOpts) {
-  return this.parent.requestStream(protoOpts, reqOpts);
+GrpcServiceObject.prototype.requestStream = function() {
+  return this.parent.requestStream.apply(this.parent, arguments);
+};
+
+/**
+ * Patch a writable streaming request to the GrpcService object.
+ *
+ * @private
+ */
+GrpcServiceObject.prototype.requestWritableStream = function() {
+  return this.parent.requestWritableStream.apply(this.parent, arguments);
 };
 
 module.exports = GrpcServiceObject;

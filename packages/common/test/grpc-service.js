@@ -17,6 +17,7 @@
 'use strict';
 
 var assert = require('assert');
+var duplexify = require('duplexify');
 var extend = require('extend');
 var googleProtoFiles = require('google-proto-files');
 var grpc = require('grpc');
@@ -1198,6 +1199,240 @@ describe('GrpcService', function() {
         };
 
         retryStream.emit('error', grpcError500);
+      });
+    });
+  });
+
+  describe('requestWritableStream', function() {
+    var PROTO_OPTS;
+    var REQ_OPTS = {};
+    var GRPC_CREDENTIALS = {};
+
+    function ProtoService() {}
+
+    beforeEach(function() {
+      PROTO_OPTS = { service: 'service', method: 'method', timeout: 3000 };
+      ProtoService.prototype.method = function() {};
+
+      grpcService.grpcCredentials = GRPC_CREDENTIALS;
+      grpcService.baseUrl = 'http://base-url';
+      grpcService.proto = {};
+      grpcService.proto.service = ProtoService;
+
+      grpcService.getService_ = function() {
+        return new ProtoService();
+      };
+    });
+
+    it('should not run in the gcloud sandbox environment', function() {
+      delete grpcService.grpcCredentials;
+
+      grpcService.getGrpcCredentials_ = function() {
+        throw new Error('Should not be called.');
+      };
+
+      global.GCLOUD_SANDBOX_ENV = true;
+      grpcService.requestWritableStream({});
+
+      delete global.GCLOUD_SANDBOX_ENV;
+    });
+
+    it('should get the proto service', function(done) {
+      ProtoService.prototype.method = function() {
+        return duplexify.obj();
+      };
+      grpcService.getService_ = function(protoOpts) {
+        assert.strictEqual(protoOpts, PROTO_OPTS);
+        setImmediate(done);
+        return new ProtoService();
+      };
+
+      grpcService.requestWritableStream(PROTO_OPTS, REQ_OPTS);
+    });
+
+    it('should set the deadline', function(done) {
+      var createDeadline = GrpcService.createDeadline_;
+      var fakeDeadline = createDeadline(PROTO_OPTS.timeout);
+
+      GrpcService.createDeadline_ = function(timeout) {
+        assert.strictEqual(timeout, PROTO_OPTS.timeout);
+        return fakeDeadline;
+      };
+
+      ProtoService.prototype.method = function(reqOpts, grpcOpts) {
+        assert.strictEqual(grpcOpts.deadline, fakeDeadline);
+
+        GrpcService.createDeadline_ = createDeadline;
+        setImmediate(done);
+
+        return through.obj();
+      };
+
+      retryRequestOverride = function(_, retryOpts) {
+        return retryOpts.request();
+      };
+
+      grpcService.requestWritableStream(PROTO_OPTS, REQ_OPTS);
+    });
+
+    describe('getting gRPC credentials', function() {
+      beforeEach(function() {
+        delete grpcService.grpcCredentials;
+      });
+
+      describe('error', function() {
+        var error = new Error('err');
+
+        beforeEach(function() {
+          grpcService.getGrpcCredentials_ = function(callback) {
+            setImmediate(function() {
+              callback(error);
+            });
+          };
+        });
+
+        it('should execute callback with error', function(done) {
+          grpcService.requestWritableStream(PROTO_OPTS, REQ_OPTS)
+            .on('error', function(err) {
+              assert.strictEqual(err, error);
+              done();
+            });
+        });
+      });
+
+      describe('success', function() {
+        var authClient = {};
+
+        beforeEach(function() {
+          grpcService.getGrpcCredentials_ = function(callback) {
+            callback(null, authClient);
+          };
+        });
+
+        it('should make the gRPC request again', function(done) {
+          var stream = duplexify.obj();
+          ProtoService.prototype.method = function() {
+            return stream;
+          };
+          grpcService.getService_ = function() {
+            assert.strictEqual(grpcService.grpcCredentials, authClient);
+            setImmediate(done);
+            return new ProtoService();
+          };
+
+          grpcService.requestWritableStream(PROTO_OPTS, REQ_OPTS);
+        });
+      });
+    });
+
+    describe('stream success', function() {
+      var authClient = {};
+
+      beforeEach(function() {
+        delete grpcService.grpcCredentials;
+        grpcService.getGrpcCredentials_ = function(callback) {
+          callback(null, authClient);
+        };
+        sinon.spy(GrpcService, 'decorateStatus_');
+      });
+
+      it('should emit response', function(done) {
+        var stream = duplexify.obj();
+        ProtoService.prototype.method = function() {
+          return stream;
+        };
+        grpcService.getService_ = function() {
+          assert.strictEqual(grpcService.grpcCredentials, authClient);
+          return new ProtoService();
+        };
+
+        grpcService.requestWritableStream(PROTO_OPTS, REQ_OPTS)
+          .on('response', function(status) {
+            assert.equal(status, 'foo');
+            assert.equal(GrpcService.decorateStatus_.callCount, 1);
+            assert(GrpcService.decorateStatus_.calledWith('foo'));
+            GrpcService.decorateStatus_.restore();
+            done();
+          })
+          .on('error', done);
+
+        setImmediate(function() {
+          stream.emit('status', 'foo');
+        });
+      });
+    });
+
+    describe('stream error', function() {
+      var authClient = {};
+
+      beforeEach(function() {
+        delete grpcService.grpcCredentials;
+        grpcService.getGrpcCredentials_ = function(callback) {
+          callback(null, authClient);
+        };
+      });
+
+      it('should emit a decorated error', function(done) {
+        var grpcStream = duplexify.obj();
+        ProtoService.prototype.method = function() {
+          return grpcStream;
+        };
+        grpcService.getService_ = function() {
+          assert.strictEqual(grpcService.grpcCredentials, authClient);
+          return new ProtoService();
+        };
+
+        var error = new Error('Error.');
+        var expectedDecoratedError = new Error('Decorated error.');
+
+        sinon.stub(GrpcService, 'decorateError_', function() {
+          return expectedDecoratedError;
+        });
+
+        var stream = grpcService.requestWritableStream(PROTO_OPTS, REQ_OPTS);
+
+        stream.destroy = function(err) {
+          assert.strictEqual(err, expectedDecoratedError);
+          assert.equal(GrpcService.decorateError_.callCount, 1);
+          assert(GrpcService.decorateError_.calledWith(error));
+          GrpcService.decorateError_.restore();
+          done();
+        };
+
+        setImmediate(function() {
+          grpcStream.emit('error', error);
+        });
+      });
+
+      it('should emit the original error', function(done) {
+        var grpcStream = duplexify.obj();
+        ProtoService.prototype.method = function() {
+          return grpcStream;
+        };
+        grpcService.getService_ = function() {
+          assert.strictEqual(grpcService.grpcCredentials, authClient);
+          return new ProtoService();
+        };
+
+        var error = new Error('Error.');
+
+        sinon.stub(GrpcService, 'decorateError_', function() {
+          return null;
+        });
+
+        var stream = grpcService.requestWritableStream(PROTO_OPTS, REQ_OPTS);
+
+        stream.destroy = function(err) {
+          assert.strictEqual(err, error);
+          assert.equal(GrpcService.decorateError_.callCount, 1);
+          assert(GrpcService.decorateError_.calledWith(error));
+          GrpcService.decorateError_.restore();
+          done();
+        };
+
+        setImmediate(function() {
+          grpcStream.emit('error', error);
+        });
       });
     });
   });

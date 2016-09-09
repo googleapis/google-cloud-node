@@ -178,30 +178,59 @@ describe('GrpcServiceObject', function() {
   });
 
   describe('request', function() {
-    it('should call the parent instance request method', function(done) {
+    it('should call the parent instance request method', function() {
+      var args = [1, 2, 3];
+      var expectedReturnValue = {};
+
       grpcServiceObject.parent = {
-        request: function(protoOpts, reqOpts, callback) {
-          assert.strictEqual(protoOpts, PROTO_OPTS);
-          assert.strictEqual(reqOpts, REQ_OPTS);
-          callback(); // done()
+        request: function() {
+          assert.strictEqual(this, grpcServiceObject.parent);
+          assert.deepEqual([].slice.call(arguments), args);
+          return expectedReturnValue;
         }
       };
 
-      grpcServiceObject.request(PROTO_OPTS, REQ_OPTS, done);
+      var ret = grpcServiceObject.request.apply(grpcServiceObject, args);
+      assert.strictEqual(ret, expectedReturnValue);
     });
   });
 
   describe('requestStream', function() {
-    it('should call the parent instance requestStream method', function(done) {
+    it('should call the parent instance requestStream method', function() {
+      var args = [1, 2, 3];
+      var expectedReturnValue = {};
+
       grpcServiceObject.parent = {
-        requestStream: function(protoOpts, reqOpts) {
-          assert.strictEqual(protoOpts, PROTO_OPTS);
-          assert.strictEqual(reqOpts, REQ_OPTS);
-          done();
+        requestStream: function() {
+          assert.strictEqual(this, grpcServiceObject.parent);
+          assert.deepEqual([].slice.call(arguments), args);
+          return expectedReturnValue;
         }
       };
 
-      grpcServiceObject.requestStream(PROTO_OPTS, REQ_OPTS);
+      var ret = grpcServiceObject.requestStream.apply(grpcServiceObject, args);
+      assert.strictEqual(ret, expectedReturnValue);
+    });
+  });
+
+  describe('requestWritableStream', function() {
+    it('should call the parent requestWritableStream method', function() {
+      var args = [1, 2, 3];
+      var expectedReturnValue = {};
+
+      grpcServiceObject.parent = {
+        requestWritableStream: function() {
+          assert.strictEqual(this, grpcServiceObject.parent);
+          assert.deepEqual([].slice.call(arguments), args);
+          return expectedReturnValue;
+        }
+      };
+
+      var ret = grpcServiceObject.requestWritableStream.apply(
+        grpcServiceObject,
+        args
+      );
+      assert.strictEqual(ret, expectedReturnValue);
     });
   });
 });
