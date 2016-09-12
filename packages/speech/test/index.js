@@ -144,12 +144,6 @@ describe('Speech', function() {
 
   describe('detectEncoding_', function() {
     it('should detect encoding', function() {
-      assert.equal(Speech.detectEncoding_(), undefined);
-      assert.equal(Speech.detectEncoding_(''), undefined);
-      assert.equal(Speech.detectEncoding_('foo'), undefined);
-      assert.equal(Speech.detectEncoding_('foo.'), undefined);
-      assert.equal(Speech.detectEncoding_('foo.bar'), undefined);
-      assert.equal(Speech.detectEncoding_('foo.bar.bar'), undefined);
       assert.equal(Speech.detectEncoding_('foo.raw'), 'LINEAR16');
       assert.equal(Speech.detectEncoding_('foo.amr'), 'AMR');
       assert.equal(Speech.detectEncoding_('foo.awb'), 'AMR_WB');
@@ -157,6 +151,12 @@ describe('Speech', function() {
       assert.equal(Speech.detectEncoding_('foo.fLAc'), 'FLAC');
       assert.equal(Speech.detectEncoding_('foo.wav'), 'MULAW');
       assert.equal(Speech.detectEncoding_('foo.au'), 'MULAW');
+    });
+
+    it('should throw if a supported encoding is not detected', function() {
+      assert.throws(function() {
+        Speech.detectEncoding_('blah.mp3');
+      }, /Encoding could not be determined for file: blah\.mp3/);
     });
   });
 
@@ -612,9 +612,8 @@ describe('Speech', function() {
         encoding: 'LINEAR32'
       };
 
-      Speech.detectEncoding_ = function(file) {
-        assert.strictEqual(file, FILE);
-        return DETECTED_ENCODING;
+      Speech.detectEncoding_ = function() {
+        done(); // Will cause test to fail.
       };
 
       speech.request = function(protoOpts, reqOpts) {
@@ -623,6 +622,22 @@ describe('Speech', function() {
       };
 
       speech.recognize(FILE, config, assert.ifError);
+    });
+
+    it('should guess the encoding if it is not specified', function(done) {
+      var expectedEncoding = 'LINEAR16';
+
+      Speech.detectEncoding_ = function(file) {
+        assert.strictEqual(file, FILE);
+        return expectedEncoding;
+      };
+
+      speech.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(reqOpts.config.encoding, expectedEncoding);
+        done();
+      };
+
+      speech.recognize(FILE, {}, assert.ifError);
     });
 
     it('should return an error from findFile_', function(done) {
@@ -798,9 +813,8 @@ describe('Speech', function() {
         encoding: 'LINEAR32'
       };
 
-      Speech.detectEncoding_ = function(file) {
-        assert.strictEqual(file, FILE);
-        return DETECTED_ENCODING;
+      Speech.detectEncoding_ = function() {
+        done(); // Will cause test to fail.
       };
 
       speech.request = function(protoOpts, reqOpts) {
@@ -809,6 +823,22 @@ describe('Speech', function() {
       };
 
       speech.startRecognition(FILE, config, assert.ifError);
+    });
+
+    it('should guess the encoding if it is not specified', function(done) {
+      var expectedEncoding = 'LINEAR16';
+
+      Speech.detectEncoding_ = function(file) {
+        assert.strictEqual(file, FILE);
+        return expectedEncoding;
+      };
+
+      speech.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(reqOpts.config.encoding, expectedEncoding);
+        done();
+      };
+
+      speech.startRecognition(FILE, {}, assert.ifError);
     });
 
     it('should return an error from findFile_', function(done) {

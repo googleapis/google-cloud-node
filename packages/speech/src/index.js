@@ -129,6 +129,9 @@ Speech.prototype.endpointerTypes = {
  * @resource [AudioEncoding API Documentation]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#audioencoding}
  * @private
  *
+ * @throws {Error} If an encoding type could not be determined from the file's
+ *     extension.
+ *
  * @param {string} filename - The name of the file.
  * @returns {string} The audio encoding.
  */
@@ -153,6 +156,9 @@ Speech.detectEncoding_ = function(filename) {
     case '.au':
     case '.wav': {
       return 'MULAW';
+    }
+    default: {
+      throw new Error('Encoding could not be determined for file: ' + filename);
     }
   }
 };
@@ -619,9 +625,11 @@ Speech.prototype.recognize = function(file, config, callback) {
     method: 'syncRecognize'
   };
 
-  config = extend({
-    encoding: Speech.detectEncoding_(file)
-  }, config);
+  config = extend({}, config);
+
+  if (!config.encoding) {
+    config.encoding = Speech.detectEncoding_(file);
+  }
 
   var verboseMode = config.verbose === true;
   delete config.verbose;
@@ -757,9 +765,11 @@ Speech.prototype.startRecognition = function(file, config, callback) {
     method: 'asyncRecognize'
   };
 
-  config = extend({
-    encoding: Speech.detectEncoding_(file)
-  }, config);
+  config = extend({}, config);
+
+  if (!config.encoding) {
+    config.encoding = Speech.detectEncoding_(file);
+  }
 
   var verboseMode = config.verbose === true;
   delete config.verbose;
