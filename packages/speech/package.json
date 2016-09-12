@@ -70,6 +70,7 @@
   "devDependencies": {
     "@google-cloud/storage": "*",
     "async": "^2.0.1",
+    "methmeth": "^1.1.0",
     "mocha": "^3.0.2",
     "node-uuid": "^1.4.7",
     "proxyquire": "^1.7.10",

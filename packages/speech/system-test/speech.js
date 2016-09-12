@@ -18,6 +18,7 @@
 
 var assert = require('assert');
 var async = require('async');
+var exec = require('methmeth');
 var extend = require('extend');
 var fs = require('fs');
 var path = require('path');
@@ -43,7 +44,7 @@ FILENAMES.forEach(function(filename) {
 });
 
 describe('Speech', function() {
-  var speech;
+  var speech = new Speech(env);
   var bucket = storage.bucket(BUCKET_NAME);
 
   var OPTIONS = {
@@ -61,7 +62,7 @@ describe('Speech', function() {
         bucket.create(next);
       },
 
-      function(zone, apiResponse, next) {
+      function(_, apiResponse, next) {
         async.map(FILENAMES, function(filename, onComplete) {
           fs.readFile(AUDIO_FILES[filename].path, onComplete);
         }, next);
@@ -82,34 +83,21 @@ describe('Speech', function() {
       },
 
       function(files, next) {
-        async.map(files, function(file, onComplete) {
-          file.makePublic(onComplete);
-        }, next);
+        async.map(files, exec('makePublic'), next);
       }
     ], done);
   });
 
-  beforeEach(function() {
-    speech = new Speech(env);
-  });
-
   after(function(done) {
-    bucket.getFiles(function(err, files) {
+    bucket.deleteFiles({
+      force: true
+    }, function(err) {
       if (err) {
         done(err);
         return;
       }
 
-      async.map(files, function(file, onComplete) {
-        file.delete(onComplete);
-      }, function(err) {
-        if (err) {
-          done(err);
-          return;
-        }
-
-        bucket.delete(done);
-      });
+      bucket.delete(done);
     });
   });
 
