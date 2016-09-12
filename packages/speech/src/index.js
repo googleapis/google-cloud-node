@@ -235,8 +235,8 @@ Speech.findFile_ = function(file, callback) {
 /**
  * Simplify the transcription results from the API.
  *
- * @resource [`SpeechRecognitionResult` API Documentation]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.SpeechRecognitionResult}
- * @resource [`StreamingRecognitionResult` API Documentation]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognitionResult}
+ * @resource [SpeechRecognitionResult API Documentation]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.SpeechRecognitionResult}
+ * @resource [StreamingRecognitionResult API Documentation]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognitionResult}
  *
  * @private
  *
@@ -526,8 +526,8 @@ Speech.prototype.operation = function(name) {
  * larger files, you will need to use {module:speech#startRecognition} or
  * {module:speech#createRecognizeStream}.
  *
- * @resource [`SyncRecognize` API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.Speech.SyncRecognize}
- * @resource [`SyncRecognizeRequest` API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.SyncRecognizeRequest}
+ * @resource [SyncRecognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.Speech.SyncRecognize}
+ * @resource [SyncRecognizeRequest API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.SyncRecognizeRequest}
  *
  * @param {string|object|module:storage/file} file - The source file to run the
  *     detection on. It can be either a local file path, a remote file URL, a
