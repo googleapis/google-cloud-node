@@ -355,8 +355,8 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  * Perform bidirectional streaming speech-recognition: receive results while
  * sending audio.
  *
- * @resource [`StreamingRecognize` API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.Speech.StreamingRecognize}
- * @resource [`StreamingRecognizeRequest` API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognizeRequest}
+ * @resource [StreamingRecognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.Speech.StreamingRecognize}
+ * @resource [StreamingRecognizeRequest API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognizeRequest}
  *
  * @param {object} config - A `StreamingRecognitionConfig` object. See
  *     [`StreamingRecognitionConfig`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognitionConfig).
@@ -367,8 +367,8 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  * var fs = require('fs');
  *
  * //-
- * // See <a href="https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognitionConfig">
- * // `RecognizeRequest`</a>.
+ * // See <a href="https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognizeRequest">
+ * // `StreamingRecognizeRequest`</a> for all of the available configuration options.
  * //-
  * var request = {
  *   config: {
@@ -408,7 +408,7 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  *   });
  *
  * //-
- * // <h3>Enable verbose mode for more detailed results.</h3>
+ * // Enable verbose mode for more detailed results.
  * //-
  * var request = {
  *   config: {
@@ -564,33 +564,33 @@ Speech.prototype.operation = function(name) {
  * }
  *
  * //-
- * // <h3>Run speech detection over a local file</h3>
+ * // Run speech detection over a local file.
  * //-
  * speech.recognize('./bridge.raw', config, callback);
  *
  * //-
- * // <h3>Run speech recognition over a file in Cloud Storage</h3>
+ * // Run speech recognition over a file in Cloud Storage.
  * //-
  * speech.recognize('gs://your-bucket-name/bridge.raw', config, callback);
  *
  * //-
- * // <h3>Run speech recognition over raw file contents</h3>
+ * // Run speech recognition over raw file contents.
  * //-
  * speech.recognize({
  *   content: fs.readFileSync('./bridge.raw')
  * }, config, callback);
  *
  * //-
- * // <h3>Run speech recognition over a remote file</h3>
+ * // Run speech recognition over a remote file.
  * //
- * // *Note: This is not an officially supported feature of the Speech API.
- * // google-cloud will make a request to the URL given and send the file
- * // contents to the upstream API.*
+ * // <em>Note: This is not an officially supported feature of the Speech API.
+ * // This library will make a request to the URL given and send the file
+ * // contents to the upstream API.</em>
  * //-
  * speech.recognize('https://example.com/files/bridge.raw', config, callback);
  *
  * //-
- * // <h3>Enable verbose mode for more detailed results.</h3>
+ * // Enable verbose mode for more detailed results.
  * //-
  * var config = {
  *   encoding: 'LINEAR16',
@@ -663,12 +663,13 @@ Speech.prototype.recognize = function(file, config, callback) {
  * Perform asynchronous speech recognition.
  *
  * This method sends audio to the Speech API, which immediately responds with an
- * Operation object. You can then poll the operation for a result by registering
- * a listener for the "complete" event. See the examples below.
+ * Operation object. Register event handlers for the "error" and "complete"
+ * events to see how the operation finishes. Follow along with the examples
+ * below.
  *
- * @resource [`AsyncRecognize` API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.Speech.AsyncRecognize}
- * @resource [`AsyncRecognizeRequest` API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.AsyncRecognizeRequest}
- * @resource [`AsyncRecognizeResponse` API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.AsyncRecognizeResponse}
+ * @resource [AsyncRecognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.Speech.AsyncRecognize}
+ * @resource [AsyncRecognizeRequest API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.AsyncRecognizeRequest}
+ * @resource [AsyncRecognizeResponse API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.AsyncRecognizeResponse}
  *
  * @param {string|object|module:storage/file} file - The source file to run the
  *     detection on. It can be either a local file path, a remote file URL, a
@@ -704,35 +705,36 @@ Speech.prototype.recognize = function(file, config, callback) {
  * }
  *
  * //-
- * // <h3>Run speech detection over a local file</h3>
+ * // Run speech detection over a local file.
  * //-
  * speech.startRecognition('./bridge.raw', config, callback);
  *
  * //-
- * // <h3>Run speech detection over a file in Cloud Storage</h3>
+ * // Run speech detection over a file in Cloud Storage.
  * //-
  * var file = 'gs://your-bucket-name/bridge.raw';
  * speech.startRecognition(file, config, callback);
  *
  * //-
- * // <h3>Run speech detection over raw file contents</h3>
+ * // Run speech detection over raw file contents.
  * //-
  * speech.startRecognition({
  *   content: fs.readFileSync('./bridge.raw')
  * }, config, callback);
  *
  * //-
- * // <h3>Run speech detection over a remote file</h3>
+ * // Run speech detection over a remote file.
  * //
- * // *Note: This is not an officially supported feature of the Speech API. Our
- * // library will make a request to the URL given, and send that upstream.*
+ * // <em>Note: This is not an officially supported feature of the Speech API.
+ * // This library will make a request to the URL given and send the file
+ * // contents to the upstream API.</em>
  * //-
  * var file = 'https://example.com/files/bridge.raw';
  *
  * speech.startRecognition(file, config, callback);
  *
  * //-
- * // <h3>Enable verbose mode for more detailed results.</h3>
+ * // Enable verbose mode for more detailed results.
  * //-
  * var config = {
  *   encoding: 'LINEAR16',
