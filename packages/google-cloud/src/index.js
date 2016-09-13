@@ -251,33 +251,6 @@ var apis = {
   resource: require('@google-cloud/resource'),
 
   /**
-   * The [Cloud Speech API](https://cloud.google.com/speech/docs) enables easy
-   * integration of Google speech recognition technologies into developer
-   * applications. Send audio and receive a text transcription from the Cloud
-   * Speech API service.
-   *
-   * <p class="notice">
-   *   **This is a Beta release of Google Cloud Speech.** This feature is not
-   *   covered by any SLA or deprecation policy and may be subject to
-   *   backward-incompatible changes.
-   * </p>
-   *
-   * To learn more about the Speech API, see the
-   * [Getting Started guide](https://cloud.google.com/speech/docs/getting-started).
-   *
-   * @type {module:speech}
-   *
-   * @example
-   * var gcloud = require('google-cloud')({
-   *   keyFilename: '/path/to/keyfile.json',
-   *   projectId: 'grape-spaceship-123'
-   * });
-   *
-   * var speech = gcloud.speech();
-   */
-  speech: require('@google-cloud/speech'),
-
-  /**
    * Google Cloud Storage allows you to store data on Google infrastructure.
    * Read [Google Cloud Storage API docs](https://developers.google.com/storage)
    * for more information.
