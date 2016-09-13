@@ -13,7 +13,7 @@
     "googleapis": "^12.2.0",
     "nodemailer": "^2.4.1",
     "nodemailer-smtp-transport": "^2.5.0",
-    "sendgrid": "^2.0.0"
+    "sendgrid": "^4.0.1"
   },
   "devDependencies": {
     "mocha": "^3.0.2"
