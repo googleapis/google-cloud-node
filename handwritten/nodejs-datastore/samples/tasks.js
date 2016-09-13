@@ -13,9 +13,6 @@
 
 'use strict';
 
-var input = process.argv.splice(2);
-var command = input.shift();
-
 // [START build_service]
 // By default, the client will authenticate using the service account file
 // specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use
@@ -60,7 +57,7 @@ export GCLOUD_PROJECT=<project-id>
 
 7. Run the application!
 ```sh
-npm run tasks
+node tasks <command>
 ```
 */
 
@@ -87,11 +84,12 @@ function addTask (description, callback) {
     ]
   }, function (err) {
     if (err) {
-      callback(err);
-      return;
+      return callback(err);
     }
 
-    callback(null, taskKey);
+    var taskId = taskKey.path.pop();
+    console.log('Task %d created successfully.', taskId);
+    return callback(null, taskKey);
   });
 }
 // [END add_entity]
@@ -129,7 +127,8 @@ function markDone (taskId, callback) {
         }
 
         // The transaction completed successfully.
-        callback();
+        console.log('Task %d updated successfully.', taskId);
+        return callback(null);
       });
     });
   });
@@ -141,7 +140,14 @@ function listTasks (callback) {
   var query = datastore.createQuery('Task')
     .order('created');
 
-  datastore.runQuery(query, callback);
+  datastore.runQuery(query, function (err, tasks) {
+    if (err) {
+      return callback(err);
+    }
+
+    console.log('Found %d task(s)!', tasks.length);
+    return callback(null, tasks);
+  });
 }
 // [END retrieve_entities]
 
@@ -152,101 +158,53 @@ function deleteTask (taskId, callback) {
     taskId
   ]);
 
-  datastore.delete(taskKey, callback);
+  datastore.delete(taskKey, function (err) {
+    if (err) {
+      return callback(err);
+    }
+
+    console.log('Task %d deleted successfully.', taskId);
+    return callback(null);
+  });
 }
 // [END delete_entity]
 
-// [START format_results]
-function formatTasks (tasks) {
-  return tasks
-    .map(function (task) {
-      var taskKey = task.key.path.pop();
-      var status;
+var cli = require('yargs');
+var makeHandler = require('../utils').makeHandler;
 
-      if (task.data.done) {
-        status = 'done';
-      } else {
-        status = 'created ' + new Date(task.data.created);
-      }
+var program = module.exports = {
+  addEntity: addTask,
+  updateEntity: markDone,
+  retrieveEntities: listTasks,
+  deleteEntity: deleteTask,
+  main: function (args) {
+    // Run the command-line program
+    cli.help().strict().parse(args).argv;
+  }
+};
 
-      return taskKey + ' : ' + task.data.description + ' (' + status + ')';
-    })
-    .join('\n');
-}
-// [END format_results]
+cli
+  .demand(1)
+  .command('new <description>', 'Adds a task with a description <description>.', {}, function (options) {
+    addTask(options.description, makeHandler());
+  })
+  .command('done <taskId>', 'Marks the specified task as done.', {}, function (options) {
+    markDone(options.taskId, makeHandler());
+  })
+  .command('list', 'Lists all tasks ordered by creation time.', {}, function (options) {
+    listTasks(makeHandler());
+  })
+  .command('delete <taskId>', 'Deletes a task.', {}, function (options) {
+    deleteTask(options.taskId, makeHandler());
+  })
+  .example('node $0 new "Buy milk"', 'Adds a task with description "Buy milk".')
+  .example('node $0 done 12345', 'Marks task 12345 as Done.')
+  .example('node $0 list', 'Lists all tasks ordered by creation time')
+  .example('node $0 delete 12345', 'Deletes task 12345.')
+  .wrap(120)
+  .recommendCommands()
+  .epilogue('For more information, see https://cloud.google.com/datastore/docs');
 
 if (module === require.main) {
-  var taskId;
-
-  switch (command) {
-    case 'new': {
-      addTask(input, function (err, taskKey) {
-        if (err) {
-          throw err;
-        }
-
-        taskId = taskKey.path.pop();
-
-        console.log('Task %d created successfully.', taskId);
-      });
-
-      break;
-    }
-    case 'done': {
-      taskId = parseInt(input, 10);
-
-      markDone(taskId, function (err) {
-        if (err) {
-          throw err;
-        }
-
-        console.log('Task %d updated successfully.', taskId);
-      });
-
-      break;
-    }
-    case 'list': {
-      listTasks(function (err, tasks) {
-        if (err) {
-          throw err;
-        }
-
-        console.log(formatTasks(tasks));
-      });
-
-      break;
-    }
-    case 'delete': {
-      taskId = parseInt(input, 10);
-
-      deleteTask(taskId, function (err) {
-        if (err) {
-          throw err;
-        }
-
-        console.log('Task %d deleted successfully.', taskId);
-      });
-
-      break;
-    }
-    default: {
-      // Only print usage if this file is being executed directly
-      if (module === require.main) {
-        console.log([
-          'Usage:',
-          '',
-          '  new <description> Adds a task with a description <description>',
-          '  done <task-id>    Marks a task as done',
-          '  list              Lists all tasks by creation time',
-          '  delete <task-id>  Deletes a task'
-        ].join('\n'));
-      }
-    }
-  }
+  program.main(process.argv.slice(2));
 }
-
-module.exports.addEntity = addTask;
-module.exports.updateEntity = markDone;
-module.exports.retrieveEntities = listTasks;
-module.exports.deleteEntity = deleteTask;
-module.exports.formatTasks = formatTasks;
