@@ -926,7 +926,8 @@ fs.createReadStream('./audio.raw')
     //
     // A final "data" event emitted might look like:
     //   data = {
-    //     endpointerType: Speech.endpointerTypes.END_OF_AUDIO,
+    //     endpointerType:
+    //       Speech.endpointerTypes.ENDPOINTER_EVENT_UNSPECIFIED,
     //     results: "how old is the Brooklyn Bridge",
     //     ...
     //   }

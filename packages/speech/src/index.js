@@ -355,6 +355,16 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  * Perform bidirectional streaming speech-recognition: receive results while
  * sending audio.
  *
+ * Each emitted `data` event is a
+ * [`StreamingRecognizeResponse`](https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#streamingrecognizeresponse)
+ * object, containing these properties:
+ *
+ *   - **`endpointerType`** See {module:speech#endpointerTypes}.
+ *   - **`results`** By default, a combined string of transcripts. When
+ *     `config.verbose` is enabled, this is an object including a `transcript`
+ *     property, a `confidence` score from `0` - `100`, and an `alternatives`
+ *     array consisting of other transcription possibilities.
+ *
  * @resource [StreamingRecognize API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.Speech.StreamingRecognize}
  * @resource [StreamingRecognizeRequest API Reference]{@link https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognizeRequest}
  *
