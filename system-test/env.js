@@ -31,7 +31,7 @@ var credentials = process.env.GCLOUD_TESTS_CREDENTIALS;
 
 if (credentials) {
   googleCloudConfig.credentials = JSON.parse(credentials);
-  googleCloudConfig.projectId = credentials.project_id;
+  googleCloudConfig.projectId = googleCloudConfig.credentials.project_id;
 } else {
   googleCloudConfig.projectId = process.env.GCLOUD_TESTS_PROJECT_ID;
   googleCloudConfig.keyFilename = process.env.GCLOUD_TESTS_KEY;
