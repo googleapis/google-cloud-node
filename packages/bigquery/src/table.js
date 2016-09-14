@@ -188,12 +188,19 @@ Table.createSchemaFromString_ = function(str) {
  * @return {array} Fields using their matching names from the table's schema.
  */
 Table.mergeSchemaWithRows_ = function(schema, rows) {
-  return rows.map(mergeSchema).map(flattenRows);
+  return arrify(rows).map(mergeSchema).map(flattenRows);
 
   function mergeSchema(row) {
     return row.f.map(function(field, index) {
       var schemaField = schema.fields[index];
       var value = field.v;
+
+      var fieldObject = {};
+
+      if (value === null) {
+        fieldObject[schemaField.name] = null;
+        return fieldObject;
+      }
 
       switch (schemaField.type) {
         case 'BOOLEAN': {
@@ -212,13 +219,23 @@ Table.mergeSchemaWithRows_ = function(schema, rows) {
           }
           break;
         }
+        case 'RECORD': {
+          if (schemaField.mode === 'REPEATED') {
+            value = value.map(function(val) {
+              return Table.mergeSchemaWithRows_(schemaField, val.v).pop();
+            });
+          } else {
+            value = Table.mergeSchemaWithRows_(schemaField, value).pop();
+          }
+
+          break;
+        }
         case 'TIMESTAMP': {
           value = new Date(value * 1000);
           break;
         }
       }
 
-      var fieldObject = {};
       fieldObject[schemaField.name] = value;
       return fieldObject;
     });

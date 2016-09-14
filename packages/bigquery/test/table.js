@@ -180,7 +180,27 @@ describe('BigQuery/Table', function() {
               { v: 'Milo' },
               { v: String(now.valueOf() / 1000) },
               { v: 'false' },
-              { v: '5.222330009847' }
+              { v: '5.222330009847' },
+              { v: null },
+              {
+                v: [
+                  {
+                    v: {
+                      f: [
+                        {
+                          v: {
+                            f: [
+                              {
+                                v: 'nested_value'
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
             ]
           },
           expected: {
@@ -188,13 +208,47 @@ describe('BigQuery/Table', function() {
             name: 'Milo',
             dob: now,
             has_claws: false,
-            hair_count: 5.222330009847
+            hair_count: 5.222330009847,
+            nullable: null,
+            objects: [
+              {
+                nested_object: {
+                  nested_property: 'nested_value'
+                }
+              }
+            ]
           }
         }
       ];
 
+      var schemaObject = extend(true, SCHEMA_OBJECT, {});
+
+      schemaObject.fields.push({
+        name: 'nullable',
+        type: 'STRING',
+        mode: 'NULLABLE'
+      });
+
+      schemaObject.fields.push({
+        name: 'objects',
+        type: 'RECORD',
+        mode: 'REPEATED',
+        fields: [
+          {
+            name: 'nested_object',
+            type: 'RECORD',
+            fields: [
+              {
+                name: 'nested_property',
+                type: 'STRING'
+              }
+            ]
+          }
+        ]
+      });
+
       var rawRows = rows.map(prop('raw'));
-      var mergedRows = Table.mergeSchemaWithRows_(SCHEMA_OBJECT, rawRows);
+      var mergedRows = Table.mergeSchemaWithRows_(schemaObject, rawRows);
 
       mergedRows.forEach(function(mergedRow, index) {
         assert.deepEqual(mergedRow, rows[index].expected);
