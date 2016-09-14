@@ -10,7 +10,7 @@ environment:
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - ps: |
+  - ps: >-
     if (!$env:APPVEYOR_PULL_REQUEST_NUMBER) {
       nuget install secure-file -ExcludeVersion
       secure-file\tools\secure-file -decrypt key.appveyor.json.enc -secret %GCLOUD_TESTS_KEY_SECRET%
