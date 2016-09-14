@@ -11,10 +11,10 @@ environment:
 install:
   - ps: Install-Product node $env:nodejs_version
   - ps: >-
-    if (!$env:APPVEYOR_PULL_REQUEST_NUMBER) {
-      nuget install secure-file -ExcludeVersion
-      secure-file\tools\secure-file -decrypt key.appveyor.json.enc -secret $env:GCLOUD_TESTS_KEY_SECRET
-    }
+      if (!$env:APPVEYOR_PULL_REQUEST_NUMBER) {
+        nuget install secure-file -ExcludeVersion
+        secure-file\tools\secure-file -decrypt key.appveyor.json.enc -secret $env:GCLOUD_TESTS_KEY_SECRET
+      }
   - npm install -g npm
   - set PATH=%APPDATA%\npm;%PATH%
   - npm install
