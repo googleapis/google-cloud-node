@@ -16,25 +16,14 @@
 
 'use strict';
 
-var googleCloudConfig = {};
-
-if (!process.env.GCLOUD_TESTS_CREDENTIALS &&
-    !process.env.GCLOUD_TESTS_PROJECT_ID &&
-    !process.env.GCLOUD_TESTS_KEY) {
+if (!process.env.GCLOUD_TESTS_PROJECT_ID && !process.env.GCLOUD_TESTS_KEY) {
   throw new Error([
     'To run the system tests, you need to set some environment variables.',
     'Please check the Contributing guide for instructions.'
   ].join('\n'));
 }
 
-var credentials = process.env.GCLOUD_TESTS_CREDENTIALS;
-
-if (credentials) {
-  googleCloudConfig.credentials = JSON.parse(credentials);
-  googleCloudConfig.projectId = googleCloudConfig.credentials.project_id;
-} else {
-  googleCloudConfig.projectId = process.env.GCLOUD_TESTS_PROJECT_ID;
-  googleCloudConfig.keyFilename = process.env.GCLOUD_TESTS_KEY;
-}
-
-module.exports = googleCloudConfig;
+module.exports = {
+  projectId: process.env.GCLOUD_TESTS_PROJECT_ID,
+  keyFilename: process.env.GCLOUD_TESTS_KEY
+};
