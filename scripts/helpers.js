@@ -77,7 +77,7 @@ Module.getUpdated = function() {
     'https://github.com/GoogleCloudPlatform/google-cloud-node.git'
   ]);
 
-  run('git fetch temp');
+  run('git fetch -q temp');
 
   var output = run('git diff HEAD temp/master --name-only', {
     stdio: null // prevents piping to the console
@@ -94,14 +94,12 @@ Module.getUpdated = function() {
 };
 
 /**
- * Returns a list of modules that are dependent on one or more of the modules
- * specified.
+ * Returns a list containing ALL the modules.
  *
  * @static
- * @param {Module[]} modules - The dependency modules.
- * @return {Module[]} modules - The dependent modules.
+ * @return {Module[]} modules - All of em'!
  */
-Module.getDependents = function(modules) {
+Module.getAll = function() {
   cd(ROOT_DIR);
 
   return globby
@@ -110,20 +108,30 @@ Module.getDependents = function(modules) {
       ignore: Module.UMBRELLA
     })
     .map(Module)
-    .filter(function(mod) {
-      return mod.hasDeps(modules)
-    });
+};
+
+/**
+ * Returns a list of modules that are dependent on one or more of the modules
+ * specified.
+ *
+ * @static
+ * @param {Module[]} modules - The dependency modules.
+ * @return {Module[]} modules - The dependent modules.
+ */
+Module.getDependents = function(modules) {
+  return Module.getAll().filter(function(mod) {
+    return mod.hasDeps(modules)
+  });
 };
 
 /**
  * Generates an lcov coverage report for the specified modules.
  *
  * @static
- * @param {Modules[]} modules - Modules to generate coverage for.
  * @return {string} lcov
  */
-Module.getCoverage = function(modules) {
-  var tests = modules.map(function(mod) {
+Module.getCoverage = function() {
+  var tests = Module.getAll().map(function(mod) {
     return path.join(mod.directory, 'test', '*.js');
   });
 
@@ -137,16 +145,24 @@ Module.getCoverage = function(modules) {
     '--',
     '--no-timeout',
     '--bail',
-    tests.join(' '),
+    'packages/*/test/*.js',
     '-R spec'
   ]);
 
   var lcovPath = path.join(ROOT_DIR, 'coverage', 'lcov.info');
-  var lcov = fs.readFileSync(lcovPath, 'utf8');
+
+  run(['cat', lcovPath, '|', './coveralls.js'], {
+    cwd: path.join(ROOT_DIR, 'node_modules', 'coveralls', 'bin')
+  });
 
   rm('-rf', path.dirname(lcovPath));
+};
 
-  return lcov;
+/**
+ * Installs dependencies for all the modules!
+ */
+Module.installAll = function() {
+  run('npm run install-modules', { cwd: ROOT_DIR });
 };
 
 /**

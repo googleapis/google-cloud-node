@@ -81,7 +81,7 @@ if (MODULE_NAME === 'common') {
 // update the manifest.json in master
 git.submodule('master');
 
-var manifestPath = path.join('master', 'docs', 'manifest.json');
+var manifestPath = path.resolve('./master', 'docs', 'manifest.json');
 var manifest = require(manifestPath);
 var CONTENT_DIR = manifest.content;
 
@@ -91,7 +91,7 @@ for (var i = 0, docs; i < manifest.modules.length; i++) {
 
   if (docs.id === MODULE_NAME) {
     if (docs.versions.indexOf(MODULE_VERSION) === -1) {
-      docs.versions.push(MODULE_VERSION);
+      docs.versions.unshift(MODULE_VERSION);
     }
 
     break;

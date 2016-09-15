@@ -28,8 +28,8 @@
  * - For each module that has updates, we'll install their dependencies and run
  *   their unit tests.
  *
- * - Assuming all the unit tests pass, we'll then attempt to get code coverage
- *   for the changed files.
+ * - Assuming all the unit tests pass, we'll check to see if this is the first
+ *   job and if so, install ALL the things to get code coverage.
  *
  * - At this point, if this "build" was triggered by a PR or is a merge to a
  *   branch other than master, we'll exit early here. All steps after this point
@@ -58,7 +58,7 @@
 
 require('shelljs/global');
 
-var coveralls = require('coveralls');
+var format = require('string-format-obj');
 var helpers = require('./helpers');
 
 var Module = helpers.Module;
@@ -67,7 +67,7 @@ var git = helpers.git;
 
 var TRAVIS_BRANCH = process.env.TRAVIS_BRANCH;
 var IS_PULL_REQUEST = process.env.TRAVIS_PULL_REQUEST === 'true';
-var GENERATE_DOCS = /\.1$/.test(process.env.TRAVIS_JOB_NUMBER);
+var IS_FIRST_JOB = /\.1$/.test(process.env.TRAVIS_JOB_NUMBER);
 
 // Get a list of the modules that have code changes.
 var modules = Module.getUpdated();
@@ -84,16 +84,11 @@ modules.forEach(function(mod) {
   mod.runUnitTests();
 });
 
-// Using istanbul, generate code coverage lcov.
-var coverage = Module.getCoverage(modules);
-
-// Pass lcov to coveralls.. if it fails oh well.
-coveralls.handleInput(coverage, function(err) {
-  if (err) {
-    echo('Coveralls error!');
-    echo(err.message || err);
-  }
-});
+// generate code coverage for all the modules (only on first pass)
+if (IS_FIRST_JOB) {
+  Module.installAll();
+  Module.getCoverage();
+}
 
 // If this is anything besides a merge to master, we can exit early.
 if (TRAVIS_BRANCH !== 'master' || IS_PULL_REQUEST) {
@@ -127,7 +122,7 @@ dependents.forEach(function(dep) {
 
 // Check to see whether or not this build requires documentation updates
 // If not, exit early
-if (!GENERATE_DOCS) {
+if (!IS_FIRST_JOB) {
   echo('Skipping doc updates.');
   exit();
 }
