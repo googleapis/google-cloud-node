@@ -2,6 +2,7 @@
   "name": "google-cloud-node",
   "private": "true",
   "devDependencies": {
+    "array-uniq": "^1.0.3",
     "async": "^1.4.2",
     "coveralls": "^2.11.2",
     "dox": "0.8.1",
@@ -25,7 +26,7 @@
     "through2": "^2.0.0"
   },
   "scripts": {
-    "postinstall": "node ./scripts/install.js",
+    "install-modules": "node ./scripts/install.js",
     "docs": "node ./scripts/docs/packages.js",
     "bundle": "node ./scripts/docs/bundle.js",
     "lint": "jshint scripts/ packages/ system-test/ test/ && jscs packages/ system-test/ test/",

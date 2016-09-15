@@ -25,6 +25,6 @@ os:
   - osx
 before_install:
   - npm install -g npm # Force using the latest npm to get dedupe during install
-script: "./scripts/build.sh"
-before_deploy: "./scripts/release.sh"
+script: "node ./scripts/build.js"
+before_deploy: "node ./scripts/release.js"
 sudo: false
