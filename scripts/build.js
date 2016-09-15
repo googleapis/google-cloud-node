@@ -40,9 +40,9 @@
  *
  * - Assuming all system tests pass, we'll create symlinks for each module
  *   via `npm link`. We'll then search for any modules that have the updated
- *   modules listed as dependencies or devDependencies. For each dependent
- *   module we find, we'll run it's system tests using the symlinks in place
- *   of the latest stable dependency version.
+ *   modules listed as devDependencies. For each dependent module we find, we'll
+ *   run it's system tests using the symlinks in place of the latest stable
+ *   dependency version.
  *
  * - We'll then check to see if this build requires a documentation update.
  *   This is determined by the `TEST_ONLY` environment variable. This is set
@@ -67,7 +67,7 @@ var git = helpers.git;
 
 var TRAVIS_BRANCH = process.env.TRAVIS_BRANCH;
 var IS_PULL_REQUEST = process.env.TRAVIS_PULL_REQUEST === 'true';
-var TEST_ONLY = process.env.TEST_ONLY === 'true';
+var GENERATE_DOCS = /\.1$/.test(process.env.TRAVIS_JOB_NUMBER);
 
 // Get a list of the modules that have code changes.
 var modules = Module.getUpdated();
@@ -127,7 +127,7 @@ dependents.forEach(function(dep) {
 
 // Check to see whether or not this build requires documentation updates
 // If not, exit early
-if (TEST_ONLY) {
+if (!GENERATE_DOCS) {
   echo('Skipping doc updates.');
   exit();
 }
