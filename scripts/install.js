@@ -23,7 +23,7 @@ var prop = require('propprop');
 require('shelljs/global');
 
 var directories = require('../docs/manifest.json').modules.map(prop('id'));
-var PARALLEL_LIMIT = 5;
+var PARALLEL_LIMIT = 3;
 var MAX_RETRIES = 1;
 
 // This is a helper method which will install each module's dependencies.
@@ -47,7 +47,7 @@ function installModule(moduleName, callback) {
         return;
       }
 
-      callback();
+      callback(err);
     });
   }
 }
