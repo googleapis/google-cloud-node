@@ -24,27 +24,32 @@ require('shelljs/global');
 
 var directories = require('../docs/manifest.json').modules.map(prop('id'));
 var PARALLEL_LIMIT = 5;
+var MAX_RETRIES = 1;
 
 // This is a helper method which will install each module's dependencies.
 
 function installModule(moduleName, callback) {
+  var installAttempts = 0;
   console.log('Installing dependencies for ' + moduleName);
+  tryToInstallModule();
 
-  exec('npm install', {
-    async: true,
-    cwd: path.join(__dirname, '../packages', moduleName)
-  }, function(err) {
-    if (err) {
-      // Retry installing to circumvent locked npm cache file conflicts on
-      // AppVeyor. (RE: https://github.com/npm/npm/issues/9696)
-      setTimeout(function() {
-        installModule(moduleName, callback);
-      }, 250);
-      return;
-    }
+  function tryToInstallModule() {
+    installAttempts++;
 
-    callback();
-  });
+    exec('npm install', {
+      async: true,
+      cwd: path.join(__dirname, '../packages', moduleName)
+    }, function(err) {
+      if (err && installAttempts <= MAX_RETRIES) {
+        // Retry installing to circumvent locked npm cache file conflicts on
+        // AppVeyor. (RE: https://github.com/npm/npm/issues/9696)
+        setTimeout(tryToInstallModule, 250);
+        return;
+      }
+
+      callback();
+    });
+  }
 }
 
 async.eachLimit(directories, PARALLEL_LIMIT, installModule, function(err) {
