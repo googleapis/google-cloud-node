@@ -9,22 +9,22 @@ environment:
     secure: usGkvXjqCzDNIQHx8oEncrZOmez7GBocB1EXM+g/9rw=
 
 cache:
-  - node_modules
-  - packages\bigquery\node_modules
-  - packages\bigtable\node_modules
-  - packages\compute\node_modules
-  - packages\datastore\node_modules
-  - packages\dns\node_modules
-  - packages\google-cloud\node_modules
-  - packages\language\node_modules
-  - packages\logging\node_modules
-  - packages\prediction\node_modules
-  - packages\pubsub\node_modules
-  - packages\resource\node_modules
-  - packages\storage\node_modules
-  - packages\translate\node_modules
-  - packages\vision\node_modules
   - '%APPDATA%\npm-cache'
+  - node_modules -> package.json
+  - packages\bigquery\node_modules -> packages\bigquery\package.json
+  - packages\bigtable\node_modules -> packages\bigtable\package.json
+  - packages\compute\node_modules -> packages\compute\package.json
+  - packages\datastore\node_modules -> packages\datastore\package.json
+  - packages\dns\node_modules -> packages\dns\package.json
+  - packages\google-cloud\node_modules -> packages\google-cloud\package.json
+  - packages\language\node_modules -> packages\language\package.json
+  - packages\logging\node_modules -> packages\logging\package.json
+  - packages\prediction\node_modules -> packages\prediction\package.json
+  - packages\pubsub\node_modules -> packages\pubsub\package.json
+  - packages\resource\node_modules -> packages\resource\package.json
+  - packages\storage\node_modules -> packages\storage\package.json
+  - packages\translate\node_modules -> packages\translate\package.json
+  - packages\vision\node_modules -> packages\vision\package.json
 
 install:
   - ps: Install-Product node $env:nodejs_version

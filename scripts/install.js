@@ -36,7 +36,7 @@ function installModule(moduleName, callback) {
   function tryToInstallModule() {
     installAttempts++;
 
-    exec('npm install', {
+    exec('npm install --cache-min 999999', {
       async: true,
       cwd: path.join(__dirname, '../packages', moduleName)
     }, function(err) {
