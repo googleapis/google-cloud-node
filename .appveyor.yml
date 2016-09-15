@@ -10,7 +10,7 @@ environment:
 
 cache:
   - node_modules
-  - packages\*\node_modules
+  - 'packages\*\node_modules'
   - '%APPDATA%\npm-cache'
 
 install:
