@@ -30,7 +30,7 @@ var PARALLEL_LIMIT = 5;
 async.eachLimit(directories, PARALLEL_LIMIT, function(directory, callback) {
   console.log('Installing dependencies for ' + directory);
 
-  exec('npm install', {
+  exec('npm install --force', {
     async: true,
     cwd: path.join(__dirname, '../packages', directory)
   }, callback);
