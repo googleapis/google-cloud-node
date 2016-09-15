@@ -23,10 +23,11 @@ var path = require('path');
 require('shelljs/global');
 
 var directories = fs.readdirSync(path.join(__dirname, '../packages'));
+var PARALLEL_LIMIT = 5;
 
 // This is a helper method which will auto-install all of the dependencies of
 // each module.
-async.eachSeries(directories, function(directory, callback) {
+async.eachLimit(directories, PARALLEL_LIMIT, function(directory, callback) {
   console.log('Installing dependencies for ' + directory);
 
   exec('npm install', {
