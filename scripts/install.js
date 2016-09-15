@@ -23,10 +23,9 @@ var path = require('path');
 require('shelljs/global');
 
 var directories = fs.readdirSync(path.join(__dirname, '../packages'));
-var PARALLEL_LIMIT = 5;
+var PARALLEL_LIMIT = 10;
 
-// This is a helper method which will auto-install all of the dependencies of
-// each module.
+// This is a helper method which will install each module's dependencies.
 
 function installModule(moduleName, callback) {
   console.log('Installing dependencies for ' + moduleName);
@@ -36,7 +35,8 @@ function installModule(moduleName, callback) {
     cwd: path.join(__dirname, '../packages', moduleName)
   }, function(err) {
     if (err) {
-      // Retry.
+      // Retry installing to circumvent locked npm cache file conflicts on
+      // AppVeyor. (RE: https://github.com/npm/npm/issues/9696)
       setTimeout(function() {
         installModule(moduleName, callback);
       }, 100);

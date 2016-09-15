@@ -1,10 +1,10 @@
 environment:
   matrix:
-  - nodejs_version: "0.12"
-  - nodejs_version: "4"
-  - nodejs_version: "6"
+  - nodejs_version: 0.12
+  - nodejs_version: 4
+  - nodejs_version: 6
 
-  GCLOUD_TESTS_KEY: 'key.appveyor.json'
+  GCLOUD_TESTS_KEY: key.appveyor.json
   GCLOUD_TESTS_KEY_SECRET:
     secure: usGkvXjqCzDNIQHx8oEncrZOmez7GBocB1EXM+g/9rw=
 
