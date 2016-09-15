@@ -27,14 +27,27 @@ var PARALLEL_LIMIT = 5;
 
 // This is a helper method which will auto-install all of the dependencies of
 // each module.
-async.eachLimit(directories, PARALLEL_LIMIT, function(directory, callback) {
-  console.log('Installing dependencies for ' + directory);
 
-  exec('npm install --force', {
+function installModule(moduleName, callback) {
+  console.log('Installing dependencies for ' + moduleName);
+
+  exec('npm install', {
     async: true,
-    cwd: path.join(__dirname, '../packages', directory)
-  }, callback);
-}, function(err) {
+    cwd: path.join(__dirname, '../packages', moduleName)
+  }, function(err) {
+    if (err) {
+      // Retry.
+      setTimeout(function() {
+        installModule(moduleName, callback);
+      }, 100);
+      return;
+    }
+
+    callback();
+  });
+}
+
+async.eachLimit(directories, PARALLEL_LIMIT, installModule, function(err) {
   if (err) {
     console.error('All dependencies could not be installed');
     return;
