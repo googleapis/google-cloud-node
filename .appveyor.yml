@@ -15,7 +15,7 @@ install:
         nuget install secure-file -ExcludeVersion
         secure-file\tools\secure-file -decrypt key.appveyor.json.enc -secret $env:GCLOUD_TESTS_KEY_SECRET
       }
-  - npm install -g npm
+  - npm install -g npm@2
   - set PATH=%APPDATA%\npm;%PATH%
   - npm install
 
