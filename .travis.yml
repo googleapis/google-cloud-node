@@ -3,6 +3,10 @@ node_js:
   - 0.12
   - 4
   - 6
+cache:
+  directories:
+  - node_modules
+  - packages/*/node_modules
 os:
   - linux
   - osx
