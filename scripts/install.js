@@ -39,7 +39,7 @@ function installModule(moduleName, callback) {
       // AppVeyor. (RE: https://github.com/npm/npm/issues/9696)
       setTimeout(function() {
         installModule(moduleName, callback);
-      }, 100);
+      }, 250);
       return;
     }
 
