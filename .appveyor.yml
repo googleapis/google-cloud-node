@@ -8,6 +8,11 @@ environment:
   GCLOUD_TESTS_KEY_SECRET:
     secure: usGkvXjqCzDNIQHx8oEncrZOmez7GBocB1EXM+g/9rw=
 
+cache:
+  - node_modules
+  - packages\*\node_modules
+  - '%APPDATA%\npm-cache'
+
 install:
   - ps: Install-Product node $env:nodejs_version
   - ps: >-
