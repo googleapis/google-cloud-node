@@ -17,13 +17,14 @@
 'use strict';
 
 var async = require('async');
+var fs = require('fs');
 var path = require('path');
 var prop = require('propprop');
 
 require('shelljs/global');
 
-var directories = require('../docs/manifest.json').modules.map(prop('id'));
-var PARALLEL_LIMIT = 3;
+var directories = fs.readdirSync(path.join(__dirname, '../packages'));
+var PARALLEL_LIMIT = Math.floor(directories.length / 2);
 var MAX_RETRIES = 1;
 
 // This is a helper method which will install each module's dependencies.
