@@ -19,10 +19,11 @@
 var async = require('async');
 var fs = require('fs');
 var path = require('path');
+var prop = require('propprop');
 
 require('shelljs/global');
 
-var directories = fs.readdirSync(path.join(__dirname, '../packages'));
+var directories = require('../docs/manifest.json').modules.map(prop('id'));
 var PARALLEL_LIMIT = 10;
 
 // This is a helper method which will install each module's dependencies.
