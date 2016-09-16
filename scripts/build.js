@@ -65,8 +65,9 @@ var run = helpers.run;
 var git = helpers.git;
 
 var TRAVIS_BRANCH = process.env.TRAVIS_BRANCH;
-var IS_PULL_REQUEST = process.env.TRAVIS_PULL_REQUEST === 'true';
 var IS_FIRST_JOB = /\.1$/.test(process.env.TRAVIS_JOB_NUMBER);
+var IS_PULL_REQUEST = process.env.TRAVIS_PULL_REQUEST === 'true' ||
+  !!process.env.APPVEYOR_PULL_REQUEST_NUMBER;
 
 // Get a list of the modules that have code changes.
 var modules = Module.getUpdated();
