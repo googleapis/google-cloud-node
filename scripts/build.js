@@ -87,7 +87,7 @@ modules.forEach(function(mod) {
 // generate code coverage for all the modules (only on first pass)
 if (IS_FIRST_JOB) {
   Module.installAll();
-  Module.getCoverage();
+  Module.runCoveralls();
 }
 
 // If this is anything besides a merge to master, we can exit early.

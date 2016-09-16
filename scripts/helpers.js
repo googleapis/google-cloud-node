@@ -103,10 +103,7 @@ Module.getAll = function() {
   cd(ROOT_DIR);
 
   return globby
-    .sync('*', {
-      cwd: 'packages',
-      ignore: Module.UMBRELLA
-    })
+    .sync('*', { cwd: 'packages' })
     .map(Module)
 };
 
@@ -125,44 +122,21 @@ Module.getDependents = function(modules) {
 };
 
 /**
- * Generates an lcov coverage report for the specified modules.
+ * Installs dependencies for all the modules!
  *
  * @static
- * @return {string} lcov
- */
-Module.getCoverage = function() {
-  var tests = Module.getAll().map(function(mod) {
-    return path.join(mod.directory, 'test', '*.js');
-  });
-
-  cd(ROOT_DIR);
-
-  run([
-    'istanbul',
-    'cover _mocha',
-    '--report lcovonly',
-    '-x "packages/*/src/v*/*.js"',
-    '--',
-    '--no-timeout',
-    '--bail',
-    'packages/*/test/*.js',
-    '-R spec'
-  ]);
-
-  var lcovPath = path.join(ROOT_DIR, 'coverage', 'lcov.info');
-
-  run(['cat', lcovPath, '|', './coveralls.js'], {
-    cwd: path.join(ROOT_DIR, 'node_modules', 'coveralls', 'bin')
-  });
-
-  rm('-rf', path.dirname(lcovPath));
-};
-
-/**
- * Installs dependencies for all the modules!
  */
 Module.installAll = function() {
   run('npm run postinstall', { cwd: ROOT_DIR });
+};
+
+/**
+ * Generates an lcov coverage report for the specified modules.
+ *
+ * @static
+ */
+Module.runCoveralls = function() {
+  run('npm run coveralls', { cwd: ROOT_DIR });
 };
 
 /**
