@@ -25,6 +25,10 @@
     "cp": true,
     "exec": true,
     "pwd": true,
-    "rm": true
+    "rm": true,
+    "echo": true,
+    "exit": true,
+    "cd": true,
+    "mkdir": true
   }
 }

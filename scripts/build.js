@@ -58,7 +58,6 @@
 
 require('shelljs/global');
 
-var format = require('string-format-obj');
 var helpers = require('./helpers');
 
 var Module = helpers.Module;

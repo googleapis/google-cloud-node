@@ -17,7 +17,6 @@
 'use strict';
 
 var path = require('path');
-var fs = require('fs');
 var uniq = require('array-uniq');
 var globby = require('globby');
 var execSync = require('child_process').execSync;
@@ -104,7 +103,7 @@ Module.getAll = function() {
 
   return globby
     .sync('*', { cwd: 'packages' })
-    .map(Module)
+    .map(Module);
 };
 
 /**
@@ -117,7 +116,7 @@ Module.getAll = function() {
  */
 Module.getDependents = function(modules) {
   return Module.getAll().filter(function(mod) {
-    return mod.hasDeps(modules)
+    return mod.hasDeps(modules);
   });
 };
 
@@ -282,7 +281,7 @@ function setUser(name, email) {
  * @param {...string} file - File to add
  */
 function add() {
-  var files = [].slice.call(argument);
+  var files = [].slice.call(arguments);
   var command = ['git add'].concat(files);
 
   run(command);
