@@ -162,7 +162,7 @@ Module.getCoverage = function() {
  * Installs dependencies for all the modules!
  */
 Module.installAll = function() {
-  run('npm run install-modules', { cwd: ROOT_DIR });
+  run('npm run postinstall', { cwd: ROOT_DIR });
 };
 
 /**

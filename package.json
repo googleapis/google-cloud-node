@@ -26,7 +26,7 @@
     "through2": "^2.0.0"
   },
   "scripts": {
-    "install-modules": "node ./scripts/install.js",
+    "postinstall": "node ./scripts/install.js",
     "docs": "node ./scripts/docs/packages.js",
     "bundle": "node ./scripts/docs/bundle.js",
     "lint": "jshint scripts/ packages/ system-test/ test/ && jscs packages/ system-test/ test/",

@@ -25,6 +25,8 @@ os:
   - osx
 before_install:
   - npm install -g npm # Force using the latest npm to get dedupe during install
+install:
+ - npm install --ignore-scripts
 before_script:
   - npm run lint
   - openssl aes-256-cbc -K $encrypted_b8aa0887832a_key -iv $encrypted_b8aa0887832a_iv -in key.json.enc -out key.json -d
