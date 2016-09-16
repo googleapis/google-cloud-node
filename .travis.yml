@@ -29,10 +29,15 @@ install:
  - npm install --ignore-scripts
 before_script:
   - npm run lint
-  -
   - if [ "${TRAVIS_BRANCH}" == "master" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ]; then
+      export IS_PUSH_TO_MASTER=true;
+    fi
+  - if [ $IS_PUSH_TO_MASTER ]; then
       openssl aes-256-cbc -K $encrypted_b8aa0887832a_key -iv $encrypted_b8aa0887832a_iv -in key.json.enc -out key.json -d;
     fi
 script: "node ./scripts/build.js"
-before_deploy: "node ./scripts/release.js"
+after_success:
+  - if [ $IS_PUSH_TO_MASTER ]; then
+      node ./scripts/build-docs.js;
+    fi
 sudo: false

@@ -230,89 +230,189 @@ function run(command, options) {
 
 module.exports.run = run;
 
+/**
+ * Used to make committing to git easier/etc..
+ *
+ * @param {string=} cwd - Directory to commit/add/push from.
+ */
+function Git(cwd) {
+  this.cwd = cwd || ROOT_DIR;
+}
+
 // We'll use this for cloning/submoduling/pushing purposes on CI
-var REPO = 'https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME}';
+Git.REPO = 'https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME}';
 
 /**
  * Creates a submodule in the root directory in quiet mode.
  *
- * @alias git.submodule
  * @param {string} branch - The branch to use.
  * @param {string=} alias - Name of the folder that contains submodule.
+ * @return {Git}
  */
-function submodule(branch, alias) {
+Git.prototype.submodule = function(branch, alias) {
   alias = alias || branch;
 
-  run(['git submodule add -q -b', branch, REPO, alias], {
-    cwd: ROOT_DIR
+  run(['git submodule add -q -b', branch, Git.REPO, alias], {
+    cwd: this.cwd
   });
-}
+
+  return new Git(path.join(this.cwd, alias));
+};
 
 /**
  * Check to see if git has any files it can commit.
  *
- * @alias git.hasUpdates
  * @return {boolean}
  */
-function hasUpdates() {
+Git.prototype.hasUpdates = function() {
   var output = run('git status --porcelain', {
+    cwd: this.cwd,
     stdio: null
   });
 
   return !!output && output.trim().length > 0;
-}
+};
 
 /**
  * Sets git user
  *
- * @alias git.setUser
  * @param {string} name - User name
  * @param {string} email - User email
  */
-function setUser(name, email) {
-  run(['git config user.name', name]);
-  run(['git config user.email', email]);
-}
+Git.prototype.setUser = function(name, email) {
+  run(['git config user.name', name], {
+    cwd: this.cwd
+  });
+
+  run(['git config user.email', email], {
+    cwd: this.cwd
+  });
+};
 
 /**
  * Adds all files passed in via git add
  *
- * @alias git.add
  * @param {...string} file - File to add
  */
-function add() {
+Git.prototype.add = function() {
   var files = [].slice.call(arguments);
   var command = ['git add'].concat(files);
 
-  run(command);
-}
+  run(command, {
+    cwd: this.cwd
+  });
+};
 
 /**
  * Commits to git via commit message.
  *
- * @alias git.commit
  * @param {string} message - The commit message.
  */
-function commit(message) {
-  run(['git commit -m', '"' + message + '"']);
-}
+Git.prototype.commit = function(message) {
+  run(['git commit -m', '"' + message + '"', '[ci skip]'], {
+    cwd: this.cwd
+  });
+};
 
 /**
  * Runs git status and pushes changes in quiet mode.
  *
- * @alias git.push
  * @param {string} branch - The branch to push to.
  */
-function push(branch) {
-  run('git status');
-  run(['git push -q', REPO, branch]);
+Git.prototype.push = function(branch) {
+  run('git status', {
+    cwd: this.cwd
+  });
+
+  run(['git push -q', Git.REPO, branch], {
+    cwd: this.cwd
+  });
+};
+
+module.exports.git = new Git();
+
+/**
+ * The name of the branch currently being tested.
+ *
+ * @alias ci.BRANCH
+ */
+var BRANCH = process.env.TRAVIS_BRANCH || process.env.APPVEYOR_REPO_BRANCH;
+
+/**
+ * Checks to see if this is a pull request or not.
+ *
+ * @alias ci.IS_PR
+ */
+var IS_PR = process.env.TRAVIS_PULL_REQUEST === 'true' ||
+  !!process.env.APPVEYOR_PULL_REQUEST_NUMBER;
+
+/**
+ * Returns the tag name (assuming this is a release)
+ *
+ * @alias ci.getTagName
+ * @return {string|null}
+ */
+function getTagName() {
+  return process.env.TRAVIS_TAG || process.env.APPVEYOR_REPO_TAG_NAME;
 }
 
-module.exports.git = {
-  submodule: submodule,
-  hasUpdates: hasUpdates,
-  setUser: setUser,
-  add: add,
-  commit: commit,
-  push: push
+/**
+ * Let's us know whether or not this is a release.
+ *
+ * @alias ci.isReleaseBuild
+ * @return {string|null}
+ */
+function isReleaseBuild() {
+  return !!getTagName();
+}
+
+/**
+ * Returns name/version of release.
+ *
+ * @alias ci.getRelease
+ * @return {object|null}
+ */
+function getRelease() {
+  var tag = getTagName();
+
+  if (!tag) {
+    return null;
+  }
+
+  var parts = tag.split('-');
+
+  return {
+    version: parts.pop(),
+    name: parts.pop() || Module.UMBRELLA
+  };
+}
+
+/**
+ * Checks to see if this is a push to master.
+ *
+ * @alias ci.isPushToMaster
+ * @return {boolean}
+ */
+function isPushToMaster() {
+  return BRANCH === 'master' && !IS_PR;
+}
+
+/**
+ * Checks to see if this the CI's first pass (Travis only)
+ *
+ * @alias ci.isFirstPass
+ * @return {boolean}
+ */
+function isFirstPass() {
+  return /\.1$/.test(process.env.TRAVIS_JOB_NUMBER);
+}
+
+module.exports.ci = {
+  BRANCH: BRANCH,
+  IS_PR: IS_PR,
+  getTagName: getTagName,
+  isReleaseBuild: isReleaseBuild,
+  getRelease: getRelease,
+  isPushToMaster: isPushToMaster,
+  isFirstPass: isFirstPass
 };
