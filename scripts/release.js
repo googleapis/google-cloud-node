@@ -68,6 +68,9 @@ var mod = new Module(MODULE_NAME);
 // install module dependencies
 mod.install();
 
+// run module unit tests
+mod.runUnitTests();
+
 // run module system tests
 mod.runSystemTests();
 
