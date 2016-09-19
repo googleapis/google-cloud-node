@@ -378,7 +378,8 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
  *
  * //-
  * // See <a href="https://cloud.google.com/speech/reference/rpc/google.cloud.speech.v1beta1#google.cloud.speech.v1beta1.StreamingRecognizeRequest">
- * // `StreamingRecognizeRequest`</a> for all of the available configuration options.
+ * // `StreamingRecognizeRequest`</a> for all of the available configuration
+ * // options.
  * //-
  * var request = {
  *   config: {
