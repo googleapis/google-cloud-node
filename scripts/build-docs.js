@@ -71,7 +71,7 @@ cp('docs/home.html', GHPAGES_JSON);
 cp('docs/manifest.json', ghpages.cwd);
 
 globby
-  .sync('ghpages/json/*/master')
+  .sync(path.join(GHPAGES_JSON, '*/master'))
   .forEach(function(dir) {
     cp('docs/*.md', dir);
   });
@@ -140,7 +140,7 @@ if (release && release.name !== 'common') {
 
 if (ghpages.hasUpdates()) {
   ghpages.add('manifest.json', 'json');
-  ghpages.commit('Update docs for ' + ci.getTagName());
+  ghpages.commit('Update docs for ' + (ci.getTagName() || 'master'));
   ghpages.push('HEAD:gh-pages');
 } else {
   echo('Nothing to commit. Exiting without pushing changes.');
