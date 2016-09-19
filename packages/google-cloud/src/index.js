@@ -363,22 +363,23 @@ var apis = {
  * @alias module:google-cloud
  * @constructor
  *
- * @param {object} config - Connection configuration options.
- * @param {string} config.projectId - The project ID from the Google Developer's
- *     Console. E.g. 'purple-grape-123'.
- * @param {string=} config.keyFilename - Full path to the a .json, .pem, or .p12
+ * @param {object} options - Configuration object.
+ * @param {string} options.projectId - The project ID from the Google Developer's
+ *     Console. E.g. 'grape-spaceship-123'. We will also check for the environment
+ *     variable `GCLOUD_PROJECT` for your project ID.
+ * @param {string} options.keyFilename - Full path to the a .json, .pem, or .p12
  *     key downloaded from the Google Developers Console. NOTE: .pem and .p12
- *     require you to specify `config.email` as well.
- * @param {string=} config.email - Account email address. Required when using a
+ *     require you to specify `options.email` as well.
+ * @param {string} options.email - Account email address. Required when using a
  *     .pem or .p12 keyFilename.
- * @param {object=} config.credentials - Credentials object.
- * @param {string} config.credentials.client_email
- * @param {string} config.credentials.private_key
- * @param {boolean=} config.autoRetry - Automatically retry requests if the
+ * @param {object} options.credentials - Credentials object.
+ * @param {string} options.credentials.client_email
+ * @param {string} options.credentials.private_key
+ * @param {boolean} options.autoRetry - Automatically retry requests if the
  *     response is related to rate limits or certain intermittent server errors.
  *     We will exponentially backoff subsequent requests by default. (default:
  *     true)
- * @param {number=} config.maxRetries - Maximum number of automatic retries
+ * @param {number} options.maxRetries - Maximum number of automatic retries
  *     attempted before returning the error. (default: 3)
  *
  * @example
