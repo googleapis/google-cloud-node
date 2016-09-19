@@ -290,22 +290,22 @@ function Bigtable(options) {
     return new Bigtable(options);
   }
 
+  var baseUrl = 'bigtable.googleapis.com';
   var adminBaseUrl = 'bigtableadmin.googleapis.com';
 
-  var customEndpoint = is.defined(options.apiEndpoint) ||
-    is.defined(process.env.BIGTABLE_EMULATOR_HOST);
-
-  var baseUrl = 'bigtable.googleapis.com';
+  var customEndpoint = options.apiEndpoint ||
+    process.env.BIGTABLE_EMULATOR_HOST;
 
   if (customEndpoint) {
-    baseUrl = options.apiEndpoint || process.env.BIGTABLE_EMULATOR_HOST;
+    baseUrl = customEndpoint;
+    adminBaseUrl = baseUrl;
   }
 
   var config = {
     baseUrl: baseUrl,
     service: 'bigtable',
     apiVersion: 'v2',
-    customEndpoint: customEndpoint,
+    customEndpoint: !!customEndpoint,
     protoServices: {
       Bigtable: googleProtoFiles.bigtable.v2,
       BigtableTableAdmin: {
