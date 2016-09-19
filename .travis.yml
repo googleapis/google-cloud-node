@@ -1,8 +1,25 @@
 language: node_js
 node_js:
-  - 6
-  - 4
   - 0.12
+  - 4
+  - 6
+cache:
+  directories:
+    - node_modules
+    - packages/bigquery/node_modules
+    - packages/bigtable/node_modules
+    - packages/compute/node_modules
+    - packages/datastore/node_modules
+    - packages/dns/node_modules
+    - packages/google-cloud/node_modules
+    - packages/language/node_modules
+    - packages/logging/node_modules
+    - packages/prediction/node_modules
+    - packages/pubsub/node_modules
+    - packages/resource/node_modules
+    - packages/storage/node_modules
+    - packages/translate/node_modules
+    - packages/vision/node_modules
 os:
   - linux
   - osx
