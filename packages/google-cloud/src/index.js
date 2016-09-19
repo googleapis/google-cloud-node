@@ -365,7 +365,7 @@ var apis = {
  *
  * @param {object} options - Configuration object.
  * @param {string} options.projectId - The project ID from the Google Developer's
- *     Console. E.g. 'grape-spaceship-123'. We will also check for the environment
+ *     Console, e.g. 'grape-spaceship-123'. We will also check the environment
  *     variable `GCLOUD_PROJECT` for your project ID.
  * @param {string} options.keyFilename - Full path to the a .json, .pem, or .p12
  *     key downloaded from the Google Developers Console. NOTE: .pem and .p12
