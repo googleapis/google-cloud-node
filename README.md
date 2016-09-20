@@ -23,6 +23,7 @@ This client supports the following Google Cloud Platform services:
 * [Google Translate API](#google-translate-api)
 * [Google Cloud Natural Language](#google-cloud-natural-language-beta) (Beta)
 * [Google Cloud Resource Manager](#google-cloud-resource-manager-beta) (Beta)
+* [Google Cloud Speech](#google-cloud-speech-beta) (Beta)
 * [Google Cloud Vision](#google-cloud-vision-beta) (Beta)
 * [Stackdriver Logging](#stackdriver-logging-beta) (Beta)
 
@@ -92,6 +93,7 @@ If you are not running this client on Google Compute Engine, you need a Google D
   * Google Cloud Natural Language API
   * Google Cloud Pub/Sub API
   * Google Cloud Resource Manager API
+  * Google Cloud Speech API
   * Google Cloud Storage
   * Google Cloud Storage JSON API
   * Google Cloud Vision API
@@ -849,6 +851,91 @@ project.getMetadata(function(err, metadata) {
 ```
 
 
+## Google Cloud Speech (Beta)
+
+> **This is a Beta release of Google Cloud Speech.** This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
+
+- [API Documentation][gcloud-speech-docs]
+- [Official Documentation][cloud-speech-docs]
+
+#### Using the all-in-one module
+
+```
+$ npm install --save google-cloud
+```
+
+```js
+var gcloud = require('google-cloud');
+var speech = gcloud.speech;
+```
+
+#### Using the Cloud Speech API module
+
+```
+$ npm install --save @google-cloud/speech
+```
+
+```js
+var speech = require('@google-cloud/speech');
+```
+
+#### Preview
+
+```js
+// Authenticating on a per-API-basis. You don't need to do this if you auth on a
+// global basis (see Authentication section above).
+
+var speechClient = gcloud.speech({
+  projectId: 'my-project',
+  keyFilename: '/path/to/keyfile.json'
+});
+
+// Detect the speech in an audio file.
+speechClient.recognize('./audio.raw', {
+  encoding: 'LINEAR16',
+  sampleRate: 16000
+}, function(err, transcript) {
+  // transcript = 'how old is the Brooklyn Bridge'
+});
+
+// Detect the speech in an audio file stream.
+fs.createReadStream('./audio.raw')
+  .on('error', console.error)
+  .pipe(speech.createRecognizeStream({
+    config: {
+      encoding: 'LINEAR16',
+      sampleRate: 16000
+    },
+    singleUtterance: false,
+    interimResults: false
+  }))
+  .on('error', console.error)
+  .on('data', function(data) {
+    // The first "data" event emitted might look like:
+    //   data = {
+    //     endpointerType: Speech.endpointerTypes.START_OF_SPEECH,
+    //     results: "",
+    //     ...
+    //   }
+    //
+    // A later "data" event emitted might look like:
+    //   data = {
+    //     endpointerType: Speech.endpointerTypes.END_OF_AUDIO,
+    //     results: "",
+    //     ...
+    //   }
+    //
+    // A final "data" event emitted might look like:
+    //   data = {
+    //     endpointerType:
+    //       Speech.endpointerTypes.ENDPOINTER_EVENT_UNSPECIFIED,
+    //     results: "how old is the Brooklyn Bridge",
+    //     ...
+    //   }
+  });
+```
+
+
 ## Google Cloud Vision (Beta)
 
 > **This is a Beta release of Google Cloud Vision.** This feature is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
@@ -1074,6 +1161,7 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [gcloud-prediction-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/prediction
 [gcloud-pubsub-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub
 [gcloud-resource-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/resource
+[gcloud-speech-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/speech
 [gcloud-storage-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/storage
 [gcloud-translate-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/translate
 [gcloud-vision-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/vision
@@ -1119,5 +1207,7 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [cloud-storage-docs]: https://cloud.google.com/storage/docs/overview
 
 [cloud-translate-docs]: https://cloud.google.com/translate/docs
+
+[cloud-speech-docs]: https://cloud.google.com/speech/docs
 
 [cloud-vision-docs]: https://cloud.google.com/vision/docs

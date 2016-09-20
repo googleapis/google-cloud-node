@@ -66,6 +66,9 @@ module.exports = {
     resource: {
       title: 'Google Cloud Resource Manager'
     },
+    speech: {
+      title: 'Google Cloud Speech API'
+    },
     storage: {
       title: 'Google Cloud Storage',
       instanceName: 'gcs'

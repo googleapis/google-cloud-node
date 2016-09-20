@@ -23,6 +23,7 @@ var glob = require('glob');
 var mitm = require('mitm');
 var packageOverviewConfigs = require('../scripts/docs/config.js').OVERVIEW;
 var prop = require('propprop');
+var tmp = require('tmp');
 var vm = require('vm');
 
 var util = require('../packages/common').util;
@@ -171,6 +172,9 @@ describe('documentation', function() {
           code = moduleInstantationCode + code;
         }
 
+        // Create a temporary file for any examples that try to write to disk.
+        var temporaryFile = tmp.fileSync();
+
         code = code
           .replace(
             /require\('google-cloud'\)/g,
@@ -181,7 +185,11 @@ describe('documentation', function() {
             'require(\'../packages/' + directory + '/node_modules/$1'
           )
           .replace('require(\'express\')', FakeExpress.toString())
-          .replace('require(\'level\')', FakeLevel.toString());
+          .replace('require(\'level\')', FakeLevel.toString())
+
+          // in:  fs.anyMethod('--any-file-path--
+          // out: fs.anymethod('--a-temporary-file--
+          .replace(/(fs\.[^(]+\(['"])([^'"]*)/g, '$1' + temporaryFile.name);
 
         var displayName = filename
           .replace('docs/json/master/', '')
