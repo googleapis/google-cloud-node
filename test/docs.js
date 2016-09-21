@@ -23,7 +23,6 @@ var glob = require('glob');
 var mitm = require('mitm');
 var packageOverviewConfigs = require('../scripts/docs/config.js').OVERVIEW;
 var prop = require('propprop');
-var tmp = require('tmp');
 var vm = require('vm');
 
 var util = require('../packages/common').util;
@@ -55,22 +54,27 @@ function runCodeInSandbox(code, sandbox) {
 }
 
 describe('documentation', function() {
+  var tempFile = 'temp-test-file.tmp';
   var MITM;
 
-  before(function() {
+  before(function(done) {
     // Set a global to indicate to any interested function inside of gcloud that
     // this is a sandbox environment.
     global.GCLOUD_SANDBOX_ENV = true;
 
     // Turn off the network so that API calls aren't actually made.
     MITM = mitm();
+
+    fs.writeFile(tempFile, 'test', done);
   });
 
-  after(function() {
+  after(function(done) {
     delete global.GCLOUD_SANDBOX_ENV;
 
     // Re-enable the network.
     MITM.disable();
+
+    fs.unlink(tempFile, done);
   });
 
   var ignore = [
@@ -172,9 +176,6 @@ describe('documentation', function() {
           code = moduleInstantationCode + code;
         }
 
-        // Create a temporary file for any examples that try to write to disk.
-        var temporaryFile = tmp.fileSync();
-
         code = code
           .replace(
             /require\('google-cloud'\)/g,
@@ -189,7 +190,7 @@ describe('documentation', function() {
 
           // in:  fs.anyMethod('--any-file-path--
           // out: fs.anymethod('--a-temporary-file--
-          .replace(/(fs\.[^(]+\(['"])([^'"]*)/g, '$1' + temporaryFile.name);
+          .replace(/(fs\.[^(]+\(['"])([^'"]*)/g, '$1' + tempFile);
 
         var displayName = filename
           .replace('docs/json/master/', '')

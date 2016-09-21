@@ -22,8 +22,7 @@
     "semver": "^5.3.0",
     "shelljs": "^0.7.3",
     "string-format-obj": "^1.0.0",
-    "through2": "^2.0.0",
-    "tmp": "0.0.28"
+    "through2": "^2.0.0"
   },
   "scripts": {
     "postinstall": "node ./scripts/install.js",
