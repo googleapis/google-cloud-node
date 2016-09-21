@@ -136,6 +136,13 @@ if (release && release.name !== 'common') {
   );
 
   cp('-rf', JSON_DIR, RELEASE_DIR);
+
+  var tocPath = path.join(RELEASE_DIR, 'toc.json');
+  var toc = require(tocPath);
+
+  toc.tagName = ci.getTagName();
+  toc = JSON.stringify(toc);
+  fs.writeFileSync(tocPath, toc);
 }
 
 if (ghpages.hasUpdates()) {
