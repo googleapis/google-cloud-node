@@ -19,7 +19,7 @@ var speech = require('@google-cloud/speech')({
 });
 
 // Detect the speech in an audio file.
-speechClient.recognize('./audio.raw', {
+speech.recognize('./audio.raw', {
   encoding: 'LINEAR16',
   sampleRate: 16000
 }, function(err, transcript) {

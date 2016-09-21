@@ -885,7 +885,7 @@ var speech = require('@google-cloud/speech');
 // Authenticating on a per-API-basis. You don't need to do this if you auth on a
 // global basis (see Authentication section above).
 
-var speechClient = gcloud.speech({
+var speechClient = speech({
   projectId: 'my-project',
   keyFilename: '/path/to/keyfile.json'
 });
@@ -901,7 +901,7 @@ speechClient.recognize('./audio.raw', {
 // Detect the speech in an audio file stream.
 fs.createReadStream('./audio.raw')
   .on('error', console.error)
-  .pipe(speech.createRecognizeStream({
+  .pipe(speechClient.createRecognizeStream({
     config: {
       encoding: 'LINEAR16',
       sampleRate: 16000
