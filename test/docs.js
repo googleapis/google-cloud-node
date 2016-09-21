@@ -65,6 +65,7 @@ describe('documentation', function() {
     // Turn off the network so that API calls aren't actually made.
     MITM = mitm();
 
+    // Create a temporary file for any examples that try to write to disk.
     fs.writeFile(tempFile, 'test', done);
   });
 
