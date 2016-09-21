@@ -425,7 +425,8 @@ Table.prototype.getMetadata = function(options, callback) {
 };
 
 /**
- * Get Row objects for the rows currently in your table.
+ * Get Row objects for the rows currently in your table as a readable object
+ * stream.
  *
  * @param {options=} options - Configuration object.
  * @param {boolean} options.decode - If set to `false` it will not decode Buffer
@@ -436,91 +437,11 @@ Table.prototype.getMetadata = function(options, callback) {
  * @param {object[]} options.ranges - A list of key ranges.
  * @param {module:bigtable/filter} options.filter - Row filters allow you to
  *     both make advanced queries and format how the data is returned.
- * @param {boolean} options.interleave - Allow for interleaving.
  * @param {number} options.limit - Maximum number of rows to be returned.
- * @param {function=} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request.
- * @param {module:bigtable/row[]} callback.rows - List of Row objects.
+ * @return {stream}
  *
  * @example
- * //-
- * // While this method does accept a callback, this is not recommended for
- * // large datasets as it will buffer all rows before executing the callback.
- * // Instead we recommend using the streaming API by simply omitting the
- * // callback.
- * //-
- * var callback = function(err, rows) {
- *   if (!err) {
- *     // `rows` is an array of Row objects.
- *   }
- * };
- *
- * table.getRows(callback);
- *
- * //-
- * // Specify arbitrary keys for a non-contiguous set of rows.
- * // The total size of the keys must remain under 1MB, after encoding.
- * //-
- * table.getRows({
- *   keys: [
- *     'alincoln',
- *     'gwashington'
- *   ]
- * }, callback);
- *
- * //-
- * // Specify a contiguous range of rows to read by supplying `start` and `end`
- * // keys.
- * //
- * // If the `start` key is omitted, it is interpreted as an empty string.
- * // If the `end` key is omitted, it is interpreted as infinity.
- * //-
- * table.getRows({
- *   start: 'alincoln',
- *   end: 'gwashington'
- * }, callback);
- *
- * //-
- * // Specify multiple ranges.
- * //-
- * table.getRows({
- *   ranges: [{
- *     start: 'alincoln',
- *     end: 'gwashington'
- *   }, {
- *     start: 'tjefferson',
- *     end: 'jadams'
- *   }]
- * }, callback);
- *
- * //-
- * // By default, rows are read sequentially, producing results which are
- * // guaranteed to arrive in increasing row order. Setting `interleave` to
- * // true allows multiple rows to be interleaved in the response, which
- * // increases throughput but breaks this guarantee and may force the client
- * // to use more memory to buffer partially-received rows.
- * //-
- * table.getRows({
- *   interleave: true
- * }, callback);
- *
- * //-
- * // Apply a {module:bigtable/filter} to the contents of the specified rows.
- * //-
- * table.getRows({
- *   filter: [
- *     {
- *       column: 'gwashington'
- *     }, {
- *       value: 1
- *     }
- *   ]
- * }, callback);
- *
- * //-
- * // Get the rows from your table as a readable object stream.
- * //-
- * table.getRows()
+ * table.getRowStream()
  *   .on('error', console.error)
  *   .on('data', function(row) {
  *     // `row` is a Row object.
@@ -533,18 +454,62 @@ Table.prototype.getMetadata = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing.
  * //-
- * table.getRows()
+ * table.getRowStream()
  *   .on('data', function(row) {
  *     this.end();
  *   });
+ *
+ * //-
+ * // Specify arbitrary keys for a non-contiguous set of rows.
+ * // The total size of the keys must remain under 1MB, after encoding.
+ * //-
+ * table.getRowStream({
+ *   keys: [
+ *     'alincoln',
+ *     'gwashington'
+ *   ]
+ * });
+ *
+ * //-
+ * // Specify a contiguous range of rows to read by supplying `start` and `end`
+ * // keys.
+ * //
+ * // If the `start` key is omitted, it is interpreted as an empty string.
+ * // If the `end` key is omitted, it is interpreted as infinity.
+ * //-
+ * table.getRows({
+ *   start: 'alincoln',
+ *   end: 'gwashington'
+ * });
+ *
+ * //-
+ * // Specify multiple ranges.
+ * //-
+ * table.getRowStream({
+ *   ranges: [{
+ *     start: 'alincoln',
+ *     end: 'gwashington'
+ *   }, {
+ *     start: 'tjefferson',
+ *     end: 'jadams'
+ *   }]
+ * });
+ *
+ * //-
+ * // Apply a {module:bigtable/filter} to the contents of the specified rows.
+ * //-
+ * table.getRowStream({
+ *   filter: [
+ *     {
+ *       column: 'gwashington'
+ *     }, {
+ *       value: 1
+ *     }
+ *   ]
+ * });
  */
-Table.prototype.getRows = function(options, callback) {
+Table.prototype.getRowStream = function(options) {
   var self = this;
-
-  if (is.function(options)) {
-    callback = options;
-    options = {};
-  }
 
   options = options || {};
   options.ranges = options.ranges || [];
@@ -588,7 +553,7 @@ Table.prototype.getRows = function(options, callback) {
     reqOpts.numRowsLimit = options.limit;
   }
 
-  var stream = pumpify.obj([
+  return pumpify.obj([
     this.requestStream(grpcOpts, reqOpts),
     through.obj(function(data, enc, next) {
       var throughStream = this;
@@ -606,12 +571,35 @@ Table.prototype.getRows = function(options, callback) {
       next();
     })
   ]);
+};
 
-  if (!is.function(callback)) {
-    return stream;
+/**
+ * Get Row objects for the rows currently in your table.
+ *
+ * This method is not recommended for large datasets as it will buffer all rows
+ * before returning the results. Instead we recommend using the streaming API
+ * via {module:bigtable/table#getRowStream}.
+ *
+ * @param {object=} options - Configuration object. See
+ *     {module:bigtable/table#getRowStream} for a complete list of options.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {module:bigtable/row[]} callback.rows - List of Row objects.
+ *
+ * @example
+ * table.getRows(function(err, rows) {
+ *   if (!err) {
+ *     // `rows` is an array of Row objects.
+ *   }
+ * });
+ */
+Table.prototype.getRows = function(options, callback) {
+  if (is.function(options)) {
+    callback = options;
+    options = {};
   }
 
-  stream
+  this.getRowStream(options)
     .on('error', callback)
     .pipe(concat(function(rows) {
       callback(null, rows);
@@ -916,11 +904,24 @@ Table.prototype.row = function(key) {
  *   //   ...
  *   // ]
  * });
+ */
+Table.prototype.sampleRowKeys = function(callback) {
+  this.sampleRowKeyStream()
+    .on('error', callback)
+    .pipe(concat(function(keys) {
+      callback(null, keys);
+    }));
+};
+
+/**
+ * Returns a sample of row keys in the table as a readable object stream.
  *
- * //-
- * // Get the keys from your table as a readable object stream.
- * //-
- * table.sampleRowKeys()
+ * See {module:bigtable/table#sampleRowKeys} for more details.
+ *
+ * @return {stream}
+ *
+ * @example
+ * table.sampleRowKeyStream()
  *   .on('error', console.error)
  *   .on('data', function(key) {
  *     // Do something with the `key` object.
@@ -930,12 +931,12 @@ Table.prototype.row = function(key) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing.
  * //-
- * table.sampleRowKeys()
+ * table.sampleRowKeyStream()
  *   .on('data', function(key) {
  *     this.end();
  *   });
  */
-Table.prototype.sampleRowKeys = function(callback) {
+Table.prototype.sampleRowKeyStream = function() {
   var grpcOpts = {
     service: 'Bigtable',
     method: 'sampleRowKeys'
@@ -946,7 +947,7 @@ Table.prototype.sampleRowKeys = function(callback) {
     objectMode: true
   };
 
-  var stream = pumpify.obj([
+  return pumpify.obj([
     this.requestStream(grpcOpts, reqOpts),
     through.obj(function(key, enc, next) {
       next(null, {
@@ -955,16 +956,6 @@ Table.prototype.sampleRowKeys = function(callback) {
       });
     })
   ]);
-
-  if (!is.function(callback)) {
-    return stream;
-  }
-
-  stream
-    .on('error', callback)
-    .pipe(concat(function(keys) {
-      callback(null, keys);
-    }));
 };
 
 module.exports = Table;

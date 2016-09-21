@@ -217,27 +217,6 @@ Prediction.prototype.createModel = function(id, options, callback) {
  * prediction.getModels({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the models from your project as a readable object stream.
- * //-
- * prediction.getModels()
- *   .on('error', console.error)
- *   .on('data', function(model) {
- *     // model is a Model object.
- *   })
- *   .on('end', function() {
- *     // All models retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * prediction.getModels()
- *   .on('data', function(model) {
- *     this.end();
- *   });
  */
 Prediction.prototype.getModels = function(query, callback) {
   var self = this;
@@ -275,6 +254,34 @@ Prediction.prototype.getModels = function(query, callback) {
 };
 
 /**
+ * Gets a list of trained models for the project as a readable object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:prediction#getModels} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * prediction.getModelStream()
+ *   .on('error', console.error)
+ *   .on('data', function(model) {
+ *     // model is a Model object.
+ *   })
+ *   .on('end', function() {
+ *     // All models retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * prediction.getModelStream()
+ *   .on('data', function(model) {
+ *     this.end();
+ *   });
+ */
+Prediction.prototype.getModelStream = common.paginator.streamify('getModels');
+
+/**
  * Create a model object representing a trained model.
  *
  * @throws {error} If a model ID is not provided.
@@ -295,10 +302,9 @@ Prediction.prototype.model = function(id) {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(Prediction, 'getModels');
+common.paginator.extend(Prediction, 'getModels');
 
 Prediction.Model = Model;
 

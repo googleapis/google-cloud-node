@@ -31,6 +31,7 @@
   },
   "scripts": {
     "postinstall": "node ./scripts/install.js",
+    "link-common": "node ./scripts/link-common.js",
     "update-deps": "node ./scripts/update-deps.js",
     "docs": "node ./scripts/docs/packages.js",
     "bundle": "node ./scripts/docs/bundle.js",

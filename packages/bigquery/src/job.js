@@ -238,19 +238,6 @@ Job.prototype.cancel = function(callback) {
  * job.getQueryResults({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Consume the results from the query as a readable object stream.
- * //-
- * var through2 = require('through2');
- * var fs = require('fs');
- *
- * job.getQueryResults()
- *   .pipe(through2.obj(function (row, enc, next) {
- *     this.push(JSON.stringify(row) + '\n');
- *     next();
- *   }))
- *   .pipe(fs.createWriteStream('./test/testdata/testfile.json'));
  */
 Job.prototype.getQueryResults = function(options, callback) {
   if (is.fn(options)) {
@@ -260,7 +247,32 @@ Job.prototype.getQueryResults = function(options, callback) {
 
   options = options || {};
   options.job = this;
-  return this.bigQuery.query(options, callback);
+  this.bigQuery.query(options, callback);
+};
+
+/**
+ * Get the results of a job as a readable object stream.
+ *
+ * @param {object=} options - Configuration object. See
+ *     {module:bigquery/job#getQueryResults} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * var through2 = require('through2');
+ * var fs = require('fs');
+ *
+ * job.getQueryResultStream()
+ *   .pipe(through2.obj(function (row, enc, next) {
+ *     this.push(JSON.stringify(row) + '\n');
+ *     next();
+ *   }))
+ *   .pipe(fs.createWriteStream('./test/testdata/testfile.json'));
+ */
+Job.prototype.getQueryResultStream = function(options) {
+  options = options || {};
+  options.job = this;
+
+  return this.bigQuery.createQueryStream(options);
 };
 
 /**

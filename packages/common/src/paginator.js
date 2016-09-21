@@ -15,7 +15,7 @@
  */
 
 /*!
- * @module common/stream-router
+ * @module common/paginator
  */
 
 'use strict';
@@ -34,39 +34,61 @@ var util = require('./util.js');
 
 /*! Developer Documentation
  *
- * streamRouter is used to extend `nextQuery`+callback methods with stream
- * functionality.
+ * paginator is used to auto paginated `nextQuery` methods as well as
+ * streamifying them.
  *
  * Before:
  *
- *   search.query('done=true', function(err, results, nextQuery) {});
+ *   search.query('done=true', function(err, results, nextQuery) {
+ *     search.query(nextQuery, function(err, results, nextQuery) { ... });
+ *   });
  *
  * After:
  *
- *   search.query('done=true').on('data', function(result) {});
+ *   search.query('done=true', function(err, results) { ... });
  *
  * Methods to extend should be written to accept callbacks and return a
- * `nextQuery`. All stream logic is handled in `streamRouter.router_`.
+ * `nextQuery`.
  */
-var streamRouter = {};
+var paginator = {};
 
 /**
  * Cache the original method, then overwrite it on the Class's prototype.
  *
  * @param {function} Class - The parent class of the methods to extend.
- * @param {array|string} methodNames - Name(s) of the methods to extend.
+ * @param {string|string[]} methodNames - Name(s) of the methods to extend.
  */
-streamRouter.extend = function(Class, methodNames) {
+paginator.extend = function(Class, methodNames) {
   methodNames = arrify(methodNames);
 
   methodNames.forEach(function(methodName) {
-    var originalMethod = Class.prototype[methodName];
-
-    Class.prototype[methodName] = function() {
-      var parsedArguments = streamRouter.parseArguments_(arguments);
-      return streamRouter.router_(parsedArguments, originalMethod.bind(this));
-    };
+    Class.prototype[methodName] = paginator.wrap_(Class.prototype[methodName]);
   });
+};
+
+/**
+ * Wraps paginated API calls in a readable object stream.
+ *
+ * This method simply calls the nextQuery recursively, emitting results to a
+ * stream. The stream ends when `nextQuery` is null.
+ *
+ * `maxResults` will act as a cap for how many results are fetched and emitted
+ * to the stream.
+ *
+ * @param {string} methodName - Name of the method to streamify.
+ * @return {function} - Wrapped function.
+ */
+paginator.streamify = function(methodName) {
+  return function() {
+    var parsedArguments = paginator.parseArguments_(arguments);
+    var originalMethod = this[methodName];
+
+    if (is.fn(originalMethod.getOriginal_)) {
+      originalMethod = originalMethod.getOriginal_();
+    }
+
+    return paginator.runAsStream_(parsedArguments, originalMethod.bind(this));
+  };
 };
 
 /**
@@ -75,7 +97,7 @@ streamRouter.extend = function(Class, methodNames) {
  * @param {array} args - The original `arguments` pseduo-array that the original
  *     method received.
  */
-streamRouter.parseArguments_ = function(args) {
+paginator.parseArguments_ = function(args) {
   var query;
   var autoPaginate = true;
   var maxApiCalls = -1;
@@ -129,9 +151,8 @@ streamRouter.parseArguments_ = function(args) {
 };
 
 /**
- * The router accepts a query and callback that were passed to the overwritten
- * method. If there's a callback, simply pass the query and/or callback through
- * to the original method. If there isn't a callback. stream mode is activated.
+ * This simply checks to see if `autoPaginate` is set or not, if it's true
+ * then we buffer all results, otherwise simply call the original method.
  *
  * @param {array} parsedArguments - Parsed arguments from the original method
  *     call.
@@ -144,25 +165,20 @@ streamRouter.parseArguments_ = function(args) {
  * @param {number} parsedArguments.maxResults - Maximum results to return.
  * @param {function} originalMethod - The cached method that accepts a callback
  *     and returns `nextQuery` to receive more results.
- * @return {undefined|stream}
  */
-streamRouter.router_ = function(parsedArguments, originalMethod) {
+paginator.run_ = function(parsedArguments, originalMethod) {
   var query = parsedArguments.query;
   var callback = parsedArguments.callback;
   var autoPaginate = parsedArguments.autoPaginate;
 
-  if (callback) {
-    if (autoPaginate) {
-      this.runAsStream_(parsedArguments, originalMethod)
-        .on('error', callback)
-        .pipe(concat(function(results) {
-          callback(null, results);
-        }));
-    } else {
-      originalMethod(query, callback);
-    }
+  if (autoPaginate) {
+    this.runAsStream_(parsedArguments, originalMethod)
+      .on('error', callback)
+      .pipe(concat(function(results) {
+        callback(null, results);
+      }));
   } else {
-    return this.runAsStream_(parsedArguments, originalMethod);
+    originalMethod(query, callback);
   }
 };
 
@@ -184,7 +200,7 @@ streamRouter.router_ = function(parsedArguments, originalMethod) {
  *     and returns `nextQuery` to receive more results.
  * @return {stream} - Readable object stream.
  */
-streamRouter.runAsStream_ = function(parsedArguments, originalMethod) {
+paginator.runAsStream_ = function(parsedArguments, originalMethod) {
   var query = parsedArguments.query;
   var resultsToSend = parsedArguments.maxResults;
 
@@ -231,4 +247,25 @@ streamRouter.runAsStream_ = function(parsedArguments, originalMethod) {
   return limiter.stream;
 };
 
-module.exports = streamRouter;
+/**
+ * Wraps original method in auto paginated function and provides a getter
+ * for the original in the event that we wish to streamify that same method
+ * later.
+ *
+ * @param {function} originalMethod - The original method.
+ * @return {function} wrapped - The wrapped method.
+ */
+paginator.wrap_ = function(originalMethod) {
+  var wrapped = function() {
+    var parsedArguments = paginator.parseArguments_(arguments);
+    return paginator.run_(parsedArguments, originalMethod.bind(this));
+  };
+
+  wrapped.getOriginal_ = function() {
+    return originalMethod;
+  };
+
+  return wrapped;
+};
+
+module.exports = paginator;

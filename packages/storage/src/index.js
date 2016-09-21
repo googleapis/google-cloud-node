@@ -289,7 +289,7 @@ Storage.prototype.createBucket = function(name, metadata, callback) {
  *     return.
  * @param {string} query.pageToken - A previously-returned page token
  *     representing part of the larger set of results to view.
- * @param {function=} callback - The callback function.
+ * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {module:storage/bucket[]} callback.buckets - List of all buckets from
  *     your project.
@@ -324,27 +324,6 @@ Storage.prototype.createBucket = function(name, metadata, callback) {
  * gcs.getBuckets({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the buckets from your project as a readable object stream.
- * //-
- * gcs.getBuckets()
- *   .on('error', console.error)
- *   .on('data', function(bucket) {
- *     // bucket is a Bucket object.
- *   })
- *   .on('end', function() {
- *     // All buckets retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * gcs.getBuckets()
- *   .on('data', function(bucket) {
- *     this.end();
- *   });
  */
 Storage.prototype.getBuckets = function(query, callback) {
   var self = this;
@@ -380,12 +359,40 @@ Storage.prototype.getBuckets = function(query, callback) {
   });
 };
 
+/**
+ * Get Bucket objects for all of the buckets in your project as a readable
+ * object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:storage#getBuckets} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * gcs.getBucketStream()
+ *   .on('error', console.error)
+ *   .on('data', function(bucket) {
+ *     // bucket is a Bucket object.
+ *   })
+ *   .on('end', function() {
+ *     // All buckets retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * gcs.getBucketStream()
+ *   .on('data', function(bucket) {
+ *     this.end();
+ *   });
+ */
+Storage.prototype.getBucketStream = common.paginator.streamify('getBuckets');
+
 /*! Developer Documentation
  *
- * This method can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(Storage, 'getBuckets');
+common.paginator.extend(Storage, 'getBuckets');
 
 Storage.Bucket = Bucket;
 Storage.Channel = Channel;

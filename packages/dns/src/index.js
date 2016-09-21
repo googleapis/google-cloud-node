@@ -145,27 +145,6 @@ DNS.prototype.createZone = function(name, config, callback) {
  *
  * @example
  * dns.getZones(function(err, zones, apiResponse) {});
- *
- * //-
- * // Get the zones from your project as a readable object stream.
- * //-
- * dns.getZones()
- *   .on('error', console.error)
- *   .on('data', function(zone) {
- *     // zone is a Zone object.
- *   })
- *   .on('end', function() {
- *     // All zones retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * dns.getZones()
- *   .on('data', function(zone) {
- *     this.end();
- *   });
  */
 DNS.prototype.getZones = function(query, callback) {
   var self = this;
@@ -203,6 +182,34 @@ DNS.prototype.getZones = function(query, callback) {
 };
 
 /**
+ * Gets a list of managed zones for the project as a readable object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:dns#getZones} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * dns.getZoneStream()
+ *   .on('error', console.error)
+ *   .on('data', function(zone) {
+ *     // zone is a Zone object.
+ *   })
+ *   .on('end', function() {
+ *     // All zones retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * dns.getZoneStream()
+ *   .on('data', function(zone) {
+ *     this.end();
+ *   });
+ */
+DNS.prototype.getZoneStream = common.paginator.streamify('getZones');
+
+/**
  * Create a zone object representing a managed zone.
  *
  * @throws {error} If a zone name is not provided.
@@ -223,10 +230,9 @@ DNS.prototype.zone = function(name) {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(DNS, 'getZones');
+common.paginator.extend(DNS, 'getZones');
 
 DNS.Zone = Zone;
 

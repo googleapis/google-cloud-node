@@ -138,7 +138,7 @@ describe('Prediction', function() {
       });
 
       it('should return models in stream mode', function(done) {
-        prediction.getModels({ maxResults: 1 })
+        prediction.getModelStream({ maxResults: 1 })
           .on('error', done)
           .once('data', function() {
             done();

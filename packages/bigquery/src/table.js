@@ -331,9 +331,7 @@ Table.prototype.copy = function(destination, metadata, callback) {
  *   }))
  *   .pipe(fs.createWriteStream('./test/testdata/testfile.json'));
  */
-Table.prototype.createReadStream = function() {
-  return this.getRows();
-};
+Table.prototype.createReadStream = common.paginator.streamify('getRows');
 
 /**
  * Load data into your table from a readable stream of JSON, CSV, or
@@ -968,6 +966,16 @@ Table.prototype.query = function(query, callback) {
 };
 
 /**
+ * Run a query scoped to your dataset as a readable object stream.
+ *
+ * See {module:bigquery#createQueryStream} for full documentation of this
+ * method.
+ */
+Table.prototype.createQueryStream = function(query) {
+  return this.dataset.createQueryStream(query);
+};
+
+/**
  * Set the metadata on the table.
  *
  * @resource [Tables: update API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/tables/update}
@@ -1025,9 +1033,8 @@ Table.prototype.setMetadata = function(metadata, callback) {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(Table, ['getRows']);
+common.paginator.extend(Table, ['getRows']);
 
 module.exports = Table;

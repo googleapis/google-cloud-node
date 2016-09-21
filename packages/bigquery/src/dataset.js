@@ -288,25 +288,6 @@ Dataset.prototype.delete = function(options, callback) {
  * dataset.getTables(function(err, tables, nextQuery, apiResponse) {
  *   // If `nextQuery` is non-null, there are more results to fetch.
  * });
- *
- * //-
- * // Get the tables as a readable object stream. `table` is a Table object
- * //-
- * dataset.getTables()
- *   .on('error', console.error)
- *   .on('data', function(table) {})
- *   .on('end', function() {
- *     // All tables have been retrieved
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * dataset.getTables()
- *   .on('data', function(table) {
- *     this.end();
- *   });
  */
 Dataset.prototype.getTables = function(query, callback) {
   var that = this;
@@ -345,6 +326,32 @@ Dataset.prototype.getTables = function(query, callback) {
 };
 
 /**
+ * List all or some of the tables in your project as a readable object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:bigquery/dataset#getTables} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * dataset.getTableStream()
+ *   .on('error', console.error)
+ *   .on('data', function(table) {})
+ *   .on('end', function() {
+ *     // All tables have been retrieved
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * dataset.getTableStream()
+ *   .on('data', function(table) {
+ *     this.end();
+ *   });
+ */
+Dataset.prototype.getTableStream = common.paginator.streamify('getTables');
+
+/**
  * Run a query scoped to your dataset.
  *
  * See {module:bigquery#query} for full documentation of this method.
@@ -366,6 +373,28 @@ Dataset.prototype.query = function(options, callback) {
 };
 
 /**
+ * Run a query scoped to your dataset as a readable object stream.
+ *
+ * See {module:bigquery#createQueryStream} for full documentation of this
+ * method.
+ */
+Dataset.prototype.createQueryStream = function(options) {
+  if (is.string(options)) {
+    options = {
+      query: options
+    };
+  }
+
+  options = extend(true, {}, options, {
+    defaultDataset: {
+      datasetId: this.id
+    }
+  });
+
+  return this.bigQuery.createQueryStream(options);
+};
+
+/**
  * Create a Table object.
  *
  * @param {string} id - The ID of the table.
@@ -380,9 +409,8 @@ Dataset.prototype.table = function(id) {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(Dataset, ['getTables']);
+common.paginator.extend(Dataset, ['getTables']);
 
 module.exports = Dataset;

@@ -279,27 +279,6 @@ InstanceGroup.prototype.delete = function(callback) {
  * instanceGroup.getVMs({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the VM instances from your project as a readable object stream.
- * //-
- * instanceGroup.getVMs()
- *   .on('error', console.error)
- *   .on('data', function(vm) {
- *     // `vm` is a `VM` object.
- *   })
- *   .on('end', function() {
- *     // All instances retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * instanceGroup.getVMs()
- *   .on('data', function(vm) {
- *     this.end();
- *   });
  */
 InstanceGroup.prototype.getVMs = function(options, callback) {
   var self = this;
@@ -347,6 +326,35 @@ InstanceGroup.prototype.getVMs = function(options, callback) {
     callback(null, vms, nextQuery, resp);
   });
 };
+
+/**
+ * Get a list of VM instances in this instance group as a readable object
+ * stream.
+ *
+ * @param {object=} options - Configuration object. See
+ *     {module:compute/instanceGroup#getVMs} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * instanceGroup.getVMStream()
+ *   .on('error', console.error)
+ *   .on('data', function(vm) {
+ *     // `vm` is a `VM` object.
+ *   })
+ *   .on('end', function() {
+ *     // All instances retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * instanceGroup.getVMStream()
+ *   .on('data', function(vm) {
+ *     this.end();
+ *   });
+ */
+InstanceGroup.prototype.getVMStream = common.paginator.streamify('getVMs');
 
 /**
  * Remove one or more VMs from this instance group.
@@ -448,9 +456,8 @@ InstanceGroup.prototype.setPorts = function(ports, callback) {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(InstanceGroup, ['getVMs']);
+common.paginator.extend(InstanceGroup, ['getVMs']);
 
 module.exports = InstanceGroup;
