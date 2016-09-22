@@ -54,28 +54,22 @@ function runCodeInSandbox(code, sandbox) {
 }
 
 describe('documentation', function() {
-  var tempFile = 'temp-test-file.tmp';
   var MITM;
 
-  before(function(done) {
+  before(function() {
     // Set a global to indicate to any interested function inside of gcloud that
     // this is a sandbox environment.
     global.GCLOUD_SANDBOX_ENV = true;
 
     // Turn off the network so that API calls aren't actually made.
     MITM = mitm();
-
-    // Create a temporary file for any examples that try to write to disk.
-    fs.writeFile(tempFile, 'test', done);
   });
 
-  after(function(done) {
+  after(function() {
     delete global.GCLOUD_SANDBOX_ENV;
 
     // Re-enable the network.
     MITM.disable();
-
-    fs.unlink(tempFile, done);
   });
 
   var ignore = [
@@ -150,6 +144,26 @@ describe('documentation', function() {
         };
       }
 
+      function FakeFs() {
+        return {
+          writeFile: function(name, contents, callback) {
+            callback(null);
+          },
+          readFile: function(filename, callback) {
+            callback(null, new Buffer(''));
+          },
+          readFileSync: function() {
+            return new Buffer('');
+          },
+          createWriteStream: function() {
+            return require('through2')();
+          },
+          createReadStream: function() {
+            return require('through2')();
+          }
+        };
+      }
+
       fileDocBlocks.methods.forEach(function(method) {
         var code = method.examples.map(prop('code')).join('\n');
         var lowercaseId = method.id.toLowerCase();
@@ -188,10 +202,7 @@ describe('documentation', function() {
           )
           .replace('require(\'express\')', FakeExpress.toString())
           .replace('require(\'level\')', FakeLevel.toString())
-
-          // in:  fs.anyMethod('--any-file-path--
-          // out: fs.anymethod('--a-temporary-file--
-          .replace(/(fs\.[^(]+\(['"])([^'"]*)/g, '$1' + tempFile);
+          .replace('require(\'fs\')', '(' + FakeFs.toString() + '())');
 
         var displayName = filename
           .replace('docs/json/master/', '')
