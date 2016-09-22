@@ -730,10 +730,10 @@ File.prototype.createResumableUpload = function(options, callback) {
  * by setting `options.resumable` to `false`.
  *
  * <p class="notice">
- *   Resumable uploads have been known to cause performance issues. For each
- *   file being uploaded we store the first 16kb of data, this can cause
- *   considerable performance degredation when uploading a large number of
- *   files.
+ *   There is some overhead when using a resumable upload that can cause
+ *   noticeable performance degradation while uploading a series of small files.
+ *   When uploading files less than 10MB, it is recommended that the resumable
+ *   feature is disabled.
  * </p>
  *
  * For faster crc32c computation, you must manually install
