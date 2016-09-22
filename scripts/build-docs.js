@@ -63,7 +63,7 @@ var ghpages = git.submodule('gh-pages', 'ghpages');
 var GHPAGES_JSON = path.join(ghpages.cwd, 'json');
 
 // generate latest json docs
-run('npm run docs');
+Module.buildDocs();
 
 // copy docs to gh-pages
 cp('-R', 'docs/json/*', GHPAGES_JSON);

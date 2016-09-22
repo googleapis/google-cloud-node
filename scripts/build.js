@@ -43,8 +43,8 @@ require('shelljs/global');
 
 var helpers = require('./helpers');
 
-var Module = helpers.Module;
 var ci = helpers.ci;
+var Module = helpers.Module;
 
 // Get a list of the modules that have code changes.
 var modules = Module.getUpdated();
@@ -60,9 +60,12 @@ if (ci.isFirstPass()) {
   Module.runCoveralls();
 }
 
+Module.buildDocs();
+
 modules.forEach(function(mod) {
   mod.install();
   mod.runUnitTests();
+  mod.runSnippetTests();
 });
 
 // If this is a push to master, let's run system tests

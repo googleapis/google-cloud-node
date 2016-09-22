@@ -93,6 +93,15 @@ Module.getUpdated = function() {
 };
 
 /**
+ * Builds docs for all modules
+ *
+ * @static
+ */
+Module.buildDocs = function() {
+  run('npm run docs', { cwd: ROOT_DIR });
+};
+
+/**
  * Returns a list containing ALL the modules.
  *
  * @static
@@ -162,6 +171,13 @@ Module.prototype.link = function(mod) {
  */
 Module.prototype.runUnitTests = function() {
   run('npm run test', { cwd: this.directory });
+};
+
+/**
+ * Runs snippet tests for this module.
+ */
+Module.prototype.runSnippetTests = function() {
+  run(['TEST_MODULE=' + this.name, 'mocha test/docs.js'], { cwd: ROOT_DIR });
 };
 
 /**

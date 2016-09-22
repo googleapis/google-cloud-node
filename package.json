@@ -5,6 +5,7 @@
     "array-uniq": "^1.0.3",
     "async": "^1.4.2",
     "coveralls": "^2.11.2",
+    "create-error-class": "^3.0.2",
     "dox": "0.8.1",
     "extend": "^3.0.0",
     "glob": "^5.0.9",
