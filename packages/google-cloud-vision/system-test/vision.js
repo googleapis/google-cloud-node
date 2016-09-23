@@ -522,7 +522,7 @@ describe('Vision', function() {
   describe('text', function() {
     var expectedResults = [
       normalizeNewline(multiline.stripIndent(function() {/*
-        Google Cloud Client Library for Node.js an idiomatic, intuitive, and
+        Google Cloud Client Library for Node js an idiomatic, intuitive, and
         natural way for Node.js developers to integrate with Google Cloud
         Platform services, like Cloud Datastore and Cloud Storage.
 
@@ -530,7 +530,10 @@ describe('Vision', function() {
     ];
 
     expectedResults = expectedResults.concat(
-      expectedResults[0].replace(/\n/g, ' ').trim().split(' ')
+      expectedResults[0]
+        .replace(/\n/g, ' ')
+        .trim()
+        .split(' ')
     );
 
     expectedResults.errors = [];
