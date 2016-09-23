@@ -35,13 +35,13 @@ install:
       }
   - npm install -g npm
   - set PATH=%APPDATA%\npm;%PATH%
-  - npm install
+  - npm install --ignore-scripts
 
 test_script:
   - node --version
   - npm --version
-  - npm test
-  - ps: if (!$env:APPVEYOR_PULL_REQUEST_NUMBER) { npm run system-test }
+  - npm run lint
+  - node ./scripts/build.js
 
 build: off
 
