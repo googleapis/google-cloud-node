@@ -827,3 +827,4 @@ Speech.prototype.startRecognition = function(file, config, callback) {
 };
 
 module.exports = Speech;
+module.exports.v1beta1 = require('./v1beta1');
