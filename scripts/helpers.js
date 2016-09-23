@@ -178,7 +178,7 @@ Module.prototype.runUnitTests = function() {
  */
 Module.prototype.runSnippetTests = function() {
   process.env.TEST_MODULE = this.name;
-  run('mocha test/docs.js', { cwd: ROOT_DIR });
+  run('npm run snippet-test', { cwd: ROOT_DIR });
   delete process.env.TEST_MODULE;
 };
 
