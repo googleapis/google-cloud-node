@@ -361,8 +361,12 @@ var BRANCH = process.env.TRAVIS_BRANCH || process.env.APPVEYOR_REPO_BRANCH;
  *
  * @alias ci.IS_PR
  */
-var IS_PR = process.env.TRAVIS_PULL_REQUEST === 'true' ||
-  !!process.env.APPVEYOR_PULL_REQUEST_NUMBER;
+var IS_PR = (function() {
+  if (process.env.TRAVIS_PULL_REQUEST) {
+    return process.env.TRAVIS_PULL_REQUEST !== 'false';
+  }
+  return !!process.env.APPVEYOR_PULL_REQUEST_NUMBER;
+}());
 
 /**
  * Returns the tag name (assuming this is a release)
