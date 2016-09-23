@@ -729,6 +729,13 @@ File.prototype.createResumableUpload = function(options, callback) {
  * Resumable uploads are automatically enabled and must be shut off explicitly
  * by setting `options.resumable` to `false`.
  *
+ * <p class="notice">
+ *   There is some overhead when using a resumable upload that can cause
+ *   noticeable performance degradation while uploading a series of small files.
+ *   When uploading files less than 10MB, it is recommended that the resumable
+ *   feature is disabled.
+ * </p>
+ *
  * For faster crc32c computation, you must manually install
  * [`fast-crc32c`](http://www.gitnpm.com/fast-crc32c):
  *
