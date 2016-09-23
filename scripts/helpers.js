@@ -69,12 +69,25 @@ Module.UMBRELLA = 'google-cloud';
  * @return {Module[]} modules - The updated modules.
  */
 Module.getUpdated = function() {
+  var command = ['git diff'];
+
   cd(ROOT_DIR);
 
-  var output = run('git diff HEAD^ --name-only', {
-    stdio: null // prevents piping to the console
-  });
+  if (!isPushToMaster()) {
+    run([
+      'git remote add temp',
+      'https://github.com/GoogleCloudPlatform/google-cloud-node.git'
+    ]);
 
+    run('git fetch -q temp');
+    command.push('HEAD', 'temp/master');
+  } else {
+    command.push('HEAD^');
+  }
+
+  command.push('--name-only');
+
+  var output = run(command, { stdio: null });
   var files = output.trim().split('\n');
   var modules = files.filter(function(file) {
     return /^packages\/.+\.js/.test(file);
