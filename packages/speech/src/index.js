@@ -137,6 +137,7 @@ Speech.prototype.endpointerTypes = {
  */
 Speech.detectEncoding_ = function(filename) {
   if (!is.string(filename)) {
+    // istanbul ignore next
     return;
   }
 
