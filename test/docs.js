@@ -27,7 +27,7 @@ var prop = require('propprop');
 var vm = require('vm');
 
 var rootFile = 'index.json';
-var util = require('../packages/common').util;
+var noop = function() {};
 
 var DocsError = createErrorClass('DocsError', function(err, code) {
   var lineCol = err.stack.match('assert-code\.vm:(.+)');
@@ -46,7 +46,7 @@ var DocsError = createErrorClass('DocsError', function(err, code) {
 
 var FakeConsole = Object.keys(console)
   .reduce(function(console, method) {
-    console[method] = util.noop;
+    console[method] = noop;
     return console;
   }, {});
 
