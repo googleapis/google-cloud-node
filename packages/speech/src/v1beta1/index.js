@@ -24,7 +24,6 @@ function v1beta1(options) {
     scopes: v1beta1.ALL_SCOPES
   }, options);
   var gaxGrpc = gax.grpc(options);
-  var result = {};
   return speechApi(gaxGrpc);
 }
 v1beta1.SERVICE_ADDRESS = speechApi.SERVICE_ADDRESS;
