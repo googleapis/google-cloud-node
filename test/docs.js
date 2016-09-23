@@ -169,7 +169,7 @@ function getDocs(mod) {
 }
 
 function createInstantiationCode(mod) {
-  var config = overviews[mod];
+  var config = overviews[mod] || {};
 
   return format('var {instanceName} = require(\'{path}\')({config});', {
     instanceName: config.instanceName || mod,
