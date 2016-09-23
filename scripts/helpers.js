@@ -71,14 +71,7 @@ Module.UMBRELLA = 'google-cloud';
 Module.getUpdated = function() {
   cd(ROOT_DIR);
 
-  run([
-    'git remote add temp',
-    'https://github.com/GoogleCloudPlatform/google-cloud-node.git'
-  ]);
-
-  run('git fetch -q temp');
-
-  var output = run('git diff HEAD temp/master --name-only', {
+  var output = run('git diff HEAD^ --name-only', {
     stdio: null // prevents piping to the console
   });
 
