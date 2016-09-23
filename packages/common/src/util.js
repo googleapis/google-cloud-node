@@ -29,6 +29,7 @@ var googleAuth = require('google-auto-auth');
 var is = require('is');
 var request = require('request').defaults({
   timeout: 60000,
+  gzip: true,
   pool: {
     maxSockets: Infinity
   }
