@@ -191,7 +191,8 @@ function decodeValueProto(valueProto) {
     }
 
     case 'timestampValue': {
-      return new Date(parseInt(value.seconds, 10) * 1000);
+      var milliseconds = parseInt(value.nanos, 10) / 1e6;
+      return new Date(parseInt(value.seconds, 10) * 1000 + milliseconds);
     }
 
     default: {
@@ -252,11 +253,10 @@ function encodeValue(value) {
 
   if (value instanceof Date) {
     var seconds = value.getTime() / 1000;
-    var secondsRounded = Math.floor(seconds);
 
     valueProto.timestampValue = {
-      seconds: secondsRounded,
-      nanos: Math.floor((seconds - secondsRounded) * 1e9)
+      seconds: Math.floor(seconds),
+      nanos: value.getMilliseconds() * 1e6
     };
 
     return valueProto;
