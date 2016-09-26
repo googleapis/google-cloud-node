@@ -91,7 +91,6 @@ function updatePackage(pkg, callback) {
 }
 
 function shouldUpdateDep(dependency, callback) {
-  console.log(BLACKLIST, dependency.name)
   if (BLACKLIST.indexOf(dependency.name) > -1) {
     setImmediate(function() {
       callback(null, false);
