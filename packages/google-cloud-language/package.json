@@ -52,7 +52,7 @@
     "language"
   ],
   "dependencies": {
-    "@google-cloud/common": "^0.5.0",
+    "@google-cloud/common": "^0.6.0",
     "arguejs": "^0.2.3",
     "arrify": "^1.0.1",
     "extend": "^3.0.0",
