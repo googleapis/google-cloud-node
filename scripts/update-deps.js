@@ -26,8 +26,55 @@ var semver = require('semver');
 
 require('shelljs/global');
 
+/*! Developer Documentation
+ *
+ * This file will dig through all of the sub-module's package.json's, check for
+ * any compatible updates, and run `npm install` to update them.
+ */
+
+/**
+ * Dependencies not to update.
+ *
+ * @type {string[]}
+ */
+var BLACKLIST = [
+  'dns-zonefile'
+];
+
+/**
+ * The minimum version of Node that we support. This is compared against each
+ * depdendency's package.json.engines.node to confirm the newest version is
+ * compatible.
+ *
+ * @const {string}
+ */
 var MIN_SUPPORTED_NODE_VERSION =
   require('../package.json').engines.node.replace(/^\D*/, '');
+
+var pkgs = glob.sync('packages/*/package.json')
+  .map(function(packageJsonPath) {
+    return {
+      cwd: path.dirname(packageJsonPath),
+      json: require(path.join('..', packageJsonPath)),
+      depsToUpdate: [] // Updated in `populateDepsToUpdate`
+    };
+  });
+
+async.eachLimit(pkgs, 5, populateDepsToUpdate, function(err) {
+  if (err) {
+    console.error('Could not update dependencies', err);
+    return;
+  }
+
+  async.eachLimit(pkgs, 5, updatePackage, function(err) {
+    if (err) {
+      console.error('Could not update dependencies', err);
+      return;
+    }
+
+    console.log('Dependencies updated!');
+  });
+});
 
 function updatePackage(pkg, callback) {
   if (!is.empty(pkg.depsToUpdate)) {
@@ -89,28 +136,3 @@ function populateDepsToUpdate(pkg, callback) {
     });
   });
 }
-
-var pkgs = glob.sync('packages/*/package.json')
-  .map(function(packageJsonPath) {
-    return {
-      cwd: path.dirname(packageJsonPath),
-      json: require(path.join('..', packageJsonPath)),
-      depsToUpdate: []
-    };
-  });
-
-async.eachLimit(pkgs, 5, populateDepsToUpdate, function(err) {
-  if (err) {
-    console.error('Could not update dependencies', err);
-    return;
-  }
-
-  async.eachLimit(pkgs, 5, updatePackage, function(err) {
-    if (err) {
-      console.error('Could not update dependencies', err);
-      return;
-    }
-
-    console.log('Dependencies updated!');
-  });
-});
