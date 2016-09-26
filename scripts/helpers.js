@@ -19,7 +19,7 @@
 var path = require('path');
 var uniq = require('array-uniq');
 var globby = require('globby');
-var execSync = require('child_process').execSync;
+var spawnSync = require('child_process').spawnSync;
 var extend = require('extend');
 
 require('shelljs/global');
@@ -219,17 +219,15 @@ Module.prototype.hasDeps = function(modules) {
 module.exports.Module = Module;
 
 /**
- * Exec's command via child_process.execSync.
+ * Exec's command via child_process.spawnSync.
  * By default all output will be piped to the console unless `stdio`
  * is overridden.
  *
- * @param {string|string[]} command - The command to run.
- * @param {object=} options - Options to pass to `execSync`.
- * @return {string|null} -
+ * @param {string} command - The command to run.
+ * @param {object=} options - Options to pass to `spawnSync`.
+ * @return {string|null}
  */
 function run(command, options) {
-  var response;
-
   options = extend({
     stdio: [0, 1, 2]
   }, options);
@@ -238,17 +236,28 @@ function run(command, options) {
     command = command.join(' ');
   }
 
-  echo(command);
+  console.log(command);
 
-  try {
-    response = execSync(command, options);
-  } catch (e) {
-    console.error(e.message);
-    exit(1);
+  var args = command.split(' ');
+
+  command = args.shift();
+
+  var response = spawnSync(command, args, options);
+
+  if (response.error) {
+    console.error(response.error.message);
   }
 
-  if (response instanceof Buffer) {
-    return response.toString();
+  if (response.stderr) {
+    console.error(response.stderr.toString());
+  }
+
+  if (response.error || response.status) {
+    exit(response.status || 1);
+  }
+
+  if (response.stdout) {
+    return response.stdout.toString();
   }
 }
 
