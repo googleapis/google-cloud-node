@@ -218,13 +218,18 @@ describe('entity', function() {
     });
 
     it('should decode timestamps', function() {
-      var seconds = String(Date.now() / 1000);
-      var expectedValue = new Date(parseInt(seconds, 10) * 1000);
+      var date = new Date();
+
+      var seconds = Math.floor(date.getTime() / 1000);
+      var ms = date.getMilliseconds();
+
+      var expectedValue = new Date(seconds * 1000 + ms);
 
       var valueProto = {
         value_type: 'timestampValue',
         timestampValue: {
-          seconds: seconds
+          seconds: seconds,
+          nanos: ms * 1e6
         }
       };
 
@@ -327,12 +332,11 @@ describe('entity', function() {
     it('should encode a date', function() {
       var value = new Date();
       var seconds = value.getTime() / 1000;
-      var secondsRounded = Math.floor(seconds);
 
       var expectedValueProto = {
         timestampValue: {
-          seconds: secondsRounded,
-          nanos: Math.floor((seconds - secondsRounded) * 1e9)
+          seconds: Math.floor(seconds),
+          nanos: value.getMilliseconds() * 1e6
         }
       };
 

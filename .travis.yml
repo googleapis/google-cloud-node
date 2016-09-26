@@ -34,6 +34,7 @@ before_script:
     fi
   - if [ $IS_PUSH_TO_MASTER ]; then
       openssl aes-256-cbc -K $encrypted_b8aa0887832a_key -iv $encrypted_b8aa0887832a_iv -in key.json.enc -out key.json -d;
+      export GCLOUD_TESTS_KEY="$(pwd)/key.json";
     fi
 script: "node ./scripts/build.js"
 after_success:

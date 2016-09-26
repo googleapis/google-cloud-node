@@ -19,7 +19,7 @@
 var path = require('path');
 var uniq = require('array-uniq');
 var globby = require('globby');
-var execSync = require('child_process').execSync;
+var spawnSync = require('child_process').spawnSync;
 var extend = require('extend');
 
 require('shelljs/global');
@@ -69,19 +69,25 @@ Module.UMBRELLA = 'google-cloud';
  * @return {Module[]} modules - The updated modules.
  */
 Module.getUpdated = function() {
+  var command = ['git diff'];
+
   cd(ROOT_DIR);
 
-  run([
-    'git remote add temp',
-    'https://github.com/GoogleCloudPlatform/google-cloud-node.git'
-  ]);
+  if (!isPushToMaster()) {
+    run([
+      'git remote add temp',
+      'https://github.com/GoogleCloudPlatform/google-cloud-node.git'
+    ]);
 
-  run('git fetch -q temp');
+    run('git fetch -q temp');
+    command.push('HEAD', 'temp/master');
+  } else {
+    command.push('HEAD^');
+  }
 
-  var output = run('git diff HEAD temp/master --name-only', {
-    stdio: null // prevents piping to the console
-  });
+  command.push('--name-only');
 
+  var output = run(command, { stdio: null });
   var files = output.trim().split('\n');
   var modules = files.filter(function(file) {
     return /^packages\/.+\.js/.test(file);
@@ -213,17 +219,15 @@ Module.prototype.hasDeps = function(modules) {
 module.exports.Module = Module;
 
 /**
- * Exec's command via child_process.execSync.
+ * Exec's command via child_process.spawnSync.
  * By default all output will be piped to the console unless `stdio`
  * is overridden.
  *
- * @param {string|string[]} command - The command to run.
- * @param {object=} options - Options to pass to `execSync`.
- * @return {string|null} -
+ * @param {string} command - The command to run.
+ * @param {object=} options - Options to pass to `spawnSync`.
+ * @return {string|null}
  */
 function run(command, options) {
-  var response;
-
   options = extend({
     stdio: [0, 1, 2]
   }, options);
@@ -232,17 +236,32 @@ function run(command, options) {
     command = command.join(' ');
   }
 
-  echo(command);
+  console.log(command);
 
-  try {
-    response = execSync(command, options);
-  } catch (e) {
-    console.error(e.message);
-    exit(1);
+  var args = command.split(' ');
+
+  command = args.shift();
+
+  if (command === 'npm' && process.env.APPVEYOR) {
+    command += '.cmd';
   }
 
-  if (response instanceof Buffer) {
-    return response.toString();
+  var response = spawnSync(command, args, options);
+
+  if (response.error) {
+    console.error(response.error.message);
+  }
+
+  if (response.stderr) {
+    console.error(response.stderr.toString());
+  }
+
+  if (response.error || response.status) {
+    exit(response.status || 1);
+  }
+
+  if (response.stdout) {
+    return response.stdout.toString();
   }
 }
 
@@ -357,12 +376,19 @@ module.exports.git = new Git();
 var BRANCH = process.env.TRAVIS_BRANCH || process.env.APPVEYOR_REPO_BRANCH;
 
 /**
+ * The pull request number.
+ *
+ * @alias ci.PR_NUMBER;
+ */
+var PR_NUMBER = process.env.TRAVIS_PULL_REQUEST ||
+  process.env.APPVEYOR_PULL_REQUEST_NUMBER;
+
+/**
  * Checks to see if this is a pull request or not.
  *
  * @alias ci.IS_PR
  */
-var IS_PR = process.env.TRAVIS_PULL_REQUEST === 'true' ||
-  !!process.env.APPVEYOR_PULL_REQUEST_NUMBER;
+var IS_PR = !isNaN(parseInt(PR_NUMBER, 10));
 
 /**
  * Returns the tag name (assuming this is a release)
@@ -428,6 +454,7 @@ function isFirstPass() {
 module.exports.ci = {
   BRANCH: BRANCH,
   IS_PR: IS_PR,
+  PR_NUMBER: PR_NUMBER,
   getTagName: getTagName,
   isReleaseBuild: isReleaseBuild,
   getRelease: getRelease,

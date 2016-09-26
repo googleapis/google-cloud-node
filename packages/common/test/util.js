@@ -95,6 +95,7 @@ describe('common/util', function() {
   it('should have set correct defaults on Request', function() {
     assert.deepEqual(REQUEST_DEFAULT_CONF, {
       timeout: 60000,
+      gzip: true,
       pool: {
         maxSockets: Infinity
       }
