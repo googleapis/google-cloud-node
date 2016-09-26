@@ -54,7 +54,7 @@
     "speech"
   ],
   "dependencies": {
-    "@google-cloud/common": "^0.5.0",
+    "@google-cloud/common": "^0.6.0",
     "arguejs": "^0.2.3",
     "events-intercept": "^2.0.0",
     "extend": "^3.0.0",
