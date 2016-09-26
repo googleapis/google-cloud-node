@@ -3,7 +3,7 @@ Thanks for stopping by to let us know something could be better!
 Please run down the following list and make sure you've tried the usual "quick fixes":
 
   - Search the issues already opened: https://github.com/GoogleCloudPlatform/google-cloud-node/issues
-  - Search StackOverflow: https://stackoverflow.com/questions/tagged/gcloud-node
+  - Search StackOverflow: http://stackoverflow.com/questions/tagged/google-cloud-platform+node.js
   - Check our Troubleshooting guide: https://googlecloudplatform.github.io/google-cloud-node/#/docs/guides/troubleshooting
   - Check our FAQ: https://googlecloudplatform.github.io/google-cloud-node/#/docs/guides/faq
 
