@@ -22,7 +22,6 @@ var glob = require('globby');
 var is = require('is');
 var packageJson = require('package-json');
 var path = require('path');
-var prop = require('propprop');
 var semver = require('semver');
 
 require('shelljs/global');
@@ -31,10 +30,12 @@ var MIN_SUPPORTED_NODE_VERSION =
   require('../package.json').engines.node.replace(/^\D*/, '');
 
 function updatePackage(pkg, callback) {
-  console.log(pkg.depsToUpdate)
-
   if (!is.empty(pkg.depsToUpdate)) {
-    exec('npm install --save ' + pkg.depsToUpdate.map(prop('name')).join(' '), {
+    var updatedDeps = pkg.depsToUpdate.map(function(depToUpdate) {
+      return depToUpdate.name + '@^' + depToUpdate.stable;
+    });
+
+    exec('npm install --save ' + updatedDeps.join(' '), {
       cwd: pkg.cwd
     });
   }
@@ -42,12 +43,12 @@ function updatePackage(pkg, callback) {
   callback();
 }
 
-function shouldUpdateDependency(dependency, callback) {
+function shouldUpdateDep(dependency, callback) {
   packageJson(dependency.name, dependency.stable).then(function(json) {
     var minCompatibleNodeVersion = json.engines && json.engines.node;
 
     if (!minCompatibleNodeVersion) {
-      callback(true);
+      callback(null, true);
       return;
     }
 
@@ -56,7 +57,7 @@ function shouldUpdateDependency(dependency, callback) {
       minCompatibleNodeVersion
     );
 
-    callback(isCompatible);
+    callback(null, isCompatible);
   });
 }
 
@@ -76,13 +77,13 @@ function populateDepsToUpdate(pkg, callback) {
       updatedDeps[updatedDep].name = updatedDep;
     }
 
-    async.filter(updatedDeps, shouldUpdateDependency, function(deps) {
+    async.filter(updatedDeps, shouldUpdateDep, function(err, depsToUpdate) {
       if (err) {
         callback(err);
         return;
       }
 
-      pkg.depsToUpdate = deps;
+      pkg.depsToUpdate = depsToUpdate;
 
       callback();
     });

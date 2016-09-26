@@ -3,7 +3,7 @@
   "private": "true",
   "devDependencies": {
     "array-uniq": "^1.0.3",
-    "async": "^1.4.2",
+    "async": "^2.0.1",
     "coveralls": "^2.11.2",
     "create-error-class": "^3.0.2",
     "david": "^9.0.0",
