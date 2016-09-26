@@ -242,6 +242,10 @@ function run(command, options) {
 
   command = args.shift();
 
+  if (command === 'npm' && process.env.APPVEYOR) {
+    command += '.cmd';
+  }
+
   var response = spawnSync(command, args, options);
 
   if (response.error) {
