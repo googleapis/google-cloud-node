@@ -30,7 +30,6 @@ var prop = require('propprop');
 /*! Developer Documentation
  *
  * @param {module:language} language - The parent Language object.
- * @param {object=} config - Configuration object.
  */
 /*
  * Create a Natural Language Document object. From this object, you will be able
@@ -39,6 +38,17 @@ var prop = require('propprop');
  * @constructor
  * @alias module:language/document
  *
+ * @param {object|string|module:storage/file} config - Configuration object, the
+ *     inline content of the document, or a Storage File object.
+ * @param {string|module:storage/file} options.content - If using `config` as an
+ *     object to specify the encoding and/or language of the document, use this
+ *     property to pass the inline content of the document or a Storage File
+ *     object.
+ * @param {string} options.encoding - `UTF8`, `UTF16`, or `UTF32`. See
+ *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1beta1/EncodingType).
+ * @param {string} options.language - The language of the text.
+ * @return {module:language/document}
+ *
  * @example
  * var textToAnalyze = [
  *   'Google is an American multinational technology company specializing in',
@@ -46,6 +56,14 @@ var prop = require('propprop');
  * ].join(' ');
  *
  * var document = language.document(textToAnalyze);
+ *
+ * //-
+ * // Create a Document object with pre-defined configuration, such as its
+ * // language.
+ * //-
+ * var spanishDocument = language.document('¿Dónde está la sede de Google?', {
+ *   language: 'es'
+ * });
  */
 function Document(language, config) {
   var content = config.content || config;
@@ -130,7 +148,8 @@ Document.PART_OF_SPEECH = {
  *
  * @resource [documents.annotateText API Documentation]{@link https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/annotateText}
  *
- * @param {object=} options - Configuration object.
+ * @param {object=} options - Configuration object. See
+ *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/annotateText#request-body).
  * @param {boolean} options.entities - Detect the entities from this document.
  *     By default, all features (`entities`, `sentiment`, and `syntax`) are
  *     enabled. By overriding any of these values, all defaults are switched to
@@ -419,7 +438,8 @@ Document.prototype.annotate = function(options, callback) {
  *
  * @resource [documents.analyzeEntities API Documentation]{@link https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/analyzeEntities}
  *
- * @param {object=} options - Configuration object.
+ * @param {object=} options - Configuration object. See
+ *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/analyzeEntities#request-body).
  * @param {boolean} options.verbose - Enable verbose mode for more detailed
  *     results. Default: `false`
  * @param {function} callback - The callback function.
@@ -545,7 +565,8 @@ Document.prototype.detectEntities = function(options, callback) {
  *
  * @resource [documents.analyzeSentiment API Documentation]{@link https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/analyzeSentiment}
  *
- * @param {object=} options - Configuration object.
+ * @param {object=} options - Configuration object. See
+ *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/analyzeSentiment#request-body).
  * @param {boolean} options.verbose - Enable verbose mode for more detailed
  *     results. Default: `false`
  * @param {function} callback - The callback function.
