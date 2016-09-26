@@ -158,6 +158,10 @@ describe('Speech', function() {
         Speech.detectEncoding_('blah.mp3');
       }, /Encoding could not be determined for file: blah\.mp3/);
     });
+
+    it('should return nothing if the argument is not a string', function() {
+      assert.strictEqual(Speech.detectEncoding_({}), undefined);
+    });
   });
 
   describe('findFile_', function() {
