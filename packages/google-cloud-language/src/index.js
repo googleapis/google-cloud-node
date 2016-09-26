@@ -93,11 +93,12 @@ util.inherits(Language, common.GrpcService);
  * detection, this may be more convenient. However, if you plan to run multiple
  * detections, it's easier to create a {module:language/document} object.
  *
- * @resource [documents.annotate API Documentation]{@link https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/annotate}
+ * @resource [documents.annotate API Documentation]{@link https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/annotateText}
  *
  * @param {string|module:storage/file} content - Inline content or a Storage
  *     File object.
- * @param {object=} options - Configuration object.
+ * @param {object=} options - Configuration object. See
+ *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/annotateText#request-body).
  * @param {string} options.encoding - `UTF8`, `UTF16`, or `UTF32`. See
  *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1beta1/EncodingType).
  * @param {string} options.language - The language of the text.
@@ -136,6 +137,16 @@ util.inherits(Language, common.GrpcService);
  * language.annotate('Hello!', options, callback);
  *
  * //-
+ * // Specify the language the text is written in.
+ * //-
+ * var options = {
+ *   language: 'es',
+ *   entities: true
+ * };
+ *
+ * language.annotate('¿Dónde está la sede de Google?', options, callback);
+ *
+ * //-
  * // Verbose mode may also be enabled for more detailed results.
  * //-
  * var options = {
@@ -170,7 +181,8 @@ Language.prototype.annotate = function(content, options, callback) {
  *
  * @param {string|module:storage/file} content - Inline content or a Storage
  *     File object.
- * @param {object=} options - Configuration object.
+ * @param {object=} options - Configuration object. See
+ *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/analyzeEntities#request-body).
  * @param {string} options.encoding - `UTF8`, `UTF16`, or `UTF32`. See
  *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1beta1/EncodingType).
  * @param {string} options.language - The language of the text.
@@ -209,6 +221,15 @@ Language.prototype.annotate = function(content, options, callback) {
  * language.detectEntities('Axel Foley is from Detroit', options, callback);
  *
  * //-
+ * // Specify the language the text is written in.
+ * //-
+ * var options = {
+ *   language: 'es'
+ * };
+ *
+ * language.detectEntities('Axel Foley es de Detroit', options, callback);
+ *
+ * //-
  * // Verbose mode may also be enabled for more detailed results.
  * //-
  * var options = {
@@ -243,7 +264,8 @@ Language.prototype.detectEntities = function(content, options, callback) {
  *
  * @param {string|module:storage/file} content - Inline content or a Storage
  *     File object.
- * @param {object=} options - Configuration object.
+ * @param {object=} options - Configuration object. See
+ *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/analyzeSentiment#request-body).
  * @param {string} options.encoding - `UTF8`, `UTF16`, or `UTF32`. See
  *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1beta1/EncodingType).
  * @param {string} options.language - The language of the text.
@@ -337,6 +359,14 @@ Language.prototype.detectSentiment = function(content, options, callback) {
  * var document = language.document(file);
  *
  * //-
+ * // Create a Document object with pre-defined configuration, such as its
+ * // language.
+ * //-
+ * var document = language.document('¿Dónde está la sede de Google?', {
+ *   language: 'es'
+ * });
+ *
+ * //-
  * // You can now run detections on the document.
  * //
  * // See {module:language/document} for a complete list of methods available.
@@ -372,6 +402,14 @@ Language.prototype.document = function(config) {
  * var file = bucket.file('my-file.html');
  *
  * var document = language.html(file);
+ *
+ * //-
+ * // Create a Document object with pre-defined configuration, such as its
+ * // language.
+ * //-
+ * var document = language.html('&lt;h1>Titulo del documento&lt;/h1>', {
+ *   language: 'es'
+ * });
  *
  * //-
  * // You can now run detections on the document.
@@ -414,6 +452,14 @@ Language.prototype.html = function(content, options) {
  * var file = bucket.file('my-file.txt');
  *
  * var document = language.text(file);
+ *
+ * //-
+ * // Create a Document object with pre-defined configuration, such as its
+ * // language.
+ * //-
+ * var document = language.text('¿Dónde está la sede de Google?', {
+ *   language: 'es'
+ * });
  *
  * //-
  * // You can now run detections on the document.
