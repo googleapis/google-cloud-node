@@ -160,7 +160,7 @@ describe('Speech', function() {
     });
 
     it('should return nothing if the argument is not a string', function() {
-      assert.equal(Speech.detectEncoding_({}), undefined);
+      assert.strictEqual(Speech.detectEncoding_({}), undefined);
     });
   });
 
