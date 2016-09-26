@@ -13,6 +13,7 @@
       "name": "google-cloud",
       "defaultService": "google-cloud",
       "versions": [
+        "v0.41.0",
         "0.40.0",
         "0.39.0",
         "0.38.3",
@@ -66,6 +67,7 @@
       "name": "@google-cloud/bigquery",
       "defaultService": "bigquery",
       "versions": [
+        "0.3.0",
         "0.2.0",
         "0.1.2",
         "0.1.1",
@@ -77,6 +79,7 @@
       "name": "@google-cloud/bigtable",
       "defaultService": "bigtable",
       "versions": [
+        "0.4.0",
         "0.3.0",
         "0.2.1",
         "0.2.0",
@@ -89,6 +92,7 @@
       "name": "@google-cloud/compute",
       "defaultService": "compute",
       "versions": [
+        "0.2.0",
         "0.1.1",
         "master"
       ]
@@ -98,6 +102,7 @@
       "name": "@google-cloud/datastore",
       "defaultService": "datastore",
       "versions": [
+        "0.4.0",
         "0.3.1",
         "0.3.0",
         "0.2.0",
@@ -110,6 +115,7 @@
       "name": "@google-cloud/dns",
       "defaultService": "dns",
       "versions": [
+        "0.2.0",
         "0.1.1",
         "master"
       ]
@@ -119,6 +125,7 @@
       "name": "@google-cloud/language",
       "defaultService": "language",
       "versions": [
+        "0.3.0",
         "0.2.0",
         "0.1.2",
         "0.1.1",
@@ -130,6 +137,7 @@
       "name": "@google-cloud/logging",
       "defaultService": "logging",
       "versions": [
+        "0.3.0",
         "0.2.0",
         "0.1.1",
         "master"
@@ -140,6 +148,7 @@
       "name": "@google-cloud/prediction",
       "defaultService": "prediction",
       "versions": [
+        "0.2.0",
         "0.1.2",
         "0.1.1",
         "master"
@@ -150,6 +159,7 @@
       "name": "@google-cloud/pubsub",
       "defaultService": "pubsub",
       "versions": [
+        "0.3.0",
         "0.2.0",
         "0.1.1",
         "master"
@@ -160,7 +170,17 @@
       "name": "@google-cloud/resource",
       "defaultService": "resource",
       "versions": [
+        "0.2.0",
         "0.1.1",
+        "master"
+      ]
+    },
+    {
+      "id": "speech",
+      "name": "@google-cloud/speech",
+      "defaultService": "speech",
+      "versions": [
+        "0.2.0",
         "master"
       ]
     },
@@ -169,6 +189,7 @@
       "name": "@google-cloud/storage",
       "defaultService": "storage",
       "versions": [
+        "0.2.0",
         "0.1.1",
         "master"
       ]
@@ -178,6 +199,7 @@
       "name": "@google-cloud/translate",
       "defaultService": "translate",
       "versions": [
+        "0.3.0",
         "0.2.0",
         "0.1.1",
         "master"
@@ -188,6 +210,7 @@
       "name": "@google-cloud/vision",
       "defaultService": "vision",
       "versions": [
+        "0.3.0",
         "0.2.0",
         "0.1.1",
         "master"
