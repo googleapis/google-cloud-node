@@ -114,6 +114,7 @@
     "extend": "^3.0.0"
   },
   "devDependencies": {
+    "mocha": "^3.1.0",
     "proxyquire": "^1.7.10"
   },
   "scripts": {
