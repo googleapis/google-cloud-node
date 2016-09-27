@@ -48,16 +48,6 @@ describe('datastore:tasks', function () {
     });
   });
 
-  it('should format tasks', function (done) {
-    tasks.retrieveEntities(function (err, _tasks) {
-      assert.ifError(err);
-      assert.doesNotThrow(function () {
-        tasks.formatTasks(_tasks);
-      });
-      done();
-    });
-  });
-
   function getTaskId (callback) {
     tasks.addEntity('description', function (err, taskKey) {
       if (err) {
