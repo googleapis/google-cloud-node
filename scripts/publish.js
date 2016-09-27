@@ -57,6 +57,14 @@ setTimeout(function() {
   console.log('Publishing now');
 
   if (moduleName === 'google-cloud') {
+    exec('rm -rf node_modules', {
+      cwd: cwd
+    });
+
+    exec('npm install' {
+      cwd: cwd
+    });
+
     exec('npm dedupe', {
       cwd: cwd
     });
