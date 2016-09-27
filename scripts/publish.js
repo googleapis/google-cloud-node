@@ -48,6 +48,17 @@ console.log('Publishing package in 10 seconds. Exit process to abort');
 setTimeout(function() {
   console.log('Publishing now');
 
+  if (moduleName === 'google-cloud') {
+    exec('npm dedupe', {
+      cwd: cwd
+    });
+
+    exec('npm shrinkwrap', {
+      cwd: cwd
+    });
+  }
+
+  // To circumvent an npm bug which can publish empty node_modules
   exec('rm -rf node_modules', {
     cwd: cwd
   });
