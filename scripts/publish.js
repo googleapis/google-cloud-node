@@ -37,7 +37,7 @@ var tagName = [moduleName, newVersion].join('-');
 if (moduleName === 'google-cloud') {
   if (npmVersion < 3) {
     throw new Error([
-      'Publishing google-cloud requires the latest npm.'
+      'Publishing google-cloud requires the latest npm.',
       'Please update by running `npm install -g npm` before publishing.'
     ].join(' '));
   }
