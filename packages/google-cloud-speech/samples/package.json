@@ -9,13 +9,14 @@
     "system-test": "mocha -R spec -t 120000 --require intelli-espower-loader ../system-test/_setup.js system-test/*.test.js"
   },
   "dependencies": {
-    "async": "^1.5.2",
-    "google-auto-auth": "^0.2.4",
-    "google-proto-files": "^0.3.0",
-    "googleapis": "^12.0.0",
-    "grpc": "^0.15.0"
+    "@google-cloud/speech": "^0.1.1",
+    "node-record-lpcm16": "^0.1.4",
+    "yargs": "^5.0.0"
   },
   "devDependencies": {
-    "mocha": "^2.5.3"
+    "mocha": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=4.3.2"
   }
 }

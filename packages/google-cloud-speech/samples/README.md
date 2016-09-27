@@ -14,7 +14,7 @@ recognition technologies into developer applications.
 
 * [Setup](#setup)
 * [Samples](#samples)
-  * [Recognition](#recognition)
+  * [Recognize](#recognize)
 
 ## Setup
 
@@ -28,32 +28,32 @@ recognition technologies into developer applications.
 
 ## Samples
 
-### Recognition
+### Recognize
 
-View the [documentation][recognition_docs] or the [source code][recognition_code].
+View the [documentation][recognize_docs] or the [source code][recognize_code].
 
-__Run the sample:__
+__Usage:__ `node recognize --help`
 
-Usage: `node recognize <path-to-audio-file>`
+```
+Commands:
+  sync <filename>    Detects speech in an audio file.
+  async <filename>   Creates a job to detect speech in an audio file, and waits for the job to complete.
+  stream <filename>  Detects speech in an audio file by streaming it to the Speech API.
+  listen             Detects speech in a microphone input stream.
 
-Example:
+Options:
+  --help  Show help                                                                                            [boolean]
 
-    node recognize resources/audio.raw
+Examples:
+  node recognize sync ./resources/audio.raw    Detects speech in "./resources/audio.raw".
+  node recognize async ./resources/audio.raw   Creates a job to detect speech in "./resources/audio.raw", and waits for
+                                               the job to complete.
+  node recognize stream ./resources/audio.raw  Detects speech in "./resources/audio.raw" by streaming it to the Speech
+                                               API.
+  node recognize listen ./resources/audio.raw  Detects speech in a microphone input stream.
 
-[recognition_docs]: https://cloud.google.com/speech/
-[recognition_code]: recognize.js
+For more information, see https://cloud.google.com/speech/docs
+```
 
-### Recognition (Streaming)
-
-View the [documentation][recognition_streaming_docs] or the [source code][recognition_streaming_code].
-
-__Run the sample:__
-
-Usage: `node recognize_streaming <path-to-audio-file>`
-
-Example:
-
-    node recognize_streaming resources/audio.raw
-
-[recognition_streaming_docs]: https://cloud.google.com/speech/
-[recognition_streaming_code]: recognize_streaming.js
+[recognize_docs]: https://cloud.google.com/speech/docs
+[recognize_code]: recognize.js
