@@ -32,7 +32,7 @@ install:
       if (!$env:APPVEYOR_PULL_REQUEST_NUMBER) {
         nuget install secure-file -ExcludeVersion
         secure-file\tools\secure-file -decrypt key.appveyor.json.enc -secret $env:GCLOUD_TESTS_KEY_SECRET
-        set GCLOUD_TESTS_KEY=%APPVEYOR_BUILD_FOLDER%\%GCLOUD_TESTS_KEY%
+        $env:GCLOUD_TESTS_KEY=$env:APPVEYOR_BUILD_FOLDER + '\' + $env:GCLOUD_TESTS_KEY
       }
   - npm install -g npm
   - set PATH=%APPDATA%\npm;%PATH%
