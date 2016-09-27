@@ -61,7 +61,7 @@ setTimeout(function() {
       cwd: cwd
     });
 
-    exec('npm install' {
+    exec('npm install', {
       cwd: cwd
     });
 
