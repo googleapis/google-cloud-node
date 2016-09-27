@@ -19,7 +19,6 @@
 var path = require('path');
 var uniq = require('array-uniq');
 var globby = require('globby');
-var spawnSync = require('child_process').spawnSync;
 var extend = require('extend');
 
 require('shelljs/global');
@@ -87,7 +86,7 @@ Module.getUpdated = function() {
 
   command.push('--name-only');
 
-  var output = run(command, { stdio: null });
+  var output = run(command, { silent: true });
   var files = output.trim().split('\n');
   var modules = files.filter(function(file) {
     return /^packages\/.+\.js/.test(file);
@@ -228,9 +227,7 @@ module.exports.Module = Module;
  * @return {string|null}
  */
 function run(command, options) {
-  options = extend({
-    stdio: [0, 1, 2]
-  }, options);
+  options = options || {};
 
   if (Array.isArray(command)) {
     command = command.join(' ');
@@ -238,31 +235,16 @@ function run(command, options) {
 
   console.log(command);
 
-  var args = command.split(' ');
+  var response = exec(command, options);
 
-  command = args.shift();
-
-  if (command === 'npm' && process.env.APPVEYOR) {
-    command += '.cmd';
+  if (response.code) {
+    if (options.silent) {
+      console.error(response.stderr);
+    }
+    exit(response.code);
   }
 
-  var response = spawnSync(command, args, options);
-
-  if (response.error) {
-    console.error(response.error.message);
-  }
-
-  if (response.stderr) {
-    console.error(response.stderr.toString());
-  }
-
-  if (response.error || response.status) {
-    exit(response.status || 1);
-  }
-
-  if (response.stdout) {
-    return response.stdout.toString();
-  }
+  return response.stdout;
 }
 
 module.exports.run = run;
@@ -304,7 +286,7 @@ Git.prototype.submodule = function(branch, alias) {
 Git.prototype.hasUpdates = function() {
   var output = run('git status --porcelain', {
     cwd: this.cwd,
-    stdio: null
+    silent: true
   });
 
   return !!output && output.trim().length > 0;
