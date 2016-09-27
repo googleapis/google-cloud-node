@@ -27,7 +27,6 @@
 /* jscs: disable maximumLineLength */
 'use strict';
 
-var arguejs = require('arguejs');
 var configData = require('./image_annotator_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
@@ -38,7 +37,6 @@ var DEFAULT_SERVICE_PORT = 443;
 
 var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
 
-var DEFAULT_TIMEOUT = 30;
 
 /**
  * The scopes needed to make gRPC calls to all of the methods defined in
@@ -65,42 +63,43 @@ var ALL_SCOPES = [
  *
  * @class
  */
-function ImageAnnotatorApi(gaxGrpc, grpcClient, opts) {
+function ImageAnnotatorApi(gaxGrpc, grpcClients, opts) {
   opts = opts || {};
   var servicePath = opts.servicePath || SERVICE_ADDRESS;
   var port = opts.port || DEFAULT_SERVICE_PORT;
   var sslCreds = opts.sslCreds || null;
   var clientConfig = opts.clientConfig || {};
-  var timeout = opts.timeout || DEFAULT_TIMEOUT;
   var appName = opts.appName || 'gax';
-  var appVersion = opts.appVersion || gax.Version;
+  var appVersion = opts.appVersion || gax.version;
 
   var googleApiClient = [
     appName + '/' + appVersion,
     CODE_GEN_NAME_VERSION,
+    'gax/' + gax.version,
     'nodejs/' + process.version].join(' ');
 
   var defaults = gaxGrpc.constructSettings(
       'google.cloud.vision.v1.ImageAnnotator',
       configData,
       clientConfig,
-      timeout,
       null,
       null,
       {'x-goog-api-client': googleApiClient});
 
-  var stub = gaxGrpc.createStub(
+  var imageAnnotatorStub = gaxGrpc.createStub(
       servicePath,
       port,
-      grpcClient.google.cloud.vision.v1.ImageAnnotator,
+      grpcClients.imageAnnotatorClient.google.cloud.vision.v1.ImageAnnotator,
       {sslCreds: sslCreds});
-  var methods = [
+  var imageAnnotatorStubMethods = [
     'batchAnnotateImages'
   ];
-  methods.forEach(function(methodName) {
+  imageAnnotatorStubMethods.forEach(function(methodName) {
     this['_' + methodName] = gax.createApiCall(
-        stub.then(function(stub) { return stub[methodName].bind(stub); }),
-        defaults[methodName]);
+      imageAnnotatorStub.then(function(imageAnnotatorStub) {
+        return imageAnnotatorStub[methodName].bind(imageAnnotatorStub);
+      }),
+      defaults[methodName]);
   }.bind(this));
 }
 
@@ -113,9 +112,9 @@ function ImageAnnotatorApi(gaxGrpc, grpcClient, opts) {
  *   Individual image annotation requests for this batch.
  *
  *   This object should have the same structure as [AnnotateImageRequest]{@link AnnotateImageRequest}
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
@@ -135,16 +134,21 @@ function ImageAnnotatorApi(gaxGrpc, grpcClient, opts) {
  *     // doThingsWith(response)
  * });
  */
-ImageAnnotatorApi.prototype.batchAnnotateImages = function batchAnnotateImages() {
-  var args = arguejs({
-    requests: Array,
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+ImageAnnotatorApi.prototype.batchAnnotateImages = function batchAnnotateImages(
+    requests,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    requests: args.requests
+    requests: requests
   };
-  return this._batchAnnotateImages(req, args.options, args.callback);
+  return this._batchAnnotateImages(req, options, callback);
 };
 
 function ImageAnnotatorApiBuilder(gaxGrpc) {
@@ -152,11 +156,15 @@ function ImageAnnotatorApiBuilder(gaxGrpc) {
     return new ImageAnnotatorApiBuilder(gaxGrpc);
   }
 
-  var grpcClient = gaxGrpc.load([{
+  var imageAnnotatorClient = gaxGrpc.load([{
     root: require('google-proto-files')('..'),
     file: 'google/cloud/vision/v1/image_annotator.proto'
   }]);
-  extend(this, grpcClient.google.cloud.vision.v1);
+  extend(this, imageAnnotatorClient.google.cloud.vision.v1);
+
+  var grpcClients = {
+    imageAnnotatorClient: imageAnnotatorClient
+  };
 
   /**
    * Build a new instance of {@link ImageAnnotatorApi}.
@@ -171,15 +179,13 @@ function ImageAnnotatorApiBuilder(gaxGrpc) {
    * @param {Object=} opts.clientConfig
    *   The customized config to build the call settings. See
    *   {@link gax.constructSettings} for the format.
-   * @param {number=} opts.timeout
-   *   The default timeout, in seconds, for calls made through this client.
    * @param {number=} opts.appName
    *   The codename of the calling service.
    * @param {String=} opts.appVersion
    *   The version of the calling service.
    */
   this.imageAnnotatorApi = function(opts) {
-    return new ImageAnnotatorApi(gaxGrpc, grpcClient, opts);
+    return new ImageAnnotatorApi(gaxGrpc, grpcClients, opts);
   };
   extend(this.imageAnnotatorApi, ImageAnnotatorApi);
 }

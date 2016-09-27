@@ -27,7 +27,6 @@
 /* jscs: disable maximumLineLength */
 'use strict';
 
-var arguejs = require('arguejs');
 var configData = require('./metrics_service_v2_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
@@ -38,12 +37,11 @@ var DEFAULT_SERVICE_PORT = 443;
 
 var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
 
-var DEFAULT_TIMEOUT = 30;
 
 var PAGE_DESCRIPTORS = {
   listLogMetrics: new gax.PageDescriptor(
-      'page_token',
-      'next_page_token',
+      'pageToken',
+      'nextPageToken',
       'metrics')
 };
 
@@ -74,46 +72,47 @@ var ALL_SCOPES = [
  *
  * @class
  */
-function MetricsServiceV2Api(gaxGrpc, grpcClient, opts) {
+function MetricsServiceV2Api(gaxGrpc, grpcClients, opts) {
   opts = opts || {};
   var servicePath = opts.servicePath || SERVICE_ADDRESS;
   var port = opts.port || DEFAULT_SERVICE_PORT;
   var sslCreds = opts.sslCreds || null;
   var clientConfig = opts.clientConfig || {};
-  var timeout = opts.timeout || DEFAULT_TIMEOUT;
   var appName = opts.appName || 'gax';
-  var appVersion = opts.appVersion || gax.Version;
+  var appVersion = opts.appVersion || gax.version;
 
   var googleApiClient = [
     appName + '/' + appVersion,
     CODE_GEN_NAME_VERSION,
+    'gax/' + gax.version,
     'nodejs/' + process.version].join(' ');
 
   var defaults = gaxGrpc.constructSettings(
       'google.logging.v2.MetricsServiceV2',
       configData,
       clientConfig,
-      timeout,
       PAGE_DESCRIPTORS,
       null,
       {'x-goog-api-client': googleApiClient});
 
-  var stub = gaxGrpc.createStub(
+  var metricsServiceV2Stub = gaxGrpc.createStub(
       servicePath,
       port,
-      grpcClient.google.logging.v2.MetricsServiceV2,
+      grpcClients.metricsServiceV2Client.google.logging.v2.MetricsServiceV2,
       {sslCreds: sslCreds});
-  var methods = [
+  var metricsServiceV2StubMethods = [
     'listLogMetrics',
     'getLogMetric',
     'createLogMetric',
     'updateLogMetric',
     'deleteLogMetric'
   ];
-  methods.forEach(function(methodName) {
+  metricsServiceV2StubMethods.forEach(function(methodName) {
     this['_' + methodName] = gax.createApiCall(
-        stub.then(function(stub) { return stub[methodName].bind(stub); }),
-        defaults[methodName]);
+      metricsServiceV2Stub.then(function(metricsServiceV2Stub) {
+        return metricsServiceV2Stub[methodName].bind(metricsServiceV2Stub);
+      }),
+      defaults[methodName]);
   }.bind(this));
 }
 
@@ -190,44 +189,71 @@ MetricsServiceV2Api.prototype.matchMetricFromMetricName =
  * @param {string} parent
  *   Required. The resource name containing the metrics.
  *   Example: `"projects/my-project-id"`.
- * @param {Object=} otherArgs
- * @param {number=} otherArgs.pageSize
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ *
+ *   In addition, options may contain the following optional parameters.
+ * @param {number=} options.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
  *   parameter does not affect the return value. If page streaming is
  *   performed per-page, this determines the maximum number of
  *   resources in a page.
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
- * @returns {Stream}
- *   An object stream. By default, this emits an object representing
+ *
+ * @param {function(?Error, ?Object, ?string)=} callback
+ *   When specified, the results are not streamed but this callback
+ *   will be called with the response object representing [ListLogMetricsResponse]{@link ListLogMetricsResponse}.
+ *   The third item will be set if the response contains the token for the further results
+ *   and can be reused to `pageToken` field in the options in the next request.
+ * @returns {Stream|gax.EventEmitter}
+ *   An object stream which emits an object representing
  *   [LogMetric]{@link LogMetric} on 'data' event.
- *   This object can also be configured to emit
- *   pages of the responses through the options parameter.
+ *   When the callback is specified or streaming is suppressed through options,
+ *   it will return an event emitter to handle the call status and the callback
+ *   will be called with the response object.
  *
  * @example
  *
  * var api = loggingV2.metricsServiceV2Api();
  * var formattedParent = api.parentPath("[PROJECT]");
+ * // Iterate over all elements.
  * api.listLogMetrics(formattedParent).on('data', function(element) {
  *     // doThingsWith(element)
  * });
+ *
+ * // Or obtain the paged response through the callback.
+ * function callback(err, response, nextPageToken) {
+ *     if (err) {
+ *         console.error(err);
+ *         return;
+ *     }
+ *     // doThingsWith(response)
+ *     if (nextPageToken) {
+ *         // fetch the next page.
+ *         api.listLogMetrics(formattedParent, {pageToken: nextPageToken}, callback);
+ *     }
+ * }
+ * api.listLogMetrics(formattedParent, {flattenPages: false}, callback);
  */
-MetricsServiceV2Api.prototype.listLogMetrics = function listLogMetrics() {
-  var args = arguejs({
-    parent: String,
-    otherArgs: [Object, {}],
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
-  var req = {
-    parent: args.parent
-  };
-  if ('pageSize' in args.otherArgs) {
-    req.page_size = args.otherArgs.pageSize;
+MetricsServiceV2Api.prototype.listLogMetrics = function listLogMetrics(
+    parent,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
   }
-  return this._listLogMetrics(req, args.options, args.callback);
+  if (options === undefined) {
+    options = {};
+  }
+  var req = {
+    parent: parent
+  };
+  if ('pageSize' in options) {
+    req.pageSize = options.pageSize;
+  }
+  return this._listLogMetrics(req, options, callback);
 };
 
 /**
@@ -236,9 +262,9 @@ MetricsServiceV2Api.prototype.listLogMetrics = function listLogMetrics() {
  * @param {string} metricName
  *   The resource name of the desired metric.
  *   Example: `"projects/my-project-id/metrics/my-metric-id"`.
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
@@ -258,16 +284,21 @@ MetricsServiceV2Api.prototype.listLogMetrics = function listLogMetrics() {
  *     // doThingsWith(response)
  * });
  */
-MetricsServiceV2Api.prototype.getLogMetric = function getLogMetric() {
-  var args = arguejs({
-    metricName: String,
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+MetricsServiceV2Api.prototype.getLogMetric = function getLogMetric(
+    metricName,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    metric_name: args.metricName
+    metricName: metricName
   };
-  return this._getLogMetric(req, args.options, args.callback);
+  return this._getLogMetric(req, options, callback);
 };
 
 /**
@@ -283,9 +314,9 @@ MetricsServiceV2Api.prototype.getLogMetric = function getLogMetric() {
  *   already exists.
  *
  *   This object should have the same structure as [LogMetric]{@link LogMetric}
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
@@ -306,18 +337,23 @@ MetricsServiceV2Api.prototype.getLogMetric = function getLogMetric() {
  *     // doThingsWith(response)
  * });
  */
-MetricsServiceV2Api.prototype.createLogMetric = function createLogMetric() {
-  var args = arguejs({
-    parent: String,
-    metric: Object,
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+MetricsServiceV2Api.prototype.createLogMetric = function createLogMetric(
+    parent,
+    metric,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    parent: args.parent,
-    metric: args.metric
+    parent: parent,
+    metric: metric
   };
-  return this._createLogMetric(req, args.options, args.callback);
+  return this._createLogMetric(req, options, callback);
 };
 
 /**
@@ -336,9 +372,9 @@ MetricsServiceV2Api.prototype.createLogMetric = function createLogMetric() {
  *   exist, then a new metric is created.
  *
  *   This object should have the same structure as [LogMetric]{@link LogMetric}
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
@@ -359,18 +395,23 @@ MetricsServiceV2Api.prototype.createLogMetric = function createLogMetric() {
  *     // doThingsWith(response)
  * });
  */
-MetricsServiceV2Api.prototype.updateLogMetric = function updateLogMetric() {
-  var args = arguejs({
-    metricName: String,
-    metric: Object,
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+MetricsServiceV2Api.prototype.updateLogMetric = function updateLogMetric(
+    metricName,
+    metric,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    metric_name: args.metricName,
-    metric: args.metric
+    metricName: metricName,
+    metric: metric
   };
-  return this._updateLogMetric(req, args.options, args.callback);
+  return this._updateLogMetric(req, options, callback);
 };
 
 /**
@@ -379,9 +420,9 @@ MetricsServiceV2Api.prototype.updateLogMetric = function updateLogMetric() {
  * @param {string} metricName
  *   The resource name of the metric to delete.
  *   Example: `"projects/my-project-id/metrics/my-metric-id"`.
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error)=} callback
  *   The function which will be called with the result of the API call.
  * @returns {gax.EventEmitter} - the event emitter to handle the call
@@ -397,16 +438,21 @@ MetricsServiceV2Api.prototype.updateLogMetric = function updateLogMetric() {
  *     }
  * });
  */
-MetricsServiceV2Api.prototype.deleteLogMetric = function deleteLogMetric() {
-  var args = arguejs({
-    metricName: String,
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+MetricsServiceV2Api.prototype.deleteLogMetric = function deleteLogMetric(
+    metricName,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    metric_name: args.metricName
+    metricName: metricName
   };
-  return this._deleteLogMetric(req, args.options, args.callback);
+  return this._deleteLogMetric(req, options, callback);
 };
 
 function MetricsServiceV2ApiBuilder(gaxGrpc) {
@@ -414,11 +460,15 @@ function MetricsServiceV2ApiBuilder(gaxGrpc) {
     return new MetricsServiceV2ApiBuilder(gaxGrpc);
   }
 
-  var grpcClient = gaxGrpc.load([{
+  var metricsServiceV2Client = gaxGrpc.load([{
     root: require('google-proto-files')('..'),
     file: 'google/logging/v2/logging_metrics.proto'
   }]);
-  extend(this, grpcClient.google.logging.v2);
+  extend(this, metricsServiceV2Client.google.logging.v2);
+
+  var grpcClients = {
+    metricsServiceV2Client: metricsServiceV2Client
+  };
 
   /**
    * Build a new instance of {@link MetricsServiceV2Api}.
@@ -433,15 +483,13 @@ function MetricsServiceV2ApiBuilder(gaxGrpc) {
    * @param {Object=} opts.clientConfig
    *   The customized config to build the call settings. See
    *   {@link gax.constructSettings} for the format.
-   * @param {number=} opts.timeout
-   *   The default timeout, in seconds, for calls made through this client.
    * @param {number=} opts.appName
    *   The codename of the calling service.
    * @param {String=} opts.appVersion
    *   The version of the calling service.
    */
   this.metricsServiceV2Api = function(opts) {
-    return new MetricsServiceV2Api(gaxGrpc, grpcClient, opts);
+    return new MetricsServiceV2Api(gaxGrpc, grpcClients, opts);
   };
   extend(this.metricsServiceV2Api, MetricsServiceV2Api);
 }

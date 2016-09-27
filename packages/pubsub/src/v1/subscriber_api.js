@@ -27,7 +27,6 @@
 /* jscs: disable maximumLineLength */
 'use strict';
 
-var arguejs = require('arguejs');
 var configData = require('./subscriber_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
@@ -38,12 +37,11 @@ var DEFAULT_SERVICE_PORT = 443;
 
 var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
 
-var DEFAULT_TIMEOUT = 30;
 
 var PAGE_DESCRIPTORS = {
   listSubscriptions: new gax.PageDescriptor(
-      'page_token',
-      'next_page_token',
+      'pageToken',
+      'nextPageToken',
       'subscriptions')
 };
 
@@ -72,36 +70,53 @@ var ALL_SCOPES = [
  *
  * @class
  */
-function SubscriberApi(gaxGrpc, grpcClient, opts) {
+function SubscriberApi(gaxGrpc, grpcClients, opts) {
   opts = opts || {};
   var servicePath = opts.servicePath || SERVICE_ADDRESS;
   var port = opts.port || DEFAULT_SERVICE_PORT;
   var sslCreds = opts.sslCreds || null;
   var clientConfig = opts.clientConfig || {};
-  var timeout = opts.timeout || DEFAULT_TIMEOUT;
   var appName = opts.appName || 'gax';
-  var appVersion = opts.appVersion || gax.Version;
+  var appVersion = opts.appVersion || gax.version;
 
   var googleApiClient = [
     appName + '/' + appVersion,
     CODE_GEN_NAME_VERSION,
+    'gax/' + gax.version,
     'nodejs/' + process.version].join(' ');
 
   var defaults = gaxGrpc.constructSettings(
       'google.pubsub.v1.Subscriber',
       configData,
       clientConfig,
-      timeout,
       PAGE_DESCRIPTORS,
       null,
       {'x-goog-api-client': googleApiClient});
 
-  var stub = gaxGrpc.createStub(
+  var iamPolicyStub = gaxGrpc.createStub(
       servicePath,
       port,
-      grpcClient.google.pubsub.v1.Subscriber,
+      grpcClients.iamPolicyClient.google.iam.v1.IAMPolicy,
       {sslCreds: sslCreds});
-  var methods = [
+  var iamPolicyStubMethods = [
+    'setIamPolicy',
+    'getIamPolicy',
+    'testIamPermissions'
+  ];
+  iamPolicyStubMethods.forEach(function(methodName) {
+    this['_' + methodName] = gax.createApiCall(
+      iamPolicyStub.then(function(iamPolicyStub) {
+        return iamPolicyStub[methodName].bind(iamPolicyStub);
+      }),
+      defaults[methodName]);
+  }.bind(this));
+
+  var subscriberStub = gaxGrpc.createStub(
+      servicePath,
+      port,
+      grpcClients.subscriberClient.google.pubsub.v1.Subscriber,
+      {sslCreds: sslCreds});
+  var subscriberStubMethods = [
     'createSubscription',
     'getSubscription',
     'listSubscriptions',
@@ -111,10 +126,12 @@ function SubscriberApi(gaxGrpc, grpcClient, opts) {
     'pull',
     'modifyPushConfig'
   ];
-  methods.forEach(function(methodName) {
+  subscriberStubMethods.forEach(function(methodName) {
     this['_' + methodName] = gax.createApiCall(
-        stub.then(function(stub) { return stub[methodName].bind(stub); }),
-        defaults[methodName]);
+      subscriberStub.then(function(subscriberStub) {
+        return subscriberStub[methodName].bind(subscriberStub);
+      }),
+      defaults[methodName]);
   }.bind(this));
 }
 
@@ -224,12 +241,13 @@ SubscriberApi.prototype.matchTopicFromTopicName =
 // Service calls
 
 /**
- * Creates a subscription to a given topic for a given subscriber.
+ * Creates a subscription to a given topic.
  * If the subscription already exists, returns `ALREADY_EXISTS`.
  * If the corresponding topic doesn't exist, returns `NOT_FOUND`.
  *
  * If the name is not provided in the request, the server will assign a random
- * name for this subscription on the same project as the topic.
+ * name for this subscription on the same project as the topic. Note that
+ * for REST API requests, you must specify a name.
  *
  * @param {string} name
  *   The name of the subscription. It must have the format
@@ -242,14 +260,18 @@ SubscriberApi.prototype.matchTopicFromTopicName =
  *   The name of the topic from which this subscription is receiving messages.
  *   The value of this field will be `_deleted-topic_` if the topic has been
  *   deleted.
- * @param {Object=} otherArgs
- * @param {Object=} otherArgs.pushConfig
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ *
+ *   In addition, options may contain the following optional parameters.
+ * @param {Object=} options.pushConfig
  *   If push delivery is used with this subscription, this field is
  *   used to configure it. An empty `pushConfig` signifies that the subscriber
  *   will pull and ack messages using API methods.
  *
  *   This object should have the same structure as [PushConfig]{@link PushConfig}
- * @param {number=} otherArgs.ackDeadlineSeconds
+ * @param {number=} options.ackDeadlineSeconds
  *   This value is the maximum time after a subscriber receives a message
  *   before the subscriber should acknowledge the message. After message
  *   delivery but before the ack deadline expires and before the message is
@@ -260,6 +282,7 @@ SubscriberApi.prototype.matchTopicFromTopicName =
  *   deadline. To override this value for a given message, call
  *   `ModifyAckDeadline` with the corresponding `ack_id` if using
  *   pull.
+ *   The maximum custom deadline you can specify is 600 seconds (10 minutes).
  *
  *   For push delivery, this value is also used to set the request timeout for
  *   the call to the push endpoint.
@@ -267,10 +290,8 @@ SubscriberApi.prototype.matchTopicFromTopicName =
  *   If the subscriber never acknowledges the message, the Pub/Sub
  *   system will eventually redeliver the message.
  *
- *   If this parameter is not set, the default value of 10 seconds is used.
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ *   If this parameter is 0, a default value of 10 seconds is used.
+ *
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
@@ -291,25 +312,29 @@ SubscriberApi.prototype.matchTopicFromTopicName =
  *     // doThingsWith(response)
  * });
  */
-SubscriberApi.prototype.createSubscription = function createSubscription() {
-  var args = arguejs({
-    name: String,
-    topic: String,
-    otherArgs: [Object, {}],
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+SubscriberApi.prototype.createSubscription = function createSubscription(
+    name,
+    topic,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    name: args.name,
-    topic: args.topic
+    name: name,
+    topic: topic
   };
-  if ('pushConfig' in args.otherArgs) {
-    req.push_config = args.otherArgs.pushConfig;
+  if ('pushConfig' in options) {
+    req.pushConfig = options.pushConfig;
   }
-  if ('ackDeadlineSeconds' in args.otherArgs) {
-    req.ack_deadline_seconds = args.otherArgs.ackDeadlineSeconds;
+  if ('ackDeadlineSeconds' in options) {
+    req.ackDeadlineSeconds = options.ackDeadlineSeconds;
   }
-  return this._createSubscription(req, args.options, args.callback);
+  return this._createSubscription(req, options, callback);
 };
 
 /**
@@ -317,9 +342,9 @@ SubscriberApi.prototype.createSubscription = function createSubscription() {
  *
  * @param {string} subscription
  *   The name of the subscription to get.
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
@@ -339,16 +364,21 @@ SubscriberApi.prototype.createSubscription = function createSubscription() {
  *     // doThingsWith(response)
  * });
  */
-SubscriberApi.prototype.getSubscription = function getSubscription() {
-  var args = arguejs({
-    subscription: String,
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+SubscriberApi.prototype.getSubscription = function getSubscription(
+    subscription,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    subscription: args.subscription
+    subscription: subscription
   };
-  return this._getSubscription(req, args.options, args.callback);
+  return this._getSubscription(req, options, callback);
 };
 
 /**
@@ -356,44 +386,71 @@ SubscriberApi.prototype.getSubscription = function getSubscription() {
  *
  * @param {string} project
  *   The name of the cloud project that subscriptions belong to.
- * @param {Object=} otherArgs
- * @param {number=} otherArgs.pageSize
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ *
+ *   In addition, options may contain the following optional parameters.
+ * @param {number=} options.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
  *   parameter does not affect the return value. If page streaming is
  *   performed per-page, this determines the maximum number of
  *   resources in a page.
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
- * @returns {Stream}
- *   An object stream. By default, this emits an object representing
+ *
+ * @param {function(?Error, ?Object, ?string)=} callback
+ *   When specified, the results are not streamed but this callback
+ *   will be called with the response object representing [ListSubscriptionsResponse]{@link ListSubscriptionsResponse}.
+ *   The third item will be set if the response contains the token for the further results
+ *   and can be reused to `pageToken` field in the options in the next request.
+ * @returns {Stream|gax.EventEmitter}
+ *   An object stream which emits an object representing
  *   [Subscription]{@link Subscription} on 'data' event.
- *   This object can also be configured to emit
- *   pages of the responses through the options parameter.
+ *   When the callback is specified or streaming is suppressed through options,
+ *   it will return an event emitter to handle the call status and the callback
+ *   will be called with the response object.
  *
  * @example
  *
  * var api = pubsubV1.subscriberApi();
  * var formattedProject = api.projectPath("[PROJECT]");
+ * // Iterate over all elements.
  * api.listSubscriptions(formattedProject).on('data', function(element) {
  *     // doThingsWith(element)
  * });
+ *
+ * // Or obtain the paged response through the callback.
+ * function callback(err, response, nextPageToken) {
+ *     if (err) {
+ *         console.error(err);
+ *         return;
+ *     }
+ *     // doThingsWith(response)
+ *     if (nextPageToken) {
+ *         // fetch the next page.
+ *         api.listSubscriptions(formattedProject, {pageToken: nextPageToken}, callback);
+ *     }
+ * }
+ * api.listSubscriptions(formattedProject, {flattenPages: false}, callback);
  */
-SubscriberApi.prototype.listSubscriptions = function listSubscriptions() {
-  var args = arguejs({
-    project: String,
-    otherArgs: [Object, {}],
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
-  var req = {
-    project: args.project
-  };
-  if ('pageSize' in args.otherArgs) {
-    req.page_size = args.otherArgs.pageSize;
+SubscriberApi.prototype.listSubscriptions = function listSubscriptions(
+    project,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
   }
-  return this._listSubscriptions(req, args.options, args.callback);
+  if (options === undefined) {
+    options = {};
+  }
+  var req = {
+    project: project
+  };
+  if ('pageSize' in options) {
+    req.pageSize = options.pageSize;
+  }
+  return this._listSubscriptions(req, options, callback);
 };
 
 /**
@@ -405,9 +462,9 @@ SubscriberApi.prototype.listSubscriptions = function listSubscriptions() {
  *
  * @param {string} subscription
  *   The subscription to delete.
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error)=} callback
  *   The function which will be called with the result of the API call.
  * @returns {gax.EventEmitter} - the event emitter to handle the call
@@ -423,23 +480,29 @@ SubscriberApi.prototype.listSubscriptions = function listSubscriptions() {
  *     }
  * });
  */
-SubscriberApi.prototype.deleteSubscription = function deleteSubscription() {
-  var args = arguejs({
-    subscription: String,
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+SubscriberApi.prototype.deleteSubscription = function deleteSubscription(
+    subscription,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    subscription: args.subscription
+    subscription: subscription
   };
-  return this._deleteSubscription(req, args.options, args.callback);
+  return this._deleteSubscription(req, options, callback);
 };
 
 /**
  * Modifies the ack deadline for a specific message. This method is useful
  * to indicate that more time is needed to process a message by the
  * subscriber, or to make the message available for redelivery if the
- * processing was interrupted.
+ * processing was interrupted. Note that this does not modify the
+ * subscription-level `ackDeadlineSeconds` used for subsequent messages.
  *
  * @param {string} subscription
  *   The name of the subscription.
@@ -451,9 +514,9 @@ SubscriberApi.prototype.deleteSubscription = function deleteSubscription() {
  *   ack deadline will expire 10 seconds after the `ModifyAckDeadline` call
  *   was made. Specifying zero may immediately make the message available for
  *   another pull request.
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error)=} callback
  *   The function which will be called with the result of the API call.
  * @returns {gax.EventEmitter} - the event emitter to handle the call
@@ -471,20 +534,25 @@ SubscriberApi.prototype.deleteSubscription = function deleteSubscription() {
  *     }
  * });
  */
-SubscriberApi.prototype.modifyAckDeadline = function modifyAckDeadline() {
-  var args = arguejs({
-    subscription: String,
-    ackIds: Array,
-    ackDeadlineSeconds: Number,
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+SubscriberApi.prototype.modifyAckDeadline = function modifyAckDeadline(
+    subscription,
+    ackIds,
+    ackDeadlineSeconds,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    subscription: args.subscription,
-    ack_ids: args.ackIds,
-    ack_deadline_seconds: args.ackDeadlineSeconds
+    subscription: subscription,
+    ackIds: ackIds,
+    ackDeadlineSeconds: ackDeadlineSeconds
   };
-  return this._modifyAckDeadline(req, args.options, args.callback);
+  return this._modifyAckDeadline(req, options, callback);
 };
 
 /**
@@ -501,9 +569,9 @@ SubscriberApi.prototype.modifyAckDeadline = function modifyAckDeadline() {
  * @param {string[]} ackIds
  *   The acknowledgment ID for the messages being acknowledged that was returned
  *   by the Pub/Sub system in the `Pull` response. Must not be empty.
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error)=} callback
  *   The function which will be called with the result of the API call.
  * @returns {gax.EventEmitter} - the event emitter to handle the call
@@ -520,18 +588,23 @@ SubscriberApi.prototype.modifyAckDeadline = function modifyAckDeadline() {
  *     }
  * });
  */
-SubscriberApi.prototype.acknowledge = function acknowledge() {
-  var args = arguejs({
-    subscription: String,
-    ackIds: Array,
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+SubscriberApi.prototype.acknowledge = function acknowledge(
+    subscription,
+    ackIds,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    subscription: args.subscription,
-    ack_ids: args.ackIds
+    subscription: subscription,
+    ackIds: ackIds
   };
-  return this._acknowledge(req, args.options, args.callback);
+  return this._acknowledge(req, options, callback);
 };
 
 /**
@@ -545,16 +618,18 @@ SubscriberApi.prototype.acknowledge = function acknowledge() {
  * @param {number} maxMessages
  *   The maximum number of messages returned for this request. The Pub/Sub
  *   system may return fewer than the number specified.
- * @param {Object=} otherArgs
- * @param {boolean=} otherArgs.returnImmediately
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ *
+ *   In addition, options may contain the following optional parameters.
+ * @param {boolean=} options.returnImmediately
  *   If this is specified as true the system will respond immediately even if
  *   it is not able to return a message in the `Pull` response. Otherwise the
  *   system is allowed to wait until at least one message is available rather
  *   than returning no messages. The client may cancel the request if it does
  *   not wish to wait any longer for the response.
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ *
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
@@ -575,22 +650,26 @@ SubscriberApi.prototype.acknowledge = function acknowledge() {
  *     // doThingsWith(response)
  * });
  */
-SubscriberApi.prototype.pull = function pull() {
-  var args = arguejs({
-    subscription: String,
-    maxMessages: Number,
-    otherArgs: [Object, {}],
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
-  var req = {
-    subscription: args.subscription,
-    max_messages: args.maxMessages
-  };
-  if ('returnImmediately' in args.otherArgs) {
-    req.return_immediately = args.otherArgs.returnImmediately;
+SubscriberApi.prototype.pull = function pull(
+    subscription,
+    maxMessages,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
   }
-  return this._pull(req, args.options, args.callback);
+  if (options === undefined) {
+    options = {};
+  }
+  var req = {
+    subscription: subscription,
+    maxMessages: maxMessages
+  };
+  if ('returnImmediately' in options) {
+    req.returnImmediately = options.returnImmediately;
+  }
+  return this._pull(req, options, callback);
 };
 
 /**
@@ -612,9 +691,9 @@ SubscriberApi.prototype.pull = function pull() {
  *   the subscription if `Pull` is not called.
  *
  *   This object should have the same structure as [PushConfig]{@link PushConfig}
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error)=} callback
  *   The function which will be called with the result of the API call.
  * @returns {gax.EventEmitter} - the event emitter to handle the call
@@ -631,18 +710,176 @@ SubscriberApi.prototype.pull = function pull() {
  *     }
  * });
  */
-SubscriberApi.prototype.modifyPushConfig = function modifyPushConfig() {
-  var args = arguejs({
-    subscription: String,
-    pushConfig: Object,
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+SubscriberApi.prototype.modifyPushConfig = function modifyPushConfig(
+    subscription,
+    pushConfig,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    subscription: args.subscription,
-    push_config: args.pushConfig
+    subscription: subscription,
+    pushConfig: pushConfig
   };
-  return this._modifyPushConfig(req, args.options, args.callback);
+  return this._modifyPushConfig(req, options, callback);
+};
+
+/**
+ * Sets the access control policy on the specified resource. Replaces any
+ * existing policy.
+ *
+ * @param {string} resource
+ *   REQUIRED: The resource for which policy is being specified.
+ *   Resource is usually specified as a path, such as,
+ *   projects/{project}/zones/{zone}/disks/{disk}.
+ * @param {Object} policy
+ *   REQUIRED: The complete policy to be applied to the 'resource'. The size of
+ *   the policy is limited to a few 10s of KB. An empty policy is in general a
+ *   valid policy but certain services (like Projects) might reject them.
+ *
+ *   This object should have the same structure as [Policy]{@link Policy}
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ * @param {function(?Error, ?Object)=} callback
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing [Policy]{@link Policy}
+ * @returns {gax.EventEmitter} - the event emitter to handle the call
+ *   status.
+ *
+ * @example
+ *
+ * var api = pubsubV1.subscriberApi();
+ * var formattedResource = api.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
+ * var policy = {};
+ * api.setIamPolicy(formattedResource, policy, function(err, response) {
+ *     if (err) {
+ *         console.error(err);
+ *         return;
+ *     }
+ *     // doThingsWith(response)
+ * });
+ */
+SubscriberApi.prototype.setIamPolicy = function setIamPolicy(
+    resource,
+    policy,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
+  var req = {
+    resource: resource,
+    policy: policy
+  };
+  return this._setIamPolicy(req, options, callback);
+};
+
+/**
+ * Gets the access control policy for a resource. Is empty if the
+ * policy or the resource does not exist.
+ *
+ * @param {string} resource
+ *   REQUIRED: The resource for which policy is being requested. Resource
+ *   is usually specified as a path, such as, projects/{project}.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ * @param {function(?Error, ?Object)=} callback
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing [Policy]{@link Policy}
+ * @returns {gax.EventEmitter} - the event emitter to handle the call
+ *   status.
+ *
+ * @example
+ *
+ * var api = pubsubV1.subscriberApi();
+ * var formattedResource = api.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
+ * api.getIamPolicy(formattedResource, function(err, response) {
+ *     if (err) {
+ *         console.error(err);
+ *         return;
+ *     }
+ *     // doThingsWith(response)
+ * });
+ */
+SubscriberApi.prototype.getIamPolicy = function getIamPolicy(
+    resource,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
+  var req = {
+    resource: resource
+  };
+  return this._getIamPolicy(req, options, callback);
+};
+
+/**
+ * Returns permissions that a caller has on the specified resource.
+ *
+ * @param {string} resource
+ *   REQUIRED: The resource for which policy detail is being requested.
+ *   Resource is usually specified as a path, such as, projects/{project}.
+ * @param {string[]} permissions
+ *   The set of permissions to check for the 'resource'. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ * @param {function(?Error, ?Object)=} callback
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing [TestIamPermissionsResponse]{@link TestIamPermissionsResponse}
+ * @returns {gax.EventEmitter} - the event emitter to handle the call
+ *   status.
+ *
+ * @example
+ *
+ * var api = pubsubV1.subscriberApi();
+ * var formattedResource = api.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
+ * var permissions = [];
+ * api.testIamPermissions(formattedResource, permissions, function(err, response) {
+ *     if (err) {
+ *         console.error(err);
+ *         return;
+ *     }
+ *     // doThingsWith(response)
+ * });
+ */
+SubscriberApi.prototype.testIamPermissions = function testIamPermissions(
+    resource,
+    permissions,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
+  var req = {
+    resource: resource,
+    permissions: permissions
+  };
+  return this._testIamPermissions(req, options, callback);
 };
 
 function SubscriberApiBuilder(gaxGrpc) {
@@ -650,11 +887,22 @@ function SubscriberApiBuilder(gaxGrpc) {
     return new SubscriberApiBuilder(gaxGrpc);
   }
 
-  var grpcClient = gaxGrpc.load([{
+  var iamPolicyClient = gaxGrpc.load([{
+    root: require('google-proto-files')('..'),
+    file: 'google/iam/v1/iam_policy.proto'
+  }]);
+  extend(this, iamPolicyClient.google.iam.v1);
+
+  var subscriberClient = gaxGrpc.load([{
     root: require('google-proto-files')('..'),
     file: 'google/pubsub/v1/pubsub.proto'
   }]);
-  extend(this, grpcClient.google.pubsub.v1);
+  extend(this, subscriberClient.google.pubsub.v1);
+
+  var grpcClients = {
+    iamPolicyClient: iamPolicyClient,
+    subscriberClient: subscriberClient
+  };
 
   /**
    * Build a new instance of {@link SubscriberApi}.
@@ -669,15 +917,13 @@ function SubscriberApiBuilder(gaxGrpc) {
    * @param {Object=} opts.clientConfig
    *   The customized config to build the call settings. See
    *   {@link gax.constructSettings} for the format.
-   * @param {number=} opts.timeout
-   *   The default timeout, in seconds, for calls made through this client.
    * @param {number=} opts.appName
    *   The codename of the calling service.
    * @param {String=} opts.appVersion
    *   The version of the calling service.
    */
   this.subscriberApi = function(opts) {
-    return new SubscriberApi(gaxGrpc, grpcClient, opts);
+    return new SubscriberApi(gaxGrpc, grpcClients, opts);
   };
   extend(this.subscriberApi, SubscriberApi);
 }
