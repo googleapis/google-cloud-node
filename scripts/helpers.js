@@ -19,6 +19,7 @@
 var path = require('path');
 var uniq = require('array-uniq');
 var globby = require('globby');
+var spawn = require('child_process').spawnSync;
 
 require('shelljs/global');
 
@@ -67,9 +68,8 @@ Module.UMBRELLA = 'google-cloud';
  * @return {Module[]} modules - The updated modules.
  */
 Module.getUpdated = function() {
-  var command = ['git diff'];
-
-  cd(ROOT_DIR);
+  var command = 'git';
+  var args = ['diff'];
 
   if (!isPushToMaster()) {
     run([
@@ -78,20 +78,41 @@ Module.getUpdated = function() {
     ]);
 
     run('git fetch -q temp');
-    command.push('HEAD', 'temp/master');
+    args.push('HEAD', 'temp/master');
   } else {
-    command.push('HEAD^');
+    args.push('HEAD^');
   }
 
-  command.push('--name-only');
+  args.push('--name-only');
 
-  var output = run(command, { silent: true });
-  var files = output.trim().split('\n');
-  var modules = files.filter(function(file) {
-    return /^packages\/.+\.js/.test(file);
-  }).map(function(file) {
-    return file.split('/')[1];
+  console.log(command, args.join(' '));
+
+  // There's a Windows bug where child_process.exec exits early on `git diff`
+  // which in turn does not return all of the files that have changed. This can
+  // cause a false positive when checking for package changes on AppVeyor
+  var output = spawn(command, args, {
+    cwd: ROOT_DIR,
+    stdio: null
   });
+
+  if (output.status || output.error) {
+    console.error(output.error || output.stderr.toString());
+    exit(output.status || 1);
+  }
+
+  var files = output.stdout.toString();
+
+  console.log(files);
+
+  var modules = files
+    .trim()
+    .split('\n')
+    .filter(function(file) {
+      return /^packages\/.+\.js/.test(file);
+    })
+    .map(function(file) {
+      return file.split('/')[1];
+    });
 
   return uniq(modules).map(Module);
 };
@@ -237,9 +258,6 @@ function run(command, options) {
   var response = exec(command, options);
 
   if (response.code) {
-    if (options.silent) {
-      console.error(response.stderr);
-    }
     exit(response.code);
   }
 
@@ -284,8 +302,7 @@ Git.prototype.submodule = function(branch, alias) {
  */
 Git.prototype.hasUpdates = function() {
   var output = run('git status --porcelain', {
-    cwd: this.cwd,
-    silent: true
+    cwd: this.cwd
   });
 
   return !!output && output.trim().length > 0;
