@@ -21,6 +21,7 @@ var path = require('path');
 require('shelljs/global');
 
 var cwd = pwd().toString();
+var npmVersion = parseInt(exec('npm --version', { silent: true }), 10);
 
 // Copy the legal files from the root of the repo so they are included in the
 // release
@@ -34,6 +35,13 @@ var newVersion = args[2].replace(/^v*/, '');
 var tagName = [moduleName, newVersion].join('-');
 
 if (moduleName === 'google-cloud') {
+  if (npmVersion < 3) {
+    throw new Error([
+      'Publishing google-cloud requires the latest npm.',
+      'Please update by running `npm install -g npm` before publishing.'
+    ].join(' '));
+  }
+
   tagName = ('v' + newVersion);
   cp(path.join(__dirname, '../README.md'), cwd);
 }
@@ -48,6 +56,17 @@ console.log('Publishing package in 10 seconds. Exit process to abort');
 setTimeout(function() {
   console.log('Publishing now');
 
+  if (moduleName === 'google-cloud') {
+    exec('npm dedupe', {
+      cwd: cwd
+    });
+
+    exec('npm shrinkwrap', {
+      cwd: cwd
+    });
+  }
+
+  // To circumvent an npm bug which can publish empty node_modules
   exec('rm -rf node_modules', {
     cwd: cwd
   });

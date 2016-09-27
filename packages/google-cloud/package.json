@@ -35,6 +35,7 @@
   ],
   "main": "./src/index.js",
   "files": [
+    "npm-shrinkwrap.json",
     "src",
     "AUTHORS",
     "CONTRIBUTORS",
