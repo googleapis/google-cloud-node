@@ -1,68 +1,86 @@
-// Copyright 2016, Google, Inc.
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2016, Google, Inc.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * This application demonstrates how to perform basic operations on topics with
+ * the Google Cloud Pub/Sub API.
+ *
+ * For more information, see the README.md under /pubsub and the documentation
+ * at https://cloud.google.com/pubsub/docs.
+ */
 
 'use strict';
 
-// [START setup]
-// By default, the client will authenticate using the service account file
-// specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use
-// the project specified by the GCLOUD_PROJECT environment variable. See
-// https://googlecloudplatform.github.io/gcloud-node/#/docs/google-cloud/latest/guides/authentication
-var PubSub = require('@google-cloud/pubsub');
-// [END setup]
+const pubsubClient = require(`@google-cloud/pubsub`)();
 
+// [START pubsub_list_topics]
+function listTopics (callback) {
+  // Lists all topics in the current project
+  pubsubClient.getTopics((err, topics) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+
+    console.log(`Topics:`);
+    topics.forEach((topic) => console.log(topic.name));
+    callback();
+  });
+}
+// [END pubsub_list_topics]
+
+// [START pubsub_create_topic]
 function createTopic (topicName, callback) {
-  var pubsub = PubSub();
-  var topic = pubsub.topic(topicName);
-
-  // Get the topic if it exists, otherwise create the topic
-  // See https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub/latest/pubsub/topic?method=get
-  topic.get({
-    autoCreate: true
-  }, function (err, topic, apiResponse) {
+  // Creates a new topic, e.g. "my-new-topic"
+  pubsubClient.createTopic(topicName, (err, topic) => {
     if (err) {
-      return callback(err);
+      callback(err);
+      return;
     }
 
-    console.log('Created topic: %s', topicName);
-    return callback(null, topic, apiResponse);
+    console.log(`Topic ${topic.name} created.`);
+    callback();
   });
 }
+// [END pubsub_create_topic]
 
+// [START pubsub_delete_topic]
 function deleteTopic (topicName, callback) {
-  var pubsub = PubSub();
-  var topic = pubsub.topic(topicName);
+  // References an existing topic, e.g. "my-topic"
+  const topic = pubsubClient.topic(topicName);
 
-  // Delete the topic
-  // See https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub/latest/pubsub/topic?method=delete
-  topic.delete(function (err, apiResponse) {
+  // Deletes the topic
+  topic.delete((err) => {
     if (err) {
-      return callback(err);
+      callback(err);
+      return;
     }
 
-    // Deleted the topic
-    console.log('Deleted topic: %s', topicName);
-    return callback(null, apiResponse);
+    console.log(`Topic ${topic.name} deleted.`);
+    callback();
   });
 }
+// [END pubsub_delete_topic]
 
-function publishMessage (topicName, message, callback) {
-  var pubsub = PubSub();
-  var topic = pubsub.topic(topicName);
+// [START pubsub_publish_message]
+function publishMessage (topicName, data, callback) {
+  // References an existing topic, e.g. "my-topic"
+  const topic = pubsubClient.topic(topicName);
 
   /**
-   * Publish a message to the topic, e.g. { "data": "Hello, world!" }. In
-   * Node.js, a PubSub message requires a "data" property, which can have a
+   * In Node.js, a PubSub message requires a "data" property, which can have a
    * string or an object as its value. An optional "attributes" property can be
    * an object of key/value pairs, where the keys and values are both strings.
    * See https://cloud.google.com/pubsub/reference/rpc/google.pubsub.v1#google.pubsub.v1.PubsubMessage
@@ -70,40 +88,113 @@ function publishMessage (topicName, message, callback) {
    * Topic#publish() takes either a single message object or an array of message
    * objects. See https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub/latest/pubsub/topic?method=publish
    */
-  topic.publish(message, function (err, messageIds, apiResponse) {
+  const message = {
+    data: data
+  };
+
+  // Publishes the message
+  topic.publish(message, (err, messageIds) => {
     if (err) {
-      return callback(err);
+      callback(err);
+      return;
     }
 
-    console.log('Published %d message(s)!', messageIds.length);
-    return callback(null, messageIds, apiResponse);
+    console.log(`Message ${messageIds[0]} published.`);
+    callback();
   });
 }
+// [END pubsub_publish_message]
 
-function listTopics (callback) {
-  var pubsub = PubSub();
+// [START pubsub_get_topic_policy]
+function getTopicPolicy (topicName, callback) {
+  // References an existing topic, e.g. "my-topic"
+  const topic = pubsubClient.topic(topicName);
 
-  // See https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub/latest/pubsub?method=getTopics
-  pubsub.getTopics(function (err, topics) {
+  // Retrieves the IAM policy for the topic
+  topic.iam.getPolicy((err, policy) => {
     if (err) {
-      return callback(err);
+      callback(err);
+      return;
     }
 
-    console.log('Found %d topics!', topics.length);
-    return callback(null, topics);
+    console.log(`Policy for topic: %j.`, policy.bindings);
+    callback();
   });
 }
+// [END pubsub_get_topic_policy]
+
+// [START pubsub_set_topic_policy]
+function setTopicPolicy (topicName, callback) {
+  // References an existing topic, e.g. "my-topic"
+  const topic = pubsubClient.topic(topicName);
+
+  // The new IAM policy
+  const newPolicy = {
+    bindings: [
+      {
+        // Add a group as editors
+        role: `roles/pubsub.editor`,
+        members: [`group:cloud-logs@google.com`]
+      },
+      {
+        // Add all users as viewers
+        role: `roles/pubsub.viewer`,
+        members: [`allUsers`]
+      }
+    ]
+  };
+
+  // Updates the IAM policy for the topic
+  topic.iam.setPolicy(newPolicy, (err, updatedPolicy) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+
+    console.log(`Updated policy for topic: %j`, updatedPolicy.bindings);
+    callback();
+  });
+}
+// [END pubsub_set_topic_policy]
+
+// [START pubsub_test_topic_permissions]
+function testTopicPermissions (topicName, callback) {
+  // References an existing topic, e.g. "my-topic"
+  const topic = pubsubClient.topic(topicName);
+
+  const permissionsToTest = [
+    `pubsub.topics.attachSubscription`,
+    `pubsub.topics.publish`,
+    `pubsub.topics.update`
+  ];
+
+  // Tests the IAM policy for the specified topic
+  topic.iam.testPermissions(permissionsToTest, (err, permissions) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+
+    console.log(`Tested permissions for topic: %j`, permissions);
+
+    callback();
+  });
+}
+// [END pubsub_test_topic_permissions]
 
 // The command-line program
-var cli = require('yargs');
-var makeHandler = require('../utils').makeHandler;
+const cli = require(`yargs`);
+const makeHandler = require(`../utils`).makeHandler;
 
-var program = module.exports = {
+const program = module.exports = {
+  listTopics: listTopics,
   createTopic: createTopic,
   deleteTopic: deleteTopic,
   publishMessage: publishMessage,
-  listTopics: listTopics,
-  main: function (args) {
+  getTopicPolicy: getTopicPolicy,
+  setTopicPolicy: setTopicPolicy,
+  testTopicPermissions: testTopicPermissions,
+  main: (args) => {
     // Run the command-line program
     cli.help().strict().parse(args).argv;
   }
@@ -111,30 +202,43 @@ var program = module.exports = {
 
 cli
   .demand(1)
-  .command('create <topicName>', 'Creates a new topic.', {}, function (options) {
-    program.createTopic(options.topicName, makeHandler(true, 'id'));
+  .command(`list`, `Lists all topics in the current project.`, {}, (options) => {
+    program.listTopics(makeHandler(false));
   })
-  .command('list', 'Lists topics.', {}, function (options) {
-    program.listTopics(makeHandler(true, 'id'));
+  .command(`create <topicName>`, `Creates a new topic.`, {}, (options) => {
+    program.createTopic(options.topicName, makeHandler(false));
   })
-  .command('publish <topicName> <message>', 'Publish a message to the specified topic.', {}, function (options) {
-    try {
-      options.message = JSON.parse(options.message);
-      program.publishMessage(options.topicName, options.message, makeHandler());
-    } catch (err) {
-      return console.error('"message" must be a valid JSON string!');
-    }
-  })
-  .command('delete <topicName>', 'Deletes the specified topic.', {}, function (options) {
+  .command(`delete <topicName>`, `Deletes the a topic.`, {}, (options) => {
     program.deleteTopic(options.topicName, makeHandler(false));
   })
-  .example('node $0 create greetings', 'Creates a new topic named "greetings".')
-  .example('node $0 list', 'Lists all topics.')
-  .example('node $0 publish greetings \'{"data":"Hello world!"}\'', 'Publishes a message to "greetings".')
-  .example('node $0 delete greetings', 'Deletes a topic named "greetings".')
+  .command(`publish <topicName> <message>`, `Publishes a message.`, {}, (options) => {
+    try {
+      options.message = JSON.parse(options.message);
+    } catch (err) {
+      // Ignore error
+    }
+    program.publishMessage(options.topicName, options.message, makeHandler(false));
+  })
+  .command(`get-policy <topicName>`, `Gets the IAM policy for a topic.`, {}, (options) => {
+    program.getTopicPolicy(options.topicName, makeHandler(false));
+  })
+  .command(`set-policy <topicName>`, `Sets the IAM policy for a topic.`, {}, (options) => {
+    program.setTopicPolicy(options.topicName, makeHandler(false));
+  })
+  .command(`test-permissions <topicName>`, `Tests the permissions for a topic.`, {}, (options) => {
+    program.testTopicPermissions(options.topicName, makeHandler(false));
+  })
+  .example(`node $0 list`, `Lists all topics in the current project.`)
+  .example(`node $0 create greetings`, `Creates a new topic named "greetings".`)
+  .example(`node $0 delete greetings`, `Deletes a topic named "greetings".`)
+  .example(`node $0 publish greetings "Hello, world!"`, `Publishes a simple message.`)
+  .example(`node $0 publish greetings \`{"data":"Hello, world!"}\``, `Publishes a JSON message.`)
+  .example(`node $0 get-policy greetings`, `Gets the IAM policy for a topic named "greetings".`)
+  .example(`node $0 set-policy greetings`, `Sets the IAM policy for a topic named "greetings".`)
+  .example(`node $0 test-permissions greetings`, `Tests the permissions for a topic named "greetings".`)
   .wrap(120)
   .recommendCommands()
-  .epilogue('For more information, see https://cloud.google.com/pubsub/docs');
+  .epilogue(`For more information, see https://cloud.google.com/pubsub/docs`);
 
 if (module === require.main) {
   program.main(process.argv.slice(2));

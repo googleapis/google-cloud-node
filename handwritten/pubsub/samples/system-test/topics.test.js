@@ -13,65 +13,115 @@
 
 'use strict';
 
-var uuid = require('node-uuid');
-var program = require('../topics');
+const pubsub = require(`@google-cloud/pubsub`)();
+const uuid = require(`node-uuid`);
+const path = require(`path`);
+const run = require(`../../utils`).run;
 
-var topicName = 'nodejs-docs-samples-test-' + uuid.v4();
-var projectId = process.env.GCLOUD_PROJECT;
-var fullTopicName = 'projects/' + projectId + '/topics/' + topicName;
-var message = { data: 'Hello, world!' };
+const cwd = path.join(__dirname, `..`);
+const topicName = `nodejs-docs-samples-test-${uuid.v4()}`;
+const subscriptionName = `nodejs-docs-samples-test-${uuid.v4()}`;
+const projectId = process.env.GCLOUD_PROJECT;
+const fullTopicName = `projects/${projectId}/topics/${topicName}`;
+const message = { data: `Hello, world!` };
+const cmd = `node topics.js`;
 
-describe('pubsub:topics', function () {
-  describe('createTopic', function () {
-    it('should create a topic', function (done) {
-      program.createTopic(topicName, function (err, topic, apiResponse) {
-        assert.ifError(err);
-        assert.equal(topic.name, fullTopicName);
-        assert(console.log.calledWith('Created topic: %s', topicName));
-        assert.notEqual(apiResponse, undefined);
-        // Listing is eventually consistent, so give the index time to update
-        setTimeout(done, 5000);
-      });
-    });
-  });
-
-  describe('listTopics', function () {
-    it('should list topics', function (done) {
-      program.listTopics(function (err, topics) {
-        assert.ifError(err);
-        assert(Array.isArray(topics));
-        assert(topics.length > 0);
-        var recentlyCreatedTopics = topics.filter(function (topic) {
-          return topic.name === fullTopicName;
-        });
-        assert.equal(recentlyCreatedTopics.length, 1, 'list has newly created topic');
-        assert(console.log.calledWith('Found %d topics!', topics.length));
+describe(`pubsub:topics`, () => {
+  after((done) => {
+    pubsub.subscription(subscriptionName).delete(() => {
+      // Ignore any error
+      pubsub.topic(topicName).delete(() => {
+        // Ignore any error
         done();
       });
     });
   });
 
-  describe('publishMessage', function () {
-    it('should publish a message', function (done) {
-      program.publishMessage(topicName, message, function (err, messageIds, apiResponse) {
+  it(`should create a topic`, (done) => {
+    const output = run(`${cmd} create ${topicName}`, cwd);
+    assert.equal(output, `Topic ${fullTopicName} created.`);
+    pubsub.topic(topicName).exists((err, exists) => {
+      assert.ifError(err);
+      assert.equal(exists, true);
+      done();
+    });
+  });
+
+  it(`should list topics`, (done) => {
+    // Listing is eventually consistent. Give the indexes time to update.
+    setTimeout(() => {
+      const output = run(`${cmd} list`, cwd);
+      assert.notEqual(output.indexOf(`Topics:`), -1);
+      assert.notEqual(output.indexOf(fullTopicName), -1);
+      done();
+    }, 5000);
+  });
+
+  it(`should publish a simple message`, (done) => {
+    pubsub.topic(topicName).subscribe(subscriptionName, (err, subscription) => {
+      assert.ifError(err);
+      run(`${cmd} publish ${topicName} "${message.data}"`, cwd);
+      subscription.pull((err, messages) => {
         assert.ifError(err);
-        assert(Array.isArray(messageIds));
-        assert(messageIds.length > 0);
-        assert(console.log.calledWith('Published %d message(s)!', messageIds.length));
-        assert.notEqual(apiResponse, undefined);
+        console.log(JSON.stringify(messages, null, 2));
+        assert.equal(messages[0].data, message.data);
         done();
       });
     });
   });
 
-  describe('deleteTopic', function () {
-    it('should delete a topic', function (done) {
-      program.deleteTopic(topicName, function (err, apiResponse) {
+  it(`should publish a JSON message`, (done) => {
+    pubsub.topic(topicName).subscribe(subscriptionName, { reuseExisting: true }, (err, subscription) => {
+      assert.ifError(err);
+      run(`${cmd} publish ${topicName} '${JSON.stringify(message)}'`, cwd);
+      subscription.pull((err, messages) => {
         assert.ifError(err);
-        assert(console.log.calledWith('Deleted topic: %s', topicName));
-        assert.notEqual(apiResponse, undefined);
+        console.log(JSON.stringify(messages, null, 2));
+        assert.deepEqual(messages[0].data, message);
         done();
       });
+    });
+  });
+
+  it(`should set the IAM policy for a topic`, (done) => {
+    run(`${cmd} set-policy ${topicName}`, cwd);
+    pubsub.topic(topicName).iam.getPolicy((err, policy) => {
+      assert.ifError(err);
+      assert.deepEqual(policy.bindings, [
+        {
+          role: `roles/pubsub.editor`,
+          members: [`group:cloud-logs@google.com`]
+        },
+        {
+          role: `roles/pubsub.viewer`,
+          members: [`allUsers`]
+        }
+      ]);
+      done();
+    });
+  });
+
+  it(`should get the IAM policy for a topic`, (done) => {
+    pubsub.topic(topicName).iam.getPolicy((err, policy) => {
+      assert.ifError(err);
+      const output = run(`${cmd} get-policy ${topicName}`, cwd);
+      assert.equal(output, `Policy for topic: ${JSON.stringify(policy.bindings)}.`);
+      done();
+    });
+  });
+
+  it(`should test permissions for a topic`, () => {
+    const output = run(`${cmd} test-permissions ${topicName}`, cwd);
+    assert.notEqual(output.indexOf(`Tested permissions for topic`), -1);
+  });
+
+  it(`should delete a topic`, (done) => {
+    const output = run(`${cmd} delete ${topicName}`, cwd);
+    assert.equal(output, `Topic ${fullTopicName} deleted.`);
+    pubsub.topic(topicName).exists((err, exists) => {
+      assert.ifError(err);
+      assert.equal(exists, false);
+      done();
     });
   });
 });

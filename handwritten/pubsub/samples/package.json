@@ -15,5 +15,8 @@
   "devDependencies": {
     "mocha": "^3.0.2",
     "node-uuid": "^1.4.7"
+  },
+  "engines": {
+    "node": "~4.5"
   }
 }

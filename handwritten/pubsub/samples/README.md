@@ -13,7 +13,6 @@ allows you to send and receive messages between independent applications.
 * [Samples](#samples)
   * [Topics](#topics)
   * [Subscriptions](#subscriptions)
-  * [IAM](#iam)
 
 ## Setup
 
@@ -35,19 +34,26 @@ __Usage:__ `node topics --help`
 
 ```
 Commands:
+  list                           Lists all topics in the current project.
   create <topicName>             Creates a new topic.
-  list                           Lists topics.
-  publish <topicName> <message>  Publish a message to the specified topic.
-  delete <topicName>             Deletes the specified topic.
+  delete <topicName>             Deletes the a topic.
+  publish <topicName> <message>  Publishes a message.
+  getPolicy <topicName>          Gets the IAM policy for a topic.
+  setPolicy <topicName>          Sets the IAM policy for a topic.
+  testPermissions <topicName>    Tests the permissions for a topic.
 
 Options:
   --help  Show help                                                                                            [boolean]
 
 Examples:
-  node topics create greetings                             Creates a new topic named "greetings".
-  node topics list                                         Lists all topics.
-  node topics publish greetings '{"data":"Hello world!"}'  Publishes a message to "greetings".
-  node topics delete greetings                             Deletes a topic named "greetings".
+  node topics.js list                                          Lists all topics in the current project.
+  node topics.js create greetings                              Creates a new topic named "greetings".
+  node topics.js delete greetings                              Deletes a topic named "greetings".
+  node topics.js publish greetings "Hello, world!"             Publishes a simple message.
+  node topics.js publish greetings '{"data":"Hello, world!"}'  Publishes a JSON message.
+  node topics.js getPolicy greetings                           Gets the IAM policy for a topic named "greetings".
+  node topics.js setPolicy greetings                           Sets the IAM policy for a topic named "greetings".
+  node topics.js testPermissions greetings                     Tests the permissions for a topic named "greetings".
 
 For more information, see https://cloud.google.com/pubsub/docs
 ```
@@ -63,58 +69,41 @@ __Usage:__ `node subscriptions --help`
 
 ```
 Commands:
-  create <topicName> <subscriptionName>  Creates a new subscription.
-  list [topicName]                       Lists subscriptions, optionally filtering by a topic.
-  get <subscriptionName>                 Gets the metadata the metadata for the specified subscription.
-  pull <subscriptionName>                Pulls messages for the specified subscription.
-  delete <subscriptionName>              Deletes the specified subscription.
+  list [topicName]                            Lists all subscriptions in the current project, optionally filtering by a
+                                              topic.
+  create <topicName> <subscriptionName>       Creates a new subscription.
+  create-push <topicName> <subscriptionName>  Creates a new push subscription.
+  delete <subscriptionName>                   Deletes a subscription.
+  get <subscriptionName>                      Gets the metadata for a subscription.
+  pull <subscriptionName>                     Pulls messages for a subscription.
+  get-policy <subscriptionName>               Gets the IAM policy for a subscription.
+  set-policy <subscriptionName>               Sets the IAM policy for a subscription.
+  test-permissions <subscriptionName>         Tests the permissions for a subscription.
 
 Options:
   --help  Show help                                                                                            [boolean]
 
 Examples:
-  node subscriptions create greetings greetings-worker-1  Creates a subscription named "greetings-worker-1" to a topic
-                                                          named "greetings".
-  node subscriptions delete greetings-worker-1            Deletes a subscription named "greetings-worker-1".
-  node subscriptions pull greetings-worker-1              Pulls messages for a subscription named "greetings-worker-1".
-  node subscriptions list                                 Lists all subscriptions.
-  node subscriptions list greetings                       Lists subscriptions for a topic named "greetings".
+  node subscriptions.js list                                    Lists all subscriptions in the current project.
+  node subscriptions.js list greetings                          Lists all subscriptions for a topic named "greetings".
+  node subscriptions.js create greetings greetings-worker-1     Creates a subscription named "greetings-worker-1" to a
+                                                                topic named "greetings".
+  node subscriptions.js create-push greetings                   Creates a push subscription named "greetings-worker-1"
+  greetings-worker-1                                            to a topic named "greetings".
+  node subscriptions.js get greetings-worker-1                  Gets the metadata for a subscription named
+                                                                "greetings-worker-1".
+  node subscriptions.js delete greetings-worker-1               Deletes a subscription named "greetings-worker-1".
+  node subscriptions.js pull greetings-worker-1                 Pulls messages for a subscription named
+                                                                "greetings-worker-1".
+  node subscriptions.js get-policy greetings-worker-1           Gets the IAM policy for a subscription named
+                                                                "greetings-worker-1".
+  node subscriptions.js set-policy greetings-worker-1           Sets the IAM policy for a subscription named
+                                                                "greetings-worker-1".
+  node subscriptions.js test-permissions greetings-worker-1     Tests the permissions for a subscription named
+                                                                "greetings-worker-1".
 
 For more information, see https://cloud.google.com/pubsub/docs
 ```
 
 [subscriptions_docs]: https://cloud.google.com/pubsub/subscriber
 [subscriptions_code]: subscriptions.js
-
-### IAM
-
-View the [documentation][iam_docs] or the [source code][iam_code].
-
-__Usage:__ `node iam --help`
-
-```
-Usage: node iam RESOURCE COMMAND [ARGS...]
-
-Resources:
-
-  topics
-  subscriptions
-
-Commands:
-
-  get NAME
-  set NAME
-  test NAME
-
-Examples:
-
-  node iam topics get my-topic
-  node iam topics set my-topic
-  node iam topics test my-topic
-  node iam subscriptions get my-subscription
-  node iam subscriptions set my-subscription
-  node iam subscriptions test my-subscription
-```
-
-[iam_docs]: https://cloud.google.com/pubsub/access_control
-[iam_code]: iam.js
