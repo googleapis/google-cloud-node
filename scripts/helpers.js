@@ -19,7 +19,6 @@
 var path = require('path');
 var uniq = require('array-uniq');
 var globby = require('globby');
-var extend = require('extend');
 
 require('shelljs/global');
 
