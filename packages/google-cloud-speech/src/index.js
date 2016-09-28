@@ -34,6 +34,7 @@ var request = require('request');
 var streamEvents = require('stream-events');
 var through = require('through2');
 var util = require('util');
+var v1beta1 = require('./v1beta1');
 
 /**
  * The [Cloud Speech API](https://cloud.google.com/speech/docs) enables easy
@@ -87,6 +88,10 @@ function Speech(options) {
   };
 
   common.GrpcService.call(this, config, options);
+
+  this.api = {
+    Speech: v1beta1(options).speechApi(options)
+  };
 }
 
 util.inherits(Speech, common.GrpcService);
@@ -631,11 +636,6 @@ Speech.prototype.operation = function(name) {
 Speech.prototype.recognize = function(file, config, callback) {
   var self = this;
 
-  var protoOpts = {
-    service: 'Speech',
-    method: 'syncRecognize'
-  };
-
   config = extend({}, config);
 
   if (!config.encoding) {
@@ -651,21 +651,16 @@ Speech.prototype.recognize = function(file, config, callback) {
       return;
     }
 
-    var reqOpts = {
-      audio: foundFile,
-      config: config
-    };
-
-    self.request(protoOpts, reqOpts, function(err, apiResponse) {
+    self.api.Speech.syncRecognize(config, foundFile, function(err, resp) {
       if (err) {
-        callback(err, null, apiResponse);
+        callback(err, null, resp);
         return;
       }
 
-      var response = new self.protos.Speech.SyncRecognizeResponse(apiResponse);
+      var response = new self.protos.Speech.SyncRecognizeResponse(resp);
       var results = Speech.formatResults_(response.results, verboseMode);
 
-      callback(null, results, apiResponse);
+      callback(null, results, resp);
     });
   });
 };
@@ -773,11 +768,6 @@ Speech.prototype.recognize = function(file, config, callback) {
 Speech.prototype.startRecognition = function(file, config, callback) {
   var self = this;
 
-  var protoOpts = {
-    service: 'Speech',
-    method: 'asyncRecognize'
-  };
-
   config = extend({}, config);
 
   if (!config.encoding) {
@@ -793,19 +783,14 @@ Speech.prototype.startRecognition = function(file, config, callback) {
       return;
     }
 
-    var reqOpts = {
-      audio: foundFile,
-      config: config
-    };
-
-    self.request(protoOpts, reqOpts, function(err, apiResponse) {
+    self.api.Speech.asyncRecognize(config, foundFile, function(err, resp) {
       if (err) {
-        callback(err, null, apiResponse);
+        callback(err, null, resp);
         return;
       }
 
-      var operation = self.operation(apiResponse.name);
-      operation.metadata = apiResponse;
+      var operation = self.operation(resp.name);
+      operation.metadata = resp;
 
       // Intercept the "complete" event to decode and format the results of the
       // operation for the user.
@@ -821,10 +806,10 @@ Speech.prototype.startRecognition = function(file, config, callback) {
         callback(null, Speech.formatResults_(response.results, verboseMode));
       });
 
-      callback(null, operation, apiResponse);
+      callback(null, operation, resp);
     });
   });
 };
 
 module.exports = Speech;
-module.exports.v1beta1 = require('./v1beta1');
+module.exports.v1beta1 = v1beta1;
