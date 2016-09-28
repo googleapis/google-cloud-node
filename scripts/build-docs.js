@@ -47,7 +47,7 @@ var helpers = require('./helpers');
 
 var ci = helpers.ci;
 var git = helpers.git;
-var Module = helpers.git;
+var Module = helpers.Module;
 var run = helpers.run;
 
 if (!ci.isFirstPass()) {
