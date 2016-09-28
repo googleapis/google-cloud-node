@@ -68,7 +68,9 @@ var prop = require('propprop');
 function Document(language, config) {
   var content = config.content || config;
 
-  // `reqOpts` is the payload passed to each `request()`. This object is used as
+  this.api = language.api;
+
+  // `reqOpts` is the payload passed to each API request. This object is used as
   // the default for all API requests made with this Document.
   this.reqOpts = {
     document: {}
@@ -102,8 +104,6 @@ function Document(language, config) {
   } else {
     this.reqOpts.document.content = content;
   }
-
-  this.request = language.request.bind(language);
 }
 
 /**
@@ -392,16 +392,10 @@ Document.prototype.annotate = function(options, callback) {
 
   var verbose = options.verbose === true;
 
-  var grpcOpts = {
-    service: 'LanguageService',
-    method: 'annotateText'
-  };
+  var doc = this.reqOpts.document;
+  var encType = this.reqOpts.encodingType;
 
-  var reqOpts = extend({
-    features: features
-  }, this.reqOpts);
-
-  this.request(grpcOpts, reqOpts, function(err, resp) {
+  this.api.Language.annotateText(doc, features, encType, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -542,12 +536,10 @@ Document.prototype.detectEntities = function(options, callback) {
 
   var verbose = options.verbose === true;
 
-  var grpcOpts = {
-    service: 'LanguageService',
-    method: 'analyzeEntities'
-  };
+  var doc = this.reqOpts.document;
+  var encType = this.reqOpts.encodingType;
 
-  this.request(grpcOpts, this.reqOpts, function(err, resp) {
+  this.api.Language.analyzeEntities(doc, encType, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -610,12 +602,10 @@ Document.prototype.detectSentiment = function(options, callback) {
 
   var verbose = options.verbose === true;
 
-  var grpcOpts = {
-    service: 'LanguageService',
-    method: 'analyzeSentiment'
-  };
+  var doc = this.reqOpts.document;
+  var encType = this.reqOpts.encodingType;
 
-  this.request(grpcOpts, this.reqOpts, function(err, resp) {
+  this.api.Language.analyzeSentiment(doc, encType, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;

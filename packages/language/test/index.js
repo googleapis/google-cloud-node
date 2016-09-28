@@ -18,7 +18,6 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var googleProtoFiles = require('google-proto-files');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
@@ -28,8 +27,15 @@ function FakeDocument() {
   this.calledWith_ = arguments;
 }
 
-function FakeGrpcService() {
-  this.calledWith_ = arguments;
+var fakeV1Beta1Override;
+function fakeV1Beta1() {
+  if (fakeV1Beta1Override) {
+    return fakeV1Beta1Override.apply(null, arguments);
+  }
+
+  return {
+    languageServiceApi: util.noop
+  };
 }
 
 describe('Language', function() {
@@ -41,14 +47,15 @@ describe('Language', function() {
   before(function() {
     Language = proxyquire('../src/index.js', {
       '@google-cloud/common': {
-        util: fakeUtil,
-        GrpcService: FakeGrpcService
+        util: fakeUtil
       },
-      './document.js': FakeDocument
+      './document.js': FakeDocument,
+      './v1beta1': fakeV1Beta1
     });
   });
 
   beforeEach(function() {
+    fakeV1Beta1Override = null;
     language = new Language(OPTIONS);
   });
 
@@ -78,25 +85,24 @@ describe('Language', function() {
       fakeUtil.normalizeArguments = normalizeArguments;
     });
 
-    it('should inherit from GrpcService', function() {
-      assert(language instanceof FakeGrpcService);
+    it('should create a gax api client', function() {
+      var expectedLanguageService = {};
 
-      var calledWith = language.calledWith_[0];
+      fakeV1Beta1Override = function(options) {
+        assert.strictEqual(options, OPTIONS);
 
-      assert.deepEqual(calledWith, {
-        baseUrl: 'language.googleapis.com',
-        service: 'language',
-        apiVersion: 'v1beta1',
-        protoServices: {
-          LanguageService: {
-            path: googleProtoFiles.language.v1beta1,
-            service: 'cloud.language'
+        return {
+          languageServiceApi: function(options) {
+            assert.strictEqual(options, OPTIONS);
+            return expectedLanguageService;
           }
-        },
-        scopes: [
-          'https://www.googleapis.com/auth/cloud-platform'
-        ],
-        packageJson: require('../package.json')
+        };
+      };
+
+      var language = new Language(OPTIONS);
+
+      assert.deepEqual(language.api, {
+        Language: expectedLanguageService
       });
     });
   });
