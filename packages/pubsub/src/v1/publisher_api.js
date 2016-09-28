@@ -27,7 +27,6 @@
 /* jscs: disable maximumLineLength */
 'use strict';
 
-var arguejs = require('arguejs');
 var configData = require('./publisher_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
@@ -38,16 +37,15 @@ var DEFAULT_SERVICE_PORT = 443;
 
 var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
 
-var DEFAULT_TIMEOUT = 30;
 
 var PAGE_DESCRIPTORS = {
   listTopics: new gax.PageDescriptor(
-      'page_token',
-      'next_page_token',
+      'pageToken',
+      'nextPageToken',
       'topics'),
   listTopicSubscriptions: new gax.PageDescriptor(
-      'page_token',
-      'next_page_token',
+      'pageToken',
+      'nextPageToken',
       'subscriptions')
 };
 
@@ -76,19 +74,19 @@ var ALL_SCOPES = [
  *
  * @class
  */
-function PublisherApi(gaxGrpc, grpcClient, opts) {
+function PublisherApi(gaxGrpc, grpcClients, opts) {
   opts = opts || {};
   var servicePath = opts.servicePath || SERVICE_ADDRESS;
   var port = opts.port || DEFAULT_SERVICE_PORT;
   var sslCreds = opts.sslCreds || null;
   var clientConfig = opts.clientConfig || {};
-  var timeout = opts.timeout || DEFAULT_TIMEOUT;
   var appName = opts.appName || 'gax';
-  var appVersion = opts.appVersion || gax.Version;
+  var appVersion = opts.appVersion || gax.version;
 
   var googleApiClient = [
     appName + '/' + appVersion,
     CODE_GEN_NAME_VERSION,
+    'gax/' + gax.version,
     'nodejs/' + process.version].join(' ');
 
 
@@ -98,24 +96,41 @@ function PublisherApi(gaxGrpc, grpcClient, opts) {
         [
           'topic'
         ],
-        'message_ids',
-        gax.createByteLengthFunction(grpcClient.google.pubsub.v1.PubsubMessage))
+        'messageIds',
+        gax.createByteLengthFunction(grpcClients.publisherClient.google.pubsub.v1.PubsubMessage))
   };
   var defaults = gaxGrpc.constructSettings(
       'google.pubsub.v1.Publisher',
       configData,
       clientConfig,
-      timeout,
       PAGE_DESCRIPTORS,
       bundleDescriptors,
       {'x-goog-api-client': googleApiClient});
 
-  var stub = gaxGrpc.createStub(
+  var iamPolicyStub = gaxGrpc.createStub(
       servicePath,
       port,
-      grpcClient.google.pubsub.v1.Publisher,
+      grpcClients.iamPolicyClient.google.iam.v1.IAMPolicy,
       {sslCreds: sslCreds});
-  var methods = [
+  var iamPolicyStubMethods = [
+    'setIamPolicy',
+    'getIamPolicy',
+    'testIamPermissions'
+  ];
+  iamPolicyStubMethods.forEach(function(methodName) {
+    this['_' + methodName] = gax.createApiCall(
+      iamPolicyStub.then(function(iamPolicyStub) {
+        return iamPolicyStub[methodName].bind(iamPolicyStub);
+      }),
+      defaults[methodName]);
+  }.bind(this));
+
+  var publisherStub = gaxGrpc.createStub(
+      servicePath,
+      port,
+      grpcClients.publisherClient.google.pubsub.v1.Publisher,
+      {sslCreds: sslCreds});
+  var publisherStubMethods = [
     'createTopic',
     'publish',
     'getTopic',
@@ -123,10 +138,12 @@ function PublisherApi(gaxGrpc, grpcClient, opts) {
     'listTopicSubscriptions',
     'deleteTopic'
   ];
-  methods.forEach(function(methodName) {
+  publisherStubMethods.forEach(function(methodName) {
     this['_' + methodName] = gax.createApiCall(
-        stub.then(function(stub) { return stub[methodName].bind(stub); }),
-        defaults[methodName]);
+      publisherStub.then(function(publisherStub) {
+        return publisherStub[methodName].bind(publisherStub);
+      }),
+      defaults[methodName]);
   }.bind(this));
 }
 
@@ -207,9 +224,9 @@ PublisherApi.prototype.matchTopicFromTopicName =
  *   underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
  *   signs (`%`). It must be between 3 and 255 characters in length, and it
  *   must not start with `"goog"`.
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
@@ -229,16 +246,21 @@ PublisherApi.prototype.matchTopicFromTopicName =
  *     // doThingsWith(response)
  * });
  */
-PublisherApi.prototype.createTopic = function createTopic() {
-  var args = arguejs({
-    name: String,
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+PublisherApi.prototype.createTopic = function createTopic(
+    name,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    name: args.name
+    name: name
   };
-  return this._createTopic(req, args.options, args.callback);
+  return this._createTopic(req, options, callback);
 };
 
 /**
@@ -252,9 +274,9 @@ PublisherApi.prototype.createTopic = function createTopic() {
  *   The messages to publish.
  *
  *   This object should have the same structure as [PubsubMessage]{@link PubsubMessage}
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
@@ -281,18 +303,23 @@ PublisherApi.prototype.createTopic = function createTopic() {
  *     // doThingsWith(response)
  * });
  */
-PublisherApi.prototype.publish = function publish() {
-  var args = arguejs({
-    topic: String,
-    messages: Array,
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+PublisherApi.prototype.publish = function publish(
+    topic,
+    messages,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    topic: args.topic,
-    messages: args.messages
+    topic: topic,
+    messages: messages
   };
-  return this._publish(req, args.options, args.callback);
+  return this._publish(req, options, callback);
 };
 
 /**
@@ -300,9 +327,9 @@ PublisherApi.prototype.publish = function publish() {
  *
  * @param {string} topic
  *   The name of the topic to get.
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
@@ -322,16 +349,21 @@ PublisherApi.prototype.publish = function publish() {
  *     // doThingsWith(response)
  * });
  */
-PublisherApi.prototype.getTopic = function getTopic() {
-  var args = arguejs({
-    topic: String,
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+PublisherApi.prototype.getTopic = function getTopic(
+    topic,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    topic: args.topic
+    topic: topic
   };
-  return this._getTopic(req, args.options, args.callback);
+  return this._getTopic(req, options, callback);
 };
 
 /**
@@ -339,44 +371,71 @@ PublisherApi.prototype.getTopic = function getTopic() {
  *
  * @param {string} project
  *   The name of the cloud project that topics belong to.
- * @param {Object=} otherArgs
- * @param {number=} otherArgs.pageSize
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ *
+ *   In addition, options may contain the following optional parameters.
+ * @param {number=} options.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
  *   parameter does not affect the return value. If page streaming is
  *   performed per-page, this determines the maximum number of
  *   resources in a page.
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
- * @returns {Stream}
- *   An object stream. By default, this emits an object representing
+ *
+ * @param {function(?Error, ?Object, ?string)=} callback
+ *   When specified, the results are not streamed but this callback
+ *   will be called with the response object representing [ListTopicsResponse]{@link ListTopicsResponse}.
+ *   The third item will be set if the response contains the token for the further results
+ *   and can be reused to `pageToken` field in the options in the next request.
+ * @returns {Stream|gax.EventEmitter}
+ *   An object stream which emits an object representing
  *   [Topic]{@link Topic} on 'data' event.
- *   This object can also be configured to emit
- *   pages of the responses through the options parameter.
+ *   When the callback is specified or streaming is suppressed through options,
+ *   it will return an event emitter to handle the call status and the callback
+ *   will be called with the response object.
  *
  * @example
  *
  * var api = pubsubV1.publisherApi();
  * var formattedProject = api.projectPath("[PROJECT]");
+ * // Iterate over all elements.
  * api.listTopics(formattedProject).on('data', function(element) {
  *     // doThingsWith(element)
  * });
+ *
+ * // Or obtain the paged response through the callback.
+ * function callback(err, response, nextPageToken) {
+ *     if (err) {
+ *         console.error(err);
+ *         return;
+ *     }
+ *     // doThingsWith(response)
+ *     if (nextPageToken) {
+ *         // fetch the next page.
+ *         api.listTopics(formattedProject, {pageToken: nextPageToken}, callback);
+ *     }
+ * }
+ * api.listTopics(formattedProject, {flattenPages: false}, callback);
  */
-PublisherApi.prototype.listTopics = function listTopics() {
-  var args = arguejs({
-    project: String,
-    otherArgs: [Object, {}],
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
-  var req = {
-    project: args.project
-  };
-  if ('pageSize' in args.otherArgs) {
-    req.page_size = args.otherArgs.pageSize;
+PublisherApi.prototype.listTopics = function listTopics(
+    project,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
   }
-  return this._listTopics(req, args.options, args.callback);
+  if (options === undefined) {
+    options = {};
+  }
+  var req = {
+    project: project
+  };
+  if ('pageSize' in options) {
+    req.pageSize = options.pageSize;
+  }
+  return this._listTopics(req, options, callback);
 };
 
 /**
@@ -384,43 +443,70 @@ PublisherApi.prototype.listTopics = function listTopics() {
  *
  * @param {string} topic
  *   The name of the topic that subscriptions are attached to.
- * @param {Object=} otherArgs
- * @param {number=} otherArgs.pageSize
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ *
+ *   In addition, options may contain the following optional parameters.
+ * @param {number=} options.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
  *   parameter does not affect the return value. If page streaming is
  *   performed per-page, this determines the maximum number of
  *   resources in a page.
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
- * @returns {Stream}
- *   An object stream. By default, this emits a string on 'data' event.
- *   This object can also be configured to emit
- *   pages of the responses through the options parameter.
+ *
+ * @param {function(?Error, ?Object, ?string)=} callback
+ *   When specified, the results are not streamed but this callback
+ *   will be called with the response object representing [ListTopicSubscriptionsResponse]{@link ListTopicSubscriptionsResponse}.
+ *   The third item will be set if the response contains the token for the further results
+ *   and can be reused to `pageToken` field in the options in the next request.
+ * @returns {Stream|gax.EventEmitter}
+ *   An object stream which emits a string on 'data' event.
+ *   When the callback is specified or streaming is suppressed through options,
+ *   it will return an event emitter to handle the call status and the callback
+ *   will be called with the response object.
  *
  * @example
  *
  * var api = pubsubV1.publisherApi();
  * var formattedTopic = api.topicPath("[PROJECT]", "[TOPIC]");
+ * // Iterate over all elements.
  * api.listTopicSubscriptions(formattedTopic).on('data', function(element) {
  *     // doThingsWith(element)
  * });
+ *
+ * // Or obtain the paged response through the callback.
+ * function callback(err, response, nextPageToken) {
+ *     if (err) {
+ *         console.error(err);
+ *         return;
+ *     }
+ *     // doThingsWith(response)
+ *     if (nextPageToken) {
+ *         // fetch the next page.
+ *         api.listTopicSubscriptions(formattedTopic, {pageToken: nextPageToken}, callback);
+ *     }
+ * }
+ * api.listTopicSubscriptions(formattedTopic, {flattenPages: false}, callback);
  */
-PublisherApi.prototype.listTopicSubscriptions = function listTopicSubscriptions() {
-  var args = arguejs({
-    topic: String,
-    otherArgs: [Object, {}],
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
-  var req = {
-    topic: args.topic
-  };
-  if ('pageSize' in args.otherArgs) {
-    req.page_size = args.otherArgs.pageSize;
+PublisherApi.prototype.listTopicSubscriptions = function listTopicSubscriptions(
+    topic,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
   }
-  return this._listTopicSubscriptions(req, args.options, args.callback);
+  if (options === undefined) {
+    options = {};
+  }
+  var req = {
+    topic: topic
+  };
+  if ('pageSize' in options) {
+    req.pageSize = options.pageSize;
+  }
+  return this._listTopicSubscriptions(req, options, callback);
 };
 
 /**
@@ -432,9 +518,9 @@ PublisherApi.prototype.listTopicSubscriptions = function listTopicSubscriptions(
  *
  * @param {string} topic
  *   Name of the topic to delete.
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error)=} callback
  *   The function which will be called with the result of the API call.
  * @returns {gax.EventEmitter} - the event emitter to handle the call
@@ -450,16 +536,174 @@ PublisherApi.prototype.listTopicSubscriptions = function listTopicSubscriptions(
  *     }
  * });
  */
-PublisherApi.prototype.deleteTopic = function deleteTopic() {
-  var args = arguejs({
-    topic: String,
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+PublisherApi.prototype.deleteTopic = function deleteTopic(
+    topic,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    topic: args.topic
+    topic: topic
   };
-  return this._deleteTopic(req, args.options, args.callback);
+  return this._deleteTopic(req, options, callback);
+};
+
+/**
+ * Sets the access control policy on the specified resource. Replaces any
+ * existing policy.
+ *
+ * @param {string} resource
+ *   REQUIRED: The resource for which policy is being specified.
+ *   Resource is usually specified as a path, such as,
+ *   projects/{project}/zones/{zone}/disks/{disk}.
+ * @param {Object} policy
+ *   REQUIRED: The complete policy to be applied to the 'resource'. The size of
+ *   the policy is limited to a few 10s of KB. An empty policy is in general a
+ *   valid policy but certain services (like Projects) might reject them.
+ *
+ *   This object should have the same structure as [Policy]{@link Policy}
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ * @param {function(?Error, ?Object)=} callback
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing [Policy]{@link Policy}
+ * @returns {gax.EventEmitter} - the event emitter to handle the call
+ *   status.
+ *
+ * @example
+ *
+ * var api = pubsubV1.publisherApi();
+ * var formattedResource = api.topicPath("[PROJECT]", "[TOPIC]");
+ * var policy = {};
+ * api.setIamPolicy(formattedResource, policy, function(err, response) {
+ *     if (err) {
+ *         console.error(err);
+ *         return;
+ *     }
+ *     // doThingsWith(response)
+ * });
+ */
+PublisherApi.prototype.setIamPolicy = function setIamPolicy(
+    resource,
+    policy,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
+  var req = {
+    resource: resource,
+    policy: policy
+  };
+  return this._setIamPolicy(req, options, callback);
+};
+
+/**
+ * Gets the access control policy for a resource. Is empty if the
+ * policy or the resource does not exist.
+ *
+ * @param {string} resource
+ *   REQUIRED: The resource for which policy is being requested. Resource
+ *   is usually specified as a path, such as, projects/{project}.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ * @param {function(?Error, ?Object)=} callback
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing [Policy]{@link Policy}
+ * @returns {gax.EventEmitter} - the event emitter to handle the call
+ *   status.
+ *
+ * @example
+ *
+ * var api = pubsubV1.publisherApi();
+ * var formattedResource = api.topicPath("[PROJECT]", "[TOPIC]");
+ * api.getIamPolicy(formattedResource, function(err, response) {
+ *     if (err) {
+ *         console.error(err);
+ *         return;
+ *     }
+ *     // doThingsWith(response)
+ * });
+ */
+PublisherApi.prototype.getIamPolicy = function getIamPolicy(
+    resource,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
+  var req = {
+    resource: resource
+  };
+  return this._getIamPolicy(req, options, callback);
+};
+
+/**
+ * Returns permissions that a caller has on the specified resource.
+ *
+ * @param {string} resource
+ *   REQUIRED: The resource for which policy detail is being requested.
+ *   Resource is usually specified as a path, such as, projects/{project}.
+ * @param {string[]} permissions
+ *   The set of permissions to check for the 'resource'. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ * @param {function(?Error, ?Object)=} callback
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing [TestIamPermissionsResponse]{@link TestIamPermissionsResponse}
+ * @returns {gax.EventEmitter} - the event emitter to handle the call
+ *   status.
+ *
+ * @example
+ *
+ * var api = pubsubV1.publisherApi();
+ * var formattedResource = api.topicPath("[PROJECT]", "[TOPIC]");
+ * var permissions = [];
+ * api.testIamPermissions(formattedResource, permissions, function(err, response) {
+ *     if (err) {
+ *         console.error(err);
+ *         return;
+ *     }
+ *     // doThingsWith(response)
+ * });
+ */
+PublisherApi.prototype.testIamPermissions = function testIamPermissions(
+    resource,
+    permissions,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
+  var req = {
+    resource: resource,
+    permissions: permissions
+  };
+  return this._testIamPermissions(req, options, callback);
 };
 
 function PublisherApiBuilder(gaxGrpc) {
@@ -467,11 +711,22 @@ function PublisherApiBuilder(gaxGrpc) {
     return new PublisherApiBuilder(gaxGrpc);
   }
 
-  var grpcClient = gaxGrpc.load([{
+  var iamPolicyClient = gaxGrpc.load([{
+    root: require('google-proto-files')('..'),
+    file: 'google/iam/v1/iam_policy.proto'
+  }]);
+  extend(this, iamPolicyClient.google.iam.v1);
+
+  var publisherClient = gaxGrpc.load([{
     root: require('google-proto-files')('..'),
     file: 'google/pubsub/v1/pubsub.proto'
   }]);
-  extend(this, grpcClient.google.pubsub.v1);
+  extend(this, publisherClient.google.pubsub.v1);
+
+  var grpcClients = {
+    iamPolicyClient: iamPolicyClient,
+    publisherClient: publisherClient
+  };
 
   /**
    * Build a new instance of {@link PublisherApi}.
@@ -486,15 +741,13 @@ function PublisherApiBuilder(gaxGrpc) {
    * @param {Object=} opts.clientConfig
    *   The customized config to build the call settings. See
    *   {@link gax.constructSettings} for the format.
-   * @param {number=} opts.timeout
-   *   The default timeout, in seconds, for calls made through this client.
    * @param {number=} opts.appName
    *   The codename of the calling service.
    * @param {String=} opts.appVersion
    *   The version of the calling service.
    */
   this.publisherApi = function(opts) {
-    return new PublisherApi(gaxGrpc, grpcClient, opts);
+    return new PublisherApi(gaxGrpc, grpcClients, opts);
   };
   extend(this.publisherApi, PublisherApi);
 }

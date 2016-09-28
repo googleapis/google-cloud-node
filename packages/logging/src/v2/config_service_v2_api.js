@@ -27,7 +27,6 @@
 /* jscs: disable maximumLineLength */
 'use strict';
 
-var arguejs = require('arguejs');
 var configData = require('./config_service_v2_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
@@ -38,12 +37,11 @@ var DEFAULT_SERVICE_PORT = 443;
 
 var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
 
-var DEFAULT_TIMEOUT = 30;
 
 var PAGE_DESCRIPTORS = {
   listSinks: new gax.PageDescriptor(
-      'page_token',
-      'next_page_token',
+      'pageToken',
+      'nextPageToken',
       'sinks')
 };
 
@@ -75,46 +73,47 @@ var ALL_SCOPES = [
  *
  * @class
  */
-function ConfigServiceV2Api(gaxGrpc, grpcClient, opts) {
+function ConfigServiceV2Api(gaxGrpc, grpcClients, opts) {
   opts = opts || {};
   var servicePath = opts.servicePath || SERVICE_ADDRESS;
   var port = opts.port || DEFAULT_SERVICE_PORT;
   var sslCreds = opts.sslCreds || null;
   var clientConfig = opts.clientConfig || {};
-  var timeout = opts.timeout || DEFAULT_TIMEOUT;
   var appName = opts.appName || 'gax';
-  var appVersion = opts.appVersion || gax.Version;
+  var appVersion = opts.appVersion || gax.version;
 
   var googleApiClient = [
     appName + '/' + appVersion,
     CODE_GEN_NAME_VERSION,
+    'gax/' + gax.version,
     'nodejs/' + process.version].join(' ');
 
   var defaults = gaxGrpc.constructSettings(
       'google.logging.v2.ConfigServiceV2',
       configData,
       clientConfig,
-      timeout,
       PAGE_DESCRIPTORS,
       null,
       {'x-goog-api-client': googleApiClient});
 
-  var stub = gaxGrpc.createStub(
+  var configServiceV2Stub = gaxGrpc.createStub(
       servicePath,
       port,
-      grpcClient.google.logging.v2.ConfigServiceV2,
+      grpcClients.configServiceV2Client.google.logging.v2.ConfigServiceV2,
       {sslCreds: sslCreds});
-  var methods = [
+  var configServiceV2StubMethods = [
     'listSinks',
     'getSink',
     'createSink',
     'updateSink',
     'deleteSink'
   ];
-  methods.forEach(function(methodName) {
+  configServiceV2StubMethods.forEach(function(methodName) {
     this['_' + methodName] = gax.createApiCall(
-        stub.then(function(stub) { return stub[methodName].bind(stub); }),
-        defaults[methodName]);
+      configServiceV2Stub.then(function(configServiceV2Stub) {
+        return configServiceV2Stub[methodName].bind(configServiceV2Stub);
+      }),
+      defaults[methodName]);
   }.bind(this));
 }
 
@@ -189,57 +188,84 @@ ConfigServiceV2Api.prototype.matchSinkFromSinkName =
  * Lists sinks.
  *
  * @param {string} parent
- *   Required. The resource name containing the sinks.
+ *   Required. The cloud resource containing the sinks.
  *   Example: `"projects/my-logging-project"`.
- * @param {Object=} otherArgs
- * @param {number=} otherArgs.pageSize
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ *
+ *   In addition, options may contain the following optional parameters.
+ * @param {number=} options.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
  *   parameter does not affect the return value. If page streaming is
  *   performed per-page, this determines the maximum number of
  *   resources in a page.
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
- * @returns {Stream}
- *   An object stream. By default, this emits an object representing
+ *
+ * @param {function(?Error, ?Object, ?string)=} callback
+ *   When specified, the results are not streamed but this callback
+ *   will be called with the response object representing [ListSinksResponse]{@link ListSinksResponse}.
+ *   The third item will be set if the response contains the token for the further results
+ *   and can be reused to `pageToken` field in the options in the next request.
+ * @returns {Stream|gax.EventEmitter}
+ *   An object stream which emits an object representing
  *   [LogSink]{@link LogSink} on 'data' event.
- *   This object can also be configured to emit
- *   pages of the responses through the options parameter.
+ *   When the callback is specified or streaming is suppressed through options,
+ *   it will return an event emitter to handle the call status and the callback
+ *   will be called with the response object.
  *
  * @example
  *
  * var api = loggingV2.configServiceV2Api();
  * var formattedParent = api.parentPath("[PROJECT]");
+ * // Iterate over all elements.
  * api.listSinks(formattedParent).on('data', function(element) {
  *     // doThingsWith(element)
  * });
+ *
+ * // Or obtain the paged response through the callback.
+ * function callback(err, response, nextPageToken) {
+ *     if (err) {
+ *         console.error(err);
+ *         return;
+ *     }
+ *     // doThingsWith(response)
+ *     if (nextPageToken) {
+ *         // fetch the next page.
+ *         api.listSinks(formattedParent, {pageToken: nextPageToken}, callback);
+ *     }
+ * }
+ * api.listSinks(formattedParent, {flattenPages: false}, callback);
  */
-ConfigServiceV2Api.prototype.listSinks = function listSinks() {
-  var args = arguejs({
-    parent: String,
-    otherArgs: [Object, {}],
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
-  var req = {
-    parent: args.parent
-  };
-  if ('pageSize' in args.otherArgs) {
-    req.page_size = args.otherArgs.pageSize;
+ConfigServiceV2Api.prototype.listSinks = function listSinks(
+    parent,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
   }
-  return this._listSinks(req, args.options, args.callback);
+  if (options === undefined) {
+    options = {};
+  }
+  var req = {
+    parent: parent
+  };
+  if ('pageSize' in options) {
+    req.pageSize = options.pageSize;
+  }
+  return this._listSinks(req, options, callback);
 };
 
 /**
  * Gets a sink.
  *
  * @param {string} sinkName
- *   The resource name of the sink to return.
+ *   Required. The resource name of the sink to return.
  *   Example: `"projects/my-project-id/sinks/my-sink-id"`.
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
@@ -259,34 +285,38 @@ ConfigServiceV2Api.prototype.listSinks = function listSinks() {
  *     // doThingsWith(response)
  * });
  */
-ConfigServiceV2Api.prototype.getSink = function getSink() {
-  var args = arguejs({
-    sinkName: String,
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+ConfigServiceV2Api.prototype.getSink = function getSink(
+    sinkName,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    sink_name: args.sinkName
+    sinkName: sinkName
   };
-  return this._getSink(req, args.options, args.callback);
+  return this._getSink(req, options, callback);
 };
 
 /**
  * Creates a sink.
  *
  * @param {string} parent
- *   The resource in which to create the sink.
+ *   Required. The resource in which to create the sink.
  *   Example: `"projects/my-project-id"`.
- *
  *   The new sink must be provided in the request.
  * @param {Object} sink
- *   The new sink, which must not have an identifier that already
- *   exists.
+ *   Required. The new sink, whose `name` parameter is a sink identifier that
+ *   is not already in use.
  *
  *   This object should have the same structure as [LogSink]{@link LogSink}
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
@@ -307,39 +337,41 @@ ConfigServiceV2Api.prototype.getSink = function getSink() {
  *     // doThingsWith(response)
  * });
  */
-ConfigServiceV2Api.prototype.createSink = function createSink() {
-  var args = arguejs({
-    parent: String,
-    sink: Object,
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+ConfigServiceV2Api.prototype.createSink = function createSink(
+    parent,
+    sink,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    parent: args.parent,
-    sink: args.sink
+    parent: parent,
+    sink: sink
   };
-  return this._createSink(req, args.options, args.callback);
+  return this._createSink(req, options, callback);
 };
 
 /**
- * Creates or updates a sink.
+ * Updates or creates a sink.
  *
  * @param {string} sinkName
- *   The resource name of the sink to update.
- *   Example: `"projects/my-project-id/sinks/my-sink-id"`.
- *
- *   The updated sink must be provided in the request and have the
- *   same name that is specified in `sinkName`.  If the sink does not
- *   exist, it is created.
+ *   Required. The resource name of the sink to update, including the parent
+ *   resource and the sink identifier.  If the sink does not exist, this method
+ *   creates the sink.  Example: `"projects/my-project-id/sinks/my-sink-id"`.
  * @param {Object} sink
- *   The updated sink, whose name must be the same as the sink
- *   identifier in `sinkName`.  If `sinkName` does not exist, then
+ *   Required. The updated sink, whose name is the same identifier that appears
+ *   as part of `sinkName`.  If `sinkName` does not exist, then
  *   this method creates a new sink.
  *
  *   This object should have the same structure as [LogSink]{@link LogSink}
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
@@ -360,29 +392,36 @@ ConfigServiceV2Api.prototype.createSink = function createSink() {
  *     // doThingsWith(response)
  * });
  */
-ConfigServiceV2Api.prototype.updateSink = function updateSink() {
-  var args = arguejs({
-    sinkName: String,
-    sink: Object,
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+ConfigServiceV2Api.prototype.updateSink = function updateSink(
+    sinkName,
+    sink,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    sink_name: args.sinkName,
-    sink: args.sink
+    sinkName: sinkName,
+    sink: sink
   };
-  return this._updateSink(req, args.options, args.callback);
+  return this._updateSink(req, options, callback);
 };
 
 /**
  * Deletes a sink.
  *
  * @param {string} sinkName
- *   The resource name of the sink to delete.
- *   Example: `"projects/my-project-id/sinks/my-sink-id"`.
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ *   Required. The resource name of the sink to delete, including the parent
+ *   resource and the sink identifier.  Example:
+ *   `"projects/my-project-id/sinks/my-sink-id"`.  It is an error if the sink
+ *   does not exist.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error)=} callback
  *   The function which will be called with the result of the API call.
  * @returns {gax.EventEmitter} - the event emitter to handle the call
@@ -398,16 +437,21 @@ ConfigServiceV2Api.prototype.updateSink = function updateSink() {
  *     }
  * });
  */
-ConfigServiceV2Api.prototype.deleteSink = function deleteSink() {
-  var args = arguejs({
-    sinkName: String,
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+ConfigServiceV2Api.prototype.deleteSink = function deleteSink(
+    sinkName,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    sink_name: args.sinkName
+    sinkName: sinkName
   };
-  return this._deleteSink(req, args.options, args.callback);
+  return this._deleteSink(req, options, callback);
 };
 
 function ConfigServiceV2ApiBuilder(gaxGrpc) {
@@ -415,11 +459,15 @@ function ConfigServiceV2ApiBuilder(gaxGrpc) {
     return new ConfigServiceV2ApiBuilder(gaxGrpc);
   }
 
-  var grpcClient = gaxGrpc.load([{
+  var configServiceV2Client = gaxGrpc.load([{
     root: require('google-proto-files')('..'),
     file: 'google/logging/v2/logging_config.proto'
   }]);
-  extend(this, grpcClient.google.logging.v2);
+  extend(this, configServiceV2Client.google.logging.v2);
+
+  var grpcClients = {
+    configServiceV2Client: configServiceV2Client
+  };
 
   /**
    * Build a new instance of {@link ConfigServiceV2Api}.
@@ -434,15 +482,13 @@ function ConfigServiceV2ApiBuilder(gaxGrpc) {
    * @param {Object=} opts.clientConfig
    *   The customized config to build the call settings. See
    *   {@link gax.constructSettings} for the format.
-   * @param {number=} opts.timeout
-   *   The default timeout, in seconds, for calls made through this client.
    * @param {number=} opts.appName
    *   The codename of the calling service.
    * @param {String=} opts.appVersion
    *   The version of the calling service.
    */
   this.configServiceV2Api = function(opts) {
-    return new ConfigServiceV2Api(gaxGrpc, grpcClient, opts);
+    return new ConfigServiceV2Api(gaxGrpc, grpcClients, opts);
   };
   extend(this.configServiceV2Api, ConfigServiceV2Api);
 }

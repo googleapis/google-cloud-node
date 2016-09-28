@@ -27,7 +27,6 @@
 /* jscs: disable maximumLineLength */
 'use strict';
 
-var arguejs = require('arguejs');
 var configData = require('./speech_client_config');
 var extend = require('extend');
 var gax = require('google-gax');
@@ -38,7 +37,6 @@ var DEFAULT_SERVICE_PORT = 443;
 
 var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
 
-var DEFAULT_TIMEOUT = 30;
 
 /**
  * The scopes needed to make gRPC calls to all of the methods defined in
@@ -69,7 +67,6 @@ function SpeechApi(gaxGrpc, grpcClients, opts) {
   var port = opts.port || DEFAULT_SERVICE_PORT;
   var sslCreds = opts.sslCreds || null;
   var clientConfig = opts.clientConfig || {};
-  var timeout = opts.timeout || DEFAULT_TIMEOUT;
   var appName = opts.appName || 'gax';
   var appVersion = opts.appVersion || gax.version;
 
@@ -83,7 +80,6 @@ function SpeechApi(gaxGrpc, grpcClients, opts) {
       'google.cloud.speech.v1beta1.Speech',
       configData,
       clientConfig,
-      timeout,
       null,
       null,
       {'x-goog-api-client': googleApiClient});
@@ -121,9 +117,9 @@ function SpeechApi(gaxGrpc, grpcClients, opts) {
  *   [Required] The audio data to be recognized.
  *
  *   This object should have the same structure as [RecognitionAudio]{@link RecognitionAudio}
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
@@ -144,24 +140,30 @@ function SpeechApi(gaxGrpc, grpcClients, opts) {
  *     // doThingsWith(response)
  * });
  */
-SpeechApi.prototype.syncRecognize = function syncRecognize() {
-  var args = arguejs({
-    config: Object,
-    audio: Object,
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+SpeechApi.prototype.syncRecognize = function syncRecognize(
+    config,
+    audio,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    config: args.config,
-    audio: args.audio
+    config: config,
+    audio: audio
   };
-  return this._syncRecognize(req, args.options, args.callback);
+  return this._syncRecognize(req, options, callback);
 };
 
 /**
  * Perform asynchronous speech-recognition: receive results via the
- * google.longrunning.Operations interface. `Operation.response` returns
- * `AsyncRecognizeResponse`.
+ * google.longrunning.Operations interface. Returns either an
+ * `Operation.error` or an `Operation.response` which contains
+ * an `AsyncRecognizeResponse` message.
  *
  * @param {Object} config
  *   [Required] The `config` message provides information to the recognizer
@@ -172,9 +174,9 @@ SpeechApi.prototype.syncRecognize = function syncRecognize() {
  *   [Required] The audio data to be recognized.
  *
  *   This object should have the same structure as [RecognitionAudio]{@link RecognitionAudio}
- * @param {gax.CallOptions=} options
- *   Overrides the default settings for this call, e.g, timeout,
- *   retries, etc.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
@@ -195,18 +197,23 @@ SpeechApi.prototype.syncRecognize = function syncRecognize() {
  *     // doThingsWith(response)
  * });
  */
-SpeechApi.prototype.asyncRecognize = function asyncRecognize() {
-  var args = arguejs({
-    config: Object,
-    audio: Object,
-    options: [gax.CallOptions],
-    callback: [Function]
-  }, arguments);
+SpeechApi.prototype.asyncRecognize = function asyncRecognize(
+    config,
+    audio,
+    options,
+    callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
   var req = {
-    config: args.config,
-    audio: args.audio
+    config: config,
+    audio: audio
   };
-  return this._asyncRecognize(req, args.options, args.callback);
+  return this._asyncRecognize(req, options, callback);
 };
 
 function SpeechApiBuilder(gaxGrpc) {
@@ -237,8 +244,6 @@ function SpeechApiBuilder(gaxGrpc) {
    * @param {Object=} opts.clientConfig
    *   The customized config to build the call settings. See
    *   {@link gax.constructSettings} for the format.
-   * @param {number=} opts.timeout
-   *   The default timeout, in seconds, for calls made through this client.
    * @param {number=} opts.appName
    *   The codename of the calling service.
    * @param {String=} opts.appVersion
