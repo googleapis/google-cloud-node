@@ -88,6 +88,7 @@ function Speech(options) {
   };
 
   common.GrpcService.call(this, config, options);
+
   this.api = {
     Speech: v1beta1(options).speechApi(options)
   };
