@@ -13,6 +13,7 @@
     "yargs": "^5.0.0"
   },
   "devDependencies": {
+    "async": "^2.0.1",
     "mocha": "^3.0.2",
     "node-uuid": "^1.4.7"
   },

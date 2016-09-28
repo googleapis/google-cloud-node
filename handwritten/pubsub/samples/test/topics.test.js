@@ -42,12 +42,13 @@ describe(`pubsub:topics`, () => {
     program.createTopic(topicName, callback);
     program.deleteTopic(topicName, callback);
     program.publishMessage(topicName, {}, callback);
+    program.publishOrderedMessage(topicName, {}, callback);
     program.listTopics(callback);
     program.getTopicPolicy(topicName, callback);
     program.setTopicPolicy(topicName, callback);
     program.testTopicPermissions(topicName, callback);
 
-    assert.equal(callback.callCount, 7);
+    assert.equal(callback.callCount, 8);
     assert.equal(callback.alwaysCalledWithExactly(error), true);
   });
 });

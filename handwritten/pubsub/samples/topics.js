@@ -23,10 +23,13 @@
 
 'use strict';
 
-const pubsubClient = require(`@google-cloud/pubsub`)();
+const PubSub = require(`@google-cloud/pubsub`);
 
 // [START pubsub_list_topics]
 function listTopics (callback) {
+  // Instantiates the client library
+  const pubsubClient = PubSub();
+
   // Lists all topics in the current project
   pubsubClient.getTopics((err, topics) => {
     if (err) {
@@ -43,6 +46,9 @@ function listTopics (callback) {
 
 // [START pubsub_create_topic]
 function createTopic (topicName, callback) {
+  // Instantiates the client library
+  const pubsubClient = PubSub();
+
   // Creates a new topic, e.g. "my-new-topic"
   pubsubClient.createTopic(topicName, (err, topic) => {
     if (err) {
@@ -58,6 +64,9 @@ function createTopic (topicName, callback) {
 
 // [START pubsub_delete_topic]
 function deleteTopic (topicName, callback) {
+  // Instantiates the client library
+  const pubsubClient = PubSub();
+
   // References an existing topic, e.g. "my-topic"
   const topic = pubsubClient.topic(topicName);
 
@@ -76,6 +85,9 @@ function deleteTopic (topicName, callback) {
 
 // [START pubsub_publish_message]
 function publishMessage (topicName, data, callback) {
+  // Instantiates the client library
+  const pubsubClient = PubSub();
+
   // References an existing topic, e.g. "my-topic"
   const topic = pubsubClient.topic(topicName);
 
@@ -105,8 +117,63 @@ function publishMessage (topicName, data, callback) {
 }
 // [END pubsub_publish_message]
 
+let publishCounterValue = 1;
+
+function getPublishCounterValue () {
+  return publishCounterValue;
+}
+
+function setPublishCounterValue (value) {
+  publishCounterValue = value;
+}
+
+// [START pubsub_publish_ordered_message]
+function publishOrderedMessage (topicName, data, callback) {
+  // Instantiates the client library
+  const pubsubClient = PubSub();
+
+  // References an existing topic, e.g. "my-topic"
+  const topic = pubsubClient.topic(topicName);
+
+  /**
+   * In Node.js, a PubSub message requires a "data" property, which can have a
+   * string or an object as its value. An optional "attributes" property can be
+   * an object of key/value pairs, where the keys and values are both strings.
+   * See https://cloud.google.com/pubsub/reference/rpc/google.pubsub.v1#google.pubsub.v1.PubsubMessage
+   *
+   * Topic#publish() takes either a single message object or an array of message
+   * objects. See https://googlecloudplatform.github.io/google-cloud-node/#/docs/pubsub/latest/pubsub/topic?method=publish
+   */
+  const message = {
+    data: data,
+
+    // Pub/Sub messages are unordered, so assign an order id to the message to
+    // manually order messages
+    attributes: {
+      counterId: '' + getPublishCounterValue()
+    }
+  };
+
+  topic.publish(message, (err, messageIds) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+
+    // Update the counter value
+    setPublishCounterValue(+message.attributes.counterId + 1);
+
+    console.log(`Message ${messageIds[0]} published.`);
+    callback();
+  });
+}
+// [END pubsub_publish_ordered_message]
+
 // [START pubsub_get_topic_policy]
 function getTopicPolicy (topicName, callback) {
+  // Instantiates the client library
+  const pubsubClient = PubSub();
+
   // References an existing topic, e.g. "my-topic"
   const topic = pubsubClient.topic(topicName);
 
@@ -125,6 +192,9 @@ function getTopicPolicy (topicName, callback) {
 
 // [START pubsub_set_topic_policy]
 function setTopicPolicy (topicName, callback) {
+  // Instantiates the client library
+  const pubsubClient = PubSub();
+
   // References an existing topic, e.g. "my-topic"
   const topic = pubsubClient.topic(topicName);
 
@@ -159,6 +229,9 @@ function setTopicPolicy (topicName, callback) {
 
 // [START pubsub_test_topic_permissions]
 function testTopicPermissions (topicName, callback) {
+  // Instantiates the client library
+  const pubsubClient = PubSub();
+
   // References an existing topic, e.g. "my-topic"
   const topic = pubsubClient.topic(topicName);
 
@@ -191,6 +264,7 @@ const program = module.exports = {
   createTopic: createTopic,
   deleteTopic: deleteTopic,
   publishMessage: publishMessage,
+  publishOrderedMessage: publishOrderedMessage,
   getTopicPolicy: getTopicPolicy,
   setTopicPolicy: setTopicPolicy,
   testTopicPermissions: testTopicPermissions,

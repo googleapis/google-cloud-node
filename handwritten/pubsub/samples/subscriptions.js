@@ -23,10 +23,13 @@
 
 'use strict';
 
-const pubsubClient = require(`@google-cloud/pubsub`)();
+const PubSub = require(`@google-cloud/pubsub`);
 
 // [START pubsub_list_subscriptions]
 function listSubscriptions (callback) {
+  // Instantiates the client library
+  const pubsubClient = PubSub();
+
   // Lists all subscriptions in the current project
   pubsubClient.getSubscriptions((err, subscriptions) => {
     if (err) {
@@ -43,6 +46,9 @@ function listSubscriptions (callback) {
 
 // [START pubsub_list_topic_subscriptions]
 function listTopicSubscriptions (topicName, callback) {
+  // Instantiates the client library
+  const pubsubClient = PubSub();
+
   // References an existing topic, e.g. "my-topic"
   const topic = pubsubClient.topic(topicName);
 
@@ -62,6 +68,9 @@ function listTopicSubscriptions (topicName, callback) {
 
 // [START pubsub_create_subscription]
 function createSubscription (topicName, subscriptionName, callback) {
+  // Instantiates the client library
+  const pubsubClient = PubSub();
+
   // References an existing topic, e.g. "my-topic"
   const topic = pubsubClient.topic(topicName);
 
@@ -80,16 +89,18 @@ function createSubscription (topicName, subscriptionName, callback) {
 
 // [START pubsub_create_push_subscription]
 function createPushSubscription (topicName, subscriptionName, callback) {
+  // Instantiates the client library
+  const pubsubClient = PubSub();
+
   // References an existing topic, e.g. "my-topic"
   const topic = pubsubClient.topic(topicName);
-  const projectId = process.env.GCLOUD_PROJECT || 'YOU_PROJECT_ID';
 
   // Creates a new push subscription, e.g. "my-new-subscription"
   topic.subscribe(subscriptionName, {
     pushConfig: {
       // Set to an HTTPS endpoint of your choice. If necessary, register
       // (authorize) the domain on which the server is hosted.
-      pushEndpoint: `https://${projectId}.appspot.com/push`
+      pushEndpoint: `https://${pubsubClient.projectId}.appspot.com/push`
     }
   }, (err, subscription) => {
     if (err) {
@@ -105,6 +116,9 @@ function createPushSubscription (topicName, subscriptionName, callback) {
 
 // [START pubsub_delete_subscription]
 function deleteSubscription (subscriptionName, callback) {
+  // Instantiates the client library
+  const pubsubClient = PubSub();
+
   // References an existing subscription, e.g. "my-subscription"
   const subscription = pubsubClient.subscription(subscriptionName);
 
@@ -121,8 +135,11 @@ function deleteSubscription (subscriptionName, callback) {
 }
 // [END pubsub_delete_subscription]
 
-// [START pubsub_get_subscription_metadata]
-function getSubscriptionMetadata (subscriptionName, callback) {
+// [START pubsub_get_subscription]
+function getSubscription (subscriptionName, callback) {
+  // Instantiates the client library
+  const pubsubClient = PubSub();
+
   // References an existing subscription, e.g. "my-subscription"
   const subscription = pubsubClient.subscription(subscriptionName);
 
@@ -140,10 +157,13 @@ function getSubscriptionMetadata (subscriptionName, callback) {
     callback();
   });
 }
-// [END pubsub_get_subscription_metadata]
+// [END pubsub_get_subscription]
 
 // [START pubsub_pull_messages]
 function pullMessages (subscriptionName, callback) {
+  // Instantiates the client library
+  const pubsubClient = PubSub();
+
   // References an existing subscription, e.g. "my-subscription"
   const subscription = pubsubClient.subscription(subscriptionName);
 
@@ -168,8 +188,73 @@ function pullMessages (subscriptionName, callback) {
 }
 // [END pubsub_pull_messages]
 
+let subscribeCounterValue = 1;
+
+function getSubscribeCounterValue () {
+  return subscribeCounterValue;
+}
+
+function setSubscribeCounterValue (value) {
+  subscribeCounterValue = value;
+}
+
+// [START pubsub_pull_ordered_messages]
+const outstandingMessages = {};
+
+function pullOrderedMessages (subscriptionName, callback) {
+  // Instantiates the client library
+  const pubsubClient = PubSub();
+
+  // References an existing subscription, e.g. "my-subscription"
+  const subscription = pubsubClient.subscription(subscriptionName);
+
+  // Pulls messages. Set returnImmediately to false to block until messages are
+  // received.
+  subscription.pull({ returnImmediately: true }, (err, messages) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+
+    // Pub/Sub messages are unordered, so here we manually order messages by
+    // their "counterId" attribute which was set when they were published.
+    messages.forEach((message) => {
+      outstandingMessages[message.attributes.counterId] = message;
+    });
+
+    const outstandingIds = Object.keys(outstandingMessages).map((counterId) => +counterId);
+    outstandingIds.sort();
+
+    outstandingIds.forEach((counterId) => {
+      const counter = getSubscribeCounterValue();
+      const message = outstandingMessages[counterId];
+
+      if (counterId < counter) {
+        // The message has already been processed
+        subscription.ack(message.ackId);
+        delete outstandingMessages[counterId];
+      } else if (counterId === counter) {
+        // Process the message
+        console.log(`* %d %j %j`, message.id, message.data, message.attributes);
+
+        setSubscribeCounterValue(counterId + 1);
+        subscription.ack(message.ackId);
+        delete outstandingMessages[counterId];
+      } else {
+        // Have not yet processed the message on which this message is dependent
+        return false;
+      }
+    });
+    callback();
+  });
+}
+// [END pubsub_pull_ordered_messages]
+
 // [START pubsub_get_subscription_policy]
 function getSubscriptionPolicy (subscriptionName, callback) {
+  // Instantiates the client library
+  const pubsubClient = PubSub();
+
   // References an existing subscription, e.g. "my-subscription"
   const subscription = pubsubClient.subscription(subscriptionName);
 
@@ -188,6 +273,9 @@ function getSubscriptionPolicy (subscriptionName, callback) {
 
 // [START pubsub_set_subscription_policy]
 function setSubscriptionPolicy (subscriptionName, callback) {
+  // Instantiates the client library
+  const pubsubClient = PubSub();
+
   // References an existing subscription, e.g. "my-subscription"
   const subscription = pubsubClient.subscription(subscriptionName);
 
@@ -222,6 +310,9 @@ function setSubscriptionPolicy (subscriptionName, callback) {
 
 // [START pubsub_test_subscription_permissions]
 function testSubscriptionPermissions (subscriptionName, callback) {
+  // Instantiates the client library
+  const pubsubClient = PubSub();
+
   // References an existing subscription, e.g. "my-subscription"
   const subscription = pubsubClient.subscription(subscriptionName);
 
@@ -253,8 +344,9 @@ const program = module.exports = {
   createSubscription: createSubscription,
   createPushSubscription: createPushSubscription,
   deleteSubscription: deleteSubscription,
-  getSubscriptionMetadata: getSubscriptionMetadata,
+  getSubscription: getSubscription,
   pullMessages: pullMessages,
+  pullOrderedMessages: pullOrderedMessages,
   getSubscriptionPolicy: getSubscriptionPolicy,
   setSubscriptionPolicy: setSubscriptionPolicy,
   testSubscriptionPermissions: testSubscriptionPermissions,
@@ -283,7 +375,7 @@ cli
     program.deleteSubscription(options.subscriptionName, makeHandler(false));
   })
   .command(`get <subscriptionName>`, `Gets the metadata for a subscription.`, {}, (options) => {
-    program.getSubscriptionMetadata(options.subscriptionName, makeHandler(false));
+    program.getSubscription(options.subscriptionName, makeHandler(false));
   })
   .command(`pull <subscriptionName>`, `Pulls messages for a subscription.`, {}, (options) => {
     program.pullMessages(options.subscriptionName, makeHandler(false));

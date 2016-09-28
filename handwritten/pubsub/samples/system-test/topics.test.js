@@ -13,6 +13,7 @@
 
 'use strict';
 
+const async = require(`async`);
 const pubsub = require(`@google-cloud/pubsub`)();
 const uuid = require(`node-uuid`);
 const path = require(`path`);
@@ -58,29 +59,66 @@ describe(`pubsub:topics`, () => {
   });
 
   it(`should publish a simple message`, (done) => {
-    pubsub.topic(topicName).subscribe(subscriptionName, (err, subscription) => {
-      assert.ifError(err);
-      run(`${cmd} publish ${topicName} "${message.data}"`, cwd);
-      subscription.pull((err, messages) => {
-        assert.ifError(err);
-        console.log(JSON.stringify(messages, null, 2));
+    async.waterfall([
+      (cb) => {
+        pubsub.topic(topicName).subscribe(subscriptionName, cb);
+      },
+      (subscription, apiResponse, cb) => {
+        run(`${cmd} publish ${topicName} "${message.data}"`, cwd);
+        setTimeout(() => subscription.pull(cb), 2000);
+      },
+      (messages, apiResponse, cb) => {
         assert.equal(messages[0].data, message.data);
-        done();
-      });
-    });
+        cb();
+      }
+    ], done);
   });
 
   it(`should publish a JSON message`, (done) => {
-    pubsub.topic(topicName).subscribe(subscriptionName, { reuseExisting: true }, (err, subscription) => {
-      assert.ifError(err);
-      run(`${cmd} publish ${topicName} '${JSON.stringify(message)}'`, cwd);
-      subscription.pull((err, messages) => {
-        assert.ifError(err);
-        console.log(JSON.stringify(messages, null, 2));
+    async.waterfall([
+      (cb) => {
+        pubsub.topic(topicName).subscribe(subscriptionName, { reuseExisting: true }, cb);
+      },
+      (subscription, apiResponse, cb) => {
+        run(`${cmd} publish ${topicName} '${JSON.stringify(message)}'`, cwd);
+        setTimeout(() => subscription.pull(cb), 2000);
+      },
+      (messages, apiResponse, cb) => {
         assert.deepEqual(messages[0].data, message);
-        done();
-      });
-    });
+        cb();
+      }
+    ], done);
+  });
+
+  it(`should publish ordered messages`, (done) => {
+    const topics = require('../topics');
+    let subscription;
+
+    async.waterfall([
+      (cb) => {
+        pubsub.topic(topicName).subscribe(subscriptionName, { reuseExisting: true }, cb);
+      },
+      (_subscription, apiResponse, cb) => {
+        subscription = _subscription;
+        topics.publishOrderedMessage(topicName, message.data, cb);
+      },
+      (cb) => {
+        setTimeout(() => subscription.pull(cb), 2000);
+      },
+      (messages, apiResponse, cb) => {
+        assert.equal(messages[0].data, message.data);
+        assert.equal(messages[0].attributes.counterId, '1');
+        topics.publishOrderedMessage(topicName, message.data, cb);
+      },
+      (cb) => {
+        setTimeout(() => subscription.pull(cb), 2000);
+      },
+      (messages, apiResponse, cb) => {
+        assert.equal(messages[0].data, message.data);
+        assert.equal(messages[0].attributes.counterId, '2');
+        topics.publishOrderedMessage(topicName, message.data, cb);
+      }
+    ], done);
   });
 
   it(`should set the IAM policy for a topic`, (done) => {

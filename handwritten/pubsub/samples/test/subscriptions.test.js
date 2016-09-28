@@ -48,15 +48,16 @@ describe(`pubsub:subscriptions`, () => {
     program.createSubscription(topicName, subscriptionName, callback);
     program.createPushSubscription(topicName, subscriptionName, callback);
     program.deleteSubscription(subscriptionName, callback);
-    program.getSubscriptionMetadata(subscriptionName, callback);
+    program.getSubscription(subscriptionName, callback);
     program.listSubscriptions(callback);
     program.listTopicSubscriptions(topicName, callback);
     program.pullMessages(subscriptionName, callback);
+    program.pullOrderedMessages(subscriptionName, callback);
     program.getSubscriptionPolicy(subscriptionName, callback);
     program.setSubscriptionPolicy(subscriptionName, callback);
     program.testSubscriptionPermissions(subscriptionName, callback);
 
-    assert.equal(callback.callCount, 10);
+    assert.equal(callback.callCount, 11);
     assert.equal(callback.alwaysCalledWithExactly(error), true);
   });
 });

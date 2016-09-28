@@ -13,6 +13,7 @@
 
 'use strict';
 
+const async = require(`async`);
 const pubsub = require(`@google-cloud/pubsub`)();
 const uuid = require(`node-uuid`);
 const path = require(`path`);
@@ -108,8 +109,50 @@ describe(`pubsub:subscriptions`, () => {
           `* ${messageIds[0]} "${expected}" {}`;
         assert.equal(output, expectedOutput);
         done();
-      }, 5000);
+      }, 2000);
     });
+  });
+
+  it(`should pull ordered messages`, (done) => {
+    const subscriptions = require('../subscriptions');
+    const expected = `Hello, world!`;
+    const publishedMessageIds = [];
+
+    async.waterfall([
+      (cb) => {
+        pubsub.topic(topicName).publish({ data: expected, attributes: { counterId: '3' } }, cb);
+      },
+      (messageIds, apiResponse, cb) => {
+        publishedMessageIds.push(messageIds[0]);
+        setTimeout(() => subscriptions.pullOrderedMessages(subscriptionNameOne, cb), 2000);
+      },
+      (cb) => {
+        assert.equal(console.log.callCount, 0);
+        pubsub.topic(topicName).publish({ data: expected, attributes: { counterId: '1' } }, cb);
+      },
+      (messageIds, apiResponse, cb) => {
+        publishedMessageIds.push(messageIds[0]);
+        setTimeout(() => subscriptions.pullOrderedMessages(subscriptionNameOne, cb), 2000);
+      },
+      (cb) => {
+        assert.equal(console.log.callCount, 1);
+        assert.deepEqual(console.log.firstCall.args, [`* %d %j %j`, publishedMessageIds[1], expected, { counterId: '1' }]);
+        pubsub.topic(topicName).publish({ data: expected, attributes: { counterId: '1' } }, cb);
+      },
+      (messageIds, apiResponse, cb) => {
+        pubsub.topic(topicName).publish({ data: expected, attributes: { counterId: '2' } }, cb);
+      },
+      (messageIds, apiResponse, cb) => {
+        publishedMessageIds.push(messageIds[0]);
+        setTimeout(() => subscriptions.pullOrderedMessages(subscriptionNameOne, cb), 2000);
+      },
+      (cb) => {
+        assert.equal(console.log.callCount, 3);
+        assert.deepEqual(console.log.secondCall.args, [`* %d %j %j`, publishedMessageIds[2], expected, { counterId: '2' }]);
+        assert.deepEqual(console.log.thirdCall.args, [`* %d %j %j`, publishedMessageIds[0], expected, { counterId: '3' }]);
+        cb();
+      }
+    ], done);
   });
 
   it(`should set the IAM policy for a subscription`, (done) => {

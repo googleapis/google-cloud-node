@@ -15,7 +15,6 @@
 
 // [START pubsub_quickstart]
 // Imports and instantiates the Google Cloud client library
-// for Google Cloud Pub/Sub
 const pubsub = require('@google-cloud/pubsub')({
   projectId: 'YOUR_PROJECT_ID'
 });
