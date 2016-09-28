@@ -518,6 +518,8 @@ DatastoreRequest.prototype.runQuery = function(query, options, callback) {
     return;
   }
 
+  query = extend(true, new Query(), query);
+
   var limiter = common.util.createLimiter(makeRequest, options);
   var stream = limiter.stream;
 
@@ -586,16 +588,16 @@ DatastoreRequest.prototype.runQuery = function(query, options, callback) {
       // The query is "NOT_FINISHED". Get the rest of the results.
       var offset = query.offsetVal === -1 ? 0 : query.offsetVal;
 
-      var continuationQuery = extend(true, new Query(), query)
+      query
         .start(info.endCursor)
         .offset(offset - resp.batch.skippedResults);
 
       var limit = query.limitVal;
       if (limit && limit > -1) {
-        continuationQuery.limit(limit - resp.batch.entityResults.length);
+        query.limit(limit - resp.batch.entityResults.length);
       }
 
-      limiter.makeRequest(continuationQuery);
+      limiter.makeRequest(query);
     });
   }
 

@@ -589,12 +589,25 @@ describe('Request', function() {
       request.runQuery({}, options, assert.ifError);
     });
 
+    it('should clone the query', function(done) {
+      var query = new FakeQuery();
+      query.namespace = 'namespace';
+      query = extend(true, new FakeQuery(), query);
+
+      overrides.entity.queryToQueryProto = function(query_) {
+        assert.notStrictEqual(query_, query);
+        assert.deepEqual(query_, query);
+        done();
+      };
+
+      request.runQuery(query, assert.ifError);
+    });
+
     it('should make correct request', function(done) {
       var query = { namespace: 'namespace' };
       var queryProto = {};
 
-      overrides.entity.queryToQueryProto = function(query_) {
-        assert.strictEqual(query_, query);
+      overrides.entity.queryToQueryProto = function() {
         return queryProto;
       };
 
@@ -693,7 +706,6 @@ describe('Request', function() {
       });
 
       it('should re-run query if not finished', function(done) {
-        var continuationQuery;
         var query = {
           limitVal: 1,
           offsetVal: 8
@@ -769,7 +781,7 @@ describe('Request', function() {
 
         overrides.entity.queryToQueryProto = function(query_) {
           if (timesRequestCalled > 1) {
-            assert.strictEqual(query_, continuationQuery);
+            assert.strictEqual(query_, query);
           }
           return queryProto;
         };
