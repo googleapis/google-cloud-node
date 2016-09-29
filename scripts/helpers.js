@@ -275,11 +275,11 @@ function Git(cwd) {
   this.cwd = cwd || ROOT_DIR;
 
   run(['git config --global user.name "travis-ci"'], {
-    cwd: cwd
+    cwd: this.cwd
   });
 
   run(['git config --global user.email "travis@travis-ci.org"'], {
-    cwd: cwd
+    cwd: this.cwd
   });
 }
 
