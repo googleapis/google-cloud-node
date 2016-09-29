@@ -66,6 +66,10 @@ function Speech(options) {
     return new Speech(options);
   }
 
+  this.api = {
+    Speech: v1beta1(options).speechApi(options)
+  };
+
   var config = {
     baseUrl: 'speech.googleapis.com',
     projectIdRequired: false,
@@ -88,10 +92,6 @@ function Speech(options) {
   };
 
   common.GrpcService.call(this, config, options);
-
-  this.api = {
-    Speech: v1beta1(options).speechApi(options)
-  };
 }
 
 util.inherits(Speech, common.GrpcService);
