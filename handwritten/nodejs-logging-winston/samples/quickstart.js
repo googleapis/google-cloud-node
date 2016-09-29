@@ -14,15 +14,28 @@
 'use strict';
 
 // [START logging_quickstart]
-// Imports and instantiates the Google Cloud client library
-const logging = require('@google-cloud/logging')({
-  projectId: 'YOUR_PROJECT_ID'
+// Imports the Google Cloud client library
+const Logging = require('@google-cloud/logging');
+
+// Your Google Cloud Platform project ID
+const projectId = 'YOUR_PROJECT_ID';
+
+// Instantiates a client
+const loggingClient = Logging({
+  projectId: projectId
 });
 
+// The name of the log to write to
+const logName = 'my-log';
 // Selects the log to write to
-const log = logging.log('my-log');
+const log = loggingClient.log(logName);
+
+// The data to write to the log
+const text = 'Hello, world!';
+// The resource associated with the data
+const resource = { type: 'global' };
 // Prepares a log entry
-const entry = log.entry({ type: 'global' }, 'Hello, world!');
+const entry = log.entry(resource, text);
 
 // Writes the log entry
 log.write(entry, (err) => {
