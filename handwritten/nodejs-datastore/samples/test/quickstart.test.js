@@ -20,7 +20,7 @@ describe(`datastore:quickstart`, () => {
 
   before(() => {
     datastoreMock = {
-      get: sinon.stub().yields(null, { key: 1234 }),
+      get: sinon.stub().yields(null, { key: 1234567890 }),
       key: sinon.stub.returns(`task/1234`)
     };
     DatastoreMock = sinon.stub().returns(datastoreMock);
@@ -34,6 +34,6 @@ describe(`datastore:quickstart`, () => {
     assert.equal(DatastoreMock.calledOnce, true);
     assert.deepEqual(DatastoreMock.firstCall.args, [{ projectId: 'YOUR_PROJECT_ID' }]);
     assert.equal(datastoreMock.get.calledOnce, true);
-    assert.deepEqual(datastoreMock.get.firstCall.args.slice(0, -1), [datastoreMock.key(['Task', 1234])]);
+    assert.deepEqual(datastoreMock.get.firstCall.args.slice(0, -1), [datastoreMock.key(['Task', 1234567890])]);
   });
 });
