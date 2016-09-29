@@ -273,14 +273,6 @@ module.exports.run = run;
  */
 function Git(cwd) {
   this.cwd = cwd || ROOT_DIR;
-
-  run(['git config --global user.name "travis-ci"'], {
-    cwd: this.cwd
-  });
-
-  run(['git config --global user.email "travis@travis-ci.org"'], {
-    cwd: this.cwd
-  });
 }
 
 // We'll use this for cloning/submoduling/pushing purposes on CI
@@ -323,11 +315,11 @@ Git.prototype.hasUpdates = function() {
  * @param {string} email - User email
  */
 Git.prototype.setUser = function(name, email) {
-  run(['git config user.name', name], {
+  run(['git config --global user.name', name], {
     cwd: this.cwd
   });
 
-  run(['git config user.email', email], {
+  run(['git config --global user.email', email], {
     cwd: this.cwd
   });
 };
