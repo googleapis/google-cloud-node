@@ -14,13 +14,22 @@
 'use strict';
 
 // [START pubsub_quickstart]
-// Imports and instantiates the Google Cloud client library
-const pubsub = require('@google-cloud/pubsub')({
-  projectId: 'YOUR_PROJECT_ID'
+// Imports the Google Cloud client library
+const PubSub = require('@google-cloud/pubsub');
+
+// Your Google Cloud Platform project ID
+const projectId = 'YOUR_PROJECT_ID';
+
+// Instantiates a client
+const pubsubClient = PubSub({
+  projectId: projectId
 });
 
-// Creates a new topic
-pubsub.createTopic('my-new-topic', (err, topic) => {
+// The name for the new topic
+const topicName = 'my-new-topic';
+
+// Creates the new topic
+pubsubClient.createTopic(topicName, (err, topic) => {
   if (!err) {
     // The topic was created successfully
   }
