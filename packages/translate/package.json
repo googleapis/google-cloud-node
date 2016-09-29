@@ -54,6 +54,7 @@
     "arrify": "^1.0.0",
     "extend": "^3.0.0",
     "is": "^3.0.1",
+    "is-html": "^1.0.0",
     "propprop": "^0.3.0"
   },
   "devDependencies": {

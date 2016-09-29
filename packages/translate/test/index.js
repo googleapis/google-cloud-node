@@ -266,6 +266,7 @@ describe('Translate', function() {
 
   describe('translate', function() {
     var INPUT = 'Hello';
+    var INPUT_HTML = '<html><body>Hello</body></html>';
     var SOURCE_LANG_CODE = 'en';
     var TARGET_LANG_CODE = 'es';
 
@@ -306,12 +307,46 @@ describe('Translate', function() {
       });
     });
 
+    describe('options.format', function() {
+      it('should default to text', function(done) {
+        translate.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.qs.format, 'text');
+          done();
+        };
+
+        translate.translate(INPUT, OPTIONS, assert.ifError);
+      });
+
+      it('should recognize HTML', function(done) {
+        translate.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.qs.format, 'html');
+          done();
+        };
+
+        translate.translate(INPUT_HTML, OPTIONS, assert.ifError);
+      });
+
+      it('should allow overriding the format', function(done) {
+        var options = extend({}, OPTIONS, {
+          format: 'custom format'
+        });
+
+        translate.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.qs.format, options.format);
+          done();
+        };
+
+        translate.translate(INPUT_HTML, options, assert.ifError);
+      });
+    });
+
     it('should make the correct API request', function(done) {
       translate.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '');
         assert.strictEqual(reqOpts.useQuerystring, true);
         assert.deepEqual(reqOpts.qs, {
           q: [INPUT],
+          format: 'text',
           source: SOURCE_LANG_CODE,
           target: TARGET_LANG_CODE
         });
