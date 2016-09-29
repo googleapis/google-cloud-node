@@ -14,15 +14,26 @@
 'use strict';
 
 // [START datastore_quickstart]
-// Imports and instantiates the Google Cloud client library
-const datastore = require('@google-cloud/datastore')({
-  projectId: 'YOUR_PROJECT_ID'
+// Imports the Google Cloud client library
+const Datastore = require('@google-cloud/datastore');
+
+// Your Google Cloud Platform project ID
+const projectId = 'YOUR_PROJECT_ID';
+
+// Instantiates a client
+const datastoreClient = Datastore({
+  projectId: projectId
 });
 
-const taskKey = datastore.key(['Task', 1234]);
+// The kind of the entity to retrieve
+const kind = 'Task';
+// The id of the entity to retrieve
+const id = 1234567890;
+// The Datastore key for the entity
+const taskKey = datastoreClient.key([kind, id]);
 
-// Retrieves an entity
-datastore.get(taskKey, (err, entity) => {
+// Retrieves the entity
+datastoreClient.get(taskKey, (err, entity) => {
   if (!err) {
     // The entity was retrieved successfully
   }
