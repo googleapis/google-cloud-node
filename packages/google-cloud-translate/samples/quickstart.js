@@ -14,13 +14,24 @@
 'use strict';
 
 // [START translate_quickstart]
-// Imports and instantiates the Google Cloud client library
-const translate = require('@google-cloud/translate')({
-  key: 'YOUR_API_KEY'
+// Imports the Google Cloud client library
+const Translate = require('@google-cloud/translate');
+
+// Your Translate API key
+const apiKey = 'YOUR_API_KEY';
+
+// Instantiates a client
+const translateClient = Translate({
+  key: apiKey
 });
 
+// The text to translate
+const text = 'Hello, world!';
+// The target language
+const target = 'ru';
+
 // Translates some text into Russian
-translate.translate('Hello, world!', 'ru', (err, translation) => {
+translateClient.translate(text, target, (err, translation) => {
   if (!err) {
     // The text was translated successfully
   }
