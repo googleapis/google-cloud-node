@@ -273,6 +273,14 @@ module.exports.run = run;
  */
 function Git(cwd) {
   this.cwd = cwd || ROOT_DIR;
+
+  run(['git config --global user.name "travis-ci"'], {
+    cwd: cwd
+  });
+
+  run(['git config --global user.email "travis@travis-ci.org"'], {
+    cwd: cwd
+  });
 }
 
 // We'll use this for cloning/submoduling/pushing purposes on CI
