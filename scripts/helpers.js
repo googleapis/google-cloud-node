@@ -344,7 +344,7 @@ Git.prototype.add = function() {
  * @param {string} message - The commit message.
  */
 Git.prototype.commit = function(message) {
-  run(['git commit -m', '"' + message + '"', '[ci skip]'], {
+  run(['git commit -m', '"' + message + ' [ci skip]"'], {
     cwd: this.cwd
   });
 };
