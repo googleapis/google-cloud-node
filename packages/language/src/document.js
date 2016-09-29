@@ -70,39 +70,34 @@ function Document(language, config) {
 
   this.api = language.api;
 
-  // `reqOpts` is the payload passed to each API request. This object is used as
-  // the default for all API requests made with this Document.
-  this.reqOpts = {
-    document: {}
-  };
+  this.document = {};
 
   if (config.encoding) {
-    var encodingType = config.encoding.toUpperCase().replace(/[ -]/g, '');
-    this.reqOpts.encodingType = encodingType;
+    this.encodingType = config.encoding.toUpperCase().replace(/[ -]/g, '');
   }
 
   if (config.language) {
-    this.reqOpts.document.language = config.language;
+    this.document.language = config.language;
   }
 
   if (config.type) {
-    this.reqOpts.document.type = config.type.toUpperCase();
+    this.document.type = config.type.toUpperCase();
 
-    if (this.reqOpts.document.type === 'TEXT') {
-      this.reqOpts.document.type = 'PLAIN_TEXT';
+    if (this.document.type === 'TEXT') {
+      this.document.type = 'PLAIN_TEXT';
     }
   } else {
     // Default to plain text.
-    this.reqOpts.document.type = 'PLAIN_TEXT';
+    this.document.type = 'PLAIN_TEXT';
   }
 
   if (common.util.isCustomType(content, 'storage/file')) {
-    this.reqOpts.document.gcsContentUri = format('gs://{bucket}/{file}', {
+    this.document.gcsContentUri = format('gs://{bucket}/{file}', {
       bucket: encodeURIComponent(content.bucket.id),
       file: encodeURIComponent(content.id)
     });
   } else {
-    this.reqOpts.document.content = content;
+    this.document.content = content;
   }
 }
 
@@ -392,8 +387,8 @@ Document.prototype.annotate = function(options, callback) {
 
   var verbose = options.verbose === true;
 
-  var doc = this.reqOpts.document;
-  var encType = this.reqOpts.encodingType;
+  var doc = this.document;
+  var encType = this.encodingType;
 
   this.api.Language.annotateText(doc, features, encType, function(err, resp) {
     if (err) {
@@ -536,8 +531,8 @@ Document.prototype.detectEntities = function(options, callback) {
 
   var verbose = options.verbose === true;
 
-  var doc = this.reqOpts.document;
-  var encType = this.reqOpts.encodingType;
+  var doc = this.document;
+  var encType = this.encodingType;
 
   this.api.Language.analyzeEntities(doc, encType, function(err, resp) {
     if (err) {
@@ -602,8 +597,8 @@ Document.prototype.detectSentiment = function(options, callback) {
 
   var verbose = options.verbose === true;
 
-  var doc = this.reqOpts.document;
-  var encType = this.reqOpts.encodingType;
+  var doc = this.document;
+  var encType = this.encodingType;
 
   this.api.Language.analyzeSentiment(doc, encType, function(err, resp) {
     if (err) {

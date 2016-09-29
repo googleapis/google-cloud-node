@@ -70,70 +70,49 @@ describe('Document', function() {
       assert.strictEqual(document.api, LANGUAGE.api);
     });
 
-    it('should set the correct reqOpts for inline content', function() {
-      assert.deepEqual(document.reqOpts, {
-        document: {
-          content: CONFIG,
-          type: 'PLAIN_TEXT'
-        }
+    it('should set the correct document for inline content', function() {
+      assert.deepEqual(document.document, {
+        content: CONFIG,
+        type: 'PLAIN_TEXT'
       });
     });
 
-    it('should set the correct reqOpts for content with encoding', function() {
+    it('should set and uppercase the correct encodingType', function() {
       var document = new Document(LANGUAGE, {
         content: CONFIG,
         encoding: 'utf-8'
       });
 
-      assert.deepEqual(document.reqOpts, {
-        document: {
-          content: CONFIG,
-          type: 'PLAIN_TEXT'
-        },
-        encodingType: 'UTF8'
-      });
+      assert.strictEqual(document.encodingType, 'UTF8');
     });
 
-    it('should set the correct reqOpts for content with language', function() {
+    it('should set the correct document for content with language', function() {
       var document = new Document(LANGUAGE, {
         content: CONFIG,
         language: 'EN'
       });
 
-      assert.deepEqual(document.reqOpts, {
-        document: {
-          content: CONFIG,
-          type: 'PLAIN_TEXT',
-          language: 'EN'
-        }
-      });
+      assert.strictEqual(document.document.language, 'EN');
     });
 
-    it('should set the correct reqOpts for content with type', function() {
+    it('should set the correct document for content with type', function() {
       var document = new Document(LANGUAGE, {
         content: CONFIG,
         type: 'html'
       });
 
-      assert.deepEqual(document.reqOpts, {
-        document: {
-          content: CONFIG,
-          type: 'HTML'
-        }
-      });
+      assert.strictEqual(document.document.type, 'HTML');
     });
 
-    it('should set the correct reqOpts for text', function() {
+    it('should set the correct document for text', function() {
       var document = new Document(LANGUAGE, {
         content: CONFIG,
         type: 'text'
       });
 
-      assert.deepEqual(document.reqOpts, {
-        document: {
-          content: CONFIG,
-          type: 'PLAIN_TEXT'
-        }
+      assert.deepEqual(document.document, {
+        content: CONFIG,
+        type: 'PLAIN_TEXT'
       });
     });
 
@@ -156,17 +135,12 @@ describe('Document', function() {
         content: file
       });
 
-      assert.deepEqual(document.reqOpts, {
-        document: {
-          gcsContentUri: [
-            'gs://',
-            encodeURIComponent(file.bucket.id),
-            '/',
-            encodeURIComponent(file.id),
-          ].join(''),
-          type: 'PLAIN_TEXT'
-        }
-      });
+      assert.deepEqual(document.document.gcsContentUri, [
+        'gs://',
+        encodeURIComponent(file.bucket.id),
+        '/',
+        encodeURIComponent(file.id),
+      ].join(''));
     });
   });
 
@@ -197,7 +171,7 @@ describe('Document', function() {
     it('should make the correct API request', function(done) {
       document.api.Language = {
         annotateText: function(doc, features, encType) {
-          assert.strictEqual(doc, document.reqOpts.document);
+          assert.strictEqual(doc, document.document);
 
           assert.deepEqual(features, {
             extractDocumentSentiment: true,
@@ -205,13 +179,13 @@ describe('Document', function() {
             extractSyntax: true
           });
 
-          assert.strictEqual(encType, document.reqOpts.encodingType);
+          assert.strictEqual(encType, document.encodingType);
 
           done();
         }
       };
 
-      document.reqOpts.encodingType = 'encoding-type';
+      document.encodingType = 'encoding-type';
       document.annotate(assert.ifError);
     });
 
@@ -453,13 +427,13 @@ describe('Document', function() {
     it('should make the correct API request', function(done) {
       document.api.Language = {
         analyzeEntities: function(doc, encType) {
-          assert.strictEqual(doc, document.reqOpts.document);
-          assert.strictEqual(encType, document.reqOpts.encodingType);
+          assert.strictEqual(doc, document.document);
+          assert.strictEqual(encType, document.encodingType);
           done();
         }
       };
 
-      document.reqOpts.encodingType = 'encoding-type';
+      document.encodingType = 'encoding-type';
       document.detectEntities(assert.ifError);
     });
 
@@ -542,13 +516,13 @@ describe('Document', function() {
     it('should make the correct API request', function(done) {
       document.api.Language = {
         analyzeSentiment: function(doc, encType) {
-          assert.strictEqual(doc, document.reqOpts.document);
-          assert.strictEqual(encType, document.reqOpts.encodingType);
+          assert.strictEqual(doc, document.document);
+          assert.strictEqual(encType, document.encodingType);
           done();
         }
       };
 
-      document.reqOpts.encodingType = 'encoding-type';
+      document.encodingType = 'encoding-type';
       document.detectSentiment(assert.ifError);
     });
 
