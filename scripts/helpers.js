@@ -315,11 +315,11 @@ Git.prototype.hasUpdates = function() {
  * @param {string} email - User email
  */
 Git.prototype.setUser = function(name, email) {
-  run(['git config user.name', name], {
+  run(['git config --global user.name', name], {
     cwd: this.cwd
   });
 
-  run(['git config user.email', email], {
+  run(['git config --global user.email', email], {
     cwd: this.cwd
   });
 };
