@@ -201,7 +201,7 @@ describe('datastore:concepts', function () {
     query.testLimit(done);
   });
 
-  it.skip('allows manual pagination through results', function (done) {
+  it('allows manual pagination through results', function (done) {
     entity.testBatchUpsert(function (err) {
       assert.ifError(err);
       setTimeout(function () {

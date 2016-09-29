@@ -988,16 +988,14 @@ Query.prototype.testCursorPaging = function (callback) {
   datastore.createQuery = this.datastore.createQuery;
 
   // [START cursor_paging]
-  // By default, gcloud-node will paginate through all of the results that match
-  // a query, push them into an array, then return them to your callback after
-  // they have all been retrieved. You must execute `.autoPaginate(false)` on
-  // your query to disable this behavior.
+  // By default, gcloud-node will automatically paginate through all of the
+  // results that match a query. However, this sample implements manual
+  // pagination using limits and cursor tokens.
   var query = datastore.createQuery('Task')
-    .autoPaginate(false)
     .limit(pageSize)
     .start(pageCursor);
 
-  datastore.runQuery(query, function (err, results, nextQuery) {
+  this.datastore.runQuery(query, function (err, results, info) {
     if (err) {
       // An error occurred while running the query.
       return;
@@ -1005,11 +1003,11 @@ Query.prototype.testCursorPaging = function (callback) {
 
     var nextPageCursor;
 
-    if (nextQuery) {
-      // If there are more results to retrieve, the start cursor is
-      // automatically set on `nextQuery`. To get this value directly, access
-      // the `startVal` property.
-      nextPageCursor = nextQuery.startVal;
+    if (info.moreResults !== Datastore.NO_MORE_RESULTS) {
+      // If there are more results to retrieve, the end cursor is
+      // automatically set on `info`. To get this value directly, access
+      // the `endCursor` property.
+      nextPageCursor = info.endCursor;
     } else {
       // No more results exist.
     }
@@ -1018,14 +1016,14 @@ Query.prototype.testCursorPaging = function (callback) {
   // [END cursor_paging]
 
   delete datastore.createQuery;
-  this.datastore.runQuery(query, function (err, results, nextQuery) {
+  this.datastore.runQuery(query, function (err, results, info) {
     if (err) {
       callback(err);
       return;
     }
 
-    if (!nextQuery || !nextQuery.startVal) {
-      callback(new Error('A nextQuery with a startVal is not present.'));
+    if (!info || !info.endCursor) {
+      callback(new Error('An `info` with an `endCursor` is not present.'));
     } else {
       callback();
     }
