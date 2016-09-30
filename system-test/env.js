@@ -16,13 +16,6 @@
 
 'use strict';
 
-if (!process.env.GCLOUD_TESTS_PROJECT_ID && !process.env.GCLOUD_TESTS_KEY) {
-  throw new Error([
-    'To run the system tests, you need to set some environment variables.',
-    'Please check the Contributing guide for instructions.'
-  ].join('\n'));
-}
-
 module.exports = {
   projectId: process.env.GCLOUD_TESTS_PROJECT_ID,
   keyFilename: process.env.GCLOUD_TESTS_KEY

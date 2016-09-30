@@ -269,6 +269,13 @@ GrpcService.prototype.request = function(protoOpts, reqOpts, callback) {
     request: function(_, onResponse) {
       respError = null;
 
+      try {
+        reqOpts = util.decorateRequest(reqOpts, { projectId: self.projectId });
+      } catch (e) {
+        onResponse(e);
+        return;
+      }
+
       service[protoOpts.method](reqOpts, metadata, grpcOpts, function(e, resp) {
         if (e) {
           respError = GrpcService.decorateError_(e);
@@ -351,6 +358,13 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
     shouldRetryFn: GrpcService.shouldRetryRequest_,
 
     request: function() {
+      try {
+        reqOpts = util.decorateRequest(reqOpts, { projectId: self.projectId });
+      } catch (e) {
+        stream.destroy(e);
+        return;
+      }
+
       return service[protoOpts.method](reqOpts, self.grpcMetadata, grpcOpts)
         .on('metadata', function() {
           // retry-request requires a server response before it starts emitting
@@ -414,6 +428,15 @@ GrpcService.prototype.requestWritableStream = function(protoOpts, reqOpts) {
 
   if (is.number(protoOpts.timeout)) {
     grpcOpts.deadline = GrpcService.createDeadline_(protoOpts.timeout);
+  }
+
+  try {
+    reqOpts = util.decorateRequest(reqOpts, { projectId: self.projectId });
+  } catch (e) {
+    setImmediate(function() {
+      stream.destroy(e);
+    });
+    return stream;
   }
 
   var grpcStream = service[protoOpts.method](reqOpts, grpcOpts)
@@ -724,6 +747,8 @@ GrpcService.structToObj_ = function(struct) {
  * @param {?error} callback.err - An error getting an auth client.
  */
 GrpcService.prototype.getGrpcCredentials_ = function(callback) {
+  var self = this;
+
   this.authClient.getAuthClient(function(err, authClient) {
     if (err) {
       callback(err);
@@ -734,6 +759,8 @@ GrpcService.prototype.getGrpcCredentials_ = function(callback) {
       grpc.credentials.createSsl(),
       grpc.credentials.createFromGoogleCredential(authClient)
     );
+
+    self.projectId = authClient.projectId;
 
     callback(null, credentials);
   });
