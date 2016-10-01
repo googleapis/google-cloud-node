@@ -1,0 +1,21 @@
+{
+  "url": "https://github.com/googleapis/googleapis",
+  "name": "@google-cloud/monitoring",
+  "version": "0.7.1",
+  "author": "Google Inc.",
+  "description": "Stackdriver Monitoring library for Node.js",
+  "main": "src/index.js",
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "google-proto-files": "^0.8.2",
+    "google-gax": "^0.7.0",
+    "extend": "^3.0.0",
+    "lodash.union": "^4.6.0"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=0.12.0"
+  }
+}
