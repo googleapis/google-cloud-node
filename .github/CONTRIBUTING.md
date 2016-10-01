@@ -172,7 +172,7 @@ Checklist:
   - [ ] I made sure all breaking changes are noted
   - [x] I'm not going to say "nifty" anymore
 
-[elsewhere]: README.md#elsewhere
+[elsewhere]: ../README.md#elsewhere
 [gcloudcli]: https://developers.google.com/cloud/sdk/gcloud/
 [indvcla]: https://developers.google.com/open-source/cla/individual
 [corpcla]: https://developers.google.com/open-source/cla/corporate
