@@ -541,7 +541,7 @@ function normalizeArguments(globalContext, localConfig, options) {
 
   var config = util.extendGlobalConfig(globalConfig, localConfig);
 
-  if(!config.projectId && config.project_id) {
+  if (!config.projectId && config.project_id) {
     config.projectId = config.project_id;
   }
 

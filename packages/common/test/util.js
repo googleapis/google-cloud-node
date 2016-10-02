@@ -1215,21 +1215,21 @@ describe('common/util', function() {
       config = util.normalizeArguments(fakeContext, local);
       assert.strictEqual(config, fakeContext.config_);
     });
-    
+
     describe('project_idNormalized', function() {
-      var fakeContextWithProject_id = {
+      var fakeContextWithProjectUnderscoreId = {
         config_: {
           project_id: 'grapespaceship911'
         }
       };
-      
+
       it('should return projectId', function() {
         var config;
-        
-        config = util.normalizeArguments(fakeContextWithProject_id);
-        assert.strictEqual(config.projectId, fakeContextWithProject_id.config_.project_id);
-      })
-      
+        var projectId = fakeContextWithProjectUnderscoreId.config_.project_id;
+
+        config = util.normalizeArguments(fakeContextWithProjectUnderscoreId);
+        assert.strictEqual(config.projectId, projectId);
+      });
     });
 
     describe('projectIdRequired', function() {
