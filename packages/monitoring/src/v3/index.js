@@ -19,7 +19,6 @@ var groupServiceApi = require('./group_service_api');
 var metricServiceApi = require('./metric_service_api');
 var gax = require('google-gax');
 var extend = require('extend');
-var union = require('lodash.union');
 
 function v3(options) {
   options = extend({
@@ -32,8 +31,5 @@ function v3(options) {
   return result;
 }
 v3.SERVICE_ADDRESS = groupServiceApi.SERVICE_ADDRESS;
-v3.ALL_SCOPES = union(
-  groupServiceApi.ALL_SCOPES,
-  metricServiceApi.ALL_SCOPES
-);
+v3.ALL_SCOPES = []; 
 module.exports = v3;

@@ -1,45 +1,68 @@
-Stackdriver Monitoring API for Node.js
-=================================================
+# @google-cloud/monitoring
+> Stackdriver Monitoring Client Library for Node.js
 
-@google-cloud/monitoring uses [Google API extensions][google-gax] to provide an
-easy-to-use client library for the [Stackdriver Monitoring API][] (v3) defined in the [googleapis][] git repository
+*Looking for more Google APIs than just Monitoring? You might want to check out [`google-cloud`][google-cloud].*
 
-
-[googleapis]: https://github.com/googleapis/googleapis/tree/master/google/google/monitoring/v3
-[google-gax]: https://github.com/googleapis/gax-nodejs
-[Stackdriver Monitoring API]: https://developers.google.com/apis-explorer/#p/monitoring/v3/
-
-Getting started
----------------
-
-@google-cloud/monitoring will allow you to connect to the [Stackdriver Monitoring API][] and access all its methods.
-
-In order to do so, you need to set up authentication as well as install the library locally.
+- [Official Documentation][cloud-monitoring-docs]
 
 
-Setup Authentication
---------------------
-
-To authenticate all your API calls, first install and setup the [Google Cloud SDK][].
-Once done, you can then run the following command in your terminal:
-
-    $ gcloud beta auth application-default login
-
-or
-
-    $ gcloud auth login
-
-Please see [[gcloud beta auth application-default login][] document for the difference between these commands.
-
-[Google Cloud SDK]: https://cloud.google.com/sdk/
-[gcloud beta auth application-default login]: https://cloud.google.com/sdk/gcloud/reference/beta/auth/application-default/login
+```sh
+$ npm install --save @google-cloud/monitoring
+```
+```js
+var monitoring = require('@google-cloud/monitoring').v3({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
+```
 
 
-Installation
--------------------
+## Authentication
 
-Install this library using npm:
+It's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Google Cloud services.
 
-    $ npm install @google-cloud/monitoring
+### On Google Compute Engine
 
-At this point you are all set to continue.
+If you are running this client on Google Compute Engine, we handle authentication for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
+
+``` js
+// Authenticating on a global basis.
+var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
+
+var monitoring = require('@google-cloud/monitoring').v3({
+  projectId: projectId
+});
+
+// ...you're good to go!
+```
+
+### Elsewhere
+
+If you are not running this client on Google Compute Engine, you need a Google Developers service account. To create a service account:
+
+1. Visit the [Google Developers Console][dev-console].
+2. Create a new project or click on an existing project.
+3. Navigate to **APIs & auth** >  **Credentials** and then:
+  * If you want to use a new service account, click on **Create new Client ID** and select **Service account**. After the account is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
+  * If you want to generate a new key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
+
+``` js
+var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
+
+var monitoring = require('@google-cloud/monitoring')({
+  projectId: projectId,
+
+  // The path to your key file:
+  keyFilename: '/path/to/keyfile.json'
+
+  // Or the contents of the key file:
+  credentials: require('./path/to/keyfile.json')
+});
+
+// ...you're good to go!
+```
+
+[google-cloud]: https://github.com/GoogleCloudPlatform/google-cloud-node/
+[gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
+[dev-console]: https://console.developers.google.com/project
+[cloud-monitoring-docs]: https://cloud.google.com/monitoring/docs

@@ -1,18 +1,63 @@
 {
-  "url": "https://github.com/googleapis/googleapis",
+  "repository": "googlecloudplatform/google-cloud-node",
   "name": "@google-cloud/monitoring",
-  "version": "0.7.1",
+  "version": "0.0.0",
   "author": "Google Inc.",
-  "description": "Stackdriver Monitoring library for Node.js",
+  "description": "Stackdriver Monitoring Client Library for Node.js",
+  "contributors": [
+    {
+      "name": "Burcu Dogan",
+      "email": "jbd@google.com"
+    },
+    {
+      "name": "Johan Euphrosine",
+      "email": "proppy@google.com"
+    },
+    {
+      "name": "Patrick Costello",
+      "email": "pcostell@google.com"
+    },
+    {
+      "name": "Ryan Seys",
+      "email": "ryan@ryanseys.com"
+    },
+    {
+      "name": "Silvano Luciani",
+      "email": "silvano@google.com"
+    },
+    {
+      "name": "Stephen Sawchuk",
+      "email": "sawchuk@gmail.com"
+    }
+  ],
   "main": "src/index.js",
   "files": [
-    "src"
+    "src",
+    "AUTHORS",
+    "CONTRIBUTING",
+    "COPYING"
+  ],
+  "keywords": [
+    "google apis client",
+    "google api client",
+    "google apis",
+    "google api",
+    "google",
+    "google cloud platform",
+    "google cloud",
+    "cloud",
+    "google monitoring",
+    "monitoring",
+    "stackdriver monitoring",
+    "stackdriver"
   ],
   "dependencies": {
     "google-proto-files": "^0.8.2",
     "google-gax": "^0.7.0",
-    "extend": "^3.0.0",
-    "lodash.union": "^4.6.0"
+    "extend": "^3.0.0"
+  },
+  "scripts": {
+    "publish-module": "node ../../scripts/publish.js logging"
   },
   "license": "Apache-2.0",
   "engines": {
