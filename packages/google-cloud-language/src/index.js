@@ -22,9 +22,8 @@
 
 var common = require('@google-cloud/common');
 var extend = require('extend');
-var googleProtoFiles = require('google-proto-files');
 var is = require('is');
-var util = require('util');
+var v1beta1 = require('./v1beta1');
 
 /**
  * @type {module:language/document}
@@ -64,26 +63,10 @@ function Language(options) {
     return new Language(options);
   }
 
-  var config = {
-    baseUrl: 'language.googleapis.com',
-    service: 'language',
-    apiVersion: 'v1beta1',
-    protoServices: {
-      LanguageService: {
-        path: googleProtoFiles.language.v1beta1,
-        service: 'cloud.language'
-      }
-    },
-    scopes: [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ],
-    packageJson: require('../package.json')
+  this.api = {
+    Language: v1beta1(options).languageServiceApi(options)
   };
-
-  common.GrpcService.call(this, config, options);
 }
-
-util.inherits(Language, common.GrpcService);
 
 /**
  * Run an annotation of a block of text.
@@ -478,4 +461,4 @@ Language.prototype.text = function(content, options) {
 };
 
 module.exports = Language;
-module.exports.v1beta1 = require('./v1beta1');
+module.exports.v1beta1 = v1beta1;

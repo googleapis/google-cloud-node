@@ -68,42 +68,37 @@ var prop = require('propprop');
 function Document(language, config) {
   var content = config.content || config;
 
-  // `reqOpts` is the payload passed to each `request()`. This object is used as
-  // the default for all API requests made with this Document.
-  this.reqOpts = {
-    document: {}
-  };
+  this.api = language.api;
+
+  this.document = {};
 
   if (config.encoding) {
-    var encodingType = config.encoding.toUpperCase().replace(/[ -]/g, '');
-    this.reqOpts.encodingType = encodingType;
+    this.encodingType = config.encoding.toUpperCase().replace(/[ -]/g, '');
   }
 
   if (config.language) {
-    this.reqOpts.document.language = config.language;
+    this.document.language = config.language;
   }
 
   if (config.type) {
-    this.reqOpts.document.type = config.type.toUpperCase();
+    this.document.type = config.type.toUpperCase();
 
-    if (this.reqOpts.document.type === 'TEXT') {
-      this.reqOpts.document.type = 'PLAIN_TEXT';
+    if (this.document.type === 'TEXT') {
+      this.document.type = 'PLAIN_TEXT';
     }
   } else {
     // Default to plain text.
-    this.reqOpts.document.type = 'PLAIN_TEXT';
+    this.document.type = 'PLAIN_TEXT';
   }
 
   if (common.util.isCustomType(content, 'storage/file')) {
-    this.reqOpts.document.gcsContentUri = format('gs://{bucket}/{file}', {
+    this.document.gcsContentUri = format('gs://{bucket}/{file}', {
       bucket: encodeURIComponent(content.bucket.id),
       file: encodeURIComponent(content.id)
     });
   } else {
-    this.reqOpts.document.content = content;
+    this.document.content = content;
   }
-
-  this.request = language.request.bind(language);
 }
 
 /**
@@ -392,16 +387,10 @@ Document.prototype.annotate = function(options, callback) {
 
   var verbose = options.verbose === true;
 
-  var grpcOpts = {
-    service: 'LanguageService',
-    method: 'annotateText'
-  };
+  var doc = this.document;
+  var encType = this.encodingType;
 
-  var reqOpts = extend({
-    features: features
-  }, this.reqOpts);
-
-  this.request(grpcOpts, reqOpts, function(err, resp) {
+  this.api.Language.annotateText(doc, features, encType, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -542,12 +531,10 @@ Document.prototype.detectEntities = function(options, callback) {
 
   var verbose = options.verbose === true;
 
-  var grpcOpts = {
-    service: 'LanguageService',
-    method: 'analyzeEntities'
-  };
+  var doc = this.document;
+  var encType = this.encodingType;
 
-  this.request(grpcOpts, this.reqOpts, function(err, resp) {
+  this.api.Language.analyzeEntities(doc, encType, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -610,12 +597,10 @@ Document.prototype.detectSentiment = function(options, callback) {
 
   var verbose = options.verbose === true;
 
-  var grpcOpts = {
-    service: 'LanguageService',
-    method: 'analyzeSentiment'
-  };
+  var doc = this.document;
+  var encType = this.encodingType;
 
-  this.request(grpcOpts, this.reqOpts, function(err, resp) {
+  this.api.Language.analyzeSentiment(doc, encType, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
