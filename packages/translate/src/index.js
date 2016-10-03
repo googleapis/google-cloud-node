@@ -24,6 +24,7 @@ var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
+var isHtml = require('is-html');
 var prop = require('propprop');
 
 var PKG = require('../package.json');
@@ -268,6 +269,9 @@ Translate.prototype.getLanguages = function(target, callback) {
  *     target ISO 639-1 language code to translate the source input to. (e.g.
  *     `en` for English). If an object, you may also specify the source
  *     language.
+ * @param {string} options.format - Set the text's format as `html` or `text`.
+ *     If not provided, we will try to auto-detect if the text given is HTML. If
+ *     not, we set the format as `text`.
  * @param {string} options.from - The ISO 639-1 language code the source input
  *     is written in.
  * @param {string} options.to - The ISO 639-1 language code to translate the
@@ -323,8 +327,11 @@ Translate.prototype.getLanguages = function(target, callback) {
  * });
  */
 Translate.prototype.translate = function(input, options, callback) {
+  input = arrify(input);
+
   var query = {
-    q: arrify(input)
+    q: input,
+    format: options.format || (isHtml(input[0]) ? 'html' : 'text')
   };
 
   if (is.string(options)) {
