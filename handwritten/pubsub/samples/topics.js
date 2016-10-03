@@ -37,7 +37,7 @@ function listTopics (callback) {
       return;
     }
 
-    console.log(`Topics:`);
+    console.log('Topics:');
     topics.forEach((topic) => console.log(topic.name));
     callback();
   });
@@ -257,7 +257,7 @@ function testTopicPermissions (topicName, callback) {
 
 // The command-line program
 const cli = require(`yargs`);
-const makeHandler = require(`../utils`).makeHandler;
+const noop = require(`../utils`).noop;
 
 const program = module.exports = {
   listTopics: listTopics,
@@ -277,13 +277,13 @@ const program = module.exports = {
 cli
   .demand(1)
   .command(`list`, `Lists all topics in the current project.`, {}, (options) => {
-    program.listTopics(makeHandler(false));
+    program.listTopics(noop);
   })
   .command(`create <topicName>`, `Creates a new topic.`, {}, (options) => {
-    program.createTopic(options.topicName, makeHandler(false));
+    program.createTopic(options.topicName, noop);
   })
-  .command(`delete <topicName>`, `Deletes the a topic.`, {}, (options) => {
-    program.deleteTopic(options.topicName, makeHandler(false));
+  .command(`delete <topicName>`, `Deletes a topic.`, {}, (options) => {
+    program.deleteTopic(options.topicName, noop);
   })
   .command(`publish <topicName> <message>`, `Publishes a message.`, {}, (options) => {
     try {
@@ -291,16 +291,16 @@ cli
     } catch (err) {
       // Ignore error
     }
-    program.publishMessage(options.topicName, options.message, makeHandler(false));
+    program.publishMessage(options.topicName, options.message, noop);
   })
   .command(`get-policy <topicName>`, `Gets the IAM policy for a topic.`, {}, (options) => {
-    program.getTopicPolicy(options.topicName, makeHandler(false));
+    program.getTopicPolicy(options.topicName, noop);
   })
   .command(`set-policy <topicName>`, `Sets the IAM policy for a topic.`, {}, (options) => {
-    program.setTopicPolicy(options.topicName, makeHandler(false));
+    program.setTopicPolicy(options.topicName, noop);
   })
   .command(`test-permissions <topicName>`, `Tests the permissions for a topic.`, {}, (options) => {
-    program.testTopicPermissions(options.topicName, makeHandler(false));
+    program.testTopicPermissions(options.topicName, noop);
   })
   .example(`node $0 list`, `Lists all topics in the current project.`)
   .example(`node $0 create greetings`, `Creates a new topic named "greetings".`)
