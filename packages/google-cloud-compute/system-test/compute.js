@@ -96,19 +96,46 @@ describe('Compute', function() {
     var AUTOSCALER_NAME = generateName('autoscaler');
     var autoscaler = zone.autoscaler(AUTOSCALER_NAME);
 
-    var INSTANCE_GROUP_NAME = generateName('instance-group');
-    var instanceGroup = zone.instanceGroup(INSTANCE_GROUP_NAME);
+    var NETWORK_NAME = generateName('network');
+    var network = compute.network(NETWORK_NAME);
+
+    var INSTANCE_TEMPLATE_NAME = generateName('instance-template');
+    var INSTANCE_GROUP_MANAGER_NAME = generateName('instance-group-manager');
 
     before(function(done) {
       async.series([
-        create(instanceGroup),
+        create(network, {
+          range: '10.240.0.0/16'
+        }),
+
+        function(callback) {
+          createInstanceTemplate(
+            INSTANCE_TEMPLATE_NAME,
+            network.formattedName,
+            callback
+          );
+        },
+
+        function(callback) {
+          createInstanceGroupManager(
+            INSTANCE_GROUP_MANAGER_NAME,
+            [
+              'https://www.googleapis.com/compute/v1/projects',
+              compute.projectId,
+              'global/instanceTemplates',
+              INSTANCE_TEMPLATE_NAME
+            ].join('/'),
+            callback
+          );
+        },
+
         create(autoscaler, {
           coolDown: 30,
           cpu: 80,
           loadBalance: 40,
           maxReplicas: 5,
           minReplicas: 1,
-          target: INSTANCE_GROUP_NAME
+          target: INSTANCE_GROUP_MANAGER_NAME
         })
       ], done);
     });
@@ -1318,6 +1345,8 @@ describe('Compute', function() {
       deleteUrlMaps,
       deleteServices,
       deleteHttpsHealthChecks,
+      deleteInstanceGroupManagers,
+      deleteInstanceTemplates,
       deleteTargetInstances,
       deleteAllGcloudTestObjects
     ], callback);
@@ -1652,6 +1681,171 @@ describe('Compute', function() {
     zone.request({
       method: 'DELETE',
       uri: '/targetInstances/' + name
+    }, function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      var operation = zone.operation(resp.name);
+      operation
+        .on('error', callback)
+        .on('complete', function() {
+          callback();
+        });
+    });
+  }
+
+  function getInstanceTemplates(callback) {
+    compute.request({
+      uri: '/global/instanceTemplates',
+      qs: {
+        filter: 'name eq ' + TESTS_PREFIX + '.*'
+      }
+    }, callback);
+  }
+
+  function deleteInstanceTemplates(callback) {
+    getInstanceTemplates(function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      if (!resp.items) {
+        callback();
+        return;
+      }
+
+      var names = resp.items.map(prop('name'));
+      async.each(names, deleteInstanceTemplate, callback);
+    });
+  }
+
+  function createInstanceTemplate(name, networkName, callback) {
+    compute.request({
+      method: 'POST',
+      uri: '/global/instanceTemplates',
+      json: {
+        name: name,
+        properties: {
+          disks: [
+            {
+              boot: true,
+              mode: 'READ_ONLY',
+              initializeParams: {
+                diskName: generateName('disk'),
+                diskSizeGb: 2,
+                diskType: 'pd-standard',
+                sourceImage: [
+                  'projects/centos-cloud/global/images/centos-6-v20150710'
+                ].join('')
+              }
+            }
+          ],
+          machineType: 'n1-standard-1',
+          networkInterfaces: [
+            {
+              network: networkName,
+              accessConfigs: [
+                {
+                  name: generateName('access_config'),
+                  type: 'ONE_TO_ONE_NAT'
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }, function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      var operation = compute.operation(resp.name);
+      operation
+        .on('error', callback)
+        .on('complete', function() {
+          callback();
+        });
+    });
+  }
+
+  function deleteInstanceTemplate(name, callback) {
+    compute.request({
+      method: 'DELETE',
+      uri: '/global/instanceTemplates/' + name
+    }, function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      var operation = compute.operation(resp.name);
+      operation
+        .on('error', callback)
+        .on('complete', function() {
+          callback();
+        });
+    });
+  }
+
+  function getInstanceGroupManagers(callback) {
+    zone.request({
+      uri: '/instanceGroupManagers',
+      qs: {
+        filter: 'name eq ' + TESTS_PREFIX + '.*'
+      }
+    }, callback);
+  }
+
+  function deleteInstanceGroupManagers(callback) {
+    getInstanceGroupManagers(function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      if (!resp.items) {
+        callback();
+        return;
+      }
+
+      var names = resp.items.map(prop('name'));
+      async.each(names, deleteInstanceGroupManager, callback);
+    });
+  }
+
+  function createInstanceGroupManager(name, instanceTemplateName, callback) {
+    zone.request({
+      method: 'POST',
+      uri: '/instanceGroupManagers',
+      json: {
+        baseInstanceName: name.replace(/\W/g, ''),
+        name: name,
+        targetSize: 1,
+        instanceTemplate: instanceTemplateName
+      }
+    }, function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      var operation = zone.operation(resp.name);
+      operation
+        .on('error', callback)
+        .on('complete', function() {
+          callback();
+        });
+    });
+  }
+
+  function deleteInstanceGroupManager(name, callback) {
+    zone.request({
+      method: 'DELETE',
+      uri: '/instanceGroupManagers/' + name
     }, function(err, resp) {
       if (err) {
         callback(err);

@@ -199,7 +199,7 @@ Zone.prototype.autoscaler = function(name) {
  *   loadBalance: 40,
  *   maxReplicas: 5,
  *   minReplicas: 0,
- *   target: 'instance-group-1'
+ *   target: 'instance-group-manager-1'
  * };
  *
  * function callback(err, autoscaler, operation, apiResponse) {
