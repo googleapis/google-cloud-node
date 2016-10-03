@@ -360,8 +360,8 @@ Storage.prototype.getBuckets = function(query, callback) {
 };
 
 /**
- * Get Bucket objects for all of the buckets in your project as a readable
- * object stream.
+ * Get {module:storage/bucket} objects for all of the buckets in your project as
+ * a readable object stream.
  *
  * @param {object=} query - Configuration object. See
  *     {module:storage#getBuckets} for a complete list of options.

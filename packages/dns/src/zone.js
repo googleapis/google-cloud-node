@@ -507,8 +507,8 @@ Zone.prototype.getChanges = function(query, callback) {
 };
 
 /**
- * Get the list of changes associated with this zone as a readable object
- * stream.
+ * Get the list of {module:dns/change} objects associated with this zone as a
+ * readable object stream.
  *
  * @param {object=} query - Configuration object. See
  *     {module:dns/zone#getChanges} for a complete list of options.
@@ -655,7 +655,8 @@ Zone.prototype.getRecords = function(query, callback) {
 };
 
 /**
- * Get the list of records for this zone as a readable object stream.
+ * Get the list of {module:dns/record} objects for this zone as a readable
+ * object stream.
  *
  * @param {object=} query - Configuration object. See
  *     {module:dns/zone#getRecords} for a complete list of options.

@@ -212,7 +212,8 @@ BigQuery.prototype.getDatasets = function(query, callback) {
 };
 
 /**
- * List all or some of the datasets in your project as a readable object stream.
+ * List all or some of the {module:bigquery/dataset} objects in your project as
+ * a readable object stream.
  *
  * @param {object=} query - Configuration object. See
  *     {module:bigquery#getDatasets} for a complete list of options.
@@ -324,7 +325,8 @@ BigQuery.prototype.getJobs = function(options, callback) {
 };
 
 /**
- * List all or some of the jobs in your project as a readable object stream.
+ * List all or some of the {module:bigquery/job} objects in your project as a
+ * readable object stream.
  *
  * @param {object=} query - Configuration object. See
  *     {module:bigquery#getJobs} for a complete list of options.

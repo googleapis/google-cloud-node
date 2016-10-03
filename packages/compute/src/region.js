@@ -418,7 +418,8 @@ Region.prototype.getAddresses = function(options, callback) {
 };
 
 /**
- * Get a list of addresses in this region as a readable object stream.
+ * Get a list of {module:compute/address} objects in this region as a readable
+ * object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute/region#getAddresses} for a complete list of options.
@@ -529,7 +530,8 @@ Region.prototype.getOperations = function(options, callback) {
 };
 
 /**
- * Get a list of operations for this region as a readable object stream.
+ * Get a list of {module:compute/operation} objects for this region as a
+ * readable object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute/region#getOperations} for a complete list of options.
@@ -640,7 +642,8 @@ Region.prototype.getRules = function(options, callback) {
 };
 
 /**
- * Get a list of forwading rules in this region as a readable object stream.
+ * Get a list of {module:compute/rule} objects in this region as a readable
+ * object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute/region#getRuleStream} for a complete list of options.
@@ -751,7 +754,8 @@ Region.prototype.getSubnetworks = function(options, callback) {
 };
 
 /**
- * Get a list of subnetworks in this region as a readable object stream.
+ * Get a list of {module:compute/subnetwork} objects in this region as a
+ * readable object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute/region#getSubnetworks} for a complete list of options.

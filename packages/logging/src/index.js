@@ -310,7 +310,8 @@ Logging.prototype.getEntries = function(options, callback) {
 };
 
 /**
- * List the entries in your logs as a readable object stream.
+ * List the {module:logging/entry} objects in your logs as a readable object
+ * stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:logging#getEntries} for a complete list of options.
@@ -400,7 +401,8 @@ Logging.prototype.getSinks = function(options, callback) {
 };
 
 /**
- * Get the sinks associated with this project as a readable object stream.
+ * Get the {module:logging/sink} objects associated with this project as a
+ * readable object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:logging#getSinks} for a complete list of options.

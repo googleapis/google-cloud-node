@@ -324,7 +324,7 @@ Log.prototype.getEntries = function(options, callback) {
 
 /**
  * This method is a wrapper around {module:logging#getEntryStream}, but with a
- * filter specified to only return entries from this log.
+ * filter specified to only return {module:logging/entry} objects from this log.
  *
  * @param {object=} options - Configuration object. See
  *     {module:logging/log#getEntries} for a complete list of options.

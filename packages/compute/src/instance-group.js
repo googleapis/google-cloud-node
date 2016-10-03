@@ -328,8 +328,8 @@ InstanceGroup.prototype.getVMs = function(options, callback) {
 };
 
 /**
- * Get a list of VM instances in this instance group as a readable object
- * stream.
+ * Get a list of {module:compute/vm} instances in this instance group as a
+ * readable object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute/instanceGroup#getVMs} for a complete list of options.

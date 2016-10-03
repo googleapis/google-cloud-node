@@ -326,7 +326,8 @@ Dataset.prototype.getTables = function(query, callback) {
 };
 
 /**
- * List all or some of the tables in your project as a readable object stream.
+ * List all or some of the {module:bigquery/table} objects in your project as a
+ * readable object stream.
  *
  * @param {object=} query - Configuration object. See
  *     {module:bigquery/dataset#getTables} for a complete list of options.

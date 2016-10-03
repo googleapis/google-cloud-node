@@ -425,8 +425,8 @@ Table.prototype.getMetadata = function(options, callback) {
 };
 
 /**
- * Get Row objects for the rows currently in your table as a readable object
- * stream.
+ * Get {module:bigtable/row} objects for the rows currently in your table as a
+ * readable object stream.
  *
  * @param {options=} options - Configuration object.
  * @param {boolean} options.decode - If set to `false` it will not decode Buffer
@@ -574,7 +574,7 @@ Table.prototype.getRowStream = function(options) {
 };
 
 /**
- * Get Row objects for the rows currently in your table.
+ * Get {module:bigtable/row} objects for the rows currently in your table.
  *
  * This method is not recommended for large datasets as it will buffer all rows
  * before returning the results. Instead we recommend using the streaming API

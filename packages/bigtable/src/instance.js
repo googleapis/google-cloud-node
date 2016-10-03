@@ -517,7 +517,8 @@ Instance.prototype.getClusters = function(query, callback) {
 };
 
 /**
- * Get Cluster objects for all of your clusters as a readable object stream.
+ * Get {module:bigtable/cluster} objects for all of your clusters as a readable
+ * object stream.
  *
  * @param {object=} query - Configuration object. See
  *     {module:bigtable/instance#getClusters} for a complete list of options.
@@ -627,8 +628,8 @@ Instance.prototype.getTables = function(query, callback) {
 };
 
 /**
- * Get Table objects for all the tables in your Compute instance as a readable
- * object stream.
+ * Get {module:bigtable/table} objects for all the tables in your Compute
+ * instance as a readable object stream.
  *
  * @param {object=} query - Configuration object. See
  *     {module:bigtable/instance#getTables} for a complete list of options.

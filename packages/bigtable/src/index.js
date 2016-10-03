@@ -496,8 +496,8 @@ Bigtable.prototype.getInstances = function(query, callback) {
 };
 
 /**
- * Get Instance objects for all of your Compute instances as a readable object
- * stream.
+ * Get {module:bigtable/instance} objects for all of your Compute instances as a
+ * readable object stream.
  *
  * @param {object=} query - Configuration object. See
  *     {module:bigtable#getInstances} for a complete list of options.

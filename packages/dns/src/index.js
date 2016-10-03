@@ -182,7 +182,8 @@ DNS.prototype.getZones = function(query, callback) {
 };
 
 /**
- * Gets a list of managed zones for the project as a readable object stream.
+ * Gets a list of {module:dns/zone} objects for the project as a readable object
+ * stream.
  *
  * @param {object=} query - Configuration object. See
  *     {module:dns#getZones} for a complete list of options.

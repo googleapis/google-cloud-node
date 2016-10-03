@@ -648,7 +648,7 @@ Compute.prototype.getAddresses = function(options, callback) {
 };
 
 /**
- * Get a list of addresses as a readable object stream.
+ * Get a list of {module:compute/address} objects as a readable object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute#getAddresses} for a complete list of options.
@@ -774,7 +774,8 @@ Compute.prototype.getAutoscalers = function(options, callback) {
 };
 
 /**
- * Get a list of autoscalers as a readable object stream.
+ * Get a list of {module:compute/autoscaler} objects as a readable object
+ * stream.
  *
  * @param {object=} query - Configuration object. See
  *     {module:compute#getAutoscalers} for a complete list of options.
@@ -895,7 +896,7 @@ Compute.prototype.getDisks = function(options, callback) {
 };
 
 /**
- * Get a list of disks as a readable object stream.
+ * Get a list of {module:compute/disk} objects as a readable object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute#getDisks} for a complete list of options.
@@ -1017,7 +1018,8 @@ Compute.prototype.getInstanceGroups = function(options, callback) {
 };
 
 /**
- * Get a list of instance groups as a readable object stream.
+ * Get a list of {module:compute/instanceGroup} objects as a readable object
+ * stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute#getInstanceGroups} for a complete list of options.
@@ -1130,7 +1132,7 @@ Compute.prototype.getFirewalls = function(options, callback) {
 };
 
 /**
- * Get a list of firewalls as a readable object stream.
+ * Get a list of {module:compute/firewall} objects as a readable object stream.
  *
  * @param {object=} query - Configuration object. See
  *     {module:compute#getFirewalls} for a complete list of options.
@@ -1251,7 +1253,8 @@ Compute.prototype.getHealthChecks = function(options, callback) {
 };
 
 /**
- * Get a list of health checks as a readable object stream.
+ * Get a list of {module:compute/healthCheck} objects as a readable object
+ * stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute#getHealthChecks} for a complete list of options.
@@ -1375,7 +1378,8 @@ Compute.prototype.getMachineTypes = function(options, callback) {
 };
 
 /**
- * Get a list of machine types in this project as a readable object stream.
+ * Get a list of {module:compute/machineType} objects in this project as a
+ * readable object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute#getMachineTypes} for a complete list of options.
@@ -1487,7 +1491,7 @@ Compute.prototype.getNetworks = function(options, callback) {
 };
 
 /**
- * Get a list of networks as a readable object stream.
+ * Get a list of {module:compute/network} objects as a readable object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute#getNetworks} for a complete list of options.
@@ -1598,7 +1602,8 @@ Compute.prototype.getOperations = function(options, callback) {
 };
 
 /**
- * Get a list of global operations as a readable object stream.
+ * Get a list of global {module:compute/operation} objects as a readable object
+ * stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute#getOperations} for a complete list of options.
@@ -1708,7 +1713,8 @@ Compute.prototype.getRegions = function(options, callback) {
 };
 
 /**
- * Return the regions available to your project as a readable object stream.
+ * Return the {module:compute/region} objects available to your project as a
+ * readable object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute#getRegions} for a complete list of options.
@@ -1736,7 +1742,7 @@ Compute.prototype.getRegions = function(options, callback) {
 Compute.prototype.getRegionStream = common.paginator.streamify('getRegions');
 
 /**
- * Get a list of forwading rules.
+ * Get a list of forwarding rules.
  *
  * @resource [GlobalForwardingRules: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalForwardingRules/list}
  *
@@ -1818,7 +1824,7 @@ Compute.prototype.getRules = function(options, callback) {
 };
 
 /**
- * Get a list of forwading rules as a readable object stream.
+ * Get a list of {module:compute/rule} objects as a readable object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute#getRules} for a complete list of options.
@@ -1929,7 +1935,7 @@ Compute.prototype.getServices = function(options, callback) {
 };
 
 /**
- * Get a list of backend services as a readable object stream.
+ * Get a list of {module:compute/service} objects as a readable object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute#getServices} for a complete list of options.
@@ -2040,7 +2046,7 @@ Compute.prototype.getSnapshots = function(options, callback) {
 };
 
 /**
- * Get a list of snapshots as a readable object stream.
+ * Get a list of {module:compute/snapshot} objects as a readable object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute#getSnapshots} for a complete list of options.
@@ -2161,7 +2167,8 @@ Compute.prototype.getSubnetworks = function(options, callback) {
 };
 
 /**
- * Get a list of subnetworks in this project as a readable object stream.
+ * Get a list of {module:compute/subnetwork} objects in this project as a
+ * readable object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute#getSubnetworks} for a complete list of options.
@@ -2281,7 +2288,7 @@ Compute.prototype.getVMs = function(options, callback) {
 };
 
 /**
- * Get a list of virtual machine instances as a readable object stream.
+ * Get a list of {module:compute/vm} instances as a readable object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute#getVMs} for a complete list of options.
@@ -2390,7 +2397,8 @@ Compute.prototype.getZones = function(options, callback) {
 };
 
 /**
- * Return the zones available to your project as a readable object stream.
+ * Return the {module:compute/zone} objects available to your project as a
+ * readable object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute#getZones} for a complete list of options.

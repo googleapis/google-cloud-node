@@ -255,8 +255,8 @@ Topic.prototype.getSubscriptions = function(options, callback) {
 };
 
 /**
- * Get a list of the subscriptions registered to this topic as a readable
- * object stream.
+ * Get a list of the {module:pubsub/subscription} objects registered to this
+ * topic as a readable object stream.
  *
  * @param {object=} query - Configuration object. See
  *     {module:pubsub/topic#getSubscriptions} for a complete list of options.

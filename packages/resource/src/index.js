@@ -208,7 +208,7 @@ Resource.prototype.getProjects = function(options, callback) {
 };
 
 /**
- * Get a list of projects as a readable object stream.
+ * Get a list of {module:resource/project} objects as a readable object stream.
  *
  * @param {object=} query - Configuration object. See
  *     {module:resource#getProjects} for a complete list of options.

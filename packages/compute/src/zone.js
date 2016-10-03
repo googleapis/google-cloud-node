@@ -751,7 +751,8 @@ Zone.prototype.getAutoscalers = function(options, callback) {
 };
 
 /**
- * Get a list of autoscalers from this zone as a readable object stream.
+ * Get a list of {module:compute/autoscaler} objects from this zone as a
+ * readable object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute/zone#getAutoscalers} for a complete list of options.
@@ -862,7 +863,8 @@ Zone.prototype.getDisks = function(options, callback) {
 };
 
 /**
- * Get a list of disks in this zone as a readable object stream.
+ * Get a list of {module:compute/disk} objects in this zone as a readable object
+ * stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute/zone#getDisks} for a complete list of options.
@@ -974,7 +976,8 @@ Zone.prototype.getInstanceGroups = function(options, callback) {
 };
 
 /**
- * Get a list of instance groups for this zone as a readable object stream.
+ * Get a list of {module:compute/instanceGroup} objects for this zone as a
+ * readable object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute/zone#getInstanceGroups} for a complete list of options.
@@ -1057,7 +1060,8 @@ Zone.prototype.getMachineTypes = function(options, callback) {
 };
 
 /**
- * Get a list of machine types for this zone as a readable object stream.
+ * Get a list of {module:compute/machineType} objects for this zone as a
+ * readable object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute/zone#getMachineTypes} for a complete list of options.
@@ -1169,7 +1173,8 @@ Zone.prototype.getOperations = function(options, callback) {
 };
 
 /**
- * Get a list of operations for this zone as a readable object stream.
+ * Get a list of {module:compute/operation} objects for this zone as a readable
+ * object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute/zone#getOperations} for a complete list of options.
@@ -1277,7 +1282,7 @@ Zone.prototype.getVMs = function(options, callback) {
 };
 
 /**
- * Get a list of VM instances in this zone as a readable object stream.
+ * Get a list of {module:compute/vm} instances in this zone as a readable object stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute/zone#getVMs} for a complete list of options.

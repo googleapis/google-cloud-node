@@ -254,7 +254,8 @@ Prediction.prototype.getModels = function(query, callback) {
 };
 
 /**
- * Gets a list of trained models for the project as a readable object stream.
+ * Gets a list of {module:prediction/model} objects for the project as a
+ * readable object stream.
  *
  * @param {object=} query - Configuration object. See
  *     {module:prediction#getModels} for a complete list of options.
