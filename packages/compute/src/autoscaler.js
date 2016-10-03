@@ -56,7 +56,7 @@ function Autoscaler(zone, name) {
      *   loadBalance: 40,
      *   maxReplicas: 5,
      *   minReplicas: 0,
-     *   target: 'instance-group-1'
+     *   target: 'instance-group-manager-1'
      * }, function(err, autoscaler, operation, apiResponse) {
      *   // `autoscaler` is an Autoscaler object.
      *
