@@ -96,6 +96,26 @@ var API_KEY = process.env.GCLOUD_TESTS_API_KEY;
         done();
       });
     });
+
+    it('should autodetect HTML', function(done) {
+      var input = '<body>' + INPUT[0].input + '</body>';
+      var expectedTranslation = [
+        '<body>',
+        INPUT[0].expectedTranslation,
+        '</body>'
+      ].join(' ');
+
+      var opts = {
+        from: 'en',
+        to: 'es'
+      };
+
+      translate.translate(input, opts, function(err, results) {
+        assert.ifError(err);
+        assert.strictEqual(results, expectedTranslation);
+        done();
+      });
+    });
   });
 
   describe('supported languages', function() {

@@ -270,6 +270,8 @@ Translate.prototype.getLanguages = function(target, callback) {
  *     `en` for English). If an object, you may also specify the source
  *     language.
  * @param {string} options.format - Set the text's format as `html` or `text`.
+ *     If not provided, we will try to auto-detect if the text given is HTML. If
+ *     not, we set the format as `text`.
  * @param {string} options.from - The ISO 639-1 language code the source input
  *     is written in.
  * @param {string} options.to - The ISO 639-1 language code to translate the
