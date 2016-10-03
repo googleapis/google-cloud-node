@@ -11,9 +11,12 @@
   "dependencies": {
     "@google-cloud/translate": "^0.2.0",
     "iso-639-1": "^1.2.1",
-    "yargs": "^5.0.0"
+    "yargs": "^6.0.0"
   },
   "devDependencies": {
-    "mocha": "^3.0.2"
+    "mocha": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=4.3.2"
   }
 }
