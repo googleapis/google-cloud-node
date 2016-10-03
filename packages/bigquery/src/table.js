@@ -202,43 +202,48 @@ Table.mergeSchemaWithRows_ = function(schema, rows) {
         return fieldObject;
       }
 
-      switch (schemaField.type) {
-        case 'BOOLEAN': {
-          value = value === 'true';
-          break;
-        }
-        case 'FLOAT': {
-          if (!is.nil(value)) {
-            value = parseFloat(value);
-          }
-          break;
-        }
-        case 'INTEGER': {
-          if (!is.nil(value)) {
-            value = parseInt(value, 10);
-          }
-          break;
-        }
-        case 'RECORD': {
-          if (schemaField.mode === 'REPEATED') {
-            value = value.map(function(val) {
-              return Table.mergeSchemaWithRows_(schemaField, val.v).pop();
-            });
-          } else {
-            value = Table.mergeSchemaWithRows_(schemaField, value).pop();
-          }
-
-          break;
-        }
-        case 'TIMESTAMP': {
-          value = new Date(value * 1000);
-          break;
-        }
+      if (schemaField.mode === 'REPEATED') {
+        value = value.map(function(val) {
+          return convert(schemaField, val.v);
+        });
+      } else {
+        value = convert(schemaField, value);
       }
 
       fieldObject[schemaField.name] = value;
       return fieldObject;
     });
+  }
+
+  function convert(schemaField, value) {
+    switch (schemaField.type) {
+      case 'BOOLEAN': {
+        value = value === 'true';
+        break;
+      }
+      case 'FLOAT': {
+        if (!is.nil(value)) {
+          value = parseFloat(value);
+        }
+        break;
+      }
+      case 'INTEGER': {
+        if (!is.nil(value)) {
+          value = parseInt(value, 10);
+        }
+        break;
+      }
+      case 'RECORD': {
+        value = Table.mergeSchemaWithRows_(schemaField, value).pop();
+        break;
+      }
+      case 'TIMESTAMP': {
+        value = new Date(value * 1000);
+        break;
+      }
+    }
+
+    return value;
   }
 
   function flattenRows(rows) {

@@ -181,6 +181,13 @@ describe('BigQuery/Table', function() {
               { v: String(now.valueOf() / 1000) },
               { v: 'false' },
               { v: '5.222330009847' },
+              {
+                v: [
+                  {
+                    v: '10'
+                  }
+                ]
+              },
               { v: null },
               {
                 v: [
@@ -209,6 +216,7 @@ describe('BigQuery/Table', function() {
             dob: now,
             has_claws: false,
             hair_count: 5.222330009847,
+            arr: [10],
             nullable: null,
             objects: [
               {
@@ -222,6 +230,12 @@ describe('BigQuery/Table', function() {
       ];
 
       var schemaObject = extend(true, SCHEMA_OBJECT, {});
+
+      schemaObject.fields.push({
+        name: 'arr',
+        type: 'INTEGER',
+        mode: 'REPEATED'
+      });
 
       schemaObject.fields.push({
         name: 'nullable',
