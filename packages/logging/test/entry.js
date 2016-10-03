@@ -186,6 +186,15 @@ describe('Entry', function() {
       assert.strictEqual(json.jsonPayload, converted);
     });
 
+    it('should throw with a struct with a circular reference', function() {
+      entry.data = { val: true };
+      entry.data.data = entry.data;
+
+      assert.throws(function() {
+        entry.toJSON();
+      }, /The JSON data for this entry has a circular reference\./);
+    });
+
     it('should assign string data as textPayload', function() {
       entry.data = 'string';
       var json = entry.toJSON();
