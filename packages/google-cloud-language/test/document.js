@@ -39,7 +39,7 @@ describe('Document', function() {
   var document;
 
   var LANGUAGE = {
-    request: util.noop
+    api: {}
   };
   var CONFIG = 'inline content';
 
@@ -66,70 +66,53 @@ describe('Document', function() {
   });
 
   describe('instantiation', function() {
-    it('should set the correct reqOpts for inline content', function() {
-      assert.deepEqual(document.reqOpts, {
-        document: {
-          content: CONFIG,
-          type: 'PLAIN_TEXT'
-        }
+    it('should expose the gax API', function() {
+      assert.strictEqual(document.api, LANGUAGE.api);
+    });
+
+    it('should set the correct document for inline content', function() {
+      assert.deepEqual(document.document, {
+        content: CONFIG,
+        type: 'PLAIN_TEXT'
       });
     });
 
-    it('should set the correct reqOpts for content with encoding', function() {
+    it('should set and uppercase the correct encodingType', function() {
       var document = new Document(LANGUAGE, {
         content: CONFIG,
         encoding: 'utf-8'
       });
 
-      assert.deepEqual(document.reqOpts, {
-        document: {
-          content: CONFIG,
-          type: 'PLAIN_TEXT'
-        },
-        encodingType: 'UTF8'
-      });
+      assert.strictEqual(document.encodingType, 'UTF8');
     });
 
-    it('should set the correct reqOpts for content with language', function() {
+    it('should set the correct document for content with language', function() {
       var document = new Document(LANGUAGE, {
         content: CONFIG,
         language: 'EN'
       });
 
-      assert.deepEqual(document.reqOpts, {
-        document: {
-          content: CONFIG,
-          type: 'PLAIN_TEXT',
-          language: 'EN'
-        }
-      });
+      assert.strictEqual(document.document.language, 'EN');
     });
 
-    it('should set the correct reqOpts for content with type', function() {
+    it('should set the correct document for content with type', function() {
       var document = new Document(LANGUAGE, {
         content: CONFIG,
         type: 'html'
       });
 
-      assert.deepEqual(document.reqOpts, {
-        document: {
-          content: CONFIG,
-          type: 'HTML'
-        }
-      });
+      assert.strictEqual(document.document.type, 'HTML');
     });
 
-    it('should set the correct reqOpts for text', function() {
+    it('should set the correct document for text', function() {
       var document = new Document(LANGUAGE, {
         content: CONFIG,
         type: 'text'
       });
 
-      assert.deepEqual(document.reqOpts, {
-        document: {
-          content: CONFIG,
-          type: 'PLAIN_TEXT'
-        }
+      assert.deepEqual(document.document, {
+        content: CONFIG,
+        type: 'PLAIN_TEXT'
       });
     });
 
@@ -152,29 +135,12 @@ describe('Document', function() {
         content: file
       });
 
-      assert.deepEqual(document.reqOpts, {
-        document: {
-          gcsContentUri: [
-            'gs://',
-            encodeURIComponent(file.bucket.id),
-            '/',
-            encodeURIComponent(file.id),
-          ].join(''),
-          type: 'PLAIN_TEXT'
-        }
-      });
-    });
-
-    it('should create a request function', function(done) {
-      var LanguageInstance = {
-        request: function() {
-          assert.strictEqual(this, LanguageInstance);
-          done();
-        }
-      };
-
-      var document = new Document(LanguageInstance, CONFIG);
-      document.request();
+      assert.deepEqual(document.document.gcsContentUri, [
+        'gs://',
+        encodeURIComponent(file.bucket.id),
+        '/',
+        encodeURIComponent(file.id),
+      ].join(''));
     });
   });
 
@@ -203,38 +169,37 @@ describe('Document', function() {
 
   describe('annotate', function() {
     it('should make the correct API request', function(done) {
-      document.request = function(grpcOpts, reqOpts) {
-        assert.deepEqual(grpcOpts, {
-          service: 'LanguageService',
-          method: 'annotateText'
-        });
+      document.api.Language = {
+        annotateText: function(doc, features, encType) {
+          assert.strictEqual(doc, document.document);
 
-        assert.deepEqual(reqOpts, extend(
-          {
-            features: {
-              extractDocumentSentiment: true,
-              extractEntities: true,
-              extractSyntax: true
-            }
-          },
-          document.reqOpts
-        ));
+          assert.deepEqual(features, {
+            extractDocumentSentiment: true,
+            extractEntities: true,
+            extractSyntax: true
+          });
 
-        done();
+          assert.strictEqual(encType, document.encodingType);
+
+          done();
+        }
       };
 
+      document.encodingType = 'encoding-type';
       document.annotate(assert.ifError);
     });
 
     it('should allow specifying individual features', function(done) {
-      document.request = function(grpcOpts, reqOpts) {
-        assert.deepEqual(reqOpts.features, {
-          extractDocumentSentiment: false,
-          extractEntities: true,
-          extractSyntax: true
-        });
+      document.api.Language = {
+        annotateText: function(doc, features) {
+          assert.deepEqual(features, {
+            extractDocumentSentiment: false,
+            extractEntities: true,
+            extractSyntax: true
+          });
 
-        done();
+          done();
+        }
       };
 
       document.annotate({
@@ -248,8 +213,10 @@ describe('Document', function() {
       var error = new Error('Error.');
 
       beforeEach(function() {
-        document.request = function(grpcOpts, reqOpts, callback) {
-          callback(error, apiResponse);
+        document.api.Language = {
+          annotateText: function(doc, features, encType, callback) {
+            callback(error, apiResponse);
+          }
         };
       });
 
@@ -293,9 +260,9 @@ describe('Document', function() {
         apiResponses.withSyntax
       );
 
-      function createRequestWithResponse(apiResponse) {
-        return function(grpcOpts, reqOpts, callback) {
-          callback(null, apiResponse, apiResponse);
+      function createAnnotateTextWithResponse(apiResponse) {
+        return function(doc, features, encType, callback) {
+          callback(null, apiResponse);
         };
       }
 
@@ -308,7 +275,10 @@ describe('Document', function() {
 
       it('should always return the language', function(done) {
         var apiResponse = apiResponses.default;
-        document.request = createRequestWithResponse(apiResponse);
+
+        document.api.Language = {
+          annotateText: createAnnotateTextWithResponse(apiResponse)
+        };
 
         document.annotate(function(err, annotation, apiResponse_) {
           assert.ifError(err);
@@ -320,7 +290,10 @@ describe('Document', function() {
 
       it('should return syntax when no features are requested', function(done) {
         var apiResponse = apiResponses.default;
-        document.request = createRequestWithResponse(apiResponse);
+
+        document.api.Language = {
+          annotateText: createAnnotateTextWithResponse(apiResponse)
+        };
 
         var formattedSentences = [];
         Document.formatSentences_ = function(sentences, verbose) {
@@ -347,7 +320,10 @@ describe('Document', function() {
 
       it('should return the formatted sentiment if available', function(done) {
         var apiResponse = apiResponses.withSentiment;
-        document.request = createRequestWithResponse(apiResponse);
+
+        document.api.Language = {
+          annotateText: createAnnotateTextWithResponse(apiResponse)
+        };
 
         var formattedSentiment = {};
         Document.formatSentiment_ = function(sentiment, verbose) {
@@ -370,7 +346,10 @@ describe('Document', function() {
 
       it('should return the formatted entities if available', function(done) {
         var apiResponse = apiResponses.withEntities;
-        document.request = createRequestWithResponse(apiResponse);
+
+        document.api.Language = {
+          annotateText: createAnnotateTextWithResponse(apiResponse)
+        };
 
         var formattedEntities = [];
         Document.formatEntities_ = function(entities, verbose) {
@@ -393,7 +372,10 @@ describe('Document', function() {
 
       it('should not return syntax analyses when not wanted', function(done) {
         var apiResponse = apiResponses.default;
-        document.request = createRequestWithResponse(apiResponse);
+
+        document.api.Language = {
+          annotateText: createAnnotateTextWithResponse(apiResponse)
+        };
 
         document.annotate({
           entities: true,
@@ -410,7 +392,10 @@ describe('Document', function() {
 
       it('should allow verbose mode', function(done) {
         var apiResponse = apiResponses.withAll;
-        document.request = createRequestWithResponse(apiResponse);
+
+        document.api.Language = {
+          annotateText: createAnnotateTextWithResponse(apiResponse)
+        };
 
         var numCallsWithCorrectVerbosityArgument = 0;
 
@@ -440,17 +425,15 @@ describe('Document', function() {
 
   describe('detectEntities', function() {
     it('should make the correct API request', function(done) {
-      document.request = function(grpcOpts, reqOpts) {
-        assert.deepEqual(grpcOpts, {
-          service: 'LanguageService',
-          method: 'analyzeEntities'
-        });
-
-        assert.strictEqual(reqOpts, document.reqOpts);
-
-        done();
+      document.api.Language = {
+        analyzeEntities: function(doc, encType) {
+          assert.strictEqual(doc, document.document);
+          assert.strictEqual(encType, document.encodingType);
+          done();
+        }
       };
 
+      document.encodingType = 'encoding-type';
       document.detectEntities(assert.ifError);
     });
 
@@ -459,8 +442,10 @@ describe('Document', function() {
       var error = new Error('Error.');
 
       beforeEach(function() {
-        document.request = function(grpcOpts, reqOpts, callback) {
-          callback(error, apiResponse);
+        document.api.Language = {
+          analyzeEntities: function(doc, encType, callback) {
+            callback(error, apiResponse);
+          }
         };
       });
 
@@ -482,8 +467,10 @@ describe('Document', function() {
       var originalApiResponse = extend({}, apiResponse);
 
       beforeEach(function() {
-        document.request = function(grpcOpts, reqOpts, callback) {
-          callback(null, apiResponse);
+        document.api.Language = {
+          analyzeEntities: function(doc, encType, callback) {
+            callback(null, apiResponse);
+          }
         };
       });
 
@@ -527,17 +514,15 @@ describe('Document', function() {
 
   describe('detectSentiment', function() {
     it('should make the correct API request', function(done) {
-      document.request = function(grpcOpts, reqOpts) {
-        assert.deepEqual(grpcOpts, {
-          service: 'LanguageService',
-          method: 'analyzeSentiment'
-        });
-
-        assert.strictEqual(reqOpts, document.reqOpts);
-
-        done();
+      document.api.Language = {
+        analyzeSentiment: function(doc, encType) {
+          assert.strictEqual(doc, document.document);
+          assert.strictEqual(encType, document.encodingType);
+          done();
+        }
       };
 
+      document.encodingType = 'encoding-type';
       document.detectSentiment(assert.ifError);
     });
 
@@ -546,8 +531,10 @@ describe('Document', function() {
       var error = new Error('Error.');
 
       beforeEach(function() {
-        document.request = function(grpcOpts, reqOpts, callback) {
-          callback(error, apiResponse);
+        document.api.Language = {
+          analyzeSentiment: function(doc, encType, callback) {
+            callback(error, apiResponse);
+          }
         };
       });
 
@@ -571,8 +558,10 @@ describe('Document', function() {
       beforeEach(function() {
         Document.formatSentiment_ = util.noop;
 
-        document.request = function(grpcOpts, reqOpts, callback) {
-          callback(null, apiResponse);
+        document.api.Language = {
+          analyzeSentiment: function(doc, encType, callback) {
+            callback(null, apiResponse);
+          }
         };
       });
 

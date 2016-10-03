@@ -56,10 +56,8 @@
     "arrify": "^1.0.1",
     "extend": "^3.0.0",
     "google-gax": "^0.7.0",
-    "google-proto-files": "^0.8.0",
     "is": "^3.0.1",
-    "propprop": "^0.3.1",
-    "string-format-obj": "^1.0.0"
+    "propprop": "^0.3.1"
   },
   "devDependencies": {
     "@google-cloud/storage": "*",
