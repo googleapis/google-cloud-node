@@ -876,7 +876,7 @@ describe('storage', function() {
             dra: true
           }, callback);
         },
-        function (callback) {
+        function(callback) {
           file.copy(copiedFile, callback);
         }
       ], function(err) {
