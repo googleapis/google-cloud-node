@@ -209,7 +209,7 @@ Log.prototype.emergency = function(entry, options, callback) {
  * @resource [LogEntry JSON representation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry}
  *
  * @param {object=} metadata - See a
- *     [Monitored Resource](https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource).
+ *     [LogEntry Resource](https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry).
  * @param {object|string} data - The data to use as the value for this log
  *     entry.
  * @return {module:logging/entry}
