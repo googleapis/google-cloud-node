@@ -120,9 +120,23 @@ describe('pubsub', function() {
 
     it('should publish a message', function(done) {
       var topic = pubsub.topic(TOPIC_NAMES[0]);
-      topic.publish({ data: 'message from me' }, function(err, messageIds) {
+      topic.publish('message from me', function(err, messageIds) {
         assert.ifError(err);
-        assert.equal(messageIds.length, 1);
+        assert.strictEqual(messageIds.length, 1);
+        done();
+      });
+    });
+
+    it('should publish a message with attributes', function(done) {
+      var topic = pubsub.topic(TOPIC_NAMES[1]);
+      topic.publish({
+        data: 'raw message data',
+        attributes: {
+          raw: true
+        }
+      }, function(err, messageIds) {
+        assert.ifError(err);
+        assert.strictEqual(messageIds.length, 1);
         done();
       });
     });
@@ -166,7 +180,7 @@ describe('pubsub', function() {
           }
 
           async.times(10, function(_, next) {
-            topic.publish({ data: 'hello' }, next);
+            topic.publish('hello', next);
           }, function(err) {
             if (err) {
               done(err);
