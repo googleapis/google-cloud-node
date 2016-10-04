@@ -55,8 +55,8 @@ var Instance = require('./instance.js');
  * //-
  * // <h3>The Bigtable Emulator</h3>
  * //
- * // Make sure you have the
- * // [gcloud SDK installed](https://cloud.google.com/sdk/downloads), then run:
+ * // Make sure you have the <a href="https://cloud.google.com/sdk/downloads">
+ * // gcloud SDK installed</a>, then run:
  * //
  * // <pre>
  * //   $ gcloud beta emulators bigtable start
