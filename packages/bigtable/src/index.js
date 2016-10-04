@@ -53,6 +53,24 @@ var Instance = require('./instance.js');
  *
  * @example
  * //-
+ * // <h3>The Bigtable Emulator</h3>
+ * //
+ * // Make sure you have the
+ * // [gcloud SDK installed](https://cloud.google.com/sdk/downloads), then run:
+ * //
+ * // <pre>
+ * //   $ gcloud beta emulators bigtable start
+ * // </pre>
+ * //
+ * // Before running your Node.js app, set the environment variables that this
+ * // library will look for to connect to the emulator:
+ * //
+ * // <pre>
+ * //   $ $(gcloud beta emulators bigtable env-init)
+ * // </pre>
+ * //-
+ *
+ * //-
  * // <h3>Creating a Compute Instance</h3>
  * //
  * // Before you create your table, you first need to create a Compute Instance
