@@ -123,7 +123,7 @@ Entry.fromApiResponse_ = function(entry) {
  * @private
  */
 Entry.prototype.toJSON = function() {
-  if (is.object(this.data) && isCircular(this.data)) {
+  if (is.object(this.data) && isCircular([this.data])) {
     throw new Error('The JSON data for this entry has a circular reference.');
   }
 
