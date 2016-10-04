@@ -223,7 +223,7 @@ describe('Log', function() {
       };
 
       log.entry(data);
-    })
+    });
   });
 
   describe('getEntries', function() {
