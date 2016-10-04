@@ -178,6 +178,39 @@ Table.createSchemaFromString_ = function(str) {
 };
 
 /**
+ * Convert a row entry from native types to their encoded types that the API
+ * expects.
+ *
+ * @static
+ * @private
+ *
+ * @param {*} value - The value to be converted.
+ * @return {*} The converted value.
+ */
+Table.encodeValue_ = function(value) {
+  if (is.array(value)) {
+    return value.map(Table.encodeValue_);
+  }
+
+  if (is.object(value)) {
+    return Object.keys(value).reduce(function(acc, key) {
+      acc[key] = Table.encodeValue_(value[key]);
+      return acc;
+    }, {});
+  }
+
+  if (Buffer.isBuffer(value)) {
+    return value.toString('base64');
+  }
+
+  if (is.date(value)) {
+    return value.toJSON();
+  }
+
+  return value;
+};
+
+/**
  * Merge a rowset returned from the API with a table schema.
  *
  * @static
@@ -195,13 +228,6 @@ Table.mergeSchemaWithRows_ = function(schema, rows) {
       var schemaField = schema.fields[index];
       var value = field.v;
 
-      var fieldObject = {};
-
-      if (value === null) {
-        fieldObject[schemaField.name] = null;
-        return fieldObject;
-      }
-
       if (schemaField.mode === 'REPEATED') {
         value = value.map(function(val) {
           return convert(schemaField, val.v);
@@ -210,27 +236,32 @@ Table.mergeSchemaWithRows_ = function(schema, rows) {
         value = convert(schemaField, value);
       }
 
+      var fieldObject = {};
       fieldObject[schemaField.name] = value;
       return fieldObject;
     });
   }
 
   function convert(schemaField, value) {
+    if (is.nil(value)) {
+      return value;
+    }
+
     switch (schemaField.type) {
       case 'BOOLEAN': {
         value = value === 'true';
         break;
       }
+      case 'BYTES': {
+        value = Buffer.from(value, 'base64');
+        break;
+      }
       case 'FLOAT': {
-        if (!is.nil(value)) {
-          value = parseFloat(value);
-        }
+        value = parseFloat(value);
         break;
       }
       case 'INTEGER': {
-        if (!is.nil(value)) {
-          value = parseInt(value, 10);
-        }
+        value = parseInt(value, 10);
         break;
       }
       case 'RECORD': {
@@ -947,7 +978,7 @@ Table.prototype.insert = function(rows, options, callback) {
   if (!options.raw) {
     json.rows = arrify(rows).map(function(row) {
       return {
-        json: row
+        json: Table.encodeValue_(row)
       };
     });
   }
@@ -999,11 +1030,12 @@ Table.prototype.query = function(query, callback) {
  *     table.
  * @param {string} metadata.name - A descriptive name for the table.
  * @param {string|object} metadata.schema - A comma-separated list of name:type
- *     pairs. Valid types are "string", "integer", "float", "boolean", and
- *     "timestamp". If the type is omitted, it is assumed to be "string".
- *     Example: "name:string, age:integer". Schemas can also be specified as a
- *     JSON array of fields, which allows for nested and repeated fields. See
- *     a [Table resource](http://goo.gl/sl8Dmg) for more detailed information.
+ *     pairs. Valid types are "string", "integer", "float", "boolean", "bytes",
+ *     "recodr", and "timestamp". If the type is omitted, it is assumed to be
+ *     "string". Example: "name:string, age:integer". Schemas can also be
+ *     specified as a JSON array of fields, which allows for nested and repeated
+ *     fields. See a [Table resource](http://goo.gl/sl8Dmg) for more detailed
+ *     information.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
   * @param {object} callback.apiResponse - The full API response.

@@ -168,9 +168,58 @@ describe('BigQuery/Table', function() {
     });
   });
 
+  describe('encodeValue_', function() {
+    it('should properly encode values', function() {
+      var buffer = new Buffer('test');
+      assert.strictEqual(Table.encodeValue_(buffer), buffer.toString('base64'));
+
+      var date = new Date();
+      assert.strictEqual(Table.encodeValue_(date), date.toJSON());
+    });
+
+    it('should properly encode arrays', function() {
+      var buffer = new Buffer('test');
+      var date = new Date();
+
+      var array = [
+        buffer,
+        date
+      ];
+
+      assert.deepEqual(Table.encodeValue_(array), [
+        buffer.toString('base64'),
+        date.toJSON()
+      ]);
+    });
+
+    it('should properly encode objects', function() {
+      var buffer = new Buffer('test');
+      var date = new Date();
+
+      var object = {
+        nested: {
+          array: [
+            buffer,
+            date
+          ]
+        }
+      };
+
+      assert.deepEqual(Table.encodeValue_(object), {
+        nested: {
+          array: [
+            buffer.toString('base64'),
+            date.toJSON()
+          ]
+        }
+      });
+    });
+  });
+
   describe('mergeSchemaWithRows_', function() {
     it('should merge the schema and flatten the rows', function() {
       var now = new Date();
+      var buffer = new Buffer('test');
 
       var rows = [
         {
@@ -189,6 +238,7 @@ describe('BigQuery/Table', function() {
                 ]
               },
               { v: null },
+              { v: buffer.toString('base64') },
               {
                 v: [
                   {
@@ -218,6 +268,7 @@ describe('BigQuery/Table', function() {
             hair_count: 5.222330009847,
             arr: [10],
             nullable: null,
+            buffer: buffer,
             objects: [
               {
                 nested_object: {
@@ -241,6 +292,11 @@ describe('BigQuery/Table', function() {
         name: 'nullable',
         type: 'STRING',
         mode: 'NULLABLE'
+      });
+
+      schemaObject.fields.push({
+        name: 'buffer',
+        type: 'BYTES'
       });
 
       schemaObject.fields.push({
