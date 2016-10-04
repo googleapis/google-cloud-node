@@ -37,11 +37,11 @@ var API_KEY = process.env.GCLOUD_TESTS_API_KEY;
   describe('detecting language from input', function() {
     var INPUT = [
       {
-        input: 'Hello',
+        input: 'Hello!',
         expectedLanguage: 'en'
       },
       {
-        input: 'Hola',
+        input: '¡Hola!',
         expectedLanguage: 'es'
       }
     ];
@@ -61,8 +61,8 @@ var API_KEY = process.env.GCLOUD_TESTS_API_KEY;
   describe('translations', function() {
     var INPUT = [
       {
-        input: 'Hello',
-        expectedTranslation: 'Hola'
+        input: 'Hello!',
+        expectedTranslation: '¡Hola!'
       },
       {
         input: 'How are you today?',
