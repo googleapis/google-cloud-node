@@ -47,8 +47,29 @@ var Instance = require('./instance.js');
  * @resource [Google Cloud Bigtable Concepts Overview]{@link https://cloud.google.com/bigtable/docs/concepts}
  *
  * @param {object=} options - [Configuration object](#/docs).
+ * @param {string=} options.apiEndpoint - Override the default API endpoint used
+ *     to reach Bigtable. This is useful for connecting to your local Bigtable
+ *     emulator.
  *
  * @example
+ * //-
+ * // <h3>The Bigtable Emulator</h3>
+ * //
+ * // Make sure you have the
+ * // [gcloud SDK installed](https://cloud.google.com/sdk/downloads), then run:
+ * //
+ * // <pre>
+ * //   $ gcloud beta emulators bigtable start
+ * // </pre>
+ * //
+ * // Before running your Node.js app, set the environment variables that this
+ * // library will look for to connect to the emulator:
+ * //
+ * // <pre>
+ * //   $ $(gcloud beta emulators bigtable env-init)
+ * // </pre>
+ * //-
+ *
  * //-
  * // <h3>Creating a Compute Instance</h3>
  * //
@@ -287,12 +308,22 @@ function Bigtable(options) {
     return new Bigtable(options);
   }
 
+  var baseUrl = 'bigtable.googleapis.com';
   var adminBaseUrl = 'bigtableadmin.googleapis.com';
 
+  var customEndpoint = options.apiEndpoint ||
+    process.env.BIGTABLE_EMULATOR_HOST;
+
+  if (customEndpoint) {
+    baseUrl = customEndpoint;
+    adminBaseUrl = baseUrl;
+  }
+
   var config = {
-    baseUrl: 'bigtable.googleapis.com',
+    baseUrl: baseUrl,
     service: 'bigtable',
     apiVersion: 'v2',
+    customEndpoint: !!customEndpoint,
     protoServices: {
       Bigtable: googleProtoFiles.bigtable.v2,
       BigtableTableAdmin: {

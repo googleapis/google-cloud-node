@@ -19,6 +19,7 @@
 var assert = require('assert');
 var extend = require('extend');
 var googleProtoFiles = require('google-proto-files');
+var is = require('is');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var sinon = require('sinon').sandbox.create();
@@ -72,6 +73,7 @@ describe('Bigtable', function() {
   });
 
   beforeEach(function() {
+    delete process.env.BIGTABLE_EMULATOR_HOST;
     bigtable = new Bigtable({ projectId: PROJECT_ID });
   });
 
@@ -112,6 +114,7 @@ describe('Bigtable', function() {
       assert.strictEqual(calledWith.baseUrl, 'bigtable.googleapis.com');
       assert.strictEqual(calledWith.service, 'bigtable');
       assert.strictEqual(calledWith.apiVersion, 'v2');
+      assert.strictEqual(calledWith.customEndpoint, false);
 
       assert.deepEqual(calledWith.protoServices, {
         Bigtable: googleProtoFiles('bigtable/v2/bigtable.proto'),
@@ -143,6 +146,48 @@ describe('Bigtable', function() {
       ]);
 
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
+    });
+
+    it('should work with the emulator', function() {
+      var endpoint = 'http://emulator:8288';
+      process.env.BIGTABLE_EMULATOR_HOST = endpoint;
+
+      var bigtable = new Bigtable({ projectId: PROJECT_ID });
+
+      var calledWith = bigtable.calledWith_[0];
+      assert.strictEqual(calledWith.baseUrl, endpoint);
+      assert.strictEqual(calledWith.customEndpoint, true);
+
+      Object.keys(calledWith.protoServices).forEach(function(service) {
+        service = calledWith.protoServices[service];
+
+        if (is.object(service)) {
+          assert.strictEqual(service.baseUrl, endpoint);
+        }
+      });
+
+      delete process.env.BIGTABLE_EMULATOR_HOST;
+    });
+
+    it('should work with a custom apiEndpoint', function() {
+      var options = {
+        projectId: PROJECT_ID,
+        apiEndpoint: 'http://local:3888'
+      };
+
+      var bigtable = new Bigtable(options);
+
+      var calledWith = bigtable.calledWith_[0];
+      assert.strictEqual(calledWith.baseUrl, options.apiEndpoint);
+      assert.strictEqual(calledWith.customEndpoint, true);
+
+      Object.keys(calledWith.protoServices).forEach(function(service) {
+        service = calledWith.protoServices[service];
+
+        if (is.object(service)) {
+          assert.strictEqual(service.baseUrl, options.apiEndpoint);
+        }
+      });
     });
 
     it('should set the projectName', function() {
