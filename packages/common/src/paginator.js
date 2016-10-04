@@ -62,7 +62,16 @@ paginator.extend = function(Class, methodNames) {
   methodNames = arrify(methodNames);
 
   methodNames.forEach(function(methodName) {
-    Class.prototype[methodName] = paginator.wrap_(Class.prototype[methodName]);
+    var originalMethod = Class.prototype[methodName];
+
+    // map the original method to a private member
+    Class.prototype[methodName + '_'] = originalMethod;
+
+    // overwrite the original to auto-paginate
+    Class.prototype[methodName] = function() {
+      var parsedArguments = paginator.parseArguments_(arguments);
+      return paginator.run_(parsedArguments, originalMethod.bind(this));
+    };
   });
 };
 
@@ -81,11 +90,7 @@ paginator.extend = function(Class, methodNames) {
 paginator.streamify = function(methodName) {
   return function() {
     var parsedArguments = paginator.parseArguments_(arguments);
-    var originalMethod = this[methodName];
-
-    if (is.fn(originalMethod.getOriginal_)) {
-      originalMethod = originalMethod.getOriginal_();
-    }
+    var originalMethod = this[methodName + '_'] || this[methodName];
 
     return paginator.runAsStream_(parsedArguments, originalMethod.bind(this));
   };
@@ -245,27 +250,6 @@ paginator.runAsStream_ = function(parsedArguments, originalMethod) {
   }
 
   return limiter.stream;
-};
-
-/**
- * Wraps original method in auto paginated function and provides a getter
- * for the original in the event that we wish to streamify that same method
- * later.
- *
- * @param {function} originalMethod - The original method.
- * @return {function} wrapped - The wrapped method.
- */
-paginator.wrap_ = function(originalMethod) {
-  var wrapped = function() {
-    var parsedArguments = paginator.parseArguments_(arguments);
-    return paginator.run_(parsedArguments, originalMethod.bind(this));
-  };
-
-  wrapped.getOriginal_ = function() {
-    return originalMethod;
-  };
-
-  return wrapped;
 };
 
 module.exports = paginator;
