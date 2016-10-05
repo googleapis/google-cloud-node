@@ -188,6 +188,14 @@ Table.createSchemaFromString_ = function(str) {
  * @return {*} The converted value.
  */
 Table.encodeValue_ = function(value) {
+  if (value instanceof Buffer) {
+    return value.toString('base64');
+  }
+
+  if (is.date(value)) {
+    return value.toJSON();
+  }
+
   if (is.array(value)) {
     return value.map(Table.encodeValue_);
   }
@@ -197,14 +205,6 @@ Table.encodeValue_ = function(value) {
       acc[key] = Table.encodeValue_(value[key]);
       return acc;
     }, {});
-  }
-
-  if (Buffer.isBuffer(value)) {
-    return value.toString('base64');
-  }
-
-  if (is.date(value)) {
-    return value.toJSON();
   }
 
   return value;
@@ -253,7 +253,7 @@ Table.mergeSchemaWithRows_ = function(schema, rows) {
         break;
       }
       case 'BYTES': {
-        value = Buffer.from(value, 'base64');
+        value = new Buffer(value, 'base64');
         break;
       }
       case 'FLOAT': {
