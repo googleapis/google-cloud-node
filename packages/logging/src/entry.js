@@ -23,6 +23,7 @@
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
+var isCircular = require('is-circular');
 
 /**
  * Create an entry object to define new data to insert into a log.
@@ -122,6 +123,10 @@ Entry.fromApiResponse_ = function(entry) {
  * @private
  */
 Entry.prototype.toJSON = function() {
+  if (is.object(this.data) && isCircular([this.data])) {
+    throw new Error('The JSON data for this entry has a circular reference.');
+  }
+
   var entry = extend(true, {}, this);
 
   var whitelist = [
