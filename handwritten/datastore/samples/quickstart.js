@@ -28,19 +28,19 @@ const datastoreClient = Datastore({
 });
 
 // The kind of the entity to retrieve
-const kind = 'Person';
+const kind = 'Task';
 // The name/ID of the entity to retrieve
-const name = 'Bob';
+const name = 'sampletask1';
 // The Datastore key for the entity
 const taskKey = datastoreClient.key([kind, name]);
 
 // Retrieves the entity
-datastoreClient.get(taskKey, (err, entity) => {
+datastoreClient.get(taskKey, (err, task) => {
   if (err) {
     console.error(err);
     return;
   }
 
-  console.log(`Fetched entity: ${entity.key.name}`);
+  console.log(`Fetched task: ${task.key.name}`);
 });
 // [END datastore_quickstart]
