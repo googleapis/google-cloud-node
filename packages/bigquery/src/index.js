@@ -617,6 +617,13 @@ BigQuery.prototype.startQuery = function(options, callback) {
  */
 common.paginator.extend(BigQuery, ['getDatasets', 'getJobs', 'query']);
 
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(BigQuery);
+
 BigQuery.Dataset = Dataset;
 BigQuery.Job = Job;
 BigQuery.Table = Table;

@@ -631,3 +631,66 @@ function getUserAgentFromPackageJson(packageJson) {
 }
 
 util.getUserAgentFromPackageJson = getUserAgentFromPackageJson;
+
+/**
+ * Promisifies certain Class methods. This will not promisify private or
+ * streaming methods. By default it will promisify any method that is
+ * camel cased with the exception of `query`.
+ *
+ * @param {module:common/service} Class - Service class.
+ * @param {object=} options - Configuration object.
+ */
+function promisify(Class, options) {
+  var slice = Array.prototype.slice;
+
+  var filter = options && options.filter || function(methodName) {
+    return /(query|[A-Z])/.test(methodName);
+  };
+
+  var methods = Object
+    .keys(Class.prototype)
+    .filter(function(methodName) {
+      return !/.+(\_|Stream)$/.test(methodName) && filter(methodName);
+    });
+
+  methods.forEach(function(methodName) {
+    var originalMethod = Class.prototype[methodName];
+
+    if (originalMethod.promisified_) {
+      return;
+    }
+
+    Class.prototype[methodName] = function() {
+      var args = slice.call(arguments);
+      var hasCallback = is.fn(args[args.length - 1]);
+      var context = this;
+
+      if (hasCallback) {
+        return originalMethod.apply(context, args);
+      }
+
+      return new Promise(function(resolve, reject) {
+        args.push(function() {
+          var callbackArgs = slice.call(arguments);
+          var err = callbackArgs.shift();
+
+          if (err) {
+            return reject(err);
+          }
+
+          if (callbackArgs.length === 1) {
+            callbackArgs = callbackArgs.pop();
+          }
+
+          resolve(callbackArgs);
+        });
+
+        originalMethod.apply(context, args);
+      });
+    };
+
+    Class.prototype[methodName].promisified_ = true;
+  });
+}
+
+util.promisify = promisify;
