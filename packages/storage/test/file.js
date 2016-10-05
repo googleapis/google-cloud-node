@@ -369,7 +369,7 @@ describe('File', function() {
       it('should make the subsequent correct API request', function(done) {
         var newFile = new File(BUCKET, 'new-file');
 
-        file.request = function(reqOpts, callback) {
+        file.request = function(reqOpts) {
           assert.strictEqual(reqOpts.qs.rewriteToken, apiResponse.rewriteToken);
           done();
         };
