@@ -90,6 +90,15 @@ util.inherits(BigQuery, common.Service);
  *
  * @example
  * bigquery.createDataset('my-dataset', function(err, dataset, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bigquery.createDataset('my-dataset')
+ *   .then(function(response) {
+ *     var dataset = response[0];
+ *     var apiResponse = response[1];
+ *   });
  */
 BigQuery.prototype.createDataset = function(id, options, callback) {
   var that = this;
@@ -203,6 +212,14 @@ BigQuery.prototype.dataset = function(id) {
  * bigquery.getDatasets({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bigquery.getDatasets()
+ *   .then(function(datasets) {
+ *     // datasets is an array of Dataset objects.
+ *   });
  */
 BigQuery.prototype.getDatasets = function(query, callback) {
   var that = this;
@@ -317,6 +334,14 @@ BigQuery.prototype.getDatasetsStream =
  * bigquery.getJobs({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bigquery.getJobs()
+ *   .then(function(jobs) {
+ *     // jobs is an array of Job objects.
+ *   });
  */
 BigQuery.prototype.getJobs = function(options, callback) {
   var that = this;
@@ -443,6 +468,14 @@ BigQuery.prototype.job = function(id) {
  *   query: query,
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bigquery.query(query)
+ *   .then(function(rows) {
+ *     // row is an array of results from your query.
+ *   });
  */
 BigQuery.prototype.query = function(options, callback) {
   var self = this;
@@ -558,6 +591,14 @@ BigQuery.prototype.query = function(options, callback) {
  *     job.getQueryResults(function(err, rows, apiResponse) {});
  *   }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bigquery.startQuery(query)
+ *   .then(function(job) {
+ *     return job.getQueryResults();
+ *   });
  */
 BigQuery.prototype.startQuery = function(options, callback) {
   var that = this;
