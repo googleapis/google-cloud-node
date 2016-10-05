@@ -860,6 +860,35 @@ describe('storage', function() {
       });
     });
 
+    it('should copy a large file', function(done) {
+      var otherBucket = storage.bucket(generateName());
+      var file = bucket.file('Big');
+      var copiedFile = otherBucket.file(file.name);
+
+      async.series([
+        function(callback) {
+          var opts = { destination: file };
+          bucket.upload(FILES.logo.path, opts, callback);
+        },
+        function(callback) {
+          otherBucket.create({
+            location: 'ASIA-EAST1',
+            dra: true
+          }, callback);
+        },
+        function(callback) {
+          file.copy(copiedFile, callback);
+        }
+      ], function(err) {
+        assert.ifError(err);
+        async.series([
+          copiedFile.delete.bind(copiedFile),
+          otherBucket.delete.bind(otherBucket),
+          file.delete.bind(file)
+        ], done);
+      });
+    });
+
     it('should copy to another bucket given a gs:// URL', function(done) {
       var opts = { destination: 'CloudLogo' };
       bucket.upload(FILES.logo.path, opts, function(err, file) {

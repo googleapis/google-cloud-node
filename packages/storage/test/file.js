@@ -241,7 +241,7 @@ describe('File', function() {
     it('should URI encode file names', function(done) {
       var newFile = new File(BUCKET, 'nested/file.jpg');
 
-      var expectedPath = format('/copyTo/b/{destBucket}/o/{destName}', {
+      var expectedPath = format('/rewriteTo/b/{destBucket}/o/{destName}', {
         destBucket: file.bucket.name,
         destName: encodeURIComponent(newFile.name)
       });
@@ -295,7 +295,7 @@ describe('File', function() {
 
       it('should allow a string', function(done) {
         var newFileName = 'new-file-name.png';
-        var expectedPath = format('/copyTo/b/{destBucket}/o/{destName}', {
+        var expectedPath = format('/rewriteTo/b/{destBucket}/o/{destName}', {
           destBucket: file.bucket.name,
           destName: newFileName
         });
@@ -305,7 +305,7 @@ describe('File', function() {
 
       it('should allow a "gs://..." string', function(done) {
         var newFileName = 'gs://other-bucket/new-file-name.png';
-        var expectedPath = format('/copyTo/b/{destBucket}/o/{destName}', {
+        var expectedPath = format('/rewriteTo/b/{destBucket}/o/{destName}', {
           destBucket: 'other-bucket',
           destName: 'new-file-name.png'
         });
@@ -314,7 +314,7 @@ describe('File', function() {
       });
 
       it('should allow a Bucket', function(done) {
-        var expectedPath = format('/copyTo/b/{destBucket}/o/{destName}', {
+        var expectedPath = format('/rewriteTo/b/{destBucket}/o/{destName}', {
           destBucket: BUCKET.name,
           destName: file.name
         });
@@ -324,7 +324,7 @@ describe('File', function() {
 
       it('should allow a File', function(done) {
         var newFile = new File(BUCKET, 'new-file');
-        var expectedPath = format('/copyTo/b/{destBucket}/o/{destName}', {
+        var expectedPath = format('/rewriteTo/b/{destBucket}/o/{destName}', {
           destBucket: BUCKET.name,
           destName: newFile.name
         });
@@ -336,6 +336,45 @@ describe('File', function() {
         assert.throws(function() {
           file.copy(function() {});
         }, /Destination file should have a name\./);
+      });
+    });
+
+    describe('not finished copying', function() {
+      var apiResponse = {
+        rewriteToken: '...'
+      };
+
+      beforeEach(function() {
+        file.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should continue attempting to copy', function(done) {
+        var newFile = new File(BUCKET, 'new-file');
+
+        file.request = function(reqOpts, callback) {
+          file.copy = function(newFile_, options, callback) {
+            assert.strictEqual(newFile_, newFile);
+            assert.deepEqual(options, { token: apiResponse.rewriteToken });
+            callback(); // done()
+          };
+
+          callback(null, apiResponse);
+        };
+
+        file.copy(newFile, done);
+      });
+
+      it('should make the subsequent correct API request', function(done) {
+        var newFile = new File(BUCKET, 'new-file');
+
+        file.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.qs.rewriteToken, apiResponse.rewriteToken);
+          done();
+        };
+
+        file.copy(newFile, { token: apiResponse.rewriteToken }, assert.ifError);
       });
     });
 

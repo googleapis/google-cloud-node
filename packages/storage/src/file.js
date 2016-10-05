@@ -269,6 +269,12 @@ function File(bucket, name, options) {
 
 util.inherits(File, common.ServiceObject);
 
+/*! Developer Documentation
+ *
+ * @param {object=} options - Configuration object.
+ * @param {string} options.token - A previously-returned `rewriteToken` from an
+ *     unfinished rewrite request.
+ */
 /**
  * Copy this file to another file. By default, this will copy the file to the
  * same bucket, but you can choose to copy it to another Bucket by providing
@@ -356,13 +362,21 @@ util.inherits(File, common.ServiceObject);
  *   // The `copiedFile` parameter is equal to `anotherFile`.
  * });
  */
-File.prototype.copy = function(destination, callback) {
+File.prototype.copy = function(destination, options, callback) {
+  var self = this;
+
   var noDestinationError = new Error('Destination file should have a name.');
 
   if (!destination) {
     throw noDestinationError;
   }
 
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = options || {};
   callback = callback || common.util.noop;
 
   var destBucket;
@@ -394,12 +408,15 @@ File.prototype.copy = function(destination, callback) {
   if (is.defined(this.generation)) {
     query.sourceGeneration = this.generation;
   }
+  if (is.defined(options.token)) {
+    query.rewriteToken = options.token;
+  }
 
   newFile = newFile || destBucket.file(destName);
 
   this.request({
     method: 'POST',
-    uri: format('/copyTo/b/{bucketName}/o/{fileName}', {
+    uri: format('/rewriteTo/b/{bucketName}/o/{fileName}', {
       bucketName: destBucket.name,
       fileName: encodeURIComponent(destName)
     }),
@@ -407,6 +424,11 @@ File.prototype.copy = function(destination, callback) {
   }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
+      return;
+    }
+
+    if (resp.rewriteToken) {
+      self.copy(newFile, { token: resp.rewriteToken }, callback);
       return;
     }
 
