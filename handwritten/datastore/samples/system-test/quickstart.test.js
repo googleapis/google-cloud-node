@@ -61,7 +61,7 @@ describe(`datastore:quickstart`, () => {
           assert.equal(entity.key.kind, kind);
           assert.deepEqual(entity.data, { message: message });
           assert.equal(console.log.calledOnce, true);
-          assert.deepEqual(console.log.firstCall.args, [`Entity: ${entity.key.id}`]);
+          assert.deepEqual(console.log.firstCall.args, [`Fetched entity: ${entity.key.name}`]);
           done();
         });
       }
