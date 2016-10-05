@@ -140,7 +140,7 @@ var GROUP_PATH_TEMPLATE = new gax.PathTemplate(
  * @param {String} project
  * @returns {String}
  */
-GroupServiceApi.prototype.projectPath = function projectPath(project) {
+GroupServiceApi.prototype.projectPath = function(project) {
   return PROJECT_PATH_TEMPLATE.render({
     project: project
   });
@@ -152,8 +152,7 @@ GroupServiceApi.prototype.projectPath = function projectPath(project) {
  *   A fully-qualified path representing a project resources.
  * @returns {String} - A string representing the project.
  */
-GroupServiceApi.prototype.matchProjectFromProjectName =
-    function matchProjectFromProjectName(projectName) {
+GroupServiceApi.prototype.matchProjectFromProjectName = function(projectName) {
   return PROJECT_PATH_TEMPLATE.match(projectName).project;
 };
 
@@ -163,7 +162,7 @@ GroupServiceApi.prototype.matchProjectFromProjectName =
  * @param {String} group
  * @returns {String}
  */
-GroupServiceApi.prototype.groupPath = function groupPath(project, group) {
+GroupServiceApi.prototype.groupPath = function(project, group) {
   return GROUP_PATH_TEMPLATE.render({
     project: project,
     group: group
@@ -176,8 +175,7 @@ GroupServiceApi.prototype.groupPath = function groupPath(project, group) {
  *   A fully-qualified path representing a group resources.
  * @returns {String} - A string representing the project.
  */
-GroupServiceApi.prototype.matchProjectFromGroupName =
-    function matchProjectFromGroupName(groupName) {
+GroupServiceApi.prototype.matchProjectFromGroupName = function(groupName) {
   return GROUP_PATH_TEMPLATE.match(groupName).project;
 };
 
@@ -187,8 +185,7 @@ GroupServiceApi.prototype.matchProjectFromGroupName =
  *   A fully-qualified path representing a group resources.
  * @returns {String} - A string representing the group.
  */
-GroupServiceApi.prototype.matchGroupFromGroupName =
-    function matchGroupFromGroupName(groupName) {
+GroupServiceApi.prototype.matchGroupFromGroupName = function(groupName) {
   return GROUP_PATH_TEMPLATE.match(groupName).group;
 };
 
@@ -262,7 +259,7 @@ GroupServiceApi.prototype.matchGroupFromGroupName =
  * }
  * api.listGroups(formattedName, {flattenPages: false}, callback);
  */
-GroupServiceApi.prototype.listGroups = function listGroups(
+GroupServiceApi.prototype.listGroups = function(
     name,
     options,
     callback) {
@@ -319,7 +316,7 @@ GroupServiceApi.prototype.listGroups = function listGroups(
  *     // doThingsWith(response)
  * });
  */
-GroupServiceApi.prototype.getGroup = function getGroup(
+GroupServiceApi.prototype.getGroup = function(
     name,
     options,
     callback) {
@@ -375,7 +372,7 @@ GroupServiceApi.prototype.getGroup = function getGroup(
  *     // doThingsWith(response)
  * });
  */
-GroupServiceApi.prototype.createGroup = function createGroup(
+GroupServiceApi.prototype.createGroup = function(
     name,
     group,
     options,
@@ -433,7 +430,7 @@ GroupServiceApi.prototype.createGroup = function createGroup(
  *     // doThingsWith(response)
  * });
  */
-GroupServiceApi.prototype.updateGroup = function updateGroup(
+GroupServiceApi.prototype.updateGroup = function(
     group,
     options,
     callback) {
@@ -477,7 +474,7 @@ GroupServiceApi.prototype.updateGroup = function updateGroup(
  *     }
  * });
  */
-GroupServiceApi.prototype.deleteGroup = function deleteGroup(
+GroupServiceApi.prototype.deleteGroup = function(
     name,
     options,
     callback) {
@@ -562,7 +559,7 @@ GroupServiceApi.prototype.deleteGroup = function deleteGroup(
  * }
  * api.listGroupMembers(formattedName, {flattenPages: false}, callback);
  */
-GroupServiceApi.prototype.listGroupMembers = function listGroupMembers(
+GroupServiceApi.prototype.listGroupMembers = function(
     name,
     options,
     callback) {

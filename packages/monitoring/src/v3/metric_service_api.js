@@ -128,8 +128,8 @@ function MetricServiceApi(gaxGrpc, grpcClients, opts) {
 var PROJECT_PATH_TEMPLATE = new gax.PathTemplate(
     'projects/{project}');
 
-var METRIC_DESCRIPTOR_PATH_PATH_TEMPLATE = new gax.PathTemplate(
-    'projects/{project}/metricDescriptors/{metric_descriptor_path=**}');
+var METRIC_DESCRIPTOR_PATH_TEMPLATE = new gax.PathTemplate(
+    'projects/{project}/metricDescriptors/{metric_descriptor=**}');
 
 var MONITORED_RESOURCE_DESCRIPTOR_PATH_TEMPLATE = new gax.PathTemplate(
     'projects/{project}/monitoredResourceDescriptors/{monitored_resource_descriptor}');
@@ -139,7 +139,7 @@ var MONITORED_RESOURCE_DESCRIPTOR_PATH_TEMPLATE = new gax.PathTemplate(
  * @param {String} project
  * @returns {String}
  */
-MetricServiceApi.prototype.projectPath = function projectPath(project) {
+MetricServiceApi.prototype.projectPath = function(project) {
   return PROJECT_PATH_TEMPLATE.render({
     project: project
   });
@@ -151,44 +151,41 @@ MetricServiceApi.prototype.projectPath = function projectPath(project) {
  *   A fully-qualified path representing a project resources.
  * @returns {String} - A string representing the project.
  */
-MetricServiceApi.prototype.matchProjectFromProjectName =
-    function matchProjectFromProjectName(projectName) {
+MetricServiceApi.prototype.matchProjectFromProjectName = function(projectName) {
   return PROJECT_PATH_TEMPLATE.match(projectName).project;
 };
 
 /**
- * Returns a fully-qualified metric_descriptor_path resource name string.
+ * Returns a fully-qualified metric_descriptor resource name string.
  * @param {String} project
- * @param {String} metric_descriptor_path
+ * @param {String} metric_descriptor
  * @returns {String}
  */
-MetricServiceApi.prototype.metricDescriptorPathPath = function metricDescriptorPathPath(project, metric_descriptor_path) {
-  return METRIC_DESCRIPTOR_PATH_PATH_TEMPLATE.render({
+MetricServiceApi.prototype.metricDescriptorPath = function(project, metricDescriptor) {
+  return METRIC_DESCRIPTOR_PATH_TEMPLATE.render({
     project: project,
-    metric_descriptor_path: metric_descriptor_path
+    metric_descriptor: metricDescriptor
   });
 };
 
 /**
- * Parses the metricDescriptorPathName from a metric_descriptor_path resource.
- * @param {String} metricDescriptorPathName
- *   A fully-qualified path representing a metric_descriptor_path resources.
+ * Parses the metricDescriptorName from a metric_descriptor resource.
+ * @param {String} metricDescriptorName
+ *   A fully-qualified path representing a metric_descriptor resources.
  * @returns {String} - A string representing the project.
  */
-MetricServiceApi.prototype.matchProjectFromMetricDescriptorPathName =
-    function matchProjectFromMetricDescriptorPathName(metricDescriptorPathName) {
-  return METRIC_DESCRIPTOR_PATH_PATH_TEMPLATE.match(metricDescriptorPathName).project;
+MetricServiceApi.prototype.matchProjectFromMetricDescriptorName = function(metricDescriptorName) {
+  return METRIC_DESCRIPTOR_PATH_TEMPLATE.match(metricDescriptorName).project;
 };
 
 /**
- * Parses the metricDescriptorPathName from a metric_descriptor_path resource.
- * @param {String} metricDescriptorPathName
- *   A fully-qualified path representing a metric_descriptor_path resources.
- * @returns {String} - A string representing the metric_descriptor_path.
+ * Parses the metricDescriptorName from a metric_descriptor resource.
+ * @param {String} metricDescriptorName
+ *   A fully-qualified path representing a metric_descriptor resources.
+ * @returns {String} - A string representing the metric_descriptor.
  */
-MetricServiceApi.prototype.matchMetricDescriptorPathFromMetricDescriptorPathName =
-    function matchMetricDescriptorPathFromMetricDescriptorPathName(metricDescriptorPathName) {
-  return METRIC_DESCRIPTOR_PATH_PATH_TEMPLATE.match(metricDescriptorPathName).metric_descriptor_path;
+MetricServiceApi.prototype.matchMetricDescriptorFromMetricDescriptorName = function(metricDescriptorName) {
+  return METRIC_DESCRIPTOR_PATH_TEMPLATE.match(metricDescriptorName).metric_descriptor;
 };
 
 /**
@@ -197,10 +194,10 @@ MetricServiceApi.prototype.matchMetricDescriptorPathFromMetricDescriptorPathName
  * @param {String} monitored_resource_descriptor
  * @returns {String}
  */
-MetricServiceApi.prototype.monitoredResourceDescriptorPath = function monitoredResourceDescriptorPath(project, monitored_resource_descriptor) {
+MetricServiceApi.prototype.monitoredResourceDescriptorPath = function(project, monitoredResourceDescriptor) {
   return MONITORED_RESOURCE_DESCRIPTOR_PATH_TEMPLATE.render({
     project: project,
-    monitored_resource_descriptor: monitored_resource_descriptor
+    monitored_resource_descriptor: monitoredResourceDescriptor
   });
 };
 
@@ -210,8 +207,7 @@ MetricServiceApi.prototype.monitoredResourceDescriptorPath = function monitoredR
  *   A fully-qualified path representing a monitored_resource_descriptor resources.
  * @returns {String} - A string representing the project.
  */
-MetricServiceApi.prototype.matchProjectFromMonitoredResourceDescriptorName =
-    function matchProjectFromMonitoredResourceDescriptorName(monitoredResourceDescriptorName) {
+MetricServiceApi.prototype.matchProjectFromMonitoredResourceDescriptorName = function(monitoredResourceDescriptorName) {
   return MONITORED_RESOURCE_DESCRIPTOR_PATH_TEMPLATE.match(monitoredResourceDescriptorName).project;
 };
 
@@ -221,8 +217,7 @@ MetricServiceApi.prototype.matchProjectFromMonitoredResourceDescriptorName =
  *   A fully-qualified path representing a monitored_resource_descriptor resources.
  * @returns {String} - A string representing the monitored_resource_descriptor.
  */
-MetricServiceApi.prototype.matchMonitoredResourceDescriptorFromMonitoredResourceDescriptorName =
-    function matchMonitoredResourceDescriptorFromMonitoredResourceDescriptorName(monitoredResourceDescriptorName) {
+MetricServiceApi.prototype.matchMonitoredResourceDescriptorFromMonitoredResourceDescriptorName = function(monitoredResourceDescriptorName) {
   return MONITORED_RESOURCE_DESCRIPTOR_PATH_TEMPLATE.match(monitoredResourceDescriptorName).monitored_resource_descriptor;
 };
 
@@ -289,7 +284,7 @@ MetricServiceApi.prototype.matchMonitoredResourceDescriptorFromMonitoredResource
  * }
  * api.listMonitoredResourceDescriptors(formattedName, {flattenPages: false}, callback);
  */
-MetricServiceApi.prototype.listMonitoredResourceDescriptors = function listMonitoredResourceDescriptors(
+MetricServiceApi.prototype.listMonitoredResourceDescriptors = function(
     name,
     options,
     callback) {
@@ -342,7 +337,7 @@ MetricServiceApi.prototype.listMonitoredResourceDescriptors = function listMonit
  *     // doThingsWith(response)
  * });
  */
-MetricServiceApi.prototype.getMonitoredResourceDescriptor = function getMonitoredResourceDescriptor(
+MetricServiceApi.prototype.getMonitoredResourceDescriptor = function(
     name,
     options,
     callback) {
@@ -421,7 +416,7 @@ MetricServiceApi.prototype.getMonitoredResourceDescriptor = function getMonitore
  * }
  * api.listMetricDescriptors(formattedName, {flattenPages: false}, callback);
  */
-MetricServiceApi.prototype.listMetricDescriptors = function listMetricDescriptors(
+MetricServiceApi.prototype.listMetricDescriptors = function(
     name,
     options,
     callback) {
@@ -465,7 +460,7 @@ MetricServiceApi.prototype.listMetricDescriptors = function listMetricDescriptor
  * @example
  *
  * var api = monitoringV3.metricServiceApi();
- * var formattedName = api.metricDescriptorPathPath("[PROJECT]", "[METRIC_DESCRIPTOR_PATH]");
+ * var formattedName = api.metricDescriptorPath("[PROJECT]", "[METRIC_DESCRIPTOR]");
  * api.getMetricDescriptor(formattedName, function(err, response) {
  *     if (err) {
  *         console.error(err);
@@ -474,7 +469,7 @@ MetricServiceApi.prototype.listMetricDescriptors = function listMetricDescriptor
  *     // doThingsWith(response)
  * });
  */
-MetricServiceApi.prototype.getMetricDescriptor = function getMetricDescriptor(
+MetricServiceApi.prototype.getMetricDescriptor = function(
     name,
     options,
     callback) {
@@ -527,7 +522,7 @@ MetricServiceApi.prototype.getMetricDescriptor = function getMetricDescriptor(
  *     // doThingsWith(response)
  * });
  */
-MetricServiceApi.prototype.createMetricDescriptor = function createMetricDescriptor(
+MetricServiceApi.prototype.createMetricDescriptor = function(
     name,
     metricDescriptor,
     options,
@@ -566,14 +561,14 @@ MetricServiceApi.prototype.createMetricDescriptor = function createMetricDescrip
  * @example
  *
  * var api = monitoringV3.metricServiceApi();
- * var formattedName = api.metricDescriptorPathPath("[PROJECT]", "[METRIC_DESCRIPTOR_PATH]");
+ * var formattedName = api.metricDescriptorPath("[PROJECT]", "[METRIC_DESCRIPTOR]");
  * api.deleteMetricDescriptor(formattedName, function(err) {
  *     if (err) {
  *         console.error(err);
  *     }
  * });
  */
-MetricServiceApi.prototype.deleteMetricDescriptor = function deleteMetricDescriptor(
+MetricServiceApi.prototype.deleteMetricDescriptor = function(
     name,
     options,
     callback) {
@@ -674,7 +669,7 @@ MetricServiceApi.prototype.deleteMetricDescriptor = function deleteMetricDescrip
  * }
  * api.listTimeSeries(formattedName, filter, interval, view, {flattenPages: false}, callback);
  */
-MetricServiceApi.prototype.listTimeSeries = function listTimeSeries(
+MetricServiceApi.prototype.listTimeSeries = function(
     name,
     filter,
     interval,
@@ -742,7 +737,7 @@ MetricServiceApi.prototype.listTimeSeries = function listTimeSeries(
  *     }
  * });
  */
-MetricServiceApi.prototype.createTimeSeries = function createTimeSeries(
+MetricServiceApi.prototype.createTimeSeries = function(
     name,
     timeSeries,
     options,

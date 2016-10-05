@@ -31,5 +31,5 @@ function v3(options) {
   return result;
 }
 v3.SERVICE_ADDRESS = groupServiceApi.SERVICE_ADDRESS;
-v3.ALL_SCOPES = []; 
+v3.ALL_SCOPES = [];
 module.exports = v3;
