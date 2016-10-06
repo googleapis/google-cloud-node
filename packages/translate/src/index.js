@@ -53,6 +53,14 @@ var PKG = require('../package.json');
  *
  * @param {object} options - [Configuration object](#/docs).
  * @param {string} options.key - An API key.
+ *
+ * @example
+ * //-
+ * // <h3>Custom Translate API</h3>
+ * //
+ * // The environment variable, `GOOGLE_CLOUD_TRANSLATE_ENDPOINT`, is honored as
+ * // a custom backend which our library will send requests to.
+ * //-
  */
 function Translate(options) {
   if (!(this instanceof Translate)) {
