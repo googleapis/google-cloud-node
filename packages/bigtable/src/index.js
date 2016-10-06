@@ -504,7 +504,7 @@ Bigtable.prototype.getInstances = function(query, callback) {
  * @return {stream}
  *
  * @example
- * bigtable.getInstanceStream()
+ * bigtable.getInstancesStream()
  *   .on('error', console.error)
  *   .on('data', function(instance) {
  *     // `instance` is an Instance object.
@@ -517,12 +517,12 @@ Bigtable.prototype.getInstances = function(query, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * bigtable.getInstanceStream()
+ * bigtable.getInstancesStream()
  *   .on('data', function(instance) {
  *     this.end();
  *   });
  */
-Bigtable.prototype.getInstanceStream =
+Bigtable.prototype.getInstancesStream =
   common.paginator.streamify('getInstances');
 
 /**

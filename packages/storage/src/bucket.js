@@ -656,7 +656,7 @@ Bucket.prototype.getFiles = function(query, callback) {
  * @return {stream}
  *
  * @example
- * bucket.getFileStream()
+ * bucket.getFilesStream()
  *   .on('error', console.error)
  *   .on('data', function(file) {
  *     // file is a File object.
@@ -669,12 +669,12 @@ Bucket.prototype.getFiles = function(query, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * bucket.getFileStream()
+ * bucket.getFilesStream()
  *   .on('data', function(file) {
  *     this.end();
  *   });
  */
-Bucket.prototype.getFileStream = common.paginator.streamify('getFiles');
+Bucket.prototype.getFilesStream = common.paginator.streamify('getFiles');
 
 /**
  * Make the bucket listing private.

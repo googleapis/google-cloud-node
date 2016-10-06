@@ -759,7 +759,7 @@ Zone.prototype.getAutoscalers = function(options, callback) {
  * @return {stream}
  *
  * @example
- * zone.getAutoscalerStream()
+ * zone.getAutoscalersStream()
  *   .on('error', console.error)
  *   .on('data', function(autoscaler) {
  *     // `autoscaler` is an `Autoscaler` object.
@@ -772,12 +772,12 @@ Zone.prototype.getAutoscalers = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * zone.getAutoscalerStream()
+ * zone.getAutoscalersStream()
  *   .on('data', function(autoscaler) {
  *     this.end();
  *   });
  */
-Zone.prototype.getAutoscalerStream =
+Zone.prototype.getAutoscalersStream =
   common.paginator.streamify('getAutoscalers');
 
 /**
@@ -871,7 +871,7 @@ Zone.prototype.getDisks = function(options, callback) {
  * @return {stream}
  *
  * @example
- * zone.getDiskStream()
+ * zone.getDisksStream()
  *   .on('error', console.error)
  *   .on('data', function(disk) {
  *     // `disk` is a `Disk` object.
@@ -884,12 +884,12 @@ Zone.prototype.getDisks = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * zone.getDiskStream()
+ * zone.getDisksStream()
  *   .on('data', function(disk) {
  *     this.end();
  *   });
  */
-Zone.prototype.getDiskStream = common.paginator.streamify('getDisks');
+Zone.prototype.getDisksStream = common.paginator.streamify('getDisks');
 
 /**
  * Get a list of instance groups for this zone.
@@ -984,7 +984,7 @@ Zone.prototype.getInstanceGroups = function(options, callback) {
  * @return {stream}
  *
  * @example
- * zone.getInstanceGroupStream()
+ * zone.getInstanceGroupsStream()
  *   .on('error', console.error)
  *   .on('data', function(instanceGroup) {
  *     // `instanceGroup` is an `InstanceGroup` object.
@@ -997,12 +997,12 @@ Zone.prototype.getInstanceGroups = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * zone.getInstanceGroupStream()
+ * zone.getInstanceGroupsStream()
  *   .on('data', function(instanceGroup) {
  *     this.end();
  *   });
  */
-Zone.prototype.getInstanceGroupStream =
+Zone.prototype.getInstanceGroupsStream =
   common.paginator.streamify('getInstanceGroups');
 
 /**
@@ -1068,7 +1068,7 @@ Zone.prototype.getMachineTypes = function(options, callback) {
  * @return {stream}
  *
  * @example
- * zone.getMachineTypeStream()
+ * zone.getMachineTypesStream()
  *   .on('error', console.error)
  *   .on('data', function(machineType) {
  *     // `machineType` is a `MachineType` object.
@@ -1081,12 +1081,12 @@ Zone.prototype.getMachineTypes = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * zone.getMachineTypeStream()
+ * zone.getMachineTypesStream()
  *   .on('data', function(machineType) {
  *     this.end();
  *   });
  */
-Zone.prototype.getMachineTypeStream =
+Zone.prototype.getMachineTypesStream =
   common.paginator.streamify('getMachineTypes');
 
 /**
@@ -1181,7 +1181,7 @@ Zone.prototype.getOperations = function(options, callback) {
  * @return {stream}
  *
  * @example
- * zone.getOperationStream()
+ * zone.getOperationsStream()
  *   .on('error', console.error)
  *   .on('data', function(operation) {
  *     // `operation` is an `Operation` object.
@@ -1194,12 +1194,12 @@ Zone.prototype.getOperations = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * zone.getOperationStream()
+ * zone.getOperationsStream()
  *   .on('data', function(operation) {
  *     this.end();
  *   });
  */
-Zone.prototype.getOperationStream = common.paginator.streamify('getOperations');
+Zone.prototype.getOperationsStream = common.paginator.streamify('getOperations');
 
 /**
  * Get a list of VM instances in this zone.
@@ -1289,7 +1289,7 @@ Zone.prototype.getVMs = function(options, callback) {
  * @return {stream}
  *
  * @example
- * zone.getVMStream()
+ * zone.getVMsStream()
  *   .on('error', console.error)
  *   .on('data', function(vm) {
  *     // `vm` is a `VM` object.
@@ -1302,12 +1302,12 @@ Zone.prototype.getVMs = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * zone.getVMStream()
+ * zone.getVMsStream()
  *   .on('data', function(vm) {
  *     this.end();
  *   });
  */
-Zone.prototype.getVMStream = common.paginator.streamify('getVMs');
+Zone.prototype.getVMsStream = common.paginator.streamify('getVMs');
 
 /**
  * Get a reference to a Google Compute Engine instance group.

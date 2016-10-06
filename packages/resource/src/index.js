@@ -215,7 +215,7 @@ Resource.prototype.getProjects = function(options, callback) {
  * @return {stream}
  *
  * @example
- * resource.getProjectStream()
+ * resource.getProjectsStream()
  *   .on('error', console.error)
  *   .on('data', function(project) {
  *     // `project` is a `Project` object.
@@ -228,12 +228,12 @@ Resource.prototype.getProjects = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * resource.getProjectStream()
+ * resource.getProjectsStream()
  *   .on('data', function(project) {
  *     this.end();
  *   });
  */
-Resource.prototype.getProjectStream = common.paginator.streamify('getProjects');
+Resource.prototype.getProjectsStream = common.paginator.streamify('getProjects');
 
 /**
  * Create a Project object. See {module:resoucemanager/createProject} to create

@@ -368,7 +368,7 @@ Storage.prototype.getBuckets = function(query, callback) {
  * @return {stream}
  *
  * @example
- * gcs.getBucketStream()
+ * gcs.getBucketsStream()
  *   .on('error', console.error)
  *   .on('data', function(bucket) {
  *     // bucket is a Bucket object.
@@ -381,12 +381,12 @@ Storage.prototype.getBuckets = function(query, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * gcs.getBucketStream()
+ * gcs.getBucketsStream()
  *   .on('data', function(bucket) {
  *     this.end();
  *   });
  */
-Storage.prototype.getBucketStream = common.paginator.streamify('getBuckets');
+Storage.prototype.getBucketsStream = common.paginator.streamify('getBuckets');
 
 /*! Developer Documentation
  *

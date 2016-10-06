@@ -83,7 +83,7 @@ describe('pubsub', function() {
     it('should list topics in a stream', function(done) {
       var topicsEmitted = [];
 
-      pubsub.getTopicStream()
+      pubsub.getTopicsStream()
         .on('error', done)
         .on('data', function(topic) {
           topicsEmitted.push(topic);
@@ -203,7 +203,7 @@ describe('pubsub', function() {
     it('should list all topic subscriptions as a stream', function(done) {
       var subscriptionsEmitted = [];
 
-      topic.getSubscriptionStream()
+      topic.getSubscriptionsStream()
         .on('error', done)
         .on('data', function(subscription) {
           subscriptionsEmitted.push(subscription);
@@ -225,7 +225,7 @@ describe('pubsub', function() {
     it('should list all subscriptions as a stream', function(done) {
       var subscriptionEmitted = false;
 
-      pubsub.getSubscriptionStream()
+      pubsub.getSubscriptionsStream()
         .on('error', done)
         .on('data', function(subscription) {
           subscriptionEmitted = subscription instanceof Subscription;

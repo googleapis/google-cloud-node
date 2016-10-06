@@ -247,7 +247,7 @@ PubSub.prototype.getSubscriptions = function(options, callback) {
  * @return {stream}
  *
  * @example
- * pubsub.getSubscriptionStream()
+ * pubsub.getSubscriptionsStream()
  *   .on('error', console.error)
  *   .on('data', function(subscription) {
  *     // subscription is a Subscription object.
@@ -260,12 +260,12 @@ PubSub.prototype.getSubscriptions = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * pubsub.getSubscriptionStream()
+ * pubsub.getSubscriptionsStream()
  *   .on('data', function(topic) {
  *     this.end();
  *   });
  */
-PubSub.prototype.getSubscriptionStream =
+PubSub.prototype.getSubscriptionsStream =
   common.paginator.streamify('getSubscriptions');
 
 /**
@@ -364,7 +364,7 @@ PubSub.prototype.getTopics = function(query, callback) {
  * @return {stream}
  *
  * @example
- * pubsub.getTopicStream()
+ * pubsub.getTopicsStream()
  *   .on('error', console.error)
  *   .on('data', function(topic) {
  *     // topic is a Topic object.
@@ -377,12 +377,12 @@ PubSub.prototype.getTopics = function(query, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * pubsub.getTopicStream()
+ * pubsub.getTopicsStream()
  *   .on('data', function(topic) {
  *     this.end();
  *   });
  */
-PubSub.prototype.getTopicStream = common.paginator.streamify('getTopics');
+PubSub.prototype.getTopicsStream = common.paginator.streamify('getTopics');
 
 /**
  * Create a subscription to a topic. You may optionally provide an object to

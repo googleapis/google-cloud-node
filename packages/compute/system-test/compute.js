@@ -76,7 +76,7 @@ describe('Compute', function() {
     it('should get a list of addresses in stream mode', function(done) {
       var resultsMatched = 0;
 
-      compute.getAddressStream()
+      compute.getAddressesStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -173,7 +173,7 @@ describe('Compute', function() {
     it('should get a list of autoscalers in stream mode', function(done) {
       var resultsMatched = 0;
 
-      compute.getAutoscalerStream()
+      compute.getAutoscalersStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -226,7 +226,7 @@ describe('Compute', function() {
     it('should get a list of disks in stream mode', function(done) {
       var resultsMatched = 0;
 
-      compute.getDiskStream()
+      compute.getDisksStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -305,7 +305,7 @@ describe('Compute', function() {
     it('should get a list of firewalls in stream mode', function(done) {
       var resultsMatched = 0;
 
-      compute.getFirewallStream()
+      compute.getFirewallsStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -376,7 +376,7 @@ describe('Compute', function() {
     it('should get a list of health checks in stream mode', function(done) {
       var resultsMatched = 0;
 
-      compute.getHealthCheckStream()
+      compute.getHealthChecksStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -449,7 +449,7 @@ describe('Compute', function() {
     it('should get a list of health checks in stream mode', function(done) {
       var resultsMatched = 0;
 
-      compute.getHealthCheckStream({ https: true })
+      compute.getHealthChecksStream({ https: true })
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -502,7 +502,7 @@ describe('Compute', function() {
     it('should list project instance groups in stream mode', function(done) {
       var resultsMatched = 0;
 
-      compute.getInstanceGroupStream()
+      compute.getInstanceGroupsStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -524,7 +524,7 @@ describe('Compute', function() {
     it('should list zonal instance groups in stream mode', function(done) {
       var resultsMatched = 0;
 
-      zone.getInstanceGroupStream()
+      zone.getInstanceGroupsStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -575,7 +575,7 @@ describe('Compute', function() {
       });
 
       it('should list the VMs in stream mode', function(done) {
-        instanceGroup.getVMStream()
+        instanceGroup.getVMsStream()
           .on('error', done)
           .pipe(concat(function(vms) {
             var vmNamesInGroup = vms.map(prop('name'));
@@ -603,7 +603,7 @@ describe('Compute', function() {
     it('should get a list of machine types in stream mode', function(done) {
       var resultsMatched = 0;
 
-      compute.getMachineTypeStream()
+      compute.getMachineTypesStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -615,7 +615,7 @@ describe('Compute', function() {
     });
 
     it('should get the metadata', function(done) {
-      compute.getMachineTypeStream()
+      compute.getMachineTypesStream()
         .on('error', done)
         .once('data', function(machineType) {
           machineType.getMetadata(function(err, metadata) {
@@ -639,7 +639,7 @@ describe('Compute', function() {
     it('should get a list of machine types in stream mode', function(done) {
       var resultsMatched = 0;
 
-      zone.getMachineTypeStream()
+      zone.getMachineTypesStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -651,7 +651,7 @@ describe('Compute', function() {
     });
 
     it('should get the metadata', function(done) {
-      zone.getMachineTypeStream()
+      zone.getMachineTypesStream()
         .on('error', done)
         .once('data', function(machineType) {
           machineType.getMetadata(function(err, metadata) {
@@ -692,7 +692,7 @@ describe('Compute', function() {
     it('should get a list of networks in stream mode', function(done) {
       var resultsMatched = 0;
 
-      compute.getNetworkStream()
+      compute.getNetworksStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -716,7 +716,7 @@ describe('Compute', function() {
     it('should get a list of operations in stream mode', function(done) {
       var resultsMatched = 0;
 
-      compute.getOperationStream()
+      compute.getOperationsStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -740,7 +740,7 @@ describe('Compute', function() {
     it('should get a list of regions in stream mode', function(done) {
       var resultsMatched = 0;
 
-      compute.getRegionStream()
+      compute.getRegionsStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -762,7 +762,7 @@ describe('Compute', function() {
     it('should get a list of addresses in stream mode', function(done) {
       var resultsMatched = 0;
 
-      region.getOperationStream()
+      region.getOperationsStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -784,7 +784,7 @@ describe('Compute', function() {
     it('should get a list of operations in stream mode', function(done) {
       var resultsMatched = 0;
 
-      region.getOperationStream()
+      region.getOperationsStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -961,7 +961,7 @@ describe('Compute', function() {
     it('should get a list of services in stream mode', function(done) {
       var resultsMatched = 0;
 
-      compute.getServiceStream()
+      compute.getServicesStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -1020,7 +1020,7 @@ describe('Compute', function() {
     it('should get a list of snapshots in stream mode', function(done) {
       var resultsMatched = 0;
 
-      compute.getSnapshotStream()
+      compute.getSnapshotsStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -1074,7 +1074,7 @@ describe('Compute', function() {
     it('should get a list of subnetworks in stream mode', function(done) {
       var resultsMatched = 0;
 
-      compute.getSubnetworkStream()
+      compute.getSubnetworksStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -1096,7 +1096,7 @@ describe('Compute', function() {
     it('should get a list of regional subnetworks in stream', function(done) {
       var resultsMatched = 0;
 
-      region.getSubnetworkStream()
+      region.getSubnetworksStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -1137,7 +1137,7 @@ describe('Compute', function() {
     it('should get a list of vms in stream mode', function(done) {
       var resultsMatched = 0;
 
-      compute.getVMStream()
+      compute.getVMsStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -1277,7 +1277,7 @@ describe('Compute', function() {
     it('should get a list of zones in stream mode', function(done) {
       var resultsMatched = 0;
 
-      compute.getZoneStream()
+      compute.getZonesStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -1299,7 +1299,7 @@ describe('Compute', function() {
     it('should get a list of disks in stream mode', function(done) {
       var resultsMatched = 0;
 
-      zone.getDiskStream()
+      zone.getDisksStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;
@@ -1321,7 +1321,7 @@ describe('Compute', function() {
     it('should get a list of operations in stream mode', function(done) {
       var resultsMatched = 0;
 
-      zone.getOperationStream()
+      zone.getOperationsStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;

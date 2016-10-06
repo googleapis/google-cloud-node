@@ -426,7 +426,7 @@ Region.prototype.getAddresses = function(options, callback) {
  * @return {stream}
  *
  * @example
- * region.getAddressStream()
+ * region.getAddressesStream()
  *   .on('error', console.error)
  *   .on('data', function(address) {
  *     // `address` is an `Address` object.
@@ -439,12 +439,12 @@ Region.prototype.getAddresses = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * region.getAddressStream()
+ * region.getAddressesStream()
  *   .on('data', function(address) {
  *     this.end();
  *   });
  */
-Region.prototype.getAddressStream = common.paginator.streamify('getAddresses');
+Region.prototype.getAddressesStream = common.paginator.streamify('getAddresses');
 
 /**
  * Get a list of operations for this region.
@@ -538,7 +538,7 @@ Region.prototype.getOperations = function(options, callback) {
  * @return {stream}
  *
  * @example
- * region.getOperationStream()
+ * region.getOperationsStream()
  *   .on('error', console.error)
  *   .on('data', function(operation) {
  *     // `operation` is an `Operation` object.
@@ -551,12 +551,12 @@ Region.prototype.getOperations = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * region.getOperationStream()
+ * region.getOperationsStream()
  *   .on('data', function(operation) {
  *     this.end();
  *   });
  */
-Region.prototype.getOperationStream =
+Region.prototype.getOperationsStream =
   common.paginator.streamify('getOperations');
 
 /**
@@ -646,11 +646,11 @@ Region.prototype.getRules = function(options, callback) {
  * object stream.
  *
  * @param {object=} options - Configuration object. See
- *     {module:compute/region#getRuleStream} for a complete list of options.
+ *     {module:compute/region#getRulesStream} for a complete list of options.
  * @return {stream}
  *
  * @example
- * region.getRuleStream()
+ * region.getRulesStream()
  *   .on('error', console.error)
  *   .on('data', function(rule) {
  *     // `rule` is a `Rule` object.
@@ -663,12 +663,12 @@ Region.prototype.getRules = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * region.getRuleStream()
+ * region.getRulesStream()
  *   .on('data', function(rule) {
  *     this.end();
  *   });
  */
-Region.prototype.getRuleStream = common.paginator.streamify('getRules');
+Region.prototype.getRulesStream = common.paginator.streamify('getRules');
 
 /**
  * Get a list of subnetworks in this region.
@@ -762,7 +762,7 @@ Region.prototype.getSubnetworks = function(options, callback) {
  * @return {stream}
  *
  * @example
- * region.getSubnetworkStream()
+ * region.getSubnetworksStream()
  *   .on('error', console.error)
  *   .on('data', function(subnetwork) {
  *     // `subnetwork` is a `Subnetwork` object.
@@ -775,12 +775,12 @@ Region.prototype.getSubnetworks = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * region.getSubnetworkStream()
+ * region.getSubnetworksStream()
  *   .on('data', function(subnetwork) {
  *     this.end();
  *   });
  */
-Region.prototype.getSubnetworkStream =
+Region.prototype.getSubnetworksStream =
   common.paginator.streamify('getSubnetworks');
 
 /**

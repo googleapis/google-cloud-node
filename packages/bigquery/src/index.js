@@ -220,7 +220,7 @@ BigQuery.prototype.getDatasets = function(query, callback) {
  * @return {stream}
  *
  * @example
- * bigquery.getDatasetStream()
+ * bigquery.getDatasetsStream()
  *   .on('error', console.error)
  *   .on('data', function(dataset) {
  *     // dataset is a Dataset object.
@@ -233,12 +233,12 @@ BigQuery.prototype.getDatasets = function(query, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * bigquery.getDatasetStream()
+ * bigquery.getDatasetsStream()
  *   .on('data', function(dataset) {
  *     this.end();
  *   });
  */
-BigQuery.prototype.getDatasetStream = common.paginator.streamify('getDatasets');
+BigQuery.prototype.getDatasetsStream = common.paginator.streamify('getDatasets');
 
 /**
  * Get all of the jobs from your project.
@@ -333,7 +333,7 @@ BigQuery.prototype.getJobs = function(options, callback) {
  * @return {stream}
  *
  * @example
- * bigquery.getJobStream()
+ * bigquery.getJobsStream()
  *   .on('error', console.error)
  *   .on('data', function(job) {
  *     // job is a Job object.
@@ -346,12 +346,12 @@ BigQuery.prototype.getJobs = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * bigquery.getJobStream()
+ * bigquery.getJobsStream()
  *   .on('data', function(job) {
  *     this.end();
  *   });
  */
-BigQuery.prototype.getJobStream = common.paginator.streamify('getJobs');
+BigQuery.prototype.getJobsStream = common.paginator.streamify('getJobs');
 
 /**
  * Create a reference to an existing job.

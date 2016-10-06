@@ -262,7 +262,7 @@ Prediction.prototype.getModels = function(query, callback) {
  * @return {stream}
  *
  * @example
- * prediction.getModelStream()
+ * prediction.getModelsStream()
  *   .on('error', console.error)
  *   .on('data', function(model) {
  *     // model is a Model object.
@@ -275,12 +275,12 @@ Prediction.prototype.getModels = function(query, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * prediction.getModelStream()
+ * prediction.getModelsStream()
  *   .on('data', function(model) {
  *     this.end();
  *   });
  */
-Prediction.prototype.getModelStream = common.paginator.streamify('getModels');
+Prediction.prototype.getModelsStream = common.paginator.streamify('getModels');
 
 /**
  * Create a model object representing a trained model.

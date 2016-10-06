@@ -100,7 +100,7 @@ describe('BigQuery', function() {
   it('should list datasets as a stream', function(done) {
     var datasetEmitted = false;
 
-    bigquery.getDatasetStream()
+    bigquery.getDatasetsStream()
       .on('error', done)
       .on('data', function(dataset) {
         datasetEmitted = dataset instanceof Dataset;
@@ -131,7 +131,7 @@ describe('BigQuery', function() {
 
       var rowsEmitted = [];
 
-      job.getQueryResultStream()
+      job.getQueryResultsStream()
         .on('error', done)
         .on('data', function(row) {
           rowsEmitted.push(row);
@@ -190,7 +190,7 @@ describe('BigQuery', function() {
   it('should list jobs as a stream', function(done) {
     var jobEmitted = false;
 
-    bigquery.getJobStream()
+    bigquery.getJobsStream()
       .on('error', done)
       .on('data', function(job) {
         jobEmitted = job instanceof Job;
@@ -245,7 +245,7 @@ describe('BigQuery', function() {
     it('should get tables as a stream', function(done) {
       var tableEmitted = false;
 
-      dataset.getTableStream()
+      dataset.getTablesStream()
         .on('error', done)
         .on('data', function(table) {
           tableEmitted = table instanceof Table;

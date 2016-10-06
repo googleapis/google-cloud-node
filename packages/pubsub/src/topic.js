@@ -263,7 +263,7 @@ Topic.prototype.getSubscriptions = function(options, callback) {
  * @return {stream}
  *
  * @example
- * topic.getSubscriptionStream()
+ * topic.getSubscriptionsStream()
  *   .on('error', console.error)
  *   .on('data', function(subscription) {
  *     // subscription is a Subscription object.
@@ -276,16 +276,16 @@ Topic.prototype.getSubscriptions = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * topic.getSubscriptionStream()
+ * topic.getSubscriptionsStream()
  *   .on('data', function(subscription) {
  *     this.end();
  *   });
  */
-Topic.prototype.getSubscriptionStream = function(options) {
+Topic.prototype.getSubscriptionsStream = function(options) {
   options = options || {};
   options.topic = this;
 
-  return this.pubsub.getSubscriptionStream(options);
+  return this.pubsub.getSubscriptionsStream(options);
 };
 
 /**

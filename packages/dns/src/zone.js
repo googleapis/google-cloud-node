@@ -515,7 +515,7 @@ Zone.prototype.getChanges = function(query, callback) {
  * @return {stream}
  *
  * @example
- * zone.getChangeStream()
+ * zone.getChangesStream()
  *   .on('error', console.error)
  *   .on('data', function(change) {
  *     // change is a Change object.
@@ -528,12 +528,12 @@ Zone.prototype.getChanges = function(query, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * zone.getChangeStream()
+ * zone.getChangesStream()
  *   .on('data', function(change) {
  *     this.end();
  *   });
  */
-Zone.prototype.getChangeStream = common.paginator.streamify('getChanges');
+Zone.prototype.getChangesStream = common.paginator.streamify('getChanges');
 
 /**
  * Get the list of records for this zone.
@@ -663,7 +663,7 @@ Zone.prototype.getRecords = function(query, callback) {
  * @return {stream}
  *
  * @example
- * zone.getRecordStream()
+ * zone.getRecordsStream()
  *   .on('error', console.error)
  *   .on('data', function(record) {
  *     // record is a Record object.
@@ -676,12 +676,12 @@ Zone.prototype.getRecords = function(query, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * zone.getRecordStream()
+ * zone.getRecordsStream()
  *   .on('data', function(change) {
  *     this.end();
  *   });
  */
-Zone.prototype.getRecordStream = common.paginator.streamify('getRecords');
+Zone.prototype.getRecordsStream = common.paginator.streamify('getRecords');
 
 /**
  * Copy the records from a zone file into this zone.

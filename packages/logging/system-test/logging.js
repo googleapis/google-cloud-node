@@ -212,7 +212,7 @@ describe('Logging', function() {
       });
 
       it('should list sinks as a stream', function(done) {
-        logging.getSinkStream({ pageSize: 1 })
+        logging.getSinksStream({ pageSize: 1 })
           .on('error', done)
           .once('data', function() {
             this.end();
@@ -221,7 +221,7 @@ describe('Logging', function() {
       });
 
       it('should get metadata', function(done) {
-        logging.getSinkStream({ pageSize: 1 })
+        logging.getSinksStream({ pageSize: 1 })
           .on('error', done)
           .once('data', function(sink) {
             sink.getMetadata(function(err, metadata) {
@@ -278,7 +278,7 @@ describe('Logging', function() {
     });
 
     it('should list log entries as a stream', function(done) {
-      logging.getEntryStream({ pageSize: 1 })
+      logging.getEntriesStream({ pageSize: 1 })
         .on('error', done)
         .once('data', function() {
           this.end();
@@ -300,7 +300,7 @@ describe('Logging', function() {
       });
 
       it('should list log entries as a stream', function(done) {
-        log.getEntryStream({ pageSize: 1 })
+        log.getEntriesStream({ pageSize: 1 })
           .on('error', done)
           .once('data', function() {
             this.end();

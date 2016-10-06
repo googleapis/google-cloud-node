@@ -261,14 +261,14 @@ Job.prototype.getQueryResults = function(options, callback) {
  * var through2 = require('through2');
  * var fs = require('fs');
  *
- * job.getQueryResultStream()
+ * job.getQueryResultsStream()
  *   .pipe(through2.obj(function (row, enc, next) {
  *     this.push(JSON.stringify(row) + '\n');
  *     next();
  *   }))
  *   .pipe(fs.createWriteStream('./test/testdata/testfile.json'));
  */
-Job.prototype.getQueryResultStream = function(options) {
+Job.prototype.getQueryResultsStream = function(options) {
   options = options || {};
   options.job = this;
 

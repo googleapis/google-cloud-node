@@ -655,7 +655,7 @@ Compute.prototype.getAddresses = function(options, callback) {
  * @return {stream}
  *
  * @example
- * gce.getAddressStream()
+ * gce.getAddressesStream()
  *   .on('error', console.error)
  *   .on('data', function(address) {
  *     // `address` is an `Address` object.
@@ -668,12 +668,12 @@ Compute.prototype.getAddresses = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * gce.getAddressStream()
+ * gce.getAddressesStream()
  *   .on('data', function(address) {
  *     this.end();
  *   });
  */
-Compute.prototype.getAddressStream = common.paginator.streamify('getAddresses');
+Compute.prototype.getAddressesStream = common.paginator.streamify('getAddresses');
 
 /**
  * Get a list of autoscalers. For a detailed description of this method's
@@ -782,7 +782,7 @@ Compute.prototype.getAutoscalers = function(options, callback) {
  * @return {stream}
  *
  * @example
- * gce.getAutoscalerStream()
+ * gce.getAutoscalersStream()
  *   .on('error', console.error)
  *   .on('data', function(autoscaler) {
  *     // `autoscaler` is an `Autoscaler` object.
@@ -795,12 +795,12 @@ Compute.prototype.getAutoscalers = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * gce.getAutoscalerStream()
+ * gce.getAutoscalersStream()
  *   .on('data', function(address) {
  *     this.end();
  *   });
  */
-Compute.prototype.getAutoscalerStream =
+Compute.prototype.getAutoscalersStream =
   common.paginator.streamify('getAutoscalers');
 
 /**
@@ -903,7 +903,7 @@ Compute.prototype.getDisks = function(options, callback) {
  * @return {stream}
  *
  * @example
- * gce.getDiskStream()
+ * gce.getDisksStream()
  *   .on('error', console.error)
  *   .on('data', function(disk) {
  *     // `disk` is a `Disk` object.
@@ -916,13 +916,13 @@ Compute.prototype.getDisks = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * gce.getDiskStream()
+ * gce.getDisksStream()
  *   .on('data', function(disk) {
  *     this.end();
  *   });
  */
 
-Compute.prototype.getDiskStream = common.paginator.streamify('getDisks');
+Compute.prototype.getDisksStream = common.paginator.streamify('getDisks');
 
 /**
  * Get a list of instance groups.
@@ -1026,7 +1026,7 @@ Compute.prototype.getInstanceGroups = function(options, callback) {
  * @return {stream}
  *
  * @example
- * gce.getInstanceGroupStream()
+ * gce.getInstanceGroupsStream()
  *   .on('error', console.error)
  *   .on('data', function(instanceGroup) {
  *     // `instanceGroup` is an `InstanceGroup` object.
@@ -1039,13 +1039,13 @@ Compute.prototype.getInstanceGroups = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * gce.getInstanceGroupStream()
+ * gce.getInstanceGroupsStream()
  *   .on('data', function(instanceGroup) {
  *     this.end();
  *   });
  */
 
-Compute.prototype.getInstanceGroupStream =
+Compute.prototype.getInstanceGroupsStream =
   common.paginator.streamify('getInstanceGroups');
 
 /**
@@ -1139,7 +1139,7 @@ Compute.prototype.getFirewalls = function(options, callback) {
  * @return {stream}
  *
  * @example
- * gce.getFirewallStream()
+ * gce.getFirewallsStream()
  *   .on('error', console.error)
  *   .on('data', function(firewall) {
  *     // `firewall` is a `Firewall` object.
@@ -1152,13 +1152,13 @@ Compute.prototype.getFirewalls = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * gce.getFirewallStream()
+ * gce.getFirewallsStream()
  *   .on('data', function(firewall) {
  *     this.end();
  *   });
  */
 
-Compute.prototype.getFirewallStream =
+Compute.prototype.getFirewallsStream =
   common.paginator.streamify('getFirewalls');
 
 /**
@@ -1261,7 +1261,7 @@ Compute.prototype.getHealthChecks = function(options, callback) {
  * @return {stream}
  *
  * @example
- * gce.getHealthCheckStream()
+ * gce.getHealthChecksStream()
  *   .on('error', console.error)
  *   .on('data', function(healthCheck) {
  *     // `healthCheck` is a `HealthCheck` object.
@@ -1274,13 +1274,13 @@ Compute.prototype.getHealthChecks = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * gce.getHealthCheckStream()
+ * gce.getHealthChecksStream()
  *   .on('data', function(healthCheck) {
  *     this.end();
  *   });
  */
 
-Compute.prototype.getHealthCheckStream =
+Compute.prototype.getHealthChecksStream =
   common.paginator.streamify('getHealthChecks');
 
 /**
@@ -1386,7 +1386,7 @@ Compute.prototype.getMachineTypes = function(options, callback) {
  * @return {stream}
  *
  * @example
- * gce.getMachineTypeStream()
+ * gce.getMachineTypesStream()
  *   .on('error', console.error)
  *   .on('data', function(machineType) {
  *     // `machineType` is a `MachineType` object.
@@ -1399,12 +1399,12 @@ Compute.prototype.getMachineTypes = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * gce.getMachineTypeStream()
+ * gce.getMachineTypesStream()
  *   .on('data', function(machineType) {
  *     this.end();
  *   });
  */
-Compute.prototype.getMachineTypeStream =
+Compute.prototype.getMachineTypesStream =
   common.paginator.streamify('getMachineTypes');
 
 /**
@@ -1498,7 +1498,7 @@ Compute.prototype.getNetworks = function(options, callback) {
  * @return {stream}
  *
  * @example
- * gce.getNetworkStream()
+ * gce.getNetworksStream()
  *   .on('error', console.error)
  *   .on('data', function(network) {
  *     // `network` is a `Network` object.
@@ -1511,12 +1511,12 @@ Compute.prototype.getNetworks = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * gce.getNetworkStream()
+ * gce.getNetworksStream()
  *   .on('data', function(network) {
  *     this.end();
  *   });
  */
-Compute.prototype.getNetworkStream = common.paginator.streamify('getNetworks');
+Compute.prototype.getNetworksStream = common.paginator.streamify('getNetworks');
 
 /**
  * Get a list of global operations.
@@ -1610,7 +1610,7 @@ Compute.prototype.getOperations = function(options, callback) {
  * @return {stream}
  *
  * @example
- * gce.getOperationStream()
+ * gce.getOperationsStream()
  *   .on('error', console.error)
  *   .on('data', function(operation) {
  *     // `operation` is a `Operation` object.
@@ -1623,12 +1623,12 @@ Compute.prototype.getOperations = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * gce.getOperationStream()
+ * gce.getOperationsStream()
  *   .on('data', function(operation) {
  *     this.end();
  *   });
  */
-Compute.prototype.getOperationStream =
+Compute.prototype.getOperationsStream =
   common.paginator.streamify('getOperations');
 
 /**
@@ -1721,7 +1721,7 @@ Compute.prototype.getRegions = function(options, callback) {
  * @return {stream}
  *
  * @example
- * gce.getRegionStream()
+ * gce.getRegionsStream()
  *   .on('error', console.error)
  *   .on('data', function(region) {
  *     // `region` is a `Region` object.
@@ -1734,12 +1734,12 @@ Compute.prototype.getRegions = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * gce.getRegionStream()
+ * gce.getRegionsStream()
  *   .on('data', function(region) {
  *     this.end();
  *   });
  */
-Compute.prototype.getRegionStream = common.paginator.streamify('getRegions');
+Compute.prototype.getRegionsStream = common.paginator.streamify('getRegions');
 
 /**
  * Get a list of forwarding rules.
@@ -1831,7 +1831,7 @@ Compute.prototype.getRules = function(options, callback) {
  * @return {stream}
  *
  * @example
- * gce.getRuleStream()
+ * gce.getRulesStream()
  *   .on('error', console.error)
  *   .on('data', function(rule) {
  *     // `rule` is a `Rule` object.
@@ -1844,12 +1844,12 @@ Compute.prototype.getRules = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * gce.getRuleStream()
+ * gce.getRulesStream()
  *   .on('data', function(rule) {
  *     this.end();
  *   });
  */
-Compute.prototype.getRuleStream = common.paginator.streamify('getRules');
+Compute.prototype.getRulesStream = common.paginator.streamify('getRules');
 
 /**
  * Get a list of backend services.
@@ -1942,7 +1942,7 @@ Compute.prototype.getServices = function(options, callback) {
  * @return {stream}
  *
  * @example
- * gce.getServiceStream()
+ * gce.getServicesStream()
  *   .on('error', console.error)
  *   .on('data', function(service) {
  *     // `service` is a `Service` object.
@@ -1955,12 +1955,12 @@ Compute.prototype.getServices = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * gce.getServiceStream()
+ * gce.getServicesStream()
  *   .on('data', function(service) {
  *     this.end();
  *   });
  */
-Compute.prototype.getServiceStream = common.paginator.streamify('getServices');
+Compute.prototype.getServicesStream = common.paginator.streamify('getServices');
 
 /**
  * Get a list of snapshots.
@@ -2053,7 +2053,7 @@ Compute.prototype.getSnapshots = function(options, callback) {
  * @return {stream}
  *
  * @example
- * gce.getSnapshotStream()
+ * gce.getSnapshotsStream()
  *   .on('error', console.error)
  *   .on('data', function(snapshot) {
  *     // `snapshot` is a `Snapshot` object.
@@ -2066,12 +2066,12 @@ Compute.prototype.getSnapshots = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * gce.getSnapshotStream()
+ * gce.getSnapshotsStream()
  *   .on('data', function(snapshot) {
  *     this.end();
  *   });
  */
-Compute.prototype.getSnapshotStream =
+Compute.prototype.getSnapshotsStream =
   common.paginator.streamify('getSnapshots');
 
 /**
@@ -2175,7 +2175,7 @@ Compute.prototype.getSubnetworks = function(options, callback) {
  * @return {stream}
  *
  * @example
- * gce.getSubnetworkStream()
+ * gce.getSubnetworksStream()
  *   .on('error', console.error)
  *   .on('data', function(subnetwork) {
  *     // `subnetwork` is a `Subnetwork` object.
@@ -2188,12 +2188,12 @@ Compute.prototype.getSubnetworks = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * gce.getSubnetworkStream()
+ * gce.getSubnetworksStream()
  *   .on('data', function(subnetwork) {
  *     this.end();
  *   });
  */
-Compute.prototype.getSubnetworkStream =
+Compute.prototype.getSubnetworksStream =
   common.paginator.streamify('getSubnetworks');
 
 /**
@@ -2295,7 +2295,7 @@ Compute.prototype.getVMs = function(options, callback) {
  * @return {stream}
  *
  * @example
- * gce.getVMStream()
+ * gce.getVMsStream()
  *   .on('error', console.error)
  *   .on('data', function(vm) {
  *     // `vm` is a `VM` object.
@@ -2308,12 +2308,12 @@ Compute.prototype.getVMs = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * gce.getVMStream()
+ * gce.getVMsStream()
  *   .on('data', function(vm) {
  *     this.end();
  *   });
  */
-Compute.prototype.getVMStream = common.paginator.streamify('getVMs');
+Compute.prototype.getVMsStream = common.paginator.streamify('getVMs');
 
 /**
  * Return the zones available to your project.
@@ -2405,7 +2405,7 @@ Compute.prototype.getZones = function(options, callback) {
  * @return {stream}
  *
  * @example
- * gce.getZoneStream()
+ * gce.getZonesStream()
  *   .on('error', console.error)
  *   .on('data', function(zone) {
  *     // `zone` is a `Zone` object.
@@ -2418,12 +2418,12 @@ Compute.prototype.getZones = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * gce.getZoneStream()
+ * gce.getZonesStream()
  *   .on('data', function(zone) {
  *     this.end();
  *   });
  */
-Compute.prototype.getZoneStream = common.paginator.streamify('getZones');
+Compute.prototype.getZonesStream = common.paginator.streamify('getZones');
 
 /**
  * Get a reference to a Google Compute Engine health check.

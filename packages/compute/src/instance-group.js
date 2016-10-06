@@ -336,7 +336,7 @@ InstanceGroup.prototype.getVMs = function(options, callback) {
  * @return {stream}
  *
  * @example
- * instanceGroup.getVMStream()
+ * instanceGroup.getVMsStream()
  *   .on('error', console.error)
  *   .on('data', function(vm) {
  *     // `vm` is a `VM` object.
@@ -349,12 +349,12 @@ InstanceGroup.prototype.getVMs = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * instanceGroup.getVMStream()
+ * instanceGroup.getVMsStream()
  *   .on('data', function(vm) {
  *     this.end();
  *   });
  */
-InstanceGroup.prototype.getVMStream = common.paginator.streamify('getVMs');
+InstanceGroup.prototype.getVMsStream = common.paginator.streamify('getVMs');
 
 /**
  * Remove one or more VMs from this instance group.

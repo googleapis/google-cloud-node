@@ -441,7 +441,7 @@ Table.prototype.getMetadata = function(options, callback) {
  * @return {stream}
  *
  * @example
- * table.getRowStream()
+ * table.getRowsStream()
  *   .on('error', console.error)
  *   .on('data', function(row) {
  *     // `row` is a Row object.
@@ -454,7 +454,7 @@ Table.prototype.getMetadata = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing.
  * //-
- * table.getRowStream()
+ * table.getRowsStream()
  *   .on('data', function(row) {
  *     this.end();
  *   });
@@ -463,7 +463,7 @@ Table.prototype.getMetadata = function(options, callback) {
  * // Specify arbitrary keys for a non-contiguous set of rows.
  * // The total size of the keys must remain under 1MB, after encoding.
  * //-
- * table.getRowStream({
+ * table.getRowsStream({
  *   keys: [
  *     'alincoln',
  *     'gwashington'
@@ -485,7 +485,7 @@ Table.prototype.getMetadata = function(options, callback) {
  * //-
  * // Specify multiple ranges.
  * //-
- * table.getRowStream({
+ * table.getRowsStream({
  *   ranges: [{
  *     start: 'alincoln',
  *     end: 'gwashington'
@@ -498,7 +498,7 @@ Table.prototype.getMetadata = function(options, callback) {
  * //-
  * // Apply a {module:bigtable/filter} to the contents of the specified rows.
  * //-
- * table.getRowStream({
+ * table.getRowsStream({
  *   filter: [
  *     {
  *       column: 'gwashington'
@@ -508,7 +508,7 @@ Table.prototype.getMetadata = function(options, callback) {
  *   ]
  * });
  */
-Table.prototype.getRowStream = function(options) {
+Table.prototype.getRowsStream = function(options) {
   var self = this;
 
   options = options || {};
@@ -578,10 +578,10 @@ Table.prototype.getRowStream = function(options) {
  *
  * This method is not recommended for large datasets as it will buffer all rows
  * before returning the results. Instead we recommend using the streaming API
- * via {module:bigtable/table#getRowStream}.
+ * via {module:bigtable/table#getRowsStream}.
  *
  * @param {object=} options - Configuration object. See
- *     {module:bigtable/table#getRowStream} for a complete list of options.
+ *     {module:bigtable/table#getRowsStream} for a complete list of options.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:bigtable/row[]} callback.rows - List of Row objects.
@@ -599,7 +599,7 @@ Table.prototype.getRows = function(options, callback) {
     options = {};
   }
 
-  this.getRowStream(options)
+  this.getRowsStream(options)
     .on('error', callback)
     .pipe(concat(function(rows) {
       callback(null, rows);
@@ -906,7 +906,7 @@ Table.prototype.row = function(key) {
  * });
  */
 Table.prototype.sampleRowKeys = function(callback) {
-  this.sampleRowKeyStream()
+  this.sampleRowKeysStream()
     .on('error', callback)
     .pipe(concat(function(keys) {
       callback(null, keys);
@@ -921,7 +921,7 @@ Table.prototype.sampleRowKeys = function(callback) {
  * @return {stream}
  *
  * @example
- * table.sampleRowKeyStream()
+ * table.sampleRowKeysStream()
  *   .on('error', console.error)
  *   .on('data', function(key) {
  *     // Do something with the `key` object.
@@ -931,12 +931,12 @@ Table.prototype.sampleRowKeys = function(callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing.
  * //-
- * table.sampleRowKeyStream()
+ * table.sampleRowKeysStream()
  *   .on('data', function(key) {
  *     this.end();
  *   });
  */
-Table.prototype.sampleRowKeyStream = function() {
+Table.prototype.sampleRowKeysStream = function() {
   var grpcOpts = {
     service: 'Bigtable',
     method: 'sampleRowKeys'

@@ -334,7 +334,7 @@ Dataset.prototype.getTables = function(query, callback) {
  * @return {stream}
  *
  * @example
- * dataset.getTableStream()
+ * dataset.getTablesStream()
  *   .on('error', console.error)
  *   .on('data', function(table) {})
  *   .on('end', function() {
@@ -345,12 +345,12 @@ Dataset.prototype.getTables = function(query, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * dataset.getTableStream()
+ * dataset.getTablesStream()
  *   .on('data', function(table) {
  *     this.end();
  *   });
  */
-Dataset.prototype.getTableStream = common.paginator.streamify('getTables');
+Dataset.prototype.getTablesStream = common.paginator.streamify('getTables');
 
 /**
  * Run a query scoped to your dataset.

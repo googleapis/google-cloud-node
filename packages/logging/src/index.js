@@ -318,7 +318,7 @@ Logging.prototype.getEntries = function(options, callback) {
  * @return {stream}
  *
  * @example
- * logging.getEntryStream()
+ * logging.getEntriesStream()
  *   .on('error', console.error)
  *   .on('data', function(entry) {
  *     // `entry` is a Stackdriver Logging entry object.
@@ -332,12 +332,12 @@ Logging.prototype.getEntries = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * logging.getEntryStream()
+ * logging.getEntriesStream()
  *   .on('data', function(entry) {
  *     this.end();
  *   });
  */
-Logging.prototype.getEntryStream = common.paginator.streamify('getEntries');
+Logging.prototype.getEntriesStream = common.paginator.streamify('getEntries');
 
 /**
  * Get the sinks associated with this project.
@@ -409,7 +409,7 @@ Logging.prototype.getSinks = function(options, callback) {
  * @return {stream}
  *
  * @example
- * logging.getSinkStream()
+ * logging.getSinksStream()
  *   .on('error', console.error)
  *   .on('data', function(sink) {
  *     // `sink` is a Sink object.
@@ -422,12 +422,12 @@ Logging.prototype.getSinks = function(options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * logging.getSinkStream()
+ * logging.getSinksStream()
  *   .on('data', function(sink) {
  *     this.end();
  *   });
  */
-Logging.prototype.getSinkStream = common.paginator.streamify('getSinks');
+Logging.prototype.getSinksStream = common.paginator.streamify('getSinks');
 
 /**
  * Get a reference to a Stackdriver Logging log.

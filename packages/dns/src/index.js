@@ -190,7 +190,7 @@ DNS.prototype.getZones = function(query, callback) {
  * @return {stream}
  *
  * @example
- * dns.getZoneStream()
+ * dns.getZonesStream()
  *   .on('error', console.error)
  *   .on('data', function(zone) {
  *     // zone is a Zone object.
@@ -203,12 +203,12 @@ DNS.prototype.getZones = function(query, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * dns.getZoneStream()
+ * dns.getZonesStream()
  *   .on('data', function(zone) {
  *     this.end();
  *   });
  */
-DNS.prototype.getZoneStream = common.paginator.streamify('getZones');
+DNS.prototype.getZonesStream = common.paginator.streamify('getZones');
 
 /**
  * Create a zone object representing a managed zone.
