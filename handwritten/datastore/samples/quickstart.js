@@ -27,20 +27,28 @@ const datastoreClient = Datastore({
   projectId: projectId
 });
 
-// The kind of the entity to retrieve
+// The kind for the new entity
 const kind = 'Task';
-// The name/ID of the entity to retrieve
+// The name/ID for the new entity
 const name = 'sampletask1';
-// The Datastore key for the entity
+// The Cloud Datastore key for the new entity
 const taskKey = datastoreClient.key([kind, name]);
 
-// Retrieves the entity
-datastoreClient.get(taskKey, (err, task) => {
+// Prepares the new entity
+const task = {
+  key: taskKey,
+  data: {
+    description: 'Buy milk'
+  }
+};
+
+// Saves the entity
+datastoreClient.save(task, (err) => {
   if (err) {
     console.error(err);
     return;
   }
 
-  console.log(`Fetched task: ${task.key.name}`);
+  console.log(`Saved ${task.key.name}: ${task.data.description}`);
 });
 // [END datastore_quickstart]

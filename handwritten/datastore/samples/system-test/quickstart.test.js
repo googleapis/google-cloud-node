@@ -18,23 +18,11 @@
 const proxyquire = require(`proxyquire`).noPreserveCache();
 const datastore = proxyquire(`@google-cloud/datastore`, {})();
 const kind = `Task`;
-const message = `Buy milk`;
-const key = datastore.key(kind);
+const name = `sampletask1`;
+const key = datastore.key(kind, name);
 
 describe(`datastore:quickstart`, () => {
   let datastoreMock, DatastoreMock;
-
-  before((done) => {
-    datastore.save({
-      key: key,
-      data: {
-        message: message
-      }
-    }, () => {
-      // Datastore is eventually consistent
-      setTimeout(done, 5000);
-    });
-  });
 
   after((done) => {
     datastore.delete(key, () => {
@@ -45,23 +33,23 @@ describe(`datastore:quickstart`, () => {
 
   it(`should get a task from Datastore`, (done) => {
     datastoreMock = {
-      key: () => {
-        return key;
+      key (...args) {
+        return datastore.key(...args);
       },
 
-      get: (_key, _callback) => {
-        assert.equal(_key, key);
+      save (_task, _callback) {
+        assert.equal(_task.key.kind, kind);
+        assert.equal(_task.key.name, name);
+        assert.deepEqual(_task.data, {
+          description: `Buy milk`
+        });
         assert.equal(typeof _callback, 'function');
 
-        datastore.get(_key, (err, entity) => {
-          _callback(err, entity);
+        datastore.save(_task, (err) => {
+          _callback(err);
           assert.ifError(err);
-          assert.notEqual(entity, undefined);
-          assert.notEqual(entity.key, undefined);
-          assert.equal(entity.key.kind, kind);
-          assert.deepEqual(entity.data, { message: message });
           assert.equal(console.log.calledOnce, true);
-          assert.deepEqual(console.log.firstCall.args, [`Fetched entity: ${entity.key.name}`]);
+          assert.deepEqual(console.log.firstCall.args, [`Saved ${_task.key.name}: ${_task.data.description}`]);
           done();
         });
       }
