@@ -1375,4 +1375,92 @@ describe('common/util', function() {
       assert.strictEqual(userAgent, 'gcloud-node-storage/0.1.0');
     });
   });
+
+  describe('promisify', function() {
+    var fakeArgs = [null, 1, 2, 3];
+    var fakeError = new Error('err.');
+
+    var FakeClass;
+    var instance;
+    var context;
+
+    beforeEach(function() {
+      context = null;
+
+      FakeClass = function() {};
+
+      FakeClass.prototype.methodName = function(callback) {
+        context = this;
+        callback.apply(null, fakeArgs);
+      };
+
+      FakeClass.prototype.methodSingle = function(callback) {
+        context = this;
+        callback(null, fakeArgs[1]);
+      };
+
+      FakeClass.prototype.methodError = function(callback) {
+        context = this;
+        callback(fakeError);
+      };
+
+      FakeClass.prototype.method_ = util.noop;
+      FakeClass.prototype.methodStream = util.noop;
+      FakeClass.prototype.methodSync = util.noop;
+
+      util.promisify(FakeClass);
+      instance = new FakeClass();
+    });
+
+    it('should promisify the correct method', function() {
+      assert(FakeClass.prototype.methodName.promisified_);
+      assert(FakeClass.prototype.methodSingle.promisified_);
+      assert(FakeClass.prototype.methodError.promisified_);
+
+      assert.strictEqual(FakeClass.prototype.method_, util.noop);
+      assert.strictEqual(FakeClass.prototype.methodStream, util.noop);
+    });
+
+    it('should not return a promise in callback mode', function(done) {
+      var returnVal = instance.methodName(function() {
+        var args = [].slice.call(arguments);
+
+        assert.deepEqual(args, fakeArgs);
+        assert(!returnVal);
+        assert.strictEqual(context, instance);
+        done();
+      });
+    });
+
+    it('should return a promise when the callback is omitted', function(done) {
+      instance.methodName().then(function(args) {
+        assert.deepEqual(args, fakeArgs.slice(1));
+        assert.strictEqual(context, instance);
+        done();
+      });
+    });
+
+    it('should not return an array when only 1 param is found', function(done) {
+      instance.methodSingle().then(function(param) {
+        assert.strictEqual(param, fakeArgs[1]);
+        assert.strictEqual(context, instance);
+        done();
+      });
+    });
+
+    it('should reject the promise on a failed request', function(done) {
+      instance.methodError().then(null, function(err) {
+        assert.strictEqual(err, fakeError);
+        done();
+      });
+    });
+
+    it('should not re-promisify methods', function() {
+      var method = FakeClass.prototype.methodName;
+
+      util.promisify(FakeClass);
+
+      assert.strictEqual(FakeClass.prototype.methodName, method);
+    });
+  });
 });
