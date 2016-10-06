@@ -66,6 +66,13 @@ function Translate(options) {
     throw new Error('An API key is required to use the Translate API.');
   }
 
+  this.baseUrl = 'https://www.googleapis.com/language/translate/v2';
+
+  if (process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT) {
+    this.baseUrl = process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT
+      .replace(/\/+$/, '');
+  }
+
   this.options = options;
   this.key = options.key;
 }
@@ -382,9 +389,7 @@ Translate.prototype.translate = function(input, options, callback) {
  * @param {function} callback - The callback function passed to `request`.
  */
 Translate.prototype.request = function(reqOpts, callback) {
-  var BASE_URL = 'https://www.googleapis.com/language/translate/v2';
-
-  reqOpts.uri = BASE_URL + reqOpts.uri;
+  reqOpts.uri = this.baseUrl + reqOpts.uri;
 
   reqOpts = extend(true, {}, reqOpts, {
     qs: {
