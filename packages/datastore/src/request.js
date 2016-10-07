@@ -156,69 +156,6 @@ DatastoreRequest.prototype.allocateIds = function(incompleteKey, n, callback) {
 };
 
 /**
- * Delete all entities identified with the specified key(s).
- *
- * @param {Key|Key[]} key - Datastore key object(s).
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request
- * @param {object} callback.apiResponse - The full API response.
- *
- * @example
- * var key = datastore.key(['Company', 123]);
- * datastore.delete(key, function(err, apiResp) {});
- *
- * //-
- * // Or, if you're using a transaction object.
- * //-
- * var transaction = datastore.transaction();
- *
- * transaction.run(function(err) {
- *   if (err) {
- *     // Error handling omitted.
- *   }
- *
- *   transaction.delete(key);
- *
- *   transaction.commit(function(err) {
- *     if (!err) {
- *       // Transaction committed successfully.
- *     }
- *   });
- * });
- *
- * //-
- * // Delete multiple entities at once.
- * //-
- * datastore.delete([
- *   datastore.key(['Company', 123]),
- *   datastore.key(['Product', 'Computer'])
- * ], function(err, apiResponse) {});
- */
-DatastoreRequest.prototype.delete = function(keys, callback) {
-  callback = callback || common.util.noop;
-
-  var protoOpts = {
-    service: 'Datastore',
-    method: 'commit'
-  };
-
-  var reqOpts = {
-    mutations: arrify(keys).map(function(key) {
-      return {
-        delete: entity.keyToKeyProto(key)
-      };
-    })
-  };
-
-  if (this.id) {
-    this.requests_.push(reqOpts);
-    return;
-  }
-
-  this.request_(protoOpts, reqOpts, callback);
-};
-
-/**
  * Retrieve the entities as a readable object stream.
  *
  * @throws {Error} If at least one Key object is not provided.
@@ -305,6 +242,69 @@ DatastoreRequest.prototype.createReadStream = function(keys, options) {
   }
 
   return stream;
+};
+
+/**
+ * Delete all entities identified with the specified key(s).
+ *
+ * @param {Key|Key[]} key - Datastore key object(s).
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * var key = datastore.key(['Company', 123]);
+ * datastore.delete(key, function(err, apiResp) {});
+ *
+ * //-
+ * // Or, if you're using a transaction object.
+ * //-
+ * var transaction = datastore.transaction();
+ *
+ * transaction.run(function(err) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ *
+ *   transaction.delete(key);
+ *
+ *   transaction.commit(function(err) {
+ *     if (!err) {
+ *       // Transaction committed successfully.
+ *     }
+ *   });
+ * });
+ *
+ * //-
+ * // Delete multiple entities at once.
+ * //-
+ * datastore.delete([
+ *   datastore.key(['Company', 123]),
+ *   datastore.key(['Product', 'Computer'])
+ * ], function(err, apiResponse) {});
+ */
+DatastoreRequest.prototype.delete = function(keys, callback) {
+  callback = callback || common.util.noop;
+
+  var protoOpts = {
+    service: 'Datastore',
+    method: 'commit'
+  };
+
+  var reqOpts = {
+    mutations: arrify(keys).map(function(key) {
+      return {
+        delete: entity.keyToKeyProto(key)
+      };
+    })
+  };
+
+  if (this.id) {
+    this.requests_.push(reqOpts);
+    return;
+  }
+
+  this.request_(protoOpts, reqOpts, callback);
 };
 
 /**
@@ -405,11 +405,107 @@ DatastoreRequest.prototype.insert = function(entities, callback) {
 };
 
 /**
+ * Datastore allows you to query entities by kind, filter them by property
+ * filters, and sort them by a property name. Projection and pagination are also
+ * supported.
+ *
+ * The query is run, and the results are returned as the second argument to your
+ * callback. A third argument may also exist, which is a query object that uses
+ * the end cursor from the previous query as the starting cursor for the next
+ * query. You can pass that object back to this method to see if more results
+ * exist.
+ *
+ * @param {module:datastore/query} query - Query object.
+ * @param {object=} options - Optional configuration.
+ * @param {string} options.consistency - Specify either `strong` or `eventual`.
+ *     If not specified, default values are chosen by Datastore for the
+ *     operation. Learn more about strong and eventual consistency
+ *     [here](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore).
+ * @param {boolean} options.maxApiCalls - Maximum API calls to make.
+ * @param {function} callback - The callback function. If omitted, a readable
+ *     stream instance is returned.
+ * @param {?error} callback.err - An error returned while making this request
+ * @param {object[]} callback.entities - A list of entities.
+ * @param {object} callback.info - An object useful for pagination.
+ * @param {?string} callback.info.endCursor - Use this in a follow-up query to
+ *     begin from where these results ended.
+ * @param {string} callback.info.moreResults - Datastore responds with one of:
+ *
+ *     - {module:datastore#MORE_RESULTS_AFTER_LIMIT}: There *may* be more
+ *       results after the specified limit.
+ *     - {module:datastore#MORE_RESULTS_AFTER_CURSOR}: There *may* be more
+ *       results after the specified end cursor.
+ *     - {module:datastore#NO_MORE_RESULTS}: There are no more results.
+ *
+ * @example
+ * //-
+ * // Where you see `transaction`, assume this is the context that's relevant to
+ * // your use, whether that be a Datastore or a Transaction object.
+ * //-
+ * var query = datastore.createQuery('Lion');
+ *
+ * datastore.runQuery(query, function(err, entities, info) {});
+ *
+ * //-
+ * // Or, if you're using a transaction object.
+ * //-
+ * var transaction = datastore.transaction();
+ *
+ * transaction.run(function(err) {
+ *   if (err) {
+ *     // Error handling omitted.
+ *   }
+ *
+ *   transaction.runQuery(query, function(err, entities) {
+ *     if (err) {
+ *       // Error handling omitted.
+ *     }
+ *
+ *     transaction.commit(function(err) {
+ *       if (!err) {
+ *         // Transaction committed successfully.
+ *       }
+ *     });
+ *   });
+ * });
+ *
+ * //-
+ * // A keys-only query returns just the keys of the result entities instead of
+ * // the entities themselves, at lower latency and cost.
+ * //-
+ * var keysOnlyQuery = datastore.createQuery('Lion').select('__key__');
+ *
+ * datastore.runQuery(keysOnlyQuery, function(err, entities) {
+ *   // entities[].key = Key object
+ *   // entities[].data = Empty object
+ * });
+ */
+DatastoreRequest.prototype.runQuery = function(query, options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = options || {};
+
+  var info;
+
+  this.runQueryStream(query, options)
+    .on('error', callback)
+    .on('info', function(info_) {
+      info = info_;
+    })
+    .pipe(concat(function(results) {
+      callback(null, results, info);
+    }));
+};
+
+/**
  * Get a list of entities as a readable object stream.
  *
  * See {module:datastore#runQuery} for a list of all available options.
  *
- * @param {module:datastore/query} q - Query object.
+ * @param {module:datastore/query} query - Query object.
  * @param {object=} options - Optional configuration.
  *
  * @example
@@ -519,102 +615,6 @@ DatastoreRequest.prototype.runQueryStream = function(query, options) {
   }
 
   return stream;
-};
-
-/**
- * Datastore allows you to query entities by kind, filter them by property
- * filters, and sort them by a property name. Projection and pagination are also
- * supported.
- *
- * The query is run, and the results are returned as the second argument to your
- * callback. A third argument may also exist, which is a query object that uses
- * the end cursor from the previous query as the starting cursor for the next
- * query. You can pass that object back to this method to see if more results
- * exist.
- *
- * @param {module:datastore/query} q - Query object.
- * @param {object=} options - Optional configuration.
- * @param {string} options.consistency - Specify either `strong` or `eventual`.
- *     If not specified, default values are chosen by Datastore for the
- *     operation. Learn more about strong and eventual consistency
- *     [here](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore).
- * @param {boolean} options.maxApiCalls - Maximum API calls to make.
- * @param {function} callback - The callback function. If omitted, a readable
- *     stream instance is returned.
- * @param {?error} callback.err - An error returned while making this request
- * @param {object[]} callback.entities - A list of entities.
- * @param {object} callback.info - An object useful for pagination.
- * @param {?string} callback.info.endCursor - Use this in a follow-up query to
- *     begin from where these results ended.
- * @param {string} callback.info.moreResults - Datastore responds with one of:
- *
- *     - {module:datastore#MORE_RESULTS_AFTER_LIMIT}: There *may* be more
- *       results after the specified limit.
- *     - {module:datastore#MORE_RESULTS_AFTER_CURSOR}: There *may* be more
- *       results after the specified end cursor.
- *     - {module:datastore#NO_MORE_RESULTS}: There are no more results.
- *
- * @example
- * //-
- * // Where you see `transaction`, assume this is the context that's relevant to
- * // your use, whether that be a Datastore or a Transaction object.
- * //-
- * var query = datastore.createQuery('Lion');
- *
- * datastore.runQuery(query, function(err, entities, info) {});
- *
- * //-
- * // Or, if you're using a transaction object.
- * //-
- * var transaction = datastore.transaction();
- *
- * transaction.run(function(err) {
- *   if (err) {
- *     // Error handling omitted.
- *   }
- *
- *   transaction.runQuery(query, function(err, entities) {
- *     if (err) {
- *       // Error handling omitted.
- *     }
- *
- *     transaction.commit(function(err) {
- *       if (!err) {
- *         // Transaction committed successfully.
- *       }
- *     });
- *   });
- * });
- *
- * //-
- * // A keys-only query returns just the keys of the result entities instead of
- * // the entities themselves, at lower latency and cost.
- * //-
- * var keysOnlyQuery = datastore.createQuery('Lion').select('__key__');
- *
- * datastore.runQuery(keysOnlyQuery, function(err, entities) {
- *   // entities[].key = Key object
- *   // entities[].data = Empty object
- * });
- */
-DatastoreRequest.prototype.runQuery = function(query, options, callback) {
-  if (is.fn(options)) {
-    callback = options;
-    options = {};
-  }
-
-  options = options || {};
-
-  var info;
-
-  this.runQueryStream(query, options)
-    .on('error', callback)
-    .on('info', function(info_) {
-      info = info_;
-    })
-    .pipe(concat(function(results) {
-      callback(null, results, info);
-    }));
 };
 
 /**

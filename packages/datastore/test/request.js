@@ -159,52 +159,6 @@ describe('Request', function() {
     });
   });
 
-  describe('delete', function() {
-    it('should delete by key', function(done) {
-      request.request_ = function(protoOpts, reqOpts, callback) {
-        assert.strictEqual(protoOpts.service, 'Datastore');
-        assert.strictEqual(protoOpts.method, 'commit');
-        assert(is.object(reqOpts.mutations[0].delete));
-        callback();
-      };
-      request.delete(key, done);
-    });
-
-    it('should return apiResponse in callback', function(done) {
-      var resp = { success: true };
-      request.request_ = function(protoOpts, reqOpts, callback) {
-        callback(null, resp);
-      };
-      request.delete(key, function(err, apiResponse) {
-        assert.ifError(err);
-        assert.deepEqual(resp, apiResponse);
-        done();
-      });
-    });
-
-    it('should multi delete by keys', function(done) {
-      request.request_ = function(protoOpts, reqOpts, callback) {
-        assert.equal(reqOpts.mutations.length, 2);
-        callback();
-      };
-      request.delete([ key, key ], done);
-    });
-
-    describe('transactions', function() {
-      beforeEach(function() {
-        // Trigger transaction mode.
-        request.id = 'transaction-id';
-        request.requests_ = [];
-      });
-
-      it('should queue request', function() {
-        request.delete(key);
-
-        assert(is.object(request.requests_[0].mutations[0].delete));
-      });
-    });
-  });
-
   describe('createReadStream', function() {
     beforeEach(function() {
       request.request_ = function() {};
@@ -489,6 +443,52 @@ describe('Request', function() {
             done();
           })
           .emit('reading');
+      });
+    });
+  });
+
+  describe('delete', function() {
+    it('should delete by key', function(done) {
+      request.request_ = function(protoOpts, reqOpts, callback) {
+        assert.strictEqual(protoOpts.service, 'Datastore');
+        assert.strictEqual(protoOpts.method, 'commit');
+        assert(is.object(reqOpts.mutations[0].delete));
+        callback();
+      };
+      request.delete(key, done);
+    });
+
+    it('should return apiResponse in callback', function(done) {
+      var resp = { success: true };
+      request.request_ = function(protoOpts, reqOpts, callback) {
+        callback(null, resp);
+      };
+      request.delete(key, function(err, apiResponse) {
+        assert.ifError(err);
+        assert.deepEqual(resp, apiResponse);
+        done();
+      });
+    });
+
+    it('should multi delete by keys', function(done) {
+      request.request_ = function(protoOpts, reqOpts, callback) {
+        assert.equal(reqOpts.mutations.length, 2);
+        callback();
+      };
+      request.delete([ key, key ], done);
+    });
+
+    describe('transactions', function() {
+      beforeEach(function() {
+        // Trigger transaction mode.
+        request.id = 'transaction-id';
+        request.requests_ = [];
+      });
+
+      it('should queue request', function() {
+        request.delete(key);
+
+        assert(is.object(request.requests_[0].mutations[0].delete));
       });
     });
   });

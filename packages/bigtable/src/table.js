@@ -277,6 +277,155 @@ Table.prototype.createFamily = function(name, rule, callback) {
 };
 
 /**
+ * Get {module:bigtable/row} objects for the rows currently in your table as a
+ * readable object stream.
+ *
+ * @param {options=} options - Configuration object.
+ * @param {boolean} options.decode - If set to `false` it will not decode Buffer
+ *     values returned from Bigtable. Default: true.
+ * @param {string[]} options.keys - A list of row keys.
+ * @param {string} options.start - Start value for key range.
+ * @param {string} options.end - End value for key range.
+ * @param {object[]} options.ranges - A list of key ranges.
+ * @param {module:bigtable/filter} options.filter - Row filters allow you to
+ *     both make advanced queries and format how the data is returned.
+ * @param {number} options.limit - Maximum number of rows to be returned.
+ * @return {stream}
+ *
+ * @example
+ * table.createReadStream()
+ *   .on('error', console.error)
+ *   .on('data', function(row) {
+ *     // `row` is a Row object.
+ *   })
+ *   .on('end', function() {
+ *     // All rows retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing.
+ * //-
+ * table.createReadStream()
+ *   .on('data', function(row) {
+ *     this.end();
+ *   });
+ *
+ * //-
+ * // Specify arbitrary keys for a non-contiguous set of rows.
+ * // The total size of the keys must remain under 1MB, after encoding.
+ * //-
+ * table.createReadStream({
+ *   keys: [
+ *     'alincoln',
+ *     'gwashington'
+ *   ]
+ * });
+ *
+ * //-
+ * // Specify a contiguous range of rows to read by supplying `start` and `end`
+ * // keys.
+ * //
+ * // If the `start` key is omitted, it is interpreted as an empty string.
+ * // If the `end` key is omitted, it is interpreted as infinity.
+ * //-
+ * table.createReadStream({
+ *   start: 'alincoln',
+ *   end: 'gwashington'
+ * });
+ *
+ * //-
+ * // Specify multiple ranges.
+ * //-
+ * table.createReadStream({
+ *   ranges: [{
+ *     start: 'alincoln',
+ *     end: 'gwashington'
+ *   }, {
+ *     start: 'tjefferson',
+ *     end: 'jadams'
+ *   }]
+ * });
+ *
+ * //-
+ * // Apply a {module:bigtable/filter} to the contents of the specified rows.
+ * //-
+ * table.createReadStream({
+ *   filter: [
+ *     {
+ *       column: 'gwashington'
+ *     }, {
+ *       value: 1
+ *     }
+ *   ]
+ * });
+ */
+Table.prototype.createReadStream = function(options) {
+  var self = this;
+
+  options = options || {};
+  options.ranges = options.ranges || [];
+
+  var grpcOpts = {
+    service: 'Bigtable',
+    method: 'readRows'
+  };
+
+  var reqOpts = {
+    tableName: this.id,
+    objectMode: true
+  };
+
+  if (options.start || options.end) {
+    options.ranges.push({
+      start: options.start,
+      end: options.end
+    });
+  }
+
+  if (options.keys || options.ranges.length) {
+    reqOpts.rows = {};
+
+    if (options.keys) {
+      reqOpts.rows.rowKeys = options.keys.map(Mutation.convertToBytes);
+    }
+
+    if (options.ranges.length) {
+      reqOpts.rows.rowRanges = options.ranges.map(function(range) {
+        return Filter.createRange(range.start, range.end, 'Key');
+      });
+    }
+  }
+
+  if (options.filter) {
+    reqOpts.filter = Filter.parse(options.filter);
+  }
+
+  if (options.limit) {
+    reqOpts.numRowsLimit = options.limit;
+  }
+
+  return pumpify.obj([
+    this.requestStream(grpcOpts, reqOpts),
+    through.obj(function(data, enc, next) {
+      var throughStream = this;
+      var rows = Row.formatChunks_(data.chunks, {
+        decode: options.decode
+      });
+
+      rows.forEach(function(rowData) {
+        var row = self.row(rowData.key);
+
+        row.data = rowData.data;
+        throughStream.push(row);
+      });
+
+      next();
+    })
+  ]);
+};
+
+/**
  * Delete all rows in the table, optionally corresponding to a particular
  * prefix.
  *
@@ -425,163 +574,14 @@ Table.prototype.getMetadata = function(options, callback) {
 };
 
 /**
- * Get {module:bigtable/row} objects for the rows currently in your table as a
- * readable object stream.
- *
- * @param {options=} options - Configuration object.
- * @param {boolean} options.decode - If set to `false` it will not decode Buffer
- *     values returned from Bigtable. Default: true.
- * @param {string[]} options.keys - A list of row keys.
- * @param {string} options.start - Start value for key range.
- * @param {string} options.end - End value for key range.
- * @param {object[]} options.ranges - A list of key ranges.
- * @param {module:bigtable/filter} options.filter - Row filters allow you to
- *     both make advanced queries and format how the data is returned.
- * @param {number} options.limit - Maximum number of rows to be returned.
- * @return {stream}
- *
- * @example
- * table.getRowsStream()
- *   .on('error', console.error)
- *   .on('data', function(row) {
- *     // `row` is a Row object.
- *   })
- *   .on('end', function() {
- *     // All rows retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing.
- * //-
- * table.getRowsStream()
- *   .on('data', function(row) {
- *     this.end();
- *   });
- *
- * //-
- * // Specify arbitrary keys for a non-contiguous set of rows.
- * // The total size of the keys must remain under 1MB, after encoding.
- * //-
- * table.getRowsStream({
- *   keys: [
- *     'alincoln',
- *     'gwashington'
- *   ]
- * });
- *
- * //-
- * // Specify a contiguous range of rows to read by supplying `start` and `end`
- * // keys.
- * //
- * // If the `start` key is omitted, it is interpreted as an empty string.
- * // If the `end` key is omitted, it is interpreted as infinity.
- * //-
- * table.getRowsStream({
- *   start: 'alincoln',
- *   end: 'gwashington'
- * });
- *
- * //-
- * // Specify multiple ranges.
- * //-
- * table.getRowsStream({
- *   ranges: [{
- *     start: 'alincoln',
- *     end: 'gwashington'
- *   }, {
- *     start: 'tjefferson',
- *     end: 'jadams'
- *   }]
- * });
- *
- * //-
- * // Apply a {module:bigtable/filter} to the contents of the specified rows.
- * //-
- * table.getRowsStream({
- *   filter: [
- *     {
- *       column: 'gwashington'
- *     }, {
- *       value: 1
- *     }
- *   ]
- * });
- */
-Table.prototype.getRowsStream = function(options) {
-  var self = this;
-
-  options = options || {};
-  options.ranges = options.ranges || [];
-
-  var grpcOpts = {
-    service: 'Bigtable',
-    method: 'readRows'
-  };
-
-  var reqOpts = {
-    tableName: this.id,
-    objectMode: true
-  };
-
-  if (options.start || options.end) {
-    options.ranges.push({
-      start: options.start,
-      end: options.end
-    });
-  }
-
-  if (options.keys || options.ranges.length) {
-    reqOpts.rows = {};
-
-    if (options.keys) {
-      reqOpts.rows.rowKeys = options.keys.map(Mutation.convertToBytes);
-    }
-
-    if (options.ranges.length) {
-      reqOpts.rows.rowRanges = options.ranges.map(function(range) {
-        return Filter.createRange(range.start, range.end, 'Key');
-      });
-    }
-  }
-
-  if (options.filter) {
-    reqOpts.filter = Filter.parse(options.filter);
-  }
-
-  if (options.limit) {
-    reqOpts.numRowsLimit = options.limit;
-  }
-
-  return pumpify.obj([
-    this.requestStream(grpcOpts, reqOpts),
-    through.obj(function(data, enc, next) {
-      var throughStream = this;
-      var rows = Row.formatChunks_(data.chunks, {
-        decode: options.decode
-      });
-
-      rows.forEach(function(rowData) {
-        var row = self.row(rowData.key);
-
-        row.data = rowData.data;
-        throughStream.push(row);
-      });
-
-      next();
-    })
-  ]);
-};
-
-/**
  * Get {module:bigtable/row} objects for the rows currently in your table.
  *
  * This method is not recommended for large datasets as it will buffer all rows
  * before returning the results. Instead we recommend using the streaming API
- * via {module:bigtable/table#getRowsStream}.
+ * via {module:bigtable/table#createReadStream}.
  *
  * @param {object=} options - Configuration object. See
- *     {module:bigtable/table#getRowsStream} for a complete list of options.
+ *     {module:bigtable/table#createReadStream} for a complete list of options.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:bigtable/row[]} callback.rows - List of Row objects.
@@ -599,7 +599,7 @@ Table.prototype.getRows = function(options, callback) {
     options = {};
   }
 
-  this.getRowsStream(options)
+  this.createReadStream(options)
     .on('error', callback)
     .pipe(concat(function(rows) {
       callback(null, rows);

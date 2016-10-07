@@ -34,18 +34,18 @@ var util = require('./util.js');
 
 /*! Developer Documentation
  *
- * paginator is used to auto paginated `nextQuery` methods as well as
+ * paginator is used to auto-paginate `nextQuery` methods as well as
  * streamifying them.
  *
  * Before:
  *
  *   search.query('done=true', function(err, results, nextQuery) {
- *     search.query(nextQuery, function(err, results, nextQuery) { ... });
+ *     search.query(nextQuery, function(err, results, nextQuery) {});
  *   });
  *
  * After:
  *
- *   search.query('done=true', function(err, results) { ... });
+ *   search.query('done=true', function(err, results) {});
  *
  * Methods to extend should be written to accept callbacks and return a
  * `nextQuery`.

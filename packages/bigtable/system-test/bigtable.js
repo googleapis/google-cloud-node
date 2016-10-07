@@ -520,7 +520,7 @@ describe('Bigtable', function() {
       it('should get rows via stream', function(done) {
         var rows = [];
 
-        TABLE.getRowsStream()
+        TABLE.createReadStream()
           .on('error', done)
           .on('data', function(row) {
             assert(row instanceof Row);

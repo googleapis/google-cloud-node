@@ -321,7 +321,7 @@ Query.prototype.run = function() {
  * @return {stream}
  *
  * @example
- * query.stream()
+ * query.runStream()
  *   .on('error', console.error)
  *   .on('data', function (entity) {})
  *   .on('info', function(info) {})
@@ -333,12 +333,12 @@ Query.prototype.run = function() {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * query.stream()
+ * query.runStream()
  *   .on('data', function (entity) {
  *     this.end();
  *   });
  */
-Query.prototype.stream = function() {
+Query.prototype.runStream = function() {
   var query = this;
   var args = [query].concat([].slice.call(arguments));
 

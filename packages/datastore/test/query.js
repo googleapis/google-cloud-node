@@ -304,7 +304,7 @@ describe('Query', function() {
     });
   });
 
-  describe('stream', function() {
+  describe('runStream', function() {
     it('should call the parent instance runQueryStream correctly', function() {
       var args = [0, 1, 2];
       var runQueryReturnValue = {};
@@ -318,7 +318,7 @@ describe('Query', function() {
         return runQueryReturnValue;
       };
 
-      var results = query.stream.apply(query, args);
+      var results = query.runStream.apply(query, args);
       assert.strictEqual(results, runQueryReturnValue);
     });
   });

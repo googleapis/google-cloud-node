@@ -110,6 +110,70 @@ describe('BigQuery/Dataset', function() {
     });
   });
 
+  describe('createQueryStream', function() {
+    var options = {
+      a: 'b',
+      c: 'd'
+    };
+
+    it('should call through to bigQuery', function(done) {
+      ds.bigQuery.createQueryStream = function() {
+        done();
+      };
+
+      ds.createQueryStream();
+    });
+
+    it('should return the result of the call to bq.query', function(done) {
+      ds.bigQuery.createQueryStream = function() {
+        return {
+          done: done
+        };
+      };
+
+      ds.createQueryStream().done();
+    });
+
+    it('should accept a string', function(done) {
+      var query = 'SELECT * FROM allthedata';
+
+      ds.bigQuery.createQueryStream = function(opts) {
+        assert.equal(opts.query, query);
+        done();
+      };
+
+      ds.createQueryStream(query);
+    });
+
+    it('should pass along options', function(done) {
+      ds.bigQuery.createQueryStream = function(opts) {
+        assert.equal(opts.a, options.a);
+        assert.equal(opts.c, options.c);
+        done();
+      };
+
+      ds.createQueryStream(options);
+    });
+
+    it('should extend options with defaultDataset', function(done) {
+      ds.bigQuery.createQueryStream = function(opts) {
+        assert.deepEqual(opts.defaultDataset, { datasetId: ds.id });
+        done();
+      };
+
+      ds.createQueryStream(options);
+    });
+
+    it('should not modify original options object', function(done) {
+      ds.bigQuery.createQueryStream = function() {
+        assert.deepEqual(options, { a: 'b', c: 'd' });
+        done();
+      };
+
+      ds.createQueryStream();
+    });
+  });
+
   describe('createTable', function() {
     var SCHEMA_OBJECT = {
       fields: [
@@ -493,70 +557,6 @@ describe('BigQuery/Dataset', function() {
       };
 
       ds.query(options, callback);
-    });
-  });
-
-  describe('createQueryStream', function() {
-    var options = {
-      a: 'b',
-      c: 'd'
-    };
-
-    it('should call through to bigQuery', function(done) {
-      ds.bigQuery.createQueryStream = function() {
-        done();
-      };
-
-      ds.createQueryStream();
-    });
-
-    it('should return the result of the call to bq.query', function(done) {
-      ds.bigQuery.createQueryStream = function() {
-        return {
-          done: done
-        };
-      };
-
-      ds.createQueryStream().done();
-    });
-
-    it('should accept a string', function(done) {
-      var query = 'SELECT * FROM allthedata';
-
-      ds.bigQuery.createQueryStream = function(opts) {
-        assert.equal(opts.query, query);
-        done();
-      };
-
-      ds.createQueryStream(query);
-    });
-
-    it('should pass along options', function(done) {
-      ds.bigQuery.createQueryStream = function(opts) {
-        assert.equal(opts.a, options.a);
-        assert.equal(opts.c, options.c);
-        done();
-      };
-
-      ds.createQueryStream(options);
-    });
-
-    it('should extend options with defaultDataset', function(done) {
-      ds.bigQuery.createQueryStream = function(opts) {
-        assert.deepEqual(opts.defaultDataset, { datasetId: ds.id });
-        done();
-      };
-
-      ds.createQueryStream(options);
-    });
-
-    it('should not modify original options object', function(done) {
-      ds.bigQuery.createQueryStream = function() {
-        assert.deepEqual(options, { a: 'b', c: 'd' });
-        done();
-      };
-
-      ds.createQueryStream();
     });
   });
 

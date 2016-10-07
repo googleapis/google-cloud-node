@@ -14,6 +14,15 @@
  * limitations under the License.
  */
 
+
+/*! Developer Documentation
+ *
+ * Anytime a change is made to @google-cloud/common it is wise to test if said
+ * changes are compatible with with all other modules (bigquery, compute, etc.)
+ *
+ * All this script aims to do is link your local version of @google-cloud/common
+ * to all the local modules to make integration testing easier.
+ */
 'use strict';
 
 var Module = require('./helpers').Module;

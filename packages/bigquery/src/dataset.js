@@ -145,6 +145,28 @@ function Dataset(bigQuery, id) {
 util.inherits(Dataset, common.ServiceObject);
 
 /**
+ * Run a query scoped to your dataset as a readable object stream.
+ *
+ * See {module:bigquery#createQueryStream} for full documentation of this
+ * method.
+ */
+Dataset.prototype.createQueryStream = function(options) {
+  if (is.string(options)) {
+    options = {
+      query: options
+    };
+  }
+
+  options = extend(true, {}, options, {
+    defaultDataset: {
+      datasetId: this.id
+    }
+  });
+
+  return this.bigQuery.createQueryStream(options);
+};
+
+/**
  * Create a table given a tableId or configuration object.
  *
  * @resource [Tables: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/tables/insert}
@@ -371,28 +393,6 @@ Dataset.prototype.query = function(options, callback) {
   });
 
   return this.bigQuery.query(options, callback);
-};
-
-/**
- * Run a query scoped to your dataset as a readable object stream.
- *
- * See {module:bigquery#createQueryStream} for full documentation of this
- * method.
- */
-Dataset.prototype.createQueryStream = function(options) {
-  if (is.string(options)) {
-    options = {
-      query: options
-    };
-  }
-
-  options = extend(true, {}, options, {
-    defaultDataset: {
-      datasetId: this.id
-    }
-  });
-
-  return this.bigQuery.createQueryStream(options);
 };
 
 /**

@@ -323,6 +323,29 @@ describe('BigQuery/Table', function() {
     });
   });
 
+  describe('createQueryStream', function() {
+    it('should call datasetInstance.createQueryStream()', function(done) {
+      table.dataset.createQueryStream = function(a) {
+        assert.equal(a, 'a');
+        done();
+      };
+
+      table.createQueryStream('a');
+    });
+
+    it('should return whatever dataset.createQueryStream returns', function() {
+      var fakeValue = 123;
+
+      table.dataset.createQueryStream = function() {
+        return fakeValue;
+      };
+
+      var val = table.createQueryStream();
+
+      assert.strictEqual(val, fakeValue);
+    });
+  });
+
   describe('createWriteStream', function() {
     describe('formats', function() {
       it('should accept csv', function(done) {
@@ -1165,29 +1188,6 @@ describe('BigQuery/Table', function() {
       };
 
       table.query('a', 'b');
-    });
-  });
-
-  describe('createQueryStream', function() {
-    it('should call datasetInstance.createQueryStream()', function(done) {
-      table.dataset.createQueryStream = function(a) {
-        assert.equal(a, 'a');
-        done();
-      };
-
-      table.createQueryStream('a');
-    });
-
-    it('should return whatever dataset.createQueryStream returns', function() {
-      var fakeValue = 123;
-
-      table.dataset.createQueryStream = function() {
-        return fakeValue;
-      };
-
-      var val = table.createQueryStream();
-
-      assert.strictEqual(val, fakeValue);
     });
   });
 

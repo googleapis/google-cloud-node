@@ -314,6 +314,16 @@ Table.prototype.copy = function(destination, metadata, callback) {
 };
 
 /**
+ * Run a query scoped to your dataset as a readable object stream.
+ *
+ * See {module:bigquery#createQueryStream} for full documentation of this
+ * method.
+ */
+Table.prototype.createQueryStream = function(query) {
+  return this.dataset.createQueryStream(query);
+};
+
+/**
  * Create a readable stream of the rows of data in your table. This method is
  * simply a wrapper around {module:bigquery/table#getRows}.
  *
@@ -951,16 +961,6 @@ Table.prototype.insert = function(rows, options, callback) {
  */
 Table.prototype.query = function(query, callback) {
   this.dataset.query(query, callback);
-};
-
-/**
- * Run a query scoped to your dataset as a readable object stream.
- *
- * See {module:bigquery#createQueryStream} for full documentation of this
- * method.
- */
-Table.prototype.createQueryStream = function(query) {
-  return this.dataset.createQueryStream(query);
 };
 
 /**

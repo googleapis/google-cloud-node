@@ -121,6 +121,36 @@ BigQuery.prototype.createDataset = function(id, options, callback) {
 };
 
 /**
+ * Run a query scoped to your project as a readable object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:bigquery#query} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * var query = 'SELECT url FROM [publicdata:samples.github_nested] LIMIT 100';
+ *
+ * bigquery.createQueryStream(query)
+ *   .on('error', console.error)
+ *   .on('data', function(row) {
+ *     // row is a result from your query.
+ *   })
+ *   .on('end', function() {
+ *     // All rows retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * bigquery.createQueryStream(query)
+ *   .on('data', function(row) {
+ *     this.end();
+ *   });
+ */
+BigQuery.prototype.createQueryStream = common.paginator.streamify('query');
+
+/**
  * Create a reference to a dataset.
  *
  * @param {string} id - ID of the dataset.
@@ -474,34 +504,6 @@ BigQuery.prototype.query = function(options, callback) {
     callback(null, rows, nextQuery, resp);
   }
 };
-
-/**
- * Run a query scoped to your project as a readable object stream.
- *
- * @param {object=} query - Configuration object. See
- *     {module:bigquery#query} for a complete list of options.
- * @return {stream}
- *
- * @example
- * bigquery.createQueryStream(query)
- *   .on('error', console.error)
- *   .on('data', function(row) {
- *     // row is a result from your query.
- *   })
- *   .on('end', function() {
- *     // All rows retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * bigquery.createQueryStream(query)
- *   .on('data', function(row) {
- *     this.end();
- *   });
- */
-BigQuery.prototype.createQueryStream = common.paginator.streamify('query');
 
 /**
  * Run a query as a job. No results are immediately returned. Instead, your
