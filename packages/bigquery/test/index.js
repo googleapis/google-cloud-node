@@ -94,7 +94,6 @@ describe('BigQuery', function() {
       assert.strictEqual(bq.getDatasetsStream, 'getDatasets');
       assert.strictEqual(bq.getJobsStream, 'getJobs');
       assert.strictEqual(bq.createQueryStream, 'query');
-      assert.strictEqual(bq.getDatasetsStream, 'getDatasets');
     });
 
     it('should normalize the arguments', function() {
