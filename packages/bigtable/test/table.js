@@ -468,7 +468,7 @@ describe('Bigtable/Table', function() {
     });
   });
 
-  describe('getRows', function() {
+  describe('getRowsStream', function() {
     describe('options', function() {
       var pumpSpy;
 
@@ -490,7 +490,7 @@ describe('Bigtable/Table', function() {
           done();
         };
 
-        table.getRows();
+        table.getRowsStream();
       });
 
       it('should retrieve a range of rows', function(done) {
@@ -519,7 +519,7 @@ describe('Bigtable/Table', function() {
           done();
         };
 
-        table.getRows(options);
+        table.getRowsStream(options);
       });
 
       it('should retrieve multiple rows', function(done) {
@@ -547,7 +547,7 @@ describe('Bigtable/Table', function() {
           done();
         };
 
-        table.getRows(options);
+        table.getRowsStream(options);
       });
 
       it('should retrieve multiple ranges', function(done) {
@@ -589,7 +589,7 @@ describe('Bigtable/Table', function() {
           done();
         };
 
-        table.getRows(options);
+        table.getRowsStream(options);
       });
 
       it('should parse a filter object', function(done) {
@@ -610,7 +610,7 @@ describe('Bigtable/Table', function() {
           done();
         };
 
-        table.getRows(options);
+        table.getRowsStream(options);
       });
 
       it('should allow setting a row limit', function(done) {
@@ -623,7 +623,7 @@ describe('Bigtable/Table', function() {
           done();
         };
 
-        table.getRows(options);
+        table.getRowsStream(options);
       });
     });
 
@@ -673,18 +673,21 @@ describe('Bigtable/Table', function() {
           decode: false
         };
 
-        table.getRows(options, function(err) {
-          assert.ifError(err);
-          var formatArgs = FakeRow.formatChunks_.getCall(0).args[1];
-          assert.strictEqual(formatArgs.decode, options.decode);
-          done();
-        });
+        table.getRowsStream(options)
+          .on('error', done)
+          .on('data', function() {})
+          .on('end', function() {
+            var formatArgs = FakeRow.formatChunks_.getCall(0).args[1];
+
+            assert.strictEqual(formatArgs.decode, options.decode);
+            done();
+          });
       });
 
       it('should stream Row objects', function(done) {
         var rows = [];
 
-        table.getRows()
+        table.getRowsStream()
           .on('error', done)
           .on('data', function(row) {
             rows.push(row);
@@ -707,28 +710,6 @@ describe('Bigtable/Table', function() {
             done();
           });
       });
-
-      it('should return an array of Row objects via callback', function(done) {
-        table.getRows(function(err, rows) {
-          assert.ifError(err);
-
-          var rowSpy = table.row;
-          var formatSpy = FakeRow.formatChunks_;
-
-          assert.strictEqual(rows.length, formattedRows.length);
-          assert.strictEqual(rowSpy.callCount, formattedRows.length);
-
-          assert.strictEqual(formatSpy.getCall(0).args[0], fakeChunks.chunks);
-
-          assert.strictEqual(rowSpy.getCall(0).args[0], formattedRows[0].key);
-          assert.strictEqual(rows[0].data, formattedRows[0].data);
-
-          assert.strictEqual(rowSpy.getCall(1).args[0], formattedRows[1].key);
-          assert.strictEqual(rows[1].data, formattedRows[1].data);
-
-          done();
-        });
-      });
     });
 
     describe('error', function() {
@@ -749,18 +730,81 @@ describe('Bigtable/Table', function() {
       });
 
       it('should emit an error event', function(done) {
-        table.getRows()
+        table.getRowsStream()
           .on('error', function(err) {
             assert.strictEqual(error, err);
             done();
           })
           .on('data', done);
       });
+    });
+  });
 
-      it('should return an error to the callback', function(done) {
+  describe('getRows', function() {
+    describe('success', function() {
+      var fakeRows = [
+        { key: 'c', data: {} },
+        { key: 'd', data: {} }
+      ];
+
+      beforeEach(function() {
+        table.getRowsStream = sinon.spy(function() {
+          var stream = new Stream({
+            objectMode: true
+          });
+
+          setImmediate(function() {
+            fakeRows.forEach(function(row) {
+              stream.push(row);
+            });
+
+            stream.push(null);
+          });
+
+          return stream;
+        });
+      });
+
+      it('should return the rows to the callback', function(done) {
+        var options = {};
+
+        table.getRows(options, function(err, rows) {
+          assert.ifError(err);
+          assert.deepEqual(rows, fakeRows);
+          assert.strictEqual(table.getRowsStream.getCall(0).args[0], options);
+          done();
+        });
+      });
+
+      it('should optionally accept options', function(done) {
         table.getRows(function(err, rows) {
-          assert.strictEqual(error, err);
-          assert(!rows);
+          assert.ifError(err);
+          assert.deepEqual(rows, fakeRows);
+          done();
+        });
+      });
+    });
+
+    describe('error', function() {
+      var error = new Error('err');
+
+      beforeEach(function() {
+        table.getRowsStream = sinon.spy(function() {
+          var stream = new Stream({
+            objectMode: true
+          });
+
+          setImmediate(function() {
+            stream.emit('error', error);
+          });
+
+          return stream;
+        });
+      });
+
+      it('should return the error to the callback', function(done) {
+        table.getRows(function(err) {
+          assert.strictEqual(err, error);
           done();
         });
       });
@@ -1015,7 +1059,7 @@ describe('Bigtable/Table', function() {
     });
   });
 
-  describe('sampleRowKeys', function() {
+  describe('sampleRowKeysStream', function() {
     it('should provide the proper request options', function(done) {
       table.requestStream = function(grpcOpts, reqOpts) {
         assert.deepEqual(grpcOpts, {
@@ -1032,7 +1076,7 @@ describe('Bigtable/Table', function() {
         });
       };
 
-      table.sampleRowKeys();
+      table.sampleRowKeysStream();
     });
 
     describe('success', function() {
@@ -1065,7 +1109,7 @@ describe('Bigtable/Table', function() {
       it('should stream key objects', function(done) {
         var keys = [];
 
-        table.sampleRowKeys()
+        table.sampleRowKeysStream()
           .on('error', done)
           .on('data', function(key) {
             keys.push(key);
@@ -1077,17 +1121,6 @@ describe('Bigtable/Table', function() {
             assert.strictEqual(keys[1].offset, fakeKeys[1].offsetBytes);
             done();
           });
-      });
-
-      it('should return an array of keys via callback', function(done) {
-        table.sampleRowKeys(function(err, keys) {
-          assert.ifError(err);
-          assert.strictEqual(keys[0].key, fakeKeys[0].rowKey);
-          assert.strictEqual(keys[0].offset, fakeKeys[0].offsetBytes);
-          assert.strictEqual(keys[1].key, fakeKeys[1].rowKey);
-          assert.strictEqual(keys[1].offset, fakeKeys[1].offsetBytes);
-          done();
-        });
       });
     });
 
@@ -1109,18 +1142,73 @@ describe('Bigtable/Table', function() {
       });
 
       it('should emit an error event', function(done) {
-        table.sampleRowKeys()
+        table.sampleRowKeysStream()
           .on('error', function(err) {
             assert.strictEqual(err, error);
             done();
           })
           .on('data', done);
       });
+    });
+  });
 
-      it('should return an error to the callback', function(done) {
+  describe('sampleRowKeys', function() {
+    describe('success', function() {
+      var fakeKeys = [{
+        key: 'a',
+        offset: 10
+      }, {
+        key: 'b',
+        offset: 20
+      }];
+
+      beforeEach(function() {
+        table.sampleRowKeysStream = sinon.spy(function() {
+          var stream = new Stream({
+            objectMode: true
+          });
+
+          setImmediate(function() {
+            fakeKeys.forEach(function(key) {
+              stream.push(key);
+            });
+
+            stream.push(null);
+          });
+
+          return stream;
+        });
+      });
+
+      it('should return the keys to the callback', function(done) {
         table.sampleRowKeys(function(err, keys) {
-          assert.strictEqual(error, err);
-          assert(!keys);
+          assert.ifError(err);
+          assert.deepEqual(keys, fakeKeys);
+          done();
+        });
+      });
+    });
+
+    describe('error', function() {
+      var error = new Error('err');
+
+      beforeEach(function() {
+        table.sampleRowKeysStream = sinon.spy(function() {
+          var stream = new Stream({
+            objectMode: true
+          });
+
+          setImmediate(function() {
+            stream.emit('error', error);
+          });
+
+          return stream;
+        });
+      });
+
+      it('should return the error to the callback', function(done) {
+        table.sampleRowKeys(function(err) {
+          assert.strictEqual(err, error);
           done();
         });
       });

@@ -238,7 +238,8 @@ BigQuery.prototype.getDatasets = function(query, callback) {
  *     this.end();
  *   });
  */
-BigQuery.prototype.getDatasetsStream = common.paginator.streamify('getDatasets');
+BigQuery.prototype.getDatasetsStream =
+  common.paginator.streamify('getDatasets');
 
 /**
  * Get all of the jobs from your project.

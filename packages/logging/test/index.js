@@ -24,7 +24,7 @@ var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
 var extended = false;
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'Logging') {
       return;
@@ -36,6 +36,9 @@ var fakeStreamRouter = {
       'getEntries',
       'getSinks'
     ]);
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -80,7 +83,7 @@ describe('Logging', function() {
     Logging = proxyquire('../', {
       '@google-cloud/common': {
         GrpcService: FakeGrpcService,
-        streamRouter: fakeStreamRouter,
+        paginator: fakePaginator,
         util: fakeUtil
       },
       './log.js': FakeLog,
@@ -101,7 +104,12 @@ describe('Logging', function() {
 
   describe('instantiation', function() {
     it('should extend the correct methods', function() {
-      assert(extended); // See `fakeStreamRouter.extend`
+      assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(logging.getEntriesStream, 'getEntries');
+      assert.strictEqual(logging.getSinksStream, 'getSinks');
     });
 
     it('should normalize the arguments', function() {

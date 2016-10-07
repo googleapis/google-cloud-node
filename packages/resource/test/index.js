@@ -36,7 +36,7 @@ function FakeService() {
 nodeutil.inherits(FakeService, Service);
 
 var extended = false;
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'Resource') {
       return;
@@ -46,6 +46,9 @@ var fakeStreamRouter = {
     assert.equal(Class.name, 'Resource');
     assert.deepEqual(methods, ['getProjects']);
     extended = true;
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -70,7 +73,7 @@ describe('Resource', function() {
     Resource = proxyquire('../', {
       '@google-cloud/common': {
         Service: FakeService,
-        streamRouter: fakeStreamRouter,
+        paginator: fakePaginator,
         util: fakeUtil
       },
       './project.js': FakeProject
@@ -87,7 +90,11 @@ describe('Resource', function() {
 
   describe('instantiation', function() {
     it('should extend the correct methods', function() {
-      assert(extended); // See `fakeStreamRouter.extend`
+      assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(resource.getProjectsStream, 'getProjects');
     });
 
     it('should normalize the arguments', function() {

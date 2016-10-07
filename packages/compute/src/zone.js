@@ -1199,7 +1199,8 @@ Zone.prototype.getOperations = function(options, callback) {
  *     this.end();
  *   });
  */
-Zone.prototype.getOperationsStream = common.paginator.streamify('getOperations');
+Zone.prototype.getOperationsStream =
+  common.paginator.streamify('getOperations');
 
 /**
  * Get a list of VM instances in this zone.
@@ -1282,7 +1283,8 @@ Zone.prototype.getVMs = function(options, callback) {
 };
 
 /**
- * Get a list of {module:compute/vm} instances in this zone as a readable object stream.
+ * Get a list of {module:compute/vm} instances in this zone as a readable object
+ * stream.
  *
  * @param {object=} options - Configuration object. See
  *     {module:compute/zone#getVMs} for a complete list of options.

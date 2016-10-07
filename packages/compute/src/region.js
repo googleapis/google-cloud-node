@@ -444,7 +444,8 @@ Region.prototype.getAddresses = function(options, callback) {
  *     this.end();
  *   });
  */
-Region.prototype.getAddressesStream = common.paginator.streamify('getAddresses');
+Region.prototype.getAddressesStream =
+  common.paginator.streamify('getAddresses');
 
 /**
  * Get a list of operations for this region.

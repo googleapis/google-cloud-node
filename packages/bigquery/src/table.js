@@ -322,14 +322,21 @@ Table.prototype.copy = function(destination, metadata, callback) {
  * @return {ReadableStream}
  *
  * @example
- * var through2 = require('through2');
- * var fs = require('fs');
+ * table.createReadStream(options)
+ *   .on('error', console.error)
+ *   .on('data', function(row) {})
+ *   .on('end', function() {
+ *     // All rows have been retrieved.
+ *   });
  *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
  * table.createReadStream()
- *   .pipe(through2.obj(function(row, enc, next) {
- *     this.push(JSON.stringify(row) + '\n');
- *   }))
- *   .pipe(fs.createWriteStream('./test/testdata/testfile.json'));
+ *   .on('data', function(row) {
+ *     this.end();
+ *   });
  */
 Table.prototype.createReadStream = common.paginator.streamify('getRows');
 
@@ -598,25 +605,6 @@ Table.prototype.export = function(destination, options, callback) {
  * table.getRows({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the rows as a readable object stream.
- * //-
- * table.getRows(options)
- *   .on('error', console.error)
- *   .on('data', function(row) {})
- *   .on('end', function() {
- *     // All rows have been retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * table.getRows()
- *   .on('data', function(row) {
- *     this.end();
- *   });
  */
 Table.prototype.getRows = function(options, callback) {
   var self = this;
@@ -962,7 +950,7 @@ Table.prototype.insert = function(rows, options, callback) {
  * See {module:bigquery#query} for full documentation of this method.
  */
 Table.prototype.query = function(query, callback) {
-  return this.dataset.query(query, callback);
+  this.dataset.query(query, callback);
 };
 
 /**

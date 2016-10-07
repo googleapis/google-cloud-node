@@ -228,6 +228,40 @@ describe('Log', function() {
     });
   });
 
+  describe('getEntriesStream', function() {
+    var fakeStream = {};
+    var EXPECTED_OPTIONS = {
+      filter: 'logName="' + LOG_NAME_FORMATTED + '"'
+    };
+
+    it('should call Logging getEntriesStream with defaults', function(done) {
+      log.parent.getEntriesStream = function(options) {
+        assert.deepEqual(options, EXPECTED_OPTIONS);
+        setImmediate(done);
+        return fakeStream;
+      };
+
+      var stream = log.getEntriesStream();
+      assert.strictEqual(stream, fakeStream);
+    });
+
+    it('should allow overriding the options', function(done) {
+      var options = {
+        custom: true,
+        filter: 'custom filter'
+      };
+
+      log.parent.getEntriesStream = function(options_) {
+        assert.deepEqual(options_, extend({}, EXPECTED_OPTIONS, options));
+        setImmediate(done);
+        return fakeStream;
+      };
+
+      var stream = log.getEntriesStream(options);
+      assert.strictEqual(stream, fakeStream);
+    });
+  });
+
   describe('write', function() {
     var ENTRY = {};
     var OPTIONS = {

@@ -28,9 +28,12 @@ var Cluster = require('../src/cluster.js');
 var Instance = require('../src/instance.js');
 
 var fakeUtil = extend({}, common.util);
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function() {
     this.calledWith_ = arguments;
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -59,7 +62,7 @@ describe('Bigtable', function() {
       '@google-cloud/common': {
         GrpcService: FakeGrpcService,
         GrpcOperation: FakeGrpcOperation,
-        streamRouter: fakeStreamRouter,
+        paginator: fakePaginator,
         util: fakeUtil
       },
       './cluster.js': FakeCluster,
@@ -76,11 +79,15 @@ describe('Bigtable', function() {
   });
 
   describe('instantiation', function() {
-    it('should streamify the correct methods', function() {
-      var args = fakeStreamRouter.calledWith_;
+    it('should extend the correct methods', function() {
+      var args = fakePaginator.calledWith_;
 
       assert.strictEqual(args[0], Bigtable);
       assert.deepEqual(args[1], ['getInstances']);
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(bigtable.getInstancesStream, 'getInstances');
     });
 
     it('should normalize the arguments', function() {

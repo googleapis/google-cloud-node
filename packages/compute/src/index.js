@@ -673,7 +673,8 @@ Compute.prototype.getAddresses = function(options, callback) {
  *     this.end();
  *   });
  */
-Compute.prototype.getAddressesStream = common.paginator.streamify('getAddresses');
+Compute.prototype.getAddressesStream =
+  common.paginator.streamify('getAddresses');
 
 /**
  * Get a list of autoscalers. For a detailed description of this method's

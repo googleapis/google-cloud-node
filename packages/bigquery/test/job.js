@@ -214,15 +214,51 @@ describe('BigQuery/Job', function() {
 
       job.getQueryResults();
     });
+  });
+
+  describe('getQueryResultsStream', function() {
+    var options = {
+      a: 'b',
+      c: 'd'
+    };
+    var callback = util.noop;
+
+    it('should accept an options object', function(done) {
+      job.bigQuery.createQueryStream = function(opts) {
+        assert.deepEqual(opts, options);
+        done();
+      };
+
+      job.getQueryResultsStream(options, callback);
+    });
+
+    it('should accept no arguments', function(done) {
+      job.bigQuery.createQueryStream = function(opts, cb) {
+        assert.deepEqual(opts, { job: job });
+        assert.equal(cb, undefined);
+        done();
+      };
+
+      job.getQueryResultsStream();
+    });
+
+    it('should assign job to the options object', function(done) {
+      job.bigQuery.createQueryStream = function(opts) {
+        assert.deepEqual(opts.job, job);
+        done();
+      };
+
+      job.getQueryResultsStream();
+    });
 
     it('should return the result of the call to bq.query', function(done) {
-      job.bigQuery.query = function() {
+      job.bigQuery.createQueryStream = function() {
         return {
           done: done
         };
       };
 
-      job.getQueryResults().done();
+      job.getQueryResultsStream().done();
     });
   });
 

@@ -32,7 +32,7 @@ var fakeUtil = extend({}, util, {
 });
 
 var extended = false;
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'Compute') {
       return;
@@ -58,6 +58,9 @@ var fakeStreamRouter = {
       'getVMs',
       'getZones'
     ]);
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -119,7 +122,7 @@ describe('Compute', function() {
     Compute = proxyquire('../', {
       '@google-cloud/common': {
         Service: FakeService,
-        streamRouter: fakeStreamRouter,
+        paginator: fakePaginator,
         util: fakeUtil
       },
       './firewall.js': FakeFirewall,
@@ -182,6 +185,25 @@ describe('Compute', function() {
         'https://www.googleapis.com/auth/compute'
       ]);
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(compute.getAddressesStream, 'getAddresses');
+      assert.strictEqual(compute.getAutoscalersStream, 'getAutoscalers');
+      assert.strictEqual(compute.getDisksStream, 'getDisks');
+      assert.strictEqual(compute.getInstanceGroupsStream, 'getInstanceGroups');
+      assert.strictEqual(compute.getFirewallsStream, 'getFirewalls');
+      assert.strictEqual(compute.getHealthChecksStream, 'getHealthChecks');
+      assert.strictEqual(compute.getMachineTypesStream, 'getMachineTypes');
+      assert.strictEqual(compute.getNetworksStream, 'getNetworks');
+      assert.strictEqual(compute.getOperationsStream, 'getOperations');
+      assert.strictEqual(compute.getRegionsStream, 'getRegions');
+      assert.strictEqual(compute.getRulesStream, 'getRules');
+      assert.strictEqual(compute.getServicesStream, 'getServices');
+      assert.strictEqual(compute.getSnapshotsStream, 'getSnapshots');
+      assert.strictEqual(compute.getSubnetworksStream, 'getSubnetworks');
+      assert.strictEqual(compute.getVMsStream, 'getVMs');
+      assert.strictEqual(compute.getZonesStream, 'getZones');
     });
   });
 

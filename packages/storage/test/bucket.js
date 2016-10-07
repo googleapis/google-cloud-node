@@ -70,7 +70,7 @@ fakeAsync.eachLimit = function() {
 };
 
 var extended = false;
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'Bucket') {
       return;
@@ -80,6 +80,9 @@ var fakeStreamRouter = {
     assert.equal(Class.name, 'Bucket');
     assert.deepEqual(methods, ['getFiles']);
     extended = true;
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -109,7 +112,7 @@ describe('Bucket', function() {
       request: fakeRequest,
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        streamRouter: fakeStreamRouter
+        paginator: fakePaginator
       },
       './acl.js': FakeAcl,
       './file.js': FakeFile
@@ -124,7 +127,11 @@ describe('Bucket', function() {
 
   describe('instantiation', function() {
     it('should extend the correct methods', function() {
-      assert(extended); // See `fakeStreamRouter.extend`
+      assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(bucket.getFilesStream, 'getFiles');
     });
 
     it('should localize the name', function() {

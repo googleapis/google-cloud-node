@@ -477,7 +477,7 @@ Table.prototype.getMetadata = function(options, callback) {
  * // If the `start` key is omitted, it is interpreted as an empty string.
  * // If the `end` key is omitted, it is interpreted as infinity.
  * //-
- * table.getRows({
+ * table.getRowsStream({
  *   start: 'alincoln',
  *   end: 'gwashington'
  * });

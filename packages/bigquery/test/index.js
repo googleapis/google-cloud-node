@@ -40,7 +40,7 @@ FakeTable.mergeSchemaWithRows_ = function() {
 };
 
 var extended = false;
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'BigQuery') {
       return;
@@ -50,6 +50,9 @@ var fakeStreamRouter = {
     assert.equal(Class.name, 'BigQuery');
     assert.deepEqual(methods, ['getDatasets', 'getJobs', 'query']);
     extended = true;
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -72,7 +75,7 @@ describe('BigQuery', function() {
       './table.js': FakeTable,
       '@google-cloud/common': {
         Service: FakeService,
-        streamRouter: fakeStreamRouter,
+        paginator: fakePaginator,
         util: fakeUtil
       }
     });
@@ -84,7 +87,14 @@ describe('BigQuery', function() {
 
   describe('instantiation', function() {
     it('should extend the correct methods', function() {
-      assert(extended); // See `fakeStreamRouter.extend`
+      assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(bq.getDatasetsStream, 'getDatasets');
+      assert.strictEqual(bq.getJobsStream, 'getJobs');
+      assert.strictEqual(bq.createQueryStream, 'query');
+      assert.strictEqual(bq.getDatasetsStream, 'getDatasets');
     });
 
     it('should normalize the arguments', function() {

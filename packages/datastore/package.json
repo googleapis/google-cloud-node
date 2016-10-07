@@ -67,6 +67,7 @@
     "deep-strict-equal": "^0.2.0",
     "mocha": "^3.0.1",
     "proxyquire": "^1.7.10",
+    "sinon": "^1.17.6",
     "through2": "^2.0.0"
   },
   "scripts": {

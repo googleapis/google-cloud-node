@@ -233,7 +233,8 @@ Resource.prototype.getProjects = function(options, callback) {
  *     this.end();
  *   });
  */
-Resource.prototype.getProjectsStream = common.paginator.streamify('getProjects');
+Resource.prototype.getProjectsStream =
+  common.paginator.streamify('getProjects');
 
 /**
  * Create a Project object. See {module:resoucemanager/createProject} to create

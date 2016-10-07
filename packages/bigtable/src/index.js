@@ -153,7 +153,7 @@ var Instance = require('./instance.js');
  * // If you're anticipating a large number of rows to be returned, we suggest
  * // using the {module:bigtable/table#getRows} streaming API.
  * //-
- * table.getRows()
+ * table.getRowsStream()
  *   .on('error', console.error)
  *   .on('data', function(row) {
  *     // `row` is a Row object.

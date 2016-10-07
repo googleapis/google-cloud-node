@@ -543,7 +543,8 @@ Instance.prototype.getClusters = function(query, callback) {
  *     this.end();
  *   });
  */
-Instance.prototype.getClustersStream = common.paginator.streamify('getClusters');
+Instance.prototype.getClustersStream =
+  common.paginator.streamify('getClusters');
 
 /**
  * Get Table objects for all the tables in your Compute instance.
