@@ -268,7 +268,7 @@ function encodeValue(value) {
   }
 
   if (value instanceof Buffer) {
-    valueProto.blobValue = value.toString('base64');
+    valueProto.blobValue = value;
     return valueProto;
   }
 
@@ -622,11 +622,7 @@ function queryToQueryProto(query) {
   };
 
   if (query.endVal) {
-    if (is.string(query.endVal)) {
-      queryProto.endCursor = query.endVal;
-    } else {
-      queryProto.endCursor = query.endVal.toString('base64');
-    }
+    queryProto.endCursor = query.endVal;
   }
 
   if (query.limitVal > 0) {
@@ -640,11 +636,7 @@ function queryToQueryProto(query) {
   }
 
   if (query.startVal) {
-    if (is.string(query.startVal)) {
-      queryProto.startCursor = query.startVal;
-    } else {
-      queryProto.startCursor = query.startVal.toString('base64');
-    }
+    queryProto.startCursor = query.startVal;
   }
 
   if (query.filters.length > 0) {

@@ -357,7 +357,7 @@ describe('entity', function() {
       var value = new Buffer('Hi');
 
       var expectedValueProto = {
-        blobValue: value.toString('base64')
+        blobValue: value
       };
 
       assert.deepEqual(entity.encodeValue(value), expectedValueProto);
@@ -881,8 +881,8 @@ describe('entity', function() {
         .end(endVal);
 
       var queryProto = entity.queryToQueryProto(query);
-      assert.strictEqual(queryProto.endCursor, endVal.toString('base64'));
-      assert.strictEqual(queryProto.startCursor, startVal.toString('base64'));
+      assert.strictEqual(queryProto.endCursor, endVal);
+      assert.strictEqual(queryProto.startCursor, startVal);
     });
   });
 });
