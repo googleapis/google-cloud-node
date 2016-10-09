@@ -53,6 +53,14 @@ var PKG = require('../package.json');
  *
  * @param {object} options - [Configuration object](#/docs).
  * @param {string} options.key - An API key.
+ *
+ * @example
+ * //-
+ * // <h3>Custom Translate API</h3>
+ * //
+ * // The environment variable, `GOOGLE_CLOUD_TRANSLATE_ENDPOINT`, is honored as
+ * // a custom backend which our library will send requests to.
+ * //-
  */
 function Translate(options) {
   if (!(this instanceof Translate)) {
@@ -64,6 +72,13 @@ function Translate(options) {
 
   if (!options.key) {
     throw new Error('An API key is required to use the Translate API.');
+  }
+
+  this.baseUrl = 'https://www.googleapis.com/language/translate/v2';
+
+  if (process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT) {
+    this.baseUrl = process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT
+      .replace(/\/+$/, '');
   }
 
   this.options = options;
@@ -382,9 +397,7 @@ Translate.prototype.translate = function(input, options, callback) {
  * @param {function} callback - The callback function passed to `request`.
  */
 Translate.prototype.request = function(reqOpts, callback) {
-  var BASE_URL = 'https://www.googleapis.com/language/translate/v2';
-
-  reqOpts.uri = BASE_URL + reqOpts.uri;
+  reqOpts.uri = this.baseUrl + reqOpts.uri;
 
   reqOpts = extend(true, {}, reqOpts, {
     qs: {
