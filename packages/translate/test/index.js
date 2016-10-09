@@ -33,7 +33,9 @@ var fakeUtil = extend({}, util, {
 });
 
 describe('Translate', function() {
-  var API_KEY = 'api-key';
+  var OPTIONS = {
+    key: 'api-key'
+  };
 
   var Translate;
   var translate;
@@ -49,16 +51,14 @@ describe('Translate', function() {
   beforeEach(function() {
     makeRequestOverride = null;
 
-    translate = new Translate({
-      key: API_KEY
-    });
+    translate = new Translate(OPTIONS);
   });
 
   describe('instantiation', function() {
     it('should normalize the arguments', function() {
       var normalizeArguments = fakeUtil.normalizeArguments;
       var normalizeArgumentsCalled = false;
-      var fakeOptions = { key: API_KEY };
+      var fakeOptions = extend({}, OPTIONS);
       var fakeContext = {};
 
       fakeUtil.normalizeArguments = function(context, options, cfg) {
@@ -81,14 +81,48 @@ describe('Translate', function() {
       }, /An API key is required to use the Translate API\./);
     });
 
+    it('should default baseUrl correctly', function() {
+      assert.strictEqual(
+        translate.baseUrl,
+        'https://www.googleapis.com/language/translate/v2'
+      );
+    });
+
     it('should localize the options', function() {
-      var options = { key: API_KEY };
+      var options = { key: '...' };
       var translate = new Translate(options);
       assert.strictEqual(translate.options, options);
     });
 
     it('should localize the api key', function() {
-      assert.equal(translate.key, API_KEY);
+      assert.equal(translate.key, OPTIONS.key);
+    });
+
+    describe('GOOGLE_CLOUD_TRANSLATE_ENDPOINT', function() {
+      var CUSTOM_ENDPOINT = '...';
+      var translate;
+
+      before(function() {
+        process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT = CUSTOM_ENDPOINT;
+        translate = new Translate(OPTIONS);
+      });
+
+      after(function() {
+        delete process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT;
+      });
+
+      it('should correctly set the baseUrl', function() {
+        assert.strictEqual(translate.baseUrl, CUSTOM_ENDPOINT);
+      });
+
+      it('should remove trailing slashes', function() {
+        var expectedBaseUrl = 'http://localhost:8080';
+
+        process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT = 'http://localhost:8080//';
+
+        var translate = new Translate(OPTIONS);
+        assert.strictEqual(translate.baseUrl, expectedBaseUrl);
+      });
     });
   });
 
@@ -446,8 +480,8 @@ describe('Translate', function() {
           'User-Agent': userAgent
         }
       });
-      var BASE_URL = 'https://www.googleapis.com/language/translate/v2';
-      expectedReqOpts.uri = BASE_URL + reqOpts.uri;
+
+      expectedReqOpts.uri = translate.baseUrl + reqOpts.uri;
 
       makeRequestOverride = function(reqOpts, options, callback) {
         assert.deepEqual(reqOpts, expectedReqOpts);
