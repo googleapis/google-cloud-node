@@ -372,6 +372,15 @@ util.inherits(Bigtable, common.GrpcService);
  * };
  *
  * bigtable.createInstance('my-instance', options, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bigtable.createInstance('my-instance', options).then(function(data) {
+ *   var instance = data[0];
+ *   var operation = data[1];
+ *   var apiResponse = data[2];
+ * });
  */
 Bigtable.prototype.createInstance = function(name, options, callback) {
   var self = this;
@@ -456,6 +465,11 @@ Bigtable.prototype.createInstance = function(name, options, callback) {
  * bigtable.getInstances({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bigtable.getInstances().then(function(instances) {});
  */
 Bigtable.prototype.getInstances = function(query, callback) {
   var self = this;
@@ -550,5 +564,16 @@ Bigtable.prototype.operation = function(name) {
  * These methods can be auto-paginated.
  */
 common.paginator.extend(Bigtable, ['getInstances']);
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(Bigtable, {
+  filter: function(methodName) {
+    return ['instance', 'operation'].indexOf(methodName) === -1;
+  }
+});
 
 module.exports = Bigtable;

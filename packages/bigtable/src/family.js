@@ -58,6 +58,14 @@ function Family(table, name) {
      * family.create(function(err, family, apiResponse) {
      *   // The column family was created successfully.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * family.create().then(function(data) {
+     *   var family = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     create: true,
 
@@ -71,6 +79,11 @@ function Family(table, name) {
      *
      * @example
      * family.delete(function(err, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * family.delete().then(function(apiResponse) {});
      */
     delete: {
       protoOpts: {
@@ -96,6 +109,11 @@ function Family(table, name) {
      *
      * @example
      * family.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * family.exists().then(function(exists) {});
      */
     exists: true,
 
@@ -114,6 +132,14 @@ function Family(table, name) {
      * @example
      * family.get(function(err, family, apiResponse) {
      *   // `family.metadata` has been populated.
+     * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * family.get().then(function(data) {
+     *   var family = data[0];
+     *   var apiResponse = data[1];
      * });
      */
     get: true
@@ -229,6 +255,14 @@ Family.formatRule_ = function(ruleObj) {
  *
  * @example
  * family.getMetadata(function(err, metadata, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * family.getMetadata().then(function(data) {
+ *   var metadata = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Family.prototype.getMetadata = function(callback) {
   var self = this;
@@ -268,12 +302,19 @@ Family.prototype.getMetadata = function(callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * family.setMetadata({
+ * var metadata = {
  *   rule: {
  *     versions: 2,
  *     union: true
  *   }
- * }, function(err, apiResponse) {});
+ * };
+ *
+ * family.setMetadata(metadata, function(err, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * family.setMetadata(metadata).then(function(apiResponse) {});
  */
 Family.prototype.setMetadata = function(metadata, callback) {
   var self = this;
@@ -307,6 +348,13 @@ Family.prototype.setMetadata = function(metadata, callback) {
     callback(null, self.metadata, resp);
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(Family);
 
 module.exports = Family;
 module.exports.FamilyError = FamilyError;

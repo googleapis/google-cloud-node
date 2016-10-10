@@ -27,7 +27,20 @@ var common = require('@google-cloud/common');
 var Cluster = require('../src/cluster.js');
 var Instance = require('../src/instance.js');
 
-var fakeUtil = extend({}, common.util);
+var promisified = false;
+var fakeUtil = extend({}, common.util, {
+  promisify: function(Class, options) {
+    if (Class.name !== 'Bigtable') {
+      return;
+    }
+
+    promisified = true;
+
+    assert.strictEqual(options.filter('instance'), false);
+    assert.strictEqual(options.filter('operation'), false);
+  }
+});
+
 var fakePaginator = {
   extend: function() {
     this.calledWith_ = arguments;
@@ -88,6 +101,10 @@ describe('Bigtable', function() {
 
     it('should streamify the correct methods', function() {
       assert.strictEqual(bigtable.getInstancesStream, 'getInstances');
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should normalize the arguments', function() {

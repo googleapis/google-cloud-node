@@ -18,6 +18,7 @@
 
 var assert = require('assert');
 var events = require('events');
+var extend = require('extend');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var pumpify = require('pumpify');
@@ -29,6 +30,22 @@ var common = require('@google-cloud/common');
 var Family = require('../src/family.js');
 var Mutation = require('../src/mutation.js');
 var Row = require('../src/row.js');
+
+var promisified = false;
+var fakeUtil = extend({}, common.util, {
+  promisify: function(Class, options) {
+    if (Class.name !== 'Table') {
+      return;
+    }
+
+    promisified = true;
+
+    assert.strictEqual(options.filter('family'), false);
+    assert.strictEqual(options.filter('insert'), false);
+    assert.strictEqual(options.filter('mutate'), false);
+    assert.strictEqual(options.filter('row'), false);
+  }
+});
 
 function createFake(Class) {
   function Fake() {
@@ -87,7 +104,8 @@ describe('Bigtable/Table', function() {
     Table = proxyquire('../src/table.js', {
       '@google-cloud/common': {
         GrpcService: FakeGrpcService,
-        GrpcServiceObject: FakeGrpcServiceObject
+        GrpcServiceObject: FakeGrpcServiceObject,
+        util: fakeUtil
       },
       './family.js': FakeFamily,
       './mutation.js': FakeMutation,
@@ -144,6 +162,10 @@ describe('Bigtable/Table', function() {
       });
 
       assert(Table.formatName_.calledWith(INSTANCE.id, TABLE_ID));
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should use Instance#createTable to create the table', function(done) {

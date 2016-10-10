@@ -63,6 +63,15 @@ function Cluster(instance, name) {
      *       // The cluster was created successfully.
      *     });
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * cluster.create().then(function(data) {
+     *   var cluster = data[0];
+     *   var operation = data[1];
+     *   var apiResponse = data[2];
+     * });
      */
     create: true,
 
@@ -76,6 +85,11 @@ function Cluster(instance, name) {
      *
      * @example
      * cluster.delete(function(err, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * cluster.delete().then(function(apiResponse) {});
      */
     delete: {
       protoOpts: {
@@ -97,6 +111,11 @@ function Cluster(instance, name) {
      *
      * @example
      * cluster.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * cluster.exists().then(function(exists) {});
      */
     exists: true,
 
@@ -106,6 +125,14 @@ function Cluster(instance, name) {
      * @example
      * cluster.get(function(err, cluster, apiResponse) {
      *   // The `cluster` data has been populated.
+     * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * cluster.get().then(function(data) {
+     *   var cluster = data[0];
+     *   var apiResponse = data[1];
      * });
      */
     get: true,
@@ -121,6 +148,14 @@ function Cluster(instance, name) {
      *
      * @example
      * cluster.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * cluster.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: {
       protoOpts: {
@@ -226,11 +261,21 @@ Cluster.getStorageType_ = function(type) {
  *     });
  * };
  *
- * cluster.setMetadata({
+ * var metadata = {
  *   location: 'us-central1-b',
  *   nodes: 3,
  *   storage: 'ssd'
- * }, callback);
+ * };
+ *
+ * cluster.setMetadata(metadata, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * cluster.setMetadata(metadata).then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Cluster.prototype.setMetadata = function(options, callback) {
   var protoOpts = {
@@ -271,5 +316,12 @@ Cluster.prototype.setMetadata = function(options, callback) {
     callback(null, operation, resp);
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(Cluster);
 
 module.exports = Cluster;

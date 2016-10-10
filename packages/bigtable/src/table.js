@@ -83,6 +83,14 @@ function Table(instance, name) {
      *     // The table was created successfully.
      *   }
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * table.create().then(function(data) {
+     *   var table = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     create: true,
 
@@ -96,6 +104,11 @@ function Table(instance, name) {
      *
      * @example
      * table.delete(function(err, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * table.delete().then(function(apiResponse) {});
      */
     delete: {
       protoOpts: {
@@ -117,6 +130,11 @@ function Table(instance, name) {
      *
      * @example
      * table.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * table.exists().then(function(exists) {});
      */
     exists: true,
 
@@ -137,6 +155,14 @@ function Table(instance, name) {
      * @example
      * table.get(function(err, table, apiResponse) {
      *   // The `table` data has been populated.
+     * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * table.get().then(function(data) {
+     *   var table = data[0];
+     *   var apiResponse = data[0];
      * });
      */
     get: true
@@ -232,6 +258,14 @@ Table.formatName_ = function(instanceName, name) {
  * };
  *
  * table.createFamily('follows', rule, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * table.createFamily('follows').then(function(data) {
+ *   var family = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Table.prototype.createFamily = function(name, rule, callback) {
   var self = this;
@@ -454,6 +488,11 @@ Table.prototype.createReadStream = function(options) {
  * // If you choose to omit the prefix, all rows in the table will be deleted.
  * //-
  * table.deleteRows(callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * table.deleteRows().then(function(apiResponse) {});
  */
 Table.prototype.deleteRows = function(options, callback) {
   if (is.function(options)) {
@@ -510,6 +549,14 @@ Table.prototype.family = function(name) {
  * table.getFamilies(function(err, families, apiResponse) {
  *   // `families` is an array of Family objects.
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * table.getFamilies().then(function(data) {
+ *   var families = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Table.prototype.getFamilies = function(callback) {
   var self = this;
@@ -543,6 +590,14 @@ Table.prototype.getFamilies = function(callback) {
  *
  * @example
  * table.getMetadata(function(err, metadata, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * table.getMetadata().then(function(data) {
+ *   var metadata = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Table.prototype.getMetadata = function(options, callback) {
   var self = this;
@@ -592,6 +647,11 @@ Table.prototype.getMetadata = function(options, callback) {
  *     // `rows` is an array of Row objects.
  *   }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * table.getRows().then(function(rows) {});
  */
 Table.prototype.getRows = function(options, callback) {
   if (is.function(options)) {
@@ -904,6 +964,11 @@ Table.prototype.row = function(key) {
  *   //   ...
  *   // ]
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * table.sampleRowKeys().then(function(keys) {});
  */
 Table.prototype.sampleRowKeys = function(callback) {
   this.sampleRowKeysStream()
@@ -957,5 +1022,16 @@ Table.prototype.sampleRowKeysStream = function() {
     })
   ]);
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(Table, {
+  filter: function(methodName) {
+    return ['family', 'insert', 'mutate', 'row'].indexOf(methodName) === -1;
+  }
+});
 
 module.exports = Table;
