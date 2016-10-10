@@ -20,9 +20,7 @@ var pubsub = require('@google-cloud/pubsub')({
 var topic = pubsub.topic('my-topic');
 
 // Publish a message to the topic.
-topic.publish({
-  data: 'New message!'
-}, function(err) {});
+topic.publish('New message!', function(err) {});
 
 // Subscribe to the topic.
 var options = {

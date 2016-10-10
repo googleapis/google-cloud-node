@@ -22,8 +22,8 @@
 
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
+var extend = require('extend');
 var is = require('is');
-var prop = require('propprop');
 var util = require('util');
 
 /**
@@ -282,32 +282,27 @@ Topic.prototype.getSubscriptions = function(options, callback) {
  * @resource [Topics: publish API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/publish}
  *
  * @throws {Error} If no message is provided.
- * @throws {Error} If a message is missing a data property.
  *
- * @param {object|object[]} message - The message(s) to publish.
- * @param {*} message.data - The contents of the message.
- * @param {array=} message.attributes - Key/value pair of attributes to apply to
- *     the message. All values must be strings.
+ * @param {*|*[]} message - The message(s) to publish. If you need to
+ *     provide attributes for the message, you must enable `options.raw`, then
+ *     box your message in to an object with a `data` and `attributes` property.
+ *     `data` will be the raw message value you want to publish, and
+ *     `attributes` is a key/value pair of attributes to apply to the message.
+ * @param {object=} options - Configuration object.
+ * @param {boolean} options.raw - Enable if you require setting attributes on
+ *     your messages.
  * @param {function=} callback - The callback function.
  *
  * @example
- * topic.publish({
- *   data: 'Hello, world!'
- * }, function(err, messageIds, apiResponse) {});
+ * topic.publish('Hello, world!', function(err, messageIds, apiResponse) {});
  *
  * //-
- * // The data property can be a JSON object as well.
+ * // You can also publish a JSON object.
  * //-
  * var registerMessage = {
- *   data: {
- *     userId: 3,
- *     name: 'Stephen',
- *     event: 'new user'
- *   },
- *   attributes: {
- *     key: 'value',
- *     hello: 'world'
- *   }
+ *   userId: 3,
+ *   name: 'Stephen',
+ *   event: 'new user'
  * };
  *
  * topic.publish(registerMessage, function(err, messageIds, apiResponse) {});
@@ -327,19 +322,42 @@ Topic.prototype.getSubscriptions = function(options, callback) {
  *   registerMessage,
  *   purchaseMessage
  * ], function(err, messageIds, apiResponse) {});
+ *
+ * //-
+ * // Set attributes with your message.
+ * //-
+ * var message = {
+ *   data: {
+ *     userId: 3,
+ *     product: 'book',
+ *     event: 'rent'
+ *   },
+ *   attributes: {
+ *     key: 'value',
+ *     hello: 'world'
+ *   }
+ * };
+ *
+ * var options = {
+ *   raw: true
+ * };
+ *
+ * topic.publish(message, options, function(err, messageIds, apiResponse) {});
  */
-Topic.prototype.publish = function(messages, callback) {
+Topic.prototype.publish = function(messages, options, callback) {
   messages = arrify(messages);
+
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = options || {};
+  callback = callback || common.util.noop;
 
   if (messages.length === 0) {
     throw new Error('Cannot publish without a message.');
   }
-
-  if (!messages.every(prop('data'))) {
-    throw new Error('Cannot publish message without a `data` property.');
-  }
-
-  callback = callback || common.util.noop;
 
   var protoOpts = {
     service: 'Publisher',
@@ -348,7 +366,14 @@ Topic.prototype.publish = function(messages, callback) {
 
   var reqOpts = {
     topic: this.name,
-    messages: messages.map(Topic.formatMessage_)
+    messages: messages
+      .map(function(message) {
+        if (is.object(message)) {
+          message = extend(true, {}, message);
+        }
+        return options.raw ? message : { data: message };
+      })
+      .map(Topic.formatMessage_)
   };
 
   this.request(protoOpts, reqOpts, function(err, result) {

@@ -425,9 +425,7 @@ var pubsubClient = pubsub({
 var topic = pubsubClient.topic('my-topic');
 
 // Publish a message to the topic.
-topic.publish({
-  data: 'New message!'
-}, function(err) {});
+topic.publish('New message!', function(err) {});
 
 // Subscribe to the topic.
 var options = {

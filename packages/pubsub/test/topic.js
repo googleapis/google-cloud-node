@@ -180,7 +180,9 @@ describe('Topic', function() {
 
   describe('publish', function() {
     var message = 'howdy';
-    var messageObject = { data: message };
+    var attributes = {
+      key: 'value'
+    };
 
     it('should throw if no message is provided', function() {
       assert.throws(function() {
@@ -190,12 +192,6 @@ describe('Topic', function() {
       assert.throws(function() {
         topic.publish([]);
       }, /Cannot publish without a message\./);
-    });
-
-    it('should throw if a message has no data', function() {
-      assert.throws(function() {
-        topic.publish({});
-      }, /Cannot publish message without a `data` property\./);
     });
 
     it('should send correct api request', function(done) {
@@ -211,7 +207,39 @@ describe('Topic', function() {
         done();
       };
 
-      topic.publish(messageObject, assert.ifError);
+      topic.publish(message, assert.ifError);
+    });
+
+    it('should send correct api request for raw message', function(done) {
+      topic.request = function(protoOpts, reqOpts) {
+        assert.deepEqual(reqOpts.messages, [
+          {
+            data: new Buffer(JSON.stringify(message)).toString('base64'),
+            attributes: attributes
+          }
+        ]);
+
+        done();
+      };
+
+      topic.publish({
+        data: message,
+        attributes: attributes
+      }, { raw: true }, assert.ifError);
+    });
+
+    it('should clone the provided message', function(done) {
+      var message = {
+        data: 'data'
+      };
+      var originalMessage = extend({}, message);
+
+      topic.request = function() {
+        assert.deepEqual(message, originalMessage);
+        done();
+      };
+
+      topic.publish(message, { raw: true }, assert.ifError);
     });
 
     it('should execute callback', function(done) {
@@ -219,7 +247,7 @@ describe('Topic', function() {
         callback(null, {});
       };
 
-      topic.publish(messageObject, done);
+      topic.publish(message, done);
     });
 
     it('should execute callback with error', function(done) {
@@ -230,7 +258,7 @@ describe('Topic', function() {
         callback(error, apiResponse);
       };
 
-      topic.publish(messageObject, function(err, ackIds, apiResponse_) {
+      topic.publish(message, function(err, ackIds, apiResponse_) {
         assert.strictEqual(err, error);
         assert.strictEqual(ackIds, null);
         assert.strictEqual(apiResponse_, apiResponse);
@@ -246,7 +274,7 @@ describe('Topic', function() {
         callback(null, resp);
       };
 
-      topic.publish(messageObject, function(err, ackIds, apiResponse) {
+      topic.publish(message, function(err, ackIds, apiResponse) {
         assert.deepEqual(resp, apiResponse);
         done();
       });
