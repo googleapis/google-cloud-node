@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      http:// www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -1405,8 +1405,8 @@ describe('common/util', function() {
       };
 
       FakeClass.prototype.method_ = util.noop;
+      FakeClass.prototype._method = util.noop;
       FakeClass.prototype.methodStream = util.noop;
-      FakeClass.prototype.methodSync = util.noop;
 
       util.promisify(FakeClass);
       instance = new FakeClass();
@@ -1418,7 +1418,24 @@ describe('common/util', function() {
       assert(FakeClass.prototype.methodError.promisified_);
 
       assert.strictEqual(FakeClass.prototype.method_, util.noop);
+      assert.strictEqual(FakeClass.prototype._method, util.noop);
       assert.strictEqual(FakeClass.prototype.methodStream, util.noop);
+    });
+
+    it('should optionally except a filter', function() {
+      function FakeClass2() {}
+
+      FakeClass2.prototype.methodSync = util.noop;
+      FakeClass2.prototype.method = function() {};
+
+      util.promisify(FakeClass2, {
+        filter: function(methodName) {
+          return methodName !== 'methodSync';
+        }
+      });
+
+      assert.strictEqual(FakeClass2.prototype.methodSync, util.noop);
+      assert(FakeClass2.prototype.method.promisified_);
     });
 
     it('should not return a promise in callback mode', function(done) {

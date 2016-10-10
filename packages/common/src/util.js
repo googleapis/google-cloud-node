@@ -642,15 +642,15 @@ util.getUserAgentFromPackageJson = getUserAgentFromPackageJson;
  */
 function promisify(Class, options) {
   var slice = Array.prototype.slice;
-
-  var filter = options && options.filter || function(methodName) {
-    return /(query|[A-Z])/.test(methodName);
-  };
+  var filter = options && options.filter || noop;
 
   var methods = Object
     .keys(Class.prototype)
     .filter(function(methodName) {
-      return !/.+(\_|Stream)$/.test(methodName) && filter(methodName);
+      var isFunc = is.fn(Class.prototype[methodName]);
+      var isPromisable = !/(^\_|(Stream|\_)$)/.test(methodName);
+
+      return isFunc && isPromisable && filter(methodName) !== false;
     });
 
   methods.forEach(function(methodName) {

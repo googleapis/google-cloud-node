@@ -332,4 +332,11 @@ ServiceObject.prototype.request = function(reqOpts, callback) {
   return this.parent.request(reqOpts, callback);
 };
 
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+util.promisify(ServiceObject);
+
 module.exports = ServiceObject;

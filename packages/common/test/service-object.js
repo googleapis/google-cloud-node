@@ -18,13 +18,25 @@
 
 var assert = require('assert');
 var extend = require('extend');
+var proxyquire = require('proxyquire');
 
-var ServiceObject = require('../src/service-object.js');
 var util = require('../src/util.js');
 
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisify: function(Class) {
+    console.log('yeahboi');
+    console.log(Class.name);
+    if (Class.name === 'ServiceObject') {
+      promisified = true;
+    }
+  }
+});
+
 describe('ServiceObject', function() {
+  var ServiceObject;
   var serviceObject;
-  var originalRequest = ServiceObject.prototype.request;
+  var originalRequest;
 
   var CONFIG = {
     baseUrl: 'base-url',
@@ -33,12 +45,24 @@ describe('ServiceObject', function() {
     createMethod: util.noop
   };
 
+  before(function() {
+    ServiceObject = proxyquire('../src/service-object.js', {
+      './util.js': fakeUtil
+    });
+
+    originalRequest = ServiceObject.prototype.request;
+  });
+
   beforeEach(function() {
     ServiceObject.prototype.request = originalRequest;
     serviceObject = new ServiceObject(CONFIG);
   });
 
   describe('instantiation', function() {
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
+
     it('should create an empty metadata object', function() {
       assert.deepEqual(serviceObject.metadata, {});
     });
