@@ -228,6 +228,20 @@ describe('Topic', function() {
       }, { raw: true }, assert.ifError);
     });
 
+    it('should clone the provided message', function(done) {
+      var message = {
+        data: 'data'
+      };
+      var originalMessage = extend({}, message);
+
+      topic.request = function() {
+        assert.deepEqual(message, originalMessage);
+        done();
+      };
+
+      topic.publish(message, { raw: true }, assert.ifError);
+    });
+
     it('should execute callback', function(done) {
       topic.request = function(protoOpts, reqOpts, callback) {
         callback(null, {});

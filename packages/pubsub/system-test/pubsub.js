@@ -24,14 +24,6 @@ var uuid = require('node-uuid');
 var env = require('../../../system-test/env.js');
 var pubsub = require('../')(env);
 
-function generateSubName() {
-  return 'test-subscription-' + uuid.v4();
-}
-
-function generateTopicName() {
-  return 'test-topic-' + uuid.v4();
-}
-
 describe('pubsub', function() {
   var TOPIC_NAMES = [
     generateTopicName(),
@@ -50,6 +42,53 @@ describe('pubsub', function() {
     TOPICS[1].name,
     TOPICS[2].name
   ];
+
+  function generateSubName() {
+    return 'test-subscription-' + uuid.v4();
+  }
+
+  function generateTopicName() {
+    return 'test-topic-' + uuid.v4();
+  }
+
+  function publishPop(message, options, callback) {
+    if (!callback) {
+      callback = options;
+      options = {};
+    }
+
+    options = options || {};
+
+    var topic = pubsub.topic(generateTopicName());
+    var subscription = topic.subscription(generateSubName());
+
+    async.series([
+      topic.create.bind(topic),
+      subscription.create.bind(subscription),
+      function(callback) {
+        async.times(6, function(_, callback) {
+          topic.publish(message, options, callback);
+        }, callback);
+      }
+    ], function(err) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      subscription.pull({
+        returnImmediately: true,
+        maxResults: 1
+      }, function(err, messages) {
+        if (err) {
+          callback(err);
+          return;
+        }
+
+        callback(null, messages.pop());
+      });
+    });
+  }
 
   before(function(done) {
     // create all needed topics
@@ -128,15 +167,19 @@ describe('pubsub', function() {
     });
 
     it('should publish a message with attributes', function(done) {
-      var topic = pubsub.topic(TOPIC_NAMES[1]);
-      topic.publish({
+      var rawMessage = {
         data: 'raw message data',
         attributes: {
-          raw: true
+          customAttribute: 'value'
         }
-      }, function(err, messageIds) {
+      };
+
+      publishPop(rawMessage, { raw: true }, function(err, message) {
         assert.ifError(err);
-        assert.strictEqual(messageIds.length, 1);
+
+        assert.strictEqual(message.data, rawMessage.data);
+        assert.deepEqual(message.attributes, rawMessage.attributes);
+
         done();
       });
     });

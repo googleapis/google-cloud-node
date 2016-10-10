@@ -22,6 +22,7 @@
 
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
+var extend = require('extend');
 var is = require('is');
 var util = require('util');
 
@@ -367,6 +368,9 @@ Topic.prototype.publish = function(messages, options, callback) {
     topic: this.name,
     messages: messages
       .map(function(message) {
+        if (is.object(message)) {
+          message = extend(true, {}, message);
+        }
         return options.raw ? message : { data: message };
       })
       .map(Topic.formatMessage_)
