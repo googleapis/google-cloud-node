@@ -312,7 +312,7 @@ Query.prototype.offset = function(n) {
  * // unnecessary processing and API requests.
  * //-
  * query.run()
- *   .on('data', function (entity) {
+ *   .on('data', function(entity) {
  *     this.end();
  *   });
  *
@@ -323,8 +323,9 @@ Query.prototype.offset = function(n) {
  * query.select('__key__');
  *
  * query.run(function(err, entities) {
- *   // entities[].key = Key object
- *   // entities[].data = Empty object
+ *   var keys = entities.map(function(entity) {
+ *     return entity[datastore.KEY];
+ *   });
  * });
  */
 Query.prototype.run = function() {
