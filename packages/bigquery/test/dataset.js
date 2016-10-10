@@ -26,7 +26,7 @@ var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 
 var extended = false;
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'Dataset') {
       return;
@@ -36,6 +36,9 @@ var fakeStreamRouter = {
     assert.equal(Class.name, 'Dataset');
     assert.deepEqual(methods, ['getTables']);
     extended = true;
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -59,7 +62,7 @@ describe('BigQuery/Dataset', function() {
   before(function() {
     Dataset = proxyquire('../src/dataset.js', {
       '@google-cloud/common': {
-        streamRouter: fakeStreamRouter,
+        paginator: fakePaginator,
         ServiceObject: FakeServiceObject
       }
     });
@@ -72,7 +75,11 @@ describe('BigQuery/Dataset', function() {
 
   describe('instantiation', function() {
     it('should extend the correct methods', function() {
-      assert(extended); // See `fakeStreamRouter.extend`
+      assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(ds.getTablesStream, 'getTables');
     });
 
     it('should inherit from ServiceObject', function(done) {
@@ -100,6 +107,70 @@ describe('BigQuery/Dataset', function() {
         getMetadata: true,
         setMetadata: true
       });
+    });
+  });
+
+  describe('createQueryStream', function() {
+    var options = {
+      a: 'b',
+      c: 'd'
+    };
+
+    it('should call through to bigQuery', function(done) {
+      ds.bigQuery.createQueryStream = function() {
+        done();
+      };
+
+      ds.createQueryStream();
+    });
+
+    it('should return the result of the call to bq.query', function(done) {
+      ds.bigQuery.createQueryStream = function() {
+        return {
+          done: done
+        };
+      };
+
+      ds.createQueryStream().done();
+    });
+
+    it('should accept a string', function(done) {
+      var query = 'SELECT * FROM allthedata';
+
+      ds.bigQuery.createQueryStream = function(opts) {
+        assert.equal(opts.query, query);
+        done();
+      };
+
+      ds.createQueryStream(query);
+    });
+
+    it('should pass along options', function(done) {
+      ds.bigQuery.createQueryStream = function(opts) {
+        assert.equal(opts.a, options.a);
+        assert.equal(opts.c, options.c);
+        done();
+      };
+
+      ds.createQueryStream(options);
+    });
+
+    it('should extend options with defaultDataset', function(done) {
+      ds.bigQuery.createQueryStream = function(opts) {
+        assert.deepEqual(opts.defaultDataset, { datasetId: ds.id });
+        done();
+      };
+
+      ds.createQueryStream(options);
+    });
+
+    it('should not modify original options object', function(done) {
+      ds.bigQuery.createQueryStream = function() {
+        assert.deepEqual(options, { a: 'b', c: 'd' });
+        done();
+      };
+
+      ds.createQueryStream();
     });
   });
 
@@ -436,16 +507,6 @@ describe('BigQuery/Dataset', function() {
       };
 
       ds.query();
-    });
-
-    it('should return the result of the call to bq.query', function(done) {
-      ds.bigQuery.query = function() {
-        return {
-          done: done
-        };
-      };
-
-      ds.query().done();
     });
 
     it('should accept a string', function(done) {

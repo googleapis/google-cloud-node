@@ -367,6 +367,16 @@ Table.prototype.copy = function(destination, metadata, callback) {
 };
 
 /**
+ * Run a query scoped to your dataset as a readable object stream.
+ *
+ * See {module:bigquery#createQueryStream} for full documentation of this
+ * method.
+ */
+Table.prototype.createQueryStream = function(query) {
+  return this.dataset.createQueryStream(query);
+};
+
+/**
  * Create a readable stream of the rows of data in your table. This method is
  * simply a wrapper around {module:bigquery/table#getRows}.
  *
@@ -375,18 +385,23 @@ Table.prototype.copy = function(destination, metadata, callback) {
  * @return {ReadableStream}
  *
  * @example
- * var through2 = require('through2');
- * var fs = require('fs');
+ * table.createReadStream(options)
+ *   .on('error', console.error)
+ *   .on('data', function(row) {})
+ *   .on('end', function() {
+ *     // All rows have been retrieved.
+ *   });
  *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
  * table.createReadStream()
- *   .pipe(through2.obj(function(row, enc, next) {
- *     this.push(JSON.stringify(row) + '\n');
- *   }))
- *   .pipe(fs.createWriteStream('./test/testdata/testfile.json'));
+ *   .on('data', function(row) {
+ *     this.end();
+ *   });
  */
-Table.prototype.createReadStream = function() {
-  return this.getRows();
-};
+Table.prototype.createReadStream = common.paginator.streamify('getRows');
 
 /**
  * Load data into your table from a readable stream of JSON, CSV, or
@@ -653,25 +668,6 @@ Table.prototype.export = function(destination, options, callback) {
  * table.getRows({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the rows as a readable object stream.
- * //-
- * table.getRows(options)
- *   .on('error', console.error)
- *   .on('data', function(row) {})
- *   .on('end', function() {
- *     // All rows have been retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * table.getRows()
- *   .on('data', function(row) {
- *     this.end();
- *   });
  */
 Table.prototype.getRows = function(options, callback) {
   var self = this;
@@ -1017,7 +1013,7 @@ Table.prototype.insert = function(rows, options, callback) {
  * See {module:bigquery#query} for full documentation of this method.
  */
 Table.prototype.query = function(query, callback) {
-  return this.dataset.query(query, callback);
+  this.dataset.query(query, callback);
 };
 
 /**
@@ -1079,9 +1075,8 @@ Table.prototype.setMetadata = function(metadata, callback) {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(Table, ['getRows']);
+common.paginator.extend(Table, ['getRows']);
 
 module.exports = Table;

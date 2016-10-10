@@ -379,27 +379,6 @@ Region.prototype.createRule = function(name, config, callback) {
  * region.getAddresses({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the addresses from your project as a readable object stream.
- * //-
- * region.getAddresses()
- *   .on('error', console.error)
- *   .on('data', function(address) {
- *     // `address` is an `Address` object.
- *   })
- *   .on('end', function() {
- *     // All addresses retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * region.getAddresses()
- *   .on('data', function(address) {
- *     this.end();
- *   });
  */
 Region.prototype.getAddresses = function(options, callback) {
   var self = this;
@@ -437,6 +416,36 @@ Region.prototype.getAddresses = function(options, callback) {
     callback(null, addresses, nextQuery, resp);
   });
 };
+
+/**
+ * Get a list of {module:compute/address} objects in this region as a readable
+ * object stream.
+ *
+ * @param {object=} options - Configuration object. See
+ *     {module:compute/region#getAddresses} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * region.getAddressesStream()
+ *   .on('error', console.error)
+ *   .on('data', function(address) {
+ *     // `address` is an `Address` object.
+ *   })
+ *   .on('end', function() {
+ *     // All addresses retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * region.getAddressesStream()
+ *   .on('data', function(address) {
+ *     this.end();
+ *   });
+ */
+Region.prototype.getAddressesStream =
+  common.paginator.streamify('getAddresses');
 
 /**
  * Get a list of operations for this region.
@@ -483,27 +492,6 @@ Region.prototype.getAddresses = function(options, callback) {
  * region.getOperations({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the operations from your project as a readable object stream.
- * //-
- * region.getOperations()
- *   .on('error', console.error)
- *   .on('data', function(operation) {
- *     // `operation` is an `Operation` object.
- *   })
- *   .on('end', function() {
- *     // All operations retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * region.getOperations()
- *   .on('data', function(operation) {
- *     this.end();
- *   });
  */
 Region.prototype.getOperations = function(options, callback) {
   var self = this;
@@ -541,6 +529,36 @@ Region.prototype.getOperations = function(options, callback) {
     callback(null, operations, nextQuery, resp);
   });
 };
+
+/**
+ * Get a list of {module:compute/operation} objects for this region as a
+ * readable object stream.
+ *
+ * @param {object=} options - Configuration object. See
+ *     {module:compute/region#getOperations} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * region.getOperationsStream()
+ *   .on('error', console.error)
+ *   .on('data', function(operation) {
+ *     // `operation` is an `Operation` object.
+ *   })
+ *   .on('end', function() {
+ *     // All operations retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * region.getOperationsStream()
+ *   .on('data', function(operation) {
+ *     this.end();
+ *   });
+ */
+Region.prototype.getOperationsStream =
+  common.paginator.streamify('getOperations');
 
 /**
  * Get a list of forwading rules in this region.
@@ -586,27 +604,6 @@ Region.prototype.getOperations = function(options, callback) {
  * region.getRules({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the rules from this region as a readable object stream.
- * //-
- * region.getRules()
- *   .on('error', console.error)
- *   .on('data', function(rule) {
- *     // `rule` is a `Rule` object.
- *   })
- *   .on('end', function() {
- *     // All rules retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * region.getRules()
- *   .on('data', function(rule) {
- *     this.end();
- *   });
  */
 Region.prototype.getRules = function(options, callback) {
   var self = this;
@@ -644,6 +641,35 @@ Region.prototype.getRules = function(options, callback) {
     callback(null, rules, nextQuery, resp);
   });
 };
+
+/**
+ * Get a list of {module:compute/rule} objects in this region as a readable
+ * object stream.
+ *
+ * @param {object=} options - Configuration object. See
+ *     {module:compute/region#getRulesStream} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * region.getRulesStream()
+ *   .on('error', console.error)
+ *   .on('data', function(rule) {
+ *     // `rule` is a `Rule` object.
+ *   })
+ *   .on('end', function() {
+ *     // All rules retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * region.getRulesStream()
+ *   .on('data', function(rule) {
+ *     this.end();
+ *   });
+ */
+Region.prototype.getRulesStream = common.paginator.streamify('getRules');
 
 /**
  * Get a list of subnetworks in this region.
@@ -690,27 +716,6 @@ Region.prototype.getRules = function(options, callback) {
  * region.getSubnetworks({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the subnetworks from this region as a readable object stream.
- * //-
- * region.getSubnetworks()
- *   .on('error', console.error)
- *   .on('data', function(subnetwork) {
- *     // `subnetwork` is a `Subnetwork` object.
- *   })
- *   .on('end', function() {
- *     // All subnetworks retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * region.getSubnetworks()
- *   .on('data', function(subnetwork) {
- *     this.end();
- *   });
  */
 Region.prototype.getSubnetworks = function(options, callback) {
   var self = this;
@@ -748,6 +753,36 @@ Region.prototype.getSubnetworks = function(options, callback) {
     callback(null, subnetworks, nextQuery, resp);
   });
 };
+
+/**
+ * Get a list of {module:compute/subnetwork} objects in this region as a
+ * readable object stream.
+ *
+ * @param {object=} options - Configuration object. See
+ *     {module:compute/region#getSubnetworks} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * region.getSubnetworksStream()
+ *   .on('error', console.error)
+ *   .on('data', function(subnetwork) {
+ *     // `subnetwork` is a `Subnetwork` object.
+ *   })
+ *   .on('end', function() {
+ *     // All subnetworks retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * region.getSubnetworksStream()
+ *   .on('data', function(subnetwork) {
+ *     this.end();
+ *   });
+ */
+Region.prototype.getSubnetworksStream =
+  common.paginator.streamify('getSubnetworks');
 
 /**
  * Get a reference to a Google Compute Engine region operation.
@@ -794,10 +829,9 @@ Region.prototype.subnetwork = function(name) {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(Region, [
+common.paginator.extend(Region, [
   'getAddresses',
   'getOperations',
   'getRules',

@@ -298,11 +298,30 @@ Network.prototype.createSubnetwork = function(name, config, callback) {
  * network.getSubnetworks({
  *   autoPaginate: false
  * }, callback);
+ */
+Network.prototype.getSubnetworks = function(options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = extend({}, options, {
+    filter: 'network eq .*' + this.formattedName
+  });
+
+  this.compute.getSubnetworks(options, callback);
+};
+
+/**
+ * Get a {module:compute/subnetwork} list within this network as a readable
+ * object stream.
  *
- * //-
- * // Get the subnetworks from this network as a readable object stream.
- * //-
- * network.getSubnetworks()
+ * @param {object=} options - Configuration object. See
+ *     {module:compute/network#getSubnetworks} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * network.getSubnetworksStream()
  *   .on('error', console.error)
  *   .on('data', function(subnetwork) {
  *     // `subnetwork` is a `Subnetwork` object.
@@ -315,22 +334,17 @@ Network.prototype.createSubnetwork = function(name, config, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * network.getSubnetworks()
+ * network.getSubnetworksStream()
  *   .on('data', function(subnetwork) {
  *     this.end();
  *   });
  */
-Network.prototype.getSubnetworks = function(options, callback) {
-  if (is.fn(options)) {
-    callback = options;
-    options = {};
-  }
-
+Network.prototype.getSubnetworksStream = function(options) {
   options = extend({}, options, {
     filter: 'network eq .*' + this.formattedName
   });
 
-  return this.compute.getSubnetworks(options, callback);
+  return this.compute.getSubnetworksStream(options);
 };
 
 /**
@@ -426,11 +440,30 @@ Network.prototype.firewall = function(name) {
  * network.getFirewalls({
  *   autoPaginate: false
  * }, callback);
+ */
+Network.prototype.getFirewalls = function(options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = extend({}, options, {
+    filter: 'network eq .*' + this.formattedName
+  });
+
+  this.compute.getFirewalls(options, callback);
+};
+
+/**
+ * Get a list of {module:compute/firewall} objects for this network as a
+ * readable object stream.
  *
- * //-
- * // Get the firewalls from your project as a readable object stream.
- * //-
- * network.getFirewalls()
+ * @param {object=} options - Configuration object. See
+ *     {module:compute/network#getFirewalls} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * network.getFirewallsStream()
  *   .on('error', console.error)
  *   .on('data', function(firewall) {
  *     // `firewall` is a `Firewall` object.
@@ -443,22 +476,17 @@ Network.prototype.firewall = function(name) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * network.getFirewalls()
+ * network.getFirewallsStream()
  *   .on('data', function(firewall) {
  *     this.end();
  *   });
  */
-Network.prototype.getFirewalls = function(options, callback) {
-  if (is.fn(options)) {
-    callback = options;
-    options = {};
-  }
-
+Network.prototype.getFirewallsStream = function(options) {
   options = extend({}, options, {
     filter: 'network eq .*' + this.formattedName
   });
 
-  return this.compute.getFirewalls(options, callback);
+  return this.compute.getFirewallsStream(options);
 };
 
 module.exports = Network;

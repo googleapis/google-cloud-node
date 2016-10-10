@@ -149,7 +149,7 @@ describe('BigQuery', function() {
   it('should list datasets as a stream', function(done) {
     var datasetEmitted = false;
 
-    bigquery.getDatasets()
+    bigquery.getDatasetsStream()
       .on('error', done)
       .on('data', function(dataset) {
         datasetEmitted = dataset instanceof Dataset;
@@ -180,7 +180,7 @@ describe('BigQuery', function() {
 
       var rowsEmitted = [];
 
-      job.getQueryResults()
+      job.getQueryResultsStream()
         .on('error', done)
         .on('data', function(row) {
           rowsEmitted.push(row);
@@ -196,7 +196,7 @@ describe('BigQuery', function() {
   it('should query as a stream', function(done) {
     var rowsEmitted = 0;
 
-    bigquery.query(query)
+    bigquery.createQueryStream(query)
       .on('data', function(row) {
         rowsEmitted++;
         assert.equal(typeof row.url, 'string');
@@ -239,7 +239,7 @@ describe('BigQuery', function() {
   it('should list jobs as a stream', function(done) {
     var jobEmitted = false;
 
-    bigquery.getJobs()
+    bigquery.getJobsStream()
       .on('error', done)
       .on('data', function(job) {
         jobEmitted = job instanceof Job;
@@ -294,7 +294,7 @@ describe('BigQuery', function() {
     it('should get tables as a stream', function(done) {
       var tableEmitted = false;
 
-      dataset.getTables()
+      dataset.getTablesStream()
         .on('error', done)
         .on('data', function(table) {
           tableEmitted = table instanceof Table;
@@ -373,7 +373,7 @@ describe('BigQuery', function() {
     });
 
     it('should get the rows in a table via stream', function(done) {
-      table.getRows()
+      table.createReadStream()
         .on('error', done)
         .on('data', function() {})
         .on('end', done);
@@ -455,13 +455,13 @@ describe('BigQuery', function() {
           }
 
           function query(callback) {
+            var query = {
+              query: 'SELECT * FROM ' + table.id + ' WHERE id = ' + data.id,
+              useLegacySql: false
+            };
             var row;
 
-            table
-              .query({
-                query: 'SELECT * FROM ' + table.id + ' WHERE id = ' + data.id,
-                useLegacySql: false
-              })
+            table.createQueryStream(query)
               .on('error', callback)
               .once('data', function(row_) { row = row_; })
               .on('end', function() {

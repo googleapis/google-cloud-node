@@ -474,27 +474,6 @@ Instance.prototype.cluster = function(name) {
  * instance.getClusters({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the clusters from your project as a readable object stream.
- * //-
- * instance.getClusters()
- *   .on('error', console.error)
- *   .on('data', function(cluster) {
- *     // `cluster` is a Cluster object.
- *   })
- *   .on('end', function() {
- *     // All clusters retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * instance.getClusters()
- *   .on('data', function(cluster) {
- *     this.end();
- *   });
  */
 Instance.prototype.getClusters = function(query, callback) {
   var self = this;
@@ -538,6 +517,36 @@ Instance.prototype.getClusters = function(query, callback) {
 };
 
 /**
+ * Get {module:bigtable/cluster} objects for all of your clusters as a readable
+ * object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:bigtable/instance#getClusters} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * instance.getClustersStream()
+ *   .on('error', console.error)
+ *   .on('data', function(cluster) {
+ *     // `cluster` is a Cluster object.
+ *   })
+ *   .on('end', function() {
+ *     // All clusters retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * instance.getClustersStream()
+ *   .on('data', function(cluster) {
+ *     this.end();
+ *   });
+ */
+Instance.prototype.getClustersStream =
+  common.paginator.streamify('getClusters');
+
+/**
  * Get Table objects for all the tables in your Compute instance.
  *
  * @param {object=} query - Query object.
@@ -575,27 +584,6 @@ Instance.prototype.getClusters = function(query, callback) {
  * instance.getTables({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the tables from your project as a readable object stream.
- * //-
- * instance.getTables()
- *   .on('error', console.error)
- *   .on('data', function(table) {
- *     // table is a Table object.
- *   })
- *   .on('end', function() {
- *     // All tables retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * instance.getTables()
- *   .on('data', function(table) {
- *     this.end();
- *   });
  */
 Instance.prototype.getTables = function(query, callback) {
   var self = this;
@@ -641,6 +629,35 @@ Instance.prototype.getTables = function(query, callback) {
 };
 
 /**
+ * Get {module:bigtable/table} objects for all the tables in your Compute
+ * instance as a readable object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:bigtable/instance#getTables} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * instance.getTablesStream()
+ *   .on('error', console.error)
+ *   .on('data', function(table) {
+ *     // table is a Table object.
+ *   })
+ *   .on('end', function() {
+ *     // All tables retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * instance.getTablesStream()
+ *   .on('data', function(table) {
+ *     this.end();
+ *   });
+ */
+Instance.prototype.getTablesStream = common.paginator.streamify('getTables');
+
+/**
  * Get a reference to a Bigtable table.
  *
  * @param {string} name - The name of the table.
@@ -655,9 +672,8 @@ Instance.prototype.table = function(name) {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(Instance, ['getClusters', 'getTables']);
+common.paginator.extend(Instance, ['getClusters', 'getTables']);
 
 module.exports = Instance;

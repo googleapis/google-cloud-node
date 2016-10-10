@@ -38,7 +38,7 @@ describe('Resource', function() {
     it('should get a list of projects in stream mode', function(done) {
       var resultsMatched = 0;
 
-      resource.getProjects()
+      resource.getProjectsStream()
         .on('error', done)
         .on('data', function() {
           resultsMatched++;

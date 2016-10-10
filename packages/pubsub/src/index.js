@@ -176,27 +176,6 @@ PubSub.prototype.createTopic = function(name, callback) {
  * pubsub.getSubscriptions({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the subscriptions as a readable object stream.
- * //-
- * pubsub.getSubscriptions()
- *   .on('error', console.error)
- *   .on('data', function(subscription) {
- *     // subscription is a Subscription object.
- *   })
- *   .on('end', function() {
- *     // All subscriptions retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * pubsub.getSubscriptions()
- *   .on('data', function(topic) {
- *     this.end();
- *   });
  */
 PubSub.prototype.getSubscriptions = function(options, callback) {
   var self = this;
@@ -260,6 +239,36 @@ PubSub.prototype.getSubscriptions = function(options, callback) {
 };
 
 /**
+ * Get a list of the {module:pubsub/subscription} objects registered to all of
+ * your project's topics as a readable object stream.
+ *
+ * @param {object=} options - Configuration object. See
+ *     {module:pubsub#getSubscriptions} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * pubsub.getSubscriptionsStream()
+ *   .on('error', console.error)
+ *   .on('data', function(subscription) {
+ *     // subscription is a Subscription object.
+ *   })
+ *   .on('end', function() {
+ *     // All subscriptions retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * pubsub.getSubscriptionsStream()
+ *   .on('data', function(topic) {
+ *     this.end();
+ *   });
+ */
+PubSub.prototype.getSubscriptionsStream =
+  common.paginator.streamify('getSubscriptions');
+
+/**
  * Get a list of the topics registered to your project. You may optionally
  * provide a query object as the first argument to customize the response.
  *
@@ -306,27 +315,6 @@ PubSub.prototype.getSubscriptions = function(options, callback) {
  * pubsub.getTopics({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the topics as a readable object stream.
- * //-
- * pubsub.getTopics()
- *   .on('error', console.error)
- *   .on('data', function(topic) {
- *     // topic is a Topic object.
- *   })
- *   .on('end', function() {
- *     // All topics retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * pubsub.getTopics()
- *   .on('data', function(topic) {
- *     this.end();
- *   });
  */
 PubSub.prototype.getTopics = function(query, callback) {
   var self = this;
@@ -366,6 +354,35 @@ PubSub.prototype.getTopics = function(query, callback) {
     callback(null, topics, nextQuery, result);
   });
 };
+
+/**
+ * Get a list of the {module:pubsub/topic} objects registered to your project as
+ * a readable object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:pubsub#getTopics} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * pubsub.getTopicsStream()
+ *   .on('error', console.error)
+ *   .on('data', function(topic) {
+ *     // topic is a Topic object.
+ *   })
+ *   .on('end', function() {
+ *     // All topics retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * pubsub.getTopicsStream()
+ *   .on('data', function(topic) {
+ *     this.end();
+ *   });
+ */
+PubSub.prototype.getTopicsStream = common.paginator.streamify('getTopics');
 
 /**
  * Create a subscription to a topic. You may optionally provide an object to
@@ -564,10 +581,9 @@ PubSub.prototype.determineBaseUrl_ = function() {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(PubSub, ['getSubscriptions', 'getTopics']);
+common.paginator.extend(PubSub, ['getSubscriptions', 'getTopics']);
 
 PubSub.Subscription = Subscription;
 PubSub.Topic = Topic;

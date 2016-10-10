@@ -285,27 +285,41 @@ describe('Network', function() {
 
       network.getFirewalls(done);
     });
+  });
 
-    it('should not require any arguments', function(done) {
-      network.compute.getFirewalls = function(options, callback) {
-        assert.deepEqual(options, {
-          filter: 'network eq .*' + network.formattedName
-        });
-        assert.strictEqual(typeof callback, 'undefined');
+  describe('getFirewallsStream', function() {
+    it('should call to getFirewallsStream correctly', function(done) {
+      var options = { a: 'b', c: 'd' };
+      var expectedOptions = extend({}, options, {
+        filter: 'network eq .*' + network.formattedName
+      });
+
+      network.compute.getFirewallsStream = function(options) {
+        assert.deepEqual(options, expectedOptions);
         done();
       };
 
-      network.getFirewalls();
+      network.getFirewallsStream(options);
     });
 
-    it('should return the result of calling Compute', function() {
-      var resultOfGetFirewalls = {};
-
-      network.compute.getFirewalls = function() {
-        return resultOfGetFirewalls;
+    it('should not require options', function(done) {
+      network.compute.getFirewallsStream = function() {
+        done();
       };
 
-      assert.strictEqual(network.getFirewalls(), resultOfGetFirewalls);
+      network.getFirewallsStream();
+    });
+
+    it('should return a stream', function(done) {
+      var fakeStream = {};
+
+      network.compute.getFirewallsStream = function() {
+        setImmediate(done);
+        return fakeStream;
+      };
+
+      var stream = network.getFirewallsStream();
+      assert.strictEqual(stream, fakeStream);
     });
   });
 
@@ -331,27 +345,41 @@ describe('Network', function() {
 
       network.getSubnetworks(done);
     });
+  });
 
-    it('should not require any arguments', function(done) {
-      network.compute.getSubnetworks = function(options, callback) {
-        assert.deepEqual(options, {
-          filter: 'network eq .*' + network.formattedName
-        });
-        assert.strictEqual(typeof callback, 'undefined');
+  describe('getSubnetworksStream', function() {
+    it('should call to getSubnetworksStream correctly', function(done) {
+      var options = { a: 'b', c: 'd' };
+      var expectedOptions = extend({}, options, {
+        filter: 'network eq .*' + network.formattedName
+      });
+
+      network.compute.getSubnetworksStream = function(options) {
+        assert.deepEqual(options, expectedOptions);
         done();
       };
 
-      network.getSubnetworks();
+      network.getSubnetworksStream(options);
     });
 
-    it('should return the result of calling Compute', function() {
-      var resultOfGetSubnetworks = {};
-
-      network.compute.getSubnetworks = function() {
-        return resultOfGetSubnetworks;
+    it('should not require options', function(done) {
+      network.compute.getSubnetworksStream = function() {
+        done();
       };
 
-      assert.strictEqual(network.getSubnetworks(), resultOfGetSubnetworks);
+      network.getSubnetworksStream();
+    });
+
+    it('should return a stream', function(done) {
+      var fakeStream = {};
+
+      network.compute.getSubnetworksStream = function() {
+        setImmediate(done);
+        return fakeStream;
+      };
+
+      var stream = network.getSubnetworksStream();
+      assert.strictEqual(stream, fakeStream);
     });
   });
 });

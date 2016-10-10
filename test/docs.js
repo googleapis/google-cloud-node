@@ -41,7 +41,6 @@ var DocsError = createErrorClass('DocsError', function(err, code) {
     .join('\n');
 
   this.message = '\n' + lines + '\n\n' + err.message;
-  this.stack = err.stack;
 });
 
 var FakeConsole = Object.keys(console)
@@ -211,6 +210,8 @@ function runCodeInSandbox(code, sandbox) {
       timeout: 5000
     });
   } catch (err) {
-    throw new DocsError(err, code);
+    var docsErr = new DocsError(err, code);
+    docsErr.stack = err.stack;
+    throw docsErr;
   }
 }

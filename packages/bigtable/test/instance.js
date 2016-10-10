@@ -27,9 +27,12 @@ var Cluster = require('../src/cluster.js');
 var Family = require('../src/family.js');
 var Table = require('../src/table.js');
 
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function() {
     this.calledWith_ = arguments;
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -66,7 +69,7 @@ describe('Bigtable/Instance', function() {
     Instance = proxyquire('../src/instance.js', {
       '@google-cloud/common': {
         GrpcServiceObject: FakeGrpcServiceObject,
-        streamRouter: fakeStreamRouter
+        paginator: fakePaginator
       },
       './cluster.js': FakeCluster,
       './family.js': FakeFamily,
@@ -79,11 +82,16 @@ describe('Bigtable/Instance', function() {
   });
 
   describe('instantiation', function() {
-    it('should streamify the correct methods', function() {
-      var args = fakeStreamRouter.calledWith_;
+    it('should extend the correct methods', function() {
+      var args = fakePaginator.calledWith_;
 
       assert.strictEqual(args[0], Instance);
       assert.deepEqual(args[1], ['getClusters', 'getTables']);
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(instance.getClustersStream, 'getClusters');
+      assert.strictEqual(instance.getTablesStream, 'getTables');
     });
 
     it('should inherit from GrpcServiceObject', function() {

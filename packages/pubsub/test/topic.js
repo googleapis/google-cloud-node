@@ -178,6 +178,35 @@ describe('Topic', function() {
     });
   });
 
+  describe('getSubscriptionsStream', function() {
+    it('should return a stream', function(done) {
+      var fakeStream = {};
+
+      topic.pubsub.getSubscriptions = function(options) {
+        assert.deepEqual(options, { topic: topic });
+        setImmediate(done);
+        return fakeStream;
+      };
+
+      var stream = topic.getSubscriptions();
+      assert.strictEqual(stream, fakeStream);
+    });
+
+    it('should pass correct args to getSubscriptionsStream', function(done) {
+      var opts = { a: 'b', c: 'd' };
+
+      topic.pubsub = {
+        getSubscriptions: function(options) {
+          assert.deepEqual(options, opts);
+          assert.deepEqual(options.topic, topic);
+          done();
+        }
+      };
+
+      topic.getSubscriptions(opts);
+    });
+  });
+
   describe('publish', function() {
     var message = 'howdy';
     var attributes = {

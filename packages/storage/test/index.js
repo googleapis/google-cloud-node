@@ -36,7 +36,7 @@ function FakeService() {
 nodeutil.inherits(FakeService, Service);
 
 var extended = false;
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'Storage') {
       return;
@@ -46,6 +46,9 @@ var fakeStreamRouter = {
     assert.equal(Class.name, 'Storage');
     assert.deepEqual(methods, ['getBuckets']);
     extended = true;
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -61,7 +64,7 @@ describe('Storage', function() {
     Storage = proxyquire('../', {
       '@google-cloud/common': {
         Service: FakeService,
-        streamRouter: fakeStreamRouter,
+        paginator: fakePaginator,
         util: fakeUtil
       },
       './channel.js': FakeChannel,
@@ -75,7 +78,11 @@ describe('Storage', function() {
 
   describe('instantiation', function() {
     it('should extend the correct methods', function() {
-      assert(extended); // See `fakeStreamRouter.extend`
+      assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(storage.getBucketsStream, 'getBuckets');
     });
 
     it('should normalize the arguments', function() {

@@ -466,27 +466,6 @@ Zone.prototype.export = function(localPath, callback) {
  * };
  *
  * zone.getChanges(callback);
- *
- * //-
- * // Get the changes from your zone as a readable object stream.
- * //-
- * zone.getChanges()
- *   .on('error', console.error)
- *   .on('data', function(change) {
- *     // change is a Change object.
- *   })
- *   .on('end', function() {
- *     // All changes retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * zone.getChanges()
- *   .on('data', function(change) {
- *     this.end();
- *   });
  */
 Zone.prototype.getChanges = function(query, callback) {
   var self = this;
@@ -526,6 +505,35 @@ Zone.prototype.getChanges = function(query, callback) {
     callback(null, changes, nextQuery, resp);
   });
 };
+
+/**
+ * Get the list of {module:dns/change} objects associated with this zone as a
+ * readable object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:dns/zone#getChanges} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * zone.getChangesStream()
+ *   .on('error', console.error)
+ *   .on('data', function(change) {
+ *     // change is a Change object.
+ *   })
+ *   .on('end', function() {
+ *     // All changes retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * zone.getChangesStream()
+ *   .on('data', function(change) {
+ *     this.end();
+ *   });
+ */
+Zone.prototype.getChangesStream = common.paginator.streamify('getChanges');
 
 /**
  * Get the list of records for this zone.
@@ -572,27 +580,6 @@ Zone.prototype.getChanges = function(query, callback) {
  * };
  *
  * zone.getRecords(query, callback);
- *
- * //-
- * // Get the records from your zone as a readable object stream.
- * //-
- * zone.getRecords()
- *   .on('error', console.error)
- *   .on('data', function(record) {
- *     // record is a Record object.
- *   })
- *   .on('end', function() {
- *     // All records retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * zone.getRecords()
- *   .on('data', function(change) {
- *     this.end();
- *   });
  *
  * //-
  * // If you only want records of a specific type or types, provide them in
@@ -666,6 +653,35 @@ Zone.prototype.getRecords = function(query, callback) {
     callback(null, records, nextQuery, resp);
   });
 };
+
+/**
+ * Get the list of {module:dns/record} objects for this zone as a readable
+ * object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:dns/zone#getRecords} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * zone.getRecordsStream()
+ *   .on('error', console.error)
+ *   .on('data', function(record) {
+ *     // record is a Record object.
+ *   })
+ *   .on('end', function() {
+ *     // All records retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * zone.getRecordsStream()
+ *   .on('data', function(change) {
+ *     this.end();
+ *   });
+ */
+Zone.prototype.getRecordsStream = common.paginator.streamify('getRecords');
 
 /**
  * Copy the records from a zone file into this zone.
@@ -859,9 +875,8 @@ Zone.prototype.deleteRecordsByType_ = function(recordTypes, callback) {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(Zone, ['getChanges', 'getRecords']);
+common.paginator.extend(Zone, ['getChanges', 'getRecords']);
 
 module.exports = Zone;

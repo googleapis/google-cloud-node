@@ -241,11 +241,29 @@ Topic.formatName_ = function(projectId, name) {
  * topic.getSubscriptions({
  *   pageSize: 3
  * }, callback);
+ */
+Topic.prototype.getSubscriptions = function(options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = options || {};
+  options.topic = this;
+
+  return this.pubsub.getSubscriptions(options, callback);
+};
+
+/**
+ * Get a list of the {module:pubsub/subscription} objects registered to this
+ * topic as a readable object stream.
  *
- * //-
- * // Get the subscriptions for this topic as a readable object stream.
- * //-
- * topic.getSubscriptions()
+ * @param {object=} query - Configuration object. See
+ *     {module:pubsub/topic#getSubscriptions} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * topic.getSubscriptionsStream()
  *   .on('error', console.error)
  *   .on('data', function(subscription) {
  *     // subscription is a Subscription object.
@@ -258,21 +276,16 @@ Topic.formatName_ = function(projectId, name) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * topic.getSubscriptions()
+ * topic.getSubscriptionsStream()
  *   .on('data', function(subscription) {
  *     this.end();
  *   });
  */
-Topic.prototype.getSubscriptions = function(options, callback) {
-  if (is.fn(options)) {
-    callback = options;
-    options = {};
-  }
-
+Topic.prototype.getSubscriptionsStream = function(options) {
   options = options || {};
   options.topic = this;
 
-  return this.pubsub.getSubscriptions(options, callback);
+  return this.pubsub.getSubscriptionsStream(options);
 };
 
 /**

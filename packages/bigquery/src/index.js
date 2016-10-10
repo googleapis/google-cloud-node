@@ -121,6 +121,36 @@ BigQuery.prototype.createDataset = function(id, options, callback) {
 };
 
 /**
+ * Run a query scoped to your project as a readable object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:bigquery#query} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * var query = 'SELECT url FROM [publicdata:samples.github_nested] LIMIT 100';
+ *
+ * bigquery.createQueryStream(query)
+ *   .on('error', console.error)
+ *   .on('data', function(row) {
+ *     // row is a result from your query.
+ *   })
+ *   .on('end', function() {
+ *     // All rows retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * bigquery.createQueryStream(query)
+ *   .on('data', function(row) {
+ *     this.end();
+ *   });
+ */
+BigQuery.prototype.createQueryStream = common.paginator.streamify('query');
+
+/**
  * Create a reference to a dataset.
  *
  * @param {string} id - ID of the dataset.
@@ -146,7 +176,7 @@ BigQuery.prototype.dataset = function(id) {
  * @param {number} query.maxResults - Maximum number of results to return.
  * @param {string} query.pageToken - Token returned from a previous call, to
  *     request the next page of results.
- * @param {function=} callback - The callback function.
+ * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {module:bigquery/dataset[]} callback.datasets - The list of datasets
  *     in your project.
@@ -173,27 +203,6 @@ BigQuery.prototype.dataset = function(id) {
  * bigquery.getDatasets({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the datasets from your project as a readable object stream.
- * //-
- * bigquery.getDatasets()
- *   .on('error', console.error)
- *   .on('data', function(dataset) {
- *     // dataset is a Dataset object.
- *   })
- *   .on('end', function() {
- *     // All datasets retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * bigquery.getDatasets()
- *   .on('data', function(dataset) {
- *     this.end();
- *   });
  */
 BigQuery.prototype.getDatasets = function(query, callback) {
   var that = this;
@@ -233,6 +242,36 @@ BigQuery.prototype.getDatasets = function(query, callback) {
 };
 
 /**
+ * List all or some of the {module:bigquery/dataset} objects in your project as
+ * a readable object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:bigquery#getDatasets} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * bigquery.getDatasetsStream()
+ *   .on('error', console.error)
+ *   .on('data', function(dataset) {
+ *     // dataset is a Dataset object.
+ *   })
+ *   .on('end', function() {
+ *     // All datasets retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * bigquery.getDatasetsStream()
+ *   .on('data', function(dataset) {
+ *     this.end();
+ *   });
+ */
+BigQuery.prototype.getDatasetsStream =
+  common.paginator.streamify('getDatasets');
+
+/**
  * Get all of the jobs from your project.
  *
  * @resource [Jobs: list API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/list}
@@ -251,7 +290,7 @@ BigQuery.prototype.getDatasets = function(query, callback) {
  *     "minimal", to not include the job configuration.
  * @param {string=} options.stateFilter - Filter for job state. Acceptable
  *     values are "done", "pending", and "running".
- * @param {function=} callback - The callback function.
+ * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {module:bigquery/job[]} callback.jobs - The list of jobs in your
  *     project.
@@ -278,27 +317,6 @@ BigQuery.prototype.getDatasets = function(query, callback) {
  * bigquery.getJobs({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the jobs from your project as a readable object stream.
- * //-
- * bigquery.getJobs()
- *   .on('error', console.error)
- *   .on('data', function(job) {
- *     // job is a Job object.
- *   })
- *   .on('end', function() {
- *     // All jobs retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * bigquery.getJobs()
- *   .on('data', function(job) {
- *     this.end();
- *   });
  */
 BigQuery.prototype.getJobs = function(options, callback) {
   var that = this;
@@ -338,6 +356,35 @@ BigQuery.prototype.getJobs = function(options, callback) {
 };
 
 /**
+ * List all or some of the {module:bigquery/job} objects in your project as a
+ * readable object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:bigquery#getJobs} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * bigquery.getJobsStream()
+ *   .on('error', console.error)
+ *   .on('data', function(job) {
+ *     // job is a Job object.
+ *   })
+ *   .on('end', function() {
+ *     // All jobs retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * bigquery.getJobsStream()
+ *   .on('data', function(job) {
+ *     this.end();
+ *   });
+ */
+BigQuery.prototype.getJobsStream = common.paginator.streamify('getJobs');
+
+/**
  * Create a reference to an existing job.
  *
  * @param {string} id - ID of the job.
@@ -352,8 +399,6 @@ BigQuery.prototype.job = function(id) {
 
 /**
  * Run a query scoped to your project.
- *
- * This method also runs as a readable stream if you do not provide a callback.
  *
  * @resource [Jobs: query API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/jobs/query}
  *
@@ -370,7 +415,7 @@ BigQuery.prototype.job = function(id) {
  *     complete, in milliseconds, before returning. Default is to return
  *     immediately. If the timeout passes before the job completes, the request
  *     will fail with a `TIMEOUT` error.
- * @param {function=} callback - The callback function.
+ * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {array} callback.rows - The list of results from your query.
  * @param {object} callback.apiResponse - The full API response.
@@ -398,28 +443,6 @@ BigQuery.prototype.job = function(id) {
  *   query: query,
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // You can also use the `query` method as a readable object stream by
- * // omitting the callback.
- * //-
- * bigquery.query(query)
- *   .on('error', console.error)
- *   .on('data', function(row) {
- *     // row is a result from your query.
- *   })
- *   .on('end', function() {
- *     // All rows retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * bigquery.query(query)
- *   .on('data', function(row) {
- *     this.end();
- *   });
  */
 BigQuery.prototype.query = function(options, callback) {
   var self = this;
@@ -590,10 +613,9 @@ BigQuery.prototype.startQuery = function(options, callback) {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(BigQuery, ['getDatasets', 'getJobs', 'query']);
+common.paginator.extend(BigQuery, ['getDatasets', 'getJobs', 'query']);
 
 BigQuery.Dataset = Dataset;
 BigQuery.Job = Job;

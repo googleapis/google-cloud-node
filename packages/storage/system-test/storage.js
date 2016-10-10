@@ -507,7 +507,7 @@ describe('storage', function() {
     it('should get buckets as a stream', function(done) {
       var bucketEmitted = false;
 
-      storage.getBuckets()
+      storage.getBucketsStream()
         .on('error', done)
         .on('data', function(bucket) {
           bucketEmitted = bucket instanceof Bucket;
@@ -1022,7 +1022,7 @@ describe('storage', function() {
     it('should get files as a stream', function(done) {
       var fileEmitted = false;
 
-      bucket.getFiles()
+      bucket.getFilesStream()
         .on('error', done)
         .on('data', function(file) {
           fileEmitted = file instanceof File;

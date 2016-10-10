@@ -63,7 +63,7 @@ function FakeServiceObject() {
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 var extended = false;
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'Zone') {
       return;
@@ -73,6 +73,9 @@ var fakeStreamRouter = {
     methods = arrify(methods);
     assert.equal(Class.name, 'Zone');
     assert.deepEqual(methods, ['getChanges', 'getRecords']);
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -91,7 +94,7 @@ describe('Zone', function() {
       fs: fakeFs,
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        streamRouter: fakeStreamRouter
+        paginator: fakePaginator
       },
       './change.js': FakeChange,
       './record.js': FakeRecord
@@ -107,7 +110,12 @@ describe('Zone', function() {
 
   describe('instantiation', function() {
     it('should extend the correct methods', function() {
-      assert(extended); // See `fakeStreamRouter.extend`
+      assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(zone.getChangesStream, 'getChanges');
+      assert.strictEqual(zone.getRecordsStream, 'getRecords');
     });
 
     it('should localize the name', function() {
