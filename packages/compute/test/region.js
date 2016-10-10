@@ -52,7 +52,7 @@ function FakeSubnetwork() {
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 var extended = false;
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'Region') {
       return;
@@ -67,6 +67,9 @@ var fakeStreamRouter = {
       'getRules',
       'getSubnetworks'
     ]);
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -83,7 +86,7 @@ describe('Region', function() {
     Region = proxyquire('../src/region.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        streamRouter: fakeStreamRouter
+        paginator: fakePaginator
       },
       './address.js': FakeAddress,
       './network.js': FakeNetwork,
@@ -99,7 +102,14 @@ describe('Region', function() {
 
   describe('instantiation', function() {
     it('should extend the correct methods', function() {
-      assert(extended); // See `fakeStreamRouter.extend`
+      assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(region.getAddressesStream, 'getAddresses');
+      assert.strictEqual(region.getOperationsStream, 'getOperations');
+      assert.strictEqual(region.getRulesStream, 'getRules');
+      assert.strictEqual(region.getSubnetworksStream, 'getSubnetworks');
     });
 
     it('should localize the name', function() {

@@ -20,6 +20,7 @@ var assert = require('assert');
 var extend = require('extend');
 var is = require('is');
 var proxyquire = require('proxyquire');
+var sinon = require('sinon').sandbox.create();
 var stream = require('stream');
 var through = require('through2');
 var util = require('@google-cloud/common').util;
@@ -158,53 +159,7 @@ describe('Request', function() {
     });
   });
 
-  describe('delete', function() {
-    it('should delete by key', function(done) {
-      request.request_ = function(protoOpts, reqOpts, callback) {
-        assert.strictEqual(protoOpts.service, 'Datastore');
-        assert.strictEqual(protoOpts.method, 'commit');
-        assert(is.object(reqOpts.mutations[0].delete));
-        callback();
-      };
-      request.delete(key, done);
-    });
-
-    it('should return apiResponse in callback', function(done) {
-      var resp = { success: true };
-      request.request_ = function(protoOpts, reqOpts, callback) {
-        callback(null, resp);
-      };
-      request.delete(key, function(err, apiResponse) {
-        assert.ifError(err);
-        assert.deepEqual(resp, apiResponse);
-        done();
-      });
-    });
-
-    it('should multi delete by keys', function(done) {
-      request.request_ = function(protoOpts, reqOpts, callback) {
-        assert.equal(reqOpts.mutations.length, 2);
-        callback();
-      };
-      request.delete([ key, key ], done);
-    });
-
-    describe('transactions', function() {
-      beforeEach(function() {
-        // Trigger transaction mode.
-        request.id = 'transaction-id';
-        request.requests_ = [];
-      });
-
-      it('should queue request', function() {
-        request.delete(key);
-
-        assert(is.object(request.requests_[0].mutations[0].delete));
-      });
-    });
-  });
-
-  describe('get', function() {
+  describe('createReadStream', function() {
     beforeEach(function() {
       request.request_ = function() {};
 
@@ -225,12 +180,8 @@ describe('Request', function() {
 
     it('should throw if no keys are provided', function() {
       assert.throws(function() {
-        request.get();
+        request.createReadStream();
       }, /At least one Key object is required/);
-    });
-
-    it('should return a stream if no callback is provided', function() {
-      assert(request.get(key) instanceof stream);
     });
 
     it('should convert key to key proto', function(done) {
@@ -239,7 +190,7 @@ describe('Request', function() {
         done();
       };
 
-      request.get(key, assert.ifError);
+      request.createReadStream(key).on('error', done);
     });
 
     it('should create a limiter', function(done) {
@@ -256,7 +207,7 @@ describe('Request', function() {
         };
       };
 
-      request.get(key, options, assert.ifError);
+      request.createReadStream(key, options).on('error', done);
     });
 
     it('should make correct request', function(done) {
@@ -269,7 +220,7 @@ describe('Request', function() {
         done();
       };
 
-      request.get(key, assert.ifError);
+      request.createReadStream(key).on('error', done);
     });
 
     it('should allow setting strong read consistency', function(done) {
@@ -278,7 +229,9 @@ describe('Request', function() {
         done();
       };
 
-      request.get(key, { consistency: 'strong' }, assert.ifError);
+      request
+        .createReadStream(key, { consistency: 'strong' })
+        .on('error', done);
     });
 
     it('should allow setting strong eventual consistency', function(done) {
@@ -287,7 +240,9 @@ describe('Request', function() {
         done();
       };
 
-      request.get(key, { consistency: 'eventual' }, assert.ifError);
+      request
+        .createReadStream(key, { consistency: 'eventual' })
+        .on('error', done);
     });
 
     describe('error', function() {
@@ -302,37 +257,26 @@ describe('Request', function() {
         };
       });
 
-      describe('callback mode', function() {
-        it('should execute callback with error', function(done) {
-          request.get(key, function(err) {
+      it('should emit error', function(done) {
+        request.createReadStream(key)
+          .on('data', util.noop)
+          .on('error', function(err) {
             assert.strictEqual(err, error);
             done();
           });
-        });
       });
 
-      describe('stream mode', function() {
-        it('should emit error', function(done) {
-          request.get(key)
-            .on('data', util.noop)
-            .on('error', function(err) {
-              assert.strictEqual(err, error);
+      it('should end stream', function(done) {
+        var stream = request.createReadStream(key);
+
+        stream
+          .on('data', util.noop)
+          .on('error', function() {
+            setImmediate(function() {
+              assert.strictEqual(stream._destroyed, true);
               done();
             });
-        });
-
-        it('should end stream', function(done) {
-          var stream = request.get(key);
-
-          stream
-            .on('data', util.noop)
-            .on('error', function() {
-              setImmediate(function() {
-                assert.strictEqual(stream._destroyed, true);
-                done();
-              });
-            });
-        });
+          });
       });
     });
 
@@ -391,7 +335,6 @@ describe('Request', function() {
       var apiResponseWithMultiEntities = extend(true, {}, apiResponse);
       var entities = apiResponseWithMultiEntities.found;
       entities.push(entities[0]);
-      var expectedResults = entity.formatArray(entities);
 
       var apiResponseWithDeferred = extend(true, {}, apiResponse);
       apiResponseWithDeferred.deferred = [
@@ -402,6 +345,13 @@ describe('Request', function() {
         request.request_ = function(protoOpts, reqOpts, callback) {
           callback(null, apiResponse);
         };
+
+        overrides.util.createLimiter = function(makeRequest) {
+          return {
+            makeRequest: makeRequest,
+            stream: new stream.Transform({ objectMode: true })
+          };
+        };
       });
 
       it('should format the results', function(done) {
@@ -411,7 +361,10 @@ describe('Request', function() {
           return arr;
         };
 
-        request.get(key, assert.ifError);
+        request
+          .createReadStream(key)
+          .on('error', done)
+          .emit('reading');
       });
 
       it('should continue looking for deferred results', function(done) {
@@ -433,95 +386,196 @@ describe('Request', function() {
           done();
         };
 
-        request.get(key, assert.ifError);
+        request
+          .createReadStream(key)
+          .on('error', done)
+          .emit('reading');
       });
 
-      describe('callback mode', function() {
-        it('should exec callback with results', function(done) {
-          request.get(key, function(err, entity) {
-            assert.ifError(err);
+      it('should push results to the stream', function(done) {
+        request.createReadStream(key)
+          .on('error', done)
+          .on('data', function(entity) {
             assert.deepEqual(entity, expectedResult);
-            done();
-          });
-        });
+          })
+          .on('end', done)
+          .emit('reading');
+      });
 
-        it('should exec callback w/ array from multiple keys', function(done) {
-          request.request_ = function(protoOpts, reqOpts, callback) {
+      it('should not push more results if stream was ended', function(done) {
+        var entitiesEmitted = 0;
+
+        request.request_ = function(protoOpts, reqOpts, callback) {
+          setImmediate(function() {
             callback(null, apiResponseWithMultiEntities);
-          };
-
-          request.get([key, key], function(err, entities) {
-            assert.ifError(err);
-
-            assert.strictEqual(is.array(entities), true);
-            assert.deepEqual(entities, expectedResults);
-
-            done();
           });
+        };
+
+        request.createReadStream([key, key])
+          .on('data', function() {
+            entitiesEmitted++;
+            this.end();
+          })
+          .on('end', function() {
+            assert.strictEqual(entitiesEmitted, 1);
+            done();
+          })
+          .emit('reading');
+      });
+
+      it('should not get more results if stream was ended', function(done) {
+        var lookupCount = 0;
+
+        request.request_ = function(protoOpts, reqOpts, callback) {
+          lookupCount++;
+          setImmediate(function() {
+            callback(null, apiResponseWithDeferred);
+          });
+        };
+
+        request.createReadStream(key)
+          .on('error', done)
+          .on('data', function() {
+            this.end();
+          })
+          .on('end', function() {
+            assert.strictEqual(lookupCount, 1);
+            done();
+          })
+          .emit('reading');
+      });
+    });
+  });
+
+  describe('delete', function() {
+    it('should delete by key', function(done) {
+      request.request_ = function(protoOpts, reqOpts, callback) {
+        assert.strictEqual(protoOpts.service, 'Datastore');
+        assert.strictEqual(protoOpts.method, 'commit');
+        assert(is.object(reqOpts.mutations[0].delete));
+        callback();
+      };
+      request.delete(key, done);
+    });
+
+    it('should return apiResponse in callback', function(done) {
+      var resp = { success: true };
+      request.request_ = function(protoOpts, reqOpts, callback) {
+        callback(null, resp);
+      };
+      request.delete(key, function(err, apiResponse) {
+        assert.ifError(err);
+        assert.deepEqual(resp, apiResponse);
+        done();
+      });
+    });
+
+    it('should multi delete by keys', function(done) {
+      request.request_ = function(protoOpts, reqOpts, callback) {
+        assert.equal(reqOpts.mutations.length, 2);
+        callback();
+      };
+      request.delete([ key, key ], done);
+    });
+
+    describe('transactions', function() {
+      beforeEach(function() {
+        // Trigger transaction mode.
+        request.id = 'transaction-id';
+        request.requests_ = [];
+      });
+
+      it('should queue request', function() {
+        request.delete(key);
+
+        assert(is.object(request.requests_[0].mutations[0].delete));
+      });
+    });
+  });
+
+  describe('get', function() {
+    describe('success', function() {
+      var keys = [key];
+      var fakeEntities = [
+        { a: 'a' },
+        { b: 'b' }
+      ];
+
+      beforeEach(function() {
+        request.createReadStream = sinon.spy(function() {
+          var stream = through.obj();
+
+          setImmediate(function() {
+            fakeEntities.forEach(function(entity) {
+              stream.push(entity);
+            });
+
+            stream.push(null);
+          });
+
+          return stream;
         });
       });
 
-      describe('stream mode', function() {
-        beforeEach(function() {
-          overrides.util.createLimiter = function(makeRequest) {
-            return {
-              makeRequest: makeRequest,
-              stream: new stream.Transform({ objectMode: true })
-            };
-          };
+      it('should return an array of entities', function(done) {
+        var options = {};
+
+        request.get(keys, options, function(err, entities) {
+          assert.ifError(err);
+          assert.deepEqual(entities, fakeEntities);
+
+          var spy = request.createReadStream.getCall(0);
+          assert.strictEqual(spy.args[0], keys);
+          assert.strictEqual(spy.args[1], options);
+          done();
         });
+      });
 
-        it('should push results to the stream', function(done) {
-          request.get(key)
-            .on('error', done)
-            .on('data', function(entity) {
-              assert.deepEqual(entity, expectedResult);
-            })
-            .on('end', done)
-            .emit('reading');
+      it('should return a single entity', function(done) {
+        request.get(key, function(err, entity) {
+          assert.ifError(err);
+          assert.strictEqual(entity, fakeEntities[0]);
+          done();
         });
+      });
 
-        it('should not push more results if stream was ended', function(done) {
-          var entitiesEmitted = 0;
-
-          request.request_ = function(protoOpts, reqOpts, callback) {
-            setImmediate(function() {
-              callback(null, apiResponseWithMultiEntities);
-            });
-          };
-
-          request.get([key, key])
-            .on('data', function() {
-              entitiesEmitted++;
-              this.end();
-            })
-            .on('end', function() {
-              assert.strictEqual(entitiesEmitted, 1);
-              done();
-            })
-            .emit('reading');
+      it('should allow options to be omitted', function(done) {
+        request.get(keys, function(err) {
+          assert.ifError(err);
+          done();
         });
+      });
 
-        it('should not get more results if stream was ended', function(done) {
-          var lookupCount = 0;
+      it('should default options to an object', function(done) {
+        request.get(keys, null, function(err) {
+          assert.ifError(err);
 
-          request.request_ = function(protoOpts, reqOpts, callback) {
-            lookupCount++;
-            setImmediate(function() {
-              callback(null, apiResponseWithDeferred);
-            });
-          };
+          var spy = request.createReadStream.getCall(0);
+          assert.deepEqual(spy.args[1], {});
+          done();
+        });
+      });
+    });
 
-          request.get(key)
-            .on('error', done)
-            .on('data', function() {
-              this.end();
-            })
-            .on('end', function() {
-              assert.strictEqual(lookupCount, 1);
-              done();
-            })
-            .emit('reading');
+    describe('error', function() {
+      var error = new Error('err');
+
+      beforeEach(function() {
+        request.createReadStream = sinon.spy(function() {
+          var stream = through.obj();
+
+          setImmediate(function() {
+            stream.emit('error', error);
+          });
+
+          return stream;
+        });
+      });
+
+      it('send an error to the callback', function(done) {
+        request.get(key, function(err) {
+          assert.strictEqual(err, error);
+          done();
         });
       });
     });
@@ -548,7 +602,7 @@ describe('Request', function() {
     });
   });
 
-  describe('runQuery', function() {
+  describe('runQueryStream', function() {
     beforeEach(function() {
       overrides.entity.queryToQueryProto = util.noop;
       request.request_ = util.noop;
@@ -568,10 +622,6 @@ describe('Request', function() {
       };
     });
 
-    it('should return a stream if no callback is provided', function() {
-      assert(request.runQuery({}) instanceof stream);
-    });
-
     it('should create a limiter', function(done) {
       var options = {};
 
@@ -586,7 +636,10 @@ describe('Request', function() {
         };
       };
 
-      request.runQuery({}, options, assert.ifError);
+      request
+        .runQueryStream({}, options)
+        .on('error', done)
+        .emit('reading');
     });
 
     it('should clone the query', function(done) {
@@ -600,7 +653,10 @@ describe('Request', function() {
         done();
       };
 
-      request.runQuery(query, assert.ifError);
+      request
+        .runQueryStream(query)
+        .on('error', done)
+        .emit('reading');
     });
 
     it('should make correct request', function(done) {
@@ -621,7 +677,10 @@ describe('Request', function() {
         done();
       };
 
-      request.runQuery(query, assert.ifError);
+      request
+        .runQueryStream(query)
+        .on('error', done)
+        .emit('reading');
     });
 
     it('should allow setting strong read consistency', function(done) {
@@ -630,7 +689,10 @@ describe('Request', function() {
         done();
       };
 
-      request.runQuery({}, { consistency: 'strong' }, assert.ifError);
+      request
+        .runQueryStream({}, { consistency: 'strong' })
+        .on('error', done)
+        .emit('reading');
     });
 
     it('should allow setting strong eventual consistency', function(done) {
@@ -639,7 +701,10 @@ describe('Request', function() {
         done();
       };
 
-      request.runQuery({}, { consistency: 'eventual' }, assert.ifError);
+      request
+        .runQueryStream({}, { consistency: 'eventual' })
+        .on('error', done)
+        .emit('reading');
     });
 
     describe('error', function() {
@@ -651,15 +716,8 @@ describe('Request', function() {
         };
       });
 
-      it('should execute callback with error', function(done) {
-        request.runQuery({}, function(err) {
-          assert.strictEqual(err, error);
-          done();
-        });
-      });
-
       it('should emit error on a stream', function(done) {
-        request.runQuery({})
+        request.runQueryStream({})
           .on('error', function(err) {
             assert.strictEqual(err, error);
             done();
@@ -698,11 +756,18 @@ describe('Request', function() {
           return array;
         };
 
-        request.runQuery({}, function(err, entities) {
-          assert.ifError(err);
-          assert.deepEqual(entities, apiResponse.batch.entityResults);
-          done();
-        });
+        var entities = [];
+
+        request
+          .runQueryStream({})
+          .on('error', done)
+          .on('data', function(entity) {
+            entities.push(entity);
+          })
+          .on('end', function() {
+            assert.deepEqual(entities, apiResponse.batch.entityResults);
+            done();
+          });
       });
 
       it('should re-run query if not finished', function(done) {
@@ -786,20 +851,31 @@ describe('Request', function() {
           return queryProto;
         };
 
-        request.runQuery(query, function(err, entities, info) {
-          assert.ifError(err);
+        var entities = [];
+        var info;
 
-          var allResults = [].slice.call(entityResultsPerApiCall[1])
-            .concat(entityResultsPerApiCall[2]);
-          assert.deepEqual(entities, allResults);
+        request
+          .runQueryStream(query)
+          .on('error', done)
+          .on('info', function(_info) {
+            info = _info;
+          })
+          .on('data', function(entity) {
+            entities.push(entity);
+          })
+          .on('end', function() {
+            var allResults = [].slice.call(entityResultsPerApiCall[1])
+              .concat(entityResultsPerApiCall[2]);
 
-          assert.deepEqual(info, {
-            endCursor: apiResponse.batch.endCursor,
-            moreResults: apiResponse.batch.moreResults
+            assert.deepEqual(entities, allResults);
+
+            assert.deepEqual(info, {
+              endCursor: apiResponse.batch.endCursor,
+              moreResults: apiResponse.batch.moreResults
+            });
+
+            done();
           });
-
-          done();
-        });
       });
 
       it('should handle large limitless queries', function(done) {
@@ -834,22 +910,13 @@ describe('Request', function() {
           return this;
         };
 
-        request.runQuery(query, function(err) {
-          assert.ifError(err);
-          assert.strictEqual(timesRequestCalled, 2);
-          assert.strictEqual(limitCalled, false);
-          done();
-        });
-      });
-
-      it('should emit the info object on a stream', function(done) {
-        request.runQuery({})
+        request
+          .runQueryStream(query)
           .on('error', done)
-          .on('info', function(info) {
-            assert.deepEqual(info, {
-              endCursor: apiResponse.batch.endCursor,
-              moreResults: apiResponse.batch.moreResults
-            });
+          .on('data', function() {})
+          .on('end', function() {
+            assert.strictEqual(timesRequestCalled, 2);
+            assert.strictEqual(limitCalled, false);
             done();
           });
       });
@@ -874,7 +941,7 @@ describe('Request', function() {
           }
         };
 
-        request.runQuery({})
+        request.runQueryStream({})
           .on('data', function() {
             entitiesEmitted++;
             this.end();
@@ -893,7 +960,7 @@ describe('Request', function() {
           callback(null, apiResponse);
         };
 
-        request.runQuery({})
+        request.runQueryStream({})
           .on('error', done)
           .on('data', function() {
             this.end();
@@ -902,6 +969,91 @@ describe('Request', function() {
             assert.strictEqual(timesRequestCalled, 1);
             done();
           });
+      });
+    });
+  });
+
+  describe('runQuery', function() {
+    var query = {};
+
+    describe('success', function() {
+      var fakeInfo = {};
+      var fakeEntities = [
+        { a: 'a' },
+        { b: 'b' }
+      ];
+
+      beforeEach(function() {
+        request.runQueryStream = sinon.spy(function() {
+          var stream = through.obj();
+
+          setImmediate(function() {
+            stream.emit('info', fakeInfo);
+
+            fakeEntities.forEach(function(entity) {
+              stream.push(entity);
+            });
+
+            stream.push(null);
+          });
+
+          return stream;
+        });
+      });
+
+      it('should return an array of entities', function(done) {
+        var options = {};
+
+        request.runQuery(query, options, function(err, entities, info) {
+          assert.ifError(err);
+          assert.deepEqual(entities, fakeEntities);
+          assert.strictEqual(info, fakeInfo);
+
+          var spy = request.runQueryStream.getCall(0);
+          assert.strictEqual(spy.args[0], query);
+          assert.strictEqual(spy.args[1], options);
+          done();
+        });
+      });
+
+      it('should allow options to be omitted', function(done) {
+        request.runQuery(query, function(err) {
+          assert.ifError(err);
+          done();
+        });
+      });
+
+      it('should default options to an object', function(done) {
+        request.runQuery(query, null, function(err) {
+          assert.ifError(err);
+
+          var spy = request.runQueryStream.getCall(0);
+          assert.deepEqual(spy.args[1], {});
+          done();
+        });
+      });
+    });
+
+    describe('error', function() {
+      var error = new Error('err');
+
+      beforeEach(function() {
+        request.runQueryStream = sinon.spy(function() {
+          var stream = through.obj();
+
+          setImmediate(function() {
+            stream.emit('error', error);
+          });
+
+          return stream;
+        });
+      });
+
+      it('send an error to the callback', function(done) {
+        request.runQuery(query, function(err) {
+          assert.strictEqual(err, error);
+          done();
+        });
       });
     });
   });

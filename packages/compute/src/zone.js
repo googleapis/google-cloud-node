@@ -711,27 +711,6 @@ Zone.prototype.disk = function(name) {
  * zone.getAutoscalers({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the autoscalers from this zone as a readable object stream.
- * //-
- * zone.getAutoscalers()
- *   .on('error', console.error)
- *   .on('data', function(autoscaler) {
- *     // `autoscaler` is an `Autoscaler` object.
- *   })
- *   .on('end', function() {
- *     // All autoscalers retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * zone.getAutoscalers()
- *   .on('data', function(autoscaler) {
- *     this.end();
- *   });
  */
 Zone.prototype.getAutoscalers = function(options, callback) {
   var self = this;
@@ -770,6 +749,36 @@ Zone.prototype.getAutoscalers = function(options, callback) {
     callback(null, autoscalers, nextQuery, resp);
   });
 };
+
+/**
+ * Get a list of {module:compute/autoscaler} objects from this zone as a
+ * readable object stream.
+ *
+ * @param {object=} options - Configuration object. See
+ *     {module:compute/zone#getAutoscalers} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * zone.getAutoscalersStream()
+ *   .on('error', console.error)
+ *   .on('data', function(autoscaler) {
+ *     // `autoscaler` is an `Autoscaler` object.
+ *   })
+ *   .on('end', function() {
+ *     // All autoscalers retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * zone.getAutoscalersStream()
+ *   .on('data', function(autoscaler) {
+ *     this.end();
+ *   });
+ */
+Zone.prototype.getAutoscalersStream =
+  common.paginator.streamify('getAutoscalers');
 
 /**
  *  Get a list of disks in this zone.
@@ -815,27 +824,6 @@ Zone.prototype.getAutoscalers = function(options, callback) {
  * zone.getDisks({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the disks from your project as a readable object stream.
- * //-
- * zone.getDisks()
- *   .on('error', console.error)
- *   .on('data', function(disk) {
- *     // `disk` is a `Disk` object.
- *   })
- *   .on('end', function() {
- *     // All disks retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * zone.getDisks()
- *   .on('data', function(disk) {
- *     this.end();
- *   });
  */
 Zone.prototype.getDisks = function(options, callback) {
   var self = this;
@@ -873,6 +861,35 @@ Zone.prototype.getDisks = function(options, callback) {
     callback(null, disks, nextQuery, resp);
   });
 };
+
+/**
+ * Get a list of {module:compute/disk} objects in this zone as a readable object
+ * stream.
+ *
+ * @param {object=} options - Configuration object. See
+ *     {module:compute/zone#getDisks} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * zone.getDisksStream()
+ *   .on('error', console.error)
+ *   .on('data', function(disk) {
+ *     // `disk` is a `Disk` object.
+ *   })
+ *   .on('end', function() {
+ *     // All disks retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * zone.getDisksStream()
+ *   .on('data', function(disk) {
+ *     this.end();
+ *   });
+ */
+Zone.prototype.getDisksStream = common.paginator.streamify('getDisks');
 
 /**
  * Get a list of instance groups for this zone.
@@ -920,27 +937,6 @@ Zone.prototype.getDisks = function(options, callback) {
  * zone.getInstanceGroups({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the instance groups from your project as a readable object stream.
- * //-
- * zone.getInstanceGroups()
- *   .on('error', console.error)
- *   .on('data', function(instanceGroup) {
- *     // `instanceGroup` is an `InstanceGroup` object.
- *   })
- *   .on('end', function() {
- *     // All instance groups retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * zone.getInstanceGroups()
- *   .on('data', function(instanceGroup) {
- *     this.end();
- *   });
  */
 Zone.prototype.getInstanceGroups = function(options, callback) {
   var self = this;
@@ -978,6 +974,36 @@ Zone.prototype.getInstanceGroups = function(options, callback) {
     callback(null, instanceGroups, nextQuery, resp);
   });
 };
+
+/**
+ * Get a list of {module:compute/instanceGroup} objects for this zone as a
+ * readable object stream.
+ *
+ * @param {object=} options - Configuration object. See
+ *     {module:compute/zone#getInstanceGroups} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * zone.getInstanceGroupsStream()
+ *   .on('error', console.error)
+ *   .on('data', function(instanceGroup) {
+ *     // `instanceGroup` is an `InstanceGroup` object.
+ *   })
+ *   .on('end', function() {
+ *     // All instance groups retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * zone.getInstanceGroupsStream()
+ *   .on('data', function(instanceGroup) {
+ *     this.end();
+ *   });
+ */
+Zone.prototype.getInstanceGroupsStream =
+  common.paginator.streamify('getInstanceGroups');
 
 /**
  * Get a list of machine types for this zone.
@@ -1019,27 +1045,6 @@ Zone.prototype.getInstanceGroups = function(options, callback) {
  * zone.getMachineTypes({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the machine types from this zone as a readable object stream.
- * //-
- * zone.getMachineTypes()
- *   .on('error', console.error)
- *   .on('data', function(machineType) {
- *     // `machineType` is a `MachineType` object.
- *   })
- *   .on('end', function() {
- *     // All machine types retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * zone.getMachineTypes()
- *   .on('data', function(machineType) {
- *     this.end();
- *   });
  */
 Zone.prototype.getMachineTypes = function(options, callback) {
   if (is.fn(options)) {
@@ -1053,6 +1058,36 @@ Zone.prototype.getMachineTypes = function(options, callback) {
 
   return this.compute.getMachineTypes(options, callback);
 };
+
+/**
+ * Get a list of {module:compute/machineType} objects for this zone as a
+ * readable object stream.
+ *
+ * @param {object=} options - Configuration object. See
+ *     {module:compute/zone#getMachineTypes} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * zone.getMachineTypesStream()
+ *   .on('error', console.error)
+ *   .on('data', function(machineType) {
+ *     // `machineType` is a `MachineType` object.
+ *   })
+ *   .on('end', function() {
+ *     // All machine types retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * zone.getMachineTypesStream()
+ *   .on('data', function(machineType) {
+ *     this.end();
+ *   });
+ */
+Zone.prototype.getMachineTypesStream =
+  common.paginator.streamify('getMachineTypes');
 
 /**
  * Get a list of operations for this zone.
@@ -1099,27 +1134,6 @@ Zone.prototype.getMachineTypes = function(options, callback) {
  * zone.getOperations({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the operations from your project as a readable object stream.
- * //-
- * zone.getOperations()
- *   .on('error', console.error)
- *   .on('data', function(operation) {
- *     // `operation` is an `Operation` object.
- *   })
- *   .on('end', function() {
- *     // All operations retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * zone.getOperations()
- *   .on('data', function(operation) {
- *     this.end();
- *   });
  */
 Zone.prototype.getOperations = function(options, callback) {
   var self = this;
@@ -1157,6 +1171,36 @@ Zone.prototype.getOperations = function(options, callback) {
     callback(null, operations, nextQuery, resp);
   });
 };
+
+/**
+ * Get a list of {module:compute/operation} objects for this zone as a readable
+ * object stream.
+ *
+ * @param {object=} options - Configuration object. See
+ *     {module:compute/zone#getOperations} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * zone.getOperationsStream()
+ *   .on('error', console.error)
+ *   .on('data', function(operation) {
+ *     // `operation` is an `Operation` object.
+ *   })
+ *   .on('end', function() {
+ *     // All operations retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * zone.getOperationsStream()
+ *   .on('data', function(operation) {
+ *     this.end();
+ *   });
+ */
+Zone.prototype.getOperationsStream =
+  common.paginator.streamify('getOperations');
 
 /**
  * Get a list of VM instances in this zone.
@@ -1200,27 +1244,6 @@ Zone.prototype.getOperations = function(options, callback) {
  * zone.getVMs({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the VM instances from your project as a readable object stream.
- * //-
- * zone.getVMs()
- *   .on('error', console.error)
- *   .on('data', function(vm) {
- *     // `vm` is a `VM` object.
- *   })
- *   .on('end', function() {
- *     // All instances retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * zone.getVMs()
- *   .on('data', function(vm) {
- *     this.end();
- *   });
  */
 Zone.prototype.getVMs = function(options, callback) {
   var self = this;
@@ -1258,6 +1281,35 @@ Zone.prototype.getVMs = function(options, callback) {
     callback(null, vms, nextQuery, resp);
   });
 };
+
+/**
+ * Get a list of {module:compute/vm} instances in this zone as a readable object
+ * stream.
+ *
+ * @param {object=} options - Configuration object. See
+ *     {module:compute/zone#getVMs} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * zone.getVMsStream()
+ *   .on('error', console.error)
+ *   .on('data', function(vm) {
+ *     // `vm` is a `VM` object.
+ *   })
+ *   .on('end', function() {
+ *     // All instances retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * zone.getVMsStream()
+ *   .on('data', function(vm) {
+ *     this.end();
+ *   });
+ */
+Zone.prototype.getVMsStream = common.paginator.streamify('getVMs');
 
 /**
  * Get a reference to a Google Compute Engine instance group.
@@ -1366,10 +1418,9 @@ Zone.prototype.createHttpsServerFirewall_ = function(callback) {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(Zone, [
+common.paginator.extend(Zone, [
   'getAutoscalers',
   'getDisks',
   'getInstanceGroups',

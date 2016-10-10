@@ -308,11 +308,30 @@ Log.prototype.error = function(entry, options, callback) {
  * log.getEntries({
  *   autoPaginate: false
  * }, callback);
+ */
+Log.prototype.getEntries = function(options, callback) {
+  if (is.function(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = extend({
+    filter: 'logName="' + this.formattedName_ + '"'
+  }, options);
+
+  return this.parent.getEntries(options, callback);
+};
+
+/**
+ * This method is a wrapper around {module:logging#getEntriesStream}, but with a
+ * filter specified to only return {module:logging/entry} objects from this log.
  *
- * //-
- * // Get the entries from your project as a readable object stream.
- * //-
- * log.getEntries()
+ * @param {object=} options - Configuration object. See
+ *     {module:logging/log#getEntries} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * log.getEntriesStream()
  *   .on('error', console.error)
  *   .on('data', function(entry) {
  *     // `entry` is a Stackdriver Logging entry object.
@@ -326,22 +345,17 @@ Log.prototype.error = function(entry, options, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * log.getEntries()
+ * log.getEntriesStream()
  *   .on('data', function(entry) {
  *     this.end();
  *   });
  */
-Log.prototype.getEntries = function(options, callback) {
-  if (is.function(options)) {
-    callback = options;
-    options = {};
-  }
-
+Log.prototype.getEntriesStream = function(options) {
   options = extend({
     filter: 'logName="' + this.formattedName_ + '"'
   }, options);
 
-  return this.parent.getEntries(options, callback);
+  return this.parent.getEntriesStream(options);
 };
 
 /**

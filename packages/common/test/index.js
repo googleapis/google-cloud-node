@@ -22,9 +22,9 @@ var proxyquire = require('proxyquire');
 var fakeGrpcOperation = {};
 var fakeGrpcService = {};
 var fakeGrpcServiceObject = {};
+var fakePaginator = {};
 var fakeService = {};
 var fakeServiceObject = {};
-var fakeStreamRouter = {};
 var fakeUtil = {};
 
 describe('common', function() {
@@ -35,9 +35,9 @@ describe('common', function() {
       './grpc-operation.js': fakeGrpcOperation,
       './grpc-service.js': fakeGrpcService,
       './grpc-service-object.js': fakeGrpcServiceObject,
+      './paginator.js': fakePaginator,
       './service.js': fakeService,
       './service-object.js': fakeServiceObject,
-      './stream-router.js': fakeStreamRouter,
       './util.js': fakeUtil
     });
   });
@@ -49,7 +49,7 @@ describe('common', function() {
       GrpcServiceObject: fakeGrpcServiceObject,
       Service: fakeService,
       ServiceObject: fakeServiceObject,
-      streamRouter: fakeStreamRouter,
+      paginator: fakePaginator,
       util: fakeUtil
     });
   });

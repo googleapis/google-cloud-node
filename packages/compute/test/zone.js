@@ -67,7 +67,7 @@ function FakeServiceObject() {
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 var extended = false;
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'Zone') {
       return;
@@ -84,6 +84,9 @@ var fakeStreamRouter = {
       'getOperations',
       'getVMs'
     ]);
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -102,7 +105,7 @@ describe('Zone', function() {
       'gce-images': fakeGceImages,
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        streamRouter: fakeStreamRouter
+        paginator: fakePaginator
       },
       './autoscaler.js': FakeAutoscaler,
       './disk.js': FakeDisk,
@@ -121,7 +124,16 @@ describe('Zone', function() {
 
   describe('instantiation', function() {
     it('should extend the correct methods', function() {
-      assert(extended); // See `fakeStreamRouter.extend`
+      assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(zone.getAutoscalersStream, 'getAutoscalers');
+      assert.strictEqual(zone.getDisksStream, 'getDisks');
+      assert.strictEqual(zone.getInstanceGroupsStream, 'getInstanceGroups');
+      assert.strictEqual(zone.getMachineTypesStream, 'getMachineTypes');
+      assert.strictEqual(zone.getOperationsStream, 'getOperations');
+      assert.strictEqual(zone.getVMsStream, 'getVMs');
     });
 
     it('should localize the compute instance', function() {

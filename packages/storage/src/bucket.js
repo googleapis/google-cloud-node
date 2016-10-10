@@ -605,27 +605,6 @@ Bucket.prototype.file = function(name, options) {
  * bucket.getFiles({
  *   autoPaginate: false
  * }, callback);
- *
- * //-
- * // Get the files from your bucket as a readable object stream.
- * //-
- * bucket.getFiles()
- *   .on('error', console.error)
- *   .on('data', function(file) {
- *     // file is a File object.
- *   })
- *   .on('end', function() {
- *     // All files retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * bucket.getFiles()
- *   .on('data', function(file) {
- *     this.end();
- *   });
  */
 Bucket.prototype.getFiles = function(query, callback) {
   var self = this;
@@ -667,6 +646,35 @@ Bucket.prototype.getFiles = function(query, callback) {
     callback(null, files, nextQuery, resp);
   });
 };
+
+/**
+ * Get {module:storage/file} objects for the files currently in the bucket as a
+ * readable object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:storage/bucket#getFiles} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * bucket.getFilesStream()
+ *   .on('error', console.error)
+ *   .on('data', function(file) {
+ *     // file is a File object.
+ *   })
+ *   .on('end', function() {
+ *     // All files retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * bucket.getFilesStream()
+ *   .on('data', function(file) {
+ *     this.end();
+ *   });
+ */
+Bucket.prototype.getFilesStream = common.paginator.streamify('getFiles');
 
 /**
  * Make the bucket listing private.
@@ -1175,9 +1183,8 @@ Bucket.prototype.makeAllFilesPublicPrivate_ = function(options, callback) {
 
 /*! Developer Documentation
  *
- * This method can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(Bucket, 'getFiles');
+common.paginator.extend(Bucket, 'getFiles');
 
 module.exports = Bucket;
