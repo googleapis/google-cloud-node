@@ -74,6 +74,14 @@ function Table(dataset, id) {
      *     // The table was created successfully.
      *   }
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * table.create().then(function(data) {
+     *   var table = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     create: true,
 
@@ -89,6 +97,11 @@ function Table(dataset, id) {
      *
      * @example
      * table.delete(function(err, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * table.delete().then(function(apiResponse) {});
      */
     delete: true,
 
@@ -102,6 +115,11 @@ function Table(dataset, id) {
      *
      * @example
      * table.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * table.exists().then(function(exists) {});
      */
     exists: true,
 
@@ -121,6 +139,14 @@ function Table(dataset, id) {
      * table.get(function(err, table, apiResponse) {
      *   // `table.metadata` has been populated.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * table.get().then(function(data) {
+     *   var table = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     get: true,
 
@@ -137,6 +163,14 @@ function Table(dataset, id) {
      *
      * @example
      * table.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * table.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true
   };
@@ -266,6 +300,14 @@ Table.mergeSchemaWithRows_ = function(schema, rows) {
  * };
  *
  * table.copy(yourTable, metadata, function(err, job, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * table.copy(yourTable, metadata).then(function(data) {
+ *   var job = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Table.prototype.copy = function(destination, metadata, callback) {
   var self = this;
@@ -507,6 +549,14 @@ Table.prototype.createWriteStream = function(metadata) {
  *   gcs.bucket('institutions').file('2014.json'),
  *   gcs.bucket('institutions-copy').file('2014.json')
  * ], options, function(err, job, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * table.export(exportedFile, options).then(function(data) {
+ *   var job = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Table.prototype.export = function(destination, options, callback) {
   var self = this;
@@ -615,6 +665,11 @@ Table.prototype.export = function(destination, options, callback) {
  * table.getRows({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * table.getRows().then(function(rows) {});
  */
 Table.prototype.getRows = function(options, callback) {
   var self = this;
@@ -733,6 +788,14 @@ Table.prototype.getRows = function(options, callback) {
  *   gcs.bucket('institutions').file('2011.csv'),
  *   gcs.bucket('institutions').file('2012.csv')
  * ], function(err, job, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * table.import(data).then(function(data) {
+ *   var job = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Table.prototype.import = function(source, metadata, callback) {
   var self = this;
@@ -907,6 +970,14 @@ Table.prototype.import = function(source, metadata, callback) {
  *   // See https://developers.google.com/bigquery/troubleshooting-errors for
  *   // recommendations on handling errors.
  * }
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * table.insert(rows).then(function(data) {
+ *   var insertErrors = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Table.prototype.insert = function(rows, options, callback) {
   if (is.fn(options)) {
@@ -990,6 +1061,14 @@ Table.prototype.query = function(query, callback) {
  * };
  *
  * table.setMetadata(metadata, function(err, metadata, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * table.setMetadata(metadata).then(function(data) {
+ *   var metadata = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Table.prototype.setMetadata = function(metadata, callback) {
   var self = this;
@@ -1024,5 +1103,12 @@ Table.prototype.setMetadata = function(metadata, callback) {
  * These methods can be auto-paginated.
  */
 common.paginator.extend(Table, ['getRows']);
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(Table);
 
 module.exports = Table;

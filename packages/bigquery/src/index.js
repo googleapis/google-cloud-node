@@ -663,7 +663,11 @@ common.paginator.extend(BigQuery, ['getDatasets', 'getJobs', 'query']);
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(BigQuery);
+common.util.promisify(BigQuery, {
+  filter: function(methodName) {
+    return ['dataset', 'job'].indexOf(methodName) === -1;
+  }
+});
 
 BigQuery.Dataset = Dataset;
 BigQuery.Job = Job;

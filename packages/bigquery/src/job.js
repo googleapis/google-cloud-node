@@ -87,6 +87,11 @@ function Job(bigQuery, id) {
      *
      * @example
      * job.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * job.exists().then(function(exists) {});
      */
     exists: true,
 
@@ -98,6 +103,14 @@ function Job(bigQuery, id) {
      *   if (!err) {
      *     // `job.metadata` has been populated.
      *   }
+     * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * job.get().then(function(data) {
+     *   var job = data[0];
+     *   var apiResponse = data[1];
      * });
      */
     get: true,
@@ -117,6 +130,14 @@ function Job(bigQuery, id) {
      * @example
      * var job = bigquery.job('id');
      * job.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * job.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true
   };
@@ -168,6 +189,11 @@ modelo.inherits(Job, common.ServiceObject, events.EventEmitter);
  *   job.on('error', function(err) {});
  *   job.on('complete', function(metadata) {});
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * job.cancel().then(function(apiResponse) {});
  */
 Job.prototype.cancel = function(callback) {
   callback = callback || common.util.noop;
@@ -238,6 +264,11 @@ Job.prototype.cancel = function(callback) {
  * job.getQueryResults({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * job.getQueryResults().then(function(rows) {});
  */
 Job.prototype.getQueryResults = function(options, callback) {
   if (is.fn(options)) {
@@ -340,5 +371,12 @@ Job.prototype.startPolling_ = function() {
     self.emit('complete', metadata);
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(Job);
 
 module.exports = Job;

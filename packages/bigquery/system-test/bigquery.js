@@ -77,16 +77,6 @@ describe('BigQuery', function() {
     });
   });
 
-  it('should get a list of datasets as a promise', function(done) {
-    bigquery.getDatasets()
-      .then(function(datasets) {
-        assert(datasets.length > 0);
-        assert(datasets[0] instanceof Dataset);
-        done();
-      })
-      .then(null, done);
-  });
-
   it('should allow limiting API calls', function(done) {
     var maxApiCalls = 1;
     var numRequestsMade = 0;
