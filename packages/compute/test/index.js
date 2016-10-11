@@ -27,8 +27,19 @@ var util = require('@google-cloud/common').util;
 
 var slice = Array.prototype.slice;
 
+var promisified = false;
 var fakeUtil = extend({}, util, {
-  makeAuthenticatedRequestFactory: util.noop
+  makeAuthenticatedRequestFactory: util.noop,
+  promisify: function(Class, options) {
+    if (Class.name !== 'Compute') {
+      return;
+    }
+
+    promisified = true;
+    assert.strictEqual(options.filter('getThing'), true);
+    assert.strictEqual(options.filter('createThing'), true);
+    assert.strictEqual(options.filter('thing'), false);
+  }
 });
 
 var extended = false;
@@ -204,6 +215,10 @@ describe('Compute', function() {
       assert.strictEqual(compute.getSubnetworksStream, 'getSubnetworks');
       assert.strictEqual(compute.getVMsStream, 'getVMs');
       assert.strictEqual(compute.getZonesStream, 'getZones');
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
   });
 

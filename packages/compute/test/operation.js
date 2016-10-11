@@ -31,6 +31,7 @@ function FakeServiceObject() {
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 var parseHttpRespBodyOverride = null;
+var promisified = false;
 var fakeUtil = extend({}, util, {
   parseHttpRespBody: function() {
     if (parseHttpRespBodyOverride) {
@@ -38,6 +39,11 @@ var fakeUtil = extend({}, util, {
     }
 
     return util.parseHttpRespBody.apply(this, arguments);
+  },
+  promisify: function(Class, options) {
+    if (Class.name === 'Operation') {
+      promisified = true;
+    }
   }
 });
 
@@ -84,6 +90,10 @@ describe('Operation', function() {
         exists: true,
         get: true
       });
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should give the right baseUrl for a global Operation', function() {

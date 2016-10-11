@@ -93,6 +93,15 @@ function VM(zone, name) {
      *   // `operation` is an Operation object that can be used to check the
      *   // status of the request.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * vm.create(config).then(function(data) {
+     *   var vm = data[0];
+     *   var operation = data[1];
+     *   var apiResponse = data[2];
+     * });
      */
     create: true,
 
@@ -106,6 +115,11 @@ function VM(zone, name) {
      *
      * @example
      * vm.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * vm.exists().then(function(exists) {});
      */
     exists: true,
 
@@ -125,6 +139,14 @@ function VM(zone, name) {
      * vm.get(function(err, vm, apiResponse) {
      *   // `vm` is a VM object.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * vm.get().then(function(data) {
+     *   var vm = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     get: true,
 
@@ -142,6 +164,14 @@ function VM(zone, name) {
      *
      * @example
      * vm.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * vm.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true
   };
@@ -197,6 +227,14 @@ util.inherits(VM, common.ServiceObject);
  * };
  *
  * vm.attachDisk(disk, options, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vm.attachDisk(disk, options).then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 VM.prototype.attachDisk = function(disk, options, callback) {
   if (!(disk instanceof Disk)) {
@@ -243,6 +281,14 @@ VM.prototype.attachDisk = function(disk, options, callback) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vm.delete().then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 VM.prototype.delete = function(callback) {
   this.request({
@@ -271,6 +317,14 @@ VM.prototype.delete = function(callback) {
  * vm.detachDisk(disk, function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vm.detachDisk(disk).then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 VM.prototype.detachDisk = function(disk, callback) {
@@ -330,6 +384,14 @@ VM.prototype.detachDisk = function(disk, callback) {
  *
  * @example
  * vm.getSerialPortOutput(function(err, output, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vm.getSerialPortOutput().then(function(data) {
+ *   var output = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 VM.prototype.getSerialPortOutput = function(port, callback) {
   if (is.fn(port)) {
@@ -370,6 +432,15 @@ VM.prototype.getSerialPortOutput = function(port, callback) {
  *
  * @example
  * vm.getTags(function(err, tags, fingerprint, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vm.getTags().then(function(data) {
+ *   var tags = data[0];
+ *   var fingerprint = data[1];
+ *   var apiResponse = data[2];
+ * });
  */
 VM.prototype.getTags = function(callback) {
   this.getMetadata(function(err, metadata, apiResponse) {
@@ -397,6 +468,14 @@ VM.prototype.getTags = function(callback) {
  * vm.reset(function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vm.reset().then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 VM.prototype.reset = function(callback) {
@@ -452,6 +531,11 @@ VM.prototype.reset = function(callback) {
  *     // The VM is stopped and its machine type was changed successfully.
  *   }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vm.resize('ns-standard-1', options).then(function(apiResponse) {});
  */
 VM.prototype.resize = function(machineType, options, callback) {
   var self = this;
@@ -520,11 +604,21 @@ VM.prototype.resize = function(machineType, options, callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * vm.setMetadata({
+ * var metadata = {
  *   'startup-script': '...'
- * }, function(err, operation, apiResponse) {
+ * };
+ *
+ * vm.setMetadata(metadata, function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vm.setMetadata(metadata).then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 VM.prototype.setMetadata = function(metadata, callback) {
@@ -583,6 +677,21 @@ VM.prototype.setMetadata = function(metadata, callback) {
  *     //  status of the request.
  *   });
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vm.getTags().then(function(data) {
+ *   var tags = data[0];
+ *   var fingerprint = data[1];
+ *
+ *   tags.push('new-tag');
+ *
+ *   return vm.setTags(tags, fingerprint);
+ * }).then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 VM.prototype.setTags = function(tags, fingerprint, callback) {
   var body = {
@@ -613,6 +722,14 @@ VM.prototype.setTags = function(tags, fingerprint, callback) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vm.start().then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 VM.prototype.start = function(callback) {
   this.request({
@@ -636,6 +753,14 @@ VM.prototype.start = function(callback) {
  * vm.stop(function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vm.stop().then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 VM.prototype.stop = function(callback) {
@@ -679,5 +804,12 @@ VM.prototype.request = function(reqOpts, callback) {
     callback(null, operation, resp);
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(VM);
 
 module.exports = VM;

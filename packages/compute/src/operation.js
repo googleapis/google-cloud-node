@@ -110,6 +110,11 @@ function Operation(scope, name) {
      *
      * @example
      * operation.delete(function(err, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * operation.delete().then(function(apiResponse) {});
      */
     delete: true,
 
@@ -123,6 +128,11 @@ function Operation(scope, name) {
      *
      * @example
      * operation.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * operation.exists().then(function(exists) {});
      */
     exists: true,
 
@@ -132,6 +142,14 @@ function Operation(scope, name) {
      * @example
      * operation.get(function(err, operation, apiResponse) {
      *   // `operation` is an Operation object.
+     * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * operation.get().then(function(data) {
+     *   var operation = data[0];
+     *   var apiResponse = data[1];
      * });
      */
     get: true
@@ -172,6 +190,14 @@ modelo.inherits(Operation, common.ServiceObject, events.EventEmitter);
  * operation.getMetadata(function(err, metadata, apiResponse) {
  *   // `metadata.error`: Contains errors if the operation failed.
  *   // `metadata.warnings`: Contains warnings.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * operation.getMetadata().then(function(data) {
+ *   var metadata = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 Operation.prototype.getMetadata = function(callback) {
@@ -272,5 +298,12 @@ Operation.prototype.startPolling_ = function() {
     self.emit('complete', metadata);
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(Operation);
 
 module.exports = Operation;

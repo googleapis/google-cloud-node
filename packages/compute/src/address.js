@@ -57,6 +57,15 @@ function Address(region, name) {
      *   // `operation` is an Operation object that can be used to check the
      *   // of the request.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * address.create().then(function(data) {
+     *   var address = data[0];
+     *   var operation = data[1];
+     *   var apiResponse = data[2];
+     * });
      */
     create: true,
 
@@ -70,6 +79,11 @@ function Address(region, name) {
      *
      * @example
      * address.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * address.exists().then(function(exists) {});
      */
     exists: true,
 
@@ -89,6 +103,14 @@ function Address(region, name) {
      * address.get(function(err, address, apiResponse) {
      *   // `address` is an Address object.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * address.get().then(function(data) {
+     *   var address = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     get: true,
 
@@ -106,6 +128,14 @@ function Address(region, name) {
      *
      * @example
      * address.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * address.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true
   };
@@ -140,6 +170,14 @@ util.inherits(Address, common.ServiceObject);
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * address.delete().then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Address.prototype.delete = function(callback) {
   callback = callback || common.util.noop;
@@ -161,5 +199,12 @@ Address.prototype.delete = function(callback) {
     callback(null, operation, resp);
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(Address);
 
 module.exports = Address;

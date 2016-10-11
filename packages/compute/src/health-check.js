@@ -63,6 +63,15 @@ function HealthCheck(compute, name, options) {
      *   // `operation` is an Operation object that can be used to check the
      *   // status of the request.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * healthCheck.create().then(function(data) {
+     *   var healthCheck = data[0];
+     *   var operation = data[1];
+     *   var apiResponse = data[2];
+     * });
      */
     create: true,
 
@@ -77,6 +86,11 @@ function HealthCheck(compute, name, options) {
      *
      * @example
      * healthCheck.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * healthCheck.exists().then(function(exists) {});
      */
     exists: true,
 
@@ -95,6 +109,14 @@ function HealthCheck(compute, name, options) {
      * @example
      * healthCheck.get(function(err, healthCheck, apiResponse) {
      *   // `healthCheck` is a HealthCheck object.
+     * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * healthCheck.get().then(function(data) {
+     *   var healthCheck = data[0];
+     *   var apiResponse = data[1];
      * });
      */
     get: true,
@@ -115,6 +137,14 @@ function HealthCheck(compute, name, options) {
      *
      * @example
      * healthCheck.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * healthCheck.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true
   };
@@ -161,6 +191,14 @@ util.inherits(HealthCheck, common.ServiceObject);
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * healthCheck.delete().then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 HealthCheck.prototype.delete = function(callback) {
   var compute = this.compute;
@@ -204,6 +242,14 @@ HealthCheck.prototype.delete = function(callback) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * healthCheck.setMetadata(metadata).then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 HealthCheck.prototype.setMetadata = function(metadata, callback) {
   var compute = this.compute;
@@ -224,5 +270,12 @@ HealthCheck.prototype.setMetadata = function(metadata, callback) {
     callback(null, operation, resp);
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(HealthCheck);
 
 module.exports = HealthCheck;

@@ -24,6 +24,21 @@ var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisify: function(Class, options) {
+    if (Class.name !== 'Network') {
+      return;
+    }
+
+    promisified = true;
+    assert.strictEqual(options.filter('firewall'), false);
+    assert.strictEqual(options.filter('getFirewalls'), true);
+    assert.strictEqual(options.filter('createFirewalls'), true);
+    assert.strictEqual(options.filter('delete'), true);
+  }
+});
+
 function FakeServiceObject() {
   this.calledWith_ = arguments;
   ServiceObject.apply(this, arguments);
@@ -53,7 +68,7 @@ describe('Network', function() {
     Network = proxyquire('../src/network.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: util
+        util: fakeUtil
       }
     });
 
@@ -66,6 +81,10 @@ describe('Network', function() {
   });
 
   describe('instantiation', function() {
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
+
     it('should localize the compute instance', function() {
       assert.strictEqual(network.compute, COMPUTE);
     });

@@ -25,6 +25,20 @@ var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisify: function(Class, options) {
+    if (Class.name !== 'Zone') {
+      return;
+    }
+
+    promisified = true;
+    assert.strictEqual(options.filter('disk'), false);
+    assert.strictEqual(options.filter('createDisk'), true);
+    assert.strictEqual(options.filter('getDisks'), true);
+  }
+});
+
 var gceImagesOverride;
 function fakeGceImages() {
   return (gceImagesOverride || gceImages).apply(null, arguments);
@@ -105,7 +119,8 @@ describe('Zone', function() {
       'gce-images': fakeGceImages,
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        paginator: fakePaginator
+        paginator: fakePaginator,
+        util: fakeUtil
       },
       './autoscaler.js': FakeAutoscaler,
       './disk.js': FakeDisk,
@@ -125,6 +140,10 @@ describe('Zone', function() {
   describe('instantiation', function() {
     it('should extend the correct methods', function() {
       assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should streamify the correct methods', function() {

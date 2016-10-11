@@ -24,6 +24,19 @@ var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisify: function(Class, options) {
+    if (Class.name !== 'Disk') {
+      return;
+    }
+
+    promisified = true;
+    assert.strictEqual(options.filter('snapshot'), false);
+    assert.strictEqual(options.filter('delete'), true);
+  }
+});
+
 function FakeSnapshot() {
   this.calledWith_ = [].slice.call(arguments);
 }
@@ -59,7 +72,8 @@ describe('Disk', function() {
   before(function() {
     Disk = proxyquire('../src/disk.js', {
       '@google-cloud/common': {
-        ServiceObject: FakeServiceObject
+        ServiceObject: FakeServiceObject,
+        util: fakeUtil
       },
       './snapshot.js': FakeSnapshot
     });
@@ -76,6 +90,10 @@ describe('Disk', function() {
 
     it('should localize the name', function() {
       assert.strictEqual(disk.name, DISK_NAME);
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should format the disk name', function() {

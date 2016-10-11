@@ -25,6 +25,15 @@ var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisify: function(Class, options) {
+    if (Class.name === 'InstanceGroup') {
+      promisified = true;
+    }
+  }
+});
+
 function FakeServiceObject() {
   this.calledWith_ = arguments;
   ServiceObject.apply(this, arguments);
@@ -65,7 +74,8 @@ describe('InstanceGroup', function() {
     InstanceGroup = proxyquire('../src/instance-group.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        paginator: fakePaginator
+        paginator: fakePaginator,
+        util: fakeUtil
       }
     });
     staticMethods.formatPorts_ = InstanceGroup.formatPorts_;
@@ -83,6 +93,10 @@ describe('InstanceGroup', function() {
 
     it('should streamify the correct methods', function() {
       assert.strictEqual(instanceGroup.getVMsStream, 'getVMs');
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should localize the zone instance', function() {
