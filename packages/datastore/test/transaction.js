@@ -19,8 +19,24 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var entity = require('../src/entity.js');
+var extend = require('extend');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
+
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisify: function(Class, options) {
+    if (Class.name !== 'Transaction') {
+      return;
+    }
+
+    promisified = true;
+    assert.strictEqual(options.filter('commit'), true);
+    assert.strictEqual(options.filter('rollback'), true);
+    assert.strictEqual(options.filter('run'), true);
+    assert.strictEqual(options.filter('save'), false);
+  }
+});
 
 var DatastoreRequestOverride = {
   delete: util.noop,
@@ -62,6 +78,9 @@ describe('Transaction', function() {
 
   before(function() {
     Transaction = proxyquire('../src/transaction.js', {
+      '@google-cloud/common': {
+        util: fakeUtil
+      },
       './request.js': FakeDatastoreRequest
     });
   });
@@ -71,6 +90,10 @@ describe('Transaction', function() {
   });
 
   describe('instantiation', function() {
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
+
     it('should localize the datastore instance', function() {
       assert.strictEqual(transaction.datastore, DATASTORE);
     });

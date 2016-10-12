@@ -97,6 +97,11 @@ util.inherits(Transaction, Request);
  *     // Transaction could not be committed.
  *   }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * transaction.commit().then(function(apiResponse) {});
  */
 Transaction.prototype.commit = function(callback) {
   var self = this;
@@ -300,6 +305,11 @@ Transaction.prototype.delete = function(entities) {
  *     }
  *   });
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * transaction.rollback().then(function(apiResponse) {});
  */
 Transaction.prototype.rollback = function(callback) {
   var self = this;
@@ -348,6 +358,14 @@ Transaction.prototype.rollback = function(callback) {
  *       }
  *     });
  *   });
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * transaction.run().then(function(data) {
+ *   var transaction = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 Transaction.prototype.run = function(callback) {
@@ -496,5 +514,16 @@ Transaction.prototype.save = function(entities) {
     });
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(Transaction, {
+  filter: function(methodName) {
+    return ['commit', 'rollback', 'run'].indexOf(methodName) > -1;
+  }
+});
 
 module.exports = Transaction;

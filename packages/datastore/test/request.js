@@ -28,6 +28,15 @@ var util = require('@google-cloud/common').util;
 var entity = require('../src/entity.js');
 var Query = require('../src/query.js');
 
+var fakeUtil = extend({}, util, {
+  promisify: function(Class) {
+    if (Class.name === 'DatastoreRequest') {
+      promisified = true;
+    }
+  }
+});
+
+var promisified = false;
 var overrides = {};
 
 function override(name, object) {
@@ -59,7 +68,7 @@ function resetOverrides() {
 }
 
 override('entity', entity);
-override('util', util);
+override('util', fakeUtil);
 
 function FakeQuery() {
   this.calledWith_ = arguments;
@@ -74,7 +83,7 @@ describe('Request', function() {
   before(function() {
     Request = proxyquire('../src/request.js', {
       '@google-cloud/common': {
-        util: util
+        util: fakeUtil
       },
       './entity.js': entity,
       './query.js': FakeQuery
@@ -93,6 +102,12 @@ describe('Request', function() {
     FakeQuery.prototype = new Query();
     resetOverrides();
     request = new Request();
+  });
+
+  describe('instantiation', function() {
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
   });
 
   describe('allocateIds', function() {

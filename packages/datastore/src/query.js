@@ -21,6 +21,7 @@
 'use strict';
 
 var arrify = require('arrify');
+var common = require('@google-cloud/common');
 
 /*! Developer Documentation
  *
@@ -305,6 +306,11 @@ Query.prototype.offset = function(n) {
  *   // entities[].key = Key object
  *   // entities[].data = Empty object
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * query.run().then(function(entities) {});
  */
 Query.prototype.run = function() {
   var query = this;
@@ -344,5 +350,16 @@ Query.prototype.runStream = function() {
 
   return this.scope.runQueryStream.apply(this.scope, args);
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(Query, {
+  filter: function(methodName) {
+    return methodName === 'run';
+  }
+});
 
 module.exports = Query;

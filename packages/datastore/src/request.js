@@ -123,6 +123,14 @@ function DatastoreRequest() {}
  * function callback(err, keys, apiResponse) {}
  *
  * datastore.allocateIds(incompleteKey, 100, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * datastore.allocateIds(incompleteKey, 100).then(function(data) {
+ *   var keys = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 DatastoreRequest.prototype.allocateIds = function(incompleteKey, n, callback) {
   if (entity.isKeyComplete(incompleteKey)) {
@@ -282,6 +290,11 @@ DatastoreRequest.prototype.createReadStream = function(keys, options) {
  *   datastore.key(['Company', 123]),
  *   datastore.key(['Product', 'Computer'])
  * ], function(err, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * datastore.delete().then(function(apiResponse) {});
  */
 DatastoreRequest.prototype.delete = function(keys, callback) {
   callback = callback || common.util.noop;
@@ -379,6 +392,11 @@ DatastoreRequest.prototype.delete = function(keys, callback) {
  *   entity.data.newValue = true;
  *   datastore.save(entity, function(err) {});
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * datastore.get(keys).then(function(entities) {});
  */
 DatastoreRequest.prototype.get = function(keys, options, callback) {
   if (is.fn(options)) {
@@ -479,6 +497,11 @@ DatastoreRequest.prototype.insert = function(entities, callback) {
  *   // entities[].key = Key object
  *   // entities[].data = Empty object
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * datastore.runQuery(query).then(function(entities) {});
  */
 DatastoreRequest.prototype.runQuery = function(query, options, callback) {
   if (is.fn(options)) {
@@ -657,13 +680,14 @@ DatastoreRequest.prototype.runQueryStream = function(query, options) {
  * // generated ID.
  * //-
  * var key = datastore.key('Company');
- *
- * datastore.save({
+ * var entity = {
  *   key: key,
  *   data: {
  *     rating: '10'
  *   }
- * }, function(err) {
+ * };
+ *
+ * datastore.save(entity, function(err) {
  *   console.log(key.path); // [ 'Company', 5669468231434240 ]
  *   console.log(key.namespace); // undefined
  * });
@@ -676,14 +700,15 @@ DatastoreRequest.prototype.runQueryStream = function(query, options) {
  * // the name instead of a generated ID.
  * //-
  * var key = datastore.key(['Company', 'donutshack']);
- *
- * datastore.save({
+ * var entity = {
  *   key: key,
  *   data: {
  *     name: 'DonutShack',
  *     rating: 8
  *   }
- * }, function(err) {
+ * };
+ *
+ * datastore.save(entity, function(err) {
  *   console.log(key.path); // ['Company', 'donutshack']
  *   console.log(key.namespace); // undefined
  * });
@@ -700,13 +725,15 @@ DatastoreRequest.prototype.runQueryStream = function(query, options) {
  *   path: ['Company', 'donutshack']
  * });
  *
- * datastore.save({
+ * var entity = {
  *   key: key,
  *   data: {
  *     name: 'DonutShack',
  *     rating: 8
  *   }
- * }, function(err) {
+ * }
+ *
+ * datastore.save(entity, function(err) {
  *   console.log(key.path); // ['Company', 'donutshack']
  *   console.log(key.namespace); // 'my-namespace'
  * });
@@ -720,8 +747,7 @@ DatastoreRequest.prototype.runQueryStream = function(query, options) {
  * // generated ID.
  * //-
  * var key = datastore.key('Company');
- *
- * datastore.save({
+ * var entity = {
  *   key: key,
  *   data: {
  *     name: 'DonutShack',
@@ -741,13 +767,15 @@ DatastoreRequest.prototype.runQueryStream = function(query, options) {
  *       'yum'
  *     ]
  *   }
- * }, function(err, apiResponse) {});
+ * };
+ *
+ * datastore.save(entity, function(err, apiResponse) {});
  *
  * //-
  * // To specify an `excludeFromIndexes` value for a Datastore entity, pass in
  * // an array for the key's data.
  * //-
- * datastore.save({
+ * var entity = {
  *   key: datastore.key('Company'),
  *   data: [
  *     {
@@ -756,15 +784,16 @@ DatastoreRequest.prototype.runQueryStream = function(query, options) {
  *       excludeFromIndexes: true
  *     }
  *   ]
- * }, function(err, apiResponse) {});
+ * };
+ *
+ * datastore.save(entity, function(err, apiResponse) {});
  *
  * //-
  * // Save multiple entities at once.
  * //-
  * var companyKey = datastore.key(['Company', 123]);
  * var productKey = datastore.key(['Product', 'Computer']);
- *
- * datastore.save([
+ * var entities = [
  *   {
  *     key: companyKey,
  *     data: {
@@ -777,20 +806,28 @@ DatastoreRequest.prototype.runQueryStream = function(query, options) {
  *       vendor: 'Dell'
  *     }
  *   }
- * ], function(err, apiResponse) {});
+ * ];
+ *
+ * datastore.save(entities, function(err, apiResponse) {});
  *
  * //-
  * // Explicitly attempt to 'insert' a specific entity.
  * //-
  * var userKey = datastore.key(['User', 'chilts']);
- *
- * datastore.save({
+ * var entity = {
  *   key: userKey,
  *   method: 'insert',
  *   data: {
  *     fullName: 'Andrew Chilton'
  *   }
- * }, function(err, apiResponse) {});
+ * };
+ *
+ * datastore.save(entity, function(err, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * datastore.save(entity).then(function(apiResponse) {});
  */
 DatastoreRequest.prototype.save = function(entities, callback) {
   entities = arrify(entities);
@@ -956,5 +993,12 @@ DatastoreRequest.prototype.request_ = function(protoOpts, reqOpts, callback) {
 
   this.request(protoOpts, reqOpts, callback);
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(DatastoreRequest);
 
 module.exports = DatastoreRequest;
