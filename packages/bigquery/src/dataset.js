@@ -361,11 +361,7 @@ Dataset.prototype.delete = function(options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * dataset.getTables().then(function(data) {
- *   var tables = data[0];
- *   var nextQuery = data[1];
- *   var apiResponse = data[2];
- * });
+ * dataset.getTables().then(function(tables) {});
  */
 Dataset.prototype.getTables = function(query, callback) {
   var that = this;

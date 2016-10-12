@@ -94,11 +94,10 @@ util.inherits(BigQuery, common.Service);
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * bigquery.createDataset('my-dataset')
- *   .then(function(response) {
- *     var dataset = response[0];
- *     var apiResponse = response[1];
- *   });
+ * bigquery.createDataset('my-dataset').then(function(data) {
+ *   var dataset = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 BigQuery.prototype.createDataset = function(id, options, callback) {
   var that = this;
@@ -216,10 +215,7 @@ BigQuery.prototype.dataset = function(id) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * bigquery.getDatasets()
- *   .then(function(datasets) {
- *     // datasets is an array of Dataset objects.
- *   });
+ * bigquery.getDatasets().then(function(datasets) {});
  */
 BigQuery.prototype.getDatasets = function(query, callback) {
   var that = this;
@@ -338,10 +334,7 @@ BigQuery.prototype.getDatasetsStream =
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * bigquery.getJobs()
- *   .then(function(jobs) {
- *     // jobs is an array of Job objects.
- *   });
+ * bigquery.getJobs().then(function(jobs) {});
  */
 BigQuery.prototype.getJobs = function(options, callback) {
   var that = this;
@@ -472,10 +465,7 @@ BigQuery.prototype.job = function(id) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * bigquery.query(query)
- *   .then(function(rows) {
- *     // row is an array of results from your query.
- *   });
+ * bigquery.query(query).then(function(rows) {});
  */
 BigQuery.prototype.query = function(options, callback) {
   var self = this;
@@ -595,10 +585,12 @@ BigQuery.prototype.query = function(options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * bigquery.startQuery(query)
- *   .then(function(job) {
- *     return job.getQueryResults();
- *   });
+ * bigquery.startQuery(query).then(function(data) {
+ *   var job = data[0];
+ *   var apiResponse = data[1];
+ *
+ *   return job.getQueryResults();
+ * });
  */
 BigQuery.prototype.startQuery = function(options, callback) {
   var that = this;
