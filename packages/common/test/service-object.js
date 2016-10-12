@@ -25,8 +25,6 @@ var util = require('../src/util.js');
 var promisified = false;
 var fakeUtil = extend({}, util, {
   promisify: function(Class) {
-    console.log('yeahboi');
-    console.log(Class.name);
     if (Class.name === 'ServiceObject') {
       promisified = true;
     }
@@ -769,7 +767,7 @@ describe('ServiceObject', function() {
         done(new Error('Should call to the prototype directly.'));
       };
 
-      serviceObject.request(fakeOptions, done)
+      serviceObject.request(fakeOptions, done);
     });
   });
 
@@ -794,7 +792,7 @@ describe('ServiceObject', function() {
       };
 
       serviceObject.request_ = function() {
-        done(new Error('Should call to the prototype directly.'));
+        throw new Error('Should call to the prototype directly.');
       };
 
       var stream = serviceObject.requestStream(fakeOptions);

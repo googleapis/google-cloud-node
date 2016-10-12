@@ -25,7 +25,7 @@ var ServiceObject = common.ServiceObject;
 
 var promisified = false;
 var fakeUtil = extend({}, common.util, {
-  promisify: function(Class, options) {
+  promisify: function(Class) {
     if (Class.name === 'Snapshot') {
       promisified = true;
     }

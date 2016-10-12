@@ -28,6 +28,7 @@ var util = require('@google-cloud/common').util;
 var entity = require('../src/entity.js');
 var Query = require('../src/query.js');
 
+var promisified = false;
 var fakeUtil = extend({}, util, {
   promisify: function(Class) {
     if (Class.name === 'DatastoreRequest') {
@@ -36,7 +37,6 @@ var fakeUtil = extend({}, util, {
   }
 });
 
-var promisified = false;
 var overrides = {};
 
 function override(name, object) {

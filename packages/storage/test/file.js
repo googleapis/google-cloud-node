@@ -786,7 +786,8 @@ describe('File', function() {
       });
 
       it('should validate with crc32c', function(done) {
-        file.requestStream = getFakeSuccessfulRequest(data, fakeResponse.crc32c);
+        file.requestStream =
+          getFakeSuccessfulRequest(data, fakeResponse.crc32c);
 
         file.createReadStream({ validation: 'crc32c' })
           .on('error', done)
@@ -818,7 +819,8 @@ describe('File', function() {
       });
 
       it('should emit an error if md5 validation fails', function(done) {
-        file.requestStream = getFakeSuccessfulRequest('bad-data', fakeResponse.md5);
+        file.requestStream =
+          getFakeSuccessfulRequest('bad-data', fakeResponse.md5);
 
         file.createReadStream({ validation: 'md5' })
           .on('error', function(err) {

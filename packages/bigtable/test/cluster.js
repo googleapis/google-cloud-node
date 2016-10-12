@@ -26,7 +26,7 @@ var common = require('@google-cloud/common');
 
 var promisified = false;
 var fakeUtil = extend({}, common.util, {
-  promisify: function(Class, options) {
+  promisify: function(Class) {
     if (Class.name === 'Cluster') {
       promisified = true;
     }

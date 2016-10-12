@@ -59,12 +59,14 @@ function Autoscaler(zone, name) {
      *   target: 'instance-group-manager-1'
      * };
      *
-     * autoscaler.create(config, function(err, autoscaler, operation, apiResponse) {
+     * var callback = function(err, autoscaler, operation, apiResponse) {
      *   // `autoscaler` is an Autoscaler object.
      *
      *   // `operation` is an Operation object that can be used to check the
      *   // of the request.
-     * });
+     * };
+     *
+     * autoscaler.create(config, callback);
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.

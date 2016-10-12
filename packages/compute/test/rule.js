@@ -19,11 +19,12 @@
 var assert = require('assert');
 var extend = require('extend');
 var proxyquire = require('proxyquire');
+var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
-  promisify: function(Class, options) {
+  promisify: function(Class) {
     if (Class.name === 'Rule') {
       promisified = true;
     }
