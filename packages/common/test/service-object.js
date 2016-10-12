@@ -604,7 +604,7 @@ describe('ServiceObject', function() {
     });
   });
 
-  describe('request', function() {
+  describe('request_', function() {
     var reqOpts;
 
     beforeEach(function() {
@@ -627,7 +627,7 @@ describe('ServiceObject', function() {
         callback(); // done()
       };
 
-      serviceObject.request(reqOpts, done);
+      serviceObject.request_(reqOpts, done);
     });
 
     it('should not require a service object ID', function(done) {
@@ -643,7 +643,7 @@ describe('ServiceObject', function() {
 
       delete serviceObject.id;
 
-      serviceObject.request(reqOpts, assert.ifError);
+      serviceObject.request_(reqOpts, assert.ifError);
     });
 
     it('should support absolute uris', function(done) {
@@ -654,7 +654,7 @@ describe('ServiceObject', function() {
         done();
       };
 
-      serviceObject.request({ uri: expectedUri }, assert.ifError);
+      serviceObject.request_({ uri: expectedUri }, assert.ifError);
     });
 
     it('should remove empty components', function(done) {
@@ -673,7 +673,7 @@ describe('ServiceObject', function() {
         done();
       };
 
-      serviceObject.request(reqOpts, assert.ifError);
+      serviceObject.request_(reqOpts, assert.ifError);
     });
 
     it('should trim slashes', function(done) {
@@ -692,7 +692,7 @@ describe('ServiceObject', function() {
         done();
       };
 
-      serviceObject.request(reqOpts, assert.ifError);
+      serviceObject.request_(reqOpts, assert.ifError);
     });
 
     it('should extend interceptors from child ServiceObjects', function(done) {
@@ -724,7 +724,7 @@ describe('ServiceObject', function() {
         done();
       };
 
-      child.request({ uri: '' }, assert.ifError);
+      child.request_({ uri: '' }, assert.ifError);
     });
 
     it('should pass a clone of the interceptors', function(done) {
@@ -742,7 +742,63 @@ describe('ServiceObject', function() {
         done();
       };
 
-      serviceObject.request({ uri: '' }, assert.ifError);
+      serviceObject.request_({ uri: '' }, assert.ifError);
+    });
+  });
+
+  describe('request', function() {
+    var request_;
+
+    before(function() {
+      request_ = ServiceObject.prototype.request_;
+    });
+
+    after(function() {
+      ServiceObject.prototype.request_ = request_;
+    });
+
+    it('should call through to request_', function(done) {
+      var fakeOptions = {};
+
+      ServiceObject.prototype.request_ = function(reqOpts, callback) {
+        assert.strictEqual(reqOpts, fakeOptions);
+        callback();
+      };
+
+      serviceObject.request_ = function() {
+        done(new Error('Should call to the prototype directly.'));
+      };
+
+      serviceObject.request(fakeOptions, done)
+    });
+  });
+
+  describe('requestStream', function() {
+    var request_;
+
+    before(function() {
+      request_ = ServiceObject.prototype.request_;
+    });
+
+    after(function() {
+      ServiceObject.prototype.request_ = request_;
+    });
+
+    it('should call through to request_', function() {
+      var fakeOptions = {};
+      var fakeStream = {};
+
+      ServiceObject.prototype.request_ = function(reqOpts) {
+        assert.strictEqual(reqOpts, fakeOptions);
+        return fakeStream;
+      };
+
+      serviceObject.request_ = function() {
+        done(new Error('Should call to the prototype directly.'));
+      };
+
+      var stream = serviceObject.request(fakeOptions);
+      assert.strictEqual(stream, fakeStream);
     });
   });
 });
