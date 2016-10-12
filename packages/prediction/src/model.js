@@ -60,6 +60,14 @@ function Model(prediction, id) {
      *     // The model was created successfully.
      *   }
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * model.create().then(function(data) {
+     *   var model = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     create: true,
 
@@ -75,6 +83,11 @@ function Model(prediction, id) {
      *
      * @example
      * model.delete(function(err, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * model.delete().then(function(apiResponse) {});
      */
     delete: true,
 
@@ -88,6 +101,11 @@ function Model(prediction, id) {
      *
      * @example
      * model.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * model.exists().then(function(exists) {});
      */
     exists: true,
 
@@ -107,6 +125,14 @@ function Model(prediction, id) {
      * model.get(function(err, model, apiResponse) {
      *   // `model.metadata` has been populated.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * model.get().then(function(data) {
+     *   var model = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     get: true,
 
@@ -122,6 +148,14 @@ function Model(prediction, id) {
      *
      * @example
      * model.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * model.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true,
 
@@ -148,6 +182,11 @@ function Model(prediction, id) {
      * };
      *
      * model.setMetadata(metadata, function(err, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * model.setMetadata(metadata).then(function(apiResponse) {});
      */
     setMetadata: {
       reqOpts: {
@@ -187,6 +226,14 @@ util.inherits(Model, common.ServiceObject);
  *     // `analysis.data` == {...}
  *     // `analysis.model` == {...}
  *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * model.analyze().then(function(data) {
+ *   var analysis = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 Model.prototype.analyze = function(callback) {
@@ -241,7 +288,7 @@ Model.prototype.createWriteStream = function(label) {
       csvInstance: [[]]
     }).split('[]');
 
-    var requestStream = self.request({
+    var requestStream = self.requestStream({
       method: 'PUT',
       uri: '',
       headers: {
@@ -312,6 +359,14 @@ Model.prototype.createWriteStream = function(label) {
  *     // ]
  *   }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * model.query('Hello').then(function(data) {
+ *   var results = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Model.prototype.query = function(input, callback) {
   this.request({
@@ -365,6 +420,11 @@ Model.prototype.query = function(input, callback) {
  *     // New data was inserted successfully.
  *   }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * model.train('english', 'Hello from Stephen!').then(function(apiResponse) {});
  */
 Model.prototype.train = function(label, input, callback) {
   this.setMetadata({
@@ -372,5 +432,12 @@ Model.prototype.train = function(label, input, callback) {
     csvInstance: arrify(input)
   }, callback);
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(Model);
 
 module.exports = Model;

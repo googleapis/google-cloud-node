@@ -52,9 +52,18 @@ var fakePaginator = {
   }
 };
 
-
+var promisified = false;
 var fakeUtil = extend({}, util, {
-  makeAuthenticatedRequestFactory: util.noop
+  makeAuthenticatedRequestFactory: util.noop,
+  promisify: function(Class, options) {
+    if (Class.name !== 'Prediction') {
+      return;
+    }
+
+    promisified = true;
+    assert.strictEqual(options.filter('model'), false);
+    assert.strictEqual(options.filter('getModels'), true);
+  }
 });
 
 describe('Prediction', function() {
@@ -87,6 +96,10 @@ describe('Prediction', function() {
 
     it('should streamify the correct methods', function() {
       assert.strictEqual(prediction.getModelsStream, 'getModels');
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should normalize the arguments', function() {
