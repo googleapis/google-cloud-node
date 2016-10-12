@@ -24,6 +24,20 @@ var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisify: function(Class, options) {
+    if (Class.name !== 'Zone') {
+      return;
+    }
+
+    promisified = true;
+    assert.strictEqual(options.filter('change'), false);
+    assert.strictEqual(options.filter('record'), false);
+    assert.strictEqual(options.filter('getChanges'), true);
+  }
+});
+
 var parseOverride;
 var fakeDnsZonefile = {
   parse: function() {
@@ -94,7 +108,8 @@ describe('Zone', function() {
       fs: fakeFs,
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        paginator: fakePaginator
+        paginator: fakePaginator,
+        util: fakeUtil
       },
       './change.js': FakeChange,
       './record.js': FakeRecord
@@ -109,6 +124,10 @@ describe('Zone', function() {
   });
 
   describe('instantiation', function() {
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
+
     it('should extend the correct methods', function() {
       assert(extended); // See `fakePaginator.extend`
     });

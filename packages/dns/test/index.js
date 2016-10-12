@@ -48,8 +48,18 @@ function FakeService() {
 
 nodeutil.inherits(FakeService, Service);
 
+var promisified = false;
 var fakeUtil = extend({}, util, {
-  makeAuthenticatedRequestFactory: util.noop
+  makeAuthenticatedRequestFactory: util.noop,
+  promisify: function(Class, options) {
+    if (Class.name !== 'DNS') {
+      return;
+    }
+
+    promisified = true;
+    assert.strictEqual(options.filter('zone'), false);
+    assert.strictEqual(options.filter('getZones'), true);
+  }
 });
 
 function FakeZone() {
@@ -86,6 +96,10 @@ describe('DNS', function() {
 
     it('should streamify the correct methods', function() {
       assert.strictEqual(dns.getZonesStream, 'getZones');
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should normalize the arguments', function() {
