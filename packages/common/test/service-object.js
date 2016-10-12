@@ -797,7 +797,7 @@ describe('ServiceObject', function() {
         done(new Error('Should call to the prototype directly.'));
       };
 
-      var stream = serviceObject.request(fakeOptions);
+      var stream = serviceObject.requestStream(fakeOptions);
       assert.strictEqual(stream, fakeStream);
     });
   });

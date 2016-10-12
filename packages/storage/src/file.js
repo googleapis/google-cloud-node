@@ -598,7 +598,7 @@ File.prototype.createReadStream = function(options) {
       };
     }
 
-    var requestStream = self.request(reqOpts);
+    var requestStream = self.requestStream(reqOpts);
     var validateStream;
 
     // We listen to the response event from the request stream so that we can...

@@ -329,7 +329,11 @@ ServiceObject.prototype.request_ = function(reqOpts, callback) {
 
   reqOpts.interceptors_ = childInterceptors.concat(localInterceptors);
 
-  return this.parent.request(reqOpts, callback);
+  if (!callback) {
+    return this.parent.requestStream(reqOpts);
+  }
+
+  this.parent.request(reqOpts, callback);
 };
 
 /**
@@ -342,7 +346,7 @@ ServiceObject.prototype.request_ = function(reqOpts, callback) {
  * @param {function} callback - The callback function passed to `request`.
  */
 ServiceObject.prototype.request = function(reqOpts, callback) {
-  return ServiceObject.prototype.request_.call(this, reqOpts, callback);
+  ServiceObject.prototype.request_.call(this, reqOpts, callback);
 };
 
 /**
