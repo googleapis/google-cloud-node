@@ -13,6 +13,48 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/*!
+ * @module monitoring
+ */
+
 'use strict';
 
+/**
+ * <p class="notice">
+ *   **This is a Beta release of Stackdriver Monitoring.** This API is not
+ *   covered by any SLA or deprecation policy and may be subject to
+ *   backward-incompatible changes.
+ * </p>
+ *
+ * [Stackdriver Monitoring](https://cloud.google.com/monitoring/docs) collects
+ * metrics, events, and metadata from Google Cloud Platform, Amazon Web Services
+ * (AWS), hosted uptime probes, application instrumentation, and a variety of
+ * common application components including Cassandra, Nginx, Apache Web Server,
+ * Elasticsearch and many others. Stackdriver ingests that data and generates
+ * insights via dashboards, charts, and alerts.
+ *
+ * <h2>This is an auto-generated API</h2>
+ *
+ * It does not follow the conventions you're familiar with from other parts of
+ * our library. A handwritten layer is not yet available.
+ *
+ * The example below shows you how to instantiate the generated client. For
+ * further documentation, please browse the
+ * [Monitoring .proto files](https://github.com/googleapis/googleapis/tree/master/google/monitoring/v3)
+ * on GitHub.
+ *
+ * @constructor
+ * @alias module:monitoring
+ */
+function Monitoring() {
+  throw new Error([
+    'Cloud Monitoring must be accessed through the auto-generated client.',
+    'See',
+    'https://googlecloudplatform.github.io/google-cloud-node/#/docs/monitoring',
+    'for more information.'
+  ].join(' '));
+}
+
+module.exports = Monitoring;
 module.exports.v3 = require('./v3');

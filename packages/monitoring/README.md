@@ -5,6 +5,12 @@
 
 - [Official Documentation][cloud-monitoring-docs]
 
+## This is an auto-generated API
+
+It does not follow the conventions you're familiar with from other parts of our library. A handwritten layer is not yet available.
+
+The example below shows you how to instantiate the generated client. For further documentation, please browse the [Monitoring .proto files][cloud-monitoring-protos] on GitHub.
+
 
 ```sh
 $ npm install --save @google-cloud/monitoring
@@ -66,3 +72,4 @@ var monitoring = require('@google-cloud/monitoring')({
 [gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
 [dev-console]: https://console.developers.google.com/project
 [cloud-monitoring-docs]: https://cloud.google.com/monitoring/docs
+[cloud-monitoring-protos]: https://github.com/googleapis/googleapis/tree/master/google/monitoring/v3

@@ -56,8 +56,12 @@
     "google-gax": "^0.7.0",
     "extend": "^3.0.0"
   },
+  "devDependencies": {
+    "mocha": "^3.1.2"
+  },
   "scripts": {
-    "publish-module": "node ../../scripts/publish.js logging"
+    "publish-module": "node ../../scripts/publish.js monitoring",
+    "test": "mocha test/*.js"
   },
   "license": "Apache-2.0",
   "engines": {
