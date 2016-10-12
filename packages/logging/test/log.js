@@ -22,6 +22,20 @@ var GrpcServiceObject = require('@google-cloud/common').GrpcServiceObject;
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
+var promisifed = false;
+var fakeUtil = extend({}, util, {
+  promisify: function(Class, options) {
+    if (Class.name !== 'Log') {
+      return;
+    }
+
+    promisifed = true;
+    assert.strictEqual(options.filter('write'), true);
+    assert.strictEqual(options.filter('warning'), true);
+    assert.strictEqual(options.filter('entry'), false);
+  }
+});
+
 var Entry = require('../src/entry.js');
 
 function FakeGrpcServiceObject() {
@@ -55,7 +69,8 @@ describe('Log', function() {
     Log = proxyquire('../src/log.js', {
       './entry.js': Entry,
       '@google-cloud/common': {
-        GrpcServiceObject: FakeGrpcServiceObject
+        GrpcServiceObject: FakeGrpcServiceObject,
+        util: fakeUtil
       }
     });
     var assignSeverityToEntries_ = Log.assignSeverityToEntries_;
@@ -72,6 +87,10 @@ describe('Log', function() {
   });
 
   describe('instantiation', function() {
+    it('should promisify all the things', function() {
+      assert(promisifed);
+    });
+
     it('should localize the escaped name', function() {
       assert.strictEqual(log.name, LOG_NAME_ENCODED);
     });
