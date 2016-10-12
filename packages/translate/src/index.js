@@ -85,8 +85,6 @@ function Translate(options) {
  * @param {number=} callback.results[].confidence - A float 0 - 1. The higher
  *     the number, the higher the confidence in language detection. Note, this
  *     is not always returned from the API.
- * @param {string} callback.input - The original input that this was result was
- *     based on.
  * @param {object} callback.apiResponse - Raw API response.
  *
  * @example
@@ -125,6 +123,14 @@ function Translate(options) {
  *     //   }
  *     // ]
  *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * translate.detect('Hello').then(function(data) {
+ *   var results = data[0];
+ *   var apiResponse = data[2];
  * });
  */
 Translate.prototype.detect = function(input, callback) {
@@ -220,6 +226,14 @@ Translate.prototype.detect = function(input, callback) {
  *     //   ...
  *     // ]
  *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * translate.getLanguages().then(function(data) {
+ *   var languages = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 Translate.prototype.getLanguages = function(target, callback) {
@@ -321,6 +335,14 @@ Translate.prototype.getLanguages = function(target, callback) {
  *     // ]
  *   }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * translate.translate('Hello', 'es').then(function(data) {
+ *   var translation = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Translate.prototype.translate = function(input, options, callback) {
   var query = {
@@ -390,5 +412,12 @@ Translate.prototype.request = function(reqOpts, callback) {
 
   common.util.makeRequest(reqOpts, this.options, callback);
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(Translate);
 
 module.exports = Translate;
