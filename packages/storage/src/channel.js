@@ -76,6 +76,11 @@ util.inherits(Channel, common.ServiceObject);
  *     // Channel stopped successfully.
  *   }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * channel.stop().then(function(apiResponse) {});
  */
 Channel.prototype.stop = function(callback) {
   callback = callback || common.util.noop;
@@ -88,5 +93,12 @@ Channel.prototype.stop = function(callback) {
     callback(err, apiResponse);
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(Channel);
 
 module.exports = Channel;

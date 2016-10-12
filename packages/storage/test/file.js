@@ -34,6 +34,7 @@ var util = require('@google-cloud/common').util;
 
 var Bucket = require('../src/bucket.js');
 
+var promisified = false;
 var makeWritableStreamOverride;
 var handleRespOverride;
 var fakeUtil = extend({}, util, {
@@ -44,6 +45,16 @@ var fakeUtil = extend({}, util, {
   makeWritableStream: function() {
     var args = arguments;
     (makeWritableStreamOverride || util.makeWritableStream).apply(null, args);
+  },
+
+  promisify: function(Class, options) {
+    if (Class.name !== 'File') {
+      return;
+    }
+
+    promisified = true;
+    assert.strictEqual(options.filter('setEncryptionKey'), false);
+    assert.strictEqual(options.filter('save'), true);
   }
 });
 
@@ -135,6 +146,10 @@ describe('File', function() {
   });
 
   describe('initialization', function() {
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
+
     it('should assign file name', function() {
       assert.equal(file.name, FILE_NAME);
     });

@@ -69,6 +69,19 @@ fakeAsync.eachLimit = function() {
   (eachLimitOverride || async.eachLimit).apply(null, arguments);
 };
 
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisify: function(Class, options) {
+    if (Class.name !== 'Bucket') {
+      return;
+    }
+
+    promisified = true;
+    assert.strictEqual(options.filter('file'), false);
+    assert.strictEqual(options.filter('getFiles'), true);
+  }
+});
+
 var extended = false;
 var fakePaginator = {
   extend: function(Class, methods) {
@@ -112,7 +125,8 @@ describe('Bucket', function() {
       request: fakeRequest,
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        paginator: fakePaginator
+        paginator: fakePaginator,
+        util: fakeUtil
       },
       './acl.js': FakeAcl,
       './file.js': FakeFile
@@ -132,6 +146,10 @@ describe('Bucket', function() {
 
     it('should streamify the correct methods', function() {
       assert.strictEqual(bucket.getFilesStream, 'getFiles');
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should localize the name', function() {

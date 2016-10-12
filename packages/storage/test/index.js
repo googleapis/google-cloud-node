@@ -52,7 +52,18 @@ var fakePaginator = {
   }
 };
 
-var fakeUtil = extend({}, util);
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisify: function(Class, options) {
+    if (Class.name !== 'Storage') {
+      return;
+    }
+
+    promisified = true;
+    assert.strictEqual(options.filter('channel'), false);
+    assert.strictEqual(options.filter('getBuckets'), true);
+  }
+});
 
 describe('Storage', function() {
   var PROJECT_ID = 'project-id';
@@ -83,6 +94,10 @@ describe('Storage', function() {
 
     it('should streamify the correct methods', function() {
       assert.strictEqual(storage.getBucketsStream, 'getBuckets');
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should normalize the arguments', function() {

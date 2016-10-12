@@ -111,18 +111,17 @@ util.inherits(Storage, common.Service);
  * //-
  * // Make all of the files currently in a bucket publicly readable.
  * //-
- * albums.acl.add({
+ * var options = {
  *   entity: 'allUsers',
  *   role: gcs.acl.READER_ROLE
- * }, function(err, aclObject) {});
+ * };
+ *
+ * albums.acl.add(options, function(err, aclObject) {});
  *
  * //-
  * // Make any new objects added to a bucket publicly readable.
  * //-
- * albums.acl.default.add({
- *   entity: 'allUsers',
- *   role: gcs.acl.READER_ROLE
- * }, function(err, aclObject) {});
+ * albums.acl.default.add(options, function(err, aclObject) {});
  *
  * //-
  * // Grant a user ownership permissions to a bucket.
@@ -131,6 +130,14 @@ util.inherits(Storage, common.Service);
  *   entity: 'user-useremail@example.com',
  *   role: gcs.acl.OWNER_ROLE
  * }, function(err, aclObject) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * albums.acl.add(options).then(function(data) {
+ *   var aclObject = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Storage.acl = {
   OWNER_ROLE: 'OWNER',
@@ -227,6 +234,14 @@ Storage.prototype.channel = function(id, resourceId) {
  * };
  *
  * gcs.createBucket('new-bucket', metadata, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gcs.createBucket('new-bucket').then(function(data) {
+ *   var bucket = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Storage.prototype.createBucket = function(name, metadata, callback) {
   var self = this;
@@ -324,6 +339,11 @@ Storage.prototype.createBucket = function(name, metadata, callback) {
  * gcs.getBuckets({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gcs.getBuckets().then(function(buckets) {});
  */
 Storage.prototype.getBuckets = function(query, callback) {
   var self = this;
@@ -393,6 +413,17 @@ Storage.prototype.getBucketsStream = common.paginator.streamify('getBuckets');
  * These methods can be auto-paginated.
  */
 common.paginator.extend(Storage, 'getBuckets');
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(Storage, {
+  filter: function(methodName) {
+    return /(get|create)/.test(methodName);
+  }
+});
 
 Storage.Bucket = Bucket;
 Storage.Channel = Channel;
