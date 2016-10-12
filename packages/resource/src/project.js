@@ -53,6 +53,14 @@ function Project(resource, id) {
      *     // The zone was created successfully.
      *   }
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * project.create().then(function(data) {
+     *   var zone = data[0];
+     *   var apiResponse = data[0];
+     * });
      */
     create: true,
 
@@ -75,6 +83,11 @@ function Project(resource, id) {
      *     // The project was deleted!
      *   }
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * project.delete().then(function(apiResponse) {});
      */
     delete: true,
 
@@ -88,6 +101,11 @@ function Project(resource, id) {
      *
      * @example
      * project.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * project.exists().then(function(exists) {});
      */
     exists: true,
 
@@ -107,6 +125,14 @@ function Project(resource, id) {
      * project.get(function(err, project, apiResponse) {
      *   // `project.metadata` has been populated.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * project.get().then(function(data) {
+     *   var project = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     get: true,
 
@@ -124,6 +150,14 @@ function Project(resource, id) {
      *
      * @example
      * project.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * project.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true,
 
@@ -153,6 +187,11 @@ function Project(resource, id) {
      *     // The project has been successfully updated.
      *   }
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * project.setMetadata(metadata).then(function(apiResponse) {});
      */
     setMetadata: {
       reqOpts: {
@@ -190,6 +229,11 @@ util.inherits(Project, common.ServiceObject);
  *     // Project restored.
  *   }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * project.restore().then(function(apiResponse) {});
  */
 Project.prototype.restore = function(callback) {
   callback = callback || common.util.noop;
@@ -201,5 +245,12 @@ Project.prototype.restore = function(callback) {
     callback(err, resp);
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(Project);
 
 module.exports = Project;

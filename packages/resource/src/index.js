@@ -101,6 +101,14 @@ util.inherits(Resource, common.Service);
  *     // `project` is a new Project instance.
  *   }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * resource.createProject('new project name').then(function(data) {
+ *   var project = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Resource.prototype.createProject = function(id, options, callback) {
   var self = this;
@@ -169,6 +177,11 @@ Resource.prototype.createProject = function(id, options, callback) {
  * resource.getProjects({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * resource.getProjects().then(function(projects) {});
  */
 Resource.prototype.getProjects = function(options, callback) {
   var self = this;
@@ -263,6 +276,17 @@ Resource.prototype.project = function(id) {
  * These methods can be auto-paginated.
  */
 common.paginator.extend(Resource, ['getProjects']);
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(Resource, {
+  filter: function(methodName) {
+    return methodName !== 'project';
+  }
+});
 
 Resource.Project = Project;
 
