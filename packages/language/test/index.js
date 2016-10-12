@@ -21,7 +21,20 @@ var extend = require('extend');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
-var fakeUtil = extend(true, {}, util);
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisify: function(Class, options) {
+    if (Class.name !== 'Language') {
+      return;
+    }
+
+    promisified = true;
+    assert.strictEqual(options.filter('detect'), true);
+    assert.strictEqual(options.filter('detectSentiment'), true);
+    assert.strictEqual(options.filter('annotate'), true);
+    assert.strictEqual(options.filter('document'), false);
+  }
+});
 
 function FakeDocument() {
   this.calledWith_ = arguments;
@@ -60,6 +73,10 @@ describe('Language', function() {
   });
 
   describe('instantiation', function() {
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
+
     it('should normalize the arguments', function() {
       var options = {
         projectId: 'project-id',
