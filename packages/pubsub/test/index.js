@@ -32,7 +32,19 @@ function Subscription(a, b) {
   return new OverrideFn(a, b);
 }
 
-var fakeUtil = extend({}, util);
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisify: function(Class, options) {
+    if (Class.name !== 'PubSub') {
+      return;
+    }
+
+    promisified = true;
+    assert.strictEqual(options.filter('subscription'), false);
+    assert.strictEqual(options.filter('topic'), false);
+    assert.strictEqual(options.filter('subscribe'), true);
+  }
+});
 
 function FakeGrpcService() {
   this.calledWith_ = arguments;
@@ -96,6 +108,10 @@ describe('PubSub', function() {
     it('should streamify the correct methods', function() {
       assert.strictEqual(pubsub.getSubscriptionsStream, 'getSubscriptions');
       assert.strictEqual(pubsub.getTopicsStream, 'getTopics');
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should normalize the arguments', function() {

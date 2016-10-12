@@ -62,6 +62,14 @@ function Topic(pubsub, name) {
      *     // The topic was created successfully.
      *   }
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * topic.create().then(function(data) {
+     *   var topic = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     create: true,
 
@@ -74,6 +82,11 @@ function Topic(pubsub, name) {
      *
      * @example
      * topic.delete(function(err, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * topic.delete().then(function(apiResponse) {});
      */
     delete: {
       protoOpts: {
@@ -95,6 +108,11 @@ function Topic(pubsub, name) {
      *
      * @example
      * topic.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * topic.exists().then(function(exists) {});
      */
     exists: true,
 
@@ -114,6 +132,14 @@ function Topic(pubsub, name) {
      * topic.get(function(err, topic, apiResponse) {
      *   // `topic.metadata` has been populated.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * topic.get().then(function(data) {
+     *   var topic = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     get: true,
 
@@ -127,6 +153,17 @@ function Topic(pubsub, name) {
      *     request.
      * @param {object} callback.metadata - The metadata of the Topic.
      * @param {object} callback.apiResponse - The full API response.
+     *
+     * @example
+     * topic.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * topic.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: {
       protoOpts: {
@@ -170,6 +207,14 @@ function Topic(pubsub, name) {
    * //-
    * topic.iam.getPolicy(function(err, policy) {
    *   console.log(policy);
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * topic.iam.getPolicy().then(function(data) {
+   *   var policy = data[0];
+   *   var apiResponse = data[1];
    * });
    */
   this.iam = new IAM(pubsub, this.name);
@@ -241,6 +286,11 @@ Topic.formatName_ = function(projectId, name) {
  * topic.getSubscriptions({
  *   pageSize: 3
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * topic.getSubscriptions().then(function(subscriptions) {});
  */
 Topic.prototype.getSubscriptions = function(options, callback) {
   if (is.fn(options)) {
@@ -304,9 +354,11 @@ Topic.prototype.getSubscriptionsStream = function(options) {
  * @param {function=} callback - The callback function.
  *
  * @example
- * topic.publish({
+ * var message = {
  *   data: 'Hello, world!'
- * }, function(err, messageIds, apiResponse) {});
+ * };
+ *
+ * topic.publish(message, function(err, messageIds, apiResponse) {});
  *
  * //-
  * // The data property can be a JSON object as well.
@@ -340,6 +392,14 @@ Topic.prototype.getSubscriptionsStream = function(options) {
  *   registerMessage,
  *   purchaseMessage
  * ], function(err, messageIds, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * topic.publish(message).then(function(data) {
+ *   var messageIds = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Topic.prototype.publish = function(messages, callback) {
   messages = arrify(messages);
@@ -414,6 +474,14 @@ Topic.prototype.publish = function(messages, callback) {
  *   autoAck: true,
  *   interval: 30
  * }, function(err, subscription, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * topic.subscribe('newMessages').then(function(data) {
+ *   var subscription = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Topic.prototype.subscribe = function(subName, options, callback) {
   this.pubsub.subscribe(this, subName, options, callback);
@@ -449,5 +517,16 @@ Topic.prototype.subscription = function(name, options) {
 
   return this.pubsub.subscription(name, options);
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(Topic, {
+  filter: function(methodName) {
+    return methodName !== 'subscription';
+  }
+});
 
 module.exports = Topic;

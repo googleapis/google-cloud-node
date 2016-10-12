@@ -154,6 +154,11 @@ function Subscription(pubsub, options) {
      *
      * @example
      * subscription.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * subscription.exists().then(function(exists) {});
      */
     exists: true,
 
@@ -176,6 +181,14 @@ function Subscription(pubsub, options) {
      * subscription.get(function(err, subscription, apiResponse) {
      *   // `subscription.metadata` has been populated.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * subscription.get().then(function(data) {
+     *   var subscription = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     get: true,
 
@@ -193,6 +206,14 @@ function Subscription(pubsub, options) {
      *
      * @example
      * subscription.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * subscription.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: {
       protoOpts: {
@@ -229,6 +250,14 @@ function Subscription(pubsub, options) {
      *   if (!err) {
      *     // The subscription was created successfully.
      *   }
+     * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * subscription.create().then(function(data) {
+     *   var subscription = data[0];
+     *   var apiResponse = data[1];
      * });
      */
     config.methods.create = true;
@@ -280,6 +309,14 @@ function Subscription(pubsub, options) {
    * //-
    * subscription.iam.getPolicy(function(err, policy) {
    *   console.log(policy);
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * subscription.iam.getPolicy().then(function(data) {
+   *   var policy = data[0];
+   *   var apiResponse = data[1];
    * });
    */
   this.iam = new IAM(pubsub, this.name);
@@ -347,7 +384,14 @@ Subscription.formatName_ = function(projectId, name) {
  * @param {function=} callback - The callback function.
  *
  * @example
- * subscription.ack('ePHEESyhuE8e...', function(err, apiResponse) {});
+ * var ackId = 'ePHEESyhuE8e...';
+ *
+ * subscription.ack(ackId, function(err, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * subscription.ack(ackId).then(function(apiResponse) {});
  */
 Subscription.prototype.ack = function(ackIds, callback) {
   var self = this;
@@ -428,6 +472,11 @@ Subscription.prototype.decorateMessage_ = function(message) {
  *
  * @example
  * subscription.delete(function(err, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * subscription.delete().then(function(apiResponse) {});
  */
 Subscription.prototype.delete = function(callback) {
   var self = this;
@@ -504,6 +553,14 @@ Subscription.prototype.delete = function(callback) {
  * };
  *
  * subscription.pull(opts, function(err, messages, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * subscription.pull(opts).then(function(data) {
+ *   var messages = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Subscription.prototype.pull = function(options, callback) {
   var self = this;
@@ -586,6 +643,11 @@ Subscription.prototype.pull = function(options, callback) {
  * };
  *
  * subscription.setAckDeadline(options, function(err, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * subscription.setAckDeadline(options).then(function(apiResponse) {});
  */
 Subscription.prototype.setAckDeadline = function(options, callback) {
   callback = callback || common.util.noop;
@@ -712,5 +774,12 @@ Subscription.prototype.startPulling_ = function() {
     setTimeout(self.startPulling_.bind(self), self.interval);
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisify(Subscription);
 
 module.exports = Subscription;
