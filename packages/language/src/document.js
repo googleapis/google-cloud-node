@@ -783,7 +783,7 @@ Document.sortByProperty_ = function(propertyName) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Document);
+common.util.promisifyAll(Document);
 
 module.exports = Document;
 

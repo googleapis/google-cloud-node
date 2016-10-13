@@ -34,15 +34,13 @@ function Subscription(a, b) {
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'PubSub') {
       return;
     }
 
     promisified = true;
-    assert.strictEqual(options.filter('subscription'), false);
-    assert.strictEqual(options.filter('topic'), false);
-    assert.strictEqual(options.filter('subscribe'), true);
+    assert.deepEqual(options.exclude, ['subscription', 'topic']);
   }
 });
 

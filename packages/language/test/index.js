@@ -23,16 +23,13 @@ var util = require('@google-cloud/common').util;
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'Language') {
       return;
     }
 
     promisified = true;
-    assert.strictEqual(options.filter('detect'), true);
-    assert.strictEqual(options.filter('detectSentiment'), true);
-    assert.strictEqual(options.filter('annotate'), true);
-    assert.strictEqual(options.filter('document'), false);
+    assert.deepEqual(options.exclude, ['document', 'html', 'text']);
   }
 });
 

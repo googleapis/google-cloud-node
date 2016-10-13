@@ -24,7 +24,7 @@ var util = require('../src/util.js');
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
-  promisify: function(Class) {
+  promisifyAll: function(Class) {
     if (Class.name === 'GrpcServiceObject') {
       promisified = true;
     }

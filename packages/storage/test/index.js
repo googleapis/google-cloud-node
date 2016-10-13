@@ -54,14 +54,13 @@ var fakePaginator = {
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'Storage') {
       return;
     }
 
     promisified = true;
-    assert.strictEqual(options.filter('channel'), false);
-    assert.strictEqual(options.filter('getBuckets'), true);
+    assert.deepEqual(options.exclude, ['bucket', 'channel']);
   }
 });
 

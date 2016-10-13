@@ -33,17 +33,13 @@ var Row = require('../src/row.js');
 
 var promisified = false;
 var fakeUtil = extend({}, common.util, {
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'Table') {
       return;
     }
 
     promisified = true;
-
-    assert.strictEqual(options.filter('family'), false);
-    assert.strictEqual(options.filter('insert'), false);
-    assert.strictEqual(options.filter('mutate'), false);
-    assert.strictEqual(options.filter('row'), false);
+    assert.deepEqual(options.exclude, ['family', 'insert', 'mutate', 'row']);
   }
 });
 

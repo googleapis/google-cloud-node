@@ -1109,6 +1109,6 @@ common.paginator.extend(Table, ['getRows']);
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Table);
+common.util.promisifyAll(Table);
 
 module.exports = Table;

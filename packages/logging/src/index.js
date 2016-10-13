@@ -600,10 +600,8 @@ common.paginator.extend(Logging, ['getEntries', 'getSinks']);
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Logging, {
-  filter: function(methodName) {
-    return /(get|create)/.test(methodName);
-  }
+common.util.promisifyAll(Logging, {
+  exclude: ['entry', 'log', 'sink']
 });
 
 Logging.Entry = Entry;

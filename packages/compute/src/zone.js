@@ -1521,10 +1521,15 @@ common.paginator.extend(Zone, [
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Zone, {
-  filter: function(methodName) {
-    return /^(get|create)/.test(methodName);
-  }
+common.util.promisifyAll(Zone, {
+  exclude: [
+    'autoscaler',
+    'disk',
+    'instanceGroup',
+    'machineType',
+    'operation',
+    'vm'
+  ]
 });
 
 module.exports = Zone;

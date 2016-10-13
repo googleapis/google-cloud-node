@@ -26,15 +26,13 @@ var util = require('@google-cloud/common').util;
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'Zone') {
       return;
     }
 
     promisified = true;
-    assert.strictEqual(options.filter('change'), false);
-    assert.strictEqual(options.filter('record'), false);
-    assert.strictEqual(options.filter('getChanges'), true);
+    assert.deepEqual(options.exclude, ['change', 'record']);
   }
 });
 

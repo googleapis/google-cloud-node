@@ -438,6 +438,6 @@ Model.prototype.train = function(label, input, callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Model);
+common.util.promisifyAll(Model);
 
 module.exports = Model;

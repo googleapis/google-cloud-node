@@ -780,6 +780,6 @@ Subscription.prototype.startPulling_ = function() {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Subscription);
+common.util.promisifyAll(Subscription);
 
 module.exports = Subscription;

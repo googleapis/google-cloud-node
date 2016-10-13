@@ -255,10 +255,8 @@ common.paginator.extend(DNS, 'getZones');
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(DNS, {
-  filter: function(methodName) {
-    return methodName !== 'zone';
-  }
+common.util.promisifyAll(DNS, {
+  exclude: ['zone']
 });
 
 DNS.Zone = Zone;

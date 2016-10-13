@@ -273,6 +273,6 @@ IAM.prototype.testPermissions = function(permissions, callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(IAM);
+common.util.promisifyAll(IAM);
 
 module.exports = IAM;

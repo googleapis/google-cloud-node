@@ -29,15 +29,13 @@ var util = require('@google-cloud/common').util;
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'Speech') {
       return;
     }
 
     promisified = true;
-    assert.strictEqual(options.filter('recognize'), true);
-    assert.strictEqual(options.filter('startRecognition'), true);
-    assert.strictEqual(options.filter('operation'), false);
+    assert.deepEqual(options.exclude, ['operation']);
   }
 });
 

@@ -366,6 +366,6 @@ ServiceObject.prototype.requestStream = function(reqOpts) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-util.promisify(ServiceObject);
+util.promisifyAll(ServiceObject);
 
 module.exports = ServiceObject;

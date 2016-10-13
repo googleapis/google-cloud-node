@@ -278,6 +278,6 @@ Rule.prototype.setTarget = function(target, callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Rule);
+common.util.promisifyAll(Rule);
 
 module.exports = Rule;

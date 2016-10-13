@@ -55,14 +55,13 @@ var fakePaginator = {
 var promisified = false;
 var fakeUtil = extend({}, util, {
   makeAuthenticatedRequestFactory: util.noop,
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'Prediction') {
       return;
     }
 
     promisified = true;
-    assert.strictEqual(options.filter('model'), false);
-    assert.strictEqual(options.filter('getModels'), true);
+    assert.deepEqual(options.exclude, ['model']);
   }
 });
 

@@ -17,48 +17,20 @@
 'use strict';
 
 var assert = require('assert');
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var proxyquire = require('proxyquire');
-
-var promisified = false;
-var fakeUtil = extend({}, common.util, {
-  promisify: function(Class, options) {
-    if (Class.name !== 'Query') {
-      return;
-    }
-
-    promisified = true;
-    assert.strictEqual(options.filter('run'), true);
-    assert.strictEqual(options.filter('offset'), false);
-  }
-});
 
 describe('Query', function() {
   var SCOPE = {};
   var NAMESPACE = 'Namespace';
   var KINDS = 'Kind';
 
-  var Query;
+  var Query = require('../src/query.js');
   var query;
-
-  before(function() {
-    Query = proxyquire('../src/query.js', {
-      '@google-cloud/common': {
-        util: fakeUtil
-      }
-    });
-  });
 
   beforeEach(function() {
     query = new Query(SCOPE, NAMESPACE, KINDS);
   });
 
   describe('instantiation', function() {
-    it('should promisify all the things', function() {
-      assert(promisified);
-    });
-
     it('should localize the scope', function() {
       assert.strictEqual(query.scope, SCOPE);
     });

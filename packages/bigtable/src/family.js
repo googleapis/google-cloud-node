@@ -354,7 +354,7 @@ Family.prototype.setMetadata = function(metadata, callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Family);
+common.util.promisifyAll(Family);
 
 module.exports = Family;
 module.exports.FamilyError = FamilyError;

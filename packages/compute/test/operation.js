@@ -40,7 +40,7 @@ var fakeUtil = extend({}, util, {
 
     return util.parseHttpRespBody.apply(this, arguments);
   },
-  promisify: function(Class) {
+  promisifyAll: function(Class) {
     if (Class.name === 'Operation') {
       promisified = true;
     }

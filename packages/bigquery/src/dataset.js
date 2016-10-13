@@ -471,10 +471,8 @@ common.paginator.extend(Dataset, ['getTables']);
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Dataset, {
-  filter: function(methodName) {
-    return methodName !== 'table';
-  }
+common.util.promisifyAll(Dataset, {
+  exclude: ['table']
 });
 
 module.exports = Dataset;

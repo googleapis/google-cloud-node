@@ -29,15 +29,13 @@ var Instance = require('../src/instance.js');
 
 var promisified = false;
 var fakeUtil = extend({}, common.util, {
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'Bigtable') {
       return;
     }
 
     promisified = true;
-
-    assert.strictEqual(options.filter('instance'), false);
-    assert.strictEqual(options.filter('operation'), false);
+    assert.deepEqual(options.exclude, ['instance', 'operation']);
   }
 });
 

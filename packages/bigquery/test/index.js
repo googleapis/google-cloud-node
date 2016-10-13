@@ -28,14 +28,13 @@ var util = require('@google-cloud/common').util;
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'BigQuery') {
       return;
     }
-    promisified = true;
 
-    assert.strictEqual(options.filter('dataset'), false);
-    assert.strictEqual(options.filter('job'), false);
+    promisified = true;
+    assert.deepEqual(options.exclude, ['dataset', 'job']);
   }
 });
 

@@ -1284,10 +1284,8 @@ common.paginator.extend(Bucket, 'getFiles');
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Bucket, {
-  filter: function(methodName) {
-    return methodName !== 'file';
-  }
+common.util.promisifyAll(Bucket, {
+  exclude: ['file']
 });
 
 module.exports = Bucket;

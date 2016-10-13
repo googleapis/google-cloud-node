@@ -27,13 +27,13 @@ var util = require('@google-cloud/common').util;
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'Dataset') {
       return;
     }
 
     promisified = true;
-    assert.strictEqual(options.filter('table'), false);
+    assert.deepEqual(options.exclude, ['table']);
   }
 });
 

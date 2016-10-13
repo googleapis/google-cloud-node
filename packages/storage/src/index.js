@@ -419,10 +419,8 @@ common.paginator.extend(Storage, 'getBuckets');
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Storage, {
-  filter: function(methodName) {
-    return /(get|create)/.test(methodName);
-  }
+common.util.promisifyAll(Storage, {
+  exclude: ['bucket', 'channel']
 });
 
 Storage.Bucket = Bucket;

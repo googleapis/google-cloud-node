@@ -29,7 +29,7 @@ var util = require('@google-cloud/common').util;
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
-  promisify: function(Class) {
+  promisifyAll: function(Class) {
     if (Class.name === 'Channel') {
       promisified = true;
     }

@@ -844,7 +844,7 @@ Row.prototype.save = function(key, value, callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Row);
+common.util.promisifyAll(Row);
 
 module.exports = Row;
 module.exports.RowError = RowError;

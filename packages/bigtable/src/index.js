@@ -570,10 +570,8 @@ common.paginator.extend(Bigtable, ['getInstances']);
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Bigtable, {
-  filter: function(methodName) {
-    return ['instance', 'operation'].indexOf(methodName) === -1;
-  }
+common.util.promisifyAll(Bigtable, {
+  exclude: ['instance', 'operation']
 });
 
 module.exports = Bigtable;

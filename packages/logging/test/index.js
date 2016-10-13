@@ -52,15 +52,13 @@ var fakeUtil = extend({}, util, {
 
     return false;
   },
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'Logging') {
       return;
     }
 
     promisifed = true;
-    assert.strictEqual(options.filter('getEntries'), true);
-    assert.strictEqual(options.filter('createSink'), true);
-    assert.strictEqual(options.filter('entry'), false);
+    assert.deepEqual(options.exclude, ['entry', 'log', 'sink']);
   }
 });
 

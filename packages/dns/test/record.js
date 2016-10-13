@@ -23,14 +23,13 @@ var util = require('@google-cloud/common').util;
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'Record') {
       return;
     }
 
     promisified = true;
-    assert.strictEqual(options.filter('delete'), true);
-    assert.strictEqual(options.filter('toString'), false);
+    assert.deepEqual(options.exclude, ['toJSON', 'toString']);
   }
 });
 

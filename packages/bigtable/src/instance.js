@@ -750,10 +750,8 @@ common.paginator.extend(Instance, ['getClusters', 'getTables']);
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Instance, {
-  filter: function(methodName) {
-    return ['cluster', 'table'].indexOf(methodName) === -1;
-  }
+common.util.promisifyAll(Instance, {
+  exclude: ['cluster', 'table']
 });
 
 module.exports = Instance;

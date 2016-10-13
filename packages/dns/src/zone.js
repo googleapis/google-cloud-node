@@ -967,10 +967,8 @@ common.paginator.extend(Zone, ['getChanges', 'getRecords']);
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Zone, {
-  filter: function(methodName) {
-    return ['change', 'record'].indexOf(methodName) === -1;
-  }
+common.util.promisifyAll(Zone, {
+  exclude: ['change', 'record']
 });
 
 module.exports = Zone;

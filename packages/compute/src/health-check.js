@@ -276,6 +276,6 @@ HealthCheck.prototype.setMetadata = function(metadata, callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(HealthCheck);
+common.util.promisifyAll(HealthCheck);
 
 module.exports = HealthCheck;

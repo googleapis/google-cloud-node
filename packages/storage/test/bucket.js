@@ -71,14 +71,13 @@ fakeAsync.eachLimit = function() {
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'Bucket') {
       return;
     }
 
     promisified = true;
-    assert.strictEqual(options.filter('file'), false);
-    assert.strictEqual(options.filter('getFiles'), true);
+    assert.deepEqual(options.exclude, ['file']);
   }
 });
 

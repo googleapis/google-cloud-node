@@ -31,7 +31,7 @@ var fakeUtil = extend({}, util, {
 
     return util.makeRequest.apply(null, arguments);
   },
-  promisify: function(Class) {
+  promisifyAll: function(Class) {
     if (Class.name === 'Translate') {
       promisified = true;
     }

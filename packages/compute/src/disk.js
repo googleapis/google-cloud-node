@@ -315,10 +315,8 @@ Disk.prototype.snapshot = function(name) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Disk, {
-  filter: function(methodName) {
-    return methodName !== 'snapshot';
-  }
+common.util.promisifyAll(Disk, {
+  exclude: ['snapshot']
 });
 
 module.exports = Disk;

@@ -170,10 +170,8 @@ Record.prototype.toString = function() {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Record, {
-  filter: function(methodName) {
-    return methodName === 'delete';
-  }
+common.util.promisifyAll(Record, {
+  exclude: ['toJSON', 'toString']
 });
 
 module.exports = Record;

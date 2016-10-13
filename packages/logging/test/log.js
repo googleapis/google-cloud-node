@@ -24,15 +24,13 @@ var util = require('@google-cloud/common').util;
 
 var promisifed = false;
 var fakeUtil = extend({}, util, {
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'Log') {
       return;
     }
 
     promisifed = true;
-    assert.strictEqual(options.filter('write'), true);
-    assert.strictEqual(options.filter('warning'), true);
-    assert.strictEqual(options.filter('entry'), false);
+    assert.deepEqual(options.exclude, ['entry']);
   }
 });
 

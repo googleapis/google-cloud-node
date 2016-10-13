@@ -51,14 +51,13 @@ nodeutil.inherits(FakeService, Service);
 var promisified = false;
 var fakeUtil = extend({}, util, {
   makeAuthenticatedRequestFactory: util.noop,
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'DNS') {
       return;
     }
 
     promisified = true;
-    assert.strictEqual(options.filter('zone'), false);
-    assert.strictEqual(options.filter('getZones'), true);
+    assert.deepEqual(options.exclude, ['zone']);
   }
 });
 

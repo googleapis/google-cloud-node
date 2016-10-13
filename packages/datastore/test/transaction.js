@@ -25,16 +25,13 @@ var util = require('@google-cloud/common').util;
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'Transaction') {
       return;
     }
 
     promisified = true;
-    assert.strictEqual(options.filter('commit'), true);
-    assert.strictEqual(options.filter('rollback'), true);
-    assert.strictEqual(options.filter('run'), true);
-    assert.strictEqual(options.filter('save'), false);
+    assert.deepEqual(options.exclude, ['delete', 'save']);
   }
 });
 

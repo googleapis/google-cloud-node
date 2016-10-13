@@ -520,10 +520,8 @@ Transaction.prototype.save = function(entities) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Transaction, {
-  filter: function(methodName) {
-    return ['commit', 'rollback', 'run'].indexOf(methodName) > -1;
-  }
+common.util.promisifyAll(Transaction, {
+  exclude: ['delete', 'save']
 });
 
 module.exports = Transaction;

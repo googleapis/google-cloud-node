@@ -23,7 +23,7 @@ var util = require('@google-cloud/common').util;
 
 var promisifed = false;
 var fakeUtil = extend({}, util, {
-  promisify: function(Class) {
+  promisifyAll: function(Class) {
     if (Class.name === 'Sink') {
       promisifed = true;
     }

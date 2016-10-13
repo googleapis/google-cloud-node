@@ -33,7 +33,7 @@ nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 var promisified = false;
 var utilOverrides = {
-  promisify: function(Class) {
+  promisifyAll: function(Class) {
     if (Class.name === 'Job') {
       promisified = true;
     }

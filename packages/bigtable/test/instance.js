@@ -30,15 +30,13 @@ var Table = require('../src/table.js');
 
 var promisified = false;
 var fakeUtil = extend({}, common.util, {
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'Instance') {
       return;
     }
 
     promisified = true;
-
-    assert.strictEqual(options.filter('cluster'), false);
-    assert.strictEqual(options.filter('table'), false);
+    assert.deepEqual(options.exclude, ['cluster', 'table']);
   }
 });
 

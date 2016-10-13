@@ -573,10 +573,8 @@ Log.prototype.formatEntryForApi_ = function(entry) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Log, {
-  filter: function(methodName) {
-    return methodName !== 'entry';
-  }
+common.util.promisifyAll(Log, {
+  exclude: ['entry']
 });
 
 module.exports = Log;

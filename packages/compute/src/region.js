@@ -911,10 +911,13 @@ common.paginator.extend(Region, [
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Region, {
-  filter: function(methodName) {
-    return /^(get|create)/.test(methodName);
-  }
+common.util.promisifyAll(Region, {
+  exclude: [
+    'address',
+    'operation',
+    'rule',
+    'subnetwork'
+  ]
 });
 
 module.exports = Region;

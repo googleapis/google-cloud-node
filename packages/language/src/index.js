@@ -489,10 +489,8 @@ Language.prototype.text = function(content, options) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Language, {
-  filter: function(methodName) {
-    return /(detect|annotate)/.test(methodName);
-  }
+common.util.promisifyAll(Language, {
+  exclude: ['document', 'html', 'text']
 });
 
 module.exports = Language;

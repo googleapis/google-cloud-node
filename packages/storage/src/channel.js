@@ -99,6 +99,6 @@ Channel.prototype.stop = function(callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Channel);
+common.util.promisifyAll(Channel);
 
 module.exports = Channel;

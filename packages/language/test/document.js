@@ -32,7 +32,7 @@ var fakeUtil = extend(true, {}, util, {
 
     return false;
   },
-  promisify: function(Class) {
+  promisifyAll: function(Class) {
     if (Class.name === 'Document') {
       promisified = true;
     }

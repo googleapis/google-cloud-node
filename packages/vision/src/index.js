@@ -1624,7 +1624,7 @@ Vision.formatSafeSearchAnnotation_ = function(ssAnnotation, options) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Vision);
+common.util.promisifyAll(Vision);
 
 module.exports = Vision;
 module.exports.v1 = require('./v1');

@@ -322,6 +322,6 @@ Cluster.prototype.setMetadata = function(options, callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Cluster);
+common.util.promisifyAll(Cluster);
 
 module.exports = Cluster;

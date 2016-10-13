@@ -1376,7 +1376,7 @@ describe('common/util', function() {
     });
   });
 
-  describe('promisify', function() {
+  describe('promisifyAll', function() {
     var fakeArgs = [null, 1, 2, 3];
     var fakeError = new Error('err.');
 
@@ -1408,7 +1408,7 @@ describe('common/util', function() {
       FakeClass.prototype._method = util.noop;
       FakeClass.prototype.methodStream = util.noop;
 
-      util.promisify(FakeClass);
+      util.promisifyAll(FakeClass);
       instance = new FakeClass();
     });
 
@@ -1422,62 +1422,77 @@ describe('common/util', function() {
       assert.strictEqual(FakeClass.prototype.methodStream, util.noop);
     });
 
-    it('should optionally except a filter', function() {
+    it('should optionally except an exclude list', function() {
       function FakeClass2() {}
 
       FakeClass2.prototype.methodSync = util.noop;
       FakeClass2.prototype.method = function() {};
 
-      util.promisify(FakeClass2, {
-        filter: function(methodName) {
-          return methodName !== 'methodSync';
-        }
+      util.promisifyAll(FakeClass2, {
+        exclude: ['methodSync']
       });
 
       assert.strictEqual(FakeClass2.prototype.methodSync, util.noop);
       assert(FakeClass2.prototype.method.promisified_);
     });
 
-    it('should not return a promise in callback mode', function(done) {
-      var returnVal = instance.methodName(function() {
-        var args = [].slice.call(arguments);
-
-        assert.deepEqual(args, fakeArgs);
-        assert(!returnVal);
-        assert.strictEqual(context, instance);
-        done();
-      });
-    });
-
-    it('should return a promise when the callback is omitted', function(done) {
-      instance.methodName().then(function(args) {
-        assert.deepEqual(args, fakeArgs.slice(1));
-        assert.strictEqual(context, instance);
-        done();
-      });
-    });
-
-    it('should not return an array when only 1 param is found', function(done) {
-      instance.methodSingle().then(function(param) {
-        assert.strictEqual(param, fakeArgs[1]);
-        assert.strictEqual(context, instance);
-        done();
-      });
-    });
-
-    it('should reject the promise on a failed request', function(done) {
-      instance.methodError().then(null, function(err) {
-        assert.strictEqual(err, fakeError);
-        done();
-      });
-    });
-
     it('should not re-promisify methods', function() {
       var method = FakeClass.prototype.methodName;
 
-      util.promisify(FakeClass);
+      util.promisifyAll(FakeClass);
 
       assert.strictEqual(FakeClass.prototype.methodName, method);
+    });
+  });
+
+  describe('promisify', function() {
+    var fakeContext = {};
+    var func;
+    var fakeArgs;
+
+    beforeEach(function() {
+      fakeArgs = [null, 1, 2, 3];
+
+      func = util.promisify(function(callback) {
+        callback.apply(this, fakeArgs);
+      });
+    });
+
+    it('should not re-promisify the function', function() {
+      var original = func;
+
+      func = util.promisify(func);
+
+      assert.strictEqual(original, func);
+    });
+
+    it('should not return a promise in callback mode', function(done) {
+      var returnVal = func.call(fakeContext, function() {
+        var args = [].slice.call(arguments);
+
+        assert.deepEqual(args, fakeArgs);
+        assert.strictEqual(this, fakeContext);
+        assert(!returnVal);
+        done();
+      });
+    });
+
+    it('should return a promise when the callback is omitted', function() {
+      return func().then(function(args) {
+        assert.deepEqual(args, fakeArgs.slice(1));
+      });
+    });
+
+    it('should reject the promise on a failed request', function() {
+      var error = new Error('err');
+
+      fakeArgs = [error];
+
+      return func().then(function() {
+        throw new Error('Should have gone to failure block');
+      }, function(err) {
+        assert.strictEqual(err, error);
+      });
     });
   });
 });

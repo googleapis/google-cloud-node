@@ -810,6 +810,6 @@ VM.prototype.request = function(reqOpts, callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(VM);
+common.util.promisifyAll(VM);
 
 module.exports = VM;

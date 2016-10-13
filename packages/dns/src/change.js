@@ -175,7 +175,7 @@ Change.prototype.create = function(config, callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Change);
+common.util.promisifyAll(Change);
 
 
 module.exports = Change;

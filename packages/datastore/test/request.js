@@ -30,7 +30,7 @@ var Query = require('../src/query.js');
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
-  promisify: function(Class) {
+  promisifyAll: function(Class) {
     if (Class.name === 'DatastoreRequest') {
       promisified = true;
     }

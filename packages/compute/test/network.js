@@ -26,16 +26,13 @@ var util = require('@google-cloud/common').util;
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'Network') {
       return;
     }
 
     promisified = true;
-    assert.strictEqual(options.filter('firewall'), false);
-    assert.strictEqual(options.filter('getFirewalls'), true);
-    assert.strictEqual(options.filter('createFirewalls'), true);
-    assert.strictEqual(options.filter('delete'), true);
+    assert.deepEqual(options.exclude, ['firewall']);
   }
 });
 

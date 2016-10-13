@@ -616,10 +616,8 @@ common.paginator.extend(PubSub, ['getSubscriptions', 'getTopics']);
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(PubSub, {
-  filter: function(methodName) {
-    return ['subscription', 'topic'].indexOf(methodName) === -1;
-  }
+common.util.promisifyAll(PubSub, {
+  exclude: ['subscription', 'topic']
 });
 
 PubSub.Subscription = Subscription;

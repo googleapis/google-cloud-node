@@ -205,6 +205,6 @@ Address.prototype.delete = function(callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Address);
+common.util.promisifyAll(Address);
 
 module.exports = Address;

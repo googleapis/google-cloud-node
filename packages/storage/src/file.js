@@ -1832,10 +1832,8 @@ File.prototype.startSimpleUpload_ = function(dup, options) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(File, {
-  filter: function(methodName) {
-    return methodName !== 'setEncryptionKey';
-  }
+common.util.promisifyAll(File, {
+  exclude: ['setEncryptionKey']
 });
 
 module.exports = File;

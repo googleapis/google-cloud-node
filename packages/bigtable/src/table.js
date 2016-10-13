@@ -1028,10 +1028,8 @@ Table.prototype.sampleRowKeysStream = function() {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Table, {
-  filter: function(methodName) {
-    return ['family', 'insert', 'mutate', 'row'].indexOf(methodName) === -1;
-  }
+common.util.promisifyAll(Table, {
+  exclude: ['family', 'insert', 'mutate', 'row']
 });
 
 module.exports = Table;

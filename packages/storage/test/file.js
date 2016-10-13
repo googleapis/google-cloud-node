@@ -47,14 +47,13 @@ var fakeUtil = extend({}, util, {
     (makeWritableStreamOverride || util.makeWritableStream).apply(null, args);
   },
 
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'File') {
       return;
     }
 
     promisified = true;
-    assert.strictEqual(options.filter('setEncryptionKey'), false);
-    assert.strictEqual(options.filter('save'), true);
+    assert.deepEqual(options.exclude, ['setEncryptionKey']);
   }
 });
 

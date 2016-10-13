@@ -523,10 +523,8 @@ Topic.prototype.subscription = function(name, options) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Topic, {
-  filter: function(methodName) {
-    return methodName !== 'subscription';
-  }
+common.util.promisifyAll(Topic, {
+  exclude: ['subscription']
 });
 
 module.exports = Topic;

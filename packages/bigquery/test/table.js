@@ -38,7 +38,7 @@ var fakeUtil = extend({}, util, {
     var args = arguments;
     (makeWritableStreamOverride || util.makeWritableStream).apply(null, args);
   },
-  promisify: function(Class) {
+  promisifyAll: function(Class) {
     if (Class.name === 'Table') {
       promisified = true;
     }

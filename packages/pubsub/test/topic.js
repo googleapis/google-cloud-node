@@ -25,14 +25,13 @@ var util = require('@google-cloud/common').util;
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'Topic') {
       return;
     }
 
     promisified = true;
-    assert.strictEqual(options.filter('subscription'), false);
-    assert.strictEqual(options.filter('getTopics'), true);
+    assert.deepEqual(options.exclude, ['subscription']);
   }
 });
 

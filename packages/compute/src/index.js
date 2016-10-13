@@ -2728,10 +2728,25 @@ common.paginator.extend(Compute, [
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Compute, {
-  filter: function(methodName) {
-    return /^(get|create)/.test(methodName);
-  }
+common.util.promisifyAll(Compute, {
+  exclude: [
+    'address',
+    'autoscaler',
+    'disk',
+    'firewall',
+    'healthCheck',
+    'instanceGroup',
+    'machineType',
+    'network',
+    'operation',
+    'region',
+    'rule',
+    'service',
+    'snapshot',
+    'subnetwork',
+    'vm',
+    'zone'
+  ]
 });
 
 Compute.Firewall = Firewall;

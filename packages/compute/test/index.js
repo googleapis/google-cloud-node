@@ -30,15 +30,30 @@ var slice = Array.prototype.slice;
 var promisified = false;
 var fakeUtil = extend({}, util, {
   makeAuthenticatedRequestFactory: util.noop,
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'Compute') {
       return;
     }
 
     promisified = true;
-    assert.strictEqual(options.filter('getThing'), true);
-    assert.strictEqual(options.filter('createThing'), true);
-    assert.strictEqual(options.filter('thing'), false);
+    assert.deepEqual(options.exclude, [
+      'address',
+      'autoscaler',
+      'disk',
+      'firewall',
+      'healthCheck',
+      'instanceGroup',
+      'machineType',
+      'network',
+      'operation',
+      'region',
+      'rule',
+      'service',
+      'snapshot',
+      'subnetwork',
+      'vm',
+      'zone'
+    ]);
   }
 });
 

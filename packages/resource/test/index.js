@@ -62,14 +62,13 @@ var fakeUtil = extend({}, util, {
 
     return util.makeAuthenticatedRequestFactory.apply(null, arguments);
   },
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'Resource') {
       return;
     }
 
     promisified = true;
-    assert.strictEqual(options.filter('project'), false);
-    assert.strictEqual(options.filter('getProjects'), true);
+    assert.deepEqual(options.exclude, ['project']);
   }
 });
 

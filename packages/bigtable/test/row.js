@@ -28,7 +28,7 @@ var Mutation = require('../src/mutation.js');
 
 var promisified = false;
 var fakeUtil = extend({}, common.util, {
-  promisify: function(Class) {
+  promisifyAll: function(Class) {
     if (Class.name === 'Row') {
       promisified = true;
     }

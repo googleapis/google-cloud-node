@@ -282,10 +282,8 @@ common.paginator.extend(Resource, ['getProjects']);
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisify(Resource, {
-  filter: function(methodName) {
-    return methodName !== 'project';
-  }
+common.util.promisifyAll(Resource, {
+  exclude: ['project']
 });
 
 Resource.Project = Project;

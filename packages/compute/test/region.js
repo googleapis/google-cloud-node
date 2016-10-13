@@ -27,15 +27,18 @@ var ServiceObject = common.ServiceObject;
 
 var promisified = false;
 var fakeUtil = extend({}, common.util, {
-  promisify: function(Class, options) {
+  promisifyAll: function(Class, options) {
     if (Class.name !== 'Region') {
       return;
     }
 
     promisified = true;
-    assert.strictEqual(options.filter('rule'), false);
-    assert.strictEqual(options.filter('getRules'), true);
-    assert.strictEqual(options.filter('createRule'), true);
+    assert.deepEqual(options.exclude, [
+      'address',
+      'operation',
+      'rule',
+      'subnetwork'
+    ]);
   }
 });
 

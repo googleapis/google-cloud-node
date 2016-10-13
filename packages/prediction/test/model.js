@@ -42,7 +42,7 @@ var fakeUtil = Object.keys(util).reduce(function(fakeUtil, methodName) {
 }, {});
 
 var promisified = false;
-fakeUtil.promisify = function(Class) {
+fakeUtil.promisifyAll = function(Class) {
   if (Class.name === 'Model') {
     promisified = true;
   }
