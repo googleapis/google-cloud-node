@@ -88,6 +88,11 @@ var FakeFs = function() {
   };
 };
 
+// For {module:google-cloud} docs.
+var FakeBluebird = function() {
+  return Promise;
+};
+
 var modules;
 
 if (process.env.TEST_MODULE) {
@@ -198,6 +203,7 @@ function createSnippet(mod, instantiation, method) {
     )
     .replace('require(\'express\')', FakeExpress.toString())
     .replace('require(\'level\')', FakeLevel.toString())
+    .replace('require(\'bluebird\')', FakeBluebird.toString())
     .replace('require(\'fs\')', '(' + FakeFs.toString() + '())');
 }
 

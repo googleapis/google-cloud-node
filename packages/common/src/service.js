@@ -60,6 +60,10 @@ function Service(config, options) {
   this.packageJson = config.packageJson;
   this.projectId = options.projectId;
   this.projectIdRequired = config.projectIdRequired !== false;
+
+  if (options.promise) {
+    util.setPromiseOverride(options.promise);
+  }
 }
 
 /**

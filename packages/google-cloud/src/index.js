@@ -476,13 +476,23 @@ var apis = {
  * bucket.getMetadata(function() {
  *   // This HTTP request was sent with the 'I win!' header specified above.
  * });
+ *
+ * //-
+ * // By default any methods that return a Promise object will use the native
+ * // Promise constructor. If you wish to use a third-party library such as
+ * // Bluebird, you can specify this via the `promise` option.
+ * //-
+ * var gcloud = require('google-cloud')({
+ *   promise: require('bluebird')
+ * });
  */
 function gcloud(config) {
   config = extend(true, { interceptors_: [] }, config);
 
   var gcloudExposedApi = {
     config_: config,
-    interceptors: config.interceptors_
+    interceptors: config.interceptors_,
+    promise: null
   };
 
   return Object.keys(apis).reduce(function(gcloudExposedApi, apiName) {

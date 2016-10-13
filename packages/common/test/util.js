@@ -1495,4 +1495,22 @@ describe('common/util', function() {
       });
     });
   });
+
+  describe('setPromiseOverride', function() {
+    var FakePromise = function() {};
+
+    before(function() {
+      util.setPromiseOverride(FakePromise);
+    });
+
+    after(function() {
+      util.setPromiseOverride(null);
+    });
+
+    it('should allow the Promise constructor to be specified', function() {
+      var promise = util.promisify(util.noop)();
+
+      assert(promise instanceof FakePromise);
+    });
+  });
 });

@@ -51,6 +51,8 @@ var errorMessage = format([
   path: '/docs/guides/authentication'
 });
 
+var PromiseOverride;
+
 var missingProjectIdError = new Error(errorMessage);
 
 util.missingProjectIdError = missingProjectIdError;
@@ -654,7 +656,7 @@ function promisify(originalMethod) {
       return originalMethod.apply(context, args);
     }
 
-    return new Promise(function(resolve, reject) {
+    return new (PromiseOverride || Promise)(function(resolve, reject) {
       args.push(function() {
         var callbackArgs = slice.call(arguments);
         var err = callbackArgs.shift();
@@ -704,3 +706,15 @@ function promisifyAll(Class, options) {
 }
 
 util.promisifyAll = promisifyAll;
+
+/**
+ * Allows user to override the Promise constructor without the need to touch
+ * globals. Override should be ES6 Promise compliant.
+ *
+ * @param {promise} override
+ */
+function setPromiseOverride(override) {
+  PromiseOverride = override;
+}
+
+module.exports.setPromiseOverride = setPromiseOverride;

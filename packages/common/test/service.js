@@ -149,6 +149,17 @@ describe('Service', function() {
       var service = new Service({}, OPTIONS);
       assert.strictEqual(service.projectIdRequired, true);
     });
+
+    it('should call util.setPromiseOverride when promise is set', function(done) {
+      var FakePromise = function() {};
+
+      util.setPromiseOverride = function(override) {
+        assert.strictEqual(override, FakePromise);
+        done();
+      };
+
+      var service = new Service({}, { promise: FakePromise });
+    });
   });
 
   describe('request_', function() {
