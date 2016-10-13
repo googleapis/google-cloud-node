@@ -60,7 +60,9 @@ function MachineType(zone, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * machineType.exists().then(function(exists) {});
+     * machineType.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 

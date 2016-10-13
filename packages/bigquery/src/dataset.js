@@ -82,7 +82,9 @@ function Dataset(bigQuery, id) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * dataset.exists().then(function(exists) {});
+     * dataset.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -160,7 +162,9 @@ function Dataset(bigQuery, id) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * dataset.setMetadata(metadata).then(function(apiResponse) {});
+     * dataset.setMetadata(metadata).then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     setMetadata: true
   };
@@ -316,7 +320,9 @@ Dataset.prototype.createTable = function(id, options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * dataset.delete().then(function(apiResponse) {});
+ * dataset.delete().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Dataset.prototype.delete = function(options, callback) {
   if (!callback) {
@@ -361,7 +367,9 @@ Dataset.prototype.delete = function(options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * dataset.getTables().then(function(tables) {});
+ * dataset.getTables().then(function(data) {
+ *   var tables = data[0];
+ * });
  */
 Dataset.prototype.getTables = function(query, callback) {
   var that = this;

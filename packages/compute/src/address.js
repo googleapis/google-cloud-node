@@ -83,7 +83,9 @@ function Address(region, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * address.exists().then(function(exists) {});
+     * address.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 

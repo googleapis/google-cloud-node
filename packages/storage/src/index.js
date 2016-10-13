@@ -343,7 +343,9 @@ Storage.prototype.createBucket = function(name, metadata, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * gcs.getBuckets().then(function(buckets) {});
+ * gcs.getBuckets().then(function(data) {
+ *   var buckets = data[0];
+ * });
  */
 Storage.prototype.getBuckets = function(query, callback) {
   var self = this;

@@ -83,7 +83,9 @@ function Family(table, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * family.delete().then(function(apiResponse) {});
+     * family.delete().then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     delete: {
       protoOpts: {
@@ -113,7 +115,9 @@ function Family(table, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * family.exists().then(function(exists) {});
+     * family.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -314,7 +318,9 @@ Family.prototype.getMetadata = function(callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * family.setMetadata(metadata).then(function(apiResponse) {});
+ * family.setMetadata(metadata).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Family.prototype.setMetadata = function(metadata, callback) {
   var self = this;

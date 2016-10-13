@@ -87,7 +87,9 @@ function Model(prediction, id) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * model.delete().then(function(apiResponse) {});
+     * model.delete().then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     delete: true,
 
@@ -105,7 +107,9 @@ function Model(prediction, id) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * model.exists().then(function(exists) {});
+     * model.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -186,7 +190,9 @@ function Model(prediction, id) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * model.setMetadata(metadata).then(function(apiResponse) {});
+     * model.setMetadata(metadata).then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     setMetadata: {
       reqOpts: {
@@ -424,7 +430,9 @@ Model.prototype.query = function(input, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * model.train('english', 'Hello from Stephen!').then(function(apiResponse) {});
+ * model.train('english', 'Hello from Stephen!').then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Model.prototype.train = function(label, input, callback) {
   this.setMetadata({

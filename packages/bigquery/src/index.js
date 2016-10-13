@@ -334,7 +334,9 @@ BigQuery.prototype.getDatasetsStream =
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * bigquery.getJobs().then(function(jobs) {});
+ * bigquery.getJobs().then(function(data) {
+ *   var jobs = data[0];
+ * });
  */
 BigQuery.prototype.getJobs = function(options, callback) {
   var that = this;
@@ -465,7 +467,9 @@ BigQuery.prototype.job = function(id) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * bigquery.query(query).then(function(rows) {});
+ * bigquery.query(query).then(function(data) {
+ *   var rows = data[0];
+ * });
  */
 BigQuery.prototype.query = function(options, callback) {
   var self = this;

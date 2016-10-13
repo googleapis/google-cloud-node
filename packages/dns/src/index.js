@@ -159,7 +159,9 @@ DNS.prototype.createZone = function(name, config, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * dns.getZones().then(function(zones) {});
+ * dns.getZones().then(function(data) {
+ *   var zones = data[0];
+ * });
  */
 DNS.prototype.getZones = function(query, callback) {
   var self = this;

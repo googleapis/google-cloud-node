@@ -95,7 +95,9 @@ function Disk(zone, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * disk.exists().then(function(exists) {});
+     * disk.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 

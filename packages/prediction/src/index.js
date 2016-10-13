@@ -229,7 +229,9 @@ Prediction.prototype.createModel = function(id, options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * prediction.getModels().then(function(models) {});
+ * prediction.getModels().then(function(data) {
+ *   var models = data[0];
+ * });
  */
 Prediction.prototype.getModels = function(query, callback) {
   var self = this;

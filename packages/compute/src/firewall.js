@@ -85,7 +85,9 @@ function Firewall(compute, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * firewall.exists().then(function(exists) {});
+     * firewall.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 

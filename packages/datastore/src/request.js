@@ -294,7 +294,9 @@ DatastoreRequest.prototype.createReadStream = function(keys, options) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * datastore.delete().then(function(apiResponse) {});
+ * datastore.delete().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 DatastoreRequest.prototype.delete = function(keys, callback) {
   callback = callback || common.util.noop;
@@ -396,7 +398,9 @@ DatastoreRequest.prototype.delete = function(keys, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * datastore.get(keys).then(function(entities) {});
+ * datastore.get(keys).then(function(data) {
+ *   var entities = data[0];
+ * });
  */
 DatastoreRequest.prototype.get = function(keys, options, callback) {
   if (is.fn(options)) {
@@ -501,7 +505,9 @@ DatastoreRequest.prototype.insert = function(entities, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * datastore.runQuery(query).then(function(entities) {});
+ * datastore.runQuery(query).then(function(data) {
+ *   var entities = data[0];
+ * });
  */
 DatastoreRequest.prototype.runQuery = function(query, options, callback) {
   if (is.fn(options)) {
@@ -827,7 +833,9 @@ DatastoreRequest.prototype.runQueryStream = function(query, options) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * datastore.save(entity).then(function(apiResponse) {});
+ * datastore.save(entity).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 DatastoreRequest.prototype.save = function(entities, callback) {
   entities = arrify(entities);

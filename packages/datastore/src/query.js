@@ -309,7 +309,9 @@ Query.prototype.offset = function(n) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * query.run().then(function(entities) {});
+ * query.run().then(function(data) {
+ *   var entities = data[0];
+ * });
  */
 Query.prototype.run = function() {
   var query = this;

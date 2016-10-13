@@ -81,7 +81,9 @@ function Row(table, key) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * row.exists().then(function(exists) {});
+     * row.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true
   };
@@ -282,7 +284,9 @@ Row.formatFamilies_ = function(families, options) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * row.create().then(function(apiResponse) {});
+ * row.create().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Row.prototype.create = function(entry, callback) {
   var self = this;
@@ -358,7 +362,9 @@ Row.prototype.create = function(entry, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * row.createRules(rules).then(function(apiResponse) {});
+ * row.createRules(rules).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Row.prototype.createRules = function(rules, callback) {
   if (!rules || rules.length === 0) {
@@ -451,7 +457,9 @@ Row.prototype.createRules = function(rules, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * row.filter(filter, null, entries).then(function(matched) {});
+ * row.filter(filter, null, entries).then(function(data) {
+ *   var matched = data[0];
+ * });
  */
 Row.prototype.filter = function(filter, onMatch, onNoMatch, callback) {
   var grpcOpts = {
@@ -504,7 +512,9 @@ Row.prototype.filter = function(filter, onMatch, onNoMatch, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * row.delete().then(function(apiResponse) {});
+ * row.delete().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Row.prototype.delete = function(callback) {
   var mutation = {
@@ -552,7 +562,9 @@ Row.prototype.delete = function(callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * row.deleteCells(cells).then(function(apiResponse) {});
+ * row.deleteCells(cells).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Row.prototype.deleteCells = function(columns, callback) {
   var mutation = {
@@ -814,7 +826,9 @@ Row.prototype.increment = function(column, value, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * row.save('follows:jadams', 1).then(function(apiResponse) {});
+ * row.save('follows:jadams', 1).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Row.prototype.save = function(key, value, callback) {
   var rowData;

@@ -119,7 +119,9 @@ function VM(zone, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * vm.exists().then(function(exists) {});
+     * vm.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -535,7 +537,9 @@ VM.prototype.reset = function(callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * vm.resize('ns-standard-1', options).then(function(apiResponse) {});
+ * vm.resize('ns-standard-1', options).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 VM.prototype.resize = function(machineType, options, callback) {
   var self = this;

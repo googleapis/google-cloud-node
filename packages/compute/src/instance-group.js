@@ -90,7 +90,9 @@ function InstanceGroup(zone, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * instanceGroup.exists().then(function(exists) {});
+     * instanceGroup.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -329,7 +331,9 @@ InstanceGroup.prototype.delete = function(callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * instanceGroup.getVMs().then(function(vms) {});
+ * instanceGroup.getVMs().then(function(data) {
+ *   var vms = data[0];
+ * });
  */
 InstanceGroup.prototype.getVMs = function(options, callback) {
   var self = this;

@@ -92,7 +92,9 @@ function Subnetwork(region, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * subnetwork.exists().then(function(exists) {});
+     * subnetwork.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 

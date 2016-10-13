@@ -158,7 +158,9 @@ function Subscription(pubsub, options) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * subscription.exists().then(function(exists) {});
+     * subscription.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -391,7 +393,9 @@ Subscription.formatName_ = function(projectId, name) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * subscription.ack(ackId).then(function(apiResponse) {});
+ * subscription.ack(ackId).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Subscription.prototype.ack = function(ackIds, callback) {
   var self = this;
@@ -476,7 +480,9 @@ Subscription.prototype.decorateMessage_ = function(message) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * subscription.delete().then(function(apiResponse) {});
+ * subscription.delete().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Subscription.prototype.delete = function(callback) {
   var self = this;
@@ -647,7 +653,9 @@ Subscription.prototype.pull = function(options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * subscription.setAckDeadline(options).then(function(apiResponse) {});
+ * subscription.setAckDeadline(options).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Subscription.prototype.setAckDeadline = function(options, callback) {
   callback = callback || common.util.noop;

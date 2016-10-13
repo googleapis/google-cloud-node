@@ -91,7 +91,9 @@ function Job(bigQuery, id) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * job.exists().then(function(exists) {});
+     * job.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -193,7 +195,9 @@ modelo.inherits(Job, common.ServiceObject, events.EventEmitter);
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * job.cancel().then(function(apiResponse) {});
+ * job.cancel().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Job.prototype.cancel = function(callback) {
   callback = callback || common.util.noop;
@@ -268,7 +272,9 @@ Job.prototype.cancel = function(callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * job.getQueryResults().then(function(rows) {});
+ * job.getQueryResults().then(function(data) {
+ *   var rows = data[0];
+ * });
  */
 Job.prototype.getQueryResults = function(options, callback) {
   if (is.fn(options)) {

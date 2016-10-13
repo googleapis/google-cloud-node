@@ -88,7 +88,9 @@ function Network(compute, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * network.exists().then(function(exists) {});
+     * network.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -351,7 +353,9 @@ Network.prototype.createSubnetwork = function(name, config, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * network.getSubnetworks().then(function(subnetworks) {});
+ * network.getSubnetworks().then(function(data) {
+ *   var subnetworks = data[0];
+ * });
  */
 Network.prototype.getSubnetworks = function(options, callback) {
   if (is.fn(options)) {
@@ -506,7 +510,9 @@ Network.prototype.firewall = function(name) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * network.getFirewalls().then(function(firewalls) {});
+ * network.getFirewalls().then(function(data) {
+ *   var firewalls = data[0];
+ * });
  */
 Network.prototype.getFirewalls = function(options, callback) {
   if (is.fn(options)) {

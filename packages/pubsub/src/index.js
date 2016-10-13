@@ -188,7 +188,9 @@ PubSub.prototype.createTopic = function(name, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * pubsub.getSubscriptions().then(function(subscriptions) {});
+ * pubsub.getSubscriptions().then(function(data) {
+ *   var subscriptions = data[0];
+ * });
  */
 PubSub.prototype.getSubscriptions = function(options, callback) {
   var self = this;
@@ -332,7 +334,9 @@ PubSub.prototype.getSubscriptionsStream =
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * pubsub.getTopics().then(function(topics) {});
+ * pubsub.getTopics().then(function(data) {
+ *   var topics = data[0];
+ * });
  */
 PubSub.prototype.getTopics = function(query, callback) {
   var self = this;

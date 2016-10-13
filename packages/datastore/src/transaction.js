@@ -101,7 +101,9 @@ util.inherits(Transaction, Request);
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * transaction.commit().then(function(apiResponse) {});
+ * transaction.commit().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Transaction.prototype.commit = function(callback) {
   var self = this;
@@ -309,7 +311,9 @@ Transaction.prototype.delete = function(entities) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * transaction.rollback().then(function(apiResponse) {});
+ * transaction.rollback().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Transaction.prototype.rollback = function(callback) {
   var self = this;

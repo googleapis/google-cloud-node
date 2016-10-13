@@ -101,7 +101,9 @@ function Table(dataset, id) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * table.delete().then(function(apiResponse) {});
+     * table.delete().then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     delete: true,
 
@@ -119,7 +121,9 @@ function Table(dataset, id) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * table.exists().then(function(exists) {});
+     * table.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -669,7 +673,9 @@ Table.prototype.export = function(destination, options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * table.getRows().then(function(rows) {});
+ * table.getRows().then(function(data) {
+ *   var rows = data[0];
+});
  */
 Table.prototype.getRows = function(options, callback) {
   var self = this;

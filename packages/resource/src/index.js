@@ -181,7 +181,9 @@ Resource.prototype.createProject = function(id, options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * resource.getProjects().then(function(projects) {});
+ * resource.getProjects().then(function(data) {
+ *   var projects = data[0];
+ * });
  */
 Resource.prototype.getProjects = function(options, callback) {
   var self = this;

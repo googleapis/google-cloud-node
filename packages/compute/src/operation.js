@@ -114,7 +114,9 @@ function Operation(scope, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * operation.delete().then(function(apiResponse) {});
+     * operation.delete().then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     delete: true,
 
@@ -132,7 +134,9 @@ function Operation(scope, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * operation.exists().then(function(exists) {});
+     * operation.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 

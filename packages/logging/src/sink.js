@@ -98,7 +98,9 @@ function Sink(logging, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * sink.delete().then(function(apiResponse) {});
+     * sink.delete().then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     delete: {
       protoOpts: {
@@ -176,7 +178,9 @@ util.inherits(Sink, common.GrpcServiceObject);
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * sink.setFilter(filter).then(function(apiResponse) {});
+ * sink.setFilter(filter).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Sink.prototype.setFilter = function(filter, callback) {
   this.setMetadata({
@@ -207,7 +211,9 @@ Sink.prototype.setFilter = function(filter, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * sink.setMetadata(metadata).then(function(apiResponse) {});
+ * sink.setMetadata(metadata).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Sink.prototype.setMetadata = function(metadata, callback) {
   var self = this;

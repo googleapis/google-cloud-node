@@ -89,7 +89,9 @@ function Cluster(instance, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * cluster.delete().then(function(apiResponse) {});
+     * cluster.delete().then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     delete: {
       protoOpts: {
@@ -115,7 +117,9 @@ function Cluster(instance, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * cluster.exists().then(function(exists) {});
+     * cluster.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 

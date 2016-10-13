@@ -95,7 +95,9 @@ function Zone(dns, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * zone.exists().then(function(exists) {});
+     * zone.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -311,7 +313,9 @@ Zone.prototype.createChange = function(config, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * zone.delete().then(function(apiResponse) {});
+ * zone.delete().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Zone.prototype.delete = function(options, callback) {
   if (is.fn(options)) {
@@ -527,7 +531,9 @@ Zone.prototype.export = function(localPath, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * zone.getChanges().then(function(changes) {});
+ * zone.getChanges().then(function(data) {
+ *   var changes = data[0];
+ * });
  */
 Zone.prototype.getChanges = function(query, callback) {
   var self = this;
@@ -665,7 +671,9 @@ Zone.prototype.getChangesStream = common.paginator.streamify('getChanges');
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * zone.getRecords(query).then(function(records) {});
+ * zone.getRecords(query).then(function(data) {
+ *   var records = data[0];
+ * });
  */
 Zone.prototype.getRecords = function(query, callback) {
   var self = this;

@@ -87,7 +87,9 @@ function Project(resource, id) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * project.delete().then(function(apiResponse) {});
+     * project.delete().then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     delete: true,
 
@@ -105,7 +107,9 @@ function Project(resource, id) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * project.exists().then(function(exists) {});
+     * project.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -191,7 +195,9 @@ function Project(resource, id) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * project.setMetadata(metadata).then(function(apiResponse) {});
+     * project.setMetadata(metadata).then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     setMetadata: {
       reqOpts: {
@@ -233,7 +239,9 @@ util.inherits(Project, common.ServiceObject);
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * project.restore().then(function(apiResponse) {});
+ * project.restore().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Project.prototype.restore = function(callback) {
   callback = callback || common.util.noop;

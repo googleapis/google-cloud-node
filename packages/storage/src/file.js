@@ -131,7 +131,9 @@ function File(bucket, name, options) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * file.delete().then(function(apiResponse) {});
+     * file.delete().then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     delete: {
       reqOpts: {
@@ -153,7 +155,9 @@ function File(bucket, name, options) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * file.exists().then(function(exists) {});
+     * file.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -247,7 +251,9 @@ function File(bucket, name, options) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * file.setMetadata(metadata).then(function(apiResponse) {});
+     * file.setMetadata(metadata).then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     setMetadata: {
       reqOpts: {
@@ -755,7 +761,9 @@ File.prototype.createReadStream = function(options) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * file.createResumableUpload().then(function(uri) {});
+ * file.createResumableUpload().then(function(data) {
+ *   var uri = data[0];
+ * });
  */
 File.prototype.createResumableUpload = function(options, callback) {
   if (is.fn(options)) {
@@ -1047,7 +1055,9 @@ File.prototype.createWriteStream = function(options) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * file.download().then(function(contents) {});
+ * file.download().then(function(data) {
+ *   var contents = data[0];
+ * });
  */
 File.prototype.download = function(options, callback) {
   if (is.fn(options)) {
@@ -1186,7 +1196,9 @@ File.prototype.setEncryptionKey = function(encryptionKey) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * file.getSignedPolicy(options).then(function(policy) {});
+ * file.getSignedPolicy(options).then(function(data) {
+ *   var policy = data[0];
+ * });
  */
 File.prototype.getSignedPolicy = function(options, callback) {
   var expires = new Date(options.expires);
@@ -1377,7 +1389,9 @@ File.prototype.getSignedPolicy = function(options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * file.getSignedUrl(config).then(function(url) {});
+ * file.getSignedUrl(config).then(function(data) {
+ *   var url = data[0];
+ * });
  */
 File.prototype.getSignedUrl = function(config, callback) {
   var self = this;
@@ -1497,7 +1511,9 @@ File.prototype.getSignedUrl = function(config, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * file.makePrivate().then(function(apiResponse) {});
+ * file.makePrivate().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 File.prototype.makePrivate = function(options, callback) {
   var self = this;
@@ -1551,7 +1567,9 @@ File.prototype.makePrivate = function(options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * file.makePublic().then(function(apiResponse) {});
+ * file.makePublic().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 File.prototype.makePublic = function(callback) {
   callback = callback || common.util.noop;

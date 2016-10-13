@@ -106,7 +106,9 @@ function Instance(bigtable, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * instance.delete().then(function(apiResponse) {});
+     * instance.delete().then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     delete: {
       protoOpts: {
@@ -132,7 +134,9 @@ function Instance(bigtable, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * instance.exists().then(function(exists) {});
+     * instance.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -206,7 +210,9 @@ function Instance(bigtable, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * instance.setMetadata(metadata).then(function(apiResponse) {});
+     * instance.setMetadata(metadata).then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     setMetadata: {
       protoOpts: {
@@ -537,7 +543,9 @@ Instance.prototype.cluster = function(name) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * instance.getClusters().then(function(clusters) {});
+ * instance.getClusters().then(function(data) {
+ *   var clusters = data[0];
+ * });
  */
 Instance.prototype.getClusters = function(query, callback) {
   var self = this;
@@ -652,7 +660,9 @@ Instance.prototype.getClustersStream =
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * instance.getTables().then(function(tables) {});
+ * instance.getTables().then(function(data) {
+ *   var tables = data[0];
+ * });
  */
 Instance.prototype.getTables = function(query, callback) {
   var self = this;

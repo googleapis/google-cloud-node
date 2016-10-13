@@ -104,7 +104,9 @@ function Rule(scope, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * rule.exists().then(function(exists) {});
+     * rule.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 

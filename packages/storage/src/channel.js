@@ -80,7 +80,9 @@ util.inherits(Channel, common.ServiceObject);
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * channel.stop().then(function(apiResponse) {});
+ * channel.stop().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Channel.prototype.stop = function(callback) {
   callback = callback || common.util.noop;

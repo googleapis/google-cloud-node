@@ -93,7 +93,9 @@ function Autoscaler(zone, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * autoscaler.exists().then(function(exists) {});
+     * autoscaler.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 

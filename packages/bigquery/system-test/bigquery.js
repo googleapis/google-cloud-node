@@ -98,7 +98,9 @@ describe('BigQuery', function() {
   });
 
   it('should return a promise', function() {
-    return bigquery.getDatasets().then(function(datasets) {
+    return bigquery.getDatasets().then(function(data) {
+      var datasets = data[0];
+
       assert(datasets.length > 0);
       assert(datasets[0] instanceof Dataset);
     });

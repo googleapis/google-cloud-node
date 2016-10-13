@@ -469,7 +469,9 @@ Bigtable.prototype.createInstance = function(name, options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * bigtable.getInstances().then(function(instances) {});
+ * bigtable.getInstances().then(function(data) {
+ *   var instances = data[0];
+ * });
  */
 Bigtable.prototype.getInstances = function(query, callback) {
   var self = this;

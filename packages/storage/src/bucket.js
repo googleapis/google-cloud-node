@@ -108,7 +108,9 @@ function Bucket(storage, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * bucket.delete().then(function(apiResponse) {});
+     * bucket.delete().then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     delete: true,
 
@@ -126,7 +128,9 @@ function Bucket(storage, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * bucket.exists().then(function(exists) {});
+     * bucket.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -219,7 +223,9 @@ function Bucket(storage, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * bucket.setMetadata(metadata).then(function(apiResponse) {});
+     * bucket.setMetadata(metadata).then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     setMetadata: true
   };
@@ -681,7 +687,9 @@ Bucket.prototype.file = function(name, options) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * bucket.getFiles().then(function(files) {});
+ * bucket.getFiles().then(function(data) {
+ *   var files = data[0];
+ * });
  */
 Bucket.prototype.getFiles = function(query, callback) {
   var self = this;
@@ -821,7 +829,9 @@ Bucket.prototype.getFilesStream = common.paginator.streamify('getFiles');
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * bucket.makePrivate(opts).then(function(files) {});
+ * bucket.makePrivate(opts).then(function(data) {
+ *   var files = data[0];
+ * });
  */
 Bucket.prototype.makePrivate = function(options, callback) {
   var self = this;
@@ -942,7 +952,9 @@ Bucket.prototype.makePrivate = function(options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * bucket.makePublic(opts).then(function(files) {});
+ * bucket.makePublic(opts).then(function(data) {
+ *   var files = data[0];
+ * });
  */
 Bucket.prototype.makePublic = function(options, callback) {
   var self = this;
@@ -1148,7 +1160,9 @@ Bucket.prototype.makePublic = function(options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * bucket.upload('local-image.png').then(function(file) {});
+ * bucket.upload('local-image.png').then(function(data) {
+ *   var file = data[0];
+ * });
  */
 Bucket.prototype.upload = function(localPath, options, callback) {
   if (is.fn(options)) {

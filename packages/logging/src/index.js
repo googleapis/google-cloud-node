@@ -283,7 +283,9 @@ Logging.prototype.entry = function(resource, data) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * logging.getEntries().then(function(entries) {});
+ * logging.getEntries().then(function(data) {
+ *   var entries = data[0];
+ * });
  */
 Logging.prototype.getEntries = function(options, callback) {
   if (is.fn(options)) {
@@ -375,7 +377,9 @@ Logging.prototype.getEntriesStream = common.paginator.streamify('getEntries');
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * logging.getSinks().then(function(sinks) {});
+ * logging.getSinks().then(function(data) {
+ *   var sinks = data[0];
+ * });
  */
 Logging.prototype.getSinks = function(options, callback) {
   var self = this;

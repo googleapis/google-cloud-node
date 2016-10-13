@@ -312,7 +312,9 @@ Acl.prototype.add = function(options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * myFile.acl.delete().then(function(apiResponse) {});
+ * myFile.acl.delete().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Acl.prototype.delete = function(options, callback) {
   var query = {};

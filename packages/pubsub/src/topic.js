@@ -86,7 +86,9 @@ function Topic(pubsub, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * topic.delete().then(function(apiResponse) {});
+     * topic.delete().then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     delete: {
       protoOpts: {
@@ -112,7 +114,9 @@ function Topic(pubsub, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * topic.exists().then(function(exists) {});
+     * topic.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -290,7 +294,9 @@ Topic.formatName_ = function(projectId, name) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * topic.getSubscriptions().then(function(subscriptions) {});
+ * topic.getSubscriptions().then(function(data) {
+ *   var subscriptions = data[0];
+ * });
  */
 Topic.prototype.getSubscriptions = function(options, callback) {
   if (is.fn(options)) {

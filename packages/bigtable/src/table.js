@@ -108,7 +108,9 @@ function Table(instance, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * table.delete().then(function(apiResponse) {});
+     * table.delete().then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     delete: {
       protoOpts: {
@@ -134,7 +136,9 @@ function Table(instance, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * table.exists().then(function(exists) {});
+     * table.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -492,7 +496,9 @@ Table.prototype.createReadStream = function(options) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * table.deleteRows().then(function(apiResponse) {});
+ * table.deleteRows().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Table.prototype.deleteRows = function(options, callback) {
   if (is.function(options)) {
@@ -651,7 +657,9 @@ Table.prototype.getMetadata = function(options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * table.getRows().then(function(rows) {});
+ * table.getRows().then(function(data) {
+ *   var rows = data[0];
+ * });
  */
 Table.prototype.getRows = function(options, callback) {
   if (is.function(options)) {
@@ -968,7 +976,9 @@ Table.prototype.row = function(key) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * table.sampleRowKeys().then(function(keys) {});
+ * table.sampleRowKeys().then(function(data) {
+ *   var keys = data[0];
+ * });
  */
 Table.prototype.sampleRowKeys = function(callback) {
   this.sampleRowKeysStream()

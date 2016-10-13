@@ -50,7 +50,9 @@ function Change(zone, id) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * change.exists().then(function(exists) {});
+     * change.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 

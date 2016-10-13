@@ -649,7 +649,9 @@ Compute.prototype.firewall = function(name) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * gce.getAddresses().then(function(addresses) {});
+ * gce.getAddresses().then(function(data) {
+ *   var addresses = data[0];
+ * });
  */
 Compute.prototype.getAddresses = function(options, callback) {
   var self = this;
@@ -777,7 +779,9 @@ Compute.prototype.getAddressesStream =
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * gce.getAutoscalers().then(function(autoscalers) {});
+ * gce.getAutoscalers().then(function(data) {
+ *   var autoscalers = data[0];
+ * });
  */
 Compute.prototype.getAutoscalers = function(options, callback) {
   var self = this;
@@ -908,7 +912,9 @@ Compute.prototype.getAutoscalersStream =
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * gce.getDisks().then(function(disks) {});
+ * gce.getDisks().then(function(data) {
+ *   var disks = data[0];
+ * });
  */
 Compute.prototype.getDisks = function(options, callback) {
   var self = this;
@@ -1035,7 +1041,9 @@ Compute.prototype.getDisksStream = common.paginator.streamify('getDisks');
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * gce.getInstanceGroups().then(function(instanceGroups) {});
+ * gce.getInstanceGroups().then(function(data) {
+ *   var instanceGroups = data[0];
+ * });
  */
 Compute.prototype.getInstanceGroups = function(options, callback) {
   var self = this;
@@ -1160,7 +1168,9 @@ Compute.prototype.getInstanceGroupsStream =
  *   autoPaginate: false
  * }, callback);
  *
- * gce.getFirewalls().then(function(firewalls) {});
+ * gce.getFirewalls().then(function(data) {
+ *   var firewalls = data[0];
+ * });
  */
 Compute.prototype.getFirewalls = function(options, callback) {
   var self = this;
@@ -1278,7 +1288,9 @@ Compute.prototype.getFirewallsStream =
  *   autoPaginate: false
  * }, callback);
  *
- * gce.getHealthChecks().then(function(healthChecks) {});
+ * gce.getHealthChecks().then(function(data) {
+ *   var healthChecks = data[0];
+ * });
  */
 Compute.prototype.getHealthChecks = function(options, callback) {
   var self = this;
@@ -1404,7 +1416,9 @@ Compute.prototype.getHealthChecksStream =
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * gce.getMachineTypes().then(function(machineTypes) {});
+ * gce.getMachineTypes().then(function(data) {
+ *   var machineTypes = data[0];
+ * });
  */
 Compute.prototype.getMachineTypes = function(options, callback) {
   var self = this;
@@ -1531,7 +1545,9 @@ Compute.prototype.getMachineTypesStream =
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * gce.getNetworks().then(function(networks) {});
+ * gce.getNetworks().then(function(data) {
+ *   var networks = data[0];
+ * });
  */
 Compute.prototype.getNetworks = function(options, callback) {
   var self = this;
@@ -1647,7 +1663,9 @@ Compute.prototype.getNetworksStream = common.paginator.streamify('getNetworks');
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * gce.getOperations().then(function(operations) {});
+ * gce.getOperations().then(function(data) {
+ *   var operations = data[0];
+ * });
  */
 Compute.prototype.getOperations = function(options, callback) {
   var self = this;
@@ -1765,7 +1783,9 @@ Compute.prototype.getOperationsStream =
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * gce.getRegions().then(function(regions) {});
+ * gce.getRegions().then(function(data) {
+ *   var regions = data[0];
+ * });
  */
 Compute.prototype.getRegions = function(options, callback) {
   var self = this;
@@ -1879,7 +1899,9 @@ Compute.prototype.getRegionsStream = common.paginator.streamify('getRegions');
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * gce.getRules().then(function(rules) {});
+ * gce.getRules().then(function(data) {
+ *   var rules = data[0];
+ * });
  */
 Compute.prototype.getRules = function(options, callback) {
   var self = this;
@@ -1995,7 +2017,9 @@ Compute.prototype.getRulesStream = common.paginator.streamify('getRules');
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * gce.getServices().then(function(services) {});
+ * gce.getServices().then(function(data) {
+ *   var services = data[0];
+ * });
  */
 Compute.prototype.getServices = function(options, callback) {
   var self = this;
@@ -2111,7 +2135,9 @@ Compute.prototype.getServicesStream = common.paginator.streamify('getServices');
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * gce.getSnapshots().then(function(snapshots) {});
+ * gce.getSnapshots().then(function(data) {
+ *   var snapshots = data[0];
+ * });
  */
 Compute.prototype.getSnapshots = function(options, callback) {
   var self = this;
@@ -2228,7 +2254,9 @@ Compute.prototype.getSnapshotsStream =
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * gce.getSubnetworks().then(function(subnetworks) {});
+ * gce.getSubnetworks().then(function(data) {
+ *   var subnetworks = data[0];
+ * });
  */
 Compute.prototype.getSubnetworks = function(options, callback) {
   var self = this;
@@ -2354,7 +2382,9 @@ Compute.prototype.getSubnetworksStream =
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * gce.getVMs().then(function(vms) {});
+ * gce.getVMs().then(function(data) {
+ *   var vms = data[0];
+ * });
  */
 Compute.prototype.getVMs = function(options, callback) {
   var self = this;
@@ -2479,7 +2509,9 @@ Compute.prototype.getVMsStream = common.paginator.streamify('getVMs');
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * gce.getZones().then(function(zones) {});
+ * gce.getZones().then(function(data) {
+ *   var zones = data[0];
+ * });
  */
 Compute.prototype.getZones = function(options, callback) {
   var self = this;

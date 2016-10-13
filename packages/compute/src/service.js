@@ -101,7 +101,9 @@ function Service(compute, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * service.exists().then(function(exists) {});
+     * service.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 

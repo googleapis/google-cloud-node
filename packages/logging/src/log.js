@@ -74,7 +74,9 @@ function Log(logging, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * log.delete().then(function(apiResponse) {});
+     * log.delete().then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     delete: {
       protoOpts: {
@@ -148,7 +150,9 @@ Log.formatName_ = function(projectId, name) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * log.alert(entry).then(function(apiResponse) {});
+ * log.alert(entry).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Log.prototype.alert = function(entry, options, callback) {
   this.write(Log.assignSeverityToEntries_(entry, 'ALERT'), options, callback);
@@ -170,7 +174,9 @@ Log.prototype.alert = function(entry, options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * log.critical(entry).then(function(apiResponse) {});
+ * log.critical(entry).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Log.prototype.critical = function(entry, options, callback) {
   var entries = Log.assignSeverityToEntries_(entry, 'CRITICAL');
@@ -193,7 +199,9 @@ Log.prototype.critical = function(entry, options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * log.debug(entry).then(function(apiResponse) {});
+ * log.debug(entry).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Log.prototype.debug = function(entry, options, callback) {
   this.write(Log.assignSeverityToEntries_(entry, 'DEBUG'), options, callback);
@@ -215,7 +223,9 @@ Log.prototype.debug = function(entry, options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * log.emergency(entry).then(function(apiResponse) {});
+ * log.emergency(entry).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Log.prototype.emergency = function(entry, options, callback) {
   var entries = Log.assignSeverityToEntries_(entry, 'EMERGENCY');
@@ -287,7 +297,9 @@ Log.prototype.entry = function(resource, data) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * log.error(entry).then(function(apiResponse) {});
+ * log.error(entry).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Log.prototype.error = function(entry, options, callback) {
   this.write(Log.assignSeverityToEntries_(entry, 'ERROR'), options, callback);
@@ -342,7 +354,9 @@ Log.prototype.error = function(entry, options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * log.getEntries().then(function(entries) {});
+ * log.getEntries().then(function(data) {
+ *   var entries = data[0];
+ * });
  */
 Log.prototype.getEntries = function(options, callback) {
   if (is.function(options)) {
@@ -409,7 +423,9 @@ Log.prototype.getEntriesStream = function(options) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * log.info(entry).then(function(apiResponse) {});
+ * log.info(entry).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Log.prototype.info = function(entry, options, callback) {
   this.write(Log.assignSeverityToEntries_(entry, 'INFO'), options, callback);
@@ -431,7 +447,9 @@ Log.prototype.info = function(entry, options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * log.notice(entry).then(function(apiResponse) {});
+ * log.notice(entry).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Log.prototype.notice = function(entry, options, callback) {
   this.write(Log.assignSeverityToEntries_(entry, 'NOTICE'), options, callback);
@@ -453,7 +471,9 @@ Log.prototype.notice = function(entry, options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * log.warning(entry).then(function(apiResponse) {});
+ * log.warning(entry).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Log.prototype.warning = function(entry, options, callback) {
   this.write(Log.assignSeverityToEntries_(entry, 'WARNING'), options, callback);
@@ -527,7 +547,9 @@ Log.prototype.warning = function(entry, options, callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * log.write(entries).then(function(apiResponse) {});
+ * log.write(entries).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Log.prototype.write = function(entry, options, callback) {
   if (is.fn(options)) {

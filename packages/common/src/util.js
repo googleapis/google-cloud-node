@@ -663,10 +663,6 @@ function promisify(originalMethod) {
           return reject(err);
         }
 
-        if (callbackArgs.length < 2) {
-          callbackArgs = callbackArgs.pop();
-        }
-
         resolve(callbackArgs);
       });
 

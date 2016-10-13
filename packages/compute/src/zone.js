@@ -98,7 +98,9 @@ function Zone(compute, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * zone.exists().then(function(exists) {});
+     * zone.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -772,7 +774,9 @@ Zone.prototype.disk = function(name) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * zone.getAutoscalers().then(function(autoscalers) {});
+ * zone.getAutoscalers().then(function(data) {
+ *   var autoscalers = data[0];
+ * });
  */
 Zone.prototype.getAutoscalers = function(options, callback) {
   var self = this;
@@ -890,7 +894,9 @@ Zone.prototype.getAutoscalersStream =
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * zone.getDisks().then(function(disks) {});
+ * zone.getDisks().then(function(data) {
+ *   var disks = data[0];
+ * });
  */
 Zone.prototype.getDisks = function(options, callback) {
   var self = this;
@@ -1008,7 +1014,9 @@ Zone.prototype.getDisksStream = common.paginator.streamify('getDisks');
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * zone.getInstanceGroups().then(function(instanceGroups) {});
+ * zone.getInstanceGroups().then(function(data) {
+ *   var instanceGroups = data[0];
+ * });
  */
 Zone.prototype.getInstanceGroups = function(options, callback) {
   var self = this;
@@ -1121,7 +1129,9 @@ Zone.prototype.getInstanceGroupsStream =
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * zone.getMachineTypes().then(function(machineTypes) {});
+ * zone.getMachineTypes().then(function(data) {
+ *   var machineTypes = data[0];
+ * });
  */
 Zone.prototype.getMachineTypes = function(options, callback) {
   if (is.fn(options)) {
@@ -1215,7 +1225,9 @@ Zone.prototype.getMachineTypesStream =
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * zone.getOperations().then(function(operations) {});
+ * zone.getOperations().then(function(data) {
+ *   var operations = data[0];
+ * });
  */
 Zone.prototype.getOperations = function(options, callback) {
   var self = this;
@@ -1330,7 +1342,9 @@ Zone.prototype.getOperationsStream =
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * zone.getVMs().then(function(vms) {});
+ * zone.getVMs().then(function(data) {
+ *   var vms = data[0];
+ * });
  */
 Zone.prototype.getVMs = function(options, callback) {
   var self = this;

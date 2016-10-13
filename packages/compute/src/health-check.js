@@ -90,7 +90,9 @@ function HealthCheck(compute, name, options) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * healthCheck.exists().then(function(exists) {});
+     * healthCheck.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
