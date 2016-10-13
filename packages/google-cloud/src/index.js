@@ -406,6 +406,8 @@ var apis = {
  *     true)
  * @param {number} options.maxRetries - Maximum number of automatic retries
  *     attempted before returning the error. (default: 3)
+ * @param {function} options.promise - Custom promise module to use instead of
+ *     native Promises.
  *
  * @example
  * var gcloud = require('google-cloud')({

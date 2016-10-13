@@ -656,7 +656,9 @@ function promisify(originalMethod) {
       return originalMethod.apply(context, args);
     }
 
-    return new (PromiseOverride || Promise)(function(resolve, reject) {
+    var PromiseCtor = PromiseOverride || Promise;
+
+    return new PromiseCtor(function(resolve, reject) {
       args.push(function() {
         var callbackArgs = slice.call(arguments);
         var err = callbackArgs.shift();
