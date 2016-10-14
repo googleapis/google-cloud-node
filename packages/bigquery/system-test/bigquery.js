@@ -38,6 +38,55 @@ describe('BigQuery', function() {
 
   var query = 'SELECT url FROM [publicdata:samples.github_nested] LIMIT 100';
 
+  var SCHEMA = [
+    {
+      name: 'id',
+      type: 'INTEGER'
+    },
+    {
+      name: 'breed',
+      type: 'STRING'
+    },
+    {
+      name: 'name',
+      type: 'STRING'
+    },
+    {
+      name: 'dob',
+      type: 'TIMESTAMP'
+    },
+    {
+      name: 'around',
+      type: 'BOOLEAN'
+    },
+    {
+      name: 'buffer',
+      type: 'BYTES'
+    },
+    {
+      name: 'arrayOfInts',
+      type: 'INTEGER',
+      mode: 'REPEATED'
+    },
+    {
+      name: 'recordOfRecords',
+      type: 'RECORD',
+      fields: [
+        {
+          name: 'records',
+          type: 'RECORD',
+          mode: 'REPEATED',
+          fields: [
+            {
+              name: 'record',
+              type: 'BOOLEAN'
+            }
+          ]
+        }
+      ]
+    }
+  ];
+
   before(function(done) {
     async.series([
       // Remove buckets created for the tests.
@@ -51,7 +100,7 @@ describe('BigQuery', function() {
 
       // Create the test table.
       table.create.bind(table, {
-        schema: 'id:integer,breed,name,dob:timestamp,around:boolean'
+        schema: SCHEMA
       }),
 
       // Create a Bucket.
@@ -312,15 +361,7 @@ describe('BigQuery', function() {
     var TEST_DATA_JSON_PATH = require.resolve('./data/kitten-test-data.json');
 
     it('should have created the correct schema', function() {
-      assert.deepEqual(table.metadata.schema, {
-        fields: [
-          { name: 'id', type: 'INTEGER' },
-          { name: 'breed', type: 'STRING' },
-          { name: 'name', type: 'STRING' },
-          { name: 'dob', type: 'TIMESTAMP' },
-          { name: 'around', type: 'BOOLEAN' }
-        ]
-      });
+      assert.deepEqual(table.metadata.schema.fields, SCHEMA);
     });
 
     it('should get the rows in a table', function(done) {
@@ -388,14 +429,21 @@ describe('BigQuery', function() {
       });
 
       it('should convert values to their schema types', function(done) {
-        var now = new Date();
-
         var data = {
           name: 'dave',
           breed: 'british shorthair',
           id: 99,
-          dob: now.toJSON(),
-          around: true
+          dob: new Date(),
+          around: true,
+          buffer: new Buffer('test'),
+          arrayOfInts: [1, 3, 5],
+          recordOfRecords: {
+            records: [
+              {
+                record: true
+              }
+            ]
+          }
         };
 
         table.insert(data, function(err, insertErrors) {
@@ -409,7 +457,11 @@ describe('BigQuery', function() {
           function query(callback) {
             var row;
 
-            table.query('SELECT * FROM ' + table.id + ' WHERE id = ' + data.id)
+            table
+              .query({
+                query: 'SELECT * FROM ' + table.id + ' WHERE id = ' + data.id,
+                useLegacySql: false
+              })
               .on('error', callback)
               .once('data', function(row_) { row = row_; })
               .on('end', function() {
@@ -418,10 +470,7 @@ describe('BigQuery', function() {
                   return;
                 }
 
-                assert.strictEqual(row.name, data.name);
-                assert.strictEqual(row.breed, data.breed);
-                assert.strictEqual(row.id, data.id);
-                assert.deepEqual(row.dob, now);
+                assert.deepEqual(row, data);
                 callback();
               });
           }
