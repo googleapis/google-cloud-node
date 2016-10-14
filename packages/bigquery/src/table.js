@@ -1031,7 +1031,7 @@ Table.prototype.query = function(query, callback) {
  * @param {string} metadata.name - A descriptive name for the table.
  * @param {string|object} metadata.schema - A comma-separated list of name:type
  *     pairs. Valid types are "string", "integer", "float", "boolean", "bytes",
- *     "recodr", and "timestamp". If the type is omitted, it is assumed to be
+ *     "record", and "timestamp". If the type is omitted, it is assumed to be
  *     "string". Example: "name:string, age:integer". Schemas can also be
  *     specified as a JSON array of fields, which allows for nested and repeated
  *     fields. See a [Table resource](http://goo.gl/sl8Dmg) for more detailed
