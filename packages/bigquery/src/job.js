@@ -344,6 +344,27 @@ Job.prototype.listenForEvents_ = function() {
 };
 
 /**
+ * Convenience method that wraps the `complete` and `error` events in a
+ * Promise.
+ *
+ * @return {promise}
+ *
+ * @example
+ * job.promise().then(function(metadata) {
+ *   // The job is complete.
+ * }, function(err) {
+ *   // An error occurred during the job.
+ * });
+ */
+Job.prototype.promise = function() {
+  var self = this;
+
+  return new common.util.Promise(function(resolve, reject) {
+    self.on('error', reject).on('complete', resolve);
+  });
+};
+
+/**
  * Poll `getMetadata` to check the operation's status. This runs a loop to ping
  * the API on an interval.
  *

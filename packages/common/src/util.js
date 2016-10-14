@@ -51,8 +51,6 @@ var errorMessage = format([
   path: '/docs/guides/authentication'
 });
 
-var PromiseOverride;
-
 var missingProjectIdError = new Error(errorMessage);
 
 util.missingProjectIdError = missingProjectIdError;
@@ -635,6 +633,13 @@ function getUserAgentFromPackageJson(packageJson) {
 util.getUserAgentFromPackageJson = getUserAgentFromPackageJson;
 
 /**
+ * Rather than making getters and setters for getting the Promise override
+ * let's just store it on the util object and reference that.
+ * By default we'll use the native Promise object.
+ */
+util.Promise = Promise;
+
+/**
  * Wraps a callback style function to conditionally return a promise.
  *
  * @param {function} originalMethod - The method to promisify.
@@ -656,9 +661,7 @@ function promisify(originalMethod) {
       return originalMethod.apply(context, args);
     }
 
-    var PromiseCtor = PromiseOverride || Promise;
-
-    return new PromiseCtor(function(resolve, reject) {
+    return new util.Promise(function(resolve, reject) {
       args.push(function() {
         var callbackArgs = slice.call(arguments);
         var err = callbackArgs.shift();
@@ -708,15 +711,3 @@ function promisifyAll(Class, options) {
 }
 
 util.promisifyAll = promisifyAll;
-
-/**
- * Allows user to override the Promise constructor without the need to touch
- * globals. Override should be ES6 Promise compliant.
- *
- * @param {promise} override
- */
-function setPromiseOverride(override) {
-  PromiseOverride = override;
-}
-
-module.exports.setPromiseOverride = setPromiseOverride;

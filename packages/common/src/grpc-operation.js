@@ -165,6 +165,19 @@ GrpcOperation.prototype.listenForEvents_ = function() {
 };
 
 /**
+ * Wraps the `complete` and `error` events in a Promise.
+ *
+ * @return {promise}
+ */
+GrpcOperation.prototype.promise = function() {
+  var self = this;
+
+  return new util.Promise(function(resolve, reject) {
+    self.on('error', reject).on('complete', resolve);
+  });
+};
+
+/**
  * Poll `getMetadata` to check the operation's status. This runs a loop to ping
  * the API on an interval.
  *

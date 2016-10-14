@@ -62,7 +62,7 @@ function Service(config, options) {
   this.projectIdRequired = config.projectIdRequired !== false;
 
   if (options.promise) {
-    util.setPromiseOverride(options.promise);
+    util.Promise = options.promise;
   }
 }
 
