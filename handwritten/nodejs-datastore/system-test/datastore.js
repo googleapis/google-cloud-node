@@ -48,7 +48,7 @@ describe('Datastore', function() {
         }
 
         var keys = entities.map(function(entity) {
-          return entity.key;
+          return entity[datastore.KEY];
         });
 
         datastore.delete(keys, callback);
@@ -91,7 +91,8 @@ describe('Datastore', function() {
         datastore.get(postKey, function(err, entity) {
           assert.ifError(err);
 
-          assert.deepEqual(entity.data, post);
+          assert.deepEqual(entity, post);
+          assert.deepEqual(entity[datastore.KEY], postKey);
 
           datastore.delete(postKey, done);
         });
@@ -107,7 +108,7 @@ describe('Datastore', function() {
         datastore.get(postKey, function(err, entity) {
           assert.ifError(err);
 
-          assert.deepEqual(entity.data, post);
+          assert.deepEqual(entity, post);
 
           datastore.delete(postKey, done);
         });
@@ -129,7 +130,7 @@ describe('Datastore', function() {
         datastore.get(postKey, function(err, entity) {
           assert.ifError(err);
 
-          assert.deepEqual(entity.data, data);
+          assert.deepEqual(entity, data);
 
           datastore.delete(datastore.key(['Post', assignedId]), done);
         });
@@ -148,7 +149,7 @@ describe('Datastore', function() {
         datastore.get(postKey, function(err, entity) {
           assert.ifError(err);
 
-          assert.deepEqual(entity.data, post);
+          assert.deepEqual(entity, post);
 
           datastore.delete(postKey, done);
         });
@@ -174,7 +175,7 @@ describe('Datastore', function() {
           datastore.get(postKey, function(err, entity) {
             assert.ifError(err);
 
-            assert.deepEqual(entity.data, post);
+            assert.deepEqual(entity, post);
 
             datastore.delete(postKey, done);
           });
@@ -268,8 +269,8 @@ describe('Datastore', function() {
         datastore.runQuery(query, function(err, results) {
           assert.ifError(err);
 
-          assert.strictEqual(results[0].data.fullName, 'Full name');
-          assert.deepEqual(results[0].data.linkedTo, personKey);
+          assert.strictEqual(results[0].fullName, 'Full name');
+          assert.deepEqual(results[0].linkedTo, personKey);
 
           datastore.delete(personKey, done);
         });
@@ -293,7 +294,7 @@ describe('Datastore', function() {
 
           datastore.get(key, function(err, entity) {
             assert.ifError(err);
-            assert.strictEqual(entity.data.year, integerValue);
+            assert.strictEqual(entity.year, integerValue);
             done();
           });
         });
@@ -315,7 +316,7 @@ describe('Datastore', function() {
 
           datastore.get(key, function(err, entity) {
             assert.ifError(err);
-            assert.strictEqual(entity.data.nines, doubleValue);
+            assert.strictEqual(entity.nines, doubleValue);
             done();
           });
         });
@@ -340,7 +341,7 @@ describe('Datastore', function() {
 
           datastore.get(key, function(err, entity) {
             assert.ifError(err);
-            assert.deepEqual(entity.data.location, geoPointValue);
+            assert.deepEqual(entity.location, geoPointValue);
             done();
           });
         });
@@ -553,8 +554,8 @@ describe('Datastore', function() {
       datastore.runQuery(q, function(err, entities) {
         assert.ifError(err);
 
-        assert.strictEqual(entities[0].data.name, characters[0].name);
-        assert.strictEqual(entities[7].data.name, characters[3].name);
+        assert.strictEqual(entities[0].name, characters[0].name);
+        assert.strictEqual(entities[7].name, characters[3].name);
 
         done();
       });
@@ -568,12 +569,12 @@ describe('Datastore', function() {
       datastore.runQuery(q, function(err, entities) {
         assert.ifError(err);
 
-        assert.deepEqual(entities[0].data, {
+        assert.deepEqual(entities[0], {
           name: 'Arya',
           family: 'Stark'
         });
 
-        assert.deepEqual(entities[8].data, {
+        assert.deepEqual(entities[8], {
           name: 'Sansa',
           family: 'Stark'
         });
@@ -593,8 +594,8 @@ describe('Datastore', function() {
         assert.ifError(err);
 
         assert.strictEqual(entities.length, 3);
-        assert.strictEqual(entities[0].data.name, 'Robb');
-        assert.strictEqual(entities[2].data.name, 'Catelyn');
+        assert.strictEqual(entities[0].name, 'Robb');
+        assert.strictEqual(entities[2].name, 'Catelyn');
 
         var secondQ = datastore.createQuery('Character')
           .hasAncestor(ancestor)
@@ -605,8 +606,8 @@ describe('Datastore', function() {
           assert.ifError(err);
 
           assert.strictEqual(secondEntities.length, 3);
-          assert.strictEqual(secondEntities[0].data.name, 'Sansa');
-          assert.strictEqual(secondEntities[2].data.name, 'Arya');
+          assert.strictEqual(secondEntities[0].name, 'Sansa');
+          assert.strictEqual(secondEntities[2].name, 'Arya');
 
           done();
         });
@@ -632,8 +633,8 @@ describe('Datastore', function() {
           assert.ifError(err);
 
           assert.strictEqual(secondEntities.length, 4);
-          assert.strictEqual(secondEntities[0].data.name, 'Catelyn');
-          assert.strictEqual(secondEntities[3].data.name, 'Arya');
+          assert.strictEqual(secondEntities[0].name, 'Catelyn');
+          assert.strictEqual(secondEntities[3].name, 'Arya');
 
           done();
         });
@@ -681,7 +682,7 @@ describe('Datastore', function() {
 
             datastore.get(key, function(err, entity) {
               assert.ifError(err);
-              assert.deepEqual(entity.data, obj);
+              assert.deepEqual(entity, obj);
               done();
             });
           });
@@ -738,7 +739,7 @@ describe('Datastore', function() {
               function(callback) {
                 datastore.get(key, function(err, entity) {
                   assert.ifError(err);
-                  assert.strictEqual(entity.data.rating, 10);
+                  assert.strictEqual(entity.rating, 10);
                   callback();
                 });
               }

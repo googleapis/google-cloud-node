@@ -38,6 +38,13 @@ var InvalidKeyError = createErrorClass('InvalidKey', function(opts) {
 });
 
 /**
+ * A symbol to access the Key object from an entity object.
+ *
+ * @type {symbol}
+ */
+entity.KEY_SYMBOL = Symbol('KEY');
+
+/**
  * Build a Datastore Double object.
  *
  * @constructor
@@ -405,10 +412,9 @@ entity.entityToEntityProto = entityToEntityProto;
  */
 function formatArray(results) {
   return results.map(function(result) {
-    return {
-      key: entity.keyFromKeyProto(result.entity.key),
-      data: entity.entityFromEntityProto(result.entity)
-    };
+    var ent = entity.entityFromEntityProto(result.entity);
+    ent[entity.KEY_SYMBOL] = entity.keyFromKeyProto(result.entity.key);
+    return ent;
   });
 }
 

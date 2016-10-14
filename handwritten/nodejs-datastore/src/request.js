@@ -299,7 +299,7 @@ DatastoreRequest.prototype.delete = function(keys, callback) {
  *     // Error handling omitted.
  *   }
  *
- *   entity.data.newValue = true;
+ *   entity.newValue = true;
  *   datastore.save(entity, function(err) {});
  * });
  */
@@ -489,8 +489,9 @@ DatastoreRequest.prototype.insert = function(entities, callback) {
  * var keysOnlyQuery = datastore.createQuery('Lion').select('__key__');
  *
  * datastore.runQuery(keysOnlyQuery, function(err, entities) {
- *   // entities[].key = Key object
- *   // entities[].data = Empty object
+ *   var keys = entities.map(function(entity) {
+ *     return entity[datastore.KEY];
+ *   });
  * });
  */
 DatastoreRequest.prototype.runQuery = function(query, options, callback) {

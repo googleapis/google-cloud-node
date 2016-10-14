@@ -379,6 +379,13 @@ Datastore.prototype.int = Datastore.int = function(value) {
 };
 
 /**
+ * Access the Key from an Entity object.
+ *
+ * @type {symbol}
+ */
+Datastore.prototype.KEY = Datastore.KEY = entity.KEY_SYMBOL;
+
+/**
  * This is one of three values which may be returned from
  * {module:datastore#runQuery}, {module:transaction#runQuery}, and
  * {module:datastore/query#run} as `info.moreResults`.
