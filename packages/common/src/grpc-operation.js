@@ -134,6 +134,19 @@ GrpcOperation.prototype.cancel = function(callback) {
 };
 
 /**
+ * Wraps the `complete` and `error` events in a Promise.
+ *
+ * @return {promise}
+ */
+GrpcOperation.prototype.promise = function() {
+  var self = this;
+
+  return new util.Promise(function(resolve, reject) {
+    self.on('error', reject).on('complete', resolve);
+  });
+};
+
+/**
  * Begin listening for events on the operation. This method keeps track of how
  * many "complete" listeners are registered and removed, making sure polling is
  * handled automatically.
@@ -161,19 +174,6 @@ GrpcOperation.prototype.listenForEvents_ = function() {
     if (event === 'complete' && --self.completeListeners === 0) {
       self.hasActiveListeners = false;
     }
-  });
-};
-
-/**
- * Wraps the `complete` and `error` events in a Promise.
- *
- * @return {promise}
- */
-GrpcOperation.prototype.promise = function() {
-  var self = this;
-
-  return new util.Promise(function(resolve, reject) {
-    self.on('error', reject).on('complete', resolve);
   });
 };
 
