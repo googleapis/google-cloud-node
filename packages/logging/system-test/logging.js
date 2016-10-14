@@ -20,6 +20,7 @@ var assert = require('assert');
 var async = require('async');
 var BigQuery = require('@google-cloud/bigquery');
 var exec = require('methmeth');
+var extend = require('extend');
 var format = require('string-format-obj');
 var is = require('is');
 var prop = require('propprop');
@@ -368,6 +369,35 @@ describe('Logging', function() {
               matchUser: logEntry.data.matchUser.toString(),
               matchUserError: logEntry.data.matchUserError.toString()
             });
+
+            done();
+          });
+        }, WRITE_CONSISTENCY_DELAY_MS);
+      });
+    });
+
+    it('should write a log with metadata', function(done) {
+      var metadata = extend({}, options, {
+        severity: 'DEBUG'
+      });
+
+      var data = {
+        embeddedData: true
+      };
+
+      var logEntry = log.entry(metadata, data);
+
+      log.write(logEntry, function(err) {
+        assert.ifError(err);
+
+        setTimeout(function() {
+          log.getEntries({ pageSize: 1 }, function(err, entries) {
+            assert.ifError(err);
+
+            var entry = entries[0];
+
+            assert.strictEqual(entry.metadata.severity, metadata.severity);
+            assert.deepEqual(entry.data, data);
 
             done();
           });

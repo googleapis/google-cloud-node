@@ -33,8 +33,8 @@ var isCircular = require('is-circular');
  * @alias module:logging/entry
  * @constructor
  *
- * @param {object=|string=} resource - See a
- *     [Monitored Resource](https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource).
+ * @param {object=} metadata - See a
+ *     [LogEntry Resource](https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry).
  * @param {object|string} data - The data to use as the value for this log
  *     entry.
  *
@@ -52,15 +52,17 @@ var isCircular = require('is-circular');
  * @example
  * var syslog = logging.log('syslog');
  *
- * var resource = {
- *   type: 'gce_instance',
- *   labels: {
- *     zone: 'global',
- *     instance_id: '3'
+ * var metadata = {
+ *   resource: {
+ *     type: 'gce_instance',
+ *     labels: {
+ *       zone: 'global',
+ *       instance_id: '3'
+ *     }
  *   }
  * };
  *
- * var entry = syslog.entry(resource, {
+ * var entry = syslog.entry(metadata, {
  *   delegate: 'my_username'
  * });
  *
@@ -80,13 +82,8 @@ var isCircular = require('is-circular');
  *   }
  * });
  */
-function Entry(resource, data) {
-  if (!data) {
-    this.data = resource;
-    return;
-  }
-
-  this.resource = resource;
+function Entry(metadata, data) {
+  this.metadata = metadata;
   this.data = data;
 }
 
@@ -106,12 +103,12 @@ Entry.fromApiResponse_ = function(entry) {
     data = common.GrpcService.structToObj_(data);
   }
 
-  var serializedEntry = extend(new Entry(entry.resource, data), entry);
+  var serializedEntry = new Entry(entry, data);
 
-  if (serializedEntry.timestamp) {
-    var ms = serializedEntry.timestamp.seconds * 1000;
-    ms += serializedEntry.timestamp.nanos / 1e6;
-    serializedEntry.timestamp = new Date(ms);
+  if (serializedEntry.metadata.timestamp) {
+    var ms = serializedEntry.metadata.timestamp.seconds * 1000;
+    ms += serializedEntry.metadata.timestamp.nanos / 1e6;
+    serializedEntry.metadata.timestamp = new Date(ms);
   }
 
   return serializedEntry;
@@ -127,30 +124,7 @@ Entry.prototype.toJSON = function() {
     throw new Error('The JSON data for this entry has a circular reference.');
   }
 
-  var entry = extend(true, {}, this);
-
-  var whitelist = [
-    'logName',
-    'resource',
-    'timestamp',
-    'severity',
-    'insertId',
-    'httpRequest',
-    'labels',
-    'operation'
-  ];
-
-  for (var prop in entry) {
-    if (whitelist.indexOf(prop) === -1) {
-      delete entry[prop];
-    }
-  }
-
-  if (is.string(this.resource)) {
-    entry.resource = {
-      type: this.resource
-    };
-  }
+  var entry = extend(true, {}, this.metadata);
 
   if (is.object(this.data)) {
     entry.jsonPayload = common.GrpcService.objToStruct_(this.data, {

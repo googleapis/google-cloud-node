@@ -123,7 +123,11 @@ describe('Log', function() {
       assert.deepEqual(
         Log.assignSeverityToEntries_(ENTRIES[0], SEVERITY),
         [
-          extend(true, {}, ENTRIES[0], { severity: SEVERITY })
+          extend(true, {}, ENTRIES[0], {
+            metadata: {
+              severity: SEVERITY
+            }
+          })
         ]
       );
     });
@@ -132,8 +136,16 @@ describe('Log', function() {
       assert.deepEqual(
         Log.assignSeverityToEntries_(ENTRIES, SEVERITY),
         [
-          extend(true, {}, ENTRIES[0], { severity: SEVERITY }),
-          extend(true, {}, ENTRIES[1], { severity: SEVERITY })
+          extend(true, {}, ENTRIES[0], {
+            metadata: {
+              severity: SEVERITY
+            }
+          }),
+          extend(true, {}, ENTRIES[1], {
+            metadata: {
+              severity: SEVERITY
+            }
+          })
         ]
       );
     });
@@ -174,28 +186,43 @@ describe('Log', function() {
 
   describe('entry', function() {
     it('should return an entry from Logging', function() {
-      var resource = {};
+      var metadata = {
+        val: true
+      };
       var data = {};
 
       var entryObject = {};
 
-      log.parent.entry = function(resource_, data_) {
-        assert.strictEqual(resource_, resource);
+      log.parent.entry = function(metadata_, data_) {
+        assert.deepEqual(metadata_, extend({}, metadata, {
+          logName: log.formattedName_
+        }));
         assert.strictEqual(data_, data);
         return entryObject;
       };
 
-      var entry = log.entry(resource, data);
+      var entry = log.entry(metadata, data);
       assert.strictEqual(entry, entryObject);
     });
 
-    it('should attach the log name to the entry', function() {
-      log.parent.entry = function() {
-        return {};
+    it('should attach the log name to the entry', function(done) {
+      log.parent.entry = function(metadata) {
+        assert.strictEqual(metadata.logName, log.formattedName_);
+        done();
       };
 
-      var entry = log.entry({}, {});
-      assert.strictEqual(entry.logName, log.formattedName_);
+      log.entry({}, {});
+    });
+
+    it('should assume one argument means data', function(done) {
+      var data = {};
+
+      log.parent.entry = function(metadata, data_) {
+        assert.strictEqual(data_, data);
+        done();
+      };
+
+      log.entry(data);
     });
   });
 

@@ -27,7 +27,7 @@ describe('Entry', function() {
   var Entry;
   var entry;
 
-  var RESOURCE = {};
+  var METADATA = {};
   var DATA = {};
 
   before(function() {
@@ -40,23 +40,18 @@ describe('Entry', function() {
 
   beforeEach(function() {
     extend(FakeGrpcService, GrpcService);
-    entry = new Entry(RESOURCE, DATA);
+    entry = new Entry(METADATA, DATA);
   });
 
   describe('instantiation', function() {
-    it('should treat resource as data if data is not provided', function() {
-      var entry = new Entry(DATA);
-      assert.strictEqual(entry.data, DATA);
-      assert.strictEqual(entry.resource, undefined);
-    });
-
-    it('should localize resource and data', function() {
-      assert.strictEqual(entry.resource, RESOURCE);
+    it('should localize metadata and data', function() {
+      assert.strictEqual(entry.metadata, METADATA);
       assert.strictEqual(entry.data, DATA);
     });
   });
 
   describe('fromApiResponse_', function() {
+    var RESOURCE = {};
     var entry;
     var date = new Date();
 
@@ -82,10 +77,10 @@ describe('Entry', function() {
 
     it('should create an Entry', function() {
       assert(entry instanceof Entry);
-      assert.strictEqual(entry.resource, RESOURCE);
+      assert.strictEqual(entry.metadata.resource, RESOURCE);
       assert.strictEqual(entry.data, DATA);
-      assert.strictEqual(entry.extraProperty, true);
-      assert.deepEqual(entry.timestamp, date);
+      assert.strictEqual(entry.metadata.extraProperty, true);
+      assert.deepEqual(entry.metadata.timestamp, date);
     });
 
     it('should extend the entry with proto data', function() {
@@ -123,52 +118,6 @@ describe('Entry', function() {
       assert.deepEqual(entryBefore, entryAfter);
     });
 
-    it('should only include correct properties', function() {
-      var propertiesToInclude = [
-        'logName',
-        'resource',
-        'timestamp',
-        'severity',
-        'insertId',
-        'httpRequest',
-        'labels',
-        'operation'
-      ];
-
-      var value = 'value';
-
-      propertiesToInclude.forEach(function(property) {
-        entry[property] = value;
-      });
-
-      entry.extraProperty = true;
-
-      var json = entry.toJSON();
-
-      assert(propertiesToInclude.every(function(property) {
-        if (property === 'resource') {
-          return json[property].type === value;
-        }
-
-        return json[property] === value;
-      }));
-
-      // Was removed for JSON representation...
-      assert.strictEqual(json.extraProperty, undefined);
-      // ...but still exists on the Entry.
-      assert.strictEqual(entry.extraProperty, true);
-    });
-
-    it('should convert a string resource to an object', function() {
-      entry.resource = 'resource-name';
-
-      var json = entry.toJSON();
-
-      assert.deepEqual(json.resource, {
-        type: entry.resource
-      });
-    });
-
     it('should convert data as a struct and assign to jsonPayload', function() {
       var input = {};
       var converted = {};
@@ -203,7 +152,7 @@ describe('Entry', function() {
 
     it('should convert a date', function() {
       var date = new Date();
-      entry.timestamp = date;
+      entry.metadata.timestamp = date;
 
       var json = entry.toJSON();
 

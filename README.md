@@ -1114,15 +1114,17 @@ loggingClient.createSink('my-new-sink', {
 // Write a critical entry to a log.
 var syslog = loggingClient.log('syslog');
 
-var resource = {
-  type: 'gce_instance',
-  labels: {
-    zone: 'global',
-    instance_id: '3'
+var metadata = {
+  resource: {
+    type: 'gce_instance',
+    labels: {
+      zone: 'global',
+      instance_id: '3'
+    }
   }
 };
 
-var entry = syslog.entry(resource, {
+var entry = syslog.entry(metadata, {
   delegate: process.env.user
 });
 

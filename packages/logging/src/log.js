@@ -101,8 +101,10 @@ util.inherits(Log, common.GrpcServiceObject);
  */
 Log.assignSeverityToEntries_ = function(entries, severity) {
   return arrify(entries).map(function(entry) {
-    return extend(new Entry(), entry, {
-      severity: severity
+    return extend(true, new Entry(), entry, {
+      metadata: {
+        severity: severity
+      }
     });
   });
 };
@@ -206,22 +208,24 @@ Log.prototype.emergency = function(entry, options, callback) {
  *
  * @resource [LogEntry JSON representation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry}
  *
- * @param {object=|string=} resource - See a
- *     [Monitored Resource](https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource).
+ * @param {object=} metadata - See a
+ *     [LogEntry Resource](https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/LogEntry).
  * @param {object|string} data - The data to use as the value for this log
  *     entry.
  * @return {module:logging/entry}
  *
  * @example
- * var resource = {
- *   type: 'gce_instance',
- *   labels: {
- *     zone: 'global',
- *     instance_id: '3'
+ * var metadata = {
+ *   resource: {
+ *     type: 'gce_instance',
+ *     labels: {
+ *       zone: 'global',
+ *       instance_id: '3'
+ *     }
  *   }
  * };
  *
- * var entry = log.entry(resource, {
+ * var entry = log.entry(metadata, {
  *   delegate: 'my_username'
  * });
  *
@@ -240,10 +244,17 @@ Log.prototype.emergency = function(entry, options, callback) {
  * //   }
  * // }
  */
-Log.prototype.entry = function(resource, data) {
-  var entryInstance = this.parent.entry(resource, data);
-  entryInstance.logName = this.formattedName_;
-  return entryInstance;
+Log.prototype.entry = function(metadata, data) {
+  if (!data) {
+    data = metadata;
+    metadata = {};
+  }
+
+  metadata = extend({}, metadata, {
+    logName: this.formattedName_
+  });
+
+  return this.parent.entry(metadata, data);
 };
 
 /**
