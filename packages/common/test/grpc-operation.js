@@ -47,7 +47,9 @@ var FakeGrpcServiceObject = createFake(GrpcServiceObject);
 var FakeGrpcService = createFake(GrpcService);
 
 describe('GrpcOperation', function() {
-  var FAKE_SERVICE = {};
+  var FAKE_SERVICE = {
+    Promise: Promise
+  };
   var OPERATION_ID = '/a/b/c/d';
 
   var GrpcOperation;
@@ -146,6 +148,45 @@ describe('GrpcOperation', function() {
       };
 
       grpcOperation.cancel();
+    });
+  });
+
+  describe('promise', function() {
+    beforeEach(function() {
+      grpcOperation.startPolling_ = util.noop;
+    });
+
+    it('should return an instance of the localized Promise', function() {
+      var FakePromise = grpcOperation.Promise = function() {};
+      var promise = grpcOperation.promise();
+
+      assert(promise instanceof FakePromise);
+    });
+
+    it('should reject the promise if an error occurs', function() {
+      var error = new Error('err');
+
+      setImmediate(function() {
+        grpcOperation.emit('error', error);
+      });
+
+      return grpcOperation.promise().then(function() {
+        throw new Error('Promise should have been rejected.');
+      }, function(err) {
+        assert.strictEqual(err, error);
+      });
+    });
+
+    it('should resolve the promise on complete', function() {
+      var metadata = {};
+
+      setImmediate(function() {
+        grpcOperation.emit('complete', metadata);
+      });
+
+      return grpcOperation.promise().then(function(data) {
+        assert.deepEqual(data, [metadata]);
+      });
     });
   });
 

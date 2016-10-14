@@ -51,7 +51,9 @@ describe('Operation', function() {
   var Operation;
   var operation;
 
-  var SCOPE = {};
+  var SCOPE = {
+    Promise: Promise
+  };
   var OPERATION_NAME = 'operation-name';
 
   before(function() {
@@ -199,6 +201,45 @@ describe('Operation', function() {
         assert.doesNotThrow(function() {
           operation.getMetadata();
         });
+      });
+    });
+  });
+
+  describe('promise', function() {
+    beforeEach(function() {
+      operation.startPolling_ = util.noop;
+    });
+
+    it('should return an instance of the localized Promise', function() {
+      var FakePromise = operation.Promise = function() {};
+      var promise = operation.promise();
+
+      assert(promise instanceof FakePromise);
+    });
+
+    it('should reject the promise if an error occurs', function() {
+      var error = new Error('err');
+
+      setImmediate(function() {
+        operation.emit('error', error);
+      });
+
+      return operation.promise().then(function() {
+        throw new Error('Promise should have been rejected.');
+      }, function(err) {
+        assert.strictEqual(err, error);
+      });
+    });
+
+    it('should resolve the promise on complete', function() {
+      var metadata = {};
+
+      setImmediate(function() {
+        operation.emit('complete', metadata);
+      });
+
+      return operation.promise().then(function(data) {
+        assert.deepEqual(data, [metadata]);
       });
     });
   });

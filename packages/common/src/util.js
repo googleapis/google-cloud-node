@@ -654,10 +654,14 @@ function promisify(originalMethod) {
       return originalMethod.apply(context, args);
     }
 
+    var PromiseCtor = Promise;
+
     // Because dedupe will likely create a single install of
     // @google-cloud/common to be shared amongst all modules, we need to
     // localize it at the Service level.
-    var PromiseCtor = context.Promise || Promise;
+    if (context && context.Promise) {
+      PromiseCtor = context.Promise;
+    }
 
     return new PromiseCtor(function(resolve, reject) {
       args.push(function() {

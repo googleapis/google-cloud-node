@@ -50,7 +50,8 @@ var fakeUtil = Object.keys(util).reduce(function(fakeUtil, methodName) {
 
 describe('BigQuery/Job', function() {
   var BIGQUERY = {
-    projectId: 'my-project'
+    projectId: 'my-project',
+    Promise: Promise
   };
   var JOB_ID = 'job_XYrk_3z';
   var Job;
@@ -271,6 +272,45 @@ describe('BigQuery/Job', function() {
       };
 
       job.getQueryResultsStream().done();
+    });
+  });
+
+  describe('promise', function() {
+    beforeEach(function() {
+      job.startPolling_ = util.noop;
+    });
+
+    it('should return an instance of the localized Promise', function() {
+      var FakePromise = job.Promise = function() {};
+      var promise = job.promise();
+
+      assert(promise instanceof FakePromise);
+    });
+
+    it('should reject the promise if an error occurs', function() {
+      var error = new Error('err');
+
+      setImmediate(function() {
+        job.emit('error', error);
+      });
+
+      return job.promise().then(function() {
+        throw new Error('Promise should have been rejected.');
+      }, function(err) {
+        assert.strictEqual(err, error);
+      });
+    });
+
+    it('should resolve the promise on complete', function() {
+      var metadata = {};
+
+      setImmediate(function() {
+        job.emit('complete', metadata);
+      });
+
+      return job.promise().then(function(data) {
+        assert.deepEqual(data, [metadata]);
+      });
     });
   });
 

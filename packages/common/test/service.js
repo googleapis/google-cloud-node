@@ -150,15 +150,15 @@ describe('Service', function() {
       assert.strictEqual(service.projectIdRequired, true);
     });
 
-    it('should call setPromiseOverride when promise is set', function(done) {
+    it('should localize the Promise object', function() {
       var FakePromise = function() {};
+      var service = new Service({}, { promise: FakePromise });
 
-      util.setPromiseOverride = function(override) {
-        assert.strictEqual(override, FakePromise);
-        done();
-      };
+      assert.strictEqual(service.Promise, FakePromise);
+    });
 
-      new Service({}, { promise: FakePromise });
+    it('should localize the native Promise object by default', function() {
+      assert.strictEqual(service.Promise, global.Promise);
     });
   });
 
