@@ -59,6 +59,15 @@ function Firewall(compute, name) {
      *   // `operation` is an Operation object that can be used to check the
      *   // status of the request.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * firewall.create(config).then(function(data) {
+     *   var firewall = data[0];
+     *   var operation = data[1];
+     *   var apiResponse = data[2];
+     * });
      */
     create: true,
 
@@ -72,6 +81,13 @@ function Firewall(compute, name) {
      *
      * @example
      * firewall.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * firewall.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -91,6 +107,14 @@ function Firewall(compute, name) {
      * firewall.get(function(err, firewall, apiResponse) {
      *   // `firewall` is a Firewall object.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * firewall.get().then(function(data) {
+     *   var firewall = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     get: true,
 
@@ -108,6 +132,14 @@ function Firewall(compute, name) {
      *
      * @example
      * firewall.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * firewall.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true
   };
@@ -142,6 +174,14 @@ util.inherits(Firewall, common.ServiceObject);
  * firewall.delete(function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * firewall.delete().then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 Firewall.prototype.delete = function(callback) {
@@ -184,6 +224,14 @@ Firewall.prototype.delete = function(callback) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * firewall.setMetadata(metadata).then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Firewall.prototype.setMetadata = function(metadata, callback) {
   var compute = this.compute;
@@ -210,5 +258,12 @@ Firewall.prototype.setMetadata = function(metadata, callback) {
     callback(null, operation, resp);
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Firewall);
 
 module.exports = Firewall;

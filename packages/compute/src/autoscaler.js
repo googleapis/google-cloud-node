@@ -50,18 +50,31 @@ function Autoscaler(zone, name) {
      * @param {object} config - See {module:compute/zone#createAutoscaler}.
      *
      * @example
-     * autoscaler.create({
+     * var config = {
      *   coolDown: 30,
      *   cpu: 80,
      *   loadBalance: 40,
      *   maxReplicas: 5,
      *   minReplicas: 0,
      *   target: 'instance-group-manager-1'
-     * }, function(err, autoscaler, operation, apiResponse) {
+     * };
+     *
+     * var callback = function(err, autoscaler, operation, apiResponse) {
      *   // `autoscaler` is an Autoscaler object.
      *
      *   // `operation` is an Operation object that can be used to check the
      *   // of the request.
+     * };
+     *
+     * autoscaler.create(config, callback);
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * autoscaler.create(config).then(function(data) {
+     *   var autoscaler = data[0];
+     *   var operation = data[1];
+     *   var apiResponse = data[2];
      * });
      */
     create: true,
@@ -76,6 +89,13 @@ function Autoscaler(zone, name) {
      *
      * @example
      * autoscaler.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * autoscaler.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -95,6 +115,14 @@ function Autoscaler(zone, name) {
      * autoscaler.get(function(err, autoscaler, apiResponse) {
      *   // `autoscaler` is an Autoscaler object.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * autoscaler.get().then(function(data) {
+     *   var autoscaler = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     get: true,
 
@@ -112,6 +140,14 @@ function Autoscaler(zone, name) {
      *
      * @example
      * autoscaler.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * autoscaler.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true
   };
@@ -145,6 +181,14 @@ util.inherits(Autoscaler, common.ServiceObject);
  * autoscaler.delete(function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * autoscaler.delete().then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 Autoscaler.prototype.delete = function(callback) {
@@ -187,6 +231,14 @@ Autoscaler.prototype.delete = function(callback) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * autoscaler.setMetadata(metadata).then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Autoscaler.prototype.setMetadata = function(metadata, callback) {
   var zone = this.zone;
@@ -216,5 +268,12 @@ Autoscaler.prototype.setMetadata = function(metadata, callback) {
     callback(null, operation, resp);
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Autoscaler);
 
 module.exports = Autoscaler;

@@ -27,6 +27,7 @@ var stream = require('stream');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 
+var promisified = false;
 var makeWritableStreamOverride;
 var isCustomTypeOverride;
 var fakeUtil = extend({}, util, {
@@ -36,6 +37,11 @@ var fakeUtil = extend({}, util, {
   makeWritableStream: function() {
     var args = arguments;
     (makeWritableStreamOverride || util.makeWritableStream).apply(null, args);
+  },
+  promisifyAll: function(Class) {
+    if (Class.name === 'Table') {
+      promisified = true;
+    }
   }
 });
 
@@ -138,6 +144,10 @@ describe('BigQuery/Table', function() {
 
     it('should streamify the correct methods', function() {
       assert.strictEqual(table.createReadStream, 'getRows');
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should inherit from ServiceObject', function(done) {

@@ -23,6 +23,18 @@ var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class, options) {
+    if (Class.name !== 'Topic') {
+      return;
+    }
+
+    promisified = true;
+    assert.deepEqual(options.exclude, ['subscription']);
+  }
+});
+
 function FakeGrpcServiceObject() {
   this.calledWith_ = arguments;
   GrpcServiceObject.apply(this, arguments);
@@ -50,7 +62,8 @@ describe('Topic', function() {
     Topic = proxyquire('../src/topic.js', {
       './iam.js': FakeIAM,
       '@google-cloud/common': {
-        GrpcServiceObject: FakeGrpcServiceObject
+        GrpcServiceObject: FakeGrpcServiceObject,
+        util: fakeUtil
       }
     });
   });

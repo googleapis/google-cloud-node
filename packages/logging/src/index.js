@@ -130,6 +130,14 @@ util.inherits(Logging, common.GrpcService);
  * }
  *
  * logging.createSink('new-sink-name', config, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * logging.createSink('new-sink-name', config).then(function(data) {
+ *   var sink = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Logging.prototype.createSink = function(name, config, callback) {
   // jscs:enable maximumLineLength
@@ -271,6 +279,13 @@ Logging.prototype.entry = function(resource, data) {
  * logging.getEntries({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * logging.getEntries().then(function(data) {
+ *   var entries = data[0];
+ * });
  */
 Logging.prototype.getEntries = function(options, callback) {
   if (is.fn(options)) {
@@ -357,6 +372,13 @@ Logging.prototype.getEntriesStream = common.paginator.streamify('getEntries');
  * @example
  * logging.getSinks(function(err, sinks) {
  *   // sinks is an array of Sink objects.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * logging.getSinks().then(function(data) {
+ *   var sinks = data[0];
  * });
  */
 Logging.prototype.getSinks = function(options, callback) {
@@ -576,6 +598,15 @@ Logging.prototype.setAclForTopic_ = function(name, config, callback) {
  * These methods can be auto-paginated.
  */
 common.paginator.extend(Logging, ['getEntries', 'getSinks']);
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Logging, {
+  exclude: ['entry', 'log', 'sink']
+});
 
 Logging.Entry = Entry;
 Logging.Log = Log;

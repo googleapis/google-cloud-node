@@ -52,6 +52,7 @@ var fakePaginator = {
   }
 };
 
+var promisified = true;
 var makeAuthenticatedRequestFactoryOverride;
 var fakeUtil = extend({}, util, {
   makeAuthenticatedRequestFactory: function() {
@@ -60,6 +61,14 @@ var fakeUtil = extend({}, util, {
     }
 
     return util.makeAuthenticatedRequestFactory.apply(null, arguments);
+  },
+  promisifyAll: function(Class, options) {
+    if (Class.name !== 'Resource') {
+      return;
+    }
+
+    promisified = true;
+    assert.deepEqual(options.exclude, ['project']);
   }
 });
 
@@ -95,6 +104,10 @@ describe('Resource', function() {
 
     it('should streamify the correct methods', function() {
       assert.strictEqual(resource.getProjectsStream, 'getProjects');
+    });
+
+    it('should promisify all tlhe things', function() {
+      assert(promisified);
     });
 
     it('should normalize the arguments', function() {

@@ -25,6 +25,18 @@ var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class, options) {
+    if (Class.name !== 'Dataset') {
+      return;
+    }
+
+    promisified = true;
+    assert.deepEqual(options.exclude, ['table']);
+  }
+});
+
 var extended = false;
 var fakePaginator = {
   extend: function(Class, methods) {
@@ -63,7 +75,8 @@ describe('BigQuery/Dataset', function() {
     Dataset = proxyquire('../src/dataset.js', {
       '@google-cloud/common': {
         paginator: fakePaginator,
-        ServiceObject: FakeServiceObject
+        ServiceObject: FakeServiceObject,
+        util: fakeUtil
       }
     });
     Table = require('../src/table.js');
@@ -80,6 +93,10 @@ describe('BigQuery/Dataset', function() {
 
     it('should streamify the correct methods', function() {
       assert.strictEqual(ds.getTablesStream, 'getTables');
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should inherit from ServiceObject', function(done) {

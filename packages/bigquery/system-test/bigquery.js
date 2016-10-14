@@ -97,6 +97,49 @@ describe('BigQuery', function() {
     });
   });
 
+  it('should return a promise', function() {
+    return bigquery.getDatasets().then(function(data) {
+      var datasets = data[0];
+
+      assert(datasets.length > 0);
+      assert(datasets[0] instanceof Dataset);
+    });
+  });
+
+  it('should allow limiting API calls via promises', function() {
+    var maxApiCalls = 1;
+    var numRequestsMade = 0;
+
+    var bigquery = require('../')(env);
+
+    bigquery.interceptors.push({
+      request: function(reqOpts) {
+        numRequestsMade++;
+        return reqOpts;
+      }
+    });
+
+    return bigquery.getDatasets({
+      maxApiCalls: maxApiCalls
+    }).then(function() {
+      assert.strictEqual(numRequestsMade, maxApiCalls);
+    });
+  });
+
+  it('should allow for manual pagination in promise mode', function() {
+    return bigquery.getDatasets({
+      autoPaginate: false
+    }).then(function(data) {
+      var datasets = data[0];
+      var nextQuery = data[1];
+      var apiResponse = data[2];
+
+      assert(datasets[0] instanceof Dataset);
+      assert.strictEqual(nextQuery, null);
+      assert(apiResponse);
+    });
+  });
+
   it('should list datasets as a stream', function(done) {
     var datasetEmitted = false;
 

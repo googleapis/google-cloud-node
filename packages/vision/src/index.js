@@ -113,6 +113,14 @@ Vision.likelihood = {
  * vision.annotate(annotateImageReq, function(err, annotations, apiResponse) {
  *   // annotations = apiResponse.responses
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vision.annotate(annotateImageReq).then(function(data) {
+ *   var annotations = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Vision.prototype.annotate = function(requests, callback) {
   this.request({
@@ -262,6 +270,14 @@ Vision.prototype.annotate = function(requests, callback) {
  *   if (detections.faces.errors.length > 0) {
  *     // Errors occurred while trying to use this image for a face annotation.
  *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vision.detect('image.jpg', types).then(function(data) {
+ *   var detections = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 Vision.prototype.detect = function(images, options, callback) {
@@ -869,6 +885,14 @@ Vision.prototype.detect = function(images, options, callback) {
  *     top: 'MIDPOINT_BETWEEN_EYES'
  *   }
  * };
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vision.detectFaces('image.jpg').then(function(data) {
+ *   var faces = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Vision.prototype.detectFaces = function(images, options, callback) {
   if (is.fn(options)) {
@@ -924,6 +948,14 @@ Vision.prototype.detectFaces = function(images, options, callback) {
  *   //   },
  *   //   // ...
  *   // ]
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vision.detectLabels('image.jpg').then(function(data) {
+ *   var labels = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 Vision.prototype.detectLabels = function(images, options, callback) {
@@ -997,6 +1029,14 @@ Vision.prototype.detectLabels = function(images, options, callback) {
  *   //   }
  *   // ]
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vision.detectLandmarks('image.jpg').then(function(data) {
+ *   var landmarks = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Vision.prototype.detectLandmarks = function(images, options, callback) {
   if (is.fn(options)) {
@@ -1060,6 +1100,14 @@ Vision.prototype.detectLandmarks = function(images, options, callback) {
  *   //     ]
  *   //   }
  *   // ]
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vision.detectLogos('image.jpg').then(function(data) {
+ *   var logos = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 Vision.prototype.detectLogos = function(images, options, callback) {
@@ -1134,6 +1182,14 @@ Vision.prototype.detectLogos = function(images, options, callback) {
  *   //   ]
  *   // }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vision.detectProperties('image.jpg').then(function(data) {
+ *   var props = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Vision.prototype.detectProperties = function(images, options, callback) {
   if (is.fn(options)) {
@@ -1165,6 +1221,14 @@ Vision.prototype.detectProperties = function(images, options, callback) {
  *   //   spoof: false,
  *   //   violence: true
  *   // }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vision.detectSafeSearch('image.jpg').then(function(data) {
+ *   var safeSearch = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 Vision.prototype.detectSafeSearch = function(images, options, callback) {
@@ -1225,6 +1289,14 @@ Vision.prototype.detectSafeSearch = function(images, options, callback) {
  *   //     ]
  *   //   }
  *   // ]
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * vision.detectText('image.jpg').then(function(data) {
+ *   var text = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 Vision.prototype.detectText = function(images, options, callback) {
@@ -1546,6 +1618,13 @@ Vision.formatSafeSearchAnnotation_ = function(ssAnnotation, options) {
 
   return ssAnnotation;
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Vision);
 
 module.exports = Vision;
 module.exports.v1 = require('./v1');

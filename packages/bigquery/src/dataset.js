@@ -57,6 +57,14 @@ function Dataset(bigQuery, id) {
      *     // The dataset was created successfully.
      *   }
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * dataset.create().then(function(data) {
+     *   var dataset = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     create: true,
 
@@ -70,6 +78,13 @@ function Dataset(bigQuery, id) {
      *
      * @example
      * dataset.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * dataset.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -91,6 +106,14 @@ function Dataset(bigQuery, id) {
      *     // `dataset.metadata` has been populated.
      *   }
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * dataset.get().then(function(data) {
+     *   var dataset = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     get: true,
 
@@ -107,6 +130,14 @@ function Dataset(bigQuery, id) {
      *
      * @example
      * dataset.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * dataset.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true,
 
@@ -127,6 +158,13 @@ function Dataset(bigQuery, id) {
      * };
      *
      * dataset.setMetadata(metadata, function(err, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * dataset.setMetadata(metadata).then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     setMetadata: true
   };
@@ -194,6 +232,14 @@ Dataset.prototype.createQueryStream = function(options) {
  * };
  *
  * dataset.createTable(tableId, options, function(err, table, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * dataset.createTable(tableId, options).then(function(data) {
+ *   var table = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Dataset.prototype.createTable = function(id, options, callback) {
   var self = this;
@@ -270,6 +316,13 @@ Dataset.prototype.createTable = function(id, options, callback) {
  * // Delete the dataset and any tables it contains.
  * //-
  * dataset.delete({ force: true }, function(err, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * dataset.delete().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Dataset.prototype.delete = function(options, callback) {
   if (!callback) {
@@ -309,6 +362,13 @@ Dataset.prototype.delete = function(options, callback) {
  * @example
  * dataset.getTables(function(err, tables, nextQuery, apiResponse) {
  *   // If `nextQuery` is non-null, there are more results to fetch.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * dataset.getTables().then(function(data) {
+ *   var tables = data[0];
  * });
  */
 Dataset.prototype.getTables = function(query, callback) {
@@ -413,5 +473,14 @@ Dataset.prototype.table = function(id) {
  * These methods can be auto-paginated.
  */
 common.paginator.extend(Dataset, ['getTables']);
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Dataset, {
+  exclude: ['table']
+});
 
 module.exports = Dataset;

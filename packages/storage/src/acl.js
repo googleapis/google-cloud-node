@@ -21,6 +21,7 @@
 'use strict';
 
 var arrify = require('arrify');
+var common = require('@google-cloud/common');
 var is = require('is');
 var util = require('util');
 
@@ -107,6 +108,14 @@ function Acl(options) {
  *   entity: 'user-email@example.com',
  *   role: gcs.acl.OWNER_ROLE
  * }, function(err, aclObject) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * myFile.acl.owners.addUser('email@example.com').then(function(data) {
+ *   var aclObject = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Acl.prototype.owners = {};
 
@@ -144,6 +153,14 @@ Acl.prototype.owners = {};
  *   entity: 'user-email@example.com',
  *   role: gcs.acl.READER_ROLE
  * }, function(err, aclObject) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * myFile.acl.readers.addUser('email@example.com').then(function(data) {
+ *   var aclObject = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Acl.prototype.readers = {};
 
@@ -181,6 +198,14 @@ Acl.prototype.readers = {};
  *   entity: 'user-email@example.com',
  *   role: gcs.acl.WRITER_ROLE
  * }, function(err, aclObject) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * myFile.acl.writers.addUser('email@example.com').then(function(data) {
+ *   var aclObject = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Acl.prototype.writers = {};
 
@@ -204,10 +229,12 @@ util.inherits(Acl, AclRoleAccessorMethods);
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * myBucket.acl.add({
+ * var options = {
  *   entity: 'user-useremail@example.com',
  *   role: gcs.acl.OWNER_ROLE
- * }, function(err, aclObject, apiResponse) {});
+ * };
+ *
+ * myBucket.acl.add(options, function(err, aclObject, apiResponse) {});
  *
  * //-
  * // For file ACL operations, you can also specify a `generation` property.
@@ -219,6 +246,14 @@ util.inherits(Acl, AclRoleAccessorMethods);
  *   role: gcs.acl.OWNER_ROLE,
  *   generation: 1
  * }, function(err, aclObject, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * myBucket.acl.add(options).then(function(data) {
+ *   var aclObject = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Acl.prototype.add = function(options, callback) {
   var self = this;
@@ -273,6 +308,13 @@ Acl.prototype.add = function(options, callback) {
  *   entity: 'user-useremail@example.com',
  *   generation: 1
  * }, function(err, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * myFile.acl.delete().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Acl.prototype.delete = function(options, callback) {
   var query = {};
@@ -333,6 +375,14 @@ Acl.prototype.delete = function(options, callback) {
  *   entity: 'user-useremail@example.com',
  *   generation: 1
  * }, function(err, aclObject, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * myBucket.acl.get().then(function(data) {
+ *   var aclObject = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Acl.prototype.get = function(options, callback) {
   var self = this;
@@ -389,10 +439,12 @@ Acl.prototype.get = function(options, callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * myBucket.acl.update({
+ * var options = {
  *   entity: 'user-useremail@example.com',
  *   role: gcs.acl.WRITER_ROLE
- * }, function(err, aclObject, apiResponse) {});
+ * };
+ *
+ * myBucket.acl.update(options, function(err, aclObject, apiResponse) {});
  *
  * //-
  * // For file ACL operations, you can also specify a `generation` property.
@@ -402,6 +454,14 @@ Acl.prototype.get = function(options, callback) {
  *   role: gcs.acl.WRITER_ROLE,
  *   generation: 1
  * }, function(err, aclObject, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * myFile.acl.update(options).then(function(data) {
+ *   var aclObject = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Acl.prototype.update = function(options, callback) {
   var self = this;
@@ -462,6 +522,13 @@ Acl.prototype.request = function(reqOpts, callback) {
   reqOpts.uri = this.pathPrefix + reqOpts.uri;
   this.request_(reqOpts, callback);
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Acl);
 
 module.exports = Acl;
 
@@ -539,7 +606,7 @@ AclRoleAccessorMethods.prototype._assignAccessMethods = function(role) {
           callback = entityId;
         }
 
-        self[accessMethod]({
+        return self[accessMethod]({
           entity: apiEntity,
           role: role
         }, callback);

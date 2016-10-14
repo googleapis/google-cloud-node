@@ -99,6 +99,14 @@ util.inherits(IAM, common.GrpcService);
  * topic.iam.getPolicy(function(err, policy, apiResponse) {});
  *
  * subscription.iam.getPolicy(function(err, policy, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * topic.iam.getPolicy().then(function(data) {
+ *   var policy = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 IAM.prototype.getPolicy = function(callback) {
   var protoOpts = {
@@ -144,6 +152,14 @@ IAM.prototype.getPolicy = function(callback) {
  * topic.iam.setPolicy(myPolicy, function(err, policy, apiResponse) {});
  *
  * subscription.iam.setPolicy(myPolicy, function(err, policy, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * topic.iam.setPolicy(myPolicy).then(function(data) {
+ *   var policy = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 IAM.prototype.setPolicy = function(policy, callback) {
   if (!is.object(policy)) {
@@ -209,6 +225,14 @@ IAM.prototype.setPolicy = function(policy, callback) {
  *   //   "pubsub.subscriptions.update": false
  *   // }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * topic.iam.testPermissions(test).then(function(data) {
+ *   var permissions = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 IAM.prototype.testPermissions = function(permissions, callback) {
   if (!is.array(permissions) && !is.string(permissions)) {
@@ -243,5 +267,12 @@ IAM.prototype.testPermissions = function(permissions, callback) {
     callback(null, permissionsHash, resp);
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(IAM);
 
 module.exports = IAM;

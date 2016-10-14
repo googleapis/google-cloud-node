@@ -43,6 +43,7 @@ var fakePaginator = {
 };
 
 var isCustomTypeOverride;
+var promisifed = false;
 var fakeUtil = extend({}, util, {
   isCustomType: function() {
     if (isCustomTypeOverride) {
@@ -50,6 +51,14 @@ var fakeUtil = extend({}, util, {
     }
 
     return false;
+  },
+  promisifyAll: function(Class, options) {
+    if (Class.name !== 'Logging') {
+      return;
+    }
+
+    promisifed = true;
+    assert.deepEqual(options.exclude, ['entry', 'log', 'sink']);
   }
 });
 
@@ -105,6 +114,10 @@ describe('Logging', function() {
   describe('instantiation', function() {
     it('should extend the correct methods', function() {
       assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisifed);
     });
 
     it('should streamify the correct methods', function() {

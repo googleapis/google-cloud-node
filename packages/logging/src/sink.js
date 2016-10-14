@@ -67,6 +67,14 @@ function Sink(logging, name) {
      *     // The sink was created successfully.
      *   }
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * sink.create(config).then(function(data) {
+     *   var sink = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     create: true,
 
@@ -85,6 +93,13 @@ function Sink(logging, name) {
      *   if (!err) {
      *     // The log was deleted.
      *   }
+     * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * sink.delete().then(function(data) {
+     *   var apiResponse = data[0];
      * });
      */
     delete: {
@@ -111,6 +126,14 @@ function Sink(logging, name) {
      *
      * @example
      * sink.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * sink.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: {
       protoOpts: {
@@ -148,7 +171,16 @@ util.inherits(Sink, common.GrpcServiceObject);
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * sink.setFilter('metadata.severity = ALERT', function(err, apiResponse) {});
+ * var filter = 'metadata.severity = ALERT';
+ *
+ * sink.setFilter(filter, function(err, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * sink.setFilter(filter).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Sink.prototype.setFilter = function(filter, callback) {
   this.setMetadata({
@@ -175,6 +207,13 @@ Sink.prototype.setFilter = function(filter, callback) {
  * };
  *
  * sink.setMetadata(metadata, function(err, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * sink.setMetadata(metadata).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Sink.prototype.setMetadata = function(metadata, callback) {
   var self = this;
@@ -209,5 +248,12 @@ Sink.prototype.setMetadata = function(metadata, callback) {
     });
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Sink);
 
 module.exports = Sink;

@@ -18,13 +18,23 @@
 
 var assert = require('assert');
 var extend = require('extend');
+var proxyquire = require('proxyquire');
 
-var ServiceObject = require('../src/service-object.js');
 var util = require('../src/util.js');
 
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class) {
+    if (Class.name === 'ServiceObject') {
+      promisified = true;
+    }
+  }
+});
+
 describe('ServiceObject', function() {
+  var ServiceObject;
   var serviceObject;
-  var originalRequest = ServiceObject.prototype.request;
+  var originalRequest;
 
   var CONFIG = {
     baseUrl: 'base-url',
@@ -33,12 +43,24 @@ describe('ServiceObject', function() {
     createMethod: util.noop
   };
 
+  before(function() {
+    ServiceObject = proxyquire('../src/service-object.js', {
+      './util.js': fakeUtil
+    });
+
+    originalRequest = ServiceObject.prototype.request;
+  });
+
   beforeEach(function() {
     ServiceObject.prototype.request = originalRequest;
     serviceObject = new ServiceObject(CONFIG);
   });
 
   describe('instantiation', function() {
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
+
     it('should create an empty metadata object', function() {
       assert.deepEqual(serviceObject.metadata, {});
     });
@@ -580,7 +602,7 @@ describe('ServiceObject', function() {
     });
   });
 
-  describe('request', function() {
+  describe('request_', function() {
     var reqOpts;
 
     beforeEach(function() {
@@ -603,7 +625,7 @@ describe('ServiceObject', function() {
         callback(); // done()
       };
 
-      serviceObject.request(reqOpts, done);
+      serviceObject.request_(reqOpts, done);
     });
 
     it('should not require a service object ID', function(done) {
@@ -619,7 +641,7 @@ describe('ServiceObject', function() {
 
       delete serviceObject.id;
 
-      serviceObject.request(reqOpts, assert.ifError);
+      serviceObject.request_(reqOpts, assert.ifError);
     });
 
     it('should support absolute uris', function(done) {
@@ -630,7 +652,7 @@ describe('ServiceObject', function() {
         done();
       };
 
-      serviceObject.request({ uri: expectedUri }, assert.ifError);
+      serviceObject.request_({ uri: expectedUri }, assert.ifError);
     });
 
     it('should remove empty components', function(done) {
@@ -649,7 +671,7 @@ describe('ServiceObject', function() {
         done();
       };
 
-      serviceObject.request(reqOpts, assert.ifError);
+      serviceObject.request_(reqOpts, assert.ifError);
     });
 
     it('should trim slashes', function(done) {
@@ -668,7 +690,7 @@ describe('ServiceObject', function() {
         done();
       };
 
-      serviceObject.request(reqOpts, assert.ifError);
+      serviceObject.request_(reqOpts, assert.ifError);
     });
 
     it('should extend interceptors from child ServiceObjects', function(done) {
@@ -700,7 +722,7 @@ describe('ServiceObject', function() {
         done();
       };
 
-      child.request({ uri: '' }, assert.ifError);
+      child.request_({ uri: '' }, assert.ifError);
     });
 
     it('should pass a clone of the interceptors', function(done) {
@@ -718,7 +740,63 @@ describe('ServiceObject', function() {
         done();
       };
 
-      serviceObject.request({ uri: '' }, assert.ifError);
+      serviceObject.request_({ uri: '' }, assert.ifError);
+    });
+  });
+
+  describe('request', function() {
+    var request_;
+
+    before(function() {
+      request_ = ServiceObject.prototype.request_;
+    });
+
+    after(function() {
+      ServiceObject.prototype.request_ = request_;
+    });
+
+    it('should call through to request_', function(done) {
+      var fakeOptions = {};
+
+      ServiceObject.prototype.request_ = function(reqOpts, callback) {
+        assert.strictEqual(reqOpts, fakeOptions);
+        callback();
+      };
+
+      serviceObject.request_ = function() {
+        done(new Error('Should call to the prototype directly.'));
+      };
+
+      serviceObject.request(fakeOptions, done);
+    });
+  });
+
+  describe('requestStream', function() {
+    var request_;
+
+    before(function() {
+      request_ = ServiceObject.prototype.request_;
+    });
+
+    after(function() {
+      ServiceObject.prototype.request_ = request_;
+    });
+
+    it('should call through to request_', function() {
+      var fakeOptions = {};
+      var fakeStream = {};
+
+      ServiceObject.prototype.request_ = function(reqOpts) {
+        assert.strictEqual(reqOpts, fakeOptions);
+        return fakeStream;
+      };
+
+      serviceObject.request_ = function() {
+        throw new Error('Should call to the prototype directly.');
+      };
+
+      var stream = serviceObject.requestStream(fakeOptions);
+      assert.strictEqual(stream, fakeStream);
     });
   });
 });

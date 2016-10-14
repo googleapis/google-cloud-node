@@ -66,6 +66,15 @@ function Subnetwork(region, name) {
      * }
      *
      * subnetwork.create(config, callback);
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * subnetwork.create(config).then(function(data) {
+     *   var subnetwork = data[0];
+     *   var operation = data[1];
+     *   var apiResponse = data[2];
+     * });
      */
     create: true,
 
@@ -79,6 +88,13 @@ function Subnetwork(region, name) {
      *
      * @example
      * subnetwork.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * subnetwork.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -98,6 +114,14 @@ function Subnetwork(region, name) {
      * subnetwork.get(function(err, subnetwork, apiResponse) {
      *   // `subnetwork` is a Subnetwork object.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * subnetwork.get().then(function(data) {
+     *   var subnetwork = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     get: true,
 
@@ -115,6 +139,14 @@ function Subnetwork(region, name) {
      *
      * @example
      * subnetwork.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * subnetwork.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true
   };
@@ -146,6 +178,14 @@ util.inherits(Subnetwork, common.ServiceObject);
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * subnetwork.delete().then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Subnetwork.prototype.delete = function(callback) {
   callback = callback || common.util.noop;
@@ -167,5 +207,12 @@ Subnetwork.prototype.delete = function(callback) {
     callback(null, operation, resp);
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Subnetwork);
 
 module.exports = Subnetwork;

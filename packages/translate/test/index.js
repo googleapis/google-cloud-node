@@ -22,6 +22,7 @@ var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
 var makeRequestOverride;
+var promisified = false;
 var fakeUtil = extend({}, util, {
   makeRequest: function() {
     if (makeRequestOverride) {
@@ -29,6 +30,11 @@ var fakeUtil = extend({}, util, {
     }
 
     return util.makeRequest.apply(null, arguments);
+  },
+  promisifyAll: function(Class) {
+    if (Class.name === 'Translate') {
+      promisified = true;
+    }
   }
 });
 
@@ -55,6 +61,10 @@ describe('Translate', function() {
   });
 
   describe('instantiation', function() {
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
+
     it('should normalize the arguments', function() {
       var normalizeArguments = fakeUtil.normalizeArguments;
       var normalizeArgumentsCalled = false;

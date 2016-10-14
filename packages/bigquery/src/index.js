@@ -90,6 +90,14 @@ util.inherits(BigQuery, common.Service);
  *
  * @example
  * bigquery.createDataset('my-dataset', function(err, dataset, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bigquery.createDataset('my-dataset').then(function(data) {
+ *   var dataset = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 BigQuery.prototype.createDataset = function(id, options, callback) {
   var that = this;
@@ -203,6 +211,11 @@ BigQuery.prototype.dataset = function(id) {
  * bigquery.getDatasets({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bigquery.getDatasets().then(function(datasets) {});
  */
 BigQuery.prototype.getDatasets = function(query, callback) {
   var that = this;
@@ -317,6 +330,13 @@ BigQuery.prototype.getDatasetsStream =
  * bigquery.getJobs({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bigquery.getJobs().then(function(data) {
+ *   var jobs = data[0];
+ * });
  */
 BigQuery.prototype.getJobs = function(options, callback) {
   var that = this;
@@ -443,6 +463,13 @@ BigQuery.prototype.job = function(id) {
  *   query: query,
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bigquery.query(query).then(function(data) {
+ *   var rows = data[0];
+ * });
  */
 BigQuery.prototype.query = function(options, callback) {
   var self = this;
@@ -558,6 +585,16 @@ BigQuery.prototype.query = function(options, callback) {
  *     job.getQueryResults(function(err, rows, apiResponse) {});
  *   }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bigquery.startQuery(query).then(function(data) {
+ *   var job = data[0];
+ *   var apiResponse = data[1];
+ *
+ *   return job.getQueryResults();
+ * });
  */
 BigQuery.prototype.startQuery = function(options, callback) {
   var that = this;
@@ -616,6 +653,15 @@ BigQuery.prototype.startQuery = function(options, callback) {
  * These methods can be auto-paginated.
  */
 common.paginator.extend(BigQuery, ['getDatasets', 'getJobs', 'query']);
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(BigQuery, {
+  exclude: ['dataset', 'job']
+});
 
 BigQuery.Dataset = Dataset;
 BigQuery.Job = Job;

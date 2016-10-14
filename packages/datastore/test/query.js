@@ -18,13 +18,12 @@
 
 var assert = require('assert');
 
-var Query = require('../src/query.js');
-
 describe('Query', function() {
   var SCOPE = {};
   var NAMESPACE = 'Namespace';
   var KINDS = 'Kind';
 
+  var Query = require('../src/query.js');
   var query;
 
   beforeEach(function() {
