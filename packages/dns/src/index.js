@@ -84,13 +84,23 @@ util.inherits(DNS, common.Service);
  * @param {object} callback.apiResponse - Raw API response.
  *
  * @example
- * dns.createZone('my-awesome-zone', {
+ * var config = {
  *   dnsName: 'example.com.', // note the period at the end of the domain.
  *   description: 'This zone is awesome!'
- * }, function(err, zone, apiResponse) {
+ * };
+ *
+ * dns.createZone('my-awesome-zone', config, function(err, zone, apiResponse) {
  *   if (!err) {
  *     // The zone was created successfully.
  *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * dns.createZone('my-awesome-zone', config).then(function(data) {
+ *   var zone = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 DNS.prototype.createZone = function(name, config, callback) {
@@ -145,6 +155,13 @@ DNS.prototype.createZone = function(name, config, callback) {
  *
  * @example
  * dns.getZones(function(err, zones, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * dns.getZones().then(function(data) {
+ *   var zones = data[0];
+ * });
  */
 DNS.prototype.getZones = function(query, callback) {
   var self = this;
@@ -234,6 +251,15 @@ DNS.prototype.zone = function(name) {
  * These methods can be auto-paginated.
  */
 common.paginator.extend(DNS, 'getZones');
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(DNS, {
+  exclude: ['zone']
+});
 
 DNS.Zone = Zone;
 

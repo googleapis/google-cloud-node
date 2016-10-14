@@ -57,7 +57,7 @@ function Service(compute, name) {
      * @param {object} config - See {module:compute#createService}.
      *
      * @example
-     * service.create({
+     * var config = {
      *   backends: [
      *     {
      *       group: 'URL of an Instance Group resource'
@@ -66,11 +66,22 @@ function Service(compute, name) {
      *   healthChecks: [
      *     'URL of an HTTP/HTTPS health check resource'
      *   ]
-     * }, function(err, service, operation, apiResponse) {
+     * };
+     *
+     * service.create(config, function(err, service, operation, apiResponse) {
      *   // `service` is a Service object.
      *
      *   // `operation` is an Operation object that can be used to check the
      *   // of the request.
+     * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * service.create(config).then(function(data) {
+     *   var service = data[0];
+     *   var operation = data[1];
+     *   var apiResponse = data[2];
      * });
      */
     create: true,
@@ -86,6 +97,13 @@ function Service(compute, name) {
      *
      * @example
      * service.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * service.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -105,6 +123,14 @@ function Service(compute, name) {
      * service.get(function(err, service, apiResponse) {
      *   // `service` is a Service object.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * service.get().then(function(data) {
+     *   var service = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     get: true,
 
@@ -122,6 +148,14 @@ function Service(compute, name) {
      *
      * @example
      * service.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * service.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true
   };
@@ -155,6 +189,14 @@ util.inherits(Service, common.ServiceObject);
  * service.delete(function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * service.delete().then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 Service.prototype.delete = function(callback) {
@@ -192,10 +234,12 @@ Service.prototype.delete = function(callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * service.getHealth({
+ * var group = {
  *   name: 'instance-group-name',
  *   zone: 'us-central1-a'
- * }, function(err, status, apiResponse) {
+ * };
+ *
+ * service.getHealth(group, function(err, status, apiResponse) {
  *   if (!err) {
  *     // status = [
  *     //   {
@@ -206,6 +250,14 @@ Service.prototype.delete = function(callback) {
  *     //   }
  *     // ]
  *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * service.getHealth(group).then(function(data) {
+ *   var status = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 Service.prototype.getHealth = function(group, callback) {
@@ -256,6 +308,14 @@ Service.prototype.getHealth = function(group, callback) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * service.setMetadata(metadata).then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Service.prototype.setMetadata = function(metadata, callback) {
   var compute = this.compute;
@@ -278,5 +338,12 @@ Service.prototype.setMetadata = function(metadata, callback) {
     callback(null, operation, resp);
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Service);
 
 module.exports = Service;

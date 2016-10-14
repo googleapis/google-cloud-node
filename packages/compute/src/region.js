@@ -84,6 +84,13 @@ function Region(compute, name) {
      *
      * @example
      * region.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * region.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -93,6 +100,14 @@ function Region(compute, name) {
      * @example
      * region.get(function(err, region, apiResponse) {
      *   // `region` is a Region object.
+     * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * region.get().then(function(data) {
+     *   var region = data[0];
+     *   var apiResponse = data[1];
      * });
      */
     get: true,
@@ -111,6 +126,14 @@ function Region(compute, name) {
      *
      * @example
      * region.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * region.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true
   };
@@ -178,6 +201,15 @@ Region.prototype.address = function(name) {
  * }
  *
  * region.createAddress('new-address', callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * region.createAddress('new-address').then(function(data) {
+ *   var address = data[0];
+ *   var operation = data[1];
+ *   var apiResponse = data[2];
+ * });
  */
 Region.prototype.createAddress = function(name, options, callback) {
   var self = this;
@@ -246,6 +278,15 @@ Region.prototype.createAddress = function(name, options, callback) {
  * }
  *
  * region.createSubnetwork('new-subnetwork-name', config, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * region.createSubnetwork('new-subnetwork-name', config).then(function(data) {
+ *   var subnetwork = data[0];
+ *   var operation = data[1];
+ *   var apiResponse = data[2];
+ * });
  */
 Region.prototype.createSubnetwork = function(name, config, callback) {
   var self = this;
@@ -329,6 +370,15 @@ Region.prototype.createSubnetwork = function(name, config, callback) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * region.createRule(name, cfg).then(function(data) {
+ *   var rule = data[0];
+ *   var operation = data[1];
+ *   var apiResponse = data[2];
+ * });
  */
 Region.prototype.createRule = function(name, config, callback) {
   this.parent.createRule.call(this, name, config, callback);
@@ -379,6 +429,13 @@ Region.prototype.createRule = function(name, config, callback) {
  * region.getAddresses({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * region.getAddresses().then(function(data) {
+ *   var addresses = data[0];
+ * });
  */
 Region.prototype.getAddresses = function(options, callback) {
   var self = this;
@@ -492,6 +549,13 @@ Region.prototype.getAddressesStream =
  * region.getOperations({
  *   autoPaginate: false
  * }, callback);
+ *
+  * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * region.getOperations().then(function(data) {
+ *   var operations = data[0];
+ * });
  */
 Region.prototype.getOperations = function(options, callback) {
   var self = this;
@@ -604,6 +668,13 @@ Region.prototype.getOperationsStream =
  * region.getRules({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * region.getRules().then(function(data) {
+ *   var rules = data[0];
+ * });
  */
 Region.prototype.getRules = function(options, callback) {
   var self = this;
@@ -716,6 +787,13 @@ Region.prototype.getRulesStream = common.paginator.streamify('getRules');
  * region.getSubnetworks({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * region.getSubnetworks().then(function(data) {
+ *   var subnetworks = data[0];
+ * });
  */
 Region.prototype.getSubnetworks = function(options, callback) {
   var self = this;
@@ -837,5 +915,19 @@ common.paginator.extend(Region, [
   'getRules',
   'getSubnetworks'
 ]);
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Region, {
+  exclude: [
+    'address',
+    'operation',
+    'rule',
+    'subnetwork'
+  ]
+});
 
 module.exports = Region;

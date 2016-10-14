@@ -21,6 +21,16 @@ var extend = require('extend');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
+var promisifed = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class) {
+    if (Class.name === 'Sink') {
+      promisifed = true;
+    }
+  }
+});
+
+
 function FakeGrpcServiceObject() {
   this.calledWith_ = arguments;
 }
@@ -38,7 +48,8 @@ describe('Sink', function() {
   before(function() {
     Sink = proxyquire('../src/sink.js', {
       '@google-cloud/common': {
-        GrpcServiceObject: FakeGrpcServiceObject
+        GrpcServiceObject: FakeGrpcServiceObject,
+        util: fakeUtil
       }
     });
   });
@@ -86,6 +97,10 @@ describe('Sink', function() {
           }
         }
       });
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisifed);
     });
 
     it('should localize the name', function() {

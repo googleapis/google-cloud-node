@@ -21,6 +21,7 @@
 'use strict';
 
 var arrify = require('arrify');
+var common = require('@google-cloud/common');
 var extend = require('extend');
 var format = require('string-format-obj');
 
@@ -117,6 +118,14 @@ Record.fromZoneRecord_ = function(zone, type, bindData) {
  *     // Delete change modification was created.
  *   }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * record.delete().then(function(data) {
+ *   var change = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Record.prototype.delete = function(callback) {
   this.zone_.deleteRecords(this, callback);
@@ -155,5 +164,14 @@ Record.prototype.toString = function() {
     return format('{name} {ttl} IN {type} {rrdata}', json);
   }).join('\n');
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Record, {
+  exclude: ['toJSON', 'toString']
+});
 
 module.exports = Record;

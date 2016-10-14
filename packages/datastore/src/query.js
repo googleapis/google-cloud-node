@@ -306,12 +306,19 @@ Query.prototype.offset = function(n) {
  *     return entity[datastore.KEY];
  *   });
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * query.run().then(function(data) {
+ *   var entities = data[0];
+ * });
  */
 Query.prototype.run = function() {
   var query = this;
   var args = [query].concat([].slice.call(arguments));
 
-  this.scope.runQuery.apply(this.scope, args);
+  return this.scope.runQuery.apply(this.scope, args);
 };
 
 /**

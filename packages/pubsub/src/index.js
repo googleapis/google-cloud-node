@@ -99,6 +99,14 @@ util.inherits(PubSub, common.GrpcService);
  *     // The topic was created successfully.
  *   }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * pubsub.createTopic('my-new-topic').then(function(data) {
+ *   var topic = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 PubSub.prototype.createTopic = function(name, callback) {
   var self = this;
@@ -176,6 +184,13 @@ PubSub.prototype.createTopic = function(name, callback) {
  * pubsub.getSubscriptions({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * pubsub.getSubscriptions().then(function(data) {
+ *   var subscriptions = data[0];
+ * });
  */
 PubSub.prototype.getSubscriptions = function(options, callback) {
   var self = this;
@@ -315,6 +330,13 @@ PubSub.prototype.getSubscriptionsStream =
  * pubsub.getTopics({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * pubsub.getTopics().then(function(data) {
+ *   var topics = data[0];
+ * });
  */
 PubSub.prototype.getTopics = function(query, callback) {
   var self = this;
@@ -440,6 +462,14 @@ PubSub.prototype.getTopicsStream = common.paginator.streamify('getTopics');
  *   autoAck: true,
  *   interval: 30
  * }, function(err, subscription, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * pubsub.subscribe(topic, name).then(function(data) {
+ *   var subscription = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 PubSub.prototype.subscribe = function(topic, subName, options, callback) {
   if (!is.string(topic) && !(topic instanceof Topic)) {
@@ -584,6 +614,15 @@ PubSub.prototype.determineBaseUrl_ = function() {
  * These methods can be auto-paginated.
  */
 common.paginator.extend(PubSub, ['getSubscriptions', 'getTopics']);
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(PubSub, {
+  exclude: ['subscription', 'topic']
+});
 
 PubSub.Subscription = Subscription;
 PubSub.Topic = Topic;

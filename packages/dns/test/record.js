@@ -18,11 +18,23 @@
 
 var assert = require('assert');
 var extend = require('extend');
+var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
-var Record = require('../src/record.js');
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class, options) {
+    if (Class.name !== 'Record') {
+      return;
+    }
+
+    promisified = true;
+    assert.deepEqual(options.exclude, ['toJSON', 'toString']);
+  }
+});
 
 describe('Record', function() {
+  var Record;
   var record;
 
   var ZONE = {
@@ -35,11 +47,23 @@ describe('Record', function() {
     ttl: 86400
   };
 
+  before(function() {
+    Record = proxyquire('../src/record.js', {
+      '@google-cloud/common': {
+        util: fakeUtil
+      }
+    });
+  });
+
   beforeEach(function() {
     record = new Record(ZONE, TYPE, METADATA);
   });
 
   describe('instantiation', function() {
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
+
     it('should localize the zone instance', function() {
       assert.strictEqual(record.zone_, ZONE);
     });

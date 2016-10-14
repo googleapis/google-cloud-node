@@ -29,7 +29,14 @@ var Service = require('@google-cloud/common').Service;
 var tmp = require('tmp');
 var util = require('@google-cloud/common').util;
 
-var fakeUtil = extend({}, util);
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class) {
+    if (Class.name === 'Vision') {
+      promisified = true;
+    }
+  }
+});
 
 function FakeService() {
   this.calledWith_ = arguments;
@@ -100,6 +107,10 @@ describe('Vision', function() {
         'https://www.googleapis.com/auth/cloud-platform'
       ]);
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
   });
 

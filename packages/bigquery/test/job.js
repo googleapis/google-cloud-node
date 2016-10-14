@@ -31,7 +31,15 @@ function FakeServiceObject() {
 
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
-var utilOverrides = {};
+var promisified = false;
+var utilOverrides = {
+  promisifyAll: function(Class) {
+    if (Class.name === 'Job') {
+      promisified = true;
+    }
+  }
+};
+
 var fakeUtil = Object.keys(util).reduce(function(fakeUtil, methodName) {
   fakeUtil[methodName] = function() {
     var method = utilOverrides[methodName] || util[methodName];
@@ -63,6 +71,10 @@ describe('BigQuery/Job', function() {
   });
 
   describe('initialization', function() {
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
+
     it('should assign this.bigQuery', function() {
       assert.deepEqual(job.bigQuery, BIGQUERY);
     });

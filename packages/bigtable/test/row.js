@@ -17,12 +17,23 @@
 'use strict';
 
 var assert = require('assert');
+var extend = require('extend');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var sinon = require('sinon').sandbox.create();
 
-var GrpcServiceObject = require('@google-cloud/common').GrpcServiceObject;
+var common = require('@google-cloud/common');
+var GrpcServiceObject = common.GrpcServiceObject;
 var Mutation = require('../src/mutation.js');
+
+var promisified = false;
+var fakeUtil = extend({}, common.util, {
+  promisifyAll: function(Class) {
+    if (Class.name === 'Row') {
+      promisified = true;
+    }
+  }
+});
 
 function FakeGrpcServiceObject() {
   this.calledWith_ = arguments;
@@ -71,7 +82,8 @@ describe('Bigtable/Row', function() {
   before(function() {
     Row = proxyquire('../src/row.js', {
       '@google-cloud/common': {
-        GrpcServiceObject: FakeGrpcServiceObject
+        GrpcServiceObject: FakeGrpcServiceObject,
+        util: fakeUtil
       },
       './mutation.js': FakeMutation,
       './filter.js': FakeFilter
@@ -106,6 +118,10 @@ describe('Bigtable/Row', function() {
 
     it('should create an empty data object', function() {
       assert.deepEqual(row.data, {});
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
   });
 

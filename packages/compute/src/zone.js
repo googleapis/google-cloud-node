@@ -94,6 +94,13 @@ function Zone(compute, name) {
      *
      * @example
      * zone.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * zone.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -103,6 +110,14 @@ function Zone(compute, name) {
      * @example
      * zone.get(function(err, zone, apiResponse) {
      *   // `zone` is a Zone object.
+     * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * zone.get().then(function(data) {
+     *   var zone = data[0];
+     *   var apiResponse = data[1];
      * });
      */
     get: true,
@@ -121,6 +136,14 @@ function Zone(compute, name) {
      *
      * @example
      * zone.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * zone.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true
   };
@@ -210,6 +233,15 @@ Zone.prototype.autoscaler = function(name) {
  * }
  *
  * zone.createAutoscaler('name', config, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * zone.createAutoscaler('name', config).then(function(data) {
+ *   var autoscaler = data[0];
+ *   var operation = data[1];
+ *   var apiResponse = data[2];
+ * });
  */
 Zone.prototype.createAutoscaler = function(name, config, callback) {
   var self = this;
@@ -326,6 +358,15 @@ Zone.prototype.createAutoscaler = function(name, config, callback) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * zone.createDisk('name', config).then(function(data) {
+ *   var disk = data[0];
+ *   var operation = data[1];
+ *   var apiResponse = data[2];
+ * });
  */
 Zone.prototype.createDisk = function(name, config, callback) {
   var self = this;
@@ -403,6 +444,15 @@ Zone.prototype.createDisk = function(name, config, callback) {
  * }
  *
  * zone.createInstanceGroup('instance-group-name', onCreated);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * zone.createInstanceGroup('instance-group-name', config).then(function(data) {
+ *   var instanceGroup = data[0];
+ *   var operation = data[1];
+ *   var apiResponse = data[2];
+ * });
  */
 Zone.prototype.createInstanceGroup = function(name, options, callback) {
   var self = this;
@@ -532,6 +582,15 @@ Zone.prototype.createInstanceGroup = function(name, options, callback) {
  * }
  *
  * zone.createVM('new-vm-name', config, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * zone.createVM('new-vm-name', config).then(function(data) {
+ *   var vm = data[0];
+ *   var operation = data[1];
+ *   var apiResponse = data[2];
+ * });
  */
 Zone.prototype.createVM = function(name, config, callback) {
   var self = this;
@@ -711,6 +770,13 @@ Zone.prototype.disk = function(name) {
  * zone.getAutoscalers({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * zone.getAutoscalers().then(function(data) {
+ *   var autoscalers = data[0];
+ * });
  */
 Zone.prototype.getAutoscalers = function(options, callback) {
   var self = this;
@@ -824,6 +890,13 @@ Zone.prototype.getAutoscalersStream =
  * zone.getDisks({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * zone.getDisks().then(function(data) {
+ *   var disks = data[0];
+ * });
  */
 Zone.prototype.getDisks = function(options, callback) {
   var self = this;
@@ -937,6 +1010,13 @@ Zone.prototype.getDisksStream = common.paginator.streamify('getDisks');
  * zone.getInstanceGroups({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * zone.getInstanceGroups().then(function(data) {
+ *   var instanceGroups = data[0];
+ * });
  */
 Zone.prototype.getInstanceGroups = function(options, callback) {
   var self = this;
@@ -1045,6 +1125,13 @@ Zone.prototype.getInstanceGroupsStream =
  * zone.getMachineTypes({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * zone.getMachineTypes().then(function(data) {
+ *   var machineTypes = data[0];
+ * });
  */
 Zone.prototype.getMachineTypes = function(options, callback) {
   if (is.fn(options)) {
@@ -1134,6 +1221,13 @@ Zone.prototype.getMachineTypesStream =
  * zone.getOperations({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * zone.getOperations().then(function(data) {
+ *   var operations = data[0];
+ * });
  */
 Zone.prototype.getOperations = function(options, callback) {
   var self = this;
@@ -1244,6 +1338,13 @@ Zone.prototype.getOperationsStream =
  * zone.getVMs({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * zone.getVMs().then(function(data) {
+ *   var vms = data[0];
+ * });
  */
 Zone.prototype.getVMs = function(options, callback) {
   var self = this;
@@ -1428,5 +1529,21 @@ common.paginator.extend(Zone, [
   'getOperations',
   'getVMs'
 ]);
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Zone, {
+  exclude: [
+    'autoscaler',
+    'disk',
+    'instanceGroup',
+    'machineType',
+    'operation',
+    'vm'
+  ]
+});
 
 module.exports = Zone;

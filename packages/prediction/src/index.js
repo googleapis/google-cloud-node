@@ -121,6 +121,14 @@ util.inherits(Prediction, common.Service);
  * prediction.createModel('my-model', {
  *   data: modelDataCsv
  * }, function(err, model, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * prediction.createModel('my-model').then(function(data) {
+ *   var model = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Prediction.prototype.createModel = function(id, options, callback) {
   var self = this;
@@ -217,6 +225,13 @@ Prediction.prototype.createModel = function(id, options, callback) {
  * prediction.getModels({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * prediction.getModels().then(function(data) {
+ *   var models = data[0];
+ * });
  */
 Prediction.prototype.getModels = function(query, callback) {
   var self = this;
@@ -306,6 +321,16 @@ Prediction.prototype.model = function(id) {
  * These methods can be auto-paginated.
  */
 common.paginator.extend(Prediction, 'getModels');
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Prediction, {
+  exclude: ['model']
+});
+
 
 Prediction.Model = Model;
 

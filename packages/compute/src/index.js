@@ -153,6 +153,15 @@ util.inherits(Compute, common.Service);
  * }
  *
  * gce.createFirewall('new-firewall-name', config, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gce.createFirewall('new-firewall-name', config).then(function(data) {
+ *   var firewall = data[0];
+ *   var operation = data[1];
+ *   var apiResponse = data[2];
+ * });
  */
 Compute.prototype.createFirewall = function(name, config, callback) {
   var self = this;
@@ -258,6 +267,15 @@ Compute.prototype.createFirewall = function(name, config, callback) {
  * }
  *
  * gce.createHealthCheck('new-health-check-name', callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gce.createHealthCheck('new-health-check-name').then(function(data) {
+ *   var healthCheck = data[0];
+ *   var operation = data[1];
+ *   var apiResponse = data[2];
+ * });
  */
 Compute.prototype.createHealthCheck = function(name, options, callback) {
   var self = this;
@@ -345,6 +363,15 @@ Compute.prototype.createHealthCheck = function(name, options, callback) {
  * }
  *
  * gce.createNetwork('new-network', config, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gce.createNetwork('new-network', config).then(function(data) {
+ *   var network = data[0];
+ *   var operation = data[1];
+ *   var apiResponse = data[2];
+ * });
  */
 Compute.prototype.createNetwork = function(name, config, callback) {
   var self = this;
@@ -430,6 +457,15 @@ Compute.prototype.createNetwork = function(name, config, callback) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gce.createRule(name, config).then(function(data) {
+ *   var rule = data[0];
+ *   var operation = data[1];
+ *   var apiResponse = data[2];
+ * });
  */
 Compute.prototype.createRule = function(name, config, callback) {
   var self = this;
@@ -509,6 +545,15 @@ Compute.prototype.createRule = function(name, config, callback) {
  * }
  *
  * gce.createService('new-service', config, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gce.createService('new-service', config).then(function(data) {
+ *   var service = data[0];
+ *   var operation = data[1];
+ *   var apiResponse = data[2];
+ * });
  */
 Compute.prototype.createService = function(name, config, callback) {
   var self = this;
@@ -600,6 +645,13 @@ Compute.prototype.firewall = function(name) {
  * gce.getAddresses({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gce.getAddresses().then(function(data) {
+ *   var addresses = data[0];
+ * });
  */
 Compute.prototype.getAddresses = function(options, callback) {
   var self = this;
@@ -723,6 +775,13 @@ Compute.prototype.getAddressesStream =
  * gce.getAutoscalers({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gce.getAutoscalers().then(function(data) {
+ *   var autoscalers = data[0];
+ * });
  */
 Compute.prototype.getAutoscalers = function(options, callback) {
   var self = this;
@@ -849,6 +908,13 @@ Compute.prototype.getAutoscalersStream =
  * gce.getDisks({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gce.getDisks().then(function(data) {
+ *   var disks = data[0];
+ * });
  */
 Compute.prototype.getDisks = function(options, callback) {
   var self = this;
@@ -971,6 +1037,13 @@ Compute.prototype.getDisksStream = common.paginator.streamify('getDisks');
  * gce.getInstanceGroups({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gce.getInstanceGroups().then(function(data) {
+ *   var instanceGroups = data[0];
+ * });
  */
 Compute.prototype.getInstanceGroups = function(options, callback) {
   var self = this;
@@ -1094,6 +1167,10 @@ Compute.prototype.getInstanceGroupsStream =
  * gce.getFirewalls({
  *   autoPaginate: false
  * }, callback);
+ *
+ * gce.getFirewalls().then(function(data) {
+ *   var firewalls = data[0];
+ * });
  */
 Compute.prototype.getFirewalls = function(options, callback) {
   var self = this;
@@ -1210,6 +1287,10 @@ Compute.prototype.getFirewallsStream =
  * gce.getHealthChecks({
  *   autoPaginate: false
  * }, callback);
+ *
+ * gce.getHealthChecks().then(function(data) {
+ *   var healthChecks = data[0];
+ * });
  */
 Compute.prototype.getHealthChecks = function(options, callback) {
   var self = this;
@@ -1331,6 +1412,13 @@ Compute.prototype.getHealthChecksStream =
  * gce.getMachineTypes({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gce.getMachineTypes().then(function(data) {
+ *   var machineTypes = data[0];
+ * });
  */
 Compute.prototype.getMachineTypes = function(options, callback) {
   var self = this;
@@ -1453,6 +1541,13 @@ Compute.prototype.getMachineTypesStream =
  * gce.getNetworks({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gce.getNetworks().then(function(data) {
+ *   var networks = data[0];
+ * });
  */
 Compute.prototype.getNetworks = function(options, callback) {
   var self = this;
@@ -1564,6 +1659,13 @@ Compute.prototype.getNetworksStream = common.paginator.streamify('getNetworks');
  * gce.getOperations({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gce.getOperations().then(function(data) {
+ *   var operations = data[0];
+ * });
  */
 Compute.prototype.getOperations = function(options, callback) {
   var self = this;
@@ -1677,6 +1779,13 @@ Compute.prototype.getOperationsStream =
  * gce.getRegions({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gce.getRegions().then(function(data) {
+ *   var regions = data[0];
+ * });
  */
 Compute.prototype.getRegions = function(options, callback) {
   var self = this;
@@ -1786,6 +1895,13 @@ Compute.prototype.getRegionsStream = common.paginator.streamify('getRegions');
  * gce.getRules({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gce.getRules().then(function(data) {
+ *   var rules = data[0];
+ * });
  */
 Compute.prototype.getRules = function(options, callback) {
   var self = this;
@@ -1897,6 +2013,13 @@ Compute.prototype.getRulesStream = common.paginator.streamify('getRules');
  * gce.getServices({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gce.getServices().then(function(data) {
+ *   var services = data[0];
+ * });
  */
 Compute.prototype.getServices = function(options, callback) {
   var self = this;
@@ -2008,6 +2131,13 @@ Compute.prototype.getServicesStream = common.paginator.streamify('getServices');
  * gce.getSnapshots({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gce.getSnapshots().then(function(data) {
+ *   var snapshots = data[0];
+ * });
  */
 Compute.prototype.getSnapshots = function(options, callback) {
   var self = this;
@@ -2120,6 +2250,13 @@ Compute.prototype.getSnapshotsStream =
  * gce.getSubnetworks({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gce.getSubnetworks().then(function(data) {
+ *   var subnetworks = data[0];
+ * });
  */
 Compute.prototype.getSubnetworks = function(options, callback) {
   var self = this;
@@ -2241,6 +2378,13 @@ Compute.prototype.getSubnetworksStream =
  * gce.getVMs({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gce.getVMs().then(function(data) {
+ *   var vms = data[0];
+ * });
  */
 Compute.prototype.getVMs = function(options, callback) {
   var self = this;
@@ -2361,6 +2505,13 @@ Compute.prototype.getVMsStream = common.paginator.streamify('getVMs');
  * gce.getZones({
  *   autoPaginate: false
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gce.getZones().then(function(data) {
+ *   var zones = data[0];
+ * });
  */
 Compute.prototype.getZones = function(options, callback) {
   var self = this;
@@ -2603,6 +2754,32 @@ common.paginator.extend(Compute, [
   'getVMs',
   'getZones'
 ]);
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Compute, {
+  exclude: [
+    'address',
+    'autoscaler',
+    'disk',
+    'firewall',
+    'healthCheck',
+    'instanceGroup',
+    'machineType',
+    'network',
+    'operation',
+    'region',
+    'rule',
+    'service',
+    'snapshot',
+    'subnetwork',
+    'vm',
+    'zone'
+  ]
+});
 
 Compute.Firewall = Firewall;
 Compute.HealthCheck = HealthCheck;
