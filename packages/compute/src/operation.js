@@ -246,7 +246,7 @@ Operation.prototype.getMetadata = function(callback) {
 Operation.prototype.promise = function() {
   var self = this;
 
-  return new common.util.Promise(function(resolve, reject) {
+  return new self.Promise(function(resolve, reject) {
     self.on('error', reject).on('complete', resolve);
   });
 };

@@ -71,6 +71,7 @@ function ServiceObject(config) {
   this.createMethod = config.createMethod;
   this.methods = config.methods || {};
   this.interceptors = [];
+  this.Promise = this.parent.Promise;
 
   if (config.methods) {
     var allMethodNames = Object.keys(ServiceObject.prototype);

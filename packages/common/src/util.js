@@ -633,13 +633,6 @@ function getUserAgentFromPackageJson(packageJson) {
 util.getUserAgentFromPackageJson = getUserAgentFromPackageJson;
 
 /**
- * Rather than making getters and setters for getting the Promise override
- * let's just store it on the util object and reference that.
- * By default we'll use the native Promise object.
- */
-util.Promise = Promise;
-
-/**
  * Wraps a callback style function to conditionally return a promise.
  *
  * @param {function} originalMethod - The method to promisify.
@@ -661,7 +654,12 @@ function promisify(originalMethod) {
       return originalMethod.apply(context, args);
     }
 
-    return new util.Promise(function(resolve, reject) {
+    // Because dedupe will likely create a single install of
+    // @google-cloud/common to be shared amongst all modules, we need to
+    // localize it at the Service level.
+    var PromiseCtor = context.Promise || Promise;
+
+    return new PromiseCtor(function(resolve, reject) {
       args.push(function() {
         var callbackArgs = slice.call(arguments);
         var err = callbackArgs.shift();

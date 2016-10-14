@@ -141,7 +141,7 @@ GrpcOperation.prototype.cancel = function(callback) {
 GrpcOperation.prototype.promise = function() {
   var self = this;
 
-  return new util.Promise(function(resolve, reject) {
+  return new self.Promise(function(resolve, reject) {
     self.on('error', reject).on('complete', resolve);
   });
 };
