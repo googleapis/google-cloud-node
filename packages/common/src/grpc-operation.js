@@ -142,7 +142,8 @@ GrpcOperation.prototype.promise = function() {
   var self = this;
 
   return new self.Promise(function(resolve, reject) {
-    self.on('error', reject)
+    self
+      .on('error', reject)
       .on('complete', function(metadata) {
         resolve([metadata]);
       });
