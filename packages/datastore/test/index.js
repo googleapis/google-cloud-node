@@ -22,6 +22,7 @@ var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
 var fakeEntity = {
+  KEY_SYMBOL: Symbol('fake key symbol'),
   Int: function(value) {
     this.value = value;
   },
@@ -195,6 +196,16 @@ describe('Datastore', function() {
 
     it('should also be on the prototype', function() {
       assert.strictEqual(datastore.int, Datastore.int);
+    });
+  });
+
+  describe('KEY', function() {
+    it('should expose the KEY symbol', function() {
+      assert.strictEqual(Datastore.KEY, fakeEntity.KEY_SYMBOL);
+    });
+
+    it('should also be on the prototype', function() {
+      assert.strictEqual(datastore.KEY, Datastore.KEY);
     });
   });
 

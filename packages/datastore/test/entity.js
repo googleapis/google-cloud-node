@@ -33,6 +33,12 @@ describe('entity', function() {
     entity = require('../src/entity.js');
   });
 
+  describe('KEY_SYMBOL', function() {
+    it('should export the symbol', function() {
+      assert.strictEqual(entity.KEY_SYMBOL.toString(), 'Symbol(KEY)');
+    });
+  });
+
   describe('Double', function() {
     it('should store the value', function() {
       var value = 8.3;
@@ -532,12 +538,7 @@ describe('entity', function() {
         }
       ];
 
-      var expectedResults = [
-        {
-          key: key,
-          data: entityProto
-        }
-      ];
+      var expectedResults = entityProto;
 
       entity.keyFromKeyProto = function(key_) {
         assert.strictEqual(key_, key);
@@ -549,7 +550,10 @@ describe('entity', function() {
         return entityProto;
       };
 
-      assert.deepEqual(entity.formatArray(results), expectedResults);
+      var ent = entity.formatArray(results)[0];
+
+      assert.deepEqual(ent, expectedResults);
+      assert.strictEqual(ent[entity.KEY_SYMBOL], key);
     });
   });
 
