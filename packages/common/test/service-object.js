@@ -109,6 +109,19 @@ describe('ServiceObject', function() {
       assert.strictEqual(typeof serviceObject.create, 'function');
       assert.strictEqual(serviceObject.delete, undefined);
     });
+
+    it('should localize the Promise object', function() {
+      var FakePromise = function() {};
+      var config = extend({}, CONFIG, {
+        parent: {
+          Promise: FakePromise
+        }
+      });
+
+      var serviceObject = new ServiceObject(config);
+
+      assert.strictEqual(serviceObject.Promise, FakePromise);
+    });
   });
 
   describe('create', function() {

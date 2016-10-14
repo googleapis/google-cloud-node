@@ -51,8 +51,6 @@ var errorMessage = format([
   path: '/docs/guides/authentication'
 });
 
-var PromiseOverride;
-
 var missingProjectIdError = new Error(errorMessage);
 
 util.missingProjectIdError = missingProjectIdError;
@@ -656,7 +654,14 @@ function promisify(originalMethod) {
       return originalMethod.apply(context, args);
     }
 
-    var PromiseCtor = PromiseOverride || Promise;
+    var PromiseCtor = Promise;
+
+    // Because dedupe will likely create a single install of
+    // @google-cloud/common to be shared amongst all modules, we need to
+    // localize it at the Service level.
+    if (context && context.Promise) {
+      PromiseCtor = context.Promise;
+    }
 
     return new PromiseCtor(function(resolve, reject) {
       args.push(function() {
@@ -708,15 +713,3 @@ function promisifyAll(Class, options) {
 }
 
 util.promisifyAll = promisifyAll;
-
-/**
- * Allows user to override the Promise constructor without the need to touch
- * globals. Override should be ES6 Promise compliant.
- *
- * @param {promise} override
- */
-function setPromiseOverride(override) {
-  PromiseOverride = override;
-}
-
-module.exports.setPromiseOverride = setPromiseOverride;

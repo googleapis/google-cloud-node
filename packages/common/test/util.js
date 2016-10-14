@@ -1494,21 +1494,10 @@ describe('common/util', function() {
         assert.strictEqual(err, error);
       });
     });
-  });
 
-  describe('setPromiseOverride', function() {
-    var FakePromise = function() {};
-
-    before(function() {
-      util.setPromiseOverride(FakePromise);
-    });
-
-    after(function() {
-      util.setPromiseOverride(null);
-    });
-
-    it('should allow the Promise constructor to be specified', function() {
-      var promise = util.promisify(util.noop)();
+    it('should allow the Promise object to be overridden', function() {
+      var FakePromise = function() {};
+      var promise = func.call({ Promise: FakePromise });
 
       assert(promise instanceof FakePromise);
     });

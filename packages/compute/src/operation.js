@@ -231,6 +231,31 @@ Operation.prototype.getMetadata = function(callback) {
 };
 
 /**
+ * Convenience method that wraps the `complete` and `error` events in a
+ * Promise.
+ *
+ * @return {promise}
+ *
+ * @example
+ * operation.promise().then(function(metadata) {
+ *   // The operation is complete.
+ * }, function(err) {
+ *   // An error occurred during the operation.
+ * });
+ */
+Operation.prototype.promise = function() {
+  var self = this;
+
+  return new self.Promise(function(resolve, reject) {
+    self
+      .on('error', reject)
+      .on('complete', function(metadata) {
+        resolve([metadata]);
+      });
+  });
+};
+
+/**
  * Begin listening for events on the operation. This method keeps track of how
  * many "complete" listeners are registered and removed, making sure polling is
  * handled automatically.
