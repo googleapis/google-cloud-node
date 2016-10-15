@@ -16,7 +16,10 @@
 
 'use strict';
 
+var assert = require('assert');
+var async = require('async');
 var createErrorClass = require('create-error-class');
+var extend = require('extend');
 var format = require('string-format-obj');
 var fs = require('fs');
 var glob = require('glob');
@@ -24,10 +27,13 @@ var mitm = require('mitm');
 var overviews = require('../scripts/docs/config').OVERVIEW;
 var path = require('path');
 var prop = require('propprop');
+var url = require('url');
+var urlExists = require('url-exists');
+var urlRegex = require('url-regex')();
 var vm = require('vm');
 
+function noop() {}
 var rootFile = 'index.json';
-var noop = function() {};
 
 var DocsError = createErrorClass('DocsError', function(err, code) {
   var lineCol = err.stack.match('assert-code\.vm:(.+)');
@@ -97,20 +103,21 @@ if (process.env.TEST_MODULE) {
   modules = fs.readdirSync('docs/json');
 }
 
-modules.forEach(function(mod) {
-  describe(mod + ' documentation', function() {
+describe('Documentation Tests', function() {
+  var BROKEN_LINKS = [];
+
+  describe('Examples', function() {
     var MITM;
 
-    var docFiles = getDocs(mod);
-    var moduleInstantationCode = createInstantiationCode(mod);
     var sandbox = {
-      require: require,
-      process: process,
+      require: function() {
+        return require.apply(null, arguments);
+      },
+      process: extend(true, {}, process),
       console: FakeConsole,
       Buffer: Buffer,
       Date: Date,
-      Array: Array,
-      global: global
+      Array: Array
     };
 
     before(function() {
@@ -129,19 +136,71 @@ modules.forEach(function(mod) {
       MITM.disable();
     });
 
-    docFiles.forEach(function(docFile) {
-      docFile.methods
-        .filter(function(method) {
-          return method.examples && method.examples.length;
-        })
-        .forEach(function(method) {
-          var name = [docFile.name, method.name].join('#');
-          var snippet = createSnippet(mod, moduleInstantationCode, method);
+    modules.forEach(function(mod) {
+      describe(mod + ' documentation', function() {
+        var docFiles = getDocs(mod);
+        var moduleInstantationCode = createInstantiationCode(mod);
 
-          it('should run ' + name + ' examples without errors', function() {
-            runCodeInSandbox(snippet, sandbox);
-          });
+        docFiles.forEach(function(docFile) {
+          docFile.methods
+            .filter(function(method) {
+              return method.examples && method.examples.length;
+            })
+            .forEach(function(method) {
+              var name = [docFile.name, method.name].join('#');
+              var snippet = createSnippet(mod, moduleInstantationCode, method);
+
+              it('should run ' + name + ' examples', function(done) {
+                var urls = snippet.match(urlRegex);
+
+                if (urls) {
+                  BROKEN_LINKS = BROKEN_LINKS.concat(urls.map(function(url) {
+                    return {
+                      name: name,
+                      url: url
+                    };
+                  }));
+                }
+
+                runCodeInSandbox(snippet, sandbox, done);
+              });
+            });
         });
+      });
+    });
+  });
+
+  describe('Link Validity', function() {
+    function checkUrl(brokenLink, callback) {
+      if (brokenLink.url.indexOf('example.com') > -1) {
+        callback(null, true);
+        return;
+      }
+
+      var parsedUrl = url.parse(brokenLink.url);
+
+      if (!parsedUrl.protocol) {
+        parsedUrl.protocol = 'http:';
+      }
+
+      urlExists(url.format(parsedUrl), callback);
+    }
+
+    it('should validate all URLs', function(done) {
+      this.timeout(0);
+
+      async.filter(BROKEN_LINKS, checkUrl, function(err, invalidLinks) {
+        assert.ifError(err);
+
+        if (invalidLinks.length > 0) {
+          var invalidLink = invalidLinks[0];
+          throw new Error([
+            invalidLink.url + ' from ' + invalidLink.method + ' doesn\'t exist'
+          ].join(''));
+        }
+
+        done();
+      });
     });
   });
 });
@@ -202,7 +261,7 @@ function createSnippet(mod, instantiation, method) {
     .replace('require(\'fs\')', '(' + FakeFs.toString() + '())');
 }
 
-function runCodeInSandbox(code, sandbox) {
+function runCodeInSandbox(code, sandbox, callback) {
   vm.createContext(sandbox);
 
   try {
@@ -210,7 +269,8 @@ function runCodeInSandbox(code, sandbox) {
       filename: 'assert-code.vm',
       timeout: 5000
     });
+    callback();
   } catch (err) {
-    throw new DocsError(err, code);
+    callback(new DocsError(err, code));
   }
 }
