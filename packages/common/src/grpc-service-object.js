@@ -131,4 +131,12 @@ GrpcServiceObject.prototype.requestWritableStream = function() {
   return this.parent.requestWritableStream.apply(this.parent, arguments);
 };
 
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+util.promisifyAll(GrpcServiceObject);
+
+
 module.exports = GrpcServiceObject;

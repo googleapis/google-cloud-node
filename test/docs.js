@@ -41,7 +41,6 @@ var DocsError = createErrorClass('DocsError', function(err, code) {
     .join('\n');
 
   this.message = '\n' + lines + '\n\n' + err.message;
-  this.stack = err.stack;
 });
 
 var FakeConsole = Object.keys(console)
@@ -87,6 +86,11 @@ var FakeFs = function() {
       return require('through2')();
     }
   };
+};
+
+// For {module:google-cloud} docs.
+var FakeBluebird = function() {
+  return Promise;
 };
 
 var modules;
@@ -199,6 +203,7 @@ function createSnippet(mod, instantiation, method) {
     )
     .replace('require(\'express\')', FakeExpress.toString())
     .replace('require(\'level\')', FakeLevel.toString())
+    .replace('require(\'bluebird\')', FakeBluebird.toString())
     .replace('require(\'fs\')', '(' + FakeFs.toString() + '())');
 }
 
@@ -211,6 +216,8 @@ function runCodeInSandbox(code, sandbox) {
       timeout: 5000
     });
   } catch (err) {
-    throw new DocsError(err, code);
+    var docsErr = new DocsError(err, code);
+    docsErr.stack = err.stack;
+    throw docsErr;
   }
 }
