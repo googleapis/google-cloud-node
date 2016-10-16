@@ -749,7 +749,12 @@ File.prototype.createResumableUpload = function(options, callback) {
  * A File object can also be used to create files for the first time.
  *
  * Resumable uploads are automatically enabled and must be shut off explicitly
- * by setting `options.resumable` to `false`.
+ * by setting `options.resumable` to `false`. We use
+ * [`gcs-resumable-upload`](https://github.com/stephenplusplus/gcs-resumable-upload),
+ * which persists a config file with metadata about the upload request (see
+ * ["How it works"](https://github.com/stephenplusplus/gcs-resumable-upload#how-it-works)).
+ * If you start running into unexplainable errors, try clearing this cache file
+ * located at `~/.config/configstore/gcs-resumable-upload.json`.
  *
  * <p class="notice">
  *   There is some overhead when using a resumable upload that can cause
