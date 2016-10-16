@@ -84,13 +84,23 @@ util.inherits(DNS, common.Service);
  * @param {object} callback.apiResponse - Raw API response.
  *
  * @example
- * dns.createZone('my-awesome-zone', {
+ * var config = {
  *   dnsName: 'example.com.', // note the period at the end of the domain.
  *   description: 'This zone is awesome!'
- * }, function(err, zone, apiResponse) {
+ * };
+ *
+ * dns.createZone('my-awesome-zone', config, function(err, zone, apiResponse) {
  *   if (!err) {
  *     // The zone was created successfully.
  *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * dns.createZone('my-awesome-zone', config).then(function(data) {
+ *   var zone = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 DNS.prototype.createZone = function(name, config, callback) {
@@ -147,25 +157,11 @@ DNS.prototype.createZone = function(name, config, callback) {
  * dns.getZones(function(err, zones, apiResponse) {});
  *
  * //-
- * // Get the zones from your project as a readable object stream.
+ * // If the callback is omitted, we'll return a Promise.
  * //-
- * dns.getZones()
- *   .on('error', console.error)
- *   .on('data', function(zone) {
- *     // zone is a Zone object.
- *   })
- *   .on('end', function() {
- *     // All zones retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * dns.getZones()
- *   .on('data', function(zone) {
- *     this.end();
- *   });
+ * dns.getZones().then(function(data) {
+ *   var zones = data[0];
+ * });
  */
 DNS.prototype.getZones = function(query, callback) {
   var self = this;
@@ -203,6 +199,35 @@ DNS.prototype.getZones = function(query, callback) {
 };
 
 /**
+ * Gets a list of {module:dns/zone} objects for the project as a readable object
+ * stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:dns#getZones} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * dns.getZonesStream()
+ *   .on('error', console.error)
+ *   .on('data', function(zone) {
+ *     // zone is a Zone object.
+ *   })
+ *   .on('end', function() {
+ *     // All zones retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * dns.getZonesStream()
+ *   .on('data', function(zone) {
+ *     this.end();
+ *   });
+ */
+DNS.prototype.getZonesStream = common.paginator.streamify('getZones');
+
+/**
  * Create a zone object representing a managed zone.
  *
  * @throws {error} If a zone name is not provided.
@@ -223,10 +248,18 @@ DNS.prototype.zone = function(name) {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(DNS, 'getZones');
+common.paginator.extend(DNS, 'getZones');
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(DNS, {
+  exclude: ['zone']
+});
 
 DNS.Zone = Zone;
 

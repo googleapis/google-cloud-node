@@ -17,9 +17,20 @@
 'use strict';
 
 var assert = require('assert');
+var extend = require('extend');
+var common = require('@google-cloud/common');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
-var ServiceObject = require('@google-cloud/common').ServiceObject;
+var ServiceObject = common.ServiceObject;
+
+var promisified = false;
+var fakeUtil = extend({}, common.util, {
+  promisifyAll: function(Class) {
+    if (Class.name === 'Snapshot') {
+      promisified = true;
+    }
+  }
+});
 
 function FakeServiceObject() {
   this.calledWith_ = arguments;
@@ -38,7 +49,8 @@ describe('Snapshot', function() {
   before(function() {
     Snapshot = proxyquire('../src/snapshot.js', {
       '@google-cloud/common': {
-        ServiceObject: FakeServiceObject
+        ServiceObject: FakeServiceObject,
+        util: fakeUtil
       }
     });
   });
@@ -67,6 +79,10 @@ describe('Snapshot', function() {
         get: true,
         getMetadata: true
       });
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should allow creating for a Disk object snapshot', function(done) {

@@ -17,12 +17,24 @@
 'use strict';
 
 var assert = require('assert');
+var extend = require('extend');
 var format = require('string-format-obj');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
-var GrpcServiceObject = require('@google-cloud/common').GrpcServiceObject;
+var common = require('@google-cloud/common');
+
+var promisified = false;
+var fakeUtil = extend({}, common.util, {
+  promisifyAll: function(Class) {
+    if (Class.name === 'Family') {
+      promisified = true;
+    }
+  }
+});
+
+var GrpcServiceObject = common.GrpcServiceObject;
 
 function FakeGrpcServiceObject() {
   this.calledWith_ = arguments;
@@ -51,7 +63,8 @@ describe('Bigtable/Family', function() {
   before(function() {
     Family = proxyquire('../src/family.js', {
       '@google-cloud/common': {
-        GrpcServiceObject: FakeGrpcServiceObject
+        GrpcServiceObject: FakeGrpcServiceObject,
+        util: fakeUtil
       }
     });
     FamilyError = Family.FamilyError;
@@ -88,6 +101,10 @@ describe('Bigtable/Family', function() {
       });
       assert.strictEqual(typeof config.createMethod, 'function');
       assert.strictEqual(family.familyName, FAMILY_NAME);
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should call Table#createFamily for the create method', function(done) {

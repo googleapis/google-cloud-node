@@ -80,6 +80,15 @@ function Instance(bigtable, name) {
      *       // The instance was created successfully.
      *     });
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * instance.create().then(function(data) {
+     *   var instance = data[0];
+     *   var operation = data[1];
+     *   var apiResponse = data[2]
+     * });
      */
     create: true,
 
@@ -93,6 +102,13 @@ function Instance(bigtable, name) {
      *
      * @example
      * instance.delete(function(err, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * instance.delete().then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     delete: {
       protoOpts: {
@@ -114,6 +130,13 @@ function Instance(bigtable, name) {
      *
      * @example
      * instance.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * instance.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -123,6 +146,14 @@ function Instance(bigtable, name) {
      * @example
      * instance.get(function(err, instance, apiResponse) {
      *   // The `instance` data has been populated.
+     * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * instance.get().then(function(data) {
+     *   var instance = data[0];
+     *   var apiResponse = data[1];
      * });
      */
     get: true,
@@ -138,6 +169,14 @@ function Instance(bigtable, name) {
      *
      * @example
      * instance.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * instance.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: {
       protoOpts: {
@@ -162,9 +201,18 @@ function Instance(bigtable, name) {
      * @param {object} callback.apiResponse - The full API response.
      *
      * @example
-     * instance.setMetadata({
+     * var metadata = {
      *   displayName: 'updated-name'
-     * }, function(err, apiResponse) {});
+     * };
+     *
+     * instance.setMetadata(metadata, function(err, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * instance.setMetadata(metadata).then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     setMetadata: {
       protoOpts: {
@@ -234,6 +282,15 @@ util.inherits(Instance, common.GrpcServiceObject);
  * };
  *
  * instance.createCluster('my-cluster', options, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * instance.createCluster('my-cluster', options).then(function(data) {
+ *   var cluster = data[0];
+ *   var operation = data[1];
+ *   var apiResponse = data[2];
+ * });
  */
 Instance.prototype.createCluster = function(name, options, callback) {
   var self = this;
@@ -356,6 +413,14 @@ Instance.prototype.createCluster = function(name, options, callback) {
  * };
  *
  * instance.createTable('prezzy', options, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * instance.createTable('prezzy', options).then(function(data) {
+ *   var table = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Instance.prototype.createTable = function(name, options, callback) {
   var self = this;
@@ -476,25 +541,11 @@ Instance.prototype.cluster = function(name) {
  * }, callback);
  *
  * //-
- * // Get the clusters from your project as a readable object stream.
+ * // If the callback is omitted, we'll return a Promise.
  * //-
- * instance.getClusters()
- *   .on('error', console.error)
- *   .on('data', function(cluster) {
- *     // `cluster` is a Cluster object.
- *   })
- *   .on('end', function() {
- *     // All clusters retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * instance.getClusters()
- *   .on('data', function(cluster) {
- *     this.end();
- *   });
+ * instance.getClusters().then(function(data) {
+ *   var clusters = data[0];
+ * });
  */
 Instance.prototype.getClusters = function(query, callback) {
   var self = this;
@@ -538,6 +589,36 @@ Instance.prototype.getClusters = function(query, callback) {
 };
 
 /**
+ * Get {module:bigtable/cluster} objects for all of your clusters as a readable
+ * object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:bigtable/instance#getClusters} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * instance.getClustersStream()
+ *   .on('error', console.error)
+ *   .on('data', function(cluster) {
+ *     // `cluster` is a Cluster object.
+ *   })
+ *   .on('end', function() {
+ *     // All clusters retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * instance.getClustersStream()
+ *   .on('data', function(cluster) {
+ *     this.end();
+ *   });
+ */
+Instance.prototype.getClustersStream =
+  common.paginator.streamify('getClusters');
+
+/**
  * Get Table objects for all the tables in your Compute instance.
  *
  * @param {object=} query - Query object.
@@ -577,25 +658,11 @@ Instance.prototype.getClusters = function(query, callback) {
  * }, callback);
  *
  * //-
- * // Get the tables from your project as a readable object stream.
+ * // If the callback is omitted, we'll return a Promise.
  * //-
- * instance.getTables()
- *   .on('error', console.error)
- *   .on('data', function(table) {
- *     // table is a Table object.
- *   })
- *   .on('end', function() {
- *     // All tables retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * instance.getTables()
- *   .on('data', function(table) {
- *     this.end();
- *   });
+ * instance.getTables().then(function(data) {
+ *   var tables = data[0];
+ * });
  */
 Instance.prototype.getTables = function(query, callback) {
   var self = this;
@@ -641,6 +708,35 @@ Instance.prototype.getTables = function(query, callback) {
 };
 
 /**
+ * Get {module:bigtable/table} objects for all the tables in your Compute
+ * instance as a readable object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:bigtable/instance#getTables} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * instance.getTablesStream()
+ *   .on('error', console.error)
+ *   .on('data', function(table) {
+ *     // table is a Table object.
+ *   })
+ *   .on('end', function() {
+ *     // All tables retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * instance.getTablesStream()
+ *   .on('data', function(table) {
+ *     this.end();
+ *   });
+ */
+Instance.prototype.getTablesStream = common.paginator.streamify('getTables');
+
+/**
  * Get a reference to a Bigtable table.
  *
  * @param {string} name - The name of the table.
@@ -655,9 +751,17 @@ Instance.prototype.table = function(name) {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(Instance, ['getClusters', 'getTables']);
+common.paginator.extend(Instance, ['getClusters', 'getTables']);
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Instance, {
+  exclude: ['cluster', 'table']
+});
 
 module.exports = Instance;

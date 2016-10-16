@@ -60,6 +60,7 @@ function Service(config, options) {
   this.packageJson = config.packageJson;
   this.projectId = options.projectId;
   this.projectIdRequired = config.projectIdRequired !== false;
+  this.Promise = options.promise || Promise;
 }
 
 /**
@@ -71,7 +72,7 @@ function Service(config, options) {
  * @param {string} reqOpts.uri - A URI relative to the baseUrl.
  * @param {function} callback - The callback function passed to `request`.
  */
-Service.prototype.request = function(reqOpts, callback) {
+Service.prototype.request_ = function(reqOpts, callback) {
   reqOpts = extend(true, {}, reqOpts);
 
   var isAbsoluteUrl = reqOpts.uri.indexOf('http') === 0;
@@ -120,6 +121,31 @@ Service.prototype.request = function(reqOpts, callback) {
   });
 
   return this.makeAuthenticatedRequest(reqOpts, callback);
+};
+
+/**
+ * Make an authenticated API request.
+ *
+ * @private
+ *
+ * @param {object} reqOpts - Request options that are passed to `request`.
+ * @param {string} reqOpts.uri - A URI relative to the baseUrl.
+ * @param {function} callback - The callback function passed to `request`.
+ */
+Service.prototype.request = function(reqOpts, callback) {
+  Service.prototype.request_.call(this, reqOpts, callback);
+};
+
+/**
+ * Make an authenticated API request.
+ *
+ * @private
+ *
+ * @param {object} reqOpts - Request options that are passed to `request`.
+ * @param {string} reqOpts.uri - A URI relative to the baseUrl.
+ */
+Service.prototype.requestStream = function(reqOpts) {
+  return Service.prototype.request_.call(this, reqOpts);
 };
 
 module.exports = Service;

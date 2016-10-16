@@ -25,6 +25,15 @@ var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class) {
+    if (Class.name === 'InstanceGroup') {
+      promisified = true;
+    }
+  }
+});
+
 function FakeServiceObject() {
   this.calledWith_ = arguments;
   ServiceObject.apply(this, arguments);
@@ -33,7 +42,7 @@ function FakeServiceObject() {
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 var extended = false;
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'InstanceGroup') {
       return;
@@ -43,6 +52,9 @@ var fakeStreamRouter = {
     methods = arrify(methods);
     assert.equal(Class.name, 'InstanceGroup');
     assert.deepEqual(methods, ['getVMs']);
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -62,7 +74,8 @@ describe('InstanceGroup', function() {
     InstanceGroup = proxyquire('../src/instance-group.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        streamRouter: fakeStreamRouter
+        paginator: fakePaginator,
+        util: fakeUtil
       }
     });
     staticMethods.formatPorts_ = InstanceGroup.formatPorts_;
@@ -75,7 +88,15 @@ describe('InstanceGroup', function() {
 
   describe('instantiation', function() {
     it('should extend the correct methods', function() {
-      assert(extended); // See `fakeStreamRouter.extend`
+      assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(instanceGroup.getVMsStream, 'getVMs');
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should localize the zone instance', function() {

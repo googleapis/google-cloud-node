@@ -23,6 +23,18 @@ var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class, options) {
+    if (Class.name !== 'Topic') {
+      return;
+    }
+
+    promisified = true;
+    assert.deepEqual(options.exclude, ['subscription']);
+  }
+});
+
 function FakeGrpcServiceObject() {
   this.calledWith_ = arguments;
   GrpcServiceObject.apply(this, arguments);
@@ -50,7 +62,8 @@ describe('Topic', function() {
     Topic = proxyquire('../src/topic.js', {
       './iam.js': FakeIAM,
       '@google-cloud/common': {
-        GrpcServiceObject: FakeGrpcServiceObject
+        GrpcServiceObject: FakeGrpcServiceObject,
+        util: fakeUtil
       }
     });
   });
@@ -175,6 +188,35 @@ describe('Topic', function() {
       };
 
       topic.getSubscriptions(opts, done);
+    });
+  });
+
+  describe('getSubscriptionsStream', function() {
+    it('should return a stream', function(done) {
+      var fakeStream = {};
+
+      topic.pubsub.getSubscriptions = function(options) {
+        assert.deepEqual(options, { topic: topic });
+        setImmediate(done);
+        return fakeStream;
+      };
+
+      var stream = topic.getSubscriptions();
+      assert.strictEqual(stream, fakeStream);
+    });
+
+    it('should pass correct args to getSubscriptionsStream', function(done) {
+      var opts = { a: 'b', c: 'd' };
+
+      topic.pubsub = {
+        getSubscriptions: function(options) {
+          assert.deepEqual(options, opts);
+          assert.deepEqual(options.topic, topic);
+          done();
+        }
+      };
+
+      topic.getSubscriptions(opts);
     });
   });
 

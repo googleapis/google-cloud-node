@@ -41,6 +41,13 @@ var fakeUtil = Object.keys(util).reduce(function(fakeUtil, methodName) {
   return fakeUtil;
 }, {});
 
+var promisified = false;
+fakeUtil.promisifyAll = function(Class) {
+  if (Class.name === 'Model') {
+    promisified = true;
+  }
+};
+
 describe('Index', function() {
   var Model;
   var model;
@@ -99,6 +106,10 @@ describe('Index', function() {
       });
 
       assert.strictEqual(createMethodBound, true);
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
   });
 
@@ -175,7 +186,7 @@ describe('Index', function() {
 
   describe('createWriteStream', function() {
     it('should wait for the write event to make the request', function(done) {
-      model.request = function() {
+      model.requestStream = function() {
         setImmediate(done);
         return through();
       };
@@ -185,7 +196,7 @@ describe('Index', function() {
     });
 
     it('should make the correct request', function(done) {
-      model.request = function(reqOpts) {
+      model.requestStream = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'PUT');
         assert.strictEqual(reqOpts.uri, '');
         assert.deepEqual(reqOpts.headers, {
@@ -205,7 +216,7 @@ describe('Index', function() {
     it('should re-emit the response from the API request', function(done) {
       var response = {};
 
-      model.request = function() {
+      model.requestStream = function() {
         var requestStream = through();
         setImmediate(function() {
           requestStream.emit('response', response);
@@ -226,7 +237,7 @@ describe('Index', function() {
       var writeStream;
 
       beforeEach(function() {
-        model.request = function() {
+        model.requestStream = function() {
           requestStream = concat();
           return requestStream;
         };
@@ -319,7 +330,7 @@ describe('Index', function() {
       });
 
       beforeEach(function(done) {
-        model.request = function() {
+        model.requestStream = function() {
           return concat();
         };
 

@@ -69,6 +69,15 @@ function Disk(zone, name) {
      *   // `operation` is an Operation object that can be used to check the
      *   // status of the request.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * disk.create(config).then(function(data) {
+     *   var disk = data[0];
+     *   var operation = data[1];
+     *   var apiResponse = data[2];
+     * });
      */
     create: true,
 
@@ -82,6 +91,13 @@ function Disk(zone, name) {
      *
      * @example
      * disk.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * disk.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -101,6 +117,14 @@ function Disk(zone, name) {
      * disk.get(function(err, disk, apiResponse) {
      *   // `disk` is a Disk object.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * disk.get().then(function(data) {
+     *   var disk = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     get: true,
 
@@ -118,6 +142,14 @@ function Disk(zone, name) {
      *
      * @example
      * disk.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * disk.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true
   };
@@ -182,6 +214,15 @@ Disk.formatName_ = function(zone, name) {
  * }
  *
  * disk.createSnapshot('new-snapshot-name', callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * disk.createSnapshot('new-snapshot-name').then(function(data) {
+ *   var snapshot = data[0];
+ *   var operation = data[1];
+ *   var apiResponse = data[2];
+ * });
  */
 Disk.prototype.createSnapshot = function(name, options, callback) {
   var self = this;
@@ -229,6 +270,14 @@ Disk.prototype.createSnapshot = function(name, options, callback) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * disk.delete().then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Disk.prototype.delete = function(callback) {
   var zone = this.zone;
@@ -262,5 +311,14 @@ Disk.prototype.delete = function(callback) {
 Disk.prototype.snapshot = function(name) {
   return new Snapshot(this, name);
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Disk, {
+  exclude: ['snapshot']
+});
 
 module.exports = Disk;

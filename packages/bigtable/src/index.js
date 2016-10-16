@@ -174,7 +174,7 @@ var Instance = require('./instance.js');
  * // If you're anticipating a large number of rows to be returned, we suggest
  * // using the {module:bigtable/table#getRows} streaming API.
  * //-
- * table.getRows()
+ * table.createReadStream()
  *   .on('error', console.error)
  *   .on('data', function(row) {
  *     // `row` is a Row object.
@@ -403,6 +403,15 @@ util.inherits(Bigtable, common.GrpcService);
  * };
  *
  * bigtable.createInstance('my-instance', options, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bigtable.createInstance('my-instance', options).then(function(data) {
+ *   var instance = data[0];
+ *   var operation = data[1];
+ *   var apiResponse = data[2];
+ * });
  */
 Bigtable.prototype.createInstance = function(name, options, callback) {
   var self = this;
@@ -489,25 +498,11 @@ Bigtable.prototype.createInstance = function(name, options, callback) {
  * }, callback);
  *
  * //-
- * // Get the instances from your project as a readable object stream.
+ * // If the callback is omitted, we'll return a Promise.
  * //-
- * bigtable.getInstances()
- *   .on('error', console.error)
- *   .on('data', function(instance) {
- *     // `instance` is an Instance object.
- *   })
- *   .on('end', function() {
- *     // All instances retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * bigtable.getInstances()
- *   .on('data', function(instance) {
- *     this.end();
- *   });
+ * bigtable.getInstances().then(function(data) {
+ *   var instances = data[0];
+ * });
  */
 Bigtable.prototype.getInstances = function(query, callback) {
   var self = this;
@@ -548,6 +543,36 @@ Bigtable.prototype.getInstances = function(query, callback) {
 };
 
 /**
+ * Get {module:bigtable/instance} objects for all of your Compute instances as a
+ * readable object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:bigtable#getInstances} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * bigtable.getInstancesStream()
+ *   .on('error', console.error)
+ *   .on('data', function(instance) {
+ *     // `instance` is an Instance object.
+ *   })
+ *   .on('end', function() {
+ *     // All instances retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * bigtable.getInstancesStream()
+ *   .on('data', function(instance) {
+ *     this.end();
+ *   });
+ */
+Bigtable.prototype.getInstancesStream =
+  common.paginator.streamify('getInstances');
+
+/**
  * Get a reference to a Compute instance.
  *
  * @param {string} name - The name of the instance.
@@ -569,9 +594,17 @@ Bigtable.prototype.operation = function(name) {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(Bigtable, ['getInstances']);
+common.paginator.extend(Bigtable, ['getInstances']);
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Bigtable, {
+  exclude: ['instance', 'operation']
+});
 
 module.exports = Bigtable;

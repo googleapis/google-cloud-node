@@ -27,6 +27,7 @@ var stream = require('stream');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 
+var promisified = false;
 var makeWritableStreamOverride;
 var isCustomTypeOverride;
 var fakeUtil = extend({}, util, {
@@ -36,11 +37,16 @@ var fakeUtil = extend({}, util, {
   makeWritableStream: function() {
     var args = arguments;
     (makeWritableStreamOverride || util.makeWritableStream).apply(null, args);
+  },
+  promisifyAll: function(Class) {
+    if (Class.name === 'Table') {
+      promisified = true;
+    }
   }
 });
 
 var extended = false;
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'Table') {
       return;
@@ -50,6 +56,9 @@ var fakeStreamRouter = {
     assert.equal(Class.name, 'Table');
     assert.deepEqual(methods, ['getRows']);
     extended = true;
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -99,7 +108,7 @@ describe('BigQuery/Table', function() {
     Table = proxyquire('../src/table.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        streamRouter: fakeStreamRouter,
+        paginator: fakePaginator,
         util: fakeUtil
       }
     });
@@ -130,7 +139,15 @@ describe('BigQuery/Table', function() {
 
   describe('instantiation', function() {
     it('should extend the correct methods', function() {
-      assert(extended); // See `fakeStreamRouter.extend`
+      assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(table.createReadStream, 'getRows');
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should inherit from ServiceObject', function(done) {
@@ -440,16 +457,26 @@ describe('BigQuery/Table', function() {
     });
   });
 
-  describe('createReadStream', function() {
-    it('should return table.getRows()', function() {
-      var uniqueReturnValue = 'abc123';
-
-      table.getRows = function() {
-        assert.equal(arguments.length, 0);
-        return uniqueReturnValue;
+  describe('createQueryStream', function() {
+    it('should call datasetInstance.createQueryStream()', function(done) {
+      table.dataset.createQueryStream = function(a) {
+        assert.equal(a, 'a');
+        done();
       };
 
-      assert.equal(table.createReadStream(), uniqueReturnValue);
+      table.createQueryStream('a');
+    });
+
+    it('should return whatever dataset.createQueryStream returns', function() {
+      var fakeValue = 123;
+
+      table.dataset.createQueryStream = function() {
+        return fakeValue;
+      };
+
+      var val = table.createQueryStream();
+
+      assert.strictEqual(val, fakeValue);
     });
   });
 

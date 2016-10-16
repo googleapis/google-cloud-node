@@ -631,3 +631,85 @@ function getUserAgentFromPackageJson(packageJson) {
 }
 
 util.getUserAgentFromPackageJson = getUserAgentFromPackageJson;
+
+/**
+ * Wraps a callback style function to conditionally return a promise.
+ *
+ * @param {function} originalMethod - The method to promisify.
+ * @return {function} wrapped
+ */
+function promisify(originalMethod) {
+  if (originalMethod.promisified_) {
+    return originalMethod;
+  }
+
+  var slice = Array.prototype.slice;
+
+  var wrapper = function() {
+    var args = slice.call(arguments);
+    var hasCallback = is.fn(args[args.length - 1]);
+    var context = this;
+
+    if (hasCallback) {
+      return originalMethod.apply(context, args);
+    }
+
+    var PromiseCtor = Promise;
+
+    // Because dedupe will likely create a single install of
+    // @google-cloud/common to be shared amongst all modules, we need to
+    // localize it at the Service level.
+    if (context && context.Promise) {
+      PromiseCtor = context.Promise;
+    }
+
+    return new PromiseCtor(function(resolve, reject) {
+      args.push(function() {
+        var callbackArgs = slice.call(arguments);
+        var err = callbackArgs.shift();
+
+        if (err) {
+          return reject(err);
+        }
+
+        resolve(callbackArgs);
+      });
+
+      originalMethod.apply(context, args);
+    });
+  };
+
+  wrapper.promisified_ = true;
+  return wrapper;
+}
+
+util.promisify = promisify;
+
+/**
+ * Promisifies certain Class methods. This will not promisify private or
+ * streaming methods.
+ *
+ * @param {module:common/service} Class - Service class.
+ * @param {object=} options - Configuration object.
+ */
+function promisifyAll(Class, options) {
+  var exclude = options && options.exclude || [];
+
+  var methods = Object
+    .keys(Class.prototype)
+    .filter(function(methodName) {
+      return is.fn(Class.prototype[methodName]) && // is it a function?
+        !/(^\_|(Stream|\_)$)/.test(methodName) && // is it public/non-stream?
+        exclude.indexOf(methodName) === -1; // is it blacklisted?
+    });
+
+  methods.forEach(function(methodName) {
+    var originalMethod = Class.prototype[methodName];
+
+    if (!originalMethod.promisified_) {
+      Class.prototype[methodName] = util.promisify(originalMethod);
+    }
+  });
+}
+
+util.promisifyAll = promisifyAll;

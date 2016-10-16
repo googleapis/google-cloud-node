@@ -70,6 +70,14 @@ function Zone(dns, name) {
      *     // The zone was created successfully.
      *   }
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * zone.create(config).then(function(data) {
+     *   var zone = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     create: true,
 
@@ -83,6 +91,13 @@ function Zone(dns, name) {
      *
      * @example
      * zone.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * zone.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -102,6 +117,14 @@ function Zone(dns, name) {
      * zone.get(function(err, zone, apiResponse) {
      *   // `zone.metadata` has been populated.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * zone.get().then(function(data) {
+     *   var zone = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     get: true,
 
@@ -117,6 +140,14 @@ function Zone(dns, name) {
      *
      * @example
      * zone.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * zone.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true
   };
@@ -194,13 +225,23 @@ Zone.prototype.change = function(id) {
  *   ttl: 86400
  * });
  *
- * zone.createChange({
+ * var config = {
  *   add: newARecord,
  *   delete: oldARecord
- * }, function(err, change, apiResponse) {
+ * };
+ *
+ * zone.createChange(config, function(err, change, apiResponse) {
  *   if (!err) {
  *     // The change was created successfully.
  *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * zone.createChange(config).then(function(data) {
+ *   var change = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 Zone.prototype.createChange = function(config, callback) {
@@ -267,6 +308,13 @@ Zone.prototype.createChange = function(config, callback) {
  *   if (!err) {
  *     // The zone is now deleted.
  *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * zone.delete().then(function(data) {
+ *   var apiResponse = data[0];
  * });
  */
 Zone.prototype.delete = function(options, callback) {
@@ -348,6 +396,14 @@ Zone.prototype.delete = function(options, callback) {
  * // You can also delete records of multiple types.
  * //-
  * zone.deleteRecords(['ns', 'a'], callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * zone.deleteRecords(oldARecord).then(function(data) {
+ *   var change = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Zone.prototype.deleteRecords = function(records, callback) {
   records = arrify(records);
@@ -413,6 +469,11 @@ Zone.prototype.empty = function(callback) {
  *     // The zone file was created successfully.
  *   }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * zone.export(zoneFilename).then(function() {});
  */
 Zone.prototype.export = function(localPath, callback) {
   this.getRecords(function(err, records) {
@@ -468,25 +529,11 @@ Zone.prototype.export = function(localPath, callback) {
  * zone.getChanges(callback);
  *
  * //-
- * // Get the changes from your zone as a readable object stream.
+ * // If the callback is omitted, we'll return a Promise.
  * //-
- * zone.getChanges()
- *   .on('error', console.error)
- *   .on('data', function(change) {
- *     // change is a Change object.
- *   })
- *   .on('end', function() {
- *     // All changes retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * zone.getChanges()
- *   .on('data', function(change) {
- *     this.end();
- *   });
+ * zone.getChanges().then(function(data) {
+ *   var changes = data[0];
+ * });
  */
 Zone.prototype.getChanges = function(query, callback) {
   var self = this;
@@ -526,6 +573,35 @@ Zone.prototype.getChanges = function(query, callback) {
     callback(null, changes, nextQuery, resp);
   });
 };
+
+/**
+ * Get the list of {module:dns/change} objects associated with this zone as a
+ * readable object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:dns/zone#getChanges} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * zone.getChangesStream()
+ *   .on('error', console.error)
+ *   .on('data', function(change) {
+ *     // change is a Change object.
+ *   })
+ *   .on('end', function() {
+ *     // All changes retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * zone.getChangesStream()
+ *   .on('data', function(change) {
+ *     this.end();
+ *   });
+ */
+Zone.prototype.getChangesStream = common.paginator.streamify('getChanges');
 
 /**
  * Get the list of records for this zone.
@@ -574,27 +650,6 @@ Zone.prototype.getChanges = function(query, callback) {
  * zone.getRecords(query, callback);
  *
  * //-
- * // Get the records from your zone as a readable object stream.
- * //-
- * zone.getRecords()
- *   .on('error', console.error)
- *   .on('data', function(record) {
- *     // record is a Record object.
- *   })
- *   .on('end', function() {
- *     // All records retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * zone.getRecords()
- *   .on('data', function(change) {
- *     this.end();
- *   });
- *
- * //-
  * // If you only want records of a specific type or types, provide them in
  * // place of the query object.
  * //-
@@ -611,6 +666,13 @@ Zone.prototype.getChanges = function(query, callback) {
  *   if (!err) {
  *     // records is an array of NS, A, and CNAME records in your zone.
  *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * zone.getRecords(query).then(function(data) {
+ *   var records = data[0];
  * });
  */
 Zone.prototype.getRecords = function(query, callback) {
@@ -668,6 +730,35 @@ Zone.prototype.getRecords = function(query, callback) {
 };
 
 /**
+ * Get the list of {module:dns/record} objects for this zone as a readable
+ * object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:dns/zone#getRecords} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * zone.getRecordsStream()
+ *   .on('error', console.error)
+ *   .on('data', function(record) {
+ *     // record is a Record object.
+ *   })
+ *   .on('end', function() {
+ *     // All records retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * zone.getRecordsStream()
+ *   .on('data', function(change) {
+ *     this.end();
+ *   });
+ */
+Zone.prototype.getRecordsStream = common.paginator.streamify('getRecords');
+
+/**
  * Copy the records from a zone file into this zone.
  *
  * @resource [ManagedZones: create API Documentation]{@link https://cloud.google.com/dns/api/v1/managedZones/create}
@@ -685,6 +776,14 @@ Zone.prototype.getRecords = function(query, callback) {
  *   if (!err) {
  *     // The change was created successfully.
  *   }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * zone.import(zoneFilename).then(function(data) {
+ *   var change = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 Zone.prototype.import = function(localPath, callback) {
@@ -804,6 +903,14 @@ Zone.prototype.record = function(type, metadata) {
  *     // The change was created successfully.
  *   }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * zone.replaceRecords('ns', newNsRecords).then(function(data) {
+ *   var change = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Zone.prototype.replaceRecords = function(recordType, newRecords, callback) {
   var self = this;
@@ -859,9 +966,17 @@ Zone.prototype.deleteRecordsByType_ = function(recordTypes, callback) {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(Zone, ['getChanges', 'getRecords']);
+common.paginator.extend(Zone, ['getChanges', 'getRecords']);
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Zone, {
+  exclude: ['change', 'record']
+});
 
 module.exports = Zone;

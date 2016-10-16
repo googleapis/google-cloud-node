@@ -25,7 +25,7 @@ var Service = require('@google-cloud/common').Service;
 var util = require('@google-cloud/common').util;
 
 var extended = false;
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'DNS') {
       return;
@@ -35,6 +35,9 @@ var fakeStreamRouter = {
     methods = arrify(methods);
     assert.equal(Class.name, 'DNS');
     assert.deepEqual(methods, ['getZones']);
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -45,8 +48,17 @@ function FakeService() {
 
 nodeutil.inherits(FakeService, Service);
 
+var promisified = false;
 var fakeUtil = extend({}, util, {
-  makeAuthenticatedRequestFactory: util.noop
+  makeAuthenticatedRequestFactory: util.noop,
+  promisifyAll: function(Class, options) {
+    if (Class.name !== 'DNS') {
+      return;
+    }
+
+    promisified = true;
+    assert.deepEqual(options.exclude, ['zone']);
+  }
 });
 
 function FakeZone() {
@@ -63,7 +75,7 @@ describe('DNS', function() {
     DNS = proxyquire('../', {
       '@google-cloud/common': {
         Service: FakeService,
-        streamRouter: fakeStreamRouter,
+        paginator: fakePaginator,
         util: fakeUtil
       },
       './zone.js': FakeZone
@@ -78,7 +90,15 @@ describe('DNS', function() {
 
   describe('instantiation', function() {
     it('should extend the correct methods', function() {
-      assert(extended); // See `fakeStreamRouter.extend`
+      assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(dns.getZonesStream, 'getZones');
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should normalize the arguments', function() {

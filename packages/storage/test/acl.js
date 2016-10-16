@@ -18,24 +18,48 @@
 
 var assert = require('assert');
 var async = require('async');
+var extend = require('extend');
+var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
-var Acl = require('../src/acl.js');
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class) {
+    if (Class.name === 'Acl') {
+      promisified = true;
+    }
+  }
+});
+
 var Storage = require('../');
+var Acl;
 
 describe('storage/acl', function() {
   var acl;
+
   var ERROR = new Error('Error.');
   var MAKE_REQ = util.noop;
   var PATH_PREFIX = '/acl';
   var ROLE = Storage.acl.OWNER_ROLE;
   var ENTITY = 'user-user@example.com';
 
+  before(function() {
+    Acl = proxyquire('../src/acl.js', {
+      '@google-cloud/common': {
+        util: fakeUtil
+      }
+    });
+  });
+
   beforeEach(function() {
     acl = new Acl({ request: MAKE_REQ, pathPrefix: PATH_PREFIX });
   });
 
   describe('initialization', function() {
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
+
     it('should assign makeReq and pathPrefix', function() {
       assert.strictEqual(acl.pathPrefix, PATH_PREFIX);
       assert.strictEqual(acl.request_, MAKE_REQ);
@@ -477,6 +501,19 @@ describe('storage/AclRoleAccessorMethods', function() {
           aclEntity.fakeroles.deleteAllUsers(next);
         }
       ], done);
+    });
+
+    it('should return the parent methods return value', function() {
+      var fakeReturn = {};
+
+      aclEntity.add = function() {
+        return fakeReturn;
+      };
+
+      aclEntity._assignAccessMethods('fakerole');
+
+      var value = aclEntity.fakeroles.addUser('email@example.com');
+      assert.strictEqual(value, fakeReturn);
     });
   });
 });

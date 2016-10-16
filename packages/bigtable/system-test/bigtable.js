@@ -91,7 +91,7 @@ describe('Bigtable', function() {
     it('should get a list of instances in stream mode', function(done) {
       var instances = [];
 
-      bigtable.getInstances()
+      bigtable.getInstancesStream()
         .on('error', done)
         .on('data', function(instance) {
           assert(instance instanceof Instance);
@@ -160,7 +160,7 @@ describe('Bigtable', function() {
     it('should retrieve a list of clusters in stream mode', function(done) {
       var clusters = [];
 
-      INSTANCE.getClusters()
+      INSTANCE.getClustersStream()
         .on('error', done)
         .on('data', function(cluster) {
           assert(cluster instanceof Cluster);
@@ -229,7 +229,7 @@ describe('Bigtable', function() {
     it('should retrieve a list of tables in stream mode', function(done) {
       var tables = [];
 
-      INSTANCE.getTables()
+      INSTANCE.getTablesStream()
         .on('error', done)
         .on('data', function(table) {
           assert(table instanceof Table);
@@ -520,7 +520,7 @@ describe('Bigtable', function() {
       it('should get rows via stream', function(done) {
         var rows = [];
 
-        TABLE.getRows()
+        TABLE.createReadStream()
           .on('error', done)
           .on('data', function(row) {
             assert(row instanceof Row);
@@ -595,7 +595,7 @@ describe('Bigtable', function() {
       it('should get sample row keys via stream', function(done) {
         var keys = [];
 
-        TABLE.sampleRowKeys()
+        TABLE.sampleRowKeysStream()
           .on('error', done)
           .on('data', function(rowKey) {
             keys.push(rowKey);

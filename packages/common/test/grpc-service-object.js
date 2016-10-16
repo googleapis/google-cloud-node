@@ -20,6 +20,17 @@ var assert = require('assert');
 var extend = require('extend');
 var proxyquire = require('proxyquire');
 
+var util = require('../src/util.js');
+
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class) {
+    if (Class.name === 'GrpcServiceObject') {
+      promisified = true;
+    }
+  }
+});
+
 function FakeServiceObject() {
   this.calledWith_ = arguments;
 }
@@ -34,7 +45,8 @@ describe('GrpcServiceObject', function() {
 
   before(function() {
     GrpcServiceObject = proxyquire('../src/grpc-service-object.js', {
-      './service-object.js': FakeServiceObject
+      './service-object.js': FakeServiceObject,
+      './util.js': fakeUtil
     });
   });
 
@@ -63,6 +75,10 @@ describe('GrpcServiceObject', function() {
 
       var calledWith = grpcServiceObject.calledWith_;
       assert.strictEqual(calledWith[0], CONFIG);
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
   });
 

@@ -296,10 +296,40 @@ Query.prototype.offset = function(n) {
  * query.run(function(err, entities, info) {});
  *
  * //-
- * // If you omit the callback, you will get the matching entities in a readable
- * // object stream.
+ * // A keys-only query returns just the keys of the result entities instead of
+ * // the entities themselves, at lower latency and cost.
  * //-
- * query.run()
+ * query.select('__key__');
+ *
+ * query.run(function(err, entities) {
+ *   var keys = entities.map(function(entity) {
+ *     return entity[datastore.KEY];
+ *   });
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * query.run().then(function(data) {
+ *   var entities = data[0];
+ * });
+ */
+Query.prototype.run = function() {
+  var query = this;
+  var args = [query].concat([].slice.call(arguments));
+
+  return this.scope.runQuery.apply(this.scope, args);
+};
+
+/**
+ * Run the query as a readable object stream.
+ *
+ * @param {object=} options - Optional configuration. See
+ *     {module:datastore/query#run} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * query.runStream()
  *   .on('error', console.error)
  *   .on('data', function (entity) {})
  *   .on('info', function(info) {})
@@ -311,28 +341,16 @@ Query.prototype.offset = function(n) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * query.run()
- *   .on('data', function(entity) {
+ * query.runStream()
+ *   .on('data', function (entity) {
  *     this.end();
  *   });
- *
- * //-
- * // A keys-only query returns just the keys of the result entities instead of
- * // the entities themselves, at lower latency and cost.
- * //-
- * query.select('__key__');
- *
- * query.run(function(err, entities) {
- *   var keys = entities.map(function(entity) {
- *     return entity[datastore.KEY];
- *   });
- * });
  */
-Query.prototype.run = function() {
+Query.prototype.runStream = function() {
   var query = this;
   var args = [query].concat([].slice.call(arguments));
 
-  return this.scope.runQuery.apply(this.scope, args);
+  return this.scope.runQueryStream.apply(this.scope, args);
 };
 
 module.exports = Query;

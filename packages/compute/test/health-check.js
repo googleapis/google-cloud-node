@@ -23,6 +23,15 @@ var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class) {
+    if (Class.name === 'HealthCheck') {
+      promisified = true;
+    }
+  }
+});
+
 function FakeServiceObject() {
   this.calledWith_ = arguments;
 }
@@ -42,7 +51,8 @@ describe('HealthCheck', function() {
   before(function() {
     HealthCheck = proxyquire('../src/health-check.js', {
       '@google-cloud/common': {
-        ServiceObject: FakeServiceObject
+        ServiceObject: FakeServiceObject,
+        util: fakeUtil
       }
     });
   });
@@ -69,6 +79,10 @@ describe('HealthCheck', function() {
         get: true,
         getMetadata: true
       });
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     describe('http', function() {

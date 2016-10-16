@@ -36,7 +36,7 @@ function FakeService() {
 nodeutil.inherits(FakeService, Service);
 
 var extended = false;
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'Prediction') {
       return;
@@ -46,12 +46,23 @@ var fakeStreamRouter = {
     methods = arrify(methods);
     assert.equal(Class.name, 'Prediction');
     assert.deepEqual(methods, ['getModels']);
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
-
+var promisified = false;
 var fakeUtil = extend({}, util, {
-  makeAuthenticatedRequestFactory: util.noop
+  makeAuthenticatedRequestFactory: util.noop,
+  promisifyAll: function(Class, options) {
+    if (Class.name !== 'Prediction') {
+      return;
+    }
+
+    promisified = true;
+    assert.deepEqual(options.exclude, ['model']);
+  }
 });
 
 describe('Prediction', function() {
@@ -64,7 +75,7 @@ describe('Prediction', function() {
     Prediction = proxyquire('../', {
       '@google-cloud/common': {
         Service: FakeService,
-        streamRouter: fakeStreamRouter,
+        paginator: fakePaginator,
         util: fakeUtil
       },
       './model.js': FakeModel,
@@ -79,7 +90,15 @@ describe('Prediction', function() {
 
   describe('instantiation', function() {
     it('should extend the correct methods', function() {
-      assert(extended); // See `fakeStreamRouter.extend`
+      assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(prediction.getModelsStream, 'getModels');
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should normalize the arguments', function() {

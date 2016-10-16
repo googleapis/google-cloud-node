@@ -632,6 +632,14 @@ Speech.prototype.operation = function(name) {
  *   //   }
  *   // ]
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * speech.recognize('./bridge.raw', config).then(function(data) {
+ *   var results = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Speech.prototype.recognize = function(file, config, callback) {
   var self = this;
@@ -764,6 +772,14 @@ Speech.prototype.recognize = function(file, config, callback) {
  *       // ]
  *     });
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * speech.startRecognition('./bridge.raw', config).then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Speech.prototype.startRecognition = function(file, config, callback) {
   var self = this;
@@ -810,6 +826,15 @@ Speech.prototype.startRecognition = function(file, config, callback) {
     });
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Speech, {
+  exclude: ['operation']
+});
 
 module.exports = Speech;
 module.exports.v1beta1 = v1beta1;

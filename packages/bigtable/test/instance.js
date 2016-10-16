@@ -22,14 +22,30 @@ var util = require('util');
 var format = require('string-format-obj');
 var extend = require('extend');
 
-var GrpcServiceObject = require('@google-cloud/common').GrpcServiceObject;
+var common = require('@google-cloud/common');
+var GrpcServiceObject = common.GrpcServiceObject;
 var Cluster = require('../src/cluster.js');
 var Family = require('../src/family.js');
 var Table = require('../src/table.js');
 
-var fakeStreamRouter = {
+var promisified = false;
+var fakeUtil = extend({}, common.util, {
+  promisifyAll: function(Class, options) {
+    if (Class.name !== 'Instance') {
+      return;
+    }
+
+    promisified = true;
+    assert.deepEqual(options.exclude, ['cluster', 'table']);
+  }
+});
+
+var fakePaginator = {
   extend: function() {
     this.calledWith_ = arguments;
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -66,7 +82,8 @@ describe('Bigtable/Instance', function() {
     Instance = proxyquire('../src/instance.js', {
       '@google-cloud/common': {
         GrpcServiceObject: FakeGrpcServiceObject,
-        streamRouter: fakeStreamRouter
+        paginator: fakePaginator,
+        util: fakeUtil
       },
       './cluster.js': FakeCluster,
       './family.js': FakeFamily,
@@ -79,11 +96,20 @@ describe('Bigtable/Instance', function() {
   });
 
   describe('instantiation', function() {
-    it('should streamify the correct methods', function() {
-      var args = fakeStreamRouter.calledWith_;
+    it('should extend the correct methods', function() {
+      var args = fakePaginator.calledWith_;
 
       assert.strictEqual(args[0], Instance);
       assert.deepEqual(args[1], ['getClusters', 'getTables']);
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(instance.getClustersStream, 'getClusters');
+      assert.strictEqual(instance.getTablesStream, 'getTables');
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should inherit from GrpcServiceObject', function() {

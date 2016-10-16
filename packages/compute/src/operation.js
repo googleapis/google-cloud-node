@@ -110,6 +110,13 @@ function Operation(scope, name) {
      *
      * @example
      * operation.delete(function(err, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * operation.delete().then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     delete: true,
 
@@ -123,6 +130,13 @@ function Operation(scope, name) {
      *
      * @example
      * operation.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * operation.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -132,6 +146,14 @@ function Operation(scope, name) {
      * @example
      * operation.get(function(err, operation, apiResponse) {
      *   // `operation` is an Operation object.
+     * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * operation.get().then(function(data) {
+     *   var operation = data[0];
+     *   var apiResponse = data[1];
      * });
      */
     get: true
@@ -173,6 +195,14 @@ modelo.inherits(Operation, common.ServiceObject, events.EventEmitter);
  *   // `metadata.error`: Contains errors if the operation failed.
  *   // `metadata.warnings`: Contains warnings.
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * operation.getMetadata().then(function(data) {
+ *   var metadata = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Operation.prototype.getMetadata = function(callback) {
   var self = this;
@@ -197,6 +227,31 @@ Operation.prototype.getMetadata = function(callback) {
     self.metadata = apiResponse;
 
     callback(null, self.metadata, apiResponse);
+  });
+};
+
+/**
+ * Convenience method that wraps the `complete` and `error` events in a
+ * Promise.
+ *
+ * @return {promise}
+ *
+ * @example
+ * operation.promise().then(function(metadata) {
+ *   // The operation is complete.
+ * }, function(err) {
+ *   // An error occurred during the operation.
+ * });
+ */
+Operation.prototype.promise = function() {
+  var self = this;
+
+  return new self.Promise(function(resolve, reject) {
+    self
+      .on('error', reject)
+      .on('complete', function(metadata) {
+        resolve([metadata]);
+      });
   });
 };
 
@@ -272,5 +327,12 @@ Operation.prototype.startPolling_ = function() {
     self.emit('complete', metadata);
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Operation);
 
 module.exports = Operation;

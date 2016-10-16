@@ -123,6 +123,14 @@ function DatastoreRequest() {}
  * function callback(err, keys, apiResponse) {}
  *
  * datastore.allocateIds(incompleteKey, 100, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * datastore.allocateIds(incompleteKey, 100).then(function(data) {
+ *   var keys = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 DatastoreRequest.prototype.allocateIds = function(incompleteKey, n, callback) {
   if (entity.isKeyComplete(incompleteKey)) {
@@ -153,6 +161,95 @@ DatastoreRequest.prototype.allocateIds = function(incompleteKey, n, callback) {
 
     callback(null, keys, resp);
   });
+};
+
+/**
+ * Retrieve the entities as a readable object stream.
+ *
+ * @throws {Error} If at least one Key object is not provided.
+ *
+ * @param {Key|Key[]} keys - Datastore key object(s).
+ * @param {object=} options - Optional configuration. See {module:datastore#get}
+ *     for a complete list of options.
+ *
+ * @example
+ * var keys = [
+ *   datastore.key(['Company', 123]),
+ *   datastore.key(['Product', 'Computer'])
+ * ];
+ *
+ * datastore.createReadStream(keys)
+ *   .on('error', function(err) {})
+ *   .on('data', function(entity) {
+ *     // entity is an entity object.
+ *   })
+ *   .on('end', function() {
+ *     // All entities retrieved.
+ *   });
+ */
+DatastoreRequest.prototype.createReadStream = function(keys, options) {
+  var self = this;
+
+  options = options || {};
+
+  keys = arrify(keys).map(entity.keyToKeyProto);
+
+  if (keys.length === 0) {
+    throw new Error('At least one Key object is required.');
+  }
+
+  var limiter = common.util.createLimiter(makeRequest, options);
+  var stream = limiter.stream;
+
+  stream.once('reading', function() {
+    limiter.makeRequest(keys);
+  });
+
+  function makeRequest(keys) {
+    var protoOpts = {
+      service: 'Datastore',
+      method: 'lookup'
+    };
+
+    var reqOpts = {
+      keys: keys
+    };
+
+    if (options.consistency) {
+      var code = CONSISTENCY_PROTO_CODE[options.consistency.toLowerCase()];
+
+      reqOpts.readOptions = {
+        readConsistency: code
+      };
+    }
+
+    self.request_(protoOpts, reqOpts, function(err, resp) {
+      if (err) {
+        stream.destroy(err);
+        return;
+      }
+
+      var entities = entity.formatArray(resp.found);
+      var nextKeys = (resp.deferred || [])
+        .map(entity.keyFromKeyProto)
+        .map(entity.keyToKeyProto);
+
+      split(entities, stream, function(streamEnded) {
+        if (streamEnded) {
+          return;
+        }
+
+        if (nextKeys.length > 0) {
+          limiter.makeRequest(nextKeys);
+          return;
+        }
+
+        stream.push(null);
+      });
+    });
+  }
+
+  return stream;
 };
 
 /**
@@ -193,6 +290,13 @@ DatastoreRequest.prototype.allocateIds = function(incompleteKey, n, callback) {
  *   datastore.key(['Company', 123]),
  *   datastore.key(['Product', 'Computer'])
  * ], function(err, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * datastore.delete().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 DatastoreRequest.prototype.delete = function(keys, callback) {
   callback = callback || common.util.noop;
@@ -279,18 +383,6 @@ DatastoreRequest.prototype.delete = function(keys, callback) {
  * datastore.get(keys, function(err, entities) {});
  *
  * //-
- * // Or, get the entities as a readable object stream.
- * //-
- * datastore.get(keys)
- *   .on('error', function(err) {})
- *   .on('data', function(entity) {
- *     // entity is an entity object.
- *   })
- *   .on('end', function() {
- *     // All entities retrieved.
- *   });
- *
- * //-
  * // Here's how you would update the value of an entity with the help of the
  * // `save` method.
  * //-
@@ -302,10 +394,15 @@ DatastoreRequest.prototype.delete = function(keys, callback) {
  *   entity.newValue = true;
  *   datastore.save(entity, function(err) {});
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * datastore.get(keys).then(function(data) {
+ *   var entities = data[0];
+ * });
  */
 DatastoreRequest.prototype.get = function(keys, options, callback) {
-  var self = this;
-
   if (is.fn(options)) {
     callback = options;
     options = {};
@@ -313,75 +410,12 @@ DatastoreRequest.prototype.get = function(keys, options, callback) {
 
   options = options || {};
 
-  if (is.fn(callback)) {
-    // Run this method in stream mode and send the results back to the callback.
-    this.get(keys, options)
-      .on('error', callback)
-      .pipe(concat(function(results) {
-        var isSingleLookup = !is.array(keys);
-        callback(null, isSingleLookup ? results[0] : results);
-      }));
-    return;
-  }
-
-  keys = arrify(keys).map(entity.keyToKeyProto);
-
-  if (keys.length === 0) {
-    throw new Error('At least one Key object is required.');
-  }
-
-  var limiter = common.util.createLimiter(makeRequest, options);
-  var stream = limiter.stream;
-
-  stream.once('reading', function() {
-    limiter.makeRequest(keys);
-  });
-
-  function makeRequest(keys) {
-    var protoOpts = {
-      service: 'Datastore',
-      method: 'lookup'
-    };
-
-    var reqOpts = {
-      keys: keys
-    };
-
-    if (options.consistency) {
-      var code = CONSISTENCY_PROTO_CODE[options.consistency.toLowerCase()];
-
-      reqOpts.readOptions = {
-        readConsistency: code
-      };
-    }
-
-    self.request_(protoOpts, reqOpts, function(err, resp) {
-      if (err) {
-        stream.destroy(err);
-        return;
-      }
-
-      var entities = entity.formatArray(resp.found);
-      var nextKeys = (resp.deferred || [])
-        .map(entity.keyFromKeyProto)
-        .map(entity.keyToKeyProto);
-
-      split(entities, stream, function(streamEnded) {
-        if (streamEnded) {
-          return;
-        }
-
-        if (nextKeys.length > 0) {
-          limiter.makeRequest(nextKeys);
-          return;
-        }
-
-        stream.push(null);
-      });
-    });
-  }
-
-  return stream;
+  this.createReadStream(keys, options)
+    .on('error', callback)
+    .pipe(concat(function(results) {
+      var isSingleLookup = !is.array(keys);
+      callback(null, isSingleLookup ? results[0] : results);
+    }));
 };
 
 /**
@@ -397,17 +431,13 @@ DatastoreRequest.prototype.insert = function(entities, callback) {
  * filters, and sort them by a property name. Projection and pagination are also
  * supported.
  *
- * If you provide a callback, the query is run, and the results are returned as
- * the second argument to your callback. A third argument may also exist, which
- * is a query object that uses the end cursor from the previous query as the
- * starting cursor for the next query. You can pass that object back to this
- * method to see if more results exist.
+ * The query is run, and the results are returned as the second argument to your
+ * callback. A third argument may also exist, which is a query object that uses
+ * the end cursor from the previous query as the starting cursor for the next
+ * query. You can pass that object back to this method to see if more results
+ * exist.
  *
- * You may also omit the callback to this function to trigger streaming mode.
- *
- * See below for examples of both approaches.
- *
- * @param {module:datastore/query} q - Query object.
+ * @param {module:datastore/query} query - Query object.
  * @param {object=} options - Optional configuration.
  * @param {string} options.consistency - Specify either `strong` or `eventual`.
  *     If not specified, default values are chosen by Datastore for the
@@ -462,10 +492,54 @@ DatastoreRequest.prototype.insert = function(entities, callback) {
  * });
  *
  * //-
- * // If you omit the callback, you will get the matching entities in a readable
- * // object stream.
+ * // A keys-only query returns just the keys of the result entities instead of
+ * // the entities themselves, at lower latency and cost.
  * //-
- * datastore.runQuery(query)
+ * var keysOnlyQuery = datastore.createQuery('Lion').select('__key__');
+ *
+ * datastore.runQuery(keysOnlyQuery, function(err, entities) {
+ *   var keys = entities.map(function(entity) {
+ *     return entity[datastore.KEY];
+ *   });
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * datastore.runQuery(query).then(function(data) {
+ *   var entities = data[0];
+ * });
+ */
+DatastoreRequest.prototype.runQuery = function(query, options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = options || {};
+
+  var info;
+
+  this.runQueryStream(query, options)
+    .on('error', callback)
+    .on('info', function(info_) {
+      info = info_;
+    })
+    .pipe(concat(function(results) {
+      callback(null, results, info);
+    }));
+};
+
+/**
+ * Get a list of entities as a readable object stream.
+ *
+ * See {module:datastore#runQuery} for a list of all available options.
+ *
+ * @param {module:datastore/query} query - Query object.
+ * @param {object=} options - Optional configuration.
+ *
+ * @example
+ * datastore.runQueryStream(query)
  *   .on('error', console.error)
  *   .on('data', function (entity) {})
  *   .on('info', function(info) {})
@@ -477,47 +551,15 @@ DatastoreRequest.prototype.insert = function(entities, callback) {
  * // If you anticipate many results, you can end a stream early to prevent
  * // unnecessary processing and API requests.
  * //-
- * datastore.runQuery(query)
+ * datastore.runQueryStream(query)
  *   .on('data', function (entity) {
  *     this.end();
  *   });
- *
- * //-
- * // A keys-only query returns just the keys of the result entities instead of
- * // the entities themselves, at lower latency and cost.
- * //-
- * var keysOnlyQuery = datastore.createQuery('Lion').select('__key__');
- *
- * datastore.runQuery(keysOnlyQuery, function(err, entities) {
- *   var keys = entities.map(function(entity) {
- *     return entity[datastore.KEY];
- *   });
- * });
  */
-DatastoreRequest.prototype.runQuery = function(query, options, callback) {
+DatastoreRequest.prototype.runQueryStream = function(query, options) {
   var self = this;
 
-  if (is.fn(options)) {
-    callback = options;
-    options = {};
-  }
-
   options = options || {};
-
-  var info;
-
-  if (is.fn(callback)) {
-    // Run this method in stream mode and send the results back to the callback.
-    this.runQuery(query, options)
-      .on('error', callback)
-      .on('info', function(info_) {
-        info = info_;
-      })
-      .pipe(concat(function(results) {
-        callback(null, results, info);
-      }));
-    return;
-  }
 
   query = extend(true, new Query(), query);
 
@@ -645,13 +687,14 @@ DatastoreRequest.prototype.runQuery = function(query, options, callback) {
  * // generated ID.
  * //-
  * var key = datastore.key('Company');
- *
- * datastore.save({
+ * var entity = {
  *   key: key,
  *   data: {
  *     rating: '10'
  *   }
- * }, function(err) {
+ * };
+ *
+ * datastore.save(entity, function(err) {
  *   console.log(key.path); // [ 'Company', 5669468231434240 ]
  *   console.log(key.namespace); // undefined
  * });
@@ -664,14 +707,15 @@ DatastoreRequest.prototype.runQuery = function(query, options, callback) {
  * // the name instead of a generated ID.
  * //-
  * var key = datastore.key(['Company', 'donutshack']);
- *
- * datastore.save({
+ * var entity = {
  *   key: key,
  *   data: {
  *     name: 'DonutShack',
  *     rating: 8
  *   }
- * }, function(err) {
+ * };
+ *
+ * datastore.save(entity, function(err) {
  *   console.log(key.path); // ['Company', 'donutshack']
  *   console.log(key.namespace); // undefined
  * });
@@ -688,13 +732,15 @@ DatastoreRequest.prototype.runQuery = function(query, options, callback) {
  *   path: ['Company', 'donutshack']
  * });
  *
- * datastore.save({
+ * var entity = {
  *   key: key,
  *   data: {
  *     name: 'DonutShack',
  *     rating: 8
  *   }
- * }, function(err) {
+ * }
+ *
+ * datastore.save(entity, function(err) {
  *   console.log(key.path); // ['Company', 'donutshack']
  *   console.log(key.namespace); // 'my-namespace'
  * });
@@ -708,8 +754,7 @@ DatastoreRequest.prototype.runQuery = function(query, options, callback) {
  * // generated ID.
  * //-
  * var key = datastore.key('Company');
- *
- * datastore.save({
+ * var entity = {
  *   key: key,
  *   data: {
  *     name: 'DonutShack',
@@ -729,13 +774,15 @@ DatastoreRequest.prototype.runQuery = function(query, options, callback) {
  *       'yum'
  *     ]
  *   }
- * }, function(err, apiResponse) {});
+ * };
+ *
+ * datastore.save(entity, function(err, apiResponse) {});
  *
  * //-
  * // To specify an `excludeFromIndexes` value for a Datastore entity, pass in
  * // an array for the key's data.
  * //-
- * datastore.save({
+ * var entity = {
  *   key: datastore.key('Company'),
  *   data: [
  *     {
@@ -744,15 +791,16 @@ DatastoreRequest.prototype.runQuery = function(query, options, callback) {
  *       excludeFromIndexes: true
  *     }
  *   ]
- * }, function(err, apiResponse) {});
+ * };
+ *
+ * datastore.save(entity, function(err, apiResponse) {});
  *
  * //-
  * // Save multiple entities at once.
  * //-
  * var companyKey = datastore.key(['Company', 123]);
  * var productKey = datastore.key(['Product', 'Computer']);
- *
- * datastore.save([
+ * var entities = [
  *   {
  *     key: companyKey,
  *     data: {
@@ -765,20 +813,30 @@ DatastoreRequest.prototype.runQuery = function(query, options, callback) {
  *       vendor: 'Dell'
  *     }
  *   }
- * ], function(err, apiResponse) {});
+ * ];
+ *
+ * datastore.save(entities, function(err, apiResponse) {});
  *
  * //-
  * // Explicitly attempt to 'insert' a specific entity.
  * //-
  * var userKey = datastore.key(['User', 'chilts']);
- *
- * datastore.save({
+ * var entity = {
  *   key: userKey,
  *   method: 'insert',
  *   data: {
  *     fullName: 'Andrew Chilton'
  *   }
- * }, function(err, apiResponse) {});
+ * };
+ *
+ * datastore.save(entity, function(err, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * datastore.save(entity).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 DatastoreRequest.prototype.save = function(entities, callback) {
   entities = arrify(entities);
@@ -944,5 +1002,12 @@ DatastoreRequest.prototype.request_ = function(protoOpts, reqOpts, callback) {
 
   this.request(protoOpts, reqOpts, callback);
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(DatastoreRequest);
 
 module.exports = DatastoreRequest;

@@ -31,7 +31,15 @@ function FakeServiceObject() {
 
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
-var utilOverrides = {};
+var promisified = false;
+var utilOverrides = {
+  promisifyAll: function(Class) {
+    if (Class.name === 'Job') {
+      promisified = true;
+    }
+  }
+};
+
 var fakeUtil = Object.keys(util).reduce(function(fakeUtil, methodName) {
   fakeUtil[methodName] = function() {
     var method = utilOverrides[methodName] || util[methodName];
@@ -42,7 +50,8 @@ var fakeUtil = Object.keys(util).reduce(function(fakeUtil, methodName) {
 
 describe('BigQuery/Job', function() {
   var BIGQUERY = {
-    projectId: 'my-project'
+    projectId: 'my-project',
+    Promise: Promise
   };
   var JOB_ID = 'job_XYrk_3z';
   var Job;
@@ -63,6 +72,10 @@ describe('BigQuery/Job', function() {
   });
 
   describe('initialization', function() {
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
+
     it('should assign this.bigQuery', function() {
       assert.deepEqual(job.bigQuery, BIGQUERY);
     });
@@ -214,15 +227,90 @@ describe('BigQuery/Job', function() {
 
       job.getQueryResults();
     });
+  });
+
+  describe('getQueryResultsStream', function() {
+    var options = {
+      a: 'b',
+      c: 'd'
+    };
+    var callback = util.noop;
+
+    it('should accept an options object', function(done) {
+      job.bigQuery.createQueryStream = function(opts) {
+        assert.deepEqual(opts, options);
+        done();
+      };
+
+      job.getQueryResultsStream(options, callback);
+    });
+
+    it('should accept no arguments', function(done) {
+      job.bigQuery.createQueryStream = function(opts, cb) {
+        assert.deepEqual(opts, { job: job });
+        assert.equal(cb, undefined);
+        done();
+      };
+
+      job.getQueryResultsStream();
+    });
+
+    it('should assign job to the options object', function(done) {
+      job.bigQuery.createQueryStream = function(opts) {
+        assert.deepEqual(opts.job, job);
+        done();
+      };
+
+      job.getQueryResultsStream();
+    });
 
     it('should return the result of the call to bq.query', function(done) {
-      job.bigQuery.query = function() {
+      job.bigQuery.createQueryStream = function() {
         return {
           done: done
         };
       };
 
-      job.getQueryResults().done();
+      job.getQueryResultsStream().done();
+    });
+  });
+
+  describe('promise', function() {
+    beforeEach(function() {
+      job.startPolling_ = util.noop;
+    });
+
+    it('should return an instance of the localized Promise', function() {
+      var FakePromise = job.Promise = function() {};
+      var promise = job.promise();
+
+      assert(promise instanceof FakePromise);
+    });
+
+    it('should reject the promise if an error occurs', function() {
+      var error = new Error('err');
+
+      setImmediate(function() {
+        job.emit('error', error);
+      });
+
+      return job.promise().then(function() {
+        throw new Error('Promise should have been rejected.');
+      }, function(err) {
+        assert.strictEqual(err, error);
+      });
+    });
+
+    it('should resolve the promise on complete', function() {
+      var metadata = {};
+
+      setImmediate(function() {
+        job.emit('complete', metadata);
+      });
+
+      return job.promise().then(function(data) {
+        assert.deepEqual(data, [metadata]);
+      });
     });
   });
 
