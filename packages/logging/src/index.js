@@ -130,6 +130,14 @@ util.inherits(Logging, common.GrpcService);
  * }
  *
  * logging.createSink('new-sink-name', config, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * logging.createSink('new-sink-name', config).then(function(data) {
+ *   var sink = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Logging.prototype.createSink = function(name, config, callback) {
   // jscs:enable maximumLineLength
@@ -273,26 +281,11 @@ Logging.prototype.entry = function(resource, data) {
  * }, callback);
  *
  * //-
- * // Get the entries from your project as a readable object stream.
+ * // If the callback is omitted, we'll return a Promise.
  * //-
- * logging.getEntries()
- *   .on('error', console.error)
- *   .on('data', function(entry) {
- *     // `entry` is a Stackdriver Logging entry object.
- *     // See the `data` property to read the data from the entry.
- *   })
- *   .on('end', function() {
- *     // All entries retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * logging.getEntries()
- *   .on('data', function(entry) {
- *     this.end();
- *   });
+ * logging.getEntries().then(function(data) {
+ *   var entries = data[0];
+ * });
  */
 Logging.prototype.getEntries = function(options, callback) {
   if (is.fn(options)) {
@@ -332,6 +325,36 @@ Logging.prototype.getEntries = function(options, callback) {
 };
 
 /**
+ * List the {module:logging/entry} objects in your logs as a readable object
+ * stream.
+ *
+ * @param {object=} options - Configuration object. See
+ *     {module:logging#getEntries} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * logging.getEntriesStream()
+ *   .on('error', console.error)
+ *   .on('data', function(entry) {
+ *     // `entry` is a Stackdriver Logging entry object.
+ *     // See the `data` property to read the data from the entry.
+ *   })
+ *   .on('end', function() {
+ *     // All entries retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * logging.getEntriesStream()
+ *   .on('data', function(entry) {
+ *     this.end();
+ *   });
+ */
+Logging.prototype.getEntriesStream = common.paginator.streamify('getEntries');
+
+/**
  * Get the sinks associated with this project.
  *
  * @resource [projects.sinks.list API Documentation]{@link https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/projects.sinks/list}
@@ -352,25 +375,11 @@ Logging.prototype.getEntries = function(options, callback) {
  * });
  *
  * //-
- * // Get the sinks from your project as a readable object stream.
+ * // If the callback is omitted, we'll return a Promise.
  * //-
- * logging.getSinks()
- *   .on('error', console.error)
- *   .on('data', function(sink) {
- *     // `sink` is a Sink object.
- *   })
- *   .on('end', function() {
- *     // All sinks retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * logging.getSinks()
- *   .on('data', function(sink) {
- *     this.end();
- *   });
+ * logging.getSinks().then(function(data) {
+ *   var sinks = data[0];
+ * });
  */
 Logging.prototype.getSinks = function(options, callback) {
   var self = this;
@@ -412,6 +421,35 @@ Logging.prototype.getSinks = function(options, callback) {
     callback(null, sinks, nextQuery, resp);
   });
 };
+
+/**
+ * Get the {module:logging/sink} objects associated with this project as a
+ * readable object stream.
+ *
+ * @param {object=} options - Configuration object. See
+ *     {module:logging#getSinks} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * logging.getSinksStream()
+ *   .on('error', console.error)
+ *   .on('data', function(sink) {
+ *     // `sink` is a Sink object.
+ *   })
+ *   .on('end', function() {
+ *     // All sinks retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * logging.getSinksStream()
+ *   .on('data', function(sink) {
+ *     this.end();
+ *   });
+ */
+Logging.prototype.getSinksStream = common.paginator.streamify('getSinks');
 
 /**
  * Get a reference to a Stackdriver Logging log.
@@ -557,10 +595,18 @@ Logging.prototype.setAclForTopic_ = function(name, config, callback) {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(Logging, ['getEntries', 'getSinks']);
+common.paginator.extend(Logging, ['getEntries', 'getSinks']);
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Logging, {
+  exclude: ['entry', 'log', 'sink']
+});
 
 Logging.Entry = Entry;
 Logging.Log = Log;

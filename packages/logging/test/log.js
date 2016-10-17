@@ -22,6 +22,18 @@ var GrpcServiceObject = require('@google-cloud/common').GrpcServiceObject;
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
+var promisifed = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class, options) {
+    if (Class.name !== 'Log') {
+      return;
+    }
+
+    promisifed = true;
+    assert.deepEqual(options.exclude, ['entry']);
+  }
+});
+
 var Entry = require('../src/entry.js');
 
 function FakeGrpcServiceObject() {
@@ -55,7 +67,8 @@ describe('Log', function() {
     Log = proxyquire('../src/log.js', {
       './entry.js': Entry,
       '@google-cloud/common': {
-        GrpcServiceObject: FakeGrpcServiceObject
+        GrpcServiceObject: FakeGrpcServiceObject,
+        util: fakeUtil
       }
     });
     var assignSeverityToEntries_ = Log.assignSeverityToEntries_;
@@ -72,6 +85,10 @@ describe('Log', function() {
   });
 
   describe('instantiation', function() {
+    it('should promisify all the things', function() {
+      assert(promisifed);
+    });
+
     it('should localize the escaped name', function() {
       assert.strictEqual(log.name, LOG_NAME_ENCODED);
     });
@@ -252,6 +269,40 @@ describe('Log', function() {
       };
 
       log.getEntries(options, done);
+    });
+  });
+
+  describe('getEntriesStream', function() {
+    var fakeStream = {};
+    var EXPECTED_OPTIONS = {
+      filter: 'logName="' + LOG_NAME_FORMATTED + '"'
+    };
+
+    it('should call Logging getEntriesStream with defaults', function(done) {
+      log.parent.getEntriesStream = function(options) {
+        assert.deepEqual(options, EXPECTED_OPTIONS);
+        setImmediate(done);
+        return fakeStream;
+      };
+
+      var stream = log.getEntriesStream();
+      assert.strictEqual(stream, fakeStream);
+    });
+
+    it('should allow overriding the options', function(done) {
+      var options = {
+        custom: true,
+        filter: 'custom filter'
+      };
+
+      log.parent.getEntriesStream = function(options_) {
+        assert.deepEqual(options_, extend({}, EXPECTED_OPTIONS, options));
+        setImmediate(done);
+        return fakeStream;
+      };
+
+      var stream = log.getEntriesStream(options);
+      assert.strictEqual(stream, fakeStream);
     });
   });
 

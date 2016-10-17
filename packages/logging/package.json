@@ -52,7 +52,7 @@
     "stackdriver"
   ],
   "dependencies": {
-    "@google-cloud/common": "^0.6.0",
+    "@google-cloud/common": "^0.7.0",
     "arrify": "^1.0.0",
     "extend": "^3.0.0",
     "google-gax": "^0.7.0",
