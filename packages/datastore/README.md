@@ -49,6 +49,19 @@ datastore.save({
     }
   });
 });
+
+// Promises are also supported by omitting callbacks.
+datastore.save({
+  key: blogPostKey,
+  data: blogPostData
+}).then(function() {
+  // The blog post is not published!
+});
+
+// It's also possible to integrate with third-party Promise libraries.
+var datastore = require('@google-cloud/datastore')({
+  promise: require('bluebird')
+});
 ```
 
 
