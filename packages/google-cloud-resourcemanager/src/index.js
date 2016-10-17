@@ -101,6 +101,14 @@ util.inherits(Resource, common.Service);
  *     // `project` is a new Project instance.
  *   }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * resource.createProject('new project name').then(function(data) {
+ *   var project = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Resource.prototype.createProject = function(id, options, callback) {
   var self = this;
@@ -171,25 +179,11 @@ Resource.prototype.createProject = function(id, options, callback) {
  * }, callback);
  *
  * //-
- * // Get the projects from your account as a readable object stream.
+ * // If the callback is omitted, we'll return a Promise.
  * //-
- * resource.getProjects()
- *   .on('error', console.error)
- *   .on('data', function(project) {
- *     // `project` is a `Project` object.
- *   })
- *   .on('end', function() {
- *     // All projects retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * resource.getProjects()
- *   .on('data', function(project) {
- *     this.end();
- *   });
+ * resource.getProjects().then(function(data) {
+ *   var projects = data[0];
+ * });
  */
 Resource.prototype.getProjects = function(options, callback) {
   var self = this;
@@ -229,6 +223,35 @@ Resource.prototype.getProjects = function(options, callback) {
 };
 
 /**
+ * Get a list of {module:resource/project} objects as a readable object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:resource#getProjects} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * resource.getProjectsStream()
+ *   .on('error', console.error)
+ *   .on('data', function(project) {
+ *     // `project` is a `Project` object.
+ *   })
+ *   .on('end', function() {
+ *     // All projects retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * resource.getProjectsStream()
+ *   .on('data', function(project) {
+ *     this.end();
+ *   });
+ */
+Resource.prototype.getProjectsStream =
+  common.paginator.streamify('getProjects');
+
+/**
  * Create a Project object. See {module:resoucemanager/createProject} to create
  * a project.
  *
@@ -252,10 +275,18 @@ Resource.prototype.project = function(id) {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(Resource, ['getProjects']);
+common.paginator.extend(Resource, ['getProjects']);
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Resource, {
+  exclude: ['project']
+});
 
 Resource.Project = Project;
 
