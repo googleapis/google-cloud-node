@@ -17,10 +17,20 @@
 'use strict';
 
 var assert = require('assert');
+var extend = require('extend');
 var GrpcService = require('@google-cloud/common').GrpcService;
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
+
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class) {
+    if (Class.name === 'IAM') {
+      promisified = true;
+    }
+  }
+});
 
 function FakeGrpcService() {
   this.calledWith_ = arguments;
@@ -42,7 +52,8 @@ describe('IAM', function() {
   before(function() {
     IAM = proxyquire('../src/iam.js', {
       '@google-cloud/common': {
-        GrpcService: FakeGrpcService
+        GrpcService: FakeGrpcService,
+        util: fakeUtil
       }
     });
   });
@@ -68,6 +79,10 @@ describe('IAM', function() {
       assert.deepEqual(config.packageJson, require('../package.json'));
 
       assert.strictEqual(options, PUBSUB.options);
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should localize the ID', function() {
