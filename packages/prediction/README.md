@@ -45,6 +45,16 @@ model.query('Hello', function(err, results) {
     // ]
   }
 });
+
+// Promises are also supported by omitting callbacks.
+model.query('Hello').then(function(data) {
+  var results = data[0];
+});
+
+// It's also possible to integrate with third-party Promise libraries.
+var prediction = require('@google-cloud/prediction')({
+  promise: require('bluebird')
+});
 ```
 
 
