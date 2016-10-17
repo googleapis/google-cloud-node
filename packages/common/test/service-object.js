@@ -755,6 +755,26 @@ describe('ServiceObject', function() {
 
       serviceObject.request_({ uri: '' }, assert.ifError);
     });
+
+    it('should call the parent requestStream method', function() {
+      var fakeObj = {};
+
+      var expectedUri = [
+        serviceObject.baseUrl,
+        serviceObject.id,
+        reqOpts.uri
+      ].join('/');
+
+      serviceObject.parent.requestStream = function(reqOpts_) {
+        assert.notStrictEqual(reqOpts_, reqOpts);
+        assert.strictEqual(reqOpts_.uri, expectedUri);
+        assert.deepEqual(reqOpts_.interceptors_, []);
+        return fakeObj;
+      };
+
+      var returnVal = serviceObject.request_(reqOpts);
+      assert.strictEqual(returnVal, fakeObj);
+    });
   });
 
   describe('request', function() {
