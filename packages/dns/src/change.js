@@ -46,6 +46,13 @@ function Change(zone, id) {
      *
      * @example
      * change.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * change.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -64,6 +71,14 @@ function Change(zone, id) {
      * @example
      * change.get(function(err, change, apiResponse) {
      *   // `change.metadata` has been populated.
+     * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * change.get().then(function(data) {
+     *   var change = data[0];
+     *   var apiResponse = data[1];
      * });
      */
     get: true,
@@ -90,6 +105,15 @@ function Change(zone, id) {
      *     //   status: 'done'
      *     // }
      *   }
+     * });
+     *
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * change.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
      * });
      */
     getMetadata: true
@@ -122,6 +146,15 @@ util.inherits(Change, common.ServiceObject);
  *     // The change was created successfully.
  *   }
  * });
+ *
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * change.create(config).then(function(data) {
+ *   var change = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Change.prototype.create = function(config, callback) {
   var self = this;
@@ -138,5 +171,13 @@ Change.prototype.create = function(config, callback) {
     callback(null, self, apiResponse);
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Change);
+
 
 module.exports = Change;

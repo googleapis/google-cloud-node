@@ -35,6 +35,16 @@ zone.addRecord(nsRecord, function(err, change) {});
 
 // Create a zonefile from the records in your zone.
 zone.export('/zonefile.zone', function(err) {});
+
+// Promises are also supported by omitting callbacks.
+zone.addRecords(nsRecord).then(function(data) {
+  var change = data[0];
+});
+
+// It's also possible to integrate with third-party Promise libraries.
+var dns = require('@google-cloud/dns')({
+  promise: require('bluebird')
+});
 ```
 
 
