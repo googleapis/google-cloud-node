@@ -48,6 +48,7 @@ var Module = helpers.Module;
 
 // Get a list of the modules that have code changes.
 var modules = Module.getUpdated();
+var skipSystem = ['common'];
 
 if (!modules.length && !ci.isReleaseBuild()) {
   echo('No code changes found, exiting early.');
@@ -68,8 +69,14 @@ modules.forEach(function(mod) {
   mod.runSnippetTests();
 });
 
+// not every module (common) has system tests, so we'll filter those
+// out for the next phase.
+modules = modules.filter(function(mod) {
+  return skipSystem.indexOf(mod.name) > -1;
+});
+
 // If this is a push to master, let's run system tests
-if (ci.isPushToMaster()) {
+if (ci.isPushToMaster() && modules.length) {
   // Run system tests for each module
   // If they pass then create a symlink via npm link
   modules.forEach(function(mod) {
@@ -102,5 +109,8 @@ if (ci.isReleaseBuild()) {
 
   mod.install();
   mod.runUnitTests();
-  mod.runSystemTests();
+
+  if (skipSystem.indexOf(mod.name) > -1) {
+    mod.runSystemTests();
+  }
 }
