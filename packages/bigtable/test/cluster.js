@@ -17,11 +17,23 @@
 'use strict';
 
 var assert = require('assert');
+var extend = require('extend');
 var format = require('string-format-obj');
 var proxyquire = require('proxyquire');
 var util = require('util');
 
-var GrpcServiceObject = require('@google-cloud/common').GrpcServiceObject;
+var common = require('@google-cloud/common');
+
+var promisified = false;
+var fakeUtil = extend({}, common.util, {
+  promisifyAll: function(Class) {
+    if (Class.name === 'Cluster') {
+      promisified = true;
+    }
+  }
+});
+
+var GrpcServiceObject = common.GrpcServiceObject;
 
 function FakeGrpcServiceObject() {
   this.calledWith_ = arguments;
@@ -50,7 +62,8 @@ describe('Bigtable/Cluster', function() {
   before(function() {
     Cluster = proxyquire('../src/cluster.js', {
       '@google-cloud/common': {
-        GrpcServiceObject: FakeGrpcServiceObject
+        GrpcServiceObject: FakeGrpcServiceObject,
+        util: fakeUtil
       }
     });
   });
@@ -91,6 +104,10 @@ describe('Bigtable/Cluster', function() {
           }
         }
       });
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should Instance#createCluster to create the cluster', function(done) {

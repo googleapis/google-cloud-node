@@ -77,6 +77,13 @@ function Row(table, key) {
      *
      * @example
      * row.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * row.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true
   };
@@ -273,6 +280,13 @@ Row.formatFamilies_ = function(families, options) {
  *      alincoln: 1
  *   }
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * row.create().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Row.prototype.create = function(entry, callback) {
   var self = this;
@@ -322,24 +336,35 @@ Row.prototype.create = function(entry, callback) {
  *   }
  * };
  *
- * row.createRules([
+ * var rules = [
  *   {
  *     column: 'follows:gwashington',
  *     increment: 1
  *   }
- * ], callback);
+ * ];
+ *
+ * row.createRules(rules, callback);
  *
  * //-
  * // You can also create a rule that will append data to an existing value.
  * // If the targeted cell is unset, it will be treated as a containing an
  * // empty string.
  * //-
- * row.createRules([
+ * var rules = [
  *   {
  *     column: 'follows:alincoln',
  *     append: ' Honest Abe!'
  *   }
- * ], callback);
+ * ];
+ *
+ * row.createRules(rules, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * row.createRules(rules).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Row.prototype.createRules = function(rules, callback) {
   if (!rules || rules.length === 0) {
@@ -428,6 +453,13 @@ Row.prototype.createRules = function(rules, callback) {
  * // that a match is not made.
  * //-
  * row.filter(filter, null, entries, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * row.filter(filter, null, entries).then(function(data) {
+ *   var matched = data[0];
+ * });
  */
 Row.prototype.filter = function(filter, onMatch, onNoMatch, callback) {
   var grpcOpts = {
@@ -476,6 +508,13 @@ Row.prototype.filter = function(filter, onMatch, onNoMatch, callback) {
  *
  * @example
  * row.delete(function(err, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * row.delete().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Row.prototype.delete = function(callback) {
   var mutation = {
@@ -505,16 +544,27 @@ Row.prototype.delete = function(callback) {
  *   }
  * };
  *
- * row.deleteCells([
+ * var cells = [
  *   'follows:gwashington'
- * ], callback);
+ * ];
+ *
+ * row.deleteCells(cells, callback);
  *
  * //-
  * // Delete all cells within a family.
  * //-
- * row.deleteCells([
+ * var cells = [
  *   'follows',
- * ], callback)
+ * ];
+ *
+ * row.deleteCells(cells, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * row.deleteCells(cells).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Row.prototype.deleteCells = function(columns, callback) {
   var mutation = {
@@ -559,6 +609,14 @@ Row.prototype.deleteCells = function(columns, callback) {
  *   'follows:gwashington',
  *   'follows:alincoln'
  * ], callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * row.get().then(function(data) {
+ *   var row = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Row.prototype.get = function(columns, options, callback) {
   var self = this;
@@ -642,6 +700,14 @@ Row.prototype.get = function(columns, options, callback) {
  *
  * @example
  * row.getMetadata(function(err, metadata, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * row.getMetadata().then(function(data) {
+ *   var metadata = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Row.prototype.getMetadata = function(options, callback) {
   if (is.function(options)) {
@@ -689,6 +755,14 @@ Row.prototype.getMetadata = function(options, callback) {
  * // To decrement a column, simply supply a negative value.
  * //-
  * row.increment('follows:gwashington', -1, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * row.increment('follows:gwashington').then(function(data) {
+ *   var value = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Row.prototype.increment = function(column, value, callback) {
   if (is.function(value)) {
@@ -748,6 +822,13 @@ Row.prototype.increment = function(column, value, callback) {
  *     wmckinley: 1
  *   }
  * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * row.save('follows:jadams', 1).then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Row.prototype.save = function(key, value, callback) {
   var rowData;
@@ -771,6 +852,13 @@ Row.prototype.save = function(key, value, callback) {
 
   this.parent.mutate(mutation, callback);
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Row);
 
 module.exports = Row;
 module.exports.RowError = RowError;
