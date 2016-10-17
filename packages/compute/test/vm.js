@@ -23,6 +23,15 @@ var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class) {
+    if (Class.name === 'VM') {
+      promisified = true;
+    }
+  }
+});
+
 function FakeServiceObject() {
   this.calledWith_ = arguments;
   ServiceObject.apply(this, arguments);
@@ -54,7 +63,8 @@ describe('VM', function() {
     Disk = require('../src/disk.js');
     VM = proxyquire('../src/vm.js', {
       '@google-cloud/common': {
-        ServiceObject: FakeServiceObject
+        ServiceObject: FakeServiceObject,
+        util: fakeUtil
       }
     });
   });
@@ -65,6 +75,10 @@ describe('VM', function() {
   });
 
   describe('instantiation', function() {
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
+
     it('should localize the zone', function() {
       assert.strictEqual(vm.zone, ZONE);
     });

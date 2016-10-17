@@ -56,6 +56,13 @@ function MachineType(zone, name) {
      *
      * @example
      * machineType.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * machineType.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -65,6 +72,14 @@ function MachineType(zone, name) {
      * @example
      * machineType.get(function(err, machineType, apiResponse) {
      *   // `machineType` is a MachineType object.
+     * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * machineType.get().then(function(data) {
+     *   var machineType = data[0];
+     *   var apiResponse = data[1];
      * });
      */
     get: true,
@@ -83,6 +98,14 @@ function MachineType(zone, name) {
      *
      * @example
      * machineType.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * machineType.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true
   };
