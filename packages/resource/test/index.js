@@ -36,7 +36,7 @@ function FakeService() {
 nodeutil.inherits(FakeService, Service);
 
 var extended = false;
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'Resource') {
       return;
@@ -46,9 +46,13 @@ var fakeStreamRouter = {
     assert.equal(Class.name, 'Resource');
     assert.deepEqual(methods, ['getProjects']);
     extended = true;
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
+var promisified = true;
 var makeAuthenticatedRequestFactoryOverride;
 var fakeUtil = extend({}, util, {
   makeAuthenticatedRequestFactory: function() {
@@ -57,6 +61,14 @@ var fakeUtil = extend({}, util, {
     }
 
     return util.makeAuthenticatedRequestFactory.apply(null, arguments);
+  },
+  promisifyAll: function(Class, options) {
+    if (Class.name !== 'Resource') {
+      return;
+    }
+
+    promisified = true;
+    assert.deepEqual(options.exclude, ['project']);
   }
 });
 
@@ -70,7 +82,7 @@ describe('Resource', function() {
     Resource = proxyquire('../', {
       '@google-cloud/common': {
         Service: FakeService,
-        streamRouter: fakeStreamRouter,
+        paginator: fakePaginator,
         util: fakeUtil
       },
       './project.js': FakeProject
@@ -87,7 +99,15 @@ describe('Resource', function() {
 
   describe('instantiation', function() {
     it('should extend the correct methods', function() {
-      assert(extended); // See `fakeStreamRouter.extend`
+      assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(resource.getProjectsStream, 'getProjects');
+    });
+
+    it('should promisify all tlhe things', function() {
+      assert(promisified);
     });
 
     it('should normalize the arguments', function() {
