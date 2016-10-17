@@ -149,9 +149,20 @@ describe('Service', function() {
       var service = new Service({}, OPTIONS);
       assert.strictEqual(service.projectIdRequired, true);
     });
+
+    it('should localize the Promise object', function() {
+      var FakePromise = function() {};
+      var service = new Service({}, { promise: FakePromise });
+
+      assert.strictEqual(service.Promise, FakePromise);
+    });
+
+    it('should localize the native Promise object by default', function() {
+      assert.strictEqual(service.Promise, global.Promise);
+    });
   });
 
-  describe('request', function() {
+  describe('request_', function() {
     var reqOpts;
 
     beforeEach(function() {
@@ -173,7 +184,7 @@ describe('Service', function() {
         callback(); // done()
       };
 
-      service.request(reqOpts, done);
+      service.request_(reqOpts, done);
     });
 
     it('should support absolute uris', function(done) {
@@ -184,7 +195,7 @@ describe('Service', function() {
         done();
       };
 
-      service.request({ uri: expectedUri }, assert.ifError);
+      service.request_({ uri: expectedUri }, assert.ifError);
     });
 
     it('should trim slashes', function(done) {
@@ -202,7 +213,7 @@ describe('Service', function() {
         done();
       };
 
-      service.request(reqOpts, assert.ifError);
+      service.request_(reqOpts, assert.ifError);
     });
 
     it('should replace path/:subpath with path:subpath', function(done) {
@@ -217,7 +228,7 @@ describe('Service', function() {
         done();
       };
 
-      service.request(reqOpts, assert.ifError);
+      service.request_(reqOpts, assert.ifError);
     });
 
     it('should add the User Agent', function(done) {
@@ -235,7 +246,7 @@ describe('Service', function() {
         done();
       };
 
-      service.request(reqOpts, assert.ifError);
+      service.request_(reqOpts, assert.ifError);
     });
 
     describe('projectIdRequired', function() {
@@ -255,7 +266,7 @@ describe('Service', function() {
             done();
           };
 
-          service.request(reqOpts, assert.ifError);
+          service.request_(reqOpts, assert.ifError);
         });
       });
 
@@ -277,7 +288,7 @@ describe('Service', function() {
             done();
           };
 
-          service.request(reqOpts, assert.ifError);
+          service.request_(reqOpts, assert.ifError);
         });
       });
     });
@@ -342,7 +353,7 @@ describe('Service', function() {
           done();
         };
 
-        service.request(reqOpts, assert.ifError);
+        service.request_(reqOpts, assert.ifError);
       });
 
       it('should not affect original interceptor arrays', function(done) {
@@ -363,7 +374,7 @@ describe('Service', function() {
           done();
         };
 
-        service.request({
+        service.request_({
           uri: '',
           interceptors_: requestInterceptors
         }, assert.ifError);
@@ -382,8 +393,56 @@ describe('Service', function() {
 
         service.makeAuthenticatedRequest = util.noop;
 
-        service.request({ uri: '' }, assert.ifError);
+        service.request_({ uri: '' }, assert.ifError);
       });
+    });
+  });
+
+  describe('request', function() {
+    var request_;
+
+    before(function() {
+      request_ = Service.prototype.request_;
+    });
+
+    after(function() {
+      Service.prototype.request_ = request_;
+    });
+
+    it('should call through to _request', function(done) {
+      var fakeOpts = {};
+
+      Service.prototype.request_ = function(reqOpts, callback) {
+        assert.strictEqual(reqOpts, fakeOpts);
+        callback();
+      };
+
+      service.request(fakeOpts, done);
+    });
+  });
+
+  describe('requestStream', function() {
+    var request_;
+
+    before(function() {
+      request_ = Service.prototype.request_;
+    });
+
+    after(function() {
+      Service.prototype.request_ = request_;
+    });
+
+    it('should return whatever _request returns', function() {
+      var fakeOpts = {};
+      var fakeStream = {};
+
+      Service.prototype.request_ = function(reqOpts) {
+        assert.strictEqual(reqOpts, fakeOpts);
+        return fakeStream;
+      };
+
+      var stream = service.requestStream(fakeOpts);
+      assert.strictEqual(stream, fakeStream);
     });
   });
 });

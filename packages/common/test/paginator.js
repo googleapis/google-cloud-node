@@ -23,7 +23,7 @@ var stream = require('stream');
 var through = require('through2');
 var uuid = require('node-uuid');
 
-var streamRouter = require('../src/stream-router.js');
+var paginator = require('../src/paginator.js');
 var util = require('../src/util.js');
 
 var overrides = {};
@@ -58,16 +58,16 @@ function resetOverrides() {
 
 override('util', util);
 
-describe('streamRouter', function() {
+describe('paginator', function() {
   var UUID = uuid.v1();
 
   function FakeClass() {}
 
   before(function() {
-    streamRouter = proxyquire('../src/stream-router.js', {
+    paginator = proxyquire('../src/paginator.js', {
       './util.js': util
     });
-    override('streamRouter', streamRouter);
+    override('paginator', paginator);
   });
 
   beforeEach(function() {
@@ -82,10 +82,17 @@ describe('streamRouter', function() {
   describe('extend', function() {
     it('should overwrite a method on a class', function() {
       var originalMethod = FakeClass.prototype.methodToExtend;
-      streamRouter.extend(FakeClass, 'methodToExtend');
+      paginator.extend(FakeClass, 'methodToExtend');
       var overwrittenMethod = FakeClass.prototype.methodToExtend;
 
       assert.notEqual(originalMethod, overwrittenMethod);
+    });
+
+    it('should store the original method as a private member', function() {
+      var originalMethod = FakeClass.prototype.methodToExtend;
+      paginator.extend(FakeClass, 'methodToExtend');
+
+      assert.strictEqual(originalMethod, FakeClass.prototype.methodToExtend_);
     });
 
     it('should accept an array or string method names', function() {
@@ -95,21 +102,21 @@ describe('streamRouter', function() {
       var anotherMethod = FakeClass.prototype.anotherMethodToExtend;
 
       var methodsToExtend = ['methodToExtend', 'anotherMethodToExtend'];
-      streamRouter.extend(FakeClass, methodsToExtend);
+      paginator.extend(FakeClass, methodsToExtend);
 
       assert.notEqual(originalMethod, FakeClass.prototype.methodToExtend);
       assert.notEqual(anotherMethod, FakeClass.prototype.anotherMethodToExtend);
     });
 
     it('should parse the arguments', function(done) {
-      overrides.streamRouter.parseArguments_ = function(args) {
+      overrides.paginator.parseArguments_ = function(args) {
         assert.deepEqual([].slice.call(args), [1, 2, 3]);
         done();
       };
 
-      overrides.streamRouter.router_ = util.noop;
+      overrides.paginator.run_ = util.noop;
 
-      streamRouter.extend(FakeClass, 'methodToExtend');
+      paginator.extend(FakeClass, 'methodToExtend');
       FakeClass.prototype.methodToExtend(1, 2, 3);
     });
 
@@ -117,17 +124,17 @@ describe('streamRouter', function() {
       var expectedReturnValue = FakeClass.prototype.methodToExtend();
       var parsedArguments = { a: 'b', c: 'd' };
 
-      overrides.streamRouter.parseArguments_ = function() {
+      overrides.paginator.parseArguments_ = function() {
         return parsedArguments;
       };
 
-      overrides.streamRouter.router_ = function(args, originalMethod) {
+      overrides.paginator.run_ = function(args, originalMethod) {
         assert.strictEqual(args, parsedArguments);
         assert.equal(originalMethod(), expectedReturnValue);
         done();
       };
 
-      streamRouter.extend(FakeClass, 'methodToExtend');
+      paginator.extend(FakeClass, 'methodToExtend');
       FakeClass.prototype.methodToExtend();
     });
 
@@ -137,29 +144,117 @@ describe('streamRouter', function() {
       var cls = new FakeClass();
       cls.uuid = uuid.v1();
 
-      overrides.streamRouter.router_ = function(args, originalMethod) {
+      overrides.paginator.run_ = function(args, originalMethod) {
         assert.equal(originalMethod(), cls.uuid);
         done();
       };
 
-      streamRouter.extend(FakeClass, 'methodToExtend');
+      paginator.extend(FakeClass, 'methodToExtend');
       cls.methodToExtend();
     });
 
     it('should return what the router returns', function() {
       var uniqueValue = 234;
-      overrides.streamRouter.router_ = function() {
+      overrides.paginator.run_ = function() {
         return uniqueValue;
       };
 
-      streamRouter.extend(FakeClass, 'methodToExtend');
+      paginator.extend(FakeClass, 'methodToExtend');
       assert.equal(FakeClass.prototype.methodToExtend(), uniqueValue);
+    });
+  });
+
+  describe('streamify', function() {
+    beforeEach(function() {
+      FakeClass.prototype.streamMethod = paginator.streamify('methodToExtend');
+    });
+
+    it('should return a function', function() {
+      var fakeStreamMethod = FakeClass.prototype.streamMethod;
+      assert.strictEqual(typeof fakeStreamMethod, 'function');
+    });
+
+    it('should parse the arguments', function(done) {
+      var fakeArgs = [1, 2, 3];
+
+      overrides.paginator.parseArguments_ = function(args) {
+        assert.deepEqual(fakeArgs, [].slice.call(args));
+        done();
+      };
+
+      overrides.paginator.runAsStream_ = util.noop;
+      FakeClass.prototype.streamMethod.apply(FakeClass.prototype, fakeArgs);
+    });
+
+    it('should run the method as a stream', function(done) {
+      var parsedArguments = { a: 'b', c: 'd' };
+
+      overrides.paginator.parseArguments_ = function() {
+        return parsedArguments;
+      };
+
+      overrides.paginator.runAsStream_ = function(args, callback) {
+        assert.strictEqual(args, parsedArguments);
+        assert.strictEqual(callback(), UUID);
+        done();
+      };
+
+      FakeClass.prototype.streamMethod();
+    });
+
+    it('should apply the proper context', function(done) {
+      var parsedArguments = { a: 'b', c: 'd' };
+
+      FakeClass.prototype.methodToExtend = function() { return this; };
+
+      overrides.paginator.parseArguments_ = function() {
+        return parsedArguments;
+      };
+
+      overrides.paginator.runAsStream_ = function(args, callback) {
+        assert.strictEqual(callback(), FakeClass.prototype);
+        done();
+      };
+
+      FakeClass.prototype.streamMethod();
+    });
+
+    it('should check for a private member', function(done) {
+      var parsedArguments = { a: 'b', c: 'd' };
+      var fakeValue = 123;
+
+      FakeClass.prototype.methodToExtend_ = function() { return fakeValue; };
+
+      overrides.paginator.parseArguments_ = function() {
+        return parsedArguments;
+      };
+
+      overrides.paginator.runAsStream_ = function(args, callback) {
+        assert.strictEqual(callback(), fakeValue);
+        done();
+      };
+
+      FakeClass.prototype.streamMethod();
+    });
+
+    it('should return a stream', function() {
+      var fakeStream = through.obj();
+
+      overrides.paginator.parseArguments_ = util.noop;
+
+      overrides.paginator.runAsStream_ = function() {
+        return fakeStream;
+      };
+
+      var stream = FakeClass.prototype.streamMethod();
+
+      assert.strictEqual(fakeStream, stream);
     });
   });
 
   describe('parseArguments_', function() {
     it('should set defaults', function() {
-      var parsedArguments = streamRouter.parseArguments_([]);
+      var parsedArguments = paginator.parseArguments_([]);
 
       assert.strictEqual(Object.keys(parsedArguments.query).length, 0);
       assert.strictEqual(parsedArguments.autoPaginate, true);
@@ -170,42 +265,42 @@ describe('streamRouter', function() {
 
     it('should detect a callback if first argument is a function', function() {
       var args = [ util.noop ];
-      var parsedArguments = streamRouter.parseArguments_(args);
+      var parsedArguments = paginator.parseArguments_(args);
 
       assert.strictEqual(parsedArguments.callback, args[0]);
     });
 
     it('should use any other first argument as query', function() {
       var args = [ 'string' ];
-      var parsedArguments = streamRouter.parseArguments_(args);
+      var parsedArguments = paginator.parseArguments_(args);
 
       assert.strictEqual(parsedArguments.query, args[0]);
     });
 
     it('should not make an undefined value the query', function() {
       var args = [ undefined, util.noop ];
-      var parsedArguments = streamRouter.parseArguments_(args);
+      var parsedArguments = paginator.parseArguments_(args);
 
       assert.deepEqual(parsedArguments.query, {});
     });
 
     it('should detect a callback if last argument is a function', function() {
       var args = [ 'string', util.noop ];
-      var parsedArguments = streamRouter.parseArguments_(args);
+      var parsedArguments = paginator.parseArguments_(args);
 
       assert.strictEqual(parsedArguments.callback, args[1]);
     });
 
     it('should not assign a callback if a fn is not provided', function() {
       var args = [ 'string' ];
-      var parsedArguments = streamRouter.parseArguments_(args);
+      var parsedArguments = paginator.parseArguments_(args);
 
       assert.strictEqual(parsedArguments.callback, undefined);
     });
 
     it('should set maxApiCalls from query.maxApiCalls', function() {
       var args = [ { maxApiCalls: 10 } ];
-      var parsedArguments = streamRouter.parseArguments_(args);
+      var parsedArguments = paginator.parseArguments_(args);
 
       assert.strictEqual(parsedArguments.maxApiCalls, args[0].maxApiCalls);
       assert.strictEqual(parsedArguments.query.maxApiCalls, undefined);
@@ -213,153 +308,121 @@ describe('streamRouter', function() {
 
     it('should set maxResults from query.maxResults', function() {
       var args = [ { maxResults: 10 } ];
-      var parsedArguments = streamRouter.parseArguments_(args);
+      var parsedArguments = paginator.parseArguments_(args);
 
       assert.strictEqual(parsedArguments.maxResults, args[0].maxResults);
     });
 
     it('should set maxResults from query.pageSize', function() {
       var args = [ { pageSize: 10 } ];
-      var parsedArguments = streamRouter.parseArguments_(args);
+      var parsedArguments = paginator.parseArguments_(args);
 
       assert.strictEqual(parsedArguments.maxResults, args[0].pageSize);
     });
 
     it('should set autoPaginate: false if there is a maxResults', function() {
       var args = [ { maxResults: 10 }, util.noop ];
-      var parsedArguments = streamRouter.parseArguments_(args);
+      var parsedArguments = paginator.parseArguments_(args);
 
       assert.strictEqual(parsedArguments.autoPaginate, false);
     });
 
     it('should set autoPaginate: false query.autoPaginate', function() {
       var args = [ { autoPaginate: false }, util.noop ];
-      var parsedArguments = streamRouter.parseArguments_(args);
+      var parsedArguments = paginator.parseArguments_(args);
 
       assert.strictEqual(parsedArguments.autoPaginate, false);
     });
   });
 
-  describe('router_', function() {
+  describe('run_', function() {
     beforeEach(function() {
-      overrides.streamRouter.runAsStream_ = util.noop;
+      overrides.paginator.runAsStream_ = util.noop;
     });
 
-    describe('callback mode', function() {
-      describe('autoPaginate', function() {
-        it('should call runAsStream_ when autoPaginate:true', function(done) {
-          var parsedArguments = {
-            autoPaginate: true,
-            callback: util.noop
-          };
-
-          overrides.streamRouter.runAsStream_ = function(args, originalMethod) {
-            assert.strictEqual(args, parsedArguments);
-            originalMethod();
-            return through();
-          };
-
-          streamRouter.router_(parsedArguments, done);
-        });
-
-        it('should execute callback on error', function(done) {
-          var error = new Error('Error.');
-
-          var parsedArguments = {
-            autoPaginate: true,
-            callback: function(err) {
-              assert.strictEqual(err, error);
-              done();
-            }
-          };
-
-          overrides.streamRouter.runAsStream_ = function() {
-            var stream = through();
-            setImmediate(function() {
-              stream.emit('error', error);
-            });
-            return stream;
-          };
-
-          streamRouter.router_(parsedArguments, util.noop);
-        });
-
-        it('should return all results on end', function(done) {
-          var results = ['a', 'b', 'c'];
-
-          var parsedArguments = {
-            autoPaginate: true,
-            callback: function(err, results_) {
-              assert.deepEqual(results_.toString().split(''), results);
-              done();
-            }
-          };
-
-          overrides.streamRouter.runAsStream_ = function() {
-            var stream = through();
-
-            setImmediate(function() {
-              results.forEach(function(result) {
-                stream.push(result);
-              });
-
-              stream.push(null);
-            });
-
-            return stream;
-          };
-
-          streamRouter.router_(parsedArguments, util.noop);
-        });
-      });
-
-      describe('manual pagination', function() {
-        it('should recoginze autoPaginate: false', function(done) {
-          var parsedArguments = {
-            autoPaginate: false,
-            query: {
-              a: 'b',
-              c: 'd'
-            },
-            callback: done
-          };
-
-          streamRouter.router_(parsedArguments, function(query, callback) {
-            assert.deepEqual(query, parsedArguments.query);
-
-            callback();
-          });
-        });
-      });
-    });
-
-    describe('stream mode', function() {
-      it('should call runAsStream_', function(done) {
+    describe('autoPaginate', function() {
+      it('should call runAsStream_ when autoPaginate:true', function(done) {
         var parsedArguments = {
-          query: { a: 'b', c: 'd' }
+          autoPaginate: true,
+          callback: util.noop
         };
 
-        overrides.streamRouter.runAsStream_ = function(args, originalMethod) {
-          assert.deepEqual(args, parsedArguments);
+        overrides.paginator.runAsStream_ = function(args, originalMethod) {
+          assert.strictEqual(args, parsedArguments);
           originalMethod();
+          return through();
         };
 
-        streamRouter.router_(parsedArguments, done);
+        paginator.run_(parsedArguments, done);
       });
 
-      it('should return the value of runAsStream_', function() {
+      it('should execute callback on error', function(done) {
+        var error = new Error('Error.');
+
         var parsedArguments = {
-          query: { a: 'b', c: 'd' }
+          autoPaginate: true,
+          callback: function(err) {
+            assert.strictEqual(err, error);
+            done();
+          }
         };
 
-        var stream = through();
-
-        overrides.streamRouter.runAsStream_ = function() {
+        overrides.paginator.runAsStream_ = function() {
+          var stream = through();
+          setImmediate(function() {
+            stream.emit('error', error);
+          });
           return stream;
         };
 
-        var stream_ = streamRouter.router_(parsedArguments, assert.ifError);
-        assert.strictEqual(stream_, stream);
+        paginator.run_(parsedArguments, util.noop);
+      });
+
+      it('should return all results on end', function(done) {
+        var results = ['a', 'b', 'c'];
+
+        var parsedArguments = {
+          autoPaginate: true,
+          callback: function(err, results_) {
+            assert.deepEqual(results_.toString().split(''), results);
+            done();
+          }
+        };
+
+        overrides.paginator.runAsStream_ = function() {
+          var stream = through();
+
+          setImmediate(function() {
+            results.forEach(function(result) {
+              stream.push(result);
+            });
+
+            stream.push(null);
+          });
+
+          return stream;
+        };
+
+        paginator.run_(parsedArguments, util.noop);
+      });
+    });
+
+    describe('manual pagination', function() {
+      it('should recoginze autoPaginate: false', function(done) {
+        var parsedArguments = {
+          autoPaginate: false,
+          query: {
+            a: 'b',
+            c: 'd'
+          },
+          callback: done
+        };
+
+        paginator.run_(parsedArguments, function(query, callback) {
+          assert.deepEqual(query, parsedArguments.query);
+
+          callback();
+        });
       });
     });
   });
@@ -393,7 +456,7 @@ describe('streamRouter', function() {
         done();
       }
 
-      streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
+      paginator.runAsStream_(PARSED_ARGUMENTS, originalMethod);
     });
 
     it('should emit an error if one occurs', function(done) {
@@ -405,7 +468,7 @@ describe('streamRouter', function() {
         });
       }
 
-      var rs = streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
+      var rs = paginator.runAsStream_(PARSED_ARGUMENTS, originalMethod);
       rs.on('error', function(err) {
         assert.deepEqual(err, error);
         done();
@@ -422,7 +485,7 @@ describe('streamRouter', function() {
         });
       }
 
-      var rs = streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
+      var rs = paginator.runAsStream_(PARSED_ARGUMENTS, originalMethod);
       rs.on('data', function(result) {
         resultsReceived.push(result);
       });
@@ -446,7 +509,7 @@ describe('streamRouter', function() {
           };
         };
 
-        streamRouter.runAsStream_({ maxApiCalls: maxApiCalls }, util.noop);
+        paginator.runAsStream_({ maxApiCalls: maxApiCalls }, util.noop);
       });
     });
 
@@ -462,7 +525,7 @@ describe('streamRouter', function() {
       it('should respect maxResults', function(done) {
         var numResultsReceived = 0;
 
-        streamRouter.runAsStream_({ maxResults: limit }, originalMethod)
+        paginator.runAsStream_({ maxResults: limit }, originalMethod)
           .on('data', function() { numResultsReceived++; })
           .on('end', function() {
             assert.strictEqual(numResultsReceived, limit);
@@ -488,7 +551,7 @@ describe('streamRouter', function() {
         });
       }
 
-      streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
+      paginator.runAsStream_(PARSED_ARGUMENTS, originalMethod);
     });
 
     it('should not push more results if stream ends early', function(done) {
@@ -500,7 +563,7 @@ describe('streamRouter', function() {
         });
       }
 
-      var rs = streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
+      var rs = paginator.runAsStream_(PARSED_ARGUMENTS, originalMethod);
       rs.on('data', function(result) {
         if (result === 'b') {
           // Pre-maturely end the stream.
@@ -527,7 +590,7 @@ describe('streamRouter', function() {
         });
       }
 
-      var rs = streamRouter.runAsStream_(PARSED_ARGUMENTS, originalMethod);
+      var rs = paginator.runAsStream_(PARSED_ARGUMENTS, originalMethod);
       rs.on('data', function(result) {
         if (result === 'b') {
           // Pre-maturely end the stream.

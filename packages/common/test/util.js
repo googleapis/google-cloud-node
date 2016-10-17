@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      http:// www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -1373,6 +1373,133 @@ describe('common/util', function() {
       });
 
       assert.strictEqual(userAgent, 'gcloud-node-storage/0.1.0');
+    });
+  });
+
+  describe('promisifyAll', function() {
+    var fakeArgs = [null, 1, 2, 3];
+    var fakeError = new Error('err.');
+
+    var FakeClass;
+    var instance;
+    var context;
+
+    beforeEach(function() {
+      context = null;
+
+      FakeClass = function() {};
+
+      FakeClass.prototype.methodName = function(callback) {
+        context = this;
+        callback.apply(null, fakeArgs);
+      };
+
+      FakeClass.prototype.methodSingle = function(callback) {
+        context = this;
+        callback(null, fakeArgs[1]);
+      };
+
+      FakeClass.prototype.methodError = function(callback) {
+        context = this;
+        callback(fakeError);
+      };
+
+      FakeClass.prototype.method_ = util.noop;
+      FakeClass.prototype._method = util.noop;
+      FakeClass.prototype.methodStream = util.noop;
+
+      util.promisifyAll(FakeClass);
+      instance = new FakeClass();
+    });
+
+    it('should promisify the correct method', function() {
+      assert(FakeClass.prototype.methodName.promisified_);
+      assert(FakeClass.prototype.methodSingle.promisified_);
+      assert(FakeClass.prototype.methodError.promisified_);
+
+      assert.strictEqual(FakeClass.prototype.method_, util.noop);
+      assert.strictEqual(FakeClass.prototype._method, util.noop);
+      assert.strictEqual(FakeClass.prototype.methodStream, util.noop);
+    });
+
+    it('should optionally except an exclude list', function() {
+      function FakeClass2() {}
+
+      FakeClass2.prototype.methodSync = util.noop;
+      FakeClass2.prototype.method = function() {};
+
+      util.promisifyAll(FakeClass2, {
+        exclude: ['methodSync']
+      });
+
+      assert.strictEqual(FakeClass2.prototype.methodSync, util.noop);
+      assert(FakeClass2.prototype.method.promisified_);
+    });
+
+    it('should not re-promisify methods', function() {
+      var method = FakeClass.prototype.methodName;
+
+      util.promisifyAll(FakeClass);
+
+      assert.strictEqual(FakeClass.prototype.methodName, method);
+    });
+  });
+
+  describe('promisify', function() {
+    var fakeContext = {};
+    var func;
+    var fakeArgs;
+
+    beforeEach(function() {
+      fakeArgs = [null, 1, 2, 3];
+
+      func = util.promisify(function(callback) {
+        callback.apply(this, fakeArgs);
+      });
+    });
+
+    it('should not re-promisify the function', function() {
+      var original = func;
+
+      func = util.promisify(func);
+
+      assert.strictEqual(original, func);
+    });
+
+    it('should not return a promise in callback mode', function(done) {
+      var returnVal = func.call(fakeContext, function() {
+        var args = [].slice.call(arguments);
+
+        assert.deepEqual(args, fakeArgs);
+        assert.strictEqual(this, fakeContext);
+        assert(!returnVal);
+        done();
+      });
+    });
+
+    it('should return a promise when the callback is omitted', function() {
+      return func().then(function(args) {
+        assert.deepEqual(args, fakeArgs.slice(1));
+      });
+    });
+
+    it('should reject the promise on a failed request', function() {
+      var error = new Error('err');
+
+      fakeArgs = [error];
+
+      return func().then(function() {
+        throw new Error('Should have gone to failure block');
+      }, function(err) {
+        assert.strictEqual(err, error);
+      });
+    });
+
+    it('should allow the Promise object to be overridden', function() {
+      var FakePromise = function() {};
+      var promise = func.call({ Promise: FakePromise });
+
+      assert(promise instanceof FakePromise);
     });
   });
 });

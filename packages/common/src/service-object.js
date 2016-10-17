@@ -71,6 +71,7 @@ function ServiceObject(config) {
   this.createMethod = config.createMethod;
   this.methods = config.methods || {};
   this.interceptors = [];
+  this.Promise = this.parent.Promise;
 
   if (config.methods) {
     var allMethodNames = Object.keys(ServiceObject.prototype);
@@ -78,7 +79,7 @@ function ServiceObject(config) {
       .filter(function(methodName) {
         return (
           // All ServiceObjects need `request`.
-          methodName !== 'request' &&
+          !/^request/.test(methodName) &&
 
           // The ServiceObject didn't redefine the method.
           self[methodName] === ServiceObject.prototype[methodName] &&
@@ -301,7 +302,7 @@ ServiceObject.prototype.setMetadata = function(metadata, callback) {
  * @param {string} reqOpts.uri - A URI relative to the baseUrl.
  * @param {function} callback - The callback function passed to `request`.
  */
-ServiceObject.prototype.request = function(reqOpts, callback) {
+ServiceObject.prototype.request_ = function(reqOpts, callback) {
   reqOpts = extend(true, {}, reqOpts);
 
   var isAbsoluteUrl = reqOpts.uri.indexOf('http') === 0;
@@ -329,7 +330,43 @@ ServiceObject.prototype.request = function(reqOpts, callback) {
 
   reqOpts.interceptors_ = childInterceptors.concat(localInterceptors);
 
-  return this.parent.request(reqOpts, callback);
+  if (!callback) {
+    return this.parent.requestStream(reqOpts);
+  }
+
+  this.parent.request(reqOpts, callback);
 };
+
+/**
+ * Make an authenticated API request.
+ *
+ * @private
+ *
+ * @param {object} reqOpts - Request options that are passed to `request`.
+ * @param {string} reqOpts.uri - A URI relative to the baseUrl.
+ * @param {function} callback - The callback function passed to `request`.
+ */
+ServiceObject.prototype.request = function(reqOpts, callback) {
+  ServiceObject.prototype.request_.call(this, reqOpts, callback);
+};
+
+/**
+ * Make an authenticated API request.
+ *
+ * @private
+ *
+ * @param {object} reqOpts - Request options that are passed to `request`.
+ * @param {string} reqOpts.uri - A URI relative to the baseUrl.
+ */
+ServiceObject.prototype.requestStream = function(reqOpts) {
+  return ServiceObject.prototype.request_.call(this, reqOpts);
+};
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+util.promisifyAll(ServiceObject);
 
 module.exports = ServiceObject;
