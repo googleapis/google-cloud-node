@@ -31,6 +31,16 @@ var project = resource.project();
 project.getMetadata(function(err, metadata) {
   // `metadata` describes your project.
 });
+
+// Promises are also supported by omitting callbacks.
+project.getMetadata().then(function(data) {
+  var metadata = data[0];
+});
+
+// It's also possible to integrate with third-party Promise libraries.
+var resource = require('@google-cloud/resource')({
+  promise: require('bluebird')
+});
 ```
 
 
