@@ -137,6 +137,14 @@ function Language(options) {
  * };
  *
  * language.annotate('Hello!', options, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * language.annotate('Hello!').then(function(data) {
+ *   var entities = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Language.prototype.annotate = function(content, options, callback) {
   if (is.fn(options)) {
@@ -220,6 +228,14 @@ Language.prototype.annotate = function(content, options, callback) {
  * };
  *
  * language.detectEntities('Axel Foley is from Detroit', options, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * language.detectEntities('Axel Foley is from Detroit').then(function(data) {
+ *   var entities = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Language.prototype.detectEntities = function(content, options, callback) {
   if (is.fn(options)) {
@@ -294,6 +310,14 @@ Language.prototype.detectEntities = function(content, options, callback) {
  * };
  *
  * language.detectSentiment('Hello!', options, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * language.detectSentiment('Hello!').then(function(data) {
+ *   var sentiment = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Language.prototype.detectSentiment = function(content, options, callback) {
   if (is.fn(options)) {
@@ -459,6 +483,15 @@ Language.prototype.text = function(content, options) {
 
   return this.document(options);
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Language, {
+  exclude: ['document', 'html', 'text']
+});
 
 module.exports = Language;
 module.exports.v1beta1 = v1beta1;

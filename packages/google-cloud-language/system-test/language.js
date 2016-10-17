@@ -56,7 +56,7 @@ describe('Language', function() {
   });
 
   after(function(done) {
-    GCS.getBuckets({ prefix: TESTS_PREFIX })
+    GCS.getBucketsStream({ prefix: TESTS_PREFIX })
       .on('error', done)
       .pipe(through.obj(function(bucket, _, next) {
         bucket.deleteFiles({ force: true }, function(err) {

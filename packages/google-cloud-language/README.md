@@ -18,11 +18,6 @@ var language = require('@google-cloud/language')({
   keyFilename: '/path/to/keyfile.json'
 });
 
-var language = language({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
-
 // Get the entities from a sentence.
 language.detectEntities('Stephen of Michigan!', function(err, entities) {
   // entities = {
@@ -64,6 +59,16 @@ document.annotate(function(err, annotations) {
   //     }
   //   ]
   // }
+});
+
+// Promises are also supported by omitting callbacks.
+document.annotate().then(function(data) {
+  var annotations = data[0];
+});
+
+// It's also possible to integrate with third-party Promise libraries.
+var language = require('@google-cloud/language')({
+  promise: require('bluebird')
 });
 ```
 

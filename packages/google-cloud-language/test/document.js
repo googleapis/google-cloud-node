@@ -23,6 +23,7 @@ var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
 var isCustomTypeOverride;
+var promisified = false;
 var fakeUtil = extend(true, {}, util, {
   isCustomType: function() {
     if (isCustomTypeOverride) {
@@ -30,6 +31,11 @@ var fakeUtil = extend(true, {}, util, {
     }
 
     return false;
+  },
+  promisifyAll: function(Class) {
+    if (Class.name === 'Document') {
+      promisified = true;
+    }
   }
 });
 
@@ -68,6 +74,10 @@ describe('Document', function() {
   describe('instantiation', function() {
     it('should expose the gax API', function() {
       assert.strictEqual(document.api, LANGUAGE.api);
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should set the correct document for inline content', function() {

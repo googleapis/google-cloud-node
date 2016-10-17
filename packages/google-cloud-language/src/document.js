@@ -354,6 +354,14 @@ Document.PART_OF_SPEECH = {
  *   //   ]
  *   // }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * document.annotate().then(function(data) {
+ *   var annotation = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Document.prototype.annotate = function(options, callback) {
   if (is.fn(options)) {
@@ -522,6 +530,14 @@ Document.prototype.annotate = function(options, callback) {
  *   //   ]
  *   // }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * document.detectEntities().then(function(data) {
+ *   var entities = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Document.prototype.detectEntities = function(options, callback) {
   if (is.fn(options)) {
@@ -587,6 +603,14 @@ Document.prototype.detectEntities = function(options, callback) {
  *   //   polarity: 100,
  *   //   magnitude: 40
  *   // }
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * document.detectSentiment().then(function(data) {
+ *   var sentiment = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 Document.prototype.detectSentiment = function(options, callback) {
@@ -753,6 +777,13 @@ Document.sortByProperty_ = function(propertyName) {
     return 0;
   };
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Document);
 
 module.exports = Document;
 
