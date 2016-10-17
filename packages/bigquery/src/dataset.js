@@ -57,6 +57,14 @@ function Dataset(bigQuery, id) {
      *     // The dataset was created successfully.
      *   }
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * dataset.create().then(function(data) {
+     *   var dataset = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     create: true,
 
@@ -70,6 +78,13 @@ function Dataset(bigQuery, id) {
      *
      * @example
      * dataset.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * dataset.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -91,6 +106,14 @@ function Dataset(bigQuery, id) {
      *     // `dataset.metadata` has been populated.
      *   }
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * dataset.get().then(function(data) {
+     *   var dataset = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     get: true,
 
@@ -107,6 +130,14 @@ function Dataset(bigQuery, id) {
      *
      * @example
      * dataset.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * dataset.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true,
 
@@ -127,6 +158,13 @@ function Dataset(bigQuery, id) {
      * };
      *
      * dataset.setMetadata(metadata, function(err, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * dataset.setMetadata(metadata).then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     setMetadata: true
   };
@@ -143,6 +181,28 @@ function Dataset(bigQuery, id) {
 }
 
 util.inherits(Dataset, common.ServiceObject);
+
+/**
+ * Run a query scoped to your dataset as a readable object stream.
+ *
+ * See {module:bigquery#createQueryStream} for full documentation of this
+ * method.
+ */
+Dataset.prototype.createQueryStream = function(options) {
+  if (is.string(options)) {
+    options = {
+      query: options
+    };
+  }
+
+  options = extend(true, {}, options, {
+    defaultDataset: {
+      datasetId: this.id
+    }
+  });
+
+  return this.bigQuery.createQueryStream(options);
+};
 
 /**
  * Create a table given a tableId or configuration object.
@@ -172,6 +232,14 @@ util.inherits(Dataset, common.ServiceObject);
  * };
  *
  * dataset.createTable(tableId, options, function(err, table, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * dataset.createTable(tableId, options).then(function(data) {
+ *   var table = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Dataset.prototype.createTable = function(id, options, callback) {
   var self = this;
@@ -248,6 +316,13 @@ Dataset.prototype.createTable = function(id, options, callback) {
  * // Delete the dataset and any tables it contains.
  * //-
  * dataset.delete({ force: true }, function(err, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * dataset.delete().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 Dataset.prototype.delete = function(options, callback) {
   if (!callback) {
@@ -290,23 +365,11 @@ Dataset.prototype.delete = function(options, callback) {
  * });
  *
  * //-
- * // Get the tables as a readable object stream. `table` is a Table object
+ * // If the callback is omitted, we'll return a Promise.
  * //-
- * dataset.getTables()
- *   .on('error', console.error)
- *   .on('data', function(table) {})
- *   .on('end', function() {
- *     // All tables have been retrieved
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * dataset.getTables()
- *   .on('data', function(table) {
- *     this.end();
- *   });
+ * dataset.getTables().then(function(data) {
+ *   var tables = data[0];
+ * });
  */
 Dataset.prototype.getTables = function(query, callback) {
   var that = this;
@@ -345,6 +408,33 @@ Dataset.prototype.getTables = function(query, callback) {
 };
 
 /**
+ * List all or some of the {module:bigquery/table} objects in your project as a
+ * readable object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:bigquery/dataset#getTables} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * dataset.getTablesStream()
+ *   .on('error', console.error)
+ *   .on('data', function(table) {})
+ *   .on('end', function() {
+ *     // All tables have been retrieved
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * dataset.getTablesStream()
+ *   .on('data', function(table) {
+ *     this.end();
+ *   });
+ */
+Dataset.prototype.getTablesStream = common.paginator.streamify('getTables');
+
+/**
  * Run a query scoped to your dataset.
  *
  * See {module:bigquery#query} for full documentation of this method.
@@ -380,9 +470,17 @@ Dataset.prototype.table = function(id) {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(Dataset, ['getTables']);
+common.paginator.extend(Dataset, ['getTables']);
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Dataset, {
+  exclude: ['table']
+});
 
 module.exports = Dataset;

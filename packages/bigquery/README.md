@@ -31,6 +31,16 @@ job.getQueryResults(function(err, rows) {});
 
 // Or get the same results as a readable stream.
 job.getQueryResults().on('data', function(row) {});
+
+// Promises are also supported by omitting callbacks.
+job.getQueryResults().then(function(data) {
+  var rows = data[0];
+});
+
+// It's also possible to integrate with third-party Promise libraries.
+var bigquery = require('@google-cloud/bigquery')({
+  promise: require('bluebird')
+});
 ```
 
 

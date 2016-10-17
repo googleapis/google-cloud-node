@@ -87,6 +87,13 @@ function Job(bigQuery, id) {
      *
      * @example
      * job.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * job.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -98,6 +105,14 @@ function Job(bigQuery, id) {
      *   if (!err) {
      *     // `job.metadata` has been populated.
      *   }
+     * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * job.get().then(function(data) {
+     *   var job = data[0];
+     *   var apiResponse = data[1];
      * });
      */
     get: true,
@@ -117,6 +132,14 @@ function Job(bigQuery, id) {
      * @example
      * var job = bigquery.job('id');
      * job.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * job.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true
   };
@@ -167,6 +190,13 @@ modelo.inherits(Job, common.ServiceObject, events.EventEmitter);
  *   // Check to see if the job completes successfully.
  *   job.on('error', function(err) {});
  *   job.on('complete', function(metadata) {});
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * job.cancel().then(function(data) {
+ *   var apiResponse = data[0];
  * });
  */
 Job.prototype.cancel = function(callback) {
@@ -240,17 +270,11 @@ Job.prototype.cancel = function(callback) {
  * }, callback);
  *
  * //-
- * // Consume the results from the query as a readable object stream.
+ * // If the callback is omitted, we'll return a Promise.
  * //-
- * var through2 = require('through2');
- * var fs = require('fs');
- *
- * job.getQueryResults()
- *   .pipe(through2.obj(function (row, enc, next) {
- *     this.push(JSON.stringify(row) + '\n');
- *     next();
- *   }))
- *   .pipe(fs.createWriteStream('./test/testdata/testfile.json'));
+ * job.getQueryResults().then(function(data) {
+ *   var rows = data[0];
+ * });
  */
 Job.prototype.getQueryResults = function(options, callback) {
   if (is.fn(options)) {
@@ -260,7 +284,57 @@ Job.prototype.getQueryResults = function(options, callback) {
 
   options = options || {};
   options.job = this;
-  return this.bigQuery.query(options, callback);
+  this.bigQuery.query(options, callback);
+};
+
+/**
+ * Get the results of a job as a readable object stream.
+ *
+ * @param {object=} options - Configuration object. See
+ *     {module:bigquery/job#getQueryResults} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * var through2 = require('through2');
+ * var fs = require('fs');
+ *
+ * job.getQueryResultsStream()
+ *   .pipe(through2.obj(function (row, enc, next) {
+ *     this.push(JSON.stringify(row) + '\n');
+ *     next();
+ *   }))
+ *   .pipe(fs.createWriteStream('./test/testdata/testfile.json'));
+ */
+Job.prototype.getQueryResultsStream = function(options) {
+  options = options || {};
+  options.job = this;
+
+  return this.bigQuery.createQueryStream(options);
+};
+
+/**
+ * Convenience method that wraps the `complete` and `error` events in a
+ * Promise.
+ *
+ * @return {promise}
+ *
+ * @example
+ * job.promise().then(function(metadata) {
+ *   // The job is complete.
+ * }, function(err) {
+ *   // An error occurred during the job.
+ * });
+ */
+Job.prototype.promise = function() {
+  var self = this;
+
+  return new self.Promise(function(resolve, reject) {
+    self
+      .on('error', reject)
+      .on('complete', function(metadata) {
+        resolve([metadata]);
+      });
+  });
 };
 
 /**
@@ -328,5 +402,12 @@ Job.prototype.startPolling_ = function() {
     self.emit('complete', metadata);
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Job);
 
 module.exports = Job;
