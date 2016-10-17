@@ -18,11 +18,29 @@
 
 var arrify = require('arrify');
 var assert = require('assert');
+var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
-var ServiceObject = require('@google-cloud/common').ServiceObject;
+var ServiceObject = common.ServiceObject;
+
+var promisified = false;
+var fakeUtil = extend({}, common.util, {
+  promisifyAll: function(Class, options) {
+    if (Class.name !== 'Region') {
+      return;
+    }
+
+    promisified = true;
+    assert.deepEqual(options.exclude, [
+      'address',
+      'operation',
+      'rule',
+      'subnetwork'
+    ]);
+  }
+});
 
 function FakeAddress() {
   this.calledWith_ = [].slice.call(arguments);
@@ -52,7 +70,7 @@ function FakeSubnetwork() {
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 var extended = false;
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'Region') {
       return;
@@ -67,6 +85,9 @@ var fakeStreamRouter = {
       'getRules',
       'getSubnetworks'
     ]);
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -83,7 +104,8 @@ describe('Region', function() {
     Region = proxyquire('../src/region.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        streamRouter: fakeStreamRouter
+        paginator: fakePaginator,
+        util: fakeUtil
       },
       './address.js': FakeAddress,
       './network.js': FakeNetwork,
@@ -98,8 +120,19 @@ describe('Region', function() {
   });
 
   describe('instantiation', function() {
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
+
     it('should extend the correct methods', function() {
-      assert(extended); // See `fakeStreamRouter.extend`
+      assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(region.getAddressesStream, 'getAddresses');
+      assert.strictEqual(region.getOperationsStream, 'getOperations');
+      assert.strictEqual(region.getRulesStream, 'getRules');
+      assert.strictEqual(region.getSubnetworksStream, 'getSubnetworks');
     });
 
     it('should localize the name', function() {

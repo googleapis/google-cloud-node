@@ -23,6 +23,15 @@ var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class) {
+    if (Class.name === 'Address') {
+      promisified = true;
+    }
+  }
+});
+
 function FakeServiceObject() {
   this.calledWith_ = arguments;
   ServiceObject.apply(this, arguments);
@@ -42,7 +51,8 @@ describe('Address', function() {
   before(function() {
     Address = proxyquire('../src/address.js', {
       '@google-cloud/common': {
-        ServiceObject: FakeServiceObject
+        ServiceObject: FakeServiceObject,
+        util: fakeUtil
       }
     });
   });
@@ -58,6 +68,10 @@ describe('Address', function() {
 
     it('should localize the name', function() {
       assert.strictEqual(address.name, ADDRESS_NAME);
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should inherit from ServiceObject', function(done) {

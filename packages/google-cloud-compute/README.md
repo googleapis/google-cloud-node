@@ -30,6 +30,23 @@ zone.createVM(name, { os: 'ubuntu' }, function(err, vm, operation) {
       // Virtual machine created!
     });
 });
+
+// Promises are also supported by omitting callbacks.
+zone.createVM(name)
+  .then(function(data) {
+    var vm = data[0];
+    var operation = data[1];
+
+    return operation.promise();
+  })
+  .then(function() {
+    // Virtual machine created!
+  });
+
+// It's also possible to integrate with third-party Promise libraries.
+var gce = require('@google-cloud/compute')({
+  promise: require('bluebird')
+});
 ```
 
 

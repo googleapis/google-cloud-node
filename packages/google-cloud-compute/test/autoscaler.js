@@ -23,6 +23,15 @@ var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class) {
+    if (Class.name === 'Autoscaler') {
+      promisified = true;
+    }
+  }
+});
+
 function FakeServiceObject() {
   this.calledWith_ = arguments;
   ServiceObject.apply(this, arguments);
@@ -46,7 +55,8 @@ describe('Autoscaler', function() {
   before(function() {
     Autoscaler = proxyquire('../src/autoscaler.js', {
       '@google-cloud/common': {
-        ServiceObject: FakeServiceObject
+        ServiceObject: FakeServiceObject,
+        util: fakeUtil
       }
     });
   });
@@ -62,6 +72,10 @@ describe('Autoscaler', function() {
 
     it('should localize the name', function() {
       assert.strictEqual(autoscaler.name, AUTOSCALER_NAME);
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should inherit from ServiceObject', function() {
