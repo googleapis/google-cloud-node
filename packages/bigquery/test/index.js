@@ -26,7 +26,17 @@ var Service = require('@google-cloud/common').Service;
 var Table = require('../src/table.js');
 var util = require('@google-cloud/common').util;
 
-var fakeUtil = extend({}, util);
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class, options) {
+    if (Class.name !== 'BigQuery') {
+      return;
+    }
+
+    promisified = true;
+    assert.deepEqual(options.exclude, ['dataset', 'job']);
+  }
+});
 
 function FakeTable(a, b) {
   Table.call(this, a, b);
@@ -40,7 +50,7 @@ FakeTable.mergeSchemaWithRows_ = function() {
 };
 
 var extended = false;
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'BigQuery') {
       return;
@@ -50,6 +60,9 @@ var fakeStreamRouter = {
     assert.equal(Class.name, 'BigQuery');
     assert.deepEqual(methods, ['getDatasets', 'getJobs', 'query']);
     extended = true;
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -72,7 +85,7 @@ describe('BigQuery', function() {
       './table.js': FakeTable,
       '@google-cloud/common': {
         Service: FakeService,
-        streamRouter: fakeStreamRouter,
+        paginator: fakePaginator,
         util: fakeUtil
       }
     });
@@ -84,7 +97,17 @@ describe('BigQuery', function() {
 
   describe('instantiation', function() {
     it('should extend the correct methods', function() {
-      assert(extended); // See `fakeStreamRouter.extend`
+      assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(bq.getDatasetsStream, 'getDatasets');
+      assert.strictEqual(bq.getJobsStream, 'getJobs');
+      assert.strictEqual(bq.createQueryStream, 'query');
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should normalize the arguments', function() {
