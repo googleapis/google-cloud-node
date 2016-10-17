@@ -53,6 +53,11 @@ localReadStream.pipe(remoteWriteStream);
 bucket.upload('/photos/zoo/zebra.jpg').then(function(data) {
   var file = data[0];
 });
+
+// It's also possible to integrate with third-party Promise libraries.
+var gcs = require('@google-cloud/storage')({
+  promise: require('bluebird')
+});
 ```
 
 
