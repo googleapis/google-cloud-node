@@ -24,7 +24,7 @@ var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
 var extended = false;
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'Logging') {
       return;
@@ -36,10 +36,14 @@ var fakeStreamRouter = {
       'getEntries',
       'getSinks'
     ]);
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
 var isCustomTypeOverride;
+var promisifed = false;
 var fakeUtil = extend({}, util, {
   isCustomType: function() {
     if (isCustomTypeOverride) {
@@ -47,6 +51,14 @@ var fakeUtil = extend({}, util, {
     }
 
     return false;
+  },
+  promisifyAll: function(Class, options) {
+    if (Class.name !== 'Logging') {
+      return;
+    }
+
+    promisifed = true;
+    assert.deepEqual(options.exclude, ['entry', 'log', 'sink']);
   }
 });
 
@@ -80,7 +92,7 @@ describe('Logging', function() {
     Logging = proxyquire('../', {
       '@google-cloud/common': {
         GrpcService: FakeGrpcService,
-        streamRouter: fakeStreamRouter,
+        paginator: fakePaginator,
         util: fakeUtil
       },
       './log.js': FakeLog,
@@ -101,7 +113,16 @@ describe('Logging', function() {
 
   describe('instantiation', function() {
     it('should extend the correct methods', function() {
-      assert(extended); // See `fakeStreamRouter.extend`
+      assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisifed);
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(logging.getEntriesStream, 'getEntries');
+      assert.strictEqual(logging.getSinksStream, 'getSinks');
     });
 
     it('should normalize the arguments', function() {

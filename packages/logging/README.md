@@ -49,6 +49,16 @@ logging.getEntries(function(err, entries) {
     // `entries` contains all of the entries from the logs in your project.
   }
 });
+
+// Promises are also supported by omitting callbacks.
+logging.getEntries().then(function(data) {
+  var entries = data[0];
+});
+
+// It's also possible to integrate with third-party Promise libraries.
+var logging = require('@google-cloud/logging')({
+  promise: require('bluebird')
+});
 ```
 
 
