@@ -81,6 +81,14 @@ function Snapshot(scope, name) {
      * snapshot.get(function(err, snapshot, apiResponse) {
      *   // `snapshot` is a Snapshot object.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * snapshot.get().then(function(data) {
+     *   var snapshot = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     get: true,
 
@@ -98,6 +106,14 @@ function Snapshot(scope, name) {
      *
      * @example
      * snapshot.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * snapshot.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true
   };
@@ -127,6 +143,16 @@ function Snapshot(scope, name) {
      *   // `operation` is an Operation object that can be used to check the
      *   // status of the request.
      * });
+     *
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * snapshot.create().then(function(data) {
+     *   var snapshot = data[0];
+     *   var operation = data[1];
+     *   var apiResponse = data[2];
+     * });
      */
     config.methods.create = true;
   }
@@ -155,6 +181,14 @@ util.inherits(Snapshot, common.ServiceObject);
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * snapshot.delete().then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Snapshot.prototype.delete = function(callback) {
   callback = callback || common.util.noop;
@@ -173,5 +207,12 @@ Snapshot.prototype.delete = function(callback) {
     callback(null, operation, resp);
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Snapshot);
 
 module.exports = Snapshot;

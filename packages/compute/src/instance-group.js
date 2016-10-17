@@ -63,6 +63,15 @@ function InstanceGroup(zone, name) {
      * }
      *
      * instanceGroup.create(onCreated);
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * instanceGroup.create().then(function(data) {
+     *   var instanceGroup = data[0];
+     *   var operation = data[1];
+     *   var apiResponse = data[2]
+     * });
      */
     create: true,
 
@@ -77,6 +86,13 @@ function InstanceGroup(zone, name) {
      *
      * @example
      * instanceGroup.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * instanceGroup.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -96,6 +112,14 @@ function InstanceGroup(zone, name) {
      * instanceGroup.get(function(err, instanceGroup, apiResponse) {
      *   // `instanceGroup` is an InstanceGroup object.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * instanceGroup.get().then(function(data) {
+     *   var instanceGroup = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     get: true,
 
@@ -113,6 +137,14 @@ function InstanceGroup(zone, name) {
      *
      * @example
      * instanceGroup.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * instanceGroup.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true
   };
@@ -172,6 +204,14 @@ InstanceGroup.formatPorts_ = function(ports) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * instanceGroup.add(vms).then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 InstanceGroup.prototype.add = function(vms, callback) {
   var self = this;
@@ -214,6 +254,14 @@ InstanceGroup.prototype.add = function(vms, callback) {
  * instanceGroup.delete(function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * instanceGroup.delete().then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 InstanceGroup.prototype.delete = function(callback) {
@@ -281,25 +329,11 @@ InstanceGroup.prototype.delete = function(callback) {
  * }, callback);
  *
  * //-
- * // Get the VM instances from your project as a readable object stream.
+ * // If the callback is omitted, we'll return a Promise.
  * //-
- * instanceGroup.getVMs()
- *   .on('error', console.error)
- *   .on('data', function(vm) {
- *     // `vm` is a `VM` object.
- *   })
- *   .on('end', function() {
- *     // All instances retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * instanceGroup.getVMs()
- *   .on('data', function(vm) {
- *     this.end();
- *   });
+ * instanceGroup.getVMs().then(function(data) {
+ *   var vms = data[0];
+ * });
  */
 InstanceGroup.prototype.getVMs = function(options, callback) {
   var self = this;
@@ -349,6 +383,35 @@ InstanceGroup.prototype.getVMs = function(options, callback) {
 };
 
 /**
+ * Get a list of {module:compute/vm} instances in this instance group as a
+ * readable object stream.
+ *
+ * @param {object=} options - Configuration object. See
+ *     {module:compute/instanceGroup#getVMs} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * instanceGroup.getVMsStream()
+ *   .on('error', console.error)
+ *   .on('data', function(vm) {
+ *     // `vm` is a `VM` object.
+ *   })
+ *   .on('end', function() {
+ *     // All instances retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * instanceGroup.getVMsStream()
+ *   .on('data', function(vm) {
+ *     this.end();
+ *   });
+ */
+InstanceGroup.prototype.getVMsStream = common.paginator.streamify('getVMs');
+
+/**
  * Remove one or more VMs from this instance group.
  *
  * @resource [InstanceGroups: removeInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/removeInstances}
@@ -370,6 +433,14 @@ InstanceGroup.prototype.getVMs = function(options, callback) {
  * instanceGroup.remove(vms, function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * instanceGroup.remove(vms).then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 InstanceGroup.prototype.remove = function(vms, callback) {
@@ -421,6 +492,14 @@ InstanceGroup.prototype.remove = function(vms, callback) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * instanceGroup.setPorts(ports).then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 InstanceGroup.prototype.setPorts = function(ports, callback) {
   var self = this;
@@ -448,9 +527,15 @@ InstanceGroup.prototype.setPorts = function(ports, callback) {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(InstanceGroup, ['getVMs']);
+common.paginator.extend(InstanceGroup, ['getVMs']);
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(InstanceGroup);
 
 module.exports = InstanceGroup;

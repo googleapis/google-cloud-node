@@ -19,7 +19,22 @@
 var assert = require('assert');
 var extend = require('extend');
 var proxyquire = require('proxyquire');
+var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
+
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class) {
+    if (Class.name === 'Rule') {
+      promisified = true;
+    }
+  }
+});
+
+function FakeServiceObject() {
+  this.calledWith_ = arguments;
+  ServiceObject.apply(this, arguments);
+}
 
 function FakeServiceObject() {
   this.calledWith_ = arguments;
@@ -40,7 +55,8 @@ describe('Rule', function() {
   before(function() {
     Rule = proxyquire('../src/rule.js', {
       '@google-cloud/common': {
-        ServiceObject: FakeServiceObject
+        ServiceObject: FakeServiceObject,
+        util: fakeUtil
       }
     });
   });
@@ -78,6 +94,10 @@ describe('Rule', function() {
         get: true,
         getMetadata: true
       });
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should not use global forwarding rules', function() {
