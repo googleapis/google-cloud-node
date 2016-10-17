@@ -160,7 +160,7 @@ var TOPIC_PATH_TEMPLATE = new gax.PathTemplate(
  * @param {String} project
  * @returns {String}
  */
-PublisherApi.prototype.projectPath = function projectPath(project) {
+PublisherApi.prototype.projectPath = function(project) {
   return PROJECT_PATH_TEMPLATE.render({
     project: project
   });
@@ -172,8 +172,7 @@ PublisherApi.prototype.projectPath = function projectPath(project) {
  *   A fully-qualified path representing a project resources.
  * @returns {String} - A string representing the project.
  */
-PublisherApi.prototype.matchProjectFromProjectName =
-    function matchProjectFromProjectName(projectName) {
+PublisherApi.prototype.matchProjectFromProjectName = function(projectName) {
   return PROJECT_PATH_TEMPLATE.match(projectName).project;
 };
 
@@ -183,7 +182,7 @@ PublisherApi.prototype.matchProjectFromProjectName =
  * @param {String} topic
  * @returns {String}
  */
-PublisherApi.prototype.topicPath = function topicPath(project, topic) {
+PublisherApi.prototype.topicPath = function(project, topic) {
   return TOPIC_PATH_TEMPLATE.render({
     project: project,
     topic: topic
@@ -196,8 +195,7 @@ PublisherApi.prototype.topicPath = function topicPath(project, topic) {
  *   A fully-qualified path representing a topic resources.
  * @returns {String} - A string representing the project.
  */
-PublisherApi.prototype.matchProjectFromTopicName =
-    function matchProjectFromTopicName(topicName) {
+PublisherApi.prototype.matchProjectFromTopicName = function(topicName) {
   return TOPIC_PATH_TEMPLATE.match(topicName).project;
 };
 
@@ -207,8 +205,7 @@ PublisherApi.prototype.matchProjectFromTopicName =
  *   A fully-qualified path representing a topic resources.
  * @returns {String} - A string representing the topic.
  */
-PublisherApi.prototype.matchTopicFromTopicName =
-    function matchTopicFromTopicName(topicName) {
+PublisherApi.prototype.matchTopicFromTopicName = function(topicName) {
   return TOPIC_PATH_TEMPLATE.match(topicName).topic;
 };
 
@@ -217,7 +214,9 @@ PublisherApi.prototype.matchTopicFromTopicName =
 /**
  * Creates the given topic with the given name.
  *
- * @param {string} name
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
  *   The name of the topic. It must have the format
  *   `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
  *   and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
@@ -231,25 +230,20 @@ PublisherApi.prototype.matchTopicFromTopicName =
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [Topic]{@link Topic}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = pubsubV1.publisherApi();
  * var formattedName = api.topicPath("[PROJECT]", "[TOPIC]");
- * api.createTopic(formattedName, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * api.createTopic({name: formattedName}).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-PublisherApi.prototype.createTopic = function createTopic(
-    name,
-    options,
-    callback) {
+PublisherApi.prototype.createTopic = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -257,10 +251,7 @@ PublisherApi.prototype.createTopic = function createTopic(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    name: name
-  };
-  return this._createTopic(req, options, callback);
+  return this._createTopic(request, options, callback);
 };
 
 /**
@@ -268,9 +259,11 @@ PublisherApi.prototype.createTopic = function createTopic(
  * does not exist. The message payload must not be empty; it must contain
  *  either a non-empty data field, or at least one attribute.
  *
- * @param {string} topic
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.topic
  *   The messages in the request will be published on this topic.
- * @param {Object[]} messages
+ * @param {Object[]} request.messages
  *   The messages to publish.
  *
  *   This object should have the same structure as [PubsubMessage]{@link PubsubMessage}
@@ -281,10 +274,8 @@ PublisherApi.prototype.createTopic = function createTopic(
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [PublishResponse]{@link PublishResponse}
- * @returns {gax.BundleEventEmitter} - the event emitter to handle the call
- *   status. When isBundling: false is specified in the options, it still returns
- *   a gax.BundleEventEmitter but the API is immediately invoked, so it behaves same
- *   as a gax.EventEmitter does.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
@@ -295,19 +286,17 @@ PublisherApi.prototype.createTopic = function createTopic(
  *     data : data
  * };
  * var messages = [messagesElement];
- * api.publish(formattedTopic, messages, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * var request = {
+ *     topic: formattedTopic,
+ *     messages: messages
+ * };
+ * api.publish(request).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-PublisherApi.prototype.publish = function publish(
-    topic,
-    messages,
-    options,
-    callback) {
+PublisherApi.prototype.publish = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -315,17 +304,15 @@ PublisherApi.prototype.publish = function publish(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    topic: topic,
-    messages: messages
-  };
-  return this._publish(req, options, callback);
+  return this._publish(request, options, callback);
 };
 
 /**
  * Gets the configuration of a topic.
  *
- * @param {string} topic
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.topic
  *   The name of the topic to get.
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
@@ -334,25 +321,20 @@ PublisherApi.prototype.publish = function publish(
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [Topic]{@link Topic}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = pubsubV1.publisherApi();
  * var formattedTopic = api.topicPath("[PROJECT]", "[TOPIC]");
- * api.getTopic(formattedTopic, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * api.getTopic({topic: formattedTopic}).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-PublisherApi.prototype.getTopic = function getTopic(
-    topic,
-    options,
-    callback) {
+PublisherApi.prototype.getTopic = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -360,47 +342,43 @@ PublisherApi.prototype.getTopic = function getTopic(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    topic: topic
-  };
-  return this._getTopic(req, options, callback);
+  return this._getTopic(request, options, callback);
 };
 
 /**
  * Lists matching topics.
  *
- * @param {string} project
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.project
  *   The name of the cloud project that topics belong to.
- * @param {Object=} options
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
- *
- *   In addition, options may contain the following optional parameters.
- * @param {number=} options.pageSize
+ * @param {number=} request.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
  *   parameter does not affect the return value. If page streaming is
  *   performed per-page, this determines the maximum number of
  *   resources in a page.
- *
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object, ?string)=} callback
  *   When specified, the results are not streamed but this callback
  *   will be called with the response object representing [ListTopicsResponse]{@link ListTopicsResponse}.
  *   The third item will be set if the response contains the token for the further results
  *   and can be reused to `pageToken` field in the options in the next request.
- * @returns {Stream|gax.EventEmitter}
+ * @returns {Stream|Promise}
  *   An object stream which emits an object representing
  *   [Topic]{@link Topic} on 'data' event.
  *   When the callback is specified or streaming is suppressed through options,
- *   it will return an event emitter to handle the call status and the callback
- *   will be called with the response object.
+ *   it will return a promise that resolves to the response object. The promise
+ *   has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = pubsubV1.publisherApi();
  * var formattedProject = api.projectPath("[PROJECT]");
  * // Iterate over all elements.
- * api.listTopics(formattedProject).on('data', function(element) {
+ * api.listTopics({project: formattedProject}).on('data', function(element) {
  *     // doThingsWith(element)
  * });
  *
@@ -413,15 +391,12 @@ PublisherApi.prototype.getTopic = function getTopic(
  *     // doThingsWith(response)
  *     if (nextPageToken) {
  *         // fetch the next page.
- *         api.listTopics(formattedProject, {pageToken: nextPageToken}, callback);
+ *         api.listTopics({project: formattedProject}, {pageToken: nextPageToken}, callback);
  *     }
  * }
- * api.listTopics(formattedProject, {flattenPages: false}, callback);
+ * api.listTopics({project: formattedProject}, {flattenPages: false}, callback);
  */
-PublisherApi.prototype.listTopics = function listTopics(
-    project,
-    options,
-    callback) {
+PublisherApi.prototype.listTopics = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -429,49 +404,42 @@ PublisherApi.prototype.listTopics = function listTopics(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    project: project
-  };
-  if ('pageSize' in options) {
-    req.pageSize = options.pageSize;
-  }
-  return this._listTopics(req, options, callback);
+  return this._listTopics(request, options, callback);
 };
 
 /**
  * Lists the name of the subscriptions for this topic.
  *
- * @param {string} topic
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.topic
  *   The name of the topic that subscriptions are attached to.
- * @param {Object=} options
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
- *
- *   In addition, options may contain the following optional parameters.
- * @param {number=} options.pageSize
+ * @param {number=} request.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
  *   parameter does not affect the return value. If page streaming is
  *   performed per-page, this determines the maximum number of
  *   resources in a page.
- *
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object, ?string)=} callback
  *   When specified, the results are not streamed but this callback
  *   will be called with the response object representing [ListTopicSubscriptionsResponse]{@link ListTopicSubscriptionsResponse}.
  *   The third item will be set if the response contains the token for the further results
  *   and can be reused to `pageToken` field in the options in the next request.
- * @returns {Stream|gax.EventEmitter}
+ * @returns {Stream|Promise}
  *   An object stream which emits a string on 'data' event.
  *   When the callback is specified or streaming is suppressed through options,
- *   it will return an event emitter to handle the call status and the callback
- *   will be called with the response object.
+ *   it will return a promise that resolves to the response object. The promise
+ *   has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = pubsubV1.publisherApi();
  * var formattedTopic = api.topicPath("[PROJECT]", "[TOPIC]");
  * // Iterate over all elements.
- * api.listTopicSubscriptions(formattedTopic).on('data', function(element) {
+ * api.listTopicSubscriptions({topic: formattedTopic}).on('data', function(element) {
  *     // doThingsWith(element)
  * });
  *
@@ -484,15 +452,12 @@ PublisherApi.prototype.listTopics = function listTopics(
  *     // doThingsWith(response)
  *     if (nextPageToken) {
  *         // fetch the next page.
- *         api.listTopicSubscriptions(formattedTopic, {pageToken: nextPageToken}, callback);
+ *         api.listTopicSubscriptions({topic: formattedTopic}, {pageToken: nextPageToken}, callback);
  *     }
  * }
- * api.listTopicSubscriptions(formattedTopic, {flattenPages: false}, callback);
+ * api.listTopicSubscriptions({topic: formattedTopic}, {flattenPages: false}, callback);
  */
-PublisherApi.prototype.listTopicSubscriptions = function listTopicSubscriptions(
-    topic,
-    options,
-    callback) {
+PublisherApi.prototype.listTopicSubscriptions = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -500,13 +465,7 @@ PublisherApi.prototype.listTopicSubscriptions = function listTopicSubscriptions(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    topic: topic
-  };
-  if ('pageSize' in options) {
-    req.pageSize = options.pageSize;
-  }
-  return this._listTopicSubscriptions(req, options, callback);
+  return this._listTopicSubscriptions(request, options, callback);
 };
 
 /**
@@ -516,30 +475,27 @@ PublisherApi.prototype.listTopicSubscriptions = function listTopicSubscriptions(
  * configuration or subscriptions. Existing subscriptions to this topic are
  * not deleted, but their `topic` field is set to `_deleted-topic_`.
  *
- * @param {string} topic
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.topic
  *   Name of the topic to delete.
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error)=} callback
  *   The function which will be called with the result of the API call.
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = pubsubV1.publisherApi();
  * var formattedTopic = api.topicPath("[PROJECT]", "[TOPIC]");
- * api.deleteTopic(formattedTopic, function(err) {
- *     if (err) {
- *         console.error(err);
- *     }
+ * api.deleteTopic({topic: formattedTopic}).catch(function(err) {
+ *     console.error(err);
  * });
  */
-PublisherApi.prototype.deleteTopic = function deleteTopic(
-    topic,
-    options,
-    callback) {
+PublisherApi.prototype.deleteTopic = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -547,24 +503,24 @@ PublisherApi.prototype.deleteTopic = function deleteTopic(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    topic: topic
-  };
-  return this._deleteTopic(req, options, callback);
+  return this._deleteTopic(request, options, callback);
 };
 
 /**
  * Sets the access control policy on the specified resource. Replaces any
  * existing policy.
  *
- * @param {string} resource
- *   REQUIRED: The resource for which policy is being specified.
- *   Resource is usually specified as a path, such as,
- *   projects/{project}/zones/{zone}/disks/{disk}.
- * @param {Object} policy
- *   REQUIRED: The complete policy to be applied to the 'resource'. The size of
- *   the policy is limited to a few 10s of KB. An empty policy is in general a
- *   valid policy but certain services (like Projects) might reject them.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being specified.
+ *   `resource` is usually specified as a path. For example, a Project
+ *   resource is specified as `projects/{project}`.
+ * @param {Object} request.policy
+ *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+ *   the policy is limited to a few 10s of KB. An empty policy is a
+ *   valid policy but certain Cloud Platform services (such as Projects)
+ *   might reject them.
  *
  *   This object should have the same structure as [Policy]{@link Policy}
  * @param {Object=} options
@@ -574,27 +530,25 @@ PublisherApi.prototype.deleteTopic = function deleteTopic(
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [Policy]{@link Policy}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = pubsubV1.publisherApi();
  * var formattedResource = api.topicPath("[PROJECT]", "[TOPIC]");
  * var policy = {};
- * api.setIamPolicy(formattedResource, policy, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * var request = {
+ *     resource: formattedResource,
+ *     policy: policy
+ * };
+ * api.setIamPolicy(request).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-PublisherApi.prototype.setIamPolicy = function setIamPolicy(
-    resource,
-    policy,
-    options,
-    callback) {
+PublisherApi.prototype.setIamPolicy = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -602,20 +556,20 @@ PublisherApi.prototype.setIamPolicy = function setIamPolicy(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    resource: resource,
-    policy: policy
-  };
-  return this._setIamPolicy(req, options, callback);
+  return this._setIamPolicy(request, options, callback);
 };
 
 /**
- * Gets the access control policy for a resource. Is empty if the
- * policy or the resource does not exist.
+ * Gets the access control policy for a resource.
+ * Returns an empty policy if the resource exists and does not have a policy
+ * set.
  *
- * @param {string} resource
- *   REQUIRED: The resource for which policy is being requested. Resource
- *   is usually specified as a path, such as, projects/{project}.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   `resource` is usually specified as a path. For example, a Project
+ *   resource is specified as `projects/{project}`.
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -623,25 +577,20 @@ PublisherApi.prototype.setIamPolicy = function setIamPolicy(
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [Policy]{@link Policy}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = pubsubV1.publisherApi();
  * var formattedResource = api.topicPath("[PROJECT]", "[TOPIC]");
- * api.getIamPolicy(formattedResource, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * api.getIamPolicy({resource: formattedResource}).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-PublisherApi.prototype.getIamPolicy = function getIamPolicy(
-    resource,
-    options,
-    callback) {
+PublisherApi.prototype.getIamPolicy = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -649,21 +598,23 @@ PublisherApi.prototype.getIamPolicy = function getIamPolicy(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    resource: resource
-  };
-  return this._getIamPolicy(req, options, callback);
+  return this._getIamPolicy(request, options, callback);
 };
 
 /**
  * Returns permissions that a caller has on the specified resource.
  *
- * @param {string} resource
- *   REQUIRED: The resource for which policy detail is being requested.
- *   Resource is usually specified as a path, such as, projects/{project}.
- * @param {string[]} permissions
- *   The set of permissions to check for the 'resource'. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   `resource` is usually specified as a path. For example, a Project
+ *   resource is specified as `projects/{project}`.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see
+ *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
@@ -671,27 +622,25 @@ PublisherApi.prototype.getIamPolicy = function getIamPolicy(
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [TestIamPermissionsResponse]{@link TestIamPermissionsResponse}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = pubsubV1.publisherApi();
  * var formattedResource = api.topicPath("[PROJECT]", "[TOPIC]");
  * var permissions = [];
- * api.testIamPermissions(formattedResource, permissions, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * var request = {
+ *     resource: formattedResource,
+ *     permissions: permissions
+ * };
+ * api.testIamPermissions(request).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-PublisherApi.prototype.testIamPermissions = function testIamPermissions(
-    resource,
-    permissions,
-    options,
-    callback) {
+PublisherApi.prototype.testIamPermissions = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -699,11 +648,7 @@ PublisherApi.prototype.testIamPermissions = function testIamPermissions(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    resource: resource,
-    permissions: permissions
-  };
-  return this._testIamPermissions(req, options, callback);
+  return this._testIamPermissions(request, options, callback);
 };
 
 function PublisherApiBuilder(gaxGrpc) {

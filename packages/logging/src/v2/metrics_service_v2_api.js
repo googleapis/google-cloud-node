@@ -129,7 +129,7 @@ var METRIC_PATH_TEMPLATE = new gax.PathTemplate(
  * @param {String} project
  * @returns {String}
  */
-MetricsServiceV2Api.prototype.parentPath = function parentPath(project) {
+MetricsServiceV2Api.prototype.parentPath = function(project) {
   return PARENT_PATH_TEMPLATE.render({
     project: project
   });
@@ -141,8 +141,7 @@ MetricsServiceV2Api.prototype.parentPath = function parentPath(project) {
  *   A fully-qualified path representing a parent resources.
  * @returns {String} - A string representing the project.
  */
-MetricsServiceV2Api.prototype.matchProjectFromParentName =
-    function matchProjectFromParentName(parentName) {
+MetricsServiceV2Api.prototype.matchProjectFromParentName = function(parentName) {
   return PARENT_PATH_TEMPLATE.match(parentName).project;
 };
 
@@ -152,7 +151,7 @@ MetricsServiceV2Api.prototype.matchProjectFromParentName =
  * @param {String} metric
  * @returns {String}
  */
-MetricsServiceV2Api.prototype.metricPath = function metricPath(project, metric) {
+MetricsServiceV2Api.prototype.metricPath = function(project, metric) {
   return METRIC_PATH_TEMPLATE.render({
     project: project,
     metric: metric
@@ -165,8 +164,7 @@ MetricsServiceV2Api.prototype.metricPath = function metricPath(project, metric) 
  *   A fully-qualified path representing a metric resources.
  * @returns {String} - A string representing the project.
  */
-MetricsServiceV2Api.prototype.matchProjectFromMetricName =
-    function matchProjectFromMetricName(metricName) {
+MetricsServiceV2Api.prototype.matchProjectFromMetricName = function(metricName) {
   return METRIC_PATH_TEMPLATE.match(metricName).project;
 };
 
@@ -176,8 +174,7 @@ MetricsServiceV2Api.prototype.matchProjectFromMetricName =
  *   A fully-qualified path representing a metric resources.
  * @returns {String} - A string representing the metric.
  */
-MetricsServiceV2Api.prototype.matchMetricFromMetricName =
-    function matchMetricFromMetricName(metricName) {
+MetricsServiceV2Api.prototype.matchMetricFromMetricName = function(metricName) {
   return METRIC_PATH_TEMPLATE.match(metricName).metric;
 };
 
@@ -186,39 +183,38 @@ MetricsServiceV2Api.prototype.matchMetricFromMetricName =
 /**
  * Lists logs-based metrics.
  *
- * @param {string} parent
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
  *   Required. The resource name containing the metrics.
  *   Example: `"projects/my-project-id"`.
- * @param {Object=} options
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
- *
- *   In addition, options may contain the following optional parameters.
- * @param {number=} options.pageSize
+ * @param {number=} request.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
  *   parameter does not affect the return value. If page streaming is
  *   performed per-page, this determines the maximum number of
  *   resources in a page.
- *
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object, ?string)=} callback
  *   When specified, the results are not streamed but this callback
  *   will be called with the response object representing [ListLogMetricsResponse]{@link ListLogMetricsResponse}.
  *   The third item will be set if the response contains the token for the further results
  *   and can be reused to `pageToken` field in the options in the next request.
- * @returns {Stream|gax.EventEmitter}
+ * @returns {Stream|Promise}
  *   An object stream which emits an object representing
  *   [LogMetric]{@link LogMetric} on 'data' event.
  *   When the callback is specified or streaming is suppressed through options,
- *   it will return an event emitter to handle the call status and the callback
- *   will be called with the response object.
+ *   it will return a promise that resolves to the response object. The promise
+ *   has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = loggingV2.metricsServiceV2Api();
  * var formattedParent = api.parentPath("[PROJECT]");
  * // Iterate over all elements.
- * api.listLogMetrics(formattedParent).on('data', function(element) {
+ * api.listLogMetrics({parent: formattedParent}).on('data', function(element) {
  *     // doThingsWith(element)
  * });
  *
@@ -231,15 +227,12 @@ MetricsServiceV2Api.prototype.matchMetricFromMetricName =
  *     // doThingsWith(response)
  *     if (nextPageToken) {
  *         // fetch the next page.
- *         api.listLogMetrics(formattedParent, {pageToken: nextPageToken}, callback);
+ *         api.listLogMetrics({parent: formattedParent}, {pageToken: nextPageToken}, callback);
  *     }
  * }
- * api.listLogMetrics(formattedParent, {flattenPages: false}, callback);
+ * api.listLogMetrics({parent: formattedParent}, {flattenPages: false}, callback);
  */
-MetricsServiceV2Api.prototype.listLogMetrics = function listLogMetrics(
-    parent,
-    options,
-    callback) {
+MetricsServiceV2Api.prototype.listLogMetrics = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -247,19 +240,15 @@ MetricsServiceV2Api.prototype.listLogMetrics = function listLogMetrics(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    parent: parent
-  };
-  if ('pageSize' in options) {
-    req.pageSize = options.pageSize;
-  }
-  return this._listLogMetrics(req, options, callback);
+  return this._listLogMetrics(request, options, callback);
 };
 
 /**
  * Gets a logs-based metric.
  *
- * @param {string} metricName
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.metricName
  *   The resource name of the desired metric.
  *   Example: `"projects/my-project-id/metrics/my-metric-id"`.
  * @param {Object=} options
@@ -269,25 +258,20 @@ MetricsServiceV2Api.prototype.listLogMetrics = function listLogMetrics(
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [LogMetric]{@link LogMetric}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = loggingV2.metricsServiceV2Api();
  * var formattedMetricName = api.metricPath("[PROJECT]", "[METRIC]");
- * api.getLogMetric(formattedMetricName, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * api.getLogMetric({metricName: formattedMetricName}).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-MetricsServiceV2Api.prototype.getLogMetric = function getLogMetric(
-    metricName,
-    options,
-    callback) {
+MetricsServiceV2Api.prototype.getLogMetric = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -295,21 +279,20 @@ MetricsServiceV2Api.prototype.getLogMetric = function getLogMetric(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    metricName: metricName
-  };
-  return this._getLogMetric(req, options, callback);
+  return this._getLogMetric(request, options, callback);
 };
 
 /**
  * Creates a logs-based metric.
  *
- * @param {string} parent
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
  *   The resource name of the project in which to create the metric.
  *   Example: `"projects/my-project-id"`.
  *
  *   The new metric must be provided in the request.
- * @param {Object} metric
+ * @param {Object} request.metric
  *   The new logs-based metric, which must not have an identifier that
  *   already exists.
  *
@@ -321,27 +304,25 @@ MetricsServiceV2Api.prototype.getLogMetric = function getLogMetric(
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [LogMetric]{@link LogMetric}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = loggingV2.metricsServiceV2Api();
  * var formattedParent = api.parentPath("[PROJECT]");
  * var metric = {};
- * api.createLogMetric(formattedParent, metric, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * var request = {
+ *     parent: formattedParent,
+ *     metric: metric
+ * };
+ * api.createLogMetric(request).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-MetricsServiceV2Api.prototype.createLogMetric = function createLogMetric(
-    parent,
-    metric,
-    options,
-    callback) {
+MetricsServiceV2Api.prototype.createLogMetric = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -349,24 +330,22 @@ MetricsServiceV2Api.prototype.createLogMetric = function createLogMetric(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    parent: parent,
-    metric: metric
-  };
-  return this._createLogMetric(req, options, callback);
+  return this._createLogMetric(request, options, callback);
 };
 
 /**
  * Creates or updates a logs-based metric.
  *
- * @param {string} metricName
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.metricName
  *   The resource name of the metric to update.
  *   Example: `"projects/my-project-id/metrics/my-metric-id"`.
  *
  *   The updated metric must be provided in the request and have the
  *   same identifier that is specified in `metricName`.
  *   If the metric does not exist, it is created.
- * @param {Object} metric
+ * @param {Object} request.metric
  *   The updated metric, whose name must be the same as the
  *   metric identifier in `metricName`. If `metricName` does not
  *   exist, then a new metric is created.
@@ -379,27 +358,25 @@ MetricsServiceV2Api.prototype.createLogMetric = function createLogMetric(
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [LogMetric]{@link LogMetric}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = loggingV2.metricsServiceV2Api();
  * var formattedMetricName = api.metricPath("[PROJECT]", "[METRIC]");
  * var metric = {};
- * api.updateLogMetric(formattedMetricName, metric, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * var request = {
+ *     metricName: formattedMetricName,
+ *     metric: metric
+ * };
+ * api.updateLogMetric(request).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-MetricsServiceV2Api.prototype.updateLogMetric = function updateLogMetric(
-    metricName,
-    metric,
-    options,
-    callback) {
+MetricsServiceV2Api.prototype.updateLogMetric = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -407,17 +384,15 @@ MetricsServiceV2Api.prototype.updateLogMetric = function updateLogMetric(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    metricName: metricName,
-    metric: metric
-  };
-  return this._updateLogMetric(req, options, callback);
+  return this._updateLogMetric(request, options, callback);
 };
 
 /**
  * Deletes a logs-based metric.
  *
- * @param {string} metricName
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.metricName
  *   The resource name of the metric to delete.
  *   Example: `"projects/my-project-id/metrics/my-metric-id"`.
  * @param {Object=} options
@@ -425,23 +400,18 @@ MetricsServiceV2Api.prototype.updateLogMetric = function updateLogMetric(
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error)=} callback
  *   The function which will be called with the result of the API call.
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = loggingV2.metricsServiceV2Api();
  * var formattedMetricName = api.metricPath("[PROJECT]", "[METRIC]");
- * api.deleteLogMetric(formattedMetricName, function(err) {
- *     if (err) {
- *         console.error(err);
- *     }
+ * api.deleteLogMetric({metricName: formattedMetricName}).catch(function(err) {
+ *     console.error(err);
  * });
  */
-MetricsServiceV2Api.prototype.deleteLogMetric = function deleteLogMetric(
-    metricName,
-    options,
-    callback) {
+MetricsServiceV2Api.prototype.deleteLogMetric = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -449,10 +419,7 @@ MetricsServiceV2Api.prototype.deleteLogMetric = function deleteLogMetric(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    metricName: metricName
-  };
-  return this._deleteLogMetric(req, options, callback);
+  return this._deleteLogMetric(request, options, callback);
 };
 
 function MetricsServiceV2ApiBuilder(gaxGrpc) {

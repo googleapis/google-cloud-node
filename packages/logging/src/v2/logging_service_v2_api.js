@@ -132,7 +132,7 @@ var LOG_PATH_TEMPLATE = new gax.PathTemplate(
  * @param {String} project
  * @returns {String}
  */
-LoggingServiceV2Api.prototype.parentPath = function parentPath(project) {
+LoggingServiceV2Api.prototype.parentPath = function(project) {
   return PARENT_PATH_TEMPLATE.render({
     project: project
   });
@@ -144,8 +144,7 @@ LoggingServiceV2Api.prototype.parentPath = function parentPath(project) {
  *   A fully-qualified path representing a parent resources.
  * @returns {String} - A string representing the project.
  */
-LoggingServiceV2Api.prototype.matchProjectFromParentName =
-    function matchProjectFromParentName(parentName) {
+LoggingServiceV2Api.prototype.matchProjectFromParentName = function(parentName) {
   return PARENT_PATH_TEMPLATE.match(parentName).project;
 };
 
@@ -155,7 +154,7 @@ LoggingServiceV2Api.prototype.matchProjectFromParentName =
  * @param {String} log
  * @returns {String}
  */
-LoggingServiceV2Api.prototype.logPath = function logPath(project, log) {
+LoggingServiceV2Api.prototype.logPath = function(project, log) {
   return LOG_PATH_TEMPLATE.render({
     project: project,
     log: log
@@ -168,8 +167,7 @@ LoggingServiceV2Api.prototype.logPath = function logPath(project, log) {
  *   A fully-qualified path representing a log resources.
  * @returns {String} - A string representing the project.
  */
-LoggingServiceV2Api.prototype.matchProjectFromLogName =
-    function matchProjectFromLogName(logName) {
+LoggingServiceV2Api.prototype.matchProjectFromLogName = function(logName) {
   return LOG_PATH_TEMPLATE.match(logName).project;
 };
 
@@ -179,8 +177,7 @@ LoggingServiceV2Api.prototype.matchProjectFromLogName =
  *   A fully-qualified path representing a log resources.
  * @returns {String} - A string representing the log.
  */
-LoggingServiceV2Api.prototype.matchLogFromLogName =
-    function matchLogFromLogName(logName) {
+LoggingServiceV2Api.prototype.matchLogFromLogName = function(logName) {
   return LOG_PATH_TEMPLATE.match(logName).log;
 };
 
@@ -190,7 +187,9 @@ LoggingServiceV2Api.prototype.matchLogFromLogName =
  * Deletes a log and all its log entries.
  * The log will reappear if it receives new entries.
  *
- * @param {string} logName
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.logName
  *   Required. The resource name of the log to delete.  Example:
  *   `"projects/my-project/logs/syslog"`.
  * @param {Object=} options
@@ -198,23 +197,18 @@ LoggingServiceV2Api.prototype.matchLogFromLogName =
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error)=} callback
  *   The function which will be called with the result of the API call.
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = loggingV2.loggingServiceV2Api();
  * var formattedLogName = api.logPath("[PROJECT]", "[LOG]");
- * api.deleteLog(formattedLogName, function(err) {
- *     if (err) {
- *         console.error(err);
- *     }
+ * api.deleteLog({logName: formattedLogName}).catch(function(err) {
+ *     console.error(err);
  * });
  */
-LoggingServiceV2Api.prototype.deleteLog = function deleteLog(
-    logName,
-    options,
-    callback) {
+LoggingServiceV2Api.prototype.deleteLog = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -222,17 +216,16 @@ LoggingServiceV2Api.prototype.deleteLog = function deleteLog(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    logName: logName
-  };
-  return this._deleteLog(req, options, callback);
+  return this._deleteLog(request, options, callback);
 };
 
 /**
  * Writes log entries to Stackdriver Logging.  All log entries are
  * written by this method.
  *
- * @param {Object[]} entries
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {Object[]} request.entries
  *   Required. The log entries to write. Values supplied for the fields
  *   `log_name`, `resource`, and `labels` in this `entries.write` request are
  *   added to those log entries that do not provide their own values for the
@@ -244,17 +237,12 @@ LoggingServiceV2Api.prototype.deleteLog = function deleteLog(
  *   calling this method for each individual log entry.
  *
  *   This object should have the same structure as [LogEntry]{@link LogEntry}
- * @param {Object=} options
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
- *
- *   In addition, options may contain the following optional parameters.
- * @param {string=} options.logName
+ * @param {string=} request.logName
  *   Optional. A default log resource name that is assigned to all log entries
  *   in `entries` that do not specify a value for `log_name`.  Example:
  *   `"projects/my-project/logs/syslog"`.  See
  *   {@link LogEntry}.
- * @param {Object=} options.resource
+ * @param {Object=} request.resource
  *   Optional. A default monitored resource object that is assigned to all log
  *   entries in `entries` that do not specify a value for `resource`. Example:
  *
@@ -265,41 +253,38 @@ LoggingServiceV2Api.prototype.deleteLog = function deleteLog(
  *   See {@link LogEntry}.
  *
  *   This object should have the same structure as [google.api.MonitoredResource]{@link external:"google.api.MonitoredResource"}
- * @param {Object.<string, string>=} options.labels
+ * @param {Object.<string, string>=} request.labels
  *   Optional. Default labels that are added to the `labels` field of all log
  *   entries in `entries`. If a log entry already has a label with the same key
  *   as a label in this parameter, then the log entry's label is not changed.
  *   See {@link LogEntry}.
- * @param {boolean=} options.partialSuccess
+ * @param {boolean=} request.partialSuccess
  *   Optional. Whether valid entries should be written even if some other
  *   entries fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any
  *   entry is not written, the response status will be the error associated
  *   with one of the failed entries and include error details in the form of
  *   WriteLogEntriesPartialErrors.
- *
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [WriteLogEntriesResponse]{@link WriteLogEntriesResponse}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = loggingV2.loggingServiceV2Api();
  * var entries = [];
- * api.writeLogEntries(entries, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * api.writeLogEntries({entries: entries}).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-LoggingServiceV2Api.prototype.writeLogEntries = function writeLogEntries(
-    entries,
-    options,
-    callback) {
+LoggingServiceV2Api.prototype.writeLogEntries = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -307,22 +292,7 @@ LoggingServiceV2Api.prototype.writeLogEntries = function writeLogEntries(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    entries: entries
-  };
-  if ('logName' in options) {
-    req.logName = options.logName;
-  }
-  if ('resource' in options) {
-    req.resource = options.resource;
-  }
-  if ('labels' in options) {
-    req.labels = options.labels;
-  }
-  if ('partialSuccess' in options) {
-    req.partialSuccess = options.partialSuccess;
-  }
-  return this._writeLogEntries(req, options, callback);
+  return this._writeLogEntries(request, options, callback);
 };
 
 /**
@@ -330,57 +300,56 @@ LoggingServiceV2Api.prototype.writeLogEntries = function writeLogEntries(
  * Logging.  For ways to export log entries, see
  * [Exporting Logs](https://cloud.google.com/logging/docs/export).
  *
- * @param {string[]} projectIds
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string[]} request.projectIds
  *   Deprecated. One or more project identifiers or project numbers from which
  *   to retrieve log entries.  Examples: `"my-project-1A"`, `"1234567890"`. If
  *   present, these project identifiers are converted to resource format and
  *   added to the list of resources in `resourceNames`. Callers should use
  *   `resourceNames` rather than this parameter.
- * @param {Object=} options
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
- *
- *   In addition, options may contain the following optional parameters.
- * @param {string[]=} options.resourceNames
+ * @param {string[]=} request.resourceNames
  *   Optional. One or more cloud resources from which to retrieve log entries.
  *   Example: `"projects/my-project-1A"`, `"projects/1234567890"`.  Projects
  *   listed in `projectIds` are added to this list.
- * @param {string=} options.filter
+ * @param {string=} request.filter
  *   Optional. A filter that chooses which log entries to return.  See [Advanced
  *   Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).  Only log entries that
  *   match the filter are returned.  An empty filter matches all log entries.
- * @param {string=} options.orderBy
+ * @param {string=} request.orderBy
  *   Optional. How the results should be sorted.  Presently, the only permitted
  *   values are `"timestamp asc"` (default) and `"timestamp desc"`. The first
  *   option returns entries in order of increasing values of
  *   `LogEntry.timestamp` (oldest first), and the second option returns entries
  *   in order of decreasing timestamps (newest first).  Entries with equal
  *   timestamps are returned in order of `LogEntry.insertId`.
- * @param {number=} options.pageSize
+ * @param {number=} request.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
  *   parameter does not affect the return value. If page streaming is
  *   performed per-page, this determines the maximum number of
  *   resources in a page.
- *
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object, ?string)=} callback
  *   When specified, the results are not streamed but this callback
  *   will be called with the response object representing [ListLogEntriesResponse]{@link ListLogEntriesResponse}.
  *   The third item will be set if the response contains the token for the further results
  *   and can be reused to `pageToken` field in the options in the next request.
- * @returns {Stream|gax.EventEmitter}
+ * @returns {Stream|Promise}
  *   An object stream which emits an object representing
  *   [LogEntry]{@link LogEntry} on 'data' event.
  *   When the callback is specified or streaming is suppressed through options,
- *   it will return an event emitter to handle the call status and the callback
- *   will be called with the response object.
+ *   it will return a promise that resolves to the response object. The promise
+ *   has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = loggingV2.loggingServiceV2Api();
  * var projectIds = [];
  * // Iterate over all elements.
- * api.listLogEntries(projectIds).on('data', function(element) {
+ * api.listLogEntries({projectIds: projectIds}).on('data', function(element) {
  *     // doThingsWith(element)
  * });
  *
@@ -393,15 +362,12 @@ LoggingServiceV2Api.prototype.writeLogEntries = function writeLogEntries(
  *     // doThingsWith(response)
  *     if (nextPageToken) {
  *         // fetch the next page.
- *         api.listLogEntries(projectIds, {pageToken: nextPageToken}, callback);
+ *         api.listLogEntries({projectIds: projectIds}, {pageToken: nextPageToken}, callback);
  *     }
  * }
- * api.listLogEntries(projectIds, {flattenPages: false}, callback);
+ * api.listLogEntries({projectIds: projectIds}, {flattenPages: false}, callback);
  */
-LoggingServiceV2Api.prototype.listLogEntries = function listLogEntries(
-    projectIds,
-    options,
-    callback) {
+LoggingServiceV2Api.prototype.listLogEntries = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -409,57 +375,41 @@ LoggingServiceV2Api.prototype.listLogEntries = function listLogEntries(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    projectIds: projectIds
-  };
-  if ('resourceNames' in options) {
-    req.resourceNames = options.resourceNames;
-  }
-  if ('filter' in options) {
-    req.filter = options.filter;
-  }
-  if ('orderBy' in options) {
-    req.orderBy = options.orderBy;
-  }
-  if ('pageSize' in options) {
-    req.pageSize = options.pageSize;
-  }
-  return this._listLogEntries(req, options, callback);
+  return this._listLogEntries(request, options, callback);
 };
 
 /**
  * Lists the monitored resource descriptors used by Stackdriver Logging.
  *
- * @param {Object=} options
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
- *
- *   In addition, options may contain the following optional parameters.
- * @param {number=} options.pageSize
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number=} request.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
  *   parameter does not affect the return value. If page streaming is
  *   performed per-page, this determines the maximum number of
  *   resources in a page.
- *
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object, ?string)=} callback
  *   When specified, the results are not streamed but this callback
  *   will be called with the response object representing [ListMonitoredResourceDescriptorsResponse]{@link ListMonitoredResourceDescriptorsResponse}.
  *   The third item will be set if the response contains the token for the further results
  *   and can be reused to `pageToken` field in the options in the next request.
- * @returns {Stream|gax.EventEmitter}
+ * @returns {Stream|Promise}
  *   An object stream which emits an object representing
  *   [google.api.MonitoredResourceDescriptor]{@link external:"google.api.MonitoredResourceDescriptor"} on 'data' event.
  *   When the callback is specified or streaming is suppressed through options,
- *   it will return an event emitter to handle the call status and the callback
- *   will be called with the response object.
+ *   it will return a promise that resolves to the response object. The promise
+ *   has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = loggingV2.loggingServiceV2Api();
  *
  * // Iterate over all elements.
- * api.listMonitoredResourceDescriptors().on('data', function(element) {
+ * api.listMonitoredResourceDescriptors({}).on('data', function(element) {
  *     // doThingsWith(element)
  * });
  *
@@ -472,15 +422,12 @@ LoggingServiceV2Api.prototype.listLogEntries = function listLogEntries(
  *     // doThingsWith(response)
  *     if (nextPageToken) {
  *         // fetch the next page.
- *         api.listMonitoredResourceDescriptors({pageToken: nextPageToken}, callback);
+ *         api.listMonitoredResourceDescriptors({}, {pageToken: nextPageToken}, callback);
  *     }
  * }
- * api.listMonitoredResourceDescriptors({flattenPages: false}, callback);
- * api.listMonitoredResourceDescriptors(function(err, response) {
+ * api.listMonitoredResourceDescriptors({}, {flattenPages: false}, callback);
  */
-LoggingServiceV2Api.prototype.listMonitoredResourceDescriptors = function listMonitoredResourceDescriptors(
-    options,
-    callback) {
+LoggingServiceV2Api.prototype.listMonitoredResourceDescriptors = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -488,12 +435,7 @@ LoggingServiceV2Api.prototype.listMonitoredResourceDescriptors = function listMo
   if (options === undefined) {
     options = {};
   }
-  var req = {
-  };
-  if ('pageSize' in options) {
-    req.pageSize = options.pageSize;
-  }
-  return this._listMonitoredResourceDescriptors(req, options, callback);
+  return this._listMonitoredResourceDescriptors(request, options, callback);
 };
 
 function LoggingServiceV2ApiBuilder(gaxGrpc) {

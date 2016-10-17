@@ -130,7 +130,7 @@ var SINK_PATH_TEMPLATE = new gax.PathTemplate(
  * @param {String} project
  * @returns {String}
  */
-ConfigServiceV2Api.prototype.parentPath = function parentPath(project) {
+ConfigServiceV2Api.prototype.parentPath = function(project) {
   return PARENT_PATH_TEMPLATE.render({
     project: project
   });
@@ -142,8 +142,7 @@ ConfigServiceV2Api.prototype.parentPath = function parentPath(project) {
  *   A fully-qualified path representing a parent resources.
  * @returns {String} - A string representing the project.
  */
-ConfigServiceV2Api.prototype.matchProjectFromParentName =
-    function matchProjectFromParentName(parentName) {
+ConfigServiceV2Api.prototype.matchProjectFromParentName = function(parentName) {
   return PARENT_PATH_TEMPLATE.match(parentName).project;
 };
 
@@ -153,7 +152,7 @@ ConfigServiceV2Api.prototype.matchProjectFromParentName =
  * @param {String} sink
  * @returns {String}
  */
-ConfigServiceV2Api.prototype.sinkPath = function sinkPath(project, sink) {
+ConfigServiceV2Api.prototype.sinkPath = function(project, sink) {
   return SINK_PATH_TEMPLATE.render({
     project: project,
     sink: sink
@@ -166,8 +165,7 @@ ConfigServiceV2Api.prototype.sinkPath = function sinkPath(project, sink) {
  *   A fully-qualified path representing a sink resources.
  * @returns {String} - A string representing the project.
  */
-ConfigServiceV2Api.prototype.matchProjectFromSinkName =
-    function matchProjectFromSinkName(sinkName) {
+ConfigServiceV2Api.prototype.matchProjectFromSinkName = function(sinkName) {
   return SINK_PATH_TEMPLATE.match(sinkName).project;
 };
 
@@ -177,8 +175,7 @@ ConfigServiceV2Api.prototype.matchProjectFromSinkName =
  *   A fully-qualified path representing a sink resources.
  * @returns {String} - A string representing the sink.
  */
-ConfigServiceV2Api.prototype.matchSinkFromSinkName =
-    function matchSinkFromSinkName(sinkName) {
+ConfigServiceV2Api.prototype.matchSinkFromSinkName = function(sinkName) {
   return SINK_PATH_TEMPLATE.match(sinkName).sink;
 };
 
@@ -187,39 +184,38 @@ ConfigServiceV2Api.prototype.matchSinkFromSinkName =
 /**
  * Lists sinks.
  *
- * @param {string} parent
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
  *   Required. The cloud resource containing the sinks.
  *   Example: `"projects/my-logging-project"`.
- * @param {Object=} options
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
- *
- *   In addition, options may contain the following optional parameters.
- * @param {number=} options.pageSize
+ * @param {number=} request.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
  *   parameter does not affect the return value. If page streaming is
  *   performed per-page, this determines the maximum number of
  *   resources in a page.
- *
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object, ?string)=} callback
  *   When specified, the results are not streamed but this callback
  *   will be called with the response object representing [ListSinksResponse]{@link ListSinksResponse}.
  *   The third item will be set if the response contains the token for the further results
  *   and can be reused to `pageToken` field in the options in the next request.
- * @returns {Stream|gax.EventEmitter}
+ * @returns {Stream|Promise}
  *   An object stream which emits an object representing
  *   [LogSink]{@link LogSink} on 'data' event.
  *   When the callback is specified or streaming is suppressed through options,
- *   it will return an event emitter to handle the call status and the callback
- *   will be called with the response object.
+ *   it will return a promise that resolves to the response object. The promise
+ *   has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = loggingV2.configServiceV2Api();
  * var formattedParent = api.parentPath("[PROJECT]");
  * // Iterate over all elements.
- * api.listSinks(formattedParent).on('data', function(element) {
+ * api.listSinks({parent: formattedParent}).on('data', function(element) {
  *     // doThingsWith(element)
  * });
  *
@@ -232,15 +228,12 @@ ConfigServiceV2Api.prototype.matchSinkFromSinkName =
  *     // doThingsWith(response)
  *     if (nextPageToken) {
  *         // fetch the next page.
- *         api.listSinks(formattedParent, {pageToken: nextPageToken}, callback);
+ *         api.listSinks({parent: formattedParent}, {pageToken: nextPageToken}, callback);
  *     }
  * }
- * api.listSinks(formattedParent, {flattenPages: false}, callback);
+ * api.listSinks({parent: formattedParent}, {flattenPages: false}, callback);
  */
-ConfigServiceV2Api.prototype.listSinks = function listSinks(
-    parent,
-    options,
-    callback) {
+ConfigServiceV2Api.prototype.listSinks = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -248,19 +241,15 @@ ConfigServiceV2Api.prototype.listSinks = function listSinks(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    parent: parent
-  };
-  if ('pageSize' in options) {
-    req.pageSize = options.pageSize;
-  }
-  return this._listSinks(req, options, callback);
+  return this._listSinks(request, options, callback);
 };
 
 /**
  * Gets a sink.
  *
- * @param {string} sinkName
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.sinkName
  *   Required. The resource name of the sink to return.
  *   Example: `"projects/my-project-id/sinks/my-sink-id"`.
  * @param {Object=} options
@@ -270,25 +259,20 @@ ConfigServiceV2Api.prototype.listSinks = function listSinks(
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [LogSink]{@link LogSink}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = loggingV2.configServiceV2Api();
  * var formattedSinkName = api.sinkPath("[PROJECT]", "[SINK]");
- * api.getSink(formattedSinkName, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * api.getSink({sinkName: formattedSinkName}).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-ConfigServiceV2Api.prototype.getSink = function getSink(
-    sinkName,
-    options,
-    callback) {
+ConfigServiceV2Api.prototype.getSink = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -296,20 +280,19 @@ ConfigServiceV2Api.prototype.getSink = function getSink(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    sinkName: sinkName
-  };
-  return this._getSink(req, options, callback);
+  return this._getSink(request, options, callback);
 };
 
 /**
  * Creates a sink.
  *
- * @param {string} parent
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
  *   Required. The resource in which to create the sink.
  *   Example: `"projects/my-project-id"`.
  *   The new sink must be provided in the request.
- * @param {Object} sink
+ * @param {Object} request.sink
  *   Required. The new sink, whose `name` parameter is a sink identifier that
  *   is not already in use.
  *
@@ -321,27 +304,25 @@ ConfigServiceV2Api.prototype.getSink = function getSink(
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [LogSink]{@link LogSink}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = loggingV2.configServiceV2Api();
  * var formattedParent = api.parentPath("[PROJECT]");
  * var sink = {};
- * api.createSink(formattedParent, sink, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * var request = {
+ *     parent: formattedParent,
+ *     sink: sink
+ * };
+ * api.createSink(request).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-ConfigServiceV2Api.prototype.createSink = function createSink(
-    parent,
-    sink,
-    options,
-    callback) {
+ConfigServiceV2Api.prototype.createSink = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -349,21 +330,19 @@ ConfigServiceV2Api.prototype.createSink = function createSink(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    parent: parent,
-    sink: sink
-  };
-  return this._createSink(req, options, callback);
+  return this._createSink(request, options, callback);
 };
 
 /**
  * Updates or creates a sink.
  *
- * @param {string} sinkName
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.sinkName
  *   Required. The resource name of the sink to update, including the parent
  *   resource and the sink identifier.  If the sink does not exist, this method
  *   creates the sink.  Example: `"projects/my-project-id/sinks/my-sink-id"`.
- * @param {Object} sink
+ * @param {Object} request.sink
  *   Required. The updated sink, whose name is the same identifier that appears
  *   as part of `sinkName`.  If `sinkName` does not exist, then
  *   this method creates a new sink.
@@ -376,27 +355,25 @@ ConfigServiceV2Api.prototype.createSink = function createSink(
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [LogSink]{@link LogSink}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = loggingV2.configServiceV2Api();
  * var formattedSinkName = api.sinkPath("[PROJECT]", "[SINK]");
  * var sink = {};
- * api.updateSink(formattedSinkName, sink, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * var request = {
+ *     sinkName: formattedSinkName,
+ *     sink: sink
+ * };
+ * api.updateSink(request).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-ConfigServiceV2Api.prototype.updateSink = function updateSink(
-    sinkName,
-    sink,
-    options,
-    callback) {
+ConfigServiceV2Api.prototype.updateSink = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -404,17 +381,15 @@ ConfigServiceV2Api.prototype.updateSink = function updateSink(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    sinkName: sinkName,
-    sink: sink
-  };
-  return this._updateSink(req, options, callback);
+  return this._updateSink(request, options, callback);
 };
 
 /**
  * Deletes a sink.
  *
- * @param {string} sinkName
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.sinkName
  *   Required. The resource name of the sink to delete, including the parent
  *   resource and the sink identifier.  Example:
  *   `"projects/my-project-id/sinks/my-sink-id"`.  It is an error if the sink
@@ -424,23 +399,18 @@ ConfigServiceV2Api.prototype.updateSink = function updateSink(
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error)=} callback
  *   The function which will be called with the result of the API call.
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = loggingV2.configServiceV2Api();
  * var formattedSinkName = api.sinkPath("[PROJECT]", "[SINK]");
- * api.deleteSink(formattedSinkName, function(err) {
- *     if (err) {
- *         console.error(err);
- *     }
+ * api.deleteSink({sinkName: formattedSinkName}).catch(function(err) {
+ *     console.error(err);
  * });
  */
-ConfigServiceV2Api.prototype.deleteSink = function deleteSink(
-    sinkName,
-    options,
-    callback) {
+ConfigServiceV2Api.prototype.deleteSink = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -448,10 +418,7 @@ ConfigServiceV2Api.prototype.deleteSink = function deleteSink(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    sinkName: sinkName
-  };
-  return this._deleteSink(req, options, callback);
+  return this._deleteSink(request, options, callback);
 };
 
 function ConfigServiceV2ApiBuilder(gaxGrpc) {
