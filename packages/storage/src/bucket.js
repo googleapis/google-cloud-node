@@ -81,6 +81,14 @@ function Bucket(storage, name) {
      *     // The zone was created successfully.
      *   }
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * bucket.create().then(function(data) {
+     *   var zone = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     create: true,
 
@@ -96,6 +104,13 @@ function Bucket(storage, name) {
      *
      * @example
      * bucket.delete(function(err, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * bucket.delete().then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     delete: true,
 
@@ -109,6 +124,13 @@ function Bucket(storage, name) {
      *
      * @example
      * bucket.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * bucket.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -128,6 +150,14 @@ function Bucket(storage, name) {
      * bucket.get(function(err, bucket, apiResponse) {
      *   // `bucket.metadata` has been populated.
      * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * bucket.get().then(function(data) {
+     *   var bucket = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     get: true,
 
@@ -146,6 +176,14 @@ function Bucket(storage, name) {
      *
      * @example
      * bucket.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * bucket.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: true,
 
@@ -164,12 +202,14 @@ function Bucket(storage, name) {
      * //-
      * // Set website metadata field on the bucket.
      * //-
-     * bucket.setMetadata({
+     * var metadata = {
      *   website: {
      *     mainPageSuffix: 'http://example.com',
      *     notFoundPage: 'http://example.com/404.html'
      *   }
-     * }, function(err, apiResponse) {});
+     * };
+     *
+     * bucket.setMetadata(metadata, function(err, apiResponse) {});
      *
      * //-
      * // Enable versioning for your bucket.
@@ -179,6 +219,13 @@ function Bucket(storage, name) {
      *     enabled: true
      *   }
      * }, function(err, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * bucket.setMetadata(metadata).then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     setMetadata: true
   };
@@ -225,10 +272,21 @@ function Bucket(storage, name) {
    * // Make a bucket's contents publicly readable.
    * //-
    * var myBucket = gcs.bucket('my-bucket');
-   * myBucket.acl.add({
+   *
+   * var options = {
    *   entity: 'allUsers',
    *   role: gcs.acl.READER_ROLE
-   * }, function(err, aclObject) {});
+   * };
+   *
+   * myBucket.acl.add(options, function(err, aclObject) {});
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * myBucket.acl.add(options).then(function(data) {
+   *   var aclObject = data[0];
+   *   var apiResponse = data[1];
+   * });
    */
   this.acl = new Acl({
     request: this.request.bind(this),
@@ -274,16 +332,23 @@ util.inherits(Bucket, common.ServiceObject);
  * @example
  * var logBucket = gcs.bucket('log-bucket');
  *
- * var logs2013 = logBucket.file('2013-logs.txt');
- * var logs2014 = logBucket.file('2014-logs.txt');
+ * var sources = [
+ *   logBucket.file('2013-logs.txt'),
+ *   logBucket.file('2014-logs.txt')
+ * ];
  *
  * var allLogs = logBucket.file('all-logs.txt');
  *
- * logBucket.combine([
- *   logs2013,
- *   logs2014
- * ], allLogs, function(err, newFile, apiResponse) {
+ * logBucket.combine(sources, allLogs, function(err, newFile, apiResponse) {
  *   // newFile === allLogs
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * logBucket.combine(sources, allLogs).then(function(data) {
+ *   var newFile = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 Bucket.prototype.combine = function(sources, destination, callback) {
@@ -381,6 +446,14 @@ Bucket.prototype.combine = function(sources, destination, callback) {
  *     // Channel created successfully.
  *   }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.createChannel(id, config).then(function(data) {
+ *   var channel = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Bucket.prototype.createChannel = function(id, config, callback) {
   var self = this;
@@ -469,6 +542,11 @@ Bucket.prototype.createChannel = function(id, config, callback) {
  *     // All files in the `images` directory have been deleted.
  *   }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.deleteFiles().then(function() {});
  */
 Bucket.prototype.deleteFiles = function(query, callback) {
   if (is.fn(query)) {
@@ -607,25 +685,11 @@ Bucket.prototype.file = function(name, options) {
  * }, callback);
  *
  * //-
- * // Get the files from your bucket as a readable object stream.
+ * // If the callback is omitted, we'll return a Promise.
  * //-
- * bucket.getFiles()
- *   .on('error', console.error)
- *   .on('data', function(file) {
- *     // file is a File object.
- *   })
- *   .on('end', function() {
- *     // All files retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * bucket.getFiles()
- *   .on('data', function(file) {
- *     this.end();
- *   });
+ * bucket.getFiles().then(function(data) {
+ *   var files = data[0];
+ * });
  */
 Bucket.prototype.getFiles = function(query, callback) {
   var self = this;
@@ -667,6 +731,35 @@ Bucket.prototype.getFiles = function(query, callback) {
     callback(null, files, nextQuery, resp);
   });
 };
+
+/**
+ * Get {module:storage/file} objects for the files currently in the bucket as a
+ * readable object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:storage/bucket#getFiles} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * bucket.getFilesStream()
+ *   .on('error', console.error)
+ *   .on('data', function(file) {
+ *     // file is a File object.
+ *   })
+ *   .on('end', function() {
+ *     // All files retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * bucket.getFilesStream()
+ *   .on('data', function(file) {
+ *     this.end();
+ *   });
+ */
+Bucket.prototype.getFilesStream = common.paginator.streamify('getFiles');
 
 /**
  * Make the bucket listing private.
@@ -731,6 +824,13 @@ Bucket.prototype.getFiles = function(query, callback) {
  *   //
  *   // `files`:
  *   //    Array of files successfully made private in the bucket.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.makePrivate(opts).then(function(data) {
+ *   var files = data[0];
  * });
  */
 Bucket.prototype.makePrivate = function(options, callback) {
@@ -847,6 +947,13 @@ Bucket.prototype.makePrivate = function(options, callback) {
  *   //
  *   // `files`:
  *   //    Array of files successfully made public in the bucket.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.makePublic(opts).then(function(data) {
+ *   var files = data[0];
  * });
  */
 Bucket.prototype.makePublic = function(options, callback) {
@@ -1049,6 +1156,13 @@ Bucket.prototype.makePublic = function(options, callback) {
  *   var file = bucket.file('img.png');
  *   file.setEncryptionKey(encryptionKey);
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * bucket.upload('local-image.png').then(function(data) {
+ *   var file = data[0];
+ * });
  */
 Bucket.prototype.upload = function(localPath, options, callback) {
   if (is.fn(options)) {
@@ -1175,9 +1289,17 @@ Bucket.prototype.makeAllFilesPublicPrivate_ = function(options, callback) {
 
 /*! Developer Documentation
  *
- * This method can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(Bucket, 'getFiles');
+common.paginator.extend(Bucket, 'getFiles');
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Bucket, {
+  exclude: ['file']
+});
 
 module.exports = Bucket;

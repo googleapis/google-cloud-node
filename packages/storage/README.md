@@ -48,6 +48,11 @@ remoteReadStream.pipe(localWriteStream);
 var localReadStream = fs.createReadStream('/photos/zoo/zebra.jpg');
 var remoteWriteStream = bucket.file('zebra.jpg').createWriteStream();
 localReadStream.pipe(remoteWriteStream);
+
+// Promises are also supported by omitting callbacks.
+bucket.upload('/photos/zoo/zebra.jpg').then(function(data) {
+  var file = data[0];
+});
 ```
 
 
