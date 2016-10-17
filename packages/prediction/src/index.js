@@ -121,6 +121,14 @@ util.inherits(Prediction, common.Service);
  * prediction.createModel('my-model', {
  *   data: modelDataCsv
  * }, function(err, model, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * prediction.createModel('my-model').then(function(data) {
+ *   var model = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 Prediction.prototype.createModel = function(id, options, callback) {
   var self = this;
@@ -219,25 +227,11 @@ Prediction.prototype.createModel = function(id, options, callback) {
  * }, callback);
  *
  * //-
- * // Get the models from your project as a readable object stream.
+ * // If the callback is omitted, we'll return a Promise.
  * //-
- * prediction.getModels()
- *   .on('error', console.error)
- *   .on('data', function(model) {
- *     // model is a Model object.
- *   })
- *   .on('end', function() {
- *     // All models retrieved.
- *   });
- *
- * //-
- * // If you anticipate many results, you can end a stream early to prevent
- * // unnecessary processing and API requests.
- * //-
- * prediction.getModels()
- *   .on('data', function(model) {
- *     this.end();
- *   });
+ * prediction.getModels().then(function(data) {
+ *   var models = data[0];
+ * });
  */
 Prediction.prototype.getModels = function(query, callback) {
   var self = this;
@@ -275,6 +269,35 @@ Prediction.prototype.getModels = function(query, callback) {
 };
 
 /**
+ * Gets a list of {module:prediction/model} objects for the project as a
+ * readable object stream.
+ *
+ * @param {object=} query - Configuration object. See
+ *     {module:prediction#getModels} for a complete list of options.
+ * @return {stream}
+ *
+ * @example
+ * prediction.getModelsStream()
+ *   .on('error', console.error)
+ *   .on('data', function(model) {
+ *     // model is a Model object.
+ *   })
+ *   .on('end', function() {
+ *     // All models retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * prediction.getModelsStream()
+ *   .on('data', function(model) {
+ *     this.end();
+ *   });
+ */
+Prediction.prototype.getModelsStream = common.paginator.streamify('getModels');
+
+/**
  * Create a model object representing a trained model.
  *
  * @throws {error} If a model ID is not provided.
@@ -295,10 +318,19 @@ Prediction.prototype.model = function(id) {
 
 /*! Developer Documentation
  *
- * These methods can be used with either a callback or as a readable object
- * stream. `streamRouter` is used to add this dual behavior.
+ * These methods can be auto-paginated.
  */
-common.streamRouter.extend(Prediction, 'getModels');
+common.paginator.extend(Prediction, 'getModels');
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(Prediction, {
+  exclude: ['model']
+});
+
 
 Prediction.Model = Model;
 
