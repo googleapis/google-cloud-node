@@ -24,6 +24,18 @@ var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
 var util = require('@google-cloud/common').util;
 
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class, options) {
+    if (Class.name !== 'Zone') {
+      return;
+    }
+
+    promisified = true;
+    assert.deepEqual(options.exclude, ['change', 'record']);
+  }
+});
+
 var parseOverride;
 var fakeDnsZonefile = {
   parse: function() {
@@ -63,7 +75,7 @@ function FakeServiceObject() {
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 var extended = false;
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'Zone') {
       return;
@@ -73,6 +85,9 @@ var fakeStreamRouter = {
     methods = arrify(methods);
     assert.equal(Class.name, 'Zone');
     assert.deepEqual(methods, ['getChanges', 'getRecords']);
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -91,7 +106,8 @@ describe('Zone', function() {
       fs: fakeFs,
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        streamRouter: fakeStreamRouter
+        paginator: fakePaginator,
+        util: fakeUtil
       },
       './change.js': FakeChange,
       './record.js': FakeRecord
@@ -106,8 +122,17 @@ describe('Zone', function() {
   });
 
   describe('instantiation', function() {
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
+
     it('should extend the correct methods', function() {
-      assert(extended); // See `fakeStreamRouter.extend`
+      assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(zone.getChangesStream, 'getChanges');
+      assert.strictEqual(zone.getRecordsStream, 'getRecords');
     });
 
     it('should localize the name', function() {
