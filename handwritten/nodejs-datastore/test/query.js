@@ -18,13 +18,12 @@
 
 var assert = require('assert');
 
-var Query = require('../src/query.js');
-
 describe('Query', function() {
   var SCOPE = {};
   var NAMESPACE = 'Namespace';
   var KINDS = 'Kind';
 
+  var Query = require('../src/query.js');
   var query;
 
   beforeEach(function() {
@@ -288,11 +287,28 @@ describe('Query', function() {
   });
 
   describe('run', function() {
-    it('should call the parent instance runQuery correctly', function() {
+    it('should call the parent instance runQuery correctly', function(done) {
+      var args = [0, 1, 2];
+
+      query.scope.runQuery = function() {
+        assert.strictEqual(this, query.scope);
+        assert.strictEqual(arguments[0], query);
+        assert.strictEqual(arguments[1], args[0]);
+        assert.strictEqual(arguments[2], args[1]);
+        assert.strictEqual(arguments[3], args[2]);
+        done();
+      };
+
+      query.run.apply(query, args);
+    });
+  });
+
+  describe('runStream', function() {
+    it('should call the parent instance runQueryStream correctly', function() {
       var args = [0, 1, 2];
       var runQueryReturnValue = {};
 
-      query.scope.runQuery = function() {
+      query.scope.runQueryStream = function() {
         assert.strictEqual(this, query.scope);
         assert.strictEqual(arguments[0], query);
         assert.strictEqual(arguments[1], args[0]);
@@ -301,7 +317,7 @@ describe('Query', function() {
         return runQueryReturnValue;
       };
 
-      var results = query.run.apply(query, args);
+      var results = query.runStream.apply(query, args);
       assert.strictEqual(results, runQueryReturnValue);
     });
   });
