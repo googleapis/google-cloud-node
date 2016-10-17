@@ -127,6 +127,13 @@ function File(bucket, name, options) {
      *
      * @example
      * file.delete(function(err, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * file.delete().then(function(data) {
+     *   var apiResponse = data[0];
+     * });
      */
     delete: {
       reqOpts: {
@@ -144,6 +151,13 @@ function File(bucket, name, options) {
      *
      * @example
      * file.exists(function(err, exists) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * file.exists().then(function(data) {
+     *   var exists = data[0];
+     * });
      */
     exists: true,
 
@@ -153,6 +167,14 @@ function File(bucket, name, options) {
      * @example
      * file.get(function(err, file, apiResponse) {
      *   // file.metadata` has been populated.
+     * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * file.get().then(function(data) {
+     *   var file = data[0];
+     *   var apiResponse = data[1];
      * });
      */
     get: true,
@@ -170,6 +192,14 @@ function File(bucket, name, options) {
      *
      * @example
      * file.getMetadata(function(err, metadata, apiResponse) {});
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * file.getMetadata().then(function(data) {
+     *   var metadata = data[0];
+     *   var apiResponse = data[1];
+     * });
      */
     getMetadata: {
       reqOpts: {
@@ -197,13 +227,15 @@ function File(bucket, name, options) {
      * @param {object} callback.apiResponse - The full API response.
      *
      * @example
-     * file.setMetadata({
+     * var metadata = {
      *   contentType: 'application/x-font-ttf',
      *   metadata: {
      *     my: 'custom',
      *     properties: 'go here'
      *   }
-     * }, function(err, apiResponse) {});
+     * };
+     *
+     * file.setMetadata(metadata, function(err, apiResponse) {});
      *
      * // Assuming current metadata = { hello: 'world', unsetMe: 'will do' }
      * file.setMetadata({
@@ -214,6 +246,13 @@ function File(bucket, name, options) {
      *   }
      * }, function(err, apiResponse) {
      *   // metadata should now be { abc: '123', hello: 'goodbye' }
+     * });
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * file.setMetadata(metadata).then(function(data) {
+     *   var apiResponse = data[0];
      * });
      */
     setMetadata: {
@@ -256,10 +295,20 @@ function File(bucket, name, options) {
    * //-
    * // Make a file publicly readable.
    * //-
-   * file.acl.add({
+   * var options = {
    *   entity: 'allUsers',
    *   role: gcs.acl.READER_ROLE
-   * }, function(err, aclObject) {});
+   * };
+   *
+   * file.acl.add(options, function(err, aclObject) {});
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * file.acl.add(options).then(function(data) {
+   *   var aclObject = data[0];
+   *   var apiResponse = data[1];
+   * });
    */
   this.acl = new Acl({
     request: this.request.bind(this),
@@ -360,6 +409,14 @@ util.inherits(File, common.ServiceObject);
  *
  *   // Note:
  *   // The `copiedFile` parameter is equal to `anotherFile`.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * file.copy(newLocation).then(function(data) {
+ *   var newFile = data[0];
+ *   var apiResponse = data[1];
  * });
  */
 File.prototype.copy = function(destination, options, callback) {
@@ -569,7 +626,7 @@ File.prototype.createReadStream = function(options) {
       };
     }
 
-    var requestStream = self.request(reqOpts);
+    var requestStream = self.requestStream(reqOpts);
     var validateStream;
 
     // We listen to the response event from the request stream so that we can...
@@ -722,6 +779,13 @@ File.prototype.createReadStream = function(options) {
  *     // `uri` can be used to PUT data to.
  *   }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * file.createResumableUpload().then(function(data) {
+ *   var uri = data[0];
+ * });
  */
 File.prototype.createResumableUpload = function(options, callback) {
   if (is.fn(options)) {
@@ -749,12 +813,7 @@ File.prototype.createResumableUpload = function(options, callback) {
  * A File object can also be used to create files for the first time.
  *
  * Resumable uploads are automatically enabled and must be shut off explicitly
- * by setting `options.resumable` to `false`. We use
- * [`gcs-resumable-upload`](https://github.com/stephenplusplus/gcs-resumable-upload),
- * which persists a config file with metadata about the upload request (see
- * ["How it works"](https://github.com/stephenplusplus/gcs-resumable-upload#how-it-works)).
- * If you start running into unexplainable errors, try clearing this cache file
- * located at `~/.config/configstore/gcs-resumable-upload.json`.
+ * by setting `options.resumable` to `false`.
  *
  * <p class="notice">
  *   There is some overhead when using a resumable upload that can cause
@@ -1014,6 +1073,13 @@ File.prototype.createWriteStream = function(options) {
  * file.download({
  *   destination: '/Users/me/Desktop/file-backup.txt'
  * }, function(err) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * file.download().then(function(data) {
+ *   var contents = data[0];
+ * });
  */
 File.prototype.download = function(options, callback) {
   if (is.fn(options)) {
@@ -1147,6 +1213,13 @@ File.prototype.setEncryptionKey = function(encryptionKey) {
  *   // policy.string: the policy document in plain text.
  *   // policy.base64: the policy document in base64.
  *   // policy.signature: the policy signature in base64.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * file.getSignedPolicy(options).then(function(data) {
+ *   var policy = data[0];
  * });
  */
 File.prototype.getSignedPolicy = function(options, callback) {
@@ -1292,10 +1365,12 @@ File.prototype.getSignedPolicy = function(options, callback) {
  * //-
  * var request = require('request');
  *
- * file.getSignedUrl({
+ * var config = {
  *   action: 'read',
  *   expires: '03-17-2025'
- * }, function(err, url) {
+ * };
+ *
+ * file.getSignedUrl(config, function(err, url) {
  *   if (err) {
  *     console.error(err);
  *     return;
@@ -1331,6 +1406,13 @@ File.prototype.getSignedPolicy = function(options, callback) {
  *       // Contents: New data
  *     });
  *   });
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * file.getSignedUrl(config).then(function(data) {
+ *   var url = data[0];
  * });
  */
 File.prototype.getSignedUrl = function(config, callback) {
@@ -1447,6 +1529,13 @@ File.prototype.getSignedUrl = function(config, callback) {
  * // Set the file private so only the owner can see and modify it.
  * //-
  * file.makePrivate({ strict: true }, function(err) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * file.makePrivate().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 File.prototype.makePrivate = function(options, callback) {
   var self = this;
@@ -1496,6 +1585,13 @@ File.prototype.makePrivate = function(options, callback) {
  *
  * @example
  * file.makePublic(function(err, apiResponse) {});
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * file.makePublic().then(function(data) {
+ *   var apiResponse = data[0];
+ * });
  */
 File.prototype.makePublic = function(callback) {
   callback = callback || common.util.noop;
@@ -1605,6 +1701,14 @@ File.prototype.makePublic = function(callback) {
  *   // Note:
  *   // The `destinationFile` parameter is equal to `anotherFile`.
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * file.move('my-image-new.png').then(function(data) {
+ *   var destinationFile = data[0];
+ *   var apiResponse = data[1];
+ * });
  */
 File.prototype.move = function(destination, callback) {
   var self = this;
@@ -1636,11 +1740,18 @@ File.prototype.move = function(destination, callback) {
  * @param {?error} callback.err - An error returned while making this request
  *
  * @example
- * file.save('This is the contents of the file.', function(err) {
+ * var contents = 'This is the contents of the file.';
+ *
+ * file.save(contents, function(err) {
  *   if (!err) {
  *     // File written successfully.
  *   }
  * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * file.save(contents).then(function() {});
  */
 File.prototype.save = function(data, options, callback) {
   if (is.fn(options)) {
@@ -1755,5 +1866,14 @@ File.prototype.startSimpleUpload_ = function(dup, options) {
     request: reqOpts
   });
 };
+
+/*! Developer Documentation
+ *
+ * All async methods (except for streams) will return a Promise in the event
+ * that a callback is omitted.
+ */
+common.util.promisifyAll(File, {
+  exclude: ['setEncryptionKey']
+});
 
 module.exports = File;

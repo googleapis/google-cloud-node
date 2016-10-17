@@ -34,6 +34,7 @@ var util = require('@google-cloud/common').util;
 
 var Bucket = require('../src/bucket.js');
 
+var promisified = false;
 var makeWritableStreamOverride;
 var handleRespOverride;
 var fakeUtil = extend({}, util, {
@@ -44,6 +45,15 @@ var fakeUtil = extend({}, util, {
   makeWritableStream: function() {
     var args = arguments;
     (makeWritableStreamOverride || util.makeWritableStream).apply(null, args);
+  },
+
+  promisifyAll: function(Class, options) {
+    if (Class.name !== 'File') {
+      return;
+    }
+
+    promisified = true;
+    assert.deepEqual(options.exclude, ['setEncryptionKey']);
   }
 });
 
@@ -135,6 +145,10 @@ describe('File', function() {
   });
 
   describe('initialization', function() {
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
+
     it('should assign file name', function() {
       assert.equal(file.name, FILE_NAME);
     });
@@ -545,7 +559,7 @@ describe('File', function() {
     it('should send query.generation if File has one', function(done) {
       var versionedFile = new File(BUCKET, 'file.txt', { generation: 1 });
 
-      versionedFile.request = function(rOpts) {
+      versionedFile.requestStream = function(rOpts) {
         assert.equal(rOpts.qs.generation, 1);
         setImmediate(done);
         return duplexify();
@@ -555,7 +569,7 @@ describe('File', function() {
     });
 
     it('should end request stream on error', function(done) {
-      file.request = getFakeSuccessfulRequest('body', { body: null });
+      file.requestStream = getFakeSuccessfulRequest('body', { body: null });
 
       var readStream = file.createReadStream();
 
@@ -564,8 +578,8 @@ describe('File', function() {
       // Let the error handler from createReadStream assign.
       setImmediate(function() {
         readStream.emit('error');
-        assert(file.request.wasRequestAborted());
-        assert(file.request.wasRequestDestroyed());
+        assert(file.requestStream.wasRequestAborted());
+        assert(file.requestStream.wasRequestDestroyed());
         done();
       });
     });
@@ -573,7 +587,7 @@ describe('File', function() {
     it('should confirm the abort method exists', function(done) {
       var reqStream = through();
 
-      file.request = function() {
+      file.requestStream = function() {
         return reqStream;
       };
 
@@ -596,7 +610,7 @@ describe('File', function() {
           o: encodeURIComponent(file.name)
         });
 
-        file.request = function(opts) {
+        file.requestStream = function(opts) {
           assert.equal(opts.uri, expectedPath);
           setImmediate(function() {
             done();
@@ -608,7 +622,7 @@ describe('File', function() {
       });
 
       it('should accept gzip encoding', function(done) {
-        file.request = function(opts) {
+        file.requestStream = function(opts) {
           assert.strictEqual(opts.gzip, true);
           setImmediate(function() {
             done();
@@ -623,7 +637,7 @@ describe('File', function() {
         var ERROR = new Error('Error.');
 
         beforeEach(function() {
-          file.request = function(opts) {
+          file.requestStream = function(opts) {
             var stream = (requestOverride || request)(opts);
 
             setImmediate(function() {
@@ -645,13 +659,13 @@ describe('File', function() {
       });
     });
 
-    describe('request', function() {
+    describe('requestStream', function() {
       it('should get readable stream from request', function(done) {
         var fakeRequest = { a: 'b', c: 'd' };
 
         requestOverride = getFakeRequest();
 
-        file.request = function() {
+        file.requestStream = function() {
           setImmediate(function() {
             assert.deepEqual(requestOverride.getRequestOptions(), fakeRequest);
             done();
@@ -664,7 +678,7 @@ describe('File', function() {
       });
 
       it('should emit response event from request', function(done) {
-        file.request = getFakeSuccessfulRequest('body');
+        file.requestStream = getFakeSuccessfulRequest('body');
 
         file.createReadStream({ validation: false })
           .on('response', function() {
@@ -683,7 +697,7 @@ describe('File', function() {
           done();
         };
 
-        file.request = function() {
+        file.requestStream = function() {
           var stream = through();
           setImmediate(function() {
             stream.emit('response', response);
@@ -698,7 +712,7 @@ describe('File', function() {
         var requestStream = through();
         var readStream = file.createReadStream();
 
-        file.request = function() {
+        file.requestStream = function() {
           setImmediate(function() {
             // Must be a stream. Doesn't matter for the tests, though.
             requestStream.emit('response', through());
@@ -734,7 +748,7 @@ describe('File', function() {
           done();
         };
 
-        file.request = function() {
+        file.requestStream = function() {
           var stream = through();
           setImmediate(function() {
             stream.emit('complete', response);
@@ -749,7 +763,7 @@ describe('File', function() {
         var ERROR = new Error('Error.');
 
         beforeEach(function() {
-          file.request = getFakeFailedRequest(ERROR);
+          file.requestStream = getFakeFailedRequest(ERROR);
         });
 
         it('should emit the error', function(done) {
@@ -790,7 +804,7 @@ describe('File', function() {
       it('should destroy the stream on error', function(done) {
         var error = new Error('Error.');
 
-        file.request = getFakeSuccessfulRequest('data');
+        file.requestStream = getFakeSuccessfulRequest('data');
 
         handleRespOverride = function(err, resp, body, callback) {
           callback(error);
@@ -801,7 +815,8 @@ describe('File', function() {
             assert.strictEqual(err, error);
 
             setImmediate(function() {
-              assert.strictEqual(file.request.wasRequestDestroyed(), true);
+              assert
+                .strictEqual(file.requestStream.wasRequestDestroyed(), true);
               done();
             });
           })
@@ -809,7 +824,8 @@ describe('File', function() {
       });
 
       it('should validate with crc32c', function(done) {
-        file.request = getFakeSuccessfulRequest(data, fakeResponse.crc32c);
+        file.requestStream =
+          getFakeSuccessfulRequest(data, fakeResponse.crc32c);
 
         file.createReadStream({ validation: 'crc32c' })
           .on('error', done)
@@ -818,7 +834,7 @@ describe('File', function() {
       });
 
       it('should emit an error if crc32c validation fails', function(done) {
-        file.request = getFakeSuccessfulRequest(
+        file.requestStream = getFakeSuccessfulRequest(
           'bad-data',
           fakeResponse.crc32c
         );
@@ -832,7 +848,7 @@ describe('File', function() {
       });
 
       it('should validate with md5', function(done) {
-        file.request = getFakeSuccessfulRequest(data, fakeResponse.md5);
+        file.requestStream = getFakeSuccessfulRequest(data, fakeResponse.md5);
 
         file.createReadStream({ validation: 'md5' })
           .on('error', done)
@@ -841,7 +857,8 @@ describe('File', function() {
       });
 
       it('should emit an error if md5 validation fails', function(done) {
-        file.request = getFakeSuccessfulRequest('bad-data', fakeResponse.md5);
+        file.requestStream =
+          getFakeSuccessfulRequest('bad-data', fakeResponse.md5);
 
         file.createReadStream({ validation: 'md5' })
           .on('error', function(err) {
@@ -852,7 +869,7 @@ describe('File', function() {
       });
 
       it('should default to md5 validation', function(done) {
-        file.request = getFakeSuccessfulRequest(data, {
+        file.requestStream = getFakeSuccessfulRequest(data, {
           headers: { 'x-goog-hash': 'md5=fakefakefake' }
         });
 
@@ -865,7 +882,7 @@ describe('File', function() {
       });
 
       it('should ignore a data mismatch if validation: false', function(done) {
-        file.request = getFakeSuccessfulRequest(data, {
+        file.requestStream = getFakeSuccessfulRequest(data, {
           headers: { 'x-goog-hash': 'md5=fakefakefake' }
         });
 
@@ -877,7 +894,7 @@ describe('File', function() {
 
       describe('destroying the through stream', function() {
         it('should destroy after failed validation', function(done) {
-          file.request = getFakeSuccessfulRequest(
+          file.requestStream = getFakeSuccessfulRequest(
             'bad-data',
             fakeResponse.crc32c
           );
@@ -896,7 +913,7 @@ describe('File', function() {
       it('should accept a start range', function(done) {
         var startOffset = 100;
 
-        file.request = function(opts) {
+        file.requestStream = function(opts) {
           setImmediate(function() {
             assert.equal(opts.headers.Range, 'bytes=' + startOffset + '-');
             done();
@@ -910,7 +927,7 @@ describe('File', function() {
       it('should accept an end range and set start to 0', function(done) {
         var endOffset = 100;
 
-        file.request = function(opts) {
+        file.requestStream = function(opts) {
           setImmediate(function() {
             assert.equal(opts.headers.Range, 'bytes=0-' + endOffset);
             done();
@@ -925,7 +942,7 @@ describe('File', function() {
         var startOffset = 100;
         var endOffset = 101;
 
-        file.request = function(opts) {
+        file.requestStream = function(opts) {
           setImmediate(function() {
             var expectedRange = 'bytes=' + startOffset + '-' + endOffset;
             assert.equal(opts.headers.Range, expectedRange);
@@ -941,7 +958,7 @@ describe('File', function() {
         var startOffset = 0;
         var endOffset = 0;
 
-        file.request = function(opts) {
+        file.requestStream = function(opts) {
           setImmediate(function() {
             var expectedRange = 'bytes=0-0';
             assert.equal(opts.headers.Range, expectedRange);
@@ -954,7 +971,7 @@ describe('File', function() {
       });
 
       it('should end the through stream', function(done) {
-        file.request = getFakeSuccessfulRequest('body', { body: null });
+        file.requestStream = getFakeSuccessfulRequest('body', { body: null });
 
         var readStream = file.createReadStream({ start: 100 });
         readStream.end = done;
@@ -966,7 +983,7 @@ describe('File', function() {
       it('should make a request for the tail bytes', function(done) {
         var endOffset = -10;
 
-        file.request = function(opts) {
+        file.requestStream = function(opts) {
           setImmediate(function() {
             assert.equal(opts.headers.Range, 'bytes=' + endOffset);
             done();

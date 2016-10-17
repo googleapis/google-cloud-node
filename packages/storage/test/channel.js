@@ -21,9 +21,20 @@
 'use strict';
 
 var assert = require('assert');
+var extend = require('extend');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var ServiceObject = require('@google-cloud/common').ServiceObject;
+var util = require('@google-cloud/common').util;
+
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class) {
+    if (Class.name === 'Channel') {
+      promisified = true;
+    }
+  }
+});
 
 function FakeServiceObject() {
   this.calledWith_ = arguments;
@@ -43,7 +54,8 @@ describe('Channel', function() {
   before(function() {
     Channel = proxyquire('../src/channel.js', {
       '@google-cloud/common': {
-        ServiceObject: FakeServiceObject
+        ServiceObject: FakeServiceObject,
+        util: fakeUtil
       }
     });
   });
@@ -62,6 +74,10 @@ describe('Channel', function() {
       assert.strictEqual(calledWith.baseUrl, '/channels');
       assert.strictEqual(calledWith.id, '');
       assert.deepEqual(calledWith.methods, {});
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should set the default metadata', function() {
