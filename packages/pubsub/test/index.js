@@ -32,14 +32,24 @@ function Subscription(a, b) {
   return new OverrideFn(a, b);
 }
 
-var fakeUtil = extend({}, util);
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class, options) {
+    if (Class.name !== 'PubSub') {
+      return;
+    }
+
+    promisified = true;
+    assert.deepEqual(options.exclude, ['subscription', 'topic']);
+  }
+});
 
 function FakeGrpcService() {
   this.calledWith_ = arguments;
 }
 
 var extended = false;
-var fakeStreamRouter = {
+var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'PubSub') {
       return;
@@ -49,6 +59,9 @@ var fakeStreamRouter = {
     assert.equal(Class.name, 'PubSub');
     assert.deepEqual(methods, ['getSubscriptions', 'getTopics']);
     extended = true;
+  },
+  streamify: function(methodName) {
+    return methodName;
   }
 };
 
@@ -65,7 +78,7 @@ describe('PubSub', function() {
     PubSub = proxyquire('../', {
       '@google-cloud/common': {
         GrpcService: FakeGrpcService,
-        streamRouter: fakeStreamRouter,
+        paginator: fakePaginator,
         util: fakeUtil
       },
       './subscription.js': Subscription,
@@ -87,7 +100,16 @@ describe('PubSub', function() {
 
   describe('instantiation', function() {
     it('should extend the correct methods', function() {
-      assert(extended); // See `fakeStreamRouter.extend`
+      assert(extended); // See `fakePaginator.extend`
+    });
+
+    it('should streamify the correct methods', function() {
+      assert.strictEqual(pubsub.getSubscriptionsStream, 'getSubscriptions');
+      assert.strictEqual(pubsub.getTopicsStream, 'getTopics');
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should normalize the arguments', function() {

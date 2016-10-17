@@ -38,6 +38,16 @@ topic.subscribe('subscription-name', options, function(err, subscription) {
   subscription.removeListener('message', onMessage);
   subscription.removeListener('error', onError);
 });
+
+// Promises are also supported by omitting callbacks.
+topic.publish('New message!').then(function(data) {
+  var messageIds = data[0];
+});
+
+// It's also possible to integrate with third-party Promise libraries.
+var pubsub = require('@google-cloud/pubsub')({
+  promise: require('bluebird')
+});
 ```
 
 

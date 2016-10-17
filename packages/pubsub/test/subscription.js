@@ -23,6 +23,15 @@ var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class) {
+    if (Class.name === 'Subscription') {
+      promisified = true;
+    }
+  }
+});
+
 function FakeGrpcServiceObject() {
   this.calledWith_ = arguments;
   GrpcServiceObject.apply(this, arguments);
@@ -72,7 +81,8 @@ describe('Subscription', function() {
   before(function() {
     Subscription = proxyquire('../src/subscription.js', {
       '@google-cloud/common': {
-        GrpcServiceObject: FakeGrpcServiceObject
+        GrpcServiceObject: FakeGrpcServiceObject,
+        util: fakeUtil
       },
       './iam.js': FakeIAM
     });
@@ -92,6 +102,10 @@ describe('Subscription', function() {
   });
 
   describe('initialization', function() {
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
+
     it('should format name', function(done) {
       var formatName_ = Subscription.formatName_;
       Subscription.formatName_ = function() {
