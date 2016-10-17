@@ -46,6 +46,16 @@ translate.getLanguages(function(err, languages) {
     // ]
   }
 });
+
+// Promises are also supported by omitting callbacks.
+translate.getLanguages().then(function(data) {
+  var languages = data[0];
+});
+
+// It's also possible to integrate with third-party Promise libraries.
+var translate = require('@google-cloud/translate')({
+  promise: require('bluebird')
+});
 ```
 
 
