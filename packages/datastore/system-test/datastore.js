@@ -237,7 +237,7 @@ describe('Datastore', function() {
 
         var numEntitiesEmitted = 0;
 
-        datastore.get([key1, key2])
+        datastore.createReadStream([key1, key2])
           .on('error', done)
           .on('data', function() {
             numEntitiesEmitted++;
@@ -471,7 +471,7 @@ describe('Datastore', function() {
 
       var resultsReturned = 0;
 
-      datastore.runQuery(q)
+      datastore.runQueryStream(q)
         .on('error', done)
         .on('data', function() { resultsReturned++; })
         .on('end', function() {
@@ -488,7 +488,7 @@ describe('Datastore', function() {
 
       var resultsReturned = 0;
 
-      datastore.runQuery(q)
+      datastore.runQueryStream(q)
         .on('error', done)
         .on('data', function() { resultsReturned++; })
         .on('end', function() {
