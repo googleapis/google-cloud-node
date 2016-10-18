@@ -413,6 +413,7 @@ Topic.prototype.getSubscriptionsStream = function(options) {
  *
  * topic.publish(message, options, function(err, messageIds, apiResponse) {});
  *
+ * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * topic.publish(message).then(function(data) {
