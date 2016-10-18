@@ -57,6 +57,9 @@ module.exports = {
     logging: {
       title: 'Google Cloud Logging'
     },
+    monitoring: {
+      title: 'Google Cloud Monitoring'
+    },
     prediction: {
       title: 'Google Prediction API'
     },
