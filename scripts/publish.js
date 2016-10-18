@@ -57,6 +57,10 @@ setTimeout(function() {
   console.log('Publishing now');
 
   if (moduleName === 'google-cloud') {
+    exec('rm npm-shrinkwrap.json', {
+      cwd: cwd
+    });
+
     exec('rm -rf node_modules', {
       cwd: cwd
     });
@@ -68,8 +72,6 @@ setTimeout(function() {
     exec('npm dedupe', {
       cwd: cwd
     });
-
-    rm(path.join(cwd, 'npm-shrinkwrap.json'));
 
     exec('npm shrinkwrap', {
       cwd: cwd
