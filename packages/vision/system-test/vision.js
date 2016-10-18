@@ -416,13 +416,13 @@ describe('Vision', function() {
         assert.deepEqual(properties.colors, [
           '3b3027',
           '727d81',
-          '3f2f22',
+          '3f3022',
           '838e92',
-          '482a16',
-          '5f4f3c',
-          '261b14',
-          'b39b7f',
-          '51473f',
+          '482b17',
+          '5f4e3d',
+          '261c14',
+          'b29a7f',
+          '51473e',
           '2c1e12'
         ]);
 

@@ -107,6 +107,16 @@ vision.detectFaces('./image.jpg', function(err, faces) {
   //   }
   // ]
 });
+
+// Promises are also supported by omitting callbacks.
+vision.detectFaces('./image.jpg').then(function(data) {
+  var faces = data[0];
+});
+
+// It's also possible to integrate with third-party Promise libraries.
+var vision = require('@google-cloud/vision')({
+  promise: require('bluebird')
+});
 ```
 
 
