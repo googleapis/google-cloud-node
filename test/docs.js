@@ -21,6 +21,7 @@ var format = require('string-format-obj');
 var fs = require('fs');
 var glob = require('glob');
 var mitm = require('mitm');
+var multiline = require('multiline');
 var overviews = require('../scripts/docs/config').OVERVIEW;
 var path = require('path');
 var prop = require('propprop');
@@ -174,9 +175,21 @@ function getDocs(mod) {
 
 function createInstantiationCode(mod) {
   var config = overviews[mod] || {};
+  var instanceName = config.instanceName || mod;
 
-  return format('var {instanceName} = require(\'{path}\')({config});', {
-    instanceName: config.instanceName || mod,
+  return format(multiline.stripIndent(function() {/*
+    var {instanceName} = require('{path}')({config});
+
+    var api = {instanceName}.api;
+    if (api) {
+      Object.keys(api).forEach(function(apiName) {
+        Object.keys(api[apiName]).forEach(function(method) {
+          api[apiName][method] = function() {};
+        });
+      });
+    }
+  */}), {
+    instanceName: instanceName,
     path: '../packages/' + mod,
     config: JSON.stringify({
       // All of the minimum required options our APIs expect.
