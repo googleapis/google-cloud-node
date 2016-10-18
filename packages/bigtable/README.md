@@ -47,6 +47,16 @@ row.save('follows:gwashington', 1, function(err) {
     // }
   });
 });
+
+// Promises are also supported by omitting callbacks.
+table.getRows().then(function(data) {
+  var rows = data[0];
+});
+
+// It's also possible to integrate with third-party Promise libraries.
+var bigtable = require('@google-cloud/bigtable')({
+  promise: require('bluebird')
+});
 ```
 
 

@@ -18,6 +18,7 @@
 
 var assert = require('assert');
 var events = require('events');
+var extend = require('extend');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var pumpify = require('pumpify');
@@ -29,6 +30,18 @@ var common = require('@google-cloud/common');
 var Family = require('../src/family.js');
 var Mutation = require('../src/mutation.js');
 var Row = require('../src/row.js');
+
+var promisified = false;
+var fakeUtil = extend({}, common.util, {
+  promisifyAll: function(Class, options) {
+    if (Class.name !== 'Table') {
+      return;
+    }
+
+    promisified = true;
+    assert.deepEqual(options.exclude, ['family', 'insert', 'mutate', 'row']);
+  }
+});
 
 function createFake(Class) {
   function Fake() {
@@ -87,7 +100,8 @@ describe('Bigtable/Table', function() {
     Table = proxyquire('../src/table.js', {
       '@google-cloud/common': {
         GrpcService: FakeGrpcService,
-        GrpcServiceObject: FakeGrpcServiceObject
+        GrpcServiceObject: FakeGrpcServiceObject,
+        util: fakeUtil
       },
       './family.js': FakeFamily,
       './mutation.js': FakeMutation,
@@ -144,6 +158,10 @@ describe('Bigtable/Table', function() {
       });
 
       assert(Table.formatName_.calledWith(INSTANCE.id, TABLE_ID));
+    });
+
+    it('should promisify all the things', function() {
+      assert(promisified);
     });
 
     it('should use Instance#createTable to create the table', function(done) {
@@ -275,6 +293,278 @@ describe('Bigtable/Table', function() {
         assert.strictEqual(family.metadata, response);
         assert.strictEqual(apiResponse, response);
         done();
+      });
+    });
+  });
+
+  describe('createReadStream', function() {
+    describe('options', function() {
+      var pumpSpy;
+
+      beforeEach(function() {
+        pumpSpy = sinon.stub(pumpify, 'obj', function() {
+          return through.obj();
+        });
+      });
+
+      it('should provide the proper request options', function(done) {
+        table.requestStream = function(grpcOpts, reqOpts) {
+          assert.deepEqual(grpcOpts, {
+            service: 'Bigtable',
+            method: 'readRows'
+          });
+
+          assert.strictEqual(reqOpts.tableName, TABLE_NAME);
+          assert.strictEqual(reqOpts.objectMode, true);
+          done();
+        };
+
+        table.createReadStream();
+      });
+
+      it('should retrieve a range of rows', function(done) {
+        var options = {
+          start: 'gwashington',
+          end: 'alincoln'
+        };
+
+        var fakeRange = {
+          start: 'a',
+          end: 'b'
+        };
+
+        var formatSpy = FakeFilter.createRange = sinon.spy(function() {
+          return fakeRange;
+        });
+
+        table.requestStream = function(g, reqOpts) {
+          assert.deepEqual(reqOpts.rows.rowRanges[0], fakeRange);
+          assert.strictEqual(formatSpy.callCount, 1);
+          assert.deepEqual(formatSpy.getCall(0).args, [
+            options.start,
+            options.end,
+            'Key'
+          ]);
+          done();
+        };
+
+        table.createReadStream(options);
+      });
+
+      it('should retrieve multiple rows', function(done) {
+        var options = {
+          keys: [
+            'gwashington',
+            'alincoln'
+          ]
+        };
+        var convertedKeys = [
+          'a',
+          'b'
+        ];
+
+        var convertSpy = FakeMutation.convertToBytes = sinon.spy(function(key) {
+          var keyIndex = options.keys.indexOf(key);
+          return convertedKeys[keyIndex];
+        });
+
+        table.requestStream = function(g, reqOpts) {
+          assert.deepEqual(reqOpts.rows.rowKeys, convertedKeys);
+          assert.strictEqual(convertSpy.callCount, 2);
+          assert.strictEqual(convertSpy.getCall(0).args[0], options.keys[0]);
+          assert.strictEqual(convertSpy.getCall(1).args[0], options.keys[1]);
+          done();
+        };
+
+        table.createReadStream(options);
+      });
+
+      it('should retrieve multiple ranges', function(done) {
+        var options = {
+          ranges: [{
+            start: 'a',
+            end: 'b'
+          }, {
+            start: 'c',
+            end: 'd'
+          }]
+        };
+
+        var fakeRanges = [{
+          start: 'e',
+          end: 'f'
+        }, {
+          start: 'g',
+          end: 'h'
+        }];
+
+        var formatSpy = FakeFilter.createRange = sinon.spy(function() {
+          return fakeRanges[formatSpy.callCount - 1];
+        });
+
+        table.requestStream = function(g, reqOpts) {
+          assert.deepEqual(reqOpts.rows.rowRanges, fakeRanges);
+          assert.strictEqual(formatSpy.callCount, 2);
+          assert.deepEqual(formatSpy.getCall(0).args, [
+            options.ranges[0].start,
+            options.ranges[0].end,
+            'Key'
+          ]);
+          assert.deepEqual(formatSpy.getCall(1).args, [
+            options.ranges[1].start,
+            options.ranges[1].end,
+            'Key'
+          ]);
+          done();
+        };
+
+        table.createReadStream(options);
+      });
+
+      it('should parse a filter object', function(done) {
+        var options = {
+          filter: [{}]
+        };
+
+        var fakeFilter = {};
+
+        var parseSpy = FakeFilter.parse = sinon.spy(function() {
+          return fakeFilter;
+        });
+
+        table.requestStream = function(g, reqOpts) {
+          assert.strictEqual(reqOpts.filter, fakeFilter);
+          assert.strictEqual(parseSpy.callCount, 1);
+          assert.strictEqual(parseSpy.getCall(0).args[0], options.filter);
+          done();
+        };
+
+        table.createReadStream(options);
+      });
+
+      it('should allow setting a row limit', function(done) {
+        var options = {
+          limit: 10
+        };
+
+        table.requestStream = function(g, reqOpts) {
+          assert.strictEqual(reqOpts.numRowsLimit, options.limit);
+          done();
+        };
+
+        table.createReadStream(options);
+      });
+    });
+
+    describe('success', function() {
+      var fakeChunks = {
+        chunks: [{
+          rowKey: 'a',
+        }, {
+          commitRow: true
+        }, {
+          rowKey: 'b',
+        }, {
+          commitRow: true
+        }]
+      };
+
+      var formattedRows = [
+        { key: 'c', data: {} },
+        { key: 'd', data: {} }
+      ];
+
+      beforeEach(function() {
+        sinon.stub(table, 'row', function() {
+          return {};
+        });
+
+        FakeRow.formatChunks_ = sinon.spy(function() {
+          return formattedRows;
+        });
+
+        table.requestStream = function() {
+          var stream = new Stream({
+            objectMode: true
+          });
+
+          setImmediate(function() {
+            stream.push(fakeChunks);
+            stream.push(null);
+          });
+
+          return stream;
+        };
+      });
+
+      it('should pass the decode option', function(done) {
+        var options = {
+          decode: false
+        };
+
+        table.createReadStream(options)
+          .on('error', done)
+          .on('data', function() {})
+          .on('end', function() {
+            var formatArgs = FakeRow.formatChunks_.getCall(0).args[1];
+
+            assert.strictEqual(formatArgs.decode, options.decode);
+            done();
+          });
+      });
+
+      it('should stream Row objects', function(done) {
+        var rows = [];
+
+        table.createReadStream()
+          .on('error', done)
+          .on('data', function(row) {
+            rows.push(row);
+          })
+          .on('end', function() {
+            var rowSpy = table.row;
+            var formatSpy = FakeRow.formatChunks_;
+
+            assert.strictEqual(rows.length, formattedRows.length);
+            assert.strictEqual(rowSpy.callCount, formattedRows.length);
+
+            assert.strictEqual(formatSpy.getCall(0).args[0], fakeChunks.chunks);
+
+            assert.strictEqual(rowSpy.getCall(0).args[0], formattedRows[0].key);
+            assert.strictEqual(rows[0].data, formattedRows[0].data);
+
+            assert.strictEqual(rowSpy.getCall(1).args[0], formattedRows[1].key);
+            assert.strictEqual(rows[1].data, formattedRows[1].data);
+
+            done();
+          });
+      });
+    });
+
+    describe('error', function() {
+      var error = new Error('err');
+
+      beforeEach(function() {
+        table.requestStream = function() {
+          var stream = new Stream({
+            objectMode: true
+          });
+
+          setImmediate(function() {
+            stream.emit('error', error);
+          });
+
+          return stream;
+        };
+      });
+
+      it('should emit an error event', function(done) {
+        table.createReadStream()
+          .on('error', function(err) {
+            assert.strictEqual(error, err);
+            done();
+          })
+          .on('data', done);
       });
     });
   });
@@ -469,263 +759,47 @@ describe('Bigtable/Table', function() {
   });
 
   describe('getRows', function() {
-    describe('options', function() {
-      var pumpSpy;
-
-      beforeEach(function() {
-        pumpSpy = sinon.stub(pumpify, 'obj', function() {
-          return through.obj();
-        });
-      });
-
-      it('should provide the proper request options', function(done) {
-        table.requestStream = function(grpcOpts, reqOpts) {
-          assert.deepEqual(grpcOpts, {
-            service: 'Bigtable',
-            method: 'readRows'
-          });
-
-          assert.strictEqual(reqOpts.tableName, TABLE_NAME);
-          assert.strictEqual(reqOpts.objectMode, true);
-          done();
-        };
-
-        table.getRows();
-      });
-
-      it('should retrieve a range of rows', function(done) {
-        var options = {
-          start: 'gwashington',
-          end: 'alincoln'
-        };
-
-        var fakeRange = {
-          start: 'a',
-          end: 'b'
-        };
-
-        var formatSpy = FakeFilter.createRange = sinon.spy(function() {
-          return fakeRange;
-        });
-
-        table.requestStream = function(g, reqOpts) {
-          assert.deepEqual(reqOpts.rows.rowRanges[0], fakeRange);
-          assert.strictEqual(formatSpy.callCount, 1);
-          assert.deepEqual(formatSpy.getCall(0).args, [
-            options.start,
-            options.end,
-            'Key'
-          ]);
-          done();
-        };
-
-        table.getRows(options);
-      });
-
-      it('should retrieve multiple rows', function(done) {
-        var options = {
-          keys: [
-            'gwashington',
-            'alincoln'
-          ]
-        };
-        var convertedKeys = [
-          'a',
-          'b'
-        ];
-
-        var convertSpy = FakeMutation.convertToBytes = sinon.spy(function(key) {
-          var keyIndex = options.keys.indexOf(key);
-          return convertedKeys[keyIndex];
-        });
-
-        table.requestStream = function(g, reqOpts) {
-          assert.deepEqual(reqOpts.rows.rowKeys, convertedKeys);
-          assert.strictEqual(convertSpy.callCount, 2);
-          assert.strictEqual(convertSpy.getCall(0).args[0], options.keys[0]);
-          assert.strictEqual(convertSpy.getCall(1).args[0], options.keys[1]);
-          done();
-        };
-
-        table.getRows(options);
-      });
-
-      it('should retrieve multiple ranges', function(done) {
-        var options = {
-          ranges: [{
-            start: 'a',
-            end: 'b'
-          }, {
-            start: 'c',
-            end: 'd'
-          }]
-        };
-
-        var fakeRanges = [{
-          start: 'e',
-          end: 'f'
-        }, {
-          start: 'g',
-          end: 'h'
-        }];
-
-        var formatSpy = FakeFilter.createRange = sinon.spy(function() {
-          return fakeRanges[formatSpy.callCount - 1];
-        });
-
-        table.requestStream = function(g, reqOpts) {
-          assert.deepEqual(reqOpts.rows.rowRanges, fakeRanges);
-          assert.strictEqual(formatSpy.callCount, 2);
-          assert.deepEqual(formatSpy.getCall(0).args, [
-            options.ranges[0].start,
-            options.ranges[0].end,
-            'Key'
-          ]);
-          assert.deepEqual(formatSpy.getCall(1).args, [
-            options.ranges[1].start,
-            options.ranges[1].end,
-            'Key'
-          ]);
-          done();
-        };
-
-        table.getRows(options);
-      });
-
-      it('should parse a filter object', function(done) {
-        var options = {
-          filter: [{}]
-        };
-
-        var fakeFilter = {};
-
-        var parseSpy = FakeFilter.parse = sinon.spy(function() {
-          return fakeFilter;
-        });
-
-        table.requestStream = function(g, reqOpts) {
-          assert.strictEqual(reqOpts.filter, fakeFilter);
-          assert.strictEqual(parseSpy.callCount, 1);
-          assert.strictEqual(parseSpy.getCall(0).args[0], options.filter);
-          done();
-        };
-
-        table.getRows(options);
-      });
-
-      it('should allow setting a row limit', function(done) {
-        var options = {
-          limit: 10
-        };
-
-        table.requestStream = function(g, reqOpts) {
-          assert.strictEqual(reqOpts.numRowsLimit, options.limit);
-          done();
-        };
-
-        table.getRows(options);
-      });
-    });
-
     describe('success', function() {
-      var fakeChunks = {
-        chunks: [{
-          rowKey: 'a',
-        }, {
-          commitRow: true
-        }, {
-          rowKey: 'b',
-        }, {
-          commitRow: true
-        }]
-      };
-
-      var formattedRows = [
+      var fakeRows = [
         { key: 'c', data: {} },
         { key: 'd', data: {} }
       ];
 
       beforeEach(function() {
-        sinon.stub(table, 'row', function() {
-          return {};
-        });
-
-        FakeRow.formatChunks_ = sinon.spy(function() {
-          return formattedRows;
-        });
-
-        table.requestStream = function() {
+        table.createReadStream = sinon.spy(function() {
           var stream = new Stream({
             objectMode: true
           });
 
           setImmediate(function() {
-            stream.push(fakeChunks);
+            fakeRows.forEach(function(row) {
+              stream.push(row);
+            });
+
             stream.push(null);
           });
 
           return stream;
-        };
+        });
       });
 
-      it('should pass the decode option', function(done) {
-        var options = {
-          decode: false
-        };
+      it('should return the rows to the callback', function(done) {
+        var options = {};
 
-        table.getRows(options, function(err) {
+        table.getRows(options, function(err, rows) {
           assert.ifError(err);
-          var formatArgs = FakeRow.formatChunks_.getCall(0).args[1];
-          assert.strictEqual(formatArgs.decode, options.decode);
+          assert.deepEqual(rows, fakeRows);
+
+          var spy = table.createReadStream.getCall(0);
+          assert.strictEqual(spy.args[0], options);
           done();
         });
       });
 
-      it('should stream Row objects', function(done) {
-        var rows = [];
-
-        table.getRows()
-          .on('error', done)
-          .on('data', function(row) {
-            rows.push(row);
-          })
-          .on('end', function() {
-            var rowSpy = table.row;
-            var formatSpy = FakeRow.formatChunks_;
-
-            assert.strictEqual(rows.length, formattedRows.length);
-            assert.strictEqual(rowSpy.callCount, formattedRows.length);
-
-            assert.strictEqual(formatSpy.getCall(0).args[0], fakeChunks.chunks);
-
-            assert.strictEqual(rowSpy.getCall(0).args[0], formattedRows[0].key);
-            assert.strictEqual(rows[0].data, formattedRows[0].data);
-
-            assert.strictEqual(rowSpy.getCall(1).args[0], formattedRows[1].key);
-            assert.strictEqual(rows[1].data, formattedRows[1].data);
-
-            done();
-          });
-      });
-
-      it('should return an array of Row objects via callback', function(done) {
+      it('should optionally accept options', function(done) {
         table.getRows(function(err, rows) {
           assert.ifError(err);
-
-          var rowSpy = table.row;
-          var formatSpy = FakeRow.formatChunks_;
-
-          assert.strictEqual(rows.length, formattedRows.length);
-          assert.strictEqual(rowSpy.callCount, formattedRows.length);
-
-          assert.strictEqual(formatSpy.getCall(0).args[0], fakeChunks.chunks);
-
-          assert.strictEqual(rowSpy.getCall(0).args[0], formattedRows[0].key);
-          assert.strictEqual(rows[0].data, formattedRows[0].data);
-
-          assert.strictEqual(rowSpy.getCall(1).args[0], formattedRows[1].key);
-          assert.strictEqual(rows[1].data, formattedRows[1].data);
-
+          assert.deepEqual(rows, fakeRows);
           done();
         });
       });
@@ -735,7 +809,7 @@ describe('Bigtable/Table', function() {
       var error = new Error('err');
 
       beforeEach(function() {
-        table.requestStream = function() {
+        table.createReadStream = sinon.spy(function() {
           var stream = new Stream({
             objectMode: true
           });
@@ -745,22 +819,12 @@ describe('Bigtable/Table', function() {
           });
 
           return stream;
-        };
+        });
       });
 
-      it('should emit an error event', function(done) {
-        table.getRows()
-          .on('error', function(err) {
-            assert.strictEqual(error, err);
-            done();
-          })
-          .on('data', done);
-      });
-
-      it('should return an error to the callback', function(done) {
-        table.getRows(function(err, rows) {
-          assert.strictEqual(error, err);
-          assert(!rows);
+      it('should return the error to the callback', function(done) {
+        table.getRows(function(err) {
+          assert.strictEqual(err, error);
           done();
         });
       });
@@ -1015,7 +1079,7 @@ describe('Bigtable/Table', function() {
     });
   });
 
-  describe('sampleRowKeys', function() {
+  describe('sampleRowKeysStream', function() {
     it('should provide the proper request options', function(done) {
       table.requestStream = function(grpcOpts, reqOpts) {
         assert.deepEqual(grpcOpts, {
@@ -1032,7 +1096,7 @@ describe('Bigtable/Table', function() {
         });
       };
 
-      table.sampleRowKeys();
+      table.sampleRowKeysStream();
     });
 
     describe('success', function() {
@@ -1065,7 +1129,7 @@ describe('Bigtable/Table', function() {
       it('should stream key objects', function(done) {
         var keys = [];
 
-        table.sampleRowKeys()
+        table.sampleRowKeysStream()
           .on('error', done)
           .on('data', function(key) {
             keys.push(key);
@@ -1077,17 +1141,6 @@ describe('Bigtable/Table', function() {
             assert.strictEqual(keys[1].offset, fakeKeys[1].offsetBytes);
             done();
           });
-      });
-
-      it('should return an array of keys via callback', function(done) {
-        table.sampleRowKeys(function(err, keys) {
-          assert.ifError(err);
-          assert.strictEqual(keys[0].key, fakeKeys[0].rowKey);
-          assert.strictEqual(keys[0].offset, fakeKeys[0].offsetBytes);
-          assert.strictEqual(keys[1].key, fakeKeys[1].rowKey);
-          assert.strictEqual(keys[1].offset, fakeKeys[1].offsetBytes);
-          done();
-        });
       });
     });
 
@@ -1109,18 +1162,73 @@ describe('Bigtable/Table', function() {
       });
 
       it('should emit an error event', function(done) {
-        table.sampleRowKeys()
+        table.sampleRowKeysStream()
           .on('error', function(err) {
             assert.strictEqual(err, error);
             done();
           })
           .on('data', done);
       });
+    });
+  });
 
-      it('should return an error to the callback', function(done) {
+  describe('sampleRowKeys', function() {
+    describe('success', function() {
+      var fakeKeys = [{
+        key: 'a',
+        offset: 10
+      }, {
+        key: 'b',
+        offset: 20
+      }];
+
+      beforeEach(function() {
+        table.sampleRowKeysStream = sinon.spy(function() {
+          var stream = new Stream({
+            objectMode: true
+          });
+
+          setImmediate(function() {
+            fakeKeys.forEach(function(key) {
+              stream.push(key);
+            });
+
+            stream.push(null);
+          });
+
+          return stream;
+        });
+      });
+
+      it('should return the keys to the callback', function(done) {
         table.sampleRowKeys(function(err, keys) {
-          assert.strictEqual(error, err);
-          assert(!keys);
+          assert.ifError(err);
+          assert.deepEqual(keys, fakeKeys);
+          done();
+        });
+      });
+    });
+
+    describe('error', function() {
+      var error = new Error('err');
+
+      beforeEach(function() {
+        table.sampleRowKeysStream = sinon.spy(function() {
+          var stream = new Stream({
+            objectMode: true
+          });
+
+          setImmediate(function() {
+            stream.emit('error', error);
+          });
+
+          return stream;
+        });
+      });
+
+      it('should return the error to the callback', function(done) {
+        table.sampleRowKeys(function(err) {
+          assert.strictEqual(err, error);
           done();
         });
       });
