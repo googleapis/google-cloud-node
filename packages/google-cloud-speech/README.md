@@ -58,6 +58,19 @@ fs.createReadStream('./audio.raw')
     //     ...
     //   }
   });
+
+// Promises are also supported by omitting callbacks.
+speech.recognize('./audio.raw', {
+  encoding: 'LINEAR16',
+  sampleRate: 16000
+}).then(function(data) {
+  var transcript = data[0];
+});
+
+// It's also possible to integrate with third-party Promise libraries.
+var speech = require('@google-cloud/speech')({
+  promise: require('bluebird')
+});
 ```
 
 
