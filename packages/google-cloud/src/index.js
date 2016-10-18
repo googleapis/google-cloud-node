@@ -406,6 +406,8 @@ var apis = {
  *     true)
  * @param {number} options.maxRetries - Maximum number of automatic retries
  *     attempted before returning the error. (default: 3)
+ * @param {function} options.promise - Custom promise module to use instead of
+ *     native Promises.
  *
  * @example
  * var gcloud = require('google-cloud')({
@@ -476,13 +478,23 @@ var apis = {
  * bucket.getMetadata(function() {
  *   // This HTTP request was sent with the 'I win!' header specified above.
  * });
+ *
+ * //-
+ * // By default any methods that return a Promise object will use the native
+ * // Promise constructor. If you wish to use a third-party library such as
+ * // Bluebird, you can specify this via the `promise` option.
+ * //-
+ * var gcloud = require('google-cloud')({
+ *   promise: require('bluebird')
+ * });
  */
 function gcloud(config) {
   config = extend(true, { interceptors_: [] }, config);
 
   var gcloudExposedApi = {
     config_: config,
-    interceptors: config.interceptors_
+    interceptors: config.interceptors_,
+    promise: null
   };
 
   return Object.keys(apis).reduce(function(gcloudExposedApi, apiName) {
