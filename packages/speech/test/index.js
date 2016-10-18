@@ -27,7 +27,17 @@ var tmp = require('tmp');
 
 var util = require('@google-cloud/common').util;
 
-var fakeUtil = extend({}, util);
+var promisified = false;
+var fakeUtil = extend({}, util, {
+  promisifyAll: function(Class, options) {
+    if (Class.name !== 'Speech') {
+      return;
+    }
+
+    promisified = true;
+    assert.deepEqual(options.exclude, ['operation']);
+  }
+});
 
 function FakeGrpcOperation() {
   this.calledWith_ = arguments;
@@ -90,6 +100,10 @@ describe('Speech', function() {
   });
 
   describe('instantiation', function() {
+    it('should promisify all the things', function() {
+      assert(promisified);
+    });
+
     it('should normalize the arguments', function() {
       var normalizeArguments = fakeUtil.normalizeArguments;
       var normalizeArgumentsCalled = false;
