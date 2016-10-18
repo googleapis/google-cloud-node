@@ -175,7 +175,6 @@ function getDocs(mod) {
 
 function createInstantiationCode(mod) {
   var config = overviews[mod] || {};
-  var instanceName = config.instanceName || mod;
 
   return format(multiline.stripIndent(function() {/*
     var {instanceName} = require('{path}')({config});
@@ -189,7 +188,7 @@ function createInstantiationCode(mod) {
       });
     }
   */}), {
-    instanceName: instanceName,
+    instanceName: config.instanceName || mod,
     path: '../packages/' + mod,
     config: JSON.stringify({
       // All of the minimum required options our APIs expect.
