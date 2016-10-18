@@ -69,6 +69,8 @@ setTimeout(function() {
       cwd: cwd
     });
 
+    rm(path.join(cwd, 'npm-shrinkwrap.json'));
+
     exec('npm shrinkwrap', {
       cwd: cwd
     });
