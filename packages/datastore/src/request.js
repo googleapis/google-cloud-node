@@ -466,7 +466,12 @@ DatastoreRequest.prototype.insert = function(entities, callback) {
  * //-
  * var query = datastore.createQuery('Lion');
  *
- * datastore.runQuery(query, function(err, entities, info) {});
+ * datastore.runQuery(query, function(err, entities, info) {
+ *   // entities = An array of records.
+ *
+ *   // Access the Key object for an entity.
+ *   var firstEntityKey = entities[0][datastore.KEY];
+ * });
  *
  * //-
  * // Or, if you're using a transaction object.
@@ -541,7 +546,10 @@ DatastoreRequest.prototype.runQuery = function(query, options, callback) {
  * @example
  * datastore.runQueryStream(query)
  *   .on('error', console.error)
- *   .on('data', function (entity) {})
+ *   .on('data', function(entity) {
+ *     // Access the Key object for this entity.
+ *     var key = entity[datastore.KEY];
+ *   })
  *   .on('info', function(info) {})
  *   .on('end', function() {
  *     // All entities retrieved.
@@ -552,7 +560,7 @@ DatastoreRequest.prototype.runQuery = function(query, options, callback) {
  * // unnecessary processing and API requests.
  * //-
  * datastore.runQueryStream(query)
- *   .on('data', function (entity) {
+ *   .on('data', function(entity) {
  *     this.end();
  *   });
  */

@@ -107,8 +107,8 @@ var Transaction = require('./transaction.js');
  * var key = datastore.key(['Company', 'Google']);
  *
  * datastore.get(key, function(err, entity) {
- *   // entity.data = The record.
- *   // entity.key = The key.
+ *   // entity = The record.
+ *   // entity[datastore.KEY] = The key for this entity.
  * });
  *
  * //-
@@ -147,13 +147,10 @@ var Transaction = require('./transaction.js');
  * // Run the query with {module:datastore#runQuery}.
  * //-
  * datastore.runQuery(query, function(err, entities) {
- *   // entities = [
- *   //   {
- *   //     data: The record,
- *   //     key: The key for this record
- *   //   },
- *   //   ...
- *   // ]
+ *   // entities = An array of records.
+ *
+ *   // Access the Key object for an entity.
+ *   var firstEntityKey = entities[0][datastore.KEY];
  * });
  *
  * //-
@@ -227,11 +224,8 @@ var Transaction = require('./transaction.js');
  * //-
  * datastore.get(key, function(err, entity) {
  *   // entity = {
- *   //   key: datastore.key(['Company', 'Google']),
- *   //   data: {
- *   //     name: 'Google',
- *   //     location: 'CA'
- *   //   }
+ *   //   name: 'Google',
+ *   //   location: 'CA'
  *   // }
  * });
  *
@@ -280,16 +274,16 @@ var Transaction = require('./transaction.js');
  *
  *   var key = datastore.key(['Company', 'Google']);
  *
- *   transaction.get(key, function(err, data) {
+ *   transaction.get(key, function(err, entity) {
  *     if (err) {
  *       // Error handling omitted.
  *     }
  *
- *     data.symbol = 'GOOG';
+ *     entity.symbol = 'GOOG';
  *
  *     transaction.save({
  *       key: key,
- *       data: data
+ *       data: entity
  *     });
  *
  *     transaction.commit(function(err) {

@@ -55,7 +55,7 @@ datastore.save({
   key: blogPostKey,
   data: blogPostData
 }).then(function() {
-  // The blog post is not published!
+  // The blog post is now published!
 });
 
 // It's also possible to integrate with third-party Promise libraries.
