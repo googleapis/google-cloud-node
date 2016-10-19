@@ -246,6 +246,30 @@ describe('Storage', function() {
       });
     });
 
+    it('should expand the Multi Regional option', function(done) {
+      storage.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.json.storageClass, 'MULTI_REGIONAL');
+        done();
+      };
+      storage.createBucket(BUCKET_NAME, { multi_regional: true }, function() {});
+    });
+
+    it('should expand the Regional option', function(done) {
+      storage.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.json.storageClass, 'REGIONAL');
+        done();
+      };
+      storage.createBucket(BUCKET_NAME, { regional: true }, function() {});
+    });
+
+    it('should expand the Coldline option', function(done) {
+      storage.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.json.storageClass, 'COLDLINE');
+        done();
+      };
+      storage.createBucket(BUCKET_NAME, { coldline: true }, function() {});
+    });
+
     it('should expand the Nearline option', function(done) {
       storage.request = function(reqOpts) {
         assert.strictEqual(reqOpts.json.storageClass, 'NEARLINE');
