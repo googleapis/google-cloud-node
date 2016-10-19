@@ -195,13 +195,13 @@ describe('Topic', function() {
     it('should return a stream', function(done) {
       var fakeStream = {};
 
-      topic.pubsub.getSubscriptions = function(options) {
+      topic.pubsub.getSubscriptionsStream = function(options) {
         assert.deepEqual(options, { topic: topic });
         setImmediate(done);
         return fakeStream;
       };
 
-      var stream = topic.getSubscriptions();
+      var stream = topic.getSubscriptionsStream();
       assert.strictEqual(stream, fakeStream);
     });
 
@@ -209,14 +209,14 @@ describe('Topic', function() {
       var opts = { a: 'b', c: 'd' };
 
       topic.pubsub = {
-        getSubscriptions: function(options) {
+        getSubscriptionsStream: function(options) {
           assert.deepEqual(options, opts);
           assert.deepEqual(options.topic, topic);
           done();
         }
       };
 
-      topic.getSubscriptions(opts);
+      topic.getSubscriptionsStream(opts);
     });
   });
 
