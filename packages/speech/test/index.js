@@ -647,13 +647,13 @@ describe('Speech', function() {
 
     it('should make the correct request', function(done) {
       speech.api.Speech = {
-        syncRecognize: function(config, file) {
+        syncRecognize: function(request) {
           var expectedConfig = extend({}, CONFIG, {
             encoding: DETECTED_ENCODING
           });
-          assert.deepEqual(config, expectedConfig);
+          assert.deepEqual(request.config, expectedConfig);
 
-          assert.strictEqual(file, FOUND_FILE);
+          assert.strictEqual(request.audio, FOUND_FILE);
 
           done();
         }
@@ -672,8 +672,8 @@ describe('Speech', function() {
       };
 
       speech.api.Speech = {
-        syncRecognize: function(config_) {
-          assert.strictEqual(config_.encoding, config.encoding);
+        syncRecognize: function(request) {
+          assert.strictEqual(request.config.encoding, config.encoding);
           done();
         }
       };
@@ -690,8 +690,8 @@ describe('Speech', function() {
       };
 
       speech.api.Speech = {
-        syncRecognize: function(config) {
-          assert.strictEqual(config.encoding, expectedEncoding);
+        syncRecognize: function(request) {
+          assert.strictEqual(request.config.encoding, expectedEncoding);
           done();
         }
       };
@@ -718,7 +718,7 @@ describe('Speech', function() {
 
       beforeEach(function() {
         speech.api.Speech = {
-          syncRecognize: function(config, file, callback) {
+          syncRecognize: function(request, callback) {
             callback(error, apiResponse);
           }
         };
@@ -757,7 +757,7 @@ describe('Speech', function() {
         };
 
         speech.api.Speech = {
-          syncRecognize: function(config, file, callback) {
+          syncRecognize: function(request, callback) {
             callback(null, apiResponse);
           }
         };
@@ -815,8 +815,8 @@ describe('Speech', function() {
 
       it('should delete verbose option from request object', function(done) {
         speech.api.Speech = {
-          syncRecognize: function(config) {
-            assert.strictEqual(config.verbose, undefined);
+          syncRecognize: function(request) {
+            assert.strictEqual(request.config.verbose, undefined);
             done();
           }
         };
@@ -861,13 +861,13 @@ describe('Speech', function() {
 
     it('should make the correct request', function(done) {
       speech.api.Speech = {
-        asyncRecognize: function(config, file) {
+        asyncRecognize: function(request) {
           var expectedConfig = extend({}, CONFIG, {
             encoding: DETECTED_ENCODING
           });
-          assert.deepEqual(config, expectedConfig);
+          assert.deepEqual(request.config, expectedConfig);
 
-          assert.strictEqual(file, FOUND_FILE);
+          assert.strictEqual(request.audio, FOUND_FILE);
 
           done();
         }
@@ -886,8 +886,8 @@ describe('Speech', function() {
       };
 
       speech.api.Speech = {
-        asyncRecognize: function(config_) {
-          assert.strictEqual(config_.encoding, config.encoding);
+        asyncRecognize: function(request) {
+          assert.strictEqual(request.config.encoding, config.encoding);
           done();
         }
       };
@@ -904,8 +904,8 @@ describe('Speech', function() {
       };
 
       speech.api.Speech = {
-        asyncRecognize: function(config) {
-          assert.strictEqual(config.encoding, expectedEncoding);
+        asyncRecognize: function(request) {
+          assert.strictEqual(request.config.encoding, expectedEncoding);
           done();
         }
       };
@@ -932,7 +932,7 @@ describe('Speech', function() {
 
       beforeEach(function() {
         speech.api.Speech = {
-          asyncRecognize: function(config, file, callback) {
+          asyncRecognize: function(request, callback) {
             callback(error, apiResponse);
           }
         };
@@ -978,7 +978,7 @@ describe('Speech', function() {
         };
 
         speech.api.Speech = {
-          asyncRecognize: function(config, file, callback) {
+          asyncRecognize: function(request, callback) {
             callback(null, apiResponse);
           }
         };
@@ -1058,8 +1058,8 @@ describe('Speech', function() {
 
       it('should delete verbose option from request object', function(done) {
         speech.api.Speech = {
-          asyncRecognize: function(config) {
-            assert.strictEqual(config.verbose, undefined);
+          asyncRecognize: function(request) {
+            assert.strictEqual(request.config.verbose, undefined);
             done();
           }
         };

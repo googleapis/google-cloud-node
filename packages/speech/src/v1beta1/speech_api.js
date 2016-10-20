@@ -108,12 +108,14 @@ function SpeechApi(gaxGrpc, grpcClients, opts) {
  * Perform synchronous speech-recognition: receive results after all audio
  * has been sent and processed.
  *
- * @param {Object} config
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {Object} request.config
  *   [Required] The `config` message provides information to the recognizer
  *   that specifies how to process the request.
  *
  *   This object should have the same structure as [RecognitionConfig]{@link RecognitionConfig}
- * @param {Object} audio
+ * @param {Object} request.audio
  *   [Required] The audio data to be recognized.
  *
  *   This object should have the same structure as [RecognitionAudio]{@link RecognitionAudio}
@@ -124,27 +126,25 @@ function SpeechApi(gaxGrpc, grpcClients, opts) {
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [SyncRecognizeResponse]{@link SyncRecognizeResponse}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = speechV1beta1.speechApi();
  * var config = {};
  * var audio = {};
- * api.syncRecognize(config, audio, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * var request = {
+ *     config: config,
+ *     audio: audio
+ * };
+ * api.syncRecognize(request).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-SpeechApi.prototype.syncRecognize = function syncRecognize(
-    config,
-    audio,
-    options,
-    callback) {
+SpeechApi.prototype.syncRecognize = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -152,11 +152,7 @@ SpeechApi.prototype.syncRecognize = function syncRecognize(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    config: config,
-    audio: audio
-  };
-  return this._syncRecognize(req, options, callback);
+  return this._syncRecognize(request, options, callback);
 };
 
 /**
@@ -165,12 +161,14 @@ SpeechApi.prototype.syncRecognize = function syncRecognize(
  * `Operation.error` or an `Operation.response` which contains
  * an `AsyncRecognizeResponse` message.
  *
- * @param {Object} config
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {Object} request.config
  *   [Required] The `config` message provides information to the recognizer
  *   that specifies how to process the request.
  *
  *   This object should have the same structure as [RecognitionConfig]{@link RecognitionConfig}
- * @param {Object} audio
+ * @param {Object} request.audio
  *   [Required] The audio data to be recognized.
  *
  *   This object should have the same structure as [RecognitionAudio]{@link RecognitionAudio}
@@ -181,27 +179,25 @@ SpeechApi.prototype.syncRecognize = function syncRecognize(
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [google.longrunning.Operation]{@link external:"google.longrunning.Operation"}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = speechV1beta1.speechApi();
  * var config = {};
  * var audio = {};
- * api.asyncRecognize(config, audio, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * var request = {
+ *     config: config,
+ *     audio: audio
+ * };
+ * api.asyncRecognize(request).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-SpeechApi.prototype.asyncRecognize = function asyncRecognize(
-    config,
-    audio,
-    options,
-    callback) {
+SpeechApi.prototype.asyncRecognize = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -209,11 +205,7 @@ SpeechApi.prototype.asyncRecognize = function asyncRecognize(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    config: config,
-    audio: audio
-  };
-  return this._asyncRecognize(req, options, callback);
+  return this._asyncRecognize(request, options, callback);
 };
 
 function SpeechApiBuilder(gaxGrpc) {
