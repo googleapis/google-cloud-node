@@ -180,16 +180,16 @@ describe('Document', function() {
   describe('annotate', function() {
     it('should make the correct API request', function(done) {
       document.api.Language = {
-        annotateText: function(doc, features, encType) {
-          assert.strictEqual(doc, document.document);
+        annotateText: function(reqOpts) {
+          assert.strictEqual(reqOpts.document, document.document);
 
-          assert.deepEqual(features, {
+          assert.deepEqual(reqOpts.features, {
             extractDocumentSentiment: true,
             extractEntities: true,
             extractSyntax: true
           });
 
-          assert.strictEqual(encType, document.encodingType);
+          assert.strictEqual(reqOpts.encodingType, document.encodingType);
 
           done();
         }
@@ -201,8 +201,8 @@ describe('Document', function() {
 
     it('should allow specifying individual features', function(done) {
       document.api.Language = {
-        annotateText: function(doc, features) {
-          assert.deepEqual(features, {
+        annotateText: function(reqOpts) {
+          assert.deepEqual(reqOpts.features, {
             extractDocumentSentiment: false,
             extractEntities: true,
             extractSyntax: true
@@ -224,7 +224,7 @@ describe('Document', function() {
 
       beforeEach(function() {
         document.api.Language = {
-          annotateText: function(doc, features, encType, callback) {
+          annotateText: function(options, callback) {
             callback(error, apiResponse);
           }
         };
@@ -271,7 +271,7 @@ describe('Document', function() {
       );
 
       function createAnnotateTextWithResponse(apiResponse) {
-        return function(doc, features, encType, callback) {
+        return function(reqOpts, callback) {
           callback(null, apiResponse);
         };
       }
@@ -436,9 +436,9 @@ describe('Document', function() {
   describe('detectEntities', function() {
     it('should make the correct API request', function(done) {
       document.api.Language = {
-        analyzeEntities: function(doc, encType) {
-          assert.strictEqual(doc, document.document);
-          assert.strictEqual(encType, document.encodingType);
+        analyzeEntities: function(reqOpts) {
+          assert.strictEqual(reqOpts.document, document.document);
+          assert.strictEqual(reqOpts.encodingType, document.encodingType);
           done();
         }
       };
@@ -453,7 +453,7 @@ describe('Document', function() {
 
       beforeEach(function() {
         document.api.Language = {
-          analyzeEntities: function(doc, encType, callback) {
+          analyzeEntities: function(reqOpts, callback) {
             callback(error, apiResponse);
           }
         };
@@ -478,7 +478,7 @@ describe('Document', function() {
 
       beforeEach(function() {
         document.api.Language = {
-          analyzeEntities: function(doc, encType, callback) {
+          analyzeEntities: function(reqOpts, callback) {
             callback(null, apiResponse);
           }
         };
@@ -525,9 +525,9 @@ describe('Document', function() {
   describe('detectSentiment', function() {
     it('should make the correct API request', function(done) {
       document.api.Language = {
-        analyzeSentiment: function(doc, encType) {
-          assert.strictEqual(doc, document.document);
-          assert.strictEqual(encType, document.encodingType);
+        analyzeSentiment: function(reqOpts) {
+          assert.strictEqual(reqOpts.document, document.document);
+          assert.strictEqual(reqOpts.encodingType, document.encodingType);
           done();
         }
       };
@@ -542,7 +542,7 @@ describe('Document', function() {
 
       beforeEach(function() {
         document.api.Language = {
-          analyzeSentiment: function(doc, encType, callback) {
+          analyzeSentiment: function(reqOpts, callback) {
             callback(error, apiResponse);
           }
         };
@@ -569,7 +569,7 @@ describe('Document', function() {
         Document.formatSentiment_ = util.noop;
 
         document.api.Language = {
-          analyzeSentiment: function(doc, encType, callback) {
+          analyzeSentiment: function(reqOpts, callback) {
             callback(null, apiResponse);
           }
         };
