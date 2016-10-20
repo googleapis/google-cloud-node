@@ -246,21 +246,54 @@ describe('Storage', function() {
       });
     });
 
-    it('should expand the Nearline option', function(done) {
-      storage.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.json.storageClass, 'NEARLINE');
-        done();
-      };
-      storage.createBucket(BUCKET_NAME, { nearline: true }, function() {});
-    });
+    describe('storage classes', function() {
+      it('should expand metadata.coldline', function(done) {
+        storage.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.json.storageClass, 'COLDLINE');
+          done();
+        };
 
-    it('should expand the Durable Reduced Availability option', function(done) {
-      storage.request = function(reqOpts) {
-        var body = reqOpts.json;
-        assert.strictEqual(body.storageClass, 'DURABLE_REDUCED_AVAILABILITY');
-        done();
-      };
-      storage.createBucket(BUCKET_NAME, { dra: true }, function() {});
+        storage.createBucket(BUCKET_NAME, { coldline: true }, assert.ifError);
+      });
+
+      it('should expand metadata.dra', function(done) {
+        storage.request = function(reqOpts) {
+          var body = reqOpts.json;
+          assert.strictEqual(body.storageClass, 'DURABLE_REDUCED_AVAILABILITY');
+          done();
+        };
+
+        storage.createBucket(BUCKET_NAME, { dra: true }, assert.ifError);
+      });
+
+      it('should expand metadata.multiRegional', function(done) {
+        storage.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.json.storageClass, 'MULTI_REGIONAL');
+          done();
+        };
+
+        storage.createBucket(BUCKET_NAME, {
+          multiRegional: true
+        }, assert.ifError);
+      });
+
+      it('should expand metadata.nearline', function(done) {
+        storage.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.json.storageClass, 'NEARLINE');
+          done();
+        };
+
+        storage.createBucket(BUCKET_NAME, { nearline: true }, assert.ifError);
+      });
+
+      it('should expand metadata.regional', function(done) {
+        storage.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.json.storageClass, 'REGIONAL');
+          done();
+        };
+
+        storage.createBucket(BUCKET_NAME, { regional: true }, assert.ifError);
+      });
     });
   });
 

@@ -187,18 +187,19 @@ Storage.prototype.channel = function(id, resourceId) {
  * [Bucket Naming Guidelines](https://cloud.google.com/storage/docs/bucketnaming.html#requirements).
  *
  * @resource [Buckets: insert API Documentation]{@link https://cloud.google.com/storage/docs/json_api/v1/buckets/insert}
- * @resource [Durable Reduced Availability]{@link https://cloud.google.com/storage/docs/durable-reduced-availability}
- * @resource [Nearline]{@link https://cloud.google.com/storage/docs/nearline}
  * @resource [Storage Classes]{@link https://cloud.google.com/storage/docs/storage-classes}
  *
  * @throws {Error} If a name is not provided.
  *
  * @param {string} name - Name of the bucket to create.
  * @param {object=} metadata - Metadata to set for the bucket.
- * @param {boolean=} metadata.dra - Specify the storage class as
- *     [Durable Reduced Availability](https://goo.gl/26lthK).
- * @param {boolean=} metadata.nearline - Specify the storage class as
- *     [Nearline](https://goo.gl/sN5wNh).
+ * @param {boolean} metadata.coldline - Specify the storage class as Coldline.
+ * @param {boolean} metadata.dra - Specify the storage class as Durable Reduced
+ *     Availability.
+ * @param {boolean} metadata.multiRegional - Specify the storage class as
+ *     Multi-Regional.
+ * @param {boolean} metadata.nearline - Specify the storage class as Nearline.
+ * @param {boolean} metadata.regional - Specify the storage class as Regional.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request
  * @param {module:storage/bucket} callback.bucket - The newly created Bucket.
@@ -219,7 +220,7 @@ Storage.prototype.channel = function(id, resourceId) {
  * //-
  * var metadata = {
  *   location: 'US-CENTRAL1',
- *   dra: true
+ *   regional: true
  * };
  *
  * gcs.createBucket('new-bucket', metadata, callback);
@@ -260,8 +261,11 @@ Storage.prototype.createBucket = function(name, metadata, callback) {
   });
 
   var storageClasses = {
+    coldline: 'COLDLINE',
     dra: 'DURABLE_REDUCED_AVAILABILITY',
-    nearline: 'NEARLINE'
+    multiRegional: 'MULTI_REGIONAL',
+    nearline: 'NEARLINE',
+    regional: 'REGIONAL'
   };
 
   Object.keys(storageClasses).forEach(function(storageClass) {
