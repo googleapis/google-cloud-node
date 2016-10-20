@@ -471,6 +471,18 @@ describe('BigQuery', function() {
         });
       });
 
+      it('should import data from a file in your bucket via promises', function() {
+        return table.import(file)
+          .then(function(results) {
+            return results[0].promise();
+          })
+          .then(function(results) {
+            var metadata = results[0];
+            assert(metadata.status);
+            assert.equal(metadata.status.state, 'DONE');
+          });
+      });
+
       it('should convert values to their schema types', function(done) {
         var data = {
           name: 'dave',
