@@ -395,10 +395,11 @@ Document.prototype.annotate = function(options, callback) {
 
   var verbose = options.verbose === true;
 
-  var doc = this.document;
-  var encType = this.encodingType;
-
-  this.api.Language.annotateText(doc, features, encType, function(err, resp) {
+  this.api.Language.annotateText({
+    document: this.document,
+    features: features,
+    encodingType: this.encodingType
+  }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -547,10 +548,10 @@ Document.prototype.detectEntities = function(options, callback) {
 
   var verbose = options.verbose === true;
 
-  var doc = this.document;
-  var encType = this.encodingType;
-
-  this.api.Language.analyzeEntities(doc, encType, function(err, resp) {
+  this.api.Language.analyzeEntities({
+    document: this.document,
+    encodingType: this.encodingType
+  }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;
@@ -621,10 +622,10 @@ Document.prototype.detectSentiment = function(options, callback) {
 
   var verbose = options.verbose === true;
 
-  var doc = this.document;
-  var encType = this.encodingType;
-
-  this.api.Language.analyzeSentiment(doc, encType, function(err, resp) {
+  this.api.Language.analyzeSentiment({
+    document: this.document,
+    encodingType: this.encodingType
+  }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
       return;

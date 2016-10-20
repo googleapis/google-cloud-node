@@ -109,7 +109,9 @@ function LanguageServiceApi(gaxGrpc, grpcClients, opts) {
 /**
  * Analyzes the sentiment of the provided text.
  *
- * @param {Object} document
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {Object} request.document
  *   Input document. Currently, `analyzeSentiment` only supports English text
  *   ({@link Document.language}="EN").
  *
@@ -121,25 +123,20 @@ function LanguageServiceApi(gaxGrpc, grpcClients, opts) {
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [AnalyzeSentimentResponse]{@link AnalyzeSentimentResponse}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = languageV1beta1.languageServiceApi();
  * var document = {};
- * api.analyzeSentiment(document, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * api.analyzeSentiment({document: document}).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-LanguageServiceApi.prototype.analyzeSentiment = function analyzeSentiment(
-    document,
-    options,
-    callback) {
+LanguageServiceApi.prototype.analyzeSentiment = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -147,21 +144,20 @@ LanguageServiceApi.prototype.analyzeSentiment = function analyzeSentiment(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    document: document
-  };
-  return this._analyzeSentiment(req, options, callback);
+  return this._analyzeSentiment(request, options, callback);
 };
 
 /**
  * Finds named entities (currently finds proper names) in the text,
  * entity types, salience, mentions for each entity, and other properties.
  *
- * @param {Object} document
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {Object} request.document
  *   Input document.
  *
  *   This object should have the same structure as [Document]{@link Document}
- * @param {number} encodingType
+ * @param {number} request.encodingType
  *   The encoding type used by the API to calculate offsets.
  *
  *   The number should be among the values of [EncodingType]{@link EncodingType}
@@ -172,27 +168,25 @@ LanguageServiceApi.prototype.analyzeSentiment = function analyzeSentiment(
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [AnalyzeEntitiesResponse]{@link AnalyzeEntitiesResponse}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = languageV1beta1.languageServiceApi();
  * var document = {};
  * var encodingType = EncodingType.NONE;
- * api.analyzeEntities(document, encodingType, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * var request = {
+ *     document: document,
+ *     encodingType: encodingType
+ * };
+ * api.analyzeEntities(request).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-LanguageServiceApi.prototype.analyzeEntities = function analyzeEntities(
-    document,
-    encodingType,
-    options,
-    callback) {
+LanguageServiceApi.prototype.analyzeEntities = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -200,11 +194,7 @@ LanguageServiceApi.prototype.analyzeEntities = function analyzeEntities(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    document: document,
-    encodingType: encodingType
-  };
-  return this._analyzeEntities(req, options, callback);
+  return this._analyzeEntities(request, options, callback);
 };
 
 /**
@@ -213,15 +203,17 @@ LanguageServiceApi.prototype.analyzeEntities = function analyzeEntities(
  * API is intended for users who are familiar with machine learning and need
  * in-depth text features to build upon.
  *
- * @param {Object} document
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {Object} request.document
  *   Input document.
  *
  *   This object should have the same structure as [Document]{@link Document}
- * @param {Object} features
+ * @param {Object} request.features
  *   The enabled features.
  *
  *   This object should have the same structure as [Features]{@link Features}
- * @param {number} encodingType
+ * @param {number} request.encodingType
  *   The encoding type used by the API to calculate offsets.
  *
  *   The number should be among the values of [EncodingType]{@link EncodingType}
@@ -232,8 +224,8 @@ LanguageServiceApi.prototype.analyzeEntities = function analyzeEntities(
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [AnnotateTextResponse]{@link AnnotateTextResponse}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
@@ -241,20 +233,18 @@ LanguageServiceApi.prototype.analyzeEntities = function analyzeEntities(
  * var document = {};
  * var features = {};
  * var encodingType = EncodingType.NONE;
- * api.annotateText(document, features, encodingType, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * var request = {
+ *     document: document,
+ *     features: features,
+ *     encodingType: encodingType
+ * };
+ * api.annotateText(request).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-LanguageServiceApi.prototype.annotateText = function annotateText(
-    document,
-    features,
-    encodingType,
-    options,
-    callback) {
+LanguageServiceApi.prototype.annotateText = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -262,12 +252,7 @@ LanguageServiceApi.prototype.annotateText = function annotateText(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    document: document,
-    features: features,
-    encodingType: encodingType
-  };
-  return this._annotateText(req, options, callback);
+  return this._annotateText(request, options, callback);
 };
 
 function LanguageServiceApiBuilder(gaxGrpc) {
