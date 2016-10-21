@@ -360,9 +360,24 @@ Dataset.prototype.delete = function(options, callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * dataset.getTables(function(err, tables, nextQuery, apiResponse) {
- *   // If `nextQuery` is non-null, there are more results to fetch.
+ * dataset.getTables(function(err, tables) {
+ *   // tables is an array of `Table` objects.
  * });
+ *
+ * //-
+ * // To control how many API requests are made and page through the results
+ * // manually, set `autoPaginate` to `false`.
+ * //-
+ * function callback(err, tables, nextQuery, apiResponse) {
+ *   if (nextQuery) {
+ *     // More results exist.
+ *     dataset.getTables(nextQuery, callback);
+ *   }
+ * }
+ *
+ * dataset.getTables({
+ *   autoPaginate: false
+ * }, callback);
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.

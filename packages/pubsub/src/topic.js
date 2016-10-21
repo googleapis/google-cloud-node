@@ -278,17 +278,28 @@ Topic.formatName_ = function(projectId, name) {
  * @param {function} callback - The callback function.
  *
  * @example
- * var callback = function(err, subscriptions, nextQuery, apiResponse) {
- *   // If `nextQuery` is non-null, there may be more results to fetch. To do
- *   // so, run `topic.getSubscriptions(nextQuery, callback);`.
- * };
- *
- * // Get all subscriptions for this topic.
- * topic.getSubscriptions(callback);
+ * topic.getSubscriptions(function(err, subscriptions) {
+ *   // subscriptions is an array of `Subscription` objects.
+ * });
  *
  * // Customize the query.
  * topic.getSubscriptions({
  *   pageSize: 3
+ * }, callback);
+ *
+ * //-
+ * // To control how many API requests are made and page through the results
+ * // manually, set `autoPaginate` to `false`.
+ * //-
+ * function callback(err, subscriptions, nextQuery, apiResponse) {
+ *   if (nextQuery) {
+ *     // More results exist.
+ *     topic.getSubscriptions(nextQuery, callback);
+ *   }
+ * }
+ *
+ * topic.getSubscriptions({
+ *   autoPaginate: false
  * }, callback);
  *
  * //-
