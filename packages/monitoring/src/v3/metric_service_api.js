@@ -226,15 +226,12 @@ MetricServiceApi.prototype.matchMonitoredResourceDescriptorFromMonitoredResource
 /**
  * Lists monitored resource descriptors that match a filter. This method does not require a Stackdriver account.
  *
- * @param {string} name
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
  *   The project on which to execute the request. The format is
  *   `"projects/{project_id_or_number}"`.
- * @param {Object=} options
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
- *
- *   In addition, options may contain the following optional parameters.
- * @param {string=} options.filter
+ * @param {string=} request.filter
  *   An optional [filter](https://cloud.google.com/monitoring/api/v3/filters) describing
  *   the descriptors to be returned.  The filter can reference
  *   the descriptor's type and labels. For example, the
@@ -242,31 +239,33 @@ MetricServiceApi.prototype.matchMonitoredResourceDescriptorFromMonitoredResource
  *   that have an `id` label:
  *
  *       resource.type = starts_with("gce_") AND resource.label:id
- * @param {number=} options.pageSize
+ * @param {number=} request.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
  *   parameter does not affect the return value. If page streaming is
  *   performed per-page, this determines the maximum number of
  *   resources in a page.
- *
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object, ?string)=} callback
  *   When specified, the results are not streamed but this callback
  *   will be called with the response object representing [ListMonitoredResourceDescriptorsResponse]{@link ListMonitoredResourceDescriptorsResponse}.
  *   The third item will be set if the response contains the token for the further results
  *   and can be reused to `pageToken` field in the options in the next request.
- * @returns {Stream|gax.EventEmitter}
+ * @returns {Stream|Promise}
  *   An object stream which emits an object representing
  *   [google.api.MonitoredResourceDescriptor]{@link external:"google.api.MonitoredResourceDescriptor"} on 'data' event.
  *   When the callback is specified or streaming is suppressed through options,
- *   it will return an event emitter to handle the call status and the callback
- *   will be called with the response object.
+ *   it will return a promise that resolves to the response object. The promise
+ *   has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = monitoringV3.metricServiceApi();
  * var formattedName = api.projectPath("[PROJECT]");
  * // Iterate over all elements.
- * api.listMonitoredResourceDescriptors(formattedName).on('data', function(element) {
+ * api.listMonitoredResourceDescriptors({name: formattedName}).on('data', function(element) {
  *     // doThingsWith(element)
  * });
  *
@@ -279,15 +278,12 @@ MetricServiceApi.prototype.matchMonitoredResourceDescriptorFromMonitoredResource
  *     // doThingsWith(response)
  *     if (nextPageToken) {
  *         // fetch the next page.
- *         api.listMonitoredResourceDescriptors(formattedName, {pageToken: nextPageToken}, callback);
+ *         api.listMonitoredResourceDescriptors({name: formattedName}, {pageToken: nextPageToken}, callback);
  *     }
  * }
- * api.listMonitoredResourceDescriptors(formattedName, {flattenPages: false}, callback);
+ * api.listMonitoredResourceDescriptors({name: formattedName}, {flattenPages: false}, callback);
  */
-MetricServiceApi.prototype.listMonitoredResourceDescriptors = function(
-    name,
-    options,
-    callback) {
+MetricServiceApi.prototype.listMonitoredResourceDescriptors = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -295,22 +291,15 @@ MetricServiceApi.prototype.listMonitoredResourceDescriptors = function(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    name: name
-  };
-  if ('filter' in options) {
-    req.filter = options.filter;
-  }
-  if ('pageSize' in options) {
-    req.pageSize = options.pageSize;
-  }
-  return this._listMonitoredResourceDescriptors(req, options, callback);
+  return this._listMonitoredResourceDescriptors(request, options, callback);
 };
 
 /**
  * Gets a single monitored resource descriptor. This method does not require a Stackdriver account.
  *
- * @param {string} name
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
  *   The monitored resource descriptor to get.  The format is
  *   `"projects/{project_id_or_number}/monitoredResourceDescriptors/{resource_type}"`.
  *   The `{resource_type}` is a predefined type, such as
@@ -322,25 +311,20 @@ MetricServiceApi.prototype.listMonitoredResourceDescriptors = function(
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [google.api.MonitoredResourceDescriptor]{@link external:"google.api.MonitoredResourceDescriptor"}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = monitoringV3.metricServiceApi();
  * var formattedName = api.monitoredResourceDescriptorPath("[PROJECT]", "[MONITORED_RESOURCE_DESCRIPTOR]");
- * api.getMonitoredResourceDescriptor(formattedName, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * api.getMonitoredResourceDescriptor({name: formattedName}).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-MetricServiceApi.prototype.getMonitoredResourceDescriptor = function(
-    name,
-    options,
-    callback) {
+MetricServiceApi.prototype.getMonitoredResourceDescriptor = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -348,24 +332,18 @@ MetricServiceApi.prototype.getMonitoredResourceDescriptor = function(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    name: name
-  };
-  return this._getMonitoredResourceDescriptor(req, options, callback);
+  return this._getMonitoredResourceDescriptor(request, options, callback);
 };
 
 /**
  * Lists metric descriptors that match a filter. This method does not require a Stackdriver account.
  *
- * @param {string} name
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
  *   The project on which to execute the request. The format is
  *   `"projects/{project_id_or_number}"`.
- * @param {Object=} options
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
- *
- *   In addition, options may contain the following optional parameters.
- * @param {string=} options.filter
+ * @param {string=} request.filter
  *   If this field is empty, all custom and
  *   system-defined metric descriptors are returned.
  *   Otherwise, the [filter](https://cloud.google.com/monitoring/api/v3/filters)
@@ -374,31 +352,33 @@ MetricServiceApi.prototype.getMonitoredResourceDescriptor = function(
  *   [custom metrics](https://cloud.google.com/monitoring/custom-metrics):
  *
  *       metric.type = starts_with("custom.googleapis.com/")
- * @param {number=} options.pageSize
+ * @param {number=} request.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
  *   parameter does not affect the return value. If page streaming is
  *   performed per-page, this determines the maximum number of
  *   resources in a page.
- *
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object, ?string)=} callback
  *   When specified, the results are not streamed but this callback
  *   will be called with the response object representing [ListMetricDescriptorsResponse]{@link ListMetricDescriptorsResponse}.
  *   The third item will be set if the response contains the token for the further results
  *   and can be reused to `pageToken` field in the options in the next request.
- * @returns {Stream|gax.EventEmitter}
+ * @returns {Stream|Promise}
  *   An object stream which emits an object representing
  *   [google.api.MetricDescriptor]{@link external:"google.api.MetricDescriptor"} on 'data' event.
  *   When the callback is specified or streaming is suppressed through options,
- *   it will return an event emitter to handle the call status and the callback
- *   will be called with the response object.
+ *   it will return a promise that resolves to the response object. The promise
+ *   has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = monitoringV3.metricServiceApi();
  * var formattedName = api.projectPath("[PROJECT]");
  * // Iterate over all elements.
- * api.listMetricDescriptors(formattedName).on('data', function(element) {
+ * api.listMetricDescriptors({name: formattedName}).on('data', function(element) {
  *     // doThingsWith(element)
  * });
  *
@@ -411,15 +391,12 @@ MetricServiceApi.prototype.getMonitoredResourceDescriptor = function(
  *     // doThingsWith(response)
  *     if (nextPageToken) {
  *         // fetch the next page.
- *         api.listMetricDescriptors(formattedName, {pageToken: nextPageToken}, callback);
+ *         api.listMetricDescriptors({name: formattedName}, {pageToken: nextPageToken}, callback);
  *     }
  * }
- * api.listMetricDescriptors(formattedName, {flattenPages: false}, callback);
+ * api.listMetricDescriptors({name: formattedName}, {flattenPages: false}, callback);
  */
-MetricServiceApi.prototype.listMetricDescriptors = function(
-    name,
-    options,
-    callback) {
+MetricServiceApi.prototype.listMetricDescriptors = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -427,22 +404,15 @@ MetricServiceApi.prototype.listMetricDescriptors = function(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    name: name
-  };
-  if ('filter' in options) {
-    req.filter = options.filter;
-  }
-  if ('pageSize' in options) {
-    req.pageSize = options.pageSize;
-  }
-  return this._listMetricDescriptors(req, options, callback);
+  return this._listMetricDescriptors(request, options, callback);
 };
 
 /**
  * Gets a single metric descriptor. This method does not require a Stackdriver account.
  *
- * @param {string} name
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
  *   The metric descriptor on which to execute the request. The format is
  *   `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`.
  *   An example value of `{metric_id}` is
@@ -454,25 +424,20 @@ MetricServiceApi.prototype.listMetricDescriptors = function(
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [google.api.MetricDescriptor]{@link external:"google.api.MetricDescriptor"}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = monitoringV3.metricServiceApi();
  * var formattedName = api.metricDescriptorPath("[PROJECT]", "[METRIC_DESCRIPTOR]");
- * api.getMetricDescriptor(formattedName, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * api.getMetricDescriptor({name: formattedName}).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-MetricServiceApi.prototype.getMetricDescriptor = function(
-    name,
-    options,
-    callback) {
+MetricServiceApi.prototype.getMetricDescriptor = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -480,10 +445,7 @@ MetricServiceApi.prototype.getMetricDescriptor = function(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    name: name
-  };
-  return this._getMetricDescriptor(req, options, callback);
+  return this._getMetricDescriptor(request, options, callback);
 };
 
 /**
@@ -491,10 +453,12 @@ MetricServiceApi.prototype.getMetricDescriptor = function(
  * User-created metric descriptors define
  * [custom metrics](https://cloud.google.com/monitoring/custom-metrics).
  *
- * @param {string} name
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
  *   The project on which to execute the request. The format is
  *   `"projects/{project_id_or_number}"`.
- * @param {Object} metricDescriptor
+ * @param {Object} request.metricDescriptor
  *   The new [custom metric](https://cloud.google.com/monitoring/custom-metrics)
  *   descriptor.
  *
@@ -506,27 +470,25 @@ MetricServiceApi.prototype.getMetricDescriptor = function(
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [google.api.MetricDescriptor]{@link external:"google.api.MetricDescriptor"}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = monitoringV3.metricServiceApi();
  * var formattedName = api.projectPath("[PROJECT]");
  * var metricDescriptor = {};
- * api.createMetricDescriptor(formattedName, metricDescriptor, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * var request = {
+ *     name: formattedName,
+ *     metricDescriptor: metricDescriptor
+ * };
+ * api.createMetricDescriptor(request).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-MetricServiceApi.prototype.createMetricDescriptor = function(
-    name,
-    metricDescriptor,
-    options,
-    callback) {
+MetricServiceApi.prototype.createMetricDescriptor = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -534,18 +496,16 @@ MetricServiceApi.prototype.createMetricDescriptor = function(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    name: name,
-    metricDescriptor: metricDescriptor
-  };
-  return this._createMetricDescriptor(req, options, callback);
+  return this._createMetricDescriptor(request, options, callback);
 };
 
 /**
  * Deletes a metric descriptor. Only user-created
  * [custom metrics](https://cloud.google.com/monitoring/custom-metrics) can be deleted.
  *
- * @param {string} name
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
  *   The metric descriptor on which to execute the request. The format is
  *   `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`.
  *   An example of `{metric_id}` is:
@@ -555,23 +515,18 @@ MetricServiceApi.prototype.createMetricDescriptor = function(
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error)=} callback
  *   The function which will be called with the result of the API call.
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = monitoringV3.metricServiceApi();
  * var formattedName = api.metricDescriptorPath("[PROJECT]", "[METRIC_DESCRIPTOR]");
- * api.deleteMetricDescriptor(formattedName, function(err) {
- *     if (err) {
- *         console.error(err);
- *     }
+ * api.deleteMetricDescriptor({name: formattedName}).catch(function(err) {
+ *     console.error(err);
  * });
  */
-MetricServiceApi.prototype.deleteMetricDescriptor = function(
-    name,
-    options,
-    callback) {
+MetricServiceApi.prototype.deleteMetricDescriptor = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -579,19 +534,18 @@ MetricServiceApi.prototype.deleteMetricDescriptor = function(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    name: name
-  };
-  return this._deleteMetricDescriptor(req, options, callback);
+  return this._deleteMetricDescriptor(request, options, callback);
 };
 
 /**
  * Lists time series that match a filter. This method does not require a Stackdriver account.
  *
- * @param {string} name
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
  *   The project on which to execute the request. The format is
  *   "projects/{project_id_or_number}".
- * @param {string} filter
+ * @param {string} request.filter
  *   A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters) that specifies which time
  *   series should be returned.  The filter must specify a single metric type,
  *   and can additionally specify metric labels and other information. For
@@ -599,49 +553,46 @@ MetricServiceApi.prototype.deleteMetricDescriptor = function(
  *
  *       metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
  *           metric.label.instance_name = "my-instance-name"
- * @param {Object} interval
+ * @param {Object} request.interval
  *   The time interval for which results should be returned. Only time series
  *   that contain data points in the specified interval are included
  *   in the response.
  *
  *   This object should have the same structure as [TimeInterval]{@link TimeInterval}
- * @param {number} view
+ * @param {number} request.view
  *   Specifies which information is returned about the time series.
  *
  *   The number should be among the values of [TimeSeriesView]{@link TimeSeriesView}
- * @param {Object=} options
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
- *
- *   In addition, options may contain the following optional parameters.
- * @param {Object=} options.aggregation
+ * @param {Object=} request.aggregation
  *   By default, the raw time series data is returned.
  *   Use this field to combine multiple time series for different
  *   views of the data.
  *
  *   This object should have the same structure as [Aggregation]{@link Aggregation}
- * @param {string=} options.orderBy
+ * @param {string=} request.orderBy
  *   Specifies the order in which the points of the time series should
  *   be returned.  By default, results are not ordered.  Currently,
  *   this field must be left blank.
- * @param {number=} options.pageSize
+ * @param {number=} request.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
  *   parameter does not affect the return value. If page streaming is
  *   performed per-page, this determines the maximum number of
  *   resources in a page.
- *
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object, ?string)=} callback
  *   When specified, the results are not streamed but this callback
  *   will be called with the response object representing [ListTimeSeriesResponse]{@link ListTimeSeriesResponse}.
  *   The third item will be set if the response contains the token for the further results
  *   and can be reused to `pageToken` field in the options in the next request.
- * @returns {Stream|gax.EventEmitter}
+ * @returns {Stream|Promise}
  *   An object stream which emits an object representing
  *   [TimeSeries]{@link TimeSeries} on 'data' event.
  *   When the callback is specified or streaming is suppressed through options,
- *   it will return an event emitter to handle the call status and the callback
- *   will be called with the response object.
+ *   it will return a promise that resolves to the response object. The promise
+ *   has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
@@ -650,8 +601,14 @@ MetricServiceApi.prototype.deleteMetricDescriptor = function(
  * var filter = '';
  * var interval = {};
  * var view = TimeSeriesView.FULL;
+ * var request = {
+ *     name: formattedName,
+ *     filter: filter,
+ *     interval: interval,
+ *     view: view
+ * };
  * // Iterate over all elements.
- * api.listTimeSeries(formattedName, filter, interval, view).on('data', function(element) {
+ * api.listTimeSeries(request).on('data', function(element) {
  *     // doThingsWith(element)
  * });
  *
@@ -664,18 +621,12 @@ MetricServiceApi.prototype.deleteMetricDescriptor = function(
  *     // doThingsWith(response)
  *     if (nextPageToken) {
  *         // fetch the next page.
- *         api.listTimeSeries(formattedName, filter, interval, view, {pageToken: nextPageToken}, callback);
+ *         api.listTimeSeries(request, {pageToken: nextPageToken}, callback);
  *     }
  * }
- * api.listTimeSeries(formattedName, filter, interval, view, {flattenPages: false}, callback);
+ * api.listTimeSeries(request, {flattenPages: false}, callback);
  */
-MetricServiceApi.prototype.listTimeSeries = function(
-    name,
-    filter,
-    interval,
-    view,
-    options,
-    callback) {
+MetricServiceApi.prototype.listTimeSeries = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -683,22 +634,7 @@ MetricServiceApi.prototype.listTimeSeries = function(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    name: name,
-    filter: filter,
-    interval: interval,
-    view: view
-  };
-  if ('aggregation' in options) {
-    req.aggregation = options.aggregation;
-  }
-  if ('orderBy' in options) {
-    req.orderBy = options.orderBy;
-  }
-  if ('pageSize' in options) {
-    req.pageSize = options.pageSize;
-  }
-  return this._listTimeSeries(req, options, callback);
+  return this._listTimeSeries(request, options, callback);
 };
 
 /**
@@ -707,10 +643,12 @@ MetricServiceApi.prototype.listTimeSeries = function(
  * If any time series could not be written, a corresponding failure message is
  * included in the error response.
  *
- * @param {string} name
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
  *   The project on which to execute the request. The format is
  *   `"projects/{project_id_or_number}"`.
- * @param {Object[]} timeSeries
+ * @param {Object[]} request.timeSeries
  *   The new data to be added to a list of time series.
  *   Adds at most one data point to each of several time series.  The new data
  *   point must be more recent than any other point in its time series.  Each
@@ -723,25 +661,23 @@ MetricServiceApi.prototype.listTimeSeries = function(
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error)=} callback
  *   The function which will be called with the result of the API call.
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = monitoringV3.metricServiceApi();
  * var formattedName = api.projectPath("[PROJECT]");
  * var timeSeries = [];
- * api.createTimeSeries(formattedName, timeSeries, function(err) {
- *     if (err) {
- *         console.error(err);
- *     }
+ * var request = {
+ *     name: formattedName,
+ *     timeSeries: timeSeries
+ * };
+ * api.createTimeSeries(request).catch(function(err) {
+ *     console.error(err);
  * });
  */
-MetricServiceApi.prototype.createTimeSeries = function(
-    name,
-    timeSeries,
-    options,
-    callback) {
+MetricServiceApi.prototype.createTimeSeries = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -749,11 +685,7 @@ MetricServiceApi.prototype.createTimeSeries = function(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    name: name,
-    timeSeries: timeSeries
-  };
-  return this._createTimeSeries(req, options, callback);
+  return this._createTimeSeries(request, options, callback);
 };
 
 function MetricServiceApiBuilder(gaxGrpc) {
@@ -761,10 +693,7 @@ function MetricServiceApiBuilder(gaxGrpc) {
     return new MetricServiceApiBuilder(gaxGrpc);
   }
 
-  var metricServiceClient = gaxGrpc.load([{
-    root: require('google-proto-files')('..'),
-    file: 'google/monitoring/v3/metric_service.proto'
-  }]);
+  var metricServiceClient = require('grpc-google-monitoring-v3').client;
   extend(this, metricServiceClient.google.monitoring.v3);
 
   var grpcClients = {
