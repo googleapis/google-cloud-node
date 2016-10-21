@@ -108,7 +108,9 @@ function ImageAnnotatorApi(gaxGrpc, grpcClients, opts) {
 /**
  * Run image detection and annotation for a batch of images.
  *
- * @param {Object[]} requests
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {Object[]} request.requests
  *   Individual image annotation requests for this batch.
  *
  *   This object should have the same structure as [AnnotateImageRequest]{@link AnnotateImageRequest}
@@ -119,25 +121,20 @@ function ImageAnnotatorApi(gaxGrpc, grpcClients, opts) {
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}
- * @returns {gax.EventEmitter} - the event emitter to handle the call
- *   status.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
  * var api = visionV1.imageAnnotatorApi();
  * var requests = [];
- * api.batchAnnotateImages(requests, function(err, response) {
- *     if (err) {
- *         console.error(err);
- *         return;
- *     }
+ * api.batchAnnotateImages({requests: requests}).then(function(response) {
  *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  */
-ImageAnnotatorApi.prototype.batchAnnotateImages = function batchAnnotateImages(
-    requests,
-    options,
-    callback) {
+ImageAnnotatorApi.prototype.batchAnnotateImages = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -145,10 +142,7 @@ ImageAnnotatorApi.prototype.batchAnnotateImages = function batchAnnotateImages(
   if (options === undefined) {
     options = {};
   }
-  var req = {
-    requests: requests
-  };
-  return this._batchAnnotateImages(req, options, callback);
+  return this._batchAnnotateImages(request, options, callback);
 };
 
 function ImageAnnotatorApiBuilder(gaxGrpc) {
