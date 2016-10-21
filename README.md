@@ -26,6 +26,7 @@ This client supports the following Google Cloud Platform services:
 * [Google Cloud Speech](#google-cloud-speech-beta) (Beta)
 * [Google Cloud Vision](#google-cloud-vision-beta) (Beta)
 * [Stackdriver Logging](#stackdriver-logging-beta) (Beta)
+* [Stackdriver Monitoring](#stackdriver-monitoring-beta) (Beta)
 
 If you need support for other Google APIs, check out the [Google Node.js API Client library][googleapis].
 
@@ -1139,6 +1140,49 @@ loggingClient.getEntries(function(err, entries) {
 ```
 
 
+## Stackdriver Monitoring (Beta)
+
+> **This is a Beta release of Stackdriver Monitoring.** This API is not covered by any SLA or deprecation policy and may be subject to backward-incompatible changes.
+
+### :warning: This is an auto-generated API
+
+It does not follow the conventions you're familiar with from other parts of our library. A handwritten layer is not yet available.
+
+The example below shows you how to instantiate the generated client. For further documentation, please browse the [Monitoring .proto files][cloud-monitoring-protos] on GitHub.
+
+- [Official Documentation][cloud-monitoring-docs]
+
+#### Using the all-in-one module
+
+```
+$ npm install --save google-cloud
+```
+
+```js
+var gcloud = require('google-cloud');
+var monitoring = gcloud.monitoring;
+```
+
+#### Using the Stackdriver Monitoring API module
+
+```
+$ npm install --save @google-cloud/monitoring
+```
+
+```js
+var monitoring = require('@google-cloud/monitoring');
+```
+
+#### Preview
+
+```js
+var monitoringClient = monitoring.v3({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
+```
+
+
 ## Contributing
 
 Contributions to this library are always welcome and highly encouraged.
@@ -1195,6 +1239,9 @@ Apache 2.0 - See [COPYING](COPYING) for more information.
 [cloud-dns-docs]: https://cloud.google.com/dns/docs
 
 [cloud-language-docs]: https://cloud.google.com/natural-language/docs
+
+[cloud-monitoring-docs]: https://cloud.google.com/monitoring/docs
+[cloud-monitoring-protos]: https://github.com/googleapis/googleapis/tree/master/google/monitoring/v3
 
 [cloud-logging-docs]: https://cloud.google.com/logging/docs
 
