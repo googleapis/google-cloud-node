@@ -177,11 +177,11 @@ var apis = {
 
   /**
    * [Stackdriver Monitoring](https://cloud.google.com/monitoring/docs) collects
-   * metrics, events, and metadata from Google Cloud Platform, Amazon Web Services
-   * (AWS), hosted uptime probes, application instrumentation, and a variety of
-   * common application components including Cassandra, Nginx, Apache Web Server,
-   * Elasticsearch and many others. Stackdriver ingests that data and generates
-   * insights via dashboards, charts, and alerts.
+   * metrics, events, and metadata from Google Cloud Platform, Amazon Web
+   * Services (AWS), hosted uptime probes, application instrumentation, and a
+   * variety of common application components including Cassandra, Nginx, Apache
+   * Web Server, Elasticsearch and many others. Stackdriver ingests that data
+   * and generates insights via dashboards, charts, and alerts.
    *
    * <p class="notice">
    *   **This is a Beta release of Stackdriver Monitoring.** This API is not
