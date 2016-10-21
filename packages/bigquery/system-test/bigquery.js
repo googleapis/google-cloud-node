@@ -478,8 +478,7 @@ describe('BigQuery', function() {
           })
           .then(function(results) {
             var metadata = results[0];
-            assert(metadata.status);
-            assert.equal(metadata.status.state, 'DONE');
+            assert.strictEqual(metadata.status.state, 'DONE');
           });
       });
 
