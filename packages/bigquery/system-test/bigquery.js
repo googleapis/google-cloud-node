@@ -471,7 +471,7 @@ describe('BigQuery', function() {
         });
       });
 
-      it('should import data from a file in your bucket via promises', function() {
+      it('should import data from a file via promises', function() {
         return table.import(file)
           .then(function(results) {
             return results[0].promise();

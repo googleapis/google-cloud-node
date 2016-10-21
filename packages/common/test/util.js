@@ -1407,6 +1407,7 @@ describe('common/util', function() {
       FakeClass.prototype.method_ = util.noop;
       FakeClass.prototype._method = util.noop;
       FakeClass.prototype.methodStream = util.noop;
+      FakeClass.prototype.promise = util.noop;
 
       util.promisifyAll(FakeClass);
       instance = new FakeClass();
@@ -1420,6 +1421,7 @@ describe('common/util', function() {
       assert.strictEqual(FakeClass.prototype.method_, util.noop);
       assert.strictEqual(FakeClass.prototype._method, util.noop);
       assert.strictEqual(FakeClass.prototype.methodStream, util.noop);
+      assert.strictEqual(FakeClass.prototype.promise, util.noop);
     });
 
     it('should optionally except an exclude list', function() {
