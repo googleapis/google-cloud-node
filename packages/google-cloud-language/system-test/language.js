@@ -34,7 +34,7 @@ describe('Language', function() {
   var BUCKET;
 
   var TEXT_CONTENT_SENTENCES = [
-    'Hello from stephen and dave!',
+    'Hello from stephen and david!',
     'If you find yourself in michigan, come say hi!'
   ];
 
@@ -313,150 +313,182 @@ describe('Language', function() {
 
   function validateAnnotationSimple(callback) {
     return function(err, annotation, apiResponse) {
-      assert.ifError(err);
+      try {
+        assert.ifError(err);
 
-      assert.strictEqual(annotation.language, 'en');
+        assert.strictEqual(annotation.language, 'en');
 
-      assert(is.number(annotation.sentiment));
+        assert(is.number(annotation.sentiment));
 
-      assert.deepEqual(annotation.entities, {
-        people: ['stephen', 'dave'],
-        places: ['michigan']
-      });
+        assert.deepEqual(annotation.entities, {
+          people: ['stephen', 'david'],
+          places: ['michigan']
+        });
 
-      assert.deepEqual(annotation.sentences, TEXT_CONTENT_SENTENCES);
+        assert.deepEqual(annotation.sentences, TEXT_CONTENT_SENTENCES);
 
-      assert(is.array(annotation.tokens));
-      assert.deepEqual(annotation.tokens[0], {
-        text: 'Hello',
-        partOfSpeech: 'Other: foreign words, typos, abbreviations',
-        partOfSpeechTag: 'X'
-      });
+        assert(is.array(annotation.tokens));
+        assert.deepEqual(annotation.tokens[0], {
+          text: 'Hello',
+          partOfSpeech: 'Other: foreign words, typos, abbreviations',
+          partOfSpeechTag: 'X'
+        });
 
-      assert(is.object(apiResponse));
+        assert(is.object(apiResponse));
 
-      callback();
+        callback();
+      } catch(e) {
+        callback(e);
+      }
     };
   }
 
   function validateAnnotationVerbose(callback) {
     return function(err, annotation, apiResponse) {
-      assert.ifError(err);
+      try {
+        assert.ifError(err);
 
-      assert.strictEqual(annotation.language, 'en');
+        assert.strictEqual(annotation.language, 'en');
 
-      assert(is.object(annotation.sentiment));
+        assert(is.object(annotation.sentiment));
 
-      assert(is.array(annotation.entities.people));
-      assert.strictEqual(annotation.entities.people.length, 2);
-      assert(is.object(annotation.entities.people[0]));
+        assert(is.array(annotation.entities.people));
+        assert.strictEqual(annotation.entities.people.length, 2);
+        assert(is.object(annotation.entities.people[0]));
 
-      assert(is.array(annotation.sentences));
-      assert(is.object(annotation.sentences[0]));
+        assert(is.array(annotation.sentences));
+        assert(is.object(annotation.sentences[0]));
 
-      assert(is.array(annotation.tokens));
-      assert(is.object(annotation.tokens[0]));
-      assert.strictEqual(annotation.tokens[0].text.content, 'Hello');
+        assert(is.array(annotation.tokens));
+        assert(is.object(annotation.tokens[0]));
+        assert.strictEqual(annotation.tokens[0].text.content, 'Hello');
 
-      assert(is.object(apiResponse));
+        assert(is.object(apiResponse));
 
-      callback();
+        callback();
+      } catch(e) {
+        callback(e);
+      }
     };
   }
 
   function validateAnnotationSingleFeatureSimple(callback) {
     return function(err, annotation, apiResponse) {
-      assert.ifError(err);
+      try {
+        assert.ifError(err);
 
-      assert.strictEqual(annotation.language, 'en');
+        assert.strictEqual(annotation.language, 'en');
 
-      assert.deepEqual(annotation.entities, {
-        people: ['stephen', 'dave'],
-        places: ['michigan']
-      });
+        assert.deepEqual(annotation.entities, {
+          people: ['stephen', 'david'],
+          places: ['michigan']
+        });
 
-      assert.strictEqual(annotation.sentences, undefined);
-      assert.strictEqual(annotation.sentiment, undefined);
-      assert.strictEqual(annotation.tokens, undefined);
+        assert.strictEqual(annotation.sentences, undefined);
+        assert.strictEqual(annotation.sentiment, undefined);
+        assert.strictEqual(annotation.tokens, undefined);
 
-      assert(is.object(apiResponse));
+        assert(is.object(apiResponse));
 
-      callback();
+        callback();
+      } catch(e) {
+        callback(e);
+      }
     };
   }
 
   function validateAnnotationSingleFeatureVerbose(callback) {
     return function(err, annotation, apiResponse) {
-      assert.ifError(err);
+      try {
+        assert.ifError(err);
 
-      assert.strictEqual(annotation.language, 'en');
+        assert.strictEqual(annotation.language, 'en');
 
-      assert(is.array(annotation.entities.people));
-      assert.strictEqual(annotation.entities.people.length, 2);
-      assert(is.object(annotation.entities.people[0]));
+        assert(is.array(annotation.entities.people));
+        assert.strictEqual(annotation.entities.people.length, 2);
+        assert(is.object(annotation.entities.people[0]));
 
-      assert.strictEqual(annotation.sentences, undefined);
-      assert.strictEqual(annotation.sentiment, undefined);
-      assert.strictEqual(annotation.tokens, undefined);
+        assert.strictEqual(annotation.sentences, undefined);
+        assert.strictEqual(annotation.sentiment, undefined);
+        assert.strictEqual(annotation.tokens, undefined);
 
-      assert(is.object(apiResponse));
+        assert(is.object(apiResponse));
 
-      callback();
+        callback();
+      } catch(e) {
+        callback(e);
+      }
     };
   }
 
   function validateEntitiesSimple(callback) {
     return function(err, entities, apiResponse) {
-      assert.ifError(err);
+      try {
+        assert.ifError(err);
 
-      assert.deepEqual(entities, {
-        people: ['stephen', 'dave'],
-        places: ['michigan']
-      });
+        assert.deepEqual(entities, {
+          people: ['stephen', 'david'],
+          places: ['michigan']
+        });
 
-      assert(is.object(apiResponse));
+        assert(is.object(apiResponse));
 
-      callback();
+        callback();
+      } catch(e) {
+        callback(e);
+      }
     };
   }
 
   function validateEntitiesVerbose(callback) {
     return function(err, entities, apiResponse) {
-      assert.ifError(err);
+      try {
+        assert.ifError(err);
 
-      assert(is.array(entities.people));
-      assert.strictEqual(entities.people.length, 2);
-      assert(is.object(entities.people[0]));
+        assert(is.array(entities.people));
+        assert.strictEqual(entities.people.length, 2);
+        assert(is.object(entities.people[0]));
 
-      assert(is.object(apiResponse));
+        assert(is.object(apiResponse));
 
-      callback();
+        callback();
+      } catch(e) {
+        callback(e);
+      }
     };
   }
 
   function validateSentimentSimple(callback) {
     return function(err, sentiment, apiResponse) {
-      assert.ifError(err);
+      try {
+        assert.ifError(err);
 
-      assert(is.number(sentiment));
+        assert(is.number(sentiment));
 
-      assert(is.object(apiResponse));
+        assert(is.object(apiResponse));
 
-      callback();
+        callback();
+      } catch(e) {
+        callback(e);
+      }
     };
   }
 
   function validateSentimentVerbose(callback) {
     return function(err, sentiment, apiResponse) {
-      assert.ifError(err);
+      try {
+        assert.ifError(err);
 
-      assert(is.object(sentiment));
-      assert(is.number(sentiment.polarity));
-      assert(is.number(sentiment.magnitude));
+        assert(is.object(sentiment));
+        assert(is.number(sentiment.polarity));
+        assert(is.number(sentiment.magnitude));
 
-      assert(is.object(apiResponse));
+        assert(is.object(apiResponse));
 
-      callback();
+        callback();
+      } catch(e) {
+        callback(e);
+      }
     };
   }
 });
