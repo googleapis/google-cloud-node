@@ -348,12 +348,12 @@ Transaction.prototype.rollback = function(callback) {
  *   // Perform Datastore transactional operations.
  *   var key = datastore.key(['Company', 123]);
  *
- *   transaction.get(key, function(err, data) {
- *     data.name = 'Google';
+ *   transaction.get(key, function(err, entity) {
+ *     entity.name = 'Google';
  *
  *     transaction.save({
  *       key: key,
- *       data: data
+ *       data: entity
  *     });
  *
  *     transaction.commit(function(err) {
