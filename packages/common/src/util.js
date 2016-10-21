@@ -699,7 +699,7 @@ function promisifyAll(Class, options) {
     .keys(Class.prototype)
     .filter(function(methodName) {
       return is.fn(Class.prototype[methodName]) && // is it a function?
-        !/(^\_|(Stream|\_)$)/.test(methodName) && // is it public/non-stream?
+        !/(^\_|(Stream|\_)|promise$)/.test(methodName) && // is it promisable?
         exclude.indexOf(methodName) === -1; // is it blacklisted?
     });
 
