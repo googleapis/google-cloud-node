@@ -659,7 +659,10 @@ Speech.prototype.recognize = function(file, config, callback) {
       return;
     }
 
-    self.api.Speech.syncRecognize(config, foundFile, function(err, resp) {
+    self.api.Speech.syncRecognize({
+      config: config,
+      audio: foundFile
+    }, function(err, resp) {
       if (err) {
         callback(err, null, resp);
         return;
@@ -799,7 +802,10 @@ Speech.prototype.startRecognition = function(file, config, callback) {
       return;
     }
 
-    self.api.Speech.asyncRecognize(config, foundFile, function(err, resp) {
+    self.api.Speech.asyncRecognize({
+      config: config,
+      audio: foundFile
+    }, function(err, resp) {
       if (err) {
         callback(err, null, resp);
         return;
