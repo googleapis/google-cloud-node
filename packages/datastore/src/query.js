@@ -293,7 +293,12 @@ Query.prototype.offset = function(n) {
  *     - {module:datastore#NO_MORE_RESULTS}: There are no more results.
  *
  * @example
- * query.run(function(err, entities, info) {});
+ * query.run(function(err, entities, info) {
+ *   // entities = An array of records.
+ *
+ *   // Access the Key object for an entity.
+ *   var firstEntityKey = entities[0][datastore.KEY];
+ * });
  *
  * //-
  * // A keys-only query returns just the keys of the result entities instead of
@@ -331,7 +336,10 @@ Query.prototype.run = function() {
  * @example
  * query.runStream()
  *   .on('error', console.error)
- *   .on('data', function (entity) {})
+ *   .on('data', function (entity) {
+ *     // Access the Key object for this entity.
+ *     var key = entity[datastore.KEY];
+ *   })
  *   .on('info', function(info) {})
  *   .on('end', function() {
  *     // All entities retrieved.
