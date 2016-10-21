@@ -392,7 +392,11 @@ DatastoreRequest.prototype.delete = function(keys, callback) {
  *   }
  *
  *   entity.newValue = true;
- *   datastore.save(entity, function(err) {});
+ *
+ *   datastore.save({
+ *     key: key,
+ *     data: entity
+ *   }, function(err) {});
  * });
  *
  * //-
