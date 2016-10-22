@@ -155,6 +155,15 @@
       ]
     },
     {
+      "id": "monitoring",
+      "name": "@google-cloud/monitoring",
+      "defaultService": "monitoring",
+      "versions": [
+        "0.1.1",
+        "master"
+      ]
+    },
+    {
       "id": "prediction",
       "name": "@google-cloud/prediction",
       "defaultService": "prediction",
