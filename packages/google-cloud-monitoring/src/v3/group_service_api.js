@@ -521,7 +521,10 @@ function GroupServiceApiBuilder(gaxGrpc) {
     return new GroupServiceApiBuilder(gaxGrpc);
   }
 
-  var groupServiceClient = require('grpc-google-monitoring-v3').client;
+  var groupServiceClient = gaxGrpc.load([{
+    root: require('google-proto-files')('..'),
+    file: 'google/monitoring/v3/group_service.proto'
+  }]);
   extend(this, groupServiceClient.google.monitoring.v3);
 
   var grpcClients = {

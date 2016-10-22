@@ -158,7 +158,7 @@ MetricServiceApi.prototype.matchProjectFromProjectName = function(projectName) {
 /**
  * Returns a fully-qualified metric_descriptor resource name string.
  * @param {String} project
- * @param {String} metric_descriptor
+ * @param {String} metricDescriptor
  * @returns {String}
  */
 MetricServiceApi.prototype.metricDescriptorPath = function(project, metricDescriptor) {
@@ -191,7 +191,7 @@ MetricServiceApi.prototype.matchMetricDescriptorFromMetricDescriptorName = funct
 /**
  * Returns a fully-qualified monitored_resource_descriptor resource name string.
  * @param {String} project
- * @param {String} monitored_resource_descriptor
+ * @param {String} monitoredResourceDescriptor
  * @returns {String}
  */
 MetricServiceApi.prototype.monitoredResourceDescriptorPath = function(project, monitoredResourceDescriptor) {
@@ -693,7 +693,10 @@ function MetricServiceApiBuilder(gaxGrpc) {
     return new MetricServiceApiBuilder(gaxGrpc);
   }
 
-  var metricServiceClient = require('grpc-google-monitoring-v3').client;
+  var metricServiceClient = gaxGrpc.load([{
+    root: require('google-proto-files')('..'),
+    file: 'google/monitoring/v3/metric_service.proto'
+  }]);
   extend(this, metricServiceClient.google.monitoring.v3);
 
   var grpcClients = {
