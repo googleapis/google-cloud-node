@@ -275,14 +275,27 @@ function Git(cwd) {
   this.cwd = cwd || ROOT_DIR;
 }
 
-// We'll use this for cloning/submoduling/pushing purposes on CI
-Git.REPO = 'https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME}';
+Git.REPO = process.env.CI ?
+  'https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME}' :
+  'git@github.com:GoogleCloudPlatform/google-cloud-node.git';
+
+/**
+ * Checks out a branch.
+ *
+ * @param {string} branch - The branch to check out.
+ */
+Git.prototype.checkout = function(branch) {
+  run(['git checkout', branch], {
+    cwd: this.cwd
+  });
+};
 
 /**
  * Creates a submodule in the root directory in quiet mode.
  *
  * @param {string} branch - The branch to use.
  * @param {string=} alias - Name of the folder that contains submodule.
+ * @param {string=} repo - The repo to checkout.
  * @return {Git}
  */
 Git.prototype.submodule = function(branch, alias) {

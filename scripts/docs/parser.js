@@ -25,7 +25,7 @@ var prop = require('propprop');
 var extend = require('extend');
 var template = require('lodash.template');
 var config = require('./config');
-var baseToc = require('./base-toc.json');
+var baseToc = require('./templates/toc.json');
 
 var templateFile = fs.readFileSync(
   path.join(__dirname, config.OVERVIEW_TEMPLATE));
@@ -376,6 +376,11 @@ function createToc(types, collapse) {
 
 function createOverview(moduleName, umbrellaMode) {
   var modConfig = config.OVERVIEW[moduleName];
+
+  if (!modConfig) {
+    throw new Error('Missing doc configs for "' + moduleName + '" package.');
+  }
+
   var pkgJson = path.join(
     __dirname,
     '../../packages',

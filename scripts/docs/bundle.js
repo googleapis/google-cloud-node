@@ -16,208 +16,110 @@
 
 'use strict';
 
-var path = require('path');
-var globby = require('globby');
-var semver = require('semver');
-var mkdirp = require('mkdirp');
+require('shelljs/global');
+
 var fs = require('fs');
-var async = require('async');
+var globby = require('globby');
 var flatten = require('lodash.flatten');
-var parser = require('./parser');
+var path = require('path');
+var semver = require('semver');
+
 var config = require('./config');
+var parser = require('./parser');
+var pkgJson = require('../../packages/google-cloud/package.json');
 
 // since we version the JSON in ghpages and we don't create tags for
 // individual modules, we'll look for the appropriate semver version in
 // the ghpages submodule
-var JSON_DIR = './ghpages/json';
+var JSON_DIR = './gh-pages/json';
+var UMBRELLA_DIR = path.join(
+  JSON_DIR,
+  config.UMBRELLA_PACKAGE,
+  config.DEFAULT_VERSION
+);
 
-var pkgJson = require('../../packages/google-cloud/package.json');
-var dependencies = pkgJson.dependencies;
-
-var deps = Object.keys(dependencies).reduce(function(deps, dep) {
-  if (/^\@google\-cloud/.test(dep)) {
-    deps.push({
+// get a list of the latest dep versions
+var deps = Object
+  .keys(pkgJson.dependencies)
+  .filter(function(dep) {
+    return /^\@google\-cloud/.test(dep);
+  })
+  .map(function(dep) {
+    return {
       packageName: dep.replace('@google-cloud/', ''),
-      semver: dependencies[dep]
-    });
-  }
-
-  return deps;
-}, []);
-
-function getPackageVersion(dep, callback) {
-  var globOptions = {
-    cwd: path.join(JSON_DIR, dep.packageName)
-  };
-
-  globby('*', globOptions)
-    .then(function(versions) {
-      var validVersions = versions.filter(function(version) {
-        return semver.valid(version);
-      });
-
-      var version = semver.maxSatisfying(validVersions, dep.semver);
-
-      if (!version) {
-        throw new Error(
-          'Unable to find suitable version for package: ' + dep.packageName);
-      }
-
-      callback(null, version);
-    })
-    .then(null, callback);
-}
-
-function getDocsFiles(packageName, version, callback) {
-  var globOptions = {
-    cwd: path.join(JSON_DIR, packageName),
-    ignore: [
-      path.join(version, config.TYPES_DICT),
-      path.join(version, config.TOC)
-    ]
-  };
-
-  globby(path.join(version, '*.json'), globOptions)
-    .then(callback.bind(null, null), callback);
-}
-
-function copyFile(dep, file, callback) {
-  var outputDir = path.join(
-    JSON_DIR,
-    config.UMBRELLA_PACKAGE,
-    config.DEFAULT_VERSION,
-    dep.packageName
-  );
-
-  mkdirp(outputDir, function(err) {
-    if (err) {
-      callback(err);
-      return;
-    }
-
-    var inputFile = path.join(
-      JSON_DIR,
-      dep.packageName,
-      file
-    );
-
-    var outputFile = path.join(
-      outputDir,
-      path.basename(file)
-    );
-
-    fs.readFile(inputFile, 'utf8', function(err, contents) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      var fileJson = JSON.parse(contents);
-      var service = fileJson.parent || fileJson.id;
-
-      fileJson.overview = parser.createOverview(service, true);
-      fs.writeFile(outputFile, JSON.stringify(fileJson), callback);
-    });
+      semver: pkgJson.dependencies[dep]
+    };
   });
-}
 
-function getTypes(dep, callback) {
-  var inputFile = path.join(
-    JSON_DIR,
-    dep.packageName,
-    dep.version,
-    config.TYPES_DICT
-  );
+// create a master list of available "types" (e.g. bigquery/job, etc.)
+var allTypes = deps.map(function(dep) {
+  var outputDir = path.join(UMBRELLA_DIR, dep.packageName);
+  var version = getPackageVersion(dep);
+  var files = getPackageFiles(dep, version);
 
-  fs.readFile(inputFile, 'utf8', function(err, contents) {
-    var types = JSON.parse(contents);
+  mkdir('-p', outputDir);
 
-    types.forEach(function(type) {
-      type.contents = path.join(dep.packageName, type.contents);
-    });
-
-    callback(null, types);
+  files.forEach(function(file) {
+    fs.writeFileSync(path.join(outputDir, file.basename), file.json);
   });
-}
 
-function createUmbrellaTypes(types, callback) {
-  var inputFile = path.join(
-    './docs/json',
-    config.UMBRELLA_PACKAGE,
-    config.DEFAULT_VERSION,
-    config.TYPES_DICT
-  );
-
-  fs.readFile(inputFile, 'utf8', function(err, contents) {
-    if (err) {
-      callback(err);
-      return;
-    }
-
-    var umbrellaTypes = JSON.parse(contents);
-    var allTypes = umbrellaTypes.concat(types);
-
-    var outputFile = path.join(
-      JSON_DIR,
-      config.UMBRELLA_PACKAGE,
-      config.DEFAULT_VERSION,
-      config.TYPES_DICT
-    );
-
-    fs.writeFile(outputFile, JSON.stringify(allTypes), function(err) {
-      callback(err, allTypes);
-    });
-  });
-}
-
-function createUmbrellaToc(types, callback) {
-  var outputFile = path.join(
-    JSON_DIR,
-    config.UMBRELLA_PACKAGE,
-    config.DEFAULT_VERSION,
-    config.TOC
-  );
-
-  var toc = parser.createToc(types, true);
-
-  fs.writeFile(outputFile, JSON.stringify(toc), callback);
-}
-
-async.map(deps, function(dep, callback) {
-  async.waterfall([
-    function(callback) {
-      getPackageVersion(dep, callback);
-    },
-    function(version, callback) {
-      dep.version = version;
-      getDocsFiles(dep.packageName, version, callback);
-    },
-    function(files, callback) {
-      async.each(files, copyFile.bind(null, dep), callback);
-    }
-  ], function(err) {
-    if (err) {
-      callback(err);
-      return;
-    }
-
-    getTypes(dep, callback);
-  });
-}, function(err, types) {
-  if (err) {
-    throw err;
-  }
-
-  async.waterfall([
-    function(callback) {
-      createUmbrellaTypes(flatten(types), callback);
-    },
-    function(types, callback) {
-      createUmbrellaToc(types, callback);
-    }
-  ], function(err) {
-    if (err) {
-      throw err;
-    }
-  });
+  return getPackageTypes(dep, version);
 });
+
+cp('./docs/json/google-cloud/master/*', UMBRELLA_DIR);
+
+// update the master list of types
+var umbrellaTypesPath = path.resolve(UMBRELLA_DIR, config.TYPES_DICT);
+var umbrellaTypes = require(umbrellaTypesPath);
+
+umbrellaTypes.push.apply(umbrellaTypes, flatten(allTypes));
+fs.writeFileSync(umbrellaTypesPath, JSON.stringify(umbrellaTypes));
+
+// create a new table of contents based on the master types list
+var umbrellaTocPath = path.resolve(UMBRELLA_DIR, config.TOC);
+var umbrellaToc = parser.createToc(umbrellaTypes, true);
+
+fs.writeFileSync(umbrellaTocPath, JSON.stringify(umbrellaToc));
+
+function getPackageVersion(dep) {
+  var versions = globby.sync('*', {
+    cwd: path.join(JSON_DIR, dep.packageName)
+  });
+
+  var validVersions = versions.filter(function(version) {
+    return semver.valid(version);
+  });
+
+  return semver.maxSatisfying(validVersions, dep.semver);
+}
+
+function getPackageFiles(dep, version) {
+  var packageDir = path.resolve(JSON_DIR, dep.packageName, version);
+  var files = globby.sync(path.join(packageDir, '*.json'), {
+    ignore: [config.TYPES_DICT, config.TOC].map(function(file) {
+      return path.join(packageDir, file);
+    })
+  });
+
+  return files.map(function(file) {
+    var json = require(file);
+    var service = json.parent || json.id;
+
+    json.overview = parser.createOverview(service, true);
+
+    return {
+      basename: path.basename(file),
+      json: JSON.stringify(json)
+    };
+  });
+}
+
+function getPackageTypes(dep, version) {
+  var typesPath = path.resolve(
+    JSON_DIR, dep.packageName, version, config.TYPES_DICT);
+
+  return require(typesPath).map(function(type) {
+    type.contents = path.join(dep.packageName, type.contents);
+    return type;
+  });
+}
