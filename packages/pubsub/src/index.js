@@ -84,7 +84,7 @@ util.inherits(PubSub, common.GrpcService);
 /**
  * Create a topic with the given name.
  *
- * @resource [Topics: create API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/create}
+ * @resource [Topics: create API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics/create}
  *
  * @param {string} name - Name of the topic.
  * @param {function=} callback - The callback function.
@@ -145,7 +145,7 @@ PubSub.prototype.createTopic = function(name, callback) {
  *
  * To get subscriptions for a topic, see {module:pubsub/topic}.
  *
- * @resource [Subscriptions: list API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/list}
+ * @resource [Subscriptions: list API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/list}
  *
  * @param {object=} options - Configuration object.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -287,7 +287,7 @@ PubSub.prototype.getSubscriptionsStream =
  * Get a list of the topics registered to your project. You may optionally
  * provide a query object as the first argument to customize the response.
  *
- * @resource [Topics: list API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/list}
+ * @resource [Topics: list API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics/list}
  *
  * @param {object=} query - Query object.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -407,13 +407,9 @@ PubSub.prototype.getTopics = function(query, callback) {
 PubSub.prototype.getTopicsStream = common.paginator.streamify('getTopics');
 
 /**
- * Create a subscription to a topic. You may optionally provide an object to
- * customize the subscription.
+ * Create a subscription to a topic.
  *
- * Your provided callback will be invoked with an error object if an API error
- * occurred or a {module:pubsub/subscription} object.
- *
- * @resource [Subscriptions: create API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/create}
+ * @resource [Subscriptions: create API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/create}
  *
  * @throws {Error} If a Topic instance or topic name is not provided.
  * @throws {Error} If a subName is not provided.
@@ -422,7 +418,7 @@ PubSub.prototype.getTopicsStream = common.paginator.streamify('getTopics');
  *     subscription to.
  * @param {string} subName - The name of the subscription.
  * @param {object=} options - See a
- *     [Subscription resource](https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions)
+ *     [Subscription resource](https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions)
  * @param {number} options.ackDeadlineSeconds - The maximum time after receiving
  *     a message that you must ack a message before it is redelivered.
  * @param {boolean} options.autoAck - Automatically acknowledge the message once
@@ -433,6 +429,8 @@ PubSub.prototype.getTopicsStream = common.paginator.streamify('getTopics');
  *     messages. (default: 10)
  * @param {number} options.maxInProgress - Maximum messages to consume
  *     simultaneously.
+ * @param {string} options.pushEndpoint - A URL to a custom endpoint that
+ *     messages should be pushed to.
  * @param {boolean} options.reuseExisting - If the subscription already exists,
  *     reuse it. The options of the existing subscription are not changed. If
  *     false, attempting to create a subscription that already exists will fail.
@@ -504,10 +502,17 @@ PubSub.prototype.subscribe = function(topic, subName, options, callback) {
     name: subscription.name
   });
 
+  if (reqOpts.pushEndpoint) {
+    reqOpts.pushConfig = {
+      pushEndpoint: reqOpts.pushEndpoint
+    };
+  }
+
   delete reqOpts.autoAck;
   delete reqOpts.encoding;
   delete reqOpts.interval;
   delete reqOpts.maxInProgress;
+  delete reqOpts.pushEndpoint;
   delete reqOpts.reuseExisting;
   delete reqOpts.timeout;
 

@@ -572,9 +572,7 @@ describe('PubSub', function() {
         encoding: 'utf-8',
         interval: 3,
         maxInProgress: 5,
-        pushConfig: {
-          pushEndpoint: 'https://domain/push'
-        },
+        pushEndpoint: 'https://domain/push',
         reuseExisting: false,
         timeout: 30000
       };
@@ -582,12 +580,17 @@ describe('PubSub', function() {
       var expectedBody = extend({
         topic: TOPIC_NAME,
         name: SUB_NAME
-      }, options);
+      }, options, {
+        pushConfig: {
+          pushEndpoint: options.pushEndpoint
+        }
+      });
 
       delete expectedBody.autoAck;
       delete expectedBody.encoding;
       delete expectedBody.interval;
       delete expectedBody.maxInProgress;
+      delete expectedBody.pushEndpoint;
       delete expectedBody.reuseExisting;
       delete expectedBody.timeout;
 

@@ -197,7 +197,7 @@ function Subscription(pubsub, options) {
     /**
      * Get the metadata for the subscription.
      *
-     * @resource [Subscriptions: get API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/get}
+     * @resource [Subscriptions: get API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/get}
      *
      * @param {function} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
@@ -378,7 +378,7 @@ Subscription.formatName_ = function(projectId, name) {
  * Acknowledge to the backend that the message was retrieved. You must provide
  * either a single ackId or an array of ackIds.
  *
- * @resource [Subscriptions: acknowledge API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/acknowledge}
+ * @resource [Subscriptions: acknowledge API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/acknowledge}
  *
  * @throws {Error} If at least one ackId is not provided.
  *
@@ -467,7 +467,7 @@ Subscription.prototype.decorateMessage_ = function(message) {
  * Delete the subscription. Pull requests from the current subscription will be
  * errored once unsubscription is complete.
  *
- * @resource [Subscriptions: delete API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/delete}
+ * @resource [Subscriptions: delete API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/delete}
  *
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this
@@ -522,7 +522,7 @@ Subscription.prototype.delete = function(callback) {
  *
  * @todo Should not be racing with other pull.
  *
- * @resource [Subscriptions: pull API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/pull}
+ * @resource [Subscriptions: pull API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/pull}
  *
  * @param {object=} options - Configuration object.
  * @param {number} options.maxResults - Limit the amount of messages pulled.
@@ -634,7 +634,7 @@ Subscription.prototype.pull = function(options, callback) {
  * to make the message available for redelivery if the processing was
  * interrupted.
  *
- * @resource [Subscriptions: modifyAckDeadline API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/modifyAckDeadline}
+ * @resource [Subscriptions: modifyAckDeadline API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/modifyAckDeadline}
  *
  * @param {object} options - The configuration object.
  * @param {string|string[]} options.ackIds - The ack id(s) to change.
