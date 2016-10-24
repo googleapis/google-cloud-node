@@ -104,6 +104,7 @@
     "@google-cloud/dns": "^0.3.0",
     "@google-cloud/language": "^0.5.0",
     "@google-cloud/logging": "^0.5.0",
+    "@google-cloud/monitoring": "^0.1.1",
     "@google-cloud/prediction": "^0.3.0",
     "@google-cloud/pubsub": "^0.5.0",
     "@google-cloud/resource": "^0.3.0",

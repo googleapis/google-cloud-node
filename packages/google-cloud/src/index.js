@@ -176,6 +176,43 @@ var apis = {
   logging: require('@google-cloud/logging'),
 
   /**
+   * [Stackdriver Monitoring](https://cloud.google.com/monitoring/docs) collects
+   * metrics, events, and metadata from Google Cloud Platform, Amazon Web
+   * Services (AWS), hosted uptime probes, application instrumentation, and a
+   * variety of common application components including Cassandra, Nginx, Apache
+   * Web Server, Elasticsearch and many others. Stackdriver ingests that data
+   * and generates insights via dashboards, charts, and alerts.
+   *
+   * <p class="notice">
+   *   **This is a Beta release of Stackdriver Monitoring.** This API is not
+   *   covered by any SLA or deprecation policy and may be subject to
+   *   backward-incompatible changes.
+   * </p>
+   *
+   * <h2>This is an auto-generated API</h2>
+   *
+   * It does not follow the conventions you're familiar with from other parts of
+   * our library. A handwritten layer is not yet available.
+   *
+   * The example below shows you how to instantiate the generated client. For
+   * further documentation, please browse the
+   * [Monitoring .proto files](https://github.com/googleapis/googleapis/tree/master/google/monitoring/v3)
+   * on GitHub.
+   *
+   * @type {module:monitoring}
+   *
+   * @return {module:monitoring}
+   *
+   * @example
+   * var gcloud = require('google-cloud');
+   * var monitoring = gcloud.monitoring.v3({
+   *   projectId: 'grape-spaceship-123',
+   *   keyFilename: '/path/to/keyfile.json'
+   * });
+   */
+  monitoring: require('@google-cloud/monitoring'),
+
+  /**
    * The [Google Prediction API](https://cloud.google.com/prediction/docs/getting-started)
    * provides pattern-matching and machine learning capabilities. Given a set of
    * data examples to train against, you can create applications that can
