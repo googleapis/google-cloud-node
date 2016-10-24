@@ -482,16 +482,18 @@ Topic.prototype.publish = function(messages, options, callback) {
  * @param {string} subName - The name of the subscription.
  * @param {object=} options - See a
  *     [Subscription resource](https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions)
- * @param {number=} options.ackDeadlineSeconds - The maximum time after
+ * @param {number} options.ackDeadlineSeconds - The maximum time after
  *     receiving a message that you must ack a message before it is redelivered.
  * @param {boolean=} options.autoAck - Automatically acknowledge the message
  *     once it's pulled. (default: false)
  * @param {string} options.encoding - When pulling for messages, this type is
  *     used when converting a message's data to a string. (default: 'utf-8')
- * @param {number=} options.interval - Interval in milliseconds to check for new
+ * @param {number} options.interval - Interval in milliseconds to check for new
  *     messages. (default: 10)
  * @param {number} options.maxInProgress - Maximum messages to consume
  *     simultaneously.
+ * @param {string} options.pushEndpoint - A URL to a custom endpoint that
+ *     messages should be pushed to.
  * @param {boolean=} options.reuseExisting - If the subscription already exists,
  *     reuse it. The options of the existing subscription are not changed. If
  *     false, attempting to create a subscription that already exists will fail.

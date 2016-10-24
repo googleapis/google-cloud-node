@@ -429,6 +429,8 @@ PubSub.prototype.getTopicsStream = common.paginator.streamify('getTopics');
  *     messages. (default: 10)
  * @param {number} options.maxInProgress - Maximum messages to consume
  *     simultaneously.
+ * @param {string} options.pushEndpoint - A URL to a custom endpoint that
+ *     messages should be pushed to.
  * @param {boolean} options.reuseExisting - If the subscription already exists,
  *     reuse it. The options of the existing subscription are not changed. If
  *     false, attempting to create a subscription that already exists will fail.
@@ -500,10 +502,17 @@ PubSub.prototype.subscribe = function(topic, subName, options, callback) {
     name: subscription.name
   });
 
+  if (reqOpts.pushEndpoint) {
+    reqOpts.pushConfig = {
+      pushEndpoint: reqOpts.pushEndpoint
+    };
+  }
+
   delete reqOpts.autoAck;
   delete reqOpts.encoding;
   delete reqOpts.interval;
   delete reqOpts.maxInProgress;
+  delete reqOpts.pushEndpoint;
   delete reqOpts.reuseExisting;
   delete reqOpts.timeout;
 
