@@ -867,9 +867,8 @@ Table.prototype.import = function(source, metadata, callback) {
   callback = callback || common.util.noop;
   metadata = metadata || {};
 
-  var format = metadata.sourceFormat || metadata.format;
-  if (format) {
-    metadata.sourceFormat = FORMATS[format.toLowerCase()];
+  if (metadata.format) {
+    metadata.sourceFormat = FORMATS[metadata.format.toLowerCase()];
     delete metadata.format;
   }
 

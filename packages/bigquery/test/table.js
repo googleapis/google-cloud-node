@@ -1095,11 +1095,13 @@ describe('BigQuery/Table', function() {
     it('should not override a provided format with a File', function(done) {
       table.bigQuery.request = function(reqOpts) {
         var sourceFormat = reqOpts.json.configuration.load.sourceFormat;
-        assert.equal(sourceFormat, 'CSV');
+        assert.equal(sourceFormat, 'NEWLINE_DELIMITED_JSON');
         done();
       };
 
-      table.import(FILE, { sourceFormat: 'CSV' }, assert.ifError);
+      table.import(FILE, {
+        sourceFormat: 'NEWLINE_DELIMITED_JSON'
+      }, assert.ifError);
     });
 
     it('should execute the callback with error', function(done) {
