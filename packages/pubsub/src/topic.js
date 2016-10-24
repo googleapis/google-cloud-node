@@ -76,7 +76,7 @@ function Topic(pubsub, name) {
     /**
      * Delete the topic. This will not delete subscriptions to this topic.
      *
-     * @resource [Topics: delete API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/delete}
+     * @resource [Topics: delete API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics/delete}
      *
      * @param {function=} callback - The callback function.
      *
@@ -150,7 +150,7 @@ function Topic(pubsub, name) {
     /**
      * Get the official representation of this topic from the API.
      *
-     * @resource [Topics: get API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/get}
+     * @resource [Topics: get API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics/get}
      *
      * @param {function} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
@@ -266,7 +266,7 @@ Topic.formatName_ = function(projectId, name) {
  * Your provided callback will be invoked with an error object if an API error
  * occurred or an array of {module:pubsub/subscription} objects.
  *
- * @resource [Subscriptions: list API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics.subscriptions/list}
+ * @resource [Subscriptions: list API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics.subscriptions/list}
  *
  * @param {object=} options - Configuration object.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -359,7 +359,7 @@ Topic.prototype.getSubscriptionsStream = function(options) {
  * Publish the provided message or array of messages. On success, an array of
  * messageIds is returned in the response.
  *
- * @resource [Topics: publish API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/publish}
+ * @resource [Topics: publish API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics/publish}
  *
  * @throws {Error} If no message is provided.
  *
@@ -475,16 +475,13 @@ Topic.prototype.publish = function(messages, options, callback) {
 };
 
 /**
- * Create a subscription to this topic. You may optionally provide an object to
- * customize the subscription.
+ * Create a subscription to this topic.
  *
- * Your provided callback will be invoked with an error object if an API error
- * occurred or a {module:pubsub/subscription} object.
- *
- * @resource [Subscriptions: create API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/create}
+ * @resource [Subscriptions: create API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/create}
  *
  * @param {string} subName - The name of the subscription.
- * @param {object=} options - Configuration object.
+ * @param {object=} options - See a
+ *     [Subscription resource](https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions)
  * @param {number=} options.ackDeadlineSeconds - The maximum time after
  *     receiving a message that you must ack a message before it is redelivered.
  * @param {boolean=} options.autoAck - Automatically acknowledge the message

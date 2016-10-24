@@ -89,11 +89,11 @@ util.inherits(IAM, common.GrpcService);
  *
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {object} callback.policy - The [policy](https://cloud.google.com/pubsub/reference/rest/Shared.Types/Policy).
+ * @param {object} callback.policy - The [policy](https://cloud.google.com/pubsub/docs/reference/rest/Shared.Types/Policy).
  * @param {object} callback.apiResponse - The full API response.
  *
- * @resource [Topics: getIamPolicy API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/getIamPolicy}
- * @resource [Subscriptions: getIamPolicy API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/getIamPolicy}
+ * @resource [Topics: getIamPolicy API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics/getIamPolicy}
+ * @resource [Subscriptions: getIamPolicy API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/getIamPolicy}
  *
  * @example
  * topic.iam.getPolicy(function(err, policy, apiResponse) {});
@@ -126,7 +126,7 @@ IAM.prototype.getPolicy = function(callback) {
  *
  * @throws {Error} If no policy is provided.
  *
- * @param {object} policy - The [policy](https://cloud.google.com/pubsub/reference/rest/Shared.Types/Policy).
+ * @param {object} policy - The [policy](https://cloud.google.com/pubsub/docs/reference/rest/Shared.Types/Policy).
  * @param {array=} policy.bindings - Bindings associate members with roles.
  * @param {object[]=} policy.rules - Rules to be applied to the policy.
  * @param {string=} policy.etag - Etags are used to perform a read-modify-write.
@@ -135,9 +135,9 @@ IAM.prototype.getPolicy = function(callback) {
  * @param {object} callback.policy - The updated policy.
  * @param {object} callback.apiResponse - The full API response.
  *
- * @resource [Topics: setIamPolicy API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/setIamPolicy}
- * @resource [Subscriptions: setIamPolicy API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/setIamPolicy}
- * @resource [Policy]{@link https://cloud.google.com/pubsub/reference/rest/Shared.Types/Policy}
+ * @resource [Topics: setIamPolicy API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics/setIamPolicy}
+ * @resource [Subscriptions: setIamPolicy API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/setIamPolicy}
+ * @resource [Policy]{@link https://cloud.google.com/pubsub/docs/reference/rest/Shared.Types/Policy}
  *
  * @example
  * var myPolicy = {
@@ -193,8 +193,8 @@ IAM.prototype.setPolicy = function(policy, callback) {
  *     is allowed
  * @param {object} callback.apiResponse - The full API response.
  *
- * @resource [Topics: testIamPermissions API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.topics/testIamPermissions}
- * @resource [Subscriptions: testIamPermissions API Documentation]{@link https://cloud.google.com/pubsub/reference/rest/v1/projects.subscriptions/testIamPermissions}
+ * @resource [Topics: testIamPermissions API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics/testIamPermissions}
+ * @resource [Subscriptions: testIamPermissions API Documentation]{@link https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.subscriptions/testIamPermissions}
  * @resource [Permissions Reference]{@link https://cloud.google.com/pubsub/access_control#permissions}
  *
  * @example
