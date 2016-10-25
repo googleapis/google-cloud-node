@@ -21,6 +21,8 @@ before_script:
     fi
 script: "node ./scripts/build.js"
 after_success:
+  # We check to see if the job number ends with 1 (e.g. 234234.1)
+  # letting us know it is the first pass for this build
   - if [ $IS_PUSH_TO_MASTER && "${TRAVIS_JOB_NUMBER}" == *1 ]; then
       rm -rf docs/json;
       npm run docs;
