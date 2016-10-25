@@ -355,12 +355,7 @@ Bundler.prototype.bundle = function() {
  * // ]
  */
 Bundler.prototype.getDeps = function() {
-  var jsonPath = path.resolve(
-    PACKAGES_ROOT,
-    UMBRELLA_PACKAGE,
-    'package.json'
-  );
-
+  var jsonPath = path.resolve(PACKAGES_ROOT, UMBRELLA_PACKAGE, 'package.json');
   var contents = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
   var dependencies = contents.dependencies;
 

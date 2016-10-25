@@ -293,7 +293,6 @@ Git.prototype.checkout = function(branch) {
  *
  * @param {string} branch - The branch to use.
  * @param {string=} alias - Name of the folder that contains submodule.
- * @param {string=} repo - The repo to checkout.
  * @return {Git}
  */
 Git.prototype.submodule = function(branch, alias) {
