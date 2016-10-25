@@ -35,6 +35,7 @@
     "link-common": "node ./scripts/link-common.js",
     "update-deps": "node ./scripts/update-deps.js",
     "docs": "node ./scripts/docs",
+    "prepare-docs": "node ./scripts/docs/prepare.js",
     "lint": "jshint scripts/ packages/ system-test/ test/ && jscs packages/ system-test/ test/",
     "test": "npm run docs && npm run snippet-test && npm run unit-test",
     "unit-test": "mocha --timeout 5000 --bail packages/*/test/*.js",

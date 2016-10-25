@@ -176,19 +176,7 @@ Checklist:
 
 All of the documentation is powered by JSDoc, we parse it into JSON and feed it to an [application](https://github.com/GoogleCloudPlatform/gcloud-common/tree/master/site) built in Angular. Hopefully our CI builds and updates the documentation for each successful merge to master, but if for whatever reason a manual update is required please refer to the following steps.
 
-First let's create a submodule for the `gh-pages` branch.
-
-```sh
-$ git submodule add -b gh-pages git@github.com:GoogleCloudPlatform/google-cloud-node.git
-```
-
-Next, we'll clean up any old JSON that may have been built previously.
-
-```sh
-$ rm -rf docs/json
-```
-
-Now we'll build the documentation using the `npm run docs` command. This command optionally accepts two parameters.
+We can build the documentation using the `npm run prepare-docs` command. This command optionally accepts two parameters.
 
 * module - The name of the module to build (e.g. `google-cloud`).
 * version - The target version of the module. (e.g. `0.43.0`) Defaults to master.
@@ -196,24 +184,14 @@ Now we'll build the documentation using the `npm run docs` command. This command
 If both parameters are omitted, we will build the master docs for all modules.
 
 ```sh
-$ npm run docs google-cloud 0.43.0
+$ npm run prepare-docs google-cloud 0.43.0
 ```
 
-Voila! We can now copy our newly created docs to the `gh-pages` branch.
-
-```sh
-$ cp -rf docs/json/* gh-pages/json
-$ cp docs/manifest.json gh-pages
-```
-
-Once you've copied over the JSON it's time to commit. If you wish to preview locally you can optionally run an http server in the `gh-pages` folder.
+Now it's time to push the docs! If you wish to preview locally you can optionally run an http server in the `gh-pages` folder.
 
 ```sh
 $ cd gh-pages
 $ http-server . # Run the server to look for any visual errors
-$ git status # Double check the files you expected to change did
-$ git add .
-$ git commit -m 'Update docs for google-cloud 0.43.0 [ci skip]'
 $ git push origin gh-pages
 $ cd ..
 ```

@@ -1,0 +1,63 @@
+/*!
+ * Copyright 2016 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+'use strict';
+
+require('shelljs/global');
+
+var multiline = require('multiline');
+
+var helpers = require('../helpers');
+var git = helpers.git;
+var run = helpers.run;
+
+var args = process.argv.splice(1);
+var moduleName = args[1] || '';
+var version = args[2] || '';
+
+var ghpages = git.submodule('gh-pages');
+
+rm('-rf', 'docs/json');
+run(['npm run docs', moduleName, version]);
+cp('-rf', 'docs/json/*', 'gh-pages/json');
+cp('docs/manifest.json', 'gh-pages');
+
+ghpages.add('manifest.json', 'json');
+ghpages.commit('Update docs for ' + getTagName(moduleName, version));
+
+console.log(multiline(function() {/*
+
+Now you just need to push to gh-pages: git push origin gh-pages
+
+To clean up the gh-pages submodule, run the following commands:
+
+git submodule deinit -f gh-pages
+git rm -rf gh-pages
+git rm -rf .gitmodules
+rm -rf .git/modules/gh-pages
+*/}));
+
+function getTagName(moduleName, version) {
+  if (!version) {
+    return 'master';
+  }
+
+  if (moduleName === 'google-cloud') {
+    return 'v' + version;
+  }
+
+  return [moduleName, version].join('-');
+}

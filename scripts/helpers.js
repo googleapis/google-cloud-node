@@ -255,7 +255,7 @@ function run(command, options) {
 
   console.log(command);
 
-  var response = exec(command, options);
+  var response = exec(command.trim(), options);
 
   if (response.code) {
     exit(response.code);
