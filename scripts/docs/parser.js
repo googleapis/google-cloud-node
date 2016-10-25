@@ -138,7 +138,7 @@ function getParent(id) {
 }
 
 function getChildren(id) {
-  var childrenGlob = './packages/' + id + '/*';
+  var childrenGlob = './packages/' + id + '/src/*';
 
   return globby
     .sync(childrenGlob, { ignore: config.IGNORE })

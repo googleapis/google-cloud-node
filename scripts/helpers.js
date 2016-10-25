@@ -275,9 +275,7 @@ function Git(cwd) {
   this.cwd = cwd || ROOT_DIR;
 }
 
-Git.REPO = process.env.CI ?
-  'https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME}' :
-  'git@github.com:GoogleCloudPlatform/google-cloud-node.git';
+Git.REPO = 'git@github.com:GoogleCloudPlatform/google-cloud-node.git';
 
 /**
  * Checks out a branch.
@@ -305,7 +303,12 @@ Git.prototype.submodule = function(branch, alias) {
     cwd: this.cwd
   });
 
-  return new Git(path.join(this.cwd, alias));
+  var git = new Git(path.join(this.cwd, alias));
+
+  git.branch = branch;
+  git.alias = alias;
+
+  return git;
 };
 
 /**
@@ -375,6 +378,22 @@ Git.prototype.push = function(branch) {
   run(['git push -q', Git.REPO, branch], {
     cwd: this.cwd
   });
+};
+
+/**
+ * Deinits a submodule.
+ *
+ * @param {git} submodule - The submodule instance.
+ */
+Git.prototype.deinit = function(submodule) {
+  var options = {
+    cwd: this.cwd
+  };
+
+  run(['git submodule deinit -f', submodule.alias], options);
+  run(['git rm -rf', submodule.alias], options);
+  run('git rm -rf .gitmodules', options);
+  rm('-rf', path.resolve('.git/modules', submodule.alias));
 };
 
 module.exports.git = new Git();

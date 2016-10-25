@@ -22,6 +22,6 @@ before_script:
 script: "node ./scripts/build.js"
 after_success:
   - if [ $IS_PUSH_TO_MASTER ]; then
-      node ./scripts/build-docs.js;
+      node ./scripts/docs;
     fi
 sudo: false
