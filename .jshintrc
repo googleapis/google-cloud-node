@@ -29,6 +29,7 @@
     "echo": true,
     "exit": true,
     "cd": true,
-    "mkdir": true
+    "mkdir": true,
+    "test": true
   }
 }
