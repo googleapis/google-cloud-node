@@ -868,9 +868,9 @@ describe('File', function() {
           .resume();
       });
 
-      it('should default to md5 validation', function(done) {
+      it('should default to crc32c validation', function(done) {
         file.requestStream = getFakeSuccessfulRequest(data, {
-          headers: { 'x-goog-hash': 'md5=fakefakefake' }
+          headers: { 'x-goog-hash': 'crc32c=fakefakefake' }
         });
 
         file.createReadStream()
@@ -883,7 +883,7 @@ describe('File', function() {
 
       it('should ignore a data mismatch if validation: false', function(done) {
         file.requestStream = getFakeSuccessfulRequest(data, {
-          headers: { 'x-goog-hash': 'md5=fakefakefake' }
+          headers: { 'x-goog-hash': 'crc32c=fakefakefake' }
         });
 
         file.createReadStream({ validation: false })

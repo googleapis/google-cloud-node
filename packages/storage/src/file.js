@@ -513,11 +513,11 @@ File.prototype.copy = function(destination, options, callback) {
  *
  * @param {object=} options - Configuration object.
  * @param {string|boolean} options.validation - Possible values: `"md5"`,
- *     `"crc32c"`, or `false`. By default, data integrity is validated with an
- *     MD5 checksum for maximum reliability, falling back to CRC32c when an MD5
- *     hash wasn't returned from the API. CRC32c will provide better performance
- *     with less reliability. You may also choose to skip validation completely,
- *     however this is **not recommended**.
+ *     `"crc32c"`, or `false`. By default, data integrity is validated with a
+ *     CRC32c checksum. You may use MD5 if preferred, but that hash is not
+ *     supported for composite objects. An error will be raised if MD5 is
+ *     specified but is not available. You may also choose to skip validation
+ *     completely, however this is **not recommended**.
  * @param {number} options.start - A byte offset to begin the file's download
  *     from. Default is 0. NOTE: Byte ranges are inclusive; that is,
  *     `options.start = 0` and `options.end = 999` represent the first 1000
@@ -581,13 +581,15 @@ File.prototype.createReadStream = function(options) {
   var tailRequest = options.end < 0;
   var throughStream = streamEvents(through());
 
-  var crc32c = options.validation !== false;
-  var md5 = options.validation !== false;
+  var crc32c = true;
+  var md5 = false;
 
   if (is.string(options.validation)) {
     options.validation = options.validation.toLowerCase();
     crc32c = options.validation === 'crc32c';
     md5 = options.validation === 'md5';
+  } else if (options.validation === false) {
+    crc32c = false;
   }
 
   if (rangeRequest) {
@@ -872,9 +874,10 @@ File.prototype.createResumableUpload = function(options, callback) {
  * @param {string} options.uri - The URI for an already-created resumable
  *     upload. See {module:storage/file#createResumableUpload}.
  * @param {string|boolean} options.validation - Possible values: `"md5"`,
- *     `"crc32c"`, or `false`. By default, data integrity is validated with an
- *     MD5 checksum for maximum reliability. CRC32c will provide better
- *     performance with less reliability. You may also choose to skip validation
+ *     `"crc32c"`, or `false`. By default, data integrity is validated with a
+ *     CRC32c checksum. You may use MD5 if preferred, but that hash is not
+ *     supported for composite objects. An error will be raised if MD5 is
+ *     specified but is not available. You may also choose to skip validation
  *     completely, however this is **not recommended**.
  * @return {WritableStream}
  *
@@ -945,13 +948,15 @@ File.prototype.createWriteStream = function(options) {
     options.metadata.contentEncoding = 'gzip';
   }
 
-  var crc32c = options.validation !== false;
-  var md5 = options.validation !== false;
+  var crc32c = true;
+  var md5 = false;
 
   if (is.string(options.validation)) {
     options.validation = options.validation.toLowerCase();
     crc32c = options.validation === 'crc32c';
     md5 = options.validation === 'md5';
+  } else if (options.validation === false) {
+    crc32c = false;
   }
 
   // Collect data as it comes in to store in a hash. This is compared to the
