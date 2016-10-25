@@ -689,7 +689,15 @@ File.prototype.createReadStream = function(options) {
         failed = !validateStream.test('md5', hashes.md5);
       }
 
-      if (failed) {
+      if (md5 && !hashes.md5) {
+        var hashError = new Error([
+          'MD5 verification was specified, but is not available for the',
+          'requested object. MD5 is not available for composite objects.'
+        ].join(' '));
+        hashError.code = 'MD5_NOT_AVAILABLE';
+
+        throughStream.destroy(hashError);
+      } else if (failed) {
         var mismatchError = new Error([
           'The downloaded data did not match the data from the server.',
           'To be sure the content is the same, you should download the',
@@ -1028,6 +1036,12 @@ File.prototype.createWriteStream = function(options) {
             'removing the file manually, then uploading the file again.',
             '\n\nThe delete attempt failed with this message:',
             '\n\n  ' + err.message
+          ].join(' ');
+        } else if (md5 && !metadata.md5Hash) {
+          code = 'MD5_NOT_AVAILABLE';
+          message = [
+            'MD5 verification was specified, but is not available for the',
+            'requested object. MD5 is not available for composite objects.'
           ].join(' ');
         } else {
           code = 'FILE_NO_UPLOAD';
