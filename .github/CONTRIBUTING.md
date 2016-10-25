@@ -184,7 +184,7 @@ We can build the documentation using the `npm run prepare-docs` command. This co
 If both parameters are omitted, we will build the master docs for all modules.
 
 ```sh
-$ npm run prepare-docs google-cloud 0.43.0
+$ npm run prepare-ghpages google-cloud 0.43.0
 ```
 
 Now it's time to push the docs! If you wish to preview locally you can optionally run an http server in the `gh-pages` folder.
@@ -198,10 +198,7 @@ $ cd ..
 Finally the last thing to do is cleanup the submodule we created to copy over the JSON.
 
 ```sh
-$ git submodule deinit -f gh-pages
-$ git rm -rf gh-pages
-$ git rm -rf .gitmodules
-$ rm -rf .git/modules/gh-pages
+$ npm run remove-ghpages
 ```
 
 [elsewhere]: ../README.md#elsewhere

@@ -354,6 +354,21 @@ Git.prototype.add = function() {
 };
 
 /**
+ * Removes files via git
+ *
+ * @param {string=} options - Command line options like -rf
+ * @param {...string} file - File to remove.
+ */
+Git.prototype.remove = function() {
+  var files = [].slice.call(arguments);
+  var command = ['git rm'].concat(files);
+
+  run(command, {
+    cwd: this.cwd
+  });
+};
+
+/**
  * Commits to git via commit message.
  *
  * @param {string} message - The commit message.

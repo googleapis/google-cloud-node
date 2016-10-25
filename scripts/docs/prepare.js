@@ -40,14 +40,9 @@ ghpages.commit('Update docs for ' + getTagName(moduleName, version));
 
 console.log(multiline(function() {/*
 
-Now you just need to push to gh-pages: git push origin gh-pages
+Now you just need to push to gh-pages: cd gh-pages && git push origin gh-pages
 
-To clean up the gh-pages submodule, run the following commands:
-
-git submodule deinit -f gh-pages
-git rm -rf gh-pages
-git rm -rf .gitmodules
-rm -rf .git/modules/gh-pages
+To clean up the gh-pages submodule: npm run remove-ghpages
 */}));
 
 function getTagName(moduleName, version) {
