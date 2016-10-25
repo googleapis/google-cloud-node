@@ -13,7 +13,6 @@
       "name": "google-cloud",
       "defaultService": "google-cloud",
       "versions": [
-        "0.43.0",
         "0.42.2",
         "0.41.2",
         "0.41.0",
@@ -133,7 +132,6 @@
       "name": "@google-cloud/language",
       "defaultService": "language",
       "versions": [
-        "0.5.0",
         "0.4.0",
         "0.3.0",
         "0.2.0",
@@ -147,19 +145,9 @@
       "name": "@google-cloud/logging",
       "defaultService": "logging",
       "versions": [
-        "0.5.0",
         "0.4.0",
         "0.3.0",
         "0.2.0",
-        "0.1.1",
-        "master"
-      ]
-    },
-    {
-      "id": "monitoring",
-      "name": "@google-cloud/monitoring",
-      "defaultService": "monitoring",
-      "versions": [
         "0.1.1",
         "master"
       ]
@@ -181,7 +169,6 @@
       "name": "@google-cloud/pubsub",
       "defaultService": "pubsub",
       "versions": [
-        "0.5.0",
         "0.4.0",
         "0.3.0",
         "0.2.0",
@@ -205,7 +192,6 @@
       "name": "@google-cloud/speech",
       "defaultService": "speech",
       "versions": [
-        "0.4.0",
         "0.3.0",
         "0.2.0",
         "master"
@@ -216,7 +202,6 @@
       "name": "@google-cloud/storage",
       "defaultService": "storage",
       "versions": [
-        "0.4.0",
         "0.3.0",
         "0.2.0",
         "0.1.1",
@@ -240,7 +225,6 @@
       "name": "@google-cloud/vision",
       "defaultService": "vision",
       "versions": [
-        "0.5.0",
         "0.4.0",
         "0.3.0",
         "0.2.0",
