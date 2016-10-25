@@ -21,7 +21,24 @@ before_script:
     fi
 script: "node ./scripts/build.js"
 after_success:
-  - if [ $IS_PUSH_TO_MASTER ]; then
-      node ./scripts/docs;
+  - if [ $IS_PUSH_TO_MASTER && "${TRAVIS_JOB_NUMBER}" == *1 ]; then
+      rm -rf docs/json;
+      npm run docs;
+      git submodule add -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} ghpages;
+      cp -rf docs/json/* ghpages/json;
+      cp docs/manifest.json ghpages;
+      cd ghpages;
+      set +e;
+      git add .;
+      set -e;
+      if [[ -z "$(git status --porcelain)" ]]; then
+        echo "Nothing to commit. Exiting without pushing changes.";
+        exit 0;
+      fi;
+      git config user.name "travis-ci";
+      git config user.email "travis@travis-ci.org";
+      git commit -m "Update docs for ${TRAVIS_TAG:-master} [ci skip]";
+      git status;
+      git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages;
     fi
 sudo: false
