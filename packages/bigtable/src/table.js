@@ -440,7 +440,7 @@ Table.prototype.createReadStream = function(options) {
   }
 
   if (options.limit) {
-    reqOpts.numRowsLimit = options.limit;
+    reqOpts.rowsLimit = options.limit;
   }
 
   return pumpify.obj([
