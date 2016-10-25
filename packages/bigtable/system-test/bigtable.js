@@ -542,6 +542,18 @@ describe('Bigtable', function() {
         });
       });
 
+      it('should limit the number of rows', function(done) {
+        var options = {
+          limit: 1
+        };
+
+        TABLE.getRows(options, function(err, rows) {
+          assert.ifError(err);
+          assert.strictEqual(rows.length, 1);
+          done();
+        });
+      });
+
       it('should fetch a range of rows', function(done) {
         var options = {
           start: 'alincoln',

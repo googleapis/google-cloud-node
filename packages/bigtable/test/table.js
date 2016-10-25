@@ -448,7 +448,7 @@ describe('Bigtable/Table', function() {
         };
 
         table.requestStream = function(g, reqOpts) {
-          assert.strictEqual(reqOpts.numRowsLimit, options.limit);
+          assert.strictEqual(reqOpts.rowsLimit, options.limit);
           done();
         };
 
