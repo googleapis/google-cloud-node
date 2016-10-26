@@ -27,7 +27,7 @@ const PubSub = require(`@google-cloud/pubsub`);
 
 // [START pubsub_list_topics]
 function listTopics (callback) {
-  // Instantiates the client library
+  // Instantiates a client
   const pubsubClient = PubSub();
 
   // Lists all topics in the current project
@@ -46,7 +46,7 @@ function listTopics (callback) {
 
 // [START pubsub_create_topic]
 function createTopic (topicName, callback) {
-  // Instantiates the client library
+  // Instantiates a client
   const pubsubClient = PubSub();
 
   // Creates a new topic, e.g. "my-new-topic"
@@ -64,7 +64,7 @@ function createTopic (topicName, callback) {
 
 // [START pubsub_delete_topic]
 function deleteTopic (topicName, callback) {
-  // Instantiates the client library
+  // Instantiates a client
   const pubsubClient = PubSub();
 
   // References an existing topic, e.g. "my-topic"
@@ -85,7 +85,7 @@ function deleteTopic (topicName, callback) {
 
 // [START pubsub_publish_message]
 function publishMessage (topicName, data, callback) {
-  // Instantiates the client library
+  // Instantiates a client
   const pubsubClient = PubSub();
 
   // References an existing topic, e.g. "my-topic"
@@ -129,7 +129,7 @@ function setPublishCounterValue (value) {
 
 // [START pubsub_publish_ordered_message]
 function publishOrderedMessage (topicName, data, callback) {
-  // Instantiates the client library
+  // Instantiates a client
   const pubsubClient = PubSub();
 
   // References an existing topic, e.g. "my-topic"
@@ -171,7 +171,7 @@ function publishOrderedMessage (topicName, data, callback) {
 
 // [START pubsub_get_topic_policy]
 function getTopicPolicy (topicName, callback) {
-  // Instantiates the client library
+  // Instantiates a client
   const pubsubClient = PubSub();
 
   // References an existing topic, e.g. "my-topic"
@@ -192,7 +192,7 @@ function getTopicPolicy (topicName, callback) {
 
 // [START pubsub_set_topic_policy]
 function setTopicPolicy (topicName, callback) {
-  // Instantiates the client library
+  // Instantiates a client
   const pubsubClient = PubSub();
 
   // References an existing topic, e.g. "my-topic"
@@ -229,7 +229,7 @@ function setTopicPolicy (topicName, callback) {
 
 // [START pubsub_test_topic_permissions]
 function testTopicPermissions (topicName, callback) {
-  // Instantiates the client library
+  // Instantiates a client
   const pubsubClient = PubSub();
 
   // References an existing topic, e.g. "my-topic"
