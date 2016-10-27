@@ -4,5 +4,5 @@ packages/*/CONTRIBUTORS
 packages/*/COPYING
 **/node_modules
 **/coverage/*
-docs/json/**/*.json
+docs/json
 *.log

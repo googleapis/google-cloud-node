@@ -172,6 +172,35 @@ Checklist:
   - [ ] I made sure all breaking changes are noted
   - [x] I'm not going to say "nifty" anymore
 
+### Updating Documentation
+
+All of the documentation is powered by JSDoc, we parse it into JSON and feed it to an [application](https://github.com/GoogleCloudPlatform/gcloud-common/tree/master/site) built in Angular. Hopefully our CI builds and updates the documentation for each successful merge to master, but if for whatever reason a manual update is required please refer to the following steps.
+
+We can build the documentation using the `npm run prepare-ghpages` command. This command optionally accepts two parameters.
+
+* module - The name of the module to build (e.g. `google-cloud`).
+* version - The target version of the module. (e.g. `0.43.0`) Defaults to master.
+
+If both parameters are omitted, we will build the master docs for all modules.
+
+```sh
+$ npm run prepare-ghpages google-cloud 0.43.0
+```
+
+Now it's time to push the docs! If you wish to preview locally you can optionally run an http server in the `gh-pages` folder.
+
+```sh
+$ cd gh-pages
+$ http-server . # Run the server to look for any visual errors
+$ git push origin gh-pages
+$ cd ..
+```
+Finally the last thing to do is cleanup the submodule we created to copy over the JSON.
+
+```sh
+$ npm run remove-ghpages
+```
+
 [elsewhere]: ../README.md#elsewhere
 [gcloudcli]: https://developers.google.com/cloud/sdk/gcloud/
 [indvcla]: https://developers.google.com/open-source/cla/individual

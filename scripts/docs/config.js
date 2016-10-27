@@ -29,7 +29,7 @@ module.exports = {
     'storage/src/acl.js',
     'bigtable/src/mutation.js'
   ],
-  OVERVIEW_TEMPLATE: 'overview.template.html',
+  OVERVIEW_TEMPLATE: 'templates/overview.html',
   OVERVIEW: {
     'google-cloud': {
       title: 'Google Cloud',

@@ -255,7 +255,7 @@ function run(command, options) {
 
   console.log(command);
 
-  var response = exec(command, options);
+  var response = exec(command.trim(), options);
 
   if (response.code) {
     exit(response.code);
@@ -275,8 +275,18 @@ function Git(cwd) {
   this.cwd = cwd || ROOT_DIR;
 }
 
-// We'll use this for cloning/submoduling/pushing purposes on CI
-Git.REPO = 'https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME}';
+Git.REPO = 'git@github.com:GoogleCloudPlatform/google-cloud-node.git';
+
+/**
+ * Checks out a branch.
+ *
+ * @param {string} branch - The branch to check out.
+ */
+Git.prototype.checkout = function(branch) {
+  run(['git checkout', branch], {
+    cwd: this.cwd
+  });
+};
 
 /**
  * Creates a submodule in the root directory in quiet mode.
@@ -292,7 +302,12 @@ Git.prototype.submodule = function(branch, alias) {
     cwd: this.cwd
   });
 
-  return new Git(path.join(this.cwd, alias));
+  var git = new Git(path.join(this.cwd, alias));
+
+  git.branch = branch;
+  git.alias = alias;
+
+  return git;
 };
 
 /**
@@ -339,6 +354,21 @@ Git.prototype.add = function() {
 };
 
 /**
+ * Removes files via git
+ *
+ * @param {string=} options - Command line options like -rf
+ * @param {...string} file - File to remove.
+ */
+Git.prototype.remove = function() {
+  var files = [].slice.call(arguments);
+  var command = ['git rm'].concat(files);
+
+  run(command, {
+    cwd: this.cwd
+  });
+};
+
+/**
  * Commits to git via commit message.
  *
  * @param {string} message - The commit message.
@@ -362,6 +392,22 @@ Git.prototype.push = function(branch) {
   run(['git push -q', Git.REPO, branch], {
     cwd: this.cwd
   });
+};
+
+/**
+ * Deinits a submodule.
+ *
+ * @param {git} submodule - The submodule instance.
+ */
+Git.prototype.deinit = function(submodule) {
+  var options = {
+    cwd: this.cwd
+  };
+
+  run(['git submodule deinit -f', submodule.alias], options);
+  run(['git rm -rf', submodule.alias], options);
+  run('git rm -rf .gitmodules', options);
+  rm('-rf', path.resolve('.git/modules', submodule.alias));
 };
 
 module.exports.git = new Git();
