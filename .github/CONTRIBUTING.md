@@ -176,7 +176,7 @@ Checklist:
 
 All of the documentation is powered by JSDoc, we parse it into JSON and feed it to an [application](https://github.com/GoogleCloudPlatform/gcloud-common/tree/master/site) built in Angular. Hopefully our CI builds and updates the documentation for each successful merge to master, but if for whatever reason a manual update is required please refer to the following steps.
 
-We can build the documentation using the `npm run prepare-docs` command. This command optionally accepts two parameters.
+We can build the documentation using the `npm run prepare-ghpages` command. This command optionally accepts two parameters.
 
 * module - The name of the module to build (e.g. `google-cloud`).
 * version - The target version of the module. (e.g. `0.43.0`) Defaults to master.
