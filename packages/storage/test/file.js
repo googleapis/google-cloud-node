@@ -868,9 +868,9 @@ describe('File', function() {
           .resume();
       });
 
-      it('should default to md5 validation', function(done) {
+      it('should default to crc32c validation', function(done) {
         file.requestStream = getFakeSuccessfulRequest(data, {
-          headers: { 'x-goog-hash': 'md5=fakefakefake' }
+          headers: { 'x-goog-hash': 'crc32c=fakefakefake' }
         });
 
         file.createReadStream()
@@ -883,7 +883,7 @@ describe('File', function() {
 
       it('should ignore a data mismatch if validation: false', function(done) {
         file.requestStream = getFakeSuccessfulRequest(data, {
-          headers: { 'x-goog-hash': 'md5=fakefakefake' }
+          headers: { 'x-goog-hash': 'crc32c=fakefakefake' }
         });
 
         file.createReadStream({ validation: false })
@@ -896,12 +896,26 @@ describe('File', function() {
         it('should destroy after failed validation', function(done) {
           file.requestStream = getFakeSuccessfulRequest(
             'bad-data',
-            fakeResponse.crc32c
+            fakeResponse.md5
           );
 
           var readStream = file.createReadStream({ validation: 'md5' });
           readStream.destroy = function(err) {
             assert.strictEqual(err.code, 'CONTENT_DOWNLOAD_MISMATCH');
+            done();
+          };
+          readStream.resume();
+        });
+
+        it('should destroy if MD5 is requested but absent', function(done) {
+          file.requestStream = getFakeSuccessfulRequest(
+            'bad-data',
+            fakeResponse.crc32c
+          );
+
+          var readStream = file.createReadStream({ validation: 'md5' });
+          readStream.destroy = function(err) {
+            assert.strictEqual(err.code, 'MD5_NOT_AVAILABLE');
             done();
           };
           readStream.resume();
@@ -1315,6 +1329,29 @@ describe('File', function() {
 
         writable.write(data);
         writable.end();
+      });
+
+      it('should emit an error if MD5 is requested but absent', function(done) {
+        var writable = file.createWriteStream({validation: 'md5'});
+
+        file.startResumableUpload_ = function(stream) {
+          setImmediate(function() {
+            file.metadata = { crc32c: 'not-md5' };
+            stream.emit('complete');
+          });
+        };
+
+        file.delete = function(cb) {
+          cb();
+        };
+
+        writable.write(data);
+        writable.end();
+
+        writable.on('error', function(err) {
+          assert.equal(err.code, 'MD5_NOT_AVAILABLE');
+          done();
+        });
       });
 
       it('should emit a different error if delete fails', function(done) {
