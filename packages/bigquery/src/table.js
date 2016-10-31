@@ -1015,18 +1015,19 @@ Table.prototype.import = function(source, metadata, callback) {
  * //-
  * function insertHandler(err, insertErrors, apiResponse) {
  *   // err (object):
- *   //   An API error occurred.
+ *   //   An API error or partial failure occurred.
  *
- *   // insertErrors (object[]):
- *   //   If populated, some rows failed to insert, while others may have
- *   //   succeeded.
- *   //
- *   // insertErrors[].row (original individual row object passed to `insert`)
- *   // insertErrors[].errors[].reason
- *   // insertErrors[].errors[].message
+ *   if (err.name === 'PartialFailureError') {
+ *     // Some rows failed to insert, while others may have succeeded.
  *
- *   // See https://developers.google.com/bigquery/troubleshooting-errors for
- *   // recommendations on handling errors.
+ *     // err.errors (object[]):
+ *     // err.errors[].row (original individual row object passed to `insert`)
+ *     // err.errors[].errors[].reason
+ *     // err.errors[].errors[].message
+ *
+ *     // See https://developers.google.com/bigquery/troubleshooting-errors for
+ *     // recommendations on handling errors.
+ *   }
  * }
  *
  * //-
@@ -1062,12 +1063,7 @@ Table.prototype.insert = function(rows, options, callback) {
     uri: '/insertAll',
     json: json
   }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
-
-    var failedToInsert = (resp.insertErrors || []).map(function(insertError) {
+    var partialFailures = (resp.insertErrors || []).map(function(insertError) {
       return {
         errors: insertError.errors.map(function(error) {
           return {
@@ -1078,6 +1074,18 @@ Table.prototype.insert = function(rows, options, callback) {
         row: json.rows[insertError.index].json
       };
     });
+
+    if (failedToInsert.length > 0) {
+      err = new common.util.PartialFailureError({
+        errors: partialFailures,
+        response: resp
+      });
+    }
+
+    if (err) {
+      callback(err, null, resp);
+      return;
+    }
 
     callback(null, failedToInsert, resp);
   });

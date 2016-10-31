@@ -262,14 +262,15 @@ Vision.prototype.annotate = function(requests, callback) {
  *
  * //-
  * // It's possible for part of your request to be completed successfully, while
- * // a single feature request was not successful. Each returned detection will
- * // have an `errors` array, including any of these errors which may have
- * // occurred.
+ * // a single feature request was not successful.
  * //-
  * vision.detect('malformed-image.jpg', types, function(err, detections) {
- *   if (detections.faces.errors.length > 0) {
- *     // Errors occurred while trying to use this image for a face annotation.
+ *   if (err && err.name === 'PartialFailureError') {
+ *     detections[].errors[].message = 'Why the error occurred'
  *   }
+ *
+ *   // `detections` will still be populated with all of the results that could
+ *   // be annotated.
  * });
  *
  * //-
@@ -385,16 +386,30 @@ Vision.prototype.detect = function(images, options, callback) {
       }
 
       var originalResp = extend(true, {}, resp);
+      var partialFailureErrors = [];
 
       var detections = images
         .map(groupDetectionsByImage)
         .map(assignTypeToEmptyAnnotations)
         .map(combineErrors)
         .map(flattenAnnotations)
-        .map(decorateAnnotations);
+        .map(decorateAnnotations)
+        .filter(function(annotation) {
+          // Remove annotations that had errors.
+          return annotation;
+        });
 
       // If only a single image was given, expose it from the array.
-      callback(null, isSingleImage ? detections[0] : detections, originalResp);
+      var detections = isSingleImage ? detections[0] : detections;
+
+      if (partialFailureErrors.length > 0) {
+        err = new common.util.PartialFailureError({
+          errors: partialFailureErrors,
+          response: originalResp
+        });
+      }
+
+      callback(err, detections, originalResp);
 
       function groupDetectionsByImage() {
         // detections = [
@@ -535,13 +550,18 @@ Vision.prototype.detect = function(images, options, callback) {
           }
         }
 
+        for (var key in annotations) {
+          if (annotations[key].errors.length > 0) {
+            partialFailureErrors.push(annotations.errors);
+            delete annotations[key];
+          }
+        }
+
         if (types.length === 1) {
           // Only a single detection type was asked for, so no need to box in
           // the results. Make them accessible without using a key.
           var key = Object.keys(annotations)[0];
-          var errors = annotations.errors;
           annotations = annotations[key];
-          annotations.errors = errors;
         }
 
         return annotations;
