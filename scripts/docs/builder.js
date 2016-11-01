@@ -18,6 +18,7 @@
 
 require('shelljs/global');
 
+var chalk = require('chalk');
 var flatten = require('lodash.flatten');
 var fs = require('fs');
 var globby = require('globby');
@@ -243,17 +244,23 @@ Bundler.updateDep = function(builder) {
   var bundleVersions = bundleConfig.versions;
   var config = findWhere(manifest.modules, { id: builder.name });
   var versions = config.versions.filter(semver.valid);
-  var bundler, dep;
+  var builderTag = builder.getTagName();
+  var bundler, dep, bundleTag;
 
   for (var i = 0; i < bundleVersions.length - 1; i++) {
     bundler = new Bundler(bundleVersions[i]);
-    git.checkout(bundler.builder.getTagName());
+    bundleTag = bundler.builder.getTagName();
+    git.checkout(bundleTag);
+
     dep = findWhere(bundler.getDeps(), { name: builder.name });
     git.checkout('-');
 
     if (semver.maxSatisfying(versions, dep.version) !== builder.version) {
       break;
     }
+
+    console.log('\n');
+    console.log(chalk.blue('Updating %s with %s docs'), bundleTag, builderTag);
 
     bundler.add(builder);
   }
@@ -426,6 +433,9 @@ function sortByModId(a, b) {
  */
 function build(name, version) {
   var builder = new Builder(name, version);
+
+  console.log('\n');
+  console.log(chalk.blue('Building docs for %s@%s'), name, version);
 
   git.checkout(builder.getTagName());
   builder.build();

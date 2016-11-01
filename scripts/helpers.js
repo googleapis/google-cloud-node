@@ -273,9 +273,13 @@ module.exports.run = run;
  */
 function Git(cwd) {
   this.cwd = cwd || ROOT_DIR;
+  this.branch = {
+    current: run('git rev-parse --abbrev-ref HEAD', { cwd: this.cwd, })
+  };
 }
 
-Git.REPO = 'git@github.com:GoogleCloudPlatform/google-cloud-node.git';
+// ssh fails on AppVeyor
+Git.REPO = 'https://github.com/GoogleCloudPlatform/google-cloud-node.git';
 
 /**
  * Checks out a branch.
@@ -283,9 +287,24 @@ Git.REPO = 'git@github.com:GoogleCloudPlatform/google-cloud-node.git';
  * @param {string} branch - The branch to check out.
  */
 Git.prototype.checkout = function(branch) {
+  // trying to checkout the same branch.. so we'll skip it
+  if (this.branch.current === branch) {
+    this.branch.previous = branch;
+    return;
+  }
+
+  // checking out previous branch.. check if they are the same and skip
+  if (branch === '-' && this.branch.current === this.branch.previous) {
+    delete this.branch.previous;
+    return;
+  }
+
   run(['git checkout', branch], {
     cwd: this.cwd
   });
+
+  this.branch.previous = this.branch.current;
+  this.branch.current = branch;
 };
 
 /**
@@ -304,7 +323,7 @@ Git.prototype.submodule = function(branch, alias) {
 
   var git = new Git(path.join(this.cwd, alias));
 
-  git.branch = branch;
+  git.branch.current = branch;
   git.alias = alias;
 
   return git;
