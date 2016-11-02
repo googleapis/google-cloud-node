@@ -249,6 +249,35 @@ describe('common/util', function() {
     });
   });
 
+  describe('PartialFailureError', function() {
+    it('should build correct PartialFailureError', function() {
+      var error = {
+        errors: [ new Error(), new Error() ],
+        response: { a: 'b', c: 'd' },
+        message: 'Partial failure occurred'
+      };
+
+      var partialFailureError = new util.PartialFailureError(error);
+
+      assert.strictEqual(partialFailureError.errors, error.errors);
+      assert.strictEqual(partialFailureError.response, error.response);
+      assert.strictEqual(partialFailureError.message, error.message);
+    });
+
+    it('should use default message', function() {
+      var expectedErrorMessage = 'A failure occurred during this request.';
+
+      var error = {
+        errors: [],
+        response: { a: 'b', c: 'd' }
+      };
+
+      var partialFailureError = new util.PartialFailureError(error);
+
+      assert.strictEqual(partialFailureError.message, expectedErrorMessage);
+    });
+  });
+
   describe('extendGlobalConfig', function() {
     it('should favor `keyFilename` when `credentials` is global', function() {
       var globalConfig = { credentials: {} };

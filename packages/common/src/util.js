@@ -108,6 +108,30 @@ util.ApiError = function(errorBody) {
 };
 
 /**
+ * Custom error type for partial errors returned from the API.
+ *
+ * @param {object} b - Error object.
+ */
+var PartialFailureError = createErrorClass('PartialFailureError', function(b) {
+  var errorObject = b;
+
+  this.errors = errorObject.errors;
+  this.response = errorObject.response;
+
+  var defaultErrorMessage = 'A failure occurred during this request.';
+  this.message = errorObject.message || defaultErrorMessage;
+});
+
+/**
+ * Wrap the PartialFailureError constructor so context isn't lost.
+ *
+ * @param {object} errorBody - Error object.
+ */
+util.PartialFailureError = function(errorBody) {
+  return new PartialFailureError(errorBody);
+};
+
+/**
  * Uniformly process an API response.
  *
  * @param {*} err - Error value.
