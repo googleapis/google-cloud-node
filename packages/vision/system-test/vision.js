@@ -218,18 +218,18 @@ describe('Vision', function() {
               code: 400,
               message:
                 'image-annotator::Bad image data.: Image processing error!',
-              type: TYPES[0]
+              type: 'faces'
             },
             {
               code: 400,
               message:
                 'image-annotator::Bad image data.: Image processing error!',
-              type: TYPES[1]
+              type: 'labels'
             },
             {
               code: 500,
               message: 'image-annotator::error(12): Image processing error!',
-              type: TYPES[2]
+              type: 'safeSearch'
             }
           ]
         });

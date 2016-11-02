@@ -181,6 +181,9 @@ Vision.prototype.annotate = function(requests, callback) {
  *     simplistic representation of the annotation (default: `false`).
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
+ * @param {object[]} callback.err.errors - If present, these represent partial
+ *     failures. It's possible for part of your request to be completed
+ *     successfully, while a single feature request was not successful.
  * @param {object|object[]} callback.detections - If a single detection type was
  *     asked for, it will be returned in its raw form; either an object or array
  *     of objects. If multiple detection types were requested, you will receive
@@ -188,10 +191,6 @@ Vision.prototype.annotate = function(requests, callback) {
  *     `config.types`). Additionally, if multiple images were provided, you will
  *     receive an array of detection objects, each representing an image. See
  *     the examples below for more information.
- * @param {object[]} callback.detections.errors - It's possible for part of your
- *     request to be completed successfully, while a single feature request was
- *     not successful. Each returned detection will have an `errors` array,
- *     including any of these errors which may have occurred.
  * @param {object} callback.apiResponse - Raw API response.
  *
  * @example
@@ -266,7 +265,23 @@ Vision.prototype.annotate = function(requests, callback) {
  * //-
  * vision.detect('malformed-image.jpg', types, function(err, detections) {
  *   if (err && err.name === 'PartialFailureError') {
- *     detections[].errors[].message = 'Why the error occurred'
+ *     err.errors = [
+ *       {
+ *         image: 'malformed-image.jpg',
+ *         errors: [
+ *           {
+ *             code: 400,
+ *             message: 'Bad image data',
+ *             type: 'faces'
+ *           },
+ *           {
+ *             code: 400,
+ *             message: 'Bad image data',
+ *             type: 'labels'
+ *           }
+ *         ]
+ *       }
+ *     ]
  *   }
  *
  *   // `detections` will still be populated with all of the results that could
@@ -481,7 +496,9 @@ Vision.prototype.detect = function(images, options, callback) {
           var annotationKey = Object.keys(annotation)[0];
 
           if (annotationKey === 'error') {
-            annotation.error.type = types[index];
+            var userInputType = types[index];
+            var respNameType = typeShortNameToRespName[userInputType];
+            annotation.error.type = typeRespNameToShortName[respNameType];
             errors.push(Vision.formatError_(annotation.error));
           }
         });
