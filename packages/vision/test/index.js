@@ -194,7 +194,7 @@ describe('Vision', function() {
     });
   });
 
-  describe('detect', function() {
+  describe.only('detect', function() {
     var findImages_;
     var formatFaceAnnotation_;
     var formatImagePropertiesAnnotation_;
@@ -210,6 +210,11 @@ describe('Vision', function() {
       {
         content: 'aGk='
       }
+    ];
+
+    var MULTIPLE_IMAGES = [
+      IMAGES[0],
+      IMAGES[0]
     ];
 
     before(function() {
@@ -379,8 +384,7 @@ describe('Vision', function() {
         assert.ifError(err);
         assert.deepEqual(detections, {
           faces: [],
-          labels: [],
-          errors: []
+          labels: []
         });
         done();
       });
@@ -451,7 +455,6 @@ describe('Vision', function() {
       vision.detect(IMAGE, types, function(err, detections) {
         assert.ifError(err);
 
-        expected.errors = [];
         assert(deepStrictEqual(detections, expected));
 
         done();
@@ -480,14 +483,13 @@ describe('Vision', function() {
       vision.detect(IMAGE, types, function(err, detections) {
         assert.ifError(err);
 
-        expected.errors = [];
         assert(deepStrictEqual(detections, expected));
 
         done();
       });
     });
 
-    it('should return annotation errors', function(done) {
+    it('should return partial failure errors', function(done) {
       var error1 = {};
       var error2 = {};
 
@@ -496,27 +498,104 @@ describe('Vision', function() {
         { error: error2 }
       ];
 
-      var formattedError = {};
+      var types = ['faces', 'properties'];
 
-      vision.formatError_ = function() {
-        return formattedError;
+      Vision.formatError_ = function(err) {
+        err.formatted = true;
+        return err;
       };
 
       vision.annotate = function(config, callback) {
         callback(null, annotations);
       };
 
-      vision.detect(IMAGE, ['faces', 'properties'], function(err, detections) {
-        assert.ifError(err);
+      vision.detect(IMAGE, types, function(err, detections) {
+        assert.strictEqual(err.name, 'PartialFailureError');
 
-        assert(deepStrictEqual(detections, {
-          faces: [],
-          properties: {},
-          errors: [
-            formattedError,
-            formattedError
-          ]
-        }));
+        assert.deepEqual(err.errors, [
+          {
+            image: IMAGE,
+            errors: [
+              extend(error1, {
+                type: types[0],
+                formatted: true
+              }),
+              extend(error2, {
+                type: types[1],
+                formatted: true
+              })
+            ]
+          }
+        ]);
+
+        assert.deepEqual(detections, {});
+
+        done();
+      });
+    });
+
+    it('should return partial failure errors for multi images', function(done) {
+      var error1 = {};
+      var error2 = {};
+      var error3 = {};
+      var error4 = {};
+
+      var annotations = [
+        { error: error1 },
+        { error: error2 },
+        { error: error3 },
+        { error: error4 }
+      ];
+
+      var images = ['./image.jpg', './image-2.jpg'];
+      var types = ['faces', 'properties'];
+
+      Vision.findImages_ = function(images, callback) {
+        callback(null, MULTIPLE_IMAGES);
+      };
+
+      Vision.formatError_ = function(err) {
+        err.formatted = true;
+        return err;
+      };
+
+      vision.annotate = function(config, callback) {
+        callback(null, annotations);
+      };
+
+      vision.detect(images, types, function(err, detections) {
+        assert.strictEqual(err.name, 'PartialFailureError');
+
+        assert.deepEqual(err.errors, [
+          {
+            image: images[0],
+            errors: [
+              extend(error1, {
+                type: types[0],
+                formatted: true
+              }),
+              extend(error2, {
+                type: types[1],
+                formatted: true
+              })
+            ]
+          },
+          {
+            image: images[1],
+            errors: [
+              extend(error3, {
+                type: types[0],
+                formatted: true
+              }),
+              extend(error4, {
+                type: types[1],
+                formatted: true
+              })
+            ]
+          }
+        ]);
+
+        assert.deepEqual(detections, [{}, {}]);
 
         done();
       });
@@ -530,10 +609,7 @@ describe('Vision', function() {
       vision.detect(IMAGE, ['face'], function(err, detection) {
         assert.ifError(err);
 
-        var expected = [];
-        expected.errors = [];
-
-        assert.deepEqual(detection, expected);
+        assert.deepEqual(detection, []);
 
         done();
       });
@@ -631,8 +707,7 @@ describe('Vision', function() {
           landmarks: entityAnnotation,
           logos: entityAnnotation,
           safeSearch: safeSearchAnnotation,
-          text: entityAnnotation,
-          errors: []
+          text: entityAnnotation
         },
         {
           faces: faceAnnotation,
@@ -641,13 +716,11 @@ describe('Vision', function() {
           landmarks: entityAnnotation,
           logos: entityAnnotation,
           safeSearch: safeSearchAnnotation,
-          text: entityAnnotation,
-          errors: []
+          text: entityAnnotation
         }
       ];
 
       var types = Object.keys(expected[0]);
-      types.pop(); // remove `errors`
 
       vision.detect([IMAGE, IMAGE], types, function(err, detections) {
         assert.ifError(err);

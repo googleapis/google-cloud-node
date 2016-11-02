@@ -334,7 +334,6 @@ Vision.prototype.detect = function(images, options, callback) {
   };
 
   var typeRespNameToShortName = {
-    errors: 'errors',
     faceAnnotations: 'faces',
     imagePropertiesAnnotation: 'properties',
     labelAnnotations: 'labels',
@@ -344,7 +343,7 @@ Vision.prototype.detect = function(images, options, callback) {
     textAnnotations: 'text'
   };
 
-  Vision.findImages_(images, function(err, images) {
+  Vision.findImages_(images, function(err, foundImages) {
     if (err) {
       callback(err);
       return;
@@ -352,7 +351,7 @@ Vision.prototype.detect = function(images, options, callback) {
 
     var config = [];
 
-    images.forEach(function(image) {
+    foundImages.forEach(function(image) {
       types.forEach(function(type) {
         var typeName = typeShortNameToFullName[type];
 
@@ -388,25 +387,23 @@ Vision.prototype.detect = function(images, options, callback) {
       var originalResp = extend(true, {}, resp);
       var partialFailureErrors = [];
 
-      var detections = images
+      var detections = foundImages
         .map(groupDetectionsByImage)
         .map(assignTypeToEmptyAnnotations)
-        .map(combineErrors)
+        .map(removeDetectionsWithErrors)
         .map(flattenAnnotations)
-        .map(decorateAnnotations)
-        .filter(function(annotation) {
-          // Remove annotations that had errors.
-          return annotation;
-        });
-
-      // If only a single image was given, expose it from the array.
-      var detections = isSingleImage ? detections[0] : detections;
+        .map(decorateAnnotations);
 
       if (partialFailureErrors.length > 0) {
         err = new common.util.PartialFailureError({
           errors: partialFailureErrors,
           response: originalResp
         });
+      }
+
+      if (isSingleImage && detections.length > 0) {
+        // If only a single image was given, expose it from the array.
+        detections = detections[0];
       }
 
       callback(err, detections, originalResp);
@@ -443,7 +440,7 @@ Vision.prototype.detect = function(images, options, callback) {
         //
         // After:
         //   [
-        //     { faceAnnotations: {} },
+        //     { faceAnnotations: [] },
         //     { labelAnnotations: {...} }
         //   ]
         return annotations.map(function(annotation, index) {
@@ -459,44 +456,44 @@ Vision.prototype.detect = function(images, options, callback) {
         });
       }
 
-      function combineErrors(annotations) {
+      function removeDetectionsWithErrors(annotations, index) {
         // Before:
         //   [
         //     {
-        //       faceAnnotations: [],
-        //       error: {...}
+        //       faceAnnotations: []
         //     },
         //     {
-        //       imagePropertiesAnnotation: {},
-        //       error: {...}
+        //       error: {...},
+        //       imagePropertiesAnnotation: {}
         //     }
         //   ]
 
         // After:
         //   [
-        //     faceAnnotations: [],
-        //     imagePropertiesAnnotation: {},
-        //     errors: [
-        //       {...},
-        //       {...}
-        //     ]
+        //     {
+        //       faceAnnotations: []
+        //     },
+        //     undefined
         //   ]
         var errors = [];
 
-        annotations.forEach(function(annotation) {
+        annotations.forEach(function(annotation, index) {
           var annotationKey = Object.keys(annotation)[0];
 
           if (annotationKey === 'error') {
-            errors.push(annotation.error);
-            delete annotation.error;
+            annotation.error.type = types[index];
+            errors.push(Vision.formatError_(annotation.error));
           }
-
-          return annotation;
         });
 
-        annotations.push({
-          errors: errors
-        });
+        if (errors.length > 0) {
+          partialFailureErrors.push({
+            image: isSingleImage ? images : images[index],
+            errors: errors
+          });
+
+          return;
+        }
 
         return annotations;
       }
@@ -547,13 +544,6 @@ Vision.prototype.detect = function(images, options, callback) {
             delete annotations[annotationType];
             var typeShortName = typeRespNameToShortName[annotationType];
             annotations[typeShortName] = formattedAnnotationGroup;
-          }
-        }
-
-        for (var key in annotations) {
-          if (annotations[key].errors.length > 0) {
-            partialFailureErrors.push(annotations.errors);
-            delete annotations[key];
           }
         }
 
