@@ -87,6 +87,9 @@ This will only allow 10 at a time to go through, making it easier on the API to 
 
 Reference Issue: [#1101](https://github.com/GoogleCloudPlatform/google-cloud-node/issues/1101)
 
-## GRPC received a message exceeding the max size.
 
-If you're seeing an error message saying that your grpc request is exceeding the max size, you may need to send smaller individual request. Request bodies should not exceed 4MB.
+## gRPC received a message exceeding the max size.
+
+If you're seeing an error message saying that your gRPC request is exceeding the max size, you may need to send smaller individual requests. Request bodies should not exceed 4MB.
+
+This error will generally only occur in methods that can insert large datasets like [bigtable/table#insert](https://googlecloudplatform.github.io/google-cloud-node/#/docs/bigtable/0.5.0/bigtable/table?method=insert).
