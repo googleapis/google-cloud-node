@@ -87,7 +87,18 @@ describe('Resource', function() {
           return;
         }
 
-        project.create(done);
+        project.create(function(err, project, operation) {
+          if (err) {
+            done(err);
+            return;
+          }
+
+          console.log(operation)
+
+          operation
+            .on('error', done)
+            .on('complete', done);
+        });
       });
     });
 
@@ -106,7 +117,7 @@ describe('Resource', function() {
       project.delete(done);
     });
 
-    it('should have created the project', function() {
+    it.only('should have created the project', function() {
       assert.strictEqual(project.metadata.projectId, PROJECT_ID);
     });
 

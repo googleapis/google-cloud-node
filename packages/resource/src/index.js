@@ -64,7 +64,7 @@ function Resource(options) {
   }
 
   var config = {
-    baseUrl: 'https://cloudresourcemanager.googleapis.com/v1beta1',
+    baseUrl: 'https://cloudresourcemanager.googleapis.com/v1',
     scopes: ['https://www.googleapis.com/auth/cloud-platform'],
     projectIdRequired: false,
     packageJson: require('../package.json')
@@ -84,11 +84,11 @@ util.inherits(Resource, common.Service);
  * gcloud SDK.**
  *
  * @resource [Projects Overview]{@link https://cloud.google.com/compute/docs/networking#networks}
- * @resource [projects: create API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/create}
+ * @resource [projects: create API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/create}
  *
  * @param {string} name - Name of the project.
  * @param {object=} options - See a
- *     [Project resource](https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project).
+ *     [Project resource](https://cloud.google.com/resource-manager/reference/rest/v1/projects#Project).
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:resource/project} callback.project - The created Project
@@ -131,17 +131,19 @@ Resource.prototype.createProject = function(id, options, callback) {
     }
 
     var project = self.project(resp.projectId);
-    project.metadata = resp;
 
-    callback(null, project, resp);
+    var operation = new common.GrpcOperation(this, resp.name);
+    operation.metadata = resp;
+
+    callback(null, project, operation, resp);
   });
 };
 
 /**
  * Get a list of projects.
  *
- * @resource [Projects Overview]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects}
- * @resource [projects: list API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/list}
+ * @resource [Projects Overview]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects}
+ * @resource [projects: list API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/list}
  *
  * @param {object=} options - Operation search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
