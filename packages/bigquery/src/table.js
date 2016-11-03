@@ -1021,7 +1021,7 @@ Table.prototype.import = function(source, metadata, callback) {
  *     // Some rows failed to insert, while others may have succeeded.
  *
  *     // err.errors (object[]):
- *     // err.errors[].row (original individual row object passed to `insert`)
+ *     // err.errors[].row (original row object passed to `insert`)
  *     // err.errors[].errors[].reason
  *     // err.errors[].errors[].message
  *
@@ -1063,6 +1063,11 @@ Table.prototype.insert = function(rows, options, callback) {
     uri: '/insertAll',
     json: json
   }, function(err, resp) {
+    if (err) {
+      callback(err, resp);
+      return;
+    }
+
     var partialFailures = (resp.insertErrors || []).map(function(insertError) {
       return {
         errors: insertError.errors.map(function(error) {
@@ -1071,23 +1076,18 @@ Table.prototype.insert = function(rows, options, callback) {
             reason: error.reason
           };
         }),
-        row: json.rows[insertError.index].json
+        row: rows[insertError.index]
       };
     });
 
-    if (failedToInsert.length > 0) {
+    if (partialFailures.length > 0) {
       err = new common.util.PartialFailureError({
         errors: partialFailures,
         response: resp
       });
     }
 
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
-
-    callback(null, failedToInsert, resp);
+    callback(err, resp);
   });
 };
 
