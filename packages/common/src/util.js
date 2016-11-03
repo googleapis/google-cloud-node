@@ -72,7 +72,7 @@ util.noop = noop;
  *
  * @param {object} errorBody - Error object.
  */
-var ApiError = createErrorClass('ApiError', function(errorBody) {
+util.ApiError = createErrorClass('ApiError', function(errorBody) {
   this.code = errorBody.code;
   this.errors = errorBody.errors;
   this.response = errorBody.response;
@@ -99,20 +99,11 @@ var ApiError = createErrorClass('ApiError', function(errorBody) {
 });
 
 /**
- * Wrap the ApiError constructor so context isn't lost.
- *
- * @param {object} errorBody - Error object.
- */
-util.ApiError = function(errorBody) {
-  return new ApiError(errorBody);
-};
-
-/**
  * Custom error type for partial errors returned from the API.
  *
  * @param {object} b - Error object.
  */
-var PartialFailureError = createErrorClass('PartialFailureError', function(b) {
+util.PartialFailureError = createErrorClass('PartialFailureError', function(b) {
   var errorObject = b;
 
   this.errors = errorObject.errors;
@@ -121,15 +112,6 @@ var PartialFailureError = createErrorClass('PartialFailureError', function(b) {
   var defaultErrorMessage = 'A failure occurred during this request.';
   this.message = errorObject.message || defaultErrorMessage;
 });
-
-/**
- * Wrap the PartialFailureError constructor so context isn't lost.
- *
- * @param {object} errorBody - Error object.
- */
-util.PartialFailureError = function(errorBody) {
-  return new PartialFailureError(errorBody);
-};
 
 /**
  * Uniformly process an API response.
