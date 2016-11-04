@@ -675,7 +675,9 @@ Table.prototype.getRows = function(options, callback) {
 };
 
 /**
- * Insert or update rows in your table.
+ * Insert or update rows in your table. It should be noted that gRPC only allows
+ * you to send payloads that are less than or equal to 4MB. If you're inserting
+ * more than that you may need to send smaller individual requests.
  *
  * @param {object|object[]} entries - List of entries to be inserted.
  *     See {module:bigtable/table#mutate}.
