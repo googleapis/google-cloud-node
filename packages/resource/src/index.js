@@ -132,7 +132,7 @@ Resource.prototype.createProject = function(id, options, callback) {
 
     var project = self.project(resp.projectId);
 
-    var operation = new common.GrpcOperation(this, resp.name);
+    var operation = self.operation(resp.name);
     operation.metadata = resp;
 
     callback(null, project, operation, resp);
@@ -253,6 +253,31 @@ Resource.prototype.getProjects = function(options, callback) {
 Resource.prototype.getProjectsStream =
   common.paginator.streamify('getProjects');
 
+/*! Developer Documentation
+ *
+ * @returns {module:common/operation}
+ */
+/**
+ * Get a reference to an existing operation.
+ *
+ * @throws {Error} If a name is not provided.
+ *
+ * @param {string} name - The name of the operation.
+ *
+ * @example
+ * var operation = resource.operation('68850831366825');
+ */
+Resource.prototype.operation = function(name) {
+  if (!name) {
+    throw new Error('A name must be specified for an operation.');
+  }
+
+  return new common.Operation({
+    parent: this,
+    id: name
+  });
+};
+
 /**
  * Create a Project object. See {module:resoucemanager/createProject} to create
  * a project.
@@ -287,7 +312,10 @@ common.paginator.extend(Resource, ['getProjects']);
  * that a callback is omitted.
  */
 common.util.promisifyAll(Resource, {
-  exclude: ['project']
+  exclude: [
+    'operation',
+    'project'
+  ]
 });
 
 Resource.Project = Project;
