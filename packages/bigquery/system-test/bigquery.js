@@ -18,6 +18,7 @@
 
 var assert = require('assert');
 var async = require('async');
+var exec = require('methmeth');
 var fs = require('fs');
 var uuid = require('node-uuid');
 
@@ -210,11 +211,29 @@ describe('BigQuery', function() {
 
       job.getQueryResults(function(err, rows) {
         assert.ifError(err);
-        assert.equal(rows.length, 100);
-        assert.equal(typeof rows[0].url, 'string');
+        assert.strictEqual(rows.length, 100);
+        assert.strictEqual(typeof rows[0].url, 'string');
         done();
       });
     });
+  });
+
+  it('should run a query job as a promise', function() {
+    var job;
+
+    return bigquery.startQuery(query)
+      .then(function(response) {
+        job = response[0];
+        return job.promise();
+      })
+      .then(function() {
+        return job.getQueryResults();
+      })
+      .then(function(response) {
+        var rows = response[0];
+        assert.strictEqual(rows.length, 100);
+        assert.strictEqual(typeof rows[0].url, 'string');
+      });
   });
 
   it('should get query results as a stream', function(done) {
@@ -606,9 +625,7 @@ describe('BigQuery', function() {
           return;
         }
 
-        async.each(files, function(file, next) {
-          file.delete(next);
-        }, function(err) {
+        async.each(files, exec('delete'), function(err) {
           if (err) {
             callback(err);
             return;
@@ -640,9 +657,7 @@ describe('BigQuery', function() {
         return;
       }
 
-      async.each(datasets, function(dataset, next) {
-        dataset.delete({ force: true }, next);
-      }, callback);
+      async.each(datasets, exec('delete', { force: true }), callback);
     });
   }
 });

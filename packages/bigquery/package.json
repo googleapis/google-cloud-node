@@ -55,13 +55,13 @@
     "duplexify": "^3.2.0",
     "extend": "^3.0.0",
     "is": "^3.0.1",
-    "modelo": "^4.2.0",
     "stream-events": "^1.0.1",
     "string-format-obj": "^1.0.0"
   },
   "devDependencies": {
     "@google-cloud/storage": "*",
     "async": "^2.0.1",
+    "methmeth": "^1.1.0",
     "mocha": "^3.0.1",
     "node-uuid": "^1.4.3",
     "propprop": "^0.3.0",

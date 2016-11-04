@@ -23,7 +23,7 @@
 var common = require('@google-cloud/common');
 var events = require('events');
 var is = require('is');
-var modelo = require('modelo');
+var util = require('util');
 
 /*! Developer Documentation
  *
@@ -144,14 +144,13 @@ function Job(bigQuery, id) {
     getMetadata: true
   };
 
-  common.ServiceObject.call(this, {
+  var self = this;
+
+  common.Operation.call(this, {
     parent: bigQuery,
     baseUrl: '/jobs',
-    id: id,
-    methods: methods
+    id: id
   });
-
-  events.EventEmitter.call(this);
 
   this.bigQuery = bigQuery;
 
@@ -166,14 +165,9 @@ function Job(bigQuery, id) {
       return reqOpts;
     }
   });
-
-  this.completeListeners = 0;
-  this.hasActiveListeners = false;
-
-  this.listenForEvents_();
 }
 
-modelo.inherits(Job, common.ServiceObject, events.EventEmitter);
+util.inherits(Job, common.Operation);
 
 /**
  * Cancel a job. Use {module:bigquery/job#getMetadata} to see if the cancel
@@ -313,93 +307,33 @@ Job.prototype.getQueryResultsStream = function(options) {
 };
 
 /**
- * Convenience method that wraps the `complete` and `error` events in a
- * Promise.
+ * Poll for a status update. Execute the callback:
  *
- * @return {promise}
- *
- * @example
- * job.promise().then(function(metadata) {
- *   // The job is complete.
- * }, function(err) {
- *   // An error occurred during the job.
- * });
- */
-Job.prototype.promise = function() {
-  var self = this;
-
-  return new self.Promise(function(resolve, reject) {
-    self
-      .on('error', reject)
-      .on('complete', function(metadata) {
-        resolve([metadata]);
-      });
-  });
-};
-
-/**
- * Begin listening for events on the job. This method keeps track of how many
- * "complete" listeners are registered and removed, making sure polling is
- * handled automatically.
- *
- * As long as there is one active "complete" listener, the connection is open.
- * When there are no more listeners, the polling stops.
+ *   - callback(err): Job failed
+ *   - callback(): Job incomplete
+ *   - callback(null, metadata): Job complete
  *
  * @private
- */
-Job.prototype.listenForEvents_ = function() {
-  var self = this;
-
-  this.on('newListener', function(event) {
-    if (event === 'complete') {
-      self.completeListeners++;
-
-      if (!self.hasActiveListeners) {
-        self.hasActiveListeners = true;
-        self.startPolling_();
-      }
-    }
-  });
-
-  this.on('removeListener', function(event) {
-    if (event === 'complete' && --self.completeListeners === 0) {
-      self.hasActiveListeners = false;
-    }
-  });
-};
-
-/**
- * Poll `getMetadata` to check the operation's status. This runs a loop to ping
- * the API on an interval.
  *
- * Note: This method is automatically called once a "complete" event handler is
- * registered on the operation.
- *
- * @private
+ * @param {function} callback
  */
-Job.prototype.startPolling_ = function() {
-  var self = this;
-
-  if (!this.hasActiveListeners) {
-    return;
-  }
-
+Job.prototype.poll_ = function(callback) {
   this.getMetadata(function(err, metadata, apiResponse) {
     if (apiResponse.status && apiResponse.status.errors) {
       err = common.util.ApiError(apiResponse.status);
     }
 
     if (err) {
-      self.emit('error', err);
+      callback(err);
       return;
     }
 
     if (metadata.status.state !== 'DONE') {
-      setTimeout(self.startPolling_.bind(self), 500);
+      callback();
       return;
     }
 
-    self.emit('complete', metadata);
+    callback(null, metadata);
   });
 };
 
