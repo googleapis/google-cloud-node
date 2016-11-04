@@ -33,6 +33,12 @@ exports.GrpcService = require('./grpc-service.js');
 exports.GrpcServiceObject = require('./grpc-service-object.js');
 
 /**
+ * @type {module:common/operation}
+ * @private
+ */
+exports.Operation = require('./operation.js');
+
+/**
  * @type {module:common/paginator}
  * @private
  */
