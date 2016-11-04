@@ -683,30 +683,21 @@ Table.prototype.getRows = function(options, callback) {
  *     See {module:bigtable/table#mutate}.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {object[]} callback.insertErrors - A status object for each failed
- *     insert.
+ * @param {object[]} callback.err.errors - If present, these represent partial
+ *     failures. It's possible for part of your request to be completed
+ *     successfully, while the other part was not.
  *
  * @example
- * var callback = function(err, insertErrors) {
+ * var callback = function(err) {
  *   if (err) {
- *     // Error handling omitted.
- *   }
+ *     // An API error or partial failure occurred.
  *
- *   // insertErrors = [
- *   //   {
- *   //     code: 500,
- *   //     message: 'Internal Server Error',
- *   //     entry: {
- *   //       key: 'gwashington',
- *   //       data: {
- *   //         follows: {
- *   //           jadams: 1
- *   //         }
- *   //       }
- *   //     }
- *   //   },
- *   //   ...
- *   // ]
+ *     if (err.name === 'PartialFailureError') {
+ *       // err.errors[].code = 'Response code'
+ *       // err.errors[].message = 'Error message'
+ *       // err.errors[].entry = The original entry
+ *     }
+ *   }
  * };
  *
  * var entries = [
@@ -769,8 +760,9 @@ Table.prototype.insert = function(entries, callback) {
  *     deleted.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {object[]} callback.mutationErrors - A status object for each failed
- *     mutation.
+ * @param {object[]} callback.err.errors - If present, these represent partial
+ *     failures. It's possible for part of your request to be completed
+ *     successfully, while the other part was not.
  *
  * @example
  * //-
