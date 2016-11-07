@@ -181,6 +181,9 @@ Vision.prototype.annotate = function(requests, callback) {
  *     simplistic representation of the annotation (default: `false`).
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
+ * @param {object[]} callback.err.errors - If present, these represent partial
+ *     failures. It's possible for part of your request to be completed
+ *     successfully, while a single feature request was not successful.
  * @param {object|object[]} callback.detections - If a single detection type was
  *     asked for, it will be returned in its raw form; either an object or array
  *     of objects. If multiple detection types were requested, you will receive
@@ -188,10 +191,6 @@ Vision.prototype.annotate = function(requests, callback) {
  *     `config.types`). Additionally, if multiple images were provided, you will
  *     receive an array of detection objects, each representing an image. See
  *     the examples below for more information.
- * @param {object[]} callback.detections.errors - It's possible for part of your
- *     request to be completed successfully, while a single feature request was
- *     not successful. Each returned detection will have an `errors` array,
- *     including any of these errors which may have occurred.
  * @param {object} callback.apiResponse - Raw API response.
  *
  * @example
@@ -262,14 +261,35 @@ Vision.prototype.annotate = function(requests, callback) {
  *
  * //-
  * // It's possible for part of your request to be completed successfully, while
- * // a single feature request was not successful. Each returned detection will
- * // have an `errors` array, including any of these errors which may have
- * // occurred.
+ * // a single feature request was not successful.
  * //-
  * vision.detect('malformed-image.jpg', types, function(err, detections) {
- *   if (detections.faces.errors.length > 0) {
- *     // Errors occurred while trying to use this image for a face annotation.
+ *   if (err) {
+ *     // An API error or partial failure occurred.
+ *
+ *     if (err.name === 'PartialFailureError') {
+ *       // err.errors = [
+ *       //   {
+ *       //     image: 'malformed-image.jpg',
+ *       //     errors: [
+ *       //       {
+ *       //         code: 400,
+ *       //         message: 'Bad image data',
+ *       //         type: 'faces'
+ *       //       },
+ *       //       {
+ *       //         code: 400,
+ *       //         message: 'Bad image data',
+ *       //         type: 'labels'
+ *       //       }
+ *       //     ]
+ *       //   }
+ *       // ]
+ *     }
  *   }
+ *
+ *   // `detections` will still be populated with all of the results that could
+ *   // be annotated.
  * });
  *
  * //-
@@ -333,7 +353,6 @@ Vision.prototype.detect = function(images, options, callback) {
   };
 
   var typeRespNameToShortName = {
-    errors: 'errors',
     faceAnnotations: 'faces',
     imagePropertiesAnnotation: 'properties',
     labelAnnotations: 'labels',
@@ -343,7 +362,7 @@ Vision.prototype.detect = function(images, options, callback) {
     textAnnotations: 'text'
   };
 
-  Vision.findImages_(images, function(err, images) {
+  Vision.findImages_(images, function(err, foundImages) {
     if (err) {
       callback(err);
       return;
@@ -351,7 +370,7 @@ Vision.prototype.detect = function(images, options, callback) {
 
     var config = [];
 
-    images.forEach(function(image) {
+    foundImages.forEach(function(image) {
       types.forEach(function(type) {
         var typeName = typeShortNameToFullName[type];
 
@@ -385,16 +404,28 @@ Vision.prototype.detect = function(images, options, callback) {
       }
 
       var originalResp = extend(true, {}, resp);
+      var partialFailureErrors = [];
 
-      var detections = images
+      var detections = foundImages
         .map(groupDetectionsByImage)
         .map(assignTypeToEmptyAnnotations)
-        .map(combineErrors)
+        .map(removeDetectionsWithErrors)
         .map(flattenAnnotations)
         .map(decorateAnnotations);
 
-      // If only a single image was given, expose it from the array.
-      callback(null, isSingleImage ? detections[0] : detections, originalResp);
+      if (partialFailureErrors.length > 0) {
+        err = new common.util.PartialFailureError({
+          errors: partialFailureErrors,
+          response: originalResp
+        });
+      }
+
+      if (isSingleImage && detections.length > 0) {
+        // If only a single image was given, expose it from the array.
+        detections = detections[0];
+      }
+
+      callback(err, detections, originalResp);
 
       function groupDetectionsByImage() {
         // detections = [
@@ -428,7 +459,7 @@ Vision.prototype.detect = function(images, options, callback) {
         //
         // After:
         //   [
-        //     { faceAnnotations: {} },
+        //     { faceAnnotations: [] },
         //     { labelAnnotations: {...} }
         //   ]
         return annotations.map(function(annotation, index) {
@@ -444,44 +475,46 @@ Vision.prototype.detect = function(images, options, callback) {
         });
       }
 
-      function combineErrors(annotations) {
+      function removeDetectionsWithErrors(annotations, index) {
         // Before:
         //   [
         //     {
-        //       faceAnnotations: [],
-        //       error: {...}
+        //       faceAnnotations: []
         //     },
         //     {
-        //       imagePropertiesAnnotation: {},
-        //       error: {...}
+        //       error: {...},
+        //       imagePropertiesAnnotation: {}
         //     }
         //   ]
 
         // After:
         //   [
-        //     faceAnnotations: [],
-        //     imagePropertiesAnnotation: {},
-        //     errors: [
-        //       {...},
-        //       {...}
-        //     ]
+        //     {
+        //       faceAnnotations: []
+        //     },
+        //     undefined
         //   ]
         var errors = [];
 
-        annotations.forEach(function(annotation) {
+        annotations.forEach(function(annotation, index) {
           var annotationKey = Object.keys(annotation)[0];
 
           if (annotationKey === 'error') {
-            errors.push(annotation.error);
-            delete annotation.error;
+            var userInputType = types[index];
+            var respNameType = typeShortNameToRespName[userInputType];
+            annotation.error.type = typeRespNameToShortName[respNameType];
+            errors.push(Vision.formatError_(annotation.error));
           }
-
-          return annotation;
         });
 
-        annotations.push({
-          errors: errors
-        });
+        if (errors.length > 0) {
+          partialFailureErrors.push({
+            image: isSingleImage ? images : images[index],
+            errors: errors
+          });
+
+          return;
+        }
 
         return annotations;
       }
@@ -539,9 +572,7 @@ Vision.prototype.detect = function(images, options, callback) {
           // Only a single detection type was asked for, so no need to box in
           // the results. Make them accessible without using a key.
           var key = Object.keys(annotations)[0];
-          var errors = annotations.errors;
           annotations = annotations[key];
-          annotations.errors = errors;
         }
 
         return annotations;

@@ -97,10 +97,7 @@ describe('Vision', function() {
       vision.detect(url, ['logos'], function(err, logos) {
         assert.ifError(err);
 
-        var expected = ['Google'];
-        expected.errors = [];
-
-        assert.deepEqual(logos, expected);
+        assert.deepEqual(logos, ['Google']);
 
         done();
       });
@@ -111,10 +108,7 @@ describe('Vision', function() {
     vision.detect(file, ['logos'], function(err, logos) {
       assert.ifError(err);
 
-      var expected = ['Google'];
-      expected.errors = [];
-
-      assert.deepEqual(logos, expected);
+      assert.deepEqual(logos, ['Google']);
 
       done();
     });
@@ -125,10 +119,7 @@ describe('Vision', function() {
     vision.detect(buffer, ['logos'], function(err, logos) {
       assert.ifError(err);
 
-      var expected = ['Google'];
-      expected.errors = [];
-
-      assert.deepEqual(logos, expected);
+      assert.deepEqual(logos, ['Google']);
 
       done();
     });
@@ -142,7 +133,6 @@ describe('Vision', function() {
         assert.ifError(err);
 
         assert(is.array(detections));
-        assert(is.array(detections.errors));
 
         done();
       });
@@ -162,15 +152,11 @@ describe('Vision', function() {
 
     it('should return errors', function(done) {
       vision.detect(IMAGES.malformed, TYPES, function(err, detections) {
-        assert.ifError(err);
+        assert.strictEqual(err.name, 'PartialFailureError');
+        assert(is.array(err.errors));
+        assert.strictEqual(err.errors.length, 1);
 
-        assert.deepEqual(detections.faces, []);
-        assert.deepEqual(detections.labels, []);
-        assert.deepEqual(detections.safeSearch, {});
-
-        assert(is.array(detections.errors));
-        assert.strictEqual(detections.errors.length, TYPES.length);
-
+        assert.deepEqual(detections, []);
         done();
       });
     });
@@ -189,10 +175,7 @@ describe('Vision', function() {
         var image2detections = detections[1];
 
         assert(is.array(image1detections));
-        assert(is.array(image1detections.errors));
-
         assert(is.array(image2detections));
-        assert(is.array(image2detections.errors));
 
         done();
       });
@@ -223,16 +206,41 @@ describe('Vision', function() {
       var images = [IMAGES.logo, IMAGES.malformed];
 
       vision.detect(images, TYPES, function(err, detections) {
-        assert.ifError(err);
+        assert.strictEqual(err.name, 'PartialFailureError');
+        assert(is.array(err.errors));
+        assert.strictEqual(err.errors.length, 1);
+
+        var image2errors = err.errors[0];
+        assert.deepEqual(image2errors, {
+          image: IMAGES.malformed,
+          errors: [
+            {
+              code: 400,
+              message:
+                'image-annotator::Bad image data.: Image processing error!',
+              type: 'faces'
+            },
+            {
+              code: 400,
+              message:
+                'image-annotator::Bad image data.: Image processing error!',
+              type: 'labels'
+            },
+            {
+              code: 500,
+              message: 'image-annotator::error(12): Image processing error!',
+              type: 'safeSearch'
+            }
+          ]
+        });
 
         var image1detections = detections[0];
+        assert(is.array(image1detections.faces));
+        assert(is.array(image1detections.labels));
+        assert(is.object(image1detections.safeSearch));
+
         var image2detections = detections[1];
-
-        assert(is.array(image1detections.errors));
-        assert.strictEqual(image1detections.errors.length, 0);
-
-        assert(is.array(image2detections.errors));
-        assert.strictEqual(image2detections.errors.length, TYPES.length);
+        assert.deepEqual(image2detections, {});
 
         done();
       });
@@ -313,10 +321,7 @@ describe('Vision', function() {
       vision.detectLandmarks(IMAGES.rushmore, function(err, landmarks) {
         assert.ifError(err);
 
-        var expected = ['Mount Rushmore'];
-        expected.errors = [];
-
-        assert.deepEqual(landmarks, expected);
+        assert.deepEqual(landmarks, ['Mount Rushmore']);
 
         done();
       });
@@ -331,13 +336,8 @@ describe('Vision', function() {
 
         assert.strictEqual(landmarks.length, 2);
 
-        var expectedLandmark1 = [];
-        expectedLandmark1.errors = [];
-        assert.deepEqual(landmarks[0], expectedLandmark1);
-
-        var expectedLandmark2 = ['Mount Rushmore'];
-        expectedLandmark2.errors = [];
-        assert.deepEqual(landmarks[1], expectedLandmark2);
+        assert.deepEqual(landmarks[0], []);
+        assert.deepEqual(landmarks[1], ['Mount Rushmore']);
 
         done();
       });
@@ -363,10 +363,7 @@ describe('Vision', function() {
       vision.detectLogos(IMAGES.logo, function(err, logos) {
         assert.ifError(err);
 
-        var expected = ['Google'];
-        expected.errors = [];
-
-        assert.deepEqual(logos, expected);
+        assert.deepEqual(logos, ['Google']);
 
         done();
       });
@@ -381,13 +378,8 @@ describe('Vision', function() {
 
         assert.strictEqual(logos.length, 2);
 
-        var expectedLogo1 = [];
-        expectedLogo1.errors = [];
-        assert.deepEqual(logos[0], expectedLogo1);
-
-        var expectedLogo2 = ['Google'];
-        expectedLogo2.errors = [];
-        assert.deepEqual(logos[1], expectedLogo2);
+        assert.deepEqual(logos[0], []);
+        assert.deepEqual(logos[1], ['Google']);
 
         done();
       });
@@ -467,7 +459,6 @@ describe('Vision', function() {
 
         assert.deepEqual(safesearch, {
           adult: false,
-          errors: [],
           medical: false,
           spoof: false,
           violence: false
@@ -487,14 +478,12 @@ describe('Vision', function() {
         assert.strictEqual(safesearches.length, 2);
         assert.deepEqual(safesearches[0], {
           adult: false,
-          errors: [],
           medical: false,
           spoof: false,
           violence: false
         });
         assert.deepEqual(safesearches[1], {
           adult: false,
-          errors: [],
           medical: false,
           spoof: false,
           violence: false
@@ -536,8 +525,6 @@ describe('Vision', function() {
         .split(' ')
     );
 
-    expectedResults.errors = [];
-
     it('should detect text', function(done) {
       vision.detectText(IMAGES.text, function(err, text) {
         assert.ifError(err);
@@ -557,11 +544,7 @@ describe('Vision', function() {
 
         assert.strictEqual(texts.length, 2);
 
-        var expectedText1 = [];
-        expectedText1.errors = [];
-        assert.deepEqual(texts[0], expectedText1);
-
-
+        assert.deepEqual(texts[0], []);
         assert.deepEqual(texts[1], expectedResults);
 
         done();
