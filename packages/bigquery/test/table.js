@@ -1256,7 +1256,7 @@ describe('BigQuery/Table', function() {
         });
       };
 
-      table.insert(data, function(err, insertErrors) {
+      table.insert(data, function(err) {
         assert.strictEqual(err.name, 'PartialFailureError');
 
         assert.deepEqual(err.errors, [

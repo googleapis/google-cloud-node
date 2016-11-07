@@ -977,7 +977,7 @@ describe('Bigtable/Table', function() {
         });
 
         it('should return a PartialFailureError', function(done) {
-          table.mutate(entries, function(err, mutationErrors) {
+          table.mutate(entries, function(err) {
             assert.strictEqual(err.name, 'PartialFailureError');
 
             assert.deepEqual(err.errors, [
