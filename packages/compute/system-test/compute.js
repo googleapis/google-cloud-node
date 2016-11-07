@@ -253,6 +253,16 @@ describe('Compute', function() {
             });
         });
     });
+
+    it('should run operation as a promise', function() {
+      var snapshot = disk.snapshot(generateName('snapshot'));
+
+      return snapshot.create()
+        .then(function(response) {
+          var operation = response[1];
+          return operation.promise();
+        });
+    });
   });
 
   describe('firewalls', function() {
