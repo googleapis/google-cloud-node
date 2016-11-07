@@ -811,7 +811,7 @@ Table.prototype.insert = function(entries, callback) {
  *   }
  * ];
  *
- * table.mutate(entries, callback)
+ * table.mutate(entries, callback);
  *
  * //-
  * // Delete entities. See {module:bigtable/row#deleteCells}

@@ -750,7 +750,7 @@ DatastoreRequest.prototype.runQueryStream = function(query, options) {
  *     name: 'DonutShack',
  *     rating: 8
  *   }
- * }
+ * };
  *
  * datastore.save(entity, function(err) {
  *   console.log(key.path); // ['Company', 'donutshack']

@@ -87,7 +87,7 @@ function Instance(bigtable, name) {
      * instance.create().then(function(data) {
      *   var instance = data[0];
      *   var operation = data[1];
-     *   var apiResponse = data[2]
+     *   var apiResponse = data[2];
      * });
      */
     create: true,

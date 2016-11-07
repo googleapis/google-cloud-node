@@ -744,7 +744,7 @@ Row.prototype.getMetadata = function(options, callback) {
  *   }
  * };
  *
- * row.increment('follows:gwashington', callback)
+ * row.increment('follows:gwashington', callback);
  *
  * //-
  * // Specify a custom amount to increment the column by.

@@ -70,7 +70,7 @@ function InstanceGroup(zone, name) {
      * instanceGroup.create().then(function(data) {
      *   var instanceGroup = data[0];
      *   var operation = data[1];
-     *   var apiResponse = data[2]
+     *   var apiResponse = data[2];
      * });
      */
     create: true,
