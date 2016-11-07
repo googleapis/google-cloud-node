@@ -56,7 +56,7 @@ function Builder(name, version, cwd) {
   this.version = version || config.DEFAULT_VERSION;
   this.dir = path.join(cwd || '', DOCS_ROOT, name, this.version);
   this.isUmbrella = name === UMBRELLA_PACKAGE;
-  this.isMaster = this.version === config.DEFAULT_VERSION;
+  this.isRelease = !!semver.valid(this.version);
 }
 
 /**
@@ -112,7 +112,7 @@ Builder.prototype.build = function() {
  * var tagName = builder.getTagName(); // bigtable-0.2.0
  */
 Builder.prototype.getTagName = function() {
-  if (this.isMaster) {
+  if (!semver.valid(this.version)) {
     return this.version;
   }
 
@@ -233,7 +233,7 @@ function Bundler(builder) {
  * Bundler.updateDep(builder);
  */
 Bundler.updateDep = function(builder) {
-  if (builder.isMaster) {
+  if (!builder.isRelease) {
     throw new Error('Must supply valid version to update bundles with.');
   }
 
@@ -252,7 +252,7 @@ Bundler.updateDep = function(builder) {
     bundleTag = bundler.builder.getTagName();
     git.checkout(bundleTag);
 
-    dep = findWhere(bundler.getDeps(), { name: builder.name });
+    dep = findWhere(bundler.getDeps(), { name: builder.name }) || {};
     git.checkout('-');
 
     if (semver.maxSatisfying(versions, dep.version) !== builder.version) {
@@ -440,10 +440,13 @@ function build(name, version) {
   git.checkout(builder.getTagName());
   builder.build();
   git.checkout('-');
-  builder.updateManifest();
 
-  if (!builder.isUmbrella && !builder.isMaster) {
-    Bundler.updateDep(builder);
+  if (builder.isRelease) {
+    builder.updateManifest();
+
+    if (!builder.isUmbrella) {
+      Bundler.updateDep(builder);
+    }
   }
 }
 
@@ -456,13 +459,14 @@ module.exports.build = build;
  * builder.buildAll();
  */
 function buildAll() {
+  var currentBranch = git.branch.current;
   var modules = globby.sync('*', {
     cwd: PACKAGES_ROOT,
     ignore: config.IGNORE
   });
 
   modules.forEach(function(name) {
-    build(name, config.DEFAULT_VERSION);
+    build(name, currentBranch);
   });
 }
 

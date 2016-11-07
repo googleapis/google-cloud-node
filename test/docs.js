@@ -53,7 +53,7 @@ var JSHintError = createErrorClass('JSHintError', function(err) {
     evidence: err.evidence.trim(),
     reason: err.reason
   });
-console.log(err.code);
+
   this.code = err.code;
 });
 
@@ -181,7 +181,7 @@ modules.forEach(function(mod) {
 
 function getDocs(mod) {
   return glob
-    .sync('docs/json/' + mod + '/master/*.json', {
+    .sync('docs/json/' + mod + '/*/*.json', {
       ignore: [
         '**/toc.json',
         '**/types.json'
