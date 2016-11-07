@@ -405,11 +405,7 @@ describe('Bigtable', function() {
           }
         }];
 
-        TABLE.insert(rows, function(err, insertErrors) {
-          assert.ifError(err);
-          assert.strictEqual(insertErrors.length, 0);
-          done();
-        });
+        TABLE.insert(rows, done);
       });
 
       it('should create an individual row', function(done) {

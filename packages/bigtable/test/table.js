@@ -976,13 +976,20 @@ describe('Bigtable/Table', function() {
           };
         });
 
-        it('should populate the mutationErrors array', function(done) {
-          table.mutate(entries, function(err, mutationErrors) {
-            assert.ifError(err);
-            assert.strictEqual(mutationErrors[0], parsedStatuses[0]);
-            assert.strictEqual(mutationErrors[0].entry, entries[0]);
-            assert.strictEqual(mutationErrors[1], parsedStatuses[1]);
-            assert.strictEqual(mutationErrors[1].entry, entries[1]);
+        it('should return a PartialFailureError', function(done) {
+          table.mutate(entries, function(err) {
+            assert.strictEqual(err.name, 'PartialFailureError');
+
+            assert.deepEqual(err.errors, [
+              extend({
+                entry: entries[0]
+              }, parsedStatuses[0]),
+
+              extend({
+                entry: entries[1]
+              }, parsedStatuses[1])
+            ]);
+
             done();
           });
         });
@@ -1037,14 +1044,6 @@ describe('Bigtable/Table', function() {
         FakeGrpcServiceObject.decorateStatus_ = function() {
           throw new Error('Should not be called');
         };
-      });
-
-      it('should return an empty array to the callback', function(done) {
-        table.mutate(entries, function(err, mutateErrors) {
-          assert.ifError(err);
-          assert.strictEqual(mutateErrors.length, 0);
-          done();
-        });
       });
 
       it('should emit the appropriate stream events', function(done) {

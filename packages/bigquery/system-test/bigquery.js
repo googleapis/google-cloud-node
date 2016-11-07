@@ -485,7 +485,7 @@ describe('BigQuery', function() {
       it('should convert values to their schema types', function(done) {
         var data = {
           name: 'dave',
-          breed: 'british shorthair',
+          breed: 'husky',
           id: 99,
           dob: new Date(),
           around: true,
@@ -500,13 +500,8 @@ describe('BigQuery', function() {
           }
         };
 
-        table.insert(data, function(err, insertErrors) {
+        table.insert(data, function(err) {
           assert.ifError(err);
-
-          if (insertErrors.length > 0) {
-            done(insertErrors[0].errors[0]);
-            return;
-          }
 
           function query(callback) {
             var query = {
@@ -530,6 +525,55 @@ describe('BigQuery', function() {
           }
 
           async.retry({ times: 3, interval: 2000 }, query, done);
+        });
+      });
+
+      it('should return partial errors', function(done) {
+        var data = {
+          name: 'dave',
+          breed: 'british husky',
+          id: 99,
+          dob: new Date(),
+          around: true,
+          buffer: new Buffer('test'),
+          arrayOfInts: [1, 3, 5],
+          recordOfRecords: {
+            records: [
+              {
+                record: true
+              }
+            ]
+          }
+        };
+
+        var improperData = {
+          name: 11
+        };
+
+        table.insert([data, improperData], function(err) {
+          assert.strictEqual(err.name, 'PartialFailureError');
+
+          assert.deepEqual(err.errors[0], {
+            errors: [
+              {
+                message: 'Conversion from int64 to string is unsupported.',
+                reason: 'invalid'
+              }
+            ],
+            row: improperData
+          });
+
+          assert.deepEqual(err.errors[1], {
+            errors: [
+              {
+                message: undefined,
+                reason: 'stopped'
+              }
+            ],
+            row: data
+          });
+
+          done();
         });
       });
 

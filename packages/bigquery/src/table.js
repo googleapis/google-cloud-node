@@ -945,6 +945,7 @@ Table.prototype.import = function(source, metadata, callback) {
  * {module:bigquery/table#import} instead.
  *
  * @resource [Tabledata: insertAll API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/tabledata/insertAll}
+ * @resource [Troubleshooting Errors]{@link https://developers.google.com/bigquery/troubleshooting-errors}
  *
  * @param {object|object[]} rows - The rows to insert into the table.
  * @param {object=} options - Configuration object.
@@ -964,7 +965,9 @@ Table.prototype.import = function(source, metadata, callback) {
  *     for considerations when working with templates tables.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {array} callback.insertErrors - A list of errors for insert failures.
+ * @param {object[]} callback.err.errors - If present, these represent partial
+ *     failures. It's possible for part of your request to be completed
+ *     successfully, while the other part was not.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -1011,22 +1014,22 @@ Table.prototype.import = function(source, metadata, callback) {
  * table.insert(row, options, insertHandler);
  *
  * //-
- * // Handling the response.
+ * // Handling the response. See <a href="https://developers.google.com/bigquery/troubleshooting-errors">
+ * // Troubleshooting Errors</a> for best practices on how to handle errors.
  * //-
- * function insertHandler(err, insertErrors, apiResponse) {
- *   // err (object):
- *   //   An API error occurred.
+ * function insertHandler(err, apiResponse) {
+ *   if (err) {
+ *     // An API error or partial failure occurred.
  *
- *   // insertErrors (object[]):
- *   //   If populated, some rows failed to insert, while others may have
- *   //   succeeded.
- *   //
- *   // insertErrors[].row (original individual row object passed to `insert`)
- *   // insertErrors[].errors[].reason
- *   // insertErrors[].errors[].message
+ *     if (err.name === 'PartialFailureError') {
+ *       // Some rows failed to insert, while others may have succeeded.
  *
- *   // See https://developers.google.com/bigquery/troubleshooting-errors for
- *   // recommendations on handling errors.
+ *       // err.errors (object[]):
+ *       // err.errors[].row (original row object passed to `insert`)
+ *       // err.errors[].errors[].reason
+ *       // err.errors[].errors[].message
+ *     }
+ *   }
  * }
  *
  * //-
@@ -1063,11 +1066,11 @@ Table.prototype.insert = function(rows, options, callback) {
     json: json
   }, function(err, resp) {
     if (err) {
-      callback(err, null, resp);
+      callback(err, resp);
       return;
     }
 
-    var failedToInsert = (resp.insertErrors || []).map(function(insertError) {
+    var partialFailures = (resp.insertErrors || []).map(function(insertError) {
       return {
         errors: insertError.errors.map(function(error) {
           return {
@@ -1075,11 +1078,18 @@ Table.prototype.insert = function(rows, options, callback) {
             reason: error.reason
           };
         }),
-        row: json.rows[insertError.index].json
+        row: rows[insertError.index]
       };
     });
 
-    callback(null, failedToInsert, resp);
+    if (partialFailures.length > 0) {
+      err = new common.util.PartialFailureError({
+        errors: partialFailures,
+        response: resp
+      });
+    }
+
+    callback(err, resp);
   });
 };
 

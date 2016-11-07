@@ -683,30 +683,21 @@ Table.prototype.getRows = function(options, callback) {
  *     See {module:bigtable/table#mutate}.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {object[]} callback.insertErrors - A status object for each failed
- *     insert.
+ * @param {object[]} callback.err.errors - If present, these represent partial
+ *     failures. It's possible for part of your request to be completed
+ *     successfully, while the other part was not.
  *
  * @example
- * var callback = function(err, insertErrors) {
+ * var callback = function(err) {
  *   if (err) {
- *     // Error handling omitted.
- *   }
+ *     // An API error or partial failure occurred.
  *
- *   // insertErrors = [
- *   //   {
- *   //     code: 500,
- *   //     message: 'Internal Server Error',
- *   //     entry: {
- *   //       key: 'gwashington',
- *   //       data: {
- *   //         follows: {
- *   //           jadams: 1
- *   //         }
- *   //       }
- *   //     }
- *   //   },
- *   //   ...
- *   // ]
+ *     if (err.name === 'PartialFailureError') {
+ *       // err.errors[].code = 'Response code'
+ *       // err.errors[].message = 'Error message'
+ *       // err.errors[].entry = The original entry
+ *     }
+ *   }
  * };
  *
  * var entries = [
@@ -769,34 +760,24 @@ Table.prototype.insert = function(entries, callback) {
  *     deleted.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {object[]} callback.mutationErrors - A status object for each failed
- *     mutation.
+ * @param {object[]} callback.err.errors - If present, these represent partial
+ *     failures. It's possible for part of your request to be completed
+ *     successfully, while the other part was not.
  *
  * @example
  * //-
  * // Insert entities. See {module:bigtable/table#insert}
  * //-
- * var callback = function(err, mutationErrors) {
+ * var callback = function(err) {
  *   if (err) {
- *     // Error handling omitted.
- *   }
+ *     // An API error or partial failure occurred.
  *
- *   // mutationErrors = [
- *   //   {
- *   //     code: 500,
- *   //     message: 'Internal Server Error',
- *   //     entry: {
- *   //       method: 'insert',
- *   //       key: 'gwashington',
- *   //       data: {
- *   //         follows: {
- *   //           jadams: 1
- *   //         }
- *   //       }
- *   //     }
- *   //   },
- *   //   ...
- *   // ]
+ *     if (err.name === 'PartialFailureError') {
+ *       // err.errors[].code = 'Response code'
+ *       // err.errors[].message = 'Error message'
+ *       // err.errors[].entry = The original entry
+ *     }
+ *   }
  * };
  *
  * var entries = [
@@ -910,7 +891,6 @@ Table.prototype.mutate = function(entries, callback) {
         var status = common.GrpcService.decorateStatus_(entry.status);
         status.entry = entries[entry.index];
 
-
         if (!isCallbackMode) {
           emitter.emit('error', status);
           return;
@@ -932,7 +912,15 @@ Table.prototype.mutate = function(entries, callback) {
   stream
     .on('error', callback)
     .pipe(concat(function(mutationErrors) {
-      callback(null, mutationErrors);
+      var err = null;
+
+      if (mutationErrors && mutationErrors.length > 0) {
+        err = new common.util.PartialFailureError({
+          errors: mutationErrors
+        });
+      }
+
+      callback(err);
     }));
 };
 

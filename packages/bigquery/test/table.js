@@ -1221,9 +1221,8 @@ describe('BigQuery/Table', function() {
         callback(null, apiResponse);
       };
 
-      table.insert(data, function(err, insertErrors, apiResponse_) {
+      table.insert(data, function(err, apiResponse_) {
         assert.ifError(err);
-        assert.deepEqual(insertErrors, []);
         assert.strictEqual(apiResponse_, apiResponse);
         done();
       });
@@ -1237,15 +1236,14 @@ describe('BigQuery/Table', function() {
         callback(error, apiResponse);
       };
 
-      table.insert(data, function(err, insertErrors, apiResponse_) {
+      table.insert(data, function(err, apiResponse_) {
         assert.strictEqual(err, error);
-        assert.strictEqual(insertErrors, null);
         assert.strictEqual(apiResponse_, apiResponse);
         done();
       });
     });
 
-    it('should return insert failures to the callback', function(done) {
+    it('should return partial failures', function(done) {
       var row0Error = { message: 'Error.', reason: 'notFound' };
       var row1Error = { message: 'Error.', reason: 'notFound' };
 
@@ -1258,12 +1256,18 @@ describe('BigQuery/Table', function() {
         });
       };
 
-      table.insert(data, function(err, insertErrors) {
-        assert.ifError(err);
+      table.insert(data, function(err) {
+        assert.strictEqual(err.name, 'PartialFailureError');
 
-        assert.deepEqual(insertErrors, [
-          { row: dataApiFormat.rows[0].json, errors: [row0Error] },
-          { row: dataApiFormat.rows[1].json, errors: [row1Error] }
+        assert.deepEqual(err.errors, [
+          {
+            row: dataApiFormat.rows[0].json,
+            errors: [row0Error]
+          },
+          {
+            row: dataApiFormat.rows[1].json,
+            errors: [row1Error]
+          }
         ]);
 
         done();
