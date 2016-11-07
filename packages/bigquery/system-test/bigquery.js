@@ -485,7 +485,7 @@ describe('BigQuery', function() {
       it('should convert values to their schema types', function(done) {
         var data = {
           name: 'dave',
-          breed: 'british shorthair',
+          breed: 'husky',
           id: 99,
           dob: new Date(),
           around: true,
@@ -531,7 +531,7 @@ describe('BigQuery', function() {
       it('should return partial errors', function(done) {
         var data = {
           name: 'dave',
-          breed: 'british shorthair',
+          breed: 'british husky',
           id: 99,
           dob: new Date(),
           around: true,

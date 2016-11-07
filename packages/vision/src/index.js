@@ -264,24 +264,28 @@ Vision.prototype.annotate = function(requests, callback) {
  * // a single feature request was not successful.
  * //-
  * vision.detect('malformed-image.jpg', types, function(err, detections) {
- *   if (err && err.name === 'PartialFailureError') {
- *     // err.errors = [
- *     //   {
- *     //     image: 'malformed-image.jpg',
- *     //     errors: [
- *     //       {
- *     //         code: 400,
- *     //         message: 'Bad image data',
- *     //         type: 'faces'
- *     //       },
- *     //       {
- *     //         code: 400,
- *     //         message: 'Bad image data',
- *     //         type: 'labels'
- *     //       }
- *     //     ]
- *     //   }
- *     // ]
+ *   if (err) {
+ *     // An API error or partial failure occurred.
+ *
+ *     if (err.name === 'PartialFailureError') {
+ *       // err.errors = [
+ *       //   {
+ *       //     image: 'malformed-image.jpg',
+ *       //     errors: [
+ *       //       {
+ *       //         code: 400,
+ *       //         message: 'Bad image data',
+ *       //         type: 'faces'
+ *       //       },
+ *       //       {
+ *       //         code: 400,
+ *       //         message: 'Bad image data',
+ *       //         type: 'labels'
+ *       //       }
+ *       //     ]
+ *       //   }
+ *       // ]
+ *     }
  *   }
  *
  *   // `detections` will still be populated with all of the results that could
