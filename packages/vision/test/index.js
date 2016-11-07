@@ -194,7 +194,7 @@ describe('Vision', function() {
     });
   });
 
-  describe.only('detect', function() {
+  describe('detect', function() {
     var findImages_;
     var formatFaceAnnotation_;
     var formatImagePropertiesAnnotation_;
