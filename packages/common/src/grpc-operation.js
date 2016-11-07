@@ -20,20 +20,19 @@
 
 'use strict';
 
-var events = require('events');
 var modelo = require('modelo');
-
-/**
- * @type {module:common/grpcService}
- * @private
- */
-var GrpcService = require('./grpc-service.js');
 
 /**
  * @type {module:common/grpcServiceObject}
  * @private
  */
 var GrpcServiceObject = require('./grpc-service-object.js');
+
+/**
+ * @type {module:common/operation}
+ * @private
+ */
+var Operation = require('./operation.js');
 
 /**
  * @type {module:common/util}
@@ -101,16 +100,11 @@ function GrpcOperation(parent, name) {
     methods: methods
   };
 
+  Operation.call(this, config);
   GrpcServiceObject.call(this, config);
-  events.EventEmitter.call(this);
-
-  this.completeListeners = 0;
-  this.hasActiveListeners = false;
-
-  this.listenForEvents_();
 }
 
-modelo.inherits(GrpcOperation, GrpcServiceObject, events.EventEmitter);
+modelo.inherits(GrpcOperation, GrpcServiceObject, Operation);
 
 /**
  * Cancel the operation.
@@ -131,85 +125,6 @@ GrpcOperation.prototype.cancel = function(callback) {
   };
 
   this.request(protoOpts, reqOpts, callback || util.noop);
-};
-
-/**
- * Wraps the `complete` and `error` events in a Promise.
- *
- * @return {promise}
- */
-GrpcOperation.prototype.promise = function() {
-  var self = this;
-
-  return new self.Promise(function(resolve, reject) {
-    self
-      .on('error', reject)
-      .on('complete', function(metadata) {
-        resolve([metadata]);
-      });
-  });
-};
-
-/**
- * Begin listening for events on the operation. This method keeps track of how
- * many "complete" listeners are registered and removed, making sure polling is
- * handled automatically.
- *
- * As long as there is one active "complete" listener, the connection is open.
- * When there are no more listeners, the polling stops.
- *
- * @private
- */
-GrpcOperation.prototype.listenForEvents_ = function() {
-  var self = this;
-
-  this.on('newListener', function(event) {
-    if (event === 'complete') {
-      self.completeListeners++;
-
-      if (!self.hasActiveListeners) {
-        self.hasActiveListeners = true;
-        self.startPolling_();
-      }
-    }
-  });
-
-  this.on('removeListener', function(event) {
-    if (event === 'complete' && --self.completeListeners === 0) {
-      self.hasActiveListeners = false;
-    }
-  });
-};
-
-/**
- * Poll `getMetadata` to check the operation's status. This runs a loop to ping
- * the API on an interval.
- *
- * Note: This method is automatically called once a "complete" event handler is
- * registered on the operation.
- *
- * @private
- */
-GrpcOperation.prototype.startPolling_ = function() {
-  var self = this;
-
-  if (!this.hasActiveListeners) {
-    return;
-  }
-
-  this.getMetadata(function(err, resp) {
-    if (err || resp.error) {
-      self.emit('error', err || GrpcService.decorateStatus_(resp.result));
-      return;
-    }
-
-    if (!resp.done) {
-      setTimeout(self.startPolling_.bind(self), 500);
-      return;
-    }
-
-    self.emit('complete', resp);
-  });
 };
 
 module.exports = GrpcOperation;
