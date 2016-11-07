@@ -21,7 +21,6 @@
 'use strict';
 
 var common = require('@google-cloud/common');
-var events = require('events');
 var is = require('is');
 var util = require('util');
 
@@ -144,12 +143,11 @@ function Job(bigQuery, id) {
     getMetadata: true
   };
 
-  var self = this;
-
   common.Operation.call(this, {
     parent: bigQuery,
     baseUrl: '/jobs',
-    id: id
+    id: id,
+    methods: methods
   });
 
   this.bigQuery = bigQuery;

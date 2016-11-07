@@ -84,6 +84,11 @@ describe('BigQuery/Job', function() {
       assert.strictEqual(calledWith.parent, BIGQUERY);
       assert.strictEqual(calledWith.baseUrl, '/jobs');
       assert.strictEqual(calledWith.id, JOB_ID);
+      assert.deepEqual(calledWith.methods, {
+        exists: true,
+        get: true,
+        getMetadata: true
+      });
     });
 
     describe('request interceptor', function() {
