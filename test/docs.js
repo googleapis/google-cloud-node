@@ -20,6 +20,7 @@ var createErrorClass = require('create-error-class');
 var format = require('string-format-obj');
 var fs = require('fs');
 var glob = require('glob');
+var jshint = require('jshint').JSHINT;
 var mitm = require('mitm');
 var multiline = require('multiline');
 var overviews = require('../scripts/docs/config').OVERVIEW;
@@ -41,7 +42,19 @@ var DocsError = createErrorClass('DocsError', function(err, code) {
     })
     .join('\n');
 
-  this.message = '\n' + lines + '\n\n' + err.message;
+  this.message = format('\n{lines}\n\n{message}', {
+    lines: lines,
+    message: err.message
+  });
+});
+
+var JSHintError = createErrorClass('JSHintError', function(err) {
+  this.message = format('"{evidence}" - {reason}', {
+    evidence: err.evidence.trim(),
+    reason: err.reason
+  });
+
+  this.code = err.code;
 });
 
 var FakeConsole = Object.keys(console)
@@ -144,6 +157,21 @@ modules.forEach(function(mod) {
           var snippet = createSnippet(mod, moduleInstantationCode, method);
 
           it('should run ' + name + ' examples without errors', function() {
+            jshint(snippet, {
+              // in several snippets we give an example as to how to access
+              // a property (like metadata) without doing anything with it
+              // e.g. `list[0].metadata`
+              expr: true,
+
+              // this allows us to redefine variables, generally it's bad, buuut
+              // for copy/paste purposes this is desirable within the docs
+              shadow: true
+            });
+
+            if (jshint.errors.length) {
+              throw new JSHintError(jshint.errors[0]);
+            }
+
             runCodeInSandbox(snippet, sandbox);
           });
         });
@@ -153,7 +181,7 @@ modules.forEach(function(mod) {
 
 function getDocs(mod) {
   return glob
-    .sync('docs/json/' + mod + '/master/*.json', {
+    .sync('docs/json/' + mod + '/*/*.json', {
       ignore: [
         '**/toc.json',
         '**/types.json'
