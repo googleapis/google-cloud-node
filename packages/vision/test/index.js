@@ -55,6 +55,7 @@ describe('Vision', function() {
   var PROJECT_ID = 'project-id';
 
   var Vision;
+  var VisionCached;
   var vision;
 
   before(function() {
@@ -65,10 +66,14 @@ describe('Vision', function() {
         util: fakeUtil
       }
     });
+
+    VisionCached = extend({}, Vision);
   });
 
   beforeEach(function() {
     requestOverride = null;
+
+    extend(Vision, VisionCached);
 
     vision = new Vision({
       projectId: PROJECT_ID
