@@ -37,6 +37,9 @@ var DEFAULT_SERVICE_PORT = 443;
 
 var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
 
+var STREAM_DESCRIPTORS = {
+  streamingRecognize: new gax.StreamDescriptor(gax.StreamType.BIDI_STREAMING)
+};
 
 /**
  * The scopes needed to make gRPC calls to all of the methods defined in
@@ -80,8 +83,6 @@ function SpeechApi(gaxGrpc, grpcClients, opts) {
       'google.cloud.speech.v1beta1.Speech',
       configData,
       clientConfig,
-      null,
-      null,
       {'x-goog-api-client': googleApiClient});
 
   var speechStub = gaxGrpc.createStub(
@@ -91,14 +92,16 @@ function SpeechApi(gaxGrpc, grpcClients, opts) {
       {sslCreds: sslCreds});
   var speechStubMethods = [
     'syncRecognize',
-    'asyncRecognize'
+    'asyncRecognize',
+    'streamingRecognize'
   ];
   speechStubMethods.forEach(function(methodName) {
     this['_' + methodName] = gax.createApiCall(
       speechStub.then(function(speechStub) {
         return speechStub[methodName].bind(speechStub);
       }),
-      defaults[methodName]);
+      defaults[methodName],
+      STREAM_DESCRIPTORS[methodName]);
   }.bind(this));
 }
 
@@ -206,6 +209,35 @@ SpeechApi.prototype.asyncRecognize = function(request, options, callback) {
     options = {};
   }
   return this._asyncRecognize(request, options, callback);
+};
+
+/**
+ * Perform bidirectional streaming speech-recognition: receive results while
+ * sending audio. This method is only available via the gRPC API (not REST).
+ *
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ * @returns {Stream}
+ *   An object stream which is both readable and writable. It accepts objects
+ *   representing [StreamingRecognizeRequest]{@link StreamingRecognizeRequest} for write() method, and
+ *   will emit objects representing [StreamingRecognizeResponse]{@link StreamingRecognizeResponse} on 'data' event asynchronously.
+ *
+ * @example
+ *
+ * var api = speechV1beta1.speechApi();
+ * var stream = api.streamingRecognize().on('data', function(response) {
+ *     // doThingsWith(response);
+ * });
+ * var request = {};
+ * // Write request objects.
+ * stream.write(request);
+ */
+SpeechApi.prototype.streamingRecognize = function(options) {
+  if (options === undefined) {
+    options = {};
+  }
+  return this._streamingRecognize(options);
 };
 
 function SpeechApiBuilder(gaxGrpc) {
