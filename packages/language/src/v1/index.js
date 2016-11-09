@@ -19,14 +19,14 @@ var languageServiceApi = require('./language_service_api');
 var extend = require('extend');
 var gax = require('google-gax');
 
-function v1beta1(options) {
+function v1(options) {
   options = extend({
-    scopes: v1beta1.ALL_SCOPES
+    scopes: v1.ALL_SCOPES
   }, options);
   var gaxGrpc = gax.grpc(options);
   return languageServiceApi(gaxGrpc);
 }
 
-v1beta1.SERVICE_ADDRESS = languageServiceApi.SERVICE_ADDRESS;
-v1beta1.ALL_SCOPES = languageServiceApi.ALL_SCOPES;
-module.exports = v1beta1;
+v1.SERVICE_ADDRESS = languageServiceApi.SERVICE_ADDRESS;
+v1.ALL_SCOPES = languageServiceApi.ALL_SCOPES;
+module.exports = v1;

@@ -45,7 +45,7 @@ var prop = require('propprop');
  *     property to pass the inline content of the document or a Storage File
  *     object.
  * @param {string} options.encoding - `UTF8`, `UTF16`, or `UTF32`. See
- *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1beta1/EncodingType).
+ *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType).
  * @param {string} options.language - The language of the text.
  * @return {module:language/document}
  *
@@ -141,10 +141,10 @@ Document.PART_OF_SPEECH = {
  *   - {module:language#detectEntities}
  *   - {module:language#detectSentiment}
  *
- * @resource [documents.annotateText API Documentation]{@link https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/annotateText}
+ * @resource [documents.annotateText API Documentation]{@link https://cloud.google.com/natural-language/reference/rest/v1/documents/annotateText}
  *
  * @param {object=} options - Configuration object. See
- *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/annotateText#request-body).
+ *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1/documents/annotateText#request-body).
  * @param {boolean} options.entities - Detect the entities from this document.
  *     By default, all features (`entities`, `sentiment`, and `syntax`) are
  *     enabled. By overriding any of these values, all defaults are switched to
@@ -434,10 +434,10 @@ Document.prototype.annotate = function(options, callback) {
 /**
  * Detect entities from the document.
  *
- * @resource [documents.analyzeEntities API Documentation]{@link https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/analyzeEntities}
+ * @resource [documents.analyzeEntities API Documentation]{@link https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeEntities}
  *
  * @param {object=} options - Configuration object. See
- *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/analyzeEntities#request-body).
+ *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeEntities#request-body).
  * @param {boolean} options.verbose - Enable verbose mode for more detailed
  *     results. Default: `false`
  * @param {function} callback - The callback function.
@@ -567,10 +567,10 @@ Document.prototype.detectEntities = function(options, callback) {
 /**
  * Detect the sentiment of the text in this document.
  *
- * @resource [documents.analyzeSentiment API Documentation]{@link https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/analyzeSentiment}
+ * @resource [documents.analyzeSentiment API Documentation]{@link https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeSentiment}
  *
  * @param {object=} options - Configuration object. See
- *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/analyzeSentiment#request-body).
+ *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeSentiment#request-body).
  * @param {boolean} options.verbose - Enable verbose mode for more detailed
  *     results. Default: `false`
  * @param {function} callback - The callback function.
