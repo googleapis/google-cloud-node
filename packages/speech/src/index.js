@@ -472,18 +472,13 @@ Speech.formatResults_ = function(resultSets, verboseMode) {
 Speech.prototype.createRecognizeStream = function(config) {
   var self = this;
 
-  var protoOpts = {
-    service: 'Speech',
-    method: 'streamingRecognize'
-  };
-
   var verboseMode = config.verbose === true;
   delete config.verbose;
 
   var recognizeStream = streamEvents(pumpify.obj());
 
   recognizeStream.once('writing', function() {
-    var requestStream = self.requestWritableStream(protoOpts);
+    var requestStream = self.api.Speech.streamingRecognize();
 
     requestStream.on('response', function(response) {
       recognizeStream.emit('response', response);

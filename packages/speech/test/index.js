@@ -448,22 +448,20 @@ describe('Speech', function() {
 
       stream.setPipeline = util.noop;
 
-      speech.requestWritableStream = function() {
-        requestStream = through.obj();
-        return requestStream;
+      speech.api.Speech = {
+        streamingRecognize: function() {
+          requestStream = through.obj();
+          return requestStream;
+        }
       };
     });
 
     it('should make the correct request once writing started', function(done) {
-      speech.requestWritableStream = function(protoOpts) {
-        assert.deepEqual(protoOpts, {
-          service: 'Speech',
-          method: 'streamingRecognize'
-        });
-
-        setImmediate(done);
-
-        return through.obj();
+      speech.api.Speech = {
+        streamingRecognize: function() {
+          setImmediate(done);
+          return through.obj();
+        }
       };
 
       stream.emit('writing');
@@ -477,31 +475,35 @@ describe('Speech', function() {
         done();
       });
 
-      speech.requestWritableStream = function() {
-        var requestStream = through.obj();
+      speech.api.Speech = {
+        streamingRecognize: function() {
+          var requestStream = through.obj();
 
-        setImmediate(function() {
-          requestStream.emit('response', response);
-        });
+          setImmediate(function() {
+            requestStream.emit('response', response);
+          });
 
-        return requestStream;
+          return requestStream;
+        }
       };
 
       stream.emit('writing');
     });
 
     it('should send the initial write to the request stream', function(done) {
-      speech.requestWritableStream = function() {
-        var requestStream = through.obj();
+      speech.api.Speech = {
+        streamingRecognize: function() {
+          var requestStream = through.obj();
 
-        requestStream.once('data', function(data) {
-          assert.deepEqual(data, {
-            streamingConfig: CONFIG
+          requestStream.once('data', function(data) {
+            assert.deepEqual(data, {
+              streamingConfig: CONFIG
+            });
+            done();
           });
-          done();
-        });
 
-        return requestStream;
+          return requestStream;
+        }
       };
 
       stream.emit('writing');
@@ -582,17 +584,19 @@ describe('Speech', function() {
         verbose: true
       });
 
-      speech.requestWritableStream = function() {
-        var stream = through.obj();
+      speech.api.Speech = {
+        streamingRecognize: function() {
+          var stream = through.obj();
 
-        stream.on('data', function(data) {
-          assert.deepEqual(data, {
-            streamingConfig: {} // No `verbose` property.
+          stream.on('data', function(data) {
+            assert.deepEqual(data, {
+              streamingConfig: {} // No `verbose` property.
+            });
+            done();
           });
-          done();
-        });
 
-        return stream;
+          return stream;
+        }
       };
 
       stream.emit('writing');
