@@ -288,6 +288,34 @@ describe('Language', function() {
               }, validateSentimentVerbose(done));
             });
           });
+
+          describe('syntax', function() {
+            it('should work without creating a document', function(done) {
+              if (!CONTENT_TYPE) {
+                language.detectSyntax(
+                  CONTENT,
+                  validateSyntaxSimple(done)
+                );
+                return;
+              }
+
+              language.detectSyntax(
+                CONTENT,
+                { type: CONTENT_TYPE },
+                validateSyntaxSimple(done)
+              );
+            });
+
+            it('should return the correct simplified response', function(done) {
+              DOC.detectSyntax(validateSyntaxSimple(done));
+            });
+
+            it('should support verbose mode', function(done) {
+              DOC.detectSyntax({
+                verbose: true
+              }, validateSyntaxVerbose(done));
+            });
+          });
         });
       });
     });
@@ -331,7 +359,18 @@ describe('Language', function() {
         assert.deepEqual(annotation.tokens[0], {
           text: 'Hello',
           partOfSpeech: 'Other: foreign words, typos, abbreviations',
-          partOfSpeechTag: 'X'
+          tag: 'X',
+          aspect: 'ASPECT_UNKNOWN',
+          case: 'CASE_UNKNOWN',
+          form: 'FORM_UNKNOWN',
+          gender: 'GENDER_UNKNOWN',
+          mood: 'MOOD_UNKNOWN',
+          number: 'NUMBER_UNKNOWN',
+          person: 'PERSON_UNKNOWN',
+          proper: 'PROPER_UNKNOWN',
+          reciprocity: 'RECIPROCITY_UNKNOWN',
+          tense: 'TENSE_UNKNOWN',
+          voice: 'VOICE_UNKNOWN'
         });
 
         assert(is.object(apiResponse));
@@ -463,7 +502,9 @@ describe('Language', function() {
       try {
         assert.ifError(err);
 
-        assert(is.number(sentiment));
+        assert(is.number(sentiment.sentiment));
+        assert.strictEqual(sentiment.language, 'en');
+        assert.strictEqual(sentiment.sentences.length, 2);
 
         assert(is.object(apiResponse));
 
@@ -479,14 +520,69 @@ describe('Language', function() {
       try {
         assert.ifError(err);
 
-        assert(is.object(sentiment));
-        assert(is.number(sentiment.polarity));
-        assert(is.number(sentiment.magnitude));
+        assert(is.object(sentiment.sentiment));
+        assert(is.number(sentiment.sentiment.score));
+        assert(is.number(sentiment.sentiment.magnitude));
+        assert.strictEqual(sentiment.language, 'en');
+        assert.strictEqual(sentiment.sentences.length, 2);
 
         assert(is.object(apiResponse));
 
         callback();
       } catch(e) {
+        callback(e);
+      }
+    };
+  }
+
+  function validateSyntaxSimple(callback) {
+    return function(err, syntax, apiResponse) {
+      try {
+        assert.ifError(err);
+        assert.strictEqual(syntax.sentences.length, 2);
+        assert(is.string(syntax.sentences[0]));
+        assert.strictEqual(syntax.tokens.length, 17);
+        assert.deepEqual(syntax.tokens[0], {
+          aspect: 'ASPECT_UNKNOWN',
+          case: 'CASE_UNKNOWN',
+          form: 'FORM_UNKNOWN',
+          gender: 'GENDER_UNKNOWN',
+          mood: 'MOOD_UNKNOWN',
+          number: 'NUMBER_UNKNOWN',
+          partOfSpeech: 'Other: foreign words, typos, abbreviations',
+          person: 'PERSON_UNKNOWN',
+          proper: 'PROPER_UNKNOWN',
+          reciprocity: 'RECIPROCITY_UNKNOWN',
+          tag: 'X',
+          tense: 'TENSE_UNKNOWN',
+          text: 'Hello',
+          voice: 'VOICE_UNKNOWN'
+        });
+        assert.strictEqual(syntax.language, 'en');
+
+        assert(is.object(apiResponse));
+
+        callback();
+      } catch (e) {
+        callback(e);
+      }
+    };
+  }
+
+  function validateSyntaxVerbose(callback) {
+    return function(err, syntax, apiResponse) {
+      try {
+        assert.ifError(err);
+        assert.strictEqual(syntax.sentences.length, 2);
+        assert(is.object(syntax.sentences[0]));
+        assert.strictEqual(syntax.tokens.length, 17);
+        assert(is.object(syntax.tokens[0]));
+        assert.strictEqual(syntax.language, 'en');
+
+        assert(is.object(apiResponse));
+
+        callback();
+      } catch (e) {
         callback(e);
       }
     };
