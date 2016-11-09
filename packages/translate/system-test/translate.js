@@ -23,16 +23,7 @@ var prop = require('propprop');
 var env = require('../../../system-test/env.js');
 var Translate = require('../');
 
-var API_KEY = process.env.GCLOUD_TESTS_API_KEY;
-
-// Only run the tests if there is an API key to test with.
 describe('translate', function() {
-// (API_KEY ? describe : describe.skip)('translate', function() {
-  // if (!API_KEY) {
-  //   // The test runner still executes this function, even if it is skipped.
-  //   return;
-  // }
-
   var translate = new Translate(extend({}, env));
 
   describe('detecting language from input', function() {

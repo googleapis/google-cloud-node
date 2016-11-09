@@ -41,9 +41,6 @@ var PKG = require('../package.json');
  * [Pricing](https://cloud.google.com/translate/v2/pricing.html) and
  * [FAQ](https://cloud.google.com/translate/v2/faq.html) pages for details.
  *
- * **An API key is required for Translate.** See
- * [Identifying your application to Google](https://cloud.google.com/translate/v2/using_rest#auth).
- *
  * @constructor
  * @alias module:translate
  *
@@ -53,7 +50,7 @@ var PKG = require('../package.json');
  * @throws {Error} If an API key is not provided.
  *
  * @param {object} options - [Configuration object](#/docs).
- * @param {string} options.key - An API key.
+ * @param {string=} options.key - An API key.
  *
  * @example
  * //-
@@ -71,10 +68,6 @@ function Translate(options) {
     return new Translate(options);
   }
 
-  // if (!options.key) {
-  //   throw new Error('An API key is required to use the Translate API.');
-  // }
-
   var baseUrl = 'https://translation.googleapis.com/language/translate/v2';
 
   if (process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT) {
@@ -83,7 +76,6 @@ function Translate(options) {
   }
 
   if (options.key) {
-    this.baseUrl = baseUrl;
     this.options = options;
     this.key = options.key;
   }
@@ -173,10 +165,6 @@ Translate.prototype.detect = function(input, callback) {
     json: {
       q: input
     }
-    // useQuerystring: true,
-    // qs: {
-    //   q: input
-    // }
   }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
@@ -427,10 +415,10 @@ Translate.prototype.translate = function(input, options, callback) {
 };
 
 /**
- * A custom request implementation. Requests to this API use an API key for an
- * application, not a bearer token from a service account. This means we skip
- * the `makeAuthenticatedRequest` portion of the typical request lifecycle, and
- * manually authenticate the request here.
+ * A custom request implementation. Requests to this API may optionally use an
+ * API key for an application, not a bearer token from a service account. This
+ * means it is possible to skip the `makeAuthenticatedRequest` portion of the
+ * typical request lifecycle, and manually authenticate the request here.
  *
  * @private
  *
@@ -439,12 +427,12 @@ Translate.prototype.translate = function(input, options, callback) {
  */
 Translate.prototype.request = function(reqOpts, callback) {
   if (!this.key) {
-    return common.Service.prototype.request.call(this, reqOpts, callback);
+    common.Service.prototype.request.call(this, reqOpts, callback);
+    return;
   }
 
   reqOpts.uri = this.baseUrl + reqOpts.uri;
 
-  // @TODO see if we can send this via JSON
   reqOpts = extend(true, {}, reqOpts, {
     qs: {
       key: this.key
