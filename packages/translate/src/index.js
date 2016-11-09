@@ -26,6 +26,7 @@ var extend = require('extend');
 var is = require('is');
 var isHtml = require('is-html');
 var prop = require('propprop');
+var util = require('util');
 
 var PKG = require('../package.json');
 
@@ -70,20 +71,34 @@ function Translate(options) {
     return new Translate(options);
   }
 
-  if (!options.key) {
-    throw new Error('An API key is required to use the Translate API.');
-  }
+  // if (!options.key) {
+  //   throw new Error('An API key is required to use the Translate API.');
+  // }
 
-  this.baseUrl = 'https://www.googleapis.com/language/translate/v2';
+  var baseUrl = 'https://translation.googleapis.com/language/translate/v2';
 
   if (process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT) {
-    this.baseUrl = process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT
+    baseUrl = process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT
       .replace(/\/+$/, '');
   }
 
-  this.options = options;
-  this.key = options.key;
+  if (options.key) {
+    this.baseUrl = baseUrl;
+    this.options = options;
+    this.key = options.key;
+  }
+
+  var config = {
+    baseUrl: baseUrl,
+    scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+    packageJson: require('../package.json'),
+    projectIdRequired: false
+  };
+
+  common.Service.call(this, config, options);
 }
+
+util.inherits(Translate, common.Service);
 
 /**
  * Detect the language used in a string or multiple strings.
@@ -153,11 +168,15 @@ Translate.prototype.detect = function(input, callback) {
   input = arrify(input);
 
   this.request({
+    method: 'POST',
     uri: '/detect',
-    useQuerystring: true,
-    qs: {
+    json: {
       q: input
     }
+    // useQuerystring: true,
+    // qs: {
+    //   q: input
+    // }
   }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
@@ -388,9 +407,9 @@ Translate.prototype.translate = function(input, options, callback) {
   }
 
   this.request({
+    method: 'POST',
     uri: '',
-    useQuerystring: true,
-    qs: query
+    json: query
   }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
@@ -419,8 +438,13 @@ Translate.prototype.translate = function(input, options, callback) {
  * @param {function} callback - The callback function passed to `request`.
  */
 Translate.prototype.request = function(reqOpts, callback) {
+  if (!this.key) {
+    return common.Service.prototype.request.call(this, reqOpts, callback);
+  }
+
   reqOpts.uri = this.baseUrl + reqOpts.uri;
 
+  // @TODO see if we can send this via JSON
   reqOpts = extend(true, {}, reqOpts, {
     qs: {
       key: this.key
