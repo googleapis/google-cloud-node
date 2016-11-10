@@ -24,6 +24,21 @@ var spawn = require('child_process').spawnSync;
 require('shelljs/global');
 
 /**
+ * The pull request number.
+ *
+ * @alias ci.PR_NUMBER;
+ */
+var PR_NUMBER = process.env.TRAVIS_PULL_REQUEST ||
+  process.env.APPVEYOR_PULL_REQUEST_NUMBER;
+
+/**
+ * Checks to see if this is a pull request or not.
+ *
+ * @alias ci.IS_PR
+ */
+var IS_PR = !isNaN(parseInt(PR_NUMBER, 10));
+
+/**
  * google-cloud-node root directory.. useful in case we need to cd
  */
 var ROOT_DIR = path.join(__dirname, '..');
@@ -443,21 +458,6 @@ module.exports.git = new Git();
  * @alias ci.BRANCH
  */
 var BRANCH = process.env.TRAVIS_BRANCH || process.env.APPVEYOR_REPO_BRANCH;
-
-/**
- * The pull request number.
- *
- * @alias ci.PR_NUMBER;
- */
-var PR_NUMBER = process.env.TRAVIS_PULL_REQUEST ||
-  process.env.APPVEYOR_PULL_REQUEST_NUMBER;
-
-/**
- * Checks to see if this is a pull request or not.
- *
- * @alias ci.IS_PR
- */
-var IS_PR = !isNaN(parseInt(PR_NUMBER, 10));
 
 /**
  * Returns the tag name (assuming this is a release)

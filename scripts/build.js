@@ -102,8 +102,5 @@ if (ci.isReleaseBuild()) {
 
   mod.install();
   mod.runUnitTests();
-
-  if (skipSystem.indexOf(mod.name) > -1) {
-    mod.runSystemTests();
-  }
+  mod.runSystemTests();
 }
