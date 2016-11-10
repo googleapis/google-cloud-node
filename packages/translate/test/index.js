@@ -406,6 +406,22 @@ describe('Translate', function() {
       });
     });
 
+    describe('options.model', function() {
+      it('should set the model option when available', function(done) {
+        var fakeOptions = {
+          model: 'nmt',
+          to: 'es'
+        };
+
+        translate.request = function(reqOpts) {
+          assert.strictEqual(reqOpts.json.model, 'nmt');
+          done();
+        };
+
+        translate.translate(INPUT, fakeOptions, assert.ifError);
+      });
+    });
+
     it('should make the correct API request', function(done) {
       translate.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '');

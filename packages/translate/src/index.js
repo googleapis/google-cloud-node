@@ -312,6 +312,9 @@ Translate.prototype.getLanguages = function(target, callback) {
  *     is written in.
  * @param {string} options.to - The ISO 639-1 language code to translate the
  *     input to.
+ * @param {string} options.model - **Note:** Users must be whitelisted to use
+ *     this parameter. You can use this parameter to take advantage of Neural
+ *     Machine Translation. Possible values are 'base' and 'nmt'.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {object|object[]} callback.translations - If a single string input was
@@ -387,6 +390,10 @@ Translate.prototype.translate = function(input, options, callback) {
 
     if (options.to) {
       query.target = options.to;
+    }
+
+    if (options.model) {
+      query.model = options.model;
     }
   }
 
