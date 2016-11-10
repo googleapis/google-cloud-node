@@ -329,7 +329,7 @@ Document.PART_OF_SPEECH = {
  *   //   language: 'en',
  *   //   sentiment: {
  *   //     score: 100,
- *   //     magnitude: 40
+ *   //     magnitude: 4
  *   //   },
  *   //   entities: {
  *   //     organizations: [
@@ -673,7 +673,7 @@ Document.prototype.detectEntities = function(options, callback) {
  *   // sentiment = {
  *   //   sentiment: {
  *   //     score: 100,
- *   //     magnitude: 40
+ *   //     magnitude: 4
  *   //   },
  *   //   sentences: [
  *   //     {
@@ -795,7 +795,7 @@ Document.prototype.detectSentiment = function(options, callback) {
  *   //       },
  *   //       sentiment: {
  *   //         score: 100
- *   //         magnitude: 40
+ *   //         magnitude: 4
  *   //       }
  *   //     }
  *   //   ],
@@ -915,10 +915,6 @@ Document.formatEntities_ = function(entities, verbose) {
   return groupedEntities;
 };
 
-/*!
- * @TODO - Sentences now contain sentiments for certain API calls.
- * should this be put behind verbose mode?
- */
 /**
  * Take a raw response from the API and make it more user-friendly.
  *
@@ -938,12 +934,6 @@ Document.formatSentences_ = function(sentences, verbose) {
   return sentences;
 };
 
-/*!
- * @TODO - It has been suggested we do not modify the values of sentiment.
- * While the logic behind multiplying the score (polarity) makes sense,
- * magnitude is technically unbounded and modifying this number does not seem
- * meaningful.
- */
 /**
  * Take a raw response from the API and make it more user-friendly.
  *
@@ -959,7 +949,7 @@ Document.formatSentences_ = function(sentences, verbose) {
 Document.formatSentiment_ = function(sentiment, verbose) {
   sentiment = {
     score: sentiment.score *= 100,
-    magnitude: sentiment.magnitude *= 100
+    magnitude: sentiment.magnitude
   };
 
   if (!verbose) {
