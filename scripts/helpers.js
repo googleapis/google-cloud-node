@@ -211,6 +211,10 @@ Module.prototype.runSnippetTests = function() {
  * Runs system tests for this module via `npm run system-test`
  */
 Module.prototype.runSystemTests = function() {
+  if (this.name === 'common') {
+    return;
+  }
+
   run('npm run system-test', { cwd: this.directory });
 };
 
@@ -274,7 +278,9 @@ module.exports.run = run;
 function Git(cwd) {
   this.cwd = cwd || ROOT_DIR;
   this.branch = {
-    current: run('git rev-parse --abbrev-ref HEAD', { cwd: this.cwd, })
+    current: IS_PR ? 'FETCH_HEAD' : run('git rev-parse --abbrev-ref HEAD', {
+      cwd: this.cwd
+    })
   };
 }
 
