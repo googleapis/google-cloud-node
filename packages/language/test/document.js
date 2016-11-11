@@ -560,7 +560,9 @@ describe('Document', function() {
 
     describe('success', function() {
       var apiResponse = {
-        documentSentiment: {}
+        documentSentiment: {},
+        sentences: [],
+        language: 'en'
       };
 
       var originalApiResponse = extend({}, apiResponse);
@@ -601,14 +603,154 @@ describe('Document', function() {
       });
 
       it('should allow verbose mode', function(done) {
+        var fakeSentiment = {};
+
         Document.formatSentiment_ = function(sentiment, verbose) {
+          assert.strictEqual(sentiment, apiResponse.documentSentiment);
           assert.strictEqual(verbose, true);
-          done();
+          return fakeSentiment;
         };
 
-        document.detectSentiment({
+        var fakeSentences = [];
+
+        Document.formatSentences_ = function(sentences, verbose) {
+          assert.strictEqual(sentences, apiResponse.sentences);
+          assert.strictEqual(verbose, true);
+          return fakeSentences;
+        };
+
+        var options = {
           verbose: true
-        }, assert.ifError);
+        };
+
+        document.detectSentiment(options, function(err, sentiment, resp) {
+          assert.ifError(err);
+
+          assert.strictEqual(sentiment.sentiment, fakeSentiment);
+          assert.strictEqual(sentiment.sentences, fakeSentences);
+          assert.strictEqual(sentiment.language, 'en');
+
+          assert.deepEqual(resp, apiResponse);
+
+          done();
+        });
+      });
+    });
+  });
+
+  describe('detectSyntax', function() {
+    it('should make the correct API request', function(done) {
+      document.api.Language = {
+        analyzeSyntax: function(reqOpts) {
+          assert.strictEqual(reqOpts.document, document.document);
+          assert.strictEqual(reqOpts.encodingType, document.encodingType);
+          done();
+        }
+      };
+
+      document.encodingType = 'encoding-type';
+      document.detectSyntax(assert.ifError);
+    });
+
+    describe('error', function() {
+      var apiResponse = {};
+      var error = new Error('Error.');
+
+      beforeEach(function() {
+        document.api.Language = {
+          analyzeSyntax: function(reqOpts, callback) {
+            callback(error, apiResponse);
+          }
+        };
+      });
+
+      it('should exec callback with error and API response', function(done) {
+        document.detectSyntax(function(err, syntax, apiResponse_) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(syntax, null);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = {
+        sentences: [{}],
+        tokens: [{}],
+        language: 'en'
+      };
+
+      var originalApiResponse = extend({}, apiResponse);
+
+      beforeEach(function() {
+        Document.formatTokens_ = util.noop;
+        Document.formatSentences_ = util.noop;
+
+        document.api.Language = {
+          analyzeSyntax: function(reqOpts, callback) {
+            callback(null, apiResponse);
+          }
+        };
+      });
+
+      it('should format the tokens', function(done) {
+        var formattedTokens = [{}];
+
+        Document.formatTokens_ = function(tokens, verbose) {
+          assert.strictEqual(tokens, apiResponse.tokens);
+          assert.strictEqual(verbose, false);
+          return formattedTokens;
+        };
+
+        document.detectSyntax(function(err, syntax) {
+          assert.ifError(err);
+          assert.strictEqual(syntax, formattedTokens);
+          done();
+        });
+      });
+
+      it('should clone the response object', function(done) {
+        document.detectSyntax(function(err, syntax, apiResponse_) {
+          assert.ifError(err);
+          assert.notStrictEqual(apiResponse_, apiResponse);
+          assert.deepEqual(apiResponse_, originalApiResponse);
+          done();
+        });
+      });
+
+      it('should allow verbose mode', function(done) {
+        var fakeTokens = [];
+
+        Document.formatTokens_ = function(tokens, verbose) {
+          assert.strictEqual(tokens, apiResponse.tokens);
+          assert.strictEqual(verbose, true);
+          return fakeTokens;
+        };
+
+        var fakeSentences = [];
+
+        Document.formatSentences_ = function(sentences, verbose) {
+          assert.strictEqual(sentences, apiResponse.sentences);
+          assert.strictEqual(verbose, true);
+          return fakeSentences;
+        };
+
+        var options = {
+          verbose: true
+        };
+
+        document.detectSyntax(options, function(err, syntax, resp) {
+          assert.ifError(err);
+
+          assert.strictEqual(syntax.tokens, fakeTokens);
+          assert.strictEqual(syntax.sentences, fakeSentences);
+          assert.strictEqual(syntax.language, 'en');
+
+          assert.deepEqual(resp, apiResponse);
+
+          done();
+        });
       });
     });
   });
@@ -716,7 +858,7 @@ describe('Document', function() {
 
     var EXPECTED_FORMATTED_SENTENCES = {
       default: SENTENCES.map(prop('text')).map(prop('content')),
-      verbose: SENTENCES.map(prop('text'))
+      verbose: SENTENCES
     };
 
     it('should correctly format sentences', function() {
@@ -740,17 +882,17 @@ describe('Document', function() {
 
   describe('formatSentiment_', function() {
     var SENTIMENT = {
-      polarity: -0.5,
+      score: -0.5,
       magnitude: 0.5
     };
 
     var VERBOSE = false;
 
     var EXPECTED_FORMATTED_SENTIMENT = {
-      default: SENTIMENT.polarity * 100,
+      default: SENTIMENT.score * 100,
       verbose: {
-        polarity: SENTIMENT.polarity * 100,
-        magnitude: SENTIMENT.magnitude * 100
+        score: SENTIMENT.score * 100,
+        magnitude: SENTIMENT.magnitude
       }
     };
 
@@ -782,7 +924,8 @@ describe('Document', function() {
           content: 'Text content'
         },
         partOfSpeech: {
-          tag: 'PART_OF_SPEECH_TAG'
+          tag: 'PART_OF_SPEECH_TAG',
+          fakePart: 'UNKNOWN'
         },
         property: 'value'
       }
@@ -799,7 +942,8 @@ describe('Document', function() {
         return {
           text: token.text.content,
           partOfSpeech: PART_OF_SPEECH.PART_OF_SPEECH_TAG,
-          partOfSpeechTag: 'PART_OF_SPEECH_TAG'
+          tag: 'PART_OF_SPEECH_TAG',
+          fakePart: false
         };
       }),
 

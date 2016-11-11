@@ -848,12 +848,15 @@ Document.prototype.detectSyntax = function(options, callback) {
     }
 
     var originalResp = extend(true, {}, resp);
+    var syntax = Document.formatTokens_(resp.tokens, verbose);
 
-    var syntax = {
-      sentences: Document.formatSentences_(resp.sentences, verbose),
-      tokens: Document.formatTokens_(resp.tokens, verbose),
-      language: resp.language
-    };
+    if (verbose) {
+      syntax = {
+        tokens: syntax,
+        sentences: Document.formatSentences_(resp.sentences, verbose),
+        language: resp.language
+      };
+    }
 
     callback(null, syntax, originalResp);
   });

@@ -262,6 +262,54 @@ describe('Language', function() {
     });
   });
 
+  describe('detectSyntax', function() {
+    var CONTENT = '...';
+    var OPTIONS = {
+      property: 'value'
+    };
+
+    var EXPECTED_OPTIONS = {
+      withCustomOptions: extend({}, OPTIONS, {
+        content: CONTENT
+      }),
+
+      withoutCustomOptions: extend({}, {
+        content: CONTENT
+      })
+    };
+
+    it('should call detectSyntax on a Document', function(done) {
+      language.document = function(options) {
+        assert.deepEqual(options, EXPECTED_OPTIONS.withCustomOptions);
+
+        return {
+          detectSyntax: function(options, callback) {
+            assert.deepEqual(options, EXPECTED_OPTIONS.withCustomOptions);
+            callback(); // done()
+          }
+        };
+      };
+
+      language.detectSyntax(CONTENT, OPTIONS, done);
+    });
+
+    it('should not require options', function(done) {
+      language.document = function(options) {
+        assert.deepEqual(options, EXPECTED_OPTIONS.withoutCustomOptions);
+
+        return {
+          detectSyntax: function(options, callback) {
+            assert.deepEqual(options, EXPECTED_OPTIONS.withoutCustomOptions);
+            callback(); // done()
+          }
+        };
+      };
+
+      language.detectSyntax(CONTENT, done);
+    });
+  });
+
+
   describe('document', function() {
     var CONFIG = {};
 
