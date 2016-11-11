@@ -101,6 +101,7 @@ describe('Translate', function() {
         'https://www.googleapis.com/auth/cloud-platform'
       ]);
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
+      assert.strictEqual(calledWith.projectIdRequired, false);
     });
 
     describe('Using an API Key', function() {

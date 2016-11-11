@@ -312,7 +312,7 @@ Translate.prototype.getLanguages = function(target, callback) {
  *     is written in.
  * @param {string} options.model - **Note:** Users must be whitelisted to use
  *     this parameter. Set the model type requested for this translation. Please
- *     refer to the upstread documentation for possible values.
+ *     refer to the upstream documentation for possible values.
  * @param {string} options.to - The ISO 639-1 language code to translate the
  *     input to.
  * @param {function} callback - The callback function.
@@ -376,35 +376,35 @@ Translate.prototype.getLanguages = function(target, callback) {
 Translate.prototype.translate = function(input, options, callback) {
   input = arrify(input);
 
-  var query = {
+  var body = {
     q: input,
     format: options.format || (isHtml(input[0]) ? 'html' : 'text')
   };
 
   if (is.string(options)) {
-    query.target = options;
+    body.target = options;
   } else {
     if (options.from) {
-      query.source = options.from;
+      body.source = options.from;
     }
 
     if (options.to) {
-      query.target = options.to;
+      body.target = options.to;
     }
 
     if (options.model) {
-      query.model = options.model;
+      body.model = options.model;
     }
   }
 
-  if (!query.target) {
+  if (!body.target) {
     throw new Error('A target language is required to perform a translation.');
   }
 
   this.request({
     method: 'POST',
     uri: '',
-    json: query
+    json: body
   }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
@@ -413,7 +413,7 @@ Translate.prototype.translate = function(input, options, callback) {
 
     var translations = resp.data.translations.map(prop('translatedText'));
 
-    if (query.q.length === 1) {
+    if (body.q.length === 1) {
       translations = translations[0];
     }
 
