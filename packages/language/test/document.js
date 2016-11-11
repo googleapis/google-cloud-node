@@ -626,7 +626,7 @@ describe('Document', function() {
         document.detectSentiment(options, function(err, sentiment, resp) {
           assert.ifError(err);
 
-          assert.strictEqual(sentiment.sentiment, fakeSentiment);
+          assert.strictEqual(sentiment, fakeSentiment);
           assert.strictEqual(sentiment.sentences, fakeSentences);
           assert.strictEqual(sentiment.language, 'en');
 

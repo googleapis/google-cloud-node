@@ -634,8 +634,8 @@ Document.prototype.detectEntities = function(options, callback) {
  *     results. Default: `false`
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error occurred while making this request.
- * @param {number} callback.sentiment - A value in the range of `-100`
- *      to `100`. Large numbers represent more positive sentiments.
+ * @param {number} callback.sentiment - A value in the range of `-100` to `100`.
+ *     Large numbers represent more positive sentiments.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -660,10 +660,8 @@ Document.prototype.detectEntities = function(options, callback) {
  *   }
  *
  *   // sentiment = {
- *   //   sentiment: {
- *   //     score: 100,
- *   //     magnitude: 4
- *   //   },
+ *   //   score: 100,
+ *   //   magnitude: 4,
  *   //   sentences: [
  *   //     {
  *   //       text: {
@@ -707,11 +705,10 @@ Document.prototype.detectSentiment = function(options, callback) {
     var sentiment = Document.formatSentiment_(resp.documentSentiment, verbose);
 
     if (verbose) {
-      sentiment = {
-        sentiment: sentiment,
+      sentiment = extend(sentiment, {
         sentences: Document.formatSentences_(resp.sentences, verbose),
         language: resp.language
-      };
+      });
     }
 
     callback(null, sentiment, originalResp);
