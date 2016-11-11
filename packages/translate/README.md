@@ -110,7 +110,7 @@ var translate = require('@google-cloud/translate')({
 It's also possible to authenticate with an API key. To create an API key:
 
 1. Visit the [Google Developers Console][dev-console].
-2. 2. Create a new project or click on an existing project.
+2. Create a new project or click on an existing project.
 3. Navigate to  **APIs & auth** > **APIs section** and turn on the following APIs (you may need to enable billing in order to use these services):
   * Google Translate API
 4. Navigate to **APIs & auth** >  **Credentials** and then click on **Create new Client ID** and select **API key**. You should then be presented with a pop-up containing your newly created key.

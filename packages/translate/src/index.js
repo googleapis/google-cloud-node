@@ -310,11 +310,11 @@ Translate.prototype.getLanguages = function(target, callback) {
  *     not, we set the format as `text`.
  * @param {string} options.from - The ISO 639-1 language code the source input
  *     is written in.
+ * @param {string} options.model - **Note:** Users must be whitelisted to use
+ *     this parameter. Set the model type requested for this translation. Please
+ *     refer to the upstread documentation for possible values.
  * @param {string} options.to - The ISO 639-1 language code to translate the
  *     input to.
- * @param {string} options.model - **Note:** Users must be whitelisted to use
- *     this parameter. You can use this parameter to take advantage of Neural
- *     Machine Translation. Possible values are 'base' and 'nmt'.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {object|object[]} callback.translations - If a single string input was

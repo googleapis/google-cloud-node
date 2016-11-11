@@ -17,13 +17,9 @@
 'use strict';
 
 var assert = require('assert');
-var common = require('@google-cloud/common');
 var extend = require('extend');
-var nodeutil = require('util');
 var proxyquire = require('proxyquire');
-
-var Service = common.Service;
-var util = common.util;
+var util = require('@google-cloud/common').util;
 
 var makeRequestOverride;
 var promisified = false;
@@ -44,10 +40,7 @@ var fakeUtil = extend({}, util, {
 
 function FakeService() {
   this.calledWith_ = arguments;
-  Service.apply(this, arguments);
 }
-
-nodeutil.inherits(FakeService, Service);
 
 describe('Translate', function() {
   var OPTIONS = {
@@ -98,7 +91,7 @@ describe('Translate', function() {
     });
 
     it('should inherit from Service', function() {
-      assert(translate instanceof Service);
+      assert(translate instanceof FakeService);
 
       var calledWith = translate.calledWith_[0];
       var baseUrl = 'https://translation.googleapis.com/language/translate/v2';
@@ -126,7 +119,7 @@ describe('Translate', function() {
       });
 
       it('should localize the api key', function() {
-        assert.equal(translate.key, KEY_OPTIONS.key);
+        assert.strictEqual(translate.key, KEY_OPTIONS.key);
       });
     });
 
@@ -144,7 +137,9 @@ describe('Translate', function() {
       });
 
       it('should correctly set the baseUrl', function() {
-        assert.strictEqual(translate.baseUrl, CUSTOM_ENDPOINT);
+        var baseUrl = translate.calledWith_[0].baseUrl;
+
+        assert.strictEqual(baseUrl, CUSTOM_ENDPOINT);
       });
 
       it('should remove trailing slashes', function() {
@@ -153,7 +148,9 @@ describe('Translate', function() {
         process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT = 'http://localhost:8080//';
 
         var translate = new Translate(OPTIONS);
-        assert.strictEqual(translate.baseUrl, expectedBaseUrl);
+        var baseUrl = translate.calledWith_[0].baseUrl;
+
+        assert.strictEqual(baseUrl, expectedBaseUrl);
       });
     });
   });
