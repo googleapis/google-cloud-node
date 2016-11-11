@@ -379,7 +379,7 @@ Document.PART_OF_SPEECH = {
  *   //         content:
  *   //           'Google is an American multinational technology company' +
  *   //           'specializing in Internet-related services and products.',
- *   //         beingOffset: -1
+ *   //         beginOffset: -1
  *   //       }
  *   //     }
  *   //   ],
@@ -634,12 +634,8 @@ Document.prototype.detectEntities = function(options, callback) {
  *     results. Default: `false`
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error occurred while making this request.
- * @param {number} callback.sentiment.sentiment - A value in the range of `-100`
+ * @param {number} callback.sentiment - A value in the range of `-100`
  *      to `100`. Large numbers represent more positive sentiments.
- * @param {string[]} callback.sentiment.sentences - Sentences detected from the
- *     text.
- * @param {string} callback.sentiment.language - The language detected from the
- *     text.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -648,14 +644,7 @@ Document.prototype.detectEntities = function(options, callback) {
  *     // Error handling omitted.
  *   }
  *
- *   // sentiment = {
- *   //   sentiment: 100,
- *   //   sentences: [
- *   //     'Google is an American multinational technology company ' +
- *   //     'specializing in Internet-related services and products.'
- *   //   ],
- *   //   language: 'en'
- *   // }
+ *   // sentiment = 100
  * });
  *
  * //-
@@ -681,7 +670,7 @@ Document.prototype.detectEntities = function(options, callback) {
  *   //         content:
  *   //           'Google is an American multinational technology company' +
  *   //           'specializing in Internet-related services and products.',
- *   //         beingOffset: -1
+ *   //         beginOffset: -1
  *   //       }
  *   //     }
  *   //   ],
@@ -715,12 +704,15 @@ Document.prototype.detectSentiment = function(options, callback) {
     }
 
     var originalResp = extend(true, {}, resp);
+    var sentiment = Document.formatSentiment_(resp.documentSentiment, verbose);
 
-    var sentiment = {
-      sentiment: Document.formatSentiment_(resp.documentSentiment, verbose),
-      sentences: Document.formatSentences_(resp.sentences, verbose),
-      language: resp.language
-    };
+    if (verbose) {
+      sentiment = {
+        sentiment: sentiment,
+        sentences: Document.formatSentences_(resp.sentences, verbose),
+        language: resp.language
+      };
+    }
 
     callback(null, sentiment, originalResp);
   });
@@ -972,11 +964,19 @@ Document.formatSentiment_ = function(sentiment, verbose) {
  */
 Document.formatTokens_ = function(tokens, verbose) {
   if (!verbose) {
-    tokens = tokens.map(function(token) {
-      return extend({}, token.partOfSpeech, {
-        text: token.text.content,
-        partOfSpeech: Document.PART_OF_SPEECH[token.partOfSpeech.tag]
+    tokens = tokens.map(function(rawToken) {
+      var token = extend({}, rawToken.partOfSpeech, {
+        text: rawToken.text.content,
+        partOfSpeech: Document.PART_OF_SPEECH[rawToken.partOfSpeech.tag]
       });
+
+      for (var part in token) {
+        if (token.hasOwnProperty(part) && /UNKNOWN/.test(token[part])) {
+          token[part] = false;
+        }
+      }
+
+      return token;
     });
   }
 

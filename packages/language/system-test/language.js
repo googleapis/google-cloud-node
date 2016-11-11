@@ -360,17 +360,17 @@ describe('Language', function() {
           text: 'Hello',
           partOfSpeech: 'Other: foreign words, typos, abbreviations',
           tag: 'X',
-          aspect: 'ASPECT_UNKNOWN',
-          case: 'CASE_UNKNOWN',
-          form: 'FORM_UNKNOWN',
-          gender: 'GENDER_UNKNOWN',
-          mood: 'MOOD_UNKNOWN',
-          number: 'NUMBER_UNKNOWN',
-          person: 'PERSON_UNKNOWN',
-          proper: 'PROPER_UNKNOWN',
-          reciprocity: 'RECIPROCITY_UNKNOWN',
-          tense: 'TENSE_UNKNOWN',
-          voice: 'VOICE_UNKNOWN'
+          aspect: false,
+          case: false,
+          form: false,
+          gender: false,
+          mood: false,
+          number: false,
+          person: false,
+          proper: false,
+          reciprocity: false,
+          tense: false,
+          voice: false
         });
 
         assert(is.object(apiResponse));
@@ -502,10 +502,7 @@ describe('Language', function() {
       try {
         assert.ifError(err);
 
-        assert(is.number(sentiment.sentiment));
-        assert.strictEqual(sentiment.language, 'en');
-        assert.strictEqual(sentiment.sentences.length, 2);
-
+        assert(is.number(sentiment));
         assert(is.object(apiResponse));
 
         callback();
@@ -543,20 +540,20 @@ describe('Language', function() {
         assert(is.string(syntax.sentences[0]));
         assert.strictEqual(syntax.tokens.length, 17);
         assert.deepEqual(syntax.tokens[0], {
-          aspect: 'ASPECT_UNKNOWN',
-          case: 'CASE_UNKNOWN',
-          form: 'FORM_UNKNOWN',
-          gender: 'GENDER_UNKNOWN',
-          mood: 'MOOD_UNKNOWN',
-          number: 'NUMBER_UNKNOWN',
+          aspect: false,
+          case: false,
+          form: false,
+          gender: false,
+          mood: false,
+          number: false,
           partOfSpeech: 'Other: foreign words, typos, abbreviations',
-          person: 'PERSON_UNKNOWN',
-          proper: 'PROPER_UNKNOWN',
-          reciprocity: 'RECIPROCITY_UNKNOWN',
+          person: false,
+          proper: false,
+          reciprocity: false,
           tag: 'X',
-          tense: 'TENSE_UNKNOWN',
+          tense: false,
           text: 'Hello',
-          voice: 'VOICE_UNKNOWN'
+          voice: false
         });
         assert.strictEqual(syntax.language, 'en');
 
