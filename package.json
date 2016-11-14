@@ -39,7 +39,7 @@
     "prepare-ghpages": "node ./scripts/docs/prepare.js",
     "remove-ghpages": "node ./scripts/docs/remove.js",
     "lint": "jshint scripts/ packages/ system-test/ test/ && jscs packages/ system-test/ test/",
-    "test": "npm run docs && npm run snippet-test && npm run unit-test",
+    "test": "rm -rf docs/json && npm run docs && npm run snippet-test && npm run unit-test",
     "unit-test": "mocha --timeout 5000 --bail packages/*/test/*.js",
     "snippet-test": "mocha --timeout 5000 --bail test/docs.js",
     "system-test": "mocha packages/*/system-test/*.js --no-timeouts --bail",

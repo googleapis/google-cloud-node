@@ -734,16 +734,14 @@ Table.prototype.getRows = function(options, callback) {
  *
  * table.insert(entries, callback);
  *
+ *
  * //-
- * // If you don't provide a callback, an EventEmitter is returned. Listen for
- * // the error event to catch API and insert errors, and complete for when
- * // the API request has completed.
+ * // If the callback is omitted, we'll return a Promise.
  * //-
- * table.insert(entries)
- *   .on('error', console.error)
- *   .on('complete', function() {
- *     // All requested inserts have been processed.
- *   });
+ * table.insert(entries).then(function() {
+ *   // All requested inserts have been processed.
+ * });
+ * //-
  */
 Table.prototype.insert = function(entries, callback) {
   entries = arrify(entries).map(propAssign('method', Mutation.methods.INSERT));
@@ -846,15 +844,12 @@ Table.prototype.insert = function(entries, callback) {
  * table.mutate(entries, callback);
  *
  * //-
- * // If you don't provide a callback, an EventEmitter is returned. Listen for
- * // the error event to catch API and mutation errors, and complete for when
- * // the API request has completed.
+ * // If the callback is omitted, we'll return a Promise.
  * //-
- * table.mutate(entries)
- *   .on('error', console.error)
- *   .on('complete', function() {
- *     // All requested mutations have been processed.
- *   });
+ * table.mutate(entries).then(function() {
+ *   // All requested mutations have been processed.
+ * });
+ * //-
  */
 Table.prototype.mutate = function(entries, callback) {
   entries = flatten(arrify(entries));
@@ -870,13 +865,6 @@ Table.prototype.mutate = function(entries, callback) {
     entries: entries.map(Mutation.parse)
   };
 
-  var isCallbackMode = is.function(callback);
-  var emitter = null;
-
-  if (!isCallbackMode) {
-    emitter = new events.EventEmitter();
-  }
-
   var stream = pumpify.obj([
     this.requestStream(grpcOpts, reqOpts),
     through.obj(function(data, enc, next) {
@@ -889,25 +877,14 @@ Table.prototype.mutate = function(entries, callback) {
         }
 
         var status = common.GrpcService.decorateStatus_(entry.status);
+
         status.entry = entries[entry.index];
-
-        if (!isCallbackMode) {
-          emitter.emit('error', status);
-          return;
-        }
-
         throughStream.push(status);
       });
 
       next();
     })
   ]);
-
-  if (!isCallbackMode) {
-    stream.on('error', emitter.emit.bind(emitter, 'error'));
-    stream.on('finish', emitter.emit.bind(emitter, 'complete'));
-    return emitter;
-  }
 
   stream
     .on('error', callback)
@@ -1029,7 +1006,7 @@ Table.prototype.sampleRowKeysStream = function() {
  * that a callback is omitted.
  */
 common.util.promisifyAll(Table, {
-  exclude: ['family', 'insert', 'mutate', 'row']
+  exclude: ['family', 'row']
 });
 
 module.exports = Table;
