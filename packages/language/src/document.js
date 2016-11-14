@@ -491,7 +491,8 @@ Document.PART_OF_SPEECH = {
  *   //       },
  *   //       dependencyEdge: {
  *   //         headTokenIndex: 1,
- *   //         label: 'NSUBJ'
+ *   //         label: 'NSUBJ',
+ *   //         description: 'Nominal subject'
  *   //       },
  *   //       lemma: 'Google'
  *   //     },
@@ -920,7 +921,8 @@ Document.prototype.detectSentiment = function(options, callback) {
  *   //       },
  *   //       dependencyEdge: {
  *   //         headTokenIndex: 1,
- *   //         label: 'NSUBJ'
+ *   //         label: 'NSUBJ',
+ *   //         description: 'Nominal subject'
  *   //       },
  *   //       lemme: 'Google'
  *   //     }
