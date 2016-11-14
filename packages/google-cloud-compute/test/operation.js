@@ -18,17 +18,16 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
-var ServiceObject = require('@google-cloud/common').ServiceObject;
+var proxyquire = require('proxyquire').noPreserveCache();
 var util = require('@google-cloud/common').util;
+
+function FakeOperation() {
+  this.calledWith_ = arguments;
+}
 
 function FakeServiceObject() {
   this.calledWith_ = arguments;
-  ServiceObject.apply(this, arguments);
 }
-
-nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 var parseHttpRespBodyOverride = null;
 var promisified = false;
@@ -59,6 +58,7 @@ describe('Operation', function() {
   before(function() {
     Operation = proxyquire('../src/operation.js', {
       '@google-cloud/common': {
+        Operation: FakeOperation,
         ServiceObject: FakeServiceObject,
         util: fakeUtil
       }
@@ -70,17 +70,13 @@ describe('Operation', function() {
     operation = new Operation(SCOPE, OPERATION_NAME);
   });
 
-  afterEach(function() {
-    operation.removeAllListeners();
-  });
-
   describe('instantiation', function() {
     it('should localize the name', function() {
       assert.strictEqual(operation.name, OPERATION_NAME);
     });
 
-    it('should inherit from ServiceObject', function() {
-      assert(operation instanceof ServiceObject);
+    it('should inherit from Operation', function() {
+      assert(operation instanceof FakeOperation);
 
       var calledWith = operation.calledWith_[0];
 
@@ -107,11 +103,6 @@ describe('Operation', function() {
 
       var calledWith = operation.calledWith_[0];
       assert.strictEqual(calledWith.baseUrl, '/global/operations');
-    });
-
-    it('should correctly initialize variables', function() {
-      assert.strictEqual(operation.completeListeners, 0);
-      assert.strictEqual(operation.hasActiveListeners, false);
     });
   });
 
@@ -205,133 +196,17 @@ describe('Operation', function() {
     });
   });
 
-  describe('promise', function() {
+  describe('poll_', function() {
     beforeEach(function() {
-      operation.startPolling_ = util.noop;
+      operation.emit = util.noop;
     });
 
-    it('should return an instance of the localized Promise', function() {
-      var FakePromise = operation.Promise = function() {};
-      var promise = operation.promise();
-
-      assert(promise instanceof FakePromise);
-    });
-
-    it('should reject the promise if an error occurs', function() {
-      var error = new Error('err');
-
-      setImmediate(function() {
-        operation.emit('error', error);
-      });
-
-      return operation.promise().then(function() {
-        throw new Error('Promise should have been rejected.');
-      }, function(err) {
-        assert.strictEqual(err, error);
-      });
-    });
-
-    it('should resolve the promise on complete', function() {
-      var metadata = {};
-
-      setImmediate(function() {
-        operation.emit('complete', metadata);
-      });
-
-      return operation.promise().then(function(data) {
-        assert.deepEqual(data, [metadata]);
-      });
-    });
-  });
-
-  describe('listenForEvents_', function() {
-    beforeEach(function() {
-      operation.startPolling_ = util.noop;
-    });
-
-    it('should start polling when complete listener is bound', function(done) {
-      operation.startPolling_ = function() {
-        done();
-      };
-
-      operation.on('complete', util.noop);
-    });
-
-    it('should track the number of listeners', function() {
-      assert.strictEqual(operation.completeListeners, 0);
-
-      operation.on('complete', util.noop);
-      assert.strictEqual(operation.completeListeners, 1);
-
-      operation.removeListener('complete', util.noop);
-      assert.strictEqual(operation.completeListeners, 0);
-    });
-
-    it('should only run a single pulling loop', function() {
-      var startPollingCallCount = 0;
-
-      operation.startPolling_ = function() {
-        startPollingCallCount++;
-      };
-
-      operation.on('complete', util.noop);
-      operation.on('complete', util.noop);
-
-      assert.strictEqual(startPollingCallCount, 1);
-    });
-
-    it('should close when no more message listeners are bound', function() {
-      operation.on('complete', util.noop);
-      operation.on('complete', util.noop);
-      assert.strictEqual(operation.hasActiveListeners, true);
-
-      operation.removeListener('complete', util.noop);
-      assert.strictEqual(operation.hasActiveListeners, true);
-
-      operation.removeListener('complete', util.noop);
-      assert.strictEqual(operation.hasActiveListeners, false);
-    });
-  });
-
-  describe('startPolling_', function() {
-    var listenForEvents_;
-    var operation;
-
-    before(function() {
-      listenForEvents_ = Operation.prototype.listenForEvents_;
-    });
-
-    after(function() {
-      Operation.prototype.listenForEvents_ = listenForEvents_;
-    });
-
-    beforeEach(function() {
-      Operation.prototype.listenForEvents_ = util.noop;
-      operation = new Operation(SCOPE, OPERATION_NAME);
-      operation.hasActiveListeners = true;
-    });
-
-    afterEach(function() {
-      operation.hasActiveListeners = false;
-    });
-
-    it('should not call getMetadata if no listeners', function(done) {
-      operation.hasActiveListeners = false;
-
-      operation.getMetadata = done; // if called, test will fail.
-
-      operation.startPolling_();
-      done();
-    });
-
-    it('should call getMetadata if listeners are registered', function(done) {
-      operation.hasActiveListeners = true;
-
+    it('should call getMetadata', function(done) {
       operation.getMetadata = function() {
         done();
       };
 
-      operation.startPolling_();
+      operation.poll_(assert.ifError);
     });
 
     describe('API error', function() {
@@ -344,12 +219,10 @@ describe('Operation', function() {
       });
 
       it('should emit the error', function(done) {
-        operation.on('error', function(err) {
+        operation.poll_(function(err) {
           assert.strictEqual(err, error);
           done();
         });
-
-        operation.startPolling_();
       });
     });
 
@@ -363,37 +236,23 @@ describe('Operation', function() {
         };
       });
 
-      it('should parse the response body', function(done) {
+      it('should parse and return the response body', function(done) {
+        var parsedHttpRespBody = { err: {} };
+
         parseHttpRespBodyOverride = function(body) {
           assert.strictEqual(body, apiResponse);
-          setImmediate(done);
-          return {};
+          return parsedHttpRespBody;
         };
 
-        operation.startPolling_();
-      });
-
-      it('should detect and emit the error', function(done) {
-        parseHttpRespBodyOverride = function(body) {
-          assert.strictEqual(body, apiResponse);
-
-          return {
-            err: error
-          };
-        };
-
-        operation.on('error', function(err) {
-          assert.strictEqual(err, error);
+        operation.poll_(function(err) {
+          assert.strictEqual(err, parsedHttpRespBody.err);
           done();
         });
-
-        operation.startPolling_();
       });
     });
 
-    describe('operation pending', function() {
-      var apiResponse = { status: 'PENDING' };
-      var setTimeoutCached = global.setTimeout;
+    describe('operation running', function() {
+      var apiResponse = { status: 'RUNNING' };
 
       beforeEach(function() {
         operation.getMetadata = function(callback) {
@@ -401,33 +260,35 @@ describe('Operation', function() {
         };
       });
 
-      after(function() {
-        global.setTimeout = setTimeoutCached;
+      it('should update status', function(done) {
+        delete operation.status;
+
+        operation.poll_(function(err) {
+          assert.ifError(err);
+          assert.strictEqual(operation.status, apiResponse.status);
+          done();
+        });
       });
 
-      it('should call startPolling_ after 500 ms', function(done) {
-        var startPolling_ = operation.startPolling_;
-        var startPollingCalled = false;
-
-        global.setTimeout = function(fn, timeoutMs) {
-          fn(); // should call startPolling_
-          assert.strictEqual(timeoutMs, 500);
-        };
-
-        operation.startPolling_ = function() {
-          if (!startPollingCalled) {
-            // Call #1.
-            startPollingCalled = true;
-            startPolling_.apply(this, arguments);
-            return;
-          }
-
-          // This is from the setTimeout call.
-          assert.strictEqual(this, operation);
+      it('should emit the running event', function(done) {
+        operation.emit = function(eventName, metadata) {
+          assert.strictEqual(eventName, 'running');
+          assert.strictEqual(metadata, apiResponse);
           done();
         };
 
-        operation.startPolling_();
+        operation.poll_(assert.ifError);
+      });
+
+      it('should not emit running if already running', function(done) {
+        operation.emit = function(eventName) {
+          assert.strictEqual(eventName, 'running');
+
+          operation.emit = done; // will fail test if called
+          operation.poll_(done);
+        };
+
+        operation.poll_(assert.ifError);
       });
     });
 
@@ -440,58 +301,22 @@ describe('Operation', function() {
         };
       });
 
-      it('should emit complete with metadata', function(done) {
-        operation.on('complete', function(metadata) {
+      it('should update status', function(done) {
+        operation.status = 'PENDING';
+
+        operation.poll_(function(err) {
+          assert.ifError(err);
+          assert.strictEqual(operation.status, apiResponse.status);
+          done();
+        });
+      });
+
+      it('should execute callback with metadata', function(done) {
+        operation.poll_(function(err, metadata) {
+          assert.ifError(err);
           assert.strictEqual(metadata, apiResponse);
           done();
         });
-
-        operation.startPolling_();
-      });
-    });
-
-    describe('operation status', function() {
-      var apiResponse;
-
-      beforeEach(function() {
-        apiResponse = { status: 'RUNNING' };
-
-        operation.getMetadata = function(callback) {
-          callback(null, apiResponse, apiResponse);
-        };
-      });
-
-      it('should emit the running event when running', function(done) {
-        operation.on('running', function(metadata) {
-          assert.strictEqual(metadata, apiResponse);
-          done();
-        });
-
-        operation.startPolling_();
-      });
-
-      it('should only emit the running event once', function(done) {
-        var statusSteps = ['PENDING', 'RUNNING', 'RUNNING', 'DONE'];
-        var metadataCallCount = 0;
-        var runningCallCount = 0;
-
-        this.timeout(2000);
-
-        operation.getMetadata = function(callback) {
-          apiResponse.status = statusSteps[metadataCallCount++];
-          callback(null, apiResponse, apiResponse);
-        };
-
-        operation.on('running', function() {
-          runningCallCount++;
-        });
-
-        operation.on('complete', function() {
-          assert.strictEqual(runningCallCount, 1);
-          done();
-        });
-
-        operation.startPolling_();
       });
     });
   });

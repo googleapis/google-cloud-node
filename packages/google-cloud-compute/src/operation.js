@@ -21,8 +21,7 @@
 'use strict';
 
 var common = require('@google-cloud/common');
-var events = require('events');
-var modelo = require('modelo');
+var util = require('util');
 
 /*! Developer Documentation
  *
@@ -159,23 +158,17 @@ function Operation(scope, name) {
     get: true
   };
 
-  common.ServiceObject.call(this, {
+  common.Operation.call(this, {
     parent: scope,
     baseUrl: isCompute ? '/global/operations' : '/operations',
     id: name,
     methods: methods
   });
 
-  events.EventEmitter.call(this);
-
-  this.completeListeners = 0;
-  this.hasActiveListeners = false;
   this.name = name;
-
-  this.listenForEvents_();
 }
 
-modelo.inherits(Operation, common.ServiceObject, events.EventEmitter);
+util.inherits(Operation, common.Operation);
 
 /**
  * Get the operation's metadata. For a detailed description of metadata see
@@ -231,62 +224,6 @@ Operation.prototype.getMetadata = function(callback) {
 };
 
 /**
- * Convenience method that wraps the `complete` and `error` events in a
- * Promise.
- *
- * @return {promise}
- *
- * @example
- * operation.promise().then(function(metadata) {
- *   // The operation is complete.
- * }, function(err) {
- *   // An error occurred during the operation.
- * });
- */
-Operation.prototype.promise = function() {
-  var self = this;
-
-  return new self.Promise(function(resolve, reject) {
-    self
-      .on('error', reject)
-      .on('complete', function(metadata) {
-        resolve([metadata]);
-      });
-  });
-};
-
-/**
- * Begin listening for events on the operation. This method keeps track of how
- * many "complete" listeners are registered and removed, making sure polling is
- * handled automatically.
- *
- * As long as there is one active "complete" listener, the connection is open.
- * When there are no more listeners, the polling stops.
- *
- * @private
- */
-Operation.prototype.listenForEvents_ = function() {
-  var self = this;
-
-  this.on('newListener', function(event) {
-    if (event === 'complete') {
-      self.completeListeners++;
-
-      if (!self.hasActiveListeners) {
-        self.hasActiveListeners = true;
-        self.startPolling_();
-      }
-    }
-  });
-
-  this.on('removeListener', function(event) {
-    if (event === 'complete' && --self.completeListeners === 0) {
-      self.hasActiveListeners = false;
-    }
-  });
-};
-
-/**
  * Poll `getMetadata` to check the operation's status. This runs a loop to ping
  * the API on an interval.
  *
@@ -295,12 +232,8 @@ Operation.prototype.listenForEvents_ = function() {
  *
  * @private
  */
-Operation.prototype.startPolling_ = function() {
+Operation.prototype.poll_ = function(callback) {
   var self = this;
-
-  if (!this.hasActiveListeners) {
-    return;
-  }
 
   this.getMetadata(function(err, metadata, apiResponse) {
     // Parsing the response body will automatically create an ApiError object if
@@ -309,7 +242,7 @@ Operation.prototype.startPolling_ = function() {
     err = err || parsedHttpRespBody.err;
 
     if (err) {
-      self.emit('error', err);
+      callback(err);
       return;
     }
 
@@ -319,12 +252,12 @@ Operation.prototype.startPolling_ = function() {
     }
 
     if (metadata.status !== 'DONE') {
-      setTimeout(self.startPolling_.bind(self), 500);
+      callback();
       return;
     }
 
     self.status = metadata.status;
-    self.emit('complete', metadata);
+    callback(null, metadata);
   });
 };
 
