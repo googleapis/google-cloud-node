@@ -23,7 +23,6 @@
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var concat = require('concat-stream');
-var events = require('events');
 var flatten = require('lodash.flatten');
 var is = require('is');
 var propAssign = require('prop-assign');

@@ -17,7 +17,6 @@
 'use strict';
 
 var assert = require('assert');
-var events = require('events');
 var extend = require('extend');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
