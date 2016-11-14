@@ -102,6 +102,92 @@ function Document(language, config) {
 }
 
 /**
+ * Labels that can be used to represent a token.
+ *
+ * @private
+ * @type {object}
+ */
+Document.LABEL_DESCRIPTIONS = {
+  UNKNOWN: 'Unknown',
+  ABBREV: 'Abbreviation modifier',
+  ACOMP: 'Adjectival complement',
+  ADVCL: 'Adverbial clause modifier',
+  ADVMOD: 'Adverbial modifier',
+  AMOD: 'Adjectival modifier of an NP',
+  APPOS: 'Appositional modifier of an NP',
+  ATTR: 'Attribute dependent of a copular verb',
+  AUX: 'Auxiliary (non-main) verb',
+  AUXPASS: 'Passive auxiliary',
+  CC: 'Coordinating conjunction',
+  CCOMP: 'Clausal complement of a verb or adjective',
+  CONJ: 'Conjunct',
+  CSUBJ: 'Clausal subject',
+  CSUBJPASS: 'Clausal passive subject',
+  DEP: 'Dependency (unable to determine)',
+  DET: 'Determiner',
+  DISCOURSE: 'Discourse',
+  DOBJ: 'Direct object',
+  EXPL: 'Expletive',
+  GOESWITH: ' Goes with (part of a word in a text not well edited)',
+  IOBJ: 'Indirect object',
+  MARK: 'Marker (word introducing a subordinate clause)',
+  MWE: 'Multi-word expression',
+  MWV: 'Multi-word verbal expression',
+  NEG: 'Negation modifier',
+  NN: 'Noun compound modifier',
+  NPADVMOD: 'Noun phrase used as an adverbial modifier',
+  NSUBJ: 'Nominal subject',
+  NSUBJPASS: 'Passive nominal subject',
+  NUM: 'Numeric modifier of a noun',
+  NUMBER: 'Element of compound number',
+  P: 'Punctuation mark',
+  PARATAXIS: 'Parataxis relation',
+  PARTMOD: 'Participial modifier',
+  PCOMP: 'The complement of a preposition is a clause',
+  POBJ: 'Object of a preposition',
+  POSS: 'Possession modifier',
+  POSTNEG: 'Postverbal negative particle',
+  PRECOMP: 'Predicate complement',
+  PRECONJ: 'Preconjunt',
+  PREDET: 'Predeterminer',
+  PREF: 'Prefix',
+  PREP: 'Prepositional modifier',
+  PRONL: 'The relationship between a verb and verbal morpheme',
+  PRT: 'Particle',
+  PS: 'Associative or possessive marker',
+  QUANTMOD: 'Quantifier phrase modifier',
+  RCMOD: 'Relative clause modifier',
+  RCMODREL: 'Complementizer in relative clause',
+  RDROP: 'Ellipsis without a preceding predicate',
+  REF: 'Referent',
+  REMNANT: 'Remnant',
+  REPARANDUM: 'Reparandum',
+  ROOT: 'Root',
+  SNUM: 'Suffix specifying a unit of number',
+  SUFF: 'Suffix',
+  TMOD: 'Temporal modifier',
+  TOPIC: 'Topic marker',
+  VMOD: 'Clause headed by an infinite form of the verb that modifies a noun',
+  VOCATIVE: 'Vocative',
+  XCOMP: 'Open clausal complement',
+  SUFFIX: 'Name suffix',
+  TITLE: 'Name title',
+  ADVPHMOD: 'Adverbial phrase modifier',
+  AUXCAUS: 'Causative auxiliary',
+  AUXVV: 'Helper auxiliary',
+  DTMOD: 'Rentaishi (Prenominal modifier)',
+  FOREIGN: 'Foreign words',
+  KW: 'Keyword',
+  LIST: 'List for chains of comparable items',
+  NOMC: 'Nominalized clause',
+  NOMCSUBJ: 'Nominalized clausal subject',
+  NOMCSUBJPASS: 'Nominalized clausal passive',
+  NUMC: 'Compound of numeric modifier',
+  COP: 'Copula',
+  DISLOCATED: 'Dislocated relation (for fronted/topicalized elements)'
+};
+
+/**
  * The parts of speech that will be recognized by the Natural Language API.
  *
  * @private
@@ -721,18 +807,18 @@ Document.prototype.detectSentiment = function(options, callback) {
  * @resource [documents.analyzeSyntax API Documentation]{@link https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeSyntax}
  *
  * @param {object=} options - Configuration object. See
- *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeSyntax#request-body).
+ *     [documents.annotateSyntax](https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeSyntax#request-body).
  * @param {boolean} options.verbose - Enable verbose mode for more detailed
  *     results. Default: `false`
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error occurred while making this request.
- * @param {object} callback.syntax - The recognizd syntax from the text.
+ * @param {object} callback.syntax - The syntax recognized from the text.
+ * @param {string} callback.syntax.language - The language detected from the
+ *     text.
  * @param {string[]} callback.syntax.sentences - Sentences detected from the
  *     text.
  * @param {object[]} callback.syntax.tokens - Parts of speech that were
  *     detected from the text.
- * @param {string} callback.syntax.language - The language detected from the
- *     text.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -749,11 +835,35 @@ Document.prototype.detectSentiment = function(options, callback) {
  *   //   tokens: [
  *   //     {
  *   //       text: 'Google',
- *   //       partOfSpeech: 'Noun (common and proper)'
+ *   //       partOfSpeech: 'Noun (common and proper)',
+ *   //       tag: 'NOUN',
+ *   //       aspect: 'PERFECTIVE',
+ *   //       case: 'ADVERBIAL',
+ *   //       form: 'ADNOMIAL',
+ *   //       gender: 'FEMININE',
+ *   //       mood: 'IMPERATIVE',
+ *   //       number: 'SINGULAR',
+ *   //       person: 'FIRST',
+ *   //       proper: 'PROPER',
+ *   //       reciprocity: 'RECIPROCAL',
+ *   //       tense: 'PAST',
+ *   //       voice: 'PASSIVE'
  *   //     },
  *   //     {
  *   //       text: 'is',
- *   //       partOfSpeech: 'Verb (all tenses and modes)'
+ *   //       partOfSpeech: 'Verb (all tenses and modes)',
+ *   //       tag: 'VERB',
+ *   //       aspect: 'PERFECTIVE',
+ *   //       case: 'ADVERBIAL',
+ *   //       form: 'ADNOMIAL',
+ *   //       gender: 'FEMININE',
+ *   //       mood: 'IMPERATIVE',
+ *   //       number: 'SINGULAR',
+ *   //       person: 'FIRST',
+ *   //       proper: 'PROPER',
+ *   //       reciprocity: 'RECIPROCAL',
+ *   //       tense: 'PAST',
+ *   //       voice: 'PASSIVE'
  *   //     },
  *   //     ...
  *   //   ],
@@ -970,9 +1080,17 @@ Document.formatTokens_ = function(tokens, verbose) {
         partOfSpeech: Document.PART_OF_SPEECH[rawToken.partOfSpeech.tag]
       });
 
+      if (rawToken.dependencyEdge) {
+        var label = rawToken.dependencyEdge.label;
+
+        token.dependencyEdge = extend({}, rawToken.dependencyEdge, {
+          description: Document.LABEL_DESCRIPTIONS[label]
+        });
+      }
+
       for (var part in token) {
         if (token.hasOwnProperty(part) && /UNKNOWN/.test(token[part])) {
-          token[part] = false;
+          token[part] = undefined;
         }
       }
 

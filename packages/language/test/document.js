@@ -943,7 +943,7 @@ describe('Document', function() {
           text: token.text.content,
           partOfSpeech: PART_OF_SPEECH.PART_OF_SPEECH_TAG,
           tag: 'PART_OF_SPEECH_TAG',
-          fakePart: false
+          fakePart: undefined
         };
       }),
 
