@@ -90,20 +90,26 @@ If you are not running this client on Google Compute Engine, you need a Google D
   * Google Cloud Storage
   * Google Cloud Storage JSON API
 4. Navigate to **APIs & auth** >  **Credentials** and then:
-  * If you want to use a new service account, click on **Create new Client ID** and select **Service account**. After the account is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
-  * If you want to generate a new key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
+  * If you want to use a new service account key, click on **Create credentials** and select **Service account key**. After the account key is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
+  * If you want to generate a new service account key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
+  * If you want to use a new API key, click on **Create credentials** and select **API key**. After the API key is created, you will see a newly opened modal with the API key in a field named **Your API key** that the library uses to authenticate your requests.
+  * If you want to generate a new API key for an existing API key, click on an existing API key and click **Regenerate key**.
 
 ``` js
 var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
 
 var gcs = require('@google-cloud/storage')({
+  // 1. Specify projectId
   projectId: projectId,
-
+  // 2. Specify authentication
+  // To authenticate with a service account key use
   // The path to your key file:
   keyFilename: '/path/to/keyfile.json'
-
   // Or the contents of the key file:
   credentials: require('./path/to/keyfile.json')
+  
+  // To authenticate with an API key use
+  key: 'yourKeyContent'
 });
 
 // ...you're good to go!
