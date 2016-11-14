@@ -26,6 +26,7 @@ var extend = require('extend');
 var is = require('is');
 var isHtml = require('is-html');
 var prop = require('propprop');
+var util = require('util');
 
 var PKG = require('../package.json');
 
@@ -40,9 +41,6 @@ var PKG = require('../package.json');
  * [Pricing](https://cloud.google.com/translate/v2/pricing.html) and
  * [FAQ](https://cloud.google.com/translate/v2/faq.html) pages for details.
  *
- * **An API key is required for Translate.** See
- * [Identifying your application to Google](https://cloud.google.com/translate/v2/using_rest#auth).
- *
  * @constructor
  * @alias module:translate
  *
@@ -52,7 +50,7 @@ var PKG = require('../package.json');
  * @throws {Error} If an API key is not provided.
  *
  * @param {object} options - [Configuration object](#/docs).
- * @param {string} options.key - An API key.
+ * @param {string=} options.key - An API key.
  *
  * @example
  * //-
@@ -70,20 +68,29 @@ function Translate(options) {
     return new Translate(options);
   }
 
-  if (!options.key) {
-    throw new Error('An API key is required to use the Translate API.');
-  }
-
-  this.baseUrl = 'https://www.googleapis.com/language/translate/v2';
+  var baseUrl = 'https://translation.googleapis.com/language/translate/v2';
 
   if (process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT) {
-    this.baseUrl = process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT
+    baseUrl = process.env.GOOGLE_CLOUD_TRANSLATE_ENDPOINT
       .replace(/\/+$/, '');
   }
 
-  this.options = options;
-  this.key = options.key;
+  if (options.key) {
+    this.options = options;
+    this.key = options.key;
+  }
+
+  var config = {
+    baseUrl: baseUrl,
+    scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+    packageJson: require('../package.json'),
+    projectIdRequired: false
+  };
+
+  common.Service.call(this, config, options);
 }
+
+util.inherits(Translate, common.Service);
 
 /**
  * Detect the language used in a string or multiple strings.
@@ -153,9 +160,9 @@ Translate.prototype.detect = function(input, callback) {
   input = arrify(input);
 
   this.request({
+    method: 'POST',
     uri: '/detect',
-    useQuerystring: true,
-    qs: {
+    json: {
       q: input
     }
   }, function(err, resp) {
@@ -303,6 +310,9 @@ Translate.prototype.getLanguages = function(target, callback) {
  *     not, we set the format as `text`.
  * @param {string} options.from - The ISO 639-1 language code the source input
  *     is written in.
+ * @param {string} options.model - **Note:** Users must be whitelisted to use
+ *     this parameter. Set the model type requested for this translation. Please
+ *     refer to the upstream documentation for possible values.
  * @param {string} options.to - The ISO 639-1 language code to translate the
  *     input to.
  * @param {function} callback - The callback function.
@@ -366,31 +376,35 @@ Translate.prototype.getLanguages = function(target, callback) {
 Translate.prototype.translate = function(input, options, callback) {
   input = arrify(input);
 
-  var query = {
+  var body = {
     q: input,
     format: options.format || (isHtml(input[0]) ? 'html' : 'text')
   };
 
   if (is.string(options)) {
-    query.target = options;
+    body.target = options;
   } else {
     if (options.from) {
-      query.source = options.from;
+      body.source = options.from;
     }
 
     if (options.to) {
-      query.target = options.to;
+      body.target = options.to;
+    }
+
+    if (options.model) {
+      body.model = options.model;
     }
   }
 
-  if (!query.target) {
+  if (!body.target) {
     throw new Error('A target language is required to perform a translation.');
   }
 
   this.request({
+    method: 'POST',
     uri: '',
-    useQuerystring: true,
-    qs: query
+    json: body
   }, function(err, resp) {
     if (err) {
       callback(err, null, resp);
@@ -399,7 +413,7 @@ Translate.prototype.translate = function(input, options, callback) {
 
     var translations = resp.data.translations.map(prop('translatedText'));
 
-    if (query.q.length === 1) {
+    if (body.q.length === 1) {
       translations = translations[0];
     }
 
@@ -408,10 +422,10 @@ Translate.prototype.translate = function(input, options, callback) {
 };
 
 /**
- * A custom request implementation. Requests to this API use an API key for an
- * application, not a bearer token from a service account. This means we skip
- * the `makeAuthenticatedRequest` portion of the typical request lifecycle, and
- * manually authenticate the request here.
+ * A custom request implementation. Requests to this API may optionally use an
+ * API key for an application, not a bearer token from a service account. This
+ * means it is possible to skip the `makeAuthenticatedRequest` portion of the
+ * typical request lifecycle, and manually authenticate the request here.
  *
  * @private
  *
@@ -419,6 +433,11 @@ Translate.prototype.translate = function(input, options, callback) {
  * @param {function} callback - The callback function passed to `request`.
  */
 Translate.prototype.request = function(reqOpts, callback) {
+  if (!this.key) {
+    common.Service.prototype.request.call(this, reqOpts, callback);
+    return;
+  }
+
   reqOpts.uri = this.baseUrl + reqOpts.uri;
 
   reqOpts = extend(true, {}, reqOpts, {
