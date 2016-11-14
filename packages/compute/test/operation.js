@@ -18,7 +18,6 @@
 
 var assert = require('assert');
 var extend = require('extend');
-var nodeutil = require('util');
 var proxyquire = require('proxyquire').noPreserveCache();
 var util = require('@google-cloud/common').util;
 
@@ -282,7 +281,7 @@ describe('Operation', function() {
       });
 
       it('should not emit running if already running', function(done) {
-        operation.emit = function(eventName, metadata) {
+        operation.emit = function(eventName) {
           assert.strictEqual(eventName, 'running');
 
           operation.emit = done; // will fail test if called
