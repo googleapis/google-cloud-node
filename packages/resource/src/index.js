@@ -86,7 +86,7 @@ util.inherits(Resource, common.Service);
  * @resource [Projects Overview]{@link https://cloud.google.com/compute/docs/networking#networks}
  * @resource [projects: create API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/create}
  *
- * @param {string} name - Name of the project.
+ * @param {string} id - ID of the project.
  * @param {object=} options - See a
  *     [Project resource](https://cloud.google.com/resource-manager/reference/rest/v1/projects#Project).
  * @param {function=} callback - The callback function.
@@ -96,19 +96,39 @@ util.inherits(Resource, common.Service);
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * resource.createProject('new project name', function(err, project) {
- *   if (!err) {
- *     // `project` is a new Project instance.
+ * var id = 'new-project-id';
+ *
+ * resource.createProject(id, function(err, project, operation, apiResponse) {
+ *   if (err) {
+ *     // Error handling omitted.
  *   }
+ *
+ *   // `project` is a new Project instance.
+ *   // `operation` will emit `error` or `complete` when the status updates.
+ *
+ *   operation
+ *     .on('error', function(err) {})
+ *     .on('complete', function() {
+ *       // Project was created successfully!
+ *     });
  * });
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * resource.createProject('new project name').then(function(data) {
- *   var project = data[0];
- *   var apiResponse = data[1];
- * });
+ * resource.createProject(id)
+ *   .then(function(data) {
+ *     var project = data[0];
+ *     var operation = data[1];
+ *     var apiResponse = data[2];
+ *
+ *     return operation.promise();
+ *   })
+ *   .then(function(data) {
+ *     var operationMetadata = data[0];
+ *
+ *     // Project created successfully!
+ *   });
  */
 Resource.prototype.createProject = function(id, options, callback) {
   var self = this;

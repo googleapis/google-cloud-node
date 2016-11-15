@@ -48,19 +48,36 @@ function Project(resource, id) {
      * @param {object=} config - See {module:resource#createProject}.
      *
      * @example
-     * project.create(function(err, zone, apiResponse) {
-     *   if (!err) {
-     *     // The zone was created successfully.
+     * project.create(function(err, project, operation, apiResponse) {
+     *   if (err) {
+     *     // Error handling omitted.
      *   }
+     *
+     *   // `operation` will emit `error` or `complete` when the status updates.
+     *
+     *   operation
+     *     .on('error', function(err) {})
+     *     .on('complete', function() {
+     *       // Project was created successfully!
+     *     });
      * });
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * project.create().then(function(data) {
-     *   var zone = data[0];
-     *   var apiResponse = data[0];
-     * });
+     * project.create()
+     *   .then(function(data) {
+     *     var project = data[0];
+     *     var operation = data[1];
+     *     var apiResponse = data[2];
+     *
+     *     return operation.promise();
+     *   })
+     *   .then(function(data) {
+     *     var operationMetadata = data[0];
+     *
+     *     // Project created successfully!
+     *   });
      */
     create: true,
 

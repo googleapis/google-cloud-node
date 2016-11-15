@@ -68,7 +68,7 @@ var fakeUtil = extend({}, util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, ['project']);
+    assert.deepEqual(options.exclude, ['operation', 'project']);
   }
 });
 
@@ -138,7 +138,7 @@ describe('Resource', function() {
 
       var calledWith = resource.calledWith_[0];
 
-      var baseUrl = 'https://cloudresourcemanager.googleapis.com/v1beta1';
+      var baseUrl = 'https://cloudresourcemanager.googleapis.com/v1';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/cloud-platform'
@@ -197,7 +197,10 @@ describe('Resource', function() {
     });
 
     describe('success', function() {
-      var apiResponse = { projectId: NEW_PROJECT_ID };
+      var apiResponse = {
+        projectId: PROJECT_ID,
+        name: 'operation-name'
+      };
 
       beforeEach(function() {
         resource.request = function(reqOpts, callback) {
@@ -207,18 +210,28 @@ describe('Resource', function() {
 
       it('should exec callback with Project & API response', function(done) {
         var project = {};
+        var fakeOperation = {};
 
         resource.project = function(id) {
-          assert.strictEqual(id, NEW_PROJECT_ID);
+          assert.strictEqual(id, apiResponse.projectId);
           return project;
         };
 
-        resource.createProject(NEW_PROJECT_ID, OPTIONS, function(err, p, res) {
-          assert.ifError(err);
+        resource.operation = function(name) {
+          assert.strictEqual(name, apiResponse.name);
+          return fakeOperation;
+        };
+
+        resource.createProject(NEW_PROJECT_ID, OPTIONS, function(e, p, o, res) {
+          assert.ifError(e);
 
           assert.strictEqual(p, project);
 
+          assert.strictEqual(o, fakeOperation);
+          assert.strictEqual(o.metadata, apiResponse);
+
           assert.strictEqual(res, apiResponse);
+
           done();
         });
       });
