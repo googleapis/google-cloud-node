@@ -288,6 +288,34 @@ describe('Language', function() {
               }, validateSentimentVerbose(done));
             });
           });
+
+          describe('syntax', function() {
+            it('should work without creating a document', function(done) {
+              if (!CONTENT_TYPE) {
+                language.detectSyntax(
+                  CONTENT,
+                  validateSyntaxSimple(done)
+                );
+                return;
+              }
+
+              language.detectSyntax(
+                CONTENT,
+                { type: CONTENT_TYPE },
+                validateSyntaxSimple(done)
+              );
+            });
+
+            it('should return the correct simplified response', function(done) {
+              DOC.detectSyntax(validateSyntaxSimple(done));
+            });
+
+            it('should support verbose mode', function(done) {
+              DOC.detectSyntax({
+                verbose: true
+              }, validateSyntaxVerbose(done));
+            });
+          });
         });
       });
     });
@@ -331,7 +359,23 @@ describe('Language', function() {
         assert.deepEqual(annotation.tokens[0], {
           text: 'Hello',
           partOfSpeech: 'Other: foreign words, typos, abbreviations',
-          partOfSpeechTag: 'X'
+          tag: 'X',
+          aspect: undefined,
+          case: undefined,
+          form: undefined,
+          gender: undefined,
+          mood: undefined,
+          number: undefined,
+          person: undefined,
+          proper: undefined,
+          reciprocity: undefined,
+          tense: undefined,
+          voice: undefined,
+          dependencyEdge: {
+            description: 'Root',
+            label: 'ROOT',
+            headTokenIndex: 0
+          }
         });
 
         assert(is.object(apiResponse));
@@ -464,7 +508,6 @@ describe('Language', function() {
         assert.ifError(err);
 
         assert(is.number(sentiment));
-
         assert(is.object(apiResponse));
 
         callback();
@@ -480,13 +523,70 @@ describe('Language', function() {
         assert.ifError(err);
 
         assert(is.object(sentiment));
-        assert(is.number(sentiment.polarity));
+        assert(is.number(sentiment.score));
         assert(is.number(sentiment.magnitude));
+        assert.strictEqual(sentiment.language, 'en');
+        assert.strictEqual(sentiment.sentences.length, 2);
 
         assert(is.object(apiResponse));
 
         callback();
       } catch(e) {
+        callback(e);
+      }
+    };
+  }
+
+  function validateSyntaxSimple(callback) {
+    return function(err, tokens, apiResponse) {
+      try {
+        assert.ifError(err);
+        assert.strictEqual(tokens.length, 17);
+        assert.deepEqual(tokens[0], {
+          aspect: undefined,
+          case: undefined,
+          form: undefined,
+          gender: undefined,
+          mood: undefined,
+          number: undefined,
+          partOfSpeech: 'Other: foreign words, typos, abbreviations',
+          person: undefined,
+          proper: undefined,
+          reciprocity: undefined,
+          tag: 'X',
+          tense: undefined,
+          text: 'Hello',
+          voice: undefined,
+          dependencyEdge: {
+            description: 'Root',
+            headTokenIndex: 0,
+            label: 'ROOT'
+          }
+        });
+
+        assert(is.object(apiResponse));
+
+        callback();
+      } catch (e) {
+        callback(e);
+      }
+    };
+  }
+
+  function validateSyntaxVerbose(callback) {
+    return function(err, syntax, apiResponse) {
+      try {
+        assert.ifError(err);
+        assert.strictEqual(syntax.sentences.length, 2);
+        assert(is.object(syntax.sentences[0]));
+        assert.strictEqual(syntax.tokens.length, 17);
+        assert(is.object(syntax.tokens[0]));
+        assert.strictEqual(syntax.language, 'en');
+
+        assert(is.object(apiResponse));
+
+        callback();
+      } catch (e) {
         callback(e);
       }
     };

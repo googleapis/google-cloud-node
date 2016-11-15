@@ -23,7 +23,7 @@
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
-var v1beta1 = require('./v1beta1');
+var v1 = require('./v1');
 
 /**
  * @type {module:language/document}
@@ -43,12 +43,12 @@ var Document = require('./document.js');
  * including sentiment analysis, entity recognition, and syntax analysis. This
  * API is part of the larger Cloud Machine Learning API.
  *
- * The Cloud Natural Language API currently supports English for
- * [sentiment analysis](https://cloud.google.com/natural-language/docs/reference/rest/v1beta1/documents/analyzeSentiment)
- * and English, Spanish, and Japanese for
- * [entity analysis](https://cloud.google.com/natural-language/docs/reference/rest/v1beta1/documents/analyzeEntities)
+ * The Cloud Natural Language API currently supports English, Spanish, and
+ * Japanese for
+ * [sentiment analysis](https://cloud.google.com/natural-language/docs/reference/rest/v1/documents/analyzeSentiment),
+ * [entity analysis](https://cloud.google.com/natural-language/docs/reference/rest/v1/documents/analyzeEntities)
  * and
- * [syntax analysis](https://cloud.google.com/natural-language/docs/reference/rest/v1beta1/documents/annotateText).
+ * [syntax analysis](https://cloud.google.com/natural-language/docs/reference/rest/v1/documents/annotateText).
  *
  * @constructor
  * @alias module:language
@@ -64,7 +64,7 @@ function Language(options) {
   }
 
   this.api = {
-    Language: v1beta1(options).languageServiceApi(options)
+    Language: v1(options).languageServiceApi(options)
   };
 }
 
@@ -76,14 +76,14 @@ function Language(options) {
  * detection, this may be more convenient. However, if you plan to run multiple
  * detections, it's easier to create a {module:language/document} object.
  *
- * @resource [documents.annotate API Documentation]{@link https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/annotateText}
+ * @resource [documents.annotate API Documentation]{@link https://cloud.google.com/natural-language/reference/rest/v1/documents/annotateText}
  *
  * @param {string|module:storage/file} content - Inline content or a Storage
  *     File object.
  * @param {object=} options - Configuration object. See
- *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/annotateText#request-body).
+ *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1/documents/annotateText#request-body).
  * @param {string} options.encoding - `UTF8`, `UTF16`, or `UTF32`. See
- *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1beta1/EncodingType).
+ *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType).
  * @param {string} options.language - The language of the text.
  * @param {string} options.type - The type of document, either `html` or `text`.
  * @param {boolean} options.verbose - Enable verbose mode for more detailed
@@ -168,14 +168,14 @@ Language.prototype.annotate = function(content, options, callback) {
  * detection, this may be more convenient. However, if you plan to run multiple
  * detections, it's easier to create a {module:language/document} object.
  *
- * @resource [documents.analyzeEntities API Documentation]{@link https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/analyzeEntities}
+ * @resource [documents.analyzeEntities API Documentation]{@link https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeEntities}
  *
  * @param {string|module:storage/file} content - Inline content or a Storage
  *     File object.
  * @param {object=} options - Configuration object. See
- *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/analyzeEntities#request-body).
+ *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeEntities#request-body).
  * @param {string} options.encoding - `UTF8`, `UTF16`, or `UTF32`. See
- *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1beta1/EncodingType).
+ *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType).
  * @param {string} options.language - The language of the text.
  * @param {string} options.type - The type of document, either `html` or `text`.
  * @param {boolean} options.verbose - Enable verbose mode for more detailed
@@ -259,14 +259,14 @@ Language.prototype.detectEntities = function(content, options, callback) {
  * detection, this may be more convenient. However, if you plan to run multiple
  * detections, it's easier to create a {module:language/document} object.
  *
- * @resource [documents.analyzeSentiment API Documentation]{@link https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/analyzeSentiment}
+ * @resource [documents.analyzeSentiment API Documentation]{@link https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeSentiment}
  *
  * @param {string|module:storage/file} content - Inline content or a Storage
  *     File object.
  * @param {object=} options - Configuration object. See
- *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1beta1/documents/analyzeSentiment#request-body).
+ *     [documents.annotateText](https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeSentiment#request-body).
  * @param {string} options.encoding - `UTF8`, `UTF16`, or `UTF32`. See
- *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1beta1/EncodingType).
+ *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType).
  * @param {string} options.language - The language of the text.
  * @param {string} options.type - The type of document, either `html` or `text`.
  * @param {boolean} options.verbose - Enable verbose mode for more detailed
@@ -334,6 +334,97 @@ Language.prototype.detectSentiment = function(content, options, callback) {
 };
 
 /**
+ * Detect the syntax of a block of text.
+ *
+ * NOTE: This is a convenience method which doesn't require creating a
+ * {module:language/document} object. If you are only running a single
+ * detection, this may be more convenient. However, if you plan to run multiple
+ * detections, it's easier to create a {module:language/document} object.
+ *
+ * @resource [documents.analyzeSyntax API Documentation]{@link https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeSyntax}
+ *
+ * @param {string|module:storage/file} content - Inline content or a Storage
+ *     File object.
+ * @param {object=} options - Configuration object. See
+ *     [documents.analyzeSyntax](https://cloud.google.com/natural-language/reference/rest/v1/documents/analyzeSyntax#request-body).
+ * @param {string} options.encoding - `UTF8`, `UTF16`, or `UTF32`. See
+ *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType).
+ * @param {string} options.language - The language of the text.
+ * @param {string} options.type - The type of document, either `html` or `text`.
+ * @param {boolean} options.verbose - Enable verbose mode for more detailed
+ *     results. Default: `false`
+ * @param {function} callback - See {module:language/document#detectSyntax}.
+ *
+ * @example
+ * //-
+ * // See {module:language/document#detectSyntax} for a detailed breakdown of
+ * // the arguments your callback will be executed with.
+ * //-
+ * function callback(err, syntax, apiResponse) {}
+ *
+ * language.detectSyntax('Axel Foley is from Detroit', callback);
+ *
+ * //-
+ * // Or, provide a reference to a file hosted on Google Cloud Storage.
+ * //-
+ * var gcs = require('@google-cloud/storage')({
+ *   projectId: 'grape-spaceship-123'
+ * });
+ * var bucket = gcs.bucket('my-bucket');
+ * var file = bucket.file('my-file');
+ *
+ * language.detectSyntax(file, callback);
+ *
+ * //-
+ * // Specify HTML content.
+ * //-
+ * var options = {
+ *   type: 'html'
+ * };
+ *
+ * language.detectSyntax('Axel Foley is from Detroit', options, callback);
+ *
+ * //-
+ * // Specify the language the text is written in.
+ * //-
+ * var options = {
+ *   language: 'es'
+ * };
+ *
+ * language.detectSyntax('Axel Foley es de Detroit', options, callback);
+ *
+ * //-
+ * // Verbose mode may also be enabled for more detailed results.
+ * //-
+ * var options = {
+ *   verbose: true
+ * };
+ *
+ * language.detectSyntax('Axel Foley is from Detroit', options, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * language.detectSyntax('Axel Foley is from Detroit').then(function(data) {
+ *   var syntax = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+Language.prototype.detectSyntax = function(content, options, callback) {
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = extend({}, options, {
+    content: content
+  });
+
+  var document = this.document(options);
+  document.detectSyntax(options, callback);
+};
+
+/**
  * Create a Document object for an unknown type. If you know the type, use the
  * appropriate method below:
  *
@@ -347,7 +438,7 @@ Language.prototype.detectSentiment = function(content, options, callback) {
  *     property to pass the inline content of the document or a Storage File
  *     object.
  * @param {string} options.encoding - `UTF8`, `UTF16`, or `UTF32`. See
- *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1beta1/EncodingType).
+ *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType).
  * @param {string} options.language - The language of the text.
  * @return {module:language/document}
  *
@@ -392,7 +483,7 @@ Language.prototype.document = function(config) {
  *     Storage File object.
  * @param {object=} options - Configuration object.
  * @param {string} options.encoding - `UTF8`, `UTF16`, or `UTF32`. See
- *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1beta1/EncodingType).
+ *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType).
  * @param {string} options.language - The language of the text.
  * @return {module:language/document}
  *
@@ -442,7 +533,7 @@ Language.prototype.html = function(content, options) {
  *     Storage File object.
  * @param {object=} options - Configuration object.
  * @param {string} options.encoding - `UTF8`, `UTF16`, or `UTF32`. See
- *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1beta1/EncodingType).
+ *     [`EncodingType`](https://cloud.google.com/natural-language/reference/rest/v1/EncodingType).
  * @param {string} options.language - The language of the text.
  * @return {module:language/document}
  *
@@ -494,4 +585,4 @@ common.util.promisifyAll(Language, {
 });
 
 module.exports = Language;
-module.exports.v1beta1 = v1beta1;
+module.exports.v1 = v1;
