@@ -31,13 +31,11 @@ const languageClient = Language({
 const text = 'Hello, world!';
 
 // Detects the sentiment of the text
-languageClient.detectSentiment(text, { verbose: true }, (err, sentiment) => {
-  if (err) {
-    console.error(err);
-    return;
-  }
+languageClient.detectSentiment(text)
+  .then((results) => {
+    const sentiment = results[0];
 
-  console.log('Text: %s', text);
-  console.log('Sentiment: %j', sentiment);
-});
+    console.log(`Text: ${text}`);
+    console.log(`Sentiment: ${sentiment}`);
+  });
 // [END language_quickstart]
