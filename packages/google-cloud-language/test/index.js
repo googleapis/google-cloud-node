@@ -37,10 +37,10 @@ function FakeDocument() {
   this.calledWith_ = arguments;
 }
 
-var fakeV1Beta1Override;
-function fakeV1Beta1() {
-  if (fakeV1Beta1Override) {
-    return fakeV1Beta1Override.apply(null, arguments);
+var fakeV1Override;
+function fakeV1() {
+  if (fakeV1Override) {
+    return fakeV1Override.apply(null, arguments);
   }
 
   return {
@@ -60,12 +60,12 @@ describe('Language', function() {
         util: fakeUtil
       },
       './document.js': FakeDocument,
-      './v1beta1': fakeV1Beta1
+      './v1': fakeV1
     });
   });
 
   beforeEach(function() {
-    fakeV1Beta1Override = null;
+    fakeV1Override = null;
     language = new Language(OPTIONS);
   });
 
@@ -102,7 +102,7 @@ describe('Language', function() {
     it('should create a gax api client', function() {
       var expectedLanguageService = {};
 
-      fakeV1Beta1Override = function(options) {
+      fakeV1Override = function(options) {
         assert.strictEqual(options, OPTIONS);
 
         return {
@@ -261,6 +261,54 @@ describe('Language', function() {
       language.detectSentiment(CONTENT, done);
     });
   });
+
+  describe('detectSyntax', function() {
+    var CONTENT = '...';
+    var OPTIONS = {
+      property: 'value'
+    };
+
+    var EXPECTED_OPTIONS = {
+      withCustomOptions: extend({}, OPTIONS, {
+        content: CONTENT
+      }),
+
+      withoutCustomOptions: extend({}, {
+        content: CONTENT
+      })
+    };
+
+    it('should call detectSyntax on a Document', function(done) {
+      language.document = function(options) {
+        assert.deepEqual(options, EXPECTED_OPTIONS.withCustomOptions);
+
+        return {
+          detectSyntax: function(options, callback) {
+            assert.deepEqual(options, EXPECTED_OPTIONS.withCustomOptions);
+            callback(); // done()
+          }
+        };
+      };
+
+      language.detectSyntax(CONTENT, OPTIONS, done);
+    });
+
+    it('should not require options', function(done) {
+      language.document = function(options) {
+        assert.deepEqual(options, EXPECTED_OPTIONS.withoutCustomOptions);
+
+        return {
+          detectSyntax: function(options, callback) {
+            assert.deepEqual(options, EXPECTED_OPTIONS.withoutCustomOptions);
+            callback(); // done()
+          }
+        };
+      };
+
+      language.detectSyntax(CONTENT, done);
+    });
+  });
+
 
   describe('document', function() {
     var CONFIG = {};

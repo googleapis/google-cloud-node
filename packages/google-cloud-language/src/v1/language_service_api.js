@@ -15,7 +15,7 @@
  *
  * EDITING INSTRUCTIONS
  * This file was generated from the file
- * https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1beta1/language_service.proto,
+ * https://github.com/googleapis/googleapis/blob/master/google/cloud/language/v1/language_service.proto,
  * and updates to that file get reflected here through a refresh process.
  * For the short term, the refresh process will only be runnable by Google
  * engineers.
@@ -37,7 +37,6 @@ var DEFAULT_SERVICE_PORT = 443;
 
 var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
 
-
 /**
  * The scopes needed to make gRPC calls to all of the methods defined in
  * this service.
@@ -55,10 +54,10 @@ var ALL_SCOPES = [
  * @see {@link languageServiceApi}
  *
  * @example
- * var languageV1beta1 = require('@google-cloud/language').v1beta1({
+ * var languageV1 = require('@google-cloud/language').v1({
  *   // optional auth parameters.
  * });
- * var api = languageV1beta1.languageServiceApi();
+ * var api = languageV1.languageServiceApi();
  *
  * @class
  */
@@ -78,21 +77,20 @@ function LanguageServiceApi(gaxGrpc, grpcClients, opts) {
     'nodejs/' + process.version].join(' ');
 
   var defaults = gaxGrpc.constructSettings(
-      'google.cloud.language.v1beta1.LanguageService',
+      'google.cloud.language.v1.LanguageService',
       configData,
       clientConfig,
-      null,
-      null,
       {'x-goog-api-client': googleApiClient});
 
   var languageServiceStub = gaxGrpc.createStub(
       servicePath,
       port,
-      grpcClients.languageServiceClient.google.cloud.language.v1beta1.LanguageService,
+      grpcClients.languageServiceClient.google.cloud.language.v1.LanguageService,
       {sslCreds: sslCreds});
   var languageServiceStubMethods = [
     'analyzeSentiment',
     'analyzeEntities',
+    'analyzeSyntax',
     'annotateText'
   ];
   languageServiceStubMethods.forEach(function(methodName) {
@@ -100,7 +98,8 @@ function LanguageServiceApi(gaxGrpc, grpcClients, opts) {
       languageServiceStub.then(function(languageServiceStub) {
         return languageServiceStub[methodName].bind(languageServiceStub);
       }),
-      defaults[methodName]);
+      defaults[methodName],
+      null);
   }.bind(this));
 }
 
@@ -116,19 +115,23 @@ function LanguageServiceApi(gaxGrpc, grpcClients, opts) {
  *   ({@link Document.language}="EN").
  *
  *   This object should have the same structure as [Document]{@link Document}
+ * @param {number=} request.encodingType
+ *   The encoding type used by the API to calculate sentence offsets.
+ *
+ *   The number should be among the values of [EncodingType]{@link EncodingType}
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
- *   The second parameter to the callback is an object representing [AnalyzeSentimentResponse]{@link AnalyzeSentimentResponse}
+ *   The second parameter to the callback is an object representing [AnalyzeSentimentResponse]{@link AnalyzeSentimentResponse}.
  * @returns {Promise} - The promise which resolves to the response object.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = languageV1beta1.languageServiceApi();
+ * var api = languageV1.languageServiceApi();
  * var document = {};
  * api.analyzeSentiment({document: document}).then(function(response) {
  *     // doThingsWith(response)
@@ -167,13 +170,13 @@ LanguageServiceApi.prototype.analyzeSentiment = function(request, options, callb
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
- *   The second parameter to the callback is an object representing [AnalyzeEntitiesResponse]{@link AnalyzeEntitiesResponse}
+ *   The second parameter to the callback is an object representing [AnalyzeEntitiesResponse]{@link AnalyzeEntitiesResponse}.
  * @returns {Promise} - The promise which resolves to the response object.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = languageV1beta1.languageServiceApi();
+ * var api = languageV1.languageServiceApi();
  * var document = {};
  * var encodingType = EncodingType.NONE;
  * var request = {
@@ -198,10 +201,59 @@ LanguageServiceApi.prototype.analyzeEntities = function(request, options, callba
 };
 
 /**
- * Advanced API that analyzes the document and provides a full set of text
- * annotations, including semantic, syntactic, and sentiment information. This
- * API is intended for users who are familiar with machine learning and need
- * in-depth text features to build upon.
+ * Analyzes the syntax of the text and provides sentence boundaries and
+ * tokenization along with part of speech tags, dependency trees, and other
+ * properties.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {Object} request.document
+ *   Input document.
+ *
+ *   This object should have the same structure as [Document]{@link Document}
+ * @param {number} request.encodingType
+ *   The encoding type used by the API to calculate offsets.
+ *
+ *   The number should be among the values of [EncodingType]{@link EncodingType}
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ * @param {function(?Error, ?Object)=} callback
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is an object representing [AnalyzeSyntaxResponse]{@link AnalyzeSyntaxResponse}.
+ * @returns {Promise} - The promise which resolves to the response object.
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
+ *
+ * @example
+ *
+ * var api = languageV1.languageServiceApi();
+ * var document = {};
+ * var encodingType = EncodingType.NONE;
+ * var request = {
+ *     document: document,
+ *     encodingType: encodingType
+ * };
+ * api.analyzeSyntax(request).then(function(response) {
+ *     // doThingsWith(response)
+ * }).catch(function(err) {
+ *     console.error(err);
+ * });
+ */
+LanguageServiceApi.prototype.analyzeSyntax = function(request, options, callback) {
+  if (options instanceof Function && callback === undefined) {
+    callback = options;
+    options = {};
+  }
+  if (options === undefined) {
+    options = {};
+  }
+  return this._analyzeSyntax(request, options, callback);
+};
+
+/**
+ * A convenience method that provides all the features that analyzeSentiment,
+ * analyzeEntities, and analyzeSyntax provide in one call.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -223,13 +275,13 @@ LanguageServiceApi.prototype.analyzeEntities = function(request, options, callba
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
- *   The second parameter to the callback is an object representing [AnnotateTextResponse]{@link AnnotateTextResponse}
+ *   The second parameter to the callback is an object representing [AnnotateTextResponse]{@link AnnotateTextResponse}.
  * @returns {Promise} - The promise which resolves to the response object.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = languageV1beta1.languageServiceApi();
+ * var api = languageV1.languageServiceApi();
  * var document = {};
  * var features = {};
  * var encodingType = EncodingType.NONE;
@@ -262,9 +314,9 @@ function LanguageServiceApiBuilder(gaxGrpc) {
 
   var languageServiceClient = gaxGrpc.load([{
     root: require('google-proto-files')('..'),
-    file: 'google/cloud/language/v1beta1/language_service.proto'
+    file: 'google/cloud/language/v1/language_service.proto'
   }]);
-  extend(this, languageServiceClient.google.cloud.language.v1beta1);
+  extend(this, languageServiceClient.google.cloud.language.v1);
 
   var grpcClients = {
     languageServiceClient: languageServiceClient
