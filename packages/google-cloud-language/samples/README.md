@@ -35,25 +35,26 @@ __Usage:__ `node analyze --help`
 
 ```
 Commands:
-  sentimentFromString <text>             Detect the sentiment of a block of text.
-  sentimentFromFile <bucket> <filename>  Detect the sentiment of text in a GCS file.
-  entitiesFromString <text>              Detect the entities of a block of text.
-  entitiesFromFile <bucket> <filename>   Detect the entities of text in a GCS file.
-  syntaxFromString <text>                Detect the syntax of a block of text.
-  syntaxFromFile <bucket> <filename>     Detect the syntax of text in a GCS file.
+  sentimentOfText <text>               Detect the sentiment of a block of text.
+  sentimentInFile <bucket> <filename>  Detect the sentiment of text in a GCS file.
+  entitiesOfText <text>                Detect the entities of a block of text.
+  entitiesInFile <bucket> <filename>   Detect the entities of text in a GCS file.
+  syntaxOfText <text>                  Detect the syntax of a block of text.
+  syntaxInFile <bucket> <filename>     Detect the syntax of text in a GCS file.
 
 Options:
-  --language, -l  The language of the text.                                             [string]
-  --type, -t      Type of text              [string] [choices: "text", "html"] [default: "text"]
-  --help          Show help                                                            [boolean]
+  --help  Show help                                                    [boolean]
 
 Examples:
-  node analyze sentimentFromString "President Obama is speaking at the White House."
-  node analyze sentimentFromFile my-bucket file.txt
-  node analyze entitiesFromString "<p>President Obama is speaking at the White House.</p>" -t html
-  node analyze entitiesFromFile my-bucket file.txt
-  node analyze syntaxFromString "President Obama is speaking at the White House."
-  node analyze syntaxFromFile my-bucket es_file.txt -l es
+  node analyze sentimentOfText "President Obama is speaking at
+  the White House."
+  node analyze sentimentInFile my-bucket file.txt
+  node analyze entitiesOfText "President Obama is speaking at
+  the White House."
+  node analyze entitiesInFile my-bucket file.txt
+  node analyze syntaxOfText "President Obama is speaking at
+  the White House."
+  node analyze syntaxInFile my-bucket file.txt
 
 For more information, see https://cloud.google.com/natural-language/docs
 ```
