@@ -21,19 +21,19 @@ var assert = require('assert');
 var extend = require('extend');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
-var Service = require('@google-cloud/common').Service;
 var util = require('@google-cloud/common').util;
 
+function FakeOperation() {
+  this.calledWith_ = arguments;
+}
+
 function FakeProject() {
-  this.calledWith_ = [].slice.call(arguments);
+  this.calledWith_ = arguments;
 }
 
 function FakeService() {
   this.calledWith_ = arguments;
-  Service.apply(this, arguments);
 }
-
-nodeutil.inherits(FakeService, Service);
 
 var extended = false;
 var fakePaginator = {
@@ -81,6 +81,7 @@ describe('Resource', function() {
   before(function() {
     Resource = proxyquire('../', {
       '@google-cloud/common': {
+        Operation: FakeOperation,
         Service: FakeService,
         paginator: fakePaginator,
         util: fakeUtil
@@ -335,6 +336,27 @@ describe('Resource', function() {
 
           done();
         });
+      });
+    });
+  });
+
+  describe('operation', function() {
+    var NAME = 'operation-name';
+
+    it('should throw if a name is not provided', function() {
+      assert.throws(function() {
+        resource.operation();
+      }, /A name must be specified for an operation\./);
+    });
+
+    it('should return a common/operation', function() {
+      var operation = resource.operation(NAME);
+
+      assert(operation instanceof FakeOperation);
+
+      assert.deepEqual(operation.calledWith_[0], {
+        parent: resource,
+        id: NAME
       });
     });
   });
