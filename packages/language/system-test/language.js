@@ -360,17 +360,22 @@ describe('Language', function() {
           text: 'Hello',
           partOfSpeech: 'Other: foreign words, typos, abbreviations',
           tag: 'X',
-          aspect: false,
-          case: false,
-          form: false,
-          gender: false,
-          mood: false,
-          number: false,
-          person: false,
-          proper: false,
-          reciprocity: false,
-          tense: false,
-          voice: false
+          aspect: undefined,
+          case: undefined,
+          form: undefined,
+          gender: undefined,
+          mood: undefined,
+          number: undefined,
+          person: undefined,
+          proper: undefined,
+          reciprocity: undefined,
+          tense: undefined,
+          voice: undefined,
+          dependencyEdge: {
+            description: 'Root',
+            label: 'ROOT',
+            headTokenIndex: 0
+          }
         });
 
         assert(is.object(apiResponse));
@@ -517,9 +522,9 @@ describe('Language', function() {
       try {
         assert.ifError(err);
 
-        assert(is.object(sentiment.sentiment));
-        assert(is.number(sentiment.sentiment.score));
-        assert(is.number(sentiment.sentiment.magnitude));
+        assert(is.object(sentiment));
+        assert(is.number(sentiment.score));
+        assert(is.number(sentiment.magnitude));
         assert.strictEqual(sentiment.language, 'en');
         assert.strictEqual(sentiment.sentences.length, 2);
 
@@ -533,29 +538,31 @@ describe('Language', function() {
   }
 
   function validateSyntaxSimple(callback) {
-    return function(err, syntax, apiResponse) {
+    return function(err, tokens, apiResponse) {
       try {
         assert.ifError(err);
-        assert.strictEqual(syntax.sentences.length, 2);
-        assert(is.string(syntax.sentences[0]));
-        assert.strictEqual(syntax.tokens.length, 17);
-        assert.deepEqual(syntax.tokens[0], {
-          aspect: false,
-          case: false,
-          form: false,
-          gender: false,
-          mood: false,
-          number: false,
+        assert.strictEqual(tokens.length, 17);
+        assert.deepEqual(tokens[0], {
+          aspect: undefined,
+          case: undefined,
+          form: undefined,
+          gender: undefined,
+          mood: undefined,
+          number: undefined,
           partOfSpeech: 'Other: foreign words, typos, abbreviations',
-          person: false,
-          proper: false,
-          reciprocity: false,
+          person: undefined,
+          proper: undefined,
+          reciprocity: undefined,
           tag: 'X',
-          tense: false,
+          tense: undefined,
           text: 'Hello',
-          voice: false
+          voice: undefined,
+          dependencyEdge: {
+            description: 'Root',
+            headTokenIndex: 0,
+            label: 'ROOT'
+          }
         });
-        assert.strictEqual(syntax.language, 'en');
 
         assert(is.object(apiResponse));
 
