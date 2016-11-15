@@ -154,6 +154,93 @@ describe('Document', function() {
     });
   });
 
+  describe('LABEL_DESCRIPTIONS', function() {
+    var expectedDescriptions = {
+      UNKNOWN: 'Unknown',
+      ABBREV: 'Abbreviation modifier',
+      ACOMP: 'Adjectival complement',
+      ADVCL: 'Adverbial clause modifier',
+      ADVMOD: 'Adverbial modifier',
+      AMOD: 'Adjectival modifier of an NP',
+      APPOS: 'Appositional modifier of an NP',
+      ATTR: 'Attribute dependent of a copular verb',
+      AUX: 'Auxiliary (non-main) verb',
+      AUXPASS: 'Passive auxiliary',
+      CC: 'Coordinating conjunction',
+      CCOMP: 'Clausal complement of a verb or adjective',
+      CONJ: 'Conjunct',
+      CSUBJ: 'Clausal subject',
+      CSUBJPASS: 'Clausal passive subject',
+      DEP: 'Dependency (unable to determine)',
+      DET: 'Determiner',
+      DISCOURSE: 'Discourse',
+      DOBJ: 'Direct object',
+      EXPL: 'Expletive',
+      GOESWITH: ' Goes with (part of a word in a text not well edited)',
+      IOBJ: 'Indirect object',
+      MARK: 'Marker (word introducing a subordinate clause)',
+      MWE: 'Multi-word expression',
+      MWV: 'Multi-word verbal expression',
+      NEG: 'Negation modifier',
+      NN: 'Noun compound modifier',
+      NPADVMOD: 'Noun phrase used as an adverbial modifier',
+      NSUBJ: 'Nominal subject',
+      NSUBJPASS: 'Passive nominal subject',
+      NUM: 'Numeric modifier of a noun',
+      NUMBER: 'Element of compound number',
+      P: 'Punctuation mark',
+      PARATAXIS: 'Parataxis relation',
+      PARTMOD: 'Participial modifier',
+      PCOMP: 'The complement of a preposition is a clause',
+      POBJ: 'Object of a preposition',
+      POSS: 'Possession modifier',
+      POSTNEG: 'Postverbal negative particle',
+      PRECOMP: 'Predicate complement',
+      PRECONJ: 'Preconjunt',
+      PREDET: 'Predeterminer',
+      PREF: 'Prefix',
+      PREP: 'Prepositional modifier',
+      PRONL: 'The relationship between a verb and verbal morpheme',
+      PRT: 'Particle',
+      PS: 'Associative or possessive marker',
+      QUANTMOD: 'Quantifier phrase modifier',
+      RCMOD: 'Relative clause modifier',
+      RCMODREL: 'Complementizer in relative clause',
+      RDROP: 'Ellipsis without a preceding predicate',
+      REF: 'Referent',
+      REMNANT: 'Remnant',
+      REPARANDUM: 'Reparandum',
+      ROOT: 'Root',
+      SNUM: 'Suffix specifying a unit of number',
+      SUFF: 'Suffix',
+      TMOD: 'Temporal modifier',
+      TOPIC: 'Topic marker',
+      VMOD:
+        'Clause headed by an infinite form of the verb that modifies a noun',
+      VOCATIVE: 'Vocative',
+      XCOMP: 'Open clausal complement',
+      SUFFIX: 'Name suffix',
+      TITLE: 'Name title',
+      ADVPHMOD: 'Adverbial phrase modifier',
+      AUXCAUS: 'Causative auxiliary',
+      AUXVV: 'Helper auxiliary',
+      DTMOD: 'Rentaishi (Prenominal modifier)',
+      FOREIGN: 'Foreign words',
+      KW: 'Keyword',
+      LIST: 'List for chains of comparable items',
+      NOMC: 'Nominalized clause',
+      NOMCSUBJ: 'Nominalized clausal subject',
+      NOMCSUBJPASS: 'Nominalized clausal passive',
+      NUMC: 'Compound of numeric modifier',
+      COP: 'Copula',
+      DISLOCATED: 'Dislocated relation (for fronted/topicalized elements)'
+    };
+
+    it('should contain the correct list of label descriptions', function() {
+      assert.deepEqual(Document.LABEL_DESCRIPTIONS, expectedDescriptions);
+    });
+  });
+
   describe('PART_OF_SPEECH', function() {
     var expectedPartOfSpeech = {
       UNKNOWN: 'Unknown',
@@ -560,7 +647,9 @@ describe('Document', function() {
 
     describe('success', function() {
       var apiResponse = {
-        documentSentiment: {}
+        documentSentiment: {},
+        sentences: [],
+        language: 'en'
       };
 
       var originalApiResponse = extend({}, apiResponse);
@@ -601,14 +690,154 @@ describe('Document', function() {
       });
 
       it('should allow verbose mode', function(done) {
+        var fakeSentiment = {};
+
         Document.formatSentiment_ = function(sentiment, verbose) {
+          assert.strictEqual(sentiment, apiResponse.documentSentiment);
           assert.strictEqual(verbose, true);
-          done();
+          return fakeSentiment;
         };
 
-        document.detectSentiment({
+        var fakeSentences = [];
+
+        Document.formatSentences_ = function(sentences, verbose) {
+          assert.strictEqual(sentences, apiResponse.sentences);
+          assert.strictEqual(verbose, true);
+          return fakeSentences;
+        };
+
+        var options = {
           verbose: true
-        }, assert.ifError);
+        };
+
+        document.detectSentiment(options, function(err, sentiment, resp) {
+          assert.ifError(err);
+
+          assert.strictEqual(sentiment, fakeSentiment);
+          assert.strictEqual(sentiment.sentences, fakeSentences);
+          assert.strictEqual(sentiment.language, 'en');
+
+          assert.deepEqual(resp, apiResponse);
+
+          done();
+        });
+      });
+    });
+  });
+
+  describe('detectSyntax', function() {
+    it('should make the correct API request', function(done) {
+      document.api.Language = {
+        analyzeSyntax: function(reqOpts) {
+          assert.strictEqual(reqOpts.document, document.document);
+          assert.strictEqual(reqOpts.encodingType, document.encodingType);
+          done();
+        }
+      };
+
+      document.encodingType = 'encoding-type';
+      document.detectSyntax(assert.ifError);
+    });
+
+    describe('error', function() {
+      var apiResponse = {};
+      var error = new Error('Error.');
+
+      beforeEach(function() {
+        document.api.Language = {
+          analyzeSyntax: function(reqOpts, callback) {
+            callback(error, apiResponse);
+          }
+        };
+      });
+
+      it('should exec callback with error and API response', function(done) {
+        document.detectSyntax(function(err, syntax, apiResponse_) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(syntax, null);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = {
+        sentences: [{}],
+        tokens: [{}],
+        language: 'en'
+      };
+
+      var originalApiResponse = extend({}, apiResponse);
+
+      beforeEach(function() {
+        Document.formatTokens_ = util.noop;
+        Document.formatSentences_ = util.noop;
+
+        document.api.Language = {
+          analyzeSyntax: function(reqOpts, callback) {
+            callback(null, apiResponse);
+          }
+        };
+      });
+
+      it('should format the tokens', function(done) {
+        var formattedTokens = [{}];
+
+        Document.formatTokens_ = function(tokens, verbose) {
+          assert.strictEqual(tokens, apiResponse.tokens);
+          assert.strictEqual(verbose, false);
+          return formattedTokens;
+        };
+
+        document.detectSyntax(function(err, syntax) {
+          assert.ifError(err);
+          assert.strictEqual(syntax, formattedTokens);
+          done();
+        });
+      });
+
+      it('should clone the response object', function(done) {
+        document.detectSyntax(function(err, syntax, apiResponse_) {
+          assert.ifError(err);
+          assert.notStrictEqual(apiResponse_, apiResponse);
+          assert.deepEqual(apiResponse_, originalApiResponse);
+          done();
+        });
+      });
+
+      it('should allow verbose mode', function(done) {
+        var fakeTokens = [];
+
+        Document.formatTokens_ = function(tokens, verbose) {
+          assert.strictEqual(tokens, apiResponse.tokens);
+          assert.strictEqual(verbose, true);
+          return fakeTokens;
+        };
+
+        var fakeSentences = [];
+
+        Document.formatSentences_ = function(sentences, verbose) {
+          assert.strictEqual(sentences, apiResponse.sentences);
+          assert.strictEqual(verbose, true);
+          return fakeSentences;
+        };
+
+        var options = {
+          verbose: true
+        };
+
+        document.detectSyntax(options, function(err, syntax, resp) {
+          assert.ifError(err);
+
+          assert.strictEqual(syntax.tokens, fakeTokens);
+          assert.strictEqual(syntax.sentences, fakeSentences);
+          assert.strictEqual(syntax.language, 'en');
+
+          assert.deepEqual(resp, apiResponse);
+
+          done();
+        });
       });
     });
   });
@@ -716,7 +945,7 @@ describe('Document', function() {
 
     var EXPECTED_FORMATTED_SENTENCES = {
       default: SENTENCES.map(prop('text')).map(prop('content')),
-      verbose: SENTENCES.map(prop('text'))
+      verbose: SENTENCES
     };
 
     it('should correctly format sentences', function() {
@@ -740,17 +969,17 @@ describe('Document', function() {
 
   describe('formatSentiment_', function() {
     var SENTIMENT = {
-      polarity: -0.5,
+      score: -0.5,
       magnitude: 0.5
     };
 
     var VERBOSE = false;
 
     var EXPECTED_FORMATTED_SENTIMENT = {
-      default: SENTIMENT.polarity * 100,
+      default: SENTIMENT.score * 100,
       verbose: {
-        polarity: SENTIMENT.polarity * 100,
-        magnitude: SENTIMENT.magnitude * 100
+        score: SENTIMENT.score * 100,
+        magnitude: SENTIMENT.magnitude
       }
     };
 
@@ -782,13 +1011,21 @@ describe('Document', function() {
           content: 'Text content'
         },
         partOfSpeech: {
-          tag: 'PART_OF_SPEECH_TAG'
+          tag: 'PART_OF_SPEECH_TAG',
+          fakePart: 'UNKNOWN'
         },
-        property: 'value'
+        property: 'value',
+        dependencyEdge: {
+          label: 'FAKE_LABEL'
+        }
       }
     ];
 
     var VERBOSE = false;
+
+    var LABEL_DESCRIPTIONS = {
+      FAKE_LABEL: 'fake label description'
+    };
 
     var PART_OF_SPEECH = {
       PART_OF_SPEECH_TAG: 'part of speech value'
@@ -799,7 +1036,12 @@ describe('Document', function() {
         return {
           text: token.text.content,
           partOfSpeech: PART_OF_SPEECH.PART_OF_SPEECH_TAG,
-          partOfSpeechTag: 'PART_OF_SPEECH_TAG'
+          tag: 'PART_OF_SPEECH_TAG',
+          fakePart: undefined,
+          dependencyEdge: {
+            label: 'FAKE_LABEL',
+            description: LABEL_DESCRIPTIONS.FAKE_LABEL
+          }
         };
       }),
 
@@ -808,6 +1050,7 @@ describe('Document', function() {
 
     beforeEach(function() {
       Document.PART_OF_SPEECH = PART_OF_SPEECH;
+      Document.LABEL_DESCRIPTIONS = LABEL_DESCRIPTIONS;
     });
 
     it('should correctly format tokens', function() {

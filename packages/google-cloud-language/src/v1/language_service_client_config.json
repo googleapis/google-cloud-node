@@ -1,6 +1,6 @@
 {
   "interfaces": {
-    "google.cloud.language.v1beta1.LanguageService": {
+    "google.cloud.language.v1.LanguageService": {
       "retry_codes": {
         "retry_codes_def": {
           "idempotent": [
@@ -28,6 +28,11 @@
           "retry_params_name": "default"
         },
         "AnalyzeEntities": {
+          "timeout_millis": 30000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "AnalyzeSyntax": {
           "timeout_millis": 30000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
