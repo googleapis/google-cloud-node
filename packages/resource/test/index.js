@@ -19,7 +19,6 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
-var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var util = require('@google-cloud/common').util;
 
@@ -135,7 +134,7 @@ describe('Resource', function() {
     });
 
     it('should inherit from Service', function() {
-      assert(resource instanceof Service);
+      assert(resource instanceof FakeService);
 
       var calledWith = resource.calledWith_[0];
 
