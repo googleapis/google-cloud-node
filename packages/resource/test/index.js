@@ -143,7 +143,7 @@ describe('Resource', function() {
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/cloud-platform'
       ]);
-      assert.strictEqual(resource.projectIdRequired, false);
+      assert.strictEqual(calledWith.projectIdRequired, false);
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
     });
   });
