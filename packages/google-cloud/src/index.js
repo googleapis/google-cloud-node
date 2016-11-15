@@ -425,13 +425,17 @@ var apis = {
  * @alias module:google-cloud
  * @constructor
  *
- * @param {object} options - Configuration object.
+ * @param {object=} options - Configuration object.
  * @param {string} options.projectId - The project ID from the Google
  *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check the
- *     environment variable `GCLOUD_PROJECT` for your project ID.
+ *     environment variable `GCLOUD_PROJECT` for your project ID. If your app is
+ *     running in an environment which supports
+ *     [Application Default Credentials](https://developers.google.com/identity/protocols/application-default-credentials),
+ *     your project ID will be detected automatically.
  * @param {string} options.keyFilename - Full path to the a .json, .pem, or .p12
- *     key downloaded from the Google Developers Console. NOTE: .pem and .p12
- *     require you to specify `options.email` as well.
+ *     key downloaded from the Google Developers Console. If you provide a path
+ *     to a JSON file, the `projectId` option above is not necessary. NOTE: .pem
+ *     and .p12 require you to specify `options.email` as well.
  * @param {string} options.email - Account email address. Required when using a
  *     .pem or .p12 keyFilename.
  * @param {object} options.credentials - Credentials object.

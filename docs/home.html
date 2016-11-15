@@ -91,9 +91,7 @@
       <div hljs hlsj-language="js" ng-show="selected == 'compute engine'">
 // Authentication is automatic
 // inside Google Compute Engine.
-var gcloud = require('google-cloud')({
-  projectId: 'grape-spaceship-123'
-});
+var gcloud = require('google-cloud')();
 
 var gcs = gcloud.storage();
 
