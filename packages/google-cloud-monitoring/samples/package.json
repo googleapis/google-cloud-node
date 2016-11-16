@@ -5,14 +5,11 @@
   "license": "Apache Version 2.0",
   "author": "Google Inc.",
   "scripts": {
-    "test": "mocha -R spec -t 120000 --require intelli-espower-loader ../test/_setup.js test/*.test.js",
-    "system-test": "mocha -R spec -t 120000 --require intelli-espower-loader ../system-test/_setup.js system-test/*.test.js"
+    "test": "cd ..; npm run t -- monitoring/test/*.test.js",
+    "system-test": "cd ..; npm run st -- monitoring/system-test/*.test.js"
   },
   "dependencies": {
-    "async":"^1.5.2",
-    "googleapis": "^12.0.0"
-  },
-  "devDependencies": {
-    "mocha": "^2.5.3"
+    "async":"2.1.2",
+    "googleapis": "14.2.0"
   }
 }
