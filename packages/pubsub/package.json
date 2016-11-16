@@ -57,12 +57,12 @@
     "google-proto-files": "^0.8.0",
     "is": "^3.0.1",
     "modelo": "^4.2.0",
+    "node-uuid": "^1.4.3",
     "propprop": "^0.3.0"
   },
   "devDependencies": {
     "async": "^1.5.2",
     "mocha": "^3.0.1",
-    "node-uuid": "^1.4.3",
     "proxyquire": "^1.7.10"
   },
   "scripts": {

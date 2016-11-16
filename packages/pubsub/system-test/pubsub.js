@@ -302,8 +302,15 @@ describe('pubsub', function() {
       });
     });
 
+    it('should create a subscription with a generated name', function(done) {
+      topic.subscribe(function(err, sub) {
+        assert.ifError(err);
+        sub.delete(done);
+      });
+    });
+
     it('should re-use an existing subscription', function(done) {
-      pubsub.subscribe(topic, SUB_NAMES[0], { reuseExisting: true }, done);
+      pubsub.subscribe(topic, SUB_NAMES[0], done);
     });
 
     it('should error when using a non-existent subscription', function(done) {

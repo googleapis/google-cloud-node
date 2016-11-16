@@ -491,10 +491,12 @@ describe('PubSub', function() {
       }, /A Topic is required for a new subscription\./);
     });
 
-    it('should throw if no sub name is provided', function() {
-      assert.throws(function() {
-        pubsub.subscribe('topic');
-      }, /A subscription name is required for a new subscription\./);
+    it('should not require a subscription name', function(done) {
+      pubsub.request = function(protoOpts, reqOpts, callback) {
+        callback(null, apiResponse);
+      };
+
+      pubsub.subscribe(TOPIC_NAME, done);
     });
 
     it('should not require configuration options', function(done) {
@@ -573,7 +575,6 @@ describe('PubSub', function() {
         interval: 3,
         maxInProgress: 5,
         pushEndpoint: 'https://domain/push',
-        reuseExisting: false,
         timeout: 30000
       };
 
@@ -591,7 +592,6 @@ describe('PubSub', function() {
       delete expectedBody.interval;
       delete expectedBody.maxInProgress;
       delete expectedBody.pushEndpoint;
-      delete expectedBody.reuseExisting;
       delete expectedBody.timeout;
 
       pubsub.topic = function() {
@@ -625,7 +625,7 @@ describe('PubSub', function() {
         };
       });
 
-      it('should re-use existing subscription if specified', function(done) {
+      it('should re-use existing subscription', function(done) {
         var apiResponse = { code: 409 };
 
         pubsub.subscription = function() {
@@ -636,18 +636,9 @@ describe('PubSub', function() {
           callback({ code: 409 }, apiResponse);
         };
 
-        // Don't re-use an existing subscription (error if one exists).
-        pubsub.subscribe(TOPIC_NAME, SUB_NAME, function(err, sub, resp) {
-          assert.equal(err.code, 409);
-          assert.strictEqual(resp, apiResponse);
-        });
-
-        // Re-use an existing subscription (ignore error if one exists).
-        var opts = { reuseExisting: true };
-        pubsub.subscribe(TOPIC_NAME, SUB_NAME, opts, function(err, sub) {
+        pubsub.subscribe(TOPIC_NAME, SUB_NAME, function(err, subscription) {
           assert.ifError(err);
-          assert.deepEqual(sub, SUBSCRIPTION);
-
+          assert.strictEqual(subscription, SUBSCRIPTION);
           done();
         });
       });
@@ -700,24 +691,10 @@ describe('PubSub', function() {
     var SUB_NAME = 'new-sub-name';
     var CONFIG = { autoAck: true, interval: 90 };
 
-    it('should throw if no name is provided', function() {
-      assert.throws(function() {
-        pubsub.subscription();
-      }, /The name of a subscription is required\./);
-    });
-
     it('should return a Subscription object', function() {
       SubscriptionOverride = function() {};
       var subscription = pubsub.subscription(SUB_NAME, {});
       assert(subscription instanceof SubscriptionOverride);
-    });
-
-    it('should honor settings', function(done) {
-      SubscriptionOverride = function(pubsub, options) {
-        assert.deepEqual(options, CONFIG);
-        done();
-      };
-      pubsub.subscription(SUB_NAME, CONFIG);
     });
 
     it('should pass specified name to the Subscription', function(done) {
@@ -728,10 +705,34 @@ describe('PubSub', function() {
       pubsub.subscription(SUB_NAME, {});
     });
 
-    it('should not require options', function() {
-      assert.doesNotThrow(function() {
-        pubsub.subscription(SUB_NAME);
-      });
+    it('should honor settings', function(done) {
+      SubscriptionOverride = function(pubsub, options) {
+        assert.deepEqual(options, CONFIG);
+        done();
+      };
+      pubsub.subscription(SUB_NAME, CONFIG);
+    });
+
+    it('should not require a name', function(done) {
+      SubscriptionOverride = function(pubsub, options) {
+        assert.deepEqual(options, {
+          name: undefined
+        });
+        done();
+      };
+
+      pubsub.subscription();
+    });
+
+    it('should not require options', function(done) {
+      SubscriptionOverride = function(pubsub, options) {
+        assert.deepEqual(options, {
+          name: SUB_NAME
+        });
+        done();
+      };
+
+      pubsub.subscription(SUB_NAME);
     });
   });
 
