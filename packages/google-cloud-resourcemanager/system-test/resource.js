@@ -17,12 +17,16 @@
 'use strict';
 
 var assert = require('assert');
+var async = require('async');
+var exec = require('methmeth');
 var googleAuth = require('google-auto-auth');
+var uuid = require('node-uuid');
 
 var env = require('../../../system-test/env.js');
 var Resource = require('../');
 
 describe('Resource', function() {
+  var PREFIX = 'gcloud-tests-';
   var resource = new Resource(env);
   var project = resource.project();
 
@@ -68,26 +72,47 @@ describe('Resource', function() {
   //   - Delete a project
   describe('lifecycle', function() {
     var CAN_RUN_TESTS = true;
+    var testProjects = [];
 
     var resource = new Resource({
       projectId: env.projectId
     });
 
-    var PROJECT_ID = 'gcloud-tests-' + Date.now();
-    var project = resource.project(PROJECT_ID);
+    var project = resource.project(generateName('project'));
 
     before(function(done) {
       var authClient = googleAuth();
 
-      // See if an auth token exists.
-      authClient.getToken(function(err) {
-        if (err) {
-          CAN_RUN_TESTS = false;
-          done();
+      async.series([
+        function(callback) {
+          // See if an auth token exists.
+          authClient.getToken(function(err) {
+            CAN_RUN_TESTS = err === null;
+            callback();
+          });
+        },
+
+        deleteTestProjects
+      ], function(err) {
+        if (err || !CAN_RUN_TESTS) {
+          done(err);
           return;
         }
 
-        project.create(done);
+        project.create(function(err, project, operation) {
+          if (err) {
+            done(err);
+            return;
+          }
+
+          testProjects.push(project);
+
+          operation
+            .on('error', done)
+            .on('complete', function() {
+              done();
+            });
+        });
       });
     });
 
@@ -103,11 +128,34 @@ describe('Resource', function() {
         return;
       }
 
-      project.delete(done);
+      deleteTestProjects(done);
     });
 
-    it('should have created the project', function() {
-      assert.strictEqual(project.metadata.projectId, PROJECT_ID);
+    it('should have created the project', function(done) {
+      project.getMetadata(function(err, metadata) {
+        assert.ifError(err);
+        assert.strictEqual(metadata.projectId, project.id);
+        done();
+      });
+    });
+
+    it('should run operation as a promise', function(done) {
+      var project = resource.project(generateName('project'));
+
+      project.create()
+        .then(function(response) {
+          var operation = response[1];
+          return operation.promise();
+        })
+        .then(function() {
+          testProjects.push(project);
+          return project.getMetadata();
+        })
+        .then(function(response) {
+          var metadata = response[0];
+          assert.strictEqual(metadata.projectId, project.id);
+          done();
+        });
     });
 
     it('should set metadata', function(done) {
@@ -137,5 +185,41 @@ describe('Resource', function() {
         project.restore(done);
       });
     });
+
+    function deleteTestProjects(callback) {
+      if (!CAN_RUN_TESTS) {
+        callback();
+        return;
+      }
+
+      async.series([
+        function(callback) {
+          async.eachSeries(testProjects, exec('delete'), callback);
+        },
+
+        function(callback) {
+          resource.getProjects(function(err, projects) {
+            if (err) {
+              callback(err);
+              return;
+            }
+
+            var projectsToDelete = projects.filter(function(project) {
+              var isTestProject = project.id.indexOf(PREFIX) === 0;
+              var deleted =
+                project.metadata.lifecycleState === 'DELETE_REQUESTED';
+
+              return isTestProject && !deleted;
+            });
+
+            async.each(projectsToDelete, exec('delete'), callback);
+          });
+        }
+      ], callback);
+    }
+
+    function generateName(resourceType) {
+      return PREFIX + resourceType + '-' + uuid.v1().substr(0, 8);
+    }
   });
 });

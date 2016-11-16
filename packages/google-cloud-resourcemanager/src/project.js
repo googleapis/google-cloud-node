@@ -31,8 +31,8 @@ var util = require('util');
 /**
  * A Project object allows you to interact with a Google Cloud Platform project.
  *
- * @resource [Projects Overview]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects}
- * @resource [Project Resource]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project}
+ * @resource [Projects Overview]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects}
+ * @resource [Project Resource]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects#Project}
  *
  * @constructor
  * @alias module:resource/project
@@ -48,19 +48,36 @@ function Project(resource, id) {
      * @param {object=} config - See {module:resource#createProject}.
      *
      * @example
-     * project.create(function(err, zone, apiResponse) {
-     *   if (!err) {
-     *     // The zone was created successfully.
+     * project.create(function(err, project, operation, apiResponse) {
+     *   if (err) {
+     *     // Error handling omitted.
      *   }
+     *
+     *   // `operation` will emit `error` or `complete` when the status updates.
+     *
+     *   operation
+     *     .on('error', function(err) {})
+     *     .on('complete', function() {
+     *       // Project was created successfully!
+     *     });
      * });
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * project.create().then(function(data) {
-     *   var zone = data[0];
-     *   var apiResponse = data[0];
-     * });
+     * project.create()
+     *   .then(function(data) {
+     *     var project = data[0];
+     *     var operation = data[1];
+     *     var apiResponse = data[2];
+     *
+     *     return operation.promise();
+     *   })
+     *   .then(function(data) {
+     *     var operationMetadata = data[0];
+     *
+     *     // Project created successfully!
+     *   });
      */
     create: true,
 
@@ -70,7 +87,7 @@ function Project(resource, id) {
      * **This method only works if you are authenticated as yourself, e.g. using
      * the gcloud SDK.**
      *
-     * @resource [projects: delete API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/delete}
+     * @resource [projects: delete API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/delete}
      *
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
@@ -143,7 +160,7 @@ function Project(resource, id) {
     /**
      * Get the metadata for the project.
      *
-     * @resource [projects: get API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/get}
+     * @resource [projects: get API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/get}
      *
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
@@ -171,11 +188,11 @@ function Project(resource, id) {
      * **This method only works if you are authenticated as yourself, e.g. using
      * the gcloud SDK.**
      *
-     * @resource [projects: update API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/update}
-     * @resource [Project Resource]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project}
+     * @resource [projects: update API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/update}
+     * @resource [Project Resource]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects#Project}
      *
      * @param {object} metadata - See a
-     *     [Project resource](https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project).
+     *     [Project resource](https://cloud.google.com/resource-manager/reference/rest/v1/projects#Project).
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
@@ -223,7 +240,7 @@ util.inherits(Project, common.ServiceObject);
  * **This method only works if you are authenticated as yourself, e.g. using the
  * gcloud SDK.**
  *
- * @resource [projects: undelete API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/undelete}
+ * @resource [projects: undelete API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/undelete}
  *
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.

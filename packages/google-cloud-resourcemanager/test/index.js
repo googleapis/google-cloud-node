@@ -19,21 +19,20 @@
 var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
-var nodeutil = require('util');
 var proxyquire = require('proxyquire');
-var Service = require('@google-cloud/common').Service;
 var util = require('@google-cloud/common').util;
 
+function FakeOperation() {
+  this.calledWith_ = arguments;
+}
+
 function FakeProject() {
-  this.calledWith_ = [].slice.call(arguments);
+  this.calledWith_ = arguments;
 }
 
 function FakeService() {
   this.calledWith_ = arguments;
-  Service.apply(this, arguments);
 }
-
-nodeutil.inherits(FakeService, Service);
 
 var extended = false;
 var fakePaginator = {
@@ -68,7 +67,7 @@ var fakeUtil = extend({}, util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, ['project']);
+    assert.deepEqual(options.exclude, ['operation', 'project']);
   }
 });
 
@@ -81,6 +80,7 @@ describe('Resource', function() {
   before(function() {
     Resource = proxyquire('../', {
       '@google-cloud/common': {
+        Operation: FakeOperation,
         Service: FakeService,
         paginator: fakePaginator,
         util: fakeUtil
@@ -134,16 +134,16 @@ describe('Resource', function() {
     });
 
     it('should inherit from Service', function() {
-      assert(resource instanceof Service);
+      assert(resource instanceof FakeService);
 
       var calledWith = resource.calledWith_[0];
 
-      var baseUrl = 'https://cloudresourcemanager.googleapis.com/v1beta1';
+      var baseUrl = 'https://cloudresourcemanager.googleapis.com/v1';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/cloud-platform'
       ]);
-      assert.strictEqual(resource.projectIdRequired, false);
+      assert.strictEqual(calledWith.projectIdRequired, false);
       assert.deepEqual(calledWith.packageJson, require('../package.json'));
     });
   });
@@ -197,7 +197,10 @@ describe('Resource', function() {
     });
 
     describe('success', function() {
-      var apiResponse = { projectId: NEW_PROJECT_ID };
+      var apiResponse = {
+        projectId: PROJECT_ID,
+        name: 'operation-name'
+      };
 
       beforeEach(function() {
         resource.request = function(reqOpts, callback) {
@@ -207,18 +210,28 @@ describe('Resource', function() {
 
       it('should exec callback with Project & API response', function(done) {
         var project = {};
+        var fakeOperation = {};
 
         resource.project = function(id) {
-          assert.strictEqual(id, NEW_PROJECT_ID);
+          assert.strictEqual(id, apiResponse.projectId);
           return project;
         };
 
-        resource.createProject(NEW_PROJECT_ID, OPTIONS, function(err, p, res) {
-          assert.ifError(err);
+        resource.operation = function(name) {
+          assert.strictEqual(name, apiResponse.name);
+          return fakeOperation;
+        };
+
+        resource.createProject(NEW_PROJECT_ID, OPTIONS, function(e, p, o, res) {
+          assert.ifError(e);
 
           assert.strictEqual(p, project);
 
+          assert.strictEqual(o, fakeOperation);
+          assert.strictEqual(o.metadata, apiResponse);
+
           assert.strictEqual(res, apiResponse);
+
           done();
         });
       });
@@ -322,6 +335,27 @@ describe('Resource', function() {
 
           done();
         });
+      });
+    });
+  });
+
+  describe('operation', function() {
+    var NAME = 'operation-name';
+
+    it('should throw if a name is not provided', function() {
+      assert.throws(function() {
+        resource.operation();
+      }, /A name must be specified for an operation\./);
+    });
+
+    it('should return a common/operation', function() {
+      var operation = resource.operation(NAME);
+
+      assert(operation instanceof FakeOperation);
+
+      assert.deepEqual(operation.calledWith_[0], {
+        parent: resource,
+        id: NAME
       });
     });
   });

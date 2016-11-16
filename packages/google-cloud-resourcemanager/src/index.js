@@ -64,7 +64,7 @@ function Resource(options) {
   }
 
   var config = {
-    baseUrl: 'https://cloudresourcemanager.googleapis.com/v1beta1',
+    baseUrl: 'https://cloudresourcemanager.googleapis.com/v1',
     scopes: ['https://www.googleapis.com/auth/cloud-platform'],
     projectIdRequired: false,
     packageJson: require('../package.json')
@@ -84,11 +84,11 @@ util.inherits(Resource, common.Service);
  * gcloud SDK.**
  *
  * @resource [Projects Overview]{@link https://cloud.google.com/compute/docs/networking#networks}
- * @resource [projects: create API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/create}
+ * @resource [projects: create API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/create}
  *
- * @param {string} name - Name of the project.
+ * @param {string} id - ID of the project.
  * @param {object=} options - See a
- *     [Project resource](https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects#Project).
+ *     [Project resource](https://cloud.google.com/resource-manager/reference/rest/v1/projects#Project).
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:resource/project} callback.project - The created Project
@@ -96,19 +96,39 @@ util.inherits(Resource, common.Service);
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * resource.createProject('new project name', function(err, project) {
- *   if (!err) {
- *     // `project` is a new Project instance.
+ * var id = 'new-project-id';
+ *
+ * resource.createProject(id, function(err, project, operation, apiResponse) {
+ *   if (err) {
+ *     // Error handling omitted.
  *   }
+ *
+ *   // `project` is a new Project instance.
+ *   // `operation` will emit `error` or `complete` when the status updates.
+ *
+ *   operation
+ *     .on('error', function(err) {})
+ *     .on('complete', function() {
+ *       // Project was created successfully!
+ *     });
  * });
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * resource.createProject('new project name').then(function(data) {
- *   var project = data[0];
- *   var apiResponse = data[1];
- * });
+ * resource.createProject(id)
+ *   .then(function(data) {
+ *     var project = data[0];
+ *     var operation = data[1];
+ *     var apiResponse = data[2];
+ *
+ *     return operation.promise();
+ *   })
+ *   .then(function(data) {
+ *     var operationMetadata = data[0];
+ *
+ *     // Project created successfully!
+ *   });
  */
 Resource.prototype.createProject = function(id, options, callback) {
   var self = this;
@@ -131,17 +151,19 @@ Resource.prototype.createProject = function(id, options, callback) {
     }
 
     var project = self.project(resp.projectId);
-    project.metadata = resp;
 
-    callback(null, project, resp);
+    var operation = self.operation(resp.name);
+    operation.metadata = resp;
+
+    callback(null, project, operation, resp);
   });
 };
 
 /**
  * Get a list of projects.
  *
- * @resource [Projects Overview]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects}
- * @resource [projects: list API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1beta1/projects/list}
+ * @resource [Projects Overview]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects}
+ * @resource [projects: list API Documentation]{@link https://cloud.google.com/resource-manager/reference/rest/v1/projects/list}
  *
  * @param {object=} options - Operation search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -251,6 +273,31 @@ Resource.prototype.getProjects = function(options, callback) {
 Resource.prototype.getProjectsStream =
   common.paginator.streamify('getProjects');
 
+/*! Developer Documentation
+ *
+ * @returns {module:common/operation}
+ */
+/**
+ * Get a reference to an existing operation.
+ *
+ * @throws {Error} If a name is not provided.
+ *
+ * @param {string} name - The name of the operation.
+ *
+ * @example
+ * var operation = resource.operation('68850831366825');
+ */
+Resource.prototype.operation = function(name) {
+  if (!name) {
+    throw new Error('A name must be specified for an operation.');
+  }
+
+  return new common.Operation({
+    parent: this,
+    id: name
+  });
+};
+
 /**
  * Create a Project object. See {module:resoucemanager/createProject} to create
  * a project.
@@ -285,7 +332,10 @@ common.paginator.extend(Resource, ['getProjects']);
  * that a callback is omitted.
  */
 common.util.promisifyAll(Resource, {
-  exclude: ['project']
+  exclude: [
+    'operation',
+    'project'
+  ]
 });
 
 Resource.Project = Project;

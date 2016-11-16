@@ -50,14 +50,17 @@
     "resource"
   ],
   "dependencies": {
-    "@google-cloud/common": "^0.7.0",
+    "@google-cloud/common": "^0.8.0",
     "extend": "^3.0.0",
     "is": "^3.0.1"
   },
   "devDependencies": {
     "arrify": "^1.0.0",
+    "async": "^2.1.2",
     "google-auto-auth": "^0.2.4",
+    "methmeth": "^1.1.0",
     "mocha": "^3.0.1",
+    "node-uuid": "^1.4.7",
     "proxyquire": "^1.7.10"
   },
   "scripts": {
