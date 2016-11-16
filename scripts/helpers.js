@@ -295,7 +295,7 @@ function Git(cwd) {
   this.branch = {
     current: IS_PR ? 'FETCH_HEAD' : run('git rev-parse --abbrev-ref HEAD', {
       cwd: this.cwd
-    })
+    }).trim()
   };
 }
 
