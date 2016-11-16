@@ -5,16 +5,15 @@
   "license": "Apache Version 2.0",
   "author": "Google Inc.",
   "scripts": {
-    "test": "mocha -R spec -t 120000 --require intelli-espower-loader ../test/_setup.js test/*.test.js",
-    "system-test": "mocha -R spec -t 120000 --require intelli-espower-loader ../system-test/_setup.js system-test/*.test.js"
+    "test": "cd ..; npm run t -- dns/test/*.test.js",
+    "system-test": "cd ..; npm run st -- dns/system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/dns": "^0.2.0",
-    "yargs": "^6.0.0"
+    "@google-cloud/dns": "0.2.0",
+    "yargs": "6.4.0"
   },
   "devDependencies": {
-    "mocha": "^3.1.0",
-    "uuid": "^2.0.3"
+    "uuid": "2.0.3"
   },
   "engines": {
     "node": ">=4.3.2"
