@@ -52,9 +52,9 @@
     "stackdriver"
   ],
   "dependencies": {
-    "google-gax": "^0.8.1",
-    "google-proto-files": "^0.8.3",
-    "extend": "^3.0.0"
+    "extend": "^3.0.0",
+    "google-gax": "^0.9.1",
+    "google-proto-files": "^0.8.3"
   },
   "devDependencies": {
     "mocha": "^3.1.2"
