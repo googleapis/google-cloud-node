@@ -86,3 +86,8 @@ async.eachLimit(subscriptions, PARALLEL_LIMIT, deleteSubscription, function(err)
 This will only allow 10 at a time to go through, making it easier on the API to keep up with your requests.
 
 Reference Issue: [#1101](https://github.com/GoogleCloudPlatform/google-cloud-node/issues/1101)
+
+
+## gRPC received a message exceeding the max size.
+
+If you're seeing an error message saying that your gRPC request is exceeding the max size, you may need to send smaller individual requests. Request bodies should not exceed 4MB.
