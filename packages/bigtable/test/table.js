@@ -976,6 +976,39 @@ describe('Bigtable/Table', function() {
         });
       });
     });
+
+    describe('success', function() {
+      var fakeStatuses = [
+        {
+          status: {
+            code: 0
+          }
+        },
+        {
+          status: {
+            code: 0
+          }
+        }
+      ];
+
+      beforeEach(function() {
+        table.requestStream = function() {
+          var stream = new Stream({
+            objectMode: true
+          });
+
+          setImmediate(function() {
+            stream.end({ entries: fakeStatuses });
+          });
+
+          return stream;
+        };
+      });
+
+      it('should execute callback', function(done) {
+        table.mutate(entries, done);
+      });
+    });
   });
 
   describe('row', function() {

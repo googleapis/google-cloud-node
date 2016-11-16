@@ -763,7 +763,7 @@ Table.prototype.insert = function(entries, callback) {
  *
  * @example
  * //-
- * // Insert entities. See {module:bigtable/table#insert}
+ * // Insert entities. See {module:bigtable/table#insert}.
  * //-
  * var callback = function(err) {
  *   if (err) {
@@ -792,7 +792,7 @@ Table.prototype.insert = function(entries, callback) {
  * table.mutate(entries, callback);
  *
  * //-
- * // Delete entities. See {module:bigtable/row#deleteCells}
+ * // Delete entities. See {module:bigtable/row#deleteCells}.
  * //-
  * var entries = [
  *   {
@@ -848,7 +848,6 @@ Table.prototype.insert = function(entries, callback) {
  * table.mutate(entries).then(function() {
  *   // All requested mutations have been processed.
  * });
- * //-
  */
 Table.prototype.mutate = function(entries, callback) {
   entries = flatten(arrify(entries));
@@ -864,40 +863,34 @@ Table.prototype.mutate = function(entries, callback) {
     entries: entries.map(Mutation.parse)
   };
 
-  var stream = pumpify.obj([
-    this.requestStream(grpcOpts, reqOpts),
-    through.obj(function(data, enc, next) {
-      var throughStream = this;
+  var mutationErrors = [];
 
-      data.entries.forEach(function(entry) {
-        // mutation was successful, no need to notify the user
+  this.requestStream(grpcOpts, reqOpts)
+    .on('error', callback)
+    .on('data', function(obj) {
+      obj.entries.forEach(function(entry) {
+        // Mutation was successful.
         if (entry.status.code === 0) {
           return;
         }
 
         var status = common.GrpcService.decorateStatus_(entry.status);
-
         status.entry = entries[entry.index];
-        throughStream.push(status);
+
+        mutationErrors.push(status);
       });
-
-      next();
     })
-  ]);
-
-  stream
-    .on('error', callback)
-    .pipe(concat(function(mutationErrors) {
+    .on('end', function() {
       var err = null;
 
-      if (mutationErrors && mutationErrors.length > 0) {
+      if (mutationErrors.length > 0) {
         err = new common.util.PartialFailureError({
           errors: mutationErrors
         });
       }
 
       callback(err);
-    }));
+    });
 };
 
 /**
