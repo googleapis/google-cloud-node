@@ -21,7 +21,7 @@ describe(`logging:quickstart`, () => {
   let logMock, loggingMock, LoggingMock;
   const error = new Error(`error`);
   const expectedLogName = `my-log`;
-  const expectedResource = { type: `global` };
+  const expectedResource = { resource: { type: `global` } };
   const expectedMessage = `Hello, world!`;
 
   before(() => {

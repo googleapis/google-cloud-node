@@ -5,19 +5,18 @@
   "license": "Apache Version 2.0",
   "author": "Google Inc.",
   "scripts": {
-    "test": "mocha -R spec -t 120000 --require intelli-espower-loader ../test/_setup.js test/*.test.js",
-    "system-test": "mocha -R spec -t 120000 --require intelli-espower-loader ../system-test/_setup.js system-test/*.test.js"
+    "test": "cd ..; npm run t -- logging/test/*.test.js",
+    "system-test": "cd ..; npm run st -- logging/system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/logging": "^0.1.1",
-    "@google-cloud/storage": "^0.1.1",
-    "express": "^4.13.4",
-    "fluent-logger": "^2.0.1",
-    "yargs": "^5.0.0"
+    "@google-cloud/logging": "0.5.0",
+    "@google-cloud/storage": "0.4.0",
+    "express": "4.14.0",
+    "fluent-logger": "2.0.1",
+    "yargs": "6.4.0"
   },
   "devDependencies": {
-    "mocha": "^3.0.2",
-    "node-uuid": "^1.4.7"
+    "node-uuid": "1.4.7"
   },
   "engines": {
     "node": ">=4.3.2"
