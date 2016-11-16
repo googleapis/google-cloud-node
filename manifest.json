@@ -1,0 +1,259 @@
+{
+  "lang": "node",
+  "friendlyLang": "Node.js",
+  "moduleName": "google-cloud-node",
+  "markdown": "javascript",
+  "content": "json",
+  "home": "home.html",
+  "titleDelimiter": " » ",
+  "defaultModule": "google-cloud",
+  "modules": [
+    {
+      "id": "google-cloud",
+      "name": "google-cloud",
+      "defaultService": "google-cloud",
+      "versions": [
+        "0.44.0",
+        "0.43.0",
+        "0.42.2",
+        "0.41.2",
+        "0.41.0",
+        "0.40.0",
+        "0.39.0",
+        "0.38.3",
+        "0.37.0",
+        "0.36.0",
+        "0.35.0",
+        "0.34.0",
+        "0.33.0",
+        "0.32.0",
+        "0.31.0",
+        "0.30.3",
+        "0.30.2",
+        "0.30.1",
+        "0.30.0",
+        "0.29.0",
+        "0.28.0",
+        "0.27.0",
+        "0.26.1",
+        "0.26.0",
+        "0.25.1",
+        "0.25.0",
+        "0.24.0",
+        "0.23.0",
+        "0.22.0",
+        "0.21.0",
+        "0.20.0",
+        "0.19.1",
+        "0.19.0",
+        "0.18.0",
+        "0.17.0",
+        "0.16.0",
+        "0.15.0",
+        "0.14.0",
+        "0.13.2",
+        "0.13.1",
+        "0.12.0",
+        "0.11.0",
+        "0.10.0",
+        "0.9.0",
+        "0.8.1",
+        "0.8.0",
+        "0.7.1",
+        "0.7.0",
+        "0.6.0",
+        "0.5.0",
+        "master"
+      ]
+    },
+    {
+      "id": "bigquery",
+      "name": "@google-cloud/bigquery",
+      "defaultService": "bigquery",
+      "versions": [
+        "0.4.0",
+        "0.3.0",
+        "0.2.0",
+        "0.1.2",
+        "0.1.1",
+        "master"
+      ]
+    },
+    {
+      "id": "bigtable",
+      "name": "@google-cloud/bigtable",
+      "defaultService": "bigtable",
+      "versions": [
+        "0.5.0",
+        "0.4.0",
+        "0.3.0",
+        "0.2.1",
+        "0.2.0",
+        "0.1.1",
+        "master"
+      ]
+    },
+    {
+      "id": "compute",
+      "name": "@google-cloud/compute",
+      "defaultService": "compute",
+      "versions": [
+        "0.3.0",
+        "0.2.0",
+        "0.1.1",
+        "master"
+      ]
+    },
+    {
+      "id": "datastore",
+      "name": "@google-cloud/datastore",
+      "defaultService": "datastore",
+      "versions": [
+        "0.5.0",
+        "0.4.0",
+        "0.3.1",
+        "0.3.0",
+        "0.2.0",
+        "0.1.1",
+        "master"
+      ]
+    },
+    {
+      "id": "dns",
+      "name": "@google-cloud/dns",
+      "defaultService": "dns",
+      "versions": [
+        "0.3.0",
+        "0.2.0",
+        "0.1.1",
+        "master"
+      ]
+    },
+    {
+      "id": "language",
+      "name": "@google-cloud/language",
+      "defaultService": "language",
+      "versions": [
+        "0.6.0",
+        "0.5.0",
+        "0.4.0",
+        "0.3.0",
+        "0.2.0",
+        "0.1.2",
+        "0.1.1",
+        "master"
+      ]
+    },
+    {
+      "id": "logging",
+      "name": "@google-cloud/logging",
+      "defaultService": "logging",
+      "versions": [
+        "0.5.0",
+        "0.4.0",
+        "0.3.0",
+        "0.2.0",
+        "0.1.1",
+        "master"
+      ]
+    },
+    {
+      "id": "monitoring",
+      "name": "@google-cloud/monitoring",
+      "defaultService": "monitoring",
+      "versions": [
+        "0.1.1",
+        "master"
+      ]
+    },
+    {
+      "id": "prediction",
+      "name": "@google-cloud/prediction",
+      "defaultService": "prediction",
+      "versions": [
+        "0.3.0",
+        "0.2.0",
+        "0.1.2",
+        "0.1.1",
+        "master"
+      ]
+    },
+    {
+      "id": "pubsub",
+      "name": "@google-cloud/pubsub",
+      "defaultService": "pubsub",
+      "versions": [
+        "0.5.0",
+        "0.4.0",
+        "0.3.0",
+        "0.2.0",
+        "0.1.1",
+        "master"
+      ]
+    },
+    {
+      "id": "resource",
+      "name": "@google-cloud/resource",
+      "defaultService": "resource",
+      "versions": [
+        "0.3.0",
+        "0.2.0",
+        "0.1.1",
+        "master"
+      ]
+    },
+    {
+      "id": "speech",
+      "name": "@google-cloud/speech",
+      "defaultService": "speech",
+      "versions": [
+        "0.4.0",
+        "0.3.0",
+        "0.2.0",
+        "master"
+      ]
+    },
+    {
+      "id": "storage",
+      "name": "@google-cloud/storage",
+      "defaultService": "storage",
+      "versions": [
+        "0.4.0",
+        "0.3.0",
+        "0.2.0",
+        "0.1.1",
+        "master"
+      ]
+    },
+    {
+      "id": "translate",
+      "name": "@google-cloud/translate",
+      "defaultService": "translate",
+      "versions": [
+        "0.5.0",
+        "0.4.0",
+        "0.3.0",
+        "0.2.0",
+        "0.1.1",
+        "master"
+      ]
+    },
+    {
+      "id": "vision",
+      "name": "@google-cloud/vision",
+      "defaultService": "vision",
+      "versions": [
+        "0.5.0",
+        "0.4.0",
+        "0.3.0",
+        "0.2.0",
+        "0.1.1",
+        "master"
+      ]
+    }
+  ],
+  "package": {
+    "title": "npm",
+    "href": "https://www.npmjs.com/package/gcloud"
+  }
+}
