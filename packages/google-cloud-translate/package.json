@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/translate",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "author": "Google Inc.",
   "description": "Google Translate API Client Library for Node.js",
   "contributors": [
