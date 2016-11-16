@@ -215,6 +215,16 @@ describe('Speech', function() {
           .on('complete', assertSimplifiedResponseOperation(done));
       });
     });
+
+    it('runs operation as a promise', function() {
+      var uri = AUDIO_FILES.bridge.httpUri;
+
+      return speech.startRecognition(uri, OPTIONS)
+        .then(function(response) {
+          var operation = response[0];
+          return operation.promise();
+        });
+    });
   });
 
   describe('createRecognizeStream', function() {
