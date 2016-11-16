@@ -103,8 +103,8 @@ If you are not running this client on Google Compute Engine, you need a Google D
   * Prediction API
   * Stackdriver Logging API
 4. Navigate to **APIs & auth** >  **Credentials** and then:
-  * If you want to use a new service account, click on **Create new Client ID** and select **Service account**. After the account is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
-  * If you want to generate a new key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
+  * If you want to use a new service account key, click on **Create credentials** and select **Service account key**. After the account key is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
+  * If you want to generate a new service account key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
 
 ``` js
 // Authenticating on a global basis.
@@ -118,6 +118,9 @@ var gcloud = require('google-cloud')({
 
   // Or the contents of the key file:
   credentials: require('./path/to/keyfile.json')
+
+  // For any APIs that accept an API key:
+  key: '...'
 });
 
 // ...you're good to go! See the next section to get started using the APIs.
