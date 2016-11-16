@@ -17,7 +17,6 @@
 'use strict';
 
 var assert = require('assert');
-var events = require('events');
 var extend = require('extend');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
@@ -39,7 +38,7 @@ var fakeUtil = extend({}, common.util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, ['family', 'insert', 'mutate', 'row']);
+    assert.deepEqual(options.exclude, ['family', 'row']);
   }
 });
 
@@ -859,17 +858,6 @@ describe('Bigtable/Table', function() {
 
       table.insert(fakeEntries, done);
     });
-
-    it('should return the mutate stream', function() {
-      var fakeStream = {};
-
-      table.mutate = function() {
-        return fakeStream;
-      };
-
-      var stream = table.insert([]);
-      assert.strictEqual(stream, fakeStream);
-    });
   });
 
   describe('mutate', function() {
@@ -932,13 +920,6 @@ describe('Bigtable/Table', function() {
             done();
           });
         });
-
-        it('should emit the error via error event', function(done) {
-          table.mutate(entries).on('error', function(err) {
-            assert.strictEqual(err, error);
-            done();
-          });
-        });
       });
 
       describe('mutation errors', function() {
@@ -993,69 +974,39 @@ describe('Bigtable/Table', function() {
             done();
           });
         });
-
-        it('should emit a mutation error as an error event', function(done) {
-          var mutationErrors = [];
-          var emitter = table.mutate(entries);
-
-          assert(emitter instanceof events.EventEmitter);
-
-          emitter
-            .on('error', function(err) {
-              mutationErrors.push(err);
-            })
-            .on('complete', function() {
-              assert.strictEqual(mutationErrors[0], parsedStatuses[0]);
-              assert.strictEqual(mutationErrors[0].entry, entries[0]);
-              assert.strictEqual(mutationErrors[1], parsedStatuses[1]);
-              assert.strictEqual(mutationErrors[1].entry, entries[1]);
-              done();
-            });
-        });
       });
     });
 
     describe('success', function() {
-      var fakeStatuses = [{
-        index: 0,
-        status: {
-          code: 0
+      var fakeStatuses = [
+        {
+          status: {
+            code: 0
+          }
+        },
+        {
+          status: {
+            code: 0
+          }
         }
-      }, {
-        index: 1,
-        status: {
-          code: 0
-        }
-      }];
+      ];
 
       beforeEach(function() {
         table.requestStream = function() {
-          var stream = through.obj();
-
-          stream.push({ entries: fakeStatuses });
+          var stream = new Stream({
+            objectMode: true
+          });
 
           setImmediate(function() {
-            stream.end();
+            stream.end({ entries: fakeStatuses });
           });
 
           return stream;
         };
-
-        FakeGrpcServiceObject.decorateStatus_ = function() {
-          throw new Error('Should not be called');
-        };
       });
 
-      it('should emit the appropriate stream events', function(done) {
-        var emitter = table.mutate(entries);
-
-        assert(emitter instanceof events.EventEmitter);
-
-        emitter
-          .on('error', done) // should not be emitted
-          .on('complete', function() {
-            done();
-          });
+      it('should execute callback', function(done) {
+        table.mutate(entries, done);
       });
     });
   });

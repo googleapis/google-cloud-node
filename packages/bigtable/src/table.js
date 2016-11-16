@@ -23,7 +23,6 @@
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var concat = require('concat-stream');
-var events = require('events');
 var flatten = require('lodash.flatten');
 var is = require('is');
 var propAssign = require('prop-assign');
@@ -734,16 +733,14 @@ Table.prototype.getRows = function(options, callback) {
  *
  * table.insert(entries, callback);
  *
+ *
  * //-
- * // If you don't provide a callback, an EventEmitter is returned. Listen for
- * // the error event to catch API and insert errors, and complete for when
- * // the API request has completed.
+ * // If the callback is omitted, we'll return a Promise.
  * //-
- * table.insert(entries)
- *   .on('error', console.error)
- *   .on('complete', function() {
- *     // All requested inserts have been processed.
- *   });
+ * table.insert(entries).then(function() {
+ *   // All requested inserts have been processed.
+ * });
+ * //-
  */
 Table.prototype.insert = function(entries, callback) {
   entries = arrify(entries).map(propAssign('method', Mutation.methods.INSERT));
@@ -766,7 +763,7 @@ Table.prototype.insert = function(entries, callback) {
  *
  * @example
  * //-
- * // Insert entities. See {module:bigtable/table#insert}
+ * // Insert entities. See {module:bigtable/table#insert}.
  * //-
  * var callback = function(err) {
  *   if (err) {
@@ -795,7 +792,7 @@ Table.prototype.insert = function(entries, callback) {
  * table.mutate(entries, callback);
  *
  * //-
- * // Delete entities. See {module:bigtable/row#deleteCells}
+ * // Delete entities. See {module:bigtable/row#deleteCells}.
  * //-
  * var entries = [
  *   {
@@ -846,15 +843,11 @@ Table.prototype.insert = function(entries, callback) {
  * table.mutate(entries, callback);
  *
  * //-
- * // If you don't provide a callback, an EventEmitter is returned. Listen for
- * // the error event to catch API and mutation errors, and complete for when
- * // the API request has completed.
+ * // If the callback is omitted, we'll return a Promise.
  * //-
- * table.mutate(entries)
- *   .on('error', console.error)
- *   .on('complete', function() {
- *     // All requested mutations have been processed.
- *   });
+ * table.mutate(entries).then(function() {
+ *   // All requested mutations have been processed.
+ * });
  */
 Table.prototype.mutate = function(entries, callback) {
   entries = flatten(arrify(entries));
@@ -870,20 +863,13 @@ Table.prototype.mutate = function(entries, callback) {
     entries: entries.map(Mutation.parse)
   };
 
-  var isCallbackMode = is.function(callback);
-  var emitter = null;
+  var mutationErrors = [];
 
-  if (!isCallbackMode) {
-    emitter = new events.EventEmitter();
-  }
-
-  var stream = pumpify.obj([
-    this.requestStream(grpcOpts, reqOpts),
-    through.obj(function(data, enc, next) {
-      var throughStream = this;
-
-      data.entries.forEach(function(entry) {
-        // mutation was successful, no need to notify the user
+  this.requestStream(grpcOpts, reqOpts)
+    .on('error', callback)
+    .on('data', function(obj) {
+      obj.entries.forEach(function(entry) {
+        // Mutation was successful.
         if (entry.status.code === 0) {
           return;
         }
@@ -891,37 +877,20 @@ Table.prototype.mutate = function(entries, callback) {
         var status = common.GrpcService.decorateStatus_(entry.status);
         status.entry = entries[entry.index];
 
-        if (!isCallbackMode) {
-          emitter.emit('error', status);
-          return;
-        }
-
-        throughStream.push(status);
+        mutationErrors.push(status);
       });
-
-      next();
     })
-  ]);
-
-  if (!isCallbackMode) {
-    stream.on('error', emitter.emit.bind(emitter, 'error'));
-    stream.on('finish', emitter.emit.bind(emitter, 'complete'));
-    return emitter;
-  }
-
-  stream
-    .on('error', callback)
-    .pipe(concat(function(mutationErrors) {
+    .on('end', function() {
       var err = null;
 
-      if (mutationErrors && mutationErrors.length > 0) {
+      if (mutationErrors.length > 0) {
         err = new common.util.PartialFailureError({
           errors: mutationErrors
         });
       }
 
       callback(err);
-    }));
+    });
 };
 
 /**
@@ -1029,7 +998,7 @@ Table.prototype.sampleRowKeysStream = function() {
  * that a callback is omitted.
  */
 common.util.promisifyAll(Table, {
-  exclude: ['family', 'insert', 'mutate', 'row']
+  exclude: ['family', 'row']
 });
 
 module.exports = Table;
