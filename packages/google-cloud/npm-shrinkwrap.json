@@ -3,15 +3,34 @@
   "version": "0.43.0",
   "dependencies": {
     "@google-cloud/bigquery": {
-      "version": "0.4.0",
-      "from": "@google-cloud/bigquery@>=0.4.0 <0.5.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/bigquery/-/bigquery-0.4.0.tgz"
+      "version": "0.5.0",
+      "from": "@google-cloud/bigquery@>=0.5.0 <0.6.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/bigquery/-/bigquery-0.5.0.tgz",
+      "dependencies": {
+        "@google-cloud/common": {
+          "version": "0.8.0",
+          "from": "@google-cloud/common@>=0.8.0 <0.9.0",
+          "resolved": "https://registry.npmjs.org/@google-cloud/common/-/common-0.8.0.tgz"
+        }
+      }
     },
     "@google-cloud/bigtable": {
-      "version": "0.5.0",
-      "from": "@google-cloud/bigtable@>=0.5.0 <0.6.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/bigtable/-/bigtable-0.5.0.tgz",
+      "version": "0.6.0",
+      "from": "@google-cloud/bigtable@>=0.6.0 <0.7.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/bigtable/-/bigtable-0.6.0.tgz",
       "dependencies": {
+        "@google-cloud/common": {
+          "version": "0.8.0",
+          "from": "@google-cloud/common@^0.8.0",
+          "resolved": "https://registry.npmjs.org/@google-cloud/common/-/common-0.8.0.tgz",
+          "dependencies": {
+            "dot-prop": {
+              "version": "2.4.0",
+              "from": "dot-prop@>=2.4.0 <3.0.0",
+              "resolved": "https://registry.npmjs.org/dot-prop/-/dot-prop-2.4.0.tgz"
+            }
+          }
+        },
         "dot-prop": {
           "version": "3.0.0",
           "from": "dot-prop@>=3.0.0 <4.0.0",
@@ -20,14 +39,14 @@
       }
     },
     "@google-cloud/common": {
-      "version": "0.7.1",
-      "from": "@google-cloud/common@>=0.7.0 <0.8.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/common/-/common-0.7.1.tgz"
+      "version": "0.8.0",
+      "from": "@google-cloud/common@>=0.8.0 <0.9.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/common/-/common-0.8.0.tgz"
     },
     "@google-cloud/compute": {
-      "version": "0.3.0",
-      "from": "@google-cloud/compute@>=0.3.0 <0.4.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/compute/-/compute-0.3.0.tgz",
+      "version": "0.3.1",
+      "from": "@google-cloud/compute@>=0.3.1 <0.4.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/compute/-/compute-0.3.1.tgz",
       "dependencies": {
         "async": {
           "version": "2.1.2",
@@ -37,23 +56,50 @@
       }
     },
     "@google-cloud/datastore": {
-      "version": "0.5.0",
-      "from": "@google-cloud/datastore@>=0.5.0 <0.6.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/datastore/-/datastore-0.5.0.tgz"
+      "version": "0.5.1",
+      "from": "@google-cloud/datastore@>=0.5.1 <0.6.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/datastore/-/datastore-0.5.1.tgz"
     },
     "@google-cloud/dns": {
-      "version": "0.3.0",
-      "from": "@google-cloud/dns@>=0.3.0 <0.4.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/dns/-/dns-0.3.0.tgz"
+      "version": "0.3.1",
+      "from": "@google-cloud/dns@>=0.3.1 <0.4.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/dns/-/dns-0.3.1.tgz"
     },
     "@google-cloud/language": {
+      "version": "0.6.1",
+      "from": "@google-cloud/language@>=0.6.1 <0.7.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/language/-/language-0.6.1.tgz",
+      "dependencies": {
+        "google-proto-files": {
+          "version": "0.8.5",
+          "from": "google-proto-files@>=0.8.5 <0.9.0",
+          "resolved": "https://registry.npmjs.org/google-proto-files/-/google-proto-files-0.8.5.tgz"
+        }
+      }
+    },
+    "@google-cloud/logging": {
+      "version": "0.5.1",
+      "from": "@google-cloud/logging@>=0.5.1 <0.6.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/logging/-/logging-0.5.1.tgz"
+    },
+    "@google-cloud/monitoring": {
+      "version": "0.1.2",
+      "from": "@google-cloud/monitoring@>=0.1.1 <0.2.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/monitoring/-/monitoring-0.1.2.tgz"
+    },
+    "@google-cloud/prediction": {
+      "version": "0.3.1",
+      "from": "@google-cloud/prediction@>=0.3.1 <0.4.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/prediction/-/prediction-0.3.1.tgz"
+    },
+    "@google-cloud/pubsub": {
       "version": "0.6.0",
-      "from": "@google-cloud/language@>=0.6.0 <0.7.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/language/-/language-0.6.0.tgz",
+      "from": "@google-cloud/pubsub@>=0.6.0 <0.7.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/pubsub/-/pubsub-0.6.0.tgz",
       "dependencies": {
         "@google-cloud/common": {
           "version": "0.8.0",
-          "from": "@google-cloud/common@>=0.8.0 <0.9.0",
+          "from": "@google-cloud/common@^0.8.0",
           "resolved": "https://registry.npmjs.org/@google-cloud/common/-/common-0.8.0.tgz"
         },
         "google-gax": {
@@ -68,11 +114,6 @@
             }
           }
         },
-        "google-proto-files": {
-          "version": "0.8.5",
-          "from": "google-proto-files@>=0.8.5 <0.9.0",
-          "resolved": "https://registry.npmjs.org/google-proto-files/-/google-proto-files-0.8.5.tgz"
-        },
         "lodash": {
           "version": "4.11.2",
           "from": "lodash@>=4.11.1 <4.12.0",
@@ -80,52 +121,10 @@
         }
       }
     },
-    "@google-cloud/logging": {
-      "version": "0.5.0",
-      "from": "@google-cloud/logging@>=0.5.0 <0.6.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/logging/-/logging-0.5.0.tgz"
-    },
-    "@google-cloud/monitoring": {
-      "version": "0.1.1",
-      "from": "@google-cloud/monitoring@>=0.1.1 <0.2.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/monitoring/-/monitoring-0.1.1.tgz"
-    },
-    "@google-cloud/prediction": {
-      "version": "0.3.0",
-      "from": "@google-cloud/prediction@>=0.3.0 <0.4.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/prediction/-/prediction-0.3.0.tgz"
-    },
-    "@google-cloud/pubsub": {
-      "version": "0.5.0",
-      "from": "@google-cloud/pubsub@>=0.5.0 <0.6.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/pubsub/-/pubsub-0.5.0.tgz"
-    },
     "@google-cloud/resource": {
-      "version": "0.3.0",
-      "from": "@google-cloud/resource@>=0.3.0 <0.4.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/resource/-/resource-0.3.0.tgz"
-    },
-    "@google-cloud/speech": {
       "version": "0.4.0",
-      "from": "@google-cloud/speech@>=0.4.0 <0.5.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/speech/-/speech-0.4.0.tgz"
-    },
-    "@google-cloud/storage": {
-      "version": "0.4.0",
-      "from": "@google-cloud/storage@>=0.4.0 <0.5.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/storage/-/storage-0.4.0.tgz",
-      "dependencies": {
-        "async": {
-          "version": "2.1.2",
-          "from": "async@>=2.0.1 <3.0.0",
-          "resolved": "https://registry.npmjs.org/async/-/async-2.1.2.tgz"
-        }
-      }
-    },
-    "@google-cloud/translate": {
-      "version": "0.5.0",
-      "from": "@google-cloud/translate@>=0.5.0 <0.6.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/translate/-/translate-0.5.0.tgz",
+      "from": "@google-cloud/resource@>=0.4.0 <0.5.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/resource/-/resource-0.4.0.tgz",
       "dependencies": {
         "@google-cloud/common": {
           "version": "0.8.0",
@@ -134,15 +133,64 @@
         }
       }
     },
-    "@google-cloud/vision": {
+    "@google-cloud/speech": {
+      "version": "0.4.1",
+      "from": "@google-cloud/speech@>=0.4.1 <0.5.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/speech/-/speech-0.4.1.tgz"
+    },
+    "@google-cloud/storage": {
       "version": "0.5.0",
-      "from": "@google-cloud/vision@>=0.5.0 <0.6.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/vision/-/vision-0.5.0.tgz",
+      "from": "@google-cloud/storage@>=0.5.0 <0.6.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/storage/-/storage-0.5.0.tgz",
       "dependencies": {
+        "@google-cloud/common": {
+          "version": "0.8.0",
+          "from": "@google-cloud/common@^0.8.0",
+          "resolved": "https://registry.npmjs.org/@google-cloud/common/-/common-0.8.0.tgz"
+        },
         "async": {
           "version": "2.1.2",
           "from": "async@>=2.0.1 <3.0.0",
           "resolved": "https://registry.npmjs.org/async/-/async-2.1.2.tgz"
+        }
+      }
+    },
+    "@google-cloud/translate": {
+      "version": "0.5.1",
+      "from": "@google-cloud/translate@>=0.5.1 <0.6.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/translate/-/translate-0.5.1.tgz"
+    },
+    "@google-cloud/vision": {
+      "version": "0.6.0",
+      "from": "@google-cloud/vision@>=0.6.0 <0.7.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/vision/-/vision-0.6.0.tgz",
+      "dependencies": {
+        "@google-cloud/common": {
+          "version": "0.8.0",
+          "from": "@google-cloud/common@^0.8.0",
+          "resolved": "https://registry.npmjs.org/@google-cloud/common/-/common-0.8.0.tgz"
+        },
+        "async": {
+          "version": "2.1.2",
+          "from": "async@>=2.0.1 <3.0.0",
+          "resolved": "https://registry.npmjs.org/async/-/async-2.1.2.tgz"
+        },
+        "google-gax": {
+          "version": "0.9.1",
+          "from": "google-gax@^0.9.1",
+          "resolved": "https://registry.npmjs.org/google-gax/-/google-gax-0.9.1.tgz",
+          "dependencies": {
+            "google-auto-auth": {
+              "version": "0.2.4",
+              "from": "google-auto-auth@~0.2.4",
+              "resolved": "https://registry.npmjs.org/google-auto-auth/-/google-auto-auth-0.2.4.tgz"
+            },
+            "lodash": {
+              "version": "4.11.2",
+              "from": "lodash@~4.11.1",
+              "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.11.2.tgz"
+            }
+          }
         }
       }
     },
@@ -244,11 +292,6 @@
       "version": "0.2.0",
       "from": "assert-plus@>=0.2.0 <0.3.0",
       "resolved": "https://registry.npmjs.org/assert-plus/-/assert-plus-0.2.0.tgz"
-    },
-    "assertion-error": {
-      "version": "1.0.2",
-      "from": "assertion-error@>=1.0.1 <2.0.0",
-      "resolved": "https://registry.npmjs.org/assertion-error/-/assertion-error-1.0.2.tgz"
     },
     "async": {
       "version": "1.4.2",
@@ -368,11 +411,6 @@
       "from": "caseless@>=0.11.0 <0.12.0",
       "resolved": "https://registry.npmjs.org/caseless/-/caseless-0.11.0.tgz"
     },
-    "chai": {
-      "version": "3.5.0",
-      "from": "chai@*",
-      "resolved": "https://registry.npmjs.org/chai/-/chai-3.5.0.tgz"
-    },
     "chalk": {
       "version": "1.1.3",
       "from": "chalk@>=1.1.1 <2.0.0",
@@ -466,18 +504,6 @@
       "version": "1.2.0",
       "from": "decamelize@>=1.1.1 <2.0.0",
       "resolved": "https://registry.npmjs.org/decamelize/-/decamelize-1.2.0.tgz"
-    },
-    "deep-eql": {
-      "version": "0.1.3",
-      "from": "deep-eql@>=0.1.3 <0.2.0",
-      "resolved": "https://registry.npmjs.org/deep-eql/-/deep-eql-0.1.3.tgz",
-      "dependencies": {
-        "type-detect": {
-          "version": "0.1.1",
-          "from": "type-detect@0.1.1",
-          "resolved": "https://registry.npmjs.org/type-detect/-/type-detect-0.1.1.tgz"
-        }
-      }
     },
     "deep-extend": {
       "version": "0.4.1",
@@ -687,9 +713,9 @@
       "resolved": "https://registry.npmjs.org/google-auto-auth/-/google-auto-auth-0.3.0.tgz"
     },
     "google-gax": {
-      "version": "0.8.1",
-      "from": "google-gax@>=0.8.0 <0.9.0",
-      "resolved": "https://registry.npmjs.org/google-gax/-/google-gax-0.8.1.tgz",
+      "version": "0.9.1",
+      "from": "google-gax@>=0.9.1 <0.10.0",
+      "resolved": "https://registry.npmjs.org/google-gax/-/google-gax-0.9.1.tgz",
       "dependencies": {
         "google-auto-auth": {
           "version": "0.2.4",
@@ -736,9 +762,9 @@
       }
     },
     "graceful-fs": {
-      "version": "4.1.9",
+      "version": "4.1.10",
       "from": "graceful-fs@>=4.1.2 <5.0.0",
-      "resolved": "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.1.9.tgz"
+      "resolved": "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.1.10.tgz"
     },
     "graceful-readlink": {
       "version": "1.0.1",
@@ -1910,11 +1936,6 @@
       "resolved": "https://registry.npmjs.org/tweetnacl/-/tweetnacl-0.14.3.tgz",
       "optional": true
     },
-    "type-detect": {
-      "version": "1.0.0",
-      "from": "type-detect@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/type-detect/-/type-detect-1.0.0.tgz"
-    },
     "typedarray": {
       "version": "0.0.6",
       "from": "typedarray@>=0.0.5 <0.1.0",
@@ -1926,9 +1947,9 @@
       "resolved": "https://registry.npmjs.org/uid-number/-/uid-number-0.0.6.tgz"
     },
     "unzip-response": {
-      "version": "1.0.1",
+      "version": "1.0.2",
       "from": "unzip-response@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/unzip-response/-/unzip-response-1.0.1.tgz"
+      "resolved": "https://registry.npmjs.org/unzip-response/-/unzip-response-1.0.2.tgz"
     },
     "util-deprecate": {
       "version": "1.0.2",
