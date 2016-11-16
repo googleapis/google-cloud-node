@@ -5,20 +5,17 @@
   "license": "Apache Version 2.0",
   "author": "Google Inc.",
   "scripts": {
-    "test": "mocha -R spec -t 10000 --require intelli-espower-loader ../test/_setup.js test/*.test.js",
-    "system-test": "mocha -R spec -t 10000 --require intelli-espower-loader ../system-test/_setup.js system-test/*.test.js"
+    "test": "cd ..; npm run t -- vision/test/*.test.js",
+    "system-test": "cd ..; npm run st -- vision/system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/vision": "^0.5.0",
-    "async": "^2.1.2",
-    "natural": "^0.4.0",
-    "redis": "^2.6.3"
-  },
-  "devDependencies": {
-    "mocha": "^3.1.2"
+    "@google-cloud/vision": "0.5.0",
+    "async": "2.1.2",
+    "natural": "0.4.0",
+    "redis": "2.6.3"
   },
   "optionalDependencies": {
-    "canvas": "^1.6.2"
+    "canvas": "1.6.2"
   },
   "engines": {
     "node": ">=4.3.2"
