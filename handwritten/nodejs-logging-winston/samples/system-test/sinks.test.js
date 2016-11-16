@@ -58,7 +58,8 @@ describe('logging:sinks', function () {
         name: sinkName,
         destination: 'storage.googleapis.com/' + bucketName,
         filter: filter,
-        outputVersionFormat: 'V2'
+        outputVersionFormat: 'V2',
+        writerIdentity: 'serviceAccount:cloud-logs@system.gserviceaccount.com'
       };
 
       program.getSinkMetadata(sinkName, function (err, metadata) {
@@ -90,7 +91,8 @@ describe('logging:sinks', function () {
         name: sinkName,
         destination: 'storage.googleapis.com/' + bucketName,
         filter: newFilter,
-        outputVersionFormat: 'V2'
+        outputVersionFormat: 'V2',
+        writerIdentity: 'serviceAccount:cloud-logs@system.gserviceaccount.com'
       };
 
       program.updateSink(sinkName, newFilter, function (err, apiResponse) {

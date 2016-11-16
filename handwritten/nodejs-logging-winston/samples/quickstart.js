@@ -34,10 +34,10 @@ const log = loggingClient.log(logName);
 
 // The data to write to the log
 const text = 'Hello, world!';
-// The resource associated with the data
-const resource = { type: 'global' };
+// The metadata associated with the entry
+const metadata = { resource: { type: 'global' } };
 // Prepares a log entry
-const entry = log.entry(resource, text);
+const entry = log.entry(metadata, text);
 
 // Writes the log entry
 log.write(entry, (err) => {

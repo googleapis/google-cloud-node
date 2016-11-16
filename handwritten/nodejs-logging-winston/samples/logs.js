@@ -33,10 +33,10 @@ function writeLogEntry (logName, callback) {
   };
 
   // A text log entry
-  var entry = log.entry(resource, 'Hello, world!');
+  var entry = log.entry({ resource: resource }, 'Hello, world!');
 
   // A structured log entry
-  var secondEntry = log.entry(resource, {
+  var secondEntry = log.entry({ resource: resource }, {
     name: 'King Arthur',
     quest: 'Find the Holy Grail',
     favorite_color: 'Blue'
@@ -62,7 +62,7 @@ function writeLogEntryAdvanced (logName, options, callback) {
   var log = logging.log(logName);
 
   // Prepare the entry
-  var entry = log.entry(options.resource, options.entry);
+  var entry = log.entry({ resource: options.resource }, options.entry);
 
   // See https://googlecloudplatform.github.io/google-cloud-node/#/docs/logging/latest/logging/log?method=write
   log.write(entry, function (err, apiResponse) {
