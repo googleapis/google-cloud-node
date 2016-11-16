@@ -50,10 +50,10 @@
     "pubsub"
   ],
   "dependencies": {
-    "@google-cloud/common": "^0.7.0",
+    "@google-cloud/common": "^0.8.0",
     "arrify": "^1.0.0",
     "extend": "^3.0.0",
-    "google-gax": "^0.8.1",
+    "google-gax": "^0.9.1",
     "google-proto-files": "^0.8.0",
     "is": "^3.0.1",
     "modelo": "^4.2.0",

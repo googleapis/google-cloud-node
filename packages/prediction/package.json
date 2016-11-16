@@ -50,7 +50,7 @@
     "prediction"
   ],
   "dependencies": {
-    "@google-cloud/common": "^0.7.0",
+    "@google-cloud/common": "^0.8.0",
     "JSONStream": "^1.0.7",
     "arrify": "^1.0.0",
     "extend": "^3.0.0",

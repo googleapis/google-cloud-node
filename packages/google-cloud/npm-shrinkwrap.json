@@ -47,14 +47,48 @@
       "resolved": "https://registry.npmjs.org/@google-cloud/dns/-/dns-0.3.0.tgz"
     },
     "@google-cloud/language": {
-      "version": "0.5.0",
-      "from": "@google-cloud/language@>=0.5.0 <0.6.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/language/-/language-0.5.0.tgz"
+      "version": "0.6.0",
+      "from": "@google-cloud/language@>=0.6.0 <0.7.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/language/-/language-0.6.0.tgz",
+      "dependencies": {
+        "@google-cloud/common": {
+          "version": "0.8.0",
+          "from": "@google-cloud/common@>=0.8.0 <0.9.0",
+          "resolved": "https://registry.npmjs.org/@google-cloud/common/-/common-0.8.0.tgz"
+        },
+        "google-gax": {
+          "version": "0.9.1",
+          "from": "google-gax@>=0.9.1 <0.10.0",
+          "resolved": "https://registry.npmjs.org/google-gax/-/google-gax-0.9.1.tgz",
+          "dependencies": {
+            "google-auto-auth": {
+              "version": "0.2.4",
+              "from": "google-auto-auth@>=0.2.4 <0.3.0",
+              "resolved": "https://registry.npmjs.org/google-auto-auth/-/google-auto-auth-0.2.4.tgz"
+            }
+          }
+        },
+        "google-proto-files": {
+          "version": "0.8.5",
+          "from": "google-proto-files@>=0.8.5 <0.9.0",
+          "resolved": "https://registry.npmjs.org/google-proto-files/-/google-proto-files-0.8.5.tgz"
+        },
+        "lodash": {
+          "version": "4.11.2",
+          "from": "lodash@>=4.11.1 <4.12.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.11.2.tgz"
+        }
+      }
     },
     "@google-cloud/logging": {
       "version": "0.5.0",
       "from": "@google-cloud/logging@>=0.5.0 <0.6.0",
       "resolved": "https://registry.npmjs.org/@google-cloud/logging/-/logging-0.5.0.tgz"
+    },
+    "@google-cloud/monitoring": {
+      "version": "0.1.1",
+      "from": "@google-cloud/monitoring@>=0.1.1 <0.2.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/monitoring/-/monitoring-0.1.1.tgz"
     },
     "@google-cloud/prediction": {
       "version": "0.3.0",
@@ -89,9 +123,16 @@
       }
     },
     "@google-cloud/translate": {
-      "version": "0.4.0",
-      "from": "@google-cloud/translate@>=0.4.0 <0.5.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/translate/-/translate-0.4.0.tgz"
+      "version": "0.5.0",
+      "from": "@google-cloud/translate@>=0.5.0 <0.6.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/translate/-/translate-0.5.0.tgz",
+      "dependencies": {
+        "@google-cloud/common": {
+          "version": "0.8.0",
+          "from": "@google-cloud/common@^0.8.0",
+          "resolved": "https://registry.npmjs.org/@google-cloud/common/-/common-0.8.0.tgz"
+        }
+      }
     },
     "@google-cloud/vision": {
       "version": "0.5.0",
