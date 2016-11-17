@@ -499,6 +499,16 @@ describe('PubSub', function() {
       pubsub.subscribe(TOPIC_NAME, done);
     });
 
+    it('should not require a sub name and accept options', function(done) {
+      var opts = {};
+
+      pubsub.request = function(protoOpts, reqOpts, callback) {
+        callback(null, apiResponse);
+      };
+
+      pubsub.subscribe(TOPIC_NAME, opts, done);
+    });
+
     it('should not require configuration options', function(done) {
       pubsub.request = function(protoOpts, reqOpts, callback) {
         callback(null, apiResponse);
@@ -722,6 +732,18 @@ describe('PubSub', function() {
       };
 
       pubsub.subscription();
+    });
+
+    it('should not require a name and accept options', function(done) {
+      SubscriptionOverride = function(pubsub, options) {
+        var expectedOptions = extend({}, CONFIG);
+        expectedOptions.name = undefined;
+
+        assert.deepEqual(options, expectedOptions);
+        done();
+      };
+
+      pubsub.subscription(CONFIG);
     });
 
     it('should not require options', function(done) {

@@ -486,6 +486,7 @@ PubSub.prototype.subscribe = function(topic, subName, options, callback) {
   }
 
   if (is.object(subName)) {
+    callback = options;
     options = subName;
     subName = '';
   }
