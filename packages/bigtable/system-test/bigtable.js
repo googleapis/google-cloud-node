@@ -563,6 +563,19 @@ describe('Bigtable', function() {
         });
       });
 
+      it('should fetch a range of rows via prefix', function(done) {
+        var options = {
+          prefix: 'g'
+        };
+
+        TABLE.getRows(options, function(err, rows) {
+          assert.ifError(err);
+          assert.strictEqual(rows.length, 1);
+          assert.strictEqual(rows[0].id, 'gwashington');
+          done();
+        });
+      });
+
       it('should fetch individual cells of a row', function(done) {
         var row = TABLE.row('alincoln');
 

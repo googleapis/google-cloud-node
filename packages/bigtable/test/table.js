@@ -202,6 +202,68 @@ describe('Bigtable/Table', function() {
     });
   });
 
+  describe('createEndRange_', function() {
+    it('should create a range from the prefix', function() {
+      assert.deepEqual(Table.createPrefixRange_('start'), {
+        start: 'start',
+        end: {
+          value: 'staru',
+          inclusive: false
+        }
+      });
+
+      assert.deepEqual(Table.createPrefixRange_('X\xff'), {
+        start: 'X\xff',
+        end: {
+          value: 'Y',
+          inclusive: false
+        }
+      });
+
+      assert.deepEqual(Table.createPrefixRange_('xoo\xff'), {
+        start: 'xoo\xff',
+        end: {
+          value: 'xop',
+          inclusive: false
+        }
+      });
+
+      assert.deepEqual(Table.createPrefixRange_('a\xffb'), {
+        start: 'a\xffb',
+        end: {
+          value: 'a\xffc',
+          inclusive: false
+        }
+      });
+
+      assert.deepEqual(Table.createPrefixRange_('com.google.'), {
+        start: 'com.google.',
+        end: {
+          value: 'com.google/',
+          inclusive: false
+        }
+      });
+    });
+
+    it('should create an inclusive bound when the prefix is empty', function() {
+      assert.deepEqual(Table.createPrefixRange_('\xff'), {
+        start: '\xff',
+        end: {
+          value: '',
+          inclusive: true
+        }
+      });
+
+      assert.deepEqual(Table.createPrefixRange_(''), {
+        start: '',
+        end: {
+          value: '',
+          inclusive: true
+        }
+      });
+    });
+  });
+
   describe('createFamily', function() {
     var COLUMN_ID = 'my-column';
 
@@ -453,6 +515,39 @@ describe('Bigtable/Table', function() {
         };
 
         table.createReadStream(options);
+      });
+
+      it('should transform the prefix into a range', function(done) {
+        var fakeRange = {};
+        var fakePrefixRange = {
+          start: 'a',
+          end: 'b'
+        };
+
+        var fakePrefix = 'abc';
+
+        var prefixSpy = Table.createPrefixRange_ = sinon.spy(function() {
+          return fakePrefixRange;
+        });
+
+        var rangeSpy = FakeFilter.createRange = sinon.spy(function() {
+          return fakeRange;
+        });
+
+        table.requestStream = function(g, reqOpts) {
+          assert.strictEqual(prefixSpy.getCall(0).args[0], fakePrefix);
+          assert.deepEqual(reqOpts.rows.rowRanges, [fakeRange]);
+
+          assert.deepEqual(rangeSpy.getCall(0).args, [
+            fakePrefixRange.start,
+            fakePrefixRange.end,
+            'Key'
+          ]);
+
+          done();
+        };
+
+        table.createReadStream({ prefix: fakePrefix });
       });
     });
 
