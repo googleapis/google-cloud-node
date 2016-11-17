@@ -228,7 +228,7 @@ Table.formatName_ = function(instanceName, name) {
  * @private
  *
  * @param {string} start - The key prefix/starting bound.
- * @return {object} bound
+ * @return {object} range
  *
  * @example
  * Table.createPrefixRange_('start');
