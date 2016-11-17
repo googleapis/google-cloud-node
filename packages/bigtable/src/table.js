@@ -222,6 +222,45 @@ Table.formatName_ = function(instanceName, name) {
 };
 
 /**
+ * Creates a range based off of a key prefix.
+ *
+ * @private
+ *
+ * @param {string} start - The key prefix/starting bound.
+ * @return {object} range
+ *
+ * @example
+ * Table.createPrefixRange_('start');
+ * // => {
+ * //   start: 'start',
+ * //   end: {
+ * //     value: 'staru',
+ * //     inclusive: false
+ * //   }
+ * // }
+ */
+Table.createPrefixRange_ = function(start) {
+  var prefix = start.replace(new RegExp('[\xff]+$'), '');
+  var endKey = '';
+
+  if (prefix) {
+    var position = prefix.length - 1;
+    var charCode = prefix.charCodeAt(position);
+    var nextChar = String.fromCharCode(charCode + 1);
+
+    endKey = prefix.substring(0, position) + nextChar;
+  }
+
+  return {
+    start: start,
+    end: {
+      value: endKey,
+      inclusive: !endKey
+    }
+  };
+};
+
+/**
  * Create a column family.
  *
  * Optionally you can send garbage collection rules and when creating a family.
@@ -320,13 +359,14 @@ Table.prototype.createFamily = function(name, rule, callback) {
  * @param {options=} options - Configuration object.
  * @param {boolean} options.decode - If set to `false` it will not decode Buffer
  *     values returned from Bigtable. Default: true.
- * @param {string[]} options.keys - A list of row keys.
- * @param {string} options.start - Start value for key range.
  * @param {string} options.end - End value for key range.
- * @param {object[]} options.ranges - A list of key ranges.
- * @param {module:bigtable/filter} options.filter - Row filters allow you to
+* @param {module:bigtable/filter} options.filter - Row filters allow you to
  *     both make advanced queries and format how the data is returned.
+ * @param {string[]} options.keys - A list of row keys.
  * @param {number} options.limit - Maximum number of rows to be returned.
+ * @param {string} options.prefix - Prefix that the row key must match.
+ * @param {object[]} options.ranges - A list of key ranges.
+ * @param {string} options.start - Start value for key range.
  * @return {stream}
  *
  * @example
@@ -357,6 +397,13 @@ Table.prototype.createFamily = function(name, rule, callback) {
  *     'alincoln',
  *     'gwashington'
  *   ]
+ * });
+ *
+ * //-
+ * // Scan for row keys that contain a specific prefix.
+ * //-
+ * table.createReadStream({
+ *   prefix: 'gwash'
  * });
  *
  * //-
@@ -418,6 +465,10 @@ Table.prototype.createReadStream = function(options) {
       start: options.start,
       end: options.end
     });
+  }
+
+  if (options.prefix) {
+    options.ranges.push(Table.createPrefixRange_(options.prefix));
   }
 
   if (options.keys || options.ranges.length) {
