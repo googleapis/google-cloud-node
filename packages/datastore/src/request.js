@@ -68,6 +68,42 @@ var CONSISTENCY_PROTO_CODE = {
 function DatastoreRequest() {}
 
 /**
+ * Format a user's input to mutation methods. This will create a deep clone of
+ * the input, as well as allow users to pass an object in the format of an
+ * entity.
+ *
+ * Both of the following formats can be supplied supported:
+ *
+ *     datastore.save({
+ *       key: datastore.key('Kind'),
+ *       data: { foo: 'bar' }
+ *     }, function(err) {})
+ *
+ *     var entity = { foo: 'bar' }
+ *     entity[datastore.KEY] = datastore.key('Kind')
+ *     datastore.save(entity, function(err) {})
+ *
+ * @private
+ *
+ * @resource [#1803]{@link https://github.com/GoogleCloudPlatform/google-cloud-node/issues/1803}
+ *
+ * @param {object} obj - The user's input object.
+ */
+DatastoreRequest.prepareEntityObject_ = function(obj) {
+  var entityObject = extend(true, {}, obj);
+
+  // Entity objects are also supported.
+  if (obj[entity.KEY_SYMBOL]) {
+    return {
+      key: obj[entity.KEY_SYMBOL],
+      data: entityObject
+    };
+  }
+
+  return entityObject;
+};
+
+/**
  * Generate IDs without creating entities.
  *
  * @param {Key} incompleteKey - The key object to complete.
@@ -426,7 +462,10 @@ DatastoreRequest.prototype.get = function(keys, options, callback) {
  * Maps to {module:datastore#save}, forcing the method to be `insert`.
  */
 DatastoreRequest.prototype.insert = function(entities, callback) {
-  entities = arrify(entities).map(propAssign('method', 'insert'));
+  entities = arrify(entities)
+    .map(DatastoreRequest.prepareEntityObject_)
+    .map(propAssign('method', 'insert'));
+
   this.save(entities, callback);
 };
 
@@ -863,53 +902,53 @@ DatastoreRequest.prototype.save = function(entities, callback) {
 
   // Iterate over the entity objects, build a proto from all keys and values,
   // then place in the correct mutation array (insert, update, etc).
-  entities.forEach(function(entityObject, index) {
-    entityObject = extend(true, {}, entityObject);
+  entities
+    .map(DatastoreRequest.prepareEntityObject_)
+    .forEach(function(entityObject, index) {
+      var mutation = {};
+      var entityProto = {};
+      var method = 'upsert';
 
-    var mutation = {};
-    var entityProto = {};
-    var method = 'upsert';
-
-    if (entityObject.method) {
-      if (methods[entityObject.method]) {
-        method = entityObject.method;
-      } else {
-        throw new Error('Method ' + entityObject.method + ' not recognized.');
-      }
-    }
-
-    if (!entity.isKeyComplete(entityObject.key)) {
-      insertIndexes[index] = true;
-    }
-
-    if (is.array(entityObject.data)) {
-      entityProto.properties = entityObject.data.reduce(function(acc, data) {
-        var value = entity.encodeValue(data.value);
-
-        if (is.boolean(data.excludeFromIndexes)) {
-          var excluded = data.excludeFromIndexes;
-          var values = value.arrayValue && value.arrayValue.values;
-
-          if (values) {
-            values = values.map(propAssign('excludeFromIndexes', excluded));
-          } else {
-            value.excludeFromIndexes = data.excludeFromIndexes;
-          }
+      if (entityObject.method) {
+        if (methods[entityObject.method]) {
+          method = entityObject.method;
+        } else {
+          throw new Error('Method ' + entityObject.method + ' not recognized.');
         }
+      }
 
-        acc[data.name] = value;
+      if (!entity.isKeyComplete(entityObject.key)) {
+        insertIndexes[index] = true;
+      }
 
-        return acc;
-      }, {});
-    } else {
-      entityProto = entity.entityToEntityProto(entityObject.data);
-    }
+      if (is.array(entityObject.data)) {
+        entityProto.properties = entityObject.data.reduce(function(acc, data) {
+          var value = entity.encodeValue(data.value);
 
-    entityProto.key = entity.keyToKeyProto(entityObject.key);
+          if (is.boolean(data.excludeFromIndexes)) {
+            var excluded = data.excludeFromIndexes;
+            var values = value.arrayValue && value.arrayValue.values;
 
-    mutation[method] = entityProto;
-    mutations.push(mutation);
-  });
+            if (values) {
+              values = values.map(propAssign('excludeFromIndexes', excluded));
+            } else {
+              value.excludeFromIndexes = data.excludeFromIndexes;
+            }
+          }
+
+          acc[data.name] = value;
+
+          return acc;
+        }, {});
+      } else {
+        entityProto = entity.entityToEntityProto(entityObject.data);
+      }
+
+      entityProto.key = entity.keyToKeyProto(entityObject.key);
+
+      mutation[method] = entityProto;
+      mutations.push(mutation);
+    });
 
   var protoOpts = {
     service: 'Datastore',
@@ -953,7 +992,10 @@ DatastoreRequest.prototype.save = function(entities, callback) {
  * Maps to {module:datastore#save}, forcing the method to be `update`.
  */
 DatastoreRequest.prototype.update = function(entities, callback) {
-  entities = arrify(entities).map(propAssign('method', 'update'));
+  entities = arrify(entities)
+    .map(DatastoreRequest.prepareEntityObject_)
+    .map(propAssign('method', 'update'));
+
   this.save(entities, callback);
 };
 
@@ -961,7 +1003,10 @@ DatastoreRequest.prototype.update = function(entities, callback) {
  * Maps to {module:datastore#save}, forcing the method to be `upsert`.
  */
 DatastoreRequest.prototype.upsert = function(entities, callback) {
-  entities = arrify(entities).map(propAssign('method', 'upsert'));
+  entities = arrify(entities)
+    .map(DatastoreRequest.prepareEntityObject_)
+    .map(propAssign('method', 'upsert'));
+
   this.save(entities, callback);
 };
 
