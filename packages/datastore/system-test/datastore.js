@@ -26,7 +26,6 @@ var env = require('../../../system-test/env.js');
 describe('Datastore', function() {
   var testKinds = [];
   var datastore = new Datastore(env);
-
   // Override the Key method so we can track what keys are created during the
   // tests. They are then deleted in the `after` hook.
   var key = datastore.key;
@@ -152,6 +151,32 @@ describe('Datastore', function() {
           assert.deepEqual(entity, post);
 
           datastore.delete(postKey, done);
+        });
+      });
+    });
+
+    it('should save/get/update', function(done) {
+      var postKey = datastore.key('Post');
+
+      datastore.save({ key: postKey, data: post }, function(err) {
+        assert.ifError(err);
+
+        datastore.get(postKey, function(err, entity) {
+          assert.ifError(err);
+
+          assert.strictEqual(entity.title, post.title);
+
+          entity.title = 'Updated';
+
+          datastore.save(entity, function(err) {
+            assert.ifError(err);
+
+            datastore.get(postKey, function(err, entity) {
+              assert.ifError(err);
+              assert.strictEqual(entity.title, 'Updated');
+              datastore.delete(postKey, done);
+            });
+          });
         });
       });
     });
