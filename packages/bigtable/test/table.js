@@ -202,7 +202,7 @@ describe('Bigtable/Table', function() {
     });
   });
 
-  describe('createEndRange_', function() {
+  describe('createPrefixRange_', function() {
     it('should create a range from the prefix', function() {
       assert.deepEqual(Table.createPrefixRange_('start'), {
         start: 'start',
