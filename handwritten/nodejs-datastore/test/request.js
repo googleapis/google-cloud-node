@@ -88,6 +88,8 @@ describe('Request', function() {
       './entity.js': entity,
       './query.js': FakeQuery
     });
+
+    override('Request', Request);
   });
 
   after(function() {
@@ -107,6 +109,42 @@ describe('Request', function() {
   describe('instantiation', function() {
     it('should promisify all the things', function() {
       assert(promisified);
+    });
+  });
+
+  describe('prepareEntityObject_', function() {
+    it('should clone an object', function() {
+      var obj = {
+        data: {
+          nested: {
+            obj: true
+          }
+        },
+        method: 'insert'
+      };
+      var expectedPreparedEntityObject = extend(true, {}, obj);
+
+      var preparedEntityObject = Request.prepareEntityObject_(obj);
+
+      assert.notStrictEqual(preparedEntityObject, obj);
+
+      assert.notStrictEqual(
+        preparedEntityObject.data.nested,
+        obj.data.nested
+      );
+
+      assert.deepEqual(preparedEntityObject, expectedPreparedEntityObject);
+    });
+
+    it('should format an entity', function() {
+      var key = {};
+      var entityObject = { data: true };
+      entityObject[entity.KEY_SYMBOL] = key;
+
+      var preparedEntityObject = Request.prepareEntityObject_(entityObject);
+
+      assert.strictEqual(preparedEntityObject.key, key);
+      assert.deepEqual(preparedEntityObject.data, entityObject);
     });
   });
 
@@ -597,6 +635,26 @@ describe('Request', function() {
   });
 
   describe('insert', function() {
+    it('should prepare entity objects', function(done) {
+      var entityObject = {};
+      var preparedEntityObject = { prepared: true };
+      var expectedEntityObject = extend({}, preparedEntityObject, {
+        method: 'insert'
+      });
+
+      overrides.Request.prepareEntityObject_ = function(obj) {
+        assert.strictEqual(obj, entityObject);
+        return preparedEntityObject;
+      };
+
+      request.save = function(entities) {
+        assert.deepEqual(entities[0], expectedEntityObject);
+        done();
+      };
+
+      request.insert(entityObject, assert.ifError);
+    });
+
     it('should pass the correct arguments to save', function(done) {
       request.save = function(entities, callback) {
         assert.deepEqual(entities, [{
@@ -1134,6 +1192,17 @@ describe('Request', function() {
       ], done);
     });
 
+    it('should prepare entity objects', function(done) {
+      var entityObject = {};
+
+      overrides.Request.prepareEntityObject_ = function(obj) {
+        assert.strictEqual(obj, entityObject);
+        done();
+      };
+
+      request.save(entityObject, assert.ifError);
+    });
+
     it('should save with specific method', function(done) {
       request.request_ = function(protoOpts, reqOpts, callback) {
         assert.equal(reqOpts.mutations.length, 3);
@@ -1324,6 +1393,26 @@ describe('Request', function() {
   });
 
   describe('update', function() {
+    it('should prepare entity objects', function(done) {
+      var entityObject = {};
+      var preparedEntityObject = { prepared: true };
+      var expectedEntityObject = extend({}, preparedEntityObject, {
+        method: 'update'
+      });
+
+      overrides.Request.prepareEntityObject_ = function(obj) {
+        assert.strictEqual(obj, entityObject);
+        return preparedEntityObject;
+      };
+
+      request.save = function(entities) {
+        assert.deepEqual(entities[0], expectedEntityObject);
+        done();
+      };
+
+      request.update(entityObject, assert.ifError);
+    });
+
     it('should pass the correct arguments to save', function(done) {
       request.save = function(entities, callback) {
         assert.deepEqual(entities, [{
@@ -1345,6 +1434,26 @@ describe('Request', function() {
   });
 
   describe('upsert', function() {
+    it('should prepare entity objects', function(done) {
+      var entityObject = {};
+      var preparedEntityObject = { prepared: true };
+      var expectedEntityObject = extend({}, preparedEntityObject, {
+        method: 'upsert'
+      });
+
+      overrides.Request.prepareEntityObject_ = function(obj) {
+        assert.strictEqual(obj, entityObject);
+        return preparedEntityObject;
+      };
+
+      request.save = function(entities) {
+        assert.deepEqual(entities[0], expectedEntityObject);
+        done();
+      };
+
+      request.upsert(entityObject, assert.ifError);
+    });
+
     it('should pass the correct arguments to save', function(done) {
       request.save = function(entities, callback) {
         assert.deepEqual(entities, [{

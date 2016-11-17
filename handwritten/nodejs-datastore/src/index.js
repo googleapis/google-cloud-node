@@ -281,10 +281,7 @@ var Transaction = require('./transaction.js');
  *
  *     entity.symbol = 'GOOG';
  *
- *     transaction.save({
- *       key: key,
- *       data: entity
- *     });
+ *     transaction.save(entity);
  *
  *     transaction.commit(function(err) {
  *       if (!err) {
