@@ -18,7 +18,10 @@ var logging = require('@google-cloud/logging')({
 
 // Create a sink using a Bucket as a destination.
 // $ npm install --save @google-cloud/storage
-var gcs = require('@google-cloud/storage');
+var gcs = require('@google-cloud/storage')({
+  projectId: 'grape-spaceship-123',
+  keyFilename: '/path/to/keyfile.json'
+});
 
 logging.createSink('my-new-sink', {
   destination: gcs.bucket('my-sink')
