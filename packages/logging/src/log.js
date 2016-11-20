@@ -52,6 +52,8 @@ var Entry = require('./entry.js');
 function Log(logging, name) {
   this.formattedName_ = Log.formatName_(logging.projectId, name);
   this.name = this.formattedName_.split('/').pop();
+  this.metadata_ = logging.metadata;
+  this.projectId_ = logging.projectId;
 
   var methods = {
     /**
@@ -136,6 +138,43 @@ Log.formatName_ = function(projectId, name) {
   return path + name;
 };
 
+Log.prototype.assignDefaultMetadata_ = function(dftResource, entry) {
+  if (!is.object(entry.resource)) {
+    // Merge the entry's metadata with the auto generated resource; give
+    // precedence to any entry originated metadata information
+    if (!is.empty(this.projectId_)) {
+      // The user supplied a project id - merge it in over the auto-generated
+      // one
+      entry.resource = extend(true, dftResource,
+        {labels: {project_id: this.projectId_}});
+    } else {
+      // The user failed to supply a project id, same merge order precedence but
+      // with no secondary project id merge step
+      entry.resource = dftResource;
+    }
+  }
+  return entry;
+};
+
+Log.prototype.getDefaultMetadata_ = function(entry, callback) {
+  var self = this;
+  this.metadata_.getDefaultResource(function(err, resource) {
+    if (err) {
+      callback(err);
+      return;
+    } else if (is.array(entry)) {
+      entry.map(function(v) {
+        if (is.object(v)) {
+          self.assignDefaultMetadata_(resource, v);
+        }
+      });
+    } else if (entry) {
+      self.assignDefaultMetadata_(resource, entry);
+    }
+    callback(null);
+  });
+};
+
 /**
  * Write a log entry with a severity of "ALERT".
  *
@@ -181,8 +220,8 @@ Log.prototype.alert = function(entry, options, callback) {
  * });
  */
 Log.prototype.critical = function(entry, options, callback) {
-  var entries = Log.assignSeverityToEntries_(entry, 'CRITICAL');
-  this.write(entries, options, callback);
+  this.write(Log.assignSeverityToEntries_(entry, 'CRITICAL'), options,
+    callback);
 };
 
 /**
@@ -230,8 +269,8 @@ Log.prototype.debug = function(entry, options, callback) {
  * });
  */
 Log.prototype.emergency = function(entry, options, callback) {
-  var entries = Log.assignSeverityToEntries_(entry, 'EMERGENCY');
-  this.write(entries, options, callback);
+  this.write(Log.assignSeverityToEntries_(entry, 'EMERGENCY'), options,
+    callback);
 };
 
 /**
@@ -563,23 +602,28 @@ Log.prototype.warning = function(entry, options, callback) {
  * });
  */
 Log.prototype.write = function(entry, options, callback) {
+  var self = this;
   if (is.fn(options)) {
     callback = options;
     options = {};
   }
-
   var protoOpts = {
     service: 'LoggingServiceV2',
     method: 'writeLogEntries'
   };
-
   var reqOpts = extend({
     logName: this.formattedName_,
     entries: arrify(entry).map(this.formatEntryForApi_.bind(this))
   }, options);
 
-  this.request(protoOpts, reqOpts, function(err, resp) {
-    callback(err, resp);
+  this.getDefaultMetadata_(reqOpts.entries, function(err) {
+    if (err) {
+      callback(err, null);
+      return;
+    }
+    self.request(protoOpts, reqOpts, function(err, resp) {
+      callback(err, resp);
+    });
   });
 };
 

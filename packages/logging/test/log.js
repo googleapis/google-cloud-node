@@ -59,7 +59,14 @@ describe('Log', function() {
   var LOGGING = {
     projectId: PROJECT_ID,
     entry: util.noop,
-    request: util.noop
+    request: util.noop,
+    metadata: {
+      getDefaultResource: function(callback) {
+        setImmediate(function() {
+          callback(null, {type: 'global'});
+        });
+      }
+    }
   };
 
   var assignSeverityToEntriesOverride = null;
@@ -350,6 +357,58 @@ describe('Log', function() {
       };
 
       log.write(ENTRY, done);
+    });
+  });
+
+  describe('metadata defaults', function() {
+    it('Should not augment user resource data', function(done) {
+      var ENTRY = {metadata: {resource: {type: 'test'}}};
+      log.write = function(entries) {
+        assert.deepEqual(entries[0].metadata, extend({severity: 'ALERT'},
+          ENTRY.metadata));
+        done();
+      };
+      log.alert(ENTRY, {}, assert.ifError);
+    });
+
+    it('Should augment user resource data if nothing is given', function(done) {
+      var ENTRY = new Entry();
+      var AUTO_RESOURCE = {
+        resource: {
+          type: 'global',
+          labels: {
+            project_id: 'project-id'
+          }
+        }
+      };
+      var GENERATED_RESOURCE;
+      log.request = function(proto, reqOpts, cb) {
+        GENERATED_RESOURCE = reqOpts.entries[0].resource;
+        cb();
+      };
+      log.write(ENTRY, {}, function() {
+        assert.deepEqual(AUTO_RESOURCE.resource, GENERATED_RESOURCE);
+        done();
+      });
+    });
+
+    it('Should not overwrite user resource data if given', function(done) {
+      var GENERATED_RESOURCE;
+      var USER_RESOURCE = {
+        type: 'x',
+        labels: {
+          project_id: 'y'
+        }
+      };
+      var ENTRY = new Entry({resource: USER_RESOURCE}, {textPayload: 'z'});
+      log.request = function(proto, reqOpts, cb) {
+        GENERATED_RESOURCE = reqOpts.entries[0].resource;
+        cb();
+      };
+      log.write(ENTRY, {}, function() {
+        assert.deepEqual(USER_RESOURCE, GENERATED_RESOURCE);
+        done();
+      });
     });
   });
 
