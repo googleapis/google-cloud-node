@@ -42,7 +42,7 @@ describe(`logging:quickstart`, () => {
 
         const log = logging.log(logName);
         const text = `Hello, world!`;
-        const entry = log.entry({ type: `global` }, text);
+        const entry = log.entry({ resource: { type: `global` } }, text);
         log.write(entry, (err, apiResponse) => {
           _callback(err, apiResponse);
           assert.ifError(err);
