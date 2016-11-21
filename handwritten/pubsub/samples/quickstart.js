@@ -31,12 +31,9 @@ const pubsubClient = PubSub({
 const topicName = 'my-new-topic';
 
 // Creates the new topic
-pubsubClient.createTopic(topicName, (err, topic) => {
-  if (err) {
-    console.error(err);
-    return;
-  }
-
-  console.log(`Topic ${topic.name} created.`);
-});
+pubsubClient.createTopic(topicName)
+  .then((results) => {
+    const topic = results[0];
+    console.log(`Topic ${topic.name} created.`);
+  });
 // [END pubsub_quickstart]

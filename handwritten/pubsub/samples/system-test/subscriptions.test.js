@@ -15,7 +15,6 @@
 
 'use strict';
 
-const async = require(`async`);
 const pubsub = require(`@google-cloud/pubsub`)();
 const uuid = require(`node-uuid`);
 const path = require(`path`);
@@ -32,44 +31,33 @@ const fullSubscriptionNameTwo = `projects/${projectId}/subscriptions/${subscript
 const cmd = `node subscriptions.js`;
 
 describe(`pubsub:subscriptions`, () => {
-  before((done) => {
-    pubsub.createTopic(topicName, (err) => {
-      assert.ifError(err);
-      done();
-    });
+  before(() => pubsub.createTopic(topicName));
+
+  after(() => {
+    return pubsub.subscription(subscriptionNameOne).delete()
+      .then(() => pubsub.subscription(subscriptionNameTwo).delete(), () => {})
+      .then(() => pubsub.topic(topicName).delete(), () => {})
+      .catch(() => {});
   });
 
-  after((done) => {
-    pubsub.subscription(subscriptionNameOne).delete(() => {
-      // Ignore any error
-      pubsub.subscription(subscriptionNameTwo).delete(() => {
-        // Ignore any error
-        pubsub.topic(topicName).delete(() => {
-          // Ignore any error
-          done();
-        });
-      });
-    });
-  });
-
-  it(`should create a subscription`, (done) => {
+  it(`should create a subscription`, () => {
     const output = run(`${cmd} create ${topicName} ${subscriptionNameOne}`, cwd);
     assert.equal(output, `Subscription ${fullSubscriptionNameOne} created.`);
-    pubsub.subscription(subscriptionNameOne).exists((err, exists) => {
-      assert.ifError(err);
-      assert.equal(exists, true);
-      done();
-    });
+    return pubsub.subscription(subscriptionNameOne).exists()
+      .then((results) => {
+        const exists = results[0];
+        assert.equal(exists, true);
+      });
   });
 
-  it(`should create a push subscription`, (done) => {
+  it(`should create a push subscription`, () => {
     const output = run(`${cmd} create-push ${topicName} ${subscriptionNameTwo}`, cwd);
     assert.equal(output, `Subscription ${fullSubscriptionNameTwo} created.`);
-    pubsub.subscription(subscriptionNameTwo).exists((err, exists) => {
-      assert.ifError(err);
-      assert.equal(exists, true);
-      done();
-    });
+    return pubsub.subscription(subscriptionNameTwo).exists()
+      .then((results) => {
+        const exists = results[0];
+        assert.equal(exists, true);
+      });
   });
 
   it(`should get metadata for a subscription`, () => {
@@ -85,117 +73,111 @@ describe(`pubsub:subscriptions`, () => {
     // Listing is eventually consistent. Give the indexes time to update.
     setTimeout(() => {
       const output = run(`${cmd} list`, cwd);
-      assert.notEqual(output.indexOf(`Subscriptions:`), -1);
-      assert.notEqual(output.indexOf(fullSubscriptionNameOne), -1);
-      assert.notEqual(output.indexOf(fullSubscriptionNameTwo), -1);
+      assert.equal(output.includes(`Subscriptions:`), true);
+      assert.equal(output.includes(fullSubscriptionNameOne), true);
+      assert.equal(output.includes(fullSubscriptionNameTwo), true);
       done();
     }, 5000);
   });
 
-  it(`should list subscriptions for a topic`, (done) => {
-    // Listing is eventually consistent. Give the indexes time to update.
+  it(`should list subscriptions for a topic`, () => {
     const output = run(`${cmd} list ${topicName}`, cwd);
-    assert.notEqual(output.indexOf(`Subscriptions for ${topicName}:`), -1);
-    assert.notEqual(output.indexOf(fullSubscriptionNameOne), -1);
-    assert.notEqual(output.indexOf(fullSubscriptionNameTwo), -1);
-    done();
+    assert.equal(output.includes(`Subscriptions for ${topicName}:`), true);
+    assert.equal(output.includes(fullSubscriptionNameOne), true);
+    assert.equal(output.includes(fullSubscriptionNameTwo), true);
   });
 
-  it(`should pull messages`, (done) => {
+  it(`should pull messages`, () => {
     const expected = `Hello, world!`;
-    pubsub.topic(topicName).publish({ data: expected }, (err, messageIds) => {
-      assert.ifError(err);
-      setTimeout(() => {
+    return pubsub.topic(topicName).publish(expected)
+      .then((results) => {
+        const messageIds = results[0];
         const output = run(`${cmd} pull ${subscriptionNameOne}`, cwd);
         const expectedOutput = `Received ${messageIds.length} messages.\n` +
           `* ${messageIds[0]} "${expected}" {}`;
         assert.equal(output, expectedOutput);
-        done();
-      }, 2000);
-    });
+      });
   });
 
-  it(`should pull ordered messages`, (done) => {
+  it(`should pull ordered messages`, () => {
     const subscriptions = require('../subscriptions');
     const expected = `Hello, world!`;
     const publishedMessageIds = [];
 
-    async.waterfall([
-      (cb) => {
-        pubsub.topic(topicName).publish({ data: expected, attributes: { counterId: '3' } }, cb);
-      },
-      (messageIds, apiResponse, cb) => {
+    return pubsub.topic(topicName).publish({ data: expected, attributes: { counterId: '3' } }, { raw: true })
+      .then((results) => {
+        const messageIds = results[0];
         publishedMessageIds.push(messageIds[0]);
-        setTimeout(() => subscriptions.pullOrderedMessages(subscriptionNameOne, cb), 2000);
-      },
-      (cb) => {
+        return subscriptions.pullOrderedMessages(subscriptionNameOne);
+      })
+      .then(() => {
         assert.equal(console.log.callCount, 0);
-        pubsub.topic(topicName).publish({ data: expected, attributes: { counterId: '1' } }, cb);
-      },
-      (messageIds, apiResponse, cb) => {
+        return pubsub.topic(topicName).publish({ data: expected, attributes: { counterId: '1' } }, { raw: true });
+      })
+      .then((results) => {
+        const messageIds = results[0];
         publishedMessageIds.push(messageIds[0]);
-        setTimeout(() => subscriptions.pullOrderedMessages(subscriptionNameOne, cb), 2000);
-      },
-      (cb) => {
+        return subscriptions.pullOrderedMessages(subscriptionNameOne);
+      })
+      .then(() => {
         assert.equal(console.log.callCount, 1);
         assert.deepEqual(console.log.firstCall.args, [`* %d %j %j`, publishedMessageIds[1], expected, { counterId: '1' }]);
-        pubsub.topic(topicName).publish({ data: expected, attributes: { counterId: '1' } }, cb);
-      },
-      (messageIds, apiResponse, cb) => {
-        pubsub.topic(topicName).publish({ data: expected, attributes: { counterId: '2' } }, cb);
-      },
-      (messageIds, apiResponse, cb) => {
+        return pubsub.topic(topicName).publish({ data: expected, attributes: { counterId: '1' } }, { raw: true });
+      })
+      .then((results) => {
+        return pubsub.topic(topicName).publish({ data: expected, attributes: { counterId: '2' } }, { raw: true });
+      })
+      .then((results) => {
+        const messageIds = results[0];
         publishedMessageIds.push(messageIds[0]);
-        setTimeout(() => subscriptions.pullOrderedMessages(subscriptionNameOne, cb), 2000);
-      },
-      (cb) => {
+        return subscriptions.pullOrderedMessages(subscriptionNameOne);
+      })
+      .then(() => {
         assert.equal(console.log.callCount, 3);
         assert.deepEqual(console.log.secondCall.args, [`* %d %j %j`, publishedMessageIds[2], expected, { counterId: '2' }]);
         assert.deepEqual(console.log.thirdCall.args, [`* %d %j %j`, publishedMessageIds[0], expected, { counterId: '3' }]);
-        cb();
-      }
-    ], done);
+      });
   });
 
-  it(`should set the IAM policy for a subscription`, (done) => {
+  it(`should set the IAM policy for a subscription`, () => {
     run(`${cmd} set-policy ${subscriptionNameOne}`, cwd);
-    pubsub.subscription(subscriptionNameOne).iam.getPolicy((err, policy) => {
-      assert.ifError(err);
-      assert.deepEqual(policy.bindings, [
-        {
-          role: `roles/pubsub.editor`,
-          members: [`group:cloud-logs@google.com`]
-        },
-        {
-          role: `roles/pubsub.viewer`,
-          members: [`allUsers`]
-        }
-      ]);
-      done();
-    });
+    return pubsub.subscription(subscriptionNameOne).iam.getPolicy()
+      .then((results) => {
+        const policy = results[0];
+        assert.deepEqual(policy.bindings, [
+          {
+            role: `roles/pubsub.editor`,
+            members: [`group:cloud-logs@google.com`]
+          },
+          {
+            role: `roles/pubsub.viewer`,
+            members: [`allUsers`]
+          }
+        ]);
+      });
   });
 
-  it(`should get the IAM policy for a subscription`, (done) => {
-    pubsub.subscription(subscriptionNameOne).iam.getPolicy((err, policy) => {
-      assert.ifError(err);
-      const output = run(`${cmd} get-policy ${subscriptionNameOne}`, cwd);
-      assert.equal(output, `Policy for subscription: ${JSON.stringify(policy.bindings)}.`);
-      done();
-    });
+  it(`should get the IAM policy for a subscription`, () => {
+    pubsub.subscription(subscriptionNameOne).iam.getPolicy()
+      .then((results) => {
+        const policy = results[0];
+        const output = run(`${cmd} get-policy ${subscriptionNameOne}`, cwd);
+        assert.equal(output, `Policy for subscription: ${JSON.stringify(policy.bindings)}.`);
+      });
   });
 
   it(`should test permissions for a subscription`, () => {
     const output = run(`${cmd} test-permissions ${subscriptionNameOne}`, cwd);
-    assert.notEqual(output.indexOf(`Tested permissions for subscription`), -1);
+    assert.equal(output.includes(`Tested permissions for subscription`), true);
   });
 
-  it(`should delete a subscription`, (done) => {
+  it(`should delete a subscription`, () => {
     const output = run(`${cmd} delete ${subscriptionNameOne}`, cwd);
     assert.equal(output, `Subscription ${fullSubscriptionNameOne} deleted.`);
-    pubsub.subscription(subscriptionNameOne).exists((err, exists) => {
-      assert.ifError(err);
-      assert.equal(exists, false);
-      done();
-    });
+    return pubsub.subscription(subscriptionNameOne).exists()
+      .then((results) => {
+        const exists = results[0];
+        assert.equal(exists, false);
+      });
   });
 });

@@ -24,39 +24,32 @@ const projectId = process.env.GCLOUD_PROJECT;
 const fullTopicName = `projects/${projectId}/topics/${topicName}`;
 
 describe(`pubsub:quickstart`, () => {
-  let pubsubMock, PubSubMock;
-
-  after((done) => {
-    pubsub.topic(topicName).delete(() => {
-      // Ignore any error, the topic might not have been created
-      done();
-    });
-  });
+  after(() => pubsub.topic(topicName).delete().catch(() => {}));
 
   it(`should create a topic`, (done) => {
     const expectedTopicName = `my-new-topic`;
-
-    pubsubMock = {
-      createTopic: (_topicName, _callback) => {
+    const pubsubMock = {
+      createTopic: (_topicName) => {
         assert.equal(_topicName, expectedTopicName);
-        assert.equal(typeof _callback, 'function');
 
-        pubsub.createTopic(topicName, (err, topic, apiResponse) => {
-          _callback(err, topic, apiResponse);
-          assert.ifError(err);
-          assert.notEqual(topic, undefined);
-          assert.equal(topic.name, fullTopicName);
-          assert.notEqual(apiResponse, undefined);
-          assert.equal(console.log.calledOnce, true);
-          assert.deepEqual(console.log.firstCall.args, [`Topic ${topic.name} created.`]);
-          done();
-        });
+        return pubsub.createTopic(topicName)
+          .then((results) => {
+            const topic = results[0];
+            assert.equal(topic.name, fullTopicName);
+
+            setTimeout(() => {
+              assert.equal(console.log.callCount, 1);
+              assert.deepEqual(console.log.getCall(0).args, [`Topic ${topic.name} created.`]);
+              done();
+            }, 200);
+
+            return results;
+          });
       }
     };
-    PubSubMock = sinon.stub().returns(pubsubMock);
 
     proxyquire(`../quickstart`, {
-      '@google-cloud/pubsub': PubSubMock
+      '@google-cloud/pubsub': sinon.stub().returns(pubsubMock)
     });
   });
 });
