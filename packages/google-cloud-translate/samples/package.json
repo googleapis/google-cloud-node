@@ -5,15 +5,11 @@
   "license": "Apache Version 2.0",
   "author": "Google Inc.",
   "scripts": {
-    "test": "mocha -R spec --require intelli-espower-loader ../test/_setup.js test/*.test.js",
-    "system-test": "mocha -R spec --require intelli-espower-loader ../system-test/_setup.js system-test/*.test.js"
+    "test": "cd ..; npm run st -- translate/system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/translate": "^0.4.0",
+    "@google-cloud/translate": "^0.5.0",
     "yargs": "^6.4.0"
-  },
-  "devDependencies": {
-    "mocha": "^3.1.2"
   },
   "engines": {
     "node": ">=4.3.2"

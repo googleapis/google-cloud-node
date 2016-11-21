@@ -19,12 +19,12 @@
 // Imports the Google Cloud client library
 const Translate = require('@google-cloud/translate');
 
-// Your Translate API key
-const apiKey = 'YOUR_API_KEY';
+// Your Google Cloud Platform project ID
+const projectId = 'YOUR_PROJECT_ID';
 
 // Instantiates a client
 const translateClient = Translate({
-  key: apiKey
+  projectId: projectId
 });
 
 // The text to translate
@@ -33,13 +33,11 @@ const text = 'Hello, world!';
 const target = 'ru';
 
 // Translates some text into Russian
-translateClient.translate(text, target, (err, translation) => {
-  if (err) {
-    console.error(err);
-    return;
-  }
+translateClient.translate(text, target)
+  .then((results) => {
+    const translation = results[0];
 
-  console.log(`Text: ${text}`);
-  console.log(`Translation: ${translation}`);
-});
+    console.log(`Text: ${text}`);
+    console.log(`Translation: ${translation}`);
+  });
 // [END translate_quickstart]
