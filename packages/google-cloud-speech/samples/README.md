@@ -32,7 +32,7 @@ recognition technologies into developer applications.
 
 View the [documentation][recognize_docs] or the [source code][recognize_code].
 
-__Usage:__ `node recognize --help`
+__Usage:__ `node recognize.js --help`
 
 ```
 Commands:
@@ -42,15 +42,13 @@ Commands:
   listen             Detects speech in a microphone input stream.
 
 Options:
-  --help  Show help                                                                                            [boolean]
+  --help  Show help                                                    [boolean]
 
 Examples:
-  node recognize sync ./resources/audio.raw    Detects speech in "./resources/audio.raw".
-  node recognize async ./resources/audio.raw   Creates a job to detect speech in "./resources/audio.raw", and waits for
-                                               the job to complete.
-  node recognize stream ./resources/audio.raw  Detects speech in "./resources/audio.raw" by streaming it to the Speech
-                                               API.
-  node recognize listen ./resources/audio.raw  Detects speech in a microphone input stream.
+  node recognize.js sync ./resources/audio.raw
+  node recognize.js async ./resources/audio.raw
+  node recognize.js stream ./resources/audio.raw
+  node recognize.js listen
 
 For more information, see https://cloud.google.com/speech/docs
 ```

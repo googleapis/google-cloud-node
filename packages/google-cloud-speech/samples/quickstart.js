@@ -37,12 +37,9 @@ const options = {
 };
 
 // Detects speech in the audio file
-speechClient.recognize(fileName, options, (err, result) => {
-  if (err) {
-    console.error(err);
-    return;
-  }
-
-  console.log(`Transcription: ${result}`);
-});
+speechClient.recognize(fileName, options)
+  .then((results) => {
+    const transcription = results[0];
+    console.log(`Transcription: ${transcription}`);
+  });
 // [END speech_quickstart]
