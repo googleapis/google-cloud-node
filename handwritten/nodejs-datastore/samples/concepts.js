@@ -1,24 +1,1239 @@
-// Copyright 2015, Google, Inc.
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2016, Google, Inc.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 'use strict';
 
-var asyncUtil = require('async');
+const assert = require('power-assert');
 // By default, the client will authenticate using the service account file
 // specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use
 // the project specified by the GCLOUD_PROJECT environment variable. See
 // https://googlecloudplatform.github.io/gcloud-node/#/docs/google-cloud/latest/guides/authentication
-var Datastore = require('@google-cloud/datastore');
+const Datastore = require('@google-cloud/datastore');
+
+function makeStub () {
+  return sinon.stub().returns(Promise.resolve([]));
+}
+
+// This mock is used in the documentation snippets.
+let datastore = {
+  delete: makeStub(),
+  get: makeStub(),
+  insert: makeStub(),
+  key: makeStub(),
+  update: makeStub(),
+  upsert: makeStub(),
+  runQuery: sinon.stub().returns(Promise.resolve([[]])),
+  save: makeStub()
+};
+
+class TestHelper {
+  constructor (projectId) {
+    const options = {
+      projectId: projectId
+    };
+    this.datastore = Datastore(options);
+  }
+}
+
+class Entity extends TestHelper {
+  constructor (projectId) {
+    super(projectId);
+    // To create the keys, we have to use this instance of Datastore.
+    datastore.key = this.datastore.key;
+
+    this.incompleteKey = this.getIncompleteKey();
+    this.namedKey = this.getNamedKey();
+    this.keyWithParent = this.getKeyWithParent();
+    this.keyWithMultiLevelParent = this.getKeyWithMultiLevelParent();
+  }
+
+  getIncompleteKey () {
+    // [START incomplete_key]
+    const taskKey = datastore.key('Task');
+    // [END incomplete_key]
+
+    return taskKey;
+  }
+
+  getNamedKey () {
+    // [START named_key]
+    const taskKey = datastore.key([
+      'Task',
+      'sampleTask'
+    ]);
+    // [END named_key]
+
+    return taskKey;
+  }
+
+  getKeyWithParent () {
+    // [START key_with_parent]
+    const taskKey = datastore.key([
+      'TaskList',
+      'default',
+      'Task',
+      'sampleTask'
+    ]);
+    // [END key_with_parent]
+
+    return taskKey;
+  }
+
+  getKeyWithMultiLevelParent () {
+    // [START key_with_multilevel_parent]
+    const taskKey = datastore.key([
+      'User',
+      'alice',
+      'TaskList',
+      'default',
+      'Task',
+      'sampleTask'
+    ]);
+    // [END key_with_multilevel_parent]
+
+    return taskKey;
+  }
+
+  getTask () {
+    // [START basic_entity]
+    const task = {
+      category: 'Personal',
+      done: false,
+      priority: 4,
+      description: 'Learn Cloud Datastore'
+    };
+    // [END basic_entity]
+
+    return task;
+  }
+
+  testIncompleteKey () {
+    return this.datastore.save({
+      key: this.incompleteKey,
+      data: {}
+    });
+  }
+
+  testNamedKey () {
+    return this.datastore.save({
+      key: this.namedKey,
+      data: {}
+    });
+  }
+
+  testKeyWithParent () {
+    return this.datastore.save({
+      key: this.keyWithParent,
+      data: {}
+    });
+  }
+
+  testKeyWithMultiLevelParent () {
+    return this.datastore.save({
+      key: this.keyWithMultiLevelParent,
+      data: {}
+    });
+  }
+
+  testEntityWithParent () {
+    const taskKey = this.keyWithParent;
+
+    // [START entity_with_parent]
+    const task = {
+      key: taskKey,
+      data: {
+        category: 'Personal',
+        done: false,
+        priority: 4,
+        description: 'Learn Cloud Datastore'
+      }
+    };
+    // [END entity_with_parent]
+
+    return this.datastore.save(task);
+  }
+
+  testProperties () {
+    // [START properties]
+    const task = [
+      {
+        name: 'category',
+        value: 'Personal'
+      },
+      {
+        name: 'created',
+        value: new Date()
+      },
+      {
+        name: 'done',
+        value: false
+      },
+      {
+        name: 'priority',
+        value: 4
+      },
+      {
+        name: 'percent_complete',
+        value: 10.0
+      },
+      {
+        name: 'description',
+        value: 'Learn Cloud Datastore',
+        excludeFromIndexes: true
+      }
+    ];
+    // [END properties]
+
+    return this.datastore.save({
+      key: this.incompleteKey,
+      data: task
+    });
+  }
+
+  testArrayValue () {
+    // [START array_value]
+    const task = {
+      tags: [
+        'fun',
+        'programming'
+      ],
+      collaborators: [
+        'alice',
+        'bob'
+      ]
+    };
+    // [END array_value]
+
+    return this.datastore.save({
+      key: this.incompleteKey,
+      data: task
+    });
+  }
+
+  testBasicEntity () {
+    return this.datastore.save({
+      key: this.getIncompleteKey(),
+      data: this.getTask()
+    });
+  }
+
+  testUpsert () {
+    const taskKey = this.getIncompleteKey();
+    const task = this.getTask();
+
+    // [START upsert]
+    const entity = {
+      key: taskKey,
+      data: task
+    };
+
+    datastore.upsert(entity)
+      .then(() => {
+        // Task inserted successfully.
+      });
+    // [END upsert]
+
+    return this.datastore.upsert({
+      key: this.datastore.key(['Task', 1]),
+      data: task
+    });
+  }
+
+  testInsert () {
+    const taskKey = this.getIncompleteKey();
+    const task = this.getTask();
+
+    // [START insert]
+    const entity = {
+      key: taskKey,
+      data: task
+    };
+
+    datastore.insert(entity)
+      .then(() => {
+        // Task inserted successfully.
+      });
+    // [END insert]
+
+    return this.datastore.save({
+      method: 'insert',
+      key: taskKey,
+      data: task
+    });
+  }
+
+  testLookup () {
+    const taskKey = this.getIncompleteKey();
+
+    // [START lookup]
+    datastore.get(taskKey)
+      .then((results) => {
+        // Task found.
+        const entity = results[0];
+
+        // entity = {
+        //   category: 'Personal',
+        //   done: false,
+        //   priority: 4,
+        //   description: 'Learn Cloud Datastore'
+        // };
+        console.log(entity);
+      });
+    // [END lookup]
+
+    return this.datastore.save({
+      method: 'insert',
+      key: taskKey,
+      data: {}
+    }).then(() => this.datastore.get(taskKey));
+  }
+
+  testUpdate () {
+    const taskKey = this.getIncompleteKey();
+    const task = this.getTask();
+
+    // [START update]
+    const entity = {
+      key: taskKey,
+      data: task
+    };
+
+    datastore.update(entity)
+      .then(() => {
+        // Task updated successfully.
+      });
+    // [END update]
+
+    return this.datastore.save({
+      method: 'insert',
+      key: taskKey,
+      data: {}
+    }).then(() => this.datastore.update({ key: taskKey, data: task }));
+  }
+
+  testDelete () {
+    const taskKey = this.getIncompleteKey();
+
+    // [START delete]
+    datastore.delete(taskKey)
+      .then(() => {
+        // Task deleted successfully.
+      });
+    // [END delete]
+
+    return this.datastore.save({
+      method: 'insert',
+      key: taskKey,
+      data: {}
+    }).then(() => this.datastore.delete(taskKey));
+  }
+
+  testBatchUpsert () {
+    const taskKey1 = this.datastore.key(['Task', 1]);
+    const taskKey2 = this.datastore.key(['Task', 2]);
+
+    const task1 = {
+      category: 'Personal',
+      done: false,
+      priority: 4,
+      description: 'Learn Cloud Datastore'
+    };
+
+    const task2 = {
+      category: 'Work',
+      done: false,
+      priority: 8,
+      description: 'Integrate Cloud Datastore'
+    };
+
+    // [START batch_upsert]
+    const entities = [
+      {
+        key: taskKey1,
+        data: task1
+      },
+      {
+        key: taskKey2,
+        data: task2
+      }
+    ];
+
+    datastore.upsert(entities)
+      .then(() => {
+        // Tasks inserted successfully.
+      });
+    // [END batch_upsert]
+
+    return this.datastore.upsert([
+      {
+        key: taskKey1,
+        data: task1
+      },
+      {
+        key: taskKey2,
+        data: task2
+      }
+    ]);
+  }
+
+  testBatchLookup () {
+    const taskKey1 = this.datastore.key(['Task', 1]);
+    const taskKey2 = this.datastore.key(['Task', 2]);
+
+    // [START batch_lookup]
+    const keys = [taskKey1, taskKey2];
+
+    datastore.get(keys)
+      .then((results) => {
+        // Tasks retrieved successfully.
+        const tasks = results[0];
+
+        console.log(tasks);
+      });
+    // [END batch_lookup]
+
+    return this.datastore.get([taskKey1, taskKey2]);
+  }
+
+  testBatchDelete () {
+    const taskKey1 = this.datastore.key(['Task', 1]);
+    const taskKey2 = this.datastore.key(['Task', 2]);
+
+    // [START batch_delete]
+    const keys = [taskKey1, taskKey2];
+
+    datastore.delete(keys)
+      .then(() => {
+        // Tasks deleted successfully.
+      });
+    // [END batch_delete]
+
+    return this.datastore.delete([taskKey1, taskKey2]);
+  }
+}
+
+class Index extends TestHelper {
+  testUnindexedPropertyQuery () {
+    const datastore = this.datastore;
+
+    // [START unindexed_property_query]
+    const query = datastore.createQuery('Task')
+      .filter('description', '=', 'A task description.');
+    // [END unindexed_property_query]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testExplodingProperties () {
+    const original = datastore.key;
+    datastore.key = this.datastore.key;
+
+    // [START exploding_properties]
+    const task = {
+      method: 'insert',
+      key: datastore.key('Task'),
+      data: {
+        tags: [
+          'fun',
+          'programming',
+          'learn'
+        ],
+        collaborators: [
+          'alice',
+          'bob',
+          'charlie'
+        ],
+        created: new Date()
+      }
+    };
+    // [END exploding_properties]
+
+    datastore.key = original;
+
+    return this.datastore.save(task)
+      .then(() => {
+        assert(task.key);
+        assert(task.key.id);
+      });
+  }
+}
+
+class Metadata extends TestHelper {
+  testNamespaceRunQuery () {
+    const datastore = this.datastore;
+
+    const startNamespace = 'Animals';
+    const endNamespace = 'Zoos';
+
+    return datastore.save({
+      key: datastore.key({
+        namespace: 'Animals',
+        path: ['Ant', 1]
+      }),
+      data: {}
+    })
+      .then(() => {
+        // [START namespace_run_query]
+        function runNamespaceQuery (startNamespace, endNamespace) {
+          const startKey = datastore.key(['__namespace__', startNamespace]);
+          const endKey = datastore.key(['__namespace__', endNamespace]);
+
+          const query = datastore.createQuery('__namespace__')
+            .select('__key__')
+            .filter('__key__', '>=', startKey)
+            .filter('__key__', '<', endKey);
+
+          return datastore.runQuery(query)
+            .then((results) => {
+              const entities = results[0];
+              const namespaces = entities.map((entity) => entity[datastore.KEY].name);
+
+              console.log('Namespaces:');
+              namespaces.forEach((namespace) => console.log(namespace));
+
+              return namespaces;
+            });
+        }
+        // [END namespace_run_query]
+
+        return runNamespaceQuery(startNamespace, endNamespace);
+      })
+      .then((namespaces) => {
+        assert.deepEqual(namespaces, ['Animals']);
+      });
+  }
+
+  testKindRunQuery () {
+    const datastore = this.datastore;
+
+    // [START kind_run_query]
+    function runKindQuery () {
+      const query = datastore.createQuery('__kind__')
+        .select('__key__');
+
+      return datastore.runQuery(query)
+        .then((results) => {
+          const entities = results[0];
+          const kinds = entities.map((entity) => entity[datastore.KEY].name);
+
+          console.log('Kinds:');
+          kinds.forEach((kind) => console.log(kind));
+
+          return kinds;
+        });
+    }
+    // [END kind_run_query]
+
+    return runKindQuery()
+      .then((kinds) => {
+        assert.equal(kinds.includes('Account'), true);
+      });
+  }
+
+  testPropertyRunQuery () {
+    const datastore = this.datastore;
+
+    // [START property_run_query]
+    function runPropertyQuery () {
+      const query = datastore.createQuery('__property__')
+        .select('__key__');
+
+      return datastore.runQuery(query)
+        .then((results) => {
+          const entities = results[0];
+          const propertiesByKind = {};
+
+          entities.forEach((entity) => {
+            const key = entity[datastore.KEY];
+            const kind = key.path[1];
+            const property = key.path[3];
+
+            propertiesByKind[kind] = propertiesByKind[kind] || [];
+            propertiesByKind[kind].push(property);
+          });
+
+          console.log('Properties by Kind:');
+          for (let key in propertiesByKind) {
+            console.log(key, propertiesByKind[key]);
+          }
+
+          return propertiesByKind;
+        });
+    }
+    // [END property_run_query]
+
+    return runPropertyQuery()
+      .then((propertiesByKind) => {
+        assert.deepEqual(propertiesByKind.Account, ['balance']);
+      });
+  }
+
+  testPropertyByKindRunQuery () {
+    const datastore = this.datastore;
+
+    // [START property_by_kind_run_query]
+    function runPropertyByKindQuery () {
+      const ancestorKey = datastore.key(['__kind__', 'Account']);
+
+      const query = datastore.createQuery('__property__')
+        .hasAncestor(ancestorKey);
+
+      return datastore.runQuery(query)
+        .then((results) => {
+          const entities = results[0];
+
+          const representationsByProperty = {};
+
+          entities.forEach((entity) => {
+            const key = entity[datastore.KEY];
+            const propertyName = key.name;
+            const propertyType = entity.property_representation;
+
+            representationsByProperty[propertyName] = propertyType;
+          });
+
+          console.log('Task property representations:');
+          for (let key in representationsByProperty) {
+            console.log(key, representationsByProperty[key]);
+          }
+
+          return representationsByProperty;
+        });
+    }
+    // [END property_by_kind_run_query]
+
+    return runPropertyByKindQuery()
+      .then((propertiesByKind) => {
+        assert.deepEqual(propertiesByKind, {
+          balance: ['INT64']
+        });
+      });
+  }
+}
+
+class Query extends TestHelper {
+  constructor (projectId) {
+    super(projectId);
+
+    this.basicQuery = this.getBasicQuery();
+    this.projectionQuery = this.getProjectionQuery();
+    this.ancestorQuery = this.getAncestorQuery();
+  }
+
+  getBasicQuery () {
+    const datastore = this.datastore;
+
+    // [START basic_query]
+    const query = datastore.createQuery('Task')
+      .filter('done', '=', false)
+      .filter('priority', '>=', 4)
+      .order('priority', {
+        descending: true
+      });
+    // [END basic_query]
+
+    return query;
+  }
+
+  getProjectionQuery () {
+    const datastore = this.datastore;
+
+    // [START projection_query]
+    const query = datastore.createQuery('Task')
+      .select(['priority', 'percent_complete']);
+    // [END projection_query]
+
+    return query;
+  }
+
+  getAncestorQuery () {
+    const datastore = this.datastore;
+
+    // [START ancestor_query]
+    const ancestorKey = datastore.key(['TaskList', 'default']);
+
+    const query = datastore.createQuery('Task')
+      .hasAncestor(ancestorKey);
+    // [END ancestor_query]
+
+    return query;
+  }
+
+  testRunQuery () {
+    const query = this.basicQuery;
+
+    // [START run_query]
+    datastore.runQuery(query)
+      .then((results) => {
+        // Task entities found.
+        const tasks = results[0];
+
+        console.log('Tasks:');
+        tasks.forEach((task) => console.log(task));
+      });
+    // [END run_query]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testPropertyFilter () {
+    const datastore = this.datastore;
+
+    // [START property_filter]
+    const query = datastore.createQuery('Task')
+      .filter('done', '=', false);
+    // [END property_filter]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testCompositeFilter () {
+    const datastore = this.datastore;
+
+    // [START composite_filter]
+    const query = datastore.createQuery('Task')
+      .filter('done', '=', false)
+      .filter('priority', '=', 4);
+    // [END composite_filter]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testKeyFilter () {
+    const datastore = this.datastore;
+
+    // [START key_filter]
+    const query = datastore.createQuery('Task')
+      .filter('__key__', '>', datastore.key(['Task', 'someTask']));
+    // [END key_filter]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testAscendingSort () {
+    const datastore = this.datastore;
+
+    // [START ascending_sort]
+    const query = datastore.createQuery('Task')
+      .order('created');
+    // [END ascending_sort]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testDescendingSort () {
+    const datastore = this.datastore;
+
+    // [START descending_sort]
+    const query = datastore.createQuery('Task')
+      .order('created', {
+        descending: true
+      });
+    // [END descending_sort]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testMultiSort () {
+    const datastore = this.datastore;
+
+    // [START multi_sort]
+    const query = datastore.createQuery('Task')
+      .order('priority', {
+        descending: true
+      })
+      .order('created');
+    // [END multi_sort]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testKindlessQuery () {
+    const datastore = this.datastore;
+    const lastSeenKey = this.datastore.key(['Task', Date.now()]);
+
+    // [START kindless_query]
+    const query = datastore.createQuery()
+      .filter('__key__', '>', lastSeenKey)
+      .limit(1);
+    // [END kindless_query]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testRunQueryProjection () {
+    const datastore = this.datastore;
+    const query = this.projectionQuery;
+
+    // [START run_query_projection]
+    function runProjectionQuery () {
+      const priorities = [];
+      const percentCompletes = [];
+
+      return datastore.runQuery(query)
+        .then((results) => {
+          const tasks = results[0];
+
+          tasks.forEach((task) => {
+            priorities.push(task.priority);
+            percentCompletes.push(task.percent_complete);
+          });
+
+          return {
+            priorities: priorities,
+            percentCompletes: percentCompletes
+          };
+        });
+    }
+    // [END run_query_projection]
+
+    return runProjectionQuery();
+  }
+
+  testKeysOnlyQuery () {
+    const datastore = this.datastore;
+
+    // [START keys_only_query]
+    const query = datastore.createQuery()
+      .select('__key__')
+      .limit(1);
+    // [END keys_only_query]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testDistinctQuery () {
+    const datastore = this.datastore;
+
+    // [START distinct_query]
+    const query = datastore.createQuery('Task')
+      .groupBy(['category', 'priority'])
+      .order('category')
+      .order('priority');
+    // [END distinct_query]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testDistinctOnQuery () {
+    const datastore = this.datastore;
+
+    // [START distinct_on_query]
+    const query = datastore.createQuery('Task')
+      .groupBy('category')
+      .order('category')
+      .order('priority');
+    // [END distinct_on_query]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testArrayValueInequalityRange () {
+    const datastore = this.datastore;
+
+    // [START array_value_inequality_range]
+    const query = datastore.createQuery('Task')
+      .filter('tag', '>', 'learn')
+      .filter('tag', '<', 'math');
+    // [END array_value_inequality_range]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testArrayValueEquality () {
+    const datastore = this.datastore;
+
+    // [START array_value_equality]
+    const query = datastore.createQuery('Task')
+      .filter('tag', '=', 'fun')
+      .filter('tag', '=', 'programming');
+    // [END array_value_equality]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testInequalityRange () {
+    const datastore = this.datastore;
+
+    // [START inequality_range]
+    const query = datastore.createQuery('Task')
+      .filter('created', '>', new Date('1990-01-01T00:00:00z'))
+      .filter('created', '<', new Date('2000-12-31T23:59:59z'));
+    // [END inequality_range]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testInequalityInvalid () {
+    const datastore = this.datastore;
+
+    // [START inequality_invalid]
+    const query = datastore.createQuery('Task')
+      .filter('priority', '>', 3)
+      .filter('created', '>', new Date('1990-01-01T00:00:00z'));
+    // [END inequality_invalid]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testEqualAndInequalityRange () {
+    const datastore = this.datastore;
+
+    // [START equal_and_inequality_range]
+    const query = datastore.createQuery('Task')
+      .filter('priority', '=', 4)
+      .filter('done', '=', false)
+      .filter('created', '>', new Date('1990-01-01T00:00:00z'))
+      .filter('created', '<', new Date('2000-12-31T23:59:59z'));
+    // [END equal_and_inequality_range]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testInequalitySort () {
+    const datastore = this.datastore;
+
+    // [START inequality_sort]
+    const query = datastore.createQuery('Task')
+      .filter('priority', '>', 3)
+      .order('priority')
+      .order('created');
+    // [END inequality_sort]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testInequalitySortInvalidNotSame () {
+    const datastore = this.datastore;
+
+    // [START inequality_sort_invalid_not_same]
+    const query = datastore.createQuery('Task')
+      .filter('priority', '>', 3)
+      .order('created');
+    // [END inequality_sort_invalid_not_same]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testInequalitySortInvalidNotFirst () {
+    const datastore = this.datastore;
+
+    // [START inequality_sort_invalid_not_first]
+    const query = datastore.createQuery('Task')
+      .filter('priority', '>', 3)
+      .order('created')
+      .order('priority');
+    // [END inequality_sort_invalid_not_first]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testLimit () {
+    const datastore = this.datastore;
+
+    // [START limit]
+    const query = datastore.createQuery('Task')
+      .limit(5);
+    // [END limit]
+
+    return this.datastore.runQuery(query);
+  }
+
+  testCursorPaging () {
+    const datastore = this.datastore;
+    const pageSize = 1;
+
+    // [START cursor_paging]
+    // By default, google-cloud-node will automatically paginate through all of
+    // the results that match a query. However, this sample implements manual
+    // pagination using limits and cursor tokens.
+    function runPageQuery (pageCursor) {
+      let query = datastore.createQuery('Task')
+        .limit(pageSize);
+
+      if (pageCursor) {
+        query = query.start(pageCursor);
+      }
+
+      return datastore.runQuery(query)
+        .then((results) => {
+          const entities = results[0];
+          const info = results[1];
+
+          if (info.moreResults !== Datastore.NO_MORE_RESULTS) {
+            // If there are more results to retrieve, the end cursor is
+            // automatically set on `info`. To get this value directly, access
+            // the `endCursor` property.
+            return runPageQuery(info.endCursor)
+              .then((results) => {
+                // Concatenate entities
+                results[0] = entities.concat(results[0]);
+                return results;
+              });
+          }
+
+          return [entities, info];
+        });
+    }
+    // [END cursor_paging]
+
+    return runPageQuery()
+      .then((results) => {
+        const entities = results[0];
+        assert.equal(Array.isArray(entities), true);
+        const info = results[1];
+        if (!info || !info.endCursor) {
+          throw new Error('An `info` with an `endCursor` is not present.');
+        }
+      });
+  }
+
+  testEventualConsistentQuery () {
+    // [START eventual_consistent_query]
+    // Read consistency cannot be specified in google-cloud-node.
+    // [END eventual_consistent_query]
+  }
+}
+
+// [START transactional_update]
+function transferFunds (fromKey, toKey, amount) {
+  const transaction = datastore.transaction();
+
+  return transaction.run()
+    .then(() => Promise.all([transaction.get(fromKey), transaction.get(toKey)]))
+    .then((results) => {
+      const accounts = results
+        .map((result) => result[0]);
+
+      accounts[0].balance -= amount;
+      accounts[1].balance += amount;
+
+      transaction.save([
+        {
+          key: fromKey,
+          data: accounts[0]
+        },
+        {
+          key: toKey,
+          data: accounts[1]
+        }
+      ]);
+
+      return transaction.commit();
+    })
+    .catch(() => transaction.rollback());
+}
+// [END transactional_update]
+
+class Transaction extends TestHelper {
+  constructor (projectId) {
+    super(projectId);
+    this.fromKey = this.datastore.key(['Bank', 1, 'Account', 1]);
+    this.toKey = this.datastore.key(['Bank', 1, 'Account', 2]);
+
+    this.originalBalance = 100;
+    this.amountToTransfer = 10;
+  }
+
+  restoreBankAccountBalances (config) {
+    const entities = config.keys.map((key) => {
+      return {
+        key: key,
+        data: {
+          balance: config.balance
+        }
+      };
+    });
+
+    return this.datastore.save(entities);
+  }
+
+  testTransactionalUpdate () {
+    const fromKey = this.fromKey;
+    const toKey = this.toKey;
+    const originalBalance = this.originalBalance;
+    const amountToTransfer = this.amountToTransfer;
+    const datastoreMock = datastore;
+
+    // Overwrite so the real Datastore instance is used in `transferFunds`.
+    datastore = this.datastore;
+
+    return this.restoreBankAccountBalances({
+      keys: [fromKey, toKey],
+      balance: originalBalance
+    })
+      .then(() => transferFunds(fromKey, toKey, amountToTransfer))
+      .then(() => Promise.all([this.datastore.get(fromKey), this.datastore.get(toKey)]))
+      .then((results) => {
+        const accounts = results.map((result) => result[0]);
+        // Restore `datastore` to the mock API.
+        datastore = datastoreMock;
+        assert.equal(accounts[0].balance, originalBalance - amountToTransfer);
+        assert.equal(accounts[1].balance, originalBalance + amountToTransfer);
+      })
+      .catch((err) => {
+        // Restore `datastore` to the mock API.
+        datastore = datastoreMock;
+        return Promise.reject(err);
+      });
+  }
+
+  testTransactionalRetry () {
+    // Overwrite so the real Datastore instance is used in `transferFunds`.
+    const datastoreMock = datastore;
+    datastore = this.datastore;
+
+    const fromKey = this.fromKey;
+    const toKey = this.toKey;
+
+    return this.restoreBankAccountBalances({
+      keys: [fromKey, toKey],
+      balance: this.originalBalance
+    })
+      .then(() => {
+        // [START transactional_retry]
+        function transferFundsWithRetry () {
+          const maxTries = 5;
+          let currentAttempt = 1;
+          let delay = 100;
+
+          function tryRequest () {
+            return transferFunds(fromKey, toKey, 10)
+              .catch((err) => {
+                if (currentAttempt <= maxTries) {
+                  // Use exponential backoff
+                  return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                      currentAttempt++;
+                      delay *= 2;
+                      tryRequest().then(resolve, reject);
+                    }, delay);
+                  });
+                }
+                return Promise.reject(err);
+              });
+          }
+
+          return tryRequest(1, 5);
+        }
+        // [END transactional_retry]
+        return transferFundsWithRetry();
+      })
+      .then(() => {
+        // Restore `datastore` to the mock API.
+        datastore = datastoreMock;
+      })
+      .catch(() => {
+        // Restore `datastore` to the mock API.
+        datastore = datastoreMock;
+      });
+  }
+
+  testTransactionalGetOrCreate () {
+    const taskKey = this.datastore.key(['Task', Date.now()]);
+
+    // Overwrite so the real Datastore instance is used in `transferFunds`.
+    const datastoreMock = datastore;
+    datastore = this.datastore;
+
+    // [START transactional_get_or_create]
+    function getOrCreate (taskKey, taskData) {
+      const taskEntity = {
+        key: taskKey,
+        data: taskData
+      };
+
+      const transaction = datastore.transaction();
+
+      return transaction.run()
+        .then(() => transaction.get(taskKey))
+        .then((results) => {
+          const task = results[0];
+          if (task) {
+            // The task entity already exists.
+            return transaction.rollback();
+          } else {
+            // Create the task entity.
+            transaction.save(taskEntity);
+            return transaction.commit();
+          }
+        })
+        .then(() => taskEntity)
+        .catch(() => transaction.rollback());
+    }
+    // [END transactional_get_or_create]
+
+    return getOrCreate(taskKey, {})
+      .then((task) => {
+        assert(task, 'Should have a task.');
+        return getOrCreate(taskKey, {});
+      })
+      .then((task) => {
+        assert(task, 'Should have a task.');
+        // Restore `datastore` to the mock API.
+        datastore = datastoreMock;
+      })
+      .catch((err) => {
+        // Restore `datastore` to the mock API.
+        datastore = datastoreMock;
+        return Promise.reject(err);
+      });
+  }
+
+  testSingleEntityGroupReadOnly () {
+    // Overwrite so the real Datastore instance is used in `transferFunds`.
+    const datastoreMock = datastore;
+    datastore = this.datastore;
+
+    // [START transactional_single_entity_group_read_only]
+    function getTaskListEntities () {
+      let taskList, taskListEntities;
+
+      const transaction = datastore.transaction();
+      const taskListKey = datastore.key(['TaskList', 'default']);
+
+      return transaction.run()
+        .then(() => datastore.get(taskListKey))
+        .then((results) => {
+          taskList = results[0];
+          const query = datastore.createQuery('Task')
+            .hasAncestor(taskListKey);
+          return datastore.runQuery(query);
+        })
+        .then((results) => {
+          taskListEntities = results[0];
+          return transaction.commit();
+        })
+        .then(() => [taskList, taskListEntities])
+        .catch(() => transaction.rollback());
+    }
+    // [END transactional_single_entity_group_read_only]
+
+    return getTaskListEntities()
+      .then((results) => {
+        // Restore `datastore` to the mock API.
+        datastore = datastoreMock;
+        assert.equal(results.length, 2);
+        assert.equal(Array.isArray(results[1]), true);
+      }, (err) => {
+        // Restore `datastore` to the mock API.
+        datastore = datastoreMock;
+        return Promise.reject(err);
+      });
+  }
+}
 
 module.exports = {
   Entity: Entity,
@@ -26,1327 +1241,4 @@ module.exports = {
   Metadata: Metadata,
   Query: Query,
   Transaction: Transaction
-};
-
-// This mock is used in the documentation snippets.
-var datastore = {
-  delete: function () {},
-  get: function () {},
-  insert: function () {},
-  key: function () {},
-  update: function () {},
-  upsert: function () {},
-  runQuery: function () {},
-  save: function () {}
-};
-
-function Entity (projectId) {
-  var options = {
-    projectId: projectId
-  };
-
-  this.datastore = Datastore(options);
-
-  // To create the keys, we have to use this instance of Datastore.
-  datastore.key = this.datastore.key;
-
-  this.incompleteKey = this.getIncompleteKey();
-  this.namedKey = this.getNamedKey();
-  this.keyWithParent = this.getKeyWithParent();
-  this.keyWithMultiLevelParent = this.getKeyWithMultiLevelParent();
-}
-
-Entity.prototype.getIncompleteKey = function () {
-  // [START incomplete_key]
-  var taskKey = datastore.key('Task');
-  // [END incomplete_key]
-
-  return taskKey;
-};
-
-Entity.prototype.getNamedKey = function () {
-  // [START named_key]
-  var taskKey = datastore.key([
-    'Task',
-    'sampleTask'
-  ]);
-  // [END named_key]
-
-  return taskKey;
-};
-
-Entity.prototype.getKeyWithParent = function () {
-  // [START key_with_parent]
-  var taskKey = datastore.key([
-    'TaskList',
-    'default',
-    'Task',
-    'sampleTask'
-  ]);
-  // [END key_with_parent]
-
-  return taskKey;
-};
-
-Entity.prototype.getKeyWithMultiLevelParent = function () {
-  // [START key_with_multilevel_parent]
-  var taskKey = datastore.key([
-    'User',
-    'alice',
-    'TaskList',
-    'default',
-    'Task',
-    'sampleTask'
-  ]);
-  // [END key_with_multilevel_parent]
-
-  return taskKey;
-};
-
-Entity.prototype.getTask = function () {
-  // [START basic_entity]
-  var task = {
-    category: 'Personal',
-    done: false,
-    priority: 4,
-    description: 'Learn Cloud Datastore'
-  };
-  // [END basic_entity]
-
-  return task;
-};
-
-Entity.prototype.testIncompleteKey = function (callback) {
-  this.datastore.save({
-    key: this.incompleteKey,
-    data: {}
-  }, callback);
-};
-
-Entity.prototype.testNamedKey = function (callback) {
-  this.datastore.save({
-    key: this.namedKey,
-    data: {}
-  }, callback);
-};
-
-Entity.prototype.testKeyWithParent = function (callback) {
-  this.datastore.save({
-    key: this.keyWithParent,
-    data: {}
-  }, callback);
-};
-
-Entity.prototype.testKeyWithMultiLevelParent = function (callback) {
-  this.datastore.save({
-    key: this.keyWithMultiLevelParent,
-    data: {}
-  }, callback);
-};
-
-Entity.prototype.testEntityWithParent = function (callback) {
-  var taskKey = this.keyWithParent;
-
-  // [START entity_with_parent]
-  var task = {
-    key: taskKey,
-    data: {
-      category: 'Personal',
-      done: false,
-      priority: 4,
-      description: 'Learn Cloud Datastore'
-    }
-  };
-  // [END entity_with_parent]
-
-  this.datastore.save(task, callback);
-};
-
-Entity.prototype.testProperties = function (callback) {
-  // jshint camelcase:false
-  // [START properties]
-  var task = [
-    {
-      name: 'category',
-      value: 'Personal'
-    },
-    {
-      name: 'created',
-      value: new Date()
-    },
-    {
-      name: 'done',
-      value: false
-    },
-    {
-      name: 'priority',
-      value: 4
-    },
-    {
-      name: 'percent_complete',
-      value: 10.0
-    },
-    {
-      name: 'description',
-      value: 'Learn Cloud Datastore',
-      excludeFromIndexes: true
-    }
-  ];
-  // [END properties]
-
-  this.datastore.save({
-    key: this.incompleteKey,
-    data: task
-  }, callback);
-};
-
-Entity.prototype.testArrayValue = function (callback) {
-  // [START array_value]
-  var task = {
-    tags: [
-      'fun',
-      'programming'
-    ],
-    collaborators: [
-      'alice',
-      'bob'
-    ]
-  };
-  // [END array_value]
-
-  this.datastore.save({
-    key: this.incompleteKey,
-    data: task
-  }, callback);
-};
-
-Entity.prototype.testBasicEntity = function (callback) {
-  this.datastore.save({
-    key: this.getIncompleteKey(),
-    data: this.getTask()
-  }, callback);
-};
-
-Entity.prototype.testUpsert = function (callback) {
-  var taskKey = this.getIncompleteKey();
-  var task = this.getTask();
-
-  // [START upsert]
-  datastore.upsert({
-    key: taskKey,
-    data: task
-  }, function (err) {
-    if (!err) {
-      // Task inserted successfully.
-    }
-  });
-  // [END upsert]
-
-  this.datastore.upsert({
-    key: this.datastore.key(['Task', 1]),
-    data: task
-  }, callback);
-};
-
-Entity.prototype.testInsert = function (callback) {
-  var taskKey = this.getIncompleteKey();
-  var task = this.getTask();
-
-  // [START insert]
-  datastore.insert({
-    key: taskKey,
-    data: task
-  }, function (err) {
-    if (!err) {
-      // Task inserted successfully.
-    }
-  });
-  // [END insert]
-
-  this.datastore.save({
-    method: 'insert',
-    key: taskKey,
-    data: task
-  }, callback);
-};
-
-Entity.prototype.testLookup = function (callback) {
-  var self = this;
-  var taskKey = this.getIncompleteKey();
-
-  // jshint unused:false
-  // [START lookup]
-  datastore.get(taskKey, function (err, entity) {
-    if (!err) {
-      // Task found.
-
-      // entity.data = {
-      //   category: 'Personal',
-      //   done: false,
-      //   priority: 4,
-      //   description: 'Learn Cloud Datastore'
-      // };
-    }
-  });
-  // [END lookup]
-
-  this.datastore.save({
-    method: 'insert',
-    key: taskKey,
-    data: {}
-  }, function (err) {
-    if (err) {
-      callback(err);
-      return;
-    }
-
-    self.datastore.get(taskKey, callback);
-  });
-};
-
-Entity.prototype.testUpdate = function (callback) {
-  var self = this;
-  var taskKey = this.getIncompleteKey();
-  var task = this.getTask();
-
-  // [START update]
-  datastore.update({
-    key: taskKey,
-    data: task
-  }, function (err) {
-    if (!err) {
-      // Task updated successfully.
-    }
-  });
-  // [END update]
-
-  this.datastore.save({
-    method: 'insert',
-    key: taskKey,
-    data: {}
-  }, function (err) {
-    if (err) {
-      callback(err);
-      return;
-    }
-
-    self.datastore.update({
-      key: taskKey,
-      data: task
-    }, callback);
-  });
-};
-
-Entity.prototype.testDelete = function (callback) {
-  var self = this;
-  var taskKey = this.getIncompleteKey();
-
-  // [START delete]
-  datastore.delete(taskKey, function (err) {
-    if (!err) {
-      // Task deleted successfully.
-    }
-  });
-  // [END delete]
-
-  this.datastore.save({
-    method: 'insert',
-    key: taskKey,
-    data: {}
-  }, function (err) {
-    if (err) {
-      callback(err);
-      return;
-    }
-
-    self.datastore.delete(taskKey, callback);
-  });
-};
-
-Entity.prototype.testBatchUpsert = function (callback) {
-  var taskKey1 = this.datastore.key(['Task', 1]);
-  var taskKey2 = this.datastore.key(['Task', 2]);
-
-  var task1 = {
-    category: 'Personal',
-    done: false,
-    priority: 4,
-    description: 'Learn Cloud Datastore'
-  };
-
-  var task2 = {
-    category: 'Work',
-    done: false,
-    priority: 8,
-    description: 'Integrate Cloud Datastore'
-  };
-
-  // [START batch_upsert]
-  datastore.upsert([
-    {
-      key: taskKey1,
-      data: task1
-    },
-    {
-      key: taskKey2,
-      data: task2
-    }
-  ], function (err) {
-    if (!err) {
-      // Tasks inserted successfully.
-    }
-  });
-  // [END batch_upsert]
-
-  this.datastore.upsert([
-    {
-      key: taskKey1,
-      data: task1
-    },
-    {
-      key: taskKey2,
-      data: task2
-    }
-  ], callback);
-};
-
-Entity.prototype.testBatchLookup = function (callback) {
-  var taskKey1 = this.datastore.key(['Task', 1]);
-  var taskKey2 = this.datastore.key(['Task', 2]);
-
-  // jshint unused:false
-  // [START batch_lookup]
-  datastore.get([
-    taskKey1,
-    taskKey2
-  ], function (err, tasks) {
-    if (!err) {
-      // Tasks retrieved successfully.
-    }
-  });
-  // [END batch_lookup]
-
-  this.datastore.get([
-    taskKey1,
-    taskKey2
-  ], callback);
-};
-
-Entity.prototype.testBatchDelete = function (callback) {
-  var taskKey1 = this.datastore.key(['Task', 1]);
-  var taskKey2 = this.datastore.key(['Task', 2]);
-
-  // [START batch_delete]
-  datastore.delete([
-    taskKey1,
-    taskKey2
-  ], function (err) {
-    if (!err) {
-      // Tasks deleted successfully.
-    }
-  });
-  // [END batch_delete]
-
-  this.datastore.delete([
-    taskKey1,
-    taskKey2
-  ], callback);
-};
-
-function Index (projectId) {
-  var options = {
-    projectId: projectId
-  };
-
-  this.datastore = Datastore(options);
-}
-
-Index.prototype.testUnindexedPropertyQuery = function (callback) {
-  var datastore = this.datastore;
-
-  // [START unindexed_property_query]
-  var query = datastore.createQuery('Task')
-    .filter('description', '=', 'A task description.');
-  // [END unindexed_property_query]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Index.prototype.testExplodingProperties = function (callback) {
-  var original = datastore.key;
-  datastore.key = this.datastore.key;
-
-  // [START exploding_properties]
-  var task = {
-    method: 'insert',
-    key: datastore.key('Task'),
-    data: {
-      tags: [
-        'fun',
-        'programming',
-        'learn'
-      ],
-      collaborators: [
-        'alice',
-        'bob',
-        'charlie'
-      ],
-      created: new Date()
-    }
-  };
-  // [END exploding_properties]
-
-  datastore.key = original;
-
-  this.datastore.save(task, callback);
-};
-
-function Metadata (projectId) {
-  var options = {
-    projectId: projectId
-  };
-
-  this.datastore = Datastore(options);
-}
-
-Metadata.prototype.testNamespaceRunQuery = function (callback) {
-  var self = this;
-
-  datastore.createQuery = this.datastore.createQuery;
-  datastore.key = this.datastore.key;
-
-  var startNamespace = 'Animals';
-  var endNamespace = 'Zoos';
-
-  this.datastore.save([
-    {
-      key: datastore.key({
-        namespace: 'Animals',
-        path: ['Ant', 1]
-      }),
-      data: {}
-    }
-  ], function (err) {
-    if (err) {
-      callback(err);
-      return;
-    }
-
-    // jshint unused:false
-    // [START namespace_run_query]
-    var query = datastore.createQuery('__namespace__')
-      .select('__key__')
-      .filter('__key__', '>=', datastore.key(['__namespace__', startNamespace]))
-      .filter('__key__', '<', datastore.key(['__namespace__', endNamespace]));
-
-    datastore.runQuery(query, function (err, entities) {
-      if (err) {
-        // An error occurred while running the query.
-        return;
-      }
-
-      var namespaces = entities.map(function (entity) {
-        return entity.key.path.pop();
-      });
-      console.log('namespaces', namespaces);
-    });
-    // [END namespace_run_query]
-
-    self.datastore.runQuery(query, callback);
-  });
-};
-
-Metadata.prototype.testKindRunQuery = function (callback) {
-  datastore.createQuery = this.datastore.createQuery;
-
-  // jshint unused:false
-  // [START kind_run_query]
-  var query = datastore.createQuery('__kind__')
-    .select('__key__');
-
-  datastore.runQuery(query, function (err, entities) {
-    if (err) {
-      // An error occurred while running the query.
-      return;
-    }
-
-    var kinds = entities.map(function (entity) {
-      return entity.key.path.pop();
-    });
-    console.log('kinds', kinds);
-  });
-  // [END kind_run_query]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Metadata.prototype.testPropertyRunQuery = function (callback) {
-  datastore.createQuery = this.datastore.createQuery;
-
-  // [START property_run_query]
-  var query = datastore.createQuery('__property__')
-    .select('__key__');
-
-  datastore.runQuery(query, function (err, entities) {
-    if (err) {
-      // An error occurred while running the query.
-      return;
-    }
-
-    var propertiesByKind = {};
-
-    entities.forEach(function (entity) {
-      var kind = entity.key.path[1];
-      var propertyName = entity.key.path[3];
-
-      propertiesByKind[kind] = propertiesByKind[kind] || [];
-      propertiesByKind[kind].push(propertyName);
-    });
-  });
-  // [END property_run_query]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Metadata.prototype.testPropertyByKindRunQuery = function (callback) {
-  var datastore = this.datastore;
-
-  // jshint camelcase:false
-  // [START property_by_kind_run_query]
-  var ancestorKey = datastore.key(['__kind__', 'Task']);
-
-  var query = datastore.createQuery('__property__')
-    .hasAncestor(ancestorKey);
-
-  datastore.runQuery(query, function (err, entities) {
-    if (err) {
-      // An error occurred while running the query.
-      return;
-    }
-
-    var representationsByProperty = {};
-
-    entities.forEach(function (entity) {
-      var propertyName = entity.key.path.pop();
-      var propertyType = entity.data.property_representation;
-
-      representationsByProperty[propertyName] = propertyType;
-    });
-  });
-  // [END property_by_kind_run_query]
-
-  this.datastore.runQuery(query, callback);
-};
-
-function Query (projectId) {
-  var options = {
-    projectId: projectId
-  };
-
-  this.datastore = Datastore(options);
-
-  this.basicQuery = this.getBasicQuery();
-  this.projectionQuery = this.getProjectionQuery();
-  this.ancestorQuery = this.getAncestorQuery();
-}
-
-Query.prototype.getBasicQuery = function () {
-  var datastore = this.datastore;
-
-  // [START basic_query]
-  var query = datastore.createQuery('Task')
-    .filter('done', '=', false)
-    .filter('priority', '>=', 4)
-    .order('priority', {
-      descending: true
-    });
-  // [END basic_query]
-
-  return query;
-};
-
-Query.prototype.getProjectionQuery = function () {
-  var datastore = this.datastore;
-
-  // [START projection_query]
-  var query = datastore.createQuery('Task')
-    .select(['priority', 'percent_complete']);
-  // [END projection_query]
-
-  return query;
-};
-
-Query.prototype.getAncestorQuery = function () {
-  var datastore = this.datastore;
-
-  // [START ancestor_query]
-  var ancestorKey = datastore.key(['TaskList', 'default']);
-
-  var query = datastore.createQuery('Task')
-    .hasAncestor(ancestorKey);
-  // [END ancestor_query]
-
-  return query;
-};
-
-Query.prototype.testRunQuery = function (callback) {
-  var query = this.basicQuery;
-
-  // jshint unused:false
-  // [START run_query]
-  datastore.runQuery(query, function (err, tasks) {
-    if (!err) {
-      // Task entities found.
-    }
-  });
-  // [END run_query]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Query.prototype.testPropertyFilter = function (callback) {
-  var datastore = this.datastore;
-
-  // [START property_filter]
-  var query = datastore.createQuery('Task')
-    .filter('done', '=', false);
-  // [END property_filter]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Query.prototype.testCompositeFilter = function (callback) {
-  var datastore = this.datastore;
-
-  // [START composite_filter]
-  var query = datastore.createQuery('Task')
-    .filter('done', '=', false)
-    .filter('priority', '=', 4);
-  // [END composite_filter]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Query.prototype.testKeyFilter = function (callback) {
-  var datastore = this.datastore;
-
-  // [START key_filter]
-  var query = datastore.createQuery('Task')
-    .filter('__key__', '>', datastore.key(['Task', 'someTask']));
-  // [END key_filter]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Query.prototype.testAscendingSort = function (callback) {
-  var datastore = this.datastore;
-
-  // [START ascending_sort]
-  var query = datastore.createQuery('Task')
-    .order('created');
-  // [END ascending_sort]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Query.prototype.testDescendingSort = function (callback) {
-  var datastore = this.datastore;
-
-  // [START descending_sort]
-  var query = datastore.createQuery('Task')
-    .order('created', {
-      descending: true
-    });
-  // [END descending_sort]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Query.prototype.testMultiSort = function (callback) {
-  var datastore = this.datastore;
-
-  // [START multi_sort]
-  var query = datastore.createQuery('Task')
-    .order('priority', {
-      descending: true
-    })
-    .order('created');
-  // [END multi_sort]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Query.prototype.testKindlessQuery = function (callback) {
-  var datastore = this.datastore;
-  var lastSeenKey = this.datastore.key(['Task', Date.now()]);
-
-  // [START kindless_query]
-  var query = datastore.createQuery()
-    .filter('__key__', '>', lastSeenKey)
-    .limit(1);
-  // [END kindless_query]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Query.prototype.testRunQueryProjection = function (callback) {
-  var self = this;
-  var query = this.projectionQuery;
-
-  // Overwrite the mock to actually run the query.
-  datastore.runQuery = function (query, queryCallback) {
-    // Restore the mock.
-    datastore.runQuery = function () {};
-
-    self.datastore.runQuery(query, function (err) {
-      if (err) {
-        return callback(err);
-      }
-
-      queryCallback.apply(null, arguments);
-
-      if (priorities.length === 0 || percentCompletes.length === 0) {
-        callback(new Error('Projection lists did not build up.'));
-      } else {
-        callback();
-      }
-    });
-  };
-
-  // jshint unused:false, camelcase:false
-  // [START run_query_projection]
-  var priorities = [];
-  var percentCompletes = [];
-
-  datastore.runQuery(query, function (err, tasks) {
-    if (err) {
-      // An error occurred while running the query.
-      return;
-    }
-
-    tasks.forEach(function (task) {
-      priorities.push(task.data.priority);
-      percentCompletes.push(task.data.percent_complete);
-    });
-  });
-  // [END run_query_projection]
-};
-
-Query.prototype.testKeysOnlyQuery = function (callback) {
-  var datastore = this.datastore;
-
-  // [START keys_only_query]
-  var query = datastore.createQuery()
-    .select('__key__')
-    .limit(1);
-  // [END keys_only_query]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Query.prototype.testDistinctQuery = function (callback) {
-  var datastore = this.datastore;
-
-  // [START distinct_query]
-  var query = datastore.createQuery('Task')
-    .groupBy(['category', 'priority'])
-    .order('category')
-    .order('priority');
-  // [END distinct_query]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Query.prototype.testDistinctOnQuery = function (callback) {
-  var datastore = this.datastore;
-
-  // [START distinct_on_query]
-  var query = datastore.createQuery('Task')
-    .groupBy('category')
-    .order('category')
-    .order('priority');
-  // [END distinct_on_query]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Query.prototype.testArrayValueInequalityRange = function (callback) {
-  var datastore = this.datastore;
-
-  // [START array_value_inequality_range]
-  var query = datastore.createQuery('Task')
-    .filter('tag', '>', 'learn')
-    .filter('tag', '<', 'math');
-  // [END array_value_inequality_range]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Query.prototype.testArrayValueEquality = function (callback) {
-  var datastore = this.datastore;
-
-  // [START array_value_equality]
-  var query = datastore.createQuery('Task')
-    .filter('tag', '=', 'fun')
-    .filter('tag', '=', 'programming');
-  // [END array_value_equality]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Query.prototype.testInequalityRange = function (callback) {
-  var datastore = this.datastore;
-
-  // [START inequality_range]
-  var query = datastore.createQuery('Task')
-    .filter('created', '>', new Date('1990-01-01T00:00:00z'))
-    .filter('created', '<', new Date('2000-12-31T23:59:59z'));
-  // [END inequality_range]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Query.prototype.testInequalityInvalid = function (callback) {
-  var datastore = this.datastore;
-
-  // [START inequality_invalid]
-  var query = datastore.createQuery('Task')
-    .filter('priority', '>', 3)
-    .filter('created', '>', new Date('1990-01-01T00:00:00z'));
-  // [END inequality_invalid]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Query.prototype.testEqualAndInequalityRange = function (callback) {
-  var datastore = this.datastore;
-
-  // [START equal_and_inequality_range]
-  var query = datastore.createQuery('Task')
-    .filter('priority', '=', 4)
-    .filter('done', '=', false)
-    .filter('created', '>', new Date('1990-01-01T00:00:00z'))
-    .filter('created', '<', new Date('2000-12-31T23:59:59z'));
-  // [END equal_and_inequality_range]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Query.prototype.testInequalitySort = function (callback) {
-  var datastore = this.datastore;
-
-  // [START inequality_sort]
-  var query = datastore.createQuery('Task')
-    .filter('priority', '>', 3)
-    .order('priority')
-    .order('created');
-  // [END inequality_sort]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Query.prototype.testInequalitySortInvalidNotSame = function (callback) {
-  var datastore = this.datastore;
-
-  // [START inequality_sort_invalid_not_same]
-  var query = datastore.createQuery('Task')
-    .filter('priority', '>', 3)
-    .order('created');
-  // [END inequality_sort_invalid_not_same]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Query.prototype.testInequalitySortInvalidNotFirst = function (callback) {
-  var datastore = this.datastore;
-
-  // [START inequality_sort_invalid_not_first]
-  var query = datastore.createQuery('Task')
-    .filter('priority', '>', 3)
-    .order('created')
-    .order('priority');
-  // [END inequality_sort_invalid_not_first]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Query.prototype.testLimit = function (callback) {
-  var datastore = this.datastore;
-
-  // [START limit]
-  var query = datastore.createQuery('Task')
-    .limit(5);
-  // [END limit]
-
-  this.datastore.runQuery(query, callback);
-};
-
-Query.prototype.testCursorPaging = function (callback) {
-  var pageSize = 1;
-  var pageCursor = '';
-
-  datastore.createQuery = this.datastore.createQuery;
-
-  // [START cursor_paging]
-  // By default, gcloud-node will automatically paginate through all of the
-  // results that match a query. However, this sample implements manual
-  // pagination using limits and cursor tokens.
-  var query = datastore.createQuery('Task')
-    .limit(pageSize)
-    .start(pageCursor);
-
-  this.datastore.runQuery(query, function (err, results, info) {
-    if (err) {
-      // An error occurred while running the query.
-      return;
-    }
-
-    var nextPageCursor;
-
-    if (info.moreResults !== Datastore.NO_MORE_RESULTS) {
-      // If there are more results to retrieve, the end cursor is
-      // automatically set on `info`. To get this value directly, access
-      // the `endCursor` property.
-      nextPageCursor = info.endCursor;
-    } else {
-      // No more results exist.
-    }
-    console.log('nextPageCursor', nextPageCursor);
-  });
-  // [END cursor_paging]
-
-  delete datastore.createQuery;
-  this.datastore.runQuery(query, function (err, results, info) {
-    if (err) {
-      callback(err);
-      return;
-    }
-
-    if (!info || !info.endCursor) {
-      callback(new Error('An `info` with an `endCursor` is not present.'));
-    } else {
-      callback();
-    }
-  });
-};
-
-Query.prototype.testEventualConsistentQuery = function () {
-  // [START eventual_consistent_query]
-  // Read consistency cannot be specified in gcloud-node.
-  // [END eventual_consistent_query]
-};
-
-// [START transactional_update]
-function transferFunds (fromKey, toKey, amount, callback) {
-  var transaction = datastore.transaction();
-
-  transaction.run(function (err) {
-    if (err) {
-      return callback(err);
-    }
-
-    transaction.get([
-      fromKey,
-      toKey
-    ], function (err, accounts) {
-      if (err) {
-        return transaction.rollback(function (_err) {
-          return callback(_err || err);
-        });
-      }
-
-      accounts[0].data.balance -= amount;
-      accounts[1].data.balance += amount;
-
-      transaction.save(accounts);
-
-      transaction.commit(function (err) {
-        if (err) {
-          return callback(err);
-        }
-
-        // The transaction completed successfully.
-        callback();
-      });
-    });
-  });
-}
-// [END transactional_update]
-
-function Transaction (projectId) {
-  var options = {
-    projectId: projectId
-  };
-
-  this.datastore = Datastore(options);
-
-  this.fromKey = this.datastore.key(['Bank', 1, 'Account', 1]);
-  this.toKey = this.datastore.key(['Bank', 1, 'Account', 2]);
-
-  this.originalBalance = 100;
-  this.amountToTransfer = 10;
-}
-
-Transaction.prototype.restoreBankAccountBalances = function (config, callback) {
-  var saveArray = config.keys.map(function (key) {
-    return {
-      key: key,
-      data: {
-        balance: config.balance
-      }
-    };
-  });
-
-  this.datastore.save(saveArray, callback);
-};
-
-Transaction.prototype.testTransactionalUpdate = function (callback) {
-  var self = this;
-
-  var fromKey = this.fromKey;
-  var toKey = this.toKey;
-  var originalBalance = this.originalBalance;
-  var amountToTransfer = this.amountToTransfer;
-
-  this.restoreBankAccountBalances({
-    keys: [fromKey, toKey],
-    balance: originalBalance
-  }, function (err) {
-    if (err) {
-      callback(err);
-      return;
-    }
-
-    // Overwrite so the real Datastore instance is used in `transferFunds`.
-    var datastoreMock = datastore;
-    datastore = self.datastore;
-
-    transferFunds(fromKey, toKey, amountToTransfer, function (err) {
-      // Restore `datastore` to the mock API.
-      datastore = datastoreMock;
-
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      self.datastore.get([
-        fromKey,
-        toKey
-      ], function (err, accounts) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        var transactionWasSuccessful =
-          accounts[0].data.balance === originalBalance - amountToTransfer &&
-          accounts[1].data.balance === originalBalance + amountToTransfer;
-
-        if (!transactionWasSuccessful) {
-          callback(new Error('Accounts were not updated successfully.'));
-        } else {
-          callback();
-        }
-      });
-    });
-  });
-};
-
-Transaction.prototype.testTransactionalRetry = function (callback) {
-  // Overwrite so the real Datastore instance is used in `transferFunds`.
-  var datastoreMock = datastore;
-  datastore = this.datastore;
-
-  var originalCallback = callback;
-  callback = function () {
-    // Restore `datastore` to the mock API.
-    datastore = datastoreMock;
-    originalCallback.apply(null, arguments);
-  };
-
-  var fromKey = this.fromKey;
-  var toKey = this.toKey;
-
-  this.restoreBankAccountBalances({
-    keys: [fromKey, toKey],
-    balance: this.originalBalance
-  }, function (err) {
-    if (err) {
-      callback(err);
-      return;
-    }
-
-    // [START transactional_retry]
-    var async = require('async');
-
-    function attemptTransfer (callback) {
-      transferFunds(fromKey, toKey, 10, callback);
-    }
-
-    async.retry(5, attemptTransfer, callback);
-    // [END transactional_retry]
-  });
-};
-
-Transaction.prototype.testTransactionalGetOrCreate = function (callback) {
-  var taskKey = this.datastore.key(['Task', Date.now()]);
-
-  // Overwrite so the real Datastore instance is used in `transferFunds`.
-  var datastoreMock = datastore;
-  datastore = this.datastore;
-
-  var originalCallback = callback;
-  callback = function () {
-    // Restore `datastore` to the mock API.
-    datastore = datastoreMock;
-    originalCallback.apply(null, arguments);
-  };
-
-  // [START transactional_get_or_create]
-  function getOrCreate (taskKey, taskData, callback) {
-    var taskEntity = {
-      key: taskKey,
-      data: taskData
-    };
-
-    var transaction = datastore.transaction();
-
-    transaction.run(function (err) {
-      if (err) {
-        return callback(err);
-      }
-
-      transaction.get(taskKey, function (err, task) {
-        if (err) {
-          // An error occurred while getting the values.
-          return transaction.rollback(function (_err) {
-            return callback(_err || err);
-          });
-        }
-
-        if (task) {
-          // The task entity already exists.
-          transaction.rollback(callback);
-        } else {
-          // Create the task entity.
-          transaction.save(taskEntity);
-          transaction.commit(function (err) {
-            if (err) {
-              return callback(err);
-            }
-            // The transaction completed successfully.
-            callback(null, taskEntity);
-          });
-        }
-      });
-    });
-  }
-  // [END transactional_get_or_create]
-
-  asyncUtil.series([
-    // Create:
-    testWithCreateBehavior,
-    // Then try to get it:
-    testWithGetBehavior
-  ], callback);
-
-  function testWithCreateBehavior (callback) {
-    getOrCreate(taskKey, {}, function (err, task) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      if (!task) {
-        return callback(new Error('Entity was not created successfully.'));
-      }
-      callback();
-    });
-  }
-
-  function testWithGetBehavior (callback) {
-    getOrCreate(taskKey, {}, function (err, task) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      if (!task) {
-        return callback(new Error('Entity was not retrieved successfully.'));
-      }
-      callback();
-    });
-  }
-};
-
-Transaction.prototype.testSingleEntityGroupReadOnly = function (callback) {
-  // Overwrite so the real Datastore instance is used in `transferFunds`.
-  var datastoreMock = datastore;
-  datastore = this.datastore;
-
-  var originalCallback = callback;
-  callback = function () {
-    // Restore `datastore` to the mock API.
-    datastore = datastoreMock;
-    originalCallback.apply(null, arguments);
-  };
-
-  // [START transactional_single_entity_group_read_only]
-  function getTaskListEntities (callback) {
-    var taskListEntities;
-
-    var transaction = datastore.transaction();
-
-    transaction.run(function (err) {
-      if (err) {
-        return callback(err);
-      }
-
-      var taskListKey = datastore.key(['TaskList', 'default']);
-
-      datastore.get(taskListKey, function (err) {
-        if (err) {
-          return transaction.rollback(function (_err) {
-            return callback(_err || err);
-          });
-        }
-
-        var query = datastore.createQuery('Task')
-          .hasAncestor(taskListKey);
-
-        datastore.runQuery(query, function (err, entities) {
-          if (err) {
-            // An error occurred while running the query.
-            return transaction.rollback(function (_err) {
-              return callback(_err || err);
-            });
-          }
-
-          taskListEntities = entities;
-          transaction.commit(function (err) {
-            if (err) {
-              return callback(err);
-            }
-
-            // The transaction completed successfully.
-            callback(null, taskListEntities);
-          });
-        });
-      });
-    });
-  }
-  // [END transactional_single_entity_group_read_only]
-
-  getTaskListEntities(function (err, entities) {
-    if (err) {
-      callback(err);
-      return;
-    }
-
-    if (!entities) {
-      return callback(new Error('Entities were not retrieved successfully.'));
-    }
-    callback();
-  });
 };

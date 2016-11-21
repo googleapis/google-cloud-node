@@ -33,15 +33,26 @@ View the [documentation][tasks_docs] or the [source code][tasks_code].
 
 __Run the sample:__
 
-Usage: `node tasks <command> [args]...`
+Usage: `node tasks.js <command> [args]...`
 
-Print usage:
+```
+Commands:
+  new <description>  Adds a task with a description <description>.
+  done <taskId>      Marks the specified task as done.
+  list               Lists all tasks ordered by creation time.
+  delete <taskId>    Deletes a task.
 
-    node tasks
+Options:
+  --help  Show help                                       [boolean]
 
-Example:
+Examples:
+  node tasks.js new "Buy milk"  Adds a task with description "Buy milk".
+  node tasks.js done 12345      Marks task 12345 as Done.
+  node tasks.js list            Lists all tasks ordered by creation time
+  node tasks.js delete 12345    Deletes task 12345.
 
-    node tasks list
+For more information, see https://cloud.google.com/datastore/docs
+```
 
 [tasks_docs]: https://cloud.google.com/datastore/docs/datastore-api-tutorial
 [tasks_code]: tasks.js

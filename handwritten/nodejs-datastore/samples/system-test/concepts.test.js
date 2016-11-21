@@ -1,36 +1,40 @@
-// Copyright 2015, Google, Inc.
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Copyright 2016, Google, Inc.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 
 'use strict';
 
-var testUtil = require('./util');
-var concepts = require('../concepts');
+const assert = require(`power-assert`);
+const concepts = require(`../concepts`);
 
-var transaction;
-var metadata;
-var index;
-var query;
-var entity;
+let transaction;
+let metadata;
+let index;
+let query;
+let entity;
 
-var Transaction = concepts.Transaction;
-var Metadata = concepts.Metadata;
-var Index = concepts.Index;
-var Entity = concepts.Entity;
-var Query = concepts.Query;
+const Transaction = concepts.Transaction;
+const Metadata = concepts.Metadata;
+const Index = concepts.Index;
+const Entity = concepts.Entity;
+const Query = concepts.Query;
 
-describe('datastore:concepts', function () {
-  before(function () {
-    var projectId = process.env.GCLOUD_PROJECT || 'nodejs-docs-samples';
+describe(`datastore:concepts`, () => {
+  before(() => {
+    const projectId = process.env.GCLOUD_PROJECT;
+    assert.equal(!!projectId, true, `You must set the GCLOUD_PROJECT env var!`);
     transaction = new Transaction(projectId);
     metadata = new Metadata(projectId);
     index = new Index(projectId);
@@ -38,245 +42,108 @@ describe('datastore:concepts', function () {
     query = new Query(projectId);
   });
 
-  after(function (done) {
-    var datastore = transaction.datastore;
-    var query = datastore.createQuery('Task');
-
-    testUtil.deleteEntities(datastore, query, done);
+  after(() => {
+    const datastore = transaction.datastore;
+    const query = datastore.createQuery(`Task`).select(`__key__`);
+    return datastore.runQuery(query)
+      .then((results) => datastore.delete(results[0].map((entity) => entity[datastore.KEY])));
   });
 
-  // Transactions
-
-  it('performs a transactional update', function (done) {
-    transaction.testTransactionalUpdate(done);
+  describe(`Transactions`, () => {
+    it(`performs a transactional update`, () => transaction.testTransactionalUpdate());
+    it(`performs retries if necessary`, () => transaction.testTransactionalRetry());
+    it(`performs a get or create`, () => transaction.testTransactionalGetOrCreate());
+    it(`gets a snapshot of task list entities`, () => transaction.testSingleEntityGroupReadOnly());
   });
 
-  it('performs retries if necessary', function (done) {
-    transaction.testTransactionalRetry(done);
+  describe(`Metadata`, () => {
+    it(`performs a namespace query`, () => metadata.testNamespaceRunQuery());
+    it(`performs a kind query`, () => metadata.testKindRunQuery());
+    it(`performs a property query`, () => metadata.testPropertyRunQuery());
+    it(`performs a property by kind query`, () => metadata.testPropertyByKindRunQuery());
   });
 
-  it('performs a get or create', function (done) {
-    transaction.testTransactionalGetOrCreate(done);
+  describe(`Indexes`, () => {
+    it(`performs a query with a filter on an unindexed property`, () => index.testUnindexedPropertyQuery());
+    it(`inserts arrays of data`, () => index.testExplodingProperties());
   });
 
-  it('gets a snapshot of task list entities', function (done) {
-    transaction.testSingleEntityGroupReadOnly(done);
-  });
-
-  // Metadata
-
-  it('performs a namespace query', function (done) {
-    metadata.testNamespaceRunQuery(done);
-  });
-
-  it('performs a kind query', function (done) {
-    metadata.testKindRunQuery(done);
-  });
-
-  it('performs a property query', function (done) {
-    metadata.testPropertyRunQuery(done);
-  });
-
-  it('performs a property by kind query', function (done) {
-    metadata.testPropertyByKindRunQuery(done);
-  });
-
-  // Indexes
-
-  it(
-    'performs a query with a filter on an unindexed property',
-    function (done) {
-      index.testUnindexedPropertyQuery(done);
-    }
-  );
-
-  it('inserts arrays of data', function (done) {
-    index.testExplodingProperties(done);
-  });
-
-  // Queries
-
-  it('performs a basic query', function (done) {
-    query.testRunQuery(done);
-  });
-
-  it('performs a query with a property filter', function (done) {
-    query.testPropertyFilter(done);
-  });
-
-  it('performs a query with a composite filter', function (done) {
-    query.testCompositeFilter(done);
-  });
-
-  it('performs a query with a key filter', function (done) {
-    query.testKeyFilter(done);
-  });
-
-  it('performs a query with ascending sort', function (done) {
-    query.testAscendingSort(done);
-  });
-
-  it('performs a query with descending sort', function (done) {
-    query.testDescendingSort(done);
-  });
-
-  it('performs a query with multi sort', function (done) {
-    query.testMultiSort(done);
-  });
-
-  it('performs a kindless query', function (done) {
-    query.testKindlessQuery(done);
-  });
-
-  it('performs a projection query', function (done) {
-    entity.testProperties(function (err, tasks) {
-      console.log(err, tasks);
-      assert.ifError(err);
-      setTimeout(function () {
-        query.testRunQueryProjection(done);
-      }, 1000);
+  describe(`Queries`, () => {
+    it(`performs a basic query`, () => query.testRunQuery());
+    it(`performs a query with a property filter`, () => query.testPropertyFilter());
+    it(`performs a query with a composite filter`, () => query.testCompositeFilter());
+    it(`performs a query with a key filter`, () => query.testKeyFilter());
+    it(`performs a query with ascending sort`, () => query.testAscendingSort());
+    it(`performs a query with descending sort`, () => query.testDescendingSort());
+    it(`performs a query with multi sort`, () => query.testMultiSort());
+    it(`performs a kindless query`, () => query.testKindlessQuery());
+    it('performs a projection query', () => {
+      return entity.testProperties()
+        .then(() => {
+          return new Promise((resolve, reject) => {
+            setTimeout(function () {
+              query.testRunQueryProjection().then(resolve, reject);
+            }, 1000);
+          });
+        })
+        .then((results) => {
+          assert.deepEqual(results, {
+            priorities: [4],
+            percentCompletes: [10]
+          });
+        });
     });
-  });
-
-  it('performs a keys only query', function (done) {
-    query.testKeysOnlyQuery(done);
-  });
-
-  it('performs a distinct query', function (done) {
-    query.testDistinctQuery(done);
-  });
-
-  it('performs a distinct on query', function (done) {
-    query.testDistinctOnQuery(done);
-  });
-
-  it('performs an array value inequality query', function (done) {
-    query.testArrayValueInequalityRange(done);
-  });
-
-  it('performs an array value equality query', function (done) {
-    query.testArrayValueEquality(done);
-  });
-
-  it('performs an inequality range query', function (done) {
-    query.testInequalityRange(done);
-  });
-
-  it('returns an error from an invalid query', function (done) {
-    query.testInequalityInvalid(function (err) {
-      assert(err);
-      done();
+    it(`performs a keys only query`, () => query.testKeysOnlyQuery());
+    it(`performs a distinct query`, () => query.testDistinctQuery());
+    it(`performs a distinct on query`, () => query.testDistinctOnQuery());
+    it(`performs an array value inequality query`, () => query.testArrayValueInequalityRange());
+    it(`performs an array value equality query`, () => query.testArrayValueEquality());
+    it(`performs an inequality range query`, () => query.testInequalityRange());
+    it(`returns an error from an invalid query`, () => {
+      return query.testInequalityInvalid()
+        .then(() => assert.fail(), (err) => assert(err));
     });
-  });
-
-  it('performs an equal and inequality range query', function (done) {
-    query.testEqualAndInequalityRange(done);
-  });
-
-  it('performs an equality sort query', function (done) {
-    query.testInequalitySort(done);
-  });
-
-  it(
-    'returns an error when not sorted on filtered property',
-    function (done) {
-      query.testInequalitySortInvalidNotSame(function (err) {
-        assert(err);
-        done();
-      });
-    }
-  );
-
-  it(
-    'returns an error when not sorted on first filter prop',
-    function (done) {
-      query.testInequalitySortInvalidNotFirst(function (err) {
-        assert(err);
-        done();
-      });
-    }
-  );
-
-  it('performs a query with a limit', function (done) {
-    query.testLimit(done);
-  });
-
-  it('allows manual pagination through results', function (done) {
-    entity.testBatchUpsert(function (err) {
-      assert.ifError(err);
-      setTimeout(function () {
-        query.testCursorPaging(done);
-      }, 1000);
+    it(`performs an equal and inequality range query`, () => query.testEqualAndInequalityRange());
+    it(`performs an equality sort query`, () => query.testInequalitySort());
+    it(`returns an error when not sorted on filtered property`, () => {
+      return query.testInequalitySortInvalidNotSame()
+        .then(() => assert.fail(), (err) => assert(err));
     });
+    it(`returns an error when not sorted on first filter prop`, () => {
+      return query.testInequalitySortInvalidNotFirst()
+        .then(() => assert.fail(), (err) => assert(err));
+    });
+    it(`performs a query with a limit`, () => query.testLimit());
+    it(`allows manual pagination through results`, () => {
+      return entity.testBatchUpsert()
+        .then(() => {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              query.testCursorPaging()
+                .then(resolve, reject);
+            }, 1000);
+          });
+        });
+    });
+    it(`performs an ancestor query`, () => query.testEventualConsistentQuery());
   });
 
-  it.skip('performs an ancestor query', function (done) {
-    query.testEventualConsistentQuery(done);
-  });
-
-  // Entities
-
-  it('saves with an incomplete key', function (done) {
-    entity.testIncompleteKey(done);
-  });
-
-  it('saves with a named key', function (done) {
-    entity.testNamedKey(done);
-  });
-
-  it('saves a key with a parent', function (done) {
-    entity.testKeyWithParent(done);
-  });
-
-  it('saves a key with multiple parents', function (done) {
-    entity.testKeyWithMultiLevelParent(done);
-  });
-
-  it('saves an entity with a parent', function (done) {
-    entity.testEntityWithParent(done);
-  });
-
-  it('saves an entity with properties', function (done) {
-    entity.testProperties(done);
-  });
-
-  it('saves an entity with arrays', function (done) {
-    entity.testArrayValue(done);
-  });
-
-  it('saves a basic entity', function (done) {
-    entity.testBasicEntity(done);
-  });
-
-  it('saves with an upsert', function (done) {
-    entity.testUpsert(done);
-  });
-
-  it('saves with an insert', function (done) {
-    entity.testInsert(done);
-  });
-
-  it('performs a lookup', function (done) {
-    entity.testLookup(done);
-  });
-
-  it('saves with an update', function (done) {
-    entity.testUpdate(done);
-  });
-
-  it('deletes an entity', function (done) {
-    entity.testDelete(done);
-  });
-
-  it('performs a batch upsert', function (done) {
-    entity.testBatchUpsert(done);
-  });
-
-  it('performs a batch lookup', function (done) {
-    entity.testBatchLookup(done);
-  });
-
-  it('performs a batch delete', function (done) {
-    entity.testBatchDelete(done);
+  describe(`Entities`, () => {
+    it(`saves with an incomplete key`, () => entity.testIncompleteKey());
+    it(`saves with a named key`, () => entity.testNamedKey());
+    it(`saves a key with a parent`, () => entity.testKeyWithParent());
+    it(`saves a key with multiple parents`, () => entity.testKeyWithMultiLevelParent());
+    it(`saves an entity with a parent`, () => entity.testEntityWithParent());
+    it(`saves an entity with properties`, () => entity.testProperties());
+    it(`saves an entity with arrays`, () => entity.testArrayValue());
+    it(`saves a basic entity`, () => entity.testBasicEntity());
+    it(`saves with an upsert`, () => entity.testUpsert());
+    it(`saves with an insert`, () => entity.testInsert());
+    it(`performs a lookup`, () => entity.testLookup());
+    it(`saves with an update`, () => entity.testUpdate());
+    it(`deletes an entity`, () => entity.testDelete());
+    it(`performs a batch upsert`, () => entity.testBatchUpsert());
+    it(`performs a batch lookup`, () => entity.testBatchLookup());
+    it(`performs a batch delete`, () => entity.testBatchDelete());
   });
 });

@@ -5,16 +5,11 @@
   "license": "Apache Version 2.0",
   "author": "Google Inc.",
   "scripts": {
-    "test": "mocha -R spec -t 120000 --require intelli-espower-loader ../test/_setup.js test/*.test.js",
-    "system-test": "mocha -R spec -t 120000 --require intelli-espower-loader ../system-test/_setup.js system-test/*.test.js"
+    "test": "cd ..; npm run st -- datastore/system-test/*.test.js"
   },
   "dependencies": {
-    "@google-cloud/datastore": "^0.1.1",
-    "async": "^2.0.1",
-    "yargs": "^5.0.0"
-  },
-  "devDependencies": {
-    "mocha": "^3.0.2"
+    "@google-cloud/datastore": "^0.5.0",
+    "yargs": "^6.4.0"
   },
   "engines": {
     "node": ">=4.3.2"
