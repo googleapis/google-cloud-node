@@ -31,30 +31,30 @@ Learning API.
 
 View the [documentation][analyze_docs] or the [source code][analyze_code].
 
-__Usage:__ `node analyze --help`
+__Usage:__ `node analyze.js --help`
 
 ```
 Commands:
-  sentimentOfText <text>               Detect the sentiment of a block of text.
-  sentimentInFile <bucket> <filename>  Detect the sentiment of text in a GCS file.
-  entitiesOfText <text>                Detect the entities of a block of text.
-  entitiesInFile <bucket> <filename>   Detect the entities of text in a GCS file.
-  syntaxOfText <text>                  Detect the syntax of a block of text.
-  syntaxInFile <bucket> <filename>     Detect the syntax of text in a GCS file.
+  sentiment-text <text>               Detects sentiment of a string.
+  sentiment-file <bucket> <filename>  Detects sentiment in a file in Google Cloud Storage.
+  entities-text <text>                Detects entities in a string.
+  entities-file <bucket> <filename>   Detects entities in a file in Google Cloud Storage.
+  syntax-text <text>                  Detects syntax of a string.
+  syntax-file <bucket> <filename>     Detects syntax in a file in Google Cloud Storage.
 
 Options:
   --help  Show help                                                    [boolean]
 
 Examples:
-  node analyze sentimentOfText "President Obama is speaking at
+  node analyze.js sentiment-text "President Obama is speaking
+  at the White House."
+  node analyze.js sentiment-file my-bucket file.txt             Detects sentiment in gs://my-bucket/file.txt
+  node analyze.js entities-text "President Obama is speaking
+  at the White House."
+  node analyze.js entities-file my-bucket file.txt              Detects entities in gs://my-bucket/file.txt
+  node analyze.js syntax-text "President Obama is speaking at
   the White House."
-  node analyze sentimentInFile my-bucket file.txt
-  node analyze entitiesOfText "President Obama is speaking at
-  the White House."
-  node analyze entitiesInFile my-bucket file.txt
-  node analyze syntaxOfText "President Obama is speaking at
-  the White House."
-  node analyze syntaxInFile my-bucket file.txt
+  node analyze.js syntax-file my-bucket file.txt                Detects syntax in gs://my-bucket/file.txt
 
 For more information, see https://cloud.google.com/natural-language/docs
 ```
