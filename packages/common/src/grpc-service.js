@@ -342,6 +342,15 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
     return stream;
   }
 
+  try {
+    reqOpts = util.decorateRequest(reqOpts, { projectId: this.projectId });
+  } catch (e) {
+    setImmediate(function() {
+      stream.destroy(e);
+    });
+    return stream;
+  }
+
   var objectMode = !!reqOpts.objectMode;
   delete reqOpts.objectMode;
 
@@ -358,13 +367,6 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
     shouldRetryFn: GrpcService.shouldRetryRequest_,
 
     request: function() {
-      try {
-        reqOpts = util.decorateRequest(reqOpts, { projectId: self.projectId });
-      } catch (e) {
-        stream.destroy(e);
-        return;
-      }
-
       return service[protoOpts.method](reqOpts, self.grpcMetadata, grpcOpts)
         .on('metadata', function() {
           // retry-request requires a server response before it starts emitting
@@ -431,7 +433,7 @@ GrpcService.prototype.requestWritableStream = function(protoOpts, reqOpts) {
   }
 
   try {
-    reqOpts = util.decorateRequest(reqOpts, { projectId: self.projectId });
+    reqOpts = util.decorateRequest(reqOpts, { projectId: this.projectId });
   } catch (e) {
     setImmediate(function() {
       stream.destroy(e);
