@@ -86,7 +86,7 @@ var levelNames = Object.keys(levels);
 /**
  * @typedef {object} OptionsObject
  * @property {string=} logName - The name of the log that will receive
- *     messages written to this stream (default: 'winston_log').
+ *     messages written to this transport (default: 'winston_log').
  * @property {object=} levels - Custom logging levels as supported by winston.
  *     We use this list of levels to translate your log level to the Stackdriver
  *     Logging level. Each property should have an integer value between 0 (most 
@@ -94,7 +94,7 @@ var levelNames = Object.keys(levels);
  *     winston logger, you should provide the same list here.
  * @property {object=} level - Default log level for the transport. Winston
  *     will filter messages with a severity lower than this.
- * @property {object=} resource - The monitored resource that the stream
+ * @property {object=} resource - The monitored resource that the transport
  *     corresponds to. On Google Cloud Platform we infer this automatically, but
  *     you may optionally specify a specific monitored resource. For more
  *     information see the [official documentation]{@link
@@ -121,7 +121,7 @@ var levelNames = Object.keys(levels);
  */
 
 /**
- * Constructs a new object which can be used as a Winston stream.
+ * Constructs a new object which can be used as a Winston transport.
  * @param {OptionsObject=} options - optional configuration object.
  * @constructor
  */
