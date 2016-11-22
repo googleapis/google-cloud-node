@@ -611,6 +611,12 @@ AclRoleAccessorMethods.prototype._assignAccessMethods = function(role) {
           role: role
         }, callback);
       };
+
+      var originalMethod = acc[method];
+
+      if (!originalMethod.promisified_) {
+        acc[method] = common.util.promisify(originalMethod);
+      }
     });
 
     return acc;
