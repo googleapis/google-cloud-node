@@ -315,36 +315,38 @@ describe('Logging', function() {
     });
 
     it('should write multiple entries to a log', function(done) {
-      log.write(logEntries, options, function(err) {
-        assert.ifError(err);
-
-        setTimeout(function() {
-          log.getEntries({
-            pageSize: logEntries.length
-          }, function(err, entries) {
-            assert.ifError(err);
-
-            assert.deepEqual(entries.map(prop('data')).reverse(), [
-              'log entry 1',
-              {
-                delegate: 'my_username'
-              },
-              {
-                nonValue: null,
-                boolValue: true,
-                arrayValue: [ 1, 2, 3 ]
-              },
-              {
-                nested: {
-                  delegate: 'my_username'
-                }
-              }
-            ]);
-
-            done();
-          });
-        }, WRITE_CONSISTENCY_DELAY_MS);
+      logEntries.forEach(function(entry) {
+        log.write(entry, options, function(err) {
+          assert.ifError(err);
+        });
       });
+
+      setTimeout(function() {
+        log.getEntries({
+          pageSize: logEntries.length
+        }, function(err, entries) {
+          assert.ifError(err);
+
+          assert.deepEqual(entries.map(prop('data')).reverse(), [
+            'log entry 1',
+            {
+              delegate: 'my_username'
+            },
+            {
+              nonValue: null,
+              boolValue: true,
+              arrayValue: [ 1, 2, 3 ]
+            },
+            {
+              nested: {
+                delegate: 'my_username'
+              }
+            }
+          ]);
+
+          done();
+        });
+      }, WRITE_CONSISTENCY_DELAY_MS);
     });
 
     it('should write an entry with primitive values', function(done) {
