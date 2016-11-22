@@ -21,7 +21,6 @@
 'use strict';
 
 var arrify = require('arrify');
-var duplexify = require('duplexify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var format = require('string-format-obj');
@@ -94,19 +93,8 @@ function Logging(options) {
   };
 
   common.GrpcService.call(this, config, options);
-  var requestStream = duplexify();
-  common.util.makeRequest({
-    url: 'http://metadata.google.internal/computeMetadata/v1/project/' +
-      'project-id',
-    headers: {
-      'Metadata-Flavor': 'Google'
-    }
-  },
-  {
-    stream: requestStream,
-    method: 'GET'
-  });
-  this.metadata = new Metadata(requestStream, this.projectId);
+
+  this.metadata_ = new Metadata(this);
 }
 
 util.inherits(Logging, common.GrpcService);
