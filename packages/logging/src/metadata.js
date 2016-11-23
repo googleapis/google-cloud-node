@@ -146,7 +146,7 @@ Metadata.prototype.getDefaultResource = function(callback) {
       return;
     }
 
-    self.logging.authClient.determineEnvironment(function(err, env) {
+    self.logging.authClient.getEnvironment(function(err, env) {
       var defaultResource;
 
       if (env.IS_APP_ENGINE) {
