@@ -315,38 +315,62 @@ describe('Logging', function() {
     });
 
     it('should write multiple entries to a log', function(done) {
-      logEntries.forEach(function(entry) {
-        log.write(entry, options, function(err) {
-          assert.ifError(err);
-        });
+      log.write(logEntries, options, function(err) {
+        assert.ifError(err);
+
+        setTimeout(function() {
+          log.getEntries({
+            pageSize: logEntries.length
+          }, function(err, entries) {
+            assert.ifError(err);
+
+            assert.deepEqual(entries.map(prop('data')).reverse(), [
+              'log entry 1',
+              {
+                delegate: 'my_username'
+              },
+              {
+                nonValue: null,
+                boolValue: true,
+                arrayValue: [ 1, 2, 3 ]
+              },
+              {
+                nested: {
+                  delegate: 'my_username'
+                }
+              }
+            ]);
+
+            done();
+          });
+        }, WRITE_CONSISTENCY_DELAY_MS);
       });
+    });
+
+    it('should preserve order of entries', function(done) {
+      var logEntries = [
+        log.entry('1')
+      ];
 
       setTimeout(function() {
-        log.getEntries({
-          pageSize: logEntries.length
-        }, function(err, entries) {
+        logEntries.push(log.entry('2'));
+
+        log.write([logEntries[1], logEntries[0]], options, function(err) {
           assert.ifError(err);
 
-          assert.deepEqual(entries.map(prop('data')).reverse(), [
-            'log entry 1',
-            {
-              delegate: 'my_username'
-            },
-            {
-              nonValue: null,
-              boolValue: true,
-              arrayValue: [ 1, 2, 3 ]
-            },
-            {
-              nested: {
-                delegate: 'my_username'
-              }
-            }
-          ]);
+          setTimeout(function() {
+            log.getEntries({
+              pageSize: 2
+            }, function(err, entries) {
+              assert.ifError(err);
 
-          done();
+              assert.deepEqual(entries.map(prop('data')), [ '2', '1' ]);
+
+              done();
+            });
+          }, WRITE_CONSISTENCY_DELAY_MS);
         });
-      }, WRITE_CONSISTENCY_DELAY_MS);
+      }, 1000);
     });
 
     it('should write an entry with primitive values', function(done) {

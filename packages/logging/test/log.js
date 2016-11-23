@@ -138,15 +138,24 @@ describe('Log', function() {
     var SEVERITY = 'severity';
 
     it('should assign severity to a single entry', function() {
-      assert.deepEqual(Log.assignSeverityToEntries_(ENTRIES[0], SEVERITY)
-                           .map(prop('metadata')),
-                       [{severity: SEVERITY}]);
+      assert.deepEqual(
+        Log.assignSeverityToEntries_(ENTRIES[0], SEVERITY)
+          .map(prop('metadata'))
+          .map(prop('severity')),
+        [ SEVERITY ]
+      );
     });
 
     it('should assign severity property to multiple entries', function() {
       assert.deepEqual(
-          Log.assignSeverityToEntries_(ENTRIES, SEVERITY).map(prop('metadata')),
-          [{severity: SEVERITY}, {severity: SEVERITY}]);
+        Log.assignSeverityToEntries_(ENTRIES, SEVERITY)
+          .map(prop('metadata'))
+          .map(prop('severity')),
+        [
+          SEVERITY,
+          SEVERITY
+        ]
+      );
     });
 
     it('should not affect original array', function() {

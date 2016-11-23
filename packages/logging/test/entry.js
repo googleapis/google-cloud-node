@@ -44,8 +44,23 @@ describe('Entry', function() {
   });
 
   describe('instantiation', function() {
-    it('should localize metadata and data', function() {
-      assert.strictEqual(entry.metadata, METADATA);
+    it('should assign timestamp to metadata', function() {
+      assert.deepEqual(entry.metadata, extend({
+        timestamp: new Date()
+      }, METADATA));
+    });
+
+    it('should not assign timestamp if one is already set', function() {
+      var timestamp = new Date('2012');
+
+      var entry = new Entry({
+        timestamp: timestamp
+      });
+
+      assert.strictEqual(entry.metadata.timestamp, timestamp);
+    });
+
+    it('should localize data', function() {
       assert.strictEqual(entry.data, DATA);
     });
   });
