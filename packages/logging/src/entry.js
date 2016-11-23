@@ -83,7 +83,10 @@ var isCircular = require('is-circular');
  * });
  */
 function Entry(metadata, data) {
-  this.metadata = metadata;
+  this.metadata = extend({
+    timestamp: new Date()
+  }, metadata);
+
   this.data = data;
 }
 

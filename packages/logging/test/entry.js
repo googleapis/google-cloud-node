@@ -44,8 +44,29 @@ describe('Entry', function() {
   });
 
   describe('instantiation', function() {
-    it('should localize metadata and data', function() {
-      assert.strictEqual(entry.metadata, METADATA);
+    it('should assign timestamp to metadata', function() {
+      var now = new Date();
+
+      var expectedTimestampBoundaries = {
+        start: new Date(now.getTime() - 1000),
+        end: new Date(now.getTime() + 1000)
+      };
+
+      assert(entry.metadata.timestamp >= expectedTimestampBoundaries.start);
+      assert(entry.metadata.timestamp <= expectedTimestampBoundaries.end);
+    });
+
+    it('should not assign timestamp if one is already set', function() {
+      var timestamp = new Date('2012');
+
+      var entry = new Entry({
+        timestamp: timestamp
+      });
+
+      assert.strictEqual(entry.metadata.timestamp, timestamp);
+    });
+
+    it('should localize data', function() {
       assert.strictEqual(entry.data, DATA);
     });
   });
