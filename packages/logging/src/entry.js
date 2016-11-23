@@ -85,6 +85,7 @@ var isCircular = require('is-circular');
 function Entry(metadata, data) {
   this.metadata = metadata;
   this.data = data;
+  this.timestamp = new Date();
 }
 
 /**
