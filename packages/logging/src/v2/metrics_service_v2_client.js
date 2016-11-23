@@ -37,7 +37,6 @@ var DEFAULT_SERVICE_PORT = 443;
 
 var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
 
-
 var PAGE_DESCRIPTORS = {
   listLogMetrics: new gax.PageDescriptor(
       'pageToken',
@@ -62,17 +61,17 @@ var ALL_SCOPES = [
  *
  * This will be created through a builder function which can be obtained by the module.
  * See the following example of how to initialize the module and how to access to the builder.
- * @see {@link metricsServiceV2Api}
+ * @see {@link metricsServiceV2Client}
  *
  * @example
  * var loggingV2 = require('@google-cloud/logging').v2({
  *   // optional auth parameters.
  * });
- * var api = loggingV2.metricsServiceV2Api();
+ * var client = loggingV2.metricsServiceV2Client();
  *
  * @class
  */
-function MetricsServiceV2Api(gaxGrpc, grpcClients, opts) {
+function MetricsServiceV2Client(gaxGrpc, grpcClients, opts) {
   opts = opts || {};
   var servicePath = opts.servicePath || SERVICE_ADDRESS;
   var port = opts.port || DEFAULT_SERVICE_PORT;
@@ -91,8 +90,6 @@ function MetricsServiceV2Api(gaxGrpc, grpcClients, opts) {
       'google.logging.v2.MetricsServiceV2',
       configData,
       clientConfig,
-      PAGE_DESCRIPTORS,
-      null,
       {'x-goog-api-client': googleApiClient});
 
   var metricsServiceV2Stub = gaxGrpc.createStub(
@@ -112,7 +109,8 @@ function MetricsServiceV2Api(gaxGrpc, grpcClients, opts) {
       metricsServiceV2Stub.then(function(metricsServiceV2Stub) {
         return metricsServiceV2Stub[methodName].bind(metricsServiceV2Stub);
       }),
-      defaults[methodName]);
+      defaults[methodName],
+      PAGE_DESCRIPTORS[methodName]);
   }.bind(this));
 }
 
@@ -129,7 +127,7 @@ var METRIC_PATH_TEMPLATE = new gax.PathTemplate(
  * @param {String} project
  * @returns {String}
  */
-MetricsServiceV2Api.prototype.parentPath = function(project) {
+MetricsServiceV2Client.prototype.parentPath = function(project) {
   return PARENT_PATH_TEMPLATE.render({
     project: project
   });
@@ -141,7 +139,7 @@ MetricsServiceV2Api.prototype.parentPath = function(project) {
  *   A fully-qualified path representing a parent resources.
  * @returns {String} - A string representing the project.
  */
-MetricsServiceV2Api.prototype.matchProjectFromParentName = function(parentName) {
+MetricsServiceV2Client.prototype.matchProjectFromParentName = function(parentName) {
   return PARENT_PATH_TEMPLATE.match(parentName).project;
 };
 
@@ -151,7 +149,7 @@ MetricsServiceV2Api.prototype.matchProjectFromParentName = function(parentName) 
  * @param {String} metric
  * @returns {String}
  */
-MetricsServiceV2Api.prototype.metricPath = function(project, metric) {
+MetricsServiceV2Client.prototype.metricPath = function(project, metric) {
   return METRIC_PATH_TEMPLATE.render({
     project: project,
     metric: metric
@@ -164,7 +162,7 @@ MetricsServiceV2Api.prototype.metricPath = function(project, metric) {
  *   A fully-qualified path representing a metric resources.
  * @returns {String} - A string representing the project.
  */
-MetricsServiceV2Api.prototype.matchProjectFromMetricName = function(metricName) {
+MetricsServiceV2Client.prototype.matchProjectFromMetricName = function(metricName) {
   return METRIC_PATH_TEMPLATE.match(metricName).project;
 };
 
@@ -174,7 +172,7 @@ MetricsServiceV2Api.prototype.matchProjectFromMetricName = function(metricName) 
  *   A fully-qualified path representing a metric resources.
  * @returns {String} - A string representing the metric.
  */
-MetricsServiceV2Api.prototype.matchMetricFromMetricName = function(metricName) {
+MetricsServiceV2Client.prototype.matchMetricFromMetricName = function(metricName) {
   return METRIC_PATH_TEMPLATE.match(metricName).metric;
 };
 
@@ -186,8 +184,9 @@ MetricsServiceV2Api.prototype.matchMetricFromMetricName = function(metricName) {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. The resource name containing the metrics.
- *   Example: `"projects/my-project-id"`.
+ *   Required. The name of the project containing the metrics:
+ *
+ *       "projects/[PROJECT_ID]"
  * @param {number=} request.pageSize
  *   The maximum number of resources contained in the underlying API
  *   response. If page streaming is performed per-resource, this
@@ -197,42 +196,64 @@ MetricsServiceV2Api.prototype.matchMetricFromMetricName = function(metricName) {
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
- * @param {function(?Error, ?Object, ?string)=} callback
- *   When specified, the results are not streamed but this callback
- *   will be called with the response object representing [ListLogMetricsResponse]{@link ListLogMetricsResponse}.
- *   The third item will be set if the response contains the token for the further results
- *   and can be reused to `pageToken` field in the options in the next request.
- * @returns {Stream|Promise}
- *   An object stream which emits an object representing
- *   [LogMetric]{@link LogMetric} on 'data' event.
- *   When the callback is specified or streaming is suppressed through options,
- *   it will return a promise that resolves to the response object. The promise
- *   has a method named "cancel" which cancels the ongoing API call.
+ * @param {function(?Error, ?Array, ?Object, ?Object)=} callback
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is Array of [LogMetric]{@link LogMetric}.
+ *
+ *   When autoPaginate: false is specified through options, it contains the result
+ *   in a single response. If the response indicates the next page exists, the third
+ *   parameter is set to be used for the next request object. The fourth parameter keeps
+ *   the raw response object of an object representing [ListLogMetricsResponse]{@link ListLogMetricsResponse}.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of [LogMetric]{@link LogMetric}.
+ *
+ *   When autoPaginate: false is specified through options, the array has three elements.
+ *   The first element is Array of [LogMetric]{@link LogMetric} in a single response.
+ *   The second element is the next request object if the response
+ *   indicates the next page exists, or null. The third element is
+ *   an object representing [ListLogMetricsResponse]{@link ListLogMetricsResponse}.
+ *
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = loggingV2.metricsServiceV2Api();
- * var formattedParent = api.parentPath("[PROJECT]");
+ * var client = loggingV2.metricsServiceV2Client();
+ * var formattedParent = client.parentPath("[PROJECT]");
  * // Iterate over all elements.
- * api.listLogMetrics({parent: formattedParent}).on('data', function(element) {
- *     // doThingsWith(element)
+ * client.listLogMetrics({parent: formattedParent}).then(function(responses) {
+ *     var resources = responses[0];
+ *     for (var i = 0; i < resources.length; ++i) {
+ *         // doThingsWith(resources[i])
+ *     }
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  *
- * // Or obtain the paged response through the callback.
- * function callback(err, response, nextPageToken) {
- *     if (err) {
- *         console.error(err);
- *         return;
+ * // Or obtain the paged response.
+ * var options = {autoPaginate: false};
+ * function callback(responses) {
+ *     // The actual resources in a response.
+ *     var resources = responses[0];
+ *     // The next request if the response shows there's more responses.
+ *     var nextRequest = responses[1];
+ *     // The actual response object, if necessary.
+ *     // var rawResponse = responses[2];
+ *     for (var i = 0; i < resources.length; ++i) {
+ *         // doThingsWith(resources[i]);
  *     }
- *     // doThingsWith(response)
- *     if (nextPageToken) {
- *         // fetch the next page.
- *         api.listLogMetrics({parent: formattedParent}, {pageToken: nextPageToken}, callback);
+ *     if (nextRequest) {
+ *         // Fetch the next page.
+ *         return client.listLogMetrics(nextRequest, options).then(callback);
  *     }
  * }
- * api.listLogMetrics({parent: formattedParent}, {flattenPages: false}, callback);
+ * client.listLogMetrics({parent: formattedParent}, options)
+ *     .then(callback)
+ *     .catch(function(err) {
+ *         console.error(err);
+ *     });
  */
-MetricsServiceV2Api.prototype.listLogMetrics = function(request, options, callback) {
+MetricsServiceV2Client.prototype.listLogMetrics = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -240,7 +261,57 @@ MetricsServiceV2Api.prototype.listLogMetrics = function(request, options, callba
   if (options === undefined) {
     options = {};
   }
+
   return this._listLogMetrics(request, options, callback);
+};
+
+/**
+ * Equivalent to {@link listLogMetrics}, but returns a NodeJS Stream object.
+ *
+ * This fetches the paged responses for {@link listLogMetrics} continuously
+ * and invokes the callback registered for 'data' event for each element in the
+ * responses.
+ *
+ * The returned object has 'end' method when no more elements are required.
+ *
+ * autoPaginate option will be ignored.
+ *
+ * @see {@link https://nodejs.org/api/stream.html}
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The name of the project containing the metrics:
+ *
+ *       "projects/[PROJECT_ID]"
+ * @param {number=} request.pageSize
+ *   The maximum number of resources contained in the underlying API
+ *   response. If page streaming is performed per-resource, this
+ *   parameter does not affect the return value. If page streaming is
+ *   performed per-page, this determines the maximum number of
+ *   resources in a page.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ * @return {Stream}
+ *   An object stream which emits an object representing [LogMetric]{@link LogMetric} on 'data' event.
+ *
+ * @example
+ *
+ * var client = loggingV2.metricsServiceV2Client();
+ * var formattedParent = client.parentPath("[PROJECT]");
+ * client.listLogMetricsStream({parent: formattedParent}).on('data', function(element) {
+ *     // doThingsWith(element)
+ * }).on('error', funciton(err) {
+ *     console.error(err);
+ * });
+ */
+MetricsServiceV2Client.prototype.listLogMetricsStream = function(request, options) {
+  if (options === undefined) {
+    options = {};
+  }
+
+  return PAGE_DESCRIPTORS.listLogMetrics.createStream(this._listLogMetrics, request, options);
 };
 
 /**
@@ -249,29 +320,32 @@ MetricsServiceV2Api.prototype.listLogMetrics = function(request, options, callba
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.metricName
- *   The resource name of the desired metric.
- *   Example: `"projects/my-project-id/metrics/my-metric-id"`.
+ *   The resource name of the desired metric:
+ *
+ *       "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
- *   The second parameter to the callback is an object representing [LogMetric]{@link LogMetric}
- * @returns {Promise} - The promise which resolves to the response object.
+ *   The second parameter to the callback is an object representing [LogMetric]{@link LogMetric}.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [LogMetric]{@link LogMetric}.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = loggingV2.metricsServiceV2Api();
- * var formattedMetricName = api.metricPath("[PROJECT]", "[METRIC]");
- * api.getLogMetric({metricName: formattedMetricName}).then(function(response) {
+ * var client = loggingV2.metricsServiceV2Client();
+ * var formattedMetricName = client.metricPath("[PROJECT]", "[METRIC]");
+ * client.getLogMetric({metricName: formattedMetricName}).then(function(responses) {
+ *     var response = responses[0];
  *     // doThingsWith(response)
  * }).catch(function(err) {
  *     console.error(err);
  * });
  */
-MetricsServiceV2Api.prototype.getLogMetric = function(request, options, callback) {
+MetricsServiceV2Client.prototype.getLogMetric = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -279,6 +353,7 @@ MetricsServiceV2Api.prototype.getLogMetric = function(request, options, callback
   if (options === undefined) {
     options = {};
   }
+
   return this._getLogMetric(request, options, callback);
 };
 
@@ -288,8 +363,9 @@ MetricsServiceV2Api.prototype.getLogMetric = function(request, options, callback
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   The resource name of the project in which to create the metric.
- *   Example: `"projects/my-project-id"`.
+ *   The resource name of the project in which to create the metric:
+ *
+ *       "projects/[PROJECT_ID]"
  *
  *   The new metric must be provided in the request.
  * @param {Object} request.metric
@@ -303,26 +379,28 @@ MetricsServiceV2Api.prototype.getLogMetric = function(request, options, callback
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
- *   The second parameter to the callback is an object representing [LogMetric]{@link LogMetric}
- * @returns {Promise} - The promise which resolves to the response object.
+ *   The second parameter to the callback is an object representing [LogMetric]{@link LogMetric}.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [LogMetric]{@link LogMetric}.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = loggingV2.metricsServiceV2Api();
- * var formattedParent = api.parentPath("[PROJECT]");
+ * var client = loggingV2.metricsServiceV2Client();
+ * var formattedParent = client.parentPath("[PROJECT]");
  * var metric = {};
  * var request = {
  *     parent: formattedParent,
  *     metric: metric
  * };
- * api.createLogMetric(request).then(function(response) {
+ * client.createLogMetric(request).then(function(responses) {
+ *     var response = responses[0];
  *     // doThingsWith(response)
  * }).catch(function(err) {
  *     console.error(err);
  * });
  */
-MetricsServiceV2Api.prototype.createLogMetric = function(request, options, callback) {
+MetricsServiceV2Client.prototype.createLogMetric = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -330,6 +408,7 @@ MetricsServiceV2Api.prototype.createLogMetric = function(request, options, callb
   if (options === undefined) {
     options = {};
   }
+
   return this._createLogMetric(request, options, callback);
 };
 
@@ -339,16 +418,15 @@ MetricsServiceV2Api.prototype.createLogMetric = function(request, options, callb
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.metricName
- *   The resource name of the metric to update.
- *   Example: `"projects/my-project-id/metrics/my-metric-id"`.
+ *   The resource name of the metric to update:
  *
- *   The updated metric must be provided in the request and have the
- *   same identifier that is specified in `metricName`.
- *   If the metric does not exist, it is created.
+ *       "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
+ *
+ *   The updated metric must be provided in the request and it's
+ *   `name` field must be the same as `[METRIC_ID]` If the metric
+ *   does not exist in `[PROJECT_ID]`, then a new metric is created.
  * @param {Object} request.metric
- *   The updated metric, whose name must be the same as the
- *   metric identifier in `metricName`. If `metricName` does not
- *   exist, then a new metric is created.
+ *   The updated metric.
  *
  *   This object should have the same structure as [LogMetric]{@link LogMetric}
  * @param {Object=} options
@@ -357,26 +435,28 @@ MetricsServiceV2Api.prototype.createLogMetric = function(request, options, callb
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
- *   The second parameter to the callback is an object representing [LogMetric]{@link LogMetric}
- * @returns {Promise} - The promise which resolves to the response object.
+ *   The second parameter to the callback is an object representing [LogMetric]{@link LogMetric}.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [LogMetric]{@link LogMetric}.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = loggingV2.metricsServiceV2Api();
- * var formattedMetricName = api.metricPath("[PROJECT]", "[METRIC]");
+ * var client = loggingV2.metricsServiceV2Client();
+ * var formattedMetricName = client.metricPath("[PROJECT]", "[METRIC]");
  * var metric = {};
  * var request = {
  *     metricName: formattedMetricName,
  *     metric: metric
  * };
- * api.updateLogMetric(request).then(function(response) {
+ * client.updateLogMetric(request).then(function(responses) {
+ *     var response = responses[0];
  *     // doThingsWith(response)
  * }).catch(function(err) {
  *     console.error(err);
  * });
  */
-MetricsServiceV2Api.prototype.updateLogMetric = function(request, options, callback) {
+MetricsServiceV2Client.prototype.updateLogMetric = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -384,6 +464,7 @@ MetricsServiceV2Api.prototype.updateLogMetric = function(request, options, callb
   if (options === undefined) {
     options = {};
   }
+
   return this._updateLogMetric(request, options, callback);
 };
 
@@ -393,25 +474,26 @@ MetricsServiceV2Api.prototype.updateLogMetric = function(request, options, callb
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.metricName
- *   The resource name of the metric to delete.
- *   Example: `"projects/my-project-id/metrics/my-metric-id"`.
+ *   The resource name of the metric to delete:
+ *
+ *       "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error)=} callback
  *   The function which will be called with the result of the API call.
- * @returns {Promise} - The promise which resolves to the response object.
+ * @return {Promise} - The promise which resolves when API call finishes.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = loggingV2.metricsServiceV2Api();
- * var formattedMetricName = api.metricPath("[PROJECT]", "[METRIC]");
- * api.deleteLogMetric({metricName: formattedMetricName}).catch(function(err) {
+ * var client = loggingV2.metricsServiceV2Client();
+ * var formattedMetricName = client.metricPath("[PROJECT]", "[METRIC]");
+ * client.deleteLogMetric({metricName: formattedMetricName}).catch(function(err) {
  *     console.error(err);
  * });
  */
-MetricsServiceV2Api.prototype.deleteLogMetric = function(request, options, callback) {
+MetricsServiceV2Client.prototype.deleteLogMetric = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -419,12 +501,13 @@ MetricsServiceV2Api.prototype.deleteLogMetric = function(request, options, callb
   if (options === undefined) {
     options = {};
   }
+
   return this._deleteLogMetric(request, options, callback);
 };
 
-function MetricsServiceV2ApiBuilder(gaxGrpc) {
-  if (!(this instanceof MetricsServiceV2ApiBuilder)) {
-    return new MetricsServiceV2ApiBuilder(gaxGrpc);
+function MetricsServiceV2ClientBuilder(gaxGrpc) {
+  if (!(this instanceof MetricsServiceV2ClientBuilder)) {
+    return new MetricsServiceV2ClientBuilder(gaxGrpc);
   }
 
   var metricsServiceV2Client = gaxGrpc.load([{
@@ -438,7 +521,7 @@ function MetricsServiceV2ApiBuilder(gaxGrpc) {
   };
 
   /**
-   * Build a new instance of {@link MetricsServiceV2Api}.
+   * Build a new instance of {@link MetricsServiceV2Client}.
    *
    * @param {Object=} opts - The optional parameters.
    * @param {String=} opts.servicePath
@@ -455,11 +538,11 @@ function MetricsServiceV2ApiBuilder(gaxGrpc) {
    * @param {String=} opts.appVersion
    *   The version of the calling service.
    */
-  this.metricsServiceV2Api = function(opts) {
-    return new MetricsServiceV2Api(gaxGrpc, grpcClients, opts);
+  this.metricsServiceV2Client = function(opts) {
+    return new MetricsServiceV2Client(gaxGrpc, grpcClients, opts);
   };
-  extend(this.metricsServiceV2Api, MetricsServiceV2Api);
+  extend(this.metricsServiceV2Client, MetricsServiceV2Client);
 }
-module.exports = MetricsServiceV2ApiBuilder;
+module.exports = MetricsServiceV2ClientBuilder;
 module.exports.SERVICE_ADDRESS = SERVICE_ADDRESS;
 module.exports.ALL_SCOPES = ALL_SCOPES;
