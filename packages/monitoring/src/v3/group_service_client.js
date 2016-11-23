@@ -37,7 +37,6 @@ var DEFAULT_SERVICE_PORT = 443;
 
 var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
 
-
 var PAGE_DESCRIPTORS = {
   listGroups: new gax.PageDescriptor(
       'pageToken',
@@ -54,6 +53,10 @@ var PAGE_DESCRIPTORS = {
  * this service.
  */
 var ALL_SCOPES = [
+  'https://www.googleapis.com/auth/cloud-platform',
+  'https://www.googleapis.com/auth/monitoring',
+  'https://www.googleapis.com/auth/monitoring.read',
+  'https://www.googleapis.com/auth/monitoring.write'
 ];
 
 /**
@@ -72,17 +75,17 @@ var ALL_SCOPES = [
  *
  * This will be created through a builder function which can be obtained by the module.
  * See the following example of how to initialize the module and how to access to the builder.
- * @see {@link groupServiceApi}
+ * @see {@link groupServiceClient}
  *
  * @example
  * var monitoringV3 = require('@google-cloud/monitoring').v3({
  *   // optional auth parameters.
  * });
- * var api = monitoringV3.groupServiceApi();
+ * var client = monitoringV3.groupServiceClient();
  *
  * @class
  */
-function GroupServiceApi(gaxGrpc, grpcClients, opts) {
+function GroupServiceClient(gaxGrpc, grpcClients, opts) {
   opts = opts || {};
   var servicePath = opts.servicePath || SERVICE_ADDRESS;
   var port = opts.port || DEFAULT_SERVICE_PORT;
@@ -101,8 +104,6 @@ function GroupServiceApi(gaxGrpc, grpcClients, opts) {
       'google.monitoring.v3.GroupService',
       configData,
       clientConfig,
-      PAGE_DESCRIPTORS,
-      null,
       {'x-goog-api-client': googleApiClient});
 
   var groupServiceStub = gaxGrpc.createStub(
@@ -123,7 +124,8 @@ function GroupServiceApi(gaxGrpc, grpcClients, opts) {
       groupServiceStub.then(function(groupServiceStub) {
         return groupServiceStub[methodName].bind(groupServiceStub);
       }),
-      defaults[methodName]);
+      defaults[methodName],
+      PAGE_DESCRIPTORS[methodName]);
   }.bind(this));
 }
 
@@ -140,7 +142,7 @@ var GROUP_PATH_TEMPLATE = new gax.PathTemplate(
  * @param {String} project
  * @returns {String}
  */
-GroupServiceApi.prototype.projectPath = function(project) {
+GroupServiceClient.prototype.projectPath = function(project) {
   return PROJECT_PATH_TEMPLATE.render({
     project: project
   });
@@ -152,7 +154,7 @@ GroupServiceApi.prototype.projectPath = function(project) {
  *   A fully-qualified path representing a project resources.
  * @returns {String} - A string representing the project.
  */
-GroupServiceApi.prototype.matchProjectFromProjectName = function(projectName) {
+GroupServiceClient.prototype.matchProjectFromProjectName = function(projectName) {
   return PROJECT_PATH_TEMPLATE.match(projectName).project;
 };
 
@@ -162,7 +164,7 @@ GroupServiceApi.prototype.matchProjectFromProjectName = function(projectName) {
  * @param {String} group
  * @returns {String}
  */
-GroupServiceApi.prototype.groupPath = function(project, group) {
+GroupServiceClient.prototype.groupPath = function(project, group) {
   return GROUP_PATH_TEMPLATE.render({
     project: project,
     group: group
@@ -175,7 +177,7 @@ GroupServiceApi.prototype.groupPath = function(project, group) {
  *   A fully-qualified path representing a group resources.
  * @returns {String} - A string representing the project.
  */
-GroupServiceApi.prototype.matchProjectFromGroupName = function(groupName) {
+GroupServiceClient.prototype.matchProjectFromGroupName = function(groupName) {
   return GROUP_PATH_TEMPLATE.match(groupName).project;
 };
 
@@ -185,7 +187,7 @@ GroupServiceApi.prototype.matchProjectFromGroupName = function(groupName) {
  *   A fully-qualified path representing a group resources.
  * @returns {String} - A string representing the group.
  */
-GroupServiceApi.prototype.matchGroupFromGroupName = function(groupName) {
+GroupServiceClient.prototype.matchGroupFromGroupName = function(groupName) {
   return GROUP_PATH_TEMPLATE.match(groupName).group;
 };
 
@@ -223,42 +225,64 @@ GroupServiceApi.prototype.matchGroupFromGroupName = function(groupName) {
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
- * @param {function(?Error, ?Object, ?string)=} callback
- *   When specified, the results are not streamed but this callback
- *   will be called with the response object representing [ListGroupsResponse]{@link ListGroupsResponse}.
- *   The third item will be set if the response contains the token for the further results
- *   and can be reused to `pageToken` field in the options in the next request.
- * @returns {Stream|Promise}
- *   An object stream which emits an object representing
- *   [Group]{@link Group} on 'data' event.
- *   When the callback is specified or streaming is suppressed through options,
- *   it will return a promise that resolves to the response object. The promise
- *   has a method named "cancel" which cancels the ongoing API call.
+ * @param {function(?Error, ?Array, ?Object, ?Object)=} callback
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is Array of [Group]{@link Group}.
+ *
+ *   When autoPaginate: false is specified through options, it contains the result
+ *   in a single response. If the response indicates the next page exists, the third
+ *   parameter is set to be used for the next request object. The fourth parameter keeps
+ *   the raw response object of an object representing [ListGroupsResponse]{@link ListGroupsResponse}.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of [Group]{@link Group}.
+ *
+ *   When autoPaginate: false is specified through options, the array has three elements.
+ *   The first element is Array of [Group]{@link Group} in a single response.
+ *   The second element is the next request object if the response
+ *   indicates the next page exists, or null. The third element is
+ *   an object representing [ListGroupsResponse]{@link ListGroupsResponse}.
+ *
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = monitoringV3.groupServiceApi();
- * var formattedName = api.projectPath("[PROJECT]");
+ * var client = monitoringV3.groupServiceClient();
+ * var formattedName = client.projectPath("[PROJECT]");
  * // Iterate over all elements.
- * api.listGroups({name: formattedName}).on('data', function(element) {
- *     // doThingsWith(element)
+ * client.listGroups({name: formattedName}).then(function(responses) {
+ *     var resources = responses[0];
+ *     for (var i = 0; i < resources.length; ++i) {
+ *         // doThingsWith(resources[i])
+ *     }
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  *
- * // Or obtain the paged response through the callback.
- * function callback(err, response, nextPageToken) {
- *     if (err) {
- *         console.error(err);
- *         return;
+ * // Or obtain the paged response.
+ * var options = {autoPaginate: false};
+ * function callback(responses) {
+ *     // The actual resources in a response.
+ *     var resources = responses[0];
+ *     // The next request if the response shows there's more responses.
+ *     var nextRequest = responses[1];
+ *     // The actual response object, if necessary.
+ *     // var rawResponse = responses[2];
+ *     for (var i = 0; i < resources.length; ++i) {
+ *         // doThingsWith(resources[i]);
  *     }
- *     // doThingsWith(response)
- *     if (nextPageToken) {
- *         // fetch the next page.
- *         api.listGroups({name: formattedName}, {pageToken: nextPageToken}, callback);
+ *     if (nextRequest) {
+ *         // Fetch the next page.
+ *         return client.listGroups(nextRequest, options).then(callback);
  *     }
  * }
- * api.listGroups({name: formattedName}, {flattenPages: false}, callback);
+ * client.listGroups({name: formattedName}, options)
+ *     .then(callback)
+ *     .catch(function(err) {
+ *         console.error(err);
+ *     });
  */
-GroupServiceApi.prototype.listGroups = function(request, options, callback) {
+GroupServiceClient.prototype.listGroups = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -266,7 +290,71 @@ GroupServiceApi.prototype.listGroups = function(request, options, callback) {
   if (options === undefined) {
     options = {};
   }
+
   return this._listGroups(request, options, callback);
+};
+
+/**
+ * Equivalent to {@link listGroups}, but returns a NodeJS Stream object.
+ *
+ * This fetches the paged responses for {@link listGroups} continuously
+ * and invokes the callback registered for 'data' event for each element in the
+ * responses.
+ *
+ * The returned object has 'end' method when no more elements are required.
+ *
+ * autoPaginate option will be ignored.
+ *
+ * @see {@link https://nodejs.org/api/stream.html}
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The project whose groups are to be listed. The format is
+ *   `"projects/{project_id_or_number}"`.
+ * @param {string=} request.childrenOfGroup
+ *   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
+ *   Returns groups whose `parentName` field contains the group
+ *   name.  If no groups have this parent, the results are empty.
+ * @param {string=} request.ancestorsOfGroup
+ *   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
+ *   Returns groups that are ancestors of the specified group.
+ *   The groups are returned in order, starting with the immediate parent and
+ *   ending with the most distant ancestor.  If the specified group has no
+ *   immediate parent, the results are empty.
+ * @param {string=} request.descendantsOfGroup
+ *   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
+ *   Returns the descendants of the specified group.  This is a superset of
+ *   the results returned by the `childrenOfGroup` filter, and includes
+ *   children-of-children, and so forth.
+ * @param {number=} request.pageSize
+ *   The maximum number of resources contained in the underlying API
+ *   response. If page streaming is performed per-resource, this
+ *   parameter does not affect the return value. If page streaming is
+ *   performed per-page, this determines the maximum number of
+ *   resources in a page.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ * @return {Stream}
+ *   An object stream which emits an object representing [Group]{@link Group} on 'data' event.
+ *
+ * @example
+ *
+ * var client = monitoringV3.groupServiceClient();
+ * var formattedName = client.projectPath("[PROJECT]");
+ * client.listGroupsStream({name: formattedName}).on('data', function(element) {
+ *     // doThingsWith(element)
+ * }).on('error', function(err) {
+ *     console.error(err);
+ * });
+ */
+GroupServiceClient.prototype.listGroupsStream = function(request, options) {
+  if (options === undefined) {
+    options = {};
+  }
+
+  return PAGE_DESCRIPTORS.listGroups.createStream(this._listGroups, request, options);
 };
 
 /**
@@ -283,21 +371,23 @@ GroupServiceApi.prototype.listGroups = function(request, options, callback) {
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
- *   The second parameter to the callback is an object representing [Group]{@link Group}
- * @returns {Promise} - The promise which resolves to the response object.
+ *   The second parameter to the callback is an object representing [Group]{@link Group}.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Group]{@link Group}.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = monitoringV3.groupServiceApi();
- * var formattedName = api.groupPath("[PROJECT]", "[GROUP]");
- * api.getGroup({name: formattedName}).then(function(response) {
+ * var client = monitoringV3.groupServiceClient();
+ * var formattedName = client.groupPath("[PROJECT]", "[GROUP]");
+ * client.getGroup({name: formattedName}).then(function(responses) {
+ *     var response = responses[0];
  *     // doThingsWith(response)
  * }).catch(function(err) {
  *     console.error(err);
  * });
  */
-GroupServiceApi.prototype.getGroup = function(request, options, callback) {
+GroupServiceClient.prototype.getGroup = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -305,6 +395,7 @@ GroupServiceApi.prototype.getGroup = function(request, options, callback) {
   if (options === undefined) {
     options = {};
   }
+
   return this._getGroup(request, options, callback);
 };
 
@@ -329,26 +420,28 @@ GroupServiceApi.prototype.getGroup = function(request, options, callback) {
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
- *   The second parameter to the callback is an object representing [Group]{@link Group}
- * @returns {Promise} - The promise which resolves to the response object.
+ *   The second parameter to the callback is an object representing [Group]{@link Group}.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Group]{@link Group}.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = monitoringV3.groupServiceApi();
- * var formattedName = api.projectPath("[PROJECT]");
+ * var client = monitoringV3.groupServiceClient();
+ * var formattedName = client.projectPath("[PROJECT]");
  * var group = {};
  * var request = {
  *     name: formattedName,
  *     group: group
  * };
- * api.createGroup(request).then(function(response) {
+ * client.createGroup(request).then(function(responses) {
+ *     var response = responses[0];
  *     // doThingsWith(response)
  * }).catch(function(err) {
  *     console.error(err);
  * });
  */
-GroupServiceApi.prototype.createGroup = function(request, options, callback) {
+GroupServiceClient.prototype.createGroup = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -356,6 +449,7 @@ GroupServiceApi.prototype.createGroup = function(request, options, callback) {
   if (options === undefined) {
     options = {};
   }
+
   return this._createGroup(request, options, callback);
 };
 
@@ -378,21 +472,23 @@ GroupServiceApi.prototype.createGroup = function(request, options, callback) {
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
- *   The second parameter to the callback is an object representing [Group]{@link Group}
- * @returns {Promise} - The promise which resolves to the response object.
+ *   The second parameter to the callback is an object representing [Group]{@link Group}.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Group]{@link Group}.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = monitoringV3.groupServiceApi();
+ * var client = monitoringV3.groupServiceClient();
  * var group = {};
- * api.updateGroup({group: group}).then(function(response) {
+ * client.updateGroup({group: group}).then(function(responses) {
+ *     var response = responses[0];
  *     // doThingsWith(response)
  * }).catch(function(err) {
  *     console.error(err);
  * });
  */
-GroupServiceApi.prototype.updateGroup = function(request, options, callback) {
+GroupServiceClient.prototype.updateGroup = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -400,6 +496,7 @@ GroupServiceApi.prototype.updateGroup = function(request, options, callback) {
   if (options === undefined) {
     options = {};
   }
+
   return this._updateGroup(request, options, callback);
 };
 
@@ -416,18 +513,18 @@ GroupServiceApi.prototype.updateGroup = function(request, options, callback) {
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error)=} callback
  *   The function which will be called with the result of the API call.
- * @returns {Promise} - The promise which resolves to the response object.
+ * @return {Promise} - The promise which resolves when API call finishes.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = monitoringV3.groupServiceApi();
- * var formattedName = api.groupPath("[PROJECT]", "[GROUP]");
- * api.deleteGroup({name: formattedName}).catch(function(err) {
+ * var client = monitoringV3.groupServiceClient();
+ * var formattedName = client.groupPath("[PROJECT]", "[GROUP]");
+ * client.deleteGroup({name: formattedName}).catch(function(err) {
  *     console.error(err);
  * });
  */
-GroupServiceApi.prototype.deleteGroup = function(request, options, callback) {
+GroupServiceClient.prototype.deleteGroup = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -435,6 +532,7 @@ GroupServiceApi.prototype.deleteGroup = function(request, options, callback) {
   if (options === undefined) {
     options = {};
   }
+
   return this._deleteGroup(request, options, callback);
 };
 
@@ -470,42 +568,64 @@ GroupServiceApi.prototype.deleteGroup = function(request, options, callback) {
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
- * @param {function(?Error, ?Object, ?string)=} callback
- *   When specified, the results are not streamed but this callback
- *   will be called with the response object representing [ListGroupMembersResponse]{@link ListGroupMembersResponse}.
- *   The third item will be set if the response contains the token for the further results
- *   and can be reused to `pageToken` field in the options in the next request.
- * @returns {Stream|Promise}
- *   An object stream which emits an object representing
- *   [google.api.MonitoredResource]{@link external:"google.api.MonitoredResource"} on 'data' event.
- *   When the callback is specified or streaming is suppressed through options,
- *   it will return a promise that resolves to the response object. The promise
- *   has a method named "cancel" which cancels the ongoing API call.
+ * @param {function(?Error, ?Array, ?Object, ?Object)=} callback
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is Array of [google.api.MonitoredResource]{@link external:"google.api.MonitoredResource"}.
+ *
+ *   When autoPaginate: false is specified through options, it contains the result
+ *   in a single response. If the response indicates the next page exists, the third
+ *   parameter is set to be used for the next request object. The fourth parameter keeps
+ *   the raw response object of an object representing [ListGroupMembersResponse]{@link ListGroupMembersResponse}.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of [google.api.MonitoredResource]{@link external:"google.api.MonitoredResource"}.
+ *
+ *   When autoPaginate: false is specified through options, the array has three elements.
+ *   The first element is Array of [google.api.MonitoredResource]{@link external:"google.api.MonitoredResource"} in a single response.
+ *   The second element is the next request object if the response
+ *   indicates the next page exists, or null. The third element is
+ *   an object representing [ListGroupMembersResponse]{@link ListGroupMembersResponse}.
+ *
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = monitoringV3.groupServiceApi();
- * var formattedName = api.groupPath("[PROJECT]", "[GROUP]");
+ * var client = monitoringV3.groupServiceClient();
+ * var formattedName = client.groupPath("[PROJECT]", "[GROUP]");
  * // Iterate over all elements.
- * api.listGroupMembers({name: formattedName}).on('data', function(element) {
- *     // doThingsWith(element)
+ * client.listGroupMembers({name: formattedName}).then(function(responses) {
+ *     var resources = responses[0];
+ *     for (var i = 0; i < resources.length; ++i) {
+ *         // doThingsWith(resources[i])
+ *     }
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  *
- * // Or obtain the paged response through the callback.
- * function callback(err, response, nextPageToken) {
- *     if (err) {
- *         console.error(err);
- *         return;
+ * // Or obtain the paged response.
+ * var options = {autoPaginate: false};
+ * function callback(responses) {
+ *     // The actual resources in a response.
+ *     var resources = responses[0];
+ *     // The next request if the response shows there's more responses.
+ *     var nextRequest = responses[1];
+ *     // The actual response object, if necessary.
+ *     // var rawResponse = responses[2];
+ *     for (var i = 0; i < resources.length; ++i) {
+ *         // doThingsWith(resources[i]);
  *     }
- *     // doThingsWith(response)
- *     if (nextPageToken) {
- *         // fetch the next page.
- *         api.listGroupMembers({name: formattedName}, {pageToken: nextPageToken}, callback);
+ *     if (nextRequest) {
+ *         // Fetch the next page.
+ *         return client.listGroupMembers(nextRequest, options).then(callback);
  *     }
  * }
- * api.listGroupMembers({name: formattedName}, {flattenPages: false}, callback);
+ * client.listGroupMembers({name: formattedName}, options)
+ *     .then(callback)
+ *     .catch(function(err) {
+ *         console.error(err);
+ *     });
  */
-GroupServiceApi.prototype.listGroupMembers = function(request, options, callback) {
+GroupServiceClient.prototype.listGroupMembers = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -513,12 +633,76 @@ GroupServiceApi.prototype.listGroupMembers = function(request, options, callback
   if (options === undefined) {
     options = {};
   }
+
   return this._listGroupMembers(request, options, callback);
 };
 
-function GroupServiceApiBuilder(gaxGrpc) {
-  if (!(this instanceof GroupServiceApiBuilder)) {
-    return new GroupServiceApiBuilder(gaxGrpc);
+/**
+ * Equivalent to {@link listGroupMembers}, but returns a NodeJS Stream object.
+ *
+ * This fetches the paged responses for {@link listGroupMembers} continuously
+ * and invokes the callback registered for 'data' event for each element in the
+ * responses.
+ *
+ * The returned object has 'end' method when no more elements are required.
+ *
+ * autoPaginate option will be ignored.
+ *
+ * @see {@link https://nodejs.org/api/stream.html}
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   The group whose members are listed. The format is
+ *   `"projects/{project_id_or_number}/groups/{group_id}"`.
+ * @param {number=} request.pageSize
+ *   The maximum number of resources contained in the underlying API
+ *   response. If page streaming is performed per-resource, this
+ *   parameter does not affect the return value. If page streaming is
+ *   performed per-page, this determines the maximum number of
+ *   resources in a page.
+ * @param {string=} request.filter
+ *   An optional [list filter](https://cloud.google.com/monitoring/api/learn_more#filtering) describing
+ *   the members to be returned.  The filter may reference the type, labels, and
+ *   metadata of monitored resources that comprise the group.
+ *   For example, to return only resources representing Compute Engine VM
+ *   instances, use this filter:
+ *
+ *       resource.type = "gce_instance"
+ * @param {Object=} request.interval
+ *   An optional time interval for which results should be returned. Only
+ *   members that were part of the group during the specified interval are
+ *   included in the response.  If no interval is provided then the group
+ *   membership over the last minute is returned.
+ *
+ *   This object should have the same structure as [TimeInterval]{@link TimeInterval}
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ * @return {Stream}
+ *   An object stream which emits an object representing [google.api.MonitoredResource]{@link external:"google.api.MonitoredResource"} on 'data' event.
+ *
+ * @example
+ *
+ * var client = monitoringV3.groupServiceClient();
+ * var formattedName = client.groupPath("[PROJECT]", "[GROUP]");
+ * client.listGroupMembersStream({name: formattedName}).on('data', function(element) {
+ *     // doThingsWith(element)
+ * }).on('error', function(err) {
+ *     console.error(err);
+ * });
+ */
+GroupServiceClient.prototype.listGroupMembersStream = function(request, options) {
+  if (options === undefined) {
+    options = {};
+  }
+
+  return PAGE_DESCRIPTORS.listGroupMembers.createStream(this._listGroupMembers, request, options);
+};
+
+function GroupServiceClientBuilder(gaxGrpc) {
+  if (!(this instanceof GroupServiceClientBuilder)) {
+    return new GroupServiceClientBuilder(gaxGrpc);
   }
 
   var groupServiceClient = gaxGrpc.load([{
@@ -532,7 +716,7 @@ function GroupServiceApiBuilder(gaxGrpc) {
   };
 
   /**
-   * Build a new instance of {@link GroupServiceApi}.
+   * Build a new instance of {@link GroupServiceClient}.
    *
    * @param {Object=} opts - The optional parameters.
    * @param {String=} opts.servicePath
@@ -549,11 +733,11 @@ function GroupServiceApiBuilder(gaxGrpc) {
    * @param {String=} opts.appVersion
    *   The version of the calling service.
    */
-  this.groupServiceApi = function(opts) {
-    return new GroupServiceApi(gaxGrpc, grpcClients, opts);
+  this.groupServiceClient = function(opts) {
+    return new GroupServiceClient(gaxGrpc, grpcClients, opts);
   };
-  extend(this.groupServiceApi, GroupServiceApi);
+  extend(this.groupServiceClient, GroupServiceClient);
 }
-module.exports = GroupServiceApiBuilder;
+module.exports = GroupServiceClientBuilder;
 module.exports.SERVICE_ADDRESS = SERVICE_ADDRESS;
 module.exports.ALL_SCOPES = ALL_SCOPES;
