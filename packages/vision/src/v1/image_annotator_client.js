@@ -37,7 +37,6 @@ var DEFAULT_SERVICE_PORT = 443;
 
 var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
 
-
 /**
  * The scopes needed to make gRPC calls to all of the methods defined in
  * this service.
@@ -53,17 +52,17 @@ var ALL_SCOPES = [
  *
  * This will be created through a builder function which can be obtained by the module.
  * See the following example of how to initialize the module and how to access to the builder.
- * @see {@link imageAnnotatorApi}
+ * @see {@link imageAnnotatorClient}
  *
  * @example
  * var visionV1 = require('@google-cloud/vision').v1({
  *   // optional auth parameters.
  * });
- * var api = visionV1.imageAnnotatorApi();
+ * var client = visionV1.imageAnnotatorClient();
  *
  * @class
  */
-function ImageAnnotatorApi(gaxGrpc, grpcClients, opts) {
+function ImageAnnotatorClient(gaxGrpc, grpcClients, opts) {
   opts = opts || {};
   var servicePath = opts.servicePath || SERVICE_ADDRESS;
   var port = opts.port || DEFAULT_SERVICE_PORT;
@@ -82,8 +81,6 @@ function ImageAnnotatorApi(gaxGrpc, grpcClients, opts) {
       'google.cloud.vision.v1.ImageAnnotator',
       configData,
       clientConfig,
-      null,
-      null,
       {'x-goog-api-client': googleApiClient});
 
   var imageAnnotatorStub = gaxGrpc.createStub(
@@ -99,7 +96,8 @@ function ImageAnnotatorApi(gaxGrpc, grpcClients, opts) {
       imageAnnotatorStub.then(function(imageAnnotatorStub) {
         return imageAnnotatorStub[methodName].bind(imageAnnotatorStub);
       }),
-      defaults[methodName]);
+      defaults[methodName],
+      null);
   }.bind(this));
 }
 
@@ -120,21 +118,23 @@ function ImageAnnotatorApi(gaxGrpc, grpcClients, opts) {
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
- *   The second parameter to the callback is an object representing [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}
- * @returns {Promise} - The promise which resolves to the response object.
+ *   The second parameter to the callback is an object representing [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [BatchAnnotateImagesResponse]{@link BatchAnnotateImagesResponse}.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = visionV1.imageAnnotatorApi();
+ * var client = visionV1.imageAnnotatorClient();
  * var requests = [];
- * api.batchAnnotateImages({requests: requests}).then(function(response) {
+ * client.batchAnnotateImages({requests: requests}).then(function(responses) {
+ *     var response = responses[0];
  *     // doThingsWith(response)
  * }).catch(function(err) {
  *     console.error(err);
  * });
  */
-ImageAnnotatorApi.prototype.batchAnnotateImages = function(request, options, callback) {
+ImageAnnotatorClient.prototype.batchAnnotateImages = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -142,12 +142,13 @@ ImageAnnotatorApi.prototype.batchAnnotateImages = function(request, options, cal
   if (options === undefined) {
     options = {};
   }
+
   return this._batchAnnotateImages(request, options, callback);
 };
 
-function ImageAnnotatorApiBuilder(gaxGrpc) {
-  if (!(this instanceof ImageAnnotatorApiBuilder)) {
-    return new ImageAnnotatorApiBuilder(gaxGrpc);
+function ImageAnnotatorClientBuilder(gaxGrpc) {
+  if (!(this instanceof ImageAnnotatorClientBuilder)) {
+    return new ImageAnnotatorClientBuilder(gaxGrpc);
   }
 
   var imageAnnotatorClient = gaxGrpc.load([{
@@ -161,7 +162,7 @@ function ImageAnnotatorApiBuilder(gaxGrpc) {
   };
 
   /**
-   * Build a new instance of {@link ImageAnnotatorApi}.
+   * Build a new instance of {@link ImageAnnotatorClient}.
    *
    * @param {Object=} opts - The optional parameters.
    * @param {String=} opts.servicePath
@@ -178,11 +179,11 @@ function ImageAnnotatorApiBuilder(gaxGrpc) {
    * @param {String=} opts.appVersion
    *   The version of the calling service.
    */
-  this.imageAnnotatorApi = function(opts) {
-    return new ImageAnnotatorApi(gaxGrpc, grpcClients, opts);
+  this.imageAnnotatorClient = function(opts) {
+    return new ImageAnnotatorClient(gaxGrpc, grpcClients, opts);
   };
-  extend(this.imageAnnotatorApi, ImageAnnotatorApi);
+  extend(this.imageAnnotatorClient, ImageAnnotatorClient);
 }
-module.exports = ImageAnnotatorApiBuilder;
+module.exports = ImageAnnotatorClientBuilder;
 module.exports.SERVICE_ADDRESS = SERVICE_ADDRESS;
 module.exports.ALL_SCOPES = ALL_SCOPES;
