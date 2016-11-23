@@ -348,24 +348,20 @@ describe('Logging', function() {
     });
 
     it('should preserve order of entries', function(done) {
-      var logEntries = [
-        log.entry('1')
-      ];
+      var entry1 = log.entry('1');
 
       setTimeout(function() {
-        logEntries.push(log.entry('2'));
+        var entry3 = log.entry('3');
+        var entry2 = log.entry({ timestamp: entry3.metadata.timestamp }, '2');
 
-        log.write([logEntries[1], logEntries[0]], options, function(err) {
+        // Re-arrange to confirm the timestamp is sent and honored.
+        log.write([entry2, entry3, entry1], options, function(err) {
           assert.ifError(err);
 
           setTimeout(function() {
-            log.getEntries({
-              pageSize: 2
-            }, function(err, entries) {
+            log.getEntries({ pageSize: 3 }, function(err, entries) {
               assert.ifError(err);
-
-              assert.deepEqual(entries.map(prop('data')), [ '2', '1' ]);
-
+              assert.deepEqual(entries.map(prop('data')), [ '3', '2', '1' ]);
               done();
             });
           }, WRITE_CONSISTENCY_DELAY_MS);

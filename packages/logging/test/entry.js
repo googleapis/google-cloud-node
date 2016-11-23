@@ -45,9 +45,15 @@ describe('Entry', function() {
 
   describe('instantiation', function() {
     it('should assign timestamp to metadata', function() {
-      assert.deepEqual(entry.metadata, extend({
-        timestamp: new Date()
-      }, METADATA));
+      var now = new Date();
+
+      var expectedTimestampBoundaries = {
+        start: new Date(now.getTime() - 1000),
+        end: new Date(now.getTime() + 1000)
+      };
+
+      assert(entry.metadata.timestamp >= expectedTimestampBoundaries.start);
+      assert(entry.metadata.timestamp <= expectedTimestampBoundaries.end);
     });
 
     it('should not assign timestamp if one is already set', function() {
