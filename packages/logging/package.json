@@ -55,7 +55,7 @@
     "@google-cloud/common": "^0.8.0",
     "arrify": "^1.0.0",
     "extend": "^3.0.0",
-    "google-gax": "^0.9.1",
+    "google-gax": "^0.10.0",
     "google-proto-files": "^0.8.0",
     "is": "^3.0.1",
     "is-circular": "^1.0.1",
