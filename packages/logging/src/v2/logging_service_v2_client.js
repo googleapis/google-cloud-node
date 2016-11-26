@@ -482,7 +482,7 @@ LoggingServiceV2Client.prototype.listLogEntries = function(request, options, cal
  * var resourceNames = [];
  * client.listLogEntriesStream({resourceNames: resourceNames}).on('data', function(element) {
  *     // doThingsWith(element)
- * }).on('error', funciton(err) {
+ * }).on('error', function(err) {
  *     console.error(err);
  * });
  */
@@ -610,7 +610,7 @@ LoggingServiceV2Client.prototype.listMonitoredResourceDescriptors = function(req
  *
  * client.listMonitoredResourceDescriptorsStream({}).on('data', function(element) {
  *     // doThingsWith(element)
- * }).on('error', funciton(err) {
+ * }).on('error', function(err) {
  *     console.error(err);
  * });
  */

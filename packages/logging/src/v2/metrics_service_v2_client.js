@@ -302,7 +302,7 @@ MetricsServiceV2Client.prototype.listLogMetrics = function(request, options, cal
  * var formattedParent = client.parentPath("[PROJECT]");
  * client.listLogMetricsStream({parent: formattedParent}).on('data', function(element) {
  *     // doThingsWith(element)
- * }).on('error', funciton(err) {
+ * }).on('error', function(err) {
  *     console.error(err);
  * });
  */

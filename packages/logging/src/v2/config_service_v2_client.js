@@ -305,7 +305,7 @@ ConfigServiceV2Client.prototype.listSinks = function(request, options, callback)
  * var formattedParent = client.parentPath("[PROJECT]");
  * client.listSinksStream({parent: formattedParent}).on('data', function(element) {
  *     // doThingsWith(element)
- * }).on('error', funciton(err) {
+ * }).on('error', function(err) {
  *     console.error(err);
  * });
  */
