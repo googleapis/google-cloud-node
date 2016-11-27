@@ -15,7 +15,7 @@
  */
 'use strict';
 
-var speechApi = require('./speech_api');
+var speechClient = require('./speech_client');
 var gax = require('google-gax');
 var extend = require('extend');
 
@@ -24,8 +24,8 @@ function v1beta1(options) {
     scopes: v1beta1.ALL_SCOPES
   }, options);
   var gaxGrpc = gax.grpc(options);
-  return speechApi(gaxGrpc);
+  return speechClient(gaxGrpc);
 }
-v1beta1.SERVICE_ADDRESS = speechApi.SERVICE_ADDRESS;
-v1beta1.ALL_SCOPES = speechApi.ALL_SCOPES;
+v1beta1.SERVICE_ADDRESS = speechClient.SERVICE_ADDRESS;
+v1beta1.ALL_SCOPES = speechClient.ALL_SCOPES;
 module.exports = v1beta1;

@@ -54,7 +54,7 @@ function fakeV1Beta1() {
   }
 
   return {
-    speechApi: util.noop
+    speechClient: util.noop
   };
 }
 
@@ -130,7 +130,7 @@ describe('Speech', function() {
         assert.strictEqual(options, OPTIONS);
 
         return {
-          speechApi: function(options) {
+          speechClient: function(options) {
             assert.strictEqual(options, OPTIONS);
             return expectedSpeechService;
           }
