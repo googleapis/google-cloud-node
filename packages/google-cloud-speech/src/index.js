@@ -67,7 +67,7 @@ function Speech(options) {
   }
 
   this.api = {
-    Speech: v1beta1(options).speechApi(options)
+    Speech: v1beta1(options).speechClient(options)
   };
 
   var config = {
