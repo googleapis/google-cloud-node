@@ -51,17 +51,17 @@ var ALL_SCOPES = [
  *
  * This will be created through a builder function which can be obtained by the module.
  * See the following example of how to initialize the module and how to access to the builder.
- * @see {@link languageServiceApi}
+ * @see {@link languageServiceClient}
  *
  * @example
  * var languageV1 = require('@google-cloud/language').v1({
  *   // optional auth parameters.
  * });
- * var api = languageV1.languageServiceApi();
+ * var client = languageV1.languageServiceClient();
  *
  * @class
  */
-function LanguageServiceApi(gaxGrpc, grpcClients, opts) {
+function LanguageServiceClient(gaxGrpc, grpcClients, opts) {
   opts = opts || {};
   var servicePath = opts.servicePath || SERVICE_ADDRESS;
   var port = opts.port || DEFAULT_SERVICE_PORT;
@@ -126,20 +126,22 @@ function LanguageServiceApi(gaxGrpc, grpcClients, opts) {
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [AnalyzeSentimentResponse]{@link AnalyzeSentimentResponse}.
- * @returns {Promise} - The promise which resolves to the response object.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [AnalyzeSentimentResponse]{@link AnalyzeSentimentResponse}.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = languageV1.languageServiceApi();
+ * var client = languageV1.languageServiceClient();
  * var document = {};
- * api.analyzeSentiment({document: document}).then(function(response) {
+ * client.analyzeSentiment({document: document}).then(function(responses) {
+ *     var response = responses[0];
  *     // doThingsWith(response)
  * }).catch(function(err) {
  *     console.error(err);
  * });
  */
-LanguageServiceApi.prototype.analyzeSentiment = function(request, options, callback) {
+LanguageServiceClient.prototype.analyzeSentiment = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -147,6 +149,7 @@ LanguageServiceApi.prototype.analyzeSentiment = function(request, options, callb
   if (options === undefined) {
     options = {};
   }
+
   return this._analyzeSentiment(request, options, callback);
 };
 
@@ -171,25 +174,27 @@ LanguageServiceApi.prototype.analyzeSentiment = function(request, options, callb
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [AnalyzeEntitiesResponse]{@link AnalyzeEntitiesResponse}.
- * @returns {Promise} - The promise which resolves to the response object.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [AnalyzeEntitiesResponse]{@link AnalyzeEntitiesResponse}.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = languageV1.languageServiceApi();
+ * var client = languageV1.languageServiceClient();
  * var document = {};
- * var encodingType = EncodingType.NONE;
+ * var encodingType = languageV1.EncodingType.NONE;
  * var request = {
  *     document: document,
  *     encodingType: encodingType
  * };
- * api.analyzeEntities(request).then(function(response) {
+ * client.analyzeEntities(request).then(function(responses) {
+ *     var response = responses[0];
  *     // doThingsWith(response)
  * }).catch(function(err) {
  *     console.error(err);
  * });
  */
-LanguageServiceApi.prototype.analyzeEntities = function(request, options, callback) {
+LanguageServiceClient.prototype.analyzeEntities = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -197,6 +202,7 @@ LanguageServiceApi.prototype.analyzeEntities = function(request, options, callba
   if (options === undefined) {
     options = {};
   }
+
   return this._analyzeEntities(request, options, callback);
 };
 
@@ -222,25 +228,27 @@ LanguageServiceApi.prototype.analyzeEntities = function(request, options, callba
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [AnalyzeSyntaxResponse]{@link AnalyzeSyntaxResponse}.
- * @returns {Promise} - The promise which resolves to the response object.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [AnalyzeSyntaxResponse]{@link AnalyzeSyntaxResponse}.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = languageV1.languageServiceApi();
+ * var client = languageV1.languageServiceClient();
  * var document = {};
- * var encodingType = EncodingType.NONE;
+ * var encodingType = languageV1.EncodingType.NONE;
  * var request = {
  *     document: document,
  *     encodingType: encodingType
  * };
- * api.analyzeSyntax(request).then(function(response) {
+ * client.analyzeSyntax(request).then(function(responses) {
+ *     var response = responses[0];
  *     // doThingsWith(response)
  * }).catch(function(err) {
  *     console.error(err);
  * });
  */
-LanguageServiceApi.prototype.analyzeSyntax = function(request, options, callback) {
+LanguageServiceClient.prototype.analyzeSyntax = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -248,6 +256,7 @@ LanguageServiceApi.prototype.analyzeSyntax = function(request, options, callback
   if (options === undefined) {
     options = {};
   }
+
   return this._analyzeSyntax(request, options, callback);
 };
 
@@ -276,27 +285,29 @@ LanguageServiceApi.prototype.analyzeSyntax = function(request, options, callback
  *   The function which will be called with the result of the API call.
  *
  *   The second parameter to the callback is an object representing [AnnotateTextResponse]{@link AnnotateTextResponse}.
- * @returns {Promise} - The promise which resolves to the response object.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [AnnotateTextResponse]{@link AnnotateTextResponse}.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = languageV1.languageServiceApi();
+ * var client = languageV1.languageServiceClient();
  * var document = {};
  * var features = {};
- * var encodingType = EncodingType.NONE;
+ * var encodingType = languageV1.EncodingType.NONE;
  * var request = {
  *     document: document,
  *     features: features,
  *     encodingType: encodingType
  * };
- * api.annotateText(request).then(function(response) {
+ * client.annotateText(request).then(function(responses) {
+ *     var response = responses[0];
  *     // doThingsWith(response)
  * }).catch(function(err) {
  *     console.error(err);
  * });
  */
-LanguageServiceApi.prototype.annotateText = function(request, options, callback) {
+LanguageServiceClient.prototype.annotateText = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -304,12 +315,13 @@ LanguageServiceApi.prototype.annotateText = function(request, options, callback)
   if (options === undefined) {
     options = {};
   }
+
   return this._annotateText(request, options, callback);
 };
 
-function LanguageServiceApiBuilder(gaxGrpc) {
-  if (!(this instanceof LanguageServiceApiBuilder)) {
-    return new LanguageServiceApiBuilder(gaxGrpc);
+function LanguageServiceClientBuilder(gaxGrpc) {
+  if (!(this instanceof LanguageServiceClientBuilder)) {
+    return new LanguageServiceClientBuilder(gaxGrpc);
   }
 
   var languageServiceClient = gaxGrpc.load([{
@@ -323,7 +335,7 @@ function LanguageServiceApiBuilder(gaxGrpc) {
   };
 
   /**
-   * Build a new instance of {@link LanguageServiceApi}.
+   * Build a new instance of {@link LanguageServiceClient}.
    *
    * @param {Object=} opts - The optional parameters.
    * @param {String=} opts.servicePath
@@ -340,11 +352,11 @@ function LanguageServiceApiBuilder(gaxGrpc) {
    * @param {String=} opts.appVersion
    *   The version of the calling service.
    */
-  this.languageServiceApi = function(opts) {
-    return new LanguageServiceApi(gaxGrpc, grpcClients, opts);
+  this.languageServiceClient = function(opts) {
+    return new LanguageServiceClient(gaxGrpc, grpcClients, opts);
   };
-  extend(this.languageServiceApi, LanguageServiceApi);
+  extend(this.languageServiceClient, LanguageServiceClient);
 }
-module.exports = LanguageServiceApiBuilder;
+module.exports = LanguageServiceClientBuilder;
 module.exports.SERVICE_ADDRESS = SERVICE_ADDRESS;
 module.exports.ALL_SCOPES = ALL_SCOPES;

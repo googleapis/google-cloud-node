@@ -64,7 +64,7 @@ function Language(options) {
   }
 
   this.api = {
-    Language: v1(options).languageServiceApi(options)
+    Language: v1(options).languageServiceClient(options)
   };
 }
 

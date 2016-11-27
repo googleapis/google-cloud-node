@@ -44,7 +44,7 @@ function fakeV1() {
   }
 
   return {
-    languageServiceApi: util.noop
+    languageServiceClient: util.noop
   };
 }
 
@@ -106,7 +106,7 @@ describe('Language', function() {
         assert.strictEqual(options, OPTIONS);
 
         return {
-          languageServiceApi: function(options) {
+          languageServiceClient: function(options) {
             assert.strictEqual(options, OPTIONS);
             return expectedLanguageService;
           }
