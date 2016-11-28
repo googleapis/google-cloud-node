@@ -479,6 +479,10 @@ util.makeRequest = makeRequest;
 function decorateRequest(reqOpts, config) {
   config = config || {};
 
+  delete reqOpts.autoPaginate;
+  delete reqOpts.autoPaginateVal;
+  delete reqOpts.objectMode;
+
   if (is.object(reqOpts.qs)) {
     delete reqOpts.qs.autoPaginate;
     delete reqOpts.qs.autoPaginateVal;

@@ -241,10 +241,6 @@ GrpcService.prototype.request = function(protoOpts, reqOpts, callback) {
     return;
   }
 
-  // Clean up gcloud-specific options.
-  delete reqOpts.autoPaginate;
-  delete reqOpts.autoPaginateVal;
-
   var service = this.getService_(protoOpts);
 
   var metadata = this.grpcMetadata;
@@ -252,6 +248,13 @@ GrpcService.prototype.request = function(protoOpts, reqOpts, callback) {
   var grpcOpts = {};
   if (is.number(protoOpts.timeout)) {
     grpcOpts.deadline = GrpcService.createDeadline_(protoOpts.timeout);
+  }
+
+  try {
+    reqOpts = util.decorateRequest(reqOpts, { projectId: self.projectId });
+  } catch(e) {
+    callback(e);
+    return;
   }
 
   // Retains a reference to an error from the response. If the final callback is
@@ -268,13 +271,6 @@ GrpcService.prototype.request = function(protoOpts, reqOpts, callback) {
     // status code to determine if it should retry.
     request: function(_, onResponse) {
       respError = null;
-
-      try {
-        reqOpts = util.decorateRequest(reqOpts, { projectId: self.projectId });
-      } catch (e) {
-        onResponse(e);
-        return;
-      }
 
       service[protoOpts.method](reqOpts, metadata, grpcOpts, function(e, resp) {
         if (e) {
@@ -342,23 +338,22 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
     return stream;
   }
 
-  try {
-    reqOpts = util.decorateRequest(reqOpts, { projectId: this.projectId });
-  } catch (e) {
-    setImmediate(function() {
-      stream.destroy(e);
-    });
-    return stream;
-  }
-
   var objectMode = !!reqOpts.objectMode;
-  delete reqOpts.objectMode;
 
   var service = this.getService_(protoOpts);
   var grpcOpts = {};
 
   if (is.number(protoOpts.timeout)) {
     grpcOpts.deadline = GrpcService.createDeadline_(protoOpts.timeout);
+  }
+
+  try {
+    reqOpts = util.decorateRequest(reqOpts, { projectId: this.projectId });
+  } catch(e) {
+    setImmediate(function() {
+      stream.destroy(e);
+    });
+    return stream;
   }
 
   var retryOpts = {
