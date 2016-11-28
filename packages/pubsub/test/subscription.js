@@ -106,13 +106,60 @@ describe('Subscription', function() {
       assert(promisified);
     });
 
-    it('should format name', function(done) {
-      var formatName_ = Subscription.formatName_;
-      Subscription.formatName_ = function() {
+    describe('name', function() {
+      var FORMATTED_NAME = 'formatted-name';
+      var GENERATED_NAME = 'generated-name';
+
+      var formatName_;
+      var generateName_;
+
+      before(function() {
+        formatName_ = Subscription.formatName_;
+        generateName_ = Subscription.generateName_;
+
+        Subscription.formatName_ = function() {
+          return FORMATTED_NAME;
+        };
+
+        Subscription.generateName_ = function() {
+          return GENERATED_NAME;
+        };
+      });
+
+      afterEach(function() {
+        Subscription.formatName_ = function() {
+          return FORMATTED_NAME;
+        };
+
+        Subscription.generateName_ = function() {
+          return GENERATED_NAME;
+        };
+      });
+
+      after(function() {
         Subscription.formatName_ = formatName_;
-        done();
-      };
-      new Subscription(PUBSUB, { name: SUB_NAME });
+        Subscription.generateName_ = generateName_;
+      });
+
+      it('should generate name', function(done) {
+        Subscription.formatName_ = function(projectId, name) {
+          assert.strictEqual(name, GENERATED_NAME);
+          done();
+        };
+
+        new Subscription(PUBSUB, {});
+      });
+
+      it('should format name', function() {
+        Subscription.formatName_ = function(projectId, name) {
+          assert.strictEqual(projectId, PROJECT_ID);
+          assert.strictEqual(name, SUB_NAME);
+          return FORMATTED_NAME;
+        };
+
+        var subscription = new Subscription(PUBSUB, { name: SUB_NAME });
+        assert.strictEqual(subscription.name, FORMATTED_NAME);
+      });
     });
 
     it('should honor configuration settings', function() {

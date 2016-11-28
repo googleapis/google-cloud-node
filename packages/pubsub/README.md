@@ -23,11 +23,7 @@ var topic = pubsub.topic('my-topic');
 topic.publish('New message!', function(err) {});
 
 // Subscribe to the topic.
-var options = {
-  reuseExisting: true
-};
-
-topic.subscribe('subscription-name', options, function(err, subscription) {
+topic.subscribe('subscription-name', function(err, subscription) {
   // Register listeners to start pulling for messages.
   function onError(err) {}
   function onMessage(message) {}
