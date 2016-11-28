@@ -15,7 +15,7 @@
  */
 'use strict';
 
-var visionApi = require('./image_annotator_api');
+var visionClient = require('./image_annotator_client');
 var extend = require('extend');
 var gax = require('google-gax');
 
@@ -24,9 +24,9 @@ function v1(options) {
     scopes: v1.ALL_SCOPES
   }, options);
   var gaxGrpc = gax.grpc(options);
-  return visionApi(gaxGrpc);
+  return visionClient(gaxGrpc);
 }
 
-v1.SERVICE_ADDRESS = visionApi.SERVICE_ADDRESS;
-v1.ALL_SCOPES = visionApi.ALL_SCOPES;
+v1.SERVICE_ADDRESS = visionClient.SERVICE_ADDRESS;
+v1.ALL_SCOPES = visionClient.ALL_SCOPES;
 module.exports = v1;
