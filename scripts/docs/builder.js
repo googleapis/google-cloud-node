@@ -152,9 +152,9 @@ Builder.prototype.parseFile = function(file) {
   try {
     return parser.parseFile(filePath, contents);
   } catch (e) {
-    throw new Error(
-      'Unable to generate docs for file: ' + file + '. Reason: ' + e.message
-    );
+    e.message =
+        'Unable to generate docs for file: ' + file + '. Reason: ' + e.message;
+    throw e;
   }
 };
 
