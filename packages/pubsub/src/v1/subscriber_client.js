@@ -37,7 +37,6 @@ var DEFAULT_SERVICE_PORT = 443;
 
 var CODE_GEN_NAME_VERSION = 'gapic/0.1.0';
 
-
 var PAGE_DESCRIPTORS = {
   listSubscriptions: new gax.PageDescriptor(
       'pageToken',
@@ -60,17 +59,17 @@ var ALL_SCOPES = [
  *
  * This will be created through a builder function which can be obtained by the module.
  * See the following example of how to initialize the module and how to access to the builder.
- * @see {@link subscriberApi}
+ * @see {@link subscriberClient}
  *
  * @example
  * var pubsubV1 = require('@google-cloud/pubsub').v1({
  *   // optional auth parameters.
  * });
- * var api = pubsubV1.subscriberApi();
+ * var client = pubsubV1.subscriberClient();
  *
  * @class
  */
-function SubscriberApi(gaxGrpc, grpcClients, opts) {
+function SubscriberClient(gaxGrpc, grpcClients, opts) {
   opts = opts || {};
   var servicePath = opts.servicePath || SERVICE_ADDRESS;
   var port = opts.port || DEFAULT_SERVICE_PORT;
@@ -89,8 +88,6 @@ function SubscriberApi(gaxGrpc, grpcClients, opts) {
       'google.pubsub.v1.Subscriber',
       configData,
       clientConfig,
-      PAGE_DESCRIPTORS,
-      null,
       {'x-goog-api-client': googleApiClient});
 
   var iamPolicyStub = gaxGrpc.createStub(
@@ -108,7 +105,8 @@ function SubscriberApi(gaxGrpc, grpcClients, opts) {
       iamPolicyStub.then(function(iamPolicyStub) {
         return iamPolicyStub[methodName].bind(iamPolicyStub);
       }),
-      defaults[methodName]);
+      defaults[methodName],
+      PAGE_DESCRIPTORS[methodName]);
   }.bind(this));
 
   var subscriberStub = gaxGrpc.createStub(
@@ -131,7 +129,8 @@ function SubscriberApi(gaxGrpc, grpcClients, opts) {
       subscriberStub.then(function(subscriberStub) {
         return subscriberStub[methodName].bind(subscriberStub);
       }),
-      defaults[methodName]);
+      defaults[methodName],
+      PAGE_DESCRIPTORS[methodName]);
   }.bind(this));
 }
 
@@ -151,7 +150,7 @@ var TOPIC_PATH_TEMPLATE = new gax.PathTemplate(
  * @param {String} project
  * @returns {String}
  */
-SubscriberApi.prototype.projectPath = function(project) {
+SubscriberClient.prototype.projectPath = function(project) {
   return PROJECT_PATH_TEMPLATE.render({
     project: project
   });
@@ -163,7 +162,7 @@ SubscriberApi.prototype.projectPath = function(project) {
  *   A fully-qualified path representing a project resources.
  * @returns {String} - A string representing the project.
  */
-SubscriberApi.prototype.matchProjectFromProjectName = function(projectName) {
+SubscriberClient.prototype.matchProjectFromProjectName = function(projectName) {
   return PROJECT_PATH_TEMPLATE.match(projectName).project;
 };
 
@@ -173,7 +172,7 @@ SubscriberApi.prototype.matchProjectFromProjectName = function(projectName) {
  * @param {String} subscription
  * @returns {String}
  */
-SubscriberApi.prototype.subscriptionPath = function(project, subscription) {
+SubscriberClient.prototype.subscriptionPath = function(project, subscription) {
   return SUBSCRIPTION_PATH_TEMPLATE.render({
     project: project,
     subscription: subscription
@@ -186,7 +185,7 @@ SubscriberApi.prototype.subscriptionPath = function(project, subscription) {
  *   A fully-qualified path representing a subscription resources.
  * @returns {String} - A string representing the project.
  */
-SubscriberApi.prototype.matchProjectFromSubscriptionName = function(subscriptionName) {
+SubscriberClient.prototype.matchProjectFromSubscriptionName = function(subscriptionName) {
   return SUBSCRIPTION_PATH_TEMPLATE.match(subscriptionName).project;
 };
 
@@ -196,7 +195,7 @@ SubscriberApi.prototype.matchProjectFromSubscriptionName = function(subscription
  *   A fully-qualified path representing a subscription resources.
  * @returns {String} - A string representing the subscription.
  */
-SubscriberApi.prototype.matchSubscriptionFromSubscriptionName = function(subscriptionName) {
+SubscriberClient.prototype.matchSubscriptionFromSubscriptionName = function(subscriptionName) {
   return SUBSCRIPTION_PATH_TEMPLATE.match(subscriptionName).subscription;
 };
 
@@ -206,7 +205,7 @@ SubscriberApi.prototype.matchSubscriptionFromSubscriptionName = function(subscri
  * @param {String} topic
  * @returns {String}
  */
-SubscriberApi.prototype.topicPath = function(project, topic) {
+SubscriberClient.prototype.topicPath = function(project, topic) {
   return TOPIC_PATH_TEMPLATE.render({
     project: project,
     topic: topic
@@ -219,7 +218,7 @@ SubscriberApi.prototype.topicPath = function(project, topic) {
  *   A fully-qualified path representing a topic resources.
  * @returns {String} - A string representing the project.
  */
-SubscriberApi.prototype.matchProjectFromTopicName = function(topicName) {
+SubscriberClient.prototype.matchProjectFromTopicName = function(topicName) {
   return TOPIC_PATH_TEMPLATE.match(topicName).project;
 };
 
@@ -229,7 +228,7 @@ SubscriberApi.prototype.matchProjectFromTopicName = function(topicName) {
  *   A fully-qualified path representing a topic resources.
  * @returns {String} - A string representing the topic.
  */
-SubscriberApi.prototype.matchTopicFromTopicName = function(topicName) {
+SubscriberClient.prototype.matchTopicFromTopicName = function(topicName) {
   return TOPIC_PATH_TEMPLATE.match(topicName).topic;
 };
 
@@ -289,26 +288,28 @@ SubscriberApi.prototype.matchTopicFromTopicName = function(topicName) {
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
- *   The second parameter to the callback is an object representing [Subscription]{@link Subscription}
- * @returns {Promise} - The promise which resolves to the response object.
+ *   The second parameter to the callback is an object representing [Subscription]{@link Subscription}.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Subscription]{@link Subscription}.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = pubsubV1.subscriberApi();
- * var formattedName = api.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
- * var formattedTopic = api.topicPath("[PROJECT]", "[TOPIC]");
+ * var client = pubsubV1.subscriberClient();
+ * var formattedName = client.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
+ * var formattedTopic = client.topicPath("[PROJECT]", "[TOPIC]");
  * var request = {
  *     name: formattedName,
  *     topic: formattedTopic
  * };
- * api.createSubscription(request).then(function(response) {
+ * client.createSubscription(request).then(function(responses) {
+ *     var response = responses[0];
  *     // doThingsWith(response)
  * }).catch(function(err) {
  *     console.error(err);
  * });
  */
-SubscriberApi.prototype.createSubscription = function(request, options, callback) {
+SubscriberClient.prototype.createSubscription = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -316,6 +317,7 @@ SubscriberApi.prototype.createSubscription = function(request, options, callback
   if (options === undefined) {
     options = {};
   }
+
   return this._createSubscription(request, options, callback);
 };
 
@@ -332,21 +334,23 @@ SubscriberApi.prototype.createSubscription = function(request, options, callback
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
- *   The second parameter to the callback is an object representing [Subscription]{@link Subscription}
- * @returns {Promise} - The promise which resolves to the response object.
+ *   The second parameter to the callback is an object representing [Subscription]{@link Subscription}.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Subscription]{@link Subscription}.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = pubsubV1.subscriberApi();
- * var formattedSubscription = api.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
- * api.getSubscription({subscription: formattedSubscription}).then(function(response) {
+ * var client = pubsubV1.subscriberClient();
+ * var formattedSubscription = client.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
+ * client.getSubscription({subscription: formattedSubscription}).then(function(responses) {
+ *     var response = responses[0];
  *     // doThingsWith(response)
  * }).catch(function(err) {
  *     console.error(err);
  * });
  */
-SubscriberApi.prototype.getSubscription = function(request, options, callback) {
+SubscriberClient.prototype.getSubscription = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -354,6 +358,7 @@ SubscriberApi.prototype.getSubscription = function(request, options, callback) {
   if (options === undefined) {
     options = {};
   }
+
   return this._getSubscription(request, options, callback);
 };
 
@@ -373,42 +378,64 @@ SubscriberApi.prototype.getSubscription = function(request, options, callback) {
  * @param {Object=} options
  *   Optional parameters. You can override the default settings for this call, e.g, timeout,
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
- * @param {function(?Error, ?Object, ?string)=} callback
- *   When specified, the results are not streamed but this callback
- *   will be called with the response object representing [ListSubscriptionsResponse]{@link ListSubscriptionsResponse}.
- *   The third item will be set if the response contains the token for the further results
- *   and can be reused to `pageToken` field in the options in the next request.
- * @returns {Stream|Promise}
- *   An object stream which emits an object representing
- *   [Subscription]{@link Subscription} on 'data' event.
- *   When the callback is specified or streaming is suppressed through options,
- *   it will return a promise that resolves to the response object. The promise
- *   has a method named "cancel" which cancels the ongoing API call.
+ * @param {function(?Error, ?Array, ?Object, ?Object)=} callback
+ *   The function which will be called with the result of the API call.
+ *
+ *   The second parameter to the callback is Array of [Subscription]{@link Subscription}.
+ *
+ *   When autoPaginate: false is specified through options, it contains the result
+ *   in a single response. If the response indicates the next page exists, the third
+ *   parameter is set to be used for the next request object. The fourth parameter keeps
+ *   the raw response object of an object representing [ListSubscriptionsResponse]{@link ListSubscriptionsResponse}.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of [Subscription]{@link Subscription}.
+ *
+ *   When autoPaginate: false is specified through options, the array has three elements.
+ *   The first element is Array of [Subscription]{@link Subscription} in a single response.
+ *   The second element is the next request object if the response
+ *   indicates the next page exists, or null. The third element is
+ *   an object representing [ListSubscriptionsResponse]{@link ListSubscriptionsResponse}.
+ *
+ *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = pubsubV1.subscriberApi();
- * var formattedProject = api.projectPath("[PROJECT]");
+ * var client = pubsubV1.subscriberClient();
+ * var formattedProject = client.projectPath("[PROJECT]");
  * // Iterate over all elements.
- * api.listSubscriptions({project: formattedProject}).on('data', function(element) {
- *     // doThingsWith(element)
+ * client.listSubscriptions({project: formattedProject}).then(function(responses) {
+ *     var resources = responses[0];
+ *     for (var i = 0; i < resources.length; ++i) {
+ *         // doThingsWith(resources[i])
+ *     }
+ * }).catch(function(err) {
+ *     console.error(err);
  * });
  *
- * // Or obtain the paged response through the callback.
- * function callback(err, response, nextPageToken) {
- *     if (err) {
- *         console.error(err);
- *         return;
+ * // Or obtain the paged response.
+ * var options = {autoPaginate: false};
+ * function callback(responses) {
+ *     // The actual resources in a response.
+ *     var resources = responses[0];
+ *     // The next request if the response shows there's more responses.
+ *     var nextRequest = responses[1];
+ *     // The actual response object, if necessary.
+ *     // var rawResponse = responses[2];
+ *     for (var i = 0; i < resources.length; ++i) {
+ *         // doThingsWith(resources[i]);
  *     }
- *     // doThingsWith(response)
- *     if (nextPageToken) {
- *         // fetch the next page.
- *         api.listSubscriptions({project: formattedProject}, {pageToken: nextPageToken}, callback);
+ *     if (nextRequest) {
+ *         // Fetch the next page.
+ *         return client.listSubscriptions(nextRequest, options).then(callback);
  *     }
  * }
- * api.listSubscriptions({project: formattedProject}, {flattenPages: false}, callback);
+ * client.listSubscriptions({project: formattedProject}, options)
+ *     .then(callback)
+ *     .catch(function(err) {
+ *         console.error(err);
+ *     });
  */
-SubscriberApi.prototype.listSubscriptions = function(request, options, callback) {
+SubscriberClient.prototype.listSubscriptions = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -416,7 +443,55 @@ SubscriberApi.prototype.listSubscriptions = function(request, options, callback)
   if (options === undefined) {
     options = {};
   }
+
   return this._listSubscriptions(request, options, callback);
+};
+
+/**
+ * Equivalent to {@link listSubscriptions}, but returns a NodeJS Stream object.
+ *
+ * This fetches the paged responses for {@link listSubscriptions} continuously
+ * and invokes the callback registered for 'data' event for each element in the
+ * responses.
+ *
+ * The returned object has 'end' method when no more elements are required.
+ *
+ * autoPaginate option will be ignored.
+ *
+ * @see {@link https://nodejs.org/api/stream.html}
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.project
+ *   The name of the cloud project that subscriptions belong to.
+ * @param {number=} request.pageSize
+ *   The maximum number of resources contained in the underlying API
+ *   response. If page streaming is performed per-resource, this
+ *   parameter does not affect the return value. If page streaming is
+ *   performed per-page, this determines the maximum number of
+ *   resources in a page.
+ * @param {Object=} options
+ *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+ *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
+ * @return {Stream}
+ *   An object stream which emits an object representing [Subscription]{@link Subscription} on 'data' event.
+ *
+ * @example
+ *
+ * var client = pubsubV1.subscriberClient();
+ * var formattedProject = client.projectPath("[PROJECT]");
+ * client.listSubscriptionsStream({project: formattedProject}).on('data', function(element) {
+ *     // doThingsWith(element)
+ * }).on('error', function(err) {
+ *     console.error(err);
+ * });
+ */
+SubscriberClient.prototype.listSubscriptionsStream = function(request, options) {
+  if (options === undefined) {
+    options = {};
+  }
+
+  return PAGE_DESCRIPTORS.listSubscriptions.createStream(this._listSubscriptions, request, options);
 };
 
 /**
@@ -435,18 +510,18 @@ SubscriberApi.prototype.listSubscriptions = function(request, options, callback)
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error)=} callback
  *   The function which will be called with the result of the API call.
- * @returns {Promise} - The promise which resolves to the response object.
+ * @return {Promise} - The promise which resolves when API call finishes.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = pubsubV1.subscriberApi();
- * var formattedSubscription = api.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
- * api.deleteSubscription({subscription: formattedSubscription}).catch(function(err) {
+ * var client = pubsubV1.subscriberClient();
+ * var formattedSubscription = client.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
+ * client.deleteSubscription({subscription: formattedSubscription}).catch(function(err) {
  *     console.error(err);
  * });
  */
-SubscriberApi.prototype.deleteSubscription = function(request, options, callback) {
+SubscriberClient.prototype.deleteSubscription = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -454,6 +529,7 @@ SubscriberApi.prototype.deleteSubscription = function(request, options, callback
   if (options === undefined) {
     options = {};
   }
+
   return this._deleteSubscription(request, options, callback);
 };
 
@@ -481,13 +557,13 @@ SubscriberApi.prototype.deleteSubscription = function(request, options, callback
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error)=} callback
  *   The function which will be called with the result of the API call.
- * @returns {Promise} - The promise which resolves to the response object.
+ * @return {Promise} - The promise which resolves when API call finishes.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = pubsubV1.subscriberApi();
- * var formattedSubscription = api.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
+ * var client = pubsubV1.subscriberClient();
+ * var formattedSubscription = client.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
  * var ackIds = [];
  * var ackDeadlineSeconds = 0;
  * var request = {
@@ -495,11 +571,11 @@ SubscriberApi.prototype.deleteSubscription = function(request, options, callback
  *     ackIds: ackIds,
  *     ackDeadlineSeconds: ackDeadlineSeconds
  * };
- * api.modifyAckDeadline(request).catch(function(err) {
+ * client.modifyAckDeadline(request).catch(function(err) {
  *     console.error(err);
  * });
  */
-SubscriberApi.prototype.modifyAckDeadline = function(request, options, callback) {
+SubscriberClient.prototype.modifyAckDeadline = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -507,6 +583,7 @@ SubscriberApi.prototype.modifyAckDeadline = function(request, options, callback)
   if (options === undefined) {
     options = {};
   }
+
   return this._modifyAckDeadline(request, options, callback);
 };
 
@@ -531,23 +608,23 @@ SubscriberApi.prototype.modifyAckDeadline = function(request, options, callback)
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error)=} callback
  *   The function which will be called with the result of the API call.
- * @returns {Promise} - The promise which resolves to the response object.
+ * @return {Promise} - The promise which resolves when API call finishes.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = pubsubV1.subscriberApi();
- * var formattedSubscription = api.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
+ * var client = pubsubV1.subscriberClient();
+ * var formattedSubscription = client.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
  * var ackIds = [];
  * var request = {
  *     subscription: formattedSubscription,
  *     ackIds: ackIds
  * };
- * api.acknowledge(request).catch(function(err) {
+ * client.acknowledge(request).catch(function(err) {
  *     console.error(err);
  * });
  */
-SubscriberApi.prototype.acknowledge = function(request, options, callback) {
+SubscriberClient.prototype.acknowledge = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -555,6 +632,7 @@ SubscriberApi.prototype.acknowledge = function(request, options, callback) {
   if (options === undefined) {
     options = {};
   }
+
   return this._acknowledge(request, options, callback);
 };
 
@@ -583,26 +661,28 @@ SubscriberApi.prototype.acknowledge = function(request, options, callback) {
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
- *   The second parameter to the callback is an object representing [PullResponse]{@link PullResponse}
- * @returns {Promise} - The promise which resolves to the response object.
+ *   The second parameter to the callback is an object representing [PullResponse]{@link PullResponse}.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [PullResponse]{@link PullResponse}.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = pubsubV1.subscriberApi();
- * var formattedSubscription = api.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
+ * var client = pubsubV1.subscriberClient();
+ * var formattedSubscription = client.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
  * var maxMessages = 0;
  * var request = {
  *     subscription: formattedSubscription,
  *     maxMessages: maxMessages
  * };
- * api.pull(request).then(function(response) {
+ * client.pull(request).then(function(responses) {
+ *     var response = responses[0];
  *     // doThingsWith(response)
  * }).catch(function(err) {
  *     console.error(err);
  * });
  */
-SubscriberApi.prototype.pull = function(request, options, callback) {
+SubscriberClient.prototype.pull = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -610,6 +690,7 @@ SubscriberApi.prototype.pull = function(request, options, callback) {
   if (options === undefined) {
     options = {};
   }
+
   return this._pull(request, options, callback);
 };
 
@@ -639,23 +720,23 @@ SubscriberApi.prototype.pull = function(request, options, callback) {
  *   retries, paginations, etc. See [gax.CallOptions]{@link https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the details.
  * @param {function(?Error)=} callback
  *   The function which will be called with the result of the API call.
- * @returns {Promise} - The promise which resolves to the response object.
+ * @return {Promise} - The promise which resolves when API call finishes.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = pubsubV1.subscriberApi();
- * var formattedSubscription = api.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
+ * var client = pubsubV1.subscriberClient();
+ * var formattedSubscription = client.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
  * var pushConfig = {};
  * var request = {
  *     subscription: formattedSubscription,
  *     pushConfig: pushConfig
  * };
- * api.modifyPushConfig(request).catch(function(err) {
+ * client.modifyPushConfig(request).catch(function(err) {
  *     console.error(err);
  * });
  */
-SubscriberApi.prototype.modifyPushConfig = function(request, options, callback) {
+SubscriberClient.prototype.modifyPushConfig = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -663,6 +744,7 @@ SubscriberApi.prototype.modifyPushConfig = function(request, options, callback) 
   if (options === undefined) {
     options = {};
   }
+
   return this._modifyPushConfig(request, options, callback);
 };
 
@@ -689,26 +771,28 @@ SubscriberApi.prototype.modifyPushConfig = function(request, options, callback) 
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
- *   The second parameter to the callback is an object representing [Policy]{@link Policy}
- * @returns {Promise} - The promise which resolves to the response object.
+ *   The second parameter to the callback is an object representing [Policy]{@link Policy}.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Policy]{@link Policy}.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = pubsubV1.subscriberApi();
- * var formattedResource = api.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
+ * var client = pubsubV1.subscriberClient();
+ * var formattedResource = client.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
  * var policy = {};
  * var request = {
  *     resource: formattedResource,
  *     policy: policy
  * };
- * api.setIamPolicy(request).then(function(response) {
+ * client.setIamPolicy(request).then(function(responses) {
+ *     var response = responses[0];
  *     // doThingsWith(response)
  * }).catch(function(err) {
  *     console.error(err);
  * });
  */
-SubscriberApi.prototype.setIamPolicy = function(request, options, callback) {
+SubscriberClient.prototype.setIamPolicy = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -716,6 +800,7 @@ SubscriberApi.prototype.setIamPolicy = function(request, options, callback) {
   if (options === undefined) {
     options = {};
   }
+
   return this._setIamPolicy(request, options, callback);
 };
 
@@ -736,21 +821,23 @@ SubscriberApi.prototype.setIamPolicy = function(request, options, callback) {
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
- *   The second parameter to the callback is an object representing [Policy]{@link Policy}
- * @returns {Promise} - The promise which resolves to the response object.
+ *   The second parameter to the callback is an object representing [Policy]{@link Policy}.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Policy]{@link Policy}.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = pubsubV1.subscriberApi();
- * var formattedResource = api.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
- * api.getIamPolicy({resource: formattedResource}).then(function(response) {
+ * var client = pubsubV1.subscriberClient();
+ * var formattedResource = client.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
+ * client.getIamPolicy({resource: formattedResource}).then(function(responses) {
+ *     var response = responses[0];
  *     // doThingsWith(response)
  * }).catch(function(err) {
  *     console.error(err);
  * });
  */
-SubscriberApi.prototype.getIamPolicy = function(request, options, callback) {
+SubscriberClient.prototype.getIamPolicy = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -758,6 +845,7 @@ SubscriberApi.prototype.getIamPolicy = function(request, options, callback) {
   if (options === undefined) {
     options = {};
   }
+
   return this._getIamPolicy(request, options, callback);
 };
 
@@ -781,26 +869,28 @@ SubscriberApi.prototype.getIamPolicy = function(request, options, callback) {
  * @param {function(?Error, ?Object)=} callback
  *   The function which will be called with the result of the API call.
  *
- *   The second parameter to the callback is an object representing [TestIamPermissionsResponse]{@link TestIamPermissionsResponse}
- * @returns {Promise} - The promise which resolves to the response object.
+ *   The second parameter to the callback is an object representing [TestIamPermissionsResponse]{@link TestIamPermissionsResponse}.
+ * @return {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [TestIamPermissionsResponse]{@link TestIamPermissionsResponse}.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  * @example
  *
- * var api = pubsubV1.subscriberApi();
- * var formattedResource = api.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
+ * var client = pubsubV1.subscriberClient();
+ * var formattedResource = client.subscriptionPath("[PROJECT]", "[SUBSCRIPTION]");
  * var permissions = [];
  * var request = {
  *     resource: formattedResource,
  *     permissions: permissions
  * };
- * api.testIamPermissions(request).then(function(response) {
+ * client.testIamPermissions(request).then(function(responses) {
+ *     var response = responses[0];
  *     // doThingsWith(response)
  * }).catch(function(err) {
  *     console.error(err);
  * });
  */
-SubscriberApi.prototype.testIamPermissions = function(request, options, callback) {
+SubscriberClient.prototype.testIamPermissions = function(request, options, callback) {
   if (options instanceof Function && callback === undefined) {
     callback = options;
     options = {};
@@ -808,12 +898,13 @@ SubscriberApi.prototype.testIamPermissions = function(request, options, callback
   if (options === undefined) {
     options = {};
   }
+
   return this._testIamPermissions(request, options, callback);
 };
 
-function SubscriberApiBuilder(gaxGrpc) {
-  if (!(this instanceof SubscriberApiBuilder)) {
-    return new SubscriberApiBuilder(gaxGrpc);
+function SubscriberClientBuilder(gaxGrpc) {
+  if (!(this instanceof SubscriberClientBuilder)) {
+    return new SubscriberClientBuilder(gaxGrpc);
   }
 
   var iamPolicyClient = gaxGrpc.load([{
@@ -834,7 +925,7 @@ function SubscriberApiBuilder(gaxGrpc) {
   };
 
   /**
-   * Build a new instance of {@link SubscriberApi}.
+   * Build a new instance of {@link SubscriberClient}.
    *
    * @param {Object=} opts - The optional parameters.
    * @param {String=} opts.servicePath
@@ -851,11 +942,11 @@ function SubscriberApiBuilder(gaxGrpc) {
    * @param {String=} opts.appVersion
    *   The version of the calling service.
    */
-  this.subscriberApi = function(opts) {
-    return new SubscriberApi(gaxGrpc, grpcClients, opts);
+  this.subscriberClient = function(opts) {
+    return new SubscriberClient(gaxGrpc, grpcClients, opts);
   };
-  extend(this.subscriberApi, SubscriberApi);
+  extend(this.subscriberClient, SubscriberClient);
 }
-module.exports = SubscriberApiBuilder;
+module.exports = SubscriberClientBuilder;
 module.exports.SERVICE_ADDRESS = SERVICE_ADDRESS;
 module.exports.ALL_SCOPES = ALL_SCOPES;
