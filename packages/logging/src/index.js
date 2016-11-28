@@ -47,12 +47,6 @@ var Log = require('./log.js');
 var Sink = require('./sink.js');
 
 /**
- * @type {module:metdata}
- * @private
- */
-var Metadata = require('./metadata.js');
-
-/**
  * <p class="notice">
  *   **This is a Beta release of Stackdriver Logging.** This API is not covered
  *   by any SLA or deprecation policy and may be subject to
@@ -93,8 +87,6 @@ function Logging(options) {
   };
 
   common.GrpcService.call(this, config, options);
-
-  this.metadata_ = new Metadata(this);
 }
 
 util.inherits(Logging, common.GrpcService);

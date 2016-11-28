@@ -34,6 +34,12 @@ var util = require('util');
 var Entry = require('./entry.js');
 
 /**
+ * @type {module:logging/metadata}
+ * @private
+ */
+var Metadata = require('./metadata.js');
+
+/**
  * A log is a named collection of entries, each entry representing a timestamped
  * event. Logs can be produced by Google Cloud Platform services, by third-party
  * services, or by your applications. For example, the log `apache-access` is
@@ -53,7 +59,8 @@ var Entry = require('./entry.js');
 function Log(logging, name) {
   this.formattedName_ = Log.formatName_(logging.projectId, name);
   this.name = this.formattedName_.split('/').pop();
-  this.metadata_ = logging.metadata_;
+
+  this.metadata_ = new Metadata(logging);
 
   var methods = {
     /**
