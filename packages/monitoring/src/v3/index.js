@@ -15,8 +15,8 @@
  */
 'use strict';
 
-var groupServiceApi = require('./group_service_api');
-var metricServiceApi = require('./metric_service_api');
+var groupServiceClient = require('./group_service_client');
+var metricServiceClient = require('./metric_service_client');
 var gax = require('google-gax');
 var extend = require('extend');
 
@@ -26,10 +26,10 @@ function v3(options) {
   }, options);
   var gaxGrpc = gax.grpc(options);
   var result = {};
-  extend(result, groupServiceApi(gaxGrpc));
-  extend(result, metricServiceApi(gaxGrpc));
+  extend(result, groupServiceClient(gaxGrpc));
+  extend(result, metricServiceClient(gaxGrpc));
   return result;
 }
-v3.SERVICE_ADDRESS = groupServiceApi.SERVICE_ADDRESS;
-v3.ALL_SCOPES = [];
+v3.SERVICE_ADDRESS = groupServiceClient.SERVICE_ADDRESS;
+v3.ALL_SCOPES = groupServiceClient.ALL_SCOPES;
 module.exports = v3;
