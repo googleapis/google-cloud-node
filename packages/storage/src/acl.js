@@ -606,17 +606,17 @@ AclRoleAccessorMethods.prototype._assignAccessMethods = function(role) {
           callback = entityId;
         }
 
-        return self[accessMethod]({
+        var args = [{
           entity: apiEntity,
           role: role
-        }, callback);
+        }];
+
+        if (is.fn(callback)) {
+          args.push(callback);
+        }
+
+        return self[accessMethod].apply(self, args);
       };
-
-      var originalMethod = acc[method];
-
-      if (!originalMethod.promisified_) {
-        acc[method] = common.util.promisify(originalMethod);
-      }
     });
 
     return acc;
