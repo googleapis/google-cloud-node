@@ -334,7 +334,7 @@ function Subscription(pubsub, options) {
 modelo.inherits(Subscription, common.GrpcServiceObject, events.EventEmitter);
 
 /**
- * Simplify a message from an API response to have four properties: `id`,
+ * Simplify a message from an API response to have five properties: `id`,
  * `ackId`, `data`, `attributes`, and `timestamp`. `data` is always converted to
  * a string.
  *
