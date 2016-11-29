@@ -552,9 +552,11 @@ Topic.prototype.subscribe = function(subName, options, callback) {
  * // Register a listener for `message` events.
  * subscription.on('message', function(message) {
  *   // Called every time a message is received.
- *   // message.id = ID used to acknowledge its receival.
+ *   // message.id = ID of the message.
+ *   // message.ackId = ID used to acknowledge the message receival.
  *   // message.data = Contents of the message.
  *   // message.attributes = Attributes of the message.
+ *   // message.timestamp = Timestamp when Pub/Sub received the message.
  * });
  */
 Topic.prototype.subscription = function(name, options) {
