@@ -883,14 +883,6 @@ describe('Document', function() {
       other: [ entitiesCopy[15], entitiesCopy[14] ],
     };
 
-    for (var entityType in FORMATTED_ENTITIES) {
-      FORMATTED_ENTITIES[entityType] = FORMATTED_ENTITIES[entityType]
-        .map(function(entity) {
-          entity.salience *= 100;
-          return entity;
-        });
-    }
-
     var EXPECTED_FORMATTED_ENTITIES = {
       default: extend(true, {}, FORMATTED_ENTITIES),
       verbose: extend(true, {}, FORMATTED_ENTITIES)
@@ -976,9 +968,9 @@ describe('Document', function() {
     var VERBOSE = false;
 
     var EXPECTED_FORMATTED_SENTIMENT = {
-      default: SENTIMENT.score * 100,
+      default: SENTIMENT.score,
       verbose: {
-        score: SENTIMENT.score * 100,
+        score: SENTIMENT.score,
         magnitude: SENTIMENT.magnitude
       }
     };
