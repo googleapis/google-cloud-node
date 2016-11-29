@@ -117,7 +117,7 @@ Builder.prototype.getTagName = function() {
   }
 
   if (this.isUmbrella) {
-    return 'v' + this.version;
+    return this.version.replace(/^v*/, 'v');
   }
 
   return [this.name, this.version].join('-');
