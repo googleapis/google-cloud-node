@@ -1194,9 +1194,20 @@ describe('Request', function() {
 
     it('should prepare entity objects', function(done) {
       var entityObject = {};
+      var prepared = false;
 
       overrides.Request.prepareEntityObject_ = function(obj) {
         assert.strictEqual(obj, entityObject);
+        prepared = true;
+        return {
+          key: key,
+          method: 'insert',
+          data: { k: 'v' }
+        };
+      };
+
+      request.request_ = function() {
+        assert.strictEqual(prepared, true);
         done();
       };
 
