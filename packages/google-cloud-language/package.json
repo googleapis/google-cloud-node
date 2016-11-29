@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/language",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "author": "Google Inc.",
   "description": "Google Cloud Natural Language Client Library for Node.js",
   "contributors": [
