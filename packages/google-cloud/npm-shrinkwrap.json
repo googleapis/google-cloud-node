@@ -40,9 +40,9 @@
       "resolved": "https://registry.npmjs.org/@google-cloud/dns/-/dns-0.3.1.tgz"
     },
     "@google-cloud/language": {
-      "version": "0.6.2",
-      "from": "@google-cloud/language@>=0.6.2 <0.7.0",
-      "resolved": "https://registry.npmjs.org/@google-cloud/language/-/language-0.6.2.tgz"
+      "version": "0.6.3",
+      "from": "@google-cloud/language@>=0.6.3 <0.7.0",
+      "resolved": "https://registry.npmjs.org/@google-cloud/language/-/language-0.6.3.tgz"
     },
     "@google-cloud/logging": {
       "version": "0.5.1",
