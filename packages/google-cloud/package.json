@@ -102,7 +102,7 @@
     "@google-cloud/compute": "^0.3.1",
     "@google-cloud/datastore": "^0.5.1",
     "@google-cloud/dns": "^0.3.1",
-    "@google-cloud/language": "^0.6.1",
+    "@google-cloud/language": "^0.6.2",
     "@google-cloud/logging": "^0.5.1",
     "@google-cloud/monitoring": "^0.1.2",
     "@google-cloud/prediction": "^0.3.1",
