@@ -241,6 +241,10 @@ function createSnippet(mod, instantiation, method) {
       /require\('(@google-cloud\/[^']*)/g,
       'require(\'../packages/' + mod + '/node_modules/$1'
     )
+    .replace(
+      'keyFilename: \'/path/to/keyfile.json\'',
+      'keyFilename: \'\''
+    )
     .replace('require(\'express\')', FakeExpress.toString())
     .replace('require(\'level\')', FakeLevel.toString())
     .replace('require(\'bluebird\')', FakeBluebird.toString())
