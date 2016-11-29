@@ -37,6 +37,10 @@ var fakeUtil = extend({}, util, {
 
 var Entry = require('../src/entry.js');
 
+function FakeMetadata() {
+  this.calledWith_ = arguments;
+}
+
 function FakeGrpcServiceObject() {
   this.calledWith_ = arguments;
   this.parent = {};
@@ -59,14 +63,7 @@ describe('Log', function() {
   var LOGGING = {
     projectId: PROJECT_ID,
     entry: util.noop,
-    request: util.noop,
-    metadata: {
-      getDefaultResource: function(callback) {
-        setImmediate(function() {
-          callback(null, {type: 'global'});
-        });
-      }
-    }
+    request: util.noop
   };
 
   var assignSeverityToEntriesOverride = null;
@@ -74,6 +71,7 @@ describe('Log', function() {
   before(function() {
     Log = proxyquire('../src/log.js', {
       './entry.js': Entry,
+      './metadata.js': FakeMetadata,
       '@google-cloud/common': {
         GrpcServiceObject: FakeGrpcServiceObject,
         util: fakeUtil
@@ -113,6 +111,11 @@ describe('Log', function() {
       var log = new Log(LOGGING, LOG_NAME_FORMATTED);
 
       assert.strictEqual(log.formattedName_, formattedName);
+    });
+
+    it('should localize an instance of Metadata', function() {
+      assert(log.metadata_ instanceof FakeMetadata);
+      assert.strictEqual(log.metadata_.calledWith[0], LOGGING);
     });
 
     it('should inherit from GrpcServiceObject', function() {
@@ -310,20 +313,36 @@ describe('Log', function() {
       resource: {}
     };
 
-    it('should make the correct API request', function(done) {
-      var formattedEntry = {};
-
-      log.formatEntryForApi_ = function() {
-        return formattedEntry;
+    beforeEach(function() {
+      log.decorateEntries_ = function(entries, callback) {
+        callback(null, entries);
       };
+    });
 
+    it('should make the correct API request', function(done) {
       log.request = function(protoOpts, reqOpts) {
         assert.strictEqual(protoOpts.service, 'LoggingServiceV2');
         assert.strictEqual(protoOpts.method, 'writeLogEntries');
 
         assert.strictEqual(reqOpts.logName, log.formattedName_);
-        assert.strictEqual(reqOpts.entries[0], formattedEntry);
+        assert.strictEqual(reqOpts.entries[0], ENTRY);
 
+        done();
+      };
+
+      log.write(ENTRY, OPTIONS, assert.ifError);
+    });
+
+    it('should arrify & decorate the entries', function(done) {
+      var decoratedEntries = [];
+
+      log.decorateEntries_ = function(entries, callback) {
+        assert.strictEqual(entries[0], ENTRY);
+        callback(null, decoratedEntries);
+      };
+
+      log.request = function(protoOpts, reqOpts) {
+        assert.strictEqual(reqOpts.entries, decoratedEntries);
         done();
       };
 
@@ -332,8 +351,6 @@ describe('Log', function() {
 
     it('should exec callback with only error and API response', function(done) {
       var args = [1, 2, 3, 4];
-
-      log.formatEntryForApi_ = util.noop;
 
       log.request = function(protoOpts, reqOpts, callback) {
         callback.apply(null, args);
@@ -350,65 +367,11 @@ describe('Log', function() {
     });
 
     it('should not require options', function(done) {
-      log.formatEntryForApi_ = util.noop;
-
       log.request = function(protoOpts, reqOpts, callback) {
         callback(); // done()
       };
 
       log.write(ENTRY, done);
-    });
-  });
-
-  describe('metadata defaults', function() {
-    it('Should not augment user resource data', function(done) {
-      var ENTRY = {metadata: {resource: {type: 'test'}}};
-      log.write = function(entries) {
-        assert.deepEqual(entries[0].metadata, extend({severity: 'ALERT'},
-          ENTRY.metadata));
-        done();
-      };
-      log.alert(ENTRY, {}, assert.ifError);
-    });
-
-    it('Should augment user resource data if nothing is given', function(done) {
-      var ENTRY = new Entry();
-      var AUTO_RESOURCE = {
-        resource: {
-          type: 'global',
-          labels: {
-            project_id: 'project-id'
-          }
-        }
-      };
-      var GENERATED_RESOURCE;
-      log.request = function(proto, reqOpts, cb) {
-        GENERATED_RESOURCE = reqOpts.entries[0].resource;
-        cb();
-      };
-      log.write(ENTRY, {}, function() {
-        assert.deepEqual(AUTO_RESOURCE.resource, GENERATED_RESOURCE);
-        done();
-      });
-    });
-
-    it('Should not overwrite user resource data if given', function(done) {
-      var GENERATED_RESOURCE;
-      var USER_RESOURCE = {
-        type: 'x',
-        labels: {
-          project_id: 'y'
-        }
-      };
-      var ENTRY = new Entry({resource: USER_RESOURCE}, {textPayload: 'z'});
-      log.request = function(proto, reqOpts, cb) {
-        GENERATED_RESOURCE = reqOpts.entries[0].resource;
-        cb();
-      };
-      log.write(ENTRY, {}, function() {
-        assert.deepEqual(USER_RESOURCE, GENERATED_RESOURCE);
-        done();
-      });
     });
   });
 
@@ -653,47 +616,100 @@ describe('Log', function() {
     });
   });
 
-  describe('formatEntryForApi_', function() {
-    var ENTRY = {};
-    var EXPECTED_FORMATTED_ENTRY = {};
-    var ENTRY_INSTANCE = new Entry();
+  describe('decorateEntries_', function() {
+    var toJSONResponse = {};
 
-    it('should create an entry if one is not provided', function() {
-      var fakeEntryInstance = {
-        toJSON: function() {
-          return EXPECTED_FORMATTED_ENTRY;
-        }
+    function FakeEntry() {}
+    FakeEntry.prototype.toJSON = function() {
+      return toJSONResponse;
+    };
+
+    beforeEach(function() {
+      log.entry = function() {
+        return new FakeEntry();
       };
 
-      log.entry = function(entry) {
-        assert.strictEqual(entry, ENTRY);
-        return fakeEntryInstance;
+      log.metadata_.assignDefaultResource = function(entryJson, callback) {
+        callback(null, entryJson);
       };
-
-      var formattedEntry = log.formatEntryForApi_(ENTRY);
-      assert.strictEqual(formattedEntry, EXPECTED_FORMATTED_ENTRY);
     });
 
-    it('should get JSON format from entry object', function(done) {
+    it('should create an Entry object if one is not provided', function(done) {
+      var entry = {};
+
+      log.entry = function(entry_) {
+        assert.strictEqual(entry_, entry);
+        return new FakeEntry();
+      };
+
+      log.decorateEntries_([entry], function(err, decoratedEntries) {
+        assert.ifError(err);
+        assert.strictEqual(decoratedEntries[0], toJSONResponse);
+        done();
+      });
+    });
+
+    it('should get JSON format from Entry object', function(done) {
       log.entry = function() {
         done(); // will result in multiple done() calls and fail the test.
       };
 
-      var toJSON = ENTRY_INSTANCE.toJSON;
-      ENTRY_INSTANCE.toJSON = function() {
-        ENTRY_INSTANCE.toJSON = toJSON;
-        return EXPECTED_FORMATTED_ENTRY;
+      var entry = new Entry();
+      entry.toJSON = function() {
+        return toJSONResponse;
       };
 
-      var formattedEntry = log.formatEntryForApi_(ENTRY_INSTANCE);
-      assert.strictEqual(formattedEntry, EXPECTED_FORMATTED_ENTRY);
-      done();
+      log.decorateEntries_(entry, function(err, decoratedEntries) {
+        assert.ifError(err);
+        assert.strictEqual(decoratedEntries[0], toJSONResponse);
+        done();
+      });
     });
 
-    it('should assign the log name', function() {
-      var entry = log.formatEntryForApi_(ENTRY_INSTANCE);
+    it('should assign the log name', function(done) {
+      log.decorateEntries_([{}], function(err, decoratedEntries) {
+        assert.ifError(err);
+        assert.strictEqual(decoratedEntries[0].logName, log.formattedName_);
+        done();
+      });
+    });
 
-      assert.strictEqual(entry.logName, log.formattedName_);
+    it('should return extended entry with default resource', function(done) {
+      var entry = new FakeEntry();
+      entry.toJSON = function() {
+        return toJSONResponse;
+      };
+
+      var entryWithDefaultResource = {};
+
+      log.metadata_.assignDefaultResource = function(entryJson, callback) {
+        assert.strictEqual(entryJson, toJSONResponse);
+        callback(null, entryWithDefaultResource);
+      };
+
+      log.decorateEntries_([entry], function(err, decoratedEntries) {
+        assert.ifError(err);
+        assert.strictEqual(decoratedEntries[0], entryWithDefaultResource);
+        done();
+      });
+    });
+
+    it('should return original entry without resource', function(done) {
+      var entry = new Entry();
+      entry.toJSON = function() {
+        return toJSONResponse;
+      };
+
+      log.metadata_.assignDefaultResource = function(entryJson, callback) {
+        assert.strictEqual(entryJson, toJSONResponse);
+        callback();
+      };
+
+      log.decorateEntries_([entry], function(err, decoratedEntries) {
+        assert.ifError(err);
+        assert.strictEqual(decoratedEntries[0], toJSONResponse);
+        done();
+      });
     });
   });
 });

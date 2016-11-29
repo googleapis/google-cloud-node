@@ -588,13 +588,12 @@ Log.prototype.write = function(entry, options, callback) {
     logName: this.formattedName_
   }, options);
 
-  this.decorateEntries_(entry, function(err, entries) {
-    if (err) {
-      callback(err, null);
-      return;
-    }
+  var entries = arrify(entry);
 
-    reqOpts.entries = entries;
+  this.decorateEntries_(entries, function(err, decoratedEntries) {
+    // Ignore errors (the API will speak up if it has an issue).
+
+    reqOpts.entries = decoratedEntries;
 
     self.request(protoOpts, reqOpts, function(err, resp) {
       callback(err, resp);
@@ -610,22 +609,20 @@ Log.prototype.write = function(entry, options, callback) {
  *
  * @param {object} entry - An entry object.
  */
-Log.prototype.decorateEntries_ = function(entry, callback) {
+Log.prototype.decorateEntries_ = function(entries, callback) {
   var self = this;
-
-  var entries = arrify(entry);
 
   async.map(entries, function(entry, callback) {
     if (!(entry instanceof Entry)) {
       entry = self.entry(entry);
     }
 
-    var formattedEntry = entry.toJSON();
-    formattedEntry.logName = self.formattedName_;
+    var decoratedEntry = entry.toJSON();
+    decoratedEntry.logName = self.formattedName_;
 
-    self.metadata_.assignDefaultResource(formattedEntry, function(err, entry) {
+    self.metadata_.assignDefaultResource(decoratedEntry, function(err, entry) {
       // Ignore errors (the API will speak up if it has an issue).
-      callback(null, entry || formattedEntry);
+      callback(null, entry || decoratedEntry);
     });
   }, callback);
 };
