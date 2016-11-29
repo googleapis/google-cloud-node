@@ -252,7 +252,7 @@ Document.PART_OF_SPEECH = {
  * @param {string} callback.annotation.language - The language detected from the
  *     text.
  * @param {number} callback.annotation.sentiment - A value in the range of
- *     `-100` to `100`. Large numbers represent more positive sentiments.
+ *     `-1` (negative) to `1` (positive).
  * @param {object} callback.annotation.entities - The recognized entities from
  *     the text, grouped by the type of entity.
  * @param {string[]} callback.annotation.entities.art - Art entities detected
@@ -321,7 +321,7 @@ Document.PART_OF_SPEECH = {
  *
  *   // annotation = {
  *   //   language: 'en',
- *   //   sentiment: 100,
+ *   //   sentiment: 1,
  *   //   entities: {
  *   //     organizations: [
  *   //       'Google'
@@ -387,7 +387,7 @@ Document.PART_OF_SPEECH = {
  *
  *   // annotation = {
  *   //   language: 'en',
- *   //   sentiment: 100,
+ *   //   sentiment: 1,
  *   //   entities: {
  *   //     organizations: [
  *   //       'Google'
@@ -414,7 +414,7 @@ Document.PART_OF_SPEECH = {
  *   // annotation = {
  *   //   language: 'en',
  *   //   sentiment: {
- *   //     score: 100,
+ *   //     score: 1,
  *   //     magnitude: 4
  *   //   },
  *   //   entities: {
@@ -425,7 +425,7 @@ Document.PART_OF_SPEECH = {
  *   //         metadata: {
  *   //           wikipedia_url: 'http://en.wikipedia.org/wiki/Google'
  *   //         },
- *   //         salience: 65.137446,
+ *   //         salience: 0.65137446,
  *   //         mentions: [
  *   //           {
  *   //             text: {
@@ -444,7 +444,7 @@ Document.PART_OF_SPEECH = {
  *   //         metadata: {
  *   //           wikipedia_url: 'http://en.wikipedia.org/wiki/United_States'
  *   //         },
- *   //         salience: 13.947370648384094,
+ *   //         salience: 0.13947370648384094,
  *   //         mentions: [
  *   //           {
  *   //             text: [
@@ -646,7 +646,7 @@ Document.prototype.annotate = function(options, callback) {
  *   //       metadata: {
  *   //         wikipedia_url: 'http: *   //en.wikipedia.org/wiki/Google'
  *   //       },
- *   //       salience: 65.137446,
+ *   //       salience: 0.65137446,
  *   //       mentions: [
  *   //         {
  *   //           text: {
@@ -664,7 +664,7 @@ Document.prototype.annotate = function(options, callback) {
  *   //       metadata: {
  *   //         wikipedia_url: 'http: *   //en.wikipedia.org/wiki/United_States'
  *   //       },
- *   //       salience: 13.947371,
+ *   //       salience: 0.13947371,
  *   //       mentions: [
  *   //         {
  *   //           text: {
@@ -721,8 +721,8 @@ Document.prototype.detectEntities = function(options, callback) {
  *     results. Default: `false`
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error occurred while making this request.
- * @param {number} callback.sentiment - A value in the range of `-100` to `100`.
- *     Large numbers represent more positive sentiments.
+ * @param {number} callback.sentiment - A value in the range of `-1` (negative)
+ *     to `1` (positive).
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -731,7 +731,7 @@ Document.prototype.detectEntities = function(options, callback) {
  *     // Error handling omitted.
  *   }
  *
- *   // sentiment = 100
+ *   // sentiment = 1
  * });
  *
  * //-
@@ -747,7 +747,7 @@ Document.prototype.detectEntities = function(options, callback) {
  *   }
  *
  *   // sentiment = {
- *   //   score: 100,
+ *   //   score: 1,
  *   //   magnitude: 4,
  *   //   sentences: [
  *   //     {
@@ -894,7 +894,7 @@ Document.prototype.detectSentiment = function(options, callback) {
  *   //         beginOffset: -1
  *   //       },
  *   //       sentiment: {
- *   //         score: 100
+ *   //         score: 1
  *   //         magnitude: 4
  *   //       }
  *   //     }
@@ -997,8 +997,6 @@ Document.formatEntities_ = function(entities, verbose) {
 
     var groupName = GROUP_NAME_TO_TYPE[entity.type];
 
-    entity.salience *= 100;
-
     acc[groupName] = arrify(acc[groupName]);
     acc[groupName].push(entity);
     acc[groupName].sort(Document.sortByProperty_('salience'));
@@ -1047,12 +1045,12 @@ Document.formatSentences_ = function(sentences, verbose) {
  *     API.
  * @param {boolean} verbose - Enable verbose mode for more detailed results.
  * @return {number|object} - The sentiment represented as a number in the range
- *     of `-100` to `100` or an object containing `score` and `magnitude`
+ *     of `-1` to `1` or an object containing `score` and `magnitude`
  *     measurements in verbose mode.
  */
 Document.formatSentiment_ = function(sentiment, verbose) {
   sentiment = {
-    score: sentiment.score *= 100,
+    score: sentiment.score,
     magnitude: sentiment.magnitude
   };
 
