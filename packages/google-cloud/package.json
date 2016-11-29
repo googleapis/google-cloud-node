@@ -120,8 +120,7 @@
   },
   "scripts": {
     "publish-module": "node ../../scripts/publish.js google-cloud",
-    "test": "mocha test/*.js",
-    "system-test": "mocha system-test/*.js --no-timeouts --bail"
+    "test": "mocha test/*.js"
   },
   "license": "Apache-2.0",
   "engines": {
