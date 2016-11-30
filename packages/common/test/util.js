@@ -1245,6 +1245,22 @@ describe('common/util', function() {
       assert.strictEqual(config, fakeContext.config_);
     });
 
+    describe('project_idNormalized', function() {
+      var fakeContextWithProjectUnderscoreId = {
+        config_: {
+          project_id: 'grapespaceship911'
+        }
+      };
+
+      it('should return projectId', function() {
+        var config;
+        var projectId = fakeContextWithProjectUnderscoreId.config_.project_id;
+
+        config = util.normalizeArguments(fakeContextWithProjectUnderscoreId);
+        assert.strictEqual(config.projectId, projectId);
+      });
+    });
+
     describe('projectIdRequired', function() {
       var defaultProjectId;
 
