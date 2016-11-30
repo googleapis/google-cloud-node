@@ -320,6 +320,12 @@ describe('metadata', function() {
   describe('getProjectId', function() {
     var CACHED_PROJECT_ID = 'cached-project-id';
 
+    it('should exit early if in the sandbox environment', function() {
+      global.GCLOUD_SANDBOX_ENV = true;
+      assert.strictEqual(metadata.getProjectId(), undefined);
+      global.GCLOUD_SANDBOX_ENV = false;
+    });
+
     it('should return cached projectId from Logging instance', function(done) {
       metadata.logging_.projectId = CACHED_PROJECT_ID;
 

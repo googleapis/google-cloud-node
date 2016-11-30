@@ -170,6 +170,10 @@ Metadata.prototype.getDefaultResource = function(callback) {
  * @param {function} callback - The callback function.
  */
 Metadata.prototype.getProjectId = function(callback) {
+  if (global.GCLOUD_SANDBOX_ENV) {
+    return;
+  }
+
   var self = this;
 
   if (this.logging_.projectId) {
