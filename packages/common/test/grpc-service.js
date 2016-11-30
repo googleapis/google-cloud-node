@@ -1178,14 +1178,12 @@ describe('GrpcService', function() {
           return options.request();
         };
 
-        fakeStream
-          .on('error', done)
+        grpcService.requestStream(PROTO_OPTS, REQ_OPTS)
           .on('response', function(resp) {
             assert.deepEqual(resp, GrpcService.GRPC_ERROR_CODE_TO_HTTP[0]);
             done();
           });
 
-        grpcService.requestStream(PROTO_OPTS, REQ_OPTS);
         fakeStream.emit('metadata');
       });
 

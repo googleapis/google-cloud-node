@@ -361,7 +361,7 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
           // https://github.com/GoogleCloudPlatform/google-cloud-node/pull/1444#discussion_r71812636
           var grcpStatus = GrpcService.decorateStatus_({ code: 0 });
 
-          this.emit('response', grcpStatus);
+          stream.emit('response', grcpStatus);
         });
     }
   };
