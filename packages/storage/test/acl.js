@@ -515,5 +515,15 @@ describe('storage/AclRoleAccessorMethods', function() {
       var value = aclEntity.fakeroles.addUser('email@example.com');
       assert.strictEqual(value, fakeReturn);
     });
+
+    it('should not pass in the callback if undefined', function(done) {
+      aclEntity.add = function() {
+        assert.strictEqual(arguments.length, 1);
+        done();
+      };
+
+      aclEntity._assignAccessMethods('fakerole');
+      aclEntity.fakeroles.addUser('email@example.com', undefined);
+    });
   });
 });
