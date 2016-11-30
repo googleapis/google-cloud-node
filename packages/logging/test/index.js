@@ -16,7 +16,6 @@
 
 'use strict';
 
-var EventEmitter = require('events').EventEmitter;
 var arrify = require('arrify');
 var assert = require('assert');
 var extend = require('extend');
@@ -60,9 +59,6 @@ var fakeUtil = extend({}, util, {
 
     promisifed = true;
     assert.deepEqual(options.exclude, ['entry', 'log', 'sink']);
-  },
-  retryRequest: function() {
-    return new EventEmitter();
   }
 });
 

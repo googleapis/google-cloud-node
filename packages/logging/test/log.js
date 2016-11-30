@@ -115,7 +115,7 @@ describe('Log', function() {
 
     it('should localize an instance of Metadata', function() {
       assert(log.metadata_ instanceof FakeMetadata);
-      assert.strictEqual(log.metadata_.calledWith[0], LOGGING);
+      assert.strictEqual(log.metadata_.calledWith_[0], LOGGING);
     });
 
     it('should inherit from GrpcServiceObject', function() {
@@ -659,7 +659,7 @@ describe('Log', function() {
         return toJSONResponse;
       };
 
-      log.decorateEntries_(entry, function(err, decoratedEntries) {
+      log.decorateEntries_([entry], function(err, decoratedEntries) {
         assert.ifError(err);
         assert.strictEqual(decoratedEntries[0], toJSONResponse);
         done();

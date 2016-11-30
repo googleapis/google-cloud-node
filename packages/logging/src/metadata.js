@@ -35,7 +35,7 @@
  * @param {module:logging} logging - The parent Logging instance.
  */
 function Metadata(logging) {
-  this.logging = logging;
+  this.logging_ = logging;
 }
 
 /**
@@ -109,13 +109,13 @@ Metadata.getGlobalDescriptor = function(projectId) {
 /**
  * Assigns an entry with a default resource object.
  *
- * @param {object} entry - The entry object to assign a resource to.
+ * @param {object} entryJson - The entry object to assign a resource to.
  * @param {function} callback - The callback function.
  */
-Metadata.prototype.assignDefaultResource = function(entry, callback) {
-  if (entry.resource) {
+Metadata.prototype.assignDefaultResource = function(entryJson, callback) {
+  if (entryJson.resource) {
     setImmediate(function() {
-      callback(null, entry);
+      callback(null, entryJson);
     });
     return;
   }
@@ -126,9 +126,9 @@ Metadata.prototype.assignDefaultResource = function(entry, callback) {
       return;
     }
 
-    entry.resource = resource;
+    entryJson.resource = resource;
 
-    callback(null, entry);
+    callback(null, entryJson);
   });
 };
 
@@ -142,11 +142,11 @@ Metadata.prototype.getDefaultResource = function(callback) {
 
   this.getProjectId(function(err, projectId) {
     if (err) {
-      callback(err, null);
+      callback(err);
       return;
     }
 
-    self.logging.authClient.getEnvironment(function(err, env) {
+    self.logging_.authClient.getEnvironment(function(err, env) {
       var defaultResource;
 
       if (env.IS_APP_ENGINE) {
@@ -172,14 +172,14 @@ Metadata.prototype.getDefaultResource = function(callback) {
 Metadata.prototype.getProjectId = function(callback) {
   var self = this;
 
-  if (this.logging.projectId) {
+  if (this.logging_.projectId) {
     setImmediate(function() {
-      callback(null, self.logging.projectId);
+      callback(null, self.logging_.projectId);
     });
     return;
   }
 
-  this.logging.authClient.getProjectId(callback);
+  this.logging_.authClient.getProjectId(callback);
 };
 
 module.exports = Metadata;

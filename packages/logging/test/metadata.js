@@ -17,395 +17,327 @@
 'use strict';
 
 var assert = require('assert');
-var EventEmitter = require('events').EventEmitter;
+var extend = require('extend');
+
 var Metadata = require('../src/metadata.js');
 
 describe('metadata', function() {
-  describe('online mode', function() {
-    var emitter, metadata, oldProcessProjectId;
-    before(function() {
-      oldProcessProjectId = process.env.GCLOUD_PROJECT;
-      process.env.GCLOUD_PROJECT = '';
+  var MetadataCached;
+  var metadata;
+
+  var PROJECT_ID = 'project-id';
+  var LOGGING;
+
+  var ENV_CACHED = extend({}, process.env);
+
+  before(function() {
+    MetadataCached = extend({}, Metadata);
+  });
+
+  beforeEach(function() {
+    LOGGING = {};
+    extend(Metadata, MetadataCached);
+    metadata = new Metadata(LOGGING);
+  });
+
+  afterEach(function() {
+    extend(process.env, ENV_CACHED);
+  });
+
+  describe('instantiation', function() {
+    it('should localize Logging instance', function() {
+      assert.strictEqual(metadata.logging_, LOGGING);
     });
-    after(function() {
-      process.env.GCLOUD_PROJECT = oldProcessProjectId;
-    });
+  });
+
+  describe('getCloudFunctionDescriptor', function() {
+    var FUNCTION_NAME = 'function-name';
+    var SUPERVISOR_REGION = 'supervisor-region';
+
     beforeEach(function() {
-      emitter = new EventEmitter();
-      metadata = new Metadata(emitter);
+      process.env.FUNCTION_NAME = FUNCTION_NAME;
+      process.env.SUPERVISOR_REGION = SUPERVISOR_REGION;
     });
-    afterEach(function() {
-      // Cleanup if necessary
-      emitter.emit('end');
-    });
-    it('Should throw if requesting project id without a callback', function() {
-      assert.throws(function() {
-        metadata.getProjectId();
-      });
-    });
-    it('Should throw if requesting resource without a callback', function() {
-      assert.throws(function() {
-        metadata.getDefaultResource();
-      });
-    });
-    it('Should give the project id the request returns', function(done) {
-      var projectId = 'stub-project-id';
-      emitter.emit('data', projectId);
-      emitter.emit('end');
-      metadata.getProjectId(function(err, id) {
-        assert.strictEqual(id, projectId);
-        assert.strictEqual(err, null);
-        done();
-      });
-    });
-    it('Should queue multiple callers on project id requests before end ' +
-      'is called', function(done) {
-      var projectId = 'stub-project-id';
-      var completer = (function() {
-        var a = 0;
-        return function() {
-          a += 1;
-          if (a === 2) {
-            done();
-          }
-        };
-      }());
-      metadata.getProjectId(function(err, id) {
-        assert.strictEqual(id, projectId);
-        assert.strictEqual(err, null);
-        completer();
-      });
-      metadata.getProjectId(function(err, id) {
-        assert.strictEqual(id, projectId);
-        assert.strictEqual(err, null);
-        completer();
-      });
-      emitter.emit('data', projectId);
-      emitter.emit('end');
-    });
-    it('Should give the process project id even if online', function(done) {
-      var newProcessProjectId = 'test-process-id';
-      metadata.libProjectId_ = newProcessProjectId;
-      var metadataProjectId = 'metadata-project-id';
-      emitter.emit('data', metadataProjectId);
-      emitter.emit('end');
-      metadata.getProjectId(function(err, id) {
-        assert.strictEqual(id, newProcessProjectId);
-        assert.strictEqual(err, null);
-        done();
-      });
-    });
-    it('Should return an error if an error is emitted and is cached',
-      function(done) {
-      var error = new Error('err');
-      emitter.emit('error', error);
-      metadata.getProjectId(function(err) {
-        assert.strictEqual(err, error);
-        done();
-      });
-    });
-    it('Should return an error if an for resource if queued', function(done) {
-      var error = new Error('err');
-      metadata.getDefaultResource(function(err) {
-        assert.strictEqual(err, error);
-        done();
-      });
-      emitter.emit('error', error);
-    });
-    it('Should return an error if the stream is prematurely ended',
-      function(done) {
-      metadata.getDefaultResource(function(err) {
-        assert(err instanceof Error);
-        done();
-      });
-      emitter.emit('end');
-    });
-    it('Should return an error if an error is emitted and but the caller ' +
-      'is queued', function(done) {
-      var error = new Error('err');
-      metadata.getProjectId(function(err) {
-        assert.strictEqual(err, error);
-        done();
-      });
-      emitter.emit('error', error);
-    });
-    it('Should return an error if the response status code is not a 200',
-      function(done) {
-      var statusCode = 500;
-      var response = {statusCode: statusCode};
-      metadata.getProjectId(function(err) {
-        assert(err.message, statusCode.toString());
-        done();
-      });
-      emitter.emit('response', response);
-    });
-    it('Should think its a Cloud Function', function(done) {
-      var oldEnv = {
-        FUNCTION_NAME: process.env.FUNCTION_NAME,
-        SUPERVISOR_REGION: process.env.SUPERVISOR_REGION,
-      };
-      var fnName = 'test-name';
-      var testRegion = 'test-region';
-      var id = 'test';
-      process.env.FUNCTION_NAME = fnName;
-      process.env.SUPERVISOR_REGION = testRegion;
-      metadata.getDefaultResource(function(err, rsc) {
-        assert.strictEqual(err, null);
-        assert.deepEqual(rsc, {
-          type: 'cloud_function',
-          labels: {
-            project_id: id,
-            function_name: fnName,
-            region: testRegion
-          }
-        });
-        process.env.FUNCTION_NAME = oldEnv.FUNCTION_NAME;
-        process.env.SUPERVISOR_REGION = oldEnv.SUPERVISOR_REGION;
-        done();
-      });
-      emitter.emit('data', id);
-      emitter.emit('end');
-    });
-    it('Should think its on App Engine - new version (2016)', function(done) {
-      var oldEnv = {
-        FUNCTION_NAME: process.env.FUNCTION_NAME,
-        SUPERVISOR_REGION: process.env.SUPERVISOR_REGION,
-        GAE_SERVICE: process.env.GAE_SERVICE,
-        GAE_VERSION: process.env.GAE_VERSION,
-        GAE_MODULE_NAME: process.env.GAE_MODULE_NAME
-      };
-      var service = 'test-service';
-      var version = 'test-version';
-      var module = 'test-module';
-      var id = 'test';
-      process.env.FUNCTION_NAME = '';
-      process.env.SUPERVISOR_REGION = '';
-      process.env.GAE_SERVICE = service;
-      process.env.GAE_VERSION = version;
-      process.env.GAE_MODULE_NAME = module;
-      metadata.getDefaultResource(function(err, rsc) {
-        assert.strictEqual(err, null);
-        assert.deepEqual(rsc, {
-          type: 'gae_app',
-          labels: {
-            project_id: id,
-            module_id: service,
-            version_id: version
-          }
-        });
-        process.env.FUNCTION_NAME = oldEnv.FUNCTION_NAME;
-        process.env.SUPERVISOR_REGION = oldEnv.SUPERVISOR_REGION;
-        process.env.GAE_SERVICE = oldEnv.GAE_SERVICE;
-        process.env.GAE_VERSION = oldEnv.GAE_VERSION;
-        process.env.GAE_MODULE_NAME = oldEnv.GAE_MODULE_NAME;
-        done();
-      });
-      emitter.emit('data', id);
-      emitter.emit('end');
-    });
-    it('Should think its on App Engine - old version (2016)', function(done) {
-      var oldEnv = {
-        FUNCTION_NAME: process.env.FUNCTION_NAME,
-        SUPERVISOR_REGION: process.env.SUPERVISOR_REGION,
-        GAE_SERVICE: process.env.GAE_SERVICE,
-        GAE_VERSION: process.env.GAE_VERSION,
-        GAE_MODULE_NAME: process.env.GAE_MODULE_NAME
-      };
-      var service = '';
-      var version = 'test-version';
-      var module = 'test-module';
-      var id = 'test';
-      process.env.FUNCTION_NAME = '';
-      process.env.SUPERVISOR_REGION = '';
-      process.env.GAE_SERVICE = service;
-      process.env.GAE_VERSION = version;
-      process.env.GAE_MODULE_NAME = module;
-      metadata.getDefaultResource(function(err, rsc) {
-        assert.strictEqual(err, null);
-        assert.deepEqual(rsc, {
-          type: 'gae_app',
-          labels: {
-            project_id: id,
-            module_id: module,
-            version_id: version
-          }
-        });
-        process.env.FUNCTION_NAME = oldEnv.FUNCTION_NAME;
-        process.env.SUPERVISOR_REGION = oldEnv.SUPERVISOR_REGION;
-        process.env.GAE_SERVICE = oldEnv.GAE_SERVICE;
-        process.env.GAE_VERSION = oldEnv.GAE_VERSION;
-        process.env.GAE_MODULE_NAME = oldEnv.GAE_MODULE_NAME;
-        done();
-      });
-      emitter.emit('data', id);
-      emitter.emit('end');
-    });
-    it('Should think its on Compute Engine', function(done) {
-      var oldEnv = {
-        FUNCTION_NAME: process.env.FUNCTION_NAME,
-        SUPERVISOR_REGION: process.env.SUPERVISOR_REGION,
-        GAE_SERVICE: process.env.GAE_SERVICE,
-        GAE_VERSION: process.env.GAE_VERSION,
-        GAE_MODULE_NAME: process.env.GAE_MODULE_NAME
-      };
-      var id = 'test';
-      process.env.FUNCTION_NAME = '';
-      process.env.SUPERVISOR_REGION = '';
-      process.env.GAE_SERVICE = '';
-      process.env.GAE_VERSION = '';
-      process.env.GAE_MODULE_NAME = '';
-      metadata.getDefaultResource(function(err, rsc) {
-        assert.strictEqual(err, null);
-        assert.deepEqual(rsc, {
-          type: 'gce_instance',
-          labels: {
-            project_id: id
-          }
-        });
-        process.env.FUNCTION_NAME = oldEnv.FUNCTION_NAME;
-        process.env.SUPERVISOR_REGION = oldEnv.SUPERVISOR_REGION;
-        process.env.GAE_SERVICE = oldEnv.GAE_SERVICE;
-        process.env.GAE_VERSION = oldEnv.GAE_VERSION;
-        process.env.GAE_MODULE_NAME = oldEnv.GAE_MODULE_NAME;
-        done();
-      });
-      emitter.emit('data', id);
-      emitter.emit('response', {statusCode: 200});
-      emitter.emit('end');
-    });
-    it('Should return a global descriptor', function(done) {
-      var oldEnv = {
-        FUNCTION_NAME: process.env.FUNCTION_NAME,
-        SUPERVISOR_REGION: process.env.SUPERVISOR_REGION,
-        GAE_SERVICE: process.env.GAE_SERVICE,
-        GAE_VERSION: process.env.GAE_VERSION,
-        GAE_MODULE_NAME: process.env.GAE_MODULE_NAME
-      };
-      var id = 'test';
-      var error = new Error('test');
-      process.env.GCLOUD_PROJECT = id;
-      process.env.FUNCTION_NAME = '';
-      process.env.SUPERVISOR_REGION = '';
-      process.env.GAE_SERVICE = '';
-      process.env.GAE_VERSION = '';
-      process.env.GAE_MODULE_NAME = '';
-      metadata.getDefaultResource(function(err, rsc) {
-        assert.strictEqual(err, error);
-        assert.deepEqual(rsc, null);
-        process.env.FUNCTION_NAME = oldEnv.FUNCTION_NAME;
-        process.env.SUPERVISOR_REGION = oldEnv.SUPERVISOR_REGION;
-        process.env.GAE_SERVICE = oldEnv.GAE_SERVICE;
-        process.env.GAE_VERSION = oldEnv.GAE_VERSION;
-        process.env.GAE_MODULE_NAME = oldEnv.GAE_MODULE_NAME;
-        process.env.GCLOUD_PROJECT = '';
-        done();
-      });
-      emitter.emit('error', error);
-    });
-    it('Should queue multiple resource requests', function(done) {
-      var oldEnv = {
-        GCLOUD_PROJECT: process.env.GCLOUD_PROJECT,
-        FUNCTION_NAME: process.env.FUNCTION_NAME,
-        SUPERVISOR_REGION: process.env.SUPERVISOR_REGION,
-      };
-      var completer = (function() {
-        var a = 0;
-        return function() {
-          a += 1;
-          if (a === 2) {
-            process.env.FUNCTION_NAME = oldEnv.FUNCTION_NAME;
-            process.env.SUPERVISOR_REGION = oldEnv.SUPERVISOR_REGION;
-            done();
-          }
-        };
-      }());
-      var fnName = 'test-name';
-      var testRegion = 'test-region';
-      var id = 'test';
-      var resource = {
+
+    it('should return the correct descriptor', function() {
+      assert.deepEqual(Metadata.getCloudFunctionDescriptor(PROJECT_ID), {
         type: 'cloud_function',
         labels: {
-          project_id: id,
-          function_name: fnName,
-          region: testRegion
+          project_id: PROJECT_ID,
+          function_name: FUNCTION_NAME,
+          region: SUPERVISOR_REGION
         }
-      };
-      process.env.GCLOUD_PROJECT = '';
-      process.env.FUNCTION_NAME = fnName;
-      process.env.SUPERVISOR_REGION = testRegion;
-      metadata.getDefaultResource(function(err, rsc) {
-        assert.strictEqual(err, null);
-        assert.deepEqual(rsc, resource);
-        completer();
-      });
-      metadata.getDefaultResource(function(err, rsc) {
-        assert.strictEqual(err, null);
-        assert.deepEqual(rsc, resource);
-        completer();
-      });
-      setImmediate(function() {
-        emitter.emit('data', id);
-        emitter.emit('end');
       });
     });
   });
-  describe('offline mode', function() {
-    var oldProcessProjectId, metadata, emitter;
+
+  describe('getCloudFunctionDescriptor', function() {
+    var GAE_MODULE_NAME = 'gae-module-name';
+    var GAE_SERVICE = 'gae-service';
+    var GAE_VERSION = 'gae-version';
+
     beforeEach(function() {
-      emitter = new EventEmitter();
-      metadata = new Metadata(emitter);
+      process.env.GAE_MODULE_NAME = GAE_MODULE_NAME;
+      process.env.GAE_SERVICE = GAE_SERVICE;
+      process.env.GAE_VERSION = GAE_VERSION;
     });
-    before(function() {
-      oldProcessProjectId = process.env.GCLOUD_PROJECT;
-      process.env.GCLOUD_PROJECT = '';
+
+    it('should return the correct descriptor', function() {
+      assert.deepEqual(Metadata.getGAEDescriptor(PROJECT_ID), {
+        type: 'gae_app',
+        labels: {
+          project_id: PROJECT_ID,
+          module_id: GAE_SERVICE,
+          version_id: GAE_VERSION
+        }
+      });
     });
-    after(function() {
-      process.env.GCLOUD_PROJECT = oldProcessProjectId;
+
+    it('should use GAE_MODULE_NAME for module_id', function() {
+      delete process.env.GAE_SERVICE;
+
+      var moduleId = Metadata.getGAEDescriptor(PROJECT_ID).labels.module_id;
+      assert.strictEqual(moduleId, GAE_MODULE_NAME);
     });
-    it('Should return an error given a completely undefined environment for id',
-      function(done) {
-      emitter.emit('end');
-      metadata.getProjectId(function(err, projectId) {
-        assert(err instanceof Error);
-        assert.strictEqual(projectId, null);
+  });
+
+  describe('getGCEDescriptor', function() {
+    it('should return the correct descriptor', function() {
+      assert.deepEqual(Metadata.getGCEDescriptor(PROJECT_ID), {
+        type: 'gce_instance',
+        labels: {
+          project_id: PROJECT_ID
+        }
+      });
+    });
+  });
+
+  describe('getGlobalDescriptor', function() {
+    it('should return the correct descriptor', function() {
+      assert.deepEqual(Metadata.getGlobalDescriptor(PROJECT_ID), {
+        type: 'global',
+        labels: {
+          project_id: PROJECT_ID
+        }
+      });
+    });
+  });
+
+  describe('assignDefaultResource', function() {
+    var ENTRY_JSON = {};
+
+    it('should return entry if it already has a resource', function(done) {
+      var entryJson = { resource: {} };
+
+      metadata.assignDefaultResource(entryJson, function(err, entryJson_) {
+        assert.ifError(err);
+        assert.strictEqual(entryJson_, entryJson);
         done();
       });
     });
-    it('Should return an error given a completely undefined environment for ' +
-      'resource', function(done) {
-      emitter.emit('end');
-      metadata.getDefaultResource(function(err, rsc) {
-        assert(err instanceof Error);
-        assert.strictEqual(rsc, null);
+
+    it('should get the default resource', function(done) {
+      metadata.getDefaultResource = function() {
+        done();
+      };
+
+      metadata.assignDefaultResource(ENTRY_JSON, assert.ifError);
+    });
+
+    it('should return error from getDefaultResource', function(done) {
+      var error = new Error('Error.');
+
+      metadata.getDefaultResource = function(callback) {
+        callback(error);
+      };
+
+      metadata.assignDefaultResource(ENTRY_JSON, function(err) {
+        assert.strictEqual(err, error);
         done();
       });
     });
-    it('Should still be able to produce a process project id if it is set',
-      function(done) {
-      var id = 'test';
-      emitter.emit('end');
-      metadata.libProjectId_ = id;
-      metadata.getProjectId(function(err, projectId) {
-        assert.strictEqual(err, null);
-        assert.strictEqual(projectId, id);
+
+    it('should assign default resource to entry', function(done) {
+      var defaultResource = {};
+
+      metadata.getDefaultResource = function(callback) {
+        callback(null, defaultResource);
+      };
+
+      metadata.assignDefaultResource(ENTRY_JSON, function(err, entryJson) {
+        assert.ifError(err);
+        assert.strictEqual(entryJson.resource, defaultResource);
         done();
       });
     });
-    it('Should still be able to produce a global descriptor if a process ' +
-      'project id is set', function(done) {
-      var id = 'test';
-      emitter.emit('end');
-      metadata.libProjectId_ = id;
-      metadata.getDefaultResource(function(err, rsc) {
-        assert.strictEqual(err, null);
-        assert.deepEqual(rsc, {
-          type: 'global',
-          labels: {
-            project_id: id
-          }
+  });
+
+  describe('getDefaultResource', function() {
+    var RETURNED_PROJECT_ID = 'project-id';
+
+    beforeEach(function() {
+      metadata.getProjectId = function(callback) {
+        callback(null, RETURNED_PROJECT_ID);
+      };
+    });
+
+    it('should get the project ID', function(done) {
+      metadata.getProjectId = function() {
+        done();
+      };
+
+      metadata.getDefaultResource(assert.ifError);
+    });
+
+    it('should return error from getProjectId', function(done) {
+      var error = new Error('Error.');
+
+      metadata.getProjectId = function(callback) {
+        callback(error);
+      };
+
+      metadata.getDefaultResource(function(err) {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
+    it('should get the environment from auth client', function(done) {
+      metadata.logging_.authClient = {
+        getEnvironment: function() {
+          done();
+        }
+      };
+
+      metadata.getDefaultResource(assert.ifError);
+    });
+
+    describe('environments', function() {
+      describe('app engine', function() {
+        it('should return correct descriptor', function(done) {
+          var DESCRIPTOR = {};
+
+          Metadata.getGAEDescriptor = function(projectId) {
+            assert.strictEqual(projectId, RETURNED_PROJECT_ID);
+            return DESCRIPTOR;
+          };
+
+          metadata.logging_.authClient = {
+            getEnvironment: function(callback) {
+              callback(null, {
+                IS_APP_ENGINE: true
+              });
+            }
+          };
+
+          metadata.getDefaultResource(function(err, defaultResource) {
+            assert.ifError(err);
+            assert.strictEqual(defaultResource, DESCRIPTOR);
+            done();
+          });
         });
+      });
+
+      describe('cloud function', function() {
+        it('should return correct descriptor', function(done) {
+          var DESCRIPTOR = {};
+
+          Metadata.getCloudFunctionDescriptor = function(projectId) {
+            assert.strictEqual(projectId, RETURNED_PROJECT_ID);
+            return DESCRIPTOR;
+          };
+
+          metadata.logging_.authClient = {
+            getEnvironment: function(callback) {
+              callback(null, {
+                IS_CLOUD_FUNCTION: true
+              });
+            }
+          };
+
+          metadata.getDefaultResource(function(err, defaultResource) {
+            assert.ifError(err);
+            assert.strictEqual(defaultResource, DESCRIPTOR);
+            done();
+          });
+        });
+      });
+
+      describe('compute engine', function() {
+        it('should return correct descriptor', function(done) {
+          var DESCRIPTOR = {};
+
+          Metadata.getGCEDescriptor = function(projectId) {
+            assert.strictEqual(projectId, RETURNED_PROJECT_ID);
+            return DESCRIPTOR;
+          };
+
+          metadata.logging_.authClient = {
+            getEnvironment: function(callback) {
+              callback(null, {
+                IS_COMPUTE_ENGINE: true
+              });
+            }
+          };
+
+          metadata.getDefaultResource(function(err, defaultResource) {
+            assert.ifError(err);
+            assert.strictEqual(defaultResource, DESCRIPTOR);
+            done();
+          });
+        });
+      });
+
+      describe('global', function() {
+        it('should return correct descriptor', function(done) {
+          var DESCRIPTOR = {};
+
+          Metadata.getGlobalDescriptor = function(projectId) {
+            assert.strictEqual(projectId, RETURNED_PROJECT_ID);
+            return DESCRIPTOR;
+          };
+
+          metadata.logging_.authClient = {
+            getEnvironment: function(callback) {
+              callback(null, {
+                IS_APP_ENGINE: false,
+                IS_CLOUD_FUNCTION: false,
+                IS_COMPUTE_ENGINE: false
+              });
+            }
+          };
+
+          metadata.getDefaultResource(function(err, defaultResource) {
+            assert.ifError(err);
+            assert.strictEqual(defaultResource, DESCRIPTOR);
+            done();
+          });
+        });
+      });
+    });
+  });
+
+  describe('getProjectId', function() {
+    var CACHED_PROJECT_ID = 'cached-project-id';
+
+    it('should return cached projectId from Logging instance', function(done) {
+      metadata.logging_.projectId = CACHED_PROJECT_ID;
+
+      metadata.getProjectId(function(err, projectId) {
+        assert.ifError(err);
+        assert.strictEqual(projectId, CACHED_PROJECT_ID);
         done();
       });
+    });
+
+    it('should get project ID from auth client', function(done) {
+      metadata.logging_.authClient = {
+        getProjectId: function(callback) {
+          callback(); // done()
+        }
+      };
+
+      metadata.getProjectId(done);
     });
   });
 });
