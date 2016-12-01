@@ -71,10 +71,10 @@ var Instance = require('./instance.js');
  * //-
  *
  * //-
- * // <h3>Creating a Compute Instance</h3>
+ * // <h3>Creating a Bigtable Instance and Cluster</h3>
  * //
- * // Before you create your table, you first need to create a Compute Instance
- * // for the table to be served from.
+ * // Before you create your table, you first need to create a Bigtable Instance
+ * // and cluster for the table to be served from.
  * //-
  * var callback = function(err, instance, operation) {
  *   operation
@@ -99,7 +99,7 @@ var Instance = require('./instance.js');
  * //-
  * // This can also be done from either the Google Cloud Platform Console or the
  * // `gcloud` cli tool. Please refer to the
- * // <a href="https://cloud.google.com/bigtable/docs/creating-compute-instance">
+ * // <a href="https://cloud.google.com/bigtable/docs/creating-instance">
  * // official Bigtable documentation</a> for more information.
  * //-
  *
