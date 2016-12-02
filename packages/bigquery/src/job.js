@@ -317,7 +317,7 @@ Job.prototype.getQueryResultsStream = function(options) {
  */
 Job.prototype.poll_ = function(callback) {
   this.getMetadata(function(err, metadata, apiResponse) {
-    if (apiResponse.status && apiResponse.status.errors) {
+    if (!err && apiResponse.status && apiResponse.status.errors) {
       err = common.util.ApiError(apiResponse.status);
     }
 

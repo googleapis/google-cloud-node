@@ -277,11 +277,10 @@ describe('BigQuery/Job', function() {
 
     describe('API error', function() {
       var error = new Error('Error.');
-      var apiResponse = {};
 
       beforeEach(function() {
         job.getMetadata = function(callback) {
-          callback(error, null, apiResponse);
+          callback(error);
         };
       });
 
