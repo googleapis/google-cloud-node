@@ -89,9 +89,8 @@ BigQuery.getType_ = function(value) {
   if (is.number(value)) {
     if (value % 1 === 0) {
       return 'INT64';
-    } else {
-      return 'FLOAT64';
     }
+    return 'FLOAT64';
   } else if (is.bool(value)) {
     return 'BOOL';
   } else if (is.date(value)) {
