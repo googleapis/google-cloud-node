@@ -90,7 +90,7 @@ BigQuery.getType_ = function(value) {
     if (value % 1 === 0) {
       return 'INT64';
     } else {
-      return 'FLOAT64'
+      return 'FLOAT64';
     }
   } else if (is.bool(value)) {
     return 'BOOL';
@@ -137,7 +137,7 @@ BigQuery.valueToQueryParameter_ = function(value) {
     queryParameter.parameterValue.arrayValues = value.map(function(value) {
       return {
         value: value
-      }
+      };
     });
   } else if (type === 'STRUCT') {
     queryParameter.parameterType.structTypes = [];
@@ -598,15 +598,11 @@ BigQuery.prototype.query = function(options, callback) {
 
   options = options || {};
 
-
   if (options.params) {
     options.useLegacySql = false;
     options.parameterMode = is.array(options.params) ? 'positional' : 'named';
 
-    if (options.parameterMode === 'positional') {
-      options.queryParameters = options.params
-        .map(BigQuery.valueToQueryParameter_);
-    } else {
+    if (options.parameterMode === 'named') {
       options.queryParameters = [];
 
       for (var namedParamater in options.params) {
@@ -615,6 +611,9 @@ BigQuery.prototype.query = function(options, callback) {
         queryParameter.name = namedParamater;
         options.queryParameters.push(queryParameter);
       }
+    } else {
+      options.queryParameters = options.params
+        .map(BigQuery.valueToQueryParameter_);
     }
 
     delete options.params;
