@@ -303,6 +303,8 @@ util.shouldRetryRequest = shouldRetryRequest;
 /**
  * Get a function for making authenticated requests.
  *
+ * @throws {Error} If a projectId is requested, but not able to be detected.
+ *
  * @param {object} config - Configuration object.
  * @param {boolean=} config.autoRetry - Automatically retry requests if the
  *     response is related to rate limits or certain intermittent server errors.
@@ -344,6 +346,17 @@ function makeAuthenticatedRequestFactory(config) {
     }
 
     function onAuthenticated(err, authenticatedReqOpts) {
+      if (!err) {
+        try {
+          authenticatedReqOpts = util.decorateRequest(
+            authenticatedReqOpts,
+            extend({ projectId: authClient.projectId }, config)
+          );
+        } catch(e) {
+          err = util.missingProjectIdError;
+        }
+      }
+
       if (err) {
         if (stream) {
           stream.destroy(err);
@@ -353,8 +366,6 @@ function makeAuthenticatedRequestFactory(config) {
 
         return;
       }
-
-      authenticatedReqOpts = util.decorateRequest(authenticatedReqOpts, config);
 
       if (options && options.onAuthenticated) {
         options.onAuthenticated(null, authenticatedReqOpts);
@@ -468,6 +479,10 @@ util.makeRequest = makeRequest;
 function decorateRequest(reqOpts, config) {
   config = config || {};
 
+  delete reqOpts.autoPaginate;
+  delete reqOpts.autoPaginateVal;
+  delete reqOpts.objectMode;
+
   if (is.object(reqOpts.qs)) {
     delete reqOpts.qs.autoPaginate;
     delete reqOpts.qs.autoPaginateVal;
@@ -476,6 +491,19 @@ function decorateRequest(reqOpts, config) {
   if (is.object(reqOpts.json)) {
     delete reqOpts.json.autoPaginate;
     delete reqOpts.json.autoPaginateVal;
+  }
+
+  for (var opt in reqOpts) {
+    if (is.string(reqOpts[opt])) {
+      if (reqOpts[opt].indexOf('{{projectId}}') > -1) {
+        if (!config.projectId) {
+          throw util.missingProjectIdError;
+        }
+        reqOpts[opt] = reqOpts[opt].replace(/{{projectId}}/g, config.projectId);
+      }
+    } else if (is.object(reqOpts[opt])) {
+      decorateRequest(reqOpts[opt], config);
+    }
   }
 
   return reqOpts;
@@ -530,8 +558,6 @@ util.extendGlobalConfig = extendGlobalConfig;
 /**
  * Merge and validate API configurations.
  *
- * @throws {Error} If a projectId is not specified.
- *
  * @param {object} globalContext - gcloud-level context.
  * @param {object} globalContext.config_ - gcloud-level configuration.
  * @param {object} localConfig - Service-level configurations.
@@ -545,13 +571,7 @@ function normalizeArguments(globalContext, localConfig, options) {
 
   var globalConfig = globalContext && globalContext.config_;
 
-  var config = util.extendGlobalConfig(globalConfig, localConfig);
-
-  if (options.projectIdRequired !== false && !config.projectId) {
-    throw util.missingProjectIdError;
-  }
-
-  return config;
+  return util.extendGlobalConfig(globalConfig, localConfig);
 }
 
 util.normalizeArguments = normalizeArguments;

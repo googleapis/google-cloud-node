@@ -648,7 +648,10 @@ describe('common/util', function() {
   });
 
   describe('makeAuthenticatedRequestFactory', function() {
-    var authClient = { getCredentials: function() {} };
+    var authClient = {
+      getCredentials: function() {},
+      projectId: 'project-id'
+    };
 
     beforeEach(function() {
       googleAutoAuthOverride = function() {
@@ -698,22 +701,47 @@ describe('common/util', function() {
 
     describe('customEndpoint (no authentication attempted)', function() {
       var makeAuthenticatedRequest;
+      var config = {
+        customEndpoint: true
+      };
+      var expectedConfig = extend({ projectId: authClient.projectId }, config);
 
       beforeEach(function() {
-        makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory({
-          customEndpoint: true
-        });
+        makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory(config);
       });
 
       it('should decorate the request', function(done) {
         var reqOpts = { a: 'b', c: 'd' };
+        var decoratedRequest = {};
 
-        utilOverrides.decorateRequest = function(reqOpts_) {
+        utilOverrides.decorateRequest = function(reqOpts_, config_) {
           assert.strictEqual(reqOpts_, reqOpts);
-          done();
+          assert.deepEqual(config_, expectedConfig);
+          return decoratedRequest;
         };
 
-        makeAuthenticatedRequest(reqOpts, { onAuthenticated: assert.ifError });
+        makeAuthenticatedRequest(reqOpts, {
+          onAuthenticated: function(err, authenticatedReqOpts) {
+            assert.ifError(err);
+            assert.strictEqual(authenticatedReqOpts, decoratedRequest);
+            done();
+          }
+        });
+      });
+
+      it('should return missing projectId error', function(done) {
+        var reqOpts = { a: 'b', c: 'd' };
+
+        utilOverrides.decorateRequest = function() {
+          throw util.missingProjectIdError;
+        };
+
+        makeAuthenticatedRequest(reqOpts, {
+          onAuthenticated: function(err) {
+            assert.strictEqual(err, util.missingProjectIdError);
+            done();
+          }
+        });
       });
 
       it('should pass options back to callback', function(done) {
@@ -1185,12 +1213,36 @@ describe('common/util', function() {
   describe('decorateRequest', function() {
     it('should delete qs.autoPaginate', function() {
       var decoratedReqOpts = util.decorateRequest({
+        autoPaginate: true
+      });
+
+      assert.strictEqual(decoratedReqOpts.autoPaginate, undefined);
+    });
+
+    it('should delete qs.autoPaginateVal', function() {
+      var decoratedReqOpts = util.decorateRequest({
+        autoPaginateVal: true
+      });
+
+      assert.strictEqual(decoratedReqOpts.autoPaginateVal, undefined);
+    });
+
+    it('should delete objectMode', function() {
+      var decoratedReqOpts = util.decorateRequest({
+        objectMode: true
+      });
+
+      assert.strictEqual(decoratedReqOpts.objectMode, undefined);
+    });
+
+    it('should delete qs.autoPaginate', function() {
+      var decoratedReqOpts = util.decorateRequest({
         qs: {
           autoPaginate: true
         }
       });
 
-      assert.strictEqual(decoratedReqOpts.autoPaginate, undefined);
+      assert.strictEqual(decoratedReqOpts.qs.autoPaginate, undefined);
     });
 
     it('should delete qs.autoPaginateVal', function() {
@@ -1200,7 +1252,7 @@ describe('common/util', function() {
         }
       });
 
-      assert.strictEqual(decoratedReqOpts.autoPaginate, undefined);
+      assert.strictEqual(decoratedReqOpts.qs.autoPaginateVal, undefined);
     });
 
     it('should delete json.autoPaginate', function() {
@@ -1210,7 +1262,7 @@ describe('common/util', function() {
         }
       });
 
-      assert.strictEqual(decoratedReqOpts.autoPaginate, undefined);
+      assert.strictEqual(decoratedReqOpts.json.autoPaginate, undefined);
     });
 
     it('should delete json.autoPaginateVal', function() {
@@ -1220,7 +1272,49 @@ describe('common/util', function() {
         }
       });
 
-      assert.strictEqual(decoratedReqOpts.autoPaginate, undefined);
+      assert.strictEqual(decoratedReqOpts.json.autoPaginateVal, undefined);
+    });
+
+    describe('projectId placeholder', function() {
+      var PROJECT_ID = 'project-id';
+
+      it('should replace any {{projectId}} it finds', function() {
+        assert.deepEqual(util.decorateRequest({
+          here: 'A {{projectId}} Z',
+          nested: {
+            here: 'A {{projectId}} Z',
+            nested: {
+              here: 'A {{projectId}} Z'
+            }
+          }
+        }, { projectId: PROJECT_ID }),
+        {
+          here: 'A ' + PROJECT_ID + ' Z',
+          nested: {
+            here: 'A ' + PROJECT_ID + ' Z',
+            nested: {
+              here: 'A ' + PROJECT_ID + ' Z'
+            }
+          }
+        });
+      });
+
+      it('should replace more than one {{projectId}}', function() {
+        assert.deepEqual(util.decorateRequest({
+          here: 'A {{projectId}} M {{projectId}} Z',
+        }, { projectId: PROJECT_ID }),
+        {
+          here: 'A ' + PROJECT_ID + ' M ' + PROJECT_ID + ' Z'
+        });
+      });
+
+      it('should throw if it needs a projectId and cannot find it', function() {
+        assert.throws(function() {
+          util.decorateRequest({
+            here: '{{projectId}}'
+          });
+        }, new RegExp(util.missingProjectIdError));
+      });
     });
   });
 
@@ -1243,41 +1337,6 @@ describe('common/util', function() {
 
       config = util.normalizeArguments(fakeContext, local);
       assert.strictEqual(config, fakeContext.config_);
-    });
-
-    describe('projectIdRequired', function() {
-      var defaultProjectId;
-
-      before(function() {
-        defaultProjectId = process.env.GCLOUD_PROJECT;
-        delete process.env.GCLOUD_PROJECT;
-      });
-
-      after(function() {
-        process.env.GCLOUD_PROJECT = defaultProjectId;
-      });
-
-      var fakeContextWithoutProjectId = {
-        config_: {}
-      };
-
-      it('should throw if true', function() {
-        var errMsg = new RegExp(util.missingProjectIdError.message);
-
-        assert.throws(function() {
-          util.normalizeArguments(fakeContextWithoutProjectId, { c: 'd' });
-        }, errMsg);
-      });
-
-      it('should not throw if false', function() {
-        assert.doesNotThrow(function() {
-          util.normalizeArguments(
-            fakeContextWithoutProjectId,
-            {},
-            { projectIdRequired: false }
-          );
-        });
-      });
     });
   });
 

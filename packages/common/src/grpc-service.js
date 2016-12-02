@@ -241,10 +241,6 @@ GrpcService.prototype.request = function(protoOpts, reqOpts, callback) {
     return;
   }
 
-  // Clean up gcloud-specific options.
-  delete reqOpts.autoPaginate;
-  delete reqOpts.autoPaginateVal;
-
   var service = this.getService_(protoOpts);
 
   var metadata = this.grpcMetadata;
@@ -252,6 +248,13 @@ GrpcService.prototype.request = function(protoOpts, reqOpts, callback) {
   var grpcOpts = {};
   if (is.number(protoOpts.timeout)) {
     grpcOpts.deadline = GrpcService.createDeadline_(protoOpts.timeout);
+  }
+
+  try {
+    reqOpts = util.decorateRequest(reqOpts, { projectId: self.projectId });
+  } catch(e) {
+    callback(e);
+    return;
   }
 
   // Retains a reference to an error from the response. If the final callback is
@@ -336,13 +339,21 @@ GrpcService.prototype.requestStream = function(protoOpts, reqOpts) {
   }
 
   var objectMode = !!reqOpts.objectMode;
-  delete reqOpts.objectMode;
 
   var service = this.getService_(protoOpts);
   var grpcOpts = {};
 
   if (is.number(protoOpts.timeout)) {
     grpcOpts.deadline = GrpcService.createDeadline_(protoOpts.timeout);
+  }
+
+  try {
+    reqOpts = util.decorateRequest(reqOpts, { projectId: this.projectId });
+  } catch(e) {
+    setImmediate(function() {
+      stream.destroy(e);
+    });
+    return stream;
   }
 
   var retryOpts = {
@@ -414,6 +425,15 @@ GrpcService.prototype.requestWritableStream = function(protoOpts, reqOpts) {
 
   if (is.number(protoOpts.timeout)) {
     grpcOpts.deadline = GrpcService.createDeadline_(protoOpts.timeout);
+  }
+
+  try {
+    reqOpts = util.decorateRequest(reqOpts, { projectId: this.projectId });
+  } catch (e) {
+    setImmediate(function() {
+      stream.destroy(e);
+    });
+    return stream;
   }
 
   var grpcStream = service[protoOpts.method](reqOpts, grpcOpts)
@@ -724,6 +744,8 @@ GrpcService.structToObj_ = function(struct) {
  * @param {?error} callback.err - An error getting an auth client.
  */
 GrpcService.prototype.getGrpcCredentials_ = function(callback) {
+  var self = this;
+
   this.authClient.getAuthClient(function(err, authClient) {
     if (err) {
       callback(err);
@@ -734,6 +756,8 @@ GrpcService.prototype.getGrpcCredentials_ = function(callback) {
       grpc.credentials.createSsl(),
       grpc.credentials.createFromGoogleCredential(authClient)
     );
+
+    self.projectId = authClient.projectId;
 
     callback(null, credentials);
   });

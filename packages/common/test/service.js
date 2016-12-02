@@ -141,6 +141,11 @@ describe('Service', function() {
       assert.strictEqual(service.projectId, OPTIONS.projectId);
     });
 
+    it('should default projectId with placeholder', function() {
+      var service = new Service({}, {});
+      assert.strictEqual(service.projectId, '{{projectId}}');
+    });
+
     it('should localize the projectIdRequired', function() {
       assert.strictEqual(service.projectIdRequired, CONFIG.projectIdRequired);
     });
