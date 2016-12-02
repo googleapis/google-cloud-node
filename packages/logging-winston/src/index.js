@@ -67,15 +67,15 @@ var STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME = {
  *
  * @param {object} options - [Configuration object](#/docs). Refer to this link
  *     for authentication information.
- * @param {string=} options.logName - The name of the log that will receive
- *     messages written to this transport. Default: `winston_log`
+ * @param {object=} options.level - The default log level. Winston will filter
+ *     messages with a severity lower than this.
  * @param {object=} options.levels - Custom logging levels as supported by
  *     winston. This list is used to translate your log level to the Stackdriver
  *     Logging level. Each property should have an integer value between 0 (most
  *     severe) and 7 (least severe). If you are passing a list of levels to your
  *     winston logger, you should provide the same list here.
- * @param {object=} options.defaultLevel - The default log level. Winston will
- *     filter messages with a severity lower than this.
+ * @param {string=} options.logName - The name of the log that will receive
+ *     messages written to this transport. Default: `winston_log`
  * @param {object=} options.resource - The monitored resource that the transport
  *     corresponds to. On Google Cloud Platform, this is detected automatically,
  *     but you may optionally specify a specific monitored resource. For more
