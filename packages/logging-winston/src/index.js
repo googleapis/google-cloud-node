@@ -16,174 +16,153 @@
 
 'use strict';
 
-var _ = require('lodash'); 
+var is = require('is');
+var logging = require('@google-cloud/logging');
 var util = require('util');
 var winston = require('winston');
-var Transport = winston.Transport;
 
 /**
- * Stackdriver Logging severity levels.
+ * Map of npm output levels to Stackdriver Logging levels.
+ *
+ * @type {object}
  * @private
- * @const
  */
-var levels = require('./levels.js');
+var NPM_LEVEL_NAME_TO_CODE = {
+  error: 3,
+  warn: 4,
+  info: 6,
+  verbose: 7,
+  debug: 7,
+  silly: 7
+};
 
 /**
- * Mapping on npmLevels to Stackdriver Logging levels.
+ * Map of Stackdriver Logging levels.
+ *
+ * @type {object}
  * @private
- * @const
  */
-var npmLevels = {error: 3, warn: 4, info: 6, verbose: 7, debug: 7, silly: 7};
+var STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME = {
+  0: 'emergency',
+  1: 'alert',
+  2: 'critical',
+  3: 'error',
+  4: 'warning',
+  5: 'notice',
+  6: 'info',
+  7: 'debug'
+};
 
 /**
- * @private
- * @const
-*/
-var levelNames = Object.keys(levels);
-
-/**
- * @overview This module provides support for streaming your winston logs to
+ * This module provides support for streaming your winston logs to
  * [Stackdriver Logging]{@link https://cloud.google.com/logging}.
+ *
+ * If your app is running on Google Cloud Platform, all configuration and
+ * authentication is handled for you. We also auto-detect the appropriate
+ * resource descriptor to report the log entries against.
+ *
+ * If you are running your application in another environment, such as locally,
+ * on-premise, or on another cloud provider, you will need to provide additional
+ * configuration.
+ *
+ * @param {object} options - [Configuration object](#/docs). Refer to this link
+ *     for authentication information.
+ * @param {string=} options.logName - The name of the log that will receive
+ *     messages written to this transport. Default: `winston_log`
+ * @param {object=} options.levels - Custom logging levels as supported by
+ *     winston. This list is used to translate your log level to the Stackdriver
+ *     Logging level. Each property should have an integer value between 0 (most
+ *     severe) and 7 (least severe). If you are passing a list of levels to your
+ *     winston logger, you should provide the same list here.
+ * @param {object=} options.defaultLevel - The default log level. Winston will
+ *     filter messages with a severity lower than this.
+ * @param {object=} options.resource - The monitored resource that the transport
+ *     corresponds to. On Google Cloud Platform, this is detected automatically,
+ *     but you may optionally specify a specific monitored resource. For more
+ *     information see the
+ *     [official documentation]{@link https://cloud.google.com/logging/docs/api/reference/rest/v2/MonitoredResource}.
  *
  * @example
  * var winston = require('winston');
- * var StackdriverTransport = require('@google-cloud/logging-winston');
- * var logger = new winston.Logger({
- *   transports: new winston.transports.StackdriverLogging();
+ * var stackdriverTransport = require('@google-cloud/logging-winston');
+ *
+ * winston.add(stackdriverTransport, {
+ *   projectId: 'grape-spaceship-123',
+ *   keyFilename: '/path/to/keyfile.json',
+ *   level: 'warning', // log at 'warning' and above
+ *   resource: {
+ *     type: 'global'
+ *   }
  * });
- * logger.error('warp nacelles offline');
- * logger.verbose('sheilds at 99%');
- */
-
-/**
- * @overview
- * ### configuration
  *
- * If your app is running on Google Cloud Platform, we handle all configuation
- * & authentication for you. We also auto-detect the appropriate [resource
- * descriptor]{@link todo://add/link} to report the log entries against.
+ * winston.emerg('antimatter containment field collapse in 10 seconds');
+ */
+function LoggingWinston(options) {
+  if (!(this instanceof LoggingWinston)) {
+    return new LoggingWinston(options);
+  }
+
+  options = options || {};
+
+  var logName = options.logName || 'winston_log';
+
+  winston.Transport.call(this, {
+    level: options.level,
+    name: logName
+  });
+
+  this.levels_ = options.levels || NPM_LEVEL_NAME_TO_CODE;
+  this.log_ = logging(options).log(logName);
+  this.resource_ = options.resource;
+}
+
+util.inherits(LoggingWinston, winston.Transport);
+
+/**
+ * Relay a log entry to the logging agent. This is normally called by winston.
  *
- * If you are running your application in a different environment, for example,
- * locally, on-premise, or on another cloud provider, you may need to provide
- * some configuration.
- *
- * @example
- * var logger = new winston.Logger({
- *   levels: winston.config.syslog.levels,
- *   transports: new winston.transports.StackdriverLogging({
- *     projectId: 'grape-spaceship-123',
- *     keyFilename: '/path/to/key.json',
- *     levels: winstong.config.syslog.levels,
- *     level: 'warning', // log at 'warning' and above
- *     resource: {
- *       type: 'global'
- *     }
- *   });
- * });
- * logger.emerg('antimatter containment field collapse in 10 seconds');
- */
-
-/**
- * @typedef {object} OptionsObject
- * @property {string=} logName - The name of the log that will receive
- *     messages written to this transport (default: 'winston_log').
- * @property {object=} levels - Custom logging levels as supported by winston.
- *     We use this list of levels to translate your log level to the Stackdriver
- *     Logging level. Each property should have an integer value between 0 (most 
- *     severe) and 7 (least severe). If you are passing a list of levels to your
- *     winston logger, you should provide the same list here.
- * @property {object=} level - Default log level for the transport. Winston
- *     will filter messages with a severity lower than this.
- * @property {object=} resource - The monitored resource that the transport
- *     corresponds to. On Google Cloud Platform we infer this automatically, but
- *     you may optionally specify a specific monitored resource. For more
- *     information see the [official documentation]{@link
- * https://cloud.google.com/logging/docs/api/reference/rest/v2/MonitoredResource}.
- * @property {string=} projectId - The project ID from the Google
- *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check the
- *     environment variable `GCLOUD_PROJECT` for your project ID.
- * @property {string=} keyFilename - Full path to the a .json, .pem, or .p12
- *     key downloaded from the Google Developers Console. NOTE: .pem and .p12
- *     require you to specify `options.email` as well.
- * @property {string=} email - Account email address. Required when using a .pem
- *     or .p12 keyFilename.
- * @property {object=} credentials - Credentials object.
- * @property {string} credentials.client_email
- * @property {string} credentials.private_key
- * @property {boolean=} autoRetry - Automatically retry requests if the
- *     response is related to rate limits or certain intermittent server errors.
- *     We will exponentially backoff subsequent requests by default. (default:
- *     true)
- * @property {number=} maxRetries - Maximum number of automatic retries
- *     attempted before returning the error. (default: 3)
- * @property {function=} promise - Custom promise module to use instead
- *     of native Promises.
- */
-
-/**
- * Constructs a new object which can be used as a Winston transport.
- * @param {OptionsObject=} options - optional configuration object.
- * @constructor
- */
-var StackdriverTransport =
-    winston.transports.StackdriverLogging = function(options) {
-      options = options || {};
-      var logName = options.logName || 'winston_log';
-
-      var transportOptions = {level: options.level, name: logName};
-      Transport.call(this, transportOptions);
-
-      this.levels_ = options.levels || npmLevels;
-      this.metadata_ = {logName: logName};
-      if (options.resource) {
-        this.metadata_.resource = _.assign({}, options.resource);
-      }
-      var logging = require('@google-cloud/logging')(options);
-      this.logger_ = logging.log(logName);
-    };
-
-util.inherits(StackdriverTransport, Transport);
-
-/**
- * Relays a log entry to the logging agent. This is normally called by winston.
- * @param {string} level - The severity level at which this entry is being
+ * @param {string} levelName - The severity level at which this entry is being
  *     logged. This should match one of the levels provided to the constructor
  *     which defaults to npm levels. This level will be translated to the
  *     appropriate Stackdriver logging severity level.
  * @param {string} msg - The message to be logged.
- * @param {object=} meta - Winston provided metadata that should be attached to
- *     log entry. Each property will be converted to a string using
- *     `util.inspect`.
- * @param {function=} callback A callback that is invoked when the logging agent
- *     either succeeds or gives up writing the log entry to the remote server.
+ * @param {object=} metadata - Winston-provided metadata that should be attached
+ *     to the log entry. Each property will be converted to a string using
+ *     `JSON.stringify`.
+ * @param {function=} callback - A callback that is invoked when the logging
+ *     agent either succeeds or gives up writing the log entry to the remote
+ *     server.
  */
-StackdriverTransport.prototype.log = function(level, msg, meta, callback) {
-  if (_.isFunction(meta) && !callback) {
-    callback = meta;
-    meta = null;
+LoggingWinston.prototype.log = function(levelName, msg, metadata, callback) {
+  if (is.fn(metadata)) {
+    callback = metadata;
+    metadata = {};
   }
 
-  if (!_.has(this.levels_, level)) {
-    throw new Error('unknown log level ' + level);
+  if (!this.levels_[levelName]) {
+    throw new Error('Unknown log level: ' + levelName);
   }
 
-  // Translate `level` to a Stackdriver logging level.
-  var numericLevel = this.levels_[level];
-  var stackdriverLevel = levelNames[numericLevel];
+  var levelCode = this.levels_[levelName];
+  var stackdriverLevel = STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME[levelCode];
 
-  var metadata = this.metadata_;
-  if (meta) {
+  var labels = {};
+
+  if (metadata) {
     // Logging proto requires that the label values be strings, so we convert
     // using util.inspect.
-    var labels = {};
-    Object.keys(meta).forEach(function(key) {
-      labels[key] = util.inspect(meta[key]);
-    });
-    metadata = _.assign({labels: labels}, metadata);
+    for (var key in metadata) {
+      labels[key] = JSON.stringify(metadata[key]);
+    }
   }
 
-  var entry = this.logger_.entry(metadata, msg);
-  this.logger_[stackdriverLevel](entry, callback);
+  metadata = {
+    resource: this.resource_,
+    labels: labels
+  };
+
+  var entry = this.log_.entry(metadata, msg);
+  this.log_[stackdriverLevel](entry, callback);
 };
 
-module.exports = StackdriverTransport;
+module.exports = LoggingWinston;

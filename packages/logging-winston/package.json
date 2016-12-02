@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/logging-winston",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "author": "Google Inc.",
   "description": "Stackdriver Logging transport for Winston",
   "main": "./src/index.js",
@@ -23,19 +23,18 @@
     "google logging",
     "logging",
     "stackdriver logging",
-    "stackdriver"
+    "stackdriver",
+    "winston transport",
+    "winston"
   ],
   "dependencies": {
     "@google-cloud/logging": "^0.5.0",
-    "winston": "^2.2.0",
-    "lodash": "^4.15.0"
+    "is": "^3.2.0",
+    "winston": "^2.2.0"
   },
   "devDependencies": {
-    "istanbul": "^0.4.4",
-    "jshint": "^2.9.2",
-    "mocha": "^2.5.3",
-    "node-uuid": "^1.4.7",
-    "proxyquire": "^1.7.10"
+    "async": "^2.1.4",
+    "mocha": "^2.5.3"
   },
   "scripts": {
     "publish-module": "node ../../scripts/publish.js logging-winston",

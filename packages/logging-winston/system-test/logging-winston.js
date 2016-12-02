@@ -17,62 +17,79 @@
 'use strict';
 
 var assert = require('assert');
+var async = require('async');
 var env = require('../../../system-test/env.js');
 var winston = require('winston');
-var StackdriverTransport = require('../');
-var util = require('util');
 
-describe('Logging-winston', function() {
+var logging = require('@google-cloud/logging')(env);
+var loggingWinston = require('../');
+
+describe('LoggingWinston', function() {
   var WRITE_CONSISTENCY_DELAY_MS = 20000;
 
-  var transport = new StackdriverTransport(env);
-  var logger = new winston.Logger({transports: [transport]});
-
+  winston.add(loggingWinston, env);
 
   describe('log', function() {
+    var testTimestamp = new Date();
 
     var testData = [
       {
         args: ['first'],
-        verify: function(entry) { assert.strictEqual(entry.data, 'first'); }
+        verify: function(entry) {
+          assert.strictEqual(entry.data, 'first');
+        }
       },
 
       {
         args: ['second'],
-        verify: function(entry) { assert.strictEqual(entry.data, 'second'); }
+        verify: function(entry) {
+          assert.strictEqual(entry.data, 'second');
+        }
       },
 
       {
-        args: ['third', {test_timestamp: new Date(5)}],
+        args: [
+          'third',
+          {
+            testTimestamp: testTimestamp
+          }
+        ],
         verify: function(entry) {
           assert.strictEqual(entry.data, 'third');
-          assert.ok(entry.metadata && entry.metadata.labels);
+
+          assert.strictEqual(
+            entry.metadata.labels.testTimestamp,
+            JSON.stringify(testTimestamp)
+          );
         }
       }
-
     ];
 
-    it('should properly write log entries to the service', function(done) {
-      testData.forEach(function(test) {
-        logger.info.apply(logger, test.args);
-      });
+    it('should properly write log entries', function(done) {
+      async.each(testData, function(test, callback) {
+        winston.info.apply(winston, test.args.concat(callback));
+      }, function(err) {
+        assert.ifError(err);
 
-      setTimeout(function() {
-        transport.logger_.getEntries(
-            {pageSize: testData.length}, function(err, entries) {
-              assert.ifError(err);
-              assert.strictEqual(entries.length, testData.length);
+        setTimeout(function() {
+          logging.log('winston_log').getEntries({
+            pageSize: testData.length
+          }, function(err, entries) {
+            assert.ifError(err);
 
-              entries.reverse();
+            assert.strictEqual(entries.length, testData.length);
 
-              entries.forEach(function(entry, index) {
+            entries
+              .reverse()
+              .forEach(function(entry, index) {
                 var test = testData[index];
                 test.verify(entry);
               });
-              done();
-            });
-      }, WRITE_CONSISTENCY_DELAY_MS);
-    });
 
+            done();
+          });
+        }, WRITE_CONSISTENCY_DELAY_MS);
+      });
+    });
   });
 });
