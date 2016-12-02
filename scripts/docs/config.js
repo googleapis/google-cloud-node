@@ -25,6 +25,7 @@ module.exports = {
     'common',
     'datastore/src/entity.js',
     'datastore/src/request.js',
+    'logging/src/metadata.js',
     'pubsub/src/iam.js',
     'storage/src/acl.js',
     'bigtable/src/mutation.js'

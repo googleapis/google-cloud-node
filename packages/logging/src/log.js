@@ -21,6 +21,7 @@
 'use strict';
 
 var arrify = require('arrify');
+var async = require('async');
 var common = require('@google-cloud/common');
 var extend = require('extend');
 var is = require('is');
@@ -31,6 +32,12 @@ var util = require('util');
  * @private
  */
 var Entry = require('./entry.js');
+
+/**
+ * @type {module:logging/metadata}
+ * @private
+ */
+var Metadata = require('./metadata.js');
 
 /**
  * A log is a named collection of entries, each entry representing a timestamped
@@ -52,6 +59,8 @@ var Entry = require('./entry.js');
 function Log(logging, name) {
   this.formattedName_ = Log.formatName_(logging.projectId, name);
   this.name = this.formattedName_.split('/').pop();
+
+  this.metadata_ = new Metadata(logging);
 
   var methods = {
     /**
@@ -563,6 +572,8 @@ Log.prototype.warning = function(entry, options, callback) {
  * });
  */
 Log.prototype.write = function(entry, options, callback) {
+  var self = this;
+
   if (is.fn(options)) {
     callback = options;
     options = {};
@@ -574,12 +585,19 @@ Log.prototype.write = function(entry, options, callback) {
   };
 
   var reqOpts = extend({
-    logName: this.formattedName_,
-    entries: arrify(entry).map(this.formatEntryForApi_.bind(this))
+    logName: this.formattedName_
   }, options);
 
-  this.request(protoOpts, reqOpts, function(err, resp) {
-    callback(err, resp);
+  var entries = arrify(entry);
+
+  this.decorateEntries_(entries, function(err, decoratedEntries) {
+    // Ignore errors (the API will speak up if it has an issue).
+
+    reqOpts.entries = decoratedEntries;
+
+    self.request(protoOpts, reqOpts, function(err, resp) {
+      callback(err, resp);
+    });
   });
 };
 
@@ -591,14 +609,22 @@ Log.prototype.write = function(entry, options, callback) {
  *
  * @param {object} entry - An entry object.
  */
-Log.prototype.formatEntryForApi_ = function(entry) {
-  if (!(entry instanceof Entry)) {
-    entry = this.entry(entry);
-  }
+Log.prototype.decorateEntries_ = function(entries, callback) {
+  var self = this;
 
-  var formattedEntry = entry.toJSON();
-  formattedEntry.logName = this.formattedName_;
-  return formattedEntry;
+  async.map(entries, function(entry, callback) {
+    if (!(entry instanceof Entry)) {
+      entry = self.entry(entry);
+    }
+
+    var decoratedEntry = entry.toJSON();
+    decoratedEntry.logName = self.formattedName_;
+
+    self.metadata_.assignDefaultResource(decoratedEntry, function(err, entry) {
+      // Ignore errors (the API will speak up if it has an issue).
+      callback(null, entry || decoratedEntry);
+    });
+  }, callback);
 };
 
 /*! Developer Documentation

@@ -427,6 +427,33 @@ describe('Logging', function() {
       });
     });
 
+    it('should set the default resource', function(done) {
+      var text = 'entry-text';
+      var entry = log.entry(text);
+
+      log.write(entry, function(err) {
+        assert.ifError(err);
+
+        setTimeout(function() {
+          log.getEntries({ pageSize: 1 }, function(err, entries) {
+            assert.ifError(err);
+
+            var entry = entries[0];
+
+            assert.strictEqual(entry.data, text);
+            assert.deepEqual(entry.metadata.resource, {
+              type: 'global',
+              labels: {
+                project_id: logging.projectId
+              }
+            });
+
+            done();
+          });
+        }, WRITE_CONSISTENCY_DELAY_MS);
+      });
+    });
+
     it('should write to a log with alert helper', function(done) {
       log.alert(logEntries, options, done);
     });
