@@ -274,7 +274,10 @@ describe('Bigtable', function() {
 
     it('should get the tables metadata', function(done) {
       TABLE.getMetadata(function(err, metadata) {
-        assert.strictEqual(metadata.name, TABLE.id);
+        assert.strictEqual(
+          metadata.name,
+          TABLE.id.replace('{{projectId}}', bigtable.projectId)
+        );
         done();
       });
     });
