@@ -76,6 +76,91 @@ function BigQuery(options) {
 util.inherits(BigQuery, common.Service);
 
 /**
+ * Detect a value's type.
+ *
+ * @private
+ *
+ * @resource [Data Type]{@link https://cloud.google.com/bigquery/data-types}
+ *
+ * @param {*} value - The value.
+ * @return {string} - The type detected from the value.
+ */
+BigQuery.getType_ = function(value) {
+  if (is.number(value)) {
+    if (value % 1 === 0) {
+      return 'INT64';
+    } else {
+      return 'FLOAT64'
+    }
+  } else if (is.bool(value)) {
+    return 'BOOL';
+  } else if (is.date(value)) {
+    return 'TIMESTAMP';
+  } else if (is.array(value)) {
+    return 'ARRAY';
+  } else if (is.object(value)) {
+    return 'STRUCT';
+  } else {
+    return 'STRING';
+  }
+};
+
+/**
+ * Convert a value into a `queryParameter` object.
+ *
+ * @private
+ *
+ * @resource [Jobs.query API Reference Docs (see `queryParameters`)]{@link https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#request-body}
+ *
+ * @param {*} value - The value.
+ * @return {object} - A properly-formed `queryParameter` object.
+ */
+BigQuery.valueToQueryParameter_ = function(value) {
+  var type = BigQuery.getType_(value);
+
+  var queryParameter = {
+    parameterType: {
+      type: type
+    },
+    parameterValue: {}
+  };
+
+  if (type === 'TIMESTAMP') {
+    // @TODO - Not sure why .toJSON() doesn't just work.
+    value = new Date(value).toJSON().replace(/(.*)T(.*)Z$/, '$1 $2');
+  }
+
+  if (type === 'ARRAY') {
+    queryParameter.parameterType.arrayType = {
+      type: BigQuery.getType_(value[0])
+    };
+    queryParameter.parameterValue.arrayValues = value.map(function(value) {
+      return {
+        value: value
+      }
+    });
+  } else if (type === 'STRUCT') {
+    queryParameter.parameterType.structTypes = [];
+    queryParameter.parameterValue.structValues = {};
+
+    for (var prop in value) {
+      queryParameter.parameterType.structTypes.push({
+        name: prop,
+        type: BigQuery.getType_(value[prop])
+      });
+
+      queryParameter.parameterValue.structValues[prop] = {
+        value: value[prop]
+      };
+    }
+  } else {
+    queryParameter.parameterValue.value = value;
+  }
+
+  return queryParameter;
+};
+
+/**
  * Create a dataset.
  *
  * @resource [Datasets: insert API Documentation]{@link https://cloud.google.com/bigquery/docs/reference/v2/datasets/insert}
@@ -429,6 +514,10 @@ BigQuery.prototype.job = function(id) {
  *     automatically. Default: true.
  * @param {number} options.maxApiCalls - Maximum number of API calls to make.
  * @param {number} options.maxResults - Maximum number of results to read.
+ * @param {object|*[]} options.params - For positional SQL parameters, provide
+ *     an array of values. For named SQL parameters, provide an object which
+ *     maps each named parameter to its value. The supported types are integers,
+ *     floats, Date objects, Strings, Booleans, and Objects.
  * @param {string} options.query - A query string, following the BigQuery query
  *     syntax, of the query to execute.
  * @param {number} options.timeoutMs - How long to wait for the query to
@@ -448,6 +537,33 @@ BigQuery.prototype.job = function(id) {
  *     // Handle results here.
  *   }
  * });
+ *
+ * //-
+ * // Positional and named SQL parameters are supported.
+ * //-
+ * bigquery.query({
+ *   query: [
+ *     'SELECT url',
+ *     'FROM `publicdata.samples.github_nested`',
+ *     'WHERE repository.owner = ?'
+ *   ].join(' '),
+ *
+ *   params: [
+ *     'google'
+ *   ]
+ * }, callback);
+ *
+ * bigquery.query({
+ *   query: [
+ *     'SELECT url',
+ *     'FROM `publicdata.samples.github_nested`',
+ *     'WHERE repository.owner = @owner'
+ *   ].join(' '),
+
+ *   params: {
+ *     owner: 'google'
+ *   }
+ * }, callback);
  *
  * //-
  * // To control how many API requests are made and page through the results
@@ -481,6 +597,28 @@ BigQuery.prototype.query = function(options, callback) {
   }
 
   options = options || {};
+
+
+  if (options.params) {
+    options.useLegacySql = false;
+    options.parameterMode = is.array(options.params) ? 'positional' : 'named';
+
+    if (options.parameterMode === 'positional') {
+      options.queryParameters = options.params
+        .map(BigQuery.valueToQueryParameter_);
+    } else {
+      options.queryParameters = [];
+
+      for (var namedParamater in options.params) {
+        var value = options.params[namedParamater];
+        var queryParameter = BigQuery.valueToQueryParameter_(value);
+        queryParameter.name = namedParamater;
+        options.queryParameters.push(queryParameter);
+      }
+    }
+
+    delete options.params;
+  }
 
   var job = options.job;
 
