@@ -1344,27 +1344,6 @@ Vision.prototype.detectText = function(images, options, callback) {
 };
 
 /**
- * Convert an object with "likelihood" values to a boolean-representation, based
- * on the lowest likelihood provided.
- *
- * @private
- *
- * @example
- * Vision.convertToBoolean_(Vision.likelihood.VERY_LIKELY, {
- *   blurred: 'POSSIBLE'
- * });
- * // { blurred: false }
- *
- * Vision.convertToBoolean_(Vision.likelihood.UNLIKELY, {
- *   blurred: 'POSSIBLE'
- * });
- * // { blurred: true }
- */
-Vision.convertToBoolean_ = function(baseLikelihood, value) {
-  return Vision.likelihood[value] >= baseLikelihood;
-};
-
-/**
  * Determine the type of image the user is asking to be annotated. If a
  * {module:storage/file}, convert to its "gs://{bucket}/{file}" URL. If a remote
  * URL, read the contents and convert to a base64 string. If a file path to a
@@ -1584,7 +1563,7 @@ Vision.formatFaceAnnotation_ = function(faceAnnotation) {
       var shortenedProp = prop.replace('Likelihood', '');
 
       formattedFaceAnnotation[shortenedProp] =
-        Vision.convertToBoolean_(LIKELY, faceAnnotation[prop]);
+        Vision.gteLikelihood_(LIKELY, faceAnnotation[prop]);
     }
   }
 
@@ -1638,12 +1617,29 @@ Vision.formatSafeSearchAnnotation_ = function(ssAnnotation, options) {
   if (!options.verbose) {
     for (var prop in ssAnnotation) {
       var value = ssAnnotation[prop];
-      ssAnnotation[prop] = Vision.convertToBoolean_(LIKELY, value);
+      ssAnnotation[prop] = Vision.gteLikelihood_(LIKELY, value);
     }
     return ssAnnotation;
   }
 
   return ssAnnotation;
+};
+
+/**
+ * Convert a "likelihood" value to a boolean representation, based on the lowest
+ * likelihood provided.
+ *
+ * @private
+ *
+ * @example
+ * Vision.gteLikelihood_(Vision.likelihood.VERY_LIKELY, 'POSSIBLE');
+ * // false
+ *
+ * Vision.gteLikelihood_(Vision.likelihood.UNLIKELY, 'POSSIBLE');
+ * // true
+ */
+Vision.gteLikelihood_ = function(baseLikelihood, likelihood) {
+  return Vision.likelihood[likelihood] >= baseLikelihood;
 };
 
 /*! Developer Documentation

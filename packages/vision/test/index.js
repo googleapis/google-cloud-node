@@ -913,37 +913,6 @@ describe('Vision', function() {
     });
   });
 
-  describe('convertToBoolean_', function() {
-    it('should return booleans', function() {
-      var baseLikelihood = Vision.likelihood.LIKELY;
-
-      assert.strictEqual(
-        Vision.convertToBoolean_(baseLikelihood, 'VERY_UNLIKELY'),
-        false
-      );
-
-      assert.strictEqual(
-        Vision.convertToBoolean_(baseLikelihood, 'UNLIKELY'),
-        false
-      );
-
-      assert.strictEqual(
-        Vision.convertToBoolean_(baseLikelihood, 'POSSIBLE'),
-        false
-      );
-
-      assert.strictEqual(
-        Vision.convertToBoolean_(baseLikelihood, 'LIKELY'),
-        true
-      );
-
-      assert.strictEqual(
-        Vision.convertToBoolean_(baseLikelihood, 'VERY_LIKELY'),
-        true
-      );
-    });
-  });
-
   describe('findImages_', function() {
     it('should convert a File object', function(done) {
       var file = {
@@ -1494,6 +1463,37 @@ describe('Vision', function() {
 
         assert.strictEqual(fmtd, safeSearchAnno);
       });
+    });
+  });
+
+  describe('gteLikelihood_', function() {
+    it('should return booleans', function() {
+      var baseLikelihood = Vision.likelihood.LIKELY;
+
+      assert.strictEqual(
+        Vision.gteLikelihood_(baseLikelihood, 'VERY_UNLIKELY'),
+        false
+      );
+
+      assert.strictEqual(
+        Vision.gteLikelihood_(baseLikelihood, 'UNLIKELY'),
+        false
+      );
+
+      assert.strictEqual(
+        Vision.gteLikelihood_(baseLikelihood, 'POSSIBLE'),
+        false
+      );
+
+      assert.strictEqual(
+        Vision.gteLikelihood_(baseLikelihood, 'LIKELY'),
+        true
+      );
+
+      assert.strictEqual(
+        Vision.gteLikelihood_(baseLikelihood, 'VERY_LIKELY'),
+        true
+      );
     });
   });
 
