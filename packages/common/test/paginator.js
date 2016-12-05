@@ -21,7 +21,7 @@ var extend = require('extend');
 var proxyquire = require('proxyquire');
 var stream = require('stream');
 var through = require('through2');
-var uuid = require('node-uuid');
+var uuid = require('uuid');
 
 var paginator = require('../src/paginator.js');
 var util = require('../src/util.js');

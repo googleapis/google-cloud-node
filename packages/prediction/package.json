@@ -62,11 +62,11 @@
   },
   "devDependencies": {
     "@google-cloud/storage": "*",
-    "async": "^1.4.2",
+    "async": "^2.1.4",
     "concat-stream": "^1.5.0",
     "mocha": "^3.0.1",
-    "node-uuid": "^1.4.3",
-    "proxyquire": "^1.7.10"
+    "proxyquire": "^1.7.10",
+    "uuid": "^3.0.1"
   },
   "scripts": {
     "publish-module": "node ../../scripts/publish.js prediction",

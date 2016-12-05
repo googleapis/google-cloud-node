@@ -61,9 +61,9 @@
   },
   "devDependencies": {
     "mocha": "^3.0.1",
-    "node-uuid": "^1.4.3",
     "proxyquire": "^1.7.10",
-    "sinon": "^1.17.4"
+    "sinon": "^1.17.4",
+    "uuid": "^3.0.1"
   },
   "scripts": {
     "publish-module": "node ../../scripts/publish.js common",

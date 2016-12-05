@@ -17,10 +17,10 @@
 'use strict';
 
 var assert = require('assert');
+var extend = require('extend');
+var format = require('string-format-obj');
 var proxyquire = require('proxyquire');
 var util = require('util');
-var format = require('string-format-obj');
-var extend = require('extend');
 
 var common = require('@google-cloud/common');
 var GrpcServiceObject = common.GrpcServiceObject;

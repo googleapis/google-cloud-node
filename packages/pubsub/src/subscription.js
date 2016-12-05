@@ -26,7 +26,7 @@ var events = require('events');
 var is = require('is');
 var modelo = require('modelo');
 var prop = require('propprop');
-var uuid = require('node-uuid');
+var uuid = require('uuid');
 
 /**
  * @type {module:pubsub/iam}
