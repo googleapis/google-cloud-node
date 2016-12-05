@@ -57,10 +57,9 @@
     "@google-cloud/common": "^0.8.0",
     "events-intercept": "^2.0.0",
     "extend": "^3.0.0",
-    "google-gax": "^0.9.1",
+    "google-gax": "^0.10.0",
     "google-proto-files": "^0.8.0",
     "is": "^3.1.0",
-    "modelo": "^4.2.0",
     "propprop": "^0.3.1",
     "pumpify": "^1.3.5",
     "request": "^2.74.0",
@@ -73,10 +72,9 @@
     "async": "^2.0.1",
     "methmeth": "^1.1.0",
     "mocha": "^3.0.2",
-    "node-uuid": "^1.4.7",
     "proxyquire": "^1.7.10",
-    "sinon": "^1.17.5",
-    "tmp": "0.0.28"
+    "tmp": "^0.0.31",
+    "uuid": "^3.0.1"
   },
   "scripts": {
     "publish-module": "node ../../scripts/publish.js speech",

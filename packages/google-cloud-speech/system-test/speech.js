@@ -22,7 +22,7 @@ var exec = require('methmeth');
 var extend = require('extend');
 var fs = require('fs');
 var path = require('path');
-var uuid = require('node-uuid');
+var uuid = require('uuid');
 
 var env = require('../../../system-test/env.js');
 var Speech = require('../');
