@@ -22,7 +22,7 @@ var exec = require('methmeth');
 var format = require('string-format-obj');
 var fs = require('fs');
 var tmp = require('tmp');
-var uuid = require('node-uuid');
+var uuid = require('uuid');
 
 var DNS = require('../');
 var env = require('../../../system-test/env.js');

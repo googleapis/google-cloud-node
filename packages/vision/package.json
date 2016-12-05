@@ -64,13 +64,13 @@
   },
   "devDependencies": {
     "@google-cloud/storage": "*",
-    "deep-strict-equal": "^0.1.0",
+    "deep-strict-equal": "^0.2.0",
     "mocha": "^3.0.1",
     "multiline": "^1.0.2",
     "node-uuid": "^1.4.7",
     "normalize-newline": "^2.0.0",
     "proxyquire": "^1.7.10",
-    "tmp": "0.0.27"
+    "tmp": "^0.0.31"
   },
   "scripts": {
     "publish-module": "node ../../scripts/publish.js vision",

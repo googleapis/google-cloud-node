@@ -26,7 +26,7 @@ var prop = require('propprop');
 var request = require('request');
 var through = require('through2');
 var tmp = require('tmp');
-var uuid = require('node-uuid');
+var uuid = require('uuid');
 
 var env = require('../../../system-test/env.js');
 

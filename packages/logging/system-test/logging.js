@@ -26,7 +26,7 @@ var is = require('is');
 var prop = require('propprop');
 var PubSub = require('@google-cloud/pubsub');
 var Storage = require('@google-cloud/storage');
-var uuid = require('node-uuid');
+var uuid = require('uuid');
 
 var env = require('../../../system-test/env.js');
 var Logging = require('../');

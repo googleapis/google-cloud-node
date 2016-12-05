@@ -60,12 +60,12 @@
   },
   "devDependencies": {
     "@google-cloud/storage": "*",
-    "async": "^2.0.1",
+    "async": "^2.1.4",
     "methmeth": "^1.1.0",
     "mocha": "^3.0.1",
-    "node-uuid": "^1.4.3",
     "propprop": "^0.3.0",
-    "proxyquire": "^1.7.10"
+    "proxyquire": "^1.7.10",
+    "uuid": "^3.0.1"
   },
   "scripts": {
     "publish-module": "node ../../scripts/publish.js bigquery",

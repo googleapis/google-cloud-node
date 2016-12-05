@@ -19,7 +19,7 @@
 var assert = require('assert');
 var async = require('async');
 var Subscription = require('../src/subscription.js');
-var uuid = require('node-uuid');
+var uuid = require('uuid');
 
 var env = require('../../../system-test/env.js');
 var pubsub = require('../')(env);

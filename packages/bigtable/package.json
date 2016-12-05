@@ -66,12 +66,11 @@
     "through2": "^2.0.0"
   },
   "devDependencies": {
-    "async": "^2.0.1",
-    "methmeth": "^1.0.0",
+    "async": "^2.1.4",
     "mocha": "^3.0.1",
-    "node-uuid": "^1.4.3",
     "proxyquire": "^1.7.10",
-    "sinon": "^1.17.4"
+    "sinon": "^1.17.4",
+    "uuid": "^3.0.1"
   },
   "scripts": {
     "publish-module": "node ../../scripts/publish.js bigtable",

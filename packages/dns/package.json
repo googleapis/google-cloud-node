@@ -59,11 +59,11 @@
     "string-format-obj": "^1.0.0"
   },
   "devDependencies": {
-    "async": "^1.4.2",
+    "async": "^2.1.4",
     "mocha": "^3.0.1",
-    "node-uuid": "^1.4.3",
     "proxyquire": "^1.7.10",
-    "tmp": "0.0.27"
+    "tmp": "^0.0.31",
+    "uuid": "^3.0.1"
   },
   "scripts": {
     "publish-module": "node ../../scripts/publish.js dns",

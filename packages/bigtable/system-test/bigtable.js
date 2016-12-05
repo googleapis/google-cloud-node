@@ -18,7 +18,7 @@
 
 var assert = require('assert');
 var async = require('async');
-var uuid = require('node-uuid');
+var uuid = require('uuid');
 
 var env = require('../../../system-test/env.js');
 var Bigtable = require('../');
