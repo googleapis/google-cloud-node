@@ -55,7 +55,7 @@
     "@google-cloud/common": "^0.8.0",
     "arrify": "^1.0.1",
     "extend": "^3.0.0",
-    "google-gax": "^0.9.1",
+    "google-gax": "^0.10.0",
     "google-proto-files": "^0.8.5",
     "is": "^3.0.1",
     "propprop": "^0.3.1",
@@ -64,9 +64,9 @@
   "devDependencies": {
     "@google-cloud/storage": "*",
     "mocha": "^3.0.2",
-    "node-uuid": "^1.4.7",
     "proxyquire": "^1.7.10",
-    "through2": "^2.0.1"
+    "through2": "^2.0.1",
+    "uuid": "^3.0.1"
   },
   "scripts": {
     "publish-module": "node ../../scripts/publish.js language",
