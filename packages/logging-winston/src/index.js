@@ -116,6 +116,7 @@ function LoggingWinston(options) {
   this.resource_ = options.resource;
 }
 
+winston.transports.StackdriverLogging = LoggingWinston;
 util.inherits(LoggingWinston, winston.Transport);
 
 /**
