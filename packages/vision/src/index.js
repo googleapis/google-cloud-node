@@ -834,13 +834,13 @@ Vision.prototype.detect = function(images, options, callback) {
  *   //       }
  *   //     },
  *   //     confidence: 56.748849,
- *   //     blurry: false,
- *   //     dark: false,
- *   //     happy: false,
- *   //     hat: false,
- *   //     mad: false,
- *   //     sad: false,
- *   //     surprised: false
+ *   //     anger: false,
+ *   //     blurred: false,
+ *   //     headwear: false,
+ *   //     joy: false,
+ *   //     sorrow: false,
+ *   //     surprise: false,
+ *   //     underExposed: false
  *   //   }
  *   // ]
  * });
@@ -1344,36 +1344,6 @@ Vision.prototype.detectText = function(images, options, callback) {
 };
 
 /**
- * Convert an object with "likelihood" values to a boolean-representation, based
- * on the lowest likelihood provided.
- *
- * @private
- *
- * @example
- * Vision.convertToBoolean_(Vision.likelihood.VERY_LIKELY, {
- *   blurry: 'POSSIBLE'
- * });
- * // { blurry: false }
- *
- * Vision.convertToBoolean_(Vision.likelihood.UNLIKELY, {
- *   blurry: 'POSSIBLE'
- * });
- * // { blurry: true }
- */
-Vision.convertToBoolean_ = function(baseLikelihood, object) {
-  var convertedObject = {};
-
-  for (var prop in object) {
-    if (object.hasOwnProperty(prop)) {
-      var value = Vision.likelihood[object[prop]];
-      convertedObject[prop] = value >= baseLikelihood;
-    }
-  }
-
-  return convertedObject;
-};
-
-/**
  * Determine the type of image the user is asking to be annotated. If a
  * {module:storage/file}, convert to its "gs://{bucket}/{file}" URL. If a remote
  * URL, read the contents and convert to a base64 string. If a file path to a
@@ -1586,15 +1556,16 @@ Vision.formatFaceAnnotation_ = function(faceAnnotation) {
     confidence: faceAnnotation.detectionConfidence * 100
   };
 
-  extend(formattedFaceAnnotation, Vision.convertToBoolean_(LIKELY, {
-    blurry: faceAnnotation.blurredLikelihood,
-    dark: faceAnnotation.underExposedLikelihood,
-    happy: faceAnnotation.joyLikelihood,
-    hat: faceAnnotation.headwearLikelihood,
-    mad: faceAnnotation.angerLikelihood,
-    sad: faceAnnotation.sorrowLikelihood,
-    surprised: faceAnnotation.surpriseLikelihood
-  }));
+  // Remove the `Likelihood` part from a property name.
+  // input: "joyLikelihood", output: "joy"
+  for (var prop in faceAnnotation) {
+    if (prop.indexOf('Likelihood') > -1) {
+      var shortenedProp = prop.replace('Likelihood', '');
+
+      formattedFaceAnnotation[shortenedProp] =
+        Vision.gteLikelihood_(LIKELY, faceAnnotation[prop]);
+    }
+  }
 
   return formattedFaceAnnotation;
 };
@@ -1644,10 +1615,31 @@ Vision.formatImagePropertiesAnnotation_ = function(imageAnnotation, options) {
  */
 Vision.formatSafeSearchAnnotation_ = function(ssAnnotation, options) {
   if (!options.verbose) {
-    return Vision.convertToBoolean_(LIKELY, ssAnnotation);
+    for (var prop in ssAnnotation) {
+      var value = ssAnnotation[prop];
+      ssAnnotation[prop] = Vision.gteLikelihood_(LIKELY, value);
+    }
+    return ssAnnotation;
   }
 
   return ssAnnotation;
+};
+
+/**
+ * Convert a "likelihood" value to a boolean representation, based on the lowest
+ * likelihood provided.
+ *
+ * @private
+ *
+ * @example
+ * Vision.gteLikelihood_(Vision.likelihood.VERY_LIKELY, 'POSSIBLE');
+ * // false
+ *
+ * Vision.gteLikelihood_(Vision.likelihood.UNLIKELY, 'POSSIBLE');
+ * // true
+ */
+Vision.gteLikelihood_ = function(baseLikelihood, likelihood) {
+  return Vision.likelihood[likelihood] >= baseLikelihood;
 };
 
 /*! Developer Documentation

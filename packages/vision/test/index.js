@@ -913,31 +913,6 @@ describe('Vision', function() {
     });
   });
 
-  describe('convertToBoolean_', function() {
-    it('should return booleans', function() {
-      var baseLikelihood = Vision.likelihood.LIKELY;
-
-      var object = {
-        // f's should be false, t's should be true:
-        veryUnlikely: 'VERY_UNLIKELY',
-        unlikely: 'UNLIKELY',
-        possible: 'POSSIBLE',
-        likely: 'LIKELY',
-        veryLikely: 'VERY_LIKELY'
-      };
-
-      var convertedObject = Vision.convertToBoolean_(baseLikelihood, object);
-
-      assert.deepEqual(convertedObject, {
-        veryUnlikely: false,
-        unlikely: false,
-        possible: false,
-        likely: true,
-        veryLikely: true
-      });
-    });
-  });
-
   describe('findImages_', function() {
     it('should convert a File object', function(done) {
       var file = {
@@ -1289,7 +1264,9 @@ describe('Vision', function() {
         headwearLikelihood: 'LIKELY',
         angerLikelihood: 'LIKELY',
         sorrowLikelihood: 'LIKELY',
-        surpriseLikelihood: 'LIKELY'
+        surpriseLikelihood: 'LIKELY',
+
+        nonExistentLikelihood: 'LIKELY'
       };
     });
 
@@ -1378,13 +1355,16 @@ describe('Vision', function() {
 
         confidence: faceAnnotation.detectionConfidence * 100,
 
-        blurry: true,
-        dark: true,
-        happy: true,
-        hat: true,
-        mad: true,
-        sad: true,
-        surprised: true
+        anger: true,
+        blurred: true,
+        headwear: true,
+        joy: true,
+        sorrow: true,
+        surprise: true,
+        underExposed: true,
+
+        // Checks that *any* property that ends in `Likelihood` is shortened.
+        nonExistent: true
       };
 
       var formatted = Vision.formatFaceAnnotation_(faceAnnotation);
@@ -1483,6 +1463,37 @@ describe('Vision', function() {
 
         assert.strictEqual(fmtd, safeSearchAnno);
       });
+    });
+  });
+
+  describe('gteLikelihood_', function() {
+    it('should return booleans', function() {
+      var baseLikelihood = Vision.likelihood.LIKELY;
+
+      assert.strictEqual(
+        Vision.gteLikelihood_(baseLikelihood, 'VERY_UNLIKELY'),
+        false
+      );
+
+      assert.strictEqual(
+        Vision.gteLikelihood_(baseLikelihood, 'UNLIKELY'),
+        false
+      );
+
+      assert.strictEqual(
+        Vision.gteLikelihood_(baseLikelihood, 'POSSIBLE'),
+        false
+      );
+
+      assert.strictEqual(
+        Vision.gteLikelihood_(baseLikelihood, 'LIKELY'),
+        true
+      );
+
+      assert.strictEqual(
+        Vision.gteLikelihood_(baseLikelihood, 'VERY_LIKELY'),
+        true
+      );
     });
   });
 
